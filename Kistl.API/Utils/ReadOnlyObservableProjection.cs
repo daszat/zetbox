@@ -219,8 +219,8 @@ namespace Kistl.API.Utils
     }
 
     /// <summary>
-    /// Wrap the <see cref="ReadOnlyObservableCollection&lt;TValue&gt;"/> into
-    /// the <see cref="IReadOnlyObservableCollection&lt;TValue&gt;"/> interface.
+    /// Wrap the <see cref="ReadOnlyObservableCollection{TValue}"/> into
+    /// the <see cref="IReadOnlyObservableCollection{TValue}"/> interface.
     /// </summary>
     /// <typeparam name="TValue">The Type of the elements of this collection.</typeparam>
     public class ReadOnlyObservableCollectionWrapper<TValue>

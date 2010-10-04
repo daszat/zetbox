@@ -307,7 +307,7 @@ namespace Kistl.API
     /// Handler for custom save events. TODO: Außer SetObject hat's noch niemand implementiert.
     /// </summary>
     /// <typeparam name="T">Type of the implementing Object.</typeparam>
-    /// <param name="obj">>Object that has fired this Event.</param>
+    /// <param name="obj">Object that has fired this Event.</param>
     public delegate void ObjectEventHandler<T>(T obj) where T : IDataObject;
 
     public class PropertyGetterEventArgs<V>

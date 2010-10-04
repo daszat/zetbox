@@ -130,7 +130,6 @@ namespace Kistl.API
         public IQueryable<IDataObject> GetQuery(InterfaceType ifType)
         {
             CheckDisposed();
-            if (ifType == null) { throw new ArgumentNullException("ifType"); }
             //CheckInterfaceAssembly("ifType", ifType.Type);
             return GetPersistenceObjectQuery(ifType).Cast<IDataObject>();
         }
@@ -149,7 +148,6 @@ namespace Kistl.API
         public virtual IQueryable<IPersistenceObject> GetPersistenceObjectQuery(InterfaceType ifType)
         {
             CheckDisposed();
-            if (ifType == null) { throw new ArgumentNullException("ifType"); }
             //CheckInterfaceAssembly("ifType", ifType.Type);
             return (objects[ifType] ?? _emptyList).AsQueryable().AddOfType(ifType.Type).Cast<IPersistenceObject>();
         }
@@ -228,7 +226,6 @@ namespace Kistl.API
         public IDataObject Create(InterfaceType ifType)
         {
             CheckDisposed();
-            if (ifType == null) { throw new ArgumentNullException("ifType"); }
             //CheckInterfaceAssembly("ifType", ifType.Type);
             return (IDataObject)CreateInternal(ifType);
         }
@@ -245,7 +242,6 @@ namespace Kistl.API
         public IPersistenceObject CreateUnattached(InterfaceType ifType)
         {
             CheckDisposed();
-            if (ifType == null) { throw new ArgumentNullException("ifType"); }
             //CheckInterfaceAssembly("ifType", ifType.Type);
             return (IPersistenceObject)CreateUnattachedInstance(ifType);
         }
@@ -262,7 +258,6 @@ namespace Kistl.API
         public IRelationCollectionEntry CreateRelationCollectionEntry(InterfaceType ifType)
         {
             CheckDisposed();
-            if (ifType == null) { throw new ArgumentNullException("ifType"); }
             //CheckInterfaceAssembly("ifType", ifType.Type);
             return (IRelationCollectionEntry)CreateInternal(ifType);
         }
@@ -279,7 +274,6 @@ namespace Kistl.API
         public IValueCollectionEntry CreateValueCollectionEntry(InterfaceType ifType)
         {
             CheckDisposed();
-            if (ifType == null) { throw new ArgumentNullException("ifType"); }
             //CheckInterfaceAssembly("ifType", ifType.Type);
             return (IValueCollectionEntry)CreateInternal(ifType);
         }
@@ -313,7 +307,6 @@ namespace Kistl.API
         public ICompoundObject CreateCompoundObject(InterfaceType ifType)
         {
             CheckDisposed();
-            if (ifType == null) { throw new ArgumentNullException("ifType"); }
             //CheckInterfaceAssembly("ifType", ifType.Type);
 
             ICompoundObject obj = (ICompoundObject)CreateUnattachedInstance(ifType);
@@ -332,7 +325,6 @@ namespace Kistl.API
         public IDataObject Find(InterfaceType ifType, int ID)
         {
             CheckDisposed();
-            if (ifType == null) { throw new ArgumentNullException("ifType"); }
             //CheckInterfaceAssembly("ifType", ifType.Type);
 
             return (IDataObject)objects.Lookup(ifType, ID);
@@ -361,7 +353,6 @@ namespace Kistl.API
         public IPersistenceObject FindPersistenceObject(InterfaceType ifType, int ID)
         {
             CheckDisposed();
-            if (ifType == null) { throw new ArgumentNullException("ifType"); }
             //CheckInterfaceAssembly("ifType", ifType.Type);
 
             return objects.Lookup(ifType, ID);
@@ -380,7 +371,6 @@ namespace Kistl.API
         public IPersistenceObject FindPersistenceObject(InterfaceType ifType, Guid exportGuid)
         {
             CheckDisposed();
-            if (ifType == null) { throw new ArgumentNullException("ifType"); }
             //CheckInterfaceAssembly("ifType", ifType.Type);
 
             return objects.Lookup(exportGuid);
@@ -390,7 +380,6 @@ namespace Kistl.API
         public IEnumerable<IPersistenceObject> FindPersistenceObjects(InterfaceType ifType, IEnumerable<Guid> exportGuids)
         {
             CheckDisposed();
-            if (ifType == null) { throw new ArgumentNullException("ifType"); }
             //CheckInterfaceAssembly("ifType", ifType.Type);
             if (exportGuids == null) { throw new ArgumentNullException("exportGuids"); }
 

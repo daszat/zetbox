@@ -120,7 +120,7 @@ namespace Kistl.API
 
         public virtual void Clear()
         {
-            // need a clone here
+            // need a clone here to avoid collection modification while iterating
             var entries = Collection.ToList();
             foreach (TEntry entry in entries)
             {

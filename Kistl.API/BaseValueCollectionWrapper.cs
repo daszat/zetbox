@@ -22,7 +22,8 @@ namespace Kistl.API
 
         protected ValueCollectionWrapper(IKistlContext ctx, TParent parent, Action parentNotifier, TEntryCollection collection)
         {
-            if (ctx == null) throw new ArgumentNullException("ctx");
+            if (ctx == null)
+                throw new ArgumentNullException("ctx");
             this.ctx = ctx;
             this.parent = parent;
             this.parentNotifier = parentNotifier;
@@ -80,7 +81,8 @@ namespace Kistl.API
         {
             foreach (var e in collection)
             {
-                if (object.Equals(e.Value, item)) return e;
+                if (object.Equals(e.Value, item))
+                    return e;
             }
             return null;
         }
@@ -136,7 +138,8 @@ namespace Kistl.API
         public bool Remove(TValue item)
         {
             TEntry e = FindByItem(item);
-            if (e == null) return false;
+            if (e == null)
+                return false;
             ctx.Delete(e);
             OnEntryRemoving(e);
             collection.Remove(e);
@@ -279,13 +282,15 @@ namespace Kistl.API
             get
             {
                 TEntry entry = GetAt(index);
-                if (entry == null) throw new ArgumentOutOfRangeException("index", String.Format("Index {0} not found in collection", index));
+                if (entry == null)
+                    throw new ArgumentOutOfRangeException("index", String.Format("Index {0} not found in collection", index));
                 return entry.Value;
             }
             set
             {
                 TEntry entry = GetAt(index);
-                if (entry == null) throw new ArgumentOutOfRangeException("index", String.Format("Index {0} not found in collection", index));
+                if (entry == null)
+                    throw new ArgumentOutOfRangeException("index", String.Format("Index {0} not found in collection", index));
 
                 if (!Object.Equals(entry.Value, value))
                 {
