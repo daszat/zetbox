@@ -31,8 +31,31 @@ namespace Kistl.Client.Presentables
         }
 
         public ColumnDisplayModel()
+            : this(string.Empty, string.Empty, null, ColumnType.PropertyModel)
         {
-            this.Type = ColumnType.PropertyModel;
+        }
+
+        public ColumnDisplayModel(string header, string name)
+            : this(header, name, null, ColumnType.PropertyModel)
+        {
+        }
+
+        public ColumnDisplayModel(string header, string name, ControlKind kind)
+            : this(header, name, kind, ColumnType.PropertyModel)
+        {
+        }
+
+        public ColumnDisplayModel(string header, string name, ColumnType type)
+            : this(header, name, null, type)
+        {
+        }
+
+        public ColumnDisplayModel(string header, string name, ControlKind kind, ColumnType type)
+        {
+            this.Header = header;
+            this.Name = name;
+            this.ControlKind = kind;
+            this.Type = type;
         }
 
         public ColumnType Type { get; set; }
