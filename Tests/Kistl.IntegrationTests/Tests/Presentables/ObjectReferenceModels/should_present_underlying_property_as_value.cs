@@ -9,6 +9,8 @@ using Kistl.Client.Presentables;
 using NUnit.Framework;
 
 using Autofac;
+using Kistl.Client.Presentables.ValueViewModels;
+using Kistl.Client.Models;
 
 namespace Kistl.IntegrationTests.Presentables.ObjectReferenceModels
 {
@@ -25,7 +27,7 @@ namespace Kistl.IntegrationTests.Presentables.ObjectReferenceModels
 					.Single(oc => oc.Name == "TypeRef");
 				var assemblyProperty = ctx.GetQuery<ObjectReferenceProperty>()
 					.Single(p => p.ObjectClass.ID == typeRefClass.ID && p.Name == "Assembly");
-				var orm = scope.Resolve<ObjectReferenceModel.Factory>().Invoke(ctx, obj, assemblyProperty);
+                var orm = scope.Resolve<ObjectReferenceViewModel.Factory>().Invoke(ctx, assemblyProperty.GetValueModel(obj));
 				
 				Assert.That(orm.Value.ID , Is.EqualTo(obj.Assembly.ID));
 			}

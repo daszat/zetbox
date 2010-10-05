@@ -22,7 +22,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
     public class ObjectCollectionViewModel
         : BaseObjectCollectionViewModel<ICollection<DataObjectModel>>, IValueCollectionViewModel<DataObjectModel, ICollection<DataObjectModel>>
     {
-        public new delegate ObjectCollectionModel Factory(IKistlContext dataCtx, IValueModel mdl);
+        public new delegate ObjectCollectionViewModel Factory(IKistlContext dataCtx, IValueModel mdl);
 
         public IObjectCollectionValueModel ObjectCollectionModel { get; private set; }
 

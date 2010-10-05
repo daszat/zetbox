@@ -10,13 +10,14 @@ using Kistl.API;
 using Kistl.App.Extensions;
 using Kistl.Client.GUI;
 using Kistl.Client.Presentables;
+using Kistl.Client.Presentables.ValueViewModels;
 
 [assembly: WebResource("Kistl.Client.ASPNET.Toolkit.View.DataObjectListView.js", "text/javascript")] 
 
 namespace Kistl.Client.ASPNET.Toolkit.View
 {
     [ControlLocation("~/View/DataObjectListView.ascx")]
-    public abstract class DataObjectListView : ModelUserControl<ObjectListModel>, IScriptControl
+    public abstract class DataObjectListView : ModelUserControl<ObjectListViewModel>, IScriptControl
     {
         protected abstract HiddenField HdItemsControl { get; }
         protected abstract AjaxDataControls.DataList LstItemsControl { get; }

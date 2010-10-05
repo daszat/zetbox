@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Kistl.Client.Presentables;
+using Kistl.Client.Presentables.ValueViewModels;
 
 namespace Kistl.Client.Forms.View
 {
@@ -36,5 +37,5 @@ namespace Kistl.Client.Forms.View
         }
     }
 
-    public class DataObjectListViewDesignerProxy : FormsUserControl<ObjectListModel> { }
+    public class DataObjectListViewDesignerProxy : FormsUserControl<ObjectListViewModel> { }
 }

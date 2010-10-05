@@ -76,9 +76,21 @@ namespace Kistl.Client.Presentables.ValueViewModels
             get { return Model.Description; }
         }
 
+        private bool _IsReadOnly;
         public virtual bool IsReadOnly
         {
-            get { return Model.IsReadOnly; }
+            get 
+            { 
+                return Model.IsReadOnly || _IsReadOnly; 
+            }
+            set
+            {
+                if (_IsReadOnly != value)
+                {
+                    _IsReadOnly = value;
+                    OnPropertyChanged("IsReadOnly");
+                }
+            }
         }
 
         public virtual void ClearValue()
@@ -207,11 +219,11 @@ namespace Kistl.Client.Presentables.ValueViewModels
         }
     }
 
-    public class EnumerationPropertyViewModel : NullableStructValueViewModel<int>
+    public class EnumerationValueViewModel : NullableStructValueViewModel<int>
     {
-        public new delegate EnumerationPropertyViewModel Factory(IKistlContext dataCtx, IValueModel mdl);
+        public new delegate EnumerationValueViewModel Factory(IKistlContext dataCtx, IValueModel mdl);
 
-        public EnumerationPropertyViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, IValueModel mdl)
+        public EnumerationValueViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, IValueModel mdl)
             : base(dependencies, dataCtx, mdl)
         {
             this.EnumModel = (IEnumerationValueModel)mdl;
@@ -265,12 +277,12 @@ namespace Kistl.Client.Presentables.ValueViewModels
         }
     }
 
-    public class MultiLineStringPropertyViewModel 
+    public class MultiLineStringValueViewModel 
         : ClassValueViewModel<string>
     { 
-        public new delegate MultiLineStringPropertyViewModel Factory(IKistlContext dataCtx, IValueModel mdl);
+        public new delegate MultiLineStringValueViewModel Factory(IKistlContext dataCtx, IValueModel mdl);
 
-        public MultiLineStringPropertyViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, IValueModel mdl)
+        public MultiLineStringValueViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, IValueModel mdl)
             : base(dependencies, dataCtx, mdl)
         {
         }

@@ -18,6 +18,8 @@ namespace Kistl.Client.Tests
     using System.ComponentModel;
 
     using Autofac;
+    using Kistl.Client.Presentables.ValueViewModels;
+    using Kistl.Client.Models;
 
     [TestFixture]
     [Ignore("Mocks not implemented")]
@@ -29,7 +31,7 @@ namespace Kistl.Client.Tests
         Mock<TestObject> objMock;
         ObservableCollection<TestObject> list;
         Mock<ObjectReferenceProperty> orpMock;
-        ObjectListModel olm;
+        ObjectListViewModel olm;
 
         public override void SetUp()
         {
@@ -48,7 +50,7 @@ namespace Kistl.Client.Tests
 
             orpMock = scope.Resolve<KistlMockFactory>().CreateObjectReferenceProperty("TestCollection", true);
 
-            olm = new ObjectListModel(appCtxMock.Object, null, objMock.Object, orpMock.Object);
+            olm = new ObjectListViewModel(appCtxMock.Object, null, orpMock.Object.GetValueModel(objMock.Object));
 
         }
 

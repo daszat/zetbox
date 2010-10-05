@@ -9,6 +9,7 @@ using Kistl.API;
 using Kistl.App.Extensions;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using Kistl.Client.Presentables.ValueViewModels;
 
 [assembly: WebResource("Kistl.Client.ASPNET.Toolkit.View.DataObjectReferenceView.js", "text/javascript")] 
 
@@ -16,7 +17,7 @@ using System.Web.UI.HtmlControls;
 namespace Kistl.Client.ASPNET.Toolkit.View
 {
     [ControlLocation("~/View/DataObjectReferenceView.ascx")]
-    public abstract class DataObjectReferenceView : ModelUserControl<ObjectReferenceModel>, IScriptControl
+    public abstract class DataObjectReferenceView : ModelUserControl<ObjectReferenceViewModel>, IScriptControl
     {
         protected abstract Control containerCtrl { get; }
         protected abstract Label lbItemCtrl { get; }

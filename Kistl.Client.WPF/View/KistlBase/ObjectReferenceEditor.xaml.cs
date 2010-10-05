@@ -14,13 +14,14 @@ using System.Windows.Shapes;
 
 using Kistl.Client.GUI;
 using Kistl.Client.Presentables;
+using Kistl.Client.Presentables.ValueViewModels;
 
 namespace Kistl.Client.WPF.View.KistlBase
 {
     /// <summary>
     /// Interaction logic for ObjectReferenceEditor.xaml
     /// </summary>
-    public partial class ObjectReferenceEditor : PropertyEditor, IHasViewModel<ObjectReferenceModel>
+    public partial class ObjectReferenceEditor : PropertyEditor, IHasViewModel<ObjectReferenceViewModel>
     {
         public ObjectReferenceEditor()
         {
@@ -29,9 +30,9 @@ namespace Kistl.Client.WPF.View.KistlBase
 
         #region IHasViewModel<ObjectReferenceModel> Members
 
-        public ObjectReferenceModel ViewModel
+        public ObjectReferenceViewModel ViewModel
         {
-            get { return (ObjectReferenceModel)DataContext; }
+            get { return (ObjectReferenceViewModel)DataContext; }
         }
 
         #endregion

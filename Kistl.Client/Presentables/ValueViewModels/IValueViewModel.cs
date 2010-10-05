@@ -38,9 +38,9 @@ namespace Kistl.Client.Presentables.ValueViewModels
         string ToolTip { get; }
 
         /// <summary>
-        /// Gets a value indicating whether or not the property may be edited
+        /// Gets or sets a value indicating whether or not the property may be edited
         /// </summary>
-        bool IsReadOnly { get; }
+        bool IsReadOnly { get; set; }
 
         /// <summary>
         /// Clears the value of this Model. After calling this method the value should be <value>null</value> or "empty".

@@ -17,6 +17,8 @@ namespace Kistl.Client.Presentables
     using Kistl.App.Extensions;
     using Kistl.App.GUI;
     using Kistl.API.Configuration;
+    using Kistl.Client.Presentables.ValueViewModels;
+    using Kistl.Client.Models;
 
     /// <summary>
     /// Proxies a whole IDataObject
@@ -62,44 +64,44 @@ namespace Kistl.Client.Presentables
 
         }
 
-        private ReadOnlyProjectedList<Property, BasePropertyViewModel> _propertyModelList;
-        public IReadOnlyList<BasePropertyViewModel> PropertyModels
+        private ReadOnlyProjectedList<Property, BaseValueViewModel> _propertyModelList;
+        public IReadOnlyList<BaseValueViewModel> PropertyModels
         {
             get
             {
                 if (_propertyModelList == null)
                 {
                     FetchPropertyModels();
-                    _propertyModelList = new ReadOnlyProjectedList<Property, BasePropertyViewModel>(_propertyList, p => _propertyModels[p], m => m.Property);
+                    _propertyModelList = new ReadOnlyProjectedList<Property, BaseValueViewModel>(_propertyList, p => _propertyModels[p], m => null); //m.Property);
                 }
                 return _propertyModelList;
             }
         }
 
-        private LookupDictionary<Property, Property, BasePropertyViewModel> _propertyModels;
+        private LookupDictionary<Property, Property, BaseValueViewModel> _propertyModels;
         private void FetchPropertyModels()
         {
             if (_propertyModels == null)
             {
                 FetchPropertyList();
-                _propertyModels = new LookupDictionary<Property, Property, BasePropertyViewModel>(_propertyList, k => k, v =>
+                _propertyModels = new LookupDictionary<Property, Property, BaseValueViewModel>(_propertyList, k => k, v =>
                 {
-                    var result = ModelFactory.CreateViewModel<BasePropertyViewModel.Factory>(v).Invoke(DataContext, Object, v);
+                    var result = ModelFactory.CreateViewModel<BaseValueViewModel.Factory>(v).Invoke(DataContext, v.GetValueModel(Object));
                     result.IsReadOnly = IsReadOnly;
                     return result;
                 });
             }
         }
 
-        private LookupDictionary<string, Property, BasePropertyViewModel> _propertyModelsByName;
-        public LookupDictionary<string, Property, BasePropertyViewModel> PropertyModelsByName
+        private LookupDictionary<string, Property, BaseValueViewModel> _propertyModelsByName;
+        public LookupDictionary<string, Property, BaseValueViewModel> PropertyModelsByName
         {
             get
             {
                 if (_propertyModelsByName == null)
                 {
                     FetchPropertyModels();
-                    _propertyModelsByName = new LookupDictionary<string, Property, BasePropertyViewModel>(
+                    _propertyModelsByName = new LookupDictionary<string, Property, BaseValueViewModel>(
                         _propertyList,
                         k => k.Name,
                         v => _propertyModels[v]
@@ -227,7 +229,7 @@ namespace Kistl.Client.Presentables
                     isReadOnlyStore = value;
                     if (_propertyModels != null)
                     {
-                        foreach (var p in _propertyModels.Cast<BasePropertyViewModel>())
+                        foreach (var p in _propertyModels.Cast<BaseValueViewModel>())
                         {
                             p.IsReadOnly = IsReadOnly;
                         }

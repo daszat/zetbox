@@ -11,6 +11,40 @@ namespace Kistl.Client.Models
     using Kistl.App.GUI;
     using System.ComponentModel;
 
+    public static class PropertyExtensions
+    {
+        public static IValueModel GetValueModel(this Property prop, INotifyingObject obj)
+        {
+            if (prop == null) throw new ArgumentNullException("prop");
+            if (obj == null) throw new ArgumentNullException("obj");
+
+            if (prop is IntProperty)
+            {
+                return new NullableStructPropertyValueModel<int>(obj, prop);
+            }
+            else if (prop is BoolProperty)
+            {
+                return new NullableStructPropertyValueModel<bool>(obj, prop);
+            }
+            else if (prop is DoubleProperty)
+            {
+                return new NullableStructPropertyValueModel<double>(obj, prop);
+            }
+            else if (prop is DecimalProperty)
+            {
+                return new NullableStructPropertyValueModel<decimal>(obj, prop);
+            }
+            //else if (prop is ObjectReferenceProperty)
+            //{
+            //    return new ObjectReferenceValueModel(obj, prop);
+            //}
+            else
+            {
+                throw new NotImplementedException(string.Format("GetValueModel is not implemented for {0} properties yet", prop.GetPropertyTypeString()));
+            }
+        }
+    }
+
     /// <summary>
     /// For autofac
     /// </summary>

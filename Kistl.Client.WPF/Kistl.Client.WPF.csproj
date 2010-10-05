@@ -440,6 +440,7 @@
     <Compile Include="View\KistlBase\CompoundObjectPropertyEditor.xaml.cs">
       <DependentUpon>CompoundObjectPropertyEditor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\KistlBase\IObjectReferenceViewModel.cs" />
     <Compile Include="View\KistlBase\NullableBoolValueDropdownView.xaml.cs">
       <DependentUpon>NullableBoolValueDropdownView.xaml</DependentUpon>
     </Compile>

@@ -15,6 +15,7 @@ using Kistl.App.GUI;
 
 using Kistl.Client.Presentables;
 using Kistl.Client.GUI;
+using Kistl.Client.Presentables.ValueViewModels;
 
 
 namespace Kistl.Client.WPF.View.GridCells
@@ -23,7 +24,7 @@ namespace Kistl.Client.WPF.View.GridCells
     /// Interaction logic for StringValue.xaml
     /// </summary>
     [ViewDescriptor("GUI", Kistl.App.GUI.Toolkit.WPF, Kind = "Kistl.App.GUI.MultiLineTextboxGridKind")]
-    public partial class MultilineStringValue : UserControl, IHasViewModel<MultiLineStringPropertyModel>
+    public partial class MultilineStringValue : UserControl, IHasViewModel<MultiLineStringValueViewModel>
     {
         public MultilineStringValue()
         {
@@ -32,9 +33,9 @@ namespace Kistl.Client.WPF.View.GridCells
 
         #region IHasViewModel<MultiLineStringPropertyModel> Members
 
-        public MultiLineStringPropertyModel ViewModel
+        public MultiLineStringValueViewModel ViewModel
         {
-            get { return (MultiLineStringPropertyModel)DataContext; }
+            get { return (MultiLineStringValueViewModel)DataContext; }
         }
 
         #endregion

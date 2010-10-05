@@ -16,6 +16,7 @@ namespace Kistl.IntegrationTests.ObjectListModels
     using Kistl.Client;
 
     using Autofac;
+    using Kistl.Client.Presentables.ValueViewModels;
 
     public class when_moving_items : AbstractIntegrationTestFixture
     {
@@ -39,7 +40,7 @@ namespace Kistl.IntegrationTests.ObjectListModels
                 Assert.That(objectClass.Properties.Select(p => p.GetPrivateFieldValue<int>("_Properties_pos")), Is.Ordered);
                 var factory = scope.Resolve<IModelFactory>();
                 var classModel = factory.CreateViewModel<DataObjectModel.Factory>(objectClass).Invoke(ctx, objectClass);
-                var listModel = (ObjectListModel)classModel.PropertyModelsByName["Properties"];
+                var listModel = (ObjectListViewModel)classModel.PropertyModelsByName["Properties"];
                 propList = objectClass.Properties.ToArray();
                 var mdlList = listModel.Value.ToArray();
                 listModel.MoveItemUp(listModel.Value[3]);

@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Kistl.Client.Presentables;
+using Kistl.Client.Presentables.ValueViewModels;
 
 namespace Kistl.Client.WPF.View.GridCells
 {
@@ -27,7 +28,7 @@ namespace Kistl.Client.WPF.View.GridCells
 
         private void ClearValueHandler(object sender, RoutedEventArgs e)
         {
-            ((ObjectReferenceModel)DataContext).Value = null;
+            ((ObjectReferenceViewModel)DataContext).Value = null;
         }
     }
 }

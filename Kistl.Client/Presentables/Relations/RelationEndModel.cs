@@ -6,6 +6,7 @@ using System.Text;
 using Kistl.API;
 using Kistl.App.Base;
 using Kistl.API.Configuration;
+using Kistl.Client.Presentables.ValueViewModels;
 
 namespace Kistl.Client.Presentables.Relations
 {
@@ -26,11 +27,11 @@ namespace Kistl.Client.Presentables.Relations
 
         #region Public interface
 
-        public PropertyModel<string> RoleName
+        public ValueViewModel<string> RoleName
         {
             get
             {
-                return (PropertyModel<string>)this.PropertyModelsByName["RoleName"];
+                return (ValueViewModel<string>)this.PropertyModelsByName["RoleName"];
             }
         }
 
@@ -38,9 +39,9 @@ namespace Kistl.Client.Presentables.Relations
 
         public ICommand CreateNavigatorCommand { get; private set; }
 
-        public ObjectReferenceModel RelatedClass { get; private set; }
+        public ObjectReferenceViewModel RelatedClass { get; private set; }
 
-        public PropertyModel<bool> HasOrderPersisted { get; private set; }
+        public ValueViewModel<bool> HasOrderPersisted { get; private set; }
 
         #endregion
 

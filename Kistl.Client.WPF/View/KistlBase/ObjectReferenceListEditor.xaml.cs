@@ -20,13 +20,14 @@ namespace Kistl.Client.WPF.View.KistlBase
     using Kistl.Client.Presentables;
     using Kistl.Client.WPF.Commands;
     using System.ComponentModel;
+    using Kistl.Client.Presentables.ValueViewModels;
 
     /// <summary>
     /// Interaction logic for DataObjectListView.xaml
     /// </summary>
     [ViewDescriptor("KistlBase", Kistl.App.GUI.Toolkit.WPF, Kind="Kistl.App.GUI.ObjectListKind")]
     public partial class ObjectReferenceListEditor
-        : PropertyEditor, IHasViewModel<ObjectListModel>
+        : PropertyEditor, IHasViewModel<ObjectListViewModel>
     {
         public ObjectReferenceListEditor()
         {
@@ -156,9 +157,9 @@ namespace Kistl.Client.WPF.View.KistlBase
 
         #region IHasViewModel<ObjectListModel> Members
 
-        public ObjectListModel ViewModel
+        public ObjectListViewModel ViewModel
         {
-            get { return (ObjectListModel)DataContext; }
+            get { return (ObjectListViewModel)DataContext; }
         }
 
         #endregion

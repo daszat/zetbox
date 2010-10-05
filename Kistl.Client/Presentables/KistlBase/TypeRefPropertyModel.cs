@@ -9,22 +9,24 @@ namespace Kistl.Client.Presentables.KistlBase
     using Kistl.API;
     using Kistl.App.Base;
     using Kistl.App.Extensions;
+    using Kistl.Client.Presentables.ValueViewModels;
+    using Kistl.Client.Models;
 
     public class TypeRefPropertyModel
-           : ObjectReferenceModel
+           : ObjectReferenceViewModel
     {
-        public new delegate TypeRefPropertyModel Factory(IKistlContext dataCtx, IDataObject obj, ObjectReferenceProperty prop);
+        public new delegate TypeRefPropertyModel Factory(IKistlContext dataCtx, IValueModel mdl);
 
         public TypeRefPropertyModel(
             IViewModelDependencies appCtx, IKistlContext dataCtx,
-            IDataObject obj, ObjectReferenceProperty prop)
-            : base(appCtx, dataCtx, obj, prop)
+            IValueModel mdl)
+            : base(appCtx, dataCtx, mdl)
         {
             // TODO: use a static reference here
-            if (prop.GetReferencedObjectClass().Name != "TypeRef")
-            {
-                throw new ArgumentOutOfRangeException("prop", "Can only handle TypeRef References");
-            }
+            //if (prop.GetReferencedObjectClass().Name != "TypeRef")
+            //{
+            //    throw new ArgumentOutOfRangeException("prop", "Can only handle TypeRef References");
+            //}
         }
 
         private LoadTypeRefFromAssemblyFileCommand _loadTypeRefFromAssemblyFileCommand = null;

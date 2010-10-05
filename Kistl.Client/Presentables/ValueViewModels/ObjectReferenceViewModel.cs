@@ -17,11 +17,11 @@ namespace Kistl.Client.Presentables.ValueViewModels
     public partial class ObjectReferenceViewModel
         : ClassValueViewModel<DataObjectModel>
     {
-        public new delegate ObjectReferenceModel Factory(IKistlContext dataCtx, IValueModel mdl);
+        public new delegate ObjectReferenceViewModel Factory(IKistlContext dataCtx, IValueModel mdl);
 
         public ObjectReferenceViewModel(
             IViewModelDependencies appCtx, IKistlContext dataCtx,
-            INotifyingObject obj, IValueModel mdl)
+            IValueModel mdl)
             : base(appCtx, dataCtx, mdl)
         {
             ObjectReferenceModel = (IObjectReferenceValueModel)mdl;
@@ -30,6 +30,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
         #region Public Interface
 
         public IObjectReferenceValueModel ObjectReferenceModel { get; private set; }
+        public ObjectClass ReferencedClass { get { return ObjectReferenceModel.ReferencedClass; } }
 
         private bool _allowCreateNewItem = true;
         public bool AllowCreateNewItem

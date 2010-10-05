@@ -11,20 +11,20 @@ namespace Kistl.Client.Presentables
     using Kistl.App.Base;
     using Kistl.App.Extensions;
     using Kistl.Client.Presentables.ValueViewModels;
+    using Kistl.Client.Models;
 
     [ViewModelDescriptor("GUI", DefaultKind = "Kistl.App.GUI.CompoundObjectPropertyKind", Description = "Viewmodel for editing a CompoundObject Property")]
-    public class CompoundObjectPropertyViewModel : PropertyModel<CompoundObjectViewModel>, IValueViewModel<CompoundObjectViewModel>
+    public class CompoundObjectPropertyViewModel : ValueViewModel<CompoundObjectViewModel>, IValueViewModel<CompoundObjectViewModel>
     {
-        public new delegate CompoundObjectPropertyViewModel Factory(IKistlContext dataCtx, INotifyingObject obj, CompoundObjectProperty prop);
+        public new delegate CompoundObjectPropertyViewModel Factory(IKistlContext dataCtx, IValueModel mdl);
 
 
         public CompoundObjectPropertyViewModel(
             IViewModelDependencies appCtx, IKistlContext dataCtx,
-            INotifyingObject obj, CompoundObjectProperty prop)
-            : base(appCtx, dataCtx, obj, prop)
+            IValueModel mdl)
+            : base(appCtx, dataCtx, mdl)
         {
-            AllowNullInput = prop.IsNullable();
-            ReferencedType = prop.CompoundObjectDefinition;
+            // ReferencedType = prop.CompoundObjectDefinition;
         }
 
         #region Public Interface
@@ -35,81 +35,6 @@ namespace Kistl.Client.Presentables
             protected set;
         }
 
-        public bool HasValue
-        {
-            get
-            {
-                return _valueCache != null;
-            }
-            set
-            {
-                if (!value)
-                    Value = null;
-            }
-        }
-
-        public bool IsNull
-        {
-            get
-            {
-                return _valueCache == null;
-            }
-            set
-            {
-                if (value)
-                    Value = null;
-            }
-        }
-
-        #region IClearableValue Members
-
-        public void ClearValue()
-        {
-            if (AllowNullInput) Value = null;
-            else throw new InvalidOperationException();
-        }
-
-        private ICommand _ClearValueCommand = null;
-        public ICommand ClearValueCommand
-        {
-            get
-            {
-                if (_ClearValueCommand == null)
-                {
-                    _ClearValueCommand = ModelFactory.CreateViewModel<SimpleCommandModel.Factory>()
-                        .Invoke(DataContext, "Clear value", "Sets the value to nothing", () => ClearValue(), () => AllowNullInput);
-                }
-                return _ClearValueCommand;
-            }
-        }
-
-        #endregion
-
-
-        private CompoundObjectViewModel _valueCache;
-        /// <summary>
-        /// The value of the property presented by this model
-        /// </summary>
-        public CompoundObjectViewModel Value
-        {
-            get { return _valueCache; }
-            set
-            {
-                _valueCache = value;
-
-                var newPropertyValue = _valueCache == null ? null : _valueCache.Object;
-
-                if (!object.Equals(Object.GetPropertyValue<object>(Property.Name), newPropertyValue))
-                {
-                    Object.SetPropertyValue<object>(Property.Name, newPropertyValue);
-                    CheckConstraints();
-
-                    OnPropertyChanged("Value");
-                    OnPropertyChanged("HasValue");
-                    OnPropertyChanged("IsNull");
-                }
-            }
-        }
 
         public override string Name
         {
@@ -119,17 +44,22 @@ namespace Kistl.Client.Presentables
 
         #region Utilities and UI callbacks
 
-        protected override void UpdatePropertyValue()
-        {
-            var newValue = Object.GetPropertyValue<ICompoundObject>(Property.Name) ?? DataContext.CreateCompoundObject(DataContext.GetInterfaceType(((CompoundObjectProperty)Property).CompoundObjectDefinition.GetDataType()));
-            var newModel = ModelFactory.CreateViewModel<CompoundObjectViewModel.Factory>(newValue).Invoke(DataContext, newValue);
-            if (Value != newModel)
-            {
-                Value = newModel;
-            }
-        }
+        //protected override void UpdatePropertyValue()
+        //{
+        //    var newValue = Object.GetPropertyValue<ICompoundObject>(Property.Name) ?? DataContext.CreateCompoundObject(DataContext.GetInterfaceType(((CompoundObjectProperty)Property).CompoundObjectDefinition.GetDataType()));
+        //    var newModel = ModelFactory.CreateViewModel<CompoundObjectViewModel.Factory>(newValue).Invoke(DataContext, newValue);
+        //    if (Value != newModel)
+        //    {
+        //        Value = newModel;
+        //    }
+        //}
 
         #endregion
 
+
+        protected override void ParseValue(string str)
+        {
+            throw new NotSupportedException();
+        }
     }
 }

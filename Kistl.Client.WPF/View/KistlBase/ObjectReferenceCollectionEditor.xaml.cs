@@ -20,13 +20,14 @@ namespace Kistl.Client.WPF.View.KistlBase
     using Kistl.Client.Presentables;
     using Kistl.Client.WPF.Commands;
     using System.ComponentModel;
+    using Kistl.Client.Presentables.ValueViewModels;
 
     /// <summary>
     /// Interaction logic for DataObjectListView.xaml
     /// </summary>
     [ViewDescriptor("KistlBase", Kistl.App.GUI.Toolkit.WPF, Kind = "Kistl.App.GUI.ObjectCollectionKind")]
     public partial class ObjectReferenceCollectionEditor
-        : PropertyEditor, IHasViewModel<ObjectCollectionModel>
+        : PropertyEditor, IHasViewModel<ObjectCollectionViewModel>
     {
         #region Sort dependency properties
         public static readonly DependencyProperty SortPropertyNameProperty =
@@ -192,9 +193,9 @@ namespace Kistl.Client.WPF.View.KistlBase
 
         #region IHasViewModel<ObjectCollectionModel> Members
 
-        public ObjectCollectionModel ViewModel
+        public ObjectCollectionViewModel ViewModel
         {
-            get { return (ObjectCollectionModel)DataContext; }
+            get { return (ObjectCollectionViewModel)DataContext; }
         }
 
         #endregion

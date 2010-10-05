@@ -31,29 +31,29 @@ namespace Kistl.Client.Presentables
 
         private void UpdateMemberNamePossibilities()
         {
-            if (_memberNameProperty == null)
-                _memberNameProperty = Object.GetObjectClass(FrozenContext).Properties.Single(p => p.Name == "MemberName");
+            //if (_memberNameProperty == null)
+            //    _memberNameProperty = Object.GetObjectClass(FrozenContext).Properties.Single(p => p.Name == "MemberName");
 
-            if (_memberNameModel == null)
-                // fetches already generated model from cache
-                _memberNameModel = ModelFactory.CreateViewModel<ChooseReferencePropertyModel<string>.Factory>(_memberNameProperty).Invoke(DataContext, Object, _memberNameProperty);
+            //if (_memberNameModel == null)
+            //    // fetches already generated model from cache
+            //    _memberNameModel = ModelFactory.CreateViewModel<ChooseReferencePropertyModel<string>.Factory>(_memberNameProperty).Invoke(DataContext, Object, _memberNameProperty);
 
-            if (_invocation.Implementor == null) return;
+            //if (_invocation.Implementor == null) return;
 
-            if (_invocation.Implementor.AsType(false) == null) return;
+            //if (_invocation.Implementor.AsType(false) == null) return;
 
-            var possibleValues = _invocation
-                .Implementor.AsType(true)
-                .GetMethods(BindingFlags.Public | BindingFlags.Instance)
-                .Select(mi => mi.Name)
-                .Distinct()
-                .OrderBy(name => name)
-                .ToList();
+            //var possibleValues = _invocation
+            //    .Implementor.AsType(true)
+            //    .GetMethods(BindingFlags.Public | BindingFlags.Instance)
+            //    .Select(mi => mi.Name)
+            //    .Distinct()
+            //    .OrderBy(name => name)
+            //    .ToList();
 
-            var originalValue = _memberNameModel.Value;
-            _memberNameModel.PossibleValues.Clear();
-            possibleValues.ForEach(v => _memberNameModel.PossibleValues.Add(v));
-            _memberNameModel.Value = originalValue;
+            //var originalValue = _memberNameModel.Value;
+            //_memberNameModel.PossibleValues.Clear();
+            //possibleValues.ForEach(v => _memberNameModel.PossibleValues.Add(v));
+            //_memberNameModel.Value = originalValue;
         }
 
         #endregion
@@ -71,7 +71,7 @@ namespace Kistl.Client.Presentables
         #endregion
 
         private MethodInvocation _invocation;
-        private Property _memberNameProperty;
-        private ChooseReferencePropertyModel<string> _memberNameModel;
+        //private Property _memberNameProperty;
+        //private PropertyModel<string> _memberNameModel;
     }
 }

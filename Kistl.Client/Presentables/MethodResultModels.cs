@@ -51,7 +51,7 @@ namespace Kistl.Client.Presentables
 
         public abstract TValue Value { get; set; }
 
-        public bool IsReadOnly { get { return true; } }
+        public bool IsReadOnly { get { return true; } set { throw new NotSupportedException(); } }
 
         public override string Name
         {
@@ -239,8 +239,5 @@ namespace Kistl.Client.Presentables
                 }
             }
         }
-
-        
     }
-
 }

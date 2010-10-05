@@ -635,7 +635,9 @@
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>UpdateParentTemplate.Designer.cs</LastGenOutput>
     </None>
-    <Content Include="Database\Database.xml" />
+    <Content Include="Database\Database.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Database\SchemaMigrationProjects.xml" />
     <Content Include="Generators\Interfaces\Repositories\README.txt" />
     <None Include="Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cst">

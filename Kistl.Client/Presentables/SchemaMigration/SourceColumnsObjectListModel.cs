@@ -5,18 +5,20 @@ using System.Text;
 using Kistl.API;
 using Kistl.App.Base;
 using Kistl.App.GUI;
+using Kistl.Client.Presentables.ValueViewModels;
+using Kistl.Client.Models;
 
 namespace Kistl.Client.Presentables.SchemaMigration
 {
     [ViewModelDescriptor("SchemaMigration", DefaultKind = "Kistl.App.GUI.ObjectCollectionKind", Description = "ViewModel for SourceTable.SourceColumns object collection")]
-    public class SourceColumnsObjectListModel : ObjectCollectionModel
+    public class SourceColumnsObjectListModel : ObjectCollectionViewModel
     {
-        public new delegate SourceColumnsObjectListModel Factory(IKistlContext dataCtx, IDataObject obj, Property prop);
+        public new delegate SourceColumnsObjectListModel Factory(IKistlContext dataCtx, IValueModel mdl);
 
         public SourceColumnsObjectListModel(
             IViewModelDependencies appCtx, IKistlContext dataCtx,
-            IDataObject obj, ObjectReferenceProperty prop)
-            : base(appCtx, dataCtx, obj, prop)
+            IValueModel mdl)
+            : base(appCtx, dataCtx, mdl)
         {
 
         }

@@ -15,13 +15,14 @@ using System.Windows.Shapes;
 using Kistl.Client.GUI;
 using Kistl.Client.Presentables;
 using Kistl.Client.WPF.View.KistlBase;
+using Kistl.Client.Presentables.ValueViewModels;
 
 namespace Kistl.Client.WPF.View
 {
     /// <summary>
     /// Interaction logic for EnumSelectionView.xaml
     /// </summary>
-    public partial class EnumSelectionView : PropertyEditor, IHasViewModel<EnumerationPropertyModel>
+    public partial class EnumSelectionView : PropertyEditor, IHasViewModel<EnumerationValueViewModel>
     {
         public EnumSelectionView()
         {
@@ -30,9 +31,9 @@ namespace Kistl.Client.WPF.View
 
         #region IHasViewModel<EnumerationPropertyModel> Members
 
-        public EnumerationPropertyModel ViewModel
+        public EnumerationValueViewModel ViewModel
         {
-            get { return (EnumerationPropertyModel)DataContext; }
+            get { return (EnumerationValueViewModel)DataContext; }
         }
 
         #endregion
