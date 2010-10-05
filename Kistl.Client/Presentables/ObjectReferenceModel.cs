@@ -11,9 +11,10 @@ namespace Kistl.Client.Presentables
     using Kistl.API;
     using Kistl.App.Base;
     using Kistl.App.Extensions;
+    using Kistl.Client.Presentables.ValueViewModels;
 
     public partial class ObjectReferenceModel
-        : PropertyModel<DataObjectModel>, IValueModel<DataObjectModel>
+        : PropertyModel<DataObjectModel>, IValueViewModel<DataObjectModel>
     {
         public new delegate ObjectReferenceModel Factory(IKistlContext dataCtx, INotifyingObject obj, Property prop);
 

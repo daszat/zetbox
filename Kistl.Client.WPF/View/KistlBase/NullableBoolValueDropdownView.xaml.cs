@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using Kistl.Client.WPF.View.KistlBase;
 using Kistl.Client.GUI;
 using Kistl.Client.Presentables;
+using Kistl.Client.Presentables.ValueViewModels;
 
 namespace Kistl.Client.WPF.View
 {
@@ -21,7 +22,7 @@ namespace Kistl.Client.WPF.View
     /// Interaction logic for NullableBoolValueView.xaml
     /// </summary>
     [ViewDescriptor("GUI", Kistl.App.GUI.Toolkit.WPF, Kind = "Kistl.App.GUI.DropdownBoolKind")]
-    public partial class NullableBoolValueDropdownView : PropertyEditor, IHasViewModel<IValueModel<bool>>
+    public partial class NullableBoolValueDropdownView : PropertyEditor, IHasViewModel<IValueViewModel<bool>>
     {
         public NullableBoolValueDropdownView()
         {
@@ -36,9 +37,9 @@ namespace Kistl.Client.WPF.View
 
         #region IHasViewModel<IValueModel<bool>> Members
 
-        public IValueModel<bool> ViewModel
+        public IValueViewModel<bool> ViewModel
         {
-            get { return (IValueModel<bool>)DataContext; }
+            get { return (IValueViewModel<bool>)DataContext; }
         }
 
         #endregion

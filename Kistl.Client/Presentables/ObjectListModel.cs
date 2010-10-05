@@ -82,6 +82,11 @@ namespace Kistl.Client.Presentables
                 EnsureValueCache();
                 return _valueCache;
             }
+            set
+            {
+                throw new NotSupportedException();
+            }
+
         }
 
         private void EnsureValueCache()
@@ -477,6 +482,21 @@ namespace Kistl.Client.Presentables
         private void AnyPropertyChangedHandler(object sender, EventArgs e)
         {
             OnPropertyChanged("Value");
+        }
+
+        #endregion
+
+        #region IValueViewModel Members
+
+
+        public void ClearValue()
+        {
+            throw new NotImplementedException();
+        }
+
+        public ICommand ClearValueCommand
+        {
+            get { throw new NotImplementedException(); }
         }
 
         #endregion

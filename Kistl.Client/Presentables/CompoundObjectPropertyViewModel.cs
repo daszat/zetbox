@@ -10,9 +10,10 @@ namespace Kistl.Client.Presentables
     using Kistl.API;
     using Kistl.App.Base;
     using Kistl.App.Extensions;
+    using Kistl.Client.Presentables.ValueViewModels;
 
     [ViewModelDescriptor("GUI", DefaultKind = "Kistl.App.GUI.CompoundObjectPropertyKind", Description = "Viewmodel for editing a CompoundObject Property")]
-    public class CompoundObjectPropertyViewModel : PropertyModel<CompoundObjectViewModel>, IValueModel<CompoundObjectViewModel>
+    public class CompoundObjectPropertyViewModel : PropertyModel<CompoundObjectViewModel>, IValueViewModel<CompoundObjectViewModel>
     {
         public new delegate CompoundObjectPropertyViewModel Factory(IKistlContext dataCtx, INotifyingObject obj, CompoundObjectProperty prop);
 

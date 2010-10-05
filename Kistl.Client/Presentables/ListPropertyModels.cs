@@ -11,11 +11,12 @@ using System.Text;
 using Kistl.API;
 using Kistl.API.Utils;
 using Kistl.App.Base;
+using Kistl.Client.Presentables.ValueViewModels;
 
 namespace Kistl.Client.Presentables
 {
     public interface IBaseValueCollectionModel<TElement>
-        : IReadOnlyValueModel<IReadOnlyObservableList<TElement>>
+        : IValueViewModel<IReadOnlyObservableList<TElement>>
     {
         /// <summary>
         /// Gets a value whether or not this list has a persistent order. 
@@ -29,19 +30,19 @@ namespace Kistl.Client.Presentables
 
         /// <summary>
         /// Adds the given item to the underlying value. Triggers <see cref="INotifyCollectionChanged.CollectionChanged"/>
-        /// on the underlying <see cref="IReadOnlyValueModel{TValue}.Value"/> property when the change has propagated.
+        /// on the underlying <see cref="IValueViewModel{TValue}.Value"/> property when the change has propagated.
         /// </summary>
         void AddItem(TElement item);
 
         /// <summary>
         /// Remove the given item from the underlying value. Triggers <see cref="INotifyCollectionChanged.CollectionChanged"/>
-        /// on the underlying <see cref="IReadOnlyValueModel{TValue}.Value"/> property when the change has propagated.
+        /// on the underlying <see cref="IValueViewModel{TValue}.Value"/> property when the change has propagated.
         /// </summary>
         void RemoveItem(TElement item);
 
         /// <summary>
         /// Permanentely delete the given item from the data store.
-        /// Triggers <see cref="INotifyCollectionChanged.CollectionChanged"/> on the underlying <see cref="IReadOnlyValueModel{TValue}.Value"/> property when the change has propagated.
+        /// Triggers <see cref="INotifyCollectionChanged.CollectionChanged"/> on the underlying <see cref="IValueViewModel{TValue}.Value"/> property when the change has propagated.
         /// </summary>
         void DeleteItem(TElement item);
 
@@ -69,13 +70,13 @@ namespace Kistl.Client.Presentables
     {
         /// <summary>
         /// Moves the given item one item up in the list. Triggers <see cref="INotifyCollectionChanged.CollectionChanged"/>
-        /// on the underlying <see cref="IReadOnlyValueModel{TValue}.Value"/> property when the change has propagated.
+        /// on the underlying <see cref="IValueViewModel{TValue}.Value"/> property when the change has propagated.
         /// </summary>
         void MoveItemUp(TElement item);
 
         /// <summary>
         /// Moves the given item one item down in the list. Triggers <see cref="INotifyCollectionChanged.CollectionChanged"/>
-        /// on the underlying <see cref="IReadOnlyValueModel{TValue}.Value"/> property when the change has propagated.
+        /// on the underlying <see cref="IValueViewModel{TValue}.Value"/> property when the change has propagated.
         /// </summary>
         void MoveItemDown(TElement item);
 
@@ -227,6 +228,25 @@ namespace Kistl.Client.Presentables
         public IReadOnlyObservableList<string> Value
         {
             get { return _valueView; }
+            set
+            {
+                throw new NotSupportedException();
+            }
+        }
+
+        #endregion
+
+        #region IValueViewModel Members
+
+
+        public void ClearValue()
+        {
+            throw new NotImplementedException();
+        }
+
+        public ICommand ClearValueCommand
+        {
+            get { throw new NotImplementedException(); }
         }
 
         #endregion

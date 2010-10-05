@@ -90,6 +90,10 @@
     <Compile Include="GUI\IHasViewModel.cs" />
     <Compile Include="GUI\IRenderer.cs" />
     <Compile Include="GUI\ViewDescriptorAttribute.cs" />
+    <Compile Include="Models\IValueModel.cs" />
+    <Compile Include="Models\MethodResultModel.cs" />
+    <Compile Include="Models\PropertyValueModel.cs" />
+    <Compile Include="Models\ValueModel.cs" />
     <Compile Include="Presentables\ActionModel.cs" />
     <Compile Include="Presentables\AsyncList.cs" />
     <Compile Include="Presentables\CacheDebuggerViewModel.cs" />
@@ -98,6 +102,7 @@
     <Compile Include="Presentables\CompoundObjectViewModel.cs" />
     <Compile Include="Presentables\GUI\NavigatorViewModel.cs" />
     <Compile Include="Presentables\GUI\NavigationScreenViewModel.cs" />
+    <Compile Include="Presentables\KistlBase\InstanceListViewModel.FilterTarget.cs" />
     <Compile Include="Presentables\MethodInvokerViewModel.cs" />
     <Compile Include="Presentables\ObjectCollectionModel.cs" />
     <Compile Include="Presentables\DataObjectModel.cs" />
@@ -114,7 +119,6 @@
     <Compile Include="Presentables\ILabeledViewModel.cs" />
     <Compile Include="Presentables\IModelFactory.cs" />
     <Compile Include="Presentables\IMultipleInstancesManager.cs" />
-    <Compile Include="Presentables\IPropertyModel.cs" />
     <Compile Include="Presentables\IViewModelWithIcon.cs" />
     <Compile Include="Presentables\KistlBase\ApplicationViewModel.cs" />
     <Compile Include="Presentables\KistlBase\AssemblyModel.cs" />
@@ -138,6 +142,8 @@
     <Compile Include="Presentables\ObjectReferenceModel.Commands.cs" />
     <Compile Include="Presentables\ObjectReferenceModel.cs" />
     <Compile Include="Presentables\SchemaMigration\SourceColumnsObjectListModel.cs" />
+    <Compile Include="Presentables\ValueViewModels\ValueViewModel.cs" />
+    <Compile Include="Presentables\ValueViewModels\IValueViewModel.cs" />
     <Compile Include="Presentables\ViewModel.cs" />
     <Compile Include="Presentables\PropertyGroupModel.cs" />
     <Compile Include="Presentables\Relations\RelationEndModel.cs" />
@@ -174,6 +180,7 @@
     </EmbeddedResource>
     <None Include="Kistl.snk" />
     <None Include="PresentableModelsDiagram.cd" />
+    <None Include="Presentables\ValuePropertyModels.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -199,6 +206,7 @@
       <Name>TempAppHelpers</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

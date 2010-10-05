@@ -15,13 +15,14 @@ using System.Windows.Shapes;
 using Kistl.Client.GUI;
 using Kistl.Client.Presentables;
 using Kistl.Client.WPF.View.KistlBase;
+using Kistl.Client.Presentables.ValueViewModels;
 
 namespace Kistl.Client.WPF.View
 {
     /// <summary>
     /// Interaction logic for NullablePropertyTextBoxView.xaml
     /// </summary>
-    public partial class NullablePropertyTextBoxView : PropertyEditor, IHasViewModel<IValueModel<string>>, IHasViewModel<IValueModelAsString>
+    public partial class NullablePropertyTextBoxView : PropertyEditor, IHasViewModel<IValueViewModel<string>>, IHasViewModel<IFormattedValueViewModel>
     {
         public NullablePropertyTextBoxView()
         {
@@ -30,18 +31,18 @@ namespace Kistl.Client.WPF.View
 
         #region IHasViewModel<IValueModelAsString> Members
 
-        public IValueModel<string> ViewModel
+        public IValueViewModel<string> ViewModel
         {
-            get { return (IValueModel<string>)DataContext; }
+            get { return (IValueViewModel<string>)DataContext; }
         }
 
         #endregion
 
         #region IHasViewModel<IValueModelAsString> Members
 
-        IValueModelAsString IHasViewModel<IValueModelAsString>.ViewModel
+        IFormattedValueViewModel IHasViewModel<IFormattedValueViewModel>.ViewModel
         {
-            get { return (IValueModelAsString)DataContext; }
+            get { return (IFormattedValueViewModel)DataContext; }
         }
 
         #endregion

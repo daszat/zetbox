@@ -5,6 +5,7 @@ using System.Text;
 using Kistl.API;
 using Kistl.App.Base;
 using System.ComponentModel;
+using Kistl.Client.Presentables.ValueViewModels;
 
 namespace Kistl.Client.Presentables
 {
@@ -26,7 +27,7 @@ namespace Kistl.Client.Presentables
     }
 
     public abstract class MethodResultModel<TValue>
-        : BaseMethodResultModel, IReadOnlyValueModel<string>, IValueModelAsString
+        : BaseMethodResultModel, IValueViewModel<string>, IFormattedValueViewModel
     {
         public new delegate MethodResultModel<TValue> Factory(IKistlContext dataCtx, IDataObject obj, Method m);
 
@@ -48,7 +49,7 @@ namespace Kistl.Client.Presentables
         // TODO: proxying implementations might block on that
         public string ToolTip { get { return Method.Description; } }
 
-        public abstract TValue Value { get; protected set; }
+        public abstract TValue Value { get; set; }
 
         public bool IsReadOnly { get { return true; } }
 
@@ -105,11 +106,15 @@ namespace Kistl.Client.Presentables
         public abstract bool HasValue { get; }
         public abstract bool IsNull { get; }
 
-        string IReadOnlyValueModel<string>.Value
+        string IValueViewModel<string>.Value
         {
             get
             {
                 return HasValue ? Value.ToString() : "(null)";
+            }
+            set
+            {
+                throw new NotSupportedException();
             }
         }
 
@@ -121,7 +126,7 @@ namespace Kistl.Client.Presentables
         {
             get
             {
-                return ((IReadOnlyValueModel<string>)this).Value;
+                return ((IValueViewModel<string>)this).Value;
             }
             set
             {
@@ -130,10 +135,30 @@ namespace Kistl.Client.Presentables
         }
 
         #endregion
+
+        #region IValueViewModel Members
+
+
+        public bool AllowNullInput
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public void ClearValue()
+        {
+            throw new NotImplementedException();
+        }
+
+        public ICommand ClearValueCommand
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        #endregion
     }
 
     public class NullableResultModel<TValue>
-        : MethodResultModel<Nullable<TValue>>, IReadOnlyValueModel<Nullable<TValue>>
+        : MethodResultModel<Nullable<TValue>>, IValueViewModel<Nullable<TValue>>
         where TValue : struct
     {
         public new delegate NullableResultModel<TValue> Factory(IKistlContext dataCtx, IDataObject obj, Method m);
@@ -163,7 +188,7 @@ namespace Kistl.Client.Presentables
         public override Nullable<TValue> Value
         {
             get { return _valueCache; }
-            protected set
+            set
             {
                 if (!_valueCache.HasValue && !value.HasValue)
                     return;
@@ -175,7 +200,7 @@ namespace Kistl.Client.Presentables
     }
 
     public class ObjectResultModel<TValue>
-        : MethodResultModel<TValue>, IReadOnlyValueModel<TValue>
+        : MethodResultModel<TValue>, IValueViewModel<TValue>
         where TValue : class
     {
         public new delegate ObjectResultModel<TValue> Factory(IKistlContext dataCtx, IDataObject obj, Method m);
@@ -205,7 +230,7 @@ namespace Kistl.Client.Presentables
         public override TValue Value
         {
             get { return _valueCache; }
-            protected set
+            set
             {
                 if (_valueCache != value)
                 {
@@ -214,6 +239,8 @@ namespace Kistl.Client.Presentables
                 }
             }
         }
+
+        
     }
 
 }

@@ -11,84 +11,11 @@ using Kistl.App.Base;
 using Kistl.App.Extensions;
 using Kistl.App.GUI;
 using Kistl.Client.Presentables.GUI;
+using Kistl.Client.Presentables.ValueViewModels;
 
+// Legacy code, will be removed tomorrow
 namespace Kistl.Client.Presentables
 {
-    /// <summary>
-    /// A Model describing a read-only value of type <typeparamref name="TValue"/>, usually read from a property or a method return value.
-    /// </summary>
-    /// <typeparam name="TValue">the type of the presented value</typeparam>
-    public interface IReadOnlyValueModel<TValue>
-        : INotifyPropertyChanged
-    {
-        /// <summary>
-        /// Gets a value indicating whether or not the property has a value.
-        /// </summary>
-        /// <seealso cref="IsNull"/>
-        bool HasValue { get; }
-
-        /// <summary>
-        /// Gets a value indicating whether or not the property is null.
-        /// </summary>
-        /// <seealso cref="HasValue"/>
-        bool IsNull { get; }
-
-        /// <summary>
-        /// Gets a label to display with the Value.
-        /// </summary>
-        string Label { get; }
-
-        /// <summary>
-        /// Gets a tooltip to display with the Value.
-        /// </summary>
-        string ToolTip { get; }
-
-        /// <summary>
-        /// Gets the value of this model.
-        /// </summary>
-        TValue Value { get; }
-
-        /// <summary>
-        /// Gets a value indicating whether or not the property may be edited
-        /// </summary>
-        bool IsReadOnly { get; }
-    }
-
-    /// <summary>
-    /// This interface provides a method for nullable ValueModels to allow removing the value easily.
-    /// </summary>
-    public interface IClearableValue
-    {
-        /// <summary>
-        /// Clears the value of this Model. After calling this method the value should be <value>null</value> or "empty".
-        /// </summary>
-        void ClearValue();
-
-        ICommand ClearValueCommand { get; }
-    }
-
-    /// <summary>
-    /// WPF is not able to bind to a explicit implemented interface
-    /// </summary>
-    public interface IValueModelAsString
-    {
-        string FormattedValue { get; set; }
-    }
-
-    public interface IValueModel<TValue>
-        : IReadOnlyValueModel<TValue>, IClearableValue, INotifyPropertyChanged
-    {
-        /// <summary>
-        /// Gets or sets the value of this model.
-        /// </summary>
-        new TValue Value { get; set; }
-
-        /// <summary>
-        /// Gets a value indicating whether or not to allow <value>null</value> as input.
-        /// </summary>
-        bool AllowNullInput { get; }
-    }
-
     /// <summary>
     /// Non generic base class to enable easy autofac usage
     /// </summary>
@@ -117,7 +44,7 @@ namespace Kistl.Client.Presentables
     }
 
     public abstract class PropertyModel<TValue>
-        : BasePropertyViewModel, IPropertyValueModel, IDataErrorInfo, ILabeledViewModel
+        : BasePropertyViewModel, IDataErrorInfo, ILabeledViewModel
     {
         public new delegate PropertyModel<TValue> Factory(IKistlContext dataCtx, INotifyingObject obj, Property prop);
 
@@ -324,7 +251,7 @@ namespace Kistl.Client.Presentables
     }
 
     public class NullableValuePropertyModel<TValue>
-        : PropertyModel<Nullable<TValue>>, IValueModel<Nullable<TValue>>, IValueModel<string>, IValueModelAsString
+        : PropertyModel<Nullable<TValue>>, IValueViewModel<Nullable<TValue>>, IValueViewModel<string>, IFormattedValueViewModel
         where TValue : struct
     {
         public new delegate NullableValuePropertyModel<TValue> Factory(IKistlContext dataCtx, INotifyingObject obj, Property prop);
@@ -436,7 +363,7 @@ namespace Kistl.Client.Presentables
             }
         }
 
-        string IValueModel<string>.Value
+        string IValueViewModel<string>.Value
         {
             get
             {
@@ -447,15 +374,6 @@ namespace Kistl.Client.Presentables
                 ParseValue(value);
             }
         }
-
-        string IReadOnlyValueModel<string>.Value
-        {
-            get
-            {
-                return FormatValue();
-            }
-        }
-
         #endregion
 
         #region Utilities and UI callbacks
@@ -504,7 +422,7 @@ namespace Kistl.Client.Presentables
     }
 
     public class ReferencePropertyModel<TValue>
-        : PropertyModel<TValue>, IValueModel<TValue>, IValueModelAsString
+        : PropertyModel<TValue>, IValueViewModel<TValue>, IFormattedValueViewModel
         where TValue : class
     {
         public new delegate ReferencePropertyModel<TValue> Factory(IKistlContext dataCtx, INotifyingObject obj, Property prop);
@@ -648,28 +566,6 @@ namespace Kistl.Client.Presentables
         #region Public Interface
 
         public ObservableCollection<TValue> PossibleValues { get; private set; }
-
-        #endregion
-    }
-
-    public class EnumerationPropertyModel<TValue>
-        : NullableValuePropertyModel<TValue>
-        where TValue : struct
-    {
-        public new delegate EnumerationPropertyModel<TValue> Factory(IKistlContext dataCtx, INotifyingObject obj, Property prop);
-
-        public EnumerationPropertyModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx,
-            INotifyingObject obj, EnumerationProperty prop)
-            : base(appCtx, dataCtx, obj, prop)
-        {
-            this.PossibleValues = new ReadOnlyCollection<KeyValuePair<TValue, string>>(Enum.GetValues(typeof(TValue))
-                .Cast<TValue>().Select(e => new KeyValuePair<TValue, string>(e, e.ToString())).ToList());
-        }
-
-        #region Public Interface
-
-        public ReadOnlyCollection<KeyValuePair<TValue, string>> PossibleValues { get; private set; }
 
         #endregion
     }

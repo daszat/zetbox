@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 using Kistl.App.Base;
 using Kistl.Client.Presentables;
+using Kistl.Client.Presentables.ValueViewModels;
 
 namespace Kistl.Client.Forms.View
 {
@@ -61,5 +62,5 @@ namespace Kistl.Client.Forms.View
         }
     }
 
-    public class NullablePropertyTextBoxViewDesignerProxy : FormsUserControl<IValueModel<String>> { }
+    public class NullablePropertyTextBoxViewDesignerProxy : FormsUserControl<IValueViewModel<String>> { }
 }

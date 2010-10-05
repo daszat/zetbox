@@ -5,11 +5,12 @@ using System.Text;
 using Kistl.Client.Presentables;
 using Kistl.Client.GUI;
 using System.Web.UI.WebControls;
+using Kistl.Client.Presentables.ValueViewModels;
 
 namespace Kistl.Client.ASPNET.Toolkit.View
 {
     [ControlLocation("~/View/NullablePropertyTextBoxView.ascx")]
-    public abstract class NullablePropertyTextBoxView : ModelUserControl<IValueModel<String>>
+    public abstract class NullablePropertyTextBoxView : ModelUserControl<IValueViewModel<String>>
     {
         protected abstract TextBox txtCtrl { get; }
 

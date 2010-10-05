@@ -83,6 +83,11 @@ namespace Kistl.Client.Presentables
                 EnsureValueCache();
                 return _valueCache;
             }
+            set
+            {
+                throw new NotSupportedException();
+            }
+
         }
 
         private SortedWrapper _wrapper = null;
@@ -605,5 +610,20 @@ namespace Kistl.Client.Presentables
             EnsureValueCache();
             _wrapper.Sort(propName, direction);
         }
+
+        #region IValueViewModel Members
+
+
+        public void ClearValue()
+        {
+            throw new NotImplementedException();
+        }
+
+        public ICommand ClearValueCommand
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        #endregion
     }
 }

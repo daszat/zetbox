@@ -1,0 +1,295 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Kistl.Client.Presentables.BasePropertyViewModel">
+    <Position X="8.5" Y="0.5" Width="3" />
+    <NestedTypes>
+      <Delegate Name="Kistl.Client.Presentables.BasePropertyViewModel.Factory" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Presentables\ValuePropertyModels.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Presentables\ValuePropertyModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.Client.Presentables.PropertyModel&lt;TValue&gt;" Collapsed="true">
+    <Position X="9.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAQAEAEAAQAQiBBABCwBAABAAAEAAAhAAAAAAAA=</HashCode>
+      <FileName>Presentables\ValuePropertyModels.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Kistl.Client.Presentables.NullableValuePropertyModel&lt;TValue&gt;" Collapsed="true">
+    <Position X="4.75" Y="8" Width="3" />
+    <TypeIdentifier>
+      <HashCode>gAAgAAAAABAAAAAAAAAAAAiEBAAAQAEIAAEgAAAAAAA=</HashCode>
+      <FileName>Presentables\ValuePropertyModels.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Kistl.Client.Presentables.ReferencePropertyModel&lt;TValue&gt;" Collapsed="true">
+    <Position X="11.5" Y="9" Width="3" />
+    <TypeIdentifier>
+      <HashCode>gAAgAAAAAAAAAAAAAAAAAAiEBAAAAAEIAAEgAAAAAAA=</HashCode>
+      <FileName>Presentables\ValuePropertyModels.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Kistl.Client.Presentables.ChooseReferencePropertyModel&lt;TValue&gt;" Collapsed="true">
+    <Position X="10" Y="10.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Presentables\ValuePropertyModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.Client.Presentables.EnumerationPropertyModel" Collapsed="true">
+    <Position X="6.5" Y="10" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIABAAAAAAAAAAAAgAAAAAAAEAAAEAAAAAAAA=</HashCode>
+      <FileName>Presentables\ValuePropertyModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.Client.Presentables.MultiLineStringPropertyModel" Collapsed="true">
+    <Position X="13.5" Y="10.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAQAQAEAIAAAAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Presentables\ValuePropertyModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.Client.Presentables.NullableDateTimePropertyModel" Collapsed="true">
+    <Position X="3" Y="10" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Presentables\ValuePropertyModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.Client.Presentables.KistlBase.UIFilterExpressionViewModel&lt;TValue&gt;">
+    <Position X="22.75" Y="0.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAIBAABBAAAwAABAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Presentables\KistlBase\InstanceListViewModel.FilterExpressions.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Kistl.Client.Presentables.KistlBase.ValueTypeUIFilterExpressionViewModel&lt;TValue&gt;" Collapsed="true">
+    <Position X="18.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Presentables\KistlBase\InstanceListViewModel.FilterExpressions.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Kistl.Client.Presentables.KistlBase.ReferenceTypeUIFilterExpressionViewModel&lt;TValue&gt;" Collapsed="true">
+    <Position X="25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Presentables\KistlBase\InstanceListViewModel.FilterExpressions.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Kistl.Client.Presentables.KistlBase.ConstantFilterExpression">
+    <Position X="27.25" Y="1.25" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAIAAABAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Presentables\KistlBase\InstanceListViewModel.FilterExpressions.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Kistl.Client.Presentables.KistlBase.EnableFilterExpression" Collapsed="true">
+    <Position X="17.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAIAAABAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Presentables\KistlBase\InstanceListViewModel.FilterExpressions.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Kistl.Client.Presentables.KistlBase.ToStringFilterExpression" Collapsed="true">
+    <Position X="22.25" Y="6.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIQAABAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Presentables\KistlBase\InstanceListViewModel.FilterExpressions.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Kistl.Client.Presentables.KistlBase.StringFilterExpression" Collapsed="true">
+    <Position X="28.5" Y="6.5" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAIAAABAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Presentables\KistlBase\InstanceListViewModel.FilterExpressions.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Kistl.Client.Presentables.KistlBase.ValueTypePropertyFilterExpressionViewModel&lt;TValue&gt;" Collapsed="true">
+    <Position X="19.5" Y="6.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAIAAABAgAAAAAAAAAAAAgAAAAQAAAAA=</HashCode>
+      <FileName>Presentables\KistlBase\InstanceListViewModel.FilterExpressions.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Kistl.Client.Presentables.KistlBase.ReferencePropertyFilterExpressionViewModel&lt;TValue&gt;" Collapsed="true">
+    <Position X="25.5" Y="6.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAIAAABAgAAAAAAAAAAAAgAAAAQAAAAA=</HashCode>
+      <FileName>Presentables\KistlBase\InstanceListViewModel.FilterExpressions.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Kistl.Client.Presentables.KistlBase.StringPropertyFilterExpressionViewModel" Collapsed="true">
+    <Position X="24" Y="8" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Presentables\KistlBase\InstanceListViewModel.FilterExpressions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kistl.Client.Presentables.KistlBase.ObjectReferencePropertyFilterExpressionViewModel" Collapsed="true">
+    <Position X="28.5" Y="8" Width="4" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAQABAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Presentables\KistlBase\InstanceListViewModel.FilterExpressions.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Kistl.Client.Presentables.ObjectListModel" Collapsed="true">
+    <Position X="6.25" Y="6" Width="3" />
+    <TypeIdentifier>
+      <HashCode>kEAAIICIAAxQDCMAERAgAAQmjYAAAAFNSDBhIAgCAAo=</HashCode>
+      <FileName>Presentables\ObjectListModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Kistl.Client.Presentables.ObjectCollectionModel" Collapsed="true">
+    <Position X="10.75" Y="6.25" Width="3" />
+    <TypeIdentifier>
+      <HashCode>kEAEIICIAAxQDGMAARAwAAAmjYAAAAFNCDBhIAgCAAo=</HashCode>
+      <FileName>Presentables\ObjectCollectionModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Kistl.Client.Presentables.ObjectReferenceModel" Collapsed="true">
+    <Position X="14.25" Y="6.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>iAAEADKAAABAAAAAAAQgQASEBAAAAAFIASEhEAAASAI=</HashCode>
+      <FileName>Presentables\ObjectReferenceModel.Commands.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Kistl.Client.Presentables.StringListPropertyModel" Collapsed="true">
+    <Position X="2.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>kAAQAAAAAAAAAIAAEQAAAAQAjQAAAAEMABAgAAgAAEA=</HashCode>
+      <FileName>Presentables\ListPropertyModels.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="Kistl.Client.Presentables.IValueViewModel&lt;TValue&gt;" Collapsed="true">
+    <Position X="5.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Presentables\ValuePropertyModels.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Kistl.Client.Presentables.IFormattedValueViewModel" Collapsed="true">
+    <Position X="1.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Presentables\ValuePropertyModels.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Kistl.Client.Presentables.KistlBase.IFilterExpression">
+    <Position X="18" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAABAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Presentables\KistlBase\InstanceListViewModel.FilterExpressions.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Kistl.Client.Presentables.KistlBase.ILinqFilterExpression">
+    <Position X="16.75" Y="9.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Presentables\KistlBase\InstanceListViewModel.FilterExpressions.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Kistl.Client.Presentables.KistlBase.IPostFilterExpression" Collapsed="true">
+    <Position X="19.25" Y="10" Width="2.5" />
+    <InheritanceLine Type="Kistl.Client.Presentables.KistlBase.IFilterExpression" FixedToPoint="true">
+      <Path>
+        <Point X="18.75" Y="8.546" />
+        <Point X="18.75" Y="9.125" />
+        <Point X="20.375" Y="9.125" />
+        <Point X="20.375" Y="10" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Presentables\KistlBase\InstanceListViewModel.FilterExpressions.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Kistl.Client.Presentables.KistlBase.IUIFilterExpression">
+    <Position X="22.25" Y="9.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Presentables\KistlBase\InstanceListViewModel.FilterExpressions.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Kistl.Client.Presentables.KistlBase.IValueTypeFilterViewModel&lt;TValue&gt;">
+    <Position X="28.5" Y="13" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Presentables\KistlBase\InstanceListViewModel.FilterExpressions.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Kistl.Client.Presentables.KistlBase.IReferenceTypeFilterViewModel&lt;TValue&gt;">
+    <Position X="20.5" Y="12.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Presentables\KistlBase\InstanceListViewModel.FilterExpressions.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Kistl.Client.Presentables.KistlBase.IListTypeFilterViewModel">
+    <Position X="24.25" Y="12.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Presentables\KistlBase\InstanceListViewModel.FilterExpressions.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Kistl.Client.Presentables.KistlBase.IPropertyFilterExpression">
+    <Position X="16.5" Y="12" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Presentables\KistlBase\InstanceListViewModel.FilterExpressions.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Kistl.Client.Presentables.IBaseValueCollectionModel&lt;TElement&gt;" Collapsed="true">
+    <Position X="6" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAiAAAAAAEABAAAAgAAAA=</HashCode>
+      <FileName>Presentables\ListPropertyModels.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Kistl.Client.Presentables.IValueCollectionModel&lt;TElement&gt;" Collapsed="true">
+    <Position X="3.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Presentables\ListPropertyModels.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Kistl.Client.Presentables.IValueListModel&lt;TElement&gt;" Collapsed="true">
+    <Position X="7" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Presentables\ListPropertyModels.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Delegate Name="Kistl.Client.Presentables.KistlBase.PropertyFilterExpressionFactory" Collapsed="true">
+    <Position X="32.75" Y="5.25" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAQAAAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Presentables\KistlBase\InstanceListViewModel.FilterExpressions.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

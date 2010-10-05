@@ -29,12 +29,10 @@ namespace Kistl.Client.Presentables.KistlBase
         ReadOnlyObservableCollection<DataObjectModel> Execute(IEnumerable<DataObjectModel> instances);
     }
 
-    public interface IUIFilterExpression
+    public interface IUIFilterExpression : IFilterExpression
     {
         string Label { get; }
         event EventHandler FilterChanged;
-        bool Enabled { get; }
-        bool Requiered { get; }
     }
 
     public interface IValueTypeFilterViewModel<TValue> : IUIFilterExpression

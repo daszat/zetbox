@@ -7,6 +7,7 @@ using Kistl.API;
 using Kistl.App.Base;
 using Kistl.App.Extensions;
 using Kistl.API.Configuration;
+using Kistl.Client.Presentables.ValueViewModels;
 
 namespace Kistl.Client.Presentables.Relations
 {
@@ -33,7 +34,7 @@ namespace Kistl.Client.Presentables.Relations
         {
             get
             {
-                return (RelationEndModel)((IValueModel<DataObjectModel>)PropertyModelsByName["A"]).Value;
+                return (RelationEndModel)((IValueViewModel<DataObjectModel>)PropertyModelsByName["A"]).Value;
             }
         }
 
@@ -41,7 +42,7 @@ namespace Kistl.Client.Presentables.Relations
         {
             get
             {
-                return (RelationEndModel)((IValueModel<DataObjectModel>)PropertyModelsByName["B"]).Value;
+                return (RelationEndModel)((IValueViewModel<DataObjectModel>)PropertyModelsByName["B"]).Value;
             }
         }
 
