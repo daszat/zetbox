@@ -15,12 +15,13 @@ namespace Kistl.Client.Presentables
     using Kistl.API.Utils;
     using Kistl.App.Base;
     using Kistl.App.Extensions;
+    using Kistl.Client.Presentables.ValueViewModels;
 
     /// <summary>
     /// </summary>
     [ViewModelDescriptor("KistlBase", DefaultKind = "Kistl.App.GUI.ObjectCollectionKind", Description = "A collection of IDataObjects")]
     public class ObjectCollectionModel
-        : PropertyModel<ICollection<DataObjectModel>>, IValueCollectionModel<DataObjectModel>
+        : PropertyModel<ICollection<DataObjectModel>>, IValueCollectionViewModel<DataObjectModel, IReadOnlyObservableList<DataObjectModel>>
     {
         public new delegate ObjectCollectionModel Factory(IKistlContext dataCtx, IDataObject obj, Property prop);
 

@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.ComponentModel;
+using Kistl.App.Base;
+using Kistl.API;
+using Kistl.Client.Presentables;
+using System.Collections.Specialized;
 
 namespace Kistl.Client.Models
 {
@@ -38,5 +42,34 @@ namespace Kistl.Client.Models
     public interface IValueModel<TValue> : IValueModel
     {
         TValue Value { get; set; }
+    }
+
+    public interface IEnumerationValueModel : IValueModel<int?>
+    {
+        Enumeration Enumeration { get; }
+    }
+
+    public interface IDateTimeValueModel : IValueModel<DateTime?>
+    {
+        DateTimeStyles DateTimeStyle { get; }
+    }
+
+    public interface IObjectReferenceValueModel : IValueModel<DataObjectModel>
+    {
+        ObjectClass ReferencedClass { get; }
+    }
+
+    public interface IBaseObjectCollectionValueModel : INotifyCollectionChanged
+    {
+        ObjectClass ReferencedClass { get; }
+        RelationEnd RelEnd { get; }
+    }
+
+    public interface IObjectCollectionValueModel : IValueModel<ICollection<DataObjectModel>>, IBaseObjectCollectionValueModel
+    {
+    }
+
+    public interface IObjectListValueModel : IValueModel<IList<DataObjectModel>>, IBaseObjectCollectionValueModel
+    {
     }
 }

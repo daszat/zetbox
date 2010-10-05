@@ -142,6 +142,10 @@
     <Compile Include="Presentables\ObjectReferenceModel.Commands.cs" />
     <Compile Include="Presentables\ObjectReferenceModel.cs" />
     <Compile Include="Presentables\SchemaMigration\SourceColumnsObjectListModel.cs" />
+    <Compile Include="Presentables\ValueViewModels\BaseObjectCollectionModel.cs" />
+    <Compile Include="Presentables\ValueViewModels\ObjectListViewModel.cs" />
+    <Compile Include="Presentables\ValueViewModels\ObjectCollectionViewModel.cs" />
+    <Compile Include="Presentables\ValueViewModels\ObjectReferenceViewModel.cs" />
     <Compile Include="Presentables\ValueViewModels\ValueViewModel.cs" />
     <Compile Include="Presentables\ValueViewModels\IValueViewModel.cs" />
     <Compile Include="Presentables\ViewModel.cs" />

@@ -1,11 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.ComponentModel;
-
 namespace Kistl.Client.Presentables.ValueViewModels
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.Specialized;
+    using System.Linq;
+    using System.Text;
+    using System.ComponentModel;
+    using Kistl.API.Utils;
+    
     public interface IValueViewModel : INotifyPropertyChanged
     {
         /// <summary>
@@ -67,5 +69,72 @@ namespace Kistl.Client.Presentables.ValueViewModels
     public interface IFormattedValueViewModel : IValueViewModel
     {
         string FormattedValue { get; set; }
+    }
+
+    public interface IBaseValueCollectionViewModel<TElement, TList>
+        : IValueViewModel<TList>
+    {
+        /// <summary>
+        /// Gets a value whether or not this list has a persistent order. 
+        /// </summary>
+        /// <remarks>
+        /// While lists on the client always have a definite order, the order 
+        /// is only persisted if the underlying datamodel actually supports 
+        /// this.
+        /// </remarks>
+        bool HasPersistentOrder { get; }
+
+        /// <summary>
+        /// Adds the given item to the underlying value. Triggers <see cref="INotifyCollectionChanged.CollectionChanged"/>
+        /// on the underlying <see cref="IValueViewModel{TValue}.Value"/> property when the change has propagated.
+        /// </summary>
+        void AddItem(TElement item);
+
+        /// <summary>
+        /// Remove the given item from the underlying value. Triggers <see cref="INotifyCollectionChanged.CollectionChanged"/>
+        /// on the underlying <see cref="IValueViewModel{TValue}.Value"/> property when the change has propagated.
+        /// </summary>
+        void RemoveItem(TElement item);
+
+        /// <summary>
+        /// Permanentely delete the given item from the data store.
+        /// Triggers <see cref="INotifyCollectionChanged.CollectionChanged"/> on the underlying <see cref="IValueViewModel{TValue}.Value"/> property when the change has propagated.
+        /// </summary>
+        void DeleteItem(TElement item);
+
+        /// <summary>
+        /// Activates the item for the user to edit.
+        /// </summary>
+        /// <param name="item">the item to activate</param>
+        /// <param name="activate">whether or not to raise the item to the top</param>
+        void ActivateItem(TElement item, bool activate);
+
+        /// <summary>
+        /// Stores the currently selected item of this list. 
+        /// </summary>
+        TElement SelectedItem { get; set; }
+    }
+
+    public interface IValueCollectionViewModel<TElement, TList>
+        : IBaseValueCollectionViewModel<TElement, TList>
+    {
+        void Sort(string propName, ListSortDirection direction);
+    }
+
+    public interface IValueListViewModel<TElement, TList>
+        : IBaseValueCollectionViewModel<TElement, TList>
+    {
+        /// <summary>
+        /// Moves the given item one item up in the list. Triggers <see cref="INotifyCollectionChanged.CollectionChanged"/>
+        /// on the underlying <see cref="IValueViewModel{TValue}.Value"/> property when the change has propagated.
+        /// </summary>
+        void MoveItemUp(TElement item);
+
+        /// <summary>
+        /// Moves the given item one item down in the list. Triggers <see cref="INotifyCollectionChanged.CollectionChanged"/>
+        /// on the underlying <see cref="IValueViewModel{TValue}.Value"/> property when the change has propagated.
+        /// </summary>
+        void MoveItemDown(TElement item);
+
     }
 }

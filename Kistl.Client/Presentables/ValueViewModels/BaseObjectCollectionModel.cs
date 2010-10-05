@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.Presentables
+namespace Kistl.Client.Presentables.ValueViewModels
 {
     using System;
     using System.Collections;
@@ -8,104 +8,48 @@ namespace Kistl.Client.Presentables
     using System.Collections.Specialized;
     using System.ComponentModel;
     using System.Linq;
+    using System.Linq.Dynamic;
     using System.Text;
 
     using Kistl.API;
     using Kistl.API.Utils;
     using Kistl.App.Base;
     using Kistl.App.Extensions;
-    using Kistl.Client.Presentables.ValueViewModels;
+    using Kistl.Client.Models;
 
     /// <summary>
     /// </summary>
-    [ViewModelDescriptor("KistlBase", DefaultKind = "Kistl.App.GUI.ObjectListKind", Description = "A list of IDataObjects")]
-    public class ObjectListModel
-        : PropertyModel<IList<DataObjectModel>>, IValueListViewModel<DataObjectModel, IReadOnlyObservableList<DataObjectModel>>
+    public abstract class BaseObjectCollectionViewModel<TValue>
+        : ValueViewModel<TValue>
     {
-        public new delegate ObjectListModel Factory(IKistlContext dataCtx, IDataObject obj, Property prop);
+        public new delegate BaseObjectCollectionViewModel<TValue> Factory(IKistlContext dataCtx, IValueModel mdl);
 
-        private readonly ObjectReferenceProperty _property;
-        private readonly ObjectClass _referencedClass;
-        private readonly IList _list;
-        private readonly INotifyCollectionChanged _notifier;
-
-        public ObjectListModel(
+        public BaseObjectCollectionViewModel(
             IViewModelDependencies appCtx, IKistlContext dataCtx,
-            IDataObject obj, ObjectReferenceProperty prop)
-            : base(appCtx, dataCtx, obj, prop)
+            IValueModel mdl)
+            : base(appCtx, dataCtx, mdl)
         {
-            if (!prop.GetIsList()) { throw new ArgumentOutOfRangeException("prop", "ObjectReferenceProperty must be a list"); }
-            if (!GetHasPersistentOrder(prop)) { throw new ArgumentOutOfRangeException("prop", "ObjectReferenceProperty must be a sorted list"); }
+            BaseObjectCollectionModel.CollectionChanged += ValueListChanged;
 
-            _property = prop;
-            _referencedClass = _property.GetReferencedObjectClass();
-
-            _list = Object.GetPropertyValue<IList>(Property.Name);
-            _notifier = _list as INotifyCollectionChanged;
-
-            if (_notifier == null) throw new ArgumentOutOfRangeException("prop", "Unterlying list does not implement INotifyCollectionChanged");
-            _notifier.CollectionChanged += ValueListChanged;
-
-            // Move to AddExistingItemCommand
-            var relEnd = _property.RelationEnd;
-            if (relEnd != null)
+            if (BaseObjectCollectionModel.RelEnd != null)
             {
-                var rel = _property.RelationEnd.Parent;
+                var rel = BaseObjectCollectionModel.RelEnd.Parent;
                 if (rel != null)
                 {
-                    var otherEnd = rel.GetOtherEnd(relEnd);
+                    var otherEnd = rel.GetOtherEnd(BaseObjectCollectionModel.RelEnd);
                     if (otherEnd != null && otherEnd.Multiplicity.UpperBound() > 1 && rel.Containment != ContainmentSpecification.Independent)
                     {
-                        _allowAddExisting = false;
-                        _allowRemove = false;
+                        AllowAddExisting = false;
+                        AllowAddExisting = false;
                     }
                 }
             }
         }
 
+        public IBaseObjectCollectionValueModel BaseObjectCollectionModel { get; private set; }
+        public ObjectClass ReferencedClass { get { return BaseObjectCollectionModel.ReferencedClass; } }
+
         #region Public interface and IReadOnlyValueModel<IReadOnlyObservableCollection<DataObjectModel>> Members
-
-        public bool HasValue
-        {
-            get { return true; }
-        }
-
-        public bool IsNull
-        {
-            get { return false; }
-        }
-
-        private ReadOnlyObservableProjectedList<IDataObject, DataObjectModel> _valueCache;
-        public IReadOnlyObservableList<DataObjectModel> Value
-        {
-            get
-            {
-                EnsureValueCache();
-                return _valueCache;
-            }
-            set
-            {
-                throw new NotSupportedException();
-            }
-
-        }
-
-        private void EnsureValueCache()
-        {
-            if (_valueCache == null)
-            {
-                _valueCache = new ReadOnlyObservableProjectedList<IDataObject, DataObjectModel>(
-                    _notifier,
-                    obj => ModelFactory.CreateViewModel<DataObjectModel.Factory>(obj).Invoke(DataContext, obj),
-                    mdl => mdl.Object);
-            }
-        }
-
-        public ObjectClass ReferencedClass
-        {
-            get { return _referencedClass; }
-        }
-
         private GridDisplayConfiguration _displayedColumns = null;
         public GridDisplayConfiguration DisplayedColumns
         {
@@ -121,11 +65,10 @@ namespace Kistl.Client.Presentables
         protected virtual GridDisplayConfiguration CreateDisplayedColumns()
         {
             var result = new GridDisplayConfiguration();
-            result.BuildColumns(this.ReferencedClass, false);
+            result.BuildColumns(ReferencedClass, false);
             return result;
         }
 
-        
         private DataObjectModel _selectedItem;
         public DataObjectModel SelectedItem
         {
@@ -161,19 +104,7 @@ namespace Kistl.Client.Presentables
             }
         }
 
-        private static bool GetHasPersistentOrder(ObjectReferenceProperty prop)
-        {
-            return prop.RelationEnd.Parent.GetOtherEnd(prop.RelationEnd).HasPersistentOrder;
-        }
-
-        public bool HasPersistentOrder
-        {
-            get
-            {
-                return true;
-            }
-        }
-
+        #region Allow*
         private bool _allowAddNew = true;
         public bool AllowAddNew
         {
@@ -241,7 +172,9 @@ namespace Kistl.Client.Presentables
                 }
             }
         }
+        #endregion
 
+        #region Commands
         private ICommand _CreateNewCommand = null;
         public ICommand CreateNewCommand
         {
@@ -294,7 +227,7 @@ namespace Kistl.Client.Presentables
                 if (_DeleteCommand == null)
                 {
                     _DeleteCommand = ModelFactory.CreateViewModel<SimpleParameterCommandModel<IEnumerable<DataObjectModel>>.Factory>()
-                        .Invoke(DataContext, "Delete", "Delete selection from data store",
+                        .Invoke(DataContext, "Delete", "Delete selection from data store", 
                         (items) => items.ToList().ForEach(i => DeleteItem(i)), // Collection will change while deleting!
                         (items) => items != null && items.Count() > 0 && AllowDelete);
                 }
@@ -308,7 +241,7 @@ namespace Kistl.Client.Presentables
         /// </summary>
         public void CreateNewItem()
         {
-            ObjectClass baseclass = ((ObjectReferenceProperty)this.Property).GetReferencedObjectClass();
+            ObjectClass baseclass = ReferencedClass;
 
             var children = new List<ObjectClass>() { baseclass };
             CollectChildClasses(baseclass.ID, children);
@@ -349,12 +282,14 @@ namespace Kistl.Client.Presentables
         }
 
 
+        public abstract void AddItem(DataObjectModel item);
+
         /// <summary>
         /// Adds an existing item into this ObjectList. Asks the User which should be added.
         /// </summary>
         public void AddExistingItem()
         {
-            var ifType = DataContext.GetInterfaceType(Property.GetPropertyType());
+            var ifType = ReferencedClass.GetDescribedInterfaceType();
 
             ModelFactory.ShowModel(
                 ModelFactory.CreateViewModel<DataObjectSelectionTaskModel.Factory>().Invoke(
@@ -371,58 +306,9 @@ namespace Kistl.Client.Presentables
                     null), true);
         }
 
-        public void AddItem(DataObjectModel item)
-        {
-            if (item == null) { throw new ArgumentNullException("item"); }
+        public abstract void RemoveItem(DataObjectModel item);
 
-            EnsureValueCache();
-            _list.Add(item.Object);
-
-            SelectedItem = item;
-        }
-
-        public void MoveItemUp(DataObjectModel item)
-        {
-            if (item == null) { return; }
-
-            var idx = _list.IndexOf(item.Object);
-            if (idx > 0)
-            {
-                _list.RemoveAt(idx);
-                _list.Insert(idx - 1, item.Object);
-                SelectedItem = item;
-            }
-        }
-
-        public void MoveItemDown(DataObjectModel item)
-        {
-            if (item == null) { return; }
-
-            var idx = _list.IndexOf(item.Object);
-            if (idx != -1 && idx + 1 < _list.Count)
-            {
-                _list.RemoveAt(idx);
-                _list.Insert(idx + 1, item.Object);
-                SelectedItem = item;
-            }
-        }
-
-        public void RemoveItem(DataObjectModel item)
-        {
-            if (item == null) { throw new ArgumentNullException("item"); }
-
-            EnsureValueCache();
-            _list.Remove(item.Object);
-        }
-
-        public void DeleteItem(DataObjectModel item)
-        {
-            if (item == null) { throw new ArgumentNullException("item"); }
-
-            EnsureValueCache();
-            _list.Remove(item.Object);
-            item.Delete();
-        }
+        public abstract void DeleteItem(DataObjectModel item);
 
         public void ActivateItem(DataObjectModel item, bool activate)
         {
@@ -430,16 +316,11 @@ namespace Kistl.Client.Presentables
 
             ModelFactory.ShowModel(item, activate);
         }
+        #endregion
 
         #endregion
 
         #region Utilities and UI callbacks
-
-        protected override void UpdatePropertyValue()
-        {
-            _valueCache = null;
-            OnPropertyChanged("Value");
-        }
 
         private void CollectChildClasses(int id, List<ObjectClass> children)
         {
@@ -461,7 +342,7 @@ namespace Kistl.Client.Presentables
 
         #region Event handlers
 
-        private void ValueListChanged(object sender, NotifyCollectionChangedEventArgs e)
+        protected void ValueListChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.NewItems != null)
             {
@@ -489,17 +370,21 @@ namespace Kistl.Client.Presentables
 
         #region IValueViewModel Members
 
-
-        public void ClearValue()
+        public override void ClearValue()
         {
             throw new NotImplementedException();
         }
 
-        public ICommand ClearValueCommand
+        public override ICommand ClearValueCommand
         {
             get { throw new NotImplementedException(); }
         }
 
         #endregion
+
+        protected override void ParseValue(string str)
+        {
+            throw new NotSupportedException();
+        }
     }
 }

@@ -15,75 +15,8 @@ using Kistl.Client.Presentables.ValueViewModels;
 
 namespace Kistl.Client.Presentables
 {
-    public interface IBaseValueCollectionModel<TElement>
-        : IValueViewModel<IReadOnlyObservableList<TElement>>
-    {
-        /// <summary>
-        /// Gets a value whether or not this list has a persistent order. 
-        /// </summary>
-        /// <remarks>
-        /// While lists on the client always have a definite order, the order 
-        /// is only persisted if the underlying datamodel actually supports 
-        /// this.
-        /// </remarks>
-        bool HasPersistentOrder { get; }
-
-        /// <summary>
-        /// Adds the given item to the underlying value. Triggers <see cref="INotifyCollectionChanged.CollectionChanged"/>
-        /// on the underlying <see cref="IValueViewModel{TValue}.Value"/> property when the change has propagated.
-        /// </summary>
-        void AddItem(TElement item);
-
-        /// <summary>
-        /// Remove the given item from the underlying value. Triggers <see cref="INotifyCollectionChanged.CollectionChanged"/>
-        /// on the underlying <see cref="IValueViewModel{TValue}.Value"/> property when the change has propagated.
-        /// </summary>
-        void RemoveItem(TElement item);
-
-        /// <summary>
-        /// Permanentely delete the given item from the data store.
-        /// Triggers <see cref="INotifyCollectionChanged.CollectionChanged"/> on the underlying <see cref="IValueViewModel{TValue}.Value"/> property when the change has propagated.
-        /// </summary>
-        void DeleteItem(TElement item);
-
-        /// <summary>
-        /// Activates the item for the user to edit.
-        /// </summary>
-        /// <param name="item">the item to activate</param>
-        /// <param name="activate">whether or not to raise the item to the top</param>
-        void ActivateItem(TElement item, bool activate);
-
-        /// <summary>
-        /// Stores the currently selected item of this list. 
-        /// </summary>
-        TElement SelectedItem { get; set; }
-    }
-
-    public interface IValueCollectionModel<TElement>
-        : IBaseValueCollectionModel<TElement>
-    {
-        void Sort(string propName, ListSortDirection direction);
-    }
-
-    public interface IValueListModel<TElement>
-        : IBaseValueCollectionModel<TElement>
-    {
-        /// <summary>
-        /// Moves the given item one item up in the list. Triggers <see cref="INotifyCollectionChanged.CollectionChanged"/>
-        /// on the underlying <see cref="IValueViewModel{TValue}.Value"/> property when the change has propagated.
-        /// </summary>
-        void MoveItemUp(TElement item);
-
-        /// <summary>
-        /// Moves the given item one item down in the list. Triggers <see cref="INotifyCollectionChanged.CollectionChanged"/>
-        /// on the underlying <see cref="IValueViewModel{TValue}.Value"/> property when the change has propagated.
-        /// </summary>
-        void MoveItemDown(TElement item);
-
-    }
-
     public class StringListPropertyModel
-        : PropertyModel<ICollection<string>>, IValueListModel<string>
+        : PropertyModel<ICollection<string>>, IValueListViewModel<string, IReadOnlyObservableList<string>>
     {
         public new delegate StringListPropertyModel Factory(IKistlContext dataCtx, IDataObject obj, Property prop);
 

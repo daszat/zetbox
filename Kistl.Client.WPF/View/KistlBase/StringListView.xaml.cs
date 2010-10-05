@@ -13,6 +13,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Kistl.Client.Presentables;
 using Kistl.Client.WPF.View.KistlBase;
+using Kistl.Client.Presentables.ValueViewModels;
+using Kistl.API.Utils;
 
 namespace Kistl.Client.WPF.View
 {
@@ -28,14 +30,14 @@ namespace Kistl.Client.WPF.View
 
         private void AddNewHandler(object sender, RoutedEventArgs e)
         {
-            var model = (IValueListModel<string>)DataContext;
+            var model = (IValueListViewModel<string, IReadOnlyList<string>>)DataContext;
             model.AddItem(String.Empty);
             PART_ItemEditBox.Focus();
         }
 
         private void RemoveHandler(object sender, RoutedEventArgs e)
         {
-            var model = (IValueListModel<string>)DataContext;
+            var model = (IValueListViewModel<string, IReadOnlyList<string>>)DataContext;
             model.RemoveItem(model.SelectedItem);
         }
 

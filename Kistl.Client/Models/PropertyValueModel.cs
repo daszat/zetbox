@@ -14,7 +14,8 @@ namespace Kistl.Client.Models
     /// <summary>
     /// For autofac
     /// </summary>
-    public abstract class BasePropertyValueModel : IValueModel
+    public abstract class BasePropertyValueModel 
+        : IValueModel
     {
         public delegate BasePropertyValueModel Factory(INotifyingObject obj, Property prop);
 
@@ -156,7 +157,8 @@ namespace Kistl.Client.Models
         #endregion
     }
 
-    public abstract class PropertyValueModel<TValue> : BasePropertyValueModel, IValueModel<TValue>
+    public abstract class PropertyValueModel<TValue> 
+        : BasePropertyValueModel, IValueModel<TValue>
     {
         public new delegate PropertyValueModel<TValue> Factory(INotifyingObject obj, Property prop);
 
@@ -241,7 +243,8 @@ namespace Kistl.Client.Models
         #endregion
     }
 
-    public class ClassPropertyValueModel<TValue> : PropertyValueModel<TValue>
+    public class ClassPropertyValueModel<TValue> 
+        : PropertyValueModel<TValue>
         where TValue : class
     {
         public new delegate ClassPropertyValueModel<TValue> Factory(INotifyingObject obj, Property prop);
