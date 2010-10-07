@@ -7,6 +7,7 @@ using Kistl.App.Base;
 using Kistl.API;
 using Kistl.Client.Presentables;
 using System.Collections.Specialized;
+using Kistl.API.Utils;
 
 namespace Kistl.Client.Models
 {
@@ -59,17 +60,11 @@ namespace Kistl.Client.Models
         ObjectClass ReferencedClass { get; }
     }
 
-    public interface IBaseObjectCollectionValueModel : INotifyCollectionChanged
+    public interface IObjectListValueModel : IValueModel<IReadOnlyObservableList<DataObjectModel>>
     {
         ObjectClass ReferencedClass { get; }
         RelationEnd RelEnd { get; }
-    }
 
-    public interface IObjectCollectionValueModel : IValueModel<ICollection<DataObjectModel>>, IBaseObjectCollectionValueModel
-    {
-    }
-
-    public interface IObjectListValueModel : IValueModel<IList<DataObjectModel>>, IBaseObjectCollectionValueModel
-    {
+        void tmpAddItem(DataObjectModel obj);
     }
 }

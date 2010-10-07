@@ -20,7 +20,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
     /// <summary>
     /// </summary>
     public class ObjectListViewModel
-        : BaseObjectCollectionViewModel<IList<DataObjectModel>>, IValueListViewModel<DataObjectModel, IList<DataObjectModel>>
+        : BaseObjectCollectionViewModel<IReadOnlyObservableList<DataObjectModel>>, IValueListViewModel<DataObjectModel, IReadOnlyObservableList<DataObjectModel>>
     {
         public new delegate ObjectListViewModel Factory(IKistlContext dataCtx, IValueModel mdl);
 
@@ -28,16 +28,16 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
         public ObjectListViewModel(
             IViewModelDependencies appCtx, IKistlContext dataCtx,
-            IValueModel mdl)
+            IObjectListValueModel mdl)
             : base(appCtx, dataCtx, mdl)
         {
-            ObjectListModel = (IObjectListValueModel)mdl;
+            ObjectListModel = mdl;
         }
 
         #region Public interface and IReadOnlyValueModel<IReadOnlyObservableCollection<DataObjectModel>> Members
 
-        private ReadOnlyObservableProjectedList<IDataObject, DataObjectModel> _valueCache;
-        public override IList<DataObjectModel> Value
+        private IReadOnlyObservableList<DataObjectModel> _valueCache;
+        public override IReadOnlyObservableList<DataObjectModel> Value
         {
             get
             {
@@ -55,10 +55,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
         {
             if (_valueCache == null)
             {
-                _valueCache = new ReadOnlyObservableProjectedList<IDataObject, DataObjectModel>(
-                    ObjectListModel,
-                    obj => ModelFactory.CreateViewModel<DataObjectModel.Factory>(obj).Invoke(DataContext, obj),
-                    mdl => mdl.Object);
+                _valueCache = ObjectListModel.Value;
             }
         }
 
@@ -77,7 +74,8 @@ namespace Kistl.Client.Presentables.ValueViewModels
             if (item == null) { throw new ArgumentNullException("item"); }
 
             EnsureValueCache();
-            Value.Add(item);
+            //Value.Add(item);
+            ObjectListModel.tmpAddItem(item);
 
             SelectedItem = item;
         }

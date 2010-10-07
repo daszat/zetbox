@@ -27,7 +27,7 @@ namespace Kistl.IntegrationTests.Presentables.ObjectReferenceModels
 					.Single(oc => oc.Name == "TypeRef");
 				var assemblyProperty = ctx.GetQuery<ObjectReferenceProperty>()
 					.Single(p => p.ObjectClass.ID == typeRefClass.ID && p.Name == "Assembly");
-                var orm = scope.Resolve<ObjectReferenceViewModel.Factory>().Invoke(ctx, assemblyProperty.GetValueModel(obj));
+                var orm = scope.Resolve<ObjectReferenceViewModel.Factory>().Invoke(ctx, assemblyProperty.GetValueModel(obj, ctx, null));
 				
 				Assert.That(orm.Value.ID , Is.EqualTo(obj.Assembly.ID));
 			}

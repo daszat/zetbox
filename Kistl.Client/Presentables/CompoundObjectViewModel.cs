@@ -53,7 +53,7 @@ namespace Kistl.Client.Presentables
                 {
                     _propertyModels = new ReadOnlyProjectedList<Property, BaseValueViewModel>(
                         FetchPropertyList().ToList(),
-                        property => ModelFactory.CreateViewModel<BaseValueViewModel.Factory>(property).Invoke(DataContext, property.GetValueModel(Object)),
+                        property => ModelFactory.CreateViewModel<BaseValueViewModel.Factory>(property).Invoke(DataContext, property.GetValueModel(Object, DataContext, ModelFactory)),
                         m => null); //m.Property);
                 }
                 return _propertyModels;
@@ -67,8 +67,8 @@ namespace Kistl.Client.Presentables
                 if (_propertyModelsByName == null)
                 {
                     _propertyModelsByName = new LookupDictionary<string, Property, ViewModel>(FetchPropertyList().ToList(), 
-                        prop => prop.Name, 
-                        prop => ModelFactory.CreateViewModel<BaseValueViewModel.Factory>(prop).Invoke(DataContext, prop.GetValueModel(Object)));
+                        prop => prop.Name,
+                        prop => ModelFactory.CreateViewModel<BaseValueViewModel.Factory>(prop).Invoke(DataContext, prop.GetValueModel(Object, DataContext, ModelFactory)));
                 }
                 return _propertyModelsByName;
             }

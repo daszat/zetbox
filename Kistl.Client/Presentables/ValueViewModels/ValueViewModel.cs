@@ -11,15 +11,15 @@ namespace Kistl.Client.Presentables.ValueViewModels
     using Kistl.Client.Presentables.GUI;
     using Kistl.App.Base;
 
-    public abstract class BaseValueViewModel : ViewModel, IValueViewModel, IFormattedValueViewModel, IDataErrorInfo
+    public abstract class BaseValueViewModel : ViewModel, IValueViewModel, IFormattedValueViewModel, IDataErrorInfo, ILabeledViewModel
     {
         public new delegate BaseValueViewModel Factory(IKistlContext dataCtx, IValueModel mdl);
 
         public BaseValueViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, IValueModel mdl)
             : base(dependencies, dataCtx)
         {
-            this.Model = mdl;
-            this.Model.PropertyChanged += new PropertyChangedEventHandler(Model_PropertyChanged);
+            this.ValueModel = mdl;
+            this.ValueModel.PropertyChanged += new PropertyChangedEventHandler(Model_PropertyChanged);
         }
 
         void Model_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -35,11 +35,11 @@ namespace Kistl.Client.Presentables.ValueViewModels
             }
         }
 
-        public IValueModel Model { get; private set; }
+        protected IValueModel ValueModel { get; private set; }
 
         public override string Name
         {
-            get { return Model.Label; }
+            get { return ValueModel.Label; }
         }
 
         #region Utilities and UI callbacks
@@ -63,25 +63,25 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
         public virtual bool AllowNullInput
         {
-            get { return Model.AllowNullInput; }
+            get { return ValueModel.AllowNullInput; }
         }
 
         public virtual string Label
         {
-            get { return Model.Label; }
+            get { return ValueModel.Label; }
         }
 
         public virtual string ToolTip
         {
-            get { return Model.Description; }
+            get { return ValueModel.Description; }
         }
 
         private bool _IsReadOnly;
         public virtual bool IsReadOnly
         {
-            get 
-            { 
-                return Model.IsReadOnly || _IsReadOnly; 
+            get
+            {
+                return ValueModel.IsReadOnly || _IsReadOnly;
             }
             set
             {
@@ -95,7 +95,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
         public virtual void ClearValue()
         {
-            Model.ClearValue();
+            ValueModel.ClearValue();
         }
 
         private ICommand _ClearValueCommand = null;
@@ -137,12 +137,28 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
         public string Error
         {
-            get { return Model.Error; }
+            get { return ValueModel.Error; }
         }
 
         public string this[string columnName]
         {
-            get { return Model[columnName]; }
+            get { return ValueModel[columnName]; }
+        }
+
+        #endregion
+
+        #region ILabeledViewModel Members
+        public ViewModel Model
+        {
+            get
+            {
+                return this;
+            }
+        }
+
+        public bool Requiered
+        {
+            get { return !this.AllowNullInput; }
         }
 
         #endregion
@@ -155,10 +171,10 @@ namespace Kistl.Client.Presentables.ValueViewModels
         public ValueViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, IValueModel mdl)
             : base(dependencies, dataCtx, mdl)
         {
-            this.Model = (IValueModel<TValue>)mdl;
+            this.ValueModel = (IValueModel<TValue>)mdl;
         }
 
-        public new IValueModel<TValue> Model { get; private set; }
+        public new IValueModel<TValue> ValueModel { get; private set; }
 
         #region IValueViewModel<TValue> Members
 
@@ -166,11 +182,11 @@ namespace Kistl.Client.Presentables.ValueViewModels
         {
             get
             {
-                return Model.Value;
+                return ValueModel.Value;
             }
             set
             {
-                Model.Value = value;
+                ValueModel.Value = value;
             }
         }
 
@@ -178,7 +194,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
         public override bool HasValue
         {
-            get { return Model.Value != null; }
+            get { return ValueModel.Value != null; }
         }
 
         protected override string FormatValue()
@@ -277,9 +293,9 @@ namespace Kistl.Client.Presentables.ValueViewModels
         }
     }
 
-    public class MultiLineStringValueViewModel 
+    public class MultiLineStringValueViewModel
         : ClassValueViewModel<string>
-    { 
+    {
         public new delegate MultiLineStringValueViewModel Factory(IKistlContext dataCtx, IValueModel mdl);
 
         public MultiLineStringValueViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, IValueModel mdl)

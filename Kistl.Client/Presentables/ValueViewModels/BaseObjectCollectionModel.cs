@@ -29,7 +29,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             IValueModel mdl)
             : base(appCtx, dataCtx, mdl)
         {
-            BaseObjectCollectionModel.CollectionChanged += ValueListChanged;
+            BaseObjectCollectionModel = (IObjectListValueModel)mdl;
 
             if (BaseObjectCollectionModel.RelEnd != null)
             {
@@ -46,7 +46,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             }
         }
 
-        public IBaseObjectCollectionValueModel BaseObjectCollectionModel { get; private set; }
+        public IObjectListValueModel BaseObjectCollectionModel { get; private set; }
         public ObjectClass ReferencedClass { get { return BaseObjectCollectionModel.ReferencedClass; } }
 
         #region Public interface and IReadOnlyValueModel<IReadOnlyObservableCollection<DataObjectModel>> Members

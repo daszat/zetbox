@@ -10,10 +10,14 @@ namespace Kistl.Client.Models
     using Kistl.App.Extensions;
     using Kistl.App.GUI;
     using System.ComponentModel;
+    using Kistl.Client.Presentables;
+    using Kistl.API.Utils;
+    using System.Collections.Specialized;
+    using System.Collections;
 
-    public static class PropertyExtensions
+    public static class PropertyExtensionsThisShouldBeMovedToAZBoxMethod
     {
-        public static IValueModel GetValueModel(this Property prop, INotifyingObject obj)
+        public static IValueModel GetValueModel(this Property prop, INotifyingObject obj, IKistlContext ctx, IModelFactory mdlFactory)
         {
             if (prop == null) throw new ArgumentNullException("prop");
             if (obj == null) throw new ArgumentNullException("obj");
@@ -34,10 +38,34 @@ namespace Kistl.Client.Models
             {
                 return new NullableStructPropertyValueModel<decimal>(obj, prop);
             }
-            //else if (prop is ObjectReferenceProperty)
-            //{
-            //    return new ObjectReferenceValueModel(obj, prop);
-            //}
+            else if (prop is GuidProperty)
+            {
+                return new NullableStructPropertyValueModel<Guid>(obj, prop);
+            }
+            else if (prop is DateTimeProperty)
+            {
+                return new DateTimePropertyValueModel(obj, (DateTimeProperty)prop);
+            }
+            else if (prop is EnumerationProperty)
+            {
+                return new EnumerationPropertyValueModel(obj, (EnumerationProperty)prop);
+            }
+            else if (prop is StringProperty)
+            {
+                return new ClassPropertyValueModel<string>(obj, prop);
+            }
+            else if (prop is ObjectReferenceProperty)
+            {
+                ObjectReferenceProperty objRefProp = (ObjectReferenceProperty)prop;
+                if (objRefProp.GetIsList())
+                {
+                    return new ObjectListValueModel(ctx, mdlFactory, obj, objRefProp);
+                }
+                else
+                {
+                    return new ObjectReferenceValueModel(ctx, mdlFactory, obj, objRefProp);
+                }
+            }
             else
             {
                 throw new NotImplementedException(string.Format("GetValueModel is not implemented for {0} properties yet", prop.GetPropertyTypeString()));
@@ -48,7 +76,7 @@ namespace Kistl.Client.Models
     /// <summary>
     /// For autofac
     /// </summary>
-    public abstract class BasePropertyValueModel 
+    public abstract class BasePropertyValueModel
         : IValueModel
     {
         public delegate BasePropertyValueModel Factory(INotifyingObject obj, Property prop);
@@ -60,7 +88,20 @@ namespace Kistl.Client.Models
 
             this.Property = prop;
             this.Object = obj;
+
+            this.Object.PropertyChanged += Object_PropertyChanged;
         }
+
+        void Object_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == Property.Name)
+            {
+                UpdateValueCache();
+                NotifyValueChanged();
+            }
+        }
+
+        protected abstract void UpdateValueCache();
 
         public Property Property { get; private set; }
         public INotifyingObject Object { get; private set; }
@@ -191,7 +232,7 @@ namespace Kistl.Client.Models
         #endregion
     }
 
-    public abstract class PropertyValueModel<TValue> 
+    public abstract class PropertyValueModel<TValue>
         : BasePropertyValueModel, IValueModel<TValue>
     {
         public new delegate PropertyValueModel<TValue> Factory(INotifyingObject obj, Property prop);
@@ -219,6 +260,7 @@ namespace Kistl.Client.Models
         }
 
         #region IValueModel<TValue> Members
+        private bool _valueCacheInitialized = false;
         private Nullable<TValue> _valueCache;
 
         /// <summary>
@@ -228,6 +270,10 @@ namespace Kistl.Client.Models
         {
             get
             {
+                if (!_valueCacheInitialized)
+                {
+                    UpdateValueCache();
+                }
                 return _valueCache;
             }
             set
@@ -247,6 +293,12 @@ namespace Kistl.Client.Models
                     NotifyValueChanged();
                 }
             }
+        }
+
+        protected override void UpdateValueCache()
+        {
+            _valueCache = GetPropertyValue();
+            _valueCacheInitialized = true;
         }
         #endregion
 
@@ -277,7 +329,7 @@ namespace Kistl.Client.Models
         #endregion
     }
 
-    public class ClassPropertyValueModel<TValue> 
+    public class ClassPropertyValueModel<TValue>
         : PropertyValueModel<TValue>
         where TValue : class
     {
@@ -289,6 +341,7 @@ namespace Kistl.Client.Models
         }
 
         #region IValueModel<TValue> Members
+        private bool _valueCacheInitialized = false;
         private TValue _valueCache;
 
         /// <summary>
@@ -298,6 +351,10 @@ namespace Kistl.Client.Models
         {
             get
             {
+                if (!_valueCacheInitialized)
+                {
+                    UpdateValueCache();
+                }
                 return _valueCache;
             }
             set
@@ -313,6 +370,12 @@ namespace Kistl.Client.Models
                 }
             }
         }
+
+        protected override void UpdateValueCache()
+        {
+            _valueCache = Object.GetPropertyValue<TValue>(Property.Name);
+            _valueCacheInitialized = true;
+        }
         #endregion
 
         #region Value Handling
@@ -321,6 +384,227 @@ namespace Kistl.Client.Models
             if (this.AllowNullInput) this.Value = null;
             else throw new InvalidOperationException();
         }
+        #endregion
+    }
+
+    public class ObjectReferenceValueModel
+        : ClassPropertyValueModel<DataObjectModel>, IObjectReferenceValueModel
+    {
+        public new delegate ObjectReferenceValueModel Factory(INotifyingObject obj, Property prop);
+
+        protected readonly IModelFactory mdlFactory;
+        protected readonly IKistlContext ctx;
+        protected readonly ObjectReferenceProperty objRefProp;
+
+        public ObjectReferenceValueModel(IKistlContext ctx, IModelFactory mdlFactory, INotifyingObject obj, ObjectReferenceProperty prop)
+            : base(obj, prop)
+        {
+            this.mdlFactory = mdlFactory;
+            this.ctx = ctx;
+            this.objRefProp = prop;
+        }
+
+        #region IValueModel<TValue> Members
+        private bool _valueCacheInititalized = false;
+        private DataObjectModel _valueCache;
+
+        /// <summary>
+        /// Gets or sets the value of the property presented by this model
+        /// </summary>
+        public override DataObjectModel Value
+        {
+            get
+            {
+                if (!_valueCacheInititalized)
+                {
+                    UpdateValueCache();
+                }
+                return _valueCache;
+            }
+            set
+            {
+                _valueCache = value;
+                _valueCacheInititalized = true;
+                var storedObj = Object.GetPropertyValue<IDataObject>(Property.Name);
+                var obj = value != null ? value.Object : null;
+
+                if (!object.Equals(storedObj, obj))
+                {
+                    Object.SetPropertyValue<IDataObject>(Property.Name, obj);
+                    CheckConstraints();
+
+                    NotifyValueChanged();
+                }
+            }
+        }
+
+        protected override void UpdateValueCache()
+        {
+            var obj = Object.GetPropertyValue<IDataObject>(Property.Name);
+            if (obj != null)
+            {
+                _valueCache = mdlFactory.CreateViewModel<DataObjectModel.Factory>().Invoke(ctx, obj);
+            }
+            _valueCacheInititalized = true;
+        }
+        #endregion
+
+        #region IObjectReferenceValueModel Members
+
+        private ObjectClass _referencedClass = null;
+        public ObjectClass ReferencedClass
+        {
+            get
+            {
+                if (_referencedClass == null)
+                {
+                    _referencedClass = objRefProp.GetReferencedObjectClass();
+                }
+                return _referencedClass;
+            }
+        }
+
+        #endregion
+    }
+
+    public class ObjectListValueModel
+        : ClassPropertyValueModel<IReadOnlyObservableList<DataObjectModel>>, IObjectListValueModel
+    {
+        public new delegate ObjectListValueModel Factory(INotifyingObject obj, Property prop);
+
+        protected readonly IModelFactory mdlFactory;
+        protected readonly IKistlContext ctx;
+        protected readonly ObjectReferenceProperty objRefProp;
+
+        public ObjectListValueModel(IKistlContext ctx, IModelFactory mdlFactory, INotifyingObject obj, ObjectReferenceProperty prop)
+            : base(obj, prop)
+        {
+            this.mdlFactory = mdlFactory;
+            this.ctx = ctx;
+            this.objRefProp = prop;
+        }
+
+        #region IValueModel<TValue> Members
+        private bool _valueCacheInititalized = false;
+        private ReadOnlyObservableProjectedList<IDataObject, DataObjectModel> _valueCache;
+
+        /// <summary>
+        /// Gets or sets the value of the property presented by this model
+        /// </summary>
+        public override IReadOnlyObservableList<DataObjectModel> Value
+        {
+            get
+            {
+                if (!_valueCacheInititalized)
+                {
+                    UpdateValueCache();
+                }
+                return _valueCache;
+            }
+            set
+            {
+                throw new NotSupportedException();
+            }
+        }
+
+        protected override void UpdateValueCache()
+        {
+            _valueCache = new ReadOnlyObservableProjectedList<IDataObject, DataObjectModel>(
+                Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name),
+                obj => mdlFactory.CreateViewModel<DataObjectModel.Factory>(obj).Invoke(ctx, obj),
+                mdl => mdl.Object);
+            _valueCacheInititalized = true;
+        }
+        #endregion
+
+        #region IObjectReferenceValueModel Members
+
+        private ObjectClass _referencedClass = null;
+        public ObjectClass ReferencedClass
+        {
+            get
+            {
+                if (_referencedClass == null)
+                {
+                    _referencedClass = objRefProp.GetReferencedObjectClass();
+                }
+                return _referencedClass;
+            }
+        }
+
+        #endregion
+
+        #region IObjectListValueModel Members
+
+        private RelationEnd _relEnd = null;
+        public RelationEnd RelEnd
+        {
+            get
+            {
+                if (_relEnd == null)
+                {
+                    _relEnd = objRefProp.RelationEnd;
+                }
+                return _relEnd;
+            }
+        }
+
+        #endregion
+
+        #region IObjectListValueModel Members
+
+
+        public void tmpAddItem(DataObjectModel obj)
+        {
+            if (obj == null) return;
+            Object.AddToCollection(Property.Name, obj.Object);
+        }
+
+        #endregion
+    }
+
+    public class EnumerationPropertyValueModel : NullableStructPropertyValueModel<int>, IEnumerationValueModel
+    {
+        public new delegate EnumerationPropertyValueModel Factory(INotifyingObject obj, Property prop);
+
+        protected readonly EnumerationProperty enumProp;
+
+        public EnumerationPropertyValueModel(INotifyingObject obj, EnumerationProperty prop)
+            : base(obj, prop)
+        {
+            enumProp = prop;
+        }
+
+        #region IEnumerationValueModel Members
+
+        public Enumeration Enumeration
+        {
+            get { return enumProp.Enumeration; }
+        }
+
+        #endregion
+    }
+
+    public class DateTimePropertyValueModel : NullableStructPropertyValueModel<DateTime>, IDateTimeValueModel
+    {
+        public new delegate DateTimePropertyValueModel Factory(INotifyingObject obj, Property prop);
+
+        protected readonly DateTimeProperty dtProp;
+
+        public DateTimePropertyValueModel(INotifyingObject obj, DateTimeProperty prop)
+            : base(obj, prop)
+        {
+            dtProp = prop;
+        }
+
+
+        #region IDateTimeValueModel Members
+
+        public DateTimeStyles DateTimeStyle
+        {
+            get { return dtProp.DateTimeStyle ?? DateTimeStyles.DateTime; }
+        }
+
         #endregion
     }
 }
