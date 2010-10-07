@@ -8,11 +8,11 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="Kistl.Client.Presentables.DataObjectModel" Collapsed="true">
+  <Class Name="Kistl.Client.Presentables.DataObjectViewModel" Collapsed="true">
     <Position X="6" Y="2.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>VBAAABQAIAUEgBEgAAEAAEQAkAEAACAAgiYERgCAACA=</HashCode>
-      <FileName>Presentables\DataObjectModel.cs</FileName>
+      <FileName>Presentables\DataObjectViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Kistl.Client.Presentables.DataTypeModel" Collapsed="true">

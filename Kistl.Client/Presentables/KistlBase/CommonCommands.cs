@@ -9,7 +9,7 @@ using Kistl.App.GUI;
 
 namespace Kistl.Client.Presentables.KistlBase
 {
-    public class OpenDataObjectCommand : ItemCommandModel<DataObjectModel>
+    public class OpenDataObjectCommand : ItemCommandModel<DataObjectViewModel>
     {
         public new delegate OpenDataObjectCommand Factory(IKistlContext dataCtx, ControlKind reqWorkspaceKind, ControlKind reqEditorKind);
 
@@ -59,10 +59,10 @@ namespace Kistl.Client.Presentables.KistlBase
             }
         }
 
-        public delegate void ModelCreatedEventHandler(DataObjectModel mdl);
+        public delegate void ModelCreatedEventHandler(DataObjectViewModel mdl);
         public event ModelCreatedEventHandler ModelCreated;
 
-        protected override void DoExecute(IEnumerable<DataObjectModel> data)
+        protected override void DoExecute(IEnumerable<DataObjectViewModel> data)
         {
             var newWorkspace = ModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(ctxFactory());
             foreach (var item in data)
@@ -78,7 +78,7 @@ namespace Kistl.Client.Presentables.KistlBase
         }
     }
 
-    public class DeleteDataObjectCommand : ItemCommandModel<DataObjectModel>
+    public class DeleteDataObjectCommand : ItemCommandModel<DataObjectViewModel>
     {
         public new delegate DeleteDataObjectCommand Factory(IKistlContext dataCtx);
 
@@ -87,7 +87,7 @@ namespace Kistl.Client.Presentables.KistlBase
         {
         }
 
-        protected override void DoExecute(IEnumerable<DataObjectModel> data)
+        protected override void DoExecute(IEnumerable<DataObjectViewModel> data)
         {
             foreach (var item in data)
             {
@@ -158,7 +158,7 @@ namespace Kistl.Client.Presentables.KistlBase
             var newCtx =  ctxFactory();
             var newWorkspace = ModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx);
             var newObj = newCtx.Create(DataContext.GetInterfaceType(Type.GetDataType()));
-            newWorkspace.ShowForeignModel(ModelFactory.CreateViewModel<DataObjectModel.Factory>(newObj).Invoke(newCtx, newObj), RequestedEditorKind);
+            newWorkspace.ShowForeignModel(ModelFactory.CreateViewModel<DataObjectViewModel.Factory>(newObj).Invoke(newCtx, newObj), RequestedEditorKind);
             ModelFactory.ShowModel(newWorkspace, RequestedWorkspaceKind, true);
         }
     }
@@ -189,7 +189,7 @@ namespace Kistl.Client.Presentables.KistlBase
             var newCtx = ctxFactory();
             var objClass = newCtx.Find<DataType>(this.Type.ID);
             var newWorkspace = ModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx);
-            newWorkspace.ShowForeignModel(ModelFactory.CreateViewModel<DataObjectModel.Factory>(objClass).Invoke(newCtx, objClass));
+            newWorkspace.ShowForeignModel(ModelFactory.CreateViewModel<DataObjectViewModel.Factory>(objClass).Invoke(newCtx, objClass));
             ModelFactory.ShowModel(newWorkspace, true);
         }
     }

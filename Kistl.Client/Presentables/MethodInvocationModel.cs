@@ -13,7 +13,7 @@ using Kistl.API.Configuration;
 namespace Kistl.Client.Presentables
 {
     public class MethodInvocationModel
-        : DataObjectModel
+        : DataObjectViewModel
     {
         public new delegate MethodInvocationModel Factory(IKistlContext dataCtx, MethodInvocation mdl);
 

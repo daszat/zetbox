@@ -61,7 +61,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
             {
                 if (_DeleteCommand == null)
                 {
-                    _DeleteCommand = ModelFactory.CreateViewModel<SimpleItemCommandModel<DataObjectModel>.Factory>().Invoke(DataContext, "Delete", "",
+                    _DeleteCommand = ModelFactory.CreateViewModel<SimpleItemCommandModel<DataObjectViewModel>.Factory>().Invoke(DataContext, "Delete", "",
                         (items) => items.ForEach(i => i.Delete()));
                 }
                 return _DeleteCommand;
@@ -207,7 +207,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
         /// </summary>
         /// <param name="dataObject"></param>
         /// <returns></returns>
-        public DataObjectModel ShowForeignModel(DataObjectModel dataObject)
+        public DataObjectViewModel ShowForeignModel(DataObjectViewModel dataObject)
         {
             return ShowForeignModel(dataObject, null);
         }
@@ -218,14 +218,14 @@ namespace Kistl.Client.Presentables.ObjectEditor
         /// <param name="dataObject"></param>
         /// <param name="requestedKind"></param>
         /// <returns></returns>
-        public DataObjectModel ShowForeignModel(DataObjectModel dataObject, Kistl.App.GUI.ControlKind requestedKind)
+        public DataObjectViewModel ShowForeignModel(DataObjectViewModel dataObject, Kistl.App.GUI.ControlKind requestedKind)
         {
             if (dataObject == null || dataObject.Object == null)
                 return null;
 
             var other = dataObject.Object;
             var here = DataContext.Find(DataContext.GetInterfaceType(other), other.ID);
-            var vm = ModelFactory.CreateViewModel<DataObjectModel.Factory>(here).Invoke(DataContext, here);
+            var vm = ModelFactory.CreateViewModel<DataObjectViewModel.Factory>(here).Invoke(DataContext, here);
             SelectedItem = vm;
             vm.RequestedKind = requestedKind;
             AddItem(vm);

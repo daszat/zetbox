@@ -62,7 +62,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
         {
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add)
             {
-                foreach (DataObjectModel mdl in e.NewItems)
+                foreach (DataObjectViewModel mdl in e.NewItems)
                 {
                     var container = new HtmlGenericControl("div");
                     container.ID = "mdlContainer" + Model.Items.IndexOf(mdl);
@@ -80,7 +80,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
         {
             if (e.Item.ItemType.In(ListItemType.Item, ListItemType.AlternatingItem))
             {
-                var data = (DataObjectModel)e.Item.DataItem;
+                var data = (DataObjectViewModel)e.Item.DataItem;
                 var litText = (Literal)e.Item.FindControl("litText");
                 var container = (IAttributeAccessor)e.Item.FindControl("container");
 
@@ -103,8 +103,8 @@ namespace Kistl.Client.ASPNET.Toolkit.View
             }
         }
 
-        List<DataObjectModel> _Objects;
-        public List<DataObjectModel> Objects
+        List<DataObjectViewModel> _Objects;
+        public List<DataObjectViewModel> Objects
         {
             get
             {
@@ -112,7 +112,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
                 {
                     if (!IsPostBack)
                     {
-                        _Objects = new List<DataObjectModel>();
+                        _Objects = new List<DataObjectViewModel>();
                         // Parse Request
                         var type = Request["type"];
                         var id = Convert.ToInt32(Request["id"]);
@@ -120,7 +120,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
                         InterfaceType ifType = KistlContextManagerModule.IftFactory(Type.GetType(type));
                         IDataObject obj = (IDataObject)KistlContextManagerModule.KistlContext.Find(ifType, id);
 
-                        var mdl = KistlContextManagerModule.ModelFactory.CreateViewModel<DataObjectModel.Factory>(obj).Invoke(KistlContextManagerModule.KistlContext, obj);
+                        var mdl = KistlContextManagerModule.ModelFactory.CreateViewModel<DataObjectViewModel.Factory>(obj).Invoke(KistlContextManagerModule.KistlContext, obj);
                         if (mdl == null) throw new InvalidOperationException(string.Format("Unable to create model for {0}({1})", type, id));
                         _Objects.Add(mdl);
                     }
@@ -146,7 +146,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
             repObjectsCtrl.DataSource = Model.Items;
             repObjectsCtrl.DataBind();
 
-            hdObjectsControl.Value = Model.Items.Cast<DataObjectModel>().ToJSONArray();
+            hdObjectsControl.Value = Model.Items.Cast<DataObjectViewModel>().ToJSONArray();
 
             CurrentIndex = Model.Items.IndexOf(Model.SelectedItem);
 

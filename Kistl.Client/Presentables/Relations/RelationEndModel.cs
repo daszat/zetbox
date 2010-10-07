@@ -11,7 +11,7 @@ using Kistl.Client.Presentables.ValueViewModels;
 namespace Kistl.Client.Presentables.Relations
 {
     public class RelationEndModel
-        : DataObjectModel
+        : DataObjectViewModel
     {
         public new delegate RelationEndModel Factory(IKistlContext dataCtx, RelationEnd relEnd);
 
@@ -35,7 +35,7 @@ namespace Kistl.Client.Presentables.Relations
             }
         }
 
-        public DataObjectModel Navigator { get; private set; }
+        public DataObjectViewModel Navigator { get; private set; }
 
         public ICommand CreateNavigatorCommand { get; private set; }
 

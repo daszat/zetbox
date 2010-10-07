@@ -10,27 +10,26 @@ namespace Kistl.Client.Presentables
     using System.IO;
     using System.Linq;
     using System.Text;
-
     using Kistl.API;
+    using Kistl.API.Configuration;
     using Kistl.API.Utils;
     using Kistl.App.Base;
     using Kistl.App.Extensions;
     using Kistl.App.GUI;
-    using Kistl.API.Configuration;
-    using Kistl.Client.Presentables.ValueViewModels;
     using Kistl.Client.Models;
+    using Kistl.Client.Presentables.ValueViewModels;
 
     /// <summary>
     /// Proxies a whole IDataObject
     /// </summary>
-    public class DataObjectModel
+    public class DataObjectViewModel
         : ViewModel, IDataErrorInfo, IViewModelWithIcon
     {
-        public new delegate DataObjectModel Factory(IKistlContext dataCtx, IDataObject obj);
+        public new delegate DataObjectViewModel Factory(IKistlContext dataCtx, IDataObject obj);
 
         protected readonly KistlConfig config;
 
-        public DataObjectModel(
+        public DataObjectViewModel(
             IViewModelDependencies appCtx, KistlConfig config, IKistlContext dataCtx,
             IDataObject obj)
             : base(appCtx, dataCtx)

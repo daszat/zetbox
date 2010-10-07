@@ -10,12 +10,12 @@ using NUnit.Framework;
 namespace Kistl.Client.Tests
 {
     //[TestFixture]
-    //public class DataObjectModelTests
+    //public class DataObjectViewModelTests
     //{
     //    [Test]
     //    public void TestDesignMock()
     //    {
-    //        DataObjectModel.CreateDesignMock();
+    //        DataObjectViewModel.CreateDesignMock();
     //    }
     //}
 }

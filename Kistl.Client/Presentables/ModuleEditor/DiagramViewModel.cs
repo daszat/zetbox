@@ -436,7 +436,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
 
                         newCls.Module = newCtx.Find<Module>(Module.ID);
 
-                        newWorkspace.ShowForeignModel(ModelFactory.CreateViewModel<DataObjectModel.Factory>(newCls).Invoke(newCtx, newCls));
+                        newWorkspace.ShowForeignModel(ModelFactory.CreateViewModel<DataObjectViewModel.Factory>(newCls).Invoke(newCtx, newCls));
                         ModelFactory.ShowModel(newWorkspace, true);
                     }, null);
                 }
@@ -462,7 +462,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
                         newRel.A.Type = newCtx.Find<ObjectClass>(SelectedGraphDataTypeModels.First().ID);
                         newRel.B.Type = newCtx.Find<ObjectClass>(SelectedGraphDataTypeModels.Last().ID);
 
-                        newWorkspace.ShowForeignModel(ModelFactory.CreateViewModel<DataObjectModel.Factory>(newRel).Invoke(newCtx, newRel));
+                        newWorkspace.ShowForeignModel(ModelFactory.CreateViewModel<DataObjectViewModel.Factory>(newRel).Invoke(newCtx, newRel));
                         ModelFactory.ShowModel(newWorkspace, true);
                     },
                     () => (SelectedGraphDataTypeModels.Count() == 1 || SelectedGraphDataTypeModels.Count() == 2) && SelectedGraphDataTypeModels.Any(dt => dt.DataType is ObjectClass));

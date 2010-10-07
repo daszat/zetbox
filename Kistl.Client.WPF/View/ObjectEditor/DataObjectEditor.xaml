@@ -8,13 +8,13 @@
 
     <!-- Use this for Design Mode support 
     <UserControl.Resources>
-        <ObjectDataProvider x:Key="DataObjectModelDesignProvider"
-                            ObjectType="{x:Type client:DataObjectModel}"
+        <ObjectDataProvider x:Key="DataObjectViewModelDesignProvider"
+                            ObjectType="{x:Type client:DataObjectViewModel}"
                             MethodName="CreateDesignMock">
         </ObjectDataProvider>
     </UserControl.Resources>
     <UserControl.DataContext>
-        <Binding Source="{StaticResource DataObjectModelDesignProvider}" />
+        <Binding Source="{StaticResource DataObjectViewModelDesignProvider}" />
     </UserControl.DataContext> -->
 
     <DockPanel>

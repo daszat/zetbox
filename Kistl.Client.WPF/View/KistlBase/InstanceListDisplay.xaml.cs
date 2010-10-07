@@ -68,7 +68,7 @@ namespace Kistl.Client.WPF.View.KistlBase
                 return;
             }
 
-            var dataObject = listItem.Content as DataObjectModel;
+            var dataObject = listItem.Content as DataObjectViewModel;
             if (dataObject == null)
             {
                 return;
@@ -80,7 +80,7 @@ namespace Kistl.Client.WPF.View.KistlBase
                 return;
             }
 
-            ViewModel.OnItemsDefaultAction(new DataObjectModel[] { dataObject });
+            ViewModel.OnItemsDefaultAction(new DataObjectViewModel[] { dataObject });
             e.Handled = true;
         }
 
@@ -89,8 +89,8 @@ namespace Kistl.Client.WPF.View.KistlBase
             if (e.OriginalSource == lst)
             {
                 e.Handled = true;
-                e.RemovedItems.ForEach<DataObjectModel>(i => ViewModel.SelectedItems.Remove(i));
-                e.AddedItems.ForEach<DataObjectModel>(i => ViewModel.SelectedItems.Add(i));
+                e.RemovedItems.ForEach<DataObjectViewModel>(i => ViewModel.SelectedItems.Remove(i));
+                e.AddedItems.ForEach<DataObjectViewModel>(i => ViewModel.SelectedItems.Add(i));
             }
         }
 

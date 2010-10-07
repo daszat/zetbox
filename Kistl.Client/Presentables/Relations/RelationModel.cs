@@ -13,7 +13,7 @@ namespace Kistl.Client.Presentables.Relations
 {
 
     public class RelationModel
-        : DataObjectModel
+        : DataObjectViewModel
     {
         public new delegate RelationModel Factory(IKistlContext dataCtx, Relation rel);
 
@@ -34,7 +34,7 @@ namespace Kistl.Client.Presentables.Relations
         {
             get
             {
-                return (RelationEndModel)((IValueViewModel<DataObjectModel>)PropertyModelsByName["A"]).Value;
+                return (RelationEndModel)((IValueViewModel<DataObjectViewModel>)PropertyModelsByName["A"]).Value;
             }
         }
 
@@ -42,7 +42,7 @@ namespace Kistl.Client.Presentables.Relations
         {
             get
             {
-                return (RelationEndModel)((IValueViewModel<DataObjectModel>)PropertyModelsByName["B"]).Value;
+                return (RelationEndModel)((IValueViewModel<DataObjectViewModel>)PropertyModelsByName["B"]).Value;
             }
         }
 

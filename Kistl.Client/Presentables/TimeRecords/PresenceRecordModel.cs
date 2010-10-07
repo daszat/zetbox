@@ -15,7 +15,7 @@ namespace Kistl.Client.Presentables.TimeRecords
     /// Models <see cref="PresenceRecord"/>s for viewing and editing.
     /// </summary>
     public class PresenceRecordModel
-        : DataObjectModel
+        : DataObjectViewModel
     {
         public new delegate PresenceRecordModel Factory(IKistlContext dataCtx, PresenceRecord obj);
 

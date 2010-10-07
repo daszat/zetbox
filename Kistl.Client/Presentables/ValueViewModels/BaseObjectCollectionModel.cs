@@ -50,7 +50,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
         public IObjectCollectionValueModel<TModelCollection> ObjectCollectionModel { get; private set; }
         public ObjectClass ReferencedClass { get { return ObjectCollectionModel.ReferencedClass; } }
 
-        #region Public interface and IReadOnlyValueModel<IReadOnlyObservableCollection<DataObjectModel>> Members
+        #region Public interface and IReadOnlyValueModel<IReadOnlyObservableCollection<DataObjectViewModel>> Members
         private GridDisplayConfiguration _displayedColumns = null;
         public GridDisplayConfiguration DisplayedColumns
         {
@@ -70,8 +70,8 @@ namespace Kistl.Client.Presentables.ValueViewModels
             return result;
         }
 
-        private DataObjectModel _selectedItem;
-        public DataObjectModel SelectedItem
+        private DataObjectViewModel _selectedItem;
+        public DataObjectViewModel SelectedItem
         {
             get
             {
@@ -87,14 +87,14 @@ namespace Kistl.Client.Presentables.ValueViewModels
             }
         }
 
-        private ObservableCollection<DataObjectModel> _selectedItems = null;
-        public ObservableCollection<DataObjectModel> SelectedItems
+        private ObservableCollection<DataObjectViewModel> _selectedItems = null;
+        public ObservableCollection<DataObjectViewModel> SelectedItems
         {
             get
             {
                 if (_selectedItems == null)
                 {
-                    _selectedItems = new ObservableCollection<DataObjectModel>();
+                    _selectedItems = new ObservableCollection<DataObjectViewModel>();
                 }
                 return _selectedItems;
             }
@@ -211,7 +211,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             {
                 if (_RemoveCommand == null)
                 {
-                    _RemoveCommand = ModelFactory.CreateViewModel<SimpleParameterCommandModel<IEnumerable<DataObjectModel>>.Factory>()
+                    _RemoveCommand = ModelFactory.CreateViewModel<SimpleParameterCommandModel<IEnumerable<DataObjectViewModel>>.Factory>()
                         .Invoke(DataContext, "Remove", "Remove selection from list",
                         (items) => items.ToList().ForEach(i => RemoveItem(i)), // Collection will change while deleting!
                         (items) => items != null && items.Count() > 0 && AllowRemove);
@@ -227,7 +227,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             {
                 if (_DeleteCommand == null)
                 {
-                    _DeleteCommand = ModelFactory.CreateViewModel<SimpleParameterCommandModel<IEnumerable<DataObjectModel>>.Factory>()
+                    _DeleteCommand = ModelFactory.CreateViewModel<SimpleParameterCommandModel<IEnumerable<DataObjectViewModel>>.Factory>()
                         .Invoke(DataContext, "Delete", "Delete selection from data store", 
                         (items) => items.ToList().ForEach(i => DeleteItem(i)), // Collection will change while deleting!
                         (items) => items != null && items.Count() > 0 && AllowDelete);
@@ -258,7 +258,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                         DataContext,
                         null,
                         children.AsQueryable(),
-                        new Action<DataObjectModel>(delegate(DataObjectModel chosen)
+                        new Action<DataObjectViewModel>(delegate(DataObjectViewModel chosen)
                         {
                             if (chosen != null)
                             {
@@ -274,7 +274,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
         {
             var targetType = targetClass.GetDescribedInterfaceType();
             var item = this.DataContext.Create(targetType);
-            var result = ModelFactory.CreateViewModel<DataObjectModel.Factory>().Invoke(DataContext, item);
+            var result = ModelFactory.CreateViewModel<DataObjectViewModel.Factory>().Invoke(DataContext, item);
             AddItem(result);
             if (!targetClass.IsSimpleObject)
             {
@@ -282,7 +282,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             }
         }
 
-        public virtual void AddItem(DataObjectModel item)
+        public virtual void AddItem(DataObjectViewModel item)
         {
             if (item == null) { throw new ArgumentNullException("item"); }
 
@@ -304,7 +304,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                     DataContext,
                     ifType.GetObjectClass(FrozenContext),
                     null,
-                    new Action<DataObjectModel>(delegate(DataObjectModel chosen)
+                    new Action<DataObjectViewModel>(delegate(DataObjectViewModel chosen)
                     {
                         if (chosen != null)
                         {
@@ -314,7 +314,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                     null), true);
         }
 
-        public virtual void RemoveItem(DataObjectModel item)
+        public virtual void RemoveItem(DataObjectViewModel item)
         {
             if (item == null) { throw new ArgumentNullException("item"); }
 
@@ -322,7 +322,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             ValueModel.Value.Remove(item.Object);
         }
 
-        public virtual void DeleteItem(DataObjectModel item)
+        public virtual void DeleteItem(DataObjectViewModel item)
         {
             if (item == null) { throw new ArgumentNullException("item"); }
 
@@ -331,7 +331,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             item.Delete();
         }
 
-        public void ActivateItem(DataObjectModel item, bool activate)
+        public void ActivateItem(DataObjectViewModel item, bool activate)
         {
             if (item == null) { throw new ArgumentNullException("item"); }
 

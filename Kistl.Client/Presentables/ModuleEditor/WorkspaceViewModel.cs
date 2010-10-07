@@ -99,7 +99,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
                     // Assembly
                     lstMdl = ModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, null, DataContext.GetQuery<Assembly>());
                     lstMdl.Filter.Add(new ConstantFilterExpression("Module = @0", CurrentModule));
-                    lstMdl.Commands.Add(ModelFactory.CreateViewModel<SimpleItemCommandModel<DataObjectModel>.Factory>().Invoke(DataContext,
+                    lstMdl.Commands.Add(ModelFactory.CreateViewModel<SimpleItemCommandModel<DataObjectViewModel>.Factory>().Invoke(DataContext,
                         "Refresh TypeRefs", "Refreshes the TypeRefs, ViewDescriptors and ViewModelDescriptors",
                         (i) =>
                         {
@@ -219,7 +219,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
             var newCtx = ctxFactory();
             var newWorkspace = ModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx);
 
-            newWorkspace.ShowForeignModel(ModelFactory.CreateViewModel<DataObjectModel.Factory>(CurrentModule).Invoke(newCtx, CurrentModule));
+            newWorkspace.ShowForeignModel(ModelFactory.CreateViewModel<DataObjectViewModel.Factory>(CurrentModule).Invoke(newCtx, CurrentModule));
             ModelFactory.ShowModel(newWorkspace, true);
         }
 
@@ -236,7 +236,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
             var newWorkspace = ModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx);
             var newObj = newCtx.Create<Module>();
 
-            newWorkspace.ShowForeignModel(ModelFactory.CreateViewModel<DataObjectModel.Factory>(newObj).Invoke(newCtx, newObj));
+            newWorkspace.ShowForeignModel(ModelFactory.CreateViewModel<DataObjectViewModel.Factory>(newObj).Invoke(newCtx, newObj));
             ModelFactory.ShowModel(newWorkspace, true);
         }
     }

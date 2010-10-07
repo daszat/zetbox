@@ -12,10 +12,10 @@ namespace Kistl.Client.Presentables.TimeRecords
     using Kistl.API.Configuration;
 
     /// <summary>
-    /// A <see cref="DataObjectModel"/> for <see cref="WorkEffort"/>.
+    /// A <see cref="DataObjectViewModel"/> for <see cref="WorkEffort"/>.
     /// </summary>
     public class WorkEffortModel
-        : DataObjectModel
+        : DataObjectViewModel
     {
         public new delegate WorkEffortModel Factory(IKistlContext dataCtx, WorkEffort obj);
 
@@ -74,12 +74,12 @@ namespace Kistl.Client.Presentables.TimeRecords
             set { this._entry.Thru = value; }
         }
 
-        /// <summary>Gets or sets the "Mitarbeiter"s value of the underlying WorkEffort, wrapped in a DataObjectModel</summary>
-        public DataObjectModel Mitarbeiter
+        /// <summary>Gets or sets the "Mitarbeiter"s value of the underlying WorkEffort, wrapped in a DataObjectViewModel</summary>
+        public DataObjectViewModel Mitarbeiter
         {
             get
             {
-                return this.ModelFactory.CreateViewModel<DataObjectModel.Factory>(this._entry.Mitarbeiter).Invoke(this.DataContext, this._entry.Mitarbeiter);
+                return this.ModelFactory.CreateViewModel<DataObjectViewModel.Factory>(this._entry.Mitarbeiter).Invoke(this.DataContext, this._entry.Mitarbeiter);
             }
             set
             {

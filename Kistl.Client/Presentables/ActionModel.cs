@@ -49,7 +49,7 @@ namespace Kistl.Client.Presentables
             IDataObject result = info.Invoke(Object, new object[] { }) as IDataObject;
             if (result != null && result.Context == DataContext)
             {
-                this.ModelFactory.ShowModel(this.ModelFactory.CreateViewModel<DataObjectModel.Factory>(result).Invoke(DataContext, result), true);
+                this.ModelFactory.ShowModel(this.ModelFactory.CreateViewModel<DataObjectViewModel.Factory>(result).Invoke(DataContext, result), true);
             }
             if (callback != null)
                 callback();

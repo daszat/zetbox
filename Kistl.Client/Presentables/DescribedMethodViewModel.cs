@@ -9,7 +9,7 @@ using Kistl.App.Extensions;
 
 namespace Kistl.Client.Presentables
 {
-    public class DescribedMethodViewModel : DataObjectModel
+    public class DescribedMethodViewModel : DataObjectViewModel
     {
         public new delegate DescribedMethodViewModel Factory(IKistlContext dataCtx, Method meth);
 

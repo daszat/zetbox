@@ -67,6 +67,6 @@ namespace Kistl.Client.Forms.View
 
     }
 
-    public class DataObjectFullViewDesignerProxy : FormsUserControl<DataObjectModel> { }
+    public class DataObjectFullViewDesignerProxy : FormsUserControl<DataObjectViewModel> { }
 
 }

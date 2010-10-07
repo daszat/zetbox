@@ -20,7 +20,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
     /// <summary>
     /// </summary>
     public class ObjectListViewModel
-        : BaseObjectCollectionViewModel<IReadOnlyObservableList<DataObjectModel>, IList<IDataObject>>, IValueListViewModel<DataObjectModel, IReadOnlyObservableList<DataObjectModel>>
+        : BaseObjectCollectionViewModel<IReadOnlyObservableList<DataObjectViewModel>, IList<IDataObject>>, IValueListViewModel<DataObjectViewModel, IReadOnlyObservableList<DataObjectViewModel>>
     {
         public new delegate ObjectListViewModel Factory(IKistlContext dataCtx, IValueModel mdl);
 
@@ -31,10 +31,10 @@ namespace Kistl.Client.Presentables.ValueViewModels
         {
         }
 
-        #region Public interface and IReadOnlyValueModel<IReadOnlyObservableCollection<DataObjectModel>> Members
+        #region Public interface and IReadOnlyValueModel<IReadOnlyObservableCollection<DataObjectViewModel>> Members
 
-        private ReadOnlyObservableProjectedList<IDataObject, DataObjectModel> _valueCache;
-        public override IReadOnlyObservableList<DataObjectModel> Value
+        private ReadOnlyObservableProjectedList<IDataObject, DataObjectViewModel> _valueCache;
+        public override IReadOnlyObservableList<DataObjectViewModel> Value
         {
             get
             {
@@ -52,9 +52,9 @@ namespace Kistl.Client.Presentables.ValueViewModels
         {
             if (_valueCache == null)
             {
-                _valueCache = new ReadOnlyObservableProjectedList<IDataObject, DataObjectModel>(
+                _valueCache = new ReadOnlyObservableProjectedList<IDataObject, DataObjectViewModel>(
                     ObjectCollectionModel, ObjectCollectionModel.Value,
-                    obj => ModelFactory.CreateViewModel<DataObjectModel.Factory>(obj).Invoke(DataContext, obj),
+                    obj => ModelFactory.CreateViewModel<DataObjectViewModel.Factory>(obj).Invoke(DataContext, obj),
                     mdl => mdl.Object);
             }
         }
@@ -69,7 +69,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
         #endregion
 
-        public void MoveItemUp(DataObjectModel item)
+        public void MoveItemUp(DataObjectViewModel item)
         {
             if (item == null) { return; }
 
@@ -82,7 +82,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             }
         }
 
-        public void MoveItemDown(DataObjectModel item)
+        public void MoveItemDown(DataObjectViewModel item)
         {
             if (item == null) { return; }
 

@@ -13,7 +13,7 @@ using Kistl.Client.Presentables.KistlBase;
 
 namespace Kistl.Client.Presentables.ObjectBrowser
 {
-    public class ModuleViewModel : DataObjectModel
+    public class ModuleViewModel : DataObjectViewModel
     {
         public new delegate ModuleViewModel Factory(IKistlContext dataCtx, Module mdl);
 

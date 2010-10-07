@@ -10,7 +10,7 @@ using Kistl.App.Extensions;
 
 namespace Kistl.Client.Presentables
 {
-    public class DataTypeModel : DataObjectModel
+    public class DataTypeModel : DataObjectViewModel
     {
         public new delegate DataTypeModel Factory(IKistlContext dataCtx, DataType dt);
 

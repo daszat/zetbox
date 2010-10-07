@@ -90,7 +90,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 DataContext,
                 null,
                 DataContext.GetQuery<Kistl.App.Base.TypeRef>(),
-                new Action<DataObjectModel>(delegate(DataObjectModel chosen)
+                new Action<DataObjectViewModel>(delegate(DataObjectViewModel chosen)
                 {
                     if (chosen != null)
                     {
@@ -100,7 +100,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 new List<CommandModel>() { regenerateCmd });
             var filter = (ObjectReferencePropertyFilterExpressionViewModel)selectionTask.ListViewModel.Filter.OfType<IPropertyFilterExpression>().Single(i => i.Property.ExportGuid == new Guid("885BFA97-3D43-48BB-A0AA-1049298714FF"));
             filter.Value = filter.PossibleValues
-                .Cast<KeyValuePair<DataObjectModel, string>>()
+                .Cast<KeyValuePair<DataObjectViewModel, string>>()
                 .Where(m => m.Key != null)
                 .FirstOrDefault(m => m.Key.Object == assembly)
                 .Key;

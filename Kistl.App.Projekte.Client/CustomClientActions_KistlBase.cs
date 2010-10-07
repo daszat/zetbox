@@ -15,11 +15,11 @@ namespace Kistl.App.Base
 {
     public static partial class CustomClientActions_KistlBase
     {
-        internal static readonly Guid DataObjectModelDescriptor = new Guid("d8e95ac5-d46a-4dfa-a574-12ea299eadc4");
+        internal static readonly Guid DataObjectViewModelDescriptor = new Guid("d8e95ac5-d46a-4dfa-a574-12ea299eadc4");
 
         public static void OnCreated_ObjectClass(ObjectClass obj)
         {
-            obj.DefaultViewModelDescriptor = obj.Context.FindPersistenceObject<ViewModelDescriptor>(DataObjectModelDescriptor);
+            obj.DefaultViewModelDescriptor = obj.Context.FindPersistenceObject<ViewModelDescriptor>(DataObjectViewModelDescriptor);
         }
 
         public static void OnGetDataType_DataType(DataType obj, MethodReturnEventArgs<System.Type> e)

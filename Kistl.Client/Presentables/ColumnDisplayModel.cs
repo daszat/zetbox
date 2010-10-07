@@ -17,7 +17,7 @@ namespace Kistl.Client.Presentables
         public enum ColumnType
         {
             /// <summary>
-            /// References a DataObjectModel.PropertyModelsByName[] ViewModel
+            /// References a DataObjectViewModel.PropertyModelsByName[] ViewModel
             /// </summary>
             PropertyModel,
             /// <summary>
@@ -25,7 +25,7 @@ namespace Kistl.Client.Presentables
             /// </summary>
             Property,
             /// <summary>
-            /// References a DataObjectModel.ActionModelsByName[] ViewModel
+            /// References a DataObjectViewModel.ActionModelsByName[] ViewModel
             /// </summary>
             MethodModel,
         }

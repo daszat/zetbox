@@ -26,7 +26,7 @@ namespace Kistl.Client.Presentables.KistlBase
     /// <summary>
     /// Models the specialities of <see cref="DataType"/>s.
     /// </summary>
-    [ViewModelDescriptor("KistlBase", DefaultKind = "Kistl.App.GUI.InstanceListKind", Description = "DataObjectModel with specific extensions for DataTypes")]
+    [ViewModelDescriptor("KistlBase", DefaultKind = "Kistl.App.GUI.InstanceListKind", Description = "DataObjectViewModel with specific extensions for DataTypes")]
     public class InstanceListViewModel
         : ViewModel, IViewModelWithIcon, IRefreshCommandListener
     {
@@ -385,14 +385,14 @@ namespace Kistl.Client.Presentables.KistlBase
 
         #region Instances
         // TODO: make readonly, take care of new and deleted+submitted objects
-        private ObservableCollection<DataObjectModel> _instances = null;
-        public ObservableCollection<DataObjectModel> Instances
+        private ObservableCollection<DataObjectViewModel> _instances = null;
+        public ObservableCollection<DataObjectViewModel> Instances
         {
             get
             {
                 if (_instances == null)
                 {
-                    _instances = new ObservableCollection<DataObjectModel>();
+                    _instances = new ObservableCollection<DataObjectViewModel>();
 
                     // As this is a "calculated" collection, only insider should modify this
                     ////_instances.CollectionChanged += _instances_CollectionChanged;
@@ -402,8 +402,8 @@ namespace Kistl.Client.Presentables.KistlBase
             }
         }
 
-        private ReadOnlyObservableCollection<DataObjectModel> _instancesFiltered = null;
-        public ReadOnlyObservableCollection<DataObjectModel> InstancesFiltered
+        private ReadOnlyObservableCollection<DataObjectViewModel> _instancesFiltered = null;
+        public ReadOnlyObservableCollection<DataObjectViewModel> InstancesFiltered
         {
             get
             {
@@ -415,14 +415,14 @@ namespace Kistl.Client.Presentables.KistlBase
             }
         }
 
-        private ObservableCollection<DataObjectModel> _selectedItems = null;
-        public ObservableCollection<DataObjectModel> SelectedItems
+        private ObservableCollection<DataObjectViewModel> _selectedItems = null;
+        public ObservableCollection<DataObjectViewModel> SelectedItems
         {
             get
             {
                 if (_selectedItems == null)
                 {
-                    _selectedItems = new ObservableCollection<DataObjectModel>();
+                    _selectedItems = new ObservableCollection<DataObjectViewModel>();
                 }
                 return _selectedItems;
             }
@@ -459,17 +459,17 @@ namespace Kistl.Client.Presentables.KistlBase
         #endregion
 
         #region Opening items
-        public void OpenObjects(IEnumerable<DataObjectModel> objects)
+        public void OpenObjects(IEnumerable<DataObjectViewModel> objects)
         {
             if (objects == null) throw new ArgumentNullException("objects");
             // TODO: Refactor this
             OpenCommand.Execute(objects);
         }
 
-        public delegate void ItemsDefaultActionHandler(IEnumerable<DataObjectModel> objects);
+        public delegate void ItemsDefaultActionHandler(IEnumerable<DataObjectViewModel> objects);
         public event ItemsDefaultActionHandler ItemsDefaultAction = null;
 
-        public void OnItemsDefaultAction(IEnumerable<DataObjectModel> objects)
+        public void OnItemsDefaultAction(IEnumerable<DataObjectViewModel> objects)
         {
             ItemsDefaultActionHandler temp = ItemsDefaultAction;
             if (temp != null)
@@ -617,7 +617,7 @@ namespace Kistl.Client.Presentables.KistlBase
 
             foreach (var obj in GetQuery().Cast<IDataObject>().ToList().OrderBy(obj => obj.ToString()))
             {
-                var mdl = ModelFactory.CreateViewModel<DataObjectModel.Factory>(obj).Invoke(DataContext, obj);
+                var mdl = ModelFactory.CreateViewModel<DataObjectViewModel.Factory>(obj).Invoke(DataContext, obj);
                 mdl.IsReadOnly = IsItemsReadOnly;
                 _instances.Add(mdl);
             }
@@ -639,7 +639,7 @@ namespace Kistl.Client.Presentables.KistlBase
         /// </summary>
         private void ExecutePostFilter()
         {
-            _instancesFiltered = new ReadOnlyObservableCollection<DataObjectModel>(this.Instances);
+            _instancesFiltered = new ReadOnlyObservableCollection<DataObjectViewModel>(this.Instances);
             // poor man's full text search
             foreach (var filter in Filter.OfType<IPostFilterExpression>())
             {
@@ -652,8 +652,8 @@ namespace Kistl.Client.Presentables.KistlBase
             // Sort
             if (!string.IsNullOrEmpty(_sortProperty))
             {
-                _instancesFiltered = new ReadOnlyObservableCollection<DataObjectModel>(
-                    new ObservableCollection<DataObjectModel>(
+                _instancesFiltered = new ReadOnlyObservableCollection<DataObjectViewModel>(
+                    new ObservableCollection<DataObjectViewModel>(
                     _instancesFiltered
                         .AsQueryable()
                         .OrderBy(string.Format("it.Object.{0} {1}",

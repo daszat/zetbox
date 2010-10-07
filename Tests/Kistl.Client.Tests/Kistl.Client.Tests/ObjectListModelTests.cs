@@ -54,10 +54,10 @@ namespace Kistl.Client.Tests
 
         }
 
-        private DataObjectModel CreateNewDataObjectModel()
+        private DataObjectViewModel CreateNewDataObjectViewModel()
         {
             var newMock = scope.Resolve<KistlMockFactory>().CreateTestObject();
-            var dom = new DataObjectModel(null, null, GetContext(), newMock.Object);
+            var dom = new DataObjectViewModel(null, null, GetContext(), newMock.Object);
             models[objMock.Object] = dom;
             return dom;
         }
@@ -67,7 +67,7 @@ namespace Kistl.Client.Tests
         {
             Assert.That(olm.Value.Count, Is.EqualTo(0));
 
-            var dom = CreateNewDataObjectModel();
+            var dom = CreateNewDataObjectViewModel();
             olm.AddItem(dom);
 
             Assert.That(olm.Value.Count, Is.EqualTo(1));
@@ -78,7 +78,7 @@ namespace Kistl.Client.Tests
         [Test]
         public void TestAdd()
         {
-            var objs = new[] { CreateNewDataObjectModel(), CreateNewDataObjectModel(), CreateNewDataObjectModel(), CreateNewDataObjectModel() };
+            var objs = new[] { CreateNewDataObjectViewModel(), CreateNewDataObjectViewModel(), CreateNewDataObjectViewModel(), CreateNewDataObjectViewModel() };
 
             foreach (var dom in objs)
             {
@@ -93,7 +93,7 @@ namespace Kistl.Client.Tests
         [Test]
         public void TestMoveUp([Range(1, 3)]int item)
         {
-            var objs = new List<DataObjectModel>() { CreateNewDataObjectModel(), CreateNewDataObjectModel(), CreateNewDataObjectModel(), CreateNewDataObjectModel() };
+            var objs = new List<DataObjectViewModel>() { CreateNewDataObjectViewModel(), CreateNewDataObjectViewModel(), CreateNewDataObjectViewModel(), CreateNewDataObjectViewModel() };
 
             foreach (var dom in objs)
             {
@@ -114,7 +114,7 @@ namespace Kistl.Client.Tests
         [Test]
         public void TestMoveDown([Range(0, 2)]int item)
         {
-            var objs = new List<DataObjectModel>() { CreateNewDataObjectModel(), CreateNewDataObjectModel(), CreateNewDataObjectModel(), CreateNewDataObjectModel() };
+            var objs = new List<DataObjectViewModel>() { CreateNewDataObjectViewModel(), CreateNewDataObjectViewModel(), CreateNewDataObjectViewModel(), CreateNewDataObjectViewModel() };
 
             foreach (var dom in objs)
             {

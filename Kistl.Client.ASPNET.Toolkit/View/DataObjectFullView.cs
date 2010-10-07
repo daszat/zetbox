@@ -11,7 +11,7 @@ using Kistl.Client.GUI;
 namespace Kistl.Client.ASPNET.Toolkit.View
 {
     [ControlLocation("~/View/DataObjectFullView.ascx")]
-    public abstract class DataObjectFullView : ModelUserControl<DataObjectModel>
+    public abstract class DataObjectFullView : ModelUserControl<DataObjectViewModel>
     {
         protected abstract Literal litTitleCtrl { get; }
         protected abstract Repeater repPropertiesCtrl { get; }

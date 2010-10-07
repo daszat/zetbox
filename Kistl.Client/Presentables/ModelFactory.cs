@@ -236,7 +236,7 @@ namespace Kistl.Client.Presentables
             if (mdl == null)
                 throw new ArgumentNullException("mdl");
 
-            var dom = mdl as DataObjectModel;
+            var dom = mdl as DataObjectViewModel;
 
             if (dom == null)
             {

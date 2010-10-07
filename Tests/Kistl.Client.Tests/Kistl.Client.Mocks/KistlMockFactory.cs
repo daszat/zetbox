@@ -61,7 +61,7 @@ namespace Kistl.Client.Mocks
             //    }
             //    else
             //    {
-            //        return (backingStore[obj] = new DataObjectModel(null, ctx, obj));
+            //        return (backingStore[obj] = new DataObjectViewModel(null, ctx, obj));
             //    }
             //});
             return result;

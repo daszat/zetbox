@@ -16,7 +16,7 @@ namespace Kistl.Client.Presentables
         public new delegate DataObjectSelectionTaskModel Factory(IKistlContext dataCtx,
             ObjectClass type,
             IQueryable qry,
-            Action<DataObjectModel> callback,
+            Action<DataObjectViewModel> callback,
             IList<CommandModel> additionalActions);
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace Kistl.Client.Presentables
             IViewModelDependencies appCtx, IKistlContext dataCtx,
             ObjectClass type,
             IQueryable qry,
-            Action<DataObjectModel> callback,
+            Action<DataObjectViewModel> callback,
             IList<CommandModel> additionalActions)
             : base(appCtx, dataCtx)
         {
@@ -51,7 +51,7 @@ namespace Kistl.Client.Presentables
             ListViewModel.ItemsDefaultAction += new InstanceListViewModel.ItemsDefaultActionHandler(ListViewModel_ItemsDefaultAction);
         }
 
-        void ListViewModel_ItemsDefaultAction(IEnumerable<DataObjectModel> objects)
+        void ListViewModel_ItemsDefaultAction(IEnumerable<DataObjectViewModel> objects)
         {
             var obj = objects.FirstOrDefault();
             if (obj != null) Choose(obj);
@@ -69,7 +69,7 @@ namespace Kistl.Client.Presentables
             }
         }
 
-        public void Choose(DataObjectModel choosen)
+        public void Choose(DataObjectViewModel choosen)
         {
             if (ListViewModel.Instances.Contains(choosen))
             {
@@ -87,7 +87,7 @@ namespace Kistl.Client.Presentables
             ListViewModel.ReloadInstances();
         }
 
-        public DataObjectModel SelectedItem
+        public DataObjectViewModel SelectedItem
         {
             get
             {
@@ -96,7 +96,7 @@ namespace Kistl.Client.Presentables
         }
         #endregion
 
-        private Action<DataObjectModel> _callback;
+        private Action<DataObjectViewModel> _callback;
         private ReadOnlyCollection<CommandModel> _additionalActions;
 
         public override string Name

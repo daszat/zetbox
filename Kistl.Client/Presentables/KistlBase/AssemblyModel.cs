@@ -13,9 +13,9 @@ namespace Kistl.Client.Presentables.KistlBase
     using Kistl.API.Configuration;
     
     public class AssemblyModel
-        : DataObjectModel
+        : DataObjectViewModel
     {
-        public new delegate DataObjectModel Factory(IKistlContext dataCtx, Assembly obj);
+        public new delegate DataObjectViewModel Factory(IKistlContext dataCtx, Assembly obj);
 
         private Assembly _assembly;
 

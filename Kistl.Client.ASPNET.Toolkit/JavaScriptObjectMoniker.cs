@@ -27,25 +27,25 @@ namespace Kistl.Client.ASPNET.Toolkit
         {
         }
         
-        public JavaScriptObjectMoniker(DataObjectModel m)
+        public JavaScriptObjectMoniker(DataObjectViewModel m)
         {
             Init(m);
         }
         
         public JavaScriptObjectMoniker(IKistlContext ctx, IDataObject obj)
         {
-            DataObjectModel m = KistlContextManagerModule.ModelFactory.CreateViewModel<DataObjectModel.Factory>(obj).Invoke(ctx, obj);
+            DataObjectViewModel m = KistlContextManagerModule.ModelFactory.CreateViewModel<DataObjectViewModel.Factory>(obj).Invoke(ctx, obj);
             Init(m);
         }
 
-        private void Init(DataObjectModel m)
+        private void Init(DataObjectViewModel m)
         {
             ID = m.ID;
             Type = m.GetInterfaceType().ToSerializableType();
             Text = m.Name;
         }
 
-        public DataObjectModel GetDataObject(IKistlContext ctx)
+        public DataObjectViewModel GetDataObject(IKistlContext ctx)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
 
@@ -61,7 +61,7 @@ namespace Kistl.Client.ASPNET.Toolkit
                 obj = (IDataObject)ctx.Find(KistlContextManagerModule.IftFactory(Type.GetSystemType()), ID);
             }
 
-            return KistlContextManagerModule.ModelFactory.CreateViewModel<DataObjectModel.Factory>(obj).Invoke(ctx, obj);
+            return KistlContextManagerModule.ModelFactory.CreateViewModel<DataObjectViewModel.Factory>(obj).Invoke(ctx, obj);
         }
     }
 
@@ -89,7 +89,7 @@ namespace Kistl.Client.ASPNET.Toolkit
             }
         }
 
-        public static string ToJSON(this DataObjectModel obj)
+        public static string ToJSON(this DataObjectViewModel obj)
         {
             DataContractJsonSerializer s = new DataContractJsonSerializer(typeof(JavaScriptObjectMoniker));
             using (var ms = new MemoryStream())
@@ -99,7 +99,7 @@ namespace Kistl.Client.ASPNET.Toolkit
             }
         }
 
-        public static string ToJSONArray(this IEnumerable<DataObjectModel> list)
+        public static string ToJSONArray(this IEnumerable<DataObjectViewModel> list)
         {
             DataContractJsonSerializer s = new DataContractJsonSerializer(typeof(IEnumerable<JavaScriptObjectMoniker>));
             using (var ms = new MemoryStream())
@@ -109,9 +109,9 @@ namespace Kistl.Client.ASPNET.Toolkit
             }
         }
 
-        public static IEnumerable<DataObjectModel> FromJSONArray(this string jsonArray, IKistlContext ctx)
+        public static IEnumerable<DataObjectViewModel> FromJSONArray(this string jsonArray, IKistlContext ctx)
         {
-            if (string.IsNullOrEmpty(jsonArray)) return new List<DataObjectModel>();
+            if (string.IsNullOrEmpty(jsonArray)) return new List<DataObjectViewModel>();
 
             DataContractJsonSerializer s = new DataContractJsonSerializer(typeof(IEnumerable<JavaScriptObjectMoniker>));
             using (var ms = new MemoryStream(GetEncoder().GetBytes(jsonArray)))
@@ -119,7 +119,7 @@ namespace Kistl.Client.ASPNET.Toolkit
                 var result = (IEnumerable<JavaScriptObjectMoniker>)s.ReadObject(ms);
                 if (result == null)
                 {
-                    return new List<DataObjectModel>();
+                    return new List<DataObjectViewModel>();
                 }
                 else
                 {
@@ -128,7 +128,7 @@ namespace Kistl.Client.ASPNET.Toolkit
             }
         }
 
-        public static DataObjectModel FromJSON(this string json, IKistlContext ctx)
+        public static DataObjectViewModel FromJSON(this string json, IKistlContext ctx)
         {
             if (string.IsNullOrEmpty(json)) return null;
 

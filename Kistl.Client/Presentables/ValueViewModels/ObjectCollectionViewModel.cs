@@ -20,7 +20,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
     /// <summary>
     /// </summary>
     public class ObjectCollectionViewModel
-        : BaseObjectCollectionViewModel<IReadOnlyObservableList<DataObjectModel>, ICollection<IDataObject>>, IValueCollectionViewModel<DataObjectModel, IReadOnlyObservableList<DataObjectModel>>
+        : BaseObjectCollectionViewModel<IReadOnlyObservableList<DataObjectViewModel>, ICollection<IDataObject>>, IValueCollectionViewModel<DataObjectViewModel, IReadOnlyObservableList<DataObjectViewModel>>
     {
         public new delegate ObjectCollectionViewModel Factory(IKistlContext dataCtx, IValueModel mdl);
 
@@ -31,10 +31,10 @@ namespace Kistl.Client.Presentables.ValueViewModels
         {
         }
 
-        #region Public interface and IReadOnlyValueModel<IReadOnlyObservableCollection<DataObjectModel>> Members
+        #region Public interface and IReadOnlyValueModel<IReadOnlyObservableCollection<DataObjectViewModel>> Members
 
-        private ReadOnlyObservableProjectedList<IDataObject, DataObjectModel> _valueCache;
-        public override IReadOnlyObservableList<DataObjectModel> Value
+        private ReadOnlyObservableProjectedList<IDataObject, DataObjectViewModel> _valueCache;
+        public override IReadOnlyObservableList<DataObjectViewModel> Value
         {
             get
             {
@@ -49,9 +49,9 @@ namespace Kistl.Client.Presentables.ValueViewModels
         }
 
         private SortedWrapper _wrapper = null;
-        private class SortedWrapper : INotifyCollectionChanged, IList<DataObjectModel>
+        private class SortedWrapper : INotifyCollectionChanged, IList<DataObjectViewModel>
         {
-            private List<DataObjectModel> _sortedList;
+            private List<DataObjectViewModel> _sortedList;
             private ICollection _collection;
             private INotifyCollectionChanged _notifier;
 
@@ -72,7 +72,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 _direction = direction;
                 _sortedList = _collection.AsQueryable()
                     .OrderBy(string.Format("{0} {1}", _sortProp, _direction == ListSortDirection.Descending ? "desc" : string.Empty))
-                    .Cast<DataObjectModel>()
+                    .Cast<DataObjectViewModel>()
                     .ToList();
                 OnCollectionChanged();
             }
@@ -99,12 +99,12 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
             #region IList<IDataObject> Members
 
-            public int IndexOf(DataObjectModel item)
+            public int IndexOf(DataObjectViewModel item)
             {
                 return _sortedList.IndexOf(item);
             }
 
-            public void Insert(int index, DataObjectModel item)
+            public void Insert(int index, DataObjectViewModel item)
             {
                 throw new NotImplementedException();
             }
@@ -114,7 +114,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 throw new NotImplementedException();
             }
 
-            public DataObjectModel this[int index]
+            public DataObjectViewModel this[int index]
             {
                 get
                 {
@@ -128,9 +128,9 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
             #endregion
 
-            #region ICollection<DataObjectModel> Members
+            #region ICollection<DataObjectViewModel> Members
 
-            public void Add(DataObjectModel item)
+            public void Add(DataObjectViewModel item)
             {
                 throw new NotImplementedException();
             }
@@ -140,12 +140,12 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 throw new NotImplementedException();
             }
 
-            public bool Contains(DataObjectModel item)
+            public bool Contains(DataObjectViewModel item)
             {
                 return _sortedList.Contains(item);
             }
 
-            public void CopyTo(DataObjectModel[] array, int arrayIndex)
+            public void CopyTo(DataObjectViewModel[] array, int arrayIndex)
             {
                 throw new NotImplementedException();
             }
@@ -160,7 +160,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 get { return true; }
             }
 
-            public bool Remove(DataObjectModel item)
+            public bool Remove(DataObjectViewModel item)
             {
                 throw new NotImplementedException();
             }
@@ -169,7 +169,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
             #region IEnumerable<IDataObject> Members
 
-            public IEnumerator<DataObjectModel> GetEnumerator()
+            public IEnumerator<DataObjectViewModel> GetEnumerator()
             {
                 return _sortedList.GetEnumerator();
             }
@@ -191,9 +191,9 @@ namespace Kistl.Client.Presentables.ValueViewModels
             if (_wrapper == null)
             {
                 _wrapper = new SortedWrapper((ICollection)ValueModel.Value, ObjectCollectionModel);
-                _valueCache = new ReadOnlyObservableProjectedList<IDataObject, DataObjectModel>(
+                _valueCache = new ReadOnlyObservableProjectedList<IDataObject, DataObjectViewModel>(
                     _wrapper,
-                    obj => ModelFactory.CreateViewModel<DataObjectModel.Factory>(obj).Invoke(DataContext, obj),
+                    obj => ModelFactory.CreateViewModel<DataObjectViewModel.Factory>(obj).Invoke(DataContext, obj),
                     mdl => mdl.Object);
             }
         }

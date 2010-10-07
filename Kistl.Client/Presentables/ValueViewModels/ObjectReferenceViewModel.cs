@@ -16,7 +16,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
     using Kistl.Client.Presentables.ValueViewModels;
 
     public partial class ObjectReferenceViewModel
-        : ValueViewModel<DataObjectModel, IDataObject>
+        : ValueViewModel<DataObjectViewModel, IDataObject>
     {
         public new delegate ObjectReferenceViewModel Factory(IKistlContext dataCtx, IValueModel mdl);
 
@@ -157,7 +157,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
         /// <summary>
         /// creates a new target and references it
         /// </summary>
-        public void CreateNewItemAndSetValue(Action<DataObjectModel> onCreated)
+        public void CreateNewItemAndSetValue(Action<DataObjectViewModel> onCreated)
         {
             ObjectClass baseclass = ObjectReferenceModel.ReferencedClass;
 
@@ -168,7 +168,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             {
                 var targetType = baseclass.GetDescribedInterfaceType();
                 var item = this.DataContext.Create(targetType);
-                var model = ModelFactory.CreateViewModel<DataObjectModel.Factory>().Invoke(DataContext, item);
+                var model = ModelFactory.CreateViewModel<DataObjectViewModel.Factory>().Invoke(DataContext, item);
 
                 Value = model;
 
@@ -182,13 +182,13 @@ namespace Kistl.Client.Presentables.ValueViewModels
                         DataContext,
                         null,
                         children.AsQueryable(),
-                        new Action<DataObjectModel>(delegate(DataObjectModel chosen)
+                        new Action<DataObjectViewModel>(delegate(DataObjectViewModel chosen)
                         {
                             if (chosen != null)
                             {
                                 var targetType = ((ObjectClass)chosen.Object).GetDescribedInterfaceType();
                                 var item = this.DataContext.Create(targetType);
-                                var model = ModelFactory.CreateViewModel<DataObjectModel.Factory>().Invoke(DataContext, item);
+                                var model = ModelFactory.CreateViewModel<DataObjectViewModel.Factory>().Invoke(DataContext, item);
 
                                 Value = model;
                                 if (onCreated != null)
@@ -227,7 +227,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 DataContext,
                 ifType.GetObjectClass(FrozenContext),
                 null,
-                new Action<DataObjectModel>(delegate(DataObjectModel chosen)
+                new Action<DataObjectViewModel>(delegate(DataObjectViewModel chosen)
                 {
                     if (chosen != null)
                     {
@@ -261,12 +261,12 @@ namespace Kistl.Client.Presentables.ValueViewModels
         }
 
         private bool _valueCacheInititalized = false;
-        private DataObjectModel _valueCache;
+        private DataObjectViewModel _valueCache;
 
         /// <summary>
         /// Gets or sets the value of the property presented by this model
         /// </summary>
-        public override DataObjectModel Value
+        public override DataObjectViewModel Value
         {
             get
             {
@@ -289,7 +289,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             var obj = ValueModel.Value;
             if (obj != null)
             {
-                _valueCache = ModelFactory.CreateViewModel<DataObjectModel.Factory>().Invoke(DataContext, ValueModel.Value);
+                _valueCache = ModelFactory.CreateViewModel<DataObjectViewModel.Factory>().Invoke(DataContext, ValueModel.Value);
             }
             _valueCacheInititalized = true;
         }

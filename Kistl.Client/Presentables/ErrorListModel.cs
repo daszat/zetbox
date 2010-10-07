@@ -11,15 +11,15 @@ namespace Kistl.Client.Presentables
 
     public class ErrorDescriptor
     {
-        private readonly DataObjectModel _item;
+        private readonly DataObjectViewModel _item;
         private readonly IList<string> _errors;
-        public ErrorDescriptor(DataObjectModel item, IList<string> errors)
+        public ErrorDescriptor(DataObjectViewModel item, IList<string> errors)
         {
             this._item = item;
             this._errors = errors;
         }
 
-        public DataObjectModel Item { get { return _item; } }
+        public DataObjectViewModel Item { get { return _item; } }
         public IList<string> Errors { get { return _errors; } }
     }
 
@@ -60,7 +60,7 @@ namespace Kistl.Client.Presentables
                 .Where(tmp => !String.IsNullOrEmpty(tmp.err)))
             {
                 _errors.Add(new ErrorDescriptor(
-                    ModelFactory.CreateViewModel<DataObjectModel.Factory>(error.obj).Invoke(DataContext, error.obj),
+                    ModelFactory.CreateViewModel<DataObjectViewModel.Factory>(error.obj).Invoke(DataContext, error.obj),
                     new List<string>() { error.err }));
             }
         }

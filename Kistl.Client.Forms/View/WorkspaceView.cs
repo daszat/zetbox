@@ -159,7 +159,7 @@ namespace Kistl.Client.Forms.View
         {
             if (_instancesList.SelectedItems.Count > 0)
             {
-                _dataContextCache.SelectedItem = (DataObjectModel)_instancesList.SelectedItems[0].Tag;
+                _dataContextCache.SelectedItem = (DataObjectViewModel)_instancesList.SelectedItems[0].Tag;
             }
             else
             {

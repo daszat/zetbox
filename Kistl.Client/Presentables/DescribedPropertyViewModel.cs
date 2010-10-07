@@ -8,7 +8,7 @@ using Kistl.API.Configuration;
 
 namespace Kistl.Client.Presentables
 {
-    public class DescribedPropertyViewModel : DataObjectModel
+    public class DescribedPropertyViewModel : DataObjectViewModel
     {
         public new delegate DescribedPropertyViewModel Factory(IKistlContext dataCtx, Property prop);
 

@@ -65,8 +65,8 @@ namespace Kistl.Client.WPF.View.KistlBase
             if (e.OriginalSource == lst)
             {
                 e.Handled = true;
-                e.RemovedItems.ForEach<DataObjectModel>(i => ViewModel.SelectedItems.Remove(i));
-                e.AddedItems.ForEach<DataObjectModel>(i => ViewModel.SelectedItems.Add(i));
+                e.RemovedItems.ForEach<DataObjectViewModel>(i => ViewModel.SelectedItems.Remove(i));
+                e.AddedItems.ForEach<DataObjectViewModel>(i => ViewModel.SelectedItems.Add(i));
             }
         }
         #endregion

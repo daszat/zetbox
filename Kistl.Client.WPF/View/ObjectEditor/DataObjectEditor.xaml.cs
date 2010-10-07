@@ -21,7 +21,7 @@ namespace Kistl.Client.WPF.View.ObjectEditor
     /// <summary>
     /// Interaction logic for DataObjectFullView.xaml
     /// </summary>
-    public partial class DataObjectEditor : UserControl, IHasViewModel<DataObjectModel>
+    public partial class DataObjectEditor : UserControl, IHasViewModel<DataObjectViewModel>
     {
 
         public DataObjectEditor()
@@ -29,9 +29,9 @@ namespace Kistl.Client.WPF.View.ObjectEditor
             InitializeComponent();
         }
 
-        public DataObjectModel ViewModel
+        public DataObjectViewModel ViewModel
         {
-            get { return (DataObjectModel)DataContext; }
+            get { return (DataObjectViewModel)DataContext; }
         }
     }
 }

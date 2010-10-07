@@ -30,22 +30,22 @@ namespace Kistl.Client.Presentables.GUI
         {
             // TODO: react to ctx.Create<ViewModelDescriptor>()/ctx.Delete<ViewModelDescriptor>()
             // TODO: Reactivate
-            //ViewModelDescriptors = new ReadOnlyObservableCollection<DataObjectModel>(
-            //    new ObservableCollection<DataObjectModel>(
+            //ViewModelDescriptors = new ReadOnlyObservableCollection<DataObjectViewModel>(
+            //    new ObservableCollection<DataObjectViewModel>(
             //        DataContext
             //            .GetQuery<ViewModelDescriptor>()
-            //            .Select(desc => (DataObjectModel)Factory.CreateDefaultModel(DataContext, desc))
+            //            .Select(desc => (DataObjectViewModel)Factory.CreateDefaultModel(DataContext, desc))
             //            .ToList()));
 
             //_selectedViewModelDescriptor = null;
 
-            //DefaultViewDescriptors = new Dictionary<Toolkit, DataObjectModel>();
+            //DefaultViewDescriptors = new Dictionary<Toolkit, DataObjectViewModel>();
         }
 
-        public ReadOnlyObservableCollection<DataObjectModel> ViewModelDescriptors { get; private set; }
+        public ReadOnlyObservableCollection<DataObjectViewModel> ViewModelDescriptors { get; private set; }
 
-        private DataObjectModel _selectedViewModelDescriptor;
-        public DataObjectModel SelectedViewModelDescriptor
+        private DataObjectViewModel _selectedViewModelDescriptor;
+        public DataObjectViewModel SelectedViewModelDescriptor
         {
             get { return _selectedViewModelDescriptor; }
             set
@@ -68,13 +68,13 @@ namespace Kistl.Client.Presentables.GUI
 
         private void UpdateApplicableViewDescriptors()
         {
-            //ApplicableViewDescriptors = new ReadOnlyObservableCollection<DataObjectModel>(
-            //    new ObservableCollection<DataObjectModel>(
+            //ApplicableViewDescriptors = new ReadOnlyObservableCollection<DataObjectViewModel>(
+            //    new ObservableCollection<DataObjectViewModel>(
             //        ViewModelDescriptors
             //            .Select(dom => dom.Object)
             //            .OfType<ViewModelDescriptor>()
             //            .SelectMany(pmd => pmd.GetApplicableViewDescriptors())
-            //            .Select(vd => (DataObjectModel)Factory.CreateDefaultModel(DataContext, vd))
+            //            .Select(vd => (DataObjectViewModel)Factory.CreateDefaultModel(DataContext, vd))
             //            .ToList()));
         }
 
@@ -86,14 +86,14 @@ namespace Kistl.Client.Presentables.GUI
                 var defaultView = (SelectedViewModelDescriptor.Object as ViewModelDescriptor).GetViewDescriptor(tk);
                 if (defaultView != null)
                 {
-                    DefaultViewDescriptors[tk] = ModelFactory.CreateViewModel<DataObjectModel.Factory>(defaultView).Invoke(DataContext, defaultView);
+                    DefaultViewDescriptors[tk] = ModelFactory.CreateViewModel<DataObjectViewModel.Factory>(defaultView).Invoke(DataContext, defaultView);
                 }
             }
         }
 
-        public Dictionary<Toolkit, DataObjectModel> DefaultViewDescriptors { get; private set; }
+        public Dictionary<Toolkit, DataObjectViewModel> DefaultViewDescriptors { get; private set; }
 
-        public ReadOnlyObservableCollection<DataObjectModel> ApplicableViewDescriptors { get; private set; }
+        public ReadOnlyObservableCollection<DataObjectViewModel> ApplicableViewDescriptors { get; private set; }
 
         public override string Name
         {

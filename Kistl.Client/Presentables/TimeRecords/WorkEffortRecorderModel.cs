@@ -43,11 +43,11 @@ namespace Kistl.Client.Presentables.TimeRecords
         #region The currently logging user
 
         /// <summary>The backing store for the <see cref="CurrentUser"/> property.</summary>
-        private DataObjectModel _currentUser;
+        private DataObjectViewModel _currentUser;
 
         /// <summary>Gets or sets the currently working user.</summary>
         /// TODO: This will have to change once there is ACL support
-        public DataObjectModel CurrentUser
+        public DataObjectViewModel CurrentUser
         {
             get
             {
@@ -71,16 +71,16 @@ namespace Kistl.Client.Presentables.TimeRecords
         #region List of Available Users
 
         /// <summary>The backing store for the <see cref="AvailableUsers"/> property.</summary>
-        private ReadOnlyCollection<DataObjectModel> _availableUsers;
+        private ReadOnlyCollection<DataObjectViewModel> _availableUsers;
 
         /// <summary>Gets a list of users that may record work efforts.</summary>
-        public ReadOnlyCollection<DataObjectModel> AvailableUsers
+        public ReadOnlyCollection<DataObjectViewModel> AvailableUsers
         {
             get
             {
                 if (_availableUsers == null)
                 {
-                    _availableUsers = new ReadOnlyCollection<DataObjectModel>(DataContext.GetQuery<Mitarbeiter>().Select(o => ModelFactory.CreateViewModel<DataObjectModel.Factory>(o).Invoke(DataContext, o)).ToList());
+                    _availableUsers = new ReadOnlyCollection<DataObjectViewModel>(DataContext.GetQuery<Mitarbeiter>().Select(o => ModelFactory.CreateViewModel<DataObjectViewModel.Factory>(o).Invoke(DataContext, o)).ToList());
                 }
                 return _availableUsers;
             }

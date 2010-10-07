@@ -26,7 +26,7 @@ namespace Kistl.Client.Presentables.KistlBase
 
     public interface IPostFilterExpression : IFilterExpression
     {
-        ReadOnlyObservableCollection<DataObjectModel> Execute(IEnumerable<DataObjectModel> instances);
+        ReadOnlyObservableCollection<DataObjectViewModel> Execute(IEnumerable<DataObjectViewModel> instances);
     }
 
     public interface IUIFilterExpression : IFilterExpression
@@ -287,10 +287,10 @@ namespace Kistl.Client.Presentables.KistlBase
 
         #region IPostFilterExpression Members
 
-        public ReadOnlyObservableCollection<DataObjectModel> Execute(IEnumerable<DataObjectModel> instances)
+        public ReadOnlyObservableCollection<DataObjectViewModel> Execute(IEnumerable<DataObjectViewModel> instances)
         {
-            return new ReadOnlyObservableCollection<DataObjectModel>(
-                    new ObservableCollection<DataObjectModel>(
+            return new ReadOnlyObservableCollection<DataObjectViewModel>(
+                    new ObservableCollection<DataObjectViewModel>(
                         instances.Where(
                             o => o.Name.ToLowerInvariant().Contains(Value.ToLowerInvariant())
                             || o.ID.ToString().Contains(Value))));
@@ -434,7 +434,7 @@ namespace Kistl.Client.Presentables.KistlBase
     }
 
     [ViewModelDescriptor("GUI", DefaultKind = "Kistl.App.GUI.SimpleDropdownFilterKind", Description = "Filter expression for ObjectReference Properties")]
-    public class ObjectReferencePropertyFilterExpressionViewModel : ReferencePropertyFilterExpressionViewModel<DataObjectModel>, IListTypeFilterViewModel
+    public class ObjectReferencePropertyFilterExpressionViewModel : ReferencePropertyFilterExpressionViewModel<DataObjectViewModel>, IListTypeFilterViewModel
     {
         public new delegate ObjectReferencePropertyFilterExpressionViewModel Factory(IKistlContext dataCtx, Property prop, FilterConfiguration filterCfg);
 
@@ -461,11 +461,11 @@ namespace Kistl.Client.Presentables.KistlBase
             }
             set
             {
-                base.Value = (DataObjectModel)value;
+                base.Value = (DataObjectViewModel)value;
             }
         }
 
-        private List<KeyValuePair<DataObjectModel, string>> _PossibleValues = null;
+        private List<KeyValuePair<DataObjectViewModel, string>> _PossibleValues = null;
 
         public IEnumerable PossibleValues
         {
@@ -473,15 +473,15 @@ namespace Kistl.Client.Presentables.KistlBase
             {
                 if (_PossibleValues == null)
                 {
-                    _PossibleValues = new List<KeyValuePair<DataObjectModel, string>>();
-                    _PossibleValues.Add(new KeyValuePair<DataObjectModel, string>());
+                    _PossibleValues = new List<KeyValuePair<DataObjectViewModel, string>>();
+                    _PossibleValues.Add(new KeyValuePair<DataObjectViewModel, string>());
                     foreach (var obj in DataContext
                         .GetQuery(DataContext.GetInterfaceType(Property.GetPropertyType()))
                         .ToList() // TODO: remove this
                         .OrderBy(obj => obj.ToString()).ToList())
                     {
-                        _PossibleValues.Add(new KeyValuePair<DataObjectModel, string>(
-                            ModelFactory.CreateViewModel<DataObjectModel.Factory>(obj).Invoke(DataContext, obj),
+                        _PossibleValues.Add(new KeyValuePair<DataObjectViewModel, string>(
+                            ModelFactory.CreateViewModel<DataObjectViewModel.Factory>(obj).Invoke(DataContext, obj),
                             obj.ToString())
                         );
                     }
