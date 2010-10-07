@@ -14,7 +14,7 @@ namespace Kistl.Client.Presentables
     using Kistl.Client.Models;
 
     [ViewModelDescriptor("GUI", DefaultKind = "Kistl.App.GUI.CompoundObjectPropertyKind", Description = "Viewmodel for editing a CompoundObject Property")]
-    public class CompoundObjectPropertyViewModel : ValueViewModel<CompoundObjectViewModel>, IValueViewModel<CompoundObjectViewModel>
+    public class CompoundObjectPropertyViewModel : ValueViewModel<CompoundObjectViewModel, ICompoundObject>, IValueViewModel<CompoundObjectViewModel>
     {
         public new delegate CompoundObjectPropertyViewModel Factory(IKistlContext dataCtx, IValueModel mdl);
 
@@ -60,6 +60,40 @@ namespace Kistl.Client.Presentables
         protected override void ParseValue(string str)
         {
             throw new NotSupportedException();
+        }
+
+        private bool _valueCacheInititalized = false;
+        private CompoundObjectViewModel _valueCache;
+
+        /// <summary>
+        /// Gets or sets the value of the property presented by this model
+        /// </summary>
+        public override CompoundObjectViewModel Value
+        {
+            get
+            {
+                if (!_valueCacheInititalized)
+                {
+                    UpdateValueCache();
+                }
+                return _valueCache;
+            }
+            set
+            {
+                _valueCache = value;
+                _valueCacheInititalized = true;
+                ValueModel.Value = value != null ? value.Object : null;
+            }
+        }
+
+        private void UpdateValueCache()
+        {
+            var obj = ValueModel.Value;
+            if (obj != null)
+            {
+                _valueCache = ModelFactory.CreateViewModel<CompoundObjectViewModel.Factory>().Invoke(DataContext, ValueModel.Value);
+            }
+            _valueCacheInititalized = true;
         }
     }
 }

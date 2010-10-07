@@ -19,24 +19,24 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
     /// <summary>
     /// </summary>
-    public abstract class BaseObjectCollectionViewModel<TValue>
-        : ValueViewModel<TValue>
+    public abstract class BaseObjectCollectionViewModel<TCollection, TModelCollection>
+        : ValueViewModel<TCollection, TModelCollection>
     {
-        public new delegate BaseObjectCollectionViewModel<TValue> Factory(IKistlContext dataCtx, IValueModel mdl);
+        public new delegate BaseObjectCollectionViewModel<TCollection, TModelCollection> Factory(IKistlContext dataCtx, IValueModel mdl);
 
         public BaseObjectCollectionViewModel(
             IViewModelDependencies appCtx, IKistlContext dataCtx,
-            IValueModel mdl)
-            : base(appCtx, dataCtx, mdl)
+            IObjectCollectionValueModel<TModelCollection> mdl)
+            : base(appCtx, dataCtx,     mdl)
         {
-            BaseObjectCollectionModel = (IObjectListValueModel)mdl;
+            ObjectCollectionModel = mdl;
 
-            if (BaseObjectCollectionModel.RelEnd != null)
+            if (ObjectCollectionModel.RelEnd != null)
             {
-                var rel = BaseObjectCollectionModel.RelEnd.Parent;
+                var rel = ObjectCollectionModel.RelEnd.Parent;
                 if (rel != null)
                 {
-                    var otherEnd = rel.GetOtherEnd(BaseObjectCollectionModel.RelEnd);
+                    var otherEnd = rel.GetOtherEnd(ObjectCollectionModel.RelEnd);
                     if (otherEnd != null && otherEnd.Multiplicity.UpperBound() > 1 && rel.Containment != ContainmentSpecification.Independent)
                     {
                         AllowAddExisting = false;
@@ -46,8 +46,8 @@ namespace Kistl.Client.Presentables.ValueViewModels
             }
         }
 
-        public IObjectListValueModel BaseObjectCollectionModel { get; private set; }
-        public ObjectClass ReferencedClass { get { return BaseObjectCollectionModel.ReferencedClass; } }
+        public IObjectCollectionValueModel<TModelCollection> ObjectCollectionModel { get; private set; }
+        public ObjectClass ReferencedClass { get { return ObjectCollectionModel.ReferencedClass; } }
 
         #region Public interface and IReadOnlyValueModel<IReadOnlyObservableCollection<DataObjectModel>> Members
         private GridDisplayConfiguration _displayedColumns = null;

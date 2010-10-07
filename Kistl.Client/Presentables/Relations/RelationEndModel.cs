@@ -27,11 +27,11 @@ namespace Kistl.Client.Presentables.Relations
 
         #region Public interface
 
-        public ValueViewModel<string> RoleName
+        public ValueViewModel<string, string> RoleName
         {
             get
             {
-                return (ValueViewModel<string>)this.PropertyModelsByName["RoleName"];
+                return (ValueViewModel<string, string>)this.PropertyModelsByName["RoleName"];
             }
         }
 
@@ -41,7 +41,7 @@ namespace Kistl.Client.Presentables.Relations
 
         public ObjectReferenceViewModel RelatedClass { get; private set; }
 
-        public ValueViewModel<bool> HasOrderPersisted { get; private set; }
+        public NullableStructValueViewModel<bool> HasOrderPersisted { get; private set; }
 
         #endregion
 

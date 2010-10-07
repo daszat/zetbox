@@ -136,9 +136,15 @@ namespace Kistl.API.Utils
             }
         }
 
-        public ReadOnlyObservableProjectedList(INotifyCollectionChanged notifier, Func<TInput, TOutput> select, Func<TOutput, TInput> inverter)
-            : base(MagicCollectionFactory.WrapAsList<TInput>(notifier), select, inverter)
+        public ReadOnlyObservableProjectedList(INotifyCollectionChanged notifyingCollection, Func<TInput, TOutput> select, Func<TOutput, TInput> inverter)
+            : this(notifyingCollection, notifyingCollection, select, inverter)
         {
+        }
+
+        public ReadOnlyObservableProjectedList(INotifyCollectionChanged notifier, object collection, Func<TInput, TOutput> select, Func<TOutput, TInput> inverter)
+            : base(MagicCollectionFactory.WrapAsList<TInput>(collection), select, inverter)
+        {
+            if(notifier == null) throw new ArgumentNullException("notifier");
             notifier.CollectionChanged += new NotifyCollectionChangedEventHandler(list_CollectionChanged);
             if (notifier is INotifyPropertyChanged)
             {

@@ -164,31 +164,21 @@ namespace Kistl.Client.Presentables.ValueViewModels
         #endregion
     }
 
-    public abstract class ValueViewModel<TValue> : BaseValueViewModel, IValueViewModel<TValue>
+    public abstract class ValueViewModel<TValue, TModel> : BaseValueViewModel, IValueViewModel<TValue>
     {
-        public new delegate ValueViewModel<TValue> Factory(IKistlContext dataCtx, IValueModel mdl);
+        public new delegate ValueViewModel<TValue, TModel> Factory(IKistlContext dataCtx, IValueModel mdl);
 
         public ValueViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, IValueModel mdl)
             : base(dependencies, dataCtx, mdl)
         {
-            this.ValueModel = (IValueModel<TValue>)mdl;
+            this.ValueModel = (IValueModel<TModel>)mdl;
         }
 
-        public new IValueModel<TValue> ValueModel { get; private set; }
+        public new IValueModel<TModel> ValueModel { get; private set; }
 
         #region IValueViewModel<TValue> Members
 
-        public virtual TValue Value
-        {
-            get
-            {
-                return ValueModel.Value;
-            }
-            set
-            {
-                ValueModel.Value = value;
-            }
-        }
+        public abstract TValue Value {get; set;}
 
         #endregion
 
@@ -203,7 +193,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
         }
     }
 
-    public class NullableStructValueViewModel<TValue> : ValueViewModel<Nullable<TValue>>
+    public class NullableStructValueViewModel<TValue> : ValueViewModel<Nullable<TValue>, Nullable<TValue>>
         where TValue : struct
     {
         public new delegate NullableStructValueViewModel<TValue> Factory(IKistlContext dataCtx, IValueModel mdl);
@@ -217,9 +207,21 @@ namespace Kistl.Client.Presentables.ValueViewModels
         {
             this.Value = String.IsNullOrEmpty(str) ? null : (Nullable<TValue>)System.Convert.ChangeType(str, typeof(TValue));
         }
+
+        public override TValue? Value
+        {
+            get
+            {
+                return ValueModel.Value;
+            }
+            set
+            {
+                ValueModel.Value = value;
+            }
+        }
     }
 
-    public class ClassValueViewModel<TValue> : ValueViewModel<TValue>
+    public class ClassValueViewModel<TValue> : ValueViewModel<TValue, TValue>
         where TValue : class
     {
         public new delegate ClassValueViewModel<TValue> Factory(IKistlContext dataCtx, IValueModel mdl);
@@ -232,6 +234,18 @@ namespace Kistl.Client.Presentables.ValueViewModels
         protected override void ParseValue(string str)
         {
             this.Value = String.IsNullOrEmpty(str) ? null : (TValue)System.Convert.ChangeType(str, typeof(TValue));
+        }
+
+        public override TValue Value
+        {
+            get
+            {
+                return (TValue)ValueModel.Value;
+            }
+            set
+            {
+                ValueModel.Value = value;
+            }
         }
     }
 

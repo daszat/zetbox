@@ -20,23 +20,20 @@ namespace Kistl.Client.Presentables.ValueViewModels
     /// <summary>
     /// </summary>
     public class ObjectListViewModel
-        : BaseObjectCollectionViewModel<IReadOnlyObservableList<DataObjectModel>>, IValueListViewModel<DataObjectModel, IReadOnlyObservableList<DataObjectModel>>
+        : BaseObjectCollectionViewModel<IReadOnlyObservableList<DataObjectModel>, IList<IDataObject>>, IValueListViewModel<DataObjectModel, IReadOnlyObservableList<DataObjectModel>>
     {
         public new delegate ObjectListViewModel Factory(IKistlContext dataCtx, IValueModel mdl);
 
-        public IObjectListValueModel ObjectListModel { get; private set; }
-
         public ObjectListViewModel(
             IViewModelDependencies appCtx, IKistlContext dataCtx,
-            IObjectListValueModel mdl)
+            IObjectCollectionValueModel<IList<IDataObject>> mdl)
             : base(appCtx, dataCtx, mdl)
         {
-            ObjectListModel = mdl;
         }
 
         #region Public interface and IReadOnlyValueModel<IReadOnlyObservableCollection<DataObjectModel>> Members
 
-        private IReadOnlyObservableList<DataObjectModel> _valueCache;
+        private ReadOnlyObservableProjectedList<IDataObject, DataObjectModel> _valueCache;
         public override IReadOnlyObservableList<DataObjectModel> Value
         {
             get
@@ -55,7 +52,10 @@ namespace Kistl.Client.Presentables.ValueViewModels
         {
             if (_valueCache == null)
             {
-                _valueCache = ObjectListModel.Value;
+                _valueCache = new ReadOnlyObservableProjectedList<IDataObject, DataObjectModel>(
+                    ObjectCollectionModel, ObjectCollectionModel.Value,
+                    obj => ModelFactory.CreateViewModel<DataObjectModel.Factory>(obj).Invoke(DataContext, obj),
+                    mdl => mdl.Object);
             }
         }
 
@@ -74,8 +74,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             if (item == null) { throw new ArgumentNullException("item"); }
 
             EnsureValueCache();
-            //Value.Add(item);
-            ObjectListModel.tmpAddItem(item);
+            ValueModel.Value.Add(item.Object);
 
             SelectedItem = item;
         }
@@ -86,7 +85,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             if (item == null) { throw new ArgumentNullException("item"); }
 
             EnsureValueCache();
-            Value.Remove(item);
+            ValueModel.Value.Remove(item.Object);
         }
 
         public override void DeleteItem(DataObjectModel item)
@@ -94,7 +93,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             if (item == null) { throw new ArgumentNullException("item"); }
 
             EnsureValueCache();
-            Value.Remove(item);
+            ValueModel.Value.Remove(item.Object);
             item.Delete();
         }
         #endregion
@@ -105,11 +104,11 @@ namespace Kistl.Client.Presentables.ValueViewModels
         {
             if (item == null) { return; }
 
-            var idx = Value.IndexOf(item);
+            var idx = ValueModel.Value.IndexOf(item.Object);
             if (idx > 0)
             {
-                Value.RemoveAt(idx);
-                Value.Insert(idx - 1, item);
+                ValueModel.Value.RemoveAt(idx);
+                ValueModel.Value.Insert(idx - 1, item.Object);
                 SelectedItem = item;
             }
         }
@@ -118,11 +117,11 @@ namespace Kistl.Client.Presentables.ValueViewModels
         {
             if (item == null) { return; }
 
-            var idx = Value.IndexOf(item);
+            var idx = ValueModel.Value.IndexOf(item.Object);
             if (idx != -1 && idx + 1 < Value.Count)
             {
-                Value.RemoveAt(idx);
-                Value.Insert(idx + 1, item);
+                ValueModel.Value.RemoveAt(idx);
+                ValueModel.Value.Insert(idx + 1, item.Object);
                 SelectedItem = item;
             }
         }

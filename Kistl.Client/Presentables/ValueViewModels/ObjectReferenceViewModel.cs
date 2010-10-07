@@ -13,9 +13,11 @@ namespace Kistl.Client.Presentables.ValueViewModels
     using Kistl.App.Extensions;
     using Kistl.Client.Presentables.ValueViewModels;
     using Kistl.Client.Models;
+    using Kistl.API.Utils;
+    using System.Collections.Specialized;
 
     public partial class ObjectReferenceViewModel
-        : ClassValueViewModel<DataObjectModel>
+        : ValueViewModel<DataObjectModel, IDataObject>
     {
         public new delegate ObjectReferenceViewModel Factory(IKistlContext dataCtx, IValueModel mdl);
 
@@ -253,5 +255,44 @@ namespace Kistl.Client.Presentables.ValueViewModels
         }
         #endregion
         #endregion
+
+        protected override void ParseValue(string str)
+        {
+            throw new NotImplementedException();
+        }
+
+        private bool _valueCacheInititalized = false;
+        private DataObjectModel _valueCache;
+
+        /// <summary>
+        /// Gets or sets the value of the property presented by this model
+        /// </summary>
+        public override DataObjectModel Value
+        {
+            get
+            {
+                if (!_valueCacheInititalized)
+                {
+                    UpdateValueCache();
+                }
+                return _valueCache;
+            }
+            set
+            {
+                _valueCache = value;
+                _valueCacheInititalized = true;
+                ValueModel.Value = value != null ? value.Object : null;
+            }
+        }
+
+        private void UpdateValueCache()
+        {
+            var obj = ValueModel.Value;
+            if (obj != null)
+            {
+                _valueCache = ModelFactory.CreateViewModel<DataObjectModel.Factory>().Invoke(DataContext, ValueModel.Value);
+            }
+            _valueCacheInititalized = true;
+        }
     }
 }

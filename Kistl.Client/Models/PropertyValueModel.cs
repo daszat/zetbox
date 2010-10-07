@@ -59,7 +59,15 @@ namespace Kistl.Client.Models
                 ObjectReferenceProperty objRefProp = (ObjectReferenceProperty)prop;
                 if (objRefProp.GetIsList())
                 {
-                    return new ObjectListValueModel(ctx, mdlFactory, obj, objRefProp);
+                    var sorted = objRefProp.RelationEnd.Parent.GetOtherEnd(objRefProp.RelationEnd).HasPersistentOrder;
+                    if (sorted)
+                    {
+                        return new ObjectListValueModel(ctx, mdlFactory, obj, objRefProp);
+                    }
+                    else
+                    {
+                        return new ObjectCollectionValueModel(ctx, mdlFactory, obj, objRefProp);
+                    }
                 }
                 else
                 {
@@ -388,7 +396,7 @@ namespace Kistl.Client.Models
     }
 
     public class ObjectReferenceValueModel
-        : ClassPropertyValueModel<DataObjectModel>, IObjectReferenceValueModel
+        : ClassPropertyValueModel<IDataObject>, IObjectReferenceValueModel
     {
         public new delegate ObjectReferenceValueModel Factory(INotifyingObject obj, Property prop);
 
@@ -406,12 +414,12 @@ namespace Kistl.Client.Models
 
         #region IValueModel<TValue> Members
         private bool _valueCacheInititalized = false;
-        private DataObjectModel _valueCache;
+        private IDataObject _valueCache;
 
         /// <summary>
         /// Gets or sets the value of the property presented by this model
         /// </summary>
-        public override DataObjectModel Value
+        public override IDataObject Value
         {
             get
             {
@@ -425,26 +433,15 @@ namespace Kistl.Client.Models
             {
                 _valueCache = value;
                 _valueCacheInititalized = true;
-                var storedObj = Object.GetPropertyValue<IDataObject>(Property.Name);
-                var obj = value != null ? value.Object : null;
-
-                if (!object.Equals(storedObj, obj))
-                {
-                    Object.SetPropertyValue<IDataObject>(Property.Name, obj);
-                    CheckConstraints();
-
-                    NotifyValueChanged();
-                }
+                Object.SetPropertyValue<IDataObject>(Property.Name, value);
+                CheckConstraints();
+                NotifyValueChanged();
             }
         }
 
         protected override void UpdateValueCache()
         {
-            var obj = Object.GetPropertyValue<IDataObject>(Property.Name);
-            if (obj != null)
-            {
-                _valueCache = mdlFactory.CreateViewModel<DataObjectModel.Factory>().Invoke(ctx, obj);
-            }
+            _valueCache = Object.GetPropertyValue<IDataObject>(Property.Name);
             _valueCacheInititalized = true;
         }
         #endregion
@@ -467,16 +464,16 @@ namespace Kistl.Client.Models
         #endregion
     }
 
-    public class ObjectListValueModel
-        : ClassPropertyValueModel<IReadOnlyObservableList<DataObjectModel>>, IObjectListValueModel
+    public class ObjectCollectionValueModel
+    : ClassPropertyValueModel<ICollection<IDataObject>>, IObjectCollectionValueModel<ICollection<IDataObject>>
     {
-        public new delegate ObjectListValueModel Factory(INotifyingObject obj, Property prop);
+        public new delegate ObjectCollectionValueModel Factory(INotifyingObject obj, Property prop);
 
         protected readonly IModelFactory mdlFactory;
         protected readonly IKistlContext ctx;
         protected readonly ObjectReferenceProperty objRefProp;
 
-        public ObjectListValueModel(IKistlContext ctx, IModelFactory mdlFactory, INotifyingObject obj, ObjectReferenceProperty prop)
+        public ObjectCollectionValueModel(IKistlContext ctx, IModelFactory mdlFactory, INotifyingObject obj, ObjectReferenceProperty prop)
             : base(obj, prop)
         {
             this.mdlFactory = mdlFactory;
@@ -486,12 +483,12 @@ namespace Kistl.Client.Models
 
         #region IValueModel<TValue> Members
         private bool _valueCacheInititalized = false;
-        private ReadOnlyObservableProjectedList<IDataObject, DataObjectModel> _valueCache;
+        private ICollection<IDataObject> _valueCache;
 
         /// <summary>
         /// Gets or sets the value of the property presented by this model
         /// </summary>
-        public override IReadOnlyObservableList<DataObjectModel> Value
+        public override ICollection<IDataObject> Value
         {
             get
             {
@@ -509,11 +506,118 @@ namespace Kistl.Client.Models
 
         protected override void UpdateValueCache()
         {
-            _valueCache = new ReadOnlyObservableProjectedList<IDataObject, DataObjectModel>(
-                Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name),
-                obj => mdlFactory.CreateViewModel<DataObjectModel.Factory>(obj).Invoke(ctx, obj),
-                mdl => mdl.Object);
+            var lst = Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name);
+            lst.CollectionChanged += new NotifyCollectionChangedEventHandler(lst_CollectionChanged);
+            _valueCache = MagicCollectionFactory.WrapAsCollection<IDataObject>(lst);
             _valueCacheInititalized = true;
+        }
+
+        void lst_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            NotifyCollectionChangedEventHandler temp = CollectionChanged;
+            if (temp != null)
+            {
+                temp(sender, e);
+            }
+        }
+        #endregion
+
+        #region IObjectReferenceValueModel Members
+
+        private ObjectClass _referencedClass = null;
+        public ObjectClass ReferencedClass
+        {
+            get
+            {
+                if (_referencedClass == null)
+                {
+                    _referencedClass = objRefProp.GetReferencedObjectClass();
+                }
+                return _referencedClass;
+            }
+        }
+
+        #endregion
+
+        #region IObjectListValueModel Members
+
+        private RelationEnd _relEnd = null;
+        public RelationEnd RelEnd
+        {
+            get
+            {
+                if (_relEnd == null)
+                {
+                    _relEnd = objRefProp.RelationEnd;
+                }
+                return _relEnd;
+            }
+        }
+
+        #endregion
+
+        #region INotifyCollectionChanged Members
+
+        public event NotifyCollectionChangedEventHandler CollectionChanged;
+
+        #endregion
+    }
+
+    public class ObjectListValueModel
+        : ClassPropertyValueModel<IList<IDataObject>>, IObjectCollectionValueModel<IList<IDataObject>>
+    {
+        public new delegate ObjectListValueModel Factory(INotifyingObject obj, Property prop);
+
+        protected readonly IModelFactory mdlFactory;
+        protected readonly IKistlContext ctx;
+        protected readonly ObjectReferenceProperty objRefProp;
+
+        public ObjectListValueModel(IKistlContext ctx, IModelFactory mdlFactory, INotifyingObject obj, ObjectReferenceProperty prop)
+            : base(obj, prop)
+        {
+            this.mdlFactory = mdlFactory;
+            this.ctx = ctx;
+            this.objRefProp = prop;
+        }
+
+        #region IValueModel<TValue> Members
+        private bool _valueCacheInititalized = false;
+        private IList<IDataObject> _valueCache;
+
+        /// <summary>
+        /// Gets or sets the value of the property presented by this model
+        /// </summary>
+        public override IList<IDataObject> Value
+        {
+            get
+            {
+                if (!_valueCacheInititalized)
+                {
+                    UpdateValueCache();
+                }
+                return _valueCache;
+            }
+            set
+            {
+                throw new NotSupportedException();
+            }
+        }
+
+        protected override void UpdateValueCache()
+        {
+            var lst = Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name);
+            lst.CollectionChanged += new NotifyCollectionChangedEventHandler(lst_CollectionChanged);
+            _valueCache = MagicCollectionFactory.WrapAsList<IDataObject>(lst);
+            _valueCacheInititalized = true;
+        }
+
+        void lst_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            NotifyCollectionChangedEventHandler temp = CollectionChanged;
+            if (temp != null)
+            {
+                temp(sender, e);
+            }
         }
         #endregion
 
@@ -559,6 +663,12 @@ namespace Kistl.Client.Models
             if (obj == null) return;
             Object.AddToCollection(Property.Name, obj.Object);
         }
+
+        #endregion
+
+        #region INotifyCollectionChanged Members
+
+        public event NotifyCollectionChangedEventHandler CollectionChanged;
 
         #endregion
     }

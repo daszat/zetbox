@@ -46,11 +46,11 @@ namespace Kistl.Client.Presentables.Relations
             }
         }
 
-        public ValueViewModel<string> Description
+        public ValueViewModel<string, string> Description
         {
             get
             {
-                return (ValueViewModel<string>)this.PropertyModelsByName["Description"];
+                return (ValueViewModel<string, string>)this.PropertyModelsByName["Description"];
             }
         }
 

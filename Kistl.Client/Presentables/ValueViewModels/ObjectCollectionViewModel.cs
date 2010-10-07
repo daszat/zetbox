@@ -20,29 +20,26 @@ namespace Kistl.Client.Presentables.ValueViewModels
     /// <summary>
     /// </summary>
     public class ObjectCollectionViewModel
-        : BaseObjectCollectionViewModel<IReadOnlyObservableList<DataObjectModel>>, IValueCollectionViewModel<DataObjectModel, IReadOnlyObservableList<DataObjectModel>>
+        : BaseObjectCollectionViewModel<IReadOnlyObservableList<DataObjectModel>, ICollection<IDataObject>>, IValueCollectionViewModel<DataObjectModel, IReadOnlyObservableList<DataObjectModel>>
     {
         public new delegate ObjectCollectionViewModel Factory(IKistlContext dataCtx, IValueModel mdl);
 
-        public IObjectListValueModel ObjectCollectionModel { get; private set; }
-
         public ObjectCollectionViewModel(
             IViewModelDependencies appCtx, IKistlContext dataCtx,
-            IValueModel mdl)
+            IObjectCollectionValueModel<ICollection<IDataObject>> mdl)
             : base(appCtx, dataCtx, mdl)
         {
-            ObjectCollectionModel = (IObjectListValueModel)mdl;
         }
 
         #region Public interface and IReadOnlyValueModel<IReadOnlyObservableCollection<DataObjectModel>> Members
 
-        // private ReadOnlyObservableProjectedList<IDataObject, DataObjectModel> _valueCache;
+        private ReadOnlyObservableProjectedList<IDataObject, DataObjectModel> _valueCache;
         public override IReadOnlyObservableList<DataObjectModel> Value
         {
             get
             {
                 EnsureValueCache();
-                return _wrapper;
+                return _valueCache;
             }
             set
             {
@@ -52,16 +49,16 @@ namespace Kistl.Client.Presentables.ValueViewModels
         }
 
         private SortedWrapper _wrapper = null;
-        private class SortedWrapper : INotifyCollectionChanged, IList<DataObjectModel>, IReadOnlyObservableList<DataObjectModel>
+        private class SortedWrapper : INotifyCollectionChanged, IList<DataObjectModel>
         {
             private List<DataObjectModel> _sortedList;
-            private ICollection<DataObjectModel> _collection;
+            private ICollection _collection;
             private INotifyCollectionChanged _notifier;
 
             private string _sortProp = "ID";
             private ListSortDirection _direction = ListSortDirection.Ascending;
 
-            public SortedWrapper(IReadOnlyObservableList<DataObjectModel> collection, INotifyCollectionChanged notifier)
+            public SortedWrapper(ICollection collection, INotifyCollectionChanged notifier)
             {
                 _collection = collection;
                 _notifier = notifier;
@@ -74,7 +71,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 _sortProp = p;
                 _direction = direction;
                 _sortedList = _collection.AsQueryable()
-                    .OrderBy(string.Format("it.Object.{0} {1}", _sortProp, _direction == ListSortDirection.Descending ? "desc" : string.Empty))
+                    .OrderBy(string.Format("{0} {1}", _sortProp, _direction == ListSortDirection.Descending ? "desc" : string.Empty))
                     .Cast<DataObjectModel>()
                     .ToList();
                 OnCollectionChanged();
@@ -193,11 +190,11 @@ namespace Kistl.Client.Presentables.ValueViewModels
         {
             if (_wrapper == null)
             {
-                _wrapper = new SortedWrapper(ObjectCollectionModel.Value, ObjectCollectionModel.Value);
-                //_valueCache = new ReadOnlyObservableList<DataObjectModel>(
-                //    _wrapper,
-                //    obj => ModelFactory.CreateViewModel<DataObjectModel.Factory>(obj).Invoke(DataContext, obj),
-                //    mdl => mdl.Object);
+                _wrapper = new SortedWrapper((ICollection)ValueModel.Value, ObjectCollectionModel);
+                _valueCache = new ReadOnlyObservableProjectedList<IDataObject, DataObjectModel>(
+                    _wrapper,
+                    obj => ModelFactory.CreateViewModel<DataObjectModel.Factory>(obj).Invoke(DataContext, obj),
+                    mdl => mdl.Object);
             }
         }
 
@@ -216,8 +213,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             if (item == null) { throw new ArgumentNullException("item"); }
 
             EnsureValueCache();
-            // Value.Add(item);
-            ObjectCollectionModel.tmpAddItem(item);
+            ValueModel.Value.Add(item.Object);
 
             SelectedItem = item;
         }
@@ -228,7 +224,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             if (item == null) { throw new ArgumentNullException("item"); }
 
             EnsureValueCache();
-            Value.Remove(item);
+            ValueModel.Value.Remove(item.Object);
         }
 
         public override void DeleteItem(DataObjectModel item)
@@ -236,7 +232,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             if (item == null) { throw new ArgumentNullException("item"); }
 
             EnsureValueCache();
-            Value.Remove(item);
+            ValueModel.Value.Remove(item.Object);
             item.Delete();
         }
         #endregion

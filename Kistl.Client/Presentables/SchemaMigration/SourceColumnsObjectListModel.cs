@@ -17,7 +17,7 @@ namespace Kistl.Client.Presentables.SchemaMigration
 
         public SourceColumnsObjectListModel(
             IViewModelDependencies appCtx, IKistlContext dataCtx,
-            IValueModel mdl)
+            IObjectCollectionValueModel<ICollection<IDataObject>> mdl)
             : base(appCtx, dataCtx, mdl)
         {
 

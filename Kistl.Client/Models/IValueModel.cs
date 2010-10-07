@@ -55,16 +55,15 @@ namespace Kistl.Client.Models
         DateTimeStyles DateTimeStyle { get; }
     }
 
-    public interface IObjectReferenceValueModel : IValueModel<DataObjectModel>
+    public interface IObjectReferenceValueModel : IValueModel<IDataObject>
     {
         ObjectClass ReferencedClass { get; }
     }
 
-    public interface IObjectListValueModel : IValueModel<IReadOnlyObservableList<DataObjectModel>>
+
+    public interface IObjectCollectionValueModel<TCollection> : IValueModel<TCollection>, INotifyCollectionChanged
     {
         ObjectClass ReferencedClass { get; }
         RelationEnd RelEnd { get; }
-
-        void tmpAddItem(DataObjectModel obj);
     }
 }
