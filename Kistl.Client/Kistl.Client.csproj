@@ -104,7 +104,6 @@
     <Compile Include="Presentables\GUI\NavigationScreenViewModel.cs" />
     <Compile Include="Presentables\KistlBase\InstanceListViewModel.FilterTarget.cs" />
     <Compile Include="Presentables\MethodInvokerViewModel.cs" />
-    <Compile Include="Presentables\ObjectCollectionModel.cs" />
     <Compile Include="Presentables\DataObjectModel.cs" />
     <Compile Include="Presentables\DataTypeModel.cs" />
     <Compile Include="Presentables\DescribedMethodViewModel.cs" />
@@ -129,7 +128,6 @@
     <Compile Include="Presentables\KistlBase\TypeRefPropertyModel.cs" />
     <Compile Include="Presentables\KistlDebuggerAsModel.cs" />
     <Compile Include="Presentables\LauncherModel.cs" />
-    <Compile Include="Presentables\ListPropertyModels.cs" />
     <Compile Include="Presentables\MethodInvocationModel.cs" />
     <Compile Include="Presentables\MethodResultModels.cs" />
     <Compile Include="Presentables\ModelFactory.cs" />
@@ -138,9 +136,6 @@
     <Compile Include="Presentables\ObjectBrowser\ModuleViewModel.cs" />
     <Compile Include="Presentables\ObjectBrowser\WorkspaceViewModel.cs" />
     <Compile Include="Presentables\ObjectClassModel.cs" />
-    <Compile Include="Presentables\ObjectListModel.cs" />
-    <Compile Include="Presentables\ObjectReferenceModel.Commands.cs" />
-    <Compile Include="Presentables\ObjectReferenceModel.cs" />
     <Compile Include="Presentables\SchemaMigration\SourceColumnsObjectListModel.cs" />
     <Compile Include="Presentables\ValueViewModels\BaseObjectCollectionModel.cs" />
     <Compile Include="Presentables\ValueViewModels\ObjectListViewModel.cs" />
@@ -156,7 +151,6 @@
     <Compile Include="Presentables\TimeRecords\Dashboard.cs" />
     <Compile Include="Presentables\TimeRecords\PresenceRecordModel.cs" />
     <Compile Include="Presentables\TimeRecords\WorkEffortRecorderModel.Commands.cs" />
-    <Compile Include="Presentables\ValuePropertyModels.cs" />
     <Compile Include="Presentables\ObjectEditor\WorkspaceViewModel.cs" />
     <Compile Include="Presentables\TimeRecords\WorkEffortModel.cs" />
     <Compile Include="Presentables\TimeRecords\WorkEffortRecorderModel.cs" />
@@ -184,7 +178,6 @@
     </EmbeddedResource>
     <None Include="Kistl.snk" />
     <None Include="PresentableModelsDiagram.cd" />
-    <None Include="Presentables\ValuePropertyModels.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

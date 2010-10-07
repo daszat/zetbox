@@ -4,17 +4,16 @@ namespace Kistl.Client.Presentables.ValueViewModels
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Collections.Specialized;
     using System.Diagnostics;
     using System.Linq;
     using System.Text;
-
     using Kistl.API;
+    using Kistl.API.Utils;
     using Kistl.App.Base;
     using Kistl.App.Extensions;
-    using Kistl.Client.Presentables.ValueViewModels;
     using Kistl.Client.Models;
-    using Kistl.API.Utils;
-    using System.Collections.Specialized;
+    using Kistl.Client.Presentables.ValueViewModels;
 
     public partial class ObjectReferenceViewModel
         : ValueViewModel<DataObjectModel, IDataObject>

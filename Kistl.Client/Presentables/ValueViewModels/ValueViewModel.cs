@@ -1,15 +1,16 @@
+
 namespace Kistl.Client.Presentables.ValueViewModels
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.ComponentModel;
     using System.Linq;
     using System.Text;
     using Kistl.API;
-    using Kistl.Client.Models;
-    using System.ComponentModel;
-    using System.Collections.ObjectModel;
-    using Kistl.Client.Presentables.GUI;
     using Kistl.App.Base;
+    using Kistl.Client.Models;
+    using Kistl.Client.Presentables.GUI;
 
     public abstract class BaseValueViewModel : ViewModel, IValueViewModel, IFormattedValueViewModel, IDataErrorInfo, ILabeledViewModel
     {

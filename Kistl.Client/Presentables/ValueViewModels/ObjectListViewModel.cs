@@ -48,7 +48,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
         }
 
-        private void EnsureValueCache()
+        protected override void EnsureValueCache()
         {
             if (_valueCache == null)
             {
@@ -66,37 +66,6 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 return true;
             }
         }
-
-        #region Commands
-
-        public override void AddItem(DataObjectModel item)
-        {
-            if (item == null) { throw new ArgumentNullException("item"); }
-
-            EnsureValueCache();
-            ValueModel.Value.Add(item.Object);
-
-            SelectedItem = item;
-        }
-
-
-        public override void RemoveItem(DataObjectModel item)
-        {
-            if (item == null) { throw new ArgumentNullException("item"); }
-
-            EnsureValueCache();
-            ValueModel.Value.Remove(item.Object);
-        }
-
-        public override void DeleteItem(DataObjectModel item)
-        {
-            if (item == null) { throw new ArgumentNullException("item"); }
-
-            EnsureValueCache();
-            ValueModel.Value.Remove(item.Object);
-            item.Delete();
-        }
-        #endregion
 
         #endregion
 

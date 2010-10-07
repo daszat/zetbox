@@ -1,11 +1,12 @@
+
 namespace Kistl.Client.Presentables.ValueViewModels
 {
     using System;
     using System.Collections.Generic;
     using System.Collections.Specialized;
+    using System.ComponentModel;
     using System.Linq;
     using System.Text;
-    using System.ComponentModel;
     using Kistl.API.Utils;
     
     public interface IValueViewModel : INotifyPropertyChanged

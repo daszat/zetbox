@@ -186,7 +186,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             #endregion
         }
 
-        private void EnsureValueCache()
+        protected override void EnsureValueCache()
         {
             if (_wrapper == null)
             {
@@ -206,42 +206,12 @@ namespace Kistl.Client.Presentables.ValueViewModels
             }
         }
 
-        #region Commands
-
-        public override void AddItem(DataObjectModel item)
-        {
-            if (item == null) { throw new ArgumentNullException("item"); }
-
-            EnsureValueCache();
-            ValueModel.Value.Add(item.Object);
-
-            SelectedItem = item;
-        }
-
-
-        public override void RemoveItem(DataObjectModel item)
-        {
-            if (item == null) { throw new ArgumentNullException("item"); }
-
-            EnsureValueCache();
-            ValueModel.Value.Remove(item.Object);
-        }
-
-        public override void DeleteItem(DataObjectModel item)
-        {
-            if (item == null) { throw new ArgumentNullException("item"); }
-
-            EnsureValueCache();
-            ValueModel.Value.Remove(item.Object);
-            item.Delete();
-        }
-        #endregion
-
         #endregion
 
         public void Sort(string propName, ListSortDirection direction)
         {
-            if (string.IsNullOrEmpty(propName)) throw new ArgumentNullException("propName");
+            if (string.IsNullOrEmpty(propName))
+                throw new ArgumentNullException("propName");
             EnsureValueCache();
             _wrapper.Sort(propName, direction);
         }

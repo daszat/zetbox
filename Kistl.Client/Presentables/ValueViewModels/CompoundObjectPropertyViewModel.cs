@@ -1,4 +1,5 @@
-namespace Kistl.Client.Presentables
+
+namespace Kistl.Client.Presentables.ValueViewModels
 {
     using System;
     using System.Collections.Generic;
@@ -6,12 +7,11 @@ namespace Kistl.Client.Presentables
     using System.Diagnostics;
     using System.Linq;
     using System.Text;
-
     using Kistl.API;
     using Kistl.App.Base;
     using Kistl.App.Extensions;
-    using Kistl.Client.Presentables.ValueViewModels;
     using Kistl.Client.Models;
+    using Kistl.Client.Presentables.ValueViewModels;
 
     [ViewModelDescriptor("GUI", DefaultKind = "Kistl.App.GUI.CompoundObjectPropertyKind", Description = "Viewmodel for editing a CompoundObject Property")]
     public class CompoundObjectPropertyViewModel : ValueViewModel<CompoundObjectViewModel, ICompoundObject>, IValueViewModel<CompoundObjectViewModel>

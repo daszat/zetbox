@@ -21,6 +21,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
     /// </summary>
     public abstract class BaseObjectCollectionViewModel<TCollection, TModelCollection>
         : ValueViewModel<TCollection, TModelCollection>
+        where TModelCollection : ICollection<IDataObject>
     {
         public new delegate BaseObjectCollectionViewModel<TCollection, TModelCollection> Factory(IKistlContext dataCtx, IValueModel mdl);
 
@@ -281,8 +282,15 @@ namespace Kistl.Client.Presentables.ValueViewModels
             }
         }
 
+        public virtual void AddItem(DataObjectModel item)
+        {
+            if (item == null) { throw new ArgumentNullException("item"); }
 
-        public abstract void AddItem(DataObjectModel item);
+            EnsureValueCache();
+            ValueModel.Value.Add(item.Object);
+
+            SelectedItem = item;
+        }
 
         /// <summary>
         /// Adds an existing item into this ObjectList. Asks the User which should be added.
@@ -306,9 +314,22 @@ namespace Kistl.Client.Presentables.ValueViewModels
                     null), true);
         }
 
-        public abstract void RemoveItem(DataObjectModel item);
+        public virtual void RemoveItem(DataObjectModel item)
+        {
+            if (item == null) { throw new ArgumentNullException("item"); }
 
-        public abstract void DeleteItem(DataObjectModel item);
+            EnsureValueCache();
+            ValueModel.Value.Remove(item.Object);
+        }
+
+        public virtual void DeleteItem(DataObjectModel item)
+        {
+            if (item == null) { throw new ArgumentNullException("item"); }
+
+            EnsureValueCache();
+            ValueModel.Value.Remove(item.Object);
+            item.Delete();
+        }
 
         public void ActivateItem(DataObjectModel item, bool activate)
         {
@@ -316,11 +337,14 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
             ModelFactory.ShowModel(item, activate);
         }
+
         #endregion
 
         #endregion
 
         #region Utilities and UI callbacks
+
+        protected abstract void EnsureValueCache();
 
         private void CollectChildClasses(int id, List<ObjectClass> children)
         {
