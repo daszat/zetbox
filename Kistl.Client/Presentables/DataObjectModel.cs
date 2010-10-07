@@ -86,7 +86,7 @@ namespace Kistl.Client.Presentables
                 FetchPropertyList();
                 _propertyModels = new LookupDictionary<Property, Property, BaseValueViewModel>(_propertyList, k => k, v =>
                 {
-                    var result = ModelFactory.CreateViewModel<BaseValueViewModel.Factory>(v).Invoke(DataContext, v.GetValueModel(Object, DataContext, ModelFactory));
+                    var result = ModelFactory.CreateViewModel<BaseValueViewModel.Factory>(v).Invoke(DataContext, v.GetValueModel(Object));
                     result.IsReadOnly = IsReadOnly;
                     return result;
                 });

@@ -17,10 +17,12 @@ namespace Kistl.Client.Models
 
     public static class PropertyExtensionsThisShouldBeMovedToAZBoxMethod
     {
-        public static IValueModel GetValueModel(this Property prop, INotifyingObject obj, IKistlContext ctx, IModelFactory mdlFactory)
+        public static IValueModel GetValueModel(this Property prop, INotifyingObject obj)
         {
-            if (prop == null) throw new ArgumentNullException("prop");
-            if (obj == null) throw new ArgumentNullException("obj");
+            if (prop == null)
+                throw new ArgumentNullException("prop");
+            if (obj == null)
+                throw new ArgumentNullException("obj");
 
             if (prop is IntProperty)
             {
@@ -62,16 +64,16 @@ namespace Kistl.Client.Models
                     var sorted = objRefProp.RelationEnd.Parent.GetOtherEnd(objRefProp.RelationEnd).HasPersistentOrder;
                     if (sorted)
                     {
-                        return new ObjectListValueModel(ctx, mdlFactory, obj, objRefProp);
+                        return new ObjectListValueModel(obj, objRefProp);
                     }
                     else
                     {
-                        return new ObjectCollectionValueModel(ctx, mdlFactory, obj, objRefProp);
+                        return new ObjectCollectionValueModel(obj, objRefProp);
                     }
                 }
                 else
                 {
-                    return new ObjectReferenceValueModel(ctx, mdlFactory, obj, objRefProp);
+                    return new ObjectReferenceValueModel(obj, objRefProp);
                 }
             }
             else
@@ -91,8 +93,10 @@ namespace Kistl.Client.Models
 
         public BasePropertyValueModel(INotifyingObject obj, Property prop)
         {
-            if (obj == null) throw new ArgumentNullException("obj");
-            if (prop == null) throw new ArgumentNullException("prop");
+            if (obj == null)
+                throw new ArgumentNullException("obj");
+            if (prop == null)
+                throw new ArgumentNullException("prop");
 
             this.Property = prop;
             this.Object = obj;
@@ -313,8 +317,10 @@ namespace Kistl.Client.Models
         #region Value Handling
         public override void ClearValue()
         {
-            if (this.AllowNullInput) this.Value = null;
-            else throw new InvalidOperationException();
+            if (this.AllowNullInput)
+                this.Value = null;
+            else
+                throw new InvalidOperationException();
         }
 
         /// <summary>
@@ -389,8 +395,10 @@ namespace Kistl.Client.Models
         #region Value Handling
         public override void ClearValue()
         {
-            if (this.AllowNullInput) this.Value = null;
-            else throw new InvalidOperationException();
+            if (this.AllowNullInput)
+                this.Value = null;
+            else
+                throw new InvalidOperationException();
         }
         #endregion
     }
@@ -398,17 +406,11 @@ namespace Kistl.Client.Models
     public class ObjectReferenceValueModel
         : ClassPropertyValueModel<IDataObject>, IObjectReferenceValueModel
     {
-        public new delegate ObjectReferenceValueModel Factory(INotifyingObject obj, Property prop);
-
-        protected readonly IModelFactory mdlFactory;
-        protected readonly IKistlContext ctx;
         protected readonly ObjectReferenceProperty objRefProp;
 
-        public ObjectReferenceValueModel(IKistlContext ctx, IModelFactory mdlFactory, INotifyingObject obj, ObjectReferenceProperty prop)
+        public ObjectReferenceValueModel(INotifyingObject obj, ObjectReferenceProperty prop)
             : base(obj, prop)
         {
-            this.mdlFactory = mdlFactory;
-            this.ctx = ctx;
             this.objRefProp = prop;
         }
 
@@ -464,39 +466,35 @@ namespace Kistl.Client.Models
         #endregion
     }
 
-    public class ObjectCollectionValueModel
-    : ClassPropertyValueModel<ICollection<IDataObject>>, IObjectCollectionValueModel<ICollection<IDataObject>>
+    public abstract class BaseObjectCollectionValueModel<TCollection>
+        : ClassPropertyValueModel<TCollection>, IObjectCollectionValueModel<TCollection>
+        where TCollection : class
     {
-        public new delegate ObjectCollectionValueModel Factory(INotifyingObject obj, Property prop);
-
-        protected readonly IModelFactory mdlFactory;
-        protected readonly IKistlContext ctx;
         protected readonly ObjectReferenceProperty objRefProp;
 
-        public ObjectCollectionValueModel(IKistlContext ctx, IModelFactory mdlFactory, INotifyingObject obj, ObjectReferenceProperty prop)
+        public BaseObjectCollectionValueModel(INotifyingObject obj, ObjectReferenceProperty prop)
             : base(obj, prop)
         {
-            this.mdlFactory = mdlFactory;
-            this.ctx = ctx;
             this.objRefProp = prop;
         }
 
         #region IValueModel<TValue> Members
-        private bool _valueCacheInititalized = false;
-        private ICollection<IDataObject> _valueCache;
+
+        protected bool valueCacheInititalized = false;
+        protected TCollection valueCache;
 
         /// <summary>
         /// Gets or sets the value of the property presented by this model
         /// </summary>
-        public override ICollection<IDataObject> Value
+        public override TCollection Value
         {
             get
             {
-                if (!_valueCacheInititalized)
+                if (!valueCacheInititalized)
                 {
                     UpdateValueCache();
                 }
-                return _valueCache;
+                return valueCache;
             }
             set
             {
@@ -504,15 +502,7 @@ namespace Kistl.Client.Models
             }
         }
 
-        protected override void UpdateValueCache()
-        {
-            var lst = Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name);
-            lst.CollectionChanged += new NotifyCollectionChangedEventHandler(lst_CollectionChanged);
-            _valueCache = MagicCollectionFactory.WrapAsCollection<IDataObject>(lst);
-            _valueCacheInititalized = true;
-        }
-
-        void lst_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        protected void ValueCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             NotifyCollectionChangedEventHandler temp = CollectionChanged;
             if (temp != null)
@@ -520,9 +510,10 @@ namespace Kistl.Client.Models
                 temp(sender, e);
             }
         }
+
         #endregion
 
-        #region IObjectReferenceValueModel Members
+        #region IObjectCollectionValueModel<ICollection<IDataObject>> Members
 
         private ObjectClass _referencedClass = null;
         public ObjectClass ReferencedClass
@@ -536,10 +527,6 @@ namespace Kistl.Client.Models
                 return _referencedClass;
             }
         }
-
-        #endregion
-
-        #region IObjectListValueModel Members
 
         private RelationEnd _relEnd = null;
         public RelationEnd RelEnd
@@ -563,114 +550,38 @@ namespace Kistl.Client.Models
         #endregion
     }
 
-    public class ObjectListValueModel
-        : ClassPropertyValueModel<IList<IDataObject>>, IObjectCollectionValueModel<IList<IDataObject>>
+    public class ObjectCollectionValueModel
+        : BaseObjectCollectionValueModel<ICollection<IDataObject>>
     {
-        public new delegate ObjectListValueModel Factory(INotifyingObject obj, Property prop);
-
-        protected readonly IModelFactory mdlFactory;
-        protected readonly IKistlContext ctx;
-        protected readonly ObjectReferenceProperty objRefProp;
-
-        public ObjectListValueModel(IKistlContext ctx, IModelFactory mdlFactory, INotifyingObject obj, ObjectReferenceProperty prop)
+        public ObjectCollectionValueModel(INotifyingObject obj, ObjectReferenceProperty prop)
             : base(obj, prop)
         {
-            this.mdlFactory = mdlFactory;
-            this.ctx = ctx;
-            this.objRefProp = prop;
-        }
-
-        #region IValueModel<TValue> Members
-        private bool _valueCacheInititalized = false;
-        private IList<IDataObject> _valueCache;
-
-        /// <summary>
-        /// Gets or sets the value of the property presented by this model
-        /// </summary>
-        public override IList<IDataObject> Value
-        {
-            get
-            {
-                if (!_valueCacheInititalized)
-                {
-                    UpdateValueCache();
-                }
-                return _valueCache;
-            }
-            set
-            {
-                throw new NotSupportedException();
-            }
         }
 
         protected override void UpdateValueCache()
         {
             var lst = Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name);
-            lst.CollectionChanged += new NotifyCollectionChangedEventHandler(lst_CollectionChanged);
-            _valueCache = MagicCollectionFactory.WrapAsList<IDataObject>(lst);
-            _valueCacheInititalized = true;
+            lst.CollectionChanged += ValueCollectionChanged;
+            valueCache = MagicCollectionFactory.WrapAsCollection<IDataObject>(lst);
+            valueCacheInititalized = true;
         }
+    }
 
-        void lst_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+    public class ObjectListValueModel
+        : BaseObjectCollectionValueModel<IList<IDataObject>>
+    {
+        public ObjectListValueModel(INotifyingObject obj, ObjectReferenceProperty prop)
+            : base(obj, prop)
         {
-            NotifyCollectionChangedEventHandler temp = CollectionChanged;
-            if (temp != null)
-            {
-                temp(sender, e);
-            }
         }
-        #endregion
 
-        #region IObjectReferenceValueModel Members
-
-        private ObjectClass _referencedClass = null;
-        public ObjectClass ReferencedClass
+        protected override void UpdateValueCache()
         {
-            get
-            {
-                if (_referencedClass == null)
-                {
-                    _referencedClass = objRefProp.GetReferencedObjectClass();
-                }
-                return _referencedClass;
-            }
+            var lst = Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name);
+            lst.CollectionChanged += ValueCollectionChanged;
+            valueCache = MagicCollectionFactory.WrapAsList<IDataObject>(lst);
+            valueCacheInititalized = true;
         }
-
-        #endregion
-
-        #region IObjectListValueModel Members
-
-        private RelationEnd _relEnd = null;
-        public RelationEnd RelEnd
-        {
-            get
-            {
-                if (_relEnd == null)
-                {
-                    _relEnd = objRefProp.RelationEnd;
-                }
-                return _relEnd;
-            }
-        }
-
-        #endregion
-
-        #region IObjectListValueModel Members
-
-
-        public void tmpAddItem(DataObjectModel obj)
-        {
-            if (obj == null) return;
-            Object.AddToCollection(Property.Name, obj.Object);
-        }
-
-        #endregion
-
-        #region INotifyCollectionChanged Members
-
-        public event NotifyCollectionChangedEventHandler CollectionChanged;
-
-        #endregion
     }
 
     public class EnumerationPropertyValueModel : NullableStructPropertyValueModel<int>, IEnumerationValueModel
