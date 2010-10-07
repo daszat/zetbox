@@ -1,18 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Reflection;
-using System.Text;
 
-using Kistl.API;
-using Kistl.App.Base;
-using Kistl.App.Extensions;
-using Kistl.API.Configuration;
-using Kistl.API.Utils;
-
-namespace Kistl.Client.Presentables
+namespace Kistl.Client.Presentables.KistlBase
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Linq;
+    using System.Reflection;
+    using System.Text;
+    using Kistl.API;
+    using Kistl.API.Configuration;
+    using Kistl.API.Utils;
+    using Kistl.App.Base;
+    using Kistl.App.Extensions;
+
     public class MethodInvokerViewModel
         : ViewModel
     {

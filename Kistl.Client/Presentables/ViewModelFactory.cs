@@ -19,7 +19,7 @@ namespace Kistl.Client.Presentables
     /// Abstract base class to provide basic functionality of all model factories. Toolkit-specific implementations of this class will be 
     /// used by the rendering infrastructure to create ViewModels and Views.
     /// </summary>
-    public abstract class ModelFactory : Kistl.Client.Presentables.IModelFactory
+    public abstract class ViewModelFactory : Kistl.Client.Presentables.IViewModelFactory
     {
         /// <summary>
         /// Gets the Toolkit of the implementation. A constant.
@@ -29,7 +29,7 @@ namespace Kistl.Client.Presentables
         protected readonly Autofac.ILifetimeScope Container;
         protected readonly IFrozenContext FrozenContext;
 
-        protected ModelFactory(Autofac.ILifetimeScope container, IFrozenContext frozenCtx)
+        protected ViewModelFactory(Autofac.ILifetimeScope container, IFrozenContext frozenCtx)
         {
             if (container == null) throw new ArgumentNullException("container");
             if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
@@ -110,8 +110,8 @@ namespace Kistl.Client.Presentables
                     .Select(p => Expression.Parameter(p.ParameterType, p.Name)).ToArray();
 
                 // create cast expressions. Sometimes a UpCast is needed. 
-                // TModelFactory == DataTypeModel
-                // typeof(factory) == ObjectClassModel
+                // TModelFactory == DataTypeViewModel
+                // typeof(factory) == ObjectClassViewModel
                 // TODO: check that the parameter types can match at all
                 //       this is necessary to create proper errors when Factory delegates
                 //       are out of sync

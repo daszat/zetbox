@@ -15,15 +15,15 @@ namespace Kistl.Client.Presentables
     /// <summary>
     /// Models a group of Property(Models)
     /// </summary>
-    public abstract class PropertyGroupModel
+    public abstract class PropertyGroupViewModel
         : ViewModel, IDataErrorInfo
     {
-        public new delegate PropertyGroupModel Factory(IKistlContext dataCtx, string title, IEnumerable<ViewModel> obj);
+        public new delegate PropertyGroupViewModel Factory(IKistlContext dataCtx, string title, IEnumerable<ViewModel> obj);
 
         private string _title;
         protected ObservableCollection<ViewModel> properties;
 
-        public PropertyGroupModel(
+        public PropertyGroupViewModel(
             IViewModelDependencies appCtx, IKistlContext dataCtx,
             string title,
             IEnumerable<ViewModel> obj)
@@ -116,11 +116,11 @@ namespace Kistl.Client.Presentables
         #endregion
     }
 
-    public class SinglePropertyGroupModel : PropertyGroupModel
+    public class SinglePropertyGroupViewModel : PropertyGroupViewModel
     {
-        public new delegate SinglePropertyGroupModel Factory(IKistlContext dataCtx, string title, IEnumerable<ViewModel> obj);
+        public new delegate SinglePropertyGroupViewModel Factory(IKistlContext dataCtx, string title, IEnumerable<ViewModel> obj);
         
-        public SinglePropertyGroupModel(
+        public SinglePropertyGroupViewModel(
             IViewModelDependencies appCtx, IKistlContext dataCtx,
             string title,
             IEnumerable<ViewModel> obj)
@@ -138,11 +138,11 @@ namespace Kistl.Client.Presentables
 
     }
 
-    public class MultiplePropertyGroupModel : PropertyGroupModel
+    public class MultiplePropertyGroupViewModel : PropertyGroupViewModel
     {
-        public new delegate MultiplePropertyGroupModel Factory(IKistlContext dataCtx, string title, IEnumerable<ViewModel> obj);
+        public new delegate MultiplePropertyGroupViewModel Factory(IKistlContext dataCtx, string title, IEnumerable<ViewModel> obj);
         
-        public MultiplePropertyGroupModel(
+        public MultiplePropertyGroupViewModel(
             IViewModelDependencies appCtx, IKistlContext dataCtx,
             string title,
             IEnumerable<ViewModel> obj)
