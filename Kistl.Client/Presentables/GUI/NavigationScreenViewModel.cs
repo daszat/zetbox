@@ -17,7 +17,7 @@ namespace Kistl.Client.Presentables.GUI
     {
         public new delegate NavigationScreenViewModel Factory(IKistlContext dataCtx, NavigationScreenViewModel parent, NavigationScreen screen);
 
-        public static NavigationScreenViewModel Create(IModelFactory ModelFactory, IKistlContext dataCtx, NavigationScreenViewModel parent, NavigationScreen screen)
+        public static NavigationScreenViewModel Create(IViewModelFactory ModelFactory, IKistlContext dataCtx, NavigationScreenViewModel parent, NavigationScreen screen)
         {
             if (ModelFactory == null) throw new ArgumentNullException("ModelFactory");
             if (screen == null) throw new ArgumentNullException("screen");
@@ -38,8 +38,8 @@ namespace Kistl.Client.Presentables.GUI
         private readonly ObservableCollection<NavigationScreenViewModel> _children = new ObservableCollection<NavigationScreenViewModel>();
         private readonly ReadOnlyObservableCollection<NavigationScreenViewModel> _childrenRO;
 
-        private readonly ObservableCollection<CommandModel> _additionalCommands = new ObservableCollection<CommandModel>();
-        private readonly ReadOnlyObservableCollection<CommandModel> _additionalCommandsRO;
+        private readonly ObservableCollection<CommandViewModel> _additionalCommands = new ObservableCollection<CommandViewModel>();
+        private readonly ReadOnlyObservableCollection<CommandViewModel> _additionalCommandsRO;
         
         private NavigatorViewModel _displayer = null;
 
@@ -54,10 +54,10 @@ namespace Kistl.Client.Presentables.GUI
             _screen = screen;
             foreach (var s in _screen.Children)
             {
-                _children.Add(NavigationScreenViewModel.Create(ModelFactory, DataContext, this, s));
+                _children.Add(NavigationScreenViewModel.Create(ViewModelFactory, DataContext, this, s));
             }
             _childrenRO = new ReadOnlyObservableCollection<NavigationScreenViewModel>(_children);
-            _additionalCommandsRO = new ReadOnlyObservableCollection<CommandModel>(_additionalCommands);
+            _additionalCommandsRO = new ReadOnlyObservableCollection<CommandViewModel>(_additionalCommands);
         }
 
         public override string Name
@@ -100,12 +100,12 @@ namespace Kistl.Client.Presentables.GUI
             }
         }
 
-        protected ObservableCollection<CommandModel> AdditionalCommandsRW
+        protected ObservableCollection<CommandViewModel> AdditionalCommandsRW
         {
             get { return _additionalCommands; }
         }
 
-        public ReadOnlyObservableCollection<CommandModel> AdditionalCommands
+        public ReadOnlyObservableCollection<CommandViewModel> AdditionalCommands
         {
             get { return _additionalCommandsRO; }
         }

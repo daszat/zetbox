@@ -22,18 +22,18 @@ namespace Kistl.Client.WPF.View.GUI
     /// Interaction logic for SelectionDialog.xaml
     /// </summary>
     [ViewDescriptor("GUI", Kistl.App.GUI.Toolkit.WPF, Kind = "Kistl.App.GUI.MultiLineEditorDialog")]
-    public partial class MultiLineEditorDialog : WindowView, IHasViewModel<MultiLineEditorDialogModel>
+    public partial class MultiLineEditorDialog : WindowView, IHasViewModel<MultiLineEditorDialogViewModel>
     {
         public MultiLineEditorDialog()
         {
             InitializeComponent();
         }
 
-        #region IHasViewModel<MultiLineEditorDialogModel> Members
+        #region IHasViewModel<MultiLineEditorDialogViewModel> Members
 
-        public MultiLineEditorDialogModel ViewModel
+        public MultiLineEditorDialogViewModel ViewModel
         {
-            get { return (MultiLineEditorDialogModel)DataContext; }
+            get { return (MultiLineEditorDialogViewModel)DataContext; }
         }
 
         #endregion

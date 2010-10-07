@@ -33,7 +33,7 @@ namespace Kistl.Client.WPF.View.KistlBase
 
         public void SetModel(ViewModel mdl)
         {
-            DataContext = (TypeRefPropertyModel)mdl;
+            DataContext = (TypeRefPropertyViewModel)mdl;
         }
 
         #endregion

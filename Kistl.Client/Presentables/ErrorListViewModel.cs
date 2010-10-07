@@ -26,12 +26,12 @@ namespace Kistl.Client.Presentables
     /// <summary>
     /// A simple model presenting a list of errors from constraints of the specified DataContext.
     /// </summary>
-    public class ErrorListModel
+    public class ErrorListViewModel
         : ViewModel
     {
-        public new delegate ErrorListModel Factory(IKistlContext dataCtx);
+        public new delegate ErrorListViewModel Factory(IKistlContext dataCtx);
 
-        public ErrorListModel(IViewModelDependencies appCtx, IKistlContext dataCtx)
+        public ErrorListViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx)
             : base(appCtx, dataCtx)
         {
             _errors = new ObservableCollection<ErrorDescriptor>();
@@ -60,7 +60,7 @@ namespace Kistl.Client.Presentables
                 .Where(tmp => !String.IsNullOrEmpty(tmp.err)))
             {
                 _errors.Add(new ErrorDescriptor(
-                    ModelFactory.CreateViewModel<DataObjectViewModel.Factory>(error.obj).Invoke(DataContext, error.obj),
+                    ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>(error.obj).Invoke(DataContext, error.obj),
                     new List<string>() { error.err }));
             }
         }

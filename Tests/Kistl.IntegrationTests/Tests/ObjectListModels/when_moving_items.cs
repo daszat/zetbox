@@ -38,7 +38,7 @@ namespace Kistl.IntegrationTests.ObjectListModels
                 }
 
                 Assert.That(objectClass.Properties.Select(p => p.GetPrivateFieldValue<int>("_Properties_pos")), Is.Ordered);
-                var factory = scope.Resolve<IModelFactory>();
+                var factory = scope.Resolve<IViewModelFactory>();
                 var classModel = factory.CreateViewModel<DataObjectViewModel.Factory>(objectClass).Invoke(ctx, objectClass);
                 var listModel = (ObjectListViewModel)classModel.PropertyModelsByName["Properties"];
                 propList = objectClass.Properties.ToArray();

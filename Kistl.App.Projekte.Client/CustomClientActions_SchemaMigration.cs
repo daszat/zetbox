@@ -17,9 +17,9 @@ namespace ZBox.App.SchemaMigration
 {
     public class CustomClientActions_SchemaMigration
     {
-        private static IModelFactory _mdlFactory = null;
+        private static IViewModelFactory _mdlFactory = null;
 
-        public CustomClientActions_SchemaMigration(IModelFactory mdlFactory)
+        public CustomClientActions_SchemaMigration(IViewModelFactory mdlFactory)
         {
             _mdlFactory = mdlFactory;
         }

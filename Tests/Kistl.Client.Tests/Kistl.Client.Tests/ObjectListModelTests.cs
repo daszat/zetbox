@@ -26,7 +26,7 @@ namespace Kistl.Client.Tests
     public class ObjectListModelTests : AbstractClientTestFixture
     {
         Dictionary<IDataObject, ViewModel> models;
-        Mock<IModelFactory> facMock;
+        Mock<IViewModelFactory> facMock;
         Mock<IViewModelDependencies> appCtxMock;
         Mock<TestObject> objMock;
         ObservableCollection<TestObject> list;

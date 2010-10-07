@@ -1,14 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Kistl.API;
-using System.Collections.ObjectModel;
-using Kistl.API.Utils;
 
 namespace Kistl.Client.Presentables
 {
-    public class CacheDebuggerViewModel : ViewModel
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Linq;
+    using System.Text;
+    using Kistl.API;
+    using Kistl.API.Utils;
+
+    public class CacheDebuggerViewModel
+        : ViewModel
     {
         public new delegate CacheDebuggerViewModel Factory(IKistlContext dataCtx);
 
@@ -36,37 +38,18 @@ namespace Kistl.Client.Presentables
             }
         }
 
-        private ClearCommand _clearCommand = null;
-        public ICommand ClearCommand
+        private SimpleCommandViewModel _clearCommand = null;
+        public ICommandViewModel ClearCommand
         {
             get
             {
                 if (_clearCommand == null)
                 {
-                    _clearCommand = ModelFactory.CreateViewModel<ClearCommand.Factory>().Invoke(DataContext);
+                    _clearCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, "Clear", "Clears all caches", Cache.ClearAll, null);
+
                 }
                 return _clearCommand;
             }
-        }
-    }
-
-    internal class ClearCommand : CommandModel
-    {
-        public new delegate ClearCommand Factory(IKistlContext dataCtx);
-
-        public ClearCommand(IViewModelDependencies appCtx, IKistlContext dataCtx)
-            : base(appCtx, dataCtx, "Clear", "Clears all caches")
-        {
-        }
-
-        public override bool CanExecute(object data)
-        {
-            return true;
-        }
-
-        protected override void DoExecute(object data)
-        {
-            Cache.ClearAll();
         }
     }
 }

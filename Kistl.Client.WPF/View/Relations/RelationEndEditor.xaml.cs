@@ -22,16 +22,16 @@ namespace Kistl.Client.WPF.View.Relations
     /// <summary>
     /// Interaction logic for RelationEndEditor.xaml
     /// </summary>
-    public partial class RelationEndEditor : UserControl, IHasViewModel<RelationEndModel>
+    public partial class RelationEndEditor : UserControl, IHasViewModel<RelationEndViewModel>
     {
         public RelationEndEditor()
         {
             InitializeComponent();
         }
 
-        public RelationEndModel ViewModel
+        public RelationEndViewModel ViewModel
         {
-            get { return (RelationEndModel)DataContext; }
+            get { return (RelationEndViewModel)DataContext; }
         }
     }
 

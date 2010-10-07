@@ -11,9 +11,9 @@
     <DockPanel LastChildFill="True">
         <!--<UniformGrid DockPanel.Dock="Top"
                      Rows="1">
-            <ctrls:CommandButton CommandModel="{Binding BackCommand}"
+            <ctrls:CommandButton CommandViewModel="{Binding BackCommand}"
                                  Margin="5" />
-            <ctrls:CommandButton CommandModel="{Binding HomeCommand}"
+            <ctrls:CommandButton CommandViewModel="{Binding HomeCommand}"
                                  Margin="5" />
         </UniformGrid>-->
 

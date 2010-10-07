@@ -57,14 +57,14 @@ namespace Kistl.Client.Presentables.KistlBase
 
         #region Open Application
 
-        private static ICommand _openApplicationCommand = null;
-        public ICommand OpenApplicationCommand
+        private static ICommandViewModel _openApplicationCommand = null;
+        public ICommandViewModel OpenApplicationCommand
         {
             get
             {
                 if (_openApplicationCommand == null)
                 {
-                    _openApplicationCommand = ModelFactory.CreateViewModel<SimpleItemCommandModel<ApplicationViewModel>.Factory>().Invoke(DataContext,
+                    _openApplicationCommand = ViewModelFactory.CreateViewModel<SimpleItemCommandViewModel<ApplicationViewModel>.Factory>().Invoke(DataContext,
                         "Open Application",
                         "Opens an Application in a new window",
                         (i) => i.ForEach(a => OpenApplication(a)));
@@ -81,13 +81,13 @@ namespace Kistl.Client.Presentables.KistlBase
             if (appMdl.WindowModelType != null)
             {
                 // responsibility to externalCtx's disposal passes to newWorkspace
-                var newWorkspace = ModelFactory.CreateViewModel<WindowViewModel.Factory>(appMdl.WindowModelType).Invoke(externalCtx);
-                ModelFactory.ShowModel(newWorkspace, true);
+                var newWorkspace = ViewModelFactory.CreateViewModel<WindowViewModel.Factory>(appMdl.WindowModelType).Invoke(externalCtx);
+                ViewModelFactory.ShowModel(newWorkspace, true);
             }
             else if (appMdl.RootScreen != null)
             {
-                var newWorkspace = ModelFactory.CreateViewModel<NavigatorViewModel.Factory>().Invoke(externalCtx, appMdl.RootScreen);
-                ModelFactory.ShowModel(newWorkspace, true);
+                var newWorkspace = ViewModelFactory.CreateViewModel<NavigatorViewModel.Factory>().Invoke(externalCtx, appMdl.RootScreen);
+                ViewModelFactory.ShowModel(newWorkspace, true);
             }
             else
             {

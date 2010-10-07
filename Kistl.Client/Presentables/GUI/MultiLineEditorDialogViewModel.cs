@@ -7,16 +7,16 @@ using Kistl.API;
 namespace Kistl.Client.Presentables.GUI
 {
     [ViewModelDescriptor("GUI", DefaultKind = "Kistl.App.GUI.MultiLineEditorDialog", Description = "ViewModel for displaying a multiline string editor dialog")]
-    public class MultiLineEditorDialogModel
+    public class MultiLineEditorDialogViewModel
         : WindowViewModel
     {
         private Action<string> _callback;
 
-        public new delegate MultiLineEditorDialogModel Factory(IKistlContext dataCtx,
+        public new delegate MultiLineEditorDialogViewModel Factory(IKistlContext dataCtx,
             string value,
             Action<string> callback);
 
-        public MultiLineEditorDialogModel(
+        public MultiLineEditorDialogViewModel(
             IViewModelDependencies appCtx, IKistlContext dataCtx,
             string value,
             Action<string> callback)
@@ -28,7 +28,7 @@ namespace Kistl.Client.Presentables.GUI
 
         public override string Name
         {
-            get { return "MultiLineEditorDialogModel"; }
+            get { return "MultiLineEditorDialogViewModel"; }
         }
 
         private string _value;
@@ -48,14 +48,14 @@ namespace Kistl.Client.Presentables.GUI
             }
         }
 
-        private ICommand _OKCommand = null;
-        public ICommand OKCommand
+        private ICommandViewModel _OKCommand = null;
+        public ICommandViewModel OKCommand
         {
             get
             {
                 if (_OKCommand == null)
                 {
-                    _OKCommand = ModelFactory.CreateViewModel<SimpleCommandModel.Factory>().Invoke(DataContext, "OK", "OK", () => Ok(), null);
+                    _OKCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, "OK", "OK", Ok, null);
                 }
                 return _OKCommand;
             }
@@ -67,14 +67,14 @@ namespace Kistl.Client.Presentables.GUI
             Show = false;
         }
 
-        private ICommand _CancelCommand = null;
-        public ICommand CancelCommand
+        private ICommandViewModel _CancelCommand = null;
+        public ICommandViewModel CancelCommand
         {
             get
             {
                 if (_CancelCommand == null)
                 {
-                    _CancelCommand = ModelFactory.CreateViewModel<SimpleCommandModel.Factory>().Invoke(DataContext, "Cancel", "Cancel", () => Cancel(), null);
+                    _CancelCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, "Cancel", "Cancel", Cancel, null);
                 }
                 return _CancelCommand;
             }

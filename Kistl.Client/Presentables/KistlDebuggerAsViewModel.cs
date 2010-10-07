@@ -1,28 +1,27 @@
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-
-using Kistl.API;
-using System.ComponentModel;
 
 namespace Kistl.Client.Presentables
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.ComponentModel;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.Text;
+    using Kistl.API;
 
-    public class KistlDebuggerAsModel
+    public class KistlDebuggerAsViewModel
         : ViewModel, IKistlContextDebugger
     {
-        public new delegate KistlDebuggerAsModel Factory(IKistlContext dataCtx);
+        public new delegate KistlDebuggerAsViewModel Factory(IKistlContext dataCtx);
 
-        public KistlDebuggerAsModel(IViewModelDependencies appCtx, IKistlContext dataCtx)
+        public KistlDebuggerAsViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx)
             : base(appCtx, dataCtx)
         {
             KistlContextDebuggerSingleton.SetDebugger(this);
         }
 
-        public KistlDebuggerAsModel(bool designMode)
+        public KistlDebuggerAsViewModel(bool designMode)
             : base(designMode)
         {
         }
@@ -205,7 +204,7 @@ namespace Kistl.Client.Presentables
         /// <summary>
         /// Update the model's state when the context is changed
         /// </summary>
-        /// is only called by the <see cref="KistlDebuggerAsModel"/>
+        /// is only called by the <see cref="KistlDebuggerAsViewModel"/>
         internal void OnContextChanged()
         {
             var objs = DebuggingContext.AttachedObjects.OfType<IDataObject>().ToArray();

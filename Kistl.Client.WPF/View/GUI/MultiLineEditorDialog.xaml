@@ -21,9 +21,9 @@
         <UniformGrid DockPanel.Dock="Bottom"
                      Style="{StaticResource addedMargins}"
                      Rows="1">
-            <ctrls:CommandButton CommandModel="{Binding OKCommand}"
+            <ctrls:CommandButton CommandViewModel="{Binding OKCommand}"
                                  Style="{StaticResource addedMargins}" />
-            <ctrls:CommandButton CommandModel="{Binding CancelCommand}"
+            <ctrls:CommandButton CommandViewModel="{Binding CancelCommand}"
                                  Style="{StaticResource addedMargins}" />
         </UniformGrid>
 

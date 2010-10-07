@@ -20,7 +20,7 @@ namespace Kistl.Client.WPF.View
     /// <summary>
     /// Interaction logic for SelectionDialog.xaml
     /// </summary>
-    public partial class SelectionDialog : WindowView, IHasViewModel<DataObjectSelectionTaskModel>
+    public partial class SelectionDialog : WindowView, IHasViewModel<DataObjectSelectionTaskViewModel>
     {
         public SelectionDialog()
         {
@@ -52,11 +52,11 @@ namespace Kistl.Client.WPF.View
             this.Close();            
         }
 
-        #region IHasViewModel<DataObjectSelectionTaskModel> Members
+        #region IHasViewModel<DataObjectSelectionTaskViewModel> Members
 
-        public DataObjectSelectionTaskModel ViewModel
+        public DataObjectSelectionTaskViewModel ViewModel
         {
-            get { return (DataObjectSelectionTaskModel)DataContext; }
+            get { return (DataObjectSelectionTaskViewModel)DataContext; }
         }
 
         #endregion

@@ -26,10 +26,10 @@
                 <ComboBoxItem Name="ISOM">ISOM</ComboBoxItem>
                 <ComboBoxItem Name="CompoundFDP">CompoundFDP</ComboBoxItem>
             </ComboBox>
-            <ctrls:CommandButton CommandModel="{Binding NewObjectClassCommand}" />
-            <ctrls:CommandButton CommandModel="{Binding NewRelationCommand}" />
+            <ctrls:CommandButton CommandViewModel="{Binding NewObjectClassCommand}" />
+            <ctrls:CommandButton CommandViewModel="{Binding NewRelationCommand}" />
             <Button Click="PrintButton_Click" Content="Print" />
-            <ctrls:CommandButton CommandModel="{Binding RefreshCommand}" />
+            <ctrls:CommandButton CommandViewModel="{Binding RefreshCommand}" />
         </StackPanel>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -39,11 +39,11 @@
             </Grid.ColumnDefinitions>
             <DockPanel Grid.Column="0">
                 <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
-                    <ctrls:CommandButton CommandModel="{Binding SelectAllCommand}" />
-                    <ctrls:CommandButton CommandModel="{Binding SelectNoneCommand}" />
-                    <ctrls:CommandButton CommandModel="{Binding AddRelatedCommand}" />
+                    <ctrls:CommandButton CommandViewModel="{Binding SelectAllCommand}" />
+                    <ctrls:CommandButton CommandViewModel="{Binding SelectNoneCommand}" />
+                    <ctrls:CommandButton CommandViewModel="{Binding AddRelatedCommand}" />
                 </StackPanel>
-                <ListBox  ItemsSource="{Binding DataTypeModels}">
+                <ListBox  ItemsSource="{Binding DataTypeViewModels}">
                     <ListBox.ItemTemplate>
                         <HierarchicalDataTemplate>
                             <CheckBox IsChecked="{Binding IsChecked}">

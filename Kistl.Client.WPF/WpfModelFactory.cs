@@ -14,7 +14,7 @@ namespace Kistl.Client.WPF
     using Microsoft.Win32;
 
     public class WpfModelFactory
-        : ModelFactory
+        : ViewModelFactory
     {
         private readonly IUiThreadManager uiThread;
 

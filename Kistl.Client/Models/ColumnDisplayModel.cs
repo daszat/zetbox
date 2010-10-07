@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.Presentables
+namespace Kistl.Client.Models
 {
     using System;
     using System.Collections.Generic;
@@ -25,7 +25,7 @@ namespace Kistl.Client.Presentables
             /// </summary>
             Property,
             /// <summary>
-            /// References a DataObjectViewModel.ActionModelsByName[] ViewModel
+            /// References a DataObjectViewModel.ActionViewModelsByName[] ViewModel
             /// </summary>
             MethodModel,
         }

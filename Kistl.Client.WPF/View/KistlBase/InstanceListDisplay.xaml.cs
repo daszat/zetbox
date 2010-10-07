@@ -3,6 +3,7 @@ namespace Kistl.Client.WPF.View.KistlBase
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Linq;
     using System.Text;
     using System.Windows;
@@ -14,17 +15,16 @@ namespace Kistl.Client.WPF.View.KistlBase
     using System.Windows.Media.Imaging;
     using System.Windows.Navigation;
     using System.Windows.Shapes;
-
     using Kistl.API;
     using Kistl.API.Client;
     using Kistl.App.Base;
-    using Kistl.Client.Presentables;
     using Kistl.Client.GUI;
+    using Kistl.Client.Models;
+    using Kistl.Client.Presentables;
     using Kistl.Client.Presentables.KistlBase;
-    using System.ComponentModel;
 
     /// <summary>
-    /// Shows all instances of a given DataTypeModel
+    /// Shows all instances of a given DataTypeViewModel
     /// </summary>
     [ViewDescriptor("KistlBase", Kistl.App.GUI.Toolkit.WPF, Kind = "Kistl.App.GUI.InstanceListKind")]
     public partial class InstanceListDisplay
@@ -131,7 +131,7 @@ namespace Kistl.Client.WPF.View.KistlBase
                 switch (desc.Type)
                 {
                     case ColumnDisplayModel.ColumnType.MethodModel:
-                        cpFef.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(String.Format("ActionModelsByName[{0}]", desc.Name)), Mode = BindingMode.OneWay });
+                        cpFef.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(String.Format("ActionViewModelsByName[{0}]", desc.Name)), Mode = BindingMode.OneWay });
                         break;
                     case ColumnDisplayModel.ColumnType.PropertyModel:
                         cpFef.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(String.Format("PropertyModelsByName[{0}]", desc.Name)), Mode = BindingMode.OneWay });
@@ -215,7 +215,7 @@ namespace Kistl.Client.WPF.View.KistlBase
         }
         #endregion
 
-        #region IHasViewModel<DataTypeModel> Members
+        #region IHasViewModel<DataTypeViewModel> Members
 
         public InstanceListViewModel ViewModel
         {

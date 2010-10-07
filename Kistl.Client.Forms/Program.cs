@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
-
+using Autofac;
 using Kistl.API;
 using Kistl.API.Client;
 using Kistl.API.Configuration;
+using Kistl.App.Extensions;
 using Kistl.Client.Presentables;
 using Kistl.Client.Presentables.ObjectBrowser;
-using Kistl.App.Extensions;
-using Autofac;
 
 namespace Kistl.Client.Forms
 {
@@ -32,7 +31,7 @@ namespace Kistl.Client.Forms
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            var mdlFactory = container.Resolve<IModelFactory>();
+            var mdlFactory = container.Resolve<IViewModelFactory>();
             var initialWorkspace = mdlFactory.CreateViewModel<WorkspaceViewModel.Factory>().Invoke(container.Resolve<IKistlContext>());
             mdlFactory.ShowModel(initialWorkspace, true);
 

@@ -193,7 +193,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 _wrapper = new SortedWrapper((ICollection)ValueModel.Value, ObjectCollectionModel);
                 _valueCache = new ReadOnlyObservableProjectedList<IDataObject, DataObjectViewModel>(
                     _wrapper,
-                    obj => ModelFactory.CreateViewModel<DataObjectViewModel.Factory>(obj).Invoke(DataContext, obj),
+                    obj => ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>(obj).Invoke(DataContext, obj),
                     mdl => mdl.Object);
             }
         }

@@ -1,9 +1,10 @@
+
 namespace Kistl.Client.Presentables
 {
     using System;
     using Kistl.App.GUI;
 
-    public interface IModelFactory
+    public interface IViewModelFactory
     {
         void ShowModel(ViewModel mdl, bool activate);
         void ShowModel(ViewModel mdl, Kistl.App.GUI.ControlKind kind, bool activate);

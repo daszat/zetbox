@@ -29,13 +29,13 @@ namespace Kistl.Client.Presentables.TimeRecords
         }
 
         private OpenRecorderCommand _openRecorderCommand;
-        public ICommand OpenRecorderCommand
+        public ICommandViewModel OpenRecorderCommand
         {
             get
             {
                 if (_openRecorderCommand == null)
                 {
-                    _openRecorderCommand = ModelFactory.CreateViewModel<OpenRecorderCommand.Factory>().Invoke(DataContext);
+                    _openRecorderCommand = ViewModelFactory.CreateViewModel<OpenRecorderCommand.Factory>().Invoke(DataContext);
                 }
                 return _openRecorderCommand;
             }
@@ -48,7 +48,7 @@ namespace Kistl.Client.Presentables.TimeRecords
     }
 
     internal class OpenRecorderCommand
-        : CommandModel
+        : CommandViewModel
     {
         public new delegate OpenRecorderCommand Factory(IKistlContext dataCtx);
 
@@ -67,8 +67,8 @@ namespace Kistl.Client.Presentables.TimeRecords
 
         protected override void DoExecute(object data)
         {
-            var initialWorkspace = ModelFactory.CreateViewModel<Kistl.Client.Presentables.TimeRecords.WorkEffortRecorderModel.Factory>().Invoke(ctxFactory());
-            ModelFactory.ShowModel(initialWorkspace, true);
+            var initialWorkspace = ViewModelFactory.CreateViewModel<Kistl.Client.Presentables.TimeRecords.WorkEffortRecorderModel.Factory>().Invoke(ctxFactory());
+            ViewModelFactory.ShowModel(initialWorkspace, true);
         }
     }
 

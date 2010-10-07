@@ -1,20 +1,22 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Kistl.API;
-using Kistl.App.Base;
-using Kistl.API.Configuration;
-using Kistl.API.Utils;
-using Kistl.App.Extensions;
 
 namespace Kistl.Client.Presentables
 {
-    public class DataTypeModel : DataObjectViewModel
-    {
-        public new delegate DataTypeModel Factory(IKistlContext dataCtx, DataType dt);
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using Kistl.API;
+    using Kistl.API.Configuration;
+    using Kistl.API.Utils;
+    using Kistl.App.Base;
+    using Kistl.App.Extensions;
 
-        public DataTypeModel(
+    public class DataTypeViewModel 
+        : DataObjectViewModel
+    {
+        public new delegate DataTypeViewModel Factory(IKistlContext dataCtx, DataType dt);
+
+        public DataTypeViewModel(
             IViewModelDependencies appCtx, KistlConfig config, IKistlContext dataCtx,
             DataType dt)
             : base(appCtx, config, dataCtx, dt)
@@ -32,7 +34,7 @@ namespace Kistl.Client.Presentables
                 {
                     _propertyModels = new ReadOnlyProjectedList<Property, DescribedPropertyViewModel>(
                         _dataType.Properties.OrderBy(p => p.Name).ToList(),
-                        property => ModelFactory.CreateViewModel<DescribedPropertyViewModel.Factory>().Invoke(DataContext, property),
+                        property => ViewModelFactory.CreateViewModel<DescribedPropertyViewModel.Factory>().Invoke(DataContext, property),
                         m => m.DescribedProperty);
                 }
                 return _propertyModels;
@@ -48,7 +50,7 @@ namespace Kistl.Client.Presentables
                 {
                     _methodModels = new ReadOnlyProjectedList<Method, DescribedMethodViewModel>(
                         _dataType.Methods.OrderBy(m => m.Name).ToList(),
-                        m => ModelFactory.CreateViewModel<DescribedMethodViewModel.Factory>().Invoke(DataContext, m),
+                        m => ViewModelFactory.CreateViewModel<DescribedMethodViewModel.Factory>().Invoke(DataContext, m),
                         m => m.DescribedMethod);
                 }
                 return _methodModels;

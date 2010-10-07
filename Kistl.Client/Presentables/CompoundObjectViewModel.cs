@@ -1,19 +1,21 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Kistl.API;
-using Kistl.API.Utils;
-using Kistl.App.Base;
-using Kistl.App.Extensions;
-using Kistl.API.Configuration;
-using System.ComponentModel;
-using Kistl.Client.Presentables.ValueViewModels;
-using Kistl.Client.Models;
 
 namespace Kistl.Client.Presentables
 {
-    public class CompoundObjectViewModel : ViewModel
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Linq;
+    using System.Text;
+    using Kistl.API;
+    using Kistl.API.Configuration;
+    using Kistl.API.Utils;
+    using Kistl.App.Base;
+    using Kistl.App.Extensions;
+    using Kistl.Client.Models;
+    using Kistl.Client.Presentables.ValueViewModels;
+    
+    public class CompoundObjectViewModel 
+        : ViewModel
     {
         public new delegate CompoundObjectViewModel Factory(IKistlContext dataCtx, ICompoundObject obj);
 
@@ -53,7 +55,7 @@ namespace Kistl.Client.Presentables
                 {
                     _propertyModels = new ReadOnlyProjectedList<Property, BaseValueViewModel>(
                         FetchPropertyList().ToList(),
-                        property => ModelFactory.CreateViewModel<BaseValueViewModel.Factory>(property).Invoke(DataContext, property.GetValueModel(Object)),
+                        property => ViewModelFactory.CreateViewModel<BaseValueViewModel.Factory>(property).Invoke(DataContext, property.GetValueModel(Object)),
                         m => null); //m.Property);
                 }
                 return _propertyModels;
@@ -68,7 +70,7 @@ namespace Kistl.Client.Presentables
                 {
                     _propertyModelsByName = new LookupDictionary<string, Property, ViewModel>(FetchPropertyList().ToList(), 
                         prop => prop.Name,
-                        prop => ModelFactory.CreateViewModel<BaseValueViewModel.Factory>(prop).Invoke(DataContext, prop.GetValueModel(Object)));
+                        prop => ViewModelFactory.CreateViewModel<BaseValueViewModel.Factory>(prop).Invoke(DataContext, prop.GetValueModel(Object)));
                 }
                 return _propertyModelsByName;
             }

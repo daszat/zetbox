@@ -48,7 +48,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
         /// </summary>
         void ClearValue();
 
-        ICommand ClearValueCommand { get; }
+        ICommandViewModel ClearValueCommand { get; }
     }
 
     /// <summary>

@@ -1,15 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Kistl.API;
-using Kistl.API.Configuration;
-using Kistl.App.Base;
-using Kistl.App.Extensions;
 
 namespace Kistl.Client.Presentables
 {
-    public class DescribedMethodViewModel : DataObjectViewModel
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using Kistl.API;
+    using Kistl.API.Configuration;
+    using Kistl.App.Base;
+    using Kistl.App.Extensions;
+
+    public class DescribedMethodViewModel
+        : DataObjectViewModel
     {
         public new delegate DescribedMethodViewModel Factory(IKistlContext dataCtx, Method meth);
 

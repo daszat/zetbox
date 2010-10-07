@@ -1,14 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Kistl.API;
-using Kistl.App.Base;
-using Kistl.API.Configuration;
 
 namespace Kistl.Client.Presentables
 {
-    public class DescribedPropertyViewModel : DataObjectViewModel
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using Kistl.API;
+    using Kistl.API.Configuration;
+    using Kistl.App.Base;
+
+    public class DescribedPropertyViewModel 
+        : DataObjectViewModel
     {
         public new delegate DescribedPropertyViewModel Factory(IKistlContext dataCtx, Property prop);
 

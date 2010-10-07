@@ -12,9 +12,9 @@ using Kistl.Client.Presentables;
     
     public class CustomClientActions_DocumentManagement
     {
-        private static IModelFactory _factory;
+        private static IViewModelFactory _factory;
 
-        public CustomClientActions_DocumentManagement(IModelFactory factory)
+        public CustomClientActions_DocumentManagement(IViewModelFactory factory)
         {
             _factory = factory;
         }

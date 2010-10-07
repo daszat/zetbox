@@ -5,6 +5,7 @@ namespace Kistl.Client.Presentables.KistlBase
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Collections.Specialized;
+    using System.ComponentModel;
     using System.Linq;
     using System.Linq.Dynamic;
     using System.Reflection;
@@ -14,8 +15,8 @@ namespace Kistl.Client.Presentables.KistlBase
     using Kistl.API.Configuration;
     using Kistl.App.Base;
     using Kistl.App.GUI;
+    using Kistl.Client.Models;
     using ObjectEditor = Kistl.Client.Presentables.ObjectEditor;
-    using System.ComponentModel;
 
     public enum InstanceListViewMethod
     {
@@ -35,7 +36,7 @@ namespace Kistl.Client.Presentables.KistlBase
         protected readonly Func<IKistlContext> ctxFactory;
 
         /// <summary>
-        /// Initializes a new instance of the DataTypeModel class.
+        /// Initializes a new instance of the DataTypeViewModel class.
         /// </summary>
         /// <param name="appCtx">the application context to use</param>
         /// <param name="config"></param>
@@ -183,7 +184,7 @@ namespace Kistl.Client.Presentables.KistlBase
                             foreach (var prop in t.Properties.Where(p => p.FilterConfiguration != null))
                             {
                                 var cfg = prop.FilterConfiguration;
-                                _filter.Add(ModelFactory.CreateViewModel<PropertyFilterExpressionFactory>(cfg.ViewModelDescriptor.ViewModelRef.AsType(true)).Invoke(DataContext, prop, cfg));
+                                _filter.Add(ViewModelFactory.CreateViewModel<PropertyFilterExpressionFactory>(cfg.ViewModelDescriptor.ViewModelRef.AsType(true)).Invoke(DataContext, prop, cfg));
                             }
                             if (t is ObjectClass)
                             {
@@ -192,7 +193,7 @@ namespace Kistl.Client.Presentables.KistlBase
                         }
 
                         // Add default ToString Filter for all
-                        _filter.Add(ModelFactory.CreateViewModel<ToStringFilterExpression.Factory>().Invoke(DataContext, "Name"));
+                        _filter.Add(ViewModelFactory.CreateViewModel<ToStringFilterExpression.Factory>().Invoke(DataContext, "Name"));
                     }
                 }
                 return _filter;
@@ -293,14 +294,14 @@ namespace Kistl.Client.Presentables.KistlBase
             if (ShowRefreshCommand && !_commands.Contains(RefreshCommand)) _commands.Insert((ShowNewCommand ? 1 : 0) + (ShowOpenCommand ? 1 : 0), RefreshCommand);
         }
 
-        private ObservableCollection<ICommand> _commands = null;
-        public ObservableCollection<ICommand> Commands
+        private ObservableCollection<ICommandViewModel> _commands = null;
+        public ObservableCollection<ICommandViewModel> Commands
         {
             get
             {
                 if (_commands == null)
                 {
-                    _commands = new ObservableCollection<ICommand>();
+                    _commands = new ObservableCollection<ICommandViewModel>();
                     // Add default actions
                     if(ShowNewCommand) _commands.Add(NewCommand);
                     if (ShowOpenCommand) _commands.Add(OpenCommand);
@@ -317,7 +318,7 @@ namespace Kistl.Client.Presentables.KistlBase
             {
                 if (_RefreshCommand == null)
                 {
-                    _RefreshCommand = ModelFactory.CreateViewModel<RefreshCommand.Factory>().Invoke(DataContext, this);
+                    _RefreshCommand = ViewModelFactory.CreateViewModel<RefreshCommand.Factory>().Invoke(DataContext, this);
                 }
                 return _RefreshCommand;
             }
@@ -330,7 +331,7 @@ namespace Kistl.Client.Presentables.KistlBase
             {
                 if (_OpenCommand == null)
                 {
-                    _OpenCommand = ModelFactory.CreateViewModel<OpenDataObjectCommand.Factory>().Invoke(DataContext, RequestedWorkspaceKind, RequestedEditorKind);
+                    _OpenCommand = ViewModelFactory.CreateViewModel<OpenDataObjectCommand.Factory>().Invoke(DataContext, RequestedWorkspaceKind, RequestedEditorKind);
                 }
                 return _OpenCommand;
             }
@@ -343,7 +344,7 @@ namespace Kistl.Client.Presentables.KistlBase
             {
                 if (_NewCommand == null)
                 {
-                    _NewCommand = ModelFactory.CreateViewModel<NewDataObjectCommand.Factory>().Invoke(DataContext, _type, RequestedWorkspaceKind, RequestedEditorKind);
+                    _NewCommand = ViewModelFactory.CreateViewModel<NewDataObjectCommand.Factory>().Invoke(DataContext, _type, RequestedWorkspaceKind, RequestedEditorKind);
                 }
                 return _NewCommand;
             }
@@ -361,14 +362,14 @@ namespace Kistl.Client.Presentables.KistlBase
         }
 
 
-        private Kistl.Client.Presentables.ObjectClassModel _dataTypeMdl = null;
-        public Kistl.Client.Presentables.ObjectClassModel DataTypeModel
+        private Kistl.Client.Presentables.ObjectClassViewModel _dataTypeMdl = null;
+        public Kistl.Client.Presentables.ObjectClassViewModel DataTypeViewModel
         {
             get
             {
                 if (_dataTypeMdl == null)
                 {
-                    _dataTypeMdl = ModelFactory.CreateViewModel<ObjectClassModel.Factory>(_type).Invoke(DataContext, _type);
+                    _dataTypeMdl = ViewModelFactory.CreateViewModel<ObjectClassViewModel.Factory>(_type).Invoke(DataContext, _type);
                 }
                 return _dataTypeMdl;
             }
@@ -613,11 +614,11 @@ namespace Kistl.Client.Presentables.KistlBase
         private void LoadInstances()
         {
             // Can execute?
-            if (Filter.Count(f => !f.Enabled && f.Requiered) > 0) return;
+            if (Filter.Count(f => !f.Enabled && f.Required) > 0) return;
 
             foreach (var obj in GetQuery().Cast<IDataObject>().ToList().OrderBy(obj => obj.ToString()))
             {
-                var mdl = ModelFactory.CreateViewModel<DataObjectViewModel.Factory>(obj).Invoke(DataContext, obj);
+                var mdl = ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>(obj).Invoke(DataContext, obj);
                 mdl.IsReadOnly = IsItemsReadOnly;
                 _instances.Add(mdl);
             }

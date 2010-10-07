@@ -13,7 +13,7 @@ namespace Kistl.Client.Presentables.KistlBase
     /// A intermediate helper class to provide common "load TypeRefs from various Assembly sources" functionality.
     /// </summary>
     public abstract class LoadTypeRefCommand
-        : CommandModel
+        : CommandViewModel
     {
         /// <summary>
         /// Initializes a new instance of the LoadTypeRefCommand class.
@@ -24,7 +24,7 @@ namespace Kistl.Client.Presentables.KistlBase
         /// <param name="tooltip">a tooltip for this command</param>
         /// <param name="parent">where to put the Command's result</param>
         /// This constructor is internal to avoid external inheritance of this class.
-        internal LoadTypeRefCommand(IViewModelDependencies appCtx, IKistlContext dataCtx, string label, string tooltip, TypeRefPropertyModel parent)
+        internal LoadTypeRefCommand(IViewModelDependencies appCtx, IKistlContext dataCtx, string label, string tooltip, TypeRefPropertyViewModel parent)
             : base(appCtx, dataCtx, label, tooltip)
         {
             this.Parent = parent;
@@ -33,7 +33,7 @@ namespace Kistl.Client.Presentables.KistlBase
         /// <summary>
         /// Gets the parent model, whose Value will be set by this command.
         /// </summary>
-        protected TypeRefPropertyModel Parent { get; private set; }
+        protected TypeRefPropertyViewModel Parent { get; private set; }
 
         /// <summary>
         /// Loads a <see cref="System.Reflection.Assembly"/> from the specified <see cref="Kistl.App.Base.Assembly"/>.
@@ -68,7 +68,7 @@ namespace Kistl.Client.Presentables.KistlBase
         /// <returns>a system assembly loaded in the reflection only application context.</returns>
         protected System.Reflection.Assembly ReflectionFromUser()
         {
-            string assemblyFileName = ModelFactory.GetSourceFileNameFromUser("Assembly files|*.dll;*.exe", "All files|*.*");
+            string assemblyFileName = ViewModelFactory.GetSourceFileNameFromUser("Assembly files|*.dll;*.exe", "All files|*.*");
             if (String.IsNullOrEmpty(assemblyFileName))
             {
                 return null;
@@ -85,8 +85,8 @@ namespace Kistl.Client.Presentables.KistlBase
         /// <param name="assembly">the assembly to choose from</param>
         protected void ChooseTypeRefFromAssembly(Kistl.App.Base.Assembly assembly)
         {
-            var regenerateCmd = ModelFactory.CreateViewModel<RegenerateTypeRefsCommand.Factory>().Invoke(DataContext, this);
-            var selectionTask = ModelFactory.CreateViewModel<DataObjectSelectionTaskModel.Factory>().Invoke(
+            var regenerateCmd = ViewModelFactory.CreateViewModel<RegenerateTypeRefsCommand.Factory>().Invoke(DataContext, this);
+            var selectionTask = ViewModelFactory.CreateViewModel<DataObjectSelectionTaskViewModel.Factory>().Invoke(
                 DataContext,
                 null,
                 DataContext.GetQuery<Kistl.App.Base.TypeRef>(),
@@ -97,7 +97,7 @@ namespace Kistl.Client.Presentables.KistlBase
                         this.Parent.Value = chosen;
                     }
                 }),
-                new List<CommandModel>() { regenerateCmd });
+                new List<CommandViewModel>() { regenerateCmd });
             var filter = (ObjectReferencePropertyFilterExpressionViewModel)selectionTask.ListViewModel.Filter.OfType<IPropertyFilterExpression>().Single(i => i.Property.ExportGuid == new Guid("885BFA97-3D43-48BB-A0AA-1049298714FF"));
             filter.Value = filter.PossibleValues
                 .Cast<KeyValuePair<DataObjectViewModel, string>>()
@@ -105,10 +105,10 @@ namespace Kistl.Client.Presentables.KistlBase
                 .FirstOrDefault(m => m.Key.Object == assembly)
                 .Key;
             regenerateCmd.ListModel = selectionTask.ListViewModel;
-            ModelFactory.ShowModel(selectionTask, true);
+            ViewModelFactory.ShowModel(selectionTask, true);
         }
 
-        private class RegenerateTypeRefsCommand : CommandModel
+        private class RegenerateTypeRefsCommand : CommandViewModel
         {
             public new delegate RegenerateTypeRefsCommand Factory(IKistlContext dataCtx, LoadTypeRefCommand outer);
 
@@ -150,7 +150,7 @@ namespace Kistl.Client.Presentables.KistlBase
     internal class LoadTypeRefFromAssemblyFileCommand
         : LoadTypeRefCommand
     {
-        public new delegate LoadTypeRefFromAssemblyFileCommand Factory(IKistlContext dataCtx, TypeRefPropertyModel parent);
+        public new delegate LoadTypeRefFromAssemblyFileCommand Factory(IKistlContext dataCtx, TypeRefPropertyViewModel parent);
 
         /// <summary>
         /// Initializes a new instance of the LoadTypeRefFromAssemblyFileCommand class.
@@ -159,7 +159,7 @@ namespace Kistl.Client.Presentables.KistlBase
         /// <param name="dataCtx">the data context to use</param>
         /// <param name="parent">where to put the Command's result</param>
         /// This constructor is internal to avoid external inheritance of this class.
-        public LoadTypeRefFromAssemblyFileCommand(IViewModelDependencies appCtx, IKistlContext dataCtx, TypeRefPropertyModel parent)
+        public LoadTypeRefFromAssemblyFileCommand(IViewModelDependencies appCtx, IKistlContext dataCtx, TypeRefPropertyViewModel parent)
             : base(appCtx, dataCtx, "Load TypeRef From DLL", "Loads all types from a DLL", parent)
         {
         }
@@ -205,7 +205,7 @@ namespace Kistl.Client.Presentables.KistlBase
     internal class LoadTypeRefFromAssemblyRefCommand
         : LoadTypeRefCommand
     {
-        public new delegate LoadTypeRefFromAssemblyRefCommand Factory(IKistlContext dataCtx, TypeRefPropertyModel parent);
+        public new delegate LoadTypeRefFromAssemblyRefCommand Factory(IKistlContext dataCtx, TypeRefPropertyViewModel parent);
 
         /// <summary>
         /// Initializes a new instance of the LoadTypeRefFromAssemblyRefCommand class.
@@ -214,7 +214,7 @@ namespace Kistl.Client.Presentables.KistlBase
         /// <param name="dataCtx">the data context to use</param>
         /// <param name="parent">where to put the Command's result</param>
         /// This constructor is internal to avoid external inheritance of this class.
-        public LoadTypeRefFromAssemblyRefCommand(IViewModelDependencies appCtx, IKistlContext dataCtx, TypeRefPropertyModel parent)
+        public LoadTypeRefFromAssemblyRefCommand(IViewModelDependencies appCtx, IKistlContext dataCtx, TypeRefPropertyViewModel parent)
             : base(appCtx, dataCtx, "Select TypeRef by Assembly", "Loads all types from an Assembly", parent)
         {
         }

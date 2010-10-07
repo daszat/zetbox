@@ -17,7 +17,7 @@
         <ItemsControl ItemsSource="{Binding AdditionalCommands}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <ctrls:CommandButton CommandModel="{Binding}"
+                    <ctrls:CommandButton CommandViewModel="{Binding}"
                                          Margin="5" />
                 </DataTemplate>
             </ItemsControl.ItemTemplate>

@@ -29,14 +29,14 @@
     <DockPanel>
         <ToolBar DockPanel.Dock="Top">
             <ctrls:LoadingIndicator />
-            <ctrls:CommandButton CommandModel="{Binding AddExistingCommand}"
+            <ctrls:CommandButton CommandViewModel="{Binding AddExistingCommand}"
                                  Visibility="{Binding AllowAddExisting, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
-            <ctrls:CommandButton CommandModel="{Binding CreateNewCommand}"
+            <ctrls:CommandButton CommandViewModel="{Binding CreateNewCommand}"
                                  Visibility="{Binding AllowAddNew, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
-            <ctrls:CommandButton CommandModel="{Binding RemoveCommand}"
+            <ctrls:CommandButton CommandViewModel="{Binding RemoveCommand}"
                                  CommandParameter="{Binding SelectedItems, Mode=OneWay}"
                                  Visibility="{Binding AllowRemove, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
-            <ctrls:CommandButton CommandModel="{Binding DeleteCommand}"
+            <ctrls:CommandButton CommandViewModel="{Binding DeleteCommand}"
                                  CommandParameter="{Binding SelectedItems, Mode=OneWay}"
                                  Visibility="{Binding AllowDelete, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}" />
         </ToolBar>

@@ -12,12 +12,12 @@ namespace Kistl.Client.Presentables.KistlBase
     using Kistl.Client.Presentables.ValueViewModels;
     using Kistl.Client.Models;
 
-    public class TypeRefPropertyModel
+    public class TypeRefPropertyViewModel
            : ObjectReferenceViewModel
     {
-        public new delegate TypeRefPropertyModel Factory(IKistlContext dataCtx, IValueModel mdl);
+        public new delegate TypeRefPropertyViewModel Factory(IKistlContext dataCtx, IValueModel mdl);
 
-        public TypeRefPropertyModel(
+        public TypeRefPropertyViewModel(
             IViewModelDependencies appCtx, IKistlContext dataCtx,
             IValueModel mdl)
             : base(appCtx, dataCtx, mdl)
@@ -30,26 +30,26 @@ namespace Kistl.Client.Presentables.KistlBase
         }
 
         private LoadTypeRefFromAssemblyFileCommand _loadTypeRefFromAssemblyFileCommand = null;
-        public ICommand LoadTypeRefFromAssemblyFileCommand
+        public ICommandViewModel LoadTypeRefFromAssemblyFileCommand
         {
             get
             {
                 if (_loadTypeRefFromAssemblyFileCommand == null)
                 {
-                    _loadTypeRefFromAssemblyFileCommand = ModelFactory.CreateViewModel<LoadTypeRefFromAssemblyFileCommand.Factory>().Invoke(DataContext, this);
+                    _loadTypeRefFromAssemblyFileCommand = ViewModelFactory.CreateViewModel<LoadTypeRefFromAssemblyFileCommand.Factory>().Invoke(DataContext, this);
                 }
                 return _loadTypeRefFromAssemblyFileCommand;
             }
         }
 
         private LoadTypeRefFromAssemblyRefCommand _loadTypeRefFromAssemblyRefCommand = null;
-        public ICommand LoadTypeRefFromAssemblyRefCommand
+        public ICommandViewModel LoadTypeRefFromAssemblyRefCommand
         {
             get
             {
                 if (_loadTypeRefFromAssemblyRefCommand == null)
                 {
-                    _loadTypeRefFromAssemblyRefCommand = ModelFactory.CreateViewModel<LoadTypeRefFromAssemblyRefCommand.Factory>().Invoke(DataContext, this);
+                    _loadTypeRefFromAssemblyRefCommand = ViewModelFactory.CreateViewModel<LoadTypeRefFromAssemblyRefCommand.Factory>().Invoke(DataContext, this);
                 }
                 return _loadTypeRefFromAssemblyRefCommand;
             }

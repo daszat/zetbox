@@ -17,7 +17,7 @@ namespace Kistl.Client.WPF
 
             builder
                 .RegisterType<WpfModelFactory>()
-                .As<IModelFactory>()
+                .As<IViewModelFactory>()
                 .SingleInstance();
         }
     }

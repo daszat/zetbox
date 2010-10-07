@@ -5,21 +5,20 @@ namespace Kistl.Client.WPF
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-
+    using Kistl.API;
     using Kistl.API.Client;
     using Kistl.App.GUI;
     using Kistl.Client.Presentables;
     using Kistl.Client.Presentables.ObjectBrowser;
-    using Kistl.API;
 
     public class Launcher
     {
         private readonly IKistlContext ctx;
         private readonly Func<IKistlContext> ctxFactory;
-        private readonly IModelFactory mdlFactory;
+        private readonly IViewModelFactory mdlFactory;
         private readonly IFrozenContext frozenCtx;
 
-        public Launcher(IKistlContext ctx, Func<IKistlContext> ctxFactory, IModelFactory mdlFactory, IFrozenContext frozenCtx)
+        public Launcher(IKistlContext ctx, Func<IKistlContext> ctxFactory, IViewModelFactory mdlFactory, IFrozenContext frozenCtx)
         {
             this.ctx = ctx;
             this.frozenCtx = frozenCtx;
@@ -48,7 +47,7 @@ namespace Kistl.Client.WPF
             ControlKind launcher = frozenCtx.FindPersistenceObject<ControlKind>(new Guid("90D5FF7F-0C82-4278-BB8D-49C240F6BC2C"));
             mdlFactory.ShowModel(initialWorkspace, launcher, true);
 
-            var ctxDebugger = mdlFactory.CreateViewModel<KistlDebuggerAsModel.Factory>().Invoke(ctxFactory());
+            var ctxDebugger = mdlFactory.CreateViewModel<KistlDebuggerAsViewModel.Factory>().Invoke(ctxFactory());
             mdlFactory.ShowModel(ctxDebugger, true);
 
             var cacheDebugger = mdlFactory.CreateViewModel<CacheDebuggerViewModel.Factory>().Invoke(ctxFactory());

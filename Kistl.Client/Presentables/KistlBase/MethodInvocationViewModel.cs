@@ -1,23 +1,23 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Reflection;
-using System.Text;
 
-using Kistl.API;
-using Kistl.App.Base;
-using Kistl.App.Extensions;
-using Kistl.API.Configuration;
-
-namespace Kistl.Client.Presentables
+namespace Kistl.Client.Presentables.KistlBase
 {
-    public class MethodInvocationModel
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Linq;
+    using System.Reflection;
+    using System.Text;
+    using Kistl.API;
+    using Kistl.API.Configuration;
+    using Kistl.App.Base;
+    using Kistl.App.Extensions;
+
+    public class MethodInvocationViewModel
         : DataObjectViewModel
     {
-        public new delegate MethodInvocationModel Factory(IKistlContext dataCtx, MethodInvocation mdl);
+        public new delegate MethodInvocationViewModel Factory(IKistlContext dataCtx, MethodInvocation mdl);
 
-        public MethodInvocationModel(
+        public MethodInvocationViewModel(
             IViewModelDependencies appCtx, KistlConfig config, IKistlContext dataCtx,
             MethodInvocation mdl)
             : base(appCtx, config, dataCtx, mdl)

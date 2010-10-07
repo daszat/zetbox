@@ -99,14 +99,14 @@ namespace Kistl.Client.Presentables.ValueViewModels
             ValueModel.ClearValue();
         }
 
-        private ICommand _ClearValueCommand = null;
-        public virtual ICommand ClearValueCommand
+        private ICommandViewModel _ClearValueCommand = null;
+        public virtual ICommandViewModel ClearValueCommand
         {
             get
             {
                 if (_ClearValueCommand == null)
                 {
-                    _ClearValueCommand = ModelFactory.CreateViewModel<SimpleCommandModel.Factory>()
+                    _ClearValueCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>()
                         .Invoke(DataContext, "Clear value", "Sets the value to nothing", () => ClearValue(), () => AllowNullInput);
                 }
                 return _ClearValueCommand;
@@ -157,7 +157,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             }
         }
 
-        public bool Requiered
+        public bool Required
         {
             get { return !this.AllowNullInput; }
         }
@@ -360,14 +360,14 @@ namespace Kistl.Client.Presentables.ValueViewModels
             }
         }
 
-        private ICommand _EditCommand = null;
-        public ICommand EditCommand
+        private ICommandViewModel _EditCommand = null;
+        public ICommandViewModel EditCommand
         {
             get
             {
                 if (_EditCommand == null)
                 {
-                    _EditCommand = ModelFactory.CreateViewModel<SimpleCommandModel.Factory>().Invoke(DataContext, "Edit", "Opens a Editor Dialog", () => Edit(), null);
+                    _EditCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, "Edit", "Opens a Editor Dialog", () => Edit(), null);
                 }
                 return _EditCommand;
             }
@@ -375,8 +375,8 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
         public void Edit()
         {
-            ModelFactory.ShowModel(
-                    ModelFactory.CreateViewModel<MultiLineEditorDialogModel.Factory>().Invoke(
+            ViewModelFactory.ShowModel(
+                    ViewModelFactory.CreateViewModel<MultiLineEditorDialogViewModel.Factory>().Invoke(
                         DataContext,
                         Value,
                         (v) => Value = v),

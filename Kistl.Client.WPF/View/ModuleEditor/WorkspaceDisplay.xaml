@@ -14,9 +14,9 @@
 
         <DockPanel Grid.Column="0">
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
-                <ctrls:CommandButton CommandModel="{Binding RefreshCommand}" />
-                <ctrls:CommandButton CommandModel="{Binding EditCurrentModuleCommand}" />
-                <ctrls:CommandButton CommandModel="{Binding NewModuleCommand}" />
+                <ctrls:CommandButton CommandViewModel="{Binding RefreshCommand}" />
+                <ctrls:CommandButton CommandViewModel="{Binding EditCurrentModuleCommand}" />
+                <ctrls:CommandButton CommandViewModel="{Binding NewModuleCommand}" />
             </StackPanel>
             <ComboBox DockPanel.Dock="Top" ItemsSource="{Binding ModuleList}" SelectedItem="{Binding CurrentModule}" />
             <TreeView x:Name="NavTree"

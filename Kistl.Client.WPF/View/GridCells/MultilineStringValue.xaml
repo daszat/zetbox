@@ -8,7 +8,7 @@
              commands:SmartRoutedUICommand.IsCommandSink="True"
              MinWidth="150">
     <DockPanel>
-        <ctrls:CommandButton DockPanel.Dock="Right" CommandModel="{Binding EditCommand}" />
+        <ctrls:CommandButton DockPanel.Dock="Right" CommandViewModel="{Binding EditCommand}" />
         <TextBlock Text="{Binding ShortText, Mode=OneWay}" />
     </DockPanel>
 </UserControl>

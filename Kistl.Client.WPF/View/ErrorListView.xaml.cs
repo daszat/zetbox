@@ -29,7 +29,7 @@ namespace Kistl.Client.WPF.View
 
         private void Refresh_Click(object sender, RoutedEventArgs e)
         {
-            ((ErrorListModel)DataContext).RefreshErrors();
+            ((ErrorListViewModel)DataContext).RefreshErrors();
         }
     }
 }

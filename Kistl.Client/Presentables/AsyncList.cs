@@ -1,16 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Linq;
-using System.Text;
-using System.Collections.ObjectModel;
-using Kistl.API;
 
 namespace Kistl.Client.Presentables
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Collections.Specialized;
+    using System.Linq;
+    using System.Text;
+    using Kistl.API;
+
     public class AsyncListFactory
     {
-
         public static ImmutableAsyncList<TAsync, TUi> UiCreateImmutable<TAsync, TUi>(
             IViewModelDependencies appCtx,
             IKistlContext ctx,
@@ -32,7 +32,6 @@ namespace Kistl.Client.Presentables
         {
             return new AsyncList<TAsync, TUi>(appCtx, ctx, parentModel, asyncNotifier, asyncOriginalList, uiTransform, uiInverseTransform);
         }
-
     }
 
     /// <summary>
@@ -40,7 +39,6 @@ namespace Kistl.Client.Presentables
     /// </summary>
     public class ImmutableAsyncList<TAsync, TUi>
     {
-
         private IViewModelDependencies _appCtx;
         private ViewModel _parentModel;
         private Func<IEnumerable<TAsync>> _asyncOriginalList;
@@ -118,7 +116,6 @@ namespace Kistl.Client.Presentables
     /// </summary>
     public class AsyncList<TAsync, TUi>
     {
-
         private IViewModelDependencies _appCtx;
         private ViewModel _parentModel;
         private Func<IList<TAsync>> _asyncOriginalList;
@@ -238,5 +235,4 @@ namespace Kistl.Client.Presentables
         #endregion
 
     }
-
 }

@@ -1,24 +1,25 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Kistl.API;
-using Kistl.App.Base;
 
 namespace Kistl.Client.Presentables.KistlBase
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    using Kistl.API;
+    using Kistl.App.Base;
+    
     /// <summary>
     /// Models a <see cref="System.Type"/>. Contains references to the Assembly and the respective TypeRef.
     /// </summary>
-    public class SystemTypeModel
+    public class SystemTypeViewModel
         : ViewModel
     {
-        public new delegate SystemTypeModel Factory(IKistlContext dataCtx, Type type);
+        public new delegate SystemTypeViewModel Factory(IKistlContext dataCtx, Type type);
 
         private Type _type;
 
-        public SystemTypeModel(
+        public SystemTypeViewModel(
             IViewModelDependencies appCtx, IKistlContext dataCtx,
             Type type)
             : base(appCtx, dataCtx)
@@ -44,13 +45,13 @@ namespace Kistl.Client.Presentables.KistlBase
         /// <summary>
         /// The Assembly containing this Type. MAY be null, see HasAssembly.
         /// </summary>
-        public AssemblyModel Assembly { get; private set; }
+        public AssemblyViewModel Assembly { get; private set; }
 
         /// <summary>
         /// If the Assembly containing this Type is not yet stored in the data 
         /// store, this command can construct it.
         /// </summary>
-        public ICommand CreateAssembly { get; private set; }
+        public ICommandViewModel CreateAssembly { get; private set; }
 
         /// <inheritdoc />
         public override string Name

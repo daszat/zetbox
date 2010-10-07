@@ -30,12 +30,12 @@ namespace Kistl.Client.ASPNET.Toolkit
     }
 
     /// <summary>
-    /// The ASP.NET implementation of a <see cref="ModelFactory"/>. Most 
+    /// The ASP.NET implementation of a <see cref="ViewModelFactory"/>. Most 
     /// methods are not implemented, since they would require impossible user 
     /// interaction.
     /// </summary>
     public class AspnetModelFactory
-        : ModelFactory
+        : ViewModelFactory
     {
 
         public AspnetModelFactory(Autofac.ILifetimeScope container, IFrozenContext metaCtx)
@@ -101,14 +101,14 @@ namespace Kistl.Client.ASPNET.Toolkit
 
     public static class AspnetModelFactoryExtensions
     {
-        public static object CreateDefaultView(this IModelFactory self, ViewModel mdl, Control container)
+        public static object CreateDefaultView(this IViewModelFactory self, ViewModel mdl, Control container)
         {
             if (self == null) { throw new ArgumentNullException("self"); }
 
             return AddControl(container, null /*self.CreateDefaultView(mdl)*/);
         }
 
-        public static object CreateSpecificView(this IModelFactory self, ViewModel mdl, ControlKind kind, Control container)
+        public static object CreateSpecificView(this IViewModelFactory self, ViewModel mdl, ControlKind kind, Control container)
         {
             if (self == null) { throw new ArgumentNullException("self"); }
 

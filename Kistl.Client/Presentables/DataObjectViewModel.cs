@@ -85,7 +85,7 @@ namespace Kistl.Client.Presentables
                 FetchPropertyList();
                 _propertyModels = new LookupDictionary<Property, Property, BaseValueViewModel>(_propertyList, k => k, v =>
                 {
-                    var result = ModelFactory.CreateViewModel<BaseValueViewModel.Factory>(v).Invoke(DataContext, v.GetValueModel(Object));
+                    var result = ViewModelFactory.CreateViewModel<BaseValueViewModel.Factory>(v).Invoke(DataContext, v.GetValueModel(Object));
                     result.IsReadOnly = IsReadOnly;
                     return result;
                 });
@@ -110,21 +110,21 @@ namespace Kistl.Client.Presentables
             }
         }
 
-        private ReadOnlyCollection<PropertyGroupModel> _propertyGroups;
-        public ReadOnlyCollection<PropertyGroupModel> PropertyGroups
+        private ReadOnlyCollection<PropertyGroupViewModel> _propertyGroups;
+        public ReadOnlyCollection<PropertyGroupViewModel> PropertyGroups
         {
             get
             {
                 if (_propertyGroups == null)
                 {
-                    _propertyGroups = new ReadOnlyCollection<PropertyGroupModel>(CreatePropertyGroups());
+                    _propertyGroups = new ReadOnlyCollection<PropertyGroupViewModel>(CreatePropertyGroups());
 
                 }
                 return _propertyGroups;
             }
         }
 
-        protected virtual List<PropertyGroupModel> CreatePropertyGroups()
+        protected virtual List<PropertyGroupViewModel> CreatePropertyGroups()
         {
             FetchPropertyModels();
             return _propertyList
@@ -133,34 +133,34 @@ namespace Kistl.Client.Presentables
                                             .Select(s => new { Category = s, Property = p }))
                         .GroupBy(x => x.Category, x => x.Property)
                         .OrderBy(group => group.Key)
-                        .Select<IGrouping<string, Property>, PropertyGroupModel>(group =>
+                        .Select<IGrouping<string, Property>, PropertyGroupViewModel>(group =>
                         {
                             var lst = group.Select(p => _propertyModels[p]).Cast<ViewModel>().ToList();
 
                             if (lst.Count == 1)
                             {
-                                return ModelFactory.CreateViewModel<SinglePropertyGroupModel.Factory>().Invoke(
+                                return ViewModelFactory.CreateViewModel<SinglePropertyGroupViewModel.Factory>().Invoke(
                                     DataContext, group.Key, lst);
                             }
                             else
                             {
-                                return ModelFactory.CreateViewModel<MultiplePropertyGroupModel.Factory>().Invoke(
+                                return ViewModelFactory.CreateViewModel<MultiplePropertyGroupViewModel.Factory>().Invoke(
                                     DataContext, group.Key, lst);
                             }
                         })
                         .ToList();
         }
 
-        public LookupDictionary<string, PropertyGroupModel, PropertyGroupModel> PropertyGroupsByName
+        public LookupDictionary<string, PropertyGroupViewModel, PropertyGroupViewModel> PropertyGroupsByName
         {
             get
             {
-                return new LookupDictionary<string, PropertyGroupModel, PropertyGroupModel>(PropertyGroups, mdl => mdl.Title, mdl => mdl);
+                return new LookupDictionary<string, PropertyGroupViewModel, PropertyGroupViewModel>(PropertyGroups, mdl => mdl.Title, mdl => mdl);
             }
         }
 
-        private PropertyGroupModel _selectedPropertyGroup;
-        public PropertyGroupModel SelectedPropertyGroup
+        private PropertyGroupViewModel _selectedPropertyGroup;
+        public PropertyGroupViewModel SelectedPropertyGroup
         {
             get
             {
@@ -311,31 +311,31 @@ namespace Kistl.Client.Presentables
         #endregion
 
 
-        private ObservableCollection<ActionModel> _actionsCache;
-        private ReadOnlyObservableCollection<ActionModel> _actionsView;
-        public ReadOnlyObservableCollection<ActionModel> Actions
+        private ObservableCollection<ActionViewModel> _actionsCache;
+        private ReadOnlyObservableCollection<ActionViewModel> _actionsView;
+        public ReadOnlyObservableCollection<ActionViewModel> Actions
         {
             get
             {
                 if (_actionsView == null)
                 {
-                    _actionsCache = new ObservableCollection<ActionModel>();
-                    _actionsView = new ReadOnlyObservableCollection<ActionModel>(_actionsCache);
+                    _actionsCache = new ObservableCollection<ActionViewModel>();
+                    _actionsView = new ReadOnlyObservableCollection<ActionViewModel>(_actionsCache);
                     FetchActions();
                 }
                 return _actionsView;
             }
         }
-        private IDictionary<string, ActionModel> _actionModelsByName;
-        public IDictionary<string, ActionModel> ActionModelsByName
+        private IDictionary<string, ActionViewModel> _ActionViewModelsByName;
+        public IDictionary<string, ActionViewModel> ActionViewModelsByName
         {
             get
             {
-                if (_actionModelsByName == null)
+                if (_ActionViewModelsByName == null)
                 {
-                    _actionModelsByName = Actions.ToDictionary(a => a.Name);
+                    _ActionViewModelsByName = Actions.ToDictionary(a => a.Name);
                 }
-                return _actionModelsByName;
+                return _ActionViewModelsByName;
             }
         }
 
@@ -398,16 +398,16 @@ namespace Kistl.Client.Presentables
                 cls = cls.BaseObjectClass;
             }
 
-            SetClassActionModels(cls, actions);
+            SetClassActionViewModels(cls, actions);
         }
 
         // TODO: should go to renderer and use database backed decision tables
-        protected virtual void SetClassActionModels(ObjectClass cls, IEnumerable<Method> methods)
+        protected virtual void SetClassActionViewModels(ObjectClass cls, IEnumerable<Method> methods)
         {
             foreach (var action in methods)
             {
                 //Debug.Assert(action.Parameter.Count == 0);
-                _actionsCache.Add(ModelFactory.CreateViewModel<ActionModel.Factory>().Invoke(DataContext, _object, action));
+                _actionsCache.Add(ViewModelFactory.CreateViewModel<ActionViewModel.Factory>().Invoke(DataContext, _object, action));
             }
         }
 
@@ -419,31 +419,31 @@ namespace Kistl.Client.Presentables
 
             if (retParam is BoolParameter && !retParam.IsList)
             {
-                return (ModelFactory.CreateViewModel<NullableResultModel<Boolean>.Factory>().Invoke(DataContext, _object, pm));
+                return (ViewModelFactory.CreateViewModel<NullableResultModel<Boolean>.Factory>().Invoke(DataContext, _object, pm));
             }
             else if (retParam is DateTimeParameter && !retParam.IsList)
             {
-                return (ModelFactory.CreateViewModel<NullableResultModel<DateTime>.Factory>().Invoke(DataContext, _object, pm));
+                return (ViewModelFactory.CreateViewModel<NullableResultModel<DateTime>.Factory>().Invoke(DataContext, _object, pm));
             }
             else if (retParam is DoubleParameter && !retParam.IsList)
             {
-                return (ModelFactory.CreateViewModel<NullableResultModel<Double>.Factory>().Invoke(DataContext, _object, pm));
+                return (ViewModelFactory.CreateViewModel<NullableResultModel<Double>.Factory>().Invoke(DataContext, _object, pm));
             }
             else if (retParam is IntParameter && !retParam.IsList)
             {
-                return (ModelFactory.CreateViewModel<NullableResultModel<int>.Factory>().Invoke(DataContext, _object, pm));
+                return (ViewModelFactory.CreateViewModel<NullableResultModel<int>.Factory>().Invoke(DataContext, _object, pm));
             }
             else if (retParam is DecimalParameter && !retParam.IsList)
             {
-                return (ModelFactory.CreateViewModel<NullableResultModel<decimal>.Factory>().Invoke(DataContext, _object, pm));
+                return (ViewModelFactory.CreateViewModel<NullableResultModel<decimal>.Factory>().Invoke(DataContext, _object, pm));
             }
             else if (retParam is StringParameter && !retParam.IsList)
             {
-                return (ModelFactory.CreateViewModel<ObjectResultModel<string>.Factory>().Invoke(DataContext, _object, pm));
+                return (ViewModelFactory.CreateViewModel<ObjectResultModel<string>.Factory>().Invoke(DataContext, _object, pm));
             }
             else if (retParam is ObjectParameter && !retParam.IsList)
             {
-                return (ModelFactory.CreateViewModel<ObjectResultModel<IDataObject>.Factory>().Invoke(DataContext, _object, pm));
+                return (ViewModelFactory.CreateViewModel<ObjectResultModel<IDataObject>.Factory>().Invoke(DataContext, _object, pm));
             }
             //else if (retParam is EnumParameter && !retParam.IsList)
             //{

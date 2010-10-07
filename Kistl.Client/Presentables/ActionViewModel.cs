@@ -1,20 +1,21 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Kistl.API;
-using Kistl.App.Base;
-using System.Reflection;
-using System.ComponentModel;
 
 namespace Kistl.Client.Presentables
 {
-    public class ActionModel
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Linq;
+    using System.Reflection;
+    using System.Text;
+    using Kistl.API;
+    using Kistl.App.Base;
+
+    public class ActionViewModel
         : ViewModel
     {
-        public new delegate ActionModel Factory(IKistlContext dataCtx, IDataObject obj, Method m);
+        public new delegate ActionViewModel Factory(IKistlContext dataCtx, IDataObject obj, Method m);
 
-        public ActionModel(
+        public ActionViewModel(
             IViewModelDependencies appCtx, IKistlContext dataCtx,
             IDataObject obj, Method m)
             : base(appCtx, dataCtx)
@@ -49,7 +50,7 @@ namespace Kistl.Client.Presentables
             IDataObject result = info.Invoke(Object, new object[] { }) as IDataObject;
             if (result != null && result.Context == DataContext)
             {
-                this.ModelFactory.ShowModel(this.ModelFactory.CreateViewModel<DataObjectViewModel.Factory>(result).Invoke(DataContext, result), true);
+                this.ViewModelFactory.ShowModel(this.ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>(result).Invoke(DataContext, result), true);
             }
             if (callback != null)
                 callback();

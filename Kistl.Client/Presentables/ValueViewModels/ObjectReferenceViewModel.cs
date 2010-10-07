@@ -134,17 +134,17 @@ namespace Kistl.Client.Presentables.ValueViewModels
         public void OpenReference()
         {
             if (Value != null)
-                ModelFactory.ShowModel(Value, true);
+                ViewModelFactory.ShowModel(Value, true);
         }
 
-        private ICommand _openReferenceCommand;
-        public ICommand OpenReferenceCommand
+        private ICommandViewModel _openReferenceCommand;
+        public ICommandViewModel OpenReferenceCommand
         {
             get
             {
                 if (_openReferenceCommand == null)
                 {
-                    _openReferenceCommand = ModelFactory.CreateViewModel<SimpleCommandModel.Factory>()
+                    _openReferenceCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>()
                         .Invoke(DataContext, "Open", "Open the referenced object", () => OpenReference(), () => Value != null);
                 }
                 return _openReferenceCommand;
@@ -168,7 +168,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             {
                 var targetType = baseclass.GetDescribedInterfaceType();
                 var item = this.DataContext.Create(targetType);
-                var model = ModelFactory.CreateViewModel<DataObjectViewModel.Factory>().Invoke(DataContext, item);
+                var model = ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>().Invoke(DataContext, item);
 
                 Value = model;
 
@@ -177,8 +177,8 @@ namespace Kistl.Client.Presentables.ValueViewModels
             }
             else
             {
-                ModelFactory.ShowModel(
-                    ModelFactory.CreateViewModel<DataObjectSelectionTaskModel.Factory>().Invoke(
+                ViewModelFactory.ShowModel(
+                    ViewModelFactory.CreateViewModel<DataObjectSelectionTaskViewModel.Factory>().Invoke(
                         DataContext,
                         null,
                         children.AsQueryable(),
@@ -188,7 +188,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                             {
                                 var targetType = ((ObjectClass)chosen.Object).GetDescribedInterfaceType();
                                 var item = this.DataContext.Create(targetType);
-                                var model = ModelFactory.CreateViewModel<DataObjectViewModel.Factory>().Invoke(DataContext, item);
+                                var model = ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>().Invoke(DataContext, item);
 
                                 Value = model;
                                 if (onCreated != null)
@@ -203,14 +203,14 @@ namespace Kistl.Client.Presentables.ValueViewModels
             }
         }
 
-        private ICommand _createNewItemAndSetValueCommand;
-        public ICommand CreateNewItemAndSetValueCommand
+        private ICommandViewModel _createNewItemAndSetValueCommand;
+        public ICommandViewModel CreateNewItemAndSetValueCommand
         {
             get
             {
                 if (_createNewItemAndSetValueCommand == null)
                 {
-                    _createNewItemAndSetValueCommand = ModelFactory.CreateViewModel<SimpleCommandModel.Factory>()
+                    _createNewItemAndSetValueCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>()
                         .Invoke(DataContext, "Create new item", "Create new item", () => CreateNewItemAndSetValue(null), () => !DataContext.IsReadonly);
                 }
                 return _createNewItemAndSetValueCommand;
@@ -223,7 +223,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
         public void SelectValue()
         {
             var ifType = DataContext.GetInterfaceType(ObjectReferenceModel.ReferencedClass);
-            var selectionTask = ModelFactory.CreateViewModel<DataObjectSelectionTaskModel.Factory>().Invoke(
+            var selectionTask = ViewModelFactory.CreateViewModel<DataObjectSelectionTaskViewModel.Factory>().Invoke(
                 DataContext,
                 ifType.GetObjectClass(FrozenContext),
                 null,
@@ -235,18 +235,18 @@ namespace Kistl.Client.Presentables.ValueViewModels
                     }
                 }),
                 null);
-            ModelFactory.ShowModel(selectionTask, true);
+            ViewModelFactory.ShowModel(selectionTask, true);
         }
 
-        private ICommand _SelectValueCommand;
+        private ICommandViewModel _SelectValueCommand;
 
-        public ICommand SelectValueCommand
+        public ICommandViewModel SelectValueCommand
         {
             get
             {
                 if (_SelectValueCommand == null)
                 {
-                    _SelectValueCommand = ModelFactory.CreateViewModel<SimpleCommandModel.Factory>()
+                    _SelectValueCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>()
                         .Invoke(DataContext, "Select", "Selects another reference", () => SelectValue(), () => !DataContext.IsReadonly);
                 }
                 return _SelectValueCommand;
@@ -289,7 +289,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             var obj = ValueModel.Value;
             if (obj != null)
             {
-                _valueCache = ModelFactory.CreateViewModel<DataObjectViewModel.Factory>().Invoke(DataContext, ValueModel.Value);
+                _valueCache = ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>().Invoke(DataContext, ValueModel.Value);
             }
             _valueCacheInititalized = true;
         }

@@ -13,7 +13,7 @@ namespace Kistl.Client.Forms
     using Kistl.Client.Presentables.ObjectBrowser;
 
     public class FormsModelFactory
-        : ModelFactory
+        : ViewModelFactory
     {
 
         private List<WorkspaceView> _workspaces = new List<WorkspaceView>();

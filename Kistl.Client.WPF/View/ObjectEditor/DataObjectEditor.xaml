@@ -48,7 +48,7 @@
                         BorderThickness="0"
                         HorizontalContentAlignment="Stretch">
                 <TabControl.Resources>
-                    <DataTemplate DataType="{x:Type client:SinglePropertyGroupModel}">
+                    <DataTemplate DataType="{x:Type client:SinglePropertyGroupViewModel}">
                         <ItemsControl ItemsSource="{Binding PropertyModels, ValidatesOnDataErrors=true}"
                                           BorderThickness="0"
                                           HorizontalContentAlignment="Stretch">
@@ -64,7 +64,7 @@
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
                     </DataTemplate>
-                    <DataTemplate DataType="{x:Type client:MultiplePropertyGroupModel}">
+                    <DataTemplate DataType="{x:Type client:MultiplePropertyGroupViewModel}">
                         <ScrollViewer VerticalScrollBarVisibility="Visible">
                             <ItemsControl ItemsSource="{Binding PropertyModels, ValidatesOnDataErrors=true}"
                                           BorderThickness="0"

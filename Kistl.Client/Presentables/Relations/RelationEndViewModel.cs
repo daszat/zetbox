@@ -1,23 +1,23 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Kistl.API;
-using Kistl.App.Base;
-using Kistl.API.Configuration;
-using Kistl.Client.Presentables.ValueViewModels;
 
 namespace Kistl.Client.Presentables.Relations
 {
-    public class RelationEndModel
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using Kistl.API;
+    using Kistl.API.Configuration;
+    using Kistl.App.Base;
+    using Kistl.Client.Presentables.ValueViewModels;
+    
+    public class RelationEndViewModel
         : DataObjectViewModel
     {
-        public new delegate RelationEndModel Factory(IKistlContext dataCtx, RelationEnd relEnd);
+        public new delegate RelationEndViewModel Factory(IKistlContext dataCtx, RelationEnd relEnd);
 
         private RelationEnd _relationEnd;
 
-        public RelationEndModel(
+        public RelationEndViewModel(
             IViewModelDependencies appCtx, KistlConfig config, IKistlContext dataCtx,
             RelationEnd relEnd)
             : base(appCtx, config, dataCtx, relEnd)
@@ -37,7 +37,7 @@ namespace Kistl.Client.Presentables.Relations
 
         public DataObjectViewModel Navigator { get; private set; }
 
-        public ICommand CreateNavigatorCommand { get; private set; }
+        public ICommandViewModel CreateNavigatorCommand { get; private set; }
 
         public ObjectReferenceViewModel RelatedClass { get; private set; }
 

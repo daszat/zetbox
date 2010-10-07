@@ -9,16 +9,16 @@ namespace Kistl.Client.WPF.Commands
     using System.Windows.Data;
 
     /// <summary>
-    /// Converts a Kistl ICommand to a WPF ICommand
+    /// Converts a Kistl ICommandViewModel to a WPF ICommand
     /// </summary>
-    [ValueConversion(typeof(Kistl.Client.Presentables.ICommand), typeof(System.Windows.Input.ICommand))]
+    [ValueConversion(typeof(Kistl.Client.Presentables.ICommandViewModel), typeof(System.Windows.Input.ICommand))]
     public class Converter
         : IValueConverter
     {
         #region IValueConverter Members
 
         /// <summary>
-        /// Converts a <see cref="Kistl.Client.Presentables.ICommand"/> into a <see cref="System.Windows.Input.ICommand"/> by using the <see cref="WrappedKistlCommand"/>.
+        /// Converts a <see cref="Kistl.Client.Presentables.ICommandViewModel"/> into a <see cref="System.Windows.Input.ICommand"/> by using the <see cref="WrappedKistlCommand"/>.
         /// </summary>
         /// <param name="value">the command to wrap</param>
         /// <param name="targetType">The parameter is not used.</param>
@@ -27,7 +27,7 @@ namespace Kistl.Client.WPF.Commands
         /// <returns>A new <see cref="System.Windows.Input.ICommand"/> acting like the specified <paramref name="value"/>.</returns>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var command = value as Kistl.Client.Presentables.ICommand;
+            var command = value as Kistl.Client.Presentables.ICommandViewModel;
             if (command != null)
             {
                 return new WrappedKistlCommand(command);

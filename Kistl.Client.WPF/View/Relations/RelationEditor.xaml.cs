@@ -22,7 +22,7 @@ namespace Kistl.Client.WPF.View.Relations
     /// <summary>
     /// Interaction logic for RelationEditor.xaml
     /// </summary>
-    public partial class RelationEditor : UserControl, IHasViewModel<RelationModel>
+    public partial class RelationEditor : UserControl, IHasViewModel<RelationViewModel>
     {
 
         public RelationEditor()
@@ -30,9 +30,9 @@ namespace Kistl.Client.WPF.View.Relations
             InitializeComponent();
         }
 
-        public RelationModel ViewModel
+        public RelationViewModel ViewModel
         {
-            get { return (RelationModel)DataContext; }
+            get { return (RelationViewModel)DataContext; }
         }
     }
 

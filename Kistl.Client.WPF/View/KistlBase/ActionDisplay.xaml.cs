@@ -19,7 +19,7 @@ namespace Kistl.Client.WPF.View.KistlBase
     /// <summary>
     /// Interaction logic for ActionView.xaml
     /// </summary>
-    public partial class ActionDisplay : UserControl, IHasViewModel<ActionModel>
+    public partial class ActionDisplay : UserControl, IHasViewModel<ActionViewModel>
     {
         public ActionDisplay()
         {
@@ -31,9 +31,9 @@ namespace Kistl.Client.WPF.View.KistlBase
             ViewModel.Execute(null);
         }
 
-        public ActionModel ViewModel
+        public ActionViewModel ViewModel
         {
-            get { return (ActionModel)DataContext; }
+            get { return (ActionViewModel)DataContext; }
         }
     }
 }

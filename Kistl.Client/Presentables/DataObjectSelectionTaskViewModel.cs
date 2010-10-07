@@ -1,28 +1,29 @@
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-
-using Kistl.API;
-using Kistl.App.Base;
-using Kistl.Client.Presentables.KistlBase;
 
 namespace Kistl.Client.Presentables
 {
-    public class DataObjectSelectionTaskModel
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Linq;
+    using System.Text;
+
+    using Kistl.API;
+    using Kistl.App.Base;
+    using Kistl.Client.Presentables.KistlBase;
+
+    public class DataObjectSelectionTaskViewModel
         : WindowViewModel, IRefreshCommandListener
     {
-        public new delegate DataObjectSelectionTaskModel Factory(IKistlContext dataCtx,
+        public new delegate DataObjectSelectionTaskViewModel Factory(IKistlContext dataCtx,
             ObjectClass type,
             IQueryable qry,
             Action<DataObjectViewModel> callback,
-            IList<CommandModel> additionalActions);
+            IList<CommandViewModel> additionalActions);
 
         /// <summary>
         /// Initializes a new instance of the SelectionTaskModel class. This is protected since there 
         /// is no ViewModelDescriptor for this class. Instead, either use the
-        /// <see cref="DataObjectSelectionTaskModel"/> or inherit this for a specific type yourself and 
+        /// <see cref="DataObjectSelectionTaskViewModel"/> or inherit this for a specific type yourself and 
         /// add your own ViewModelDescriptor and View.
         /// </summary>
         /// <param name="appCtx"></param>
@@ -31,17 +32,17 @@ namespace Kistl.Client.Presentables
         /// <param name="qry"></param>
         /// <param name="callback"></param>
         /// <param name="additionalActions"></param>
-        public DataObjectSelectionTaskModel(
+        public DataObjectSelectionTaskViewModel(
             IViewModelDependencies appCtx, IKistlContext dataCtx,
             ObjectClass type,
             IQueryable qry,
             Action<DataObjectViewModel> callback,
-            IList<CommandModel> additionalActions)
+            IList<CommandViewModel> additionalActions)
             : base(appCtx, dataCtx)
         {
             _callback = callback;
-            _additionalActions = new ReadOnlyCollection<CommandModel>(additionalActions ?? new CommandModel[] { });
-            ListViewModel = ModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(dataCtx, type, qry);
+            _additionalActions = new ReadOnlyCollection<CommandViewModel>(additionalActions ?? new CommandViewModel[] { });
+            ListViewModel = ViewModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(dataCtx, type, qry);
             ListViewModel.Commands.Clear();
             foreach (var cmd in _additionalActions)
             {
@@ -59,9 +60,9 @@ namespace Kistl.Client.Presentables
 
         public InstanceListViewModel ListViewModel { get; private set; }
 
-
         #region Public interface
-        public ReadOnlyCollection<CommandModel> AdditionalActions
+
+        public ReadOnlyCollection<CommandViewModel> AdditionalActions
         {
             get
             {
@@ -94,14 +95,15 @@ namespace Kistl.Client.Presentables
                 return ListViewModel.SelectedItems.FirstOrDefault();
             }
         }
+
         #endregion
 
         private Action<DataObjectViewModel> _callback;
-        private ReadOnlyCollection<CommandModel> _additionalActions;
+        private ReadOnlyCollection<CommandViewModel> _additionalActions;
 
         public override string Name
         {
-            get { return "Choose object of Type " + ListViewModel.DataTypeModel.Name; }
+            get { return "Choose object of Type " + ListViewModel.DataTypeViewModel.Name; }
         }
     }
 }

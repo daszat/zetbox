@@ -20,9 +20,9 @@ namespace Kistl.Client.Presentables
     public interface IViewModelDependencies
     {
         /// <summary>
-        /// The <see cref="ModelFactory"/> of this GUI.
+        /// The <see cref="ViewModelFactory"/> of this GUI.
         /// </summary>
-        IModelFactory Factory { get; }
+        IViewModelFactory Factory { get; }
 
         /// <summary>
         /// A <see cref="IThreadManager"/> for the UI Thread
@@ -81,7 +81,7 @@ namespace Kistl.Client.Presentables
         /// <summary>
         /// The factory from where new models should be created
         /// </summary>
-        public IModelFactory ModelFactory { get { return _dependencies.Factory; } }
+        public IViewModelFactory ViewModelFactory { get { return _dependencies.Factory; } }
 
         /// <summary>
         /// A <see cref="IKistlContext"/> to access the current user's data
@@ -208,7 +208,7 @@ namespace Kistl.Client.Presentables
 
     internal class DesignerDependencies : IViewModelDependencies
     {
-        public IModelFactory Factory
+        public IViewModelFactory Factory
         {
             get { throw new NotImplementedException(); }
         }

@@ -28,7 +28,7 @@ namespace Kistl.Client.ASPNET.Toolkit
                 HttpContext.Current.Items["__Current_KistlContextManagerModule_KistlContext"] = value;
             }
         }
-        public static IModelFactory ModelFactory { get; private set; }
+        public static IViewModelFactory ViewModelFactory { get; private set; }
         public static InterfaceType.Factory IftFactory { get; private set; }
 
         private static IContainer container;
@@ -66,7 +66,7 @@ namespace Kistl.Client.ASPNET.Toolkit
                 var builder = Kistl.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Client.Modules);
                 container = builder.Build();
 
-                ModelFactory = container.Resolve<IModelFactory>();
+                ViewModelFactory = container.Resolve<IViewModelFactory>();
                 IftFactory = container.Resolve<InterfaceType.Factory>();
 
             }

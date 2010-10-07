@@ -1,25 +1,27 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-
-using Kistl.App.GUI;
-using Kistl.API;
 
 namespace Kistl.Client.Presentables
 {
-    public interface ILabeledViewModel : INotifyPropertyChanged
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Linq;
+    using System.Text;
+    using Kistl.API;
+    using Kistl.App.GUI;
+
+    public interface ILabeledViewModel
+        : INotifyPropertyChanged
     {
         string Label { get; }
         string ToolTip { get; }
         ControlKind RequestedKind { get; }
         ViewModel Model { get; }
-        bool Requiered { get; }
+        bool Required { get; }
     }
 
     // No Viewdescriptor, code only
-    public class LabeledViewContainerViewModel : ViewModel, ILabeledViewModel
+    public class LabeledViewContainerViewModel
+        : ViewModel, ILabeledViewModel
     {
         public new delegate LabeledViewContainerViewModel Factory(IKistlContext dataCtx, string label, string toolTip, ViewModel mdl);
 
@@ -47,11 +49,11 @@ namespace Kistl.Client.Presentables
             set { _ToolTip = value; OnPropertyChanged("ToolTip"); }
         }
 
-        private bool _Requiered;
-        public bool Requiered
+        private bool _Required;
+        public bool Required
         {
-            get { return _Requiered; }
-            set { _Requiered = value; OnPropertyChanged("Requiered"); }
+            get { return _Required; }
+            set { _Required = value; OnPropertyChanged("Required"); }
         }
 
         public ViewModel Model

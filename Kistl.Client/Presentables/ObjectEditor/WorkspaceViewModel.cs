@@ -54,14 +54,14 @@ namespace Kistl.Client.Presentables.ObjectEditor
 
         #region Commands
 
-        private ICommand _DeleteCommand = null;
-        public ICommand DeleteCommand
+        private ICommandViewModel _DeleteCommand = null;
+        public ICommandViewModel DeleteCommand
         {
             get
             {
                 if (_DeleteCommand == null)
                 {
-                    _DeleteCommand = ModelFactory.CreateViewModel<SimpleItemCommandModel<DataObjectViewModel>.Factory>().Invoke(DataContext, "Delete", "",
+                    _DeleteCommand = ViewModelFactory.CreateViewModel<SimpleItemCommandViewModel<DataObjectViewModel>.Factory>().Invoke(DataContext, "Delete", "",
                         (items) => items.ForEach(i => i.Delete()));
                 }
                 return _DeleteCommand;
@@ -70,17 +70,17 @@ namespace Kistl.Client.Presentables.ObjectEditor
 
         #region Save Context
 
-        private ICommand _saveCommand;
+        private ICommandViewModel _saveCommand;
         /// <summary>
         /// This command submits all outstanding changes of this Workspace to the data store.
         /// The parameter has to be <value>null</value>.
         /// </summary>
-        public ICommand SaveCommand
+        public ICommandViewModel SaveCommand
         {
             get
             {
                 if (_saveCommand == null)
-                    _saveCommand = ModelFactory.CreateViewModel<SimpleCommandModel.Factory>()
+                    _saveCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>()
                         .Invoke(DataContext, "Save", "Saves outstanding changes to the data store.",
                         Save, CanSave);
 
@@ -88,17 +88,17 @@ namespace Kistl.Client.Presentables.ObjectEditor
             }
         }
 
-        private ICommand _saveAndCloseCommand;
+        private ICommandViewModel _saveAndCloseCommand;
         /// <summary>
         /// This command submits all outstanding changes of this Workspace to the data store.
         /// The parameter has to be <value>null</value>.
         /// </summary>
-        public ICommand SaveAndCloseCommand
+        public ICommandViewModel SaveAndCloseCommand
         {
             get
             {
                 if (_saveAndCloseCommand == null)
-                    _saveAndCloseCommand = ModelFactory.CreateViewModel<SimpleCommandModel.Factory>()
+                    _saveAndCloseCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>()
                         .Invoke(DataContext, "Save & Close", "Saves outstanding changes to the data store and closes the current workspace.",
                         () => { Save(); Close(); }, CanSave);
 
@@ -136,14 +136,14 @@ namespace Kistl.Client.Presentables.ObjectEditor
         #endregion
 
         #region AbortCommand
-        private ICommand _AbortCommand = null;
-        public ICommand AbortCommand
+        private ICommandViewModel _AbortCommand = null;
+        public ICommandViewModel AbortCommand
         {
             get
             {
                 if (_AbortCommand == null)
                 {
-                    _AbortCommand = ModelFactory.CreateViewModel<SimpleCommandModel.Factory>()
+                    _AbortCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>()
                         .Invoke(DataContext, "Abort", "Closes this workspace without saving", 
                         Close, null);
                 }
@@ -174,16 +174,16 @@ namespace Kistl.Client.Presentables.ObjectEditor
 
         #region Verify Context
 
-        private ICommand _verifyCommand;
+        private ICommandViewModel _verifyCommand;
         /// <summary>
         /// This command checks whether all constraints of the attached objects are satisfied.
         /// </summary>
-        public ICommand VerifyContextCommand
+        public ICommandViewModel VerifyContextCommand
         {
             get
             {
                 if (_verifyCommand == null)
-                    _verifyCommand = ModelFactory.CreateViewModel<SimpleCommandModel.Factory>()
+                    _verifyCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>()
                         .Invoke(DataContext, "Verify", "Verifies that all constraints are met.", ShowVerificationResults, null);
 
                 return _verifyCommand;
@@ -192,9 +192,9 @@ namespace Kistl.Client.Presentables.ObjectEditor
 
         public void ShowVerificationResults()
         {
-            var elm = ModelFactory.CreateViewModel<ErrorListModel.Factory>().Invoke(DataContext);
+            var elm = ViewModelFactory.CreateViewModel<ErrorListViewModel.Factory>().Invoke(DataContext);
             elm.RefreshErrors();
-            ModelFactory.ShowModel(elm, true);
+            ViewModelFactory.ShowModel(elm, true);
         }
 
 
@@ -225,7 +225,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
 
             var other = dataObject.Object;
             var here = DataContext.Find(DataContext.GetInterfaceType(other), other.ID);
-            var vm = ModelFactory.CreateViewModel<DataObjectViewModel.Factory>(here).Invoke(DataContext, here);
+            var vm = ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>(here).Invoke(DataContext, here);
             SelectedItem = vm;
             vm.RequestedKind = requestedKind;
             AddItem(vm);
@@ -241,7 +241,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
 
         public void Dispose()
         {
-            ModelFactory.OnIMultipleInstancesManagerDisposed(DataContext, this);
+            ViewModelFactory.OnIMultipleInstancesManagerDisposed(DataContext, this);
         }
 
         #endregion

@@ -15,7 +15,7 @@ namespace Kistl.Client.Presentables.KistlBase
     public interface IFilterExpression
     {
         bool Enabled { get; }
-        bool Requiered { get; }
+        bool Required { get; }
     }
 
     public interface ILinqFilterExpression : IFilterExpression
@@ -95,7 +95,7 @@ namespace Kistl.Client.Presentables.KistlBase
         }
 
         public abstract bool Enabled { get; }
-        public abstract bool Requiered { get; }
+        public abstract bool Required { get; }
 
         public string ToolTip { get; set; }
 
@@ -217,7 +217,7 @@ namespace Kistl.Client.Presentables.KistlBase
         }
 
         public bool Enabled { get { return true; } }
-        public bool Requiered { get { return true; } }
+        public bool Required { get { return true; } }
     }
 
     [ViewModelDescriptor("GUI", DefaultKind = "Kistl.App.GUI.SimpleBoolFilterKind", Description = "Code only filter expressions for switchable Filter")]
@@ -246,7 +246,7 @@ namespace Kistl.Client.Presentables.KistlBase
             }
         }
 
-        public override bool Requiered { get { return false; } }
+        public override bool Required { get { return false; } }
 
         #region ILinqFilterExpression Members
         public string Predicate
@@ -283,7 +283,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 return Values.Count > 0 && !string.IsNullOrEmpty(Values[0]);
             }
         }
-        public override bool Requiered { get { return false; } }
+        public override bool Required { get { return false; } }
 
         #region IPostFilterExpression Members
 
@@ -321,7 +321,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 return Values.Count > 0 && !string.IsNullOrEmpty(Values[0]);
             }
         }
-        public override bool Requiered { get { return false; } }
+        public override bool Required { get { return false; } }
 
         public virtual string Predicate
         {
@@ -370,7 +370,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 return base.Values.Count > 0;
             }
         }
-        public override bool Requiered { get { return Configuration.Requiered; } }
+        public override bool Required { get { return Configuration.Required; } }
 
         public virtual string Predicate
         {
@@ -407,7 +407,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 return base.Values.Count > 0;
             }
         }
-        public override bool Requiered { get { return Configuration.Requiered; } }
+        public override bool Required { get { return Configuration.Required; } }
 
         public virtual string Predicate
         {
@@ -481,7 +481,7 @@ namespace Kistl.Client.Presentables.KistlBase
                         .OrderBy(obj => obj.ToString()).ToList())
                     {
                         _PossibleValues.Add(new KeyValuePair<DataObjectViewModel, string>(
-                            ModelFactory.CreateViewModel<DataObjectViewModel.Factory>(obj).Invoke(DataContext, obj),
+                            ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>(obj).Invoke(DataContext, obj),
                             obj.ToString())
                         );
                     }

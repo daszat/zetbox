@@ -56,7 +56,7 @@ namespace Kistl.Client.Presentables.ObjectBrowser
                     _applicationsCache = new ObservableCollection<ApplicationViewModel>();
                     foreach (var app in FrozenContext.GetQuery<Kistl.App.GUI.Application>())
                     {
-                        _applicationsCache.Add(ModelFactory.CreateViewModel<ApplicationViewModel.Factory>().Invoke(DataContext, app));
+                        _applicationsCache.Add(ViewModelFactory.CreateViewModel<ApplicationViewModel.Factory>().Invoke(DataContext, app));
                     }
                 }
                 return _applicationsCache;
@@ -94,13 +94,13 @@ namespace Kistl.Client.Presentables.ObjectBrowser
         /// <summary>
         /// Creates a new instance of an <see cref="ObjectClass"/> and makes it the currently selected instance.
         /// </summary>
-        public ICommand CreateNewInstanceExternallyCommand
+        public ICommandViewModel CreateNewInstanceExternallyCommand
         {
             get
             {
                 if (_createNewInstanceExternallyCommand == null)
                 {
-                    _createNewInstanceExternallyCommand = ModelFactory.CreateViewModel<CreateNewInstanceExternallyCommand.Factory>().Invoke(DataContext);
+                    _createNewInstanceExternallyCommand = ViewModelFactory.CreateViewModel<CreateNewInstanceExternallyCommand.Factory>().Invoke(DataContext);
                 }
                 return _createNewInstanceExternallyCommand;
             }
@@ -117,7 +117,7 @@ namespace Kistl.Client.Presentables.ObjectBrowser
             var modules = DataContext.GetQuery<Module>().ToList();
             foreach (var m in modules)
             {
-                Modules.Add(ModelFactory.CreateViewModel<ModuleViewModel.Factory>(m).Invoke(DataContext, m));
+                Modules.Add(ViewModelFactory.CreateViewModel<ModuleViewModel.Factory>(m).Invoke(DataContext, m));
             }
         }
 
@@ -135,7 +135,7 @@ namespace Kistl.Client.Presentables.ObjectBrowser
 
             var other = dataObject.Object;
             var here = DataContext.Find(DataContext.GetInterfaceType(other), other.ID);
-            SelectedItem = ModelFactory.CreateViewModel<DataObjectViewModel.Factory>(here).Invoke(DataContext, here);
+            SelectedItem = ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>(here).Invoke(DataContext, here);
         }
 
         public override string Name
@@ -149,7 +149,7 @@ namespace Kistl.Client.Presentables.ObjectBrowser
     /// <summary>
     /// Creates a new instance of an <see cref="ObjectClass"/> and opens it in a new WorkspaceView.
     /// </summary>
-    internal class CreateNewInstanceExternallyCommand : CommandModel
+    internal class CreateNewInstanceExternallyCommand : CommandViewModel
     {
         public new delegate CreateNewInstanceExternallyCommand Factory(IKistlContext dataCtx);
 
@@ -164,7 +164,7 @@ namespace Kistl.Client.Presentables.ObjectBrowser
         public override bool CanExecute(object data)
         {
             return data != null
-                && data is ObjectClassModel;
+                && data is ObjectClassViewModel;
         }
 
         protected override void DoExecute(object data)
@@ -172,15 +172,15 @@ namespace Kistl.Client.Presentables.ObjectBrowser
             if (CanExecute(data))
             {
                 var externalCtx = ctxFactory();
-                var objectClass = data as ObjectClassModel;
+                var objectClass = data as ObjectClassViewModel;
 
                 // responsibility to externalCtx's disposal passes to newWorkspace
-                var newWorkspace = ModelFactory.CreateViewModel<ObjectEditor.WorkspaceViewModel.Factory>().Invoke(externalCtx);
+                var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditor.WorkspaceViewModel.Factory>().Invoke(externalCtx);
                 var newObject = externalCtx.Create(objectClass.GetDescribedInterfaceType());
-                var newModel = ModelFactory.CreateViewModel<DataObjectViewModel.Factory>(newObject).Invoke(externalCtx, newObject);
+                var newModel = ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>(newObject).Invoke(externalCtx, newObject);
 
                 newWorkspace.SelectedItem = newModel;
-                ModelFactory.ShowModel(newWorkspace, true);
+                ViewModelFactory.ShowModel(newWorkspace, true);
             }
         }
     }

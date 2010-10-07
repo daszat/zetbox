@@ -15,11 +15,11 @@
       <FileName>Presentables\DataObjectViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kistl.Client.Presentables.DataTypeModel" Collapsed="true">
+  <Class Name="Kistl.Client.Presentables.DataTypeViewModel" Collapsed="true">
     <Position X="3.75" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>EBAAAQAAAAYAgAQAAAAACAAAAARCABAAQIAAAgAAAAA=</HashCode>
-      <FileName>Presentables\DataTypeModel.cs</FileName>
+      <FileName>Presentables\DataTypeViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Kistl.Client.Presentables.ModuleModel" Collapsed="true">
@@ -52,14 +52,14 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="Kistl.Client.Presentables.MethodInvocationModel" Collapsed="true">
+  <Class Name="Kistl.Client.Presentables.KistlBase.MethodInvocationViewModel" Collapsed="true">
     <Position X="8.25" Y="3.75" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAgAAAAAAAAAAQAAAEAAAAAAAAAAAAAAICAAAAAAA=</HashCode>
-      <FileName>Presentables\MethodInvocationModel.cs</FileName>
+      <FileName>Presentables\KistlBase\MethodInvocationViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kistl.Client.Presentables.PropertyGroupModel" Collapsed="true">
+  <Class Name="Kistl.Client.Presentables.PropertyGroupViewModel" Collapsed="true">
     <Position X="0.75" Y="2" Width="1.75" />
     <InheritanceLine Type="Kistl.Client.Presentables.ViewModel" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
@@ -71,17 +71,17 @@
     </InheritanceLine>
     <TypeIdentifier>
       <HashCode>AEAAAAAAAIAEEEAAAAAAAAwAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Presentables\PropertyGroupModel.cs</FileName>
+      <FileName>Presentables\PropertyGroupViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kistl.Client.Presentables.ObjectClassModel" Collapsed="true">
+  <Class Name="Kistl.Client.Presentables.ObjectClassViewModel" Collapsed="true">
     <Position X="3.75" Y="5.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAIAgAAAAAAAAAAAAAACAAAAAAAAAAAAABA=</HashCode>
-      <FileName>Presentables\ObjectClassModel.cs</FileName>
+      <FileName>Presentables\ObjectClassViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kistl.Client.Presentables.ActionModel" Collapsed="true">
+  <Class Name="Kistl.Client.Presentables.ActionViewModel" Collapsed="true">
     <Position X="0.75" Y="3.25" Width="1.5" />
     <InheritanceLine Type="Kistl.Client.Presentables.ViewModel" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
@@ -93,7 +93,7 @@
     </InheritanceLine>
     <TypeIdentifier>
       <HashCode>AAAAAAAAEAAAAAQgAAAgAAwAAAAAAAAAAAAAAAAAEAA=</HashCode>
-      <FileName>Presentables\ActionModel.cs</FileName>
+      <FileName>Presentables\ActionViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Kistl.Client.Presentables.WorkspaceModel" Collapsed="true">

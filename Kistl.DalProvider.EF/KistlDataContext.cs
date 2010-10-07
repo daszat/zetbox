@@ -370,7 +370,7 @@ namespace Kistl.DalProvider.EF
         }
 
         /// <summary>
-        /// Attach an IPersistenceObject. The EntityFramework guarantees the all Objects are unique. No check requiered.
+        /// Attach an IPersistenceObject. The EntityFramework guarantees the all Objects are unique. No check required.
         /// </summary>
         /// <param name="obj">Object to Attach</param>
         /// <returns>Object Attached</returns>

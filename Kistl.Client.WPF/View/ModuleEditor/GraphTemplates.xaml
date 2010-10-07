@@ -25,7 +25,7 @@
                                 <CheckBox DockPanel.Dock="Left"
                                           IsChecked="{Binding IsGraphChecked}" />
                                 <ctrls:CommandButton DockPanel.Dock="Right"
-                                                     CommandModel="{Binding Open}" />
+                                                     CommandViewModel="{Binding Open}" />
                                 <TextBlock Text="{Binding Name}"
                                            Margin="5,0,0,0" />
                             </DockPanel>

@@ -3,6 +3,7 @@ namespace Kistl.Client.WPF.View.KistlBase
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Linq;
     using System.Text;
     using System.Windows;
@@ -14,13 +15,12 @@ namespace Kistl.Client.WPF.View.KistlBase
     using System.Windows.Media.Imaging;
     using System.Windows.Navigation;
     using System.Windows.Shapes;
-
     using Kistl.API;
     using Kistl.Client.GUI;
+    using Kistl.Client.Models;
     using Kistl.Client.Presentables;
-    using Kistl.Client.WPF.Commands;
-    using System.ComponentModel;
     using Kistl.Client.Presentables.ValueViewModels;
+    using Kistl.Client.WPF.Commands;
 
     /// <summary>
     /// Interaction logic for DataObjectListView.xaml
@@ -118,7 +118,7 @@ namespace Kistl.Client.WPF.View.KistlBase
                 switch (desc.Type)
                 {
                     case ColumnDisplayModel.ColumnType.MethodModel:
-                        cpFef.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(String.Format("ActionModelsByName[{0}]", desc.Name)), Mode = BindingMode.OneWay });
+                        cpFef.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(String.Format("ActionViewModelsByName[{0}]", desc.Name)), Mode = BindingMode.OneWay });
                         break;
                     case ColumnDisplayModel.ColumnType.PropertyModel:
                         cpFef.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(String.Format("PropertyModelsByName[{0}]", desc.Name)), Mode = BindingMode.OneWay });

@@ -1,26 +1,27 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Kistl.API;
-using Kistl.App.Base;
-using Kistl.App.GUI;
-using Kistl.Client.Presentables.ValueViewModels;
-using Kistl.Client.Models;
 
 namespace Kistl.Client.Presentables.SchemaMigration
 {
-    [ViewModelDescriptor("SchemaMigration", DefaultKind = "Kistl.App.GUI.ObjectCollectionKind", Description = "ViewModel for SourceTable.SourceColumns object collection")]
-    public class SourceColumnsObjectListModel : ObjectCollectionViewModel
-    {
-        public new delegate SourceColumnsObjectListModel Factory(IKistlContext dataCtx, IValueModel mdl);
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using Kistl.API;
+    using Kistl.App.Base;
+    using Kistl.App.GUI;
+    using Kistl.Client.Presentables.ValueViewModels;
+    using Kistl.Client.Models;
 
-        public SourceColumnsObjectListModel(
+    [ViewModelDescriptor("SchemaMigration", DefaultKind = "Kistl.App.GUI.ObjectCollectionKind", Description = "ViewModel for SourceTable.SourceColumns object collection")]
+    public class SourceColumnsObjectCollectionViewModel
+        : ObjectCollectionViewModel
+    {
+        public new delegate SourceColumnsObjectCollectionViewModel Factory(IKistlContext dataCtx, IValueModel mdl);
+
+        public SourceColumnsObjectCollectionViewModel(
             IViewModelDependencies appCtx, IKistlContext dataCtx,
             IObjectCollectionValueModel<ICollection<IDataObject>> mdl)
             : base(appCtx, dataCtx, mdl)
         {
-
         }
 
         protected override GridDisplayConfiguration CreateDisplayedColumns()

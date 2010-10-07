@@ -17,7 +17,7 @@ namespace Kistl.Client
     {
         private class ViewModelDependencies : IViewModelDependencies
         {
-            public ViewModelDependencies(IModelFactory f, IUiThreadManager ui, IAsyncThreadManager async, IFrozenContext frozenCtx)
+            public ViewModelDependencies(IViewModelFactory f, IUiThreadManager ui, IAsyncThreadManager async, IFrozenContext frozenCtx)
             {
                 Factory = f;
                 UiThread = ui;
@@ -27,7 +27,7 @@ namespace Kistl.Client
 
             #region IViewModelDependencies Members
 
-            public IModelFactory Factory
+            public IViewModelFactory Factory
             {
                 get;
                 private set;

@@ -1,25 +1,24 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Kistl.API;
-using Kistl.App.Base;
-using Kistl.App.Extensions;
-using Kistl.API.Configuration;
-using Kistl.Client.Presentables.ValueViewModels;
 
 namespace Kistl.Client.Presentables.Relations
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using Kistl.API;
+    using Kistl.API.Configuration;
+    using Kistl.App.Base;
+    using Kistl.App.Extensions;
+    using Kistl.Client.Presentables.ValueViewModels;
 
-    public class RelationModel
+    public class RelationViewModel
         : DataObjectViewModel
     {
-        public new delegate RelationModel Factory(IKistlContext dataCtx, Relation rel);
+        public new delegate RelationViewModel Factory(IKistlContext dataCtx, Relation rel);
 
         private Relation _relation;
 
-        public RelationModel(
+        public RelationViewModel(
             IViewModelDependencies appCtx, KistlConfig config, IKistlContext dataCtx,
             Relation rel)
             : base(appCtx, config, dataCtx, rel)
@@ -30,19 +29,19 @@ namespace Kistl.Client.Presentables.Relations
 
         #region Public interface
 
-        public RelationEndModel A
+        public RelationEndViewModel A
         {
             get
             {
-                return (RelationEndModel)((IValueViewModel<DataObjectViewModel>)PropertyModelsByName["A"]).Value;
+                return (RelationEndViewModel)((IValueViewModel<DataObjectViewModel>)PropertyModelsByName["A"]).Value;
             }
         }
 
-        public RelationEndModel B
+        public RelationEndViewModel B
         {
             get
             {
-                return (RelationEndModel)((IValueViewModel<DataObjectViewModel>)PropertyModelsByName["B"]).Value;
+                return (RelationEndViewModel)((IValueViewModel<DataObjectViewModel>)PropertyModelsByName["B"]).Value;
             }
         }
 

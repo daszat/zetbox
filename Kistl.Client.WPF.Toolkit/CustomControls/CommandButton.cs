@@ -10,39 +10,40 @@ namespace Kistl.Client.WPF.CustomControls
     using System.Windows.Data;
     using Kistl.Client.Presentables;
     
-    public class CommandButton : Button
+    public class CommandButton
+        : Button
     {
         public CommandButton()
         {
             {
-                var bCmd = new Binding("CommandModel");
+                var bCmd = new Binding("CommandViewModel");
                 bCmd.RelativeSource = RelativeSource.Self;
                 bCmd.Converter = new Commands.Converter();
                 this.SetBinding(CommandProperty, bCmd);
             }
 
             {
-                var bLabel = new Binding("CommandModel.Label");
+                var bLabel = new Binding("CommandViewModel.Label");
                 bLabel.RelativeSource = RelativeSource.Self;
                 this.SetBinding(ContentProperty, bLabel);
             }
 
             {
-                var bTooltip = new Binding("CommandModel.ToolTip");
+                var bTooltip = new Binding("CommandViewModel.ToolTip");
                 bTooltip.RelativeSource = RelativeSource.Self;
                 this.SetBinding(ToolTipProperty, bTooltip);
             }
         }
 
-        public ICommand CommandModel
+        public ICommandViewModel CommandViewModel
         {
-            get { return (ICommand)GetValue(CommandModelProperty); }
-            set { SetValue(CommandModelProperty, value); }
+            get { return (ICommandViewModel)GetValue(CommandViewModelProperty); }
+            set { SetValue(CommandViewModelProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for CommandModel.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty CommandModelProperty =
-            DependencyProperty.Register("CommandModel", typeof(ICommand), typeof(CommandButton));
+        // Using a DependencyProperty as the backing store for CommandViewModel.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CommandViewModelProperty =
+            DependencyProperty.Register("CommandViewModel", typeof(ICommandViewModel), typeof(CommandButton));
 
     }
 }

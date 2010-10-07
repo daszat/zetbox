@@ -15,7 +15,7 @@ using Kistl.Client.Presentables;
 namespace Kistl.Client.ASPNET.Toolkit.View
 {
     [ControlLocation("~/View/PropertyGroupBoxView.ascx")]
-    public abstract class PropertyGroupBoxView : ModelUserControl<PropertyGroupModel>
+    public abstract class PropertyGroupBoxView : ModelUserControl<PropertyGroupViewModel>
     {
         protected abstract Panel panelCtrl { get; }
         protected abstract Repeater repPropertiesCtrl { get; }
@@ -30,7 +30,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
             panelCtrl.GroupingText = Model.Title;
 
             repPropertiesCtrl.ItemDataBound += new RepeaterItemEventHandler(repPropertiesCtrl_ItemDataBound);
-            repPropertiesCtrl.DataSource = Model is SinglePropertyGroupModel ? new ViewModel [] { ((SinglePropertyGroupModel)Model).PropertyModel } : ((MultiplePropertyGroupModel)Model).PropertyModels.AsEnumerable();
+            repPropertiesCtrl.DataSource = Model is SinglePropertyGroupViewModel ? new ViewModel [] { ((SinglePropertyGroupViewModel)Model).PropertyModel } : ((MultiplePropertyGroupViewModel)Model).PropertyModels.AsEnumerable();
             repPropertiesCtrl.DataBind();
         }
 

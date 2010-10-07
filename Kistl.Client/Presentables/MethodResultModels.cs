@@ -1,15 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Kistl.API;
-using Kistl.App.Base;
-using System.ComponentModel;
-using Kistl.Client.Presentables.ValueViewModels;
 
 namespace Kistl.Client.Presentables
 {
-    public abstract class BaseMethodResultModel : ViewModel
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Linq;
+    using System.Text;
+    using Kistl.API;
+    using Kistl.App.Base;
+    using Kistl.Client.Presentables.ValueViewModels;
+
+    // TODO: (re)move to ValueViewModels\ and  ..\Models\
+    public abstract class BaseMethodResultModel
+        : ViewModel
     {
         public new delegate BaseMethodResultModel Factory(IKistlContext dataCtx, IDataObject obj, Method m);
 
@@ -149,7 +152,7 @@ namespace Kistl.Client.Presentables
             throw new NotImplementedException();
         }
 
-        public ICommand ClearValueCommand
+        public ICommandViewModel ClearValueCommand
         {
             get { throw new NotImplementedException(); }
         }

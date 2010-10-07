@@ -23,7 +23,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
             : base(allowParallelEdges, vertexCapacity) { }
     }
 
-    public class DataTypeGraphModel : Presentables.DataTypeModel
+    public class DataTypeGraphModel : Presentables.DataTypeViewModel
     {
         public new delegate DataTypeGraphModel Factory(IKistlContext dataCtx, DataType obj, DiagramViewModel parent);
 
@@ -81,19 +81,19 @@ namespace Kistl.Client.Presentables.ModuleEditor
             }
         }
 
-        private ICommand _open = null;
-        public ICommand Open
+        private ICommandViewModel _open = null;
+        public ICommandViewModel Open
         {
             get
             {
                 if (_open == null)
                 {
-                    _open = ModelFactory.CreateViewModel<SimpleCommandModel.Factory>().Invoke(
+                    _open = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
                         DataContext, "Open", "Opens the current DataType", () =>
                         {
-                            var newWorkspace = ModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(ctxFactory());
+                            var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(ctxFactory());
                             newWorkspace.ShowForeignModel(this);
-                            ModelFactory.ShowModel(newWorkspace, true);
+                            ViewModelFactory.ShowModel(newWorkspace, true);
                         }, null);
                 }
 
@@ -165,18 +165,18 @@ namespace Kistl.Client.Presentables.ModuleEditor
         #endregion
 
         #region DataTypes
-        private ReadOnlyProjectedList<DataType, DataTypeGraphModel> _dataTypeModels = null;
-        public IEnumerable<DataTypeGraphModel> DataTypeModels
+        private ReadOnlyProjectedList<DataType, DataTypeGraphModel> _DataTypeViewModels = null;
+        public IEnumerable<DataTypeGraphModel> DataTypeViewModels
         {
             get
             {
-                if (_dataTypeModels == null)
+                if (_DataTypeViewModels == null)
                 {
-                    _dataTypeModels = new ReadOnlyProjectedList<DataType, DataTypeGraphModel>(DataTypes,
-                        i => ModelFactory.CreateViewModel<DataTypeGraphModel.Factory>().Invoke(DataContext, i, this),
+                    _DataTypeViewModels = new ReadOnlyProjectedList<DataType, DataTypeGraphModel>(DataTypes,
+                        i => ViewModelFactory.CreateViewModel<DataTypeGraphModel.Factory>().Invoke(DataContext, i, this),
                         i => i.DataType);
                 }
-                return _dataTypeModels;
+                return _DataTypeViewModels;
             }
         }
 
@@ -219,41 +219,41 @@ namespace Kistl.Client.Presentables.ModuleEditor
             }
             OnPropertyChanged("Relations");
             OnPropertyChanged("DataTypes");
-            OnPropertyChanged("DataTypeModels");
+            OnPropertyChanged("DataTypeViewModels");
             RecreateGraph();
         }
 
-        public IEnumerable<DataTypeGraphModel> SelectedDataTypeModels
+        public IEnumerable<DataTypeGraphModel> SelectedDataTypeViewModels
         {
             get
             {
-                return DataTypeModels.Where(i => i.IsChecked);
+                return DataTypeViewModels.Where(i => i.IsChecked);
             }
         }
 
-        public IEnumerable<DataTypeGraphModel> SelectedGraphDataTypeModels
+        public IEnumerable<DataTypeGraphModel> SelectedGraphDataTypeViewModels
         {
             get
             {
-                return DataTypeModels.Where(i => i.IsGraphChecked);
+                return DataTypeViewModels.Where(i => i.IsGraphChecked);
             }
         }
 
         private void SelectAllDataTypes()
         {
-            DataTypeModels.ForEach(i => i.SetChecked(true, false));
+            DataTypeViewModels.ForEach(i => i.SetChecked(true, false));
             RecreateGraph();
         }
 
         private void SelectNoDataTypes()
         {
-            DataTypeModels.ForEach(i => i.SetChecked(false, false));
+            DataTypeViewModels.ForEach(i => i.SetChecked(false, false));
             RecreateGraph();
         }
 
         private void AddRelatedDataTypes()
         {
-            foreach (var dtm in DataTypeModels.Where(i => i.IsChecked).ToList())
+            foreach (var dtm in DataTypeViewModels.Where(i => i.IsChecked).ToList())
             {
                 var add = new List<DataTypeGraphModel>();
                 if (GraphType == GraphTypeEnum.Inheritance)
@@ -261,21 +261,21 @@ namespace Kistl.Client.Presentables.ModuleEditor
                     // Add BaseClass
                     if (dtm.DataType is ObjectClass && ((ObjectClass)dtm.DataType).BaseObjectClass != null)
                     {
-                        var item = DataTypeModels.FirstOrDefault(i => i.DataType == ((ObjectClass)dtm.DataType).BaseObjectClass);
+                        var item = DataTypeViewModels.FirstOrDefault(i => i.DataType == ((ObjectClass)dtm.DataType).BaseObjectClass);
                         if (item != null) add.Add(item);
                     }
 
                     // Add Inheritance
-                    add.AddRange(DataTypeModels.Where(i => i.DataType is ObjectClass && ((ObjectClass)i.DataType).BaseObjectClass == dtm.DataType));
+                    add.AddRange(DataTypeViewModels.Where(i => i.DataType is ObjectClass && ((ObjectClass)i.DataType).BaseObjectClass == dtm.DataType));
 
                 }
                 else if (GraphType == GraphTypeEnum.Relation)
                 {
                     foreach (var rel in Relations.Where(i => i.A.Type == dtm.DataType || i.B.Type == dtm.DataType))
                     {
-                        var a = DataTypeModels.FirstOrDefault(i => i.DataType == rel.A.Type);
+                        var a = DataTypeViewModels.FirstOrDefault(i => i.DataType == rel.A.Type);
                         if (a != null) add.Add(a);
-                        var b = DataTypeModels.FirstOrDefault(i => i.DataType == rel.B.Type);
+                        var b = DataTypeViewModels.FirstOrDefault(i => i.DataType == rel.B.Type);
                         if (b != null) add.Add(b);
                     }
                 }
@@ -311,13 +311,13 @@ namespace Kistl.Client.Presentables.ModuleEditor
         {
             var g = new DataTypeGraph(true);
 
-            if (SelectedDataTypeModels.Count() == 0)
+            if (SelectedDataTypeViewModels.Count() == 0)
             {
                 return null;
             }
 
             Dictionary<DataType, DataTypeGraphModel> typeMdlDict = new Dictionary<DataType, DataTypeGraphModel>();
-            foreach (var dt in SelectedDataTypeModels)
+            foreach (var dt in SelectedDataTypeViewModels)
             {
                 g.AddVertex(dt);
                 typeMdlDict[dt.DataType] = dt;
@@ -335,7 +335,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
             }
             else if (GraphType == GraphTypeEnum.Inheritance)
             {
-                foreach (var cls in SelectedDataTypeModels.Select(i => i.DataType).OfType<ObjectClass>())
+                foreach (var cls in SelectedDataTypeViewModels.Select(i => i.DataType).OfType<ObjectClass>())
                 {
                     if (cls.BaseObjectClass != null && typeMdlDict.ContainsKey(cls) && typeMdlDict.ContainsKey(cls.BaseObjectClass))
                     {
@@ -369,103 +369,103 @@ namespace Kistl.Client.Presentables.ModuleEditor
         #endregion
 
         #region Commands
-        private ICommand _RefreshCommand = null;
-        public ICommand RefreshCommand
+        private ICommandViewModel _RefreshCommand = null;
+        public ICommandViewModel RefreshCommand
         {
             get
             {
                 if (_RefreshCommand == null)
                 {
-                    _RefreshCommand = ModelFactory.CreateViewModel<SimpleCommandModel.Factory>().Invoke(DataContext, "Refresh", "Refresh the DataTypes list", () => Refresh(), null);
+                    _RefreshCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, "Refresh", "Refresh the DataTypes list", () => Refresh(), null);
                 }
                 return _RefreshCommand;
             }
         }
 
-        private ICommand _selectAllCommand = null;
-        public ICommand SelectAllCommand
+        private ICommandViewModel _selectAllCommand = null;
+        public ICommandViewModel SelectAllCommand
         {
             get
             {
                 if (_selectAllCommand == null)
                 {
-                    _selectAllCommand = ModelFactory.CreateViewModel<SimpleCommandModel.Factory>().Invoke(DataContext, "Select all", "Selects all DataTypes", () => SelectAllDataTypes(), null);
+                    _selectAllCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, "Select all", "Selects all DataTypes", () => SelectAllDataTypes(), null);
                 }
                 return _selectAllCommand;
             }
         }
 
-        private ICommand _selectNoneCommand = null;
-        public ICommand SelectNoneCommand
+        private ICommandViewModel _selectNoneCommand = null;
+        public ICommandViewModel SelectNoneCommand
         {
             get
             {
                 if (_selectNoneCommand == null)
                 {
-                    _selectNoneCommand = ModelFactory.CreateViewModel<SimpleCommandModel.Factory>().Invoke(DataContext, "Select None", "Selects no DataTypes", () => SelectNoDataTypes(), null);
+                    _selectNoneCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, "Select None", "Selects no DataTypes", () => SelectNoDataTypes(), null);
                 }
                 return _selectNoneCommand;
             }
         }
 
-        private ICommand _addRelatedCommand = null;
-        public ICommand AddRelatedCommand
+        private ICommandViewModel _addRelatedCommand = null;
+        public ICommandViewModel AddRelatedCommand
         {
             get
             {
                 if (_addRelatedCommand == null)
                 {
-                    _addRelatedCommand = ModelFactory.CreateViewModel<SimpleCommandModel.Factory>().Invoke(DataContext, "Add Related", "Add related DataTypes", () => AddRelatedDataTypes(), null);
+                    _addRelatedCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, "Add Related", "Add related DataTypes", () => AddRelatedDataTypes(), null);
                 }
                 return _addRelatedCommand;
             }
         }
 
-        private ICommand _NewObjectClassCommand = null;
-        public ICommand NewObjectClassCommand
+        private ICommandViewModel _NewObjectClassCommand = null;
+        public ICommandViewModel NewObjectClassCommand
         {
             get
             {
                 if (_NewObjectClassCommand == null)
                 {
-                    _NewObjectClassCommand = ModelFactory.CreateViewModel<SimpleCommandModel.Factory>().Invoke(DataContext, "New Class", "Creates a new Class", () =>
+                    _NewObjectClassCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, "New Class", "Creates a new Class", () =>
                     {
                         var newCtx = ctxFactory();
-                        var newWorkspace = ModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx);
+                        var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx);
                         var newCls = newCtx.Create<ObjectClass>();
 
                         newCls.Module = newCtx.Find<Module>(Module.ID);
 
-                        newWorkspace.ShowForeignModel(ModelFactory.CreateViewModel<DataObjectViewModel.Factory>(newCls).Invoke(newCtx, newCls));
-                        ModelFactory.ShowModel(newWorkspace, true);
+                        newWorkspace.ShowForeignModel(ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>(newCls).Invoke(newCtx, newCls));
+                        ViewModelFactory.ShowModel(newWorkspace, true);
                     }, null);
                 }
                 return _NewObjectClassCommand;
             }
         }
 
-        private ICommand _NewRelationCommand = null;
-        public ICommand NewRelationCommand
+        private ICommandViewModel _NewRelationCommand = null;
+        public ICommandViewModel NewRelationCommand
         {
             get
             {
                 if (_NewRelationCommand == null)
                 {
-                    _NewRelationCommand = ModelFactory.CreateViewModel<SimpleCommandModel.Factory>().Invoke(DataContext, "New Relation", "Creates a new Relation", () =>
+                    _NewRelationCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, "New Relation", "Creates a new Relation", () =>
                     {
                         var newCtx = ctxFactory();
-                        var newWorkspace = ModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx);
+                        var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx);
                         var newRel = newCtx.Create<Relation>();
 
                         newRel.Module = newCtx.Find<Module>(Module.ID);
                         // First() and Last() may be the same
-                        newRel.A.Type = newCtx.Find<ObjectClass>(SelectedGraphDataTypeModels.First().ID);
-                        newRel.B.Type = newCtx.Find<ObjectClass>(SelectedGraphDataTypeModels.Last().ID);
+                        newRel.A.Type = newCtx.Find<ObjectClass>(SelectedGraphDataTypeViewModels.First().ID);
+                        newRel.B.Type = newCtx.Find<ObjectClass>(SelectedGraphDataTypeViewModels.Last().ID);
 
-                        newWorkspace.ShowForeignModel(ModelFactory.CreateViewModel<DataObjectViewModel.Factory>(newRel).Invoke(newCtx, newRel));
-                        ModelFactory.ShowModel(newWorkspace, true);
+                        newWorkspace.ShowForeignModel(ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>(newRel).Invoke(newCtx, newRel));
+                        ViewModelFactory.ShowModel(newWorkspace, true);
                     },
-                    () => (SelectedGraphDataTypeModels.Count() == 1 || SelectedGraphDataTypeModels.Count() == 2) && SelectedGraphDataTypeModels.Any(dt => dt.DataType is ObjectClass));
+                    () => (SelectedGraphDataTypeViewModels.Count() == 1 || SelectedGraphDataTypeViewModels.Count() == 2) && SelectedGraphDataTypeViewModels.Any(dt => dt.DataType is ObjectClass));
                 }
                 return _NewRelationCommand;
             }

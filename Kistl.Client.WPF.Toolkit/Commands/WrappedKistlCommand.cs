@@ -9,7 +9,7 @@ namespace Kistl.Client.WPF.Commands
     using System.Windows.Input;
 
     /// <summary>
-    /// Wrap a Kistl <see cref="Kistl.Client.Presentables.ICommand"/> into a SmartRoutedUICommand.
+    /// Wrap a Kistl <see cref="Kistl.Client.Presentables.ICommandViewModel"/> into a SmartRoutedUICommand.
     /// </summary>
     public class WrappedKistlCommand
         : SmartRoutedUICommand
@@ -18,7 +18,7 @@ namespace Kistl.Client.WPF.Commands
         /// Initializes a new instance of the WrappedKistlCommand class.
         /// </summary>
         /// <param name="cmd">the command to wrap</param>
-        public WrappedKistlCommand(Kistl.Client.Presentables.ICommand cmd)
+        public WrappedKistlCommand(Kistl.Client.Presentables.ICommandViewModel cmd)
             : base(cmd == null ? String.Empty : cmd.Label, typeof(WrappedKistlCommand))
         {
             if (cmd == null) { throw new ArgumentNullException("cmd", "No command to wrap"); }
@@ -30,7 +30,7 @@ namespace Kistl.Client.WPF.Commands
         /// <summary>
         /// The wrapped command.
         /// </summary>
-        private Kistl.Client.Presentables.ICommand _command;
+        private Kistl.Client.Presentables.ICommandViewModel _command;
 
         /// <inheritdoc/>
         protected override bool CanExecuteCore(object parameter)

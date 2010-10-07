@@ -49,9 +49,9 @@ namespace Kistl.Client.Mocks
             return result;
         }
 
-        public static Mock<IModelFactory> CreateFactory(Dictionary<IDataObject, ViewModel> backingStore)
+        public static Mock<IViewModelFactory> CreateFactory(Dictionary<IDataObject, ViewModel> backingStore)
         {
-            var result = new Mock<IModelFactory>();
+            var result = new Mock<IViewModelFactory>();
             // TODO: ????
             //result.Setup(mf => mf.CreateDefaultModel(It.IsAny<IKistlContext>(), It.IsAny<IDataObject>(), It.Is<object>(o => o == null))).Returns((IKistlContext ctx, IDataObject obj, object nothing) =>
             //{

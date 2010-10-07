@@ -176,42 +176,42 @@ namespace Kistl.Client.Presentables.ValueViewModels
         #endregion
 
         #region Commands
-        private ICommand _CreateNewCommand = null;
-        public ICommand CreateNewCommand
+        private ICommandViewModel _CreateNewCommand = null;
+        public ICommandViewModel CreateNewCommand
         {
             get
             {
                 if (_CreateNewCommand == null)
                 {
-                    _CreateNewCommand = ModelFactory.CreateViewModel<SimpleCommandModel.Factory>()
+                    _CreateNewCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>()
                         .Invoke(DataContext, "Add new", "Creates a new Item suitable for adding to the list.", () => CreateNewItem(), () => AllowAddNew);
                 }
                 return _CreateNewCommand;
             }
         }
 
-        private ICommand _AddExistingCommand = null;
-        public ICommand AddExistingCommand
+        private ICommandViewModel _AddExistingCommand = null;
+        public ICommandViewModel AddExistingCommand
         {
             get
             {
                 if (_AddExistingCommand == null)
                 {
-                    _AddExistingCommand = ModelFactory.CreateViewModel<SimpleCommandModel.Factory>()
+                    _AddExistingCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>()
                         .Invoke(DataContext, "Add existing", "Adds an existing item into this list.", () => AddExistingItem(), () => AllowAddExisting);
                 }
                 return _AddExistingCommand;
             }
         }
 
-        private ICommand _RemoveCommand = null;
-        public ICommand RemoveCommand
+        private ICommandViewModel _RemoveCommand = null;
+        public ICommandViewModel RemoveCommand
         {
             get
             {
                 if (_RemoveCommand == null)
                 {
-                    _RemoveCommand = ModelFactory.CreateViewModel<SimpleParameterCommandModel<IEnumerable<DataObjectViewModel>>.Factory>()
+                    _RemoveCommand = ViewModelFactory.CreateViewModel<SimpleParameterCommandViewModel<IEnumerable<DataObjectViewModel>>.Factory>()
                         .Invoke(DataContext, "Remove", "Remove selection from list",
                         (items) => items.ToList().ForEach(i => RemoveItem(i)), // Collection will change while deleting!
                         (items) => items != null && items.Count() > 0 && AllowRemove);
@@ -220,14 +220,14 @@ namespace Kistl.Client.Presentables.ValueViewModels
             }
         }
 
-        private ICommand _DeleteCommand = null;
-        public ICommand DeleteCommand
+        private ICommandViewModel _DeleteCommand = null;
+        public ICommandViewModel DeleteCommand
         {
             get
             {
                 if (_DeleteCommand == null)
                 {
-                    _DeleteCommand = ModelFactory.CreateViewModel<SimpleParameterCommandModel<IEnumerable<DataObjectViewModel>>.Factory>()
+                    _DeleteCommand = ViewModelFactory.CreateViewModel<SimpleParameterCommandViewModel<IEnumerable<DataObjectViewModel>>.Factory>()
                         .Invoke(DataContext, "Delete", "Delete selection from data store", 
                         (items) => items.ToList().ForEach(i => DeleteItem(i)), // Collection will change while deleting!
                         (items) => items != null && items.Count() > 0 && AllowDelete);
@@ -253,8 +253,8 @@ namespace Kistl.Client.Presentables.ValueViewModels
             }
             else
             {
-                ModelFactory.ShowModel(
-                    ModelFactory.CreateViewModel<DataObjectSelectionTaskModel.Factory>().Invoke(
+                ViewModelFactory.ShowModel(
+                    ViewModelFactory.CreateViewModel<DataObjectSelectionTaskViewModel.Factory>().Invoke(
                         DataContext,
                         null,
                         children.AsQueryable(),
@@ -274,7 +274,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
         {
             var targetType = targetClass.GetDescribedInterfaceType();
             var item = this.DataContext.Create(targetType);
-            var result = ModelFactory.CreateViewModel<DataObjectViewModel.Factory>().Invoke(DataContext, item);
+            var result = ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>().Invoke(DataContext, item);
             AddItem(result);
             if (!targetClass.IsSimpleObject)
             {
@@ -299,8 +299,8 @@ namespace Kistl.Client.Presentables.ValueViewModels
         {
             var ifType = ReferencedClass.GetDescribedInterfaceType();
 
-            ModelFactory.ShowModel(
-                ModelFactory.CreateViewModel<DataObjectSelectionTaskModel.Factory>().Invoke(
+            ViewModelFactory.ShowModel(
+                ViewModelFactory.CreateViewModel<DataObjectSelectionTaskViewModel.Factory>().Invoke(
                     DataContext,
                     ifType.GetObjectClass(FrozenContext),
                     null,
@@ -335,7 +335,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
         {
             if (item == null) { throw new ArgumentNullException("item"); }
 
-            ModelFactory.ShowModel(item, activate);
+            ViewModelFactory.ShowModel(item, activate);
         }
 
         #endregion
@@ -399,7 +399,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             throw new NotImplementedException();
         }
 
-        public override ICommand ClearValueCommand
+        public override ICommandViewModel ClearValueCommand
         {
             get { throw new NotImplementedException(); }
         }

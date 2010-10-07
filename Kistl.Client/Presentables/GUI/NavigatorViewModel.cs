@@ -28,7 +28,7 @@ namespace Kistl.Client.Presentables.GUI
         public NavigatorViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, NavigationScreen root)
             : base(dependencies, dataCtx)
         {
-            _current = _root = NavigationScreenViewModel.Create(ModelFactory, dataCtx, null, root);
+            _current = _root = NavigationScreenViewModel.Create(ViewModelFactory, dataCtx, null, root);
             _current.Displayer = this;
 
             _history = new ObservableCollection<NavigationScreenViewModel>() { _current };
@@ -123,14 +123,14 @@ namespace Kistl.Client.Presentables.GUI
 
         #region Commands
 
-        private ICommand _HomeCommand = null;
-        public ICommand HomeCommand
+        private ICommandViewModel _HomeCommand = null;
+        public ICommandViewModel HomeCommand
         {
             get
             {
                 if (_HomeCommand == null)
                 {
-                    _HomeCommand = ModelFactory.CreateViewModel<SimpleCommandModel.Factory>().Invoke(
+                    _HomeCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
                         DataContext,
                         "Home",
                         "Navigates back to the top-most screen",
@@ -146,14 +146,14 @@ namespace Kistl.Client.Presentables.GUI
             CurrentScreen = _root;
         }
 
-        private ICommand _BackCommand = null;
-        public ICommand BackCommand
+        private ICommandViewModel _BackCommand = null;
+        public ICommandViewModel BackCommand
         {
             get
             {
                 if (_BackCommand == null)
                 {
-                    _BackCommand = ModelFactory.CreateViewModel<SimpleCommandModel.Factory>().Invoke(
+                    _BackCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
                         DataContext,
                         "Back",
                         "Navigates back to the last screen",
@@ -173,14 +173,14 @@ namespace Kistl.Client.Presentables.GUI
             _history.RemoveAt(_history.Count - 1);
         }
 
-        private ICommand _NavigateToCommand = null;
-        public ICommand NavigateToCommand
+        private ICommandViewModel _NavigateToCommand = null;
+        public ICommandViewModel NavigateToCommand
         {
             get
             {
                 if (_NavigateToCommand == null)
                 {
-                    _NavigateToCommand = ModelFactory.CreateViewModel<SimpleParameterCommandModel<NavigationScreenViewModel>.Factory>().Invoke(
+                    _NavigateToCommand = ViewModelFactory.CreateViewModel<SimpleParameterCommandViewModel<NavigationScreenViewModel>.Factory>().Invoke(
                                 DataContext,
                                 "Go to ...",
                                 "Navigates to the selected screen",

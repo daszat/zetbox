@@ -12,7 +12,7 @@ namespace Kistl.Client.Presentables.TimeRecords
     using Kistl.App.TimeRecords;
 
     /// <content>
-    /// This class contains all relevant <see cref="ICommand"/> implementations.
+    /// This class contains all relevant <see cref="ICommandViewModel"/> implementations.
     /// </content>
     public sealed partial class WorkEffortRecorderModel
     {
@@ -24,22 +24,22 @@ namespace Kistl.Client.Presentables.TimeRecords
         /// <summary>
         /// Gets a command to start a new <see cref="WorkEffort"/>.
         /// </summary>
-        public ICommand StartNewWorkEffort
+        public ICommandViewModel StartNewWorkEffort
         {
             get
             {
                 if (_startNewWorkEffortCommand == null)
                 {
-                    _startNewWorkEffortCommand = ModelFactory.CreateViewModel<StartNewWorkEffortCommand.Factory>().Invoke(DataContext, this);
+                    _startNewWorkEffortCommand = ViewModelFactory.CreateViewModel<StartNewWorkEffortCommand.Factory>().Invoke(DataContext, this);
                 }
                 return _startNewWorkEffortCommand;
             }
         }
 
         /// <summary>
-        /// This <see cref="ICommand"/> starts a new work effort for the current user, if there is none currently active.
+        /// This <see cref="ICommandViewModel"/> starts a new work effort for the current user, if there is none currently active.
         /// </summary>
-        private class StartNewWorkEffortCommand : CommandModel
+        private class StartNewWorkEffortCommand : CommandViewModel
         {
             public new delegate StartNewWorkEffortCommand Factory(IKistlContext dataCtx, WorkEffortRecorderModel parent);
 
@@ -90,7 +90,7 @@ namespace Kistl.Client.Presentables.TimeRecords
             protected override void DoExecute(object data)
             {
                 WorkEffort effort = DataContext.Create<WorkEffort>();
-                WorkEffortModel effortModel = ModelFactory.CreateViewModel<WorkEffortModel.Factory>(effort).Invoke(DataContext, effort);
+                WorkEffortModel effortModel = ViewModelFactory.CreateViewModel<WorkEffortModel.Factory>(effort).Invoke(DataContext, effort);
                 effortModel.Mitarbeiter = _parent.CurrentUser;
                 effortModel.From = DateTime.Now;
                 _parent.InitialiseEfforts();
@@ -110,22 +110,22 @@ namespace Kistl.Client.Presentables.TimeRecords
         /// <summary>
         /// Gets a command to finish the currently running work effort.
         /// </summary>
-        public ICommand FinishWorkEffort
+        public ICommandViewModel FinishWorkEffort
         {
             get
             {
                 if (_FinishWorkEffortCommand == null)
                 {
-                    _FinishWorkEffortCommand = ModelFactory.CreateViewModel<FinishWorkEffortCommand.Factory>().Invoke(DataContext, this);
+                    _FinishWorkEffortCommand = ViewModelFactory.CreateViewModel<FinishWorkEffortCommand.Factory>().Invoke(DataContext, this);
                 }
                 return _FinishWorkEffortCommand;
             }
         }
 
         /// <summary>
-        /// This <see cref="ICommand"/> takes care of closing any open work efforts of the current user and starts a new one.
+        /// This <see cref="ICommandViewModel"/> takes care of closing any open work efforts of the current user and starts a new one.
         /// </summary>
-        private class FinishWorkEffortCommand : CommandModel
+        private class FinishWorkEffortCommand : CommandViewModel
         {
             public new delegate FinishWorkEffortCommand Factory(IKistlContext dataCtx, WorkEffortRecorderModel parent);
 
