@@ -3,20 +3,16 @@ namespace Kistl.Client.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Linq;
     using System.Text;
-    using Kistl.App.Base;
     using Kistl.API;
+    using Kistl.App.Base;
     using Kistl.App.Extensions;
     using Kistl.App.GUI;
-    using System.ComponentModel;
-    /// <summary>
-    /// For autofac
-    /// </summary>
+
     public abstract class BaseMethodResultModel : IValueModel
     {
-        public delegate BaseMethodResultModel Factory(INotifyingObject obj, Method m);
-
         public BaseMethodResultModel(INotifyingObject obj, Method m)
         {
             if (obj == null) throw new ArgumentNullException("obj");
@@ -140,8 +136,6 @@ namespace Kistl.Client.Models
 
     public abstract class MethodResultModel<TValue> : BaseMethodResultModel, IValueModel<TValue>
     {
-        public new delegate MethodResultModel<TValue> Factory(INotifyingObject obj, Method m);
-
         public MethodResultModel(INotifyingObject obj, Method m)
             : base(obj, m)
         {
@@ -157,8 +151,6 @@ namespace Kistl.Client.Models
     public class NullableStructMethodResultModel<TValue> : MethodResultModel<Nullable<TValue>>
         where TValue : struct
     {
-        public new delegate NullableStructMethodResultModel<TValue> Factory(INotifyingObject obj, Method m);
-
         public NullableStructMethodResultModel(INotifyingObject obj, Method m)
             : base(obj, m)
         {
@@ -191,8 +183,6 @@ namespace Kistl.Client.Models
     public class ClassMethodResultModel<TValue> : MethodResultModel<TValue>
         where TValue : class
     {
-        public new delegate ClassMethodResultModel<TValue> Factory(INotifyingObject obj, Method m);
-
         public ClassMethodResultModel(INotifyingObject obj, Method m)
             : base(obj, m)
         {

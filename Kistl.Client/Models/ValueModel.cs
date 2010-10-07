@@ -3,20 +3,16 @@ namespace Kistl.Client.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Linq;
     using System.Text;
-    using Kistl.App.Base;
     using Kistl.API;
+    using Kistl.App.Base;
     using Kistl.App.Extensions;
     using Kistl.App.GUI;
-    using System.ComponentModel;
-    /// <summary>
-    /// For autofac
-    /// </summary>
+
     public abstract class ValueModel<TValue> : IValueModel, IValueModel<TValue>
     {
-        public delegate ValueModel<TValue> Factory(string label, string description, bool allowNullInput, bool isReadOnly, Func<TValue> getValue, Action<TValue> setValue);
-
         protected Func<TValue> getValue;
         protected Action<TValue> setValue;
 
@@ -146,8 +142,6 @@ namespace Kistl.Client.Models
     public class NullableStructValueModel<TValue> : ValueModel<Nullable<TValue>>
         where TValue : struct
     {
-        public new delegate NullableStructValueModel<TValue> Factory(string label, string description, bool allowNullInput, bool isReadOnly, Func<Nullable<TValue>> getValue, Action<Nullable<TValue>> setValue);
-
         public NullableStructValueModel(string label, string description, bool allowNullInput, bool isReadOnly, Func<Nullable<TValue>> getValue, Action<Nullable<TValue>> setValue)
             : base(label, description, allowNullInput, isReadOnly, getValue, setValue)
         {
@@ -163,8 +157,6 @@ namespace Kistl.Client.Models
     public class ClassValueModel<TValue> : ValueModel<TValue>
         where TValue : class
     {
-        public new delegate ClassValueModel<TValue> Factory(string label, string description, bool allowNullInput, bool isReadOnly, Func<TValue> getValue, Action<TValue> setValue);
-
         public ClassValueModel(string label, string description, bool allowNullInput, bool isReadOnly, Func<TValue> getValue, Action<TValue> setValue)
             : base(label, description, allowNullInput, isReadOnly, getValue, setValue)
         {

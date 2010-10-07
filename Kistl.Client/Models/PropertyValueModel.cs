@@ -2,18 +2,18 @@
 namespace Kistl.Client.Models
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
+    using System.Collections.Specialized;
+    using System.ComponentModel;
     using System.Linq;
     using System.Text;
-    using Kistl.App.Base;
     using Kistl.API;
+    using Kistl.API.Utils;
+    using Kistl.App.Base;
     using Kistl.App.Extensions;
     using Kistl.App.GUI;
-    using System.ComponentModel;
     using Kistl.Client.Presentables;
-    using Kistl.API.Utils;
-    using System.Collections.Specialized;
-    using System.Collections;
 
     public static class PropertyExtensionsThisShouldBeMovedToAZBoxMethod
     {
@@ -89,8 +89,6 @@ namespace Kistl.Client.Models
     public abstract class BasePropertyValueModel
         : IValueModel
     {
-        public delegate BasePropertyValueModel Factory(INotifyingObject obj, Property prop);
-
         public BasePropertyValueModel(INotifyingObject obj, Property prop)
         {
             if (obj == null)
@@ -247,8 +245,6 @@ namespace Kistl.Client.Models
     public abstract class PropertyValueModel<TValue>
         : BasePropertyValueModel, IValueModel<TValue>
     {
-        public new delegate PropertyValueModel<TValue> Factory(INotifyingObject obj, Property prop);
-
         public PropertyValueModel(INotifyingObject obj, Property prop)
             : base(obj, prop)
         {
@@ -264,8 +260,6 @@ namespace Kistl.Client.Models
     public class NullableStructPropertyValueModel<TValue> : PropertyValueModel<Nullable<TValue>>
         where TValue : struct
     {
-        public new delegate NullableStructPropertyValueModel<TValue> Factory(INotifyingObject obj, Property prop);
-
         public NullableStructPropertyValueModel(INotifyingObject obj, Property prop)
             : base(obj, prop)
         {
@@ -347,8 +341,6 @@ namespace Kistl.Client.Models
         : PropertyValueModel<TValue>
         where TValue : class
     {
-        public new delegate ClassPropertyValueModel<TValue> Factory(INotifyingObject obj, Property prop);
-
         public ClassPropertyValueModel(INotifyingObject obj, Property prop)
             : base(obj, prop)
         {
@@ -586,8 +578,6 @@ namespace Kistl.Client.Models
 
     public class EnumerationPropertyValueModel : NullableStructPropertyValueModel<int>, IEnumerationValueModel
     {
-        public new delegate EnumerationPropertyValueModel Factory(INotifyingObject obj, Property prop);
-
         protected readonly EnumerationProperty enumProp;
 
         public EnumerationPropertyValueModel(INotifyingObject obj, EnumerationProperty prop)
@@ -608,8 +598,6 @@ namespace Kistl.Client.Models
 
     public class DateTimePropertyValueModel : NullableStructPropertyValueModel<DateTime>, IDateTimeValueModel
     {
-        public new delegate DateTimePropertyValueModel Factory(INotifyingObject obj, Property prop);
-
         protected readonly DateTimeProperty dtProp;
 
         public DateTimePropertyValueModel(INotifyingObject obj, DateTimeProperty prop)

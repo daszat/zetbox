@@ -1,16 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.ComponentModel;
-using Kistl.App.Base;
-using Kistl.API;
-using Kistl.Client.Presentables;
-using System.Collections.Specialized;
-using Kistl.API.Utils;
 
 namespace Kistl.Client.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.Specialized;
+    using System.ComponentModel;
+    using System.Linq;
+    using System.Text;
+    using Kistl.API;
+    using Kistl.API.Utils;
+    using Kistl.App.Base;
+    using Kistl.Client.Presentables;
+
     public interface IValueModel : INotifyPropertyChanged, IDataErrorInfo
     {
         /// <summary>
