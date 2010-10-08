@@ -38,15 +38,15 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         protected override NpgsqlConnection CreateConnection(string connectionString)
         {
-            var origCS = connectionString;
-            // TODO: improve hack
-            Regex.Replace(connectionString, "SyncNotification=[^;]*", "");
-            //connectionString += ";SyncNotification=true";
+            //var origCS = connectionString;
+            //// TODO: improve hack
+            //Regex.Replace(connectionString, "SyncNotification=[^;]*", "");
+            ////connectionString += ";SyncNotification=true";
             var result = new NpgsqlConnection(connectionString);
-            if (!result.SyncNotification)
-            {
-                _log.ErrorFormat("Must set 'SyncNotification=true' in connection string [{0}]", origCS);
-            }
+            //if (!result.SyncNotification)
+            //{
+            //    _log.ErrorFormat("Must set 'SyncNotification=true' in connection string [{0}]", origCS);
+            //}
             return result;
         }
 
@@ -873,21 +873,21 @@ $BODY$BEGIN
                 if (tbl.Relations.Count == 0)
                 {
                     sb.AppendFormat(@"
-	IF OLD <> NULL THEN
+	IF TG_OP = 'DELETE' OR TG_OP = 'UPDATE' THEN
 		DELETE FROM {0} WHERE {2} = OLD.{2};
 	END IF;
-	IF NEW <> NULL THEN
+	IF TG_OP = 'INSERT' OR TG_OP = 'UPDATE' THEN
 		DELETE FROM {0} WHERE {2} = NEW.{2};
 		INSERT INTO {0} ({2}, ""Identity"", ""Right"")
 			SELECT {2}, ""Identity"", ""Right"" FROM {1}
 			WHERE {2} = NEW.{2};
 	END IF;
-", FormatFullName(tbl.TblNameRights), FormatFullName(tbl.ViewUnmaterializedName), QuoteIdentifier("ID"));
+", FormatSchemaName(tbl.TblNameRights), FormatSchemaName(tbl.ViewUnmaterializedName), QuoteIdentifier("ID"));
                 }
                 else
                 {
                     StringBuilder select = new StringBuilder();
-                    select.AppendFormat("SELECT t1.\"ID\" FROM {0} t1", FormatFullName(tbl.TblName));
+                    select.AppendFormat("SELECT t1.\"ID\" FROM {0} t1", FormatSchemaName(tbl.TblName));
                     int idx = 2;
                     var lastRel = tbl.Relations.Last();
                     foreach (var rel in tbl.Relations)
@@ -895,16 +895,16 @@ $BODY$BEGIN
                         select.AppendLine();
                         if (rel == lastRel)
                         {
-                            select.AppendFormat(@"   WHERE t{0}.{1} = {2}.{3}",
-                                idx,
-                                QuoteIdentifier(rel.JoinColumnName.Single().ColumnName),
+                            select.AppendFormat(@"      WHERE ({0}.{1} = t{2}.{3})",
                                 "{0}",
+                                QuoteIdentifier(rel.JoinColumnName.Single().ColumnName),
+                                idx - 1,
                                 QuoteIdentifier(rel.FKColumnName.Single().ColumnName));
                         }
                         else
                         {
                             select.AppendFormat(@"      INNER JOIN {0} t{1} ON (t{1}.{2} = t{3}.{4})",
-                                FormatFullName(rel.JoinTableName),
+                                FormatSchemaName(rel.JoinTableName),
                                 idx,
                                 QuoteIdentifier(rel.JoinColumnName.Single().ColumnName),
                                 idx - 1,
@@ -915,20 +915,20 @@ $BODY$BEGIN
                     string selectFormat = select.ToString();
 
                     sb.AppendFormat(@"
-	IF OLD <> NULL THEN
+	IF TG_OP = 'DELETE' OR TG_OP = 'UPDATE' THEN
 		DELETE FROM {0} WHERE {4} IN ({1});
 	END IF;
-	IF NEW <> NULL THEN
+	IF TG_OP = 'INSERT' OR TG_OP = 'UPDATE' THEN
 		DELETE FROM {0} WHERE {4} IN ({2});
 		INSERT INTO {0} ({4}, ""Identity"", ""Right"")
 			SELECT {4}, ""Identity"", ""Right"" FROM {3}
 			WHERE {4} IN ({2});
 	END IF;
 ",
-                        FormatFullName(tbl.TblNameRights),
+                        FormatSchemaName(tbl.TblNameRights),
                         String.Format(selectFormat, "OLD"),
                         String.Format(selectFormat, "NEW"),
-                        FormatFullName(tbl.ViewUnmaterializedName),
+                        FormatSchemaName(tbl.ViewUnmaterializedName),
                         QuoteIdentifier("ID"));
 
                 }
@@ -1016,7 +1016,7 @@ FROM (", FormatFullName(viewName));
             Log.DebugFormat("Creating refresh rights procedure for \"{0}\"", tblName);
             ExecuteNonQuery(String.Format(
                 @"
-CREATE FUNCTION {0}(IN refreshID integer) RETURNS void AS
+CREATE OR REPLACE FUNCTION {0}(IN refreshID integer) RETURNS void AS
 $BODY$BEGIN
     IF (refreshID IS NULL) THEN
             TRUNCATE TABLE {1};
@@ -1028,8 +1028,8 @@ $BODY$BEGIN
 END$BODY$
 LANGUAGE 'plpgsql' VOLATILE",
                 FormatSchemaName(procName),
-                FormatFullName(tblNameRights),
-                FormatFullName(viewUnmaterializedName)));
+                FormatSchemaName(tblNameRights),
+                FormatSchemaName(viewUnmaterializedName)));
         }
 
         public override void ExecRefreshRightsOnProcedure(ProcRef procName)
@@ -1102,21 +1102,86 @@ LANGUAGE 'plpgsql' VOLATILE",
 
         public override IDataReader ReadTableData(TableRef tbl, IEnumerable<string> colNames)
         {
-            throw new NotImplementedException();
+            var columns = String.Join(",", colNames.Select(n => QuoteIdentifier(n)).ToArray());
+            var query = String.Format("SELECT {0} FROM {1}", columns, FormatFullName(tbl));
+
+            return ReadTableData(query);
         }
 
         public override IDataReader ReadTableData(string sql)
         {
-            throw new NotImplementedException();
+            var cmd = CreateCommand(sql);
+            return cmd.ExecuteReader();
         }
 
         public override IDataReader ReadJoin(TableRef tbl, IEnumerable<ProjectionColumn> colNames, IEnumerable<Join> joins)
         {
-            throw new NotImplementedException();
+            if (tbl == null)
+                throw new ArgumentNullException("tbl");
+            if (colNames == null)
+                throw new ArgumentNullException("colNames");
+            if (joins == null)
+                throw new ArgumentNullException("joins");
+
+            var join_alias = new Dictionary<Join, string>();
+            var joinQueryPart = new StringBuilder();
+            int idx = 1;
+            foreach (var join in joins)
+            {
+                AddReadJoin(joinQueryPart, ref idx, join, join_alias);
+                idx++;
+            }
+
+            var columns = String.Join(",\n", colNames.Select(pc =>
+            {
+                string result = "\t";
+                if (pc.Source == null)
+                    result += string.Format("t0.{0}", QuoteIdentifier(pc.ColumnName));
+                else
+                    result += string.Format("{0}.{1}", join_alias[pc.Source], QuoteIdentifier(pc.ColumnName));
+
+                if (!string.IsNullOrEmpty(pc.NullValue))
+                {
+                    result = string.Format("COALESCE({0}, {1})", result, pc.NullValue);
+                }
+                if (!string.IsNullOrEmpty(pc.Alias))
+                {
+                    result += " AS " + QuoteIdentifier(pc.Alias);
+                }
+                return result;
+            }).ToArray());
+
+            var query = new StringBuilder();
+            query.AppendFormat("SELECT \n{0} \nFROM {1} t0{2}", columns, FormatFullName(tbl), joinQueryPart.ToString());
+            return ReadTableData(query.ToString());
+        }
+
+        private void AddReadJoin(StringBuilder query, ref int idx, Join join, Dictionary<Join, string> join_alias)
+        {
+            if (join.JoinColumnName.Length != join.FKColumnName.Length)
+                throw new ArgumentException(string.Format("Column count on Join '{0}' does not match", join), "join");
+
+            join_alias[join] = string.Format("t{0}", idx);
+            query.AppendFormat("\n  {2} JOIN {0} t{1} ON ", FormatFullName(join.JoinTableName), idx, join.Type.ToString().ToUpper());
+            for (int i = 0; i < join.JoinColumnName.Length; i++)
+            {
+                query.AppendFormat("{0}.{1} = {2}.{3}",
+                    join.JoinColumnName[i].Source == ColumnRef.PrimaryTable ? "t0" : (join.JoinColumnName[i].Source == ColumnRef.Local ? "t" + idx : join_alias[join.JoinColumnName[i].Source]),
+                    QuoteIdentifier(join.JoinColumnName[i].ColumnName),
+                    join.FKColumnName[i].Source == ColumnRef.PrimaryTable ? "t0" : (join.FKColumnName[i].Source == ColumnRef.Local ? "t" + idx : join_alias[join.FKColumnName[i].Source]),
+                    QuoteIdentifier(join.FKColumnName[i].ColumnName));
+                if (i < join.JoinColumnName.Length - 1)
+                    query.Append(" AND ");
+            }
+            foreach (var j in join.Joins)
+            {
+                idx++;
+                AddReadJoin(query, ref idx, j, join_alias);
+            }
         }
 
         private const string COPY_SEPARATOR = "|";
-        private const string COPY_NULL = "@N";
+        private const string COPY_NULL = @"\N";
 
         public override void WriteTableData(TableRef destTbl, IDataReader source, IEnumerable<string> colNames)
         {
@@ -1126,7 +1191,7 @@ LANGUAGE 'plpgsql' VOLATILE",
                 throw new ArgumentNullException("colNames");
 
             var cols = colNames.Select(n => QuoteIdentifier(n)).ToArray();
-            var query = String.Format("COPY {0} ({1}) FROM STDIN WITH DELIMITER '{2}' NULL '{3}'", FormatSchemaName(destTbl), String.Join(",", cols), COPY_SEPARATOR, COPY_NULL);
+            var query = String.Format("COPY {0} ({1}) FROM STDIN WITH DELIMITER '{2}' NULL '{3}'", FormatSchemaName(destTbl), String.Join(",", cols), COPY_SEPARATOR, COPY_NULL.Replace(@"\", @"\\"));
             _log.InfoFormat("Copy from: [{0}]", query);
             _copyLog.Info(query);
             var bulkCopy = new NpgsqlCopyIn(query, CurrentConnection);
@@ -1210,7 +1275,7 @@ LANGUAGE 'plpgsql' VOLATILE",
                                                             var str = val as string;
                                                             if (str != null)
                                                             {
-                                                                vals[srcIdx] = "SOME STRING";
+                                                                vals[srcIdx] = str;
                                                             }
                                                             else
                                                             {

@@ -774,9 +774,13 @@ BEGIN", triggerName, FormatFullName(tblName));
                     var lastRel = tbl.Relations.Last();
                     foreach (var rel in tbl.Relations)
                     {
-                        var joinTbl = rel == lastRel ? "{0}" : FormatSchemaName(rel.JoinTableName);
                         select.AppendLine();
-                        select.AppendFormat(@"      INNER JOIN {0} t{1} ON t{1}.[{2}] = t{3}.[{4}]", joinTbl, idx, rel.JoinColumnName.Single().ColumnName, idx - 1, rel.FKColumnName.Single().ColumnName);
+                        select.AppendFormat(@"      INNER JOIN {0} t{1} ON t{1}.[{2}] = t{3}.[{4}]",
+                            (rel == lastRel) ? "{0}" : FormatSchemaName(rel.JoinTableName),
+                            idx,
+                            rel.JoinColumnName.Single().ColumnName,
+                            idx - 1, 
+                            rel.FKColumnName.Single().ColumnName);
                         idx++;
                     }
                     string selectFormat = select.ToString();
@@ -941,9 +945,7 @@ FROM (", viewName.Schema, viewName.Name);
             var columns = String.Join(",", colNames.Select(n => QuoteIdentifier(n)).ToArray());
             var query = String.Format("SELECT {0} FROM {1}", columns, FormatFullName(tbl));
 
-            var cmd = new SqlCommand(query, CurrentConnection, CurrentTransaction);
-            QueryLog.Debug(query);
-            return cmd.ExecuteReader();
+            return ReadTableData(query);
         }
 
         public override IDataReader ReadTableData(string sql)
@@ -952,7 +954,6 @@ FROM (", viewName.Schema, viewName.Name);
             QueryLog.Debug(sql);
             return cmd.ExecuteReader();
         }
-
 
         public override IDataReader ReadJoin(TableRef tbl, IEnumerable<ProjectionColumn> colNames, IEnumerable<Join> joins)
         {
@@ -981,7 +982,7 @@ FROM (", viewName.Schema, viewName.Name);
                 }
                 if (!string.IsNullOrEmpty(pc.Alias))
                 {
-                    result += " " + pc.Alias;
+                    result += " AS " + QuoteIdentifier(pc.Alias);
                 }
                 return result;
             }).ToArray());
@@ -993,12 +994,12 @@ FROM (", viewName.Schema, viewName.Name);
             return cmd.ExecuteReader();
         }
 
-        private static void AddReadJoin(StringBuilder query, ref int idx, Join join, Dictionary<Join, string> join_alias)
+        private void AddReadJoin(StringBuilder query, ref int idx, Join join, Dictionary<Join, string> join_alias)
         {
             if (join.JoinColumnName.Length != join.FKColumnName.Length) throw new ArgumentException(string.Format("Column count on Join '{0}' does not match", join), "join");
 
             join_alias[join] = string.Format("t{0}", idx);
-            query.AppendFormat("\n  {2} JOIN {0} t{1} ON ", join.JoinTableName, idx, join.Type.ToString().ToUpper());
+            query.AppendFormat("\n  {2} JOIN {0} t{1} ON ", FormatFullName(join.JoinTableName), idx, join.Type.ToString().ToUpper());
             for (int i = 0; i < join.JoinColumnName.Length; i++)
             {
                 query.AppendFormat("{0}.[{1}] = {2}.[{3}]",

@@ -414,9 +414,9 @@ namespace Kistl.Server.SchemaManagement
             _provider.RefreshDbStats();
         }
 
-        public void ExecuteSqlResource(Type type, string scriptResourceName)
+        public void ExecuteSqlResource(Type type, string scriptResourceNameFormat)
         {
-            _provider.ExecuteSqlResource(type, scriptResourceName);
+            _provider.ExecuteSqlResource(type, scriptResourceNameFormat);
         }
 
         public void Dispose()

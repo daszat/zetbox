@@ -34,6 +34,9 @@ namespace Kistl.Server.SchemaManagement
                     CheckUpdateRightsTrigger();
                     Log.Debug(String.Empty);
 
+                    UpdateProcedures();
+                    Log.Debug(String.Empty);
+
                     CheckExtraTables();
                     Log.Debug(String.Empty);
 
@@ -187,7 +190,8 @@ namespace Kistl.Server.SchemaManagement
 
             foreach (string propName in db.GetTableColumnNames(db.GetQualifiedTableName(objClass.TableName)))
             {
-                if (propName == "ID") continue;
+                if (propName == "ID")
+                    continue;
                 if (!columns.Contains(propName))
                 {
                     Log.WarnFormat("Column '[{0}].[{1}]' found in database but no Property was defined", objClass.TableName, propName);

@@ -136,13 +136,17 @@ namespace Kistl.Server.SchemaManagement
             }
         }
 
-        public void ExecuteSqlResource(Type type, string scriptResourceName)
+        public void ExecuteSqlResource(Type type, string scriptResourceNameFormat)
         {
-            if (type == null) throw new ArgumentNullException("type");
-            if (string.IsNullOrEmpty(scriptResourceName)) throw new ArgumentNullException("scriptResourceName");
+            if (type == null)
+                throw new ArgumentNullException("type");
+            if (string.IsNullOrEmpty(scriptResourceNameFormat))
+                throw new ArgumentNullException("scriptResourceNameFormat");
 
+            var scriptResourceName = String.Format(scriptResourceNameFormat, ConfigName);
             var stream = type.Assembly.GetManifestResourceStream(scriptResourceName);
-            if (stream == null) throw new ArgumentOutOfRangeException("scriptResourceName", String.Format("Script [{0}] not found in assembly [{1}]", scriptResourceName, type.Assembly.FullName));
+            if (stream == null)
+                throw new ArgumentOutOfRangeException("scriptResourceNameFormat", String.Format("Script [{0}] not found in assembly [{1}]", scriptResourceName, type.Assembly.FullName));
 
             using (var scriptStream = new StreamReader(stream, Encoding.UTF8))
             {
@@ -191,8 +195,10 @@ namespace Kistl.Server.SchemaManagement
 
         public void Open(string connectionString)
         {
-            if (db != null) throw new InvalidOperationException("Database already opened");
-            if (string.IsNullOrEmpty(connectionString)) throw new ArgumentNullException("connectionString");
+            if (db != null)
+                throw new InvalidOperationException("Database already opened");
+            if (string.IsNullOrEmpty(connectionString))
+                throw new ArgumentNullException("connectionString");
 
             db = CreateConnection(connectionString);
             db.Open();
@@ -200,7 +206,8 @@ namespace Kistl.Server.SchemaManagement
 
         public void BeginTransaction()
         {
-            if (tx != null) throw new InvalidOperationException("Transaction already in progress");
+            if (tx != null)
+                throw new InvalidOperationException("Transaction already in progress");
             tx = CreateTransaction();
         }
 
@@ -282,7 +289,8 @@ namespace Kistl.Server.SchemaManagement
 
         public TableRef GetQualifiedTableName(string tblName)
         {
-            if (db == null) throw new InvalidOperationException("cannot qualify table name without database connection");
+            if (db == null)
+                throw new InvalidOperationException("cannot qualify table name without database connection");
             // keep "dbo" as default schema until we implement schemas in the infrastructure
             return new TableRef(db.Database, "dbo", tblName);
         }
@@ -400,11 +408,12 @@ namespace Kistl.Server.SchemaManagement
 
         public ProcRef GetQualifiedProcedureName(string procName)
         {
-            if (db == null) throw new InvalidOperationException("cannot qualify table name without database connection");
+            if (db == null)
+                throw new InvalidOperationException("cannot qualify table name without database connection");
             // keep "dbo" as default schema until we implement schemas in the infrastructure
             return new ProcRef(db.Database, "dbo", procName);
         }
-        
+
         public abstract IEnumerable<ProcRef> GetProcedureNames();
         public abstract bool CheckProcedureExists(ProcRef procName);
         public abstract void DropProcedure(ProcRef procName);

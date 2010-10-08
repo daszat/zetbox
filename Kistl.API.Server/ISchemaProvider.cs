@@ -42,7 +42,7 @@ namespace Kistl.API.Server
 
         public override string ToString()
         {
-            return String.Format("[{0}].[{1}].[{2}]", _database, _schema, _name);
+            return String.Format("Ref: '{0}'.'{1}'.'{2}'", _database, _schema, _name);
         }
 
         public override int GetHashCode()
@@ -535,7 +535,9 @@ namespace Kistl.API.Server
         /// </summary>
         void RefreshDbStats();
 
-        void ExecuteSqlResource(Type type, string scriptResourceName);
+        /// <param name="type">A Type to locate the Resource's Assembly</param>
+        /// <param name="scriptResourceNameFormat">the Resource path to locate the SQL script. "{0}" is replaced by the ConfigName.</param>
+        void ExecuteSqlResource(Type type, string scriptResourceNameFormat);
 
     }
 }

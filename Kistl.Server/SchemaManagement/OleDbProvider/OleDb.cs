@@ -30,8 +30,10 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
 
         public void Open(string connectionString)
         {
-            if (db != null) throw new InvalidOperationException("Database already opened");
-            if (string.IsNullOrEmpty(connectionString)) throw new ArgumentNullException("connectionString");
+            if (db != null)
+                throw new InvalidOperationException("Database already opened");
+            if (string.IsNullOrEmpty(connectionString))
+                throw new ArgumentNullException("connectionString");
 
             db = new OleDbConnection(connectionString);
             db.Open();
@@ -40,14 +42,17 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
             literals.PrimaryKey = new DataColumn[] { literals.Columns["Literal"] };
             DataRow row = null;
             row = literals.Rows.Find((int)OleDbLiteral.Quote_Prefix);
-            if (row != null) quotePrefix = row["LiteralValue"] as string;
+            if (row != null)
+                quotePrefix = row["LiteralValue"] as string;
             row = literals.Rows.Find((int)OleDbLiteral.Quote_Suffix);
-            if (row != null) quoteSuffix = row["LiteralValue"] as string;
+            if (row != null)
+                quoteSuffix = row["LiteralValue"] as string;
         }
 
         public void BeginTransaction()
         {
-            if (tx != null) throw new InvalidOperationException("Transaction is already running");
+            if (tx != null)
+                throw new InvalidOperationException("Transaction is already running");
             tx = db.BeginTransaction();
         }
 
@@ -98,7 +103,8 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
 
         public bool CheckTableExists(TableRef tblName)
         {
-            if (tblName == null) throw new ArgumentNullException("tblName");
+            if (tblName == null)
+                throw new ArgumentNullException("tblName");
 
             using (var cmd = new OleDbCommand("SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(@table) AND type IN (N'U')", db, tx))
             {
@@ -110,7 +116,8 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
 
         public bool CheckColumnExists(TableRef tblName, string colName)
         {
-            if (tblName == null) throw new ArgumentNullException("tblName");
+            if (tblName == null)
+                throw new ArgumentNullException("tblName");
 
             using (var cmd = new OleDbCommand(@"SELECT COUNT(*) FROM sys.objects o INNER JOIN sys.columns c ON c.object_id=o.object_id
 	                                            WHERE o.object_id = OBJECT_ID(@table) 
@@ -351,7 +358,8 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
 
         public IDataReader ReadTableData(TableRef tbl, IEnumerable<string> colNames)
         {
-            if (tbl == null) throw new ArgumentNullException("tbl");
+            if (tbl == null)
+                throw new ArgumentNullException("tbl");
 
             var sb = new StringBuilder();
             sb.AppendLine("SELECT ");
@@ -377,8 +385,10 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
 
         public void WriteTableData(TableRef destTbl, IDataReader source, IEnumerable<string> colNames)
         {
-            if (destTbl == null) throw new ArgumentNullException("destTbl");
-            if (source == null) throw new ArgumentNullException("source");
+            if (destTbl == null)
+                throw new ArgumentNullException("destTbl");
+            if (source == null)
+                throw new ArgumentNullException("source");
 
             var values = new object[source.FieldCount];
             while (source.Read())
@@ -390,9 +400,12 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
 
         public void WriteTableData(TableRef tbl, IEnumerable<string> colNames, System.Collections.IEnumerable values)
         {
-            if (tbl == null) throw new ArgumentNullException("tbl");
-            if (colNames == null) throw new ArgumentNullException("colNames");
-            if (values == null) throw new ArgumentNullException("values");
+            if (tbl == null)
+                throw new ArgumentNullException("tbl");
+            if (colNames == null)
+                throw new ArgumentNullException("colNames");
+            if (values == null)
+                throw new ArgumentNullException("values");
 
             var sb = new StringBuilder();
             sb.AppendLine(string.Format("INSERT INTO {0} (", Quote(tbl.Name)));
@@ -422,11 +435,14 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
             // do nothing
         }
 
-        public void ExecuteSqlResource(Type type, string scriptResourceName)
+        public void ExecuteSqlResource(Type type, string scriptResourceNameFormat)
         {
-            if (type == null) throw new ArgumentNullException("type");
-            if (string.IsNullOrEmpty(scriptResourceName)) throw new ArgumentNullException("scriptResourceName");
+            if (type == null)
+                throw new ArgumentNullException("type");
+            if (string.IsNullOrEmpty(scriptResourceNameFormat))
+                throw new ArgumentNullException("scriptResourceNameFormat");
 
+            var scriptResourceName = String.Format(scriptResourceNameFormat, ConfigName);
             using (var scriptStream = new StreamReader(type.Assembly.GetManifestResourceStream(scriptResourceName)))
             {
                 var databaseScript = scriptStream.ReadToEnd();
