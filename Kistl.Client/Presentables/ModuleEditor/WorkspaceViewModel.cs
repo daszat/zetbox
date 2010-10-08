@@ -145,7 +145,9 @@ namespace Kistl.Client.Presentables.ModuleEditor
 
                     // Relation
                     lstMdl = ViewModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, null, DataContext.GetQuery<Relation>());
+                    lstMdl.EnableAutoFilter = false;
                     lstMdl.Filter.Add(new ConstantFilterExpression("Module = @0", CurrentModule));
+                    lstMdl.Filter.Add(ViewModelFactory.CreateViewModel<ToStringFilterExpression.Factory>().Invoke(DataContext, "Name"));
                     lst.Add(lstMdl);
 
                     var diagMdl = ViewModelFactory.CreateViewModel<DiagramViewModel.Factory>().Invoke(DataContext, CurrentModule);

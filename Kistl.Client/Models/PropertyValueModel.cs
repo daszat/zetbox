@@ -586,6 +586,33 @@ namespace Kistl.Client.Models
             enumProp = prop;
         }
 
+        protected override int? GetPropertyValue()
+        {
+            // Work around the fact that the conversion from enumeration to int? is not possible.
+            object val = Object.GetPropertyValue<object>(Property.Name);
+            if (val == null)
+            {
+                return null;
+            }
+            else
+            {
+                return (int)val;
+            }
+        }
+
+        protected override void SetPropertyValue(int? val)
+        {
+            // Work around the fact that the conversion from enumeration to int? is not possible.
+            if (val == null)
+            {
+                Object.SetPropertyValue<object>(Property.Name, null);
+            }
+            else
+            {
+                Object.SetPropertyValue<object>(Property.Name, Enum.ToObject(((EnumerationProperty)Property).Enumeration.GetDataType(), val));
+            }
+        }
+
         #region IEnumerationValueModel Members
 
         public Enumeration Enumeration
