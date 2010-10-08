@@ -49,7 +49,7 @@ namespace Kistl.API.Migration
         private void Initialize()
         {
             Logging.Configure();
-            Log.InfoFormat("Starting Migration for [{0}] with arguments [{0}]", _name, String.Join("], [", _arguments));
+            Log.InfoFormat("Starting Migration for [{0}] with arguments [{1}]", _name, String.Join("], [", _arguments));
 
             _options = CreateOptionSet();
 

@@ -4,6 +4,7 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
     using System;
     using System.Collections.Generic;
     using System.Data;
+    using System.Globalization;
     using System.IO;
     using System.Linq;
     using System.Text;
@@ -13,7 +14,6 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
     using Kistl.API.Server;
     using Kistl.API.Utils;
     using Npgsql;
-    using System.Globalization;
 
     public class Postgresql
         : AdoNetSchemaProvider<NpgsqlConnection, NpgsqlTransaction, NpgsqlCommand>
@@ -22,6 +22,8 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
         protected override log4net.ILog Log { get { return _log; } }
         private readonly static log4net.ILog _queryLog = log4net.LogManager.GetLogger("Kistl.Server.Schema.Npgsql.Queries");
         protected override log4net.ILog QueryLog { get { return _queryLog; } }
+
+        private readonly static log4net.ILog _copyLog = log4net.LogManager.GetLogger("Kistl.Server.Schema.Npgsql.COPY");
 
         #region Meta data
 
@@ -212,7 +214,8 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         public override bool CheckTableExists(TableRef tblName)
         {
-            if (tblName == null) throw new ArgumentNullException("tblName");
+            if (tblName == null)
+                throw new ArgumentNullException("tblName");
 
             return (bool)ExecuteScalar("SELECT COUNT(*) > 0 FROM pg_tables WHERE schemaname=@schema AND tablename=@table",
                 new Dictionary<string, object>()
@@ -235,7 +238,8 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         public override void CreateTable(TableRef tblName, IEnumerable<Column> cols)
         {
-            if (cols == null) throw new ArgumentNullException("cols");
+            if (cols == null)
+                throw new ArgumentNullException("cols");
 
             StringBuilder sb = new StringBuilder();
             sb.AppendFormat("CREATE TABLE {0} (", FormatSchemaName(tblName));
@@ -249,7 +253,8 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         public override void CreateTable(TableRef tblName, bool idAsIdentityColumn, bool createPrimaryKey)
         {
-            if (tblName == null) throw new ArgumentNullException("tblName");
+            if (tblName == null)
+                throw new ArgumentNullException("tblName");
 
             StringBuilder sb = new StringBuilder();
             sb.AppendFormat("CREATE TABLE \"{0}\".\"{1}\" ( ", tblName.Schema, tblName.Name);
@@ -276,8 +281,10 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         public override void RenameTable(TableRef oldTblName, TableRef newTblName)
         {
-            if (oldTblName == null) throw new ArgumentNullException("oldTblName");
-            if (newTblName == null) throw new ArgumentNullException("newTblName");
+            if (oldTblName == null)
+                throw new ArgumentNullException("oldTblName");
+            if (newTblName == null)
+                throw new ArgumentNullException("newTblName");
             if (!oldTblName.Database.Equals(newTblName.Database)) { throw new ArgumentOutOfRangeException("newTblName", "cannot rename table to different database"); }
             if (!oldTblName.Schema.Equals(newTblName.Schema)) { throw new ArgumentOutOfRangeException("newTblName", "cannot rename table to different schema"); }
 
@@ -289,7 +296,8 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         public override bool CheckColumnExists(TableRef tblName, string colName)
         {
-            if (tblName == null) throw new ArgumentNullException("tblName");
+            if (tblName == null)
+                throw new ArgumentNullException("tblName");
             return (bool)ExecuteScalar(@"
                 SELECT COUNT(*) > 0
                 FROM pg_attribute a
@@ -306,7 +314,8 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         public override IEnumerable<string> GetTableColumnNames(TableRef tbl)
         {
-            if (tbl == null) throw new ArgumentNullException("tbl");
+            if (tbl == null)
+                throw new ArgumentNullException("tbl");
             return ExecuteReader(
                     @"SELECT attname
                         FROM pg_attribute
@@ -322,7 +331,8 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         public override IEnumerable<Column> GetTableColumns(TableRef tblName)
         {
-            if (tblName == null) throw new ArgumentNullException("tblName");
+            if (tblName == null)
+                throw new ArgumentNullException("tblName");
 
             return ExecuteReader(
                 @"SELECT a.attname, t.typname, a.atttypmod - 4 as len, not a.attnotnull as nullable, t.typlen < 0 as variable_length
@@ -399,7 +409,8 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         public override bool GetIsColumnNullable(TableRef tblName, string colName)
         {
-            if (tblName == null) throw new ArgumentNullException("tblName");
+            if (tblName == null)
+                throw new ArgumentNullException("tblName");
 
             return (bool)ExecuteScalar(@"
                 SELECT NOT a.attnotnull
@@ -417,7 +428,8 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         public override bool GetHasColumnDefaultValue(TableRef tblName, string colName)
         {
-            if (tblName == null) throw new ArgumentNullException("tblName");
+            if (tblName == null)
+                throw new ArgumentNullException("tblName");
 
             return (bool)ExecuteScalar(@"
                 SELECT (d.adbin IS NOT NULL AND d.adbin <> '') as has_default
@@ -435,7 +447,8 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         public override int GetColumnMaxLength(TableRef tblName, string colName)
         {
-            if (tblName == null) throw new ArgumentNullException("tblName");
+            if (tblName == null)
+                throw new ArgumentNullException("tblName");
 
             return (int)ExecuteScalar(@"
                 SELECT a.atttypmod - 4 -- adjust for varchar implementation, which is storing the length too
@@ -548,7 +561,8 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         public override bool CheckIndexExists(TableRef tblName, string idxName)
         {
-            if (tblName == null) throw new ArgumentNullException("tblName");
+            if (tblName == null)
+                throw new ArgumentNullException("tblName");
 
             return (bool)ExecuteScalar(@"
                 SELECT COUNT(*) > 0
@@ -566,7 +580,8 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         public override void DropIndex(TableRef tblName, string idxName)
         {
-            if (tblName == null) throw new ArgumentNullException("tblName");
+            if (tblName == null)
+                throw new ArgumentNullException("tblName");
 
             ExecuteNonQuery(String.Format(
                 "DROP INDEX {0}.{1}",
@@ -580,7 +595,8 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         public override bool CheckViewExists(TableRef viewName)
         {
-            if (viewName == null) throw new ArgumentNullException("viewName");
+            if (viewName == null)
+                throw new ArgumentNullException("viewName");
 
             return (bool)ExecuteScalar(@"
                 SELECT COUNT(*) > 0
@@ -594,7 +610,8 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         public override bool CheckTriggerExists(TableRef objName, string triggerName)
         {
-            if (objName == null) throw new ArgumentNullException("objName");
+            if (objName == null)
+                throw new ArgumentNullException("objName");
             return (bool)ExecuteScalar(@"
                 SELECT count(*) > 0
                 FROM pg_proc p
@@ -615,7 +632,8 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         public override bool CheckProcedureExists(ProcRef procName)
         {
-            if (procName == null) throw new ArgumentNullException("procName");
+            if (procName == null)
+                throw new ArgumentNullException("procName");
             return (bool)ExecuteScalar(@"
                 SELECT count(*) > 0
                 FROM pg_proc p
@@ -649,38 +667,38 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
         private IEnumerable<string[]> GetParameterTypes(ProcRef procName)
         {
             List<string[]> result = new List<string[]>();
-// TODO re-enable for postgres 8.4; re-implement without generate_subscripts for 8.3
-//            string sqlQuery = @"
-//                SELECT args.proc_oid, t.typname 
-//                FROM pg_type t 
-//                    JOIN (
-//                        SELECT oid AS proc_oid, proargtypes::oid[] AS argtypes, generate_subscripts(proargtypes::oid[], 1) AS argtype_subscript 
-//                        FROM pg_proc where proname = @procName) args 
-//                    ON t.oid = args.argtypes[args.argtype_subscript] 
-//                ORDER BY args.proc_oid, args.argtype_subscript;";
-//            QueryLog.Debug(sqlQuery);
+            // TODO re-enable for postgres 8.4; re-implement without generate_subscripts for 8.3
+            //            string sqlQuery = @"
+            //                SELECT args.proc_oid, t.typname 
+            //                FROM pg_type t 
+            //                    JOIN (
+            //                        SELECT oid AS proc_oid, proargtypes::oid[] AS argtypes, generate_subscripts(proargtypes::oid[], 1) AS argtype_subscript 
+            //                        FROM pg_proc where proname = @procName) args 
+            //                    ON t.oid = args.argtypes[args.argtype_subscript] 
+            //                ORDER BY args.proc_oid, args.argtype_subscript;";
+            //            QueryLog.Debug(sqlQuery);
 
-//            long? lastProcOid = null;
-//            List<string> types = null;
-//            foreach (var rd in ExecuteReader(sqlQuery, new Dictionary<string, object>() { { "@procname", procName.Name } }))
-//            {
-//                var procOid = rd.GetInt64(0);
-//                var argType = rd.GetString(1);
-//                if (lastProcOid != procOid)
-//                {
-//                    if (types != null)
-//                    {
-//                        result.Add(types.ToArray());
-//                    }
-//                    lastProcOid = procOid;
-//                    types = new List<string>();
-//                }
-//                types.Add(argType);
-//            }
-//            if (types != null)
-//            {
-//                result.Add(types.ToArray());
-//            }
+            //            long? lastProcOid = null;
+            //            List<string> types = null;
+            //            foreach (var rd in ExecuteReader(sqlQuery, new Dictionary<string, object>() { { "@procname", procName.Name } }))
+            //            {
+            //                var procOid = rd.GetInt64(0);
+            //                var argType = rd.GetString(1);
+            //                if (lastProcOid != procOid)
+            //                {
+            //                    if (types != null)
+            //                    {
+            //                        result.Add(types.ToArray());
+            //                    }
+            //                    lastProcOid = procOid;
+            //                    types = new List<string>();
+            //                }
+            //                types.Add(argType);
+            //            }
+            //            if (types != null)
+            //            {
+            //                result.Add(types.ToArray());
+            //            }
             return result;
         }
 
@@ -835,8 +853,10 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         public override void CreateUpdateRightsTrigger(string triggerName, TableRef tblName, List<RightsTrigger> tblList)
         {
-            if (String.IsNullOrEmpty(triggerName)) throw new ArgumentNullException("triggerName");
-            if (tblList == null) throw new ArgumentNullException("tblList");
+            if (String.IsNullOrEmpty(triggerName))
+                throw new ArgumentNullException("triggerName");
+            if (tblList == null)
+                throw new ArgumentNullException("tblList");
 
             StringBuilder sb = new StringBuilder();
             sb.Append("CREATE OR REPLACE FUNCTION ");
@@ -938,7 +958,8 @@ END$BODY$
 
         public override void CreateRightsViewUnmaterialized(TableRef viewName, TableRef tblName, TableRef tblNameRights, IList<ACL> acls)
         {
-            if (acls == null) throw new ArgumentNullException("acls");
+            if (acls == null)
+                throw new ArgumentNullException("acls");
             Log.DebugFormat("Creating unmaterialized rights view for \"{0}\"", tblName);
 
             StringBuilder view = new StringBuilder();
@@ -1095,21 +1116,27 @@ LANGUAGE 'plpgsql' VOLATILE",
         }
 
         private const string COPY_SEPARATOR = "|";
-        private const string COPY_NULL = "\\N";
+        private const string COPY_NULL = "@N";
 
         public override void WriteTableData(TableRef destTbl, IDataReader source, IEnumerable<string> colNames)
         {
-            if (source == null) throw new ArgumentNullException("source");
-            if (colNames == null) throw new ArgumentNullException("colNames");
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (colNames == null)
+                throw new ArgumentNullException("colNames");
 
             var cols = colNames.Select(n => QuoteIdentifier(n)).ToArray();
             var query = String.Format("COPY {0} ({1}) FROM STDIN WITH DELIMITER '{2}' NULL '{3}'", FormatSchemaName(destTbl), String.Join(",", cols), COPY_SEPARATOR, COPY_NULL);
             _log.InfoFormat("Copy from: [{0}]", query);
+            _copyLog.Info(query);
             var bulkCopy = new NpgsqlCopyIn(query, CurrentConnection);
+
             try
             {
                 bulkCopy.Start();
-                var dst = new StreamWriter(bulkCopy.CopyStream, Encoding.UTF8); // explicitly use Npgsql's default encoding
+                var dst = new StreamWriter(bulkCopy.CopyStream, new System.Text.UTF8Encoding(false)); // explicitly use Npgsql's default encoding, without BOM
+                // normal windows newline confuses npgsql
+                dst.NewLine = "\n";
 
                 while (source.Read())
                 {
@@ -1166,21 +1193,37 @@ LANGUAGE 'plpgsql' VOLATILE",
                                                 }
                                                 else
                                                 {
-                                                    var str = val as string;
-                                                    if (str != null)
+                                                    var shrt = val as short?;
+                                                    if (shrt != null)
                                                     {
-                                                        vals[srcIdx] = str;
+                                                        vals[srcIdx] = shrt.Value.ToString(CultureInfo.InvariantCulture);
                                                     }
                                                     else
                                                     {
-                                                        // error out
-                                                        var strVal = val.ToString();
-                                                        if (strVal.Length > 100)
+                                                        var boolean = val as bool?;
+                                                        if (boolean != null)
                                                         {
-                                                            str = str.Substring(0, 100);
-                                                            str += " ...";
+                                                            vals[srcIdx] = boolean.Value.ToString(CultureInfo.InvariantCulture);
                                                         }
-                                                        throw new NotSupportedException(String.Format("Cannot transform [{0}] of Type [{1}] for WriteTableData", strVal, val.GetType()));
+                                                        else
+                                                        {
+                                                            var str = val as string;
+                                                            if (str != null)
+                                                            {
+                                                                vals[srcIdx] = "SOME STRING";
+                                                            }
+                                                            else
+                                                            {
+                                                                // error out
+                                                                var strVal = val.ToString();
+                                                                if (strVal.Length > 100)
+                                                                {
+                                                                    str = str.Substring(0, 100);
+                                                                    str += " ...";
+                                                                }
+                                                                throw new NotSupportedException(String.Format("Cannot transform [{0}] of Type [{1}] for WriteTableData", strVal, val.GetType()));
+                                                            }
+                                                        }
                                                     }
                                                 }
                                             }
@@ -1193,13 +1236,8 @@ LANGUAGE 'plpgsql' VOLATILE",
                         }
                     }
                     string line = String.Join(COPY_SEPARATOR, vals);
-                    Console.WriteLine(String.Join("|", vals.Select(s=>s.Length.ToString()).ToArray()));
-                    Console.WriteLine(Regex.Replace(line, @"[^-a-z0-9A-Z|°!""§$%&/()=?`´'#+*~öäüÖÄÜ:;\._ ,]", "@"));
-                    dst.Write(line);
-                    // normal writeline confuses npgsql
-                    dst.Write("\n");
-                    dst.Flush();
-                    System.Threading.Thread.Sleep(1);
+                    _copyLog.Debug(line);
+                    dst.WriteLine(line);
                 }
                 dst.Close();
                 bulkCopy.End();
