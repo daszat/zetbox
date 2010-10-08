@@ -11,8 +11,8 @@
         <CheckBox DockPanel.Dock="Left"
                   Margin="3"
                   VerticalAlignment="Center"
-                  Visibility="{Binding AllowNullInput, Converter={StaticResource BooleanToVisibilityConverter}}"
-                  IsChecked="{Binding HasValue, Mode=TwoWay}" />
+                  Visibility="{Binding AllowNullInput, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}"
+                  IsChecked="{Binding HasValue, Mode=OneWay}" />
 
         <Button DockPanel.Dock="Right"
                 Margin="3"
