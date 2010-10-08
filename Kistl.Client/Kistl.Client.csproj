@@ -127,7 +127,6 @@
     <Compile Include="Presentables\KistlBase\TypeRefPropertyViewModel.cs" />
     <Compile Include="Presentables\KistlDebuggerAsViewModel.cs" />
     <Compile Include="Presentables\KistlBase\MethodInvocationViewModel.cs" />
-    <Compile Include="Presentables\MethodResultModels.cs" />
     <Compile Include="Presentables\ViewModelFactory.cs" />
     <Compile Include="Presentables\ModuleEditor\DiagramViewModel.cs" />
     <Compile Include="Presentables\ModuleEditor\WorkspaceViewModel.cs" />

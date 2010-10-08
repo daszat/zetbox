@@ -168,7 +168,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             {
                 var targetType = baseclass.GetDescribedInterfaceType();
                 var item = this.DataContext.Create(targetType);
-                var model = ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>().Invoke(DataContext, item);
+                var model = ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>(item).Invoke(DataContext, item);
 
                 Value = model;
 
@@ -188,7 +188,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                             {
                                 var targetType = ((ObjectClass)chosen.Object).GetDescribedInterfaceType();
                                 var item = this.DataContext.Create(targetType);
-                                var model = ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>().Invoke(DataContext, item);
+                                var model = ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>(item).Invoke(DataContext, item);
 
                                 Value = model;
                                 if (onCreated != null)
@@ -289,7 +289,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             var obj = ValueModel.Value;
             if (obj != null)
             {
-                _valueCache = ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>().Invoke(DataContext, ValueModel.Value);
+                _valueCache = ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>(ValueModel.Value).Invoke(DataContext, ValueModel.Value);
             }
             _valueCacheInititalized = true;
         }

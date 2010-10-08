@@ -274,7 +274,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
         {
             var targetType = targetClass.GetDescribedInterfaceType();
             var item = this.DataContext.Create(targetType);
-            var result = ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>().Invoke(DataContext, item);
+            var result = ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>(item).Invoke(DataContext, item);
             AddItem(result);
             if (!targetClass.IsSimpleObject)
             {
