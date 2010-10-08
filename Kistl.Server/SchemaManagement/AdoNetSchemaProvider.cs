@@ -264,7 +264,7 @@ namespace Kistl.Server.SchemaManagement
             return "SELECT "
                 + String.Join(",", columns.Select(c => QuoteIdentifier(c)).ToArray())
                 + " FROM "
-                + FormatFullName(tbl);
+                + FormatSchemaName(tbl);
         }
 
         protected static string ConstructDefaultConstraintName(TableRef tblName, string colName)
@@ -314,12 +314,12 @@ namespace Kistl.Server.SchemaManagement
 
         public virtual void DropTable(TableRef tblName)
         {
-            ExecuteNonQuery(String.Format("DROP TABLE {0}", FormatFullName(tblName)));
+            ExecuteNonQuery(String.Format("DROP TABLE {0}", FormatSchemaName(tblName)));
         }
 
         protected virtual void DropTableCascade(TableRef tblName)
         {
-            ExecuteNonQuery(String.Format("DROP TABLE {0} CASCADE", FormatFullName(tblName)));
+            ExecuteNonQuery(String.Format("DROP TABLE {0} CASCADE", FormatSchemaName(tblName)));
         }
 
         public abstract bool CheckColumnExists(TableRef tblName, string colName);
@@ -351,7 +351,7 @@ namespace Kistl.Server.SchemaManagement
         public virtual void DropColumn(TableRef tblName, string colName)
         {
             ExecuteNonQuery(String.Format("ALTER TABLE {0} DROP COLUMN {1}",
-                FormatFullName(tblName),
+                FormatSchemaName(tblName),
                 QuoteIdentifier(colName)));
         }
 
@@ -371,7 +371,7 @@ namespace Kistl.Server.SchemaManagement
 
         public virtual void TruncateTable(TableRef tblName)
         {
-            ExecuteNonQuery(String.Format("DELETE FROM {0}", FormatFullName(tblName)));
+            ExecuteNonQuery(String.Format("DELETE FROM {0}", FormatSchemaName(tblName)));
         }
 
         #endregion
@@ -385,7 +385,7 @@ namespace Kistl.Server.SchemaManagement
         public virtual void DropFKConstraint(TableRef tblName, string fkName)
         {
             ExecuteNonQuery(String.Format("ALTER TABLE {0} DROP CONSTRAINT {1}",
-                FormatFullName(tblName),
+                FormatSchemaName(tblName),
                 QuoteIdentifier(fkName)));
         }
 

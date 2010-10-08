@@ -208,7 +208,7 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
             // TODO: check schema/database
             return (int)ExecuteScalar("SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(@tbl) AND type IN (N'U')",
                 new Dictionary<string, object>() { 
-                    { "@tbl", FormatFullName(tblName) }
+                    { "@tbl", FormatSchemaName(tblName) }
                 }) > 0;
         }
 
@@ -226,7 +226,8 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
 
         public override void CreateTable(TableRef tblName, IEnumerable<Column> cols)
         {
-            if (cols == null) throw new ArgumentNullException("cols");
+            if (cols == null)
+                throw new ArgumentNullException("cols");
 
             StringBuilder sb = new StringBuilder();
             sb.AppendFormat("CREATE TABLE {0} (", FormatSchemaName(tblName));
@@ -240,7 +241,8 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
 
         public override void CreateTable(TableRef tblName, bool idAsIdentityColumn, bool createPrimaryKey)
         {
-            if (tblName == null) throw new ArgumentNullException("tblName");
+            if (tblName == null)
+                throw new ArgumentNullException("tblName");
 
             StringBuilder sb = new StringBuilder();
             sb.AppendFormat("CREATE TABLE [{0}].[{1}] (", tblName.Schema, tblName.Name);
@@ -267,13 +269,15 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
 
         public override void RenameTable(TableRef oldTblName, TableRef newTblName)
         {
-            if (oldTblName == null) throw new ArgumentNullException("oldTblName");
-            if (newTblName == null) throw new ArgumentNullException("newTblName");
+            if (oldTblName == null)
+                throw new ArgumentNullException("oldTblName");
+            if (newTblName == null)
+                throw new ArgumentNullException("newTblName");
             if (!oldTblName.Database.Equals(newTblName.Database)) { throw new ArgumentOutOfRangeException("newTblName", "cannot rename table to different database"); }
             if (!oldTblName.Schema.Equals(newTblName.Schema)) { throw new ArgumentOutOfRangeException("newTblName", "cannot rename table to different schema"); }
 
             // Do not qualify new name as it will be part of the old schema
-            ExecuteNonQuery(string.Format("EXEC sp_rename '{0}', '{1}'", FormatFullName(oldTblName), newTblName.Name));
+            ExecuteNonQuery(string.Format("EXEC sp_rename '{0}', '{1}'", FormatSchemaName(oldTblName), newTblName.Name));
         }
 
         public override bool CheckColumnExists(TableRef tblName, string colName)
@@ -285,7 +289,7 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
                     AND o.type IN (N'U', N'V')
                     AND c.Name = @name",
                 new Dictionary<string, object>(){
-                    { "@tbl", FormatFullName(tblName) },
+                    { "@tbl", FormatSchemaName(tblName) },
                     { "@name", colName },
                 }) > 0;
         }
@@ -299,7 +303,7 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
                         WHERE o.object_id = OBJECT_ID(@tbl)
                             AND o.type IN (N'U', N'V')",
                 new Dictionary<string, object>() {
-                    { "@tbl", FormatFullName(tblName) },
+                    { "@tbl", FormatSchemaName(tblName) },
                 })
                 .Select(rd => rd.GetString(0));
         }
@@ -313,7 +317,7 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
                     WHERE o.object_id = OBJECT_ID(@tbl)
                         AND o.type IN (N'U', N'V')",
                 new Dictionary<string, object>() {
-                    { "@tbl", FormatFullName(tblName) },
+                    { "@tbl", FormatSchemaName(tblName) },
                 })
                 .Select(rd =>
                 {
@@ -379,11 +383,11 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
             // Drop an existing default constraint
             if (!add)
             {
-                ExecuteNonQuery(string.Format("IF OBJECT_ID('[{0}]') IS NOT NULL\nALTER TABLE {1} DROP CONSTRAINT [{0}]", constrName, FormatFullName(tblName)));
+                ExecuteNonQuery(string.Format("IF OBJECT_ID('[{0}]') IS NOT NULL\nALTER TABLE {1} DROP CONSTRAINT [{0}]", constrName, FormatSchemaName(tblName)));
             }
 
             // Construct statement
-            sb.AppendFormat("ALTER TABLE {0} {1} {2}", FormatFullName(tblName), addOrAlter, GetColumnDefinition(new Column() { Name = colName, Type = type, Size = size, Scale = scale, IsNullable = isNullable }));
+            sb.AppendFormat("ALTER TABLE {0} {1} {2}", FormatSchemaName(tblName), addOrAlter, GetColumnDefinition(new Column() { Name = colName, Type = type, Size = size, Scale = scale, IsNullable = isNullable }));
 
             // Add Default Constraint only if column is been added
             if (defConstraint != null && add)
@@ -396,14 +400,14 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
             // Recreate Constraint only if not done during add
             if (defConstraint != null && !add)
             {
-                ExecuteNonQuery(string.Format("ALTER TABLE {1} ADD CONSTRAINT [{0}] DEFAULT {3} FOR [{2}]", constrName, FormatFullName(tblName), colName, defValue));
+                ExecuteNonQuery(string.Format("ALTER TABLE {1} ADD CONSTRAINT [{0}] DEFAULT {3} FOR [{2}]", constrName, FormatSchemaName(tblName), colName, defValue));
             }
         }
 
         public override void RenameColumn(TableRef tblName, string oldColName, string newColName)
         {
             // Do not qualify new name as it will stay part of the original table
-            ExecuteNonQuery(string.Format("EXEC sp_rename '{0}.[{1}]', '{2}', 'COLUMN'", FormatFullName(tblName), oldColName, newColName));
+            ExecuteNonQuery(string.Format("EXEC sp_rename '{0}.[{1}]', '{2}', 'COLUMN'", FormatSchemaName(tblName), oldColName, newColName));
         }
 
         public override bool GetIsColumnNullable(TableRef tblName, string colName)
@@ -416,7 +420,7 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
 		            AND o.type IN (N'U', N'V')
 		            AND c.Name = @column",
                 new Dictionary<string, object>(){
-                    { "@table", FormatFullName(tblName) },
+                    { "@table", FormatSchemaName(tblName) },
                     { "@column", colName },
                 });
         }
@@ -440,7 +444,7 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
 		            AND o.type IN (N'U', N'V')
 		            AND c.Name = @column",
                 new Dictionary<string, object>(){
-                    { "@table", FormatFullName(tblName) },
+                    { "@table", FormatSchemaName(tblName) },
                     { "@column", colName },
                 });
         }
@@ -453,14 +457,14 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
         {
             return (int)ExecuteScalar(String.Format(
                 "SELECT COUNT(*) FROM (SELECT TOP 1 * FROM {0}) AS data",
-                FormatFullName(tbl))) > 0;
+                FormatSchemaName(tbl))) > 0;
         }
 
         public override bool CheckColumnContainsNulls(TableRef tbl, string colName)
         {
             return (int)ExecuteScalar(String.Format(
                 "SELECT COUNT(*) FROM (SELECT TOP 1 {1} FROM {0} WHERE {1} IS NULL) AS nulls",
-                FormatFullName(tbl),
+                FormatSchemaName(tbl),
                 QuoteIdentifier(colName))) > 0;
         }
 
@@ -471,7 +475,7 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
                     SELECT TOP 1 {1} FROM {0} WHERE {1} IS NOT NULL
                     GROUP BY {1} 
                     HAVING COUNT({1}) > 1) AS tbl",
-                FormatFullName(tbl),
+                FormatSchemaName(tbl),
                 QuoteIdentifier(colName))) == 0;
         }
 
@@ -479,7 +483,7 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
         {
             return (int)ExecuteScalar(String.Format(
                 "SELECT COUNT(*) FROM (SELECT TOP 1 {1} FROM {0} WHERE {1} IS NOT NULL) AS data",
-                FormatFullName(tbl),
+                FormatSchemaName(tbl),
                 QuoteIdentifier(colName))) > 0;
         }
 
@@ -487,7 +491,7 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
         {
             return (int)ExecuteScalar(String.Format(
                 @"SELECT COUNT(*) FROM {0}",
-                FormatFullName(tblName)));
+                FormatSchemaName(tblName)));
         }
 
         #endregion
@@ -519,14 +523,14 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
                 ALTER TABLE {0} WITH CHECK 
                 ADD CONSTRAINT [{1}] FOREIGN KEY([{2}])
                 REFERENCES {3} ([ID]){4}",
-                FormatFullName(tblName),
+                FormatSchemaName(tblName),
                 constraintName,
                 colName,
-                FormatFullName(refTblName),
+                FormatSchemaName(refTblName),
                 onDeleteCascade ? @" ON DELETE CASCADE" : String.Empty));
 
             ExecuteNonQuery(string.Format(@"ALTER TABLE {0} CHECK CONSTRAINT [{1}]",
-                   FormatFullName(tblName),
+                   FormatSchemaName(tblName),
                    constraintName));
         }
 
@@ -540,14 +544,14 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
         {
             return (int)ExecuteScalar("SELECT COUNT(*) from sys.sysindexes WHERE id = OBJECT_ID(@tbl) AND [name] = @index",
                 new Dictionary<string, object>(){
-                    { "@tbl", FormatFullName(tblName) },
+                    { "@tbl", FormatSchemaName(tblName) },
                     { "@index", idxName },
                 }) > 0;
         }
 
         public override void DropIndex(TableRef tblName, string idxName)
         {
-            ExecuteNonQuery(string.Format("DROP INDEX [{0}] ON {1}", idxName, FormatFullName(tblName)));
+            ExecuteNonQuery(string.Format("DROP INDEX [{0}] ON {1}", idxName, FormatSchemaName(tblName)));
         }
 
         #endregion
@@ -559,7 +563,7 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
             return (int)ExecuteScalar(
                 "SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(@view) AND type IN (N'V')",
                 new Dictionary<string, object>() {
-                    { "@view", FormatFullName(viewName) },
+                    { "@view", FormatSchemaName(viewName) },
                 }) > 0;
         }
 
@@ -569,7 +573,7 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
                 "SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(@trigger) AND parent_object_id = OBJECT_ID(@parent) AND type IN (N'TR')",
                 new Dictionary<string, object>(){
                     { "@trigger", triggerName },
-                    { "@parent", FormatFullName(objName) },
+                    { "@parent", FormatSchemaName(objName) },
                 }) > 0;
         }
 
@@ -674,28 +678,28 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
         {
             Log.DebugFormat("Copying data from [{0}].[{1}] to [{2}].[{3}]", srcTblName, srcColName, tblName, colName);
             ExecuteNonQuery(string.Format("UPDATE dest SET dest.[{0}] = src.[{1}] FROM {2} dest INNER JOIN {3} src ON dest.ID = src.ID",
-                colName, srcColName, FormatFullName(tblName), FormatFullName(srcTblName)));
+                colName, srcColName, FormatSchemaName(tblName), FormatSchemaName(srcTblName)));
         }
 
         public override void MigrateFKs(TableRef srcTblName, string srcColName, TableRef tblName, string colName)
         {
             Log.DebugFormat("Migrating FK data from [{0}].[{1}] to [{2}].[{3}]", srcTblName, srcColName, tblName, colName);
             ExecuteNonQuery(string.Format("UPDATE dest SET dest.[{0}] = src.[ID] FROM [{2}] dest INNER JOIN [{3}] src ON dest.ID = src.[{1}]",
-                colName, srcColName, FormatFullName(tblName), FormatFullName(srcTblName)));
+                colName, srcColName, FormatSchemaName(tblName), FormatSchemaName(srcTblName)));
         }
 
         public override void InsertFKs(TableRef srcTblName, string srcColName, TableRef tblName, string colName, string fkColName)
         {
             Log.DebugFormat("Inserting FK data from [{0}]([{1}]) to [{2}]([{3}],[{4}])", srcTblName, srcColName, tblName, colName, fkColName);
             ExecuteNonQuery(string.Format("INSERT INTO {0} ([{1}], [{2}]) SELECT [ID], [{3}] FROM {4} WHERE [{3}] IS NOT NULL",
-                FormatFullName(tblName), colName, fkColName, srcColName, FormatFullName(srcTblName)));
+                FormatSchemaName(tblName), colName, fkColName, srcColName, FormatSchemaName(srcTblName)));
         }
 
         public override void CopyFKs(TableRef srcTblName, string srcColName, TableRef destTblName, string destColName, string srcFKColName)
         {
             Log.DebugFormat("Copy FK data from [{0}]([{1}]) to [{2}]([{3}])", srcTblName, srcColName, destTblName, destColName);
             ExecuteNonQuery(string.Format("UPDATE dest SET dest.[{0}] = src.[{1}] FROM {2} dest  INNER JOIN {3} src ON src.[{4}] = dest.[ID]",
-                destColName, srcColName, FormatFullName(destTblName), FormatFullName(srcTblName), srcFKColName));
+                destColName, srcColName, FormatSchemaName(destTblName), FormatSchemaName(srcTblName), srcFKColName));
         }
 
         private int GetSQLServerVersion()
@@ -708,7 +712,7 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
         {
             string colSpec = string.Join(", ", columns.Select(c => "[" + c + "]").ToArray());
 
-            Log.DebugFormat("Creating index {0}.[{1}] ({2})", FormatFullName(tblName), idxName, colSpec);
+            Log.DebugFormat("Creating index {0}.[{1}] ({2})", FormatSchemaName(tblName), idxName, colSpec);
 
             string appendIndexFilter = string.Empty;
             if (unique && !clustered && columns.Length == 1)
@@ -739,7 +743,8 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
 
         public override void CreateUpdateRightsTrigger(string triggerName, TableRef tblName, List<RightsTrigger> tblList)
         {
-            if (tblList == null) throw new ArgumentNullException("tblList");
+            if (tblList == null)
+                throw new ArgumentNullException("tblList");
 
             Log.DebugFormat("Creating trigger to update rights [{0}]", triggerName);
 
@@ -747,7 +752,7 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
             sb.AppendFormat(@"CREATE TRIGGER [{0}]
 ON {1}
 AFTER UPDATE, INSERT, DELETE AS
-BEGIN", triggerName, FormatFullName(tblName));
+BEGIN", triggerName, FormatSchemaName(tblName));
             sb.AppendLine();
 
             foreach (var tbl in tblList)
@@ -779,7 +784,7 @@ BEGIN", triggerName, FormatFullName(tblName));
                             (rel == lastRel) ? "{0}" : FormatSchemaName(rel.JoinTableName),
                             idx,
                             rel.JoinColumnName.Single().ColumnName,
-                            idx - 1, 
+                            idx - 1,
                             rel.FKColumnName.Single().ColumnName);
                         idx++;
                     }
@@ -807,9 +812,12 @@ BEGIN", triggerName, FormatFullName(tblName));
 
         public override void CreateRightsViewUnmaterialized(TableRef viewName, TableRef tblName, TableRef tblNameRights, IList<ACL> acls)
         {
-            if (viewName == null) throw new ArgumentNullException("viewName");
-            if (tblName == null) throw new ArgumentNullException("tblName");
-            if (acls == null) throw new ArgumentNullException("acls");
+            if (viewName == null)
+                throw new ArgumentNullException("viewName");
+            if (tblName == null)
+                throw new ArgumentNullException("tblName");
+            if (acls == null)
+                throw new ArgumentNullException("acls");
             Log.DebugFormat("Creating unmaterialized rights view for [{0}]", tblName);
 
             StringBuilder view = new StringBuilder();
@@ -943,7 +951,7 @@ FROM (", viewName.Schema, viewName.Name);
         public override IDataReader ReadTableData(TableRef tbl, IEnumerable<string> colNames)
         {
             var columns = String.Join(",", colNames.Select(n => QuoteIdentifier(n)).ToArray());
-            var query = String.Format("SELECT {0} FROM {1}", columns, FormatFullName(tbl));
+            var query = String.Format("SELECT {0} FROM {1}", columns, FormatSchemaName(tbl));
 
             return ReadTableData(query);
         }
@@ -957,9 +965,12 @@ FROM (", viewName.Schema, viewName.Name);
 
         public override IDataReader ReadJoin(TableRef tbl, IEnumerable<ProjectionColumn> colNames, IEnumerable<Join> joins)
         {
-            if (tbl == null) throw new ArgumentNullException("tbl");
-            if (colNames == null) throw new ArgumentNullException("colNames");
-            if (joins == null) throw new ArgumentNullException("joins");
+            if (tbl == null)
+                throw new ArgumentNullException("tbl");
+            if (colNames == null)
+                throw new ArgumentNullException("colNames");
+            if (joins == null)
+                throw new ArgumentNullException("joins");
 
             var join_alias = new Dictionary<Join, string>();
             var joinQueryPart = new StringBuilder();
@@ -973,8 +984,10 @@ FROM (", viewName.Schema, viewName.Name);
             var columns = String.Join(",\n", colNames.Select(pc =>
             {
                 string result = "\t";
-                if (pc.Source == null) result += string.Format("t0.{0}", QuoteIdentifier(pc.ColumnName));
-                else result += string.Format("{0}.{1}", join_alias[pc.Source], QuoteIdentifier(pc.ColumnName));
+                if (pc.Source == ColumnRef.PrimaryTable)
+                    result += string.Format("t0.{0}", QuoteIdentifier(pc.ColumnName));
+                else
+                    result += string.Format("{0}.{1}", join_alias[pc.Source], QuoteIdentifier(pc.ColumnName));
 
                 if (!string.IsNullOrEmpty(pc.NullValue))
                 {
@@ -988,7 +1001,7 @@ FROM (", viewName.Schema, viewName.Name);
             }).ToArray());
 
             var query = new StringBuilder();
-            query.AppendFormat("SELECT \n{0} \nFROM {1} t0{2}", columns, FormatFullName(tbl), joinQueryPart.ToString());
+            query.AppendFormat("SELECT \n{0} \nFROM {1} t0{2}", columns, FormatSchemaName(tbl), joinQueryPart.ToString());
             var cmd = new SqlCommand(query.ToString(), CurrentConnection, CurrentTransaction);
             QueryLog.Debug(query.ToString());
             return cmd.ExecuteReader();
@@ -996,10 +1009,11 @@ FROM (", viewName.Schema, viewName.Name);
 
         private void AddReadJoin(StringBuilder query, ref int idx, Join join, Dictionary<Join, string> join_alias)
         {
-            if (join.JoinColumnName.Length != join.FKColumnName.Length) throw new ArgumentException(string.Format("Column count on Join '{0}' does not match", join), "join");
+            if (join.JoinColumnName.Length != join.FKColumnName.Length)
+                throw new ArgumentException(string.Format("Column count on Join '{0}' does not match", join), "join");
 
             join_alias[join] = string.Format("t{0}", idx);
-            query.AppendFormat("\n  {2} JOIN {0} t{1} ON ", FormatFullName(join.JoinTableName), idx, join.Type.ToString().ToUpper());
+            query.AppendFormat("\n  {2} JOIN {0} t{1} ON ", FormatSchemaName(join.JoinTableName), idx, join.Type.ToString().ToUpper());
             for (int i = 0; i < join.JoinColumnName.Length; i++)
             {
                 query.AppendFormat("{0}.[{1}] = {2}.[{3}]",
@@ -1007,7 +1021,8 @@ FROM (", viewName.Schema, viewName.Name);
                     join.JoinColumnName[i].ColumnName,
                     join.FKColumnName[i].Source == ColumnRef.PrimaryTable ? "t0" : (join.FKColumnName[i].Source == ColumnRef.Local ? "t" + idx : join_alias[join.FKColumnName[i].Source]),
                     join.FKColumnName[i].ColumnName);
-                if (i < join.JoinColumnName.Length - 1) query.Append(" AND ");
+                if (i < join.JoinColumnName.Length - 1)
+                    query.Append(" AND ");
             }
             foreach (var j in join.Joins)
             {
@@ -1018,9 +1033,12 @@ FROM (", viewName.Schema, viewName.Name);
 
         public override void WriteTableData(TableRef destTbl, IDataReader source, IEnumerable<string> colNames)
         {
-            if (destTbl == null) throw new ArgumentNullException("destTbl");
-            if (source == null) throw new ArgumentNullException("source");
-            if (colNames == null) throw new ArgumentNullException("colNames");
+            if (destTbl == null)
+                throw new ArgumentNullException("destTbl");
+            if (source == null)
+                throw new ArgumentNullException("source");
+            if (colNames == null)
+                throw new ArgumentNullException("colNames");
 
             using (SqlBulkCopy bulkCopy = new SqlBulkCopy(CurrentConnection, SqlBulkCopyOptions.CheckConstraints, null))
             {
@@ -1046,11 +1064,13 @@ FROM (", viewName.Schema, viewName.Name);
 
         public override void WriteTableData(TableRef destTbl, IEnumerable<string> colNames, System.Collections.IEnumerable values)
         {
-            if (colNames == null) throw new ArgumentNullException("colNames");
-            if (values == null) throw new ArgumentNullException("values");
+            if (colNames == null)
+                throw new ArgumentNullException("colNames");
+            if (values == null)
+                throw new ArgumentNullException("values");
 
             var sb = new StringBuilder();
-            sb.AppendLine(string.Format("INSERT INTO {0} (", FormatFullName(destTbl)));
+            sb.AppendLine(string.Format("INSERT INTO {0} (", FormatSchemaName(destTbl)));
 
             colNames.ForEach(i => sb.Append("[" + i + "],"));
             sb.Remove(sb.Length - 1, 1);

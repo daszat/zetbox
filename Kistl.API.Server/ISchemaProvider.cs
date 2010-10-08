@@ -109,13 +109,15 @@ namespace Kistl.API.Server
 
         public static bool operator >(DboRef x, DboRef y)
         {
-            if (x == null) throw new ArgumentNullException("x");
+            if (x == null)
+                throw new ArgumentNullException("x");
             return ((IComparable<DboRef>)x).CompareTo(y) > 0;
         }
 
         public static bool operator <(DboRef x, DboRef y)
         {
-            if (x == null) throw new ArgumentNullException("x");
+            if (x == null)
+                throw new ArgumentNullException("x");
             return ((IComparable<DboRef>)x).CompareTo(y) < 0;
         }
     }
@@ -283,35 +285,72 @@ namespace Kistl.API.Server
     public class ColumnRef
     {
         public static readonly Join Local = new Join();
-        public static readonly Join PrimaryTable = null;
+        public static readonly Join PrimaryTable = new Join();
 
         public ColumnRef()
         {
         }
 
         public ColumnRef(string name, Join source)
+            : this(name, source, null)
         {
-            this.ColumnName = name;
-            this.Source = source;
         }
 
-        public Join Source { get; set; }
-        public string ColumnName { get; set; }
+        public ColumnRef(string name, Join source, DbType? colType)
+        {
+            if (String.IsNullOrEmpty(name))
+                throw new ArgumentNullException("name");
+            if (source == null)
+                throw new ArgumentNullException("source");
+
+            this.ColumnName = name;
+            this.Source = source;
+            this.Type = colType;
+        }
+
+        public string ColumnName { get; private set; }
+        public Join Source { get; private set; }
+        public DbType? Type { get; private set; }
 
         public override string ToString()
         {
-            return string.Format("CR: {0}{1}", Source != null ? "." + Source : string.Empty, ColumnName);
+            return string.Format("CR: {0}{1}", Source != PrimaryTable ? "." + Source : string.Empty, ColumnName);
         }
     }
 
     public class ProjectionColumn : ColumnRef
     {
-        public string Alias { get; set; }
-        public string NullValue { get; set; }
+        public ProjectionColumn(string name, Join source, string alias)
+            : this(name, source, null, alias, null)
+        {
+        }
+
+        public ProjectionColumn(string name, Join source, string alias, string nullValue)
+            : this(name, source, null, alias, nullValue)
+        {
+        }
+
+        public ProjectionColumn(string name, Join source, DbType? colType, string alias)
+            : this(name, source, colType, alias, null)
+        {
+        }
+
+        public ProjectionColumn(string name, Join source, DbType? colType, string alias, string nullValue)
+            : base(name, source, colType)
+        {
+            if (alias == String.Empty)
+                throw new ArgumentNullException("alias");
+
+            this.Alias = alias;
+            this.NullValue = nullValue;
+        }
+
+        public string Alias { get; private set; }
+        public string NullValue { get; private set; }
 
         public override string ToString()
         {
-            return string.Format("PC: {0}{1}", Source != null ? "." + Source : string.Empty, ColumnName);
+            return string.Format("PC: {0}{1}", Source != PrimaryTable ? "." + Source : string.Empty, ColumnName);
         }
     }
 
@@ -407,7 +446,7 @@ namespace Kistl.API.Server
         IEnumerable<string> GetSchemaNames();
         void CreateSchema(string schemaName);
         void DropSchema(string schemaName, bool force);
-        
+
         #endregion
 
         #region Table Structure

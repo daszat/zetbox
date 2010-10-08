@@ -19,9 +19,12 @@ namespace Kistl.API.Migration
 
         public MigrationTasksBase(IKistlContext logCtx, ISchemaProvider src, ISchemaProvider dst)
         {
-            if (src == null) throw new ArgumentNullException("src");
-            if (dst == null) throw new ArgumentNullException("dst");
-            if (logCtx == null) throw new ArgumentNullException("logCtx");
+            if (src == null)
+                throw new ArgumentNullException("src");
+            if (dst == null)
+                throw new ArgumentNullException("dst");
+            if (logCtx == null)
+                throw new ArgumentNullException("logCtx");
 
             _src = src;
             _dst = dst;
@@ -40,7 +43,8 @@ namespace Kistl.API.Migration
 
         public void CleanDestination(SourceTable tbl)
         {
-            if (tbl == null) throw new ArgumentNullException("tbl");
+            if (tbl == null)
+                throw new ArgumentNullException("tbl");
             if (tbl.DestinationObjectClass == null)
             {
                 Log.InfoFormat("Skipping cleaning of unmapped table [{0}]", tbl.Name);
@@ -107,7 +111,8 @@ namespace Kistl.API.Migration
         public void TableBaseMigration(SourceTable tbl, Converter[] nullConverter, Join[] additional_joins)
         {
             // ------------------- Argument checks ------------------- 
-            if (tbl == null) throw new ArgumentNullException("tbl");
+            if (tbl == null)
+                throw new ArgumentNullException("tbl");
             if (tbl.DestinationObjectClass == null)
             {
                 Log.InfoFormat("Skipping base migration of unmapped table [{0}]", tbl.Name);
@@ -193,12 +198,7 @@ namespace Kistl.API.Migration
                 var orp = c.DestinationProperty.FirstOrDefault() as ObjectReferenceProperty;
                 if (c.References != null)
                 {
-                    return new ProjectionColumn()
-                    {
-                        ColumnName = "ID",
-                        Alias = c.DestinationProperty.Single().Name,
-                        Source = all_joins[c]
-                    };
+                    return new ProjectionColumn("ID", all_joins[c], System.Data.DbType.Int32, c.DestinationProperty.Single().Name);
                 }
                 else if (c.References == null
                     && orp != null)
@@ -206,12 +206,11 @@ namespace Kistl.API.Migration
                     if (additional_joins != null
                         && additional_joins.Count(i => i.JoinTableName == _dst.GetQualifiedTableName(orp.RelationEnd.Parent.GetOtherEnd(orp.RelationEnd).Type.TableName)) > 0)
                     {
-                        return new ProjectionColumn()
-                        {
-                            ColumnName = "ID",
-                            Alias = orp.Name,
-                            Source = additional_joins.Single(j => j.JoinTableName == _dst.GetQualifiedTableName(orp.RelationEnd.Parent.GetOtherEnd(orp.RelationEnd).Type.TableName))
-                        };
+                        return new ProjectionColumn(
+                            "ID",
+                            additional_joins.Single(j => j.JoinTableName == _dst.GetQualifiedTableName(orp.RelationEnd.Parent.GetOtherEnd(orp.RelationEnd).Type.TableName)),
+                            System.Data.DbType.Int32,
+                            orp.Name);
                     }
                     else
                     {
@@ -220,11 +219,7 @@ namespace Kistl.API.Migration
                 }
                 else
                 {
-                    return new ProjectionColumn()
-                    {
-                        ColumnName = c.Name,
-                        Source = null
-                    };
+                    return new ProjectionColumn(c.Name, ColumnRef.PrimaryTable, (System.Data.DbType)c.DbType, null);
                 }
             }).ToList();
 
@@ -296,8 +291,8 @@ namespace Kistl.API.Migration
             {
                 Type = JoinType.Left,
                 JoinTableName = _dst.GetQualifiedTableName(srcTbl.DestinationObjectClass.TableName),
-                JoinColumnName = directRefs.Select(reference => new ColumnRef(reference.Value.References.DestinationProperty.Single().Name, ColumnRef.Local)).ToArray(),
-                FKColumnName = directRefs.Select(reference => new ColumnRef(reference.Value.Name, ColumnRef.PrimaryTable)).ToArray()
+                JoinColumnName = directRefs.Select(reference => new ColumnRef(reference.Value.References.DestinationProperty.Single().Name, ColumnRef.Local, reference.Value.References.DestinationProperty.Single().GetDbType())).ToArray(),
+                FKColumnName = directRefs.Select(reference => new ColumnRef(reference.Value.Name, ColumnRef.PrimaryTable, (System.Data.DbType)reference.Value.DbType)).ToArray()
             };
             directRefs.ForEach(dr => all_joins[dr.Key] = result);
             return result;

@@ -36,18 +36,12 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         #region ADO.NET, Connection and Transaction Handling
 
+        private NpgsqlConnectionStringBuilder _connectionSettings = null;
+
         protected override NpgsqlConnection CreateConnection(string connectionString)
         {
-            //var origCS = connectionString;
-            //// TODO: improve hack
-            //Regex.Replace(connectionString, "SyncNotification=[^;]*", "");
-            ////connectionString += ";SyncNotification=true";
-            var result = new NpgsqlConnection(connectionString);
-            //if (!result.SyncNotification)
-            //{
-            //    _log.ErrorFormat("Must set 'SyncNotification=true' in connection string [{0}]", origCS);
-            //}
-            return result;
+            _connectionSettings = new NpgsqlConnectionStringBuilder(connectionString);
+            return new NpgsqlConnection(connectionString);
         }
 
         protected override NpgsqlTransaction CreateTransaction()
@@ -58,6 +52,21 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
         protected override NpgsqlCommand CreateCommand(string query)
         {
             return new NpgsqlCommand(query, CurrentConnection, CurrentTransaction);
+        }
+
+        private readonly Dictionary<string, string> _dblinks = new Dictionary<string, string>();
+
+        private void DblinkConnect(TableRef tbl)
+        {
+            if (tbl.Database == CurrentConnection.Database || _dblinks.ContainsKey(tbl.Database))
+                return; // happy
+
+            ExecuteScalar("SELECT dblink_connect(@alias, @connstr)",
+                new Dictionary<string, object>() {
+                    { "@alias", tbl.Database},
+                    { "@connstr", String.Format("dbname={0} port={1} user={2} password={3}", tbl.Database, CurrentConnection.Port, _connectionSettings.UserName, _connectionSettings.Password) }
+                });
+            _dblinks[tbl.Database] = tbl.Database;
         }
 
         #endregion
@@ -290,7 +299,7 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
             ExecuteNonQuery(String.Format(
                 "ALTER TABLE {0} RENAME TO {1}",
-                FormatFullName(oldTblName),
+                FormatSchemaName(oldTblName),
                 QuoteIdentifier(newTblName.Name)));
         }
 
@@ -361,14 +370,14 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
             string addOrAlter = add ? "ADD" : "ALTER COLUMN";
             string nullable = isNullable ? "NULL" : "NOT NULL";
 
-            sb.AppendFormat("ALTER TABLE {0} {1} {2}", FormatFullName(tblName), addOrAlter, GetColumnDefinition(new Column() { Name = colName, Type = type, Size = size, Scale = scale, IsNullable = isNullable }));
+            sb.AppendFormat("ALTER TABLE {0} {1} {2}", FormatSchemaName(tblName), addOrAlter, GetColumnDefinition(new Column() { Name = colName, Type = type, Size = size, Scale = scale, IsNullable = isNullable }));
 
             ExecuteNonQuery(sb.ToString());
 
             var constrName = ConstructDefaultConstraintName(tblName, colName);
             if (GetHasColumnDefaultValue(tblName, colName))
             {
-                ExecuteNonQuery(String.Format("ALTER TABLE {0} ALTER COLUMN {0} DROP DEFAULT", FormatFullName(tblName), QuoteIdentifier(colName)));
+                ExecuteNonQuery(String.Format("ALTER TABLE {0} ALTER COLUMN {0} DROP DEFAULT", FormatSchemaName(tblName), QuoteIdentifier(colName)));
             }
 
             if (defConstraint != null)
@@ -394,7 +403,7 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
                 {
                     throw new ArgumentOutOfRangeException("defConstraint", "Unsupported default constraint " + defConstraint.GetType().Name);
                 }
-                ExecuteNonQuery(string.Format("ALTER TABLE {0} ALTER COLUMN {1} SET DEFAULT {2}", FormatFullName(tblName), QuoteIdentifier(colName), defValue));
+                ExecuteNonQuery(string.Format("ALTER TABLE {0} ALTER COLUMN {1} SET DEFAULT {2}", FormatSchemaName(tblName), QuoteIdentifier(colName), defValue));
             }
         }
 
@@ -402,7 +411,7 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
         {
             ExecuteNonQuery(String.Format(
                 "ALTER TABLE {0} RENAME COLUMN {1} TO {2}",
-                FormatFullName(tblName),
+                FormatSchemaName(tblName),
                 QuoteIdentifier(oldColName),
                 QuoteIdentifier(newColName)));
         }
@@ -471,14 +480,14 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
         {
             return (bool)ExecuteScalar(String.Format(
                 "SELECT COUNT(*) > 0 FROM (SELECT * FROM {0} LIMIT 1) AS data",
-                FormatFullName(tbl)));
+                FormatSchemaName(tbl)));
         }
 
         public override bool CheckColumnContainsNulls(TableRef tbl, string colName)
         {
             return (bool)ExecuteScalar(String.Format(
                 "SELECT COUNT(*) > 0 FROM (SELECT {1} FROM {0} WHERE {1} IS NULL LIMIT 1) AS nulls",
-                FormatFullName(tbl),
+                FormatSchemaName(tbl),
                 QuoteIdentifier(colName)));
         }
 
@@ -489,7 +498,7 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
                     SELECT {1} FROM {0} WHERE {1} IS NOT NULL
                     GROUP BY {1}
                     HAVING COUNT({1}) > 1 LIMIT 1) AS tbl",
-                FormatFullName(tbl),
+                FormatSchemaName(tbl),
                 QuoteIdentifier(colName)));
         }
 
@@ -497,7 +506,7 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
         {
             return (bool)ExecuteScalar(String.Format(
                 "SELECT COUNT(*) > 0 FROM (SELECT {1} FROM {0} WHERE {1} IS NOT NULL LIMIT 1) AS data",
-                FormatFullName(tbl),
+                FormatSchemaName(tbl),
                 QuoteIdentifier(colName)));
         }
 
@@ -505,7 +514,7 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
         {
             return (long)ExecuteScalar(String.Format(
                 @"SELECT COUNT(*) FROM {0}",
-                FormatFullName(tblName)));
+                FormatSchemaName(tblName)));
         }
 
         #endregion
@@ -543,10 +552,10 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
                 @"ALTER TABLE {0}
                     ADD CONSTRAINT {1} FOREIGN KEY({2})
                     REFERENCES {3} ({4}){5}",
-                FormatFullName(tblName),
+                FormatSchemaName(tblName),
                 QuoteIdentifier(constraintName),
                 QuoteIdentifier(colName),
-                FormatFullName(refTblName),
+                FormatSchemaName(refTblName),
                 QuoteIdentifier("ID"),
                 onDeleteCascade ? @" ON DELETE CASCADE" : String.Empty));
         }
@@ -784,9 +793,9 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
         {
             ExecuteNonQuery(String.Format(
                 "UPDATE dest SET dest.{3} = src.{1} FROM {2} dest INNER JOIN {0} src ON dest.{4} = src.{4}",
-                FormatFullName(srcTblName),     // 0
+                FormatSchemaName(srcTblName),     // 0
                 QuoteIdentifier(srcColName),    // 1
-                FormatFullName(tblName),        // 2
+                FormatSchemaName(tblName),        // 2
                 QuoteIdentifier(colName),       // 3
                 QuoteIdentifier("ID")));        // 4
         }
@@ -797,9 +806,9 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
         {
             ExecuteNonQuery(String.Format(
                 "UPDATE dest SET dest.{3} = src.{4} FROM {2} dest INNER JOIN {0} src ON dest.{4} = src.{1}",
-                FormatFullName(srcTblName), // 0
+                FormatSchemaName(srcTblName), // 0
                 QuoteIdentifier(srcColName), // 1
-                FormatFullName(tblName),    // 2
+                FormatSchemaName(tblName),    // 2
                 QuoteIdentifier(colName),    // 3
                 QuoteIdentifier("ID")));     // 4
         }
@@ -811,9 +820,9 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
         {
             ExecuteNonQuery(String.Format(
                 "INSERT INTO {2} ({3}, {4}) SELECT {5}, {1} FROM {0} WHERE {1} IS NOT NULL",
-                FormatFullName(srcTblName), // 0
+                FormatSchemaName(srcTblName), // 0
                 QuoteIdentifier(srcColName), // 1
-                FormatFullName(tblName),    // 2
+                FormatSchemaName(tblName),    // 2
                 QuoteIdentifier(colName),    // 3
                 QuoteIdentifier(fkColName),  // 4
                 QuoteIdentifier("ID")));     // 5
@@ -826,9 +835,9 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
         {
             ExecuteNonQuery(String.Format(
                 "UPDATE dest SET dest.{3} = src.{1} FROM {2} dest INNER JOIN {0} src ON src.{4} = dest.{5}",
-                FormatFullName(srcTblName), // 0
+                FormatSchemaName(srcTblName), // 0
                 QuoteIdentifier(srcColName), // 1
-                FormatFullName(tblName),    // 2
+                FormatSchemaName(tblName),    // 2
                 QuoteIdentifier(colName),    // 3
                 QuoteIdentifier(srcFkColName),  // 4
                 QuoteIdentifier("ID")));     // 5
@@ -840,13 +849,13 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
                 "CREATE {0}INDEX {1} ON {2} ({3})",
                 unique ? "UNIQUE " : String.Empty,
                 QuoteIdentifier(idxName),
-                FormatFullName(tblName),
+                FormatSchemaName(tblName),
                 String.Join(", ", columns.Select(c => QuoteIdentifier(c)).ToArray())));
 
             if (clustered)
             {
                 ExecuteNonQuery(String.Format("CLUSTER {0} USING {1}",
-                    FormatFullName(tblName),
+                    FormatSchemaName(tblName),
                     QuoteIdentifier(idxName)));
             }
         }
@@ -953,7 +962,7 @@ END$BODY$
         public override void CreateEmptyRightsViewUnmaterialized(TableRef viewName)
         {
             Log.DebugFormat("Creating *empty* unmaterialized rights view \"{0}\"", viewName);
-            ExecuteNonQuery(String.Format(@"CREATE VIEW {0} AS SELECT 0 AS ""ID"", 0 AS ""Identity"", 0 AS ""Right"" WHERE 0 = 1", FormatFullName(viewName)));
+            ExecuteNonQuery(String.Format(@"CREATE VIEW {0} AS SELECT 0 AS ""ID"", 0 AS ""Identity"", 0 AS ""Right"" WHERE 0 = 1", FormatSchemaName(viewName)));
         }
 
         public override void CreateRightsViewUnmaterialized(TableRef viewName, TableRef tblName, TableRef tblNameRights, IList<ACL> acls)
@@ -969,7 +978,7 @@ SELECT  ""ID"", ""Identity"",
 		(case SUM(""Right"" & 2) when 0 then 0 else 2 end) +
 		(case SUM(""Right"" & 4) when 0 then 0 else 4 end) +
 		(case SUM(""Right"" & 8) when 0 then 0 else 8 end) AS ""Right"" 
-FROM (", FormatFullName(viewName));
+FROM (", FormatSchemaName(viewName));
             view.AppendLine();
 
             foreach (var acl in acls)
@@ -979,14 +988,14 @@ FROM (", FormatFullName(viewName));
                     QuoteIdentifier(acl.Relations.Last().FKColumnName.Single().ColumnName),
                     (int)acl.Right);
                 view.AppendLine();
-                view.AppendFormat(@"  FROM {0} t1", FormatFullName(tblName));
+                view.AppendFormat(@"  FROM {0} t1", FormatSchemaName(tblName));
                 view.AppendLine();
 
                 int idx = 2;
                 foreach (var rel in acl.Relations.Take(acl.Relations.Count - 1))
                 {
                     view.AppendFormat(@"  INNER JOIN {0} t{1} ON t{1}.{2} = t{3}.{4}",
-                        FormatFullName(rel.JoinTableName),
+                        FormatSchemaName(rel.JoinTableName),
                         idx,
                         QuoteIdentifier(rel.JoinColumnName.Single().ColumnName),
                         idx - 1,
@@ -1103,7 +1112,7 @@ LANGUAGE 'plpgsql' VOLATILE",
         public override IDataReader ReadTableData(TableRef tbl, IEnumerable<string> colNames)
         {
             var columns = String.Join(",", colNames.Select(n => QuoteIdentifier(n)).ToArray());
-            var query = String.Format("SELECT {0} FROM {1}", columns, FormatFullName(tbl));
+            var query = String.Format("SELECT {0} FROM {1}", columns, FormatSchemaName(tbl));
 
             return ReadTableData(query);
         }
@@ -1135,7 +1144,7 @@ LANGUAGE 'plpgsql' VOLATILE",
             var columns = String.Join(",\n", colNames.Select(pc =>
             {
                 string result = "\t";
-                if (pc.Source == null)
+                if (pc.Source == ColumnRef.PrimaryTable)
                     result += string.Format("t0.{0}", QuoteIdentifier(pc.ColumnName));
                 else
                     result += string.Format("{0}.{1}", join_alias[pc.Source], QuoteIdentifier(pc.ColumnName));
@@ -1152,7 +1161,7 @@ LANGUAGE 'plpgsql' VOLATILE",
             }).ToArray());
 
             var query = new StringBuilder();
-            query.AppendFormat("SELECT \n{0} \nFROM {1} t0{2}", columns, FormatFullName(tbl), joinQueryPart.ToString());
+            query.AppendFormat("SELECT \n{0} \nFROM {1} t0{2}", columns, FormatSchemaName(tbl), joinQueryPart.ToString());
             return ReadTableData(query.ToString());
         }
 
@@ -1162,7 +1171,25 @@ LANGUAGE 'plpgsql' VOLATILE",
                 throw new ArgumentException(string.Format("Column count on Join '{0}' does not match", join), "join");
 
             join_alias[join] = string.Format("t{0}", idx);
-            query.AppendFormat("\n  {2} JOIN {0} t{1} ON ", FormatFullName(join.JoinTableName), idx, join.Type.ToString().ToUpper());
+            if (join.JoinTableName.Database != CurrentConnection.Database)
+            {
+                // need dblink call, yay!
+                DblinkConnect(join.JoinTableName);
+                var joinColumns = join.JoinColumnName.Distinct().ToList();
+
+                query.AppendFormat("\n  {0} JOIN dblink('{1}', 'SELECT {2} FROM {3}') AS t{4}({5}) ON ",
+                    join.Type.ToString().ToUpper(),
+                    join.JoinTableName.Database,
+                    String.Join(",", joinColumns.Select(cn => QuoteIdentifier(cn.ColumnName)).ToArray()),
+                    FormatSchemaName(join.JoinTableName),
+                    idx,
+                    String.Join(",", joinColumns.Select(cn => QuoteIdentifier(cn.ColumnName) + " " + DbTypeToNative(cn.Type.Value)).ToArray())
+                    );
+            }
+            else
+            {
+                query.AppendFormat("\n  {2} JOIN {0} t{1} ON ", FormatSchemaName(join.JoinTableName), idx, join.Type.ToString().ToUpper());
+            }
             for (int i = 0; i < join.JoinColumnName.Length; i++)
             {
                 query.AppendFormat("{0}.{1} = {2}.{3}",
