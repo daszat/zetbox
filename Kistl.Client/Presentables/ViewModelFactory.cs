@@ -14,6 +14,8 @@ namespace Kistl.Client.Presentables
     using Kistl.App.Extensions;
     using Kistl.App.GUI;
     using Kistl.Client.GUI;
+    using System.Diagnostics;
+    using Kistl.Client.Presentables.ValueViewModels;
 
     /// <summary>
     /// Abstract base class to provide basic functionality of all model factories. Toolkit-specific implementations of this class will be 
@@ -84,6 +86,54 @@ namespace Kistl.Client.Presentables
             {
                 throw new NotImplementedException(String.Format("==>> No model for property: '{0}' of Type '{1}'", p, p.GetType()));
             }
+        }
+
+        // TODO: should use database backed decision tables
+        public TModelFactory CreateViewModel<TModelFactory>(Method method) where TModelFactory : class
+        {
+            if (method == null) { throw new ArgumentNullException("method"); }
+
+            var retParam = method.GetReturnParameter();
+            Type t;
+
+            if (retParam is BoolParameter && !retParam.IsList)
+            {
+                 t = typeof(NullableStructValueViewModel<bool>);
+            }
+            else if (retParam is DateTimeParameter && !retParam.IsList)
+            {
+                t = typeof(NullableStructValueViewModel<DateTime>);
+            }
+            else if (retParam is DoubleParameter && !retParam.IsList)
+            {
+                t = typeof(NullableStructValueViewModel<double>);
+            }
+            else if (retParam is IntParameter && !retParam.IsList)
+            {
+                t = typeof(NullableStructValueViewModel<int>);
+            }
+            else if (retParam is DecimalParameter && !retParam.IsList)
+            {
+                t = typeof(NullableStructValueViewModel<decimal>);
+            }
+            else if (retParam is StringParameter && !retParam.IsList)
+            {
+                t = typeof(ClassValueViewModel<string>);
+            }
+            else if (retParam is ObjectParameter && !retParam.IsList)
+            {
+                t = typeof(ObjectReferenceViewModel);
+            }
+            //else if (retParam is EnumParameter && !retParam.IsList)
+            //{
+            //    return (ModelFactory.CreateViewModel<NullableResultModel<?>.Factory>().Invoke(DataContext, _object, pm));
+            //}
+            else
+            {
+                throw new NotImplementedException(String.Format("==>> No model for method: '{0}' with return parameter type '{1}'", method, retParam.GetType()));
+            }
+
+            return CreateViewModel<TModelFactory>(ResolveFactory(t));
         }
 
         // TODO: memoize this function

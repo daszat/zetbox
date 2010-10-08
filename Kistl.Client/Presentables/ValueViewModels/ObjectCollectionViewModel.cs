@@ -49,16 +49,16 @@ namespace Kistl.Client.Presentables.ValueViewModels
         }
 
         private SortedWrapper _wrapper = null;
-        private class SortedWrapper : INotifyCollectionChanged, IList<DataObjectViewModel>
+        private class SortedWrapper : INotifyCollectionChanged, IList<IDataObject>
         {
-            private List<DataObjectViewModel> _sortedList;
-            private ICollection _collection;
+            private List<IDataObject> _sortedList;
+            private IEnumerable _collection;
             private INotifyCollectionChanged _notifier;
 
             private string _sortProp = "ID";
             private ListSortDirection _direction = ListSortDirection.Ascending;
 
-            public SortedWrapper(ICollection collection, INotifyCollectionChanged notifier)
+            public SortedWrapper(IEnumerable collection, INotifyCollectionChanged notifier)
             {
                 _collection = collection;
                 _notifier = notifier;
@@ -72,7 +72,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 _direction = direction;
                 _sortedList = _collection.AsQueryable()
                     .OrderBy(string.Format("{0} {1}", _sortProp, _direction == ListSortDirection.Descending ? "desc" : string.Empty))
-                    .Cast<DataObjectViewModel>()
+                    .Cast<IDataObject>()
                     .ToList();
                 OnCollectionChanged();
             }
@@ -99,12 +99,12 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
             #region IList<IDataObject> Members
 
-            public int IndexOf(DataObjectViewModel item)
+            public int IndexOf(IDataObject item)
             {
                 return _sortedList.IndexOf(item);
             }
 
-            public void Insert(int index, DataObjectViewModel item)
+            public void Insert(int index, IDataObject item)
             {
                 throw new NotImplementedException();
             }
@@ -114,7 +114,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 throw new NotImplementedException();
             }
 
-            public DataObjectViewModel this[int index]
+            public IDataObject this[int index]
             {
                 get
                 {
@@ -130,7 +130,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
             #region ICollection<DataObjectViewModel> Members
 
-            public void Add(DataObjectViewModel item)
+            public void Add(IDataObject item)
             {
                 throw new NotImplementedException();
             }
@@ -140,12 +140,12 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 throw new NotImplementedException();
             }
 
-            public bool Contains(DataObjectViewModel item)
+            public bool Contains(IDataObject item)
             {
                 return _sortedList.Contains(item);
             }
 
-            public void CopyTo(DataObjectViewModel[] array, int arrayIndex)
+            public void CopyTo(IDataObject[] array, int arrayIndex)
             {
                 throw new NotImplementedException();
             }
@@ -160,7 +160,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 get { return true; }
             }
 
-            public bool Remove(DataObjectViewModel item)
+            public bool Remove(IDataObject item)
             {
                 throw new NotImplementedException();
             }
@@ -169,7 +169,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
             #region IEnumerable<IDataObject> Members
 
-            public IEnumerator<DataObjectViewModel> GetEnumerator()
+            public IEnumerator<IDataObject> GetEnumerator()
             {
                 return _sortedList.GetEnumerator();
             }
@@ -190,7 +190,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
         {
             if (_wrapper == null)
             {
-                _wrapper = new SortedWrapper((ICollection)ValueModel.Value, ObjectCollectionModel);
+                _wrapper = new SortedWrapper(ValueModel.Value, ObjectCollectionModel);
                 _valueCache = new ReadOnlyObservableProjectedList<IDataObject, DataObjectViewModel>(
                     _wrapper,
                     obj => ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>(obj).Invoke(DataContext, obj),

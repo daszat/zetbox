@@ -15,7 +15,7 @@
             <MenuItem Header="{Binding OpenReferenceCommand.Label}"
                       ToolTip="{Binding OpenReferenceCommand.ToolTip}"
                       Command="{Binding OpenReferenceCommand, Converter={StaticResource CommandConverter}}"
-                      IsEnabled="{Binding HasValue}" />
+                      IsEnabled="{Binding HasValue, Mode=OneWay}" />
             <MenuItem Command="{Binding ClearValueCommand, Converter={StaticResource CommandConverter}}"
                       Header="{Binding ClearValueCommand.Label}"
                       ToolTip="{Binding ClearValueCommand.ToolTip}" />
@@ -41,7 +41,7 @@
                     <MenuItem Header="{Binding OpenReferenceCommand.Label}"
                               ToolTip="{Binding OpenReferenceCommand.ToolTip}"
                               Command="{Binding OpenReferenceCommand, Converter={StaticResource CommandConverter}}"
-                              IsEnabled="{Binding HasValue}" />
+                              IsEnabled="{Binding HasValue, Mode=OneWay}" />
                     <MenuItem Command="{Binding ClearValueCommand, Converter={StaticResource CommandConverter}}"
                               Header="{Binding ClearValueCommand.Label}"
                               ToolTip="{Binding ClearValueCommand.ToolTip}" />

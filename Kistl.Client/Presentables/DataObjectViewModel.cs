@@ -263,43 +263,43 @@ namespace Kistl.Client.Presentables
             _MethodList = methods;
         }
 
-        private ReadOnlyProjectedList<Method, BaseMethodResultModel> _MethodResultsList;
-        public IReadOnlyList<BaseMethodResultModel> MethodResults
+        private ReadOnlyProjectedList<Method, BaseValueViewModel> _MethodResultsList;
+        public IReadOnlyList<BaseValueViewModel> MethodResults
         {
             get
             {
                 if (_MethodResultsList == null)
                 {
                     FetchMethodModels();
-                    _MethodResultsList = new ReadOnlyProjectedList<Method, BaseMethodResultModel>(_MethodList, p => _MethodModels[p], m => m.Method);
+                    _MethodResultsList = new ReadOnlyProjectedList<Method, BaseValueViewModel>(_MethodList, p => _MethodModels[p], null); //m => m.Method);
                 }
                 return _MethodResultsList;
             }
         }
 
-        private LookupDictionary<Method, Method, BaseMethodResultModel> _MethodModels;
+        private LookupDictionary<Method, Method, BaseValueViewModel> _MethodModels;
         private void FetchMethodModels()
         {
             if (_MethodModels == null)
             {
                 FetchMethodList();
-                _MethodModels = new LookupDictionary<Method, Method, BaseMethodResultModel>(
+                _MethodModels = new LookupDictionary<Method, Method, BaseValueViewModel>(
                     _MethodList,
                     k => k,
-                    v => ModelFromMethod(v)
+                    v => ViewModelFactory.CreateViewModel<BaseValueViewModel.Factory>(v).Invoke(DataContext, v.GetValueModel(Object))
                 );
             }
         }
 
-        private LookupDictionary<string, Method, BaseMethodResultModel> _MethodResultsByName;
-        public LookupDictionary<string, Method, BaseMethodResultModel> MethodResultsByName
+        private LookupDictionary<string, Method, BaseValueViewModel> _MethodResultsByName;
+        public LookupDictionary<string, Method, BaseValueViewModel> MethodResultsByName
         {
             get
             {
                 if (_MethodResultsByName == null)
                 {
                     FetchMethodModels();
-                    _MethodResultsByName = new LookupDictionary<string, Method, BaseMethodResultModel>(
+                    _MethodResultsByName = new LookupDictionary<string, Method, BaseValueViewModel>(
                         _MethodList,
                         k => k.Name,
                         v => _MethodModels[v]
@@ -408,51 +408,6 @@ namespace Kistl.Client.Presentables
             {
                 //Debug.Assert(action.Parameter.Count == 0);
                 _actionsCache.Add(ViewModelFactory.CreateViewModel<ActionViewModel.Factory>().Invoke(DataContext, _object, action));
-            }
-        }
-
-        // TODO: should go to renderer and use database backed decision tables
-        protected virtual BaseMethodResultModel ModelFromMethod(Method pm)
-        {
-            Debug.Assert(pm.Parameter.Single().IsReturnParameter);
-            var retParam = pm.GetReturnParameter();
-
-            if (retParam is BoolParameter && !retParam.IsList)
-            {
-                return (ViewModelFactory.CreateViewModel<NullableResultModel<Boolean>.Factory>().Invoke(DataContext, _object, pm));
-            }
-            else if (retParam is DateTimeParameter && !retParam.IsList)
-            {
-                return (ViewModelFactory.CreateViewModel<NullableResultModel<DateTime>.Factory>().Invoke(DataContext, _object, pm));
-            }
-            else if (retParam is DoubleParameter && !retParam.IsList)
-            {
-                return (ViewModelFactory.CreateViewModel<NullableResultModel<Double>.Factory>().Invoke(DataContext, _object, pm));
-            }
-            else if (retParam is IntParameter && !retParam.IsList)
-            {
-                return (ViewModelFactory.CreateViewModel<NullableResultModel<int>.Factory>().Invoke(DataContext, _object, pm));
-            }
-            else if (retParam is DecimalParameter && !retParam.IsList)
-            {
-                return (ViewModelFactory.CreateViewModel<NullableResultModel<decimal>.Factory>().Invoke(DataContext, _object, pm));
-            }
-            else if (retParam is StringParameter && !retParam.IsList)
-            {
-                return (ViewModelFactory.CreateViewModel<ObjectResultModel<string>.Factory>().Invoke(DataContext, _object, pm));
-            }
-            else if (retParam is ObjectParameter && !retParam.IsList)
-            {
-                return (ViewModelFactory.CreateViewModel<ObjectResultModel<IDataObject>.Factory>().Invoke(DataContext, _object, pm));
-            }
-            //else if (retParam is EnumParameter && !retParam.IsList)
-            //{
-            //    return (ModelFactory.CreateViewModel<NullableResultModel<?>.Factory>().Invoke(DataContext, _object, pm));
-            //}
-            else
-            {
-                Logging.Log.WarnFormat("No model for method: '{0}' of return type '{1}'", pm, pm.GetReturnParameter().GetParameterTypeString());
-                return null;
             }
         }
 

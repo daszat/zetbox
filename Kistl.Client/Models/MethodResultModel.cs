@@ -10,6 +10,59 @@ namespace Kistl.Client.Models
     using Kistl.App.Base;
     using Kistl.App.Extensions;
     using Kistl.App.GUI;
+    using System.Diagnostics;
+    using Kistl.API.Utils;
+
+    public static class MethodResultExtensionsThisShouldBeMovedToAZBoxMethod
+    {
+        public static IValueModel GetValueModel(this Method method, INotifyingObject obj)
+        {
+            if (method == null)
+                throw new ArgumentNullException("method");
+            if (obj == null)
+                throw new ArgumentNullException("obj");
+
+            var retParam = method.GetReturnParameter();
+
+            if (retParam is BoolParameter && !retParam.IsList)
+            {
+                return new NullableStructMethodResultModel<bool>(obj, method);
+            }
+            else if (retParam is DateTimeParameter && !retParam.IsList)
+            {
+                return new NullableStructMethodResultModel<DateTime>(obj, method);
+            }
+            else if (retParam is DoubleParameter && !retParam.IsList)
+            {
+                return new NullableStructMethodResultModel<double>(obj, method);
+            }
+            else if (retParam is IntParameter && !retParam.IsList)
+            {
+                return new NullableStructMethodResultModel<int>(obj, method);
+            }
+            else if (retParam is DecimalParameter && !retParam.IsList)
+            {
+                return new NullableStructMethodResultModel<decimal>(obj, method);
+            }
+            else if (retParam is StringParameter && !retParam.IsList)
+            {
+                return new ClassMethodResultModel<string>(obj, method);
+            }
+            else if (retParam is ObjectParameter && !retParam.IsList)
+            {
+                return new ObjectReferenceMethodResultModel(obj, method);
+            }
+            //else if (retParam is EnumParameter && !retParam.IsList)
+            //{
+            //    return (ModelFactory.CreateViewModel<NullableResultModel<?>.Factory>().Invoke(DataContext, _object, pm));
+            //}
+            else
+            {
+                Logging.Log.WarnFormat("No model for method: '{0}' of return type '{1}'", method, method.GetReturnParameter().GetParameterTypeString());
+                return null;
+            }
+        }
+    }
 
     public abstract class BaseMethodResultModel : IValueModel
     {
@@ -20,10 +73,31 @@ namespace Kistl.Client.Models
 
             this.Method = m;
             this.Object = obj;
+            this.Object.PropertyChanged += Object_PropertyChanged;
+        }
+
+        void Object_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            CallMethod();
+            NotifyValueChanged();
         }
 
         public Method Method { get; private set; }
         public INotifyingObject Object { get; private set; }
+        private BaseParameter _ReturnParameter = null;
+        public BaseParameter ReturnParameter
+        {
+            get
+            {
+                if (_ReturnParameter == null)
+                {
+                    _ReturnParameter = Method.GetReturnParameter();
+                }
+                return _ReturnParameter;
+            }
+        }
+
+        protected abstract void CallMethod();
 
         #region IValueModel Members
 
@@ -156,7 +230,7 @@ namespace Kistl.Client.Models
         {
         }
 
-        private void CallMethod()
+        protected override void CallMethod()
         {
             _valueCache = Object.CallMethod<TValue>(Method.Name);
             _valueCacheInitialized = true;
@@ -188,7 +262,7 @@ namespace Kistl.Client.Models
         {
         }
 
-        private void CallMethod()
+        protected override void CallMethod()
         {
             _valueCache = Object.CallMethod<TValue>(Method.Name);
             _valueCacheInitialized = true;
@@ -203,12 +277,37 @@ namespace Kistl.Client.Models
         /// </summary>
         public override TValue Value
         {
-            get 
+            get
             {
                 if (!_valueCacheInitialized) CallMethod();
-                return _valueCache; 
+                return _valueCache;
             }
             set { throw new NotSupportedException("Value of Methodresults cannot be set"); }
         }
+    }
+
+    public class ObjectReferenceMethodResultModel : ClassMethodResultModel<IDataObject>, IObjectReferenceValueModel
+    {
+        public ObjectReferenceMethodResultModel(INotifyingObject obj, Method m)
+            : base(obj, m)
+        {
+        }
+
+        #region IObjectReferenceValueModel Members
+
+        private ObjectClass _referencedClass = null;
+        public ObjectClass ReferencedClass
+        {
+            get
+            {
+                if (_referencedClass == null)
+                {
+                    _referencedClass = (ObjectClass)((ObjectParameter)ReturnParameter).DataType;
+                }
+                return _referencedClass;
+            }
+        }
+
+        #endregion
     }
 }
