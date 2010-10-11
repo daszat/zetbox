@@ -193,7 +193,12 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
 
         public TableRef GetQualifiedTableName(string tblName)
         {
-            return new TableRef(db.Database, "dbo", tblName);
+            return GetTableName("dbo", tblName);
+        }
+
+        public TableRef GetTableName(string schemaName, string tblName)
+        {
+            return new TableRef(db.Database, schemaName, tblName);
         }
 
         public IEnumerable<TableRef> GetTableNames()
@@ -699,6 +704,11 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
         }
 
         ProcRef ISchemaProvider.GetQualifiedProcedureName(string procName)
+        {
+            throw new NotSupportedException();
+        }
+
+        bool ISchemaProvider.CheckSchemaExists(string schemaName)
         {
             throw new NotSupportedException();
         }

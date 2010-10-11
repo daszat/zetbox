@@ -194,6 +194,14 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
                 .Select(rd => rd.GetString(0));
         }
 
+        public override bool CheckSchemaExists(string schemaName)
+        {
+            return (bool)ExecuteScalar("SELECT COUNT(*) > 0 FROM pg_catalog.pg_namespace WHERE nspname = @schemaName", new Dictionary<string, object>()
+            {
+                { "@schemaName", schemaName}
+            });
+        }
+
         public override void CreateSchema(string schemaName)
         {
             ExecuteNonQuery(String.Format("CREATE SCHEMA {0}", QuoteIdentifier(schemaName)));
@@ -201,6 +209,9 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         public override void DropSchema(string schemaName, bool force)
         {
+            if (!CheckSchemaExists(schemaName))
+                return;
+
             ExecuteNonQuery(String.Format(
                 "DROP SCHEMA {0} {1}",
                 QuoteIdentifier(schemaName),
@@ -369,7 +380,16 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
             if (add)
             {
-                sb.AppendFormat("ALTER TABLE ADD {0} {1}", FormatSchemaName(tblName), GetColumnDefinition(new Column() { Name = colName, Type = type, Size = size, Scale = scale, IsNullable = isNullable }));
+                sb.AppendFormat("ALTER TABLE {0} ADD {1}",
+                    FormatSchemaName(tblName),
+                    GetColumnDefinition(new Column()
+                    {
+                        Name = colName,
+                        Type = type,
+                        Size = size,
+                        Scale = scale,
+                        IsNullable = isNullable
+                    }));
             }
             else
             {

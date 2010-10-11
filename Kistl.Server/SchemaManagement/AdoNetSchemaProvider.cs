@@ -2,6 +2,7 @@
 namespace Kistl.Server.SchemaManagement
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Data;
     using System.IO;
@@ -10,7 +11,6 @@ namespace Kistl.Server.SchemaManagement
     using System.Text.RegularExpressions;
     using Kistl.API.Server;
     using Kistl.API.Utils;
-    using System.Collections;
 
     public abstract class AdoNetSchemaProvider<TConnection, TTransaction, TCommand>
         : ISchemaProvider
@@ -276,6 +276,7 @@ namespace Kistl.Server.SchemaManagement
 
         #region Database Schemas
 
+        public abstract bool CheckSchemaExists(string schemaName);
         public abstract IEnumerable<string> GetSchemaNames();
         public abstract void CreateSchema(string schemaName);
         public abstract void DropSchema(string schemaName, bool force);
@@ -289,10 +290,19 @@ namespace Kistl.Server.SchemaManagement
 
         public TableRef GetQualifiedTableName(string tblName)
         {
+            return GetTableName("dbo", tblName);
+        }
+
+        public TableRef GetTableName(string schemaName, string tblName)
+        {
             if (db == null)
                 throw new InvalidOperationException("cannot qualify table name without database connection");
-            // keep "dbo" as default schema until we implement schemas in the infrastructure
-            return new TableRef(db.Database, "dbo", tblName);
+            if (String.IsNullOrEmpty(schemaName))
+                throw new ArgumentNullException("schemaName");
+            if (String.IsNullOrEmpty(tblName))
+                throw new ArgumentNullException("tblName");
+
+            return new TableRef(db.Database, schemaName, tblName);
         }
 
         public abstract bool CheckTableExists(TableRef tblName);

@@ -39,8 +39,10 @@ namespace Kistl.API.Migration
 
         protected MigrationProgram(string name, string[] arguments)
         {
-            if (String.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
-            if (arguments == null) throw new ArgumentNullException("arguments");
+            if (String.IsNullOrEmpty(name))
+                throw new ArgumentNullException("name");
+            if (arguments == null)
+                throw new ArgumentNullException("arguments");
 
             _name = name;
             _arguments = arguments;
@@ -184,19 +186,21 @@ namespace Kistl.API.Migration
                 var srcSchema = OpenProvider(reloadScope, stage.OriginProvider, stage.OriginConnectionString);
                 var dstSchema = OpenProvider(reloadScope, stage.Provider, stage.ConnectionString);
 
-                dstSchema.DropAllObjects();
+                dstSchema.DropSchema(stage.Schema, true);
+                dstSchema.CreateSchema(stage.Schema);
 
                 foreach (var tbl in srcSchema.GetTableNames())
                 {
                     Log.InfoFormat("Migrating table {0}", tbl);
                     var cols = srcSchema.GetTableColumns(tbl);
-                    dstSchema.CreateTable(tbl, cols);
+                    var dstTableRef = new TableRef(null, stage.Schema, tbl.Name);
+                    dstSchema.CreateTable(dstTableRef, cols);
 
                     var colNames = cols.Select(i => i.Name).ToArray();
 
                     using (IDataReader rd = srcSchema.ReadTableData(tbl, colNames))
                     {
-                        dstSchema.WriteTableData(tbl, rd, colNames);
+                        dstSchema.WriteTableData(dstTableRef, rd, colNames);
                     }
                 }
             }
@@ -221,7 +225,7 @@ namespace Kistl.API.Migration
         {
             foreach (var srcTbl in srcTables.OrderBy(tbl => tbl.Name))
             {
-                var srcCount = srcSchema.CountRows(srcSchema.GetQualifiedTableName(srcTbl.Name));
+                var srcCount = srcSchema.CountRows(srcSchema.GetTableName(srcTbl.StagingDatabase.Schema, srcTbl.Name));
                 var dstCount = dstSchema.CountRows(dstSchema.GetQualifiedTableName(srcTbl.DestinationObjectClass.TableName));
 
                 Log.InfoFormat("Mapped [{0}] rows from [{1}] to [{2}] [{3}] entities",

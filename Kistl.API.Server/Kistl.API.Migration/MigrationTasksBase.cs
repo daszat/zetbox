@@ -9,7 +9,8 @@ namespace Kistl.API.Migration
     using Kistl.App.Base;
     using ZBox.App.SchemaMigration;
 
-    public class MigrationTasksBase : IMigrationTasks
+    public class MigrationTasksBase
+        : IMigrationTasks
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.API.Migration");
 
@@ -36,9 +37,9 @@ namespace Kistl.API.Migration
             return new InputStream(_src.ReadTableData(sql));
         }
 
-        public OutputStream WriteTableStreaming(string destTable)
+        public OutputStream WriteTableStreaming(TableRef destTable)
         {
-            return new OutputStream(_dst.GetQualifiedTableName(destTable), _dst);
+            return new OutputStream(destTable, _dst);
         }
 
         public void CleanDestination(SourceTable tbl)
@@ -226,7 +227,7 @@ namespace Kistl.API.Migration
             var dstColumnNames = GetDestinationColumnNames(tbl, srcColumns);
             long processedRows;
 
-            using (var srcReader = _src.ReadJoin(_src.GetQualifiedTableName(tbl.Name), srcColumnNames, joins))
+            using (var srcReader = _src.ReadJoin(_src.GetTableName(tbl.StagingDatabase.Schema, tbl.Name), srcColumnNames, joins))
             using (var translator = new Translator(tbl, srcReader, srcColumns, nullConverter))
             {
                 _dst.WriteTableData(_dst.GetQualifiedTableName(tbl.DestinationObjectClass.TableName), translator, dstColumnNames);
@@ -235,7 +236,7 @@ namespace Kistl.API.Migration
 
             // count rows in original table, joins should not add or remove rows
             WriteLog(
-                tbl.Name, _src.CountRows(_src.GetQualifiedTableName(tbl.Name)),
+                tbl.Name, _src.CountRows(_src.GetTableName(tbl.StagingDatabase.Schema, tbl.Name)),
                 tbl.DestinationObjectClass.TableName, processedRows);
         }
 
@@ -302,9 +303,10 @@ namespace Kistl.API.Migration
         {
             var dstColumnNames = GetDestinationColumnNames(tbl, mappedColumns);
             var srcColumnNames = mappedColumns.Select(c => c.Name).ToArray();
+            var tblRef = _src.GetTableName(tbl.StagingDatabase.Schema, tbl.Name);
 
             // no fk mapping required
-            using (var srcReader = _src.ReadTableData(_src.GetQualifiedTableName(tbl.Name), srcColumnNames))
+            using (var srcReader = _src.ReadTableData(tblRef, srcColumnNames))
             using (var translator = new Translator(tbl, srcReader, mappedColumns, nullConverter))
             {
                 _dst.WriteTableData(_dst.GetQualifiedTableName(tbl.DestinationObjectClass.TableName), translator, dstColumnNames);

@@ -2,13 +2,13 @@
 namespace Kistl.API.Server
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Data;
+    using System.Diagnostics;
     using System.Linq;
     using System.Text;
-    using System.Collections;
-    using System.Diagnostics;
 
     public abstract class DboRef : IComparable<DboRef>
     {
@@ -457,6 +457,7 @@ namespace Kistl.API.Server
 
         #region Database Schemas
 
+        bool CheckSchemaExists(string schemaName);
         IEnumerable<string> GetSchemaNames();
         void CreateSchema(string schemaName);
         void DropSchema(string schemaName, bool force);
@@ -466,6 +467,7 @@ namespace Kistl.API.Server
         #region Table Structure
 
         TableRef GetQualifiedTableName(string tblName);
+        TableRef GetTableName(string schemaName, string tblName);
 
         bool CheckTableExists(TableRef tblName);
         IEnumerable<TableRef> GetTableNames();

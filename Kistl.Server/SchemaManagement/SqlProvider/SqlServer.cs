@@ -171,6 +171,12 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
 
         #region Database Schemas
 
+        public override bool CheckSchemaExists(string schemaName)
+        {
+            // TODO: optimize!
+            return GetSchemaNames().Contains(schemaName);
+        }
+
         public override IEnumerable<string> GetSchemaNames()
         {
             throw new NotImplementedException();
@@ -183,10 +189,13 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
 
         public override void DropSchema(string schemaName, bool force)
         {
+            if (!CheckSchemaExists(schemaName))
+                return;
+
             ExecuteNonQuery(String.Format(
-                "DROP SCHEMA {0} {1}",
-                QuoteIdentifier(schemaName),
-                force ? "CASCADE" : "RESTRICT"));
+                    "DROP SCHEMA {0} {1}",
+                    QuoteIdentifier(schemaName),
+                    force ? "CASCADE" : "RESTRICT"));
         }
 
         #endregion

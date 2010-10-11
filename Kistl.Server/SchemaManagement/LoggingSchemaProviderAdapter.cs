@@ -18,7 +18,8 @@ namespace Kistl.Server.SchemaManagement
 
         public LoggingSchemaProviderAdapter(ISchemaProvider provider)
         {
-            if (provider == null) throw new ArgumentNullException("provider");
+            if (provider == null)
+                throw new ArgumentNullException("provider");
             _provider = provider;
             Log = log4net.LogManager.GetLogger("Kistl.Server.Schema." + provider.ConfigName);
         }
@@ -95,6 +96,11 @@ namespace Kistl.Server.SchemaManagement
         public TableRef GetQualifiedTableName(string tblName)
         {
             return _provider.GetQualifiedTableName(tblName);
+        }
+
+        public TableRef GetTableName(string schemaName, string tblName)
+        {
+            return _provider.GetTableName(schemaName, tblName);
         }
 
         public bool CheckTableExists(TableRef tblName)
@@ -229,7 +235,8 @@ namespace Kistl.Server.SchemaManagement
 
         public void CreateTable(TableRef tblName, bool idAsIdentityColumn, bool createPrimaryKey)
         {
-            if (tblName == null) throw new ArgumentNullException("tblName");
+            if (tblName == null)
+                throw new ArgumentNullException("tblName");
 
             Log.DebugFormat("CreateTable [{0}] {1} {2}",
                 tblName,
@@ -428,6 +435,11 @@ namespace Kistl.Server.SchemaManagement
         {
             Log.Debug("Ensuring Infrastructure is available on target");
             _provider.EnsureInfrastructure();
+        }
+
+        public bool CheckSchemaExists(string schemaName)
+        {
+            return _provider.CheckSchemaExists(schemaName);
         }
 
         public IEnumerable<string> GetSchemaNames()

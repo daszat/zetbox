@@ -74,6 +74,6 @@ namespace Kistl.API.Migration
         void TableBaseMigration(SourceTable tbl, Converter[] nullConverter, Join[] additional_joins);
 
         InputStream ExecuteQueryStreaming(string sql);
-        OutputStream WriteTableStreaming(string destTable);
+        OutputStream WriteTableStreaming(TableRef destTable);
     }
 }
