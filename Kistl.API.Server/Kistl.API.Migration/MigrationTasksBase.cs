@@ -267,8 +267,8 @@ namespace Kistl.API.Migration
                     foreach (var j in i.Result)
                     {
                         var join = CreateJoinComponent(referenceGroup, all_joins);
-                        join.JoinColumnName = join.JoinColumnName.Concat(new[] { new ColumnRef("ID", j) }).ToArray();
-                        join.FKColumnName = join.FKColumnName.Concat(new[] { new ColumnRef(GetColName(i.Property), ColumnRef.Local) }).ToArray();
+                        join.JoinColumnName = join.JoinColumnName.Concat(new[] { new ColumnRef("ID", j, System.Data.DbType.Int32) }).ToArray();
+                        join.FKColumnName = join.FKColumnName.Concat(new[] { new ColumnRef(GetColName(i.Property), ColumnRef.Local, System.Data.DbType.Int32) }).ToArray();
                         j.Joins.Add(join);
                         result.Add(j);
                     }

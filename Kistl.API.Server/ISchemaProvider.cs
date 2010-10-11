@@ -274,11 +274,11 @@ namespace Kistl.API.Server
         public override string ToString()
         {
             return string.Format(
-                "{0}JOIN {1} ON ({2} = {3})",
+                "{0}JOIN {1} ON (({2}) = ({3}))",
                 Type == JoinType.Left ? "LEFT " : String.Empty,
                 JoinTableName,
-                JoinColumnName,
-                FKColumnName);
+                String.Join(", ", JoinColumnName.Select(cr => cr.ToString()).ToArray()),
+                String.Join(", ", FKColumnName.Select(cr => cr.ToString()).ToArray()));
         }
     }
 

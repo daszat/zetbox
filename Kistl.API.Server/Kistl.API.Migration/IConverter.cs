@@ -16,7 +16,8 @@ namespace Kistl.API.Migration
     {
         public object Convert(object v)
         {
-            if (v == null || v == DBNull.Value) return DBNull.Value;
+            if (v == null || v == DBNull.Value)
+                return DBNull.Value;
             return System.Convert.ToByte(v, CultureInfo.GetCultureInfo("de-AT"));
         }
     }
@@ -25,7 +26,8 @@ namespace Kistl.API.Migration
     {
         public object Convert(object v)
         {
-            if (v == null || v == DBNull.Value) return DBNull.Value;
+            if (v == null || v == DBNull.Value)
+                return DBNull.Value;
             return System.Convert.ToInt16(v, CultureInfo.GetCultureInfo("de-AT"));
         }
     }
@@ -34,7 +36,8 @@ namespace Kistl.API.Migration
     {
         public object Convert(object v)
         {
-            if (v == null || v == DBNull.Value) return DBNull.Value;
+            if (v == null || v == DBNull.Value)
+                return DBNull.Value;
             return System.Convert.ToInt32(v, CultureInfo.GetCultureInfo("de-AT"));
         }
     }
@@ -43,19 +46,27 @@ namespace Kistl.API.Migration
     {
         public object Convert(object v)
         {
-            if (v == null || v == DBNull.Value) return DBNull.Value;
+            if (v == null || v == DBNull.Value)
+                return DBNull.Value;
             object dest_val;
             // try string convertions
             if (v is string)
             {
                 var s = ((string)v).ToLower();
-                if (s.Contains("yes")) dest_val = true;
-                else if (s.Contains("no")) dest_val = false;
-                else if (s.Contains("ja")) dest_val = true;
-                else if (s.Contains("nein")) dest_val = false;
-                else if (s.Contains("-1")) dest_val = true;
-                else if (s.Contains("1")) dest_val = true;
-                else if (s.Contains("0")) dest_val = false;
+                if (s.Contains("yes"))
+                    dest_val = true;
+                else if (s.Contains("no"))
+                    dest_val = false;
+                else if (s.Contains("ja"))
+                    dest_val = true;
+                else if (s.Contains("nein"))
+                    dest_val = false;
+                else if (s.Contains("-1"))
+                    dest_val = true;
+                else if (s.Contains("1"))
+                    dest_val = true;
+                else if (s.Contains("0"))
+                    dest_val = false;
                 else
                 {
                     dest_val = DBNull.Value;
@@ -84,7 +95,8 @@ namespace Kistl.API.Migration
 
         public virtual object Convert(object v)
         {
-            if (v == null || v == DBNull.Value) return DBNull.Value;
+            if (v == null || v == DBNull.Value)
+                return DBNull.Value;
 
             try
             {
@@ -140,7 +152,8 @@ namespace Kistl.API.Migration
             if (result is DateTime)
             {
                 var d = (DateTime)result;
-                if (d < SqlMinValue || d > SqlMaxValue) return DBNull.Value;
+                if (d < SqlMinValue || d > SqlMaxValue)
+                    return DBNull.Value;
             }
             return result;
         }

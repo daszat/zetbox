@@ -51,7 +51,9 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         protected override NpgsqlCommand CreateCommand(string query)
         {
-            return new NpgsqlCommand(query, CurrentConnection, CurrentTransaction);
+            var result = new NpgsqlCommand(query, CurrentConnection, CurrentTransaction);
+            result.CommandTimeout = 1200;
+            return result;
         }
 
         private readonly Dictionary<string, string> _dblinks = new Dictionary<string, string>();
@@ -1151,6 +1153,22 @@ LANGUAGE 'plpgsql' VOLATILE",
             return cmd.ExecuteReader();
         }
 
+        private IEnumerable<ColumnRef> FetchColumns(Join join, Dictionary<Join, string> aliases, ref int nextIdx)
+        {
+            var result = join
+                .JoinColumnName
+                .Concat(join.FKColumnName);
+
+            aliases[join] = String.Format(CultureInfo.InvariantCulture, "t{0}", nextIdx);
+            nextIdx += 1;
+
+            foreach (var subJoin in join.Joins)
+            {
+                result = result.Concat(FetchColumns(subJoin, aliases, ref nextIdx));
+            }
+            return result;
+        }
+
         public override IDataReader ReadJoin(TableRef tbl, IEnumerable<ProjectionColumn> colNames, IEnumerable<Join> joins)
         {
             if (tbl == null)
@@ -1160,13 +1178,20 @@ LANGUAGE 'plpgsql' VOLATILE",
             if (joins == null)
                 throw new ArgumentNullException("joins");
 
-            var join_alias = new Dictionary<Join, string>();
-            var joinQueryPart = new StringBuilder();
             int idx = 1;
+            var join_alias = new Dictionary<Join, string>();
+
+            var allColumns = joins
+                .SelectMany(j => FetchColumns(j, join_alias, ref idx));
+
+            var allColumnsByJoin = allColumns
+                .Concat(colNames.Cast<ColumnRef>())
+                .ToLookup(cr => cr.Source);
+
+            var joinQueryPart = new StringBuilder();
             foreach (var join in joins)
             {
-                AddReadJoin(joinQueryPart, ref idx, join, join_alias, colNames);
-                idx++;
+                AddReadJoin(joinQueryPart, join, join_alias, colNames, allColumnsByJoin);
             }
 
             var columns = String.Join(",\n", colNames.Select(pc =>
@@ -1192,46 +1217,52 @@ LANGUAGE 'plpgsql' VOLATILE",
             return ReadTableData(query);
         }
 
-        private void AddReadJoin(StringBuilder query, ref int idx, Join join, Dictionary<Join, string> join_alias, IEnumerable<ProjectionColumn> colNames)
+        private void AddReadJoin(StringBuilder query, Join join, Dictionary<Join, string> join_alias, IEnumerable<ProjectionColumn> colNames, ILookup<Join, ColumnRef> allColumnsByJoin)
         {
             if (join.JoinColumnName.Length != join.FKColumnName.Length)
                 throw new ArgumentException(string.Format("Column count on Join '{0}' does not match", join), "join");
 
-            join_alias[join] = string.Format("t{0}", idx);
-            // Select data and join-id columns from dblink
-            var joinColumns = join.JoinColumnName.Union(colNames.Where(c => c.Source == join).Cast<ColumnRef>()).Distinct().ToList();
+            var alias = join_alias[join];
+
+            // Select data and join-id columns for dblink
+            var joinColumns = allColumnsByJoin[join]
+                .Concat(join.JoinColumnName.Where(cr => cr.Source == ColumnRef.Local))
+                .Concat(join.FKColumnName.Where(cr => cr.Source == ColumnRef.Local))
+                .Select(cr => new KeyValuePair<string, DbType>(cr.ColumnName, cr.Type.Value))
+                .Distinct()
+                .ToList();
+
             if (join.JoinTableName.Database != CurrentConnection.Database)
             {
                 // need dblink call, yay!
                 DblinkConnect(join.JoinTableName);
 
-                query.AppendFormat("\n  {0} JOIN dblink('{1}', 'SELECT {2} FROM {3}') AS t{4}({5}) ON ",
+                query.AppendFormat("\n  {0} JOIN dblink('{1}', 'SELECT {2} FROM {3}') AS {4}({5}) ON ",
                     join.Type.ToString().ToUpper(),
                     join.JoinTableName.Database,
-                    String.Join(",", joinColumns.Select(cn => QuoteIdentifier(cn.ColumnName)).ToArray()),
+                    String.Join(",", joinColumns.Select(cn => QuoteIdentifier(cn.Key)).ToArray()),
                     FormatSchemaName(join.JoinTableName),
-                    idx,
-                    String.Join(",", joinColumns.Select(cn => QuoteIdentifier(cn.ColumnName) + " " + DbTypeToNative(cn.Type.Value)).ToArray())
+                    alias,
+                    String.Join(",", joinColumns.Select(cn => QuoteIdentifier(cn.Key) + " " + DbTypeToNative(cn.Value)).ToArray())
                     );
             }
             else
             {
-                query.AppendFormat("\n  {2} JOIN {0} t{1} ON ", FormatSchemaName(join.JoinTableName), idx, join.Type.ToString().ToUpper());
+                query.AppendFormat("\n  {2} JOIN {0} {1} ON ", FormatSchemaName(join.JoinTableName), alias, join.Type.ToString().ToUpper());
             }
             for (int i = 0; i < join.JoinColumnName.Length; i++)
             {
                 query.AppendFormat("{0}.{1} = {2}.{3}",
-                    join.JoinColumnName[i].Source == ColumnRef.PrimaryTable ? "t0" : (join.JoinColumnName[i].Source == ColumnRef.Local ? "t" + idx : join_alias[join.JoinColumnName[i].Source]),
+                    join.JoinColumnName[i].Source == ColumnRef.PrimaryTable ? "t0" : (join.JoinColumnName[i].Source == ColumnRef.Local ? alias : join_alias[join.JoinColumnName[i].Source]),
                     QuoteIdentifier(join.JoinColumnName[i].ColumnName),
-                    join.FKColumnName[i].Source == ColumnRef.PrimaryTable ? "t0" : (join.FKColumnName[i].Source == ColumnRef.Local ? "t" + idx : join_alias[join.FKColumnName[i].Source]),
+                    join.FKColumnName[i].Source == ColumnRef.PrimaryTable ? "t0" : (join.FKColumnName[i].Source == ColumnRef.Local ? alias : join_alias[join.FKColumnName[i].Source]),
                     QuoteIdentifier(join.FKColumnName[i].ColumnName));
                 if (i < join.JoinColumnName.Length - 1)
                     query.Append(" AND ");
             }
             foreach (var j in join.Joins)
             {
-                idx++;
-                AddReadJoin(query, ref idx, j, join_alias, colNames);
+                AddReadJoin(query, j, join_alias, colNames, allColumnsByJoin);
             }
         }
 
