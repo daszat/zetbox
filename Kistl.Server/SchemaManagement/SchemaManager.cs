@@ -102,7 +102,7 @@ namespace Kistl.Server.SchemaManagement
 
             List<Join> result = new List<Join>();
             string lastColumName = "ID";
-            Join lastJoin = null;
+            Join lastJoin = ColumnRef.PrimaryTable;
             ObjectClass lastType = objClass;
             foreach (var rel in relations)
             {
