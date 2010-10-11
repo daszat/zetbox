@@ -284,8 +284,22 @@ namespace Kistl.API.Server
 
     public class ColumnRef
     {
-        public static readonly Join Local = new Join();
-        public static readonly Join PrimaryTable = new Join();
+        private class LocalJoin : Join
+        {
+            public override string ToString()
+            {
+                return "Local Join";
+            }
+        }
+        private class PrimaryJoin : Join
+        {
+            public override string ToString()
+            {
+                return "Primary Table Join";
+            }
+        }
+        public static readonly Join Local = new LocalJoin();
+        public static readonly Join PrimaryTable = new PrimaryJoin();
 
         public ColumnRef()
         {
@@ -350,7 +364,7 @@ namespace Kistl.API.Server
 
         public override string ToString()
         {
-            return string.Format("PC: {0}{1}", Source != PrimaryTable ? "." + Source : string.Empty, ColumnName);
+            return string.Format("PC: {0}{1}", Source == PrimaryTable ? PrimaryTable.ToString() : "." + Source, ColumnName);
         }
     }
 
