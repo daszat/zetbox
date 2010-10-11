@@ -52,7 +52,7 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
         protected override NpgsqlCommand CreateCommand(string query)
         {
             var result = new NpgsqlCommand(query, CurrentConnection, CurrentTransaction);
-            result.CommandTimeout = 1200;
+            result.CommandTimeout = 0;
             return result;
         }
 
@@ -1277,7 +1277,7 @@ LANGUAGE 'plpgsql' VOLATILE",
                 throw new ArgumentNullException("colNames");
 
             var cols = colNames.Select(n => QuoteIdentifier(n)).ToArray();
-            var query = String.Format("COPY {0} ({1}) FROM STDIN WITH DELIMITER '{2}' NULL '{3}'", FormatSchemaName(destTbl), String.Join(",", cols), COPY_SEPARATOR, COPY_NULL.Replace(@"\", @"\\"));
+            var query = String.Format("COPY {0} ({1}) FROM STDIN WITH DELIMITER '{2}' NULL E'{3}'", FormatSchemaName(destTbl), String.Join(",", cols), COPY_SEPARATOR, COPY_NULL.Replace(@"\", @"\\"));
             _log.InfoFormat("Copy from: [{0}]", query);
             _copyLog.Info(query);
             var bulkCopy = new NpgsqlCopyIn(query, CurrentConnection);
