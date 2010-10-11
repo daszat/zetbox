@@ -367,10 +367,18 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
         {
             StringBuilder sb = new StringBuilder();
 
-            string addOrAlter = add ? "ADD" : "ALTER COLUMN";
-            string nullable = isNullable ? "NULL" : "NOT NULL";
-
-            sb.AppendFormat("ALTER TABLE {0} {1} {2}", FormatSchemaName(tblName), addOrAlter, GetColumnDefinition(new Column() { Name = colName, Type = type, Size = size, Scale = scale, IsNullable = isNullable }));
+            if (add)
+            {
+                sb.AppendFormat("ALTER TABLE ADD {0} {1}", FormatSchemaName(tblName), GetColumnDefinition(new Column() { Name = colName, Type = type, Size = size, Scale = scale, IsNullable = isNullable }));
+            }
+            else
+            {
+                sb.AppendFormat("ALTER TABLE {0} ALTER COLUMN {1} {2} NOT NULL",
+                    FormatSchemaName(tblName),
+                    QuoteIdentifier(colName),
+                    isNullable ? "DROP" : "SET"
+                    );
+            }
 
             ExecuteNonQuery(sb.ToString());
 
