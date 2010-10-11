@@ -1137,7 +1137,7 @@ LANGUAGE 'plpgsql' VOLATILE",
             int idx = 1;
             foreach (var join in joins)
             {
-                AddReadJoin(joinQueryPart, ref idx, join, join_alias);
+                AddReadJoin(joinQueryPart, ref idx, join, join_alias, colNames);
                 idx++;
             }
 
@@ -1160,22 +1160,22 @@ LANGUAGE 'plpgsql' VOLATILE",
                 return result;
             }).ToArray());
 
-            var query = new StringBuilder();
-            query.AppendFormat("SELECT \n{0} \nFROM {1} t0{2}", columns, FormatSchemaName(tbl), joinQueryPart.ToString());
-            return ReadTableData(query.ToString());
+            var query = String.Format("SELECT \n{0} \nFROM {1} t0{2}", columns, FormatSchemaName(tbl), joinQueryPart.ToString());
+            return ReadTableData(query);
         }
 
-        private void AddReadJoin(StringBuilder query, ref int idx, Join join, Dictionary<Join, string> join_alias)
+        private void AddReadJoin(StringBuilder query, ref int idx, Join join, Dictionary<Join, string> join_alias, IEnumerable<ProjectionColumn> colNames)
         {
             if (join.JoinColumnName.Length != join.FKColumnName.Length)
                 throw new ArgumentException(string.Format("Column count on Join '{0}' does not match", join), "join");
 
             join_alias[join] = string.Format("t{0}", idx);
+            // Select data and join-id columns from dblink
+            var joinColumns = join.JoinColumnName.Union(colNames.Where(c => c.Source == join).Cast<ColumnRef>()).Distinct().ToList();
             if (join.JoinTableName.Database != CurrentConnection.Database)
             {
                 // need dblink call, yay!
                 DblinkConnect(join.JoinTableName);
-                var joinColumns = join.JoinColumnName.Distinct().ToList();
 
                 query.AppendFormat("\n  {0} JOIN dblink('{1}', 'SELECT {2} FROM {3}') AS t{4}({5}) ON ",
                     join.Type.ToString().ToUpper(),
@@ -1203,7 +1203,7 @@ LANGUAGE 'plpgsql' VOLATILE",
             foreach (var j in join.Joins)
             {
                 idx++;
-                AddReadJoin(query, ref idx, j, join_alias);
+                AddReadJoin(query, ref idx, j, join_alias, colNames);
             }
         }
 

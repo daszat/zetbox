@@ -673,7 +673,6 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
         // ---------------------------------------------------------------------------
         // ---------------------------------------------------------------------------
 
-
         public override void CopyColumnData(TableRef srcTblName, string srcColName, TableRef tblName, string colName)
         {
             Log.DebugFormat("Copying data from [{0}].[{1}] to [{2}].[{3}]", srcTblName, srcColName, tblName, colName);
