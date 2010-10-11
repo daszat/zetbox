@@ -1012,7 +1012,7 @@ FROM (", viewName.Schema, viewName.Name);
                 throw new ArgumentException(string.Format("Column count on Join '{0}' does not match", join), "join");
 
             join_alias[join] = string.Format("t{0}", idx);
-            query.AppendFormat("\n  {2} JOIN {0} t{1} ON ", FormatSchemaName(join.JoinTableName), idx, join.Type.ToString().ToUpper());
+            query.AppendFormat("\n  {2} JOIN {0} t{1} ON ", FormatFullName(join.JoinTableName), idx, join.Type.ToString().ToUpper());
             for (int i = 0; i < join.JoinColumnName.Length; i++)
             {
                 query.AppendFormat("{0}.[{1}] = {2}.[{3}]",
