@@ -91,36 +91,39 @@ namespace Kistl.Client.Presentables
         // TODO: should use database backed decision tables
         public TModelFactory CreateViewModel<TModelFactory>(Method method) where TModelFactory : class
         {
-            if (method == null) { throw new ArgumentNullException("method"); }
+            return CreateViewModel<TModelFactory>(ResolveFactory(typeof(ActionViewModel)));
+        }
 
-            var retParam = method.GetReturnParameter();
+        // TODO: should use database backed decision tables
+        public TModelFactory CreateViewModel<TModelFactory>(BaseParameter param) where TModelFactory : class
+        {
+            if (param == null) { throw new ArgumentNullException("param"); }
             Type t;
-
-            if (retParam is BoolParameter && !retParam.IsList)
+            if (param is BoolParameter && !param.IsList)
             {
                  t = typeof(NullableStructValueViewModel<bool>);
             }
-            else if (retParam is DateTimeParameter && !retParam.IsList)
+            else if (param is DateTimeParameter && !param.IsList)
             {
-                t = typeof(NullableStructValueViewModel<DateTime>);
+                t = typeof(NullableDateTimePropertyViewModel);
             }
-            else if (retParam is DoubleParameter && !retParam.IsList)
+            else if (param is DoubleParameter && !param.IsList)
             {
                 t = typeof(NullableStructValueViewModel<double>);
             }
-            else if (retParam is IntParameter && !retParam.IsList)
+            else if (param is IntParameter && !param.IsList)
             {
                 t = typeof(NullableStructValueViewModel<int>);
             }
-            else if (retParam is DecimalParameter && !retParam.IsList)
+            else if (param is DecimalParameter && !param.IsList)
             {
                 t = typeof(NullableStructValueViewModel<decimal>);
             }
-            else if (retParam is StringParameter && !retParam.IsList)
+            else if (param is StringParameter && !param.IsList)
             {
                 t = typeof(ClassValueViewModel<string>);
             }
-            else if (retParam is ObjectParameter && !retParam.IsList)
+            else if (param is ObjectParameter && !param.IsList)
             {
                 t = typeof(ObjectReferenceViewModel);
             }
@@ -130,7 +133,7 @@ namespace Kistl.Client.Presentables
             //}
             else
             {
-                throw new NotImplementedException(String.Format("==>> No model for method: '{0}' with return parameter type '{1}'", method, retParam.GetType()));
+                throw new NotImplementedException(String.Format("==>> No model for parameter '{0}' with type '{1}'", param, param.GetParameterType()));
             }
 
             return CreateViewModel<TModelFactory>(ResolveFactory(t));

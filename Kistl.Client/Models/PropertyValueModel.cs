@@ -156,6 +156,7 @@ namespace Kistl.Client.Models
 
         public abstract void ClearValue();
 
+        public abstract object GetUntypedValue();
         #endregion
 
         #region INotifyPropertyChanged Members
@@ -254,6 +255,13 @@ namespace Kistl.Client.Models
 
         public abstract TValue Value { get; set; }
 
+        #endregion
+
+        #region IValueModel Members
+        public override object GetUntypedValue()
+        {
+            return this.Value;
+        }
         #endregion
     }
 

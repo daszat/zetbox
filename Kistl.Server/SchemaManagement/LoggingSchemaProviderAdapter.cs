@@ -456,5 +456,26 @@ namespace Kistl.Server.SchemaManagement
         {
             _provider.DropSchema(schemaName, force);
         }
+
+        public ProcRef GetQualifiedFunctionName(string funcName)
+        {
+            return _provider.GetQualifiedFunctionName(funcName);
+        }
+
+        public IEnumerable<ProcRef> GetFunctionNames()
+        {
+            return _provider.GetFunctionNames();
+        }
+
+        public bool CheckFunctionExists(ProcRef funcName)
+        {
+            return _provider.CheckFunctionExists(funcName);
+        }
+
+        public void DropFunction(ProcRef funcName)
+        {
+            Log.DebugFormat("Dropping function [{0}]", funcName);
+            _provider.DropFunction(funcName);
+        }
     }
 }

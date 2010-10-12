@@ -179,7 +179,9 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
 
         public override IEnumerable<string> GetSchemaNames()
         {
-            throw new NotImplementedException();
+            // Exclude all schemas defined in model database but include dbo
+            return ExecuteReader("select s.name from sys.schemas s where not exists (select * from model.sys.schemas mdl where mdl.name = s.name and s.name <> 'dbo')")
+                .Select(rd => rd.GetString(0));
         }
 
         public override void CreateSchema(string schemaName)
@@ -192,10 +194,38 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
             if (!CheckSchemaExists(schemaName))
                 return;
 
-            ExecuteNonQuery(String.Format(
-                    "DROP SCHEMA {0} {1}",
-                    QuoteIdentifier(schemaName),
-                    force ? "CASCADE" : "RESTRICT"));
+            foreach (var rel in GetFKConstraintNames().Where(i => i.TableName.Schema == schemaName).ToList())
+            {
+                DropFKConstraint(rel.TableName, rel.ConstraintName);
+            }
+
+            foreach (var tbl in GetTableNames().Where(i => i.Schema == schemaName).ToList())
+            {
+                DropTable(tbl);
+            }
+
+            foreach (var v in GetViewNames().Where(i => i.Schema == schemaName).ToList())
+            {
+                DropView(v);
+            }
+
+            foreach (var sp in GetProcedureNames().Where(i => i.Schema == schemaName).ToList())
+            {
+                DropProcedure(sp);
+            }
+
+            foreach (var sp in GetFunctionNames().Where(i => i.Schema == schemaName).ToList())
+            {
+                DropFunction(sp);
+            }
+
+            if (!string.Equals(schemaName, "dbo", StringComparison.InvariantCultureIgnoreCase))
+            {
+                // Do not drop schema dbo!
+                ExecuteNonQuery(String.Format(
+                        "DROP SCHEMA {0}",
+                        QuoteIdentifier(schemaName)));
+            }
         }
 
         #endregion
@@ -517,12 +547,11 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
 
         public override IEnumerable<TableConstraintNamePair> GetFKConstraintNames()
         {
-            return ExecuteReader("SELECT c.name, t.name FROM sys.objects c INNER JOIN sys.sysobjects t ON t.id = c.parent_object_id WHERE c.type IN (N'F') ORDER BY c.name")
+            return ExecuteReader("SELECT c.name, t.name, s.name FROM sys.objects c INNER JOIN sys.sysobjects t ON t.id = c.parent_object_id INNER JOIN sys.schemas s on c.schema_id = s.schema_id WHERE c.type IN (N'F') ORDER BY c.name")
                 .Select(rd => new TableConstraintNamePair()
                 {
                     ConstraintName = rd.GetString(0),
-                    // TODO: remove 'dbo' reference and return all tablerefs with proper namespace
-                    TableName = new TableRef(CurrentConnection.Database, "dbo", rd.GetString(1))
+                    TableName = new TableRef(CurrentConnection.Database, rd.GetString(2), rd.GetString(1))
                 });
         }
 
@@ -593,7 +622,8 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
 
         public override IEnumerable<ProcRef> GetProcedureNames()
         {
-            throw new NotImplementedException();
+            return ExecuteReader("SELECT s.name, c.name FROM sys.objects c INNER JOIN sys.schemas s on c.schema_id = s.schema_id WHERE c.type IN (N'P') ORDER BY c.name")
+                .Select(rd => new ProcRef(CurrentConnection.Database, rd.GetString(0), rd.GetString(1)));
         }
 
         public override bool CheckProcedureExists(ProcRef procName)
@@ -610,13 +640,36 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
             ExecuteNonQuery(string.Format("DROP PROCEDURE {0}", FormatSchemaName(procName)));
         }
 
+        public override IEnumerable<ProcRef> GetFunctionNames()
+        {
+            return ExecuteReader("SELECT s.name, c.name FROM sys.objects c INNER JOIN sys.schemas s on c.schema_id = s.schema_id WHERE c.type IN (N'FN') ORDER BY c.name")
+                .Select(rd => new ProcRef(CurrentConnection.Database, rd.GetString(0), rd.GetString(1)));
+        }
+
+        public override bool CheckFunctionExists(ProcRef funcName)
+        {
+            return (int)ExecuteScalar(
+                  "SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(@proc) AND type IN (N'FN')",
+                  new Dictionary<string, object>(){
+                    { "@proc", FormatSchemaName(funcName) },
+                }) > 0;
+        }
+
+        public override void DropFunction(ProcRef funcName)
+        {
+            ExecuteNonQuery(string.Format("DROP FUNCTION {0}", FormatSchemaName(funcName)));
+        }
+
         public override void EnsureInfrastructure()
         {
         }
 
         public override void DropAllObjects()
         {
-            ExecuteSqlResource(this.GetType(), "Kistl.Server.SchemaManagement.SqlProvider.Scripts.DropTables.sql");
+            foreach (var s in GetSchemaNames())
+            {
+                DropSchema(s, true);
+            }
         }
 
         #endregion
@@ -1050,7 +1103,7 @@ FROM (", viewName.Schema, viewName.Name);
 
             using (SqlBulkCopy bulkCopy = new SqlBulkCopy(CurrentConnection, SqlBulkCopyOptions.CheckConstraints, null))
             {
-                bulkCopy.DestinationTableName = destTbl.Name;
+                bulkCopy.DestinationTableName = FormatSchemaName(destTbl);
 
                 int i = 0;
                 foreach (var colName in colNames)

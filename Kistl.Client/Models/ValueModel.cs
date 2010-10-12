@@ -10,25 +10,68 @@ namespace Kistl.Client.Models
     using Kistl.App.Base;
     using Kistl.App.Extensions;
     using Kistl.App.GUI;
+    using Kistl.API.Utils;
 
-    public abstract class ValueModel<TValue> : IValueModel, IValueModel<TValue>
+    public static class BaseParameterExtensionsThisShouldBeMovedToAZBoxMethod
     {
-        protected Func<TValue> getValue;
-        protected Action<TValue> setValue;
+        public static IValueModel GetValueModel(this BaseParameter parameter)
+        {
+            if (parameter == null)
+                throw new ArgumentNullException("parameter");
 
-        public ValueModel(string label, string description, bool allowNullInput, bool isReadOnly, Func<TValue> getValue, Action<TValue> setValue)
+            if (parameter is BoolParameter && !parameter.IsList)
+            {
+                return new NullableStructValueModel<bool>(parameter.Name, parameter.Description, false, false);
+            }
+            else if (parameter is DateTimeParameter && !parameter.IsList)
+            {
+                return new DateTimeValueModel(parameter.Name, parameter.Description, false, false);
+            }
+            else if (parameter is DoubleParameter && !parameter.IsList)
+            {
+                return new NullableStructValueModel<double>(parameter.Name, parameter.Description, false, false);
+            }
+            else if (parameter is IntParameter && !parameter.IsList)
+            {
+                return new NullableStructValueModel<int>(parameter.Name, parameter.Description, false, false);
+            }
+            else if (parameter is DecimalParameter && !parameter.IsList)
+            {
+                return new NullableStructValueModel<decimal>(parameter.Name, parameter.Description, false, false);
+            }
+            else if (parameter is StringParameter && !parameter.IsList)
+            {
+                return new ClassValueModel<string>(parameter.Name, parameter.Description, false, false);
+            }
+            else if (parameter is ObjectParameter && !parameter.IsList)
+            {
+                return new ClassValueModel<IDataObject>(parameter.Name, parameter.Description, false, false);
+            }
+            //else if (retParam is EnumParameter && !retParam.IsList)
+            //{
+            //    return (ModelFactory.CreateViewModel<NullableResultModel<?>.Factory>().Invoke(DataContext, _object, pm));
+            //}
+            else
+            {
+                Logging.Log.WarnFormat("No model for parameter '{0}' of type '{1}'", parameter, parameter.GetParameterTypeString());
+                return null;
+            }
+        }
+    }
+
+    public abstract class BaseValueModel : IValueModel
+    {
+        public BaseValueModel(string label, string description, bool allowNullInput, bool isReadOnly)
         {
             this.Label = label;
             this.Description = description;
             this.AllowNullInput = allowNullInput;
             this.IsReadOnly = isReadOnly;
-            this.getValue = getValue;
-            this.setValue = setValue;
         }
 
         #region IValueModel Members
 
-        public bool AllowNullInput { get; private set;}
+        public bool AllowNullInput { get; private set; }
 
         public string Label { get; private set; }
 
@@ -38,6 +81,7 @@ namespace Kistl.Client.Models
 
         public abstract void ClearValue();
 
+        public abstract object GetUntypedValue();
         #endregion
 
         #region INotifyPropertyChanged Members
@@ -86,7 +130,7 @@ namespace Kistl.Client.Models
         {
             get
             {
-                    return null;
+                return null;
             }
         }
 
@@ -112,59 +156,103 @@ namespace Kistl.Client.Models
 
         #endregion
 
-        #region IValueModel<TValue> Members
-
-        public TValue Value 
-        {
-            get
-            {
-                return getValue();
-            }
-            set
-            {
-                setValue(value);
-                NotifyValueChanged();
-            }
-        }
-
-        #endregion
     }
 
-    //public class ValueModel<TValue> : BaseValueModel, IValueModel<TValue>
-    //{
-    //    public delegate ValueModel<TValue> Factory();
+    public abstract class ValueModel<TValue> : BaseValueModel, IValueModel<TValue>
+    {
+        public ValueModel(string label, string description, bool allowNullInput, bool isReadOnly)
+            : base(label, description, allowNullInput, isReadOnly)
+        {
+        }
 
-    //    public ValueModel() 
-    //    {
-    //    }
-    //}
+        #region IValueModel<TValue> Members
+
+        public abstract TValue Value { get; set; }
+
+        #endregion
+
+        #region IValueModel Members
+        public override object GetUntypedValue()
+        {
+            return this.Value;
+        }
+        #endregion
+
+    }
 
     public class NullableStructValueModel<TValue> : ValueModel<Nullable<TValue>>
         where TValue : struct
     {
-        public NullableStructValueModel(string label, string description, bool allowNullInput, bool isReadOnly, Func<Nullable<TValue>> getValue, Action<Nullable<TValue>> setValue)
-            : base(label, description, allowNullInput, isReadOnly, getValue, setValue)
+        public NullableStructValueModel(string label, string description, bool allowNullInput, bool isReadOnly)
+            : base(label, description, allowNullInput, isReadOnly)
         {
+        }
+
+        private Nullable<TValue> _value;
+        public override Nullable<TValue> Value
+        {
+            get
+            {
+                return _value;
+            }
+            set
+            {
+                if (object.Equals(_value, value))
+                {
+                    _value = value;
+                    NotifyValueChanged();
+                }
+            }
         }
 
         public override void ClearValue()
         {
-            if (AllowNullInput) setValue(null);
+            if (AllowNullInput) Value = null;
             else throw new NotSupportedException();
+        }
+    }
+
+    public class DateTimeValueModel : NullableStructValueModel<DateTime>, IDateTimeValueModel
+    {
+        public DateTimeValueModel(string label, string description, bool allowNullInput, bool isReadOnly)
+            : base(label, description, allowNullInput, isReadOnly)
+        {
+        }
+
+        public DateTimeStyles DateTimeStyle
+        {
+            get { return DateTimeStyles.DateTime; }
         }
     }
 
     public class ClassValueModel<TValue> : ValueModel<TValue>
         where TValue : class
     {
-        public ClassValueModel(string label, string description, bool allowNullInput, bool isReadOnly, Func<TValue> getValue, Action<TValue> setValue)
-            : base(label, description, allowNullInput, isReadOnly, getValue, setValue)
+        public ClassValueModel(string label, string description, bool allowNullInput, bool isReadOnly)
+            : base(label, description, allowNullInput, isReadOnly)
         {
+        }
+
+        private TValue _value;
+        public override TValue Value
+        {
+            get
+            {
+                return _value;
+            }
+            set
+            {
+                if (_value != value)
+                {
+                    _value = value;
+                    NotifyValueChanged();
+                }
+            }
         }
 
         public override void ClearValue()
         {
-            if (AllowNullInput) setValue(null);
+            if (AllowNullInput) Value = null;
             else throw new NotSupportedException();
         }
     }

@@ -1,6 +1,7 @@
 ﻿<UserControl x:Class="Kistl.Client.WPF.View.KistlBase.ActionDisplay"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"
              ToolTip="{Binding ToolTip}">
-    <Button Content="{Binding Label}" Click="ClickHandler"/>
+    <ctrls:CommandButton CommandViewModel="{Binding ExecuteCommand}" />
 </UserControl>

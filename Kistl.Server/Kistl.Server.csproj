@@ -533,7 +533,6 @@
     <EmbeddedResource Include="Database\Scripts\BackupRestoreTestDatabase.sql" />
     <EmbeddedResource Include="Database\Scripts\RepairPositionColumnValidity.sql" />
     <None Include="Database\Scripts\DropFKConstraints.sql" />
-    <EmbeddedResource Include="SchemaManagement\SqlProvider\Scripts\DropTables.sql" />
     <None Include="Generators\ClientObjects\Implementation\ObjectClasses\AttachToContextTemplate.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>AttachToContextTemplate.Designer.cs</LastGenOutput>

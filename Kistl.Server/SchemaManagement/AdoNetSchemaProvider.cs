@@ -428,7 +428,19 @@ namespace Kistl.Server.SchemaManagement
         public abstract bool CheckProcedureExists(ProcRef procName);
         public abstract void DropProcedure(ProcRef procName);
 
-        public abstract void EnsureInfrastructure();
+        public ProcRef GetQualifiedFunctionName(string funcName)
+        {
+            if (db == null)
+                throw new InvalidOperationException("cannot qualify table name without database connection");
+            // keep "dbo" as default schema until we implement schemas in the infrastructure
+            return new ProcRef(db.Database, "dbo", funcName);
+        }
+
+        public abstract IEnumerable<ProcRef> GetFunctionNames();
+        public abstract bool CheckFunctionExists(ProcRef funcName);
+        public abstract void DropFunction(ProcRef funcName);
+
+                public abstract void EnsureInfrastructure();
         public abstract void DropAllObjects();
 
         #endregion

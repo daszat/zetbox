@@ -727,5 +727,25 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
         {
             throw new NotSupportedException();
         }
+
+        ProcRef ISchemaProvider.GetQualifiedFunctionName(string funcName)
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerable<ProcRef> ISchemaProvider.GetFunctionNames()
+        {
+            throw new NotSupportedException();
+        }
+
+        bool ISchemaProvider.CheckFunctionExists(ProcRef funcName)
+        {
+            throw new NotSupportedException();
+        }
+
+        void ISchemaProvider.DropFunction(ProcRef funcName)
+        {
+            throw new NotSupportedException();
+        }
     }
 }

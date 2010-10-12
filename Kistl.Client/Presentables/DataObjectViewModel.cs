@@ -286,7 +286,7 @@ namespace Kistl.Client.Presentables
                 _MethodModels = new LookupDictionary<Method, Method, BaseValueViewModel>(
                     _MethodList,
                     k => k,
-                    v => ViewModelFactory.CreateViewModel<BaseValueViewModel.Factory>(v).Invoke(DataContext, v.GetValueModel(Object))
+                    v => ViewModelFactory.CreateViewModel<BaseValueViewModel.Factory>(v.GetReturnParameter()).Invoke(DataContext, v.GetValueModel(Object))
                 );
             }
         }
@@ -407,7 +407,7 @@ namespace Kistl.Client.Presentables
             foreach (var action in methods)
             {
                 //Debug.Assert(action.Parameter.Count == 0);
-                _actionsCache.Add(ViewModelFactory.CreateViewModel<ActionViewModel.Factory>().Invoke(DataContext, _object, action));
+                _actionsCache.Add(ViewModelFactory.CreateViewModel<ActionViewModel.Factory>(action).Invoke(DataContext, _object, action));
             }
         }
 

@@ -39,21 +39,52 @@ namespace Kistl.Client.Presentables
             get { return Label; }
         }
 
+        private ICommandViewModel _ExecuteCommand = null;
+        public ICommandViewModel ExecuteCommand
+        {
+            get
+            {
+                if (_ExecuteCommand == null)
+                {
+                    _ExecuteCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, Method.Name, Method.Description, Execute, null);
+                }
+                return _ExecuteCommand;
+            }
+        }
+
         /// <summary>
         /// Execute the modelled Method. The callback will be called 
         /// back on the UI thread after the execution has finished.
         /// </summary>
-        /// <param name="callback"></param>
-        public void Execute(Action callback)
+        public void Execute()
         {
-            MethodInfo info = Object.GetType().FindMethod(Method.Name, new Type[] { });
-            IDataObject result = info.Invoke(Object, new object[] { }) as IDataObject;
-            if (result != null && result.Context == DataContext)
+            var parameter = Method.Parameter.Where(i => !i.IsReturnParameter).ToArray();
+            MethodInfo info = Object.GetType().FindMethod(Method.Name, parameter.Select(i => i.GetParameterType()).ToArray());
+            if (info == null) throw new InvalidOperationException(string.Format("Method '{0}' not found", Method.Name));
+
+            if (parameter.Length > 0)
             {
-                this.ViewModelFactory.ShowModel(this.ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>(result).Invoke(DataContext, result), true);
+                var pitMdl = ViewModelFactory.CreateViewModel<ParameterInputTaskViewModel.Factory>().Invoke(DataContext, Method, 
+                    (p) => {
+                        var result = info.Invoke(Object, p);
+                        HandleResult(result);
+                    });
+                ViewModelFactory.ShowModel(pitMdl, true);
             }
-            if (callback != null)
-                callback();
+            else
+            {
+                var result = info.Invoke(Object, new object[] { });
+                HandleResult(result);
+            }                        
+        }
+
+        private void HandleResult(object result)
+        {
+            IDataObject obj = result as IDataObject;
+            if (obj != null && obj.Context == DataContext)
+            {
+                this.ViewModelFactory.ShowModel(this.ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>(obj).Invoke(DataContext, obj), true);
+            }
         }
 
         #endregion

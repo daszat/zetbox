@@ -1,0 +1,62 @@
+﻿<ctrls:WindowView x:Class="Kistl.Client.WPF.View.KistlBase.ParameterInputTaskDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"
+                  xmlns:view="clr-namespace:Kistl.Client.WPF.View;assembly=Kistl.Client.WPF.Toolkit"
+                  xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
+                  Title="Invoke Method"
+                  ResizeMode="CanResize"
+                  SizeToContent="Height"
+                  MinWidth="300"
+                  xmlns:commands="clr-namespace:Kistl.Client.WPF.Commands;assembly=Kistl.Client.WPF.Toolkit"
+                  commands:SmartRoutedUICommand.IsCommandSink="True">
+    <ctrls:WindowView.Resources>
+        <Style x:Key="addedMargins">
+            <Setter Property="FrameworkElement.Margin"
+                    Value="5" />
+        </Style>
+    </ctrls:WindowView.Resources>
+    <DockPanel Style="{StaticResource addedMargins}"
+               LastChildFill="True">
+
+        <UniformGrid DockPanel.Dock="Bottom"
+                     Style="{StaticResource addedMargins}"
+                     Rows="1">
+            <ctrls:CommandButton IsDefault="True"
+                                 Style="{StaticResource addedMargins}"
+                                 CommandViewModel="{Binding ExecuteCommand}"/>
+            <ctrls:CommandButton IsCancel="True"
+                                 Style="{StaticResource addedMargins}"
+                                 CommandViewModel="{Binding CancelCommand}"/>
+        </UniformGrid>
+
+        <ScrollViewer VerticalScrollBarVisibility="Visible">
+            <ItemsControl ItemsSource="{Binding ParameterModels, ValidatesOnDataErrors=true}"
+                          BorderThickness="0"
+                          HorizontalContentAlignment="Stretch"
+                          VerticalContentAlignment="Stretch">
+
+                <!-- use the whole horizontal space, but no more -->
+                <ItemsControl.ItemContainerStyle>
+                    <Style>
+                        <Setter Property="DockPanel.Dock"
+                                Value="Top" />
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
+
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <DockPanel IsItemsHost="True" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="{x:Type client:ViewModel}">
+                        <view:LabeledView />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+    </DockPanel>
+</ctrls:WindowView>

@@ -229,6 +229,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\KistlBase\ParameterInputTaskDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\KistlBase\PropertyGroupBoxView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -467,6 +471,9 @@
     </Compile>
     <Compile Include="View\KistlBase\ObjectReferenceEditor.xaml.cs">
       <DependentUpon>ObjectReferenceEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\KistlBase\ParameterInputTaskDialog.xaml.cs">
+      <DependentUpon>ParameterInputTaskDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\KistlBase\PropertyGroupBoxView.xaml.cs">
       <DependentUpon>PropertyGroupBoxView.xaml</DependentUpon>

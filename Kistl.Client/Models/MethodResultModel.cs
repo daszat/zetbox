@@ -30,7 +30,7 @@ namespace Kistl.Client.Models
             }
             else if (retParam is DateTimeParameter && !retParam.IsList)
             {
-                return new NullableStructMethodResultModel<DateTime>(obj, method);
+                return new DateTimeMethodResultModel(obj, method);
             }
             else if (retParam is DoubleParameter && !retParam.IsList)
             {
@@ -131,6 +131,7 @@ namespace Kistl.Client.Models
             throw new NotSupportedException("Method results cannot be cleared");
         }
 
+        public abstract object GetUntypedValue();
         #endregion
 
         #region INotifyPropertyChanged Members
@@ -220,6 +221,13 @@ namespace Kistl.Client.Models
         public abstract TValue Value { get; set; }
 
         #endregion
+
+        #region IValueModel Members
+        public override object GetUntypedValue()
+        {
+            return this.Value;
+        }
+        #endregion
     }
 
     public class NullableStructMethodResultModel<TValue> : MethodResultModel<Nullable<TValue>>
@@ -283,6 +291,19 @@ namespace Kistl.Client.Models
                 return _valueCache;
             }
             set { throw new NotSupportedException("Value of Methodresults cannot be set"); }
+        }
+    }
+
+    public class DateTimeMethodResultModel : NullableStructMethodResultModel<DateTime>, IDateTimeValueModel
+    {
+        public DateTimeMethodResultModel(INotifyingObject obj, Method m)
+            : base(obj, m)
+        {
+        }
+
+        public DateTimeStyles DateTimeStyle
+        {
+            get { return DateTimeStyles.DateTime; }
         }
     }
 

@@ -36,7 +36,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             }
         }
 
-        protected IValueModel ValueModel { get; private set; }
+        public IValueModel ValueModel { get; private set; }
 
         public override string Name
         {

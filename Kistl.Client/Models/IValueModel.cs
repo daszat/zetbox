@@ -39,6 +39,11 @@ namespace Kistl.Client.Models
         /// </summary>
         void ClearValue();
 
+        /// <summary>
+        /// Returns the untyped value
+        /// </summary>
+        /// <returns></returns>
+        object GetUntypedValue();
     }
 
     public interface IValueModel<TValue> : IValueModel

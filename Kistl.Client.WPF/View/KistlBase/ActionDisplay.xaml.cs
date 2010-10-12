@@ -26,11 +26,6 @@ namespace Kistl.Client.WPF.View.KistlBase
             InitializeComponent();
         }
 
-        private void ClickHandler(object sender, RoutedEventArgs e)
-        {
-            ViewModel.Execute(null);
-        }
-
         public ActionViewModel ViewModel
         {
             get { return (ActionViewModel)DataContext; }

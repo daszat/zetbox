@@ -1418,5 +1418,20 @@ LANGUAGE 'plpgsql' VOLATILE",
             Log.Info("Vacuuming database");
             ExecuteNonQuery("VACUUM ANALYZE");
         }
+
+        public override IEnumerable<ProcRef> GetFunctionNames()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool CheckFunctionExists(ProcRef funcName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void DropFunction(ProcRef funcName)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

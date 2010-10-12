@@ -538,6 +538,11 @@ namespace Kistl.API.Server
         bool CheckProcedureExists(ProcRef procName);
         void DropProcedure(ProcRef procName);
 
+        ProcRef GetQualifiedFunctionName(string funcName);
+        IEnumerable<ProcRef> GetFunctionNames();
+        bool CheckFunctionExists(ProcRef funcName);
+        void DropFunction(ProcRef funcName);
+
         /// <summary>
         /// Setup schema provider-local structures
         /// </summary>
