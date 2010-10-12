@@ -24,7 +24,7 @@
                      Rows="1">
             <ctrls:CommandButton IsDefault="True"
                                  Style="{StaticResource addedMargins}"
-                                 CommandViewModel="{Binding ExecuteCommand}"/>
+                                 CommandViewModel="{Binding InvokeCommand}"/>
             <ctrls:CommandButton IsCancel="True"
                                  Style="{StaticResource addedMargins}"
                                  CommandViewModel="{Binding CancelCommand}"/>

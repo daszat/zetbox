@@ -197,7 +197,7 @@ namespace Kistl.Client.Models
             }
             set
             {
-                if (object.Equals(_value, value))
+                if (!object.Equals(_value, value))
                 {
                     _value = value;
                     NotifyValueChanged();
