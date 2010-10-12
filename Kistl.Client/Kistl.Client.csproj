@@ -104,7 +104,6 @@
     <Compile Include="Presentables\GUI\NavigatorViewModel.cs" />
     <Compile Include="Presentables\GUI\NavigationScreenViewModel.cs" />
     <Compile Include="Presentables\KistlBase\InstanceListViewModel.FilterTarget.cs" />
-    <Compile Include="Presentables\KistlBase\MethodInvokerViewModel.cs" />
     <Compile Include="Presentables\DataObjectViewModel.cs" />
     <Compile Include="Presentables\DataTypeViewModel.cs" />
     <Compile Include="Presentables\DescribedMethodViewModel.cs" />
@@ -134,7 +133,6 @@
     <Compile Include="Presentables\ObjectBrowser\ModuleViewModel.cs" />
     <Compile Include="Presentables\ObjectBrowser\WorkspaceViewModel.cs" />
     <Compile Include="Presentables\ObjectClassViewModel.cs" />
-    <Compile Include="Presentables\SchemaMigration\SourceColumnsObjectCollectionViewModel.cs" />
     <Compile Include="Presentables\ValueViewModels\BaseObjectCollectionViewModel.cs" />
     <Compile Include="Presentables\ValueViewModels\ObjectListViewModel.cs" />
     <Compile Include="Presentables\ValueViewModels\ObjectCollectionViewModel.cs" />
@@ -201,7 +199,9 @@
       <Name>TempAppHelpers</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Presentables\SchemaMigration\" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

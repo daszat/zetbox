@@ -116,7 +116,7 @@ namespace Kistl.Client.Models
 
         public string Label
         {
-            get { return Method.Name; }
+            get { return !string.IsNullOrEmpty(Method.Label) ? Method.Label : Method.Name; }
         }
 
         public string Description

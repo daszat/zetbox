@@ -191,6 +191,13 @@ namespace Kistl.App.Extensions
             }
             return result.ToList();
         }
+
+        public static IList<Method> GetAllMethods(this ObjectClass cls)
+        {
+            if (cls == null) { throw new ArgumentNullException("cls"); }
+
+            return cls.GetInheritedMethods().Concat(cls.Methods).ToList();
+        }
     }
 
 }

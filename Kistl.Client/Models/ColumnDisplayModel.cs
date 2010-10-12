@@ -89,11 +89,11 @@ namespace Kistl.Client.Models
             ShowId = cls.ShowIdInLists;
             ShowName = cls.ShowNameInLists;
 
-            var group = cls.GetAllProperties()
+            var props = cls.GetAllProperties()
                 .Where(p => (p.CategoryTags ?? String.Empty).Split(',', ' ').Contains("Summary"));
-            if (group.Count() == 0)
+            if (props.Count() == 0)
             {
-                group = cls.GetAllProperties().Where(p =>
+                props = cls.GetAllProperties().Where(p =>
                 {
                     var orp = p as ObjectReferenceProperty;
                     if (orp == null) { return true; }
@@ -112,14 +112,28 @@ namespace Kistl.Client.Models
                 });
             }
 
-            this.Columns = group
+            var methods = cls.GetAllMethods()
+                .Where(m => m.IsDisplayable && (m.CategoryTags ?? String.Empty).Split(',', ' ').Contains("Summary"));
+
+            this.Columns = props
                 .Select(p => new ColumnDisplayModel()
                 {
-                    Header = p.Name,
+                    Header = !string.IsNullOrEmpty(p.Label) ? p.Label : p.Name,
                     Name = p.Name,
                     ControlKind = displayOnly ? p.ValueModelDescriptor.GetDefaultGridCellDisplayKind() : p.ValueModelDescriptor.GetDefaultGridCellKind()
-                })
-                .ToList();
+                }).ToList();
+
+            if (!displayOnly)
+            {
+                this.Columns = this.Columns.Concat(
+                methods
+                .Select(m => new ColumnDisplayModel()
+                {
+                    Header = m.Name,
+                    Name = m.Name,
+                    Type = ColumnDisplayModel.ColumnType.MethodModel
+                })).ToList();
+            }
         }
     }
 }

@@ -19,33 +19,35 @@ namespace Kistl.Client.Models
             if (parameter == null)
                 throw new ArgumentNullException("parameter");
 
+            var lb = !string.IsNullOrEmpty(parameter.Label) ? parameter.Label : parameter.Name;
+
             if (parameter is BoolParameter && !parameter.IsList)
             {
-                return new NullableStructValueModel<bool>(parameter.Name, parameter.Description, false, false);
+                return new NullableStructValueModel<bool>(lb, parameter.Description, false, false);
             }
             else if (parameter is DateTimeParameter && !parameter.IsList)
             {
-                return new DateTimeValueModel(parameter.Name, parameter.Description, false, false);
+                return new DateTimeValueModel(lb, parameter.Description, false, false);
             }
             else if (parameter is DoubleParameter && !parameter.IsList)
             {
-                return new NullableStructValueModel<double>(parameter.Name, parameter.Description, false, false);
+                return new NullableStructValueModel<double>(lb, parameter.Description, false, false);
             }
             else if (parameter is IntParameter && !parameter.IsList)
             {
-                return new NullableStructValueModel<int>(parameter.Name, parameter.Description, false, false);
+                return new NullableStructValueModel<int>(lb, parameter.Description, false, false);
             }
             else if (parameter is DecimalParameter && !parameter.IsList)
             {
-                return new NullableStructValueModel<decimal>(parameter.Name, parameter.Description, false, false);
+                return new NullableStructValueModel<decimal>(lb, parameter.Description, false, false);
             }
             else if (parameter is StringParameter && !parameter.IsList)
             {
-                return new ClassValueModel<string>(parameter.Name, parameter.Description, false, false);
+                return new ClassValueModel<string>(lb, parameter.Description, false, false);
             }
             else if (parameter is ObjectParameter && !parameter.IsList)
             {
-                return new ClassValueModel<IDataObject>(parameter.Name, parameter.Description, false, false);
+                return new ClassValueModel<IDataObject>(lb, parameter.Description, false, false);
             }
             //else if (retParam is EnumParameter && !retParam.IsList)
             //{
