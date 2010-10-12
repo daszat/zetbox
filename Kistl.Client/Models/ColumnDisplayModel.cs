@@ -129,7 +129,7 @@ namespace Kistl.Client.Models
                 methods
                 .Select(m => new ColumnDisplayModel()
                 {
-                    Header = m.Name,
+                    Header = !string.IsNullOrEmpty(m.Label) ? m.Label : m.Name,
                     Name = m.Name,
                     Type = ColumnDisplayModel.ColumnType.MethodModel
                 })).ToList();
