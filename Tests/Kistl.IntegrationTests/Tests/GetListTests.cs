@@ -84,7 +84,7 @@ namespace Kistl.IntegrationTests
                 Assert.That(prop, Is.Not.Null);
                 Assert.That(prop.Context, Is.EqualTo(ctx));
 
-                var list_objclass = ctx.GetQuery<ObjectClass>().ToList();
+                var list_objclass = ctx.GetQuery<DataType>().ToList();
                 Assert.That(list_objclass.Count, Is.GreaterThan(0));
 
                 var objclass = list_objclass.Single(o => o == prop.ObjectClass);
@@ -101,7 +101,7 @@ namespace Kistl.IntegrationTests
         {
             using (IKistlContext ctx = GetContext())
             {
-                var list_objclass = ctx.GetQuery<ObjectClass>().ToList();
+                var list_objclass = ctx.GetQuery<DataType>().ToList();
                 Assert.That(list_objclass.Count, Is.GreaterThan(0));
 
                 var prop = ctx.Find<Property>(1);

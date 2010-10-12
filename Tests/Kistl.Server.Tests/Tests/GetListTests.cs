@@ -61,7 +61,7 @@ namespace Kistl.Server.Tests
             Assert.That(prop, Is.Not.Null);
             Assert.That(prop.Context, Is.EqualTo(ctx));
 
-            var list_objclass = ctx.GetQuery<Kistl.App.Base.ObjectClass>().ToList();
+            var list_objclass = ctx.GetQuery<Kistl.App.Base.DataType>().ToList();
             Assert.That(list_objclass.Count, Is.GreaterThan(0));
 
             var objclass = list_objclass.Single(o => o == prop.ObjectClass);
@@ -75,7 +75,7 @@ namespace Kistl.Server.Tests
         [Test]
         public void GetList_GetOneObject()
         {
-            var list_objclass = ctx.GetQuery<Kistl.App.Base.ObjectClass>().ToList();
+            var list_objclass = ctx.GetQuery<Kistl.App.Base.DataType>().ToList();
             Assert.That(list_objclass.Count, Is.GreaterThan(0));
 
             var prop = ctx.Find<Kistl.App.Base.Property>(1);
