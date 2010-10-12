@@ -333,7 +333,7 @@ namespace Kistl.Client.Presentables
             {
                 if (_ActionViewModelsByName == null)
                 {
-                    _ActionViewModelsByName = Actions.ToDictionary(a => a.Name);
+                    _ActionViewModelsByName = Actions.ToDictionary(a => a.MethodName);
                 }
                 return _ActionViewModelsByName;
             }
