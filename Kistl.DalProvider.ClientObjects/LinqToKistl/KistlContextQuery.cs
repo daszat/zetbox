@@ -14,15 +14,15 @@ namespace Kistl.DalProvider.Client
 
     // http://blogs.msdn.com/mattwar/archive/2007/07/30/linq-building-an-iqueryable-provider-part-i.aspx
 
-    public class KistlContextQuery<T> : IOrderedQueryable<T>
+    internal class KistlContextQuery<T> : IOrderedQueryable<T>
     {
         private Expression _expression = null;
         private KistlContextProvider _provider = null;
         private InterfaceType _type;
-        private IKistlContext _context;
+        private KistlContextImpl _context;
 
         #region Constructor
-        public KistlContextQuery(IKistlContext ctx, InterfaceType type, IProxy proxy)
+        public KistlContextQuery(KistlContextImpl ctx, InterfaceType type, IProxy proxy)
         {
             if (ctx == null) throw new ArgumentNullException("ctx");
             if (type == null) throw new ArgumentNullException("type");
@@ -33,7 +33,7 @@ namespace Kistl.DalProvider.Client
             _provider = new KistlContextProvider(_context, _type, proxy);
         }
 
-        public KistlContextQuery(IKistlContext ctx, InterfaceType type, KistlContextProvider provider, Expression expression)
+        public KistlContextQuery(KistlContextImpl ctx, InterfaceType type, KistlContextProvider provider, Expression expression)
         {
             if (ctx == null) throw new ArgumentNullException("ctx");
             if (type == null) throw new ArgumentNullException("type");

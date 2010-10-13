@@ -26,7 +26,7 @@ namespace Kistl.DalProvider.Client
         /// <summary>
         /// 
         /// </summary>
-        private IKistlContext _context;
+        private KistlContextImpl _context;
 
         /// <summary>
         /// 
@@ -49,7 +49,7 @@ namespace Kistl.DalProvider.Client
 
         private IProxy _proxy;
 
-        internal KistlContextProvider(IKistlContext ctx, InterfaceType ifType, IProxy proxy)
+        internal KistlContextProvider(KistlContextImpl ctx, InterfaceType ifType, IProxy proxy)
         {
             _context = ctx;
             _type = ifType;
@@ -98,14 +98,15 @@ namespace Kistl.DalProvider.Client
 
             foreach (IDataObject obj in serviceResult)
             {
-                result.Add((IDataObject)_context.Attach(obj));
+                result.Add((IDataObject)_context.AttachRespectingIsolationLevel(obj));
             }
 
             foreach (IPersistenceObject obj in auxObjects)
             {
-                _context.Attach(obj);
+                _context.AttachRespectingIsolationLevel(obj);
             }
 
+            _context.PlaybackNotifications();
             return result;
         }
 
@@ -128,7 +129,7 @@ namespace Kistl.DalProvider.Client
             // prepare caches
             foreach (IPersistenceObject obj in auxObjects)
             {
-                _context.Attach(obj);
+                _context.AttachRespectingIsolationLevel(obj);
             }
 
             MethodCallExpression me = e as MethodCallExpression;
@@ -145,10 +146,12 @@ namespace Kistl.DalProvider.Client
                 IList result = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(sourceType));
                 foreach (IDataObject obj in serviceResult)
                 {
-                    result.Add(_context.Attach(obj));
+                    result.Add(_context.AttachRespectingIsolationLevel(obj));
                 }
                 // Can't use T as it is a ListType
                 AddNewLocalObjects(_type, result);
+
+                _context.PlaybackNotifications();
 
                 IQueryable selectResult = result.AsQueryable().AddSelector(selector, sourceType, typeof(T).FindElementTypes().First());
                 return (T)Activator.CreateInstance(typeof(T), selectResult.GetEnumerator());
@@ -159,10 +162,12 @@ namespace Kistl.DalProvider.Client
                 if (!(result is IList)) throw new InvalidOperationException("A GetListCall supports only ILists as return result");
                 foreach (IDataObject obj in serviceResult)
                 {
-                    ((IList)result).Add(_context.Attach(obj));
+                    ((IList)result).Add(_context.AttachRespectingIsolationLevel(obj));
                 }
                 // Can't use T as it is a ListType
                 AddNewLocalObjects(_type, (IList)result);
+
+                _context.PlaybackNotifications();
                 return result;
             }
         }
@@ -197,13 +202,15 @@ namespace Kistl.DalProvider.Client
                 // prepare caches
                 foreach (IPersistenceObject obj in auxObjects)
                 {
-                    _context.Attach(obj);
+                    _context.AttachRespectingIsolationLevel(obj);
                 }
 
                 foreach (IDataObject obj in serviceResult)
                 {
-                    result.Add((T)_context.Attach(obj));
+                    result.Add((T)_context.AttachRespectingIsolationLevel(obj));
                 }
+
+                _context.PlaybackNotifications();
             }
 
             if (e.IsMethodCallExpression("First"))

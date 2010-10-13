@@ -1,5 +1,5 @@
 
-namespace Kistl.DalProvider.Client.Tests
+namespace Kistl.DalProvider.Client.Tests.KistlContextTests
 {
     using System;
     using System.Collections.Generic;
@@ -10,6 +10,7 @@ namespace Kistl.DalProvider.Client.Tests
     using Kistl.API.Utils;
     using Kistl.App.Test;
     using NUnit.Framework;
+    using Kistl.API.Client;
 
     [TestFixture]
     public class KistlContextTests : Kistl.API.AbstractConsumerTests.AbstractTestFixture

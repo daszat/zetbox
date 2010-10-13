@@ -13,14 +13,14 @@ namespace Kistl.Client.Presentables.KistlBase
     {
         public new delegate ApplicationViewModel Factory(IKistlContext dataCtx, Application app);
 
-        protected readonly Func<IKistlContext> ctxFactory;
+        protected readonly Func<ClientIsolationLevel, IKistlContext> ctxFactory;
 
         protected readonly Application app;
 
         public ApplicationViewModel(
             IViewModelDependencies appCtx, IKistlContext dataCtx,
             Application app,
-            Func<IKistlContext> ctxFactory)
+            Func<ClientIsolationLevel, IKistlContext> ctxFactory)
             : base(appCtx, dataCtx)
         {
             if (app == null) throw new ArgumentNullException("app");
@@ -76,17 +76,21 @@ namespace Kistl.Client.Presentables.KistlBase
         public void OpenApplication(ApplicationViewModel appMdl)
         {
             if (appMdl == null) throw new ArgumentNullException("appMdl");
-            var externalCtx = ctxFactory();
 
             if (appMdl.WindowModelType != null)
             {
                 // responsibility to externalCtx's disposal passes to newWorkspace
-                var newWorkspace = ViewModelFactory.CreateViewModel<WindowViewModel.Factory>(appMdl.WindowModelType).Invoke(externalCtx);
+                var newWorkspace = ViewModelFactory.CreateViewModel<WindowViewModel.Factory>(appMdl.WindowModelType).Invoke(
+                    ctxFactory(ClientIsolationLevel.PrefereClientData) // TODO: Backward compatibility? 
+                );
                 ViewModelFactory.ShowModel(newWorkspace, true);
             }
             else if (appMdl.RootScreen != null)
             {
-                var newWorkspace = ViewModelFactory.CreateViewModel<NavigatorViewModel.Factory>().Invoke(externalCtx, appMdl.RootScreen);
+                var newWorkspace = ViewModelFactory.CreateViewModel<NavigatorViewModel.Factory>().Invoke(
+                    ctxFactory(ClientIsolationLevel.MergeServerData), // TODO: no data changes on navigation screens?
+                    appMdl.RootScreen
+                );
                 ViewModelFactory.ShowModel(newWorkspace, true);
             }
             else

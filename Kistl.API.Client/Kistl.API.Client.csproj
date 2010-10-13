@@ -93,6 +93,7 @@
   <ItemGroup>
     <Compile Include="ClientApiModule.cs" />
     <Compile Include="ClientDeploymentRestrictor.cs" />
+    <Compile Include="ClientIsolationLevel.cs" />
     <Compile Include="ClientValueCollectionWrapper.cs" />
     <Compile Include="CustomPropertyDescriptor.cs" />
     <Compile Include="OneNRelationList.cs" />

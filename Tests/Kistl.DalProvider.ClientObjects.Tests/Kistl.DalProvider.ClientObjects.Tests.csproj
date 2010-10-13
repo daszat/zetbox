@@ -82,7 +82,8 @@
     <Compile Include="Tests\CompoundObjects\when_changing_a_CompoundObject_member.cs" />
     <Compile Include="Tests\CompoundObjects\when_initialized.cs" />
     <Compile Include="Tests\CompoundObjects\when_roundtrip.cs" />
-    <Compile Include="Tests\KistlContextTests.cs" />
+    <Compile Include="Tests\KistlContextTests\KistlContextTests.cs" />
+    <Compile Include="Tests\KistlContextTests\when_using_ClientIsolationLevel_MergeServerData.cs" />
     <Compile Include="Tests\NMRelationTests.cs" />
     <Compile Include="Tests\PersistenceObjects\navigator_context_checks.cs" />
     <Compile Include="Tests\PersistenceObjects\when_changed.cs" />

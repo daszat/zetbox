@@ -21,9 +21,13 @@ namespace Kistl.DalProvider.Client
         {
             base.Load(moduleBuilder);
 
-            moduleBuilder.Register(c =>
+            moduleBuilder.Register((c,p) =>
                 {
+                    var ilp = p.FirstOrDefault() as TypedParameter;
+                    var il = ilp != null ? (ClientIsolationLevel)ilp.Value : ClientIsolationLevel.PrefereClientData;
+                    
                     return new KistlContextImpl(
+                        il,
                         c.Resolve<KistlConfig>(),
                         c.Resolve<IProxy>(),
                         Kistl.API.Helper.ClientAssembly,

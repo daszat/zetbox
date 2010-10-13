@@ -27,6 +27,7 @@ namespace Kistl.DalProvider.Client
         private readonly Func<IFrozenContext> _lazyCtx;
         private readonly InterfaceType.Factory _iftFactory;
         private readonly ClientImplementationType.ClientFactory _implTypeFactory;
+        private readonly ClientIsolationLevel _clientIsolationLevel;
 
         /// <summary>
         /// List of Objects (IDataObject and ICollectionEntry) in this Context.
@@ -39,8 +40,9 @@ namespace Kistl.DalProvider.Client
         [SuppressMessage("Microsoft.Performance", "CA1805:DoNotInitializeUnnecessarily", Justification = "Uses global constant")]
         private int _newIDCounter = Helper.INVALIDID;
 
-        public KistlContextImpl(KistlConfig config, IProxy proxy, string clientImplementationAssembly, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory, ClientImplementationType.ClientFactory implTypeFactory)
+        public KistlContextImpl(ClientIsolationLevel il, KistlConfig config, IProxy proxy, string clientImplementationAssembly, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory, ClientImplementationType.ClientFactory implTypeFactory)
         {
+            this._clientIsolationLevel = il;
             this.config = config;
             this.proxy = proxy;
             this._ClientImplementationAssembly = clientImplementationAssembly;
@@ -211,15 +213,16 @@ namespace Kistl.DalProvider.Client
 
             foreach (IPersistenceObject obj in auxObjects)
             {
-                this.Attach(obj);
+                this.AttachRespectingIsolationLevel(obj);
             }
 
             var result = new List<T>();
             foreach (IPersistenceObject obj in serverList)
             {
-                var localobj = this.Attach(obj);
+                var localobj = this.AttachRespectingIsolationLevel(obj);
                 result.Add((T)localobj);
             }
+            PlaybackNotifications();
             return result;
         }
 
@@ -334,6 +337,40 @@ namespace Kistl.DalProvider.Client
             return (T)CreateCompoundObject(_iftFactory(typeof(T)));
         }
 
+        internal IPersistenceObject AttachRespectingIsolationLevel(IPersistenceObject obj)
+        {
+            var localobj = this.Attach(obj);
+
+            if (_clientIsolationLevel == ClientIsolationLevel.MergeServerData && obj != localobj)
+            {
+                RecordNotifications(obj);
+                localobj.ApplyChangesFrom(obj);
+                // reset ObjectState to new truth
+                ((IClientObject)localobj).SetUnmodified();
+            }
+
+            return localobj;
+        }
+
+        private List<BasePersistenceObject> _objectsToPlayBackNotifications = null;
+
+        internal void RecordNotifications(IPersistenceObject obj)
+        {
+            if (_objectsToPlayBackNotifications == null)
+            {
+                _objectsToPlayBackNotifications = new List<BasePersistenceObject>();
+            }
+            var bpo = (BasePersistenceObject)obj;
+            bpo.RecordNotifications();
+            _objectsToPlayBackNotifications.Add(bpo);
+        }
+
+        internal void PlaybackNotifications()
+        {
+            if (_objectsToPlayBackNotifications == null) return;
+            _objectsToPlayBackNotifications.ForEach(obj => obj.PlaybackNotifications());
+            _objectsToPlayBackNotifications = null;
+        }
 
         /// <summary>
         /// Attach an IPersistenceObject. This Method checks, if the Object is already in that Context. 
@@ -496,7 +533,7 @@ namespace Kistl.DalProvider.Client
                     obj = (IClientObject)underlyingObject;
                 }
 
-                underlyingObject.RecordNotifications();
+                RecordNotifications(underlyingObject);
                 if (obj != objFromServer)
                 {
                     underlyingObject.ApplyChangesFrom(objFromServer);
@@ -511,7 +548,7 @@ namespace Kistl.DalProvider.Client
             objectsToDetach.ForEach(obj => this.Detach(obj));
             changedObjects.ForEach(obj => this.Attach(obj));
 
-            changedObjects.ForEach(obj => obj.PlaybackNotifications());
+            PlaybackNotifications();
 
             // Fire PostSave
             notifySaveList.ForEach(o => o.NotifyPostSave());
