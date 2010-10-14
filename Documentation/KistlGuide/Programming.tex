@@ -1,11 +1,74 @@
-This chapter describes the various ways and pieces the Kistl system is
+This chapter describes the various ways and pieces the ZBox system is
 programmed and customized.
 
 \section{Objects}
 
 \subsection{ObjectClass}
 
-\subsection{Relation}
+ZBox knows four kinds of Types, all derived from \emph{DataType}:
+\begin{description}
+\item[ObjectClass] { Type for ZBox Object Classes }
+\item[Interface] { Type for ZBox Interfaces }
+\item[Enumeration] { Type for ZBox Enumerations }
+\item[CompoundObject] { Type for ZBox Object Classes }
+\end{description}
+
+\subsubsection{DataType}
+This is the abstract base class for all ZBox Types. It provides the necessary
+infrastructure to describe a Type.
+
+\begin{CS}
+public interface DataType 
+{
+    string Name;
+    string Description;
+
+    IList<Property> Properties;
+    ICollection<Method> Methods;
+    ICollection<MethodInvocation> MethodInvocations;
+
+    Icon DefaultIcon;
+    ICollection<InstanceConstraint> Constraints;
+}
+\end{CS}
+
+\begin{description}
+\item[Name] { The name of the \emph{DataType}. Note that this name has to be a
+valid C\# name. A \emph{Constraint} protects this. }
+\item[Description] { Each Type should have a description. This description is
+used for documentation purposes. }
+\item[Properties] { Each Type can have Properties (except \emph{Enumeration})}
+\item[Methods] { Each Type can have Methods (except \emph{Enumeration})}
+\item[MethodInvocations] { Methods on a \emph{DataType} are invoked by an
+MethodInvokation. It does not matter on which level of type hierarchy the
+invokation is defined. }
+\item[DefaultIcon] { Each \emph{DataType} can have a default icon}
+\item[Constraints] { A \emph{Constraint} checks the validity of an instance. If
+any constraint throws an error nothing will be committed. }
+\end{description}
+
+\subsubsection{ObjectClass}
+\emph{ObjectClass} is \emph{the} defining class for ZBox Objects.
+
+\begin{CS}
+public interface ObjectClass : DataType 
+{
+    ObjectClass BaseObjectClass;
+    ICollection<Interface> ImplementsInterfaces;
+
+    string TableName;
+
+    bool IsAbstract;
+    bool IsFrozenObject;
+    bool IsSimpleObject;
+
+    ViewModelDescriptor DefaultViewModelDescriptor;
+    ControlKind RequestedKind;
+
+    ICollection<AccessControl> AccessControlList;
+}
+\end{CS}
+
 \input{Relations}
 
 \subsection{Additional Metadata}
@@ -113,7 +176,6 @@ n.Number = "87654321"; // changes n.Number but does not change p.Tel.Number
 
 \subsection{Database Providers}
 
-\section{Graphical User Interface}
 \input{GraphicalUserInterface}
 
 \section{Core Kistl Development Environment}

@@ -1,3 +1,5 @@
+\section{Graphical User Interface}
+
 Like other subsystems, the GUI core is designed to be platform
 independent. Therefore only the \emph{outermost} shell contains toolkit
 specific code.
@@ -147,6 +149,83 @@ hierarchy between different kinds of controls is modeled with inheritance.
 \subsubsection{Views}
 
 Their descriptors list the available Views by Toolkit and which ControlKind they represent. \emph{View Descriptors} can define which \emph{ViewModel}s (or Interfaces to ViewModels) are supported.
+
+\subsection{Resolving ViewModels}
+
+\emph{ViewModels} are resolved by the \emph{IViewModelFactory}
+
+\begin{CS}
+public interface IViewModelFactory
+{
+    void ShowModel(ViewModel mdl, bool activate);
+    void ShowModel(ViewModel mdl, Kistl.App.GUI.ControlKind kind, bool activate);
+
+    void CreateTimer(TimeSpan tickLength, Action action);
+    string GetSourceFileNameFromUser(params string[] filter);
+    string GetDestinationFileNameFromUser(string filename, params string[] filter);
+    Toolkit Toolkit { get; }
+
+    // Create Models
+    TModelFactory CreateViewModel<TModelFactory>() where TModelFactory : class;
+    TModelFactory CreateViewModel<TModelFactory>(Kistl.API.IDataObject obj) where TModelFactory : class;
+    TModelFactory CreateViewModel<TModelFactory>(Kistl.API.ICompoundObject obj) where TModelFactory : class;
+    TModelFactory CreateViewModel<TModelFactory>(Kistl.App.Base.Property p) where TModelFactory : class;
+    TModelFactory CreateViewModel<TModelFactory>(Kistl.App.Base.BaseParameter p) where TModelFactory : class;
+    TModelFactory CreateViewModel<TModelFactory>(Kistl.App.Base.Method m) where TModelFactory : class;
+    TModelFactory CreateViewModel<TModelFactory>(System.Type t) where TModelFactory : class;
+
+    // IMultipleInstancesManager
+    void OnIMultipleInstancesManagerCreated(Kistl.API.IKistlContext ctx, IMultipleInstancesManager workspace);
+    void OnIMultipleInstancesManagerDisposed(Kistl.API.IKistlContext ctx, IMultipleInstancesManager workspace);
+}
+\end{CS}
+
+\emph{ViewModel}s can be created directly if the requested \emph{ViewModel} is
+known. Some \emph{ObjectClasses} (ObjectClass, Property, Method, Parameter,
+etc.) can declare a more specific \emph{ViewModel}. Use a more specific
+\emph{CreateViewModel} overload in such a case.
+
+The most obvious example is \emph{Property}. There is a need for different
+\emph{ViewModel}s for a \emph{StringProperty} vs.
+\emph{ObjectReferenceProperty}. Each \emph{ViewModel} for displaying Properties
+derives from a very basic \emph{BaseValueViewModel}.
+
+\begin{description}
+\item[IntProperty] { is displayed by a NullableStructValueViewModel of type int
+}
+\item[BoolProperty] { is displayed by a NullableStructValueViewModel of type
+bool}
+\item[DecimalProperty] { is displayed by a NullableStructValueViewModel of type
+decimal }
+\item[String\-Property] { is displayed by a ClassValue\-ViewModel of type string
+or MultiLine\-StringValue\-View\-Model }
+\item[DateTimeProperty] { is displayed by a NullableDateTimePropertyViewModel }
+\item[ObjectReference\-Property] { is displayed by a
+Object\-Reference\-ViewModel, Object\-Collection\-ViewModel or Object\-List\-ViewModel }
+\end{description}
+
+Create a specific \emph{ViewModel} by calling:
+
+\begin{CS}
+	mdlFactory.CreateViewModel<WorkspaceViewModel.Factory>().Invoke(ctx);
+\end{CS}
+
+Create a \emph{ViewModel} for a \emph{Property} by calling:
+
+\begin{CS}
+	ViewModelFactory.CreateViewModel<BaseValueViewModel.Factory>(prop).Invoke(DataContext,
+prop.GetValueModel(Object));
+\end{CS}
+
+Create a \emph{ViewModel} for a \emph{IDataObject} by calling:
+
+\begin{CS}
+	ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>(obj).Invoke(DataContext, obj);
+\end{CS}
+
+The \emph{ViewModelFactory} will look up the \emph{IDataObject}s type and tries
+to find it's \emph{ObjectClass}. Then it looks up the \emph{ViewModelDescriptor}
+and creates the \emph{ViewModel}.
 
 \subsection{Implementation}
 

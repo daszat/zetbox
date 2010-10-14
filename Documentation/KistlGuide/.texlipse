@@ -1,0 +1,13 @@
+#TeXlipse project settings
+#Thu Oct 14 12:40:07 CEST 2010
+builderNum=2
+outputDir=
+makeIndSty=
+bibrefDir=
+outputFormat=pdf
+tempDir=tmp
+mainTexFile=KistlGuide.tex
+outputFile=KistlGuide.pdf
+langSpell=en
+markDer=true
+srcDir=
