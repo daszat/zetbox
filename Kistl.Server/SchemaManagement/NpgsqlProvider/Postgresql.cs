@@ -60,6 +60,9 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         public override void DblinkConnect(TableRef tblName)
         {
+            if (tblName == null)
+                throw new ArgumentNullException("tblName");
+
             if (tblName.Database == CurrentConnection.Database || _dblinks.ContainsKey(tblName.Database))
                 return; // already connected
 
