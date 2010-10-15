@@ -51,11 +51,16 @@ namespace Kistl.Client.Presentables
         {
             if (obj == null) throw new ArgumentNullException("obj");
 
-            var t = obj.GetObjectClass(FrozenContext)
-                .DefaultViewModelDescriptor
-                .ViewModelRef
-                .AsType(true);
-            return CreateViewModel<TModelFactory>(ResolveFactory(t));
+            var desc = obj.GetObjectClass(FrozenContext)
+                .DefaultViewModelDescriptor;
+            if (desc != null)
+            {
+                return CreateViewModel<TModelFactory>(desc);
+            }
+            else
+            {
+                throw new NotImplementedException(String.Format("==>> No model for object class: '{0}'", obj.GetType()));
+            }
         }
 
         public TModelFactory CreateViewModel<TModelFactory>(ICompoundObject obj) where TModelFactory : class
@@ -77,10 +82,7 @@ namespace Kistl.Client.Presentables
 
             if (p.ValueModelDescriptor != null)
             {
-                var t = p.ValueModelDescriptor
-                    .ViewModelRef
-                    .AsType(true);
-                return CreateViewModel<TModelFactory>(ResolveFactory(t));
+                return CreateViewModel<TModelFactory>(p.ValueModelDescriptor);
             }
             else
             {
@@ -137,6 +139,12 @@ namespace Kistl.Client.Presentables
             }
 
             return CreateViewModel<TModelFactory>(ResolveFactory(t));
+        }
+
+        public TModelFactory CreateViewModel<TModelFactory>(ViewModelDescriptor desc) where TModelFactory : class
+        {
+            if (desc == null) throw new ArgumentNullException("desc");
+            return CreateViewModel<TModelFactory>(ResolveFactory(desc.ViewModelRef.AsType(true)));
         }
 
         // TODO: memoize this function

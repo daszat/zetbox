@@ -65,5 +65,16 @@ namespace Kistl.App.GUI
             e.Result = String.Format("Screen: {0}",
                   obj.Title);
         }
+
+        public static void OnCreateFilterModel_SinglePropertyFilterConfiguration(Kistl.App.GUI.SinglePropertyFilterConfiguration obj, MethodReturnEventArgs<IFilterModel> e)
+        {
+        }
+
+        public static readonly Guid ViewModelDescriptor_SingleValueFilterViewModel = new Guid("4FF2B6EC-A47F-431B-AA6D-D10B39F8D628");
+
+        public static void OnNotifyCreated_SinglePropertyFilterConfiguration(Kistl.App.GUI.SinglePropertyFilterConfiguration obj)
+        {
+            obj.ViewModelDescriptor = obj.Context.FindPersistenceObject<ViewModelDescriptor>(ViewModelDescriptor_SingleValueFilterViewModel);
+        }
     }
 }

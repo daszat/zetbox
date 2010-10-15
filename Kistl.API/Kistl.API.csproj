@@ -90,6 +90,7 @@
     <Compile Include="HostType.cs" />
     <Compile Include="ICustomActions.cs" />
     <Compile Include="IDataObject.cs" />
+    <Compile Include="IFilterModel.cs" />
     <Compile Include="IKistlAppDomain.cs" />
     <Compile Include="IKistlContext.cs" />
     <Compile Include="IKistlService.cs" />

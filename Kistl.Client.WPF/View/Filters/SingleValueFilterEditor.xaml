@@ -1,0 +1,13 @@
+﻿<UserControl x:Class="Kistl.Client.WPF.View.Filters.SingleValueFilterEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"
+             xmlns:tk="clr-namespace:Kistl.Client.WPF.View;assembly=Kistl.Client.WPF.Toolkit"
+             xmlns:view="clr-namespace:Kistl.Client.WPF.View.KistlBase"
+             xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
+             ToolTip="{Binding ToolTip}">
+    <tk:LabeledContainer Label="{Binding Label}">
+        <ContentPresenter Content="{Binding Argument}"
+                          ContentTemplateSelector="{StaticResource defaultTemplateSelector}"/>
+    </tk:LabeledContainer>
+</UserControl>

@@ -133,6 +133,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\Filters\SingleValueFilterEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\GridCells\MultilineStringValue.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -160,12 +164,6 @@
     <Page Include="View\KistlBase\ActionDisplay.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\KistlBase\BoolFilterExpression.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -236,18 +234,6 @@
     <Page Include="View\KistlBase\PropertyGroupBoxView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\KistlBase\SimpleDropdownFilterExpression.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\KistlBase\StringFilterExpression.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -423,6 +409,9 @@
     <Compile Include="View\ErrorListView.xaml.cs">
       <DependentUpon>ErrorListView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Filters\SingleValueFilterEditor.xaml.cs">
+      <DependentUpon>SingleValueFilterEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\GridCells\MultilineStringValue.xaml.cs">
       <DependentUpon>MultilineStringValue.xaml</DependentUpon>
     </Compile>
@@ -437,9 +426,6 @@
     </Compile>
     <Compile Include="View\KistlBase\ActionDisplay.xaml.cs">
       <DependentUpon>ActionDisplay.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\KistlBase\BoolFilterExpression.xaml.cs">
-      <DependentUpon>BoolFilterExpression.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\KistlBase\CompoundObjectPropertyEditor.xaml.cs">
       <DependentUpon>CompoundObjectPropertyEditor.xaml</DependentUpon>
@@ -479,12 +465,6 @@
       <DependentUpon>PropertyGroupBoxView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\KistlBase\PropertyEditor.cs" />
-    <Compile Include="View\KistlBase\SimpleDropdownFilterExpression.xaml.cs">
-      <DependentUpon>SimpleDropdownFilterExpression.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\KistlBase\StringFilterExpression.xaml.cs">
-      <DependentUpon>StringFilterExpression.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\KistlBase\StringListView.xaml.cs">
       <DependentUpon>StringListView.xaml</DependentUpon>
     </Compile>

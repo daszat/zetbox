@@ -8,6 +8,7 @@ namespace Kistl.Client.Presentables.KistlBase
 
     using Kistl.API;
     using Kistl.App.Base;
+    using Kistl.Client.Models;
 
     /// <summary>
     /// A intermediate helper class to provide common "load TypeRefs from various Assembly sources" functionality.
@@ -97,13 +98,14 @@ namespace Kistl.Client.Presentables.KistlBase
                         this.Parent.Value = chosen;
                     }
                 }),
-                new List<CommandViewModel>() { regenerateCmd });
-            var filter = (ObjectReferencePropertyFilterExpressionViewModel)selectionTask.ListViewModel.Filter.OfType<IPropertyFilterExpression>().Single(i => i.Property.ExportGuid == new Guid("885BFA97-3D43-48BB-A0AA-1049298714FF"));
-            filter.Value = filter.PossibleValues
-                .Cast<KeyValuePair<DataObjectViewModel, string>>()
-                .Where(m => m.Key != null)
-                .FirstOrDefault(m => m.Key.Object == assembly)
-                .Key;
+                new List<CommandViewModel>() { regenerateCmd }
+            );
+            //var filter = selectionTask.ListViewModel.Filter.Single(i => i.Property.ExportGuid == new Guid("885BFA97-3D43-48BB-A0AA-1049298714FF"));
+            //filter.Value = filter.PossibleValues
+            //    .Cast<KeyValuePair<DataObjectViewModel, string>>()
+            //    .Where(m => m.Key != null)
+            //    .FirstOrDefault(m => m.Key.Object == assembly)
+            //    .Key;
             regenerateCmd.ListModel = selectionTask.ListViewModel;
             ViewModelFactory.ShowModel(selectionTask, true);
         }
@@ -121,9 +123,10 @@ namespace Kistl.Client.Presentables.KistlBase
 
             private Assembly FetchAssembly()
             {
-                var filter = (ObjectReferencePropertyFilterExpressionViewModel)ListModel.Filter.OfType<IPropertyFilterExpression>().Single(i => i.Property.ExportGuid == new Guid("885BFA97-3D43-48BB-A0AA-1049298714FF"));
-                if (filter.Value == null) return null;
-                return (Assembly)filter.Value.Object;
+                return null;
+                //var filter = (ObjectReferencePropertyFilterExpressionViewModel)ListModel.Filter.OfType<IPropertyFilterExpression>().Single(i => i.Property.ExportGuid == new Guid("885BFA97-3D43-48BB-A0AA-1049298714FF"));
+                //if (filter.Value == null) return null;
+                //return (Assembly)filter.Value.Object;
             }
 
             public override bool CanExecute(object data)

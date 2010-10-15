@@ -13,23 +13,24 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Kistl.Client.GUI;
 using Kistl.Client.Presentables.KistlBase;
+using Kistl.Client.Presentables.FilterViewModels;
 
-namespace Kistl.Client.WPF.View.KistlBase
+namespace Kistl.Client.WPF.View.Filters
 {
     /// <summary>
-    /// Interaction logic for BoolFilterExpression.xaml
+    /// Interaction logic for StringFilterExpression.xaml
     /// </summary>
-    [ViewDescriptor("GUI", Kistl.App.GUI.Toolkit.WPF, Kind = "Kistl.App.GUI.SimpleBoolFilterKind")]
-    public partial class BoolFilterExpression : UserControl, IHasViewModel<IValueTypeFilterViewModel<bool>>
+    [ViewDescriptor("GUI", Kistl.App.GUI.Toolkit.WPF, Kind = "Kistl.App.GUI.SingleValueFilterKind")]
+    public partial class SingleValueFilterEditor : UserControl, IHasViewModel<SingleValueFilterViewModel>
     {
-        public BoolFilterExpression()
+        public SingleValueFilterEditor()
         {
             InitializeComponent();
         }
 
-        public IValueTypeFilterViewModel<bool> ViewModel
+        public SingleValueFilterViewModel ViewModel
         {
-            get { return (IValueTypeFilterViewModel<bool>)DataContext; }
+            get { return (SingleValueFilterViewModel)DataContext; }
         }
     }
 }

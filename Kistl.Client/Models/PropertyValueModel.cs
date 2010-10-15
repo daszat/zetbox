@@ -17,7 +17,7 @@ namespace Kistl.Client.Models
 
     public static class PropertyExtensionsThisShouldBeMovedToAZBoxMethod
     {
-        public static IValueModel GetValueModel(this Property prop, INotifyingObject obj)
+        public static IValueModel GetPropertyValueModel(this Property prop, INotifyingObject obj)
         {
             if (prop == null)
                 throw new ArgumentNullException("prop");
@@ -73,13 +73,75 @@ namespace Kistl.Client.Models
                 }
                 else
                 {
-                    return new ObjectReferenceValueModel(obj, objRefProp);
+                    return new ObjectReferencePropertyValueModel(obj, objRefProp);
                 }
             }
             else
             {
                 throw new NotImplementedException(string.Format("GetValueModel is not implemented for {0} properties yet", prop.GetPropertyTypeString()));
             }
+        }
+        public static IValueModel GetDetachedValueModel(this Property prop)
+        {
+            if (prop == null)
+                throw new ArgumentNullException("prop");
+
+            var lb = !string.IsNullOrEmpty(prop.Label) ? prop.Label : prop.Name;
+
+            if (prop is IntProperty)
+            {
+                return new NullableStructValueModel<int>(lb, prop.Description, prop.IsNullable(), false);
+            }
+            else if (prop is BoolProperty)
+            {
+                return new NullableStructValueModel<bool>(lb, prop.Description, prop.IsNullable(), false);
+            }
+            else if (prop is DoubleProperty)
+            {
+                return new NullableStructValueModel<double>(lb, prop.Description, prop.IsNullable(), false);
+            }
+            else if (prop is DecimalProperty)
+            {
+                return new NullableStructValueModel<decimal>(lb, prop.Description, prop.IsNullable(), false);
+            }
+            else if (prop is GuidProperty)
+            {
+                return new NullableStructValueModel<Guid>(lb, prop.Description, prop.IsNullable(), false);
+            }
+            else if (prop is DateTimeProperty)
+            {
+                return new DateTimeValueModel(lb, prop.Description, prop.IsNullable(), false);
+            }
+            //else if (prop is EnumerationProperty)
+            //{
+            //    return new EnumerationValueModel(obj, (EnumerationProperty)prop);
+            //}
+            else if (prop is StringProperty)
+            {
+                return new ClassValueModel<string>(lb, prop.Description, prop.IsNullable(), false);
+            }
+            else if (prop is ObjectReferenceProperty)
+            {
+                ObjectReferenceProperty objRefProp = (ObjectReferenceProperty)prop;
+                if (objRefProp.GetIsList())
+                {
+                    //var sorted = objRefProp.RelationEnd.Parent.GetOtherEnd(objRefProp.RelationEnd).HasPersistentOrder;
+                    //if (sorted)
+                    //{
+                    //    return new ObjectListValueModel(obj, objRefProp);
+                    //}
+                    //else
+                    //{
+                    //    return new ObjectCollectionValueModel(obj, objRefProp);
+                    //}
+                }
+                else
+                {
+                    return new ObjectReferenceValueModel(lb, prop.Description, prop.IsNullable(), false, objRefProp.GetReferencedObjectClass());
+                }
+            }
+
+            throw new NotImplementedException(string.Format("GetValueModel is not implemented for {0} properties yet", prop.GetPropertyTypeString()));
         }
     }
 
@@ -403,12 +465,12 @@ namespace Kistl.Client.Models
         #endregion
     }
 
-    public class ObjectReferenceValueModel
+    public class ObjectReferencePropertyValueModel
         : ClassPropertyValueModel<IDataObject>, IObjectReferenceValueModel
     {
         protected readonly ObjectReferenceProperty objRefProp;
 
-        public ObjectReferenceValueModel(INotifyingObject obj, ObjectReferenceProperty prop)
+        public ObjectReferencePropertyValueModel(INotifyingObject obj, ObjectReferenceProperty prop)
             : base(obj, prop)
         {
             this.objRefProp = prop;

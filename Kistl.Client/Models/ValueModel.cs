@@ -47,7 +47,7 @@ namespace Kistl.Client.Models
             }
             else if (parameter is ObjectParameter && !parameter.IsList)
             {
-                return new ClassValueModel<IDataObject>(lb, parameter.Description, false, false);
+                return new ObjectReferenceValueModel(lb, parameter.Description, false, false, (ObjectClass)((ObjectParameter)parameter).DataType);
             }
             //else if (retParam is EnumParameter && !retParam.IsList)
             //{
@@ -257,5 +257,23 @@ namespace Kistl.Client.Models
             if (AllowNullInput) Value = null;
             else throw new NotSupportedException();
         }
+    }
+
+    public class ObjectReferenceValueModel : ClassValueModel<IDataObject>, IObjectReferenceValueModel
+    {
+        public ObjectReferenceValueModel(string label, string description, bool allowNullInput, bool isReadOnly, ObjectClass referencedClass)
+            : base(label, description, allowNullInput, isReadOnly)
+        {
+            this.ReferencedClass = referencedClass;
+        }
+
+        #region IObjectReferenceValueModel Members
+
+        public ObjectClass ReferencedClass
+        {
+            get; private set;
+        }
+
+        #endregion
     }
 }

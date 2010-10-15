@@ -17,6 +17,9 @@ namespace Kistl.Client.Presentables.KistlBase
     using Kistl.App.GUI;
     using Kistl.Client.Models;
     using ObjectEditor = Kistl.Client.Presentables.ObjectEditor;
+    using Kistl.Client.Presentables.FilterViewModels;
+    using Kistl.Client.Presentables.ValueViewModels;
+    using Kistl.API.Utils;
 
     public enum InstanceListViewMethod
     {
@@ -163,14 +166,14 @@ namespace Kistl.Client.Presentables.KistlBase
             }
         }
 
-        private ObservableCollection<IFilterExpression> _filter = null;
-        public ICollection<IFilterExpression> Filter
+        private ObservableCollection<IFilterModel> _filter = null;
+        public ICollection<IFilterModel> Filter
         {
             get
             {
                 if (_filter == null)
                 {
-                    _filter = new ObservableCollection<IFilterExpression>();
+                    _filter = new ObservableCollection<IFilterModel>();
                     // React on changes -> attach to FilterChanged Event
                     _filter.CollectionChanged += new NotifyCollectionChangedEventHandler(_filter_CollectionChanged);
 
@@ -180,11 +183,21 @@ namespace Kistl.Client.Presentables.KistlBase
                         var t = _type;
                         while (t != null)
                         {
+                            var tmp = new List<object>();
                             // Add Property filter expressions
                             foreach (var prop in t.Properties.Where(p => p.FilterConfiguration != null))
                             {
                                 var cfg = prop.FilterConfiguration;
-                                _filter.Add(ViewModelFactory.CreateViewModel<PropertyFilterExpressionFactory>(cfg.ViewModelDescriptor.ViewModelRef.AsType(true)).Invoke(DataContext, prop, cfg));
+                                var mdl = /* cfg.GetFilterModel(prop) */ new SingleValueFilterModel();
+                                mdl.Label = !string.IsNullOrEmpty(prop.Label) ? prop.Label : prop.Name;
+                                mdl.Required = cfg.Required;
+                                mdl.ValueSource = FilterValueSource.FromProperty(prop);
+
+                                //mdl.ViewModelType = cfg.ViewModelDescriptor != null ? cfg.ViewModelDescriptor.ViewModelRef.AsType(true) : typeof(SingleValueFilterViewModel); // DataContext.FindPersistenceObject<ViewModelDescriptor>(new Guid("")); 
+                                mdl.ViewModelType = FrozenContext.FindPersistenceObject<ViewModelDescriptor>(new Guid("4ff2b6ec-a47f-431b-aa6d-d10b39f8d628")); // Kistl.Client.Presentables.FilterViewModels.SingleValueFilterViewModel;
+                                mdl.FilterArguments.Add( new FilterArgumentConfig(prop.GetDetachedValueModel(), /*cfg.ArgumentViewModel ?? */ prop.ValueModelDescriptor));
+
+                                _filter.Add(mdl);
                             }
                             if (t is ObjectClass)
                             {
@@ -193,7 +206,7 @@ namespace Kistl.Client.Presentables.KistlBase
                         }
 
                         // Add default ToString Filter for all
-                        _filter.Add(ViewModelFactory.CreateViewModel<ToStringFilterExpression.Factory>().Invoke(DataContext, "Name"));
+                        _filter.Add(new ToStringFilterModel(FrozenContext));
                     }
                 }
                 return _filter;
@@ -202,31 +215,42 @@ namespace Kistl.Client.Presentables.KistlBase
 
         void _filter_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            foreach (var item in e.NewItems.OfType<IUIFilterExpression>())
+            foreach (var item in e.NewItems.OfType<IUIFilterModel>())
             {
                 // attach change events
                 item.FilterChanged += new EventHandler(delegate(object s, EventArgs a)
                 {
-                    if (s is IPostFilterExpression)
+                    var f = s as FilterModel;
+                    if(f == null) return;
+
+                    if (f.IsServerSideFilter)
                     {
-                        ExecutePostFilter();
+                        ReloadInstances();
                     }
                     else
                     {
-                        ReloadInstances();
+                        ExecutePostFilter();
                     }
                 });
             }
 
+            _FilterViewModels = null;
             OnPropertyChanged("FilterViewModels");
             OnPropertyChanged("ShowFilter");
         }
 
-        public IEnumerable<IUIFilterExpression> FilterViewModels
+        private List<FilterViewModel> _FilterViewModels = null;
+        public IEnumerable<FilterViewModel> FilterViewModels
         {
             get
             {
-                return Filter.OfType<IUIFilterExpression>();
+                if (_FilterViewModels == null)
+                {
+                    _FilterViewModels = new List<FilterViewModel>(Filter
+                        .OfType<IUIFilterModel>()
+                        .Select(f => ViewModelFactory.CreateViewModel<FilterViewModel.Factory>(f.ViewModelType).Invoke(DataContext, f)));
+                }
+                return _FilterViewModels;
             }
         }
         #endregion
@@ -303,7 +327,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 {
                     _commands = new ObservableCollection<ICommandViewModel>();
                     // Add default actions
-                    if(ShowNewCommand) _commands.Add(NewCommand);
+                    if (ShowNewCommand) _commands.Add(NewCommand);
                     if (ShowOpenCommand) _commands.Add(OpenCommand);
                     if (ShowRefreshCommand) _commands.Add(RefreshCommand);
                 }
@@ -573,7 +597,7 @@ namespace Kistl.Client.Presentables.KistlBase
 
         public delegate void DisplayedColumnsCreatedHandler(GridDisplayConfiguration cols);
         public event DisplayedColumnsCreatedHandler DisplayedColumnsCreated;
-        
+
         protected virtual GridDisplayConfiguration CreateDisplayedColumns()
         {
             var result = new GridDisplayConfiguration();
@@ -595,9 +619,9 @@ namespace Kistl.Client.Presentables.KistlBase
         {
             var result = _query;
 
-            foreach (var f in Filter.OfType<ILinqFilterExpression>().Where(f => f.Enabled))
+            foreach (var f in Filter.Where(f => f.Enabled))
             {
-                result = result.Where(f.Predicate, f.FilterValues);
+                result = f.GetQuery(result);
             }
 
             return result;
@@ -640,16 +664,17 @@ namespace Kistl.Client.Presentables.KistlBase
         /// </summary>
         private void ExecutePostFilter()
         {
-            _instancesFiltered = new ReadOnlyObservableCollection<DataObjectViewModel>(this.Instances);
+            var tmp = new List<DataObjectViewModel>(this.Instances);
             // poor man's full text search
-            foreach (var filter in Filter.OfType<IPostFilterExpression>())
+            foreach (var filter in Filter.Where(i => !i.IsServerSideFilter))
             {
                 if (filter.Enabled)
                 {
-                    _instancesFiltered = filter.Execute(_instancesFiltered);
+                    tmp = filter.GetResult(tmp).Cast<DataObjectViewModel>().ToList();
                 }
             }
 
+            _instancesFiltered = new ReadOnlyObservableCollection<DataObjectViewModel>(new ObservableCollection<DataObjectViewModel>(tmp));
             // Sort
             if (!string.IsNullOrEmpty(_sortProperty))
             {

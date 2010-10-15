@@ -50,7 +50,7 @@ namespace Kistl.Client.Tests
 
             orpMock = scope.Resolve<KistlMockFactory>().CreateObjectReferenceProperty("TestCollection", true);
 
-            olm = new ObjectListViewModel(appCtxMock.Object, null, (IObjectCollectionValueModel<IList<IDataObject>>)orpMock.Object.GetValueModel(objMock.Object));
+            olm = new ObjectListViewModel(appCtxMock.Object, null, (IObjectCollectionValueModel<IList<IDataObject>>)orpMock.Object.GetPropertyValueModel(objMock.Object));
 
         }
 

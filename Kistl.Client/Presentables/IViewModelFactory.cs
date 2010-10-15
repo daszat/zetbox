@@ -21,6 +21,7 @@ namespace Kistl.Client.Presentables
         TModelFactory CreateViewModel<TModelFactory>(Kistl.App.Base.Property p) where TModelFactory : class;
         TModelFactory CreateViewModel<TModelFactory>(Kistl.App.Base.BaseParameter p) where TModelFactory : class;
         TModelFactory CreateViewModel<TModelFactory>(Kistl.App.Base.Method m) where TModelFactory : class;
+        TModelFactory CreateViewModel<TModelFactory>(ViewModelDescriptor desc) where TModelFactory : class;
         TModelFactory CreateViewModel<TModelFactory>(System.Type t) where TModelFactory : class;
 
         // IMultipleInstancesManager

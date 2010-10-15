@@ -9,6 +9,7 @@ using Kistl.App.Extensions;
 using Kistl.Client.Presentables.KistlBase;
 using Kistl.App.GUI;
 using ObjectEditorWorkspace = Kistl.Client.Presentables.ObjectEditor.WorkspaceViewModel;
+using Kistl.Client.Models;
 
 namespace Kistl.Client.Presentables.ModuleEditor
 {
@@ -77,28 +78,28 @@ namespace Kistl.Client.Presentables.ModuleEditor
 
                     // Object Classes
                     lstMdl = ViewModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, null, DataContext.GetQuery<ObjectClass>());
-                    lstMdl.Filter.Add(new ConstantFilterExpression("Module = @0", CurrentModule));
-                    lstMdl.Filter.Add(ViewModelFactory.CreateViewModel<EnableFilterExpression.Factory>().Invoke(DataContext, "Only Baseclasses", "BaseObjectClass = null"));
+                    lstMdl.Filter.Add(new ConstantValueFilterModel("Module = @0", CurrentModule));
+                    //lstMdl.Filter.Add(ViewModelFactory.CreateViewModel<EnableFilterExpression.Factory>().Invoke(DataContext, "Only Baseclasses", "BaseObjectClass = null"));
                     lst.Add(lstMdl);
 
                     // Interface
                     lstMdl = ViewModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, null, DataContext.GetQuery<Interface>());
-                    lstMdl.Filter.Add(new ConstantFilterExpression("Module = @0", CurrentModule));
+                    lstMdl.Filter.Add(new ConstantValueFilterModel("Module = @0", CurrentModule));
                     lst.Add(lstMdl);
 
                     // Enums
                     lstMdl = ViewModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, null, DataContext.GetQuery<Enumeration>());
-                    lstMdl.Filter.Add(new ConstantFilterExpression("Module = @0", CurrentModule));
+                    lstMdl.Filter.Add(new ConstantValueFilterModel("Module = @0", CurrentModule));
                     lst.Add(lstMdl);
 
                     // CompoundObject
                     lstMdl = ViewModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, null, DataContext.GetQuery<CompoundObject>());
-                    lstMdl.Filter.Add(new ConstantFilterExpression("Module = @0", CurrentModule));
+                    lstMdl.Filter.Add(new ConstantValueFilterModel("Module = @0", CurrentModule));
                     lst.Add(lstMdl);
 
                     // Assembly
                     lstMdl = ViewModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, null, DataContext.GetQuery<Assembly>());
-                    lstMdl.Filter.Add(new ConstantFilterExpression("Module = @0", CurrentModule));
+                    lstMdl.Filter.Add(new ConstantValueFilterModel("Module = @0", CurrentModule));
                     lstMdl.Commands.Add(ViewModelFactory.CreateViewModel<SimpleItemCommandViewModel<DataObjectViewModel>.Factory>().Invoke(DataContext,
                         "Refresh TypeRefs", "Refreshes the TypeRefs, ViewDescriptors and ViewModelDescriptors",
                         (i) =>
@@ -113,41 +114,41 @@ namespace Kistl.Client.Presentables.ModuleEditor
 
                     // TypeRefs
                     lstMdl = ViewModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, null, DataContext.GetQuery<TypeRef>());
-                    lstMdl.Filter.Add(new ConstantFilterExpression("Assembly.Module = @0", CurrentModule));
-                    lstMdl.Filter.Add(ViewModelFactory.CreateViewModel<EnableFilterExpression.Factory>().Invoke(DataContext, "Only Deleted", "Deleted = true"));
+                    lstMdl.Filter.Add(new ConstantValueFilterModel("Assembly.Module = @0", CurrentModule));
+                    // lstMdl.Filter.Add(ViewModelFactory.CreateViewModel<EnableFilterExpression.Factory>().Invoke(DataContext, "Only Deleted", "Deleted = true"));
                     lstMdl.Commands.Add(ViewModelFactory.CreateViewModel<DeleteDataObjectCommand.Factory>().Invoke(DataContext));
                     lst.Add(lstMdl);
 
                     // Application
                     lstMdl = ViewModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, null, DataContext.GetQuery<Application>());
-                    lstMdl.Filter.Add(new ConstantFilterExpression("Module = @0", CurrentModule));
+                    lstMdl.Filter.Add(new ConstantValueFilterModel("Module = @0", CurrentModule));
                     lst.Add(lstMdl);
 
                     // NavigationScreens
                     lstMdl = ViewModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, null, DataContext.GetQuery<NavigationScreen>());
-                    lstMdl.Filter.Add(new ConstantFilterExpression("Module = @0", CurrentModule));
+                    lstMdl.Filter.Add(new ConstantValueFilterModel("Module = @0", CurrentModule));
                     lst.Add(lstMdl);
 
                     // ViewDescriptor
                     lstMdl = ViewModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, null, DataContext.GetQuery<ViewDescriptor>());
-                    lstMdl.Filter.Add(new ConstantFilterExpression("Module = @0", CurrentModule));
+                    lstMdl.Filter.Add(new ConstantValueFilterModel("Module = @0", CurrentModule));
                     lst.Add(lstMdl);
 
                     // ViewModelDescriptor
                     lstMdl = ViewModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, null, DataContext.GetQuery<ViewModelDescriptor>());
-                    lstMdl.Filter.Add(new ConstantFilterExpression("Module = @0", CurrentModule));
+                    lstMdl.Filter.Add(new ConstantValueFilterModel("Module = @0", CurrentModule));
                     lst.Add(lstMdl);
 
                     // ControlKinds
                     lstMdl = ViewModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, null, DataContext.GetQuery<ControlKind>());
-                    lstMdl.Filter.Add(new ConstantFilterExpression("Module = @0", CurrentModule));
+                    lstMdl.Filter.Add(new ConstantValueFilterModel("Module = @0", CurrentModule));
                     lst.Add(lstMdl);
 
                     // Relation
                     lstMdl = ViewModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, null, DataContext.GetQuery<Relation>());
                     lstMdl.EnableAutoFilter = false;
-                    lstMdl.Filter.Add(new ConstantFilterExpression("Module = @0", CurrentModule));
-                    lstMdl.Filter.Add(ViewModelFactory.CreateViewModel<ToStringFilterExpression.Factory>().Invoke(DataContext, "Name"));
+                    lstMdl.Filter.Add(new ConstantValueFilterModel("Module = @0", CurrentModule));
+                    // lstMdl.Filter.Add(ViewModelFactory.CreateViewModel<ToStringFilterExpression.Factory>().Invoke(DataContext, "Name"));
                     lst.Add(lstMdl);
 
                     var diagMdl = ViewModelFactory.CreateViewModel<DiagramViewModel.Factory>().Invoke(DataContext, CurrentModule);
