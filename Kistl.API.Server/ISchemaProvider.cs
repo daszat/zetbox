@@ -445,6 +445,7 @@ namespace Kistl.API.Server
         void BeginTransaction();
         void CommitTransaction();
         void RollbackTransaction();
+        void DblinkConnect(TableRef tblName);
 
         #endregion
 

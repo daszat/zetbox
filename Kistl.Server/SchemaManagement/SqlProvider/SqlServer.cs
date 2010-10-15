@@ -49,6 +49,11 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
             return new SqlCommand(query, CurrentConnection, CurrentTransaction);
         }
 
+        public override void DblinkConnect(TableRef tblName)
+        {
+            // nothing to do
+        }
+
         #endregion
 
         #region Type Mapping

@@ -229,6 +229,8 @@ namespace Kistl.Server.SchemaManagement
             }
         }
 
+        public abstract void DblinkConnect(TableRef tblName);
+
         public virtual void Dispose()
         {
             if (tx != null)

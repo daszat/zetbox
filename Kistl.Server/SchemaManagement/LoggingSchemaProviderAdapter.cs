@@ -83,6 +83,11 @@ namespace Kistl.Server.SchemaManagement
             _provider.RollbackTransaction();
         }
 
+        public void DblinkConnect(TableRef tblName)
+        {
+            _provider.DblinkConnect(tblName);
+        }
+
         public string DbTypeToNative(DbType type)
         {
             return _provider.DbTypeToNative(type);

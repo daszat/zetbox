@@ -58,17 +58,17 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         private readonly Dictionary<string, string> _dblinks = new Dictionary<string, string>();
 
-        private void DblinkConnect(TableRef tbl)
+        public override void DblinkConnect(TableRef tblName)
         {
-            if (tbl.Database == CurrentConnection.Database || _dblinks.ContainsKey(tbl.Database))
-                return; // happy
+            if (tblName.Database == CurrentConnection.Database || _dblinks.ContainsKey(tblName.Database))
+                return; // already connected
 
             ExecuteScalar("SELECT dblink_connect(@alias, @connstr)",
                 new Dictionary<string, object>() {
-                    { "@alias", tbl.Database},
-                    { "@connstr", String.Format("dbname={0} port={1} user={2} password={3}", tbl.Database, CurrentConnection.Port, _connectionSettings.UserName, _connectionSettings.Password) }
+                    { "@alias", tblName.Database},
+                    { "@connstr", String.Format("dbname={0} port={1} user={2} password={3}", tblName.Database, CurrentConnection.Port, _connectionSettings.UserName, _connectionSettings.Password) }
                 });
-            _dblinks[tbl.Database] = tbl.Database;
+            _dblinks[tblName.Database] = tblName.Database;
         }
 
         #endregion
@@ -1250,6 +1250,7 @@ LANGUAGE 'plpgsql' VOLATILE",
             {
                 query.AppendFormat("\n  {2} JOIN {0} {1} ON ", FormatSchemaName(join.JoinTableName), alias, join.Type.ToString().ToUpper());
             }
+
             for (int i = 0; i < join.JoinColumnName.Length; i++)
             {
                 query.AppendFormat("{0}.{1} = {2}.{3}",
@@ -1257,9 +1258,13 @@ LANGUAGE 'plpgsql' VOLATILE",
                     QuoteIdentifier(join.JoinColumnName[i].ColumnName),
                     join.FKColumnName[i].Source == ColumnRef.PrimaryTable ? "t0" : (join.FKColumnName[i].Source == ColumnRef.Local ? alias : join_alias[join.FKColumnName[i].Source]),
                     QuoteIdentifier(join.FKColumnName[i].ColumnName));
+
                 if (i < join.JoinColumnName.Length - 1)
+                {
                     query.Append(" AND ");
+                }
             }
+
             foreach (var j in join.Joins)
             {
                 AddReadJoin(query, j, join_alias, colNames, allColumnsByJoin);
@@ -1275,6 +1280,8 @@ LANGUAGE 'plpgsql' VOLATILE",
                 throw new ArgumentNullException("source");
             if (colNames == null)
                 throw new ArgumentNullException("colNames");
+
+            ExecuteNonQuery(String.Format("ALTER TABLE {0} DISABLE TRIGGER USER", FormatSchemaName(destTbl)));
 
             var cols = colNames.Select(n => QuoteIdentifier(n)).ToArray();
             var query = String.Format("COPY {0} ({1}) FROM STDIN WITH DELIMITER '{2}' NULL E'{3}'", FormatSchemaName(destTbl), String.Join(",", cols), COPY_SEPARATOR, COPY_NULL.Replace(@"\", @"\\"));
@@ -1392,13 +1399,16 @@ LANGUAGE 'plpgsql' VOLATILE",
                 }
                 dst.Close();
                 bulkCopy.End();
-                Console.WriteLine("Written: {0}", ExecuteScalar(String.Format("SELECT Count(*) FROM {0}", FormatSchemaName(destTbl))));
             }
             catch (Exception ex)
             {
                 Log.Error("Error bulk writing to destination", ex);
                 bulkCopy.Cancel("Aborting COPY operation");
                 throw;
+            }
+            finally
+            {
+                ExecuteNonQuery(String.Format("ALTER TABLE {0} ENABLE TRIGGER USER", FormatSchemaName(destTbl)));
             }
         }
 

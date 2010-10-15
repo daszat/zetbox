@@ -117,10 +117,14 @@ namespace Kistl.API.Migration
                     var m = RegExYearMonth.Match(s);
                     if (m != null && m.Groups.Count == 3)
                     {
-                        return new DateTime(
-                            int.Parse(m.Groups[1].Value),
-                            int.Parse(m.Groups[2].Value),
-                            1);
+                        var month = int.Parse(m.Groups[2].Value);
+                        if (0 < month && month < 13)
+                        {
+                            return new DateTime(
+                                int.Parse(m.Groups[1].Value),
+                                month,
+                                1);
+                        }
                     }
                     m = RegExYear.Match(s);
                     if (m != null && m.Groups.Count == 2)

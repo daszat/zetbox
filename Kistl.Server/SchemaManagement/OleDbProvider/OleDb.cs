@@ -747,5 +747,10 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
         {
             throw new NotSupportedException();
         }
+
+        void ISchemaProvider.DblinkConnect(TableRef tblNamE)
+        {
+            throw new NotSupportedException();
+        }
     }
 }
