@@ -173,7 +173,7 @@ namespace Kistl.API.Server
                 if (result.IsMethodCallExpression("OfType"))
                 {
                     var type = result.Type.FindElementTypes().First();
-                    return AddSecurityFilter(result, IftFactory(type));
+                    return AddSecurityFilter(result, Ctx.GetImplementationType(type).ToInterfaceType());
                 }
                 return result;
             }
