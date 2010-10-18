@@ -84,6 +84,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseServerDataObject_EntityFramework.cs" />
+    <Compile Include="EfGeneratorProvider.cs" />
     <Compile Include="EfProvider.cs" />
     <Compile Include="EfSerializer.cs" />
     <Compile Include="CollectionWrapperImplementations.cs" />

@@ -42,13 +42,13 @@ namespace Kistl.App.Packaging
                 using (XmlReader xml = XmlReader.Create(s, new XmlReaderSettings() { CloseInput = false }))
                 {
                     Log.Info("Loading namespaces");
-                    var namespaces = LoadModuleNamespaces(xml);
-                    if (namespaces.Count() == 0) throw new InvalidOperationException("No modules found in import file");
+                    var names = LoadModuleNames(xml);
+                    if (names.Count() == 0) throw new InvalidOperationException("No modules found in import file");
 
-                    foreach (var ns in namespaces)
+                    foreach (var name in names)
                     {
-                        Log.InfoFormat("Prefetching objects for {0}", ns);
-                        var module = ctx.GetQuery<Kistl.App.Base.Module>().FirstOrDefault(m => m.Namespace == ns);
+                        Log.InfoFormat("Prefetching objects for {0}", name);
+                        var module = ctx.GetQuery<Kistl.App.Base.Module>().FirstOrDefault(m => m.Name == name);
                         if (module != null)
                         {
                             foreach (var obj in PackagingHelper.GetMetaObjects(ctx, module))
@@ -58,7 +58,7 @@ namespace Kistl.App.Packaging
                         }
                         else
                         {
-                            Log.InfoFormat("Found new Module '{0}' in XML", ns);
+                            Log.InfoFormat("Found new Module '{0}' in XML", name);
                         }
                     }
                 }
@@ -235,14 +235,14 @@ namespace Kistl.App.Packaging
             return guids;
         }
 
-        private static IEnumerable<string> LoadModuleNamespaces(XmlReader xml)
+        private static IEnumerable<string> LoadModuleNames(XmlReader xml)
         {
             IList<string> namespaces = new List<string>();
             XPathDocument doc = new XPathDocument(xml);
             XmlNamespaceManager nsmgr = new XmlNamespaceManager(xml.NameTable);
             nsmgr.AddNamespace("KistlBase", "Kistl.App.Base");
             XPathNavigator nav = doc.CreateNavigator();
-            XPathNodeIterator it = nav.Select("//KistlBase:Module/KistlBase:Namespace", nsmgr);
+            XPathNodeIterator it = nav.Select("//KistlBase:Module/KistlBase:Name", nsmgr);
 
             while (it.MoveNext())
             {

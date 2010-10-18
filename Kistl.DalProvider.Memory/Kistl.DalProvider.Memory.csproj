@@ -68,6 +68,7 @@
     <Compile Include="ClientValueCollectionWrapper.cs" />
     <Compile Include="CollectionWrapperImplementations.cs" />
     <Compile Include="FrozenMemoryContext.cs" />
+    <Compile Include="MemoryDatabaseProvider.cs" />
     <Compile Include="MemoryImplementationTypeChecker.cs" />
     <Compile Include="MemoryProvider.cs" />
     <Compile Include="CustomPropertyDescriptor.cs" />

@@ -102,7 +102,9 @@
     <None Include="Kistl.snk" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ExampleConfig.MSSQL.xml" />
+    <Content Include="ExampleConfig.MSSQL.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="ExampleConfig.POSTGRESQL.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -9,11 +9,10 @@ namespace Kistl.DalProvider.EF
     using Autofac;
     using Autofac.Core;
     using Kistl.API;
+    using Kistl.API.Common;
     using Kistl.API.Configuration;
     using Kistl.API.Server;
     using Kistl.API.Utils;
-    using Kistl.Server.Generators;
-    using Kistl.API.Common;
 
     public interface IEFActionsManager : ICustomActionsManager { }
 
@@ -114,11 +113,6 @@ namespace Kistl.DalProvider.EF
                     var manager = args.Context.Resolve<IEFActionsManager>();
                     manager.Init(args.Context.Resolve<IFrozenContext>());
                 })
-                .SingleInstance();
-
-            moduleBuilder
-                .RegisterType<Generator.EntityFrameworkGenerator>()
-                .As<BaseDataObjectGenerator>()
                 .SingleInstance();
 
             moduleBuilder

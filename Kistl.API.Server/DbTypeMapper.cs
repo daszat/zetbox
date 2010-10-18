@@ -95,7 +95,7 @@ namespace Kistl.API.Server
             return GetSystemType(type, _propertyMapping);
         }
 
-        public static DbType GetDbType(ColumnType colType)
+        internal static DbType GetDbType(ColumnType colType)
         {
             return (DbType)colType;
         }

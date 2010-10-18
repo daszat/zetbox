@@ -57,13 +57,13 @@ namespace Kistl.Server.Service
 
                 options = new OptionSet()
                     {
-                        { "export=", "export the database to the specified xml file. Any extra argument is used as namespace", 
+                        { "export=", "export the database to the specified xml file. Any extra argument is used as modulenames", 
                             v => { if (v != null) { actions.Add((c, args) => c.Resolve<Server>().Export(v, args.ToArray())); } }
                             },
                         { "import=", "import the database from the specified xml file",
                             v => { if (v != null) { actions.Add((c, args) => c.Resolve<Server>().Import(v)); } }
                             },
-                        { "publish=", "publish the specified modules to this xml file. Any extra argument is used as namespace",
+                        { "publish=", "publish the specified modules to this xml file. Any extra argument is used as modulenames",
                             v => { if (v != null) { actions.Add((c, args) => c.Resolve<Server>().Publish(v, args.ToArray())); } }
                             },
                         { "deploy=", "deploy the database from the specified xml file",

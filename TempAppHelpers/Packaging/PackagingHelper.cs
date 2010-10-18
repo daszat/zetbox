@@ -23,7 +23,10 @@ namespace Kistl.App.Packaging
 
             AddMetaObjects(result, ctx.GetQuery<DataType>().Where(i => i.Module.ID == moduleID)
                 .OrderBy(i => i.Name).ThenBy(i => i.ExportGuid));
-            AddMetaObjects(result, ctx.GetPersistenceObjectQuery<ObjectClass_implements_Interface_RelationEntry>().Where(i => i.A.Module.ID == moduleID || i.B.Module.ID == moduleID)
+            AddMetaObjects(result, ctx.GetPersistenceObjectQuery<ObjectClass_implements_Interface_RelationEntry>()
+                // Workaround for missing Module relation on ObjectClass_implements_Interface_RelationEntry when creating KistlBase.xml
+                .Where(i => i.A != null && i.A.Module != null && i.B != null && i.B.Module != null)
+                .Where(i => i.A.Module.ID == moduleID || i.B.Module.ID == moduleID)
                 .OrderBy(i => i.A.Name).ThenBy(i => i.B.Name).ThenBy(i => i.A.ExportGuid).ThenBy(i => i.B.ExportGuid));
             AddMetaObjects(result, ctx.GetQuery<Property>().Where(i => i.Module.ID == moduleID)
                 .OrderBy(i => i.ObjectClass.Name).ThenBy(i => i.Name).ThenBy(i => i.ExportGuid));

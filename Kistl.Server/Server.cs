@@ -3,13 +3,12 @@ namespace Kistl.Server
 {
     using System;
     using System.Collections.Generic;
+    using System.Data;
     using System.DirectoryServices;
     using System.IO;
     using System.Linq;
     using System.Text;
-
     using Autofac;
-
     using Kistl.API;
     using Kistl.API.Configuration;
     using Kistl.API.Server;
@@ -18,7 +17,6 @@ namespace Kistl.Server
     using Kistl.App.Extensions;
     using Kistl.App.GUI;
     using Kistl.App.Packaging;
-    using System.Data;
 
     /// <summary>
     /// Serversteuerung
@@ -48,12 +46,12 @@ namespace Kistl.Server
             }
         }
 
-        public void Export(string file, string[] namespaces)
+        public void Export(string file, string[] names)
         {
-            using (Log.InfoTraceMethodCallFormat("file=[{0}],namespaces=[{1}]", file, String.Join(";", namespaces ?? new string[] { })))
+            using (Log.InfoTraceMethodCallFormat("file=[{0}],names=[{1}]", file, String.Join(";", names ?? new string[] { })))
             using (var subContainer = container.BeginLifetimeScope())
             {
-                Exporter.ExportFromContext(subContainer.Resolve<IKistlContext>(), file, namespaces);
+                Exporter.ExportFromContext(subContainer.Resolve<IKistlContext>(), file, names);
             }
         }
 

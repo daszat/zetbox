@@ -40,8 +40,8 @@ namespace Kistl.App.Packaging
                     var moduleList = GetModules(ctx, moduleNamespaces);
                     WriteStartDocument(xml, ctx, new Kistl.App.Base.Module[] 
                         { 
-                            ctx.GetQuery<Kistl.App.Base.Module>().First(m => m.Namespace == "Kistl.App.Base"),
-                            ctx.GetQuery<Kistl.App.Base.Module>().First(m => m.Namespace == "Kistl.App.GUI"),
+                            ctx.GetQuery<Kistl.App.Base.Module>().First(m => m.Name == "KistlBase"),
+                            ctx.GetQuery<Kistl.App.Base.Module>().First(m => m.Name == "GUI"),
                         });
 
                     var propNamespaces = new string[] { "Kistl.App.Base", "Kistl.App.GUI" };
@@ -74,23 +74,25 @@ namespace Kistl.App.Packaging
             }
         }
 
-        public static void ExportFromContext(IKistlContext ctx, string filename, string[] moduleNamespaces)
+        public static void ExportFromContext(IKistlContext ctx, string filename, string[] moduleNames)
         {
             using (FileStream fs = File.OpenWrite(filename))
             {
                 fs.SetLength(0);
-                ExportFromContext(ctx, fs, moduleNamespaces);
+                ExportFromContext(ctx, fs, moduleNames);
             }
         }
 
-        public static void ExportFromContext(IKistlContext ctx, Stream s, string[] moduleNamespaces)
+        public static void ExportFromContext(IKistlContext ctx, Stream s, string[] moduleNames)
         {
             using (Log.DebugTraceMethodCall())
             {
-                Log.InfoFormat("Starting Export for Modules {0}", string.Join(", ", moduleNamespaces));
+                Log.InfoFormat("Starting Export for Modules {0}", string.Join(", ", moduleNames));
                 using (XmlWriter xml = XmlTextWriter.Create(s, new XmlWriterSettings() { Indent = true, CloseOutput = false, Encoding = Encoding.UTF8 }))
                 {
-                    var moduleList = GetModules(ctx, moduleNamespaces);
+                    var moduleList = GetModules(ctx, moduleNames);
+                    var moduleNamespaces = moduleList.Select(m => m.Namespace).ToArray();
+
                     WriteStartDocument(xml, ctx, moduleList);
 
                     var iexpIf = ctx.GetIExportableInterface();
@@ -110,9 +112,12 @@ namespace Kistl.App.Packaging
                         foreach (var rel in ctx.GetQuery<Relation>().Where(r => r.Module.ID == moduleID)
                             .OrderBy(r => r.A.Type.Name).ThenBy(r => r.A.RoleName).ThenBy(r => r.B.Type.Name).ThenBy(r => r.B.RoleName).ThenBy(r => r.ExportGuid))
                         {
-                            if (rel.GetRelationType() != RelationType.n_m) continue;
-                            if (!rel.A.Type.ImplementsIExportable()) continue;
-                            if (!rel.B.Type.ImplementsIExportable()) continue;
+                            if (rel.GetRelationType() != RelationType.n_m)
+                                continue;
+                            if (!rel.A.Type.ImplementsIExportable())
+                                continue;
+                            if (!rel.B.Type.ImplementsIExportable())
+                                continue;
 
                             try
                             {
@@ -157,10 +162,22 @@ namespace Kistl.App.Packaging
         private static void WriteStartDocument(XmlWriter xml, IKistlContext ctx, IEnumerable<Kistl.App.Base.Module> moduleList)
         {
             xml.WriteStartDocument();
-            xml.WriteStartElement("KistlPackaging", "http://dasz.at/Kistl");
-            foreach (var module in moduleList)
+            if (moduleList.Count() == 1)
             {
-                xml.WriteAttributeString("xmlns", module.Name, null, module.Namespace);
+                // use exported module as default namespace
+                xml.WriteStartElement("KistlPackaging", "http://dasz.at/Kistl");
+                foreach (var module in moduleList)
+                {
+                    xml.WriteAttributeString("xmlns", module.Name, null, module.Namespace);
+                }
+            }
+            else
+            {
+                xml.WriteStartElement("KistlPackaging", "http://dasz.at/Kistl");
+                foreach (var module in moduleList)
+                {
+                    xml.WriteAttributeString("xmlns", module.Name, null, module.Namespace);
+                }
             }
 
             DateTime? lastChanged = new DateTime?[] { 
@@ -183,27 +200,27 @@ namespace Kistl.App.Packaging
             xml.WriteAttributeString("date", XmlConvert.ToString(lastChanged ?? DateTime.Now, XmlDateTimeSerializationMode.Utc));
         }
 
-        private static List<Kistl.App.Base.Module> GetModules(IKistlContext ctx, string[] moduleNamespaces)
+        private static List<Kistl.App.Base.Module> GetModules(IKistlContext ctx, string[] moduleNames)
         {
             var moduleList = new List<Kistl.App.Base.Module>();
-            if (moduleNamespaces.Contains("*"))
+            if (moduleNames.Contains("*"))
             {
                 moduleList.AddRange(ctx.GetQuery<Kistl.App.Base.Module>());
             }
             else
             {
-                foreach (var ns in moduleNamespaces)
+                foreach (var name in moduleNames)
                 {
-                    var module = ctx.GetQuery<Kistl.App.Base.Module>().Where(m => m.Namespace == ns).FirstOrDefault();
+                    var module = ctx.GetQuery<Kistl.App.Base.Module>().Where(m => m.Name == name).FirstOrDefault();
                     if (module == null)
                     {
-                        Log.WarnFormat("Module {0} not found", ns);
+                        Log.WarnFormat("Module {0} not found", name);
                         continue;
                     }
                     moduleList.Add(module);
                 }
             }
-            return moduleList.OrderBy(m => m.Namespace).ToList();
+            return moduleList.OrderBy(m => m.Name).ToList();
         }
         #endregion
     }

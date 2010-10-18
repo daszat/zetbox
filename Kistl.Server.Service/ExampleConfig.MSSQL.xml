@@ -24,9 +24,12 @@
       <Module>Kistl.Objects.MemoryModule, Kistl.Objects.Memory</Module>
       <Module>Kistl.DalProvider.EF.EfProvider, Kistl.DalProvider.EF</Module>
       <Module>Kistl.DalProvider.Memory.MemoryProvider, Kistl.DalProvider.Memory</Module>
-      <Module>Kistl.DalProvider.Memory.Generator.MemoryGeneratorProvider, Kistl.DalProvider.Memory.Generator</Module>
       <Module>Kistl.App.Projekte.Server.CustomServerActionsModule, Kistl.App.Projekte.Server</Module>
       <Module>Kistl.App.Projekte.Common.CustomCommonActionsModule, Kistl.App.Projekte.Common</Module>
+
+      <!-- Development/Master Server modules -->
+      <Module>Kistl.DalProvider.EF.EfGeneratorProvider, Kistl.DalProvider.EF</Module>
+      <Module>Kistl.DalProvider.Memory.Generator.MemoryGeneratorProvider, Kistl.DalProvider.Memory.Generator</Module>
     </Modules>
   </Server>
   <SourceFileLocation>

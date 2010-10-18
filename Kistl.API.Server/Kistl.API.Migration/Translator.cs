@@ -4,14 +4,14 @@ namespace Kistl.API.Migration
     using System;
     using System.Collections.Generic;
     using System.Data;
+    using System.Globalization;
     using System.Linq;
     using System.Text;
     using Kistl.API.Server;
-    using ZBox.App.SchemaMigration;
-    using System.Globalization;
     using Kistl.App.Base;
+    using ZBox.App.SchemaMigration;
 
-    public sealed class Translator
+    internal sealed class Translator
         : IDataReader
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.API.Migration.Translator");
