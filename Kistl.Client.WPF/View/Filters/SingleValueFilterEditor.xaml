@@ -6,8 +6,10 @@
              xmlns:view="clr-namespace:Kistl.Client.WPF.View.KistlBase"
              xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
              ToolTip="{Binding ToolTip}">
-    <tk:LabeledContainer Label="{Binding Label}">
-        <ContentPresenter Content="{Binding Argument}"
+    <tk:LabeledContainer Label="{Binding Label}"
+                         Required="{Binding Required}">
+        <ContentPresenter Content="{Binding Argument, Mode=OneWay}"
+                          tk:VisualTypeTemplateSelector.RequestedKind="{Binding Argument.RequestedArgumentKind, Mode=OneWay}"
                           ContentTemplateSelector="{StaticResource defaultTemplateSelector}"/>
     </tk:LabeledContainer>
 </UserControl>

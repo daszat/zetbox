@@ -89,5 +89,16 @@ namespace Kistl.Client.WPF.View
         public static readonly DependencyProperty LabelProperty =
             DependencyProperty.Register("Label", typeof(string), typeof(LabeledContainer), new UIPropertyMetadata(string.Empty));
 
+
+        public bool Required
+        {
+            get { return (bool)GetValue(RequiredProperty); }
+            set { SetValue(RequiredProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Required.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty RequiredProperty =
+            DependencyProperty.Register("Required", typeof(bool), typeof(LabeledContainer), new UIPropertyMetadata(false));
+
     }
 }

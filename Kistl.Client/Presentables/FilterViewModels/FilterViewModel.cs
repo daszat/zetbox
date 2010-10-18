@@ -71,6 +71,14 @@ namespace Kistl.Client.Presentables.FilterViewModels
                 }
             }
         }
+
+        public bool Required
+        {
+            get
+            {
+                return Filter.Required;
+            }
+        }
     }
 
     [ViewModelDescriptor("KistlBase", DefaultKind = "Kistl.App.GUI.SingleValueFilterKind", Description = "FilterViewModel for single value filters")]
@@ -81,6 +89,20 @@ namespace Kistl.Client.Presentables.FilterViewModels
         public SingleValueFilterViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, IUIFilterModel mdl)
             : base(dependencies, dataCtx, mdl)
         {
+        }
+
+        private object _requestedArgumentKind = null;
+        public object RequestedArgumentKind
+        {
+            get { return _requestedArgumentKind ?? base.RequestedKind; }
+            set
+            {
+                if (_requestedArgumentKind != value)
+                {
+                    _requestedArgumentKind = value;
+                    OnPropertyChanged("RequestedArgumentKind");
+                }                
+            }
         }
     }
 }

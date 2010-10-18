@@ -160,7 +160,7 @@ namespace Kistl.Client.Models
             base.IsServerSideFilter = false;
             base.Label = "Name";
             base.ViewModelType = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(new Guid("4ff2b6ec-a47f-431b-aa6d-d10b39f8d628")); // Kistl.Client.Presentables.FilterViewModels.SingleValueFilterViewModel;
-            base.FilterArguments.Add(new FilterArgumentConfig(new ClassValueModel<string>(base.Label, "", true, false), frozenCtx.FindPersistenceObject<ViewModelDescriptor>(new Guid("975eee82-e7e1-4a12-ab43-d2e3bc3766e4")))); // ClassValueViewModel<string>
+            base.FilterArguments.Add(new FilterArgumentConfig(new ClassValueModel<string>(base.Label, "Name of an Instance", true, false), frozenCtx.FindPersistenceObject<ViewModelDescriptor>(new Guid("975eee82-e7e1-4a12-ab43-d2e3bc3766e4")))); // ClassValueViewModel<string>
         }
 
         public override IEnumerable GetResult(IEnumerable src)
