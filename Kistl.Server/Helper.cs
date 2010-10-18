@@ -22,7 +22,7 @@ namespace Kistl.Server
         {
             Logging.Log.Error("Handling exception", ex);
 #if DEBUG
-            if (ex is System.Data.UpdateException && ex.InnerException != null)
+            if (ex is System.Data.DataException && ex.InnerException != null)
             {
                 throw new FaultException(ex.InnerException.Message);
             }

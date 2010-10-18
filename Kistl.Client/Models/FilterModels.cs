@@ -1,19 +1,19 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Dynamic;
-using System.Text;
-using Kistl.API;
-using System.Collections.ObjectModel;
-using Kistl.App.Base;
-using Kistl.App.GUI;
-using System.Data;
-using System.Collections;
-using Kistl.Client.Presentables.ValueViewModels;
-using System.ComponentModel;
 
 namespace Kistl.Client.Models
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.ComponentModel;
+    using System.Linq;
+    using System.Linq.Dynamic;
+    using System.Text;
+    using Kistl.API;
+    using Kistl.App.Base;
+    using Kistl.App.GUI;
+    using Kistl.Client.Presentables.ValueViewModels;
+    
     public class FilterEvaluator
     {
         public List<FilterModel> Filters { get; private set; }

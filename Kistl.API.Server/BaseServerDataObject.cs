@@ -4,7 +4,6 @@ namespace Kistl.API.Server
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Data.Linq.Mapping;
     using System.Globalization;
     using System.IO;
     using System.Linq;

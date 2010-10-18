@@ -6,16 +6,13 @@ namespace Kistl.Server.Tests.Security
     using System.Data.SqlClient;
     using System.Linq;
     using System.Text;
-
     using Autofac;
-
     using Kistl.API;
+    using Kistl.API.Configuration;
     using Kistl.API.Server;
     using Kistl.App.Base;
     using Kistl.App.Projekte;
-
     using NUnit.Framework;
-    using Kistl.API.Configuration;
 
     public abstract class SecurityDataFixture : AbstractServerTestFixture
     {
