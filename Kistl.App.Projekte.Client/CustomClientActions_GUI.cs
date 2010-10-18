@@ -8,6 +8,8 @@ namespace Kistl.App.GUI
     using Kistl.API;
     using Kistl.API.Client;
     using Kistl.App.Base;
+    using Kistl.Client.Models;
+    using Kistl.Client.Presentables.FilterViewModels;
     
     public static class CustomClientActions_GUI
     {
@@ -68,6 +70,15 @@ namespace Kistl.App.GUI
 
         public static void OnCreateFilterModel_SinglePropertyFilterConfiguration(Kistl.App.GUI.SinglePropertyFilterConfiguration obj, MethodReturnEventArgs<IFilterModel> e)
         {
+            var cfg = (SinglePropertyFilterConfiguration)obj.Property.FilterConfiguration;
+            var mdl = new SingleValueFilterModel();
+            mdl.Label = !string.IsNullOrEmpty(obj.Property.Label) ? obj.Property.Label : obj.Property.Name;
+            mdl.Required = cfg.Required;
+            mdl.ValueSource = FilterValueSource.FromProperty(obj.Property);
+
+            mdl.ViewModelType = cfg.ViewModelDescriptor; 
+            mdl.FilterArguments.Add(new FilterArgumentConfig(obj.Property.GetDetachedValueModel(), /*cfg.ArgumentViewModel ?? */ obj.Property.ValueModelDescriptor));
+            e.Result = mdl;
         }
 
         public static readonly Guid ViewModelDescriptor_SingleValueFilterViewModel = new Guid("4FF2B6EC-A47F-431B-AA6D-D10B39F8D628");

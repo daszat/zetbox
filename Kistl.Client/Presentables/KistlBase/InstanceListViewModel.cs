@@ -187,17 +187,7 @@ namespace Kistl.Client.Presentables.KistlBase
                             // Add Property filter expressions
                             foreach (var prop in t.Properties.Where(p => p.FilterConfiguration != null))
                             {
-                                var cfg = prop.FilterConfiguration;
-                                var mdl = /* cfg.GetFilterModel(prop) */ new SingleValueFilterModel();
-                                mdl.Label = !string.IsNullOrEmpty(prop.Label) ? prop.Label : prop.Name;
-                                mdl.Required = cfg.Required;
-                                mdl.ValueSource = FilterValueSource.FromProperty(prop);
-
-                                //mdl.ViewModelType = cfg.ViewModelDescriptor != null ? cfg.ViewModelDescriptor.ViewModelRef.AsType(true) : typeof(SingleValueFilterViewModel); // DataContext.FindPersistenceObject<ViewModelDescriptor>(new Guid("")); 
-                                mdl.ViewModelType = FrozenContext.FindPersistenceObject<ViewModelDescriptor>(new Guid("4ff2b6ec-a47f-431b-aa6d-d10b39f8d628")); // Kistl.Client.Presentables.FilterViewModels.SingleValueFilterViewModel;
-                                mdl.FilterArguments.Add( new FilterArgumentConfig(prop.GetDetachedValueModel(), /*cfg.ArgumentViewModel ?? */ prop.ValueModelDescriptor));
-
-                                _filter.Add(mdl);
+                                _filter.Add(prop.FilterConfiguration.CreateFilterModel());
                             }
                             if (t is ObjectClass)
                             {
