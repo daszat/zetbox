@@ -23,6 +23,12 @@ namespace Kistl.Client.Models
         }
     }
 
+    public enum FilterOperators
+    {
+        Equals = 1,
+        Contains = 2,
+    }
+
     public sealed class FilterArgumentConfig
     {
         public FilterArgumentConfig(IValueModel value, ViewModelDescriptor desc)
@@ -172,9 +178,49 @@ namespace Kistl.Client.Models
 
     public class SingleValueFilterModel : FilterModel
     {
+        public SingleValueFilterModel()
+        {
+            Operator = FilterOperators.Equals;
+        }
+
+        public FilterOperators Operator { get; set; }
+
         protected override string GetPredicate()
         {
-            return string.Format("{0} = @0", ValueSource.Expression);
+            switch (Operator)
+            {
+                case FilterOperators.Equals:
+                    return string.Format("{0} = @0", ValueSource.Expression);
+                case FilterOperators.Contains:
+                    return string.Format("{0}.ToLower().Contains(@0.ToLower())", ValueSource.Expression);
+                default:
+                    throw new InvalidOperationException("Operator is not defined");
+            }
+        }
+    }
+
+    public class RangeFilterModel : FilterModel
+    {
+    }
+
+    /// <summary>
+    /// Config -> first ObjectClassFilterConfiguration
+    /// </summary>
+    public class OptionalPredicateFilterModel : FilterModel
+    {
+        public string PredicateFromConfig { get; set; }
+
+        protected override string GetPredicate()
+        {
+            return PredicateFromConfig;
+        }
+
+        public override bool Enabled
+        {
+            get
+            {
+                return (bool)FilterArgument.Value.GetUntypedValue() == true;
+            }
         }
     }
 

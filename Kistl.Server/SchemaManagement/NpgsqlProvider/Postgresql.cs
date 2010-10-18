@@ -346,7 +346,7 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
                         FROM pg_attribute
                             JOIN pg_class ON (attrelid = pg_class.oid)
                             JOIN pg_namespace ON (relnamespace = pg_namespace.oid)
-                        WHERE nspname = @schema AND relname = @table and relkind = 'r' AND attnum >= 0",
+                        WHERE nspname = @schema AND relname = @table and relkind = 'r' AND attnum >= 0 AND NOT attisdropped",
                     new Dictionary<string, object>() {
                         { "@schema", tbl.Schema },
                         { "@table", tbl.Name }
@@ -365,7 +365,7 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
                         JOIN pg_class c ON (a.attrelid = c.oid)
                         JOIN pg_namespace n ON (c.relnamespace = n.oid)
                         JOIN pg_type t ON (a.atttypid = t.oid)
-                    WHERE n.nspname = @schema AND c.relname = @table and c.relkind = 'r' AND a.attnum >= 0",
+                    WHERE n.nspname = @schema AND c.relname = @table and c.relkind = 'r' AND a.attnum >= 0 AND NOT attisdropped",
                 new Dictionary<string, object>() {
                     { "@schema", tblName.Schema },
                     { "@table", tblName.Name }
@@ -554,10 +554,14 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         #region Constraint and Index Management
 
-        public override bool CheckFKConstraintExists(string fkName)
+        public override bool CheckFKConstraintExists(TableRef tblName, string fkName)
         {
-            return (bool)ExecuteScalar("SELECT COUNT(*) > 0 FROM pg_constraint WHERE conname = @constraint_name AND contype = 'f'",
+            if (tblName == null) throw new ArgumentNullException("tblName");
+            if (string.IsNullOrEmpty(fkName)) throw new ArgumentNullException("fkName");
+
+            return (bool)ExecuteScalar("SELECT COUNT(*) > 0 FROM pg_constraint JOIN pg_namespace n ON (connamespace = n.oid) WHERE n.nspname = @schema AND conname = @constraint_name AND contype = 'f'",
                 new Dictionary<string, object>(){
+                    { "@schema", tblName.Schema },
                     { "@constraint_name", fkName }
                 });
         }
@@ -593,10 +597,15 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
                 onDeleteCascade ? @" ON DELETE CASCADE" : String.Empty));
         }
 
-        public override void RenameFKConstraint(string oldConstraintName, string newConstraintName)
+        public override void RenameFKConstraint(TableRef tblName, string oldConstraintName, string newConstraintName)
         {
+            if (tblName == null) throw new ArgumentNullException("tblName");
+            if (string.IsNullOrEmpty(oldConstraintName)) throw new ArgumentNullException("oldConstraintName");
+            if (string.IsNullOrEmpty(newConstraintName)) throw new ArgumentNullException("newConstraintName");
+
             ExecuteNonQuery(String.Format(
-                "ALTER INDEX {0} RENAME TO {1}",
+                "ALTER INDEX {0}.{1} RENAME TO {2}",
+                QuoteIdentifier(tblName.Schema),
                 QuoteIdentifier(oldConstraintName),
                 QuoteIdentifier(newConstraintName)));
         }

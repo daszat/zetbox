@@ -42,7 +42,7 @@ this.WriteObjects("		\r\n");
 this.WriteObjects("		public IKistlContext Context { get; private set; }\r\n");
 this.WriteObjects("		\r\n");
 #line 29 "P:\Kistl\Kistl.Server\Generators\Interfaces\Repositories\Repository.cst"
-foreach(var cls in module.DataTypes.OfType<ObjectClass>())
+foreach(var cls in ctx.GetQuery<ObjectClass>().Where(i => i.Module == module))
 	{
 
 #line 32 "P:\Kistl\Kistl.Server\Generators\Interfaces\Repositories\Repository.cst"

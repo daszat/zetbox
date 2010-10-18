@@ -105,4 +105,30 @@ namespace Kistl.Client.Presentables.FilterViewModels
             }
         }
     }
+
+
+    [ViewModelDescriptor("KistlBase", DefaultKind = "Kistl.App.GUI.RangeFilterKind", Description = "FilterViewModel for range value filters")]
+    public class RangeFilterViewModel : FilterViewModel
+    {
+        public new delegate RangeFilterViewModel Factory(IKistlContext dataCtx, IUIFilterModel mdl);
+
+        public RangeFilterViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, IUIFilterModel mdl)
+            : base(dependencies, dataCtx, mdl)
+        {
+        }
+
+        private object _requestedArgumentKind = null;
+        public object RequestedArgumentKind
+        {
+            get { return _requestedArgumentKind ?? base.RequestedKind; }
+            set
+            {
+                if (_requestedArgumentKind != value)
+                {
+                    _requestedArgumentKind = value;
+                    OnPropertyChanged("RequestedArgumentKind");
+                }
+            }
+        }
+    }
 }

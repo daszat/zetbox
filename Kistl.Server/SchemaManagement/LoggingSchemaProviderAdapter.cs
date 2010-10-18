@@ -148,9 +148,9 @@ namespace Kistl.Server.SchemaManagement
             return _provider.GetTableColumns(tblName);
         }
 
-        public bool CheckFKConstraintExists(string fkName)
+        public bool CheckFKConstraintExists(TableRef tblName, string fkName)
         {
-            return _provider.CheckFKConstraintExists(fkName);
+            return _provider.CheckFKConstraintExists(tblName, fkName);
         }
 
         public bool CheckIndexExists(TableRef tblName, string idxName)
@@ -281,9 +281,9 @@ namespace Kistl.Server.SchemaManagement
             _provider.RenameColumn(tblName, oldColName, newColName);
         }
 
-        public void RenameFKConstraint(string oldConstraintName, string newConstraintName)
+        public void RenameFKConstraint(TableRef tblName, string oldConstraintName, string newConstraintName)
         {
-            _provider.RenameFKConstraint(oldConstraintName, newConstraintName);
+            _provider.RenameFKConstraint(tblName, oldConstraintName, newConstraintName);
         }
 
         public void TruncateTable(TableRef tblName)

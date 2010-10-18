@@ -107,9 +107,10 @@ namespace Kistl.Server.SchemaManagement
             {
                 Log.DebugFormat("Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.Name);
                 string assocName = Construct.InheritanceAssociationName(objClass.BaseObjectClass, objClass);
-                if (!db.CheckFKConstraintExists(assocName))
+                var tblName = db.GetQualifiedTableName(objClass.TableName);
+                if (!db.CheckFKConstraintExists(tblName, assocName))
                 {
-                    Log.WarnFormat("FK Contraint to BaseClass is missing on Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.Name);
+                    Log.WarnFormat("FK Constraint to BaseClass is missing on Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.Name);
                     if (repair)
                     {
                         Case.DoNewObjectClassInheritance(objClass);
@@ -291,7 +292,7 @@ namespace Kistl.Server.SchemaManagement
                 string idxName = Construct.IndexName(tblName.Name, colName);
 
                 CheckColumn(tblName, Construct.ForeignKeyColumnName(otherEnd), System.Data.DbType.Int32, 0, 0, otherEnd.IsNullable(), null);
-                if (!db.CheckFKConstraintExists(assocName))
+                if (!db.CheckFKConstraintExists(tblName, assocName))
                 {
                     Log.WarnFormat("FK Constraint '{0}' is missing", assocName);
                     if (repair)
@@ -340,7 +341,7 @@ namespace Kistl.Server.SchemaManagement
 
             CheckColumn(tblName, colName, System.Data.DbType.Int32, 0, 0, otherEnd.IsNullable(), null);
 
-            if (!db.CheckFKConstraintExists(assocName))
+            if (!db.CheckFKConstraintExists(tblName, assocName))
             {
                 Log.WarnFormat("FK Constraint '{0}' is missing", assocName);
                 if (repair)
@@ -389,7 +390,7 @@ namespace Kistl.Server.SchemaManagement
             CheckColumn(tblName, fkAName, System.Data.DbType.Int32, 0, 0, false, null);
             CheckColumn(tblName, fkBName, System.Data.DbType.Int32, 0, 0, false, null);
 
-            if (!db.CheckFKConstraintExists(assocAName))
+            if (!db.CheckFKConstraintExists(tblName, assocAName))
             {
                 Log.WarnFormat("FK Constraint '{0}' for A is missing for [{1}]", assocAName, assocName);
                 if (repair)
@@ -397,7 +398,7 @@ namespace Kistl.Server.SchemaManagement
                     db.CreateFKConstraint(tblName, db.GetQualifiedTableName(rel.A.Type.TableName), fkAName, assocAName, true);
                 }
             }
-            if (!db.CheckFKConstraintExists(assocBName))
+            if (!db.CheckFKConstraintExists(tblName, assocBName))
             {
                 Log.WarnFormat("FK Constraint '{0}' for B is missing for [{1}]", assocBName, assocName);
                 if (repair)
@@ -560,7 +561,7 @@ namespace Kistl.Server.SchemaManagement
                     {
                         Log.WarnFormat("Index Column '{0}' exists but property is not indexed", valPropIndexName);
                     }
-                    if (!db.CheckFKConstraintExists(assocName))
+                    if (!db.CheckFKConstraintExists(tblName, assocName))
                     {
                         Log.WarnFormat("FK Constraint is missing", prop.Name);
                         if (repair)
@@ -618,7 +619,7 @@ namespace Kistl.Server.SchemaManagement
                     {
                         Log.WarnFormat("Index Column '{0}' exists but property is not indexed", valPropIndexName);
                     }
-                    if (!db.CheckFKConstraintExists(assocName))
+                    if (!db.CheckFKConstraintExists(tblName, assocName))
                     {
                         Log.WarnFormat("FK Constraint is missing", prop.Name);
                         if (repair)

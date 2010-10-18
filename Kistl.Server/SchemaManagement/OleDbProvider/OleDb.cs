@@ -471,7 +471,7 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
         }
 
         /// <summary>Not supported.</summary>
-        bool ISchemaProvider.CheckFKConstraintExists(string fkName)
+        bool ISchemaProvider.CheckFKConstraintExists(TableRef tblName, string fkName)
         {
             throw new NotSupportedException();
         }
@@ -669,7 +669,7 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
         }
 
         /// <summary>Not supported.</summary>
-        void ISchemaProvider.RenameFKConstraint(string oldConstraintName, string newConstraintName)
+        void ISchemaProvider.RenameFKConstraint(TableRef tblName, string oldConstraintName, string newConstraintName)
         {
             throw new NotSupportedException();
         }

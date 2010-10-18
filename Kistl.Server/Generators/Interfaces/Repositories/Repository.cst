@@ -26,7 +26,7 @@ namespace <%= module.Namespace %>
 		public IKistlContext Context { get; private set; }
 		
 <%
-	foreach(var cls in module.DataTypes.OfType<ObjectClass>())
+	foreach(var cls in ctx.GetQuery<ObjectClass>().Where(i => i.Module == module))
 	{
 %>
 		/// <summary>List of all <%= cls.Name %></summary>

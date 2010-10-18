@@ -515,10 +515,10 @@ namespace Kistl.API.Server
 
         #region Constraint and Index Management
 
-        bool CheckFKConstraintExists(string fkName);
+        bool CheckFKConstraintExists(TableRef tblName, string fkName);
         IEnumerable<TableConstraintNamePair> GetFKConstraintNames();
         void CreateFKConstraint(TableRef tblName, TableRef refTblName, string colName, string constraintName, bool onDeleteCascade);
-        void RenameFKConstraint(string oldConstraintName, string newConstraintName);
+        void RenameFKConstraint(TableRef tblName, string oldConstraintName, string newConstraintName);
         void DropFKConstraint(TableRef tblName, string fkName);
 
         bool CheckIndexExists(TableRef tblName, string idxName);

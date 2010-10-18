@@ -78,6 +78,10 @@ namespace Kistl.App.GUI
 
             mdl.ViewModelType = cfg.ViewModelDescriptor; 
             mdl.FilterArguments.Add(new FilterArgumentConfig(obj.Property.GetDetachedValueModel(), /*cfg.ArgumentViewModel ?? */ obj.Property.ValueModelDescriptor));
+            if (obj.Property is StringProperty)
+            {
+                mdl.Operator = FilterOperators.Contains;
+            }
             e.Result = mdl;
         }
 

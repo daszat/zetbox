@@ -542,11 +542,14 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
 
         #region Constraint and Index Management
 
-        public override bool CheckFKConstraintExists(string fkName)
+        public override bool CheckFKConstraintExists(TableRef tblName, string fkName)
         {
+            if (tblName == null) throw new ArgumentNullException("tblName");
+            if (string.IsNullOrEmpty(fkName)) throw new ArgumentNullException("fkName");
+
             return (int)ExecuteScalar("SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(@constraint_name) AND type IN (N'F')",
                 new Dictionary<string, object>() {
-                    { "@constraint_name", fkName },
+                    { "@constraint_name", QuoteIdentifier(tblName.Schema) + "." + QuoteIdentifier(fkName) },
                 }) > 0;
         }
 
@@ -577,10 +580,14 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
                    constraintName));
         }
 
-        public override void RenameFKConstraint(string oldConstraintName, string newConstraintName)
+        public override void RenameFKConstraint(TableRef tblName, string oldConstraintName, string newConstraintName)
         {
+            if (tblName == null) throw new ArgumentNullException("tblName");
+            if (string.IsNullOrEmpty(oldConstraintName)) throw new ArgumentNullException("oldConstraintName");
+            if (string.IsNullOrEmpty(newConstraintName)) throw new ArgumentNullException("newConstraintName");
+
             // Do not qualify new name as it will be part of the name
-            ExecuteNonQuery(string.Format("EXEC sp_rename '[{0}]', '{1}', 'OBJECT'", oldConstraintName, newConstraintName));
+            ExecuteNonQuery(string.Format("EXEC sp_rename '[{0}].[{1}]', '{2}', 'OBJECT'", tblName.Schema, oldConstraintName, newConstraintName));
         }
 
         public override bool CheckIndexExists(TableRef tblName, string idxName)
