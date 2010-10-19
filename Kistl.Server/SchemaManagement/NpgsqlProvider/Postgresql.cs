@@ -834,7 +834,7 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
             TableRef tblName, string colName)
         {
             ExecuteNonQuery(String.Format(
-                "UPDATE dest SET dest.{3} = src.{1} FROM {2} dest INNER JOIN {0} src ON dest.{4} = src.{4}",
+                "UPDATE {2} dest SET {3} = src.{1} FROM {0} src WHERE dest.{4} = src.{4}",
                 FormatSchemaName(srcTblName),     // 0
                 QuoteIdentifier(srcColName),    // 1
                 FormatSchemaName(tblName),        // 2
@@ -847,7 +847,7 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
             TableRef tblName, string colName)
         {
             ExecuteNonQuery(String.Format(
-                "UPDATE dest SET dest.{3} = src.{4} FROM {2} dest INNER JOIN {0} src ON dest.{4} = src.{1}",
+                "UPDATE {2} dest SET {3} = src.{4} FROM {0} src WHERE dest.{4} = src.{1}",
                 FormatSchemaName(srcTblName), // 0
                 QuoteIdentifier(srcColName), // 1
                 FormatSchemaName(tblName),    // 2
@@ -876,7 +876,7 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
             string srcFkColName)
         {
             ExecuteNonQuery(String.Format(
-                "UPDATE dest SET dest.{3} = src.{1} FROM {2} dest INNER JOIN {0} src ON src.{4} = dest.{5}",
+                "UPDATE {2} dest SET {3} = src.{1} FROM {0} src WHERE src.{4} = dest.{5}",
                 FormatSchemaName(srcTblName), // 0
                 QuoteIdentifier(srcColName), // 1
                 FormatSchemaName(tblName),    // 2
