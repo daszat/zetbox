@@ -208,17 +208,16 @@ namespace Kistl.Client.Models
     /// </summary>
     public class OptionalPredicateFilterModel : FilterModel
     {
-        public string PredicateFromConfig { get; set; }
-
         protected override string GetPredicate()
         {
-            return PredicateFromConfig;
+            return ValueSource.Expression;
         }
 
         public override bool Enabled
         {
             get
             {
+                if (FilterArgument.Value == null) return false;
                 return (bool)FilterArgument.Value.GetUntypedValue() == true;
             }
         }

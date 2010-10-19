@@ -131,4 +131,15 @@ namespace Kistl.Client.Presentables.FilterViewModels
             }
         }
     }
+
+    [ViewModelDescriptor("KistlBase", DefaultKind = "Kistl.App.GUI.OptionalPredicateFilterKind", Description = "FilterViewModel for optional predicate object filters")]
+    public class OptionalPredicateFilterViewModel : FilterViewModel
+    {
+        public new delegate OptionalPredicateFilterViewModel Factory(IKistlContext dataCtx, IUIFilterModel mdl);
+
+        public OptionalPredicateFilterViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, IUIFilterModel mdl)
+            : base(dependencies, dataCtx, mdl)
+        {
+        }
+    }
 }

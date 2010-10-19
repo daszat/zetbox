@@ -129,6 +129,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\Filters\OptionalPredicateFilterEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Filters\RangeFilterEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\Filters\SingleValueFilterEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -404,6 +412,12 @@
     </Compile>
     <Compile Include="View\ErrorListView.xaml.cs">
       <DependentUpon>ErrorListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Filters\OptionalPredicateFilterEditor.xaml.cs">
+      <DependentUpon>OptionalPredicateFilterEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Filters\RangeFilterEditor.xaml.cs">
+      <DependentUpon>RangeFilterEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Filters\SingleValueFilterEditor.xaml.cs">
       <DependentUpon>SingleValueFilterEditor.xaml</DependentUpon>

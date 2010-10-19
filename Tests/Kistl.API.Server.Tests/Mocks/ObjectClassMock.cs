@@ -381,6 +381,10 @@ namespace Kistl.API.Server.Mocks
             }
         }
 
+        public ICollection<ObjectClassFilterConfiguration> FilterConfigurations
+        {
+            get { throw new NotImplementedException(); }
+        }
 
         #endregion
 

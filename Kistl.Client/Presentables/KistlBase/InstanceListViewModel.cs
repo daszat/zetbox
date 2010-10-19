@@ -183,7 +183,12 @@ namespace Kistl.Client.Presentables.KistlBase
                         var t = _type;
                         while (t != null)
                         {
-                            var tmp = new List<object>();
+                            // Add ObjectClass filter expressions
+                            foreach (var cfc in t.FilterConfigurations)
+                            {
+                                _filter.Add(cfc.CreateFilterModel());
+                            }
+
                             // Add Property filter expressions
                             foreach (var prop in t.Properties.Where(p => p.FilterConfiguration != null))
                             {
