@@ -8,8 +8,29 @@
              ToolTip="{Binding ToolTip}">
     <tk:LabeledContainer Label="{Binding Label}"
                          Required="{Binding Required}">
-        <ContentPresenter Content="{Binding Argument, Mode=OneWay}"
-                          tk:VisualTypeTemplateSelector.RequestedKind="{Binding Argument.RequestedArgumentKind, Mode=OneWay}"
-                          ContentTemplateSelector="{StaticResource defaultTemplateSelector}"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="3*" />
+            </Grid.ColumnDefinitions>
+            <ComboBox Grid.Column="0"
+                      ItemsSource="{Binding FromOperators}"
+                      SelectedItem="{Binding FromOperator}"
+                      DisplayMemberPath="Name" />
+            <ContentPresenter Grid.Column="1"
+                              Content="{Binding From, Mode=OneWay}"
+                              tk:VisualTypeTemplateSelector.RequestedKind="{Binding RequestedArgumentKind, Mode=OneWay}"
+                              ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
+            <ComboBox Grid.Column="2"
+                      ItemsSource="{Binding ToOperators}"
+                      SelectedItem="{Binding ToOperator}"
+                      DisplayMemberPath="Name" />
+            <ContentPresenter Grid.Column="3"
+                              Content="{Binding To, Mode=OneWay}"
+                              tk:VisualTypeTemplateSelector.RequestedKind="{Binding RequestedArgumentKind, Mode=OneWay}"
+                              ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
+        </Grid>
     </tk:LabeledContainer>
 </UserControl>

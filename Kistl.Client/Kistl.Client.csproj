@@ -91,11 +91,15 @@
     <Compile Include="Models\MethodResultModel.cs" />
     <Compile Include="Models\PropertyValueModel.cs" />
     <Compile Include="Models\ValueModel.cs" />
+    <Compile Include="NamedObjects.cs" />
     <Compile Include="Presentables\ActionViewModel.cs" />
     <Compile Include="Presentables\AsyncList.cs" />
     <Compile Include="Presentables\CacheDebuggerViewModel.cs" />
     <Compile Include="Models\ColumnDisplayModel.cs" />
     <Compile Include="Presentables\FilterViewModels\FilterViewModel.cs" />
+    <Compile Include="Presentables\FilterViewModels\OptionalPredicateFilterViewModel.cs" />
+    <Compile Include="Presentables\FilterViewModels\RangeFilterViewModel.cs" />
+    <Compile Include="Presentables\FilterViewModels\SingleValueFilterViewModel.cs" />
     <Compile Include="Presentables\ParameterInputTaskViewModel.cs" />
     <Compile Include="Presentables\ValueViewModels\CompoundObjectPropertyViewModel.cs" />
     <Compile Include="Presentables\CompoundObjectViewModel.cs" />

@@ -10,16 +10,15 @@ using Kistl.App.Extensions;
 using System.Diagnostics;
 using Kistl.API.Utils;
 using Kistl.App.GUI;
+using Kistl.Client;
 
 namespace Kistl.App.Base
 {
     public static partial class CustomClientActions_KistlBase
     {
-        internal static readonly Guid DataObjectViewModelDescriptor = new Guid("d8e95ac5-d46a-4dfa-a574-12ea299eadc4");
-
         public static void OnCreated_ObjectClass(ObjectClass obj)
         {
-            obj.DefaultViewModelDescriptor = obj.Context.FindPersistenceObject<ViewModelDescriptor>(DataObjectViewModelDescriptor);
+            obj.DefaultViewModelDescriptor = obj.Context.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_DataObjectViewModel);
         }
 
         public static void OnGetDataType_DataType(DataType obj, MethodReturnEventArgs<System.Type> e)

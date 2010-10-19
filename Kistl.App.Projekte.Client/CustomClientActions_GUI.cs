@@ -10,6 +10,7 @@ namespace Kistl.App.GUI
     using Kistl.App.Base;
     using Kistl.Client.Models;
     using Kistl.Client.Presentables.FilterViewModels;
+    using Kistl.Client;
 
     public class CustomClientActions_GUI
     {
@@ -76,10 +77,6 @@ namespace Kistl.App.GUI
         }
 
         #region Filter
-        public static readonly Guid ViewModelDescriptor_SingleValueFilterViewModel = new Guid("4FF2B6EC-A47F-431B-AA6D-D10B39F8D628");
-        public static readonly Guid ViewModelDescriptor_OptionalPredicateFilterViewModel = new Guid("29550c38-e240-46e4-b856-c7066d8395eb");
-        public static readonly Guid ViewModelDescriptor_RangeFilterViewModel = new Guid("47ea2958-1036-4fe2-afb5-84568651d817");
-        public static readonly Guid ViewModelDescriptor_NullableValuePropertyModel_Bool = new Guid("09d1f453-d0d9-429e-88e7-e84b33de7c2e");
 
         #region SinglePropertyFilterConfiguration
         public static void OnCreateFilterModel_SinglePropertyFilterConfiguration(Kistl.App.GUI.SinglePropertyFilterConfiguration obj, MethodReturnEventArgs<IFilterModel> e)
@@ -100,7 +97,7 @@ namespace Kistl.App.GUI
 
         public static void OnNotifyCreated_SinglePropertyFilterConfiguration(Kistl.App.GUI.SinglePropertyFilterConfiguration obj)
         {
-            obj.ViewModelDescriptor = obj.Context.FindPersistenceObject<ViewModelDescriptor>(ViewModelDescriptor_SingleValueFilterViewModel);
+            obj.ViewModelDescriptor = obj.Context.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_SingleValueFilterViewModel);
         }
         #endregion
 
@@ -116,14 +113,14 @@ namespace Kistl.App.GUI
 
             var valueMdl = new NullableStructValueModel<bool>("", "", false, false);
             valueMdl.Value = false;
-            mdl.FilterArguments.Add(new FilterArgumentConfig(valueMdl, /*cfg.ArgumentViewModel ?? */ ForzenContext.FindPersistenceObject<ViewModelDescriptor>(ViewModelDescriptor_NullableValuePropertyModel_Bool)));
+            mdl.FilterArguments.Add(new FilterArgumentConfig(valueMdl, /*cfg.ArgumentViewModel ?? */ ForzenContext.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableValuePropertyModel_Bool)));
             
             e.Result = mdl;
         }
 
         public static void OnNotifyCreated_OptionalPredicateFilterConfiguration(Kistl.App.GUI.OptionalPredicateFilterConfiguration obj)
         {
-            obj.ViewModelDescriptor = obj.Context.FindPersistenceObject<ViewModelDescriptor>(ViewModelDescriptor_OptionalPredicateFilterViewModel);
+            obj.ViewModelDescriptor = obj.Context.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_OptionalPredicateFilterViewModel);
         }
 
         #endregion
@@ -144,7 +141,7 @@ namespace Kistl.App.GUI
 
         public static void OnNotifyCreated_RangeFilterConfiguration(Kistl.App.GUI.RangeFilterConfiguration obj)
         {
-            obj.ViewModelDescriptor = obj.Context.FindPersistenceObject<ViewModelDescriptor>(ViewModelDescriptor_RangeFilterViewModel);
+            obj.ViewModelDescriptor = obj.Context.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_RangeFilterViewModel);
         }
         #endregion
 

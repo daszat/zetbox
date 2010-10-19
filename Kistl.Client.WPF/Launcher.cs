@@ -44,7 +44,7 @@ namespace Kistl.Client.WPF
                 initialWorkspace = mdlFactory.CreateViewModel<WorkspaceViewModel.Factory>().Invoke(ctxFactory.Invoke());
             }
 
-            ControlKind launcher = frozenCtx.FindPersistenceObject<ControlKind>(new Guid("90D5FF7F-0C82-4278-BB8D-49C240F6BC2C"));
+            ControlKind launcher = frozenCtx.FindPersistenceObject<ControlKind>(NamedObjects.ControlKind_Kistl_App_GUI_LauncherKind);
             mdlFactory.ShowModel(initialWorkspace, launcher, true);
 
             var ctxDebugger = mdlFactory.CreateViewModel<KistlDebuggerAsViewModel.Factory>().Invoke(ctxFactory());

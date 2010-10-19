@@ -27,6 +27,13 @@ namespace Kistl.Client.Models
     {
         Equals = 1,
         Contains = 2,
+        Less = 3,
+        LessOrEqual = 4,
+        Greater = 5,
+        GreaterOrEqual = 6,
+        Not = 7,
+        IsNull = 8,
+        IsNotNull = 9,
     }
 
     public sealed class FilterArgumentConfig
@@ -165,8 +172,11 @@ namespace Kistl.Client.Models
             if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
             base.IsServerSideFilter = false;
             base.Label = "Name";
-            base.ViewModelType = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(new Guid("4ff2b6ec-a47f-431b-aa6d-d10b39f8d628")); // Kistl.Client.Presentables.FilterViewModels.SingleValueFilterViewModel;
-            base.FilterArguments.Add(new FilterArgumentConfig(new ClassValueModel<string>(base.Label, "Name of an Instance", true, false), frozenCtx.FindPersistenceObject<ViewModelDescriptor>(new Guid("975eee82-e7e1-4a12-ab43-d2e3bc3766e4")))); // ClassValueViewModel<string>
+            base.ViewModelType = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_SingleValueFilterViewModel);
+            base.FilterArguments.Add(new FilterArgumentConfig(
+                new ClassValueModel<string>(base.Label, "Name of an Instance", true, false), 
+                frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_ReferencePropertyModel_String)
+            )); // ClassValueViewModel<string>
         }
 
         public override IEnumerable GetResult(IEnumerable src)
@@ -201,6 +211,125 @@ namespace Kistl.Client.Models
 
     public class RangeFilterModel : FilterModel
     {
+        protected override string GetPredicate()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            var hasFrom = From.GetUntypedValue() != null;
+            var hasTo = To.GetUntypedValue() != null;
+
+            if (hasFrom)
+            {
+                sb.Append(GetPredicate(FromOperator, "@0"));
+            }
+
+            if (hasFrom && hasTo)
+            {
+                sb.Append(" AND ");
+            }
+
+            if (hasTo)
+            {
+                sb.Append(GetPredicate(ToOperator, "@1"));
+            }
+
+            return sb.ToString();
+        }
+
+        private string GetPredicate(FilterOperators op, string arg)
+        {
+            if (op == FilterOperators.Contains)
+            {
+                return string.Format("{0}.ToLower().Contains({1}.ToLower())", ValueSource.Expression, arg);
+            }
+            else if (op == FilterOperators.IsNull)
+            {
+                return string.Format("{0} is null", arg);
+            }
+            else if (op == FilterOperators.IsNotNull)
+            {
+                return string.Format("{0} is not null", arg);
+            }
+            else
+            {
+                return string.Format("{0} {1} {2}", ValueSource.Expression, GetOperatorExpression(op), arg);
+            }
+        }
+
+        private string GetOperatorExpression(FilterOperators op)
+        {
+            switch (op)
+            {
+                case FilterOperators.Equals:
+                    return "=";
+                case FilterOperators.Less:
+                    return "<";
+                case FilterOperators.LessOrEqual:
+                    return "<=";
+                case FilterOperators.Greater:
+                    return ">";
+                case FilterOperators.GreaterOrEqual:
+                    return ">=";
+                case FilterOperators.Not:
+                    return "!=";
+                case FilterOperators.IsNull:
+                    return "is null";
+                case FilterOperators.IsNotNull:
+                    return "is not null";
+                default:
+                    throw new ArgumentOutOfRangeException("op");
+            }
+        }
+
+        private FilterOperators _fromOperator = FilterOperators.GreaterOrEqual;
+        public FilterOperators FromOperator
+        {
+            get
+            {
+                return _fromOperator;
+            }
+            set
+            {
+                if (_fromOperator != value)
+                {
+                    _fromOperator = value;
+                    OnFilterChanged();
+                }
+            }
+        }
+
+        private FilterOperators _toOperator = FilterOperators.LessOrEqual;
+        public FilterOperators ToOperator
+        {
+            get
+            {
+                return _toOperator;
+            }
+            set
+            {
+                if (_toOperator != value)
+                {
+                    _toOperator = value;
+                    OnFilterChanged();
+                }
+            }
+        }
+
+        public IValueModel From
+        {
+            get
+            {
+                return FilterArguments[0].Value;
+            }
+        }
+
+        public IValueModel To
+        {
+            get
+            {
+                return FilterArguments[1].Value;
+            }
+        }
     }
 
     /// <summary>
@@ -284,26 +413,4 @@ namespace Kistl.Client.Models
         
         #endregion
     }
-
-
-    //public class CollectionConstantFilterModel : FilterModel
-    //{
-    //    public CollectionConstantFilterModel(Property prop)
-    //        : base()
-    //    {
-    //    }
-
-    //    public bool Enabled { get; set; }
-
-    //    public int? MinCount { get; set; }
-    //    public int? MaxCount { get; set; }
-
-    //    public ObservableCollection<IDataObject> Contains { get; private set; }
-    //    public ObservableCollection<IDataObject> DoesNotContain { get; private set; }
-
-    //    public string GetPredicate()
-    //    {
-    //        return String.Format("...");
-    //    }
-    //}
 }

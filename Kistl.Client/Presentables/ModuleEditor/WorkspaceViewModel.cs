@@ -79,7 +79,6 @@ namespace Kistl.Client.Presentables.ModuleEditor
                     // Object Classes
                     lstMdl = ViewModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, null, DataContext.GetQuery<ObjectClass>());
                     lstMdl.Filter.Add(new ConstantValueFilterModel("Module = @0", CurrentModule));
-                    //lstMdl.Filter.Add(ViewModelFactory.CreateViewModel<EnableFilterExpression.Factory>().Invoke(DataContext, "Only Baseclasses", "BaseObjectClass = null"));
                     lst.Add(lstMdl);
 
                     // Interface
@@ -115,7 +114,6 @@ namespace Kistl.Client.Presentables.ModuleEditor
                     // TypeRefs
                     lstMdl = ViewModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, null, DataContext.GetQuery<TypeRef>());
                     lstMdl.Filter.Add(new ConstantValueFilterModel("Assembly.Module = @0", CurrentModule));
-                    // lstMdl.Filter.Add(ViewModelFactory.CreateViewModel<EnableFilterExpression.Factory>().Invoke(DataContext, "Only Deleted", "Deleted = true"));
                     lstMdl.Commands.Add(ViewModelFactory.CreateViewModel<DeleteDataObjectCommand.Factory>().Invoke(DataContext));
                     lst.Add(lstMdl);
 

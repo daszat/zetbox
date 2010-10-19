@@ -9,6 +9,74 @@ using Kistl.Client.Models;
 
 namespace Kistl.Client.Presentables.FilterViewModels
 {
+    /// <summary>
+    /// Not a real view model
+    /// Used to display internal enum FilterOperators
+    /// </summary>
+    public class OperatorViewModel
+    {
+        public OperatorViewModel()
+        {
+            Name = "=";
+        }
+
+        public OperatorViewModel(FilterOperators op)
+            : this()
+        {
+            Operator = op;
+        }
+
+        private FilterOperators _Operator = FilterOperators.Equals;
+        public FilterOperators Operator
+        {
+            get
+            {
+                return _Operator;
+            }
+            set
+            {
+                if (_Operator != value)
+                {
+                    _Operator = value;
+                    switch (_Operator)
+                    {
+                        case FilterOperators.Equals:
+                            Name = "=";
+                            break;
+                        case FilterOperators.Contains:
+                            Name = "*";
+                            break;
+                        case FilterOperators.Less:
+                            Name = "<";
+                            break;
+                        case FilterOperators.LessOrEqual:
+                            Name = "<=";
+                            break;
+                        case FilterOperators.Greater:
+                            Name = ">";
+                            break;
+                        case FilterOperators.GreaterOrEqual:
+                            Name = ">=";
+                            break;
+                        case FilterOperators.Not:
+                            Name = "!";
+                            break;
+                        case FilterOperators.IsNull:
+                            Name = "is null";
+                            break;
+                        case FilterOperators.IsNotNull:
+                            Name = "is not null";
+                            break;
+                        default:
+                            Name = _Operator.ToString();
+                            break;
+                    }
+                }
+            }
+        }
+        public string Name { get; set; }
+    }
+
     public abstract class FilterViewModel : ViewModel
     {
         public new delegate FilterViewModel Factory(IKistlContext dataCtx, IUIFilterModel mdl);
@@ -78,68 +146,6 @@ namespace Kistl.Client.Presentables.FilterViewModels
             {
                 return Filter.Required;
             }
-        }
-    }
-
-    [ViewModelDescriptor("KistlBase", DefaultKind = "Kistl.App.GUI.SingleValueFilterKind", Description = "FilterViewModel for single value filters")]
-    public class SingleValueFilterViewModel : FilterViewModel
-    {
-        public new delegate SingleValueFilterViewModel Factory(IKistlContext dataCtx, IUIFilterModel mdl);
-
-        public SingleValueFilterViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, IUIFilterModel mdl)
-            : base(dependencies, dataCtx, mdl)
-        {
-        }
-
-        private object _requestedArgumentKind = null;
-        public object RequestedArgumentKind
-        {
-            get { return _requestedArgumentKind ?? base.RequestedKind; }
-            set
-            {
-                if (_requestedArgumentKind != value)
-                {
-                    _requestedArgumentKind = value;
-                    OnPropertyChanged("RequestedArgumentKind");
-                }                
-            }
-        }
-    }
-
-
-    [ViewModelDescriptor("KistlBase", DefaultKind = "Kistl.App.GUI.RangeFilterKind", Description = "FilterViewModel for range value filters")]
-    public class RangeFilterViewModel : FilterViewModel
-    {
-        public new delegate RangeFilterViewModel Factory(IKistlContext dataCtx, IUIFilterModel mdl);
-
-        public RangeFilterViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, IUIFilterModel mdl)
-            : base(dependencies, dataCtx, mdl)
-        {
-        }
-
-        private object _requestedArgumentKind = null;
-        public object RequestedArgumentKind
-        {
-            get { return _requestedArgumentKind ?? base.RequestedKind; }
-            set
-            {
-                if (_requestedArgumentKind != value)
-                {
-                    _requestedArgumentKind = value;
-                    OnPropertyChanged("RequestedArgumentKind");
-                }
-            }
-        }
-    }
-
-    [ViewModelDescriptor("KistlBase", DefaultKind = "Kistl.App.GUI.OptionalPredicateFilterKind", Description = "FilterViewModel for optional predicate object filters")]
-    public class OptionalPredicateFilterViewModel : FilterViewModel
-    {
-        public new delegate OptionalPredicateFilterViewModel Factory(IKistlContext dataCtx, IUIFilterModel mdl);
-
-        public OptionalPredicateFilterViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, IUIFilterModel mdl)
-            : base(dependencies, dataCtx, mdl)
-        {
         }
     }
 }
