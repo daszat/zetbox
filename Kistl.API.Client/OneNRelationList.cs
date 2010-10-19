@@ -38,10 +38,10 @@ namespace Kistl.API.Client
             _ownerNotifier = ownerNotifier;
             this.collection = collection != null ? new List<T>(collection) : new List<T>();
 
-            foreach (var item in this.collection)
-            {
-                item.PropertyChanged += item_PropertyChanged;
-            }
+            //foreach (var item in this.collection)
+            //{
+            //    item.PropertyChanged += item_PropertyChanged;
+            //}
         }
 
         public void AddWithoutSetParent(T item)
@@ -260,19 +260,19 @@ namespace Kistl.API.Client
             if (CollectionChanged != null)
                 CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, newItem));
 
-            newItem.PropertyChanged += item_PropertyChanged;
+            // newItem.PropertyChanged += item_PropertyChanged;
         }
 
-        /// <summary>
-        /// TODO: Quick workaround. Notify parent only on "right" containment
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        void item_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (_ownerNotifier != null)
-                _ownerNotifier();
-        }
+        // <summary>
+        // TODO: Quick workaround. Notify parent only on "right" containment
+        // </summary>
+        // <param name="sender"></param>
+        // <param name="e"></param>
+        //void item_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        //{
+        //    if (_ownerNotifier != null)
+        //        _ownerNotifier();
+        //}
 
         protected virtual void OnItemRemoved(T removedItem, int index)
         {
@@ -282,7 +282,7 @@ namespace Kistl.API.Client
             if (CollectionChanged != null)
                 CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, removedItem, index));
 
-            removedItem.PropertyChanged -= item_PropertyChanged;
+            //removedItem.PropertyChanged -= item_PropertyChanged;
         }
 
         protected virtual void OnCollectionReset()
@@ -296,10 +296,10 @@ namespace Kistl.API.Client
 
         protected virtual void OnCollectionResetting()
         {
-            foreach (var item in collection)
-            {
-                item.PropertyChanged -= item_PropertyChanged;
-            }
+            //foreach (var item in collection)
+            //{
+            //    item.PropertyChanged -= item_PropertyChanged;
+            //}
         }
 
         #endregion
