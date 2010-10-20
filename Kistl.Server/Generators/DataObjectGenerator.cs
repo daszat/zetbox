@@ -5,11 +5,10 @@ namespace Kistl.Server.Generators
     using System.IO;
     using System.Linq;
     using System.Text;
-
     using Kistl.API;
+    using Kistl.API.Server;
     using Kistl.API.Utils;
     using Kistl.App.Base;
-    using Kistl.API.Server;
 
     public abstract class BaseDataObjectGenerator
     {
@@ -201,7 +200,11 @@ namespace Kistl.Server.Generators
 
         protected virtual string Generate_ProjectFile(IKistlContext ctx, string projectGuid, List<string> generatedFileNames, IEnumerable<ISchemaProvider> schemaProviders)
         {
-            return RunTemplate(ctx, "Implementation.ProjectFile", TargetNameSpace + ".csproj", projectGuid, generatedFileNames.Where(s => !String.IsNullOrEmpty(s)).ToList(), schemaProviders);
+            return RunTemplate(ctx, "Implementation.ProjectFile",
+                TargetNameSpace + ".csproj",
+                projectGuid,
+                generatedFileNames.Where(s => !String.IsNullOrEmpty(s)).ToList(),
+                schemaProviders);
         }
     }
 }

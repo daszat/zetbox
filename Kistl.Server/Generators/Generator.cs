@@ -118,13 +118,15 @@ namespace Kistl.Server.Generators
                         }
                     }
                 });
-                genThread.Name = gen.BaseName;
+                genThread.Name = generator.BaseName;
                 genThread.Start();
                 threads.Add(genThread);
 
-                //// serialize execution
-                //Log.Warn("Serializing generation threads.");
-                //genThread.Join();
+#if SERIALIZE_GENERATION_THREADS
+                // serialize execution
+                Log.Warn("Serializing generation threads.");
+                genThread.Join();
+#endif
             }
 
             foreach (var t in threads)
@@ -195,7 +197,7 @@ namespace Kistl.Server.Generators
 #if DEBUG
                     defaultPropertyGroup.AddNewProperty("Configuration", "Debug", true);
 #else
-                        defaultPropertyGroup.AddNewProperty("Configuration", "Release", true);
+                    defaultPropertyGroup.AddNewProperty("Configuration", "Release", true);
 #endif
                     // Fix XML Path
                     defaultPropertyGroup.AddNewProperty("DocumentationFile", "$(OutputPath)\\$(AssemblyName).xml", false);

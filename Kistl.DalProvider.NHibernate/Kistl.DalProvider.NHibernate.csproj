@@ -12,7 +12,7 @@
     <AssemblyName>Kistl.DalProvider.NHibernate</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-	<SignAssembly>true</SignAssembly>
+    <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Kistl.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -55,6 +55,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseNhCollectionEntry.cs" />
+    <Compile Include="BaseNhPersistenceObject.cs" />
+    <Compile Include="BaseNhDataObject.cs" />
+    <Compile Include="INHibernateActionsManager.cs" />
+    <Compile Include="NhImplementationTypeChecker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -65,6 +70,10 @@
     <ProjectReference Include="..\Kistl.API\Kistl.API.csproj">
       <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
       <Name>Kistl.API</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kistl.Objects\Kistl.Objects.csproj">
+      <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
+      <Name>Kistl.Objects</Name>
     </ProjectReference>
     <ProjectReference Include="..\TempAppHelpers\TempAppHelpers.csproj">
       <Project>{9677AE11-CB92-4F0A-A248-87A21586F0DA}</Project>

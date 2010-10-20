@@ -12,7 +12,7 @@
     <AssemblyName>Kistl.DalProvider.NHibernate.Generator</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-	<SignAssembly>true</SignAssembly>
+    <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Kistl.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -58,6 +58,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Implementation\CollectionEntries\ObjectCollectionEntry.cs" />
+    <Compile Include="Implementation\ObjectClasses\ObjectListProperty.cs">
+      <DependentUpon>ObjectListProperty.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Implementation\ObjectClasses\ObjectListProperty.Designer.cs">
+      <DependentUpon>ObjectListProperty.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Implementation\ObjectClasses\Template.cs" />
+    <Compile Include="Implementation\ProjectFile.cs" />
+    <Compile Include="NhGenerator.cs" />
+    <Compile Include="NhGeneratorProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -77,6 +90,16 @@
       <Project>{FA2B6CCD-95CB-4927-9CB5-AFE833EB38B7}</Project>
       <Name>Kistl.Server</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TempAppHelpers\TempAppHelpers.csproj">
+      <Project>{9677AE11-CB92-4F0A-A248-87A21586F0DA}</Project>
+      <Name>TempAppHelpers</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Implementation\ObjectClasses\ObjectListProperty.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>ObjectListProperty.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

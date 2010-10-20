@@ -1,18 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-
-using Arebis.CodeGeneration;
-using Arebis.CodeGenerator.Templated;
-
-using Kistl.API.Utils;
 
 namespace Kistl.Server.Generators
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.Specialized;
+    using System.IO;
+    using System.Linq;
+    using System.Reflection;
+    using System.Text;
+
+    using Arebis.CodeGeneration;
+    using Arebis.CodeGenerator.Templated;
+
+    using Kistl.API.Utils;
 
     /// <summary>
     /// a <see cref="IGenerationHost"/> to use the pre-compiled Templates from the current assembly
@@ -161,7 +161,20 @@ namespace Kistl.Server.Generators
             if (t == null)
                 throw new ArgumentOutOfRangeException("templateClass", String.Format("No class found for {0}", templateClass));
 
-            var template = (KistlCodeTemplate)Activator.CreateInstance(t, new object[] { this }.Concat(parameters).ToArray());
+            var fullParams = new object[] { this }.Concat(parameters).ToArray();
+            KistlCodeTemplate template = null;
+            try
+            {
+                template = (KistlCodeTemplate)Activator.CreateInstance(t, fullParams);
+            }
+            catch (MissingMethodException ex)
+            {
+                var msg = String.Format("Failed to find Constructor for {0} with signature:\n\t{1}",
+                        t.FullName,
+                        String.Join(",\n\t", fullParams.Select(p => p == null ? "(null)" : p.GetType().FullName).ToArray()));
+                Log.Error(msg, ex);
+                throw new ApplicationException(msg, ex);
+            }
             template.Generate();
         }
 
