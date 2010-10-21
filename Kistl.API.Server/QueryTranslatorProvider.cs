@@ -219,6 +219,14 @@ namespace Kistl.API.Server
                 var type = result.Type.GetGenericArguments().First();
                 return AddSecurityFilter(result, Ctx.GetImplementationType(type).ToInterfaceType());
             }
+            else if (c.Value != null && c.Type.IsEnum) // Handle Enums
+            {
+                return Expression.Constant((int)c.Value, typeof(int));
+            }
+            else if (c.Value != null && c.Type.IsGenericType && c.Type.GetGenericTypeDefinition() == typeof(Nullable<>) && c.Type.GetGenericArguments().Single().IsEnum)
+            {
+                return Expression.Constant((int)c.Value, typeof(int?)); // You can't extract a int? from an enum value
+            }
             else
             {
                 return c;

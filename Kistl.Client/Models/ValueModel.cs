@@ -49,10 +49,10 @@ namespace Kistl.Client.Models
             {
                 return new ObjectReferenceValueModel(lb, parameter.Description, false, false, (ObjectClass)((ObjectParameter)parameter).DataType);
             }
-            //else if (retParam is EnumParameter && !retParam.IsList)
-            //{
-            //    return (ModelFactory.CreateViewModel<NullableResultModel<?>.Factory>().Invoke(DataContext, _object, pm));
-            //}
+            else if (parameter is EnumParameter && !parameter.IsList)
+            {
+                return new EnumerationValueModel(lb, parameter.Description, false, false, ((EnumParameter)parameter).Enumeration);
+            }
             else
             {
                 Logging.Log.WarnFormat("No model for parameter '{0}' of type '{1}'", parameter, parameter.GetParameterTypeString());
@@ -272,6 +272,32 @@ namespace Kistl.Client.Models
         public ObjectClass ReferencedClass
         {
             get; private set;
+        }
+
+        #endregion
+    }
+
+    public class EnumerationValueModel : NullableStructValueModel<int>, IEnumerationValueModel
+    {
+        protected readonly Enumeration enumDef;
+
+        public EnumerationValueModel(string label, string description, bool allowNullInput, bool isReadOnly, Enumeration enumeration)
+            : base(label, description, allowNullInput, isReadOnly)
+        {
+            this.enumDef = enumeration;
+        }
+
+        public override object GetUntypedValue()
+        {
+            var val = (int?)base.GetUntypedValue();
+            return Enum.GetValues(enumDef.GetDataType()).AsQueryable().OfType<object>().FirstOrDefault(i => (int)i == val);
+        }
+
+        #region IEnumerationValueModel Members
+
+        public Enumeration Enumeration
+        {
+            get { return enumDef; }
         }
 
         #endregion

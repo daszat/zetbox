@@ -89,21 +89,21 @@ namespace Kistl.Server.Tests
 
 
         [Test]
-        public void GetListWithTake()
+        public void GetList_With_Take()
         {
             var list = ctx.GetQuery<Kistl.App.Base.ObjectClass>().Take(10).ToList();
             Assert.That(list.Count, Is.EqualTo(10));
         }
 
         [Test]
-        public void GetListWithTakeAndWhere()
+        public void GetList_With_Take_And_Where()
         {
             var list = ctx.GetQuery<Kistl.App.Base.ObjectClass>().Where(o => o.Module.Name == "KistlBase").Take(10).ToList();
             Assert.That(list.Count, Is.EqualTo(10));
         }
 
         [Test]
-        public void GetListWithOrderBy()
+        public void GetList_With_OrderBy()
         {
             var list = ctx.GetQuery<Kistl.App.Base.ObjectClass>().OrderBy(o => o.Name).ToList();
             Assert.That(list.Count, Is.GreaterThan(0));
@@ -122,7 +122,7 @@ namespace Kistl.Server.Tests
 
         [Test]
         [Ignore("Case 617")]
-        public void GetListByTypeWithOrderBy()
+        public void GetList_ByType_With_OrderBy()
         {
             var list = ctx.GetQuery(ctx.GetInterfaceType(typeof(ObjectClass)))
                 .OrderBy<IDataObject, string>(o => ((ObjectClass)o).Name)
@@ -142,7 +142,7 @@ namespace Kistl.Server.Tests
         }
 
         [Test]
-        public void GetListWithOrderByAndWhere()
+        public void GetList_With_OrderBy_And_Where()
         {
             var list = ctx.GetQuery<Kistl.App.Base.ObjectClass>().Where(o => o.Module.Name == "KistlBase").OrderBy(o => o.Name).ToList();
             Assert.That(list.Count, Is.GreaterThan(0));
@@ -160,7 +160,7 @@ namespace Kistl.Server.Tests
         }
 
         [Test]
-        public void GetListWithOrderByThenOrderBy()
+        public void GetList_With_OrderBy_ThenOrderBy()
         {
             var list = ctx.GetQuery<Kistl.App.Base.ObjectClass>().OrderBy(o => o.Module.Name).ThenBy(o => o.Name).ToList();
             Assert.That(list.Count, Is.GreaterThan(0));
@@ -178,7 +178,7 @@ namespace Kistl.Server.Tests
         }
 
         [Test]
-        public void GetListWithParameterLegal()
+        public void GetList_With_Parameter_Legal()
         {
             var test = (from m in ctx.GetQuery<Kistl.App.Base.Module>()
                         where
@@ -195,7 +195,7 @@ namespace Kistl.Server.Tests
         }
 
         [Test]
-        public void GetListWithProjection()
+        public void GetList_With_Projection()
         {
             var test = from z in ctx.GetQuery<Kistl.App.TimeRecords.WorkEffortAccount>()
                        select new { A = z.SpentHours, B = z.BudgetHours };
@@ -207,7 +207,7 @@ namespace Kistl.Server.Tests
 
         [Test]
         [Ignore("Case 471")]
-        public void GetListWithSingle()
+        public void GetList_With_Single()
         {
             var guiModule = ctx.GetQuery<Kistl.App.Base.Module>().Where(m => m.Name == "GUI").Single();
             Assert.That(guiModule, Is.Not.Null);
@@ -216,7 +216,7 @@ namespace Kistl.Server.Tests
 
         [Test]
         [Ignore("Case 471")]
-        public void GetListSingle()
+        public void GetList_Single()
         {
             var guiModule = ctx.GetQuery<Kistl.App.Base.Module>().Single(m => m.Name == "GUI");
             Assert.That(guiModule, Is.Not.Null);
@@ -224,7 +224,7 @@ namespace Kistl.Server.Tests
         }
 
         [Test]
-        public void GetListWithFirst()
+        public void GetList_With_First()
         {
             var guiModule = ctx.GetQuery<Kistl.App.Base.Module>().Where(m => m.Name == "GUI").First();
             Assert.That(guiModule, Is.Not.Null);
@@ -232,7 +232,7 @@ namespace Kistl.Server.Tests
         }
 
         [Test]
-        public void GetListFirst()
+        public void GetList_First()
         {
             var guiModule = ctx.GetQuery<Kistl.App.Base.Module>().First(m => m.Name == "GUI");
             Assert.That(guiModule, Is.Not.Null);
@@ -249,7 +249,7 @@ namespace Kistl.Server.Tests
         /// http://blogs.msdn.com/mattwar/archive/2007/08/01/linq-building-an-iqueryable-provider-part-iii.aspx
         /// </summary>
         [Test]
-        public void GetListWithPropertyAccessor()
+        public void GetList_With_PropertyAccessor()
         {
             Test t = new Test();
             t.TestProp = "foo";
@@ -260,7 +260,7 @@ namespace Kistl.Server.Tests
         }
 
         [Test]
-        public void GetListWithPropertyObjectAccessor()
+        public void GetList_With_PropertyObjectAccessor()
         {
             int mID = ctx.GetQuery<Kistl.App.Base.ObjectClass>().First().Module.ID;
             using (var otherCtx = GetContext())
@@ -269,6 +269,86 @@ namespace Kistl.Server.Tests
                 Assert.That(result, Is.Not.Null);
                 Assert.That(result.Count, Is.GreaterThan(0));
             }
+        }
+
+        [Test]
+        [Ignore("Case 1760: Enum member access does not work yet")]
+        public void GetList_With_EnumAccessor()
+        {
+            StorageType v = StorageType.MergeIntoA;
+            var result = ctx.GetQuery<Kistl.App.Base.Relation>()
+                .Where(i => i.Storage == v).ToList();
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.Count, Is.GreaterThan(0));
+        }
+
+        [Test]
+        public void GetList_With_EnumAccessor_Constant()
+        {
+            var result = ctx.GetQuery<Kistl.App.Base.Relation>()
+                .Where(i => i.Storage == StorageType.MergeIntoA).ToList();
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.Count, Is.GreaterThan(0));
+        }
+
+        [Test]
+        [Ignore("Case 1760: Enum member access does not work yet")]
+        public void GetList_With_Nullable_EnumAccessor()
+        {
+            DateTimeStyles v = DateTimeStyles.Date;
+            var result = ctx.GetQuery<Kistl.App.Base.DateTimeProperty>()
+                .Where(i => i.DateTimeStyle == v).ToList();
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.Count, Is.GreaterThan(0));
+        }
+
+        [Test]
+        public void GetList_With_Nullable_EnumAccessor_Constant()
+        {
+            var result = ctx.GetQuery<Kistl.App.Base.DateTimeProperty>()
+                .Where(i => i.DateTimeStyle == DateTimeStyles.Date).ToList();
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.Count, Is.GreaterThan(0));
+        }
+
+        [Test]
+        [Ignore("Case 1760: Enum member access does not work yet")]
+        public void GetList_With_Nullable_EnumAccessor_Nullable_Value()
+        {
+            DateTimeStyles? v = DateTimeStyles.Date;
+            var result = ctx.GetQuery<Kistl.App.Base.DateTimeProperty>()
+                .Where(i => i.DateTimeStyle == v).ToList();
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.Count, Is.GreaterThan(0));
+        }
+
+        [Test]
+        public void GetList_With_Nullable_EnumAccessor_Nullable_Constant()
+        {
+            var result = ctx.GetQuery<Kistl.App.Base.DateTimeProperty>()
+                .Where(i => i.DateTimeStyle == (DateTimeStyles?)DateTimeStyles.Date).ToList();
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.Count, Is.GreaterThan(0));
+        }
+
+        [Test]
+        [Ignore("Case 1760: Enum member access does not work yet")]
+        public void GetList_With_Nullable_EnumAccessor_With_Null_Value()
+        {
+            DateTimeStyles? v = null;
+            var result = ctx.GetQuery<Kistl.App.Base.DateTimeProperty>()
+                .Where(i => i.DateTimeStyle == v).ToList();
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.Count, Is.GreaterThan(0));
+        }
+
+        [Test]
+        public void GetList_With_Nullable_EnumAccessor_With_Null_Constant()
+        {
+            var result = ctx.GetQuery<Kistl.App.Base.DateTimeProperty>()
+                .Where(i => i.DateTimeStyle == null).ToList();
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.Count, Is.GreaterThan(0));
         }
     }
 }

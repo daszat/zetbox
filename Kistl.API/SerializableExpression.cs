@@ -302,12 +302,32 @@ namespace Kistl.API
         internal SerializableConstantExpression(ConstantExpression e, SerializationContext ctx, InterfaceType.Factory iftFactory)
             : base(e, ctx, iftFactory)
         {
-            Value = e.Value;
+            // Handle Enums
+            if (e.Value != null && e.Value.GetType().IsEnum)
+            {
+                Value = (int)e.Value;
+            }
+            else
+            {
+                Value = e.Value;
+            }
         }
 
         internal override Expression ToExpressionInternal(SerializationContext ctx)
         {
-            return Expression.Constant(Value, Type);
+            // Handle Enums
+            if (Value != null && Type.IsEnum)
+            {
+                return Expression.Constant(Enum.GetValues(Type).AsQueryable().OfType<object>().FirstOrDefault(i => (int)i == (int)Value), Type);
+            }
+            else if (Value != null && Type.IsGenericType && Type.GetGenericTypeDefinition() == typeof(Nullable<>) && Type.GetGenericArguments().Single().IsEnum)
+            {
+                return Expression.Constant(Enum.GetValues(Type.GetGenericArguments()[0]).AsQueryable().OfType<object>().FirstOrDefault(i => (int)i == (int)Value), Type);
+            }
+            else
+            {
+                return Expression.Constant(Value, Type);
+            }
         }
 
         /// <summary>

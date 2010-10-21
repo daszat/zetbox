@@ -81,6 +81,7 @@ namespace Kistl.Client.Models
                 throw new NotImplementedException(string.Format("GetValueModel is not implemented for {0} properties yet", prop.GetPropertyTypeString()));
             }
         }
+
         public static IValueModel GetDetachedValueModel(this Property prop)
         {
             if (prop == null)
@@ -112,10 +113,10 @@ namespace Kistl.Client.Models
             {
                 return new DateTimeValueModel(lb, prop.Description, prop.IsNullable(), false);
             }
-            //else if (prop is EnumerationProperty)
-            //{
-            //    return new EnumerationValueModel(obj, (EnumerationProperty)prop);
-            //}
+            else if (prop is EnumerationProperty)
+            {
+                return new EnumerationValueModel(lb, prop.Description, prop.IsNullable(), false, ((EnumerationProperty)prop).Enumeration);
+            }
             else if (prop is StringProperty)
             {
                 return new ClassValueModel<string>(lb, prop.Description, prop.IsNullable(), false);
