@@ -274,6 +274,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="EfGeneratorStructure.cd" />
     <None Include="Generator\Implementation\EfModel\Model.csdl.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>Model.csdl.Designer.cs</LastGenOutput>
