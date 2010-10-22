@@ -74,9 +74,23 @@ namespace Kistl.Client.Models
             this.Method = m;
             this.Object = obj;
             this.Object.PropertyChanged += Object_PropertyChanged;
+
+            // TODO: Move that to generated code and use metadata of Method/Invokation to filter "right" Object changes
+            // Note: This depend on an DataContext which fires the IsModifiedChanged event on _every_ Object change
+            if (this.Object is IDataObject)
+            {
+                ((IDataObject)this.Object).Context.IsModifiedChanged += dataCtx_IsModifiedChanged;
+            }
+
         }
 
         void Object_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            CallMethod();
+            NotifyValueChanged();
+        }
+
+        void dataCtx_IsModifiedChanged(object sender, EventArgs e)
         {
             CallMethod();
             NotifyValueChanged();
