@@ -16,7 +16,7 @@ namespace Kistl.API
     /// A temporary data context without permanent backing store.
     /// </summary>
     public abstract class BaseMemoryContext
-        : IKistlContext
+        : IKistlContext, IZBoxContextInternals
     {
         protected readonly ContextCache objects;
         private readonly InterfaceType.Factory _iftFactory;
@@ -516,5 +516,32 @@ namespace Kistl.API
                 return _TransientState;
             }
         }
+
+        /// <summary>
+        /// Indicates that the ZBox Context has some modified, added or deleted items
+        /// </summary>
+        public bool IsModified { get; private set; }
+
+        /// <summary>
+        /// Is fires when <see cref="IsModified"/> was changed
+        /// </summary>
+        public event EventHandler IsModifiedChanged;
+
+        #region IZBoxContextInternals Members
+
+        void IZBoxContextInternals.SetModified(IPersistenceObject obj)
+        {
+            if (obj.ObjectState.In(DataObjectState.Deleted, DataObjectState.Modified, DataObjectState.New))
+            {
+                IsModified = true;
+                EventHandler temp = IsModifiedChanged;
+                if (temp != null)
+                {
+                    temp(this, EventArgs.Empty);
+                }
+            }
+        }
+
+        #endregion
     }
 }

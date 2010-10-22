@@ -153,7 +153,7 @@ namespace Kistl.API.Client
                 SerializableType objType;
                 BinarySerializer.FromStream(out objType, sr);
 
-                IStreamable obj = (IStreamable)ctx.CreateUnattached(_iftFactory(objType.GetSystemType()));
+                IStreamable obj = (IStreamable)ctx.Internals().CreateUnattached(_iftFactory(objType.GetSystemType()));
                 obj.FromStream(sr);
 
                 result.Add((IStreamable)obj);

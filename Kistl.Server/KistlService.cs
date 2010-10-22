@@ -65,7 +65,7 @@ namespace Kistl.Server
                             SerializableType objType;
                             BinarySerializer.FromStream(out objType, sr);
 
-                            var obj = ctx.CreateUnattached(_iftFactory(objType.GetSystemType()));
+                            var obj = ctx.Internals().CreateUnattached(_iftFactory(objType.GetSystemType()));
                             obj.FromStream(sr);
                             objects.Add(obj);
                             BinarySerializer.FromStream(out @continue, sr);

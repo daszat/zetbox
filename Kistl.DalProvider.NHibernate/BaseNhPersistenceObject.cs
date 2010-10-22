@@ -36,6 +36,7 @@ namespace Kistl.DalProvider.NHibernate
         protected override void SetModified()
         {
             _objectState = DataObjectState.Modified;
+            ((IZBoxContextInternals)this.Context).SetModified(this);
         }
     }
 }

@@ -57,6 +57,7 @@ namespace Kistl.DalProvider.EF
         protected override void SetModified()
         {
             // EF will do that for us
+            ((IZBoxContextInternals)this.Context).SetModified(this);
         }
 
         #region IEntityWithKey Members
@@ -206,6 +207,7 @@ namespace Kistl.DalProvider.EF
         protected override void SetModified()
         {
             // EF will do that for us
+            ((IZBoxContextInternals)this.Context).SetModified(this);
         }
 
         #region IEntityWithKey Members

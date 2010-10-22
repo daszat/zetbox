@@ -15,7 +15,7 @@ namespace Kistl.API.Server
     public delegate IKistlContext ServerKistlContextFactory(Identity identity);
 
     public abstract class BaseKistlDataContext
-        : IKistlServerContext, IDisposable
+        : IKistlServerContext, IZBoxContextInternals, IDisposable
     {
         protected readonly Identity identity;
         protected readonly IMetaDataResolver metaDataResolver;
@@ -575,5 +575,32 @@ namespace Kistl.API.Server
                 return _TransientState;
             }
         }
+
+        /// <summary>
+        /// Indicates that the ZBox Context has some modified, added or deleted items
+        /// </summary>
+        public bool IsModified { get; private set; }
+
+        /// <summary>
+        /// Is fires when <see cref="IsModified"/> was changed
+        /// </summary>
+        public event EventHandler IsModifiedChanged;
+
+        #region IZBoxContextInternals Members
+
+        void IZBoxContextInternals.SetModified(IPersistenceObject obj)
+        {
+            if (obj.ObjectState.In(DataObjectState.Deleted, DataObjectState.Modified, DataObjectState.New))
+            {
+                IsModified = true;
+                EventHandler temp = IsModifiedChanged;
+                if (temp != null)
+                {
+                    temp(this, EventArgs.Empty);
+                }
+            }
+        }
+
+        #endregion
     }
 }

@@ -66,7 +66,7 @@ namespace Kistl.API
 
         protected virtual TEntry CreateEntry()
         {
-            return (TEntry)ctx.CreateValueCollectionEntry(tEntryInterface);
+            return (TEntry)ctx.Internals().CreateValueCollectionEntry(tEntryInterface);
         }
 
         protected virtual TEntry InitialiseEntry(TEntry e, TValue value)

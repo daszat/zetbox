@@ -116,22 +116,8 @@ namespace Kistl.API
         IQueryable<IDataObject> GetQuery(InterfaceType ifType);
 
         /// <summary>
-        /// Returns a PersistenceObject Query by T
-        /// </summary>
-        /// <typeparam name="T">Type</typeparam>
-        /// <returns>IQueryable</returns>
-        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
-        IQueryable<T> GetPersistenceObjectQuery<T>() where T : class, IPersistenceObject;
-        /// <summary>
-        /// Returns a PersistenceObject Query by InterfaceType
-        /// </summary>
-        /// <param name="ifType">the interface to look for</param>
-        /// <returns>IQueryable</returns>
-        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
-        IQueryable<IPersistenceObject> GetPersistenceObjectQuery(InterfaceType ifType);
-
-        /// <summary>
         /// Returns the List referenced by the given Name.
+        /// TODO: Move to IZBoxContextInternals interface
         /// </summary>
         /// <typeparam name="T">List Type of the ObjectReferenceProperty</typeparam>
         /// <param name="obj">Object which holds the ObjectReferenceProperty</param>
@@ -141,6 +127,7 @@ namespace Kistl.API
         List<T> GetListOf<T>(IDataObject obj, string propertyName) where T : class, IDataObject;
         /// <summary>
         /// Returns the List referenced by the given type, ID and property name.
+        /// TODO: Move to IZBoxContextInternals interface
         /// </summary>
         /// <typeparam name="T">List Type of the ObjectReferenceProperty</typeparam>
         /// <param name="ifType">Type of the Object which holds the ObjectReferenceProperty</param>
@@ -154,6 +141,7 @@ namespace Kistl.API
         /// Fetches all collection entries of a given Relation (specified by <paramref name="relationId"/>)
         /// which reference the given <paramref name="container"/> on the side <paramref name="role"/>
         /// of the relation. Mostly for internal use.
+        /// TODO: Move to IZBoxContextInternals interface
         /// </summary>
         /// <typeparam name="T">Type of the IRelationCollectionEntry element</typeparam>
         /// <param name="relationId">Specifies which relation to fetch</param>
@@ -198,6 +186,7 @@ namespace Kistl.API
 
         /// <summary>
         /// Find the Persistence Object of the given type by ID
+        /// TODO: Move to IZBoxContextInternals interface
         /// </summary>
         /// <param name="ifType">Object Type of the Object to find.</param>
         /// <param name="ID">ID of the Object to find.</param>
@@ -206,6 +195,7 @@ namespace Kistl.API
         IPersistenceObject FindPersistenceObject(InterfaceType ifType, int ID);
         /// <summary>
         /// Find the Persistence Object of the given type by ID
+        /// TODO: Move to IZBoxContextInternals interface
         /// </summary>
         /// <typeparam name="T">Object Type of the Object to find.</typeparam>
         /// <param name="ID">ID of the Object to find.</param>
@@ -215,6 +205,7 @@ namespace Kistl.API
 
         /// <summary>
         /// Find the Persistence Object of the given type by an ExportGuid
+        /// TODO: Move to IZBoxContextInternals interface
         /// </summary>
         /// <param name="ifType">Object Type of the Object to find.</param>
         /// <param name="exportGuid">ExportGuid of the Object to find.</param>
@@ -223,6 +214,7 @@ namespace Kistl.API
         IPersistenceObject FindPersistenceObject(InterfaceType ifType, Guid exportGuid);
         /// <summary>
         /// Find the Persistence Object of the given type by an ExportGuid
+        /// TODO: Move to IZBoxContextInternals interface
         /// </summary>
         /// <typeparam name="T">Object Type of the Object to find.</typeparam>
         /// <param name="exportGuid">ExportGuid of the Object to find.</param>
@@ -232,6 +224,7 @@ namespace Kistl.API
 
         /// <summary>
         /// Find Persistence Objects of the given type by ExportGuids
+        /// TODO: Move to IZBoxContextInternals interface
         /// </summary>
         /// <param name="ifType">Object Type of the Object to find.</param>
         /// <param name="exportGuids">ExportGuids of the Objects to find.</param>
@@ -240,6 +233,7 @@ namespace Kistl.API
         IEnumerable<IPersistenceObject> FindPersistenceObjects(InterfaceType ifType, IEnumerable<Guid> exportGuids);
         /// <summary>
         /// Find Persistence Objects of the given type by ExportGuids
+        /// TODO: Move to IZBoxContextInternals interface
         /// </summary>
         /// <typeparam name="T">Object Type of the Object to find.</typeparam>
         /// <param name="exportGuids">ExportGuids of the Objects to find.</param>
@@ -319,6 +313,54 @@ namespace Kistl.API
         T Create<T>() where T : class, IDataObject;
 
         /// <summary>
+        /// Creates a new CompoundObject by Type
+        /// </summary>
+        /// <param name="ifType">Type of the new CompoundObject</param>
+        /// <returns>A new CompoundObject</returns>
+        ICompoundObject CreateCompoundObject(InterfaceType ifType);
+        /// <summary>
+        /// Creates a new CompoundObject.
+        /// </summary>
+        /// <typeparam name="T">Type of the new CompoundObject</typeparam>
+        /// <returns>A new CompoundObject</returns>
+        T CreateCompoundObject<T>() where T : ICompoundObject;
+
+        int CreateBlob(System.IO.Stream s, string filename, string mimetype);
+        int CreateBlob(System.IO.FileInfo fi, string mimetype);
+
+        /// <summary>
+        /// Is fired when an object is created in this Context.
+        /// The newly created object is passed as Data.
+        /// </summary>
+        event GenericEventHandler<IPersistenceObject> ObjectCreated;
+
+        /// <summary>
+        /// Is fired when an object is deleted in this Context.
+        /// The delted object is passed as Data.
+        /// </summary>
+        event GenericEventHandler<IPersistenceObject> ObjectDeleted;
+
+        /// <summary>
+        /// Fired when the AttachedObject collection has been changed.
+        /// </summary>
+        event GenericEventHandler<IKistlContext> Changed;
+
+        /// <summary>
+        /// Indicates that the ZBox Context has some modified, added or deleted items
+        /// </summary>
+        bool IsModified { get; }
+
+        /// <summary>
+        /// Is fires when <see cref="IsModified"/> was changed
+        /// </summary>
+        event EventHandler IsModifiedChanged;
+    }
+
+    public interface IZBoxContextInternals
+    {
+        void SetModified(IPersistenceObject obj);
+
+        /// <summary>
         /// Creates a new unattached IPersistenceObject by Type
         /// </summary>
         /// <param name="ifType">Type of the new IPersistenceObject</param>
@@ -360,40 +402,20 @@ namespace Kistl.API
         /// <returns>A new IValueCollectionEntry</returns>
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         T CreateValueCollectionEntry<T>() where T : IValueCollectionEntry;
-
         /// <summary>
-        /// Creates a new CompoundObject by Type
+        /// Returns a PersistenceObject Query by T
         /// </summary>
-        /// <param name="ifType">Type of the new CompoundObject</param>
-        /// <returns>A new CompoundObject</returns>
-        ICompoundObject CreateCompoundObject(InterfaceType ifType);
+        /// <typeparam name="T">Type</typeparam>
+        /// <returns>IQueryable</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        IQueryable<T> GetPersistenceObjectQuery<T>() where T : class, IPersistenceObject;
         /// <summary>
-        /// Creates a new CompoundObject.
+        /// Returns a PersistenceObject Query by InterfaceType
         /// </summary>
-        /// <typeparam name="T">Type of the new CompoundObject</typeparam>
-        /// <returns>A new CompoundObject</returns>
-        T CreateCompoundObject<T>() where T : ICompoundObject;
-
-        int CreateBlob(System.IO.Stream s, string filename, string mimetype);
-        int CreateBlob(System.IO.FileInfo fi, string mimetype);
-
-        /// <summary>
-        /// Is fired when an object is created in this Context.
-        /// The newly created object is passed as Data.
-        /// </summary>
-        event GenericEventHandler<IPersistenceObject> ObjectCreated;
-
-        /// <summary>
-        /// Is fired when an object is deleted in this Context.
-        /// The delted object is passed as Data.
-        /// </summary>
-        event GenericEventHandler<IPersistenceObject> ObjectDeleted;
-
-        /// <summary>
-        /// Fired when the AttachedObject collection has been changed.
-        /// </summary>
-        event GenericEventHandler<IKistlContext> Changed;
-
+        /// <param name="ifType">the interface to look for</param>
+        /// <returns>IQueryable</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        IQueryable<IPersistenceObject> GetPersistenceObjectQuery(InterfaceType ifType);
     }
 
     public interface IDebuggingKistlContext : IKistlContext
@@ -404,6 +426,17 @@ namespace Kistl.API
 
     public interface IKistlQueryProvider : IQueryProvider
     {
+    }
+
+    /// <summary>
+    /// TODO: Remove that class when Case #1763 is solved
+    /// </summary>
+    public static class ZBoxContextExtensions
+    {
+        public static IZBoxContextInternals Internals(this IKistlContext ctx)
+        {
+            return (IZBoxContextInternals)ctx;
+        }
     }
 
     public static class KistlContextQueryableExtensions

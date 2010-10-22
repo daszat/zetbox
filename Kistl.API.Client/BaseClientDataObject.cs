@@ -61,6 +61,7 @@ namespace Kistl.API.Client
                 var oldValue = this._ObjectState;
                 NotifyPropertyChanging("ObjectState", oldValue, DataObjectState.Modified);
                 this._ObjectState = DataObjectState.Modified;
+                ((IZBoxContextInternals)this.Context).SetModified(this);
                 NotifyPropertyChanged("ObjectState", oldValue, DataObjectState.Modified);
             }
         }
@@ -78,6 +79,7 @@ namespace Kistl.API.Client
             var oldValue = this._ObjectState;
             NotifyPropertyChanging("ObjectState", oldValue, DataObjectState.Deleted);
             this._ObjectState = DataObjectState.Deleted;
+            ((IZBoxContextInternals)this.Context).SetModified(this);
             NotifyPropertyChanged("ObjectState", oldValue, DataObjectState.Deleted);
         }
 

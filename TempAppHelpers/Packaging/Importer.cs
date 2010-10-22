@@ -295,7 +295,7 @@ namespace Kistl.App.Packaging
                 {
                     throw new NotSupportedException("Interfacetype " + ifType + " is not supported");
                 }
-                IPersistenceObject obj = ctx.CreateUnattached(ifType);
+                IPersistenceObject obj = ctx.Internals().CreateUnattached(ifType);
                 objects[exportGuid] = obj;
                 ((Kistl.App.Base.IExportable)obj).ExportGuid = exportGuid;
                 ctx.Attach(obj);

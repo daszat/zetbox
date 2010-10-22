@@ -28,7 +28,7 @@ namespace Kistl.API.Mocks
         }
     }
 
-    public class TestKistlContext : IKistlContext
+    public class TestKistlContext : IKistlContext, IZBoxContextInternals
     {
         private readonly InterfaceType.Factory _iftFactory;
         public TestKistlContext(InterfaceType.Factory iftFactory)
@@ -327,6 +327,33 @@ namespace Kistl.API.Mocks
                 return _TransientState;
             }
         }
+        #endregion
+
+        /// <summary>
+        /// Indicates that the ZBox Context has some modified, added or deleted items
+        /// </summary>
+        public bool IsModified { get; private set; }
+
+        /// <summary>
+        /// Is fires when <see cref="IsModified"/> was changed
+        /// </summary>
+        public event EventHandler IsModifiedChanged;
+
+        #region IZBoxContextInternals Members
+
+        void IZBoxContextInternals.SetModified(IPersistenceObject obj)
+        {
+            if (obj.ObjectState.In(DataObjectState.Deleted, DataObjectState.Modified, DataObjectState.New))
+            {
+                IsModified = true;
+                EventHandler temp = IsModifiedChanged;
+                if (temp != null)
+                {
+                    temp(this, EventArgs.Empty);
+                }
+            }
+        }
+
         #endregion
 
     }
