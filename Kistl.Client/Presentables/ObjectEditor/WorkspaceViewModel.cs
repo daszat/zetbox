@@ -70,7 +70,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
         {
             if (IsContextModified)
             {
-                return ViewModelFactory.GetDecisionFromUser("Workspace contains unsafed data. Close anyway?", "Unsafed data");
+                return ViewModelFactory.GetDecisionFromUser("Workspace contains unsaved data. Close anyway?", "Unsaved data");
             }
             else
             {

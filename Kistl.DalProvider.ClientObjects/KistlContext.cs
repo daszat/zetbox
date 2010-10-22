@@ -548,6 +548,9 @@ namespace Kistl.DalProvider.Client
             objectsToDetach.ForEach(obj => this.Detach(obj));
             changedObjects.ForEach(obj => this.Attach(obj));
 
+            // Before Notifications & PostSave events. They could change data
+            IsModified = false;
+
             PlaybackNotifications();
 
             // Fire PostSave

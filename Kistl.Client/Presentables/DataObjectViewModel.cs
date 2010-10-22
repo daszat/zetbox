@@ -387,13 +387,6 @@ namespace Kistl.Client.Presentables
             var actions = new List<Method>();
             while (cls != null)
             {
-                //actions.AddRange(cls.Methods
-                //    .Where(m => m.IsDisplayable
-                //        && (m.Parameter.Count == 0
-                //        || (m.Parameter.Count == 1
-                //            && m.Parameter.Single().IsReturnParameter
-                //            && m.Name.StartsWith("Create")))));
-
                 actions.AddRange(cls.Methods.Where(m => m.IsDisplayable));
                 cls = cls.BaseObjectClass;
             }
