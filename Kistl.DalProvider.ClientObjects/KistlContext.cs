@@ -830,7 +830,24 @@ namespace Kistl.DalProvider.Client
         /// <summary>
         /// Indicates that the ZBox Context has some modified, added or deleted items
         /// </summary>
-        public bool IsModified { get; private set; }
+        private bool _isModified = false;
+        public bool IsModified
+        {
+            get
+            {
+                return _isModified;
+            }
+            private set
+            {
+                _isModified = value;
+                // Allways invoke event, as others are temporary interessed in seeing changes on individual objects
+                EventHandler temp = IsModifiedChanged;
+                if (temp != null)
+                {
+                    temp(this, EventArgs.Empty);
+                }
+            }
+        }
 
         /// <summary>
         /// Is fires when <see cref="IsModified"/> was changed
@@ -844,11 +861,6 @@ namespace Kistl.DalProvider.Client
             if (obj.ObjectState.In(DataObjectState.Deleted, DataObjectState.Modified, DataObjectState.New))
             {
                 IsModified = true;
-                EventHandler temp = IsModifiedChanged;
-                if (temp != null)
-                {
-                    temp(this, EventArgs.Empty);
-                }
             }
         }
 

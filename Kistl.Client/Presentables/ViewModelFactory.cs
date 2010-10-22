@@ -348,6 +348,10 @@ namespace Kistl.Client.Presentables
         /// <returns>the chosen file name or <code>String.Empty</code> if the user aborted the selection</returns>
         public abstract string GetDestinationFileNameFromUser(string filename, params string[] filter);
 
+        public abstract bool GetDecisionFromUser(string message, string caption);
+
+        public abstract void ShowMessage(string message, string caption);
+
         #endregion
     }
 }

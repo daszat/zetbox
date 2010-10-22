@@ -24,8 +24,25 @@ namespace Kistl.Client.Presentables
         private bool _show = true;
         public bool Show
         {
-            get { return _show; }
-            set { _show = value; OnPropertyChanged("Show"); }
+            get 
+            { 
+                return _show; 
+            }
+            set 
+            {
+                if (!value && !CanClose()) return;
+                _show = value; 
+                OnPropertyChanged("Show"); 
+            }
+        }
+
+        /// <summary>
+        /// Views should call this 
+        /// </summary>
+        /// <returns></returns>
+        public virtual bool CanClose()
+        {
+            return true;
         }
     }
 }

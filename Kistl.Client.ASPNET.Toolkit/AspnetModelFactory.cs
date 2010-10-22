@@ -97,6 +97,16 @@ namespace Kistl.Client.ASPNET.Toolkit
         {
             throw new NotImplementedException();
         }
+
+        public override bool GetDecisionFromUser(string message, string caption)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void ShowMessage(string message, string caption)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public static class AspnetModelFactoryExtensions

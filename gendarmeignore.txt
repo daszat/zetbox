@@ -150,9 +150,6 @@ M: System.Object Kistl.Client.ASPNET.Toolkit.AspnetModelFactoryExtensions::AddCo
 M: System.Void Kistl.Client.ASPNET.Toolkit.View.DataObjectFullView::repProperties_OnItemDataBound(System.Object,System.Web.UI.WebControls.RepeaterItemEventArgs)
 M: System.Void Kistl.Client.Forms.FormsModelFactory::CreateWorkspace(Kistl.Client.Presentables.ObjectBrowser.WorkspaceViewModel,System.Boolean)
 M: System.Void Kistl.Client.Forms.View.DataObjectFullView::SyncProperties()
-M: System.Void Kistl.Client.WPF.View.ObjectBrowser.InstanceListDisplay::Edit_Click(System.Object,System.Windows.RoutedEventArgs)
-M: System.Void Kistl.Client.WPF.View.ObjectBrowser.InstanceListDisplay::New_Click(System.Object,System.Windows.RoutedEventArgs)
-M: System.Void Kistl.Client.WPF.View.ModuleEditor.InstanceListDisplay::New_Click(System.Object,System.Windows.RoutedEventArgs)
 # object is "bound" to the process' life cycle, no disposal necessary
 M: System.Void Kistl.Server.WcfServer::Init(Kistl.API.Configuration.KistlConfig)
 M: System.Void Kistl.Server.Service.Program::XmlFallbackInitialisation(System.String)

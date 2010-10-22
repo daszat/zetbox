@@ -117,6 +117,16 @@ namespace Kistl.Client.WPF
                 return String.Empty;
             }
         }
+
+        public override bool GetDecisionFromUser(string message, string caption)
+        {
+            return MessageBox.Show(message, caption, MessageBoxButton.YesNo) == MessageBoxResult.Yes;
+        }
+
+        public override void ShowMessage(string message, string caption)
+        {
+            MessageBox.Show(message, caption);
+        }
     }
 
 }

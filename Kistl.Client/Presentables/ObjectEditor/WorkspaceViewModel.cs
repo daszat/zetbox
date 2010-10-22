@@ -20,6 +20,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
         public WorkspaceViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx)
             : base(appCtx, dataCtx)
         {
+            dataCtx.IsModifiedChanged += dataCtx_IsModifiedChanged;
             Items = new ObservableCollection<ViewModel>();
             appCtx.Factory.OnIMultipleInstancesManagerCreated(dataCtx, this);
         }
@@ -49,7 +50,33 @@ namespace Kistl.Client.Presentables.ObjectEditor
                 }
             }
         }
+        #endregion
 
+        #region Context change management
+        public bool IsContextModified
+        {
+            get
+            {
+                return DataContext.IsModified;
+            }
+        }
+
+        void dataCtx_IsModifiedChanged(object sender, EventArgs e)
+        {
+            OnPropertyChanged("IsContextModified");
+        }
+
+        public override bool CanClose()
+        {
+            if (IsContextModified)
+            {
+                return ViewModelFactory.GetDecisionFromUser("Workspace contains unsafed data. Close anyway?", "Unsafed data");
+            }
+            else
+            {
+                return true;
+            }
+        }
         #endregion
 
         #region Commands
@@ -202,6 +229,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
 
         #endregion
 
+        #region Model Management
         /// <summary>
         /// Show a foreign model by finding and creating the equivalent model on the local DataContext.
         /// </summary>
@@ -231,11 +259,14 @@ namespace Kistl.Client.Presentables.ObjectEditor
             AddItem(vm);
             return vm;
         }
+        #endregion
 
+        #region ViewModel Member
         public override string Name
         {
             get { return "Workspace"; }
         }
+        #endregion
 
         #region IDisposable Members
 

@@ -69,5 +69,15 @@ namespace Kistl.Client.Forms
         {
             throw new NotImplementedException();
         }
+
+        public override bool GetDecisionFromUser(string message, string caption)
+        {
+            return MessageBox.Show(message, caption, MessageBoxButtons.YesNo) == DialogResult.Yes;
+        }
+
+        public override void ShowMessage(string message, string caption)
+        {
+            MessageBox.Show(message, caption);
+        }
     }
 }
