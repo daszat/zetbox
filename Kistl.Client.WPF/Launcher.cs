@@ -10,6 +10,7 @@ namespace Kistl.Client.WPF
     using Kistl.App.GUI;
     using Kistl.Client.Presentables;
     using Kistl.Client.Presentables.ObjectBrowser;
+    using Kistl.Client.Presentables.KistlBase;
 
     public class Launcher
     {
@@ -30,28 +31,28 @@ namespace Kistl.Client.WPF
         {
             if (args == null) { throw new ArgumentNullException("args"); }
 
-            bool _timeRecorder = args.Contains("-timerecorder");
-
             App.FixupDatabase(ctxFactory);
 
-            ViewModel initialWorkspace;
-            if (_timeRecorder)
+            if (args.Length > 0)
             {
-                initialWorkspace = mdlFactory.CreateViewModel<Kistl.Client.Presentables.TimeRecords.WorkEffortRecorderModel.Factory>().Invoke(ctxFactory.Invoke());
+                var appGuid = new Guid(args[0]);
+                var app = frozenCtx.FindPersistenceObject<Kistl.App.GUI.Application>(appGuid);
+                var appMdl = mdlFactory.CreateViewModel<ApplicationViewModel.Factory>().Invoke(ctxFactory.Invoke(), app);
+                appMdl.OpenApplication(appMdl);
             }
             else
             {
-                initialWorkspace = mdlFactory.CreateViewModel<WorkspaceViewModel.Factory>().Invoke(ctxFactory.Invoke());
+                var ws = mdlFactory.CreateViewModel<WorkspaceViewModel.Factory>().Invoke(ctxFactory.Invoke());
+                ControlKind launcher = frozenCtx.FindPersistenceObject<ControlKind>(NamedObjects.ControlKind_Kistl_App_GUI_LauncherKind);
+                mdlFactory.ShowModel(ws, launcher, true);
             }
 
-            ControlKind launcher = frozenCtx.FindPersistenceObject<ControlKind>(NamedObjects.ControlKind_Kistl_App_GUI_LauncherKind);
-            mdlFactory.ShowModel(initialWorkspace, launcher, true);
 
-            var ctxDebugger = mdlFactory.CreateViewModel<KistlDebuggerAsViewModel.Factory>().Invoke(ctxFactory());
-            mdlFactory.ShowModel(ctxDebugger, true);
+            //var ctxDebugger = mdlFactory.CreateViewModel<KistlDebuggerAsViewModel.Factory>().Invoke(ctxFactory());
+            //mdlFactory.ShowModel(ctxDebugger, true);
 
-            var cacheDebugger = mdlFactory.CreateViewModel<CacheDebuggerViewModel.Factory>().Invoke(ctxFactory());
-            mdlFactory.ShowModel(cacheDebugger, true);
+            //var cacheDebugger = mdlFactory.CreateViewModel<CacheDebuggerViewModel.Factory>().Invoke(ctxFactory());
+            //mdlFactory.ShowModel(cacheDebugger, true);
         }
     }
 }

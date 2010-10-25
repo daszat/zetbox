@@ -43,10 +43,10 @@ namespace Kistl.Client.WPF
         {
             string[] result;
 
-            if (args.Length == 1 && !args[0].StartsWith("-"))
+            if (args.Length >= 1)
             {
                 configFilePath = args[0];
-                result = new string[] { };
+                result = args.Skip(1).ToArray();
             }
             else
             {
