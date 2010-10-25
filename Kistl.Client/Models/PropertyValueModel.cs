@@ -76,6 +76,10 @@ namespace Kistl.Client.Models
                     return new ObjectReferencePropertyValueModel(obj, objRefProp);
                 }
             }
+            else if (prop is CompoundObjectProperty)
+            {
+                return new CompoundObjectPropertyValueModel(obj, (CompoundObjectProperty)prop);
+            }
             else
             {
                 throw new NotImplementedException(string.Format("GetValueModel is not implemented for {0} properties yet", prop.GetPropertyTypeString()));
@@ -140,6 +144,10 @@ namespace Kistl.Client.Models
                 {
                     return new ObjectReferenceValueModel(lb, prop.Description, prop.IsNullable(), false, objRefProp.GetReferencedObjectClass());
                 }
+            }
+            else if (prop is CompoundObjectProperty)
+            {
+                return new CompoundObjectValueModel(lb, prop.Description, prop.IsNullable(), false, ((CompoundObjectProperty)prop).CompoundObjectDefinition);
             }
 
             throw new NotImplementedException(string.Format("GetValueModel is not implemented for {0} properties yet", prop.GetPropertyTypeString()));
@@ -523,6 +531,64 @@ namespace Kistl.Client.Models
                     _referencedClass = objRefProp.GetReferencedObjectClass();
                 }
                 return _referencedClass;
+            }
+        }
+
+        #endregion
+    }
+
+    public class CompoundObjectPropertyValueModel
+    : ClassPropertyValueModel<ICompoundObject>, ICompoundObjectValueModel
+    {
+        protected readonly CompoundObjectProperty cProp;
+
+        public CompoundObjectPropertyValueModel(INotifyingObject obj, CompoundObjectProperty prop)
+            : base(obj, prop)
+        {
+            this.cProp = prop;
+        }
+
+        #region IValueModel<TValue> Members
+        private bool _valueCacheInititalized = false;
+        private ICompoundObject _valueCache;
+
+        /// <summary>
+        /// Gets or sets the value of the property presented by this model
+        /// </summary>
+        public override ICompoundObject Value
+        {
+            get
+            {
+                if (!_valueCacheInititalized)
+                {
+                    UpdateValueCache();
+                }
+                return _valueCache;
+            }
+            set
+            {
+                _valueCache = value;
+                _valueCacheInititalized = true;
+                Object.SetPropertyValue<ICompoundObject>(Property.Name, value);
+                CheckConstraints();
+                NotifyValueChanged();
+            }
+        }
+
+        protected override void UpdateValueCache()
+        {
+            _valueCache = Object.GetPropertyValue<ICompoundObject>(Property.Name);
+            _valueCacheInititalized = true;
+        }
+        #endregion
+
+        #region IObjectReferenceValueModel Members
+
+        public CompoundObject CompoundObjectDefinition
+        {
+            get
+            {
+                return cProp.CompoundObjectDefinition;
             }
         }
 

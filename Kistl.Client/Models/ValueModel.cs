@@ -277,6 +277,25 @@ namespace Kistl.Client.Models
         #endregion
     }
 
+    public class CompoundObjectValueModel : ClassValueModel<ICompoundObject>, ICompoundObjectValueModel
+    {
+        public CompoundObjectValueModel(string label, string description, bool allowNullInput, bool isReadOnly, CompoundObject def)
+            : base(label, description, allowNullInput, isReadOnly)
+        {
+            this.CompoundObjectDefinition = def;
+        }
+
+        #region IObjectReferenceValueModel Members
+
+        public CompoundObject CompoundObjectDefinition
+        {
+            get;
+            private set;
+        }
+
+        #endregion
+    }
+
     public class EnumerationValueModel : NullableStructValueModel<int>, IEnumerationValueModel
     {
         protected readonly Enumeration enumDef;

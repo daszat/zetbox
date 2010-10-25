@@ -24,38 +24,19 @@ namespace Kistl.Client.Presentables.ValueViewModels
             IValueModel mdl)
             : base(appCtx, dataCtx, mdl)
         {
-            // ReferencedType = prop.CompoundObjectDefinition;
+            CompoundObjectModel = (ICompoundObjectValueModel)mdl;
         }
 
         #region Public Interface
 
-        public CompoundObject ReferencedType
-        {
-            get;
-            protected set;
-        }
-
+        public ICompoundObjectValueModel CompoundObjectModel { get; private set; }
+        public CompoundObject ReferencedType { get { return CompoundObjectModel.CompoundObjectDefinition; } }
 
         public override string Name
         {
             get { return Value == null ? "(null)" : "CompoundObject: " + Value.Name; }
         }
         #endregion
-
-        #region Utilities and UI callbacks
-
-        //protected override void UpdatePropertyValue()
-        //{
-        //    var newValue = Object.GetPropertyValue<ICompoundObject>(Property.Name) ?? DataContext.CreateCompoundObject(DataContext.GetInterfaceType(((CompoundObjectProperty)Property).CompoundObjectDefinition.GetDataType()));
-        //    var newModel = ModelFactory.CreateViewModel<CompoundObjectViewModel.Factory>(newValue).Invoke(DataContext, newValue);
-        //    if (Value != newModel)
-        //    {
-        //        Value = newModel;
-        //    }
-        //}
-
-        #endregion
-
 
         protected override void ParseValue(string str)
         {

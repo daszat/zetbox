@@ -66,6 +66,11 @@ namespace Kistl.Client.Models
         ObjectClass ReferencedClass { get; }
     }
 
+    public interface ICompoundObjectValueModel : IValueModel<ICompoundObject>
+    {
+        CompoundObject CompoundObjectDefinition { get; }
+    }
+    
 
     public interface IObjectCollectionValueModel<TCollection> : IValueModel<TCollection>, INotifyCollectionChanged
     {

@@ -134,8 +134,12 @@ namespace Kistl.Client.WPF.View.KistlBase
                         cpFef.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(String.Format("ActionViewModelsByName[{0}]", desc.Name)), Mode = BindingMode.OneWay });
                         break;
                     case ColumnDisplayModel.ColumnType.PropertyModel:
-                        cpFef.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(String.Format("PropertyModelsByName[{0}]", desc.Name)), Mode = BindingMode.OneWay });
-                        break;
+                        {
+                            var tmp = desc.Name.Split('.').Select(i => String.Format("PropertyModelsByName[{0}]", i));
+                            var binding = string.Join(".Value.", tmp.ToArray());
+                            cpFef.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(binding), Mode = BindingMode.OneWay });
+                            break;
+                        }
                     case ColumnDisplayModel.ColumnType.Property:
                         cpFef.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(desc.Name), Mode = BindingMode.OneWay });
                         break;
