@@ -411,4 +411,112 @@ namespace Kistl.Client.Presentables.ValueViewModels
             }
         }
     }
+
+    public class NullableMonthPropertyViewModel
+        : NullableDateTimePropertyViewModel
+    {
+        public new delegate NullableMonthPropertyViewModel Factory(IKistlContext dataCtx, IValueModel mdl);
+
+        public NullableMonthPropertyViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, IValueModel mdl)
+            : base(dependencies, dataCtx, mdl)
+        {
+            
+        }
+
+        private int? _year;
+        public int? Year
+        {
+            get
+            {
+                return _year;
+            }
+            set
+            {
+                if (_year != value)
+                {
+                    _year = value;
+                    base.Value = GetValue();
+                    OnPropertyChanged("Year");
+                    OnPropertyChanged("Value");
+                }
+            }
+        }
+
+        private int? _month;
+        public int? Month
+        {
+            get
+            {
+                return _month;
+            }
+            set
+            {
+                if (_month != value)
+                {
+                    _month = value;
+                    base.Value = GetValue();
+                    OnPropertyChanged("Month");
+                    OnPropertyChanged("Value");
+                }
+            }
+        }
+
+        private DateTime? GetValue()
+        {
+            return Year != null && Month != null ? new DateTime(Year.Value, Month.Value, 1) : (DateTime?)null;
+        }
+
+        public override DateTime? Value
+        {
+            get
+            {
+                return GetValue();
+            }
+            set
+            {
+                base.Value = value;
+                if (value != null)
+                {
+                    _year = value.Value.Year;
+                    _month = value.Value.Month;
+                    OnPropertyChanged("Year");
+                    OnPropertyChanged("Month");
+                }
+            }
+        }
+
+        public class MonthViewModel
+        {
+            public MonthViewModel()
+            {
+            }
+
+            public MonthViewModel(int month, string name)
+            {
+                this.Month = month;
+                this.Name = name;
+            }
+
+            public int Month { get; set; }
+            public string Name { get; set; }
+        }
+
+        private static IList<MonthViewModel> _Months = null;
+        public IEnumerable<MonthViewModel> Months
+        {
+            get
+            {
+                if (_Months == null)
+                {
+                    _Months = new List<MonthViewModel>();
+                    for (int i = 1; i <= 12; i++)
+                    {
+                        var dt = new DateTime(2000, i, 1);
+                        _Months.Add(new MonthViewModel(i, dt.ToString("MMMM")));
+                    }
+                }
+                return _Months;
+            }
+        }
+    }
 }

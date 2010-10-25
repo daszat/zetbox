@@ -71,7 +71,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 _sortProp = p;
                 _direction = direction;
                 _sortedList = _collection.AsQueryable()
-                    .OrderBy(string.Format("{0} {1}", _sortProp, _direction == ListSortDirection.Descending ? "desc" : string.Empty))
+                    .OrderBy(string.Format("it.{0} {1}", _sortProp, _direction == ListSortDirection.Descending ? "desc" : string.Empty))
                     .Cast<IDataObject>()
                     .ToList();
                 OnCollectionChanged();

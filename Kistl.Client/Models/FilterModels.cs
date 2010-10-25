@@ -209,6 +209,18 @@ namespace Kistl.Client.Models
         }
     }
 
+    public class MonthValueFilterModel : FilterModel
+    {
+        public MonthValueFilterModel()
+        {
+        }
+
+        protected override string GetPredicate()
+        {
+            return string.Format("{0} >= @0 && {0} < @0.AddMonths(1)", ValueSource.Expression);
+        }
+    }
+
     public class RangeFilterModel : FilterModel
     {
         protected override string GetPredicate()

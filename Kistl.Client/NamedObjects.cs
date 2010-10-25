@@ -13,6 +13,7 @@ namespace Kistl.Client
     {
         public static readonly Guid ViewModelDescriptor_NullableValuePropertyModel_Bool = new Guid("09d1f453-d0d9-429e-88e7-e84b33de7c2e");
         public static readonly Guid ViewModelDescriptor_NullableValuePropertyModel_DateTime = new Guid("fc74b434-3801-4e4a-ab67-e65a9e014005");
+        public static readonly Guid ViewModelDescriptor_NullableMonthPropertyViewModel = new Guid("e66f8cad-f532-4c75-8fb0-e1aa8baddd06");
         public static readonly Guid ViewModelDescriptor_NullableValuePropertyModel_Double = new Guid("3a3d0c1c-679e-4d4d-adeb-3ab260079ccb");
         public static readonly Guid ViewModelDescriptor_NullableValuePropertyModel_Enum = new Guid("a6ff986c-a485-4c4d-947c-e59d14112ec2");
         public static readonly Guid ViewModelDescriptor_NullableValuePropertyModel_Int = new Guid("edaf9334-dc36-4778-aa33-1e5cdaeeb767");

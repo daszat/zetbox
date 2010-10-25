@@ -101,6 +101,26 @@ namespace Kistl.App.GUI
         }
         #endregion
 
+        #region MonthFilterConfiguration
+        public static void OnCreateFilterModel_MonthFilterConfiguration(Kistl.App.GUI.MonthFilterConfiguration obj, MethodReturnEventArgs<IFilterModel> e)
+        {
+            var mdl = new MonthValueFilterModel();
+            mdl.Label = !string.IsNullOrEmpty(obj.Label) ? obj.Label : (!string.IsNullOrEmpty(obj.Property.Label) ? obj.Property.Label : obj.Property.Name);
+            mdl.Required = obj.Required;
+            mdl.ValueSource = FilterValueSource.FromProperty(obj.Property);
+
+            mdl.ViewModelType = obj.ViewModelDescriptor;
+            mdl.FilterArguments.Add(new FilterArgumentConfig(obj.Property.GetDetachedValueModel(), /*cfg.ArgumentViewModel ?? */ obj.Context.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableMonthPropertyViewModel)));
+            e.Result = mdl;
+        }
+
+        public static void OnNotifyCreated_MonthFilterConfiguration(Kistl.App.GUI.MonthFilterConfiguration obj)
+        {
+            obj.ViewModelDescriptor = obj.Context.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_SingleValueFilterViewModel);
+        }
+        #endregion
+
+
         #region OptionalPredicateFilterConfiguration
         public static void OnCreateFilterModel_OptionalPredicateFilterConfiguration(Kistl.App.GUI.OptionalPredicateFilterConfiguration obj, MethodReturnEventArgs<Kistl.API.IFilterModel> e)
         {

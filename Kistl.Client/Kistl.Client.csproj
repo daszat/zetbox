@@ -123,7 +123,6 @@
     <Compile Include="Presentables\KistlBase\ApplicationViewModel.cs" />
     <Compile Include="Presentables\KistlBase\AssemblyViewModel.cs" />
     <Compile Include="Presentables\KistlBase\AssemblyReferenceViewModel.cs" />
-    <Compile Include="Presentables\KistlBase\InstanceListViewModel.FilterExpressions.cs" />
     <Compile Include="Presentables\KistlBase\SystemTypeViewModel.cs" />
     <Compile Include="Presentables\KistlBase\TypeRefPropertyViewModel.Commands.cs" />
     <Compile Include="Presentables\KistlBase\TypeRefPropertyViewModel.cs" />
