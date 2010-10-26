@@ -1033,4 +1033,21 @@ namespace Kistl.API
     /// <param name="sender"></param>
     /// <param name="e"></param>
     public delegate void GenericEventHandler<TEventArgs>(object sender, GenericEventArgs<TEventArgs> e);
+
+    public static class DateTimeExtensions
+    {
+        public static DateTime FirstWeekDay(this DateTime dt)
+        {
+            return dt.Date.AddDays(-(((int)dt.DayOfWeek - 1) % 7));
+        }
+        public static DateTime FirstMonthDay(this DateTime dt)
+        {
+            return new DateTime(dt.Year, dt.Month, 1);
+        }
+        public static DateTime FirstYearDay(this DateTime dt)
+        {
+            return new DateTime(dt.Year, 1, 1);
+        }
+
+    }
 }
