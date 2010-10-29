@@ -107,7 +107,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 if (_ClearValueCommand == null)
                 {
                     _ClearValueCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>()
-                        .Invoke(DataContext, "Clear value", "Sets the value to nothing", () => ClearValue(), () => AllowNullInput);
+                        .Invoke(DataContext, "Clear value", "Sets the value to nothing", () => ClearValue(), () => AllowNullInput && !DataContext.IsReadonly);
                 }
                 return _ClearValueCommand;
             }
@@ -179,7 +179,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
         #region IValueViewModel<TValue> Members
 
-        public abstract TValue Value {get; set;}
+        public abstract TValue Value { get; set; }
 
         #endregion
 
@@ -410,6 +410,100 @@ namespace Kistl.Client.Presentables.ValueViewModels
                     return Value.Value.ToString();
             }
         }
+
+        public bool DatePartVisible
+        {
+            get
+            {
+                return DateTimeModel.DateTimeStyle == DateTimeStyles.Date || DateTimeModel.DateTimeStyle == DateTimeStyles.DateTime;
+            }
+        }
+
+        public bool TimePartVisible
+        {
+            get
+            {
+                return DateTimeModel.DateTimeStyle == DateTimeStyles.Time || DateTimeModel.DateTimeStyle == DateTimeStyles.DateTime;
+            }
+        }
+
+        public DateTime? DatePart
+        {
+            get
+            {
+                return Value != null ? Value.Value.Date : (DateTime?)null;
+            }
+            set
+            {
+                if (value == null && Value == null)
+                {
+                    // Do nothing
+                }
+                else if (value == null && Value != null)
+                {
+                    // Preserve time
+                    Value = DateTime.MinValue.Add(Value.Value.TimeOfDay);
+                }
+                else if (value != null && Value != null)
+                {
+                    // Preserve time
+                    Value = value.Value.Add(Value.Value.TimeOfDay);
+                }
+                else //if (value != null && Value == null)
+                {
+                    Value = value;
+                }
+
+                OnPropertyChanged("DatePart");
+            }
+        }
+
+        public TimeSpan? TimePart
+        {
+            get
+            {
+                return Value != null ? Value.Value.TimeOfDay : (TimeSpan?)null;
+            }
+            set
+            {
+                if (value == null && Value == null)
+                {
+                    // Do nothing
+                }
+                else if (value == null && Value != null)
+                {
+                    // Preserve date
+                    Value = Value.Value.Date;
+                }
+                else if (value != null && Value != null)
+                {
+                    // Preserve date
+                    Value = Value.Value.Date.Add(value.Value);
+                }
+                else //if (value != null && Value == null)
+                {
+                    Value = DateTime.MinValue.Add(value.Value);
+                }
+                OnPropertyChanged("TimePart");
+            }
+        }
+
+        public override DateTime? Value
+        {
+            get
+            {
+                return base.Value;
+            }
+            set
+            {
+                if (base.Value != value)
+                {
+                    base.Value = value;
+                    OnPropertyChanged("DatePart");
+                    OnPropertyChanged("TimePart");
+                }
+            }
+        }
     }
 
     public class NullableMonthPropertyViewModel
@@ -420,7 +514,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
         public NullableMonthPropertyViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, IValueModel mdl)
             : base(dependencies, dataCtx, mdl)
         {
-            
+
         }
 
         private int? _year;

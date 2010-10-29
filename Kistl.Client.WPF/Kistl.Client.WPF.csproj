@@ -177,6 +177,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\KistlBase\NullableDateTimeValueEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\KistlBase\NullableMonthValueEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -300,12 +304,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\KistlBase\StringDisplay.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\KistlBase\TypeRefPropertyView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <Generator>MSBuild:Compile</Generator>
@@ -444,6 +442,9 @@
     <Compile Include="View\KistlBase\CompoundObjectPropertyEditor.xaml.cs">
       <DependentUpon>CompoundObjectPropertyEditor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\KistlBase\NullableDateTimeValueEditor.xaml.cs">
+      <DependentUpon>NullableDateTimeValueEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\KistlBase\NullableMonthValueEditor.xaml.cs">
       <DependentUpon>NullableMonthValueEditor.xaml</DependentUpon>
     </Compile>
@@ -511,9 +512,6 @@
     </Compile>
     <Compile Include="View\KistlBase\StringDisplay.xaml.cs">
       <DependentUpon>StringDisplay.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\KistlBase\TypeRefPropertyView.xaml.cs">
-      <DependentUpon>TypeRefPropertyView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\KistlDebuggerView.xaml.cs">
       <DependentUpon>KistlDebuggerView.xaml</DependentUpon>

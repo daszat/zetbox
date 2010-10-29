@@ -5,23 +5,19 @@
                      xmlns:view="clr-namespace:Kistl.Client.WPF.View.KistlBase"
                      ToolTip="{Binding ToolTip, Mode=OneWay}">
     <view:PropertyEditor.ContextMenu>
-        <ContextMenu>
-            <MenuItem Header="{Binding SelectValueCommand.Label}"
-                      ToolTip="{Binding SelectValueCommand.ToolTip}"
-                      Command="{Binding SelectValueCommand, Converter={StaticResource CommandConverter}}" />
-            <MenuItem Header="{Binding CreateNewItemAndSetValueCommand.Label}"
-                      ToolTip="{Binding CreateNewItemAndSetValueCommand.ToolTip}"
-                      Command="{Binding CreateNewItemAndSetValueCommand, Converter={StaticResource CommandConverter}}" />
-            <MenuItem Header="{Binding OpenReferenceCommand.Label}"
-                      ToolTip="{Binding OpenReferenceCommand.ToolTip}"
-                      Command="{Binding OpenReferenceCommand, Converter={StaticResource CommandConverter}}"
-                      IsEnabled="{Binding HasValue, Mode=OneWay}" />
-            <MenuItem Command="{Binding ClearValueCommand, Converter={StaticResource CommandConverter}}"
-                      Header="{Binding ClearValueCommand.Label}"
-                      ToolTip="{Binding ClearValueCommand.ToolTip}" />
+        <ContextMenu ItemsSource="{Binding Commands}">
+            <ContextMenu.ItemContainerStyle>
+                <Style TargetType="MenuItem">
+                    <Setter Property="Command"
+                            Value="{Binding Converter={StaticResource CommandConverter}}" />
+                    <Setter Property="Header"
+                            Value="{Binding Label}" />
+                    <Setter Property="ToolTip"
+                            Value="{Binding ToolTip}" />
+                </Style>
+            </ContextMenu.ItemContainerStyle>
         </ContextMenu>
     </view:PropertyEditor.ContextMenu>
-
     <DockPanel>
         <ctrls:DropDownButton>
             <ctrls:DropDownButton.Content>
@@ -31,20 +27,17 @@
                        Source="/Kistl.Client.WPF;component/Images/EditTableHS.png" />
             </ctrls:DropDownButton.Content>
             <ctrls:DropDownButton.DropDown>
-                <ContextMenu>
-                    <MenuItem Header="{Binding SelectValueCommand.Label}"
-                              ToolTip="{Binding SelectValueCommand.ToolTip}"
-                              Command="{Binding SelectValueCommand, Converter={StaticResource CommandConverter}}" />
-                    <MenuItem Header="{Binding CreateNewItemAndSetValueCommand.Label}"
-                              ToolTip="{Binding CreateNewItemAndSetValueCommand.ToolTip}"
-                              Command="{Binding CreateNewItemAndSetValueCommand, Converter={StaticResource CommandConverter}}" />
-                    <MenuItem Header="{Binding OpenReferenceCommand.Label}"
-                              ToolTip="{Binding OpenReferenceCommand.ToolTip}"
-                              Command="{Binding OpenReferenceCommand, Converter={StaticResource CommandConverter}}"
-                              IsEnabled="{Binding HasValue, Mode=OneWay}" />
-                    <MenuItem Command="{Binding ClearValueCommand, Converter={StaticResource CommandConverter}}"
-                              Header="{Binding ClearValueCommand.Label}"
-                              ToolTip="{Binding ClearValueCommand.ToolTip}" />
+                <ContextMenu ItemsSource="{Binding Commands}">
+                    <ContextMenu.ItemContainerStyle>
+                        <Style TargetType="MenuItem">
+                            <Setter Property="Command"
+                                    Value="{Binding Converter={StaticResource CommandConverter}}" />
+                            <Setter Property="Header"
+                                    Value="{Binding Label}" />
+                            <Setter Property="ToolTip"
+                                    Value="{Binding ToolTip}" />
+                        </Style>
+                    </ContextMenu.ItemContainerStyle>
                 </ContextMenu>
             </ctrls:DropDownButton.DropDown>
         </ctrls:DropDownButton>

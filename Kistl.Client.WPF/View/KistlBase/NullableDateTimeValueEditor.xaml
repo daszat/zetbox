@@ -1,0 +1,21 @@
+﻿<view:PropertyEditor x:Class="Kistl.Client.WPF.View.NullableDateTimeValueEditor"
+                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                     xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"
+                     xmlns:view="clr-namespace:Kistl.Client.WPF.View.KistlBase"
+                     xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.DateControls;assembly=WPFSamplesLib"
+                     ToolTip="{Binding ToolTip}"
+                     MinWidth="1"
+                     mc:Ignorable="d"
+                     d:DesignHeight="300"
+                     d:DesignWidth="447">
+    <DockPanel>
+        <kevin:DatePicker Value="{Binding DatePart, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=true}"
+                          Visibility="{Binding DatePartVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                          CanEdit="True" />
+        <TextBox Text="{Binding TimePart, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=true}"
+                 Visibility="{Binding TimePartVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
+    </DockPanel>
+</view:PropertyEditor>

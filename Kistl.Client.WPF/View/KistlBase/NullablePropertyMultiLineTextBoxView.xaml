@@ -5,7 +5,7 @@
                      xmlns:view="clr-namespace:Kistl.Client.WPF.View.KistlBase"
                      ToolTip="{Binding ToolTip}"
                      VerticalContentAlignment="Stretch">
-    <TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
+    <TextBox Text="{Binding Value, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=true}"
              IsReadOnly="{Binding IsReadOnly}"
              AcceptsReturn="True"
              AcceptsTab="True"

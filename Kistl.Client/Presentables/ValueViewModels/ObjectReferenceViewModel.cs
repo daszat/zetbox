@@ -26,6 +26,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             : base(appCtx, dataCtx, mdl)
         {
             ObjectReferenceModel = (IObjectReferenceValueModel)mdl;
+            _allowCreateNewItem = !dataCtx.IsReadonly;
         }
 
         #region Public Interface
@@ -130,6 +131,30 @@ namespace Kistl.Client.Presentables.ValueViewModels
         #endregion
 
         #region Commands
+        private ObservableCollection<ICommandViewModel> _Commands;
+        public ObservableCollection<ICommandViewModel> Commands
+        {
+            get
+            {
+                if (_Commands == null)
+                {
+                    _Commands = CreateCommands();
+                }
+                return _Commands;
+            }
+        }
+
+        protected virtual ObservableCollection<ICommandViewModel> CreateCommands()
+        {
+            var cmds = new ObservableCollection<ICommandViewModel>();
+            cmds.Add(SelectValueCommand);
+            cmds.Add(CreateNewItemAndSetValueCommand);
+            cmds.Add(OpenReferenceCommand);
+            cmds.Add(ClearValueCommand);
+
+            return cmds;
+        }
+
         #region OpenReference
         public void OpenReference()
         {
@@ -211,7 +236,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 if (_createNewItemAndSetValueCommand == null)
                 {
                     _createNewItemAndSetValueCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>()
-                        .Invoke(DataContext, "Create new item", "Create new item", () => CreateNewItemAndSetValue(null), () => !DataContext.IsReadonly);
+                        .Invoke(DataContext, "Create new item", "Create new item", () => CreateNewItemAndSetValue(null), () => AllowCreateNewItem);
                 }
                 return _createNewItemAndSetValueCommand;
             }
@@ -255,6 +280,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
         #endregion
         #endregion
 
+        #region Value
         protected override void ParseValue(string str)
         {
             throw new NotImplementedException();
@@ -293,5 +319,6 @@ namespace Kistl.Client.Presentables.ValueViewModels
             }
             _valueCacheInititalized = true;
         }
+        #endregion
     }
 }

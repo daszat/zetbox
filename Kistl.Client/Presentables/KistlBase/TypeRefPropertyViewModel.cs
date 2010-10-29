@@ -29,6 +29,14 @@ namespace Kistl.Client.Presentables.KistlBase
             //}
         }
 
+        protected override System.Collections.ObjectModel.ObservableCollection<ICommandViewModel> CreateCommands()
+        {
+            var cmds = base.CreateCommands();
+            cmds.Add(LoadTypeRefFromAssemblyRefCommand);
+            cmds.Add(LoadTypeRefFromAssemblyFileCommand);
+            return cmds;
+        }
+
         private LoadTypeRefFromAssemblyFileCommand _loadTypeRefFromAssemblyFileCommand = null;
         public ICommandViewModel LoadTypeRefFromAssemblyFileCommand
         {
