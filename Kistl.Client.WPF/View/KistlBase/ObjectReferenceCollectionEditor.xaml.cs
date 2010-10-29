@@ -25,7 +25,7 @@ namespace Kistl.Client.WPF.View.KistlBase
     /// <summary>
     /// Interaction logic for DataObjectListView.xaml
     /// </summary>
-    [ViewDescriptor("KistlBase", Kistl.App.GUI.Toolkit.WPF, Kind = "Kistl.App.GUI.ObjectCollectionKind")]
+    [ViewDescriptor(Kistl.App.GUI.Toolkit.WPF)]
     public partial class ObjectReferenceCollectionEditor
         : PropertyEditor, IHasViewModel<ObjectCollectionViewModel>
     {

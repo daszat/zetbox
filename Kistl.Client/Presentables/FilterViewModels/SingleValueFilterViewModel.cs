@@ -9,7 +9,7 @@ using Kistl.Client.Models;
 
 namespace Kistl.Client.Presentables.FilterViewModels
 {
-    [ViewModelDescriptor("KistlBase", DefaultKind = "Kistl.App.GUI.SingleValueFilterKind", Description = "FilterViewModel for single value filters")]
+    [ViewModelDescriptor]
     public class SingleValueFilterViewModel : FilterViewModel
     {
         public new delegate SingleValueFilterViewModel Factory(IKistlContext dataCtx, IUIFilterModel mdl);

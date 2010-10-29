@@ -20,7 +20,7 @@ namespace Kistl.Client.WPF.View.KistlBase
     /// <summary>
     /// Interaction logic for CompoundObjectPropertyEditor.xaml
     /// </summary>
-    [ViewDescriptor("GUI", Kistl.App.GUI.Toolkit.WPF, Kind = "Kistl.App.GUI.CompoundObjectPropertyKind")]
+    [ViewDescriptor(Kistl.App.GUI.Toolkit.WPF)]
     public partial class CompoundObjectPropertyEditor : PropertyEditor, IHasViewModel<CompoundObjectPropertyViewModel>
     {
         public CompoundObjectPropertyEditor()

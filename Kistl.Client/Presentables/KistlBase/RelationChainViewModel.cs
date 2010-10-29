@@ -13,7 +13,7 @@ namespace Kistl.Client.Presentables.KistlBase
     using Kistl.Client.Models;
     using System.Collections.ObjectModel;
 
-    [ViewModelDescriptor("KistlBase", DefaultKind = "Kistl.App.GUI.ObjectListKind", Description = "A chain of Relation Objects")]
+    [ViewModelDescriptor]
     public class RelationChainViewModel
            : ObjectListViewModel
     {

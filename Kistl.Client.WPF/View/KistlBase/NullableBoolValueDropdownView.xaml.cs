@@ -21,7 +21,7 @@ namespace Kistl.Client.WPF.View
     /// <summary>
     /// Interaction logic for NullableBoolValueView.xaml
     /// </summary>
-    [ViewDescriptor("GUI", Kistl.App.GUI.Toolkit.WPF, Kind = "Kistl.App.GUI.DropdownBoolKind")]
+    [ViewDescriptor(Kistl.App.GUI.Toolkit.WPF)]
     public partial class NullableBoolValueDropdownView : PropertyEditor, IHasViewModel<IValueViewModel<bool>>
     {
         public NullableBoolValueDropdownView()

@@ -15,7 +15,7 @@ using Kistl.Client.Presentables.ValueViewModels;
 
 namespace Kistl.Client.Presentables
 {
-    [ViewModelDescriptor("KistlBase", DefaultKind = "Kistl.App.GUI.ParameterInputTaskDialog", Description = "ViewModel for receiving method invocation parameter from user.")]
+    [ViewModelDescriptor]
     public class ParameterInputTaskViewModel
         : WindowViewModel
     {

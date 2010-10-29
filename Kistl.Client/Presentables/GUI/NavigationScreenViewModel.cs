@@ -9,9 +9,7 @@ namespace Kistl.Client.Presentables.GUI
     using Kistl.API;
     using Kistl.App.GUI;
 
-    [ViewModelDescriptor("GUI",
-        DefaultKind = "Kistl.App.GUI.NavigationScreen",
-        Description = "Displays the NavigationScreen and the reachable Children, either as list or tree.")]
+    [ViewModelDescriptor]
     public class NavigationScreenViewModel
         : ViewModel
     {

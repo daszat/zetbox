@@ -6,7 +6,7 @@ using Kistl.API;
 
 namespace Kistl.Client.Presentables.GUI
 {
-    [ViewModelDescriptor("GUI", DefaultKind = "Kistl.App.GUI.MultiLineEditorDialog", Description = "ViewModel for displaying a multiline string editor dialog")]
+    [ViewModelDescriptor]
     public class MultiLineEditorDialogViewModel
         : WindowViewModel
     {

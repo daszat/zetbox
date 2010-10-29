@@ -20,7 +20,7 @@ namespace Kistl.Client.WPF.View.GUI
     /// <summary>
     /// Interaction logic for NavigationScreenDisplay.xaml
     /// </summary>
-    [ViewDescriptor("GUI", Kistl.App.GUI.Toolkit.WPF, Kind = "Kistl.App.GUI.NavigationScreen")]
+    [ViewDescriptor(Kistl.App.GUI.Toolkit.WPF)]
     public partial class NavigationScreenDisplay : UserControl, IHasViewModel<NavigationScreenViewModel>
     {
         public NavigationScreenDisplay()

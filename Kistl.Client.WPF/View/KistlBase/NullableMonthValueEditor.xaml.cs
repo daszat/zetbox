@@ -21,7 +21,7 @@ namespace Kistl.Client.WPF.View
     /// <summary>
     /// Interaction logic for NullableMonthValueEditor.xaml
     /// </summary>
-    [ViewDescriptor("GUI", Kistl.App.GUI.Toolkit.WPF, Kind = "Kistl.App.GUI.MonthEditorKind")]
+    [ViewDescriptor(Kistl.App.GUI.Toolkit.WPF)]
     public partial class NullableMonthValueEditor : PropertyEditor, IHasViewModel<NullableMonthPropertyViewModel>
     {
         public NullableMonthValueEditor()

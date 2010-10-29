@@ -42,14 +42,9 @@ namespace Kistl.Client.Presentables
     [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
     public sealed class ViewModelDescriptorAttribute : Attribute
     {
-        public ViewModelDescriptorAttribute(string module)
+        public ViewModelDescriptorAttribute()
         {
-            this.Module = module;
         }
-
-        public string Description { get; set; }
-        public string Module { get; set; }
-        public string DefaultKind { get; set; }
     }
 
     /// <summary>

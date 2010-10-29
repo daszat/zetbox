@@ -21,7 +21,7 @@ namespace Kistl.Client.WPF.View.GUI
     /// <summary>
     /// Interaction logic for SelectionDialog.xaml
     /// </summary>
-    [ViewDescriptor("GUI", Kistl.App.GUI.Toolkit.WPF, Kind = "Kistl.App.GUI.MultiLineEditorDialog")]
+    [ViewDescriptor(Kistl.App.GUI.Toolkit.WPF)]
     public partial class MultiLineEditorDialog : WindowView, IHasViewModel<MultiLineEditorDialogViewModel>
     {
         public MultiLineEditorDialog()

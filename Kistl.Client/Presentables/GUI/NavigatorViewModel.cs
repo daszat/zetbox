@@ -9,9 +9,7 @@ namespace Kistl.Client.Presentables.GUI
     using Kistl.API;
     using Kistl.App.GUI;
 
-    [ViewModelDescriptor("GUI",
-        DefaultKind = "Kistl.App.GUI.Navigator",
-        Description = "Container for navigating between NavigationScreens. Displays the current position in the screen hierarchy and allows forward/backward stepping in the history.")]
+    [ViewModelDescriptor]
     public class NavigatorViewModel
         : WindowViewModel
     {

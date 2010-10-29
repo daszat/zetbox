@@ -13,7 +13,7 @@ namespace Kistl.Client.Presentables.KistlBase
     using Kistl.Client.Presentables.KistlBase;
     using Kistl.Client.Models;
    
-    [ViewModelDescriptor("KistlBase", DefaultKind = "Kistl.App.GUI.DataObjectKind", Description = "DataObjectViewModel with specific extensions for RoleMemberships")]
+    [ViewModelDescriptor]
     public class RoleMembershipViewModel : DataObjectViewModel
     {
         public new delegate RoleMembershipViewModel Factory(IKistlContext dataCtx, RoleMembership roleMembership);

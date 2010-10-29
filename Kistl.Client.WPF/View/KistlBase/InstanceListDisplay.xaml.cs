@@ -26,7 +26,7 @@ namespace Kistl.Client.WPF.View.KistlBase
     /// <summary>
     /// Shows all instances of a given DataTypeViewModel
     /// </summary>
-    [ViewDescriptor("KistlBase", Kistl.App.GUI.Toolkit.WPF, Kind = "Kistl.App.GUI.InstanceListKind")]
+    [ViewDescriptor(Kistl.App.GUI.Toolkit.WPF)]
     public partial class InstanceListDisplay
         : UserControl, IHasViewModel<InstanceListViewModel>
     {

@@ -13,7 +13,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
     using Kistl.Client.Models;
     using Kistl.Client.Presentables.ValueViewModels;
 
-    [ViewModelDescriptor("GUI", DefaultKind = "Kistl.App.GUI.CompoundObjectPropertyKind", Description = "Viewmodel for editing a CompoundObject Property")]
+    [ViewModelDescriptor]
     public class CompoundObjectPropertyViewModel : ValueViewModel<CompoundObjectViewModel, ICompoundObject>, IValueViewModel<CompoundObjectViewModel>
     {
         public new delegate CompoundObjectPropertyViewModel Factory(IKistlContext dataCtx, IValueModel mdl);

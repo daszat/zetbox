@@ -9,7 +9,7 @@ using Kistl.Client.Models;
 
 namespace Kistl.Client.Presentables.FilterViewModels
 {
-    [ViewModelDescriptor("KistlBase", DefaultKind = "Kistl.App.GUI.RangeFilterKind", Description = "FilterViewModel for range value filters")]
+    [ViewModelDescriptor]
     public class RangeFilterViewModel : FilterViewModel
     {
         public new delegate RangeFilterViewModel Factory(IKistlContext dataCtx, IUIFilterModel mdl);

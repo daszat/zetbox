@@ -19,7 +19,7 @@ namespace Kistl.Client.WPF.View.KistlBase
     /// <summary>
     /// Interaction logic for ParameterInputTaskDialog.xaml
     /// </summary>
-    [ViewDescriptor("KistlBase", Kistl.App.GUI.Toolkit.WPF, Kind = "Kistl.App.GUI.ParameterInputTaskDialog")]
+    [ViewDescriptor(Kistl.App.GUI.Toolkit.WPF)]
     public partial class ParameterInputTaskDialog : WindowView, IHasViewModel<ParameterInputTaskViewModel>
     {
         public ParameterInputTaskDialog()

@@ -21,7 +21,7 @@ namespace Kistl.Client.WPF.View
     /// <summary>
     /// Interaction logic for NullablePropertyMultiLineTextBoxView.xaml
     /// </summary>
-    [ViewDescriptor("GUI", Kistl.App.GUI.Toolkit.WPF, Kind="Kistl.App.GUI.MultiLineTextboxKind")]
+    [ViewDescriptor(Kistl.App.GUI.Toolkit.WPF)]
     public partial class NullablePropertyMultiLineTextBoxView : PropertyEditor, IHasViewModel<IValueViewModel<string>>
     {
         public NullablePropertyMultiLineTextBoxView()

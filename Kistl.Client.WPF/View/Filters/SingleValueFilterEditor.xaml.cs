@@ -20,7 +20,7 @@ namespace Kistl.Client.WPF.View.Filters
     /// <summary>
     /// Interaction logic for StringFilterExpression.xaml
     /// </summary>
-    [ViewDescriptor("GUI", Kistl.App.GUI.Toolkit.WPF, Kind = "Kistl.App.GUI.SingleValueFilterKind")]
+    [ViewDescriptor(Kistl.App.GUI.Toolkit.WPF)]
     public partial class SingleValueFilterEditor : UserControl, IHasViewModel<SingleValueFilterViewModel>
     {
         public SingleValueFilterEditor()

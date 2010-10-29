@@ -30,7 +30,7 @@ namespace Kistl.Client.Presentables.KistlBase
     /// <summary>
     /// Models the specialities of <see cref="DataType"/>s.
     /// </summary>
-    [ViewModelDescriptor("KistlBase", DefaultKind = "Kistl.App.GUI.InstanceListKind", Description = "DataObjectViewModel with specific extensions for DataTypes")]
+    [ViewModelDescriptor]
     public class InstanceListViewModel
         : ViewModel, IViewModelWithIcon, IRefreshCommandListener
     {

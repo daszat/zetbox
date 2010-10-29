@@ -23,7 +23,7 @@ namespace Kistl.Client.WPF.View.GridCells
     /// <summary>
     /// Interaction logic for StringValue.xaml
     /// </summary>
-    [ViewDescriptor("GUI", Kistl.App.GUI.Toolkit.WPF, Kind = "Kistl.App.GUI.MultiLineTextboxGridKind")]
+    [ViewDescriptor(Kistl.App.GUI.Toolkit.WPF)]
     public partial class MultilineStringValue : UserControl, IHasViewModel<MultiLineStringValueViewModel>
     {
         public MultilineStringValue()

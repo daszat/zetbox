@@ -20,7 +20,7 @@ namespace Kistl.Client.WPF.View
     /// <summary>
     /// Interaction logic for NullableDateTimeValueEditor.xaml
     /// </summary>
-    [ViewDescriptor("GUI", Kistl.App.GUI.Toolkit.WPF, Kind = "Kistl.App.GUI.DateTimeKind")]
+    [ViewDescriptor(Kistl.App.GUI.Toolkit.WPF)]
     public partial class NullableDateTimeValueEditor : PropertyEditor, IHasViewModel<NullableDateTimePropertyViewModel>
     {
         public NullableDateTimeValueEditor()

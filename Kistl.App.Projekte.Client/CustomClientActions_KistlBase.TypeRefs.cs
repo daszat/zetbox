@@ -22,17 +22,17 @@ namespace Kistl.App.Base
         public static void OnAsType_TypeRef(TypeRef obj, MethodReturnEventArgs<Type> e, bool throwOnError)
         {
             Dictionary<TypeRef, Type> cache;
-            if(obj.Context.TransientState.ContainsKey(transientTypeTypeRefCacheKey))
+            if (obj.Context.TransientState.ContainsKey(transientTypeTypeRefCacheKey))
             {
                 cache = (Dictionary<TypeRef, Type>)obj.Context.TransientState[transientTypeTypeRefCacheKey];
             }
             else
             {
-                cache = new Dictionary<TypeRef,Type>();
+                cache = new Dictionary<TypeRef, Type>();
                 obj.Context.TransientState[transientTypeTypeRefCacheKey] = cache;
             }
 
-            if(cache.ContainsKey(obj))
+            if (cache.ContainsKey(obj))
             {
                 e.Result = cache[obj];
                 return;
@@ -154,22 +154,9 @@ namespace Kistl.App.Base
                             var descr = ctx.GetQuery<ViewModelDescriptor>().FirstOrDefault(i => i.ViewModelRef == tr);
                             if (descr == null)
                             {
-                                var module = ctx.GetQuery<Module>().FirstOrDefault(i => i.Name == attr.Module);
-                                if (module != null)
-                                {
-                                    descr = ctx.Create<ViewModelDescriptor>();
-                                    descr.ViewModelRef = tr;
-                                    descr.Module = module;
-                                    descr.Description = string.IsNullOrEmpty(attr.Description) ? "TODO: Add description" : attr.Description;
-                                    if (!string.IsNullOrEmpty(attr.DefaultKind))
-                                    {
-                                        descr.DefaultKind = ctx.GetQuery<ControlKind>().FirstOrDefault(c => c.Name == attr.DefaultKind);
-                                    }
-                                }
-                                else
-                                {
-                                    Logging.Log.Warn(string.Format("Unable to create ViewModelDescriptors for Type {0}. Attribute has a invalid Module Reference '{1}'", type.FullName, attr.Module));
-                                }
+                                descr = ctx.Create<ViewModelDescriptor>();
+                                descr.ViewModelRef = tr;
+                                descr.Description = "TODO: Add description";
                             }
                         }
                     }
@@ -199,22 +186,9 @@ namespace Kistl.App.Base
                             var descr = ctx.GetQuery<ViewDescriptor>().FirstOrDefault(i => i.ControlRef == tr);
                             if (descr == null)
                             {
-                                var module = ctx.GetQuery<Module>().FirstOrDefault(i => i.Name == attr.Module);
-                                if (module != null)
-                                {
-                                    descr = ctx.Create<ViewDescriptor>();
-                                    descr.ControlRef = tr;
-                                    descr.Module = module;
-                                    descr.Toolkit = attr.Toolkit;
-                                }
-                                else
-                                {
-                                    Logging.Log.Warn(string.Format("Unable to create ViewDescriptors for Type {0}. Attribute has a invalid Module Reference '{1}'", type.FullName, attr.Module));
-                                }
-                                if (!string.IsNullOrEmpty(attr.Kind))
-                                {
-                                    descr.ControlKind = ctx.GetQuery<ControlKind>().FirstOrDefault(c => c.Name == attr.Kind);
-                                }
+                                descr = ctx.Create<ViewDescriptor>();
+                                descr.ControlRef = tr;
+                                descr.Toolkit = attr.Toolkit;
                             }
                         }
                     }
@@ -268,7 +242,7 @@ namespace Kistl.App.Base
             using (Logging.Log.InfoTraceMethodCall("Loading new types"))
             {
                 System.Reflection.Assembly a = System.Reflection.Assembly.ReflectionOnlyLoad(assembly.Name);
-                if(a == null) a = AssemblyLoader.ReflectionOnlyLoadFrom(assembly.Name);
+                if (a == null) a = AssemblyLoader.ReflectionOnlyLoadFrom(assembly.Name);
                 if (a == null) throw new InvalidOperationException("Unable to load assembly: " + assembly.Name);
                 var newTypes = a
                     .GetExportedTypes()

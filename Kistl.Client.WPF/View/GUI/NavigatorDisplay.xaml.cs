@@ -21,7 +21,7 @@ namespace Kistl.Client.WPF.View.GUI
     /// <summary>
     /// Interaction logic for NavigatorDisplay.xaml
     /// </summary>
-    [ViewDescriptor("GUI", Kistl.App.GUI.Toolkit.WPF, Kind = "Kistl.App.GUI.Navigator")]
+    [ViewDescriptor(Kistl.App.GUI.Toolkit.WPF)]
     public partial class NavigatorDisplay : WindowView, IHasViewModel<NavigatorViewModel>
     {
         public NavigatorDisplay()
