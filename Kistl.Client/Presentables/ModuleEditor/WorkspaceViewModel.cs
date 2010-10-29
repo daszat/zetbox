@@ -105,9 +105,21 @@ namespace Kistl.Client.Presentables.ModuleEditor
                         {
                             foreach (var mdl in i)
                             {
-                                ((Assembly)mdl.Object).RegenerateTypeRefs();                                
+                                var ctx = ctxFactory();
+                                
+                                var a = ctx.Find<Assembly>(mdl.ID);
+                                a.RegenerateTypeRefs();
+
+                                if (ctx.AttachedObjects.OfType<ViewModelDescriptor>().Count(d => d.ObjectState == DataObjectState.New) == 0
+                                    && ctx.AttachedObjects.OfType<ViewDescriptor>().Count(d => d.ObjectState == DataObjectState.New) == 0)
+                                {
+                                    // Submit only if no new Descriptor has been created
+                                    // when new Descriptor has been created a Workspace will 
+                                    // show those Descriptors and the user has to submit them
+                                    ctx.SubmitChanges();
+                                }
                             }
-                            DataContext.SubmitChanges();
+
                         }));
                     lst.Add(lstMdl);
 

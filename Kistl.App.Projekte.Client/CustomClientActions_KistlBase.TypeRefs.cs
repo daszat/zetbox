@@ -15,7 +15,7 @@ using Kistl.Client.GUI;
 
 namespace Kistl.App.Base
 {
-    public static partial class CustomClientActions_KistlBase
+    public partial class CustomClientActions_KistlBase
     {
         // TODO: Move to common
         private const string transientTypeTypeRefCacheKey = "__TypeTypeRefCache__";
@@ -99,8 +99,31 @@ namespace Kistl.App.Base
                     var newTypes = LoadAndCreateTypes(assembly, ctx);
                     MarkOldTypesAsDeleted(ctx, oldTypes, newTypes);
                     UpdateTypeParents(newTypes);
+
                     CreateViewModelDescriptors(ctx, newTypes);
                     CreateViewDescriptors(ctx, newTypes);
+
+                    var newViewModelDescriptors = ctx.AttachedObjects.OfType<ViewModelDescriptor>().Where(d => d.ObjectState == DataObjectState.New).ToList();
+                    var newViewDescriptors = ctx.AttachedObjects.OfType<ViewDescriptor>().Where(d => d.ObjectState == DataObjectState.New).ToList();
+
+                    if (newViewDescriptors.Count > 0 || newViewModelDescriptors.Count > 0)
+                    {
+                        var workSpace = _mdlFactory.CreateViewModel<Kistl.Client.Presentables.ObjectEditor.WorkspaceViewModel.Factory>().Invoke(ctx);
+                        foreach (IDataObject i in newViewDescriptors)
+                        {
+                            workSpace.AddItem(_mdlFactory.CreateViewModel<DataObjectViewModel.Factory>(i).Invoke(ctx, i));
+                        }
+                        foreach (IDataObject i in newViewModelDescriptors)
+                        {
+                            workSpace.AddItem(_mdlFactory.CreateViewModel<DataObjectViewModel.Factory>(i).Invoke(ctx, i));
+                        }
+
+                        _mdlFactory.ShowModel(workSpace, true);
+                    }
+                    else
+                    {
+                        _mdlFactory.ShowMessage("Regenerating TypeRefs finished successfully, no new Descriptors found", "Success");
+                    }
                 }
                 catch (FileNotFoundException ex)
                 {

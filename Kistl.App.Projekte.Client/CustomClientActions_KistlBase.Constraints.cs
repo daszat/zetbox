@@ -11,7 +11,7 @@ using Kistl.App.Extensions;
 
 namespace Kistl.App.Base
 {
-    public static partial class CustomClientActions_KistlBase
+    public partial class CustomClientActions_KistlBase
     {
 
         #region Constraint

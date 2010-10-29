@@ -11,11 +11,19 @@ using System.Diagnostics;
 using Kistl.API.Utils;
 using Kistl.App.GUI;
 using Kistl.Client;
+using Kistl.Client.Presentables;
 
 namespace Kistl.App.Base
 {
-    public static partial class CustomClientActions_KistlBase
+    public partial class CustomClientActions_KistlBase
     {
+        private static IViewModelFactory _mdlFactory = null;
+
+        public CustomClientActions_KistlBase(IViewModelFactory mdlFactory)
+        {
+            _mdlFactory = mdlFactory;
+        }
+
         public static void OnCreated_ObjectClass(ObjectClass obj)
         {
             obj.DefaultViewModelDescriptor = obj.Context.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_DataObjectViewModel);
