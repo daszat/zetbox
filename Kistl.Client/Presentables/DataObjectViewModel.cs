@@ -105,9 +105,14 @@ namespace Kistl.Client.Presentables
                         k => k.Name,
                         v => _propertyModels[v]
                     );
+                    OnPropertyModelsByNameCreated();
                 }
                 return _propertyModelsByName;
             }
+        }
+
+        protected virtual void OnPropertyModelsByNameCreated()
+        {
         }
 
         private ReadOnlyCollection<PropertyGroupViewModel> _propertyGroups;

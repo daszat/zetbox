@@ -176,6 +176,32 @@ namespace Kistl.Client.Presentables.ValueViewModels
         #endregion
 
         #region Commands
+
+        private ObservableCollection<ICommandViewModel> _Commands;
+        public ObservableCollection<ICommandViewModel> Commands
+        {
+            get
+            {
+                if (_Commands == null)
+                {
+                    _Commands = CreateCommands();
+                }
+                return _Commands;
+            }
+        }
+
+        protected virtual ObservableCollection<ICommandViewModel> CreateCommands()
+        {
+            var cmds = new ObservableCollection<ICommandViewModel>();
+
+            if(AllowAddExisting) cmds.Add(AddExistingCommand);
+            if(AllowAddNew) cmds.Add(CreateNewCommand);
+            if(AllowRemove) cmds.Add(RemoveCommand);
+            if(AllowDelete) cmds.Add(DeleteCommand);
+
+            return cmds;
+        }
+
         private ICommandViewModel _CreateNewCommand = null;
         public ICommandViewModel CreateNewCommand
         {
@@ -211,10 +237,10 @@ namespace Kistl.Client.Presentables.ValueViewModels
             {
                 if (_RemoveCommand == null)
                 {
-                    _RemoveCommand = ViewModelFactory.CreateViewModel<SimpleParameterCommandViewModel<IEnumerable<DataObjectViewModel>>.Factory>()
+                    _RemoveCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>()
                         .Invoke(DataContext, "Remove", "Remove selection from list",
-                        (items) => items.ToList().ForEach(i => RemoveItem(i)), // Collection will change while deleting!
-                        (items) => items != null && items.Count() > 0 && AllowRemove);
+                        () => SelectedItems.ToList().ForEach(i => RemoveItem(i)), // Collection will change while deleting!
+                        () => SelectedItems != null && SelectedItems.Count() > 0 && AllowRemove);
                 }
                 return _RemoveCommand;
             }
@@ -227,10 +253,10 @@ namespace Kistl.Client.Presentables.ValueViewModels
             {
                 if (_DeleteCommand == null)
                 {
-                    _DeleteCommand = ViewModelFactory.CreateViewModel<SimpleParameterCommandViewModel<IEnumerable<DataObjectViewModel>>.Factory>()
+                    _DeleteCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>()
                         .Invoke(DataContext, "Delete", "Delete selection from data store", 
-                        (items) => items.ToList().ForEach(i => DeleteItem(i)), // Collection will change while deleting!
-                        (items) => items != null && items.Count() > 0 && AllowDelete);
+                        () => SelectedItems.ToList().ForEach(i => DeleteItem(i)), // Collection will change while deleting!
+                        () => SelectedItems != null && SelectedItems.Count() > 0 && AllowDelete);
                 }
                 return _DeleteCommand;
             }

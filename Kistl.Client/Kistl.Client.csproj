@@ -100,6 +100,8 @@
     <Compile Include="Presentables\FilterViewModels\OptionalPredicateFilterViewModel.cs" />
     <Compile Include="Presentables\FilterViewModels\RangeFilterViewModel.cs" />
     <Compile Include="Presentables\FilterViewModels\SingleValueFilterViewModel.cs" />
+    <Compile Include="Presentables\KistlBase\RoleMembershipViewModel.cs" />
+    <Compile Include="Presentables\KistlBase\RelationChainViewModel.cs" />
     <Compile Include="Presentables\ParameterInputTaskViewModel.cs" />
     <Compile Include="Presentables\ValueViewModels\CompoundObjectPropertyViewModel.cs" />
     <Compile Include="Presentables\CompoundObjectViewModel.cs" />
