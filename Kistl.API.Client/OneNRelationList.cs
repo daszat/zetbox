@@ -47,7 +47,7 @@ namespace Kistl.API.Client
         public void AddWithoutSetParent(T item)
         {
             collection.Add(item);
-            OnItemAdded(item);
+            OnItemAdded(item, collection.Count - 1);
         }
 
         public void RemoveWithoutClearParent(T item)
@@ -67,7 +67,7 @@ namespace Kistl.API.Client
             {
                 Kistl.API.Helper.FixIndices(collection, GetPosition, SetPosition);
             }
-            OnItemAdded(item);
+            OnItemAdded(item, index);
         }
 
         private void DoRemoveAt(T item, int index)
@@ -252,13 +252,13 @@ namespace Kistl.API.Client
 
         public event NotifyCollectionChangedEventHandler CollectionChanged;
 
-        protected virtual void OnItemAdded(T newItem)
+        protected virtual void OnItemAdded(T newItem, int index)
         {
             if (_ownerNotifier != null)
                 _ownerNotifier();
 
             if (CollectionChanged != null)
-                CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, newItem));
+                CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, newItem, index));
 
             // newItem.PropertyChanged += item_PropertyChanged;
         }
