@@ -50,6 +50,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             OnPropertyChanged("FormattedValue");
             OnPropertyChanged("IsNull");
             OnPropertyChanged("HasValue");
+            OnPropertyChanged("Name");
         }
         #endregion
 

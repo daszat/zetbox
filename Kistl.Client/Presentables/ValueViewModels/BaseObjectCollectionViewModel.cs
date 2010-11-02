@@ -422,12 +422,8 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
         public override void ClearValue()
         {
-            throw new NotImplementedException();
-        }
-
-        public override ICommandViewModel ClearValueCommand
-        {
-            get { throw new NotImplementedException(); }
+            EnsureValueCache();
+            ValueModel.Value.Clear();
         }
 
         #endregion

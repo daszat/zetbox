@@ -339,6 +339,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\SchemaMigration\DestinationPropertyEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SchemaMigration\SelectDestinationPropertyDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\SelectionDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -528,6 +536,12 @@
     </Compile>
     <Compile Include="View\Relations\RelationEditor.xaml.cs">
       <DependentUpon>RelationEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SchemaMigration\DestinationPropertyEditor.xaml.cs">
+      <DependentUpon>DestinationPropertyEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SchemaMigration\SelectDestinationPropertyDialog.xaml.cs">
+      <DependentUpon>SelectDestinationPropertyDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SelectionDialog.xaml.cs">
       <DependentUpon>SelectionDialog.xaml</DependentUpon>

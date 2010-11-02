@@ -10,6 +10,7 @@ using Kistl.Client.Presentables.KistlBase;
 using Kistl.App.GUI;
 using ObjectEditorWorkspace = Kistl.Client.Presentables.ObjectEditor.WorkspaceViewModel;
 using Kistl.Client.Models;
+using Kistl.API.Client;
 
 namespace Kistl.Client.Presentables.ModuleEditor
 {
@@ -17,20 +18,24 @@ namespace Kistl.Client.Presentables.ModuleEditor
     {
         public new delegate WorkspaceViewModel Factory(IKistlContext dataCtx);
 
-        protected readonly Func<IKistlContext> ctxFactory;
+        protected readonly Func<ClientIsolationLevel, IKistlContext> ctxFactory;
 
-        public WorkspaceViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, Func<IKistlContext> ctxFactory)
-            : base(appCtx, dataCtx)
+        public WorkspaceViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, Func<ClientIsolationLevel, IKistlContext> ctxFactory)
+            : base(appCtx, ctxFactory(ClientIsolationLevel.MergeServerData)) // Use another data context, this workspace does not edit anything
         {
+            if (ctxFactory == null) throw new ArgumentNullException("ctxFactory");
             this.ctxFactory = ctxFactory;
-            _CurrentModule = dataCtx.GetQuery<Module>().FirstOrDefault();
         }
 
         private Module _CurrentModule;
         public Module CurrentModule 
         {
             get 
-            { 
+            {
+                if (_CurrentModule == null)
+                {
+                    _CurrentModule = DataContext.GetQuery<Module>().FirstOrDefault();
+                }
                 return _CurrentModule; 
             }
             set
@@ -105,7 +110,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
                         {
                             foreach (var mdl in i)
                             {
-                                var ctx = ctxFactory();
+                                var ctx = ctxFactory(ClientIsolationLevel.PrefereClientData);
                                 
                                 var a = ctx.Find<Assembly>(mdl.ID);
                                 a.RegenerateTypeRefs();
@@ -229,7 +234,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
         public void EditCurrentModule()
         {
             if (CurrentModule == null) return;
-            var newCtx = ctxFactory();
+            var newCtx = ctxFactory(ClientIsolationLevel.PrefereClientData);
             var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx);
 
             newWorkspace.ShowForeignModel(ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>(CurrentModule).Invoke(newCtx, CurrentModule));
@@ -245,7 +250,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
 
         public void CreateNewModule()
         {
-            var newCtx = ctxFactory();
+            var newCtx = ctxFactory(ClientIsolationLevel.PrefereClientData);
             var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx);
             var newObj = newCtx.Create<Module>();
 

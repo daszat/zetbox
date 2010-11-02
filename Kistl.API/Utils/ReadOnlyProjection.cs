@@ -80,12 +80,12 @@ namespace Kistl.API.Utils
 
         void ICollection<TOutput>.Add(TOutput item)
         {
-            throw new InvalidOperationException();
+            throw new InvalidOperationException("This enumeration is readonly");
         }
 
         void ICollection<TOutput>.Clear()
         {
-            throw new InvalidOperationException();
+            throw new InvalidOperationException("This enumeration is readonly");
         }
 
         public bool Contains(TOutput item)
@@ -123,7 +123,7 @@ namespace Kistl.API.Utils
 
         public bool Remove(TOutput item)
         {
-            throw new InvalidOperationException();
+            throw new InvalidOperationException("This enumeration is readonly");
         }
 
         #endregion
@@ -179,12 +179,12 @@ namespace Kistl.API.Utils
 
         void IList<TOutput>.Insert(int index, TOutput item)
         {
-            throw new InvalidOperationException();
+            throw new InvalidOperationException("This enumeration is readonly");
         }
 
         void IList<TOutput>.RemoveAt(int index)
         {
-            throw new InvalidOperationException();
+            throw new InvalidOperationException("This enumeration is readonly");
         }
 
         public TOutput this[int index]
@@ -204,7 +204,7 @@ namespace Kistl.API.Utils
             }
             set
             {
-                throw new InvalidOperationException();
+                throw new InvalidOperationException("This enumeration is readonly");
             }
         }
 
@@ -214,12 +214,12 @@ namespace Kistl.API.Utils
 
         int IList.Add(object value)
         {
-            throw new InvalidOperationException();
+            throw new InvalidOperationException("This enumeration is readonly");
         }
 
         void IList.Clear()
         {
-            throw new InvalidOperationException();
+            throw new InvalidOperationException("This enumeration is readonly");
         }
 
         bool IList.Contains(object value)
@@ -234,7 +234,7 @@ namespace Kistl.API.Utils
 
         void IList.Insert(int index, object value)
         {
-            throw new InvalidOperationException();
+            throw new InvalidOperationException("This enumeration is readonly");
         }
 
         bool IList.IsFixedSize
@@ -244,12 +244,12 @@ namespace Kistl.API.Utils
 
         void IList.Remove(object value)
         {
-            throw new InvalidOperationException();
+            throw new InvalidOperationException("This enumeration is readonly");
         }
 
         void IList.RemoveAt(int index)
         {
-            throw new InvalidOperationException();
+            throw new InvalidOperationException("This enumeration is readonly");
         }
 
         object IList.this[int index]
@@ -260,7 +260,7 @@ namespace Kistl.API.Utils
             }
             set
             {
-                throw new InvalidOperationException();
+                throw new InvalidOperationException("This enumeration is readonly");
             }
         }
 

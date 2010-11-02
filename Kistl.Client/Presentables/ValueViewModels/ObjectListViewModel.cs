@@ -56,7 +56,13 @@ namespace Kistl.Client.Presentables.ValueViewModels
                     ObjectCollectionModel, ObjectCollectionModel.Value,
                     obj => ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>(obj).Invoke(DataContext, obj),
                     mdl => mdl.Object);
+                _valueCache.CollectionChanged += _valueCache_CollectionChanged;
             }
+        }
+
+        void _valueCache_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            NotifyValueChanged();
         }
 
         public bool HasPersistentOrder

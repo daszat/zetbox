@@ -6,8 +6,8 @@
                   xmlns:commands="clr-namespace:Kistl.Client.WPF.Commands;assembly=Kistl.Client.WPF.Toolkit"
                   Title="Edit Text"
                   ResizeMode="CanResize"
-                  SizeToContent="Height"
                   MinWidth="300"
+                  MinHeight="200"
                   commands:SmartRoutedUICommand.IsCommandSink="True">
     <ctrls:WindowView.Resources>
         <Style x:Key="addedMargins">

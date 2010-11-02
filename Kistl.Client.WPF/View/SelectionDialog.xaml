@@ -5,8 +5,8 @@
                   xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
                   Title="Choose Object"
                   ResizeMode="CanResize"
-                  SizeToContent="Height"
                   MinWidth="300"
+                  MinHeight="300"
                   Loaded="Window_Loaded"
                   xmlns:commands="clr-namespace:Kistl.Client.WPF.Commands;assembly=Kistl.Client.WPF.Toolkit"
                   commands:SmartRoutedUICommand.IsCommandSink="True">

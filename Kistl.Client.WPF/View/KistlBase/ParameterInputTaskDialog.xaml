@@ -6,8 +6,8 @@
                   xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
                   Title="Invoke Method"
                   ResizeMode="CanResize"
-                  SizeToContent="Height"
                   MinWidth="300"
+                  MinHeight="300"
                   xmlns:commands="clr-namespace:Kistl.Client.WPF.Commands;assembly=Kistl.Client.WPF.Toolkit"
                   commands:SmartRoutedUICommand.IsCommandSink="True">
     <ctrls:WindowView.Resources>

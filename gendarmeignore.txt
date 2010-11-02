@@ -70,6 +70,8 @@ M: System.Delegate Kistl.Client.WPF.View.NullableDateTimeValueEditor::_CreateDel
 M: System.Delegate Kistl.Client.WPF.View.GridCells.MultilineStringValue::_CreateDelegate(System.Type,System.String)
 M: System.Delegate Kistl.Client.WPF.View.GUI.MultiLineEditorDialog::_CreateDelegate(System.Type,System.String)
 
+M: System.Delegate Kistl.Client.WPF.View.SchemaMigration.DestinationPropertyEditor::_CreateDelegate(System.Type,System.String)
+
 
 
 
@@ -91,6 +93,7 @@ M: System.Void Kistl.DalProvider.EF.EntityCollectionWrapper`2::Add(TInterface)
 M: System.Boolean Kistl.DalProvider.EF.EntityCollectionWrapper`2::Contains(TInterface)
 M: System.Boolean Kistl.DalProvider.EF.EntityCollectionWrapper`2::Remove(TInterface)
 M: System.Void Kistl.DalProvider.EF.EntityCollectionWrapper`2::CopyTo(System.Array,System.Int32)
+M: System.Void Kistl.Client.Presentables.ModuleEditor.WorkspaceViewModel::.ctor(Kistl.Client.Presentables.IViewModelDependencies,Kistl.API.IKistlContext,System.Func`2<Kistl.API.Client.ClientIsolationLevel,Kistl.API.IKistlContext>)
 
 R: Gendarme.Rules.Portability.DoNotHardcodePathsRule
 # Package URIs are FS-independent

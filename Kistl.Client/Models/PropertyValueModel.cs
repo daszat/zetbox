@@ -64,11 +64,11 @@ namespace Kistl.Client.Models
                     var sorted = objRefProp.RelationEnd.Parent.GetOtherEnd(objRefProp.RelationEnd).HasPersistentOrder;
                     if (sorted)
                     {
-                        return new ObjectListValueModel(obj, objRefProp);
+                        return new ObjectListPropertyValueModel(obj, objRefProp);
                     }
                     else
                     {
-                        return new ObjectCollectionValueModel(obj, objRefProp);
+                        return new ObjectCollectionPropertyValueModel(obj, objRefProp);
                     }
                 }
                 else
@@ -393,7 +393,7 @@ namespace Kistl.Client.Models
             if (this.AllowNullInput)
                 this.Value = null;
             else
-                throw new InvalidOperationException();
+                throw new InvalidOperationException("Property does not allow null values");
         }
 
         /// <summary>
@@ -469,7 +469,7 @@ namespace Kistl.Client.Models
             if (this.AllowNullInput)
                 this.Value = null;
             else
-                throw new InvalidOperationException();
+                throw new InvalidOperationException("Property does not allow null values");
         }
         #endregion
     }
@@ -595,13 +595,13 @@ namespace Kistl.Client.Models
         #endregion
     }
 
-    public abstract class BaseObjectCollectionValueModel<TCollection>
+    public abstract class BaseObjectCollectionPropertyValueModel<TCollection>
         : ClassPropertyValueModel<TCollection>, IObjectCollectionValueModel<TCollection>
         where TCollection : class
     {
         protected readonly ObjectReferenceProperty objRefProp;
 
-        public BaseObjectCollectionValueModel(INotifyingObject obj, ObjectReferenceProperty prop)
+        public BaseObjectCollectionPropertyValueModel(INotifyingObject obj, ObjectReferenceProperty prop)
             : base(obj, prop)
         {
             this.objRefProp = prop;
@@ -692,10 +692,10 @@ namespace Kistl.Client.Models
         #endregion
     }
 
-    public class ObjectCollectionValueModel
-        : BaseObjectCollectionValueModel<ICollection<IDataObject>>
+    public class ObjectCollectionPropertyValueModel
+        : BaseObjectCollectionPropertyValueModel<ICollection<IDataObject>>
     {
-        public ObjectCollectionValueModel(INotifyingObject obj, ObjectReferenceProperty prop)
+        public ObjectCollectionPropertyValueModel(INotifyingObject obj, ObjectReferenceProperty prop)
             : base(obj, prop)
         {
         }
@@ -712,10 +712,10 @@ namespace Kistl.Client.Models
         }
     }
 
-    public class ObjectListValueModel
-        : BaseObjectCollectionValueModel<IList<IDataObject>>
+    public class ObjectListPropertyValueModel
+        : BaseObjectCollectionPropertyValueModel<IList<IDataObject>>
     {
-        public ObjectListValueModel(INotifyingObject obj, ObjectReferenceProperty prop)
+        public ObjectListPropertyValueModel(INotifyingObject obj, ObjectReferenceProperty prop)
             : base(obj, prop)
         {
         }

@@ -103,6 +103,8 @@
     <Compile Include="Presentables\KistlBase\RoleMembershipViewModel.cs" />
     <Compile Include="Presentables\KistlBase\RelationChainViewModel.cs" />
     <Compile Include="Presentables\ParameterInputTaskViewModel.cs" />
+    <Compile Include="Presentables\SchemaMigration\DestinationPropertyViewModel.cs" />
+    <Compile Include="Presentables\SchemaMigration\SelectDestinationPropertyViewModel.cs" />
     <Compile Include="Presentables\ValueViewModels\CompoundObjectPropertyViewModel.cs" />
     <Compile Include="Presentables\CompoundObjectViewModel.cs" />
     <Compile Include="Presentables\GUI\NavigatorViewModel.cs" />
@@ -202,9 +204,7 @@
       <Name>TempAppHelpers</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Presentables\SchemaMigration\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -1,0 +1,51 @@
+﻿<ctrls:WindowView x:Class="Kistl.Client.WPF.View.SchemaMigration.SelectDestinationPropertyDialog"
+                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"
+                  xmlns:view="clr-namespace:Kistl.Client.WPF.View;assembly=Kistl.Client.WPF.Toolkit"
+                  xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
+                  xmlns:local="clr-namespace:Kistl.Client.Presentables.SchemaMigration;assembly=Kistl.Client"
+                  Title="Select Destination Property"
+                  ResizeMode="CanResize"
+                  Height="400"
+                  Width="400"
+                  xmlns:commands="clr-namespace:Kistl.Client.WPF.Commands;assembly=Kistl.Client.WPF.Toolkit"
+                  commands:SmartRoutedUICommand.IsCommandSink="True">
+    <ctrls:WindowView.Resources>
+        <Style x:Key="addedMargins">
+            <Setter Property="FrameworkElement.Margin"
+                    Value="5" />
+        </Style>
+    </ctrls:WindowView.Resources>
+    <DockPanel Style="{StaticResource addedMargins}"
+               LastChildFill="True">
+
+        <UniformGrid DockPanel.Dock="Bottom"
+                     Style="{StaticResource addedMargins}"
+                     Rows="1">
+            <ctrls:CommandButton IsDefault="True"
+                                 CommandViewModel="{Binding ChooseCommand}"
+                                 Style="{StaticResource addedMargins}" />
+            <ctrls:CommandButton IsCancel="True"
+                                 CommandViewModel="{Binding CancelCommand}"
+                                 Style="{StaticResource addedMargins}" />
+        </UniformGrid>
+
+        <TreeView x:Name="treeValues"
+            ItemsSource="{Binding PossibleValues}"
+                  SelectedItemChanged="TreeView_SelectedItemChanged">
+            <TreeView.Resources>
+                <HierarchicalDataTemplate DataType="{x:Type local:PossibleDestPropertyViewModel}"
+                                          ItemsSource="{Binding PossibleValues}">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{Binding Converter={StaticResource IconConverter}}"
+                               Width="14"
+                               Height="14" />
+                        <TextBlock Text="{Binding PropertyModelsByName[Name].Value}"
+                                   Margin="3,0,0,0" />
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+            </TreeView.Resources>
+        </TreeView>
+    </DockPanel>
+</ctrls:WindowView>
