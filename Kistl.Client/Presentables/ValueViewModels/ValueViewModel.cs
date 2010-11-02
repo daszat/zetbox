@@ -522,6 +522,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
         {
             get
             {
+                UpdateValueCache();
                 return _year;
             }
             set
@@ -536,11 +537,13 @@ namespace Kistl.Client.Presentables.ValueViewModels
             }
         }
 
+
         private int? _month;
         public int? Month
         {
             get
             {
+                UpdateValueCache();
                 return _month;
             }
             set
@@ -552,6 +555,17 @@ namespace Kistl.Client.Presentables.ValueViewModels
                     OnPropertyChanged("Month");
                     OnPropertyChanged("Value");
                 }
+            }
+        }
+
+        private bool _cacheInititalized = false;
+        private void UpdateValueCache()
+        {
+            if (!_cacheInititalized)
+            {
+                _year = base.Value != null ? base.Value.Value.Year : (int?)null;
+                _month = base.Value != null ? base.Value.Value.Month : (int?)null;
+                _cacheInititalized = true;
             }
         }
 
@@ -573,9 +587,14 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 {
                     _year = value.Value.Year;
                     _month = value.Value.Month;
-                    OnPropertyChanged("Year");
-                    OnPropertyChanged("Month");
                 }
+                else
+                {
+                    _year = null;
+                    _month = null;
+                }
+                OnPropertyChanged("Year");
+                OnPropertyChanged("Month");
             }
         }
 
@@ -603,6 +622,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 if (_Months == null)
                 {
                     _Months = new List<MonthViewModel>();
+                    _Months.Add(new MonthViewModel());
                     for (int i = 1; i <= 12; i++)
                     {
                         var dt = new DateTime(2000, i, 1);

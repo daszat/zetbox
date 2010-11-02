@@ -24,7 +24,8 @@
         </GroupBox>
 
         <ToolBar DockPanel.Dock="Top"
-                 ItemsSource="{Binding Commands}">
+                 ItemsSource="{Binding Commands}"
+                 Visibility="{Binding ShowCommands, Converter={StaticResource BooleanToVisibilityConverter}}">
             <ToolBar.ItemTemplate>
                 <DataTemplate>
                     <Button Command="{Binding Converter={StaticResource CommandConverter}}"

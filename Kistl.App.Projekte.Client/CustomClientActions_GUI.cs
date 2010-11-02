@@ -111,6 +111,10 @@ namespace Kistl.App.GUI
 
             mdl.ViewModelType = obj.ViewModelDescriptor;
             mdl.FilterArguments.Add(new FilterArgumentConfig(obj.Property.GetDetachedValueModel(), /*cfg.ArgumentViewModel ?? */ obj.Context.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableMonthPropertyViewModel)));
+
+            // Defaults to this month
+            ((DateTimeValueModel)mdl.FilterArguments[0].Value).Value = DateTime.Today.FirstMonthDay();
+            
             e.Result = mdl;
         }
 

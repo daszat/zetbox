@@ -216,7 +216,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 item.FilterChanged += new EventHandler(delegate(object s, EventArgs a)
                 {
                     var f = s as FilterModel;
-                    if(f == null) return;
+                    if (f == null) return;
 
                     if (f.IsServerSideFilter)
                     {
@@ -311,6 +311,23 @@ namespace Kistl.Client.Presentables.KistlBase
             if (ShowNewCommand && !_commands.Contains(NewCommand)) _commands.Insert(0, NewCommand);
             if (ShowOpenCommand && !_commands.Contains(OpenCommand)) _commands.Insert(ShowNewCommand ? 1 : 0, OpenCommand);
             if (ShowRefreshCommand && !_commands.Contains(RefreshCommand)) _commands.Insert((ShowNewCommand ? 1 : 0) + (ShowOpenCommand ? 1 : 0), RefreshCommand);
+        }
+
+        private bool? _showCommands = null;
+        public bool ShowCommands
+        {
+            get
+            {
+                return _showCommands ?? Commands.Count > 0;
+            }
+            set
+            {
+                if (_showCommands != value)
+                {
+                    _showCommands = value;
+                    OnPropertyChanged("ShowCommands");
+                }
+            }
         }
 
         private ObservableCollection<ICommandViewModel> _commands = null;
@@ -443,15 +460,30 @@ namespace Kistl.Client.Presentables.KistlBase
                 if (_selectedItems == null)
                 {
                     _selectedItems = new ObservableCollection<DataObjectViewModel>();
+                    _selectedItems.CollectionChanged += _selectedItems_CollectionChanged;
                 }
                 return _selectedItems;
             }
-            set
-            {
-                _selectedItems = value;
-                OnPropertyChanged("SelectedItems");
-            }
         }
+
+        void _selectedItems_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            OnPropertyChanged("SelectedItem");
+        }
+
+        public DataObjectViewModel SelectedItem
+        {
+            get
+            {
+                if (SelectedItems.Count > 0)
+                {
+                    return _selectedItems[0];
+                }
+                return null;
+            }
+            // Set is not possible
+        }
+
         /// <summary>
         /// Reload instances from context.
         /// </summary>
