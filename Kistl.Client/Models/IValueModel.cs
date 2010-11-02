@@ -11,6 +11,7 @@ namespace Kistl.Client.Models
     using Kistl.API.Utils;
     using Kistl.App.Base;
     using Kistl.Client.Presentables;
+using System.Collections;
 
     public interface IValueModel : INotifyPropertyChanged, IDataErrorInfo
     {
@@ -76,5 +77,6 @@ namespace Kistl.Client.Models
     {
         ObjectClass ReferencedClass { get; }
         RelationEnd RelEnd { get; }
+        IEnumerable UnderlyingCollection { get; }
     }
 }

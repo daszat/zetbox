@@ -701,21 +701,24 @@ namespace Kistl.Client.Presentables.KistlBase
                 }
             }
 
-            _instancesFiltered = new ReadOnlyObservableCollection<DataObjectViewModel>(new ObservableCollection<DataObjectViewModel>(tmp));
             // Sort
             if (!string.IsNullOrEmpty(_sortProperty))
             {
                 _instancesFiltered = new ReadOnlyObservableCollection<DataObjectViewModel>(
                     new ObservableCollection<DataObjectViewModel>(
-                    _instancesFiltered
+                    tmp
                         .AsQueryable()
-                        .OrderBy(string.Format("it.Object.{0} {1}",
+                        .OrderBy(string.Format("it.PropertyModelsByName[\"{0}\"].UntypedValue {1}",
                                     _sortProperty,
                                     _sortDirection == ListSortDirection.Descending ? "desc" : string.Empty
                                 )
                             )
-                        )
+                       )
                     );
+            }
+            else
+            {
+                _instancesFiltered = new ReadOnlyObservableCollection<DataObjectViewModel>(new ObservableCollection<DataObjectViewModel>(tmp));
             }
 
             OnPropertyChanged("InstancesFiltered");

@@ -49,6 +49,11 @@ namespace Kistl.Client.Presentables.ValueViewModels
         void ClearValue();
 
         ICommandViewModel ClearValueCommand { get; }
+
+        /// <summary>
+        /// Returns the untyped value.
+        /// </summary>
+        object UntypedValue { get; }
     }
 
     /// <summary>

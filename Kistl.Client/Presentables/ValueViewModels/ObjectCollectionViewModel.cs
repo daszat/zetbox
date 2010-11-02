@@ -71,7 +71,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 _sortProp = p;
                 _direction = direction;
                 _sortedList = _collection.AsQueryable()
-                    .OrderBy(string.Format("it.{0} {1}", _sortProp, _direction == ListSortDirection.Descending ? "desc" : string.Empty))
+                    .OrderBy(string.Format("{0} {1}", _sortProp, _direction == ListSortDirection.Descending ? "desc" : string.Empty))
                     .Cast<IDataObject>()
                     .ToList();
                 OnCollectionChanged();
@@ -190,7 +190,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
         {
             if (_wrapper == null)
             {
-                _wrapper = new SortedWrapper(ValueModel.Value, ObjectCollectionModel);
+                _wrapper = new SortedWrapper(ObjectCollectionModel.UnderlyingCollection, ObjectCollectionModel);
                 _valueCache = new ReadOnlyObservableProjectedList<IDataObject, DataObjectViewModel>(
                     _wrapper,
                     obj => ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>(obj).Invoke(DataContext, obj),

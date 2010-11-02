@@ -631,6 +631,19 @@ namespace Kistl.Client.Models
             }
         }
 
+        protected IEnumerable underlyingCollectionCache = null;
+        public IEnumerable UnderlyingCollection
+        {
+            get
+            {
+                if (!valueCacheInititalized)
+                {
+                    UpdateValueCache();
+                }
+                return underlyingCollectionCache;
+            }
+        }
+
         protected void ValueCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             NotifyCollectionChangedEventHandler temp = CollectionChanged;
@@ -691,6 +704,9 @@ namespace Kistl.Client.Models
         {
             var lst = Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name);
             lst.CollectionChanged += ValueCollectionChanged;
+
+            underlyingCollectionCache = (IEnumerable)lst;
+
             valueCache = MagicCollectionFactory.WrapAsCollection<IDataObject>(lst);
             valueCacheInititalized = true;
         }
@@ -708,6 +724,9 @@ namespace Kistl.Client.Models
         {
             var lst = Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name);
             lst.CollectionChanged += ValueCollectionChanged;
+
+            underlyingCollectionCache = (IEnumerable)lst;
+            
             valueCache = MagicCollectionFactory.WrapAsList<IDataObject>(lst);
             valueCacheInititalized = true;
         }

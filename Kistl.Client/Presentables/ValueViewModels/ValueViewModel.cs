@@ -113,6 +113,14 @@ namespace Kistl.Client.Presentables.ValueViewModels
             }
         }
 
+        public object UntypedValue
+        {
+            get
+            {
+                return ValueModel.GetUntypedValue();
+            }
+        }
+
         #endregion
 
         #region IFormattedValueViewModel Members
