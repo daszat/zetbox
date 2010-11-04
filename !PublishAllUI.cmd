@@ -1,4 +1,10 @@
 @echo off
+echo ********************************************************************************
+echo Generating, Update Schema and Publish
+echo Used if schema has changed
+echo ********************************************************************************
+
+
 bin\Debug\bin\Server\Kistl.Server.Service.exe Kistl.Server.Service\DefaultConfig.xml -generate -updatedeployedschema -repairschema
 IF ERRORLEVEL 1 GOTO FAIL
 

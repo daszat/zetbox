@@ -1,4 +1,8 @@
 @echo off
+echo ********************************************************************************
+echo Full reset with roundtrip of ZBox Database
+echo Used to initialize a new dev enviromnent
+echo ********************************************************************************
 
 C:\Windows\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe CCNet.msbuild /p:SourceLocation=P:\Kistl /p:ArebisMsBuildPath=P:\Kistl\Libs\ArebisCGen\Arebis.CodeGeneration.MsBuild
 IF ERRORLEVEL 1 GOTO FAIL

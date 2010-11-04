@@ -1,4 +1,8 @@
 @echo off
+rem ********************************************************************************
+rem copy all generated code back to the ZBox Project for compiling the fallback
+rem Used by other command files
+rem ********************************************************************************
 
 rem *********** Interface *********** 
 xcopy /y .\Kistl.Objects\*.* .\Backup\Kistl.Objects\
