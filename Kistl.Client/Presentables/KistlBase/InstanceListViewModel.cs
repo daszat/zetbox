@@ -284,6 +284,22 @@ namespace Kistl.Client.Presentables.KistlBase
                 }
             }
         }
+        private bool _ShowDeleteCommand = true;
+        public bool ShowDeleteCommand
+        {
+            get
+            {
+                return _ShowDeleteCommand;
+            }
+            set
+            {
+                if (_ShowDeleteCommand != value)
+                {
+                    _ShowDeleteCommand = value;
+                    UpdateCommands();
+                }
+            }
+        }
         private bool _ShowRefreshCommand = true;
         public bool ShowRefreshCommand
         {
@@ -307,10 +323,12 @@ namespace Kistl.Client.Presentables.KistlBase
             if (!ShowNewCommand && _commands.Contains(NewCommand)) _commands.Remove(NewCommand);
             if (!ShowOpenCommand && _commands.Contains(OpenCommand)) _commands.Remove(OpenCommand);
             if (!ShowRefreshCommand && _commands.Contains(RefreshCommand)) _commands.Remove(RefreshCommand);
+            if (!ShowDeleteCommand && _commands.Contains(DeleteCommand)) _commands.Remove(DeleteCommand);
 
             if (ShowNewCommand && !_commands.Contains(NewCommand)) _commands.Insert(0, NewCommand);
             if (ShowOpenCommand && !_commands.Contains(OpenCommand)) _commands.Insert(ShowNewCommand ? 1 : 0, OpenCommand);
             if (ShowRefreshCommand && !_commands.Contains(RefreshCommand)) _commands.Insert((ShowNewCommand ? 1 : 0) + (ShowOpenCommand ? 1 : 0), RefreshCommand);
+            if (ShowDeleteCommand && !_commands.Contains(DeleteCommand)) _commands.Insert((ShowNewCommand ? 1 : 0) + (ShowOpenCommand ? 1 : 0) + (ShowRefreshCommand ? 1 : 0), DeleteCommand);
         }
 
         private bool? _showCommands = null;
@@ -338,10 +356,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 if (_commands == null)
                 {
                     _commands = new ObservableCollection<ICommandViewModel>();
-                    // Add default actions
-                    if (ShowNewCommand) _commands.Add(NewCommand);
-                    if (ShowOpenCommand) _commands.Add(OpenCommand);
-                    if (ShowRefreshCommand) _commands.Add(RefreshCommand);
+                    UpdateCommands();
                 }
                 return _commands;
             }
@@ -380,9 +395,22 @@ namespace Kistl.Client.Presentables.KistlBase
             {
                 if (_NewCommand == null)
                 {
-                    _NewCommand = ViewModelFactory.CreateViewModel<NewDataObjectCommand.Factory>().Invoke(DataContext, _type, RequestedWorkspaceKind, RequestedEditorKind);
+                    _NewCommand = ViewModelFactory.CreateViewModel<NewDataObjectCommand.Factory>().Invoke(DataContext, _type, RequestedWorkspaceKind, RequestedEditorKind, this);
                 }
                 return _NewCommand;
+            }
+        }
+
+        private DeleteDataObjectCommand _DeleteCommand;
+        public DeleteDataObjectCommand DeleteCommand
+        {
+            get
+            {
+                if (_DeleteCommand == null)
+                {
+                    _DeleteCommand = ViewModelFactory.CreateViewModel<DeleteDataObjectCommand.Factory>().Invoke(DataContext, this, IsItemsReadOnly);
+                }
+                return _DeleteCommand;
             }
         }
         #endregion
@@ -469,6 +497,23 @@ namespace Kistl.Client.Presentables.KistlBase
         void _selectedItems_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             OnPropertyChanged("SelectedItem");
+        }
+
+        private bool _ShowMasterDetail = false;
+        public bool ShowMasterDetail
+        {
+            get
+            {
+                return _ShowMasterDetail;
+            }
+            set
+            {
+                if (_ShowMasterDetail != value)
+                {
+                    _ShowMasterDetail = value;
+                    OnPropertyChanged("ShowMasterDetail");
+                }
+            }
         }
 
         public DataObjectViewModel SelectedItem

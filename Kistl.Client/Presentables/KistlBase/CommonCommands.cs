@@ -9,7 +9,7 @@ namespace Kistl.Client.Presentables.KistlBase
     using Kistl.App.Base;
     using Kistl.App.GUI;
     using ObjectEditorWorkspace = Kistl.Client.Presentables.ObjectEditor.WorkspaceViewModel;
-    
+
     public class OpenDataObjectCommand : ItemCommandViewModel<DataObjectViewModel>
     {
         public new delegate OpenDataObjectCommand Factory(IKistlContext dataCtx, ControlKind reqWorkspaceKind, ControlKind reqEditorKind);
@@ -81,38 +81,51 @@ namespace Kistl.Client.Presentables.KistlBase
 
     public class DeleteDataObjectCommand : ItemCommandViewModel<DataObjectViewModel>
     {
-        public new delegate DeleteDataObjectCommand Factory(IKistlContext dataCtx);
+        public new delegate DeleteDataObjectCommand Factory(IKistlContext dataCtx, IRefreshCommandListener listener, bool submitChanges);
+        protected IRefreshCommandListener Listener { get; private set; }
+        protected bool SubmitChanges { get; private set; }
 
-        public DeleteDataObjectCommand(IViewModelDependencies appCtx, IKistlContext dataCtx)
+        public DeleteDataObjectCommand(IViewModelDependencies appCtx, IKistlContext dataCtx, IRefreshCommandListener listener, bool submitChanges)
             : base(appCtx, dataCtx, "Delete", "Deletes the current selected Object")
         {
+            this.Listener = listener;
+            this.SubmitChanges = submitChanges;
         }
 
         protected override void DoExecute(IEnumerable<DataObjectViewModel> data)
         {
+            if (SubmitChanges && !ViewModelFactory.GetDecisionFromUser("Are you sure that you want to delete these items?", "Deleting items"))
+            {
+                return;
+            }
+
             foreach (var item in data)
             {
                 DataContext.Delete(item.Object);
             }
-            DataContext.SubmitChanges();
+
+            if (SubmitChanges) DataContext.SubmitChanges();
+            if (Listener != null) Listener.Refresh();
         }
     }
 
     public class NewDataObjectCommand : CommandViewModel
     {
-        public new delegate NewDataObjectCommand Factory(IKistlContext dataCtx, DataType type, ControlKind reqWorkspaceKind, ControlKind reqEditorKind);
+        public new delegate NewDataObjectCommand Factory(IKistlContext dataCtx, DataType type, ControlKind reqWorkspaceKind, ControlKind reqEditorKind, IRefreshCommandListener listener);
 
         protected readonly Func<IKistlContext> ctxFactory;
         protected DataType Type { get; private set; }
+        protected IRefreshCommandListener Listener { get; private set; }
 
         public NewDataObjectCommand(IViewModelDependencies appCtx, Func<IKistlContext> ctxFactory,
-            IKistlContext dataCtx, DataType type, ControlKind reqWorkspaceKind, ControlKind reqEditorKind)
+            IKistlContext dataCtx, DataType type, ControlKind reqWorkspaceKind, ControlKind reqEditorKind, IRefreshCommandListener listener)
             : base(appCtx, dataCtx, "New", "Creates a new Object")
         {
             this.Type = type;
             this.ctxFactory = ctxFactory;
             this._requestedWorkspaceKind = reqWorkspaceKind;
             this._requestedEditorKind = reqEditorKind;
+            this.Listener = listener;
         }
 
         private ControlKind _requestedEditorKind;
@@ -156,11 +169,21 @@ namespace Kistl.Client.Presentables.KistlBase
 
         protected override void DoExecute(object data)
         {
-            var newCtx =  ctxFactory();
-            var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx);
+            var isSimpleObject = Type is ObjectClass && ((ObjectClass)Type).IsSimpleObject;
+
+            var newCtx = isSimpleObject ? DataContext : ctxFactory();
             var newObj = newCtx.Create(DataContext.GetInterfaceType(Type.GetDataType()));
-            newWorkspace.ShowForeignModel(ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>(newObj).Invoke(newCtx, newObj), RequestedEditorKind);
-            ViewModelFactory.ShowModel(newWorkspace, RequestedWorkspaceKind, true);
+
+            if (!isSimpleObject)
+            {
+                var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx);
+                newWorkspace.ShowForeignModel(ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>(newObj).Invoke(newCtx, newObj), RequestedEditorKind);
+                ViewModelFactory.ShowModel(newWorkspace, RequestedWorkspaceKind, true);
+            }
+            else if (Listener != null)
+            {
+                Listener.Refresh();
+            }
         }
     }
 
@@ -171,7 +194,7 @@ namespace Kistl.Client.Presentables.KistlBase
         protected readonly Func<IKistlContext> ctxFactory;
         protected DataType Type { get; private set; }
 
-        public EditDataObjectClassCommand(IViewModelDependencies appCtx, 
+        public EditDataObjectClassCommand(IViewModelDependencies appCtx,
             IKistlContext dataCtx, DataType type,
             Func<IKistlContext> ctxFactory)
             : base(appCtx, dataCtx, "Edit Class", "Opens the Editor for the current lists class")

@@ -1,6 +1,7 @@
 ﻿<UserControl x:Class="Kistl.Client.WPF.View.KistlBase.InstanceListDisplay"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:tk="clr-namespace:Kistl.Client.WPF.View;assembly=Kistl.Client.WPF.Toolkit"
              xmlns:client="clr-namespace:Kistl.Client.WPF.View"
              xmlns:clientKistlBase="clr-namespace:Kistl.Client.WPF.View.KistlBase"
              xmlns:commands="clr-namespace:Kistl.Client.WPF.Commands;assembly=Kistl.Client.WPF.Toolkit"
@@ -36,6 +37,14 @@
             </ToolBar.ItemTemplate>
         </ToolBar>
 
+        <GroupBox DockPanel.Dock="Bottom"
+                  Visibility="{Binding ShowMasterDetail, Converter={StaticResource BooleanToVisibilityConverter}}"
+                  Header="Details">
+            <ContentPresenter Content="{Binding SelectedItem}"
+                              tk:VisualTypeTemplateSelector.RequestedKind="{Binding RequestedEditorKind, Mode=OneWay}"
+                              ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
+        </GroupBox>
+
         <ListView x:Name="lst"
                   Margin="10"
                   BorderThickness="0"
@@ -51,6 +60,5 @@
             </ListView.Resources>
 
         </ListView>
-
     </DockPanel>
 </UserControl>

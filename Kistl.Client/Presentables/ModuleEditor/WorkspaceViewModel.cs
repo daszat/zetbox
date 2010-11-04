@@ -131,7 +131,6 @@ namespace Kistl.Client.Presentables.ModuleEditor
                     // TypeRefs
                     lstMdl = ViewModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, null, DataContext.GetQuery<TypeRef>());
                     lstMdl.Filter.Add(new ConstantValueFilterModel("Assembly.Module = @0", CurrentModule));
-                    lstMdl.Commands.Add(ViewModelFactory.CreateViewModel<DeleteDataObjectCommand.Factory>().Invoke(DataContext));
                     lst.Add(lstMdl);
 
                     // Application
