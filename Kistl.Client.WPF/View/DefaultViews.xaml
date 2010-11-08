@@ -22,13 +22,15 @@
     <DataTemplate x:Key="GridHeaderTemplateArrowUp">
         <StackPanel Orientation="Horizontal">
             <ContentPresenter Content="{Binding}" />
-            <TextBlock Text="^" />
+            <TextBlock Text="^"
+                       Margin="10 0 0 0" />
         </StackPanel>
     </DataTemplate>
     <DataTemplate x:Key="GridHeaderTemplateArrowDown">
         <StackPanel Orientation="Horizontal">
             <ContentPresenter Content="{Binding}" />
-            <TextBlock Text="v" />
+            <TextBlock Text="v"
+                       Margin="10 0 0 0" />
         </StackPanel>
     </DataTemplate>
 

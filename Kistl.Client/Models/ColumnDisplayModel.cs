@@ -115,13 +115,7 @@ namespace Kistl.Client.Models
             var methods = cls.GetAllMethods()
                 .Where(m => m.IsDisplayable && (m.CategoryTags ?? String.Empty).Split(',', ' ').Contains("Summary"));
 
-            this.Columns = props
-                .Select(p => new ColumnDisplayModel()
-                {
-                    Header = !string.IsNullOrEmpty(p.Label) ? p.Label : p.Name,
-                    Name = p.Name,
-                    ControlKind = displayOnly ? p.ValueModelDescriptor.GetDefaultGridCellDisplayKind() : p.ValueModelDescriptor.GetDefaultGridCellKind()
-                }).ToList();
+            this.Columns = props.SelectMany(p => CreateColumnDisplayModels(displayOnly, p, string.Empty, string.Empty)).ToList();
 
             if (!displayOnly)
             {
@@ -134,6 +128,30 @@ namespace Kistl.Client.Models
                     Type = ColumnDisplayModel.ColumnType.MethodModel
                 })).ToList();
             }
+        }
+
+        private static List<ColumnDisplayModel> CreateColumnDisplayModels(bool displayOnly, Property p, string parentLabel, string parentProp)
+        {
+            var result = new List<ColumnDisplayModel>();
+            var lb = !string.IsNullOrEmpty(p.Label) ? p.Label : p.Name;
+
+            if (p is CompoundObjectProperty)
+            {
+                foreach(var i in ((CompoundObjectProperty)p).CompoundObjectDefinition.Properties)
+                {
+                    result.AddRange(CreateColumnDisplayModels(displayOnly, i, parentLabel + lb + ".", parentProp + p.Name + "."));
+                }
+            }
+            else
+            {
+                result.Add(new ColumnDisplayModel()
+                {
+                    Header = parentLabel + lb,
+                    Name = parentProp + p.Name,
+                    ControlKind = displayOnly ? p.ValueModelDescriptor.GetDefaultGridCellDisplayKind() : p.ValueModelDescriptor.GetDefaultGridCellKind()
+                });
+            }
+            return result;
         }
     }
 }

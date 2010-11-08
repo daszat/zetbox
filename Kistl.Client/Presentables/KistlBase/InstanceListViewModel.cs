@@ -749,12 +749,17 @@ namespace Kistl.Client.Presentables.KistlBase
             // Sort
             if (!string.IsNullOrEmpty(_sortProperty))
             {
+                var tmpOrderBy = _sortProperty.Split('.').Select(i => String.Format("PropertyModelsByName[\"{0}\"]", i));
+                var orderby = string.Join(".Value.", tmpOrderBy.ToArray());
+
                 _instancesFiltered = new ReadOnlyObservableCollection<DataObjectViewModel>(
                     new ObservableCollection<DataObjectViewModel>(
                     tmp
                         .AsQueryable()
-                        .OrderBy(string.Format("it.PropertyModelsByName[\"{0}\"].UntypedValue {1}",
-                                    _sortProperty,
+                        // Sorting CompundObjects does not work
+                        // Maybe we should implement a custom comparer
+                        .OrderBy(string.Format("it.{0}.UntypedValue {1}",
+                                    orderby,
                                     _sortDirection == ListSortDirection.Descending ? "desc" : string.Empty
                                 )
                             )
