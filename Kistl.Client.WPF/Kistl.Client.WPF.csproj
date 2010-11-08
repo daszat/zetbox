@@ -177,6 +177,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\KistlBase\InstanceListHorizontalDisplay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\KistlBase\NullableDateTimeValueEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -449,6 +453,10 @@
     </Compile>
     <Compile Include="View\KistlBase\CompoundObjectPropertyEditor.xaml.cs">
       <DependentUpon>CompoundObjectPropertyEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\KistlBase\InstanceListBaseDisplay.cs" />
+    <Compile Include="View\KistlBase\InstanceListHorizontalDisplay.xaml.cs">
+      <DependentUpon>InstanceListHorizontalDisplay.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\KistlBase\NullableDateTimeValueEditor.xaml.cs">
       <DependentUpon>NullableDateTimeValueEditor.xaml</DependentUpon>

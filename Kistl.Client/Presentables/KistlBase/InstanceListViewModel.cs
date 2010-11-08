@@ -628,7 +628,7 @@ namespace Kistl.Client.Presentables.KistlBase
         {
             get
             {
-                return _type.Name;
+                return "InstanceList of type " + _type.Name;
             }
         }
 

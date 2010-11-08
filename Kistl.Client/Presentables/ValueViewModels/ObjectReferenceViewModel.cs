@@ -122,7 +122,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             {
                 foreach (ObjectClass oc in nextChildren)
                 {
-                    children.Add(oc);
+                    if(!oc.IsAbstract) children.Add(oc);
                     CollectChildClasses(oc.ID, children);
                 };
             }

@@ -27,13 +27,14 @@ namespace Kistl.Client.WPF.View.KistlBase
     /// Shows all instances of a given DataTypeViewModel
     /// </summary>
     [ViewDescriptor(Kistl.App.GUI.Toolkit.WPF)]
-    public partial class InstanceListDisplay
+    public partial class InstanceListHorizontalDisplay
         : InstanceListBaseDisplay
     {
+
         /// <summary>
         /// Initializes a new instance of the ObjectClassDisplay class.
         /// </summary>
-        public InstanceListDisplay()
+        public InstanceListHorizontalDisplay()
         {
             InitializeComponent();
         }

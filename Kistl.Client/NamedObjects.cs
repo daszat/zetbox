@@ -33,5 +33,7 @@ namespace Kistl.Client
 
         public static readonly Guid ControlKind_Kistl_App_GUI_LabelKind = new Guid("A3F09EF3-2FAC-4D7E-AEA8-CBF0EAB4DE70");
         public static readonly Guid ControlKind_Kistl_App_GUI_LauncherKind = new Guid("90D5FF7F-0C82-4278-BB8D-49C240F6BC2C");
+        public static readonly Guid ControlKind_Kistl_App_GUI_InstanceListKind = new Guid("4e7a8b0b-0c8e-49e1-aa35-d3a9ec7b8e4c");
+        public static readonly Guid ControlKind_Kistl_App_GUI_InstanceListHorizontalKind = new Guid("997f9eb7-084f-4703-b905-2b97be27a9f1");
     }
 }
