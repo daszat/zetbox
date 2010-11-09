@@ -120,12 +120,45 @@ namespace Kistl.App.Base
 
         public static void OnGetMemberName_ConstraintInvocation(ConstraintInvocation obj, MethodReturnEventArgs<string> e)
         {
-            e.Result = String.Empty;
+            var constr_IsValid = obj.Context.GetQuery<InvokingConstraint>().FirstOrDefault(i => i.IsValidInvocation == obj);
+            var constr_GetErrorText = obj.Context.GetQuery<InvokingConstraint>().FirstOrDefault(i => i.GetErrorTextInvocation == obj);
+
+            if (constr_IsValid != null)
+            {
+                e.Result = string.Format("OnIsValid_{0}_{1}",
+                    constr_IsValid.ConstrainedProperty != null && constr_IsValid.ConstrainedProperty.ObjectClass != null ? constr_IsValid.ConstrainedProperty.ObjectClass.Name : string.Empty,
+                    constr_IsValid.ConstrainedProperty != null ? constr_IsValid.ConstrainedProperty.Name : string.Empty);
+            }
+            else if (constr_GetErrorText != null)
+            {
+                e.Result = string.Format("OnGetErrorText_{0}_{1}",
+                    constr_GetErrorText.ConstrainedProperty != null && constr_GetErrorText.ConstrainedProperty.ObjectClass != null ? constr_GetErrorText.ConstrainedProperty.ObjectClass.Name : string.Empty,
+                    constr_GetErrorText.ConstrainedProperty != null ? constr_GetErrorText.ConstrainedProperty.Name : string.Empty);
+            }
+            else
+            {
+                e.Result = string.Empty;
+            }
         }
 
         public static void OnGetCodeTemplate_ConstraintInvocation(ConstraintInvocation obj, MethodReturnEventArgs<string> e)
         {
-            e.Result = "// choose wisely, young padawan!\n\npublic static bool OnIsValid_<ClassName>_<PropertyName>(object constrainedObject, object constrainedValue)\n{\n}\n\npublic static string OnGetErrorText_<ClassName>_<PropertyName>(object constrainedObject, object constrainedValue)\n{\n}\n";
+            var constr_IsValid = obj.Context.GetQuery<InvokingConstraint>().FirstOrDefault(i => i.IsValidInvocation == obj);
+            var constr_GetErrorText = obj.Context.GetQuery<InvokingConstraint>().FirstOrDefault(i => i.GetErrorTextInvocation == obj);
+
+            if (constr_IsValid != null)
+            {
+                e.Result = string.Format("public static bool {0}(object constrainedObject, object constrainedValue)\n{{\n\treturn true;\n}}", obj.GetMemberName());
+
+            }
+            else if (constr_GetErrorText != null)
+            {
+                e.Result = string.Format("public static string {0}(object constrainedObject, object constrainedValue)\n{{\n\treturn string.Empty;\n}}", obj.GetMemberName());
+            }
+            else
+            {
+                e.Result = string.Empty;
+            }
         }
 
         #endregion
