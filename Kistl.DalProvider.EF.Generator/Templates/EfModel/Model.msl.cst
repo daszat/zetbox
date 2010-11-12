@@ -216,12 +216,12 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.<%= prop.GetCollectionEntryClassName() %>)">
         <MappingFragment StoreEntitySet="<%= prop.GetCollectionEntryClassName() %>">
           <ScalarProperty Name="ID" ColumnName="ID" />
-          <% ModelMslEntityTypeMappingComplexProperty.Call(Host, ctx, prop, "B", string.Empty); %>
+          <% ModelMslEntityTypeMappingComplexProperty.Call(Host, ctx, prop, "Value", string.Empty); %>
 <%
 		if (prop.HasPersistentOrder)
 		{
 %>
-          <ScalarProperty Name="B<%= Kistl.API.Helper.PositionSuffix %>" ColumnName="BIndex" />
+          <ScalarProperty Name="Value<%= Kistl.API.Helper.PositionSuffix %>" ColumnName="BIndex" />
 <%
 		}
 %>

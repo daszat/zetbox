@@ -253,13 +253,13 @@ this.WriteObjects("        <MappingFragment StoreEntitySet=\"",  prop.GetCollect
 this.WriteObjects("          <ScalarProperty Name=\"ID\" ColumnName=\"ID\" />\r\n");
 this.WriteObjects("          ");
 #line 219 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
-ModelMslEntityTypeMappingComplexProperty.Call(Host, ctx, prop, "B", string.Empty); 
+ModelMslEntityTypeMappingComplexProperty.Call(Host, ctx, prop, "Value", string.Empty); 
 #line 221 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 if (prop.HasPersistentOrder)
 		{
 
 #line 224 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
-this.WriteObjects("          <ScalarProperty Name=\"B",  Kistl.API.Helper.PositionSuffix , "\" ColumnName=\"BIndex\" />\r\n");
+this.WriteObjects("          <ScalarProperty Name=\"Value",  Kistl.API.Helper.PositionSuffix , "\" ColumnName=\"BIndex\" />\r\n");
 #line 226 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 }
 

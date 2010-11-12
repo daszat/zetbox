@@ -20,6 +20,8 @@
     <string>P:\Kistl\bin\CodeGen\bin\Debug</string>
     <!-- common libaries -->
     <string>P:\Kistl\bin\Debug\bin\Common</string>
+    <!-- server libaries -->
+    <string>P:\Kistl\bin\Debug\bin\Server</string>
     <!-- Fallback path for local development -->
     <string>P:\Kistl\bin\Debug\bin\Server\fallback</string>
 
@@ -28,6 +30,8 @@
     <string>F:\CruiseControl.Net\Projects\Kistl\bin\CodeGen\bin\Debug</string>
     <!-- common libaries -->
     <string>F:\CruiseControl.Net\Projects\Kistl\bin\Debug\bin\Common</string>
+    <!-- server libaries -->
+    <string>F:\CruiseControl.Net\Projects\Kistl\bin\Debug\bin\Server</string>
     <!-- Fallback path for local development -->
     <string>F:\CruiseControl.Net\Projects\Kistl\bin\Debug\bin\Server\fallback</string>
   </SourceFileLocation>
