@@ -46,7 +46,8 @@ this.WriteObjects("\r\n");
 #line 29 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\ReloadReferences.cst"
 this.WriteObjects("            // fix direct object references\r\n");
 #line 31 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\ReloadReferences.cst"
-foreach(var prop in cls.Properties.OfType<ObjectReferenceProperty>()
+// TODO: Use only 1 side relation ends
+    foreach(var prop in cls.Properties.OfType<ObjectReferenceProperty>()
         .Where(orp => !orp.IsList())
         .OrderBy(orp => orp.ObjectClass.Name)
         .ThenBy(orp => orp.Name))
@@ -68,7 +69,7 @@ foreach(var prop in cls.Properties.OfType<ObjectReferenceProperty>()
         }
     }
 
-#line 53 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\ReloadReferences.cst"
+#line 54 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\ReloadReferences.cst"
 this.WriteObjects("        }\r\n");
 
         }

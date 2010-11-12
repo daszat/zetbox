@@ -28,6 +28,7 @@
 %>
             // fix direct object references
 <%
+	// TODO: Use only 1 side relation ends
     foreach(var prop in cls.Properties.OfType<ObjectReferenceProperty>()
         .Where(orp => !orp.IsList())
         .OrderBy(orp => orp.ObjectClass.Name)
