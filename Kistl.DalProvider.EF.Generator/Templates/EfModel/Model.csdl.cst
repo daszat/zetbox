@@ -134,7 +134,7 @@
 		if(cls.NeedsRightsTable())
 		{
 %>
-  <EntityType Name="<%= Construct.SecurityRulesClassName(cls) %>">
+  <EntityType Name="<%= Construct.SecurityRulesClassName(cls, this.Settings["extrasuffix"]) %>">
     <Key>
 	  <PropertyRef Name="ID" />
 	  <PropertyRef Name="Identity" />
@@ -145,7 +145,7 @@
   </EntityType>
   <Association Name="<%= Construct.SecurityRulesFKName(cls) %>">
     <End Role="<%= cls.Name %>" Type="Model.<%= cls.Name %>" Multiplicity="1" />
-    <End Role="<%= Construct.SecurityRulesClassName(cls) %>" Type="Model.<%= Construct.SecurityRulesClassName(cls) %>" Multiplicity="*" />
+    <End Role="<%= Construct.SecurityRulesClassName(cls) %>" Type="Model.<%= Construct.SecurityRulesClassName(cls, this.Settings["extrasuffix"]) %>" Multiplicity="*" />
     <ReferentialConstraint>
 	  <Principal Role="<%= cls.Name %>">
 	    <PropertyRef Name="ID" />

@@ -1,7 +1,7 @@
 ﻿<%@ CodeTemplate Language="C#" 
-	Name="Properties.SecurityRulesProperties"
-	ClassName="Kistl.DalProvider.Ef.Generator.Templates.Properties.SecurityRulesProperties" 
-	Inherits="Kistl.Generator.ResourceTemplate" %>
+    Name="Properties.SecurityRulesProperties"
+    ClassName="Kistl.DalProvider.Ef.Generator.Templates.Properties.SecurityRulesProperties" 
+    Inherits="Kistl.Generator.ResourceTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Linq" %>
 <%@ Import Namespace="Kistl.API" %>
@@ -17,13 +17,13 @@
 <%@ Parameter Name="referencedImplementation" Type="string" %>
 <%@ Parameter Name="efNameRightsPropertyName" Type="string" %>
 
-		public override Kistl.API.AccessRights CurrentAccessRights 
-		{ 
-			get 
-			{ 
-				return (Kistl.API.AccessRights)<%= efNameRightsPropertyName %>.First().Right; 
-			} 
-		}
+        public override Kistl.API.AccessRights CurrentAccessRights 
+        { 
+            get 
+            { 
+                return (Kistl.API.AccessRights)<%= efNameRightsPropertyName %>.First().Right; 
+            } 
+        }
 
         [EdmRelationshipNavigationProperty("Model", "<%= assocName %>", "<%= targetRoleName %>")]
         public EntityCollection<<%= referencedImplementation %>> <%= efNameRightsPropertyName %>

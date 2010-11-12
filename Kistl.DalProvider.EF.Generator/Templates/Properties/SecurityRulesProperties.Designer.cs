@@ -10,7 +10,7 @@ using Kistl.Generator.Extensions;
 
 namespace Kistl.DalProvider.Ef.Generator.Templates.Properties
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.DalProvider.Ef.Generator\Templates\Properties\SecurityRulesProperties.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\SecurityRulesProperties.cst")]
     public partial class SecurityRulesProperties : Kistl.Generator.ResourceTemplate
     {
 		protected IKistlContext ctx;
@@ -35,15 +35,15 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.Properties
         
         public override void Generate()
         {
-#line 19 "P:\Kistl\Kistl.DalProvider.Ef.Generator\Templates\Properties\SecurityRulesProperties.cst"
+#line 19 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\SecurityRulesProperties.cst"
 this.WriteObjects("\r\n");
-this.WriteObjects("		public override Kistl.API.AccessRights CurrentAccessRights \r\n");
-this.WriteObjects("		{ \r\n");
-this.WriteObjects("			get \r\n");
-this.WriteObjects("			{ \r\n");
-this.WriteObjects("				return (Kistl.API.AccessRights)",  efNameRightsPropertyName , ".First().Right; \r\n");
-this.WriteObjects("			} \r\n");
-this.WriteObjects("		}\r\n");
+this.WriteObjects("        public override Kistl.API.AccessRights CurrentAccessRights \r\n");
+this.WriteObjects("        { \r\n");
+this.WriteObjects("            get \r\n");
+this.WriteObjects("            { \r\n");
+this.WriteObjects("                return (Kistl.API.AccessRights)",  efNameRightsPropertyName , ".First().Right; \r\n");
+this.WriteObjects("            } \r\n");
+this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("        [EdmRelationshipNavigationProperty(\"Model\", \"",  assocName , "\", \"",  targetRoleName , "\")]\r\n");
 this.WriteObjects("        public EntityCollection<",  referencedImplementation , "> ",  efNameRightsPropertyName , "\r\n");

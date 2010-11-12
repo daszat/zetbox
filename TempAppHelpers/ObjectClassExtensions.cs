@@ -124,7 +124,7 @@ namespace Kistl.App.Extensions
 
         /// <summary>
         /// Checks if this ObjectClass needs a Rights Table. Lookup is done only in current class, not in base classes.
-        /// Only RoleMembership ACLs would need a Rights Table. GroupMemberShip ACLs are resolved directly at the server.
+        /// Only RoleMembership ACLs would need a Rights Table. GroupMembership ACLs are resolved directly at the server.
         /// </summary>
         /// <param name="cls">ObjectClass to test</param>
         /// <returns>true if the class needs a Rights Table</returns>
