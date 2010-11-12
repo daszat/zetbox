@@ -1,5 +1,5 @@
 
-namespace Kistl.Generator.Templates.ObjectClasses
+namespace Kistl.DalProvider.Client.Generator.Templates.Serialization
 {
     using System;
     using System.Collections.Generic;
@@ -11,7 +11,7 @@ namespace Kistl.Generator.Templates.ObjectClasses
     public class CollectionSerialization
         : Templates.Serialization.CollectionSerialization
     {
-        public CollectionSerialization(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Serialization.SerializerDirection direction, string streamName, string xmlnamespace, string xmlname, string collectionName, bool orderByB)
+        public CollectionSerialization(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Serialization.SerializerDirection direction, string streamName, string xmlnamespace, string xmlname, string collectionName, bool orderByB)
             : base(_host, ctx, direction, streamName, xmlnamespace, xmlname, collectionName, orderByB)
         {
         }
@@ -21,7 +21,7 @@ namespace Kistl.Generator.Templates.ObjectClasses
             // Do not serialize collection entries from client to server
             // they will be sent by the Client KistlContext as separate objects
             // from server to client they will be serialized - some kind of eager loading
-            return direction != Serialization.SerializerDirection.ToStream;
+            return direction != Templates.Serialization.SerializerDirection.ToStream;
         }
     }
 }
