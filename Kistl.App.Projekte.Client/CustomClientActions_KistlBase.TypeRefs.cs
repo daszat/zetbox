@@ -103,17 +103,14 @@ namespace Kistl.App.Base
                     CreateViewModelDescriptors(ctx, newTypes);
                     CreateViewDescriptors(ctx, newTypes);
 
-                    var newViewModelDescriptors = ctx.AttachedObjects.OfType<ViewModelDescriptor>().Where(d => d.ObjectState == DataObjectState.New).ToList();
-                    var newViewDescriptors = ctx.AttachedObjects.OfType<ViewDescriptor>().Where(d => d.ObjectState == DataObjectState.New).ToList();
+                    var newViewModelDescriptors = ctx.AttachedObjects.OfType<ViewModelDescriptor>().Where(d => d.ObjectState == DataObjectState.New).Cast<IDataObject>().ToList();
+                    var newViewDescriptors = ctx.AttachedObjects.OfType<ViewDescriptor>().Where(d => d.ObjectState == DataObjectState.New).Cast<IDataObject>().ToList();
+                    var newAssemblies = ctx.AttachedObjects.OfType<Assembly>().Where(d => d.ObjectState == DataObjectState.New).Cast<IDataObject>().ToList();
 
-                    if (newViewDescriptors.Count > 0 || newViewModelDescriptors.Count > 0)
+                    if (newViewDescriptors.Count > 0 || newViewModelDescriptors.Count > 0 || newAssemblies.Count > 0)
                     {
                         var workSpace = _mdlFactory.CreateViewModel<Kistl.Client.Presentables.ObjectEditor.WorkspaceViewModel.Factory>().Invoke(ctx);
-                        foreach (IDataObject i in newViewDescriptors)
-                        {
-                            workSpace.AddItem(_mdlFactory.CreateViewModel<DataObjectViewModel.Factory>(i).Invoke(ctx, i));
-                        }
-                        foreach (IDataObject i in newViewModelDescriptors)
+                        foreach (IDataObject i in newViewDescriptors.Union(newViewModelDescriptors).Union(newAssemblies))
                         {
                             workSpace.AddItem(_mdlFactory.CreateViewModel<DataObjectViewModel.Factory>(i).Invoke(ctx, i));
                         }
@@ -122,7 +119,7 @@ namespace Kistl.App.Base
                     }
                     else
                     {
-                        _mdlFactory.ShowMessage("Regenerating TypeRefs finished successfully, no new Descriptors found", "Success");
+                        _mdlFactory.ShowMessage("Regenerating TypeRefs finished successfully, no new Descriptors or Assemblies found", "Success");
                     }
                 }
                 catch (FileNotFoundException ex)

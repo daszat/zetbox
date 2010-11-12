@@ -21,23 +21,21 @@ namespace Kistl.Client.WPF
         ///// <summary>
         ///// Fix broken TypeRefs.
         ///// </summary>
-        //private static void FixupTypeRefParents()
+        //private static void FixupTypeRefParents(IKistlContext ctx)
         //{
+        //    if (ctx == null) throw new ArgumentNullException("ctx");
         //    using (Logging.Log.DebugTraceMethodCall("FixupTypeRefParents"))
         //    {
-        //        using (IKistlContext ctx = GetContext())
+        //        var typeRefs = ctx.GetQuery<TypeRef>();
+        //        foreach (var tr in typeRefs)
         //        {
-        //            var typeRefs = ctx.GetQuery<TypeRef>();
-        //            foreach (var tr in typeRefs)
+        //            if (tr.Parent != null)
         //            {
-        //                if (tr.Parent != null)
-        //                {
-        //                    continue;
-        //                }
-
-        //                UpdateParent(ctx, tr);
-        //                ctx.SubmitChanges();
+        //                continue;
         //            }
+
+        //            UpdateParent(ctx, tr);
+        //            ctx.SubmitChanges();
         //        }
         //    }
         //}
@@ -127,12 +125,22 @@ namespace Kistl.Client.WPF
         /// </summary>
         internal static void FixupDatabase(Func<IKistlContext> ctxFactory)
         {
-            // FixupTypeRefParents();
+            //FixupTypeRefParents(ctxFactory());
             // PrintEagerLoadingGraphViz();
             // CreateTestFragebögen();
             //PrintControlKindTypes();
             //FixupCallImplementInterfaces(ctx);
+            //RegenerateTypeRefs(ctxFactory());
         }
+
+        //private static void RegenerateTypeRefs(IKistlContext ctx)
+        //{
+        //    foreach (var a in ctx.GetQuery<Assembly>())
+        //    {
+        //        a.RegenerateTypeRefs();
+        //        ctx.SubmitChanges();
+        //    }
+        //}
 
         //private static void FixupCallImplementInterfaces(Func<IKistlContext> ctxFactory)
         //{

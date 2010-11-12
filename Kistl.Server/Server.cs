@@ -211,14 +211,15 @@ namespace Kistl.Server
             using (Log.InfoTraceMethodCall())
             using (var subContainer = container.BeginLifetimeScope())
             {
+                //Log.Info("Currently no fixes to do");
+
                 var ctx = subContainer.Resolve<IKistlServerContext>();
 
-                foreach (var prj in ctx.GetQuery<ZBox.App.SchemaMigration.MigrationProject>())
-                {
-                    prj.UpdateFromSourceSchema();
-                }
+                //foreach (var prj in ctx.GetQuery<ZBox.App.SchemaMigration.MigrationProject>())
+                //{
+                //    prj.UpdateFromSourceSchema();
+                //}
 
-                //Log.Info("Currently no fixes to do");
 
                 //foreach (var tr in ctx.GetQuery<TypeRef>())
                 //{
