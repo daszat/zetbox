@@ -29,7 +29,7 @@
 		{
 %>
     <EntitySetMapping Name="<%= Construct.SecurityRulesClassName(cls) %>">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.<%= Construct.SecurityRulesClassName(cls, this.Settings["extrasuffix"]) %>)">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.<%= Construct.SecurityRulesClassName(cls) %>)">
         <MappingFragment StoreEntitySet="<%= Construct.SecurityRulesClassName(cls) %>">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Identity" ColumnName="Identity" />

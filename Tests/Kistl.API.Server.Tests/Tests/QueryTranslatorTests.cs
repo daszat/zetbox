@@ -29,6 +29,11 @@ namespace Kistl.API.Server.Tests
         {
             return new TestQueryTranslatorProvider<TElement>(MetaDataResolver, Identity, Source, Ctx, _iftFactory);
         }
+
+        protected override string ImplementationSuffix
+        {
+            get { return Kistl.API.Helper.ImplementationSuffix; }
+        }
     }
 
     [TestFixture]

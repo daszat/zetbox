@@ -61,6 +61,8 @@ namespace Kistl.API.Server
             this.IftFactory = iftFactory;
         }
 
+        protected abstract string ImplementationSuffix { get; }
+
         #region IQueryProvider Members
 
         public IQueryable<TElement> CreateQuery<TElement>(Expression expression)
@@ -354,7 +356,7 @@ namespace Kistl.API.Server
                 var type = TranslateType(ifType.Type);
 
                 var baseIfType = rootClass.GetDescribedInterfaceType();
-                var rights_type = Type.GetType(baseIfType.Type.FullName + "_Rights" + Kistl.API.Helper.ImplementationSuffix + ", " + type.Assembly.FullName, true);
+                var rights_type = Type.GetType(baseIfType.Type.FullName + "_Rights" + ImplementationSuffix + ", " + type.Assembly.FullName, true);
 
                 // .Where(o => o.Projekte_Rights.Count(r => r.Identity == 12) == 1)
                 ParameterExpression pe_o = Expression.Parameter(type, "o");

@@ -149,12 +149,6 @@ namespace Kistl.Generator
             return objClass.Name + "_Rights";
         }
 
-        public static string SecurityRulesClassName(ObjectClass objClass, string extraSuffix)
-        {
-            if (objClass == null) { throw new ArgumentNullException("objClass"); }
-            return objClass.Name + "_Rights" + extraSuffix + Kistl.API.Helper.ImplementationSuffix;
-        }
-
         public static string SecurityRulesUpdateRightsTriggerName(ObjectClass objClass)
         {
             if (objClass == null) { throw new ArgumentNullException("objClass"); }

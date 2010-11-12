@@ -22,5 +22,10 @@ namespace Kistl.DalProvider.Ef
         {
             return new EfQueryTranslatorProvider<TElement>(MetaDataResolver, Identity, Source, Ctx, IftFactory);
         }
+
+        protected override string ImplementationSuffix
+        {
+            get { return "Ef" + Kistl.API.Helper.ImplementationSuffix; }
+        }
     }
 }

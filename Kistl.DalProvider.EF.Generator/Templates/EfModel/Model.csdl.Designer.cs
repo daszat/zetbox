@@ -164,7 +164,7 @@ if(cls.NeedsRightsTable())
 		{
 
 #line 137 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.cst"
-this.WriteObjects("  <EntityType Name=\"",  Construct.SecurityRulesClassName(cls, this.Settings["extrasuffix"]) , "\">\r\n");
+this.WriteObjects("  <EntityType Name=\"",  Construct.SecurityRulesClassName(cls) , "\">\r\n");
 this.WriteObjects("    <Key>\r\n");
 this.WriteObjects("	  <PropertyRef Name=\"ID\" />\r\n");
 this.WriteObjects("	  <PropertyRef Name=\"Identity\" />\r\n");
@@ -175,7 +175,7 @@ this.WriteObjects("    <Property Name=\"Right\" Type=\"Int32\" Nullable=\"false\
 this.WriteObjects("  </EntityType>\r\n");
 this.WriteObjects("  <Association Name=\"",  Construct.SecurityRulesFKName(cls) , "\">\r\n");
 this.WriteObjects("    <End Role=\"",  cls.Name , "\" Type=\"Model.",  cls.Name , "\" Multiplicity=\"1\" />\r\n");
-this.WriteObjects("    <End Role=\"",  Construct.SecurityRulesClassName(cls) , "\" Type=\"Model.",  Construct.SecurityRulesClassName(cls, this.Settings["extrasuffix"]) , "\" Multiplicity=\"*\" />\r\n");
+this.WriteObjects("    <End Role=\"",  Construct.SecurityRulesClassName(cls) , "\" Type=\"Model.",  Construct.SecurityRulesClassName(cls) , "\" Multiplicity=\"*\" />\r\n");
 this.WriteObjects("    <ReferentialConstraint>\r\n");
 this.WriteObjects("	  <Principal Role=\"",  cls.Name , "\">\r\n");
 this.WriteObjects("	    <PropertyRef Name=\"ID\" />\r\n");
