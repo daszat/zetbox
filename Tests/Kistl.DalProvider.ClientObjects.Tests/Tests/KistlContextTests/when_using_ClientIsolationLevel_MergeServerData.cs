@@ -7,10 +7,10 @@ namespace Kistl.DalProvider.Client.Tests.KistlContextTests
     using System.Text;
     using Autofac;
     using Kistl.API;
+    using Kistl.API.Client;
     using Kistl.API.Utils;
     using Kistl.App.Test;
     using NUnit.Framework;
-    using Kistl.API.Client;
 
     [TestFixture]
     public class when_using_ClientIsolationLevel_MergeServerData : Kistl.API.AbstractConsumerTests.AbstractTestFixture
@@ -37,7 +37,7 @@ namespace Kistl.DalProvider.Client.Tests.KistlContextTests
             TestObjClass obj_test = ctx.Find<TestObjClass>(1);
             Assert.That(obj_test.StringProp, Is.EqualTo("Changed"));
             Assert.That(obj.StringProp, Is.EqualTo("Changed"));
-            Assert.That(obj, Is.EqualTo(obj_test));
+            Assert.That(obj, Is.SameAs(obj_test));
         }
 
         [Test]
@@ -49,7 +49,7 @@ namespace Kistl.DalProvider.Client.Tests.KistlContextTests
             TestObjClass obj_test = ctx.GetQuery<TestObjClass>().First(i => i.ID == 1);
             Assert.That(obj_test.StringProp, Is.EqualTo("Changed"));
             Assert.That(obj.StringProp, Is.EqualTo("Changed"));
-            Assert.That(obj, Is.EqualTo(obj_test));
+            Assert.That(obj, Is.SameAs(obj_test));
         }
 
         [Test]
@@ -63,7 +63,7 @@ namespace Kistl.DalProvider.Client.Tests.KistlContextTests
             Assert.That(lst.Count, Is.GreaterThan(0));
             Assert.That(obj.StringProp, Is.EqualTo("String 1"));
             Assert.That(obj_test.StringProp, Is.EqualTo("String 1"));
-            Assert.That(obj, Is.EqualTo(obj_test));
+            Assert.That(obj, Is.SameAs(obj_test));
         }
     }
 }
