@@ -43,6 +43,7 @@
       <Module>Kistl.DalProvider.Memory.MemoryProvider, Kistl.DalProvider.Memory</Module>
       <Module>Kistl.App.Projekte.Client.CustomClientActionsModule, Kistl.App.Projekte.Client</Module>
       <Module>Kistl.App.Projekte.Common.CustomCommonActionsModule, Kistl.App.Projekte.Common</Module>
+      <Module>Ini50.App.Client.Ini50Module, Ini50.App.Client</Module>
     </Modules>
   </Client>
   <SourceFileLocation>
