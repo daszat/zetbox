@@ -13,6 +13,7 @@ namespace Kistl.DalProvider.Client
     using Kistl.API.Client;
     using Kistl.API.Configuration;
     using Kistl.API.Utils;
+    using Kistl.DalProvider.Base;
 
     /// <summary>
     /// Linq to Kistl Context Implementation
@@ -390,7 +391,7 @@ namespace Kistl.DalProvider.Client
             // Handle created Objects
             if (obj.ID == Helper.INVALIDID)
             {
-                ((BaseClientPersistenceObject)obj).ID = --_newIDCounter;
+                ((PersistenceObjectBaseImpl)obj).ID = --_newIDCounter;
                 // do not allow to create new objects that have positive IDs
                 if (obj.ID >= Helper.INVALIDID)
                 {
@@ -474,25 +475,25 @@ namespace Kistl.DalProvider.Client
             // TODO: Add a better Cache Refresh Strategie
             // CacheController<IDataObject>.Current.Clear();
 
-            var objectsToSubmit = new List<BaseClientPersistenceObject>();
-            var objectsToAdd = new List<BaseClientPersistenceObject>();
-            var objectsToDetach = new List<BaseClientPersistenceObject>();
+            var objectsToSubmit = new List<PersistenceObjectBaseImpl>();
+            var objectsToAdd = new List<PersistenceObjectBaseImpl>();
+            var objectsToDetach = new List<PersistenceObjectBaseImpl>();
 
             // Added Objects
-            foreach (var obj in _objects.OfType<BaseClientPersistenceObject>()
+            foreach (var obj in _objects.OfType<PersistenceObjectBaseImpl>()
                 .Where(o => o.ObjectState == DataObjectState.New))
             {
                 objectsToSubmit.Add(obj);
                 objectsToAdd.Add(obj);
             }
             // Changed objects
-            foreach (var obj in _objects.OfType<BaseClientPersistenceObject>()
+            foreach (var obj in _objects.OfType<PersistenceObjectBaseImpl>()
                 .Where(o => o.ObjectState == DataObjectState.Modified))
             {
                 objectsToSubmit.Add(obj);
             }
             // Deleted Objects
-            foreach (var obj in _objects.OfType<BaseClientPersistenceObject>()
+            foreach (var obj in _objects.OfType<PersistenceObjectBaseImpl>()
                 .Where(o => o.ObjectState == DataObjectState.Deleted))
             {
                 // Submit only persisted objects

@@ -7,9 +7,10 @@ namespace Kistl.DalProvider.Client
     using System.Text;
     using Kistl.API;
     using Kistl.API.Client;
+    using Kistl.DalProvider.Base;
 
     public abstract class CompoundCollectionEntryClientImpl<TA, TAImpl, TB, TBImpl>
-        : BaseClientCollectionEntry, IClientObject
+        : CompoundCollectionEntryBaseImpl<TA, TAImpl, TB, TBImpl>, IClientObject
         where TA : class, IDataObject
         where TAImpl : class, IDataObject, TA
         where TB : class, ICompoundObject

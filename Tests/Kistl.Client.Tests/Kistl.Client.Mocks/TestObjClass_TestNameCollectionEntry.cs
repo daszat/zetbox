@@ -8,9 +8,10 @@ namespace Kistl.API.Client.Tests
     using System.Xml.Serialization;
     
     using Kistl.App.Test;
+    using Kistl.DalProvider.Base;
 
     public class TestObjClass_TestNameCollectionEntry
-        : BaseClientCollectionEntry, IValueCollectionEntry<TestObjClass, string>
+        : CollectionEntryBaseImpl, IValueCollectionEntry<TestObjClass, string>
     {
         public TestObjClass_TestNameCollectionEntry()
             : base(null)

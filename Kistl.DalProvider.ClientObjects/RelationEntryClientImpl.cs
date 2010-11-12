@@ -7,9 +7,10 @@ namespace Kistl.DalProvider.Client
     using System.Text;
     using Kistl.API;
     using Kistl.API.Client;
+    using Kistl.DalProvider.Base;
 
     public abstract class RelationEntryClientImpl<TA, TAImpl, TB, TBImpl>
-        : BaseClientCollectionEntry, IClientObject
+        : RelationEntryBaseImpl<TA, TAImpl, TB, TBImpl>, IClientObject
         where TA : class, IDataObject
         where TAImpl : class, IDataObject, TA
         where TB : class, IDataObject
@@ -19,8 +20,6 @@ namespace Kistl.DalProvider.Client
             : base(lazyCtx)
         {
         }
-
-        public abstract Guid RelationID { get; }
 
         #region IClientObject Members
 
