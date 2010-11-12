@@ -21,20 +21,22 @@ namespace Kistl.DalProvider.Base
         /// <summary>
         /// Fires an Event before an Object is saved.
         /// </summary>
-        public abstract void NotifyPreSave();
+        public virtual void NotifyPreSave() { }
+
         /// <summary>
         /// Fires an Event after an Object is saved.
         /// </summary>
-        public abstract void NotifyPostSave();
+        public virtual void NotifyPostSave() { }
 
         /// <summary>
         /// Fires an Event after an Object is created.
         /// </summary>
-        public abstract void NotifyCreated();
+        public virtual void NotifyCreated() { }
+
         /// <summary>
         /// Fires an Event before an Object is deleted.
         /// </summary>
-        public abstract void NotifyDeleting();
+        public virtual void NotifyDeleting() { }
 
         public virtual void UpdateParent(string propertyName, int? id)
         {
