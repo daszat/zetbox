@@ -63,7 +63,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseMemoryCollectionEntry.cs" />
-    <Compile Include="BaseMemoryDataObject.cs" />
     <Compile Include="BaseMemoryPersistenceObject.cs" />
     <Compile Include="CompoundObjectMemoryImpl.cs" />
     <Compile Include="CompoundCollectionEntryMemoryImpl.cs" />

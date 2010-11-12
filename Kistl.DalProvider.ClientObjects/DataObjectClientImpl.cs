@@ -7,9 +7,10 @@ namespace Kistl.DalProvider.Client
     using System.Text;
     using Kistl.API;
     using Kistl.API.Client;
+    using Kistl.DalProvider.Base;
 
     public abstract class DataObjectClientImpl
-       : BaseClientDataObject, IClientObject
+       : DataObjectBaseImpl, IClientObject
     {
         protected DataObjectClientImpl(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)

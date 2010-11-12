@@ -5,9 +5,10 @@ namespace Kistl.API.Client.Mocks.OneNLists
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using Kistl.DalProvider.Base;
 
     public class NSide
-        : BaseClientDataObject, INSide
+        : DataObjectBaseImpl, INSide
     {
         public NSide() : base(null) { }
 
@@ -66,6 +67,26 @@ namespace Kistl.API.Client.Mocks.OneNLists
         }
 
         protected override string GetPropertyError(string prop)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void NotifyPreSave()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void NotifyPostSave()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void NotifyCreated()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void NotifyDeleting()
         {
             throw new NotImplementedException();
         }

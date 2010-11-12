@@ -115,42 +115,6 @@ namespace Kistl.API.Client
         }
     }
 
-    public abstract class BaseClientDataObject : BaseClientPersistenceObject, IDataObject
-    {
-        protected BaseClientDataObject(Func<IFrozenContext> lazyCtx)
-            : base(lazyCtx)
-        {
-        }
-
-        /// <summary>
-        /// Fires an Event before an Object is saved.
-        /// </summary>
-        public virtual void NotifyPreSave() { }
-        /// <summary>
-        /// Fires an Event after an Object is saved.
-        /// </summary>
-        public virtual void NotifyPostSave() { }
-
-        /// <summary>
-        /// Fires an Event after an Object is created.
-        /// </summary>
-        public virtual void NotifyCreated() { }
-        /// <summary>
-        /// Fires an Event before an Object is deleted.
-        /// </summary>
-        public virtual void NotifyDeleting() { }
-
-        public virtual void UpdateParent(string propertyName, int? id)
-        {
-            throw new MemberAccessException(String.Format("No {0} property in {1}", propertyName, GetImplementedInterface().FullName));
-        }
-
-        /// <summary>
-        /// Reflects the current access rights by the current Identity. 
-        /// </summary>
-        public AccessRights CurrentAccessRights { get; protected set; }
-    }
-
     public abstract class BaseClientCollectionEntry : BaseClientPersistenceObject
     {
         protected BaseClientCollectionEntry(Func<IFrozenContext> lazyCtx)
