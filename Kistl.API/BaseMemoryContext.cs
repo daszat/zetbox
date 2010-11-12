@@ -247,7 +247,7 @@ namespace Kistl.API
         }
 
         /// <inheritdoc />
-        public T CreateRelationCollectionEntry<T>() where T : IRelationCollectionEntry
+        public T CreateRelationCollectionEntry<T>() where T : IRelationEntry
         {
             CheckDisposed();
             //CheckInterfaceAssembly("T", typeof(T));
@@ -255,11 +255,11 @@ namespace Kistl.API
         }
 
         /// <inheritdoc />
-        public IRelationCollectionEntry CreateRelationCollectionEntry(InterfaceType ifType)
+        public IRelationEntry CreateRelationCollectionEntry(InterfaceType ifType)
         {
             CheckDisposed();
             //CheckInterfaceAssembly("ifType", ifType.Type);
-            return (IRelationCollectionEntry)CreateInternal(ifType);
+            return (IRelationEntry)CreateInternal(ifType);
         }
 
         /// <inheritdoc />

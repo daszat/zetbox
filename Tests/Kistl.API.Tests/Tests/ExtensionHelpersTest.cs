@@ -22,14 +22,14 @@ namespace Kistl.API.Tests
 		public override void SetUp()
 		{
             base.SetUp();
-			obj = new TestDataObject__Implementation__() { BoolProperty = true, IntProperty = 1, StringProperty = "test" };
+			obj = new TestDataObjectImpl() { BoolProperty = true, IntProperty = 1, StringProperty = "test" };
 		}
 
 		[Test]
 		public void XmlString()
 		{
 			string xml = obj.ToXmlString();
-			TestDataObject result = xml.FromXmlString<TestDataObject__Implementation__>();
+			TestDataObject result = xml.FromXmlString<TestDataObjectImpl>();
 
 			Assert.That(result, Is.Not.Null);
 			Assert.That(result.ID, Is.EqualTo(obj.ID));

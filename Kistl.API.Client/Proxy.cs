@@ -26,7 +26,7 @@ namespace Kistl.API.Client
         IEnumerable<IPersistenceObject> SetObjects(IKistlContext ctx, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests);
 
         IEnumerable<T> FetchRelation<T>(IKistlContext ctx, Guid relationId, RelationEndRole role, IDataObject parent, out List<IStreamable> auxObjects)
-            where T : class, IRelationCollectionEntry;
+            where T : class, IRelationEntry;
 
         Stream GetBlobStream(int ID);
         Kistl.App.Base.Blob SetBlobStream(IKistlContext ctx, Stream stream, string filename, string mimetype);
@@ -163,7 +163,7 @@ namespace Kistl.API.Client
         }
 
         public IEnumerable<T> FetchRelation<T>(IKistlContext ctx, Guid relationId, RelationEndRole role, IDataObject parent, out List<IStreamable> auxObjects)
-            where T : class, IRelationCollectionEntry
+            where T : class, IRelationEntry
         {
             using (Logging.Facade.InfoTraceMethodCallFormat("Fetching relation: ID=[{0}],role=[{1}],parentId=[{2}]", relationId, role, parent.ID))
             {

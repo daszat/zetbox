@@ -8,7 +8,7 @@ using Kistl.API.Server;
 
 using NUnit.Framework;
 
-namespace Kistl.DalProvider.EF.Tests.BaseServerDataObjects
+namespace Kistl.DalProvider.Ef.Tests.BaseServerDataObjects
 {
     [TestFixture]
     public class when_loaded

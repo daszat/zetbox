@@ -7,14 +7,13 @@ namespace Kistl.Server
     using System.ServiceModel;
     using System.ServiceModel.Activation;
     using System.Text;
-
     using Autofac;
     using Autofac.Integration.Wcf;
     using Kistl.API;
+    using Kistl.API.Common;
     using Kistl.API.Configuration;
     using Kistl.API.Server;
     using Kistl.App.Extensions;
-    using Kistl.API.Common;
 
     public class ServerModule : Module
     {
@@ -41,6 +40,7 @@ namespace Kistl.Server
 
             moduleBuilder
                 .RegisterType<Server>()
+                .As<IServer>()
                 .SingleInstance();
 
             moduleBuilder
@@ -48,18 +48,18 @@ namespace Kistl.Server
                 .As<IKistlAppDomain>()
                 .SingleInstance();
 
-            moduleBuilder
-                .RegisterType<Generators.Interfaces.InterfaceGenerator>()
-                .As<Generators.BaseDataObjectGenerator>()
-                .SingleInstance();
-            moduleBuilder
-                .RegisterType<Generators.ClientObjects.ClientObjectGenerator>()
-                .As<Generators.BaseDataObjectGenerator>()
-                .SingleInstance();
+            //moduleBuilder
+            //    .RegisterType<Generators.Interfaces.InterfaceGenerator>()
+            //    .As<Generators.BaseDataObjectGenerator>()
+            //    .SingleInstance();
+            //moduleBuilder
+            //    .RegisterType<Generators.ClientObjects.ClientObjectGenerator>()
+            //    .As<Generators.BaseDataObjectGenerator>()
+            //    .SingleInstance();
 
-            moduleBuilder
-                .RegisterType<Generators.Generator>()
-                .SingleInstance();
+            //moduleBuilder
+            //    .RegisterType<Generators.Generator>()
+            //    .SingleInstance();
 
             moduleBuilder
                 .Register(c => new AutofacServiceHostFactory())

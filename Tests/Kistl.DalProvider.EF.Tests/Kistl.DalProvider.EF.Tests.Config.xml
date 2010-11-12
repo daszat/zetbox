@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <KistlConfig xmlns="http://dasz.at/Kistl/">
-  <ConfigName>Kistl.DalProvider.EF's Test Configuration</ConfigName>
+  <ConfigName>Kistl.DalProvider.Ef's Test Configuration</ConfigName>
   <Server StartServer="false">
     <SchemaProvider>MSSQL</SchemaProvider>
     <DatabaseProvider>System.Data.SqlClient</DatabaseProvider>

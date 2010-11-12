@@ -42,7 +42,7 @@ namespace Kistl.DalProvider.Memory
         public override ImplementationType ToImplementationType(InterfaceType t)
         {
             // TODO: replace with generated switch factory
-            return GetImplementationType(Type.GetType(t.Type.FullName + Kistl.API.Helper.ImplementationSuffix + "Memory," + MemoryProvider.GeneratedAssemblyName));
+            return GetImplementationType(Type.GetType(t.Type.FullName + "Memory" + Kistl.API.Helper.ImplementationSuffix + "," + MemoryProvider.GeneratedAssemblyName));
         }
 
         public override InterfaceType GetInterfaceType(string typeName)

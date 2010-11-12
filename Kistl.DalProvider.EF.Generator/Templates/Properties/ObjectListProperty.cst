@@ -1,0 +1,104 @@
+﻿<%@ CodeTemplate Language="C#"    
+    Name="Properties.ObjectListProperty"
+    ClassName="Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty"    
+    Inherits="Kistl.Generator.ResourceTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.App.Extensions" %>
+<%@ Import Namespace="Kistl.Generator" %>
+<%@ Import Namespace="Kistl.Generator.Extensions" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="serializationList" Type="Kistl.Generator.Templates.Serialization.SerializationMembersList" %>
+<%@ Parameter Name="name" Type="string" %>
+<%@ Parameter Name="wrapperName" Type="string" %>
+<%@ Parameter Name="wrapperClass" Type="string" %>
+<%@ Parameter Name="exposedListType" Type="string" %>
+<%@ Parameter Name="rel" Type="Relation" %>
+<%@ Parameter Name="endRole" Type="RelationEndRole" %>
+<%@ Parameter Name="positionPropertyName" Type="string" %>
+<%@ Parameter Name="otherName" Type="string" %>
+<%@ Parameter Name="referencedInterface" Type="string" %>
+<%
+    RelationEnd relEnd = rel.GetEndFromRole(endRole);
+    RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
+
+    // the ef-visible property's name
+    string efName = name + ImplementationPropertySuffix;
+    // the name of the position property as string argument
+    string positionPropertyNameArgument = rel.NeedsPositionStorage(otherEnd.GetRole()) ? String.Format(@", ""{0}""", Construct.ListPositionPropertyName(otherEnd)) : String.Empty;
+    
+    // the name of the EF association
+    string assocName = rel.GetAssociationName() + (relEnd.Multiplicity.UpperBound() > 1 ? "_" + relEnd.GetRole() : String.Empty);
+    string targetRoleName = otherEnd.RoleName;
+
+    // which Kistl interface this is    
+    string thisInterface = relEnd.Type.GetDataTypeString();
+    // the actual implementation class of the list's elements
+    string referencedImplementation = referencedInterface + ImplementationSuffix;
+
+    // whether or not the collection will be eagerly loaded
+    bool eagerLoading = relEnd.Navigator != null && relEnd.Navigator.EagerLoading;
+
+    // override and ignore Base's notion of wrapper classes
+    wrapperClass = rel.NeedsPositionStorage(otherEnd.GetRole()) ? "EntityListWrapper" : "EntityCollectionWrapper";
+%>
+           // <%= this.GetType() %>
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public <%= exposedListType %><<%= referencedInterface %>> <%= name %>
+        {
+            get
+            {
+                if (<%= wrapperName %> == null)
+                {
+                    <%= wrapperName %> = new <%= wrapperClass %><<%= referencedInterface %>, <%= referencedImplementation %>>(
+                            this.Context, <%= efName %><%
+    // TODO: improve this!
+    if (rel.NeedsPositionStorage(otherEnd.GetRole()))
+    {
+        this.WriteObjects(", \"", relEnd.RoleName, "\"");
+    }
+                            %><%= positionPropertyNameArgument %>);
+                }
+                return <%= wrapperName %>;
+            }
+        }
+    
+        [EdmRelationshipNavigationProperty("Model", "<%= assocName %>", "<%= targetRoleName %>")]
+        public EntityCollection<<%= referencedImplementation %>> <%= efName %>
+        {
+            get
+            {
+                var c = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<<%= referencedImplementation %>>(
+                        "Model.<%= assocName %>",
+                        "<%= targetRoleName %>");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !c.IsLoaded)
+                {
+                    c.Load();
+                }
+                c.ForEach(i => i.AttachToContext(Context));
+                return c;
+            }
+        }
+        private <%= wrapperClass %><<%= referencedInterface %>, <%= referencedImplementation %>> <%= wrapperName %>;
+
+<%
+    if (eagerLoading)
+    {
+%>
+        private List<int> <%= name %>Ids;
+        private bool <%= name %>_was_eagerLoaded = false;
+<%
+    
+        if (serializationList != null)
+        {
+            serializationList.Add("Serialization.EagerLoadingSerialization", Kistl.Generator.Templates.Serialization.SerializerType.Binary, null, null, name, true);
+        }
+    }
+%>
+

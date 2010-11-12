@@ -12,11 +12,11 @@ del /Q .\Kistl.Objects\*.*
 xcopy /y bin\CodeGen\Kistl.Objects\*.* .\Kistl.Objects
 
 rem *********** Server *********** 
-xcopy /y .\Kistl.Objects.Server\*.* .\Backup\Kistl.Objects.Server\
+xcopy /y .\Kistl.Objects.Ef\*.* .\Backup\Kistl.Objects.Ef\
 
-del /Q .\Kistl.Objects.Server\*.*
+del /Q .\Kistl.Objects.Ef\*.*
 
-xcopy /y bin\CodeGen\Kistl.Objects.Server\*.* .\Kistl.Objects.Server
+xcopy /y bin\CodeGen\Kistl.Objects.Ef\*.* .\Kistl.Objects.Ef
 
 rem *********** Memory *********** 
 xcopy /y .\Kistl.Objects.Memory\*.* .\Backup\Kistl.Objects.Memory\

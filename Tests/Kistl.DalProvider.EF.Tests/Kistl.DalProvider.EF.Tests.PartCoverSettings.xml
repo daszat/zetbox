@@ -1,6 +1,6 @@
 <PartCoverSettings>
   <Target>E:\Program Files\NUnit 2.4.7\bin\nunit-console.exe</Target>
-  <TargetWorkDir>P:\Kistl\Tests\Kistl.DalProvider.EF.Tests</TargetWorkDir>
-  <TargetArgs>Kistl.DalProvider.EF.Tests.nunit</TargetArgs>
+  <TargetWorkDir>P:\Kistl\Tests\Kistl.DalProvider.Ef.Tests</TargetWorkDir>
+  <TargetArgs>Kistl.DalProvider.Ef.Tests.nunit</TargetArgs>
   <Rule>+[Kistl.DalProvider.*]*</Rule>
 </PartCoverSettings>

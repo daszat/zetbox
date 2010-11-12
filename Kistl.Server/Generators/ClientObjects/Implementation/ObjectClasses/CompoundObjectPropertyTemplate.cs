@@ -19,14 +19,12 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             if (host == null) { throw new ArgumentNullException("host"); }
             if (prop == null) { throw new ArgumentNullException("prop"); }
 
-            string backingPropertyName = propName + Kistl.API.Helper.ImplementationSuffix;
             string backingStoreName = "_" + propName + "Store";
 
             string coType = prop.GetPropertyTypeString();
-            string coImplementationType = coType + Kistl.API.Helper.ImplementationSuffix;
 
             host.CallTemplate("Implementation.ObjectClasses.CompoundObjectPropertyTemplate", ctx,
-                serializationList, prop, propName, backingPropertyName, backingStoreName, coType, coImplementationType);
+                serializationList, prop, propName, backingStoreName, coType);
         }
 
         protected virtual void AddSerialization(Templates.Implementation.SerializationMembersList list, string memberName, string backingPropertyName)

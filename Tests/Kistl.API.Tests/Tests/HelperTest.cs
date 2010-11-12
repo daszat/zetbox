@@ -24,14 +24,14 @@ namespace Kistl.API.Tests
         public override void SetUp()
         {
             base.SetUp();
-            obj = new TestDataObject__Implementation__() { BoolProperty = true, IntProperty = 1, StringProperty = "test" };
+            obj = new TestDataObjectImpl() { BoolProperty = true, IntProperty = 1, StringProperty = "test" };
         }
 
         [Test]
         public void IsFloatingObjectTest()
         {
             Assert.That(Helper.IsFloatingObject(obj), Is.EqualTo(true));
-            ((TestDataObject__Implementation__)obj).ID = 1;
+            ((TestDataObjectImpl)obj).ID = 1;
             obj.AttachToContext(scope.Resolve<IKistlContext>());
             Assert.That(Helper.IsFloatingObject(obj), Is.EqualTo(false));
         }
@@ -40,7 +40,7 @@ namespace Kistl.API.Tests
         public void IsPersistedObject()
         {
             Assert.That(Helper.IsPersistedObject(obj), Is.EqualTo(false));
-            ((TestDataObject__Implementation__)obj).ID = 1;
+            ((TestDataObjectImpl)obj).ID = 1;
             obj.AttachToContext(scope.Resolve<IKistlContext>());
             Assert.That(Helper.IsPersistedObject(obj), Is.EqualTo(true));
         }

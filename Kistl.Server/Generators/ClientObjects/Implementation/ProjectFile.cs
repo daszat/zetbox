@@ -16,11 +16,6 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation
         {
         }
 
-        protected override string GetAssemblyName()
-        {
-            return "Kistl.Objects." + TaskEnum.Client;
-        }
-
         protected override void ApplyAdditionalReferences()
         {
             base.ApplyAdditionalReferences();

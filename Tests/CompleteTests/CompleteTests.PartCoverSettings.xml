@@ -9,10 +9,10 @@
   <Rule>+[Kistl.Client.WPF]*</Rule>
   <Rule>+[Kistl.Server]*</Rule>
   <Rule>+[Kistl.DalProvider.ClientObjects]*</Rule>
-  <Rule>+[Kistl.DalProvider.EF]*</Rule>
+  <Rule>+[Kistl.DalProvider.Ef]*</Rule>
   <Rule>+[Kistl.DalProvider.Memory]*</Rule>
   <Rule>+[Kistl.DalProvider.ClientObjects.Generator]*</Rule>
-  <Rule>+[Kistl.DalProvider.EF.Generator]*</Rule>
+  <Rule>+[Kistl.DalProvider.Ef.Generator]*</Rule>
   <Rule>+[Kistl.DalProvider.Memory.Generator]*</Rule>
   <Rule>+[Kistl.Objects.Client]*</Rule>
   <Rule>+[Kistl.Objects.Memory]*</Rule>

@@ -13,7 +13,7 @@ namespace Kistl.API.Client
         : RelationASideCollectionWrapper<TA, TB, TEntry, ICollection<TEntry>>/*, IList<ATYPE>*/, INotifyCollectionChanged
         where TA : class, IDataObject
         where TB : class, IDataObject
-        where TEntry : class, IRelationCollectionEntry<TA, TB>, new()
+        where TEntry : class, IRelationEntry<TA, TB>, new()
     {
         public ClientRelationASideCollectionWrapper(TB parentObject, ICollection<TEntry> ec)
             : base(parentObject, ec)
@@ -101,7 +101,7 @@ namespace Kistl.API.Client
         : RelationBSideCollectionWrapper<TA, TB, TEntry, ICollection<TEntry>>/*, IList<BTYPE>*/, INotifyCollectionChanged
         where TA : class, IDataObject
         where TB : class, IDataObject
-        where TEntry : class, IRelationCollectionEntry<TA, TB>, new()
+        where TEntry : class, IRelationEntry<TA, TB>, new()
     {
         public ClientRelationBSideCollectionWrapper(TA parentObject, ICollection<TEntry> ec)
             : base(parentObject, ec)

@@ -25,7 +25,7 @@ namespace Kistl.Server.Generators.Templates.Interface.CollectionEntries
 
         protected virtual IEnumerable<string> GetAdditionalImports()
         {
-            return new string[] { };
+            return RequiredNamespaces;
         }
     }
 }

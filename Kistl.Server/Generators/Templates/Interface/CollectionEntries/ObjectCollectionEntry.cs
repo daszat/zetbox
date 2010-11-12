@@ -42,7 +42,7 @@ namespace Kistl.Server.Generators.Templates.Interface.CollectionEntries
         protected override string GetCeInterface()
         {
             return String.Format("{0}<{1}, {2}>",
-                IsOrdered() ? "IRelationListEntry" : "IRelationCollectionEntry",
+                IsOrdered() ? "IRelationListEntry" : "IRelationEntry",
                 rel.A.Type.Name,
                 rel.B.Type.Name);
         }
@@ -60,13 +60,15 @@ namespace Kistl.Server.Generators.Templates.Interface.CollectionEntries
 
         protected override IEnumerable<string> GetAdditionalImports()
         {
-            var additionalImports = new HashSet<string>();
+            var additionalImports = new HashSet<string>(base.GetAdditionalImports());
 
             // import referenced objectclasses' namespaces
-            additionalImports.Add(rel.A.Type.Module.Namespace);
-            additionalImports.Add(rel.B.Type.Module.Namespace);
+            if (!String.IsNullOrEmpty(rel.A.Type.Module.Namespace))
+                additionalImports.Add(rel.A.Type.Module.Namespace);
+            if (!String.IsNullOrEmpty(rel.B.Type.Module.Namespace))
+                additionalImports.Add(rel.B.Type.Module.Namespace);
 
-            return base.GetAdditionalImports().Concat(additionalImports);
+            return additionalImports;
         }
     }
 }

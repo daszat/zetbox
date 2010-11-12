@@ -11,18 +11,16 @@ namespace Kistl.DalProvider.Memory.Generator
     using Kistl.API.Utils;
     using Kistl.App.Base;
     using Kistl.App.Extensions;
-    using Kistl.Server.Generators;
+    using Kistl.Generator;
 
     public class MemoryGenerator
-        : BaseDataObjectGenerator
+        : AbstractBaseGenerator
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Generator.Memory");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Generator.Memory");
 
-        internal static readonly string Suffix = "Memory";
+        private readonly IServer _server;
 
-        private readonly Server.Server _server;
-
-        public MemoryGenerator(IEnumerable<ISchemaProvider> schemaProviders, Server.Server server)
+        public MemoryGenerator(IEnumerable<ISchemaProvider> schemaProviders, IServer server)
             : base(schemaProviders)
         {
             _server = server;
@@ -34,6 +32,15 @@ namespace Kistl.DalProvider.Memory.Generator
         public override string TargetNameSpace { get { return "Kistl.Objects." + ExtraSuffix; } }
         public override string BaseName { get { return ExtraSuffix; } }
         public override string ProjectGuid { get { return "{01E60FD5-CD96-466a-83B1-8EFC7452B47C}"; } }
+        public override IEnumerable<string> RequiredNamespaces
+        {
+            get
+            {
+                return new string[] {
+                   "Kistl.DalProvider.Memory",
+                };
+            }
+        }
 
         protected override IEnumerable<string> Generate_Other(IKistlContext ctx)
         {

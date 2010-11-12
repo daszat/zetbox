@@ -1,0 +1,66 @@
+﻿<%@ CodeTemplate Language="C#" 
+	Name="Serialization.CompoundObjectSerialization"
+	ClassName="Kistl.Generator.Templates.Serialization.CompoundObjectSerialization" 
+	Inherits="Kistl.Generator.ResourceTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.Generator" %>
+<%@ Import Namespace="Kistl.Generator.Extensions" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="direction" Type="SerializerDirection" %>
+<%@ Parameter Name="streamName" Type="string" %>
+<%@ Parameter Name="xmlnamespace" Type="string" %>
+<%@ Parameter Name="xmlname" Type="string" %>
+<%@ Parameter Name="memberName" Type="string" %>
+<%@ Parameter Name="backingStoreName" Type="string" %>
+<%
+	if (direction == SerializerDirection.ToStream)
+	{
+%>
+			BinarySerializer.ToStream(this.<%= memberName %>, <%= streamName %>);
+<%	
+	}
+	else if (direction == SerializerDirection.FromStream)
+	{
+%>
+			{
+				// trick compiler into generating correct temporary variable
+				var tmp = this.<%= backingStoreName %>;
+				BinarySerializer.FromStream(out tmp, <%= streamName %>);
+				// use setter to de-/attach everything correctly
+	            this.<%= backingStoreName %> = tmp;
+	        }
+<%	
+	}
+	else if (direction == SerializerDirection.ToXmlStream)
+	{
+%>
+			// TODO: Add XML Serializer here
+<%
+	}
+	else if (direction == SerializerDirection.FromXmlStream)
+	{
+%>
+            // TODO: Add XML Serializer here
+<%
+	}
+	else if (direction == SerializerDirection.Export)
+	{
+%>
+            if (modules.Contains("*") || modules.Contains("<%= xmlnamespace %>")) XmlStreamer.ToStream(this.<%= memberName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
+<%
+	}
+	else if (direction == SerializerDirection.MergeImport)
+	{
+%>
+			XmlStreamer.FromStream(this.<%= backingStoreName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
+<%
+	}
+	else
+	{
+		throw new ArgumentOutOfRangeException("direction");
+	}
+%>

@@ -189,7 +189,7 @@ namespace Kistl.API.Server
         }
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public abstract IList<T> FetchRelation<T>(Guid relationId, RelationEndRole role, IDataObject parent) where T : class, IRelationCollectionEntry;
+        public abstract IList<T> FetchRelation<T>(Guid relationId, RelationEndRole role, IDataObject parent) where T : class, IRelationEntry;
 
         /// <summary>
         /// Checks if the given Object is already in that Context.
@@ -335,9 +335,9 @@ namespace Kistl.API.Server
         /// </summary>
         /// <param name="ifType">Interface type of the new IPersistenceObject</param>
         /// <returns>A new IPersistenceObject</returns>
-        public virtual IRelationCollectionEntry CreateRelationCollectionEntry(InterfaceType ifType)
+        public virtual IRelationEntry CreateRelationCollectionEntry(InterfaceType ifType)
         {
-            return (IRelationCollectionEntry)CreateInternal(ifType);
+            return (IRelationEntry)CreateInternal(ifType);
         }
 
         /// <summary>
@@ -345,7 +345,7 @@ namespace Kistl.API.Server
         /// </summary>
         /// <typeparam name="T">Type of the new IPersistenceObject</typeparam>
         /// <returns>A new IDataObject</returns>
-        public virtual T CreateRelationCollectionEntry<T>() where T : IRelationCollectionEntry
+        public virtual T CreateRelationCollectionEntry<T>() where T : IRelationEntry
         {
             return (T)CreateRelationCollectionEntry(iftFactory(typeof(T)));
         }

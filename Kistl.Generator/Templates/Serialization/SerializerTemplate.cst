@@ -1,0 +1,98 @@
+﻿<%@ CodeTemplate Language="C#" 
+    Name="Serializer.SerializerTemplate"
+    ClassName="Kistl.Generator.Templates.Serialization.SerializerTemplate" 
+    Inherits="Kistl.Generator.ResourceTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Linq" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.Generator" %>
+<%@ Import Namespace="Kistl.Generator.Extensions" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="direction" Type="SerializerDirection" %>
+<%@ Parameter Name="fields" Type="SerializationMembersList" %>
+<%@ Parameter Name="overrideAndCallBase" Type="bool" %>
+<%@ Parameter Name="writeExportGuidAttribute" Type="bool" %>
+
+<%
+    string methodName = direction.ToString();
+    string argName;
+    string argType;
+    string additionalArgs = String.Empty;
+    string callBaseWithAdditionalArgs = String.Empty;
+    SerializerType serType;
+    
+    switch(direction){
+        case SerializerDirection.ToStream:
+            argType = "System.IO.BinaryWriter";
+            argName = "binStream";
+            methodName = "ToStream";
+            serType = SerializerType.Binary;
+            additionalArgs = ", HashSet<IStreamable> auxObjects, bool eagerLoadLists";
+            callBaseWithAdditionalArgs = ", auxObjects, eagerLoadLists";
+            break;
+        case SerializerDirection.FromStream:
+            argType = "System.IO.BinaryReader";
+            argName = "binStream";
+            methodName = "FromStream";
+            serType = SerializerType.Binary;
+            break;
+        case SerializerDirection.ToXmlStream:
+            argType = "System.Xml.XmlWriter";
+            argName = "xml";
+            methodName = "ToStream";
+            serType = SerializerType.Xml;
+            break;
+        case SerializerDirection.FromXmlStream:
+            argType = "System.Xml.XmlReader";
+            argName = "xml";
+            methodName = "FromStream";
+            serType = SerializerType.Xml;
+            break;
+        case SerializerDirection.Export:
+            argType = "System.Xml.XmlWriter";
+            additionalArgs = ", string[] modules";
+            callBaseWithAdditionalArgs = ", modules";
+            argName = "xml";
+            methodName = "Export";
+            serType = SerializerType.ImportExport;
+            break;
+        case SerializerDirection.MergeImport:
+            argType = "System.Xml.XmlReader";
+            argName = "xml";
+            methodName = "MergeImport";
+            serType = SerializerType.ImportExport;
+            break;
+        default:
+            throw new ArgumentOutOfRangeException("direction");
+    }
+    
+%>
+        public <%= overrideAndCallBase ? "override" : "virtual" %> void <%= methodName %>(<%= argType %> <%= argName %><%= additionalArgs %>)
+        {
+<%            
+    if(overrideAndCallBase)
+    {
+%>            
+            base.<%= methodName %>(<%= argName %><%= callBaseWithAdditionalArgs %>);
+<%
+    }
+    else if(direction == SerializerDirection.Export && writeExportGuidAttribute)
+    {
+%>            
+            xml.WriteAttributeString("ExportGuid", this._ExportGuid.ToString());
+<%
+    }
+
+    foreach(var serMember in fields.Where(f => (f.SerializerType & serType) == serType))
+    {
+        if (direction == SerializerDirection.Export && serMember.XmlName == "ExportGuid")
+        {
+            continue;
+        }
+        ApplySerializer(direction, serMember, argName);
+    }
+%>
+        }

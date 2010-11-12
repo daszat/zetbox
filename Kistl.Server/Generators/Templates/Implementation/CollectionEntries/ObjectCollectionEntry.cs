@@ -8,7 +8,6 @@ using Kistl.App.Base;
 using Kistl.App.Extensions;
 using Kistl.Server.Generators.Extensions;
 
-
 namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
 {
     public abstract partial class ObjectCollectionEntry
@@ -29,16 +28,6 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
             this.rel = rel;
         }
 
-        protected override void ApplyExportGuidPropertyTemplate()
-        {
-            ExportGuidProperty.Call(Host, ctx, this.MembersToSerialize);
-        }
-
-        protected override void ApplyRelationIdPropertyTemplate()
-        {
-            this.WriteLine("        public Guid RelationID {{ get {{ return new Guid(\"{0}\"); }} }}", rel.ExportGuid);
-        }
-
         protected override void ApplyObjectGetterTemplate()
         {
             this.WriteLine("        public IDataObject AObject {{ get {{ return A; }} set {{ A = ({0})value; }} }}", rel.A.Type.GetDataTypeString());
@@ -47,7 +36,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
 
         protected override string GetCeClassName()
         {
-            return rel.GetRelationClassName() + Kistl.API.Helper.ImplementationSuffix + Settings["extrasuffix"];
+            return rel.GetRelationClassName() + ImplementationSuffix;
         }
 
         protected override string GetCeInterface()

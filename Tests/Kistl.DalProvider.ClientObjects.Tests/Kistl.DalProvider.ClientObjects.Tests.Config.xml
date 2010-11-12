@@ -5,7 +5,7 @@
     <DocumentStore>DocumentStore\Client\</DocumentStore>
     <Modules>
       <!-- has to be loaded dynamically -->
-      <Module>Kistl.Objects.ClientModule, Kistl.Objects.Client</Module>
+      <Module>Kistl.Objects.ClientModule, Kistl.Objects.ClientImpl</Module>
     </Modules>
   </Client>
   <SourceFileLocation>

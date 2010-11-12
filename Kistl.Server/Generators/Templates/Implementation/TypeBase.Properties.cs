@@ -92,7 +92,7 @@ namespace Kistl.Server.Generators.Templates.Implementation
         {
             this.WriteLine("        // enumeration property");
             this.ApplyNotifyingValueProperty(prop, null);
-            this.MembersToSerialize.Add("Implementation.ObjectClasses.EnumBinarySerialization", SerializerType.All, prop.Module.Namespace, prop.Name, prop);
+            this.MembersToSerialize.Add("Serialization.EnumBinarySerialization", SerializerType.All, prop.Module.Namespace, prop.Name, prop);
         }
 
         protected virtual void ApplyObjectReferenceListTemplate(ObjectReferenceProperty prop)

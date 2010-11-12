@@ -197,7 +197,7 @@ namespace Kistl.DalProvider.Client.Mocks
             fi.SetValue(obj, val);
         }
 
-        public IEnumerable<T> FetchRelation<T>(IKistlContext ctx, Guid relationId, RelationEndRole role, IDataObject parent, out List<IStreamable> auxObjects) where T : class, IRelationCollectionEntry
+        public IEnumerable<T> FetchRelation<T>(IKistlContext ctx, Guid relationId, RelationEndRole role, IDataObject parent, out List<IStreamable> auxObjects) where T : class, IRelationEntry
         {
             auxObjects = new List<IStreamable>();
             return new List<T>();

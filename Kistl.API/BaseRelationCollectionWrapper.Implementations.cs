@@ -11,7 +11,7 @@ namespace Kistl.API
         : BaseRelationCollectionWrapper<TA, TB, TB, TA, TEntry, TBaseCollection>
         where TA : class, IDataObject
         where TB : class, IDataObject
-        where TEntry : class, IRelationCollectionEntry<TA, TB>
+        where TEntry : class, IRelationEntry<TA, TB>
         where TBaseCollection : class, ICollection<TEntry>
     {
         protected RelationASideCollectionWrapper(TB parentObject, TBaseCollection baseCollection)
@@ -111,7 +111,7 @@ namespace Kistl.API
         : BaseRelationCollectionWrapper<TA, TB, TA, TB, TEntry, TBaseCollection>
         where TA : class, IDataObject
         where TB : class, IDataObject
-        where TEntry : class, IRelationCollectionEntry<TA, TB>
+        where TEntry : class, IRelationEntry<TA, TB>
         where TBaseCollection : class, ICollection<TEntry>
     {
         protected RelationBSideCollectionWrapper(TA parentObject, TBaseCollection baseCollection)

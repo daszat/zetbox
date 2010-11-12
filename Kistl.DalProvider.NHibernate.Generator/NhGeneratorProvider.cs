@@ -6,7 +6,7 @@ namespace Kistl.DalProvider.NHibernate.Generator
     using System.Linq;
     using System.Text;
     using Autofac;
-    using Kistl.Server.Generators;
+    using Kistl.Generator;
 
     public sealed class NhGeneratorProvider
         : Autofac.Module
@@ -17,7 +17,7 @@ namespace Kistl.DalProvider.NHibernate.Generator
 
             builder
                 .RegisterType<NhGenerator>()
-                .As<BaseDataObjectGenerator>()
+                .As<AbstractBaseGenerator>()
                 .SingleInstance();
         }
     }

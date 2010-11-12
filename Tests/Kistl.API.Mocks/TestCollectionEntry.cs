@@ -9,7 +9,7 @@ namespace Kistl.API.Mocks
     using System.Text;
 
     public class TestCollectionEntry
-        : IRelationCollectionEntry
+        : IRelationEntry
     {
         private int _ID = -1;
         public int ID { get { return _ID; } set { _ID = value; } }
@@ -43,7 +43,7 @@ namespace Kistl.API.Mocks
             return ID;
         }
 
-        public void CopyTo(IRelationCollectionEntry obj)
+        public void CopyTo(IRelationEntry obj)
         {
             ((TestCollectionEntry)obj).ID = this.ID;
             ((TestCollectionEntry)obj).TestName = this.TestName;
@@ -164,7 +164,7 @@ namespace Kistl.API.Mocks
 
         public Type GetImplementedInterface()
         {
-            return typeof(IRelationCollectionEntry);
+            return typeof(IRelationEntry);
         }
 
         #endregion

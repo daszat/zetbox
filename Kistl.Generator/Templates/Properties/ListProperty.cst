@@ -1,0 +1,40 @@
+﻿<%@ CodeTemplate Language="C#" 
+	Name="Properties.ListProperty"
+	ClassName="Kistl.Generator.Templates.Properties.ListProperty" 
+	Inherits="Kistl.Generator.ResourceTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.Generator" %>
+<%@ Import Namespace="Kistl.Generator.Extensions" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="serializationList" Type="Serialization.SerializationMembersList" %>
+<%@ Parameter Name="containingType" Type="DataType" %>
+<%@ Parameter Name="name" Type="String" %>
+<%@ Parameter Name="property" Type="Property" %>
+<%
+	ApplyAttributesTemplate();
+
+	var backingName = BackingMemberFromName(name);
+%>
+   		// <%= this.GetType() %>
+        <%= GetModifiers() %> <%= GetPropertyTypeString() %> <%= name %>
+        {
+            get
+            {
+                if (<%= backingName %> == null)
+                    <%= backingName %> = <%= GetInitialisationExpression() %>;
+                return <%= backingName %>;
+            }
+<%
+			ApplySettor();
+%>
+        }
+        private <%= GetBackingTypeString() %> <%= backingName %>;
+<%
+	AddSerialization(serializationList, name);
+
+
+	ApplyRequisitesTemplate();
+%>

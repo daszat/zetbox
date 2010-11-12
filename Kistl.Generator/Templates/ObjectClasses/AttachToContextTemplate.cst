@@ -1,0 +1,33 @@
+﻿<%@ CodeTemplate Language="C#" 
+	Name="ObjectClasses.AttachToContextTemplate"
+	ClassName="Kistl.Generator.Templates.ObjectClasses.AttachToContextTemplate" 
+	Inherits="Kistl.Generator.ResourceTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Linq" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.Generator" %>
+<%@ Import Namespace="Kistl.Generator.Extensions" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="cls" Type="ObjectClass" %>
+
+        public override void AttachToContext(IKistlContext ctx)
+        {
+            base.AttachToContext(ctx);
+<%			
+			foreach(var prop in cls.Properties.OfType<ValueTypeProperty>().Where(p => p.IsList).OrderBy(p => p.Name))
+			{
+%>
+			_<%= prop.Name %>.ForEach<IValueCollectionEntry>(i => ctx.Attach(i));
+<%
+			}
+
+			foreach(var prop in cls.Properties.OfType<CompoundObjectProperty>().Where(p => p.IsList).OrderBy(p => p.Name))
+			{
+%>
+			_<%= prop.Name %>.ForEach<IValueCollectionEntry>(i => ctx.Attach(i));
+<%
+			}
+%>
+		}

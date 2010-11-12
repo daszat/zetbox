@@ -143,13 +143,13 @@ namespace Kistl.API
         /// of the relation. Mostly for internal use.
         /// TODO: Move to IZBoxContextInternals interface
         /// </summary>
-        /// <typeparam name="T">Type of the IRelationCollectionEntry element</typeparam>
+        /// <typeparam name="T">Type of the IRelationEntry element</typeparam>
         /// <param name="relationId">Specifies which relation to fetch</param>
         /// <param name="role">Specifies how to interpret the container</param>
         /// <param name="container">The container of the requested collection</param>
         /// <returns></returns>
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
-        IList<T> FetchRelation<T>(Guid relationId, RelationEndRole role, IDataObject container) where T : class, IRelationCollectionEntry;
+        IList<T> FetchRelation<T>(Guid relationId, RelationEndRole role, IDataObject container) where T : class, IRelationEntry;
 
         /// <summary>
         /// Checks if the given Object is already in that Context.
@@ -374,19 +374,19 @@ namespace Kistl.API
         T CreateUnattached<T>() where T : class, IPersistenceObject;
 
         /// <summary>
-        /// Creates a new IRelationCollectionEntry by Type
+        /// Creates a new IRelationEntry by Type
         /// </summary>
-        /// <param name="ifType">Type of the new IRelationCollectionEntry</param>
-        /// <returns>A new IRelationCollectionEntry</returns>
+        /// <param name="ifType">Type of the new IRelationEntry</param>
+        /// <returns>A new IRelationEntry</returns>
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
-        IRelationCollectionEntry CreateRelationCollectionEntry(InterfaceType ifType);
+        IRelationEntry CreateRelationCollectionEntry(InterfaceType ifType);
         /// <summary>
-        /// Creates a new IRelationCollectionEntry.
+        /// Creates a new IRelationEntry.
         /// </summary>
-        /// <typeparam name="T">Type of the new IRelationCollectionEntry</typeparam>
-        /// <returns>A new IRelationCollectionEntry</returns>
+        /// <typeparam name="T">Type of the new IRelationEntry</typeparam>
+        /// <returns>A new IRelationEntry</returns>
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
-        T CreateRelationCollectionEntry<T>() where T : IRelationCollectionEntry;
+        T CreateRelationCollectionEntry<T>() where T : IRelationEntry;
 
         /// <summary>
         /// Creates a new IValueCollectionEntry by Type

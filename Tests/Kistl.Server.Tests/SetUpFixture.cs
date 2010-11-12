@@ -31,9 +31,9 @@ namespace Kistl.Server.Tests
             builder.RegisterModule(new Kistl.API.ApiModule());
             builder.RegisterModule(new Kistl.API.Server.ServerApiModule());
             builder.RegisterModule(new Kistl.Server.ServerModule());
-            builder.RegisterModule(new Kistl.DalProvider.EF.EfProvider());
+            builder.RegisterModule(new Kistl.DalProvider.Ef.EfProvider());
             builder.RegisterModule(new Kistl.DalProvider.Memory.MemoryProvider());
-            builder.RegisterModule(new Kistl.Objects.EFModule());
+            builder.RegisterModule(new Kistl.Objects.EfModule());
             builder.RegisterModule(new Kistl.Objects.MemoryModule());
         }
 

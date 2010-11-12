@@ -38,12 +38,12 @@ namespace Kistl.API.Tests
         protected override TestDataObject NewItem()
         {
             int id = NewItemNumber();
-            return new TestDataObject__Implementation__() { ID = id, StringProperty = "item#" + id };
+            return new TestDataObjectImpl() { ID = id, StringProperty = "item#" + id };
         }
 
         protected override NotifyingObservableCollection<TestDataObject> CreateCollection(List<TestDataObject> items)
         {
-            parent = new TestDataObject__Implementation__();
+            parent = new TestDataObjectImpl();
             var result = new NotifyingObservableCollection<TestDataObject>(parent, "ParentProperty");
             foreach (var i in items)
             {
@@ -154,12 +154,12 @@ namespace Kistl.API.Tests
         protected override TestDataObject NewItem()
         {
             int id = NewItemNumber();
-            return new TestDataObject__Implementation__() { ID = id, StringProperty = "item#" + id };
+            return new TestDataObjectImpl() { ID = id, StringProperty = "item#" + id };
         }
 
         protected override NotifyingObservableCollection<TestDataObject> CreateCollection(List<TestDataObject> items)
         {
-            parent = new TestDataObject__Implementation__();
+            parent = new TestDataObjectImpl();
             var result = new NotifyingObservableCollection<TestDataObject>(parent, "ParentProperty");
             foreach (var i in items)
             {

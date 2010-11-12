@@ -11,7 +11,26 @@ namespace Kistl.API.Server
     // server implementation has to delay property lookup until validation
     // to avoid bootstrapping issues and threading failures when initialising
 
-    public class CustomPropertyDescriptor<TComponent, TProperty>
+    public class CustomPropertyDescriptor<X, Y> : PropertyDescriptorImpl<X, Y>
+    {
+        public CustomPropertyDescriptor(
+            Func<IFrozenContext> lazyCtx,
+            Guid? propertyGuid,
+            string name,
+            Attribute[] attrs,
+            Func<X, Y> getter,
+            Action<X, Y> setter)
+            : base(lazyCtx,
+             propertyGuid,
+             name,
+             attrs,
+             getter,
+             setter)
+        {
+        }
+    }
+
+    public class PropertyDescriptorImpl<TComponent, TProperty>
         : BaseCustomPropertyDescriptor<TComponent, TProperty>
     {
         private static readonly string[] NoErrors = new string[] { };
@@ -19,7 +38,7 @@ namespace Kistl.API.Server
         private readonly Func<IFrozenContext> _lazyCtx;
         private readonly Guid? _propertyGuid;
 
-        public CustomPropertyDescriptor(
+        public PropertyDescriptorImpl(
             Func<IFrozenContext> lazyCtx,
             Guid? propertyGuid,
             string name,
@@ -32,7 +51,7 @@ namespace Kistl.API.Server
             _propertyGuid = propertyGuid;
         }
 
-        public CustomPropertyDescriptor(
+        public PropertyDescriptorImpl(
             Guid? propertyGuid,
             string name,
             Attribute[] attrs,

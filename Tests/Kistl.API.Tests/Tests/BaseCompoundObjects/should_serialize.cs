@@ -17,7 +17,7 @@ namespace Kistl.API.Tests.BaseCompoundObjects
         BinaryWriter sw;
         BinaryReader sr;
 
-        TestCompoundObject__Implementation__ test;
+        TestCompoundObjectImpl test;
 
         public override void SetUp()
         {
@@ -26,7 +26,7 @@ namespace Kistl.API.Tests.BaseCompoundObjects
             sw = new BinaryWriter(ms);
             sr = new BinaryReader(ms);
 
-            test = new TestCompoundObject__Implementation__();
+            test = new TestCompoundObjectImpl();
         }
 
         /// <summary>

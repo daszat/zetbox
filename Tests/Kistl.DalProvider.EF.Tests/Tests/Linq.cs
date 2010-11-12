@@ -11,11 +11,11 @@ using Kistl.API.Server;
 using Kistl.App.Base;
 using Kistl.App.Projekte;
 using Kistl.App.Test;
-using Kistl.DalProvider.EF.Mocks;
+using Kistl.DalProvider.Ef.Mocks;
 
 using NUnit.Framework;
 
-namespace Kistl.DalProvider.EF.Tests
+namespace Kistl.DalProvider.Ef.Tests
 {
     [TestFixture]
     public class Linq

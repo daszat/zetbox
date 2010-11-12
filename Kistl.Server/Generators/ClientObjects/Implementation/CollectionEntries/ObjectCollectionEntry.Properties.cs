@@ -19,7 +19,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.CollectionEntries
             RelationEnd relEnd = rel.GetEndFromRole(endRole);
             RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
 
-            string backingName = propertyName + Kistl.API.Helper.ImplementationSuffix;
+            string backingName = propertyName + ImplementationPropertySuffix;
             string fkBackingName = "_fk_" + propertyName;
             string fkGuidBackingName = "_fk_guid_" + propertyName;
 

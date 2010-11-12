@@ -1,0 +1,65 @@
+﻿<%@ CodeTemplate Language="C#" 
+	Name="Serialization.EnumBinarySerialization"
+	ClassName="Kistl.Generator.Templates.Serialization.EnumBinarySerialization" 
+	Inherits="Kistl.Generator.ResourceTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.App.Extensions" %>
+<%@ Import Namespace="Kistl.Generator" %>
+<%@ Import Namespace="Kistl.Generator.Extensions" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="direction" Type="SerializerDirection" %>
+<%@ Parameter Name="streamName" Type="string" %>
+<%@ Parameter Name="xmlnamespace" Type="string" %>
+<%@ Parameter Name="xmlname" Type="string" %>
+<%@ Parameter Name="prop" Type="EnumerationProperty" %>
+<%
+	// always use the interface to get the "right" property
+	string interfaceName = prop.ObjectClass.Name;
+    string memberName = prop.Name;
+    string enumName =  prop.Enumeration.Module.Namespace + "." +  prop.Enumeration.Name;
+    if(prop.IsNullable()) enumName += "?";
+	string methodName = direction.ToString();
+	
+	////
+	////  This class always serializes as int? to avoid complicating the code
+	////
+	
+	switch(direction){
+		case SerializerDirection.ToStream:
+%>
+            BinarySerializer.<%= methodName %>((int?)((<%= interfaceName %>)this).<%= memberName %>, <%= streamName %>);
+<%
+			break;
+		case SerializerDirection.FromStream:
+%>
+			{
+				int? baseValue;
+				BinarySerializer.<%= methodName %>(out baseValue, <%= streamName %>);
+				((<%= interfaceName %>)this).<%= memberName %> = (<%= enumName %>)baseValue;
+			}
+<%
+			break;
+		case SerializerDirection.ToXmlStream:
+%>
+            XmlStreamer.ToStream((int?)this.<%= memberName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
+<%
+            break;
+		case SerializerDirection.FromXmlStream:
+		case SerializerDirection.MergeImport:
+%>
+            XmlStreamer.FromStreamConverter(v => ((<%= interfaceName %>)this).<%= memberName %> = (<%= enumName %>)v, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
+<%
+            break;
+		case SerializerDirection.Export:
+%>
+            if (modules.Contains("*") || modules.Contains("<%= xmlnamespace %>")) XmlStreamer.ToStream((int?)this.<%= memberName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
+<%
+            break;
+		default:
+			throw new ArgumentOutOfRangeException("direction");
+	}
+%>

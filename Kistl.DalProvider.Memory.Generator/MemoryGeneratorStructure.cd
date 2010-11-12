@@ -18,95 +18,95 @@
   <Comment CommentText="Project Stuff">
     <Position X="1.536" Y="3.987" Height="0.75" Width="1.7" />
   </Comment>
-  <Class Name="Kistl.DalProvider.Memory.Generator.Implementation.CollectionEntries.ObjectCollectionEntry" Collapsed="true">
+  <Class Name="Kistl.DalProvider.Memory.Generator.Templates.CollectionEntries.ObjectCollectionEntry" Collapsed="true">
     <Position X="11" Y="5.25" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAkAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
-      <FileName>Implementation\CollectionEntries\ObjectCollectionEntry.cs</FileName>
+      <FileName>Templates\CollectionEntries\ObjectCollectionEntry.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kistl.DalProvider.Memory.Generator.Implementation.CollectionEntries.ValueCollectionEntry" Collapsed="true">
+  <Class Name="Kistl.DalProvider.Memory.Generator.Templates.CollectionEntries.ValueCollectionEntry" Collapsed="true">
     <Position X="11" Y="6" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAIAAAAAAEAAA=</HashCode>
-      <FileName>Implementation\CollectionEntries\ValueCollectionEntry.cs</FileName>
+      <FileName>Templates\CollectionEntries\ValueCollectionEntry.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kistl.DalProvider.Memory.Generator.Implementation.CollectionEntries.ValueCollectionEntryParentReference" Collapsed="true">
+  <Class Name="Kistl.DalProvider.Memory.Generator.Templates.CollectionEntries.ValueCollectionEntryParentReference" Collapsed="true">
     <Position X="11" Y="3" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Implementation\CollectionEntries\ValueCollectionEntryParentReference.cs</FileName>
+      <FileName>Templates\CollectionEntries\ValueCollectionEntryParentReference.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kistl.DalProvider.Memory.Generator.Implementation.CompoundObjects.Template" Collapsed="true">
+  <Class Name="Kistl.DalProvider.Memory.Generator.Templates.CompoundObjects.Template" Collapsed="true">
     <Position X="1.75" Y="2" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAEAAAAAAAAAAAAAAAAAAAAAAAIAgAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Implementation\CompoundObjects\Template.cs</FileName>
+      <FileName>Templates\CompoundObjects\Template.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.AttachToContextTemplate" Collapsed="true">
+  <Class Name="Kistl.DalProvider.Memory.Generator.Templates.ObjectClasses.AttachToContextTemplate" Collapsed="true">
     <Position X="5.25" Y="1.75" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Implementation\ObjectClasses\AttachToContextTemplate.cs</FileName>
+      <FileName>Templates\ObjectClasses\AttachToContextTemplate.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.CollectionEntries" Collapsed="true">
+  <Class Name="Kistl.DalProvider.Memory.Generator.Templates.ObjectClasses.CollectionEntries" Collapsed="true">
     <Position X="11" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAA=</HashCode>
-      <FileName>Implementation\ObjectClasses\CollectionEntries.cs</FileName>
+      <FileName>Templates\ObjectClasses\CollectionEntries.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.CompoundObjectPropertyTemplate" Collapsed="true">
+  <Class Name="Kistl.DalProvider.Memory.Generator.Templates.ObjectClasses.CompoundObjectPropertyTemplate" Collapsed="true">
     <Position X="11" Y="0.75" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Implementation\ObjectClasses\CompoundObjectPropertyTemplate.cs</FileName>
+      <FileName>Templates\ObjectClasses\CompoundObjectPropertyTemplate.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectListProperty" Collapsed="true">
+  <Class Name="Kistl.DalProvider.Memory.Generator.Templates.ObjectClasses.ObjectListProperty" Collapsed="true">
     <Position X="11" Y="1.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Implementation\ObjectClasses\ObjectListProperty.cs</FileName>
+      <FileName>Templates\ObjectClasses\ObjectListProperty.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ObjectReferencePropertyTemplate" Collapsed="true">
+  <Class Name="Kistl.DalProvider.Memory.Generator.Templates.ObjectClasses.ObjectReferencePropertyTemplate" Collapsed="true">
     <Position X="11" Y="2.25" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cs</FileName>
+      <FileName>Templates\ObjectClasses\ObjectReferencePropertyTemplate.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.Template" Collapsed="true">
+  <Class Name="Kistl.DalProvider.Memory.Generator.Templates.ObjectClasses.Template" Collapsed="true">
     <Position X="1.75" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAEAAAAABIAAAAAAIAAAIgAAIAIAgAAAAAAAEAAAABA=</HashCode>
-      <FileName>Implementation\ObjectClasses\Template.cs</FileName>
+      <FileName>Templates\ObjectClasses\Template.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.UpdateParentTemplate" Collapsed="true">
+  <Class Name="Kistl.DalProvider.Memory.Generator.Templates.ObjectClasses.UpdateParentTemplate" Collapsed="true">
     <Position X="5.25" Y="2.5" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Implementation\ObjectClasses\UpdateParentTemplate.cs</FileName>
+      <FileName>Templates\ObjectClasses\UpdateParentTemplate.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kistl.DalProvider.Memory.Generator.Implementation.ObjectClasses.ValueCollectionProperty" Collapsed="true">
+  <Class Name="Kistl.DalProvider.Memory.Generator.Templates.ObjectClasses.ValueCollectionProperty" Collapsed="true">
     <Position X="11" Y="6.75" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Implementation\ObjectClasses\ValueCollectionProperty.cs</FileName>
+      <FileName>Templates\ObjectClasses\ValueCollectionProperty.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Kistl.DalProvider.Memory.Generator.Implementation.ProjectFile" Collapsed="true">
+  <Class Name="Kistl.DalProvider.Memory.Generator.Templates.ProjectFile" Collapsed="true">
     <Position X="1.5" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAABAAAAEAAAA=</HashCode>
-      <FileName>Implementation\ProjectFile.cs</FileName>
+      <FileName>Templates\ProjectFile.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Kistl.DalProvider.Memory.Generator.MemoryGenerator" Collapsed="true">

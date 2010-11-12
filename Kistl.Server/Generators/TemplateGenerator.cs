@@ -15,6 +15,7 @@ namespace Kistl.Server.Generators
     /// A Generator object creates a GenerationHost and executes the initial template on it.
     /// This implementation will host the GenerationHost in a separate AppDomain to allow unload of assemblies.
     /// </summary>
+    //[Obsolete("Moved to Kistl.Generator")]
     public class TemplateGenerator
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Generator.Templates");

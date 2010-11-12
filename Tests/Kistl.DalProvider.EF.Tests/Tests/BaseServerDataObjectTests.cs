@@ -9,15 +9,15 @@ using Kistl.API;
 using Kistl.API.Server;
 using Kistl.API.Tests.Skeletons;
 using Kistl.App.Base;
-using Kistl.DalProvider.EF.Mocks;
+using Kistl.DalProvider.Ef.Mocks;
 
 using NUnit.Framework;
 
-namespace Kistl.DalProvider.EF.Tests
+namespace Kistl.DalProvider.Ef.Tests
 {
     [TestFixture]
-    public class BaseServerDataObjectTests 
-        : IDataObjectTests<ObjectClass__Implementation__>
+    public class BaseServerDataObjectTests
+        : IDataObjectTests<ObjectClassEfImpl>
     {
         [SetUp]
         public override void SetUp()

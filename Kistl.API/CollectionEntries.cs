@@ -6,7 +6,7 @@ namespace Kistl.API
     /// <summary>
     /// Asserts that the Relation "RelationID" contains the tuple (AObject, BObject).
     /// </summary>
-    public interface IRelationCollectionEntry
+    public interface IRelationEntry
         : IPersistenceObject
     {
         /// <summary>Gets the ID of the relation.</summary>
@@ -22,7 +22,7 @@ namespace Kistl.API
     /// <summary>
     /// Contains order information for a relation entry.
     /// </summary>
-    public interface IRelationListEntry : IRelationCollectionEntry
+    public interface IRelationListEntry : IRelationEntry
     {
         /// <summary>Gets or sets the index of A-side object. null if this side is not ordered.</summary>
         int? AIndex { get; set; }
@@ -36,8 +36,8 @@ namespace Kistl.API
     /// </summary>
     /// <typeparam name="TA">the Type of the A-side</typeparam>
     /// <typeparam name="TB">the Type of the B-side</typeparam>
-    public interface IRelationCollectionEntry<TA, TB>
-        : IRelationCollectionEntry
+    public interface IRelationEntry<TA, TB>
+        : IRelationEntry
         where TA : IDataObject
         where TB : IDataObject
     {
@@ -54,7 +54,7 @@ namespace Kistl.API
     /// <typeparam name="TA">the Type of the A-side</typeparam>
     /// <typeparam name="TB">the Type of the B-side</typeparam>
     public interface IRelationListEntry<TA, TB>
-        : IRelationCollectionEntry<TA, TB>, IRelationListEntry
+        : IRelationEntry<TA, TB>, IRelationListEntry
         where TA : IDataObject
         where TB : IDataObject
     {

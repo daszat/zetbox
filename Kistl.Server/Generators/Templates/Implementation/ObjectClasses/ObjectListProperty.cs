@@ -19,7 +19,8 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
             if (host == null) { throw new ArgumentNullException("host"); }
             if (rel == null) { throw new ArgumentNullException("rel"); }
 
-            host.CallTemplate("Implementation.ObjectClasses.ObjectListProperty", ctx,
+            // TODO: fix this template path
+            host.CallTemplate("ObjectClasses.ObjectListProperty", ctx,
                 serializationList,
                 rel, endRole);
         }

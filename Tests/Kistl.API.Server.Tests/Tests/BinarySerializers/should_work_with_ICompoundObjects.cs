@@ -14,9 +14,9 @@ namespace Kistl.API.Server.Tests.BinarySerializers
     {
     }
 
-    public class CompoundObjectMock__Implementation__ : BaseServerCompoundObject
+    public class CompoundObjectMockImpl : BaseServerCompoundObject
     {
-        public CompoundObjectMock__Implementation__() : base(null) { }
+        public CompoundObjectMockImpl() : base(null) { }
 
         public override Type GetImplementedInterface()
         {
@@ -26,7 +26,7 @@ namespace Kistl.API.Server.Tests.BinarySerializers
 
     [TestFixture]
     public class should_work_with_BaseServerCompoundObjects
-        : Kistl.API.AbstractConsumerTests.BinarySerializers.should_work_with_ICompoundObjects<CompoundObjectMock__Implementation__>
+        : Kistl.API.AbstractConsumerTests.BinarySerializers.should_work_with_ICompoundObjects<CompoundObjectMockImpl>
     {
     }
 }

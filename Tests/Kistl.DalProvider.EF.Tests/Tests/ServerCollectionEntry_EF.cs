@@ -10,15 +10,15 @@ using Kistl.API;
 using Kistl.API.Server;
 using Kistl.API.Tests.Skeletons;
 using Kistl.App.Projekte;
-using Kistl.DalProvider.EF.Mocks;
+using Kistl.DalProvider.Ef.Mocks;
 
 using NUnit.Framework;
 
-namespace Kistl.DalProvider.EF.Tests
+namespace Kistl.DalProvider.Ef.Tests
 {
     [TestFixture]
     public class ServerCollectionEntry_EF
-        : CollectionEntryTests<Kunde_EMails_CollectionEntry__Implementation__>
+        : CollectionEntryTests<Kunde_EMails_CollectionEntryEfImpl>
     {
 
         [Test]

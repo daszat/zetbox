@@ -99,15 +99,15 @@ namespace Kistl.API.Mocks
             this.Visit(expression);
 
             List<TestDataObject> result = new List<TestDataObject>();
-            result.Add(new TestDataObject__Implementation__() { ID = 1, StringProperty = "First", IntProperty = 10, BoolProperty = true, TestField = "test" });
-            result.Add(new TestDataObject__Implementation__() { ID = 2, StringProperty = "Second", IntProperty = 20, BoolProperty = false, TestField = "test" });
-            result.Add(new TestDataObject__Implementation__() { ID = 3, StringProperty = "Third", IntProperty = 30, BoolProperty = true, TestField = "test" });
-            result.Add(new TestDataObject__Implementation__() { ID = 4, StringProperty = "Fourth", IntProperty = 40, BoolProperty = false, TestField = "test" });
-            result.Add(new TestDataObject__Implementation__() { ID = 5, StringProperty = "Fith", IntProperty = 50, BoolProperty = true, TestField = "test" });
-            result.Add(new TestDataObject__Implementation__() { ID = 6, StringProperty = "Sixth", IntProperty = 60, BoolProperty = false, TestField = "test" });
-            result.Add(new TestDataObject__Implementation__() { ID = 7, StringProperty = "Seventh", IntProperty = 70, BoolProperty = true, TestField = "test" });
-            result.Add(new TestDataObject__Implementation__() { ID = 8, StringProperty = "Eightth", IntProperty = 80, BoolProperty = false, TestField = "test" });
-            result.Add(new TestDataObject__Implementation__() { ID = 9, StringProperty = "Nineth", IntProperty = 90, BoolProperty = true, TestField = "test" });
+            result.Add(new TestDataObjectImpl() { ID = 1, StringProperty = "First", IntProperty = 10, BoolProperty = true, TestField = "test" });
+            result.Add(new TestDataObjectImpl() { ID = 2, StringProperty = "Second", IntProperty = 20, BoolProperty = false, TestField = "test" });
+            result.Add(new TestDataObjectImpl() { ID = 3, StringProperty = "Third", IntProperty = 30, BoolProperty = true, TestField = "test" });
+            result.Add(new TestDataObjectImpl() { ID = 4, StringProperty = "Fourth", IntProperty = 40, BoolProperty = false, TestField = "test" });
+            result.Add(new TestDataObjectImpl() { ID = 5, StringProperty = "Fith", IntProperty = 50, BoolProperty = true, TestField = "test" });
+            result.Add(new TestDataObjectImpl() { ID = 6, StringProperty = "Sixth", IntProperty = 60, BoolProperty = false, TestField = "test" });
+            result.Add(new TestDataObjectImpl() { ID = 7, StringProperty = "Seventh", IntProperty = 70, BoolProperty = true, TestField = "test" });
+            result.Add(new TestDataObjectImpl() { ID = 8, StringProperty = "Eightth", IntProperty = 80, BoolProperty = false, TestField = "test" });
+            result.Add(new TestDataObjectImpl() { ID = 9, StringProperty = "Nineth", IntProperty = 90, BoolProperty = true, TestField = "test" });
             return result;
         }
 

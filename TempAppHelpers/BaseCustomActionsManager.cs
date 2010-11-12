@@ -123,8 +123,8 @@ namespace Kistl.App.Extensions
             // baseObjClass.GetDataType(); is not possible here, because this
             // Method is currently attaching
             var implTypeName = objClass.Module.Namespace
-                + "." + objClass.Name
-                + Kistl.API.Helper.ImplementationSuffix
+                + "."
+                + objClass.Name
                 + extraSuffix
                 + ", " + assemblyName;
             var implType = Type.GetType(implTypeName);

@@ -1,0 +1,122 @@
+﻿<%@ CodeTemplate Language="C#"
+    Name="CollectionEntries.CollectionEntryTemplate"
+    ClassName="Kistl.Generator.Templates.CollectionEntries.CollectionEntryTemplate"
+    Inherits="Kistl.Generator.ResourceTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.Generator" %>
+<%@ Import Namespace="Kistl.Generator.Extensions" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%
+    ApplyClassAttributeTemplate();
+%>
+    [System.Diagnostics.DebuggerDisplay("<%= GetCeClassName() %>")]
+    public class <%= GetCeClassName() %> <%= GetInheritance() %>
+    {
+        [Obsolete]
+        public <%= GetCeClassName() %>() : base(null) { }
+
+        public <%= GetCeClassName() %>(Func<IFrozenContext> lazyCtx)
+            : base(lazyCtx)
+        {
+        }
+
+<%
+    ApplyClassHeadTemplate();
+%>
+
+        /// <summary>
+        /// the A-side value of this CollectionEntry
+        /// </summary>
+<%
+    ApplyAPropertyTemplate();
+%>
+
+        /// <summary>
+        /// the B-side value of this CollectionEntry
+        /// </summary>
+<%
+    ApplyBPropertyTemplate();
+
+
+    if (IsOrdered())
+    {
+%>
+
+        /// <summary>
+        /// Index into the A-side list of this relation
+        /// </summary>
+<%
+        ApplyAIndexPropertyTemplate();
+%>
+
+        /// <summary>
+        /// Index into the B-side list of this relation
+        /// </summary>
+<%
+        ApplyBIndexPropertyTemplate();
+    }
+%>
+
+        #region Serializer
+
+<%
+    Serialization.SerializerTemplate.Call(Host, ctx,
+        Serialization.SerializerDirection.ToStream, this.MembersToSerialize, true, false);
+
+    Serialization.SerializerTemplate.Call(Host, ctx,
+        Serialization.SerializerDirection.FromStream, this.MembersToSerialize, true, false);
+
+    Serialization.SerializerTemplate.Call(Host, ctx,
+        Serialization.SerializerDirection.ToXmlStream, this.MembersToSerialize, true, false);
+
+    Serialization.SerializerTemplate.Call(Host, ctx,
+        Serialization.SerializerDirection.FromXmlStream, this.MembersToSerialize, true, false);
+
+    if(IsExportable())
+    {
+        Serialization.SerializerTemplate.Call(Host, ctx,
+            Serialization.SerializerDirection.Export, this.MembersToSerialize, false, true);
+
+        Serialization.SerializerTemplate.Call(Host, ctx,
+            Serialization.SerializerDirection.MergeImport, this.MembersToSerialize, false, true);
+    }
+%>
+
+        #endregion
+
+        public override Type GetImplementedInterface()
+        {
+            return typeof(<%= GetCeInterface() %>);
+        }
+
+        public override void ApplyChangesFrom(IPersistenceObject obj)
+        {
+            base.ApplyChangesFrom(obj);
+            var other = (<%= GetCeClassName() %>)obj;
+            var me = (<%= GetCeClassName() %>)this;
+
+<%
+            ApplyChangesFromBody();
+%>
+        }
+
+
+        public override void ReloadReferences()
+        {
+            // Do not reload references if the current object has been deleted.
+            // TODO: enable when MemoryContext uses MemoryDataObjects
+            //if (this.ObjectState == DataObjectState.Deleted) return;
+<%
+    ApplyReloadReferenceBody();
+%>
+
+        }
+
+<%
+    ApplyClassTailTemplate();
+%>
+    }

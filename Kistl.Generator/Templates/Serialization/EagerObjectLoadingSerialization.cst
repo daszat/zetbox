@@ -1,0 +1,34 @@
+﻿<%@ CodeTemplate Language="C#" 
+	Name="Serialization.EagerObjectLoadingSerialization"
+	ClassName="Kistl.Generator.Templates.Serialization.EagerObjectLoadingSerialization" 
+	Inherits="Kistl.Generator.ResourceTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.Generator" %>
+<%@ Import Namespace="Kistl.Generator.Extensions" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="direction" Type="SerializerDirection" %>
+<%@ Parameter Name="streamName" Type="string" %>
+<%@ Parameter Name="xmlnamespace" Type="string" %>
+<%@ Parameter Name="xmlname" Type="string" %>
+<%@ Parameter Name="propertyName" Type="string" %>
+<%
+
+	switch(direction)
+	{
+		case SerializerDirection.ToStream:
+%>
+			if (auxObjects != null) {
+				auxObjects.Add(<%= propertyName %>);
+			}
+<%
+			break;
+		case SerializerDirection.FromStream:
+			break;
+		default:
+			throw new ArgumentOutOfRangeException("direction");
+	}
+%>

@@ -9,10 +9,10 @@ namespace Kistl.DalProvider.Client.Mocks
     using Kistl.API.Client;
     using Kistl.App.Test;
 
-    public class BaseClientDataObjectMock__Implementation__
+    public class BaseClientDataObjectMockImpl
         : BaseClientDataObject, ANewObjectClass, IClientObject
     {
-        public BaseClientDataObjectMock__Implementation__(Func<IFrozenContext> lazyCtx) : base(lazyCtx) { }
+        public BaseClientDataObjectMockImpl(Func<IFrozenContext> lazyCtx) : base(lazyCtx) { }
 
         public override Type GetImplementedInterface()
         {

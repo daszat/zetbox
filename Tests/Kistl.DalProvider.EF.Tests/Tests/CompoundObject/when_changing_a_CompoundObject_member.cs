@@ -7,7 +7,7 @@ using Kistl.API;
 
 using NUnit.Framework;
 
-namespace Kistl.DalProvider.EF.Tests.CompoundObjects
+namespace Kistl.DalProvider.Ef.Tests.CompoundObjects
 {
     [TestFixture]
     public class when_changing_a_CompoundObject_member

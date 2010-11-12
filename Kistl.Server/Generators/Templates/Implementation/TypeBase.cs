@@ -12,10 +12,9 @@ namespace Kistl.Server.Generators.Templates.Implementation
 {
     public partial class TypeBase
     {
-
         protected virtual IEnumerable<string> GetAdditionalImports()
         {
-            return new string[] { };
+            return RequiredNamespaces;
         }
 
         protected string GetTypeName()
@@ -23,7 +22,7 @@ namespace Kistl.Server.Generators.Templates.Implementation
             return MungeClassName(DataType.Name);
         }
 
-        protected virtual string MungeClassName(string name) { return name; }
+        protected virtual string MungeClassName(string name) { return name + ImplementationSuffix; }
 
         protected virtual string GetClassModifiers() { return string.Empty; }
 

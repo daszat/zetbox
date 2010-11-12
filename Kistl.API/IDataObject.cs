@@ -100,7 +100,7 @@ namespace Kistl.API
     /// <summary>
     /// Interface for Exporting/Importing Objects with XML
     /// </summary>
-    public interface IExportableCollectionEntryInternal
+    public interface IExportableValueCollectionEntryInternal
     {
         /// <summary>
         /// Serialize this Object to a XmlWriter

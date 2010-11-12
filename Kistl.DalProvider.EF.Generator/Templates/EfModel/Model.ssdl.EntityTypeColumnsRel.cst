@@ -1,0 +1,43 @@
+﻿<%@ CodeTemplate Language="C#" 
+	Name="EfModel.ModelSsdlEntityTypeColumnsRel"
+	ClassName="Kistl.DalProvider.Ef.Generator.Templates.EfModel.ModelSsdlEntityTypeColumnsRel" 
+	Inherits="Kistl.Generator.ResourceTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="System.Data" %>
+<%@ Import Namespace="System.Linq" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.App.Extensions" %>
+<%@ Import Namespace="Kistl.Generator" %>
+<%@ Import Namespace="Kistl.Generator.Extensions" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="cls" Type="ObjectClass" %>
+<%@ Parameter Name="relations" Type="IEnumerable<Relation>" %>
+<%@ Parameter Name="prefix" Type="string" %>
+<%@ Parameter Name="schemaProvider" Type="ISchemaProvider" %>
+<%
+
+	foreach(var rel in relations)
+	{
+		ProcessRelation(rel);
+	}
+}
+
+/// <summary>Generate a single Property with the specified parameters</summary>
+private void GenerateProperty(string propertyName, bool needPositionStorage, string positionColumnName)
+{
+%>
+    <Property Name="<%= propertyName %>" Type="<%= schemaProvider.DbTypeToNative(DbType.Int32) %>" />
+<%
+   			
+	if (needPositionStorage)
+	{
+%>
+    <Property Name="<%= positionColumnName %>" Type="<%= schemaProvider.DbTypeToNative(DbType.Int32) %>" Nullable="true" />
+<%
+	}
+	
+// } last brace added by template expansion 
+%>

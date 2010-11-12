@@ -8,6 +8,7 @@ namespace Kistl.DalProvider.Memory
 
     using Kistl.API;
     
+    // obsolete
     public abstract class BaseMemoryCollectionEntry
         : BaseMemoryPersistenceObject
     {

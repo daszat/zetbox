@@ -155,8 +155,8 @@ namespace Kistl.API
             typeof(ICompoundObject),
             typeof(IRelationListEntry<,>),
             typeof(IRelationListEntry),
-            typeof(IRelationCollectionEntry<,>),
-            typeof(IRelationCollectionEntry),
+            typeof(IRelationEntry<,>),
+            typeof(IRelationEntry),
             typeof(IValueCollectionEntry<,>),
             typeof(IValueCollectionEntry),
             typeof(IPersistenceObject) 

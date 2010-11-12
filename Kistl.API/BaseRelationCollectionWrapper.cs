@@ -21,7 +21,7 @@ namespace Kistl.API
         where TA : class, IDataObject
         where TB : class, IDataObject
         where TParent : class, IDataObject
-        where TEntry : class, IRelationCollectionEntry<TA, TB>
+        where TEntry : class, IRelationEntry<TA, TB>
         where TBaseCollection : class, ICollection<TEntry>
     {
         protected TBaseCollection Collection { get; private set; }

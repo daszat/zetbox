@@ -59,15 +59,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClientObjects.cs" />
     <Compile Include="ClientImplementationType.cs" />
     <Compile Include="ClientProvider.cs" />
+    <Compile Include="CompoundCollectionEntryClientImpl.cs" />
+    <Compile Include="CompoundObjectClientImpl.cs" />
+    <Compile Include="DataObjectClientImpl.cs" />
+    <Compile Include="IClientObject.cs" />
     <Compile Include="KistlContext.cs" />
     <Compile Include="LinqToKistl\ConstantEvaluator.cs" />
     <Compile Include="LinqToKistl\KistlContextProvider.cs" />
     <Compile Include="LinqToKistl\KistlContextQuery.cs" />
     <Compile Include="LinqToKistl\QueryTranslator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PropertyDescriptorClientImpl.cs" />
+    <Compile Include="RelationEntryClientImpl.cs" />
+    <Compile Include="ValueCollectionEntryClientImpl.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Kistl.API.Client\Kistl.API.Client.csproj">

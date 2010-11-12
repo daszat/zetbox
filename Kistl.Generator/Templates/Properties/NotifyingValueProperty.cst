@@ -1,0 +1,64 @@
+﻿<%@ CodeTemplate Language="C#" 
+    Name="Properties.NotifyingValueProperty"
+    ClassName="Kistl.Generator.Templates.Properties.NotifyingValueProperty" 
+    Inherits="Kistl.Generator.ResourceTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.Generator" %>
+<%@ Import Namespace="Kistl.Generator.Extensions" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="serializationList" Type="Serialization.SerializationMembersList" %>
+<%@ Parameter Name="type" Type="string" %>
+<%@ Parameter Name="name" Type="String" %>
+<%@ Parameter Name="modulenamespace" Type="String" %>
+        // BEGIN <%= this.GetType() %>
+<%
+
+    ApplyRequisitesTemplate();
+
+    ApplyAttributesTemplate();
+
+    string backingName = BackingMemberFromName(name);
+
+%>
+        <%= GetModifiers() %> <%= type %> <%= name %>
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = <%= backingName %>;
+<%
+    ApplyOnGetTemplate();
+%>
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+<%
+    ApplyOnAllSetTemplate();
+%>
+                if (<%= backingName %> != value)
+                {
+                    var __oldValue = <%= backingName %>;
+                    var __newValue = value;
+<%
+    ApplyPreSetTemplate();
+%>
+                    NotifyPropertyChanging("<%= name %>", __oldValue, __newValue);
+                    <%= backingName %> = __newValue;
+                    NotifyPropertyChanged("<%= name %>", __oldValue, __newValue);
+<%
+    ApplyPostSetTemplate();
+%>
+                }
+            }
+        }
+        private <%= type %> <%= backingName %>;
+<%
+    AddSerialization(serializationList, name);
+%>
+        // END <%= this.GetType() %>

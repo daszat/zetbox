@@ -115,7 +115,8 @@ namespace Kistl.DalProvider.Client
         /// If the Object is not in that Context, null is returned.</returns>
         public IPersistenceObject ContainsObject(InterfaceType type, int ID)
         {
-            if (ID == Helper.INVALIDID) throw new ArgumentException("ID cannot be invalid", "ID");
+            if (ID == Helper.INVALIDID)
+                throw new ArgumentException("ID cannot be invalid", "ID");
             return _objects.Lookup(type, ID);
         }
 
@@ -206,7 +207,7 @@ namespace Kistl.DalProvider.Client
             return ((KistlContextProvider)query.Provider).GetListOfCall(ID, propertyName).Cast<T>().ToList();
         }
 
-        public IList<T> FetchRelation<T>(Guid relationId, RelationEndRole role, IDataObject container) where T : class, IRelationCollectionEntry
+        public IList<T> FetchRelation<T>(Guid relationId, RelationEndRole role, IDataObject container) where T : class, IRelationEntry
         {
             List<IStreamable> auxObjects;
             var serverList = proxy.FetchRelation<T>(this, relationId, role, container, out auxObjects);
@@ -259,22 +260,22 @@ namespace Kistl.DalProvider.Client
         }
 
         /// <summary>
-        /// Creates a new IRelationCollectionEntry by Type
+        /// Creates a new IRelationEntry by Type
         /// </summary>
-        /// <typeparam name="T">Type of the new IRelationCollectionEntry</typeparam>
-        /// <returns>A new IRelationCollectionEntry</returns>
-        public T CreateRelationCollectionEntry<T>() where T : IRelationCollectionEntry
+        /// <typeparam name="T">Type of the new IRelationEntry</typeparam>
+        /// <returns>A new IRelationEntry</returns>
+        public T CreateRelationCollectionEntry<T>() where T : IRelationEntry
         {
             return (T)CreateRelationCollectionEntry(_iftFactory(typeof(T)));
         }
 
         /// <summary>
-        /// Creates a new IRelationCollectionEntry.
+        /// Creates a new IRelationEntry.
         /// </summary>
-        /// <returns>A new IRelationCollectionEntry</returns>
-        public IRelationCollectionEntry CreateRelationCollectionEntry(InterfaceType ifType)
+        /// <returns>A new IRelationEntry</returns>
+        public IRelationEntry CreateRelationCollectionEntry(InterfaceType ifType)
         {
-            return (IRelationCollectionEntry)CreateInternal(ifType);
+            return (IRelationEntry)CreateInternal(ifType);
         }
 
         /// <summary>
@@ -304,7 +305,8 @@ namespace Kistl.DalProvider.Client
         private IPersistenceObject CreateInternal(InterfaceType ifType)
         {
             CheckDisposed();
-            if (ifType.Type == typeof(Kistl.App.Base.Blob)) throw new InvalidOperationException("Creating a Blob is not supported. Use CreateBlob() instead");
+            if (ifType.Type == typeof(Kistl.App.Base.Blob))
+                throw new InvalidOperationException("Creating a Blob is not supported. Use CreateBlob() instead");
 
             IPersistenceObject obj = (IPersistenceObject)CreateUnattachedInstance(ifType);
             Attach(obj);
@@ -367,7 +369,8 @@ namespace Kistl.DalProvider.Client
 
         internal void PlaybackNotifications()
         {
-            if (_objectsToPlayBackNotifications == null) return;
+            if (_objectsToPlayBackNotifications == null)
+                return;
             _objectsToPlayBackNotifications.ForEach(obj => obj.PlaybackNotifications());
             _objectsToPlayBackNotifications = null;
         }
@@ -381,7 +384,8 @@ namespace Kistl.DalProvider.Client
         public IPersistenceObject Attach(IPersistenceObject obj)
         {
             CheckDisposed();
-            if (obj == null) throw new ArgumentNullException("obj");
+            if (obj == null)
+                throw new ArgumentNullException("obj");
 
             // Handle created Objects
             if (obj.ID == Helper.INVALIDID)
@@ -429,8 +433,10 @@ namespace Kistl.DalProvider.Client
         public void Detach(IPersistenceObject obj)
         {
             CheckDisposed();
-            if (obj == null) throw new ArgumentNullException("obj");
-            if (!_objects.Contains(obj)) throw new InvalidOperationException("This Object does not belong to this context");
+            if (obj == null)
+                throw new ArgumentNullException("obj");
+            if (!_objects.Contains(obj))
+                throw new InvalidOperationException("This Object does not belong to this context");
 
             _objects.Remove(obj);
             obj.DetachFromContext(this);
@@ -444,8 +450,10 @@ namespace Kistl.DalProvider.Client
         public void Delete(IPersistenceObject obj)
         {
             CheckDisposed();
-            if (obj == null) throw new ArgumentNullException("obj");
-            if (obj.Context != this) throw new InvalidOperationException("The Object does not belong to the current Context");
+            if (obj == null)
+                throw new ArgumentNullException("obj");
+            if (obj.Context != this)
+                throw new InvalidOperationException("The Object does not belong to the current Context");
 
             ((IClientObject)obj).SetDeleted();
 
@@ -806,7 +814,7 @@ namespace Kistl.DalProvider.Client
 
         public ImplementationType ToImplementationType(InterfaceType t)
         {
-            return GetImplementationType(Type.GetType(t.Type.FullName + Kistl.API.Helper.ImplementationSuffix + "," + _ClientImplementationAssembly, true));
+            return GetImplementationType(Type.GetType(t.Type.FullName + "Client" + Kistl.API.Helper.ImplementationSuffix + "," + _ClientImplementationAssembly, true));
         }
 
         public ImplementationType GetImplementationType(Type t)

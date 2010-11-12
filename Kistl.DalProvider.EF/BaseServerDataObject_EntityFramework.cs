@@ -10,7 +10,7 @@ using Kistl.API.Server;
 using Kistl.App.Base;
 using Kistl.App.Extensions;
 
-namespace Kistl.DalProvider.EF
+namespace Kistl.DalProvider.Ef
 {
     internal interface IEntityStateObject : IEntityWithKey
     {
@@ -173,6 +173,11 @@ namespace Kistl.DalProvider.EF
             {
                 _changeTracker.EntityMemberChanging(efProperty);
             }
+        }
+
+        public virtual void UpdateParent(string propertyName, int? id)
+        {
+            throw new MemberAccessException(String.Format("No {0} property in {1}", propertyName, GetImplementedInterface().FullName));
         }
     }
 

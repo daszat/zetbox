@@ -1,17 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
-using Kistl.API;
-using Kistl.API.Server;
-using Kistl.App.Base;
-using Kistl.App.Extensions;
-using Kistl.Server.Generators.Extensions;
-using Kistl.Server.Generators;
 
 namespace Kistl.Server.SchemaManagement
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using Kistl.API;
+    using Kistl.API.Server;
+    using Kistl.App.Base;
+    using Kistl.App.Extensions;
+    using Kistl.Generator;
+    using Kistl.Generator.Extensions;
+
     internal class Cases
         : IDisposable
     {

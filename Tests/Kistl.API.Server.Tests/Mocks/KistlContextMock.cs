@@ -10,13 +10,13 @@ namespace Kistl.API.Server.Mocks
 {
     public class KistlContextMock : BaseKistlDataContext
     {
-        public Dictionary<int, TestObjClass__Implementation__> TestObjClasses = new Dictionary<int, TestObjClass__Implementation__>();
+        public Dictionary<int, TestObjClassImpl> TestObjClasses = new Dictionary<int, TestObjClassImpl>();
         public KistlContextMock(IMetaDataResolver metaDataResolver, Identity identity, KistlConfig config, InterfaceType.Factory iftFactory)
             : base(metaDataResolver, identity, config, iftFactory)
         {
-            TestObjClasses[1] = new TestObjClass__Implementation__() { ID = 1 };
-            TestObjClasses[3] = new TestObjClass__Implementation__() { ID = 3 };
-            TestObjClasses[22] = new TestObjClass__Implementation__() { ID = 22 };
+            TestObjClasses[1] = new TestObjClassImpl() { ID = 1 };
+            TestObjClasses[3] = new TestObjClassImpl() { ID = 3 };
+            TestObjClasses[22] = new TestObjClassImpl() { ID = 22 };
 
             base.Attach(TestObjClasses[1]);
             base.Attach(TestObjClasses[3]);
@@ -152,7 +152,7 @@ namespace Kistl.API.Server.Mocks
         {
             if (ifType.Type == typeof(TestObjClass))
             {
-                return new TestObjClass__Implementation__();
+                return new TestObjClassImpl();
             }
             else
             {

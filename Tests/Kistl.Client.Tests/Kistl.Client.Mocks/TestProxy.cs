@@ -53,11 +53,11 @@ namespace Kistl.Client.Mocks
         private static IEnumerable<IDataObject> GetList_TestObjClass()
         {
             List<TestObjClass> result = new List<TestObjClass>();
-            result.Add(new TestObjClass__Implementation__() { StringProp = "String " + 1 });
-            result.Add(new TestObjClass__Implementation__() { StringProp = "String " + 2, _fk_ObjectProp = 1 });
-            result.Add(new TestObjClass__Implementation__() { StringProp = "String " + 3, _fk_ObjectProp = 1 });
-            result.Add(new TestObjClass__Implementation__() { StringProp = "String " + 4 });
-            result.Add(new TestObjClass__Implementation__() { StringProp = "String " + 5 });
+            result.Add(new TestObjClassImpl() { StringProp = "String " + 1 });
+            result.Add(new TestObjClassImpl() { StringProp = "String " + 2, _fk_ObjectProp = 1 });
+            result.Add(new TestObjClassImpl() { StringProp = "String " + 3, _fk_ObjectProp = 1 });
+            result.Add(new TestObjClassImpl() { StringProp = "String " + 4 });
+            result.Add(new TestObjClassImpl() { StringProp = "String " + 5 });
 
             result[0].SetPrivatePropertyValue<int>("ID", 1);
             result[1].SetPrivatePropertyValue<int>("ID", 2);
@@ -76,8 +76,8 @@ namespace Kistl.Client.Mocks
             List<TestObjClass> result = new List<TestObjClass>();
             if (ID == 1)
             {
-                result.Add(new TestObjClass__Implementation__() { StringProp = "String " + 2 });
-                result.Add(new TestObjClass__Implementation__() { StringProp = "String " + 3 });
+                result.Add(new TestObjClassImpl() { StringProp = "String " + 2 });
+                result.Add(new TestObjClassImpl() { StringProp = "String " + 3 });
                 result[0].SetPrivatePropertyValue<int>("ID", 2);
                 result[1].SetPrivatePropertyValue<int>("ID", 3);
             }
@@ -97,11 +97,11 @@ namespace Kistl.Client.Mocks
             {
                 Type type = obj.GetType();
                 if (type == null) throw new ArgumentNullException("type");
-                if (type != typeof(TestObjClass__Implementation__)) throw new ArgumentOutOfRangeException("type", "Only TestObjClasses are allowed");
+                if (type != typeof(TestObjClassImpl)) throw new ArgumentOutOfRangeException("type", "Only TestObjClasses are allowed");
 
                 if (obj.ObjectState != DataObjectState.Deleted)
                 {
-                    var newObj = new TestObjClass__Implementation__();
+                    var newObj = new TestObjClassImpl();
 
                     // Copy old object to new object
                     newObj.ApplyChangesFrom(obj);
@@ -139,7 +139,7 @@ namespace Kistl.Client.Mocks
             fi.SetValue(obj, val);
         }
 
-        public IEnumerable<T> FetchRelation<T>(IKistlContext ctx, Guid relationId, RelationEndRole role, IDataObject parent, out List<IStreamable> auxObjects) where T : class, IRelationCollectionEntry
+        public IEnumerable<T> FetchRelation<T>(IKistlContext ctx, Guid relationId, RelationEndRole role, IDataObject parent, out List<IStreamable> auxObjects) where T : class, IRelationEntry
         {
             auxObjects = new List<IStreamable>();
             return new List<T>();

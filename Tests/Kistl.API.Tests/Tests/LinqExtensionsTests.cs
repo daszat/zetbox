@@ -96,7 +96,7 @@ namespace Kistl.API.Tests
 		[Test]
 		public void GetExpressionValue_MemberExpression_Property()
 		{
-			TestDataObject obj = new TestDataObject__Implementation__() { StringProperty = "Hello World" };
+			TestDataObject obj = new TestDataObjectImpl() { StringProperty = "Hello World" };
 			Expression e = Expression.PropertyOrField(Expression.Constant(obj), "StringProperty");
 			Assert.That(e.GetExpressionValue<string>(), Is.EqualTo("Hello World"));
 		}
@@ -104,7 +104,7 @@ namespace Kistl.API.Tests
 		[Test]
 		public void GetExpressionValue_MemberExpression_Field()
 		{
-			TestDataObject obj = new TestDataObject__Implementation__() { TestField = "Hello World" };
+			TestDataObject obj = new TestDataObjectImpl() { TestField = "Hello World" };
 			Expression e = Expression.PropertyOrField(Expression.Constant(obj), "TestField");
 			Assert.That(e.GetExpressionValue<string>(), Is.EqualTo("Hello World"));
 		}
@@ -112,7 +112,7 @@ namespace Kistl.API.Tests
 		[Test]
 		public void GetExpressionValue_LambdaExpression()
 		{
-			TestDataObject obj = new TestDataObject__Implementation__() { TestField = "Hello World" };
+			TestDataObject obj = new TestDataObjectImpl() { TestField = "Hello World" };
 			Expression<Func<TestDataObject, string>> e = (o) => o.StringProperty;
 			Assert.That(() => e.GetExpressionValue<string>(), Throws.InstanceOf<NotSupportedException>());
 		}

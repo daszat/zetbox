@@ -15,8 +15,8 @@ namespace Kistl.Server.SchemaManagement
     using Kistl.App.Base;
     using Kistl.App.Extensions;
     using Kistl.App.Packaging;
-    using Kistl.Server.Generators;
-    using Kistl.Server.Generators.Extensions;
+    using Kistl.Generator;
+    using Kistl.Generator.Extensions;
 
     public partial class SchemaManager
         : IDisposable

@@ -1,0 +1,19 @@
+﻿<%@ CodeTemplate Language="C#" 
+	Name="Properties.PropertyEvents"
+	ClassName="Kistl.Generator.Templates.Properties.PropertyEvents" 
+	Inherits="Kistl.Generator.ResourceTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="eventName" Type="string" %>
+<%@ Parameter Name="propType" Type="string" %>
+<%@ Parameter Name="objType" Type="string" %>
+<%@ Parameter Name="hasGetters" Type="bool" %>
+<%@ Parameter Name="hasSetters" Type="bool" %>
+<% if (hasGetters) { %>
+		public static event PropertyGetterHandler<<%= objType %>, <%= propType %>> <%= eventName %>_Getter;
+<% } %>
+<% if (hasSetters) { %>
+		public static event PropertyPreSetterHandler<<%= objType %>, <%= propType %>> <%= eventName %>_PreSetter;
+		public static event PropertyPostSetterHandler<<%= objType %>, <%= propType %>> <%= eventName %>_PostSetter;
+<% } %>

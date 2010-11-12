@@ -1,0 +1,143 @@
+﻿<%@ CodeTemplate Language="C#"
+    Name="Properties.ObjectReferencePropertyTemplate"
+    ClassName="Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate"
+    Inherits="Kistl.Generator.ResourceTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.App.Extensions" %>
+<%@ Import Namespace="Kistl.Generator" %>
+<%@ Import Namespace="Kistl.Generator.Extensions" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="serializationList" Type="Kistl.Generator.Templates.Serialization.SerializationMembersList" %>
+<%@ Parameter Name="moduleNamespace" Type="string" %>
+<%@ Parameter Name="ownInterface" Type="string" %>
+<%@ Parameter Name="name" Type="string" %>
+<%@ Parameter Name="implName" Type="string" %>
+<%@ Parameter Name="eventName" Type="string" %>
+<%@ Parameter Name="fkBackingName" Type="string" %>
+<%@ Parameter Name="fkGuidBackingName" Type="string" %>
+<%@ Parameter Name="referencedInterface" Type="string" %>
+<%@ Parameter Name="referencedImplementation" Type="string" %>
+<%@ Parameter Name="associationName" Type="string" %>
+<%@ Parameter Name="targetRoleName" Type="string" %>
+<%@ Parameter Name="positionPropertyName" Type="string" %>
+<%@ Parameter Name="inverseNavigatorName" Type="string" %>
+<%@ Parameter Name="inverseNavigatorIsList" Type="bool" %>
+<%@ Parameter Name="eagerLoading" Type="bool" %>
+<%@ Parameter Name="relDataTypeExportable" Type="bool" %>
+<%@ Parameter Name="callGetterSetterEvents" Type="bool" %>
+        // BEGIN <%= this.GetType() %> for <%= name %>
+        // fkBackingName=<%= fkBackingName %>; fkGuidBackingName=<%= fkGuidBackingName %>;
+        // referencedInterface=<%= referencedInterface %>; moduleNamespace=<%= moduleNamespace %>;
+        // inverse Navigator=<%= String.IsNullOrEmpty(inverseNavigatorName) ? "none" : inverseNavigatorName %>; <%= inverseNavigatorIsList ? "is list" : "is reference" %>;
+        // PositionStorage=<%= String.IsNullOrEmpty(positionPropertyName) ? "none" : positionPropertyName %>;
+        // Target <%= relDataTypeExportable ? String.Empty : "not " %>exportable
+
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public <%= referencedInterface %> <%= name %>
+        {
+            get { return <%= implName %>; }
+            set { <%= implName %> = (<%= referencedImplementation %>)value; }
+        }
+
+        private int? <%= fkBackingName %>;
+
+<% if (relDataTypeExportable) { %>
+        private Guid? <%= fkGuidBackingName %> = null;
+<% } %>
+
+        // internal implementation, EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "<%= associationName %>", "<%= targetRoleName %>")]
+        public <%= referencedImplementation %> <%= implName %>
+        {
+            get
+            {
+                <%= referencedImplementation %> __value;
+                EntityReference<<%= referencedImplementation %>> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<<%= referencedImplementation %>>(
+                        "Model.<%= associationName %>",
+                        "<%= targetRoleName %>");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load();
+                    if (r.Value != null)
+                        r.Value.AttachToContext(this.Context);
+                }
+                __value = r.Value;
+<%
+                if(callGetterSetterEvents)
+                {
+%>
+                if(<%= eventName %>_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<<%= referencedInterface %>>(__value);
+                    <%= eventName %>_Getter(this, e);
+                    __value = (<%= referencedImplementation %>)e.Result;
+                }
+<%
+                }
+%>
+                return __value;
+            }
+            set
+            {
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+
+                EntityReference<<%= referencedImplementation %>> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<<%= referencedImplementation %>>(
+                        "Model.<%= associationName %>",
+                        "<%= targetRoleName %>");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load();
+                }
+                <%= referencedInterface %> __oldValue = (<%= referencedInterface %>)r.Value;
+                <%= referencedInterface %> __newValue = (<%= referencedInterface %>)value;
+
+<%
+                if(callGetterSetterEvents)
+                {
+%>
+                if(<%= eventName %>_PreSetter != null)
+                {
+                    var e = new PropertyPreSetterEventArgs<<%= referencedInterface %>>(__oldValue, __newValue);
+                    <%= eventName %>_PreSetter(this, e);
+                    __newValue = e.Result;
+                }
+<%
+                }
+%>
+                r.Value = (<%= referencedImplementation %>)__newValue;
+<%
+                if(callGetterSetterEvents)
+                {
+%>
+                if(<%= eventName %>_PostSetter != null)
+                {
+                    var e = new PropertyPostSetterEventArgs<<%= referencedInterface %>>(__oldValue, __newValue);
+                    <%= eventName %>_PostSetter(this, e);
+                }
+<%
+                }
+%>
+            }
+        }
+
+<%
+    AddSerialization(serializationList, name);
+
+    if (!String.IsNullOrEmpty(positionPropertyName))
+    {
+        Properties.NotifyingValueProperty.Call(
+            Host, ctx, serializationList,
+            "int?", positionPropertyName, moduleNamespace);
+    }
+%>
+        // END <%= this.GetType() %> for <%= name %>

@@ -1,0 +1,29 @@
+﻿<%@ CodeTemplate Language="C#" 
+	Name="EfModel.ModelMslEntityTypeMapping"
+	ClassName="Kistl.DalProvider.Ef.Generator.Templates.EfModel.ModelMslEntityTypeMapping" 
+	Inherits="Kistl.Generator.ResourceTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="System.Linq" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.App.Extensions" %>
+<%@ Import Namespace="Kistl.Generator" %>
+<%@ Import Namespace="Kistl.Generator.Extensions" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="cls" Type="ObjectClass" %>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.<%= cls.Name %>)">
+	    <MappingFragment StoreEntitySet="<%= cls.Name %>">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<%
+		ApplyPropertyMappings();
+%>
+	    </MappingFragment>
+      </EntityTypeMapping>
+<%
+	foreach(var subCls in cls.SubClasses.OrderBy(c => c.Name))
+	{
+		ApplyEntityTypeMapping(subCls);	
+	}
+%>

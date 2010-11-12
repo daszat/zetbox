@@ -6,7 +6,7 @@ namespace Kistl.DalProvider.Memory.Generator
     using System.Linq;
     using System.Text;
     using Autofac;
-    using Kistl.Server.Generators;
+    using Kistl.Generator;
 
     public class MemoryGeneratorProvider
         : Autofac.Module
@@ -19,7 +19,7 @@ namespace Kistl.DalProvider.Memory.Generator
 
             moduleBuilder
                 .RegisterType<MemoryGenerator>()
-                .As<BaseDataObjectGenerator>()
+                .As<AbstractBaseGenerator>()
                 .SingleInstance();
         }
     }

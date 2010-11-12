@@ -2,7 +2,7 @@
 
 [assembly: global::System.Data.Objects.DataClasses.EdmSchema]
 
-namespace Kistl.DalProvider.EF
+namespace Kistl.DalProvider.Ef
 {
     using System;
     using System.Collections;
@@ -12,13 +12,12 @@ namespace Kistl.DalProvider.EF
     using System.Linq;
     using System.Reflection;
     using System.Text;
-
     using Kistl.API;
     using Kistl.API.Configuration;
     using Kistl.API.Server;
     using Kistl.API.Utils;
-    using Kistl.App.Extensions;
     using Kistl.App.Base;
+    using Kistl.App.Extensions;
 
     /// <summary>
     /// Entityframework IKistlContext implementation
@@ -28,7 +27,7 @@ namespace Kistl.DalProvider.EF
     {
         private static readonly object _lock = new object();
 
-        private readonly EFObjectContext _ctx;
+        private readonly EfObjectContext _ctx;
 
         private readonly Func<IFrozenContext> _lazyCtx;
 
@@ -49,7 +48,7 @@ namespace Kistl.DalProvider.EF
         public KistlDataContext(IMetaDataResolver metaDataResolver, Identity identity, KistlConfig config, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory, EfImplementationType.EfFactory implTypeFactory)
             : base(metaDataResolver, identity, config, iftFactory)
         {
-            _ctx = new EFObjectContext(config);
+            _ctx = new EfObjectContext(config);
             _lazyCtx = lazyCtx;
             _implTypeFactory = implTypeFactory;
         }
@@ -68,7 +67,8 @@ namespace Kistl.DalProvider.EF
         /// <returns>the name of the underlying entity set</returns>
         private string GetEntityName(InterfaceType intf)
         {
-            if (intf == null) throw new ArgumentNullException("intf");
+            if (intf == null)
+                throw new ArgumentNullException("intf");
             var rootType = intf.GetRootType();
             return rootType.Type.Name;
         }
@@ -281,7 +281,8 @@ namespace Kistl.DalProvider.EF
             catch (UpdateException updex)
             {
                 Logging.Log.Error("Error during SubmitChanges", updex);
-                if (updex.InnerException == null) throw;
+                if (updex.InnerException == null)
+                    throw;
                 throw updex.InnerException;
             }
 
@@ -566,7 +567,8 @@ namespace Kistl.DalProvider.EF
                 var tmp = GetPersistenceObjectQuery<Kistl.App.Base.ObjectClass>().FirstOrDefault();
                 string sql = string.Format("SELECT VALUE e FROM Entities.[{0}] AS e WHERE e.[ExportGuid] = @guid", GetEntityName(iftFactory(typeof(T))));
                 result = _ctx.CreateQuery<T>(sql, new System.Data.Objects.ObjectParameter("guid", exportGuid)).FirstOrDefault();
-                if (result != null) result.AttachToContext(this);
+                if (result != null)
+                    result.AttachToContext(this);
             }
             return result;
         }
@@ -604,7 +606,8 @@ namespace Kistl.DalProvider.EF
         {
             var guidStrings = exportGuids.Select(g => g.ToString()).ToList();
 
-            if (guidStrings.Count == 0) return new List<T>();
+            if (guidStrings.Count == 0)
+                return new List<T>();
 
             IEnumerable<T> result = null;
             int offset = 0;
@@ -617,7 +620,7 @@ namespace Kistl.DalProvider.EF
                 result = result == null ? tmp : result.Concat(tmp);
                 offset += 100;
             }
-            
+
             foreach (IPersistenceObject obj in result)
             {
                 obj.AttachToContext(this);
@@ -628,10 +631,13 @@ namespace Kistl.DalProvider.EF
 
         private List<T> SelectByExportGuid<T>(string[] cache)
         {
-            if (cache == null) throw new ArgumentNullException("cache");
-            if (cache.Length > 100) throw new ArgumentOutOfRangeException("cache", "cache too big");
+            if (cache == null)
+                throw new ArgumentNullException("cache");
+            if (cache.Length > 100)
+                throw new ArgumentOutOfRangeException("cache", "cache too big");
 
-            if (cache.Length == 0) return new List<T>(0);
+            if (cache.Length == 0)
+                return new List<T>(0);
 
             StringBuilder sql = new StringBuilder();
             sql.AppendFormat("SELECT VALUE e FROM Entities.{0} AS e WHERE e.ExportGuid IN {{Guid'", GetEntityName(iftFactory(typeof(T))));
@@ -642,7 +648,7 @@ namespace Kistl.DalProvider.EF
 
         public override ImplementationType ToImplementationType(InterfaceType t)
         {
-            return _implTypeFactory(Type.GetType(t.Type.FullName + Kistl.API.Helper.ImplementationSuffix + "," + EfProvider.ServerAssembly));
+            return _implTypeFactory(Type.GetType(t.Type.FullName + "Ef" + Kistl.API.Helper.ImplementationSuffix + "," + EfProvider.ServerAssembly));
         }
 
         public override ImplementationType GetImplementationType(Type t)

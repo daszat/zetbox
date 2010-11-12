@@ -7,7 +7,7 @@ using Kistl.API.AbstractConsumerTests;
 
 using NUnit.Framework;
 
-namespace Kistl.DalProvider.EF.Tests
+namespace Kistl.DalProvider.Ef.Tests
 {
     [TestFixture]
     public class ListPropertiesTests

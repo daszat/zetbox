@@ -6,12 +6,12 @@ using System.Text;
 
 using Kistl.API;
 
-namespace Kistl.DalProvider.EF
+namespace Kistl.DalProvider.Ef
 {
     //public static class EfSerializer
     //{
     //    public static void ToStream<T, AType, BType>(EntityCollection<T> collection, System.IO.BinaryWriter sw)
-    //        where T : class, IEntityWithRelationships, IRelationCollectionEntry<AType, BType>
+    //        where T : class, IEntityWithRelationships, IRelationEntry<AType, BType>
     //    {
     //        foreach (var obj in collection)
     //        {

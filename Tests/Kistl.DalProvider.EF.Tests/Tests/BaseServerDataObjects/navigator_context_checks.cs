@@ -6,7 +6,7 @@ using NUnit.Framework;
 using Kistl.API.Server;
 using Kistl.API;
 
-namespace Kistl.DalProvider.EF.Tests.BaseServerDataObjects
+namespace Kistl.DalProvider.Ef.Tests.BaseServerDataObjects
 {
     [TestFixture]
     public class navigator_context_checks

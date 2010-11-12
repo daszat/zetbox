@@ -1,0 +1,23 @@
+﻿<%@ CodeTemplate Language="C#"
+    Name="Properties.DelegatingProperty"
+    ClassName="Kistl.Generator.Templates.Properties.DelegatingProperty"
+    Inherits="Kistl.Generator.ResourceTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.App.Extensions" %>
+<%@ Import Namespace="Kistl.Generator" %>
+<%@ Import Namespace="Kistl.Generator.Extensions" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="propName" Type="string" %>
+<%@ Parameter Name="presentedType" Type="string" %>
+<%@ Parameter Name="backingPropName" Type="string" %>
+<%@ Parameter Name="backingType" Type="string" %>
+        // BEGIN <%= this.GetType() %>
+        public <%= presentedType %> <%= propName %>
+        {
+            get { return <%= backingPropName %>; }
+            set { <%= backingPropName %> = (<%= backingType %>)value; }
+        }
+        // END <%= this.GetType() %>

@@ -6,6 +6,7 @@ using Kistl.API;
 
 namespace Kistl.DalProvider.Memory
 {
+    // obsolete
     public abstract class BaseMemoryDataObject
         : BaseMemoryPersistenceObject, IDataObject
     {

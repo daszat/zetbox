@@ -12,9 +12,9 @@ namespace Kistl.API.Mocks
         string TestProperty { get; set; }
     }
 
-    public class TestCompoundObject__Implementation__ : BaseCompoundObject, TestCompoundObject
+    public class TestCompoundObjectImpl : BaseCompoundObject, TestCompoundObject
     {
-        public TestCompoundObject__Implementation__()
+        public TestCompoundObjectImpl()
             : base(null)
         {
         }

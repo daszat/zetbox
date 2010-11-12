@@ -8,27 +8,27 @@ using System.Text;
 using Kistl.API;
 using Kistl.API.Server;
 using Kistl.App.Test;
-using Kistl.DalProvider.EF;
+using Kistl.DalProvider.Ef;
 
 using NUnit.Framework;
 
-namespace Kistl.DalProvider.EF.Tests.BinarySerializers
+namespace Kistl.DalProvider.Ef.Tests.BinarySerializers
 {
     public interface CompoundObjectMock : ICompoundObject
     {
     }
 
-    public class CompoundObjectMock__Implementation__ : BaseServerCompoundObject_EntityFramework
+    public class CompoundObjectMockImpl : BaseServerCompoundObject_EntityFramework
     {
-        public CompoundObjectMock__Implementation__() : base(null) { }
+        public CompoundObjectMockImpl() : base(null) { }
         public override Type GetImplementedInterface()
         {
             return typeof(CompoundObjectMock);
         }
     }
 
-    [TestFixture(typeof(CompoundObjectMock__Implementation__))]
-    [TestFixture(typeof(TestPhoneCompoundObject__Implementation__))]
+    [TestFixture(typeof(CompoundObjectMockImpl))]
+    [TestFixture(typeof(TestPhoneCompoundObjectEfImpl))]
     public class should_work_with_EFCompoundObjects<T>
         : Kistl.API.AbstractConsumerTests.BinarySerializers.should_work_with_ICompoundObjects<T>
         where T : BaseServerCompoundObject_EntityFramework, ICompoundObject, new()

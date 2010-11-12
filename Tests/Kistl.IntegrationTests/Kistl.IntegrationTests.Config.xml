@@ -15,9 +15,9 @@
       <Module>Kistl.API.Server.ServerApiModule, Kistl.API.Server</Module>
       <Module>Kistl.Server.ServerModule, Kistl.Server</Module>
       <Module>Kistl.Objects.InterfaceModule, Kistl.Objects</Module>
-      <Module>Kistl.Objects.EFModule, Kistl.Objects.Server</Module>
-      <Module>Kistl.Objects.MemoryModule, Kistl.Objects.Memory</Module>
-      <Module>Kistl.DalProvider.EF.EfProvider, Kistl.DalProvider.EF</Module>
+      <Module>Kistl.Objects.EfModule, Kistl.Objects.EfImpl</Module>
+      <Module>Kistl.Objects.MemoryModule, Kistl.Objects.MemoryImpl</Module>
+      <Module>Kistl.DalProvider.Ef.EfProvider, Kistl.DalProvider.Ef</Module>
       <Module>Kistl.DalProvider.Memory.MemoryProvider, Kistl.DalProvider.Memory</Module>
       <Module>Kistl.App.Projekte.Server.CustomServerActionsModule, Kistl.App.Projekte.Server</Module>
       <Module>Kistl.App.Projekte.Common.CustomCommonActionsModule, Kistl.App.Projekte.Common</Module>
@@ -31,8 +31,8 @@
       <Module>Kistl.Client.ClientModule, Kistl.Client</Module>
       <Module>Kistl.Client.WPF.WPFModule, Kistl.Client.WPF</Module>
       <Module>Kistl.Objects.InterfaceModule, Kistl.Objects</Module>
-      <Module>Kistl.Objects.ClientModule, Kistl.Objects.Client</Module>
-      <Module>Kistl.Objects.MemoryModule, Kistl.Objects.Memory</Module>
+      <Module>Kistl.Objects.ClientModule, Kistl.Objects.ClientImpl</Module>
+      <Module>Kistl.Objects.MemoryModule, Kistl.Objects.MemoryImpl</Module>
       <Module>Kistl.DalProvider.Client.ClientProvider, Kistl.DalProvider.ClientObjects</Module>
       <Module>Kistl.DalProvider.Memory.MemoryProvider, Kistl.DalProvider.Memory</Module>
       <Module>Kistl.App.Projekte.Client.CustomClientActionsModule, Kistl.App.Projekte.Client</Module>

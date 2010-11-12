@@ -15,6 +15,11 @@ namespace Kistl.Server.Generators.Templates.Implementation
         {
         }
 
+        protected override string GetAssemblyName()
+        {
+            return "Kistl.Objects." + ImplementationSuffix;
+        }
+
         protected override void ApplyAdditionalReferences()
         {
             base.ApplyAdditionalReferences();

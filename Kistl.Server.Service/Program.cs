@@ -58,19 +58,19 @@ namespace Kistl.Server.Service
                 options = new OptionSet()
                     {
                         { "export=", "export the database to the specified xml file. Any extra argument is used as modulenames", 
-                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<Server>().Export(v, args.ToArray())); } }
+                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<IServer>().Export(v, args.ToArray())); } }
                             },
                         { "import=", "import the database from the specified xml file",
-                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<Server>().Import(v)); } }
+                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<IServer>().Import(v)); } }
                             },
                         { "publish=", "publish the specified modules to this xml file. Any extra argument is used as modulenames",
-                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<Server>().Publish(v, args.ToArray())); } }
+                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<IServer>().Publish(v, args.ToArray())); } }
                             },
                         { "deploy=", "deploy the database from the specified xml file",
-                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<Server>().Deploy(v)); } }
+                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<IServer>().Deploy(v)); } }
                             },
                         { "checkdeployedschema", "checks the sql schema against the deployed schema",
-                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<Server>().CheckSchema(false)); } } 
+                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<IServer>().CheckSchema(false)); } } 
                             },
                         { "checkschema=", "checks the sql schema against the metadata (parameter 'meta') or a specified xml file",
                             v => {
@@ -78,34 +78,34 @@ namespace Kistl.Server.Service
                                 
                                 if (v.Equals("meta"))
                                 {
-                                    actions.Add((c, args) => c.Resolve<Server>().CheckSchemaFromCurrentMetaData(false));
+                                    actions.Add((c, args) => c.Resolve<IServer>().CheckSchemaFromCurrentMetaData(false));
                                 } 
                                 else 
                                 {
-                                    actions.Add((c, args) => c.Resolve<Server>().CheckSchema(v, false));
+                                    actions.Add((c, args) => c.Resolve<IServer>().CheckSchema(v, false));
                                 }
                             }},
                         { "repairschema", "checks the schema against the deployed schema and tries to correct it",
-                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<Server>().CheckSchema(true)); } }
+                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<IServer>().CheckSchema(true)); } }
                             },
                         { "updatedeployedschema", "updates the schema to the current metadata",
-                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<Server>().UpdateSchema()); } }
+                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<IServer>().UpdateSchema()); } }
                             },
                         { "updateschema=", "updates the schema to the specified xml file",
-                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<Server>().UpdateSchema(v)); } }
+                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<IServer>().UpdateSchema(v)); } }
                             },
                         { "generate", "generates and compiles new data classes",
-                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<Server>().GenerateCode()); } }
+                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<Kistl.Generator.Compiler>().GenerateCode()); } }
                             },
                         { "fix", "[DEVEL] run ad-hoc fixes against the database",
-                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<Server>().RunFixes()); } }
+                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<IServer>().RunFixes()); } }
                             },
                         { "wipe", "[DEVEL] completely wipe the contents of the database",
-                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<Server>().WipeDatabase()); } }
+                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<IServer>().WipeDatabase()); } }
                             },
                         { "benchmark", "[DEVEL] run ad-hoc benchmarks against the database",
                             v => { if (v != null) {
-                				actions.Add((c, args) => c.Resolve<Server>().RunBenchmarks());
+                                actions.Add((c, args) => c.Resolve<IServer>().RunBenchmarks());
                 				waitForKey = true;
                 			} }
                             },
@@ -114,7 +114,7 @@ namespace Kistl.Server.Service
                                 waitForKey = (v != null);
                             }},
                         { "syncidentities", "synchronices local and domain users with Kistl Identities",
-                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<Server>().SyncIdentities()); } }
+                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<IServer>().SyncIdentities()); } }
                             },
                         { "help", "prints this help", 
                             v => { if ( v != null) { PrintHelpAndExit(); } } 

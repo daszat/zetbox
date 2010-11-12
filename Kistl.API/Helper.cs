@@ -30,7 +30,7 @@ namespace Kistl.API
         /// <summary>
         /// Suffix for Interface implementations
         /// </summary>
-        public static readonly string ImplementationSuffix = "__Implementation__";
+        public static readonly string ImplementationSuffix = "Impl";
 
         /// <summary>
         /// Suffix for Position Properties in Lists
@@ -41,10 +41,6 @@ namespace Kistl.API
         /// Interface Assembly
         /// </summary>
         public static readonly string InterfaceAssembly = "Kistl.Objects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7b69192d05046fdf";
-        /// <summary>
-        /// Client Assembly
-        /// </summary>
-        public static readonly string ClientAssembly = "Kistl.Objects.Client, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7b69192d05046fdf";
        
         /// <summary>
         /// Default length if StringRangeConstraint is missing
@@ -154,9 +150,9 @@ namespace Kistl.API
         {
             return typeof(IDataObject).IsAssignableFrom(type);
         }
-        public static bool IsIRelationCollectionEntry(this Type type)
+        public static bool IsIRelationEntry(this Type type)
         {
-            return typeof(IRelationCollectionEntry).IsAssignableFrom(type);
+            return typeof(IRelationEntry).IsAssignableFrom(type);
         }
         public static bool IsIPersistenceObject(this Type type)
         {

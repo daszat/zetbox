@@ -17,7 +17,7 @@ using System.Xml.Serialization;
     }
 
     [Serializable]
-    public class TestDataObject__Implementation__
+    public class TestDataObjectImpl
         : IDataObject, ICloneable, INotifyPropertyChanged, TestDataObject
     {
         private int _ID;
@@ -108,7 +108,7 @@ using System.Xml.Serialization;
 
         public void CopyTo(IDataObject obj)
         {
-            ((TestDataObject__Implementation__)obj).ID = this.ID;
+            ((TestDataObjectImpl)obj).ID = this.ID;
             ((TestDataObject)obj).IntProperty = this.IntProperty;
             ((TestDataObject)obj).StringProperty = this.StringProperty;
             ((TestDataObject)obj).BoolProperty = this.BoolProperty;
@@ -167,7 +167,7 @@ using System.Xml.Serialization;
         {
             if (obj == null)
                 throw new ArgumentNullException("obj");
-            if (((TestDataObject__Implementation__)obj).GetImplementedInterface() != this.GetImplementedInterface())
+            if (((TestDataObjectImpl)obj).GetImplementedInterface() != this.GetImplementedInterface())
                 throw new ArgumentOutOfRangeException("obj");
 
             this.ID = obj.ID;

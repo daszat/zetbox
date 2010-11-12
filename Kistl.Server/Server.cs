@@ -19,10 +19,10 @@ namespace Kistl.Server
     using Kistl.App.Packaging;
 
     /// <summary>
-    /// Serversteuerung
+    /// Central Server Object
     /// </summary>
-    public class Server
-        : IDisposable
+    internal sealed class Server
+        : IDisposable, IServer
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server");
 
@@ -35,16 +35,6 @@ namespace Kistl.Server
         /// The IoC container used by this Server.
         /// </summary>
         private ILifetimeScope container;
-
-        public void GenerateCode()
-        {
-            using (Log.InfoTraceMethodCall())
-            using (var subContainer = container.BeginLifetimeScope())
-            {
-                var generator = subContainer.Resolve<Generators.Generator>();
-                generator.GenerateCode();
-            }
-        }
 
         public void Export(string file, string[] names)
         {

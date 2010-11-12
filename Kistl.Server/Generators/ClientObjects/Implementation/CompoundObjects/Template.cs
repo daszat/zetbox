@@ -17,18 +17,6 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.CompoundObjects
         {
         }
 
-        protected override IEnumerable<string> GetAdditionalImports()
-        {
-            return base.GetAdditionalImports().Concat(new string[]{
-                "Kistl.API.Client",
-            });
-        }
-
-        protected override string MungeClassName(string name)
-        {
-            return base.MungeClassName(name) + Kistl.API.Helper.ImplementationSuffix;
-        }
-
         /// <returns>The base class to inherit from.</returns>
         protected override string GetBaseClass()
         {
@@ -41,7 +29,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.CompoundObjects
 
             string clsName = this.GetTypeName();
 
-            // attach compound to parent object
+            // attach compound to parent object when being constructed
             this.WriteObjects("        public ", clsName, "(IPersistenceObject parent, string property)");
             this.WriteLine();
             this.WriteObjects("            : base(null) // TODO: pass parent's lazyCtx");

@@ -47,7 +47,7 @@ using System.IO;
 
     public interface IServerCollectionHandler
     {
-        IEnumerable<IRelationCollectionEntry> GetCollectionEntries(IKistlContext ctx, Guid relId, RelationEndRole endRole, int parentId);
+        IEnumerable<IRelationEntry> GetCollectionEntries(IKistlContext ctx, Guid relId, RelationEndRole endRole, int parentId);
     }
 
     public interface IServerDocumentHandler

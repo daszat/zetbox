@@ -1,4 +1,4 @@
-namespace Kistl.DalProvider.EF
+namespace Kistl.DalProvider.Ef
 {
     using System;
     using System.Collections.Generic;

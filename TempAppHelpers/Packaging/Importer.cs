@@ -291,7 +291,7 @@ namespace Kistl.App.Packaging
             if (!objects.ContainsKey(exportGuid))
             {
                 if (!ifType.Type.IsIDataObject() &&
-                    !ifType.Type.IsIRelationCollectionEntry())
+                    !ifType.Type.IsIRelationEntry())
                 {
                     throw new NotSupportedException("Interfacetype " + ifType + " is not supported");
                 }

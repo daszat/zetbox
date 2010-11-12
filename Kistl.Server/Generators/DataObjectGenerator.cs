@@ -10,6 +10,7 @@ namespace Kistl.Server.Generators
     using Kistl.API.Utils;
     using Kistl.App.Base;
 
+    //[Obsolete("Moved to Kistl.Generator")]
     public abstract class BaseDataObjectGenerator
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Generator");
@@ -103,7 +104,7 @@ namespace Kistl.Server.Generators
         /// <summary>
         /// the namespace where to lookup the templates of this provider
         /// </summary>
-        public string TemplateProviderNamespace { get { return this.GetType().Namespace; } }
+        public virtual string TemplateProviderNamespace { get { return this.GetType().Namespace; } }
 
         /// <summary>
         /// the assembly where to lookup the templates of this provider
@@ -136,6 +137,11 @@ namespace Kistl.Server.Generators
         /// </summary>
         public string ProjectFileName { get; private set; }
 
+        /// <summary>
+        /// Required Namespaces for this project
+        /// </summary>
+        public abstract IEnumerable<string> RequiredNamespaces { get; }
+
         protected virtual string RunTemplateWithExtension(IKistlContext ctx, string templateName, string baseFilename, string extension, params object[] args)
         {
             string filename = String.Join(".", new string[] { baseFilename, BaseName, extension });
@@ -144,17 +150,26 @@ namespace Kistl.Server.Generators
 
         protected virtual string RunTemplate(IKistlContext ctx, string templateName, string filename, params object[] args)
         {
-            var gen = Generator.GetTemplateGenerator(
-                Description,
-                TemplateProviderNamespace,
-                TemplateProviderAssembly,
-                templateName,
-                filename,
-                this.CodeBasePath,
-                new object[] { ctx }.Concat(args).ToArray());
+            var gen = new TemplateGenerator();
+
+            gen.Settings.Add("basetemplatepath", "Kistl.Server.Generators.Templates");
+            gen.Settings.Add("providertemplatenamespace", TemplateProviderNamespace);
+            gen.Settings.Add("providertemplateassembly", TemplateProviderAssembly);
+
+            gen.Settings.Add("template", templateName);
+
+            gen.Settings.Add("targetdir", this.CodeBasePath);
+            gen.Settings.Add("output", filename);
+            gen.Settings.Add("logfile", "TemplateCodegenLog.txt");
 
             gen.Settings.Add("extrasuffix", ExtraSuffix);
+            gen.Settings.Add("namespaces", String.Join(",", RequiredNamespaces.ToArray()));
+            gen.Settings.Add("implementationnamespace", "Kistl.DalProvider." + BaseName);
+
+            gen.TemplateParameters = new object[] { ctx }.Concat(args).ToArray();
+
             gen.ExecuteTemplate();
+
             return filename;
         }
 
@@ -194,7 +209,7 @@ namespace Kistl.Server.Generators
         {
             return new List<string>()
             {
-                RunTemplateWithExtension(ctx, "Implementation.Module", "Module", "cs", Description, ExtraSuffix)
+                RunTemplateWithExtension(ctx, "Implementation.Module", "Module", "cs", Description)
             };
         }
 

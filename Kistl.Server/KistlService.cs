@@ -250,7 +250,7 @@ namespace Kistl.Server
                         var endRole = (RelationEndRole)serializableRole;
                         Relation rel = ctx.FindPersistenceObject<Relation>(relId);
 
-                        var ifType = typeof(IRelationCollectionEntry<,>);
+                        var ifType = typeof(IRelationEntry<,>);
                         var ceType = ifType.MakeGenericType(rel.A.Type.GetDataType(), rel.B.Type.GetDataType());
 
                         var lst = _sohFactory

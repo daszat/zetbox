@@ -155,6 +155,21 @@ namespace Kistl.Server.Generators
             if (t == null)
             {
                 Log.InfoFormat("provided template [{0}] not found", providerName);
+                // TODO: remove transition workaround
+                providerName = providerName.Replace("Implementation.", "");
+                Log.InfoFormat("trying [{0}] instead", providerName);
+                t = Type.GetType(providerName);
+                if (t == null)
+                {
+                    providerName = String.Format(
+                        "{0}.Implementation.{1}, {2}",
+                        this.Settings["providertemplatenamespace"],
+                        templateClass,
+                        this.Settings["providertemplateassembly"]);
+                    Log.InfoFormat("trying [{0}] instead", providerName);
+                    t = Type.GetType(providerName);
+                }
+                // end transition workaround
             }
             t = t ?? Type.GetType(String.Format("{0}.{1}", this.Settings["basetemplatepath"], templateClass));
 

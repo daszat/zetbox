@@ -1,0 +1,88 @@
+
+namespace Kistl.Generator.Templates.Properties
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    using Kistl.API;
+    using Kistl.App.Base;
+    using Kistl.App.Extensions;
+    using Kistl.Generator.Extensions;
+
+    public partial class CollectionEntryListProperty
+    {
+        /// <summary>
+        /// TODO: Frage: Rollen schon beim Aufruf tauschen? Es wird primär mit otherEnd gearbeitet.
+        /// </summary>
+        /// <param name="host"></param>
+        /// <param name="ctx"></param>
+        /// <param name="serializationList"></param>
+        /// <param name="rel"></param>
+        /// <param name="endRole"></param>
+        public static void Call(Arebis.CodeGeneration.IGenerationHost host,
+            IKistlContext ctx,
+            Serialization.SerializationMembersList serializationList,
+            Relation rel, RelationEndRole endRole)
+        {
+            if (host == null) { throw new ArgumentNullException("host"); }
+            if (rel == null) { throw new ArgumentNullException("rel"); }
+
+            RelationEnd relEnd = rel.GetEndFromRole(endRole);
+            RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
+
+            string name = relEnd.Navigator.Name;
+            string exposedCollectionInterface = rel.NeedsPositionStorage(otherEnd.GetRole()) ? "IList" : "ICollection";
+            string referencedInterface = otherEnd.Type.GetDataTypeString();
+            string backingName = "_" + name;
+            string backingCollectionType = "undefined wrapper class";
+            if (rel.NeedsPositionStorage(otherEnd.GetRole()))
+            {
+                if (otherEnd.GetRole() == RelationEndRole.A)
+                {
+                    backingCollectionType = "ClientRelationASideListWrapper";
+                }
+                else if (otherEnd.GetRole() == RelationEndRole.B)
+                {
+                    backingCollectionType = "ClientRelationBSideListWrapper";
+                }
+            }
+            else
+            {
+                if (otherEnd.GetRole() == RelationEndRole.A)
+                {
+                    backingCollectionType = "ClientRelationASideCollectionWrapper";
+                }
+                else if (otherEnd.GetRole() == RelationEndRole.B)
+                {
+                    backingCollectionType = "ClientRelationBSideCollectionWrapper";
+                }
+            }
+
+            string aSideType = rel.A.Type.GetDataTypeString();
+            string bSideType = rel.B.Type.GetDataTypeString();
+            string entryType = rel.GetRelationClassName() + host.Settings["extrasuffix"] + Kistl.API.Helper.ImplementationSuffix;
+            string providerCollectionType = (rel.NeedsPositionStorage(otherEnd.GetRole()) ? "IList<" : "ICollection<")
+                + entryType + ">";
+
+            bool eagerLoading = relEnd.Navigator != null && relEnd.Navigator.EagerLoading;
+
+            host.CallTemplate("Properties.CollectionEntryListProperty",
+                ctx, serializationList,
+                name, exposedCollectionInterface, referencedInterface,
+                backingName, backingCollectionType, aSideType, bSideType, entryType,
+                providerCollectionType,
+                rel.ExportGuid, endRole,
+                eagerLoading);
+        }
+
+        protected virtual void AddSerialization(Serialization.SerializationMembersList list, string memberName, bool eagerLoading)
+        {
+            if (list != null && eagerLoading)
+            {
+                list.Add("Serialization.EagerLoadingSerialization", Serialization.SerializerType.Binary, null, null, memberName, false);
+            }
+        }
+    }
+}

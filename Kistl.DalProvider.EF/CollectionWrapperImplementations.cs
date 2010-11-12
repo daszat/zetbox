@@ -1,4 +1,4 @@
-namespace Kistl.DalProvider.EF
+namespace Kistl.DalProvider.Ef
 {
     using System;
     using System.Collections;
@@ -13,7 +13,7 @@ namespace Kistl.DalProvider.EF
         : RelationASideCollectionWrapper<TA, TB, TEntry, EntityCollection<TEntry>>
         where TA : class, IDataObject
         where TB : class, IDataObject
-        where TEntry : BaseServerCollectionEntry_EntityFramework, IEntityWithRelationships, IRelationCollectionEntry<TA, TB>, new()
+        where TEntry : BaseServerCollectionEntry_EntityFramework, IEntityWithRelationships, IRelationEntry<TA, TB>, new()
     {
         public EntityRelationASideCollectionWrapper(TB parentObject, EntityCollection<TEntry> ec)
             : base(parentObject, ec)
@@ -60,7 +60,7 @@ namespace Kistl.DalProvider.EF
         : RelationBSideCollectionWrapper<TA, TB, TEntry, EntityCollection<TEntry>>
         where TA : class, IDataObject
         where TB : class, IDataObject
-        where TEntry : BaseServerCollectionEntry_EntityFramework, IEntityWithRelationships, IRelationCollectionEntry<TA, TB>, new()
+        where TEntry : BaseServerCollectionEntry_EntityFramework, IEntityWithRelationships, IRelationEntry<TA, TB>, new()
     {
         public EntityRelationBSideCollectionWrapper(TA parentObject, EntityCollection<TEntry> ec)
             : base(parentObject, ec)

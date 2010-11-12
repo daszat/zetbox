@@ -11,6 +11,16 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
 {
     public partial class ObjectCollectionEntry
     {
+        protected override void ApplyExportGuidPropertyTemplate()
+        {
+            ExportGuidProperty.Call(Host, ctx, this.MembersToSerialize);
+        }
+
+        protected override void ApplyRelationIdPropertyTemplate()
+        {
+            this.WriteLine("        public Guid RelationID {{ get {{ return new Guid(\"{0}\"); }} }}", rel.ExportGuid);
+        }
+        
         protected override void ApplyAPropertyTemplate()
         {
             ApplyObjectReferenceProperty(rel, RelationEndRole.A, "A");
@@ -46,9 +56,9 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
             RelationEnd relend = rel.GetEndFromRole(endRole);
             Templates.Implementation.ObjectClasses.ReloadOneReference.Call(Host, ctx,
                 relend.Type.GetDataTypeString(),
-                relend.Type.GetDataTypeString() + Kistl.API.Helper.ImplementationSuffix + Settings["extrasuffix"],
+                relend.Type.GetDataTypeString() + ImplementationSuffix,
                 endRole.ToString(),
-                endRole.ToString() + Kistl.API.Helper.ImplementationSuffix,
+                endRole.ToString() + ImplementationPropertySuffix,
                 "_fk_" + endRole.ToString(),
                 "_fk_guid_" + endRole.ToString());
         }

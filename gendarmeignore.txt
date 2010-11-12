@@ -31,7 +31,7 @@ M: System.Void Kistl.API.BinarySerializer::SerializerTrace(System.String,System.
 # Helper method which is only called by reflection from AddNewLocalObjects
 M: System.Void Kistl.DalProvider.Client.KistlContextProvider::AddNewLocalObjectsGeneric(System.Collections.IList)
 # Helper method which is only called by reflection from GetCollectionEntries
-M: System.Collections.Generic.IEnumerable`1<Kistl.API.IRelationCollectionEntry> Kistl.DalProvider.EF.ServerCollectionHandler`4::GetCollectionEntriesInternal(TParent,Kistl.App.Base.Relation,Kistl.API.RelationEndRole)
+M: System.Collections.Generic.IEnumerable`1<Kistl.API.IRelationEntry> Kistl.DalProvider.Ef.ServerCollectionHandler`4::GetCollectionEntriesInternal(TParent,Kistl.App.Base.Relation,Kistl.API.RelationEndRole)
 # generated code (wpf)
 M: System.Delegate Kistl.Client.WPF.View.KistlBase.DataObjectLineDisplay::_CreateDelegate(System.Type,System.String)
 M: System.Delegate Kistl.Client.WPF.View.KistlBase.ObjectReferenceEditor::_CreateDelegate(System.Type,System.String)
@@ -91,10 +91,10 @@ A: Kistl.App.Projekte.Common
 A: Kistl.App.Projekte.Client
 A: Kistl.App.Projekte.Server
 # False positives
-M: System.Void Kistl.DalProvider.EF.EntityCollectionWrapper`2::Add(TInterface)
-M: System.Boolean Kistl.DalProvider.EF.EntityCollectionWrapper`2::Contains(TInterface)
-M: System.Boolean Kistl.DalProvider.EF.EntityCollectionWrapper`2::Remove(TInterface)
-M: System.Void Kistl.DalProvider.EF.EntityCollectionWrapper`2::CopyTo(System.Array,System.Int32)
+M: System.Void Kistl.DalProvider.Ef.EntityCollectionWrapper`2::Add(TInterface)
+M: System.Boolean Kistl.DalProvider.Ef.EntityCollectionWrapper`2::Contains(TInterface)
+M: System.Boolean Kistl.DalProvider.Ef.EntityCollectionWrapper`2::Remove(TInterface)
+M: System.Void Kistl.DalProvider.Ef.EntityCollectionWrapper`2::CopyTo(System.Array,System.Int32)
 M: System.Void Kistl.Client.Presentables.ModuleEditor.WorkspaceViewModel::.ctor(Kistl.Client.Presentables.IViewModelDependencies,Kistl.API.IKistlContext,System.Func`2<Kistl.API.Client.ClientIsolationLevel,Kistl.API.IKistlContext>)
 
 R: Gendarme.Rules.Portability.DoNotHardcodePathsRule
@@ -102,9 +102,9 @@ R: Gendarme.Rules.Portability.DoNotHardcodePathsRule
 M: System.Void Kistl.App.Projekte.WordHelper::ApplyCustomXml(System.Xml.XmlDocument)
 
 R: Gendarme.Rules.Portability.MonoCompatibilityReviewRule
-# exclude known not-implemented parts: WPF, EF, OleDB (partial)
+# exclude known not-implemented parts: WPF, Ef, OleDB (partial)
 A: Kistl.Client.WPF
-A: Kistl.DalProvider.EF
+A: Kistl.DalProvider.Ef
 T: Kistl.Server.SchemaManagement.OleDbProvider.OleDb
 T: Kistl.Server.SchemaManagement.SqlProvider.SqlServer
 M: System.Boolean Kistl.Server.SchemaManagement.OleDbProvider.OleDb/<GetTableNames>d__0::MoveNext()
@@ -138,7 +138,7 @@ M: System.Collections.IEnumerator Kistl.Client.ASPNET.Toolkit.View.WorkspaceView
 M: System.Collections.IEnumerator Kistl.Client.ASPNET.Toolkit.View.WorkspaceView/<GetScriptReferences>d__6::System.Collections.IEnumerable.GetEnumerator()
 M: System.Collections.IEnumerator Kistl.Client.ASPNET.Toolkit.View.DataObjectListView/<GetScriptDescriptors>d__4::System.Collections.IEnumerable.GetEnumerator()
 M: System.Collections.IEnumerator Kistl.Client.ASPNET.Toolkit.View.DataObjectListView/<GetScriptReferences>d__8::System.Collections.IEnumerable.GetEnumerator()
-M: System.Collections.IEnumerator Kistl.DalProvider.EF.EntityCollectionWrapper`2::System.Collections.IEnumerable.GetEnumerator()
+M: System.Collections.IEnumerator Kistl.DalProvider.Ef.EntityCollectionWrapper`2::System.Collections.IEnumerable.GetEnumerator()
 M: System.Collections.IEnumerator Kistl.Server.SchemaManagement.SqlProvider.SqlServer/<GetTableNames>d__0::System.Collections.IEnumerable.GetEnumerator()
 M: System.Collections.IEnumerator Kistl.Server.SchemaManagement.SqlProvider.SqlServer/<GetFKConstraintNames>d__9::System.Collections.IEnumerable.GetEnumerator()
 M: System.Collections.IEnumerator Kistl.Server.SchemaManagement.SqlProvider.SqlServer/<GetTableColumnNames>d__11::System.Collections.IEnumerable.GetEnumerator()
@@ -174,8 +174,8 @@ M: System.Void Kistl.API.BaseRelationListWrapper`6::set_Item(System.Int32,TItem)
 M: TValue Kistl.API.Utils.LookupDictionary`3::get_Item(TKey)
 M: TValue Kistl.API.ValueListWrapper`4::get_Item(System.Int32)
 M: System.Void Kistl.API.ValueListWrapper`4::set_Item(System.Int32,TValue)
-M: TInterface Kistl.DalProvider.EF.EntityListWrapper`2::get_Item(System.Int32)
-M: System.Void Kistl.DalProvider.EF.EntityListWrapper`2::set_Item(System.Int32,TInterface)
+M: TInterface Kistl.DalProvider.Ef.EntityListWrapper`2::get_Item(System.Int32)
+M: System.Void Kistl.DalProvider.Ef.EntityListWrapper`2::set_Item(System.Int32,TInterface)
 M: System.Collections.IEnumerable Kistl.API.Utils.ContextCache::get_Item(Kistl.API.InterfaceType)
 
 R: Gendarme.Rules.Correctness.ProvideCorrectArgumentsToFormattingMethodsRule
@@ -209,7 +209,7 @@ A: Kistl.Client.Forms
 A: Kistl.Client.WPF
 A: TempAppHelpers
 A: Kistl.DalProvider.ClientObjects
-A: Kistl.DalProvider.EF
+A: Kistl.DalProvider.Ef
 A: Kistl.DalProvider.Memory
 A: Kistl.DalProvider.Memory.Generator
 A: Kistl.Server
@@ -231,7 +231,7 @@ A: Kistl.Client.Forms
 A: Kistl.Client.WPF
 A: TempAppHelpers
 A: Kistl.DalProvider.ClientObjects
-A: Kistl.DalProvider.EF
+A: Kistl.DalProvider.Ef
 A: Kistl.DalProvider.Memory
 A: Kistl.DalProvider.Memory.Generator
 A: Kistl.Server
@@ -251,7 +251,7 @@ A: Kistl.Client.Forms
 A: Kistl.Client.WPF
 A: TempAppHelpers
 A: Kistl.DalProvider.ClientObjects
-A: Kistl.DalProvider.EF
+A: Kistl.DalProvider.Ef
 A: Kistl.DalProvider.Memory
 A: Kistl.DalProvider.Memory.Generator
 A: Kistl.Server
@@ -271,7 +271,7 @@ A: Kistl.Client.Forms
 A: Kistl.Client.WPF
 A: TempAppHelpers
 A: Kistl.DalProvider.ClientObjects
-A: Kistl.DalProvider.EF
+A: Kistl.DalProvider.Ef
 A: Kistl.DalProvider.Memory
 A: Kistl.DalProvider.Memory.Generator
 A: Kistl.Server
@@ -291,7 +291,7 @@ A: Kistl.Client.Forms
 A: Kistl.Client.WPF
 A: TempAppHelpers
 A: Kistl.DalProvider.ClientObjects
-A: Kistl.DalProvider.EF
+A: Kistl.DalProvider.Ef
 A: Kistl.DalProvider.Memory
 A: Kistl.DalProvider.Memory.Generator
 A: Kistl.Server
@@ -311,7 +311,7 @@ A: Kistl.Client.Forms
 A: Kistl.Client.WPF
 A: TempAppHelpers
 A: Kistl.DalProvider.ClientObjects
-A: Kistl.DalProvider.EF
+A: Kistl.DalProvider.Ef
 A: Kistl.DalProvider.Memory
 A: Kistl.DalProvider.Memory.Generator
 A: Kistl.Server
@@ -331,7 +331,7 @@ A: Kistl.Client.Forms
 A: Kistl.Client.WPF
 A: TempAppHelpers
 A: Kistl.DalProvider.ClientObjects
-A: Kistl.DalProvider.EF
+A: Kistl.DalProvider.Ef
 A: Kistl.DalProvider.Memory
 A: Kistl.DalProvider.Memory.Generator
 A: Kistl.Server

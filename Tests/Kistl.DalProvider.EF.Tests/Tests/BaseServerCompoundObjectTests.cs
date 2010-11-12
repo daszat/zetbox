@@ -8,27 +8,27 @@ using System.Text;
 using Kistl.API;
 using Kistl.API.Tests.Skeletons;
 using Kistl.App.Test;
-using Kistl.DalProvider.EF.Mocks;
+using Kistl.DalProvider.Ef.Mocks;
 
 using NUnit.Framework;
-using Kistl.DalProvider.EF;
+using Kistl.DalProvider.Ef;
 
-namespace Kistl.DalProvider.EF.Tests
+namespace Kistl.DalProvider.Ef.Tests
 {
     [TestFixture]
     public class BaseServerCompoundObjectTests
-        : IStreamableTests<TestPhoneCompoundObject__Implementation__>
+        : IStreamableTests<TestPhoneCompoundObjectEfImpl>
     {
-        TestCustomObject__Implementation__ parent;
-        TestPhoneCompoundObject__Implementation__ attachedObj;
+        TestCustomObjectEfImpl parent;
+        TestPhoneCompoundObjectEfImpl attachedObj;
 
         [SetUp]
         public void SetUpTestObject()
         {
-            obj = new TestPhoneCompoundObject__Implementation__(null) { AreaCode = "ABC", Number = "123456" };
+            obj = new TestPhoneCompoundObjectEfImpl(null) { AreaCode = "ABC", Number = "123456" };
 
-            parent = new TestCustomObject__Implementation__(null);
-            attachedObj = (TestPhoneCompoundObject__Implementation__)parent.PhoneNumberOffice;
+            parent = new TestCustomObjectEfImpl(null);
+            attachedObj = (TestPhoneCompoundObjectEfImpl)parent.PhoneNumberOffice;
             attachedObj.AreaCode = "attachedAreaCode";
             attachedObj.Number = "attachedNumber";
         }

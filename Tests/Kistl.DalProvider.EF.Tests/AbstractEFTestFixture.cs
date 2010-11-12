@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Kistl.API;
 
-namespace Kistl.DalProvider.EF
+namespace Kistl.DalProvider.Ef
 {
     public class AbstractEFTestFixture : Kistl.API.AbstractConsumerTests.AbstractTestFixture
     {

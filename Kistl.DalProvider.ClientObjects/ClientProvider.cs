@@ -30,7 +30,7 @@ namespace Kistl.DalProvider.Client
                         il,
                         c.Resolve<KistlConfig>(),
                         c.Resolve<IProxy>(),
-                        Kistl.API.Helper.ClientAssembly,
+                        "Kistl.Objects.ClientImpl, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7b69192d05046fdf",
                         c.Resolve<Func<IFrozenContext>>(),
                         c.Resolve<InterfaceType.Factory>(),
                         c.Resolve<ClientImplementationType.ClientFactory>());

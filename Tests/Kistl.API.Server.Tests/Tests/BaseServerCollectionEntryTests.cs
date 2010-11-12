@@ -13,7 +13,7 @@ namespace Kistl.API.Server.Tests
 
     [TestFixture]
     public class BaseServerCollectionEntryTests
-        : CollectionEntryTests<TestObjClass_TestNameCollectionEntry__Implementation__>
+        : CollectionEntryTests<TestObjClass_TestNameCollectionEntryImpl>
     {
     }
 

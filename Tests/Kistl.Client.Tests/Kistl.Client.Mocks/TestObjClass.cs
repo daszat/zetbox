@@ -12,9 +12,9 @@ namespace Kistl.App.Test
     using Kistl.API;
     using Kistl.API.Client;
 
-    public class TestObjClass__Implementation__ : BaseClientDataObject, TestObjClass
+    public class TestObjClassImpl : BaseClientDataObject, TestObjClass
     {
-        public TestObjClass__Implementation__()
+        public TestObjClassImpl()
             : base(null)
         {
         }
@@ -270,7 +270,7 @@ namespace Kistl.App.Test
         {
             base.ApplyChangesFrom(obj);
             var other = (TestObjClass)obj;
-            var otherImpl = (TestObjClass__Implementation__)obj;
+            var otherImpl = (TestObjClassImpl)obj;
             var me = (TestObjClass)this;
 
             me.MyIntProperty = other.MyIntProperty;

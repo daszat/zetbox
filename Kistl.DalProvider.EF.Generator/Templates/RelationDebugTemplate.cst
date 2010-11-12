@@ -1,0 +1,16 @@
+﻿<%@ CodeTemplate Language="C#" 
+	Name="RelationDebugTemplate"
+	ClassName="Kistl.DalProvider.Ef.Generator.Templates.RelationDebugTemplate" 
+	Inherits="Kistl.Generator.ResourceTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.Generator.Extensions" %>
+<%@ Import Namespace="Kistl.App.Extensions" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="rel" Type="Relation" %>
+    Relation: <%= rel.GetAssociationName() %>
+    A: <%= rel.A.Multiplicity %> <%= rel.A.Type.Name %> as <%= rel.A.RoleName %>
+    B: <%= rel.B.Multiplicity %> <%= rel.B.Type.Name %> as <%= rel.B.RoleName %>
+    Preferred Storage: <%= rel.Storage %>

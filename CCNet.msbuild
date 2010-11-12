@@ -30,27 +30,27 @@
     <Message Importance="high" Text="Backup and remove old generated code" />
     <ItemGroup>
       <OldKistlObjectsSources Include="Kistl.Objects\*.*" />
-      <OldKistlObjectsServerSources Include="Kistl.Objects.Server\*.*" />
+      <OldKistlObjectsServerSources Include="Kistl.Objects.Ef\*.*" />
       <OldKistlObjectsMemorySources Include="Kistl.Objects.Memory\*.*" />
     </ItemGroup>
     <Copy SourceFiles="@(OldKistlObjectsSources)" DestinationFolder="Backup\Kistl.Objects\" />
-    <Copy SourceFiles="@(OldKistlObjectsServerSources)" DestinationFolder="Backup\Kistl.Objects.Server\" />
+    <Copy SourceFiles="@(OldKistlObjectsServerSources)" DestinationFolder="Backup\Kistl.Objects.Ef\" />
     <Copy SourceFiles="@(OldKistlObjectsMemorySources)" DestinationFolder="Backup\Kistl.Objects.Memory\" />
     <Delete Files="@(OldKistlObjectsSources);@(OldKistlObjectsServerSources);@(OldKistlObjectsMemorySources)" />
-    <RemoveDir Directories="Kistl.Objects\bin;Kistl.Objects.Server\bin;Kistl.Objects.Memory\bin" />
-    <RemoveDir Directories="Kistl.Objects\obj;Kistl.Objects.Server\obj;Kistl.Objects.Memory\obj" />
+    <RemoveDir Directories="Kistl.Objects\bin;Kistl.Objects.Ef\bin;Kistl.Objects.Memory\bin" />
+    <RemoveDir Directories="Kistl.Objects\obj;Kistl.Objects.Ef\obj;Kistl.Objects.Memory\obj" />
 
     <Message Importance="high" Text="deploy generated code" />
     <ItemGroup>
       <KistlObjectsSources Include="bin\CodeGen\Kistl.Objects\*.*" />
-      <KistlObjectsServerSources Include="bin\CodeGen\Kistl.Objects.Server\*.*" />
+      <KistlObjectsServerSources Include="bin\CodeGen\Kistl.Objects.Ef\*.*" />
       <KistlObjectsMemorySources Include="bin\CodeGen\Kistl.Objects.Memory\*.*" />
     </ItemGroup>
     <Copy SourceFiles="@(KistlObjectsSources)" DestinationFolder="Kistl.Objects\" />
-    <Copy SourceFiles="@(KistlObjectsServerSources)" DestinationFolder="Kistl.Objects.Server\" />
+    <Copy SourceFiles="@(KistlObjectsServerSources)" DestinationFolder="Kistl.Objects.Ef\" />
     <Copy SourceFiles="@(KistlObjectsMemorySources)" DestinationFolder="Kistl.Objects.Memory\" />
 
-    <!--  -->
+    <!-- re-test building the solution with new code -->
     <Message Importance="high" Text="Clean, then rebuild entire solution" />
     <MSBuild Projects="Kistl.Complete.sln" Targets="Clean;Rebuild" />
 

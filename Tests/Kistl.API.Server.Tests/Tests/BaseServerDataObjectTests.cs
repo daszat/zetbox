@@ -16,7 +16,7 @@ namespace Kistl.API.Server.Tests
     [TestFixture]
     public class BaseServerDataObjectTests : AbstractApiServerTestFixture
     {
-        private TestObjClass__Implementation__ obj;
+        private TestObjClassImpl obj;
         private IKistlContext ctx;
         private InterfaceType.Factory _iftFactory;
 
@@ -25,7 +25,7 @@ namespace Kistl.API.Server.Tests
             base.SetUp();
             _iftFactory = scope.Resolve<InterfaceType.Factory>();
             ctx = GetContext();
-            obj = new TestObjClass__Implementation__();
+            obj = new TestObjClassImpl();
             ctx.Attach(obj);
         }
 
@@ -35,14 +35,14 @@ namespace Kistl.API.Server.Tests
             base.TearDown();
         }
 
-        public void InitialiseObject(TestObjClass__Implementation__ objImpl)
+        public void InitialiseObject(TestObjClassImpl objImpl)
         {
 
             objImpl.ID = TestObjClassSerializationMock.TestObjClassId;
 
             //objImpl.ObjectState = TestObjClassSerializationMock.TestObjectState;
 
-            var baseClass = new TestObjClass__Implementation__();
+            var baseClass = new TestObjClassImpl();
             baseClass.ID = TestObjClassSerializationMock.TestBaseClassId.Value;
             objImpl.BaseTestObjClass = baseClass;
 
@@ -51,7 +51,7 @@ namespace Kistl.API.Server.Tests
             objImpl.SubClasses.Clear();
             foreach (var subClassId in TestObjClassSerializationMock.TestSubClassesIds)
             {
-                var subClass = new TestObjClass__Implementation__();
+                var subClass = new TestObjClassImpl();
                 subClass.ID = subClassId;
                 objImpl.SubClasses.Add(subClass);
                 objImpl.Context.Attach(subClass);
@@ -59,16 +59,16 @@ namespace Kistl.API.Server.Tests
 
             objImpl.TestEnumProp = TestEnum.TestSerializationValue;
 
-            objImpl.TestNames__Implementation__.Clear();
+            objImpl.TestNamesImpl.Clear();
             for (int i = 0; i < TestObjClassSerializationMock.TestTestNamesIds.Length; i++)
             {
-                var ce = new TestObjClass_TestNameCollectionEntry__Implementation__();
+                var ce = new TestObjClass_TestNameCollectionEntryImpl();
                 ce.ID = TestObjClassSerializationMock.TestTestNamesIds[i];
                 ce.Parent = objImpl;
                 ce.Value = TestObjClassSerializationMock.TestTestNamesValues[i];
 
                 objImpl.Context.Attach(ce);
-                objImpl.TestNames__Implementation__.Add(ce);
+                objImpl.TestNamesImpl.Add(ce);
             }
         }
 
@@ -118,7 +118,7 @@ namespace Kistl.API.Server.Tests
             SerializableType t;
             BinarySerializer.FromStream(out t, sr);
 
-            var obj = new TestObjClass__Implementation__();
+            var obj = new TestObjClassImpl();
             obj.FromStream(sr);
             ctx.Attach(obj);
 
@@ -128,7 +128,7 @@ namespace Kistl.API.Server.Tests
         [Test]
         public void FromStream_Null_StreamReader_fails()
         {
-            TestObjClass result = new TestObjClass__Implementation__();
+            TestObjClass result = new TestObjClassImpl();
             Assert.That(() => result.FromStream((BinaryReader)null), Throws.InstanceOf<ArgumentNullException>());
         }
 

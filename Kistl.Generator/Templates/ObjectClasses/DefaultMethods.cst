@@ -1,0 +1,62 @@
+﻿<%@ CodeTemplate Language="C#"
+    Name="ObjectClasses.DefaultMethods"
+    ClassName="Kistl.Generator.Templates.ObjectClasses.DefaultMethods"
+    Inherits="Kistl.Generator.ResourceTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Linq" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.Generator" %>
+<%@ Import Namespace="Kistl.Generator.Extensions" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="dt" Type="DataType" %>
+        #region <%= this.GetType() %>
+
+        [System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnToString_<%= dt.Name %>")]
+        public override string ToString()
+        {
+            MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
+            e.Result = base.ToString();
+            if (OnToString_<%= dt.Name %> != null)
+            {
+                OnToString_<%= dt.Name %>(this, e);
+            }
+            return e.Result;
+        }
+        public static event ToStringHandler<<%= dt.Name %>> OnToString_<%= dt.Name %>;
+
+        [EventBasedMethod("OnPreSave_<%= dt.Name %>")]
+        public override void NotifyPreSave()
+        {
+            base.NotifyPreSave();
+            if (OnPreSave_<%= dt.Name %> != null) OnPreSave_<%= dt.Name %>(this);
+        }
+        public static event ObjectEventHandler<<%= dt.Name %>> OnPreSave_<%= dt.Name %>;
+
+        [EventBasedMethod("OnPostSave_<%= dt.Name %>")]
+        public override void NotifyPostSave()
+        {
+            base.NotifyPostSave();
+            if (OnPostSave_<%= dt.Name %> != null) OnPostSave_<%= dt.Name %>(this);
+        }
+        public static event ObjectEventHandler<<%= dt.Name %>> OnPostSave_<%= dt.Name %>;
+
+        [EventBasedMethod("OnCreated_<%= dt.Name %>")]
+        public override void NotifyCreated()
+        {
+            base.NotifyCreated();
+            if (OnCreated_<%= dt.Name %> != null) OnCreated_<%= dt.Name %>(this);
+        }
+        public static event ObjectEventHandler<<%= dt.Name %>> OnCreated_<%= dt.Name %>;
+
+        [EventBasedMethod("OnDeleting_<%= dt.Name %>")]
+        public override void NotifyDeleting()
+        {
+            base.NotifyDeleting();
+            if (OnDeleting_<%= dt.Name %> != null) OnDeleting_<%= dt.Name %>(this);
+        }
+        public static event ObjectEventHandler<<%= dt.Name %>> OnDeleting_<%= dt.Name %>;
+
+        #endregion // <%= this.GetType() %>

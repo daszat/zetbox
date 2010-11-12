@@ -1,0 +1,167 @@
+
+namespace Kistl.Generator.Templates.ObjectClasses
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.Text;
+
+    using Kistl.API;
+    using Kistl.App.Base;
+    using Kistl.App.Extensions;
+    using Kistl.Generator.Extensions;
+
+    public class Template
+        : TypeBase
+    {
+        protected ObjectClass ObjectClass { get; private set; }
+
+        public Template(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, ObjectClass t)
+            : base(_host, ctx, t)
+        {
+            this.ObjectClass = t;
+        }
+
+        protected override string GetClassModifiers()
+        {
+            return ObjectClass.IsAbstract ? " abstract" : string.Empty;
+        }
+
+        protected override string GetBaseClass()
+        {
+            if (this.ObjectClass.BaseObjectClass != null)
+            {
+                return MungeClassName(this.ObjectClass.BaseObjectClass.Module.Namespace + "." + this.ObjectClass.BaseObjectClass.Name);
+            }
+            else
+            {
+                return ImplementationNamespace + ".DataObject" + ImplementationSuffix;
+            }
+        }
+
+        protected override void ApplyObjectReferencePropertyTemplate(ObjectReferenceProperty prop)
+        {
+            Properties.ObjectReferencePropertyTemplate.Call(
+                Host, ctx, this.MembersToSerialize,
+                prop, true, true);
+        }
+
+        protected override void ApplyCompoundObjectPropertyTemplate(CompoundObjectProperty prop)
+        {
+            this.WriteLine("        // CompoundObject property");
+            Properties.CompoundObjectPropertyTemplate.Call(Host, ctx, MembersToSerialize, prop);
+        }
+
+        protected override void ApplyCompoundObjectListTemplate(CompoundObjectProperty prop)
+        {
+            this.WriteLine("        // CompoundObject list property");
+            Properties.ValueCollectionProperty.Call(Host, ctx,
+                this.MembersToSerialize,
+                prop);
+        }
+
+        protected override void ApplyObjectReferenceListTemplate(ObjectReferenceProperty prop)
+        {
+            var rel = RelationExtensions.Lookup(ctx, prop);
+
+            var relEnd = rel.GetEnd(prop);
+            var otherEnd = rel.GetOtherEnd(relEnd);
+
+            // without navigator, there should be no property
+            if (relEnd.Navigator == null)
+                return;
+
+            switch ((StorageType)rel.Storage)
+            {
+                case StorageType.MergeIntoA:
+                case StorageType.MergeIntoB:
+                case StorageType.Replicate:
+                    // simple and direct reference
+                    this.WriteLine("        // object list property");
+                    ApplyObjectListPropertyTemplate(prop);
+                    break;
+                case StorageType.Separate:
+                    this.WriteLine("        // collection entry list property");
+                    ApplyCollectionEntryListTemplate(prop);
+                    break;
+                default:
+                    throw new NotImplementedException("unknown StorageHint for ObjectReferenceProperty[IsList == true]");
+            }
+        }
+
+        protected virtual void ApplyObjectListPropertyTemplate(ObjectReferenceProperty prop)
+        {
+            Properties.ObjectListProperty.Call(Host, ctx,
+                 this.MembersToSerialize,
+                 prop);
+        }
+
+        protected virtual void ApplyCollectionEntryListTemplate(ObjectReferenceProperty prop)
+        {
+            var rel = RelationExtensions.Lookup(ctx, prop);
+            var relEnd = rel.GetEnd(prop);
+
+            Properties.CollectionEntryListProperty.Call(Host, ctx,
+                 this.MembersToSerialize,
+                 rel, relEnd.GetRole());
+        }
+
+        protected override void ApplyValueTypeListTemplate(ValueTypeProperty prop)
+        {
+            this.WriteLine("        // value list property");
+            Properties.ValueCollectionProperty.Call(Host, ctx, MembersToSerialize, prop);
+        }
+
+        protected override void ApplyConstructorTemplate()
+        {
+            base.ApplyConstructorTemplate();
+            this.WriteObjects("            {");
+            this.WriteLine();
+            foreach (var prop in DataType.Properties.OfType<CompoundObjectProperty>().Where(p => !p.IsList).OrderBy(p => p.Name))
+            {
+                if (prop.IsNullable())
+                    continue;
+
+                string name = prop.Name;
+                string backingName = name + ImplementationPropertySuffix;
+                string coType = prop.GetPropertyTypeString();
+                string coImplementationType = coType + ImplementationSuffix;
+                this.WriteObjects("                ", backingName, " = new ", coImplementationType, "(this, \"", name, "\");");
+                this.WriteLine();
+            }
+            this.WriteObjects("            }");
+            this.WriteLine();
+        }
+
+        protected override void ApplyAttachToContextMethod()
+        {
+            base.ApplyAttachToContextMethod();
+            ObjectClasses.AttachToContextTemplate.Call(Host, ctx, ObjectClass);
+        }
+
+        protected override void ApplyClassTailTemplate()
+        {
+            base.ApplyClassTailTemplate();
+            UpdateParentTemplate.Call(Host, ctx, this.DataType);
+            ReloadReferences.Call(Host, ctx, this.DataType);
+            CustomTypeDescriptor.Call(Host, ctx, this.ObjectClass, this.GetTypeName());
+            DefaultMethods.Call(Host, ctx, this.DataType);
+        }
+
+        protected override IEnumerable<App.Base.Method> MethodsToGenerate()
+        {
+            return SelectAndParents(this.ObjectClass).SelectMany(cls => cls.Methods).Where(m => !m.IsDefaultMethod());
+        }
+
+        private static IEnumerable<ObjectClass> SelectAndParents(ObjectClass cls)
+        {
+            yield return cls;
+            while (cls.BaseObjectClass != null)
+            {
+                cls = cls.BaseObjectClass;
+                yield return cls;
+            }
+        }
+    }
+}

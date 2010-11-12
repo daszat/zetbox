@@ -63,5 +63,9 @@ namespace Kistl.Server.Generators.Interfaces
             return base.Generate_Other(ctx).Concat(otherFileNames);
         }
 
+        public override IEnumerable<string> RequiredNamespaces
+        {
+            get { return new List<string>(); }
+        }
     }
 }

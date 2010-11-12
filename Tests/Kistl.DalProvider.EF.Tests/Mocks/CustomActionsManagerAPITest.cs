@@ -5,7 +5,7 @@ using System.Text;
 
 using Kistl.API;
 
-namespace Kistl.DalProvider.EF.Mocks
+namespace Kistl.DalProvider.Ef.Mocks
 {
     public class CustomActionsManagerAPITest : ICustomActionsManager
     {

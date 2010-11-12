@@ -1,0 +1,336 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A2C68E17-5B32-4F4E-B83A-DC7122623FDD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Kistl.DalProvider.EF.Generator</RootNamespace>
+    <AssemblyName>Kistl.DalProvider.EF.Generator</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Kistl.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\bin\Debug\bin\Server\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>1591</NoWarn>
+    <DocumentationFile>..\bin\Debug\bin\Server\Kistl.DalProvider.EF.XML</DocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\bin\Release\bin\Server\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\bin\Release\bin\Server\Kistl.DalProvider.EF.XML</DocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <NoWarn>1591</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Arebis.CodeGeneration, Version=1.2.0.1, Culture=neutral, PublicKeyToken=1012dfebee6c8abd, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\AREBIS\Arebis Generation Tools\Arebis.CodeGeneration.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Autofac, Version=0.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\AutoFac 2.1\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="EfGeneratorProvider.cs" />
+    <Compile Include="EfGenerator.cs" />
+    <Compile Include="Templates\AssemblyInfoTemplate.cs" />
+    <Compile Include="Templates\Properties\ExportGuidProperty.cs" />
+    <Compile Include="Templates\CollectionEntries\RelationEntry.cs" />
+    <Compile Include="Templates\CollectionEntries\ValueCollectionEntry.cs" />
+    <Compile Include="Templates\CollectionEntries\ValueCollectionEntry.Properties.cs" />
+    <Compile Include="Templates\EfModel\Model.csdl.cs">
+      <DependentUpon>Model.csdl.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\EfModel\Model.csdl.Designer.cs">
+      <DependentUpon>Model.csdl.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Templates\EfModel\Model.csdl.EntityTypeFields.cs">
+      <DependentUpon>Model.csdl.EntityTypeFields.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\EfModel\Model.csdl.EntityTypeFields.Designer.cs">
+      <DependentUpon>Model.csdl.EntityTypeFields.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Templates\EfModel\Model.msl.cs">
+      <DependentUpon>Model.msl.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\EfModel\Model.msl.Designer.cs">
+      <DependentUpon>Model.msl.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Templates\EfModel\Model.msl.EntityTypeMapping.cs">
+      <DependentUpon>Model.msl.EntityTypeMapping.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\EfModel\Model.msl.EntityTypeMapping.Designer.cs">
+      <DependentUpon>Model.msl.EntityTypeMapping.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Templates\EfModel\Model.ssdl.cs">
+      <DependentUpon>Model.ssdl.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\EfModel\Model.ssdl.Designer.cs">
+      <DependentUpon>Model.ssdl.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Templates\EfModel\Model.ssdl.EntityTypeColumns.cs">
+      <DependentUpon>Model.ssdl.EntityTypeColumns.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\EfModel\Model.ssdl.EntityTypeColumns.Designer.cs">
+      <DependentUpon>Model.ssdl.EntityTypeColumns.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Templates\EfModel\Model.ssdl.EntityTypeColumnsRel.cs">
+      <DependentUpon>Model.ssdl.EntityTypeColumnsRel.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\EfModel\Model.ssdl.EntityTypeColumnsRel.Designer.cs">
+      <DependentUpon>Model.ssdl.EntityTypeColumnsRel.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Templates\InheritanceStorageAssociationInfo.cs" />
+    <Compile Include="Templates\ObjectClasses\AssociationSetAttributes.Designer.cs">
+      <DependentUpon>AssociationSetAttributes.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Templates\Properties\CollectionEntryListProperty.cs">
+      <DependentUpon>CollectionEntryListProperty.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Properties\CollectionEntryListProperty.Designer.cs">
+      <DependentUpon>CollectionEntryListProperty.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Templates\Serialization\CollectionSerialization.cs" />
+    <Compile Include="Templates\Properties\EfListWrapper.cs">
+      <DependentUpon>EfListWrapper.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Properties\EfListWrapper.Designer.cs">
+      <DependentUpon>EfListWrapper.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Templates\Properties\EnumerationPropertyTemplate.cs">
+      <DependentUpon>EnumerationPropertyTemplate.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Properties\EnumerationPropertyTemplate.Designer.cs">
+      <DependentUpon>EnumerationPropertyTemplate.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Templates\Properties\IdProperty.cs" />
+    <Compile Include="Templates\Properties\ListProperty.cs" />
+    <Compile Include="Templates\Properties\NotifyingDataProperty.cs" />
+    <Compile Include="Templates\Properties\NotifyingValueProperty.cs" />
+    <Compile Include="Templates\Properties\ObjectListProperty.Designer.cs">
+      <DependentUpon>ObjectListProperty.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Templates\Properties\ObjectReferencePropertyTemplate.cs">
+      <DependentUpon>ObjectReferencePropertyTemplate.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Properties\ObjectReferencePropertyTemplate.Designer.cs">
+      <DependentUpon>ObjectReferencePropertyTemplate.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Templates\ObjectClasses\SecurityRulesClass.cs">
+      <DependentUpon>SecurityRulesClass.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\ObjectClasses\SecurityRulesClass.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SecurityRulesClass.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Properties\SecurityRulesProperties.cs">
+      <DependentUpon>SecurityRulesProperties.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Properties\SecurityRulesProperties.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SecurityRulesProperties.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Properties\CompoundObjectPropertyTemplate.cs">
+      <DependentUpon>CompoundObjectPropertyTemplate.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Properties\CompoundObjectPropertyTemplate.Designer.cs">
+      <DependentUpon>CompoundObjectPropertyTemplate.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Templates\ObjectClasses\Template.cs" />
+    <Compile Include="Templates\Properties\ValueCollectionProperty.cs">
+      <DependentUpon>ValueCollectionProperty.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Properties\ValueCollectionProperty.Designer.cs">
+      <DependentUpon>ValueCollectionProperty.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Templates\ProjectFile.cs" />
+    <Compile Include="Templates\RelationDebugTemplate.cs">
+      <DependentUpon>RelationDebugTemplate.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\RelationDebugTemplate.Designer.cs">
+      <DependentUpon>RelationDebugTemplate.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Templates\RelationExtensions.cs" />
+    <Compile Include="Templates\CompoundObject\Template.cs" />
+    <Compile Include="Templates\EfModel\ModelMslEntityTypeMapping.ComplexProperty.cs" />
+    <Compile Include="Templates\EfModel\ModelMslEntityTypeMapping.ScalarProperty.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="EfGeneratorStructure.cd" />
+    <None Include="Templates\EfModel\Model.csdl.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>Model.csdl.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\EfModel\Model.csdl.EntityTypeFields.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>Model.csdl.EntityTypeFields.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\EfModel\Model.msl.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>Model.msl.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\EfModel\Model.msl.EntityTypeMapping.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>Model.msl.EntityTypeMapping.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\EfModel\Model.ssdl.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>Model.ssdl.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\EfModel\Model.ssdl.EntityTypeColumns.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>Model.ssdl.EntityTypeColumns.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\EfModel\Model.ssdl.EntityTypeColumnsRel.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>Model.ssdl.EntityTypeColumnsRel.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\ObjectClasses\AssociationSetAttributes.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>AssociationSetAttributes.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\Properties\CollectionEntryListProperty.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>CollectionEntryListProperty.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\Properties\EfListWrapper.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>EfListWrapper.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\Properties\EnumerationPropertyTemplate.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>EnumerationPropertyTemplate.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\Properties\ObjectListProperty.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>ObjectListProperty.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\Properties\ObjectReferencePropertyTemplate.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>ObjectReferencePropertyTemplate.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\ObjectClasses\SecurityRulesClass.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>SecurityRulesClass.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\Properties\SecurityRulesProperties.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>SecurityRulesProperties.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\Properties\CompoundObjectPropertyTemplate.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>CompoundObjectPropertyTemplate.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\Properties\ValueCollectionProperty.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>ValueCollectionProperty.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\RelationDebugTemplate.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>RelationDebugTemplate.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Kistl.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="README.txt" />
+    <Content Include="Templates\README 1-N.txt" />
+    <Content Include="Templates\README N-M.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Kistl.API.Server\Kistl.API.Server.csproj">
+      <Project>{08902397-B9CA-43DA-8C8D-27DCEC097611}</Project>
+      <Name>Kistl.API.Server</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kistl.API\Kistl.API.csproj">
+      <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
+      <Name>Kistl.API</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kistl.Generator\Kistl.Generator.csproj">
+      <Project>{4992171F-DA41-401C-8869-63594ACF2D93}</Project>
+      <Name>Kistl.Generator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kistl.Objects\Kistl.Objects.csproj">
+      <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
+      <Name>Kistl.Objects</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\TempAppHelpers\TempAppHelpers.csproj">
+      <Project>{9677AE11-CB92-4F0A-A248-87A21586F0DA}</Project>
+      <Name>TempAppHelpers</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

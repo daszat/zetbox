@@ -8,9 +8,9 @@ using NUnit.Framework;
 
 namespace Kistl.DalProvider.Client.Tests
 {
-    // TODO: cannot reference Kistl.Objects.Client, but must!
+    // TODO: cannot reference Kistl.Objects.ClientImpl, but must!
     //[TestFixture]
-    //public class BaseClientCollectionEntryTests : CollectionEntryTests<TestCustomObject_PhoneNumbersOther_CollectionEntry__Implementation__>
+    //public class BaseClientCollectionEntryTests : CollectionEntryTests<TestCustomObject_PhoneNumbersOther_CollectionEntryImpl>
     //{
     //}
 }

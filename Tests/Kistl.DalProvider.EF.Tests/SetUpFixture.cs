@@ -1,5 +1,5 @@
 
-namespace Kistl.DalProvider.EF.Tests
+namespace Kistl.DalProvider.Ef.Tests
 {
     using System;
     using System.Collections.Generic;
@@ -10,7 +10,7 @@ namespace Kistl.DalProvider.EF.Tests
     using Kistl.API.Configuration;
     using Kistl.App.Base;
     using Kistl.App.Projekte;
-    using Kistl.DalProvider.EF.Mocks;
+    using Kistl.DalProvider.Ef.Mocks;
     using Kistl.Server;
 
     using NUnit.Framework;
@@ -26,9 +26,9 @@ namespace Kistl.DalProvider.EF.Tests
             builder.RegisterModule(new Kistl.API.ApiModule());
             builder.RegisterModule(new Kistl.API.Server.ServerApiModule());
             builder.RegisterModule(new Kistl.Server.ServerModule());
-            builder.RegisterModule(new Kistl.DalProvider.EF.EfProvider());
+            builder.RegisterModule(new Kistl.DalProvider.Ef.EfProvider());
             builder.RegisterModule(new Kistl.DalProvider.Memory.MemoryProvider());
-            builder.RegisterModule(new Kistl.Objects.EFModule());
+            builder.RegisterModule(new Kistl.Objects.EfModule());
             builder.RegisterModule(new Kistl.Objects.MemoryModule());
         }
 
@@ -37,17 +37,17 @@ namespace Kistl.DalProvider.EF.Tests
             base.SetUp(container);
             ResetDatabase(container.Resolve<KistlConfig>());
 
-            Property__Implementation__.OnToString_Property
+            PropertyEfImpl.OnToString_Property
                 += (obj, args) => { args.Result = String.Format("Prop, [{0}]", obj.Description); };
-            Mitarbeiter__Implementation__.OnToString_Mitarbeiter
+            MitarbeiterEfImpl.OnToString_Mitarbeiter
                 += (obj, args) => { args.Result = String.Format("MA, [{0}]", obj.Name); };
-            Projekt__Implementation__.OnToString_Projekt
+            ProjektEfImpl.OnToString_Projekt
                 += (obj, args) => { args.Result = String.Format("Proj, [{0}]", obj.Name); };
         }
 
         protected override string GetConfigFile()
         {
-            return "Kistl.DalProvider.EF.Tests.Config.xml";
+            return "Kistl.DalProvider.Ef.Tests.Config.xml";
         }
 
         protected override HostType GetHostType()

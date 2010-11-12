@@ -16,9 +16,9 @@
 //    [TestFixture(10)]
 //    [TestFixture(50)]
 //    public class NMRelationBSideTests
-//        : BasicListTests<ClientRelationBSideListWrapper<Projekt, Mitarbeiter, Projekt_haben_Mitarbeiter_RelationEntry__Implementation__>, Mitarbeiter>
+//        : BasicListTests<ClientRelationBSideListWrapper<Projekt, Mitarbeiter, Projekt_haben_Mitarbeiter_RelationEntryImpl>, Mitarbeiter>
 //    {
-//        private Projekt__Implementation__ parent;
+//        private ProjektImpl parent;
 
 //        public NMRelationBSideTests(int items)
 //            : base(items) { }
@@ -31,15 +31,15 @@
 //            return result;
 //        }
 
-//        protected override ClientRelationBSideListWrapper<Projekt, Mitarbeiter, Projekt_haben_Mitarbeiter_RelationEntry__Implementation__> CreateCollection(List<Mitarbeiter> items)
+//        protected override ClientRelationBSideListWrapper<Projekt, Mitarbeiter, Projekt_haben_Mitarbeiter_RelationEntryImpl> CreateCollection(List<Mitarbeiter> items)
 //        {
-//            parent = (Projekt__Implementation__)ctx.Create<Projekt>();
+//            parent = (ProjektImpl)ctx.Create<Projekt>();
 //            parent.Name = "proj#" + parent.ID;
 //            foreach (var item in items)
 //            {
 //                parent.Mitarbeiter.Add(item);
 //            }
-//            return (ClientRelationBSideListWrapper<Projekt, Mitarbeiter, Projekt_haben_Mitarbeiter_RelationEntry__Implementation__>)parent.Mitarbeiter;
+//            return (ClientRelationBSideListWrapper<Projekt, Mitarbeiter, Projekt_haben_Mitarbeiter_RelationEntryImpl>)parent.Mitarbeiter;
 //        }
 //    }
 
@@ -49,9 +49,9 @@
 //    //[TestFixture(10)]
 //    //[TestFixture(50)]
 //    //public class NMRelationASideTests
-//    //    : BasicListTests<ClientRelationASideListWrapper<Projekt, Mitarbeiter, Projekt_haben_Mitarbeiter_RelationEntry__Implementation__>, Mitarbeiter>
+//    //    : BasicListTests<ClientRelationASideListWrapper<Projekt, Mitarbeiter, Projekt_haben_Mitarbeiter_RelationEntryImpl>, Mitarbeiter>
 //    //{
-//    //    private Projekt__Implementation__ parent;
+//    //    private ProjektImpl parent;
 
 //    //    public NMRelationASideTests(int items)
 //    //        : base(items) { }
@@ -64,15 +64,15 @@
 //    //        return result;
 //    //    }
 
-//    //    protected override ClientRelationASideListWrapper<Projekt, Mitarbeiter, Projekt_haben_Mitarbeiter_RelationEntry__Implementation__> CreateCollection(List<Mitarbeiter> items)
+//    //    protected override ClientRelationASideListWrapper<Projekt, Mitarbeiter, Projekt_haben_Mitarbeiter_RelationEntryImpl> CreateCollection(List<Mitarbeiter> items)
 //    //    {
-//    //        parent = (Projekt__Implementation__)ctx.Create<Projekt>();
+//    //        parent = (ProjektImpl)ctx.Create<Projekt>();
 //    //        parent.Name = "proj#" + parent.ID;
 //    //        foreach (var item in items)
 //    //        {
 //    //            parent.Mitarbeiter.Add(item);
 //    //        }
-//    //        return (ClientRelationASideListWrapper<Projekt, Mitarbeiter, Projekt_haben_Mitarbeiter_RelationEntry__Implementation__>)parent.Mitarbeiter;
+//    //        return (ClientRelationASideListWrapper<Projekt, Mitarbeiter, Projekt_haben_Mitarbeiter_RelationEntryImpl>)parent.Mitarbeiter;
 //    //    }
 //    //}
 //}

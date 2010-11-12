@@ -27,7 +27,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
         {
             this.prop = prop;
         }
-        
+
         protected override void ApplyRelationIdPropertyTemplate()
         {
         }
@@ -40,7 +40,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
 
         protected override string GetCeClassName()
         {
-            return prop.GetCollectionEntryClassName() + Kistl.API.Helper.ImplementationSuffix + Settings["extrasuffix"]; ;
+            return prop.GetCollectionEntryClassName() + ImplementationSuffix;
         }
 
         protected override string GetCeInterface()
@@ -74,7 +74,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.CollectionEntries
 
         protected override string[] GetIExportableInterfaces()
         {
-            return new string[] { "Kistl.API.IExportableCollectionEntryInternal" };
+            return new string[] { "Kistl.API.IExportableValueCollectionEntryInternal" };
         }
     }
 }

@@ -33,7 +33,7 @@ namespace Kistl.API.Tests
             System.Linq.Expressions.Expression<Func<int, int, bool>> largeSumTestExpression = (num1, num2) => (num1 + num2) > 1000;
             Func<int, int, bool> largeSumTest = largeSumTestExpression.Compile();
 
-            TestDataObject obj = new TestDataObject__Implementation__() { StringProperty = "test", TestField = "test2" };
+            TestDataObject obj = new TestDataObjectImpl() { StringProperty = "test", TestField = "test2" };
             TestObj obj2 = new TestObj() { TestField = "Test2" };
             TestQuery<TestDataObject> ctx = new TestQuery<TestDataObject>();
             var list = from o in ctx
@@ -62,13 +62,13 @@ namespace Kistl.API.Tests
                            TestObj = new { o.BoolProperty, o.ID },
                            Date = new DateTime(1000),
                            Test3 = obj.StringProperty,
-                           Test4 = new TestDataObject__Implementation__() { StringProperty = o.StringProperty, ID = MethodCallTest(o.IntProperty) },
+                           Test4 = new TestDataObjectImpl() { StringProperty = o.StringProperty, ID = MethodCallTest(o.IntProperty) },
                            Test5 = new List<TestDataObject> {
-                                new TestDataObject__Implementation__() { StringProperty = obj.StringProperty, ID = o.IntProperty }, 
-                                new TestDataObject__Implementation__() { StringProperty = o.StringProperty, ID = MethodCallTest(o.IntProperty) } 
+                                new TestDataObjectImpl() { StringProperty = obj.StringProperty, ID = o.IntProperty }, 
+                                new TestDataObjectImpl() { StringProperty = o.StringProperty, ID = MethodCallTest(o.IntProperty) } 
                            },
                            Test6 = MethodCallTest(2),
-                           Test7 = new List<TestDataObject>() { new TestDataObject__Implementation__(), obj }.Max(x => x.ID),
+                           Test7 = new List<TestDataObject>() { new TestDataObjectImpl(), obj }.Max(x => x.ID),
                        };
 
             // The TestProvider does not implement Projections

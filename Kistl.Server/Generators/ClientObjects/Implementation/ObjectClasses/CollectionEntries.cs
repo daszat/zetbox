@@ -13,12 +13,5 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
             : base(_host, ctx)
         {
         }
-
-        protected override IEnumerable<string> GetAdditionalImports()
-        {
-            return base.GetAdditionalImports().Concat(new string[]{
-                "Kistl.API.Client",
-            });
-        }
     }
 }

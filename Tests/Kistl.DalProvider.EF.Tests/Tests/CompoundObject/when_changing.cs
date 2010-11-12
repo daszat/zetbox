@@ -9,7 +9,7 @@ using Kistl.API.Server;
 using NUnit.Framework;
 using Kistl.App.Test;
 
-namespace Kistl.DalProvider.EF.Tests.CompoundObjects
+namespace Kistl.DalProvider.Ef.Tests.CompoundObjects
 {
     [TestFixture]
     public class when_changing

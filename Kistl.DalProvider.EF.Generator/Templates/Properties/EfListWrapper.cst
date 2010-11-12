@@ -1,0 +1,35 @@
+﻿<%@ CodeTemplate Language="C#" 
+    Name="Properties.EfListWrapper"
+    ClassName="Kistl.DalProvider.Ef.Generator.Templates.Properties.EfListWrapper" 
+    Inherits="Kistl.Generator.ResourceTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.Generator" %>
+<%@ Import Namespace="Kistl.Generator.Extensions" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="name" Type="String" %>
+<%@ Parameter Name="associationName" Type="String" %>
+<%@ Parameter Name="roleName" Type="String" %>
+<%@ Parameter Name="referencedCollectionEntry" Type="String" %>
+        // BEGIN <%= this.GetType() %>
+        [EdmRelationshipNavigationPropertyAttribute("Model", "<%= associationName %>", "<%= roleName %>")]
+        public EntityCollection<<%= referencedCollectionEntry %>> <%= name %>
+        {
+            get
+            {
+                EntityCollection<<%= referencedCollectionEntry %>> c
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<<%= referencedCollectionEntry %>>(
+                        "Model.<%= associationName %>",
+                        "<%= roleName %>");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !c.IsLoaded)
+                {
+                    c.Load();
+                    c.ForEach(i => i.AttachToContext(Context));
+                }
+                return c;
+            }
+        }
+        // END <%= this.GetType() %>

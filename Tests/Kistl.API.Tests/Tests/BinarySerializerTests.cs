@@ -627,7 +627,7 @@ namespace Kistl.API.Tests
 			private SerializableExpression CreateExpression()
 			{
                 // Cannot use another KistlObject because in this tests we do not do any type transformations
-				//TestDataObject obj = new TestDataObject__Implementation__();
+				//TestDataObject obj = new TestDataObjectImpl();
 				TestObj obj2 = new TestObj();
 				TestQuery<TestDataObject> ctx = new TestQuery<TestDataObject>();
 				var list = from o in ctx
@@ -760,26 +760,26 @@ namespace Kistl.API.Tests
 			public void ICompoundObject()
 			{
 				const string testString = "muh";
-				TestCompoundObject__Implementation__ toval = new TestCompoundObject__Implementation__() { TestProperty = testString };
+				TestCompoundObjectImpl toval = new TestCompoundObjectImpl() { TestProperty = testString };
 
 				BinarySerializer.ToStream(toval, sw);
 				ms.Seek(0, SeekOrigin.Begin);
 
-				TestCompoundObject__Implementation__ fromval;
-				BinarySerializer.FromStream<TestCompoundObject__Implementation__>(out fromval, sr);
+				TestCompoundObjectImpl fromval;
+				BinarySerializer.FromStream<TestCompoundObjectImpl>(out fromval, sr);
 				Assert.That(fromval.TestProperty, Is.EqualTo(fromval.TestProperty));
 			}
 
 			[Test]
 			public void ICompoundObjectNull()
 			{
-				TestCompoundObject__Implementation__ toval = null;
+				TestCompoundObjectImpl toval = null;
 
 				BinarySerializer.ToStream(toval, sw);
 				ms.Seek(0, SeekOrigin.Begin);
 
-				TestCompoundObject__Implementation__ fromval;
-				BinarySerializer.FromStream<TestCompoundObject__Implementation__>(out fromval, sr);
+				TestCompoundObjectImpl fromval;
+				BinarySerializer.FromStream<TestCompoundObjectImpl>(out fromval, sr);
 				Assert.That(fromval, Is.Null);
 			}
 
@@ -787,14 +787,14 @@ namespace Kistl.API.Tests
 			public void should_fail_on_writing_to_null_stream()
 			{
 				const string testString = "muh";
-				TestCompoundObject__Implementation__ value = new TestCompoundObject__Implementation__() { TestProperty = testString };
+				TestCompoundObjectImpl value = new TestCompoundObjectImpl() { TestProperty = testString };
 				Assert.That(() => BinarySerializer.ToStream(value, null), Throws.InstanceOf<ArgumentNullException>());
 			}
 
 			[Test]
 			public void should_fail_on_reading_from_null_stream()
 			{
-				TestCompoundObject__Implementation__ value;
+				TestCompoundObjectImpl value;
 				Assert.That(() => BinarySerializer.FromStream(out value, null), Throws.InstanceOf<ArgumentNullException>());
 			}
 		}

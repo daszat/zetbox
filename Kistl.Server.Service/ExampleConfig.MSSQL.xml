@@ -10,6 +10,10 @@
     <DatabaseProvider>Npgsql</DatabaseProvider>
     <ConnectionString>Server=localhost;Database=zbox;User Id=zbox;Password=b-cXqMyXEYea2kkjUhkS</ConnectionString>
     -->
+    <!--
+    <DatabaseProvider>Memory</DatabaseProvider>
+    <ConnectionString>P:\Kistl\Kistl.Server\Database\KistlBase.xml</ConnectionString>
+    -->
     <DocumentStore>DocumentStore\Server\</DocumentStore>
     <LogFilePath>bin\LogFiles</LogFilePath>
     <CodeGenWorkingPath>bin\CodeGenNext</CodeGenWorkingPath>
@@ -20,16 +24,21 @@
       <Module>Kistl.API.Server.ServerApiModule, Kistl.API.Server</Module>
       <Module>Kistl.Server.ServerModule, Kistl.Server</Module>
       <Module>Kistl.Objects.InterfaceModule, Kistl.Objects</Module>
-      <Module>Kistl.Objects.EFModule, Kistl.Objects.Server</Module>
-      <Module>Kistl.Objects.MemoryModule, Kistl.Objects.Memory</Module>
-      <Module>Kistl.DalProvider.EF.EfProvider, Kistl.DalProvider.EF</Module>
+      <Module>Kistl.Objects.EfModule, Kistl.Objects.EfImpl</Module>
+      <Module>Kistl.Objects.MemoryModule, Kistl.Objects.MemoryImpl</Module>
+      <Module>Kistl.DalProvider.Ef.EfProvider, Kistl.DalProvider.Ef</Module>
       <Module>Kistl.DalProvider.Memory.MemoryProvider, Kistl.DalProvider.Memory</Module>
+      <!--
+      <Module>Kistl.DalProvider.Memory.MemoryDatabaseProvider, Kistl.DalProvider.Memory</Module>
+      -->
       <Module>Kistl.App.Projekte.Server.CustomServerActionsModule, Kistl.App.Projekte.Server</Module>
       <Module>Kistl.App.Projekte.Common.CustomCommonActionsModule, Kistl.App.Projekte.Common</Module>
 
       <!-- Development/Master Server modules -->
-      <Module>Kistl.DalProvider.EF.EfGeneratorProvider, Kistl.DalProvider.EF</Module>
+      <Module>Kistl.Generator.GeneratorModule, Kistl.Generator</Module>
+      <Module>Kistl.DalProvider.Client.Generator.ClientGeneratorProvider, Kistl.DalProvider.Client.Generator</Module>
       <Module>Kistl.DalProvider.Memory.Generator.MemoryGeneratorProvider, Kistl.DalProvider.Memory.Generator</Module>
+      <Module>Kistl.DalProvider.Ef.Generator.EfGeneratorProvider, Kistl.DalProvider.Ef.Generator</Module>
     </Modules>
   </Server>
   <SourceFileLocation>

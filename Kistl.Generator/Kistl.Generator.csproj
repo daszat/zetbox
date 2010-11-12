@@ -1,0 +1,609 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4992171F-DA41-401C-8869-63594ACF2D93}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Kistl.Generator</RootNamespace>
+    <AssemblyName>Kistl.Generator</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Kistl.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\bin\Debug\bin\Server\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\bin\Release\bin\Server\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=2.1.14.854, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\AutoFac 2.1\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Build.Engine" />
+    <Reference Include="Microsoft.Build.Framework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Arebis.CodeGeneration, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(AREBISROOT)\Arebis.CodeGeneration.dll</HintPath>
+    </Reference>
+    <Reference Include="Arebis.CodeGenerator, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(AREBISROOT)\Arebis.CodeGenerator.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseGenerator.cs" />
+    <Compile Include="AbstractBaseGenerator.cs" />
+    <Compile Include="Compiler.cs" />
+    <Compile Include="Construct.cs" />
+    <Compile Include="GenerationHost.cs" />
+    <Compile Include="GeneratorModule.cs" />
+    <Compile Include="InterfaceGenerator.cs" />
+    <Compile Include="InterfaceTemplates\CollectionEntries\CollectionEntries.Designer.cs">
+      <DependentUpon>CollectionEntries.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="InterfaceTemplates\CollectionEntries\ObjectCollectionEntry.cs" />
+    <Compile Include="InterfaceTemplates\CollectionEntries\Template.cs">
+      <DependentUpon>Template.cst</DependentUpon>
+    </Compile>
+    <Compile Include="InterfaceTemplates\CollectionEntries\Template.Designer.cs">
+      <DependentUpon>Template.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="InterfaceTemplates\CollectionEntries\ValueCollectionEntry.cs" />
+    <Compile Include="InterfaceTemplates\Enumerations\Template.cs">
+      <DependentUpon>Template.cst</DependentUpon>
+    </Compile>
+    <Compile Include="InterfaceTemplates\Enumerations\Template.Designer.cs">
+      <DependentUpon>Template.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="InterfaceTemplates\Properties\SimplePropertyListTemplate.cs">
+      <DependentUpon>SimplePropertyListTemplate.cst</DependentUpon>
+    </Compile>
+    <Compile Include="InterfaceTemplates\Properties\SimplePropertyListTemplate.Designer.cs">
+      <DependentUpon>SimplePropertyListTemplate.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="InterfaceTemplates\Properties\SimplePropertyTemplate.cs">
+      <DependentUpon>SimplePropertyTemplate.cst</DependentUpon>
+    </Compile>
+    <Compile Include="InterfaceTemplates\Properties\SimplePropertyTemplate.Designer.cs">
+      <DependentUpon>SimplePropertyTemplate.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Kistl.DalProvider.Base\IBaseActionsManager.cs" />
+    <Compile Include="Kistl.DalProvider.Base\IBaseImplementationTypeChecker.cs" />
+    <Compile Include="Kistl.DalProvider.Base\RelationEntryBaseImpl.cs" />
+    <Compile Include="Kistl.DalProvider.Base\PropertyDescriptorBaseImpl.cs" />
+    <Compile Include="Kistl.DalProvider.Base\DataObjectBaseImpl.cs" />
+    <Compile Include="Kistl.DalProvider.Base\ClientValueCollectionWrapper.cs" />
+    <Compile Include="Kistl.DalProvider.Base\CollectionWrapperImplementations.cs" />
+    <Compile Include="Extensions\ContextExtensions.cs" />
+    <Compile Include="Extensions\MethodExtensions.cs" />
+    <Compile Include="Extensions\MiscExtensions.cs" />
+    <Compile Include="Extensions\PropertyChecks.cs" />
+    <Compile Include="Extensions\Reflection.cs" />
+    <Compile Include="BaseGeneratorModule.cs" />
+    <Compile Include="Kistl.DalProvider.Base\CompoundObjectBaseImpl.cs" />
+    <Compile Include="Kistl.DalProvider.Base\PersistenceObjectBaseImpl.cs" />
+    <Compile Include="Kistl.DalProvider.Base\OneNRelationList.cs" />
+    <Compile Include="Kistl.DalProvider.Base\CompoundCollectionEntryBaseImpl.cs" />
+    <Compile Include="ResourceTemplate.cs" />
+    <Compile Include="TemplateExecutor.cs" />
+    <Compile Include="Templates\AssemblyInfoTemplate.cs">
+      <DependentUpon>AssemblyInfoTemplate.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\AssemblyInfoTemplate.Designer.cs">
+      <DependentUpon>AssemblyInfoTemplate.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Templates\CollectionEntries\RelationEntry.cs" />
+    <Compile Include="Templates\CollectionEntries\RelationEntry.Properties.cs" />
+    <Compile Include="Templates\CollectionEntries\CollectionEntryTemplate.cs">
+      <DependentUpon>CollectionEntryTemplate.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\CollectionEntries\CollectionEntryTemplate.Designer.cs">
+      <DependentUpon>CollectionEntryTemplate.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Templates\CollectionEntries\CollectionEntryTemplate.Properties.cs">
+      <DependentUpon>CollectionEntryTemplate.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\CollectionEntries\ValueCollectionEntry.cs" />
+    <Compile Include="Templates\CollectionEntries\ValueCollectionEntry.Properties.cs" />
+    <Compile Include="Templates\CollectionEntries\ValueCollectionEntryParentReference.cs">
+      <DependentUpon>ValueCollectionEntryParentReference.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\CollectionEntries\ValueCollectionEntryParentReference.Designer.cs">
+      <DependentUpon>ValueCollectionEntryParentReference.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Kistl.DalProvider.Base\CollectionEntryBaseImpl.cs" />
+    <Compile Include="Templates\CompoundObjects\Template.cs" />
+    <Compile Include="InterfaceTemplates\AssemblyInfoTemplate.cs" />
+    <Compile Include="InterfaceTemplates\Module.Designer.cs">
+      <DependentUpon>Module.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="InterfaceTemplates\ProjectFile.cs" />
+    <Compile Include="InterfaceTemplates\Interfaces\Template.cs">
+      <DependentUpon>Template.cst</DependentUpon>
+    </Compile>
+    <Compile Include="InterfaceTemplates\Interfaces\Template.Designer.cs">
+      <DependentUpon>Template.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Templates\Module.cs">
+      <DependentUpon>Module.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Module.Designer.cs">
+      <DependentUpon>Module.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Templates\ObjectClasses\AttachToContextTemplate.cs">
+      <DependentUpon>AttachToContextTemplate.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\ObjectClasses\AttachToContextTemplate.Designer.cs">
+      <DependentUpon>AttachToContextTemplate.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Templates\ObjectClasses\CollectionEntries.cs">
+      <DependentUpon>CollectionEntries.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\ObjectClasses\CollectionEntries.Designer.cs">
+      <DependentUpon>CollectionEntries.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Templates\ObjectClasses\CollectionSerialization.cs" />
+    <Compile Include="Templates\ObjectClasses\CustomTypeDescriptor.cs">
+      <DependentUpon>CustomTypeDescriptor.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\ObjectClasses\CustomTypeDescriptor.Designer.cs">
+      <DependentUpon>CustomTypeDescriptor.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Templates\ObjectClasses\DefaultMethods.cs">
+      <DependentUpon>DefaultMethods.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\ObjectClasses\DefaultMethods.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DefaultMethods.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\ObjectClasses\Method.cs">
+      <DependentUpon>Method.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\ObjectClasses\Method.Designer.cs">
+      <DependentUpon>Method.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Templates\ObjectClasses\ReloadOneReference.cs">
+      <DependentUpon>ReloadOneReference.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\ObjectClasses\ReloadOneReference.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReloadOneReference.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\ObjectClasses\ReloadReferences.cs">
+      <DependentUpon>ReloadReferences.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\ObjectClasses\ReloadReferences.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReloadReferences.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Properties\CalculatedProperty.cs">
+      <DependentUpon>CalculatedProperty.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Properties\CalculatedProperty.Designer.cs">
+      <DependentUpon>CalculatedProperty.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Templates\Properties\CollectionEntryListProperty.cs">
+      <DependentUpon>CollectionEntryListProperty.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Properties\CollectionEntryListProperty.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CollectionEntryListProperty.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Properties\CompoundObjectPropertyTemplate.cs">
+      <DependentUpon>CompoundObjectPropertyTemplate.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Properties\CompoundObjectPropertyTemplate.Designer.cs">
+      <DependentUpon>CompoundObjectPropertyTemplate.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Templates\Properties\DelegatingProperty.cs">
+      <DependentUpon>DelegatingProperty.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Properties\DelegatingProperty.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DelegatingProperty.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Properties\ExportGuidProperty.cs" />
+    <Compile Include="Templates\Properties\IdProperty.cs" />
+    <Compile Include="Templates\Properties\ListProperty.cs">
+      <DependentUpon>ListProperty.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Properties\ListProperty.Designer.cs">
+      <DependentUpon>ListProperty.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Templates\Properties\NotifyingDataProperty.cs" />
+    <Compile Include="Templates\Properties\NotifyingValueProperty.cs">
+      <DependentUpon>NotifyingValueProperty.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Properties\NotifyingValueProperty.Designer.cs">
+      <DependentUpon>NotifyingValueProperty.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Templates\Properties\ObjectListProperty.cs">
+      <DependentUpon>ObjectListProperty.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Properties\ObjectListProperty.Designer.cs">
+      <DependentUpon>ObjectListProperty.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Templates\Properties\ObjectReferencePropertyTemplate.cs">
+      <DependentUpon>ObjectReferencePropertyTemplate.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Properties\ObjectReferencePropertyTemplate.Designer.cs">
+      <DependentUpon>ObjectReferencePropertyTemplate.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Templates\ObjectClasses\Template.cs" />
+    <Compile Include="Templates\ObjectClasses\UpdateParentTemplate.cs">
+      <DependentUpon>UpdateParentTemplate.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\ObjectClasses\UpdateParentTemplate.Designer.cs">
+      <DependentUpon>UpdateParentTemplate.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Templates\Properties\PropertyEvents.cs">
+      <DependentUpon>PropertyEvents.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Properties\PropertyEvents.Designer.cs">
+      <DependentUpon>PropertyEvents.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Templates\Properties\ValueCollectionProperty.cs">
+      <DependentUpon>ValueCollectionProperty.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Properties\ValueCollectionProperty.Designer.cs">
+      <DependentUpon>ValueCollectionProperty.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Templates\ProjectFile.cs">
+      <DependentUpon>ProjectFile.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\ProjectFile.Designer.cs">
+      <DependentUpon>ProjectFile.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Templates\Serialization\CollectionSerialization.cs" />
+    <Compile Include="Templates\Serialization\CollectionSerialization.Designer.cs">
+      <DependentUpon>CollectionSerialization.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Templates\Serialization\CompoundObjectSerialization.Designer.cs">
+      <DependentUpon>CompoundObjectSerialization.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Templates\Serialization\EagerLoadingSerialization.Designer.cs">
+      <DependentUpon>EagerLoadingSerialization.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Templates\Serialization\EagerObjectLoadingSerialization.Designer.cs">
+      <DependentUpon>EagerObjectLoadingSerialization.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Templates\Serialization\EnumBinarySerialization.Designer.cs">
+      <DependentUpon>EnumBinarySerialization.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Templates\Serialization\NotifyingDataPropertySerialization.Designer.cs">
+      <DependentUpon>NotifyingDataPropertySerialization.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Templates\Serialization\NotifyingDataPropertyWithDefaultSerialization.Designer.cs">
+      <DependentUpon>NotifyingDataPropertyWithDefaultSerialization.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Templates\Serialization\ObjectReferencePropertySerialization.Designer.cs">
+      <DependentUpon>ObjectReferencePropertySerialization.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Templates\Serialization\SerializationMember.cs" />
+    <Compile Include="Templates\Serialization\SerializationMembersList.cs" />
+    <Compile Include="Templates\Serialization\SerializerDirection.cs" />
+    <Compile Include="Templates\Serialization\SerializerTemplate.cs">
+      <DependentUpon>SerializerTemplate.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Serialization\SerializerTemplate.Designer.cs">
+      <DependentUpon>SerializerTemplate.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Templates\Serialization\SimpleFieldSerialization.Designer.cs">
+      <DependentUpon>SimpleFieldSerialization.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Templates\TypeBase.cs">
+      <DependentUpon>TypeBase.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\TypeBase.Designer.cs">
+      <DependentUpon>TypeBase.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Templates\TypeBase.Properties.cs">
+      <DependentUpon>TypeBase.cst</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Kistl.Objects.snk" />
+    <None Include="Kistl.snk" />
+    <None Include="InterfaceTemplates\CollectionEntries\CollectionEntries.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>CollectionEntries.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="InterfaceTemplates\CollectionEntries\Template.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>Template.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="InterfaceTemplates\Enumerations\Template.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>Template.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="InterfaceTemplates\Properties\SimplePropertyListTemplate.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>SimplePropertyListTemplate.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="InterfaceTemplates\Properties\SimplePropertyTemplate.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>SimplePropertyTemplate.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\AssemblyInfoTemplate.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>AssemblyInfoTemplate.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\CollectionEntries\CollectionEntryTemplate.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>CollectionEntryTemplate.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\CollectionEntries\ValueCollectionEntryParentReference.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>ValueCollectionEntryParentReference.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="InterfaceTemplates\Module.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>Module.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="InterfaceTemplates\Interfaces\Template.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>Template.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\Module.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>Module.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\ObjectClasses\AttachToContextTemplate.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>AttachToContextTemplate.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\ObjectClasses\CollectionEntries.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>CollectionEntries.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\ObjectClasses\CustomTypeDescriptor.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>CustomTypeDescriptor.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\ObjectClasses\Method.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>Method.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\ObjectClasses\ReloadOneReference.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>ReloadOneReference.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\ObjectClasses\ReloadReferences.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>ReloadReferences.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\Properties\CalculatedProperty.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>CalculatedProperty.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\Properties\CollectionEntryListProperty.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>CollectionEntryListProperty.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\Properties\CompoundObjectPropertyTemplate.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>CompoundObjectPropertyTemplate.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\Properties\ListProperty.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>ListProperty.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\Properties\NotifyingValueProperty.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>NotifyingValueProperty.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\Properties\ObjectListProperty.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>ObjectListProperty.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\Properties\ObjectReferencePropertyTemplate.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>ObjectReferencePropertyTemplate.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\ObjectClasses\UpdateParentTemplate.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>UpdateParentTemplate.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\Properties\PropertyEvents.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>PropertyEvents.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\Properties\ValueCollectionProperty.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>ValueCollectionProperty.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\ProjectFile.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>ProjectFile.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\Serialization\CollectionSerialization.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>CollectionSerialization.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\Serialization\CompoundObjectSerialization.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>CompoundObjectSerialization.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\Serialization\EagerLoadingSerialization.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>EagerLoadingSerialization.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\Serialization\EagerObjectLoadingSerialization.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>EagerObjectLoadingSerialization.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\Serialization\EnumBinarySerialization.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>EnumBinarySerialization.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\Serialization\NotifyingDataPropertySerialization.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>NotifyingDataPropertySerialization.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\Serialization\NotifyingDataPropertyWithDefaultSerialization.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>NotifyingDataPropertyWithDefaultSerialization.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\Serialization\ObjectReferencePropertySerialization.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>ObjectReferencePropertySerialization.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\Serialization\SerializerTemplate.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>SerializerTemplate.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\Serialization\SimpleFieldSerialization.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>SimpleFieldSerialization.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\TypeBase.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>TypeBase.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Kistl.API.Server\Kistl.API.Server.csproj">
+      <Project>{08902397-B9CA-43DA-8C8D-27DCEC097611}</Project>
+      <Name>Kistl.API.Server</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kistl.API\Kistl.API.csproj">
+      <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
+      <Name>Kistl.API</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kistl.Objects\Kistl.Objects.csproj">
+      <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
+      <Name>Kistl.Objects</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\TempAppHelpers\TempAppHelpers.csproj">
+      <Project>{9677AE11-CB92-4F0A-A248-87A21586F0DA}</Project>
+      <Name>TempAppHelpers</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Templates\Properties\DelegatingProperty.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>DelegatingProperty.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Templates\ObjectClasses\DefaultMethods.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>DefaultMethods.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

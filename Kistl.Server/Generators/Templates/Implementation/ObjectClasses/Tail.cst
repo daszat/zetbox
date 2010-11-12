@@ -63,5 +63,5 @@
         public static event ObjectEventHandler<<%= cls.Name %>> OnDeleting_<%= cls.Name %>;
 
 <%
-	Implementation.ObjectClasses.CustomTypeDescriptor.Call(Host, ctx, cls, implName);
+	Implementation.ObjectClasses.CustomTypeDescriptor.Call(Host, ctx, cls, "PropertyDescriptor" + ImplementationSuffix, implName);
 %>

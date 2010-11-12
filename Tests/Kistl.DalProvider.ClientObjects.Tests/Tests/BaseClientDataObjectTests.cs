@@ -13,7 +13,7 @@ namespace Kistl.DalProvider.Client.Tests
     [TestFixture]
     public class BaseClientDataObjectTests : Kistl.API.AbstractConsumerTests.AbstractTestFixture
     {
-        private BaseClientDataObjectMock__Implementation__ obj;
+        private BaseClientDataObjectMockImpl obj;
         private bool PropertyChangedCalled = false;
 
         public override void SetUp()
@@ -22,7 +22,7 @@ namespace Kistl.DalProvider.Client.Tests
 
             PropertyChangedCalled = false;
 
-            obj = new BaseClientDataObjectMock__Implementation__(null);
+            obj = new BaseClientDataObjectMockImpl(null);
             obj.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(obj_PropertyChanged);
         }
 
@@ -78,7 +78,7 @@ namespace Kistl.DalProvider.Client.Tests
         [Test]
         public void ApplyChanges()
         {
-            BaseClientDataObjectMock__Implementation__ result = new BaseClientDataObjectMock__Implementation__(null);
+            BaseClientDataObjectMockImpl result = new BaseClientDataObjectMockImpl(null);
 
             obj.SetPrivatePropertyValue<int>("ID", 10);
 
@@ -91,7 +91,7 @@ namespace Kistl.DalProvider.Client.Tests
         [ExpectedException(typeof(ArgumentNullException))]
         public void ApplyChanges_Null()
         {
-            BaseClientDataObjectMock__Implementation__ result = null;
+            BaseClientDataObjectMockImpl result = null;
             obj.ApplyChangesFrom(result);
         }
 
@@ -122,7 +122,7 @@ namespace Kistl.DalProvider.Client.Tests
             SerializableType t;
             BinarySerializer.FromStream(out t, sr);
 
-            BaseClientDataObjectMock__Implementation__ result = new BaseClientDataObjectMock__Implementation__(null);
+            BaseClientDataObjectMockImpl result = new BaseClientDataObjectMockImpl(null);
             result.FromStream(sr);
 
             Assert.That(result.GetType(), Is.EqualTo(obj.GetType()));
@@ -136,7 +136,7 @@ namespace Kistl.DalProvider.Client.Tests
         {
             using (IKistlContext ctx = GetContext())
             {
-                BaseClientDataObjectMock__Implementation__ result = new BaseClientDataObjectMock__Implementation__(null);
+                BaseClientDataObjectMockImpl result = new BaseClientDataObjectMockImpl(null);
                 result.FromStream((BinaryReader)null);
             }
         }

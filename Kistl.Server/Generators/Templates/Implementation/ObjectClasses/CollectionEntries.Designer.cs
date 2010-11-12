@@ -38,7 +38,7 @@ this.WriteObjects("using System.Linq;\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("using Kistl.API;\r\n");
 #line 26 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CollectionEntries.cst"
-foreach(string ns in GetAdditionalImports())
+foreach(string ns in GetAdditionalImports().Distinct().OrderBy(s => s))
     {
 
 #line 29 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CollectionEntries.cst"

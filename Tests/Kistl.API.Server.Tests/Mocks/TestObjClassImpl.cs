@@ -10,14 +10,14 @@ using Kistl.API.Mocks;
 namespace Kistl.API.Server.Mocks
 {
 
-    public class TestObjClass__Implementation__ : BaseServerDataObject, TestObjClass
+    public class TestObjClassImpl : BaseServerDataObject, TestObjClass
     {
 
-        public TestObjClass__Implementation__()
+        public TestObjClassImpl()
             : base(null)
         {
             SubClasses = new List<TestObjClass>();
-            TestNames__Implementation__ = new List<TestObjClass_TestNameCollectionEntry__Implementation__>();
+            TestNamesImpl = new List<TestObjClass_TestNameCollectionEntryImpl>();
             _TestNames = null;
         }
 
@@ -93,12 +93,12 @@ namespace Kistl.API.Server.Mocks
             {
                 if (_TestNames == null)
                 {
-                    _TestNames = new TestNameCollectionWrapper(this.Context, this, TestNames__Implementation__);
+                    _TestNames = new TestNameCollectionWrapper(this.Context, this, TestNamesImpl);
                 }
                 return _TestNames;
             }
         }
-        internal List<TestObjClass_TestNameCollectionEntry__Implementation__> TestNames__Implementation__ { get; private set; }
+        internal List<TestObjClass_TestNameCollectionEntryImpl> TestNamesImpl { get; private set; }
 
         public event ToStringHandler<TestObjClass> OnToString_TestObjClass;
 
@@ -164,7 +164,7 @@ namespace Kistl.API.Server.Mocks
 
             BinarySerializer.ToStream(this._StringProp, sw);
             BinarySerializer.ToStream((int)this.TestEnumProp, sw);
-            BinarySerializer.ToStreamCollectionEntries(this.TestNames__Implementation__, sw);
+            BinarySerializer.ToStreamCollectionEntries(this.TestNamesImpl, sw);
         }
 
         public override void FromStream(System.IO.BinaryReader sr)
@@ -183,7 +183,7 @@ namespace Kistl.API.Server.Mocks
 
             BinarySerializer.FromStream(out this._StringProp, sr);
             BinarySerializer.FromStreamConverter(value => this._TestEnumProp = (TestEnum)value, sr);
-            BinarySerializer.FromStreamCollectionEntries(this.TestNames__Implementation__, sr);
+            BinarySerializer.FromStreamCollectionEntries(this.TestNamesImpl, sr);
         }
 
         public delegate void TestMethod_Handler<T>(T obj, System.DateTime DateTimeParamForTestMethod);

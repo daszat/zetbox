@@ -19,9 +19,11 @@ namespace Kistl.Server.Generators
     using Microsoft.Build.BuildEngine;
     using Microsoft.Build.Framework;
 
+    //[Obsolete("Moved to Kistl.Generator")]
     public class Generator
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Generator");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Generator");
+
         private readonly ILifetimeScope _container;
         private readonly IEnumerable<BaseDataObjectGenerator> _generatorProviders;
         private readonly KistlConfig _config;
@@ -95,6 +97,7 @@ namespace Kistl.Server.Generators
         {
             Log.InfoFormat("Generating Code to [{0}]", workingPath);
             List<Exception> failed = new List<Exception>();
+            // TODO: use TaskExecutor to optimally use multicores
             var threads = new List<Thread>();
             foreach (var gen in _generatorProviders)
             {
@@ -255,29 +258,6 @@ namespace Kistl.Server.Generators
                     Log.InfoFormat("No old results found in [{0}]", outputPath);
                 }
             }
-        }
-
-        internal static TemplateGenerator GetTemplateGenerator(
-            string provider,
-            string providerTemplateNamespace,
-            string providerTemplateAssembly,
-            string template, string output, string targetdir, params object[] templateParameter)
-        {
-            var gen = new TemplateGenerator();
-
-            gen.Settings.Add("basetemplatepath", "Kistl.Server.Generators.Templates");
-            gen.Settings.Add("providertemplatenamespace", providerTemplateNamespace);
-            gen.Settings.Add("providertemplateassembly", providerTemplateAssembly);
-
-            gen.Settings.Add("template", template);
-
-            gen.Settings.Add("targetdir", targetdir);
-            gen.Settings.Add("output", output);
-            gen.Settings.Add("logfile", "TemplateCodegenLog.txt");
-
-            gen.TemplateParameters = templateParameter;
-
-            return gen;
         }
 
         #region GetLists

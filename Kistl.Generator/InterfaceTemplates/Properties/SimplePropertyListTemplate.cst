@@ -1,0 +1,14 @@
+﻿<%@ CodeTemplate Language="C#" 
+	Name="Properties.SimplePropertyListTemplate"
+	ClassName="Kistl.Generator.InterfaceTemplates.Properties.SimplePropertyListTemplate" 
+	Inherits="Kistl.Generator.ResourceTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.Generator" %>
+<%@ Import Namespace="Kistl.Generator.Extensions" %>
+
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="prop" Type="Property" %>
+        <%= GetPropertyTypeString() %> <%= GetPropertyName() %> { get; }

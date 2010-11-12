@@ -8,16 +8,16 @@ namespace Kistl.API.Server.Mocks
 {
 
     public class TestNameCollectionWrapper
-        : ValueCollectionWrapper<TestObjClass, string, TestObjClass_TestNameCollectionEntry__Implementation__, List<TestObjClass_TestNameCollectionEntry__Implementation__>>
+        : ValueCollectionWrapper<TestObjClass, string, TestObjClass_TestNameCollectionEntryImpl, List<TestObjClass_TestNameCollectionEntryImpl>>
     {
-        public TestNameCollectionWrapper(IKistlContext ctx, TestObjClass__Implementation__ parent, List<TestObjClass_TestNameCollectionEntry__Implementation__> baselist)
+        public TestNameCollectionWrapper(IKistlContext ctx, TestObjClassImpl parent, List<TestObjClass_TestNameCollectionEntryImpl> baselist)
             : base(ctx, parent, null, baselist)
         {
         }
 
-        protected override TestObjClass_TestNameCollectionEntry__Implementation__ CreateEntry()
+        protected override TestObjClass_TestNameCollectionEntryImpl CreateEntry()
         {
-            return new TestObjClass_TestNameCollectionEntry__Implementation__();
+            return new TestObjClass_TestNameCollectionEntryImpl();
         }
     }
 
@@ -26,10 +26,10 @@ namespace Kistl.API.Server.Mocks
     {
     }
 
-    public class TestObjClass_TestNameCollectionEntry__Implementation__
+    public class TestObjClass_TestNameCollectionEntryImpl
         : BaseServerCollectionEntry, TestObjClass_TestNameCollectionEntry
     {
-        public TestObjClass_TestNameCollectionEntry__Implementation__()
+        public TestObjClass_TestNameCollectionEntryImpl()
             : base(null)
         {
         }

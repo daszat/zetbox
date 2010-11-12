@@ -1,5 +1,5 @@
 
-namespace Kistl.DalProvider.EF
+namespace Kistl.DalProvider.Ef
 {
     using System;
     using System.Collections.Generic;
@@ -14,12 +14,12 @@ namespace Kistl.DalProvider.EF
     using Kistl.API.Server;
     using Kistl.API.Utils;
 
-    public interface IEFActionsManager : ICustomActionsManager { }
+    public interface IEfActionsManager : ICustomActionsManager { }
 
     public class EfProvider
         : Autofac.Module
     {
-        internal static readonly string ServerAssembly = "Kistl.Objects.Server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7b69192d05046fdf";
+        internal static readonly string ServerAssembly = "Kistl.Objects.EfImpl, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7b69192d05046fdf";
 
         private static readonly object _lock = new object();
 
@@ -29,7 +29,7 @@ namespace Kistl.DalProvider.EF
 
             var serverAssembly = Assembly.Load(ServerAssembly);
             if (serverAssembly == null)
-                throw new InvalidOperationException("Unable to load Kistl.Objects.Server Assembly, no Entity Framework Metadata will be loaded");
+                throw new InvalidOperationException("Unable to load Kistl.Objects.EfImpl Assembly, no Entity Framework Metadata will be loaded");
 
             // force-load a few assemblies to the reflection-only context so the DAL provider can find them
             // this uses the AssemblyLoader directly because Assembly.ReflectionOnlyLoad doesn't go through all 
@@ -39,7 +39,7 @@ namespace Kistl.DalProvider.EF
                 throw new InvalidOperationException("Unable to load Kistl.Objects Assembly for reflection, no Entity Framework Metadata will be loaded");
             var reflectedServerAssembly = AssemblyLoader.ReflectionOnlyLoadFrom(EfProvider.ServerAssembly);
             if (reflectedServerAssembly == null)
-                throw new InvalidOperationException("Unable to load Kistl.Objects.Server Assembly for reflection, no Entity Framework Metadata will be loaded");
+                throw new InvalidOperationException("Unable to load Kistl.Objects.EfImpl Assembly for reflection, no Entity Framework Metadata will be loaded");
 
             moduleBuilder
                 .Register(c =>
@@ -60,7 +60,7 @@ namespace Kistl.DalProvider.EF
                 .As<IKistlServerContext>()
                 .OnActivated(args =>                              
                 {
-                    var manager = args.Context.Resolve<IEFActionsManager>();
+                    var manager = args.Context.Resolve<IEfActionsManager>();
                     manager.Init(args.Context.Resolve<IFrozenContext>());
                 })
                 .InstancePerDependency();
@@ -85,7 +85,7 @@ namespace Kistl.DalProvider.EF
                 .As<IKistlContext>()
                 .OnActivated(args =>
                 {
-                    var manager = args.Context.Resolve<IEFActionsManager>();
+                    var manager = args.Context.Resolve<IEfActionsManager>();
                     manager.Init(args.Context.Resolve<IFrozenContext>());
                 })
                 .InstancePerDependency();
@@ -110,7 +110,7 @@ namespace Kistl.DalProvider.EF
                 .As<IReadOnlyKistlContext>()
                 .OnActivated(args =>
                 {
-                    var manager = args.Context.Resolve<IEFActionsManager>();
+                    var manager = args.Context.Resolve<IEfActionsManager>();
                     manager.Init(args.Context.Resolve<IFrozenContext>());
                 })
                 .SingleInstance();

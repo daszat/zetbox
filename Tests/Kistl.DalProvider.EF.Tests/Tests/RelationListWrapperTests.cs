@@ -1,5 +1,5 @@
 
-namespace Kistl.DalProvider.EF.Tests
+namespace Kistl.DalProvider.Ef.Tests
 {
     using System;
     using System.Collections.Generic;
@@ -20,11 +20,11 @@ namespace Kistl.DalProvider.EF.Tests
     [TestFixture(10)]
     [TestFixture(50)]
     public class RelationListWrapperTests
-        : BasicListTests<EntityRelationBSideListWrapper<Projekt, Mitarbeiter, Projekt_haben_Mitarbeiter_RelationEntry__Implementation__>, Mitarbeiter>
+        : BasicListTests<EntityRelationBSideListWrapper<Projekt, Mitarbeiter, Projekt_haben_Mitarbeiter_RelationEntryEfImpl>, Mitarbeiter>
     {
-        protected EntityCollection<Projekt_haben_Mitarbeiter_RelationEntry__Implementation__> wrappedCollection;
+        protected EntityCollection<Projekt_haben_Mitarbeiter_RelationEntryEfImpl> wrappedCollection;
 
-        private Projekt__Implementation__ parent;
+        private ProjektEfImpl parent;
 
         public RelationListWrapperTests(int items)
             : base(items) { }
@@ -41,16 +41,16 @@ namespace Kistl.DalProvider.EF.Tests
             return result;
         }
 
-        protected override EntityRelationBSideListWrapper<Projekt, Mitarbeiter, Projekt_haben_Mitarbeiter_RelationEntry__Implementation__> CreateCollection(List<Mitarbeiter> items)
+        protected override EntityRelationBSideListWrapper<Projekt, Mitarbeiter, Projekt_haben_Mitarbeiter_RelationEntryEfImpl> CreateCollection(List<Mitarbeiter> items)
         {
-            parent = (Projekt__Implementation__)ctx.Create<Projekt>();
+            parent = (ProjektEfImpl)ctx.Create<Projekt>();
             parent.Name = "proj#" + parent.ID;
-            wrappedCollection = parent.Mitarbeiter__Implementation__;
+            wrappedCollection = parent.MitarbeiterImpl;
             foreach (var item in items)
             {
                 parent.Mitarbeiter.Add(item);
             }
-            return (EntityRelationBSideListWrapper<Projekt, Mitarbeiter, Projekt_haben_Mitarbeiter_RelationEntry__Implementation__>)parent.Mitarbeiter;
+            return (EntityRelationBSideListWrapper<Projekt, Mitarbeiter, Projekt_haben_Mitarbeiter_RelationEntryEfImpl>)parent.Mitarbeiter;
         }
 
         protected override void AssertInvariants(List<Mitarbeiter> expectedItems)
@@ -59,12 +59,12 @@ namespace Kistl.DalProvider.EF.Tests
 
             Assert.That(wrappedCollection.Select(entry => entry.B).OrderBy(o => o.GetHashCode()), Is.EquivalentTo(expectedItems.OrderBy(o => o.GetHashCode())));
 
-            foreach (var expected in expectedItems.Cast<Mitarbeiter__Implementation__>())
+            foreach (var expected in expectedItems.Cast<MitarbeiterEfImpl>())
             {
                 Assert.That(expected.Projekte, Has.Member(parent));
             }
 
-            var removedItems = initialItems.Where(item => !expectedItems.Contains(item)).Cast<Mitarbeiter__Implementation__>();
+            var removedItems = initialItems.Where(item => !expectedItems.Contains(item)).Cast<MitarbeiterEfImpl>();
             foreach (var removed in removedItems)
             {
                 Assert.That(removed.Projekte, Has.No.Member(parent));

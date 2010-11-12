@@ -1,0 +1,21 @@
+﻿<%@ CodeTemplate Language="C#" 
+	Name="ObjectClasses.ObjectListProperty"
+	ClassName="Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.ObjectListProperty" 
+	Inherits="Kistl.Generator.ResourceTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.Generator" %>
+<%@ Import Namespace="Kistl.Generator.Extensions" %>
+<%@ Parameter Name="serializationList" Type="Kistl.Generator.Templates.Serialization.SerializationMembersList" %>
+<%@ Parameter Name="exposedListType" Type="string" %>
+<%@ Parameter Name="referencedInterface" Type="string" %>
+<%@ Parameter Name="name" Type="string" %>
+<%
+    AddSerialization(serializationList, name, false);
+%>
+        // <%= this.GetType() %>
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public <%= exposedListType %><<%= referencedInterface %>> <%= name %> { get; set; }

@@ -1,0 +1,69 @@
+﻿<%@ CodeTemplate Language="C#" 
+    Name="Serialization.NotifyingDataPropertyWithDefaultSerialization"
+    ClassName="Kistl.Generator.Templates.Serialization.NotifyingDataPropertyWithDefaultSerialization" 
+    Inherits="Kistl.Generator.ResourceTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.Generator" %>
+<%@ Import Namespace="Kistl.Generator.Extensions" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="direction" Type="SerializerDirection" %>
+<%@ Parameter Name="streamName" Type="string" %>
+<%@ Parameter Name="xmlnamespace" Type="string" %>
+<%@ Parameter Name="xmlname" Type="string" %>
+<%@ Parameter Name="backingStoreName" Type="string" %>
+<%@ Parameter Name="isSetFlagName" Type="string" %>
+<%
+    switch(direction)
+    {
+        case SerializerDirection.ToStream:
+%>
+            BinarySerializer.ToStream(this.<%= isSetFlagName %>, <%= streamName %>);
+            if (this.<%= isSetFlagName %>) {
+                BinarySerializer.ToStream(this.<%= backingStoreName %>, <%= streamName %>);
+            }
+<%
+            break;
+        case SerializerDirection.FromStream:
+%>
+            BinarySerializer.FromStream(out this.<%= isSetFlagName %>, <%= streamName %>);
+            if (this.<%= isSetFlagName %>) {
+                BinarySerializer.FromStream(out this.<%= backingStoreName %>, <%= streamName %>);
+            }
+<%
+            break;
+        case SerializerDirection.ToXmlStream:
+%>
+            XmlStreamer.ToStream(this.<%= isSetFlagName %>, <%= streamName %>, "Is<%= xmlname %>Set", "<%= xmlnamespace %>");
+            if (this.<%= isSetFlagName %>) {
+                XmlStreamer.ToStream(this.<%= backingStoreName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
+            }
+<%        
+            break;
+        case SerializerDirection.FromXmlStream:
+%>
+            XmlStreamer.FromStream(ref this.<%= isSetFlagName %>, <%= streamName %>, "Is<%= xmlname %>Set", "<%= xmlnamespace %>");
+            if (this.<%= isSetFlagName %>) {
+                XmlStreamer.FromStream(ref this.<%= backingStoreName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
+            }
+<%        
+            break;
+        case SerializerDirection.Export:
+%>    
+            System.Diagnostics.Debug.Assert(this.<%= isSetFlagName %>, "Exported objects need to have all default values evaluated");
+            if (modules.Contains("*") || modules.Contains("<%= xmlnamespace %>")) XmlStreamer.ToStream(this.<%= backingStoreName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
+<%            
+            break;
+        case SerializerDirection.MergeImport:
+%>
+            XmlStreamer.FromStream(ref this.<%= backingStoreName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
+            this.<%= isSetFlagName %> = true;
+<%            
+            break;
+        default:
+            throw new ArgumentOutOfRangeException("direction");
+    }
+%>

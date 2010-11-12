@@ -1,5 +1,5 @@
 
-namespace Kistl.DalProvider.EF
+namespace Kistl.DalProvider.Ef
 {
     using System;
     using System.Collections.Generic;
@@ -10,19 +10,20 @@ namespace Kistl.DalProvider.EF
     using Kistl.API.Utils;
     using Kistl.App.Base;
 
-    public interface IEFImplementationTypeChecker
+    public interface IEfImplementationTypeChecker
         : IImplementationTypeChecker
     {
     }
 
+    // TODO: move to generated assembly, optimize there
     public sealed class EfImplementationType
         : ImplementationType
     {
         public delegate EfImplementationType EfFactory(Type type);
 
-        private readonly IEFImplementationTypeChecker _typeChecker;
+        private readonly IEfImplementationTypeChecker _typeChecker;
 
-        public EfImplementationType(Type type, InterfaceType.Factory iftFactory, IEFImplementationTypeChecker typeChecker)
+        public EfImplementationType(Type type, InterfaceType.Factory iftFactory, IEfImplementationTypeChecker typeChecker)
             : base(type, iftFactory, typeChecker)
         {
             _typeChecker = typeChecker;
@@ -39,7 +40,7 @@ namespace Kistl.DalProvider.EF
             }
             else
             {
-                var parts = Type.FullName.Split(new string[] { Helper.ImplementationSuffix }, StringSplitOptions.RemoveEmptyEntries);
+                var parts = Type.FullName.Split(new string[] { "Ef" + Helper.ImplementationSuffix }, StringSplitOptions.RemoveEmptyEntries);
                 return IftFactory(Type.GetType(parts[0] + ", " + typeof(ObjectClass).Assembly.FullName, true));
             }
         }

@@ -5,7 +5,7 @@ using System.Text;
 using NUnit.Framework;
 using Kistl.API;
 
-namespace Kistl.DalProvider.EF.Tests.Blobs
+namespace Kistl.DalProvider.Ef.Tests.Blobs
 {
     [TestFixture]
     [Ignore("This test suite does not support custom actions")]

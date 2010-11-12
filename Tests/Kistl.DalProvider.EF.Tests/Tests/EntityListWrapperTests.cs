@@ -1,5 +1,5 @@
 
-namespace Kistl.DalProvider.EF.Tests
+namespace Kistl.DalProvider.Ef.Tests
 {
     using System;
     using System.Collections.Generic;
@@ -20,11 +20,11 @@ namespace Kistl.DalProvider.EF.Tests
     [TestFixture(10)]
     [TestFixture(50)]
     public class EntityListWrapperTests
-        : BasicListTests<EntityListWrapper<Property, Property__Implementation__>, Property>
+        : BasicListTests<EntityListWrapper<Property, PropertyEfImpl>, Property>
     {
-        protected EntityCollection<Property__Implementation__> wrappedList;
+        protected EntityCollection<PropertyEfImpl> wrappedList;
 
-        private ObjectClass__Implementation__ parent;
+        private ObjectClassEfImpl parent;
 
         public EntityListWrapperTests(int items)
             : base(items) { }
@@ -41,15 +41,15 @@ namespace Kistl.DalProvider.EF.Tests
             return result;
         }
 
-        protected override EntityListWrapper<Property, Property__Implementation__> CreateCollection(List<Property> items)
+        protected override EntityListWrapper<Property, PropertyEfImpl> CreateCollection(List<Property> items)
         {
-            parent = (ObjectClass__Implementation__)ctx.Create<ObjectClass>();
-            wrappedList = parent.Properties__Implementation__;
+            parent = (ObjectClassEfImpl)ctx.Create<ObjectClass>();
+            wrappedList = parent.PropertiesImpl;
             foreach (var item in items)
             {
                 parent.Properties.Add(item);
             }
-            return (EntityListWrapper<Property, Property__Implementation__>)parent.Properties;
+            return (EntityListWrapper<Property, PropertyEfImpl>)parent.Properties;
         }
 
         protected override void AssertInvariants(List<Property> expectedItems)
@@ -63,14 +63,14 @@ namespace Kistl.DalProvider.EF.Tests
             Assert.That(wrappedList.OrderBy(o => o.GetHashCode()), Is.EquivalentTo(expectedItems.OrderBy(o => o.GetHashCode())));
 
             // the parent pointer has to be set right
-            foreach (var expected in expectedItems.Cast<Property__Implementation__>())
+            foreach (var expected in expectedItems.Cast<PropertyEfImpl>())
             {
                 Assert.That(expected.ObjectClass, Is.EqualTo(parent));
                 Assert.That(expected.Properties_pos, Is.Not.Null);
             }
 
             // the removed objects' references must be nulled
-            var removedItems = initialItems.Where(item => !expectedItems.Contains(item)).Cast<Property__Implementation__>();
+            var removedItems = initialItems.Where(item => !expectedItems.Contains(item)).Cast<PropertyEfImpl>();
             foreach (var removed in removedItems)
             {
                 Assert.That(removed.ObjectClass, Is.Null);

@@ -305,13 +305,13 @@ namespace Kistl.API
         }
 
         public static void ExportCollectionEntries<T>(IEnumerable<T> val, XmlWriter xml, string name, string ns)
-            where T : IExportableCollectionEntryInternal
+            where T : IExportableValueCollectionEntryInternal
         {
             WriteCollectionEntries<T>(val, xml, name, ns, (obj, x) => obj.Export(x, new string[] { "*" }));
         }
 
         public static void MergeImportCollectionEntries<T>(ICollection<T> val, XmlReader xml, string name, string ns)
-            where T : IExportableCollectionEntryInternal, new()
+            where T : IExportableValueCollectionEntryInternal, new()
         {
             ReadCollectionEntries<T>(val, xml, name, ns, (obj, x) => obj.MergeImport(x));
         }

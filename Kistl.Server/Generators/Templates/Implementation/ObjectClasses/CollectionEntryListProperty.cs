@@ -58,10 +58,10 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
                     backingCollectionType = "ClientRelationBSideCollectionWrapper";
                 }
             }
-            
+
             string aSideType = rel.A.Type.GetDataTypeString();
             string bSideType = rel.B.Type.GetDataTypeString();
-            string entryType = rel.GetRelationClassName() + Kistl.API.Helper.ImplementationSuffix + host.Settings["extrasuffix"];
+            string entryType = rel.GetRelationClassName() + host.Settings["extrasuffix"] + Kistl.API.Helper.ImplementationSuffix;
             string providerCollectionType = (rel.NeedsPositionStorage(otherEnd.GetRole()) ? "IList<" : "ICollection<")
                 + entryType + ">";
 

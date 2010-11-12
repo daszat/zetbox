@@ -16,29 +16,29 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
 		protected Templates.Implementation.SerializationMembersList serializationList;
 		protected CompoundObjectProperty prop;
 		protected string propName;
-		protected string backingPropertyName;
 		protected string backingStoreName;
 		protected string coType;
-		protected string coImplementationType;
 
 
-        public CompoundObjectPropertyTemplate(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Implementation.SerializationMembersList serializationList, CompoundObjectProperty prop, string propName, string backingPropertyName, string backingStoreName, string coType, string coImplementationType)
+        public CompoundObjectPropertyTemplate(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Implementation.SerializationMembersList serializationList, CompoundObjectProperty prop, string propName, string backingStoreName, string coType)
             : base(_host)
         {
 			this.ctx = ctx;
 			this.serializationList = serializationList;
 			this.prop = prop;
 			this.propName = propName;
-			this.backingPropertyName = backingPropertyName;
 			this.backingStoreName = backingStoreName;
 			this.coType = coType;
-			this.coImplementationType = coImplementationType;
 
         }
         
         public override void Generate()
         {
-#line 20 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\CompoundObjectPropertyTemplate.cst"
+#line 19 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\CompoundObjectPropertyTemplate.cst"
+string backingPropertyName = propName + ImplementationPropertySuffix;
+	string coImplementationType = coType + ImplementationSuffix;
+
+#line 22 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\CompoundObjectPropertyTemplate.cst"
 this.WriteObjects("		// ",  this.GetType() , "\r\n");
 this.WriteObjects("        // implement the user-visible interface\r\n");
 this.WriteObjects("        public ",  coType , " ",  propName , "\r\n");
@@ -54,18 +54,18 @@ this.WriteObjects("        /// <summary>backing property for ",  propName , ", t
 this.WriteObjects("        private ",  coImplementationType , " ",  backingPropertyName , " {\r\n");
 this.WriteObjects("            get { return ",  backingStoreName , "; }\r\n");
 this.WriteObjects("            set {\r\n");
-#line 35 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\CompoundObjectPropertyTemplate.cst"
+#line 37 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\CompoundObjectPropertyTemplate.cst"
 if(!prop.IsNullable())
 				{
 
-#line 37 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\CompoundObjectPropertyTemplate.cst"
+#line 39 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\CompoundObjectPropertyTemplate.cst"
 this.WriteObjects("				            \r\n");
 this.WriteObjects("                if (value == null)\r\n");
 this.WriteObjects("					throw new ArgumentNullException(\"value\");\r\n");
-#line 41 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\CompoundObjectPropertyTemplate.cst"
+#line 43 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\CompoundObjectPropertyTemplate.cst"
 }                
 
-#line 43 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\CompoundObjectPropertyTemplate.cst"
+#line 45 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\CompoundObjectPropertyTemplate.cst"
 this.WriteObjects("                var __oldValue = ",  backingStoreName , ";\r\n");
 this.WriteObjects("                var __newValue = value;\r\n");
 this.WriteObjects("\r\n");
@@ -78,10 +78,10 @@ this.WriteObjects("\r\n");
 this.WriteObjects("                NotifyPropertyChanged(\"",  propName , "\", __oldValue, __newValue);\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("		}\r\n");
-#line 56 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\CompoundObjectPropertyTemplate.cst"
+#line 58 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\CompoundObjectPropertyTemplate.cst"
 AddSerialization(serializationList, propName, backingPropertyName);
 
-#line 57 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\CompoundObjectPropertyTemplate.cst"
+#line 59 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\CompoundObjectPropertyTemplate.cst"
 this.WriteObjects("  ");
 
         }

@@ -6,7 +6,7 @@ using System.Text;
 namespace Kistl.API
 {
     public abstract class BaseRelationshipFilterCollection<T> : ICollection<T>
-        where T : IRelationCollectionEntry
+        where T : IRelationEntry
     {
         protected IKistlContext ctx { get; private set; }
         protected IDataObject Parent { get; private set; }
@@ -79,7 +79,7 @@ namespace Kistl.API
     }
 
     public class RelationshipFilterASideCollection<T> : BaseRelationshipFilterCollection<T>
-        where T : IRelationCollectionEntry
+        where T : IRelationEntry
     {
         public RelationshipFilterASideCollection(IKistlContext ctx, IDataObject parent)
             : base(ctx, parent)
@@ -93,7 +93,7 @@ namespace Kistl.API
     }
 
     public class RelationshipFilterBSideCollection<T> : BaseRelationshipFilterCollection<T>
-        where T : IRelationCollectionEntry
+        where T : IRelationEntry
     {
         public RelationshipFilterBSideCollection(IKistlContext ctx, IDataObject parent)
             : base(ctx, parent)

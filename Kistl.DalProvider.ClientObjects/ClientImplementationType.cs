@@ -39,7 +39,7 @@ namespace Kistl.DalProvider.Client
             }
             else
             {
-                var ifTypeName = Type.FullName.Replace(Helper.ImplementationSuffix, String.Empty);
+                var ifTypeName = Type.FullName.Replace("Client" + Helper.ImplementationSuffix, String.Empty);
                 return IftFactory(Type.GetType(ifTypeName + ", " + typeof(ObjectClass).Assembly.FullName, true));
             }
         }

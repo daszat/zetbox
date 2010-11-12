@@ -56,7 +56,7 @@ foreach(var prop in cls.Properties.OfType<ObjectReferenceProperty>()
         RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
         
         string referencedInterface = otherEnd.Type.GetDataTypeString();
-        string referencedImplementation = otherEnd.Type.GetDataTypeString() + Kistl.API.Helper.ImplementationSuffix + Settings["extrasuffix"];
+        string referencedImplementation = otherEnd.Type.GetDataTypeString() + ImplementationSuffix;
         string name = prop.Name;
 		string implName = name + Kistl.API.Helper.ImplementationSuffix;
 		string fkBackingName = "_fk_" + name;

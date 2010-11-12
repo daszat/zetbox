@@ -1,18 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Kistl.API;
-using Kistl.API.Server;
-using Kistl.API.Utils;
-using Kistl.App.Base;
-using Kistl.App.Extensions;
-using Kistl.Server.Generators;
-using Kistl.Server.Generators.Extensions;
 
 namespace Kistl.Server.SchemaManagement
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using Kistl.API;
+    using Kistl.API.Server;
+    using Kistl.API.Utils;
+    using Kistl.App.Base;
+    using Kistl.App.Extensions;
+    using Kistl.Generator;
+    using Kistl.Generator.Extensions;
+
     public partial class SchemaManager
     {
         public void CheckSchema(bool withRepair)

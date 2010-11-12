@@ -40,7 +40,7 @@ namespace Kistl.DalProvider.Memory
             else
             {
                 // TODO: #1570 using wrong suffix
-                var ifTypeName = Type.FullName.Replace(Helper.ImplementationSuffix + "Memory", String.Empty);
+                var ifTypeName = Type.FullName.Replace("Memory" + Helper.ImplementationSuffix, String.Empty);
                 return IftFactory(Type.GetType(ifTypeName + ", " + typeof(ObjectClass).Assembly.FullName, true));
             }
         }

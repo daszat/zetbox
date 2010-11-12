@@ -91,7 +91,7 @@
     <Compile Include="ClientDeploymentRestrictor.cs" />
     <Compile Include="ClientIsolationLevel.cs" />
     <Compile Include="ClientValueCollectionWrapper.cs" />
-    <Compile Include="CustomPropertyDescriptor.cs" />
+    <Compile Include="PropertyDescriptorClientImpl.cs" />
     <Compile Include="OneNRelationList.cs" />
     <Compile Include="BaseClientDataObject.cs" />
     <Compile Include="CollectionWrapperImplementations.cs" />

@@ -13,7 +13,7 @@ namespace Kistl.API.Tests.BinarySerializers
 {
     [TestFixture]
     public sealed class should_work_with_MockedCompoundObjects
-        : Kistl.API.AbstractConsumerTests.BinarySerializers.should_work_with_ICompoundObjects<TestCompoundObject__Implementation__>
+        : Kistl.API.AbstractConsumerTests.BinarySerializers.should_work_with_ICompoundObjects<TestCompoundObjectImpl>
     {
     }
 }

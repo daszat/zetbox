@@ -1,0 +1,371 @@
+﻿<%@ CodeTemplate Language="C#" 
+    Name="EfModel.ModelCsdl"
+    ClassName="Kistl.DalProvider.Ef.Generator.Templates.EfModel.ModelCsdl" 
+    Inherits="Kistl.Generator.ResourceTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="System.Linq" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.App.Extensions" %>
+<%@ Import Namespace="Kistl.Generator" %>
+<%@ Import Namespace="Kistl.Generator.Extensions" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
+  <EntityContainer Name="Entities">
+  
+    <!-- EntitySets for all classes -->
+<%
+    foreach(var cls in ctx.GetBaseClasses().OrderBy(c => c.Name))
+    {
+%>
+    <EntitySet Name="<%= cls.Name %>" EntityType="Model.<%= cls.Name %>" />
+<%  
+		if(cls.NeedsRightsTable())
+		{
+%>
+    <EntitySet Name="<%= Construct.SecurityRulesClassName(cls) %>" EntityType="Model.<%= Construct.SecurityRulesClassName(cls) %>" />
+    <AssociationSet Name="<%= Construct.SecurityRulesFKName(cls) %>" Association="Model.<%= Construct.SecurityRulesFKName(cls) %>">
+      <End Role="<%= cls.Name %>" EntitySet="<%= cls.Name %>" />
+      <End Role="<%= Construct.SecurityRulesClassName(cls) %>" EntitySet="<%= Construct.SecurityRulesClassName(cls) %>" />
+    </AssociationSet>
+<%	
+		}
+    }
+%>
+    <!-- EntitySets and AssociationSets for all object-object CollectionEntrys -->
+<%
+    foreach(var rel in GetRelationsWithSeparateStorage(ctx))
+    {
+        string entityName = rel.GetRelationClassName();
+        string assocNameA = rel.GetRelationAssociationName(RelationEndRole.A);
+        string assocNameB = rel.GetRelationAssociationName(RelationEndRole.B);
+%>
+    <EntitySet Name="<%= entityName %>" EntityType="Model.<%= entityName %>" />
+    <AssociationSet Name="<%= assocNameA %>" Association="Model.<%= assocNameA %>" >
+      <End Role="<%= rel.A.RoleName %>" EntitySet="<%= rel.A.Type.GetRootClass().Name %>" />
+      <End Role="CollectionEntry" EntitySet="<%= entityName %>" />
+    </AssociationSet>
+    <AssociationSet Name="<%= assocNameB %>" Association="Model.<%= assocNameB %>" >
+      <End Role="<%= rel.B.RoleName %>" EntitySet="<%= rel.B.Type.GetRootClass().Name %>" />
+      <End Role="CollectionEntry" EntitySet="<%= entityName %>" />
+    </AssociationSet>
+<%
+    }
+%>
+
+    <!-- EntitySets and AssociationSets for all object-value CollectionEntrys -->
+<%
+    foreach(var prop in ctx.GetQuery<ValueTypeProperty>()
+        .Where(p => p.IsList)
+        .OrderBy(p => p.ObjectClass.Name)
+        .ThenBy(p => p.Name))
+    {
+        string assocName = prop.GetAssociationName();
+        string entityName = prop.GetCollectionEntryClassName();
+%>
+    <EntitySet Name="<%= entityName %>" EntityType="Model.<%= entityName %>" />
+    <AssociationSet Name="<%= assocName %>" Association="Model.<%= assocName %>" >
+      <End Role="<%= prop.ObjectClass.Name %>" EntitySet="<%= ((ObjectClass)prop.ObjectClass).GetRootClass().Name %>" />
+      <End Role="CollectionEntry" EntitySet="<%= entityName %>" />
+    </AssociationSet>
+<%
+    }
+%>
+
+    <!-- EntitySets and AssociationSets for all object-struct CollectionEntrys -->
+<%
+    foreach(var prop in ctx.GetQuery<CompoundObjectProperty>()
+        .Where(p => p.IsList)
+        .OrderBy(p => p.ObjectClass.Name)
+        .ThenBy(p => p.Name))
+    {
+        string assocName = prop.GetAssociationName();
+        string entityName = prop.GetCollectionEntryClassName();
+%>
+    <EntitySet Name="<%= entityName %>" EntityType="Model.<%= entityName %>" />
+    <AssociationSet Name="<%= assocName %>" Association="Model.<%= assocName %>" >
+      <End Role="<%= prop.ObjectClass.Name %>" EntitySet="<%= ((ObjectClass)prop.ObjectClass).GetRootClass().Name %>" />
+      <End Role="CollectionEntry" EntitySet="<%= entityName %>" />
+    </AssociationSet>
+<%
+    }
+%>
+
+    <!-- AssociationSets for all object-object relations without CollectionEntrys -->
+<%
+    foreach(var rel in GetRelationsWithoutSeparateStorage(ctx))
+    {
+        string assocName = rel.GetAssociationName();
+%>
+    <AssociationSet Name="<%= assocName %>" Association="Model.<%= assocName %>" >
+      <End Role="<%= rel.A.RoleName %>" EntitySet="<%= rel.A.Type.GetRootClass().Name %>" />
+      <End Role="<%= rel.B.RoleName %>" EntitySet="<%= rel.B.Type.GetRootClass().Name %>" />
+    </AssociationSet>
+<%
+    }
+%>
+
+  </EntityContainer>
+  
+  <!-- EntityTypes for all base classes -->
+<%
+    foreach(var cls in ctx.GetBaseClasses().OrderBy(c => c.Name))
+    {
+%>
+  <EntityType Name="<%= cls.Name %>"<%= GetAbstractModifier(cls) %>>
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+<% 
+		ApplyEntityTypeFieldDefs(cls.Properties.Cast<Property>());
+		if(cls.NeedsRightsTable())
+		{
+%>
+    <NavigationProperty Name="SecurityRightsCollection<%= ImplementationPropertySuffix %>" Relationship="Model.<%= Construct.SecurityRulesFKName(cls) %>" FromRole="<%= cls.Name %>" ToRole="<%= Construct.SecurityRulesClassName(cls) %>" />
+<%
+		}
+%>
+  </EntityType>
+<%
+		if(cls.NeedsRightsTable())
+		{
+%>
+  <EntityType Name="<%= Construct.SecurityRulesClassName(cls) %>">
+    <Key>
+	  <PropertyRef Name="ID" />
+	  <PropertyRef Name="Identity" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Identity" Type="Int32" Nullable="false" />
+    <Property Name="Right" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="<%= Construct.SecurityRulesFKName(cls) %>">
+    <End Role="<%= cls.Name %>" Type="Model.<%= cls.Name %>" Multiplicity="1" />
+    <End Role="<%= Construct.SecurityRulesClassName(cls) %>" Type="Model.<%= Construct.SecurityRulesClassName(cls) %>" Multiplicity="*" />
+    <ReferentialConstraint>
+	  <Principal Role="<%= cls.Name %>">
+	    <PropertyRef Name="ID" />
+	  </Principal>
+	  <Dependent Role="<%= Construct.SecurityRulesClassName(cls) %>">
+	    <PropertyRef Name="ID" />
+	  </Dependent>
+    </ReferentialConstraint>
+  </Association>
+<%	
+		}
+    }
+%>
+
+  <!-- EntityTypes for all other classes -->
+<%
+    foreach(var cls in ctx.GetDerivedClasses().OrderBy(c => c.Name))
+    {
+%>
+  <EntityType Name="<%= cls.Name %>" BaseType="Model.<%= cls.BaseObjectClass.Name %>"<%= GetAbstractModifier(cls) %>>
+<% ApplyEntityTypeFieldDefs(cls.Properties.Cast<Property>()); %>
+  </EntityType>
+<%
+    }
+%>
+
+  <!-- EntityTypes and Associations for all object-object CollectionEntrys -->
+<%
+    foreach(var rel in GetRelationsWithSeparateStorage(ctx))
+    {
+
+%>
+  <!--
+<%
+    RelationDebugTemplate.Call(Host, ctx, rel);
+%>
+  -->
+  <EntityType Name="<%= rel.GetRelationClassName() %>" >
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+<% 
+	if(rel.A.Type.ImplementsIExportable() && rel.B.Type.ImplementsIExportable())
+	{
+%>
+	<Property Name="ExportGuid" Type="Guid" Nullable="false" />
+<%	
+	}
+%>	
+    
+    <!-- A -->
+    <NavigationProperty Name="A<%= ImplementationPropertySuffix %>"
+                        Relationship="Model.<%= rel.GetRelationAssociationName(RelationEndRole.A) %>"
+                        FromRole="CollectionEntry"
+                        ToRole="<%= rel.A.RoleName %>" />
+<%
+        if (rel.NeedsPositionStorage(RelationEndRole.A))
+        {
+%>
+    <Property Name="A<%= Kistl.API.Helper.PositionSuffix %>" Type="Int32" Nullable="false" />
+<%
+        }
+%>
+
+    <!-- B -->
+    <NavigationProperty Name="B<%= ImplementationPropertySuffix %>"
+                        Relationship="Model.<%= rel.GetRelationAssociationName(RelationEndRole.B) %>"
+                        FromRole="CollectionEntry"
+                        ToRole="<%= rel.B.RoleName %>" />
+<%
+        if (rel.NeedsPositionStorage(RelationEndRole.B))
+        {
+%>
+    <Property Name="B<%= Kistl.API.Helper.PositionSuffix %>" Type="Int32" Nullable="false" />
+<%
+        }
+%>
+  </EntityType>
+  <Association Name="<%= rel.GetRelationAssociationName(RelationEndRole.A) %>" >
+    <End Role="<%= rel.A.RoleName %>"
+         Type="Model.<%= rel.A.Type.Name %>" 
+         Multiplicity="0..1" />
+    <End Role="CollectionEntry"
+         Type="Model.<%= rel.GetRelationClassName() %>"
+         Multiplicity="*" />
+  </Association>
+  <Association Name="<%= rel.GetRelationAssociationName(RelationEndRole.B) %>" >
+    <End Role="<%= rel.B.RoleName %>"
+         Type="Model.<%= rel.B.Type.Name %>" 
+         Multiplicity="0..1" />
+    <End Role="CollectionEntry"
+         Type="Model.<%= rel.GetRelationClassName() %>"
+         Multiplicity="*" />
+  </Association>
+  
+<%
+    }
+%>
+
+
+  <!-- EntityTypes and Associations for all object-value CollectionEntrys -->
+<%
+    foreach(var prop in ctx.GetQuery<ValueTypeProperty>()
+        .Where(p => p.IsList)
+        .OrderBy(p => p.ObjectClass.Name)
+        .ThenBy(p => p.Name))
+    {
+
+%>
+  <!-- <%= prop.ObjectClass.Name %>.<%= prop.Name %> -->
+  <EntityType Name="<%= prop.GetCollectionEntryClassName() %>" >
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    
+    <!-- A -->
+    <NavigationProperty Name="Parent<%= ImplementationPropertySuffix %>"
+                        Relationship="Model.<%= prop.GetAssociationName() %>"
+                        FromRole="CollectionEntry"
+                        ToRole="<%= prop.ObjectClass.Name %>" />
+    <!-- B -->
+    <%= PlainPropertyDefinitionFromValueType(prop, "Value", ImplementationPropertySuffix) %>
+<%
+        if (prop.HasPersistentOrder)
+        {
+%>
+    <Property Name="Value<%= Kistl.API.Helper.PositionSuffix %>" Type="Int32" Nullable="false" />
+<%
+        }
+%>
+  </EntityType>
+  <Association Name="<%= prop.GetAssociationName() %>" >
+    <End Role="<%= prop.ObjectClass.Name %>"
+         Type="Model.<%= prop.ObjectClass.Name %>" 
+         Multiplicity="0..1" />
+    <End Role="CollectionEntry"
+         Type="Model.<%= prop.GetCollectionEntryClassName() %>" 
+         Multiplicity="*" />
+  </Association>
+<%
+    }
+%>
+
+<!-- EntityTypes and Associations for all object-CompoundObject CollectionEntrys -->
+<%
+    foreach(var prop in ctx.GetQuery<CompoundObjectProperty>()
+        .Where(p => p.IsList)
+        .OrderBy(p => p.ObjectClass.Name)
+        .ThenBy(p => p.Name))
+    {
+
+%>
+  <!-- <%= prop.ObjectClass.Name %>.<%= prop.Name %> -->
+  <EntityType Name="<%= prop.GetCollectionEntryClassName() %>" >
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    
+    <!-- A -->
+    <NavigationProperty Name="A<%= ImplementationPropertySuffix %>"
+                        Relationship="Model.<%= prop.GetAssociationName() %>"
+                        FromRole="CollectionEntry"
+                        ToRole="<%= prop.ObjectClass.Name %>" />
+    <!-- B -->
+    <Property Name="B<%= ImplementationPropertySuffix %>"
+              Type="Model.<%= prop.CompoundObjectDefinition.Name %>"
+              Nullable="false" />
+<%
+        if (prop.HasPersistentOrder)
+        {
+%>
+    <Property Name="B<%= Kistl.API.Helper.PositionSuffix %>" Type="Int32" Nullable="false" />
+<%
+        }
+%>
+  </EntityType>
+  <Association Name="<%= prop.GetAssociationName() %>" >
+    <End Role="<%= prop.ObjectClass.Name %>"
+         Type="Model.<%= prop.ObjectClass.Name %>" 
+         Multiplicity="0..1" />
+    <End Role="CollectionEntry"
+         Type="Model.<%= prop.GetCollectionEntryClassName() %>" 
+         Multiplicity="*" />
+  </Association>
+<%
+    }
+%>
+
+  <!-- Associations for all object-object relations without CollectionEntrys -->
+<%
+    foreach(var rel in GetRelationsWithoutSeparateStorage(ctx))
+    {
+%>
+  <Association Name="<%= rel.GetAssociationName() %>" >
+    <End Role="<%= rel.A.RoleName %>"
+         Type="Model.<%= rel.A.Type.Name %>" 
+         Multiplicity="<%= rel.A.Multiplicity.ToCsdlRelationshipMultiplicity().ToXmlValue() %>" />
+    <End Role="<%= rel.B.RoleName %>"
+         Type="Model.<%= rel.B.Type.Name %>" 
+         Multiplicity="<%= rel.B.Multiplicity.ToCsdlRelationshipMultiplicity().ToXmlValue() %>" />
+  </Association>
+<%
+    }
+%>
+
+
+  <!-- ComplexTypes for all CompoundObjects -->
+<%
+    foreach(var cls in ctx.GetQuery<CompoundObject>().OrderBy(s => s.Name))
+    {
+%>
+  <ComplexType Name="<%= cls.Name %>" >
+    <Property Name="CompoundObject_IsNull" Type="Boolean" Nullable="false" />
+<% ApplyEntityTypeFieldDefs(cls.Properties.Cast<Property>()); %>
+  </ComplexType>
+<%    }
+
+%>
+
+</Schema>

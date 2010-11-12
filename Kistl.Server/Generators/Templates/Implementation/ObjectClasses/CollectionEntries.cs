@@ -5,11 +5,11 @@ using System.Text;
 
 namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 {
-   public partial class CollectionEntries
+    public partial class CollectionEntries
     {
         protected virtual IEnumerable<string> GetAdditionalImports()
         {
-            return new string[] { };
+            return RequiredNamespaces;
         }
     }
 }

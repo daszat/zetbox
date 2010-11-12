@@ -3,6 +3,7 @@
     ClassName="Kistl.Server.Generators.Templates.Interface.CollectionEntries.Template" 
     Inherits="Kistl.Server.Generators.KistlCodeTemplate" %>
 <%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Linq" %>
 <%@ Import Namespace="Kistl.API" %>
 <%@ Import Namespace="Kistl.API.Server" %>
 <%@ Import Namespace="Kistl.App.Base" %>
@@ -16,7 +17,7 @@ namespace <%= module.Namespace %>
 {
     using Kistl.API;
 <%
-    foreach(string ns in GetAdditionalImports())
+    foreach(string ns in GetAdditionalImports().Distinct().OrderBy(s => s))
     {
 %>
     using <%= ns %>;

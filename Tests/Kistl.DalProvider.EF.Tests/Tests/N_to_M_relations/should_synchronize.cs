@@ -7,7 +7,7 @@ using Kistl.API;
 
 using NUnit.Framework;
 
-namespace Kistl.DalProvider.EF.Tests.N_to_M_relations
+namespace Kistl.DalProvider.Ef.Tests.N_to_M_relations
 {
 
     [TestFixture]

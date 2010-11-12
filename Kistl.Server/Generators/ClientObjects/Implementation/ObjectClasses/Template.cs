@@ -20,16 +20,6 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
         {
         }
 
-        protected override IEnumerable<string> GetAdditionalImports()
-        {
-            return base.GetAdditionalImports().Concat(new string[] { "Kistl.API.Client", "Kistl.DalProvider.Client" });
-        }
-
-        protected override string MungeClassName(string name)
-        {
-            return base.MungeClassName(name) + Kistl.API.Helper.ImplementationSuffix;
-        }
-
         protected override string GetBaseClass()
         {
             if (this.ObjectClass.BaseObjectClass != null)
@@ -92,9 +82,9 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
                 if (prop.IsNullable()) continue;
 
                 string name = prop.Name;
-                string backingName = name + Kistl.API.Helper.ImplementationSuffix;
+                string backingName = name + ImplementationPropertySuffix;
                 string coType = prop.GetPropertyTypeString();
-                string coImplementationType = coType + Kistl.API.Helper.ImplementationSuffix;
+                string coImplementationType = coType + ImplementationSuffix;
                 this.WriteObjects("                ", backingName, " = new ", coImplementationType, "(this, \"", name, "\");");
                 this.WriteLine();
             }

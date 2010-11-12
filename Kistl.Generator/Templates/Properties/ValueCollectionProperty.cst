@@ -1,0 +1,50 @@
+﻿<%@ CodeTemplate Language="C#" 
+	Name="Properties.ValueCollectionProperty"
+	ClassName="Kistl.Generator.Templates.Properties.ValueCollectionProperty" 
+	Inherits="Kistl.Generator.ResourceTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="System.Diagnostics" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.Generator" %>
+<%@ Import Namespace="Kistl.Generator.Extensions" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="serializationList" Type="Kistl.Generator.Templates.Serialization.SerializationMembersList" %>
+<%@ Parameter Name="name" Type="string" %>
+<%@ Parameter Name="backingName" Type="string" %>
+<%@ Parameter Name="backingCollectionType" Type="string" %>
+<%@ Parameter Name="exposedCollectionInterface" Type="string" %>
+<%@ Parameter Name="thisInterface" Type="string" %>
+<%@ Parameter Name="referencedType" Type="string" %>
+<%@ Parameter Name="entryType" Type="string" %>
+<%@ Parameter Name="providerCollectionType" Type="string" %>
+<%@ Parameter Name="underlyingCollectionName" Type="string" %>
+<%@ Parameter Name="orderByB" Type="bool" %>
+<%@ Parameter Name="moduleNamespace" Type="string" %>
+<%
+
+    AddSerialization(serializationList, underlyingCollectionName);
+
+%>
+		// <%= this.GetType() %>
+		public <%= exposedCollectionInterface %><<%= referencedType %>> <%= name %>
+		{
+			get
+			{
+				if (<%= backingName %> == null)
+				{
+				    <%= backingName %> 
+				        = new <%= backingCollectionType %><<%= thisInterface %>, <%= referencedType %>, <%= entryType %>, <%= providerCollectionType %>>(
+							this.Context,
+				            this, 
+				            // () => this.NotifyPropertyChanged("<%= name %>", null, null),
+				            <%= underlyingCollectionName %>);
+				}
+				return <%= backingName %>;
+			}
+		}
+
+		private <%= backingCollectionType %><<%= thisInterface %>, <%= referencedType %>, <%= entryType %>, <%= providerCollectionType %>> <%= backingName %>;
+		private <%= providerCollectionType %> <%= underlyingCollectionName %> = new List<<%= entryType %>>();
