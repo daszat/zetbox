@@ -66,6 +66,11 @@
     <Compile Include="EfGeneratorProvider.cs" />
     <Compile Include="EfGenerator.cs" />
     <Compile Include="Templates\AssemblyInfoTemplate.cs" />
+    <Compile Include="Templates\ObjectClasses\AttachToContextTemplate.Designer.cs">
+      <DependentUpon>AttachToContextTemplate.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Templates\Properties\ExportGuidProperty.cs" />
     <Compile Include="Templates\CollectionEntries\RelationEntry.cs" />
     <Compile Include="Templates\CollectionEntries\ValueCollectionEntry.cs" />
@@ -254,6 +259,10 @@
     <None Include="Templates\ObjectClasses\AssociationSetAttributes.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>AssociationSetAttributes.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\ObjectClasses\AttachToContextTemplate.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>AttachToContextTemplate.Designer.cs</LastGenOutput>
     </None>
     <None Include="Templates\Properties\CollectionEntryListProperty.cst">
       <Generator>Arebis Template Processor</Generator>
