@@ -34,67 +34,67 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.Properties
 RelationEnd relEnd = rel.GetEndFromRole(endRole);
     RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
 
-	// the name of the property to create
-	// TODO: Case #1168
-	// Interface & Client Assembly generation uses the navigation property, EntityFramework Implementation uses the role name
-	string name = relEnd.Navigator.Name;
-	// the ef-visible property's name
-	string efName = name + ImplementationPropertySuffix;
-	// the name of the IDs list
-	string idsListName = efName + "Ids";
-	// the name of the private backing store for the conversion wrapper list
-	string wrapperName = "_" + name;
-	// the name of the wrapper class for wrapping the other end
-	string wrapperClass = "undefined wrapper class";
+    // the name of the property to create
+    // TODO: Case #1168
+    // Interface & Client Assembly generation uses the navigation property, EntityFramework Implementation uses the role name
+    string name = relEnd.Navigator.Name;
+    // the ef-visible property's name
+    string efName = name + ImplementationPropertySuffix;
+    // the name of the IDs list
+    string idsListName = efName + "Ids";
+    // the name of the private backing store for the conversion wrapper list
+    string wrapperName = "_" + name;
+    // the name of the wrapper class for wrapping the other end
+    string wrapperClass = "undefined wrapper class";
     if (rel.NeedsPositionStorage(endRole))
-	{
-	    if (otherEnd.GetRole() == RelationEndRole.A)
-	    {
-	        wrapperClass = "EntityRelationASideListWrapper";
-	    }
-	    else if (otherEnd.GetRole() == RelationEndRole.B)
-	    {
-	        wrapperClass = "EntityRelationBSideListWrapper";
-	    }
-	}
-	else
-	{
-	    if (otherEnd.GetRole() == RelationEndRole.A)
-	    {
-	        wrapperClass = "EntityRelationASideCollectionWrapper";
-	    }
-	    else if (otherEnd.GetRole() == RelationEndRole.B)
-	    {
-	        wrapperClass = "EntityRelationBSideCollectionWrapper";
-	    }
-	}
+    {
+        if (otherEnd.GetRole() == RelationEndRole.A)
+        {
+            wrapperClass = "EntityRelationASideListWrapper";
+        }
+        else if (otherEnd.GetRole() == RelationEndRole.B)
+        {
+            wrapperClass = "EntityRelationBSideListWrapper";
+        }
+    }
+    else
+    {
+        if (otherEnd.GetRole() == RelationEndRole.A)
+        {
+            wrapperClass = "EntityRelationASideCollectionWrapper";
+        }
+        else if (otherEnd.GetRole() == RelationEndRole.B)
+        {
+            wrapperClass = "EntityRelationBSideCollectionWrapper";
+        }
+    }
 
-	// the name of the CollectionEntry type
-	string ceName = rel.GetRelationFullName() + ImplementationSuffix;
+    // the name of the CollectionEntry type
+    string ceName = rel.GetRelationFullName() + ImplementationSuffix;
 
-	// the name of the EF association to the CollectionEntry
-	string assocName = rel.GetRelationAssociationName(endRole);
-	// this class' role name in this association
-	string roleName = relEnd.RoleName;
-	// this targeted role name 
-	string targetRoleName = "CollectionEntry";
+    // the name of the EF association to the CollectionEntry
+    string assocName = rel.GetRelationAssociationName(endRole);
+    // this class' role name in this association
+    string roleName = relEnd.RoleName;
+    // this targeted role name 
+    string targetRoleName = "CollectionEntry";
 
-	// which generic interface to use for the collection
-	string exposedListType = rel.NeedsPositionStorage(endRole) ? "IList" : "ICollection";
+    // which generic interface to use for the collection
+    string exposedListType = rel.NeedsPositionStorage(endRole) ? "IList" : "ICollection";
 
-	// which Kistl interface this is 
-	string thisInterface = relEnd.Type.GetDataTypeString();
-	// which Kistl interface this list contains
-	string referencedInterface = otherEnd.Type.GetDataTypeString();
-	// the actual implementation class of the list's elements
-	string referencedImplementation = otherEnd.Type.GetDataTypeString() + ImplementationSuffix;
+    // which Kistl interface this is 
+    string thisInterface = relEnd.Type.GetDataTypeString();
+    // which Kistl interface this list contains
+    string referencedInterface = otherEnd.Type.GetDataTypeString();
+    // the actual implementation class of the list's elements
+    string referencedImplementation = otherEnd.Type.GetDataTypeString() + ImplementationSuffix;
 
-	// whether or not the collection will be eagerly loaded
-	bool eagerLoading = relEnd.Navigator != null && relEnd.Navigator.EagerLoading;
+    // whether or not the collection will be eagerly loaded
+    bool eagerLoading = relEnd.Navigator != null && relEnd.Navigator.EagerLoading;
 
 
 #line 80 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\CollectionEntryListProperty.cst"
-this.WriteObjects("		// ",  this.GetType() , "\r\n");
+this.WriteObjects("        // ",  this.GetType() , "\r\n");
 this.WriteObjects("        // implement the user-visible interface\r\n");
 this.WriteObjects("        [XmlIgnore()]\r\n");
 this.WriteObjects("        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]\r\n");
@@ -134,10 +134,10 @@ this.WriteObjects("        private ",  wrapperClass , "<",  rel.A.Type.GetDataTy
 this.WriteObjects("\r\n");
 #line 119 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 if (eagerLoading)
-	{
+    {
 
 #line 122 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\CollectionEntryListProperty.cst"
-this.WriteObjects("		private bool ",  efName , "_was_eagerLoaded = false;\r\n");
+this.WriteObjects("        private bool ",  efName , "_was_eagerLoaded = false;\r\n");
 #line 124 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 }
         AddSerialization(serializationList, efName, eagerLoading);

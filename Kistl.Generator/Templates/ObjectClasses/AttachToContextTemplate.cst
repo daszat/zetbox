@@ -1,7 +1,7 @@
 ﻿<%@ CodeTemplate Language="C#" 
-	Name="ObjectClasses.AttachToContextTemplate"
-	ClassName="Kistl.Generator.Templates.ObjectClasses.AttachToContextTemplate" 
-	Inherits="Kistl.Generator.ResourceTemplate" %>
+    Name="ObjectClasses.AttachToContextTemplate"
+    ClassName="Kistl.Generator.Templates.ObjectClasses.AttachToContextTemplate" 
+    Inherits="Kistl.Generator.ResourceTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Linq" %>
 <%@ Import Namespace="Kistl.API" %>
@@ -15,19 +15,21 @@
         public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
-<%			
-			foreach(var prop in cls.Properties.OfType<ValueTypeProperty>().Where(p => p.IsList).OrderBy(p => p.Name))
-			{
-%>
-			_<%= prop.Name %>.ForEach<IValueCollectionEntry>(i => ctx.Attach(i));
 <%
-			}
+            foreach(var prop in cls.Properties.OfType<ValueTypeProperty>().Where(p => p.IsList).OrderBy(p => p.Name))
+            {
+%>
+            if (_<%= prop.Name %> != null)
+                _<%= prop.Name %>.ForEach<IValueCollectionEntry>(i => ctx.Attach(i));
+<%
+            }
 
-			foreach(var prop in cls.Properties.OfType<CompoundObjectProperty>().Where(p => p.IsList).OrderBy(p => p.Name))
-			{
+            foreach(var prop in cls.Properties.OfType<CompoundObjectProperty>().Where(p => p.IsList).OrderBy(p => p.Name))
+            {
 %>
-			_<%= prop.Name %>.ForEach<IValueCollectionEntry>(i => ctx.Attach(i));
+            if (_<%= prop.Name %> != null)
+                _<%= prop.Name %>.ForEach<IValueCollectionEntry>(i => ctx.Attach(i));
 <%
-			}
+            }
 %>
-		}
+        }
