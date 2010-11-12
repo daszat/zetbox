@@ -8,9 +8,10 @@ namespace Kistl.DalProvider.Client.Mocks
     using Kistl.API;
     using Kistl.API.Client;
     using Kistl.App.Test;
+    using Kistl.DalProvider.Base;
 
     public class BaseClientDataObjectMockImpl
-        : BaseClientDataObject, ANewObjectClass, IClientObject
+        : DataObjectBaseImpl, ANewObjectClass, IClientObject
     {
         public BaseClientDataObjectMockImpl(Func<IFrozenContext> lazyCtx) : base(lazyCtx) { }
 
@@ -70,5 +71,25 @@ namespace Kistl.DalProvider.Client.Mocks
         }
 
         #endregion
+
+        public override void NotifyPreSave()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void NotifyPostSave()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void NotifyCreated()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void NotifyDeleting()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

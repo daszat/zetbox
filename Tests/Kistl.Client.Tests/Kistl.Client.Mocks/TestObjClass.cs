@@ -11,8 +11,10 @@ namespace Kistl.App.Test
 
     using Kistl.API;
     using Kistl.API.Client;
+    using Kistl.DalProvider.Base;
 
-    public class TestObjClassImpl : BaseClientDataObject, TestObjClass
+    public class TestObjClassImpl 
+        : DataObjectBaseImpl, TestObjClass
     {
         public TestObjClassImpl()
             : base(null)
@@ -304,7 +306,6 @@ namespace Kistl.App.Test
         [EventBasedMethod("OnPreSave_TestObjClass")]
         public override void NotifyPreSave()
         {
-            base.NotifyPreSave();
             if (OnPreSave_TestObjClass != null) OnPreSave_TestObjClass(this);
         }
         public static event ObjectEventHandler<TestObjClass> OnPreSave_TestObjClass;
@@ -312,7 +313,6 @@ namespace Kistl.App.Test
         [EventBasedMethod("OnPostSave_TestObjClass")]
         public override void NotifyPostSave()
         {
-            base.NotifyPostSave();
             if (OnPostSave_TestObjClass != null) OnPostSave_TestObjClass(this);
         }
         public static event ObjectEventHandler<TestObjClass> OnPostSave_TestObjClass;
@@ -320,7 +320,6 @@ namespace Kistl.App.Test
         [EventBasedMethod("OnCreated_TestObjClass")]
         public override void NotifyCreated()
         {
-            base.NotifyCreated();
             if (OnCreated_TestObjClass != null) OnCreated_TestObjClass(this);
         }
         public static event ObjectEventHandler<TestObjClass> OnCreated_TestObjClass;
@@ -328,7 +327,6 @@ namespace Kistl.App.Test
         [EventBasedMethod("OnDeleting_TestObjClass")]
         public override void NotifyDeleting()
         {
-            base.NotifyDeleting();
             if (OnDeleting_TestObjClass != null) OnDeleting_TestObjClass(this);
         }
         public static event ObjectEventHandler<TestObjClass> OnDeleting_TestObjClass;
@@ -409,8 +407,5 @@ namespace Kistl.App.Test
         }
 
         #endregion
-
-
-
     }
 }
