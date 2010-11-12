@@ -39,7 +39,7 @@ namespace Kistl.DalProvider.Base
             _posProperty = posProperty;
             _owner = owner;
             _ownerNotifier = ownerNotifier;
-            this.collection = collection != null ? new List<T>(collection) : new List<T>();
+            this.collection = collection != null ? new List<T>(collection.OrderBy(i => GetPosition(i))) : new List<T>();
 
             //foreach (var item in this.collection)
             //{
@@ -49,6 +49,25 @@ namespace Kistl.DalProvider.Base
 
         public void AddWithoutSetParent(T item)
         {
+            // on ReloadReference, the _posProperty has a valid value
+            // we need to insert correctly
+
+            if (!String.IsNullOrEmpty(_posProperty))
+            {
+                int? pos = GetPosition(item);
+                if (pos.HasValue)
+                {
+                    int idx = collection.FindIndex(i => GetPosition(i) > pos.Value);
+                    if (idx >= 0)
+                    {
+                        collection.Insert(idx, item);
+                        OnItemAdded(item);
+
+                        return;
+                    }
+                }
+            }
+
             collection.Add(item);
             OnItemAdded(item);
         }
@@ -62,8 +81,10 @@ namespace Kistl.DalProvider.Base
 
         private void DoInsert(T item, int index)
         {
-            if (item == null) throw new ArgumentNullException("item", "Cannot add a NULL Object to this collection");
-            if (_owner.Context != item.Context) throw new WrongKistlContextException();
+            if (item == null)
+                throw new ArgumentNullException("item", "Cannot add a NULL Object to this collection");
+            if (_owner.Context != item.Context)
+                throw new WrongKistlContextException();
             collection.Insert(index, item);
             SetPointerProperty(item);
             if (!String.IsNullOrEmpty(_posProperty))
@@ -82,7 +103,8 @@ namespace Kistl.DalProvider.Base
 
         private bool DoRemove(T item)
         {
-            if (item == null) throw new ArgumentNullException("item", "Cannot remove a NULL Object from this collection");
+            if (item == null)
+                throw new ArgumentNullException("item", "Cannot remove a NULL Object from this collection");
 
             int index = collection.IndexOf(item);
             if (index < 0)
@@ -147,7 +169,8 @@ namespace Kistl.DalProvider.Base
 
         public void ApplyChanges(OneNRelationList<T> list)
         {
-            if (list == null) return;
+            if (list == null)
+                return;
             list.OnCollectionResetting();
             list.collection = new List<T>(this.collection);
             list.OnCollectionReset();
@@ -185,7 +208,8 @@ namespace Kistl.DalProvider.Base
             }
             set
             {
-                if (Object.Equals(collection[index], value)) return;
+                if (Object.Equals(collection[index], value))
+                    return;
 
                 DoRemove(collection[index]);
                 DoInsert(value, index);
