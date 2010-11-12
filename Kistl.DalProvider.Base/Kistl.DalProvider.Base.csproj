@@ -3,34 +3,29 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{7E3CE048-00C1-4357-BE27-801AB5B75FE3}</ProjectGuid>
+    <ProjectGuid>{A242A751-9F97-4F1C-ABE5-57B28133DEF4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Kistl.DalProvider.Memory</RootNamespace>
-    <AssemblyName>Kistl.DalProvider.Memory</AssemblyName>
+    <RootNamespace>Kistl.DalProvider.Base</RootNamespace>
+    <AssemblyName>Kistl.DalProvider.Base</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Kistl.snk</AssemblyOriginatorKeyFile>
-    <FileUpgradeFlags>
-    </FileUpgradeFlags>
-    <OldToolsVersion>3.5</OldToolsVersion>
-    <UpgradeBackupLocation />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>..\bin\Debug\bin\Common\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;CODE_ANALYSIS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\bin\Debug\bin\Common\Kistl.DalProvider.Base.XML</DocumentationFile>
     <NoWarn>1591</NoWarn>
-    <DocumentationFile>..\bin\Debug\bin\Common\Kistl.DalProvider.Memory.XML</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -39,45 +34,60 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\bin\Release\bin\Common\Kistl.DalProvider.Memory.XML</DocumentationFile>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DocumentationFile>..\bin\Debug\bin\Common\Kistl.DalProvider.Base.XML</DocumentationFile>
     <NoWarn>1591</NoWarn>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac, Version=0.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\AutoFac 2.1\Autofac.dll</HintPath>
-    </Reference>
-    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\log4net.dll</HintPath>
-    </Reference>
+
+
+
+
+
+
+
+
     <Reference Include="System" />
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
+    <Reference Include="System.Core" />
+
+
+
+
     <Reference Include="System.Xml" />
-    <Reference Include="WindowsBase">
-      <RequiredTargetFramework>3.0</RequiredTargetFramework>
-    </Reference>
+    <Reference Include="WindowsBase" />
+
+
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseMemoryCollectionEntry.cs" />
-    <Compile Include="BaseMemoryDataObject.cs" />
-    <Compile Include="BaseMemoryPersistenceObject.cs" />
-    <Compile Include="CompoundObjectMemoryImpl.cs" />
-    <Compile Include="CompoundCollectionEntryMemoryImpl.cs" />
-    <Compile Include="ValueCollectionEntryMemoryImpl.cs" />
-    <Compile Include="RelationEntryMemoryImpl.cs" />
-    <Compile Include="DataObjectMemoryImpl.cs" />
-    <Compile Include="FrozenMemoryContext.cs" />
-    <Compile Include="MemoryDatabaseProvider.cs" />
-    <Compile Include="MemoryImplementationTypeChecker.cs" />
-    <Compile Include="MemoryProvider.cs" />
-    <Compile Include="PropertyDescriptorMemoryImpl.cs" />
-    <Compile Include="MemoryContext.cs" />
+    <Compile Include="ClientValueCollectionWrapper.cs" />
+    <Compile Include="CollectionEntryBaseImpl.cs" />
+    <Compile Include="CollectionWrapperImplementations.cs" />
+    <Compile Include="CompoundCollectionEntryBaseImpl.cs" />
+    <Compile Include="CompoundObjectBaseImpl.cs" />
+    <Compile Include="DataObjectBaseImpl.cs" />
+    <Compile Include="IBaseActionsManager.cs" />
+    <Compile Include="IBaseImplementationTypeChecker.cs" />
+    <Compile Include="OneNRelationList.cs" />
+    <Compile Include="PersistenceObjectBaseImpl.cs" />
+
+
+
+
+
+
+
+
+
+
+
+
+
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <None Include="Kistl.snk" />
+    <Compile Include="PropertyDescriptorBaseImpl.cs" />
+    <Compile Include="RelationEntryBaseImpl.cs" />
+
+
+
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Kistl.API\Kistl.API.csproj">
@@ -89,10 +99,38 @@
       <Name>Kistl.Objects</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\TempAppHelpers\TempAppHelpers.csproj">
-      <Project>{9677AE11-CB92-4F0A-A248-87A21586F0DA}</Project>
-      <Name>TempAppHelpers</Name>
-    </ProjectReference>
+
+  </ItemGroup>
+  <ItemGroup>
+
+
+
+
+
+
+    <None Include="Kistl.snk" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -100,6 +138,7 @@
   <Target Name="BeforeBuild">
   </Target>
   <Target Name="AfterBuild">
+
   </Target>
   -->
 </Project>

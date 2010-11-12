@@ -15,7 +15,8 @@ namespace Kistl.Generator.Templates.ObjectClasses
         {
             if (host == null) { throw new ArgumentNullException("host"); }
 
-            host.CallTemplate("ObjectClasses.CustomTypeDescriptor", ctx, cls, implName);
+            string propertyDescriptorName = host.Settings["propertydescriptorname"];
+            host.CallTemplate("ObjectClasses.CustomTypeDescriptor", ctx, cls, implName, propertyDescriptorName);
         }
     }
 }

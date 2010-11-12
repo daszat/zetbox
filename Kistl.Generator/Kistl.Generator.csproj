@@ -105,23 +105,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Kistl.DalProvider.Base\IBaseActionsManager.cs" />
-    <Compile Include="Kistl.DalProvider.Base\IBaseImplementationTypeChecker.cs" />
-    <Compile Include="Kistl.DalProvider.Base\RelationEntryBaseImpl.cs" />
-    <Compile Include="Kistl.DalProvider.Base\PropertyDescriptorBaseImpl.cs" />
-    <Compile Include="Kistl.DalProvider.Base\DataObjectBaseImpl.cs" />
-    <Compile Include="Kistl.DalProvider.Base\ClientValueCollectionWrapper.cs" />
-    <Compile Include="Kistl.DalProvider.Base\CollectionWrapperImplementations.cs" />
     <Compile Include="Extensions\ContextExtensions.cs" />
     <Compile Include="Extensions\MethodExtensions.cs" />
     <Compile Include="Extensions\MiscExtensions.cs" />
     <Compile Include="Extensions\PropertyChecks.cs" />
     <Compile Include="Extensions\Reflection.cs" />
     <Compile Include="BaseGeneratorModule.cs" />
-    <Compile Include="Kistl.DalProvider.Base\CompoundObjectBaseImpl.cs" />
-    <Compile Include="Kistl.DalProvider.Base\PersistenceObjectBaseImpl.cs" />
-    <Compile Include="Kistl.DalProvider.Base\OneNRelationList.cs" />
-    <Compile Include="Kistl.DalProvider.Base\CompoundCollectionEntryBaseImpl.cs" />
     <Compile Include="ResourceTemplate.cs" />
     <Compile Include="TemplateExecutor.cs" />
     <Compile Include="Templates\AssemblyInfoTemplate.cs">
@@ -155,7 +144,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Kistl.DalProvider.Base\CollectionEntryBaseImpl.cs" />
     <Compile Include="Templates\CompoundObjects\Template.cs" />
     <Compile Include="InterfaceTemplates\AssemblyInfoTemplate.cs" />
     <Compile Include="InterfaceTemplates\Module.Designer.cs">

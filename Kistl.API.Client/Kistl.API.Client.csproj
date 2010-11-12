@@ -90,11 +90,7 @@
     <Compile Include="ClientApiModule.cs" />
     <Compile Include="ClientDeploymentRestrictor.cs" />
     <Compile Include="ClientIsolationLevel.cs" />
-    <Compile Include="ClientValueCollectionWrapper.cs" />
-    <Compile Include="PropertyDescriptorClientImpl.cs" />
-    <Compile Include="OneNRelationList.cs" />
     <Compile Include="BaseClientDataObject.cs" />
-    <Compile Include="CollectionWrapperImplementations.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Proxy.cs" />

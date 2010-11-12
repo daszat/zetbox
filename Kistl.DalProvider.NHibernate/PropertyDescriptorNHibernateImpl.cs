@@ -1,36 +1,15 @@
 
-namespace Kistl.API.Server
+namespace Kistl.DalProvider.NHibernate
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
+    using Kistl.API;
     using Kistl.App.Base;
 
-    // server implementation has to delay property lookup until validation
-    // to avoid bootstrapping issues and threading failures when initialising
-
-    public class CustomPropertyDescriptor<X, Y> : PropertyDescriptorImpl<X, Y>
-    {
-        public CustomPropertyDescriptor(
-            Func<IFrozenContext> lazyCtx,
-            Guid? propertyGuid,
-            string name,
-            Attribute[] attrs,
-            Func<X, Y> getter,
-            Action<X, Y> setter)
-            : base(lazyCtx,
-             propertyGuid,
-             name,
-             attrs,
-             getter,
-             setter)
-        {
-        }
-    }
-
-    public class PropertyDescriptorImpl<TComponent, TProperty>
+    public class PropertyDescriptorNHibernateImpl<TComponent, TProperty>
         : BaseCustomPropertyDescriptor<TComponent, TProperty>
     {
         private static readonly string[] NoErrors = new string[] { };
@@ -38,7 +17,7 @@ namespace Kistl.API.Server
         private readonly Func<IFrozenContext> _lazyCtx;
         private readonly Guid? _propertyGuid;
 
-        public PropertyDescriptorImpl(
+        public PropertyDescriptorNHibernateImpl(
             Func<IFrozenContext> lazyCtx,
             Guid? propertyGuid,
             string name,
@@ -48,17 +27,6 @@ namespace Kistl.API.Server
             : base(name, attrs, getter, setter)
         {
             _lazyCtx = lazyCtx;
-            _propertyGuid = propertyGuid;
-        }
-
-        public PropertyDescriptorImpl(
-            Guid? propertyGuid,
-            string name,
-            Attribute[] attrs,
-            Func<TComponent, TProperty> getter,
-            Action<TComponent, TProperty> setter)
-            : base(name, attrs, getter, setter)
-        {
             _propertyGuid = propertyGuid;
         }
 

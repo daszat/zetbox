@@ -137,6 +137,11 @@ namespace Kistl.Generator
         public string ProjectFileName { get; private set; }
 
         /// <summary>
+        /// The type name of the custom PropertyDescriptor.
+        /// </summary>
+        public virtual string CustomPropertyDescriptorName { get { return "PropertyDescriptor" + ExtraSuffix + Kistl.API.Helper.ImplementationSuffix; } }
+
+        /// <summary>
         /// Required Namespaces for this project
         /// </summary>
         public abstract IEnumerable<string> RequiredNamespaces { get; }
@@ -164,6 +169,8 @@ namespace Kistl.Generator
             gen.Settings.Add("extrasuffix", ExtraSuffix);
             gen.Settings.Add("namespaces", String.Join(",", RequiredNamespaces.ToArray()));
             gen.Settings.Add("implementationnamespace", "Kistl.DalProvider." + BaseName);
+
+            gen.Settings.Add("propertydescriptorname", CustomPropertyDescriptorName);
 
             gen.TemplateParameters = new object[] { ctx }.Concat(args).ToArray();
 

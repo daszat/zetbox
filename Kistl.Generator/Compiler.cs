@@ -305,6 +305,4 @@ namespace Kistl.Generator
 
         #endregion
     }
-
-
 }

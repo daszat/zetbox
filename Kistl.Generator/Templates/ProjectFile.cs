@@ -29,8 +29,22 @@ namespace Kistl.Generator.Templates
             this.WriteLine("    <ProjectReference Include=\"..\\Kistl.Objects\\Kistl.Objects.csproj\">");
             this.WriteLine("      <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>");
             this.WriteLine("      <Name>Kistl.Objects</Name>");
-            this.WriteLine("      <Private>True</Private>");
+            this.WriteLine("      <Private>False</Private>");
             this.WriteLine("    </ProjectReference>");
+
+            // DAL Provider Base
+            this.WriteLine(@"    <Reference Include=""Kistl.DalProvider.Base"">");
+            this.WriteLine(@"      <SpecificVersion>False</SpecificVersion>");
+            this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Common\Kistl.DalProvider.Base.dll</HintPath>");
+            this.WriteLine(@"      <Private>False</Private>");
+            this.WriteLine(@"    </Reference>");
+
+            // common functionality for all
+            this.WriteLine(@"    <Reference Include=""TempAppHelpers"">");
+            this.WriteLine(@"      <SpecificVersion>False</SpecificVersion>");
+            this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Common\TempAppHelpers.dll</HintPath>");
+            this.WriteLine(@"      <Private>False</Private>");
+            this.WriteLine(@"    </Reference>");
         }
     
         /// <summary>

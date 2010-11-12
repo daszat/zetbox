@@ -5,11 +5,10 @@ namespace Kistl.API.Client.Tests
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-
     using Kistl.API;
     using Kistl.API.Client.Mocks.OneNLists;
     using Kistl.API.Tests;
-
+    using Kistl.DalProvider.Base;
     using NUnit.Framework;
 
     [TestFixture(0)]

@@ -10,6 +10,10 @@
     <CodeGenWorkingPath>bin\CodeGenNext</CodeGenWorkingPath>
     <CodeGenOutputPath>bin\CodeGen</CodeGenOutputPath>
     <CodeGenArchivePath>Backup</CodeGenArchivePath>
+    <Modules>
+      <Module>Kistl.App.Projekte.Server.CustomServerActionsModule, Kistl.App.Projekte.Server</Module>
+      <Module>Kistl.App.Projekte.Common.CustomCommonActionsModule, Kistl.App.Projekte.Common</Module>
+    </Modules>
   </Server>
   <SourceFileLocation>
     <!-- default probe path -->
@@ -17,17 +21,14 @@
     <!-- common libaries -->
     <string>P:\Kistl\bin\Debug\bin\Common</string>
     <!-- Fallback path for local development -->
-    <string>P:\Kistl\bin\Debug\bin\server\fallback</string>
-    <!-- default probe path for CC.net on srv2008 -->
-    <string>f:\CruiseControl.NET\Projects\Kistl\bin\CodeGen\bin\Debug</string>
-    <!-- common libaries for CC.net on srv2008 -->
-    <string>f:\CruiseControl.NET\Projects\Kistl\bin\Debug\bin\Common</string>
-    <!-- Fallback path for CC.net on srv2008 -->
-    <string>f:\CruiseControl.Net\Projects\Kistl\bin\Debug\bin\Server\Fallback</string>
-    <!-- All other assemblies -->
-    <string>P:\Kistl\bin\Debug\bin\server</string>
-    <string>P:\Kistl\bin\Debug\bin\client</string>
-    <string>f:\CruiseControl.Net\Projects\Kistl\bin\Debug\bin\Server</string>
-    <string>f:\CruiseControl.Net\Projects\Kistl\bin\Debug\bin\Client</string>
+    <string>P:\Kistl\bin\Debug\bin\Server\fallback</string>
+
+    <!-- CC.net on srv2008 -->
+    <!-- default probe path -->
+    <string>F:\CruiseControl.Net\Projects\Kistl\bin\CodeGen\bin\Debug</string>
+    <!-- common libaries -->
+    <string>F:\CruiseControl.Net\Projects\Kistl\bin\Debug\bin\Common</string>
+    <!-- Fallback path for local development -->
+    <string>F:\CruiseControl.Net\Projects\Kistl\bin\Debug\bin\Server\fallback</string>
   </SourceFileLocation>
 </KistlConfig>

@@ -358,12 +358,12 @@ this.WriteObjects("    </Key>\r\n");
 this.WriteObjects("    <Property Name=\"ID\" Type=\"Int32\" Nullable=\"false\" />\r\n");
 this.WriteObjects("    \r\n");
 this.WriteObjects("    <!-- A -->\r\n");
-this.WriteObjects("    <NavigationProperty Name=\"A",  ImplementationPropertySuffix , "\"\r\n");
+this.WriteObjects("    <NavigationProperty Name=\"Parent",  ImplementationPropertySuffix , "\"\r\n");
 this.WriteObjects("                        Relationship=\"Model.",  prop.GetAssociationName() , "\"\r\n");
 this.WriteObjects("                        FromRole=\"CollectionEntry\"\r\n");
 this.WriteObjects("                        ToRole=\"",  prop.ObjectClass.Name , "\" />\r\n");
 this.WriteObjects("    <!-- B -->\r\n");
-this.WriteObjects("    <Property Name=\"B",  ImplementationPropertySuffix , "\"\r\n");
+this.WriteObjects("    <Property Name=\"Value",  ImplementationPropertySuffix , "\"\r\n");
 this.WriteObjects("              Type=\"Model.",  prop.CompoundObjectDefinition.Name , "\"\r\n");
 this.WriteObjects("              Nullable=\"false\" />\r\n");
 #line 320 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.cst"

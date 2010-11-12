@@ -60,16 +60,6 @@
     <Compile Include="NhGenerator.cs" />
     <Compile Include="NhGeneratorProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Templates\CollectionEntries\RelationEntry.cs" />
-    <Compile Include="Templates\ObjectClasses\ObjectListProperty.cs">
-      <DependentUpon>ObjectListProperty.cst</DependentUpon>
-    </Compile>
-    <Compile Include="Templates\ObjectClasses\ObjectListProperty.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ObjectListProperty.cst</DependentUpon>
-    </Compile>
-    <Compile Include="Templates\ObjectClasses\Template.cs" />
     <Compile Include="Templates\ProjectFile.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -96,10 +86,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Templates\ObjectClasses\ObjectListProperty.cst">
-      <Generator>Arebis Template Processor</Generator>
-      <LastGenOutput>ObjectListProperty.Designer.cs</LastGenOutput>
-    </None>
+    <Folder Include="Templates\CollectionEntries\" />
+    <Folder Include="Templates\ObjectClasses\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

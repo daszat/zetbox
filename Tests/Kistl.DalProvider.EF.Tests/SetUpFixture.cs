@@ -28,6 +28,7 @@ namespace Kistl.DalProvider.Ef.Tests
             builder.RegisterModule(new Kistl.Server.ServerModule());
             builder.RegisterModule(new Kistl.DalProvider.Ef.EfProvider());
             builder.RegisterModule(new Kistl.DalProvider.Memory.MemoryProvider());
+            builder.RegisterModule(new Kistl.Objects.InterfaceModule());
             builder.RegisterModule(new Kistl.Objects.EfModule());
             builder.RegisterModule(new Kistl.Objects.MemoryModule());
         }

@@ -1,5 +1,5 @@
 
-namespace Kistl.DalProvider.NHibernate.Generator.Implementation
+namespace Kistl.DalProvider.NHibernate.Generator.Templates
 {
     using System;
     using System.Collections.Generic;
@@ -41,6 +41,13 @@ namespace Kistl.DalProvider.NHibernate.Generator.Implementation
             this.WriteLine(@"    <Reference Include=""Kistl.DalProvider.NHibernate"">");
             this.WriteLine(@"      <SpecificVersion>False</SpecificVersion>");
             this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Server\Kistl.DalProvider.NHibernate.dll</HintPath>");
+            this.WriteLine(@"      <Private>False</Private>");
+            this.WriteLine(@"    </Reference>");
+
+            // Base Provider
+            this.WriteLine(@"    <Reference Include=""Kistl.Generator"">");
+            this.WriteLine(@"      <SpecificVersion>False</SpecificVersion>");
+            this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Server\Kistl.Generator.dll</HintPath>");
             this.WriteLine(@"      <Private>False</Private>");
             this.WriteLine(@"    </Reference>");
         }

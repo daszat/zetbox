@@ -9,25 +9,6 @@ namespace Kistl.DalProvider.Memory
     using Kistl.API;
     using Kistl.App.Base;
 
-    public class CustomPropertyDescriptor<X, Y> : PropertyDescriptorMemoryImpl<X, Y>
-    {
-        public CustomPropertyDescriptor(
-            Func<IFrozenContext> lazyCtx,
-            Guid? propertyGuid,
-            string name,
-            Attribute[] attrs,
-            Func<X, Y> getter,
-            Action<X, Y> setter)
-            : base(lazyCtx,
-             propertyGuid,
-             name,
-             attrs,
-             getter,
-             setter)
-        {
-        }
-    }
-
     public class PropertyDescriptorMemoryImpl<TComponent, TProperty>
         : BaseCustomPropertyDescriptor<TComponent, TProperty>
     {

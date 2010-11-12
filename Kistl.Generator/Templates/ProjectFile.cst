@@ -74,17 +74,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>$(KistlAPIPath)\Common\Autofac.dll</HintPath>
     </Reference>
-    <Reference Include="TempAppHelpers">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(KistlAPIPath)\Common\TempAppHelpers.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-	<!-- TODO: remove this reference by using Kistl.API.Base* Objects for Base Generator -->
-    <Reference Include="Kistl.Generator">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(KistlAPIPath)\Server\Kistl.Generator.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
 	<Reference Include="WindowsBase">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>

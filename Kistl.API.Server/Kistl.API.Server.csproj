@@ -86,7 +86,6 @@
     <Compile Include="Kistl.API.Migration\Translator.cs" />
     <Compile Include="ServerApiModule.cs" />
     <Compile Include="QueryTranslatorProvider.cs" />
-    <Compile Include="CustomPropertyDescriptor.cs" />
     <Compile Include="IKistlServerContext.cs" />
     <Compile Include="IMetaDataResolver.cs" />
     <Compile Include="ISchemaProvider.cs" />

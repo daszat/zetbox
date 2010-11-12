@@ -37,7 +37,7 @@ namespace Kistl.DalProvider.Memory.Generator
             get
             {
                 return new string[] {
-                   "Kistl.DalProvider.Memory",
+                    "Kistl.DalProvider.Base", "Kistl.DalProvider.Memory",
                 };
             }
         }

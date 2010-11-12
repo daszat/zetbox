@@ -5,13 +5,12 @@ namespace Kistl.IntegrationTests
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-
     using Kistl.API;
     using Kistl.API.Client;
     using Kistl.API.Tests;
     using Kistl.App.Base;
     using Kistl.App.GUI;
-
+    using Kistl.DalProvider.Base;
     using NUnit.Framework;
 
     [Ignore("takes way too long")]

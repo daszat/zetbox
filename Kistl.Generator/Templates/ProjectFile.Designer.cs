@@ -93,44 +93,33 @@ this.WriteObjects("    <Reference Include=\"Autofac, Version=2.1.14.854, Culture
 this.WriteObjects("      <SpecificVersion>False</SpecificVersion>\r\n");
 this.WriteObjects("      <HintPath>$(KistlAPIPath)\\Common\\Autofac.dll</HintPath>\r\n");
 this.WriteObjects("    </Reference>\r\n");
-this.WriteObjects("    <Reference Include=\"TempAppHelpers\">\r\n");
-this.WriteObjects("      <SpecificVersion>False</SpecificVersion>\r\n");
-this.WriteObjects("      <HintPath>$(KistlAPIPath)\\Common\\TempAppHelpers.dll</HintPath>\r\n");
-this.WriteObjects("      <Private>False</Private>\r\n");
-this.WriteObjects("    </Reference>\r\n");
-this.WriteObjects("	<!-- TODO: remove this reference by using Kistl.API.Base* Objects for Base Generator -->\r\n");
-this.WriteObjects("    <Reference Include=\"Kistl.Generator\">\r\n");
-this.WriteObjects("      <SpecificVersion>False</SpecificVersion>\r\n");
-this.WriteObjects("      <HintPath>$(KistlAPIPath)\\Server\\Kistl.Generator.dll</HintPath>\r\n");
-this.WriteObjects("      <Private>False</Private>\r\n");
-this.WriteObjects("    </Reference>\r\n");
 this.WriteObjects("	<Reference Include=\"WindowsBase\">\r\n");
 this.WriteObjects("      <RequiredTargetFramework>3.5</RequiredTargetFramework>\r\n");
 this.WriteObjects("    </Reference>\r\n");
-#line 92 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 81 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
 ApplyAdditionalReferences();
 
-#line 94 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 83 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
 this.WriteObjects("  </ItemGroup>\r\n");
 this.WriteObjects("  <ItemGroup>\r\n");
-#line 97 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 86 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
 foreach (var name in fileNames)
 	{
 
-#line 100 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 89 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
 this.WriteObjects("    <Compile Include=\"",  name , "\" />\r\n");
-#line 102 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 91 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
 }
 
-#line 104 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 93 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
 this.WriteObjects("  </ItemGroup>\r\n");
 this.WriteObjects("  <ItemGroup>\r\n");
 this.WriteObjects("    <None Include=\"Kistl.Objects.snk\" />\r\n");
 this.WriteObjects("  </ItemGroup>\r\n");
-#line 109 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 98 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
 ApplyAdditionalItemGroups();
 
-#line 111 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 100 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
 this.WriteObjects("  <Import Project=\"$(MSBuildBinPath)\\Microsoft.CSharp.targets\" />\r\n");
 this.WriteObjects("  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. \r\n");
 this.WriteObjects("       Other similar extension points exist, see Microsoft.Common.targets.\r\n");
@@ -140,10 +129,10 @@ this.WriteObjects("  -->\r\n");
 this.WriteObjects("  <Target Name=\"AfterBuild\">\r\n");
 this.WriteObjects("  </Target>\r\n");
 this.WriteObjects("  ");
-#line 120 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 109 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
 ApplyAdditionalPropertyGroups();
   
-#line 122 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 111 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
 this.WriteObjects("</Project>\r\n");
 
         }

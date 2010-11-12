@@ -141,6 +141,10 @@
       <Project>{A736E13F-D349-4CE5-A397-8438F58D0B9D}</Project>
       <Name>Kistl.Client</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Kistl.DalProvider.Base\Kistl.DalProvider.Base.csproj">
+      <Project>{A242A751-9F97-4F1C-ABE5-57B28133DEF4}</Project>
+      <Name>Kistl.DalProvider.Base</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Kistl.DalProvider.ClientObjects\Kistl.DalProvider.ClientObjects.csproj">
       <Project>{3760694D-3B35-41D4-B1A3-41BB288AA19F}</Project>
       <Name>Kistl.DalProvider.ClientObjects</Name>

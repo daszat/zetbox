@@ -308,12 +308,12 @@
     <Property Name="ID" Type="Int32" Nullable="false" />
     
     <!-- A -->
-    <NavigationProperty Name="A<%= ImplementationPropertySuffix %>"
+    <NavigationProperty Name="Parent<%= ImplementationPropertySuffix %>"
                         Relationship="Model.<%= prop.GetAssociationName() %>"
                         FromRole="CollectionEntry"
                         ToRole="<%= prop.ObjectClass.Name %>" />
     <!-- B -->
-    <Property Name="B<%= ImplementationPropertySuffix %>"
+    <Property Name="Value<%= ImplementationPropertySuffix %>"
               Type="Model.<%= prop.CompoundObjectDefinition.Name %>"
               Nullable="false" />
 <%

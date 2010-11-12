@@ -193,6 +193,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.DalProvider.Client.Ge
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.DalProvider.EF.Generator", "Kistl.DalProvider.EF.Generator\Kistl.DalProvider.EF.Generator.csproj", "{A2C68E17-5B32-4F4E-B83A-DC7122623FDD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.DalProvider.Base", "Kistl.DalProvider.Base\Kistl.DalProvider.Base.csproj", "{A242A751-9F97-4F1C-ABE5-57B28133DEF4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|.NET = Debug|.NET
@@ -664,6 +666,16 @@ Global
 		{A2C68E17-5B32-4F4E-B83A-DC7122623FDD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A2C68E17-5B32-4F4E-B83A-DC7122623FDD}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{A2C68E17-5B32-4F4E-B83A-DC7122623FDD}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{A242A751-9F97-4F1C-ABE5-57B28133DEF4}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{A242A751-9F97-4F1C-ABE5-57B28133DEF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A242A751-9F97-4F1C-ABE5-57B28133DEF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A242A751-9F97-4F1C-ABE5-57B28133DEF4}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{A242A751-9F97-4F1C-ABE5-57B28133DEF4}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{A242A751-9F97-4F1C-ABE5-57B28133DEF4}.Release|.NET.ActiveCfg = Release|Any CPU
+		{A242A751-9F97-4F1C-ABE5-57B28133DEF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A242A751-9F97-4F1C-ABE5-57B28133DEF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A242A751-9F97-4F1C-ABE5-57B28133DEF4}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{A242A751-9F97-4F1C-ABE5-57B28133DEF4}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -697,5 +709,6 @@ Global
 		{5EEF01A2-C027-4B1E-9D7D-61DEF2042047} = {0EBD0023-C7AE-4C6F-BF07-0CEA724F2B0F}
 		{F81E2AB4-0622-40A3-B7E3-9FAC0EE4A31B} = {0EBD0023-C7AE-4C6F-BF07-0CEA724F2B0F}
 		{A2C68E17-5B32-4F4E-B83A-DC7122623FDD} = {0EBD0023-C7AE-4C6F-BF07-0CEA724F2B0F}
+		{A242A751-9F97-4F1C-ABE5-57B28133DEF4} = {0EBD0023-C7AE-4C6F-BF07-0CEA724F2B0F}
 	EndGlobalSection
 EndGlobal
