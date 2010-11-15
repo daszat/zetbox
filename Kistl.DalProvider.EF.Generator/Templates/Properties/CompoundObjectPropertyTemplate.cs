@@ -11,10 +11,18 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.Properties
 
     public partial class CompoundObjectPropertyTemplate
     {
-        protected virtual void AddSerialization(Templates.Serialization.SerializationMembersList list, string memberName, string backingPropertyName)
+        protected virtual void AddSerialization(
+            Templates.Serialization.SerializationMembersList list,
+            string memberType, string memberName,
+            string backingStoreType, string backingStoreName)
         {
             if (list != null)
-                list.Add("Serialization.CompoundObjectSerialization", Templates.Serialization.SerializerType.All, this.xmlNamespace, memberName, memberName, backingPropertyName);
+            {
+                var xmlname = memberName;
+
+                list.Add("Serialization.CompoundObjectSerialization", Templates.Serialization.SerializerType.All,
+                    this.xmlNamespace, xmlname, memberType, memberName, backingStoreType, backingStoreName);
+            }
         }
     }
 }

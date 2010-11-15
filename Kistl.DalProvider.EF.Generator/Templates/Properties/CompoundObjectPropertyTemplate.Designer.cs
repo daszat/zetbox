@@ -65,16 +65,13 @@ this.WriteObjects("            set\r\n");
 this.WriteObjects("            {\r\n");
 this.WriteObjects("                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();\r\n");
 #line 44 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
-if(!isNullable)
-                {
-
-#line 47 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+if(!isNullable) { 
+#line 45 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 this.WriteObjects("                if (value == null)\r\n");
 this.WriteObjects("                    throw new ArgumentNullException(\"value\");\r\n");
-#line 50 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
-}
-
-#line 52 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 47 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+} 
+#line 48 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 this.WriteObjects("                if (!object.Equals(",  backingStoreName , ", value))\r\n");
 this.WriteObjects("                {\r\n");
 this.WriteObjects("                    var __oldValue = ",  backingStoreName , ";\r\n");
@@ -98,11 +95,11 @@ this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("\r\n");
-#line 76 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
-AddSerialization(serializationList, propName, backingStoreName);
+#line 72 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+AddSerialization(serializationList, coType, propName, coImplementationType, backingPropertyName);
 
-#line 78 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
-this.WriteObjects("           // BEGIN ",  this.GetType() , "");
+#line 74 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+this.WriteObjects("           // END ",  this.GetType() , "");
 
         }
 

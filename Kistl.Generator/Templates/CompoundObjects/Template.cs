@@ -35,14 +35,16 @@ namespace Kistl.Generator.Templates.CompoundObjects
             return "CompoundObject" + ImplementationSuffix;
         }
 
-        protected override void ApplyClassTailTemplate()
+        protected override void ApplyExtraConstructorTemplate()
         {
-            base.ApplyClassTailTemplate();
+            base.ApplyExtraConstructorTemplate();
 
             string clsName = this.GetTypeName();
 
             // attach compound to parent object
-            this.WriteObjects("        public ", clsName, "(IPersistenceObject parent, string property)");
+            this.WriteObjects("        public ", clsName, "(IPersistenceObject parent, string property) : this(false, parent, property) {}");
+            this.WriteLine();
+            this.WriteObjects("        public ", clsName, "(bool ignore, IPersistenceObject parent, string property)");
             this.WriteLine();
             this.WriteObjects("            : base(null) // TODO: pass parent's lazyCtx");
             this.WriteLine();
@@ -50,6 +52,7 @@ namespace Kistl.Generator.Templates.CompoundObjects
             this.WriteLine();
             this.WriteObjects("            AttachToObject(parent, property);");
             this.WriteLine();
+            ApplyConstructorBodyTemplate();
             this.WriteObjects("        }");
             this.WriteLine();
         }

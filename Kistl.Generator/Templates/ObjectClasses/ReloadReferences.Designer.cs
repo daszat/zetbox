@@ -34,18 +34,16 @@ this.WriteObjects("        {\r\n");
 this.WriteObjects("            // Do not reload references if the current object has been deleted.\r\n");
 this.WriteObjects("            // TODO: enable when MemoryContext uses MemoryDataObjects\r\n");
 this.WriteObjects("            //if (this.ObjectState == DataObjectState.Deleted) return;\r\n");
+#line 21 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\ReloadReferences.cst"
+if (cls.BaseObjectClass != null) { 
 #line 22 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\ReloadReferences.cst"
-if (cls.BaseObjectClass != null) {
-
-#line 24 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\ReloadReferences.cst"
 this.WriteObjects("            base.ReloadReferences();\r\n");
+#line 23 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\ReloadReferences.cst"
+} 
+#line 24 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\ReloadReferences.cst"
 this.WriteObjects("\r\n");
-#line 27 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\ReloadReferences.cst"
-}
-
-#line 29 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\ReloadReferences.cst"
 this.WriteObjects("            // fix direct object references\r\n");
-#line 31 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\ReloadReferences.cst"
+#line 27 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\ReloadReferences.cst"
 // TODO: Use only 1 side relation ends
     foreach(var prop in cls.Properties.OfType<ObjectReferenceProperty>()
         .Where(orp => !orp.IsList())
@@ -56,20 +54,18 @@ this.WriteObjects("            // fix direct object references\r\n");
         RelationEnd relEnd = rel.GetEnd(prop);
         RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
 
-        if (otherEnd.Type.ImplementsIExportable()) {
-            string referencedInterface = otherEnd.Type.GetDataTypeString();
-            string referencedImplementation = otherEnd.Type.GetDataTypeString() + ImplementationSuffix;
-            string name = prop.Name;
-            string implName = name + Kistl.API.Helper.ImplementationSuffix;
-            string fkBackingName = "_fk_" + name;
-            string fkGuidBackingName = "_fk_guid_" + name;
-            bool isExportable = relEnd.Type.ImplementsIExportable() && otherEnd.Type.ImplementsIExportable();
+        string referencedInterface = otherEnd.Type.GetDataTypeString();
+        string referencedImplementation = otherEnd.Type.GetDataTypeString() + ImplementationSuffix;
+        string name = prop.Name;
+        string implName = name + Kistl.API.Helper.ImplementationSuffix;
+        string fkBackingName = "_fk_" + name;
+        string fkGuidBackingName = "_fk_guid_" + name;
+        bool isExportable = relEnd.Type.ImplementsIExportable() && otherEnd.Type.ImplementsIExportable();
 
-            ReloadOneReference.Call(Host, ctx, referencedInterface, referencedImplementation, name, implName, fkBackingName, fkGuidBackingName, isExportable);
-        }
+        ReloadOneReference.Call(Host, ctx, referencedInterface, referencedImplementation, name, implName, fkBackingName, fkGuidBackingName, isExportable);
     }
 
-#line 54 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\ReloadReferences.cst"
+#line 48 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\ReloadReferences.cst"
 this.WriteObjects("        }\r\n");
 
         }

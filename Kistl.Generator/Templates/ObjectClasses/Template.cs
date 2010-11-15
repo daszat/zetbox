@@ -113,9 +113,9 @@ namespace Kistl.Generator.Templates.ObjectClasses
             Properties.ValueCollectionProperty.Call(Host, ctx, MembersToSerialize, prop);
         }
 
-        protected override void ApplyConstructorTemplate()
+        protected override void ApplyConstructorBodyTemplate()
         {
-            base.ApplyConstructorTemplate();
+            base.ApplyConstructorBodyTemplate();
             this.WriteObjects("            {");
             this.WriteLine();
             foreach (var prop in DataType.Properties.OfType<CompoundObjectProperty>().Where(p => !p.IsList).OrderBy(p => p.Name))
@@ -127,11 +127,17 @@ namespace Kistl.Generator.Templates.ObjectClasses
                 string backingName = name + ImplementationPropertySuffix;
                 string coType = prop.GetPropertyTypeString();
                 string coImplementationType = coType + ImplementationSuffix;
-                this.WriteObjects("                ", backingName, " = new ", coImplementationType, "(this, \"", name, "\");");
+                this.WriteObjects("                ", backingName, " = new ", coImplementationType, "(false, this, \"", name, "\");");
                 this.WriteLine();
             }
             this.WriteObjects("            }");
             this.WriteLine();
+        }
+
+        protected override void ApplyApplyChangesFromMethod()
+        {
+            base.ApplyApplyChangesFromMethod();
+            ApplyChangesFromMethod.Call(Host, ctx, DataType, GetTypeName());
         }
 
         protected override void ApplyAttachToContextMethod()

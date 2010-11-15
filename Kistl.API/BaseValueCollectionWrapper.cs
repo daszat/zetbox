@@ -22,14 +22,26 @@ namespace Kistl.API
 
         protected ValueCollectionWrapper(IKistlContext ctx, TParent parent, Action parentNotifier, TEntryCollection collection)
         {
-            if (ctx == null)
-                throw new ArgumentNullException("ctx");
+            if (ctx == null) { throw new ArgumentNullException("ctx"); }
+            if (parent == null) { throw new ArgumentNullException("parent"); }
+            // may be null: if (parentNotifier == null) { throw new ArgumentNullException("parentNotifier"); }
+            if (collection == null) { throw new ArgumentNullException("collection"); }
+
             this.ctx = ctx;
             this.parent = parent;
             this.parentNotifier = parentNotifier;
             this.collection = collection;
             this.tEntryImplementation = ctx.GetImplementationType(typeof(TEntry));
             this.tEntryInterface = tEntryImplementation.ToInterfaceType();
+
+            // may be necessary on (lazy) initialisation
+            foreach (var item in this.collection)
+            {
+                if (item.Context != this.ctx)
+                {
+                    ctx.Attach(item);
+                }
+            }
         }
 
         #region Notifications

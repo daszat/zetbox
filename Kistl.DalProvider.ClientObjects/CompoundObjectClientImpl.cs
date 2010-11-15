@@ -7,9 +7,10 @@ namespace Kistl.DalProvider.Client
     using System.Text;
 
     using Kistl.API;
+    using Kistl.DalProvider.Base;
 
     public abstract class CompoundObjectClientImpl
-        : BaseCompoundObject
+        : CompoundObjectDefaultImpl
     {
         protected CompoundObjectClientImpl(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)

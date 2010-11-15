@@ -225,6 +225,11 @@
     <Compile Include="Templates\CompoundObject\Template.cs" />
     <Compile Include="Templates\EfModel\ModelMslEntityTypeMapping.ComplexProperty.cs" />
     <Compile Include="Templates\EfModel\ModelMslEntityTypeMapping.ScalarProperty.cs" />
+    <Compile Include="Templates\Serialization\CompoundObjectSerialization.Designer.cs">
+      <DependentUpon>CompoundObjectSerialization.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="EfGeneratorStructure.cd" />
@@ -305,6 +310,10 @@
       <LastGenOutput>RelationDebugTemplate.Designer.cs</LastGenOutput>
     </None>
     <None Include="Kistl.snk" />
+    <None Include="Templates\Serialization\CompoundObjectSerialization.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>CompoundObjectSerialization.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="README.txt" />

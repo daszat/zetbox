@@ -30,10 +30,10 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.CompoundObjects
             return "BaseServerCompoundObject_EntityFramework";
         }
 
-        protected override void ApplyClassTailTemplate()
+        protected override void ApplyExtraConstructorTemplate()
         {
-            base.ApplyClassTailTemplate();
-
+            // avoid base constructor not implementing bool isNull
+            // base.ApplyExtraConstructorTemplate();
             string clsName = this.GetTypeName();
 
             this.WriteObjects("        public ", clsName, "(bool isNull, IPersistenceObject parent, string property)");
@@ -46,6 +46,7 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.CompoundObjects
             this.WriteLine();
             this.WriteObjects("            CompoundObject_IsNull = isNull;");
             this.WriteLine();
+            ApplyConstructorBodyTemplate();
             this.WriteObjects("        }");
             this.WriteLine();
 

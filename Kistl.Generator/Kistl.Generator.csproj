@@ -168,6 +168,14 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Templates\ObjectClasses\ApplyChangesFromMethod.cs">
+      <DependentUpon>ApplyChangesFromMethod.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\ObjectClasses\ApplyChangesFromMethod.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ApplyChangesFromMethod.cst</DependentUpon>
+    </Compile>
     <Compile Include="Templates\ObjectClasses\AttachToContextTemplate.cs">
       <DependentUpon>AttachToContextTemplate.cst</DependentUpon>
     </Compile>
@@ -441,6 +449,10 @@
     <None Include="Templates\Module.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>Module.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\ObjectClasses\ApplyChangesFromMethod.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>ApplyChangesFromMethod.Designer.cs</LastGenOutput>
     </None>
     <None Include="Templates\ObjectClasses\AttachToContextTemplate.cst">
       <Generator>Arebis Template Processor</Generator>

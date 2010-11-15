@@ -43,26 +43,33 @@ namespace Kistl.Generator.Templates.Properties
         }
 
         public static void Call(Arebis.CodeGeneration.IGenerationHost host,
-            IKistlContext ctx, 
+            IKistlContext ctx,
             Serialization.SerializationMembersList serializationList,
             string xmlNamespace,
-            string propName, string backingPropertyName, string backingStoreName, 
+            string propName, string backingPropertyName, string backingStoreName,
             string coType, string coImplementationType,
             bool isNullable
             )
         {
             host.CallTemplate(
-                "Properties.CompoundObjectPropertyTemplate", ctx, serializationList, 
+                "Properties.CompoundObjectPropertyTemplate", ctx, serializationList,
                 xmlNamespace, propName, backingPropertyName, backingStoreName,
                 coType, coImplementationType,
                 isNullable);
         }
 
-        protected virtual void AddSerialization(Serialization.SerializationMembersList list, string memberName, string backingPropertyName)
+        protected virtual void AddSerialization(
+            Serialization.SerializationMembersList list,
+            string memberType, string memberName, 
+            string backingStoreType, string backingStoreName)
         {
             if (list != null)
-                list.Add("Serialization.CompoundObjectSerialization", Serialization.SerializerType.All, 
-                    this.xmlNamespace, memberName, memberName, backingPropertyName);
+            {
+                var xmlname = memberName;
+
+                list.Add("Serialization.CompoundObjectSerialization", Serialization.SerializerType.All,
+                    this.xmlNamespace, xmlname, memberType, memberName, backingStoreType, backingStoreName);
+            }
         }
     }
 }

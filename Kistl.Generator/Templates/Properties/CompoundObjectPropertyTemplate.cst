@@ -18,7 +18,7 @@
 <%@ Parameter Name="coType" Type="string" %>
 <%@ Parameter Name="coImplementationType" Type="string" %>
 <%@ Parameter Name="isNullable" Type="bool" %>
-        // <%= this.GetType() %>
+        // BEGIN <%= this.GetType() %>
         // implement the user-visible interface
         public <%= coType %> <%= propName %>
         {
@@ -35,22 +35,37 @@
             get { return <%= backingStoreName %>; }
             set
             {
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
 <% if(!isNullable) { %>
                 if (value == null)
                     throw new ArgumentNullException("value");
 <% } %>
-                var __oldValue = <%= backingStoreName %>;
-                var __newValue = value;
+                if (!object.Equals(<%= backingStoreName %>, value))
+                {
+					var __oldValue = <%= backingStoreName %>;
+					var __newValue = value;
 
-                NotifyPropertyChanging("<%= propName %>", __oldValue, __newValue);
+					NotifyPropertyChanging("<%= propName %>", __oldValue, __newValue);
 
-                if (<%= backingStoreName %> != null) <%= backingStoreName %>.DetachFromObject(this, "<%= propName %>");
-                <%= backingStoreName %> = value != null ? (<%= coImplementationType %>)value.Clone() : null;
-                if (<%= backingStoreName %> != null) <%= backingStoreName %>.AttachToObject(this, "<%= propName %>");
+					if (<%= backingStoreName %> != null)
+					{ 
+						<%= backingStoreName %>.DetachFromObject(this, "<%= propName %>");
+					}
+					if (__newValue == null)
+					{
+						<%= backingStoreName %> = null;
+					}
+                    else
+                    {
+					    <%= backingStoreName %> = (<%= coImplementationType %>)__newValue.Clone();
+					    <%= backingStoreName %>.AttachToObject(this, "<%= propName %>");
+                    }
 
-                NotifyPropertyChanged("<%= propName %>", __oldValue, __newValue);
+					NotifyPropertyChanged("<%= propName %>", __oldValue, __newValue);
+				}
             }
         }
 <%
-        AddSerialization(serializationList, propName, backingPropertyName);
+        AddSerialization(serializationList, coType, propName, coImplementationType, backingPropertyName);
 %>
+           // END <%= this.GetType() %>

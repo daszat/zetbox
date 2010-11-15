@@ -53,7 +53,12 @@ namespace Kistl.Generator.Templates
         /// <summary>
         /// Is called to apply the contents of the default constructor
         /// </summary>
-        protected virtual void ApplyConstructorTemplate() { }
+        protected virtual void ApplyConstructorBodyTemplate() { }
+
+        /// <summary>
+        /// Is called to apply additional constructors
+        /// </summary>
+        protected virtual void ApplyExtraConstructorTemplate() { }
 
         /// <summary>
         /// is called to apply a optional tail part within the class

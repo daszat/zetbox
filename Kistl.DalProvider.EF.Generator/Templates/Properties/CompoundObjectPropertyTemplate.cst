@@ -34,45 +34,40 @@
         [EdmComplexProperty()]
         public <%= coImplementationType %> <%= backingPropertyName %>
         {
-            get
-            {
-                return <%= backingStoreName %>;
-            }
+            get { return <%= backingStoreName %>; }
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-<%                if(!isNullable)
-                {
-%>
+<% if(!isNullable) { %>
                 if (value == null)
                     throw new ArgumentNullException("value");
-<%
-                }
-%>
+<% } %>
                 if (!object.Equals(<%= backingStoreName %>, value))
                 {
                     var __oldValue = <%= backingStoreName %>;
-                    NotifyPropertyChanging("<%= propName %>", "<%= backingPropertyName %>", __oldValue, value);
+					var __newValue = value;
+
+                    NotifyPropertyChanging("<%= propName %>", "<%= backingPropertyName %>", __oldValue, __newValue);
+
                     if (<%= backingStoreName %> != null)
                     {
                         <%= backingStoreName %>.DetachFromObject(this, "<%= propName %>");
                     }
-                    if(value == null)
+                    if(__newValue == null)
                     {
                         <%= backingStoreName %> = new <%= coImplementationType %>(true, this, "<%= propName %>");
                     }
                     else
                     {
-                        <%= backingStoreName %> = (<%= coImplementationType %>)value.Clone();
+                        <%= backingStoreName %> = (<%= coImplementationType %>)__newValue.Clone();
                         <%= backingStoreName %>.AttachToObject(this, "<%= propName %>");
                     }
+
                     NotifyPropertyChanged("<%= propName %>", "<%= backingPropertyName %>", __oldValue, value);
                 }
             }
         }
-
-
 <%
-        AddSerialization(serializationList, propName, backingStoreName);
+        AddSerialization(serializationList, coType, propName, coImplementationType, backingPropertyName);
 %>
-           // BEGIN <%= this.GetType() %>
+           // END <%= this.GetType() %>

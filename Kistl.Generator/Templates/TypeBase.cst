@@ -59,18 +59,16 @@ namespace <%= DataType.Module.Namespace %>
         public <%= mungedClassName %>()
             : base(null)
         {
-<%
-            ApplyConstructorTemplate();
-%>
+<% ApplyConstructorBodyTemplate(); %>
         }
 
         public <%= mungedClassName %>(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
-<%
-            ApplyConstructorTemplate();
-%>
+<% ApplyConstructorBodyTemplate(); %>
         }
+
+<% ApplyExtraConstructorTemplate(); %>
 
 <%
         // TODO: decouple serializing format from Name order

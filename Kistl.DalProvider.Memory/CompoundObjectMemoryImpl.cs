@@ -7,9 +7,10 @@ namespace Kistl.DalProvider.Memory
     using System.Text;
 
     using Kistl.API;
+    using Kistl.DalProvider.Base;
 
     public abstract class CompoundObjectMemoryImpl
-        : BaseCompoundObject
+        : CompoundObjectDefaultImpl
     {
         protected CompoundObjectMemoryImpl(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)

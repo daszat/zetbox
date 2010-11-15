@@ -131,7 +131,10 @@ namespace Kistl.DalProvider.Base
 
         private int? GetPosition(T item)
         {
-            return item.GetPropertyValue<int?>(_posProperty);
+            if (String.IsNullOrEmpty(_posProperty))
+                return -1;
+            else
+                return item.GetPropertyValue<int?>(_posProperty);
         }
 
         private void SetPointerProperty(T item)

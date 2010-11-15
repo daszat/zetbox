@@ -10,10 +10,10 @@ namespace Kistl.DalProvider.Base
     /// <summary>
     /// local proxy
     /// </summary>
-    public abstract class CompoundObjectBaseImpl
+    public abstract class CompoundObjectDefaultImpl
         : BaseCompoundObject
     {
-        protected CompoundObjectBaseImpl(Func<IFrozenContext> lazyCtx)
+        protected CompoundObjectDefaultImpl(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
         }

@@ -9,7 +9,6 @@ namespace Kistl.DalProvider.Base
 
     using Kistl.API;
 
-    // TODO: Move to DalProvider.Base
     public class ClientValueCollectionWrapper<TParent, TValue, TEntry, TEntryCollection>
         : ValueCollectionWrapper<TParent, TValue, TEntry, TEntryCollection>, INotifyCollectionChanged
         where TParent : IDataObject
@@ -50,7 +49,6 @@ namespace Kistl.DalProvider.Base
         #endregion
     }
 
-    // TODO: Move to DalProvider.Base
     public class ClientValueListWrapper<TParent, TValue, TEntry, TEntryCollection> : ValueListWrapper<TParent, TValue, TEntry, TEntryCollection>
         where TParent : IDataObject
         where TEntry : class, IValueListEntry<TParent, TValue>
