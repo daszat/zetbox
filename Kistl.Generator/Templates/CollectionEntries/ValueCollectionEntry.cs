@@ -115,5 +115,13 @@ namespace Kistl.Generator.Templates.CollectionEntries
             string referencedImplementation = referencedInterface + ImplementationSuffix;
             ObjectClasses.ReloadOneReference.Call(Host, ctx, referencedInterface, referencedImplementation, "Parent", "Parent", "_fk_Parent", "_fk_guid_Parent", IsExportable());
         }
+
+        protected override void ApplyChangesFromBody()
+        {
+            base.ApplyChangesFromBody();
+
+            this.WriteLine("            me._fk_Parent = other._fk_Parent;");
+            this.WriteLine("            me.Value = other.Value;");
+        }
     }
 }
