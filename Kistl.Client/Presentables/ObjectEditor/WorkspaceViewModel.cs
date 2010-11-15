@@ -1,17 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-
-using Kistl.API;
-using Kistl.App.Base;
-using Kistl.App.Extensions;
-using Kistl.API.Client;
-using System.ComponentModel;
 
 namespace Kistl.Client.Presentables.ObjectEditor
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.ComponentModel;
+    using System.Linq;
+    using System.Text;
+    using Kistl.API;
+    using Kistl.API.Client;
+    using Kistl.App.Base;
+    using Kistl.App.Extensions;
+
     public class WorkspaceViewModel
         : WindowViewModel, IMultipleInstancesManager, IDisposable
     {
@@ -171,7 +171,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
                 if (_AbortCommand == null)
                 {
                     _AbortCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>()
-                        .Invoke(DataContext, "Abort", "Closes this workspace without saving", 
+                        .Invoke(DataContext, "Abort", "Closes this workspace without saving",
                         Close, null);
                 }
                 return _AbortCommand;
