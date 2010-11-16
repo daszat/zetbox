@@ -8,6 +8,7 @@ namespace Kistl.Client.Presentables.GUI
     using System.Text;
     using Kistl.API;
     using Kistl.App.GUI;
+using Kistl.API.Common;
 
     [ViewModelDescriptor]
     public class NavigationScreenViewModel
@@ -59,6 +60,11 @@ namespace Kistl.Client.Presentables.GUI
         }
 
         public override string Name
+        {
+            get { return _screen.Title; }
+        }
+
+        public string Title
         {
             get { return _screen.Title; }
         }
