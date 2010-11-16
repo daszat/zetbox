@@ -11,8 +11,10 @@
     <UniformGrid Rows="1">
         <kevin:DatePicker Value="{Binding DatePart, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=true}"
                           Visibility="{Binding DatePartVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                          IsReadOnly="{Binding IsReadOnly}"
                           CanEdit="True" />
         <TextBox Text="{Binding TimePart, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=true}"
+                 IsReadOnly="{Binding IsReadOnly}"
                  Visibility="{Binding TimePartVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
     </UniformGrid>
 </view:PropertyEditor>
