@@ -236,7 +236,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 if (_createNewItemAndSetValueCommand == null)
                 {
                     _createNewItemAndSetValueCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>()
-                        .Invoke(DataContext, "Create new item", "Create new item", () => CreateNewItemAndSetValue(null), () => AllowCreateNewItem);
+                        .Invoke(DataContext, "Create new item", "Create new item", () => CreateNewItemAndSetValue(null), () => AllowCreateNewItem && !DataContext.IsReadonly && !IsReadOnly);
                 }
                 return _createNewItemAndSetValueCommand;
             }
@@ -272,7 +272,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 if (_SelectValueCommand == null)
                 {
                     _SelectValueCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>()
-                        .Invoke(DataContext, "Select", "Selects another reference", () => SelectValue(), () => !DataContext.IsReadonly);
+                        .Invoke(DataContext, "Select", "Selects another reference", () => SelectValue(), () => !DataContext.IsReadonly && !IsReadOnly);
                 }
                 return _SelectValueCommand;
             }

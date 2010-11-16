@@ -210,7 +210,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 if (_CreateNewCommand == null)
                 {
                     _CreateNewCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>()
-                        .Invoke(DataContext, "Add new", "Creates a new Item suitable for adding to the list.", () => CreateNewItem(), () => AllowAddNew);
+                        .Invoke(DataContext, "Add new", "Creates a new Item suitable for adding to the list.", () => CreateNewItem(), () => AllowAddNew && !DataContext.IsReadonly && !IsReadOnly);
                 }
                 return _CreateNewCommand;
             }
@@ -224,7 +224,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 if (_AddExistingCommand == null)
                 {
                     _AddExistingCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>()
-                        .Invoke(DataContext, "Add existing", "Adds an existing item into this list.", () => AddExistingItem(), () => AllowAddExisting);
+                        .Invoke(DataContext, "Add existing", "Adds an existing item into this list.", () => AddExistingItem(), () => AllowAddExisting && !DataContext.IsReadonly && !IsReadOnly);
                 }
                 return _AddExistingCommand;
             }
@@ -256,7 +256,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                     _DeleteCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>()
                         .Invoke(DataContext, "Delete", "Delete selection from data store", 
                         () => SelectedItems.ToList().ForEach(i => DeleteItem(i)), // Collection will change while deleting!
-                        () => SelectedItems != null && SelectedItems.Count() > 0 && AllowDelete);
+                        () => SelectedItems != null && SelectedItems.Count() > 0 && AllowDelete && !DataContext.IsReadonly && !IsReadOnly);
                 }
                 return _DeleteCommand;
             }
