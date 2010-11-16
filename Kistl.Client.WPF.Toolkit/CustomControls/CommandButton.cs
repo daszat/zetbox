@@ -9,29 +9,34 @@ namespace Kistl.Client.WPF.CustomControls
     using System.Windows.Controls;
     using System.Windows.Data;
     using Kistl.Client.Presentables;
+    using System.ComponentModel;
     
     public class CommandButton
         : Button
     {
         public CommandButton()
         {
-            {
-                var bCmd = new Binding("CommandViewModel");
-                bCmd.RelativeSource = RelativeSource.Self;
-                bCmd.Converter = new Commands.Converter();
-                this.SetBinding(CommandProperty, bCmd);
-            }
+            var bCmd = new Binding("CommandViewModel");
+            bCmd.RelativeSource = RelativeSource.Self;
+            bCmd.Converter = new Commands.Converter();
+            this.SetBinding(CommandProperty, bCmd);
 
-            {
-                var bLabel = new Binding("CommandViewModel.Label");
-                bLabel.RelativeSource = RelativeSource.Self;
-                this.SetBinding(ContentProperty, bLabel);
-            }
+            var bLabel = new Binding("CommandViewModel.Label");
+            bLabel.RelativeSource = RelativeSource.Self;
+            this.SetBinding(ContentProperty, bLabel);
 
+            var bTooltip = new Binding("CommandViewModel.ToolTip");
+            bTooltip.RelativeSource = RelativeSource.Self;
+            this.SetBinding(ToolTipProperty, bTooltip);
+
+            this.Loaded += new RoutedEventHandler(CommandButton_Loaded);
+        }
+
+        void CommandButton_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (DesignerProperties.GetIsInDesignMode(this))
             {
-                var bTooltip = new Binding("CommandViewModel.ToolTip");
-                bTooltip.RelativeSource = RelativeSource.Self;
-                this.SetBinding(ToolTipProperty, bTooltip);
+                this.Content = "Command Button";
             }
         }
 
