@@ -8,26 +8,23 @@
                                xmlns:commands="clr-namespace:Kistl.Client.WPF.Commands;assembly=Kistl.Client.WPF.Toolkit"
                                commands:SmartRoutedUICommand.IsCommandSink="True">
     <DockPanel x:Name="ctrlInstanceList">
-        <GroupBox DockPanel.Dock="Top"
-                  Header="Filter"
-                  Padding="10"
-                  Visibility="{Binding ShowFilter, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <StackPanel>
-                <ItemsControl ItemsSource="{Binding FilterViewModels}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <ContentPresenter Grid.Column="1"
-                                              Content="{Binding}"
-                                              ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </StackPanel>
-        </GroupBox>
+        <StackPanel DockPanel.Dock="Top"
+                    Visibility="{Binding ShowFilter, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    Margin="0 0 0 10">
+            <ItemsControl ItemsSource="{Binding FilterViewModels}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <ContentPresenter Content="{Binding}"
+                                          ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
 
         <ToolBar DockPanel.Dock="Top"
                  ItemsSource="{Binding Commands}"
-                 Visibility="{Binding ShowCommands, Converter={StaticResource BooleanToVisibilityConverter}}">
+                 Visibility="{Binding ShowCommands, Converter={StaticResource BooleanToVisibilityConverter}}"
+                 Margin="0 0 0 5">
             <ToolBar.ItemTemplate>
                 <DataTemplate>
                     <Button Command="{Binding Converter={StaticResource CommandConverter}}"
@@ -40,14 +37,14 @@
 
         <GroupBox DockPanel.Dock="Bottom"
                   Visibility="{Binding ShowMasterDetail, Converter={StaticResource BooleanToVisibilityConverter}}"
-                  Header="Details">
+                  Header="Details"
+                  Margin="0 10 0 0">
             <ContentPresenter Content="{Binding SelectedItem}"
                               tk:VisualTypeTemplateSelector.RequestedKind="{Binding DataContext.RequestedEditorKind, ElementName=ctrlInstanceList, Mode=OneWay}"
                               ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
         </GroupBox>
 
         <ListView x:Name="lst"
-                  Margin="10"
                   BorderThickness="0"
                   ItemsSource="{Binding InstancesFiltered}"
                   ItemTemplateSelector="{StaticResource listItemTemplateSelector}"

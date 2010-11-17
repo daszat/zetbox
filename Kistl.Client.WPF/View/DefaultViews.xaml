@@ -4,6 +4,12 @@
                     xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"
                     xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client">
 
+    <Style x:Key="Notice"
+           TargetType="TextBlock">
+        <Setter Property="FontWeight"
+                Value="Bold" />
+    </Style>
+
     <DataTemplate x:Key="emptyTemplate">
         <Viewbox Stretch="UniformToFill"
                  StretchDirection="DownOnly">

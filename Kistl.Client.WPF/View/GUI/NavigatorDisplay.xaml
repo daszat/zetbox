@@ -4,10 +4,9 @@
                   xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"
                   xmlns:commands="clr-namespace:Kistl.Client.WPF.Commands;assembly=Kistl.Client.WPF.Toolkit"
                   commands:SmartRoutedUICommand.IsCommandSink="True"
-                  Height="600"
-                  Width="800"
-                  Title="{Binding Name}"
-                  WindowState="Maximized">
+                  Width="1024"
+                  Height="768"
+                  Title="{Binding Name}">
     <DockPanel LastChildFill="True">
         <!--<UniformGrid DockPanel.Dock="Top"
                      Rows="1">

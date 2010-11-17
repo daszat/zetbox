@@ -7,6 +7,8 @@ using System.Text;
 
 using Kistl.API;
 using Kistl.App.GUI;
+using Kistl.API.Common;
+using Kistl.App.Base;
 
 namespace Kistl.Client.Presentables
 {
@@ -37,6 +39,11 @@ namespace Kistl.Client.Presentables
         /// FrozenContext for resolving meta data
         /// </summary>
         IFrozenContext FrozenContext { get; }
+
+        /// <summary>
+        /// The current Identity Resolver
+        /// </summary>
+        IIdentityResolver IdentityResolver { get; }
     }
 
     [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
@@ -82,6 +89,19 @@ namespace Kistl.Client.Presentables
         /// A <see cref="IKistlContext"/> to access the current user's data
         /// </summary>
         protected IKistlContext DataContext { get; private set; }
+
+        private Identity _CurrentIdentity = null;
+        public Identity CurrentIdentity
+        {
+            get
+            {
+                if (_CurrentIdentity == null)
+                {
+                    _CurrentIdentity = _dependencies.IdentityResolver.GetCurrent();
+                }
+                return _CurrentIdentity;
+            }
+        }
 
         /// <param name="dependencies">The <see cref="IViewModelDependencies"/> to access the current application context</param>
         /// <param name="dataCtx">The <see cref="IKistlContext"/> to access the current user's data session</param>
@@ -223,6 +243,10 @@ namespace Kistl.Client.Presentables
         {
             get { throw new NotImplementedException(); }
         }
-    }
 
+        public IIdentityResolver IdentityResolver
+        {
+            get { throw new NotImplementedException(); }
+        }
+    }
 }
