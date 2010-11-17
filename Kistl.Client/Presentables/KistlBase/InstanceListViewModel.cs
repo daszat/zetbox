@@ -541,6 +541,23 @@ namespace Kistl.Client.Presentables.KistlBase
                 ExecutePostFilter();
             }
         }
+
+        private bool _SelectFirstOnLoad = false;
+        public bool SelectFirstOnLoad
+        {
+            get
+            {
+                return _SelectFirstOnLoad;
+            }
+            set
+            {
+                if (_SelectFirstOnLoad != value)
+                {
+                    _SelectFirstOnLoad = value;
+                    OnPropertyChanged("SelectFirstOnLoad");
+                }
+            }
+        }
         #endregion
 
         #region Sorting
@@ -727,8 +744,8 @@ namespace Kistl.Client.Presentables.KistlBase
         /// </summary>
         protected virtual void OnInstancesChanged()
         {
-            OnPropertyChanged("Instances");
             ExecutePostFilter();
+            OnPropertyChanged("Instances");
         }
 
         /// <summary>
@@ -772,6 +789,13 @@ namespace Kistl.Client.Presentables.KistlBase
             }
 
             OnPropertyChanged("InstancesFiltered");
+
+            if (SelectFirstOnLoad)
+            {
+                this.SelectedItems.Clear();
+                var i = _instancesFiltered.FirstOrDefault();
+                if(i != null) this.SelectedItems.Add(i);
+            }
         }
 
         #endregion

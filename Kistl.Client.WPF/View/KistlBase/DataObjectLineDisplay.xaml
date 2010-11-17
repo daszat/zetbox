@@ -6,14 +6,8 @@
         <Image Source="{Binding Converter={StaticResource IconConverter}}"
                Width="14"
                Height="14" />
-        <StackPanel Orientation="Horizontal">
-            <TextBlock Text="("
-                       Margin="3,0,0,0" />
-            <TextBlock Text="{Binding ID}" />
-            <TextBlock Text=")" />
-            <TextBlock Text="{Binding Name}"
-                       Margin="3,0,0,0" />
-        </StackPanel>
+        <TextBlock Text="{Binding Name}"
+                   Margin="3,0,0,0" />
         <ctrls:LoadingIndicator DockPanel.Dock="Left" />
     </DockPanel>
 </UserControl>

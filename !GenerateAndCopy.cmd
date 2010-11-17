@@ -14,6 +14,9 @@ IF ERRORLEVEL 1 GOTO FAIL
 bin\debug\bin\Server\Kistl.Server.Service.exe Kistl.Server.Service\DefaultConfig.xml -publish Kistl.Server\Database\Database.xml *
 IF ERRORLEVEL 1 GOTO FAIL
 
+bin\debug\bin\Server\Kistl.Server.Service.exe Kistl.Server.Service\DefaultConfig.xml -publish Kistl.Server\Database\KistlBase.xml KistlBase GUI
+IF ERRORLEVEL 1 GOTO FAIL
+
 echo ********************************************************************************
 echo ************************************ Success ***********************************
 echo ********************************************************************************

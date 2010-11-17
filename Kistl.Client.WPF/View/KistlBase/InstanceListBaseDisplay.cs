@@ -72,13 +72,49 @@ namespace Kistl.Client.WPF.View.KistlBase
             e.Handled = true;
         }
 
+        private bool _selectedItemsChangedByViewModel = false;
+        private bool _selectedItemsChangedByList = false;
+
         protected void lst_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (e.OriginalSource == ListView)
+            if (_selectedItemsChangedByViewModel) return;
+
+            _selectedItemsChangedByList = true;
+            try
             {
-                e.Handled = true;
-                e.RemovedItems.ForEach<DataObjectViewModel>(i => ViewModel.SelectedItems.Remove(i));
-                e.AddedItems.ForEach<DataObjectViewModel>(i => ViewModel.SelectedItems.Add(i));
+                if (e.OriginalSource == ListView)
+                {
+                    e.Handled = true;
+                    e.RemovedItems.ForEach<DataObjectViewModel>(i => ViewModel.SelectedItems.Remove(i));
+                    e.AddedItems.ForEach<DataObjectViewModel>(i => ViewModel.SelectedItems.Add(i));
+                }
+            }
+            finally
+            {
+                _selectedItemsChangedByList = false;
+            }
+        }
+
+        void ViewModel_SelectedItems_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            if (_selectedItemsChangedByList) return;
+
+            _selectedItemsChangedByViewModel = true;
+            try
+            {
+                if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Reset)
+                {
+                    ListView.SelectedItems.Clear();
+                }
+                else
+                {
+                    if (e.OldItems != null) e.OldItems.ForEach<object>(i => ListView.SelectedItems.Remove(i));
+                    if (e.NewItems != null) e.NewItems.ForEach<object>(i => ListView.SelectedItems.Add(i));
+                }
+            }
+            finally
+            {
+                _selectedItemsChangedByViewModel = false;
             }
         }
 
@@ -150,6 +186,8 @@ namespace Kistl.Client.WPF.View.KistlBase
                 {
                     RefreshGridView();
                 }
+                // Attach to selection changed event on ViewModel side
+                ViewModel.SelectedItems.CollectionChanged += ViewModel_SelectedItems_CollectionChanged;
             }
         }
         #endregion
