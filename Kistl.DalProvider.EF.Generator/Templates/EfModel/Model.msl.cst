@@ -54,7 +54,7 @@
 
     <!-- EntitySetMappings and AssociationSetMappings for object-object relations with a CollectionEntry -->
 <%
-    foreach(var rel in ModelCsdl.GetRelationsWithSeparateStorage(ctx))
+    foreach(var rel in ctx.GetRelationsWithSeparateStorage())
     {
         string fkAName = rel.GetRelationFkColumnName(RelationEndRole.A);
         string fkBName = rel.GetRelationFkColumnName(RelationEndRole.B);
@@ -125,7 +125,7 @@
 
     <!-- AssociationSetMappings for direct object-object relations without a CollectionEntry -->
 <%
-    foreach(var rel in ModelCsdl.GetRelationsWithoutSeparateStorage(ctx))
+    foreach(var rel in ctx.GetRelationsWithoutSeparateStorage())
     {
         RelationEnd principal, dependent;
     

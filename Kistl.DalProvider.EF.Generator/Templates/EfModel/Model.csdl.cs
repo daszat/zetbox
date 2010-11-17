@@ -61,22 +61,5 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.EfModel
         {
             return cls.IsAbstract ? " Abstract=\"true\"" : string.Empty;
         }
-
-        internal static IEnumerable<Relation> GetRelationsWithSeparateStorage(IKistlContext ctx)
-        {
-            return ctx.GetQuery<Relation>()
-                .Where(r => r.Storage == StorageType.Separate)
-                .ToList()
-                .OrderBy(r => r.GetAssociationName());
-        }
-
-        internal static IEnumerable<Relation> GetRelationsWithoutSeparateStorage(IKistlContext ctx)
-        {
-            return ctx.GetQuery<Relation>()
-                .Where(r => r.Storage != StorageType.Separate)
-                .ToList()
-                .OrderBy(r => r.GetAssociationName());
-        }
-
     }
 }

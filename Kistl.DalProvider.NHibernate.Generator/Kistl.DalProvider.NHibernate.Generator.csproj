@@ -60,6 +60,24 @@
     <Compile Include="NhGenerator.cs" />
     <Compile Include="NhGeneratorProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Templates\Mappings\JoinedSubclassHbm.cs" />
+    <Compile Include="Templates\Mappings\JoinedSubclassHbm.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>JoinedSubclassHbm.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Mappings\ObjectClassHbm.cs" />
+    <Compile Include="Templates\Mappings\ObjectClassHbm.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ObjectClassHbm.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Mappings\PropertiesHbm.cs" />
+    <Compile Include="Templates\Mappings\PropertiesHbm.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PropertiesHbm.cst</DependentUpon>
+    </Compile>
     <Compile Include="Templates\ProjectFile.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -86,8 +104,20 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Templates\CollectionEntries\" />
-    <Folder Include="Templates\ObjectClasses\" />
+    <None Include="Templates\Mappings\ObjectClassHbm.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>ObjectClassHbm.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\Mappings\PropertiesHbm.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>PropertiesHbm.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Templates\Mappings\JoinedSubclassHbm.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>JoinedSubclassHbm.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

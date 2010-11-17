@@ -255,6 +255,7 @@ A: Kistl.DalProvider.ClientObjects
 A: Kistl.DalProvider.Ef
 A: Kistl.DalProvider.Memory
 A: Kistl.DalProvider.Memory.Generator
+A: Kistl.DalProvider.NHibernate.Generator
 A: Kistl.Server
 A: Kistl.Server.Service
 

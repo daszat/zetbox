@@ -45,11 +45,20 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates
             this.WriteLine(@"    </Reference>");
 
             // Base Provider
-            this.WriteLine(@"    <Reference Include=""Kistl.Generator"">");
+            this.WriteLine(@"    <Reference Include=""Kistl.DalProvider.Base"">");
             this.WriteLine(@"      <SpecificVersion>False</SpecificVersion>");
-            this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Server\Kistl.Generator.dll</HintPath>");
+            this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Common\Kistl.DalProvider.Base.dll</HintPath>");
             this.WriteLine(@"      <Private>False</Private>");
             this.WriteLine(@"    </Reference>");
+        }
+
+        protected override void ApplyAdditionalItemGroups()
+        {
+            base.ApplyAdditionalItemGroups();
+            this.WriteLine(@"    <ItemGroup>");
+            this.WriteLine(@"    <EmbeddedResource Include=""*.hbm.xml"" />");
+            this.WriteLine(@"    <EmbeddedResource Include=""*/*.hbm.xml"" />");
+            this.WriteLine(@"    </ItemGroup>");
         }
     }
 }

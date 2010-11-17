@@ -55,7 +55,7 @@ this.WriteObjects("    </AssociationSet>\r\n");
 #line 38 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.cst"
 this.WriteObjects("    <!-- EntitySets and AssociationSets for all object-object CollectionEntrys -->\r\n");
 #line 40 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.cst"
-foreach(var rel in GetRelationsWithSeparateStorage(ctx))
+foreach(var rel in ctx.GetRelationsWithSeparateStorage())
     {
         string entityName = rel.GetRelationClassName();
         string assocNameA = rel.GetRelationAssociationName(RelationEndRole.A);
@@ -120,7 +120,7 @@ this.WriteObjects("    </AssociationSet>\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("    <!-- AssociationSets for all object-object relations without CollectionEntrys -->\r\n");
 #line 99 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.cst"
-foreach(var rel in GetRelationsWithoutSeparateStorage(ctx))
+foreach(var rel in ctx.GetRelationsWithoutSeparateStorage())
     {
         string assocName = rel.GetAssociationName();
 
@@ -209,7 +209,7 @@ this.WriteObjects("  </EntityType>\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("  <!-- EntityTypes and Associations for all object-object CollectionEntrys -->\r\n");
 #line 177 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.cst"
-foreach(var rel in GetRelationsWithSeparateStorage(ctx))
+foreach(var rel in ctx.GetRelationsWithSeparateStorage())
     {
 
 
@@ -392,7 +392,7 @@ this.WriteObjects("  </Association>\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("  <!-- Associations for all object-object relations without CollectionEntrys -->\r\n");
 #line 342 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.cst"
-foreach(var rel in GetRelationsWithoutSeparateStorage(ctx))
+foreach(var rel in ctx.GetRelationsWithoutSeparateStorage())
     {
 
 #line 345 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.cst"

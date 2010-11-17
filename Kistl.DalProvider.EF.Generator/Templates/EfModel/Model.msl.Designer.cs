@@ -74,7 +74,7 @@ this.WriteObjects("\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("    <!-- EntitySetMappings and AssociationSetMappings for object-object relations with a CollectionEntry -->\r\n");
 #line 57 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
-foreach(var rel in ModelCsdl.GetRelationsWithSeparateStorage(ctx))
+foreach(var rel in ctx.GetRelationsWithSeparateStorage())
     {
         string fkAName = rel.GetRelationFkColumnName(RelationEndRole.A);
         string fkBName = rel.GetRelationFkColumnName(RelationEndRole.B);
@@ -152,7 +152,7 @@ this.WriteObjects("\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("    <!-- AssociationSetMappings for direct object-object relations without a CollectionEntry -->\r\n");
 #line 128 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
-foreach(var rel in ModelCsdl.GetRelationsWithoutSeparateStorage(ctx))
+foreach(var rel in ctx.GetRelationsWithoutSeparateStorage())
     {
         RelationEnd principal, dependent;
     

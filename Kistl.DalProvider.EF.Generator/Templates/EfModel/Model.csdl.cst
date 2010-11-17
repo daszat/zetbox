@@ -37,7 +37,7 @@
 %>
     <!-- EntitySets and AssociationSets for all object-object CollectionEntrys -->
 <%
-    foreach(var rel in GetRelationsWithSeparateStorage(ctx))
+    foreach(var rel in ctx.GetRelationsWithSeparateStorage())
     {
         string entityName = rel.GetRelationClassName();
         string assocNameA = rel.GetRelationAssociationName(RelationEndRole.A);
@@ -96,7 +96,7 @@
 
     <!-- AssociationSets for all object-object relations without CollectionEntrys -->
 <%
-    foreach(var rel in GetRelationsWithoutSeparateStorage(ctx))
+    foreach(var rel in ctx.GetRelationsWithoutSeparateStorage())
     {
         string assocName = rel.GetAssociationName();
 %>
@@ -174,7 +174,7 @@
 
   <!-- EntityTypes and Associations for all object-object CollectionEntrys -->
 <%
-    foreach(var rel in GetRelationsWithSeparateStorage(ctx))
+    foreach(var rel in ctx.GetRelationsWithSeparateStorage())
     {
 
 %>
@@ -339,7 +339,7 @@
 
   <!-- Associations for all object-object relations without CollectionEntrys -->
 <%
-    foreach(var rel in GetRelationsWithoutSeparateStorage(ctx))
+    foreach(var rel in ctx.GetRelationsWithoutSeparateStorage())
     {
 %>
   <Association Name="<%= rel.GetAssociationName() %>" >

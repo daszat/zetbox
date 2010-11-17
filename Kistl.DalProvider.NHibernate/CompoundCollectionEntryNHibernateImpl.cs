@@ -9,7 +9,7 @@ namespace Kistl.DalProvider.NHibernate
     using Kistl.API;
 
     public abstract class CompoundCollectionEntryNHibernateImpl<TA, TAImpl, TB, TBImpl>
-        : BaseNhPersistenceObject
+        : NHibernatePersistenceObject
         where TA : class, IDataObject
         where TAImpl : class, IDataObject, TA
         where TB : class, ICompoundObject

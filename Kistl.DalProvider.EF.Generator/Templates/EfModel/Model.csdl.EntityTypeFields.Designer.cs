@@ -12,7 +12,7 @@ using Kistl.Generator.Extensions;
 
 namespace Kistl.DalProvider.Ef.Generator.Templates.EfModel
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.DalProvider.Ef.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst")]
     public partial class ModelCsdlEntityTypeFields : Kistl.Generator.ResourceTemplate
     {
 		protected IKistlContext ctx;
@@ -29,9 +29,10 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.EfModel
         
         public override void Generate()
         {
-#line 19 "P:\Kistl\Kistl.DalProvider.Ef.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
+#line 19 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
 /*
 	 * TODO: Actually, all this should die and become a bunch of polymorphic calls.
+     * See also Kistl.DalProvider.NHibernate.Generator.Templates.Mappings.PropertiesHbm
 	 */
 
 	foreach(var p in properties.OrderBy(p => p.Name))
@@ -48,28 +49,28 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.EfModel
 			{
 				Debug.Assert(relEnd != null);
 
-#line 37 "P:\Kistl\Kistl.DalProvider.Ef.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
+#line 38 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
 this.WriteObjects("    <NavigationProperty Name=\"",  p.Name + ImplementationPropertySuffix , "\"\r\n");
 this.WriteObjects("                        Relationship=\"Model.",  rel.GetRelationAssociationName(relEnd.GetRole()) , "\"\r\n");
 this.WriteObjects("                        FromRole=\"",  relEnd.RoleName , "\"\r\n");
 this.WriteObjects("                        ToRole=\"CollectionEntry\" />\r\n");
-#line 42 "P:\Kistl\Kistl.DalProvider.Ef.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
+#line 43 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
 }
 			else
 			{
 
-#line 46 "P:\Kistl\Kistl.DalProvider.Ef.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
+#line 47 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
 this.WriteObjects("    <NavigationProperty Name=\"",  p.Name + ImplementationPropertySuffix , "\"\r\n");
 this.WriteObjects("                        Relationship=\"Model.",  rel.GetAssociationName() , "\"\r\n");
 this.WriteObjects("                        FromRole=\"",  relEnd.RoleName , "\"\r\n");
 this.WriteObjects("                        ToRole=\"",  otherEnd.RoleName , "\" />\r\n");
-#line 52 "P:\Kistl\Kistl.DalProvider.Ef.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
+#line 53 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
 if (rel.NeedsPositionStorage(relEnd.GetRole()))
 				{
 
-#line 55 "P:\Kistl\Kistl.DalProvider.Ef.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
+#line 56 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
 this.WriteObjects("    <Property Name=\"",  Construct.ListPositionPropertyName(relEnd) , "\" Type=\"Int32\" Nullable=\"true\" />\r\n");
-#line 57 "P:\Kistl\Kistl.DalProvider.Ef.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
+#line 58 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
 }
 			}
 		}
@@ -79,19 +80,19 @@ this.WriteObjects("    <Property Name=\"",  Construct.ListPositionPropertyName(r
 			if (prop.IsList)
 			{
 
-#line 66 "P:\Kistl\Kistl.DalProvider.Ef.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
+#line 67 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
 this.WriteObjects("    <NavigationProperty Name=\"",  prop.Name + ImplementationPropertySuffix , "\"\r\n");
 this.WriteObjects("                        Relationship=\"Model.",  prop.GetAssociationName() , "\"\r\n");
 this.WriteObjects("                        FromRole=\"",  prop.ObjectClass.Name , "\"\r\n");
 this.WriteObjects("                        ToRole=\"CollectionEntry\" />\r\n");
-#line 71 "P:\Kistl\Kistl.DalProvider.Ef.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
+#line 72 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
 }
 			else
 			{
 
-#line 75 "P:\Kistl\Kistl.DalProvider.Ef.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
+#line 76 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
 this.WriteObjects("    ",  ModelCsdl.PlainPropertyDefinitionFromValueType((ValueTypeProperty)p, p.Name, ImplementationPropertySuffix) , "\r\n");
-#line 77 "P:\Kistl\Kistl.DalProvider.Ef.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
+#line 78 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
 }
 		}
 		else if (p is CompoundObjectProperty)
@@ -100,22 +101,22 @@ this.WriteObjects("    ",  ModelCsdl.PlainPropertyDefinitionFromValueType((Value
 			if (prop.IsList)
 			{
 
-#line 85 "P:\Kistl\Kistl.DalProvider.Ef.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
+#line 86 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
 this.WriteObjects("    <NavigationProperty Name=\"",  prop.Name + ImplementationPropertySuffix , "\"\r\n");
 this.WriteObjects("                        Relationship=\"Model.",  prop.GetAssociationName() , "\"\r\n");
 this.WriteObjects("                        FromRole=\"",  prop.ObjectClass.Name , "\"\r\n");
 this.WriteObjects("                        ToRole=\"CollectionEntry\" />\r\n");
-#line 90 "P:\Kistl\Kistl.DalProvider.Ef.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
+#line 91 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
 }
 			else
 			{
 			// Nullable Complex types are not supported by EF
 
-#line 95 "P:\Kistl\Kistl.DalProvider.Ef.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
+#line 96 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
 this.WriteObjects("    <Property Name=\"",  p.Name + ImplementationPropertySuffix , "\"\r\n");
 this.WriteObjects("              Type=\"Model.",  prop.CompoundObjectDefinition.Name , "\"\r\n");
 this.WriteObjects("              Nullable=\"false\" />\r\n");
-#line 99 "P:\Kistl\Kistl.DalProvider.Ef.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
+#line 100 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
 }
 		}	
 	}

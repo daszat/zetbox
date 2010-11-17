@@ -60,7 +60,7 @@
 
     <!-- EntitySets and AssociationSet for all object-object CollectionEntrys -->
 <%
-	foreach(var rel in ModelCsdl.GetRelationsWithSeparateStorage(ctx))
+	foreach(var rel in ctx.GetRelationsWithSeparateStorage())
 	{
 		string assocNameA = rel.GetRelationAssociationName(RelationEndRole.A);
 		string assocNameB = rel.GetRelationAssociationName(RelationEndRole.B);
@@ -90,7 +90,7 @@
 
     <!-- AssociationSets for all object-object relations which do not need CollectionEntrys -->
 <%
-	foreach(var rel in ModelCsdl.GetRelationsWithoutSeparateStorage(ctx))
+	foreach(var rel in ctx.GetRelationsWithoutSeparateStorage())
 	{
 		string assocName = rel.GetAssociationName();
 		
@@ -194,7 +194,7 @@
 
   <!-- EntityTypes for all object-object CollectionEntrys with their associations -->
 <%
-	foreach(var rel in ModelCsdl.GetRelationsWithSeparateStorage(ctx))
+	foreach(var rel in ctx.GetRelationsWithSeparateStorage())
 	{
 		string ceName = rel.GetRelationClassName();
 		string fkAName = rel.GetRelationFkColumnName(RelationEndRole.A);
@@ -268,7 +268,7 @@
 
   <!-- Associations for all object-object relations without CollectionEntry (1:1, 1:N) -->
 <%
-	foreach(var rel in ModelCsdl.GetRelationsWithoutSeparateStorage(ctx))
+	foreach(var rel in ctx.GetRelationsWithoutSeparateStorage())
 	{
 		RelationEnd principal, dependent;
 	

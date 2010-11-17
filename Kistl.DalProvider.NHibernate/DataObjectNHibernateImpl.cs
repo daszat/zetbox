@@ -9,7 +9,7 @@ namespace Kistl.DalProvider.NHibernate
     using Kistl.API;
 
     public abstract class DataObjectNHibernateImpl
-        : BaseNhPersistenceObject, IDataObject
+        : NHibernatePersistenceObject, IDataObject
     {
         protected DataObjectNHibernateImpl(Func<IFrozenContext> lazyCtx) : base(lazyCtx) { }
 

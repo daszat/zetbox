@@ -26,5 +26,21 @@ namespace Kistl.Generator.Extensions
 
             return ctx.GetQuery<ObjectClass>().Where(cls => cls.BaseObjectClass != null);
         }
+
+        public static IEnumerable<Relation> GetRelationsWithSeparateStorage(this IKistlContext ctx)
+        {
+            return ctx.GetQuery<Relation>()
+                .Where(r => r.Storage == StorageType.Separate)
+                .ToList()
+                .OrderBy(r => r.GetAssociationName());
+        }
+
+        public static IEnumerable<Relation> GetRelationsWithoutSeparateStorage(this IKistlContext ctx)
+        {
+            return ctx.GetQuery<Relation>()
+                .Where(r => r.Storage != StorageType.Separate)
+                .ToList()
+                .OrderBy(r => r.GetAssociationName());
+        }
     }
 }

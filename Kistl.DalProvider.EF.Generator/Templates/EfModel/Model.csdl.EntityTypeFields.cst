@@ -18,6 +18,7 @@
 
 	/*
 	 * TODO: Actually, all this should die and become a bunch of polymorphic calls.
+     * See also Kistl.DalProvider.NHibernate.Generator.Templates.Mappings.PropertiesHbm
 	 */
 
 	foreach(var p in properties.OrderBy(p => p.Name))
