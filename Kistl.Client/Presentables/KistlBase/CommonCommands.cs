@@ -173,6 +173,7 @@ namespace Kistl.Client.Presentables.KistlBase
 
             var newCtx = isSimpleObject ? DataContext : ctxFactory();
             var newObj = newCtx.Create(DataContext.GetInterfaceType(Type.GetDataType()));
+            OnObjectCreated(newObj);
 
             if (!isSimpleObject)
             {
@@ -183,6 +184,18 @@ namespace Kistl.Client.Presentables.KistlBase
             else if (Listener != null)
             {
                 Listener.Refresh();
+            }
+        }
+
+        public delegate void ObjectCreatedHandler(IDataObject obj);
+        public event ObjectCreatedHandler ObjectCreated;
+
+        protected void OnObjectCreated(IDataObject obj)
+        {
+            ObjectCreatedHandler temp = ObjectCreated;
+            if (temp != null)
+            {
+                temp(obj);
             }
         }
     }

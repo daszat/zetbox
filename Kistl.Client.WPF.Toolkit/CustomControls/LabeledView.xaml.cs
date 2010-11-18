@@ -20,11 +20,11 @@ namespace Kistl.Client.WPF.View
     /// <summary>
     /// Interaction logic for LabeledView.xaml
     /// </summary>
-    public partial class LabeledView : UserControl, IHasViewModel<ILabeledViewModel>, INotifyPropertyChanged
+    public partial class LabeledView : UserControl, IHasViewModel<ILabeledViewModel>
     {
         public LabeledView()
         {
-            InitializeComponent();            
+            InitializeComponent();
         }
 
 
@@ -63,19 +63,13 @@ namespace Kistl.Client.WPF.View
         public static readonly DependencyProperty LabelSharedSizeGroupProperty =
             DependencyProperty.Register("LabelSharedSizeGroup", typeof(string), typeof(LabeledView), new UIPropertyMetadata("LabeledViewLabel"));
 
-        private object _requestedKind = null;
+        // Using a DependencyProperty as the backing store for LabelSharedSizeGroup.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty RequestedKindProperty =
+            DependencyProperty.Register("RequestedKind", typeof(object), typeof(LabeledView), new UIPropertyMetadata(null));
         public object RequestedKind
         {
-            get { return _requestedKind ?? (ViewModel != null ? ViewModel.RequestedKind : null); }
-            set 
-            { 
-                _requestedKind = value;
-                PropertyChangedEventHandler temp = PropertyChanged;
-                if (temp != null)
-                {
-                    temp(this, new PropertyChangedEventArgs("RequestedKind"));
-                }
-            }
+            get { return GetValue(RequestedKindProperty) ?? (ViewModel != null ? ViewModel.RequestedKind : null); }
+            set { SetValue(RequestedKindProperty, value); }
         }
 
         #region IHasViewModel<ILabeledViewModel> Members
@@ -84,12 +78,6 @@ namespace Kistl.Client.WPF.View
         {
             get { return (ILabeledViewModel)DataContext; }
         }
-
-        #endregion
-
-        #region INotifyPropertyChanged Members
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         #endregion
     }
