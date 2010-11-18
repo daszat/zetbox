@@ -28,6 +28,30 @@ namespace Kistl.Client.WPF.View
             InitializeComponent();
         }
 
+        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
+        {
+            base.OnPropertyChanged(e);
+            if (ViewModel != null && e.Property == FrameworkElement.DataContextProperty)
+            {
+                FixTimePart();
+                ViewModel.PropertyChanged += ViewModel_PropertyChanged;
+            }
+        }
+
+        void ViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "DatePartVisible")
+            {
+                FixTimePart();
+            }
+        }
+
+        private void FixTimePart()
+        {
+            // Fix lonely Time Textbox
+            txtTime.SetValue(DockPanel.DockProperty, ViewModel.DatePartVisible ? Dock.Right : Dock.Top);
+        }
+
         #region IHasViewModel<NullableDateTimePropertyViewModel> Members
 
         public NullableDateTimePropertyViewModel ViewModel
