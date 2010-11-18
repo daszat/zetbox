@@ -1,0 +1,103 @@
+﻿<%@ CodeTemplate Language="C#" 
+    Name="Mappings.PropertiesHbm"
+    ClassName="Kistl.DalProvider.NHibernate.Generator.Templates.Mappings.PropertiesHbm" 
+    Inherits="Kistl.Generator.ResourceTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="System.Diagnostics" %>
+<%@ Import Namespace="System.Linq" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.App.Extensions" %>
+<%@ Import Namespace="Kistl.Generator" %>
+<%@ Import Namespace="Kistl.Generator.Extensions" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="properties" Type="IEnumerable<Property>" %>
+<%
+
+    /*
+     * TODO: Actually, all this should die and become a bunch of polymorphic calls.
+     * See also Kistl.DalProvider.Ef.Generator.Templates.EfModel.ModelCsdlEntityTypeFields
+     */
+
+    foreach(var p in properties.OrderBy(p => p.Name))
+    {
+        // TODO: implement IsNullable everywhere
+        if (p is ObjectReferenceProperty)
+        {
+            var prop = p as ObjectReferenceProperty;
+            var rel = Kistl.App.Extensions.RelationExtensions.Lookup(ctx, prop);
+            var relEnd = rel.GetEnd(prop);
+            var otherEnd = rel.GetOtherEnd(relEnd);
+            
+            if (rel.Storage == StorageType.Separate)
+            {
+                Debug.Assert(relEnd != null);
+%>
+    <NavigationProperty Name="<%= p.Name + ImplementationPropertySuffix %>"
+                        Relationship="Model.<%= rel.GetRelationAssociationName(relEnd.GetRole()) %>"
+                        FromRole="<%= relEnd.RoleName %>"
+                        ToRole="CollectionEntry" />
+<%
+            }
+            else
+            {
+%>
+    <NavigationProperty Name="<%= p.Name + ImplementationPropertySuffix %>"
+                        Relationship="Model.<%= rel.GetAssociationName() %>"
+                        FromRole="<%= relEnd.RoleName %>"
+                        ToRole="<%= otherEnd.RoleName %>" />
+<%
+
+                if (rel.NeedsPositionStorage(relEnd.GetRole()))
+                {
+%>
+    <Property Name="<%= Construct.ListPositionPropertyName(relEnd) %>" Type="Int32" Nullable="true" />
+<%
+                }
+            }
+        }
+        else if (p is ValueTypeProperty)
+        {
+            var prop = (ValueTypeProperty)p;
+            if (prop.IsList)
+            {
+%>
+    <NavigationProperty Name="<%= prop.Name + ImplementationPropertySuffix %>"
+                        Relationship="Model.<%= prop.GetAssociationName() %>"
+                        FromRole="<%= prop.ObjectClass.Name %>"
+                        ToRole="CollectionEntry" />
+<%
+            }
+            else
+            {
+%>
+    ModelCsdl.PlainPropertyDefinitionFromValueType(ValueTypeProperty=<%= p.Name %>)
+<%
+            }
+        }
+        else if (p is CompoundObjectProperty)
+        {
+            var prop = (CompoundObjectProperty)p;
+            if (prop.IsList)
+            {
+%>
+    <NavigationProperty Name="<%= prop.Name + ImplementationPropertySuffix %>"
+                        Relationship="Model.<%= prop.GetAssociationName() %>"
+                        FromRole="<%= prop.ObjectClass.Name %>"
+                        ToRole="CollectionEntry" />
+<%
+            }
+            else
+            {
+            // Nullable Complex types are not supported by EF
+%>
+    <Property Name="<%= p.Name + ImplementationPropertySuffix %>"
+              Type="Model.<%= prop.CompoundObjectDefinition.Name %>"
+              Nullable="false" />
+<%
+            }
+        }    
+    }
+%>

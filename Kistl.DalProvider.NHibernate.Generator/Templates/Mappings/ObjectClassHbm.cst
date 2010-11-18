@@ -1,0 +1,43 @@
+﻿<%@ CodeTemplate Language="C#" 
+    Name="Mappings.ObjectClassHbm"
+    ClassName="Kistl.DalProvider.NHibernate.Generator.Templates.Mappings.ObjectClassHbm" 
+    Inherits="Kistl.Generator.ResourceTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="System.Linq" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.App.Extensions" %>
+<%@ Import Namespace="Kistl.Generator" %>
+<%@ Import Namespace="Kistl.Generator.Extensions" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="interfaceName" Type="string" %>
+<%@ Parameter Name="implementationName" Type="string" %>
+<%@ Parameter Name="tableName" Type="string" %>
+<%@ Parameter Name="qualifiedInterfaceName" Type="string" %>
+<%@ Parameter Name="qualifiedImplementationName" Type="string" %>
+<%@ Parameter Name="isAbstract" Type="bool" %>
+<%@ Parameter Name="properties" Type="List<Property>" %>
+<%@ Parameter Name="subClasses" Type="List<ObjectClass>" %>
+<?xml version="1.0"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
+                   schema="dbo">
+    <class name="<%= qualifiedImplementationName %>"
+           table="<%= tableName %>"
+           abstract="<%= isAbstract ? "true" : "false" %>">
+
+        <id name="ID"
+            type="Int32">
+
+            <generator class="native" />
+        </id>
+
+        <!-- define the properties -->
+<% ApplyPropertyDefinitions(properties); %>
+
+        <!-- define the subclasses -->
+<% ApplyJoinedSubclasses(subClasses); %>
+
+    </class>
+</hibernate-mapping>

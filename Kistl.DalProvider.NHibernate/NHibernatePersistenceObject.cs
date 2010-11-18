@@ -7,10 +7,10 @@ namespace Kistl.DalProvider.NHibernate
     using System.Text;
     using Kistl.API;
 
-    public abstract class BaseNhPersistenceObject
-        : BasePersistenceObject
+    public abstract class NHibernatePersistenceObject
+       : BasePersistenceObject
     {
-        protected BaseNhPersistenceObject(Func<IFrozenContext> lazyCtx)
+        protected NHibernatePersistenceObject(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
             _objectState = DataObjectState.New;
@@ -36,7 +36,8 @@ namespace Kistl.DalProvider.NHibernate
         protected override void SetModified()
         {
             _objectState = DataObjectState.Modified;
-            if (this.Context != null) this.Context.Internals().SetModified(this);
+            if (this.Context != null)
+                this.Context.Internals().SetModified(this);
         }
     }
 }
