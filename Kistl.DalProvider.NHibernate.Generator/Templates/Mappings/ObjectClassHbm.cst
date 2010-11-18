@@ -22,12 +22,12 @@
 <%@ Parameter Name="subClasses" Type="List<ObjectClass>" %>
 <?xml version="1.0"?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
-                   schema="dbo">
+                   schema="`dbo`">
     <class name="<%= qualifiedImplementationName %>"
-           table="<%= tableName %>"
+           table="`<%= tableName %>`"
            abstract="<%= isAbstract ? "true" : "false" %>">
 
-        <id name="ID"
+        <id name="`ID`"
             type="Int32">
 
             <generator class="native" />

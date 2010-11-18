@@ -11,6 +11,16 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
 
     public partial class ObjectClassHbm
     {
+        public static string GetAssemblyQualifiedImplementation(ObjectClass cls, string extraSuffix)
+        {
+            if (cls == null) { throw new ArgumentNullException("cls"); }
+            if (extraSuffix == null) { extraSuffix = String.Empty; }
+
+            return cls.Module.Namespace + "."
+                + cls.Name + extraSuffix + Kistl.API.Helper.ImplementationSuffix
+                + ", Kistl.Objects." + extraSuffix + Kistl.API.Helper.ImplementationSuffix;
+        }
+
         public static object[] MakeArgs(IKistlContext ctx, ObjectClass cls, string extraSuffix)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
@@ -22,7 +32,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
             string tableName = cls.TableName;
 
             string qualifiedInterfaceName = cls.Module.Namespace + "." + interfaceName + ", Kistl.Objects";
-            string qualifiedImplementationName = cls.Module.Namespace + "." + implementationName + ", Kistl.Objects." + extraSuffix;
+            string qualifiedImplementationName = GetAssemblyQualifiedImplementation(cls, extraSuffix);
 
             bool isAbstract = cls.IsAbstract;
 
@@ -34,7 +44,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
 
         protected virtual void ApplyPropertyDefinitions(List<Property> properties)
         {
-            PropertiesHbm.Call(Host, ctx, properties);
+            PropertiesHbm.Call(Host, ctx, String.Empty, properties);
         }
 
         protected virtual void ApplyJoinedSubclasses(List<ObjectClass> subClasses)

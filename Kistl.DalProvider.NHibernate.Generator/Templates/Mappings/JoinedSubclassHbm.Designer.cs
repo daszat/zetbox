@@ -43,12 +43,21 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
         public override void Generate()
         {
 #line 23 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\JoinedSubclassHbm.cst"
-this.WriteObjects("        <joined-subclass name=\"",  qualifiedImplementationName , "\">\r\n");
+this.WriteObjects("        <joined-subclass name=\"",  qualifiedImplementationName , "\"\r\n");
+this.WriteObjects("                         table=\"`",  tableName , "`\">\r\n");
+this.WriteObjects("            \r\n");
+this.WriteObjects("            <!-- base class reference -->\r\n");
+this.WriteObjects("            <key column=\"ID\" />\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("            <!-- define the properties -->\r\n");
-#line 26 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\JoinedSubclassHbm.cst"
+#line 30 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\JoinedSubclassHbm.cst"
 ApplyPropertyDefinitions(properties); 
-#line 27 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\JoinedSubclassHbm.cst"
+#line 31 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\JoinedSubclassHbm.cst"
+this.WriteObjects("\r\n");
+this.WriteObjects("            <!-- define the subclasses -->\r\n");
+#line 33 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\JoinedSubclassHbm.cst"
+ApplyJoinedSubclasses(subClasses); 
+#line 34 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\JoinedSubclassHbm.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        </joined-subclass>\r\n");
 

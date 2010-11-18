@@ -325,7 +325,7 @@ namespace Kistl.Server.SchemaManagement
         {
             Log.InfoFormat("New ValueType Property List: {0}", prop.Name);
             var tblName = db.GetQualifiedTableName(prop.GetCollectionEntryTable());
-            string fkName = "fk_" + prop.ObjectClass.Name;
+            string fkName = prop.GetCollectionEntryReverseKeyColumnName();
             string valPropName = prop.Name;
             string valPropIndexName = prop.Name + "Index";
             string assocName = prop.GetAssociationName();

@@ -66,7 +66,8 @@ namespace Kistl.Generator.Extensions
         public static string GetCollectionEntryTable(this Property prop)
         {
             if (prop == null) { throw new ArgumentNullException("prop"); }
-            return String.Format("{0}_{1}Collection", ((ObjectClass)prop.ObjectClass).TableName, prop.Name);
+            var cls = prop.ObjectClass as ObjectClass;
+            return String.Format("{0}_{1}Collection", cls != null ? cls.TableName : prop.ObjectClass.Name, prop.Name);
         }
 
         public static string GetCollectionEntryFullName(this Property prop)
@@ -74,6 +75,12 @@ namespace Kistl.Generator.Extensions
             if (prop == null) { throw new ArgumentNullException("prop"); }
             return String.Format("{0}.{1}", prop.ObjectClass.Module.Namespace, prop.GetCollectionEntryClassName());
         }
+
+        public static string GetCollectionEntryReverseKeyColumnName(this Property prop)
+        {
+            return "fk_" + prop.ObjectClass.Name;
+        }
+
         #endregion
     }
 }

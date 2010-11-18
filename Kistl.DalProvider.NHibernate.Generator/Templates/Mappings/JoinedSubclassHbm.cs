@@ -23,7 +23,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
                 throw new ArgumentOutOfRangeException("cls", msg);
             }
 
-            host.CallTemplate("Mappings.JoinedSubclassHbm", 
+            host.CallTemplate("Mappings.JoinedSubclassHbm",
                 new object[] { ctx }
                     .Concat(ObjectClassHbm.MakeArgs(ctx, cls, host.Settings["extrasuffix"]))
                     .ToArray());
@@ -31,7 +31,15 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
 
         protected virtual void ApplyPropertyDefinitions(List<Property> properties)
         {
-            PropertiesHbm.Call(Host, ctx, properties);
+            PropertiesHbm.Call(Host, ctx, String.Empty, properties);
+        }
+
+        protected virtual void ApplyJoinedSubclasses(List<ObjectClass> subClasses)
+        {
+            foreach (var subClass in subClasses)
+            {
+                JoinedSubclassHbm.Call(Host, ctx, subClass);
+            }
         }
     }
 }

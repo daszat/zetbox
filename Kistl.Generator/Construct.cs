@@ -118,6 +118,16 @@ namespace Kistl.Generator
             return NestedColumnName(prop.Name, parentPropName);
         }
 
+        public static object ListPositionColumnName(ValueTypeProperty prop)
+        {
+            return prop.Name + Kistl.API.Helper.PositionSuffix;
+        }
+
+        public static object ListPositionColumnName(CompoundObjectProperty prop)
+        {
+            return prop.Name + Kistl.API.Helper.PositionSuffix;
+        }
+
         public static string ListPositionColumnName(RelationEnd otherEnd)
         {
             return ListPositionColumnName(otherEnd, string.Empty);
@@ -180,5 +190,10 @@ namespace Kistl.Generator
             return "FK_" + SecurityRulesTableName(objClass);
         }
         #endregion
+
+        public static string ValueListCollectionTableName(ValueTypeProperty prop)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

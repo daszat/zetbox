@@ -20,9 +20,16 @@
 <%@ Parameter Name="isAbstract" Type="bool" %>
 <%@ Parameter Name="properties" Type="List<Property>" %>
 <%@ Parameter Name="subClasses" Type="List<ObjectClass>" %>
-        <joined-subclass name="<%= qualifiedImplementationName %>">
+        <joined-subclass name="<%= qualifiedImplementationName %>"
+                         table="`<%= tableName %>`">
+            
+            <!-- base class reference -->
+            <key column="ID" />
 
             <!-- define the properties -->
 <% ApplyPropertyDefinitions(properties); %>
+
+            <!-- define the subclasses -->
+<% ApplyJoinedSubclasses(subClasses); %>
 
         </joined-subclass>
