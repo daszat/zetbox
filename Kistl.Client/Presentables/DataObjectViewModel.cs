@@ -36,7 +36,7 @@ namespace Kistl.Client.Presentables
         {
             this.config = config;
             _object = obj;
-            _object.PropertyChanged += ObjectPropertyChanged;
+            _object.PropertyChanged += Object_PropertyChanged;
             // TODO: Optional machen!
             InitialiseViewCache();
         }
@@ -468,16 +468,20 @@ namespace Kistl.Client.Presentables
 
         #region PropertyChanged event handlers
 
-        private void ObjectPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void Object_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             // notify consumers if ID has changed
             if (e.PropertyName == "ID")
                 OnPropertyChanged("ID");
 
             UpdateViewCache();
-            // all updates done
+
+            OnObjectPropertyChanged(e.PropertyName);
         }
 
+        protected virtual void OnObjectPropertyChanged(string propName)
+        {
+        }
         #endregion
 
         #region IDataErrorInfo Members
