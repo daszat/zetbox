@@ -30,7 +30,7 @@ namespace Kistl.Client.Presentables
         #region Public Interface
 
         // TODO: proxying implementations might block on that
-        public string Label { get { return !string.IsNullOrEmpty(Method.Label) ? Method.Label : Method.Name; } }
+        public string Label { get { return Method.GetLabel(); } }
         // TODO: proxying implementations might block on that
         public string ToolTip { get { return Method.Description; } }
 
@@ -50,7 +50,7 @@ namespace Kistl.Client.Presentables
                 {
                     _ExecuteCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
                         DataContext, 
-                        !string.IsNullOrEmpty(Method.Label) ? Method.Label : Method.Name, 
+                        Method.GetLabel(), 
                         Method.Description, 
                         Execute, 
                         null

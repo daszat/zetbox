@@ -15,6 +15,11 @@ namespace Kistl.App.Base
 {
     public static partial class CustomCommonActions_KistlBase
     {
+        public static void OnGetLabel_BaseParameter(Kistl.App.Base.BaseParameter obj, MethodReturnEventArgs<System.String> e)
+        {
+            e.Result = !string.IsNullOrEmpty(obj.Label) ? obj.Label : obj.Name;
+        }
+
         public static void OnGetParameterTypeString_DecimalParameter(Kistl.App.Base.DecimalParameter obj, MethodReturnEventArgs<System.String> e)
         {
             e.Result = "System.Decimal";

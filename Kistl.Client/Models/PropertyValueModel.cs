@@ -91,7 +91,7 @@ namespace Kistl.Client.Models
             if (prop == null)
                 throw new ArgumentNullException("prop");
 
-            var lb = !string.IsNullOrEmpty(prop.Label) ? prop.Label : prop.Name;
+            var lb = prop.GetLabel();
 
             if (prop is IntProperty)
             {
@@ -204,7 +204,7 @@ namespace Kistl.Client.Models
 
         public string Label
         {
-            get { return !string.IsNullOrEmpty(Property.Label) ? Property.Label : Property.Name; }
+            get { return Property.GetLabel(); }
         }
 
         public string Description

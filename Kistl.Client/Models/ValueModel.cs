@@ -19,7 +19,7 @@ namespace Kistl.Client.Models
             if (parameter == null)
                 throw new ArgumentNullException("parameter");
 
-            var lb = !string.IsNullOrEmpty(parameter.Label) ? parameter.Label : parameter.Name;
+            var lb = parameter.GetLabel();
 
             if (parameter is BoolParameter && !parameter.IsList)
             {

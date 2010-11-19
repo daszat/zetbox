@@ -78,11 +78,21 @@ namespace Kistl.App.GUI
 
         #region Filter
 
+        public static void OnGetLabel_FilterConfiguration(Kistl.App.GUI.FilterConfiguration obj, MethodReturnEventArgs<System.String> e)
+        {
+            e.Result = !string.IsNullOrEmpty(obj.Label) ? obj.Label : string.Empty;
+        }
+
+        public static void OnGetLabel_PropertyFilterConfiguration(Kistl.App.GUI.PropertyFilterConfiguration obj, MethodReturnEventArgs<System.String> e)
+        {
+            e.Result = !string.IsNullOrEmpty(obj.Label) ? obj.Label : obj.Property.GetLabel();
+        }
+
         #region SinglePropertyFilterConfiguration
         public static void OnCreateFilterModel_SinglePropertyFilterConfiguration(Kistl.App.GUI.SinglePropertyFilterConfiguration obj, MethodReturnEventArgs<IFilterModel> e)
         {
             var mdl = new SingleValueFilterModel();
-            mdl.Label = !string.IsNullOrEmpty(obj.Label) ? obj.Label : (!string.IsNullOrEmpty(obj.Property.Label) ? obj.Property.Label : obj.Property.Name);
+            mdl.Label = obj.GetLabel();
             mdl.Required = obj.Required;
             mdl.ValueSource = FilterValueSource.FromProperty(obj.Property);
 
@@ -105,7 +115,7 @@ namespace Kistl.App.GUI
         public static void OnCreateFilterModel_MonthFilterConfiguration(Kistl.App.GUI.MonthFilterConfiguration obj, MethodReturnEventArgs<IFilterModel> e)
         {
             var mdl = new MonthValueFilterModel();
-            mdl.Label = !string.IsNullOrEmpty(obj.Label) ? obj.Label : (!string.IsNullOrEmpty(obj.Property.Label) ? obj.Property.Label : obj.Property.Name);
+            mdl.Label = obj.GetLabel();
             mdl.Required = obj.Required;
             mdl.ValueSource = FilterValueSource.FromProperty(obj.Property);
 
@@ -123,7 +133,6 @@ namespace Kistl.App.GUI
             obj.ViewModelDescriptor = obj.Context.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_SingleValueFilterViewModel);
         }
         #endregion
-
 
         #region OptionalPredicateFilterConfiguration
         public static void OnCreateFilterModel_OptionalPredicateFilterConfiguration(Kistl.App.GUI.OptionalPredicateFilterConfiguration obj, MethodReturnEventArgs<Kistl.API.IFilterModel> e)
@@ -153,7 +162,7 @@ namespace Kistl.App.GUI
         public static void OnCreateFilterModel_RangeFilterConfiguration(Kistl.App.GUI.RangeFilterConfiguration obj, MethodReturnEventArgs<Kistl.API.IFilterModel> e)
         {
             var mdl = new RangeFilterModel();
-            mdl.Label = !string.IsNullOrEmpty(obj.Label) ? obj.Label : (!string.IsNullOrEmpty(obj.Property.Label) ? obj.Property.Label : obj.Property.Name);
+            mdl.Label = obj.GetLabel();
             mdl.Required = obj.Required;
             mdl.ValueSource = FilterValueSource.FromProperty(obj.Property);
 
@@ -168,8 +177,6 @@ namespace Kistl.App.GUI
             obj.ViewModelDescriptor = obj.Context.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_RangeFilterViewModel);
         }
         #endregion
-
-
 
         #endregion
     }

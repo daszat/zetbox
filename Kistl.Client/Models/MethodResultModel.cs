@@ -130,7 +130,7 @@ namespace Kistl.Client.Models
 
         public string Label
         {
-            get { return !string.IsNullOrEmpty(Method.Label) ? Method.Label : Method.Name; }
+            get { return Method.GetLabel(); }
         }
 
         public string Description

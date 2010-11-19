@@ -278,7 +278,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             {
                 if (_PossibleValues == null)
                 {
-                    var enumValues = EnumModel.Enumeration.EnumerationEntries.Select(e => new KeyValuePair<int?, string>(e.Value, !string.IsNullOrEmpty(e.Label) ? e.Label : e.Name));
+                    var enumValues = EnumModel.Enumeration.EnumerationEntries.Select(e => new KeyValuePair<int?, string>(e.Value, e.GetLabel()));
                     this._PossibleValues = new ReadOnlyCollection<KeyValuePair<int?, string>>(
                         new[] { new KeyValuePair<int?, string>(null, "") }
                         .Concat(enumValues)

@@ -123,7 +123,7 @@ namespace Kistl.Client.Models
                 methods
                 .Select(m => new ColumnDisplayModel()
                 {
-                    Header = !string.IsNullOrEmpty(m.Label) ? m.Label : m.Name,
+                    Header = m.GetLabel(),
                     Name = m.Name,
                     Type = ColumnDisplayModel.ColumnType.MethodModel
                 })).ToList();
@@ -133,7 +133,7 @@ namespace Kistl.Client.Models
         private static List<ColumnDisplayModel> CreateColumnDisplayModels(bool displayOnly, Property p, string parentLabel, string parentProp)
         {
             var result = new List<ColumnDisplayModel>();
-            var lb = !string.IsNullOrEmpty(p.Label) ? p.Label : p.Name;
+            var lb = p.GetLabel();
 
             if (p is CompoundObjectProperty)
             {

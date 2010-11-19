@@ -293,5 +293,44 @@ namespace Kistl.App.Base
             obj.UpdateToStringCache();
         }
         #endregion
+
+        #region Enums
+        public static void OnGetLabel_EnumerationEntry(Kistl.App.Base.EnumerationEntry obj, MethodReturnEventArgs<System.String> e)
+        {
+            e.Result = !string.IsNullOrEmpty(obj.Label) ? obj.Label : obj.Name;
+        }
+        public static void OnGetEntryByName_Enumeration(Kistl.App.Base.Enumeration obj, MethodReturnEventArgs<Kistl.App.Base.EnumerationEntry> e, System.String name)
+        {
+            e.Result = obj.EnumerationEntries.SingleOrDefault(i => i.Name == name);
+        }
+        public static void OnGetEntryByValue_Enumeration(Kistl.App.Base.Enumeration obj, MethodReturnEventArgs<Kistl.App.Base.EnumerationEntry> e, System.Int32 val)
+        {
+            e.Result = obj.EnumerationEntries.SingleOrDefault(i => i.Value == val);
+        }
+        public static void OnGetLabelByName_Enumeration(Kistl.App.Base.Enumeration obj, MethodReturnEventArgs<string> e, System.String name)
+        {
+            var entry = obj.GetEntryByName(name);
+            e.Result = entry != null ? entry.GetLabel() : string.Empty;
+        }
+        public static void OnGetLabelByValue_Enumeration(Kistl.App.Base.Enumeration obj,MethodReturnEventArgs<string> e,  System.Int32 val)
+        {
+            var entry = obj.GetEntryByValue(val);
+            e.Result = entry != null ? entry.GetLabel() : string.Empty;
+        }
+        #endregion
+
+        #region Properties
+        public static void OnGetLabel_Property(Kistl.App.Base.Property obj, MethodReturnEventArgs<System.String> e)
+        {
+            e.Result = !string.IsNullOrEmpty(obj.Label) ? obj.Label : obj.Name;
+        }
+        #endregion
+
+        #region Method
+        public static void OnGetLabel_Method(Kistl.App.Base.Method obj, MethodReturnEventArgs<System.String> e)
+        {
+            e.Result = !string.IsNullOrEmpty(obj.Label) ? obj.Label : obj.Name;
+        }
+        #endregion
     }
 }
