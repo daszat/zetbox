@@ -448,12 +448,12 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 {
                     // Do nothing
                 }
-                else if (value == null && Value != null)
+                else if (value == null && Value != null && TimePartVisible)
                 {
                     // Preserve time
                     Value = DateTime.MinValue.Add(Value.Value.TimeOfDay);
                 }
-                else if (value != null && Value != null)
+                else if (value != null && Value != null && TimePartVisible)
                 {
                     // Preserve time
                     Value = value.Value.Add(Value.Value.TimeOfDay);
@@ -479,12 +479,12 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 {
                     // Do nothing
                 }
-                else if (value == null && Value != null)
+                else if (value == null && Value != null && DatePartVisible)
                 {
                     // Preserve date
                     Value = Value.Value.Date;
                 }
-                else if (value != null && Value != null)
+                else if (value != null && Value != null && DatePartVisible)
                 {
                     // Preserve date
                     Value = Value.Value.Date.Add(value.Value);

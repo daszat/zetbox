@@ -64,7 +64,9 @@ namespace Microsoft.Samples.KMoore.WPFSamples.DateControls
 
             if (value != null && value is string)
             {
-                return DateTime.Parse((string)value, culture.DateTimeFormat);
+                var str = (string)value;
+                if (string.IsNullOrEmpty(str)) return null;
+                return DateTime.Parse(str, culture.DateTimeFormat);
             }
             else
             {
