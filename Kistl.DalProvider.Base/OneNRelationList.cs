@@ -61,7 +61,7 @@ namespace Kistl.DalProvider.Base
                     if (idx >= 0)
                     {
                         collection.Insert(idx, item);
-                        OnItemAdded(item);
+                        OnItemAdded(item, idx);
 
                         return;
                     }
@@ -69,7 +69,7 @@ namespace Kistl.DalProvider.Base
             }
 
             collection.Add(item);
-            OnItemAdded(item);
+            OnItemAdded(item, collection.Count - 1);
         }
 
         public void RemoveWithoutClearParent(T item)
@@ -91,7 +91,7 @@ namespace Kistl.DalProvider.Base
             {
                 Kistl.API.Helper.FixIndices(collection, GetPosition, SetPosition);
             }
-            OnItemAdded(item);
+            OnItemAdded(item, index);
         }
 
         private void DoRemoveAt(T item, int index)
@@ -280,37 +280,37 @@ namespace Kistl.DalProvider.Base
 
         #region INotifyCollectionChanged Members
 
-        public event NotifyCollectionChangedEventHandler CollectionChanged;
+        private event NotifyCollectionChangedEventHandler _CollectionChanged;
+        public event NotifyCollectionChangedEventHandler CollectionChanged
+        {
+            add
+            {
+                _CollectionChanged += value;
+            }
+            remove
+            {
+                _CollectionChanged -= value;
+            }
+        }
 
-        protected virtual void OnItemAdded(T newItem)
+        protected virtual void OnItemAdded(T newItem, int index)
         {
             if (_ownerNotifier != null)
                 _ownerNotifier();
 
-            if (CollectionChanged != null)
-                CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, newItem));
+            if (_CollectionChanged != null)
+                _CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, newItem, index));
 
             // newItem.PropertyChanged += item_PropertyChanged;
         }
-
-        // <summary>
-        // TODO: Quick workaround. Notify parent only on "right" containment
-        // </summary>
-        // <param name="sender"></param>
-        // <param name="e"></param>
-        //void item_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        //{
-        //    if (_ownerNotifier != null)
-        //        _ownerNotifier();
-        //}
 
         protected virtual void OnItemRemoved(T removedItem, int index)
         {
             if (_ownerNotifier != null)
                 _ownerNotifier();
 
-            if (CollectionChanged != null)
-                CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, removedItem, index));
+            if (_CollectionChanged != null)
+                _CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, removedItem, index));
 
             //removedItem.PropertyChanged -= item_PropertyChanged;
         }
@@ -320,8 +320,8 @@ namespace Kistl.DalProvider.Base
             if (_ownerNotifier != null)
                 _ownerNotifier();
 
-            if (CollectionChanged != null)
-                CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+            if (_CollectionChanged != null)
+                _CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
         }
 
         protected virtual void OnCollectionResetting()

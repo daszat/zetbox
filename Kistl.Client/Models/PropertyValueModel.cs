@@ -646,7 +646,7 @@ namespace Kistl.Client.Models
 
         protected void ValueCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            NotifyCollectionChangedEventHandler temp = CollectionChanged;
+            NotifyCollectionChangedEventHandler temp = _CollectionChanged;
             if (temp != null)
             {
                 temp(sender, e);
@@ -687,7 +687,18 @@ namespace Kistl.Client.Models
 
         #region INotifyCollectionChanged Members
 
-        public event NotifyCollectionChangedEventHandler CollectionChanged;
+        private event NotifyCollectionChangedEventHandler _CollectionChanged;
+        public event NotifyCollectionChangedEventHandler CollectionChanged
+        {
+            add
+            {
+                _CollectionChanged += value;
+            }
+            remove
+            {
+                _CollectionChanged -= value;
+            }
+        }
 
         #endregion
     }
@@ -702,12 +713,15 @@ namespace Kistl.Client.Models
 
         protected override void UpdateValueCache()
         {
-            var lst = Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name);
-            lst.CollectionChanged += ValueCollectionChanged;
+            if (valueCache == null) // Once is OK
+            {
+                var lst = Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name);
+                lst.CollectionChanged += ValueCollectionChanged;
 
-            underlyingCollectionCache = (IEnumerable)lst;
+                underlyingCollectionCache = (IEnumerable)lst;
 
-            valueCache = MagicCollectionFactory.WrapAsCollection<IDataObject>(lst);
+                valueCache = MagicCollectionFactory.WrapAsCollection<IDataObject>(lst);
+            }
             valueCacheInititalized = true;
         }
     }
@@ -722,12 +736,15 @@ namespace Kistl.Client.Models
 
         protected override void UpdateValueCache()
         {
-            var lst = Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name);
-            lst.CollectionChanged += ValueCollectionChanged;
+            if (valueCache == null) // Once is OK
+            {
+                var lst = Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name);
+                lst.CollectionChanged += ValueCollectionChanged;
 
-            underlyingCollectionCache = (IEnumerable)lst;
-            
-            valueCache = MagicCollectionFactory.WrapAsList<IDataObject>(lst);
+                underlyingCollectionCache = (IEnumerable)lst;
+
+                valueCache = MagicCollectionFactory.WrapAsList<IDataObject>(lst);
+            }
             valueCacheInititalized = true;
         }
     }
