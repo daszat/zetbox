@@ -13,22 +13,27 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Kistl.Client.Presentables;
 using Kistl.Client.Presentables.ValueViewModels;
+using Kistl.Client.GUI;
 
 namespace Kistl.Client.WPF.View.GridCells
 {
     /// <summary>
     /// Interaction logic for ReferenceEditor.xaml
     /// </summary>
-    public partial class ReferenceEditor : UserControl
+    public partial class ReferenceEditor : UserControl, IHasViewModel<ObjectReferenceViewModel>
     {
         public ReferenceEditor()
         {
             InitializeComponent();
         }
 
-        private void ClearValueHandler(object sender, RoutedEventArgs e)
+        #region IHasViewModel<ObjectReferenceModel> Members
+
+        public ObjectReferenceViewModel ViewModel
         {
-            ((ObjectReferenceViewModel)DataContext).Value = null;
+            get { return (ObjectReferenceViewModel)DataContext; }
         }
+
+        #endregion
     }
 }

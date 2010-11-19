@@ -240,7 +240,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                     _RemoveCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>()
                         .Invoke(DataContext, "Remove", "Remove selection from list",
                         () => SelectedItems.ToList().ForEach(i => RemoveItem(i)), // Collection will change while deleting!
-                        () => SelectedItems != null && SelectedItems.Count() > 0 && AllowRemove);
+                        () => SelectedItems != null && SelectedItems.Count() > 0 && AllowRemove && !IsReadOnly);
                 }
                 return _RemoveCommand;
             }
