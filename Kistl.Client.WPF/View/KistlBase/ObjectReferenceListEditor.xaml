@@ -37,14 +37,14 @@
 
         </UniformGrid>
 
-        <ToolBar DockPanel.Dock="Top"
-                 ItemsSource="{Binding Commands}">
+        <ctrls:WorkaroundToolBar DockPanel.Dock="Top"
+                                 ItemsSource="{Binding Commands}">
             <ToolBar.ItemTemplate>
                 <DataTemplate>
                     <ctrls:CommandButton CommandViewModel="{Binding}" />
                 </DataTemplate>
             </ToolBar.ItemTemplate>
-        </ToolBar>
+        </ctrls:WorkaroundToolBar>
 
         <!-- configured from code, see RefreshGridView() -->
         <ListView x:Name="lst"

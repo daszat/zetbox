@@ -6,9 +6,9 @@
              xmlns:view="clr-namespace:Kistl.Client.WPF.View;assembly=Kistl.Client.WPF.Toolkit">
 
     <DockPanel>
-        <ToolBar DockPanel.Dock="Top"
-                 ItemsSource="{Binding Actions}"
-                 ItemTemplateSelector="{StaticResource defaultTemplateSelector}" />
+        <ctrls:WorkaroundToolBar DockPanel.Dock="Top"
+                                 ItemsSource="{Binding Actions}"
+                                 ItemTemplateSelector="{StaticResource defaultTemplateSelector}" />
 
         <DockPanel DockPanel.Dock="Top">
             <Image DockPanel.Dock="Left"

@@ -44,14 +44,14 @@
             <TabControl x:Name="PropertyGroupTabs"
                         Grid.Row="0"
                         ItemsSource="{Binding PropertyGroups, ValidatesOnDataErrors=true}"
-                        SelectedValue="{Binding SelectedPropertyGroup}"                        
+                        SelectedValue="{Binding SelectedPropertyGroup}"
                         BorderThickness="0"
                         HorizontalContentAlignment="Stretch">
                 <TabControl.Resources>
                     <DataTemplate DataType="{x:Type client:SinglePropertyGroupViewModel}">
                         <ItemsControl ItemsSource="{Binding PropertyModels, ValidatesOnDataErrors=true}"
-                                          BorderThickness="0"
-                                          HorizontalContentAlignment="Stretch">
+                                      BorderThickness="0"
+                                      HorizontalContentAlignment="Stretch">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <Grid IsItemsHost="True" />
@@ -94,7 +94,7 @@
                         </ScrollViewer>
                     </DataTemplate>
                 </TabControl.Resources>
-                
+
                 <TabControl.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Title, Mode=OneWay, ValidatesOnDataErrors=true}" />
