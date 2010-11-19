@@ -109,6 +109,7 @@
   <ItemGroup>
     <None Include="Kistl.IntegrationTests.Config.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </None>
     <Content Include="Kistl.IntegrationTests.PartCoverSettings.xml" />
   </ItemGroup>
@@ -149,9 +150,9 @@
       <Project>{3760694D-3B35-41D4-B1A3-41BB288AA19F}</Project>
       <Name>Kistl.DalProvider.ClientObjects</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Kistl.DalProvider.EF\Kistl.DalProvider.EF.csproj">
-      <Project>{52EC8DFB-9C75-4FDB-9EE1-E78847F7F711}</Project>
-      <Name>Kistl.DalProvider.EF</Name>
+    <ProjectReference Include="..\..\Kistl.DalProvider.NHibernate\Kistl.DalProvider.NHibernate.csproj">
+      <Project>{B58E3B3A-7212-4F8C-9AAE-7FF680F6F324}</Project>
+      <Name>Kistl.DalProvider.NHibernate</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Kistl.Objects\Kistl.Objects.csproj">
       <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>

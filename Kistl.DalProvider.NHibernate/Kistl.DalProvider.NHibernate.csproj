@@ -55,13 +55,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NHibernateServerCollectionHandler.cs" />
+    <Compile Include="NHibernateServerObjectHandler.cs" />
+    <Compile Include="NHibernateServerObjectHandlerFactory.cs" />
+    <Compile Include="NHibernateContext.cs" />
+    <Compile Include="NHibernateProvider.cs" />
     <Compile Include="NHibernatePersistenceObject.cs" />
     <Compile Include="CompoundCollectionEntryNHibernateImpl.cs" />
     <Compile Include="CompoundObjectNHibernateImpl.cs" />
     <Compile Include="DataObjectNHibernateImpl.cs" />
     <Compile Include="INHibernateActionsManager.cs" />
     <Compile Include="KistlContextNHibernateImpl.cs" />
-    <Compile Include="NhImplementationTypeChecker.cs" />
+    <Compile Include="NHibernateImplementationTypeChecker.cs" />
+    <Compile Include="NHibernateServerObjectSetHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyDescriptorNHibernateImpl.cs" />
     <Compile Include="RelationEntryNHibernateImpl.cs" />

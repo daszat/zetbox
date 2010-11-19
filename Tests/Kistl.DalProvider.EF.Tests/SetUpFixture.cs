@@ -3,21 +3,19 @@ namespace Kistl.DalProvider.Ef.Tests
 {
     using System;
     using System.Collections.Generic;
-
     using Autofac;
-
     using Kistl.API;
+    using Kistl.API.AbstractConsumerTests;
     using Kistl.API.Configuration;
     using Kistl.App.Base;
     using Kistl.App.Projekte;
     using Kistl.DalProvider.Ef.Mocks;
     using Kistl.Server;
-
     using NUnit.Framework;
 
     [SetUpFixture]
     public class SetUpFixture
-        : Kistl.API.AbstractConsumerTests.DatabaseResetup
+        : AbstractSetUpFixture
     {
 
         protected override void SetupBuilder(ContainerBuilder builder)
@@ -31,12 +29,13 @@ namespace Kistl.DalProvider.Ef.Tests
             builder.RegisterModule(new Kistl.Objects.InterfaceModule());
             builder.RegisterModule(new Kistl.Objects.EfModule());
             builder.RegisterModule(new Kistl.Objects.MemoryModule());
+            builder.RegisterModule(new Kistl.Tests.Utilities.MsSql.UtilityModule());
         }
 
         protected override void SetUp(IContainer container)
         {
             base.SetUp(container);
-            ResetDatabase(container.Resolve<KistlConfig>());
+            ResetDatabase(container);
 
             PropertyEfImpl.OnToString_Property
                 += (obj, args) => { args.Result = String.Format("Prop, [{0}]", obj.Description); };

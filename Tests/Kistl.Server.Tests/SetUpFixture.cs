@@ -1,25 +1,24 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
-
-using Autofac;
-using Autofac.Integration.Wcf;
-
-using Kistl.API;
-using Kistl.API.Configuration;
-using Kistl.API.Utils;
-using Kistl.App.GUI;
-
-using NUnit.Framework;
-using NUnit.Framework.Constraints;
 
 namespace Kistl.Server.Tests
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using Autofac;
+    using Autofac.Integration.Wcf;
+    using Kistl.API;
+    using Kistl.API.AbstractConsumerTests;
+    using Kistl.API.Configuration;
+    using Kistl.API.Utils;
+    using Kistl.App.GUI;
+    using NUnit.Framework;
+    using NUnit.Framework.Constraints;
+
     [SetUpFixture]
-    public class SetUpFixture : Kistl.API.AbstractConsumerTests.DatabaseResetup, IDisposable
+    public class SetUpFixture : AbstractSetUpFixture, IDisposable
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Tests.Server.SetUp");
 
@@ -35,17 +34,19 @@ namespace Kistl.Server.Tests
             builder.RegisterModule(new Kistl.DalProvider.Memory.MemoryProvider());
             builder.RegisterModule(new Kistl.Objects.EfModule());
             builder.RegisterModule(new Kistl.Objects.MemoryModule());
+            builder.RegisterModule(new Kistl.Tests.Utilities.MsSql.UtilityModule());
         }
 
         protected override void SetUp(IContainer container)
         {
-            base.SetUp(container);
             using (Log.InfoTraceMethodCall("Starting up"))
             {
+                base.SetUp(container);
+                ResetDatabase(container);
+
                 AutofacServiceHostFactory.Container = container;
 
                 var config = container.Resolve<KistlConfig>();
-                ResetDatabase(config);
 
                 manager = container.Resolve<IKistlAppDomain>();
                 manager.Start(config);

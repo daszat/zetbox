@@ -70,6 +70,7 @@
     <Compile Include="CompoundObjects\when_changing.cs" />
     <Compile Include="CompoundObjects\when_roundtrip.cs" />
     <Compile Include="DatabaseResetup.cs" />
+    <Compile Include="IDatabaseResetter.cs" />
     <Compile Include="MockImplementationTypeChecker.cs" />
     <Compile Include="N_to_M_relations\should_synchronize.cs" />
     <Compile Include="one_to_N_relations\should_obey_order.cs" />

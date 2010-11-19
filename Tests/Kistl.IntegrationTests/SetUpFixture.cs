@@ -7,21 +7,19 @@ namespace Kistl.IntegrationTests
     using System.Linq;
     using System.Reflection;
     using System.Text;
-    
     using Autofac;
-    
     using Kistl.API;
+    using Kistl.API.AbstractConsumerTests;
     using Kistl.API.Configuration;
     using Kistl.API.Utils;
     using Kistl.App.Extensions;
     using Kistl.App.GUI;
     using Kistl.Client;
-    
     using NUnit.Framework;
     using NUnit.Framework.Constraints;
-    
+
     [SetUpFixture]
-    public class SetUpFixture : Kistl.API.AbstractConsumerTests.DatabaseResetup, IDisposable
+    public class SetUpFixture : AbstractSetUpFixture, IDisposable
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Tests.Integration.SetUp");
 
@@ -29,13 +27,14 @@ namespace Kistl.IntegrationTests
 
         protected override void SetUp(IContainer container)
         {
-            base.SetUp(container);
             using (Log.InfoTraceMethodCall("Starting up"))
             {
                 try
                 {
+                    base.SetUp(container);
+                    ResetDatabase(container);
+
                     var config = container.Resolve<KistlConfig>();
-                    ResetDatabase(config);
 
                     manager = new ServerDomainManager();
                     manager.Start(config);

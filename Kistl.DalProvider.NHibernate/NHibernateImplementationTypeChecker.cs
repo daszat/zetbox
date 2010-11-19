@@ -15,14 +15,14 @@ namespace Kistl.DalProvider.NHibernate
     {
     }
 
-    public sealed class NhImplementationType
+    public sealed class NHibernateImplementationType
         : ImplementationType
     {
-        public delegate NhImplementationType MemoryFactory(Type type);
+        public delegate NHibernateImplementationType MemoryFactory(Type type);
 
         private readonly INHibernateImplementationTypeChecker _typeChecker;
 
-        public NhImplementationType(Type type, InterfaceType.Factory iftFactory, INHibernateImplementationTypeChecker typeChecker)
+        public NHibernateImplementationType(Type type, InterfaceType.Factory iftFactory, INHibernateImplementationTypeChecker typeChecker)
             : base(type, iftFactory, typeChecker)
         {
             _typeChecker = typeChecker;
@@ -34,7 +34,7 @@ namespace Kistl.DalProvider.NHibernate
             {
                 // convert args of things like Generic Collections
                 Type genericType = Type.GetGenericTypeDefinition();
-                var genericArguments = Type.GetGenericArguments().Select(t => new NhImplementationType(t, IftFactory, _typeChecker).ToInterfaceType().Type).ToArray();
+                var genericArguments = Type.GetGenericArguments().Select(t => new NHibernateImplementationType(t, IftFactory, _typeChecker).ToInterfaceType().Type).ToArray();
                 return IftFactory(genericType.MakeGenericType(genericArguments));
             }
             else

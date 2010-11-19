@@ -153,6 +153,10 @@
       <Project>{1EEA57CD-4824-4A14-9447-3BD0E57997F4}</Project>
       <Name>Kistl.API.AbstractConsumerTests</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Kistl.Tests.Utilities.MsSql\Kistl.Tests.Utilities.MsSql.csproj">
+      <Project>{1E56A7BA-61B7-4283-B65F-ADFA6418F72B}</Project>
+      <Name>Kistl.Tests.Utilities.MsSql</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

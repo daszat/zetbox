@@ -1,14 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NUnit.Framework;
-using Autofac;
-using Kistl.API.Utils;
-using Kistl.API.Configuration;
 
 namespace Kistl.API.AbstractConsumerTests
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using Autofac;
+    using Kistl.API.Configuration;
+    using Kistl.API.Utils;
+    using NUnit.Framework;
+
     public abstract class AbstractSetUpFixture
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Tests.AbstractSetup");
@@ -34,8 +36,16 @@ namespace Kistl.API.AbstractConsumerTests
             using (Log.InfoTraceMethodCall("Starting up"))
             {
                 var config = KistlConfig.FromFile(GetConfigFile());
-                if (config.Server != null) config.Server.DocumentStore = System.IO.Path.Combine(System.IO.Path.GetTempPath(), GetHostType().ToString());
-                if (config.Client != null) config.Client.DocumentStore = System.IO.Path.Combine(System.IO.Path.GetTempPath(), GetHostType().ToString());
+                if (config.Server != null)
+                {
+                    config.Server.DocumentStore = Path.Combine(Path.GetTempPath(), GetHostType().ToString());
+                    Log.InfoFormat("Setting Server.DocumentStore=[{0}]", config.Server.DocumentStore);
+                }
+                if (config.Client != null)
+                {
+                    config.Client.DocumentStore = Path.Combine(Path.GetTempPath(), GetHostType().ToString());
+                    Log.InfoFormat("Setting Client.DocumentStore=[{0}]", config.Client.DocumentStore);
+                }
 
                 AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
 
@@ -61,7 +71,7 @@ namespace Kistl.API.AbstractConsumerTests
                 // TODO: totally replace this with test mocks?
                 Log.Info("Adding Interface Module");
                 builder.RegisterModule<Kistl.Objects.InterfaceModule>();
-                
+
                 SetupBuilder(builder);
                 container = builder.Build();
                 SetUp(container);
@@ -78,6 +88,25 @@ namespace Kistl.API.AbstractConsumerTests
 
         }
 
+        /// <summary>
+        /// Call this to reset the configured databases.
+        /// </summary>
+        /// <param name="container"></param>
+        protected void ResetDatabase(IContainer container)
+        {
+            foreach (var resetter in container.Resolve<IEnumerable<IDatabaseResetter>>())
+            {
+                try
+                {
+                    resetter.ResetDatabase();
+                }
+                catch (Exception ex)
+                {
+                    Log.Error("Failed to reset database", ex);
+                    throw;
+                }
+            }
+        }
 
         [TearDown]
         public virtual void TearDown()
