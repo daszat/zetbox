@@ -208,7 +208,7 @@ namespace Kistl.API.Migration
 
         protected static ISchemaProvider OpenProvider(ILifetimeScope scope, string provider, string connectionString)
         {
-            var srcSchema = scope.Resolve<ISchemaProvider>(provider);
+            var srcSchema = scope.ResolveNamed<ISchemaProvider>(provider);
             try
             {
                 srcSchema.Open(connectionString);

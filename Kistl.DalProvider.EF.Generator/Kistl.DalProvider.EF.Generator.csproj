@@ -45,9 +45,9 @@
       <HintPath>C:\Program Files\AREBIS\Arebis Generation Tools\Arebis.CodeGeneration.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Autofac, Version=0.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+    <Reference Include="Autofac">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\AutoFac 2.1\Autofac.dll</HintPath>
+      <HintPath>..\Libs\AutoFac 2\Autofac.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

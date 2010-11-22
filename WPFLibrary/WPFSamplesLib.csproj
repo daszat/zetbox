@@ -7,15 +7,9 @@
     <AssemblyName>WPFSamplesLib</AssemblyName>
     <WarningLevel>4</WarningLevel>
     <OutputType>library</OutputType>
-    <!-- Most people will use Publish dialog in Visual Studio to increment this -->
     <RootNamespace>Microsoft.Samples.KMoore.WPFSamples</RootNamespace>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <FileUpgradeFlags>
-    </FileUpgradeFlags>
-    <OldToolsVersion>3.5</OldToolsVersion>
-    <UpgradeBackupLocation>
-    </UpgradeBackupLocation>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

@@ -41,7 +41,7 @@
       <HintPath>..\..\Libs\Npgsql2\Npgsql.dll</HintPath>
     </Reference>
     <Reference Include="Autofac">
-      <HintPath>..\..\Libs\AutoFac 2.1\Autofac.dll</HintPath>
+      <HintPath>..\..\Libs\AutoFac 2\Autofac.dll</HintPath>
     </Reference>
     <Reference Include="log4net">
       <HintPath>..\..\Libs\log4net.dll</HintPath>

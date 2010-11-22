@@ -14,6 +14,7 @@ namespace Kistl.DalProvider.NHibernate
         public NHibernateContext(InterfaceType.Factory iftFactory)
             : base(iftFactory)
         {
+
         }
 
         public override int SubmitChanges()
@@ -45,7 +46,6 @@ namespace Kistl.DalProvider.NHibernate
         {
             throw new NotImplementedException();
         }
-
 
         public List<T> GetListOf<T>(IDataObject obj, string propertyName) where T : class, IDataObject
         {

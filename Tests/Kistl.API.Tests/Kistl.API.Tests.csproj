@@ -47,7 +47,7 @@
   <ItemGroup>
     <Reference Include="Autofac">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libs\AutoFac 2.1\Autofac.dll</HintPath>
+      <HintPath>..\..\Libs\AutoFac 2\Autofac.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=1.2.10.0">
       <SpecificVersion>False</SpecificVersion>

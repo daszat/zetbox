@@ -1,17 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Kistl.API.Server;
-using Kistl.App.Extensions;
-using Kistl.API.Utils;
-using Kistl.API;
-using ZBox.App.SchemaMigration;
-using Autofac;
 
 namespace ZBox.App.SchemaMigration
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using Autofac;
+    using Kistl.API;
+    using Kistl.API.Server;
+    using Kistl.API.Utils;
+    using Kistl.App.Extensions;
+    using ZBox.App.SchemaMigration;
+
     public class CustomServerActions_SchemaMigration
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("ZBox.SchemaMigration");
@@ -30,7 +30,7 @@ namespace ZBox.App.SchemaMigration
             {
                 if (string.IsNullOrEmpty(s.ConnectionString)) throw new InvalidOperationException("Source ConnectionString is empty");
                 if (string.IsNullOrEmpty(s.Provider)) throw new InvalidOperationException("Source Provider is empty");
-                ISchemaProvider src = _scope.Resolve<ISchemaProvider>(s.Provider);
+                ISchemaProvider src = _scope.ResolveNamed<ISchemaProvider>(s.Provider);
                 src.Open(s.ConnectionString);
 
                 var destTbls = s.SourceTables
