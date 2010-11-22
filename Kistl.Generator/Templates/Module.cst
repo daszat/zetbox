@@ -34,21 +34,8 @@ namespace Kistl.Objects
         {
             base.Load(builder);
 
-            builder
-                .Register<<%= shortName %>ImplementationTypeChecker>(
-                    c => new <%= shortName %>ImplementationTypeChecker(
-                        c.Resolve<Func<IEnumerable<IImplementationTypeChecker>>>()))
-                .As<I<%= shortName %>ImplementationTypeChecker>()
-                .As<IImplementationTypeChecker>()
-                .InstancePerDependency();
-                
-            builder
-                .Register<<%= shortName %>ActionsManager>(
-                    c => new <%= shortName %>ActionsManager(
-                        c.Resolve<ILifetimeScope>(),
-                        c.Resolve<IDeploymentRestrictor>()))
-                .As<I<%= shortName %>ActionsManager>()
-                .InstancePerLifetimeScope();
+<% ApplyRegistrations(); %>
+
         }
     }
 

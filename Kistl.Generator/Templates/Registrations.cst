@@ -1,0 +1,25 @@
+﻿<%@ CodeTemplate Language="C#" 
+    Name="Module"
+    ClassName="Kistl.Generator.Templates.Registrations" 
+    Inherits="Kistl.Generator.ResourceTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="System.Linq" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="shortName" Type="string" %>
+            builder
+                .Register<<%= shortName %>ImplementationTypeChecker>(
+                    c => new <%= shortName %>ImplementationTypeChecker(
+                        c.Resolve<Func<IEnumerable<IImplementationTypeChecker>>>()))
+                .As<I<%= shortName %>ImplementationTypeChecker>()
+                .As<IImplementationTypeChecker>()
+                .InstancePerDependency();
+                
+            builder
+                .Register<<%= shortName %>ActionsManager>(
+                    c => new <%= shortName %>ActionsManager(
+                        c.Resolve<ILifetimeScope>(),
+                        c.Resolve<IDeploymentRestrictor>()))
+                .As<I<%= shortName %>ActionsManager>()
+                .InstancePerLifetimeScope();

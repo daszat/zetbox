@@ -334,6 +334,14 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Templates\Registrations.cs">
+      <DependentUpon>Registrations.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Registrations.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Registrations.cst</DependentUpon>
+    </Compile>
     <Compile Include="Templates\Serialization\CollectionSerialization.cs" />
     <Compile Include="Templates\Serialization\CollectionSerialization.Designer.cs">
       <DependentUpon>CollectionSerialization.cst</DependentUpon>
@@ -521,6 +529,10 @@
     <None Include="Templates\ProjectFile.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ProjectFile.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\Registrations.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>Registrations.Designer.cs</LastGenOutput>
     </None>
     <None Include="Templates\Serialization\CollectionSerialization.cst">
       <Generator>Arebis Template Processor</Generator>
