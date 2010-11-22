@@ -481,6 +481,121 @@ namespace Kistl.DalProvider.Client
             }
         }
 
+        private abstract class ExchangeObjectsHandler
+        {
+            public int ExchangeObjects(KistlContextImpl ctx)
+            {
+                var objectsToSubmit = new List<IPersistenceObject>();
+                var objectsToAdd = new List<IPersistenceObject>();
+                var objectsToDetach = new List<IPersistenceObject>();
+
+                // Added Objects
+                foreach (var obj in ctx._objects.OfType<PersistenceObjectBaseImpl>()
+                    .Where(o => o.ObjectState == DataObjectState.New))
+                {
+                    objectsToSubmit.Add(obj);
+                    objectsToAdd.Add(obj);
+                }
+                // Changed objects
+                foreach (var obj in ctx._objects.OfType<PersistenceObjectBaseImpl>()
+                    .Where(o => o.ObjectState == DataObjectState.Modified))
+                {
+                    objectsToSubmit.Add(obj);
+                }
+                // Deleted Objects
+                foreach (var obj in ctx._objects.OfType<PersistenceObjectBaseImpl>()
+                    .Where(o => o.ObjectState == DataObjectState.Deleted))
+                {
+                    // Submit only persisted objects
+                    if (Helper.IsPersistedObject(obj))
+                    {
+                        objectsToSubmit.Add(obj);
+                    }
+                    objectsToDetach.Add(obj);
+                }
+
+                var notifySaveList = objectsToSubmit.OfType<IDataObject>().Where(o => o.ObjectState.In(DataObjectState.New, DataObjectState.Modified));
+
+                // Fire PreSave
+                notifySaveList.ForEach(o => o.NotifyPreSave());
+
+                var notificationRequests = ctx.AttachedObjects
+                        .ToLookup(o => ctx.GetInterfaceType(o))
+                        .Select(g => new ObjectNotificationRequest() { Type = g.Key.ToSerializableType(), IDs = g.Select(o => o.ID).ToArray() });
+
+                // Submit to server
+                var objectsFromServer = this.ExecuteServerCall(ctx, objectsToSubmit, notificationRequests);
+
+                // Apply Changes
+                int counter = 0;
+                var changedObjects = new List<IPersistenceObject>();
+                foreach (var objFromServer in objectsFromServer)
+                {
+                    IClientObject obj;
+                    IPersistenceObject underlyingObject;
+
+                    if (counter < objectsToAdd.Count)
+                    {
+                        obj = (IClientObject)objectsToAdd[counter++];
+                        underlyingObject = obj.UnderlyingObject;
+
+                        // remove object from cache, since index by ID may change.
+                        // will be re-inserted on attach later
+                        ctx._objects.Remove(underlyingObject);
+                    }
+                    else
+                    {
+                        underlyingObject = ctx.ContainsObject(ctx.GetInterfaceType(objFromServer), objFromServer.ID) ?? objFromServer;
+                        obj = (IClientObject)underlyingObject;
+                    }
+
+                    ctx.RecordNotifications(underlyingObject);
+                    if (obj != objFromServer)
+                    {
+                        underlyingObject.ApplyChangesFrom(objFromServer);
+                    }
+
+                    // reset ObjectState to new truth
+                    obj.SetUnmodified();
+
+                    changedObjects.Add(underlyingObject);
+                }
+
+                objectsToDetach.ForEach(obj => ctx.Detach(obj));
+                changedObjects.ForEach(obj => ctx.Attach(obj));
+
+                this.UpdateModifiedState(ctx);
+
+                ctx.PlaybackNotifications();
+
+                // Fire PostSave
+                notifySaveList.ForEach(o => o.NotifyPostSave());
+
+                return objectsToSubmit.Count;
+            }
+
+            protected abstract IEnumerable<IPersistenceObject> ExecuteServerCall(KistlContextImpl ctx, IEnumerable<IPersistenceObject> objectsToSubmit, IEnumerable<ObjectNotificationRequest> notificationRequests);
+            protected abstract void UpdateModifiedState(KistlContextImpl ctx);
+        }
+
+        private class SubmitChangesHandler : ExchangeObjectsHandler
+        {
+            protected override IEnumerable<IPersistenceObject> ExecuteServerCall(KistlContextImpl ctx, IEnumerable<IPersistenceObject> objectsToSubmit, IEnumerable<ObjectNotificationRequest> notificationRequests)
+            {
+                return ctx.proxy.SetObjects(
+                    ctx,
+                    objectsToSubmit,
+                    notificationRequests);
+            }
+
+            protected override void UpdateModifiedState(KistlContextImpl ctx)
+            {
+                // Before Notifications & PostSave events. They could change data
+                ctx.IsModified = false;
+            }
+        }
+
+        private SubmitChangesHandler _submitChangesHandler = null;
         /// <summary>
         /// Submits the changes and returns the number of affected Objects. Note: only IDataObjects are counted.
         /// </summary>
@@ -491,97 +606,8 @@ namespace Kistl.DalProvider.Client
             // TODO: Add a better Cache Refresh Strategie
             // CacheController<IDataObject>.Current.Clear();
 
-            var objectsToSubmit = new List<PersistenceObjectBaseImpl>();
-            var objectsToAdd = new List<PersistenceObjectBaseImpl>();
-            var objectsToDetach = new List<PersistenceObjectBaseImpl>();
-
-            // Added Objects
-            foreach (var obj in _objects.OfType<PersistenceObjectBaseImpl>()
-                .Where(o => o.ObjectState == DataObjectState.New))
-            {
-                objectsToSubmit.Add(obj);
-                objectsToAdd.Add(obj);
-            }
-            // Changed objects
-            foreach (var obj in _objects.OfType<PersistenceObjectBaseImpl>()
-                .Where(o => o.ObjectState == DataObjectState.Modified))
-            {
-                objectsToSubmit.Add(obj);
-            }
-            // Deleted Objects
-            foreach (var obj in _objects.OfType<PersistenceObjectBaseImpl>()
-                .Where(o => o.ObjectState == DataObjectState.Deleted))
-            {
-                // Submit only persisted objects
-                if (Helper.IsPersistedObject(obj))
-                {
-                    objectsToSubmit.Add(obj);
-                }
-                objectsToDetach.Add(obj);
-            }
-
-            var notifySaveList = objectsToSubmit.OfType<IDataObject>().Where(o => o.ObjectState.In(DataObjectState.New, DataObjectState.Modified));
-
-            // Fire PreSave
-            notifySaveList.ForEach(o => o.NotifyPreSave());
-
-            // Submit to server
-            var objectsFromServer = proxy.SetObjects(
-                this,
-                objectsToSubmit
-                    .Cast<IPersistenceObject>(),
-                AttachedObjects
-                    .ToLookup(o => GetInterfaceType(o))
-                    .Select(g => new ObjectNotificationRequest() { Type = g.Key.ToSerializableType(), IDs = g.Select(o => o.ID).ToArray() }))
-                .Cast<BasePersistenceObject>();
-
-            // Apply Changes
-            int counter = 0;
-            var changedObjects = new List<BasePersistenceObject>();
-            foreach (var objFromServer in objectsFromServer)
-            {
-                IClientObject obj;
-                BasePersistenceObject underlyingObject;
-
-                if (counter < objectsToAdd.Count)
-                {
-                    obj = (IClientObject)objectsToAdd[counter++];
-                    underlyingObject = obj.UnderlyingObject;
-
-                    // remove object from cache, since index by ID may change.
-                    // will be re-inserted on attach later
-                    _objects.Remove(underlyingObject);
-                }
-                else
-                {
-                    underlyingObject = (BasePersistenceObject)this.ContainsObject(GetInterfaceType(objFromServer), objFromServer.ID) ?? objFromServer;
-                    obj = (IClientObject)underlyingObject;
-                }
-
-                RecordNotifications(underlyingObject);
-                if (obj != objFromServer)
-                {
-                    underlyingObject.ApplyChangesFrom(objFromServer);
-                }
-
-                // reset ObjectState to new truth
-                obj.SetUnmodified();
-
-                changedObjects.Add(underlyingObject);
-            }
-
-            objectsToDetach.ForEach(obj => this.Detach(obj));
-            changedObjects.ForEach(obj => this.Attach(obj));
-
-            // Before Notifications & PostSave events. They could change data
-            IsModified = false;
-
-            PlaybackNotifications();
-
-            // Fire PostSave
-            notifySaveList.ForEach(o => o.NotifyPostSave());
-
-            return objectsToSubmit.Count;
+            if (_submitChangesHandler == null) _submitChangesHandler = new SubmitChangesHandler();
+            return _submitChangesHandler.ExchangeObjects(this);
         }
 
         /// <summary>
@@ -896,27 +922,52 @@ namespace Kistl.DalProvider.Client
 
         #region IZBoxClientContextInternals Members
 
+        private class InvokeServerMethodHandler<T> : ExchangeObjectsHandler where T : class, IDataObject
+        {
+            public InvokeServerMethodHandler(T obj, string name, IEnumerable<Type> parameterTypes, params object[] parameter)
+            {
+                this.obj = obj;
+                this.name = name;
+                this.parameterTypes = parameterTypes;
+                this.parameter = parameter;
+            }
+
+            private readonly T obj;
+            private readonly string name;
+            private readonly IEnumerable<Type> parameterTypes;
+            private readonly object[] parameter;
+
+            protected override IEnumerable<IPersistenceObject> ExecuteServerCall(KistlContextImpl ctx, IEnumerable<IPersistenceObject> objectsToSubmit, IEnumerable<ObjectNotificationRequest> notificationRequests)
+            {
+                IEnumerable<IPersistenceObject> changedObjects;
+                Result = ctx.proxy.InvokeServerMethod(
+                    ctx,
+                    ctx.GetInterfaceType(obj),
+                    obj.ID,
+                    name,
+                    parameterTypes,
+                    parameter,
+                    objectsToSubmit,
+                    notificationRequests,
+                    out changedObjects);
+
+                return changedObjects;
+            }
+
+            public object Result { get; private set; }
+
+            protected override void UpdateModifiedState(KistlContextImpl ctx)
+            {
+                // Do nothing!
+            }
+        }
+
         public object InvokeServerMethod<T>(T obj, string name, IEnumerable<Type> parameterTypes, params object[] parameter) where T : class, IDataObject
         {
             CheckDisposed();
-
-            IEnumerable<IPersistenceObject> changedObjects;
-            var result = proxy.InvokeServerMethod(
-                this, 
-                GetInterfaceType(obj), 
-                obj.ID, 
-                name, 
-                parameterTypes, 
-                parameter, 
-                new IPersistenceObject[0], 
-                new ObjectNotificationRequest[0], 
-                out changedObjects);
-
-            foreach (IDataObject c in changedObjects)
-            {
-                this.AttachRespectingIsolationLevel(c);
-            }
-            return result;
+            InvokeServerMethodHandler<T> handler = new InvokeServerMethodHandler<T>(obj, name, parameterTypes, parameter);
+            handler.ExchangeObjects(this);
+            return handler.Result;
         }
 
         #endregion
