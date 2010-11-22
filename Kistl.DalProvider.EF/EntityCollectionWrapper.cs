@@ -75,7 +75,8 @@ namespace Kistl.DalProvider.Ef
         {
             if (array == null) { throw new ArgumentNullException("array"); }
             if (arrayIndex < 0) { throw new ArgumentOutOfRangeException("arrayIndex", "arrayIndex must be non-negative"); }
-            if (arrayIndex >= array.Length)
+
+            if (underlyingCollection.Count > 0 && arrayIndex >= array.Length)
             {
                 var msg = String.Format("arrayIndex={0} must be less than array.Length={1}", arrayIndex, array.Length);
                 throw new ArgumentException(msg, "arrayIndex");
@@ -83,7 +84,7 @@ namespace Kistl.DalProvider.Ef
 
             if (arrayIndex + underlyingCollection.Count > array.Length)
             {
-                var msg = String.Format("items do not fit idx={0} + #item={1} >= len={2}", arrayIndex, underlyingCollection.Count, array.Length);
+                var msg = String.Format("items do not fit idx={0} + #item={1} > len={2}", arrayIndex, underlyingCollection.Count, array.Length);
                 throw new ArgumentException(msg, "arrayIndex");
             }
 
