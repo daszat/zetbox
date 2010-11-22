@@ -39,7 +39,7 @@ namespace Kistl.Tests.Utilities.PostgresSql
                     Log.Error("Not resetting postgresql database");
 
                     //Log.InfoFormat("executing on database [{0}]", cb.ToString());
-                    //ExecuteScript(cb.ToString(), "Tests.Utilities.PostgresSql.RestoreDatabase.sql");
+                    //ExecuteScript(cb.ToString(), "Kistl.Tests.Utilities.PostgresSql.RestoreDatabase.sql");
                     //Log.Info("Done restoring Database");
 
                     // After recreating the database, all connection pools should be cleard

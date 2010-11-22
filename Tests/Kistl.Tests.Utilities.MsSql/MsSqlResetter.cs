@@ -37,7 +37,7 @@ namespace Kistl.Tests.Utilities.MsSql
                     var cb = new SqlConnectionStringBuilder(config.Server.ConnectionString);
                     cb.InitialCatalog = "master";
                     Log.InfoFormat("executing on database [{0}]", cb.ToString());
-                    ExecuteScript(cb.ToString(), "Tests.Utilities.MsSql.BackupRestoreTestDatabase.sql");
+                    ExecuteScript(cb.ToString(), "Kistl.Tests.Utilities.MsSql.BackupRestoreTestDatabase.sql");
                     Log.Info("Done restoring Database");
 
                     // After recreating the database, all connection pools should be cleard
