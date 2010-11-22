@@ -8,6 +8,7 @@ namespace Kistl.DalProvider.NHibernate
     using System.Reflection;
     using System.Text;
     using Autofac;
+    using AutofacContrib.NHibernate.Bytecode;
     using Kistl.API;
     using Kistl.API.Server;
     using Kistl.API.Utils;
@@ -46,6 +47,10 @@ namespace Kistl.DalProvider.NHibernate
                 .Register(c => new NHibernateServerObjectHandlerFactory())
                 .As(typeof(IServerObjectHandlerFactory));
 
+            //moduleBuilder
+            //    .RegisterType<AutofacBytecodeProvider>()
+            //    .As<global::NHibernate.Bytecode.IBytecodeProvider>()
+            //    .InstancePerDependency();
         }
     }
 }

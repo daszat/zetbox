@@ -43,6 +43,9 @@
     <Reference Include="Autofac">
       <HintPath>..\Libs\AutoFac 2\Autofac.dll</HintPath>
     </Reference>
+    <Reference Include="AutofacContrib.NHibernate">
+      <HintPath>..\Libs\AutoFac.Contrib 2\Library\AutofacContrib.NHibernate.dll</HintPath>
+    </Reference>
     <Reference Include="log4net">
       <HintPath>..\Libs\log4net.dll</HintPath>
     </Reference>

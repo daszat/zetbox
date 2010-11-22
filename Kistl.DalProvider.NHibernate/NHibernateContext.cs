@@ -5,16 +5,36 @@ namespace Kistl.DalProvider.NHibernate
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using AutofacContrib.NHibernate.Bytecode;
+    //using global::NHibernate.Bytecode;
     using Kistl.API;
     using Kistl.API.Server;
 
     public class NHibernateContext
         : BaseMemoryContext, IKistlServerContext
     {
-        public NHibernateContext(InterfaceType.Factory iftFactory)
+        private static readonly object _initLock = new object();
+        private bool initialized = false;
+
+        public NHibernateContext(InterfaceType.Factory iftFactory) //, IBytecodeProvider bytecodeProvider)
             : base(iftFactory)
         {
+            // TODO: setup AutoFac as IoC container in NHibernate
+            //if (!initialized) // avoid lock if initialized
+            //{
+            //    lock (_initLock)
+            //    {
+            //        // recheck after lock succeeded
+            //        if (!initialized)
+            //        {
+            //            var containerProvider = new ContainerProvider(builder.Build());
 
+            //        global::NHibernate.   Environment.BytecodeProvider = new AutofacBytecodeProvider(
+            //                containerProvider.ApplicationContainer, new ProxyFactoryFactory());
+
+            //        }
+            //    }
+            //}
         }
 
         public override int SubmitChanges()
