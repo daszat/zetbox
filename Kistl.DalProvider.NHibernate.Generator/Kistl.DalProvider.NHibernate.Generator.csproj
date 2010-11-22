@@ -60,25 +60,41 @@
     <Compile Include="NhGenerator.cs" />
     <Compile Include="NhGeneratorProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Templates\Mappings\JoinedSubclassHbm.cs" />
+    <Compile Include="Templates\Mappings\JoinedSubclassHbm.cs">
+      <DependentUpon>JoinedSubclassHbm.cst</DependentUpon>
+    </Compile>
     <Compile Include="Templates\Mappings\JoinedSubclassHbm.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>JoinedSubclassHbm.cst</DependentUpon>
     </Compile>
-    <Compile Include="Templates\Mappings\ObjectClassHbm.cs" />
+    <Compile Include="Templates\Mappings\ObjectClassHbm.cs">
+      <DependentUpon>ObjectClassHbm.cst</DependentUpon>
+    </Compile>
     <Compile Include="Templates\Mappings\ObjectClassHbm.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ObjectClassHbm.cst</DependentUpon>
     </Compile>
-    <Compile Include="Templates\Mappings\PropertiesHbm.cs" />
+    <Compile Include="Templates\Mappings\PropertiesHbm.cs">
+      <DependentUpon>PropertiesHbm.cst</DependentUpon>
+    </Compile>
     <Compile Include="Templates\Mappings\PropertiesHbm.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PropertiesHbm.cst</DependentUpon>
     </Compile>
+    <Compile Include="Templates\Module.cs" />
+    <Compile Include="Templates\ObjectClasses\Method.cs" />
     <Compile Include="Templates\ProjectFile.cs" />
+    <Compile Include="Templates\Registrations.cs">
+      <DependentUpon>Registrations.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Registrations.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Registrations.cst</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Kistl.API.Server\Kistl.API.Server.csproj">
@@ -111,6 +127,10 @@
     <None Include="Templates\Mappings\PropertiesHbm.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>PropertiesHbm.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\Registrations.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>Registrations.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>

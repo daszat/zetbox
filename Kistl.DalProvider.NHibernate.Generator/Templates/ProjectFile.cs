@@ -44,6 +44,13 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates
             this.WriteLine(@"      <Private>False</Private>");
             this.WriteLine(@"    </Reference>");
 
+            // NHibernate
+            this.WriteLine(@"    <Reference Include=""NHibernate"">");
+            this.WriteLine(@"      <SpecificVersion>False</SpecificVersion>");
+            this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Server\NHibernate.dll</HintPath>");
+            this.WriteLine(@"      <Private>False</Private>");
+            this.WriteLine(@"    </Reference>");
+
             // Base Provider
             this.WriteLine(@"    <Reference Include=""Kistl.DalProvider.Base"">");
             this.WriteLine(@"      <SpecificVersion>False</SpecificVersion>");

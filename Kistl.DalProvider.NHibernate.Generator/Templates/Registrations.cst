@@ -1,0 +1,37 @@
+﻿<%@ CodeTemplate Language="C#" 
+    Name="Registrations"
+    ClassName="Kistl.DalProvider.NHibernate.Generator.Templates.Registrations" 
+    Inherits="Kistl.Generator.Templates.Registrations" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="System.Linq" %>
+<%@ Import Namespace="Kistl.API" %>
+
+<% base.Generate(); %>
+
+            builder
+                .Register<ISessionFactory>(
+                    c => {
+                        var kistlConfig = c.Resolve<KistlConfig>();
+                        var result = new Configuration();
+                        result.DataBaseIntegration(db => 
+                            {
+                                db.Dialect<global::NHibernate.Dialect.PostgreSQL82Dialect>();
+                                db.ConnectionString = kistlConfig.Server.ConnectionString;
+                            });
+
+                        return result
+                            .AddAssembly(this.GetType().Assembly)
+                            .Configure()
+                            .BuildSessionFactory();
+                    })
+                .SingleInstance();
+
+            builder
+                .Register<ISession>(
+                    c => c.Resolve<ISessionFactory>()
+                            .OpenSession())
+                // TODO: reconsider this configuration
+                //       using IPD makes it safer, but requires passing the session manually
+                //       on the other hand, the session should never escape the data context
+                .InstancePerDependency();

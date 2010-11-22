@@ -43,14 +43,17 @@
     <Reference Include="Autofac">
       <HintPath>..\Libs\AutoFac 2\Autofac.dll</HintPath>
     </Reference>
-    <Reference Include="AutofacContrib.NHibernate">
-      <HintPath>..\Libs\AutoFac.Contrib 2\Library\AutofacContrib.NHibernate.dll</HintPath>
-    </Reference>
     <Reference Include="log4net">
       <HintPath>..\Libs\log4net.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate">
-      <HintPath>..\Libs\NHibernate2\bin\Required_Bins\NHibernate.dll</HintPath>
+      <HintPath>..\Libs\NHibernate3\Required_Bins\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.ByteCode.LinFu">
+      <HintPath>..\Libs\NHibernate3\Required_For_LazyLoading\LinFu\NHibernate.ByteCode.LinFu.dll</HintPath>
+    </Reference>
+    <Reference Include="Remotion.Data.Linq">
+      <HintPath>..\Libs\NHibernate3\Required_Bins\Remotion.Data.Linq.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -94,6 +97,11 @@
       <Project>{9677AE11-CB92-4F0A-A248-87A21586F0DA}</Project>
       <Name>TempAppHelpers</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="hibernate.cfg.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

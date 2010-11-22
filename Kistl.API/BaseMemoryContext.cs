@@ -32,7 +32,7 @@ namespace Kistl.API
         [SuppressMessage("Microsoft.Performance", "CA1805:DoNotInitializeUnnecessarily", Justification = "Uses global constant")]
         private int _newIDCounter = Helper.INVALIDID;
 
-        private void CheckDisposed()
+        protected void CheckDisposed()
         {
             if (IsDisposed) { throw new InvalidOperationException("Context already disposed"); }
         }
@@ -149,7 +149,16 @@ namespace Kistl.API
         {
             CheckDisposed();
             //CheckInterfaceAssembly("ifType", ifType.Type);
-            return (objects[ifType] ?? _emptyList).AsQueryable().AddOfType(ifType.Type).Cast<IPersistenceObject>();
+
+            var source = objects[ifType];
+            if (source != null)
+            {
+                return source.AsQueryable().AddOfType(ifType.Type).Cast<IPersistenceObject>();
+            }
+            else
+            {
+                return _emptyList.AsQueryable();
+            }
         }
 
         /// <summary>Not implemented.</summary>

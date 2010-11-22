@@ -5,36 +5,37 @@ namespace Kistl.DalProvider.NHibernate
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using AutofacContrib.NHibernate.Bytecode;
-    //using global::NHibernate.Bytecode;
     using Kistl.API;
     using Kistl.API.Server;
+    using global::NHibernate.Linq;
 
     public class NHibernateContext
         : BaseMemoryContext, IKistlServerContext
     {
-        private static readonly object _initLock = new object();
-        //private bool initialized = false;
+        private readonly global::NHibernate.ISession _nhSession;
 
-        public NHibernateContext(InterfaceType.Factory iftFactory) //, IBytecodeProvider bytecodeProvider)
+        public NHibernateContext(InterfaceType.Factory iftFactory, global::NHibernate.ISession nhSession)
             : base(iftFactory)
         {
-            // TODO: setup AutoFac as IoC container in NHibernate
-            //if (!initialized) // avoid lock if initialized
-            //{
-            //    lock (_initLock)
-            //    {
-            //        // recheck after lock succeeded
-            //        if (!initialized)
-            //        {
-            //            var containerProvider = new ContainerProvider(builder.Build());
+            _nhSession = nhSession;
+        }
 
-            //        global::NHibernate.   Environment.BytecodeProvider = new AutofacBytecodeProvider(
-            //                containerProvider.ApplicationContainer, new ProxyFactoryFactory());
+        public override IQueryable<IPersistenceObject> GetPersistenceObjectQuery(InterfaceType ifType)
+        {
+            CheckDisposed();
+            //CheckInterfaceAssembly("ifType", ifType.Type);
 
-            //        }
-            //    }
-            //}
+            var mi = this.GetType().FindGenericMethod(
+                "PrepareQueryable",
+                new[] { ToImplementationType(ifType).Type },
+                new Type[0]);
+
+            return (IQueryable<IPersistenceObject>)mi.Invoke(this, new object[0]);
+        }
+
+        private IQueryable<IPersistenceObject> PrepareQueryable<T>()
+        {
+            return _nhSession.Query<T>().Cast<IPersistenceObject>();
         }
 
         public override int SubmitChanges()

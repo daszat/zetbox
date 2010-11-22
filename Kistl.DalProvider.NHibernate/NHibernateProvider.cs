@@ -8,7 +8,7 @@ namespace Kistl.DalProvider.NHibernate
     using System.Reflection;
     using System.Text;
     using Autofac;
-    using AutofacContrib.NHibernate.Bytecode;
+    //using AutofacContrib.NHibernate.Bytecode;
     using Kistl.API;
     using Kistl.API.Server;
     using Kistl.API.Utils;
