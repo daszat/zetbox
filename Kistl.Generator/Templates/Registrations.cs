@@ -14,5 +14,10 @@ namespace Kistl.Generator.Templates
             throw new InvalidOperationException("Do not call this constructor, use the parameterized one!");
         }
 
+
+        internal static void Call(Arebis.CodeGeneration.IGenerationHost Host, API.IKistlContext ctx, string shortName)
+        {
+            Host.CallTemplate("Registrations", ctx, shortName);
+        }
     }
 }

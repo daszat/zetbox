@@ -52,21 +52,10 @@ this.WriteObjects("        protected override void Load(ContainerBuilder builder
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            base.Load(builder);\r\n");
 this.WriteObjects("\r\n");
-this.WriteObjects("            builder\r\n");
-this.WriteObjects("                .Register<",  shortName , "ImplementationTypeChecker>(\r\n");
-this.WriteObjects("                    c => new ",  shortName , "ImplementationTypeChecker(\r\n");
-this.WriteObjects("                        c.Resolve<Func<IEnumerable<IImplementationTypeChecker>>>()))\r\n");
-this.WriteObjects("                .As<I",  shortName , "ImplementationTypeChecker>()\r\n");
-this.WriteObjects("                .As<IImplementationTypeChecker>()\r\n");
-this.WriteObjects("                .InstancePerDependency();\r\n");
-this.WriteObjects("                \r\n");
-this.WriteObjects("            builder\r\n");
-this.WriteObjects("                .Register<",  shortName , "ActionsManager>(\r\n");
-this.WriteObjects("                    c => new ",  shortName , "ActionsManager(\r\n");
-this.WriteObjects("                        c.Resolve<ILifetimeScope>(),\r\n");
-this.WriteObjects("                        c.Resolve<IDeploymentRestrictor>()))\r\n");
-this.WriteObjects("                .As<I",  shortName , "ActionsManager>()\r\n");
-this.WriteObjects("                .InstancePerLifetimeScope();\r\n");
+#line 37 "P:\Kistl\Kistl.Generator\Templates\Module.cst"
+ApplyRegistrations(); 
+#line 38 "P:\Kistl\Kistl.Generator\Templates\Module.cst"
+this.WriteObjects("\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("    }\r\n");
 this.WriteObjects("\r\n");

@@ -15,5 +15,10 @@ namespace Kistl.Generator.Templates
                     "Kistl.App.Extensions"
                 });
         }
+
+        protected virtual void ApplyRegistrations()
+        {
+            Registrations.Call(Host, ctx, shortName);
+        }
     }
 }
