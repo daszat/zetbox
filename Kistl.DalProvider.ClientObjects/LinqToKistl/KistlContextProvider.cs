@@ -86,7 +86,7 @@ namespace Kistl.DalProvider.Client
         }
         #endregion
 
-        #region Operations GetListOf/GetList/GetObject
+        #region Operations GetListOf/GetList/GetObject/InvokeServerMethod
 
         internal List<IDataObject> GetListOfCall(int ID, string propertyName)
         {

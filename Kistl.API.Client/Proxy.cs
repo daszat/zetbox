@@ -11,6 +11,7 @@ using System.Text;
 
 using Kistl.API.Client.KistlService;
 using Kistl.API.Utils;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Kistl.API.Client
 {
@@ -24,6 +25,8 @@ namespace Kistl.API.Client
         IEnumerable<IDataObject> GetListOf(IKistlContext ctx, InterfaceType ifType, int ID, string property, out List<IStreamable> auxObjects);
 
         IEnumerable<IPersistenceObject> SetObjects(IKistlContext ctx, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests);
+
+        object InvokeServerMethod(IKistlContext ctx, InterfaceType ifType, int ID, string method, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests, out IEnumerable<IPersistenceObject> changedObjects);
 
         IEnumerable<T> FetchRelation<T>(IKistlContext ctx, Guid relationId, RelationEndRole role, IDataObject parent, out List<IStreamable> auxObjects)
             where T : class, IRelationEntry;
@@ -112,12 +115,7 @@ namespace Kistl.API.Client
                 {
                     using (var sw = new BinaryWriter(ms))
                     {
-                        foreach (var obj in objects)
-                        {
-                            BinarySerializer.ToStream(true, sw);
-                            obj.ToStream(sw, new HashSet<IStreamable>(), false);
-                        }
-                        BinarySerializer.ToStream(false, sw);
+                        SendObjects(objects, sw);
 
                         using (MemoryStream s = Service.SetObjects(ms, notficationRequests.ToArray()))
                         {
@@ -133,6 +131,16 @@ namespace Kistl.API.Client
                     }
                 }
             }
+        }
+
+        private static void SendObjects(IEnumerable<IPersistenceObject> objects, BinaryWriter sw)
+        {
+            foreach (var obj in objects)
+            {
+                BinarySerializer.ToStream(true, sw);
+                obj.ToStream(sw, new HashSet<IStreamable>(), false);
+            }
+            BinarySerializer.ToStream(false, sw);
         }
 
         private IEnumerable<IStreamable> ReceiveObjects(IKistlContext ctx, BinaryReader sr, out List<IStreamable> auxObjects)
@@ -235,6 +243,37 @@ namespace Kistl.API.Client
                 {
                     result.Dispose();
                 }
+            }
+        }
+
+        public object InvokeServerMethod(IKistlContext ctx, InterfaceType ifType, int ID, string method, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests, out IEnumerable<IPersistenceObject> changedObjects)
+        {
+            using (Logging.Facade.InfoTraceMethodCallFormat("InvokeServerMethod: ID=[{0}]", ID))
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                MemoryStream parameterStream = new MemoryStream();
+                bf.Serialize(parameterStream, parameter);
+                
+                MemoryStream changedObjectsStream = new MemoryStream();
+                BinaryWriter sw = new BinaryWriter(changedObjectsStream);
+                SendObjects(objects, sw);
+
+                MemoryStream retChangedObjects;
+                var resultStream = Service.InvokeServerMethod(
+                    out retChangedObjects,
+                    ifType.ToSerializableType(),
+                    ID,
+                    method,
+                    parameterTypes.Select(t => ifType.ToSerializableType()).ToArray(),
+                    parameterStream,
+                    changedObjectsStream,
+                    notificationRequests.ToArray());
+
+                BinaryReader br = new BinaryReader(retChangedObjects);
+                changedObjects = ReceiveObjectList(ctx, br).Cast<IPersistenceObject>();
+
+                resultStream.Seek(0, SeekOrigin.Begin);
+                return bf.Deserialize(resultStream);
             }
         }
     }

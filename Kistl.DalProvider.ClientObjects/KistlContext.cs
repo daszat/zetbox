@@ -15,11 +15,27 @@ namespace Kistl.DalProvider.Client
     using Kistl.API.Utils;
     using Kistl.DalProvider.Base;
 
+    public interface IZBoxClientContextInternals
+    {
+        object InvokeServerMethod<T>(T obj, string name, IEnumerable<Type> parameterTypes, params object[] parameter) where T : class, IDataObject;
+    }
+
+    /// <summary>
+    /// TODO: Remove that class when Case #1763 is solved
+    /// </summary>
+    public static class ZBoxClientContextExtensions
+    {
+        public static IZBoxClientContextInternals ClientInternals(this IKistlContext ctx)
+        {
+            return (IZBoxClientContextInternals)ctx;
+        }
+    }
+
     /// <summary>
     /// Linq to Kistl Context Implementation
     /// </summary>
     internal class KistlContextImpl
-        : IDebuggingKistlContext, IZBoxContextInternals, IDisposable
+        : IDebuggingKistlContext, IZBoxContextInternals, IZBoxClientContextInternals, IDisposable
     {
         private readonly static object _lock = new object();
         private readonly KistlConfig config;
@@ -874,6 +890,33 @@ namespace Kistl.DalProvider.Client
             {
                 IsModified = true;
             }
+        }
+
+        #endregion
+
+        #region IZBoxClientContextInternals Members
+
+        public object InvokeServerMethod<T>(T obj, string name, IEnumerable<Type> parameterTypes, params object[] parameter) where T : class, IDataObject
+        {
+            CheckDisposed();
+
+            IEnumerable<IPersistenceObject> changedObjects;
+            var result = proxy.InvokeServerMethod(
+                this, 
+                GetInterfaceType(obj), 
+                obj.ID, 
+                name, 
+                parameterTypes, 
+                parameter, 
+                new IPersistenceObject[0], 
+                new ObjectNotificationRequest[0], 
+                out changedObjects);
+
+            foreach (IDataObject c in changedObjects)
+            {
+                this.AttachRespectingIsolationLevel(c);
+            }
+            return result;
         }
 
         #endregion

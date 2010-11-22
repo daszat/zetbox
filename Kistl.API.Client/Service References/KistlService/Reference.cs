@@ -39,6 +39,10 @@ namespace Kistl.API.Client.KistlService {
         [System.ServiceModel.OperationContractAttribute(Action="http://dasz.at/ZBox/IKistlService/SetBlobStream", ReplyAction="http://dasz.at/ZBox/IKistlService/SetBlobStreamResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(System.Exception), Action="http://dasz.at/ZBox/IKistlService/SetBlobStreamExceptionFault", Name="Exception", Namespace="http://schemas.datacontract.org/2004/07/System")]
         Kistl.API.Client.KistlService.BlobResponse SetBlobStream(Kistl.API.Client.KistlService.BlobMessage request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://dasz.at/ZBox/IKistlService/InvokeServerMethod", ReplyAction="http://dasz.at/ZBox/IKistlService/InvokeServerMethodResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(System.Exception), Action="http://dasz.at/ZBox/IKistlService/InvokeServerMethodExceptionFault", Name="Exception", Namespace="http://schemas.datacontract.org/2004/07/System")]
+        System.IO.MemoryStream InvokeServerMethod(out System.IO.MemoryStream retChangedObjects, Kistl.API.SerializableType type, int ID, string method, Kistl.API.SerializableType[] parameterTypes, System.IO.MemoryStream parameter, System.IO.MemoryStream changedObjects, Kistl.API.ObjectNotificationRequest[] notificationRequests);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -147,6 +151,10 @@ namespace Kistl.API.Client.KistlService {
             Kistl.API.Client.KistlService.BlobResponse retVal = ((Kistl.API.Client.KistlService.IKistlService)(this)).SetBlobStream(inValue);
             BlobInstance = retVal.BlobInstance;
             return retVal.ID;
+        }
+        
+        public System.IO.MemoryStream InvokeServerMethod(out System.IO.MemoryStream retChangedObjects, Kistl.API.SerializableType type, int ID, string method, Kistl.API.SerializableType[] parameterTypes, System.IO.MemoryStream parameter, System.IO.MemoryStream changedObjects, Kistl.API.ObjectNotificationRequest[] notificationRequests) {
+            return base.Channel.InvokeServerMethod(out retChangedObjects, type, ID, method, parameterTypes, parameter, changedObjects, notificationRequests);
         }
     }
 }

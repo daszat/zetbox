@@ -165,8 +165,9 @@ namespace Kistl.App.Extensions
                     }
                     else
                     {
-                        var attr = (EventBasedMethodAttribute)methodInfo.GetCustomAttributes(typeof(EventBasedMethodAttribute), false).Single();
-                        CreateInvokeInfo(objType, mi, attr.EventName);
+                        // May be null on Methods without events like server side invocations or "embedded" methods
+                        var attr = (EventBasedMethodAttribute)methodInfo.GetCustomAttributes(typeof(EventBasedMethodAttribute), false).SingleOrDefault();
+                        if(attr != null) CreateInvokeInfo(objType, mi, attr.EventName);
                     }
                 }
             }

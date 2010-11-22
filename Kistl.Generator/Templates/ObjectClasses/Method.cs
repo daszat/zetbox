@@ -15,6 +15,12 @@ namespace Kistl.Generator.Templates.ObjectClasses
 
     public partial class Method
     {
+        protected Method(Arebis.CodeGeneration.IGenerationHost host)
+            : base(host)
+        {
+            throw new NotSupportedException();
+        }
+
         public static void Call(Arebis.CodeGeneration.IGenerationHost host, IKistlContext ctx, DataType implementor, Kistl.App.Base.Method m, int index)
         {
             if (host == null) { throw new ArgumentNullException("host"); }

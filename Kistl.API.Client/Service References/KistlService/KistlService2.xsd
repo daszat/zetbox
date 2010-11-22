@@ -1,26 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Kistl.API" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Kistl.API" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd0" namespace="http://dasz.at/ZBox/" />
-  <xs:complexType name="SerializableNewExpression">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:SerializableCompoundExpression">
-        <xs:sequence>
-          <xs:element xmlns:q1="http://dasz.at/ZBox/" name="Members" nillable="true" type="q1:ArrayOfSerializableMemberInfo" />
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="SerializableNewExpression" nillable="true" type="tns:SerializableNewExpression" />
-  <xs:complexType name="SerializableCompoundExpression">
-    <xs:complexContent mixed="false">
-      <xs:extension xmlns:q2="http://dasz.at/ZBox/" base="q2:SerializableExpression">
-        <xs:sequence>
-          <xs:element name="_x003C_Children_x003E_k__BackingField" nillable="true" type="q2:ArrayOfSerializableExpression" />
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="SerializableCompoundExpression" nillable="true" type="tns:SerializableCompoundExpression" />
   <xs:complexType name="SerializableUnaryExpression">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:SerializableCompoundExpression">
@@ -29,48 +9,41 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="SerializableUnaryExpression" nillable="true" type="tns:SerializableUnaryExpression" />
-  <xs:complexType name="SerializableLambdaExpression">
+  <xs:complexType name="SerializableCompoundExpression">
     <xs:complexContent mixed="false">
-      <xs:extension base="tns:SerializableCompoundExpression">
-        <xs:sequence />
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="SerializableLambdaExpression" nillable="true" type="tns:SerializableLambdaExpression" />
-  <xs:complexType name="SerializableConstantExpression">
-    <xs:complexContent mixed="false">
-      <xs:extension xmlns:q3="http://dasz.at/ZBox/" base="q3:SerializableExpression">
+      <xs:extension xmlns:q1="http://dasz.at/ZBox/" base="q1:SerializableExpression">
         <xs:sequence>
-          <xs:element name="_x003C_Value_x003E_k__BackingField" nillable="true" type="xs:anyType" />
+          <xs:element name="_x003C_Children_x003E_k__BackingField" nillable="true" type="q1:ArrayOfSerializableExpression" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name="SerializableConstantExpression" nillable="true" type="tns:SerializableConstantExpression" />
+  <xs:element name="SerializableCompoundExpression" nillable="true" type="tns:SerializableCompoundExpression" />
   <xs:complexType name="SerializableMethodCallExpression">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:SerializableCompoundExpression">
         <xs:sequence>
-          <xs:element xmlns:q4="http://dasz.at/ZBox/" name="_x003C_GenericArguments_x003E_k__BackingField" nillable="true" type="q4:ArrayOfSerializableType" />
+          <xs:element xmlns:q2="http://dasz.at/ZBox/" name="_x003C_GenericArguments_x003E_k__BackingField" nillable="true" type="q2:ArrayOfSerializableType" />
           <xs:element name="_x003C_MethodName_x003E_k__BackingField" nillable="true" type="xs:string" />
-          <xs:element xmlns:q5="http://dasz.at/ZBox/" name="_x003C_ObjectExpression_x003E_k__BackingField" nillable="true" type="q5:SerializableExpression" />
-          <xs:element xmlns:q6="http://dasz.at/ZBox/" name="_x003C_ParameterTypes_x003E_k__BackingField" nillable="true" type="q6:ArrayOfSerializableType" />
-          <xs:element xmlns:q7="http://dasz.at/ZBox/" name="_x003C_SerializableMethodType_x003E_k__BackingField" nillable="true" type="q7:SerializableType" />
+          <xs:element xmlns:q3="http://dasz.at/ZBox/" name="_x003C_ObjectExpression_x003E_k__BackingField" nillable="true" type="q3:SerializableExpression" />
+          <xs:element xmlns:q4="http://dasz.at/ZBox/" name="_x003C_ParameterTypes_x003E_k__BackingField" nillable="true" type="q4:ArrayOfSerializableType" />
+          <xs:element xmlns:q5="http://dasz.at/ZBox/" name="_x003C_SerializableMethodType_x003E_k__BackingField" nillable="true" type="q5:SerializableType" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="SerializableMethodCallExpression" nillable="true" type="tns:SerializableMethodCallExpression" />
-  <xs:complexType name="SerializableParameterExpression">
+  <xs:complexType name="SerializableNewExpression">
     <xs:complexContent mixed="false">
-      <xs:extension xmlns:q8="http://dasz.at/ZBox/" base="q8:SerializableExpression">
+      <xs:extension base="tns:SerializableCompoundExpression">
         <xs:sequence>
-          <xs:element name="_x003C_Name_x003E_k__BackingField" nillable="true" type="xs:string" />
+          <xs:element xmlns:q6="http://dasz.at/ZBox/" name="Members" nillable="true" type="q6:ArrayOfSerializableMemberInfo" />
+          <xs:element xmlns:q7="http://dasz.at/ZBox/" name="_x003C_Constructor_x003E_k__BackingField" nillable="true" type="q7:SerializableConstructorInfo" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name="SerializableParameterExpression" nillable="true" type="tns:SerializableParameterExpression" />
+  <xs:element name="SerializableNewExpression" nillable="true" type="tns:SerializableNewExpression" />
   <xs:complexType name="SerializableMemberExpression">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:SerializableCompoundExpression">
@@ -91,14 +64,42 @@
   <xs:element name="SerializableBinaryExpression" nillable="true" type="tns:SerializableBinaryExpression" />
   <xs:complexType name="SerializableConditionalExpression">
     <xs:complexContent mixed="false">
-      <xs:extension xmlns:q9="http://dasz.at/ZBox/" base="q9:SerializableExpression">
+      <xs:extension xmlns:q8="http://dasz.at/ZBox/" base="q8:SerializableExpression">
         <xs:sequence>
-          <xs:element name="_x003C_IfFalse_x003E_k__BackingField" nillable="true" type="q9:SerializableExpression" />
-          <xs:element name="_x003C_IfTrue_x003E_k__BackingField" nillable="true" type="q9:SerializableExpression" />
-          <xs:element name="_x003C_Test_x003E_k__BackingField" nillable="true" type="q9:SerializableExpression" />
+          <xs:element name="_x003C_IfFalse_x003E_k__BackingField" nillable="true" type="q8:SerializableExpression" />
+          <xs:element name="_x003C_IfTrue_x003E_k__BackingField" nillable="true" type="q8:SerializableExpression" />
+          <xs:element name="_x003C_Test_x003E_k__BackingField" nillable="true" type="q8:SerializableExpression" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="SerializableConditionalExpression" nillable="true" type="tns:SerializableConditionalExpression" />
+  <xs:complexType name="SerializableParameterExpression">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q9="http://dasz.at/ZBox/" base="q9:SerializableExpression">
+        <xs:sequence>
+          <xs:element name="_x003C_Name_x003E_k__BackingField" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="SerializableParameterExpression" nillable="true" type="tns:SerializableParameterExpression" />
+  <xs:complexType name="SerializableConstantExpression">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q10="http://dasz.at/ZBox/" base="q10:SerializableExpression">
+        <xs:sequence>
+          <xs:element name="_x003C_Value_x003E_k__BackingField" nillable="true" type="xs:anyType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="SerializableConstantExpression" nillable="true" type="tns:SerializableConstantExpression" />
+  <xs:complexType name="SerializableLambdaExpression">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:SerializableCompoundExpression">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="SerializableLambdaExpression" nillable="true" type="tns:SerializableLambdaExpression" />
 </xs:schema>

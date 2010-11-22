@@ -83,6 +83,16 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="SerializableMemberInfo" nillable="true" type="tns:SerializableMemberInfo" />
+  <xs:complexType name="SerializableConstructorInfo">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:SerializableMemberInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ParameterTypes" nillable="true" type="tns:ArrayOfSerializableType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="SerializableConstructorInfo" nillable="true" type="tns:SerializableConstructorInfo" />
   <xs:element name="GetListResponse">
     <xs:complexType>
       <xs:sequence>
@@ -153,4 +163,25 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="ID" type="xs:int" />
+  <xs:element name="InvokeServerMethod">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="type" nillable="true" type="tns:SerializableType" />
+        <xs:element minOccurs="0" name="ID" type="xs:int" />
+        <xs:element minOccurs="0" name="method" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="parameterTypes" nillable="true" type="tns:ArrayOfSerializableType" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/System.IO" minOccurs="0" name="parameter" nillable="true" type="q11:MemoryStream" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/System.IO" minOccurs="0" name="changedObjects" nillable="true" type="q12:MemoryStream" />
+        <xs:element minOccurs="0" name="notificationRequests" nillable="true" type="tns:ArrayOfObjectNotificationRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InvokeServerMethodResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/System.IO" minOccurs="0" name="InvokeServerMethodResult" nillable="true" type="q13:MemoryStream" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/System.IO" minOccurs="0" name="retChangedObjects" nillable="true" type="q14:MemoryStream" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

@@ -46,6 +46,25 @@ namespace Kistl.Generator.Extensions
             return param.Name;
         }
 
+        public static string GetArgumentTypes(this Method method)
+        {
+            if (method == null) { throw new ArgumentNullException("method"); }
+
+            return String.Join(", ",
+                method.Parameter
+                .Where(p => !p.IsReturnParameter)
+                .Select(p => GetArgumentType(p))
+                .ToArray());
+        }
+
+        public static string GetArgumentType(this BaseParameter param)
+        {
+            if (param == null) { throw new ArgumentNullException("param"); }
+
+            return "typeof(" + param.ReturnedTypeAsCSharp() + ")";
+        }
+
+
         public static IOrderedEnumerable<Method> OrderByDefault(this IEnumerable<Method> methods)
         {
             if (methods == null) { throw new ArgumentNullException("methods"); }

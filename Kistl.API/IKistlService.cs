@@ -87,6 +87,11 @@ namespace Kistl.API
         [OperationContract]
         [FaultContract(typeof(Exception))]
         BlobResponse SetBlobStream(BlobMessage blob);
+
+
+        [OperationContract]
+        [FaultContract(typeof(Exception))]
+        MemoryStream InvokeServerMethod(SerializableType type, int ID, string method, IEnumerable<SerializableType> parameterTypes, MemoryStream parameter, MemoryStream changedObjects, IEnumerable<ObjectNotificationRequest> notificationRequests, out MemoryStream retChangedObjects);
     }
 
     [MessageContract]

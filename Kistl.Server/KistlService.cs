@@ -12,6 +12,7 @@ namespace Kistl.Server
     using Kistl.API.Utils;
     using Kistl.App.Base;
     using System.ServiceModel;
+    using System.Runtime.Serialization.Formatters.Binary;
 
     /// <summary>
     /// Implements the main WCF interface.
@@ -55,21 +56,7 @@ namespace Kistl.Server
 
                     using (IKistlContext ctx = _ctxFactory())
                     {
-                        BinaryReader sr = new BinaryReader(msg);
-                        var objects = new List<IPersistenceObject>();
-                        bool @continue;
-                        BinarySerializer.FromStream(out @continue, sr);
-                        while (@continue)
-                        {
-                            // Deserialize
-                            SerializableType objType;
-                            BinarySerializer.FromStream(out objType, sr);
-
-                            var obj = ctx.Internals().CreateUnattached(_iftFactory(objType.GetSystemType()));
-                            obj.FromStream(sr);
-                            objects.Add(obj);
-                            BinarySerializer.FromStream(out @continue, sr);
-                        }
+                        var objects = ReadObjects(msg, ctx);
 
                         // Set Operation
                         var changedObjects = _sohFactory
@@ -191,6 +178,26 @@ namespace Kistl.Server
 
             result.Seek(0, SeekOrigin.Begin);
             return result;
+        }
+
+        private List<IPersistenceObject> ReadObjects(MemoryStream msg, IKistlContext ctx)
+        {
+            var objects = new List<IPersistenceObject>();
+            BinaryReader sr = new BinaryReader(msg);
+            bool @continue;
+            BinarySerializer.FromStream(out @continue, sr);
+            while (@continue)
+            {
+                // Deserialize
+                SerializableType objType;
+                BinarySerializer.FromStream(out objType, sr);
+
+                var obj = ctx.Internals().CreateUnattached(_iftFactory(objType.GetSystemType()));
+                obj.FromStream(sr);
+                objects.Add(obj);
+                BinarySerializer.FromStream(out @continue, sr);
+            }
+            return objects;
         }
 
         /// <summary>
@@ -325,6 +332,56 @@ namespace Kistl.Server
                         resp.ID = result.ID;
                         resp.BlobInstance = SendObjects(new IDataObject[] { result }, true);
                         return resp;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Helper.ThrowFaultException(ex);
+                // Never called, Handle errors throws an Exception
+                return null;
+            }
+        }
+
+        public MemoryStream InvokeServerMethod(SerializableType type, int ID, string method, IEnumerable<SerializableType> parameterTypes, MemoryStream parameter, MemoryStream changedObjects, IEnumerable<ObjectNotificationRequest> notificationRequests, out MemoryStream retChangedObjects)
+        {
+            if (type == null) throw new ArgumentNullException("type");
+            if (string.IsNullOrEmpty(method)) throw new ArgumentNullException("method");
+            if (parameterTypes == null) throw new ArgumentNullException("parameterTypes");
+            if (parameter == null) throw new ArgumentNullException("parameter");
+            if (changedObjects == null) throw new ArgumentNullException("changedObjects");
+
+            parameter.Seek(0, SeekOrigin.Begin);
+            changedObjects.Seek(0, SeekOrigin.Begin);
+
+            retChangedObjects = null;
+            try
+            {
+                using (Logging.Facade.DebugTraceMethodCall())
+                {
+                    DebugLogIdentity();
+
+                    using (IKistlContext ctx = _ctxFactory())
+                    {
+                        BinaryFormatter bf = new BinaryFormatter();
+
+                        IEnumerable<IPersistenceObject> changedObjectsList;
+                        IEnumerable<object> parameterList = (IEnumerable<object>)bf.Deserialize(parameter);
+
+                        var result = _sohFactory
+                            .GetServerObjectHandler(_iftFactory(type.GetSystemType()))
+                            .InvokeServerMethod(ctx, ID, method, 
+                                parameterTypes.Select(t => t.GetSystemType()),
+                                parameterList,
+                                ReadObjects(changedObjects, ctx), 
+                                notificationRequests ?? new ObjectNotificationRequest[0], 
+                                out changedObjectsList);
+                        
+                        retChangedObjects = SendObjects(changedObjectsList.Cast<IStreamable>(), true);
+
+                        MemoryStream resultStream = new MemoryStream();
+                        bf.Serialize(resultStream, result);
+                        return resultStream;
                     }
                 }
             }

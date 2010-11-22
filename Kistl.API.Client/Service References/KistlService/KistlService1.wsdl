@@ -72,6 +72,15 @@
   <wsdl:message name="IKistlService_SetBlobStream_ExceptionFault_FaultMessage">
     <wsdl:part xmlns:q6="http://schemas.datacontract.org/2004/07/System" name="detail" element="q6:Exception" />
   </wsdl:message>
+  <wsdl:message name="IKistlService_InvokeServerMethod_InputMessage">
+    <wsdl:part name="parameters" element="tns:InvokeServerMethod" />
+  </wsdl:message>
+  <wsdl:message name="IKistlService_InvokeServerMethod_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InvokeServerMethodResponse" />
+  </wsdl:message>
+  <wsdl:message name="IKistlService_InvokeServerMethod_ExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q7="http://schemas.datacontract.org/2004/07/System" name="detail" element="q7:Exception" />
+  </wsdl:message>
   <wsdl:portType msc:usingSession="false" name="IKistlService">
     <wsdl:operation name="SetObjects">
       <wsdl:input wsaw:Action="http://dasz.at/ZBox/IKistlService/SetObjects" message="tns:IKistlService_SetObjects_InputMessage" />
@@ -102,6 +111,11 @@
       <wsdl:input wsaw:Action="http://dasz.at/ZBox/IKistlService/SetBlobStream" name="BlobMessage" message="tns:BlobMessage" />
       <wsdl:output wsaw:Action="http://dasz.at/ZBox/IKistlService/SetBlobStreamResponse" name="BlobResponse" message="tns:BlobResponse" />
       <wsdl:fault wsaw:Action="http://dasz.at/ZBox/IKistlService/SetBlobStreamExceptionFault" name="ExceptionFault" message="tns:IKistlService_SetBlobStream_ExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InvokeServerMethod">
+      <wsdl:input wsaw:Action="http://dasz.at/ZBox/IKistlService/InvokeServerMethod" message="tns:IKistlService_InvokeServerMethod_InputMessage" />
+      <wsdl:output wsaw:Action="http://dasz.at/ZBox/IKistlService/InvokeServerMethodResponse" message="tns:IKistlService_InvokeServerMethod_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://dasz.at/ZBox/IKistlService/InvokeServerMethodExceptionFault" name="ExceptionFault" message="tns:IKistlService_InvokeServerMethod_ExceptionFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
 </wsdl:definitions>

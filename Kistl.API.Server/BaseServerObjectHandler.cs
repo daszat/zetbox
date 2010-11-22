@@ -35,6 +35,8 @@ using System.IO;
         /// <param name="property">the name of the referencing property</param>
         /// <returns>the list of objects</returns>
         IEnumerable<IStreamable> GetListOf(IKistlContext ctx, int ID, string property);
+
+        object InvokeServerMethod(IKistlContext ctx, int ID, string method, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests, out IEnumerable<IPersistenceObject> changedObjects);
     }
 
     public interface IServerObjectSetHandler
@@ -127,6 +129,28 @@ using System.IO;
         /// </summary>
         /// <returns>a typed object</returns>
         protected abstract T GetObjectInstance(IKistlContext ctx, int ID);
+
+        public object InvokeServerMethod(IKistlContext ctx, int ID, string method, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests, out IEnumerable<IPersistenceObject> changedObjects)
+        {
+            if (ctx == null) { throw new ArgumentNullException("ctx"); }
+            if (objects == null) { throw new ArgumentNullException("objects"); }
+            if (notificationRequests == null) { throw new ArgumentNullException("notificationRequests"); }
+
+            var objList = objects.Cast<BaseServerPersistenceObject>().ToList();
+            var entityObjects = new Dictionary<IPersistenceObject, IPersistenceObject>();
+
+            BaseServerObjectSetHandler.ApplyObjectChanges(ctx, notificationRequests, objList, entityObjects);
+
+            // Call Method
+            var obj = GetObjectInstance(ctx, ID);
+            var mi = obj.GetType().FindMethod(method, parameterTypes.ToArray());
+            object result = mi.Invoke(obj, parameter.ToArray());
+
+            var requestedObjects = BaseServerObjectSetHandler.GetRequestedObjects(ctx, notificationRequests, entityObjects);
+            changedObjects = entityObjects.Values.Concat(requestedObjects);
+
+            return result;
+        }
     }
 
     public class BaseServerObjectSetHandler
@@ -147,6 +171,36 @@ using System.IO;
             var objects = objList.Cast<BaseServerPersistenceObject>().ToList();
             var entityObjects = new Dictionary<IPersistenceObject, IPersistenceObject>();
 
+            ApplyObjectChanges(ctx, notificationRequests, objects, entityObjects);
+
+            ctx.SubmitChanges();
+
+            var requestedObjects = GetRequestedObjects(ctx, notificationRequests, entityObjects);
+            return entityObjects.Values.Concat(requestedObjects);
+        }
+
+        internal static IEnumerable<IPersistenceObject> GetRequestedObjects(IKistlContext ctx, IEnumerable<ObjectNotificationRequest> notificationRequests, Dictionary<IPersistenceObject, IPersistenceObject> entityObjects)
+        {
+            // Send all objects that were modified + those the client wants to be notified about, but each only once
+            var requestLookup = notificationRequests.ToLookup(r => r.Type.TypeName, r => r.IDs.ToLookup(i => i));
+            var requestedObjects = ctx.AttachedObjects
+                .Where(obj =>
+                {
+                    var ids = requestLookup[ctx.GetInterfaceType(obj).Type.FullName].FirstOrDefault();
+                    if (ids == null)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        return ids.Contains(obj.ID) && !entityObjects.ContainsKey(obj);
+                    }
+                });
+            return requestedObjects;
+        }
+
+        internal static void ApplyObjectChanges(IKistlContext ctx, IEnumerable<ObjectNotificationRequest> notificationRequests, List<BaseServerPersistenceObject> objects, Dictionary<IPersistenceObject, IPersistenceObject> entityObjects)
+        {
             Logging.Log.InfoFormat(
                 "SetObjects for {0} objects and {1} notification requests called.",
                 objects.Count(),
@@ -189,25 +243,6 @@ using System.IO;
             {
                 obj.PlaybackNotifications();
             }
-
-            ctx.SubmitChanges();
-
-            // Send all objects that were modified + those the client wants to be notified about, but each only once
-            var requestLookup = notificationRequests.ToLookup(r => r.Type.TypeName, r => r.IDs.ToLookup(i => i));
-            var requestedObjects = ctx.AttachedObjects
-                .Where(obj =>
-                {
-                    var ids = requestLookup[ctx.GetInterfaceType(obj).Type.FullName].FirstOrDefault();
-                    if (ids == null)
-                    {
-                        return false;
-                    }
-                    else
-                    {
-                        return ids.Contains(obj.ID) && !entityObjects.ContainsKey(obj);
-                    }
-                });
-            return entityObjects.Values.Concat(requestedObjects);
         }
     }
 

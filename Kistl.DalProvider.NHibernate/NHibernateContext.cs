@@ -14,7 +14,7 @@ namespace Kistl.DalProvider.NHibernate
         : BaseMemoryContext, IKistlServerContext
     {
         private static readonly object _initLock = new object();
-        private bool initialized = false;
+        //private bool initialized = false;
 
         public NHibernateContext(InterfaceType.Factory iftFactory) //, IBytecodeProvider bytecodeProvider)
             : base(iftFactory)

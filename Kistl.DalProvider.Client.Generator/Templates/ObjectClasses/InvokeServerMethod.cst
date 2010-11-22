@@ -1,0 +1,50 @@
+﻿<%@ CodeTemplate Language="C#"
+    Name="ObjectClasses.InvokeServerMethod"
+    ClassName="Kistl.DalProvider.Client.Generator.Templates.ObjectClasses.InvokeServerMethod"
+    Inherits="Kistl.Generator.Templates.ObjectClasses.Method" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Linq" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.Generator" %>
+<%@ Import Namespace="Kistl.Generator.Extensions" %>
+        // BEGIN <%= this.GetType() %>
+
+        <%= GetModifiers() %> <%= GetReturnType() %> <%= m.Name %>(<%= GetParameterDefinitions() %>)
+<%
+
+    var returnParam = m.Parameter.SingleOrDefault(parameter => parameter.IsReturnParameter);
+
+    string argumentDefs = m.GetArguments();
+    if (!String.IsNullOrEmpty(argumentDefs))
+    {
+        // add leading comma for later usage
+        argumentDefs = ", " + argumentDefs;
+    }
+
+    string argumentTypes = m.GetArgumentTypes();
+    // add leading comma for later usage
+    argumentTypes = "new Type[] {" + argumentTypes + "}";
+
+
+    if (returnParam == null)
+    {
+%>
+        {
+            Context.ClientInternals().InvokeServerMethod(this, "<%= m.Name %>", <%= argumentTypes%><%= argumentDefs %>);
+        }
+<%
+    }
+    else
+    {
+        string returnArgsType = String.Format("MethodReturnEventArgs<{0}>", returnParam.ReturnedTypeAsCSharp());
+%>
+        {
+            return (<%= returnParam.ReturnedTypeAsCSharp() %>)Context.ClientInternals().InvokeServerMethod(this, "<%= m.Name %>", <%= argumentTypes%><%= argumentDefs %>);
+        }
+
+<%
+    }
+%>
+        // END <%= this.GetType() %>
