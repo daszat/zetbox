@@ -4,10 +4,10 @@ echo Deployes and generates a updated ZBox Schema
 echo Used to apply changes from SVN
 echo ********************************************************************************
 
-bin\debug\bin\Server\Kistl.Server.Service.exe Kistl.Server.Service\DefaultConfig.xml -deploy Kistl.Server\Database\Database.xml -updatedeployedschema -repairschema 
+bin\debug\bin\Server\Kistl.Server.Service.exe Kistl.Server.Service\DefaultConfig%zenv%.xml -deploy Kistl.Server\Database\Database.xml -updatedeployedschema -repairschema 
 IF ERRORLEVEL 1 GOTO FAIL
 
-bin\debug\bin\Server\Kistl.Server.Service.exe Kistl.Server.Service\DefaultConfig.xml -generate
+bin\debug\bin\Server\Kistl.Server.Service.exe Kistl.Server.Service\DefaultConfig%zenv%.xml -generate
 IF ERRORLEVEL 1 GOTO FAIL
 
 echo ********************************************************************************
