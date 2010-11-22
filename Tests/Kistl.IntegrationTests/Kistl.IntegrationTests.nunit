@@ -1,9 +1,9 @@
 ﻿<NUnitProject>
   <Settings activeconfig="Debug" />
-  <Config name="Debug" appbase="bin\Debug" configfile="Kistl.IntegrationTests.dll.config" binpathtype="Auto">
+  <Config name="Debug" appbase="..\..\bin\Debug\bin\Tests" configfile="Kistl.IntegrationTests.dll.config" binpathtype="Auto">
     <assembly path="Kistl.IntegrationTests.dll" />
   </Config>
-  <Config name="Release" appbase="bin\Release" configfile="Kistl.IntegrationTests.dll.config" binpathtype="Auto">
+  <Config name="Release" appbase="..\..\bin\Release\bin\Tests" configfile="Kistl.IntegrationTests.dll.config" binpathtype="Auto">
     <assembly path="Kistl.IntegrationTests.dll" />
   </Config>
   <Config name="Studio" appbase="" configfile="Kistl.IntegrationTests.dll.config" binpathtype="Auto">

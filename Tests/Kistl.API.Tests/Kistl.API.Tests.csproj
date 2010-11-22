@@ -29,7 +29,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\..\bin\Debug\bin\Tests</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -38,18 +38,18 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\..\bin\Release\bin\Tests</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac, Version=0.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+    <Reference Include="Autofac">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libs\AutoFac 2.1\Autofac.dll</HintPath>
     </Reference>
-    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+    <Reference Include="log4net, Version=1.2.10.0">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libs\log4net.dll</HintPath>
     </Reference>
@@ -111,10 +111,10 @@
     <Compile Include="Tests.Serializables\SerializerMockTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Kistl.API.Tests.PartCoverSettings.xml" />
-    <Content Include="Kistl.API.Tests.Config.xml">
+    <None Include="Kistl.API.Tests.PartCoverSettings.xml" />
+    <None Include="Kistl.API.Tests.Config.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Kistl.API\Kistl.API.csproj">

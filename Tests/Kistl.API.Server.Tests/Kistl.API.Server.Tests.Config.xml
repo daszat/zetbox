@@ -12,21 +12,13 @@
   </Server>
   <SourceFileLocation>
     <!-- default probe path -->
-    <string>P:\Kistl\bin\CodeGen\bin\Debug</string>
+    <string>..\..\..\CodeGen\bin\Debug</string>
     <!-- common libaries -->
-    <string>P:\Kistl\bin\Debug\bin\Common</string>
+    <string>..\Common</string>
     <!-- Fallback path for local development -->
-    <string>P:\Kistl\bin\Debug\bin\server\fallback</string>
-    <!-- default probe path for CC.net on srv2008 -->
-    <string>f:\CruiseControl.NET\Projects\Kistl\bin\CodeGen\bin\Debug</string>
-    <!-- common libaries for CC.net on srv2008 -->
-    <string>f:\CruiseControl.NET\Projects\Kistl\bin\Debug\bin\Common</string>
-    <!-- Fallback path for CC.net on srv2008 -->
-    <string>f:\CruiseControl.Net\Projects\Kistl\bin\Debug\bin\Server\Fallback</string>
+    <string>..\Server\fallback</string>
     <!-- All other assemblies -->
-    <string>P:\Kistl\bin\Debug\bin\server</string>
-    <string>P:\Kistl\bin\Debug\bin\client</string>
-    <string>f:\CruiseControl.Net\Projects\Kistl\bin\Debug\bin\Server</string>
-    <string>f:\CruiseControl.Net\Projects\Kistl\bin\Debug\bin\Client</string>
+    <string>..\Server</string>
+    <string>..\Client</string>
   </SourceFileLocation>
 </KistlConfig>

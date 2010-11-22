@@ -1,6 +1,6 @@
 ﻿<NUnitProject>
   <Settings activeconfig="Debug" processModel="Single" domainUsage="Multiple" />
-  <Config name="Debug" appbase="bin\Debug" configfile="CompleteTests.dll.config" binpathtype="Auto">
+  <Config name="Debug" appbase="..\..\bin\Debug\bin\Tests" configfile="CompleteTests.dll.config" binpathtype="Auto">
     <assembly path="Kistl.API.Tests.dll" />
     <assembly path="Kistl.API.Client.Tests.dll" />
     <assembly path="Kistl.API.Server.Tests.dll" />
@@ -11,7 +11,7 @@
     <assembly path="Kistl.Client.Tests.dll" />
     <assembly path="Kistl.IntegrationTests.dll" />
   </Config>
-  <Config name="Release" appbase="bin\Release" configfile="CompleteTests.dll.config" binpathtype="Auto">
+  <Config name="Release" appbase="..\..\bin\Release\bin\Tests" configfile="CompleteTests.dll.config" binpathtype="Auto">
     <assembly path="Kistl.API.Tests.dll" />
     <assembly path="Kistl.API.Client.Tests.dll" />
     <assembly path="Kistl.API.Server.Tests.dll" />
