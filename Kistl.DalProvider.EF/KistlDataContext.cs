@@ -365,9 +365,16 @@ namespace Kistl.DalProvider.Ef
             }
         }
 
+        private int _newIDCounter = Helper.INVALIDID;
         protected override object CreateUnattachedInstance(InterfaceType ifType)
         {
-            return Activator.CreateInstance(ToImplementationType(ifType).Type, _lazyCtx);
+            var obj = Activator.CreateInstance(ToImplementationType(ifType).Type, _lazyCtx);
+            // Set a temporary ID
+            if (obj is BasePersistenceObject)
+            {
+                ((BasePersistenceObject)obj).ID = --_newIDCounter;
+            }
+            return obj;
         }
 
         /// <summary>
