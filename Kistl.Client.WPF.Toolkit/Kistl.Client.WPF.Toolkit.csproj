@@ -63,6 +63,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -82,6 +83,7 @@
     <Compile Include="Converter\Converters.cs" />
     <Compile Include="Converter\DebugConverter.cs" />
     <Compile Include="Converter\IconConverter.cs" />
+    <Compile Include="Converter\ImageConverter.cs" />
     <Compile Include="CustomControls\CommandButton.cs" />
     <Compile Include="CustomControls\DropDownButton.cs" />
     <Compile Include="CustomControls\LabeledContainer.xaml.cs">

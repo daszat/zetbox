@@ -7,7 +7,7 @@ namespace Kistl.Client.Presentables.DocumentManagement
     using at.dasz.DocumentManagement;
     using Kistl.API;
     using Kistl.API.Configuration;
-using System.Drawing;
+    using System.Drawing;
 
     [ViewModelDescriptor]
     public class ImageViewModel : FileViewModel
@@ -19,7 +19,7 @@ using System.Drawing;
             File obj)
             : base(appCtx, config, dataCtx, obj)
         {
-            
+
         }
 
         private Image _image = null;
