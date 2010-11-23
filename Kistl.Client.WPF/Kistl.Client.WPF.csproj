@@ -123,6 +123,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\DocumentManagement\ImageEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ErrorListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -423,6 +427,9 @@
     </Compile>
     <Compile Include="View\CacheDebuggerDisplay.xaml.cs">
       <DependentUpon>CacheDebuggerDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DocumentManagement\ImageEditor.xaml.cs">
+      <DependentUpon>ImageEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ErrorListView.xaml.cs">
       <DependentUpon>ErrorListView.xaml</DependentUpon>

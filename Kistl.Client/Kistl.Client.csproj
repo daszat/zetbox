@@ -64,6 +64,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
@@ -96,6 +97,8 @@
     <Compile Include="Presentables\AsyncList.cs" />
     <Compile Include="Presentables\CacheDebuggerViewModel.cs" />
     <Compile Include="Models\ColumnDisplayModel.cs" />
+    <Compile Include="Presentables\DocumentManagement\FileViewModel.cs" />
+    <Compile Include="Presentables\DocumentManagement\ImageViewModel.cs" />
     <Compile Include="Presentables\FilterViewModels\FilterViewModel.cs" />
     <Compile Include="Presentables\FilterViewModels\OptionalPredicateFilterViewModel.cs" />
     <Compile Include="Presentables\FilterViewModels\RangeFilterViewModel.cs" />
