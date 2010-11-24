@@ -30,7 +30,10 @@ namespace Kistl.Generator.Templates.ObjectClasses
             host.CallTemplate("ObjectClasses.Method", ctx, implementor, m, index, indexSuffix, eventName);
         }
 
-        protected virtual IEnumerable<string> GetMethodAttributes() { return new string[] { String.Format("[EventBasedMethod(\"{0}\")]", this.eventName) }; }
+        protected virtual IEnumerable<string> GetMethodAttributes()
+        {
+            return new string[] { String.Format("[EventBasedMethod(\"{0}\")]", this.eventName) };
+        }
 
         protected string GetModifiers()
         {

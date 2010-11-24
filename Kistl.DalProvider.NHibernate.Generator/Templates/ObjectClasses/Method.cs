@@ -2,6 +2,7 @@
 namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
 {
     using System;
+    using System.CodeDom;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
@@ -12,19 +13,22 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
     public class Method
         : Templates.ObjectClasses.Method
     {
-        public Method(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.App.Base.DataType dt, Kistl.App.Base.Method m, int index, string indexSuffix, string eventName)
+        public Method(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, DataType dt, Kistl.App.Base.Method m, int index, string indexSuffix, string eventName)
             : base(_host, ctx, dt, m, index, indexSuffix, eventName)
         {
         }
 
-        protected override IEnumerable<string> GetMethodAttributes()
+        protected override MemberAttributes ModifyMethodAttributes(MemberAttributes methodAttributes)
         {
-            string virt = "override";
-            if (dt is ObjectClass && ((ObjectClass)dt).BaseObjectClass == null)
+            var baseAttrs = base.ModifyMethodAttributes(methodAttributes);
+            if (dt is ObjectClass)
             {
-                virt = "virtual";
+                if (((ObjectClass)dt).BaseObjectClass != null)
+                    baseAttrs = baseAttrs & ~MemberAttributes.Final | MemberAttributes.Override;
+                else
+                    baseAttrs = baseAttrs & ~MemberAttributes.Final;
             }
-            return base.GetMethodAttributes().Concat(new[] { virt });
+            return baseAttrs;
         }
     }
 }
