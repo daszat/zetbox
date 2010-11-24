@@ -356,5 +356,35 @@ namespace Kistl.API.Mocks
 
         #endregion
 
+
+        #region IKistlContext Members
+
+
+        public int GetSequenceNumber(Guid sequenceGuid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetContinuousSequenceNumber(Guid sequenceGuid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void BeginTransaction()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CommitTransaction()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RollbackTransaction()
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

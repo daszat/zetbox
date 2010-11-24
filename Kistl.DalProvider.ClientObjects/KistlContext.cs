@@ -971,5 +971,30 @@ namespace Kistl.DalProvider.Client
         }
 
         #endregion
+
+        public int GetSequenceNumber(Guid sequenceGuid)
+        {
+            throw new NotSupportedException();
+        }
+
+        public int GetContinuousSequenceNumber(Guid sequenceGuid)
+        {
+            throw new NotSupportedException();
+        }
+
+        public void BeginTransaction()
+        {
+            throw new NotSupportedException();
+        }
+
+        public void CommitTransaction()
+        {
+            throw new NotSupportedException();
+        }
+
+        public void RollbackTransaction()
+        {
+            throw new NotSupportedException();
+        }
     }
 }

@@ -354,6 +354,83 @@ namespace Kistl.API
         /// Is fires when <see cref="IsModified"/> was changed
         /// </summary>
         event EventHandler IsModifiedChanged;
+
+        /// <summary>
+        /// Gets the next sequence number of the given SequenceNumberDefinition.
+        /// </summary>
+        /// <exception cref="InvalidOperationException">
+        /// InvalidOperationException is thrown if the SequenceNumberDefinition is a continuous sequence.
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// ArgumentOutOfRangeException is thrown if the SequenceNumberDefinition cannot be found.
+        /// </exception>
+        /// <param name="sequenceGuid">Guid of the SequenceNumberDefinition object</param>
+        /// <returns>the next sequence number</returns>
+        int GetSequenceNumber(Guid sequenceGuid);
+
+        /// <summary>
+        /// Gets the next sequence number of the given SequenceNumberDefinition. The sequence is guaranteed to be continous, without any gaps.
+        /// <see cref="BeginTransaction"/> has to be called bevore using this method to guarantee that the sequence is realy continuously.
+        /// </summary>
+        /// <remarks>
+        /// <para>This exaample shows the proves of creating an invoice:</para>
+        /// <example>
+        /// public void CreateInvoice(Invoice obj)
+        /// {
+        ///     // Client has created and filled the invoice object.
+        ///     
+        ///     // Start a transaction
+        ///     obj.Context.BeginTransaction();
+        ///     
+        ///     // setup invoice
+        ///     obj.InvoiceNumber = obj.Context.GetContinuousSequenceNumber(...);
+        ///     obj.Date = DateTime.Today;
+        ///     // more setup
+        ///     ... 
+        ///     
+        ///     // Submit &amp; commit
+        ///     obj.Context.SubmitChanges();
+        ///     obj.Context.CommitTransaction();
+        /// }
+        /// </example>
+        /// </remarks>
+        /// <exception cref="InvalidOperationException">
+        /// InvalidOperationException is thrown if no transaction is running or the SequenceNumberDefinition is no continuous sequence.
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// ArgumentOutOfRangeException is thrown if the SequenceNumberDefinition cannot be found.
+        /// </exception>
+        /// <param name="sequenceGuid">Guid of the SequenceNumberDefinition object</param>
+        /// <returns>the next sequence number</returns>
+        int GetContinuousSequenceNumber(Guid sequenceGuid);
+
+        /// <summary>
+        /// Begins a transaction.
+        /// </summary>
+        /// <remarks>
+        /// Neested transactions are not supported.
+        /// </remarks>
+        /// <exception cref="InvalidOperationException">
+        /// InvalidOperationException is thrown if a transaction is already running.
+        /// </exception>
+        void BeginTransaction();
+        /// <summary>
+        /// Commits the current transaction
+        /// </summary>
+        /// <exception cref="InvalidOperationException">
+        /// InvalidOperationException is thrown if no transaction is currently running.
+        /// </exception>
+        void CommitTransaction();
+        /// <summary>
+        /// Rollback the transaction. The context is useless after rollback. Equivalent to calling Dispose().
+        /// </summary>
+        /// <remarks>
+        /// If a transaction is running, Dispose() will implicitly call RollbackTransaction.
+        /// </remarks>
+        /// <exception cref="InvalidOperationException">
+        /// InvalidOperationException is thrown if no transaction is currently running.
+        /// </exception>
+        void RollbackTransaction();
     }
 
     public interface IZBoxContextInternals
