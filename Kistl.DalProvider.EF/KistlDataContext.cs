@@ -1,7 +1,5 @@
 // #define EAGERLOADING
 
-[assembly: global::System.Data.Objects.DataClasses.EdmSchema]
-
 namespace Kistl.DalProvider.Ef
 {
     using System;
@@ -38,8 +36,14 @@ namespace Kistl.DalProvider.Ef
         /// </summary>
         public override void Dispose()
         {
-            base.Dispose();
-            if (_ctx != null) { _ctx.Dispose(); }
+            try
+            {
+                base.Dispose();
+            }
+            finally
+            {
+                if (_ctx != null) { _ctx.Dispose(); }
+            }
         }
 
         /// <summary>
@@ -80,6 +84,7 @@ namespace Kistl.DalProvider.Ef
         /// <returns>IQueryable</returns>
         public override IQueryable<T> GetQuery<T>()
         {
+            CheckDisposed();
             return GetPersistenceObjectQuery<T>();
         }
 
@@ -91,6 +96,7 @@ namespace Kistl.DalProvider.Ef
         /// <returns>IQueryable</returns>
         public override IQueryable<IDataObject> GetQuery(InterfaceType ifType)
         {
+            CheckDisposed();
             MethodInfo mi = this.GetType().FindGenericMethod("GetListHack", new Type[] { ifType.Type }, new Type[] { });
             // See Case 552
             var result = (System.Collections.IList)mi.Invoke(this, new object[] { });
@@ -118,6 +124,7 @@ namespace Kistl.DalProvider.Ef
         /// <returns>IQueryable</returns>
         public override IQueryable<IPersistenceObject> GetPersistenceObjectQuery(InterfaceType ifType)
         {
+            CheckDisposed();
             MethodInfo mi = this.GetType().FindGenericMethod("GetListHack", new Type[] { ifType.Type }, new Type[] { });
             // See Case 552
             var result = (System.Collections.IList)mi.Invoke(this, new object[] { });
@@ -169,6 +176,7 @@ namespace Kistl.DalProvider.Ef
         /// <returns>IQueryable</returns>
         public override IQueryable<T> GetPersistenceObjectQuery<T>()
         {
+            CheckDisposed();
             var interfaceType = iftFactory(typeof(T));
             PrimeQueryCache<T>(interfaceType, ToImplementationType(interfaceType));
             // OfType<T>() at the end adds the security filters
@@ -178,6 +186,7 @@ namespace Kistl.DalProvider.Ef
         public System.Collections.IList GetListHack<T>()
             where T : class, IPersistenceObject
         {
+            CheckDisposed();
             var interfaceType = iftFactory(typeof(T));
             PrimeQueryCache<T>(interfaceType, ToImplementationType(interfaceType));
 
@@ -211,6 +220,7 @@ namespace Kistl.DalProvider.Ef
         // TODO: Create new override
         public override IList<T> FetchRelation<T>(Guid relationId, RelationEndRole role, IDataObject parent)
         {
+            CheckDisposed();
             if (parent == null)
             {
                 return this.GetPersistenceObjectQuery<T>().ToList();
@@ -231,6 +241,7 @@ namespace Kistl.DalProvider.Ef
         /// If the Object is not in that Context, null is returned.</returns>
         public override IPersistenceObject ContainsObject(InterfaceType type, int ID)
         {
+            CheckDisposed();
             return AttachedObjects.Where(obj => GetInterfaceType(obj) == type && obj.ID == ID).SingleOrDefault();
         }
 
@@ -242,6 +253,7 @@ namespace Kistl.DalProvider.Ef
         {
             get
             {
+                CheckDisposed();
                 // Must use OfType -> ObjectStateManager also contains RelationshipEntities
                 return _ctx.ObjectStateManager
                     .GetObjectStateEntries(EntityState.Added | EntityState.Modified | EntityState.Deleted | EntityState.Unchanged)
@@ -256,6 +268,7 @@ namespace Kistl.DalProvider.Ef
         /// <returns>Number of affected Objects</returns>
         public override int SubmitChanges()
         {
+            CheckDisposed();
             DebugTraceChangedObjects();
 
             var notifySaveList = _ctx.ObjectStateManager
@@ -302,6 +315,7 @@ namespace Kistl.DalProvider.Ef
         /// <returns>Number of affected Objects</returns>
         public override int SubmitRestore()
         {
+            CheckDisposed();
             DebugTraceChangedObjects();
 
             try
@@ -384,6 +398,7 @@ namespace Kistl.DalProvider.Ef
         /// <returns>Object Attached</returns>
         public override IPersistenceObject Attach(IPersistenceObject obj)
         {
+            CheckDisposed();
             if (obj == null) { throw new ArgumentNullException("obj"); }
 
             var serverObj = (BaseServerPersistenceObject)obj;
@@ -413,6 +428,7 @@ namespace Kistl.DalProvider.Ef
         /// <param name="obj">IDataObject</param>
         public override void Detach(IPersistenceObject obj)
         {
+            CheckDisposed();
             _ctx.Detach(obj);
             base.Detach(obj);
         }
@@ -423,6 +439,7 @@ namespace Kistl.DalProvider.Ef
         /// <param name="obj">IPersistenceObject</param>
         public override void Delete(IPersistenceObject obj)
         {
+            CheckDisposed();
             _ctx.DeleteObject(obj);
             base.Delete(obj);
         }
@@ -438,6 +455,7 @@ namespace Kistl.DalProvider.Ef
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
         public override IDataObject Find(InterfaceType ifType, int ID)
         {
+            CheckDisposed();
             try
             {
                 // See Case 552
@@ -460,6 +478,7 @@ namespace Kistl.DalProvider.Ef
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
         public override T Find<T>(int ID)
         {
+            CheckDisposed();
             try
             {
                 return AttachedObjects.OfType<T>().SingleOrDefault(o => o.ID == ID)
@@ -494,6 +513,7 @@ namespace Kistl.DalProvider.Ef
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
         public override IPersistenceObject FindPersistenceObject(InterfaceType ifType, int ID)
         {
+            CheckDisposed();
             try
             {
                 // See Case 552
@@ -516,6 +536,7 @@ namespace Kistl.DalProvider.Ef
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
         public override T FindPersistenceObject<T>(int ID)
         {
+            CheckDisposed();
             try
             {
                 return AttachedObjects.OfType<T>().SingleOrDefault(o => o.ID == ID)
@@ -547,6 +568,7 @@ namespace Kistl.DalProvider.Ef
         /// <returns>IPersistenceObject or null if the Object was not found.</returns>
         public override IPersistenceObject FindPersistenceObject(InterfaceType ifType, Guid exportGuid)
         {
+            CheckDisposed();
             try
             {
                 // See Case 552
@@ -567,6 +589,7 @@ namespace Kistl.DalProvider.Ef
         /// <returns>IPersistenceObject or null if the Object was not found.</returns>
         public override T FindPersistenceObject<T>(Guid exportGuid)
         {
+            CheckDisposed();
             T result = (T)AttachedObjects.OfType<T>().OfType<IExportableInternal>().SingleOrDefault(o => o.ExportGuid == exportGuid);
             if (result == null)
             {
@@ -589,6 +612,7 @@ namespace Kistl.DalProvider.Ef
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         public override IEnumerable<IPersistenceObject> FindPersistenceObjects(InterfaceType ifType, IEnumerable<Guid> exportGuids)
         {
+            CheckDisposed();
             try
             {
                 // See Case 552
@@ -611,6 +635,7 @@ namespace Kistl.DalProvider.Ef
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         public override IEnumerable<T> FindPersistenceObjects<T>(IEnumerable<Guid> exportGuids)
         {
+            CheckDisposed();
             var guidStrings = exportGuids.Select(g => g.ToString()).ToList();
 
             if (guidStrings.Count == 0)
@@ -655,11 +680,13 @@ namespace Kistl.DalProvider.Ef
 
         public override ImplementationType ToImplementationType(InterfaceType t)
         {
+            CheckDisposed();
             return _implTypeFactory(Type.GetType(t.Type.FullName + "Ef" + Kistl.API.Helper.ImplementationSuffix + "," + EfProvider.ServerAssembly));
         }
 
         public override ImplementationType GetImplementationType(Type t)
         {
+            CheckDisposed();
             return _implTypeFactory(t);
         }
     }

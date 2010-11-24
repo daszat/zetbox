@@ -39,3 +39,6 @@ using System.Runtime.InteropServices;
 // and rules to which assemblies must conform if they are to be used across programming
 // languages. This assembly should be compatible.
 [assembly: System.CLSCompliant(true)]
+
+// indicate that the assembly contains classes that are mapped to entity types in a conceptual model
+[assembly: global::System.Data.Objects.DataClasses.EdmSchema]
