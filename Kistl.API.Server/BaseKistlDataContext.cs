@@ -8,9 +8,9 @@ namespace Kistl.API.Server
     using System.Text;
 
     using Kistl.API.Configuration;
+    using Kistl.API.Utils;
     using Kistl.App.Base;
     using Kistl.App.Extensions;
-    using Kistl.API.Utils;
 
     public delegate IKistlContext ServerKistlContextFactory(Identity identity);
 
@@ -63,6 +63,14 @@ namespace Kistl.API.Server
         /// </summary>
         public bool IsDisposed { get; private set; }
 
+        protected void CheckDisposed()
+        {
+            if (IsDisposed)
+            {
+                throw new InvalidOperationException("Context already disposed");
+            }
+        }
+
         public bool IsReadonly { get { return false; } }
 
         /// <summary>
@@ -72,6 +80,7 @@ namespace Kistl.API.Server
         /// <returns>Object Attached</returns>
         public virtual IPersistenceObject Attach(IPersistenceObject obj)
         {
+            CheckDisposed();
             if (obj == null) { throw new ArgumentNullException("obj"); }
 
             // Do not only check in IKistlContext.Create for creation rights, also here
@@ -107,6 +116,7 @@ namespace Kistl.API.Server
         /// <param name="obj">IDataObject</param>
         public virtual void Detach(IPersistenceObject obj)
         {
+            CheckDisposed();
             if (obj == null) { throw new ArgumentNullException("obj"); }
 
             obj.DetachFromContext(this);
@@ -120,6 +130,7 @@ namespace Kistl.API.Server
         /// <param name="obj">IPersistenceObject</param>
         public virtual void Delete(IPersistenceObject obj)
         {
+            CheckDisposed();
             if (obj == null) { throw new ArgumentNullException("obj"); }
 
             OnObjectDeleted(obj);
@@ -168,6 +179,7 @@ namespace Kistl.API.Server
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         public virtual List<T> GetListOf<T>(IDataObject obj, string propertyName) where T : class, IDataObject
         {
+            CheckDisposed();
             if (obj == null) { throw new ArgumentNullException("obj"); }
 
             return obj.GetPropertyValue<IEnumerable>(propertyName).Cast<T>().ToList();
@@ -184,6 +196,7 @@ namespace Kistl.API.Server
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         public virtual List<T> GetListOf<T>(InterfaceType type, int ID, string propertyName) where T : class, IDataObject
         {
+            CheckDisposed();
             IDataObject obj = (IDataObject)this.Find(type, ID);
             return GetListOf<T>(obj, propertyName);
         }
@@ -249,7 +262,7 @@ namespace Kistl.API.Server
 
                     if (this.identity != null)
                     {
-                        if(localIdentity == null)
+                        if (localIdentity == null)
                         {
                             localIdentity = this.identity.Context == this ? this.identity : this.GetQuery<Identity>().First(id => id.ID == this.identity.ID);
                         }
@@ -297,8 +310,11 @@ namespace Kistl.API.Server
         /// <returns>A new IPersistenceObject</returns>
         public virtual IDataObject Create(InterfaceType ifType)
         {
-            if (ifType == null) throw new ArgumentNullException("ifType");
-            if (ifType.Type == typeof(Kistl.App.Base.Blob)) throw new InvalidOperationException("Creating a Blob is not supported. Use CreateBlob() instead");
+            CheckDisposed();
+            if (ifType == null)
+                throw new ArgumentNullException("ifType");
+            if (ifType.Type == typeof(Kistl.App.Base.Blob))
+                throw new InvalidOperationException("Creating a Blob is not supported. Use CreateBlob() instead");
 
             ObjectClass cls = metaDataResolver.GetObjectClass(ifType).GetRootClass();
             if (identity != null && cls.HasAccessControlList() && (cls.GetGroupAccessRights(identity) & AccessRights.Create) != AccessRights.Create)
@@ -315,18 +331,21 @@ namespace Kistl.API.Server
         /// <returns>A new IDataObject</returns>
         public virtual T Create<T>() where T : class, IDataObject
         {
+            CheckDisposed();
             return (T)Create(iftFactory(typeof(T)));
         }
 
         /// <inheritdoc />
         public IPersistenceObject CreateUnattached(InterfaceType ifType)
         {
+            CheckDisposed();
             return (IPersistenceObject)CreateUnattachedInstance(ifType);
         }
 
         /// <inheritdoc />
         public T CreateUnattached<T>() where T : class, IPersistenceObject
         {
+            CheckDisposed();
             return (T)CreateUnattachedInstance(iftFactory(typeof(T)));
         }
 
@@ -337,6 +356,7 @@ namespace Kistl.API.Server
         /// <returns>A new IPersistenceObject</returns>
         public virtual IRelationEntry CreateRelationCollectionEntry(InterfaceType ifType)
         {
+            CheckDisposed();
             return (IRelationEntry)CreateInternal(ifType);
         }
 
@@ -347,6 +367,7 @@ namespace Kistl.API.Server
         /// <returns>A new IDataObject</returns>
         public virtual T CreateRelationCollectionEntry<T>() where T : IRelationEntry
         {
+            CheckDisposed();
             return (T)CreateRelationCollectionEntry(iftFactory(typeof(T)));
         }
 
@@ -357,6 +378,7 @@ namespace Kistl.API.Server
         /// <returns>A new IPersistenceObject</returns>
         public virtual IValueCollectionEntry CreateValueCollectionEntry(InterfaceType ifType)
         {
+            CheckDisposed();
             return (IValueCollectionEntry)CreateInternal(ifType);
         }
 
@@ -367,6 +389,7 @@ namespace Kistl.API.Server
         /// <returns>A new IDataObject</returns>
         public virtual T CreateValueCollectionEntry<T>() where T : IValueCollectionEntry
         {
+            CheckDisposed();
             return (T)CreateValueCollectionEntry(iftFactory(typeof(T)));
         }
 
@@ -377,6 +400,7 @@ namespace Kistl.API.Server
         /// <returns>A new CompoundObject</returns>
         public virtual ICompoundObject CreateCompoundObject(InterfaceType ifType)
         {
+            CheckDisposed();
             return (ICompoundObject)CreateUnattachedInstance(ifType);
         }
 
@@ -387,6 +411,7 @@ namespace Kistl.API.Server
         /// <returns>A new CompoundObject</returns>
         public virtual T CreateCompoundObject<T>() where T : ICompoundObject
         {
+            CheckDisposed();
             return (T)CreateCompoundObject(iftFactory(typeof(T)));
         }
 
@@ -464,9 +489,13 @@ namespace Kistl.API.Server
 
         public int CreateBlob(System.IO.Stream s, string filename, string mimetype)
         {
-            if (s == null) throw new ArgumentNullException("s");
-            if (string.IsNullOrEmpty(filename)) throw new ArgumentNullException("filename");
-            if (string.IsNullOrEmpty(mimetype)) throw new ArgumentNullException("mimetype");
+            CheckDisposed();
+            if (s == null)
+                throw new ArgumentNullException("s");
+            if (string.IsNullOrEmpty(filename))
+                throw new ArgumentNullException("filename");
+            if (string.IsNullOrEmpty(mimetype))
+                throw new ArgumentNullException("mimetype");
 
             var blob = (Kistl.App.Base.Blob)this.CreateInternal(iftFactory(typeof(Kistl.App.Base.Blob)));
             DateTime today = DateTime.Today;
@@ -489,7 +518,9 @@ namespace Kistl.API.Server
 
         public int CreateBlob(System.IO.FileInfo fi, string mimetype)
         {
-            if (fi == null) throw new ArgumentNullException("fi");
+            CheckDisposed();
+            if (fi == null)
+                throw new ArgumentNullException("fi");
             using (var s = fi.OpenRead())
             {
                 return CreateBlob(s, fi.Name, mimetype);
@@ -498,11 +529,13 @@ namespace Kistl.API.Server
 
         public System.IO.Stream GetStream(int ID)
         {
+            CheckDisposed();
             return GetFileInfo(ID).OpenRead();
         }
 
         public System.IO.FileInfo GetFileInfo(int ID)
         {
+            CheckDisposed();
             var blob = this.Find<Kistl.App.Base.Blob>(ID);
             string path = System.IO.Path.Combine(config.Server.DocumentStore, blob.StoragePath);
             return new System.IO.FileInfo(path);
@@ -541,21 +574,25 @@ namespace Kistl.API.Server
 
         public InterfaceType GetInterfaceType(IPersistenceObject obj)
         {
+            CheckDisposed();
             return iftFactory(((BasePersistenceObject)obj).GetImplementedInterface());
         }
 
         public InterfaceType GetInterfaceType(ICompoundObject obj)
         {
+            CheckDisposed();
             return iftFactory(((BaseCompoundObject)obj).GetImplementedInterface());
         }
 
         public InterfaceType GetInterfaceType(Type t)
         {
+            CheckDisposed();
             return iftFactory(t);
         }
 
         public InterfaceType GetInterfaceType(string typeName)
         {
+            CheckDisposed();
             return iftFactory(Type.GetType(typeName + "," + typeof(ObjectClass).Assembly.FullName, true));
         }
 
@@ -568,6 +605,7 @@ namespace Kistl.API.Server
         {
             get
             {
+                CheckDisposed();
                 if (_TransientState == null)
                 {
                     _TransientState = new Dictionary<object, object>();
@@ -590,6 +628,7 @@ namespace Kistl.API.Server
 
         void IZBoxContextInternals.SetModified(IPersistenceObject obj)
         {
+            CheckDisposed();
             if (obj.ObjectState.In(DataObjectState.Deleted, DataObjectState.Modified, DataObjectState.New))
             {
                 IsModified = true;
