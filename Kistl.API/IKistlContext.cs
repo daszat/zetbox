@@ -356,20 +356,20 @@ namespace Kistl.API
         event EventHandler IsModifiedChanged;
 
         /// <summary>
-        /// Gets the next sequence number of the given SequenceNumberDefinition.
+        /// Gets the next sequence number of the given Sequence.
         /// </summary>
         /// <exception cref="InvalidOperationException">
-        /// InvalidOperationException is thrown if the SequenceNumberDefinition is a continuous sequence.
+        /// InvalidOperationException is thrown if the Sequence is a continuous sequence.
         /// </exception>
         /// <exception cref="ArgumentOutOfRangeException">
-        /// ArgumentOutOfRangeException is thrown if the SequenceNumberDefinition cannot be found.
+        /// ArgumentOutOfRangeException is thrown if the Sequence cannot be found.
         /// </exception>
-        /// <param name="sequenceGuid">Guid of the SequenceNumberDefinition object</param>
+        /// <param name="sequenceGuid">Guid of the Sequence object</param>
         /// <returns>the next sequence number</returns>
         int GetSequenceNumber(Guid sequenceGuid);
 
         /// <summary>
-        /// Gets the next sequence number of the given SequenceNumberDefinition. The sequence is guaranteed to be continous, without any gaps.
+        /// Gets the next sequence number of the given Sequence. The sequence is guaranteed to be continous, without any gaps.
         /// <see cref="BeginTransaction"/> has to be called bevore using this method to guarantee that the sequence is realy continuously.
         /// </summary>
         /// <remarks>
@@ -395,12 +395,12 @@ namespace Kistl.API
         /// </example>
         /// </remarks>
         /// <exception cref="InvalidOperationException">
-        /// InvalidOperationException is thrown if no transaction is running or the SequenceNumberDefinition is no continuous sequence.
+        /// InvalidOperationException is thrown if no transaction is running or the Sequence is no continuous sequence.
         /// </exception>
         /// <exception cref="ArgumentOutOfRangeException">
-        /// ArgumentOutOfRangeException is thrown if the SequenceNumberDefinition cannot be found.
+        /// ArgumentOutOfRangeException is thrown if the Sequence cannot be found.
         /// </exception>
-        /// <param name="sequenceGuid">Guid of the SequenceNumberDefinition object</param>
+        /// <param name="sequenceGuid">Guid of the Sequence object</param>
         /// <returns>the next sequence number</returns>
         int GetContinuousSequenceNumber(Guid sequenceGuid);
 
