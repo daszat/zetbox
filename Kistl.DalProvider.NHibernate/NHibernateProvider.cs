@@ -14,6 +14,9 @@ namespace Kistl.DalProvider.NHibernate
     using Kistl.API.Utils;
     using Kistl.App.Extensions;
     using Kistl.App.Packaging;
+    using Kistl.API.Configuration;
+    using Autofac.Core;
+    using Kistl.API.Common;
 
     public class NHibernateProvider
         : Autofac.Module
@@ -30,10 +33,25 @@ namespace Kistl.DalProvider.NHibernate
                 .As<ImplementationType>()
                 .InstancePerDependency();
 
+            RegisterContext<IKistlServerContext>(moduleBuilder)
+                .InstancePerDependency();
+
+            RegisterContext<IReadOnlyKistlContext>(moduleBuilder)
+                .SingleInstance();
+
             moduleBuilder
-                .RegisterType<NHibernateContext>()
-                .As<BaseMemoryContext>()
-                .As<IKistlServerContext>() // TODO initialize privileged context differently
+                .Register((c, p) =>
+                {
+                    var param = p.OfType<ConstantParameter>().FirstOrDefault();
+                    return new NHibernateContext(
+                        c.Resolve<IMetaDataResolver>(),
+                        param != null ? (Kistl.App.Base.Identity)param.Value : c.Resolve<IIdentityResolver>().GetCurrent(),
+                        c.Resolve<KistlConfig>(),
+                        c.Resolve<InterfaceType.Factory>(),
+                        c.Resolve<NHibernateImplementationType.Factory>(),
+                        c.Resolve<global::NHibernate.ISession>()
+                        );
+                })
                 .As<IKistlContext>()
                 .OnActivated(args =>
                 {
@@ -41,7 +59,6 @@ namespace Kistl.DalProvider.NHibernate
                     manager.Init(args.Context.Resolve<IFrozenContext>());
                 })
                 .InstancePerDependency();
-
 
             moduleBuilder
                 .Register(c => new NHibernateServerObjectHandlerFactory())
@@ -51,6 +68,29 @@ namespace Kistl.DalProvider.NHibernate
             //    .RegisterType<AutofacBytecodeProvider>()
             //    .As<global::NHibernate.Bytecode.IBytecodeProvider>()
             //    .InstancePerDependency();
+        }
+
+        private static Autofac.Builder.IRegistrationBuilder<NHibernateContext, Autofac.Builder.SimpleActivatorData, Autofac.Builder.SingleRegistrationStyle> RegisterContext<TInterface>(ContainerBuilder moduleBuilder)
+            where TInterface : IReadOnlyKistlContext
+        {
+            return moduleBuilder
+                .Register(c =>
+                {
+                    return new NHibernateContext(
+                        c.Resolve<IMetaDataResolver>(),
+                        null,
+                        c.Resolve<KistlConfig>(),
+                        c.Resolve<InterfaceType.Factory>(),
+                        c.Resolve<NHibernateImplementationType.Factory>(),
+                        c.Resolve<global::NHibernate.ISession>()
+                        );
+                })
+                .As<TInterface>()
+                .OnActivated(args =>
+                {
+                    var manager = args.Context.Resolve<INHibernateActionsManager>();
+                    manager.Init(args.Context.Resolve<IFrozenContext>());
+                });
         }
     }
 }

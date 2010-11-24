@@ -2,6 +2,7 @@
 namespace Kistl.Generator.Templates.Properties
 {
     using System;
+    using System.CodeDom;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
@@ -37,6 +38,11 @@ namespace Kistl.Generator.Templates.Properties
             if (host == null) { throw new ArgumentNullException("host"); }
 
             host.CallTemplate("Properties.PropertyEvents", ctx, eventName, propType, objType, hasGetters, hasSetters);
+        }
+
+        protected override System.CodeDom.MemberAttributes ModifyMemberAttributes(System.CodeDom.MemberAttributes memberAttributes)
+        {
+            return base.ModifyMemberAttributes(memberAttributes) | MemberAttributes.Static;
         }
     }
 }

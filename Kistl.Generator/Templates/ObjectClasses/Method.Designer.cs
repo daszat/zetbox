@@ -10,7 +10,7 @@ using Kistl.Generator.Extensions;
 namespace Kistl.Generator.Templates.ObjectClasses
 {
     [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Generator\Templates\ObjectClasses\Method.cst")]
-    public partial class Method : Kistl.Generator.ResourceTemplate
+    public partial class Method : Kistl.Generator.MemberTemplate
     {
 		protected IKistlContext ctx;
 		protected Kistl.App.Base.DataType dt;

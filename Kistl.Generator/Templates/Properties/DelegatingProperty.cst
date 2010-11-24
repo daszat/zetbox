@@ -1,7 +1,7 @@
 ﻿<%@ CodeTemplate Language="C#"
     Name="Properties.DelegatingProperty"
     ClassName="Kistl.Generator.Templates.Properties.DelegatingProperty"
-    Inherits="Kistl.Generator.ResourceTemplate" %>
+    Inherits="Kistl.Generator.MemberTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="Kistl.API" %>
 <%@ Import Namespace="Kistl.API.Server" %>
@@ -15,7 +15,7 @@
 <%@ Parameter Name="backingPropName" Type="string" %>
 <%@ Parameter Name="backingType" Type="string" %>
         // BEGIN <%= this.GetType() %>
-        public <%= presentedType %> <%= propName %>
+        <%= GetModifiers() %> <%= presentedType %> <%= propName %>
         {
             get { return <%= backingPropName %>; }
             set { <%= backingPropName %> = (<%= backingType %>)value; }

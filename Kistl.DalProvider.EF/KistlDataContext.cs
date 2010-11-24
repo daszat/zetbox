@@ -261,7 +261,6 @@ namespace Kistl.DalProvider.Ef
             }
         }
 
-
         /// <summary>
         /// Submits the changes and returns the number of affected Objects. Note: only IDataObjects are counted.
         /// </summary>
@@ -273,12 +272,6 @@ namespace Kistl.DalProvider.Ef
 
             var notifySaveList = _ctx.ObjectStateManager
                 .GetObjectStateEntries(EntityState.Added | EntityState.Modified)
-                .Select(e => e.Entity)
-                .OfType<IDataObject>()
-                .ToList();
-
-            var addedList = _ctx.ObjectStateManager
-                .GetObjectStateEntries(EntityState.Added)
                 .Select(e => e.Entity)
                 .OfType<IDataObject>()
                 .ToList();

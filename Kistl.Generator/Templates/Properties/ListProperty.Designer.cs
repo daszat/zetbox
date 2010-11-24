@@ -9,7 +9,7 @@ using Kistl.Generator.Extensions;
 namespace Kistl.Generator.Templates.Properties
 {
     [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Generator\Templates\Properties\ListProperty.cst")]
-    public partial class ListProperty : Kistl.Generator.ResourceTemplate
+    public partial class ListProperty : Kistl.Generator.MemberTemplate
     {
 		protected IKistlContext ctx;
 		protected Serialization.SerializationMembersList serializationList;

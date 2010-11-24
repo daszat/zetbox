@@ -18,7 +18,7 @@ namespace Kistl.DalProvider.NHibernate
     public sealed class NHibernateImplementationType
         : ImplementationType
     {
-        public delegate NHibernateImplementationType MemoryFactory(Type type);
+        public delegate NHibernateImplementationType Factory(Type type);
 
         private readonly INHibernateImplementationTypeChecker _typeChecker;
 

@@ -87,6 +87,19 @@
     <Compile Include="Templates\Module.cs" />
     <Compile Include="Templates\ObjectClasses\Method.cs" />
     <Compile Include="Templates\ProjectFile.cs" />
+    <Compile Include="Templates\Properties\CalculatedProperty.cs" />
+    <Compile Include="Templates\Properties\CollectionEntryListProperty.cs" />
+    <Compile Include="Templates\Properties\CompoundObjectPropertyTemplate.cs" />
+    <Compile Include="Templates\Properties\DelegatingProperty.cs" />
+    <Compile Include="Templates\Properties\ExportGuidProperty.cs" />
+    <Compile Include="Templates\Properties\IdProperty.cs" />
+    <Compile Include="Templates\Properties\ListProperty.cs" />
+    <Compile Include="Templates\Properties\NotifyingDataProperty.cs" />
+    <Compile Include="Templates\Properties\ObjectListProperty.cs" />
+    <Compile Include="Templates\Properties\ObjectReferencePropertyTemplate.cs" />
+    <Compile Include="Templates\Properties\PropertyEvents.cs" />
+    <Compile Include="Templates\Properties\ValueCollectionProperty.cs" />
+    <Compile Include="Templates\Properties\NotifyingValueProperty.cs" />
     <Compile Include="Templates\Registrations.cs">
       <DependentUpon>Registrations.cst</DependentUpon>
     </Compile>
@@ -139,6 +152,7 @@
       <LastGenOutput>JoinedSubclassHbm.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

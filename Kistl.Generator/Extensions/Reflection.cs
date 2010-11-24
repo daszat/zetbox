@@ -15,25 +15,25 @@ namespace Kistl.Generator.Extensions
         public static string ToCsharp(this MemberAttributes attrs)
         {
             List<string> modifiers = new List<string>();
-            switch (attrs & MemberAttributes.AccessMask)
+            if ((attrs & MemberAttributes.Public) == MemberAttributes.Public)
             {
-                case MemberAttributes.Public:
-                    modifiers.Add("public");
-                    break;
-                case MemberAttributes.Private:
-                    modifiers.Add("private");
-                    break;
-                case MemberAttributes.Assembly:
-                    modifiers.Add("internal");
-                    break;
-                case MemberAttributes.Family:
-                    modifiers.Add("protected");
-                    break;
-                case 0: // no access modifier
-                    break;
-                default:
-                    throw new NotImplementedException();
+                modifiers.Add("public");
             }
+            if ((attrs & MemberAttributes.Private) == MemberAttributes.Private)
+            {
+                modifiers.Add("private");
+            }
+            if ((attrs & MemberAttributes.Assembly) == MemberAttributes.Assembly)
+            {
+                modifiers.Add("internal");
+            }
+            if ((attrs & MemberAttributes.Family) == MemberAttributes.Family)
+            {
+                modifiers.Add("protected");
+            }
+
+            if ((attrs & MemberAttributes.Static) == MemberAttributes.Static)
+                modifiers.Add("static");
 
             if ((attrs & MemberAttributes.New) == MemberAttributes.New)
                 modifiers.Add("new");

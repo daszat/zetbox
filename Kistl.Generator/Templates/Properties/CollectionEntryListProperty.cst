@@ -1,7 +1,7 @@
 ﻿<%@ CodeTemplate Language="C#" 
 	Name="Properties.CollectionEntryListProperty"
 	ClassName="Kistl.Generator.Templates.Properties.CollectionEntryListProperty" 
-	Inherits="Kistl.Generator.ResourceTemplate" %>
+	Inherits="Kistl.Generator.MemberTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="Kistl.API" %>
 <%@ Import Namespace="Kistl.API.Server" %>
@@ -23,7 +23,7 @@
 <%@ Parameter Name="role" Type="RelationEndRole" %>
 <%@ Parameter Name="eagerLoading" Type="bool" %>
    		// <%= this.GetType() %>
-		public <%= exposedCollectionInterface %><<%= referencedInterface %>> <%= name %>
+		<%= GetModifiers() %> <%= exposedCollectionInterface %><<%= referencedInterface %>> <%= name %>
 		{
 			get
 			{

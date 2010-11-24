@@ -10,7 +10,7 @@ using Kistl.Generator.Extensions;
 namespace Kistl.Generator.Templates.Properties
 {
     [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Generator\Templates\Properties\DelegatingProperty.cst")]
-    public partial class DelegatingProperty : Kistl.Generator.ResourceTemplate
+    public partial class DelegatingProperty : Kistl.Generator.MemberTemplate
     {
 		protected IKistlContext ctx;
 		protected string propName;
@@ -34,7 +34,7 @@ namespace Kistl.Generator.Templates.Properties
         {
 #line 17 "P:\Kistl\Kistl.Generator\Templates\Properties\DelegatingProperty.cst"
 this.WriteObjects("        // BEGIN ",  this.GetType() , "\r\n");
-this.WriteObjects("        public ",  presentedType , " ",  propName , "\r\n");
+this.WriteObjects("        ",  GetModifiers() , " ",  presentedType , " ",  propName , "\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            get { return ",  backingPropName , "; }\r\n");
 this.WriteObjects("            set { ",  backingPropName , " = (",  backingType , ")value; }\r\n");

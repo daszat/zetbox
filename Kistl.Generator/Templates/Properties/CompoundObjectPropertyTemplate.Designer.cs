@@ -10,7 +10,7 @@ using Kistl.Generator.Extensions;
 namespace Kistl.Generator.Templates.Properties
 {
     [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst")]
-    public partial class CompoundObjectPropertyTemplate : Kistl.Generator.ResourceTemplate
+    public partial class CompoundObjectPropertyTemplate : Kistl.Generator.MemberTemplate
     {
 		protected IKistlContext ctx;
 		protected Kistl.Generator.Templates.Serialization.SerializationMembersList serializationList;
@@ -43,30 +43,28 @@ namespace Kistl.Generator.Templates.Properties
 #line 21 "P:\Kistl\Kistl.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 this.WriteObjects("        // BEGIN ",  this.GetType() , "\r\n");
 this.WriteObjects("        // implement the user-visible interface\r\n");
-this.WriteObjects("        public ",  coType , " ",  propName , "\r\n");
-this.WriteObjects("        {\r\n");
-this.WriteObjects("            get { return ",  backingPropertyName , "; }\r\n");
-this.WriteObjects("            set { ",  backingPropertyName , " = (",  coImplementationType , ")value; }\r\n");
-this.WriteObjects("        }\r\n");
+#line 23 "P:\Kistl\Kistl.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+DelegatingProperty.Call(Host, ctx, propName, coType, backingPropertyName, coImplementationType); 
+#line 24 "P:\Kistl\Kistl.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        /// <summary>backing store for ",  propName , "</summary>\r\n");
 this.WriteObjects("        private ",  coImplementationType , " ",  backingStoreName , ";\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("        /// <summary>backing property for ",  propName , ", takes care of attaching/detaching the values</summary>\r\n");
-this.WriteObjects("        private ",  coImplementationType , " ",  backingPropertyName , "\r\n");
+this.WriteObjects("        ",  GetModifiers() , " ",  coImplementationType , " ",  backingPropertyName , "\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            get { return ",  backingStoreName , "; }\r\n");
 this.WriteObjects("            set\r\n");
 this.WriteObjects("            {\r\n");
 this.WriteObjects("                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();\r\n");
-#line 39 "P:\Kistl\Kistl.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 35 "P:\Kistl\Kistl.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 if(!isNullable) { 
-#line 40 "P:\Kistl\Kistl.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 36 "P:\Kistl\Kistl.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 this.WriteObjects("                if (value == null)\r\n");
 this.WriteObjects("                    throw new ArgumentNullException(\"value\");\r\n");
-#line 42 "P:\Kistl\Kistl.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 38 "P:\Kistl\Kistl.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 } 
-#line 43 "P:\Kistl\Kistl.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 39 "P:\Kistl\Kistl.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 this.WriteObjects("                if (!object.Equals(",  backingStoreName , ", value))\r\n");
 this.WriteObjects("                {\r\n");
 this.WriteObjects("					var __oldValue = ",  backingStoreName , ";\r\n");
@@ -84,7 +82,7 @@ this.WriteObjects("						",  backingStoreName , " = null;\r\n");
 this.WriteObjects("					}\r\n");
 this.WriteObjects("                    else\r\n");
 this.WriteObjects("                    {\r\n");
-this.WriteObjects("					    ",  backingStoreName , " = (",  coImplementationType , ")value.Clone();\r\n");
+this.WriteObjects("					    ",  backingStoreName , " = (",  coImplementationType , ")__newValue.Clone();\r\n");
 this.WriteObjects("					    ",  backingStoreName , ".AttachToObject(this, \"",  propName , "\");\r\n");
 this.WriteObjects("                    }\r\n");
 this.WriteObjects("\r\n");
@@ -92,10 +90,10 @@ this.WriteObjects("					NotifyPropertyChanged(\"",  propName , "\", __oldValue, 
 this.WriteObjects("				}\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
-#line 69 "P:\Kistl\Kistl.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 65 "P:\Kistl\Kistl.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 AddSerialization(serializationList, coType, propName, coImplementationType, backingPropertyName);
 
-#line 71 "P:\Kistl\Kistl.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 67 "P:\Kistl\Kistl.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 this.WriteObjects("           // END ",  this.GetType() , "");
 
         }

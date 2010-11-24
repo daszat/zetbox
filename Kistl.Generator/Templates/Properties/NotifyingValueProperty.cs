@@ -42,20 +42,6 @@ namespace Kistl.Generator.Templates.Properties
                 list.Add(Serialization.SerializerType.All, modulenamespace, name, BackingMemberFromName(name));
         }
 
-        protected string GetModifiers()
-        {
-            MemberAttributes attrs = ModifyMethodAttributes(MemberAttributes.Public);
-            return attrs.ToCsharp();
-        }
-
-        /// <summary>
-        /// Gets a set of <see cref="MemberAttributes"/> and returns an appropriate set for output.
-        /// </summary>
-        protected virtual MemberAttributes ModifyMethodAttributes(MemberAttributes methodAttributes)
-        {
-            return methodAttributes;
-        }
-
         protected virtual void ApplyOnGetTemplate() { }
         protected virtual void ApplyOnAllSetTemplate() { }
         protected virtual void ApplyPreSetTemplate() { }

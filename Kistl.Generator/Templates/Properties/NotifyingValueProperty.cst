@@ -1,7 +1,7 @@
 ﻿<%@ CodeTemplate Language="C#" 
     Name="Properties.NotifyingValueProperty"
     ClassName="Kistl.Generator.Templates.Properties.NotifyingValueProperty" 
-    Inherits="Kistl.Generator.ResourceTemplate" %>
+    Inherits="Kistl.Generator.MemberTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="Kistl.API" %>
 <%@ Import Namespace="Kistl.API.Server" %>

@@ -51,20 +51,6 @@ namespace Kistl.Generator.Templates.Properties
         {
         }
 
-        protected virtual string GetModifiers()
-        {
-            MemberAttributes attrs = ModifyMethodAttributes(MemberAttributes.Public);
-            return attrs.ToCsharp();
-        }
-
-        /// <summary>
-        /// Gets a set of <see cref="MemberAttributes"/> and returns an appropriate set for output.
-        /// </summary>
-        protected virtual MemberAttributes ModifyMethodAttributes(MemberAttributes methodAttributes)
-        {
-            return methodAttributes;
-        }
-
         /// <returns>the type of the property as string</returns>
         protected virtual string GetPropertyTypeString()
         {

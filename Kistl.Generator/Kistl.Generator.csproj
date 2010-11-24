@@ -160,6 +160,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="MemberTemplate.cs" />
     <Compile Include="Templates\Module.cs">
       <DependentUpon>Module.cst</DependentUpon>
     </Compile>

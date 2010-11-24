@@ -1,7 +1,7 @@
 ﻿<%@ CodeTemplate Language="C#"
     Name="Properties.ObjectReferencePropertyTemplate"
     ClassName="Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate"
-    Inherits="Kistl.Generator.ResourceTemplate" %>
+    Inherits="Kistl.Generator.MemberTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="Kistl.API" %>
 <%@ Import Namespace="Kistl.API.Server" %>
@@ -38,11 +38,7 @@
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public <%= referencedInterface %> <%= name %>
-        {
-            get { return <%= implName %>; }
-            set { <%= implName %> = (<%= referencedImplementation %>)value; }
-        }
+<% DelegatingProperty.Call(Host, ctx, name, referencedInterface, implName, referencedImplementation); %>
 
         private int? <%= fkBackingName %>;
 
@@ -52,7 +48,7 @@
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        internal <%= referencedImplementation %> <%= implName %>
+        <%= GetModifiers() %> <%= referencedImplementation %> <%= implName %>
         {
             get
             {

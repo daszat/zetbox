@@ -32,10 +32,10 @@ namespace Kistl.Generator.Templates.Properties
         {
         }
 
-        protected override MemberAttributes ModifyMethodAttributes(MemberAttributes methodAttributes)
+        protected override MemberAttributes ModifyMemberAttributes(MemberAttributes memberAttributes)
         {
             // add override flag to implement abstract ID member
-            return base.ModifyMethodAttributes(methodAttributes) | MemberAttributes.Override;
+            return base.ModifyMemberAttributes(memberAttributes) & ~MemberAttributes.Final | MemberAttributes.Override;
         }
     }
 }

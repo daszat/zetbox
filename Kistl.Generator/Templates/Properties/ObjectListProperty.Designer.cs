@@ -10,7 +10,7 @@ using Kistl.Generator.Extensions;
 namespace Kistl.Generator.Templates.Properties
 {
     [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Generator\Templates\Properties\ObjectListProperty.cst")]
-    public partial class ObjectListProperty : Kistl.Generator.ResourceTemplate
+    public partial class ObjectListProperty : Kistl.Generator.MemberTemplate
     {
 		protected IKistlContext ctx;
 		protected Kistl.Generator.Templates.Serialization.SerializationMembersList serializationList;
@@ -59,7 +59,7 @@ this.WriteObjects("        // ",  this.GetType() , "\r\n");
 this.WriteObjects("        // implement the user-visible interface\r\n");
 this.WriteObjects("        [XmlIgnore()]\r\n");
 this.WriteObjects("        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]\r\n");
-this.WriteObjects("        public ",  exposedListType , "<",  referencedInterface , "> ",  name , "\r\n");
+this.WriteObjects("        ",  GetModifiers() , " ",  exposedListType , "<",  referencedInterface , "> ",  name , "\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            get\r\n");
 this.WriteObjects("            {\r\n");

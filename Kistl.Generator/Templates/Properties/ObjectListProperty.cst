@@ -1,7 +1,7 @@
 ﻿<%@ CodeTemplate Language="C#"    
     Name="Properties.ObjectListProperty"
     ClassName="Kistl.Generator.Templates.Properties.ObjectListProperty"    
-    Inherits="Kistl.Generator.ResourceTemplate" %>
+    Inherits="Kistl.Generator.MemberTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="Kistl.API" %>
 <%@ Import Namespace="Kistl.API.Server" %>
@@ -35,7 +35,7 @@
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public <%= exposedListType %><<%= referencedInterface %>> <%= name %>
+        <%= GetModifiers() %> <%= exposedListType %><<%= referencedInterface %>> <%= name %>
         {
             get
             {

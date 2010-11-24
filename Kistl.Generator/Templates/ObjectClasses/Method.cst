@@ -1,7 +1,7 @@
 ﻿<%@ CodeTemplate Language="C#"
     Name="ObjectClasses.Method"
     ClassName="Kistl.Generator.Templates.ObjectClasses.Method"
-    Inherits="Kistl.Generator.ResourceTemplate" %>
+    Inherits="Kistl.Generator.MemberTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Linq" %>
 <%@ Import Namespace="Kistl.API" %>

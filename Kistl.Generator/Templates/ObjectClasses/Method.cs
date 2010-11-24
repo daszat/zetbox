@@ -18,7 +18,7 @@ namespace Kistl.Generator.Templates.ObjectClasses
         protected Method(Arebis.CodeGeneration.IGenerationHost host)
             : base(host)
         {
-            throw new NotSupportedException();
+            throw new NotSupportedException("this constructor only exists to allow overrinding in a CST");
         }
 
         public static void Call(Arebis.CodeGeneration.IGenerationHost host, IKistlContext ctx, DataType implementor, Kistl.App.Base.Method m, int index)
@@ -35,20 +35,12 @@ namespace Kistl.Generator.Templates.ObjectClasses
             return new string[] { String.Format("[EventBasedMethod(\"{0}\")]", this.eventName) };
         }
 
-        protected string GetModifiers()
+        protected override MemberAttributes ModifyMemberAttributes(MemberAttributes memberAttributes)
         {
-            MemberAttributes attrs = ModifyMethodAttributes(0);
-            return attrs.ToCsharp();
-        }
+            // Methods are usually virtual ...
+            var result = base.ModifyMemberAttributes(memberAttributes) & ~MemberAttributes.Final;
 
-        /// <summary>
-        /// Gets a set of <see cref="MemberAttributes"/> for this method and returns an appropriate set for output.
-        /// </summary>
-        protected virtual MemberAttributes ModifyMethodAttributes(MemberAttributes methodAttributes)
-        {
-            var result = methodAttributes | MemberAttributes.Public;
-
-            // only override on derived types
+            // ... and override on derived types
             if (this.m.ObjectClass != this.dt)
                 result = result | MemberAttributes.Override;
 

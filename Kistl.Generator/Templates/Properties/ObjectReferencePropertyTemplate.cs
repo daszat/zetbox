@@ -2,6 +2,7 @@
 namespace Kistl.Generator.Templates.Properties
 {
     using System;
+    using System.CodeDom;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
@@ -153,6 +154,11 @@ namespace Kistl.Generator.Templates.Properties
                 }
                 list.Add(Serialization.SerializerType.Service, moduleNamespace, name, fkBackingName);
             }
+        }
+
+        protected override MemberAttributes ModifyMemberAttributes(MemberAttributes memberAttributes)
+        {
+            return base.ModifyMemberAttributes(memberAttributes) & ~MemberAttributes.Public | MemberAttributes.Assembly;
         }
     }
 }

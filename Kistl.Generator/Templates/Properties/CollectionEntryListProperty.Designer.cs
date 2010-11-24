@@ -9,7 +9,7 @@ using Kistl.Generator.Extensions;
 namespace Kistl.Generator.Templates.Properties
 {
     [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Generator\Templates\Properties\CollectionEntryListProperty.cst")]
-    public partial class CollectionEntryListProperty : Kistl.Generator.ResourceTemplate
+    public partial class CollectionEntryListProperty : Kistl.Generator.MemberTemplate
     {
 		protected IKistlContext ctx;
 		protected Serialization.SerializationMembersList serializationList;
@@ -51,7 +51,7 @@ namespace Kistl.Generator.Templates.Properties
         {
 #line 25 "P:\Kistl\Kistl.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 this.WriteObjects("   		// ",  this.GetType() , "\r\n");
-this.WriteObjects("		public ",  exposedCollectionInterface , "<",  referencedInterface , "> ",  name , "\r\n");
+this.WriteObjects("		",  GetModifiers() , " ",  exposedCollectionInterface , "<",  referencedInterface , "> ",  name , "\r\n");
 this.WriteObjects("		{\r\n");
 this.WriteObjects("			get\r\n");
 this.WriteObjects("			{\r\n");

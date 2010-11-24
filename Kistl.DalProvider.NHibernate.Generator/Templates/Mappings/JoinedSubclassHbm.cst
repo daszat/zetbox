@@ -21,6 +21,7 @@
 <%@ Parameter Name="properties" Type="List<Property>" %>
 <%@ Parameter Name="subClasses" Type="List<ObjectClass>" %>
         <joined-subclass name="<%= qualifiedImplementationName %>"
+                         proxy="<%= qualifiedInterfaceName %>"
                          table="`<%= tableName %>`">
             
             <!-- base class reference -->

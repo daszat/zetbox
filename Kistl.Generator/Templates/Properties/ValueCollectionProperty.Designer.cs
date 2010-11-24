@@ -11,7 +11,7 @@ using Kistl.Generator.Extensions;
 namespace Kistl.Generator.Templates.Properties
 {
     [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Generator\Templates\Properties\ValueCollectionProperty.cst")]
-    public partial class ValueCollectionProperty : Kistl.Generator.ResourceTemplate
+    public partial class ValueCollectionProperty : Kistl.Generator.MemberTemplate
     {
 		protected IKistlContext ctx;
 		protected Kistl.Generator.Templates.Serialization.SerializationMembersList serializationList;
@@ -55,7 +55,7 @@ AddSerialization(serializationList, underlyingCollectionName);
 
 #line 31 "P:\Kistl\Kistl.Generator\Templates\Properties\ValueCollectionProperty.cst"
 this.WriteObjects("		// ",  this.GetType() , "\r\n");
-this.WriteObjects("		public ",  exposedCollectionInterface , "<",  referencedType , "> ",  name , "\r\n");
+this.WriteObjects("		",  GetModifiers() , " ",  exposedCollectionInterface , "<",  referencedType , "> ",  name , "\r\n");
 this.WriteObjects("		{\r\n");
 this.WriteObjects("			get\r\n");
 this.WriteObjects("			{\r\n");

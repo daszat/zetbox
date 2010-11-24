@@ -1,7 +1,7 @@
 ﻿<%@ CodeTemplate Language="C#"
     Name="Properties.CompoundObjectPropertyTemplate"
     ClassName="Kistl.Generator.Templates.Properties.CompoundObjectPropertyTemplate"
-    Inherits="Kistl.Generator.ResourceTemplate" %>
+    Inherits="Kistl.Generator.MemberTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="Kistl.API" %>
 <%@ Import Namespace="Kistl.API.Server" %>
@@ -20,17 +20,13 @@
 <%@ Parameter Name="isNullable" Type="bool" %>
         // BEGIN <%= this.GetType() %>
         // implement the user-visible interface
-        public <%= coType %> <%= propName %>
-        {
-            get { return <%= backingPropertyName %>; }
-            set { <%= backingPropertyName %> = (<%= coImplementationType %>)value; }
-        }
+<% DelegatingProperty.Call(Host, ctx, propName, coType, backingPropertyName, coImplementationType); %>
 
         /// <summary>backing store for <%= propName %></summary>
         private <%= coImplementationType %> <%= backingStoreName %>;
 
         /// <summary>backing property for <%= propName %>, takes care of attaching/detaching the values</summary>
-        private <%= coImplementationType %> <%= backingPropertyName %>
+        <%= GetModifiers() %> <%= coImplementationType %> <%= backingPropertyName %>
         {
             get { return <%= backingStoreName %>; }
             set

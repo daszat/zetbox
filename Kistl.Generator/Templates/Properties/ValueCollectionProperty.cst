@@ -1,7 +1,7 @@
 ﻿<%@ CodeTemplate Language="C#" 
 	Name="Properties.ValueCollectionProperty"
 	ClassName="Kistl.Generator.Templates.Properties.ValueCollectionProperty" 
-	Inherits="Kistl.Generator.ResourceTemplate" %>
+	Inherits="Kistl.Generator.MemberTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Collections.Generic" %>
 <%@ Import Namespace="System.Diagnostics" %>
@@ -29,7 +29,7 @@
 
 %>
 		// <%= this.GetType() %>
-		public <%= exposedCollectionInterface %><<%= referencedType %>> <%= name %>
+		<%= GetModifiers() %> <%= exposedCollectionInterface %><<%= referencedType %>> <%= name %>
 		{
 			get
 			{

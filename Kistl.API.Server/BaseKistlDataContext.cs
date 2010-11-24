@@ -421,10 +421,10 @@ namespace Kistl.API.Server
         /// This could be moved to a common abstract IKistlContextBase
         /// <remarks>Entity Framework does not support queries on Interfaces. Please use GetQuery&lt;T&gt;()</remarks>
         /// </summary>
-        /// <param name="type">Object Type of the Object to find.</param>
+        /// <param name="ifType">Object Type of the Object to find.</param>
         /// <param name="ID">ID of the Object to find.</param>
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
-        public abstract IDataObject Find(InterfaceType type, int ID);
+        public abstract IDataObject Find(InterfaceType ifType, int ID);
 
         /// <summary>
         /// Find the Object of the given type by ID

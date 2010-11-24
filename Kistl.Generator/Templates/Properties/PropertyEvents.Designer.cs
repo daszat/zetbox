@@ -5,7 +5,7 @@ using Kistl.API;
 namespace Kistl.Generator.Templates.Properties
 {
     [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Generator\Templates\Properties\PropertyEvents.cst")]
-    public partial class PropertyEvents : Kistl.Generator.ResourceTemplate
+    public partial class PropertyEvents : Kistl.Generator.MemberTemplate
     {
 		protected IKistlContext ctx;
 		protected string eventName;
@@ -32,14 +32,14 @@ namespace Kistl.Generator.Templates.Properties
 #line 13 "P:\Kistl\Kistl.Generator\Templates\Properties\PropertyEvents.cst"
 if (hasGetters) { 
 #line 14 "P:\Kistl\Kistl.Generator\Templates\Properties\PropertyEvents.cst"
-this.WriteObjects("		public static event PropertyGetterHandler<",  objType , ", ",  propType , "> ",  eventName , "_Getter;\r\n");
+this.WriteObjects("		",  GetModifiers() , " event PropertyGetterHandler<",  objType , ", ",  propType , "> ",  eventName , "_Getter;\r\n");
 #line 15 "P:\Kistl\Kistl.Generator\Templates\Properties\PropertyEvents.cst"
 } 
 #line 16 "P:\Kistl\Kistl.Generator\Templates\Properties\PropertyEvents.cst"
 if (hasSetters) { 
 #line 17 "P:\Kistl\Kistl.Generator\Templates\Properties\PropertyEvents.cst"
-this.WriteObjects("		public static event PropertyPreSetterHandler<",  objType , ", ",  propType , "> ",  eventName , "_PreSetter;\r\n");
-this.WriteObjects("		public static event PropertyPostSetterHandler<",  objType , ", ",  propType , "> ",  eventName , "_PostSetter;\r\n");
+this.WriteObjects("		",  GetModifiers() , " event PropertyPreSetterHandler<",  objType , ", ",  propType , "> ",  eventName , "_PreSetter;\r\n");
+this.WriteObjects("		",  GetModifiers() , " event PropertyPostSetterHandler<",  objType , ", ",  propType , "> ",  eventName , "_PostSetter;\r\n");
 #line 19 "P:\Kistl\Kistl.Generator\Templates\Properties\PropertyEvents.cst"
 } 
 

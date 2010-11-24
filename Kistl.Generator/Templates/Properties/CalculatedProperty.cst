@@ -1,7 +1,7 @@
 ﻿<%@ CodeTemplate Language="C#" 
 	Name="Properties.CalculatedProperty"
 	ClassName="Kistl.Generator.Templates.Properties.CalculatedProperty" 
-	Inherits="Kistl.Generator.ResourceTemplate" %>
+	Inherits="Kistl.Generator.MemberTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="Kistl.API" %>
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
@@ -9,7 +9,8 @@
 <%@ Parameter Name="referencedType" Type="string" %>
 <%@ Parameter Name="propertyName" Type="String" %>
 <%@ Parameter Name="getterEventName" Type="String" %>
-		public <%= referencedType %> <%= propertyName %>
+        // BEGIN <%= this.GetType() %>
+		<%= GetModifiers() %> <%= referencedType %> <%= propertyName %>
 		{
 			get
 			{
@@ -23,3 +24,4 @@
 				return e.Result;
 			}
 		}
+        // END <%= this.GetType() %>
