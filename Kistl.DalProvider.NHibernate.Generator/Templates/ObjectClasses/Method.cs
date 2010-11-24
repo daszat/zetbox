@@ -20,15 +20,8 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
 
         protected override MemberAttributes ModifyMethodAttributes(MemberAttributes methodAttributes)
         {
-            var baseAttrs = base.ModifyMethodAttributes(methodAttributes);
-            if (dt is ObjectClass)
-            {
-                if (((ObjectClass)dt).BaseObjectClass != null)
-                    baseAttrs = baseAttrs & ~MemberAttributes.Final | MemberAttributes.Override;
-                else
-                    baseAttrs = baseAttrs & ~MemberAttributes.Final;
-            }
-            return baseAttrs;
+            // all methods have to be virtual to allow overriding by the proxy object
+            return base.ModifyMethodAttributes(methodAttributes) & ~MemberAttributes.Final;
         }
     }
 }
