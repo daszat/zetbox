@@ -28,6 +28,7 @@ namespace Kistl.API.Server.Tests
 
             builder.Register(c => new KistlContextMock(c.Resolve<IMetaDataResolver>(), null, c.Resolve<KistlConfig>(), c.Resolve<Func<IFrozenContext>>(), c.Resolve<InterfaceType.Factory>()))
                 .As<IKistlContext>()
+                .As<IFrozenContext>()
                 .As<IReadOnlyKistlContext>()
                 .InstancePerDependency();
         }

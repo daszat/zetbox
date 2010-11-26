@@ -8,7 +8,7 @@ using Kistl.API.Configuration;
 
 namespace Kistl.API.Server.Mocks
 {
-    public class KistlContextMock : BaseKistlDataContext
+    public class KistlContextMock : BaseKistlDataContext, IFrozenContext
     {
         public Dictionary<int, TestObjClassImpl> TestObjClasses = new Dictionary<int, TestObjClassImpl>();
         public KistlContextMock(IMetaDataResolver metaDataResolver, Identity identity, KistlConfig config, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory)
