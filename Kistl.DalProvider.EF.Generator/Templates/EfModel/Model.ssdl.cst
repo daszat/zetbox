@@ -445,5 +445,10 @@
 <%
 	}
 %>
-
+	<Function Name="GetContinuousSequenceNumber" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="seqNumber" Type="uniqueidentifier" Mode="In" />
+    </Function>
+    <Function Name="GetSequenceNumber" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+        <Parameter Name="seqNumber" Type="uniqueidentifier" Mode="In" />
+    </Function>
 </Schema>

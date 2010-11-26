@@ -171,6 +171,12 @@ namespace Kistl.Client.Presentables.ModuleEditor
                     lstMdl.Filter.Add(new ToStringFilterModel(FrozenContext));
                     lst.Add(lstMdl);
 
+                    // Sequences
+                    lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, null, DataContext.GetQuery<Sequence>());
+                    lstMdl.Filter.Add(new ConstantValueFilterModel("Module = @0", CurrentModule));
+                    lst.Add(lstMdl);
+
+
                     var diagMdl = ViewModelFactory.CreateViewModel<DiagramViewModel.Factory>().Invoke(DataContext, CurrentModule);
                     lst.Add(diagMdl);
 

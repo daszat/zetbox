@@ -284,6 +284,8 @@ this.WriteObjects("    </AssociationSetMapping>\r\n");
 
 #line 246 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 this.WriteObjects("\r\n");
+this.WriteObjects("	<FunctionImportMapping FunctionImportName=\"GetContinuousSequenceNumber\" FunctionName=\"Model.Store.GetContinuousSequenceNumber\" />\r\n");
+this.WriteObjects("    <FunctionImportMapping FunctionImportName=\"GetSequenceNumber\" FunctionName=\"Model.Store.GetSequenceNumber\" />\r\n");
 this.WriteObjects("  </EntityContainerMapping>\r\n");
 this.WriteObjects("</Mapping>");
 

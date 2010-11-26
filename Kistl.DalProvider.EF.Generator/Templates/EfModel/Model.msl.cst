@@ -244,5 +244,7 @@
     
 %>
 
+	<FunctionImportMapping FunctionImportName="GetContinuousSequenceNumber" FunctionName="Model.Store.GetContinuousSequenceNumber" />
+    <FunctionImportMapping FunctionImportName="GetSequenceNumber" FunctionName="Model.Store.GetSequenceNumber" />
   </EntityContainerMapping>
 </Mapping>

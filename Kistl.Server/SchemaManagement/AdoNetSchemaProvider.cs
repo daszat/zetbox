@@ -556,6 +556,9 @@ namespace Kistl.Server.SchemaManagement
         /// <param name="refSpecs">a lookup by table name into lists of (referencedTableName, fkColumnName) pairs</param>
         public abstract void CreatePositionColumnValidCheckProcedures(ILookup<TableRef, KeyValuePair<TableRef, string>> refSpecs);
 
+        public abstract void CreateSequenceNumberProcedure();
+        public abstract void CreateContinuousSequenceNumberProcedure();
+        
         public abstract IDataReader ReadTableData(TableRef tbl, IEnumerable<string> colNames);
         public abstract IDataReader ReadTableData(string sql);
         public abstract IDataReader ReadJoin(TableRef tbl, IEnumerable<ProjectionColumn> colNames, IEnumerable<Join> joins);

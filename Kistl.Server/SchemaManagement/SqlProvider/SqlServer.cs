@@ -1021,6 +1021,26 @@ FROM (", viewName.Schema, viewName.Name);
             ExecuteNonQuery(createTableProcQuery.ToString());
         }
 
+        private const string sequenceNumberProcedure = @"CREATE PROCEDURE {0} 
+@seqNumber uniqueidentifier
+AS
+BEGIN
+	DECLARE @result int
+	SELECT @result = CurrentNumber + 1 FROM dbo.Sequences WITH(UPDLOCK) WHERE ExportGuid = @seqNumber
+	UPDATE dbo.Sequences SET CurrentNumber = @result WHERE ExportGuid = @seqNumber
+	SELECT @result
+END";
+
+        public override void CreateSequenceNumberProcedure()
+        {
+            ExecuteNonQuery(string.Format(sequenceNumberProcedure, FormatSchemaName(GetQualifiedProcedureName("GetSequenceNumber"))));
+        }
+
+        public override void CreateContinuousSequenceNumberProcedure()
+        {
+            ExecuteNonQuery(string.Format(sequenceNumberProcedure, FormatSchemaName(GetQualifiedProcedureName("GetContinuousSequenceNumber"))));
+        }
+
         public override IDataReader ReadTableData(TableRef tbl, IEnumerable<string> colNames)
         {
             var columns = String.Join(",", colNames.Select(n => QuoteIdentifier(n)).ToArray());

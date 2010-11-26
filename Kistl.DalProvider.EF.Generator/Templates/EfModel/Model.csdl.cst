@@ -108,6 +108,12 @@
     }
 %>
 
+	<FunctionImport Name="GetContinuousSequenceNumber" ReturnType="Collection(Int32)">
+	    <Parameter Name="seqNumber" Mode="In" Type="Guid" />
+	</FunctionImport>
+    <FunctionImport Name="GetSequenceNumber" ReturnType="Collection(Int32)">
+		<Parameter Name="seqNumber" Mode="In" Type="Guid" />
+	</FunctionImport>
   </EntityContainer>
   
   <!-- EntityTypes for all base classes -->

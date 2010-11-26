@@ -47,6 +47,7 @@ namespace Kistl.DalProvider.NHibernate
                         c.Resolve<IMetaDataResolver>(),
                         param != null ? (Kistl.App.Base.Identity)param.Value : c.Resolve<IIdentityResolver>().GetCurrent(),
                         c.Resolve<KistlConfig>(),
+                        c.Resolve<Func<IFrozenContext>>(),
                         c.Resolve<InterfaceType.Factory>(),
                         c.Resolve<NHibernateImplementationType.Factory>(),
                         c.Resolve<global::NHibernate.ISession>()
@@ -80,6 +81,7 @@ namespace Kistl.DalProvider.NHibernate
                         c.Resolve<IMetaDataResolver>(),
                         null,
                         c.Resolve<KistlConfig>(),
+                        c.Resolve<Func<IFrozenContext>>(),
                         c.Resolve<InterfaceType.Factory>(),
                         c.Resolve<NHibernateImplementationType.Factory>(),
                         c.Resolve<global::NHibernate.ISession>()

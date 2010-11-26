@@ -656,6 +656,16 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
             throw new NotSupportedException();
         }
 
+        void ISchemaProvider.CreateSequenceNumberProcedure()
+        {
+            throw new NotSupportedException();
+        }
+
+        void ISchemaProvider.CreateContinuousSequenceNumberProcedure()
+        {
+            throw new NotSupportedException();
+        }
+
         /// <summary>Not supported.</summary>
         void ISchemaProvider.RenameTable(TableRef oldTblName, TableRef newTblName)
         {

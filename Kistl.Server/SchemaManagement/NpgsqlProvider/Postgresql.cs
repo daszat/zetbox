@@ -1151,6 +1151,29 @@ LANGUAGE 'plpgsql' VOLATILE",
             ExecuteNonQuery(createTableProcQuery.ToString());
         }
 
+        private const string sequenceNumberProcedure = @"CREATE OR REPLACE FUNCTION {0}(""seqNumber"" uuid)
+  RETURNS integer AS
+$BODY$DECLARE result integer;
+BEGIN
+
+LOCK TABLE ""dbo"".""Sequences"";
+UPDATE ""dbo"".""Sequences"" SET ""CurrentNumber"" = ""CurrentNumber"" + 1 WHERE ""ExportGuid"" = seqNumber;
+SELECT ""CurrentNumber"" INTO result FROM ""dbo"".""Sequences"" WHERE ""ExportGuid"" = seqNumber;
+RETURN result;
+
+END$BODY$
+  LANGUAGE plpgsql VOLATILE";
+
+        public override void CreateSequenceNumberProcedure()
+        {
+            ExecuteNonQuery(string.Format(sequenceNumberProcedure, FormatSchemaName(GetQualifiedProcedureName("GetSequenceNumber"))));
+        }
+
+        public override void CreateContinuousSequenceNumberProcedure()
+        {
+            ExecuteNonQuery(string.Format(sequenceNumberProcedure, FormatSchemaName(GetQualifiedProcedureName("GetContinuousSequenceNumber"))));
+        }
+
         public override IDataReader ReadTableData(TableRef tbl, IEnumerable<string> colNames)
         {
             var columns = String.Join(",", colNames.Select(n => QuoteIdentifier(n)).ToArray());

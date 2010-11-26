@@ -92,6 +92,26 @@ namespace Kistl.Server.SchemaManagement
                     refSpec => new KeyValuePair<TableRef, string>(db.GetQualifiedTableName(refSpec.refTableName), Construct.ForeignKeyColumnName(refSpec.OtherEnd)));
 
             db.CreatePositionColumnValidCheckProcedures(refSpecs);
+
+            if (!db.CheckProcedureExists(db.GetQualifiedProcedureName("GetSequenceNumber")))
+            {
+                db.CreateSequenceNumberProcedure();
+            }
+            else if(repair)
+            {
+                db.DropProcedure(db.GetQualifiedProcedureName("GetSequenceNumber"));
+                db.CreateSequenceNumberProcedure();
+            }
+
+            if (!db.CheckProcedureExists(db.GetQualifiedProcedureName("GetContinuousSequenceNumber")))
+            {
+                db.CreateContinuousSequenceNumberProcedure();
+            }
+            else if(repair)
+            {
+                db.DropProcedure(db.GetQualifiedProcedureName("GetContinuousSequenceNumber"));
+                db.CreateContinuousSequenceNumberProcedure();
+            }
         }
 
         private void UpdateDeletedTables()

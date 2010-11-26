@@ -11,8 +11,8 @@ namespace Kistl.API.Server.Mocks
     public class KistlContextMock : BaseKistlDataContext
     {
         public Dictionary<int, TestObjClassImpl> TestObjClasses = new Dictionary<int, TestObjClassImpl>();
-        public KistlContextMock(IMetaDataResolver metaDataResolver, Identity identity, KistlConfig config, InterfaceType.Factory iftFactory)
-            : base(metaDataResolver, identity, config, iftFactory)
+        public KistlContextMock(IMetaDataResolver metaDataResolver, Identity identity, KistlConfig config, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory)
+            : base(metaDataResolver, identity, config, lazyCtx, iftFactory)
         {
             TestObjClasses[1] = new TestObjClassImpl() { ID = 1 };
             TestObjClasses[3] = new TestObjClassImpl() { ID = 3 };
@@ -168,6 +168,36 @@ namespace Kistl.API.Server.Mocks
         public override ImplementationType GetImplementationType(Type t)
         {
             return new ServerImplementationTypeMock(t, iftFactory);
+        }
+
+        public override void BeginTransaction()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void CommitTransaction()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void RollbackTransaction()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override int ExecGetSequenceNumber(Guid sequenceGuid)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override int ExecGetContinuousSequenceNumber(Guid sequenceGuid)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override bool IsTransactionRunning
+        {
+            get { throw new NotImplementedException(); }
         }
     }
 }

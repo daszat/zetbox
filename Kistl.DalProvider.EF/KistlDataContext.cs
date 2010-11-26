@@ -16,6 +16,7 @@ namespace Kistl.DalProvider.Ef
     using Kistl.API.Utils;
     using Kistl.App.Base;
     using Kistl.App.Extensions;
+    using System.Data.Common;
 
     /// <summary>
     /// Entityframework IKistlContext implementation
@@ -26,8 +27,7 @@ namespace Kistl.DalProvider.Ef
         private static readonly object _lock = new object();
 
         private readonly EfObjectContext _ctx;
-
-        private readonly Func<IFrozenContext> _lazyCtx;
+        private bool _connectionManallyOpened = false;
 
         private readonly EfImplementationType.EfFactory _implTypeFactory;
 
@@ -42,7 +42,24 @@ namespace Kistl.DalProvider.Ef
             }
             finally
             {
-                if (_ctx != null) { _ctx.Dispose(); }
+                if (_transaction != null)
+                {
+                    _transaction.Rollback();
+                    _transaction.Dispose();
+                    _transaction = null;
+                }
+                if (_ctx != null)
+                {
+                    if (_connectionManallyOpened)
+                    {
+                        // Close manually, Connection is exposed.
+                        // EF wont close it if connection was manually opened
+                        _ctx.Connection.Close();
+                        // Once is enough
+                        _connectionManallyOpened = false;
+                    }
+                    _ctx.Dispose();
+                }
             }
         }
 
@@ -50,10 +67,9 @@ namespace Kistl.DalProvider.Ef
         /// Internal Constructor
         /// </summary>
         public KistlDataContext(IMetaDataResolver metaDataResolver, Identity identity, KistlConfig config, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory, EfImplementationType.EfFactory implTypeFactory)
-            : base(metaDataResolver, identity, config, iftFactory)
+            : base(metaDataResolver, identity, config, lazyCtx, iftFactory)
         {
             _ctx = new EfObjectContext(config);
-            _lazyCtx = lazyCtx;
             _implTypeFactory = implTypeFactory;
         }
 
@@ -375,7 +391,7 @@ namespace Kistl.DalProvider.Ef
         private int _newIDCounter = Helper.INVALIDID;
         protected override object CreateUnattachedInstance(InterfaceType ifType)
         {
-            var obj = Activator.CreateInstance(ToImplementationType(ifType).Type, _lazyCtx);
+            var obj = Activator.CreateInstance(ToImplementationType(ifType).Type, lazyCtx);
             // Set a temporary ID
             if (obj is BasePersistenceObject)
             {
@@ -681,6 +697,69 @@ namespace Kistl.DalProvider.Ef
         {
             CheckDisposed();
             return _implTypeFactory(t);
+        }
+
+        protected override int ExecGetSequenceNumber(Guid sequenceGuid)
+        {
+            return CallGetSequenceNumber(sequenceGuid, "GetSequenceNumber");
+        }
+
+        protected override int ExecGetContinuousSequenceNumber(Guid sequenceGuid)
+        {
+            return CallGetSequenceNumber(sequenceGuid, "GetContinuousSequenceNumber");
+        }
+
+        private int CallGetSequenceNumber(Guid sequenceGuid, string procName)
+        {
+            var cmd = _ctx.Connection.CreateCommand();
+            cmd.Transaction = _transaction;
+            cmd.CommandText = "Entities." + procName;
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            var p = cmd.CreateParameter();
+            p.ParameterName = "seqNumber";
+            p.Value = sequenceGuid;
+            p.DbType = DbType.Guid;
+            p.Direction = ParameterDirection.Input;
+            cmd.Parameters.Add(p);
+            return (int)cmd.ExecuteScalar();
+        }
+
+
+        private void OpenEntityConnection()
+        {
+            if (this._ctx.Connection.State == ConnectionState.Closed)
+            {
+                _connectionManallyOpened = true;
+                this._ctx.Connection.Open();
+            }
+        }
+
+        private DbTransaction _transaction;
+        protected override bool IsTransactionRunning
+        {
+            get { return _transaction != null; }
+        }
+
+        public override void BeginTransaction()
+        {
+            if (_transaction != null) throw new InvalidOperationException("A transaction is already running. Nested transaction are not supported");
+            OpenEntityConnection();
+            _transaction = _ctx.Connection.BeginTransaction();
+        }
+
+        public override void CommitTransaction()
+        {
+            if (_transaction == null) throw new InvalidOperationException("No transaction running");
+            _transaction.Commit();
+            _transaction = null;
+        }
+
+        public override void RollbackTransaction()
+        {
+            if (_transaction == null) throw new InvalidOperationException("No transaction running");
+            _transaction.Rollback();
+            _transaction = null;
         }
     }
 }

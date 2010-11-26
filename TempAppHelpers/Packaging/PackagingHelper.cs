@@ -117,6 +117,10 @@ namespace Kistl.App.Packaging
                 .OrderBy(i => i.Name)
                 .ThenBy(i => i.ExportGuid));
 
+            // Sequences
+            AddMetaObjects(result, ctx.GetQuery<Sequence>().Where(i => i.Module.ID == moduleID)
+                .OrderBy(i => i.Description).ThenBy(i => i.ExportGuid));
+
             return result;
         }
 

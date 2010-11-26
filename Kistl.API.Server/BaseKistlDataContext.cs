@@ -11,6 +11,8 @@ namespace Kistl.API.Server
     using Kistl.API.Utils;
     using Kistl.App.Base;
     using Kistl.App.Extensions;
+    using System.Data.Common;
+    using System.Data;
 
     public delegate IKistlContext ServerKistlContextFactory(Identity identity);
 
@@ -21,6 +23,7 @@ namespace Kistl.API.Server
         protected readonly IMetaDataResolver metaDataResolver;
         protected KistlConfig config;
         protected InterfaceType.Factory iftFactory;
+        protected Func<IFrozenContext> lazyCtx;
 
         /// <summary>
         /// Initializes a new instance of the BaseKistlDataContext class using the specified <see cref="Identity"/>.
@@ -28,8 +31,9 @@ namespace Kistl.API.Server
         /// <param name="metaDataResolver">the IMetaDataResolver for this context.</param>
         /// <param name="identity">the identity of this context. if this is null, the context does no security checks</param>
         /// <param name="config"></param>
+        /// <param name="lazyCtx"></param>
         /// <param name="iftFactory"></param>
-        protected BaseKistlDataContext(IMetaDataResolver metaDataResolver, Identity identity, KistlConfig config, InterfaceType.Factory iftFactory)
+        protected BaseKistlDataContext(IMetaDataResolver metaDataResolver, Identity identity, KistlConfig config, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory)
         {
             if (metaDataResolver == null) { throw new ArgumentNullException("metaDataResolver"); }
             if (config == null) { throw new ArgumentNullException("config"); }
@@ -39,6 +43,7 @@ namespace Kistl.API.Server
             this.identity = identity;
             this.config = config;
             this.iftFactory = iftFactory;
+            this.lazyCtx = lazyCtx;
         }
 
         /// <summary>
@@ -642,34 +647,58 @@ namespace Kistl.API.Server
 
         #endregion
 
-        #region IKistlContext Members
-
-
-        public int GetSequenceNumber(Guid sequenceGuid)
+        #region SequenceNumber
+        private Sequence GetSequence(Guid sequenceGuid)
         {
-            throw new NotImplementedException();
+            if (sequenceGuid == Guid.Empty) throw new ArgumentNullException("sequenceGuid");
+            var s = lazyCtx().FindPersistenceObject<Sequence>(sequenceGuid);
+            if (s == null) throw new ArgumentOutOfRangeException("sequenceGuid");
+            return s;
         }
 
-        public int GetContinuousSequenceNumber(Guid sequenceGuid)
+        protected abstract int ExecGetSequenceNumber(Guid sequenceGuid);
+        protected abstract int ExecGetContinuousSequenceNumber(Guid sequenceGuid);
+
+        public virtual int GetSequenceNumber(Guid sequenceGuid)
         {
-            throw new NotImplementedException();
+            var s = GetSequence(sequenceGuid);
+            if (s.IsContinuous) throw new InvalidOperationException("Sequence is a continuous sequence. use GetContinuousSequenceNumber instead.");
+
+            bool transactionRunning = IsTransactionRunning;
+            if (!transactionRunning)
+            {
+                BeginTransaction();
+            }
+
+            try
+            {
+                return ExecGetSequenceNumber(sequenceGuid);
+            }
+            finally
+            {
+                if (!transactionRunning)
+                {
+                    CommitTransaction();
+                }
+            }
         }
 
-        public void BeginTransaction()
+        public virtual int GetContinuousSequenceNumber(Guid sequenceGuid)
         {
-            throw new NotImplementedException();
-        }
+            var s = GetSequence(sequenceGuid);
+            if (!s.IsContinuous) throw new InvalidOperationException("Sequence is no continuous sequence. use GetSequenceNumber instead.");
+            if (!IsTransactionRunning) throw new InvalidOperationException("No transaction is running");
 
-        public void CommitTransaction()
-        {
-            throw new NotImplementedException();
+            return ExecGetContinuousSequenceNumber(sequenceGuid);
         }
+        #endregion
 
-        public void RollbackTransaction()
-        {
-            throw new NotImplementedException();
-        }
+        #region Transaction/Connection management
+        protected abstract bool IsTransactionRunning { get; }
 
+        public abstract void BeginTransaction();
+        public abstract void CommitTransaction();
+        public abstract void RollbackTransaction();
         #endregion
     }
 }

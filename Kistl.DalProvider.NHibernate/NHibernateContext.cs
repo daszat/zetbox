@@ -22,11 +22,12 @@ namespace Kistl.DalProvider.NHibernate
         public NHibernateContext(
             IMetaDataResolver metaDataResolver, 
             Identity identity, 
-            KistlConfig config, 
+            KistlConfig config,
+            Func<IFrozenContext> lazyCtx,
             InterfaceType.Factory iftFactory, 
             NHibernateImplementationType.Factory implTypeFactory, 
             global::NHibernate.ISession nhSession)
-            : base(metaDataResolver, identity, config, iftFactory)
+            : base(metaDataResolver, identity, config, lazyCtx, iftFactory)
         {
             _implTypeFactory = implTypeFactory;
             _nhSession = nhSession;
@@ -285,6 +286,40 @@ namespace Kistl.DalProvider.NHibernate
         {
             CheckDisposed();
             return _implTypeFactory(t.Type);
+        }
+
+        protected override int ExecGetSequenceNumber(Guid sequenceGuid)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override int ExecGetContinuousSequenceNumber(Guid sequenceGuid)
+        {
+            throw new NotImplementedException();
+        }
+
+        
+        protected override bool IsTransactionRunning
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public override void BeginTransaction()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void CommitTransaction()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void RollbackTransaction()
+        {
+            throw new NotImplementedException();
         }
     }
 }

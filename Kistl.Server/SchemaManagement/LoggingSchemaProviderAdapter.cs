@@ -396,6 +396,16 @@ namespace Kistl.Server.SchemaManagement
             _provider.CreatePositionColumnValidCheckProcedures(refSpecs);
         }
 
+        public void CreateSequenceNumberProcedure()
+        {
+            _provider.CreateSequenceNumberProcedure();
+        }
+
+        public void CreateContinuousSequenceNumberProcedure()
+        {
+            _provider.CreateContinuousSequenceNumberProcedure();
+        }
+
         public IDataReader ReadTableData(TableRef tblName, IEnumerable<string> colNames)
         {
             return _provider.ReadTableData(tblName, colNames);
