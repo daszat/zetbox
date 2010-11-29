@@ -110,11 +110,11 @@
 
     <FunctionImport Name="GetContinuousSequenceNumber" ReturnType="Collection(Int32)">
       <Parameter Name="seqNumber" Mode="In" Type="Guid" />
-      <Parameter Name="result" Mode="InOut" Type="Int32" />
+      <Parameter Name="result" Mode="Out" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="GetSequenceNumber" ReturnType="Collection(Int32)">
       <Parameter Name="seqNumber" Mode="In" Type="Guid" />
-      <Parameter Name="result" Mode="InOut" Type="Int32" />
+      <Parameter Name="result" Mode="Out" Type="Int32" />
     </FunctionImport>
   </EntityContainer>
   
