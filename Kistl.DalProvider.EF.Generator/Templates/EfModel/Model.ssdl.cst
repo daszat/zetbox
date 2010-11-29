@@ -447,8 +447,10 @@
 %>
 	<Function Name="GetContinuousSequenceNumber" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="seqNumber" Type="<%= schemaProvider.DbTypeToNative(DbType.Guid) %>" Mode="In" />
+		  <Parameter Name="result" Type="<%= schemaProvider.DbTypeToNative(DbType.Int32) %>" Mode="Out" />
     </Function>
     <Function Name="GetSequenceNumber" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
         <Parameter Name="seqNumber" Type="<%= schemaProvider.DbTypeToNative(DbType.Guid) %>" Mode="In" />
+		<Parameter Name="result" Type="<%= schemaProvider.DbTypeToNative(DbType.Int32) %>" Mode="Out" />
     </Function>
 </Schema>

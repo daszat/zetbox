@@ -716,15 +716,23 @@ namespace Kistl.DalProvider.Ef
             cmd.CommandText = "Entities." + procName;
             cmd.CommandType = CommandType.StoredProcedure;
 
-            var p = cmd.CreateParameter();
-            p.ParameterName = "seqNumber";
-            p.Value = sequenceGuid;
-            p.DbType = DbType.Guid;
-            p.Direction = ParameterDirection.Input;
-            cmd.Parameters.Add(p);
-            return (int)cmd.ExecuteScalar();
-        }
+            var pIn = cmd.CreateParameter();
+            pIn.ParameterName = "seqNumber";
+            pIn.Value = sequenceGuid;
+            pIn.DbType = DbType.Guid;
+            pIn.Direction = ParameterDirection.Input;
+            cmd.Parameters.Add(pIn);
 
+            var pOut = cmd.CreateParameter();
+            pOut.ParameterName = "result";
+            pOut.DbType = DbType.Int32;
+            pOut.Direction = ParameterDirection.Output;
+            cmd.Parameters.Add(pOut);
+
+            cmd.ExecuteNonQuery();
+
+            return (int)pOut.Value;
+        }
 
         private void OpenEntityConnection()
         {

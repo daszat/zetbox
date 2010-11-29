@@ -1022,13 +1022,12 @@ FROM (", viewName.Schema, viewName.Name);
         }
 
         private const string sequenceNumberProcedure = @"CREATE PROCEDURE {0} 
-@seqNumber uniqueidentifier
+@seqNumber uniqueidentifier,
+@result int OUTPUT
 AS
 BEGIN
-	DECLARE @result int
 	SELECT @result = CurrentNumber + 1 FROM dbo.Sequences WITH(UPDLOCK) WHERE ExportGuid = @seqNumber
 	UPDATE dbo.Sequences SET CurrentNumber = @result WHERE ExportGuid = @seqNumber
-	SELECT @result
 END";
 
         public override void CreateSequenceNumberProcedure()
