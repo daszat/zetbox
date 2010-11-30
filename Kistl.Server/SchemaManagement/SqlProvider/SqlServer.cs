@@ -1028,6 +1028,7 @@ AS
 BEGIN
 	SELECT @result = CurrentNumber + 1 FROM dbo.Sequences WITH(UPDLOCK) WHERE ExportGuid = @seqNumber
 	UPDATE dbo.Sequences SET CurrentNumber = @result WHERE ExportGuid = @seqNumber
+	SELECT @result -- don't ask, EF requieres for SQL server an resultset as output, for npgsql not now, because we've implemented it quick and dirty
 END";
 
         public override void CreateSequenceNumberProcedure()
