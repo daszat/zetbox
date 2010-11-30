@@ -15,7 +15,8 @@ namespace Kistl.Client.Presentables.ValueViewModels
     using Kistl.Client.Models;
     using Kistl.Client.Presentables.ValueViewModels;
 
-    public partial class ObjectReferenceViewModel
+    [ViewModelDescriptor]
+    public class ObjectReferenceViewModel
         : ValueViewModel<DataObjectViewModel, IDataObject>
     {
         public new delegate ObjectReferenceViewModel Factory(IKistlContext dataCtx, IValueModel mdl);
@@ -122,7 +123,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             {
                 foreach (ObjectClass oc in nextChildren)
                 {
-                    if(!oc.IsAbstract) children.Add(oc);
+                    if (!oc.IsAbstract) children.Add(oc);
                     CollectChildClasses(oc.ID, children);
                 };
             }
@@ -247,7 +248,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
         public void SelectValue()
         {
-            var ifType = ObjectReferenceModel.ReferencedClass.GetDescribedInterfaceType();
+            var ifType = ReferencedClass.GetDescribedInterfaceType();
             var selectionTask = ViewModelFactory.CreateViewModel<DataObjectSelectionTaskViewModel.Factory>().Invoke(
                 DataContext,
                 ifType.GetObjectClass(FrozenContext),
@@ -321,4 +322,54 @@ namespace Kistl.Client.Presentables.ValueViewModels
         }
         #endregion
     }
+
+    [ViewModelDescriptor]
+    public class ObjectReferenceDropdownViewModel : ObjectReferenceViewModel
+    {
+        public new delegate ObjectReferenceDropdownViewModel Factory(IKistlContext dataCtx, IValueModel mdl);
+
+        public ObjectReferenceDropdownViewModel(
+            IViewModelDependencies appCtx, IKistlContext dataCtx, 
+            IValueModel mdl)
+            : base(appCtx, dataCtx, mdl)
+        {
+        }
+
+        private ReadOnlyObservableCollection<DataObjectViewModel> _possibleValues;
+        public ReadOnlyObservableCollection<DataObjectViewModel> PossibleValues
+        {
+            get
+            {
+                if (_possibleValues == null)
+                {
+                    var ifType = ReferencedClass.GetDescribedInterfaceType();
+                    _possibleValues = new ReadOnlyObservableCollection<DataObjectViewModel>(
+                        new ObservableCollection<DataObjectViewModel>(
+                            DataContext.GetQuery(ifType)
+                                .Select(i => ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>(i).Invoke(DataContext, i))));
+                }
+                return _possibleValues;
+            }
+        }
+
+        private GridDisplayConfiguration _displayedColumns = null;
+        public GridDisplayConfiguration DisplayedColumns
+        {
+            get
+            {
+                if (_displayedColumns == null)
+                {
+                    _displayedColumns = CreateDisplayedColumns();
+                }
+                return _displayedColumns;
+            }
+        }
+        protected virtual GridDisplayConfiguration CreateDisplayedColumns()
+        {
+            var result = new GridDisplayConfiguration();
+            result.BuildColumns(ReferencedClass, false);
+            return result;
+        }
+    }
+
 }

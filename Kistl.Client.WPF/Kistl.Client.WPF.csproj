@@ -181,6 +181,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\KistlBase\ObjectReferenceDropdownEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\KistlBase\InstanceListHorizontalDisplay.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -460,6 +464,9 @@
     </Compile>
     <Compile Include="View\KistlBase\CompoundObjectPropertyEditor.xaml.cs">
       <DependentUpon>CompoundObjectPropertyEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\KistlBase\ObjectReferenceDropdownEditor.xaml.cs">
+      <DependentUpon>ObjectReferenceDropdownEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\KistlBase\InstanceListBaseDisplay.cs" />
     <Compile Include="View\KistlBase\InstanceListHorizontalDisplay.xaml.cs">

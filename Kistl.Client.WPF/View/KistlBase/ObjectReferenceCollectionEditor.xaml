@@ -56,7 +56,6 @@
                         </Style>
                     </ContextMenu.ItemContainerStyle>
                 </ContextMenu>
-
             </ListView.ContextMenu>
         </ListView>
     </DockPanel>

@@ -1,0 +1,55 @@
+﻿<view:PropertyEditor x:Class="Kistl.Client.WPF.View.KistlBase.ObjectReferenceDropdownEditor"
+                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"
+                     xmlns:view="clr-namespace:Kistl.Client.WPF.View.KistlBase"
+                     ToolTip="{Binding ToolTip, Mode=OneWay}">
+    <view:PropertyEditor.ContextMenu>
+        <ContextMenu ItemsSource="{Binding Commands}">
+            <ContextMenu.ItemContainerStyle>
+                <Style TargetType="MenuItem">
+                    <Setter Property="Command"
+                            Value="{Binding Converter={StaticResource CommandConverter}}" />
+                    <Setter Property="Header"
+                            Value="{Binding Label}" />
+                    <Setter Property="ToolTip"
+                            Value="{Binding ToolTip}" />
+                </Style>
+            </ContextMenu.ItemContainerStyle>
+        </ContextMenu>
+    </view:PropertyEditor.ContextMenu>
+    <DockPanel>
+        <ctrls:DropDownButton>
+            <ctrls:DropDownButton.Content>
+                <Image DockPanel.Dock="Left"
+                       Width="16"
+                       Height="16"
+                       Source="/Kistl.Client.WPF;component/Images/EditTableHS.png" />
+            </ctrls:DropDownButton.Content>
+            <ctrls:DropDownButton.DropDown>
+                <ContextMenu ItemsSource="{Binding Commands}">
+                    <ContextMenu.ItemContainerStyle>
+                        <Style TargetType="MenuItem">
+                            <Setter Property="Command"
+                                    Value="{Binding Converter={StaticResource CommandConverter}}" />
+                            <Setter Property="Header"
+                                    Value="{Binding Label}" />
+                            <Setter Property="ToolTip"
+                                    Value="{Binding ToolTip}" />
+                        </Style>
+                    </ContextMenu.ItemContainerStyle>
+                </ContextMenu>
+            </ctrls:DropDownButton.DropDown>
+        </ctrls:DropDownButton>
+        <ComboBox x:Name="cbValue"
+                  ItemsSource="{Binding PossibleValues, ValidatesOnDataErrors=true}"
+                  SelectedValue="{Binding Value}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <ContentPresenter Content="{Binding Mode=OneWay}"
+                                      ContentTemplateSelector="{StaticResource listItemTemplateSelector}" />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+    </DockPanel>
+</view:PropertyEditor>

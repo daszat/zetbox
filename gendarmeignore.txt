@@ -37,6 +37,7 @@ M: System.Linq.IQueryable`1<Kistl.API.IPersistenceObject> Kistl.DalProvider.NHib
 # generated code (wpf)
 M: System.Delegate Kistl.Client.WPF.View.KistlBase.DataObjectLineDisplay::_CreateDelegate(System.Type,System.String)
 M: System.Delegate Kistl.Client.WPF.View.KistlBase.ObjectReferenceEditor::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.KistlBase.ObjectReferenceDropdownEditor::_CreateDelegate(System.Type,System.String)
 M: System.Delegate Kistl.Client.WPF.View.KistlBase.ObjectReferenceListEditor::_CreateDelegate(System.Type,System.String)
 M: System.Delegate Kistl.Client.WPF.View.KistlBase.ObjectReferenceCollectionEditor::_CreateDelegate(System.Type,System.String)
 M: System.Delegate Kistl.Client.WPF.View.KistlBase.StringDisplay::_CreateDelegate(System.Type,System.String)
