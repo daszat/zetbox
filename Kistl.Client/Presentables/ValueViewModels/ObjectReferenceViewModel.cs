@@ -325,13 +325,24 @@ namespace Kistl.Client.Presentables.ValueViewModels
             var obj = ValueModel.Value;
             if (obj != null)
             {
-                _valueCache = ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>(ValueModel.Value).Invoke(DataContext, ValueModel.Value);
+                // TODO: 1830 MÖRDERPFUSCH!!!!!
+                if (_possibleValues != null)
+                {
+                    _valueCache = _possibleValues.OfType<DataObjectViewModel>().FirstOrDefault(i => i.Object == obj);
+                }
+
+                if (_valueCache == null)
+                {
+                    // CreateViewModel<DataObjectViewModel.Factory> is invoked here and in possible values
+                    // that's why WPF can't select the right value, because thei'r different objects
+                    _valueCache = ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>(ValueModel.Value).Invoke(DataContext, ValueModel.Value);
+                }
             }
             _valueCacheInititalized = true;
         }
         #endregion
 
-        #region DopDown support
+        #region DropDown support
         private ReadOnlyObservableCollection<ViewModel> _possibleValuesRO;
         private ObservableCollection<ViewModel> _possibleValues;
         public ReadOnlyObservableCollection<ViewModel> PossibleValues
@@ -345,13 +356,16 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
                     var mdlList = lst
                                 .Take(50)
-                                .Select(i => ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>(i).Invoke(DataContext, i))
+                                // TODO: 1830 MÖRDERPFUSCH!!!!!
+                                // CreateViewModel<DataObjectViewModel.Factory> is invoked here and in possible values
+                                // that's why WPF can't select the right value, because thei'r different objects
+                                .Select(i => _valueCache == null || _valueCache.Object != i ? ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>(i).Invoke(DataContext, i) : _valueCache)
                                 .Cast<ViewModel>()
                                 .ToList();
 
                     if (lst.Count > 50)
                     {
-                        var cmdMdl = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, "...", "More elements found", SelectValue, null);
+                        var cmdMdl = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, "More ...", "More elements found", SelectValue, null);
                         cmdMdl.RequestedKind = FrozenContext.FindPersistenceObject<ControlKind>(NamedObjects.ControlKind_Kistl_App_GUI_CommandLinkKind);
                         mdlList.Add(cmdMdl);
                     }

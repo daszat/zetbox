@@ -42,8 +42,9 @@
             </ctrls:DropDownButton.DropDown>
         </ctrls:DropDownButton>
         <ComboBox x:Name="cbValue"
-                  ItemsSource="{Binding PossibleValues, ValidatesOnDataErrors=true}"
-                  SelectedValue="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}">
+                  ItemsSource="{Binding PossibleValues, Mode=OneWay, ValidatesOnDataErrors=true}"
+                  SelectedItem="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
+                  HorizontalContentAlignment="Stretch">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <ContentPresenter Content="{Binding Mode=OneWay}"

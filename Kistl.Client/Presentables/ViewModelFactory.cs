@@ -147,6 +147,9 @@ namespace Kistl.Client.Presentables
             return CreateViewModel<TModelFactory>(ResolveFactory(desc.ViewModelRef.AsType(true)));
         }
 
+        private static int _resolveCounter = 0;
+        private static int _resolveCompileCounter = 0;
+
         // TODO: memoize this function
         public TModelFactory CreateViewModel<TModelFactory>(Type t) where TModelFactory : class
         {
@@ -160,8 +163,19 @@ namespace Kistl.Client.Presentables
             }
             try
             {
+                if ((++_resolveCounter % 100) == 0)
+                {
+                    Logging.Log.WarnFormat("CreateViewModel was called {0} times", _resolveCounter);
+                }
+
                 var factory = Container.Resolve(t);
                 if (t == typeof(TModelFactory)) return (TModelFactory)factory;
+
+                if ((++_resolveCompileCounter % 100) == 0)
+                {
+                    Logging.Log.WarnFormat("CreateViewModel with compiling a lambda was called {0} times", _resolveCompileCounter);
+                }
+
 
                 // Wrap delegate. This will implement inheritance
                 Delegate factoryDelegate = (Delegate)factory;
