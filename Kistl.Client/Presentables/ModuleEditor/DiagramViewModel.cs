@@ -102,7 +102,6 @@ namespace Kistl.Client.Presentables.ModuleEditor
         }
     }
 
-
     public class DiagramViewModel : ViewModel
     {
         public new delegate DiagramViewModel Factory(IKistlContext dataCtx, Module module);

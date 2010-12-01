@@ -12,6 +12,7 @@ namespace Kistl.Client.Models
     using Kistl.App.Base;
     using Kistl.Client.Presentables;
 using System.Collections;
+    using Kistl.App.GUI;
 
     public interface IValueModel : INotifyPropertyChanged, IDataErrorInfo
     {
@@ -45,6 +46,11 @@ using System.Collections;
         /// </summary>
         /// <returns></returns>
         object GetUntypedValue();
+
+        /// <summary>
+        /// DefaultKind override from the underlying Value model.
+        /// </summary>
+        ControlKind RequestedKind { get; }
     }
 
     public interface IValueModel<TValue> : IValueModel

@@ -103,8 +103,10 @@
     <Compile Include="Presentables\FilterViewModels\OptionalPredicateFilterViewModel.cs" />
     <Compile Include="Presentables\FilterViewModels\RangeFilterViewModel.cs" />
     <Compile Include="Presentables\FilterViewModels\SingleValueFilterViewModel.cs" />
+    <Compile Include="Presentables\GUI\ControlKindViewModel.cs" />
     <Compile Include="Presentables\KistlBase\RoleMembershipViewModel.cs" />
     <Compile Include="Presentables\KistlBase\RelationChainViewModel.cs" />
+    <Compile Include="Presentables\ModuleEditor\ControlKindHierarchyViewModel.cs" />
     <Compile Include="Presentables\ModuleEditor\TreeItemInstanceListViewModel.cs" />
     <Compile Include="Presentables\ParameterInputTaskViewModel.cs" />
     <Compile Include="Presentables\SchemaMigration\DestinationPropertyViewModel.cs" />

@@ -145,6 +145,8 @@ namespace Kistl.Client.Models
             throw new NotSupportedException("Method results cannot be cleared");
         }
 
+        public ControlKind RequestedKind { get { return null; } }
+
         public abstract object GetUntypedValue();
         #endregion
 

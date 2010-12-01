@@ -108,7 +108,7 @@ namespace Kistl.Client.WPF
                 this.Resources["IconConverter"] = new IconConverter(config.Client.DocumentStore, container.Resolve<IFrozenContext>());
                 var templateSelectorFactory = container.Resolve<Kistl.Client.WPF.View.VisualTypeTemplateSelector.Factory>();
                 this.Resources["defaultTemplateSelector"] = templateSelectorFactory(null);
-                this.Resources["listItemTemplateSelector"] = templateSelectorFactory("Kistl.App.GUI.SingleLineDataObjectKind");
+                this.Resources["listItemTemplateSelector"] = templateSelectorFactory("Kistl.App.GUI.SingleLineKind");
                 this.Resources["dashBoardTemplateSelector"] = templateSelectorFactory("Kistl.App.GUI.DashboardKind");
 
                 RunFixes(container.Resolve<IKistlContext>());

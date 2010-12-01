@@ -23,7 +23,7 @@ namespace Kistl.Client.WPF.View.KistlBase
     /// Interaction logic for ObjectReferenceEditor.xaml
     /// </summary>
     [ViewDescriptor(Kistl.App.GUI.Toolkit.WPF)]
-    public partial class ObjectReferenceDropdownEditor : PropertyEditor, IHasViewModel<ObjectReferenceDropdownViewModel>
+    public partial class ObjectReferenceDropdownEditor : PropertyEditor, IHasViewModel<ObjectReferenceViewModel>
     {
         public ObjectReferenceDropdownEditor()
         {
@@ -96,11 +96,11 @@ namespace Kistl.Client.WPF.View.KistlBase
         }
         #endregion
 
-        #region IHasViewModel<ObjectReferenceDropdownViewModel> Members
+        #region IHasViewModel<ObjectReferenceViewModel> Members
 
-        public ObjectReferenceDropdownViewModel ViewModel
+        public ObjectReferenceViewModel ViewModel
         {
-            get { return (ObjectReferenceDropdownViewModel)DataContext; }
+            get { return (ObjectReferenceViewModel)DataContext; }
         }
 
         #endregion

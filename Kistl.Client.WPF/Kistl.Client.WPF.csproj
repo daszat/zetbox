@@ -181,6 +181,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\KistlBase\CommandDisplay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\KistlBase\CommandLinkDisplay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\KistlBase\ObjectReferenceDropdownEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -270,6 +278,10 @@
     <Page Include="View\KistlBase\TextValueSelectionView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ModuleEditor\ControlKindHierarchyDisplay.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -465,6 +477,12 @@
     <Compile Include="View\KistlBase\CompoundObjectPropertyEditor.xaml.cs">
       <DependentUpon>CompoundObjectPropertyEditor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\KistlBase\CommandDisplay.xaml.cs">
+      <DependentUpon>CommandDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\KistlBase\CommandLinkDisplay.xaml.cs">
+      <DependentUpon>CommandLinkDisplay.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\KistlBase\ObjectReferenceDropdownEditor.xaml.cs">
       <DependentUpon>ObjectReferenceDropdownEditor.xaml</DependentUpon>
     </Compile>
@@ -522,6 +540,9 @@
     <Compile Include="View\ModuleEditor\Converter\EdgeRouteToLabelConverter.cs" />
     <Compile Include="View\ModuleEditor\Converter\EdgeRouteToPathConverter.cs" />
     <Compile Include="View\ModuleEditor\Converter\GraphConverterHelper.cs" />
+    <Compile Include="View\ModuleEditor\ControlKindHierarchyDisplay.xaml.cs">
+      <DependentUpon>ControlKindHierarchyDisplay.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ModuleEditor\DiagramDisplay.xaml.cs">
       <DependentUpon>DiagramDisplay.xaml</DependentUpon>
     </Compile>

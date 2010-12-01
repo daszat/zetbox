@@ -43,7 +43,7 @@
         </ctrls:DropDownButton>
         <ComboBox x:Name="cbValue"
                   ItemsSource="{Binding PossibleValues, ValidatesOnDataErrors=true}"
-                  SelectedValue="{Binding Value}">
+                  SelectedValue="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <ContentPresenter Content="{Binding Mode=OneWay}"

@@ -160,9 +160,12 @@ namespace Kistl.Client.Presentables.ModuleEditor
                     lst.Add(lstMdl);
 
                     // ControlKinds
-                    lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, null, DataContext.GetQuery<ControlKind>());
-                    lstMdl.Filter.Add(new ConstantValueFilterModel("Module = @0", CurrentModule));
-                    lst.Add(lstMdl);
+                    //lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, null, DataContext.GetQuery<ControlKind>());
+                    //lstMdl.Filter.Add(new ConstantValueFilterModel("Module = @0", CurrentModule));
+                    //lst.Add(lstMdl);
+
+                    var ctrlKindMdl = ViewModelFactory.CreateViewModel<ControlKindHierarchyViewModel.Factory>().Invoke(DataContext, CurrentModule);
+                    lst.Add(ctrlKindMdl);
 
                     // Relation
                     lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, null, DataContext.GetQuery<Relation>());

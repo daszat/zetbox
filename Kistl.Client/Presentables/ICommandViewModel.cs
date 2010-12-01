@@ -238,6 +238,7 @@ namespace Kistl.Client.Presentables
         #endregion
     }
 
+    [ViewModelDescriptor]
     public sealed class SimpleCommandViewModel : CommandViewModel
     {
         public new delegate SimpleCommandViewModel Factory(IKistlContext dataCtx, string label, string tooltip, Action execute, Func<bool> canExecute);
@@ -345,7 +346,6 @@ namespace Kistl.Client.Presentables
 
         protected abstract void DoExecute(IEnumerable<T> data);
     }
-
 
     public sealed class SimpleItemCommandViewModel<T> : ItemCommandViewModel<T>
     {

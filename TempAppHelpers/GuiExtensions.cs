@@ -92,7 +92,16 @@ namespace Kistl.App.Extensions
 
             if (candidates.Count == 0)
             {
-                Logging.Log.WarnFormat("Couldn't find ViewDescriptor for '{1}' matching ControlKind: '{0}'", requestedControlKind, self.GetType().FullName);
+                // Try parent
+                var parent =  self.ViewModelRef.Parent != null ? self.ViewModelRef.Parent.GetViewModelDescriptor() : null;
+                if (parent != null)
+                {
+                    result = GetViewDescriptor(parent, tk, requestedControlKind);
+                }
+                else
+                {
+                    Logging.Log.WarnFormat("Couldn't find ViewDescriptor for '{1}' matching ControlKind: '{0}'", requestedControlKind, self.ViewModelRef);
+                }
             }
             else if (candidates.Count == 1)
             {

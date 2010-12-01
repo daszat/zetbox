@@ -14,6 +14,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
     using Kistl.App.Extensions;
     using Kistl.Client.Models;
     using Kistl.Client.Presentables.ValueViewModels;
+    using Kistl.App.GUI;
 
     [ViewModelDescriptor]
     public class ObjectReferenceViewModel
@@ -308,6 +309,14 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 _valueCache = value;
                 _valueCacheInititalized = true;
                 ValueModel.Value = value != null ? value.Object : null;
+                if (_possibleValues != null)
+                {
+                    // Add if not found
+                    if (!_possibleValues.Contains(value))
+                    {
+                        _possibleValues.Add(value);
+                    }
+                }
             }
         }
 
@@ -321,34 +330,36 @@ namespace Kistl.Client.Presentables.ValueViewModels
             _valueCacheInititalized = true;
         }
         #endregion
-    }
 
-    [ViewModelDescriptor]
-    public class ObjectReferenceDropdownViewModel : ObjectReferenceViewModel
-    {
-        public new delegate ObjectReferenceDropdownViewModel Factory(IKistlContext dataCtx, IValueModel mdl);
-
-        public ObjectReferenceDropdownViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx, 
-            IValueModel mdl)
-            : base(appCtx, dataCtx, mdl)
-        {
-        }
-
-        private ReadOnlyObservableCollection<DataObjectViewModel> _possibleValues;
-        public ReadOnlyObservableCollection<DataObjectViewModel> PossibleValues
+        #region DopDown support
+        private ReadOnlyObservableCollection<ViewModel> _possibleValuesRO;
+        private ObservableCollection<ViewModel> _possibleValues;
+        public ReadOnlyObservableCollection<ViewModel> PossibleValues
         {
             get
             {
                 if (_possibleValues == null)
                 {
                     var ifType = ReferencedClass.GetDescribedInterfaceType();
-                    _possibleValues = new ReadOnlyObservableCollection<DataObjectViewModel>(
-                        new ObservableCollection<DataObjectViewModel>(
-                            DataContext.GetQuery(ifType)
-                                .Select(i => ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>(i).Invoke(DataContext, i))));
+                    var lst = DataContext.GetQuery(ifType).Take(51).ToList();
+
+                    var mdlList = lst
+                                .Take(50)
+                                .Select(i => ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>(i).Invoke(DataContext, i))
+                                .Cast<ViewModel>()
+                                .ToList();
+
+                    if (lst.Count > 50)
+                    {
+                        var cmdMdl = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, "...", "More elements found", SelectValue, null);
+                        cmdMdl.RequestedKind = FrozenContext.FindPersistenceObject<ControlKind>(NamedObjects.ControlKind_Kistl_App_GUI_CommandLinkKind);
+                        mdlList.Add(cmdMdl);
+                    }
+
+                    _possibleValues = new ObservableCollection<ViewModel>(mdlList);
+                    _possibleValuesRO = new ReadOnlyObservableCollection<ViewModel>(_possibleValues);
                 }
-                return _possibleValues;
+                return _possibleValuesRO;
             }
         }
 
@@ -370,6 +381,6 @@ namespace Kistl.Client.Presentables.ValueViewModels
             result.BuildColumns(ReferencedClass, false);
             return result;
         }
+        #endregion
     }
-
 }

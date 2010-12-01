@@ -64,11 +64,17 @@ namespace Kistl.Client.Models
     public abstract class BaseValueModel : IValueModel
     {
         public BaseValueModel(string label, string description, bool allowNullInput, bool isReadOnly)
+            : this(label, description, allowNullInput, isReadOnly, null)
+        {
+        }
+
+        public BaseValueModel(string label, string description, bool allowNullInput, bool isReadOnly, ControlKind requestedKind)
         {
             this.Label = label;
             this.Description = description;
             this.AllowNullInput = allowNullInput;
             this.IsReadOnly = isReadOnly;
+            this.RequestedKind = requestedKind;
         }
 
         #region IValueModel Members
@@ -84,6 +90,8 @@ namespace Kistl.Client.Models
         public abstract void ClearValue();
 
         public abstract object GetUntypedValue();
+
+        public ControlKind RequestedKind { get; private set; }
         #endregion
 
         #region INotifyPropertyChanged Members
@@ -167,6 +175,11 @@ namespace Kistl.Client.Models
         {
         }
 
+        public ValueModel(string label, string description, bool allowNullInput, bool isReadOnly, ControlKind requestedKind)
+            : base(label, description, allowNullInput, isReadOnly, requestedKind)
+        {
+        }
+
         #region IValueModel<TValue> Members
 
         public abstract TValue Value { get; set; }
@@ -187,6 +200,11 @@ namespace Kistl.Client.Models
     {
         public NullableStructValueModel(string label, string description, bool allowNullInput, bool isReadOnly)
             : base(label, description, allowNullInput, isReadOnly)
+        {
+        }
+
+        public NullableStructValueModel(string label, string description, bool allowNullInput, bool isReadOnly, ControlKind requestedKind)
+            : base(label, description, allowNullInput, isReadOnly, requestedKind)
         {
         }
 
@@ -221,6 +239,11 @@ namespace Kistl.Client.Models
         {
         }
 
+        public DateTimeValueModel(string label, string description, bool allowNullInput, bool isReadOnly, ControlKind requestedKind)
+            : base(label, description, allowNullInput, isReadOnly, requestedKind)
+        {
+        }
+
         public DateTimeStyles DateTimeStyle
         {
             get { return DateTimeStyles.DateTime; }
@@ -232,6 +255,11 @@ namespace Kistl.Client.Models
     {
         public ClassValueModel(string label, string description, bool allowNullInput, bool isReadOnly)
             : base(label, description, allowNullInput, isReadOnly)
+        {
+        }
+
+        public ClassValueModel(string label, string description, bool allowNullInput, bool isReadOnly, ControlKind requestedKind)
+            : base(label, description, allowNullInput, isReadOnly, requestedKind)
         {
         }
 
@@ -262,7 +290,12 @@ namespace Kistl.Client.Models
     public class ObjectReferenceValueModel : ClassValueModel<IDataObject>, IObjectReferenceValueModel
     {
         public ObjectReferenceValueModel(string label, string description, bool allowNullInput, bool isReadOnly, ObjectClass referencedClass)
-            : base(label, description, allowNullInput, isReadOnly)
+            : this(label, description, allowNullInput, isReadOnly, null, referencedClass)
+        {
+        }
+
+        public ObjectReferenceValueModel(string label, string description, bool allowNullInput, bool isReadOnly, ControlKind requestedKind, ObjectClass referencedClass)
+            : base(label, description, allowNullInput, isReadOnly, requestedKind)
         {
             this.ReferencedClass = referencedClass;
         }
@@ -280,10 +313,16 @@ namespace Kistl.Client.Models
     public class CompoundObjectValueModel : ClassValueModel<ICompoundObject>, ICompoundObjectValueModel
     {
         public CompoundObjectValueModel(string label, string description, bool allowNullInput, bool isReadOnly, CompoundObject def)
-            : base(label, description, allowNullInput, isReadOnly)
+            : this(label, description, allowNullInput, isReadOnly, null, def)
+        {
+        }
+
+        public CompoundObjectValueModel(string label, string description, bool allowNullInput, bool isReadOnly, ControlKind requestedKind, CompoundObject def)
+            : base(label, description, allowNullInput, isReadOnly, requestedKind)
         {
             this.CompoundObjectDefinition = def;
         }
+
 
         #region IObjectReferenceValueModel Members
 
@@ -302,6 +341,12 @@ namespace Kistl.Client.Models
 
         public EnumerationValueModel(string label, string description, bool allowNullInput, bool isReadOnly, Enumeration enumeration)
             : base(label, description, allowNullInput, isReadOnly)
+        {
+            this.enumDef = enumeration;
+        }
+
+        public EnumerationValueModel(string label, string description, bool allowNullInput, bool isReadOnly, ControlKind requestedKind, Enumeration enumeration)
+            : base(label, description, allowNullInput, isReadOnly, requestedKind)
         {
             this.enumDef = enumeration;
         }

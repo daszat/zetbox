@@ -43,6 +43,18 @@ namespace Kistl.Client.Presentables.ValueViewModels
             get { return ValueModel.Label; }
         }
 
+        public override App.GUI.ControlKind RequestedKind
+        {
+            get
+            {
+                return base.RequestedKind ?? ValueModel.RequestedKind;
+            }
+            set
+            {
+                base.RequestedKind = value;
+            }
+        }
+
         #region Utilities and UI callbacks
         protected virtual void NotifyValueChanged()
         {

@@ -95,35 +95,35 @@ namespace Kistl.Client.Models
 
             if (prop is IntProperty)
             {
-                return new NullableStructValueModel<int>(lb, prop.Description, prop.IsNullable(), false);
+                return new NullableStructValueModel<int>(lb, prop.Description, prop.IsNullable(), false, prop.RequestedKind);
             }
             else if (prop is BoolProperty)
             {
-                return new NullableStructValueModel<bool>(lb, prop.Description, prop.IsNullable(), false);
+                return new NullableStructValueModel<bool>(lb, prop.Description, prop.IsNullable(), false, prop.RequestedKind);
             }
             else if (prop is DoubleProperty)
             {
-                return new NullableStructValueModel<double>(lb, prop.Description, prop.IsNullable(), false);
+                return new NullableStructValueModel<double>(lb, prop.Description, prop.IsNullable(), false, prop.RequestedKind);
             }
             else if (prop is DecimalProperty)
             {
-                return new NullableStructValueModel<decimal>(lb, prop.Description, prop.IsNullable(), false);
+                return new NullableStructValueModel<decimal>(lb, prop.Description, prop.IsNullable(), false, prop.RequestedKind);
             }
             else if (prop is GuidProperty)
             {
-                return new NullableStructValueModel<Guid>(lb, prop.Description, prop.IsNullable(), false);
+                return new NullableStructValueModel<Guid>(lb, prop.Description, prop.IsNullable(), false, prop.RequestedKind);
             }
             else if (prop is DateTimeProperty)
             {
-                return new DateTimeValueModel(lb, prop.Description, prop.IsNullable(), false);
+                return new DateTimeValueModel(lb, prop.Description, prop.IsNullable(), false, prop.RequestedKind);
             }
             else if (prop is EnumerationProperty)
             {
-                return new EnumerationValueModel(lb, prop.Description, prop.IsNullable(), false, ((EnumerationProperty)prop).Enumeration);
+                return new EnumerationValueModel(lb, prop.Description, prop.IsNullable(), false, prop.RequestedKind, ((EnumerationProperty)prop).Enumeration);
             }
             else if (prop is StringProperty)
             {
-                return new ClassValueModel<string>(lb, prop.Description, prop.IsNullable(), false);
+                return new ClassValueModel<string>(lb, prop.Description, prop.IsNullable(), false, prop.RequestedKind);
             }
             else if (prop is ObjectReferenceProperty)
             {
@@ -142,12 +142,12 @@ namespace Kistl.Client.Models
                 }
                 else
                 {
-                    return new ObjectReferenceValueModel(lb, prop.Description, prop.IsNullable(), false, objRefProp.GetReferencedObjectClass());
+                    return new ObjectReferenceValueModel(lb, prop.Description, prop.IsNullable(), false, prop.RequestedKind, objRefProp.GetReferencedObjectClass());
                 }
             }
             else if (prop is CompoundObjectProperty)
             {
-                return new CompoundObjectValueModel(lb, prop.Description, prop.IsNullable(), false, ((CompoundObjectProperty)prop).CompoundObjectDefinition);
+                return new CompoundObjectValueModel(lb, prop.Description, prop.IsNullable(), false, prop.RequestedKind, ((CompoundObjectProperty)prop).CompoundObjectDefinition);
             }
 
             throw new NotImplementedException(string.Format("GetValueModel is not implemented for {0} properties yet", prop.GetPropertyTypeString()));
@@ -228,6 +228,8 @@ namespace Kistl.Client.Models
         public abstract void ClearValue();
 
         public abstract object GetUntypedValue();
+
+        public ControlKind RequestedKind { get { return Property.RequestedKind; } }
         #endregion
 
         #region INotifyPropertyChanged Members
