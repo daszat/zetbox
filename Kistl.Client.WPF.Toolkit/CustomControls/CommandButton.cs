@@ -10,6 +10,7 @@ namespace Kistl.Client.WPF.CustomControls
     using System.Windows.Data;
     using Kistl.Client.Presentables;
     using System.ComponentModel;
+    using System.Windows.Media;
     
     public class CommandButton
         : Button
@@ -49,6 +50,19 @@ namespace Kistl.Client.WPF.CustomControls
         // Using a DependencyProperty as the backing store for CommandViewModel.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CommandViewModelProperty =
             DependencyProperty.Register("CommandViewModel", typeof(ICommandViewModel), typeof(CommandButton));
+
+
+
+        public ImageSource Image
+        {
+            get { return (ImageSource)GetValue(ImageProperty); }
+            set { SetValue(ImageProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Image.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ImageProperty =
+            DependencyProperty.Register("Image", typeof(ImageSource), typeof(CommandButton));
+
 
     }
 }

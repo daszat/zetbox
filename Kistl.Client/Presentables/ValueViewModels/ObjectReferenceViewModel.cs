@@ -392,6 +392,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                         .Take(PossibleValuesLimit)
                         .Select(i => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, i))
                         .Cast<ViewModel>()
+                        .OrderBy(v => v.Name)
                         .ToList();
 
             needMoreButton = lst.Count > PossibleValuesLimit;

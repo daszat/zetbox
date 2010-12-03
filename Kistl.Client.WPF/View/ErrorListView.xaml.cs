@@ -16,20 +16,25 @@ namespace Kistl.Client.WPF.View
     
     using Kistl.Client.Presentables;
     using Kistl.Client.WPF.CustomControls;
+using Kistl.Client.GUI;
 
     /// <summary>
     /// Interaction logic for ErrorListView.xaml
     /// </summary>
-    public partial class ErrorListView : WindowView
+    public partial class ErrorListView : WindowView, IHasViewModel<ErrorListViewModel>
     {
         public ErrorListView()
         {
             InitializeComponent();
         }
 
-        private void Refresh_Click(object sender, RoutedEventArgs e)
+        #region IHasViewModel<ErrorListViewModel> Members
+
+        public ErrorListViewModel ViewModel
         {
-            ((ErrorListViewModel)DataContext).RefreshErrors();
+            get { return (ErrorListViewModel)DataContext; }
         }
+
+        #endregion
     }
 }

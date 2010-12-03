@@ -5,14 +5,14 @@
     x:Name="MyCtrl"
     Background="Transparent" AllowsTransparency="True"
     ResizeMode="NoResize" WindowStartupLocation="CenterScreen" ShowInTaskbar="False">
-    <Border CornerRadius="10,10,10,10" BorderThickness="1" BorderBrush="Navy" Background="White">
+    <Border CornerRadius="10 10 10 10" BorderThickness="1" BorderBrush="Navy" Background="White">
         <StackPanel>
-            <TextBlock HorizontalAlignment="Center" Margin="0,30,0,0" FontWeight="Bold" 
+            <TextBlock HorizontalAlignment="Center" Margin="0 30 0 0" FontWeight="Bold" 
                    Text="{Binding  ElementName=MyCtrl, Path=Message}" />
-            <ProgressBar Margin="10,10,10,0" Height="15"
+            <ProgressBar Margin="10 10 10 0" Height="15"
                      Maximum="{Binding  ElementName=MyCtrl, Path=Steps}"
                      Value="{Binding  ElementName=MyCtrl, Path=CurrentStep}" />
-            <TextBlock Name="txtInfo" HorizontalAlignment="Center" Margin="0,10,0,0"
+            <TextBlock Name="txtInfo" HorizontalAlignment="Center" Margin="0 10 0 0"
                    Text="{Binding  ElementName=MyCtrl, Path=Info}" />
         </StackPanel>
     </Border>

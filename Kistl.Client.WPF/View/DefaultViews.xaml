@@ -10,35 +10,21 @@
                 Value="Bold" />
     </Style>
 
-    <DataTemplate x:Key="emptyTemplate">
-        <Viewbox Stretch="UniformToFill"
-                 StretchDirection="DownOnly">
-            <Ellipse Height="100"
-                     Width="100"
-                     StrokeThickness="10"
-                     Stroke="Red"
-                     Fill="White" />
-        </Viewbox>
-    </DataTemplate>
-
-    <DataTemplate x:Key="nullTemplate">
-        <TextBlock FontWeight="Bold">(null)</TextBlock>
-    </DataTemplate>
-
-    <DataTemplate x:Key="GridHeaderTemplateArrowUp">
-        <StackPanel Orientation="Horizontal">
-            <ContentPresenter Content="{Binding}" />
-            <TextBlock Text="^"
-                       Margin="10 0 0 0" />
-        </StackPanel>
-    </DataTemplate>
-    <DataTemplate x:Key="GridHeaderTemplateArrowDown">
-        <StackPanel Orientation="Horizontal">
-            <ContentPresenter Content="{Binding}" />
-            <TextBlock Text="v"
-                       Margin="10 0 0 0" />
-        </StackPanel>
-    </DataTemplate>
+    <Style x:Key="ImageButton"
+           TargetType="{x:Type ctrls:CommandButton}">
+        <Setter Property="ContentTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{Binding Path=(ctrls:CommandButton.Image), RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ctrls:CommandButton}}}" />
+                        <ContentPresenter Content="{Binding Path=Content, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ctrls:CommandButton}}}"
+                                          Margin="5 0 0 0"
+                                          VerticalAlignment="Center" />
+                    </StackPanel>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
     <!-- from http://stackoverflow.com/questions/780426/link-button-in-wpf by Anderson Imes -->
     <Style x:Key="LinkButton"
@@ -69,4 +55,34 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+
+    <DataTemplate x:Key="emptyTemplate">
+        <Viewbox Stretch="UniformToFill"
+                 StretchDirection="DownOnly">
+            <Ellipse Height="100"
+                     Width="100"
+                     StrokeThickness="10"
+                     Stroke="Red"
+                     Fill="White" />
+        </Viewbox>
+    </DataTemplate>
+
+    <DataTemplate x:Key="nullTemplate">
+        <TextBlock FontWeight="Bold">(null)</TextBlock>
+    </DataTemplate>
+
+    <DataTemplate x:Key="GridHeaderTemplateArrowUp">
+        <StackPanel Orientation="Horizontal">
+            <ContentPresenter Content="{Binding}" />
+            <TextBlock Text="^"
+                       Margin="10 0 0 0" />
+        </StackPanel>
+    </DataTemplate>
+    <DataTemplate x:Key="GridHeaderTemplateArrowDown">
+        <StackPanel Orientation="Horizontal">
+            <ContentPresenter Content="{Binding}" />
+            <TextBlock Text="v"
+                       Margin="10 0 0 0" />
+        </StackPanel>
+    </DataTemplate>
 </ResourceDictionary>

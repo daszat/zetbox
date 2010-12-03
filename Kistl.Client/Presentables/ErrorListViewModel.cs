@@ -27,7 +27,7 @@ namespace Kistl.Client.Presentables
     /// A simple model presenting a list of errors from constraints of the specified DataContext.
     /// </summary>
     public class ErrorListViewModel
-        : ViewModel
+        : WindowViewModel
     {
         public new delegate ErrorListViewModel Factory(IKistlContext dataCtx);
 
@@ -48,6 +48,37 @@ namespace Kistl.Client.Presentables
         public ReadOnlyObservableCollection<ErrorDescriptor> Errors
         {
             get { return _roErrors; }
+        }
+
+        private ICommandViewModel _CloseCommand = null;
+        public ICommandViewModel CloseCommand
+        {
+            get
+            {
+                if (_CloseCommand == null)
+                {
+                    _CloseCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, "Close", "Closes this view", Close, null);
+                }
+                return _CloseCommand;
+            }
+        }
+
+        public void Close()
+        {
+            this.Show = false;
+        }
+
+        private ICommandViewModel _RefreshErrorsCommand = null;
+        public ICommandViewModel RefreshErrorsCommand
+        {
+            get
+            {
+                if (_RefreshErrorsCommand == null)
+                {
+                    _RefreshErrorsCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, "Refresh Errors", "Reevaluate errors", RefreshErrors, null);
+                }
+                return _RefreshErrorsCommand;
+            }
         }
 
         public void RefreshErrors()

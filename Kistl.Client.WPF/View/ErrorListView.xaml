@@ -9,8 +9,8 @@
     <DockPanel>
         <UniformGrid DockPanel.Dock="Bottom"
                      Rows="1">
-            <Button Click="Refresh_Click">Refresh</Button>
-            <Button>Close</Button>
+            <ctrls:CommandButton CommandViewModel="{Binding RefreshErrorsCommand}" />
+            <ctrls:CommandButton CommandViewModel="{Binding CloseCommand}" />
         </UniformGrid>
         <ListView ItemsSource="{Binding Errors}">
             <ListView.ItemTemplate>
