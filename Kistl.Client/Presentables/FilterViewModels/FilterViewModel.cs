@@ -99,10 +99,7 @@ namespace Kistl.Client.Presentables.FilterViewModels
                 {
                     _Arguments = new ObservableCollection<IValueViewModel>(
                         Filter.FilterArguments
-                            .Select(f =>
-                                ViewModelFactory
-                                    .CreateViewModel<BaseValueViewModel.Factory>(f.ViewModelType)
-                                    .Invoke(DataContext, f.Value))
+                            .Select(f => BaseValueViewModel.Fetch(ViewModelFactory, DataContext, f.ViewModelType, f.Value))
                             .Cast<IValueViewModel>()
                     );
                 }

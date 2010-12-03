@@ -72,7 +72,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             var obj = ValueModel.Value;
             if (obj != null)
             {
-                _valueCache = ViewModelFactory.CreateViewModel<CompoundObjectViewModel.Factory>().Invoke(DataContext, obj);
+                _valueCache = CompoundObjectViewModel.Fetch(ViewModelFactory, DataContext, obj);
             }
             _valueCacheInititalized = true;
         }

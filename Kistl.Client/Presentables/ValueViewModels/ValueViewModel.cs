@@ -11,10 +11,31 @@ namespace Kistl.Client.Presentables.ValueViewModels
     using Kistl.App.Base;
     using Kistl.Client.Models;
     using Kistl.Client.Presentables.GUI;
+    using Kistl.App.GUI;
 
     public abstract class BaseValueViewModel : ViewModel, IValueViewModel, IFormattedValueViewModel, IDataErrorInfo, ILabeledViewModel
     {
         public new delegate BaseValueViewModel Factory(IKistlContext dataCtx, IValueModel mdl);
+
+        public static BaseValueViewModel Fetch(IViewModelFactory f, IKistlContext dataCtx, Property prop, IValueModel mdl)
+        {
+            return (BaseValueViewModel)dataCtx.GetViewModelCache().LookupOrCreate(mdl, () => f.CreateViewModel<BaseValueViewModel.Factory>(prop).Invoke(dataCtx, mdl));
+        }
+
+        public static BaseValueViewModel Fetch(IViewModelFactory f, IKistlContext dataCtx, Method m, IValueModel mdl)
+        {
+            return (BaseValueViewModel)dataCtx.GetViewModelCache().LookupOrCreate(mdl, () => f.CreateViewModel<BaseValueViewModel.Factory>(m).Invoke(dataCtx, mdl));
+        }
+
+        public static BaseValueViewModel Fetch(IViewModelFactory f, IKistlContext dataCtx, ViewModelDescriptor desc, IValueModel mdl)
+        {
+            return (BaseValueViewModel)dataCtx.GetViewModelCache().LookupOrCreate(mdl, () => f.CreateViewModel<BaseValueViewModel.Factory>(desc).Invoke(dataCtx, mdl));
+        }
+
+        public static BaseValueViewModel Fetch(IViewModelFactory f, IKistlContext dataCtx, BaseParameter param, IValueModel mdl)
+        {
+            return (BaseValueViewModel)dataCtx.GetViewModelCache().LookupOrCreate(mdl, () => f.CreateViewModel<BaseValueViewModel.Factory>(param).Invoke(dataCtx, mdl));
+        }
 
         public BaseValueViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, IValueModel mdl)
             : base(dependencies, dataCtx)

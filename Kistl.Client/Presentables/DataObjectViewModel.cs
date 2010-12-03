@@ -27,6 +27,11 @@ namespace Kistl.Client.Presentables
     {
         public new delegate DataObjectViewModel Factory(IKistlContext dataCtx, IDataObject obj);
 
+        public static DataObjectViewModel Fetch(IViewModelFactory f, IKistlContext dataCtx, IDataObject obj)
+        {
+            return (DataObjectViewModel)dataCtx.GetViewModelCache().LookupOrCreate(obj, () => f.CreateViewModel<DataObjectViewModel.Factory>(obj).Invoke(dataCtx, obj));
+        }
+
         protected readonly KistlConfig config;
 
         public DataObjectViewModel(
@@ -85,7 +90,7 @@ namespace Kistl.Client.Presentables
                 FetchPropertyList();
                 _propertyModels = new LookupDictionary<Property, Property, BaseValueViewModel>(_propertyList, k => k, v =>
                 {
-                    var result = ViewModelFactory.CreateViewModel<BaseValueViewModel.Factory>(v).Invoke(DataContext, v.GetPropertyValueModel(Object));
+                    var result = BaseValueViewModel.Fetch(ViewModelFactory, DataContext, v, v.GetPropertyValueModel(Object));
                     result.IsReadOnly = IsReadOnly;
                     return result;
                 });
@@ -291,7 +296,7 @@ namespace Kistl.Client.Presentables
                 _MethodModels = new LookupDictionary<Method, Method, BaseValueViewModel>(
                     _MethodList,
                     k => k,
-                    v => ViewModelFactory.CreateViewModel<BaseValueViewModel.Factory>(v.GetReturnParameter()).Invoke(DataContext, v.GetValueModel(Object))
+                    v => BaseValueViewModel.Fetch(ViewModelFactory, DataContext, v, v.GetValueModel(Object))
                 );
             }
         }

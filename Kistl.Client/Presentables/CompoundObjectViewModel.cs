@@ -19,6 +19,11 @@ namespace Kistl.Client.Presentables
     {
         public new delegate CompoundObjectViewModel Factory(IKistlContext dataCtx, ICompoundObject obj);
 
+        public static CompoundObjectViewModel Fetch(IViewModelFactory f, IKistlContext dataCtx, ICompoundObject obj)
+        {
+            return (CompoundObjectViewModel)dataCtx.GetViewModelCache().LookupOrCreate(obj, () => f.CreateViewModel<CompoundObjectViewModel.Factory>(obj).Invoke(dataCtx, obj));
+        }
+
         protected readonly KistlConfig config;
 
         public CompoundObjectViewModel(
@@ -55,7 +60,7 @@ namespace Kistl.Client.Presentables
                 {
                     _propertyModels = new ReadOnlyProjectedList<Property, BaseValueViewModel>(
                         FetchPropertyList().ToList(),
-                        property => ViewModelFactory.CreateViewModel<BaseValueViewModel.Factory>(property).Invoke(DataContext, property.GetPropertyValueModel(Object)),
+                        property => BaseValueViewModel.Fetch(ViewModelFactory, DataContext, property, property.GetPropertyValueModel(Object)),
                         m => null); //m.Property);
                 }
                 return _propertyModels;
@@ -70,7 +75,7 @@ namespace Kistl.Client.Presentables
                 {
                     _propertyModelsByName = new LookupDictionary<string, Property, ViewModel>(FetchPropertyList().ToList(), 
                         prop => prop.Name,
-                        prop => ViewModelFactory.CreateViewModel<BaseValueViewModel.Factory>(prop).Invoke(DataContext, prop.GetPropertyValueModel(Object)));
+                        prop => BaseValueViewModel.Fetch(ViewModelFactory, DataContext, prop, prop.GetPropertyValueModel(Object)));
                 }
                 return _propertyModelsByName;
             }
