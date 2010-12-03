@@ -332,6 +332,25 @@ namespace Kistl.Client.Presentables.ValueViewModels
         #endregion
 
         #region DropDown support
+
+        private int _possibleValuesLimit = 50;
+        public int PossibleValuesLimit
+        {
+            get
+            {
+                return _possibleValuesLimit;
+            }
+            set
+            {
+                if (_possibleValuesLimit != value)
+                {
+                    _possibleValuesLimit = value;
+                    ResetPossibleValues();
+                    OnPropertyChanged("PossibleValuesLimit");
+                }
+            }
+        }
+
         private ReadOnlyObservableCollection<ViewModel> _possibleValuesRO;
         private ObservableCollection<ViewModel> _possibleValues;
         public ReadOnlyObservableCollection<ViewModel> PossibleValues
@@ -340,27 +359,65 @@ namespace Kistl.Client.Presentables.ValueViewModels
             {
                 if (_possibleValues == null)
                 {
-                    var ifType = ReferencedClass.GetDescribedInterfaceType();
-                    var lst = DataContext.GetQuery(ifType).Take(51).ToList();
-
-                    var mdlList = lst
-                                .Take(50)
-                                .Select(i => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, i))
-                                .Cast<ViewModel>()
-                                .ToList();
-
-                    if (lst.Count > 50)
+                    bool needMoreButton;
+                    var mdlList = GetPossibleValues(out needMoreButton);
+                    if (needMoreButton)
                     {
                         var cmdMdl = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, "More ...", "More elements found", SelectValue, null);
                         cmdMdl.RequestedKind = FrozenContext.FindPersistenceObject<ControlKind>(NamedObjects.ControlKind_Kistl_App_GUI_CommandLinkKind);
                         mdlList.Add(cmdMdl);
                     }
-
                     _possibleValues = new ObservableCollection<ViewModel>(mdlList);
                     _possibleValuesRO = new ReadOnlyObservableCollection<ViewModel>(_possibleValues);
                 }
                 return _possibleValuesRO;
             }
+        }
+
+        protected virtual List<ViewModel> GetPossibleValues(out bool needMoreButton)
+        {
+            var ifType = ReferencedClass.GetDescribedInterfaceType();
+            var qry = DataContext.GetQuery(ifType);
+            qry = ApplyFilter(qry);
+            // Abort query of null was returned
+            if (qry == null)
+            {
+                needMoreButton = false;
+                return new List<ViewModel>();
+            }
+
+            var lst = qry.Take(PossibleValuesLimit + 1).ToList();
+
+            var mdlList = lst
+                        .Take(PossibleValuesLimit)
+                        .Select(i => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, i))
+                        .Cast<ViewModel>()
+                        .ToList();
+
+            needMoreButton = lst.Count > PossibleValuesLimit;
+            return mdlList;
+        }
+
+        /// <summary>
+        /// Override this method to apply a filter on the possible value query.
+        /// </summary>
+        /// <remarks>
+        /// <para>If null is returned the query will be aborted and an empty list will be shown.</para>
+        /// <para>To Apply no filter simply return the given query.</para>
+        /// <para>The base implementation returns the query. So no need to call base.</para>
+        /// </remarks>
+        /// <param name="qry">Query to filter</param>
+        /// <returns>filtered query or null</returns>
+        protected virtual IQueryable<IDataObject> ApplyFilter(IQueryable<IDataObject> qry)
+        {
+            return qry;
+        }
+
+        protected void ResetPossibleValues()
+        {
+            _possibleValues = null;
+            _possibleValuesRO = null;
+            OnPropertyChanged("PossibleValues");
         }
 
         private GridDisplayConfiguration _displayedColumns = null;
