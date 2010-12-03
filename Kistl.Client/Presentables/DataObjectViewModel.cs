@@ -296,7 +296,7 @@ namespace Kistl.Client.Presentables
                 _MethodModels = new LookupDictionary<Method, Method, BaseValueViewModel>(
                     _MethodList,
                     k => k,
-                    v => BaseValueViewModel.Fetch(ViewModelFactory, DataContext, v, v.GetValueModel(Object))
+                    v => BaseValueViewModel.Fetch(ViewModelFactory, DataContext, v.GetReturnParameter(), v.GetValueModel(Object))
                 );
             }
         }
