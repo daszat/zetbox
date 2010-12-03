@@ -100,6 +100,7 @@ namespace Kistl.Client.Presentables.KistlBase
                         }
                     }),
                     null);
+            selTaskVMdl.ListViewModel.ShowCommands = false;
             selTaskVMdl.ListViewModel.EnableAutoFilter = false;
             selTaskVMdl.ListViewModel.Filter.Add(new ToStringFilterModel(FrozenContext));
             ViewModelFactory.ShowModel(selTaskVMdl, true);
@@ -107,8 +108,7 @@ namespace Kistl.Client.Presentables.KistlBase
 
         public void SelectStartingObjectClass()
         {
-            ViewModelFactory.ShowModel(
-                ViewModelFactory.CreateViewModel<DataObjectSelectionTaskViewModel.Factory>().Invoke(
+            var lstMdl = ViewModelFactory.CreateViewModel<DataObjectSelectionTaskViewModel.Factory>().Invoke(
                     DataContext,
                     null,
                     DataContext.GetQuery<ObjectClass>(),
@@ -120,7 +120,9 @@ namespace Kistl.Client.Presentables.KistlBase
                             ContinueAddRelation();
                         }
                     }),
-                    null), true);
+                    null);
+            lstMdl.ListViewModel.ShowCommands = false;
+            ViewModelFactory.ShowModel(lstMdl, true);
         }
 
         public override void RemoveItem(DataObjectViewModel item)

@@ -28,7 +28,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
         public BaseObjectCollectionViewModel(
             IViewModelDependencies appCtx, IKistlContext dataCtx,
             IObjectCollectionValueModel<TModelCollection> mdl)
-            : base(appCtx, dataCtx,     mdl)
+            : base(appCtx, dataCtx, mdl)
         {
             ObjectCollectionModel = mdl;
 
@@ -194,10 +194,10 @@ namespace Kistl.Client.Presentables.ValueViewModels
         {
             var cmds = new ObservableCollection<ICommandViewModel>();
 
-            if(AllowAddExisting) cmds.Add(AddExistingCommand);
-            if(AllowAddNew) cmds.Add(CreateNewCommand);
-            if(AllowRemove) cmds.Add(RemoveCommand);
-            if(AllowDelete) cmds.Add(DeleteCommand);
+            if (AllowAddExisting) cmds.Add(AddExistingCommand);
+            if (AllowAddNew) cmds.Add(CreateNewCommand);
+            if (AllowRemove) cmds.Add(RemoveCommand);
+            if (AllowDelete) cmds.Add(DeleteCommand);
 
             return cmds;
         }
@@ -254,7 +254,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 if (_DeleteCommand == null)
                 {
                     _DeleteCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>()
-                        .Invoke(DataContext, "Delete", "Delete selection from data store", 
+                        .Invoke(DataContext, "Delete", "Delete selection from data store",
                         () => SelectedItems.ToList().ForEach(i => DeleteItem(i)), // Collection will change while deleting!
                         () => SelectedItems != null && SelectedItems.Count() > 0 && AllowDelete && !DataContext.IsReadonly && !IsReadOnly);
                 }
@@ -279,8 +279,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             }
             else
             {
-                ViewModelFactory.ShowModel(
-                    ViewModelFactory.CreateViewModel<DataObjectSelectionTaskViewModel.Factory>().Invoke(
+                var lstMdl = ViewModelFactory.CreateViewModel<DataObjectSelectionTaskViewModel.Factory>().Invoke(
                         DataContext,
                         null,
                         children.AsQueryable(),
@@ -292,7 +291,10 @@ namespace Kistl.Client.Presentables.ValueViewModels
                                 CreateItemAndActivate(targetClass);
                             }
                         }),
-                    null), true);
+                    null);
+                lstMdl.ListViewModel.ShowCommands = false;
+
+                ViewModelFactory.ShowModel(lstMdl, true);
             }
         }
 
@@ -325,8 +327,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
         {
             var ifType = ReferencedClass.GetDescribedInterfaceType();
 
-            ViewModelFactory.ShowModel(
-                ViewModelFactory.CreateViewModel<DataObjectSelectionTaskViewModel.Factory>().Invoke(
+            var lstMdl = ViewModelFactory.CreateViewModel<DataObjectSelectionTaskViewModel.Factory>().Invoke(
                     DataContext,
                     ifType.GetObjectClass(FrozenContext),
                     null,
@@ -337,7 +338,12 @@ namespace Kistl.Client.Presentables.ValueViewModels
                             AddItem(chosen);
                         }
                     }),
-                    null), true);
+                    null);
+            lstMdl.ListViewModel.ShowDeleteCommand = false;
+            lstMdl.ListViewModel.ShowOpenCommand = false;
+            lstMdl.ListViewModel.ShowNewCommand = AllowAddNew;
+
+            ViewModelFactory.ShowModel(lstMdl, true);
         }
 
         public virtual void RemoveItem(DataObjectViewModel item)

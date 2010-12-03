@@ -19,7 +19,7 @@
         <kevin:DatePicker x:Name="txtDate"
                           Value="{Binding DatePart, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=true}"
                           Visibility="{Binding DatePartVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
-                          IsReadOnly="{Binding IsReadOnly}"
+                          IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertedBoolConverter}}"
                           CanEdit="True" />
     </DockPanel>
 </view:PropertyEditor>

@@ -204,8 +204,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             }
             else
             {
-                ViewModelFactory.ShowModel(
-                    ViewModelFactory.CreateViewModel<DataObjectSelectionTaskViewModel.Factory>().Invoke(
+                var lstMdl = ViewModelFactory.CreateViewModel<DataObjectSelectionTaskViewModel.Factory>().Invoke(
                         DataContext,
                         null,
                         children.AsQueryable(),
@@ -226,7 +225,10 @@ namespace Kistl.Client.Presentables.ValueViewModels
                                 if (onCreated != null)
                                     onCreated(null);
                             }
-                        }), null), true);
+                        }), null);
+                lstMdl.ListViewModel.ShowCommands = false;
+
+                ViewModelFactory.ShowModel(lstMdl, true);
             }
         }
 
@@ -262,6 +264,10 @@ namespace Kistl.Client.Presentables.ValueViewModels
                     }
                 }),
                 null);
+            selectionTask.ListViewModel.ShowDeleteCommand = false;
+            selectionTask.ListViewModel.ShowOpenCommand = false;
+            selectionTask.ListViewModel.ShowNewCommand = AllowCreateNewItem;
+
             ViewModelFactory.ShowModel(selectionTask, true);
         }
 
