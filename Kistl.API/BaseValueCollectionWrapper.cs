@@ -266,7 +266,7 @@ namespace Kistl.API
 
         public void RemoveAt(int index)
         {
-            if (0 < index || index >= collection.Count)
+            if (index < 0 || index >= collection.Count)
                 throw new ArgumentOutOfRangeException("index", "is not a valid index");
 
             if (IsReadOnly)
