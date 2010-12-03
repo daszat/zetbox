@@ -80,7 +80,11 @@ namespace Kistl.Client.Presentables.TimeRecords
             {
                 if (_availableUsers == null)
                 {
-                    _availableUsers = new ReadOnlyCollection<DataObjectViewModel>(DataContext.GetQuery<Mitarbeiter>().Select(o => ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>(o).Invoke(DataContext, o)).ToList());
+                    _availableUsers = new ReadOnlyCollection<DataObjectViewModel>(
+                        DataContext
+                            .GetQuery<Mitarbeiter>()
+                            .Select(o => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, o))
+                            .ToList());
                 }
                 return _availableUsers;
             }

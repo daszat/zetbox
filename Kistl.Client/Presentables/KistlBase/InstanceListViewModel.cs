@@ -731,7 +731,7 @@ namespace Kistl.Client.Presentables.KistlBase
 
             foreach (var obj in GetQuery().Cast<IDataObject>().ToList().OrderBy(obj => obj.ToString()))
             {
-                var mdl = ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>(obj).Invoke(DataContext, obj);
+                var mdl = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, obj);
                 mdl.IsReadOnly = IsItemsReadOnly;
                 _instances.Add(mdl);
             }

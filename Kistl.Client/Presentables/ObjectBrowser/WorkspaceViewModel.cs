@@ -135,7 +135,7 @@ namespace Kistl.Client.Presentables.ObjectBrowser
 
             var other = dataObject.Object;
             var here = DataContext.Find(DataContext.GetInterfaceType(other), other.ID);
-            SelectedItem = ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>(here).Invoke(DataContext, here);
+            SelectedItem = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, here);
         }
 
         public override string Name
@@ -177,7 +177,7 @@ namespace Kistl.Client.Presentables.ObjectBrowser
                 // responsibility to externalCtx's disposal passes to newWorkspace
                 var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditor.WorkspaceViewModel.Factory>().Invoke(externalCtx);
                 var newObject = externalCtx.Create(objectClass.GetDescribedInterfaceType());
-                var newModel = ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>(newObject).Invoke(externalCtx, newObject);
+                var newModel = DataObjectViewModel.Fetch(ViewModelFactory, externalCtx, newObject);
 
                 newWorkspace.SelectedItem = newModel;
                 ViewModelFactory.ShowModel(newWorkspace, true);

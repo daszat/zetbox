@@ -60,7 +60,7 @@ namespace Kistl.Client.Presentables
                 .Where(tmp => !String.IsNullOrEmpty(tmp.err)))
             {
                 _errors.Add(new ErrorDescriptor(
-                    ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>(error.obj).Invoke(DataContext, error.obj),
+                    DataObjectViewModel.Fetch(ViewModelFactory, DataContext, error.obj),
                     new List<string>() { error.err }));
             }
         }

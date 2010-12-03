@@ -253,7 +253,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
 
             var other = dataObject.Object;
             var here = DataContext.Find(DataContext.GetInterfaceType(other), other.ID);
-            var vm = ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>(here).Invoke(DataContext, here);
+            var vm = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, here);
             SelectedItem = vm;
             vm.RequestedKind = requestedKind;
             AddItem(vm);

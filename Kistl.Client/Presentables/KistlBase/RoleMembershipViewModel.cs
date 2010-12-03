@@ -48,7 +48,7 @@ namespace Kistl.Client.Presentables.KistlBase
         {
             var relChainMdl = (RelationChainViewModel)PropertyModelsByName["Relations"];
             relChainMdl.StartingObjectClass = _roleMembership.ObjectClass != null
-                ? ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>(_roleMembership.ObjectClass).Invoke(DataContext, _roleMembership.ObjectClass)
+                ? DataObjectViewModel.Fetch(ViewModelFactory, DataContext, _roleMembership.ObjectClass)
                 : null;
         }
     }

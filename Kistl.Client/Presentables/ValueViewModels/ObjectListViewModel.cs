@@ -54,7 +54,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             {
                 _valueCache = new ReadOnlyObservableProjectedList<IDataObject, DataObjectViewModel>(
                     ObjectCollectionModel, ObjectCollectionModel.Value,
-                    obj => ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>(obj).Invoke(DataContext, obj),
+                    obj => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, obj),
                     mdl => mdl.Object);
                 _valueCache.CollectionChanged += _valueCache_CollectionChanged;
             }

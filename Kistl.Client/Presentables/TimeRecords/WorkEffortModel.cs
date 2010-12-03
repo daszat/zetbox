@@ -79,7 +79,7 @@ namespace Kistl.Client.Presentables.TimeRecords
         {
             get
             {
-                return this.ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>(this._entry.Mitarbeiter).Invoke(this.DataContext, this._entry.Mitarbeiter);
+                return DataObjectViewModel.Fetch(this.ViewModelFactory, this.DataContext, this._entry.Mitarbeiter);
             }
             set
             {

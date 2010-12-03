@@ -178,7 +178,7 @@ namespace Kistl.Client.Presentables.KistlBase
             if (!isSimpleObject)
             {
                 var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx);
-                newWorkspace.ShowForeignModel(ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>(newObj).Invoke(newCtx, newObj), RequestedEditorKind);
+                newWorkspace.ShowForeignModel(DataObjectViewModel.Fetch(ViewModelFactory, newCtx, newObj), RequestedEditorKind);
                 ViewModelFactory.ShowModel(newWorkspace, RequestedWorkspaceKind, true);
             }
             else if (Listener != null)
@@ -226,7 +226,7 @@ namespace Kistl.Client.Presentables.KistlBase
             var newCtx = ctxFactory();
             var objClass = newCtx.Find<DataType>(this.Type.ID);
             var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx);
-            newWorkspace.ShowForeignModel(ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>(objClass).Invoke(newCtx, objClass));
+            newWorkspace.ShowForeignModel(DataObjectViewModel.Fetch(ViewModelFactory, newCtx, objClass));
             ViewModelFactory.ShowModel(newWorkspace, true);
         }
     }

@@ -251,7 +251,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
             var newCtx = ctxFactory(ClientIsolationLevel.PrefereClientData);
             var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx);
 
-            newWorkspace.ShowForeignModel(ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>(CurrentModule).Invoke(newCtx, CurrentModule));
+            newWorkspace.ShowForeignModel(DataObjectViewModel.Fetch(ViewModelFactory, newCtx, CurrentModule));
             ViewModelFactory.ShowModel(newWorkspace, true);
         }
 
@@ -268,7 +268,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
             var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx);
             var newObj = newCtx.Create<Module>();
 
-            newWorkspace.ShowForeignModel(ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>(newObj).Invoke(newCtx, newObj));
+            newWorkspace.ShowForeignModel(DataObjectViewModel.Fetch(ViewModelFactory, newCtx, newObj));
             ViewModelFactory.ShowModel(newWorkspace, true);
         }
     }

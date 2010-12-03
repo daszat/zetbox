@@ -112,7 +112,7 @@ namespace Kistl.App.Base
                         var workSpace = _mdlFactory.CreateViewModel<Kistl.Client.Presentables.ObjectEditor.WorkspaceViewModel.Factory>().Invoke(ctx);
                         foreach (IDataObject i in newViewDescriptors.Union(newViewModelDescriptors).Union(newAssemblies))
                         {
-                            workSpace.AddItem(_mdlFactory.CreateViewModel<DataObjectViewModel.Factory>(i).Invoke(ctx, i));
+                            workSpace.AddItem(DataObjectViewModel.Fetch(_mdlFactory, ctx, i));
                         }
 
                         _mdlFactory.ShowModel(workSpace, true);

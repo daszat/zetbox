@@ -91,7 +91,7 @@ namespace Kistl.Client.Presentables
             IDataObject obj = result as IDataObject;
             if (obj != null && obj.Context == DataContext)
             {
-                this.ViewModelFactory.ShowModel(this.ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>(obj).Invoke(DataContext, obj), true);
+                this.ViewModelFactory.ShowModel(DataObjectViewModel.Fetch(this.ViewModelFactory, DataContext, obj), true);
             }
         }
 

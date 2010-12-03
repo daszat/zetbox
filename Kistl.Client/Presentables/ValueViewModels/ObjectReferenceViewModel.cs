@@ -195,7 +195,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             {
                 var targetType = baseclass.GetDescribedInterfaceType();
                 var item = this.DataContext.Create(targetType);
-                var model = ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>(item).Invoke(DataContext, item);
+                var model = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, item);
 
                 Value = model;
 
@@ -215,7 +215,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                             {
                                 var targetType = ((ObjectClass)chosen.Object).GetDescribedInterfaceType();
                                 var item = this.DataContext.Create(targetType);
-                                var model = ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>(item).Invoke(DataContext, item);
+                                var model = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, item);
 
                                 Value = model;
                                 if (onCreated != null)
@@ -325,18 +325,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             var obj = ValueModel.Value;
             if (obj != null)
             {
-                // TODO: 1830 MÖRDERPFUSCH!!!!!
-                if (_possibleValues != null)
-                {
-                    _valueCache = _possibleValues.OfType<DataObjectViewModel>().FirstOrDefault(i => i.Object == obj);
-                }
-
-                if (_valueCache == null)
-                {
-                    // CreateViewModel<DataObjectViewModel.Factory> is invoked here and in possible values
-                    // that's why WPF can't select the right value, because thei'r different objects
-                    _valueCache = ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>(ValueModel.Value).Invoke(DataContext, ValueModel.Value);
-                }
+                _valueCache = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ValueModel.Value);
             }
             _valueCacheInititalized = true;
         }
@@ -356,10 +345,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
                     var mdlList = lst
                                 .Take(50)
-                                // TODO: 1830 MÖRDERPFUSCH!!!!!
-                                // CreateViewModel<DataObjectViewModel.Factory> is invoked here and in possible values
-                                // that's why WPF can't select the right value, because thei'r different objects
-                                .Select(i => _valueCache == null || _valueCache.Object != i ? ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>(i).Invoke(DataContext, i) : _valueCache)
+                                .Select(i => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, i))
                                 .Cast<ViewModel>()
                                 .ToList();
 
