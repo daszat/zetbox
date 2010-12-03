@@ -19,7 +19,7 @@ namespace Kistl.API.Migration
         private readonly SourceTable _tbl;
         private readonly IDataReader _source;
         private readonly SourceColumn[] _srcColumns;
-        private readonly Converter[] _nullConverter;
+        private readonly Converter[] _converter;
 
         private readonly int _errorColIdx;
         private StringBuilder _currentError;
@@ -31,7 +31,7 @@ namespace Kistl.API.Migration
 
         private long _processedRows = 0;
 
-        public Translator(SourceTable tbl, IDataReader source, IEnumerable<SourceColumn> srcColumns, Converter[] nullConverter)
+        public Translator(SourceTable tbl, IDataReader source, IEnumerable<SourceColumn> srcColumns, Converter[] converter)
         {
             if (tbl == null) throw new ArgumentNullException("tbl");
             if (source == null) throw new ArgumentNullException("source");
@@ -40,7 +40,7 @@ namespace Kistl.API.Migration
             _tbl = tbl;
             _source = source;
             _srcColumns = srcColumns.ToArray();
-            _nullConverter = nullConverter ?? new Converter[] { };
+            _converter = converter ?? new Converter[] { };
             _resultColumnCount = _srcColumns.Length;
 
             if (typeof(IMigrationInfo).IsAssignableFrom(tbl.DestinationObjectClass.GetDataType()))
@@ -124,7 +124,7 @@ namespace Kistl.API.Migration
                     var src_val = _source.GetValue(i);
                     object val = null;
 
-                    var fieldConv = _nullConverter.OfType<FieldConverter>().SingleOrDefault(c => c.Column.Name == src_col.Name);
+                    var fieldConv = _converter.OfType<FieldConverter>().SingleOrDefault(c => c.Column.Name == src_col.Name);
                     if (fieldConv != null)
                     {
                         val = fieldConv.Converter(_source);
@@ -169,7 +169,7 @@ namespace Kistl.API.Migration
 
         private object HandleNullValue(SourceColumn sourceColumn, object val, object src_val)
         {
-            var nullConv = _nullConverter.OfType<NullConverter>().SingleOrDefault(i => i.Column == sourceColumn);
+            var nullConv = _converter.OfType<NullConverter>().SingleOrDefault(i => i.Column == sourceColumn);
             if (nullConv == null) return val;
             if (val == null || val == DBNull.Value)
             {
