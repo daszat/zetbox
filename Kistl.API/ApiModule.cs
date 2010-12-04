@@ -17,6 +17,11 @@ namespace Kistl.API
             moduleBuilder
                 .RegisterType<InterfaceType>()
                 .InstancePerDependency();
+
+            moduleBuilder
+                .RegisterType<LoggingProblemReporter>()
+                .As<IProblemReporter>()
+                .SingleInstance();
         }
     }
 }

@@ -17,6 +17,7 @@
                 <ctrls:CommandButton CommandViewModel="{Binding RefreshCommand}" />
                 <ctrls:CommandButton CommandViewModel="{Binding EditCurrentModuleCommand}" />
                 <ctrls:CommandButton CommandViewModel="{Binding NewModuleCommand}" />
+                <ctrls:CommandButton CommandViewModel="{Binding ReportProblemCommand}" />
             </StackPanel>
             <ComboBox DockPanel.Dock="Top" ItemsSource="{Binding ModuleList}" SelectedItem="{Binding CurrentModule}" />
             <TreeView x:Name="NavTree"

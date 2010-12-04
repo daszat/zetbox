@@ -11,6 +11,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
     using Kistl.API.Client;
     using Kistl.App.Base;
     using Kistl.App.Extensions;
+    using Kistl.Client.Presentables.KistlBase;
 
     public class WorkspaceViewModel
         : WindowViewModel, IMultipleInstancesManager, IDisposable
@@ -81,6 +82,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
 
         #region Commands
 
+        #region DeleteCommand
         private ICommandViewModel _DeleteCommand = null;
         public ICommandViewModel DeleteCommand
         {
@@ -94,6 +96,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
                 return _DeleteCommand;
             }
         }
+        #endregion
 
         #region Save Context
 
@@ -223,8 +226,21 @@ namespace Kistl.Client.Presentables.ObjectEditor
             elm.RefreshErrors();
             ViewModelFactory.ShowModel(elm, true);
         }
+        #endregion
 
-
+        #region ReportProblemCommand
+        private ICommandViewModel _ReportProblemCommand = null;
+        public ICommandViewModel ReportProblemCommand
+        {
+            get
+            {
+                if (_ReportProblemCommand == null)
+                {
+                    _ReportProblemCommand = ViewModelFactory.CreateViewModel<ReportProblemCommand.Factory>().Invoke(DataContext);
+                }
+                return _ReportProblemCommand;
+            }
+        }
         #endregion
 
         #endregion

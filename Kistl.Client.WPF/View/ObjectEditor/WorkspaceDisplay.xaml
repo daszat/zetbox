@@ -16,6 +16,8 @@
                       CommandParameter="{Binding SelectedItem}" />
             <MenuItem Command="{Binding DeleteCommand, Converter={StaticResource CommandConverter}}"
                       CommandParameter="{Binding SelectedItem}" />
+            <MenuItem Command="{Binding ReportProblemCommand, Converter={StaticResource CommandConverter}}"
+                      CommandParameter="{Binding SelectedItem}" />
         </Menu>
         <Grid>
             <Grid.ColumnDefinitions>

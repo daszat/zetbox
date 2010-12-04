@@ -261,4 +261,38 @@ namespace Kistl.Client.Presentables.KistlBase
             }
         }
     }
+
+    public class ReportProblemCommand : CommandViewModel
+    {
+        public new delegate ReportProblemCommand Factory(IKistlContext dataCtx);
+
+        private readonly IProblemReporter _reporter;
+
+        public ReportProblemCommand(IViewModelDependencies appCtx, IProblemReporter reporter, IKistlContext dataCtx)
+            : base(appCtx, dataCtx, "Report a Problem", "Reports a Problem")
+        {
+            this._reporter = reporter;
+        }
+
+        public override bool CanExecute(object data)
+        {
+            return true;
+        }
+
+        protected override void DoExecute(object data)
+        {
+            if (CanExecute(data))
+            {
+                try
+                {
+                    _reporter.Report();
+                }
+                catch (Exception ex)
+                {
+                    // The Reporter has a problem...
+                    ViewModelFactory.ShowMessage("Unable to send Problem:\n" + ex.Message, "Error");
+                }
+            }
+        }
+    }
 }

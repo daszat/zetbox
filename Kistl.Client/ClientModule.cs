@@ -79,6 +79,12 @@ namespace Kistl.Client
                 .As<IIdentityResolver>()
                 .InstancePerLifetimeScope();
 
+            moduleBuilder
+                .RegisterType<FogBugzProblemReporter>()
+                .As<IProblemReporter>()
+                .SingleInstance();
+
+
             // Register all ViewModel Types
             foreach (var t in typeof(ClientModule).Assembly.GetTypes()
                 .Where(t => typeof(ViewModel).IsAssignableFrom(t)))

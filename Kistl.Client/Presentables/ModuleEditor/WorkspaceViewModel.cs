@@ -255,6 +255,19 @@ namespace Kistl.Client.Presentables.ModuleEditor
             ViewModelFactory.ShowModel(newWorkspace, true);
         }
 
+        private ICommandViewModel _ReportProblemCommand = null;
+        public ICommandViewModel ReportProblemCommand
+        {
+            get
+            {
+                if (_ReportProblemCommand == null)
+                {
+                    _ReportProblemCommand = ViewModelFactory.CreateViewModel<ReportProblemCommand.Factory>().Invoke(DataContext);
+                }
+                return _ReportProblemCommand;
+            }
+        }
+
         public void Refresh()
         {
             _modules = null;

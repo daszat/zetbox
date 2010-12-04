@@ -9,6 +9,7 @@ namespace Kistl.Client.Presentables.GUI
     using Kistl.API;
     using Kistl.App.GUI;
 using Kistl.API.Common;
+    using Kistl.Client.Presentables.KistlBase;
 
     [ViewModelDescriptor]
     public class NavigationScreenViewModel
@@ -127,5 +128,21 @@ using Kistl.API.Common;
                 return null;
             }
         }
+
+        #region ReportProblemCommand
+        private ICommandViewModel _ReportProblemCommand = null;
+        public ICommandViewModel ReportProblemCommand
+        {
+            get
+            {
+                if (_ReportProblemCommand == null)
+                {
+                    _ReportProblemCommand = ViewModelFactory.CreateViewModel<ReportProblemCommand.Factory>().Invoke(DataContext);
+                }
+                return _ReportProblemCommand;
+            }
+        }
+        #endregion
+
     }
 }
