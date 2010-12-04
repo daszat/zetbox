@@ -17,7 +17,7 @@ namespace Kistl.Client.Presentables
 {
     [ViewModelDescriptor]
     public class ParameterInputTaskViewModel
-        : WindowViewModel
+        : WindowViewModel, IValueInputTaskViewModel
     {
         public new delegate ParameterInputTaskViewModel Factory(IKistlContext dataCtx, Method method, Action<object[]> callback);
 
@@ -46,7 +46,7 @@ namespace Kistl.Client.Presentables
         }
 
         private ReadOnlyProjectedList<BaseParameter, BaseValueViewModel> _parameterModelList;
-        public IReadOnlyList<BaseValueViewModel> ParameterModels
+        public IEnumerable<BaseValueViewModel> ValueViewModels
         {
             get
             {
@@ -73,19 +73,15 @@ namespace Kistl.Client.Presentables
             }
         }
 
-        private LookupDictionary<string, BaseParameter, BaseValueViewModel> _parameterModelsByName;
-        public LookupDictionary<string, BaseParameter, BaseValueViewModel> ParameterModelsByName
+        private ILookup<string, BaseValueViewModel> _parameterModelsByName;
+        public ILookup<string, BaseValueViewModel> ValueViewModelsByName
         {
             get
             {
                 if (_parameterModelsByName == null)
                 {
                     FetchParameterModels();
-                    _parameterModelsByName = new LookupDictionary<string, BaseParameter, BaseValueViewModel>(
-                        _parameterList,
-                        k => k.Name,
-                        v => _parameterModels[v]
-                    );
+                    _parameterModelsByName = _parameterModelList.ToLookup(k => k.Name);
                 }
                 return _parameterModelsByName;
             }
@@ -113,7 +109,7 @@ namespace Kistl.Client.Presentables
 
         public void Invoke()
         {
-            var parameter = ParameterModels.Select(i => i.ValueModel.GetUntypedValue()).ToArray();
+            var parameter = ValueViewModels.Select(i => i.ValueModel.GetUntypedValue()).ToArray();
             _callback(parameter);
             Show = false;
         }

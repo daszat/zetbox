@@ -97,6 +97,8 @@
     <Compile Include="Presentables\AsyncList.cs" />
     <Compile Include="Presentables\CacheDebuggerViewModel.cs" />
     <Compile Include="Models\ColumnDisplayModel.cs" />
+    <Compile Include="Presentables\IValueInputTaskViewModel.cs" />
+    <Compile Include="Presentables\ValueInputTaskViewModel.cs" />
     <Compile Include="Presentables\DocumentManagement\FileViewModel.cs" />
     <Compile Include="Presentables\DocumentManagement\ImageViewModel.cs" />
     <Compile Include="Presentables\FilterViewModels\FilterViewModel.cs" />

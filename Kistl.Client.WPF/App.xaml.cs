@@ -77,7 +77,7 @@ namespace Kistl.Client.WPF
         {
             DebugConsole.Show();
             Logging.Configure();
-            SplashScreen.ShowSplashScreen("Kistl is starting...", "Init application", 5);
+            SplashScreen.ShowSplashScreen("ZBox is starting...", "Init application", 5);
 
             using (Logging.Log.InfoTraceMethodCall("Starting Client"))
             {
