@@ -12,6 +12,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
     using Kistl.App.Base;
     using Kistl.App.Extensions;
     using Kistl.Client.Presentables.KistlBase;
+    using System.Collections.Specialized;
 
     public class WorkspaceViewModel
         : WindowViewModel, IMultipleInstancesManager, IDisposable
@@ -81,6 +82,44 @@ namespace Kistl.Client.Presentables.ObjectEditor
         #endregion
 
         #region Commands
+
+        #region AdditionalCommands
+        private ObservableCollection<ICommandViewModel> _AdditionalCommands = null;
+        public ObservableCollection<ICommandViewModel> AdditionalCommands
+        {
+            get
+            {
+                if (_AdditionalCommands == null)
+                {
+                    _AdditionalCommands = new ObservableCollection<ICommandViewModel>();
+                    _AdditionalCommands.CollectionChanged += _AdditionalCommands_CollectionChanged;
+                }
+                return _AdditionalCommands;
+            }
+        }
+
+        void _AdditionalCommands_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            OnPropertyChanged("ShowAdditionalCommands");
+        }
+
+        private bool? _ShowAdditionalCommands = null;
+        public bool ShowAdditionalCommands
+        {
+            get
+            {
+                return _ShowAdditionalCommands ?? (_AdditionalCommands != null && _AdditionalCommands.Count > 0);
+            }
+            set
+            {
+                if (_ShowAdditionalCommands != value)
+                {
+                    _ShowAdditionalCommands = value;
+                    OnPropertyChanged("ShowAdditionalCommands");
+                }
+            }
+        }
+        #endregion
 
         #region DeleteCommand
         private ICommandViewModel _DeleteCommand = null;
@@ -182,26 +221,6 @@ namespace Kistl.Client.Presentables.ObjectEditor
         }
         #endregion
 
-        #region History Touch
-
-        /// <summary>
-        /// registers a user contact with the mdl in this <see cref="WorkspaceViewModel"/>'s history
-        /// </summary>
-        /// <param name="mdl"></param>
-        public void AddItem(ViewModel mdl)
-        {
-            // fetch old SelectedItem to reestablish selection after modifying RecentObjects
-            var item = SelectedItem;
-            if (!Items.Contains(mdl))
-            {
-                Items.Add(mdl);
-            }
-            // reestablish selection 
-            SelectedItem = item;
-        }
-
-        #endregion
-
         #region Verify Context
 
         private ICommandViewModel _verifyCommand;
@@ -274,6 +293,22 @@ namespace Kistl.Client.Presentables.ObjectEditor
             vm.RequestedKind = requestedKind;
             AddItem(vm);
             return vm;
+        }
+
+        /// <summary>
+        /// registers a user contact with the mdl in this <see cref="WorkspaceViewModel"/>'s history
+        /// </summary>
+        /// <param name="mdl"></param>
+        public void AddItem(ViewModel mdl)
+        {
+            // fetch old SelectedItem to reestablish selection after modifying RecentObjects
+            var item = SelectedItem;
+            if (!Items.Contains(mdl))
+            {
+                Items.Add(mdl);
+            }
+            // reestablish selection 
+            SelectedItem = item;
         }
         #endregion
 

@@ -18,6 +18,20 @@
                       CommandParameter="{Binding SelectedItem}" />
             <MenuItem Command="{Binding ReportProblemCommand, Converter={StaticResource CommandConverter}}"
                       CommandParameter="{Binding SelectedItem}" />
+            <MenuItem Visibility="{Binding ShowAdditionalCommands, Converter={StaticResource BooleanToVisibilityConverter}}"
+                      ItemsSource="{Binding AdditionalCommands}"
+                      Header="Weitere Aktionen">
+                <MenuItem.ItemContainerStyle>
+                    <Style TargetType="{x:Type MenuItem}">
+                        <Setter Property="Header"
+                                Value="{Binding Name}" />
+                        <Setter Property="Command"
+                                Value="{Binding OpenApplicationCommand, Converter={StaticResource CommandConverter}}" />
+                        <Setter Property="CommandParameter"
+                                Value="{Binding}" />
+                    </Style>
+                </MenuItem.ItemContainerStyle>
+            </MenuItem>
         </Menu>
         <Grid>
             <Grid.ColumnDefinitions>
