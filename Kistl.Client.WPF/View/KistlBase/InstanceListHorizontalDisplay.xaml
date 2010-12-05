@@ -8,6 +8,25 @@
                                xmlns:clientKistlBase="clr-namespace:Kistl.Client.WPF.View.KistlBase"
                                xmlns:commands="clr-namespace:Kistl.Client.WPF.Commands;assembly=Kistl.Client.WPF.Toolkit"
                                commands:SmartRoutedUICommand.IsCommandSink="True">
+    <local:InstanceListBaseDisplay.Resources>
+        <DataTemplate x:Key="idCellTemplate">
+            <TextBlock Text="{Binding ID}" />
+        </DataTemplate>
+        <DataTemplate x:Key="iconCellTemplate">
+            <Image Source="{Binding Converter={StaticResource IconConverter}}"
+                   Width="14"
+                   Height="14" />
+        </DataTemplate>
+        <DataTemplate x:Key="nameCellTemplate">
+            <TextBlock Text="{Binding Name}" />
+        </DataTemplate>
+
+        <!-- Force all grid cells to stretch -->
+        <Style TargetType="ListViewItem">
+            <Setter Property="HorizontalContentAlignment"
+                    Value="Stretch" />
+        </Style>
+    </local:InstanceListBaseDisplay.Resources>
     <Grid x:Name="ctrlInstanceList">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250" />

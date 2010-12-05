@@ -41,7 +41,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                     if (otherEnd != null && otherEnd.Multiplicity.UpperBound() > 1 && rel.Containment != ContainmentSpecification.Independent)
                     {
                         AllowAddExisting = false;
-                        AllowAddExisting = false;
+                        AllowRemove = false;
                     }
                 }
             }
