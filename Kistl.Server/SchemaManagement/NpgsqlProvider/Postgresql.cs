@@ -1319,7 +1319,7 @@ END$BODY$
 
             var cols = colNames.Select(n => QuoteIdentifier(n)).ToArray();
             var query = String.Format("COPY {0} ({1}) FROM STDIN WITH DELIMITER '{2}' NULL E'{3}'", FormatSchemaName(destTbl), String.Join(",", cols), COPY_SEPARATOR, COPY_NULL.Replace(@"\", @"\\"));
-            _log.InfoFormat("Copy from: [{0}]", query);
+            _log.DebugFormat("Copy from: [{0}]", query);
             _copyLog.Info(query);
             var bulkCopy = new NpgsqlCopyIn(query, CurrentConnection);
 
