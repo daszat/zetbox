@@ -171,11 +171,14 @@ namespace Kistl.Generator
             try
             {
                 var result = true;
-                result &= CompileSingle(referencePath, binPath, engine, _generatorProviders.Single(g => g.BaseName == "Interface"));
-                foreach (var gen in _generatorProviders.Where(g => g.BaseName != "Interface"))
+                foreach (var gens in _generatorProviders.GroupBy(k => k.CompileOrder).OrderBy(i => i.Key))
                 {
-                    result &= CompileSingle(referencePath, binPath, engine, gen);
+                    foreach (var gen in gens)
+                    {
+                        result &= CompileSingle(referencePath, binPath, engine, gen);
+                    }
                 }
+
                 return result;
             }
             finally

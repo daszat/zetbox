@@ -32,6 +32,8 @@ namespace Kistl.DalProvider.Memory.Generator
         public override string TargetNameSpace { get { return "Kistl.Objects." + ExtraSuffix; } }
         public override string BaseName { get { return ExtraSuffix; } }
         public override string ProjectGuid { get { return "{01E60FD5-CD96-466a-83B1-8EFC7452B47C}"; } }
+        public override int CompileOrder { get { return COMPILE_ORDER_Implementation; } }
+
         public override IEnumerable<string> RequiredNamespaces
         {
             get

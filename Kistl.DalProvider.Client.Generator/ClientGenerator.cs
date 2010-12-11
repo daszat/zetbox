@@ -21,6 +21,8 @@ namespace Kistl.DalProvider.Client.Generator
         public override string TargetNameSpace { get { return "Kistl.Objects.Client"; } }
         public override string BaseName { get { return "Client"; } }
         public override string ProjectGuid { get { return "{80F37FB5-66C6-45F2-9E2A-F787B141D66C}"; } }
+        public override int CompileOrder { get { return COMPILE_ORDER_Implementation; } }
+
         public override IEnumerable<string> RequiredNamespaces
         {
             get { return new[] { "Kistl.API.Client", "Kistl.DalProvider.Base", "Kistl.DalProvider.Client" }; }

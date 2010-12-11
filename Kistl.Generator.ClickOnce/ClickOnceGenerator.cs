@@ -18,6 +18,8 @@ namespace Kistl.Generator.ClickOnce
         public override string TargetNameSpace { get { return "Kistl.Client.ClickOnce"; } }
         public override string BaseName { get { return "ClickOnce"; } }
         public override string ProjectGuid { get { return "{D057DB2C-1916-45CF-B8D8-2ACAAC5D47F9}"; } }
+        public override int CompileOrder { get { return COMPILE_ORDER_Other; } }
+
         public override IEnumerable<string> RequiredNamespaces { get { return new string[] { }; } }
 
         protected override List<string> Generate_Objects(API.IKistlContext ctx)

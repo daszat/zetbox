@@ -24,6 +24,7 @@ namespace Kistl.Generator
         public override string TemplateProviderNamespace { get { return "Kistl.Generator.InterfaceTemplates"; } }
         public override string BaseName { get { return "Interface"; } }
         public override string ProjectGuid { get { return "{0C9E6E69-309F-46F7-A936-D5762229DEB9}"; } }
+        public override int CompileOrder { get { return COMPILE_ORDER_Interface; } }
 
         protected override string Generate_ObjectClass(IKistlContext ctx, ObjectClass objClass)
         {

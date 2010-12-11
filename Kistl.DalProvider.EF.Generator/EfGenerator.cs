@@ -21,6 +21,8 @@ namespace Kistl.DalProvider.Ef.Generator
         public override string TargetNameSpace { get { return "Kistl.Objects.Ef"; } }
         public override string BaseName { get { return "Ef"; } }
         public override string ProjectGuid { get { return "{62B9344A-87D1-4715-9ABB-EAE0ACC4F523}"; } }
+        public override int CompileOrder { get { return COMPILE_ORDER_Implementation; } }
+
         public override IEnumerable<string> RequiredNamespaces
         {
             get

@@ -22,6 +22,7 @@ namespace Kistl.Generator
         public override string TargetNameSpace { get { return "Kistl.Objects.Base"; } }
         public override string TemplateProviderNamespace { get { return "Kistl.Generator.Templates"; } }
         public override IEnumerable<string> RequiredNamespaces { get { return new string[] { "Kistl.DalProvider.Base" }; } }
+        public override int CompileOrder { get { return COMPILE_ORDER_Implementation; } }
 
         protected override string Generate_ProjectFile(API.IKistlContext ctx, string projectGuid, List<string> generatedFileNames, IEnumerable<ISchemaProvider> schemaProviders)
         {

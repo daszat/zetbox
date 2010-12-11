@@ -78,6 +78,12 @@ namespace Kistl.Generator
             CodeBasePath = Path.Combine(basePath, TargetNameSpace);
         }
 
+        public const int COMPILE_ORDER_Interface = 1;
+        public const int COMPILE_ORDER_Implementation = 10;
+        public const int COMPILE_ORDER_Other = 20;
+
+        public abstract int CompileOrder { get; }
+
         /// <summary>
         /// A short string describing the generator for logfiles and namespaces.
         /// </summary>

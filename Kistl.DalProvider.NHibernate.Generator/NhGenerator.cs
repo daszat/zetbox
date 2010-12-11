@@ -25,6 +25,8 @@ namespace Kistl.DalProvider.NHibernate.Generator
         public override string TargetNameSpace { get { return "Kistl.Objects.NHibernate"; } }
         public override string BaseName { get { return "NHibernate"; } }
         public override string ProjectGuid { get { return "{5514C9AF-6C2E-4713-8EAC-FAAADFFDB029}"; } }
+        public override int CompileOrder { get { return COMPILE_ORDER_Implementation; } }
+
         public override IEnumerable<string> RequiredNamespaces
         {
             get
