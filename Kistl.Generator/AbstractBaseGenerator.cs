@@ -30,57 +30,15 @@ namespace Kistl.Generator
 
         public virtual void Generate(Kistl.API.IKistlContext ctx, string basePath)
         {
-            // Case #1382?
-            CodeBasePath = Path.Combine(basePath, TargetNameSpace);
+            InitCodeBasePath(basePath);
             Directory.CreateDirectory(CodeBasePath);
+            DeleteOldFiles();
 
-            Directory.GetFiles(CodeBasePath, "*.*", SearchOption.AllDirectories)
-                .ToList().ForEach(f => File.Delete(f));
-            Directory.GetDirectories(CodeBasePath, "*.*", SearchOption.AllDirectories).OrderByDescending(s => s.Length)
-                .ToList().ForEach(d => Directory.Delete(d));
-
-            Directory.CreateDirectory(CodeBasePath);
-
-            // Save KeyFile
-            using (var snkSrc = typeof(AbstractBaseGenerator).Assembly.GetManifestResourceStream("Kistl.Generator.Kistl.Objects.snk"))
-            using (var snkDest = File.Open(Path.Combine(CodeBasePath, "Kistl.Objects.snk"), FileMode.Create))
-            {
-                snkDest.SetLength(0);
-                snkSrc.CopyTo(snkDest);
-            }
+            SaveKeyFile();
 
             var generatedFileNames = new List<string>();
 
-            Log.Info("  Object Classes");
-            foreach (ObjectClass objClass in Compiler.GetObjectClassList(ctx).OrderBy(x => x.Name).ToList())
-            {
-                generatedFileNames.Add(Generate_ObjectClass(ctx, objClass));
-                Log.Debug("    " + objClass.Name);
-            }
-
-            Log.Info("  Collection Entries");
-            generatedFileNames.Add(Generate_CollectionEntries(ctx));
-
-            Log.Info("  Interfaces");
-            foreach (Interface i in Compiler.GetInterfaceList(ctx).OrderBy(x => x.Name))
-            {
-                generatedFileNames.Add(Generate_Interface(ctx, i));
-                Log.Debug("    " + i.Name);
-            }
-
-            Log.Info("  Enums");
-            foreach (Enumeration e in Compiler.GetEnumList(ctx).OrderBy(x => x.Name))
-            {
-                generatedFileNames.Add(Generate_Enumeration(ctx, e));
-                Log.Debug("    " + e.Name);
-            }
-
-            Log.Info("  CompoundObjects");
-            foreach (CompoundObject s in Compiler.GetCompoundObjectList(ctx).OrderBy(x => x.Name))
-            {
-                generatedFileNames.Add(Generate_CompoundObject(ctx, s));
-                Log.Debug("    " + s.Name);
-            }
+            generatedFileNames.AddRange(Generate_Objects(ctx));
 
             Log.Info("  Assemblyinfo");
             generatedFileNames.Add(Generate_AssemblyInfo(ctx));
@@ -93,6 +51,31 @@ namespace Kistl.Generator
 
             // Case #1382
             this.ProjectFileName = Path.Combine(this.CodeBasePath, projectFileName);
+        }
+
+        protected virtual void SaveKeyFile()
+        {
+            // Save KeyFile
+            using (var snkSrc = typeof(AbstractBaseGenerator).Assembly.GetManifestResourceStream("Kistl.Generator.Kistl.Objects.snk"))
+            using (var snkDest = File.Open(Path.Combine(CodeBasePath, "Kistl.Objects.snk"), FileMode.Create))
+            {
+                snkDest.SetLength(0);
+                snkSrc.CopyTo(snkDest);
+            }
+        }
+
+        protected virtual void DeleteOldFiles()
+        {
+            Directory.GetFiles(CodeBasePath, "*.*", SearchOption.AllDirectories)
+                .ToList().ForEach(f => File.Delete(f));
+            Directory.GetDirectories(CodeBasePath, "*.*", SearchOption.AllDirectories).OrderByDescending(s => s.Length)
+                .ToList().ForEach(d => Directory.Delete(d));
+        }
+
+        protected virtual void InitCodeBasePath(string basePath)
+        {
+            // Case #1382?
+            CodeBasePath = Path.Combine(basePath, TargetNameSpace);
         }
 
         /// <summary>
@@ -226,6 +209,44 @@ namespace Kistl.Generator
                 projectGuid,
                 generatedFileNames.Where(s => !String.IsNullOrEmpty(s)).ToList(),
                 schemaProviders);
+        }
+
+        protected virtual List<string> Generate_Objects(Kistl.API.IKistlContext ctx)
+        {
+            var generatedFileNames = new List<string>();
+
+            Log.Info("  Object Classes");
+            foreach (ObjectClass objClass in Compiler.GetObjectClassList(ctx).OrderBy(x => x.Name).ToList())
+            {
+                generatedFileNames.Add(Generate_ObjectClass(ctx, objClass));
+                Log.Debug("    " + objClass.Name);
+            }
+
+            Log.Info("  Collection Entries");
+            generatedFileNames.Add(Generate_CollectionEntries(ctx));
+
+            Log.Info("  Interfaces");
+            foreach (Interface i in Compiler.GetInterfaceList(ctx).OrderBy(x => x.Name))
+            {
+                generatedFileNames.Add(Generate_Interface(ctx, i));
+                Log.Debug("    " + i.Name);
+            }
+
+            Log.Info("  Enums");
+            foreach (Enumeration e in Compiler.GetEnumList(ctx).OrderBy(x => x.Name))
+            {
+                generatedFileNames.Add(Generate_Enumeration(ctx, e));
+                Log.Debug("    " + e.Name);
+            }
+
+            Log.Info("  CompoundObjects");
+            foreach (CompoundObject s in Compiler.GetCompoundObjectList(ctx).OrderBy(x => x.Name))
+            {
+                generatedFileNames.Add(Generate_CompoundObject(ctx, s));
+                Log.Debug("    " + s.Name);
+            }
+
+            return generatedFileNames;
         }
     }
 }
