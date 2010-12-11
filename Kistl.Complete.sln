@@ -204,6 +204,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Tests.Utilities.MsSql
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Tests.Utilities.PostgreSql", "Tests\Kistl.Tests.Utilities.PostgreSql\Kistl.Tests.Utilities.PostgreSql.csproj", "{C0992804-A195-4087-B77C-910ABEAB74B9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Generator.ClickOnce", "Kistl.Generator.ClickOnce\Kistl.Generator.ClickOnce.csproj", "{B93076F9-B551-4EBD-B707-205F905BCC99}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|.NET = Debug|.NET
@@ -705,6 +707,16 @@ Global
 		{C0992804-A195-4087-B77C-910ABEAB74B9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C0992804-A195-4087-B77C-910ABEAB74B9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{C0992804-A195-4087-B77C-910ABEAB74B9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{B93076F9-B551-4EBD-B707-205F905BCC99}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{B93076F9-B551-4EBD-B707-205F905BCC99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B93076F9-B551-4EBD-B707-205F905BCC99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B93076F9-B551-4EBD-B707-205F905BCC99}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{B93076F9-B551-4EBD-B707-205F905BCC99}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{B93076F9-B551-4EBD-B707-205F905BCC99}.Release|.NET.ActiveCfg = Release|Any CPU
+		{B93076F9-B551-4EBD-B707-205F905BCC99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B93076F9-B551-4EBD-B707-205F905BCC99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B93076F9-B551-4EBD-B707-205F905BCC99}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{B93076F9-B551-4EBD-B707-205F905BCC99}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

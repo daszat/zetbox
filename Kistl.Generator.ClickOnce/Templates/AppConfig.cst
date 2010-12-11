@@ -1,0 +1,95 @@
+﻿<%@ CodeTemplate Language="C#" 
+	Name="AppConfig"
+	ClassName="Kistl.Generator.ClickOnce.Templates.AppConfig" 
+	Inherits="Kistl.Generator.ResourceTemplate" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Parameter Name="ctx" Type="Kistl.API.IKistlContext" %>
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <configSections>
+    <section name="log4net" type="log4net.Config.Log4NetConfigurationSectionHandler, log4net" />
+  </configSections>
+  <system.serviceModel>
+    <!-- Binding -->
+    <bindings>
+      <wsHttpBinding>
+        <binding name="KistlService_Binding" closeTimeout="00:01:00"
+				 openTimeout="00:01:00" receiveTimeout="10:00:00" sendTimeout="00:01:00"
+				 bypassProxyOnLocal="true" transactionFlow="false" hostNameComparisonMode="StrongWildcard"
+				 maxBufferPoolSize="524288" maxReceivedMessageSize="6553600" messageEncoding="Text"
+				 textEncoding="utf-8" useDefaultWebProxy="true" allowCookies="false">
+          <security mode="Message">
+            <message clientCredentialType="Windows" />
+          </security>
+          <readerQuotas maxStringContentLength="1600000000" maxArrayLength="1600000000" />
+          <reliableSession enabled="false" />
+        </binding>
+      </wsHttpBinding>
+    </bindings>
+    <!-- Client -->
+    <client>
+      <endpoint address="<%= GetServerAddress() %>" binding="wsHttpBinding"
+			 bindingConfiguration="KistlService_Binding" contract="KistlService.IKistlService"
+			 name="KistlService_Endpoint" />
+    </client>
+  </system.serviceModel>
+  <log4net>
+    <appender name="ColoredConsoleAppender" type="log4net.Appender.ColoredConsoleAppender" >
+      <mapping>
+        <level value="DEBUG" />
+        <foreColor value="Cyan" />
+      </mapping>
+      <mapping>
+        <level value="INFO" />
+        <foreColor value="White" />
+      </mapping>
+      <mapping>
+        <level value="WARN" />
+        <foreColor value="Yellow, HighIntensity" />
+      </mapping>
+      <mapping>
+        <level value="ERROR" />
+        <foreColor value="Red, HighIntensity" />
+      </mapping>
+      <mapping>
+        <level value="FATAL" />
+        <foreColor value="Purple, HighIntensity" />
+      </mapping>
+      <layout type="log4net.Layout.PatternLayout">
+        <conversionPattern value="%message%newline" />
+      </layout>
+    </appender>
+    <appender name="TraceAppender" type="log4net.Appender.TraceAppender">
+      <layout type="log4net.Layout.PatternLayout">
+        <conversionPattern value="%date [%thread] %-5level %logger [%property{NDC}] - %message%newline" />
+      </layout>
+    </appender>
+    <appender name="RollingLogFileAppender" type="log4net.Appender.RollingFileAppender">
+      <file value="Kistl.Client.WPF.log" />
+      <appendToFile value="true" />
+      <rollingStyle value="Size" />
+      <maxSizeRollBackups value="5" />
+      <maximumFileSize value="1MB" />
+      <layout type="log4net.Layout.PatternLayout">
+        <conversionPattern value="%date [%thread] %-5level %logger [%property{NDC}] - %message%newline" />
+      </layout>
+    </appender>
+    <root>
+      <level value="INFO" />
+      <appender-ref ref="ColoredConsoleAppender" />
+      <appender-ref ref="TraceAppender" />
+      <appender-ref ref="RollingLogFileAppender" />
+      <!-- <appender-ref ref="RemotingAppender" /> -->
+    </root>
+    <logger name="Kistl.Facade">
+      <level value="DEBUG" />
+    </logger>
+    <logger name="Kistl.Linq">
+      <level value="WARN" />
+    </logger>
+    <logger name="Kistl.Reflection">
+      <level value="WARN" />
+    </logger>
+  </log4net>
+</configuration>
