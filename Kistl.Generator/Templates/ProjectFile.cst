@@ -33,8 +33,8 @@
     <WarningLevel>4</WarningLevel>
     <NoWarn>1591</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <OutputPath>..\bin\Debug\bin\Server\Fallback\</OutputPath>
-    <KistlAPIPath>..\bin\Debug\bin\</KistlAPIPath>
+    <OutputPath></OutputPath>
+    <KistlAPIPath></KistlAPIPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -44,8 +44,8 @@
     <WarningLevel>4</WarningLevel>
     <NoWarn>1591</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <OutputPath>..\bin\Release\bin\Server\Fallback\</OutputPath>
-    <KistlAPIPath>..\bin\Release\bin\</KistlAPIPath>
+    <OutputPath></OutputPath>
+    <KistlAPIPath></KistlAPIPath>
   </PropertyGroup>
   <!-- Has to come in a separate group to receive correct $(OutputPath) -->
   <PropertyGroup>
