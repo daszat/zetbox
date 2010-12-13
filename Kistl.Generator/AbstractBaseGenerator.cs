@@ -82,6 +82,9 @@ namespace Kistl.Generator
         public const int COMPILE_ORDER_Implementation = 10;
         public const int COMPILE_ORDER_Other = 20;
 
+        /// <summary>
+        /// Order of compiling
+        /// </summary>
         public abstract int CompileOrder { get; }
 
         /// <summary>
@@ -129,6 +132,11 @@ namespace Kistl.Generator
         /// The type name of the custom PropertyDescriptor.
         /// </summary>
         public virtual string CustomPropertyDescriptorName { get { return "PropertyDescriptor" + ExtraSuffix + Kistl.API.Helper.ImplementationSuffix; } }
+
+        /// <summary>
+        /// List of aditional build targets, executed after all default targets has been build
+        /// </summary>
+        public virtual IEnumerable<string> AdditionalTargets { get { return new string[] { }; } }
 
         /// <summary>
         /// Required Namespaces for this project

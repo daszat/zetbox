@@ -161,21 +161,42 @@ namespace Kistl.Generator
             Directory.CreateDirectory(binPath);
 
             var engine = new Engine(ToolsetDefinitionLocations.Registry);
+            engine.DefaultToolsVersion = "4.0";
 
             engine.RegisterLogger(new ConsoleLogger(LoggerVerbosity.Minimal));
 
             var logger = new FileLogger();
             logger.Parameters = String.Format(@"logfile={0}", Path.Combine(workingPath, "compile.log"));
+            logger.Verbosity = LoggerVerbosity.Detailed;
             engine.RegisterLogger(logger);
 
             try
             {
                 var result = true;
-                foreach (var gens in _generatorProviders.GroupBy(k => k.CompileOrder).OrderBy(i => i.Key))
+                var compileOrder = _generatorProviders
+                    .GroupBy(k => k.CompileOrder)
+                    .OrderBy(i => i.Key);
+                foreach (var gens in compileOrder)
                 {
                     foreach (var gen in gens)
                     {
-                        result &= CompileSingle(referencePath, binPath, engine, gen);
+                        result &= CompileSingle(referencePath, binPath, engine, gen, null);
+                    }
+                }
+
+                // Additional Targets
+                var additionalTargets = _generatorProviders
+                    .Where(i => i.AdditionalTargets.Count() > 0)
+                    .GroupBy(k => k.CompileOrder)
+                    .OrderBy(i => i.Key);
+                foreach (var gens in additionalTargets)
+                {
+                    foreach (var gen in gens)
+                    {
+                        foreach (var target in gen.AdditionalTargets)
+                        {
+                            result &= CompileSingle(referencePath, binPath, engine, gen, target);
+                        }
                     }
                 }
 
@@ -188,14 +209,14 @@ namespace Kistl.Generator
             }
         }
 
-        private static bool CompileSingle(string apiPath, string binPath, Engine engine, AbstractBaseGenerator gen)
+        private static bool CompileSingle(string apiPath, string binPath, Engine engine, AbstractBaseGenerator gen, string target)
         {
             try
             {
                 using (log4net.NDC.Push("Compiling " + gen.Description))
                 {
                     Log.DebugFormat("Loading MsBuild Project");
-                    var proj = new Project(engine);
+                    var proj = new Project(engine, "4.0");
                     proj.Load(gen.ProjectFileName);
                     var defaultPropertyGroup = proj.AddNewPropertyGroup(false);
                     defaultPropertyGroup.AddNewProperty("OutputPath", binPath, true);
@@ -209,7 +230,7 @@ namespace Kistl.Generator
                     defaultPropertyGroup.AddNewProperty("KistlAPIPath", apiPath, true);
 
                     Log.DebugFormat("Compiling");
-                    if (!engine.BuildProject(proj))
+                    if (!engine.BuildProject(proj, target))
                     {
                         throw new ApplicationException(String.Format("Failed to compile {0}", gen.Description));
                     }

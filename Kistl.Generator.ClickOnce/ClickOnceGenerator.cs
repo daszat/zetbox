@@ -6,11 +6,17 @@ using Kistl.API.Server;
 
 namespace Kistl.Generator.ClickOnce
 {
+    /// <summary>
+    /// Generator fpr Click Once deployment
+    /// Can only be used under windows, since it won't compile under mono
+    /// Not implemented yet
+    /// </summary>
     public class ClickOnceGenerator : AbstractBaseGenerator
     {
         public ClickOnceGenerator(IEnumerable<ISchemaProvider> schemaProviders)
             : base(schemaProviders)
         {
+            throw new NotImplementedException("This generator has not been implemented yet since it won't work under mono");
         }
 
         public override string Description { get { return "ClickOnce"; } }
@@ -37,6 +43,14 @@ namespace Kistl.Generator.ClickOnce
 
             // No Module for bootstrapper needed
             return new List<string>();
+        }
+
+        public override IEnumerable<string> AdditionalTargets
+        {
+            get
+            {
+                return base.AdditionalTargets.Union(new[] { "Publish" });
+            }
         }
     }
 }
