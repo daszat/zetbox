@@ -47,7 +47,7 @@ namespace Kistl.Server
     /// <summary>
     /// Bootstrapper service
     /// </summary>
-    [ServiceBehavior(AddressFilterMode = AddressFilterMode.Prefix)]
+    [ServiceBehavior(AddressFilterMode = AddressFilterMode.Any)]
     public class BootstrapperService : IBootstrapperService
     {
         private KistlConfig config;
