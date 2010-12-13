@@ -161,8 +161,6 @@ namespace Kistl.Generator
             Directory.CreateDirectory(binPath);
 
             var engine = new Engine(ToolsetDefinitionLocations.Registry);
-            engine.DefaultToolsVersion = "4.0";
-
             engine.RegisterLogger(new ConsoleLogger(LoggerVerbosity.Minimal));
 
             var logger = new FileLogger();
@@ -216,7 +214,7 @@ namespace Kistl.Generator
                 using (log4net.NDC.Push("Compiling " + gen.Description))
                 {
                     Log.DebugFormat("Loading MsBuild Project");
-                    var proj = new Project(engine, "4.0");
+                    var proj = new Project(engine);
                     proj.Load(gen.ProjectFileName);
                     var defaultPropertyGroup = proj.AddNewPropertyGroup(false);
                     defaultPropertyGroup.AddNewProperty("OutputPath", binPath, true);
