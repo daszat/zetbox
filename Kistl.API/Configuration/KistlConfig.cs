@@ -152,6 +152,23 @@ namespace Kistl.API.Configuration
             [XmlArrayItem("Module", typeof(string))]
             public string[] Modules { get; set; }
 
+            /// <summary>
+            /// Client Files
+            /// </summary>
+            [XmlArray("ClientFilesLocations")]
+            [XmlArrayItem("Location")]
+            public ClientFilesLocation[] ClientFilesLocations { get; set; }
+
+            [Serializable]
+            public class ClientFilesLocation
+            {
+                [XmlAttribute("Name")]
+                public string Name { get; set; }
+                [XmlText]
+                public string Value { get; set; }
+            }
+
+
             public string GetLogFilePath(string name)
             {
                 Directory.CreateDirectory(LogFilePath);

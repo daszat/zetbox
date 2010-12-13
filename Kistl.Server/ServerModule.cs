@@ -71,6 +71,10 @@ namespace Kistl.Server
                 .SingleInstance();
 
             moduleBuilder
+                .RegisterType<BootstrapperService>()
+                .SingleInstance();
+
+            moduleBuilder
                 .RegisterType<CachingMetaDataResolver>()
                 .As<CachingMetaDataResolver>()
                 .As<IMetaDataResolver>()

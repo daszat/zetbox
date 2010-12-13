@@ -21,7 +21,12 @@ namespace Kistl.Server
         /// <summary>
         /// WCF Service Host
         /// </summary>
-        private readonly ServiceHostBase _host = null;
+        private readonly ServiceHostBase _mainHost = null;
+
+        /// <summary>
+        /// Bootstrapper WCF Service Host
+        /// </summary>
+        private readonly ServiceHostBase _bootstrapperHost = null;
 
         /// <summary>
         /// WCF Service Thread
@@ -37,11 +42,13 @@ namespace Kistl.Server
         {
             if (factory == null) { throw new ArgumentNullException("factory"); }
 
-            _host = factory.CreateServiceHost(typeof(KistlService).AssemblyQualifiedName, new[] { new Uri("http://localhost:6666/KistlService") });
-            _host.UnknownMessageReceived += new EventHandler<UnknownMessageReceivedEventArgs>(host_UnknownMessageReceived);
-            _host.Faulted += new EventHandler(host_Faulted);
-            _host.Closed += new EventHandler(_host_Closed);
-            _host.Opened += new EventHandler(_host_Opened);
+            _mainHost = factory.CreateServiceHost(typeof(KistlService).AssemblyQualifiedName, new[] { new Uri("http://localhost:6666/KistlService") });
+            _mainHost.UnknownMessageReceived += new EventHandler<UnknownMessageReceivedEventArgs>(host_UnknownMessageReceived);
+            _mainHost.Faulted += new EventHandler(host_Faulted);
+            _mainHost.Closed += new EventHandler(_host_Closed);
+            _mainHost.Opened += new EventHandler(_host_Opened);
+
+            _bootstrapperHost = factory.CreateServiceHost(typeof(BootstrapperService).AssemblyQualifiedName, new[] { new Uri("http://localhost:6666/Bootstrapper") });
         }
 
         void _host_Opened(object sender, EventArgs e)
@@ -81,7 +88,8 @@ namespace Kistl.Server
         {
             Log.Info("Stopping Server");
 
-            _host.Close();
+            _mainHost.Close();
+            _bootstrapperHost.Close();
 
             if (!serviceThread.Join(5000))
             {
@@ -109,13 +117,14 @@ namespace Kistl.Server
             {
                 using (Log.DebugTraceMethodCall("Starting WCF Server"))
                 {
-                    _host.Open();
+                    _mainHost.Open();
+                    _bootstrapperHost.Open();
                     serverStarted.Set();
                 }
 
                 Log.Info("WCF Server started");
 
-                while (_host.State == CommunicationState.Opened)
+                while (_mainHost.State == CommunicationState.Opened)
                 {
                     Thread.Sleep(100);
                 }
@@ -147,10 +156,16 @@ namespace Kistl.Server
         {
             Log.Info("Disposing WcfServer");
 
-            if (_host != null && _host.State != CommunicationState.Closed)
+            if (_mainHost != null && _mainHost.State != CommunicationState.Closed)
             {
-                _host.Close();
-                ((IDisposable)_host).Dispose();
+                _mainHost.Close();
+                ((IDisposable)_mainHost).Dispose();
+            }
+
+            if (_bootstrapperHost != null && _bootstrapperHost.State != CommunicationState.Closed)
+            {
+                _bootstrapperHost.Close();
+                ((IDisposable)_bootstrapperHost).Dispose();
             }
 
             if (serverStarted != null)
