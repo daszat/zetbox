@@ -10,25 +10,20 @@ using System.Threading;
 using System.IO;
 using System.Security;
 using System.Diagnostics;
+using System.Net;
 
 namespace Kistl.Client.Bootstrapper
 {
     public partial class Bootstrapper : Form
     {
-        BootstrapperServiceReference.IBootstrapperService service;
         Thread thread;
         bool running = true;
+        string address = string.Empty;
 
         public Bootstrapper()
         {
             InitializeComponent();
             thread = new Thread(new ThreadStart(run_bootstrapper));
-        }
-
-        public static string GetLegalPathName(string path)
-        {
-            Path.GetInvalidPathChars().Union(new[] { ':' }).ToList().ForEach(c => path = path.Replace(c, '_'));
-            return path;
         }
 
         private void run_bootstrapper()
@@ -38,62 +33,55 @@ namespace Kistl.Client.Bootstrapper
                 running = true;
 
                 SetStatus("Connecting to Service");
-                var adr = new Uri(new Uri(Properties.Settings.Default.Address), "Bootstrapper");
-
-                service = new BootstrapperServiceReference.BootstrapperServiceClient("BasicHttpBinding_IBootstrapperService", adr.AbsoluteUri);
-                if (!running) return;
+                var adr = new Uri(address);
 
                 SetStatus("Loading Fileinformation");
-                var files = service.GetFileInfos();
+                WebClient service = new WebClient();
+                var filesBuffer = service.DownloadString(new Uri(adr, "Bootstrapper.svc/GetFileInfos"));
+                var files = filesBuffer.FromXmlString<FileInfoArray>();
 
                 var targetDir = System.Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
                 targetDir = Path.Combine(targetDir, "dasz");
                 targetDir = Path.Combine(targetDir, "ZBox");
                 targetDir = Path.Combine(targetDir, "BootStrapper");
-                targetDir = Path.Combine(targetDir, GetLegalPathName(adr.Authority));
+                targetDir = Path.Combine(targetDir, adr.Authority.GetLegalPathName());
 
                 Directory.CreateDirectory(targetDir);
 
                 string startExec = string.Empty;
                 string startConfig = string.Empty;
 
-                InitProgressBar(files.Length);
+                InitProgressBar(files.Files.Length);
 
-                for (int i = 0; i < files.Length; i++)
+                for (int i = 0; i < files.Files.Length; i++)
                 {
                     if (!running) return;
 
-                    var f = files[i];
+                    var f = files.Files[i];
                     var targetFile = Path.Combine(targetDir, Path.Combine(f.DestPath, f.Name));
 
-                    SetStatus(string.Format("Loading File {0}/{1}", i + 1, files.Length));
+                    SetStatus(string.Format("Loading File {0}/{1}", i + 1, files.Files.Length));
                     SetProgressBar(i);
 
                     switch (f.Type)
                     {
-                        case BootstrapperServiceReference.FileType.Executalable:
+                        case FileType.Executalable:
                             startExec = targetFile;
                             break;
-                        case BootstrapperServiceReference.FileType.AppConfig:
+                        case FileType.AppConfig:
                             startConfig = targetFile;
                             break;
                     }
 
                     if (File.Exists(targetFile))
                     {
-                        FileInfo fi = new FileInfo(targetFile);
+                        var fi = new System.IO.FileInfo(targetFile);
                         if (fi.LastWriteTimeUtc == f.Date && fi.Length == f.Size) continue;
                     }
 
                     Directory.CreateDirectory(Path.Combine(targetDir, f.DestPath));
 
-                    var data = service.GetFile(f.DestPath, f.Name);
-
-                    using (var fs = File.Create(targetFile))
-                    {
-                        fs.SetLength(0);
-                        fs.Write(data, 0, data.Length);
-                    }
+                    service.DownloadFile(new Uri(adr, "Bootstrapper.svc/GetFile/" + f.DestPath + "/" + f.Name), targetFile);
 
                     File.SetCreationTimeUtc(targetFile, f.Date);
                     File.SetLastWriteTimeUtc(targetFile, f.Date);
@@ -169,13 +157,16 @@ namespace Kistl.Client.Bootstrapper
 
         private void Bootstrapper_Load(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(Properties.Settings.Default.Address))
+            this.address = Program.Args.Length > 0 ? Program.Args[0] : Properties.Settings.Default.Address;
+
+            if (string.IsNullOrEmpty(address))
             {
                 var dlg = new AddressDialog();
                 dlg.ShowDialog();
+                address = Properties.Settings.Default.Address;
             }
 
-            if (!string.IsNullOrEmpty(Properties.Settings.Default.Address))
+            if (!string.IsNullOrEmpty(address))
             {
                 thread.Start();
             }

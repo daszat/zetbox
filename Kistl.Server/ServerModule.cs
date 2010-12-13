@@ -63,7 +63,12 @@ namespace Kistl.Server
 
             moduleBuilder
                 .Register(c => new AutofacServiceHostFactory())
-                .As<ServiceHostFactoryBase>()
+                .As<AutofacServiceHostFactory>()
+                .SingleInstance();
+
+            moduleBuilder
+                .Register(c => new AutofacWebServiceHostFactory())
+                .As<AutofacWebServiceHostFactory>()
                 .SingleInstance();
 
             moduleBuilder

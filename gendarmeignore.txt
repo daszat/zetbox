@@ -1,3 +1,7 @@
+R: Gendarme.Rules.Maintainability.AvoidUnnecessarySpecializationRule
+# This method has a parameter whose type is more specialized than necessary. This can make it difficult to reuse the method in other contexts.
+T: Kistl.Server.WcfServer
+
 R: Gendarme.Rules.Correctness.DisposableFieldsShouldBeDisposedRule
 # these classes have special disposal strategies since they need to hold disposable parts with lifecycles beyond themselves
 T: Kistl.Server.SchemaManagement.Cases

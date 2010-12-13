@@ -58,13 +58,10 @@
     <Compile Include="Bootstrapper.Designer.cs">
       <DependentUpon>Bootstrapper.cs</DependentUpon>
     </Compile>
+    <Compile Include="FileInfo.cs" />
+    <Compile Include="Helper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service References\BootstrapperServiceReference\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="AddressDialog.resx">
       <DependentUpon>AddressDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -90,43 +87,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Service References\BootstrapperServiceReference\Bootstrapper.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\BootstrapperServiceReference\Bootstrapper1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\BootstrapperServiceReference\Bootstrapper2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\BootstrapperServiceReference\BootstrapperService.wsdl" />
-    <None Include="Service References\BootstrapperServiceReference\Kistl.Client.Bootstrapper.BootstrapperServiceReference.FileInfo.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="download_FTP_00.gif" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Service References\BootstrapperServiceReference\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\BootstrapperServiceReference\Bootstrapper.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\BootstrapperServiceReference\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\BootstrapperServiceReference\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\BootstrapperServiceReference\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

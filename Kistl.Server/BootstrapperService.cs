@@ -6,6 +6,7 @@ using System.ServiceModel;
 using System.Text;
 using Kistl.API.Configuration;
 using System.IO;
+using System.ServiceModel.Web;
 
 namespace Kistl.Server
 {
@@ -16,7 +17,7 @@ namespace Kistl.Server
         AppConfig = 3,
     }
 
-    [DataContract]
+    [DataContract(Namespace="http://dasz.at/ZBox/Bootstrapper/FileInfo")]
     public class FileInfo
     {
         [DataMember]
@@ -31,19 +32,22 @@ namespace Kistl.Server
         public FileType Type { get; set; }
     }
 
-    [ServiceContract]
+    [ServiceContract(SessionMode = SessionMode.NotAllowed)]
     public interface IBootstrapperService
     {
         [OperationContract]
+        [WebGet(UriTemplate = "/GetFileInfos")]
         FileInfo[] GetFileInfos();
 
         [OperationContract]
-        byte[] GetFile(string path, string name);
+        [WebGet(UriTemplate = "/GetFile/{path}/{name}")]
+        Stream GetFile(string path, string name);
     }
 
     /// <summary>
     /// Bootstrapper service
     /// </summary>
+    [ServiceBehavior(AddressFilterMode = AddressFilterMode.Prefix)]
     public class BootstrapperService : IBootstrapperService
     {
         private KistlConfig config;
@@ -82,19 +86,16 @@ namespace Kistl.Server
             }
         }
 
-        public byte[] GetFile(string path, string name)
+        public Stream GetFile(string path, string name)
         {
             var dir = config.Server.ClientFilesLocations.Single(i => i.Name == path);
             var probe = Path.Combine(dir.Value, name);
             if (File.Exists(probe))
             {
+                WebOperationContext.Current.OutgoingResponse.ContentType = "application/octet-stream";
                 System.IO.FileInfo fi = new System.IO.FileInfo(probe);
                 var result = new byte[fi.Length];
-                using (var fs = fi.OpenRead())
-                {
-                    fs.Read(result, 0, (int)fi.Length);
-                    return result;
-                }
+                return fi.OpenRead();
             }
             throw new FileNotFoundException("File not found in Bootstrapper directories", Path.Combine(path, name));
         }
