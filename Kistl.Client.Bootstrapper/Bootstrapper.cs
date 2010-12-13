@@ -33,18 +33,27 @@ namespace Kistl.Client.Bootstrapper
                 running = true;
 
                 SetStatus("Connecting to Service");
-                var adr = new Uri(address);
 
                 SetStatus("Loading Fileinformation");
                 WebClient service = new WebClient();
-                var filesBuffer = service.DownloadString(new Uri(adr, "Bootstrapper.svc/GetFileInfos"));
+
+                var adr = new UriBuilder(address);
+                adr.Path += "/Bootstrapper.svc/GetFileInfos";
+                var filesBuffer = GetFileInfos(adr.Uri, service);
+
+                if (string.IsNullOrEmpty(filesBuffer))
+                {
+                    SetStatus("Could not connect to Service");
+                    return;
+                }
+
                 var files = filesBuffer.FromXmlString<FileInfoArray>();
 
                 var targetDir = System.Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
                 targetDir = Path.Combine(targetDir, "dasz");
                 targetDir = Path.Combine(targetDir, "ZBox");
                 targetDir = Path.Combine(targetDir, "BootStrapper");
-                targetDir = Path.Combine(targetDir, adr.Authority.GetLegalPathName());
+                targetDir = Path.Combine(targetDir, adr.Uri.Authority.GetLegalPathName());
 
                 Directory.CreateDirectory(targetDir);
 
@@ -81,7 +90,9 @@ namespace Kistl.Client.Bootstrapper
 
                     Directory.CreateDirectory(Path.Combine(targetDir, f.DestPath));
 
-                    service.DownloadFile(new Uri(adr, "Bootstrapper.svc/GetFile/" + f.DestPath + "/" + f.Name), targetFile);
+                    adr = new UriBuilder(address);
+                    adr.Path += "/Bootstrapper.svc/GetFile/" + f.DestPath + "/" + f.Name;
+                    service.DownloadFile(adr.Uri, targetFile);
 
                     File.SetCreationTimeUtc(targetFile, f.Date);
                     File.SetLastWriteTimeUtc(targetFile, f.Date);
@@ -96,6 +107,35 @@ namespace Kistl.Client.Bootstrapper
             catch (Exception ex)
             {
                 SetStatus("Error: " + ex.Message);
+            }
+        }
+
+        private static string GetFileInfos(Uri adr, WebClient service)
+        {
+            string filesBuffer = string.Empty;
+            while (true)
+            {
+                try
+                {
+                    filesBuffer = service.DownloadString(adr);
+                    return filesBuffer;
+                }
+                catch (WebException ex)
+                {
+                    if (ex.Response is HttpWebResponse && ((HttpWebResponse)ex.Response).StatusCode == HttpStatusCode.Unauthorized)
+                    {
+                        PasswordDialog dlg = new PasswordDialog();
+                        if (dlg.ShowDialog() == DialogResult.OK)
+                        {
+                            service.Credentials = new NetworkCredential(dlg.UserName, dlg.Password);
+                            continue;
+                        }
+                        else
+                        {
+                            return null;
+                        }
+                    }
+                }
             }
         }
 
