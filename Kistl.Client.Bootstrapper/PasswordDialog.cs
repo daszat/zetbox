@@ -25,7 +25,7 @@ namespace Kistl.Client.Bootstrapper
             if (cbSave.Checked)
             {
                 Properties.Settings.Default.UserName = txtUserName.Text;
-                Properties.Settings.Default.Password = txtUserName.Text.Protect();
+                Properties.Settings.Default.Password = txtPassword.Text.Protect();
             }
             else
             {

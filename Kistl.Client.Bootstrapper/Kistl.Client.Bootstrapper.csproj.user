@@ -4,7 +4,6 @@
     <ProjectView>ShowAllFiles</ProjectView>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
-    <StartArguments>
-    </StartArguments>
+    <StartArguments>https://office.dasz.at/ZBox</StartArguments>
   </PropertyGroup>
 </Project>

@@ -56,10 +56,11 @@ namespace Kistl.Client.Bootstrapper
                 {
                     if (!running) return;
 
-                    SetStatus(string.Format("Loading File {0}/{1}", i + 1, files.Files.Length));
+                    var f = files.Files[i];
+
+                    SetStatus(string.Format("Loading File {0}/{1}: {2}", i + 1, files.Files.Length, f.GetFullFileName(".")));
                     SetProgressBar(i);
 
-                    var f = files.Files[i];
                     DownloadFile(f);
                 }
 
@@ -100,7 +101,7 @@ namespace Kistl.Client.Bootstrapper
 
             if (!string.IsNullOrEmpty(Properties.Settings.Default.UserName))
             {
-                service.Credentials = new NetworkCredential(Properties.Settings.Default.UserName, Properties.Settings.Default.UserName.Unprotect());
+                service.Credentials = new NetworkCredential(Properties.Settings.Default.UserName, Properties.Settings.Default.Password.Unprotect());
             }
 
             while (true)
@@ -120,11 +121,8 @@ namespace Kistl.Client.Bootstrapper
                             service.Credentials = new NetworkCredential(dlg.UserName, dlg.Password);
                             continue;
                         }
-                        else
-                        {
-                            return null;
-                        }
                     }
+                    return null;
                 }
             }
         }

@@ -43,7 +43,8 @@ namespace Kistl.Client.Bootstrapper
 
         public static string Protect(this string str)
         {
-            return Encoding.UTF8.GetString(
+            if (string.IsNullOrEmpty(str)) return str;
+            return Convert.ToBase64String(
                     System.Security.Cryptography.ProtectedData.Protect(
                         Encoding.UTF8.GetBytes(str), null, System.Security.Cryptography.DataProtectionScope.CurrentUser)
                     );
@@ -51,9 +52,10 @@ namespace Kistl.Client.Bootstrapper
 
         public static string Unprotect(this string str)
         {
+            if (string.IsNullOrEmpty(str)) return str;
             return Encoding.UTF8.GetString(
                     System.Security.Cryptography.ProtectedData.Unprotect(
-                        Encoding.UTF8.GetBytes(str), null, System.Security.Cryptography.DataProtectionScope.CurrentUser)
+                        Convert.FromBase64String(str), null, System.Security.Cryptography.DataProtectionScope.CurrentUser)
                     );
         }
     }
