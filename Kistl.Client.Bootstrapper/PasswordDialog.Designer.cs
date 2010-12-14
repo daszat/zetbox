@@ -34,6 +34,8 @@ namespace Kistl.Client.Bootstrapper
             this.txtUserName = new System.Windows.Forms.TextBox();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.cbSave = new System.Windows.Forms.CheckBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnCancel
@@ -96,6 +98,24 @@ namespace Kistl.Client.Bootstrapper
             this.label2.TabIndex = 4;
             this.label2.Text = "Password";
             // 
+            // cbSave
+            // 
+            this.cbSave.AutoSize = true;
+            this.cbSave.Location = new System.Drawing.Point(105, 75);
+            this.cbSave.Name = "cbSave";
+            this.cbSave.Size = new System.Drawing.Size(15, 14);
+            this.cbSave.TabIndex = 6;
+            this.cbSave.UseVisualStyleBackColor = true;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 76);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(80, 13);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Save password";
+            // 
             // PasswordDialog
             // 
             this.AcceptButton = this.btnOK;
@@ -103,6 +123,8 @@ namespace Kistl.Client.Bootstrapper
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(450, 142);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.cbSave);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtUserName);
@@ -129,5 +151,7 @@ namespace Kistl.Client.Bootstrapper
         private System.Windows.Forms.TextBox txtUserName;
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.CheckBox cbSave;
+        private System.Windows.Forms.Label label3;
     }
 }

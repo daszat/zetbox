@@ -33,6 +33,7 @@ namespace Kistl.Client.Bootstrapper
             this.lbStatus = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.progressBarDownload = new System.Windows.Forms.ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -72,7 +73,7 @@ namespace Kistl.Client.Bootstrapper
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(335, 175);
+            this.btnCancel.Location = new System.Drawing.Point(335, 202);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 3;
@@ -80,13 +81,23 @@ namespace Kistl.Client.Bootstrapper
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // progressBarDownload
+            // 
+            this.progressBarDownload.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.progressBarDownload.Location = new System.Drawing.Point(12, 163);
+            this.progressBarDownload.Name = "progressBarDownload";
+            this.progressBarDownload.Size = new System.Drawing.Size(398, 23);
+            this.progressBarDownload.TabIndex = 4;
+            // 
             // Bootstrapper
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(422, 210);
+            this.ClientSize = new System.Drawing.Size(422, 237);
             this.ControlBox = false;
+            this.Controls.Add(this.progressBarDownload);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.lbStatus);
@@ -110,6 +121,7 @@ namespace Kistl.Client.Bootstrapper
         private System.Windows.Forms.Label lbStatus;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.ProgressBar progressBarDownload;
     }
 }
 

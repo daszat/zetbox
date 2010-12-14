@@ -40,5 +40,21 @@ namespace Kistl.Client.Bootstrapper
             Path.GetInvalidPathChars().Union(new[] { ':' }).ToList().ForEach(c => path = path.Replace(c, '_'));
             return path;
         }
+
+        public static string Protect(this string str)
+        {
+            return Encoding.UTF8.GetString(
+                    System.Security.Cryptography.ProtectedData.Protect(
+                        Encoding.UTF8.GetBytes(str), null, System.Security.Cryptography.DataProtectionScope.CurrentUser)
+                    );
+        }
+
+        public static string Unprotect(this string str)
+        {
+            return Encoding.UTF8.GetString(
+                    System.Security.Cryptography.ProtectedData.Unprotect(
+                        Encoding.UTF8.GetBytes(str), null, System.Security.Cryptography.DataProtectionScope.CurrentUser)
+                    );
+        }
     }
 }
