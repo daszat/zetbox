@@ -33,8 +33,9 @@
     <WarningLevel>4</WarningLevel>
     <NoWarn>1591</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <OutputPath></OutputPath>
-    <KistlAPIPath></KistlAPIPath>
+	<!-- hardcode output path for the visual studio build; the generator replaces this value from configuration -->
+    <OutputPath>..\bin\Debug\bin\<%= GetRelativeOutputPath() %></OutputPath>
+    <KistlAPIPath>..\bin\Debug\bin\</KistlAPIPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -44,8 +45,9 @@
     <WarningLevel>4</WarningLevel>
     <NoWarn>1591</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <OutputPath></OutputPath>
-    <KistlAPIPath></KistlAPIPath>
+	<!-- hardcode output path for the visual studio build; the generator replaces this value from configuration -->
+    <OutputPath>..\bin\Release\bin\<%= GetRelativeOutputPath() %></OutputPath>
+    <KistlAPIPath>..\bin\Release\bin\</KistlAPIPath>
   </PropertyGroup>
   <!-- Has to come in a separate group to receive correct $(OutputPath) -->
   <PropertyGroup>

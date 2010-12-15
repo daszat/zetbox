@@ -24,7 +24,7 @@
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Kistl.Objects.snk</AssemblyOriginatorKeyFile>
 
-	<IsWebBootstrapper>true</IsWebBootstrapper>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
     <PublishUrl><%= GetPublishUrl() %></PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
@@ -65,7 +65,6 @@
     <OutputPath></OutputPath>
     <KistlAPIPath></KistlAPIPath>
   </PropertyGroup>
-  <!-- Has to come in a separate group to receive correct $(OutputPath) -->
 
   <!-- Signing -->
   <PropertyGroup>
@@ -81,9 +80,10 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
 
+  <!-- Has to come in a separate group to receive correct $(OutputPath) -->
   <PropertyGroup>
 <%
-	ApplyAdditionalProperties();
+    ApplyAdditionalProperties();
 %>
   </PropertyGroup>
   <ItemGroup>
@@ -98,23 +98,23 @@
       <HintPath>$(KistlAPIPath)\Common\log4net.dll</HintPath>
       <Private>False</Private>
     </Reference>
-	<Reference Include="WindowsBase">
+    <Reference Include="WindowsBase">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
 <%
-	ApplyAdditionalReferences();
+    ApplyAdditionalReferences();
 %>
   </ItemGroup>
   <ItemGroup>
 <%
-	foreach (var name in fileNames)
-	{
+    foreach (var name in fileNames)
+    {
 %>
     <Compile Include="<%= name %>" />
 <%
-	}
+    }
 %>
   </ItemGroup>
   <ItemGroup>
@@ -154,7 +154,7 @@
   </ItemGroup>
 
 <%
-	ApplyAdditionalItemGroups();
+    ApplyAdditionalItemGroups();
 %>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -165,6 +165,6 @@
   <Target Name="AfterBuild">
   </Target>
   <%
-	ApplyAdditionalPropertyGroups();
+    ApplyAdditionalPropertyGroups();
   %>
 </Project>

@@ -42,7 +42,7 @@ this.WriteObjects("    <FileAlignment>512</FileAlignment>\r\n");
 this.WriteObjects("    <SignAssembly>true</SignAssembly>\r\n");
 this.WriteObjects("    <AssemblyOriginatorKeyFile>Kistl.Objects.snk</AssemblyOriginatorKeyFile>\r\n");
 this.WriteObjects("\r\n");
-this.WriteObjects("	<IsWebBootstrapper>true</IsWebBootstrapper>\r\n");
+this.WriteObjects("    <IsWebBootstrapper>true</IsWebBootstrapper>\r\n");
 this.WriteObjects("    <PublishUrl>",  GetPublishUrl() , "</PublishUrl>\r\n");
 this.WriteObjects("    <Install>true</Install>\r\n");
 this.WriteObjects("    <InstallFrom>Web</InstallFrom>\r\n");
@@ -83,7 +83,6 @@ this.WriteObjects("    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>\r\n")
 this.WriteObjects("    <OutputPath></OutputPath>\r\n");
 this.WriteObjects("    <KistlAPIPath></KistlAPIPath>\r\n");
 this.WriteObjects("  </PropertyGroup>\r\n");
-this.WriteObjects("  <!-- Has to come in a separate group to receive correct $(OutputPath) -->\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("  <!-- Signing -->\r\n");
 this.WriteObjects("  <PropertyGroup>\r\n");
@@ -99,6 +98,7 @@ this.WriteObjects("  <PropertyGroup>\r\n");
 this.WriteObjects("    <SignManifests>true</SignManifests>\r\n");
 this.WriteObjects("  </PropertyGroup>\r\n");
 this.WriteObjects("\r\n");
+this.WriteObjects("  <!-- Has to come in a separate group to receive correct $(OutputPath) -->\r\n");
 this.WriteObjects("  <PropertyGroup>\r\n");
 #line 86 "P:\Kistl\Kistl.Generator.ClickOnce\Templates\ProjectFile.cst"
 ApplyAdditionalProperties();
@@ -117,7 +117,7 @@ this.WriteObjects("      <SpecificVersion>False</SpecificVersion>\r\n");
 this.WriteObjects("      <HintPath>$(KistlAPIPath)\\Common\\log4net.dll</HintPath>\r\n");
 this.WriteObjects("      <Private>False</Private>\r\n");
 this.WriteObjects("    </Reference>\r\n");
-this.WriteObjects("	<Reference Include=\"WindowsBase\">\r\n");
+this.WriteObjects("    <Reference Include=\"WindowsBase\">\r\n");
 this.WriteObjects("      <RequiredTargetFramework>3.5</RequiredTargetFramework>\r\n");
 this.WriteObjects("    </Reference>\r\n");
 this.WriteObjects("    <Reference Include=\"PresentationCore\" />\r\n");
@@ -130,7 +130,7 @@ this.WriteObjects("  </ItemGroup>\r\n");
 this.WriteObjects("  <ItemGroup>\r\n");
 #line 112 "P:\Kistl\Kistl.Generator.ClickOnce\Templates\ProjectFile.cst"
 foreach (var name in fileNames)
-	{
+    {
 
 #line 115 "P:\Kistl\Kistl.Generator.ClickOnce\Templates\ProjectFile.cst"
 this.WriteObjects("    <Compile Include=\"",  name , "\" />\r\n");

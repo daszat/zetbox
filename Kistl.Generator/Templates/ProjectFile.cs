@@ -46,7 +46,16 @@ namespace Kistl.Generator.Templates
             this.WriteLine(@"      <Private>False</Private>");
             this.WriteLine(@"    </Reference>");
         }
-    
+
+        /// <summary>
+        /// Returns the output path relative to the KistlAPIPath. This is only relevant for projects which are 
+        /// compiled in the IDE, as the generator will override the values here.
+        /// </summary>
+        protected virtual string GetRelativeOutputPath()
+        {
+            return @"Server\Fallback";
+        }
+
         /// <summary>
         /// Override this to add one or more &lt;ItemGroup/>s to the project file
         /// </summary>
