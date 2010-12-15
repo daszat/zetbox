@@ -1,0 +1,51 @@
+﻿<%@ CodeTemplate Language="C#" 
+    Name="Serialization.ProxySerialization"
+    ClassName="Kistl.DalProvider.NHibernate.Generator.Templates.Serialization.ProxySerialization" 
+    Inherits="Kistl.Generator.ResourceTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.Generator" %>
+<%@ Import Namespace="Kistl.Generator.Extensions" %>
+<%@ Import Namespace="Kistl.Generator.Templates.Serialization" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="direction" Type="SerializerDirection" %>
+<%@ Parameter Name="streamName" Type="string" %>
+<%@ Parameter Name="xmlnamespace" Type="string" %>
+<%@ Parameter Name="xmlname" Type="string" %>
+<%@ Parameter Name="backingStoreName" Type="string" %>
+<%
+    switch(direction)
+    {
+        case SerializerDirection.ToStream:
+%>
+            BinarySerializer.ToStream(this.<%= backingStoreName %>, <%= streamName %>);
+<%
+            break;
+        case SerializerDirection.FromStream:
+%>
+            BinarySerializer.FromStreamConverter(v => this.<%= backingStoreName %> = v, <%= streamName %>);
+<%
+            break;
+        case SerializerDirection.ToXmlStream:
+%>
+            XmlStreamer.ToStream(this.<%= backingStoreName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
+<%        
+            break;
+        case SerializerDirection.FromXmlStream:
+        case SerializerDirection.MergeImport:
+%>
+            XmlStreamer.FromStreamConverter(v => this.<%= backingStoreName %> = v, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
+<%            
+            break;
+        case SerializerDirection.Export:
+%>    
+            if (modules.Contains("*") || modules.Contains("<%= xmlnamespace %>")) XmlStreamer.ToStream(this.<%= backingStoreName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
+<%            
+            break;
+        default:
+            throw new ArgumentOutOfRangeException("direction");
+    }
+%>

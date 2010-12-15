@@ -28,7 +28,8 @@
            table="`<%= tableName %>`"
            abstract="<%= isAbstract ? "true" : "false" %>">
 
-        <id name="`ID`"
+        <id name="ID"
+            column="`ID`"
             type="Int32">
 
             <generator class="native" />

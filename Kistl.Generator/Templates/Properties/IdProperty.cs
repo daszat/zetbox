@@ -28,7 +28,7 @@ namespace Kistl.Generator.Templates.Properties
                 // ID is currently serialized by the infrastructure, so ignore it here
                 new Serialization.SerializationMembersList(),
                 // hardcoded type, name, and namespace
-                "int", "ID", "http://dasz.at/Kistl")
+                "int", "ID", "http://dasz.at/Kistl", "_ID")
         {
         }
 

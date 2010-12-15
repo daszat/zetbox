@@ -287,6 +287,18 @@ namespace Kistl.API
                 val = xml.ReadElementContentAsString();
             }
         }
+
+        public static void FromStreamConverter(Action<string> conv, XmlReader xml, string name, string ns)
+        {
+            if (conv == null) { throw new ArgumentNullException("conv"); }
+            if (xml == null) { throw new ArgumentNullException("xml"); }
+
+            if (xml.LocalName == name && xml.NamespaceURI == ns)
+            {
+                string val = xml.ReadElementContentAsString();
+                conv(val);
+            }
+        }
         #endregion
 
         #region Collection Entries

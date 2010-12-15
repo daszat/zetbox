@@ -11,12 +11,12 @@ namespace Kistl.Generator.Templates.Serialization
     public partial class SerializerTemplate
     {
         public static void Call(IGenerationHost host, IKistlContext ctx, SerializerDirection direction, SerializationMembersList membersToSerialize,
-            bool overrideAndCallBase, bool writeExportGuidAttribute)
+            bool overrideAndCallBase, string exportGuidBackingStore)
         {
             if (host == null) { throw new ArgumentNullException("host"); }
 
             host.CallTemplate("Serialization.SerializerTemplate", ctx,
-                direction, membersToSerialize, overrideAndCallBase, writeExportGuidAttribute);
+                direction, membersToSerialize, overrideAndCallBase, exportGuidBackingStore);
         }
 
         protected virtual void ApplySerializer(SerializerDirection direction, SerializationMember member, string streamName)

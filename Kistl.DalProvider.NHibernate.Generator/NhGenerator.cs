@@ -8,6 +8,7 @@ namespace Kistl.DalProvider.NHibernate.Generator
     using Kistl.API.Server;
     using Kistl.App.Base;
     using Kistl.Generator;
+    using System.Collections.Specialized;
 
     public class NhGenerator
         : AbstractBaseGenerator
@@ -48,7 +49,7 @@ namespace Kistl.DalProvider.NHibernate.Generator
                 foreach (var oc in ctx.GetQuery<ObjectClass>().Where(i => i.BaseObjectClass == null))
                 {
                     this.RunTemplateWithExtension(ctx, "Mappings.ObjectClassHbm", oc.Name, "hbm.xml",
-                        Templates.Mappings.ObjectClassHbm.MakeArgs(ctx, oc, ExtraSuffix));
+                        Templates.Mappings.ObjectClassHbm.MakeArgs(ctx, oc, new NameValueCollection() { { "extrasuffix", ExtraSuffix } }));
                 }
 
                 return base.Generate_Other(ctx).Concat(otherFileNames);

@@ -12,8 +12,8 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.Properties
     public class NotifyingValueProperty
         : Templates.Properties.NotifyingValueProperty
     {
-        public NotifyingValueProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Serialization.SerializationMembersList list, string type, string name, string moduleNamespace)
-            : base(_host, ctx, list, type, name, moduleNamespace)
+        public NotifyingValueProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Serialization.SerializationMembersList list, string type, string name, string moduleNamespace, string backingName)
+            : base(_host, ctx, list, type, name, moduleNamespace, backingName)
         {
 
         }

@@ -183,6 +183,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.DalProvider.NHibernate", "Kistl.DalProvider.NHibernate\Kistl.DalProvider.NHibernate.csproj", "{B58E3B3A-7212-4F8C-9AAE-7FF680F6F324}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.DalProvider.NHibernate.Generator", "Kistl.DalProvider.NHibernate.Generator\Kistl.DalProvider.NHibernate.Generator.csproj", "{5EEF01A2-C027-4B1E-9D7D-61DEF2042047}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B58E3B3A-7212-4F8C-9AAE-7FF680F6F324} = {B58E3B3A-7212-4F8C-9AAE-7FF680F6F324}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Generator", "Kistl.Generator\Kistl.Generator.csproj", "{4992171F-DA41-401C-8869-63594ACF2D93}"
 EndProject

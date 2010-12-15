@@ -11,16 +11,15 @@
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 <%@ Parameter Name="serializationList" Type="Serialization.SerializationMembersList" %>
 <%@ Parameter Name="type" Type="string" %>
-<%@ Parameter Name="name" Type="String" %>
-<%@ Parameter Name="modulenamespace" Type="String" %>
+<%@ Parameter Name="name" Type="string" %>
+<%@ Parameter Name="modulenamespace" Type="string" %>
+<%@ Parameter Name="backingName" Type="string" %>
         // BEGIN <%= this.GetType() %>
 <%
 
     ApplyRequisitesTemplate();
 
     ApplyAttributesTemplate();
-
-    string backingName = BackingMemberFromName(name);
 
 %>
         <%= GetModifiers() %> <%= type %> <%= name %>
@@ -57,7 +56,7 @@
                 }
             }
         }
-        private <%= type %> <%= backingName %>;
+<% ApplyBackingStoreDefinition(); %>
 <%
     AddSerialization(serializationList, name);
 %>

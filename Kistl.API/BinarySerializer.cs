@@ -57,6 +57,21 @@ namespace Kistl.API
             SerializerTrace("read bool {0}", val);
         }
 
+        /// <summary>
+        /// Deserialize a bool
+        /// </summary>
+        /// <param name="consumer">An action consuming the bool.</param>
+        /// <param name="sr">BinaryReader to deserialize from.</param>
+        public static void FromStreamConverter(Action<bool> consumer, BinaryReader sr)
+        {
+            if (consumer == null) { throw new ArgumentNullException("consumer"); }
+            if (sr == null) { throw new ArgumentNullException("sr"); }
+
+            SerializerTrace("CurrentPos: {0}", sr.BaseStream.Position);
+            var val = sr.ReadBoolean();
+            consumer(val);
+            SerializerTrace("read bool {0}", val);
+        }
 
         /// <summary>
         /// Serialize a nullable bool. Format is: NULL (true/false), Value (if not null).
@@ -69,7 +84,8 @@ namespace Kistl.API
                 throw new ArgumentNullException("sw");
             SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
             SerializerTrace("Writing bool? {0}", val);
-            if (val.HasValue) { sw.Write(true); sw.Write(val.Value); } else
+            if (val.HasValue) { sw.Write(true); sw.Write(val.Value); }
+            else
                 sw.Write(false);
         }
 
@@ -130,7 +146,8 @@ namespace Kistl.API
                 throw new ArgumentNullException("sw");
             SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
             SerializerTrace("Writing DateTime? {0}", val);
-            if (val.HasValue) { sw.Write(true); sw.Write(val.Value.ToBinary()); } else
+            if (val.HasValue) { sw.Write(true); sw.Write(val.Value.ToBinary()); }
+            else
                 sw.Write(false);
         }
 
@@ -191,7 +208,8 @@ namespace Kistl.API
                 throw new ArgumentNullException("sw");
             SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
             SerializerTrace("Writing Guid? {0}", val);
-            if (val.HasValue) { sw.Write(true); sw.Write(val.Value.ToString()); } else
+            if (val.HasValue) { sw.Write(true); sw.Write(val.Value.ToString()); }
+            else
                 sw.Write(false);
         }
 
@@ -252,7 +270,8 @@ namespace Kistl.API
                 throw new ArgumentNullException("sw");
             SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
             SerializerTrace("Writing double? {0}", val);
-            if (val.HasValue) { sw.Write(true); sw.Write(val.Value); } else
+            if (val.HasValue) { sw.Write(true); sw.Write(val.Value); }
+            else
                 sw.Write(false);
         }
 
@@ -313,7 +332,8 @@ namespace Kistl.API
                 throw new ArgumentNullException("sw");
             SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
             SerializerTrace("Writing float? {0}", val);
-            if (val.HasValue) { sw.Write(true); sw.Write(val.Value); } else
+            if (val.HasValue) { sw.Write(true); sw.Write(val.Value); }
+            else
                 sw.Write(false);
         }
 
@@ -389,7 +409,8 @@ namespace Kistl.API
                 throw new ArgumentNullException("sw");
             SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
             SerializerTrace("Writing int? {0}", val);
-            if (val.HasValue) { sw.Write(true); sw.Write(val.Value); } else
+            if (val.HasValue) { sw.Write(true); sw.Write(val.Value); }
+            else
                 sw.Write(false);
         }
         /// <summary>
@@ -449,7 +470,8 @@ namespace Kistl.API
                 throw new ArgumentNullException("sw");
             SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
             SerializerTrace("Writing int? {0}", val);
-            if (val.HasValue) { sw.Write(true); sw.Write(val.Value); } else
+            if (val.HasValue) { sw.Write(true); sw.Write(val.Value); }
+            else
                 sw.Write(false);
         }
         /// <summary>
@@ -609,7 +631,8 @@ namespace Kistl.API
                 throw new ArgumentNullException("sw");
             SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
             long beginPos = sw.BaseStream.Position;
-            if (val != null) { sw.Write(true); sw.Write(val); } else
+            if (val != null) { sw.Write(true); sw.Write(val); }
+            else
                 sw.Write(false);
             long endPos = sw.BaseStream.Position;
             if (val == null)

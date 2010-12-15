@@ -14,7 +14,7 @@
 <%@ Parameter Name="direction" Type="SerializerDirection" %>
 <%@ Parameter Name="fields" Type="SerializationMembersList" %>
 <%@ Parameter Name="overrideAndCallBase" Type="bool" %>
-<%@ Parameter Name="writeExportGuidAttribute" Type="bool" %>
+<%@ Parameter Name="exportGuidBackingStore" Type="string" %>
 
 <%
     string methodName = direction.ToString();
@@ -79,10 +79,10 @@
             base.<%= methodName %>(<%= argName %><%= callBaseWithAdditionalArgs %>);
 <%
     }
-    else if(direction == SerializerDirection.Export && writeExportGuidAttribute)
+    else if(direction == SerializerDirection.Export && !String.IsNullOrEmpty(exportGuidBackingStore))
     {
 %>            
-            xml.WriteAttributeString("ExportGuid", this._ExportGuid.ToString());
+            xml.WriteAttributeString("ExportGuid", <%= exportGuidBackingStore %>.ToString());
 <%
     }
 

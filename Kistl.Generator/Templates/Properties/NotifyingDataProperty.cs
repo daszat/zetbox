@@ -26,7 +26,7 @@ namespace Kistl.Generator.Templates.Properties
         private Property _prop;
 
         public NotifyingDataProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Serialization.SerializationMembersList serializationList, Property prop)
-            : base(_host, ctx, serializationList, prop.ReferencedTypeAsCSharp(), prop.Name, prop.Module.Namespace)
+            : base(_host, ctx, serializationList, prop.ReferencedTypeAsCSharp(), prop.Name, prop.Module.Namespace, "_" + prop.Name)
         {
             _prop = prop;
         }
@@ -70,10 +70,10 @@ namespace Kistl.Generator.Templates.Properties
                 if (this._prop.IsNullable())
                 {
                     this.WriteObjects("                        if (__tmp_value == null)\r\n");
-                    this.WriteObjects("                            __result = this.", BackingMemberFromName(name), " = null;\r\n");
+                    this.WriteObjects("                            __result = this.", backingName, " = null;\r\n");
                     this.WriteObjects("                        else\r\n    "); // Fix indent
                 }
-                this.WriteObjects("                        __result = this.", BackingMemberFromName(name), " = (", type.TrimEnd('?'), ")__tmp_value;\r\n");
+                this.WriteObjects("                        __result = this.", backingName, " = (", type.TrimEnd('?'), ")__tmp_value;\r\n");
                 this.WriteObjects("                    } else {\r\n");
                 this.WriteObjects("                        Kistl.API.Utils.Logging.Log.Warn(\"Unable to get default value for property '", _prop.ObjectClass.Name, ".", _prop.Name, "'\");\r\n");
                 this.WriteObjects("                    }\r\n");
@@ -139,7 +139,7 @@ namespace Kistl.Generator.Templates.Properties
                         Serialization.SerializerType.All,
                         _prop.Module.Namespace,
                         name,
-                        BackingMemberFromName(name),
+                        backingName,
                         IsSetFlagName);
                 }
                 else
@@ -148,7 +148,7 @@ namespace Kistl.Generator.Templates.Properties
                         Serialization.SerializerType.All,
                         _prop.Module.Namespace,
                         name,
-                        BackingMemberFromName(name));
+                        backingName);
                 }
             }
         }

@@ -30,11 +30,24 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.CompoundObjects
             return "BaseServerCompoundObject_EntityFramework";
         }
 
-        protected override void ApplyExtraConstructorTemplate()
+        protected override void ApplyConstructorTemplate()
         {
             // avoid base constructor not implementing bool isNull
             // base.ApplyExtraConstructorTemplate();
             string clsName = this.GetTypeName();
+
+            // default constructor used for de-serialization
+            this.WriteObjects("        public ", clsName, "()");
+            this.WriteLine();
+            this.WriteObjects("            : base(null) // TODO: pass parent's lazyCtx");
+            this.WriteLine();
+            this.WriteObjects("        {");
+            this.WriteLine();
+            this.WriteObjects("            CompoundObject_IsNull = false;");
+            this.WriteLine();
+            this.WriteObjects("        }");
+            this.WriteLine();
+
 
             this.WriteObjects("        public ", clsName, "(bool isNull, IPersistenceObject parent, string property)");
             this.WriteLine();
@@ -46,7 +59,15 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.CompoundObjects
             this.WriteLine();
             this.WriteObjects("            CompoundObject_IsNull = isNull;");
             this.WriteLine();
-            ApplyConstructorBodyTemplate();
+
+            Templates.Properties.CompoundObjectPropertyInitialisation.Call(
+                Host, ctx,
+                this.DataType
+                    .Properties
+                    .OfType<CompoundObjectProperty>(),
+                ImplementationSuffix,
+                ImplementationPropertySuffix);
+
             this.WriteObjects("        }");
             this.WriteLine();
 

@@ -113,5 +113,50 @@ namespace Kistl.Generator.Extensions
 
             return otherEnd.Multiplicity.UpperBound() > 1;
         }
+
+        // TODO: convert to class method 
+        public static string GetCSharpTypeDef(this Property prop)
+        {
+            if (prop is ValueTypeProperty)
+            {
+                var vtp = (ValueTypeProperty)prop;
+                if (vtp.IsList && vtp.HasPersistentOrder)
+                {
+                    return String.Format("IList<{0}>", vtp.GetPropertyTypeString());
+                }
+                else if (vtp.IsList && !vtp.HasPersistentOrder)
+                {
+                    return String.Format("ICollection<{0}>", vtp.GetPropertyTypeString());
+                }
+                else if (!vtp.IsList)
+                {
+                    return String.Format("{0}{1}", vtp.GetPropertyTypeString(), vtp.IsNullable() ? "?" : String.Empty);
+                }
+                else
+                {
+                    throw new NotImplementedException(prop.ToString());
+                }
+            }
+            else if (prop is ObjectReferenceProperty)
+            {
+                var orp = (ObjectReferenceProperty)prop;
+                if (orp.IsList())
+                {
+                    return orp.GetCollectionTypeString();
+                }
+                else if (!orp.IsList())
+                {
+                    return String.Format("{0}{1}", orp.GetPropertyTypeString(), orp.IsNullable() ? "?" : String.Empty);
+                }
+                else
+                {
+                    throw new NotImplementedException(prop.ToString());
+                }
+            }
+            else
+            {
+                throw new NotImplementedException(prop.ToString());
+            }
+        }
     }
 }

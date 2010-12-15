@@ -5,6 +5,7 @@ namespace Kistl.Generator.Templates.CollectionEntries
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using Kistl.App.Base;
 
     public abstract partial class CollectionEntryTemplate
     {
@@ -50,9 +51,19 @@ namespace Kistl.Generator.Templates.CollectionEntries
             }
         }
 
+        protected virtual void ApplyConstructorTemplate()
+        {
+            ObjectClasses.Constructors.Call(Host, ctx, GetCeClassName(), new CompoundObjectProperty[0]);
+        }
+
         protected abstract bool IsExportable();
 
         protected abstract string[] GetIExportableInterfaces();
+
+        protected virtual string GetExportGuidBackingStoreReference()
+        {
+            return "this._ExportGuid";
+        }
 
         /// <returns>The interfaces this class implements</returns>
         protected virtual string[] GetInterfaces()

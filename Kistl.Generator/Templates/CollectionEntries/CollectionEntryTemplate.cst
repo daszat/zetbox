@@ -16,17 +16,8 @@
     [System.Diagnostics.DebuggerDisplay("<%= GetCeClassName() %>")]
     public class <%= GetCeClassName() %> <%= GetInheritance() %>
     {
-        [Obsolete]
-        public <%= GetCeClassName() %>() : base(null) { }
-
-        public <%= GetCeClassName() %>(Func<IFrozenContext> lazyCtx)
-            : base(lazyCtx)
-        {
-        }
-
-<%
-    ApplyClassHeadTemplate();
-%>
+<% ApplyConstructorTemplate(); %>
+<% ApplyClassHeadTemplate(); %>
 
         /// <summary>
         /// the A-side value of this CollectionEntry
@@ -65,24 +56,24 @@
 
 <%
     Serialization.SerializerTemplate.Call(Host, ctx,
-        Serialization.SerializerDirection.ToStream, this.MembersToSerialize, true, false);
+        Serialization.SerializerDirection.ToStream, this.MembersToSerialize, true, null);
 
     Serialization.SerializerTemplate.Call(Host, ctx,
-        Serialization.SerializerDirection.FromStream, this.MembersToSerialize, true, false);
+        Serialization.SerializerDirection.FromStream, this.MembersToSerialize, true, null);
 
     Serialization.SerializerTemplate.Call(Host, ctx,
-        Serialization.SerializerDirection.ToXmlStream, this.MembersToSerialize, true, false);
+        Serialization.SerializerDirection.ToXmlStream, this.MembersToSerialize, true, null);
 
     Serialization.SerializerTemplate.Call(Host, ctx,
-        Serialization.SerializerDirection.FromXmlStream, this.MembersToSerialize, true, false);
+        Serialization.SerializerDirection.FromXmlStream, this.MembersToSerialize, true, null);
 
     if(IsExportable())
     {
         Serialization.SerializerTemplate.Call(Host, ctx,
-            Serialization.SerializerDirection.Export, this.MembersToSerialize, false, true);
+            Serialization.SerializerDirection.Export, this.MembersToSerialize, false, GetExportGuidBackingStoreReference());
 
         Serialization.SerializerTemplate.Call(Host, ctx,
-            Serialization.SerializerDirection.MergeImport, this.MembersToSerialize, false, true);
+            Serialization.SerializerDirection.MergeImport, this.MembersToSerialize, false, GetExportGuidBackingStoreReference());
     }
 %>
 

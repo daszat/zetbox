@@ -17,8 +17,10 @@ namespace Kistl.Generator.Templates.Properties
         {
             if (host == null) { throw new ArgumentNullException("host"); }
 
+            string backingName = "_" + name;
+
             host.CallTemplate("Properties.NotifyingValueProperty",
-                ctx, serializationList, type, name, modulenamespace);
+                ctx, serializationList, type, name, modulenamespace, backingName);
         }
 
         /// <summary>
@@ -31,20 +33,20 @@ namespace Kistl.Generator.Templates.Properties
         /// </summary>
         protected virtual void ApplyAttributesTemplate() { }
 
-        protected virtual string BackingMemberFromName(string name)
-        {
-            return "_" + name;
-        }
-
         protected virtual void AddSerialization(Serialization.SerializationMembersList list, string name)
         {
             if (list != null)
-                list.Add(Serialization.SerializerType.All, modulenamespace, name, BackingMemberFromName(name));
+                list.Add(Serialization.SerializerType.All, modulenamespace, name, backingName);
         }
 
         protected virtual void ApplyOnGetTemplate() { }
         protected virtual void ApplyOnAllSetTemplate() { }
         protected virtual void ApplyPreSetTemplate() { }
         protected virtual void ApplyPostSetTemplate() { }
+
+        protected virtual void ApplyBackingStoreDefinition()
+        {
+            this.WriteLine("        private {0} {1};", type, backingName);
+        }
     }
 }

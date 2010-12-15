@@ -28,27 +28,6 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.ObjectClasses
             WriteLine("    [EdmEntityType(NamespaceName=\"Model\", Name=\"{0}\")]", this.DataType.Name);
         }
 
-        protected override void ApplyConstructorBodyTemplate()
-        {
-            base.ApplyConstructorBodyTemplate();
-            if (DataType.Properties.OfType<CompoundObjectProperty>().Count() > 0)
-            {
-                this.WriteObjects("\t\t\t{");
-                this.WriteLine();
-                foreach (var prop in DataType.Properties.OfType<CompoundObjectProperty>().Where(p => !p.IsList && p.IsNullable()).OrderBy(p => p.Name))
-                {
-                    string name = prop.Name;
-                    string backingName = "_" + name;
-                    string structType = prop.GetPropertyTypeString();
-                    string structImplementationType = structType + ImplementationSuffix;
-                    this.WriteObjects("\t\t\t\t", backingName, " = new ", structImplementationType, "(true, this, \"", name, "\");");
-                    this.WriteLine();
-                }
-                this.WriteObjects("\t\t\t}");
-                this.WriteLine();
-            }
-        }
-
         protected override string GetBaseClass()
         {
             if (this.ObjectClass.BaseObjectClass != null)

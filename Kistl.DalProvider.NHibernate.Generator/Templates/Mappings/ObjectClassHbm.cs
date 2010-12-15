@@ -8,31 +8,76 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
     using Arebis.CodeGeneration;
     using Kistl.API;
     using Kistl.App.Base;
+using System.Collections.Specialized;
 
     public partial class ObjectClassHbm
     {
-        public static string GetAssemblyQualifiedImplementation(ObjectClass cls, string extraSuffix)
+        public static string GetAssemblyQualifiedInterface(ObjectClass cls, NameValueCollection templateSettings)
         {
             if (cls == null) { throw new ArgumentNullException("cls"); }
-            if (extraSuffix == null) { extraSuffix = String.Empty; }
+            if (templateSettings == null) { throw new ArgumentNullException("templateSettings"); }
+
+            string extraSuffix = templateSettings["extrasuffix"];
+
+            // cls.Module.Namespace + "." + interfaceName + ", Kistl.Objects";
 
             return cls.Module.Namespace + "."
                 + cls.Name + extraSuffix + Kistl.API.Helper.ImplementationSuffix
+                + "+" + cls.Name + "Interface"
                 + ", Kistl.Objects." + extraSuffix + Kistl.API.Helper.ImplementationSuffix;
         }
 
-        public static object[] MakeArgs(IKistlContext ctx, ObjectClass cls, string extraSuffix)
+        public static string GetAssemblyQualifiedImplementation(ObjectClass cls, NameValueCollection templateSettings)
+        {
+            if (cls == null) { throw new ArgumentNullException("cls"); }
+            if (templateSettings == null) { throw new ArgumentNullException("templateSettings"); }
+
+            string extraSuffix = templateSettings["extrasuffix"];
+
+            return cls.Module.Namespace + "."
+                + cls.Name + extraSuffix + Kistl.API.Helper.ImplementationSuffix
+                + "+" + cls.Name + "Proxy"
+                + ", Kistl.Objects." + extraSuffix + Kistl.API.Helper.ImplementationSuffix;
+        }
+
+        public static string GetInterfaceTypeReference(ObjectClass cls, NameValueCollection templateSettings)
+        {
+            if (cls == null) { throw new ArgumentNullException("cls"); }
+            if (templateSettings == null) { throw new ArgumentNullException("templateSettings"); }
+
+            string extraSuffix = templateSettings["extrasuffix"];
+
+            return cls.Module.Namespace + "."
+                + cls.Name + extraSuffix + Kistl.API.Helper.ImplementationSuffix
+                + "." + cls.Name + "Interface";
+        }
+
+        public static string GetImplementationTypeReference(ObjectClass cls, NameValueCollection templateSettings)
+        {
+            if (cls == null) { throw new ArgumentNullException("cls"); }
+            if (templateSettings == null) { throw new ArgumentNullException("templateSettings"); }
+
+            string extraSuffix = templateSettings["extrasuffix"];
+
+            return cls.Module.Namespace + "."
+                + cls.Name + extraSuffix + Kistl.API.Helper.ImplementationSuffix
+                + "." + cls.Name + "Proxy";
+        }
+
+
+        public static object[] MakeArgs(IKistlContext ctx, ObjectClass cls, NameValueCollection templateSettings)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
             if (cls == null) { throw new ArgumentNullException("cls"); }
-            if (extraSuffix == null) { throw new ArgumentNullException("extraSuffix"); }
+            if (templateSettings == null) { throw new ArgumentNullException("templateSettings"); }
 
+            string extraSuffix = templateSettings["extrasuffix"];
             string interfaceName = cls.Name;
             string implementationName = cls.Name + extraSuffix + Kistl.API.Helper.ImplementationSuffix;
             string tableName = cls.TableName;
 
-            string qualifiedInterfaceName = cls.Module.Namespace + "." + interfaceName + ", Kistl.Objects";
-            string qualifiedImplementationName = GetAssemblyQualifiedImplementation(cls, extraSuffix);
+            string qualifiedInterfaceName = GetAssemblyQualifiedInterface(cls, templateSettings);
+            string qualifiedImplementationName = GetAssemblyQualifiedImplementation(cls, templateSettings);
 
             bool isAbstract = cls.IsAbstract;
 

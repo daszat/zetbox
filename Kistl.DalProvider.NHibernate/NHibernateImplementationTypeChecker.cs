@@ -40,7 +40,7 @@ namespace Kistl.DalProvider.NHibernate
             else
             {
                 // TODO: #1570 using wrong suffix
-                var ifTypeName = Type.FullName.Replace("NHibernate" + Helper.ImplementationSuffix, String.Empty);
+                var ifTypeName = Type.FullName.Replace("NHibernate" + Helper.ImplementationSuffix, String.Empty).Split('+')[0];
                 return IftFactory(Type.GetType(ifTypeName + ", " + typeof(ObjectClass).Assembly.FullName, true));
             }
         }

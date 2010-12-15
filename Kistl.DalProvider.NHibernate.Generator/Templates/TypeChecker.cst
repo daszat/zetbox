@@ -1,0 +1,36 @@
+﻿<%@ CodeTemplate Language="C#" 
+    Name="TypeChecker"
+    ClassName="Kistl.DalProvider.NHibernate.Generator.Templates.TypeChecker" 
+    Inherits="Kistl.Generator.ResourceTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="System.Linq" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="shortName" Type="string" %>
+
+    internal sealed class <%= shortName %>ImplementationTypeChecker
+        : Kistl.API.BaseTypeChecker, I<%= shortName %>ImplementationTypeChecker
+    {
+        public <%= shortName %>ImplementationTypeChecker(Func<IEnumerable<IImplementationTypeChecker>> implTypeCheckersFactory)
+            : base(implTypeCheckersFactory)
+        {
+        }
+
+        public bool IsImplementationType(Type type)
+        {
+            if (type == null) { throw new ArgumentNullException("type"); }
+
+			var myAssembly = this.GetType().Assembly;
+
+            // Allow all types from the generated assembly
+            if (type.Assembly == myAssembly)
+                return true;
+
+            // Allow all generic types which have only implementation types as arguments
+            if (type.IsGenericType)
+                return type.GetGenericArguments().All(t => IsImplementationType(t));
+
+            return false;
+		}
+	}

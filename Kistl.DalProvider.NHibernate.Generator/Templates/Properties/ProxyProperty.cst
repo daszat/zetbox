@@ -1,0 +1,52 @@
+﻿<%@ CodeTemplate Language="C#" 
+    Name="Properties.ProxyProperty"
+    ClassName="Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty" 
+    Inherits="Kistl.Generator.MemberTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="System.Linq" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.App.Extensions" %>
+<%@ Import Namespace="Kistl.Generator" %>
+<%@ Import Namespace="Kistl.Generator.Extensions" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="propertyType" Type="string" %>
+<%@ Parameter Name="propertyName" Type="string" %>
+<%@ Parameter Name="overrideParent" Type="bool" %>
+<%@ Parameter Name="useEvents" Type="bool" %>
+        // BEGIN <%= this.GetType() %>
+        <%= GetModifiers() %> <%= propertyType %> <%= propertyName %>
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = Proxy.<%= propertyName %>;
+<%
+    ApplyOnGetTemplate();
+%>
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+
+                if (Proxy.<%= propertyName %> != value)
+                {
+                    var __oldValue = Proxy.<%= propertyName %>;
+                    var __newValue = value;
+<%
+    ApplyPreSetTemplate();
+%>
+                    NotifyPropertyChanging("<%= propertyName %>", __oldValue, __newValue);
+                    Proxy.<%= propertyName %> = __newValue;
+                    NotifyPropertyChanged("<%= propertyName %>", __oldValue, __newValue);
+<%
+    ApplyPostSetTemplate();
+%>
+                }
+            }
+        }
+        // END <%= this.GetType() %>

@@ -35,9 +35,16 @@ namespace Kistl.Generator.Templates.CompoundObjects
             return "CompoundObject" + ImplementationSuffix;
         }
 
-        protected override void ApplyExtraConstructorTemplate()
+        protected override void ApplyConstructorTemplate()
         {
-            base.ApplyExtraConstructorTemplate();
+            base.ApplyConstructorTemplate();
+
+            ObjectClasses.Constructors.Call(
+                Host, ctx, 
+                GetTypeName(),
+                this.DataType
+                    .Properties
+                    .OfType<CompoundObjectProperty>());
 
             string clsName = this.GetTypeName();
 
@@ -52,7 +59,15 @@ namespace Kistl.Generator.Templates.CompoundObjects
             this.WriteLine();
             this.WriteObjects("            AttachToObject(parent, property);");
             this.WriteLine();
-            ApplyConstructorBodyTemplate();
+
+            Properties.CompoundObjectPropertyInitialisation.Call(
+                Host, ctx,
+                this.DataType
+                    .Properties
+                    .OfType<CompoundObjectProperty>(),
+                ImplementationSuffix,
+                ImplementationPropertySuffix);
+
             this.WriteObjects("        }");
             this.WriteLine();
         }

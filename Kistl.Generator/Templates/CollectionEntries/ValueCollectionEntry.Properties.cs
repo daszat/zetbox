@@ -47,7 +47,7 @@ namespace Kistl.Generator.Templates.CollectionEntries
             Properties.DelegatingProperty.Call(Host, ctx, "ValueObject", "object", "Value", implementationType);
         }
 
-        protected override void ApplyAIndexPropertyTemplate()
+        protected override sealed void ApplyAIndexPropertyTemplate()
         {
             this.WriteLine("        // always ignored because the other side (a value) cannot have a navigator and therefore no order");
             this.WriteObjects("        int? ", GetCeInterface(), ".AIndex { get { return null; } set { } }");

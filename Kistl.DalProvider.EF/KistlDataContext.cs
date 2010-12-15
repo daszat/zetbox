@@ -6,6 +6,7 @@ namespace Kistl.DalProvider.Ef
     using System.Collections;
     using System.Collections.Generic;
     using System.Data;
+    using System.Data.Common;
     using System.Data.Objects;
     using System.Linq;
     using System.Reflection;
@@ -16,7 +17,6 @@ namespace Kistl.DalProvider.Ef
     using Kistl.API.Utils;
     using Kistl.App.Base;
     using Kistl.App.Extensions;
-    using System.Data.Common;
 
     /// <summary>
     /// Entityframework IKistlContext implementation
@@ -27,7 +27,7 @@ namespace Kistl.DalProvider.Ef
         private static readonly object _lock = new object();
 
         private readonly EfObjectContext _ctx;
-        private bool _connectionManallyOpened = false;
+        private bool _connectionManuallyOpened = false;
 
         private readonly EfImplementationType.EfFactory _implTypeFactory;
 
@@ -50,13 +50,13 @@ namespace Kistl.DalProvider.Ef
                 }
                 if (_ctx != null)
                 {
-                    if (_connectionManallyOpened)
+                    if (_connectionManuallyOpened)
                     {
                         // Close manually, Connection is exposed.
                         // EF wont close it if connection was manually opened
                         _ctx.Connection.Close();
                         // Once is enough
-                        _connectionManallyOpened = false;
+                        _connectionManuallyOpened = false;
                     }
                     _ctx.Dispose();
                 }
@@ -738,7 +738,7 @@ namespace Kistl.DalProvider.Ef
         {
             if (this._ctx.Connection.State == ConnectionState.Closed)
             {
-                _connectionManallyOpened = true;
+                _connectionManuallyOpened = true;
                 this._ctx.Connection.Open();
             }
         }

@@ -10,7 +10,7 @@ using Kistl.Generator.Extensions;
 
 namespace Kistl.DalProvider.Ef.Generator.Templates.ObjectClasses
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.DalProvider.Ef.Generator\Templates\ObjectClasses\SecurityRulesClass.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\ObjectClasses\SecurityRulesClass.cst")]
     public partial class SecurityRulesClass : Kistl.Generator.ResourceTemplate
     {
 		protected IKistlContext ctx;
@@ -33,7 +33,7 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.ObjectClasses
         
         public override void Generate()
         {
-#line 18 "P:\Kistl\Kistl.DalProvider.Ef.Generator\Templates\ObjectClasses\SecurityRulesClass.cst"
+#line 18 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\ObjectClasses\SecurityRulesClass.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("    [System.Data.Objects.DataClasses.EdmEntityTypeAttribute(NamespaceName=\"Model\", Name=\"",  targetRoleName , "\")]\r\n");
 this.WriteObjects("    public class ",  referencedImplementation , " : System.Data.Objects.DataClasses.EntityObject\r\n");

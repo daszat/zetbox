@@ -51,14 +51,14 @@ namespace Kistl.Generator.Templates
         protected virtual void ApplyClassAttributeTemplate() { }
 
         /// <summary>
-        /// Is called to apply the contents of the default constructor
+        /// Is called to apply additional infrastructure to the beginning of the class.
         /// </summary>
-        protected virtual void ApplyConstructorBodyTemplate() { }
+        protected virtual void ApplyClassHeadTemplate() { }
 
         /// <summary>
-        /// Is called to apply additional constructors
+        /// Is called to apply the constructors for this class.
         /// </summary>
-        protected virtual void ApplyExtraConstructorTemplate() { }
+        protected virtual void ApplyConstructorTemplate() { }
 
         /// <summary>
         /// is called to apply a optional tail part within the class
@@ -109,6 +109,11 @@ namespace Kistl.Generator.Templates
             {
                 return String.Empty;
             }
+        }
+
+        protected virtual string GetExportGuidBackingStoreReference()
+        {
+            return "this._ExportGuid";
         }
 
         protected virtual void ApplyMethodTemplate(Method m, int index)

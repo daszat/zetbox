@@ -110,6 +110,9 @@ namespace Kistl.API.Server
                 }
 
                 object result = Source.Provider.Execute(translated);
+
+                result = WrapResult(result);
+
                 if (result != null && result is IPersistenceObject)
                 {
                     ((IPersistenceObject)result).AttachToContext(Ctx);
@@ -139,13 +142,19 @@ namespace Kistl.API.Server
 
                 IQueryable newQuery = Source.Provider.CreateQuery(translated);
                 List<T> result = new List<T>();
-                foreach (T item in newQuery)
+                foreach (object item in newQuery)
                 {
-                    if (item is IPersistenceObject) ((IPersistenceObject)item).AttachToContext(Ctx);
-                    result.Add(item);
+                    var wrappedItem = (T)WrapResult(item);
+                    if (wrappedItem is IPersistenceObject) ((IPersistenceObject)wrappedItem).AttachToContext(Ctx);
+                    result.Add(wrappedItem);
                 }
                 return result;
             }
+        }
+
+        protected virtual object WrapResult(object item)
+        {
+            return item;
         }
 
         private void ResetProvider()
@@ -276,7 +285,7 @@ namespace Kistl.API.Server
                 // If this is not a static access AND the member type(!) and expression type do not match, fixup MemberInfo
                 if (e != null && !member.DeclaringType.IsAssignableFrom(e.Type))
                 {
-                    member = e.Type.GetMember(m.Member.Name).Single();
+                    member = e.Type.FindProperty(m.Member.Name).Single();
                 }
                 result = Expression.MakeMemberAccess(e, member);
             }
@@ -416,7 +425,6 @@ namespace Kistl.API.Server
 
             List<Type> GenericArguments = new List<Type>();
             GenericArguments.AddRange(input.GetGenericArguments().Select(p => TranslateType(p)));
-
 
             MethodInfo mi;
             if (GenericArguments != null && GenericArguments.Count > 0)

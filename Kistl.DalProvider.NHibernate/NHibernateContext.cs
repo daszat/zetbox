@@ -17,31 +17,52 @@ namespace Kistl.DalProvider.NHibernate
     {
         private readonly NHibernateImplementationType.Factory _implTypeFactory;
         private readonly global::NHibernate.ISession _nhSession;
-        private readonly List<NHibernatePersistenceObject> _attachedObjects = new List<NHibernatePersistenceObject>();
+        private readonly ContextCache _attachedObjects;
 
         public NHibernateContext(
-            IMetaDataResolver metaDataResolver, 
-            Identity identity, 
+            IMetaDataResolver metaDataResolver,
+            Identity identity,
             KistlConfig config,
             Func<IFrozenContext> lazyCtx,
-            InterfaceType.Factory iftFactory, 
-            NHibernateImplementationType.Factory implTypeFactory, 
+            InterfaceType.Factory iftFactory,
+            NHibernateImplementationType.Factory implTypeFactory,
             global::NHibernate.ISession nhSession)
             : base(metaDataResolver, identity, config, lazyCtx, iftFactory)
         {
             _implTypeFactory = implTypeFactory;
             _nhSession = nhSession;
+            _attachedObjects = new ContextCache(this);
         }
 
-        private IQueryable<IPersistenceObject> PrepareQueryable<T>()
+        public IQueryable<IPersistenceObject> PrepareQueryableGeneric<Tinterface, Timpl>()
         {
-            return _nhSession.Query<T>().Cast<IPersistenceObject>();
+            var query = _nhSession.Query<Timpl>();
+            return new QueryTranslator<Tinterface>(
+                new NHibernateQueryTranslatorProvider<Tinterface>(
+                    metaDataResolver, this.identity,
+                    query, this, iftFactory))
+                .Cast<IPersistenceObject>();
         }
 
-        public override IQueryable<T> GetQuery<T>()
+        public IQueryable<IPersistenceObject> PrepareQueryable(InterfaceType ifType)
+        {
+            var mi = this.GetType().FindGenericMethod(
+                "PrepareQueryableGeneric",
+                new[] { ifType.Type, ToImplementationType(ifType).Type },
+                null);
+            return (IQueryable<IPersistenceObject>)mi.Invoke(this, new object[0]);
+        }
+
+        public override IPersistenceObject Attach(IPersistenceObject obj)
+        {
+            _attachedObjects.Add(obj);
+            return base.Attach(obj);
+        }
+
+        public override IQueryable<Tinterface> GetQuery<Tinterface>()
         {
             CheckDisposed();
-            return GetPersistenceObjectQuery<T>();
+            return GetPersistenceObjectQuery<Tinterface>();
         }
 
         public override IQueryable<IDataObject> GetQuery(InterfaceType ifType)
@@ -50,24 +71,19 @@ namespace Kistl.DalProvider.NHibernate
             return GetPersistenceObjectQuery(ifType).Cast<IDataObject>();
         }
 
-        public override IQueryable<T> GetPersistenceObjectQuery<T>()
+        public override IQueryable<Tinterface> GetPersistenceObjectQuery<Tinterface>()
         {
             CheckDisposed();
-            // TODO: need to convert T -> TImpl
-            return _nhSession.Query<T>();
+
+            var ifType = GetInterfaceType(typeof(Tinterface));
+            return PrepareQueryable(ifType).OfType<Tinterface>();
         }
 
         public override IQueryable<IPersistenceObject> GetPersistenceObjectQuery(InterfaceType ifType)
         {
             CheckDisposed();
             //CheckInterfaceAssembly("ifType", ifType.Type);
-
-            var mi = this.GetType().FindGenericMethod(
-                "PrepareQueryable",
-                new[] { ToImplementationType(ifType).Type },
-                new Type[0]);
-
-            return (IQueryable<IPersistenceObject>)mi.Invoke(this, new object[0]);
+            return PrepareQueryable(ifType);
         }
 
         public override IList<T> FetchRelation<T>(Guid relationId, RelationEndRole role, IDataObject parent)
@@ -285,7 +301,7 @@ namespace Kistl.DalProvider.NHibernate
         public override ImplementationType ToImplementationType(InterfaceType t)
         {
             CheckDisposed();
-            return _implTypeFactory(t.Type);
+            return _implTypeFactory(Type.GetType(String.Format("{0}NHibernate{1}+{2}Interface,{3}", t.Type.FullName, Kistl.API.Helper.ImplementationSuffix, t.Type.Name, NHibernateProvider.ServerAssembly)));
         }
 
         protected override int ExecGetSequenceNumber(Guid sequenceGuid)
@@ -298,7 +314,6 @@ namespace Kistl.DalProvider.NHibernate
             throw new NotImplementedException();
         }
 
-        
         protected override bool IsTransactionRunning
         {
             get
@@ -320,6 +335,16 @@ namespace Kistl.DalProvider.NHibernate
         public override void RollbackTransaction()
         {
             throw new NotImplementedException();
+        }
+
+        internal IPersistenceObject AttachAndWrap(IProxyObject proxy)
+        {
+            var item = _attachedObjects.Lookup(GetImplementationType(proxy.Interface).ToInterfaceType(), proxy.ID);
+            if (item == null)
+            {
+                item = (IPersistenceObject)Activator.CreateInstance(proxy.ZBoxWrapper, null, proxy);
+            }
+            return item;
         }
     }
 }

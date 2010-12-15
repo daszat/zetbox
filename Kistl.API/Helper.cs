@@ -41,7 +41,7 @@ namespace Kistl.API
         /// Interface Assembly
         /// </summary>
         public static readonly string InterfaceAssembly = "Kistl.Objects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7b69192d05046fdf";
-       
+
         /// <summary>
         /// Default length if StringRangeConstraint is missing
         /// </summary>
@@ -185,7 +185,7 @@ namespace Kistl.API
         public static T GetPrivatePropertyValue<T>(this object obj, string propName)
         {
             if (obj == null) throw new ArgumentNullException("obj");
-            if(Logging.Reflection.IsDebugEnabled) Logging.Reflection.DebugFormat("GetPrivatePropertyValue of {0}.{1}", obj.GetType().FullName, propName);
+            if (Logging.Reflection.IsDebugEnabled) Logging.Reflection.DebugFormat("GetPrivatePropertyValue of {0}.{1}", obj.GetType().FullName, propName);
             PropertyInfo pi = obj.GetType().GetProperty(propName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
             if (pi == null) throw new ArgumentOutOfRangeException("propName", string.Format("Property {0} was not found in Type {1}", propName, obj.GetType().FullName));
             return (T)pi.GetValue(obj, null);
@@ -769,11 +769,28 @@ namespace Kistl.API
         /// <returns>MethodInfo or null if the method was not found</returns>
         public static MethodInfo FindGenericMethod(this Type type, string methodName, Type[] typeArguments, Type[] parameterTypes)
         {
+            return type.FindGenericMethod(false, methodName, typeArguments, parameterTypes);
+        }
+
+        /// <summary>
+        /// Finds a Method with the given method parameter.
+        /// </summary>
+        /// <param name="type">Type to search in</param>
+        /// <param name="isPrivate">whether or not the method is private</param>
+        /// <param name="methodName">Methodname to search for</param>
+        /// <param name="typeArguments">type arguments to match</param>
+        /// <param name="parameterTypes">parameter types to match</param>
+        /// <returns>MethodInfo or null if the method was not found</returns>
+        public static MethodInfo FindGenericMethod(this Type type, bool isPrivate, string methodName, Type[] typeArguments, Type[] parameterTypes)
+        {
             if (type == null) { throw new ArgumentNullException("type"); }
 
             if (parameterTypes == null)
             {
-                MethodInfo mi = type.GetMethod(methodName);
+                MethodInfo mi = isPrivate
+                    ? type.GetMethod(methodName, BindingFlags.Instance | BindingFlags.FlattenHierarchy | BindingFlags.NonPublic)
+                    : type.GetMethod(methodName);
+
                 if (mi != null)
                 {
                     return mi.MakeGenericMethod(typeArguments);
@@ -781,7 +798,10 @@ namespace Kistl.API
             }
             else
             {
-                MethodInfo[] methods = type.GetMethods();
+                MethodInfo[] methods = isPrivate
+                    ? type.GetMethods(BindingFlags.Instance | BindingFlags.FlattenHierarchy | BindingFlags.NonPublic)
+                    : type.GetMethods();
+
                 foreach (MethodInfo method in methods)
                 {
                     if (method.Name == methodName && method.GetGenericArguments().Length == typeArguments.Length)
@@ -810,14 +830,14 @@ namespace Kistl.API
             // Look in Basetypes
             if (type.BaseType != null)
             {
-                MethodInfo mi = type.BaseType.FindGenericMethod(methodName, typeArguments, parameterTypes);
+                MethodInfo mi = type.BaseType.FindGenericMethod(isPrivate, methodName, typeArguments, parameterTypes);
                 if (mi != null) return mi;
             }
 
             // Look in Interfaces
             foreach (Type i in type.GetInterfaces())
             {
-                MethodInfo mi = i.FindGenericMethod(methodName, typeArguments, parameterTypes);
+                MethodInfo mi = i.FindGenericMethod(isPrivate, methodName, typeArguments, parameterTypes);
                 if (mi != null) return mi;
             }
 
@@ -843,6 +863,32 @@ namespace Kistl.API
             }
 
             return null;
+        }
+
+        /// <summary>
+        /// Searches a type hierarchie for a property
+        /// </summary>
+        /// <param name="t">type to search</param>
+        /// <param name="name">name of the property to search for</param>
+        /// <returns>MemberInfo or null if not found</returns>
+        public static MemberInfo[] FindProperty(this Type t, string name)
+        {
+            if (t == null) throw new ArgumentNullException("t");
+            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
+
+            var result = t.GetMember(name, MemberTypes.Property, BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy);
+
+            if (result == null || result.Length == 0)
+            {
+                foreach (var iface in t.GetInterfaces())
+                {
+                    result = iface.GetMember(name, MemberTypes.Property, BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy);
+                    if (result != null && result.Length > 0)
+                        break;
+                }
+            }
+
+            return result;
         }
 
         /// <summary>

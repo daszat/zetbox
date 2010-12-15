@@ -1,0 +1,39 @@
+﻿<%@ CodeTemplate Language="C#" 
+    Name="Mappings.PropertiesHbm"
+    ClassName="Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.ProxyClassChild"
+    Inherits="Kistl.Generator.ResourceTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="System.Linq" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.App.Extensions" %>
+<%@ Import Namespace="Kistl.Generator" %>
+<%@ Import Namespace="Kistl.Generator.Extensions" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="interfaceName" Type="string" %>
+<%@ Parameter Name="parentInterfaceName" Type="string" %>
+<%@ Parameter Name="parentProxyName" Type="string" %>
+<%@ Parameter Name="typeAndNameList" Type="IEnumerable<KeyValuePair<string, string>>" %>
+
+        public interface <%= interfaceName %>Interface
+            : <%= parentInterfaceName %>
+        {
+<% foreach(var p in typeAndNameList) { %>
+            <%= p.Key %> <%= p.Value %> { get; set; }
+
+<% } %>
+        }
+
+        public class <%= interfaceName %>Proxy
+            : <%= parentProxyName %>, <%= interfaceName %>Interface
+        {
+			public override Type Interface { get { return typeof(<%= interfaceName %>Interface); } }
+			public override Type ZBoxWrapper { get { return typeof(<%= interfaceName %><%= ImplementationSuffix %>); } }
+
+<% foreach(var p in typeAndNameList) { %>
+            public virtual <%= p.Key %> <%= p.Value %> { get; set; }
+
+<% } %>
+        }

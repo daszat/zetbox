@@ -113,25 +113,16 @@ namespace Kistl.Generator.Templates.ObjectClasses
             Properties.ValueCollectionProperty.Call(Host, ctx, MembersToSerialize, prop);
         }
 
-        protected override void ApplyConstructorBodyTemplate()
+        protected override void ApplyConstructorTemplate()
         {
-            base.ApplyConstructorBodyTemplate();
-            this.WriteObjects("            {");
-            this.WriteLine();
-            foreach (var prop in DataType.Properties.OfType<CompoundObjectProperty>().Where(p => !p.IsList).OrderBy(p => p.Name))
-            {
-                if (prop.IsNullable())
-                    continue;
+            base.ApplyConstructorTemplate();
 
-                string name = prop.Name;
-                string backingName = name + ImplementationPropertySuffix;
-                string coType = prop.GetPropertyTypeString();
-                string coImplementationType = coType + ImplementationSuffix;
-                this.WriteObjects("                ", backingName, " = new ", coImplementationType, "(false, this, \"", name, "\");");
-                this.WriteLine();
-            }
-            this.WriteObjects("            }");
-            this.WriteLine();
+            ObjectClasses.Constructors.Call(
+                Host, ctx,
+                GetTypeName(),
+                this.DataType
+                    .Properties
+                    .OfType<CompoundObjectProperty>());
         }
 
         protected override void ApplyApplyChangesFromMethod()
@@ -160,7 +151,7 @@ namespace Kistl.Generator.Templates.ObjectClasses
             return SelectAndParents(this.ObjectClass).SelectMany(cls => cls.Methods).Where(m => !m.IsDefaultMethod());
         }
 
-        private static IEnumerable<ObjectClass> SelectAndParents(ObjectClass cls)
+        protected static IEnumerable<ObjectClass> SelectAndParents(ObjectClass cls)
         {
             yield return cls;
             while (cls.BaseObjectClass != null)

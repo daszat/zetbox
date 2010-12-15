@@ -8,20 +8,22 @@ namespace Kistl.DalProvider.NHibernate
     using System.Reflection;
     using System.Text;
     using Autofac;
+    using Autofac.Core;
     //using AutofacContrib.NHibernate.Bytecode;
     using Kistl.API;
+    using Kistl.API.Common;
+    using Kistl.API.Configuration;
     using Kistl.API.Server;
     using Kistl.API.Utils;
     using Kistl.App.Extensions;
     using Kistl.App.Packaging;
-    using Kistl.API.Configuration;
-    using Autofac.Core;
-    using Kistl.API.Common;
 
     public class NHibernateProvider
         : Autofac.Module
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.DalProvider.NHibernate");
+
+        public static readonly string ServerAssembly = "Kistl.Objects.NHibernateImpl, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7b69192d05046fdf";
 
         protected override void Load(ContainerBuilder moduleBuilder)
         {

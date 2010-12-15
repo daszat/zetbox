@@ -25,7 +25,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
 
             host.CallTemplate("Mappings.JoinedSubclassHbm",
                 new object[] { ctx }
-                    .Concat(ObjectClassHbm.MakeArgs(ctx, cls, host.Settings["extrasuffix"]))
+                    .Concat(ObjectClassHbm.MakeArgs(ctx, cls, host.Settings))
                     .ToArray());
         }
 

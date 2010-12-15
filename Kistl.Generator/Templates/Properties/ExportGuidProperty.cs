@@ -22,7 +22,7 @@ namespace Kistl.Generator.Templates.Properties
 
         public ExportGuidProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx,
             Serialization.SerializationMembersList serializationList)
-            : base(_host, ctx, serializationList, "Guid", "ExportGuid", String.Empty) // TODO: use proper namespace
+            : base(_host, ctx, serializationList, "Guid", "ExportGuid", String.Empty, "_ExportGuid") // TODO: use proper namespace
         {
         }
 
@@ -30,8 +30,8 @@ namespace Kistl.Generator.Templates.Properties
         {
             base.ApplyOnGetTemplate();
 
-            this.WriteObjects("                if (", BackingMemberFromName(name), " == Guid.Empty) {\r\n");
-            this.WriteObjects("                    __result = ", BackingMemberFromName(name), " = Guid.NewGuid();\r\n");
+            this.WriteObjects("                if (", backingName, " == Guid.Empty) {\r\n");
+            this.WriteObjects("                    __result = ", backingName, " = Guid.NewGuid();\r\n");
             this.WriteObjects("                }\r\n");
         }
     }

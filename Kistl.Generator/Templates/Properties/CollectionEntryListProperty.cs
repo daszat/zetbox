@@ -13,20 +13,26 @@ namespace Kistl.Generator.Templates.Properties
 
     public partial class CollectionEntryListProperty
     {
-        /// <summary>
-        /// TODO: Frage: Rollen schon beim Aufruf tauschen? Es wird primär mit otherEnd gearbeitet.
-        /// </summary>
-        /// <param name="host"></param>
-        /// <param name="ctx"></param>
-        /// <param name="serializationList"></param>
-        /// <param name="rel"></param>
-        /// <param name="endRole"></param>
         public static void Call(Arebis.CodeGeneration.IGenerationHost host,
             IKistlContext ctx,
             Serialization.SerializationMembersList serializationList,
             Relation rel, RelationEndRole endRole)
         {
-            if (host == null) { throw new ArgumentNullException("host"); }
+            if (rel == null) { throw new ArgumentNullException("rel"); }
+
+            RelationEnd relEnd = rel.GetEndFromRole(endRole);
+            RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
+
+            string backingCollectionType = RelationToBackingCollectionType(rel, otherEnd);
+
+            Call(host, ctx, serializationList, rel, endRole, backingCollectionType);
+        }
+
+        public static void Call(Arebis.CodeGeneration.IGenerationHost host,
+            IKistlContext ctx,
+            Serialization.SerializationMembersList serializationList,
+            Relation rel, RelationEndRole endRole, string backingCollectionType)
+        {
             if (rel == null) { throw new ArgumentNullException("rel"); }
 
             RelationEnd relEnd = rel.GetEndFromRole(endRole);
@@ -36,29 +42,6 @@ namespace Kistl.Generator.Templates.Properties
             string exposedCollectionInterface = rel.NeedsPositionStorage(otherEnd.GetRole()) ? "IList" : "ICollection";
             string referencedInterface = otherEnd.Type.GetDataTypeString();
             string backingName = "_" + name;
-            string backingCollectionType = "undefined wrapper class";
-            if (rel.NeedsPositionStorage(otherEnd.GetRole()))
-            {
-                if (otherEnd.GetRole() == RelationEndRole.A)
-                {
-                    backingCollectionType = "ClientRelationASideListWrapper";
-                }
-                else if (otherEnd.GetRole() == RelationEndRole.B)
-                {
-                    backingCollectionType = "ClientRelationBSideListWrapper";
-                }
-            }
-            else
-            {
-                if (otherEnd.GetRole() == RelationEndRole.A)
-                {
-                    backingCollectionType = "ClientRelationASideCollectionWrapper";
-                }
-                else if (otherEnd.GetRole() == RelationEndRole.B)
-                {
-                    backingCollectionType = "ClientRelationBSideCollectionWrapper";
-                }
-            }
 
             string aSideType = rel.A.Type.GetDataTypeString();
             string bSideType = rel.B.Type.GetDataTypeString();
@@ -67,6 +50,32 @@ namespace Kistl.Generator.Templates.Properties
                 + entryType + ">";
 
             bool eagerLoading = relEnd.Navigator != null && relEnd.Navigator.EagerLoading;
+
+            Call(host, ctx, serializationList, rel, endRole, name, exposedCollectionInterface, referencedInterface, backingName, backingCollectionType, aSideType, bSideType, entryType, providerCollectionType, eagerLoading);
+        }
+
+        public static string RelationToBackingCollectionType(Relation rel, RelationEnd otherEnd)
+        {
+            if (rel == null) { throw new ArgumentNullException("rel"); }
+            if (otherEnd == null) { throw new ArgumentNullException("otherEnd"); }
+
+            string result;
+
+            if (rel.NeedsPositionStorage(otherEnd.GetRole()))
+            {
+                result = String.Format("ClientRelation{0}SideListWrapper", otherEnd.GetRole());
+            }
+            else
+            {
+                result = String.Format("ClientRelation{0}SideCollectionWrapper", otherEnd.GetRole());
+            }
+
+            return result;
+        }
+
+        public static void Call(Arebis.CodeGeneration.IGenerationHost host, IKistlContext ctx, Serialization.SerializationMembersList serializationList, Relation rel, RelationEndRole endRole, string name, string exposedCollectionInterface, string referencedInterface, string backingName, string backingCollectionType, string aSideType, string bSideType, string entryType, string providerCollectionType, bool eagerLoading)
+        {
+            if (host == null) { throw new ArgumentNullException("host"); }
 
             host.CallTemplate("Properties.CollectionEntryListProperty",
                 ctx, serializationList,

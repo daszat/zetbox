@@ -5,13 +5,12 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-
     using Kistl.API;
     using Kistl.App.Base;
     using Kistl.App.Extensions;
+    using Kistl.Generator;
     using Kistl.Generator.Extensions;
     using Templates = Kistl.Generator.Templates;
-    using Kistl.Generator;
 
     public partial class RelationEntry
         : Templates.CollectionEntries.RelationEntry

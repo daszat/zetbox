@@ -45,7 +45,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
             string nameAttr = String.Format("name=\"{0}\"", prop.Name);
             string columnAttr = String.Format("column=\"`{0}{1}`\"", prefix, prop.Name);
             string classAttr = String.Format("class=\"{0}\"",
-                ObjectClassHbm.GetAssemblyQualifiedImplementation(otherEnd.Type, this.Settings["extrasuffix"]));
+                ObjectClassHbm.GetAssemblyQualifiedImplementation(otherEnd.Type, this.Settings));
             string tableAttr = String.Format("table =\"`{0}`\" ", rel.GetAssociationName());
 
             switch (rel.GetRelationType())
@@ -121,10 +121,8 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
 
             string nameAttr = String.Format("name=\"{0}\"", prop.Name);
             string tableAttr = String.Format("table=\"{0}\"", rel.GetRelationTableName());
-            //string classAttr = String.Format("class=\"{0}\"",
-            //    ObjectClassHbm.GetAssemblyQualifiedImplementation(relEnd.Type, this.Settings["extrasuffix"]));
             string otherClassAttr = String.Format("class=\"{0}\"",
-                ObjectClassHbm.GetAssemblyQualifiedImplementation(otherEnd.Type, this.Settings["extrasuffix"]));
+                ObjectClassHbm.GetAssemblyQualifiedImplementation(otherEnd.Type, this.Settings));
             string inverseAttr = String.Format("inverse=\"{0}\"", inverse ? "true" : "false");
             string mappingType = otherEnd.HasPersistentOrder ? "list" : "idbag";
 
@@ -133,8 +131,8 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
                 rel.GetRelationClassName(),
                 ImplementationSuffix);
 
-            string fkThisColumnAttr = String.Format("column=\"{0}\"", Construct.ForeignKeyColumnName(relEnd));
-            string fkOtherColumnAttr = String.Format("column=\"{0}\"", Construct.ForeignKeyColumnName(otherEnd));
+            string fkThisColumnAttr = String.Format("column=\"`{0}`\"", Construct.ForeignKeyColumnName(relEnd));
+            string fkOtherColumnAttr = String.Format("column=\"`{0}`\"", Construct.ForeignKeyColumnName(otherEnd));
 
             this.WriteObjects("<", mappingType, " ", nameAttr, " ", tableAttr, " ", inverseAttr, ">");
             this.WriteLine();

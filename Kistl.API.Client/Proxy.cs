@@ -147,7 +147,7 @@ namespace Kistl.API.Client
         {
             var result = ReceiveObjectList(ctx, sr);
             auxObjects = ReceiveObjectList(ctx, sr);
-            Logging.Facade.DebugFormat("retrieved: {0} objects; {1} auxObjects", result.Count(), auxObjects.Count());
+            Logging.Facade.DebugFormat("retrieved: {0} objects; {1} auxObjects", result.Count, auxObjects.Count);
             return result;
         }
 

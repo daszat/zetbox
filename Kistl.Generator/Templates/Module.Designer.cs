@@ -34,16 +34,13 @@ this.WriteObjects("    using System.Linq;\r\n");
 this.WriteObjects("    using System.Text;\r\n");
 this.WriteObjects("    using Autofac;\r\n");
 this.WriteObjects("	using Kistl.API;\r\n");
+#line 21 "P:\Kistl\Kistl.Generator\Templates\Module.cst"
+foreach(string ns in GetAdditionalImports().OrderBy(s => s).Distinct().OrderBy(s => s)) { 
 #line 22 "P:\Kistl\Kistl.Generator\Templates\Module.cst"
-foreach(string ns in GetAdditionalImports().OrderBy(s => s).Distinct().OrderBy(s => s))
-    {
-
-#line 25 "P:\Kistl\Kistl.Generator\Templates\Module.cst"
 this.WriteObjects("    using ",  ns , ";\r\n");
-#line 27 "P:\Kistl\Kistl.Generator\Templates\Module.cst"
-}
-
-#line 29 "P:\Kistl\Kistl.Generator\Templates\Module.cst"
+#line 23 "P:\Kistl\Kistl.Generator\Templates\Module.cst"
+} 
+#line 24 "P:\Kistl\Kistl.Generator\Templates\Module.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("    public class ",  shortName , "Module\r\n");
 this.WriteObjects("        : Autofac.Module\r\n");
@@ -52,26 +49,15 @@ this.WriteObjects("        protected override void Load(ContainerBuilder builder
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            base.Load(builder);\r\n");
 this.WriteObjects("\r\n");
-#line 37 "P:\Kistl\Kistl.Generator\Templates\Module.cst"
+#line 32 "P:\Kistl\Kistl.Generator\Templates\Module.cst"
 ApplyRegistrations(); 
-#line 38 "P:\Kistl\Kistl.Generator\Templates\Module.cst"
-this.WriteObjects("\r\n");
+#line 33 "P:\Kistl\Kistl.Generator\Templates\Module.cst"
 this.WriteObjects("        }\r\n");
 this.WriteObjects("    }\r\n");
 this.WriteObjects("\r\n");
-this.WriteObjects("    internal sealed class ",  shortName , "ImplementationTypeChecker\r\n");
-this.WriteObjects("        : Kistl.API.BaseImplementationTypeChecker, I",  shortName , "ImplementationTypeChecker\r\n");
-this.WriteObjects("    {\r\n");
-this.WriteObjects("        public ",  shortName , "ImplementationTypeChecker(Func<IEnumerable<IImplementationTypeChecker>> implTypeCheckersFactory)\r\n");
-this.WriteObjects("            : base(implTypeCheckersFactory)\r\n");
-this.WriteObjects("        {\r\n");
-this.WriteObjects("        }\r\n");
-this.WriteObjects("\r\n");
-this.WriteObjects("        protected override System.Reflection.Assembly GetAssembly()\r\n");
-this.WriteObjects("        {\r\n");
-this.WriteObjects("            return this.GetType().Assembly;\r\n");
-this.WriteObjects("        }\r\n");
-this.WriteObjects("    }\r\n");
+#line 36 "P:\Kistl\Kistl.Generator\Templates\Module.cst"
+ApplyTypeCheckerTemplate(); 
+#line 37 "P:\Kistl\Kistl.Generator\Templates\Module.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("    // marker class to provide stable and correct assembly reference\r\n");
 this.WriteObjects("    internal sealed class ",  shortName , "ActionsManager\r\n");

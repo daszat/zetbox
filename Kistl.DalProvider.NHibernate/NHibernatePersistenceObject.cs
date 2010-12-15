@@ -16,12 +16,6 @@ namespace Kistl.DalProvider.NHibernate
             _objectState = DataObjectState.New;
         }
 
-        public override int ID
-        {
-            get;
-            set;
-        }
-
         public override bool IsAttached
         {
             get { return Context != null; }

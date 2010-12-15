@@ -1,3 +1,4 @@
+#define SERIALIZE_GENERATION_THREADS
 
 namespace Kistl.Generator
 {

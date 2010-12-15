@@ -1,12 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
 
 namespace Kistl.API.Utils
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.ComponentModel;
+    using System.Linq;
+    using System.Text;
+
     public abstract class Cache : INotifyPropertyChanged
     {
         private static readonly object _staticlock = new object();

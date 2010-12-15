@@ -1,0 +1,12 @@
+﻿<%@ CodeTemplate Language="C#"
+    Name="Properties.DelegatingProperty"
+    ClassName="Kistl.Generator.Templates.Properties.DefaultProperty"
+    Inherits="Kistl.Generator.MemberTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="propName" Type="string" %>
+<%@ Parameter Name="presentedType" Type="string" %>
+        // BEGIN <%= this.GetType() %>
+        <%= GetModifiers() %> <%= presentedType %> <%= propName %> { get; set; }
+        // END <%= this.GetType() %>

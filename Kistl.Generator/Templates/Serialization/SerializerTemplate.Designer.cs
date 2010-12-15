@@ -17,17 +17,17 @@ namespace Kistl.Generator.Templates.Serialization
 		protected SerializerDirection direction;
 		protected SerializationMembersList fields;
 		protected bool overrideAndCallBase;
-		protected bool writeExportGuidAttribute;
+		protected string exportGuidBackingStore;
 
 
-        public SerializerTemplate(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, SerializerDirection direction, SerializationMembersList fields, bool overrideAndCallBase, bool writeExportGuidAttribute)
+        public SerializerTemplate(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, SerializerDirection direction, SerializationMembersList fields, bool overrideAndCallBase, string exportGuidBackingStore)
             : base(_host)
         {
 			this.ctx = ctx;
 			this.direction = direction;
 			this.fields = fields;
 			this.overrideAndCallBase = overrideAndCallBase;
-			this.writeExportGuidAttribute = writeExportGuidAttribute;
+			this.exportGuidBackingStore = exportGuidBackingStore;
 
         }
         
@@ -101,12 +101,12 @@ this.WriteObjects("            \r\n");
 this.WriteObjects("            base.",  methodName , "(",  argName , "",  callBaseWithAdditionalArgs , ");\r\n");
 #line 81 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
 }
-    else if(direction == SerializerDirection.Export && writeExportGuidAttribute)
+    else if(direction == SerializerDirection.Export && !String.IsNullOrEmpty(exportGuidBackingStore))
     {
 
 #line 84 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
 this.WriteObjects("            \r\n");
-this.WriteObjects("            xml.WriteAttributeString(\"ExportGuid\", this._ExportGuid.ToString());\r\n");
+this.WriteObjects("            xml.WriteAttributeString(\"ExportGuid\", ",  exportGuidBackingStore , ".ToString());\r\n");
 #line 87 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
 }
 

@@ -12,7 +12,7 @@ using Kistl.Generator.Extensions;
 
 namespace Kistl.DalProvider.Ef.Generator.Templates.EfModel
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.DalProvider.Ef.Generator\Templates\EfModel\Model.ssdl.EntityTypeColumnsRel.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.EntityTypeColumnsRel.cst")]
     public partial class ModelSsdlEntityTypeColumnsRel : Kistl.Generator.ResourceTemplate
     {
 		protected IKistlContext ctx;
@@ -35,7 +35,7 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.EfModel
         
         public override void Generate()
         {
-#line 22 "P:\Kistl\Kistl.DalProvider.Ef.Generator\Templates\EfModel\Model.ssdl.EntityTypeColumnsRel.cst"
+#line 22 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.EntityTypeColumnsRel.cst"
 foreach(var rel in relations)
 	{
 		ProcessRelation(rel);
@@ -46,15 +46,15 @@ foreach(var rel in relations)
 private void GenerateProperty(string propertyName, bool needPositionStorage, string positionColumnName)
 {
 
-#line 32 "P:\Kistl\Kistl.DalProvider.Ef.Generator\Templates\EfModel\Model.ssdl.EntityTypeColumnsRel.cst"
+#line 32 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.EntityTypeColumnsRel.cst"
 this.WriteObjects("    <Property Name=\"",  propertyName , "\" Type=\"",  schemaProvider.DbTypeToNative(DbType.Int32) , "\" />\r\n");
-#line 35 "P:\Kistl\Kistl.DalProvider.Ef.Generator\Templates\EfModel\Model.ssdl.EntityTypeColumnsRel.cst"
+#line 35 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.EntityTypeColumnsRel.cst"
 if (needPositionStorage)
 	{
 
-#line 38 "P:\Kistl\Kistl.DalProvider.Ef.Generator\Templates\EfModel\Model.ssdl.EntityTypeColumnsRel.cst"
+#line 38 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.EntityTypeColumnsRel.cst"
 this.WriteObjects("    <Property Name=\"",  positionColumnName , "\" Type=\"",  schemaProvider.DbTypeToNative(DbType.Int32) , "\" Nullable=\"true\" />\r\n");
-#line 40 "P:\Kistl\Kistl.DalProvider.Ef.Generator\Templates\EfModel\Model.ssdl.EntityTypeColumnsRel.cst"
+#line 40 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.EntityTypeColumnsRel.cst"
 }
 	
 // } last brace added by template expansion 

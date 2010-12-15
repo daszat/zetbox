@@ -18,14 +18,9 @@ namespace Kistl.Objects
     using System.Text;
     using Autofac;
 	using Kistl.API;
-<%
-    foreach(string ns in GetAdditionalImports().OrderBy(s => s).Distinct().OrderBy(s => s))
-    {
-%>
+<% foreach(string ns in GetAdditionalImports().OrderBy(s => s).Distinct().OrderBy(s => s)) { %>
     using <%= ns %>;
-<%
-    }
-%>
+<% } %>
 
     public class <%= shortName %>Module
         : Autofac.Module
@@ -35,23 +30,10 @@ namespace Kistl.Objects
             base.Load(builder);
 
 <% ApplyRegistrations(); %>
-
         }
     }
 
-    internal sealed class <%= shortName %>ImplementationTypeChecker
-        : Kistl.API.BaseImplementationTypeChecker, I<%= shortName %>ImplementationTypeChecker
-    {
-        public <%= shortName %>ImplementationTypeChecker(Func<IEnumerable<IImplementationTypeChecker>> implTypeCheckersFactory)
-            : base(implTypeCheckersFactory)
-        {
-        }
-
-        protected override System.Reflection.Assembly GetAssembly()
-        {
-            return this.GetType().Assembly;
-        }
-    }
+<% ApplyTypeCheckerTemplate(); %>
 
     // marker class to provide stable and correct assembly reference
     internal sealed class <%= shortName %>ActionsManager

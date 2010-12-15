@@ -194,6 +194,14 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Templates\ObjectClasses\CollectionSerialization.cs" />
+    <Compile Include="Templates\ObjectClasses\Constructors.cs">
+      <DependentUpon>Constructors.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\ObjectClasses\Constructors.Designer.cs">
+      <DependentUpon>Constructors.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Templates\ObjectClasses\CustomTypeDescriptor.cs">
       <DependentUpon>CustomTypeDescriptor.cst</DependentUpon>
     </Compile>
@@ -250,6 +258,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CollectionEntryListProperty.cst</DependentUpon>
     </Compile>
+    <Compile Include="Templates\Properties\CompoundObjectPropertyInitialisation.cs">
+      <DependentUpon>CompoundObjectPropertyInitialisation.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Properties\CompoundObjectPropertyInitialisation.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CompoundObjectPropertyInitialisation.cst</DependentUpon>
+    </Compile>
     <Compile Include="Templates\Properties\CompoundObjectPropertyTemplate.cs">
       <DependentUpon>CompoundObjectPropertyTemplate.cst</DependentUpon>
     </Compile>
@@ -257,6 +273,14 @@
       <DependentUpon>CompoundObjectPropertyTemplate.cst</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Templates\Properties\DefaultProperty.cs">
+      <DependentUpon>DefaultProperty.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Properties\DefaultProperty.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DefaultProperty.cst</DependentUpon>
     </Compile>
     <Compile Include="Templates\Properties\DelegatingProperty.cs">
       <DependentUpon>DelegatingProperty.cst</DependentUpon>
@@ -411,6 +435,11 @@
     <Compile Include="Templates\TypeBase.Properties.cs">
       <DependentUpon>TypeBase.cst</DependentUpon>
     </Compile>
+    <Compile Include="Templates\TypeChecker.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TypeChecker.cst</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Kistl.Objects.snk" />
@@ -471,6 +500,10 @@
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>CollectionEntries.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Templates\ObjectClasses\Constructors.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>Constructors.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Templates\ObjectClasses\CustomTypeDescriptor.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>CustomTypeDescriptor.Designer.cs</LastGenOutput>
@@ -495,9 +528,17 @@
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>CollectionEntryListProperty.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Templates\Properties\CompoundObjectPropertyInitialisation.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>CompoundObjectPropertyInitialisation.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Templates\Properties\CompoundObjectPropertyTemplate.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>CompoundObjectPropertyTemplate.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\Properties\DefaultProperty.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>DefaultProperty.Designer.cs</LastGenOutput>
     </None>
     <None Include="Templates\Properties\ListProperty.cst">
       <Generator>Arebis Template Processor</Generator>
@@ -579,6 +620,10 @@
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>TypeBase.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Templates\TypeChecker.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>TypeChecker.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Kistl.API.Server\Kistl.API.Server.csproj">
@@ -612,6 +657,7 @@
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(AREBISROOT)\ArebisGenTask.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

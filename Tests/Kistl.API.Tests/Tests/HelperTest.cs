@@ -1,21 +1,19 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
-using System.Text;
-
-using Kistl.API.Mocks;
-
-using NUnit.Framework;
-using NUnit.Framework.Constraints;
-
-using Autofac;
 
 namespace Kistl.API.Tests
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Linq;
+    using System.Linq.Expressions;
+    using System.Reflection;
+    using System.Text;
+    using Autofac;
+    using Kistl.API.Mocks;
+    using NUnit.Framework;
+    using NUnit.Framework.Constraints;
+
     [TestFixture]
     public class HelperTest : AbstractApiTestFixture
     {
@@ -58,9 +56,6 @@ namespace Kistl.API.Tests
         //    Assert.That(value.FindIEnumerable(), Is.EqualTo(expected));
         //}
 
-
-
-
         [TestCase(null)]
         [TestCase(typeof(object))]
         [TestCase(typeof(string))]
@@ -86,7 +81,7 @@ namespace Kistl.API.Tests
         }
 
         [TestCase(typeof(object[]), typeof(object))]
-        [TestCase(typeof(string[]), typeof(object), Description="this might run against common expectations, but string[] really doesn't implement IEnumerable<string>")]
+        [TestCase(typeof(string[]), typeof(object), Description = "this might run against common expectations, but string[] really doesn't implement IEnumerable<string>")]
         [TestCase(typeof(IEnumerable), typeof(object))]
         public void FindElementTypes_should_find_single_IEnumerable(Type value, Type expected)
         {
@@ -362,6 +357,53 @@ namespace Kistl.API.Tests
                 Is.EquivalentTo(expected.OrderBy(t => t.ToString()).ToArray()));
         }
 
+        [TestCase("OneParameter", new[] { typeof(string) })]
+        [TestCase("TwoParameters", new[] { typeof(string), typeof(string) })]
+        [TestCase("OneParameterReturns", new[] { typeof(string) })]
+        [TestCase("TwoParametersReturns", new[] { typeof(string), typeof(string) })]
+        public void FindGenericMethod_Public(string methodName, Type[] typeArguments)
+        {
+            var result = typeof(FgmTestClass).FindGenericMethod(methodName, typeArguments, null);
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.Name, Is.EqualTo(methodName));
+        }
 
+        [TestCase("OneParameterPrivate", new[] { typeof(string) })]
+        [TestCase("TwoParametersPrivate", new[] { typeof(string), typeof(string) })]
+        [TestCase("OneParameterReturnsPrivate", new[] { typeof(string) })]
+        [TestCase("TwoParametersReturnsPrivate", new[] { typeof(string), typeof(string) })]
+        public void FindGenericMethod_Private(string methodName, Type[] typeArguments)
+        {
+            var result = typeof(FgmTestClass).FindGenericMethod(true, methodName, typeArguments, null);
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.Name, Is.EqualTo(methodName));
+        }
+
+        [TestCase("OneParameterExtension", new[] { typeof(string) })]
+        public void FindGenericMethod_Extensions(string methodName, Type[] typeArguments)
+        {
+            var result = typeof(FgmTestClass).FindGenericMethod(methodName, typeArguments, null);
+            Assert.That(result, Is.Null); // TODO: implement extension lookup in FindGenericMethod
+        }
+    }
+
+    public class FgmTestClass
+    {
+        public void OneParameter<T>() { }
+        public void TwoParameters<T1, T2>() { }
+
+        public int OneParameterReturns<T>() { return 0; }
+        public int TwoParametersReturns<T1, T2>() { return 0; }
+
+        private void OneParameterPrivate<T>() { }
+        private void TwoParametersPrivate<T1, T2>() { }
+
+        private int OneParameterReturnsPrivate<T>() { return 0; }
+        private int TwoParametersReturnsPrivate<T1, T2>() { return 0; }
+    }
+
+    public static class FgmExtensions
+    {
+        public static void OneParameterExtension<T>(this FgmTestClass self) { }
     }
 }
