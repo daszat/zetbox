@@ -12,14 +12,6 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.Properties
 
     public partial class ValueCollectionProperty
     {
-        //public static void Call(Arebis.CodeGeneration.IGenerationHost host, IKistlContext ctx, Templates.Serialization.SerializationMembersList list, Property prop)
-        //{
-        //    if (host == null) { throw new ArgumentNullException("host"); }
-
-        //    host.CallTemplate("Properties.ValueCollectionProperty", ctx,
-        //        list, prop);
-        //}
-
         protected virtual void AddSerialization(Templates.Serialization.SerializationMembersList list, string efName)
         {
             if (list != null)

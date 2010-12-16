@@ -9,9 +9,5 @@ namespace Kistl.Generator.Templates.Properties
     
     public partial class DefaultProperty
     {
-        //public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string propName, string presentedType)
-        //{
-        //    _host.CallTemplate("Properties.DefaultProperty", ctx, propName, presentedType);
-        //}
     }
 }

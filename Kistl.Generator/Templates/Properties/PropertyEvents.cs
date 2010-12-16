@@ -27,19 +27,6 @@ namespace Kistl.Generator.Templates.Properties
             Call(host, ctx, eventName, propType, objType, true, !isReadOnly);
         }
 
-        //public static void Call(Arebis.CodeGeneration.IGenerationHost host,
-        //    IKistlContext ctx,
-        //    string eventName,
-        //    string propType,
-        //    string objType,
-        //    bool hasGetters,
-        //    bool hasSetters)
-        //{
-        //    if (host == null) { throw new ArgumentNullException("host"); }
-
-        //    host.CallTemplate("Properties.PropertyEvents", ctx, eventName, propType, objType, hasGetters, hasSetters);
-        //}
-
         protected override System.CodeDom.MemberAttributes ModifyMemberAttributes(System.CodeDom.MemberAttributes memberAttributes)
         {
             return base.ModifyMemberAttributes(memberAttributes) | MemberAttributes.Static;

@@ -16,13 +16,6 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.EfModel
     
     public partial class ModelMslEntityTypeMapping
     {
-        //public static void Call(IGenerationHost host, IKistlContext ctx, ObjectClass obj)
-        //{
-        //    if (host == null) { throw new ArgumentNullException("host"); }
-
-        //    host.CallTemplate("EfModel.ModelMslEntityTypeMapping", ctx, obj);
-        //}
-
         protected virtual void ApplyEntityTypeMapping(ObjectClass obj)
         {
             Call(Host, ctx, obj);

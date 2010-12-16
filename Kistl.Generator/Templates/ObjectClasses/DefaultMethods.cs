@@ -10,11 +10,5 @@ namespace Kistl.Generator.Templates.ObjectClasses
 
     public partial class DefaultMethods
     {
-        //public static void Call(Arebis.CodeGeneration.IGenerationHost host, IKistlContext ctx, DataType type)
-        //{
-        //    if (host == null) { throw new ArgumentNullException("host"); }
-
-        //    host.CallTemplate("ObjectClasses.DefaultMethods", ctx, type);
-        //}
     }
 }

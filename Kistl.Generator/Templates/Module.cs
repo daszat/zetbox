@@ -23,8 +23,7 @@ namespace Kistl.Generator.Templates
 
         protected virtual void ApplyTypeCheckerTemplate()
         {
-            // TODO: use Call method
-            Host.CallTemplate("TypeChecker", ctx, shortName);
+            TypeChecker.Call(Host, ctx, shortName);
         }
     }
 }

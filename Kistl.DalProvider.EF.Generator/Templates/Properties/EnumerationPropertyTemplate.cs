@@ -12,19 +12,6 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.Properties
 
     public partial class EnumerationPropertyTemplate
     {
-        //public static void Call(
-        //    Arebis.CodeGeneration.IGenerationHost host,
-        //    IKistlContext ctx,
-        //    Templates.Serialization.SerializationMembersList list,
-        //    EnumerationProperty prop,
-        //    bool callGetterSetterEvents)
-        //{
-        //    if (host == null) { throw new ArgumentNullException("host"); }
-
-        //    host.CallTemplate("Properties.EnumerationPropertyTemplate", ctx,
-        //        list, prop, callGetterSetterEvents);
-        //}
-
         protected virtual void AddSerialization(Templates.Serialization.SerializationMembersList list)
         {
             if (list != null)

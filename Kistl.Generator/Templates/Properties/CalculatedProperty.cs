@@ -37,7 +37,5 @@ namespace Kistl.Generator.Templates.Properties
 
         //    host.CallTemplate("Properties.CalculatedProperty", ctx, className, referencedType, propertyName, getterEventName);
         //}
-
-
     }
 }

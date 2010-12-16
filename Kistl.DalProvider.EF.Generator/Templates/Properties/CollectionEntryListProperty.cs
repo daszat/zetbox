@@ -14,15 +14,6 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.Properties
     
     public partial class CollectionEntryListProperty
     {
-        //public static void Call(IGenerationHost host, IKistlContext ctx, Templates.Serialization.SerializationMembersList list, Relation rel, RelationEndRole endRole)
-        //{
-        //    if (host == null) { throw new ArgumentNullException("host"); }
-
-        //    host.CallTemplate("Properties.CollectionEntryListProperty", ctx,
-        //        list,
-        //        rel, endRole);
-        //}
-
         protected virtual void AddSerialization(Templates.Serialization.SerializationMembersList list, string memberName, bool eagerLoading)
         {
             if (list != null && eagerLoading)

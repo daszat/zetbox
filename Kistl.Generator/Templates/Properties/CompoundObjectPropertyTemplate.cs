@@ -42,22 +42,6 @@ namespace Kistl.Generator.Templates.Properties
                 isNullable);
         }
 
-        //public static void Call(Arebis.CodeGeneration.IGenerationHost host,
-        //    IKistlContext ctx,
-        //    Serialization.SerializationMembersList serializationList,
-        //    string xmlNamespace,
-        //    string propName, string backingPropertyName, string backingStoreName,
-        //    string coType, string coImplementationType,
-        //    bool isNullable
-        //    )
-        //{
-        //    host.CallTemplate(
-        //        "Properties.CompoundObjectPropertyTemplate", ctx, serializationList,
-        //        xmlNamespace, propName, backingPropertyName, backingStoreName,
-        //        coType, coImplementationType,
-        //        isNullable);
-        //}
-
         protected virtual void AddSerialization(
             Serialization.SerializationMembersList list,
             string memberType, string memberName, 

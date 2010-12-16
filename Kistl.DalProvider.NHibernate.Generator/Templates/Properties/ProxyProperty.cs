@@ -10,16 +10,6 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
 
     public partial class ProxyProperty
     {
-        //public static void Call(
-        //    Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx,
-        //    string propertyType, string propertyName,
-        //    bool overrideParent, bool useEvents)
-        //{
-        //    if (_host == null) { throw new ArgumentNullException("_host"); }
-
-        //    _host.CallTemplate("Properties.ProxyProperty", ctx, propertyType, propertyName, overrideParent, useEvents);
-        //}
-
         private string EventName
         {
             get

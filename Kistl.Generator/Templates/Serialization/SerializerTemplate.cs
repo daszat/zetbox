@@ -10,15 +10,6 @@ namespace Kistl.Generator.Templates.Serialization
 
     public partial class SerializerTemplate
     {
-        //public static void Call(IGenerationHost host, IKistlContext ctx, SerializerDirection direction, SerializationMembersList membersToSerialize,
-        //    bool overrideAndCallBase, string exportGuidBackingStore)
-        //{
-        //    if (host == null) { throw new ArgumentNullException("host"); }
-
-        //    host.CallTemplate("Serialization.SerializerTemplate", ctx,
-        //        direction, membersToSerialize, overrideAndCallBase, exportGuidBackingStore);
-        //}
-
         protected virtual void ApplySerializer(SerializerDirection direction, SerializationMember member, string streamName)
         {
             this.CallTemplate(member.TemplateName, new object[] { this.ctx, direction, streamName, member.XmlNamespace, member.XmlName }.Concat(member.TemplateParams).ToArray());
