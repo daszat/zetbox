@@ -22,8 +22,9 @@ namespace Kistl.Generator.Templates.Properties
 
         public static void Call(IGenerationHost _host, IKistlContext ctx, CompoundObjectProperty property, string implementationSuffix, string implementationPropertySuffix)
         {
-            if (property.IsNullable())
-                return;
+            // quick hack to un-break Ef
+            //if (property.IsNullable())
+            //    return;
 
             string propertyName = property.Name;
             string backingStoreName = propertyName + implementationPropertySuffix;

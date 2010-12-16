@@ -31,7 +31,7 @@ namespace Kistl.Generator.Templates.Properties
         public override void Generate()
         {
 #line 16 "P:\Kistl\Kistl.Generator\Templates\Properties\CompoundObjectPropertyInitialisation.cst"
-this.WriteObjects("            ",  backingStoreName , " = new ",  implementationTypeName , "(false, this, \"",  propertyName , "\");");
+this.WriteObjects("            ",  backingStoreName , " = new ",  implementationTypeName , "(false, this, \"",  propertyName , "\");\r\n");
 
         }
 
