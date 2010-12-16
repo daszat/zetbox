@@ -1,5 +1,5 @@
 ﻿<%@ CodeTemplate Language="C#" 
-    Name="Module"
+    Name="Registrations"
     ClassName="Kistl.Generator.Templates.Registrations" 
     Inherits="Kistl.Generator.ResourceTemplate" %>
 <%@ Import Namespace="System" %>

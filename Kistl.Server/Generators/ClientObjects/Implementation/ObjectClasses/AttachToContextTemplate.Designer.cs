@@ -16,6 +16,13 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
 		protected ObjectClass cls;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, ObjectClass cls)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("Implementation.ObjectClasses.AttachToContextTemplate", ctx, cls);
+        }
+
         public AttachToContextTemplate(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, ObjectClass cls)
             : base(_host)
         {
@@ -23,7 +30,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
 			this.cls = cls;
 
         }
-        
+
         public override void Generate()
         {
 #line 14 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\AttachToContextTemplate.cst"
@@ -52,8 +59,6 @@ this.WriteObjects("			_",  prop.Name , ".ForEach<IValueCollectionEntry>(i => ctx
 this.WriteObjects("		}\r\n");
 
         }
-
-
 
     }
 }

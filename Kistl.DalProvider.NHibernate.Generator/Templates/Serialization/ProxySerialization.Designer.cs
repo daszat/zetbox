@@ -21,6 +21,13 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Serialization
 		protected string backingStoreName;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, SerializerDirection direction, string streamName, string xmlnamespace, string xmlname, string backingStoreName)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("Serialization.ProxySerialization", ctx, direction, streamName, xmlnamespace, xmlname, backingStoreName);
+        }
+
         public ProxySerialization(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, SerializerDirection direction, string streamName, string xmlnamespace, string xmlname, string backingStoreName)
             : base(_host)
         {
@@ -32,7 +39,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Serialization
 			this.backingStoreName = backingStoreName;
 
         }
-        
+
         public override void Generate()
         {
 #line 20 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Serialization\ProxySerialization.cst"
@@ -76,8 +83,6 @@ break;
 
 
         }
-
-
 
     }
 }

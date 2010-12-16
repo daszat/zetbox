@@ -20,6 +20,13 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.ObjectClasses
 		protected string referencedImplementation;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, ObjectClass cls, string assocName, string targetRoleName, string referencedImplementation)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("ObjectClasses.SecurityRulesClass", ctx, cls, assocName, targetRoleName, referencedImplementation);
+        }
+
         public SecurityRulesClass(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, ObjectClass cls, string assocName, string targetRoleName, string referencedImplementation)
             : base(_host)
         {
@@ -30,7 +37,7 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.ObjectClasses
 			this.referencedImplementation = referencedImplementation;
 
         }
-        
+
         public override void Generate()
         {
 #line 18 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\ObjectClasses\SecurityRulesClass.cst"
@@ -88,8 +95,6 @@ this.WriteObjects("        private int _Right;\r\n");
 this.WriteObjects("    }");
 
         }
-
-
 
     }
 }

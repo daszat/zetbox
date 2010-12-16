@@ -20,6 +20,13 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
 		protected string coType;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Implementation.SerializationMembersList serializationList, CompoundObjectProperty prop, string propName, string backingStoreName, string coType)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("Implementation.ObjectClasses.CompoundObjectPropertyTemplate", ctx, serializationList, prop, propName, backingStoreName, coType);
+        }
+
         public CompoundObjectPropertyTemplate(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Implementation.SerializationMembersList serializationList, CompoundObjectProperty prop, string propName, string backingStoreName, string coType)
             : base(_host)
         {
@@ -31,7 +38,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
 			this.coType = coType;
 
         }
-        
+
         public override void Generate()
         {
 #line 19 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\CompoundObjectPropertyTemplate.cst"
@@ -85,8 +92,6 @@ AddSerialization(serializationList, propName, backingPropertyName);
 this.WriteObjects("  ");
 
         }
-
-
 
     }
 }

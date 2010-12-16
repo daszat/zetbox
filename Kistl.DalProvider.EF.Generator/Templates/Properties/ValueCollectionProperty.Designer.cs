@@ -19,6 +19,13 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.Properties
 		protected Property prop;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.Generator.Templates.Serialization.SerializationMembersList serializationList, Property prop)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("Properties.ValueCollectionProperty", ctx, serializationList, prop);
+        }
+
         public ValueCollectionProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.Generator.Templates.Serialization.SerializationMembersList serializationList, Property prop)
             : base(_host)
         {
@@ -27,7 +34,7 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.Properties
 			this.prop = prop;
 
         }
-        
+
         public override void Generate()
         {
 #line 19 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ValueCollectionProperty.cst"
@@ -102,8 +109,6 @@ this.WriteObjects("        }\r\n");
 this.WriteObjects("        private ",  wrapperClass , "<",  thisInterface , ", ",  referencedType , ", ",  referencedCollectionEntry , ", EntityCollection<",  referencedCollectionEntry , ">> ",  wrapperName , ";\r\n");
 
         }
-
-
 
     }
 }

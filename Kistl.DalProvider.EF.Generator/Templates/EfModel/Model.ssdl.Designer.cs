@@ -19,6 +19,13 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.EfModel
 		protected ISchemaProvider schemaProvider;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, ISchemaProvider schemaProvider)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("EfModel.ModelSsdl", ctx, schemaProvider);
+        }
+
         public ModelSsdl(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, ISchemaProvider schemaProvider)
             : base(_host)
         {
@@ -26,7 +33,7 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.EfModel
 			this.schemaProvider = schemaProvider;
 
         }
-        
+
         public override void Generate()
         {
 #line 17 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
@@ -513,8 +520,6 @@ this.WriteObjects("    </Function>\r\n");
 this.WriteObjects("</Schema>");
 
         }
-
-
 
     }
 }

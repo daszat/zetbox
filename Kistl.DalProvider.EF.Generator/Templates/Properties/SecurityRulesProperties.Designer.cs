@@ -21,6 +21,13 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.Properties
 		protected string efNameRightsPropertyName;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, ObjectClass cls, string assocName, string targetRoleName, string referencedImplementation, string efNameRightsPropertyName)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("Properties.SecurityRulesProperties", ctx, cls, assocName, targetRoleName, referencedImplementation, efNameRightsPropertyName);
+        }
+
         public SecurityRulesProperties(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, ObjectClass cls, string assocName, string targetRoleName, string referencedImplementation, string efNameRightsPropertyName)
             : base(_host)
         {
@@ -32,7 +39,7 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.Properties
 			this.efNameRightsPropertyName = efNameRightsPropertyName;
 
         }
-        
+
         public override void Generate()
         {
 #line 19 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\SecurityRulesProperties.cst"
@@ -64,8 +71,6 @@ this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 
         }
-
-
 
     }
 }

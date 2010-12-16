@@ -16,6 +16,13 @@ namespace Kistl.Server.Generators.Templates.Interface.CollectionEntries
 		protected Kistl.App.Base.Module module;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.App.Base.Module module)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("Interface.CollectionEntries.Template", ctx, module);
+        }
+
         public Template(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.App.Base.Module module)
             : base(_host)
         {
@@ -23,7 +30,7 @@ namespace Kistl.Server.Generators.Templates.Interface.CollectionEntries
 			this.module = module;
 
         }
-        
+
         public override void Generate()
         {
 #line 14 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\CollectionEntries\Template.cst"
@@ -53,8 +60,6 @@ this.WriteObjects("    }\r\n");
 this.WriteObjects("}");
 
         }
-
-
 
     }
 }

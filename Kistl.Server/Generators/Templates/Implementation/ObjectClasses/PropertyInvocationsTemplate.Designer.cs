@@ -15,6 +15,13 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 		protected bool hasSetters;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string eventName, string propType, string objType, bool hasGetters, bool hasSetters)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("Implementation.ObjectClasses.PropertyInvocationsTemplate", ctx, eventName, propType, objType, hasGetters, hasSetters);
+        }
+
         public PropertyInvocationsTemplate(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string eventName, string propType, string objType, bool hasGetters, bool hasSetters)
             : base(_host)
         {
@@ -26,7 +33,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 			this.hasSetters = hasSetters;
 
         }
-        
+
         public override void Generate()
         {
 #line 13 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\PropertyInvocationsTemplate.cst"
@@ -44,8 +51,6 @@ this.WriteObjects("		public static event PropertyPostSetterHandler<",  objType ,
 } 
 
         }
-
-
 
     }
 }

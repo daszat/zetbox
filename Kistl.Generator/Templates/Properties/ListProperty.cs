@@ -14,19 +14,19 @@ namespace Kistl.Generator.Templates.Properties
 
     public partial class ListProperty
     {
-        public static void Call(IGenerationHost host, IKistlContext ctx, Serialization.SerializationMembersList serList,
-            DataType dataType, string propertyName, Property prop)
-        {
-            if (host == null) { throw new ArgumentNullException("host"); }
-            if (String.IsNullOrEmpty(propertyName)) { throw new ArgumentNullException("propertyName"); }
-            if (prop == null) { throw new ArgumentNullException("prop"); }
+        //public static void Call(IGenerationHost host, IKistlContext ctx, Serialization.SerializationMembersList serList,
+        //    DataType dataType, string propertyName, Property prop)
+        //{
+        //    if (host == null) { throw new ArgumentNullException("host"); }
+        //    if (String.IsNullOrEmpty(propertyName)) { throw new ArgumentNullException("propertyName"); }
+        //    if (prop == null) { throw new ArgumentNullException("prop"); }
 
-            host.CallTemplate("Properties.ListProperty", ctx,
-                 serList,
-                 dataType,
-                 prop.Name,
-                 prop);
-        }
+        //    host.CallTemplate("Properties.ListProperty", ctx,
+        //         serList,
+        //         dataType,
+        //         prop.Name,
+        //         prop);
+        //}
 
         /// <summary>
         /// Is called to insert requisites into the containing class, like wrappers or similar.

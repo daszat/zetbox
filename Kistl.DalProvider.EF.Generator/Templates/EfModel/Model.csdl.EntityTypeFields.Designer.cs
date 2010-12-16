@@ -19,6 +19,13 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.EfModel
 		protected IEnumerable<Property> properties;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, IEnumerable<Property> properties)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("EfModel.ModelCsdlEntityTypeFields", ctx, properties);
+        }
+
         public ModelCsdlEntityTypeFields(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, IEnumerable<Property> properties)
             : base(_host)
         {
@@ -26,7 +33,7 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.EfModel
 			this.properties = properties;
 
         }
-        
+
         public override void Generate()
         {
 #line 19 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
@@ -123,8 +130,6 @@ this.WriteObjects("              Nullable=\"false\" />\r\n");
 
 
         }
-
-
 
     }
 }

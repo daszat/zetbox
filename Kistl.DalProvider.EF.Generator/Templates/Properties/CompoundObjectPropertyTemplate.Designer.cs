@@ -23,6 +23,13 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.Properties
 		protected bool isNullable;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.Generator.Templates.Serialization.SerializationMembersList serializationList, string xmlNamespace, string propName, string backingPropertyName, string backingStoreName, string coType, string coImplementationType, bool isNullable)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("Properties.CompoundObjectPropertyTemplate", ctx, serializationList, xmlNamespace, propName, backingPropertyName, backingStoreName, coType, coImplementationType, isNullable);
+        }
+
         public CompoundObjectPropertyTemplate(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.Generator.Templates.Serialization.SerializationMembersList serializationList, string xmlNamespace, string propName, string backingPropertyName, string backingStoreName, string coType, string coImplementationType, bool isNullable)
             : base(_host)
         {
@@ -37,7 +44,7 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.Properties
 			this.isNullable = isNullable;
 
         }
-        
+
         public override void Generate()
         {
 #line 21 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
@@ -101,8 +108,6 @@ AddSerialization(serializationList, coType, propName, coImplementationType, back
 this.WriteObjects("           // END ",  this.GetType() , "");
 
         }
-
-
 
     }
 }

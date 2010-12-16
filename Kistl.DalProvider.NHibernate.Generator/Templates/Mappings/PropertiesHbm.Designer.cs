@@ -20,6 +20,13 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
 		protected IEnumerable<Property> properties;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string prefix, IEnumerable<Property> properties)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("Mappings.PropertiesHbm", ctx, prefix, properties);
+        }
+
         public PropertiesHbm(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string prefix, IEnumerable<Property> properties)
             : base(_host)
         {
@@ -28,7 +35,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
 			this.properties = properties;
 
         }
-        
+
         public override void Generate()
         {
 #line 20 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\PropertiesHbm.cst"
@@ -59,8 +66,6 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
 
 
         }
-
-
 
     }
 }

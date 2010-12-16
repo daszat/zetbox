@@ -20,6 +20,13 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 		protected bool writeExportGuidAttribute;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, SerializerDirection direction, SerializationMembersList fields, bool overrideAndCallBase, bool writeExportGuidAttribute)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("Implementation.ObjectClasses.SerializerTemplate", ctx, direction, fields, overrideAndCallBase, writeExportGuidAttribute);
+        }
+
         public SerializerTemplate(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, SerializerDirection direction, SerializationMembersList fields, bool overrideAndCallBase, bool writeExportGuidAttribute)
             : base(_host)
         {
@@ -30,7 +37,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 			this.writeExportGuidAttribute = writeExportGuidAttribute;
 
         }
-        
+
         public override void Generate()
         {
 #line 18 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\SerializerTemplate.cst"
@@ -123,8 +130,6 @@ this.WriteObjects("            xml.WriteAttributeString(\"ExportGuid\", this._Ex
 this.WriteObjects("        }\r\n");
 
         }
-
-
 
     }
 }

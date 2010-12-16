@@ -23,6 +23,13 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.Serialization
 		protected string backingStoreName;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.Generator.Templates.Serialization.SerializerDirection direction, string streamName, string xmlnamespace, string xmlname, string memberType, string memberName, string backingStoreType, string backingStoreName)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("Serialization.CompoundObjectSerialization", ctx, direction, streamName, xmlnamespace, xmlname, memberType, memberName, backingStoreType, backingStoreName);
+        }
+
         public CompoundObjectSerialization(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.Generator.Templates.Serialization.SerializerDirection direction, string streamName, string xmlnamespace, string xmlname, string memberType, string memberName, string backingStoreType, string backingStoreName)
             : base(_host)
         {
@@ -37,7 +44,7 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.Serialization
 			this.backingStoreName = backingStoreName;
 
         }
-        
+
         public override void Generate()
         {
 #line 22 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Serialization\CompoundObjectSerialization.cst"
@@ -96,8 +103,6 @@ this.WriteObjects("			XmlStreamer.FromStream(this.",  backingStoreName , ", ",  
 
 
         }
-
-
 
     }
 }

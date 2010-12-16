@@ -11,15 +11,15 @@ namespace Kistl.Generator.Templates.CollectionEntries
 
     public partial class ValueCollectionEntryParentReference
     {
-        public static void Call(
-            Arebis.CodeGeneration.IGenerationHost host, IKistlContext ctx,
-            Templates.Serialization.SerializationMembersList membersToSerialize,
-            string className, string propertyName, string moduleName)
-        {
-            if (host == null) { throw new ArgumentNullException("host"); }
+        //public static void Call(
+        //    Arebis.CodeGeneration.IGenerationHost host, IKistlContext ctx,
+        //    Templates.Serialization.SerializationMembersList membersToSerialize,
+        //    string className, string propertyName, string moduleName)
+        //{
+        //    if (host == null) { throw new ArgumentNullException("host"); }
 
-            host.CallTemplate("CollectionEntries.ValueCollectionEntryParentReference",
-                ctx, membersToSerialize, className, propertyName, moduleName);
-        }
+        //    host.CallTemplate("CollectionEntries.ValueCollectionEntryParentReference",
+        //        ctx, membersToSerialize, className, propertyName, moduleName);
+        //}
     }
 }

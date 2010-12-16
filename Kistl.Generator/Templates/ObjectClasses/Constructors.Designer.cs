@@ -19,6 +19,13 @@ namespace Kistl.Generator.Templates.ObjectClasses
 		protected IEnumerable<CompoundObjectProperty> compoundObjectProperties;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string className, IEnumerable<CompoundObjectProperty> compoundObjectProperties)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("ObjectClasses.Constructors", ctx, className, compoundObjectProperties);
+        }
+
         public Constructors(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string className, IEnumerable<CompoundObjectProperty> compoundObjectProperties)
             : base(_host)
         {
@@ -27,7 +34,7 @@ namespace Kistl.Generator.Templates.ObjectClasses
 			this.compoundObjectProperties = compoundObjectProperties;
 
         }
-        
+
         public override void Generate()
         {
 #line 17 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\Constructors.cst"
@@ -49,8 +56,6 @@ ApplyCompoundObjectPropertyInitialisers();
 this.WriteObjects("        }\r\n");
 
         }
-
-
 
     }
 }

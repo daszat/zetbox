@@ -20,6 +20,13 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 		protected string propertyName;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Implementation.SerializerDirection direction, string streamName, string xmlnamespace, string xmlname, string propertyName)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("Implementation.ObjectClasses.EagerObjectLoadingSerialization", ctx, direction, streamName, xmlnamespace, xmlname, propertyName);
+        }
+
         public EagerObjectLoadingSerialization(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Implementation.SerializerDirection direction, string streamName, string xmlnamespace, string xmlname, string propertyName)
             : base(_host)
         {
@@ -31,7 +38,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 			this.propertyName = propertyName;
 
         }
-        
+
         public override void Generate()
         {
 #line 20 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\EagerObjectLoadingSerialization.cst"
@@ -53,8 +60,6 @@ break;
 
 
         }
-
-
 
     }
 }

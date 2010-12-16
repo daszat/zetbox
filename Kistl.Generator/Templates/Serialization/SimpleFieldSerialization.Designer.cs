@@ -20,6 +20,13 @@ namespace Kistl.Generator.Templates.Serialization
 		protected string memberName;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, SerializerDirection direction, string streamName, string xmlnamespace, string xmlname, string memberName)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("Serialization.SimpleFieldSerialization", ctx, direction, streamName, xmlnamespace, xmlname, memberName);
+        }
+
         public SimpleFieldSerialization(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, SerializerDirection direction, string streamName, string xmlnamespace, string xmlname, string memberName)
             : base(_host)
         {
@@ -31,7 +38,7 @@ namespace Kistl.Generator.Templates.Serialization
 			this.memberName = memberName;
 
         }
-        
+
         public override void Generate()
         {
 #line 20 "P:\Kistl\Kistl.Generator\Templates\Serialization\SimpleFieldSerialization.cst"
@@ -75,8 +82,6 @@ break;
 
 
         }
-
-
 
     }
 }

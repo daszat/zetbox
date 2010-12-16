@@ -21,6 +21,13 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
 		protected string baseClassName;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, IEnumerable<CompoundObjectProperty> compoundObjectProperties, string interfaceName, string className, string baseClassName)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("ObjectClasses.Constructors", ctx, compoundObjectProperties, interfaceName, className, baseClassName);
+        }
+
         public Constructors(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, IEnumerable<CompoundObjectProperty> compoundObjectProperties, string interfaceName, string className, string baseClassName)
             : base(_host)
         {
@@ -31,7 +38,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
 			this.baseClassName = baseClassName;
 
         }
-        
+
         public override void Generate()
         {
 #line 19 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\Constructors.cst"
@@ -62,8 +69,6 @@ this.WriteObjects("        /// <summary>the NHibernate proxy of the represented 
 this.WriteObjects("        private readonly ",  interfaceName , "Proxy Proxy;\r\n");
 
         }
-
-
 
     }
 }

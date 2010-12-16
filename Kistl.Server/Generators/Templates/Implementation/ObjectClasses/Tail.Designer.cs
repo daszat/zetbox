@@ -17,6 +17,13 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 		protected string implName;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, ObjectClass cls, string implName)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("Implementation.ObjectClasses.Tail", ctx, cls, implName);
+        }
+
         public Tail(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, ObjectClass cls, string implName)
             : base(_host)
         {
@@ -25,7 +32,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 			this.implName = implName;
 
         }
-        
+
         public override void Generate()
         {
 #line 15 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\Tail.cst"
@@ -84,8 +91,6 @@ Implementation.ObjectClasses.CustomTypeDescriptor.Call(Host, ctx, cls, "Property
 
 
         }
-
-
 
     }
 }

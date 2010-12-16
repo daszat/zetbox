@@ -27,6 +27,13 @@ namespace Kistl.Generator.Templates.Properties
 		protected bool eagerLoading;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Serialization.SerializationMembersList serializationList, string name, string exposedCollectionInterface, string referencedInterface, string backingName, string backingCollectionType, string aSideType, string bSideType, string entryType, string providerCollectionType, Guid relId, RelationEndRole role, bool eagerLoading)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("Properties.CollectionEntryListProperty", ctx, serializationList, name, exposedCollectionInterface, referencedInterface, backingName, backingCollectionType, aSideType, bSideType, entryType, providerCollectionType, relId, role, eagerLoading);
+        }
+
         public CollectionEntryListProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Serialization.SerializationMembersList serializationList, string name, string exposedCollectionInterface, string referencedInterface, string backingName, string backingCollectionType, string aSideType, string bSideType, string entryType, string providerCollectionType, Guid relId, RelationEndRole role, bool eagerLoading)
             : base(_host)
         {
@@ -46,7 +53,7 @@ namespace Kistl.Generator.Templates.Properties
 			this.eagerLoading = eagerLoading;
 
         }
-        
+
         public override void Generate()
         {
 #line 25 "P:\Kistl\Kistl.Generator\Templates\Properties\CollectionEntryListProperty.cst"
@@ -98,8 +105,6 @@ this.WriteObjects("		private bool ",  name , "_was_eagerLoaded = false;\r\n");
 
 
         }
-
-
 
     }
 }

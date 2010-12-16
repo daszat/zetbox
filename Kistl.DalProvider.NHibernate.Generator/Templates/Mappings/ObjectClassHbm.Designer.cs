@@ -25,6 +25,13 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
 		protected List<ObjectClass> subClasses;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string interfaceName, string implementationName, string tableName, string qualifiedInterfaceName, string qualifiedImplementationName, bool isAbstract, List<Property> properties, List<ObjectClass> subClasses)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("Mappings.ObjectClassHbm", ctx, interfaceName, implementationName, tableName, qualifiedInterfaceName, qualifiedImplementationName, isAbstract, properties, subClasses);
+        }
+
         public ObjectClassHbm(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string interfaceName, string implementationName, string tableName, string qualifiedInterfaceName, string qualifiedImplementationName, bool isAbstract, List<Property> properties, List<ObjectClass> subClasses)
             : base(_host)
         {
@@ -39,7 +46,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
 			this.subClasses = subClasses;
 
         }
-        
+
         public override void Generate()
         {
 #line 23 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
@@ -72,8 +79,6 @@ this.WriteObjects("    </class>\r\n");
 this.WriteObjects("</hibernate-mapping>");
 
         }
-
-
 
     }
 }

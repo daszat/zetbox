@@ -18,13 +18,20 @@ namespace Kistl.Generator.Templates.ObjectClasses
 		protected IKistlContext ctx;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("ObjectClasses.CollectionEntries", ctx);
+        }
+
         public CollectionEntries(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx)
             : base(_host)
         {
 			this.ctx = ctx;
 
         }
-        
+
         public override void Generate()
         {
 #line 16 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\CollectionEntries.cst"
@@ -116,8 +123,6 @@ this.WriteObjects("}\r\n");
 
 
         }
-
-
 
     }
 }

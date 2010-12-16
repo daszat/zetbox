@@ -13,6 +13,13 @@ namespace Kistl.Server.Generators.Templates.Implementation
 		protected string shortName;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string shortName)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("Implementation.Module", ctx, shortName);
+        }
+
         public Module(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string shortName)
             : base(_host)
         {
@@ -20,7 +27,7 @@ namespace Kistl.Server.Generators.Templates.Implementation
 			this.shortName = shortName;
 
         }
-        
+
         public override void Generate()
         {
 #line 11 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\Module.cst"
@@ -97,8 +104,6 @@ this.WriteObjects("    }\r\n");
 this.WriteObjects("}\r\n");
 
         }
-
-
 
     }
 }

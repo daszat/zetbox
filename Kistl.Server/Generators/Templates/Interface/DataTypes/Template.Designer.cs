@@ -16,6 +16,13 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
 		protected Kistl.App.Base.DataType dataType;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.App.Base.DataType dataType)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("Interface.DataTypes.Template", ctx, dataType);
+        }
+
         public Template(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.App.Base.DataType dataType)
             : base(_host)
         {
@@ -23,7 +30,7 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
 			this.dataType = dataType;
 
         }
-        
+
         public override void Generate()
         {
 #line 14 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\Template.cst"
@@ -84,8 +91,6 @@ this.WriteObjects("    }\r\n");
 this.WriteObjects("}");
 
         }
-
-
 
     }
 }

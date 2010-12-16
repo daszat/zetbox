@@ -19,6 +19,13 @@ namespace Kistl.Generator.Templates.ObjectClasses
 		protected string implName;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, DataType cls, string clsName, string implName)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("ObjectClasses.ApplyChangesFromMethod", ctx, cls, clsName, implName);
+        }
+
         public ApplyChangesFromMethod(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, DataType cls, string clsName, string implName)
             : base(_host)
         {
@@ -28,7 +35,7 @@ namespace Kistl.Generator.Templates.ObjectClasses
 			this.implName = implName;
 
         }
-        
+
         public override void Generate()
         {
 #line 17 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
@@ -76,8 +83,6 @@ this.WriteObjects("			this._fk_",  prop.Name , " = otherImpl._fk_",  prop.Name ,
 this.WriteObjects("		}\r\n");
 
         }
-
-
 
     }
 }

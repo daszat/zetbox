@@ -23,6 +23,13 @@ namespace Kistl.Generator.Templates.ObjectClasses
 		protected bool isExportable;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string referencedInterface, string referencedImplementation, string name, string implName, string fkBackingName, string fkGuidBackingName, bool isExportable)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("ObjectClasses.ReloadOneReference", ctx, referencedInterface, referencedImplementation, name, implName, fkBackingName, fkGuidBackingName, isExportable);
+        }
+
         public ReloadOneReference(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string referencedInterface, string referencedImplementation, string name, string implName, string fkBackingName, string fkGuidBackingName, bool isExportable)
             : base(_host)
         {
@@ -36,7 +43,7 @@ namespace Kistl.Generator.Templates.ObjectClasses
 			this.isExportable = isExportable;
 
         }
-        
+
         public override void Generate()
         {
 #line 21 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\ReloadOneReference.cst"
@@ -56,8 +63,6 @@ this.WriteObjects("            else\r\n");
 this.WriteObjects("                ",  implName , " = null;\r\n");
 
         }
-
-
 
     }
 }

@@ -18,6 +18,13 @@ namespace Kistl.Generator.Templates
 		protected DataType DataType;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, DataType DataType)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("TypeBase", ctx, DataType);
+        }
+
         public TypeBase(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, DataType DataType)
             : base(_host)
         {
@@ -25,7 +32,7 @@ namespace Kistl.Generator.Templates
 			this.DataType = DataType;
 
         }
-        
+
         public override void Generate()
         {
 #line 16 "P:\Kistl\Kistl.Generator\Templates\TypeBase.cst"
@@ -153,8 +160,6 @@ ApplyNamespaceTailTemplate();
 this.WriteObjects("}");
 
         }
-
-
 
     }
 }

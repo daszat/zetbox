@@ -16,6 +16,13 @@ namespace Kistl.Generator.Templates.ObjectClasses
 		protected DataType dt;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, DataType dt)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("ObjectClasses.DefaultMethods", ctx, dt);
+        }
+
         public DefaultMethods(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, DataType dt)
             : base(_host)
         {
@@ -23,7 +30,7 @@ namespace Kistl.Generator.Templates.ObjectClasses
 			this.dt = dt;
 
         }
-        
+
         public override void Generate()
         {
 #line 14 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\DefaultMethods.cst"
@@ -78,8 +85,6 @@ this.WriteObjects("\r\n");
 this.WriteObjects("        #endregion // ",  this.GetType() , "\r\n");
 
         }
-
-
 
     }
 }

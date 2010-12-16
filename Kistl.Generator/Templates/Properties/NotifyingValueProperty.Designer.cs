@@ -19,6 +19,13 @@ namespace Kistl.Generator.Templates.Properties
 		protected string backingName;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Serialization.SerializationMembersList serializationList, string type, string name, string modulenamespace, string backingName)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("Properties.NotifyingValueProperty", ctx, serializationList, type, name, modulenamespace, backingName);
+        }
+
         public NotifyingValueProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Serialization.SerializationMembersList serializationList, string type, string name, string modulenamespace, string backingName)
             : base(_host)
         {
@@ -30,7 +37,7 @@ namespace Kistl.Generator.Templates.Properties
 			this.backingName = backingName;
 
         }
-        
+
         public override void Generate()
         {
 #line 17 "P:\Kistl\Kistl.Generator\Templates\Properties\NotifyingValueProperty.cst"
@@ -89,8 +96,6 @@ AddSerialization(serializationList, name);
 this.WriteObjects("        // END ",  this.GetType() , "\r\n");
 
         }
-
-
 
     }
 }

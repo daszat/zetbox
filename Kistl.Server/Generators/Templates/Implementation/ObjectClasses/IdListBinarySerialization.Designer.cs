@@ -18,6 +18,13 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 		protected string memberName;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, SerializerDirection direction, string streamName, string memberName)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("Implementation.ObjectClasses.IdListBinarySerialization", ctx, direction, streamName, memberName);
+        }
+
         public IdListBinarySerialization(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, SerializerDirection direction, string streamName, string memberName)
             : base(_host)
         {
@@ -27,7 +34,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 			this.memberName = memberName;
 
         }
-        
+
         public override void Generate()
         {
 #line 17 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\IdListBinarySerialization.cst"
@@ -37,8 +44,6 @@ string methodName = direction.ToString();
 this.WriteObjects("            BinarySerializer.",  methodName , "(this.",  memberName , ", ",  streamName , ");\r\n");
 
         }
-
-
 
     }
 }

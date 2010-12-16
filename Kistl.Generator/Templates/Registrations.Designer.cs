@@ -13,6 +13,13 @@ namespace Kistl.Generator.Templates
 		protected string shortName;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string shortName)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("Registrations", ctx, shortName);
+        }
+
         public Registrations(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string shortName)
             : base(_host)
         {
@@ -20,7 +27,7 @@ namespace Kistl.Generator.Templates
 			this.shortName = shortName;
 
         }
-        
+
         public override void Generate()
         {
 #line 11 "P:\Kistl\Kistl.Generator\Templates\Registrations.cst"
@@ -41,8 +48,6 @@ this.WriteObjects("                .As<I",  shortName , "ActionsManager>()\r\n")
 this.WriteObjects("                .InstancePerLifetimeScope();\r\n");
 
         }
-
-
 
     }
 }

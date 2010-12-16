@@ -16,6 +16,13 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
 		protected bool isReadonly;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Property prop, bool isReadonly)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("Interface.DataTypes.SimplePropertyTemplate", ctx, prop, isReadonly);
+        }
+
         public SimplePropertyTemplate(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Property prop, bool isReadonly)
             : base(_host)
         {
@@ -24,7 +31,7 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
 			this.isReadonly = isReadonly;
 
         }
-        
+
         public override void Generate()
         {
 #line 15 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\SimplePropertyTemplate.cst"
@@ -47,8 +54,6 @@ this.WriteObjects("			set;\r\n");
 this.WriteObjects("		}");
 
         }
-
-
 
     }
 }

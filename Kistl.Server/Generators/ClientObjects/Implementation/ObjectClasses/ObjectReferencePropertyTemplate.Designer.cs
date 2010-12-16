@@ -32,6 +32,13 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
 		protected bool isReloadable;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Implementation.SerializationMembersList serializationList, string name, string implName, string fkBackingName, string fkGuidBackingName, string ownInterface, string referencedInterface, Relation rel, RelationEndRole endRole, bool hasInverseNavigator, bool hasPositionStorage, string positionPropertyName, bool relDataTypeExportable, string moduleNamespace, bool callGetterSetterEvents, bool isReloadable)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("Implementation.ObjectClasses.ObjectReferencePropertyTemplate", ctx, serializationList, name, implName, fkBackingName, fkGuidBackingName, ownInterface, referencedInterface, rel, endRole, hasInverseNavigator, hasPositionStorage, positionPropertyName, relDataTypeExportable, moduleNamespace, callGetterSetterEvents, isReloadable);
+        }
+
         public ObjectReferencePropertyTemplate(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Implementation.SerializationMembersList serializationList, string name, string implName, string fkBackingName, string fkGuidBackingName, string ownInterface, string referencedInterface, Relation rel, RelationEndRole endRole, bool hasInverseNavigator, bool hasPositionStorage, string positionPropertyName, bool relDataTypeExportable, string moduleNamespace, bool callGetterSetterEvents, bool isReloadable)
             : base(_host)
         {
@@ -54,7 +61,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
 			this.isReloadable = isReloadable;
 
         }
-        
+
         public override void Generate()
         {
 #line 31 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ObjectReferencePropertyTemplate.cst"
@@ -253,8 +260,6 @@ this.WriteObjects("        private Guid? ",  fkGuidBackingName , " = null;\r\n")
 this.WriteObjects("		// END ",  this.GetType() , " for ",  name , "\r\n");
 
         }
-
-
 
     }
 }

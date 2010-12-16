@@ -28,6 +28,13 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
 		protected string moduleNamespace;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Implementation.SerializationMembersList serializationList, string name, string backingName, string backingCollectionType, string exposedCollectionInterface, string thisInterface, string referencedType, string entryType, string providerCollectionType, string underlyingCollectionName, bool orderByB, string moduleNamespace)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("Implementation.ObjectClasses.ValueCollectionProperty", ctx, serializationList, name, backingName, backingCollectionType, exposedCollectionInterface, thisInterface, referencedType, entryType, providerCollectionType, underlyingCollectionName, orderByB, moduleNamespace);
+        }
+
         public ValueCollectionProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Implementation.SerializationMembersList serializationList, string name, string backingName, string backingCollectionType, string exposedCollectionInterface, string thisInterface, string referencedType, string entryType, string providerCollectionType, string underlyingCollectionName, bool orderByB, string moduleNamespace)
             : base(_host)
         {
@@ -46,7 +53,7 @@ namespace Kistl.Server.Generators.ClientObjects.Implementation.ObjectClasses
 			this.moduleNamespace = moduleNamespace;
 
         }
-        
+
         public override void Generate()
         {
 #line 28 "P:\Kistl\Kistl.Server\Generators\ClientObjects\Implementation\ObjectClasses\ValueCollectionProperty.cst"
@@ -76,8 +83,6 @@ this.WriteObjects("		private ",  backingCollectionType , "<",  thisInterface , "
 this.WriteObjects("		private ",  providerCollectionType , " ",  underlyingCollectionName , " = new List<",  entryType , ">();\r\n");
 
         }
-
-
 
     }
 }

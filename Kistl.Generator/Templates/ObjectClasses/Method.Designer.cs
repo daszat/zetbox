@@ -20,6 +20,13 @@ namespace Kistl.Generator.Templates.ObjectClasses
 		protected string eventName;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.App.Base.DataType dt, Kistl.App.Base.Method m, int index, string indexSuffix, string eventName)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("ObjectClasses.Method", ctx, dt, m, index, indexSuffix, eventName);
+        }
+
         public Method(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.App.Base.DataType dt, Kistl.App.Base.Method m, int index, string indexSuffix, string eventName)
             : base(_host)
         {
@@ -31,7 +38,7 @@ namespace Kistl.Generator.Templates.ObjectClasses
 			this.eventName = eventName;
 
         }
-        
+
         public override void Generate()
         {
 #line 18 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\Method.cst"
@@ -157,8 +164,6 @@ this.WriteObjects("        public static event ",  delegateName , "<",  dt.Name 
 this.WriteObjects("        // END ",  this.GetType() , "\r\n");
 
         }
-
-
 
     }
 }

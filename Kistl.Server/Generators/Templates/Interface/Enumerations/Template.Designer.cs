@@ -16,6 +16,13 @@ namespace Kistl.Server.Generators.Templates.Interface.Enumerations
 		protected Enumeration e;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Enumeration e)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("Interface.Enumerations.Template", ctx, e);
+        }
+
         public Template(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Enumeration e)
             : base(_host)
         {
@@ -23,7 +30,7 @@ namespace Kistl.Server.Generators.Templates.Interface.Enumerations
 			this.e = e;
 
         }
-        
+
         public override void Generate()
         {
 #line 15 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\Enumerations\Template.cst"
@@ -65,8 +72,6 @@ this.WriteObjects("	}\r\n");
 this.WriteObjects("}");
 
         }
-
-
 
     }
 }

@@ -12,6 +12,13 @@ namespace Kistl.Generator.Templates.Properties
 		protected string presentedType;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string propName, string presentedType)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("Properties.DefaultProperty", ctx, propName, presentedType);
+        }
+
         public DefaultProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string propName, string presentedType)
             : base(_host)
         {
@@ -20,7 +27,7 @@ namespace Kistl.Generator.Templates.Properties
 			this.presentedType = presentedType;
 
         }
-        
+
         public override void Generate()
         {
 #line 10 "P:\Kistl\Kistl.Generator\Templates\Properties\DefaultProperty.cst"
@@ -29,8 +36,6 @@ this.WriteObjects("        ",  GetModifiers() , " ",  presentedType , " ",  prop
 this.WriteObjects("        // END ",  this.GetType() , "\r\n");
 
         }
-
-
 
     }
 }

@@ -21,6 +21,13 @@ namespace Kistl.Generator.Templates.Serialization
 		protected EnumerationProperty prop;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, SerializerDirection direction, string streamName, string xmlnamespace, string xmlname, EnumerationProperty prop)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("Serialization.EnumBinarySerialization", ctx, direction, streamName, xmlnamespace, xmlname, prop);
+        }
+
         public EnumBinarySerialization(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, SerializerDirection direction, string streamName, string xmlnamespace, string xmlname, EnumerationProperty prop)
             : base(_host)
         {
@@ -32,7 +39,7 @@ namespace Kistl.Generator.Templates.Serialization
 			this.prop = prop;
 
         }
-        
+
         public override void Generate()
         {
 #line 20 "P:\Kistl\Kistl.Generator\Templates\Serialization\EnumBinarySerialization.cst"
@@ -89,8 +96,6 @@ break;
 
 
         }
-
-
 
     }
 }

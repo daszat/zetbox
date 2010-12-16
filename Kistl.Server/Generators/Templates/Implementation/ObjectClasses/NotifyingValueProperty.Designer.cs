@@ -18,6 +18,13 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 		protected String modulenamespace;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, SerializationMembersList serializationList, string type, String name, String modulenamespace)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("Implementation.ObjectClasses.NotifyingValueProperty", ctx, serializationList, type, name, modulenamespace);
+        }
+
         public NotifyingValueProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, SerializationMembersList serializationList, string type, String name, String modulenamespace)
             : base(_host)
         {
@@ -28,7 +35,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 			this.modulenamespace = modulenamespace;
 
         }
-        
+
         public override void Generate()
         {
 #line 18 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\NotifyingValueProperty.cst"
@@ -85,8 +92,6 @@ AddSerialization(serializationList, name);
 
 
         }
-
-
 
     }
 }

@@ -18,13 +18,20 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.ObjectClasses
 		protected IKistlContext ctx;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("ObjectClasses.AssociationSetAttributes", ctx);
+        }
+
         public AssociationSetAttributes(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx)
             : base(_host)
         {
 			this.ctx = ctx;
 
         }
-        
+
         public override void Generate()
         {
 #line 16 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
@@ -153,8 +160,6 @@ this.WriteObjects("	typeof(",  cls.Module.Namespace + "." + Construct.SecurityRu
 
 
         }
-
-
 
     }
 }

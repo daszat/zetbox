@@ -19,6 +19,13 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
 		protected IEnumerable<KeyValuePair<string, string>> typeAndNameList;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string interfaceName, IEnumerable<KeyValuePair<string, string>> typeAndNameList)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("ObjectClasses.ProxyClass", ctx, interfaceName, typeAndNameList);
+        }
+
         public ProxyClass(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string interfaceName, IEnumerable<KeyValuePair<string, string>> typeAndNameList)
             : base(_host)
         {
@@ -27,7 +34,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
 			this.typeAndNameList = typeAndNameList;
 
         }
-        
+
         public override void Generate()
         {
 #line 17 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClass.cst"
@@ -65,8 +72,6 @@ this.WriteObjects("\r\n");
 this.WriteObjects("        }\r\n");
 
         }
-
-
 
     }
 }

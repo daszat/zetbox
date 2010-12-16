@@ -18,6 +18,13 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 		protected string implName;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, ObjectClass cls, string typeDescriptorClass, string implName)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("Implementation.ObjectClasses.CustomTypeDescriptor", ctx, cls, typeDescriptorClass, implName);
+        }
+
         public CustomTypeDescriptor(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, ObjectClass cls, string typeDescriptorClass, string implName)
             : base(_host)
         {
@@ -27,7 +34,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 			this.implName = implName;
 
         }
-        
+
         public override void Generate()
         {
 #line 16 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CustomTypeDescriptor.cst"
@@ -177,8 +184,6 @@ this.WriteObjects("		}\r\n");
 this.WriteObjects("	\r\n");
 
         }
-
-
 
     }
 }

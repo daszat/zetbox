@@ -21,6 +21,13 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.EfModel
 		protected ISchemaProvider schemaProvider;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, IEnumerable<Property> properties, string prefix, ISchemaProvider schemaProvider)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("EfModel.ModelSsdlEntityTypeColumns", ctx, properties, prefix, schemaProvider);
+        }
+
         public ModelSsdlEntityTypeColumns(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, IEnumerable<Property> properties, string prefix, ISchemaProvider schemaProvider)
             : base(_host)
         {
@@ -30,7 +37,7 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.EfModel
 			this.schemaProvider = schemaProvider;
 
         }
-        
+
         public override void Generate()
         {
 #line 21 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.EntityTypeColumns.cst"
@@ -97,8 +104,6 @@ this.WriteObjects("    <Property Name=\"",  propertyName , "\" Type=\"",  sqlTyp
 
 
         }
-
-
 
     }
 }

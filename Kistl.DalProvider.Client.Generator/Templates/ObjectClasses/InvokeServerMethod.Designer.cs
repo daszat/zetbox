@@ -14,12 +14,19 @@ namespace Kistl.DalProvider.Client.Generator.Templates.ObjectClasses
     {
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("ObjectClasses.InvokeServerMethod");
+        }
+
         public InvokeServerMethod(Arebis.CodeGeneration.IGenerationHost _host)
             : base(_host)
         {
 
         }
-        
+
         public override void Generate()
         {
 #line 12 "P:\Kistl\Kistl.DalProvider.Client.Generator\Templates\ObjectClasses\InvokeServerMethod.cst"
@@ -66,8 +73,6 @@ this.WriteObjects("\r\n");
 this.WriteObjects("        // END ",  this.GetType() , "\r\n");
 
         }
-
-
 
     }
 }

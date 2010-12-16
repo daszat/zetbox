@@ -18,6 +18,13 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.Properties
 		protected String referencedCollectionEntry;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, String name, String associationName, String roleName, String referencedCollectionEntry)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("Properties.EfListWrapper", ctx, name, associationName, roleName, referencedCollectionEntry);
+        }
+
         public EfListWrapper(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, String name, String associationName, String roleName, String referencedCollectionEntry)
             : base(_host)
         {
@@ -28,7 +35,7 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.Properties
 			this.referencedCollectionEntry = referencedCollectionEntry;
 
         }
-        
+
         public override void Generate()
         {
 #line 16 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\EfListWrapper.cst"
@@ -54,8 +61,6 @@ this.WriteObjects("        }\r\n");
 this.WriteObjects("        // END ",  this.GetType() , "\r\n");
 
         }
-
-
 
     }
 }

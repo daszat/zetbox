@@ -18,6 +18,13 @@ namespace Kistl.Generator.Templates.Properties
 		protected string backingStoreName;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string implementationTypeName, string propertyName, string backingStoreName)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("Properties.CompoundObjectPropertyInitialisation", ctx, implementationTypeName, propertyName, backingStoreName);
+        }
+
         public CompoundObjectPropertyInitialisation(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string implementationTypeName, string propertyName, string backingStoreName)
             : base(_host)
         {
@@ -27,15 +34,13 @@ namespace Kistl.Generator.Templates.Properties
 			this.backingStoreName = backingStoreName;
 
         }
-        
+
         public override void Generate()
         {
 #line 16 "P:\Kistl\Kistl.Generator\Templates\Properties\CompoundObjectPropertyInitialisation.cst"
 this.WriteObjects("            ",  backingStoreName , " = new ",  implementationTypeName , "(false, this, \"",  propertyName , "\");\r\n");
 
         }
-
-
 
     }
 }

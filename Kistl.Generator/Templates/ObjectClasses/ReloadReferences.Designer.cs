@@ -17,6 +17,13 @@ namespace Kistl.Generator.Templates.ObjectClasses
 		protected ObjectClass cls;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, ObjectClass cls)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("ObjectClasses.ReloadReferences", ctx, cls);
+        }
+
         public ReloadReferences(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, ObjectClass cls)
             : base(_host)
         {
@@ -24,7 +31,7 @@ namespace Kistl.Generator.Templates.ObjectClasses
 			this.cls = cls;
 
         }
-        
+
         public override void Generate()
         {
 #line 15 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\ReloadReferences.cst"
@@ -63,8 +70,6 @@ this.WriteObjects("            // fix direct object references\r\n");
 this.WriteObjects("        }\r\n");
 
         }
-
-
 
     }
 }

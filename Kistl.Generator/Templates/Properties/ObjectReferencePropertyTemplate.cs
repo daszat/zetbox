@@ -98,51 +98,51 @@ namespace Kistl.Generator.Templates.Properties
                 callGetterSetterEvents);
         }
 
-        public static void Call(Arebis.CodeGeneration.IGenerationHost host,
-            IKistlContext ctx,
-            Serialization.SerializationMembersList serializationList,
-            string moduleNamespace,
-            string ownInterface,
-            string name,
-            string implName,
-            string eventName,
-            string fkBackingName,
-            string fkGuidBackingName,
-            string referencedInterface,
-            string referencedImplementation,
-            string associationName,
-            string targetRoleName,
-            string positionPropertyName,
-            string inverseNavigatorName,
-            bool inverseNavigatorIsList,
-            bool eagerLoading,
-            bool relDataTypeExportable,
-            bool callGetterSetterEvents)
-        {
-            if (host == null) { throw new ArgumentNullException("host"); }
+        //public static void Call(Arebis.CodeGeneration.IGenerationHost host,
+        //    IKistlContext ctx,
+        //    Serialization.SerializationMembersList serializationList,
+        //    string moduleNamespace,
+        //    string ownInterface,
+        //    string name,
+        //    string implName,
+        //    string eventName,
+        //    string fkBackingName,
+        //    string fkGuidBackingName,
+        //    string referencedInterface,
+        //    string referencedImplementation,
+        //    string associationName,
+        //    string targetRoleName,
+        //    string positionPropertyName,
+        //    string inverseNavigatorName,
+        //    bool inverseNavigatorIsList,
+        //    bool eagerLoading,
+        //    bool relDataTypeExportable,
+        //    bool callGetterSetterEvents)
+        //{
+        //    if (host == null) { throw new ArgumentNullException("host"); }
 
-            host.CallTemplate(
-                "Properties.ObjectReferencePropertyTemplate",
-                ctx,
-                serializationList,
-                moduleNamespace,
-                ownInterface,
-                name,
-                implName,
-                eventName,
-                fkBackingName,
-                fkGuidBackingName,
-                referencedInterface,
-                referencedImplementation,
-                associationName,
-                targetRoleName,
-                positionPropertyName,
-                inverseNavigatorName,
-                inverseNavigatorIsList,
-                eagerLoading,
-                relDataTypeExportable,
-                callGetterSetterEvents);
-        }
+        //    host.CallTemplate(
+        //        "Properties.ObjectReferencePropertyTemplate",
+        //        ctx,
+        //        serializationList,
+        //        moduleNamespace,
+        //        ownInterface,
+        //        name,
+        //        implName,
+        //        eventName,
+        //        fkBackingName,
+        //        fkGuidBackingName,
+        //        referencedInterface,
+        //        referencedImplementation,
+        //        associationName,
+        //        targetRoleName,
+        //        positionPropertyName,
+        //        inverseNavigatorName,
+        //        inverseNavigatorIsList,
+        //        eagerLoading,
+        //        relDataTypeExportable,
+        //        callGetterSetterEvents);
+        //}
 
         protected virtual void AddSerialization(Serialization.SerializationMembersList list, string memberName, string fkBackingName)
         {

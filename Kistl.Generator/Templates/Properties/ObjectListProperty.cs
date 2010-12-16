@@ -70,48 +70,48 @@ namespace Kistl.Generator.Templates.Properties
             Call(host, ctx, serializationList, name, wrapperName, wrapperClass, exposedListType, rel, endRole, positionPropertyName, otherName, referencedInterface);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="host"></param>
-        /// <param name="ctx"></param>
-        /// <param name="serializationList"></param>
-        /// <param name="name">the name of the property to create</param>
-        /// <param name="wrapperName">the name of the private backing store for the conversion wrapper list</param>
-        /// <param name="wrapperClass">the name of the wrapper class for wrapping the EntityCollection</param>
-        /// <param name="exposedListType">which generic interface to use for the collection (IList or ICollection)</param>
-        /// <param name="rel"></param>
-        /// <param name="endRole"></param>
-        /// <param name="positionPropertyName">the name of the position property for this list</param>
-        /// <param name="otherName"></param>
-        /// <param name="referencedInterface">which Kistl interface this list contains</param>
-        public static void Call(Arebis.CodeGeneration.IGenerationHost host,
-            IKistlContext ctx,
-            Serialization.SerializationMembersList serializationList,
-            string name,
-            string wrapperName,
-            string wrapperClass,
-            string exposedListType,
-            Relation rel,
-            RelationEndRole endRole,
-            string positionPropertyName,
-            string otherName,
-            string referencedInterface)
-        {
-            if (host == null) { throw new ArgumentNullException("host"); }
-            if (name == null) { throw new ArgumentNullException("name"); }
-            if (String.IsNullOrEmpty(wrapperName)) { throw new ArgumentNullException("wrapperName"); }
-            if (String.IsNullOrEmpty(wrapperClass)) { throw new ArgumentNullException("wrapperClass"); }
-            if (rel == null) { throw new ArgumentNullException("rel"); }
-            if (String.IsNullOrEmpty(otherName)) { throw new ArgumentNullException("otherName"); }
-            if (String.IsNullOrEmpty(referencedInterface)) { throw new ArgumentNullException("referencedInterface"); }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="host"></param>
+        ///// <param name="ctx"></param>
+        ///// <param name="serializationList"></param>
+        ///// <param name="name">the name of the property to create</param>
+        ///// <param name="wrapperName">the name of the private backing store for the conversion wrapper list</param>
+        ///// <param name="wrapperClass">the name of the wrapper class for wrapping the EntityCollection</param>
+        ///// <param name="exposedListType">which generic interface to use for the collection (IList or ICollection)</param>
+        ///// <param name="rel"></param>
+        ///// <param name="endRole"></param>
+        ///// <param name="positionPropertyName">the name of the position property for this list</param>
+        ///// <param name="otherName"></param>
+        ///// <param name="referencedInterface">which Kistl interface this list contains</param>
+        //public static void Call(Arebis.CodeGeneration.IGenerationHost host,
+        //    IKistlContext ctx,
+        //    Serialization.SerializationMembersList serializationList,
+        //    string name,
+        //    string wrapperName,
+        //    string wrapperClass,
+        //    string exposedListType,
+        //    Relation rel,
+        //    RelationEndRole endRole,
+        //    string positionPropertyName,
+        //    string otherName,
+        //    string referencedInterface)
+        //{
+        //    if (host == null) { throw new ArgumentNullException("host"); }
+        //    if (name == null) { throw new ArgumentNullException("name"); }
+        //    if (String.IsNullOrEmpty(wrapperName)) { throw new ArgumentNullException("wrapperName"); }
+        //    if (String.IsNullOrEmpty(wrapperClass)) { throw new ArgumentNullException("wrapperClass"); }
+        //    if (rel == null) { throw new ArgumentNullException("rel"); }
+        //    if (String.IsNullOrEmpty(otherName)) { throw new ArgumentNullException("otherName"); }
+        //    if (String.IsNullOrEmpty(referencedInterface)) { throw new ArgumentNullException("referencedInterface"); }
 
-            host.CallTemplate("Properties.ObjectListProperty",
-                ctx, serializationList,
-                name, wrapperName, wrapperClass, exposedListType,
-                rel, endRole, positionPropertyName, otherName,
-                referencedInterface);
-        }
+        //    host.CallTemplate("Properties.ObjectListProperty",
+        //        ctx, serializationList,
+        //        name, wrapperName, wrapperClass, exposedListType,
+        //        rel, endRole, positionPropertyName, otherName,
+        //        referencedInterface);
+        //}
 
         public ObjectListProperty(Arebis.CodeGeneration.IGenerationHost host,
             IKistlContext ctx,

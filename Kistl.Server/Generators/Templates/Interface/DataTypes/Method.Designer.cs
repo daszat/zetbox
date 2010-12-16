@@ -17,6 +17,13 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
 		protected int index;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.App.Base.Method m, int index)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("Interface.DataTypes.Method", ctx, m, index);
+        }
+
         public Method(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.App.Base.Method m, int index)
             : base(_host)
         {
@@ -25,7 +32,7 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
 			this.index = index;
 
         }
-        
+
         public override void Generate()
         {
 #line 17 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\Method.cst"
@@ -43,8 +50,6 @@ this.WriteObjects("		",  GetModifiers() , " ",  GetReturnType() , " ",  m.Name ,
 ApplyBodyTemplate(); 
 
         }
-
-
 
     }
 }

@@ -13,6 +13,13 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates
 		protected string shortName;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string shortName)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("TypeChecker", ctx, shortName);
+        }
+
         public TypeChecker(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string shortName)
             : base(_host)
         {
@@ -20,7 +27,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates
 			this.shortName = shortName;
 
         }
-        
+
         public override void Generate()
         {
 #line 11 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\TypeChecker.cst"
@@ -52,8 +59,6 @@ this.WriteObjects("		}\r\n");
 this.WriteObjects("	}\r\n");
 
         }
-
-
 
     }
 }

@@ -20,6 +20,13 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 		protected string memberName;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, SerializerDirection direction, string streamName, string xmlnamespace, string xmlname, string memberName)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("Implementation.ObjectClasses.ObjectReferencePropertySerialization", ctx, direction, streamName, xmlnamespace, xmlname, memberName);
+        }
+
         public ObjectReferencePropertySerialization(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, SerializerDirection direction, string streamName, string xmlnamespace, string xmlname, string memberName)
             : base(_host)
         {
@@ -31,7 +38,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 			this.memberName = memberName;
 
         }
-        
+
         public override void Generate()
         {
 #line 19 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ObjectReferencePropertySerialization.cst"
@@ -79,8 +86,6 @@ break;
 
 
         }
-
-
 
     }
 }

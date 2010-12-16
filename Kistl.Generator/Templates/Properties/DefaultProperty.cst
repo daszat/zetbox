@@ -1,5 +1,5 @@
 ﻿<%@ CodeTemplate Language="C#"
-    Name="Properties.DelegatingProperty"
+    Name="Properties.DefaultProperty"
     ClassName="Kistl.Generator.Templates.Properties.DefaultProperty"
     Inherits="Kistl.Generator.MemberTemplate" %>
 <%@ Import Namespace="System" %>

@@ -16,6 +16,13 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.ObjectClasses
 		protected ObjectClass cls;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, ObjectClass cls)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("ObjectClasses.AttachToContextTemplate", ctx, cls);
+        }
+
         public AttachToContextTemplate(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, ObjectClass cls)
             : base(_host)
         {
@@ -23,7 +30,7 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.ObjectClasses
 			this.cls = cls;
 
         }
-        
+
         public override void Generate()
         {
 #line 14 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
@@ -54,8 +61,6 @@ this.WriteObjects("                _",  prop.Name , ".ForEach<IValueCollectionEn
 this.WriteObjects("        }\r\n");
 
         }
-
-
 
     }
 }

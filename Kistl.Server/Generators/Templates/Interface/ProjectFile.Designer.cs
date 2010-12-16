@@ -13,6 +13,13 @@ namespace Kistl.Server.Generators.Templates.Interface
 		protected IEnumerable<ISchemaProvider> schemaProviders;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, Kistl.API.IKistlContext ctx, string projectGuid, List<string> fileNames, IEnumerable<ISchemaProvider> schemaProviders)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("Interface.ProjectFile", ctx, projectGuid, fileNames, schemaProviders);
+        }
+
         public ProjectFile(Arebis.CodeGeneration.IGenerationHost _host, Kistl.API.IKistlContext ctx, string projectGuid, List<string> fileNames, IEnumerable<ISchemaProvider> schemaProviders)
             : base(_host)
         {
@@ -22,7 +29,7 @@ namespace Kistl.Server.Generators.Templates.Interface
 			this.schemaProviders = schemaProviders;
 
         }
-        
+
         public override void Generate()
         {
 #line 11 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\ProjectFile.cst"
@@ -133,8 +140,6 @@ ApplyAdditionalPropertyGroups();
 this.WriteObjects("</Project>\r\n");
 
         }
-
-
 
     }
 }

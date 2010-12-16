@@ -18,6 +18,13 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 		protected int index;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.App.Base.DataType dt, Kistl.App.Base.Method m, int index)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("Implementation.ObjectClasses.MethodBody", ctx, dt, m, index);
+        }
+
         public MethodBody(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.App.Base.DataType dt, Kistl.App.Base.Method m, int index)
             : base(_host)
         {
@@ -27,7 +34,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 			this.index = index;
 
         }
-        
+
         public override void Generate()
         {
 #line 12 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\MethodBody.cst"
@@ -146,8 +153,6 @@ this.WriteObjects("\r\n");
 this.WriteObjects("\r\n");
 
         }
-
-
 
     }
 }

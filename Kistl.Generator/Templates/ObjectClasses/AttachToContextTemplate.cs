@@ -12,13 +12,13 @@ namespace Kistl.Generator.Templates.ObjectClasses
 
     public partial class AttachToContextTemplate
     {
-        public static void Call(IGenerationHost host, IKistlContext ctx,
-            ObjectClass dataType)
-        {
-            if (host == null) { throw new ArgumentNullException("host"); }
+        //public static void Call(IGenerationHost host, IKistlContext ctx,
+        //    ObjectClass dataType)
+        //{
+        //    if (host == null) { throw new ArgumentNullException("host"); }
 
-            host.CallTemplate("ObjectClasses.AttachToContextTemplate", ctx,
-                dataType);
-        }
+        //    host.CallTemplate("ObjectClasses.AttachToContextTemplate", ctx,
+        //        dataType);
+        //}
     }
 }

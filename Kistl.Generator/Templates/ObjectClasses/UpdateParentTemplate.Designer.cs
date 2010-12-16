@@ -19,6 +19,13 @@ namespace Kistl.Generator.Templates.ObjectClasses
 		protected List<ObjectReferenceProperty> props;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, List<ObjectReferenceProperty> props)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("ObjectClasses.UpdateParentTemplate", ctx, props);
+        }
+
         public UpdateParentTemplate(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, List<ObjectReferenceProperty> props)
             : base(_host)
         {
@@ -26,7 +33,7 @@ namespace Kistl.Generator.Templates.ObjectClasses
 			this.props = props;
 
         }
-        
+
         public override void Generate()
         {
 #line 17 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\UpdateParentTemplate.cst"
@@ -59,8 +66,6 @@ this.WriteObjects("		}\r\n");
 
 
         }
-
-
 
     }
 }

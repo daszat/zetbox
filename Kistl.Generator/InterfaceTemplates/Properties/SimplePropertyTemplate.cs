@@ -14,11 +14,11 @@ namespace Kistl.Generator.InterfaceTemplates.Properties
 
     public partial class SimplePropertyTemplate
     {
-        public static void Call(IGenerationHost host, IKistlContext ctx, Property p, bool isReadonly)
-        {
-            if (host == null) { throw new ArgumentNullException("host"); }
+        //public static void Call(IGenerationHost host, IKistlContext ctx, Property p, bool isReadonly)
+        //{
+        //    if (host == null) { throw new ArgumentNullException("host"); }
 
-            host.CallTemplate("Properties.SimplePropertyTemplate", ctx, p, isReadonly);
-        }
+        //    host.CallTemplate("Properties.SimplePropertyTemplate", ctx, p, isReadonly);
+        //}
     }
 }

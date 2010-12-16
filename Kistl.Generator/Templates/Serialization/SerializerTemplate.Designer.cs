@@ -20,6 +20,13 @@ namespace Kistl.Generator.Templates.Serialization
 		protected string exportGuidBackingStore;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, SerializerDirection direction, SerializationMembersList fields, bool overrideAndCallBase, string exportGuidBackingStore)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("Serialization.SerializerTemplate", ctx, direction, fields, overrideAndCallBase, exportGuidBackingStore);
+        }
+
         public SerializerTemplate(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, SerializerDirection direction, SerializationMembersList fields, bool overrideAndCallBase, string exportGuidBackingStore)
             : base(_host)
         {
@@ -30,7 +37,7 @@ namespace Kistl.Generator.Templates.Serialization
 			this.exportGuidBackingStore = exportGuidBackingStore;
 
         }
-        
+
         public override void Generate()
         {
 #line 18 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
@@ -123,8 +130,6 @@ this.WriteObjects("            xml.WriteAttributeString(\"ExportGuid\", ",  expo
 this.WriteObjects("        }\r\n");
 
         }
-
-
 
     }
 }

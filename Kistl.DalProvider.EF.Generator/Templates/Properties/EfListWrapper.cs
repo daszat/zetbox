@@ -10,17 +10,17 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.Properties
 
     public partial class EfListWrapper
     {
-        public static void Call(
-            Arebis.CodeGeneration.IGenerationHost host, IKistlContext ctx,
-            string nameImpl,
-            string relAssociationName, string relEndRoleName,
-            string relEndDataTypeStringImpl)
-        {
-            if (host == null) { throw new ArgumentNullException("host"); }
+        //public static void Call(
+        //    Arebis.CodeGeneration.IGenerationHost host, IKistlContext ctx,
+        //    string nameImpl,
+        //    string relAssociationName, string relEndRoleName,
+        //    string relEndDataTypeStringImpl)
+        //{
+        //    if (host == null) { throw new ArgumentNullException("host"); }
 
-            host.CallTemplate("Properties.EfListWrapper", ctx,
-                nameImpl,
-                relAssociationName, relEndRoleName, relEndDataTypeStringImpl);
-        }
+        //    host.CallTemplate("Properties.EfListWrapper", ctx,
+        //        nameImpl,
+        //        relAssociationName, relEndRoleName, relEndDataTypeStringImpl);
+        //}
     }
 }

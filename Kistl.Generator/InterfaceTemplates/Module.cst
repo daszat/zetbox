@@ -1,5 +1,5 @@
 ﻿<%@ CodeTemplate Language="C#" 
-    Name="Interfaces.Module"
+    Name="Module"
     ClassName="Kistl.Generator.InterfaceTemplates.Module" 
     Inherits="Kistl.Generator.ResourceTemplate" %>
 <%@ Import Namespace="System" %>

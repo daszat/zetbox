@@ -14,6 +14,13 @@ namespace Kistl.Generator.Templates.Properties
 		protected String getterEventName;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string className, string referencedType, String propertyName, String getterEventName)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("Properties.CalculatedProperty", ctx, className, referencedType, propertyName, getterEventName);
+        }
+
         public CalculatedProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string className, string referencedType, String propertyName, String getterEventName)
             : base(_host)
         {
@@ -24,7 +31,7 @@ namespace Kistl.Generator.Templates.Properties
 			this.getterEventName = getterEventName;
 
         }
-        
+
         public override void Generate()
         {
 #line 12 "P:\Kistl\Kistl.Generator\Templates\Properties\CalculatedProperty.cst"
@@ -46,8 +53,6 @@ this.WriteObjects("		}\r\n");
 this.WriteObjects("        // END ",  this.GetType() , "\r\n");
 
         }
-
-
 
     }
 }

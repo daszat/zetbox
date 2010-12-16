@@ -18,6 +18,13 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.Properties
 		protected RelationEndRole endRole;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.Generator.Templates.Serialization.SerializationMembersList serializationList, Relation rel, RelationEndRole endRole)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("Properties.CollectionEntryListProperty", ctx, serializationList, rel, endRole);
+        }
+
         public CollectionEntryListProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.Generator.Templates.Serialization.SerializationMembersList serializationList, Relation rel, RelationEndRole endRole)
             : base(_host)
         {
@@ -27,7 +34,7 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.Properties
 			this.endRole = endRole;
 
         }
-        
+
         public override void Generate()
         {
 #line 18 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\CollectionEntryListProperty.cst"
@@ -144,8 +151,6 @@ this.WriteObjects("        private bool ",  efName , "_was_eagerLoaded = false;\
 
 
         }
-
-
 
     }
 }

@@ -18,6 +18,13 @@ namespace Kistl.Generator.Templates.Properties
 		protected Property property;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Serialization.SerializationMembersList serializationList, DataType containingType, String name, Property property)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("Properties.ListProperty", ctx, serializationList, containingType, name, property);
+        }
+
         public ListProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Serialization.SerializationMembersList serializationList, DataType containingType, String name, Property property)
             : base(_host)
         {
@@ -28,7 +35,7 @@ namespace Kistl.Generator.Templates.Properties
 			this.property = property;
 
         }
-        
+
         public override void Generate()
         {
 #line 17 "P:\Kistl\Kistl.Generator\Templates\Properties\ListProperty.cst"
@@ -60,8 +67,6 @@ AddSerialization(serializationList, name);
 
 
         }
-
-
 
     }
 }

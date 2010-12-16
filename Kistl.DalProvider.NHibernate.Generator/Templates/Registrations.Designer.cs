@@ -11,12 +11,19 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates
     {
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("Registrations");
+        }
+
         public Registrations(Arebis.CodeGeneration.IGenerationHost _host)
             : base(_host)
         {
 
         }
-        
+
         public override void Generate()
         {
 #line 9 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Registrations.cst"
@@ -53,8 +60,6 @@ this.WriteObjects("                //       on the other hand, the session shoul
 this.WriteObjects("                .InstancePerDependency();\r\n");
 
         }
-
-
 
     }
 }

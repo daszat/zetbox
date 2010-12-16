@@ -17,13 +17,20 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.EfModel
 		protected IKistlContext ctx;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("EfModel.ModelMsl", ctx);
+        }
+
         public ModelMsl(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx)
             : base(_host)
         {
 			this.ctx = ctx;
 
         }
-        
+
         public override void Generate()
         {
 #line 15 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
@@ -290,8 +297,6 @@ this.WriteObjects("  </EntityContainerMapping>\r\n");
 this.WriteObjects("</Mapping>");
 
         }
-
-
 
     }
 }

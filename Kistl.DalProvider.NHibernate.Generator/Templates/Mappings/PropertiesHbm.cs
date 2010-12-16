@@ -14,15 +14,15 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
 
     public partial class PropertiesHbm
     {
-        public static void Call(IGenerationHost host, IKistlContext ctx, string prefix, IEnumerable<Property> properties)
-        {
-            if (host == null) { throw new ArgumentNullException("host"); }
-            if (ctx == null) { throw new ArgumentNullException("ctx"); }
-            if (prefix == null) { throw new ArgumentNullException("prefix"); }
-            if (properties == null) { throw new ArgumentNullException("properties"); }
+        //public static void Call(IGenerationHost host, IKistlContext ctx, string prefix, IEnumerable<Property> properties)
+        //{
+        //    if (host == null) { throw new ArgumentNullException("host"); }
+        //    if (ctx == null) { throw new ArgumentNullException("ctx"); }
+        //    if (prefix == null) { throw new ArgumentNullException("prefix"); }
+        //    if (properties == null) { throw new ArgumentNullException("properties"); }
 
-            host.CallTemplate("Mappings.PropertiesHbm", ctx, prefix, properties);
-        }
+        //    host.CallTemplate("Mappings.PropertiesHbm", ctx, prefix, properties);
+        //}
 
         protected virtual void ApplyObjectReferenceProperty(string prefix, ObjectReferenceProperty prop)
         {

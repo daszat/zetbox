@@ -12,6 +12,13 @@ namespace Kistl.Server.Generators.Interfaces.Interface.Repositories
 		protected Module module;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, Kistl.API.IKistlContext ctx, Module module)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("Interface.Repositories.Repository", ctx, module);
+        }
+
         public Repository(Arebis.CodeGeneration.IGenerationHost _host, Kistl.API.IKistlContext ctx, Module module)
             : base(_host)
         {
@@ -19,7 +26,7 @@ namespace Kistl.Server.Generators.Interfaces.Interface.Repositories
 			this.module = module;
 
         }
-        
+
         public override void Generate()
         {
 #line 10 "P:\Kistl\Kistl.Server\Generators\Interfaces\Repositories\Repository.cst"
@@ -66,8 +73,6 @@ this.WriteObjects("	\r\n");
 this.WriteObjects("}");
 
         }
-
-
 
     }
 }

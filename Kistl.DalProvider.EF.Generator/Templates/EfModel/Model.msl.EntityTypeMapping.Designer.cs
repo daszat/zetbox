@@ -18,6 +18,13 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.EfModel
 		protected ObjectClass cls;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, ObjectClass cls)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("EfModel.ModelMslEntityTypeMapping", ctx, cls);
+        }
+
         public ModelMslEntityTypeMapping(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, ObjectClass cls)
             : base(_host)
         {
@@ -25,7 +32,7 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.EfModel
 			this.cls = cls;
 
         }
-        
+
         public override void Generate()
         {
 #line 16 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.msl.EntityTypeMapping.cst"
@@ -46,8 +53,6 @@ foreach(var subCls in cls.SubClasses.OrderBy(c => c.Name))
 
 
         }
-
-
 
     }
 }

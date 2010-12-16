@@ -8,13 +8,20 @@ namespace Kistl.Generator.Templates
 		protected Kistl.API.IKistlContext ctx;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, Kistl.API.IKistlContext ctx)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("AssemblyInfoTemplate", ctx);
+        }
+
         public AssemblyInfoTemplate(Arebis.CodeGeneration.IGenerationHost _host, Kistl.API.IKistlContext ctx)
             : base(_host)
         {
 			this.ctx = ctx;
 
         }
-        
+
         public override void Generate()
         {
 #line 6 "P:\Kistl\Kistl.Generator\Templates\AssemblyInfoTemplate.cst"
@@ -33,8 +40,6 @@ ApplyAdditionalAssemblyInfo();
 
 
         }
-
-
 
     }
 }

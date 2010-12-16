@@ -13,7 +13,6 @@ namespace Kistl.Generator.Templates.Properties
 
     public partial class ValueCollectionProperty
     {
-
         public static void Call(Arebis.CodeGeneration.IGenerationHost host,
             IKistlContext ctx,
             Serialization.SerializationMembersList serializationList,
@@ -65,39 +64,39 @@ namespace Kistl.Generator.Templates.Properties
                 moduleNamespace);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="host"></param>
-        /// <param name="ctx"></param>
-        /// <param name="serializationList"></param>
-        /// <param name="name">the name of the property to create</param>
-        /// <param name="backingName">the name of the private backing store for the conversion wrapper list</param>
-        /// <param name="backingCollectionType">the name of the wrapper class for wrapping the CollectionEntries</param>
-        /// <param name="exposedCollectionInterface">which generic interface to use for the collection</param>
-        /// <param name="thisInterface">which Kistl interface this is</param>
-        /// <param name="referencedType">which type this list contains</param>
-        /// <param name="entryType">collection entries in this list</param>
-        /// <param name="providerCollectionType">the provider type of this collection</param>
-        /// <param name="underlyingCollectionName">how the underlying collection is called</param>
-        /// <param name="orderByB">true if the collection sould be ordered during export</param>
-        /// <param name="moduleNamespace">the xml namespace of the module</param>
-        public static void Call(
-            Arebis.CodeGeneration.IGenerationHost host,
-            IKistlContext ctx,
-            Serialization.SerializationMembersList serializationList,
-            string name, string backingName, string backingCollectionType, string exposedCollectionInterface,
-            string thisInterface, string referencedType, string entryType,
-            string providerCollectionType, string underlyingCollectionName, bool orderByB, string moduleNamespace)
-        {
-            if (host == null) { throw new ArgumentNullException("host"); }
-            if (ctx == null) { throw new ArgumentNullException("ctx"); }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="host"></param>
+        ///// <param name="ctx"></param>
+        ///// <param name="serializationList"></param>
+        ///// <param name="name">the name of the property to create</param>
+        ///// <param name="backingName">the name of the private backing store for the conversion wrapper list</param>
+        ///// <param name="backingCollectionType">the name of the wrapper class for wrapping the CollectionEntries</param>
+        ///// <param name="exposedCollectionInterface">which generic interface to use for the collection</param>
+        ///// <param name="thisInterface">which Kistl interface this is</param>
+        ///// <param name="referencedType">which type this list contains</param>
+        ///// <param name="entryType">collection entries in this list</param>
+        ///// <param name="providerCollectionType">the provider type of this collection</param>
+        ///// <param name="underlyingCollectionName">how the underlying collection is called</param>
+        ///// <param name="orderByB">true if the collection sould be ordered during export</param>
+        ///// <param name="moduleNamespace">the xml namespace of the module</param>
+        //public static void Call(
+        //    Arebis.CodeGeneration.IGenerationHost host,
+        //    IKistlContext ctx,
+        //    Serialization.SerializationMembersList serializationList,
+        //    string name, string backingName, string backingCollectionType, string exposedCollectionInterface,
+        //    string thisInterface, string referencedType, string entryType,
+        //    string providerCollectionType, string underlyingCollectionName, bool orderByB, string moduleNamespace)
+        //{
+        //    if (host == null) { throw new ArgumentNullException("host"); }
+        //    if (ctx == null) { throw new ArgumentNullException("ctx"); }
 
-            host.CallTemplate("Properties.ValueCollectionProperty",
-                ctx, serializationList,
-                name, backingName, backingCollectionType, exposedCollectionInterface,
-                thisInterface, referencedType, entryType, providerCollectionType, underlyingCollectionName, orderByB, moduleNamespace);
-        }
+        //    host.CallTemplate("Properties.ValueCollectionProperty",
+        //        ctx, serializationList,
+        //        name, backingName, backingCollectionType, exposedCollectionInterface,
+        //        thisInterface, referencedType, entryType, providerCollectionType, underlyingCollectionName, orderByB, moduleNamespace);
+        //}
 
         protected virtual void AddSerialization(Serialization.SerializationMembersList list, string underlyingCollectionName)
         {

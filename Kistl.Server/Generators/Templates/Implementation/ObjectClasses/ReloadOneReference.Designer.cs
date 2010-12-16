@@ -22,6 +22,13 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 		protected string fkGuidBackingName;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string referencedInterface, string referencedImplementation, string name, string implName, string fkBackingName, string fkGuidBackingName)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("Implementation.ObjectClasses.ReloadOneReference", ctx, referencedInterface, referencedImplementation, name, implName, fkBackingName, fkGuidBackingName);
+        }
+
         public ReloadOneReference(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string referencedInterface, string referencedImplementation, string name, string implName, string fkBackingName, string fkGuidBackingName)
             : base(_host)
         {
@@ -34,7 +41,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 			this.fkGuidBackingName = fkGuidBackingName;
 
         }
-        
+
         public override void Generate()
         {
 #line 20 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\ReloadOneReference.cst"
@@ -47,8 +54,6 @@ this.WriteObjects("			else\r\n");
 this.WriteObjects("				",  implName , " = null;\r\n");
 
         }
-
-
 
     }
 }

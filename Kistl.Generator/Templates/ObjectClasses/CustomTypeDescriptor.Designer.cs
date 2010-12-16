@@ -18,6 +18,13 @@ namespace Kistl.Generator.Templates.ObjectClasses
 		protected string propertyDescriptorName;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, ObjectClass cls, string implName, string propertyDescriptorName)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("ObjectClasses.CustomTypeDescriptor", ctx, cls, implName, propertyDescriptorName);
+        }
+
         public CustomTypeDescriptor(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, ObjectClass cls, string implName, string propertyDescriptorName)
             : base(_host)
         {
@@ -27,7 +34,7 @@ namespace Kistl.Generator.Templates.ObjectClasses
 			this.propertyDescriptorName = propertyDescriptorName;
 
         }
-        
+
         public override void Generate()
         {
 #line 16 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
@@ -177,8 +184,6 @@ this.WriteObjects("        }\r\n");
 this.WriteObjects("        #endregion // ",  this.GetType() , "\r\n");
 
         }
-
-
 
     }
 }

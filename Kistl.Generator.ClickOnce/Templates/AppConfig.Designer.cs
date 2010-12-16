@@ -10,13 +10,20 @@ namespace Kistl.Generator.ClickOnce.Templates
 		protected Kistl.API.IKistlContext ctx;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, Kistl.API.IKistlContext ctx)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("AppConfig", ctx);
+        }
+
         public AppConfig(Arebis.CodeGeneration.IGenerationHost _host, Kistl.API.IKistlContext ctx)
             : base(_host)
         {
 			this.ctx = ctx;
 
         }
-        
+
         public override void Generate()
         {
 #line 8 "P:\Kistl\Kistl.Generator.ClickOnce\Templates\AppConfig.cst"
@@ -110,8 +117,6 @@ this.WriteObjects("  </log4net>\r\n");
 this.WriteObjects("</configuration>");
 
         }
-
-
 
     }
 }

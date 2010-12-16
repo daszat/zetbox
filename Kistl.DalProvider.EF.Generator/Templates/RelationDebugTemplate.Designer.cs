@@ -15,6 +15,13 @@ namespace Kistl.DalProvider.Ef.Generator.Templates
 		protected Relation rel;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Relation rel)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("RelationDebugTemplate", ctx, rel);
+        }
+
         public RelationDebugTemplate(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Relation rel)
             : base(_host)
         {
@@ -22,7 +29,7 @@ namespace Kistl.DalProvider.Ef.Generator.Templates
 			this.rel = rel;
 
         }
-        
+
         public override void Generate()
         {
 #line 13 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\RelationDebugTemplate.cst"
@@ -32,8 +39,6 @@ this.WriteObjects("    B: ",  rel.B.Multiplicity , " ",  rel.B.Type.Name , " as 
 this.WriteObjects("    Preferred Storage: ",  rel.Storage , "\r\n");
 
         }
-
-
 
     }
 }

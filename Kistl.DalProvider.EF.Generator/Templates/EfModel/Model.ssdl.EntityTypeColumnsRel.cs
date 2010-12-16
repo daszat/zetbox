@@ -14,12 +14,12 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.EfModel
 
     public partial class ModelSsdlEntityTypeColumnsRel
     {
-        public static void Call(IGenerationHost host, IKistlContext ctx, ObjectClass cls, IEnumerable<Relation> relations, string prefix, ISchemaProvider schemaProvider)
-        {
-            if (host == null) { throw new ArgumentNullException("host"); }
+        //public static void Call(IGenerationHost host, IKistlContext ctx, ObjectClass cls, IEnumerable<Relation> relations, string prefix, ISchemaProvider schemaProvider)
+        //{
+        //    if (host == null) { throw new ArgumentNullException("host"); }
 
-            host.CallTemplate("EfModel.ModelSsdlEntityTypeColumnsRel", ctx, cls, relations, prefix, schemaProvider);
-        }
+        //    host.CallTemplate("EfModel.ModelSsdlEntityTypeColumnsRel", ctx, cls, relations, prefix, schemaProvider);
+        //}
 
         private void ProcessRelation(Relation rel)
         {

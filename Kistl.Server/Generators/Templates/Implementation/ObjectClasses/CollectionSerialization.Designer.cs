@@ -21,6 +21,13 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 		protected bool orderByB;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Implementation.SerializerDirection direction, string streamName, string xmlnamespace, string xmlname, string collectionName, bool orderByB)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("Implementation.ObjectClasses.CollectionSerialization", ctx, direction, streamName, xmlnamespace, xmlname, collectionName, orderByB);
+        }
+
         public CollectionSerialization(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Implementation.SerializerDirection direction, string streamName, string xmlnamespace, string xmlname, string collectionName, bool orderByB)
             : base(_host)
         {
@@ -33,7 +40,7 @@ namespace Kistl.Server.Generators.Templates.Implementation.ObjectClasses
 			this.orderByB = orderByB;
 
         }
-        
+
         public override void Generate()
         {
 #line 21 "P:\Kistl\Kistl.Server\Generators\Templates\Implementation\ObjectClasses\CollectionSerialization.cst"
@@ -85,8 +92,6 @@ break;
 
 
         }
-
-
 
     }
 }

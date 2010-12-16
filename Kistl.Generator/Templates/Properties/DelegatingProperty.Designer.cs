@@ -19,6 +19,13 @@ namespace Kistl.Generator.Templates.Properties
 		protected string backingType;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string propName, string presentedType, string backingPropName, string backingType)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("Properties.DelegatingProperty", ctx, propName, presentedType, backingPropName, backingType);
+        }
+
         public DelegatingProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string propName, string presentedType, string backingPropName, string backingType)
             : base(_host)
         {
@@ -29,7 +36,7 @@ namespace Kistl.Generator.Templates.Properties
 			this.backingType = backingType;
 
         }
-        
+
         public override void Generate()
         {
 #line 17 "P:\Kistl\Kistl.Generator\Templates\Properties\DelegatingProperty.cst"
@@ -42,8 +49,6 @@ this.WriteObjects("        }\r\n");
 this.WriteObjects("        // END ",  this.GetType() , "\r\n");
 
         }
-
-
 
     }
 }

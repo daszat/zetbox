@@ -19,6 +19,13 @@ namespace Kistl.Generator.Templates.CollectionEntries
 		protected string moduleNamespace;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.Generator.Templates.Serialization.SerializationMembersList serializationList, string referencedInterface, string propertyName, string moduleNamespace)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("CollectionEntries.ValueCollectionEntryParentReference", ctx, serializationList, referencedInterface, propertyName, moduleNamespace);
+        }
+
         public ValueCollectionEntryParentReference(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.Generator.Templates.Serialization.SerializationMembersList serializationList, string referencedInterface, string propertyName, string moduleNamespace)
             : base(_host)
         {
@@ -29,7 +36,7 @@ namespace Kistl.Generator.Templates.CollectionEntries
 			this.moduleNamespace = moduleNamespace;
 
         }
-        
+
         public override void Generate()
         {
 #line 18 "P:\Kistl\Kistl.Generator\Templates\CollectionEntries\ValueCollectionEntryParentReference.cst"
@@ -96,8 +103,6 @@ if (serializationList != null)
 
 
         }
-
-
 
     }
 }

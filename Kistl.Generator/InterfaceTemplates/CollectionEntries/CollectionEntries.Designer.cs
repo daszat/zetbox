@@ -16,13 +16,20 @@ namespace Kistl.Generator.InterfaceTemplates.CollectionEntries
 		protected IKistlContext ctx;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("CollectionEntries.CollectionEntries", ctx);
+        }
+
         public CollectionEntries(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx)
             : base(_host)
         {
 			this.ctx = ctx;
 
         }
-        
+
         public override void Generate()
         {
 #line 14 "P:\Kistl\Kistl.Generator\InterfaceTemplates\CollectionEntries\CollectionEntries.cst"
@@ -64,8 +71,6 @@ foreach (var rel in ctx.GetQuery<Relation>()
 
 
         }
-
-
 
     }
 }

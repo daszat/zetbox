@@ -34,11 +34,11 @@ namespace Kistl.Generator.Templates.Properties
             Call(_host, ctx, implementationTypeName, propertyName, backingStoreName);
         }
 
-        public static void Call(IGenerationHost _host, IKistlContext ctx, string implementationTypeName, string propertyName, string backingStoreName)
-        {
-            if (_host == null) { throw new ArgumentNullException("_host"); }
+        //public static void Call(IGenerationHost _host, IKistlContext ctx, string implementationTypeName, string propertyName, string backingStoreName)
+        //{
+        //    if (_host == null) { throw new ArgumentNullException("_host"); }
 
-            _host.CallTemplate("Properties.CompoundObjectPropertyInitialisation", ctx, implementationTypeName, propertyName, backingStoreName);
-        }
+        //    _host.CallTemplate("Properties.CompoundObjectPropertyInitialisation", ctx, implementationTypeName, propertyName, backingStoreName);
+        //}
     }
 }

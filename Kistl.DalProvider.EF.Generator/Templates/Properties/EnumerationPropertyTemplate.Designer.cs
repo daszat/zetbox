@@ -18,6 +18,13 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.Properties
 		protected bool callGetterSetterEvents;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.Generator.Templates.Serialization.SerializationMembersList serializationList, EnumerationProperty prop, bool callGetterSetterEvents)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("Properties.EnumerationPropertyTemplate", ctx, serializationList, prop, callGetterSetterEvents);
+        }
+
         public EnumerationPropertyTemplate(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.Generator.Templates.Serialization.SerializationMembersList serializationList, EnumerationProperty prop, bool callGetterSetterEvents)
             : base(_host)
         {
@@ -27,7 +34,7 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.Properties
 			this.callGetterSetterEvents = callGetterSetterEvents;
 
         }
-        
+
         public override void Generate()
         {
 #line 18 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\EnumerationPropertyTemplate.cst"
@@ -142,8 +149,6 @@ AddSerialization(serializationList);
 
 
         }
-
-
 
     }
 }

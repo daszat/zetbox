@@ -1,5 +1,5 @@
 ﻿<%@ CodeTemplate Language="C#" 
-    Name="Mappings.PropertiesHbm"
+    Name="ObjectClasses.ProxyClass"
     ClassName="Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.ProxyClass" 
     Inherits="Kistl.Generator.ResourceTemplate" %>
 <%@ Import Namespace="System" %>

@@ -21,6 +21,13 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
 		protected bool useEvents;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string propertyType, string propertyName, bool overrideParent, bool useEvents)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("Properties.ProxyProperty", ctx, propertyType, propertyName, overrideParent, useEvents);
+        }
+
         public ProxyProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string propertyType, string propertyName, bool overrideParent, bool useEvents)
             : base(_host)
         {
@@ -31,7 +38,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
 			this.useEvents = useEvents;
 
         }
-        
+
         public override void Generate()
         {
 #line 19 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
@@ -74,8 +81,6 @@ this.WriteObjects("        }\r\n");
 this.WriteObjects("        // END ",  this.GetType() , "\r\n");
 
         }
-
-
 
     }
 }

@@ -1,5 +1,5 @@
 ﻿<%@ CodeTemplate Language="C#" 
-    Name="Serializer.SerializerTemplate"
+    Name="Serialization.SerializerTemplate"
     ClassName="Kistl.Generator.Templates.Serialization.SerializerTemplate" 
     Inherits="Kistl.Generator.ResourceTemplate" %>
 <%@ Import Namespace="System" %>

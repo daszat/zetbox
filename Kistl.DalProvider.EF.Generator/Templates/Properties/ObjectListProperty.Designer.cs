@@ -25,6 +25,13 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.Properties
 		protected string referencedInterface;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.Generator.Templates.Serialization.SerializationMembersList serializationList, string name, string wrapperName, string wrapperClass, string exposedListType, Relation rel, RelationEndRole endRole, string positionPropertyName, string otherName, string referencedInterface)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("Properties.ObjectListProperty", ctx, serializationList, name, wrapperName, wrapperClass, exposedListType, rel, endRole, positionPropertyName, otherName, referencedInterface);
+        }
+
         public ObjectListProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.Generator.Templates.Serialization.SerializationMembersList serializationList, string name, string wrapperName, string wrapperClass, string exposedListType, Relation rel, RelationEndRole endRole, string positionPropertyName, string otherName, string referencedInterface)
             : base(_host)
         {
@@ -41,7 +48,7 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.Properties
 			this.referencedInterface = referencedInterface;
 
         }
-        
+
         public override void Generate()
         {
 #line 24 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
@@ -133,8 +140,6 @@ if (serializationList != null)
 this.WriteObjects("\r\n");
 
         }
-
-
 
     }
 }

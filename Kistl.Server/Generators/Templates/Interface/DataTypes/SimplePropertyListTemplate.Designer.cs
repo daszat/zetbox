@@ -15,6 +15,13 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
 		protected Property prop;
 
 
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Property prop)
+        {
+            if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
+
+            _host.CallTemplate("Interface.DataTypes.SimplePropertyListTemplate", ctx, prop);
+        }
+
         public SimplePropertyListTemplate(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Property prop)
             : base(_host)
         {
@@ -22,7 +29,7 @@ namespace Kistl.Server.Generators.Templates.Interface.DataTypes
 			this.prop = prop;
 
         }
-        
+
         public override void Generate()
         {
 #line 12 "P:\Kistl\Kistl.Server\Generators\Templates\Interface\DataTypes\SimplePropertyListTemplate.cst"
@@ -31,8 +38,6 @@ this.WriteObjects("\r\n");
 this.WriteObjects("        ",  GetPropertyTypeString() , " ",  GetPropertyName() , " { get; }");
 
         }
-
-
 
     }
 }
