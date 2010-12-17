@@ -18,7 +18,7 @@ namespace Kistl.API.Client
             moduleBuilder
                 .RegisterType<ProxyImplementation>()
                 .As<IProxy>()
-                .SingleInstance();
+                .InstancePerDependency(); // No singelton!
 
             moduleBuilder
                 .Register<ClientDeploymentRestrictor>(c => new ClientDeploymentRestrictor())

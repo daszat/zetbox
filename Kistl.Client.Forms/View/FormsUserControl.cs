@@ -64,7 +64,11 @@ namespace Kistl.Client.Forms.View
             ((Form)win).Activate();
         }
 
-        #endregion
+        public void ShowDialog()
+        {
+            throw new NotSupportedException();
+        }
 
+        #endregion
     }
 }

@@ -180,5 +180,14 @@ namespace Kistl.Client.Forms.View
         }
 
         #endregion
+
+        #region IFormsView Members
+
+        void IFormsView.ShowDialog()
+        {
+            this.ShowDialog();
+        }
+
+        #endregion
     }
 }

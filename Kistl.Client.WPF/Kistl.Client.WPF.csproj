@@ -655,6 +655,7 @@
     <None Include="app.config" />
     <None Include="DefaultConfig.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </None>
     <None Include="Kistl.snk" />
   </ItemGroup>

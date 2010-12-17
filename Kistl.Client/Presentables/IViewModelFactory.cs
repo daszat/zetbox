@@ -9,6 +9,9 @@ namespace Kistl.Client.Presentables
         void ShowModel(ViewModel mdl, bool activate);
         void ShowModel(ViewModel mdl, Kistl.App.GUI.ControlKind kind, bool activate);
 
+        void ShowDialog(ViewModel mdl);
+        void ShowDialog(ViewModel mdl, Kistl.App.GUI.ControlKind kind);
+
         void CreateTimer(TimeSpan tickLength, Action action);
         string GetSourceFileNameFromUser(params string[] filter);
         string GetDestinationFileNameFromUser(string filename, params string[] filter);

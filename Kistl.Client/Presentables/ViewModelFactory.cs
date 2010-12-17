@@ -297,7 +297,7 @@ namespace Kistl.Client.Presentables
             }
             else
             {
-                ShowInView(mdl, CreateSpecificView(mdl, kind), activate);
+                ShowInView(mdl, CreateSpecificView(mdl, kind), activate, false);
             }
         }
 
@@ -315,7 +315,7 @@ namespace Kistl.Client.Presentables
 
             if (dom == null)
             {
-                ShowInView(mdl, CreateDefaultView(mdl), activate);
+                ShowInView(mdl, CreateDefaultView(mdl), activate, false);
             }
             else
             {
@@ -325,7 +325,28 @@ namespace Kistl.Client.Presentables
             }
         }
 
-        protected abstract void ShowInView(ViewModel mdl, object view, bool activate);
+        public void ShowDialog(ViewModel mdl)
+        {
+            ShowDialog(mdl, null);
+        }
+
+        public void ShowDialog(ViewModel mdl, Kistl.App.GUI.ControlKind kind)
+        {
+            if (mdl == null)
+                throw new ArgumentNullException("mdl");
+
+            if (kind == null)
+            {
+                ShowInView(mdl, CreateDefaultView(mdl), true, true);
+            }
+            else
+            {
+                ShowInView(mdl, CreateSpecificView(mdl, kind), true, true);
+            }
+        }
+
+
+        protected abstract void ShowInView(ViewModel mdl, object view, bool activate, bool asDialog);
 
         #endregion
 

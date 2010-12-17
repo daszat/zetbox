@@ -14,5 +14,6 @@ namespace Kistl.Client.Forms
         void SetDataContext(INotifyPropertyChanged mdl);
         void Activate();
         void Show();
+        void ShowDialog();
     }
 }

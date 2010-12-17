@@ -44,14 +44,21 @@ namespace Kistl.Client.Forms
                 Application.Exit();
         }
 
-        protected override void ShowInView(ViewModel mdl, object view, bool activate)
+        protected override void ShowInView(ViewModel mdl, object view, bool activate, bool asDialog)
         {
             var control = (IFormsView)view;
             control.SetRenderer(_renderer);
             control.SetDataContext(mdl);
-            control.Show();
-            if (activate)
-                control.Activate();
+            if (asDialog)
+            {
+                control.ShowDialog();
+            }
+            else
+            {
+                control.Show();
+                if (activate)
+                    control.Activate();
+            }
         }
 
         private Renderer _renderer = new Renderer();

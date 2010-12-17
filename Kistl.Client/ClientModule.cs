@@ -84,6 +84,11 @@ namespace Kistl.Client
                 .As<IProblemReporter>()
                 .SingleInstance();
 
+            moduleBuilder
+                .RegisterType<DefaultCredentialsResolver>()
+                .As<ICredentialsResolver>()
+                .SingleInstance();
+
 
             // Register all ViewModel Types
             foreach (var t in typeof(ClientModule).Assembly.GetTypes()

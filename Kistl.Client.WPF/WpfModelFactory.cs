@@ -31,7 +31,7 @@ namespace Kistl.Client.WPF
         }
 
         /// <inheritdoc/>
-        protected override void ShowInView(ViewModel mdl, object view, bool activate)
+        protected override void ShowInView(ViewModel mdl, object view, bool activate, bool asDialog)
         {
             uiThread.Verify();
 
@@ -40,7 +40,14 @@ namespace Kistl.Client.WPF
                 var viewControl = (Window)view;
                 viewControl.DataContext = mdl;
                 viewControl.ShowActivated = activate;
-                viewControl.Show();
+                if (asDialog)
+                {
+                    viewControl.ShowDialog();
+                }
+                else
+                {
+                    viewControl.Show();
+                }
             }
             else
             {

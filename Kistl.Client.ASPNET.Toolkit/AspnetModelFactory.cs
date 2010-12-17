@@ -79,7 +79,7 @@ namespace Kistl.Client.ASPNET.Toolkit
             return view;
         }
 
-        protected override void ShowInView(ViewModel mdl, object view, bool activate)
+        protected override void ShowInView(ViewModel mdl, object view, bool activate, bool asDialog)
         {
             throw new NotImplementedException();
         }

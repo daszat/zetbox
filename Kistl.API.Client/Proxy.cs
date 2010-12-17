@@ -42,10 +42,12 @@ namespace Kistl.API.Client
         : IProxy
     {
         private InterfaceType.Factory _iftFactory;
+        private ICredentialsResolver _credentialsResolver;
 
-        public ProxyImplementation(InterfaceType.Factory iftFactory)
+        public ProxyImplementation(InterfaceType.Factory iftFactory, ICredentialsResolver credentialsResolver)
         {
             _iftFactory = iftFactory;
+            _credentialsResolver = credentialsResolver;
         }
 
         private readonly static object _lock = new object();
@@ -66,6 +68,7 @@ namespace Kistl.API.Client
                     {
                         Logging.Facade.Info("Initializing Service");
                         _service = new KistlServiceClient();
+                        _credentialsResolver.InitCredentials(_service.ClientCredentials);
                     }
                     return _service;
                 }
