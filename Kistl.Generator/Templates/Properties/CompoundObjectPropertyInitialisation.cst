@@ -13,4 +13,5 @@
 <%@ Parameter Name="implementationTypeName" Type="string" %>
 <%@ Parameter Name="propertyName" Type="string" %>
 <%@ Parameter Name="backingStoreName" Type="string" %>
-            <%= backingStoreName %> = new <%= implementationTypeName %>(false, this, "<%= propertyName %>");
+<%@ Parameter Name="isNull" Type="bool" %>
+            <%= backingStoreName %> = new <%= implementationTypeName %>(<%= isNull ? "true": "false" %>, this, "<%= propertyName %>");

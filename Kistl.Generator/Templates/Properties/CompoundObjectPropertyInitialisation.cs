@@ -30,8 +30,9 @@ namespace Kistl.Generator.Templates.Properties
             string backingStoreName = propertyName + implementationPropertySuffix;
             string typeName = property.GetPropertyTypeString();
             string implementationTypeName = typeName + implementationSuffix;
+            bool isNull = property.IsNullable();
 
-            Call(_host, ctx, implementationTypeName, propertyName, backingStoreName);
+            Call(_host, ctx, implementationTypeName, propertyName, backingStoreName, isNull);
         }
     }
 }
