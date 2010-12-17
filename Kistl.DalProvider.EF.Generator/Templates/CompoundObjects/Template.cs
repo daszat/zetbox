@@ -45,6 +45,15 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.CompoundObjects
             this.WriteLine();
             this.WriteObjects("            CompoundObject_IsNull = false;");
             this.WriteLine();
+            Templates.Properties.CompoundObjectPropertyInitialisation.Call(
+                Host, ctx,
+                this.DataType
+                    .Properties
+                    .OfType<CompoundObjectProperty>(),
+                ImplementationSuffix,
+                ImplementationPropertySuffix);
+
+            this.WriteLine();
             this.WriteObjects("        }");
             this.WriteLine();
 
@@ -59,7 +68,49 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.CompoundObjects
             this.WriteLine();
             this.WriteObjects("            CompoundObject_IsNull = isNull;");
             this.WriteLine();
+            Templates.Properties.CompoundObjectPropertyInitialisation.Call(
+                Host, ctx,
+                this.DataType
+                    .Properties
+                    .OfType<CompoundObjectProperty>(),
+                ImplementationSuffix,
+                ImplementationPropertySuffix);
 
+            this.WriteObjects("        }");
+            this.WriteLine();
+
+            // default constructor used for de-serialization
+            this.WriteObjects("        public ", clsName, "(Func<IFrozenContext> lazyCtx)");
+            this.WriteLine();
+            this.WriteObjects("            : base(lazyCtx)");
+            this.WriteLine();
+            this.WriteObjects("        {");
+            this.WriteLine();
+            this.WriteObjects("            CompoundObject_IsNull = false;");
+            this.WriteLine();
+            Templates.Properties.CompoundObjectPropertyInitialisation.Call(
+                Host, ctx,
+                this.DataType
+                    .Properties
+                    .OfType<CompoundObjectProperty>(),
+                ImplementationSuffix,
+                ImplementationPropertySuffix);
+
+            this.WriteLine();
+            this.WriteObjects("        }");
+            this.WriteLine();
+
+
+            this.WriteObjects("        public ", clsName, "(Func<IFrozenContext> lazyCtx, bool isNull, IPersistenceObject parent, string property)");
+            this.WriteLine();
+            this.WriteObjects("            : base(lazyCtx)");
+            this.WriteLine();
+            this.WriteObjects("        {");
+            this.WriteLine();
+            this.WriteObjects("            AttachToObject(parent, property);");
+            this.WriteLine();
+            this.WriteObjects("            CompoundObject_IsNull = isNull;");
+            this.WriteLine();
             Templates.Properties.CompoundObjectPropertyInitialisation.Call(
                 Host, ctx,
                 this.DataType
