@@ -31,7 +31,7 @@ namespace Kistl.DalProvider.Ef.Tests.BinarySerializers
     [TestFixture(typeof(TestPhoneCompoundObjectEfImpl))]
     public class should_work_with_EFCompoundObjects<T>
         : Kistl.API.AbstractConsumerTests.BinarySerializers.should_work_with_ICompoundObjects<T>
-        where T : BaseServerCompoundObject_EntityFramework, ICompoundObject, new()
+        where T : class, ICompoundObject, new()
     {
     }
 }
