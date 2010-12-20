@@ -123,7 +123,9 @@
     <Compile Include="Tests\CompoundObject\when_initialized.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Kistl.DalProvider.EF.Tests.Config.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -187,6 +189,7 @@
   <ItemGroup>
     <None Include="Kistl.DalProvider.EF.Tests.ConfigPostgreSQL.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -113,6 +113,7 @@ namespace Kistl.API.AbstractConsumerTests
         }
 
         [Test]
+        [Ignore("NpgSql produces an invalid SQL Statement")]
         public void list_and_query_should_yield_consistent_results()
         {
             using (IKistlContext ctx = GetContext())
