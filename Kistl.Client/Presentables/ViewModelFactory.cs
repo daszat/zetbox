@@ -16,6 +16,7 @@ namespace Kistl.Client.Presentables
     using Kistl.Client.GUI;
     using System.Diagnostics;
     using Kistl.Client.Presentables.ValueViewModels;
+    using System.Threading;
 
     /// <summary>
     /// Abstract base class to provide basic functionality of all model factories. Toolkit-specific implementations of this class will be 
@@ -386,6 +387,34 @@ namespace Kistl.Client.Presentables
         public abstract bool GetDecisionFromUser(string message, string caption);
 
         public abstract void ShowMessage(string message, string caption);
+
+        private void timer_callback(object args)
+        {
+            ShowWaitDialog();
+        }
+        
+        public void WithWaitDialog(Action task)
+        {
+            if (task == null) throw new ArgumentNullException("task");
+            using (Timer timer = new Timer(new TimerCallback(timer_callback), null, 200, Timeout.Infinite))
+            {
+                task();
+                CloseWaitDialog();
+            }
+        }
+
+        /// <summary>
+        /// A derived class should create a Wait Dialog.
+        /// </summary>
+        /// <remarks>
+        /// This Dialog must be created on a seperate Thread!
+        /// </remarks>
+        protected abstract void ShowWaitDialog();
+
+        /// <summary>
+        /// A derived class should close the previos opened Wait Dialog.
+        /// </summary>
+        protected abstract void CloseWaitDialog();
 
         #endregion
     }

@@ -86,5 +86,13 @@ namespace Kistl.Client.Forms
         {
             MessageBox.Show(message, caption);
         }
+
+        protected override void ShowWaitDialog()
+        {
+        }
+
+        protected override void CloseWaitDialog()
+        {
+        }
     }
 }

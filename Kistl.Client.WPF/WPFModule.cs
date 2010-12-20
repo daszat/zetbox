@@ -8,6 +8,7 @@ namespace Kistl.Client.WPF
     using Autofac;
     using Kistl.API;
     using Kistl.Client.Presentables;
+    using Kistl.API.Client;
 
     public class WPFModule : Module
     {
@@ -18,6 +19,7 @@ namespace Kistl.Client.WPF
             builder
                 .RegisterType<WpfModelFactory>()
                 .As<IViewModelFactory>()
+                .As<IToolkit>()
                 .SingleInstance();
         }
     }

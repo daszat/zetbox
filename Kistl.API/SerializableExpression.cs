@@ -548,14 +548,11 @@ namespace Kistl.API
 
         internal override Expression ToExpressionInternal(SerializationContext ctx)
         {
-            lock (ctx)
+            if (!ctx.Parameter.ContainsKey(Name))
             {
-                if (!ctx.Parameter.ContainsKey(Name))
-                {
-                    ctx.Parameter[Name] = Expression.Parameter(Type, Name);
-                }
-                return ctx.Parameter[Name];
+                ctx.Parameter[Name] = Expression.Parameter(Type, Name);
             }
+            return ctx.Parameter[Name];
         }
     }
     #endregion

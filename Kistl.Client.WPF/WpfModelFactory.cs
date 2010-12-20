@@ -134,6 +134,15 @@ namespace Kistl.Client.WPF
         {
             MessageBox.Show(message, caption);
         }
-    }
 
+        protected override void ShowWaitDialog()
+        {
+            SplashScreen.ShowSplashScreen("ZBox is busy", "The current operation might take some time", 1);
+        }
+
+        protected override void CloseWaitDialog()
+        {
+            SplashScreen.HideSplashScreen();
+        }
+    }
 }

@@ -3,22 +3,15 @@ namespace Kistl.Client.Presentables
 {
     using System;
     using Kistl.App.GUI;
+    using Kistl.API.Client;
 
-    public interface IViewModelFactory
+    public interface IViewModelFactory : IToolkit
     {
         void ShowModel(ViewModel mdl, bool activate);
         void ShowModel(ViewModel mdl, Kistl.App.GUI.ControlKind kind, bool activate);
 
         void ShowDialog(ViewModel mdl);
         void ShowDialog(ViewModel mdl, Kistl.App.GUI.ControlKind kind);
-
-        void CreateTimer(TimeSpan tickLength, Action action);
-        string GetSourceFileNameFromUser(params string[] filter);
-        string GetDestinationFileNameFromUser(string filename, params string[] filter);
-        bool GetDecisionFromUser(string message, string caption);
-        void ShowMessage(string message, string caption);
-
-        Toolkit Toolkit { get; }
 
         // Create Models
         TModelFactory CreateViewModel<TModelFactory>() where TModelFactory : class;

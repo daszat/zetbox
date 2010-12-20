@@ -27,64 +27,74 @@ namespace Kistl.Client.WPF
             InitializeComponent();
         }
 
+        private static readonly object _lock = new object();
         private static SplashScreen _current = null;
         private static Thread _thread = null;
-        private static AutoResetEvent _threadStarted = new AutoResetEvent(false);
+        private static AutoResetEvent _created = new AutoResetEvent(false);
 
-        private static void RunSplashScreen()
+        private static void Run()
         {
             _current = new SplashScreen();
-            _threadStarted.Set();
+            _created.Set();
             _current.ShowDialog();
         }
 
         public static void ShowSplashScreen(string message, string info, int steps)
         {
-            if (_current == null)
+            lock (_lock)
             {
-                _thread = new Thread(new ThreadStart(RunSplashScreen));
-                _thread.SetApartmentState(ApartmentState.STA);
-                _thread.Start();
-
-                _threadStarted.WaitOne();
-
-                _current.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(delegate()
+                if (_current == null)
                 {
-                    _current.Message = message;
-                    _current.Info = info;
-                    _current.Steps = steps;
-                }));
+                    _thread = new Thread(new ThreadStart(Run));
+                    _thread.SetApartmentState(ApartmentState.STA);
+                    _thread.Start();
+
+                    _created.WaitOne();
+
+                    _current.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(delegate()
+                    {
+                        _current.Message = message;
+                        _current.Info = info;
+                        _current.Steps = steps;
+                    }));
+                }
             }
         }
 
         public static void HideSplashScreen()
         {
-            if (_current != null)
+            lock (_lock)
             {
-                try
+                if (_current != null)
                 {
-                    _current.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(delegate()
+                    try
                     {
-                        _current.Close();
-                    }));
-                }
-                finally
-                {
-                    _current = null;
-                    _thread = null;
+                        _current.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(delegate()
+                        {
+                            _current.Close();
+                        }));
+                    }
+                    finally
+                    {
+                        _current = null;
+                        _thread = null;
+                    }
                 }
             }
         }
 
         public static void SetInfo(string info)
         {
-            if (_current != null)
+            lock (_lock)
             {
-                _current.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(delegate()
+                if (_current != null)
                 {
-                    _current.Info = info;
-                    _current.CurrentStep++;
-                }));
+                    _current.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(delegate()
+                    {
+                        _current.Info = info;
+                        _current.CurrentStep++;
+                    }));
+                }
             }
         }
 
