@@ -15,7 +15,12 @@ namespace Kistl.Client.Presentables.KistlBase
     public class SystemTypeViewModel
         : ViewModel
     {
+#if MONO
+        // See https://bugzilla.novell.com/show_bug.cgi?id=660553
+        public delegate SystemTypeViewModel Factory(IKistlContext dataCtx, Type type);
+#else
         public new delegate SystemTypeViewModel Factory(IKistlContext dataCtx, Type type);
+#endif
 
         private Type _type;
 

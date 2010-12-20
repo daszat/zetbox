@@ -18,7 +18,12 @@ namespace Kistl.Client.Presentables
     public abstract class PropertyGroupViewModel
         : ViewModel, IDataErrorInfo
     {
+#if MONO
+        // See https://bugzilla.novell.com/show_bug.cgi?id=660553
+        public delegate PropertyGroupViewModel Factory(IKistlContext dataCtx, string title, IEnumerable<ViewModel> obj);
+#else
         public new delegate PropertyGroupViewModel Factory(IKistlContext dataCtx, string title, IEnumerable<ViewModel> obj);
+#endif
 
         private string _title;
         protected ObservableCollection<ViewModel> properties;
@@ -119,7 +124,7 @@ namespace Kistl.Client.Presentables
     public class SinglePropertyGroupViewModel : PropertyGroupViewModel
     {
         public new delegate SinglePropertyGroupViewModel Factory(IKistlContext dataCtx, string title, IEnumerable<ViewModel> obj);
-        
+
         public SinglePropertyGroupViewModel(
             IViewModelDependencies appCtx, IKistlContext dataCtx,
             string title,
@@ -141,7 +146,7 @@ namespace Kistl.Client.Presentables
     public class MultiplePropertyGroupViewModel : PropertyGroupViewModel
     {
         public new delegate MultiplePropertyGroupViewModel Factory(IKistlContext dataCtx, string title, IEnumerable<ViewModel> obj);
-        
+
         public MultiplePropertyGroupViewModel(
             IViewModelDependencies appCtx, IKistlContext dataCtx,
             string title,

@@ -13,13 +13,13 @@ namespace Kistl.Client.Presentables.KistlBase
     using Kistl.API;
     using Kistl.API.Client;
     using Kistl.API.Configuration;
+    using Kistl.API.Utils;
     using Kistl.App.Base;
     using Kistl.App.GUI;
     using Kistl.Client.Models;
-    using ObjectEditor = Kistl.Client.Presentables.ObjectEditor;
     using Kistl.Client.Presentables.FilterViewModels;
     using Kistl.Client.Presentables.ValueViewModels;
-    using Kistl.API.Utils;
+    using ObjectEditor = Kistl.Client.Presentables.ObjectEditor;
 
     public enum InstanceListViewMethod
     {
@@ -34,7 +34,12 @@ namespace Kistl.Client.Presentables.KistlBase
     public class InstanceListViewModel
         : ViewModel, IViewModelWithIcon, IRefreshCommandListener
     {
+#if MONO
+        // See https://bugzilla.novell.com/show_bug.cgi?id=660553
+        public delegate InstanceListViewModel Factory(IKistlContext dataCtx, ObjectClass type, IQueryable qry);
+#else
         public new delegate InstanceListViewModel Factory(IKistlContext dataCtx, ObjectClass type, IQueryable qry);
+#endif
 
         protected readonly Func<IKistlContext> ctxFactory;
 

@@ -1,25 +1,30 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-
-using Kistl.API;
-using Kistl.App.Base;
-using Kistl.App.Extensions;
-using Kistl.API.Configuration;
-using Kistl.API.Utils;
-using Kistl.Client.Models;
-using Kistl.Client.Presentables.ValueViewModels;
 
 namespace Kistl.Client.Presentables
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Linq;
+    using System.Reflection;
+    using System.Text;
+    using Kistl.API;
+    using Kistl.API.Configuration;
+    using Kistl.API.Utils;
+    using Kistl.App.Base;
+    using Kistl.App.Extensions;
+    using Kistl.Client.Models;
+    using Kistl.Client.Presentables.ValueViewModels;
+
     [ViewModelDescriptor]
     public class ParameterInputTaskViewModel
         : WindowViewModel, IValueInputTaskViewModel
     {
+#if MONO
+        // See https://bugzilla.novell.com/show_bug.cgi?id=660553
+        public delegate ParameterInputTaskViewModel Factory(IKistlContext dataCtx, Method method, Action<object[]> callback);
+#else
         public new delegate ParameterInputTaskViewModel Factory(IKistlContext dataCtx, Method method, Action<object[]> callback);
+#endif
 
         public ParameterInputTaskViewModel(
             IViewModelDependencies appCtx, IKistlContext dataCtx, Method method, Action<object[]> callback)

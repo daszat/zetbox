@@ -17,7 +17,12 @@ namespace Kistl.Client.Presentables
     public class CompoundObjectViewModel 
         : ViewModel
     {
+#if MONO
+        // See https://bugzilla.novell.com/show_bug.cgi?id=660553
+        public delegate CompoundObjectViewModel Factory(IKistlContext dataCtx, ICompoundObject obj);
+#else
         public new delegate CompoundObjectViewModel Factory(IKistlContext dataCtx, ICompoundObject obj);
+#endif
 
         public static CompoundObjectViewModel Fetch(IViewModelFactory f, IKistlContext dataCtx, ICompoundObject obj)
         {

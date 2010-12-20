@@ -9,11 +9,16 @@ namespace Kistl.Client.Presentables.Relations
     using Kistl.API.Configuration;
     using Kistl.App.Base;
     using Kistl.Client.Presentables.ValueViewModels;
-    
+
     public class RelationEndViewModel
         : DataObjectViewModel
     {
+#if MONO
+        // See https://bugzilla.novell.com/show_bug.cgi?id=660553
+        public delegate RelationEndViewModel Factory(IKistlContext dataCtx, RelationEnd relEnd);
+#else
         public new delegate RelationEndViewModel Factory(IKistlContext dataCtx, RelationEnd relEnd);
+#endif
 
         private RelationEnd _relationEnd;
 

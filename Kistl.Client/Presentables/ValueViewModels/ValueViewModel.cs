@@ -15,7 +15,12 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
     public abstract class BaseValueViewModel : ViewModel, IValueViewModel, IFormattedValueViewModel, IDataErrorInfo, ILabeledViewModel
     {
+#if MONO
+        // See https://bugzilla.novell.com/show_bug.cgi?id=660553
+        public delegate BaseValueViewModel Factory(IKistlContext dataCtx, IValueModel mdl);
+#else
         public new delegate BaseValueViewModel Factory(IKistlContext dataCtx, IValueModel mdl);
+#endif
 
         public static BaseValueViewModel Fetch(IViewModelFactory f, IKistlContext dataCtx, Property prop, IValueModel mdl)
         {

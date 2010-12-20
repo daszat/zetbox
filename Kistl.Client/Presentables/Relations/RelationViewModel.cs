@@ -14,7 +14,12 @@ namespace Kistl.Client.Presentables.Relations
     public class RelationViewModel
         : DataObjectViewModel
     {
+#if MONO
+        // See https://bugzilla.novell.com/show_bug.cgi?id=660553
+        public delegate RelationViewModel Factory(IKistlContext dataCtx, Relation rel);
+#else
         public new delegate RelationViewModel Factory(IKistlContext dataCtx, Relation rel);
+#endif
 
         private Relation _relation;
 

@@ -12,7 +12,12 @@ namespace Kistl.Client.Presentables.KistlBase
 
     public class OpenDataObjectCommand : ItemCommandViewModel<DataObjectViewModel>
     {
+#if MONO
+        // See https://bugzilla.novell.com/show_bug.cgi?id=660553
+        public delegate OpenDataObjectCommand Factory(IKistlContext dataCtx, ControlKind reqWorkspaceKind, ControlKind reqEditorKind);
+#else
         public new delegate OpenDataObjectCommand Factory(IKistlContext dataCtx, ControlKind reqWorkspaceKind, ControlKind reqEditorKind);
+#endif
 
         protected readonly Func<IKistlContext> ctxFactory;
 
@@ -81,7 +86,12 @@ namespace Kistl.Client.Presentables.KistlBase
 
     public class DeleteDataObjectCommand : ItemCommandViewModel<DataObjectViewModel>
     {
+#if MONO
+        // See https://bugzilla.novell.com/show_bug.cgi?id=660553
+        public delegate DeleteDataObjectCommand Factory(IKistlContext dataCtx, IRefreshCommandListener listener, bool submitChanges);
+#else
         public new delegate DeleteDataObjectCommand Factory(IKistlContext dataCtx, IRefreshCommandListener listener, bool submitChanges);
+#endif
         protected IRefreshCommandListener Listener { get; private set; }
         protected bool SubmitChanges { get; private set; }
 
@@ -111,7 +121,12 @@ namespace Kistl.Client.Presentables.KistlBase
 
     public class NewDataObjectCommand : CommandViewModel
     {
+#if MONO
+        // See https://bugzilla.novell.com/show_bug.cgi?id=660553
+        public delegate NewDataObjectCommand Factory(IKistlContext dataCtx, DataType type, ControlKind reqWorkspaceKind, ControlKind reqEditorKind, IRefreshCommandListener listener);
+#else
         public new delegate NewDataObjectCommand Factory(IKistlContext dataCtx, DataType type, ControlKind reqWorkspaceKind, ControlKind reqEditorKind, IRefreshCommandListener listener);
+#endif
 
         protected readonly Func<IKistlContext> ctxFactory;
         protected DataType Type { get; private set; }
@@ -202,7 +217,12 @@ namespace Kistl.Client.Presentables.KistlBase
 
     public class EditDataObjectClassCommand : CommandViewModel
     {
+#if MONO
+        // See https://bugzilla.novell.com/show_bug.cgi?id=660553
+        public delegate EditDataObjectClassCommand Factory(IKistlContext dataCtx, DataType type);
+#else
         public new delegate EditDataObjectClassCommand Factory(IKistlContext dataCtx, DataType type);
+#endif
 
         protected readonly Func<IKistlContext> ctxFactory;
         protected DataType Type { get; private set; }
@@ -238,7 +258,12 @@ namespace Kistl.Client.Presentables.KistlBase
 
     public class RefreshCommand : CommandViewModel
     {
+#if MONO
+        // See https://bugzilla.novell.com/show_bug.cgi?id=660553
+        public delegate RefreshCommand Factory(IKistlContext dataCtx, IRefreshCommandListener listener);
+#else
         public new delegate RefreshCommand Factory(IKistlContext dataCtx, IRefreshCommandListener listener);
+#endif
 
         protected IRefreshCommandListener Listener { get; private set; }
 

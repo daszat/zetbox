@@ -14,7 +14,12 @@ namespace Kistl.Client.Presentables.KistlBase
     public class AssemblyViewModel
         : DataObjectViewModel
     {
+#if MONO
+        // See https://bugzilla.novell.com/show_bug.cgi?id=660553
+        public delegate DataObjectViewModel Factory(IKistlContext dataCtx, Assembly obj);
+#else
         public new delegate DataObjectViewModel Factory(IKistlContext dataCtx, Assembly obj);
+#endif
 
         private Assembly _assembly;
 

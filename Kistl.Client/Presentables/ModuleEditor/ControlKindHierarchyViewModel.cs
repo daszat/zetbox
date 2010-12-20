@@ -1,21 +1,27 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Kistl.API;
-using Kistl.App.Base;
-using System.Collections.ObjectModel;
-using Kistl.Client.Presentables.GUI;
-using Kistl.App.GUI;
-using Kistl.App.Extensions;
-using Kistl.Client.Presentables.KistlBase;
 
 namespace Kistl.Client.Presentables.ModuleEditor
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Linq;
+    using System.Text;
+    using Kistl.API;
+    using Kistl.App.Base;
+    using Kistl.App.Extensions;
+    using Kistl.App.GUI;
+    using Kistl.Client.Presentables.GUI;
+    using Kistl.Client.Presentables.KistlBase;
+
     [ViewModelDescriptor]
     public class ControlKindHierarchyViewModel : ViewModel, IRefreshCommandListener
     {
+#if MONO
+        // See https://bugzilla.novell.com/show_bug.cgi?id=660553
+        public delegate ControlKindHierarchyViewModel Factory(IKistlContext dataCtx, Module module);
+#else
         public new delegate ControlKindHierarchyViewModel Factory(IKistlContext dataCtx, Module module);
+#endif
 
         public ControlKindHierarchyViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, Module module, Func<IKistlContext> ctxFactory)
             : base(appCtx, dataCtx)

@@ -1,14 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Kistl.API;
-using System.Collections.ObjectModel;
-using Kistl.Client.Presentables.ValueViewModels;
-using Kistl.Client.Models;
 
 namespace Kistl.Client.Presentables.FilterViewModels
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Linq;
+    using System.Text;
+    using Kistl.API;
+    using Kistl.Client.Models;
+    using Kistl.Client.Presentables.ValueViewModels;
+
     /// <summary>
     /// Not a real view model
     /// Used to display internal enum FilterOperators
@@ -79,7 +80,14 @@ namespace Kistl.Client.Presentables.FilterViewModels
 
     public abstract class FilterViewModel : ViewModel
     {
+#if MONO
+        // See https://bugzilla.novell.com/show_bug.cgi?id=660553
+        public delegate FilterViewModel Factory(IKistlContext dataCtx, IUIFilterModel mdl);
+#else
         public new delegate FilterViewModel Factory(IKistlContext dataCtx, IUIFilterModel mdl);
+#endif
+
+        
 
         public FilterViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, IUIFilterModel mdl)
             : base(dependencies, dataCtx)

@@ -11,7 +11,12 @@ namespace Kistl.Client.Presentables.KistlBase
 {
     public class ApplicationViewModel : ViewModel
     {
+#if MONO
+        // See https://bugzilla.novell.com/show_bug.cgi?id=660553
+        public delegate ApplicationViewModel Factory(IKistlContext dataCtx, Application app);
+#else
         public new delegate ApplicationViewModel Factory(IKistlContext dataCtx, Application app);
+#endif
 
         protected readonly Func<ClientIsolationLevel, IKistlContext> ctxFactory;
 

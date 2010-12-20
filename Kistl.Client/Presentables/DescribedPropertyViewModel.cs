@@ -12,7 +12,12 @@ namespace Kistl.Client.Presentables
     public class DescribedPropertyViewModel 
         : DataObjectViewModel
     {
+#if MONO
+        // See https://bugzilla.novell.com/show_bug.cgi?id=660553
+        public delegate DescribedPropertyViewModel Factory(IKistlContext dataCtx, Property prop);
+#else
         public new delegate DescribedPropertyViewModel Factory(IKistlContext dataCtx, Property prop);
+#endif
 
         public DescribedPropertyViewModel(
             IViewModelDependencies appCtx, KistlConfig config, IKistlContext dataCtx,

@@ -7,15 +7,20 @@ namespace Kistl.Client.Presentables.GUI
     using System.Linq;
     using System.Text;
     using Kistl.API;
+    using Kistl.API.Common;
     using Kistl.App.GUI;
-using Kistl.API.Common;
     using Kistl.Client.Presentables.KistlBase;
 
     [ViewModelDescriptor]
     public class NavigationScreenViewModel
         : ViewModel
     {
+#if MONO
+        // See https://bugzilla.novell.com/show_bug.cgi?id=660553
+        public delegate NavigationScreenViewModel Factory(IKistlContext dataCtx, NavigationScreenViewModel parent, NavigationScreen screen);
+#else
         public new delegate NavigationScreenViewModel Factory(IKistlContext dataCtx, NavigationScreenViewModel parent, NavigationScreen screen);
+#endif
 
         public static NavigationScreenViewModel Create(IViewModelFactory ModelFactory, IKistlContext dataCtx, NavigationScreenViewModel parent, NavigationScreen screen)
         {

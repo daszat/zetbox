@@ -25,7 +25,12 @@ namespace Kistl.Client.Presentables.ModuleEditor
 
     public class DataTypeGraphModel : Presentables.DataTypeViewModel
     {
+#if MONO
+        // See https://bugzilla.novell.com/show_bug.cgi?id=660553
+        public delegate DataTypeGraphModel Factory(IKistlContext dataCtx, DataType obj, DiagramViewModel parent);
+#else
         public new delegate DataTypeGraphModel Factory(IKistlContext dataCtx, DataType obj, DiagramViewModel parent);
+#endif
 
         private DiagramViewModel _diagMdl;
         protected readonly Func<IKistlContext> ctxFactory;

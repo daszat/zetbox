@@ -17,7 +17,12 @@ namespace Kistl.Client.Presentables.TimeRecords
     public class PresenceRecordModel
         : DataObjectViewModel
     {
+#if MONO
+        // See https://bugzilla.novell.com/show_bug.cgi?id=660553
+        public delegate PresenceRecordModel Factory(IKistlContext dataCtx, PresenceRecord obj);
+#else
         public new delegate PresenceRecordModel Factory(IKistlContext dataCtx, PresenceRecord obj);
+#endif
 
         /// <summary>Gets the presented <see cref="PresenceRecord"/></summary>
         public PresenceRecord Entry
@@ -34,7 +39,7 @@ namespace Kistl.Client.Presentables.TimeRecords
         /// <param name="dataCtx">which <see cref="IKistlContext"/> to use</param>
         /// <param name="obj">the modelled <see cref="PresenceRecord"/></param>
         public PresenceRecordModel(
-            IViewModelDependencies appCtx, 
+            IViewModelDependencies appCtx,
             KistlConfig config,
             IKistlContext dataCtx,
             PresenceRecord obj)

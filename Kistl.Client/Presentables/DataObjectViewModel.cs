@@ -25,7 +25,12 @@ namespace Kistl.Client.Presentables
     public class DataObjectViewModel
         : ViewModel, IDataErrorInfo, IViewModelWithIcon
     {
+#if MONO
+        // See https://bugzilla.novell.com/show_bug.cgi?id=660553
+        public delegate DataObjectViewModel Factory(IKistlContext dataCtx, IDataObject obj);
+#else
         public new delegate DataObjectViewModel Factory(IKistlContext dataCtx, IDataObject obj);
+#endif
 
         public static DataObjectViewModel Fetch(IViewModelFactory f, IKistlContext dataCtx, IDataObject obj)
         {

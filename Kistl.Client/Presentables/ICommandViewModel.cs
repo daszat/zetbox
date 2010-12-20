@@ -241,7 +241,12 @@ namespace Kistl.Client.Presentables
     [ViewModelDescriptor]
     public sealed class SimpleCommandViewModel : CommandViewModel
     {
+#if MONO
+        // See https://bugzilla.novell.com/show_bug.cgi?id=660553
+        public delegate SimpleCommandViewModel Factory(IKistlContext dataCtx, string label, string tooltip, Action execute, Func<bool> canExecute);
+#else
         public new delegate SimpleCommandViewModel Factory(IKistlContext dataCtx, string label, string tooltip, Action execute, Func<bool> canExecute);
+#endif
 
         private readonly Action execute;
         private readonly Func<bool> canExecute;
@@ -273,7 +278,12 @@ namespace Kistl.Client.Presentables
 
     public sealed class SimpleParameterCommandViewModel<T> : CommandViewModel
     {
+#if MONO
+        // See https://bugzilla.novell.com/show_bug.cgi?id=660553
+        public delegate SimpleParameterCommandViewModel<T> Factory(IKistlContext dataCtx, string label, string tooltip, Action<T> execute, Func<T, bool> canExecute);
+#else
         public new delegate SimpleParameterCommandViewModel<T> Factory(IKistlContext dataCtx, string label, string tooltip, Action<T> execute, Func<T, bool> canExecute);
+#endif
 
         private readonly Action<T> execute;
         private readonly Func<T, bool> canExecute;
@@ -349,7 +359,12 @@ namespace Kistl.Client.Presentables
 
     public sealed class SimpleItemCommandViewModel<T> : ItemCommandViewModel<T>
     {
+#if MONO
+        // See https://bugzilla.novell.com/show_bug.cgi?id=660553
+        public delegate SimpleItemCommandViewModel<T> Factory(IKistlContext dataCtx, string label, string tooltip, Action<IEnumerable<T>> execute);
+#else
         public new delegate SimpleItemCommandViewModel<T> Factory(IKistlContext dataCtx, string label, string tooltip, Action<IEnumerable<T>> execute);
+#endif
 
         private readonly Action<IEnumerable<T>> execute;
 

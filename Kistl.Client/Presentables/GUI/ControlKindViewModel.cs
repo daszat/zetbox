@@ -7,14 +7,19 @@ namespace Kistl.Client.Presentables.GUI
     using System.Linq;
     using System.Text;
     using Kistl.API;
-    using Kistl.App.GUI;
     using Kistl.API.Configuration;
+    using Kistl.App.GUI;
 
     [ViewModelDescriptor]
     public class ControlKindViewModel
         : DataObjectViewModel
     {
+#if MONO
+        // See https://bugzilla.novell.com/show_bug.cgi?id=660553
+        public delegate ControlKindViewModel Factory(IKistlContext dataCtx, ControlKind obj);
+#else
         public new delegate ControlKindViewModel Factory(IKistlContext dataCtx, ControlKind obj);
+#endif
 
         public ControlKindViewModel(IViewModelDependencies dependencies, KistlConfig config, IKistlContext dataCtx, ControlKind obj)
             : base(dependencies, config, dataCtx, obj)

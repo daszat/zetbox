@@ -17,7 +17,12 @@ namespace Kistl.Client.Presentables.TimeRecords
     public class WorkEffortModel
         : DataObjectViewModel
     {
+#if MONO
+        // See https://bugzilla.novell.com/show_bug.cgi?id=660553
+        public delegate WorkEffortModel Factory(IKistlContext dataCtx, WorkEffort obj);
+#else
         public new delegate WorkEffortModel Factory(IKistlContext dataCtx, WorkEffort obj);
+#endif
 
         /// <summary>The presented <see cref="WorkEffort"/></summary>
         private WorkEffort _entry;

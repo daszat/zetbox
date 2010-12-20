@@ -23,7 +23,12 @@ namespace Kistl.Client.Presentables
     public class LabeledViewContainerViewModel
         : ViewModel, ILabeledViewModel
     {
+#if MONO
+        // See https://bugzilla.novell.com/show_bug.cgi?id=660553
+        public delegate LabeledViewContainerViewModel Factory(IKistlContext dataCtx, string label, string toolTip, ViewModel mdl);
+#else
         public new delegate LabeledViewContainerViewModel Factory(IKistlContext dataCtx, string label, string toolTip, ViewModel mdl);
+#endif
 
         public LabeledViewContainerViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, string label, string toolTip, ViewModel mdl)
             : base(dependencies, dataCtx)

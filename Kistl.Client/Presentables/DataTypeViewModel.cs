@@ -14,7 +14,12 @@ namespace Kistl.Client.Presentables
     public class DataTypeViewModel 
         : DataObjectViewModel
     {
+#if MONO
+        // See https://bugzilla.novell.com/show_bug.cgi?id=660553
+        public delegate DataTypeViewModel Factory(IKistlContext dataCtx, DataType dt);
+#else
         public new delegate DataTypeViewModel Factory(IKistlContext dataCtx, DataType dt);
+#endif
 
         public DataTypeViewModel(
             IViewModelDependencies appCtx, KistlConfig config, IKistlContext dataCtx,

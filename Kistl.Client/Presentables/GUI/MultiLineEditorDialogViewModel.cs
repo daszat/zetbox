@@ -12,9 +12,16 @@ namespace Kistl.Client.Presentables.GUI
     {
         private Action<string> _callback;
 
+#if MONO
+        // See https://bugzilla.novell.com/show_bug.cgi?id=660553
+        public delegate MultiLineEditorDialogViewModel Factory(IKistlContext dataCtx,
+            string value,
+            Action<string> callback);
+#else
         public new delegate MultiLineEditorDialogViewModel Factory(IKistlContext dataCtx,
             string value,
             Action<string> callback);
+#endif
 
         public MultiLineEditorDialogViewModel(
             IViewModelDependencies appCtx, IKistlContext dataCtx,

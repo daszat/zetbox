@@ -107,8 +107,9 @@ namespace Kistl.Client.Models
                         case RelationType.one_one:
                             return true; // can always display
                         default:
-                            return false; // something went wrong
+                            break; // return false; // something went wrong
                     }
+                    return false; // workaround for https://bugzilla.novell.com/show_bug.cgi?id=660569
                 });
             }
 
