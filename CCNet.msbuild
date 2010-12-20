@@ -4,9 +4,11 @@
     <RemoveDir Directories="bin" />
     <MakeDir Directories="bin" />
 
+	<!-- TODO: re-enable this in a windows/MSSQL specific provider
     <Message Importance="high" Text="Create temp dir for database backup" />
     <MakeDir Directories="c:\temp" />
-
+	-->
+	
     <Message Importance="high" Text="cleaning solution" />
     <MSBuild Projects="Kistl.Complete.sln" Targets="Clean" />
 
