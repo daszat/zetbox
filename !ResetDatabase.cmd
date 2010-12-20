@@ -7,7 +7,7 @@ echo ***************************************************************************
 bin\debug\bin\Server\Kistl.Server.Service.exe Kistl.Server.Service\DefaultConfig%zenv%.xml -wipe
 IF ERRORLEVEL 1 GOTO FAIL
 
-bin\debug\bin\Server\Kistl.Server.Service.exe Kistl.Server.Service\DefaultConfig%zenv%.xml -updateschema Kistl.Server\Database\KistlBase.xml KistlBase GUI
+bin\debug\bin\Server\Kistl.Server.Service.exe Kistl.Server.Service\DefaultConfig%zenv%.xml -updateschema Kistl.Server\Database\Database.xml
 IF ERRORLEVEL 1 GOTO FAIL
 
 bin\debug\bin\Server\Kistl.Server.Service.exe Kistl.Server.Service\DefaultConfig%zenv%.xml -deploy Kistl.Server\Database\Database.xml -checkdeployedschema
