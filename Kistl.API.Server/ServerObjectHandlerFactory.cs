@@ -24,8 +24,6 @@ namespace Kistl.API.Server
             Type objectHandlerType,
             InterfaceType intfType)
         {
-            if (intfType == null) { throw new ArgumentNullException("intfType"); }
-
             try
             {
                 Type result = objectHandlerType.MakeGenericType(intfType.Type);

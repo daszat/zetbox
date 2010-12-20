@@ -315,8 +315,6 @@ namespace Kistl.API.Server
         public virtual IDataObject Create(InterfaceType ifType)
         {
             CheckDisposed();
-            if (ifType == null)
-                throw new ArgumentNullException("ifType");
             if (ifType.Type == typeof(Kistl.App.Base.Blob))
                 throw new InvalidOperationException("Creating a Blob is not supported. Use CreateBlob() instead");
 
