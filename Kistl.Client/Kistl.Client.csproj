@@ -46,6 +46,7 @@
     <ErrorReport>prompt</ErrorReport>
     <DocumentationFile>..\bin\Debug\bin\Client\Kistl.Client.XML</DocumentationFile>
     <PlatformTarget>AnyCPU</PlatformTarget>
+    <NoWarn>1591,1584,1574</NoWarn>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autofac">
