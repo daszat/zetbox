@@ -13,10 +13,7 @@ IF ERRORLEVEL 1 GOTO FAIL
 bin\debug\bin\Server\Kistl.Server.Service.exe Kistl.Server.Service\DefaultConfig%zenv%.xml -deploy Kistl.Server\Database\Database.xml -checkdeployedschema
 IF ERRORLEVEL 1 GOTO FAIL
 
-bin\debug\bin\Server\Kistl.Server.Service.exe Kistl.Server.Service\DefaultConfig%zenv%.xml -repairschema
-IF ERRORLEVEL 1 GOTO FAIL
-
-bin\debug\bin\Server\Kistl.Server.Service.exe Kistl.Server.Service\DefaultConfig%zenv%.xml -syncidentities
+bin\debug\bin\Server\Kistl.Server.Service.exe Kistl.Server.Service\DefaultConfig%zenv%.xml -repairschema -syncidentities
 IF ERRORLEVEL 1 GOTO FAIL
 
 echo ********************************************************************************
