@@ -6,6 +6,7 @@ namespace Kistl.Tests.Utilities.PostgreSql
     using System.Linq;
     using System.Text;
     using Autofac;
+    using Kistl.API.Server;
 
     public sealed class UtilityModule
         : Module
