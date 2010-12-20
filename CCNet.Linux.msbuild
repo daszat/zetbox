@@ -1,9 +1,11 @@
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Target Name="Build">
+    <!--
     <Message Importance="high" Text="clean temp output" />
     <RemoveDir Directories="bin" />
     <MakeDir Directories="bin" />
-	
+    -->
+
     <!-- workaround https://bugzilla.novell.com/show_bug.cgi?id=660508
     <Message Importance="high" Text="cleaning solution" />
     <MSBuild Projects="Kistl.Complete.sln" Targets="Clean" />
