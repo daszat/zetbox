@@ -109,7 +109,12 @@ namespace Kistl.Client.Presentables.ModuleEditor
 
     public class DiagramViewModel : ViewModel
     {
+#if MONO
+        // See https://bugzilla.novell.com/show_bug.cgi?id=660553
+        public delegate DiagramViewModel Factory(IKistlContext dataCtx, Module module);
+#else
         public new delegate DiagramViewModel Factory(IKistlContext dataCtx, Module module);
+#endif
 
         public DiagramViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, Module module, Func<IKistlContext> ctxFactory)
             : base(appCtx, dataCtx)

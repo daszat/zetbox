@@ -43,7 +43,7 @@ namespace Kistl.Client.Presentables.TimeRecords
         {
 #if MONO
             // See https://bugzilla.novell.com/show_bug.cgi?id=660553
-            public new delegate StartNewWorkEffortCommand Factory(IKistlContext dataCtx, WorkEffortRecorderModel parent);
+            public delegate StartNewWorkEffortCommand Factory(IKistlContext dataCtx, WorkEffortRecorderModel parent);
 #else
             public new delegate StartNewWorkEffortCommand Factory(IKistlContext dataCtx, WorkEffortRecorderModel parent);
 #endif
