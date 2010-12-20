@@ -129,7 +129,7 @@ namespace Kistl.API
         public delegate InterfaceType Factory(Type type);
 
         /// <summary>
-        /// The wrapped <see cref="System.Type"/>. Guaranteed to be a valid InterfaceType (see <see cref="IInterfaceTypeChecker"/>).
+        /// The wrapped <see cref="Type"/>. Guaranteed to be a valid InterfaceType (see <see cref="IInterfaceTypeChecker"/>).
         /// </summary>
         public Type Type { get; private set; }
         private readonly IInterfaceTypeChecker _typeChecker;
@@ -247,7 +247,7 @@ namespace Kistl.API
         protected InterfaceType.Factory IftFactory { get { return _iftFactory; } }
 
         /// <summary>
-        /// The wrapped <see cref="System.Type"/>. Guaranteed to be a valid ImplementationType (see <see cref="IInterfaceTypeChecker"/>).
+        /// The wrapped <see cref="Type"/>. Guaranteed to be a valid ImplementationType (see <see cref="IInterfaceTypeChecker"/>).
         /// </summary>
         public Type Type { get; private set; }
 

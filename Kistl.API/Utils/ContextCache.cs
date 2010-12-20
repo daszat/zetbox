@@ -24,7 +24,8 @@ namespace Kistl.API.Utils
 
         public IPersistenceObject Lookup(InterfaceType t, int id)
         {
-            if (t == null) { throw new ArgumentNullException("t"); }
+            // Interface types are structs and can't be null
+            //if (t == null) { throw new ArgumentNullException("t"); }
             var rootT = t.GetRootType();
 
             if (!_objects.ContainsKey(rootT))
@@ -48,7 +49,8 @@ namespace Kistl.API.Utils
         {
             get
             {
-                if (t == null) { throw new ArgumentNullException("t"); }
+                // Interface types are structs and can't be null
+                //if (t == null) { throw new ArgumentNullException("t"); }
                 var rootT = t.GetRootType();
 
                 if (!_objects.ContainsKey(rootT))
