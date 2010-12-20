@@ -27,7 +27,7 @@ namespace Kistl.DalProvider.NHibernate
 
             var rel = ctx.FindPersistenceObject<Relation>(relId);
             var relEnd = rel.GetEndFromRole(endRole);
-            var relOtherEnd = rel.GetOtherEnd(relEnd);
+            //var relOtherEnd = rel.GetOtherEnd(relEnd);
             var parent = ctx.Find(ctx.GetImplementationType(typeof(TParent)).ToInterfaceType(), parentId);
             var ceType = ctx.ToImplementationType(rel.GetEntryInterfaceType()).Type;
 
