@@ -30,7 +30,6 @@ namespace Kistl.API.Server
         private readonly object _lock = new object();
 
         private readonly Func<IFrozenContext> _lazyFrozen;
-        private IReadOnlyKistlContext _ctx;
         private ILookup<string, ObjectClass> _cache;
 
         public CachingMetaDataResolver(Func<IFrozenContext> lazyFrozen)
@@ -40,12 +39,13 @@ namespace Kistl.API.Server
 
         private void Init(IFrozenContext ctx)
         {
+            if (ctx == null) { throw new ArgumentNullException("ctx"); }
+
             lock (_lock)
             {
                 if (_cache != null)
                     return;
 
-                _ctx = ctx;
                 _cache = ctx.GetQuery<ObjectClass>().ToLookup(cls => cls.Name);
                 Logging.Log.InfoFormat("Initialised CachingMetaDataResolver with {0} classes", _cache.Count);
             }

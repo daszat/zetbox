@@ -16,7 +16,7 @@ namespace Kistl.API.Migration
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.API.Migration.Translator");
 
-        private readonly SourceTable _tbl;
+        //private readonly SourceTable _tbl;
         private readonly IDataReader _source;
         private readonly SourceColumn[] _srcColumns;
         private readonly Converter[] _converter;
@@ -37,7 +37,7 @@ namespace Kistl.API.Migration
             if (source == null) throw new ArgumentNullException("source");
             if (srcColumns == null) throw new ArgumentNullException("srcColumns");
 
-            _tbl = tbl;
+            //_tbl = tbl;
             _source = source;
             _srcColumns = srcColumns.ToArray();
             _converter = converter ?? new Converter[] { };

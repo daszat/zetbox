@@ -18,6 +18,7 @@ namespace Kistl.API.Server
             : base(lazyCtx)
         {
             ClientObjectState = DataObjectState.NotDeserialized;
+#if DEBUG
             var trace = new System.Diagnostics.StackTrace(true);
             _constructTrace = String.Join("\n",
                 trace
@@ -29,13 +30,23 @@ namespace Kistl.API.Server
                     frm.GetFileName(),
                     frm.GetFileLineNumber()))
                 .ToArray());
+#endif
         }
 
+#if DEBUG
         /// <summary>
         /// A private field storing the stracktrace where the object was constructed.
         /// </summary>
         private string _constructTrace;
 
+        /// <summary>
+        /// The stack trace where this object was created
+        /// </summary>
+        public string ConstructionTrace
+        {
+            get { return _constructTrace; }
+        }
+#endif
 
         public DataObjectState ClientObjectState { get; set; }
 
