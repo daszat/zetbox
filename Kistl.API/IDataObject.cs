@@ -66,14 +66,14 @@ namespace Kistl.API
     [System.Flags]
     public enum AccessRights
     {
-        None    = 0x00,
-        Read    = 0x01,
-        Write   = 0x02,
-        Delete  = 0x04,
-        Create  = 0x08,
+        None = 0x00,
+        Read = 0x01,
+        Write = 0x02,
+        Delete = 0x04,
+        Create = 0x08,
 
-        Full    = Read | Write | Delete | Create,
-        Change  = Read | Write,
+        Full = Read | Write | Delete | Create,
+        Change = Read | Write,
     }
 
     /// <summary>
@@ -295,19 +295,21 @@ namespace Kistl.API
         public T Result { get; set; }
     }
 
-    /// <summary>
-    /// ToString delegate. Is triggered by IDataObject implementors.
-    /// </summary>
-    /// <typeparam name="T">Type of the implementing Object.</typeparam>
-    /// <param name="obj">Object that has fired this Event.</param>
-    /// <param name="e">Method return Arguments.</param>
+    // TODO: re-enable disabled doc comment after fix for https://bugzilla.novell.com/show_bug.cgi?id=643460
+    //<summary>
+    //ToString delegate. Is triggered by IDataObject implementors.
+    //</summary>
+    //<typeparam name="T">Type of the implementing Object.</typeparam>
+    //<param name="obj">Object that has fired this Event.</param>
+    //<param name="e">Method return Arguments.</param>
     public delegate void ToStringHandler<T>(T obj, MethodReturnEventArgs<string> e) where T : IDataObject;
 
-    /// <summary>
-    /// Handler for custom save events. TODO: Außer SetObject hat's noch niemand implementiert.
-    /// </summary>
-    /// <typeparam name="T">Type of the implementing Object.</typeparam>
-    /// <param name="obj">Object that has fired this Event.</param>
+    // TODO: re-enable disabled doc comment after fix for https://bugzilla.novell.com/show_bug.cgi?id=643460
+    //<summary>
+    //Handler for custom save events. TODO: Außer SetObject hat's noch niemand implementiert.
+    //</summary>
+    //<typeparam name="T">Type of the implementing Object.</typeparam>
+    //<param name="obj">Object that has fired this Event.</param>
     public delegate void ObjectEventHandler<T>(T obj) where T : IDataObject;
 
     public class PropertyGetterEventArgs<V>
@@ -375,31 +377,7 @@ namespace Kistl.API
         public V NewValue { get; private set; }
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <remarks>No Template restictions. Can be called on a Class or CompoundObject</remarks>
-    /// <typeparam name="T"></typeparam>
-    /// <typeparam name="V"></typeparam>
-    /// <param name="obj"></param>
-    /// <param name="e"></param>
     public delegate void PropertyGetterHandler<T, V>(T obj, PropertyGetterEventArgs<V> e);
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <remarks>No Template restictions. Can be called on a Class or CompoundObject</remarks>
-    /// <typeparam name="T"></typeparam>
-    /// <typeparam name="V"></typeparam>
-    /// <param name="obj"></param>
-    /// <param name="e"></param>
     public delegate void PropertyPreSetterHandler<T, V>(T obj, PropertyPreSetterEventArgs<V> e);
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <remarks>No Template restictions. Can be called on a Class or CompoundObject</remarks>
-    /// <typeparam name="T"></typeparam>
-    /// <typeparam name="V"></typeparam>
-    /// <param name="obj"></param>
-    /// <param name="e"></param>
     public delegate void PropertyPostSetterHandler<T, V>(T obj, PropertyPostSetterEventArgs<V> e);
 }

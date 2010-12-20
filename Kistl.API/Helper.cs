@@ -1068,12 +1068,6 @@ namespace Kistl.API
         public T Data { get; set; }
     }
 
-    /// <summary>
-    /// GenericEventHandler
-    /// </summary>
-    /// <typeparam name="TEventArgs"></typeparam>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
     public delegate void GenericEventHandler<TEventArgs>(object sender, GenericEventArgs<TEventArgs> e);
 
     public static class DateTimeExtensions
