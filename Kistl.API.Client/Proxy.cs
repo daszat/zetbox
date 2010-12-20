@@ -81,25 +81,33 @@ namespace Kistl.API.Client
         {
             using (Logging.Facade.InfoTraceMethodCallFormat("GetList[{0}]", ifType.ToString()))
             {
-                List<IStreamable> tmpAuxObjects = null;
-                IEnumerable<IDataObject> result = null;
-                _toolkit.WithWaitDialog(() =>
+                try
                 {
-                    using (MemoryStream s = Service.GetList(
-                        ifType.ToSerializableType(),
-                        maxListCount,
-                        eagerLoadLists,
-                        filter != null ? filter.Select(f => SerializableExpression.FromExpression(f, _iftFactory)).ToArray() : null,
-                        orderBy != null ? orderBy.Select(o => SerializableExpression.FromExpression(o, _iftFactory)).ToArray() : null))
+                    List<IStreamable> tmpAuxObjects = null;
+                    IEnumerable<IDataObject> result = null;
+                    _toolkit.WithWaitDialog(() =>
                     {
-                        using (var sr = new BinaryReader(s))
+                        using (MemoryStream s = Service.GetList(
+                            ifType.ToSerializableType(),
+                            maxListCount,
+                            eagerLoadLists,
+                            filter != null ? filter.Select(f => SerializableExpression.FromExpression(f, _iftFactory)).ToArray() : null,
+                            orderBy != null ? orderBy.Select(o => SerializableExpression.FromExpression(o, _iftFactory)).ToArray() : null))
                         {
-                            result = ReceiveObjects(ctx, sr, out tmpAuxObjects).Cast<IDataObject>();
+                            using (var sr = new BinaryReader(s))
+                            {
+                                result = ReceiveObjects(ctx, sr, out tmpAuxObjects).Cast<IDataObject>();
+                            }
                         }
-                    }
-                });
-                auxObjects = tmpAuxObjects;
-                return result;
+                    });
+                    auxObjects = tmpAuxObjects;
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    Logging.Facade.Error("GetList", ex);
+                    throw;
+                }
             }
         }
 
@@ -107,22 +115,30 @@ namespace Kistl.API.Client
         {
             using (Logging.Facade.InfoTraceMethodCallFormat("{0} [{1}].{2}", ifType, ID, property))
             {
-                List<IStreamable> tmpAuxObjects = null;
-                IEnumerable<IDataObject> result = null;
-
-                _toolkit.WithWaitDialog(() =>
+                try
                 {
-                    using (MemoryStream s = Service.GetListOf(ifType.ToSerializableType(), ID, property))
-                    {
-                        using (var sr = new BinaryReader(s))
-                        {
-                            result = ReceiveObjects(ctx, sr, out tmpAuxObjects).Cast<IDataObject>();
-                        }
-                    }
-                });
+                    List<IStreamable> tmpAuxObjects = null;
+                    IEnumerable<IDataObject> result = null;
 
-                auxObjects = tmpAuxObjects;
-                return result;
+                    _toolkit.WithWaitDialog(() =>
+                    {
+                        using (MemoryStream s = Service.GetListOf(ifType.ToSerializableType(), ID, property))
+                        {
+                            using (var sr = new BinaryReader(s))
+                            {
+                                result = ReceiveObjects(ctx, sr, out tmpAuxObjects).Cast<IDataObject>();
+                            }
+                        }
+                    });
+
+                    auxObjects = tmpAuxObjects;
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    Logging.Facade.Error("GetListOf", ex);
+                    throw;
+                }
             }
         }
 
@@ -130,32 +146,40 @@ namespace Kistl.API.Client
         {
             using (Logging.Facade.InfoTraceMethodCall("SetObjects"))
             {
-                IEnumerable<IPersistenceObject> result = null;
-
-                _toolkit.WithWaitDialog(() =>
+                try
                 {
-                    // Serialize
-                    using (var ms = new MemoryStream())
-                    {
-                        using (var sw = new BinaryWriter(ms))
-                        {
-                            SendObjects(objects, sw);
+                    IEnumerable<IPersistenceObject> result = null;
 
-                            using (MemoryStream s = Service.SetObjects(ms, notficationRequests.ToArray()))
+                    _toolkit.WithWaitDialog(() =>
+                    {
+                        // Serialize
+                        using (var ms = new MemoryStream())
+                        {
+                            using (var sw = new BinaryWriter(ms))
                             {
-                                using (var sr = new BinaryReader(s))
+                                SendObjects(objects, sw);
+
+                                using (MemoryStream s = Service.SetObjects(ms, notficationRequests.ToArray()))
                                 {
-                                    // merge auxiliary objects into primary set objects result
-                                    List<IStreamable> auxObjects;
-                                    var receivedObjects = ReceiveObjects(ctx, sr, out auxObjects);
-                                    result = receivedObjects.Concat(auxObjects).Cast<IPersistenceObject>();
+                                    using (var sr = new BinaryReader(s))
+                                    {
+                                        // merge auxiliary objects into primary set objects result
+                                        List<IStreamable> auxObjects;
+                                        var receivedObjects = ReceiveObjects(ctx, sr, out auxObjects);
+                                        result = receivedObjects.Concat(auxObjects).Cast<IPersistenceObject>();
+                                    }
                                 }
                             }
                         }
-                    }
-                });
+                    });
 
-                return result;
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    Logging.Facade.Error("SetObjects", ex);
+                    throw;
+                }
             }
         }
 
@@ -201,28 +225,36 @@ namespace Kistl.API.Client
         {
             using (Logging.Facade.InfoTraceMethodCallFormat("Fetching relation: ID=[{0}],role=[{1}],parentId=[{2}]", relationId, role, parent.ID))
             {
-                // TODO: could be implemented in generated properties
-                if (parent.ObjectState == DataObjectState.New)
+                try
                 {
-                    auxObjects = new List<IStreamable>();
-                    return new List<T>();
-                }
-
-                IEnumerable<T> result = null;
-                List<IStreamable> tmpAuxObjects = null;
-                _toolkit.WithWaitDialog(() =>
-                {
-                    using (MemoryStream s = Service.FetchRelation(relationId, (int)role, parent.ID))
+                    // TODO: could be implemented in generated properties
+                    if (parent.ObjectState == DataObjectState.New)
                     {
-                        using (var sr = new BinaryReader(s))
-                        {
-                            result = ReceiveObjects(ctx, sr, out tmpAuxObjects).Cast<T>();
-                        }
+                        auxObjects = new List<IStreamable>();
+                        return new List<T>();
                     }
-                });
 
-                auxObjects = tmpAuxObjects;
-                return result;
+                    IEnumerable<T> result = null;
+                    List<IStreamable> tmpAuxObjects = null;
+                    _toolkit.WithWaitDialog(() =>
+                    {
+                        using (MemoryStream s = Service.FetchRelation(relationId, (int)role, parent.ID))
+                        {
+                            using (var sr = new BinaryReader(s))
+                            {
+                                result = ReceiveObjects(ctx, sr, out tmpAuxObjects).Cast<T>();
+                            }
+                        }
+                    });
+
+                    auxObjects = tmpAuxObjects;
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    Logging.Facade.Error("FetchRelation", ex);
+                    throw;
+                }
             }
         }
 
@@ -256,12 +288,20 @@ namespace Kistl.API.Client
         {
             using (Logging.Facade.InfoTraceMethodCallFormat("GetBlobStream: ID=[{0}]", ID))
             {
-                Stream result = null;
-                _toolkit.WithWaitDialog(() =>
+                try
                 {
-                    result = Service.GetBlobStream(ID);
-                });
-                return result;
+                    Stream result = null;
+                    _toolkit.WithWaitDialog(() =>
+                    {
+                        result = Service.GetBlobStream(ID);
+                    });
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    Logging.Facade.Error("GetBlobStream", ex);
+                    throw;
+                }
             }
         }
 
@@ -269,24 +309,32 @@ namespace Kistl.API.Client
         {
             using (Logging.Facade.InfoTraceMethodCallFormat("SetBlobStream: filename=[{0}]", filename))
             {
-                Kistl.App.Base.Blob result = null;
-                Stream s;
-                _toolkit.WithWaitDialog(() =>
+                try
                 {
-                    int id = Service.SetBlobStream(filename, mimetype, stream, out s);
-                    try
+                    Kistl.App.Base.Blob result = null;
+                    Stream s;
+                    _toolkit.WithWaitDialog(() =>
                     {
-                        using (var sr = new BinaryReader(s))
+                        int id = Service.SetBlobStream(filename, mimetype, stream, out s);
+                        try
                         {
-                            result = ReceiveObjectList(ctx, sr).Cast<Kistl.App.Base.Blob>().Single();
+                            using (var sr = new BinaryReader(s))
+                            {
+                                result = ReceiveObjectList(ctx, sr).Cast<Kistl.App.Base.Blob>().Single();
+                            }
                         }
-                    }
-                    finally
-                    {
-                        s.Dispose();
-                    }
-                });
-                return result;
+                        finally
+                        {
+                            s.Dispose();
+                        }
+                    });
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    Logging.Facade.Error("SetBlobStream", ex);
+                    throw;
+                }
             }
         }
 
@@ -294,39 +342,47 @@ namespace Kistl.API.Client
         {
             using (Logging.Facade.InfoTraceMethodCallFormat("InvokeServerMethod: ID=[{0}]", ID))
             {
-                object result = null;
-                IEnumerable<IPersistenceObject> tmpChangedObjects = null;
-
-                _toolkit.WithWaitDialog(() =>
+                try
                 {
-                    BinaryFormatter bf = new BinaryFormatter();
-                    MemoryStream parameterStream = new MemoryStream();
-                    bf.Serialize(parameterStream, parameter);
+                    object result = null;
+                    IEnumerable<IPersistenceObject> tmpChangedObjects = null;
 
-                    MemoryStream changedObjectsStream = new MemoryStream();
-                    BinaryWriter sw = new BinaryWriter(changedObjectsStream);
-                    SendObjects(objects, sw);
+                    _toolkit.WithWaitDialog(() =>
+                    {
+                        BinaryFormatter bf = new BinaryFormatter();
+                        MemoryStream parameterStream = new MemoryStream();
+                        bf.Serialize(parameterStream, parameter);
 
-                    MemoryStream retChangedObjects;
-                    var resultStream = Service.InvokeServerMethod(
-                        out retChangedObjects,
-                        ifType.ToSerializableType(),
-                        ID,
-                        method,
-                        parameterTypes.Select(t => ifType.ToSerializableType()).ToArray(),
-                        parameterStream,
-                        changedObjectsStream,
-                        notificationRequests.ToArray());
+                        MemoryStream changedObjectsStream = new MemoryStream();
+                        BinaryWriter sw = new BinaryWriter(changedObjectsStream);
+                        SendObjects(objects, sw);
 
-                    BinaryReader br = new BinaryReader(retChangedObjects);
-                    tmpChangedObjects = ReceiveObjectList(ctx, br).Cast<IPersistenceObject>();
+                        MemoryStream retChangedObjects;
+                        var resultStream = Service.InvokeServerMethod(
+                            out retChangedObjects,
+                            ifType.ToSerializableType(),
+                            ID,
+                            method,
+                            parameterTypes.Select(t => ifType.ToSerializableType()).ToArray(),
+                            parameterStream,
+                            changedObjectsStream,
+                            notificationRequests.ToArray());
 
-                    resultStream.Seek(0, SeekOrigin.Begin);
-                    result = bf.Deserialize(resultStream);
-                });
+                        BinaryReader br = new BinaryReader(retChangedObjects);
+                        tmpChangedObjects = ReceiveObjectList(ctx, br).Cast<IPersistenceObject>();
 
-                changedObjects = tmpChangedObjects;
-                return result;
+                        resultStream.Seek(0, SeekOrigin.Begin);
+                        result = bf.Deserialize(resultStream);
+                    });
+
+                    changedObjects = tmpChangedObjects;
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    Logging.Facade.Error("InvokeServerMethod", ex);
+                    throw;
+                }
             }
         }
     }
