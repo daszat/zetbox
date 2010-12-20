@@ -29,7 +29,7 @@ namespace Kistl
 
         protected override string GetConfigFile()
         {
-            return "Kistl.Client.Tests.Config.xml";
+            return "Kistl.Client.Tests.Config{0}.xml";
         }
 
         protected override Kistl.API.HostType GetHostType()

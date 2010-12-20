@@ -10,6 +10,7 @@ namespace Kistl.Client
     using Kistl.API;
     using Kistl.Client.Presentables.ValueViewModels;
     using Kistl.Client.Models;
+    using Kistl.App.GUI;
 
     public class DefaultCredentialsResolver : ICredentialsResolver
     {
@@ -51,13 +52,15 @@ namespace Kistl.Client
 
         private IViewModelFactory _vmf;
         private Func<IKistlContext> _ctxFactory;
+        private IFrozenContext _frozenCtx;
         private string UserName = null;
         private string Password = null;
 
-        public BasicAuthCredentialsResolver(IViewModelFactory vmf, Func<IKistlContext> ctxFactory)
+        public BasicAuthCredentialsResolver(IViewModelFactory vmf, Func<IKistlContext> ctxFactory, IFrozenContext frozenCtx)
         {
             _vmf = vmf;
             _ctxFactory = ctxFactory;
+            _frozenCtx = frozenCtx;
         }
 
         public void InitCredentials(System.ServiceModel.Description.ClientCredentials c)
@@ -83,7 +86,9 @@ namespace Kistl.Client
                         valueModels.Add(_vmf.CreateViewModel<ClassValueViewModel<string>.Factory>().Invoke(ctx, userName));
 
                         var pwd = new ClassValueModel<string>("Password", "", false, false);
-                        valueModels.Add(_vmf.CreateViewModel<ClassValueViewModel<string>.Factory>().Invoke(ctx, pwd));
+                        var pwdvm = _vmf.CreateViewModel<ClassValueViewModel<string>.Factory>().Invoke(ctx, pwd);
+                        pwdvm.RequestedKind = _frozenCtx.FindPersistenceObject<ControlKind>(NamedObjects.ControlKind_Kistl_App_GUI_PasswordKind);
+                        valueModels.Add(pwdvm);
 
                         var dlg = _vmf.CreateViewModel<ValueInputTaskViewModel.Factory>().Invoke(ctx, "Enter Credentials", valueModels, (p) =>
                         {

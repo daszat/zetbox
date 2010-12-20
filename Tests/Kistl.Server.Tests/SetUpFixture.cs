@@ -79,7 +79,7 @@ namespace Kistl.Server.Tests
 
         protected override string GetConfigFile()
         {
-            return "Kistl.Server.Tests.Config.xml";
+            return "Kistl.Server.Tests.Config{0}.xml";
         }
 
         protected override HostType GetHostType()

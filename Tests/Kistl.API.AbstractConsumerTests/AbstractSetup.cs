@@ -35,7 +35,9 @@ namespace Kistl.API.AbstractConsumerTests
         {
             using (Log.InfoTraceMethodCall("Starting up"))
             {
-                var config = KistlConfig.FromFile(GetConfigFile());
+                var cfgFile = string.Format(GetConfigFile(), Environment.GetEnvironmentVariable("zenv"));
+
+                var config = KistlConfig.FromFile(cfgFile);
                 if (config.Server != null)
                 {
                     config.Server.DocumentStore = Path.Combine(Path.GetTempPath(), GetHostType().ToString());

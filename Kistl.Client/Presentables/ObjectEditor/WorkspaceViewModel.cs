@@ -196,10 +196,22 @@ namespace Kistl.Client.Presentables.ObjectEditor
 
         public void Save()
         {
+            OnUpdateFromUI();
+
             var errors = GetErrors().ToArray();
             if (errors.Length == 0)
             {
                 DataContext.SubmitChanges();
+            }
+        }
+
+        public event EventHandler UpdateFromUI;
+        public void OnUpdateFromUI()
+        {
+            EventHandler temp = UpdateFromUI;
+            if (temp != null)
+            {
+                temp(this, EventArgs.Empty);
             }
         }
         #endregion

@@ -16,6 +16,7 @@ using Kistl.Client.GUI;
 using Kistl.Client.Presentables;
 using Kistl.Client.Presentables.ObjectEditor;
 using Kistl.Client.WPF.CustomControls;
+using Kistl.Client.WPF.Toolkit;
 
 namespace Kistl.Client.WPF.View.ObjectEditor
 {
@@ -27,6 +28,20 @@ namespace Kistl.Client.WPF.View.ObjectEditor
         public WorkspaceDisplay()
         {
             InitializeComponent();
+        }
+
+        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
+        {
+            base.OnPropertyChanged(e);
+            if (ViewModel != null && e.Property == FrameworkElement.DataContextProperty)
+            {
+                ViewModel.UpdateFromUI += new EventHandler(ViewModel_UpdateFromUI);
+            }
+        }
+
+        void ViewModel_UpdateFromUI(object sender, EventArgs e)
+        {
+            WPFHelper.MoveFocus();
         }
 
         public WorkspaceViewModel ViewModel

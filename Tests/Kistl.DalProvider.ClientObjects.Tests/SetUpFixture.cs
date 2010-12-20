@@ -43,7 +43,7 @@ namespace Kistl.DalProvider.Client.Tests
 
         protected override string GetConfigFile()
         {
-            return "Kistl.DalProvider.ClientObjects.Tests.Config.xml";
+            return "Kistl.DalProvider.ClientObjects.Tests.Config{0}.xml";
         }
 
         protected override Kistl.API.HostType GetHostType()
