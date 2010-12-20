@@ -18,7 +18,7 @@ namespace Kistl.DalProvider.Memory
     public sealed class MemoryDatabaseProvider
         : Autofac.Module
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.DalProvider.Memory");
+        // private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.DalProvider.Memory");
         private readonly static object _lock = new object();
 
         protected override void Load(ContainerBuilder moduleBuilder)

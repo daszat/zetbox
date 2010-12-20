@@ -25,7 +25,7 @@ namespace Kistl.DalProvider.Client
         public KistlContextQuery(KistlContextImpl ctx, InterfaceType type, IProxy proxy)
         {
             if (ctx == null) throw new ArgumentNullException("ctx");
-            if (type == null) throw new ArgumentNullException("type");
+            // if (type == null) throw new ArgumentNullException("type");
 
             _type = type;
             _context = ctx;
@@ -36,7 +36,7 @@ namespace Kistl.DalProvider.Client
         public KistlContextQuery(KistlContextImpl ctx, InterfaceType type, KistlContextProvider provider, Expression expression)
         {
             if (ctx == null) throw new ArgumentNullException("ctx");
-            if (type == null) throw new ArgumentNullException("type");
+            // if (type == null) throw new ArgumentNullException("type");
             if (provider == null) throw new ArgumentNullException("provider");
             if (expression == null) throw new ArgumentNullException("expression");
 

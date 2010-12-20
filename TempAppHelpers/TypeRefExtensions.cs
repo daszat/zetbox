@@ -10,7 +10,7 @@ namespace Kistl.App.Extensions
 {
     public static class TypeRefExtensions
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.TypeRef");
+        // private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.TypeRef");
         private const string transientCacheKey = "__TypeRefExtensionsCache__";
 
         public static object Create(this TypeRef t, params object[] parameter)

@@ -15,9 +15,9 @@ namespace Kistl.DalProvider.Memory
     public class MemoryContext
         : BaseMemoryContext, IReadOnlyKistlContext
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.DalProvider.Memory");
+        // private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.DalProvider.Memory");
 
-        private static readonly List<IPersistenceObject> emptylist = new List<IPersistenceObject>(0);
+        // private static readonly List<IPersistenceObject> emptylist = new List<IPersistenceObject>(0);
         private readonly Func<IFrozenContext> _lazyCtx;
         private readonly MemoryImplementationType.MemoryFactory _implTypeFactory;
 

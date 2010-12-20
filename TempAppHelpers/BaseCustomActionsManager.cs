@@ -204,10 +204,8 @@ namespace Kistl.App.Extensions
 
                 if (!t.IsStatic())
                 {
-                    // Changed -> init singleton
-                    // Log.ErrorFormat("Type {0}, {1} is not static", invoke.Implementor.FullName, invoke.Implementor.Assembly.Name);
-                    // return;
-                    var tmp = _container.Resolve(t);
+                    // initialize t's handler
+                    _container.Resolve(t);
                 }
 
                 MethodInfo clrMethod = t.GetMethod(invoke.MemberName);

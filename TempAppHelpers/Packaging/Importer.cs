@@ -259,11 +259,11 @@ namespace Kistl.App.Packaging
             {
                 string ifTypeName = string.Format("{0}.{1}", xml.NamespaceURI, xml.LocalName);
                 InterfaceType ifType = ctx.GetInterfaceType(ifTypeName);
-                if (ifType == null)
-                {
-                    Log.WarnFormat("Type {0} not found", ifTypeName);
-                    return null;
-                }
+                // if (ifType == null)
+                // {
+                //     Log.WarnFormat("Type {0} not found", ifTypeName);
+                //     return null;
+                // }
 
                 IPersistenceObject obj = FindObject(ctx, objects, exportGuid, ifType);
 

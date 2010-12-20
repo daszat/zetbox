@@ -315,7 +315,7 @@ namespace Kistl.API.Client
                     Stream s;
                     _toolkit.WithWaitDialog(() =>
                     {
-                        int id = Service.SetBlobStream(filename, mimetype, stream, out s);
+                        Service.SetBlobStream(filename, mimetype, stream, out s);
                         try
                         {
                             using (var sr = new BinaryReader(s))

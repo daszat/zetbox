@@ -12,8 +12,6 @@ namespace Kistl.App.Extensions
     /// </summary>
     public static partial class CompoundObjectExtensions
     {
-        private readonly static object _lock = new object();
-
         public static CompoundObject GetCompoundObjectDefinition(this ICompoundObject obj, IReadOnlyKistlContext ctx)
         {
             if (obj == null) { throw new ArgumentNullException("obj"); }
@@ -24,7 +22,7 @@ namespace Kistl.App.Extensions
 
         public static CompoundObject GetCompoundObjectDefinition(this InterfaceType ifType, IReadOnlyKistlContext ctx)
         {
-            if (ifType == null) { throw new ArgumentNullException("ifType"); }
+            // if (ifType == null) { throw new ArgumentNullException("ifType"); }
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
 
             Type type = ifType.Type;
