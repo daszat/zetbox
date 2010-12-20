@@ -13,29 +13,7 @@
     <Message Importance="high" Text="rebuild entire solution" />
     <MSBuild Projects="Kistl.Complete.sln" Targets="Rebuild" />
 
-    <!-- MSSQL-->
-    <Message Importance="high" Text="drop database contents" />
-    <Exec Command="bin\debug\bin\Server\Kistl.Server.Service.exe Kistl.Server.Service\DefaultConfigMSSQL.xml -wipe" />
-    <Message Importance="high" Text="update schema from xml" />
-    <Exec Command="bin\debug\bin\Server\Kistl.Server.Service.exe Kistl.Server.Service\DefaultConfigMSSQL.xml -updateschema Kistl.Server\Database\Database.xml" />
-    <Message Importance="high" Text="deploy and check schema" />
-    <Exec Command="bin\debug\bin\Server\Kistl.Server.Service.exe Kistl.Server.Service\DefaultConfigMSSQL.xml -deploy Kistl.Server\Database\Database.xml -checkdeployedschema" />
-    <Message Importance="high" Text="apply potential fixes to database" />
-    <Exec Command="bin\debug\bin\Server\Kistl.Server.Service.exe Kistl.Server.Service\DefaultConfigMSSQL.xml -repairschema" />
-    <Message Importance="high" Text="sync identities" />
-    <Exec Command="bin\debug\bin\Server\Kistl.Server.Service.exe Kistl.Server.Service\DefaultConfigMSSQL.xml -syncidentities" />
-
-    <!-- PostgreSQL-->
-    <Message Importance="high" Text="drop database contents" />
-    <Exec Command="bin\debug\bin\Server\Kistl.Server.Service.exe Kistl.Server.Service\DefaultConfigPostgreSQL.xml -wipe" />
-    <Message Importance="high" Text="update schema from xml" />
-    <Exec Command="bin\debug\bin\Server\Kistl.Server.Service.exe Kistl.Server.Service\DefaultConfigPostgreSQL.xml -updateschema Kistl.Server\Database\Database.xml" />
-    <Message Importance="high" Text="deploy and check schema" />
-    <Exec Command="bin\debug\bin\Server\Kistl.Server.Service.exe Kistl.Server.Service\DefaultConfigPostgreSQL.xml -deploy Kistl.Server\Database\Database.xml -checkdeployedschema" />
-    <Message Importance="high" Text="apply potential fixes to database" />
-    <Exec Command="bin\debug\bin\Server\Kistl.Server.Service.exe Kistl.Server.Service\DefaultConfigPostgreSQL.xml -repairschema" />
-    <Message Importance="high" Text="sync identities" />
-    <Exec Command="bin\debug\bin\Server\Kistl.Server.Service.exe Kistl.Server.Service\DefaultConfigPostgreSQL.xml -syncidentities" />
+    <Exec Command="!ResetDatabase" />
 
     <!-- Generate -->
     <Message Importance="high" Text="generate new objects" />
