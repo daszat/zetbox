@@ -119,11 +119,6 @@ namespace Kistl.API
         public static IList<string> SearchPath { get; private set; }
 
         /// <summary>
-        /// Assembly Cache
-        /// </summary>
-        private static Dictionary<string, Assembly> _Assemblies = new Dictionary<string, Assembly>();
-
-        /// <summary>
         /// Called by the Framework to resolve an Assembly.
         /// </summary>
         /// <param name="sender">See MSDN</param>
