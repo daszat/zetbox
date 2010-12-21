@@ -23,6 +23,8 @@ namespace Kistl.Tests.Utilities.PostgresSql
         private readonly KistlConfig config;
         private readonly ISchemaProvider schemaProvider;
 
+        private const int RESET_TIMEOUT = 2 * 60;
+
         public PostgreSqlResetter(KistlConfig config, Autofac.ILifetimeScope scope)
         {
             this.config = config;
@@ -45,16 +47,10 @@ namespace Kistl.Tests.Utilities.PostgresSql
                     pi.UseShellExecute = false;
                     pi.WorkingDirectory = Environment.GetEnvironmentVariable("PGSQLBinPath").Trim('\"');
                     var p = System.Diagnostics.Process.Start(pi);
-                    if (!p.WaitForExit(2 * 60 * 1000)) // wait two minutes
+                    if (!p.WaitForExit(RESET_TIMEOUT * 1000)) 
                     {
-                        throw new InvalidOperationException("pg_dump did not completed within 30 seconds");
+                        throw new InvalidOperationException(string.Format("pg_dump did not completed within {0} seconds", RESET_TIMEOUT);
                     }
-
-                    //var cb = new NpgsqlConnectionStringBuilder(config.Server.ConnectionString);
-                    //Log.Error("Not resetting postgresql database");
-                    //Log.InfoFormat("executing on database [{0}]", cb.ToString());
-                    //ExecuteScript(cb.ToString(), "Kistl.Tests.Utilities.PostgresSql.RestoreDatabase.sql");
-                    //Log.Info("Done restoring Database");
 
                     // After recreating the database, all connection pools should be cleard
                     NpgsqlConnection.ClearAllPools();
