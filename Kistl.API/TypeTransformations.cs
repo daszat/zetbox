@@ -164,6 +164,7 @@ namespace Kistl.API
 
             this._type = type;
             this._typeChecker = typeChecker;
+            this._rootType = null;
         }
 
         private static readonly Type[] BaseInterfaces = new[] { 
@@ -178,6 +179,8 @@ namespace Kistl.API
             typeof(IPersistenceObject) 
         };
 
+        private object _rootType;
+
         /// <summary>
         /// Returns the root of the specified InterfaceType's data model. The
         /// root is the top-most interface in this interface's parentage that 
@@ -188,16 +191,22 @@ namespace Kistl.API
         /// <returns>the root InterfaceType of this InterfaceType's data model</returns>
         public InterfaceType GetRootType()
         {
-            var self = this.Type.IsGenericType ? this.Type.GetGenericTypeDefinition() : this.Type;
-            // the base of the interface we're looking for
-            var baseInterface = BaseInterfaces.Where(t => t.IsAssignableFrom(self)).First();
-            var allInherited = GetInterestingInterfaces(baseInterface, this.Type);
-            var candidates = allInherited
-                .Select(intf => new { Interface = intf, Inherited = GetInterestingInterfaces(baseInterface, intf) })
-                .ToList();
-            candidates.Add(new { Interface = this.Type, Inherited = allInherited });
+            lock (_lock)
+            {
+                if (_rootType != null) return (InterfaceType)_rootType;
 
-            return Create(candidates.OrderBy(i => i.Inherited.Length).First().Interface, _typeChecker);
+                var self = this.Type.IsGenericType ? this.Type.GetGenericTypeDefinition() : this.Type;
+                // the base of the interface we're looking for
+                var baseInterface = BaseInterfaces.Where(t => t.IsAssignableFrom(self)).First();
+                var allInherited = GetInterestingInterfaces(baseInterface, this.Type);
+                var candidates = allInherited
+                    .Select(intf => new { Interface = intf, Inherited = GetInterestingInterfaces(baseInterface, intf) })
+                    .ToList();
+                candidates.Add(new { Interface = this.Type, Inherited = allInherited });
+
+                _rootType = Create(candidates.OrderBy(i => i.Inherited.Length).First().Interface, _typeChecker);
+                return (InterfaceType)_rootType;
+            }
         }
 
         /// <summary>
