@@ -32,6 +32,31 @@ namespace Kistl.Client.Presentables
         protected readonly Autofac.ILifetimeScope Container;
         protected readonly IFrozenContext FrozenContext;
 
+        private struct VMCacheKey
+        {
+            public VMCacheKey(Type requestedType, Type factoryType)
+            {
+                this.requestedType = requestedType;
+                this.factoryType = factoryType;
+            }
+
+            public Type requestedType;
+            public Type factoryType;
+
+            public override bool Equals(object obj)
+            {
+                var b = (VMCacheKey)obj;
+                return this.requestedType == b.requestedType && this.factoryType == b.factoryType;
+            }
+
+            public override int GetHashCode()
+            {
+                return requestedType.GetHashCode() + factoryType.GetHashCode();
+            }
+        }
+
+        private readonly Dictionary<VMCacheKey, object> _viewModelFactoryCache;
+
         protected ViewModelFactory(Autofac.ILifetimeScope container, IFrozenContext frozenCtx)
         {
             if (container == null) throw new ArgumentNullException("container");
@@ -40,6 +65,7 @@ namespace Kistl.Client.Presentables
             this.Container = container;
             this.FrozenContext = frozenCtx;
             this.Managers = new Dictionary<IKistlContext, IMultipleInstancesManager>();
+            this._viewModelFactoryCache = new Dictionary<VMCacheKey, object>();
         }
 
         #region Model Management
@@ -151,9 +177,11 @@ namespace Kistl.Client.Presentables
         private static int _resolveCounter = 0;
         private static int _resolveCompileCounter = 0;
 
-        // TODO: memoize this function
         public TModelFactory CreateViewModel<TModelFactory>(Type t) where TModelFactory : class
         {
+            var cacheKey = new VMCacheKey(t, typeof(TModelFactory));
+            if (_viewModelFactoryCache.ContainsKey(cacheKey)) return (TModelFactory)_viewModelFactoryCache[cacheKey];
+
             if (t == null) throw new ArgumentNullException("t");
             // try to resolve factory if t is not such a factory
             if (!typeof(Delegate).IsAssignableFrom(t))
@@ -170,34 +198,39 @@ namespace Kistl.Client.Presentables
                 }
 
                 var factory = Container.Resolve(t);
-                if (t == typeof(TModelFactory)) return (TModelFactory)factory;
-
-                if ((++_resolveCompileCounter % 100) == 0)
+                if (t != typeof(TModelFactory))
                 {
-                    Logging.Log.WarnFormat("CreateViewModel with compiling a lambda was called {0} times", _resolveCompileCounter);
+
+                    if ((++_resolveCompileCounter % 100) == 0)
+                    {
+                        Logging.Log.WarnFormat("CreateViewModel with compiling a lambda was called {0} times", _resolveCompileCounter);
+                    }
+
+
+                    // Wrap delegate. This will implement inheritance
+                    Delegate factoryDelegate = (Delegate)factory;
+                    // Get Parameter of both, src and dest delegate
+                    var parameter_factory = factoryDelegate.Method.GetParameters().Skip(1).ToArray();
+                    var parameter = typeof(TModelFactory).GetMethod("Invoke").GetParameters()
+                        .Select(p => Expression.Parameter(p.ParameterType, p.Name)).ToArray();
+
+                    // create cast expressions. Sometimes a UpCast is needed. 
+                    // TModelFactory == DataTypeViewModel
+                    // typeof(factory) == ObjectClassViewModel
+                    // TODO: check that the parameter types can match at all
+                    //       this is necessary to create proper errors when Factory delegates
+                    //       are out of sync
+                    var invoke = Expression.Invoke(Expression.Constant(factoryDelegate),
+                        parameter.Select(
+                            (p, idx) => Expression.Convert(p, parameter_factory[idx].ParameterType)
+                            ).ToArray()
+                        );
+                    var l = Expression.Lambda(typeof(TModelFactory), invoke, parameter);
+                    factory = l.Compile() as TModelFactory;
                 }
 
-
-                // Wrap delegate. This will implement inheritance
-                Delegate factoryDelegate = (Delegate)factory;
-                // Get Parameter of both, src and dest delegate
-                var parameter_factory = factoryDelegate.Method.GetParameters().Skip(1).ToArray();
-                var parameter = typeof(TModelFactory).GetMethod("Invoke").GetParameters()
-                    .Select(p => Expression.Parameter(p.ParameterType, p.Name)).ToArray();
-
-                // create cast expressions. Sometimes a UpCast is needed. 
-                // TModelFactory == DataTypeViewModel
-                // typeof(factory) == ObjectClassViewModel
-                // TODO: check that the parameter types can match at all
-                //       this is necessary to create proper errors when Factory delegates
-                //       are out of sync
-                var invoke = Expression.Invoke(Expression.Constant(factoryDelegate), 
-                    parameter.Select(
-                        (p,idx) => Expression.Convert(p, parameter_factory[idx].ParameterType) 
-                        ).ToArray()
-                    );
-                var l = Expression.Lambda(typeof(TModelFactory), invoke, parameter);
-                return l.Compile() as TModelFactory;
+                _viewModelFactoryCache[cacheKey] = factory;
+                return (TModelFactory)factory;
             }
             catch (Exception ex)
             {
