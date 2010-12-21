@@ -43,7 +43,28 @@ namespace Kistl.Tests.Utilities.PostgresSql
                     schemaProvider.Open(config.Server.ConnectionString);
                     schemaProvider.DropAllObjects();
 
-                    System.Diagnostics.ProcessStartInfo pi = new System.Diagnostics.ProcessStartInfo("cmd.exe", "/C pg_dump -U postgres zbox | psql -U postgres zbox_test");
+                    var cb = new NpgsqlConnectionStringBuilder(config.Server.ConnectionString);
+                    var srcDB = cb.Database.Substring(0, cb.Database.Length - "_test".Length);
+                    var destDB = cb.Database;
+                    var userCmdString = string.Empty;
+                    // Dont work, as pg_dump dont accept a password
+                    if (!string.IsNullOrEmpty(cb.UserName))
+                    {
+                        userCmdString += "-U " + cb.UserName + " ";
+                    }
+                    if (!string.IsNullOrEmpty(cb.Password))
+                    {
+                        userCmdString += "-W " + cb.Password + " ";
+                    }
+                    else
+                    {
+                        // dont ask for password!
+                        userCmdString += "-w ";
+                    }
+
+
+                    var args = string.Format("/C pg_dump {0} {1} | psql {0} {2}", userCmdString, srcDB, destDB);
+                    System.Diagnostics.ProcessStartInfo pi = new System.Diagnostics.ProcessStartInfo("cmd.exe", args);
                     pi.UseShellExecute = false;
                     pi.WorkingDirectory = Environment.GetEnvironmentVariable("PGSQLBinPath").Trim('\"');
                     var p = System.Diagnostics.Process.Start(pi);
