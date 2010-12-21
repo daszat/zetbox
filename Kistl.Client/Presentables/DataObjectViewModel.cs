@@ -47,8 +47,6 @@ namespace Kistl.Client.Presentables
             this.config = config;
             _object = obj;
             _object.PropertyChanged += Object_PropertyChanged;
-            // TODO: Optional machen!
-            InitialiseViewCache();
         }
 
         #region Property Management
@@ -361,6 +359,7 @@ namespace Kistl.Client.Presentables
         {
             get
             {
+                if (_nameCache == null) InitialiseToStringCache();
                 return _nameCache;
             }
         }
@@ -370,13 +369,14 @@ namespace Kistl.Client.Presentables
         {
             get
             {
+                if (_longNameCache == null) InitialiseToStringCache();
                 return _longNameCache;
             }
         }
 
         public override string ToString()
         {
-            return _nameCache;
+            return Name;
         }
 
         /// <summary>
@@ -419,7 +419,7 @@ namespace Kistl.Client.Presentables
             }
         }
 
-        private void InitialiseViewCache()
+        private void InitialiseToStringCache()
         {
             // update Name
             _nameCache = String.Format("{0} {1}",
@@ -430,12 +430,11 @@ namespace Kistl.Client.Presentables
                 _nameCache);
         }
 
-        protected void UpdateViewCache()
+        protected void UpdateToStringCache()
         {
-            InitialiseViewCache();
+            InitialiseToStringCache();
             OnPropertyChanged("Name");
             OnPropertyChanged("LongName");
-
         }
 
         private Icon _iconCache = null;
@@ -484,7 +483,7 @@ namespace Kistl.Client.Presentables
             if (e.PropertyName == "ID")
                 OnPropertyChanged("ID");
 
-            UpdateViewCache();
+            UpdateToStringCache();
 
             OnObjectPropertyChanged(e.PropertyName);
         }

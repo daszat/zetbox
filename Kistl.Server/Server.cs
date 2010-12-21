@@ -81,7 +81,7 @@ namespace Kistl.Server
 
         public void CheckSchemaFromCurrentMetaData(bool withRepair)
         {
-            using (Log.InfoTraceMethodCallFormat("withRepair=[{0}]", withRepair))
+            using (Log.InfoTraceMethodCallFormat("CheckSchemaFromCurrentMetaData", "withRepair=[{0}]", withRepair))
             using (var subContainer = container.BeginLifetimeScope())
             {
                 var ctx = subContainer.Resolve<IKistlContext>();
@@ -92,7 +92,7 @@ namespace Kistl.Server
 
         public void CheckSchema(bool withRepair)
         {
-            using (Log.InfoTraceMethodCallFormat("withRepair=[{0}]", withRepair))
+            using (Log.InfoTraceMethodCallFormat("CheckSchema", "withRepair=[{0}]", withRepair))
             using (var subContainer = container.BeginLifetimeScope())
             {
                 IKistlContext ctx = subContainer.Resolve<BaseMemoryContext>();
@@ -120,7 +120,7 @@ namespace Kistl.Server
 
         public void UpdateSchema()
         {
-            using (Log.InfoTraceMethodCall())
+            using (Log.InfoTraceMethodCall("UpdateSchema"))
             using (var subContainer = container.BeginLifetimeScope())
             {
                 IKistlContext ctx = subContainer.Resolve<BaseMemoryContext>();
@@ -159,7 +159,7 @@ namespace Kistl.Server
 
         public void SyncIdentities()
         {
-            using (Log.InfoTraceMethodCall())
+            using (Log.InfoTraceMethodCall("SyncIdentities"))
             using (var subContainer = container.BeginLifetimeScope())
             {
                 IKistlContext ctx = subContainer.Resolve<IKistlContext>();
@@ -208,7 +208,7 @@ namespace Kistl.Server
 
         public void RunFixes()
         {
-            using (Log.InfoTraceMethodCall())
+            using (Log.InfoTraceMethodCall("RunFixes"))
             using (var subContainer = container.BeginLifetimeScope())
             {
                 //Log.Info("Currently no fixes to do");
@@ -304,7 +304,7 @@ namespace Kistl.Server
 
         void FetchModules()
         {
-            using (Log.InfoTraceMethodCall())
+            using (Log.InfoTraceMethodCall("FetchModules"))
             using (var subContainer = container.BeginLifetimeScope())
             {
                 var ctx = subContainer.Resolve<IKistlServerContext>();

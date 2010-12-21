@@ -720,6 +720,7 @@ namespace Kistl.Server.SchemaManagement
             if (repair)
             {
                 using (Log.InfoTraceMethodCallFormat(
+                    "CheckOrderColumn",
                     "checking and repairing [{0}].[{1}]",
                     tblName,
                     indexName))

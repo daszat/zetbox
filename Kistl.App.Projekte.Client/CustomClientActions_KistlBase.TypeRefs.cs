@@ -131,7 +131,7 @@ namespace Kistl.App.Base
 
         private static void CreateViewModelDescriptors(IKistlContext ctx, Dictionary<int, TypeRef> newTypes)
         {
-            using (Logging.Log.InfoTraceMethodCallFormat("Creating ViewModelDescriptors"))
+            using (Logging.Log.InfoTraceMethodCallFormat("CreateViewModelDescriptors", "Creating ViewModelDescriptors"))
             {
                 foreach (var tr in newTypes.Values)
                 {
@@ -163,7 +163,7 @@ namespace Kistl.App.Base
 
         private static void CreateViewDescriptors(IKistlContext ctx, Dictionary<int, TypeRef> newTypes)
         {
-            using (Logging.Log.InfoTraceMethodCallFormat("Creating ViewDescriptors"))
+            using (Logging.Log.InfoTraceMethodCallFormat("CreateViewDescriptors", "Creating ViewDescriptors"))
             {
                 foreach (var tr in newTypes.Values)
                 {
@@ -195,7 +195,7 @@ namespace Kistl.App.Base
 
         private static void UpdateTypeParents(Dictionary<int, TypeRef> newTypes)
         {
-            using (Logging.Log.InfoTraceMethodCallFormat("Updating parents"))
+            using (Logging.Log.InfoTraceMethodCallFormat("UpdateTypeParents", "Updating parents"))
             {
                 // update parent infos
                 foreach (var tr in newTypes.Values)
@@ -207,7 +207,7 @@ namespace Kistl.App.Base
 
         private static void MarkOldTypesAsDeleted(IKistlContext ctx, ILookup<string, TypeRef> oldTypes, Dictionary<int, TypeRef> newTypes)
         {
-            using (Logging.Log.InfoTraceMethodCallFormat("Updating refs"))
+            using (Logging.Log.InfoTraceMethodCallFormat("MarkOldTypesAsDeleted", "Updating refs"))
             {
                 // Delete unused Refs
                 foreach (var tr in oldTypes.SelectMany(g => g))

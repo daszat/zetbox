@@ -27,7 +27,7 @@ namespace Kistl.Tests.Utilities.MsSql
 
         public void ResetDatabase()
         {
-            using (Log.InfoTraceMethodCall())
+            using (Log.InfoTraceMethodCall("ResetDatabase"))
             {
                 Assert.That(config.Server.ConnectionString, Is.StringContaining("_test"), "test databases should be marked with '_test' in the connection string");
 

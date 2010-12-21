@@ -86,6 +86,8 @@ namespace Kistl.API.Utils
             /// </summary>
             private Stopwatch watch = new Stopwatch();
 
+            public StackTrace StackTrace { get; private set; }
+
             /// <summary>Logger</summary>
             protected readonly ILog log;
 
@@ -98,17 +100,24 @@ namespace Kistl.API.Utils
             /// </summary>
             /// <param name="log">Logger</param>
             /// <param name="method">Methodname</param>
+            /// <param name="stackTrace">Stacktrace</param>
             /// <param name="msg">Message</param>
-            internal TraceMethodCallContext(ILog log, string method, string msg)
+            internal TraceMethodCallContext(ILog log, string method, StackTrace stackTrace, string msg)
             {
                 this.log = log;
                 this.Method = method;
                 this.Message = msg;
+                this.StackTrace = stackTrace;
 
                 if (String.IsNullOrEmpty(Message))
                     LogFormat(">> {0}", Method);
                 else
                     LogFormat(">> {0}: {1}", Method, Message);
+
+                if (StackTrace != null)
+                {
+                    log.Debug(StackTrace.ToString());
+                }
 
                 watch.Start();
 
@@ -147,7 +156,7 @@ namespace Kistl.API.Utils
         private sealed class DebugTraceMethodCallContext
             : TraceMethodCallContext
         {
-            internal DebugTraceMethodCallContext(ILog log, string method, string msg) : base(log, method, msg) { }
+            internal DebugTraceMethodCallContext(ILog log, string method, StackTrace stackTrace, string msg) : base(log, method, stackTrace, msg) { }
 
             protected override void LogFormat(string format, params object[] args)
             {
@@ -158,7 +167,7 @@ namespace Kistl.API.Utils
         private sealed class InfoTraceMethodCallContext
             : TraceMethodCallContext
         {
-            internal InfoTraceMethodCallContext(ILog log, string method, string msg) : base(log, method, msg) { }
+            internal InfoTraceMethodCallContext(ILog log, string method, StackTrace stackTrace, string msg) : base(log, method, stackTrace, msg) { }
 
             protected override void LogFormat(string format, params object[] args)
             {
@@ -171,9 +180,8 @@ namespace Kistl.API.Utils
         /// Internal Helper to get the calling Methodname
         /// </summary>
         /// <returns>Methodname from the current StackTrace</returns>
-        private static string GetCallingMethodName(ILog log)
+        private static string GetCallingMethodName(ILog log, StackTrace stackTrace)
         {
-            StackTrace stackTrace = new StackTrace();
             MethodBase mi = stackTrace.GetFrame(2).GetMethod();
             return mi.DeclaringType.FullName + "." + mi.Name;
         }
@@ -190,11 +198,12 @@ namespace Kistl.API.Utils
 
             try
             {
-                return new DebugTraceMethodCallContext(log, GetCallingMethodName(log), String.Empty);
+                StackTrace s = new StackTrace();
+                return new DebugTraceMethodCallContext(log, GetCallingMethodName(log, s), s, String.Empty);
             }
             catch
             {
-                return new DebugTraceMethodCallContext(log, "<unknown method>", String.Empty);
+                return new DebugTraceMethodCallContext(log, "<unknown method>", null, String.Empty);
             }
         }
 
@@ -211,11 +220,12 @@ namespace Kistl.API.Utils
 
             try
             {
-                return new DebugTraceMethodCallContext(log, GetCallingMethodName(log), msg);
+                StackTrace s = new StackTrace();
+                return new DebugTraceMethodCallContext(log, GetCallingMethodName(log, s), s, msg);
             }
             catch
             {
-                return new DebugTraceMethodCallContext(log, "<unknown Method>", msg);
+                return new DebugTraceMethodCallContext(log, "<unknown Method>", null, msg);
             }
         }
 
@@ -233,11 +243,12 @@ namespace Kistl.API.Utils
 
             try
             {
-                return new DebugTraceMethodCallContext(log, GetCallingMethodName(log), String.Format(format, p));
+                StackTrace s = new StackTrace();
+                return new DebugTraceMethodCallContext(log, GetCallingMethodName(log, s), s, String.Format(format, p));
             }
             catch
             {
-                return new DebugTraceMethodCallContext(log, "<unknown Method>", String.Format(format, p));
+                return new DebugTraceMethodCallContext(log, "<unknown Method>", null, String.Format(format, p));
             }
         }
 
@@ -246,18 +257,20 @@ namespace Kistl.API.Utils
         /// Usage: using(Log.InfoTraceMethodCall()) { ... }
         /// </summary>
         /// <param name="log">The logger to log to.</param>
+        /// <param name="method">The calling method</param>
         /// <returns>An IDisposable helper that closes the context when it's disposed.</returns>
-        public static IDisposable InfoTraceMethodCall(this ILog log)
+        public static IDisposable InfoTraceMethodCall(this ILog log, string method)
         {
             if (log == null || !log.IsInfoEnabled) { return null; }
 
             try
             {
-                return new InfoTraceMethodCallContext(log, GetCallingMethodName(log), String.Empty);
+                StackTrace s = log.IsDebugEnabled ? new StackTrace() : null;
+                return new InfoTraceMethodCallContext(log, method, s, String.Empty);
             }
             catch
             {
-                return new InfoTraceMethodCallContext(log, "<unknown method>", String.Empty);
+                return new InfoTraceMethodCallContext(log, method, null, String.Empty);
             }
         }
 
@@ -266,21 +279,23 @@ namespace Kistl.API.Utils
         /// Usage: using(Log.InfoTraceMethodCall("additional info")) { ... }
         /// </summary>
         /// <param name="log">The logger to log to.</param>
+        /// <param name="method">The calling method</param>
         /// <param name="msg">The additional message to log.</param>
         /// <returns>An IDisposable helper that closes the context when it's disposed.</returns>
-        public static IDisposable InfoTraceMethodCall(this ILog log, string msg)
+        public static IDisposable InfoTraceMethodCall(this ILog log, string method, string msg)
         {
             if (log == null || !log.IsInfoEnabled) { return null; }
 
-
             try
             {
-                return new InfoTraceMethodCallContext(log, GetCallingMethodName(log), msg);
+                StackTrace s = log.IsDebugEnabled ? new StackTrace() : null;
+                return new InfoTraceMethodCallContext(log, method, s, msg);
             }
             catch
             {
-                return new InfoTraceMethodCallContext(log, "<unknown Method>", msg);
+                return new InfoTraceMethodCallContext(log, method, null, msg);
             }
+
         }
 
         /// <summary>
@@ -288,20 +303,22 @@ namespace Kistl.API.Utils
         /// Usage: using(Log.InfoTraceMethodCallFormat("foobar=[{0}]", foobar)) { ... }
         /// </summary>
         /// <param name="log">The logger to log to.</param>
+        /// <param name="method">The calling method</param>
         /// <param name="format">The format string for the log message</param>
         /// <param name="p">the parameters for the log message format</param>
         /// <returns>An IDisposable helper that closes the context when it's disposed.</returns>
-        public static IDisposable InfoTraceMethodCallFormat(this ILog log, string format, params object[] p)
+        public static IDisposable InfoTraceMethodCallFormat(this ILog log, string method, string format, params object[] p)
         {
             if (log == null || !log.IsInfoEnabled) { return null; }
 
             try
             {
-                return new InfoTraceMethodCallContext(log, GetCallingMethodName(log), String.Format(format, p));
+                StackTrace s = log.IsDebugEnabled ? new StackTrace() : null;
+                return new InfoTraceMethodCallContext(log, method, s, String.Format(format, p));
             }
             catch
             {
-                return new InfoTraceMethodCallContext(log, "<unknown Method>", String.Format(format, p));
+                return new InfoTraceMethodCallContext(log, method, null, String.Format(format, p));
             }
         }
 

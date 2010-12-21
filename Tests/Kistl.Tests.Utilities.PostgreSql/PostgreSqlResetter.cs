@@ -33,7 +33,7 @@ namespace Kistl.Tests.Utilities.PostgresSql
 
         public void ResetDatabase()
         {
-            using (Log.InfoTraceMethodCall())
+            using (Log.InfoTraceMethodCall("ResetDatabase"))
             {
                 Assert.That(config.Server.ConnectionString, Is.StringContaining("_test"), "test databases should be marked with '_test' in the connection string");
 
@@ -46,23 +46,7 @@ namespace Kistl.Tests.Utilities.PostgresSql
                     var cb = new NpgsqlConnectionStringBuilder(config.Server.ConnectionString);
                     var srcDB = cb.Database.Substring(0, cb.Database.Length - "_test".Length);
                     var destDB = cb.Database;
-                    var userCmdString = string.Empty;
-                    // Dont work, as pg_dump dont accept a password
-                    if (!string.IsNullOrEmpty(cb.UserName))
-                    {
-                        userCmdString += "-U " + cb.UserName + " ";
-                    }
-                    if (!string.IsNullOrEmpty(cb.Password))
-                    {
-                        userCmdString += "-W " + cb.Password + " ";
-                    }
-                    else
-                    {
-                        // dont ask for password!
-                        userCmdString += "-w ";
-                    }
-
-
+                    var userCmdString = "-U postgres -w";
                     var args = string.Format("/C pg_dump {0} {1} | psql {0} {2}", userCmdString, srcDB, destDB);
                     System.Diagnostics.ProcessStartInfo pi = new System.Diagnostics.ProcessStartInfo("cmd.exe", args);
                     pi.UseShellExecute = false;

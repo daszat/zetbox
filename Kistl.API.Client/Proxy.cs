@@ -113,7 +113,7 @@ namespace Kistl.API.Client
 
         public IEnumerable<IDataObject> GetListOf(IKistlContext ctx, InterfaceType ifType, int ID, string property, out List<IStreamable> auxObjects)
         {
-            using (Logging.Facade.InfoTraceMethodCallFormat("{0} [{1}].{2}", ifType, ID, property))
+            using (Logging.Facade.InfoTraceMethodCallFormat("GetListOf", "{0} [{1}].{2}", ifType, ID, property))
             {
                 try
                 {
@@ -223,7 +223,7 @@ namespace Kistl.API.Client
         public IEnumerable<T> FetchRelation<T>(IKistlContext ctx, Guid relationId, RelationEndRole role, IDataObject parent, out List<IStreamable> auxObjects)
             where T : class, IRelationEntry
         {
-            using (Logging.Facade.InfoTraceMethodCallFormat("Fetching relation: ID=[{0}],role=[{1}],parentId=[{2}]", relationId, role, parent.ID))
+            using (Logging.Facade.InfoTraceMethodCallFormat("FetchRelation", "Fetching relation: ID=[{0}],role=[{1}],parentId=[{2}]", relationId, role, parent.ID))
             {
                 try
                 {
@@ -286,7 +286,7 @@ namespace Kistl.API.Client
 
         public Stream GetBlobStream(int ID)
         {
-            using (Logging.Facade.InfoTraceMethodCallFormat("GetBlobStream: ID=[{0}]", ID))
+            using (Logging.Facade.InfoTraceMethodCallFormat("GetBlobStream", "GetBlobStream: ID=[{0}]", ID))
             {
                 try
                 {
@@ -340,7 +340,7 @@ namespace Kistl.API.Client
 
         public object InvokeServerMethod(IKistlContext ctx, InterfaceType ifType, int ID, string method, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests, out IEnumerable<IPersistenceObject> changedObjects)
         {
-            using (Logging.Facade.InfoTraceMethodCallFormat("InvokeServerMethod: ID=[{0}]", ID))
+            using (Logging.Facade.InfoTraceMethodCallFormat("InvokeServerMethod", "InvokeServerMethod: ID=[{0}]", ID))
             {
                 try
                 {

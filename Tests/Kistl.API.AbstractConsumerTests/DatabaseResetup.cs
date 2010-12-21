@@ -24,7 +24,7 @@ namespace Kistl.API.AbstractConsumerTests
 
         protected void ResetDatabase(KistlConfig config)
         {
-            using (Log.InfoTraceMethodCall())
+            using (Log.InfoTraceMethodCall("ResetDatabase"))
             {
                 Assert.That(config.Server.ConnectionString, Is.StringContaining("_test"), "test databases should be marked with '_test' in the connection string");
 

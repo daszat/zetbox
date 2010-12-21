@@ -24,7 +24,7 @@ namespace Kistl.App.Packaging
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
             if (s == null) { throw new ArgumentNullException("s"); }
 
-            using (Log.InfoTraceMethodCall())
+            using (Log.InfoTraceMethodCall("Deploy"))
             {
                 Log.InfoFormat("Starting Deployment from {0}", s is FileStream ? ((FileStream)s).Name : s.GetType().Name);
                 try
@@ -121,7 +121,7 @@ namespace Kistl.App.Packaging
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
             if (s == null) { throw new ArgumentNullException("s"); }
 
-            using (Log.InfoTraceMethodCall())
+            using (Log.InfoTraceMethodCall("LoadFromXml"))
             {
                 Log.InfoFormat("Starting Import from {0}", s is FileStream ? ((FileStream)s).Name : s.GetType().Name);
                 try
