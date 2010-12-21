@@ -49,7 +49,7 @@ namespace Kistl.Tests.Utilities.PostgresSql
                     var p = System.Diagnostics.Process.Start(pi);
                     if (!p.WaitForExit(RESET_TIMEOUT * 1000)) 
                     {
-                        throw new InvalidOperationException(string.Format("pg_dump did not completed within {0} seconds", RESET_TIMEOUT);
+                        throw new InvalidOperationException(string.Format("pg_dump did not completed within {0} seconds", RESET_TIMEOUT));
                     }
 
                     // After recreating the database, all connection pools should be cleard
