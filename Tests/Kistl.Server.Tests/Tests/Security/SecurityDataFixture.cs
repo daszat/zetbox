@@ -115,22 +115,12 @@ namespace Kistl.Server.Tests.Security
 
             // Fix security tables
             // Own test checks if this works during object modifications too
-            using (SqlConnection db = new SqlConnection(config.Server.ConnectionString))
+            using (var db = scope.Resolve<ISchemaProvider>())
             {
-                db.Open();
-                using (SqlCommand cmd = db.CreateCommand())
-                {
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
-
-                    cmd.CommandText = "RefreshRightsOn_Projekte";
-                    cmd.ExecuteNonQuery();
-
-                    cmd.CommandText = "RefreshRightsOn_Tasks";
-                    cmd.ExecuteNonQuery();
-
-                    cmd.CommandText = "RefreshRightsOn_Auftraege";
-                    cmd.ExecuteNonQuery();
-                }
+                db.Open(config.Server.ConnectionString);
+                db.ExecRefreshRightsOnProcedure(db.GetQualifiedProcedureName("RefreshRightsOn_Projekte"));
+                db.ExecRefreshRightsOnProcedure(db.GetQualifiedProcedureName("RefreshRightsOn_Tasks"));
+                db.ExecRefreshRightsOnProcedure(db.GetQualifiedProcedureName("RefreshRightsOn_Auftraege"));
             }
         }
 
