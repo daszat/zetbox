@@ -16,7 +16,7 @@ namespace Kistl.API.Client
             base.Load(moduleBuilder);
 
             moduleBuilder
-                .RegisterType<ProxyImplementation>()
+                .Register<ProxyImplementation>(c => new ProxyImplementation(c.Resolve<InterfaceType.Factory>(), c.Resolve<ICredentialsResolver>(), c.Resolve<IToolkit>()))
                 .As<IProxy>()
                 .InstancePerDependency(); // No singelton!
 

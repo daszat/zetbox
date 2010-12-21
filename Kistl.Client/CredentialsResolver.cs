@@ -21,7 +21,7 @@ namespace Kistl.Client
                 base.Load(builder);
 
                 builder
-                    .RegisterType<DefaultCredentialsResolver>()
+                    .Register<DefaultCredentialsResolver>(c => new DefaultCredentialsResolver())
                     .As<ICredentialsResolver>()
                     .SingleInstance();
             }
@@ -42,7 +42,7 @@ namespace Kistl.Client
                 base.Load(builder);
 
                 builder
-                    .RegisterType<BasicAuthCredentialsResolver>()
+                    .Register<BasicAuthCredentialsResolver>(c => new BasicAuthCredentialsResolver(c.Resolve<IViewModelFactory>(), c.Resolve<Func<IKistlContext>>(), c.Resolve<IFrozenContext>()))
                     .As<ICredentialsResolver>()
                     .SingleInstance();
             }

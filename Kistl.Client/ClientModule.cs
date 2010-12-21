@@ -66,26 +66,31 @@ namespace Kistl.Client
             base.Load(moduleBuilder);
 
             moduleBuilder
-                .RegisterType<SynchronousThreadManager>()
+                .Register<SynchronousThreadManager>(c => new SynchronousThreadManager())
                 .As<IAsyncThreadManager>()
                 .As<IUiThreadManager>();
 
             moduleBuilder
-                .RegisterType<ViewModelDependencies>()
+                .Register<ViewModelDependencies>(c => new ViewModelDependencies(
+                    c.Resolve<IViewModelFactory>(), 
+                    c.Resolve<IUiThreadManager>(), 
+                    c.Resolve<IAsyncThreadManager>(), 
+                    c.Resolve<IFrozenContext>(), 
+                    c.Resolve<IIdentityResolver>()))
                 .As<IViewModelDependencies>();
 
             moduleBuilder
-                .RegisterType<ThreadPrincipalResolver>()
+                .Register<ThreadPrincipalResolver>(c=> new ThreadPrincipalResolver(c.Resolve<IReadOnlyKistlContext>()))
                 .As<IIdentityResolver>()
                 .InstancePerLifetimeScope();
 
             moduleBuilder
-                .RegisterType<FogBugzProblemReporter>()
+                .Register<FogBugzProblemReporter>(c => new FogBugzProblemReporter())
                 .As<IProblemReporter>()
                 .SingleInstance();
 
             moduleBuilder
-                .RegisterType<DefaultCredentialsResolver>()
+                .Register<DefaultCredentialsResolver>(c => new DefaultCredentialsResolver())
                 .As<ICredentialsResolver>()
                 .SingleInstance();
 

@@ -19,7 +19,7 @@ namespace Kistl.API
                 .InstancePerDependency();
 
             moduleBuilder
-                .RegisterType<LoggingProblemReporter>()
+                .Register<LoggingProblemReporter>(c => new LoggingProblemReporter())
                 .As<IProblemReporter>()
                 .SingleInstance();
         }
