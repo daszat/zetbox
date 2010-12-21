@@ -109,10 +109,13 @@
     <Compile Include="Tests\Security\when_selected.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Kistl.Server.Tests.Config.EF_PostgreSQL.xml">
+    <Content Include="Kistl.Server.Tests.Config.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Kistl.Server.Tests.Config.EF_MSSQL.xml">
+    <Content Include="Kistl.Server.Tests.ConfigEF_PostgreSQL.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Kistl.Server.Tests.ConfigEF_MSSQL.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Kistl.Server.Tests.PartCoverSettings.xml" />
