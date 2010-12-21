@@ -128,13 +128,29 @@ namespace Kistl.API
     {
         public delegate InterfaceType Factory(Type type);
 
+        private static readonly object _lock = new object();
+        private static Dictionary<Type, InterfaceType> _cache = new Dictionary<Type, InterfaceType>();
+
+        // TODO: Mit david nochmals besprechen
+        internal static InterfaceType Create(Type type, IInterfaceTypeChecker typeChecker)
+        {
+            lock (_lock)
+            {
+                if (_cache.ContainsKey(type)) return _cache[type];
+                var ift = new InterfaceType(type, typeChecker);
+                _cache[type] = ift;
+                return ift;
+            }
+        }
+
         /// <summary>
         /// The wrapped <see cref="Type"/>. Guaranteed to be a valid InterfaceType (see <see cref="IInterfaceTypeChecker"/>).
         /// </summary>
-        public Type Type { get; private set; }
+        public Type Type { get { return _type; } }
+        private readonly Type _type;
         private readonly IInterfaceTypeChecker _typeChecker;
 
-        public InterfaceType(Type type, IInterfaceTypeChecker typeChecker)
+        private InterfaceType(Type type, IInterfaceTypeChecker typeChecker)
             : this()
         {
             if (type == null) throw new ArgumentNullException("type");
@@ -146,7 +162,7 @@ namespace Kistl.API
                 throw new ArgumentOutOfRangeException("type");
             }
 
-            this.Type = type;
+            this._type = type;
             this._typeChecker = typeChecker;
         }
 
@@ -181,7 +197,7 @@ namespace Kistl.API
                 .ToList();
             candidates.Add(new { Interface = this.Type, Inherited = allInherited });
 
-            return new InterfaceType(candidates.OrderBy(i => i.Inherited.Length).First().Interface, _typeChecker);
+            return Create(candidates.OrderBy(i => i.Inherited.Length).First().Interface, _typeChecker);
         }
 
         /// <summary>
@@ -249,7 +265,8 @@ namespace Kistl.API
         /// <summary>
         /// The wrapped <see cref="Type"/>. Guaranteed to be a valid ImplementationType (see <see cref="IInterfaceTypeChecker"/>).
         /// </summary>
-        public Type Type { get; private set; }
+        public Type Type { get { return _type; } }
+        private readonly Type _type;
 
         /// <summary>
         /// Wrap a given ImplementationType
@@ -267,7 +284,7 @@ namespace Kistl.API
             if (implTypeChecker == null) throw new ArgumentNullException("implTypeChecker");
             if (!implTypeChecker.IsImplementationType(type)) { throw new ArgumentOutOfRangeException("type"); }
 
-            this.Type = type;
+            this._type = type;
             this._iftFactory = iftFactory;
         }
 

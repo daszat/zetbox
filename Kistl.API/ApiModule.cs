@@ -15,7 +15,7 @@ namespace Kistl.API
             base.Load(moduleBuilder);
 
             moduleBuilder
-                .RegisterType<InterfaceType>()
+                .Register<InterfaceType>((c, p) => InterfaceType.Create(p.Named<Type>("type"), c.Resolve<IInterfaceTypeChecker>()))
                 .InstancePerDependency();
 
             moduleBuilder
