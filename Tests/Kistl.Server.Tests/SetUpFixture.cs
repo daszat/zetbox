@@ -34,7 +34,8 @@ namespace Kistl.Server.Tests
             builder.RegisterModule(new Kistl.DalProvider.Memory.MemoryProvider());
             builder.RegisterModule(new Kistl.Objects.EfModule());
             builder.RegisterModule(new Kistl.Objects.MemoryModule());
-            builder.RegisterModule(new Kistl.Tests.Utilities.MsSql.UtilityModule());
+
+            // load DB Utility from config
         }
 
         protected override void SetUp(IContainer container)
