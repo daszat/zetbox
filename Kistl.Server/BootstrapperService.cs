@@ -1,15 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.ServiceModel;
-using System.Text;
-using Kistl.API.Configuration;
-using System.IO;
-using System.ServiceModel.Web;
 
 namespace Kistl.Server
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Runtime.Serialization;
+    using System.ServiceModel;
+    using System.ServiceModel.Web;
+    using System.Text;
+    using Kistl.API.Configuration;
+
     public enum FileType
     {
         File = 1,
@@ -94,7 +95,6 @@ namespace Kistl.Server
             {
                 WebOperationContext.Current.OutgoingResponse.ContentType = "application/octet-stream";
                 System.IO.FileInfo fi = new System.IO.FileInfo(probe);
-                var result = new byte[fi.Length];
                 return fi.OpenRead();
             }
             throw new FileNotFoundException("File not found in Bootstrapper directories", Path.Combine(path, name));

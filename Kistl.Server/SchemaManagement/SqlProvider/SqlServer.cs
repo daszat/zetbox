@@ -396,7 +396,6 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
 
             // Prepare
             string addOrAlter = add ? "ADD" : "ALTER COLUMN";
-            string nullable = isNullable ? "NULL" : "NOT NULL";
             string defValue = string.Empty;
             var constrName = ConstructDefaultConstraintName(tblName, colName);
 

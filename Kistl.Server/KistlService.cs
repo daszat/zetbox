@@ -6,13 +6,12 @@ namespace Kistl.Server
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-
+    using System.Runtime.Serialization.Formatters.Binary;
+    using System.ServiceModel;
     using Kistl.API;
     using Kistl.API.Server;
     using Kistl.API.Utils;
     using Kistl.App.Base;
-    using System.ServiceModel;
-    using System.Runtime.Serialization.Formatters.Binary;
 
     /// <summary>
     /// Implements the main WCF interface.
@@ -258,7 +257,6 @@ namespace Kistl.Server
                         Relation rel = ctx.FindPersistenceObject<Relation>(relId);
 
                         var ifType = typeof(IRelationEntry<,>);
-                        var ceType = ifType.MakeGenericType(rel.A.Type.GetDataType(), rel.B.Type.GetDataType());
 
                         var lst = _sohFactory
                             .GetServerCollectionHandler(

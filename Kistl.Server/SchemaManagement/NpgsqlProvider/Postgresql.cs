@@ -407,7 +407,6 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
             ExecuteNonQuery(sb.ToString());
 
-            var constrName = ConstructDefaultConstraintName(tblName, colName);
             if (GetHasColumnDefaultValue(tblName, colName))
             {
                 ExecuteNonQuery(String.Format("ALTER TABLE {0} ALTER COLUMN {0} DROP DEFAULT", FormatSchemaName(tblName), QuoteIdentifier(colName)));

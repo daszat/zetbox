@@ -498,7 +498,6 @@ namespace Kistl.Server.SchemaManagement
             {
                 var tblName = db.GetQualifiedTableName(objClass.TableName);
                 var tblRightsName = db.GetQualifiedTableName(Construct.SecurityRulesTableName(objClass));
-                var updateRightsTriggerName = Construct.SecurityRulesUpdateRightsTriggerName(objClass);
                 var rightsViewUnmaterializedName = db.GetQualifiedTableName(Construct.SecurityRulesRightsViewUnmaterializedName(objClass));
                 var refreshRightsOnProcedureName = db.GetQualifiedProcedureName(Construct.SecurityRulesRefreshRightsOnProcedureName(objClass));
 

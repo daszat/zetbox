@@ -340,7 +340,7 @@ namespace Kistl.Server.SchemaManagement
             {
                 db.CreateColumn(tblName, valPropIndexName, System.Data.DbType.Int32, 0, 0, false, null);
             }
-            db.CreateFKConstraint(tblName, db.GetQualifiedTableName(objClass.TableName), fkName, prop.GetAssociationName(), true);
+            db.CreateFKConstraint(tblName, db.GetQualifiedTableName(objClass.TableName), fkName, assocName, true);
         }
         #endregion
 
@@ -375,7 +375,7 @@ namespace Kistl.Server.SchemaManagement
             {
                 db.CreateColumn(tblName, valPropIndexName, System.Data.DbType.Int32, 0, 0, false, null);
             }
-            db.CreateFKConstraint(tblName, db.GetQualifiedTableName(objClass.TableName), fkName, prop.GetAssociationName(), true);
+            db.CreateFKConstraint(tblName, db.GetQualifiedTableName(objClass.TableName), fkName, assocName, true);
         }
         #endregion
 
@@ -571,20 +571,17 @@ namespace Kistl.Server.SchemaManagement
             Log.InfoFormat("Deleting 1:N Relation: {0}", assocName);
 
             TableRef tblName;
-            TableRef refTblName;
             bool isIndexed = false;
             RelationEnd otherEnd;
             if (rel.HasStorage(RelationEndRole.A))
             {
                 tblName = db.GetQualifiedTableName(rel.A.Type.TableName);
-                refTblName = db.GetQualifiedTableName(rel.B.Type.TableName);
                 isIndexed = rel.NeedsPositionStorage(RelationEndRole.A);
                 otherEnd = rel.B;
             }
             else if (rel.HasStorage(RelationEndRole.B))
             {
                 tblName = db.GetQualifiedTableName(rel.B.Type.TableName);
-                refTblName = db.GetQualifiedTableName(rel.A.Type.TableName);
                 isIndexed = rel.NeedsPositionStorage(RelationEndRole.B);
                 otherEnd = rel.A;
             }
@@ -768,8 +765,6 @@ namespace Kistl.Server.SchemaManagement
 
             var srcTblName = db.GetQualifiedTableName(relEnd.Type.TableName);
             var srcColName = Construct.ForeignKeyColumnName(otherEnd);
-            bool srcIsIndexed = rel.NeedsPositionStorage(relEnd.GetRole());
-            var srcIndexName = Construct.ListPositionColumnName(otherEnd);
 
             var destTbl = db.GetQualifiedTableName(rel.GetRelationTableName());
             var destCol = rel.GetRelationFkColumnName(relEnd.GetRole());
@@ -940,8 +935,6 @@ namespace Kistl.Server.SchemaManagement
 
             var srcTblName = db.GetQualifiedTableName(relEnd.Type.TableName);
             var srcColName = Construct.ForeignKeyColumnName(otherEnd);
-            bool srcIsIndexed = rel.NeedsPositionStorage(relEnd.GetRole());
-            var srcIndexName = Construct.ListPositionColumnName(otherEnd);
 
             var destTbl = db.GetQualifiedTableName(rel.GetRelationTableName());
             var destCol = rel.GetRelationFkColumnName(relEnd.GetRole());
@@ -1054,8 +1047,6 @@ namespace Kistl.Server.SchemaManagement
 
             var destTblName = db.GetQualifiedTableName(relEnd.Type.TableName);
             var destColName = Construct.ForeignKeyColumnName(otherEnd);
-            bool destIsIndexed = rel.NeedsPositionStorage(relEnd.GetRole());
-            var destIndexName = Construct.ListPositionColumnName(otherEnd);
 
             DoNew_1_N_Relation(rel);
             db.CopyFKs(srcTbl, srcCol, destTblName, destColName, srcFKCol);
@@ -1319,8 +1310,6 @@ namespace Kistl.Server.SchemaManagement
             Log.InfoFormat("Deleting N:M Relation: {0}", assocName);
 
             var tblName = db.GetQualifiedTableName(rel.GetRelationTableName());
-            string fkAName = rel.GetRelationFkColumnName(RelationEndRole.A);
-            string fkBName = rel.GetRelationFkColumnName(RelationEndRole.B);
 
             db.DropFKConstraint(tblName, rel.GetRelationAssociationName(RelationEndRole.A));
             db.DropFKConstraint(tblName, rel.GetRelationAssociationName(RelationEndRole.B));
@@ -1390,7 +1379,6 @@ namespace Kistl.Server.SchemaManagement
         private void Delete_1_1_Relation_DropColumns(Relation rel, RelationEnd end, RelationEnd otherEnd, RelationEndRole role)
         {
             var tblName = db.GetQualifiedTableName(end.Type.TableName);
-            var refTblName = db.GetQualifiedTableName(otherEnd.Type.TableName);
             var colName = Construct.ForeignKeyColumnName(otherEnd);
             var assocName = rel.GetRelationAssociationName(role);
 
@@ -1675,7 +1663,6 @@ namespace Kistl.Server.SchemaManagement
             db.CreateFKConstraint(tblRightsName, db.GetQualifiedTableName(objClass.TableName), "ID", Construct.SecurityRulesFKName(objClass), true);
 
             var tblName = db.GetQualifiedTableName(objClass.TableName);
-            var updateRightsTriggerName = Construct.SecurityRulesUpdateRightsTriggerName(objClass);
             var rightsViewUnmaterializedName = db.GetQualifiedTableName(Construct.SecurityRulesRightsViewUnmaterializedName(objClass));
             var refreshRightsOnProcedureName = db.GetQualifiedProcedureName(Construct.SecurityRulesRefreshRightsOnProcedureName(objClass));
 
@@ -1929,8 +1916,8 @@ namespace Kistl.Server.SchemaManagement
             var objClass = (ObjectClass)uc.Constrained;
             var tblName = db.GetQualifiedTableName(objClass.TableName);
             var columns = GetUCColNames(uc);
-            Log.InfoFormat("New Unique Contraint: {0} on {1}({2})", uc.Reason, db.GetQualifiedTableName(objClass.TableName), string.Join(", ", columns));
-            db.CreateIndex(db.GetQualifiedTableName(objClass.TableName), Construct.UniqueIndexName(objClass.TableName, columns), true, false, columns);
+            Log.InfoFormat("New Unique Contraint: {0} on {1}({2})", uc.Reason, tblName, string.Join(", ", columns));
+            db.CreateIndex(tblName, Construct.UniqueIndexName(objClass.TableName, columns), true, false, columns);
         }
 
         internal static string[] GetUCColNames(UniqueConstraint uc)
