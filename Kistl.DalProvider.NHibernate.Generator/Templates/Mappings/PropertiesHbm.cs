@@ -46,7 +46,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
             string columnAttr = String.Format("column=\"`{0}{1}`\"", prefix, prop.Name);
             string classAttr = String.Format("class=\"{0}\"",
                 ObjectClassHbm.GetAssemblyQualifiedImplementation(otherEnd.Type, this.Settings));
-            string tableAttr = String.Format("table =\"`{0}`\" ", rel.GetAssociationName());
+            //string tableAttr = String.Format("table =\"`{0}`\" ", rel.GetAssociationName());
 
             switch (rel.GetRelationType())
             {

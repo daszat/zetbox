@@ -13,8 +13,6 @@ namespace Kistl.DalProvider.NHibernate.Generator
     public class NhGenerator
         : AbstractBaseGenerator
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Generator.NHibernate");
-
         public NhGenerator(IEnumerable<ISchemaProvider> schemaProviders)
             : base(schemaProviders)
         {

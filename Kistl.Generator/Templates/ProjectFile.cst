@@ -23,7 +23,6 @@
     <FileAlignment>512</FileAlignment>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Kistl.Objects.snk</AssemblyOriginatorKeyFile>
-    <NoWarn>1591</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,6 +31,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <NoWarn>1591,0168,0414</NoWarn> 
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
     <OutputPath>..\bin\Debug\bin\<%= GetRelativeOutputPath() %></OutputPath>
@@ -43,6 +43,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <NoWarn>1591,0168,0414</NoWarn> 
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
     <OutputPath>..\bin\Release\bin\<%= GetRelativeOutputPath() %></OutputPath>
