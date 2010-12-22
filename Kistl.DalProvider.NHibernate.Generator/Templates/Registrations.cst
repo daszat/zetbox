@@ -21,7 +21,7 @@
                             });
 
                         return result
-                            .AddAssembly(this.GetType().Assembly)
+                            .AddAssembly(typeof(NHibernateModule).Assembly)
                             .Configure()
                             .BuildSessionFactory();
                     })

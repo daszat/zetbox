@@ -1,4 +1,4 @@
-namespace Kistl.DalProvider.Ef.Tests
+namespace Kistl.DalProvider.NHibernate.Tests
 {
     using System;
     using System.Collections;

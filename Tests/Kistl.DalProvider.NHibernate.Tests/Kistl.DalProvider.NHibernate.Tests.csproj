@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A77331CC-350D-472D-8737-AAB47AF5A4D8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Kistl.DalProvider.NHibernate.Tests</RootNamespace>
+    <AssemblyName>Kistl.DalProvider.NHibernate.Tests</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin\Debug\bin\Tests\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libs\AutoFac 2\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Npgsql, Version=2.0.11.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libs\Npgsql2\Npgsql.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AbstractNHibernateTestFixture.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SetUpFixture.cs" />
+    <Compile Include="Tests\BaseServerDataObjects\navigator_context_checks.cs" />
+    <Compile Include="Tests\BaseServerDataObjects\when_changed.cs" />
+    <Compile Include="Tests\BaseServerDataObjects\when_loaded.cs" />
+    <Compile Include="Tests\BinarySerializers\should_work_with_ICompoundObjects.cs" />
+    <Compile Include="Tests\Blobs\when_using.cs" />
+    <Compile Include="Tests\CompoundObject\when_changing.cs" />
+    <Compile Include="Tests\CompoundObject\when_changing_a_compoundobject_list.cs" />
+    <Compile Include="Tests\CompoundObject\when_changing_a_CompoundObject_member.cs" />
+    <Compile Include="Tests\CompoundObject\when_initialized.cs" />
+    <Compile Include="Tests\CompoundObject\when_roundtrip.cs" />
+    <Compile Include="Tests\Linq.cs" />
+    <Compile Include="Tests\ListPropertiesTests.cs" />
+    <Compile Include="Tests\N_to_M_relations\should_synchronize.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Kistl.DalProvider.NHibernate.Tests.nunit">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Kistl.API.Server\Kistl.API.Server.csproj">
+      <Project>{08902397-B9CA-43DA-8C8D-27DCEC097611}</Project>
+      <Name>Kistl.API.Server</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Kistl.API\Kistl.API.csproj">
+      <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
+      <Name>Kistl.API</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Kistl.DalProvider.Memory\Kistl.DalProvider.Memory.csproj">
+      <Project>{7E3CE048-00C1-4357-BE27-801AB5B75FE3}</Project>
+      <Name>Kistl.DalProvider.Memory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Kistl.DalProvider.NHibernate\Kistl.DalProvider.NHibernate.csproj">
+      <Project>{B58E3B3A-7212-4F8C-9AAE-7FF680F6F324}</Project>
+      <Name>Kistl.DalProvider.NHibernate</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Kistl.Objects.Memory\Kistl.Objects.Memory.csproj">
+      <Project>{01E60FD5-CD96-466A-83B1-8EFC7452B47C}</Project>
+      <Name>Kistl.Objects.Memory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Kistl.Objects.NHibernate\Kistl.Objects.NHibernate.csproj">
+      <Project>{5514C9AF-6C2E-4713-8EAC-FAAADFFDB029}</Project>
+      <Name>Kistl.Objects.NHibernate</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Kistl.Objects\Kistl.Objects.csproj">
+      <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
+      <Name>Kistl.Objects</Name>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Kistl.Server\Kistl.Server.csproj">
+      <Project>{FA2B6CCD-95CB-4927-9CB5-AFE833EB38B7}</Project>
+      <Name>Kistl.Server</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kistl.API.AbstractConsumerTests\Kistl.API.AbstractConsumerTests.csproj">
+      <Project>{1EEA57CD-4824-4A14-9447-3BD0E57997F4}</Project>
+      <Name>Kistl.API.AbstractConsumerTests</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kistl.API.Tests\Kistl.API.Tests.csproj">
+      <Project>{171546DC-5AFF-43BF-B8E6-EA6AC96C9C61}</Project>
+      <Name>Kistl.API.Tests</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kistl.Tests.Utilities.MsSql\Kistl.Tests.Utilities.MsSql.csproj">
+      <Project>{1E56A7BA-61B7-4283-B65F-ADFA6418F72B}</Project>
+      <Name>Tests.Utilities.MsSql</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Kistl.DalProvider.NHibernate.Tests.Config.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Kistl.DalProvider.NHibernate.Tests.PartCoverSettings.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Kistl.DalProvider.NHibernate.Tests.ConfigMSSQL.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Kistl.DalProvider.NHibernate.Tests.ConfigPostgreSQL.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

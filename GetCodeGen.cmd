@@ -11,12 +11,19 @@ del /Q .\Kistl.Objects\*.*
 
 xcopy /y bin\CodeGen\Kistl.Objects\*.* .\Kistl.Objects
 
-rem *********** Server *********** 
+rem *********** Server - EF *********** 
 xcopy /y .\Kistl.Objects.Ef\*.* .\Backup\Kistl.Objects.Ef\
 
 del /Q .\Kistl.Objects.Ef\*.*
 
 xcopy /y bin\CodeGen\Kistl.Objects.Ef\*.* .\Kistl.Objects.Ef
+
+rem *********** Server - NHibernate *********** 
+xcopy /y .\Kistl.Objects.NHibernate\*.* .\Backup\Kistl.ObjectsNHibernate\
+
+del /Q .\Kistl.Objects.NHibernate\*.*
+
+xcopy /y bin\CodeGen\Kistl.Objects.NHibernate\*.* .\Kistl.Objects.NHibernate
 
 rem *********** Memory *********** 
 xcopy /y .\Kistl.Objects.Memory\*.* .\Backup\Kistl.Objects.Memory\

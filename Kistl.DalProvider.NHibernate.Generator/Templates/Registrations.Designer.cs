@@ -44,7 +44,7 @@ this.WriteObjects("                                db.ConnectionString = kistlCo
 this.WriteObjects("                            });\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("                        return result\r\n");
-this.WriteObjects("                            .AddAssembly(this.GetType().Assembly)\r\n");
+this.WriteObjects("                            .AddAssembly(typeof(NHibernateModule).Assembly)\r\n");
 this.WriteObjects("                            .Configure()\r\n");
 this.WriteObjects("                            .BuildSessionFactory();\r\n");
 this.WriteObjects("                    })\r\n");

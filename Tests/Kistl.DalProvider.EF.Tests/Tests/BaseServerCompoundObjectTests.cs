@@ -32,8 +32,6 @@ namespace Kistl.DalProvider.Ef.Tests
             attachedObj.Number = "attachedNumber";
         }
 
-
-
         [Test]
         public void should_roudtrip_members_correctly()
         {

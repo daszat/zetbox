@@ -28,6 +28,7 @@
       <Module>Kistl.DalProvider.Client.Generator.ClientGeneratorProvider, Kistl.DalProvider.Client.Generator</Module>
       <Module>Kistl.DalProvider.Memory.Generator.MemoryGeneratorProvider, Kistl.DalProvider.Memory.Generator</Module>
       <Module>Kistl.DalProvider.Ef.Generator.EfGeneratorProvider, Kistl.DalProvider.Ef.Generator</Module>
+      <Module>Kistl.DalProvider.NHibernate.Generator.NhGeneratorProvider, Kistl.DalProvider.NHibernate.Generator</Module>
       <!-- 
         cant be used since it won't compile under mono
       <Module>Kistl.Generator.ClickOnce.ClickOnceModule, Kistl.Generator.ClickOnce</Module>
