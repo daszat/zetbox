@@ -19,7 +19,7 @@ del /Q .\Kistl.Objects.Ef\*.*
 xcopy /y bin\CodeGen\Kistl.Objects.Ef\*.* .\Kistl.Objects.Ef
 
 rem *********** Server - NHibernate *********** 
-xcopy /y .\Kistl.Objects.NHibernate\*.* .\Backup\Kistl.ObjectsNHibernate\
+xcopy /y .\Kistl.Objects.NHibernate\*.* .\Backup\Kistl.Objects.NHibernate\
 
 del /Q .\Kistl.Objects.NHibernate\*.*
 

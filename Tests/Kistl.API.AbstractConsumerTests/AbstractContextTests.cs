@@ -341,7 +341,7 @@ namespace Kistl.API.AbstractConsumerTests
         {
             using (var ctx = GetContext())
             {
-                var next = ctx.GetSequenceNumber(continuousSequence);
+                ctx.GetSequenceNumber(continuousSequence);
             }
         }
 
@@ -351,7 +351,7 @@ namespace Kistl.API.AbstractConsumerTests
         {
             using (var ctx = GetContext())
             {
-                var next = ctx.GetContinuousSequenceNumber(sequence);
+                ctx.GetContinuousSequenceNumber(sequence);
             }
         }
 
@@ -361,7 +361,7 @@ namespace Kistl.API.AbstractConsumerTests
         {
             using (var ctx = GetContext())
             {
-                var next = ctx.GetContinuousSequenceNumber(sequence);
+                ctx.GetContinuousSequenceNumber(sequence);
             }
         }
 
@@ -436,7 +436,7 @@ namespace Kistl.API.AbstractConsumerTests
         {
             using (IKistlContext ctx = GetContext())
             {
-                TestObjClass obj = (TestObjClass)ctx.Find(iftFactory(typeof(TestObjClass)), Kistl.API.Helper.INVALIDID);
+                ctx.Find(iftFactory(typeof(TestObjClass)), Kistl.API.Helper.INVALIDID);
             }
         }
 
@@ -471,7 +471,7 @@ namespace Kistl.API.AbstractConsumerTests
             using (IKistlContext ctx = GetContext())
             {
                 var obj = ctx.GetQuery<TestObjClass>().First(o => o.ID == firstId);
-                var result = ctx.GetListOf<TestObjClass>(obj, "NotAProperty");
+                ctx.GetListOf<TestObjClass>(obj, "NotAProperty");
             }
         }
 
@@ -481,7 +481,7 @@ namespace Kistl.API.AbstractConsumerTests
         {
             using (IKistlContext ctx = GetContext())
             {
-                var result = ctx.GetListOf<TestObjClass>(iftFactory(typeof(TestObjClass)), firstId, "NotAProperty");
+                ctx.GetListOf<TestObjClass>(iftFactory(typeof(TestObjClass)), firstId, "NotAProperty");
             }
         }
 
@@ -492,7 +492,7 @@ namespace Kistl.API.AbstractConsumerTests
             using (IKistlContext ctx = GetContext())
             {
                 var obj = ctx.GetQuery<ObjectClass>().First(o => o.Name == "DataType");
-                var result = ctx.GetListOf<TestObjClass>(obj, "SubClasses").ToList();
+                ctx.GetListOf<TestObjClass>(obj, "SubClasses").ToList();
             }
         }
 
@@ -503,7 +503,7 @@ namespace Kistl.API.AbstractConsumerTests
             using (IKistlContext ctx = GetContext())
             {
                 var obj = ctx.GetQuery<ObjectClass>().First(o => o.Name == "DataType");
-                var result = ctx.GetListOf<TestObjClass>(iftFactory(typeof(ObjectClass)), obj.ID, "SubClasses").ToList();
+                ctx.GetListOf<TestObjClass>(iftFactory(typeof(ObjectClass)), obj.ID, "SubClasses").ToList();
             }
         }
 

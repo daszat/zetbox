@@ -18,10 +18,9 @@ namespace Kistl.API.AbstractConsumerTests.Blobs
         }
 
         [Test]
-        [ExpectedException(typeof(InvalidOperationException))]
         public void should_not_be_created_trough_create()
         {
-            var test_blob = ctx.Create<Blob>();
+            Assert.That(() => ctx.Create<Blob>(), Throws.InstanceOf<InvalidOperationException>());
         }
 
         [Test]
