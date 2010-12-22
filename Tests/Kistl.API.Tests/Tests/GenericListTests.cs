@@ -28,9 +28,11 @@ namespace Kistl.API.Tests
         public void indexer_should_check_negative_index_on_get(
             [Range(-5, -1)] int index)
         {
+            TItem ignored = default(TItem);
             Assert.That(
-                () => { var ignored = collection[index]; },
+                () => { ignored = collection[index]; },
                 Throws.InstanceOf<ArgumentOutOfRangeException>());
+            Assert.That(ignored, Is.EqualTo(default(TItem)));
             AssertCollectionIsUnchanged();
             AssertInvariants(initialItems);
         }

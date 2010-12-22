@@ -197,8 +197,9 @@ namespace Kistl.API.Tests
 			[Test]
 			public void should_fail_on_reading_from_null_stream_with_converter()
 			{
-				int value;
+				int value = 0;
 				Assert.That(() => BinarySerializer.FromStreamConverter(i => value = i, null), Throws.InstanceOf<ArgumentNullException>());
+                Console.WriteLine("ignored value: {0}", value);
 			}
 		}
 

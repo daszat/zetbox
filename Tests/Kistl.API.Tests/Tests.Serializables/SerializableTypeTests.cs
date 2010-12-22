@@ -41,7 +41,7 @@ namespace Kistl.API.Tests.Serializables
         public void GetSystemType_fails_on_invalid_AssemblyQualifiedName()
         {
             t.AssemblyQualifiedName = "Test";
-            Type result = t.GetSystemType();
+            t.GetSystemType();
         }
 
         [Test]
@@ -49,7 +49,7 @@ namespace Kistl.API.Tests.Serializables
         public void GetSystemType_fails_on_invalid_TypeName()
         {
             t.TypeName = "Invalid Test Class Name";
-            Type result = t.GetSystemType();
+            t.GetSystemType();
         }
 
     }

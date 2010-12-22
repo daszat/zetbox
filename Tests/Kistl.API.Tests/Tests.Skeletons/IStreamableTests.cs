@@ -44,7 +44,7 @@ namespace Kistl.API.Tests.Skeletons
         [Test]
         public void should_roundtrip_without_errors()
         {
-            T result = SerializationRoundtrip(obj);
+            SerializationRoundtrip(obj);
         }
 
         protected T SerializationRoundtrip(T obj)

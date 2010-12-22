@@ -146,7 +146,7 @@ namespace Kistl.API.Tests
         [Test]
         public void issynchronized_should_not_throw()
         {
-            Assert.That(() => { var test = collection.IsSynchronized; }, Throws.Nothing);
+            Assert.That(() => collection.IsSynchronized, Throws.Nothing);
             AssertCollectionIsUnchanged();
             AssertInvariants(initialItems);
         }

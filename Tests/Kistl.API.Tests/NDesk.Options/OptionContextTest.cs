@@ -44,13 +44,13 @@ namespace Kistl.API.Utils.Tests
             OptionContext c = new OptionContext(p);
             Utils.AssertException(typeof(InvalidOperationException),
                     "OptionContext.Option is null.",
-                    c, v => { string ignore = v.OptionValues[0]; });
+                    c, v => { string ignore = v.OptionValues[0]; Console.Write(ignore); });
             c.Option = p[0];
             Assert.That (()=>c.OptionValues[2], Throws.InstanceOf<ArgumentOutOfRangeException>());
             c.OptionName = "-a";
             Utils.AssertException(typeof(OptionException),
                     "Missing required value for option '-a'.",
-                    c, v => { string ignore = v.OptionValues[0]; });
+                    c, v => { string ignore = v.OptionValues[0]; Console.Write(ignore); });
         }
     }
 }

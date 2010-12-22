@@ -45,9 +45,9 @@ namespace Kistl.API.Tests
                            && o.StringProperty == obj.StringProperty
                            && o.StringProperty.StartsWith(obj2.TestField)
                            && (o.StringProperty.StartsWith("test") || o.StringProperty == "test")
-                           && !o.BoolProperty
                            && (o.StringProperty is string)
-                           && o.BoolProperty ? true : false
+                           && !o.BoolProperty
+                           && o.BoolProperty ? false : true
                            && o.StringProperty == new DateTime().ToShortDateString()
                            && new int[] { 1, obj.IntProperty }.Length == 2
                            && (obj.IntProperty + o.StringProperty.Length) == 4

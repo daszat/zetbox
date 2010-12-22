@@ -536,11 +536,11 @@ namespace Kistl.API.Utils.Tests
 
             Assert.AreEqual(p["h"], p[0]);
             Assert.AreEqual(p["help"], p[0]);
-            Assert.Throws(Is.AssignableTo(typeof(KeyNotFoundException)), () => { var tmp = p["invalid"]; });
+            Assert.Throws(Is.AssignableTo(typeof(KeyNotFoundException)), () => { var tmp = p["invalid"]; Console.Write(tmp); });
 
             Utils.AssertException(typeof(ArgumentException), "prototypes must be null!",
                     p, v => { v.Add("N|NUM=", (int n) => { }); });
-            Assert.That(() => { var ignore = p[null]; } , Throws.InstanceOf<ArgumentNullException>());
+            Assert.That(() => { var ignore = p[null]; Console.Write(ignore); }, Throws.InstanceOf<ArgumentNullException>());
         }
 
         [Test]

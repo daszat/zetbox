@@ -112,8 +112,7 @@ namespace Kistl.API.Tests
 		[Test]
 		public void GetExpressionValue_LambdaExpression()
 		{
-			TestDataObject obj = new TestDataObjectImpl() { TestField = "Hello World" };
-			Expression<Func<TestDataObject, string>> e = (o) => o.StringProperty;
+			Expression<Func<TestDataObject, string>> e = (o => o.StringProperty);
 			Assert.That(() => e.GetExpressionValue<string>(), Throws.InstanceOf<NotSupportedException>());
 		}
 	}
