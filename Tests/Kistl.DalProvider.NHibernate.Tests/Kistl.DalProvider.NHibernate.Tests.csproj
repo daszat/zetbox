@@ -60,7 +60,7 @@
     <Compile Include="Tests\BinarySerializers\should_work_with_ICompoundObjects.cs" />
     <Compile Include="Tests\Blobs\when_using.cs" />
     <Compile Include="Tests\CompoundObject\when_changing.cs" />
-    <Compile Include="Tests\CompoundObject\when_changing_a_compoundobject_list.cs" />
+    <Compile Include="Tests\CompoundObject\when_changing_a_CompoundObject_list.cs" />
     <Compile Include="Tests\CompoundObject\when_changing_a_CompoundObject_member.cs" />
     <Compile Include="Tests\CompoundObject\when_initialized.cs" />
     <Compile Include="Tests\CompoundObject\when_roundtrip.cs" />
