@@ -130,6 +130,7 @@ namespace Kistl.API
 
         private static readonly object _lock = new object();
         private static Dictionary<Type, InterfaceType> _cache = new Dictionary<Type, InterfaceType>();
+        private static Dictionary<InterfaceType, InterfaceType> _rootTypeCache = new Dictionary<InterfaceType, InterfaceType>();
 
         // TODO: Mit david nochmals besprechen
         internal static InterfaceType Create(Type type, IInterfaceTypeChecker typeChecker)
@@ -151,7 +152,6 @@ namespace Kistl.API
         private readonly IInterfaceTypeChecker _typeChecker;
 
         private InterfaceType(Type type, IInterfaceTypeChecker typeChecker)
-            : this()
         {
             if (type == null) throw new ArgumentNullException("type");
             if (typeChecker == null) throw new ArgumentNullException("typeChecker");
@@ -164,7 +164,6 @@ namespace Kistl.API
 
             this._type = type;
             this._typeChecker = typeChecker;
-            this._rootType = null;
         }
 
         private static readonly Type[] BaseInterfaces = new[] { 
@@ -179,8 +178,6 @@ namespace Kistl.API
             typeof(IPersistenceObject) 
         };
 
-        private object _rootType;
-
         /// <summary>
         /// Returns the root of the specified InterfaceType's data model. The
         /// root is the top-most interface in this interface's parentage that 
@@ -193,7 +190,7 @@ namespace Kistl.API
         {
             lock (_lock)
             {
-                if (_rootType != null) return (InterfaceType)_rootType;
+                if (_rootTypeCache.ContainsKey(this)) return _rootTypeCache[this];
 
                 var self = this.Type.IsGenericType ? this.Type.GetGenericTypeDefinition() : this.Type;
                 // the base of the interface we're looking for
@@ -204,8 +201,7 @@ namespace Kistl.API
                     .ToList();
                 candidates.Add(new { Interface = this.Type, Inherited = allInherited });
 
-                _rootType = Create(candidates.OrderBy(i => i.Inherited.Length).First().Interface, _typeChecker);
-                return (InterfaceType)_rootType;
+                return _rootTypeCache[this] = Create(candidates.OrderBy(i => i.Inherited.Length).First().Interface, _typeChecker);
             }
         }
 
