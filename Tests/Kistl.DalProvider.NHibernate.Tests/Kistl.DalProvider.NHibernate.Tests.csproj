@@ -64,6 +64,7 @@
     <Compile Include="Tests\CompoundObject\when_changing_a_CompoundObject_member.cs" />
     <Compile Include="Tests\CompoundObject\when_initialized.cs" />
     <Compile Include="Tests\CompoundObject\when_roundtrip.cs" />
+    <Compile Include="Tests\ContextTests.cs" />
     <Compile Include="Tests\Linq.cs" />
     <Compile Include="Tests\ListPropertiesTests.cs" />
     <Compile Include="Tests\N_to_M_relations\should_synchronize.cs" />
