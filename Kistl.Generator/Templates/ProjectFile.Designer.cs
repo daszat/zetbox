@@ -48,6 +48,7 @@ this.WriteObjects("    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>\r\n
 this.WriteObjects("    <FileAlignment>512</FileAlignment>\r\n");
 this.WriteObjects("    <SignAssembly>true</SignAssembly>\r\n");
 this.WriteObjects("    <AssemblyOriginatorKeyFile>Kistl.Objects.snk</AssemblyOriginatorKeyFile>\r\n");
+this.WriteObjects("    <NoWarn>1591</NoWarn>\r\n");
 this.WriteObjects("  </PropertyGroup>\r\n");
 this.WriteObjects("  <PropertyGroup Condition=\" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' \">\r\n");
 this.WriteObjects("    <DebugSymbols>true</DebugSymbols>\r\n");
@@ -56,9 +57,8 @@ this.WriteObjects("    <Optimize>false</Optimize>\r\n");
 this.WriteObjects("    <DefineConstants>DEBUG;TRACE</DefineConstants>\r\n");
 this.WriteObjects("    <ErrorReport>prompt</ErrorReport>\r\n");
 this.WriteObjects("    <WarningLevel>4</WarningLevel>\r\n");
-this.WriteObjects("    <NoWarn>1591</NoWarn>\r\n");
 this.WriteObjects("    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>\r\n");
-this.WriteObjects("	<!-- hardcode output path for the visual studio build; the generator replaces this value from configuration -->\r\n");
+this.WriteObjects("	<!-- hardcode output path for external builds; the generator replaces this value from configuration -->\r\n");
 this.WriteObjects("    <OutputPath>..\\bin\\Debug\\bin\\",  GetRelativeOutputPath() , "</OutputPath>\r\n");
 this.WriteObjects("    <KistlAPIPath>..\\bin\\Debug\\bin\\</KistlAPIPath>\r\n");
 this.WriteObjects("  </PropertyGroup>\r\n");
@@ -68,18 +68,29 @@ this.WriteObjects("    <Optimize>true</Optimize>\r\n");
 this.WriteObjects("    <DefineConstants>TRACE</DefineConstants>\r\n");
 this.WriteObjects("    <ErrorReport>prompt</ErrorReport>\r\n");
 this.WriteObjects("    <WarningLevel>4</WarningLevel>\r\n");
-this.WriteObjects("    <NoWarn>1591</NoWarn>\r\n");
 this.WriteObjects("    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>\r\n");
-this.WriteObjects("	<!-- hardcode output path for the visual studio build; the generator replaces this value from configuration -->\r\n");
+this.WriteObjects("	<!-- hardcode output path for external builds; the generator replaces this value from configuration -->\r\n");
 this.WriteObjects("    <OutputPath>..\\bin\\Release\\bin\\",  GetRelativeOutputPath() , "</OutputPath>\r\n");
 this.WriteObjects("    <KistlAPIPath>..\\bin\\Release\\bin\\</KistlAPIPath>\r\n");
 this.WriteObjects("  </PropertyGroup>\r\n");
+this.WriteObjects("  <PropertyGroup Condition=\" '$(Configuration)|$(Platform)' == 'Linux.Debug|AnyCPU' \">\r\n");
+this.WriteObjects("    <DebugSymbols>true</DebugSymbols>\r\n");
+this.WriteObjects("    <DebugType>full</DebugType>\r\n");
+this.WriteObjects("    <Optimize>false</Optimize>\r\n");
+this.WriteObjects("    <DefineConstants>DEBUG;TRACE;MONO</DefineConstants>\r\n");
+this.WriteObjects("    <ErrorReport>prompt</ErrorReport>\r\n");
+this.WriteObjects("    <WarningLevel>4</WarningLevel>\r\n");
+this.WriteObjects("    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>\r\n");
+this.WriteObjects("	<!-- hardcode output path for external builds; the generator replaces this value from configuration -->\r\n");
+this.WriteObjects("    <OutputPath>..\\bin\\Debug\\bin\\",  GetRelativeOutputPath() , "</OutputPath>\r\n");
+this.WriteObjects("    <KistlAPIPath>..\\bin\\Debug\\bin\\</KistlAPIPath>\r\n");
+this.WriteObjects("  </PropertyGroup>\r\n");
 this.WriteObjects("  <!-- Has to come in a separate group to receive correct $(OutputPath) -->\r\n");
 this.WriteObjects("  <PropertyGroup>\r\n");
-#line 55 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 66 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
 ApplyAdditionalProperties();
 
-#line 57 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 68 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
 this.WriteObjects("  </PropertyGroup>\r\n");
 this.WriteObjects("  <ItemGroup>\r\n");
 this.WriteObjects("    <AdditionalReferencePath Include=\"$(OutputPath)\" />\r\n");
@@ -105,30 +116,30 @@ this.WriteObjects("    </Reference>\r\n");
 this.WriteObjects("	<Reference Include=\"WindowsBase\">\r\n");
 this.WriteObjects("      <RequiredTargetFramework>3.5</RequiredTargetFramework>\r\n");
 this.WriteObjects("    </Reference>\r\n");
-#line 83 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 94 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
 ApplyAdditionalReferences();
 
-#line 85 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 96 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
 this.WriteObjects("  </ItemGroup>\r\n");
 this.WriteObjects("  <ItemGroup>\r\n");
-#line 88 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 99 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
 foreach (var name in fileNames)
 	{
 
-#line 91 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 102 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
 this.WriteObjects("    <Compile Include=\"",  name , "\" />\r\n");
-#line 93 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 104 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
 }
 
-#line 95 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 106 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
 this.WriteObjects("  </ItemGroup>\r\n");
 this.WriteObjects("  <ItemGroup>\r\n");
 this.WriteObjects("    <None Include=\"Kistl.Objects.snk\" />\r\n");
 this.WriteObjects("  </ItemGroup>\r\n");
-#line 100 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 111 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
 ApplyAdditionalItemGroups();
 
-#line 102 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 113 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
 this.WriteObjects("  <Import Project=\"$(MSBuildBinPath)\\Microsoft.CSharp.targets\" />\r\n");
 this.WriteObjects("  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. \r\n");
 this.WriteObjects("       Other similar extension points exist, see Microsoft.Common.targets.\r\n");
@@ -138,10 +149,10 @@ this.WriteObjects("  -->\r\n");
 this.WriteObjects("  <Target Name=\"AfterBuild\">\r\n");
 this.WriteObjects("  </Target>\r\n");
 this.WriteObjects("  ");
-#line 111 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 122 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
 ApplyAdditionalPropertyGroups();
   
-#line 113 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 124 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
 this.WriteObjects("</Project>\r\n");
 
         }

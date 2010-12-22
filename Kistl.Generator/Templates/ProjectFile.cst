@@ -23,6 +23,7 @@
     <FileAlignment>512</FileAlignment>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Kistl.Objects.snk</AssemblyOriginatorKeyFile>
+    <NoWarn>1591</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,9 +32,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <NoWarn>1591</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-	<!-- hardcode output path for the visual studio build; the generator replaces this value from configuration -->
+	<!-- hardcode output path for external builds; the generator replaces this value from configuration -->
     <OutputPath>..\bin\Debug\bin\<%= GetRelativeOutputPath() %></OutputPath>
     <KistlAPIPath>..\bin\Debug\bin\</KistlAPIPath>
   </PropertyGroup>
@@ -43,11 +43,22 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <NoWarn>1591</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-	<!-- hardcode output path for the visual studio build; the generator replaces this value from configuration -->
+	<!-- hardcode output path for external builds; the generator replaces this value from configuration -->
     <OutputPath>..\bin\Release\bin\<%= GetRelativeOutputPath() %></OutputPath>
     <KistlAPIPath>..\bin\Release\bin\</KistlAPIPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Linux.Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineConstants>DEBUG;TRACE;MONO</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+	<!-- hardcode output path for external builds; the generator replaces this value from configuration -->
+    <OutputPath>..\bin\Debug\bin\<%= GetRelativeOutputPath() %></OutputPath>
+    <KistlAPIPath>..\bin\Debug\bin\</KistlAPIPath>
   </PropertyGroup>
   <!-- Has to come in a separate group to receive correct $(OutputPath) -->
   <PropertyGroup>
