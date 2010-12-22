@@ -414,7 +414,7 @@ namespace Kistl.API.AbstractConsumerTests
         {
             using (IKistlContext ctx = GetContext())
             {
-                TestObjClass obj = ctx.Find<TestObjClass>(Kistl.API.Helper.INVALIDID);
+                ctx.Find<TestObjClass>(Kistl.API.Helper.INVALIDID);
             }
         }
 
