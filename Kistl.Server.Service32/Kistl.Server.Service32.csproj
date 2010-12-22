@@ -58,6 +58,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Kistl.Objects\Kistl.Objects.csproj">
+      <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
+      <Name>Kistl.Objects</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Kistl.Server.Service\Kistl.Server.Service.csproj">
       <Project>{4183E4F7-4ACB-4FE1-A3BF-DDEA50CD9545}</Project>
       <Name>Kistl.Server.Service</Name>
