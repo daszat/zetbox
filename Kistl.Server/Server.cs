@@ -310,7 +310,7 @@ namespace Kistl.Server
                 var ctx = subContainer.Resolve<IKistlServerContext>();
                 var list = ctx.GetQuery<Kistl.App.Base.Module>().ToList();
                 ctx.SubmitChanges();
-                Log.InfoFormat("Loaded [{0}] objects", ctx.AttachedObjects.Count());
+                Log.InfoFormat("Fetched [{0}] modules; loaded [{1}] objects", list.Count, ctx.AttachedObjects.Count());
             }
         }
 

@@ -33,7 +33,7 @@ namespace Kistl.DalProvider.Client.Generator.Templates.ObjectClasses
 this.WriteObjects("        // BEGIN ",  this.GetType() , "\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("        ",  GetModifiers() , " ",  GetReturnType() , " ",  m.Name , "(",  GetParameterDefinitions() , ")\r\n");
-#line 17 "P:\Kistl\Kistl.DalProvider.Client.Generator\Templates\ObjectClasses\InvokeServerMethod.cst"
+#line 16 "P:\Kistl\Kistl.DalProvider.Client.Generator\Templates\ObjectClasses\InvokeServerMethod.cst"
 var returnParam = m.Parameter.SingleOrDefault(parameter => parameter.IsReturnParameter);
 
     string argumentDefs = m.GetArguments();
@@ -51,25 +51,23 @@ var returnParam = m.Parameter.SingleOrDefault(parameter => parameter.IsReturnPar
     if (returnParam == null)
     {
 
-#line 34 "P:\Kistl\Kistl.DalProvider.Client.Generator\Templates\ObjectClasses\InvokeServerMethod.cst"
+#line 33 "P:\Kistl\Kistl.DalProvider.Client.Generator\Templates\ObjectClasses\InvokeServerMethod.cst"
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            Context.ClientInternals().InvokeServerMethod(this, \"",  m.Name , "\", ",  argumentTypes, "",  argumentDefs , ");\r\n");
 this.WriteObjects("        }\r\n");
-#line 38 "P:\Kistl\Kistl.DalProvider.Client.Generator\Templates\ObjectClasses\InvokeServerMethod.cst"
+#line 37 "P:\Kistl\Kistl.DalProvider.Client.Generator\Templates\ObjectClasses\InvokeServerMethod.cst"
 }
     else
     {
-        string returnArgsType = String.Format("MethodReturnEventArgs<{0}>", returnParam.ReturnedTypeAsCSharp());
 
-#line 43 "P:\Kistl\Kistl.DalProvider.Client.Generator\Templates\ObjectClasses\InvokeServerMethod.cst"
+#line 41 "P:\Kistl\Kistl.DalProvider.Client.Generator\Templates\ObjectClasses\InvokeServerMethod.cst"
 this.WriteObjects("        {\r\n");
-this.WriteObjects("            return (",  returnParam.ReturnedTypeAsCSharp() , ")Context.ClientInternals().InvokeServerMethod(this, \"",  m.Name , "\", ",  argumentTypes, "",  argumentDefs , ");\r\n");
+this.WriteObjects("            return (",  returnParam.ReturnedTypeAsCSharp() , ")Context.ClientInternals().InvokeServerMethod(this, \"",  m.Name , "\", ",  argumentTypes , "",  argumentDefs , ");\r\n");
 this.WriteObjects("        }\r\n");
-this.WriteObjects("\r\n");
-#line 48 "P:\Kistl\Kistl.DalProvider.Client.Generator\Templates\ObjectClasses\InvokeServerMethod.cst"
+#line 45 "P:\Kistl\Kistl.DalProvider.Client.Generator\Templates\ObjectClasses\InvokeServerMethod.cst"
 }
 
-#line 50 "P:\Kistl\Kistl.DalProvider.Client.Generator\Templates\ObjectClasses\InvokeServerMethod.cst"
+#line 47 "P:\Kistl\Kistl.DalProvider.Client.Generator\Templates\ObjectClasses\InvokeServerMethod.cst"
 this.WriteObjects("        // END ",  this.GetType() , "\r\n");
 
         }

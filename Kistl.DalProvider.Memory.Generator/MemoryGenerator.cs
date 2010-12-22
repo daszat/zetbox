@@ -16,8 +16,6 @@ namespace Kistl.DalProvider.Memory.Generator
     public class MemoryGenerator
         : AbstractBaseGenerator
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Generator.Memory");
-
         private readonly IServer _server;
 
         public MemoryGenerator(IEnumerable<ISchemaProvider> schemaProviders, IServer server)

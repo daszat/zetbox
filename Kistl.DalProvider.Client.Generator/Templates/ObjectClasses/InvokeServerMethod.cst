@@ -13,7 +13,6 @@
 
         <%= GetModifiers() %> <%= GetReturnType() %> <%= m.Name %>(<%= GetParameterDefinitions() %>)
 <%
-
     var returnParam = m.Parameter.SingleOrDefault(parameter => parameter.IsReturnParameter);
 
     string argumentDefs = m.GetArguments();
@@ -38,12 +37,10 @@
     }
     else
     {
-        string returnArgsType = String.Format("MethodReturnEventArgs<{0}>", returnParam.ReturnedTypeAsCSharp());
 %>
         {
-            return (<%= returnParam.ReturnedTypeAsCSharp() %>)Context.ClientInternals().InvokeServerMethod(this, "<%= m.Name %>", <%= argumentTypes%><%= argumentDefs %>);
+            return (<%= returnParam.ReturnedTypeAsCSharp() %>)Context.ClientInternals().InvokeServerMethod(this, "<%= m.Name %>", <%= argumentTypes %><%= argumentDefs %>);
         }
-
 <%
     }
 %>
