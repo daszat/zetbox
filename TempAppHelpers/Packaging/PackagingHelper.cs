@@ -121,6 +121,10 @@ namespace Kistl.App.Packaging
             AddMetaObjects(result, ctx.GetQuery<Sequence>().Where(i => i.Module.ID == moduleID)
                 .OrderBy(i => i.Description).ThenBy(i => i.ExportGuid));
 
+            // ServiceDescriptors
+            AddMetaObjects(result, ctx.GetQuery<ServiceDescriptor>().Where(i => i.Module.ID == moduleID)
+                .OrderBy(i => i.Description).ThenBy(i => i.ExportGuid));
+
             return result;
         }
 

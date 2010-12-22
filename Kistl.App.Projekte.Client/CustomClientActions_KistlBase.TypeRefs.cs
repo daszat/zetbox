@@ -17,70 +17,7 @@ namespace Kistl.App.Base
 {
     public partial class CustomClientActions_KistlBase
     {
-        // TODO: Move to common
-        private const string transientTypeTypeRefCacheKey = "__TypeTypeRefCache__";
-        public static void OnAsType_TypeRef(TypeRef obj, MethodReturnEventArgs<Type> e, bool throwOnError)
-        {
-            Dictionary<TypeRef, Type> cache;
-            if (obj.Context.TransientState.ContainsKey(transientTypeTypeRefCacheKey))
-            {
-                cache = (Dictionary<TypeRef, Type>)obj.Context.TransientState[transientTypeTypeRefCacheKey];
-            }
-            else
-            {
-                cache = new Dictionary<TypeRef, Type>();
-                obj.Context.TransientState[transientTypeTypeRefCacheKey] = cache;
-            }
 
-            if (cache.ContainsKey(obj))
-            {
-                e.Result = cache[obj];
-                return;
-            }
-
-            e.Result = Type.GetType(String.Format("{0}, {1}", obj.FullName, obj.Assembly.Name), false);
-            if (e.Result == null)
-            {
-                // Try ReflectionOnly
-                System.Reflection.Assembly a = null;
-                try
-                {
-                    a = System.Reflection.Assembly.ReflectionOnlyLoad(obj.Assembly.Name);
-                }
-                catch
-                {
-                    if (throwOnError) throw;
-                    cache[obj] = e.Result;
-                    return;
-                }
-                e.Result = a.GetType(obj.FullName, throwOnError);
-            }
-
-            if (e.Result == null)
-            {
-                cache[obj] = e.Result;
-                return;
-            }
-            if (obj.GenericArguments.Count > 0)
-            {
-                var args = obj.GenericArguments.Select(tRef => tRef.AsType(throwOnError)).ToArray();
-                if (args.Contains(null))
-                {
-                    e.Result = null;
-                    if (throwOnError)
-                    {
-                        throw new InvalidOperationException("Cannot create Type: missing generic argument");
-                    }
-                    else
-                    {
-                        cache[obj] = e.Result;
-                        return;
-                    }
-                }
-                e.Result = e.Result.MakeGenericType(args);
-            }
-            cache[obj] = e.Result;
-        }
 
         public static void OnRegenerateTypeRefs_Assembly(Assembly assembly)
         {

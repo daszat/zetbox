@@ -22,18 +22,24 @@ namespace Kistl.App.Extensions
     {
         private readonly Autofac.ILifetimeScope _container;
         private readonly IFrozenContext _frozenCtx;
+        private readonly IDeploymentRestrictor _restrictor;
 
-        public ServiceControlManager(Autofac.ILifetimeScope container, IFrozenContext frozenCtx)
+        public ServiceControlManager(Autofac.ILifetimeScope container, IFrozenContext frozenCtx, IDeploymentRestrictor restrictor)
         {
+            if (container == null) throw new ArgumentNullException("container");
+            if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
+            if (restrictor == null) throw new ArgumentNullException("restrictor");
+
             this._container = container;
             this._frozenCtx = frozenCtx;
+            this._restrictor = restrictor;
         }
 
         #region IServiceControlManager Members
 
         public void Start()
         {
-            foreach (var s in _frozenCtx.GetQuery<ServiceDescriptor>())
+            foreach (var s in GetServiceDescriptors())
             {
                 Start(s);
             }
@@ -41,7 +47,7 @@ namespace Kistl.App.Extensions
 
         public void Stop()
         {
-            foreach (var s in _frozenCtx.GetQuery<ServiceDescriptor>())
+            foreach (var s in GetServiceDescriptors())
             {
                 Stop(s);
             }
@@ -62,13 +68,22 @@ namespace Kistl.App.Extensions
             var service = GetInstance(descr);
             service.Stop();
         }
+        #endregion
 
         private IService GetInstance(ServiceDescriptor descr)
         {
             var type = descr.TypeRef.AsType(true);
             return (IService)_container.Resolve(type);
         }
-        #endregion
+
+        private IEnumerable<ServiceDescriptor> GetServiceDescriptors()
+        {
+            foreach (var s in _frozenCtx.GetQuery<ServiceDescriptor>())
+            {
+                if (_restrictor.IsAcceptableDeploymentRestriction((int)s.DeploymentRestriction))
+                    yield return s;
+            }
+        }
     }
 
     public class ServiceControlManagerModule : Autofac.Module
