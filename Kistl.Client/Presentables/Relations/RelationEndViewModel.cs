@@ -20,14 +20,11 @@ namespace Kistl.Client.Presentables.Relations
         public new delegate RelationEndViewModel Factory(IKistlContext dataCtx, RelationEnd relEnd);
 #endif
 
-        private RelationEnd _relationEnd;
-
         public RelationEndViewModel(
             IViewModelDependencies appCtx, KistlConfig config, IKistlContext dataCtx,
             RelationEnd relEnd)
             : base(appCtx, config, dataCtx, relEnd)
         {
-            _relationEnd = relEnd;
         }
 
         #region Public interface
