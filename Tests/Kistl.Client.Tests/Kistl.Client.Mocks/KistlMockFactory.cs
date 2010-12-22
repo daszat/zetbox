@@ -15,10 +15,8 @@ namespace Kistl.Client.Mocks
 
     public class KistlMockFactory
     {
-        InterfaceType.Factory _iftFactory;
         public KistlMockFactory(InterfaceType.Factory iftFactory)
         {
-            this._iftFactory = iftFactory;
         }
 
         public Mock<ObjectReferenceProperty> CreateObjectReferenceProperty(
