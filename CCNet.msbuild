@@ -6,7 +6,7 @@
 
     <Message Importance="high" Text="Create temp dir for database backup" />
     <MakeDir Directories="c:\temp" />
-	
+
     <Message Importance="high" Text="cleaning solution" />
     <MSBuild Projects="Kistl.Complete.sln" Targets="Clean" />
 
@@ -17,29 +17,33 @@
 
     <!-- Generate -->
     <Message Importance="high" Text="generate new objects" />
-    <Exec Command="bin\debug\bin\Server\Kistl.Server.Service.exe Kistl.Server.Service\DefaultConfig$(zenv).xml -generate" />
+    <Exec Command="bin\Debug\bin\Server\Kistl.Server.Service.exe Kistl.Server.Service\DefaultConfig$(zenv).xml -generate" />
 
     <Message Importance="high" Text="Backup and remove old generated code" />
     <ItemGroup>
       <OldKistlObjectsSources Include="Kistl.Objects\*.*" />
-      <OldKistlObjectsServerSources Include="Kistl.Objects.Ef\*.*" />
+      <OldKistlObjectsEfSources Include="Kistl.Objects.Ef\*.*" />
+      <OldKistlObjectsNHibernateSources Include="Kistl.Objects.NHibernate\*.*" />
       <OldKistlObjectsMemorySources Include="Kistl.Objects.Memory\*.*" />
     </ItemGroup>
     <Copy SourceFiles="@(OldKistlObjectsSources)" DestinationFolder="Backup\Kistl.Objects\" />
-    <Copy SourceFiles="@(OldKistlObjectsServerSources)" DestinationFolder="Backup\Kistl.Objects.Ef\" />
+    <Copy SourceFiles="@(OldKistlObjectsEfSources)" DestinationFolder="Backup\Kistl.Objects.Ef\" />
+    <Copy SourceFiles="@(OldKistlObjectsNHibernateSources)" DestinationFolder="Backup\Kistl.Objects.NHibernate\" />
     <Copy SourceFiles="@(OldKistlObjectsMemorySources)" DestinationFolder="Backup\Kistl.Objects.Memory\" />
-    <Delete Files="@(OldKistlObjectsSources);@(OldKistlObjectsServerSources);@(OldKistlObjectsMemorySources)" />
-    <RemoveDir Directories="Kistl.Objects\bin;Kistl.Objects.Ef\bin;Kistl.Objects.Memory\bin" />
-    <RemoveDir Directories="Kistl.Objects\obj;Kistl.Objects.Ef\obj;Kistl.Objects.Memory\obj" />
+    <Delete Files="@(OldKistlObjectsSources);@(OldKistlObjectsEfSources);@(OldKistlObjectsNHibernateSources);@(OldKistlObjectsMemorySources)" />
+    <RemoveDir Directories="Kistl.Objects\bin;Kistl.Objects.Ef\bin;Kistl.Objects.NHibernate\bin;Kistl.Objects.Memory\bin" />
+    <RemoveDir Directories="Kistl.Objects\obj;Kistl.Objects.Ef\obj;Kistl.Objects.NHibernate\obj;Kistl.Objects.Memory\obj" />
 
     <Message Importance="high" Text="deploy generated code" />
     <ItemGroup>
       <KistlObjectsSources Include="bin\CodeGen\Kistl.Objects\*.*" />
-      <KistlObjectsServerSources Include="bin\CodeGen\Kistl.Objects.Ef\*.*" />
+      <KistlObjectsEfSources Include="bin\CodeGen\Kistl.Objects.Ef\*.*" />
+      <KistlObjectsNHibernateSources Include="bin\CodeGen\Kistl.Objects.NHibernate\*.*" />
       <KistlObjectsMemorySources Include="bin\CodeGen\Kistl.Objects.Memory\*.*" />
     </ItemGroup>
     <Copy SourceFiles="@(KistlObjectsSources)" DestinationFolder="Kistl.Objects\" />
-    <Copy SourceFiles="@(KistlObjectsServerSources)" DestinationFolder="Kistl.Objects.Ef\" />
+    <Copy SourceFiles="@(KistlObjectsEfSources)" DestinationFolder="Kistl.Objects.Ef\" />
+    <Copy SourceFiles="@(KistlObjectsNHibernateSources)" DestinationFolder="Kistl.Objects.NHibernate\" />
     <Copy SourceFiles="@(KistlObjectsMemorySources)" DestinationFolder="Kistl.Objects.Memory\" />
 
     <!-- re-test building the solution with new code -->
