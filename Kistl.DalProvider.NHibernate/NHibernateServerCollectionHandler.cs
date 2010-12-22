@@ -26,7 +26,7 @@ namespace Kistl.DalProvider.NHibernate
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
 
             var rel = ctx.FindPersistenceObject<Relation>(relId);
-            var relEnd = rel.GetEndFromRole(endRole);
+            //var relEnd = rel.GetEndFromRole(endRole);
             //var relOtherEnd = rel.GetOtherEnd(relEnd);
             var parent = ctx.Find(ctx.GetImplementationType(typeof(TParent)).ToInterfaceType(), parentId);
             var ceType = ctx.ToImplementationType(rel.GetEntryInterfaceType()).Type;
