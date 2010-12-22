@@ -115,8 +115,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
                                 var a = ctx.Find<Assembly>(mdl.ID);
                                 a.RegenerateTypeRefs();
 
-                                if (ctx.AttachedObjects.OfType<ViewModelDescriptor>().Count(d => d.ObjectState == DataObjectState.New) == 0
-                                    && ctx.AttachedObjects.OfType<ViewDescriptor>().Count(d => d.ObjectState == DataObjectState.New) == 0)
+                                if (ctx.AttachedObjects.OfType<IPersistenceObject>().Count(d => d.ObjectState == DataObjectState.New) == 0)
                                 {
                                     // Submit only if no new Descriptor has been created
                                     // when new Descriptor has been created a Workspace will 
@@ -159,11 +158,14 @@ namespace Kistl.Client.Presentables.ModuleEditor
                     lstMdl.Filter.Add(new ToStringFilterModel(FrozenContext));
                     lst.Add(lstMdl);
 
-                    // ControlKinds
-                    //lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, null, DataContext.GetQuery<ControlKind>());
-                    //lstMdl.Filter.Add(new ConstantValueFilterModel("Module = @0", CurrentModule));
-                    //lst.Add(lstMdl);
+                    // ServiceDescriptor
+                    lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, null, DataContext.GetQuery<ServiceDescriptor>());
+                    lstMdl.EnableAutoFilter = false;
+                    lstMdl.Filter.Add(new ConstantValueFilterModel("Module = @0", CurrentModule));
+                    lstMdl.Filter.Add(new ToStringFilterModel(FrozenContext));
+                    lst.Add(lstMdl);
 
+                    // ControlKinds
                     var ctrlKindMdl = ViewModelFactory.CreateViewModel<ControlKindHierarchyViewModel.Factory>().Invoke(DataContext, CurrentModule);
                     lst.Add(ctrlKindMdl);
 

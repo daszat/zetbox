@@ -235,6 +235,13 @@ namespace Kistl.App.Base
 
             FixupFloatingObjectsToString(obj, e);
         }
+
+        public static void OnToString_ServiceDescriptor(Kistl.App.Base.ServiceDescriptor obj, MethodReturnEventArgs<System.String> e)
+        {
+            e.Result = obj.Description;
+
+            FixupFloatingObjectsToString(obj, e);
+        }
         #endregion
 
         /// <summary>

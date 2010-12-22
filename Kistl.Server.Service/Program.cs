@@ -168,15 +168,24 @@ namespace Kistl.Server.Service
                     }
                     else
                     {
+                        Log.Info("Starging ZBox Services");
+                        IServiceControlManager scm = null;
+                        if(container.TryResolve<IServiceControlManager>(out scm))
+                        {
+                            scm.Start();
+                        }
+
+                        Log.Info("Starging WCF Service");
                         var wcfServer = container.Resolve<IKistlAppDomain>();
                         wcfServer.Start(config);
 
                         Log.Info("Waiting for console input to shutdown");
                         Console.WriteLine("Server started, press the anykey to exit");
                         Console.ReadKey();
+                        
                         Log.Info("Shutting down");
-
                         wcfServer.Stop();
+                        if(scm != null) scm.Stop();
                     }
                 }
                 Log.Info("Exiting");

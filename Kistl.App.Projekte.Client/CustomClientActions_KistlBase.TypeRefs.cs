@@ -102,15 +102,18 @@ namespace Kistl.App.Base
 
                     CreateViewModelDescriptors(ctx, newTypes);
                     CreateViewDescriptors(ctx, newTypes);
+                    CreateServiceDescriptors(ctx, newTypes);
 
-                    var newViewModelDescriptors = ctx.AttachedObjects.OfType<ViewModelDescriptor>().Where(d => d.ObjectState == DataObjectState.New).Cast<IDataObject>().ToList();
-                    var newViewDescriptors = ctx.AttachedObjects.OfType<ViewDescriptor>().Where(d => d.ObjectState == DataObjectState.New).Cast<IDataObject>().ToList();
-                    var newAssemblies = ctx.AttachedObjects.OfType<Assembly>().Where(d => d.ObjectState == DataObjectState.New).Cast<IDataObject>().ToList();
+                    var newDescriptors = new List<IDataObject>();
+                    newDescriptors.AddRange(ctx.AttachedObjects.OfType<ViewModelDescriptor>().Where(d => d.ObjectState == DataObjectState.New).Cast<IDataObject>().ToList());
+                    newDescriptors.AddRange(ctx.AttachedObjects.OfType<ViewDescriptor>().Where(d => d.ObjectState == DataObjectState.New).Cast<IDataObject>().ToList());
+                    newDescriptors.AddRange(ctx.AttachedObjects.OfType<ServiceDescriptor>().Where(d => d.ObjectState == DataObjectState.New).Cast<IDataObject>().ToList());
+                    newDescriptors.AddRange(ctx.AttachedObjects.OfType<Assembly>().Where(d => d.ObjectState == DataObjectState.New).Cast<IDataObject>().ToList());
 
-                    if (newViewDescriptors.Count > 0 || newViewModelDescriptors.Count > 0 || newAssemblies.Count > 0)
+                    if (newDescriptors.Count > 0)
                     {
                         var workSpace = _mdlFactory.CreateViewModel<Kistl.Client.Presentables.ObjectEditor.WorkspaceViewModel.Factory>().Invoke(ctx);
-                        foreach (IDataObject i in newViewDescriptors.Union(newViewModelDescriptors).Union(newAssemblies))
+                        foreach (IDataObject i in newDescriptors)
                         {
                             workSpace.AddItem(DataObjectViewModel.Fetch(_mdlFactory, ctx, i));
                         }
@@ -129,6 +132,41 @@ namespace Kistl.App.Base
             }
         }
 
+        private static void CreateServiceDescriptors(IKistlContext ctx, Dictionary<int, TypeRef> newTypes)
+        {
+            using (Logging.Log.InfoTraceMethodCallFormat("CreateServiceModelDescriptors", "Creating ServiceDescriptors"))
+            {
+                foreach (var tr in newTypes.Values)
+                {
+                    var type = tr.AsType(false);
+                    if (type != null)
+                    {
+                        object attr;
+                        // http://blogs.msdn.com/b/kaevans/archive/2005/10/24/484186.aspx
+                        if (type.Assembly.ReflectionOnly)
+                        {
+                            attr = System.Reflection.CustomAttributeData.GetCustomAttributes(type).FirstOrDefault(i => i.Constructor.DeclaringType.FullName == typeof(ServiceDescriptorAttribute).FullName);
+                        }
+                        else
+                        {
+                            attr = type.GetCustomAttributes(typeof(ServiceDescriptorAttribute), false).FirstOrDefault() as ServiceDescriptorAttribute;
+                        }
+
+                        if (attr != null)
+                        {
+                            var descr = ctx.GetQuery<ServiceDescriptor>().FirstOrDefault(i => i.TypeRef == tr);
+                            if (descr == null)
+                            {
+                                descr = ctx.Create<ServiceDescriptor>();
+                                descr.TypeRef = tr;
+                                descr.Description = "TODO: Add description";
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         private static void CreateViewModelDescriptors(IKistlContext ctx, Dictionary<int, TypeRef> newTypes)
         {
             using (Logging.Log.InfoTraceMethodCallFormat("CreateViewModelDescriptors", "Creating ViewModelDescriptors"))
@@ -136,16 +174,18 @@ namespace Kistl.App.Base
                 foreach (var tr in newTypes.Values)
                 {
                     var type = tr.AsType(false);
-                    // Sorry, no support for that yet
-                    // http://blogs.msdn.com/b/kaevans/archive/2005/10/24/484186.aspx
-                    if (type.Assembly.ReflectionOnly)
-                    {
-                        Logging.Log.WarnOnce(string.Format("Unable to create ViewModelDescriptors for Assembly {0}. Assembly was loaded with ReflectionOnly. This is not supported yet", type.Assembly.FullName));
-                        continue;
-                    }
                     if (type != null)
                     {
-                        var attr = type.GetCustomAttributes(typeof(ViewModelDescriptorAttribute), false).FirstOrDefault() as ViewModelDescriptorAttribute;
+                        object attr;
+                        // http://blogs.msdn.com/b/kaevans/archive/2005/10/24/484186.aspx
+                        if (type.Assembly.ReflectionOnly)
+                        {
+                            attr = System.Reflection.CustomAttributeData.GetCustomAttributes(type).FirstOrDefault(i => i.Constructor.DeclaringType.FullName == typeof(ViewModelDescriptorAttribute).FullName);
+                        }
+                        else
+                        {
+                            attr = type.GetCustomAttributes(typeof(ViewModelDescriptorAttribute), false).FirstOrDefault() as ViewModelDescriptorAttribute;
+                        }
                         if (attr != null)
                         {
                             var descr = ctx.GetQuery<ViewModelDescriptor>().FirstOrDefault(i => i.ViewModelRef == tr);
@@ -168,16 +208,21 @@ namespace Kistl.App.Base
                 foreach (var tr in newTypes.Values)
                 {
                     var type = tr.AsType(false);
-                    // Sorry, no support for that yet
-                    // http://blogs.msdn.com/b/kaevans/archive/2005/10/24/484186.aspx
-                    if (type.Assembly.ReflectionOnly)
-                    {
-                        Logging.Log.WarnOnce(string.Format("Unable to create ViewDescriptors for Assembly {0}. Assembly was loaded with ReflectionOnly. This is not supported yet", type.Assembly.FullName));
-                        continue;
-                    }
                     if (type != null)
                     {
-                        var attr = type.GetCustomAttributes(typeof(ViewDescriptorAttribute), false).FirstOrDefault() as ViewDescriptorAttribute;
+                        object attr;
+                        Toolkit? tk = null;
+                        // http://blogs.msdn.com/b/kaevans/archive/2005/10/24/484186.aspx
+                        if (type.Assembly.ReflectionOnly)
+                        {
+                            attr = System.Reflection.CustomAttributeData.GetCustomAttributes(type).FirstOrDefault(i => i.Constructor.DeclaringType.FullName == typeof(ViewDescriptorAttribute).FullName);
+                            if (attr != null) tk = (Toolkit)((System.Reflection.CustomAttributeData)attr).ConstructorArguments.Single().Value;
+                        }
+                        else
+                        {
+                            attr = type.GetCustomAttributes(typeof(ViewDescriptorAttribute), false).FirstOrDefault() as ViewDescriptorAttribute;
+                            if (attr != null) tk = ((ViewDescriptorAttribute)attr).Toolkit;
+                        }
                         if (attr != null)
                         {
                             var descr = ctx.GetQuery<ViewDescriptor>().FirstOrDefault(i => i.ControlRef == tr);
@@ -185,7 +230,7 @@ namespace Kistl.App.Base
                             {
                                 descr = ctx.Create<ViewDescriptor>();
                                 descr.ControlRef = tr;
-                                descr.Toolkit = attr.Toolkit;
+                                if(tk != null) descr.Toolkit = tk.Value;
                             }
                         }
                     }
@@ -246,8 +291,25 @@ namespace Kistl.App.Base
                 catch (FileNotFoundException)
                 {
                 }
-                if (a == null) a = AssemblyLoader.ReflectionOnlyLoadFrom(assembly.Name);
-                if (a == null) throw new InvalidOperationException("Unable to load assembly: " + assembly.Name);
+                if (a == null)
+                {
+                    // Try AssemblyLoader directly
+                    a = AssemblyLoader.ReflectionOnlyLoadFrom(assembly.Name);
+                }
+                if (a == null)
+                {
+                    // Ask user
+                    var f = _mdlFactory.GetSourceFileNameFromUser("Assembly files|*.dll;*.exe", "All files|*.*");
+                    if (!string.IsNullOrEmpty(f))
+                    {
+                        a = System.Reflection.Assembly.ReflectionOnlyLoadFrom(f);
+                    }
+                }
+                if (a == null)
+                {
+                    // Give it up
+                    throw new InvalidOperationException("Unable to load assembly: " + assembly.Name);
+                }
                 var newTypes = a
                     .GetExportedTypes()
                     .Where(t => !t.IsGenericTypeDefinition)
