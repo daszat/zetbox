@@ -16,7 +16,6 @@ namespace Kistl.DalProvider.Client.Tests.KistlContextTests
     public class when_using_ClientIsolationLevel_MergeServerData : Kistl.API.AbstractConsumerTests.AbstractTestFixture
     {
         private IKistlContext ctx;
-        private InterfaceType.Factory _iftFactory;
 
         public override void SetUp()
         {
@@ -24,7 +23,6 @@ namespace Kistl.DalProvider.Client.Tests.KistlContextTests
 
             Logging.Log.Info("KistlContextTests.SetUp() is called");
 
-            this._iftFactory = scope.Resolve<InterfaceType.Factory>();
             ctx = scope.Resolve<Func<ClientIsolationLevel, IKistlContext>>().Invoke(ClientIsolationLevel.MergeServerData);
         }
 

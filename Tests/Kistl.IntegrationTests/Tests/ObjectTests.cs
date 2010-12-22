@@ -53,6 +53,7 @@ namespace Kistl.IntegrationTests
 
                 Project1ID = prj1.ID;
                 Project2ID = prj2.ID;
+                Console.WriteLine("Workaround for mono: {0}, {1}", Project1ID, Project2ID);
             }
         }
 
