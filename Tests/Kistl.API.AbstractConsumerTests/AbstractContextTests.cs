@@ -99,7 +99,6 @@ namespace Kistl.API.AbstractConsumerTests
 
     public abstract class AbstractContextTests : AbstractReadonlyContextTests
     {
-        private static Guid guidTestModule = new Guid("81e8ce31-65eb-46fe-ba86-de7452692d5b");
         protected static Guid sequence = new Guid("5c3d9012-a36d-4910-9e7b-1bf7d8f7d09d");
         protected static Guid continuousSequence = new Guid("57a01b4f-940d-4089-b239-fa5a46dc7d00");
 
