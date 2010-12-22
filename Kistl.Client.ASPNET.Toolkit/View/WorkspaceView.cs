@@ -69,7 +69,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
                     container.Attributes.Add("display", "node");
                     containerObjectsCtrl.Controls.Add(container);
 
-                    var ctrl = (Control)KistlContextManagerModule.ViewModelFactory.CreateDefaultView(mdl, container);
+                    KistlContextManagerModule.ViewModelFactory.CreateDefaultView(mdl, container);
                     _controlsAdded.Add(container);
                 }
             }
