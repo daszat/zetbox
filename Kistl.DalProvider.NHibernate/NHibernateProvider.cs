@@ -21,8 +21,6 @@ namespace Kistl.DalProvider.NHibernate
     public class NHibernateProvider
         : Autofac.Module
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.DalProvider.NHibernate");
-
         public static readonly string ServerAssembly = "Kistl.Objects.NHibernateImpl, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7b69192d05046fdf";
 
         protected override void Load(ContainerBuilder moduleBuilder)
