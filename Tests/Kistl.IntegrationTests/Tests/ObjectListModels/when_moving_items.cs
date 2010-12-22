@@ -5,18 +5,12 @@ namespace Kistl.IntegrationTests.ObjectListModels
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-
+    using Autofac;
     using Kistl.API;
-    using Kistl.API.Client;
     using Kistl.App.Base;
     using Kistl.Client.Presentables;
-    using Kistl.Client.WPF;
-
-    using NUnit.Framework;
-    using Kistl.Client;
-
-    using Autofac;
     using Kistl.Client.Presentables.ValueViewModels;
+    using NUnit.Framework;
 
     public class when_moving_items : AbstractIntegrationTestFixture
     {

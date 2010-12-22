@@ -28,7 +28,6 @@ namespace Kistl.DalProvider.Client.Mocks
 
         public IEnumerable<IDataObject> GetList(IKistlContext ctx, InterfaceType ifType, int maxListCount, bool withEagerLoading, IEnumerable<Expression> filter, IEnumerable<Expression> orderBy, out List<IStreamable> auxObjects)
         {
-            if (ifType == null) throw new ArgumentNullException("ifType");
             if (orderBy != null) throw new ArgumentException("OrderBy is not supported yet");
 
             auxObjects = new List<IStreamable>();
@@ -124,7 +123,6 @@ namespace Kistl.DalProvider.Client.Mocks
 
         public IEnumerable<IDataObject> GetListOf(IKistlContext ctx, InterfaceType ifType, int ID, string property, out List<IStreamable> auxObjects)
         {
-            if (ifType == null) throw new ArgumentNullException("ifType");
             if (ifType != typeof(TestObjClass)) throw new ArgumentOutOfRangeException("type", "Only TestObjClasses are allowed");
             auxObjects = new List<IStreamable>();
 
@@ -155,7 +153,6 @@ namespace Kistl.DalProvider.Client.Mocks
             foreach (var obj in objects)
             {
                 var type = ctx.GetInterfaceType(obj);
-                if (type == null) throw new ArgumentNullException("type");
 
                 if (obj.ObjectState != DataObjectState.Deleted)
                 {

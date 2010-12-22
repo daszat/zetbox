@@ -66,7 +66,7 @@ namespace Kistl.IntegrationTests
             prj.Tasks.Add(t);
         }
 
-        
+
         public override void TearDown()
         {
             DeleteObjects();
@@ -99,16 +99,20 @@ namespace Kistl.IntegrationTests
         {
             using (IKistlContext ctx = GetContext())
             {
-                var obj1 = ctx.GetQuery<Projekt>().Single(o => o.ID == Project1ID);
-                Assert.That(obj1.Name, Is.EqualTo(ProjectName1));
+                var obj1a = ctx.GetQuery<Projekt>().Single(o => o.ID == Project1ID);
+                Assert.That(obj1a.Name, Is.EqualTo(ProjectName1));
 
-                var obj2 = ctx.GetQuery<Projekt>().Single(o => o.ID == Project1ID);
-                Assert.That(obj2.Name, Is.EqualTo(ProjectName1));
+                var obj1b = ctx.GetQuery<Projekt>().Single(o => o.ID == Project1ID);
+                Assert.That(obj1b.Name, Is.EqualTo(ProjectName1));
 
-                Assert.That(object.ReferenceEquals(obj1, obj2), "Obj1 & Obj2 are different Objects");
+                var obj2 = ctx.GetQuery<Projekt>().Single(o => o.ID == Project2ID);
+                Assert.That(obj2.Name, Is.EqualTo(ProjectName2));
+
+                Assert.That(obj1a, Is.SameAs(obj1b), "Context return two Objects for one thing");
+                Assert.That(obj1a, Is.Not.SameAs(obj2), "Context return one Object for different things");
+                Assert.That(obj1b, Is.Not.SameAs(obj2), "Context return one Object for different things");
             }
         }
-
 
         [Test]
         public void GetListOf()
