@@ -34,8 +34,6 @@ namespace Kistl.Generator
         private Stack<TextWriter> contextWriter;
         private string outputDirectory;
 
-        private string logfile;
-
         public ResourceBasedGenerationHost()
         {
         }
@@ -110,12 +108,6 @@ namespace Kistl.Generator
                 {
                     this.fileWriters[i - 1].NextWriter = this.fileWriters[i];
                 }
-            }
-
-            // Initialize logfile:
-            if (settings["logfile"] != null)
-            {
-                this.logfile = Path.Combine(Environment.CurrentDirectory, settings["logfile"]);
             }
         }
 
