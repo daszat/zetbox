@@ -24,8 +24,8 @@ namespace Kistl.Generator
 
         public static string InheritanceAssociationName(InterfaceType parentClass, InterfaceType childClass)
         {
-            if (parentClass == null) { throw new ArgumentNullException("parentClass"); }
-            if (childClass == null) { throw new ArgumentNullException("childClass"); }
+            //if (parentClass == null) { throw new ArgumentNullException("parentClass"); }
+            //if (childClass == null) { throw new ArgumentNullException("childClass"); }
 
             return InheritanceAssociationName(parentClass.Type.Name, childClass.Type.Name);
         }

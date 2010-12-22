@@ -23,7 +23,7 @@
 <%
 
     RelationEnd relEnd = rel.GetEndFromRole(endRole);
-    RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
+    // RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
 
     string idsListName = name + "Ids";
     

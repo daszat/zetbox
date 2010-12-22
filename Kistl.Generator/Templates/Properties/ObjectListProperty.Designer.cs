@@ -53,7 +53,7 @@ namespace Kistl.Generator.Templates.Properties
         {
 #line 25 "P:\Kistl\Kistl.Generator\Templates\Properties\ObjectListProperty.cst"
 RelationEnd relEnd = rel.GetEndFromRole(endRole);
-    RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
+    // RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
 
     string idsListName = name + "Ids";
     

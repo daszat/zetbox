@@ -66,7 +66,7 @@ namespace Kistl.Generator.Templates.ObjectClasses
             var rel = RelationExtensions.Lookup(ctx, prop);
 
             var relEnd = rel.GetEnd(prop);
-            var otherEnd = rel.GetOtherEnd(relEnd);
+            //var otherEnd = rel.GetOtherEnd(relEnd);
 
             // without navigator, there should be no property
             if (relEnd.Navigator == null)

@@ -25,7 +25,7 @@ namespace Kistl.Generator.Templates.ObjectClasses
                 .Where(p =>
                 {
                     Relation rel = RelationExtensions.Lookup(ctx, p);
-                    RelationEnd relEnd = rel.GetEnd(p);
+                    //RelationEnd relEnd = rel.GetEnd(p);
 
                     return (rel.Storage == StorageType.MergeIntoA && rel.A.Navigator == p)
                         || (rel.Storage == StorageType.MergeIntoB && rel.B.Navigator == p);
