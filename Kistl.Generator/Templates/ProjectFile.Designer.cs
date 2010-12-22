@@ -58,7 +58,7 @@ this.WriteObjects("    <DefineConstants>DEBUG;TRACE</DefineConstants>\r\n");
 this.WriteObjects("    <ErrorReport>prompt</ErrorReport>\r\n");
 this.WriteObjects("    <WarningLevel>4</WarningLevel>\r\n");
 this.WriteObjects("    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>\r\n");
-this.WriteObjects("	<!-- hardcode output path for external builds; the generator replaces this value from configuration -->\r\n");
+this.WriteObjects("    <!-- hardcode output path for external builds; the generator replaces this value from configuration -->\r\n");
 this.WriteObjects("    <OutputPath>..\\bin\\Debug\\bin\\",  GetRelativeOutputPath() , "</OutputPath>\r\n");
 this.WriteObjects("    <KistlAPIPath>..\\bin\\Debug\\bin\\</KistlAPIPath>\r\n");
 this.WriteObjects("  </PropertyGroup>\r\n");
@@ -69,7 +69,7 @@ this.WriteObjects("    <DefineConstants>TRACE</DefineConstants>\r\n");
 this.WriteObjects("    <ErrorReport>prompt</ErrorReport>\r\n");
 this.WriteObjects("    <WarningLevel>4</WarningLevel>\r\n");
 this.WriteObjects("    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>\r\n");
-this.WriteObjects("	<!-- hardcode output path for external builds; the generator replaces this value from configuration -->\r\n");
+this.WriteObjects("    <!-- hardcode output path for external builds; the generator replaces this value from configuration -->\r\n");
 this.WriteObjects("    <OutputPath>..\\bin\\Release\\bin\\",  GetRelativeOutputPath() , "</OutputPath>\r\n");
 this.WriteObjects("    <KistlAPIPath>..\\bin\\Release\\bin\\</KistlAPIPath>\r\n");
 this.WriteObjects("  </PropertyGroup>\r\n");
@@ -80,17 +80,19 @@ this.WriteObjects("    <Optimize>false</Optimize>\r\n");
 this.WriteObjects("    <DefineConstants>DEBUG;TRACE;MONO</DefineConstants>\r\n");
 this.WriteObjects("    <ErrorReport>prompt</ErrorReport>\r\n");
 this.WriteObjects("    <WarningLevel>4</WarningLevel>\r\n");
+this.WriteObjects("    <!-- mono is quite more pedantic; ignore superfluous local vars and fields for now -->\r\n");
+this.WriteObjects("    <NoWarn>1591,0168,0414</NoWarn> \r\n");
 this.WriteObjects("    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>\r\n");
-this.WriteObjects("	<!-- hardcode output path for external builds; the generator replaces this value from configuration -->\r\n");
+this.WriteObjects("    <!-- hardcode output path for external builds; the generator replaces this value from configuration -->\r\n");
 this.WriteObjects("    <OutputPath>..\\bin\\Debug\\bin\\",  GetRelativeOutputPath() , "</OutputPath>\r\n");
 this.WriteObjects("    <KistlAPIPath>..\\bin\\Debug\\bin\\</KistlAPIPath>\r\n");
 this.WriteObjects("  </PropertyGroup>\r\n");
 this.WriteObjects("  <!-- Has to come in a separate group to receive correct $(OutputPath) -->\r\n");
 this.WriteObjects("  <PropertyGroup>\r\n");
-#line 66 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 68 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
 ApplyAdditionalProperties();
 
-#line 68 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 70 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
 this.WriteObjects("  </PropertyGroup>\r\n");
 this.WriteObjects("  <ItemGroup>\r\n");
 this.WriteObjects("    <AdditionalReferencePath Include=\"$(OutputPath)\" />\r\n");
@@ -113,33 +115,33 @@ this.WriteObjects("    <Reference Include=\"Autofac\">\r\n");
 this.WriteObjects("      <SpecificVersion>False</SpecificVersion>\r\n");
 this.WriteObjects("      <HintPath>$(KistlAPIPath)\\Common\\Autofac.dll</HintPath>\r\n");
 this.WriteObjects("    </Reference>\r\n");
-this.WriteObjects("	<Reference Include=\"WindowsBase\">\r\n");
+this.WriteObjects("    <Reference Include=\"WindowsBase\">\r\n");
 this.WriteObjects("      <RequiredTargetFramework>3.5</RequiredTargetFramework>\r\n");
 this.WriteObjects("    </Reference>\r\n");
-#line 94 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 96 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
 ApplyAdditionalReferences();
 
-#line 96 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 98 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
 this.WriteObjects("  </ItemGroup>\r\n");
 this.WriteObjects("  <ItemGroup>\r\n");
-#line 99 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 101 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
 foreach (var name in fileNames)
-	{
+    {
 
-#line 102 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
-this.WriteObjects("    <Compile Include=\"",  name , "\" />\r\n");
 #line 104 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+this.WriteObjects("    <Compile Include=\"",  name , "\" />\r\n");
+#line 106 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
 }
 
-#line 106 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 108 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
 this.WriteObjects("  </ItemGroup>\r\n");
 this.WriteObjects("  <ItemGroup>\r\n");
 this.WriteObjects("    <None Include=\"Kistl.Objects.snk\" />\r\n");
 this.WriteObjects("  </ItemGroup>\r\n");
-#line 111 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 113 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
 ApplyAdditionalItemGroups();
 
-#line 113 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 115 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
 this.WriteObjects("  <Import Project=\"$(MSBuildBinPath)\\Microsoft.CSharp.targets\" />\r\n");
 this.WriteObjects("  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. \r\n");
 this.WriteObjects("       Other similar extension points exist, see Microsoft.Common.targets.\r\n");
@@ -149,10 +151,10 @@ this.WriteObjects("  -->\r\n");
 this.WriteObjects("  <Target Name=\"AfterBuild\">\r\n");
 this.WriteObjects("  </Target>\r\n");
 this.WriteObjects("  ");
-#line 122 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 124 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
 ApplyAdditionalPropertyGroups();
   
-#line 124 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 126 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
 this.WriteObjects("</Project>\r\n");
 
         }

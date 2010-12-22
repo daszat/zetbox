@@ -1,7 +1,7 @@
 ﻿<%@ CodeTemplate Language="C#" 
-	Name="ProjectFile"
-	ClassName="Kistl.Generator.Templates.ProjectFile" 
-	Inherits="Kistl.Generator.ResourceTemplate" %>
+    Name="ProjectFile"
+    ClassName="Kistl.Generator.Templates.ProjectFile" 
+    Inherits="Kistl.Generator.ResourceTemplate" %>
 <%@ Import Namespace="System.Collections.Generic" %>
 <%@ Import Namespace="Kistl.API.Server" %>
 <%@ Parameter Name="ctx" Type="Kistl.API.IKistlContext" %>
@@ -33,7 +33,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-	<!-- hardcode output path for external builds; the generator replaces this value from configuration -->
+    <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
     <OutputPath>..\bin\Debug\bin\<%= GetRelativeOutputPath() %></OutputPath>
     <KistlAPIPath>..\bin\Debug\bin\</KistlAPIPath>
   </PropertyGroup>
@@ -44,7 +44,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-	<!-- hardcode output path for external builds; the generator replaces this value from configuration -->
+    <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
     <OutputPath>..\bin\Release\bin\<%= GetRelativeOutputPath() %></OutputPath>
     <KistlAPIPath>..\bin\Release\bin\</KistlAPIPath>
   </PropertyGroup>
@@ -55,15 +55,17 @@
     <DefineConstants>DEBUG;TRACE;MONO</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <!-- mono is quite more pedantic; ignore superfluous local vars and fields for now -->
+    <NoWarn>1591,0168,0414</NoWarn> 
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-	<!-- hardcode output path for external builds; the generator replaces this value from configuration -->
+    <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
     <OutputPath>..\bin\Debug\bin\<%= GetRelativeOutputPath() %></OutputPath>
     <KistlAPIPath>..\bin\Debug\bin\</KistlAPIPath>
   </PropertyGroup>
   <!-- Has to come in a separate group to receive correct $(OutputPath) -->
   <PropertyGroup>
 <%
-	ApplyAdditionalProperties();
+    ApplyAdditionalProperties();
 %>
   </PropertyGroup>
   <ItemGroup>
@@ -87,28 +89,28 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>$(KistlAPIPath)\Common\Autofac.dll</HintPath>
     </Reference>
-	<Reference Include="WindowsBase">
+    <Reference Include="WindowsBase">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
 <%
-	ApplyAdditionalReferences();
+    ApplyAdditionalReferences();
 %>
   </ItemGroup>
   <ItemGroup>
 <%
-	foreach (var name in fileNames)
-	{
+    foreach (var name in fileNames)
+    {
 %>
     <Compile Include="<%= name %>" />
 <%
-	}
+    }
 %>
   </ItemGroup>
   <ItemGroup>
     <None Include="Kistl.Objects.snk" />
   </ItemGroup>
 <%
-	ApplyAdditionalItemGroups();
+    ApplyAdditionalItemGroups();
 %>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -119,6 +121,6 @@
   <Target Name="AfterBuild">
   </Target>
   <%
-	ApplyAdditionalPropertyGroups();
+    ApplyAdditionalPropertyGroups();
   %>
 </Project>
