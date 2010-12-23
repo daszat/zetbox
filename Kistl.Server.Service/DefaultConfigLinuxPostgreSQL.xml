@@ -6,10 +6,10 @@
     <DatabaseProvider>Npgsql</DatabaseProvider>
     <ConnectionString>Server=localhost;Database=zbox;User Id=zbox;Password=b-cXqMyXEYea2kkjUhkS</ConnectionString>
 
-    <DocumentStore>DocumentStore\Server\</DocumentStore>
-    <LogFilePath>bin\LogFiles</LogFilePath>
-    <CodeGenWorkingPath>bin\CodeGenNext</CodeGenWorkingPath>
-    <CodeGenOutputPath>bin\CodeGen</CodeGenOutputPath>
+    <DocumentStore>DocumentStore/Server/</DocumentStore>
+    <LogFilePath>bin/LogFiles</LogFilePath>
+    <CodeGenWorkingPath>bin/CodeGenNext</CodeGenWorkingPath>
+    <CodeGenOutputPath>bin/CodeGen</CodeGenOutputPath>
     <CodeGenArchivePath>Backup</CodeGenArchivePath>
     <Modules>
       <Module>Kistl.API.ApiModule, Kistl.API</Module>
@@ -35,17 +35,17 @@
       -->
     </Modules>
     <ClientFilesLocations>
-      <Location Name="Client">P:\Kistl\bin\Debug\bin\Client</Location>
-      <Location Name="Common">P:\Kistl\bin\Debug\bin\Common</Location>
-      <Location Name="CodeGen">P:\Kistl\bin\CodeGen\bin\Debug</Location>
+      <Location Name="Client">P:/Kistl/bin/Debug/bin/Client</Location>
+      <Location Name="Common">P:/Kistl/bin/Debug/bin/Common</Location>
+      <Location Name="CodeGen">P:/Kistl/bin/CodeGen/bin/Debug</Location>
     </ClientFilesLocations>
   </Server>
   <SourceFileLocation>
     <!-- default probe path -->
-    <string>.\bin\CodeGen\bin\Debug</string>
+    <string>./bin/CodeGen/bin/Debug</string>
     <!-- common libaries -->
-    <string>.\bin\Debug\bin\Common</string>
+    <string>./bin/Debug/bin/Common</string>
     <!-- Fallback path for local development -->
-    <string>.\bin\Debug\bin\Server\Fallback</string>
+    <string>./bin/Debug/bin/Server/Fallback</string>
   </SourceFileLocation>
 </KistlConfig>
