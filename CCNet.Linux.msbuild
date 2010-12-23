@@ -6,16 +6,11 @@
     <MakeDir Directories="bin" />
     -->
 
-    <!-- workaround https://bugzilla.novell.com/show_bug.cgi?id=660508
     <Message Importance="high" Text="cleaning solution" />
     <MSBuild Projects="Kistl.Complete.sln" Targets="Clean" />
 
-    <Message Importance="high" Text="rebuild entire solution" />
-    <MSBuild Projects="Kistl.Complete.sln" Targets="Rebuild" />
-    -->
-
     <Message Importance="high" Text="build entire solution" />
-    <MSBuild Projects="test.proj" Targets="Build" Properties="Configuration=Linux.Debug" />
+    <MSBuild Projects="Kistl.Complete.sln" Targets="Build" Properties="Configuration=Linux.Debug" />
 
     <Exec Command="cp Kistl.Server.Service\app.linux.config bin\Debug\bin\Server\Kistl.Server.Service.exe.config" />
 
