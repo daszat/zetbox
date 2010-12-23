@@ -89,7 +89,7 @@ namespace Kistl.API
         /// <param name="config">must not be null</param>
         private static void InitialiseTargetAssemblyFolder(KistlConfig config)
         {
-            TargetAssemblyFolder = Path.Combine(config.WorkingFolder, @"bin\");
+            TargetAssemblyFolder = Path.Combine(config.WorkingFolder, "bin");
             Directory.CreateDirectory(TargetAssemblyFolder);
 
             // Delete stale Assemblies
