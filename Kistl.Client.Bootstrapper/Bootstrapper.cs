@@ -23,7 +23,6 @@ namespace Kistl.Client.Bootstrapper
         WebClient service = new WebClient();
         AutoResetEvent downloadEvent = new AutoResetEvent(false);
         string startExec = string.Empty;
-        string startConfig = string.Empty;
         string targetDir = string.Empty;
         #endregion
 
@@ -45,7 +44,6 @@ namespace Kistl.Client.Bootstrapper
                 targetDir = PrepareTargetDir();
 
                 startExec = string.Empty;
-                startConfig = string.Empty;
 
                 InitProgressBar(files.Files.Length);
 
@@ -143,14 +141,9 @@ namespace Kistl.Client.Bootstrapper
         {
             var targetFile = f.GetFullFileName(targetDir);
 
-            switch (f.Type)
+            if(f.Type == FileType.Exec)
             {
-                case FileType.Executalable:
                     startExec = targetFile;
-                    break;
-                case FileType.AppConfig:
-                    startConfig = targetFile;
-                    break;
             }
 
             if (File.Exists(targetFile))

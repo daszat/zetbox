@@ -10,7 +10,7 @@ namespace Kistl.Client.Bootstrapper
     public enum FileType
     {
         File = 1,
-        Executalable = 2,
+        Exec = 2,
         AppConfig = 3,
     }
 

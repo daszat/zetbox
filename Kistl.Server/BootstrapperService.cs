@@ -14,7 +14,7 @@ namespace Kistl.Server
     public enum FileType
     {
         File = 1,
-        Executalable = 2,
+        Exec = 2,
         AppConfig = 3,
     }
 
@@ -79,7 +79,7 @@ namespace Kistl.Server
             switch (fi.Name.ToLower())
             {
                 case "kistl.client.wpf.exe":
-                    return FileType.Executalable;
+                    return FileType.Exec;
                 case "kistl.client.wpf.exe.config":
                     return FileType.AppConfig;
                 default:
