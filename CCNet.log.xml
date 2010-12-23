@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+
+<!DOCTYPE log4net:events SYSTEM "log4net-events.dtd" [<!ENTITY data SYSTEM "bin/log.xml">]>
+
+<log4net:events version="1.2" xmlns:log4net="http://logging.apache.org/log4net/schemas/log4net-events-1.2">
+    &data;
+</log4net:events>
+
