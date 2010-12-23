@@ -82,27 +82,30 @@ namespace Kistl.Client.Presentables.KistlBase
         {
             if (appMdl == null) throw new ArgumentNullException("appMdl");
 
-            if (appMdl.WindowModelType != null)
+            ViewModelFactory.WithWaitDialog(() =>
             {
-                // responsibility to externalCtx's disposal passes to newWorkspace
-                var newWorkspace = ViewModelFactory.CreateViewModel<WindowViewModel.Factory>(appMdl.WindowModelType).Invoke(
-                    ctxFactory(ClientIsolationLevel.PrefereClientData) // TODO: Backward compatibility? 
-                );
-                ViewModelFactory.ShowModel(newWorkspace, true);
-            }
-            else if (appMdl.RootScreen != null)
-            {
-                var newWorkspace = ViewModelFactory.CreateViewModel<NavigatorViewModel.Factory>().Invoke(
-                    ctxFactory(ClientIsolationLevel.MergeServerData), // TODO: no data changes on navigation screens?
-                    appMdl.RootScreen
-                );
-                ViewModelFactory.ShowModel(newWorkspace, true);
-            }
-            else
-            {
-                // TODO: protect by constraint. See Case#1649
-                throw new NotSupportedException("Application has no defined startup Screen");
-            }
+                if (appMdl.WindowModelType != null)
+                {
+                    // responsibility to externalCtx's disposal passes to newWorkspace
+                    var newWorkspace = ViewModelFactory.CreateViewModel<WindowViewModel.Factory>(appMdl.WindowModelType).Invoke(
+                        ctxFactory(ClientIsolationLevel.PrefereClientData) // TODO: Backward compatibility? 
+                    );
+                    ViewModelFactory.ShowModel(newWorkspace, true);
+                }
+                else if (appMdl.RootScreen != null)
+                {
+                    var newWorkspace = ViewModelFactory.CreateViewModel<NavigatorViewModel.Factory>().Invoke(
+                        ctxFactory(ClientIsolationLevel.MergeServerData), // TODO: no data changes on navigation screens?
+                        appMdl.RootScreen
+                    );
+                    ViewModelFactory.ShowModel(newWorkspace, true);
+                }
+                else
+                {
+                    // TODO: protect by constraint. See Case#1649
+                    throw new NotSupportedException("Application has no defined startup Screen");
+                }
+            });
         }
 
         #endregion

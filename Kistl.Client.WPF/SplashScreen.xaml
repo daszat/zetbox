@@ -1,7 +1,7 @@
 ﻿<Window x:Class="Kistl.Client.WPF.SplashScreen"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Title="Kistl" Height="150" Width="300" WindowStyle="None" Topmost="True"
+    Title="Kistl" Height="150" Width="300" WindowStyle="None"
     x:Name="MyCtrl"
     Background="Transparent" AllowsTransparency="True"
     ResizeMode="NoResize" WindowStartupLocation="CenterScreen" ShowInTaskbar="False">

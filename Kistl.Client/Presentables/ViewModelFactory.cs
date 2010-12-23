@@ -421,9 +421,18 @@ namespace Kistl.Client.Presentables
 
         public abstract void ShowMessage(string message, string caption);
 
+        private static readonly object _waitDlgLock = new object();
+        private static int _waitDlgCounter = 0;
+
         private void timer_callback(object args)
         {
-            ShowWaitDialog();
+            lock (_waitDlgLock)
+            {
+                if (_waitDlgCounter++ == 0)
+                {
+                    ShowWaitDialog();
+                }
+            }
         }
         
         public void WithWaitDialog(Action task)
@@ -431,8 +440,21 @@ namespace Kistl.Client.Presentables
             if (task == null) throw new ArgumentNullException("task");
             using (Timer timer = new Timer(new TimerCallback(timer_callback), null, 200, Timeout.Infinite))
             {
-                task();
-                CloseWaitDialog();
+                try
+                {
+                    task();
+                }
+                finally
+                {
+                    lock (_waitDlgLock)
+                    {
+                        if (--_waitDlgCounter <= 0)
+                        {
+                            CloseWaitDialog();
+                            _waitDlgCounter = 0;
+                        }
+                    }
+                }
             }
         }
 
