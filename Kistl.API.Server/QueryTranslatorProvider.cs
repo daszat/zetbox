@@ -111,7 +111,8 @@ namespace Kistl.API.Server
 
                 object result = Source.Provider.Execute(translated);
 
-                result = WrapResult(result);
+                if (result != null)
+                    result = WrapResult(result);
 
                 if (result != null && result is IPersistenceObject)
                 {
