@@ -219,7 +219,7 @@ namespace Kistl.DalProvider.NHibernate
         {
             // TODO: use Autofac as BytecodeFactory and use a local autofac container to 
             //       replace this A.CI call.
-            return Activator.CreateInstance(ToImplementationType(ifType).Type);
+            return AttachAndWrap((IProxyObject)Activator.CreateInstance(ToImplementationType(ifType).Type));
         }
 
         public override IDataObject Find(InterfaceType ifType, int ID)
@@ -266,9 +266,14 @@ namespace Kistl.DalProvider.NHibernate
         {
             CheckDisposed();
             // TODO: t->timpl
-            var q = _nhSession.CreateQuery(String.Format("from {0} e where e.ExportGuid = :guid", typeof(T).FullName));
-            q.SetGuid("guid", exportGuid);
-            return (T)q.UniqueResult();
+            var q = _nhSession
+                .CreateCriteria(ToImplementationType(GetInterfaceType(typeof(T).FullName)).Type.FullName)
+                .Add(global::NHibernate.Criterion.Restrictions.Eq("ExportGuid", exportGuid))
+                .UniqueResult();
+            if (q == null)
+                return null;
+            else
+                return (T)AttachAndWrap((IProxyObject)q);
         }
 
         public override IEnumerable<IPersistenceObject> FindPersistenceObjects(InterfaceType ifType, IEnumerable<Guid> exportGuids)
@@ -301,7 +306,7 @@ namespace Kistl.DalProvider.NHibernate
         public override ImplementationType ToImplementationType(InterfaceType t)
         {
             CheckDisposed();
-            return _implTypeFactory(Type.GetType(String.Format("{0}NHibernate{1}+{2}Interface,{3}", t.Type.FullName, Kistl.API.Helper.ImplementationSuffix, t.Type.Name, NHibernateProvider.ServerAssembly)));
+            return _implTypeFactory(Type.GetType(String.Format("{0}NHibernate{1}+{2}Proxy,{3}", t.Type.FullName, Kistl.API.Helper.ImplementationSuffix, t.Type.Name, NHibernateProvider.ServerAssembly)));
         }
 
         protected override int ExecGetSequenceNumber(Guid sequenceGuid)
