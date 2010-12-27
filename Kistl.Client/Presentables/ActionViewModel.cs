@@ -73,7 +73,7 @@ namespace Kistl.Client.Presentables
         {
             var parameter = Method.Parameter.Where(i => !i.IsReturnParameter).ToArray();
             MethodInfo info = Object.GetType().FindMethod(Method.Name, parameter.Select(i => i.GetParameterType()).ToArray());
-            if (info == null) throw new InvalidOperationException(string.Format("Method '{0}' not found", Method.Name));
+            if (info == null) throw new InvalidOperationException(string.Format(ActionViewModelResources.MethodNotFoundException, Method.Name));
 
             if (parameter.Length > 0)
             {

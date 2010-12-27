@@ -195,6 +195,18 @@ namespace Kistl.API.Configuration
             public bool ThrowErrors { get; set; }
 
             /// <summary>
+            /// Overrides the current system culture
+            /// </summary>
+            [XmlElement(IsNullable=true)]
+            public string Culture { get; set; }
+
+            /// <summary>
+            /// Overrides the current system ui culture
+            /// </summary>
+            [XmlElement(IsNullable = true)]
+            public string UICulture { get; set; }
+
+            /// <summary>
             /// Path to the Document Store - TODO: Will be replaced by a Document Cache
             /// </summary>
             [XmlElement(IsNullable = false)]

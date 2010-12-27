@@ -140,7 +140,7 @@ namespace Kistl.Client.Presentables.ObjectBrowser
 
         public override string Name
         {
-            get { return "Workspace"; }
+            get { return WorkspaceViewModelResources.Name; }
         }
     }
 
@@ -156,7 +156,7 @@ namespace Kistl.Client.Presentables.ObjectBrowser
         private readonly Func<IKistlContext> ctxFactory;
 
         public CreateNewInstanceExternallyCommand(IViewModelDependencies appCtx, IKistlContext dataCtx, Func<IKistlContext> ctxFactory)
-            : base(appCtx, dataCtx, "External New ...", "Create a new instance of this object class in a new window")
+            : base(appCtx, dataCtx, WorkspaceViewModelResources.CreateNewInstanceExternallyCommand_Name, WorkspaceViewModelResources.CreateNewInstanceExternallyCommand_Tooltip)
         {
             this.ctxFactory = ctxFactory;
         }

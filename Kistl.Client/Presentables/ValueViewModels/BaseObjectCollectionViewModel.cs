@@ -209,8 +209,12 @@ namespace Kistl.Client.Presentables.ValueViewModels
             {
                 if (_CreateNewCommand == null)
                 {
-                    _CreateNewCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>()
-                        .Invoke(DataContext, "Add new", "Creates a new Item suitable for adding to the list.", () => CreateNewItem(), () => AllowAddNew && !DataContext.IsReadonly && !IsReadOnly);
+                    _CreateNewCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
+                        DataContext, 
+                        BaseObjectCollectionViewModelResources.CreateNewCommand_Name,
+                        BaseObjectCollectionViewModelResources.CreateNewCommand_Tooltip, 
+                        () => CreateNewItem(), 
+                        () => AllowAddNew && !DataContext.IsReadonly && !IsReadOnly);
                 }
                 return _CreateNewCommand;
             }
@@ -223,8 +227,12 @@ namespace Kistl.Client.Presentables.ValueViewModels
             {
                 if (_AddExistingCommand == null)
                 {
-                    _AddExistingCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>()
-                        .Invoke(DataContext, "Add existing", "Adds an existing item into this list.", () => AddExistingItem(), () => AllowAddExisting && !DataContext.IsReadonly && !IsReadOnly);
+                    _AddExistingCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
+                        DataContext, 
+                        BaseObjectCollectionViewModelResources.AddExistingCommand_Name,
+                        BaseObjectCollectionViewModelResources.AddExistingCommand_Tooltip, 
+                        () => AddExistingItem(), 
+                        () => AllowAddExisting && !DataContext.IsReadonly && !IsReadOnly);
                 }
                 return _AddExistingCommand;
             }
@@ -237,8 +245,10 @@ namespace Kistl.Client.Presentables.ValueViewModels
             {
                 if (_RemoveCommand == null)
                 {
-                    _RemoveCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>()
-                        .Invoke(DataContext, "Remove", "Remove selection from list",
+                    _RemoveCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
+                        DataContext, 
+                        BaseObjectCollectionViewModelResources.RemoveCommand_Name, 
+                        BaseObjectCollectionViewModelResources.RemoveCommand_Tooltip,
                         () => SelectedItems.ToList().ForEach(i => RemoveItem(i)), // Collection will change while deleting!
                         () => SelectedItems != null && SelectedItems.Count() > 0 && AllowRemove && !IsReadOnly);
                 }
@@ -253,8 +263,10 @@ namespace Kistl.Client.Presentables.ValueViewModels
             {
                 if (_DeleteCommand == null)
                 {
-                    _DeleteCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>()
-                        .Invoke(DataContext, "Delete", "Delete selection from data store",
+                    _DeleteCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
+                        DataContext, 
+                        BaseObjectCollectionViewModelResources.DeleteCommand_Name,
+                        BaseObjectCollectionViewModelResources.DeleteCommand_Tooltip,
                         () => SelectedItems.ToList().ForEach(i => DeleteItem(i)), // Collection will change while deleting!
                         () => SelectedItems != null && SelectedItems.Count() > 0 && AllowDelete && !DataContext.IsReadonly && !IsReadOnly);
                 }

@@ -112,7 +112,7 @@ namespace Kistl.Client.Presentables
 
         public override string Name
         {
-            get { return "Choose object of Type " + ListViewModel.DataTypeViewModel.Name; }
+            get { return string.Format(DataObjectSelectionTaskViewModelResources.Name, ListViewModel.DataTypeViewModel.Name); }
         }
     }
 }

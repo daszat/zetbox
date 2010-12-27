@@ -79,7 +79,12 @@ namespace Kistl.Client.Presentables
             {
                 if (_InvokeCommand == null)
                 {
-                    _InvokeCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, "Invoke", "Returns all parameter", Invoke, null);
+                    _InvokeCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
+                        DataContext, 
+                        ValueInputTaskViewModelResources.InvokeCommand_Name,
+                        ValueInputTaskViewModelResources.InvokeCommand_Tooltip, 
+                        Invoke, 
+                        null);
                 }
                 return _InvokeCommand;
             }
@@ -99,7 +104,12 @@ namespace Kistl.Client.Presentables
             {
                 if (_CancelCommand == null)
                 {
-                    _CancelCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, "Cancel", "Cancel this dialog", Cancel, null);
+                    _CancelCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
+                        DataContext, 
+                        ValueInputTaskViewModelResources.CancelCommand_Name,
+                        ValueInputTaskViewModelResources.CancelCommand_Tooltip, 
+                        Cancel, 
+                        null);
                 }
                 return _CancelCommand;
             }

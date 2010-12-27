@@ -24,7 +24,7 @@ namespace Kistl.Client.Presentables.KistlBase
         public OpenDataObjectCommand(IViewModelDependencies appCtx, Func<IKistlContext> ctxFactory,
             IKistlContext dataCtx, ControlKind reqWorkspaceKind, ControlKind reqEditorKind
             )
-            : base(appCtx, dataCtx, "Open", "Opens the current selected Object")
+            : base(appCtx, dataCtx, CommonCommandsResources.OpenDataObjectCommand_Name, CommonCommandsResources.OpenDataObjectCommand_Tooltip)
         {
             this.ctxFactory = ctxFactory;
             this._requestedWorkspaceKind = reqWorkspaceKind;
@@ -96,7 +96,7 @@ namespace Kistl.Client.Presentables.KistlBase
         protected bool SubmitChanges { get; private set; }
 
         public DeleteDataObjectCommand(IViewModelDependencies appCtx, IKistlContext dataCtx, IRefreshCommandListener listener, bool submitChanges)
-            : base(appCtx, dataCtx, "Delete", "Deletes the current selected Object")
+            : base(appCtx, dataCtx, CommonCommandsResources.DeleteDataObjectCommand_Name, CommonCommandsResources.DeleteDataObjectCommand_Tooltip)
         {
             this.Listener = listener;
             this.SubmitChanges = submitChanges;
@@ -104,7 +104,7 @@ namespace Kistl.Client.Presentables.KistlBase
 
         protected override void DoExecute(IEnumerable<DataObjectViewModel> data)
         {
-            if (SubmitChanges && !ViewModelFactory.GetDecisionFromUser("Are you sure that you want to delete these items?", "Deleting items"))
+            if (SubmitChanges && !ViewModelFactory.GetDecisionFromUser(CommonCommandsResources.DeleteDataObjectCommand_Confirm, CommonCommandsResources.DeleteDataObjectCommand_Confirm_Title))
             {
                 return;
             }
@@ -134,7 +134,7 @@ namespace Kistl.Client.Presentables.KistlBase
 
         public NewDataObjectCommand(IViewModelDependencies appCtx, Func<IKistlContext> ctxFactory,
             IKistlContext dataCtx, DataType type, ControlKind reqWorkspaceKind, ControlKind reqEditorKind, IRefreshCommandListener listener)
-            : base(appCtx, dataCtx, "New", "Creates a new Object")
+            : base(appCtx, dataCtx, CommonCommandsResources.NewDataObjectCommand_Name, CommonCommandsResources.NewDataObjectCommand_Tooltip)
         {
             this.Type = type;
             this.ctxFactory = ctxFactory;
@@ -230,7 +230,7 @@ namespace Kistl.Client.Presentables.KistlBase
         public EditDataObjectClassCommand(IViewModelDependencies appCtx,
             IKistlContext dataCtx, DataType type,
             Func<IKistlContext> ctxFactory)
-            : base(appCtx, dataCtx, "Edit Class", "Opens the Editor for the current lists class")
+            : base(appCtx, dataCtx, CommonCommandsResources.EditDataObjectClassCommand_Name, CommonCommandsResources.EditDataObjectClassCommand_Tooltip)
         {
             this.Type = type;
             this.ctxFactory = ctxFactory;
@@ -268,7 +268,7 @@ namespace Kistl.Client.Presentables.KistlBase
         protected IRefreshCommandListener Listener { get; private set; }
 
         public RefreshCommand(IViewModelDependencies appCtx, IKistlContext dataCtx, IRefreshCommandListener listener)
-            : base(appCtx, dataCtx, "Refresh", "Refreshes the current list")
+            : base(appCtx, dataCtx, CommonCommandsResources.RefreshCommand_Name, CommonCommandsResources.RefreshCommand_Tooltip)
         {
             this.Listener = listener;
         }
@@ -294,7 +294,7 @@ namespace Kistl.Client.Presentables.KistlBase
         private readonly IProblemReporter _reporter;
 
         public ReportProblemCommand(IViewModelDependencies appCtx, IProblemReporter reporter, IKistlContext dataCtx)
-            : base(appCtx, dataCtx, "Report a Problem", "Reports a Problem")
+            : base(appCtx, dataCtx, CommonCommandsResources.ReportProblemCommand_Name, CommonCommandsResources.ReportProblemCommand_Tooltip)
         {
             this._reporter = reporter;
         }
@@ -315,7 +315,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 catch (Exception ex)
                 {
                     // The Reporter has a problem...
-                    ViewModelFactory.ShowMessage("Unable to send Problem:\n" + ex.Message, "Error");
+                    ViewModelFactory.ShowMessage(string.Format(CommonCommandsResources.ReportProblemCommand_Error, ex.Message), CommonCommandsResources.ReportProblemCommand_Error_Title);
                 }
             }
         }

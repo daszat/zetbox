@@ -97,6 +97,15 @@ namespace Kistl.Client.WPF
                     SplashScreen.SetInfo("No server start required");
                 }
 
+                if (!string.IsNullOrEmpty(config.Client.Culture))
+                {
+                    System.Threading.Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.GetCultureInfo(config.Client.Culture);
+                }
+                if (!string.IsNullOrEmpty(config.Client.UICulture))
+                {
+                    System.Threading.Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.GetCultureInfo(config.Client.UICulture);
+                }
+
                 SplashScreen.SetInfo("Bootstrapping Assembly Resolver");
                 AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
 

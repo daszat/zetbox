@@ -72,7 +72,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
         {
             if (IsContextModified)
             {
-                return ViewModelFactory.GetDecisionFromUser("Workspace contains unsaved data. Close anyway?", "Unsaved data");
+                return ViewModelFactory.GetDecisionFromUser(WorkspaceViewModelResources.CanClose, WorkspaceViewModelResources.CanClose_Title);
             }
             else
             {
@@ -129,7 +129,10 @@ namespace Kistl.Client.Presentables.ObjectEditor
             {
                 if (_DeleteCommand == null)
                 {
-                    _DeleteCommand = ViewModelFactory.CreateViewModel<SimpleItemCommandViewModel<DataObjectViewModel>.Factory>().Invoke(DataContext, "Delete", "",
+                    _DeleteCommand = ViewModelFactory.CreateViewModel<SimpleItemCommandViewModel<DataObjectViewModel>.Factory>().Invoke(
+                        DataContext, 
+                        WorkspaceViewModelResources.DeleteCommand_Name,
+                        WorkspaceViewModelResources.DeleteCommand_Tooltip,
                         (items) => items.ForEach(i => i.Delete()));
                 }
                 return _DeleteCommand;
@@ -149,9 +152,11 @@ namespace Kistl.Client.Presentables.ObjectEditor
             get
             {
                 if (_saveCommand == null)
-                    _saveCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>()
-                        .Invoke(DataContext, "Save", "Saves outstanding changes to the data store.",
-                        Save, CanSave);
+                    _saveCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
+                            DataContext, 
+                            WorkspaceViewModelResources.SaveCommand_Name,
+                            WorkspaceViewModelResources.SaveCommand_Tooltip,
+                            Save, CanSave);
 
                 return _saveCommand;
             }
@@ -168,7 +173,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
             {
                 if (_saveAndCloseCommand == null)
                     _saveAndCloseCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>()
-                        .Invoke(DataContext, "Save & Close", "Saves outstanding changes to the data store and closes the current workspace.",
+                        .Invoke(DataContext, WorkspaceViewModelResources.SaveAndCloseCommand_Name, WorkspaceViewModelResources.SaveAndCloseCommand_Tooltip,
                         () => { Save(); Close(); }, CanSave);
 
                 return _saveAndCloseCommand;
@@ -225,7 +230,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
                 if (_AbortCommand == null)
                 {
                     _AbortCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>()
-                        .Invoke(DataContext, "Abort", "Closes this workspace without saving",
+                        .Invoke(DataContext, WorkspaceViewModelResources.AbortCommand_Name, WorkspaceViewModelResources.AbortCommand_Tooltip,
                         Close, null);
                 }
                 return _AbortCommand;
@@ -244,8 +249,12 @@ namespace Kistl.Client.Presentables.ObjectEditor
             get
             {
                 if (_verifyCommand == null)
-                    _verifyCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>()
-                        .Invoke(DataContext, "Verify", "Verifies that all constraints are met.", ShowVerificationResults, null);
+                    _verifyCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
+                            DataContext, 
+                            WorkspaceViewModelResources.VerifyContextCommand_Name,
+                            WorkspaceViewModelResources.VerifyContextCommand_Tootlip, 
+                            ShowVerificationResults, 
+                            null);
 
                 return _verifyCommand;
             }
@@ -327,7 +336,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
         #region ViewModel Member
         public override string Name
         {
-            get { return "Workspace"; }
+            get { return WorkspaceViewModelResources.Name; }
         }
         #endregion
 

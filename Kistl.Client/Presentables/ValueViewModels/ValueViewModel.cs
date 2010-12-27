@@ -145,8 +145,12 @@ namespace Kistl.Client.Presentables.ValueViewModels
             {
                 if (_ClearValueCommand == null)
                 {
-                    _ClearValueCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>()
-                        .Invoke(DataContext, "Clear value", "Sets the value to nothing", () => ClearValue(), () => AllowNullInput && !DataContext.IsReadonly && !IsReadOnly);
+                    _ClearValueCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
+                        DataContext, 
+                        ValueInputTaskViewModelResources.CancelCommand_Name, 
+                        ValueInputTaskViewModelResources.CancelCommand_Tooltip, 
+                        () => ClearValue(), 
+                        () => AllowNullInput && !DataContext.IsReadonly && !IsReadOnly);
                 }
                 return _ClearValueCommand;
             }
@@ -414,7 +418,12 @@ namespace Kistl.Client.Presentables.ValueViewModels
             {
                 if (_EditCommand == null)
                 {
-                    _EditCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, "Edit", "Opens a Editor Dialog", () => Edit(), null);
+                    _EditCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
+                        DataContext, 
+                        ValueViewModelResources.EditCommand_Name, 
+                        ValueViewModelResources.EditCommand_Tooltip, 
+                        () => Edit(), 
+                        null);
                 }
                 return _EditCommand;
             }

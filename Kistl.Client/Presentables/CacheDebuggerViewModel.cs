@@ -27,7 +27,7 @@ namespace Kistl.Client.Presentables
 
         public override string Name
         {
-            get { return "Cache Debugger"; }
+            get { return CacheDebuggerViewModelResources.Name; }
         }
 
         public static ReadOnlyCollection<Cache> Caches
@@ -45,7 +45,12 @@ namespace Kistl.Client.Presentables
             {
                 if (_clearCommand == null)
                 {
-                    _clearCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, "Clear", "Clears all caches", Cache.ClearAll, null);
+                    _clearCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
+                        DataContext, 
+                        CacheDebuggerViewModelResources.ClearCommand_Name,
+                        CacheDebuggerViewModelResources.ClearCommand_Tooltip, 
+                        Cache.ClearAll, 
+                        null);
 
                 }
                 return _clearCommand;

@@ -61,7 +61,12 @@ namespace Kistl.Client.Presentables.KistlBase
             {
                 if (_AddRelationCommand == null)
                 {
-                    _AddRelationCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, "Add", "Adds a Relation to chain", AddRelation, null);
+                    _AddRelationCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
+                        DataContext, 
+                        RelationChainViewModelResources.AddRelationCommand_Name,
+                        RelationChainViewModelResources.AddRelationCommand_Tooltip,
+                        AddRelation, 
+                        null);
                 }
                 return _AddRelationCommand;
             }

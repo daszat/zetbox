@@ -125,7 +125,7 @@ namespace Kistl.Client.Presentables.FilterViewModels
 
         public override string Name
         {
-            get { return "A Filter"; }
+            get { return FilterViewModelResources.Name; }
         }
 
         private string _label;

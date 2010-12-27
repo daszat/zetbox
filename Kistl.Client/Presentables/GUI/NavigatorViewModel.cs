@@ -135,8 +135,8 @@ namespace Kistl.Client.Presentables.GUI
                 {
                     _HomeCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
                         DataContext,
-                        "Home",
-                        "Navigates back to the top-most screen",
+                        NavigatorViewModelResources.HomeCommand_Name,
+                        NavigatorViewModelResources.HomeCommand_Tooltip,
                         Home,
                         () => CurrentScreen != _root);
                 }
@@ -158,8 +158,8 @@ namespace Kistl.Client.Presentables.GUI
                 {
                     _BackCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
                         DataContext,
-                        "Back",
-                        "Navigates back to the last screen",
+                        NavigatorViewModelResources.BackCommand_Name,
+                        NavigatorViewModelResources.BackCommand_Tooltip,
                         Back,
                         () => _history.Count > 1);
                 }
@@ -185,8 +185,8 @@ namespace Kistl.Client.Presentables.GUI
                 {
                     _NavigateToCommand = ViewModelFactory.CreateViewModel<SimpleParameterCommandViewModel<NavigationScreenViewModel>.Factory>().Invoke(
                                 DataContext,
-                                "Go to ...",
-                                "Navigates to the selected screen",
+                                NavigatorViewModelResources.NavigateToCommand_Name,
+                                NavigatorViewModelResources.NavigateToCommand_Tooltip,
                                 NavigateTo,
                                 screen => CurrentScreen != screen);
                 }

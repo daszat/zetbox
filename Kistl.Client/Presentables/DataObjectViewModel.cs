@@ -141,7 +141,7 @@ namespace Kistl.Client.Presentables
         {
             FetchPropertyModels();
             return _propertyList
-                        .SelectMany(p => (String.IsNullOrEmpty(p.CategoryTags) ? "Uncategorised" : p.CategoryTags)
+                        .SelectMany(p => (String.IsNullOrEmpty(p.CategoryTags) ? Properties.Resources.Uncategorised : p.CategoryTags)
                                             .Split(", ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
                                             .Select(s => new { Category = s, Property = p }))
                         .GroupBy(x => x.Category, x => x.Property)

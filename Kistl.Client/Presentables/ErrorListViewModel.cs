@@ -40,7 +40,7 @@ namespace Kistl.Client.Presentables
 
         public override string Name
         {
-            get { return "Error List"; }
+            get { return ErrorListViewModelResources.Name; }
         }
 
         private readonly ObservableCollection<ErrorDescriptor> _errors;
@@ -57,7 +57,10 @@ namespace Kistl.Client.Presentables
             {
                 if (_CloseCommand == null)
                 {
-                    _CloseCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, "Close", "Closes this view", Close, null);
+                    _CloseCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
+                        DataContext, 
+                        ErrorListViewModelResources.CloseCommand_Name, 
+                        ErrorListViewModelResources.CloseCommand_Tooltip, Close, null);
                 }
                 return _CloseCommand;
             }
@@ -75,7 +78,12 @@ namespace Kistl.Client.Presentables
             {
                 if (_RefreshErrorsCommand == null)
                 {
-                    _RefreshErrorsCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, "Refresh Errors", "Reevaluate errors", RefreshErrors, null);
+                    _RefreshErrorsCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
+                        DataContext, 
+                        ErrorListViewModelResources.RefreshCommand_Name,
+                        ErrorListViewModelResources.RefreshCommand_Tooltip, 
+                        RefreshErrors, 
+                        null);
                 }
                 return _RefreshErrorsCommand;
             }

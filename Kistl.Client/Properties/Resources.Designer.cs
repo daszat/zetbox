@@ -59,5 +59,23 @@ namespace Kistl.Client.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Summary.
+        /// </summary>
+        internal static string Summary {
+            get {
+                return ResourceManager.GetString("Summary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uncategorised.
+        /// </summary>
+        internal static string Uncategorised {
+            get {
+                return ResourceManager.GetString("Uncategorised", resourceCulture);
+            }
+        }
     }
 }

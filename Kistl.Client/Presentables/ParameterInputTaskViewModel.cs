@@ -95,7 +95,7 @@ namespace Kistl.Client.Presentables
 
         public override string Name
         {
-            get { return _method.Name; }
+            get { return _method.GetLabel(); }
         }
 
         #region Commands
@@ -106,7 +106,12 @@ namespace Kistl.Client.Presentables
             {
                 if (_InvokeCommand == null)
                 {
-                    _InvokeCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, "Invoke", "Invokes the method", Invoke, null);
+                    _InvokeCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
+                        DataContext, 
+                        ParameterInputTaskViewModelResources.InvokeCommand_Name,
+                        ParameterInputTaskViewModelResources.InvokeCommand_Tooltip, 
+                        Invoke, 
+                        null);
                 }
                 return _InvokeCommand;
             }
@@ -126,7 +131,12 @@ namespace Kistl.Client.Presentables
             {
                 if (_CancelCommand == null)
                 {
-                    _CancelCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, "Cancel", "Cancel the invocation", Cancel, null);
+                    _CancelCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
+                        DataContext, 
+                        ParameterInputTaskViewModelResources.CancelCommand_Name,
+                        ParameterInputTaskViewModelResources.CancelCommand_Tooltip, 
+                        Cancel, 
+                        null);
                 }
                 return _CancelCommand;
             }

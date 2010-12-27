@@ -650,7 +650,7 @@ namespace Kistl.Client.Presentables.KistlBase
         {
             get
             {
-                return "InstanceList of type " + _type.Name;
+                return string.Format(InstanceListViewModelResources.Name, _type.Name);
             }
         }
 

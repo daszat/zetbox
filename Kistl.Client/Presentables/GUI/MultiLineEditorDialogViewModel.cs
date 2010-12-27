@@ -35,7 +35,7 @@ namespace Kistl.Client.Presentables.GUI
 
         public override string Name
         {
-            get { return "MultiLineEditorDialogViewModel"; }
+            get { return MultiLineEditorDialogViewModelResources.Name; }
         }
 
         private string _value;
@@ -62,7 +62,12 @@ namespace Kistl.Client.Presentables.GUI
             {
                 if (_OKCommand == null)
                 {
-                    _OKCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, "OK", "OK", Ok, null);
+                    _OKCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
+                        DataContext, 
+                        MultiLineEditorDialogViewModelResources.OKCommand_Name,
+                        MultiLineEditorDialogViewModelResources.OKCommand_Tooltip, 
+                        Ok, 
+                        null);
                 }
                 return _OKCommand;
             }
@@ -81,7 +86,12 @@ namespace Kistl.Client.Presentables.GUI
             {
                 if (_CancelCommand == null)
                 {
-                    _CancelCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, "Cancel", "Cancel", Cancel, null);
+                    _CancelCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
+                        DataContext,
+                        MultiLineEditorDialogViewModelResources.CancelCommand_Name,
+                        MultiLineEditorDialogViewModelResources.CancelCommand_Tooltip,
+                        Cancel, 
+                        null);
                 }
                 return _CancelCommand;
             }

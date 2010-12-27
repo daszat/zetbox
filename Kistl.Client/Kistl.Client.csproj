@@ -96,11 +96,81 @@
     <Compile Include="Models\ValueModel.cs" />
     <Compile Include="NamedObjects.cs" />
     <Compile Include="Presentables\ActionViewModel.cs" />
+    <Compile Include="Presentables\ActionViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ActionViewModelResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Presentables\AsyncList.cs" />
     <Compile Include="Presentables\CacheDebuggerViewModel.cs" />
     <Compile Include="Models\ColumnDisplayModel.cs" />
+    <Compile Include="Presentables\CacheDebuggerViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CacheDebuggerViewModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentables\DataObjectSelectionTaskViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataObjectSelectionTaskViewModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentables\ErrorListViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ErrorListViewModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentables\FilterViewModels\FilterViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FilterViewModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentables\GUI\MultiLineEditorDialogViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MultiLineEditorDialogViewModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentables\GUI\NavigatorViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NavigatorViewModelResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Presentables\IValueInputTaskViewModel.cs" />
+    <Compile Include="Presentables\KistlBase\ApplicationViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ApplicationViewModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentables\KistlBase\CommonCommandsResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CommonCommandsResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentables\KistlBase\InstanceListViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InstanceListViewModelResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Presentables\KistlBase\MethodInvocationViewModel.cs" />
+    <Compile Include="Presentables\KistlBase\RelationChainViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RelationChainViewModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentables\ObjectBrowser\WorkspaceViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WorkspaceViewModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentables\ObjectEditor\WorkspaceViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WorkspaceViewModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentables\ParameterInputTaskViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ParameterInputTaskViewModelResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Presentables\ValueInputTaskViewModel.cs" />
     <Compile Include="Presentables\DocumentManagement\FileViewModel.cs" />
     <Compile Include="Presentables\DocumentManagement\ImageViewModel.cs" />
@@ -116,6 +186,16 @@
     <Compile Include="Presentables\ParameterInputTaskViewModel.cs" />
     <Compile Include="Presentables\SchemaMigration\DestinationPropertyViewModel.cs" />
     <Compile Include="Presentables\SchemaMigration\SelectDestinationPropertyViewModel.cs" />
+    <Compile Include="Presentables\ValueInputTaskViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ValueInputTaskViewModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentables\ValueViewModels\BaseObjectCollectionViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BaseObjectCollectionViewModelResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Presentables\ValueViewModels\CompoundObjectPropertyViewModel.cs" />
     <Compile Include="Presentables\CompoundObjectViewModel.cs" />
     <Compile Include="Presentables\GUI\NavigatorViewModel.cs" />
@@ -142,6 +222,16 @@
     <Compile Include="Presentables\KistlBase\TypeRefPropertyViewModel.Commands.cs" />
     <Compile Include="Presentables\KistlBase\TypeRefPropertyViewModel.cs" />
     <Compile Include="Presentables\KistlDebuggerAsViewModel.cs" />
+    <Compile Include="Presentables\ValueViewModels\ObjectReferenceViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ObjectReferenceViewModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentables\ValueViewModels\ValueViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ValueViewModelResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Presentables\ViewModelCache.cs" />
     <Compile Include="Presentables\ViewModelFactory.cs" />
     <Compile Include="Presentables\ModuleEditor\DiagramViewModel.cs" />
@@ -183,6 +273,135 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="TheseMethodsShouldBeImplementedOnKistlObjects.cs" />
+    <EmbeddedResource Include="Presentables\ActionViewModelResources.de.resx">
+      <DependentUpon>ActionViewModelResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\ActionViewModelResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ActionViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\CacheDebuggerViewModelResources.de.resx">
+      <DependentUpon>CacheDebuggerViewModelResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\CacheDebuggerViewModelResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CacheDebuggerViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\DataObjectSelectionTaskViewModelResources.de.resx">
+      <DependentUpon>DataObjectSelectionTaskViewModelResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\DataObjectSelectionTaskViewModelResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>DataObjectSelectionTaskViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\ErrorListViewModelResources.de.resx">
+      <DependentUpon>ErrorListViewModelResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\ErrorListViewModelResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ErrorListViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\FilterViewModels\FilterViewModelResources.de.resx">
+      <DependentUpon>FilterViewModelResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\FilterViewModels\FilterViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FilterViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\GUI\MultiLineEditorDialogViewModelResources.de.resx">
+      <DependentUpon>MultiLineEditorDialogViewModelResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\GUI\MultiLineEditorDialogViewModelResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MultiLineEditorDialogViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\GUI\NavigatorViewModelResources.de.resx">
+      <DependentUpon>NavigatorViewModelResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\GUI\NavigatorViewModelResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>NavigatorViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\KistlBase\ApplicationViewModelResources.de.resx">
+      <DependentUpon>ApplicationViewModelResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\KistlBase\ApplicationViewModelResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ApplicationViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\KistlBase\CommonCommandsResources.de.resx">
+      <DependentUpon>CommonCommandsResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\KistlBase\CommonCommandsResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CommonCommandsResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\KistlBase\InstanceListViewModelResources.de.resx">
+      <DependentUpon>InstanceListViewModelResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\KistlBase\InstanceListViewModelResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>InstanceListViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\KistlBase\RelationChainViewModelResources.de.resx">
+      <DependentUpon>RelationChainViewModelResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\KistlBase\RelationChainViewModelResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RelationChainViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\ObjectBrowser\WorkspaceViewModelResources.de.resx">
+      <DependentUpon>WorkspaceViewModelResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\ObjectBrowser\WorkspaceViewModelResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>WorkspaceViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\ObjectEditor\WorkspaceViewModelResources.de.resx">
+      <DependentUpon>WorkspaceViewModelResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\ObjectEditor\WorkspaceViewModelResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>WorkspaceViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\ParameterInputTaskViewModelResources.de.resx">
+      <DependentUpon>ParameterInputTaskViewModelResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\ParameterInputTaskViewModelResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ParameterInputTaskViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\ValueInputTaskViewModelResources.de.resx">
+      <DependentUpon>ValueInputTaskViewModelResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\ValueInputTaskViewModelResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ValueInputTaskViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\ValueViewModels\BaseObjectCollectionViewModelResources.de.resx">
+      <DependentUpon>BaseObjectCollectionViewModelResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\ValueViewModels\BaseObjectCollectionViewModelResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>BaseObjectCollectionViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\ValueViewModels\ObjectReferenceViewModelResources.de.resx">
+      <DependentUpon>ObjectReferenceViewModelResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\ValueViewModels\ObjectReferenceViewModelResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ObjectReferenceViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\ValueViewModels\ValueViewModelResources.de.resx">
+      <DependentUpon>ValueViewModelResources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\ValueViewModels\ValueViewModelResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ValueViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.de.resx">
+      <DependentUpon>Resources.resx</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

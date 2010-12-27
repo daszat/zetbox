@@ -171,8 +171,12 @@ namespace Kistl.Client.Presentables.ValueViewModels
             {
                 if (_openReferenceCommand == null)
                 {
-                    _openReferenceCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>()
-                        .Invoke(DataContext, "Open", "Open the referenced object", () => OpenReference(), () => Value != null);
+                    _openReferenceCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
+                        DataContext, 
+                        ObjectReferenceViewModelResources.OpenReferenceCommand_Name, 
+                        ObjectReferenceViewModelResources.OpenReferenceCommand_Tooltip, 
+                        () => OpenReference(), 
+                        () => Value != null);
                 }
                 return _openReferenceCommand;
             }
@@ -239,8 +243,12 @@ namespace Kistl.Client.Presentables.ValueViewModels
             {
                 if (_createNewItemAndSetValueCommand == null)
                 {
-                    _createNewItemAndSetValueCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>()
-                        .Invoke(DataContext, "Create new item", "Create new item", () => CreateNewItemAndSetValue(null), () => AllowCreateNewItem && !DataContext.IsReadonly && !IsReadOnly);
+                    _createNewItemAndSetValueCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
+                        DataContext, 
+                        ObjectReferenceViewModelResources.CreateNewItemAndSetValueCommand_Name, 
+                        ObjectReferenceViewModelResources.CreateNewItemAndSetValueCommand_Tooltip, 
+                        () => CreateNewItemAndSetValue(null), 
+                        () => AllowCreateNewItem && !DataContext.IsReadonly && !IsReadOnly);
                 }
                 return _createNewItemAndSetValueCommand;
             }
@@ -279,8 +287,12 @@ namespace Kistl.Client.Presentables.ValueViewModels
             {
                 if (_SelectValueCommand == null)
                 {
-                    _SelectValueCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>()
-                        .Invoke(DataContext, "Select", "Selects another reference", () => SelectValue(), () => !DataContext.IsReadonly && !IsReadOnly);
+                    _SelectValueCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
+                        DataContext, 
+                        ObjectReferenceViewModelResources.SelectValueCommand_Name, 
+                        ObjectReferenceViewModelResources.SelectValueCommand_Tooltip, 
+                        () => SelectValue(), 
+                        () => !DataContext.IsReadonly && !IsReadOnly);
                 }
                 return _SelectValueCommand;
             }
@@ -369,7 +381,12 @@ namespace Kistl.Client.Presentables.ValueViewModels
                     var mdlList = GetPossibleValues(out needMoreButton);
                     if (needMoreButton)
                     {
-                        var cmdMdl = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, "More ...", "More elements found", SelectValue, null);
+                        var cmdMdl = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
+                            DataContext, 
+                            ObjectReferenceViewModelResources.PossibleValues_More, 
+                            ObjectReferenceViewModelResources.PossibleValues_More_Tooltip, 
+                            SelectValue, 
+                            null);
                         cmdMdl.RequestedKind = FrozenContext.FindPersistenceObject<ControlKind>(NamedObjects.ControlKind_Kistl_App_GUI_CommandLinkKind);
                         mdlList.Add(cmdMdl);
                     }
