@@ -4,65 +4,13 @@
                     xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"
                     xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client">
 
-    <Style x:Key="Notice"
-           TargetType="TextBlock">
-        <Setter Property="FontWeight"
-                Value="Bold" />
-    </Style>
-
-    <Style x:Key="ImageButton"
-           TargetType="{x:Type ctrls:CommandButton}">
-        <Setter Property="ContentTemplate">
-            <Setter.Value>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="{Binding Path=(ctrls:CommandButton.Image), RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ctrls:CommandButton}}}" />
-                        <ContentPresenter Content="{Binding Path=Content, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ctrls:CommandButton}}}"
-                                          Margin="5 0 0 0"
-                                          VerticalAlignment="Center" />
-                    </StackPanel>
-                </DataTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <!-- from http://stackoverflow.com/questions/780426/link-button-in-wpf by Anderson Imes -->
-    <Style x:Key="LinkButton"
-           TargetType="Button">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Button">
-                    <TextBlock x:Name="Underliner">
-                    <ContentPresenter />
-                    </TextBlock>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="Foreground"
-                Value="Blue" />
-        <Setter Property="Cursor"
-                Value="Hand" />
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver"
-                     Value="true">
-                <Setter Property="Foreground"
-                        Value="Red" />
-            </Trigger>
-            <Trigger Property="IsEnabled"
-                     Value="false">
-                <Setter Property="Foreground"
-                        Value="Black" />
-            </Trigger>
-        </Style.Triggers>
-    </Style>
-
     <DataTemplate x:Key="emptyTemplate">
         <Viewbox Stretch="UniformToFill"
                  StretchDirection="DownOnly">
             <Ellipse Height="100"
                      Width="100"
                      StrokeThickness="10"
-                     Stroke="Red"
+                     Stroke="{StaticResource AccentColor1}"
                      Fill="White" />
         </Viewbox>
     </DataTemplate>

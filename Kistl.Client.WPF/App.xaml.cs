@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
@@ -113,6 +115,12 @@ namespace Kistl.Client.WPF
                 this.Resources["defaultTemplateSelector"] = templateSelectorFactory(null);
                 this.Resources["listItemTemplateSelector"] = templateSelectorFactory("Kistl.App.GUI.SingleLineKind");
                 this.Resources["dashBoardTemplateSelector"] = templateSelectorFactory("Kistl.App.GUI.DashboardKind");
+
+                // Load registrated dictionaries from autofac
+                foreach (var dict in container.Resolve<IEnumerable<ResourceDictionary>>())
+                {
+                    this.Resources.MergedDictionaries.Add(dict);
+                }
 
                 RunFixes(container.Resolve<IKistlContext>());
 

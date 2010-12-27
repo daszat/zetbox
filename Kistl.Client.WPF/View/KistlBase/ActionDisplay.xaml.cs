@@ -13,13 +13,14 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Kistl.Client.Presentables;
 using Kistl.Client.GUI;
+using Kistl.Client.WPF.CustomControls;
 
 namespace Kistl.Client.WPF.View.KistlBase
 {
     /// <summary>
     /// Interaction logic for ActionView.xaml
     /// </summary>
-    public partial class ActionDisplay : UserControl, IHasViewModel<ActionViewModel>
+    public partial class ActionDisplay : CommandButton, IHasViewModel<ActionViewModel>
     {
         public ActionDisplay()
         {

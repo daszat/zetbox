@@ -8,14 +8,6 @@
                   Height="768"
                   Title="{Binding Name}">
     <DockPanel LastChildFill="True">
-        <!--<UniformGrid DockPanel.Dock="Top"
-                     Rows="1">
-            <ctrls:CommandButton CommandViewModel="{Binding BackCommand}"
-                                 Margin="5" />
-            <ctrls:CommandButton CommandViewModel="{Binding HomeCommand}"
-                                 Margin="5" />
-        </UniformGrid>-->
-
         <!-- location breadcrumbs -->
         <ItemsControl DockPanel.Dock="Top"
                       ItemsSource="{Binding Location}"
@@ -29,6 +21,12 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
+                        <StackPanel.Resources>
+                            <Style TargetType="TextBlock"
+                                   BasedOn="{StaticResource NavigationBreadCrumb}" />
+                            <Style TargetType="Button"
+                                   BasedOn="{StaticResource NavigationBreadCrumb}" />
+                        </StackPanel.Resources>
                         <TextBlock Text=">" />
                         <Button Style="{StaticResource LinkButton}"
                                 Command="{Binding Displayer.NavigateToCommand, Converter={StaticResource CommandConverter}}"

@@ -18,6 +18,7 @@
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
             <commands:Converter x:Key="CommandConverter" />
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="View/DefaultStyles.xaml" />
                 <ResourceDictionary Source="View/DefaultViews.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

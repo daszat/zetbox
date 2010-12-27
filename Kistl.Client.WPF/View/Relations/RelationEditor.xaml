@@ -2,13 +2,19 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"
+             xmlns:viewKistlBase="clr-namespace:Kistl.Client.WPF.View.KistlBase"
              xmlns:rels="clr-namespace:Kistl.Client.WPF.View.Relations"
              xmlns:view="clr-namespace:Kistl.Client.WPF.View;assembly=Kistl.Client.WPF.Toolkit">
 
     <DockPanel>
         <ctrls:WorkaroundToolBar DockPanel.Dock="Top"
                                  ItemsSource="{Binding Actions}"
-                                 ItemTemplateSelector="{StaticResource defaultTemplateSelector}" />
+                                 ItemTemplateSelector="{StaticResource defaultTemplateSelector}">
+            <ctrls:WorkaroundToolBar.Resources>
+                <Style TargetType="{x:Type viewKistlBase:ActionDisplay}"
+                       BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" />
+            </ctrls:WorkaroundToolBar.Resources>
+        </ctrls:WorkaroundToolBar>
 
         <DockPanel DockPanel.Dock="Top">
             <Image DockPanel.Dock="Left"

@@ -31,7 +31,8 @@
                                  ItemsSource="{Binding Commands}">
             <ToolBar.ItemTemplate>
                 <DataTemplate>
-                    <ctrls:CommandButton CommandViewModel="{Binding}" />
+                    <ctrls:CommandButton CommandViewModel="{Binding}"
+                                         Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" />
                 </DataTemplate>
             </ToolBar.ItemTemplate>
         </ctrls:WorkaroundToolBar>

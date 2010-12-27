@@ -35,7 +35,7 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <ContentPresenter Content="{Binding}"
-                                          ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
+                                          ContentTemplateSelector="{StaticResource defaultTemplateSelector}"/>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
@@ -49,6 +49,7 @@
                 <DataTemplate>
                     <Button Command="{Binding Converter={StaticResource CommandConverter}}"
                             CommandParameter="{Binding DataContext.SelectedItems, RelativeSource={RelativeSource AncestorType={x:Type clientKistlBase:InstanceListDisplay}}}"
+                            Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
                             Content="{Binding Label}"
                             ToolTip="{Binding ToolTip}" />
                 </DataTemplate>
