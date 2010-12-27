@@ -50,7 +50,7 @@ namespace Kistl.DalProvider.NHibernate
                 "PrepareQueryableGeneric",
                 new[] { ifType.Type, ToImplementationType(ifType).Type },
                 null);
-            return (IQueryable<IPersistenceObject>)mi.Invoke(this, new object[0]);
+            return (IQueryable<IPersistenceObject>)mi.Invoke(this, new IPersistenceObject[0]);
         }
 
         public override IPersistenceObject Attach(IPersistenceObject obj)

@@ -55,7 +55,7 @@ this.WriteObjects("                         proxy=\"",  qualifiedInterfaceName ,
 this.WriteObjects("                         table=\"`",  tableName , "`\">\r\n");
 this.WriteObjects("            \r\n");
 this.WriteObjects("            <!-- base class reference -->\r\n");
-this.WriteObjects("            <key column=\"ID\" />\r\n");
+this.WriteObjects("            <key column=\"`ID`\" />\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("            <!-- define the properties -->\r\n");
 #line 31 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\JoinedSubclassHbm.cst"

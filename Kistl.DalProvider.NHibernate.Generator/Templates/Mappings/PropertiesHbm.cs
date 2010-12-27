@@ -43,7 +43,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
             }
 
             string nameAttr = String.Format("name=\"{0}\"", prop.Name);
-            string columnAttr = String.Format("column=\"`{0}{1}`\"", prefix, prop.Name);
+            string columnAttr = String.Format("column=\"`fk_{0}{1}`\"", prefix, otherEnd.RoleName);
             string classAttr = String.Format("class=\"{0}\"",
                 ObjectClassHbm.GetAssemblyQualifiedImplementation(otherEnd.Type, this.Settings));
             //string tableAttr = String.Format("table =\"`{0}`\" ", rel.GetAssociationName());
@@ -120,7 +120,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
             this.WriteLine("<!-- relEnd={0} otherEnd={1} -->", relEnd.RoleName, otherEnd.RoleName);
 
             string nameAttr = String.Format("name=\"{0}\"", prop.Name);
-            string tableAttr = String.Format("table=\"{0}\"", rel.GetRelationTableName());
+            string tableAttr = String.Format("table=\"`{0}`\"", rel.GetRelationTableName());
             string otherClassAttr = String.Format("class=\"{0}\"",
                 ObjectClassHbm.GetAssemblyQualifiedImplementation(otherEnd.Type, this.Settings));
             string inverseAttr = String.Format("inverse=\"{0}\"", inverse ? "true" : "false");
@@ -185,7 +185,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
         {
             this.WriteLine("<!-- ValueTypeProperty -->");
             string nameAttr = String.Format("name=\"{0}\"", prop.Name);
-            string tableAttr = String.Format("table=\"{0}\"", prop.GetCollectionEntryTable());
+            string tableAttr = String.Format("table=\"`{0}`\"", prop.GetCollectionEntryTable());
             string typeAttr = String.Format("type=\"{0}\"", prop.GetPropertyType().AssemblyQualifiedName);
             string mappingType = prop.HasPersistentOrder ? "list" : "idbag";
 
@@ -233,7 +233,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
         {
             this.WriteLine("<!-- CompoundObjectProperty -->");
             string nameAttr = String.Format("name=\"{0}\"", prop.Name);
-            string tableAttr = String.Format("table=\"{0}\"", prop.GetCollectionEntryTable());
+            string tableAttr = String.Format("table=\"`{0}`\"", prop.GetCollectionEntryTable());
             string classAttr = String.Format("class=\"{0}.{1}{2},Kistl.Objects.NHibernateImpl\"",
                 prop.CompoundObjectDefinition.Module.Namespace,
                 prop.CompoundObjectDefinition.Name,
