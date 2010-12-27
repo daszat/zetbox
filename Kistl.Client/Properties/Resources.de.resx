@@ -121,6 +121,24 @@
 		<value>Zusammenfassung</value>
 	</data>
 	<data name="Uncategorised" xml:space="preserve">
-		<value>Kategorisierter</value>
+		<value>Nicht Kategorisiert</value>
+	</data>
+	<data name="Startup_AssemblyResolver" xml:space="preserve">
+		<value>Starte Assembly Manager</value>
+	</data>
+	<data name="Startup_InitApp" xml:space="preserve">
+		<value>Initialisiere Anwendung</value>
+	</data>
+	<data name="Startup_Launcher" xml:space="preserve">
+		<value>Initialisiere grafische Oberfläche</value>
+	</data>
+	<data name="Startup_Message" xml:space="preserve">
+		<value>ZBox wird gestartet ...</value>
+	</data>
+	<data name="Startup_NoServerStart" xml:space="preserve">
+		<value>Kein Server start erforderlich</value>
+	</data>
+	<data name="Startup_Server" xml:space="preserve">
+		<value>Starte Server</value>
 	</data>
 </root>

@@ -17,6 +17,7 @@ namespace Kistl.Client.Presentables
     using System.Diagnostics;
     using Kistl.Client.Presentables.ValueViewModels;
     using System.Threading;
+using Kistl.API.Configuration;
 
     /// <summary>
     /// Abstract base class to provide basic functionality of all model factories. Toolkit-specific implementations of this class will be 
@@ -31,6 +32,7 @@ namespace Kistl.Client.Presentables
 
         protected readonly Autofac.ILifetimeScope Container;
         protected readonly IFrozenContext FrozenContext;
+        protected readonly KistlConfig Configuration;
 
         private struct VMCacheKey
         {
@@ -57,13 +59,15 @@ namespace Kistl.Client.Presentables
 
         private readonly Dictionary<VMCacheKey, object> _viewModelFactoryCache;
 
-        protected ViewModelFactory(Autofac.ILifetimeScope container, IFrozenContext frozenCtx)
+        protected ViewModelFactory(Autofac.ILifetimeScope container, IFrozenContext frozenCtx, KistlConfig cfg)
         {
             if (container == null) throw new ArgumentNullException("container");
             if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
+            if (cfg == null) throw new ArgumentNullException("cfg");
 
             this.Container = container;
             this.FrozenContext = frozenCtx;
+            this.Configuration = cfg;
             this.Managers = new Dictionary<IKistlContext, IMultipleInstancesManager>();
             this._viewModelFactoryCache = new Dictionary<VMCacheKey, object>();
         }
@@ -426,6 +430,7 @@ namespace Kistl.Client.Presentables
 
         private void timer_callback(object args)
         {
+            InitCulture();
             lock (_waitDlgLock)
             {
                 if (_waitDlgCounter++ == 0)
@@ -471,6 +476,20 @@ namespace Kistl.Client.Presentables
         /// </summary>
         protected abstract void CloseWaitDialog();
 
+        public void InitCulture()
+        {
+            if (Configuration.Client == null) return;
+            if (!string.IsNullOrEmpty(Configuration.Client.Culture))
+            {
+                System.Threading.Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.GetCultureInfo(Configuration.Client.Culture);
+            }
+            if (!string.IsNullOrEmpty(Configuration.Client.UICulture))
+            {
+                System.Threading.Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.GetCultureInfo(Configuration.Client.UICulture);
+            }
+        }
+
         #endregion
+
     }
 }

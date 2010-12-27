@@ -33,6 +33,14 @@ namespace Kistl.Client.Presentables.ObjectEditor
         /// </summary>
         public ObservableCollection<ViewModel> Items { get; private set; }
 
+        public string ItemsLabel
+        {
+            get
+            {
+                return WorkspaceViewModelResources.ItemsLabel;
+            }
+        }
+
         private ViewModel _selectedItem;
         /// <summary>
         /// The last selected ViewModel.

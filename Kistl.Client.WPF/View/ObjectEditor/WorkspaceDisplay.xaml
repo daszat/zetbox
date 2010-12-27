@@ -42,7 +42,8 @@
 
             <DockPanel Grid.Column="0">
                 <TextBlock DockPanel.Dock="Top"
-                           HorizontalAlignment="Center">Objects:</TextBlock>
+                           HorizontalAlignment="Center"
+                           Text="{Binding ItemsLabel}" />
                 <ListBox ItemsSource="{Binding Items}"
                          SelectedItem="{Binding SelectedItem}"
                          ItemTemplateSelector="{StaticResource listItemTemplateSelector}"

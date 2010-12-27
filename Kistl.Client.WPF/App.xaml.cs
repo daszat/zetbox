@@ -77,7 +77,6 @@ namespace Kistl.Client.WPF
         {
             DebugConsole.Show();
             Logging.Configure();
-            SplashScreen.ShowSplashScreen("ZBox is starting...", "Init application", 5);
 
             using (Logging.Log.InfoTraceMethodCall("Starting Client"))
             {
@@ -85,33 +84,28 @@ namespace Kistl.Client.WPF
                 var args = HandleCommandline(e.Args, out configFilePath);
 
                 var config = KistlConfig.FromFile(configFilePath);
+                InitCulture(config);
+
+                SplashScreen.ShowSplashScreen(Kistl.Client.Properties.Resources.Startup_Message, Kistl.Client.Properties.Resources.Startup_InitApp, 5);
 
                 if (config.Server != null && config.Server.StartServer)
                 {
-                    SplashScreen.SetInfo("Starting Server");
+                    SplashScreen.SetInfo(Kistl.Client.Properties.Resources.Startup_Server);
                     serverDomain = new ServerDomainManager();
                     serverDomain.Start(config);
                 }
                 else
                 {
-                    SplashScreen.SetInfo("No server start required");
+                    SplashScreen.SetInfo(Kistl.Client.Properties.Resources.Startup_NoServerStart);
                 }
 
-                if (!string.IsNullOrEmpty(config.Client.Culture))
-                {
-                    System.Threading.Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.GetCultureInfo(config.Client.Culture);
-                }
-                if (!string.IsNullOrEmpty(config.Client.UICulture))
-                {
-                    System.Threading.Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.GetCultureInfo(config.Client.UICulture);
-                }
-
-                SplashScreen.SetInfo("Bootstrapping Assembly Resolver");
+                
+                SplashScreen.SetInfo(Kistl.Client.Properties.Resources.Startup_AssemblyResolver);
                 AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
 
                 container = CreateMasterContainer(config);
 
-                SplashScreen.SetInfo("Initializing Launcher");
+                SplashScreen.SetInfo(Kistl.Client.Properties.Resources.Startup_Launcher);
 
                 // Init Resources
                 this.Resources["IconConverter"] = new IconConverter(config.Client.DocumentStore, container.Resolve<IFrozenContext>());
@@ -130,6 +124,19 @@ namespace Kistl.Client.WPF
             }
 
             SplashScreen.HideSplashScreen();
+        }
+
+        private static void InitCulture(KistlConfig config)
+        {
+            if (config.Client == null) return;
+            if (!string.IsNullOrEmpty(config.Client.Culture))
+            {
+                System.Threading.Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.GetCultureInfo(config.Client.Culture);
+            }
+            if (!string.IsNullOrEmpty(config.Client.UICulture))
+            {
+                System.Threading.Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.GetCultureInfo(config.Client.UICulture);
+            }
         }
 
         private void RunFixes(IKistlContext ctx)

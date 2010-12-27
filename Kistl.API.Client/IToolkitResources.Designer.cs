@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Kistl.Client.Properties {
+namespace Kistl.API.Client {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace Kistl.Client.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Resources {
+    public class IToolkitResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources() {
+        internal IToolkitResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Kistl.Client.Properties {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Kistl.Client.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Kistl.API.Client.IToolkitResources", typeof(IToolkitResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,74 +61,20 @@ namespace Kistl.Client.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bootstrapping Assembly Resolver.
+        ///   Looks up a localized string similar to The current operation might take some time.
         /// </summary>
-        public static string Startup_AssemblyResolver {
+        public static string WaitDialog_Info {
             get {
-                return ResourceManager.GetString("Startup_AssemblyResolver", resourceCulture);
+                return ResourceManager.GetString("WaitDialog_Info", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Init application.
+        ///   Looks up a localized string similar to ZBox is busy.
         /// </summary>
-        public static string Startup_InitApp {
+        public static string WaitDialog_Message {
             get {
-                return ResourceManager.GetString("Startup_InitApp", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Initializing Launcher.
-        /// </summary>
-        public static string Startup_Launcher {
-            get {
-                return ResourceManager.GetString("Startup_Launcher", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ZBox is starting....
-        /// </summary>
-        public static string Startup_Message {
-            get {
-                return ResourceManager.GetString("Startup_Message", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to No server start required.
-        /// </summary>
-        public static string Startup_NoServerStart {
-            get {
-                return ResourceManager.GetString("Startup_NoServerStart", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Starting Server.
-        /// </summary>
-        public static string Startup_Server {
-            get {
-                return ResourceManager.GetString("Startup_Server", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Summary.
-        /// </summary>
-        public static string Summary {
-            get {
-                return ResourceManager.GetString("Summary", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Uncategorised.
-        /// </summary>
-        public static string Uncategorised {
-            get {
-                return ResourceManager.GetString("Uncategorised", resourceCulture);
+                return ResourceManager.GetString("WaitDialog_Message", resourceCulture);
             }
         }
     }

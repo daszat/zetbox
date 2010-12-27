@@ -21,7 +21,7 @@
     <globalSetting name="Sort-ResourceEditorGrid">&lt;XtraSerializer version="1.0" application="View"&gt;
   &lt;property name="#LayoutVersion" /&gt;
 &lt;/XtraSerializer&gt;</globalSetting>
-    <globalSetting name="projectMruItems">&lt;?xml version='1.0' encoding='utf-8'?&gt;&lt;items /&gt;</globalSetting>
+    <globalSetting name="projectMruItems">&lt;?xml version='1.0' encoding='utf-8'?&gt;&lt;items&gt;&lt;item type="1" checksum="-728791857" /&gt;&lt;/items&gt;</globalSetting>
     <globalSetting name="CreateNewFilesForm.prefixTextBox.Text">####</globalSetting>
     <globalSetting name="CreateNewFilesForm.prefixCheckBox.Checked">False</globalSetting>
     <globalSetting name="CreateNewFilesForm.referenceLanguageComboBox.SelectedIndex">0</globalSetting>
@@ -32,18 +32,23 @@
     <globalSetting name="autoTranslateForm.prefixCheckBox.Checked">False</globalSetting>
     <globalSetting name="autoTranslateForm.referenceLanguageComboBoxEdit.SelectedIndex">0</globalSetting>
     <globalSetting name="autoTranslateForm.languagesToTranslateCheckListBox">0</globalSetting>
+    <globalSetting name="CreateNewFileForm.prefixTextBox.Text">####</globalSetting>
+    <globalSetting name="CreateNewFileForm.prefixCheckBox.Checked">False</globalSetting>
+    <globalSetting name="CreateNewFileForm.referenceLanguageComboBox.SelectedIndex">0</globalSetting>
+    <globalSetting name="CreateNewFileForm.newLanguageComboBox.SelectedIndex">118</globalSetting>
+    <globalSetting name="CreateNewFileForm.copyTextsCheckBox.Checked">False</globalSetting>
+    <globalSetting name="CreateNewFileForm.automaticallyTranslateCheckBox.Checked">False</globalSetting>
     <userSetting name="arthur@DASZ.filesInitialDir">P:\Kistl\Kistl.Client\Presentables\FilterViewModels</userSetting>
     <userSetting name="arthur@DASZ.FindText">
     </userSetting>
-    <userSetting name="arthur@DASZ.RecentFiles">
-    </userSetting>
+    <userSetting name="arthur@DASZ.RecentFiles">P:\Kistl\Kistl.Client\Presentables\ActionViewModelResources.resx;P:\Kistl\Kistl.Client\Presentables\ActionViewModelResources.de.resx;P:\Kistl\Kistl.Client\Presentables\KistlBase\ApplicationViewModelResources.resx;P:\Kistl\Kistl.Client\Presentables\KistlBase\ApplicationViewModelResources.de.resx;P:\Kistl\Kistl.Client\Presentables\ValueViewModels\BaseObjectCollectionViewModelResources.resx;P:\Kistl\Kistl.Client\Presentables\ValueViewModels\BaseObjectCollectionViewModelResources.de.resx;P:\Kistl\Kistl.Client\Presentables\CacheDebuggerViewModelResources.resx;P:\Kistl\Kistl.Client\Presentables\CacheDebuggerViewModelResources.de.resx;P:\Kistl\Kistl.Client\Presentables\KistlBase\CommonCommandsResources.resx;P:\Kistl\Kistl.Client\Presentables\KistlBase\CommonCommandsResources.de.resx;P:\Kistl\Kistl.Client\Presentables\DataObjectSelectionTaskViewModelResources.resx;P:\Kistl\Kistl.Client\Presentables\DataObjectSelectionTaskViewModelResources.de.resx;P:\Kistl\Kistl.Client\Presentables\ErrorListViewModelResources.resx;P:\Kistl\Kistl.Client\Presentables\ErrorListViewModelResources.de.resx;P:\Kistl\Kistl.Client\Presentables\FilterViewModels\FilterViewModelResources.resx;P:\Kistl\Kistl.Client\Presentables\FilterViewModels\FilterViewModelResources.de.resx;P:\Kistl\Kistl.Client\Presentables\KistlBase\InstanceListViewModelResources.resx;P:\Kistl\Kistl.Client\Presentables\KistlBase\InstanceListViewModelResources.de.resx;P:\Kistl\Kistl.Client\Presentables\GUI\MultiLineEditorDialogViewModelResources.resx;P:\Kistl\Kistl.Client\Presentables\GUI\MultiLineEditorDialogViewModelResources.de.resx;P:\Kistl\Kistl.Client\Presentables\GUI\NavigatorViewModelResources.resx;P:\Kistl\Kistl.Client\Presentables\GUI\NavigatorViewModelResources.de.resx;P:\Kistl\Kistl.Client\Presentables\ValueViewModels\ObjectReferenceViewModelResources.resx;P:\Kistl\Kistl.Client\Presentables\ValueViewModels\ObjectReferenceViewModelResources.de.resx;P:\Kistl\Kistl.Client\Presentables\ParameterInputTaskViewModelResources.resx;P:\Kistl\Kistl.Client\Presentables\ParameterInputTaskViewModelResources.de.resx;P:\Kistl\Kistl.Client\Presentables\KistlBase\RelationChainViewModelResources.resx;P:\Kistl\Kistl.Client\Presentables\KistlBase\RelationChainViewModelResources.de.resx;P:\Kistl\Kistl.Client\Properties\Resources.resx;P:\Kistl\Kistl.Client\Properties\Resources.de.resx;P:\Kistl\Kistl.Client\Presentables\ValueInputTaskViewModelResources.resx;P:\Kistl\Kistl.Client\Presentables\ValueInputTaskViewModelResources.de.resx;P:\Kistl\Kistl.Client\Presentables\ValueViewModels\ValueViewModelResources.resx;P:\Kistl\Kistl.Client\Presentables\ValueViewModels\ValueViewModelResources.de.resx;P:\Kistl\Kistl.Client\Presentables\ObjectEditor\WorkspaceViewModelResources.resx;P:\Kistl\Kistl.Client\Presentables\ObjectBrowser\WorkspaceViewModelResources.resx;P:\Kistl\Kistl.Client\Presentables\ObjectEditor\WorkspaceViewModelResources.de.resx;P:\Kistl\Kistl.Client\Presentables\ObjectBrowser\WorkspaceViewModelResources.de.resx</userSetting>
     <description>
     </description>
   </configuration>
   <fileGroups>
     <fileGroup name="" projectFolderUniqueID="5bd1c821-be5e-4cbe-a56b-311cf173da50" orderPosition="0" uniqueID="76ab6010-e84a-4b23-817b-0e748225216e">
       <file filePath="Kistl.Client\Presentables\ActionViewModelResources.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\ActionViewModelResources.resx" uniqueID="91841af9-64ba-4c94-9522-7ffc497f3018" />
-      <file filePath="Kistl.Client\Presentables\ActionViewModelResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\ActionViewModelResources.de.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="Kistl.Client\Presentables\ActionViewModelResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\ActionViewModelResources.de.resx" uniqueID="4f4ba3ab-d4fe-4223-925f-224ca7e96f79" />
       <remarks>
       </remarks>
     </fileGroup>
@@ -54,13 +59,13 @@
     </fileGroup>
     <fileGroup name="" projectFolderUniqueID="5bd1c821-be5e-4cbe-a56b-311cf173da50" orderPosition="0" uniqueID="9e3ea0b9-b9f6-4eb0-869c-8b9f4fcbfbbb">
       <file filePath="Kistl.Client\Presentables\KistlBase\ApplicationViewModelResources.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\KistlBase\ApplicationViewModelResources.resx" uniqueID="d84f2bf6-c6ce-4a82-bc50-f08119d56336" />
-      <file filePath="Kistl.Client\Presentables\KistlBase\ApplicationViewModelResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\KistlBase\ApplicationViewModelResources.de.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="Kistl.Client\Presentables\KistlBase\ApplicationViewModelResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\KistlBase\ApplicationViewModelResources.de.resx" uniqueID="7027e0b8-8dcc-4d73-84a5-9f0b85eaa5db" />
       <remarks>
       </remarks>
     </fileGroup>
     <fileGroup name="" projectFolderUniqueID="5bd1c821-be5e-4cbe-a56b-311cf173da50" orderPosition="0" uniqueID="1f48663a-9640-4bbf-9403-40f19554be07">
       <file filePath="Kistl.Client\Presentables\ValueViewModels\BaseObjectCollectionViewModelResources.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\ValueViewModels\BaseObjectCollectionViewModelResources.resx" uniqueID="d3be025c-6322-43cd-b9d6-7af703481f86" />
-      <file filePath="Kistl.Client\Presentables\ValueViewModels\BaseObjectCollectionViewModelResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\ValueViewModels\BaseObjectCollectionViewModelResources.de.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="Kistl.Client\Presentables\ValueViewModels\BaseObjectCollectionViewModelResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\ValueViewModels\BaseObjectCollectionViewModelResources.de.resx" uniqueID="f0c7af9d-89ee-4118-8180-f784425e2b24" />
       <remarks>
       </remarks>
     </fileGroup>
@@ -71,13 +76,13 @@
     </fileGroup>
     <fileGroup name="" projectFolderUniqueID="5bd1c821-be5e-4cbe-a56b-311cf173da50" orderPosition="0" uniqueID="5b8a9757-d7e0-4397-a9ff-f9227a7eb195">
       <file filePath="Kistl.Client\Presentables\CacheDebuggerViewModelResources.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\CacheDebuggerViewModelResources.resx" uniqueID="e022342a-8475-43ec-9f2a-1ed541f569b8" />
-      <file filePath="Kistl.Client\Presentables\CacheDebuggerViewModelResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\CacheDebuggerViewModelResources.de.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="Kistl.Client\Presentables\CacheDebuggerViewModelResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\CacheDebuggerViewModelResources.de.resx" uniqueID="bd45f615-d45d-4af1-9d2f-8291d6087514" />
       <remarks>
       </remarks>
     </fileGroup>
     <fileGroup name="" projectFolderUniqueID="5bd1c821-be5e-4cbe-a56b-311cf173da50" orderPosition="0" uniqueID="5e67b9c9-d0a4-4caa-b3c8-19b0c414e9e7">
       <file filePath="Kistl.Client\Presentables\KistlBase\CommonCommandsResources.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\KistlBase\CommonCommandsResources.resx" uniqueID="63316b72-5790-4513-b5b1-dd2ce5d7306a" />
-      <file filePath="Kistl.Client\Presentables\KistlBase\CommonCommandsResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\KistlBase\CommonCommandsResources.de.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="Kistl.Client\Presentables\KistlBase\CommonCommandsResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\KistlBase\CommonCommandsResources.de.resx" uniqueID="12fd9dcd-16f4-4ea1-a672-467748151a98" />
       <remarks>
       </remarks>
     </fileGroup>
@@ -98,19 +103,19 @@
     </fileGroup>
     <fileGroup name="" projectFolderUniqueID="5bd1c821-be5e-4cbe-a56b-311cf173da50" orderPosition="0" uniqueID="6eb3ff0d-4686-4c39-85a6-4c2cf062991b">
       <file filePath="Kistl.Client\Presentables\DataObjectSelectionTaskViewModelResources.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\DataObjectSelectionTaskViewModelResources.resx" uniqueID="9f8dd86c-737f-418e-8fe8-915541e6cfce" />
-      <file filePath="Kistl.Client\Presentables\DataObjectSelectionTaskViewModelResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\DataObjectSelectionTaskViewModelResources.de.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="Kistl.Client\Presentables\DataObjectSelectionTaskViewModelResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\DataObjectSelectionTaskViewModelResources.de.resx" uniqueID="ea7cfecc-71d4-4ef2-93aa-3e2c5a56dc7c" />
       <remarks>
       </remarks>
     </fileGroup>
     <fileGroup name="" projectFolderUniqueID="5bd1c821-be5e-4cbe-a56b-311cf173da50" orderPosition="0" uniqueID="d62904dc-7a9f-4aae-b488-96710cc3c5ec">
       <file filePath="Kistl.Client\Presentables\ErrorListViewModelResources.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\ErrorListViewModelResources.resx" uniqueID="566d5bae-f770-4ef3-8659-4aa7def8a989" />
-      <file filePath="Kistl.Client\Presentables\ErrorListViewModelResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\ErrorListViewModelResources.de.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="Kistl.Client\Presentables\ErrorListViewModelResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\ErrorListViewModelResources.de.resx" uniqueID="fa7a6f31-448a-410e-a513-3e29e4ae5d8a" />
       <remarks>
       </remarks>
     </fileGroup>
     <fileGroup name="" projectFolderUniqueID="5bd1c821-be5e-4cbe-a56b-311cf173da50" orderPosition="0" uniqueID="3baf1af8-e5c5-4d08-93d8-88afe423718d">
       <file filePath="Kistl.Client\Presentables\FilterViewModels\FilterViewModelResources.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\FilterViewModels\FilterViewModelResources.resx" uniqueID="38166bc2-9494-41a4-8af6-d61f868d77bc" />
-      <file filePath="Kistl.Client\Presentables\FilterViewModels\FilterViewModelResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\FilterViewModels\FilterViewModelResources.de.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="Kistl.Client\Presentables\FilterViewModels\FilterViewModelResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\FilterViewModels\FilterViewModelResources.de.resx" uniqueID="cb640759-498e-408f-8e16-5931a0cbbb66" />
       <remarks>
       </remarks>
     </fileGroup>
@@ -121,7 +126,13 @@
     </fileGroup>
     <fileGroup name="" projectFolderUniqueID="5bd1c821-be5e-4cbe-a56b-311cf173da50" orderPosition="0" uniqueID="bb4ca179-1ac8-4bc7-9b35-94c11c719ae5">
       <file filePath="Kistl.Client\Presentables\KistlBase\InstanceListViewModelResources.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\KistlBase\InstanceListViewModelResources.resx" uniqueID="cacbfbc0-e3eb-465b-b0ec-a04436e307ee" />
-      <file filePath="Kistl.Client\Presentables\KistlBase\InstanceListViewModelResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\KistlBase\InstanceListViewModelResources.de.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="Kistl.Client\Presentables\KistlBase\InstanceListViewModelResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\KistlBase\InstanceListViewModelResources.de.resx" uniqueID="78c7e0f6-171d-48de-9d68-b1b2e39230e1" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="93fe4641-7977-4e0a-87f4-84bf6605d3b3" orderPosition="0" uniqueID="e016ced3-9fd3-48ea-8bc5-ad937aa64ce1">
+      <file filePath="Kistl.API.Client\IToolkitResources.resx" absoluteFilePath="P:\Kistl\Kistl.API.Client\IToolkitResources.resx" uniqueID="959414ce-ffe6-4930-bf66-b5332e2bb93e" />
+      <file filePath="Kistl.API.Client\IToolkitResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.API.Client\IToolkitResources.de.resx" uniqueID="af116c86-ee96-40a6-abd7-4c8ae02a11bd" />
       <remarks>
       </remarks>
     </fileGroup>
@@ -142,19 +153,19 @@
     </fileGroup>
     <fileGroup name="" projectFolderUniqueID="5bd1c821-be5e-4cbe-a56b-311cf173da50" orderPosition="0" uniqueID="7cf10392-4474-4c3a-bce4-f6332bcc9881">
       <file filePath="Kistl.Client\Properties\Resources.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Properties\Resources.resx" uniqueID="e0fc74c4-44e7-44d9-8bdc-ed6ddb364882" />
-      <file filePath="Kistl.Client\Properties\Resources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Properties\Resources.de.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="Kistl.Client\Properties\Resources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Properties\Resources.de.resx" uniqueID="04856680-f158-496d-a0cf-75c7d34e5978" />
       <remarks>
       </remarks>
     </fileGroup>
     <fileGroup name="" projectFolderUniqueID="5bd1c821-be5e-4cbe-a56b-311cf173da50" orderPosition="0" uniqueID="4d8f5518-3845-4351-9624-01697fe65826">
       <file filePath="Kistl.Client\Presentables\GUI\MultiLineEditorDialogViewModelResources.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\GUI\MultiLineEditorDialogViewModelResources.resx" uniqueID="1eb6f64a-5e26-4c32-9c0e-91cd0b8f09a2" />
-      <file filePath="Kistl.Client\Presentables\GUI\MultiLineEditorDialogViewModelResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\GUI\MultiLineEditorDialogViewModelResources.de.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="Kistl.Client\Presentables\GUI\MultiLineEditorDialogViewModelResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\GUI\MultiLineEditorDialogViewModelResources.de.resx" uniqueID="2df98e4c-1fa1-4bfd-9ed8-782ca303b016" />
       <remarks>
       </remarks>
     </fileGroup>
     <fileGroup name="" projectFolderUniqueID="5bd1c821-be5e-4cbe-a56b-311cf173da50" orderPosition="0" uniqueID="544d215f-6405-4b70-a060-817b3de1cc17">
       <file filePath="Kistl.Client\Presentables\GUI\NavigatorViewModelResources.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\GUI\NavigatorViewModelResources.resx" uniqueID="f2147481-95cd-4b8d-9c6d-d458507e7c9d" />
-      <file filePath="Kistl.Client\Presentables\GUI\NavigatorViewModelResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\GUI\NavigatorViewModelResources.de.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="Kistl.Client\Presentables\GUI\NavigatorViewModelResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\GUI\NavigatorViewModelResources.de.resx" uniqueID="29fc2124-81c2-4e1d-bc7e-b37fd7ed2198" />
       <remarks>
       </remarks>
     </fileGroup>
@@ -165,13 +176,13 @@
     </fileGroup>
     <fileGroup name="" projectFolderUniqueID="5bd1c821-be5e-4cbe-a56b-311cf173da50" orderPosition="0" uniqueID="aa1f1ed5-365b-487a-bcb5-3aedf4c2cb36">
       <file filePath="Kistl.Client\Presentables\ValueViewModels\ObjectReferenceViewModelResources.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\ValueViewModels\ObjectReferenceViewModelResources.resx" uniqueID="eedd50bd-0391-43cd-bd0f-bc78c081c953" />
-      <file filePath="Kistl.Client\Presentables\ValueViewModels\ObjectReferenceViewModelResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\ValueViewModels\ObjectReferenceViewModelResources.de.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="Kistl.Client\Presentables\ValueViewModels\ObjectReferenceViewModelResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\ValueViewModels\ObjectReferenceViewModelResources.de.resx" uniqueID="a5ab9c57-5c42-4d07-8c48-dbb9fa74a5f4" />
       <remarks>
       </remarks>
     </fileGroup>
     <fileGroup name="" projectFolderUniqueID="5bd1c821-be5e-4cbe-a56b-311cf173da50" orderPosition="0" uniqueID="f7177f30-2e9e-466c-9025-d396cd5fa5ba">
       <file filePath="Kistl.Client\Presentables\ParameterInputTaskViewModelResources.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\ParameterInputTaskViewModelResources.resx" uniqueID="0112a6ee-5c04-4cd1-ba23-710dd5f5b108" />
-      <file filePath="Kistl.Client\Presentables\ParameterInputTaskViewModelResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\ParameterInputTaskViewModelResources.de.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="Kistl.Client\Presentables\ParameterInputTaskViewModelResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\ParameterInputTaskViewModelResources.de.resx" uniqueID="8837b411-274a-4049-8f7a-d11c0bee1232" />
       <remarks>
       </remarks>
     </fileGroup>
@@ -187,19 +198,19 @@
     </fileGroup>
     <fileGroup name="" projectFolderUniqueID="5bd1c821-be5e-4cbe-a56b-311cf173da50" orderPosition="0" uniqueID="26e658a8-ebe5-4f51-a400-ee43de3026ee">
       <file filePath="Kistl.Client\Presentables\KistlBase\RelationChainViewModelResources.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\KistlBase\RelationChainViewModelResources.resx" uniqueID="a4b6cdef-c559-4ccc-b753-9d7d16aa8360" />
-      <file filePath="Kistl.Client\Presentables\KistlBase\RelationChainViewModelResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\KistlBase\RelationChainViewModelResources.de.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="Kistl.Client\Presentables\KistlBase\RelationChainViewModelResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\KistlBase\RelationChainViewModelResources.de.resx" uniqueID="033acf87-08f8-4a39-bc70-298ba7fe1c5d" />
       <remarks>
       </remarks>
     </fileGroup>
     <fileGroup name="" projectFolderUniqueID="5bd1c821-be5e-4cbe-a56b-311cf173da50" orderPosition="0" uniqueID="b7197b72-22a9-47ed-b16b-983ec1965f5a">
       <file filePath="Kistl.Client\Presentables\ValueInputTaskViewModelResources.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\ValueInputTaskViewModelResources.resx" uniqueID="cb0f7125-c243-4b51-a762-0a8924808dee" />
-      <file filePath="Kistl.Client\Presentables\ValueInputTaskViewModelResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\ValueInputTaskViewModelResources.de.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="Kistl.Client\Presentables\ValueInputTaskViewModelResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\ValueInputTaskViewModelResources.de.resx" uniqueID="1434a000-2e6c-4167-b8f2-2e79c52b58bd" />
       <remarks>
       </remarks>
     </fileGroup>
     <fileGroup name="" projectFolderUniqueID="5bd1c821-be5e-4cbe-a56b-311cf173da50" orderPosition="0" uniqueID="09b7c944-af61-4ad1-a575-20cdfa64268a">
       <file filePath="Kistl.Client\Presentables\ValueViewModels\ValueViewModelResources.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\ValueViewModels\ValueViewModelResources.resx" uniqueID="02a8104c-5dd9-4163-97c9-7f5c913a0659" />
-      <file filePath="Kistl.Client\Presentables\ValueViewModels\ValueViewModelResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\ValueViewModels\ValueViewModelResources.de.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="Kistl.Client\Presentables\ValueViewModels\ValueViewModelResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\ValueViewModels\ValueViewModelResources.de.resx" uniqueID="16759a88-d6d0-4a3b-a967-a9bc989f9bc7" />
       <remarks>
       </remarks>
     </fileGroup>
@@ -210,13 +221,13 @@
     </fileGroup>
     <fileGroup name="" projectFolderUniqueID="5bd1c821-be5e-4cbe-a56b-311cf173da50" orderPosition="0" uniqueID="f9c9961e-f79d-4cdb-bb6f-73b1d7db6754">
       <file filePath="Kistl.Client\Presentables\ObjectEditor\WorkspaceViewModelResources.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\ObjectEditor\WorkspaceViewModelResources.resx" uniqueID="814102ca-5875-45cd-91bb-0a51e25f0a1f" />
-      <file filePath="Kistl.Client\Presentables\ObjectEditor\WorkspaceViewModelResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\ObjectEditor\WorkspaceViewModelResources.de.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="Kistl.Client\Presentables\ObjectEditor\WorkspaceViewModelResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\ObjectEditor\WorkspaceViewModelResources.de.resx" uniqueID="a90c3efc-a0c4-4746-8c8b-466a616ccb8a" />
       <remarks>
       </remarks>
     </fileGroup>
     <fileGroup name="" projectFolderUniqueID="5bd1c821-be5e-4cbe-a56b-311cf173da50" orderPosition="0" uniqueID="d1a76731-2254-4bc3-9d51-510757e3eecb">
       <file filePath="Kistl.Client\Presentables\ObjectBrowser\WorkspaceViewModelResources.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\ObjectBrowser\WorkspaceViewModelResources.resx" uniqueID="3bb48a41-17d5-465a-bc02-a3020d3af730" />
-      <file filePath="Kistl.Client\Presentables\ObjectBrowser\WorkspaceViewModelResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\ObjectBrowser\WorkspaceViewModelResources.de.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="Kistl.Client\Presentables\ObjectBrowser\WorkspaceViewModelResources.de.resx" absoluteFilePath="P:\Kistl\Kistl.Client\Presentables\ObjectBrowser\WorkspaceViewModelResources.de.resx" uniqueID="dec21523-6f3d-4625-a74d-306d9ad4c958" />
       <remarks>
       </remarks>
     </fileGroup>

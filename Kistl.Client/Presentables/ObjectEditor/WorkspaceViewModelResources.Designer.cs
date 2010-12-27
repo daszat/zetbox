@@ -115,6 +115,15 @@ namespace Kistl.Client.Presentables.ObjectEditor {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Objects:.
+        /// </summary>
+        internal static string ItemsLabel {
+            get {
+                return ResourceManager.GetString("ItemsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Workspace.
         /// </summary>
         internal static string Name {

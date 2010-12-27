@@ -13,6 +13,11 @@ namespace Kistl.Client.Presentables
         void ShowDialog(ViewModel mdl);
         void ShowDialog(ViewModel mdl, Kistl.App.GUI.ControlKind kind);
 
+        /// <summary>
+        /// Initializes the requested culture form config on the current thread
+        /// </summary>
+        void InitCulture();
+
         // Create Models
         TModelFactory CreateViewModel<TModelFactory>() where TModelFactory : class;
         TModelFactory CreateViewModel<TModelFactory>(Kistl.API.IDataObject obj) where TModelFactory : class;

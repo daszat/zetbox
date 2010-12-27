@@ -135,6 +135,9 @@
 	<data name="DeleteCommand_Tooltip" xml:space="preserve">
     <value>Deletes the current object</value>
   </data>
+	<data name="ItemsLabel" xml:space="preserve">
+    <value>Objects:</value>
+  </data>
 	<data name="Name" xml:space="preserve">
     <value>Workspace</value>
   </data>

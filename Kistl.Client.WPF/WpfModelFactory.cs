@@ -12,14 +12,16 @@ namespace Kistl.Client.WPF
     using Kistl.Client.GUI;
     using Kistl.Client.Presentables;
     using Microsoft.Win32;
+    using Kistl.API.Client;
+    using Kistl.API.Configuration;
 
     public class WpfModelFactory
         : ViewModelFactory
     {
         private readonly IUiThreadManager uiThread;
 
-        public WpfModelFactory(Autofac.ILifetimeScope container, IUiThreadManager uiThread, IFrozenContext frozenCtx)
-            : base(container, frozenCtx)
+        public WpfModelFactory(Autofac.ILifetimeScope container, IUiThreadManager uiThread, IFrozenContext frozenCtx, KistlConfig cfg)
+            : base(container, frozenCtx, cfg)
         {
             this.uiThread = uiThread;
         }
@@ -137,7 +139,7 @@ namespace Kistl.Client.WPF
 
         protected override void ShowWaitDialog()
         {
-            SplashScreen.ShowSplashScreen("ZBox is busy", "The current operation might take some time", 1);
+            SplashScreen.ShowSplashScreen(IToolkitResources.WaitDialog_Message, IToolkitResources.WaitDialog_Info, 1);
         }
 
         protected override void CloseWaitDialog()

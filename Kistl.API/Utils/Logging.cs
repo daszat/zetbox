@@ -15,6 +15,7 @@ namespace Kistl.API.Utils
         private readonly static ILog _linq = LogManager.GetLogger("Kistl.Linq");
         private readonly static ILog _linqquery = LogManager.GetLogger("Kistl.Linq.Query");
         private readonly static ILog _reflection = LogManager.GetLogger("Kistl.Reflection");
+        private readonly static ILog _assemblyLoader = LogManager.GetLogger("Kistl.AssemblyLoader");
 
         public static ILog Log
         {
@@ -37,6 +38,10 @@ namespace Kistl.API.Utils
         public static ILog Reflection
         {
             get { return _reflection; }
+        }
+        public static ILog AssemblyLoader
+        {
+            get { return _assemblyLoader; }
         }
 
         public static void Configure()

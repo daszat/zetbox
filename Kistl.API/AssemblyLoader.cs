@@ -96,11 +96,11 @@ namespace Kistl.API
             try
             {
                 Directory.GetFiles(AssemblyLoader.TargetAssemblyFolder).ForEach<string>(f => System.IO.File.Delete(f));
-                Logging.Log.InfoFormat("Cleaned TargetAssemblyFolder {0}", AssemblyLoader.TargetAssemblyFolder);
+                Logging.AssemblyLoader.InfoFormat("Cleaned TargetAssemblyFolder {0}", AssemblyLoader.TargetAssemblyFolder);
             }
             catch (Exception ex)
             {
-                Logging.Log.WarnFormat("Couldn't clean TargetAssemblyFolder {0}: {1}", AssemblyLoader.TargetAssemblyFolder, ex.ToString());
+                Logging.AssemblyLoader.WarnFormat("Couldn't clean TargetAssemblyFolder {0}: {1}", AssemblyLoader.TargetAssemblyFolder, ex.ToString());
             }
         }
 
@@ -129,13 +129,13 @@ namespace Kistl.API
         internal static Assembly AssemblyResolve(object sender, ResolveEventArgs args)
         {
             if (AssemblyLoader.SearchPath.Count <= 0) return null;
-            Logging.Log.DebugFormat("Resolving Assembly {0}", args.Name);
+            Logging.AssemblyLoader.DebugFormat("Resolving Assembly {0}", args.Name);
             return LoadAssemblyByName(args.Name, false);
         }
 
         internal static Assembly ReflectionOnlyAssemblyResolve(object sender, ResolveEventArgs args)
         {
-            Logging.Log.DebugFormat("Resolving Assembly {0} for reflection", args.Name);
+            Logging.AssemblyLoader.DebugFormat("Resolving Assembly {0} for reflection", args.Name);
             try
             {
                 // http://blogs.msdn.com/b/jmstall/archive/2006/11/22/reflection-type-load-exception.aspx
@@ -234,7 +234,7 @@ namespace Kistl.API
                 // the folder should have been cleared on initialisation and once
                 // an assembly is loaded, we cannot re-load the assembly anyways.
                 string targetDll = Path.Combine(TargetAssemblyFolder, baseName + ".dll");
-                Logging.Log.DebugFormat("Loading {0} (from {1}){2}", sourceDll, targetDll, reflectOnly ? " for reflection" : String.Empty);
+                Logging.AssemblyLoader.DebugFormat("Loading {0} (from {1}){2}", sourceDll, targetDll, reflectOnly ? " for reflection" : String.Empty);
                 try
                 {
                     if (!File.Exists(targetDll))
@@ -251,7 +251,7 @@ namespace Kistl.API
                 }
                 catch (Exception ex)
                 {
-                    Logging.Log.Warn("Error loading assembly", ex);
+                    Logging.AssemblyLoader.Warn("Error loading assembly", ex);
                 }
                 Assembly result = null;
 
@@ -274,7 +274,7 @@ namespace Kistl.API
                     //}
                 }
                 if (result == null)
-                    Logging.Log.WarnFormat("Cannot load {0}", baseName);
+                    Logging.AssemblyLoader.WarnFormat("Cannot load {0}", baseName);
                 return result;
             }
         }

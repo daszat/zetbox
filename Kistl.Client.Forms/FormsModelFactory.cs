@@ -11,6 +11,7 @@ namespace Kistl.Client.Forms
     using Kistl.Client.GUI;
     using Kistl.Client.Presentables;
     using Kistl.Client.Presentables.ObjectBrowser;
+    using Kistl.API.Configuration;
 
     public class FormsModelFactory
         : ViewModelFactory
@@ -18,8 +19,8 @@ namespace Kistl.Client.Forms
 
         private List<WorkspaceView> _workspaces = new List<WorkspaceView>();
 
-        public FormsModelFactory(Autofac.ILifetimeScope container, IFrozenContext metaCtx)
-            : base(container, metaCtx)
+        public FormsModelFactory(Autofac.ILifetimeScope container, IFrozenContext metaCtx, KistlConfig cfg)
+            : base(container, metaCtx, cfg)
         {
         }
 
