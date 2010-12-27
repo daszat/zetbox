@@ -15,7 +15,10 @@
       <Module>Kistl.API.ApiModule, Kistl.API</Module>
       <Module>Kistl.API.Server.ServerApiModule, Kistl.API.Server</Module>
       <Module>Kistl.Server.ServerModule, Kistl.Server</Module>
-      <!-- non-server modules need full assembly name for mono -->
+      <!-- 
+        non-server modules need full assembly name for mono
+        See https://bugzilla.novell.com/show_bug.cgi?id=661461
+        -->
       <Module>Kistl.Objects.InterfaceModule, Kistl.Objects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7b69192d05046fdf</Module>
       <Module>Kistl.Objects.NHibernateModule, Kistl.Objects.NHibernateImpl, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7b69192d05046fdf</Module>
       <Module>Kistl.Objects.MemoryModule, Kistl.Objects.MemoryImpl, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7b69192d05046fdf</Module>

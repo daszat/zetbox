@@ -153,7 +153,8 @@ namespace Kistl.API
             var source = objects[ifType];
             if (source != null)
             {
-                return source.AsQueryable().AddOfType(ifType.Type).Cast<IPersistenceObject>();
+                // double cast to work around https://bugzilla.novell.com/show_bug.cgi?id=661462
+                return source.Cast<IPersistenceObject>().AsQueryable().AddOfType(ifType.Type).Cast<IPersistenceObject>();
             }
             else
             {
