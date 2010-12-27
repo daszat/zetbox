@@ -43,7 +43,9 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
             }
 
             string nameAttr = String.Format("name=\"{0}\"", prop.Name);
-            string columnAttr = String.Format("column=\"`fk_{0}{1}`\"", prefix, otherEnd.RoleName);
+            string columnAttr = rel.HasStorage(relEnd.GetRole())
+            ? String.Format("column=\"`{0}`\"", Construct.ForeignKeyColumnName(otherEnd, prefix))
+            : String.Format("column=\"`{0}`\"", Construct.ForeignKeyColumnName(relEnd, prefix));
             string classAttr = String.Format("class=\"{0}\"",
                 ObjectClassHbm.GetAssemblyQualifiedImplementation(otherEnd.Type, this.Settings));
             //string tableAttr = String.Format("table =\"`{0}`\" ", rel.GetAssociationName());
@@ -75,7 +77,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
                             this.WriteObjects("inverse=\"true\" ");
                         }
                         this.WriteLine(">");
-                        this.WriteObjects("    <key column=\"`", Construct.ForeignKeyColumnName(otherEnd), "`\" />");
+                        this.WriteObjects("    <key ", columnAttr, " />");
                         this.WriteLine();
                         this.WriteObjects("    <one-to-many ", classAttr, " />");
                         this.WriteLine();
