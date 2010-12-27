@@ -15,10 +15,11 @@
       <Module>Kistl.API.ApiModule, Kistl.API</Module>
       <Module>Kistl.API.Server.ServerApiModule, Kistl.API.Server</Module>
       <Module>Kistl.Server.ServerModule, Kistl.Server</Module>
-      <Module>Kistl.Objects.InterfaceModule, Kistl.Objects</Module>
-      <Module>Kistl.Objects.NHibernateModule, Kistl.Objects.NHibernateImpl</Module>
-      <Module>Kistl.Objects.MemoryModule, Kistl.Objects.MemoryImpl</Module>
-      <Module>Kistl.DalProvider.NHibernate.NHibernateProvider, Kistl.DalProvider.NHibernate</Module>
+      <!-- Generated modules need full assembly name for mono -->
+      <Module>Kistl.Objects.InterfaceModule, Kistl.Objects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7b69192d05046fdf</Module>
+      <Module>Kistl.Objects.NHibernateModule, Kistl.Objects.NHibernateImpl, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7b69192d05046fdf</Module>
+      <Module>Kistl.Objects.MemoryModule, Kistl.Objects.MemoryImpl, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7b69192d05046fdf</Module>
+      <Module>Kistl.DalProvider.NHibernate.NHibernateProvider, Kistl.DalProvider.NHibernate, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7b69192d05046fdf</Module>
       <Module>Kistl.DalProvider.Memory.MemoryProvider, Kistl.DalProvider.Memory</Module>
       <Module>Kistl.App.Projekte.Server.CustomServerActionsModule, Kistl.App.Projekte.Server</Module>
       <Module>Kistl.App.Projekte.Common.CustomCommonActionsModule, Kistl.App.Projekte.Common</Module>
@@ -27,10 +28,10 @@
       <Module>Kistl.Generator.GeneratorModule, Kistl.Generator</Module>
       <Module>Kistl.DalProvider.Client.Generator.ClientGeneratorProvider, Kistl.DalProvider.Client.Generator</Module>
       <Module>Kistl.DalProvider.Memory.Generator.MemoryGeneratorProvider, Kistl.DalProvider.Memory.Generator</Module>
-      <Module>Kistl.DalProvider.Ef.Generator.EfGeneratorProvider, Kistl.DalProvider.Ef.Generator</Module>
       <Module>Kistl.DalProvider.NHibernate.Generator.NhGeneratorProvider, Kistl.DalProvider.NHibernate.Generator</Module>
       <!-- 
         cant be used since it won't compile under mono
+      <Module>Kistl.DalProvider.Ef.Generator.EfGeneratorProvider, Kistl.DalProvider.Ef.Generator</Module>
       <Module>Kistl.Generator.ClickOnce.ClickOnceModule, Kistl.Generator.ClickOnce</Module>
       -->
     </Modules>
