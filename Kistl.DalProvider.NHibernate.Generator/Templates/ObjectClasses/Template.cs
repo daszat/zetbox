@@ -29,9 +29,10 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
 
             if (cls.BaseObjectClass == null)
             {
-                Properties.ProxyProperty.Call(Host, ctx, "int", "ID", true, false);
+                Properties.IdProperty.Call(Host, ctx);
             }
         }
+
         protected override void ApplyConstructorTemplate()
         {
             // replace base constructors
@@ -41,6 +42,11 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                 cls.Name,
                 GetTypeName(),
                 cls.BaseObjectClass == null ? null : cls.BaseObjectClass.Name);
+
+            if (cls.BaseObjectClass == null)
+            {
+                SaveOrUpdateToMethod.Call(Host, ctx);
+            }
         }
 
         protected override void ApplyClassTailTemplate()

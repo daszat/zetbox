@@ -16,10 +16,10 @@
 <%@ Parameter Name="interfaceName" Type="string" %>
 <%@ Parameter Name="className" Type="string" %>
 <%@ Parameter Name="baseClassName" Type="string" %>
-		public <%= className %>()
-			: this(null)
-		{
-		}
+        public <%= className %>()
+            : this(null)
+        {
+        }
 
         /// <summary>Create a new unattached instance</summary>
         public <%= className %>(Func<IFrozenContext> lazyCtx)

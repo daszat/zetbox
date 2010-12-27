@@ -42,10 +42,10 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
         public override void Generate()
         {
 #line 19 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\Constructors.cst"
-this.WriteObjects("		public ",  className , "()\r\n");
-this.WriteObjects("			: this(null)\r\n");
-this.WriteObjects("		{\r\n");
-this.WriteObjects("		}\r\n");
+this.WriteObjects("        public ",  className , "()\r\n");
+this.WriteObjects("            : this(null)\r\n");
+this.WriteObjects("        {\r\n");
+this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("        /// <summary>Create a new unattached instance</summary>\r\n");
 this.WriteObjects("        public ",  className , "(Func<IFrozenContext> lazyCtx)\r\n");

@@ -123,7 +123,8 @@ namespace Kistl.DalProvider.NHibernate
 
             NotifyChanging(notifySaveList);
 
-            FlushSession(notifySaveList);
+            // TODO: refactor this to always talk about DataObjectNHibernateImpl
+            FlushSession(notifySaveList.Cast<DataObjectNHibernateImpl>().ToList());
 
             NotifyChanged(notifySaveList);
 
@@ -136,7 +137,8 @@ namespace Kistl.DalProvider.NHibernate
 
             var objects = GetModifiedObjects();
 
-            FlushSession(objects);
+            // TODO: refactor this to always talk about DataObjectNHibernateImpl
+            FlushSession(objects.Cast<DataObjectNHibernateImpl>().ToList());
 
             return objects.Count;
         }
@@ -179,31 +181,13 @@ namespace Kistl.DalProvider.NHibernate
                     .ToList();
         }
 
-        private void FlushSession(List<IDataObject> notifySaveList)
+        private void FlushSession(List<DataObjectNHibernateImpl> notifySaveList)
         {
             try
             {
                 foreach (var obj in notifySaveList)
                 {
-                    switch (obj.ObjectState)
-                    {
-                        case DataObjectState.New:
-                            _nhSession.Save(obj);
-                            break;
-                        case DataObjectState.Modified:
-                            _nhSession.Update(obj);
-                            break;
-                        case DataObjectState.Unmodified:
-                            // ignore
-                            break;
-                        case DataObjectState.Deleted:
-                            _nhSession.Delete(obj);
-                            break;
-                        case DataObjectState.NotDeserialized:
-                            throw new InvalidOperationException("object not deserialized");
-                        default:
-                            throw new NotImplementedException(String.Format("unknown DataObjectState encountered: '{0}'", obj.ObjectState));
-                    }
+                    obj.SaveOrUpdateTo(_nhSession);
                 }
                 _nhSession.Flush();
                 Logging.Log.InfoFormat("[{0}] changes submitted.", notifySaveList.Count);
@@ -265,7 +249,12 @@ namespace Kistl.DalProvider.NHibernate
         public override T FindPersistenceObject<T>(Guid exportGuid)
         {
             CheckDisposed();
-            // TODO: t->timpl
+
+            var result = _attachedObjects.Lookup(exportGuid);
+
+            if (result != null)
+                return (T)result;
+
             var q = _nhSession
                 .CreateCriteria(ToImplementationType(GetInterfaceType(typeof(T).FullName)).Type.FullName)
                 .Add(global::NHibernate.Criterion.Restrictions.Eq("ExportGuid", exportGuid))

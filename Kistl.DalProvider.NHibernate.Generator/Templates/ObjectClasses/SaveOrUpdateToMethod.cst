@@ -1,0 +1,36 @@
+﻿<%@ CodeTemplate Language="C#" 
+    Name="ObjectClasses.SaveOrUpdateToMethod"
+    ClassName="Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.SaveOrUpdateToMethod"
+    Inherits="Kistl.Generator.ResourceTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="System.Linq" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.App.Extensions" %>
+<%@ Import Namespace="Kistl.Generator" %>
+<%@ Import Namespace="Kistl.Generator.Extensions" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+        public override void SaveOrUpdateTo(global::NHibernate.ISession session)
+        {
+            switch (this.ObjectState)
+            {
+                case DataObjectState.New:
+                    session.Save(this.Proxy);
+                    break;
+                case DataObjectState.Modified:
+                    session.Update(this.Proxy);
+                    break;
+                case DataObjectState.Unmodified:
+                    // ignore
+                    break;
+                case DataObjectState.Deleted:
+                    session.Delete(this.Proxy);
+                    break;
+                case DataObjectState.NotDeserialized:
+                    throw new InvalidOperationException("object not deserialized");
+                default:
+                    throw new NotImplementedException(String.Format("unknown DataObjectState encountered: '{0}'", this.ObjectState));
+            }
+        }

@@ -127,8 +127,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ProxyClass.cst</DependentUpon>
     </Compile>
+    <Compile Include="Templates\ObjectClasses\SaveOrUpdateToMethod.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SaveOrUpdateToMethod.cst</DependentUpon>
+    </Compile>
     <Compile Include="Templates\ObjectClasses\Template.cs" />
     <Compile Include="Templates\ProjectFile.cs" />
+    <Compile Include="Templates\Properties\IdProperty.cs" />
     <Compile Include="Templates\Properties\ProxyProperty.cs">
       <DependentUpon>ProxyProperty.cst</DependentUpon>
     </Compile>
@@ -200,6 +206,10 @@
     <None Include="Templates\ObjectClasses\ProxyClass.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ProxyClass.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\ObjectClasses\SaveOrUpdateToMethod.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>SaveOrUpdateToMethod.Designer.cs</LastGenOutput>
     </None>
     <None Include="Templates\Properties\ProxyProperty.cst">
       <Generator>Arebis Template Processor</Generator>

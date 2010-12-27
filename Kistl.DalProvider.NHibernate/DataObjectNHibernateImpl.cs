@@ -38,5 +38,7 @@ namespace Kistl.DalProvider.NHibernate
         {
             throw new MemberAccessException(String.Format("No {0} property in {1}", propertyName, GetImplementedInterface().FullName));
         }
+
+        public abstract void SaveOrUpdateTo(global::NHibernate.ISession session);
     }
 }
