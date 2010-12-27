@@ -114,7 +114,7 @@ namespace Kistl.API
                 new Type[] { t }, queryable.Expression));
         }
 
-        public static IQueryable<T> AddOfType<T>(this IQueryable<T> queryable, Type t)
+        public static IQueryable<T> AddOfType<T>(this IQueryable queryable, Type t)
         {
             if (queryable == null) throw new ArgumentNullException("queryable");
             if (t == null) throw new ArgumentNullException("t");
