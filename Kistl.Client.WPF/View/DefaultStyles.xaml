@@ -6,7 +6,7 @@
     <!-- Define Forground Colors -->
     <SolidColorBrush x:Key="MainColor"
                      Color="#003C64" />
-    
+
     <SolidColorBrush x:Key="AccentColor1"
                      Color="#AA272F" />
     <SolidColorBrush x:Key="AccentColor2"
@@ -14,21 +14,23 @@
 
     <!-- Define Background Colors -->
     <SolidColorBrush x:Key="MainBackground"
-                     Color="#EEEEEE" />
+                     Color="#FFFFFF" />
     <SolidColorBrush x:Key="MainBackground2"
-                     Color="#DDDDDD" />
-    
+                     Color="#EEEEEE" />
+
     <SolidColorBrush x:Key="AccentBackground1"
                      Color="#AA272F" />
     <SolidColorBrush x:Key="AccentBackground2"
                      Color="#707F87" />
 
     <!-- Define Inverted Forground Colors -->
+    <SolidColorBrush x:Key="MainColorInverted"
+                     Color="White" />
     <SolidColorBrush x:Key="AccentColor1Inverted"
                      Color="White" />
     <SolidColorBrush x:Key="AccentColor2Inverted"
                      Color="#003C64" />
-    
+
     <!-- Define Default Controls Styles-->
     <Style TargetType="TextBlock">
         <Setter Property="Foreground"
