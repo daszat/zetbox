@@ -3,12 +3,12 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.Specialized;
     using System.Linq;
     using System.Text;
     using Arebis.CodeGeneration;
     using Kistl.API;
     using Kistl.App.Base;
-using System.Collections.Specialized;
 
     public partial class ObjectClassHbm
     {
@@ -94,7 +94,7 @@ using System.Collections.Specialized;
 
         protected virtual void ApplyJoinedSubclasses(List<ObjectClass> subClasses)
         {
-            foreach (var subClass in subClasses)
+            foreach (var subClass in subClasses.OrderBy(cls => cls.Name))
             {
                 JoinedSubclassHbm.Call(Host, ctx, subClass);
             }
