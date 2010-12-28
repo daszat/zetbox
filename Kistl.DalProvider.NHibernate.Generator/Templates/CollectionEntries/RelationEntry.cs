@@ -70,5 +70,17 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries
         {
             return "this.Proxy.ExportGuid";
         }
+
+        protected override void ApplyReloadReferenceBody()
+        {
+            {
+                string referencedImplementation = Mappings.ObjectClassHbm.GetImplementationTypeReference(rel.A.Type, Host.Settings);
+                ObjectClasses.ReloadOneReference.Call(Host, ctx, null, referencedImplementation, "A", null, "_fk_A", "_fk_guid_A", IsExportable());
+            }
+            {
+                string referencedImplementation = Mappings.ObjectClassHbm.GetImplementationTypeReference(rel.B.Type, Host.Settings);
+                ObjectClasses.ReloadOneReference.Call(Host, ctx, null, referencedImplementation, "B", null, "_fk_B", "_fk_guid_B", IsExportable());
+            }
+        }
     }
 }

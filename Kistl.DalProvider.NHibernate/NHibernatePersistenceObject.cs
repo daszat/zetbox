@@ -33,5 +33,7 @@ namespace Kistl.DalProvider.NHibernate
             if (this.Context != null)
                 this.Context.Internals().SetModified(this);
         }
+
+        protected NHibernateContext OurContext { get { return (NHibernateContext)Context; } }
     }
 }

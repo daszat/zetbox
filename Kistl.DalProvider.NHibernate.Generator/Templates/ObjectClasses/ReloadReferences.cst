@@ -1,6 +1,6 @@
 ﻿<%@ CodeTemplate Language="C#"
     Name="ObjectClasses.ReloadReferences"
-    ClassName="Kistl.Generator.Templates.ObjectClasses.ReloadReferences"
+    ClassName="Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.ReloadReferences"
     Inherits="Kistl.Generator.ResourceTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Linq" %>
@@ -28,19 +28,7 @@
         .OrderBy(orp => orp.ObjectClass.Name)
         .ThenBy(orp => orp.Name))
     {
-        Relation rel = Kistl.App.Extensions.RelationExtensions.Lookup(ctx, prop);
-        RelationEnd relEnd = rel.GetEnd(prop);
-        RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
-
-        string referencedInterface = otherEnd.Type.GetDataTypeString();
-        string referencedImplementation = otherEnd.Type.GetDataTypeString() + ImplementationSuffix;
-        string name = prop.Name;
-        string implName = name + Kistl.API.Helper.ImplementationSuffix;
-        string fkBackingName = "_fk_" + name;
-        string fkGuidBackingName = "_fk_guid_" + name;
-        bool isExportable = relEnd.Type.ImplementsIExportable() && otherEnd.Type.ImplementsIExportable();
-
-        ReloadOneReference.Call(Host, ctx, referencedInterface, referencedImplementation, name, implName, fkBackingName, fkGuidBackingName, isExportable);
+        ReloadOneReference.Call(Host, ctx, prop);
     }
 %>
         }

@@ -394,7 +394,8 @@ namespace Kistl.API
             if (exportGuids == null) { throw new ArgumentNullException("exportGuids"); }
 
             var query = objects[ifType];
-            if (query == null) return new List<IPersistenceObject>();
+            if (query == null)
+                return new List<IPersistenceObject>();
             return query.Cast<IExportableInternal>().Where(o => exportGuids.Contains(o.ExportGuid)).Cast<IPersistenceObject>().AsEnumerable();
         }
 

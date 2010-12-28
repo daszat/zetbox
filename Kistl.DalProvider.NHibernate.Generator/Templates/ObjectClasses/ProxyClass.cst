@@ -16,8 +16,9 @@
 <%@ Parameter Name="typeAndNameList" Type="IEnumerable<KeyValuePair<string, string>>" %>
 
         public interface <%= interfaceName %>Interface
+            : IProxyObject
         {
-            int ID { get; set; }
+            // int ID { get; set; }
 
 <% foreach(var p in typeAndNameList) { %>
             <%= p.Key %> <%= p.Value %> { get; set; }

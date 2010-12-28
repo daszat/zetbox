@@ -1,5 +1,5 @@
 
-namespace Kistl.Generator.Templates.ObjectClasses
+namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
 {
     using System;
     using System.Collections.Generic;

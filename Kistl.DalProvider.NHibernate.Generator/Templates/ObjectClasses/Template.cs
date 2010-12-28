@@ -111,7 +111,8 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                         type += ImplementationSuffix + "." + orp.GetReferencedObjectClass().Name + "Interface";
                         if (orp.IsList())
                         {
-                            type = "IList<" + type + ">";
+                            // always hold as collection, the wrapper has to translate/order the elements
+                            type = "ICollection<" + type + ">";
                         }
                     }
                     return new KeyValuePair<string, string>(type, p.Name);

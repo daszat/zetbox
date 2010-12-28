@@ -1,0 +1,30 @@
+﻿<%@ CodeTemplate Language="C#" 
+    Name="ObjectClasses.ReloadOneReference"
+    ClassName="Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.ReloadOneReference" 
+    Inherits="Kistl.Generator.ResourceTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Linq" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.App.Extensions" %>
+<%@ Import Namespace="Kistl.Generator" %>
+<%@ Import Namespace="Kistl.Generator.Extensions" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="referencedInterfaceUnused" Type="string" %>
+<%@ Parameter Name="referencedImplementation" Type="string" %>
+<%@ Parameter Name="name" Type="string" %>
+<%@ Parameter Name="implNameUnused" Type="string" %>
+<%@ Parameter Name="fkBackingName" Type="string" %>
+<%@ Parameter Name="fkGuidBackingName" Type="string" %>
+<%@ Parameter Name="isExportable" Type="bool" %>
+
+<% if (isExportable) { %>
+            if (<%= fkGuidBackingName %>.HasValue)
+                this.Proxy.<%= name %> = OurContext.FindPersistenceProxy<<%= referencedImplementation %>>(<%= fkGuidBackingName %>.Value);
+            else
+<% } %>
+            if (<%= fkBackingName %>.HasValue)
+                this.Proxy.<%= name %> = OurContext.FindPersistenceProxy<<%= referencedImplementation %>>(<%= fkBackingName %>.Value);
+            else
+                this.Proxy.<%= name %> = null;

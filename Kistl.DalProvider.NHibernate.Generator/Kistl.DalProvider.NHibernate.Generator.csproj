@@ -127,6 +127,22 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ProxyClass.cst</DependentUpon>
     </Compile>
+    <Compile Include="Templates\ObjectClasses\ReloadOneReference.cs">
+      <DependentUpon>ReloadOneReference.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\ObjectClasses\ReloadOneReference.Designer.cs">
+      <DependentUpon>ReloadOneReference.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Templates\ObjectClasses\ReloadReferences.cs">
+      <DependentUpon>ReloadReferences.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\ObjectClasses\ReloadReferences.Designer.cs">
+      <DependentUpon>ReloadReferences.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Templates\ObjectClasses\SaveOrUpdateToMethod.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -135,6 +151,14 @@
     <Compile Include="Templates\ObjectClasses\Template.cs" />
     <Compile Include="Templates\ProjectFile.cs" />
     <Compile Include="Templates\Properties\IdProperty.cs" />
+    <Compile Include="Templates\Properties\ObjectReferencePropertyTemplate.cs">
+      <DependentUpon>ObjectReferencePropertyTemplate.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Properties\ObjectReferencePropertyTemplate.Designer.cs">
+      <DependentUpon>ObjectReferencePropertyTemplate.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Templates\Properties\ProxyProperty.cs">
       <DependentUpon>ProxyProperty.cst</DependentUpon>
     </Compile>
@@ -207,9 +231,21 @@
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ProxyClass.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Templates\ObjectClasses\ReloadOneReference.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>ReloadOneReference.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\ObjectClasses\ReloadReferences.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>ReloadReferences.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Templates\ObjectClasses\SaveOrUpdateToMethod.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>SaveOrUpdateToMethod.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\Properties\ObjectReferencePropertyTemplate.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>ObjectReferencePropertyTemplate.Designer.cs</LastGenOutput>
     </None>
     <None Include="Templates\Properties\ProxyProperty.cst">
       <Generator>Arebis Template Processor</Generator>

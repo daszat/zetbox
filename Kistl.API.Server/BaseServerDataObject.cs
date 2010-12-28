@@ -142,7 +142,7 @@ namespace Kistl.API.Server
             : base(lazyCtx)
         {
         }
-        
+
         protected override void OnPropertyChanging(string property, object oldValue, object newValue)
         {
             base.OnPropertyChanging(property, oldValue, newValue);

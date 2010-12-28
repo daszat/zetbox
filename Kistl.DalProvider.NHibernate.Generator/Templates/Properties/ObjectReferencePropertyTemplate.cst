@@ -1,0 +1,147 @@
+﻿<%@ CodeTemplate Language="C#"
+    Name="Properties.ObjectReferencePropertyTemplate"
+    ClassName="Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate"
+    Inherits="Kistl.Generator.MemberTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.App.Extensions" %>
+<%@ Import Namespace="Kistl.Generator" %>
+<%@ Import Namespace="Kistl.Generator.Extensions" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="serializationList" Type="Kistl.Generator.Templates.Serialization.SerializationMembersList" %>
+<%@ Parameter Name="moduleNamespace" Type="string" %>
+<%@ Parameter Name="ownInterface" Type="string" %>
+<%@ Parameter Name="name" Type="string" %>
+<%@ Parameter Name="implNameUnused" Type="string" %>
+<%@ Parameter Name="eventName" Type="string" %>
+<%@ Parameter Name="fkBackingName" Type="string" %>
+<%@ Parameter Name="fkGuidBackingName" Type="string" %>
+<%@ Parameter Name="referencedInterface" Type="string" %>
+<%@ Parameter Name="referencedImplementation" Type="string" %>
+<%@ Parameter Name="associationName" Type="string" %>
+<%@ Parameter Name="targetRoleName" Type="string" %>
+<%@ Parameter Name="positionPropertyName" Type="string" %>
+<%@ Parameter Name="inverseNavigatorName" Type="string" %>
+<%@ Parameter Name="inverseNavigatorIsList" Type="bool" %>
+<%@ Parameter Name="eagerLoading" Type="bool" %>
+<%@ Parameter Name="relDataTypeExportable" Type="bool" %>
+<%@ Parameter Name="callGetterSetterEvents" Type="bool" %>
+        // BEGIN <%= this.GetType() %> for <%= name %>
+        // fkBackingName=this.Proxy.<%= name %>; fkGuidBackingName=<%= fkGuidBackingName %>;
+        // referencedInterface=<%= referencedInterface %>; moduleNamespace=<%= moduleNamespace %>;
+        // inverse Navigator=<%= String.IsNullOrEmpty(inverseNavigatorName) ? "none" : inverseNavigatorName %>; <%= inverseNavigatorIsList ? "is list" : "is reference" %>;
+        // PositionStorage=<%= String.IsNullOrEmpty(positionPropertyName) ? "none" : positionPropertyName %>;
+        // Target <%= relDataTypeExportable ? String.Empty : "not " %>exportable; does <%= callGetterSetterEvents ? String.Empty : "not " %>call events
+
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        <%= GetModifiers() %> <%= referencedInterface %> <%= name %>
+        {
+            get
+            {
+                <%= referencedImplementation %> __value = (<%= referencedImplementation %>)OurContext.AttachAndWrap(this.Proxy.<%= name %>);
+
+<% if(callGetterSetterEvents) { %>
+                if(<%= eventName %>_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<<%= referencedInterface %>>(__value);
+                    <%= eventName %>_Getter(this, e);
+                    __value = (<%= referencedImplementation %>)e.Result;
+                }
+<% } %>
+
+                return __value;
+            }
+            set
+            {
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+
+                // shortcut noops
+                if (value == null && this.Proxy.<%= name %> == null)
+                    return;
+                else if (value != null && value.ID == this.Proxy.<%= name %>.ID)
+                    return;
+
+                // cache old value to remove inverse references later
+                var __oldValue = (<%= referencedImplementation %>)OurContext.AttachAndWrap(this.Proxy.<%= name %>);
+                var __newValue = (<%= referencedImplementation %>)value;
+
+                // Changing Event fires before anything is touched
+                NotifyPropertyChanging("<%= name %>", __oldValue, __newValue);
+
+<% if(callGetterSetterEvents) { %>
+                if(<%= eventName %>_PreSetter != null && IsAttached)
+                {
+                    var e = new PropertyPreSetterEventArgs<<%= referencedInterface %>>(__oldValue, __newValue);
+                    <%= eventName %>_PreSetter(this, e);
+                    __newValue = (<%= referencedImplementation %>)e.Result;
+                }
+<% } %>
+
+                // next, set the local reference
+                this.Proxy.<%= name %> = __newValue.Proxy;
+
+<% if (!String.IsNullOrEmpty(inverseNavigatorName)) { %>
+                // now fixup redundant, inverse references
+                // The inverse navigator will also fire events when changed, so should
+                // only be touched after setting the local value above.
+                // TODO: for complete correctness, the "other" Changing event should also fire
+                //       before the local value is changed
+                if (__oldValue != null)
+                {
+<%      if (inverseNavigatorIsList) {
+            // TODO: check whether __oldValue is loaded before potentially triggering a DB Call
+%>
+                    // remove from old list
+                    (__oldValue.<%= inverseNavigatorName %> as OneNRelationList<<%= ownInterface %>>).RemoveWithoutClearParent(this);
+<%      } else { %>
+                    // unset old reference
+                    __oldValue.<%= inverseNavigatorName %> = null;
+<%      } %>
+                }
+
+                if (__newValue != null)
+                {
+<%      if (inverseNavigatorIsList) { %>
+                    // add to new list
+                    (__newValue.<%= inverseNavigatorName %> as OneNRelationList<<%= ownInterface %>>).AddWithoutSetParent(this);
+<%      } else { %>
+                    // set new reference
+                    __newValue.<%= inverseNavigatorName %> = this;
+<%      } %>
+                }
+<% } %>
+                // everything is done. fire the Changed event
+                NotifyPropertyChanged("<%= name %>", __oldValue, __newValue);
+
+<% if(callGetterSetterEvents) { %>
+                if(<%= eventName %>_PostSetter != null && IsAttached)
+                {
+                    var e = new PropertyPostSetterEventArgs<<%= referencedInterface %>>(__oldValue, __newValue);
+                    <%= eventName %>_PostSetter(this, e);
+                }
+<% } %>
+            }
+        }
+
+        /// <summary>Backing store for <%= name %>'s id, used on dehydration only</summary>
+        private int? <%= fkBackingName %> = null;
+
+<% if (relDataTypeExportable) { %>
+        /// <summary>Backing store for <%= name %>'s guid, used on import only</summary>
+        private Guid? <%= fkGuidBackingName %> = null;
+<% } %>
+
+<%
+    AddSerialization(serializationList, name, fkBackingName);
+
+    if (!String.IsNullOrEmpty(positionPropertyName))
+    {
+        Properties.NotifyingValueProperty.Call(
+            Host, ctx, serializationList,
+            "int?", positionPropertyName, moduleNamespace);
+    }
+%>
+        // END <%= this.GetType() %> for <%= name %>

@@ -62,6 +62,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
                 case RelationType.one_n:
                     if (otherEnd.Multiplicity.UpperBound() > 1) // we are 1-side
                     {
+                        // always map as set, the wrapper has to translate/order the elements
                         this.WriteObjects("<set ", nameAttr, " cascade=\"none\" ");
                         if (prop.EagerLoading)
                         {

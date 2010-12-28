@@ -233,17 +233,72 @@ namespace Kistl.DalProvider.NHibernate
                 .Invoke(this, new object[] { ID });
         }
 
+
+        private object NhFindById(ImplementationType implType, int id)
+        {
+            return _nhSession.Load(implType.Type.FullName, id);
+        }
+
+        private object NhFindByExportGuid(ImplementationType implType, Guid exportGuid)
+        {
+            return _nhSession
+                        .CreateCriteria(implType.Type.FullName)
+                        .Add(global::NHibernate.Criterion.Restrictions.Eq("ExportGuid", exportGuid))
+                        .UniqueResult();
+        }
+
+        public T FindPersistenceProxy<T>(int ID)
+        {
+            CheckDisposed();
+
+            var ifType = GetInterfaceType(typeof(T).FullName);
+
+            var result = _attachedObjects.Lookup(ifType, ID);
+
+            if (result != null)
+                return result.GetPrivateFieldValue<T>("Proxy");
+
+            var implType = ToImplementationType(ifType);
+
+            var q = NhFindById(implType, ID);
+            return (T)q;
+        }
+
         public override T FindPersistenceObject<T>(int ID)
         {
             CheckDisposed();
-            // TODO: T->TImpl
-            return _nhSession.Load<T>(ID);
+
+            var ifType = GetInterfaceType(typeof(T).FullName);
+
+            var result = _attachedObjects.Lookup(ifType, ID);
+
+            if (result != null)
+                return (T)result;
+
+            var implType = ToImplementationType(ifType);
+
+            var q = NhFindById(implType, ID);
+            return (T)AttachAndWrap((IProxyObject)q);
         }
 
         public override IPersistenceObject FindPersistenceObject(InterfaceType ifType, Guid exportGuid)
         {
             CheckDisposed();
             return (IPersistenceObject)this.GetType().FindGenericMethod("FindPersistenceObject", new Type[] { ifType.Type }, new Type[] { typeof(Guid) }).Invoke(this, new object[] { exportGuid });
+        }
+
+        public T FindPersistenceProxy<T>(Guid exportGuid)
+        {
+            CheckDisposed();
+            var result = _attachedObjects.Lookup(exportGuid);
+
+            if (result != null)
+                return result.GetPrivateFieldValue<T>("Proxy");
+
+            var implType = GetImplementationType(typeof(T));
+            var q = NhFindByExportGuid(implType, exportGuid);
+
+            return (T)q;
         }
 
         public override T FindPersistenceObject<T>(Guid exportGuid)
@@ -255,14 +310,9 @@ namespace Kistl.DalProvider.NHibernate
             if (result != null)
                 return (T)result;
 
-            var q = _nhSession
-                .CreateCriteria(ToImplementationType(GetInterfaceType(typeof(T).FullName)).Type.FullName)
-                .Add(global::NHibernate.Criterion.Restrictions.Eq("ExportGuid", exportGuid))
-                .UniqueResult();
-            if (q == null)
-                return null;
-            else
-                return (T)AttachAndWrap((IProxyObject)q);
+            var implType = ToImplementationType(GetInterfaceType(typeof(T).FullName));
+            var q = NhFindByExportGuid(implType, exportGuid);
+            return (T)AttachAndWrap((IProxyObject)q);
         }
 
         public override IEnumerable<IPersistenceObject> FindPersistenceObjects(InterfaceType ifType, IEnumerable<Guid> exportGuids)
@@ -331,8 +381,11 @@ namespace Kistl.DalProvider.NHibernate
             throw new NotImplementedException();
         }
 
-        internal IPersistenceObject AttachAndWrap(IProxyObject proxy)
+        public IPersistenceObject AttachAndWrap(IProxyObject proxy)
         {
+            if (proxy == null)
+                return null;
+
             var item = _attachedObjects.Lookup(GetImplementationType(proxy.Interface).ToInterfaceType(), proxy.ID);
             if (item == null)
             {
