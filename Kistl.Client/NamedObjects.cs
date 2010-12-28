@@ -36,6 +36,7 @@ namespace Kistl.Client
         public static readonly Guid ControlKind_Kistl_App_GUI_InstanceListKind = new Guid("4e7a8b0b-0c8e-49e1-aa35-d3a9ec7b8e4c");
         public static readonly Guid ControlKind_Kistl_App_GUI_InstanceListHorizontalKind = new Guid("997f9eb7-084f-4703-b905-2b97be27a9f1");
         public static readonly Guid ControlKind_Kistl_App_GUI_PasswordKind = new Guid("2f6233fe-6fd6-4145-b438-64cc85f89fd8");
+        public static readonly Guid ControlKind_Kistl_App_GUI_MultiLineTextboxKind = new Guid("b8391867-7c76-40fe-b387-96ab5597fd0d");
 
         public static readonly Guid ControlKind_Kistl_App_GUI_CommandKind = new Guid("8b4273bc-dee4-4985-926d-40d3833fe4f9");
         public static readonly Guid ControlKind_Kistl_App_GUI_CommandLinkKind = new Guid("1c39f2f9-f4ba-4653-b92f-4672dfc4294a");
