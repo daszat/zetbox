@@ -35,8 +35,11 @@ namespace Kistl.Client.WPF
         private static void Run()
         {
             _current = new SplashScreen();
+            _current.Show();
+            _current.Closed += (sender2, e2) => _current.Dispatcher.InvokeShutdown();
+
             _created.Set();
-            _current.ShowDialog();
+            System.Windows.Threading.Dispatcher.Run();
         }
 
         public static void ShowSplashScreen(string message, string info, int steps)
