@@ -170,6 +170,8 @@ namespace Kistl.Client.WPF.View.KistlBase
                 }
                 cpFef.SetValue(VisualTypeTemplateSelector.RequestedKindProperty, desc.ControlKind);
                 cpFef.SetValue(ContentPresenter.ContentTemplateSelectorProperty, FindResource("defaultTemplateSelector"));
+                cpFef.SetValue(FrameworkElement.HorizontalAlignmentProperty, HorizontalAlignment.Stretch);
+                cpFef.SetValue(FrameworkElement.MarginProperty, new Thickness(-6, 0, -6, 0));
                 result.VisualTree = cpFef;
                 col.CellTemplate = result;
                 view.Columns.Add(col);
@@ -185,6 +187,7 @@ namespace Kistl.Client.WPF.View.KistlBase
                 if (ViewModel.ViewMethod == InstanceListViewMethod.Details)
                 {
                     RefreshGridView();
+                    ListView.ItemContainerStyle = Application.Current.Resources["ExcelLikeGridView"] as Style;
                 }
                 // Attach to selection changed event on ViewModel side
                 ViewModel.SelectedItems.CollectionChanged += ViewModel_SelectedItems_CollectionChanged;

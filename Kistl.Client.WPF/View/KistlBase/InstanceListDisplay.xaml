@@ -8,15 +8,6 @@
                                xmlns:clientKistlBase="clr-namespace:Kistl.Client.WPF.View.KistlBase"
                                xmlns:commands="clr-namespace:Kistl.Client.WPF.Commands;assembly=Kistl.Client.WPF.Toolkit"
                                commands:SmartRoutedUICommand.IsCommandSink="True">
-    <local:InstanceListBaseDisplay.Resources>
-        
-
-        <!-- Force all grid cells to stretch -->
-        <Style TargetType="ListViewItem">
-            <Setter Property="HorizontalContentAlignment"
-                    Value="Stretch" />
-        </Style>
-    </local:InstanceListBaseDisplay.Resources>
     <DockPanel x:Name="ctrlInstanceList">
         <StackPanel DockPanel.Dock="Top"
                     Visibility="{Binding ShowFilter, Converter={StaticResource BooleanToVisibilityConverter}}"

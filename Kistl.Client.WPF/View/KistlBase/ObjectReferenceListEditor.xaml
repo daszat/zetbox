@@ -6,14 +6,6 @@
                      xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
                      xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
                      VerticalContentAlignment="Stretch">
-    <view:PropertyEditor.Resources>
-        <!-- Force all grid cells to stretch -->
-        <Style TargetType="ListViewItem">
-            <Setter Property="HorizontalContentAlignment"
-                    Value="Stretch" />
-        </Style>
-    </view:PropertyEditor.Resources>
-
     <DockPanel>
         <UniformGrid DockPanel.Dock="Left"
                      Rows="2">
@@ -42,6 +34,12 @@
                   MinHeight="50"
                   SelectionChanged="lst_SelectionChanged"
                   MouseDoubleClick="ItemActivatedHandler">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment"
+                            Value="Stretch" />
+                </Style>
+            </ListView.ItemContainerStyle>
             <ListView.ContextMenu>
                 <ContextMenu ItemsSource="{Binding Commands}">
                     <ContextMenu.ItemContainerStyle>
