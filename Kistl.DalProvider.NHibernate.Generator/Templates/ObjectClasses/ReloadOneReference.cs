@@ -15,6 +15,8 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
     {
         public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, ObjectReferenceProperty prop)
         {
+            if (_host == null) { throw new ArgumentNullException("_host"); }
+            if (ctx == null) { throw new ArgumentNullException("ctx"); }
             if (prop == null) { throw new ArgumentNullException("prop"); }
 
             Relation rel = Kistl.App.Extensions.RelationExtensions.Lookup(ctx, prop);
