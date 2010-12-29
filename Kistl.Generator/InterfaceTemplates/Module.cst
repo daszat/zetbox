@@ -26,23 +26,23 @@ namespace Kistl.Objects
         {
             base.Load(builder);
             builder
-                .RegisterType<InterfaceTypeChecker>()
+                .Register<InterfaceTypeChecker>(c => new InterfaceTypeChecker(c.Resolve<Func<IEnumerable<IImplementationTypeChecker>>>()))
                 .As<IInterfaceTypeChecker>()
                 .SingleInstance();
         }
     }
 
-    public sealed class InterfaceTypeChecker 
+    internal sealed class InterfaceTypeChecker 
         : BaseInterfaceTypeChecker, IInterfaceTypeChecker
     {
-        public InterfaceTypeChecker(Func<IEnumerable<IImplementationTypeChecker>> implTypeCheckersFactory)
+        internal InterfaceTypeChecker(Func<IEnumerable<IImplementationTypeChecker>> implTypeCheckersFactory)
             : base(implTypeCheckersFactory)
         {
         }
 
         protected override System.Reflection.Assembly GetAssembly()
         {
-            return this.GetType().Assembly;
+            return typeof(InterfaceTypeChecker).Assembly;
         }
     }
 }

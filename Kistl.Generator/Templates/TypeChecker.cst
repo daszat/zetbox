@@ -19,6 +19,6 @@
 
         protected override System.Reflection.Assembly GetAssembly()
         {
-            return this.GetType().Assembly;
+            return typeof(<%= shortName %>ImplementationTypeChecker).Assembly;
         }
     }

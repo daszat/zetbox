@@ -42,7 +42,7 @@ this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("        protected override System.Reflection.Assembly GetAssembly()\r\n");
 this.WriteObjects("        {\r\n");
-this.WriteObjects("            return this.GetType().Assembly;\r\n");
+this.WriteObjects("            return typeof(",  shortName , "ImplementationTypeChecker).Assembly;\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("    }\r\n");
 

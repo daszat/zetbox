@@ -108,7 +108,15 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                     // object references have to be translated to internal proxy interfaces
                     if (orp != null)
                     {
-                        type += ImplementationSuffix + "." + orp.GetReferencedObjectClass().Name + "Interface";
+                        Relation rel = RelationExtensions.Lookup(ctx, orp);
+                        if (rel.Storage == StorageType.Separate)
+                        {
+                            type = rel.GetRelationFullName() + ImplementationSuffix;
+                        }
+                        else
+                        {
+                            type += ImplementationSuffix + "." + orp.GetReferencedObjectClass().Name + "Interface";
+                        }
                         if (orp.IsList())
                         {
                             // always hold as collection, the wrapper has to translate/order the elements
@@ -121,7 +129,6 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                 .Concat(valuePosProperties)
                 .Concat(compoundPosProperties)
                 .Concat(enumPosProperties)
-                //.Distinct() // TODO: investigate why TypeRef.GenericArguments_pos is duplicated
                 .OrderBy(kv => kv.Value);
         }
 
