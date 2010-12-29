@@ -37,7 +37,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.CompoundObjects
             string interfaceName = DataType.Name;
             this.WriteObjects("public class ", interfaceName, "Interface { }");
             this.WriteLine();
-            this.WriteObjects("public class ", interfaceName, "Proxy { }");
+            this.WriteObjects("public class ", interfaceName, "Proxy : ", interfaceName, "Interface { }");
             this.WriteLine();
         }
 

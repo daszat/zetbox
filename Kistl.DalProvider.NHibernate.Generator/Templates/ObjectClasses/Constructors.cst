@@ -36,7 +36,7 @@
             : base(lazyCtx, proxy) // pass proxy to parent
 <% } %>
         {
-            this.Proxy = (<%= interfaceName %>Proxy)proxy;
+            this.Proxy = proxy;
 <% ApplyCompoundObjectPropertyInitialisers(); %>
         }
 

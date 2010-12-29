@@ -86,7 +86,7 @@ namespace Kistl.DalProvider.NHibernate
             return PrepareQueryable(ifType);
         }
 
-        public override IList<T> FetchRelation<T>(Guid relationId, RelationEndRole role, IDataObject parent)
+        public override IList<T> FetchRelation<T>(Guid relationId, RelationEndRole endRole, IDataObject parent)
         {
             CheckDisposed();
             if (parent == null)
@@ -95,7 +95,16 @@ namespace Kistl.DalProvider.NHibernate
             }
             else
             {
-                throw new NotImplementedException();
+                // TODO: #1571 This method expects IF Types, but Impl types are passed
+                switch (endRole)
+                {
+                    case RelationEndRole.A:
+                        return GetPersistenceObjectQuery(GetImplementationType(typeof(T)).ToInterfaceType()).Cast<T>().Where(i => i.AObject == parent).ToList();
+                    case RelationEndRole.B:
+                        return GetPersistenceObjectQuery(GetImplementationType(typeof(T)).ToInterfaceType()).Cast<T>().Where(i => i.BObject == parent).ToList();
+                    default:
+                        throw new NotImplementedException(String.Format("Unknown RelationEndRole [{0}]", endRole));
+                }
             }
         }
 

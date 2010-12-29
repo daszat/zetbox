@@ -70,7 +70,7 @@ this.WriteObjects("            : base(lazyCtx, proxy) // pass proxy to parent\r\
 } 
 #line 38 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\Constructors.cst"
 this.WriteObjects("        {\r\n");
-this.WriteObjects("            this.Proxy = (",  interfaceName , "Proxy)proxy;\r\n");
+this.WriteObjects("            this.Proxy = proxy;\r\n");
 #line 40 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\Constructors.cst"
 ApplyCompoundObjectPropertyInitialisers(); 
 #line 41 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\Constructors.cst"

@@ -44,7 +44,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries
             string interfaceName = GetCeInterface();
 
             List<KeyValuePair<string, string>> typeAndNameList = new List<KeyValuePair<string, string>>() {
-                new KeyValuePair<string, string>(Mappings.ObjectClassHbm.GetImplementationTypeReference(prop.ObjectClass as ObjectClass, this.Settings), "Parent"),
+                new KeyValuePair<string, string>(Mappings.ObjectClassHbm.GetInterfaceTypeReference(prop.ObjectClass as ObjectClass, this.Settings), "Parent"),
                 new KeyValuePair<string, string>(prop.GetPropertyTypeString(), "Value"),
             };
 

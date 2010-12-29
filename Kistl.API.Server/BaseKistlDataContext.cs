@@ -206,7 +206,7 @@ namespace Kistl.API.Server
         }
 
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public abstract IList<T> FetchRelation<T>(Guid relationId, RelationEndRole role, IDataObject parent) where T : class, IRelationEntry;
+        public abstract IList<T> FetchRelation<T>(Guid relationId, RelationEndRole endRole, IDataObject parent) where T : class, IRelationEntry;
 
         /// <summary>
         /// Checks if the given Object is already in that Context.
