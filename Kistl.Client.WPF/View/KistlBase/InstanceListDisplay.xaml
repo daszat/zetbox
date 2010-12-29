@@ -46,10 +46,10 @@
             </ToolBar.ItemTemplate>
         </ctrls:WorkaroundToolBar>
 
-        <GroupBox DockPanel.Dock="Bottom"
+        <GroupBox DockPanel.Dock="Top"
                   Visibility="{Binding ShowMasterDetail, Converter={StaticResource BooleanToVisibilityConverter}}"
                   Header="Details"
-                  Margin="0 10 0 0">
+                  Margin="0 0 0 10">
             <ContentPresenter Content="{Binding SelectedDetailItem}"
                               tk:VisualTypeTemplateSelector.RequestedKind="{Binding DataContext.RequestedEditorKind, ElementName=ctrlInstanceList, Mode=OneWay}"
                               ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />

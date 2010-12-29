@@ -116,6 +116,10 @@ namespace Kistl.Client.WPF
                 this.Resources["listItemTemplateSelector"] = templateSelectorFactory("Kistl.App.GUI.SingleLineKind");
                 this.Resources["dashBoardTemplateSelector"] = templateSelectorFactory("Kistl.App.GUI.DashboardKind");
 
+                // Manually add DefaultViews
+                // Otherwise converter are unknown
+                this.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Kistl.Client.WPF;component/View/DefaultViews.xaml", UriKind.Relative) });
+
                 // Load registrated dictionaries from autofac
                 foreach (var dict in container.Resolve<IEnumerable<ResourceDictionary>>())
                 {

@@ -337,6 +337,13 @@ namespace Kistl.Client.Presentables.KistlBase
         }
 
         private bool? _showCommands = null;
+
+        /// <summary>
+        /// If true, commands will be shown in UI.
+        /// </summary>
+        /// <remarks>
+        /// Can be set explicit. If not set, the value is true if commands are present
+        /// </remarks>
         public bool ShowCommands
         {
             get
@@ -400,9 +407,29 @@ namespace Kistl.Client.Presentables.KistlBase
             {
                 if (_NewCommand == null)
                 {
-                    _NewCommand = ViewModelFactory.CreateViewModel<NewDataObjectCommand.Factory>().Invoke(DataContext, _type, RequestedWorkspaceKind, RequestedEditorKind, this);
+                    _NewCommand = ViewModelFactory.CreateViewModel<NewDataObjectCommand.Factory>().Invoke(DataContext, _type, RequestedWorkspaceKind, RequestedEditorKind, null /* I do it my way */);
+                    _NewCommand.ObjectCreated += new NewDataObjectCommand.ObjectCreatedHandler(_NewCommand_ObjectCreated);
                 }
                 return _NewCommand;
+            }
+        }
+
+        void _NewCommand_ObjectCreated(IDataObject obj)
+        {
+            OnObjectCreated(obj);
+            this.ReloadInstances();
+            this.SelectedItem = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, obj);
+        }
+
+        public delegate void ObjectCreatedHandler(IDataObject obj);
+        public event ObjectCreatedHandler ObjectCreated;
+
+        protected void OnObjectCreated(IDataObject obj)
+        {
+            ObjectCreatedHandler temp = ObjectCreated;
+            if (temp != null)
+            {
+                temp(obj);
             }
         }
 
@@ -505,7 +532,50 @@ namespace Kistl.Client.Presentables.KistlBase
             OnPropertyChanged("SelectedDetailItem");
         }
 
+        /// <summary>
+        /// The current first selected item
+        /// </summary>
+        /// <remarks>
+        /// If set explicit, all other selected items will be cleard from the SelectesItems List
+        /// </remarks>
+        public DataObjectViewModel SelectedItem
+        {
+            get
+            {
+                if (SelectedItems.Count > 0)
+                {
+                    return _selectedItems[0];
+                }
+                return null;
+            }
+            set
+            {
+                this.SelectedItems.Clear();
+                if (value != null) this.SelectedItems.Add(value);
+                OnPropertyChanged("SelectedItem");
+                OnPropertyChanged("SelectedDetailItem");
+            }
+        }
+
+        /// <summary>
+        /// Returns only the SelectedItem if ShowMasterDetail is set to true
+        /// </summary>
+        public DataObjectViewModel SelectedDetailItem
+        {
+            get
+            {
+                return ShowMasterDetail ? SelectedItem : null;
+            }
+            set
+            {
+                SelectedItem = value;
+            }
+        }
+
         private bool _ShowMasterDetail = false;
+        /// <summary>
+        /// If true, Details will be displayed
+        /// </summary>
         public bool ShowMasterDetail
         {
             get
@@ -523,28 +593,6 @@ namespace Kistl.Client.Presentables.KistlBase
             }
         }
 
-        public DataObjectViewModel SelectedItem
-        {
-            get
-            {
-                if (SelectedItems.Count > 0)
-                {
-                    return _selectedItems[0];
-                }
-                return null;
-            }
-            // Set is not possible
-        }
-
-        public DataObjectViewModel SelectedDetailItem
-        {
-            get
-            {
-                return ShowMasterDetail ? SelectedItem : null;
-            }
-            // Set is not possible
-        }
-
         /// <summary>
         /// Reload instances from context.
         /// </summary>
@@ -559,6 +607,9 @@ namespace Kistl.Client.Presentables.KistlBase
         }
 
         private bool _SelectFirstOnLoad = false;
+        /// <summary>
+        /// If true, the first Item will be selected every time the Instances will be refreshed
+        /// </summary>
         public bool SelectFirstOnLoad
         {
             get
@@ -615,6 +666,12 @@ namespace Kistl.Client.Presentables.KistlBase
 
         #region UI
         private bool _isItemsReadOnly = true;
+        /// <summary>
+        /// If true, all Items will be set to readonly
+        /// </summary>
+        /// <remarks>
+        /// Default value is true
+        /// </remarks>
         public bool IsItemsReadOnly
         {
             get
@@ -642,7 +699,34 @@ namespace Kistl.Client.Presentables.KistlBase
                 }
             }
             OnPropertyChanged("IsItemsReadOnly");
+            OnPropertyChanged("IsEditable");
             OnPropertyChanged("DisplayedColumns");
+        }
+
+        private bool _isEditable = true;
+        /// <summary>
+        /// If true, all Items are editable in the list directly.
+        /// </summary>
+        /// <remarks>
+        /// This does not affect the details pane. Returnes always false, if IsItemsReadOnly is set to true.
+        /// </remarks>
+        public bool IsEditable
+        {
+            get
+            {
+                if (IsItemsReadOnly) return false;
+                return _isEditable;
+            }
+            set
+            {
+                if (_isEditable != value)
+                {
+                    _isEditable = value;
+                    _displayedColumns = null;
+                    OnPropertyChanged("IsEditable");
+                    OnPropertyChanged("DisplayedColumns");
+                }
+            }
         }
 
         /// <returns>the default icon of this <see cref="DataType"/></returns>
@@ -671,6 +755,9 @@ namespace Kistl.Client.Presentables.KistlBase
         }
 
         private InstanceListViewMethod _viewMethod = InstanceListViewMethod.List;
+        /// <summary>
+        /// Displays the list as "List" or "Details"
+        /// </summary>
         public InstanceListViewMethod ViewMethod
         {
             get
@@ -706,7 +793,7 @@ namespace Kistl.Client.Presentables.KistlBase
         protected virtual GridDisplayConfiguration CreateDisplayedColumns()
         {
             var result = new GridDisplayConfiguration();
-            result.BuildColumns(this._type, IsItemsReadOnly);
+            result.BuildColumns(this._type, !IsEditable);
 
             DisplayedColumnsCreatedHandler temp = DisplayedColumnsCreated;
             if (temp != null)
@@ -808,9 +895,7 @@ namespace Kistl.Client.Presentables.KistlBase
 
             if (SelectFirstOnLoad)
             {
-                this.SelectedItems.Clear();
-                var i = _instancesFiltered.FirstOrDefault();
-                if(i != null) this.SelectedItems.Add(i);
+                this.SelectedItem = _instancesFiltered.FirstOrDefault();
             }
         }
 

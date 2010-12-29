@@ -147,8 +147,8 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 {
                     _ClearValueCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
                         DataContext, 
-                        ValueInputTaskViewModelResources.CancelCommand_Name, 
-                        ValueInputTaskViewModelResources.CancelCommand_Tooltip, 
+                        ValueViewModelResources.ClearValueCommand_Name, 
+                        ValueViewModelResources.ClearValueCommand_Tooltip, 
                         () => ClearValue(), 
                         () => AllowNullInput && !DataContext.IsReadonly && !IsReadOnly);
                 }
