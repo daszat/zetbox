@@ -37,7 +37,7 @@ namespace Kistl.DalProvider.NHibernate
                 .InstancePerDependency();
 
             RegisterContext<IReadOnlyKistlContext>(moduleBuilder)
-                .SingleInstance();
+                .InstancePerLifetimeScope();
 
             moduleBuilder
                 .Register((c, p) =>
