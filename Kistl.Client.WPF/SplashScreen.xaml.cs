@@ -36,7 +36,7 @@ namespace Kistl.Client.WPF
         {
             _current = new SplashScreen();
             _current.Show();
-            _current.Closed += (sender2, e2) => _current.Dispatcher.InvokeShutdown();
+            _current.Closed += (sender, e) => _current.Dispatcher.InvokeShutdown();
 
             _created.Set();
             System.Windows.Threading.Dispatcher.Run();
@@ -61,6 +61,18 @@ namespace Kistl.Client.WPF
                         _current.Steps = steps;
                     }));
                 }
+                else
+                {
+                    _current.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(delegate()
+                    {
+                        _current.Message = message;
+                        _current.Info = info;
+                        _current.Steps = steps;
+
+                        _current.Show();
+                        _current.Activate();
+                    }));
+                }
             }
         }
 
@@ -70,18 +82,10 @@ namespace Kistl.Client.WPF
             {
                 if (_current != null)
                 {
-                    try
+                    _current.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(delegate()
                     {
-                        _current.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(delegate()
-                        {
-                            _current.Close();
-                        }));
-                    }
-                    finally
-                    {
-                        _current = null;
-                        _thread = null;
-                    }
+                        _current.Hide();
+                    }));
                 }
             }
         }

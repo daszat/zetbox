@@ -502,6 +502,7 @@ namespace Kistl.Client.Presentables.KistlBase
         void _selectedItems_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             OnPropertyChanged("SelectedItem");
+            OnPropertyChanged("SelectedDetailItem");
         }
 
         private bool _ShowMasterDetail = false;
@@ -517,6 +518,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 {
                     _ShowMasterDetail = value;
                     OnPropertyChanged("ShowMasterDetail");
+                    OnPropertyChanged("SelectedDetailItem");
                 }
             }
         }
@@ -530,6 +532,15 @@ namespace Kistl.Client.Presentables.KistlBase
                     return _selectedItems[0];
                 }
                 return null;
+            }
+            // Set is not possible
+        }
+
+        public DataObjectViewModel SelectedDetailItem
+        {
+            get
+            {
+                return ShowMasterDetail ? SelectedItem : null;
             }
             // Set is not possible
         }

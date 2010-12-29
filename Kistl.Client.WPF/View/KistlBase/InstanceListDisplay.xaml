@@ -9,17 +9,7 @@
                                xmlns:commands="clr-namespace:Kistl.Client.WPF.Commands;assembly=Kistl.Client.WPF.Toolkit"
                                commands:SmartRoutedUICommand.IsCommandSink="True">
     <local:InstanceListBaseDisplay.Resources>
-        <DataTemplate x:Key="idCellTemplate">
-            <TextBlock Text="{Binding ID}" />
-        </DataTemplate>
-        <DataTemplate x:Key="iconCellTemplate">
-            <Image Source="{Binding Converter={StaticResource IconConverter}}"
-                   Width="14"
-                   Height="14" />
-        </DataTemplate>
-        <DataTemplate x:Key="nameCellTemplate">
-            <TextBlock Text="{Binding Name}" />
-        </DataTemplate>
+        
 
         <!-- Force all grid cells to stretch -->
         <Style TargetType="ListViewItem">
@@ -60,7 +50,7 @@
                   Visibility="{Binding ShowMasterDetail, Converter={StaticResource BooleanToVisibilityConverter}}"
                   Header="Details"
                   Margin="0 10 0 0">
-            <ContentPresenter Content="{Binding SelectedItem}"
+            <ContentPresenter Content="{Binding SelectedDetailItem}"
                               tk:VisualTypeTemplateSelector.RequestedKind="{Binding DataContext.RequestedEditorKind, ElementName=ctrlInstanceList, Mode=OneWay}"
                               ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
         </GroupBox>

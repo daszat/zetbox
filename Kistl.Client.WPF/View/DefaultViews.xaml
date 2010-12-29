@@ -33,4 +33,16 @@
                        Margin="10 0 0 0" />
         </StackPanel>
     </DataTemplate>
+
+    <DataTemplate x:Key="idCellTemplate">
+        <TextBlock Text="{Binding ID}" />
+    </DataTemplate>
+    <DataTemplate x:Key="iconCellTemplate">
+        <Image Source="{Binding Converter={StaticResource IconConverter}}"
+               Width="14"
+               Height="14" />
+    </DataTemplate>
+    <DataTemplate x:Key="nameCellTemplate">
+        <TextBlock Text="{Binding Name}" />
+    </DataTemplate>
 </ResourceDictionary>
