@@ -43,9 +43,6 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
             }
 
             string nameAttr = String.Format("name=\"{0}\"", prop.Name);
-            string columnAttr = rel.HasStorage(relEnd.GetRole())
-            ? String.Format("column=\"`{0}`\"", Construct.ForeignKeyColumnName(otherEnd, prefix))
-            : String.Format("column=\"`{0}`\"", Construct.ForeignKeyColumnName(relEnd, prefix));
             string classAttr = String.Format("class=\"{0}\"",
                 ObjectClassHbm.GetAssemblyQualifiedImplementation(otherEnd.Type, this.Settings));
             //string tableAttr = String.Format("table =\"`{0}`\" ", rel.GetAssociationName());
@@ -53,11 +50,23 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
             switch (rel.GetRelationType())
             {
                 case RelationType.one_one:
-                    this.WriteObjects("<one-to-one ", nameAttr, " ", classAttr,
-                        " cascade=\"none\" constrained=\"true\" ",
-                        prop.EagerLoading ? "fetch=\"join\" " : String.Empty,
-                        inverse ? "property-ref=\"" + otherEnd.Navigator.Name + "\" " : String.Empty,
-                        "/>");
+                    if (rel.HasStorage(relEnd.GetRole()))
+                    {
+                        string columnAttr = String.Format("column=\"`{0}`\"", Construct.ForeignKeyColumnName(otherEnd, prefix));
+                        this.WriteObjects("<many-to-one ", nameAttr, " ", columnAttr, " ", classAttr, " cascade=\"none\" unique=\"true\" ");
+                        if (prop.EagerLoading)
+                        {
+                            this.WriteObjects("fetch=\"join\" ");
+                        }
+                        this.WriteLine("/>");
+                    }
+                    else
+                    {
+                        this.WriteObjects("<one-to-one ", nameAttr, " ", classAttr,
+                            " cascade=\"none\" constrained=\"true\" ",
+                            prop.EagerLoading ? "fetch=\"join\" " : String.Empty,
+                            "property-ref=\"" + (otherEnd.Navigator != null ? otherEnd.Navigator.Name : "(no nav)") + "\" />");
+                    }
                     break;
                 case RelationType.one_n:
                     if (otherEnd.Multiplicity.UpperBound() > 1) // we are 1-side
@@ -78,6 +87,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
                             this.WriteObjects("inverse=\"true\" ");
                         }
                         this.WriteLine(">");
+                        string columnAttr = String.Format("column=\"`{0}`\"", Construct.ForeignKeyColumnName(relEnd, prefix));
                         this.WriteObjects("    <key ", columnAttr, " />");
                         this.WriteLine();
                         this.WriteObjects("    <one-to-many ", classAttr, " />");
@@ -86,6 +96,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
                     }
                     else // we are n-side
                     {
+                        string columnAttr = String.Format("column=\"`{0}`\"", Construct.ForeignKeyColumnName(otherEnd, prefix));
                         this.WriteObjects("<many-to-one ", nameAttr, " ", columnAttr, " ", classAttr, " cascade=\"none\" ");
                         if (prop.EagerLoading)
                         {
