@@ -80,6 +80,17 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                 .Where(relEnd => relEnd.Parent.NeedsPositionStorage(relEnd.GetRole()))
                 .Select(relEnd => new KeyValuePair<string, string>("int?", relEnd.RoleName + Kistl.API.Helper.PositionSuffix));
 
+            // Look for relations where we have no navigator where the storage should be
+            // there we need to create navigators to map them with NHibernate
+            var relationProperties = ctx.GetQuery<Relation>()
+                .Where(rel => rel.A.Multiplicity == Multiplicity.One && rel.B.Multiplicity == Multiplicity.One
+                    && ((rel.A.Type == this.ObjectClass && rel.B.Navigator == null && rel.Storage == StorageType.MergeIntoB)
+                        || (rel.B.Type == this.ObjectClass && rel.A.Navigator == null && rel.Storage == StorageType.MergeIntoA)))
+                .ToList()
+                .Select(rel => rel.Storage == StorageType.MergeIntoA
+                    ? new KeyValuePair<string, string>(rel.B.Type.Module.Namespace + "." + rel.B.Type, rel.A.RoleName + ImplementationPropertySuffix)
+                    : new KeyValuePair<string, string>(rel.A.Type.Module.Namespace + "." + rel.A.Type, rel.B.RoleName + ImplementationPropertySuffix));
+
             var valuePosProperties = this.ObjectClass
                 .Properties
                 .OfType<ValueTypeProperty>()
@@ -126,6 +137,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                     return new KeyValuePair<string, string>(type, p.Name);
                 })
                 .Concat(relationPosProperties)
+                .Concat(relationProperties)
                 .Concat(valuePosProperties)
                 .Concat(compoundPosProperties)
                 .Concat(enumPosProperties)
