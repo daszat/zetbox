@@ -39,3 +39,6 @@
 
 <% } %>
         }
+
+        // make proxy available for the provider
+        public override IProxyObject NHibernateProxy { get { return Proxy; } }

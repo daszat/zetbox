@@ -87,7 +87,7 @@ this.WriteObjects("						= new ",  backingCollectionType , "<",  aSideType , ", 
 this.WriteObjects("							this, \r\n");
 this.WriteObjects("							new RelationshipFilter",  role , "SideCollection<",  entryType , ">(this.Context, this));\r\n");
 this.WriteObjects("				}\r\n");
-this.WriteObjects("				return ",  backingName , ";\r\n");
+this.WriteObjects("				return (",  exposedCollectionInterface , "<",  referencedInterface , ">)",  backingName , ";\r\n");
 this.WriteObjects("			}\r\n");
 this.WriteObjects("		}\r\n");
 this.WriteObjects("\r\n");

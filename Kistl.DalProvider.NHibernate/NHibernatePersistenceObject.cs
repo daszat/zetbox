@@ -35,5 +35,6 @@ namespace Kistl.DalProvider.NHibernate
         }
 
         protected NHibernateContext OurContext { get { return (NHibernateContext)Context; } }
+        public abstract IProxyObject NHibernateProxy { get; } 
     }
 }

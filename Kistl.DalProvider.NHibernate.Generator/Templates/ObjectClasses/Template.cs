@@ -142,12 +142,13 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
         {
             var rel = RelationExtensions.Lookup(ctx, prop);
             var relEnd = rel.GetEnd(prop);
+            var otherEnd = rel.GetOtherEnd(relEnd);
 
             Templates.Properties.CollectionEntryListProperty.Call(Host, ctx,
                  this.MembersToSerialize,
                  rel, relEnd.GetRole(),
                  String.Format("NHibernate{0}Side{1}Wrapper",
-                    relEnd.GetRole(),
+                    otherEnd.GetRole(),
                     relEnd.HasPersistentOrder ? "List" : "Collection"));
         }
 

@@ -49,7 +49,7 @@
 							this, 
 							new RelationshipFilter<%= role %>SideCollection<<%= entryType %>>(this.Context, this));
 				}
-				return <%= backingName %>;
+				return (<%= exposedCollectionInterface %><<%= referencedInterface %>>)<%= backingName %>;
 			}
 		}
 

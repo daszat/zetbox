@@ -71,6 +71,9 @@ this.WriteObjects("\r\n");
 } 
 #line 41 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClass.cst"
 this.WriteObjects("        }\r\n");
+this.WriteObjects("\r\n");
+this.WriteObjects("        // make proxy available for the provider\r\n");
+this.WriteObjects("        public override IProxyObject NHibernateProxy { get { return Proxy; } }");
 
         }
 
