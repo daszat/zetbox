@@ -19,7 +19,7 @@ namespace Kistl.DalProvider.NHibernate
         private readonly global::NHibernate.ISession _nhSession;
         private readonly ContextCache _attachedObjects;
 
-        public NHibernateContext(
+        internal NHibernateContext(
             IMetaDataResolver metaDataResolver,
             Identity identity,
             KistlConfig config,
