@@ -22,7 +22,7 @@ namespace Kistl.API
         where TB : class, IDataObject
         where TParent : class, IDataObject
         where TEntry : class, IRelationEntry<TA, TB>
-        where TBaseCollection : class, ICollection<TEntry>
+        where TBaseCollection : ICollection<TEntry>
     {
         protected TBaseCollection Collection { get; private set; }
         protected TParent ParentObject { get; private set; }
