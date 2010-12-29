@@ -327,9 +327,11 @@ namespace Kistl.API.Server
         {
             if (b.NodeType == ExpressionType.Equal && b.Left.Type.IsIDataObject() && b.Right.Type.IsIDataObject())
             {
+                var newLeft = Visit(b.Left);
+                var newRight = Visit(b.Right);
                 return Expression.MakeBinary(b.NodeType,
-                    Expression.MakeMemberAccess(Visit(b.Left), b.Left.Type.FindFirstOrDefaultMember("ID")),
-                    Expression.MakeMemberAccess(Visit(b.Right), b.Right.Type.FindFirstOrDefaultMember("ID")));
+                    Expression.MakeMemberAccess(newLeft, newLeft.Type.FindFirstOrDefaultMember("ID")),
+                    Expression.MakeMemberAccess(newRight, newRight.Type.FindFirstOrDefaultMember("ID")));
             }
             return base.VisitBinary(b);
         }
