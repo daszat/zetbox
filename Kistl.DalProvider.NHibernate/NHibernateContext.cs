@@ -401,6 +401,7 @@ namespace Kistl.DalProvider.NHibernate
             if (item == null)
             {
                 item = (IPersistenceObject)Activator.CreateInstance(proxy.ZBoxWrapper, null, proxy);
+                item.AttachToContext(this);
             }
             return item;
         }
