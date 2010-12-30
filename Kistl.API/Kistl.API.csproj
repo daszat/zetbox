@@ -99,6 +99,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Configuration\schema0.xsd" />
+    <None Include="Utils\ClassDiagram1.cd" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Configuration\SampleConfig.xml" />

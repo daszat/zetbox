@@ -51,10 +51,16 @@ namespace Kistl.Client.Models
         }
 
         public ColumnDisplayModel(string header, string name, ControlKind kind, ColumnType type)
+            : this(header, name, kind, null, type)
+        {
+        }
+
+        public ColumnDisplayModel(string header, string name, ControlKind kind, ControlKind readOnlyKind, ColumnType type)
         {
             this.Header = header;
             this.Name = name;
             this.ControlKind = kind;
+            this.ReadOnlyKind = readOnlyKind;
             this.Type = type;
         }
 
@@ -62,6 +68,7 @@ namespace Kistl.Client.Models
         public string Header { get; set; }
         public string Name { get; set; }
         public ControlKind ControlKind { get; set; }
+        public ControlKind ReadOnlyKind { get; set; }
 
         public override string ToString()
         {
@@ -75,6 +82,12 @@ namespace Kistl.Client.Models
         public bool ShowIcon { get; set; }
         public bool ShowName { get; set; }
         public IList<ColumnDisplayModel> Columns { get; set; }
+        private readonly IFrozenContext FrozenContext;
+
+        public GridDisplayConfiguration(IFrozenContext frozenCtx)
+        {
+            this.FrozenContext = frozenCtx;
+        }
 
         public void BuildColumns(Kistl.App.Base.ObjectClass cls)
         {
@@ -131,7 +144,7 @@ namespace Kistl.Client.Models
             }
         }
 
-        private static List<ColumnDisplayModel> CreateColumnDisplayModels(bool displayOnly, Property p, string parentLabel, string parentProp)
+        private List<ColumnDisplayModel> CreateColumnDisplayModels(bool displayOnly, Property p, string parentLabel, string parentProp)
         {
             var result = new List<ColumnDisplayModel>();
             var lb = p.GetLabel();
@@ -149,7 +162,8 @@ namespace Kistl.Client.Models
                 {
                     Header = parentLabel + lb,
                     Name = parentProp + p.Name,
-                    ControlKind = displayOnly ? p.ValueModelDescriptor.GetDefaultGridCellDisplayKind() : p.ValueModelDescriptor.GetDefaultGridCellKind()
+                    ControlKind = displayOnly ? p.ValueModelDescriptor.GetDefaultGridCellDisplayKind() : p.ValueModelDescriptor.GetDefaultGridCellKind(),
+                    ReadOnlyKind = p.ValueModelDescriptor.GetDefaultGridCellDisplayKind() ?? FrozenContext.FindPersistenceObject<ControlKind>(NamedObjects.ControlKind_Kistl_App_GUI_LabelKind)
                 });
             }
             return result;

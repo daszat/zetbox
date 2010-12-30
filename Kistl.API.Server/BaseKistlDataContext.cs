@@ -137,6 +137,7 @@ namespace Kistl.API.Server
             CheckDisposed();
             if (obj == null) { throw new ArgumentNullException("obj"); }
 
+            IsModified = true;
             OnObjectDeleted(obj);
             if (obj is IDataObject)
             {
@@ -299,6 +300,7 @@ namespace Kistl.API.Server
         {
             var obj = (IPersistenceObject)CreateUnattachedInstance(ifType);
             Attach(obj);
+            IsModified = true;
             OnObjectCreated(obj);
             if (obj is IDataObject)
             {

@@ -458,7 +458,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
         }
         protected virtual GridDisplayConfiguration CreateDisplayedColumns()
         {
-            var result = new GridDisplayConfiguration();
+            var result = new GridDisplayConfiguration(FrozenContext);
             result.BuildColumns(ReferencedClass, false);
             return result;
         }

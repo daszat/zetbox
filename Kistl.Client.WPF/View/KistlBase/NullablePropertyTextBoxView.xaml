@@ -5,8 +5,8 @@
                      xmlns:view="clr-namespace:Kistl.Client.WPF.View.KistlBase"
                      xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
                      xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
-                     ToolTip="{Binding ToolTip}">
-
+                     ToolTip="{Binding ToolTip}"
+                     FocusManager.FocusedElement="{Binding ElementName=txt}">
     <kevin:InfoTextBox x:Name="txt"
                        Text="{Binding FormattedValue, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=true}"
                        LostFocus="InfoTextBox_LostFocus"

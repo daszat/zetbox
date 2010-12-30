@@ -48,6 +48,11 @@ M: System.Delegate Kistl.Client.WPF.View.KistlBase.StringDisplay::_CreateDelegat
 M: System.Delegate Kistl.Client.WPF.View.KistlBase.TypeRefPropertyView::_CreateDelegate(System.Type,System.String)
 M: System.Delegate Kistl.Client.WPF.View.KistlBase.CompoundObjectPropertyEditor::_CreateDelegate(System.Type,System.String)
 
+M: System.Delegate Kistl.Client.WPF.View.KistlBase.InstanceListDisplay::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.KistlBase.InstanceListHorizontalDisplay::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.KistlBase.InstanceGridDisplay::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.KistlBase.InstanceGridHorizontalDisplay::_CreateDelegate(System.Type,System.String)
+
 M: System.Delegate Kistl.Client.WPF.View.ObjectEditor.DataObjectEditor::_CreateDelegate(System.Type,System.String)
 M: System.Delegate Kistl.Client.WPF.View.ObjectEditor.WorkspaceDisplay::_CreateDelegate(System.Type,System.String)
 
@@ -70,8 +75,6 @@ M: System.Delegate Kistl.Client.WPF.View.NullablePasswordTextBoxView::_CreateDel
 M: System.Delegate Kistl.Client.WPF.View.NullablePropertyMultiLineTextBoxView::_CreateDelegate(System.Type,System.String)
 M: System.Delegate Kistl.Client.WPF.View.TextValueSelectionView::_CreateDelegate(System.Type,System.String)
 M: System.Delegate Kistl.Client.WPF.View.CacheDebuggerDisplay::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.KistlBase.InstanceListDisplay::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.KistlBase.InstanceListHorizontalDisplay::_CreateDelegate(System.Type,System.String)
 M: System.Delegate Kistl.Client.WPF.View.NullableBoolValueDropdownView::_CreateDelegate(System.Type,System.String)
 M: System.Delegate Kistl.Client.WPF.View.NullableMonthValueEditor::_CreateDelegate(System.Type,System.String)
 M: System.Delegate Kistl.Client.WPF.View.NullableDateTimeValueEditor::_CreateDelegate(System.Type,System.String)

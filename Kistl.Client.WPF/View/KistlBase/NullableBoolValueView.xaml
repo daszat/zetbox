@@ -5,9 +5,11 @@
                      xmlns:view="clr-namespace:Kistl.Client.WPF.View.KistlBase"
                      xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
                      ToolTip="{Binding ToolTip}"
+                     FocusManager.FocusedElement="{Binding ElementName=cb}"
                      MinWidth="1">
 
-    <CheckBox IsChecked="{Binding Value, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
+    <CheckBox x:Name="cb"
+              IsChecked="{Binding Value, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
               IsThreeState="{Binding AllowNullInput, Mode=OneWay}"
               IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertedBoolConverter}}"
               ToolTip="{Binding ToolTip}" />

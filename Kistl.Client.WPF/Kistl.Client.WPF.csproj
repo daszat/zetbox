@@ -117,6 +117,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\WPFExtensions.dll</HintPath>
     </Reference>
+    <Reference Include="WPFToolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -198,6 +199,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\KistlBase\CommandLinkDisplay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\KistlBase\InstanceGridHorizontalDisplay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\KistlBase\InstanceGridDisplay.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -498,6 +507,13 @@
     </Compile>
     <Compile Include="View\KistlBase\CommandLinkDisplay.xaml.cs">
       <DependentUpon>CommandLinkDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\KistlBase\InstanceGridHorizontalDisplay.xaml.cs">
+      <DependentUpon>InstanceGridHorizontalDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\KistlBase\InstanceGridBaseDisplay.cs" />
+    <Compile Include="View\KistlBase\InstanceGridDisplay.xaml.cs">
+      <DependentUpon>InstanceGridDisplay.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\KistlBase\NullablePasswordTextBoxView.xaml.cs">
       <DependentUpon>NullablePasswordTextBoxView.xaml</DependentUpon>

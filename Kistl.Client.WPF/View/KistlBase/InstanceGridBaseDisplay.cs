@@ -21,22 +21,23 @@ namespace Kistl.Client.WPF.View.KistlBase
     using Kistl.Client.Models;
     using Kistl.Client.Presentables;
     using Kistl.Client.Presentables.KistlBase;
+    using Microsoft.Windows.Controls;
 
-    public abstract class InstanceListBaseDisplay : UserControl, IHasViewModel<InstanceListViewModel>
+    public abstract class InstanceGridBaseDisplay : UserControl, IHasViewModel<InstanceListViewModel>
     {
-        public abstract ListView ListView { get; }
+        public abstract DataGrid DataGrid { get; }
 
         #region Sort dependency properties
         public static readonly DependencyProperty SortPropertyNameProperty =
-            DependencyProperty.RegisterAttached("SortPropertyName", typeof(string), typeof(InstanceListDisplay));
+            DependencyProperty.RegisterAttached("SortPropertyName", typeof(string), typeof(InstanceGridDisplay));
 
-        public static string GetSortPropertyName(GridViewColumn obj)
+        public static string GetSortPropertyName(DependencyObject obj)
         {
             if (obj == null) throw new ArgumentNullException("obj");
             return (string)obj.GetValue(SortPropertyNameProperty);
         }
 
-        public static void SetSortPropertyName(GridViewColumn obj, string value)
+        public static void SetSortPropertyName(DependencyObject obj, string value)
         {
             if (obj == null) throw new ArgumentNullException("obj");
             obj.SetValue(SortPropertyNameProperty, value);
@@ -82,11 +83,11 @@ namespace Kistl.Client.WPF.View.KistlBase
             _selectedItemsChangedByList = true;
             try
             {
-                if (e.OriginalSource == ListView)
+                if (e.OriginalSource == DataGrid)
                 {
                     e.Handled = true;
-                    e.RemovedItems.ForEach<DataObjectViewModel>(i => ViewModel.SelectedItems.Remove(i));
-                    e.AddedItems.ForEach<DataObjectViewModel>(i => ViewModel.SelectedItems.Add(i));
+                    e.RemovedItems.OfType<InstanceListViewModel.Proxy>().ForEach(i => ViewModel.SelectedProxies.Remove(i));
+                    e.AddedItems.OfType<InstanceListViewModel.Proxy>().ForEach(i => ViewModel.SelectedProxies.Add(i, true));
                 }
             }
             finally
@@ -95,7 +96,7 @@ namespace Kistl.Client.WPF.View.KistlBase
             }
         }
 
-        void ViewModel_SelectedItems_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        void ViewModel_SelectedProxies_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             if (_selectedItemsChangedByList) return;
 
@@ -104,12 +105,12 @@ namespace Kistl.Client.WPF.View.KistlBase
             {
                 if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Reset)
                 {
-                    ListView.SelectedItems.Clear();
+                    DataGrid.SelectedItems.Clear();
                 }
                 else
                 {
-                    if (e.OldItems != null) e.OldItems.ForEach<object>(i => ListView.SelectedItems.Remove(i));
-                    if (e.NewItems != null) e.NewItems.ForEach<object>(i => ListView.SelectedItems.Add(i));
+                    if (e.OldItems != null) e.OldItems.ForEach<object>(i => DataGrid.SelectedItems.Remove(i));
+                    if (e.NewItems != null) e.NewItems.ForEach<object>(i => DataGrid.SelectedItems.Add(i));
                 }
             }
             finally
@@ -121,25 +122,23 @@ namespace Kistl.Client.WPF.View.KistlBase
         #region RefreshGridView
         protected void RefreshGridView()
         {
-            GridView view = new GridView() { AllowsColumnReorder = true };
-            ListView.View = view;
             GridDisplayConfiguration cfg = ViewModel.DisplayedColumns;
             if (cfg.ShowIcon)
             {
-                view.Columns.Add(new GridViewColumn() { CellTemplate = (DataTemplate)FindResource("iconCellTemplate") });
+                DataGrid.Columns.Add(new DataGridTemplateColumn() { CellTemplate = (DataTemplate)FindResource("iconCellTemplate") });
             }
 
             if (cfg.ShowId)
             {
-                var col = new GridViewColumn() { CellTemplate = (DataTemplate)FindResource("idCellTemplate"), Header = "ID" };
-                view.Columns.Add(col);
+                var col = new DataGridTemplateColumn() { CellTemplate = (DataTemplate)FindResource("idCellTemplate"), Header = "ID" };
+                DataGrid.Columns.Add(col);
                 // SetSortPropertyName(col, "ID");
             }
 
             if (cfg.ShowName)
             {
-                var col = new GridViewColumn() { CellTemplate = (DataTemplate)FindResource("nameCellTemplate"), Header = "Name" };
-                view.Columns.Add(col);
+                var col = new DataGridTemplateColumn() { CellTemplate = (DataTemplate)FindResource("nameCellTemplate"), Header = "Name" };
+                DataGrid.Columns.Add(col);
                 // Not possible
                 // SetSortPropertyName(col, "Name");               
             }
@@ -147,34 +146,41 @@ namespace Kistl.Client.WPF.View.KistlBase
             foreach (var desc in cfg.Columns)
             {
                 // TODO: use default controls after moving labeling to infrastructure
-                var col = new GridViewColumn() { Header = desc.Header };
+                var col = new DataGridTemplateColumn() { Header = desc.Header };
                 SetSortPropertyName(col, desc.Name);
 
-                DataTemplate result = new DataTemplate();
-                var cpFef = new FrameworkElementFactory(typeof(ContentPresenter));
+                var editorFactory = new FrameworkElementFactory(typeof(ContentPresenter));
+                var labelFactory = new FrameworkElementFactory(typeof(ContentPresenter));
                 switch (desc.Type)
                 {
                     case ColumnDisplayModel.ColumnType.MethodModel:
-                        cpFef.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(String.Format("ActionViewModelsByName[{0}]", desc.Name)), Mode = BindingMode.OneWay });
+                        editorFactory.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(String.Format("ActionViewModelsByName[{0}]", desc.Name)), Mode = BindingMode.OneWay });
+                        labelFactory.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(String.Format("ActionViewModelsByName[{0}]", desc.Name)), Mode = BindingMode.OneWay });
                         break;
                     case ColumnDisplayModel.ColumnType.PropertyModel:
                         {
                             var tmp = desc.Name.Split('.').Select(i => String.Format("PropertyModelsByName[{0}]", i));
-                            var binding = string.Join(".Value.", tmp.ToArray());
-                            cpFef.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(binding), Mode = BindingMode.OneWay });
+                            var binding = "Object." + string.Join(".Value.", tmp.ToArray());
+                            editorFactory.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(binding), Mode = BindingMode.OneWay });
+                            labelFactory.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(binding), Mode = BindingMode.OneWay });
                             break;
                         }
                     case ColumnDisplayModel.ColumnType.Property:
-                        cpFef.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(desc.Name), Mode = BindingMode.OneWay });
+                        editorFactory.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(desc.Name), Mode = BindingMode.OneWay });
+                        labelFactory.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(desc.Name), Mode = BindingMode.OneWay });
                         break;
                 }
-                cpFef.SetValue(VisualTypeTemplateSelector.RequestedKindProperty, desc.ControlKind);
-                cpFef.SetValue(ContentPresenter.ContentTemplateSelectorProperty, FindResource("defaultTemplateSelector"));
-                cpFef.SetValue(FrameworkElement.HorizontalAlignmentProperty, HorizontalAlignment.Stretch);
-                cpFef.SetValue(FrameworkElement.MarginProperty, new Thickness(-6, 0, -6, 0));
-                result.VisualTree = cpFef;
-                col.CellTemplate = result;
-                view.Columns.Add(col);
+                editorFactory.SetValue(VisualTypeTemplateSelector.RequestedKindProperty, desc.ControlKind);
+                editorFactory.SetValue(ContentPresenter.ContentTemplateSelectorProperty, FindResource("defaultTemplateSelector"));
+                editorFactory.SetValue(FrameworkElement.HorizontalAlignmentProperty, HorizontalAlignment.Stretch);
+
+                labelFactory.SetValue(VisualTypeTemplateSelector.RequestedKindProperty, desc.ReadOnlyKind);
+                labelFactory.SetValue(ContentPresenter.ContentTemplateSelectorProperty, FindResource("defaultTemplateSelector"));
+                labelFactory.SetValue(FrameworkElement.HorizontalAlignmentProperty, HorizontalAlignment.Stretch);
+
+                col.CellTemplate = new DataTemplate() { VisualTree = labelFactory };
+                col.CellEditingTemplate = new DataTemplate() { VisualTree = editorFactory }; 
+                DataGrid.Columns.Add(col);
             }
 
         }
@@ -187,10 +193,9 @@ namespace Kistl.Client.WPF.View.KistlBase
                 if (ViewModel.ViewMethod == InstanceListViewMethod.Details)
                 {
                     RefreshGridView();
-                    ListView.ItemContainerStyle = Application.Current.Resources["GridViewItemContainerStyle"] as Style;
                 }
                 // Attach to selection changed event on ViewModel side
-                ViewModel.SelectedItems.CollectionChanged += ViewModel_SelectedItems_CollectionChanged;
+                ViewModel.SelectedProxies.CollectionChanged += ViewModel_SelectedProxies_CollectionChanged;
             }
         }
         #endregion

@@ -20,6 +20,7 @@ namespace Kistl.Client.Presentables.KistlBase
     using Kistl.Client.Presentables.FilterViewModels;
     using Kistl.Client.Presentables.ValueViewModels;
     using ObjectEditor = Kistl.Client.Presentables.ObjectEditor;
+    using System.Collections;
 
     public enum InstanceListViewMethod
     {
@@ -481,36 +482,110 @@ namespace Kistl.Client.Presentables.KistlBase
         #endregion
 
         #region Instances
-        // TODO: make readonly, take care of new and deleted+submitted objects
+        private ObservableCollection<DataObjectViewModel> _instancesCache = null;
+        protected ObservableCollection<DataObjectViewModel> InstancesCache
+        {
+            get
+            {
+                if (_instancesCache == null)
+                {
+                    _instancesCache = new ObservableCollection<DataObjectViewModel>();
+                    LoadInstances();
+                }
+                return _instancesCache;
+            }
+        }
+
         private ObservableCollection<DataObjectViewModel> _instances = null;
+        /// <summary>
+        /// Allow instances to be added external
+        /// </summary>
         public ObservableCollection<DataObjectViewModel> Instances
         {
             get
             {
                 if (_instances == null)
                 {
-                    _instances = new ObservableCollection<DataObjectViewModel>();
-
-                    // As this is a "calculated" collection, only insider should modify this
-                    ////_instances.CollectionChanged += _instances_CollectionChanged;
-                    LoadInstances();
+                    ExecutePostFilter();
                 }
                 return _instances;
             }
         }
 
-        private ReadOnlyObservableCollection<DataObjectViewModel> _instancesFiltered = null;
-        public ReadOnlyObservableCollection<DataObjectViewModel> InstancesFiltered
+        public class Proxy
+        {
+            public Proxy()
+            {
+            }
+
+            public DataObjectViewModel Object { get; set; }
+        }
+        
+        private DataObjectViewModel GetObjectFromProxy(Proxy p)
+        {
+            if (p.Object == null)
+            {
+                var obj = DataContext.Create(DataContext.GetInterfaceType(_type.GetDataType()));
+                p.Object = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, obj);
+                _proxyCache[p.Object] = p;
+            }
+            return p.Object;
+        }
+        public class ProxyList : ObservableProjectedList<DataObjectViewModel, Proxy>, IList, IList<Proxy>
+        {
+            public ProxyList(INotifyCollectionChanged notifyingCollection, Func<DataObjectViewModel, Proxy> select, Func<Proxy, DataObjectViewModel> inverter)
+                : base(notifyingCollection, notifyingCollection, select, inverter)
+            {
+            }
+        }
+
+        Dictionary<DataObjectViewModel, Proxy> _proxyCache = new Dictionary<DataObjectViewModel, Proxy>();
+        private Proxy GetProxy(DataObjectViewModel vm)
+        {
+            Proxy result;
+            if (!_proxyCache.TryGetValue(vm, out result))
+            {
+                result = new Proxy() { Object = vm };
+                _proxyCache[vm] = result;
+            }
+            return result;
+        }
+
+        private ProxyList _proxyInstances = null;
+        /// <summary>
+        /// Allow instances to be added external
+        /// </summary>
+        public ProxyList ProxyInstances
         {
             get
             {
-                if (_instancesFiltered == null)
+                if (_proxyInstances == null)
                 {
-                    ExecutePostFilter();
+                    _proxyInstances = new ProxyList(
+                        Instances,
+                        (vm) => GetProxy(vm),
+                        (p) => GetObjectFromProxy(p));
                 }
-                return _instancesFiltered;
+                return _proxyInstances;
             }
         }
+
+        private ObservableProjectedList<DataObjectViewModel, Proxy> _selectedProxies = null;
+        public ObservableProjectedList<DataObjectViewModel, Proxy> SelectedProxies
+        {
+            get
+            {
+                if (_selectedProxies == null)
+                {
+                    _selectedProxies = new ObservableProjectedList<DataObjectViewModel, Proxy>(
+                        SelectedItems,
+                        (vm) => GetProxy(vm),
+                        (p) => GetObjectFromProxy(p));
+                }
+                return _selectedProxies;
+            }
+        }
+
 
         private ObservableCollection<DataObjectViewModel> _selectedItems = null;
         public ObservableCollection<DataObjectViewModel> SelectedItems
@@ -598,9 +673,9 @@ namespace Kistl.Client.Presentables.KistlBase
         /// </summary>
         public void ReloadInstances()
         {
-            if (_instances != null)
+            if (_instancesCache != null)
             {
-                _instances.Clear();
+                _instancesCache.Clear();
                 LoadInstances();
                 ExecutePostFilter();
             }
@@ -691,9 +766,9 @@ namespace Kistl.Client.Presentables.KistlBase
         protected virtual void OnIsItemsReadOnlyChanged()
         {
             _displayedColumns = null;
-            if (_instances != null)
+            if (_instancesCache != null)
             {
-                foreach (var i in _instances)
+                foreach (var i in _instancesCache)
                 {
                     i.IsReadOnly = _isItemsReadOnly;
                 }
@@ -792,7 +867,7 @@ namespace Kistl.Client.Presentables.KistlBase
 
         protected virtual GridDisplayConfiguration CreateDisplayedColumns()
         {
-            var result = new GridDisplayConfiguration();
+            var result = new GridDisplayConfiguration(FrozenContext);
             result.BuildColumns(this._type, !IsEditable);
 
             DisplayedColumnsCreatedHandler temp = DisplayedColumnsCreated;
@@ -836,27 +911,26 @@ namespace Kistl.Client.Presentables.KistlBase
             {
                 var mdl = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, obj);
                 mdl.IsReadOnly = IsItemsReadOnly;
-                _instances.Add(mdl);
+                _instancesCache.Add(mdl);
             }
             OnInstancesChanged();
         }
 
         /// <summary>
-        /// Call this when the <see cref="Instances"/> property or its 
+        /// Call this when the <see cref="InstancesCache"/> property or its 
         /// contents have changed. Override this to react on changes here.
         /// </summary>
         protected virtual void OnInstancesChanged()
         {
             ExecutePostFilter();
-            OnPropertyChanged("Instances");
         }
 
         /// <summary>
-        /// Create a fresh <see cref="InstancesFiltered"/> collection when something has changed.
+        /// Create a fresh <see cref="Instances"/> collection when something has changed.
         /// </summary>
         private void ExecutePostFilter()
         {
-            var tmp = new List<DataObjectViewModel>(this.Instances);
+            var tmp = new List<DataObjectViewModel>(this.InstancesCache);
             // poor man's full text search
             foreach (var filter in Filter.Where(i => !i.IsServerSideFilter))
             {
@@ -872,30 +946,33 @@ namespace Kistl.Client.Presentables.KistlBase
                 var tmpOrderBy = _sortProperty.Split('.').Select(i => String.Format("PropertyModelsByName[\"{0}\"]", i));
                 var orderby = string.Join(".Value.", tmpOrderBy.ToArray());
 
-                _instancesFiltered = new ReadOnlyObservableCollection<DataObjectViewModel>(
+                _instances =
                     new ObservableCollection<DataObjectViewModel>(
                     tmp
                         .AsQueryable()
-                        // Sorting CompundObjects does not work
-                        // Maybe we should implement a custom comparer
+                    // Sorting CompundObjects does not work
+                    // Maybe we should implement a custom comparer
                         .OrderBy(string.Format("it.{0}.UntypedValue {1}",
                                     orderby,
                                     _sortDirection == ListSortDirection.Descending ? "desc" : string.Empty
                                 )
                             )
-                       )
                     );
             }
             else
             {
-                _instancesFiltered = new ReadOnlyObservableCollection<DataObjectViewModel>(new ObservableCollection<DataObjectViewModel>(tmp));
+                _instances = new ObservableCollection<DataObjectViewModel>(tmp);
             }
 
-            OnPropertyChanged("InstancesFiltered");
+            _proxyCache.Clear();
+            _proxyInstances = null;
+
+            OnPropertyChanged("Instances");
+            OnPropertyChanged("ProxyInstances");
 
             if (SelectFirstOnLoad)
             {
-                this.SelectedItem = _instancesFiltered.FirstOrDefault();
+                this.SelectedItem = _instances.FirstOrDefault();
             }
         }
 

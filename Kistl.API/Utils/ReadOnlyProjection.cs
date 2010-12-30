@@ -212,12 +212,7 @@ namespace Kistl.API.Utils
 
         public int IndexOf(TOutput item)
         {
-            var source = _list.Where(v => Object.Equals(Selector(v), item)).FirstOrDefault();
-
-            if (source != null)
-                return _list.IndexOf(source);
-            else
-                return -1;
+            return _list.IndexOf(Invert(item));
         }
 
         void IList<TOutput>.Insert(int index, TOutput item)

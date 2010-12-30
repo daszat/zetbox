@@ -23,13 +23,8 @@
                   MinHeight="50"
                   SelectionChanged="lst_SelectionChanged"
                   MouseDoubleClick="ItemActivatedHandler"
+                  ItemContainerStyle="{StaticResource GridViewItemContainerStyle}"
                   GridViewColumnHeader.Click="ListView_HeaderClick">
-            <ListView.ItemContainerStyle>
-                <Style TargetType="ListViewItem">
-                    <Setter Property="HorizontalContentAlignment"
-                            Value="Stretch" />
-                </Style>
-            </ListView.ItemContainerStyle>
             <ListView.ContextMenu>
                 <ContextMenu ItemsSource="{Binding Commands}">
                     <ContextMenu.ItemContainerStyle>
