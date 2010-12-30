@@ -17,8 +17,10 @@ namespace Kistl.DalProvider.NHibernate
     {
         private readonly NHibernateImplementationType.Factory _implTypeFactory;
         private readonly global::NHibernate.ISession _nhSession;
-        private readonly ContextCache _attachedObjects;
+        private readonly INHibernateImplementationTypeChecker _implChecker;
 
+        private readonly ContextCache _attachedObjects;
+        
         internal NHibernateContext(
             IMetaDataResolver metaDataResolver,
             Identity identity,
@@ -26,11 +28,14 @@ namespace Kistl.DalProvider.NHibernate
             Func<IFrozenContext> lazyCtx,
             InterfaceType.Factory iftFactory,
             NHibernateImplementationType.Factory implTypeFactory,
-            global::NHibernate.ISession nhSession)
+            global::NHibernate.ISession nhSession,
+            INHibernateImplementationTypeChecker implChecker)
             : base(metaDataResolver, identity, config, lazyCtx, iftFactory)
         {
             _implTypeFactory = implTypeFactory;
             _nhSession = nhSession;
+            _implChecker = implChecker;
+
             _attachedObjects = new ContextCache(this);
         }
 
@@ -40,15 +45,17 @@ namespace Kistl.DalProvider.NHibernate
             return new QueryTranslator<Tinterface>(
                 new NHibernateQueryTranslatorProvider<Tinterface>(
                     metaDataResolver, this.identity,
-                    query, this, iftFactory))
+                    query, this, iftFactory, _implChecker))
                 .Cast<IPersistenceObject>();
         }
 
         public IQueryable<IPersistenceObject> PrepareQueryable(InterfaceType ifType)
         {
+            var proxyType = ToProxyType(ifType);
+
             var mi = this.GetType().FindGenericMethod(
                 "PrepareQueryableGeneric",
-                new[] { ifType.Type, ToImplementationType(ifType).Type },
+                new[] { ifType.Type, proxyType },
                 null);
             return (IQueryable<IPersistenceObject>)mi.Invoke(this, new IPersistenceObject[0]);
         }
@@ -76,7 +83,7 @@ namespace Kistl.DalProvider.NHibernate
             CheckDisposed();
 
             var ifType = GetInterfaceType(typeof(Tinterface));
-            return PrepareQueryable(ifType).OfType<Tinterface>();
+            return PrepareQueryable(ifType).Cast<Tinterface>();
         }
 
         public override IQueryable<IPersistenceObject> GetPersistenceObjectQuery(InterfaceType ifType)
@@ -230,8 +237,7 @@ namespace Kistl.DalProvider.NHibernate
         public override T Find<T>(int ID)
         {
             CheckDisposed();
-            // TODO: T->TImpl
-            return _nhSession.Load<T>(ID);
+            return (T)NhFindById(ToImplementationType(GetInterfaceType(typeof(T))), ID);
         }
 
         public override IPersistenceObject FindPersistenceObject(InterfaceType ifType, int ID)
@@ -247,13 +253,13 @@ namespace Kistl.DalProvider.NHibernate
 
         private object NhFindById(ImplementationType implType, int id)
         {
-            return _nhSession.Load(implType.Type.FullName, id);
+            return _nhSession.Load(ToProxyType(implType).FullName, id);
         }
 
         private object NhFindByExportGuid(ImplementationType implType, Guid exportGuid)
         {
             return _nhSession
-                        .CreateCriteria(implType.Type.FullName)
+                        .CreateCriteria(ToProxyType(implType).FullName)
                         .Add(global::NHibernate.Criterion.Restrictions.Eq("ExportGuid", exportGuid))
                         .UniqueResult();
         }
@@ -359,6 +365,17 @@ namespace Kistl.DalProvider.NHibernate
             return _implTypeFactory(Type.GetType(String.Format("{0}NHibernate{1},{2}", t.Type.FullName, Kistl.API.Helper.ImplementationSuffix, NHibernateProvider.ServerAssembly)));
         }
 
+        internal Type ToProxyType(ImplementationType implType)
+        {
+            var proxyType = implType.Type.GetNestedTypes().Where(cls => cls.Name.EndsWith("Proxy")).Single();
+            return proxyType;
+        }
+
+        internal Type ToProxyType(InterfaceType ifType)
+        {
+            return ToProxyType(ToImplementationType(ifType));
+        }
+
         protected override int ExecGetSequenceNumber(Guid sequenceGuid)
         {
             throw new NotImplementedException();
@@ -397,7 +414,12 @@ namespace Kistl.DalProvider.NHibernate
             if (proxy == null)
                 return null;
 
-            var item = _attachedObjects.Lookup(GetImplementationType(proxy.GetType().DeclaringType).ToInterfaceType(), proxy.ID);
+            var proxyType = proxy.GetType();
+            // dereference NHibernate proxies
+            if (proxyType.DeclaringType == null)
+                proxyType = proxyType.BaseType;
+
+            var item = _attachedObjects.Lookup(GetImplementationType(proxyType.DeclaringType).ToInterfaceType(), proxy.ID);
             if (item == null)
             {
                 item = (IPersistenceObject)Activator.CreateInstance(proxy.ZBoxWrapper, null, proxy);

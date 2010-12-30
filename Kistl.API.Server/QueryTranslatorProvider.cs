@@ -228,8 +228,8 @@ namespace Kistl.API.Server
             if (c.Type.IsGenericType && c.Type.GetGenericTypeDefinition() == typeof(QueryTranslator<>))
             {
                 var result = Source.Expression;
-                var type = result.Type.GetGenericArguments().First();
-                return AddSecurityFilter(result, Ctx.GetImplementationType(type).ToInterfaceType());
+                var type = c.Type.GetGenericArguments().First();
+                return AddSecurityFilter(result, IftFactory(type));
             }
             else if (c.Value != null && c.Type.IsEnum) // Handle Enums
             {
@@ -451,7 +451,7 @@ namespace Kistl.API.Server
         /// <summary>
         /// Translates the specified Type to a provider type, if it is a IPersistenceObject; else it is passed through unmodified.
         /// </summary>
-        private Type TranslateType(Type type)
+        protected virtual Type TranslateType(Type type)
         {
             return (type.IsIPersistenceObject() || type.IsICompoundObject())
                 ? Ctx.ToImplementationType(IftFactory(type)).Type

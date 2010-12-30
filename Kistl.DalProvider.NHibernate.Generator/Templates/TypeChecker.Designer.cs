@@ -46,8 +46,8 @@ this.WriteObjects("            if (type == null) { throw new ArgumentNullExcepti
 this.WriteObjects("\r\n");
 this.WriteObjects("			var myAssembly = typeof(",  shortName , "ImplementationTypeChecker).Assembly;\r\n");
 this.WriteObjects("\r\n");
-this.WriteObjects("            // Allow all types from the generated assembly\r\n");
-this.WriteObjects("            if (type.Assembly == myAssembly)\r\n");
+this.WriteObjects("            // Allow all top-level types from the generated assembly\r\n");
+this.WriteObjects("            if (type.Assembly == myAssembly && type.DeclaringType == null)\r\n");
 this.WriteObjects("                return true;\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("            // Allow all generic types which have only implementation types as arguments\r\n");

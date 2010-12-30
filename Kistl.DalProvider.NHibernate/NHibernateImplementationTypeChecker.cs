@@ -25,7 +25,9 @@ namespace Kistl.DalProvider.NHibernate
         public NHibernateImplementationType(Type type, InterfaceType.Factory iftFactory, INHibernateImplementationTypeChecker typeChecker)
             : base(
                 // translate from NHibernate dynamic proxies if type is not in the generated assembly, but the BaseType is.
-                (type.Assembly != typeChecker.GetType().Assembly 
+                (type != null 
+                    && typeChecker != null
+                    && type.Assembly != typeChecker.GetType().Assembly 
                     && type.BaseType != null 
                     && type.BaseType.Assembly == typeChecker.GetType().Assembly)
                 ? type.BaseType 

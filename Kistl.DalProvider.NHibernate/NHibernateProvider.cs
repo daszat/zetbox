@@ -50,7 +50,8 @@ namespace Kistl.DalProvider.NHibernate
                         c.Resolve<Func<IFrozenContext>>(),
                         c.Resolve<InterfaceType.Factory>(),
                         c.Resolve<NHibernateImplementationType.Factory>(),
-                        c.Resolve<global::NHibernate.ISession>()
+                        c.Resolve<global::NHibernate.ISession>(),
+                        c.Resolve<INHibernateImplementationTypeChecker>()
                         );
                 })
                 .As<IKistlContext>()
@@ -84,7 +85,8 @@ namespace Kistl.DalProvider.NHibernate
                         c.Resolve<Func<IFrozenContext>>(),
                         c.Resolve<InterfaceType.Factory>(),
                         c.Resolve<NHibernateImplementationType.Factory>(),
-                        c.Resolve<global::NHibernate.ISession>()
+                        c.Resolve<global::NHibernate.ISession>(),
+                        c.Resolve<INHibernateImplementationTypeChecker>()
                         );
                 })
                 .As<TInterface>()

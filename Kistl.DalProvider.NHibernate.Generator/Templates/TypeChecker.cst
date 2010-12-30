@@ -23,8 +23,8 @@
 
 			var myAssembly = typeof(<%= shortName %>ImplementationTypeChecker).Assembly;
 
-            // Allow all types from the generated assembly
-            if (type.Assembly == myAssembly)
+            // Allow all top-level types from the generated assembly
+            if (type.Assembly == myAssembly && type.DeclaringType == null)
                 return true;
 
             // Allow all generic types which have only implementation types as arguments

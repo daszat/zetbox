@@ -78,7 +78,7 @@
     <Compile Include="AbstractNHibernateProxy.cs" />
     <Compile Include="IProxyObject.cs" />
     <Compile Include="NHibernateList.cs" />
-    <Compile Include="NHibernateQueryTranslator.cs" />
+    <Compile Include="NHibernateQueryTranslatorProvider.cs" />
     <Compile Include="NHibernateServerCollectionHandler.cs" />
     <Compile Include="NHibernateServerObjectHandler.cs" />
     <Compile Include="NHibernateServerObjectHandlerFactory.cs" />
