@@ -531,10 +531,15 @@ namespace Kistl.Client.Presentables.KistlBase
             }
             return p.Object;
         }
-        public class ProxyList : ObservableProjectedList<DataObjectViewModel, Proxy>, IList, IList<Proxy>
+
+        /// <summary>
+        /// Hack for those who do not check element types by traversing from inherited interfaces
+        /// e.g. DataGrid from WPF
+        /// </summary>
+        public sealed class ProxyList : AbstractObservableProjectedList<DataObjectViewModel, Proxy>, IList, IList<Proxy>
         {
             public ProxyList(INotifyCollectionChanged notifyingCollection, Func<DataObjectViewModel, Proxy> select, Func<Proxy, DataObjectViewModel> inverter)
-                : base(notifyingCollection, notifyingCollection, select, inverter)
+                : base(notifyingCollection, notifyingCollection, select, inverter, false)
             {
             }
         }
