@@ -27,10 +27,6 @@
             if (type.Assembly == myAssembly)
                 return true;
 
-            // Allow all types inheriting from the generated assembly (e.g. NHibernate dynamic proxies)
-            if (type.BaseType != null && type.BaseType.Assembly == myAssembly)
-                return true;
-
             // Allow all generic types which have only implementation types as arguments
             if (type.IsGenericType)
                 return type.GetGenericArguments().All(t => IsImplementationType(t));

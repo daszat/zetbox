@@ -214,7 +214,7 @@ namespace Kistl.DalProvider.NHibernate
         {
             // TODO: use Autofac as BytecodeFactory and use a local autofac container to 
             //       replace this A.CI call.
-            return AttachAndWrap((IProxyObject)Activator.CreateInstance(ToImplementationType(ifType).Type));
+            return Activator.CreateInstance(ToImplementationType(ifType).Type, lazyCtx);
         }
 
         public override IDataObject Find(InterfaceType ifType, int ID)
@@ -356,7 +356,7 @@ namespace Kistl.DalProvider.NHibernate
         public override ImplementationType ToImplementationType(InterfaceType t)
         {
             CheckDisposed();
-            return _implTypeFactory(Type.GetType(String.Format("{0}NHibernate{1}+{2}Proxy,{3}", t.Type.FullName, Kistl.API.Helper.ImplementationSuffix, t.Type.Name, NHibernateProvider.ServerAssembly)));
+            return _implTypeFactory(Type.GetType(String.Format("{0}NHibernate{1},{2}", t.Type.FullName, Kistl.API.Helper.ImplementationSuffix, NHibernateProvider.ServerAssembly)));
         }
 
         protected override int ExecGetSequenceNumber(Guid sequenceGuid)
@@ -397,7 +397,7 @@ namespace Kistl.DalProvider.NHibernate
             if (proxy == null)
                 return null;
 
-            var item = _attachedObjects.Lookup(GetImplementationType(proxy.GetType()).ToInterfaceType(), proxy.ID);
+            var item = _attachedObjects.Lookup(GetImplementationType(proxy.GetType().DeclaringType).ToInterfaceType(), proxy.ID);
             if (item == null)
             {
                 item = (IPersistenceObject)Activator.CreateInstance(proxy.ZBoxWrapper, null, proxy);

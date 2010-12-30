@@ -50,10 +50,6 @@ this.WriteObjects("            // Allow all types from the generated assembly\r\
 this.WriteObjects("            if (type.Assembly == myAssembly)\r\n");
 this.WriteObjects("                return true;\r\n");
 this.WriteObjects("\r\n");
-this.WriteObjects("            // Allow all types inheriting from the generated assembly (e.g. NHibernate dynamic proxies)\r\n");
-this.WriteObjects("            if (type.BaseType != null && type.BaseType.Assembly == myAssembly)\r\n");
-this.WriteObjects("                return true;\r\n");
-this.WriteObjects("\r\n");
 this.WriteObjects("            // Allow all generic types which have only implementation types as arguments\r\n");
 this.WriteObjects("            if (type.IsGenericType)\r\n");
 this.WriteObjects("                return type.GetGenericArguments().All(t => IsImplementationType(t));\r\n");
