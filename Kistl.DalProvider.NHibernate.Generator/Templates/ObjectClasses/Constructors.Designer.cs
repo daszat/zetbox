@@ -57,7 +57,7 @@ ApplyCompoundObjectPropertyInitialisers();
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("        /// <summary>Create a instance, wrapping the specified proxy</summary>\r\n");
-this.WriteObjects("        public ",  className , "(Func<IFrozenContext> lazyCtx, ",  interfaceName , "Interface proxy)\r\n");
+this.WriteObjects("        public ",  className , "(Func<IFrozenContext> lazyCtx, ",  interfaceName , "Proxy proxy)\r\n");
 #line 33 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\Constructors.cst"
 if (String.IsNullOrEmpty(baseClassName)) { 
 #line 34 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\Constructors.cst"
@@ -80,11 +80,11 @@ this.WriteObjects("        /// <summary>the NHibernate proxy of the represented 
 #line 44 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\Constructors.cst"
 if (String.IsNullOrEmpty(baseClassName)) { 
 #line 45 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\Constructors.cst"
-this.WriteObjects("        internal readonly ",  interfaceName , "Interface Proxy;\r\n");
+this.WriteObjects("        internal readonly ",  interfaceName , "Proxy Proxy;\r\n");
 #line 46 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\Constructors.cst"
 } else { 
 #line 47 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\Constructors.cst"
-this.WriteObjects("        internal new readonly ",  interfaceName , "Interface Proxy;\r\n");
+this.WriteObjects("        internal new readonly ",  interfaceName , "Proxy Proxy;\r\n");
 #line 48 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\Constructors.cst"
 } 
 

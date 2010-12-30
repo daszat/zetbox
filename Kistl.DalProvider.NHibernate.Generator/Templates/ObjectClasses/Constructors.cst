@@ -29,7 +29,7 @@
         }
 
         /// <summary>Create a instance, wrapping the specified proxy</summary>
-        public <%= className %>(Func<IFrozenContext> lazyCtx, <%= interfaceName %>Interface proxy)
+        public <%= className %>(Func<IFrozenContext> lazyCtx, <%= interfaceName %>Proxy proxy)
 <% if (String.IsNullOrEmpty(baseClassName)) { %>
             : base(lazyCtx) // do not pass proxy to base data object
 <% } else { %>
@@ -42,7 +42,7 @@
 
         /// <summary>the NHibernate proxy of the represented entity</summary>
 <% if (String.IsNullOrEmpty(baseClassName)) { %>
-        internal readonly <%= interfaceName %>Interface Proxy;
+        internal readonly <%= interfaceName %>Proxy Proxy;
 <% } else { %>
-        internal new readonly <%= interfaceName %>Interface Proxy;
+        internal new readonly <%= interfaceName %>Proxy Proxy;
 <% } %>

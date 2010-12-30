@@ -59,7 +59,6 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                 ProxyClassChild.Call(
                     Host, ctx,
                     this.GetInterfaces().First(),
-                    Mappings.ObjectClassHbm.GetInterfaceTypeReference(parent, this.Settings),
                     Mappings.ObjectClassHbm.GetImplementationTypeReference(parent, this.Settings),
                     GetPersistentProperties());
             }
@@ -126,7 +125,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                         }
                         else
                         {
-                            type += ImplementationSuffix + "." + orp.GetReferencedObjectClass().Name + "Interface";
+                            type += ImplementationSuffix + "." + orp.GetReferencedObjectClass().Name + "Proxy";
                         }
                         if (orp.IsList())
                         {

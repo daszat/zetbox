@@ -21,10 +21,14 @@
         {
             if (type == null) { throw new ArgumentNullException("type"); }
 
-			var myAssembly = this.GetType().Assembly;
+			var myAssembly = typeof(<%= shortName %>ImplementationTypeChecker).Assembly;
 
             // Allow all types from the generated assembly
             if (type.Assembly == myAssembly)
+                return true;
+
+            // Allow all types inheriting from the generated assembly (e.g. NHibernate dynamic proxies)
+            if (type.BaseType != null && type.BaseType.Assembly == myAssembly)
                 return true;
 
             // Allow all generic types which have only implementation types as arguments

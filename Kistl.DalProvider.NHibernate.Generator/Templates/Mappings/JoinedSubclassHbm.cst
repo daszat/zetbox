@@ -15,13 +15,12 @@
 <%@ Parameter Name="interfaceName" Type="string" %>
 <%@ Parameter Name="implementationName" Type="string" %>
 <%@ Parameter Name="tableName" Type="string" %>
-<%@ Parameter Name="qualifiedInterfaceName" Type="string" %>
 <%@ Parameter Name="qualifiedImplementationName" Type="string" %>
 <%@ Parameter Name="isAbstract" Type="bool" %>
 <%@ Parameter Name="properties" Type="List<Property>" %>
 <%@ Parameter Name="subClasses" Type="List<ObjectClass>" %>
         <joined-subclass name="<%= qualifiedImplementationName %>"
-                         proxy="<%= qualifiedInterfaceName %>"
+                         proxy="<%= qualifiedImplementationName %>"
                          table="`<%= tableName %>`">
             
             <!-- base class reference -->

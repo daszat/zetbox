@@ -397,7 +397,7 @@ namespace Kistl.DalProvider.NHibernate
             if (proxy == null)
                 return null;
 
-            var item = _attachedObjects.Lookup(GetImplementationType(proxy.Interface).ToInterfaceType(), proxy.ID);
+            var item = _attachedObjects.Lookup(GetImplementationType(proxy.GetType()).ToInterfaceType(), proxy.ID);
             if (item == null)
             {
                 item = (IPersistenceObject)Activator.CreateInstance(proxy.ZBoxWrapper, null, proxy);

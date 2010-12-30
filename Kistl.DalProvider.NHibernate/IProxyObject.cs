@@ -12,7 +12,6 @@ namespace Kistl.DalProvider.NHibernate
     public interface IProxyObject
     {
         int ID { get; set; }
-        Type Interface { get; }
         Type ZBoxWrapper { get; }
     }
 }

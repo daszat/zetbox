@@ -12,25 +12,14 @@
 <%@ Import Namespace="Kistl.Generator" %>
 <%@ Import Namespace="Kistl.Generator.Extensions" %>
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
-<%@ Parameter Name="interfaceName" Type="string" %>
-<%@ Parameter Name="parentInterfaceName" Type="string" %>
-<%@ Parameter Name="parentProxyName" Type="string" %>
+<%@ Parameter Name="className" Type="string" %>
+<%@ Parameter Name="parentClassName" Type="string" %>
 <%@ Parameter Name="typeAndNameList" Type="IEnumerable<KeyValuePair<string, string>>" %>
 
-        public interface <%= interfaceName %>Interface
-            : <%= parentInterfaceName %>
+        public class <%= className %>Proxy
+            : <%= parentClassName %>
         {
-<% foreach(var p in typeAndNameList) { %>
-            <%= p.Key %> <%= p.Value %> { get; set; }
-
-<% } %>
-        }
-
-        public class <%= interfaceName %>Proxy
-            : <%= parentProxyName %>, <%= interfaceName %>Interface
-        {
-			public override Type Interface { get { return typeof(<%= interfaceName %>Interface); } }
-			public override Type ZBoxWrapper { get { return typeof(<%= interfaceName %><%= ImplementationSuffix %>); } }
+            public override Type ZBoxWrapper { get { return typeof(<%= className %><%= ImplementationSuffix %>); } }
 
 <% foreach(var p in typeAndNameList) { %>
             public virtual <%= p.Key %> <%= p.Value %> { get; set; }

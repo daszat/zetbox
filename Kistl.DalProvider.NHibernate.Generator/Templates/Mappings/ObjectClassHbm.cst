@@ -15,7 +15,6 @@
 <%@ Parameter Name="interfaceName" Type="string" %>
 <%@ Parameter Name="implementationName" Type="string" %>
 <%@ Parameter Name="tableName" Type="string" %>
-<%@ Parameter Name="qualifiedInterfaceName" Type="string" %>
 <%@ Parameter Name="qualifiedImplementationName" Type="string" %>
 <%@ Parameter Name="isAbstract" Type="bool" %>
 <%@ Parameter Name="properties" Type="List<Property>" %>
@@ -24,7 +23,7 @@
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
                    schema="`dbo`">
     <class name="<%= qualifiedImplementationName %>"
-           proxy="<%= qualifiedInterfaceName %>"
+           proxy="<%= qualifiedImplementationName %>"
            table="`<%= tableName %>`"
            abstract="<%= isAbstract ? "true" : "false" %>">
 

@@ -23,7 +23,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
 
             return cls.Module.Namespace + "."
                 + cls.Name + extraSuffix + Kistl.API.Helper.ImplementationSuffix
-                + "+" + cls.Name + "Interface"
+                + "+" + cls.Name + "Proxy"
                 + ", Kistl.Objects." + extraSuffix + Kistl.API.Helper.ImplementationSuffix;
         }
 
@@ -49,7 +49,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
 
             return cls.Module.Namespace + "."
                 + cls.Name + extraSuffix + Kistl.API.Helper.ImplementationSuffix
-                + "." + cls.Name + "Interface";
+                + "." + cls.Name + "Proxy";
         }
 
         public static string GetImplementationTypeReference(ObjectClass cls, NameValueCollection templateSettings)
@@ -76,7 +76,6 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
             string implementationName = cls.Name + extraSuffix + Kistl.API.Helper.ImplementationSuffix;
             string tableName = cls.TableName;
 
-            string qualifiedInterfaceName = GetAssemblyQualifiedInterface(cls, templateSettings);
             string qualifiedImplementationName = GetAssemblyQualifiedImplementation(cls, templateSettings);
 
             bool isAbstract = cls.IsAbstract;
@@ -84,7 +83,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
             List<Property> properties = cls.Properties.ToList();
             List<ObjectClass> subClasses = cls.SubClasses.ToList();
 
-            return new object[] { interfaceName, implementationName, tableName, qualifiedInterfaceName, qualifiedImplementationName, isAbstract, properties, subClasses };
+            return new object[] { interfaceName, implementationName, tableName, qualifiedImplementationName, isAbstract, properties, subClasses };
         }
 
         protected virtual void ApplyPropertyDefinitions(List<Property> properties)
