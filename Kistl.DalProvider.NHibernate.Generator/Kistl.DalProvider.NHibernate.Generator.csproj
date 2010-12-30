@@ -150,7 +150,14 @@
     </Compile>
     <Compile Include="Templates\ObjectClasses\Template.cs" />
     <Compile Include="Templates\ProjectFile.cs" />
-    <Compile Include="Templates\Properties\IdProperty.cs" />
+    <Compile Include="Templates\Properties\ObjectListProperty.cs">
+      <DependentUpon>ObjectListProperty.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Properties\ObjectListProperty.Designer.cs">
+      <DependentUpon>ObjectListProperty.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Templates\Properties\ObjectReferencePropertyTemplate.cs">
       <DependentUpon>ObjectReferencePropertyTemplate.cst</DependentUpon>
     </Compile>
@@ -242,6 +249,10 @@
     <None Include="Templates\ObjectClasses\SaveOrUpdateToMethod.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>SaveOrUpdateToMethod.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\Properties\ObjectListProperty.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>ObjectListProperty.Designer.cs</LastGenOutput>
     </None>
     <None Include="Templates\Properties\ObjectReferencePropertyTemplate.cst">
       <Generator>Arebis Template Processor</Generator>

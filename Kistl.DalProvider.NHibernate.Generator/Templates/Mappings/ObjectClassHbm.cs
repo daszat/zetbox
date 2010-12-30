@@ -12,22 +12,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
 
     public partial class ObjectClassHbm
     {
-        public static string GetAssemblyQualifiedInterface(ObjectClass cls, NameValueCollection templateSettings)
-        {
-            if (cls == null) { throw new ArgumentNullException("cls"); }
-            if (templateSettings == null) { throw new ArgumentNullException("templateSettings"); }
-
-            string extraSuffix = templateSettings["extrasuffix"];
-
-            // cls.Module.Namespace + "." + interfaceName + ", Kistl.Objects";
-
-            return cls.Module.Namespace + "."
-                + cls.Name + extraSuffix + Kistl.API.Helper.ImplementationSuffix
-                + "+" + cls.Name + "Proxy"
-                + ", Kistl.Objects." + extraSuffix + Kistl.API.Helper.ImplementationSuffix;
-        }
-
-        public static string GetAssemblyQualifiedImplementation(ObjectClass cls, NameValueCollection templateSettings)
+        public static string GetAssemblyQualifiedProxy(ObjectClass cls, NameValueCollection templateSettings)
         {
             if (cls == null) { throw new ArgumentNullException("cls"); }
             if (templateSettings == null) { throw new ArgumentNullException("templateSettings"); }
@@ -40,19 +25,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
                 + ", Kistl.Objects." + extraSuffix + Kistl.API.Helper.ImplementationSuffix;
         }
 
-        public static string GetInterfaceTypeReference(ObjectClass cls, NameValueCollection templateSettings)
-        {
-            if (cls == null) { throw new ArgumentNullException("cls"); }
-            if (templateSettings == null) { throw new ArgumentNullException("templateSettings"); }
-
-            string extraSuffix = templateSettings["extrasuffix"];
-
-            return cls.Module.Namespace + "."
-                + cls.Name + extraSuffix + Kistl.API.Helper.ImplementationSuffix
-                + "." + cls.Name + "Proxy";
-        }
-
-        public static string GetImplementationTypeReference(ObjectClass cls, NameValueCollection templateSettings)
+        public static string GetProxyTypeReference(ObjectClass cls, NameValueCollection templateSettings)
         {
             if (cls == null) { throw new ArgumentNullException("cls"); }
             if (templateSettings == null) { throw new ArgumentNullException("templateSettings"); }
@@ -76,7 +49,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
             string implementationName = cls.Name + extraSuffix + Kistl.API.Helper.ImplementationSuffix;
             string tableName = cls.TableName;
 
-            string qualifiedImplementationName = GetAssemblyQualifiedImplementation(cls, templateSettings);
+            string qualifiedImplementationName = GetAssemblyQualifiedProxy(cls, templateSettings);
 
             bool isAbstract = cls.IsAbstract;
 

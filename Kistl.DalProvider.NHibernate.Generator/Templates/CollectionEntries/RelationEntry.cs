@@ -48,8 +48,8 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries
             string interfaceName = GetCeInterface();
 
             List<KeyValuePair<string, string>> typeAndNameList = new List<KeyValuePair<string, string>>(){
-                new KeyValuePair<string, string>(Mappings.ObjectClassHbm.GetInterfaceTypeReference(rel.A.Type, this.Settings), "A"),
-                new KeyValuePair<string, string>(Mappings.ObjectClassHbm.GetInterfaceTypeReference(rel.B.Type, this.Settings), "B"),
+                new KeyValuePair<string, string>(Mappings.ObjectClassHbm.GetProxyTypeReference(rel.A.Type, this.Settings), "A"),
+                new KeyValuePair<string, string>(Mappings.ObjectClassHbm.GetProxyTypeReference(rel.B.Type, this.Settings), "B"),
             };
 
             if (IsOrdered())
@@ -74,11 +74,11 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries
         protected override void ApplyReloadReferenceBody()
         {
             {
-                string referencedImplementation = Mappings.ObjectClassHbm.GetImplementationTypeReference(rel.A.Type, Host.Settings);
+                string referencedImplementation = Mappings.ObjectClassHbm.GetProxyTypeReference(rel.A.Type, Host.Settings);
                 ObjectClasses.ReloadOneReference.Call(Host, ctx, null, referencedImplementation, "A", null, "_fk_A", "_fk_guid_A", IsExportable());
             }
             {
-                string referencedImplementation = Mappings.ObjectClassHbm.GetImplementationTypeReference(rel.B.Type, Host.Settings);
+                string referencedImplementation = Mappings.ObjectClassHbm.GetProxyTypeReference(rel.B.Type, Host.Settings);
                 ObjectClasses.ReloadOneReference.Call(Host, ctx, null, referencedImplementation, "B", null, "_fk_B", "_fk_guid_B", IsExportable());
             }
         }

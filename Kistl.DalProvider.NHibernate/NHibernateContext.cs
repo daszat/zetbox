@@ -419,10 +419,10 @@ namespace Kistl.DalProvider.NHibernate
             if (proxyType.DeclaringType == null)
                 proxyType = proxyType.BaseType;
 
-            var item = _attachedObjects.Lookup(GetImplementationType(proxyType.DeclaringType).ToInterfaceType(), proxy.ID);
+            var item = (NHibernatePersistenceObject)_attachedObjects.Lookup(GetImplementationType(proxyType.DeclaringType).ToInterfaceType(), proxy.ID);
             if (item == null)
             {
-                item = (IPersistenceObject)Activator.CreateInstance(proxy.ZBoxWrapper, null, proxy);
+                item = (NHibernatePersistenceObject)Activator.CreateInstance(proxy.ZBoxWrapper, null, proxy);
                 item.AttachToContext(this);
             }
             return item;

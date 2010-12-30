@@ -13,7 +13,6 @@ namespace Kistl.DalProvider.NHibernate
         protected NHibernatePersistenceObject(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
-            _objectState = DataObjectState.New;
         }
 
         public override bool IsAttached
@@ -21,10 +20,56 @@ namespace Kistl.DalProvider.NHibernate
             get { return Context != null; }
         }
 
-        private DataObjectState _objectState;
+        private DataObjectState _objectState = DataObjectState.Unmodified;
         public override DataObjectState ObjectState
         {
-            get { return _objectState; }
+            get
+            {
+                // Calc Objectstate
+                if (_objectState != DataObjectState.Deleted)
+                {
+                    if (NHibernateProxy.ID == 0)
+                    {
+                        _objectState = DataObjectState.New;
+                    }
+                    else if (_objectState == DataObjectState.New)
+                    {
+                        _objectState = DataObjectState.Unmodified;
+                    }
+                }
+                return _objectState;
+            }
+        }
+
+        private int _ID;
+        public override int ID
+        {
+            get
+            {
+                var result = _ID;
+                if (this.ObjectState != DataObjectState.New)
+                    result = _ID = NHibernateProxy.ID;
+
+                return result;
+            }
+            set
+            {
+                if (this.IsReadonly)
+                    throw new ReadOnlyObjectException();
+                if (_ID != value)
+                {
+                    var oldValue = _ID;
+                    var newValue = value;
+
+                    NotifyPropertyChanging("ID", oldValue, newValue);
+
+                    _ID = newValue;
+                    if (this.ObjectState != DataObjectState.New)
+                        NHibernateProxy.ID = newValue;
+
+                    NotifyPropertyChanged("ID", oldValue, newValue);
+                }
+            }
         }
 
         protected override void SetModified()
@@ -35,6 +80,6 @@ namespace Kistl.DalProvider.NHibernate
         }
 
         protected NHibernateContext OurContext { get { return (NHibernateContext)Context; } }
-        public abstract IProxyObject NHibernateProxy { get; } 
+        public abstract IProxyObject NHibernateProxy { get; }
     }
 }

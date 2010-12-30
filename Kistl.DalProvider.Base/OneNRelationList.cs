@@ -10,8 +10,6 @@ namespace Kistl.DalProvider.Base
     using System.Text;
     using Kistl.API;
 
-    // TODO: Move to DalProvider.Base
-
     // TODO: use delegate instead of SetPropertyValue. May be up to 300x faster.
     // TODO: take care of SELECT N+1 problem when modifying collection entries
 

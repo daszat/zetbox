@@ -10,8 +10,8 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
     using Kistl.API;
     using Kistl.App.Base;
     using Kistl.App.Extensions;
-    using Templates = Kistl.Generator.Templates;
     using Kistl.Generator;
+    using Templates = Kistl.Generator.Templates;
 
     public partial class ObjectReferencePropertyTemplate
     {

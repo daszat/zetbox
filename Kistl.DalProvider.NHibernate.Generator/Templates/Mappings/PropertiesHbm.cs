@@ -44,7 +44,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
 
             string nameAttr = String.Format("name=\"{0}\"", prop.Name);
             string classAttr = String.Format("class=\"{0}\"",
-                ObjectClassHbm.GetAssemblyQualifiedImplementation(otherEnd.Type, this.Settings));
+                ObjectClassHbm.GetAssemblyQualifiedProxy(otherEnd.Type, this.Settings));
             //string tableAttr = String.Format("table =\"`{0}`\" ", rel.GetAssociationName());
 
             switch (rel.GetRelationType())
@@ -136,7 +136,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
             string nameAttr = String.Format("name=\"{0}\"", prop.Name);
             string tableAttr = String.Format("table=\"`{0}`\"", rel.GetRelationTableName());
             string otherClassAttr = String.Format("class=\"{0}\"",
-                ObjectClassHbm.GetAssemblyQualifiedImplementation(otherEnd.Type, this.Settings));
+                ObjectClassHbm.GetAssemblyQualifiedProxy(otherEnd.Type, this.Settings));
             string inverseAttr = String.Format("inverse=\"{0}\"", inverse ? "true" : "false");
             string mappingType = otherEnd.HasPersistentOrder ? "list" : "idbag";
 

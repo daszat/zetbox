@@ -1,0 +1,47 @@
+﻿<%@ CodeTemplate Language="C#"
+    Name="Properties.ObjectListProperty"
+    ClassName="Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectListProperty"
+    Inherits="Kistl.Generator.MemberTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.App.Extensions" %>
+<%@ Import Namespace="Kistl.Generator" %>
+<%@ Import Namespace="Kistl.Generator.Extensions" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="serializationList" Type="Kistl.Generator.Templates.Serialization.SerializationMembersList" %>
+<%@ Parameter Name="name" Type="string" %>
+<%@ Parameter Name="wrapperName" Type="string" %>
+<%@ Parameter Name="wrapperClass" Type="string" %>
+<%@ Parameter Name="exposedListType" Type="string" %>
+<%@ Parameter Name="positionPropertyName" Type="string" %>
+<%@ Parameter Name="otherName" Type="string" %>
+<%@ Parameter Name="referencedInterface" Type="string" %>
+<%@ Parameter Name="referencedProxy" Type="string" %>
+        // <%= this.GetType() %>
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        <%= GetModifiers() %> <%= exposedListType %><<%= referencedInterface %>> <%= name %>
+        {
+            get
+            {
+                if (<%= wrapperName %> == null)
+                {
+                    <%= wrapperName %> = new <%= wrapperClass %><<%= referencedInterface %>>(
+                        "<%= otherName %>",
+                        <% if (!String.IsNullOrEmpty(positionPropertyName)) { %>"<%= positionPropertyName %>"<% } else { %>null<% } %>,
+                        this,
+                        () => this.NotifyPropertyChanged("<%= name %>", null, null),
+                        new ProjectedCollection<<%= referencedProxy %>, <%= referencedInterface %>>(
+                            Proxy.<%= name %>,
+                            p => (<%= referencedInterface %>)OurContext.AttachAndWrap(p),
+                            d => (<%= referencedProxy %>)((NHibernatePersistenceObject)d).NHibernateProxy));
+                }
+                return <%= wrapperName %>;
+            }
+        }
+    
+        private <%= wrapperClass %><<%= referencedInterface %>> <%= wrapperName %>;
+<% AddSerialization(serializationList, name, false); %>

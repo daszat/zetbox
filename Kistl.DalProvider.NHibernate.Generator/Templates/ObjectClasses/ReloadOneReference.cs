@@ -24,7 +24,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
             RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
 
             string referencedInterfaceUnused = null; // Mappings.ObjectClassHbm.GetInterfaceTypeReference(otherEnd.Type, _host.Settings);
-            string referencedImplementation = Mappings.ObjectClassHbm.GetImplementationTypeReference(otherEnd.Type, _host.Settings);
+            string referencedImplementation = Mappings.ObjectClassHbm.GetProxyTypeReference(otherEnd.Type, _host.Settings);
             string name = prop.Name;
             string implNameUnused = null;
             string fkBackingName = "_fk_" + name;

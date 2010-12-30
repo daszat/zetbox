@@ -114,7 +114,7 @@ namespace Kistl.API.Utils
         #endregion
     }
 
-    public class ReadOnlyObservableProjectedList<TInput, TOutput> : AbstractObservableProjectedList<TInput, TOutput>, IReadOnlyObservableList<TOutput>
+    public sealed class ReadOnlyObservableProjectedList<TInput, TOutput> : AbstractObservableProjectedList<TInput, TOutput>, IReadOnlyObservableList<TOutput>
     {
         public ReadOnlyObservableProjectedList(INotifyCollectionChanged notifyingCollection, Func<TInput, TOutput> select, Func<TOutput, TInput> inverter)
             : base(notifyingCollection, notifyingCollection, select, inverter, true)
@@ -127,7 +127,7 @@ namespace Kistl.API.Utils
         }
     }
 
-    public class ObservableProjectedList<TInput, TOutput> : AbstractObservableProjectedList<TInput, TOutput>
+    public sealed class ObservableProjectedList<TInput, TOutput> : AbstractObservableProjectedList<TInput, TOutput>
     {
         public ObservableProjectedList(INotifyCollectionChanged notifyingCollection, Func<TInput, TOutput> select, Func<TOutput, TInput> inverter)
             : base(notifyingCollection, notifyingCollection, select, inverter, false)

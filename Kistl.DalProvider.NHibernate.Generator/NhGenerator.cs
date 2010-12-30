@@ -31,7 +31,7 @@ namespace Kistl.DalProvider.NHibernate.Generator
             get
             {
                 return new string[] {
-                   "Kistl.DalProvider.Base", "Kistl.DalProvider.NHibernate",
+                   "Kistl.API.Utils", "Kistl.DalProvider.Base", "Kistl.DalProvider.NHibernate",
                 };
             }
         }

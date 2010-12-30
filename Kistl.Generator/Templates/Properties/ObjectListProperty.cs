@@ -20,7 +20,7 @@ namespace Kistl.Generator.Templates.Properties
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
             if (prop == null) { throw new ArgumentNullException("prop"); }
-            if (!prop.IsList()) { throw new ArgumentNullException("prop", "prop must be a List-valued property"); }
+            if (!prop.IsList()) { throw new ArgumentOutOfRangeException("prop", "prop must be a List-valued property"); }
 
             string name = prop.Name;
             string wrapperClass = "OneNRelationList";

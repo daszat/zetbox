@@ -44,7 +44,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries
             string interfaceName = GetCeInterface();
 
             List<KeyValuePair<string, string>> typeAndNameList = new List<KeyValuePair<string, string>>() {
-                new KeyValuePair<string, string>(Mappings.ObjectClassHbm.GetInterfaceTypeReference(prop.ObjectClass as ObjectClass, this.Settings), "Parent"),
+                new KeyValuePair<string, string>(Mappings.ObjectClassHbm.GetProxyTypeReference(prop.ObjectClass as ObjectClass, this.Settings), "Parent"),
                 new KeyValuePair<string, string>(prop.GetPropertyTypeString(), "Value"),
             };
 
@@ -69,7 +69,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries
 
         protected override void ApplyReloadReferenceBody()
         {
-            string referencedImplementation = Mappings.ObjectClassHbm.GetImplementationTypeReference(prop.ObjectClass as ObjectClass, this.Settings);
+            string referencedImplementation = Mappings.ObjectClassHbm.GetProxyTypeReference(prop.ObjectClass as ObjectClass, this.Settings);
             ObjectClasses.ReloadOneReference.Call(Host, ctx, null, referencedImplementation, "Parent", "Parent", "_fk_Parent", "_fk_guid_Parent", IsExportable());
         }
     }

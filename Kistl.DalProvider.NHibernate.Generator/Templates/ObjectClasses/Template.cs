@@ -23,16 +23,6 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
             this.cls = cls;
         }
 
-        protected override void ApplyClassHeadTemplate()
-        {
-            base.ApplyClassHeadTemplate();
-
-            if (cls.BaseObjectClass == null)
-            {
-                Properties.IdProperty.Call(Host, ctx);
-            }
-        }
-
         protected override void ApplyConstructorTemplate()
         {
             // replace base constructors
@@ -59,7 +49,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                 ProxyClassChild.Call(
                     Host, ctx,
                     this.GetInterfaces().First(),
-                    Mappings.ObjectClassHbm.GetImplementationTypeReference(parent, this.Settings),
+                    Mappings.ObjectClassHbm.GetProxyTypeReference(parent, this.Settings),
                     GetPersistentProperties());
             }
             else
@@ -197,7 +187,9 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
 
         protected override void ApplyObjectListPropertyTemplate(ObjectReferenceProperty prop)
         {
-            base.ApplyObjectListPropertyTemplate(prop);
+            Properties.ObjectListProperty.Call(Host, ctx,
+                 this.MembersToSerialize,
+                 prop);
         }
 
         protected override void ApplyObjectReferenceListTemplate(ObjectReferenceProperty prop)
