@@ -327,6 +327,8 @@ namespace Kistl.DalProvider.Client
 
             IPersistenceObject obj = (IPersistenceObject)CreateUnattachedInstance(ifType);
             Attach(obj);
+            IsModified = true;
+
             OnObjectCreated(obj);
             if (obj is IDataObject)
             {
@@ -474,7 +476,9 @@ namespace Kistl.DalProvider.Client
 
             ((IClientObject)obj).SetDeleted();
 
+            IsModified = true;
             OnObjectDeleted(obj);
+            
             if (obj is IDataObject)
             {
                 ((IDataObject)obj).NotifyDeleting();

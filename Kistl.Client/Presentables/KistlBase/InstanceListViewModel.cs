@@ -969,6 +969,9 @@ namespace Kistl.Client.Presentables.KistlBase
                 _instances = new ObservableCollection<DataObjectViewModel>(tmp);
             }
 
+            // Can be chaned -> listen to that
+            _instances.CollectionChanged += new NotifyCollectionChangedEventHandler(_instances_CollectionChanged);
+
             _proxyCache.Clear();
             _proxyInstances = null;
 
@@ -978,6 +981,19 @@ namespace Kistl.Client.Presentables.KistlBase
             if (SelectFirstOnLoad)
             {
                 this.SelectedItem = _instances.FirstOrDefault();
+            }
+        }
+
+        void _instances_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            // Add new is not very interesting, since the object was attached while creating it
+            // More interessting is deleting: Deleting is removing from the list, but we have to delete it from the database
+            if (e.OldItems != null && e.Action == NotifyCollectionChangedAction.Remove)
+            {
+                foreach (var obj in e.OldItems.OfType<DataObjectViewModel>())
+                {
+                    DataContext.Delete(obj.Object);
+                }
             }
         }
 
