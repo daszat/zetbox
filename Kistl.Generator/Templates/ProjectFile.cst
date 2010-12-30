@@ -31,7 +31,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <NoWarn>1591,0168,0414</NoWarn> 
+    <NoWarn>1591,0168,0414</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
     <OutputPath>..\bin\Debug\bin\<%= GetRelativeOutputPath() %></OutputPath>
@@ -43,7 +43,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <NoWarn>1591,0168,0414</NoWarn> 
+    <NoWarn>1591,0168,0414</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
     <OutputPath>..\bin\Release\bin\<%= GetRelativeOutputPath() %></OutputPath>
@@ -57,7 +57,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <!-- mono is quite more pedantic; ignore superfluous local vars and fields for now -->
-    <NoWarn>1591,0168,0414</NoWarn> 
+    <NoWarn>1591,0168,0414</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
     <OutputPath>..\bin\Debug\bin\<%= GetRelativeOutputPath() %></OutputPath>
@@ -65,9 +65,7 @@
   </PropertyGroup>
   <!-- Has to come in a separate group to receive correct $(OutputPath) -->
   <PropertyGroup>
-<%
-    ApplyAdditionalProperties();
-%>
+<% ApplyAdditionalProperties(); %>
   </PropertyGroup>
   <ItemGroup>
     <AdditionalReferencePath Include="$(OutputPath)" />
@@ -93,26 +91,17 @@
     <Reference Include="WindowsBase">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-<%
-    ApplyAdditionalReferences();
-%>
+<% ApplyAdditionalReferences(); %>
   </ItemGroup>
   <ItemGroup>
-<%
-    foreach (var name in fileNames)
-    {
-%>
+<% foreach (var name in fileNames) { %>
     <Compile Include="<%= name %>" />
-<%
-    }
-%>
+<% } %>
   </ItemGroup>
   <ItemGroup>
     <None Include="Kistl.Objects.snk" />
   </ItemGroup>
-<%
-    ApplyAdditionalItemGroups();
-%>
+<% ApplyAdditionalItemGroups(); %>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
@@ -121,7 +110,5 @@
   -->
   <Target Name="AfterBuild">
   </Target>
-  <%
-    ApplyAdditionalPropertyGroups();
-  %>
+<% ApplyAdditionalPropertyGroups(); %>
 </Project>
