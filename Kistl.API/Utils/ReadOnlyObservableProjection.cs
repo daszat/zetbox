@@ -8,126 +8,16 @@ using System.Text;
 
 namespace Kistl.API.Utils
 {
-
-    public interface IReadOnlyObservableCollection<TValue>
-        : IReadOnlyCollection<TValue>, INotifyCollectionChanged
-    {
-    }
-
     public interface IReadOnlyObservableList<TValue>
-        : IReadOnlyObservableCollection<TValue>, IReadOnlyList<TValue>
+        : IReadOnlyList<TValue>, INotifyCollectionChanged
     {
     }
 
-    public class ReadOnlyObservableProjectedCollection<TInput, TOutput>
-        : ReadOnlyProjectedCollection<TInput, TOutput>, IReadOnlyObservableCollection<TOutput>, INotifyPropertyChanged
+    public abstract class AbstractObservableProjectedList<TInput, TOutput>
+        : AbstractProjectedList<TInput, TOutput>, INotifyCollectionChanged, INotifyPropertyChanged
     {
-        public ReadOnlyObservableProjectedCollection(ObservableCollection<TInput> collection, Func<TInput, TOutput> select, Func<TOutput, TInput> inverter)
-            : base(collection, select, inverter)
-        {
-            collection.CollectionChanged += new NotifyCollectionChangedEventHandler(OnUnderlyingCollectionChanged);
-            if (collection is INotifyPropertyChanged)
-            {
-                ((INotifyPropertyChanged)collection).PropertyChanged += new PropertyChangedEventHandler(OnUnderlyingPropertyChanged);
-            }
-        }
-
-        public ReadOnlyObservableProjectedCollection(INotifyCollectionChanged notifier, Func<TInput, TOutput> select, Func<TOutput, TInput> inverter)
-            : base(MagicCollectionFactory.WrapAsCollection<TInput>(notifier), select, inverter)
-        {
-            notifier.CollectionChanged += new NotifyCollectionChangedEventHandler(OnUnderlyingCollectionChanged);
-            if (notifier is INotifyPropertyChanged)
-            {
-                ((INotifyPropertyChanged)notifier).PropertyChanged += new PropertyChangedEventHandler(OnUnderlyingPropertyChanged);
-            }
-        }
-
-        void OnUnderlyingPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            OnPropertyChanged(e);
-        }
-
-        void OnUnderlyingCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            switch (e.Action)
-            {
-                case NotifyCollectionChangedAction.Add:
-                    OnCollectionChanged(new NotifyCollectionChangedEventArgs(e.Action,
-                        e.NewItems.Cast<TInput>().Select(this.Selector).ToList(),
-                        e.NewStartingIndex));
-                    break;
-                case NotifyCollectionChangedAction.Move:
-                    OnCollectionChanged(new NotifyCollectionChangedEventArgs(e.Action,
-                        e.NewItems.Cast<TInput>().Select(this.Selector).ToList(),
-                        e.NewStartingIndex,
-                        e.OldStartingIndex));
-                    break;
-                case NotifyCollectionChangedAction.Remove:
-                    //if (e.OldStartingIndex != -1)
-                    //{
-                        OnCollectionChanged(new NotifyCollectionChangedEventArgs(e.Action,
-                            e.OldItems.Cast<TInput>().Select(this.Selector).ToList(),
-                            e.OldStartingIndex));
-                    //}
-                    //else
-                    //{
-                    //    // without oldIndex, we have to reset the state of the list.
-                    //    OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
-                    //}
-                    break;
-                case NotifyCollectionChangedAction.Replace:
-                    OnCollectionChanged(new NotifyCollectionChangedEventArgs(e.Action,
-                        e.NewItems.Cast<TInput>().Select(this.Selector).ToList(),
-                        e.OldItems.Cast<TInput>().Select(this.Selector).ToList(),
-                        e.NewStartingIndex));
-                    break;
-                case NotifyCollectionChangedAction.Reset:
-                    OnCollectionChanged(new NotifyCollectionChangedEventArgs(e.Action));
-                    break;
-                default:
-                    throw new InvalidOperationException(String.Format("Unknown NotifyCollectionChangedAction: {0}", e.Action));
-            }
-        }
-
-        #region INotifyCollectionChanged Members
-
-        public event NotifyCollectionChangedEventHandler CollectionChanged;
-        protected virtual void OnCollectionChanged(NotifyCollectionChangedEventArgs args)
-        {
-            if (CollectionChanged != null)
-            {
-                CollectionChanged(this, args);
-            }
-        }
-
-        #endregion
-
-        #region INotifyPropertyChanged Members
-
-        private event PropertyChangedEventHandler _propertyChanged;
-        event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged
-        {
-            add { _propertyChanged += value; }
-            remove { _propertyChanged -= value; }
-        }
-
-        protected virtual void OnPropertyChanged(PropertyChangedEventArgs args)
-        {
-            if (_propertyChanged != null)
-            {
-                _propertyChanged(this, args);
-            }
-        }
-
-        #endregion
-    }
-
-    public class ReadOnlyObservableProjectedList<TInput, TOutput>
-        : ReadOnlyProjectedList<TInput, TOutput>, IReadOnlyObservableList<TOutput>, INotifyPropertyChanged
-        where TInput : IDataObject
-    {
-        public ReadOnlyObservableProjectedList(ObservableCollection<TInput> list, Func<TInput, TOutput> select, Func<TOutput, TInput> inverter)
-            : base(list, select, inverter)
+        protected AbstractObservableProjectedList(ObservableCollection<TInput> list, Func<TInput, TOutput> select, Func<TOutput, TInput> inverter, bool isReadonly)
+            : base(list, select, inverter, isReadonly)
         {
             list.CollectionChanged += new NotifyCollectionChangedEventHandler(list_CollectionChanged);
             if (list is INotifyPropertyChanged)
@@ -136,13 +26,13 @@ namespace Kistl.API.Utils
             }
         }
 
-        public ReadOnlyObservableProjectedList(INotifyCollectionChanged notifyingCollection, Func<TInput, TOutput> select, Func<TOutput, TInput> inverter)
-            : this(notifyingCollection, notifyingCollection, select, inverter)
+        public AbstractObservableProjectedList(INotifyCollectionChanged notifyingCollection, Func<TInput, TOutput> select, Func<TOutput, TInput> inverter, bool isReadonly)
+            : this(notifyingCollection, notifyingCollection, select, inverter, isReadonly)
         {
         }
 
-        public ReadOnlyObservableProjectedList(INotifyCollectionChanged notifier, object collection, Func<TInput, TOutput> select, Func<TOutput, TInput> inverter)
-            : base(MagicCollectionFactory.WrapAsList<TInput>(collection), select, inverter)
+        public AbstractObservableProjectedList(INotifyCollectionChanged notifier, object collection, Func<TInput, TOutput> select, Func<TOutput, TInput> inverter, bool isReadonly)
+            : base(MagicCollectionFactory.WrapAsList<TInput>(collection), select, inverter, isReadonly)
         {
             if(notifier == null) throw new ArgumentNullException("notifier");
             notifier.CollectionChanged += new NotifyCollectionChangedEventHandler(list_CollectionChanged);
@@ -224,17 +114,28 @@ namespace Kistl.API.Utils
         #endregion
     }
 
-    /// <summary>
-    /// Wrap the ReadOnlyObservableCollection{TValue} into
-    /// the IReadOnlyObservableList{TValue} interface.
-    /// </summary>
-    /// <typeparam name="TValue">The Type of the elements of this collection.</typeparam>
-    public class ReadOnlyObservableCollectionWrapper<TValue>
-        : ReadOnlyObservableCollection<TValue>, IReadOnlyObservableList<TValue>
+    public class ReadOnlyObservableProjectedList<TInput, TOutput> : AbstractObservableProjectedList<TInput, TOutput>, IReadOnlyObservableList<TOutput>
     {
+        public ReadOnlyObservableProjectedList(INotifyCollectionChanged notifyingCollection, Func<TInput, TOutput> select, Func<TOutput, TInput> inverter)
+            : base(notifyingCollection, notifyingCollection, select, inverter, true)
+        {
+        }
 
-        public ReadOnlyObservableCollectionWrapper(ObservableCollection<TValue> list)
-            : base(list)
+        public ReadOnlyObservableProjectedList(INotifyCollectionChanged notifier, object collection, Func<TInput, TOutput> select, Func<TOutput, TInput> inverter)
+            : base(notifier, collection, select, inverter, true)
+        {
+        }
+    }
+
+    public class ObservableProjectedList<TInput, TOutput> : AbstractObservableProjectedList<TInput, TOutput>
+    {
+        public ObservableProjectedList(INotifyCollectionChanged notifyingCollection, Func<TInput, TOutput> select, Func<TOutput, TInput> inverter)
+            : base(notifyingCollection, notifyingCollection, select, inverter, false)
+        {
+        }
+
+        public ObservableProjectedList(INotifyCollectionChanged notifier, object collection, Func<TInput, TOutput> select, Func<TOutput, TInput> inverter)
+            : base(notifier, collection, select, inverter, false)
         {
         }
     }

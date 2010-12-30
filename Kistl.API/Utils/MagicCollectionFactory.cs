@@ -92,7 +92,6 @@ namespace Kistl.API.Utils
         /// Wrap a list-like objects into an IList&lt;T&gt;. Currently works with IList&lt;T&gt;s, ILists and ICollection&lt;T&gt;s
         /// </summary>
         public static IList<T> WrapAsList<T>(object potentialList)
-            where T : IDataObject
         {
             if (potentialList == null) { throw new ArgumentNullException("potentialList"); }
 
@@ -123,15 +122,18 @@ namespace Kistl.API.Utils
                 }
             }
 
-            try
+            if (typeof(IDataObject).IsAssignableFrom(typeof(T)))
             {
-                var potentialCollection = WrapAsCollection<T>(potentialList);
-                var sortedList = new SortListFromCollection<int, T>(item => item.ID, potentialCollection);
-                return sortedList;
-            }
-            catch (ArgumentException)
-            {
-                // also failed to wrap as collection, ignore this exception and fall through to the final exception
+                try
+                {
+                    var potentialCollection = WrapAsCollection<T>(potentialList);
+                    var sortedList = new SortListFromCollection<int, T>(item => ((IDataObject)item).ID, potentialCollection);
+                    return sortedList;
+                }
+                catch (ArgumentException)
+                {
+                    // also failed to wrap as collection, ignore this exception and fall through to the final exception
+                }
             }
 
             throw new ArgumentException(String.Format("Unable to determine ListWrapper for {0}", potentialList.GetType().FullName), "potentialList");
