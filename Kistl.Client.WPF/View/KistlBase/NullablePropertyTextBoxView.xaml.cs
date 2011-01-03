@@ -58,5 +58,10 @@ namespace Kistl.Client.WPF.View
             binding.UpdateSource();
             binding.UpdateTarget();
         }
+
+        protected override FrameworkElement MainControl
+        {
+            get { return txt; }
+        }
     }
 }

@@ -11,6 +11,7 @@ using System.Windows.Markup;
 using Kistl.GUI;
 using Kistl.GUI.Renderer.WPF.Controls;
 using System.Windows.Media;
+using System.Windows.Input;
 
 namespace Kistl.Client.WPF.View.KistlBase
 {
@@ -18,13 +19,29 @@ namespace Kistl.Client.WPF.View.KistlBase
     /// Defines common (Dependency-)Properties for Controls displaying/editing (Object)Properties
     /// </summary>
     [ContentProperty("Content")]
-    public class PropertyEditor : UserControl
+    public abstract class PropertyEditor : UserControl
     {
         public PropertyEditor()
         {
             VerticalContentAlignment = VerticalAlignment.Top;
             MinWidth = 100;
-        }
-    }
 
+            this.Loaded += new RoutedEventHandler(PropertyEditor_Loaded);
+        }
+
+        void PropertyEditor_Loaded(object sender, RoutedEventArgs e)
+        {
+            InitializeFocusManager();            
+        }
+
+        protected void InitializeFocusManager()
+        {
+            if (MainControl != null)
+            {
+                this.SetValue(FocusManager.FocusedElementProperty, MainControl);
+            }
+        }
+
+        protected abstract FrameworkElement MainControl { get; }
+    }
 }

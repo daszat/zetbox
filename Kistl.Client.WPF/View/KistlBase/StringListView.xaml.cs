@@ -41,5 +41,10 @@ namespace Kistl.Client.WPF.View
             model.RemoveItem(model.SelectedItem);
         }
 
+
+        protected override FrameworkElement MainControl
+        {
+            get { return lst; }
+        }
     }
 }

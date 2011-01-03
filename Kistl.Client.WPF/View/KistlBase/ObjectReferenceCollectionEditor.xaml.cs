@@ -199,5 +199,10 @@ namespace Kistl.Client.WPF.View.KistlBase
         }
 
         #endregion
+
+        protected override FrameworkElement MainControl
+        {
+            get { return lst; }
+        }
     }
 }

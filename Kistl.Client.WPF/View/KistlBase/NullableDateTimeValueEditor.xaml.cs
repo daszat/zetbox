@@ -50,6 +50,7 @@ namespace Kistl.Client.WPF.View
         {
             // Fix lonely Time Textbox
             txtTime.SetValue(DockPanel.DockProperty, ViewModel.DatePartVisible ? Dock.Right : Dock.Top);
+            InitializeFocusManager();
         }
 
         #region IHasViewModel<NullableDateTimePropertyViewModel> Members
@@ -60,5 +61,14 @@ namespace Kistl.Client.WPF.View
         }
 
         #endregion
+
+        protected override FrameworkElement MainControl
+        {
+            get 
+            {
+                if (ViewModel == null) return null;
+                return ViewModel.DatePartVisible ? (FrameworkElement)txtDate : (FrameworkElement)txtTime;
+            }
+        }
     }
 }

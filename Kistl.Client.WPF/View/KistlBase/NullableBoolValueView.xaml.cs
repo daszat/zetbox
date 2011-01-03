@@ -24,5 +24,10 @@ namespace Kistl.Client.WPF.View
         {
             InitializeComponent();
         }
+
+        protected override FrameworkElement MainControl
+        {
+            get { return cb; }
+        }
     }
 }

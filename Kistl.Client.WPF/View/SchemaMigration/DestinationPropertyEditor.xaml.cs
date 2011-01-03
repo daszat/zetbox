@@ -36,5 +36,10 @@ namespace Kistl.Client.WPF.View.SchemaMigration
         }
 
         #endregion
+
+        protected override FrameworkElement MainControl
+        {
+            get { return null; }
+        }
     }
 }

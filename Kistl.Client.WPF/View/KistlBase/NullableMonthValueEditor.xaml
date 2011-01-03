@@ -8,7 +8,8 @@
                      MinWidth="1">
 
     <StackPanel Orientation="Horizontal">
-        <ComboBox DisplayMemberPath="Name"
+        <ComboBox x:Name="cbMonth"
+                  DisplayMemberPath="Name"
                   SelectedValuePath="Month"
                   ItemsSource="{Binding Months}"
                   IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertedBoolConverter}}"
@@ -22,7 +23,8 @@
                 </ContextMenu>
             </ComboBox.ContextMenu>
         </ComboBox>
-        <TextBox Text="{Binding Year, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=true}"
+        <TextBox x:Name="txtYear"
+                 Text="{Binding Year, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=true}"
                  MinWidth="75" />
     </StackPanel>
 

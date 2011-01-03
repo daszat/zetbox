@@ -37,5 +37,10 @@ namespace Kistl.Client.WPF.View
         }
 
         #endregion
+
+        protected override FrameworkElement MainControl
+        {
+            get { return cbMonth; }
+        }
     }
 }
