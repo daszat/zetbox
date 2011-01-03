@@ -51,9 +51,9 @@
         <Setter Property="AlternatingRowBackground"
                 Value="#F8F8F8" />
         <Setter Property="HorizontalGridLinesBrush"
-                Value="{StaticResource MainColor}" />
+                Value="LightBlue" />
         <Setter Property="VerticalGridLinesBrush"
-                Value="{StaticResource MainColor}" />
+                Value="LightBlue" />
         <Setter Property="RowHeaderWidth"
                 Value="25" />
     </Style>
