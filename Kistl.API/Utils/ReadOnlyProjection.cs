@@ -39,8 +39,8 @@ namespace Kistl.API.Utils
             if (collection == null) { throw new ArgumentNullException("collection"); }
             if (selector == null) { throw new ArgumentNullException("selector"); }
 
-            if (collection.IsReadOnly != isReadOnly)
-                throw new ArgumentException(string.Format("list.IsReadOnly ({0}) != isReadonly ({1})", _collection.IsReadOnly, isReadOnly));
+            if (!isReadOnly && collection.IsReadOnly)
+                throw new ArgumentException("Writable projected collection was requested, but the underlying collection is read only.");
 
             _collection = collection;
             _selector = input => { if (_selectorCache.ContainsKey(input)) { return _selectorCache[input]; } else { return _selectorCache[input] = selector(input); } };
