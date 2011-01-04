@@ -79,7 +79,7 @@ namespace Kistl.API.Client
 
         public IEnumerable<IDataObject> GetList(IKistlContext ctx, InterfaceType ifType, int maxListCount, bool eagerLoadLists, IEnumerable<Expression> filter, IEnumerable<Expression> orderBy, out List<IStreamable> auxObjects)
         {
-            using (Logging.Facade.InfoTraceMethodCallFormat("GetList[{0}]", ifType.ToString()))
+            using (Logging.Facade.InfoTraceMethodCallFormat("GetList", "Type=[{0}]", ifType.ToString()))
             {
                 try
                 {
@@ -286,7 +286,7 @@ namespace Kistl.API.Client
 
         public Stream GetBlobStream(int ID)
         {
-            using (Logging.Facade.InfoTraceMethodCallFormat("GetBlobStream", "GetBlobStream: ID=[{0}]", ID))
+            using (Logging.Facade.InfoTraceMethodCallFormat("GetBlobStream", "ID=[{0}]", ID))
             {
                 try
                 {
@@ -307,7 +307,7 @@ namespace Kistl.API.Client
 
         public Kistl.App.Base.Blob SetBlobStream(IKistlContext ctx, Stream stream, string filename, string mimetype)
         {
-            using (Logging.Facade.InfoTraceMethodCallFormat("SetBlobStream: filename=[{0}]", filename))
+            using (Logging.Facade.InfoTraceMethodCallFormat("SetBlobStream", "filename=[{0}]", filename))
             {
                 try
                 {
@@ -340,7 +340,7 @@ namespace Kistl.API.Client
 
         public object InvokeServerMethod(IKistlContext ctx, InterfaceType ifType, int ID, string method, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests, out IEnumerable<IPersistenceObject> changedObjects)
         {
-            using (Logging.Facade.InfoTraceMethodCallFormat("InvokeServerMethod", "InvokeServerMethod: ID=[{0}]", ID))
+            using (Logging.Facade.InfoTraceMethodCallFormat("InvokeServerMethod", "ID=[{0}]", ID))
             {
                 try
                 {

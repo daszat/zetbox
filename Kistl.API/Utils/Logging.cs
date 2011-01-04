@@ -305,7 +305,7 @@ namespace Kistl.API.Utils
 
         /// <summary>
         /// Traces a method call context with a message if the INFO level is active.
-        /// Usage: using(Log.InfoTraceMethodCallFormat("foobar=[{0}]", foobar)) { ... }
+        /// Usage: using(Log.InfoTraceMethodCallFormat("Method", "foobar=[{0}]", foobar)) { ... }
         /// </summary>
         /// <param name="log">The logger to log to.</param>
         /// <param name="method">The calling method</param>

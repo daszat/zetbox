@@ -38,7 +38,7 @@ namespace Kistl.Server
 
         public void Export(string file, string[] names)
         {
-            using (Log.InfoTraceMethodCallFormat("file=[{0}],names=[{1}]", file, String.Join(";", names ?? new string[] { })))
+            using (Log.InfoTraceMethodCallFormat("Export", "file=[{0}],names=[{1}]", file, String.Join(";", names ?? new string[] { })))
             using (var subContainer = container.BeginLifetimeScope())
             {
                 Exporter.ExportFromContext(subContainer.Resolve<IKistlContext>(), file, names);
@@ -47,7 +47,7 @@ namespace Kistl.Server
 
         public void Import(string file)
         {
-            using (Log.InfoTraceMethodCallFormat("file=[{0}]", file))
+            using (Log.InfoTraceMethodCallFormat("Import", "file=[{0}]", file))
             using (var subContainer = container.BeginLifetimeScope())
             {
                 IKistlServerContext ctx = subContainer.Resolve<IKistlServerContext>();
@@ -59,7 +59,7 @@ namespace Kistl.Server
 
         public void Publish(string file, string[] namespaces)
         {
-            using (Log.InfoTraceMethodCallFormat("file=[{0}],namespaces=[{1}]", file, String.Join(";", namespaces ?? new string[] { })))
+            using (Log.InfoTraceMethodCallFormat("Publish", "file=[{0}],namespaces=[{1}]", file, String.Join(";", namespaces ?? new string[] { })))
             using (var subContainer = container.BeginLifetimeScope())
             {
                 Exporter.PublishFromContext(subContainer.Resolve<IKistlContext>(), file, namespaces);
@@ -68,7 +68,7 @@ namespace Kistl.Server
 
         public void Deploy(string file)
         {
-            using (Log.InfoTraceMethodCallFormat("file=[{0}]", file))
+            using (Log.InfoTraceMethodCallFormat("Deploy", "file=[{0}]", file))
             using (var subContainer = container.BeginLifetimeScope())
             using (FileStream fs = File.OpenRead(file))
             {
@@ -108,7 +108,7 @@ namespace Kistl.Server
 
         public void CheckSchema(string file, bool withRepair)
         {
-            using (Log.InfoTraceMethodCallFormat("file=[{0}],withRepair=[{1}]", file, withRepair))
+            using (Log.InfoTraceMethodCallFormat("CheckSchema", "file=[{0}],withRepair=[{1}]", file, withRepair))
             using (var subContainer = container.BeginLifetimeScope())
             {
                 IKistlContext ctx = subContainer.Resolve<BaseMemoryContext>();
@@ -143,7 +143,7 @@ namespace Kistl.Server
 
         public void UpdateSchema(string file)
         {
-            using (Log.InfoTraceMethodCallFormat("file=[{0}]", file))
+            using (Log.InfoTraceMethodCallFormat("UpdateSchema", "file=[{0}]", file))
             using (var subContainer = container.BeginLifetimeScope())
             {
                 IKistlContext ctx = subContainer.Resolve<BaseMemoryContext>();

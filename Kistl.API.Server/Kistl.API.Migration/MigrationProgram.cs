@@ -159,7 +159,7 @@ namespace Kistl.API.Migration
                 throw new InvalidOperationException("Already executed");
             }
 
-            using (Log.InfoTraceMethodCallFormat("Executing migration for [{0}]", _name))
+            using (Log.InfoTraceMethodCallFormat("Migration", "Executing migration for [{0}]", _name))
             {
                 ExecuteCore(_applicationScope.Resolve<IKistlServerContext>());
             }
@@ -179,7 +179,7 @@ namespace Kistl.API.Migration
                 return;
             }
 
-            using (Log.InfoTraceMethodCallFormat("Reloading staging database [{0}]", stage.Description))
+            using (Log.InfoTraceMethodCallFormat("Reload", "Reloading staging database [{0}]", stage.Description))
             using (var reloadScope = _applicationScope.BeginLifetimeScope())
             {
                 var srcSchema = OpenProvider(reloadScope, stage.OriginProvider, stage.OriginConnectionString);

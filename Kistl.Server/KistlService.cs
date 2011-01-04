@@ -247,7 +247,7 @@ namespace Kistl.Server
         {
             try
             {
-                using (Logging.Facade.DebugTraceMethodCallFormat("relId = [{0}], role = [{1}], parentObjID = [{2}]", relId, serializableRole, parentObjID))
+                using (Logging.Facade.DebugTraceMethodCallFormat("FetchRelation", "relId = [{0}], role = [{1}], parentObjID = [{2}]", relId, serializableRole, parentObjID))
                 {
                     DebugLogIdentity();
 
@@ -312,7 +312,8 @@ namespace Kistl.Server
         /// <returns>the newly created Blob instance</returns>
         public BlobResponse SetBlobStream(BlobMessage blob)
         {
-            if (blob == null) throw new ArgumentNullException("blob");
+            if (blob == null)
+                throw new ArgumentNullException("blob");
             try
             {
                 using (Logging.Facade.DebugTraceMethodCall())
@@ -341,11 +342,16 @@ namespace Kistl.Server
 
         public MemoryStream InvokeServerMethod(SerializableType type, int ID, string method, IEnumerable<SerializableType> parameterTypes, MemoryStream parameter, MemoryStream changedObjects, IEnumerable<ObjectNotificationRequest> notificationRequests, out MemoryStream retChangedObjects)
         {
-            if (type == null) throw new ArgumentNullException("type");
-            if (string.IsNullOrEmpty(method)) throw new ArgumentNullException("method");
-            if (parameterTypes == null) throw new ArgumentNullException("parameterTypes");
-            if (parameter == null) throw new ArgumentNullException("parameter");
-            if (changedObjects == null) throw new ArgumentNullException("changedObjects");
+            if (type == null)
+                throw new ArgumentNullException("type");
+            if (string.IsNullOrEmpty(method))
+                throw new ArgumentNullException("method");
+            if (parameterTypes == null)
+                throw new ArgumentNullException("parameterTypes");
+            if (parameter == null)
+                throw new ArgumentNullException("parameter");
+            if (changedObjects == null)
+                throw new ArgumentNullException("changedObjects");
 
             parameter.Seek(0, SeekOrigin.Begin);
             changedObjects.Seek(0, SeekOrigin.Begin);
@@ -366,13 +372,13 @@ namespace Kistl.Server
 
                         var result = _sohFactory
                             .GetServerObjectHandler(_iftFactory(type.GetSystemType()))
-                            .InvokeServerMethod(ctx, ID, method, 
+                            .InvokeServerMethod(ctx, ID, method,
                                 parameterTypes.Select(t => t.GetSystemType()),
                                 parameterList,
-                                ReadObjects(changedObjects, ctx), 
-                                notificationRequests ?? new ObjectNotificationRequest[0], 
+                                ReadObjects(changedObjects, ctx),
+                                notificationRequests ?? new ObjectNotificationRequest[0],
                                 out changedObjectsList);
-                        
+
                         retChangedObjects = SendObjects(changedObjectsList.Cast<IStreamable>(), true);
 
                         MemoryStream resultStream = new MemoryStream();

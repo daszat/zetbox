@@ -478,7 +478,7 @@ namespace Kistl.API
         {
             if (xmlStr == null) throw new ArgumentNullException("xmlStr");
 
-            using (Logging.Log.DebugTraceMethodCallFormat("Size = [{0}]", xmlStr.Length))
+            using (Logging.Log.DebugTraceMethodCallFormat("FromXmlString<T>", "Size = [{0}]", xmlStr.Length))
             {
                 using (var sr = new StringReader(xmlStr))
                 {
