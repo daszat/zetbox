@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <KistlConfig xmlns="http://dasz.at/Kistl/">
-  <ConfigName>Kistl.Server.Tests' Configuration</ConfigName>
+  <ConfigName>Kistl.Server.Tests' PostgreSQL Configuration</ConfigName>
   <Server StartServer="false">
     <SchemaProvider>POSTGRESQL</SchemaProvider>
     <DatabaseProvider>Npgsql</DatabaseProvider>

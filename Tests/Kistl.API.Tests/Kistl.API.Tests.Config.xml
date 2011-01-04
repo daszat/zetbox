@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <!-- This config is used as test for the alternate config file loading code path -->
 <KistlConfig xmlns="http://dasz.at/Kistl/">
-  <ConfigName>Kistl.API.Tests' Configuration</ConfigName>
+  <ConfigName>Kistl.API.Tests' MSSQL Configuration</ConfigName>
   <Server StartServer="false">
     <SchemaProvider>MSSQL</SchemaProvider>
     <DatabaseProvider>System.Data.SqlClient</DatabaseProvider>
