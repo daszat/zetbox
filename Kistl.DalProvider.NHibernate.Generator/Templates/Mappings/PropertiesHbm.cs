@@ -134,7 +134,8 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
             this.WriteLine("<!-- relEnd={0} otherEnd={1} -->", relEnd.RoleName, otherEnd.RoleName);
 
             string nameAttr = String.Format("name=\"{0}\"", prop.Name);
-            string tableAttr = String.Format("table=\"`{0}`\"", rel.GetRelationTableName());
+            string tableName = rel.GetRelationTableName();
+            string tableAttr = String.Format("table=\"`{0}`\"", tableName);
             string otherClassAttr = String.Format("class=\"{0}\"",
                 ObjectClassHbm.GetAssemblyQualifiedProxy(otherEnd.Type, this.Settings));
             string inverseAttr = String.Format("inverse=\"{0}\"", inverse ? "true" : "false");
@@ -155,8 +156,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
             {
                 this.WriteObjects("    <collection-id column=\"`ID`\" type=\"Int32\">");
                 this.WriteLine();
-                this.WriteObjects("        <generator class=\"native\" />");
-                this.WriteLine();
+                DefineIdGenerator(tableName);
                 this.WriteObjects("    </collection-id>");
                 this.WriteLine();
             }
@@ -199,7 +199,8 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
         {
             this.WriteLine("<!-- ValueTypeProperty -->");
             string nameAttr = String.Format("name=\"{0}\"", prop.Name);
-            string tableAttr = String.Format("table=\"`{0}`\"", prop.GetCollectionEntryTable());
+            string tableName = prop.GetCollectionEntryTable();
+            string tableAttr = String.Format("table=\"`{0}`\"", tableName);
             string typeAttr = String.Format("type=\"{0}\"", prop.GetPropertyType().AssemblyQualifiedName);
             string mappingType = prop.HasPersistentOrder ? "list" : "idbag";
 
@@ -212,8 +213,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
                 {
                     this.WriteObjects("    <collection-id column=\"`ID`\" type=\"Int32\">");
                     this.WriteLine();
-                    this.WriteObjects("        <generator class=\"native\" />");
-                    this.WriteLine();
+                    DefineIdGenerator(tableName);
                     this.WriteObjects("    </collection-id>");
                     this.WriteLine();
                 }
@@ -243,11 +243,23 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
             }
         }
 
+        private void DefineIdGenerator(string tableName)
+        {
+            var sequenceName = tableName + "_ID_seq";
+            this.WriteObjects("        <generator class=\"native\">");
+            this.WriteLine();
+            this.WriteObjects("            <param name=\"sequence\">`", sequenceName, "`</param>");
+            this.WriteLine();
+            this.WriteObjects("        </generator>");
+            this.WriteLine();
+        }
+
         protected virtual void ApplyCompoundObjectProperty(string prefix, CompoundObjectProperty prop)
         {
             this.WriteLine("<!-- CompoundObjectProperty -->");
             string nameAttr = String.Format("name=\"{0}\"", prop.Name);
-            string tableAttr = String.Format("table=\"`{0}`\"", prop.GetCollectionEntryTable());
+            string tableName = prop.GetCollectionEntryTable();
+            string tableAttr = String.Format("table=\"`{0}`\"", tableName);
             string classAttr = String.Format("class=\"{0}.{1}{2},Kistl.Objects.NHibernateImpl\"",
                 prop.CompoundObjectDefinition.Module.Namespace,
                 prop.CompoundObjectDefinition.Name,
@@ -264,8 +276,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
                 {
                     this.WriteObjects("    <collection-id column=\"`ID`\" type=\"Int32\">");
                     this.WriteLine();
-                    this.WriteObjects("        <generator class=\"native\" />");
-                    this.WriteLine();
+                    DefineIdGenerator(tableName);
                     this.WriteObjects("    </collection-id>");
                     this.WriteLine();
                 }
