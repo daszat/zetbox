@@ -14,8 +14,6 @@ namespace Kistl.DalProvider.Memory.Tests.ContextTests
     public class when_creating 
         : AbstractMemoryContextTextFixture
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.DalProvider.Memory.Tests.ContextTests.when_creating");
-
         [Test]
         public void should_resolve_readwrite()
         {

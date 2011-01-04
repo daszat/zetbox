@@ -12,8 +12,6 @@ using NUnit.Framework;
 [SetUpFixture]
 public sealed class SetUpFixture : Kistl.API.AbstractConsumerTests.AbstractSetUpFixture
 {
-    private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.DalProvider.Memory.Tests");
-
     protected override void SetupBuilder(ContainerBuilder builder)
     {
         base.SetupBuilder(builder);
