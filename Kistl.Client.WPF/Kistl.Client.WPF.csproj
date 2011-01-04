@@ -202,6 +202,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\KistlBase\ObjectReferenceListGridEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\KistlBase\ObjectReferenceCollectionGridEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\KistlBase\InstanceGridHorizontalDisplay.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -507,6 +515,12 @@
     </Compile>
     <Compile Include="View\KistlBase\CommandLinkDisplay.xaml.cs">
       <DependentUpon>CommandLinkDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\KistlBase\ObjectReferenceListGridEditor.xaml.cs">
+      <DependentUpon>ObjectReferenceListGridEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\KistlBase\ObjectReferenceCollectionGridEditor.xaml.cs">
+      <DependentUpon>ObjectReferenceCollectionGridEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\KistlBase\InstanceGridHorizontalDisplay.xaml.cs">
       <DependentUpon>InstanceGridHorizontalDisplay.xaml</DependentUpon>

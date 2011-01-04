@@ -1,42 +1,34 @@
-﻿<view:PropertyEditor x:Class="Kistl.Client.WPF.View.KistlBase.ObjectReferenceListEditor"
+﻿<view:PropertyEditor x:Class="Kistl.Client.WPF.View.KistlBase.ObjectReferenceCollectionGridEditor"
                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:wpftk="clr-namespace:Microsoft.Windows.Controls;assembly=WPFToolkit"
                      xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"
                      xmlns:view="clr-namespace:Kistl.Client.WPF.View.KistlBase"
                      xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
                      xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
                      VerticalContentAlignment="Stretch">
     <DockPanel>
-        <UniformGrid DockPanel.Dock="Left"
-                     Rows="2">
-
-            <Button Command="{Binding Path=MoveUpCommand, RelativeSource={RelativeSource AncestorType={x:Type view:ObjectReferenceListEditor}}}"
-                    IsEnabled="{Binding Path=HasPersistentOrder, Mode=OneWay}">up</Button>
-            <Button Command="{Binding Path=MoveDownCommand, RelativeSource={RelativeSource AncestorType={x:Type view:ObjectReferenceListEditor}}}"
-                    IsEnabled="{Binding Path=HasPersistentOrder, Mode=OneWay}">down</Button>
-
-        </UniformGrid>
-
         <ctrls:WorkaroundToolBar DockPanel.Dock="Top"
                                  ItemsSource="{Binding Commands}">
             <ToolBar.ItemTemplate>
                 <DataTemplate>
                     <ctrls:CommandButton CommandViewModel="{Binding}"
-                                         Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"/>
+                                         Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" />
                 </DataTemplate>
             </ToolBar.ItemTemplate>
         </ctrls:WorkaroundToolBar>
-
         <!-- configured from code, see RefreshGridView() -->
-        <ListView x:Name="lst"
-                  ItemsSource="{Binding Value, Mode=OneWay, ValidatesOnDataErrors=true}"
-                  SelectedItem="{Binding SelectedItem}"
-                  MinHeight="50"
-                  SelectionChanged="lst_SelectionChanged"
-                  ItemContainerStyle="{StaticResource GridViewItemContainerStyle}"
-                  MouseDoubleClick="ItemActivatedHandler"
-                  KeyboardNavigation.TabNavigation="Continue">
-            <ListView.ContextMenu>
+        <wpftk:DataGrid x:Name="lst"
+                        BorderThickness="0"
+                        ItemsSource="{Binding Value, Mode=OneWay, ValidatesOnDataErrors=true}"
+                        MinHeight="50"
+                        MouseDoubleClick="ItemActivatedHandler"
+                        CanUserAddRows="True"
+                        CanUserDeleteRows="True"
+                        AutoGenerateColumns="False"
+                        SelectionChanged="lst_SelectionChanged"
+                        GridViewColumnHeader.Click="ListView_HeaderClick">
+            <wpftk:DataGrid.ContextMenu>
                 <ContextMenu ItemsSource="{Binding Commands}">
                     <ContextMenu.ItemContainerStyle>
                         <Style TargetType="MenuItem">
@@ -49,7 +41,7 @@
                         </Style>
                     </ContextMenu.ItemContainerStyle>
                 </ContextMenu>
-            </ListView.ContextMenu>
-        </ListView>
+            </wpftk:DataGrid.ContextMenu>
+        </wpftk:DataGrid>
     </DockPanel>
 </view:PropertyEditor>

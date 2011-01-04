@@ -24,21 +24,9 @@
                   SelectionChanged="lst_SelectionChanged"
                   MouseDoubleClick="ItemActivatedHandler"
                   ItemContainerStyle="{StaticResource GridViewItemContainerStyle}"
-                  GridViewColumnHeader.Click="ListView_HeaderClick">
-            <ListView.ContextMenu>
-                <ContextMenu ItemsSource="{Binding Commands}">
-                    <ContextMenu.ItemContainerStyle>
-                        <Style TargetType="MenuItem">
-                            <Setter Property="Command"
-                                    Value="{Binding Converter={StaticResource CommandConverter}}" />
-                            <Setter Property="Header"
-                                    Value="{Binding Label}" />
-                            <Setter Property="ToolTip"
-                                    Value="{Binding ToolTip}" />
-                        </Style>
-                    </ContextMenu.ItemContainerStyle>
-                </ContextMenu>
-            </ListView.ContextMenu>
+                  GridViewColumnHeader.Click="ListView_HeaderClick"
+                  KeyboardNavigation.TabNavigation="Continue">
+
         </ListView>
     </DockPanel>
 </view:PropertyEditor>

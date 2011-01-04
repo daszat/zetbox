@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Controls;
 using System.Windows.Threading;
+using System.Windows.Input;
 
 namespace Kistl.Client.WPF.CustomControls
 {
@@ -14,6 +15,12 @@ namespace Kistl.Client.WPF.CustomControls
     /// </summary>
     public class WorkaroundToolBar : ToolBar
     {
+        public WorkaroundToolBar()
+            : base()
+        {
+            KeyboardNavigation.SetTabNavigation(this, KeyboardNavigationMode.Continue);
+        }
+
         private delegate void MethodeInvoke();
 
         public override void OnApplyTemplate()
