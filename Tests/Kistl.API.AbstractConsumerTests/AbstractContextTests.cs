@@ -1,18 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Kistl.API;
-using Kistl.App.Base;
-using Kistl.App.Projekte;
-using Kistl.App.Test;
-
-using NUnit.Framework;
-using Autofac;
 
 namespace Kistl.API.AbstractConsumerTests
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using Autofac;
+    using Kistl.API;
+    using Kistl.App.Base;
+    using Kistl.App.Projekte;
+    using Kistl.App.Test;
+    using NUnit.Framework;
 
     public abstract class AbstractReadonlyContextTests : AbstractTestFixture
     {
@@ -22,6 +20,7 @@ namespace Kistl.API.AbstractConsumerTests
 
         public override void SetUp()
         {
+            base.SetUp();
             iftFactory = scope.Resolve<InterfaceType.Factory>();
 
             using (IKistlContext ctx = GetContext())
@@ -551,7 +550,7 @@ namespace Kistl.API.AbstractConsumerTests
         //}
 
 
-        
+
         [Test]
         public void Create_Generic()
         {
@@ -646,6 +645,6 @@ namespace Kistl.API.AbstractConsumerTests
         //    }
         //}
 
-        
+
     }
 }
