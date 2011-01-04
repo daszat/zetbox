@@ -28,10 +28,23 @@ namespace Kistl.API.AbstractConsumerTests
                 var result = ctx.GetQuery<TestObjClass>();
                 var list = result.ToList();
 
+                var kunde = ctx.GetQuery<Kunde>().FirstOrDefault();
+
+                if (kunde == null)
+                {
+                    kunde = ctx.Create<Kunde>();
+                    kunde.Adresse = "Testadresse";
+                    kunde.EMails.Add("test@example.com");
+                    kunde.Kundenname = "Testkundenname";
+                    kunde.Land = "AT";
+                    kunde.Ort = "Wien";
+                    kunde.PLZ = "1234";
+                }
+
                 while (list.Count < 2)
                 {
                     var newObj = ctx.Create<TestObjClass>();
-                    newObj.ObjectProp = ctx.GetQuery<Kunde>().First();
+                    newObj.ObjectProp = kunde;
                     newObj.StringProp = "blah" + list.Count;
                     list.Add(newObj);
                 }
