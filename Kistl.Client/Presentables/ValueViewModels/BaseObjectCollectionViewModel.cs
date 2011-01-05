@@ -70,25 +70,8 @@ namespace Kistl.Client.Presentables.ValueViewModels
                   GridDisplayConfiguration.Mode.Editable 
                 : GridDisplayConfiguration.Mode.ReadOnly;
 
-            result.BuildColumns(ReferencedClass, mode);
+            result.BuildColumns(ReferencedClass, mode, true);
             return result;
-        }
-
-        private DataObjectViewModel _selectedItem;
-        public DataObjectViewModel SelectedItem
-        {
-            get
-            {
-                return _selectedItem;
-            }
-            set
-            {
-                if (_selectedItem != value)
-                {
-                    _selectedItem = value;
-                    OnPropertyChanged("SelectedItem");
-                }
-            }
         }
 
         private ObservableCollection<DataObjectViewModel> _selectedItems = null;
@@ -99,13 +82,38 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 if (_selectedItems == null)
                 {
                     _selectedItems = new ObservableCollection<DataObjectViewModel>();
+                    _selectedItems.CollectionChanged += _selectedItems_CollectionChanged;
                 }
                 return _selectedItems;
             }
+        }
+
+        void _selectedItems_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            OnPropertyChanged("SelectedItem");
+        }
+
+        /// <summary>
+        /// The current first selected item
+        /// </summary>
+        /// <remarks>
+        /// If set explicit, all other selected items will be cleard from the SelectesItems List
+        /// </remarks>
+        public DataObjectViewModel SelectedItem
+        {
+            get
+            {
+                if (SelectedItems.Count > 0)
+                {
+                    return _selectedItems[0];
+                }
+                return null;
+            }
             set
             {
-                _selectedItems = value;
-                OnPropertyChanged("SelectedItems");
+                this.SelectedItems.Clear();
+                if (value != null) this.SelectedItems.Add(value);
+                OnPropertyChanged("SelectedItem");
             }
         }
 

@@ -9,12 +9,8 @@
     <DockPanel>
         <UniformGrid DockPanel.Dock="Left"
                      Rows="2">
-
-            <Button Command="{Binding Path=MoveUpCommand, RelativeSource={RelativeSource AncestorType={x:Type view:ObjectReferenceListEditor}}}"
-                    IsEnabled="{Binding Path=HasPersistentOrder, Mode=OneWay}">up</Button>
-            <Button Command="{Binding Path=MoveDownCommand, RelativeSource={RelativeSource AncestorType={x:Type view:ObjectReferenceListEditor}}}"
-                    IsEnabled="{Binding Path=HasPersistentOrder, Mode=OneWay}">down</Button>
-
+            <ctrls:CommandButton CommandViewModel="{Binding Path=MoveItemUpCommand}" />
+            <ctrls:CommandButton CommandViewModel="{Binding Path=MoveItemDownCommand}" />
         </UniformGrid>
 
         <ctrls:WorkaroundToolBar DockPanel.Dock="Top"

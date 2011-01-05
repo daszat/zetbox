@@ -35,52 +35,6 @@ namespace Kistl.Client.WPF.View.KistlBase
             InitializeComponent();
         }
 
-        private RelayCommand _moveUpCommand;
-        public System.Windows.Input.ICommand MoveUpCommand
-        {
-            get
-            {
-                if (_moveUpCommand == null)
-                {
-                    _moveUpCommand = new RelayCommand(param =>
-                    {
-                        if (ViewModel.SelectedItem != null)
-                        {
-                            ViewModel.MoveItemUp(ViewModel.SelectedItem);
-                        }
-                    },
-                    param =>
-                    {
-                        return ViewModel.SelectedItem != null;
-                    });
-                }
-                return _moveUpCommand;
-            }
-        }
-
-        private RelayCommand _moveDownCommand;
-        public System.Windows.Input.ICommand MoveDownCommand
-        {
-            get
-            {
-                if (_moveDownCommand == null)
-                {
-                    _moveDownCommand = new RelayCommand(param =>
-                    {
-                        if (ViewModel.SelectedItem != null)
-                        {
-                            ViewModel.MoveItemDown(ViewModel.SelectedItem);
-                        }
-                    },
-                    param =>
-                    {
-                        return ViewModel.SelectedItem != null;
-                    });
-                }
-                return _moveDownCommand;
-            }
-        }
-
         private void ItemActivatedHandler(object sender, MouseButtonEventArgs e)
         {
             if (ViewModel.SelectedItem != null)
@@ -147,19 +101,57 @@ namespace Kistl.Client.WPF.View.KistlBase
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
             base.OnPropertyChanged(e);
-            if (e.Property == FrameworkElement.DataContextProperty)
+            if (ViewModel != null && e.Property == FrameworkElement.DataContextProperty)
             {
                 RefreshGridView();
+                // Attach to selection changed event on ViewModel side
+                ViewModel.SelectedItems.CollectionChanged += ViewModel_SelectedItems_CollectionChanged;
             }
         }
 
-        private void lst_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private bool _selectedItemsChangedByViewModel = false;
+        private bool _selectedItemsChangedByList = false;
+
+        protected void lst_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (e.OriginalSource == lst)
+            if (_selectedItemsChangedByViewModel) return;
+
+            _selectedItemsChangedByList = true;
+            try
             {
-                e.Handled = true;
-                e.RemovedItems.ForEach<DataObjectViewModel>(i => ViewModel.SelectedItems.Remove(i));
-                e.AddedItems.ForEach<DataObjectViewModel>(i => ViewModel.SelectedItems.Add(i));
+                if (e.OriginalSource == lst)
+                {
+                    e.Handled = true;
+                    e.RemovedItems.ForEach<DataObjectViewModel>(i => ViewModel.SelectedItems.Remove(i));
+                    e.AddedItems.ForEach<DataObjectViewModel>(i => ViewModel.SelectedItems.Add(i));
+                }
+            }
+            finally
+            {
+                _selectedItemsChangedByList = false;
+            }
+        }
+
+        void ViewModel_SelectedItems_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            if (_selectedItemsChangedByList) return;
+
+            _selectedItemsChangedByViewModel = true;
+            try
+            {
+                if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Reset)
+                {
+                    lst.SelectedItems.Clear();
+                }
+                else
+                {
+                    if (e.OldItems != null) e.OldItems.ForEach<object>(i => lst.SelectedItems.Remove(i));
+                    if (e.NewItems != null) e.NewItems.ForEach<object>(i => lst.SelectedItems.Add(i));
+                }
+            }
+            finally
+            {
+                _selectedItemsChangedByViewModel = false;
             }
         }
 

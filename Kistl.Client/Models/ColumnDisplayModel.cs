@@ -96,7 +96,7 @@ namespace Kistl.Client.Models
             this.FrozenContext = frozenCtx;
         }
 
-        public void BuildColumns(Kistl.App.Base.ObjectClass cls, Mode mode)
+        public void BuildColumns(Kistl.App.Base.ObjectClass cls, Mode mode, bool showMethods)
         {
             if (cls == null) throw new ArgumentNullException("cls");
 
@@ -133,7 +133,7 @@ namespace Kistl.Client.Models
 
             this.Columns = props.SelectMany(p => CreateColumnDisplayModels(mode, p, string.Empty, string.Empty)).ToList();
 
-            if (mode != Mode.ReadOnly)
+            if (showMethods)
             {
                 this.Columns = this.Columns.Concat(
                     methods

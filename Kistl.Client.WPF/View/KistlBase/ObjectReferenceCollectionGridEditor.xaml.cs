@@ -55,19 +55,57 @@ namespace Kistl.Client.WPF.View.KistlBase
         #region Item Management
         private void ItemActivatedHandler(object sender, MouseButtonEventArgs e)
         {
-            if (ViewModel.SelectedItem != null)
+            if (ViewModel != null && ViewModel.SelectedItem != null)
             {
                 ViewModel.ActivateItem(ViewModel.SelectedItem, true);
+                // Attach to selection changed event on ViewModel side
+                ViewModel.SelectedItems.CollectionChanged += ViewModel_SelectedItems_CollectionChanged;
             }
         }
 
-        private void lst_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private bool _selectedItemsChangedByViewModel = false;
+        private bool _selectedItemsChangedByList = false;
+
+        protected void lst_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (e.OriginalSource == lst)
+            if (_selectedItemsChangedByViewModel) return;
+
+            _selectedItemsChangedByList = true;
+            try
             {
-                e.Handled = true;
-                e.RemovedItems.ForEach<DataObjectViewModel>(i => ViewModel.SelectedItems.Remove(i));
-                e.AddedItems.ForEach<DataObjectViewModel>(i => ViewModel.SelectedItems.Add(i));
+                if (e.OriginalSource == lst)
+                {
+                    e.Handled = true;
+                    e.RemovedItems.ForEach<DataObjectViewModel>(i => ViewModel.SelectedItems.Remove(i));
+                    e.AddedItems.ForEach<DataObjectViewModel>(i => ViewModel.SelectedItems.Add(i));
+                }
+            }
+            finally
+            {
+                _selectedItemsChangedByList = false;
+            }
+        }
+
+        void ViewModel_SelectedItems_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            if (_selectedItemsChangedByList) return;
+
+            _selectedItemsChangedByViewModel = true;
+            try
+            {
+                if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Reset)
+                {
+                    lst.SelectedItems.Clear();
+                }
+                else
+                {
+                    if (e.OldItems != null) e.OldItems.ForEach<object>(i => lst.SelectedItems.Remove(i));
+                    if (e.NewItems != null) e.NewItems.ForEach<object>(i => lst.SelectedItems.Add(i));
+                }
+            }
+            finally
+            {
+                _selectedItemsChangedByViewModel = false;
             }
         }
         #endregion

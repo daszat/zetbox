@@ -75,6 +75,27 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
         #endregion
 
+        private ICommandViewModel _MoveItemUpCommand = null;
+        public ICommandViewModel MoveItemUpCommand
+        {
+            get
+            {
+                if (_MoveItemUpCommand == null)
+                {
+                    _MoveItemUpCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, "Up", "Moves the item up", MoveItemUp, () => SelectedItem != null);
+                }
+                return _MoveItemUpCommand;
+            }
+        }
+
+        public void MoveItemUp()
+        {
+            var memories = SelectedItems.ToList();
+            memories.ForEach(i => MoveItemUp(i));
+            SelectedItems.Clear();
+            memories.ForEach(i => SelectedItems.Add(i));
+        }
+
         public void MoveItemUp(DataObjectViewModel item)
         {
             if (item == null) { return; }
@@ -84,8 +105,29 @@ namespace Kistl.Client.Presentables.ValueViewModels
             {
                 ValueModel.Value.RemoveAt(idx);
                 ValueModel.Value.Insert(idx - 1, item.Object);
-                SelectedItem = item;
+                //SelectedItem = item;
             }
+        }
+
+        private ICommandViewModel _MoveItemDownCommand = null;
+        public ICommandViewModel MoveItemDownCommand
+        {
+            get
+            {
+                if (_MoveItemDownCommand == null)
+                {
+                    _MoveItemDownCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, "Down", "Moves the item down", MoveItemDown, () => SelectedItem != null);
+                }
+                return _MoveItemDownCommand;
+            }
+        }
+
+        public void MoveItemDown()
+        {
+            var memories = SelectedItems.ToList();
+            memories.ForEach(i => MoveItemDown(i));
+            SelectedItems.Clear();
+            memories.ForEach(i => SelectedItems.Add(i));
         }
 
         public void MoveItemDown(DataObjectViewModel item)
@@ -97,7 +139,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             {
                 ValueModel.Value.RemoveAt(idx);
                 ValueModel.Value.Insert(idx + 1, item.Object);
-                SelectedItem = item;
+                //SelectedItem = item;
             }
         }
     }
