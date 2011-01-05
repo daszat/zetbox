@@ -89,11 +89,9 @@ namespace Kistl.Client.Models
         public bool ShowName { get; set; }
 
         public IList<ColumnDisplayModel> Columns { get; set; }
-        private readonly IFrozenContext FrozenContext;
 
-        public GridDisplayConfiguration(IFrozenContext frozenCtx)
+        public GridDisplayConfiguration()
         {
-            this.FrozenContext = frozenCtx;
         }
 
         public void BuildColumns(Kistl.App.Base.ObjectClass cls, Mode mode, bool showMethods)
