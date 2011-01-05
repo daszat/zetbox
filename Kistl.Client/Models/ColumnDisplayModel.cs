@@ -163,7 +163,7 @@ namespace Kistl.Client.Models
                     Header = parentLabel + lb,
                     Name = parentProp + p.Name,
                     ControlKind = displayOnly ? p.ValueModelDescriptor.GetDefaultGridCellDisplayKind() : p.ValueModelDescriptor.GetDefaultGridCellKind(),
-                    ReadOnlyKind = p.ValueModelDescriptor.GetDefaultGridCellDisplayKind() ?? FrozenContext.FindPersistenceObject<ControlKind>(NamedObjects.ControlKind_Kistl_App_GUI_LabelKind)
+                    ReadOnlyKind = p.ValueModelDescriptor.GetDefaultGridCellDisplayKind() ?? FrozenContext.FindPersistenceObject<ControlKind>(NamedObjects.ControlKind_Kistl_App_GUI_TextKind)
                 });
             }
             return result;
