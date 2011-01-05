@@ -81,5 +81,26 @@ namespace Kistl.DalProvider.NHibernate
 
         protected NHibernateContext OurContext { get { return (NHibernateContext)Context; } }
         public abstract IProxyObject NHibernateProxy { get; }
+
+        public void SaveOrUpdateTo(global::NHibernate.ISession session)
+        {
+            if (session == null) { throw new ArgumentNullException("session"); }
+
+            switch (this.ObjectState)
+            {
+                case DataObjectState.New:
+                case DataObjectState.Modified:
+                case DataObjectState.Unmodified:
+                    session.SaveOrUpdate(this.NHibernateProxy);
+                    break;
+                case DataObjectState.Deleted:
+                    session.Delete(this.NHibernateProxy);
+                    break;
+                case DataObjectState.NotDeserialized:
+                    throw new InvalidOperationException("object not deserialized");
+                default:
+                    throw new NotImplementedException(String.Format("unknown DataObjectState encountered: '{0}'", this.ObjectState));
+            }
+        }
     }
 }

@@ -8,6 +8,7 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.Properties
 
     using Kistl.API;
     using Kistl.App.Base;
+    using Kistl.App.Extensions;
     using Templates = Kistl.Generator.Templates;
 
     public partial class EnumerationPropertyTemplate
@@ -15,7 +16,12 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.Properties
         protected virtual void AddSerialization(Templates.Serialization.SerializationMembersList list)
         {
             if (list != null)
-                list.Add("Serialization.EnumBinarySerialization", Templates.Serialization.SerializerType.All, this.prop.Module.Namespace, this.prop.Name, this.prop);
+            {
+                var backingStoreName = String.Format("(({0})this).{1}",
+                    prop.ObjectClass.Module.Namespace + "." + prop.ObjectClass.Name,
+                    prop.Name);
+                Templates.Serialization.EnumBinarySerialization.AddToSerializers(list, prop, backingStoreName);
+            }
         }
     }
 }

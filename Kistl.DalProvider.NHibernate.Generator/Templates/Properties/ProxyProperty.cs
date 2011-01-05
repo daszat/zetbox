@@ -7,6 +7,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
     using System.Linq;
     using System.Text;
     using Kistl.API;
+    using Templates = Kistl.Generator.Templates;
 
     public partial class ProxyProperty
     {
@@ -64,6 +65,18 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
                 this.WriteObjects("                        var __e = new PropertyPostSetterEventArgs<", propertyType, ">(__oldValue, __newValue);\r\n");
                 this.WriteObjects("                        ", EventName, "_PostSetter(this, __e);\r\n");
                 this.WriteObjects("                    }\r\n");
+            }
+        }
+
+        protected virtual void AddSerialization(
+            Templates.Serialization.SerializationMembersList list,
+            string memberName,
+            string fkBackingName)
+        {
+            if (list != null)
+            {
+                Templates.Serialization.SimplePropertySerialization
+                    .AddToSerializers(list, Templates.Serialization.SerializerType.All, moduleNamespace, propertyName, propertyType, "Proxy." + propertyName);
             }
         }
     }

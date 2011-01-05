@@ -12,6 +12,8 @@
 <%@ Import Namespace="Kistl.Generator" %>
 <%@ Import Namespace="Kistl.Generator.Extensions" %>
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="serializationList" Type="Kistl.Generator.Templates.Serialization.SerializationMembersList" %>
+<%@ Parameter Name="moduleNamespace" Type="string" %>
 <%@ Parameter Name="propertyType" Type="string" %>
 <%@ Parameter Name="propertyName" Type="string" %>
 <%@ Parameter Name="overrideParent" Type="bool" %>
@@ -24,9 +26,7 @@
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.<%= propertyName %>;
-<%
-    ApplyOnGetTemplate();
-%>
+<% ApplyOnGetTemplate(); %>
                 return __result;
             }
             set
@@ -37,16 +37,13 @@
                 {
                     var __oldValue = Proxy.<%= propertyName %>;
                     var __newValue = value;
-<%
-    ApplyPreSetTemplate();
-%>
+<% ApplyPreSetTemplate(); %>
                     NotifyPropertyChanging("<%= propertyName %>", __oldValue, __newValue);
                     Proxy.<%= propertyName %> = __newValue;
                     NotifyPropertyChanged("<%= propertyName %>", __oldValue, __newValue);
-<%
-    ApplyPostSetTemplate();
-%>
+<% ApplyPostSetTemplate(); %>
                 }
             }
         }
+<% AddSerialization(serializationList, propertyName, "Proxy." + propertyName); %>
         // END <%= this.GetType() %>

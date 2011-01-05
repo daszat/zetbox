@@ -13,5 +13,6 @@ namespace Kistl.DalProvider.NHibernate
     {
         int ID { get; set; }
         Type ZBoxWrapper { get; }
+        Type ZBoxProxy { get; }
     }
 }

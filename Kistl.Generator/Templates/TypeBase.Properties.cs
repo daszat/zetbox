@@ -93,7 +93,10 @@ namespace Kistl.Generator.Templates
         {
             this.WriteLine("        // enumeration property");
             this.ApplyNotifyingValueProperty(prop, null);
-            this.MembersToSerialize.Add("Serialization.EnumBinarySerialization", Serialization.SerializerType.All, prop.Module.Namespace, prop.Name, prop);
+            var backingStoreName = String.Format("(({0})this).{1}",
+                prop.ObjectClass.Module.Namespace + "." + prop.ObjectClass.Name,
+                prop.Name);
+            Serialization.EnumBinarySerialization.AddToSerializers(MembersToSerialize, prop, backingStoreName);
         }
 
         protected virtual void ApplyObjectReferenceListTemplate(ObjectReferenceProperty prop)

@@ -33,12 +33,14 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries
 
         protected override void ApplyAIndexPropertyTemplate()
         {
-            Templates.Properties.DelegatingProperty.Call(Host, ctx, "AIndex", "int?", "this.Proxy.A" + Kistl.API.Helper.PositionSuffix, "int?");
+            // delegate interface to actual implementation
+            Templates.Properties.DelegatingProperty.Call(Host, ctx, "AIndex", "int?", "this.A" + Kistl.API.Helper.PositionSuffix, "int?");
         }
 
         protected override void ApplyBIndexPropertyTemplate()
         {
-            Templates.Properties.DelegatingProperty.Call(Host, ctx, "BIndex", "int?", "this.Proxy.B" + Kistl.API.Helper.PositionSuffix, "int?");
+            // delegate interface to actual implementation
+            Templates.Properties.DelegatingProperty.Call(Host, ctx, "BIndex", "int?", "this.B" + Kistl.API.Helper.PositionSuffix, "int?");
         }
 
         protected override void ApplyClassTailTemplate()

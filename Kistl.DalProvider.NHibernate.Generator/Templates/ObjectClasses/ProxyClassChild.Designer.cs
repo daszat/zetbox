@@ -46,14 +46,16 @@ this.WriteObjects("            : ",  parentClassName , "\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            public override Type ZBoxWrapper { get { return typeof(",  className , "",  ImplementationSuffix , "); } }\r\n");
 this.WriteObjects("\r\n");
-#line 24 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClassChild.cst"
+this.WriteObjects("			public override Type ZBoxProxy { get { return typeof(",  className , "Proxy); } }\r\n");
+this.WriteObjects("\r\n");
+#line 26 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClassChild.cst"
 foreach(var p in typeAndNameList) { 
-#line 25 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClassChild.cst"
+#line 27 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClassChild.cst"
 this.WriteObjects("            public virtual ",  p.Key , " ",  p.Value , " { get; set; }\r\n");
 this.WriteObjects("\r\n");
-#line 27 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClassChild.cst"
+#line 29 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClassChild.cst"
 } 
-#line 28 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClassChild.cst"
+#line 30 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClassChild.cst"
 this.WriteObjects("        }\r\n");
 
         }

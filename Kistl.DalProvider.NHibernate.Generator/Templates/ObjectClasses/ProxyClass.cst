@@ -21,6 +21,7 @@
             public virtual int ID { get; set; }
 
 			public virtual Type ZBoxWrapper { get { return typeof(<%= className %><%= ImplementationSuffix %>); } }
+			public virtual Type ZBoxProxy { get { return typeof(<%= className %>Proxy); } }
 
 <% foreach(var p in typeAndNameList) { %>
             public virtual <%= p.Key %> <%= p.Value %> { get; set; }

@@ -63,8 +63,8 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates
         {
             base.ApplyAdditionalItemGroups();
             this.WriteLine(@"    <ItemGroup>");
-            this.WriteLine(@"    <EmbeddedResource Include=""*.hbm.xml"" />");
-            this.WriteLine(@"    <EmbeddedResource Include=""*/*.hbm.xml"" />");
+            this.WriteLine(@"        <EmbeddedResource Include=""*.hbm.xml"" />");
+            this.WriteLine(@"        <EmbeddedResource Include=""*/*.hbm.xml"" />");
             this.WriteLine(@"    </ItemGroup>");
         }
     }

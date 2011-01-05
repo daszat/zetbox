@@ -389,6 +389,13 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Templates\Serialization\EnumBinarySerialization.cs" />
+    <Compile Include="Templates\Serialization\SimplePropertySerialization.cs" />
+    <Compile Include="Templates\Serialization\SimplePropertySerialization.Designer.cs">
+      <DependentUpon>SimplePropertySerialization.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Templates\Serialization\EagerLoadingSerialization.Designer.cs">
       <DependentUpon>EagerLoadingSerialization.cst</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -594,6 +601,10 @@
     <None Include="Templates\Serialization\CompoundObjectSerialization.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>CompoundObjectSerialization.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\Serialization\SimplePropertySerialization.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>SimplePropertySerialization.Designer.cs</LastGenOutput>
     </None>
     <None Include="Templates\Serialization\EagerLoadingSerialization.cst">
       <Generator>Arebis Template Processor</Generator>

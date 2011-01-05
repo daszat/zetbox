@@ -33,7 +33,8 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
         {
             if (list != null)
             {
-                list.Add("Serialization.ProxySerialization", Templates.Serialization.SerializerType.All, modulenamespace, name, backingName);
+                Templates.Serialization.SimplePropertySerialization
+                    .AddToSerializers(list, Templates.Serialization.SerializerType.All, modulenamespace, name, type, backingName);
             }
         }
     }

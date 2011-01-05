@@ -32,11 +32,6 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                 cls.Name,
                 GetTypeName(),
                 cls.BaseObjectClass == null ? null : cls.BaseObjectClass.Name);
-
-            if (cls.BaseObjectClass == null)
-            {
-                SaveOrUpdateToMethod.Call(Host, ctx);
-            }
         }
 
         protected override void ApplyClassTailTemplate()
@@ -140,10 +135,11 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
 
         #region Property Templates
 
-        protected override void ApplyNotifyingValueProperty(Property prop, Templates.Serialization.SerializationMembersList serList)
+        protected override void ApplyNotifyingValueProperty(
+            Property prop,
+            Templates.Serialization.SerializationMembersList serList)
         {
-            Properties.ProxyProperty.Call(Host, ctx, prop.ReferencedTypeAsCSharp(), prop.Name, false, true);
-            // TODO: Serialization
+            Properties.ProxyProperty.Call(Host, ctx, serList, prop.Module.Namespace, prop.ReferencedTypeAsCSharp(), prop.Name, false, true);
         }
 
         protected override void ApplyCollectionEntryListTemplate(ObjectReferenceProperty prop)
@@ -177,7 +173,12 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
 
         protected override void ApplyEnumerationPropertyTemplate(EnumerationProperty prop)
         {
-            base.ApplyEnumerationPropertyTemplate(prop);
+            ApplyNotifyingValueProperty(prop, null);
+            Templates.Serialization.EnumBinarySerialization.AddToSerializers(MembersToSerialize, Templates.Serialization.SerializerType.All,
+                prop.Module.Namespace,
+                prop.Name,
+                "Proxy." + prop.Name,
+                prop.Enumeration.Module.Namespace + "." + prop.Enumeration.Name + (prop.IsNullable() ? "?" : String.Empty));
         }
 
         protected override void ApplyListProperty(Property prop, Templates.Serialization.SerializationMembersList serList)
@@ -219,7 +220,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
 
         protected override void ApplyValueTypePropertyTemplate(ValueTypeProperty prop)
         {
-            base.ApplyValueTypePropertyTemplate(prop);
+            ApplyNotifyingValueProperty(prop, this.MembersToSerialize);
         }
 
         #endregion

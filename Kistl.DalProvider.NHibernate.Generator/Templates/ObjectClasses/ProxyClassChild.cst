@@ -21,6 +21,8 @@
         {
             public override Type ZBoxWrapper { get { return typeof(<%= className %><%= ImplementationSuffix %>); } }
 
+			public override Type ZBoxProxy { get { return typeof(<%= className %>Proxy); } }
+
 <% foreach(var p in typeAndNameList) { %>
             public virtual <%= p.Key %> <%= p.Value %> { get; set; }
 

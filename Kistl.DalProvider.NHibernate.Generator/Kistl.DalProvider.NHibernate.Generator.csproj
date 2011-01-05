@@ -77,6 +77,11 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Templates\CompoundObjects\Template.cs" />
+    <Compile Include="Templates\Mappings\CollectionEntriesHbm.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CollectionEntriesHbm.cst</DependentUpon>
+    </Compile>
     <Compile Include="Templates\Mappings\JoinedSubclassHbm.cs">
       <DependentUpon>JoinedSubclassHbm.cst</DependentUpon>
     </Compile>
@@ -142,11 +147,6 @@
       <DependentUpon>ReloadReferences.cst</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Templates\ObjectClasses\SaveOrUpdateToMethod.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SaveOrUpdateToMethod.cst</DependentUpon>
     </Compile>
     <Compile Include="Templates\ObjectClasses\Template.cs" />
     <Compile Include="Templates\ProjectFile.cs" />
@@ -218,6 +218,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Templates\Mappings\CollectionEntriesHbm.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>CollectionEntriesHbm.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Templates\Mappings\ObjectClassHbm.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ObjectClassHbm.Designer.cs</LastGenOutput>
@@ -245,10 +249,6 @@
     <None Include="Templates\ObjectClasses\ReloadReferences.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ReloadReferences.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Templates\ObjectClasses\SaveOrUpdateToMethod.cst">
-      <Generator>Arebis Template Processor</Generator>
-      <LastGenOutput>SaveOrUpdateToMethod.Designer.cs</LastGenOutput>
     </None>
     <None Include="Templates\Properties\ObjectListProperty.cst">
       <Generator>Arebis Template Processor</Generator>

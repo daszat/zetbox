@@ -50,6 +50,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
 #line 22 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
 this.WriteObjects("<?xml version=\"1.0\"?>\r\n");
 this.WriteObjects("<hibernate-mapping xmlns=\"urn:nhibernate-mapping-2.2\" \r\n");
+this.WriteObjects("                   default-cascade=\"save-update\"\r\n");
 this.WriteObjects("                   schema=\"`dbo`\">\r\n");
 this.WriteObjects("    <class name=\"",  qualifiedImplementationName , "\"\r\n");
 this.WriteObjects("           proxy=\"",  qualifiedImplementationName , "\"\r\n");
@@ -66,14 +67,14 @@ this.WriteObjects("            </generator>\r\n");
 this.WriteObjects("        </id>\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("        <!-- define the properties -->\r\n");
-#line 40 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
-ApplyPropertyDefinitions(properties); 
 #line 41 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
+ApplyPropertyDefinitions(properties); 
+#line 42 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        <!-- define the subclasses -->\r\n");
-#line 43 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
-ApplyJoinedSubclasses(subClasses); 
 #line 44 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
+ApplyJoinedSubclasses(subClasses); 
+#line 45 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("    </class>\r\n");
 this.WriteObjects("</hibernate-mapping>");

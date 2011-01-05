@@ -53,7 +53,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
                     if (rel.HasStorage(relEnd.GetRole()))
                     {
                         string columnAttr = String.Format("column=\"`{0}`\"", Construct.ForeignKeyColumnName(otherEnd, prefix));
-                        this.WriteObjects("<many-to-one ", nameAttr, " ", columnAttr, " ", classAttr, " cascade=\"none\" unique=\"true\" ");
+                        this.WriteObjects("<many-to-one ", nameAttr, " ", columnAttr, " ", classAttr, " unique=\"true\" ");
                         if (prop.EagerLoading)
                         {
                             this.WriteObjects("fetch=\"join\" ");
@@ -63,7 +63,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
                     else
                     {
                         this.WriteObjects("<one-to-one ", nameAttr, " ", classAttr,
-                            " cascade=\"none\" constrained=\"false\" foreign-key=\"false\" ", // constrained must be false, because else the reference is not optional(!)
+                            " constrained=\"false\" foreign-key=\"false\" ", // constrained must be false, because else the reference is not optional(!)
                             prop.EagerLoading ? "fetch=\"join\" " : String.Empty,
                             "property-ref=\"" + (otherEnd.Navigator != null ? otherEnd.Navigator.Name : "(no nav)") + "\" />");
                     }
@@ -72,7 +72,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
                     if (otherEnd.Multiplicity.UpperBound() > 1) // we are 1-side
                     {
                         // always map as set, the wrapper has to translate/order the elements
-                        this.WriteObjects("<set ", nameAttr, " cascade=\"none\" ");
+                        this.WriteObjects("<set ", nameAttr, " ");
                         if (prop.EagerLoading)
                         {
                             this.WriteObjects("lazy=\"false\" fetch=\"join\" ");
@@ -97,7 +97,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
                     else // we are n-side
                     {
                         string columnAttr = String.Format("column=\"`{0}`\"", Construct.ForeignKeyColumnName(otherEnd, prefix));
-                        this.WriteObjects("<many-to-one ", nameAttr, " ", columnAttr, " ", classAttr, " cascade=\"none\" ");
+                        this.WriteObjects("<many-to-one ", nameAttr, " ", columnAttr, " ", classAttr, " ");
                         if (prop.EagerLoading)
                         {
                             this.WriteObjects("fetch=\"join\" ");

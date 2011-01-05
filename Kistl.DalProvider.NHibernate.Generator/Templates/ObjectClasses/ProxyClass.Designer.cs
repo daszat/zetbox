@@ -45,15 +45,16 @@ this.WriteObjects("        {\r\n");
 this.WriteObjects("            public virtual int ID { get; set; }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("			public virtual Type ZBoxWrapper { get { return typeof(",  className , "",  ImplementationSuffix , "); } }\r\n");
+this.WriteObjects("			public virtual Type ZBoxProxy { get { return typeof(",  className , "Proxy); } }\r\n");
 this.WriteObjects("\r\n");
-#line 25 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClass.cst"
-foreach(var p in typeAndNameList) { 
 #line 26 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClass.cst"
+foreach(var p in typeAndNameList) { 
+#line 27 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClass.cst"
 this.WriteObjects("            public virtual ",  p.Key , " ",  p.Value , " { get; set; }\r\n");
 this.WriteObjects("\r\n");
-#line 28 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClass.cst"
-} 
 #line 29 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClass.cst"
+} 
+#line 30 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClass.cst"
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("        // make proxy available for the provider\r\n");

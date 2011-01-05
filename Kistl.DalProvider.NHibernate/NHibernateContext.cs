@@ -141,8 +141,8 @@ namespace Kistl.DalProvider.NHibernate
 
             NotifyChanging(notifySaveList);
 
-            // TODO: refactor this to always talk about DataObjectNHibernateImpl
-            FlushSession(notifySaveList.Cast<DataObjectNHibernateImpl>().ToList());
+            // TODO: refactor this to always talk about NHibernatePersistenceObject
+            FlushSession(_attachedObjects.Cast<NHibernatePersistenceObject>().ToList());
 
             NotifyChanged(notifySaveList);
 
@@ -155,8 +155,8 @@ namespace Kistl.DalProvider.NHibernate
 
             var objects = GetModifiedObjects();
 
-            // TODO: refactor this to always talk about DataObjectNHibernateImpl
-            FlushSession(objects.Cast<DataObjectNHibernateImpl>().ToList());
+            // TODO: refactor this to always talk about NHibernatePersistenceObject
+            FlushSession(_attachedObjects.Cast<NHibernatePersistenceObject>().ToList());
 
             return objects.Count;
         }
@@ -199,7 +199,7 @@ namespace Kistl.DalProvider.NHibernate
                     .ToList();
         }
 
-        private void FlushSession(List<DataObjectNHibernateImpl> notifySaveList)
+        private void FlushSession(List<NHibernatePersistenceObject> notifySaveList)
         {
             try
             {
@@ -414,14 +414,10 @@ namespace Kistl.DalProvider.NHibernate
             if (proxy == null)
                 return null;
 
-            var proxyType = proxy.GetType();
-            // dereference NHibernate proxies
-            if (proxyType.DeclaringType == null)
-                proxyType = proxyType.BaseType;
-
-            var item = (NHibernatePersistenceObject)_attachedObjects.Lookup(GetImplementationType(proxyType.DeclaringType).ToInterfaceType(), proxy.ID);
+            var item = (NHibernatePersistenceObject)_attachedObjects.Lookup(GetImplementationType(proxy.ZBoxWrapper).ToInterfaceType(), proxy.ID);
             if (item == null)
             {
+                proxy = (IProxyObject)_nhSession.Load(proxy.ZBoxProxy, proxy.ID);
                 item = (NHibernatePersistenceObject)Activator.CreateInstance(proxy.ZBoxWrapper, null, proxy);
                 Attach(item);
             }
