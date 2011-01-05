@@ -171,7 +171,6 @@ namespace Kistl.Client.WPF.View.KistlBase
                 cpFef.SetValue(VisualTypeTemplateSelector.RequestedKindProperty, desc.ControlKind);
                 cpFef.SetValue(ContentPresenter.ContentTemplateSelectorProperty, FindResource("defaultTemplateSelector"));
                 cpFef.SetValue(FrameworkElement.HorizontalAlignmentProperty, HorizontalAlignment.Stretch);
-                cpFef.SetValue(FrameworkElement.MarginProperty, new Thickness(-6, 0, -6, 0));
                 result.VisualTree = cpFef;
                 col.CellTemplate = result;
                 view.Columns.Add(col);

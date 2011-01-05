@@ -459,7 +459,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
         protected virtual GridDisplayConfiguration CreateDisplayedColumns()
         {
             var result = new GridDisplayConfiguration(FrozenContext);
-            result.BuildColumns(ReferencedClass, false);
+            result.BuildColumns(ReferencedClass, GridDisplayConfiguration.Mode.Editable);
             return result;
         }
         #endregion

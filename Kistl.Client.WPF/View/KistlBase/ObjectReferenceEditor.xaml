@@ -41,7 +41,7 @@
                 </ContextMenu>
             </ctrls:DropDownButton.DropDown>
         </ctrls:DropDownButton>
-        <ContentPresenter Content="{Binding Value, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
+        <ContentPresenter Content="{Binding Value, Mode=OneWay}"
                           ContentTemplateSelector="{StaticResource listItemTemplateSelector}" />
     </DockPanel>
 

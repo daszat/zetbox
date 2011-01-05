@@ -55,12 +55,12 @@ namespace Kistl.Client.Models
         {
         }
 
-        public ColumnDisplayModel(string header, string name, ControlKind kind, ControlKind readOnlyKind, ColumnType type)
+        public ColumnDisplayModel(string header, string name, ControlKind kind, ControlKind gridPreviewKind, ColumnType type)
         {
             this.Header = header;
             this.Name = name;
             this.ControlKind = kind;
-            this.ReadOnlyKind = readOnlyKind;
+            this.GridPreEditKind = gridPreviewKind;
             this.Type = type;
         }
 
@@ -68,7 +68,7 @@ namespace Kistl.Client.Models
         public string Header { get; set; }
         public string Name { get; set; }
         public ControlKind ControlKind { get; set; }
-        public ControlKind ReadOnlyKind { get; set; }
+        public ControlKind GridPreEditKind { get; set; }
 
         public override string ToString()
         {
@@ -78,9 +78,16 @@ namespace Kistl.Client.Models
 
     public class GridDisplayConfiguration
     {
+        public enum Mode
+        {
+            ReadOnly,
+            Editable,
+        }
+
         public bool ShowId { get; set; }
         public bool ShowIcon { get; set; }
         public bool ShowName { get; set; }
+
         public IList<ColumnDisplayModel> Columns { get; set; }
         private readonly IFrozenContext FrozenContext;
 
@@ -89,12 +96,7 @@ namespace Kistl.Client.Models
             this.FrozenContext = frozenCtx;
         }
 
-        public void BuildColumns(Kistl.App.Base.ObjectClass cls)
-        {
-            BuildColumns(cls, false);
-        }
-
-        public void BuildColumns(Kistl.App.Base.ObjectClass cls, bool displayOnly)
+        public void BuildColumns(Kistl.App.Base.ObjectClass cls, Mode mode)
         {
             if (cls == null) throw new ArgumentNullException("cls");
 
@@ -129,22 +131,23 @@ namespace Kistl.Client.Models
             var methods = cls.GetAllMethods()
                 .Where(m => m.IsDisplayable && (m.CategoryTags ?? String.Empty).Split(',', ' ').Contains("Summary"));
 
-            this.Columns = props.SelectMany(p => CreateColumnDisplayModels(displayOnly, p, string.Empty, string.Empty)).ToList();
+            this.Columns = props.SelectMany(p => CreateColumnDisplayModels(mode, p, string.Empty, string.Empty)).ToList();
 
-            if (!displayOnly)
+            if (mode != Mode.ReadOnly)
             {
                 this.Columns = this.Columns.Concat(
-                methods
-                .Select(m => new ColumnDisplayModel()
-                {
-                    Header = m.GetLabel(),
-                    Name = m.Name,
-                    Type = ColumnDisplayModel.ColumnType.MethodModel
-                })).ToList();
+                    methods
+                    .Select(m => new ColumnDisplayModel()
+                    {
+                        Header = m.GetLabel(),
+                        Name = m.Name,
+                        Type = ColumnDisplayModel.ColumnType.MethodModel
+                    })
+                ).ToList();
             }
         }
 
-        private List<ColumnDisplayModel> CreateColumnDisplayModels(bool displayOnly, Property p, string parentLabel, string parentProp)
+        private List<ColumnDisplayModel> CreateColumnDisplayModels(Mode mode, Property p, string parentLabel, string parentProp)
         {
             var result = new List<ColumnDisplayModel>();
             var lb = p.GetLabel();
@@ -153,18 +156,28 @@ namespace Kistl.Client.Models
             {
                 foreach(var i in ((CompoundObjectProperty)p).CompoundObjectDefinition.Properties)
                 {
-                    result.AddRange(CreateColumnDisplayModels(displayOnly, i, parentLabel + lb + ".", parentProp + p.Name + "."));
+                    result.AddRange(CreateColumnDisplayModels(mode, i, parentLabel + lb + ".", parentProp + p.Name + "."));
                 }
             }
             else
             {
-                result.Add(new ColumnDisplayModel()
+                var colMdl = new ColumnDisplayModel()
                 {
                     Header = parentLabel + lb,
                     Name = parentProp + p.Name,
-                    ControlKind = displayOnly ? p.ValueModelDescriptor.GetDefaultGridCellDisplayKind() : p.ValueModelDescriptor.GetDefaultGridCellKind(),
-                    ReadOnlyKind = p.ValueModelDescriptor.GetDefaultGridCellDisplayKind() ?? FrozenContext.FindPersistenceObject<ControlKind>(NamedObjects.ControlKind_Kistl_App_GUI_TextKind)
-                });
+                };
+                switch(mode)
+                {
+                    case Mode.ReadOnly:
+                        colMdl.ControlKind = p.ValueModelDescriptor.GetDefaultGridCellDisplayKind();
+                        colMdl.GridPreEditKind = p.ValueModelDescriptor.GetDefaultGridCellDisplayKind();
+                        break;
+                    case Mode.Editable:
+                        colMdl.ControlKind = p.ValueModelDescriptor.GetDefaultGridCellEditorKind();
+                        colMdl.GridPreEditKind = p.ValueModelDescriptor.GetDefaultGridCellPreEditorKind();
+                        break;
+                }
+                result.Add(colMdl);
             }
             return result;
         }

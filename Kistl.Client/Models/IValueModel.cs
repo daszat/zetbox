@@ -84,5 +84,6 @@ using System.Collections;
         ObjectClass ReferencedClass { get; }
         RelationEnd RelEnd { get; }
         IEnumerable UnderlyingCollection { get; }
+        bool? IsInlineEditable { get; }
     }
 }

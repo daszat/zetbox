@@ -657,7 +657,7 @@ namespace Kistl.Client.Models
 
         #endregion
 
-        #region IObjectCollectionValueModel<ICollection<IDataObject>> Members
+        #region IObjectCollectionValueModel<TCollection> Members
 
         private ObjectClass _referencedClass = null;
         public ObjectClass ReferencedClass
@@ -685,6 +685,10 @@ namespace Kistl.Client.Models
             }
         }
 
+        public bool? IsInlineEditable
+        {
+            get { return this.objRefProp.IsInlineEditable; }
+        }
         #endregion
 
         #region INotifyCollectionChanged Members
@@ -703,6 +707,7 @@ namespace Kistl.Client.Models
         }
 
         #endregion
+
     }
 
     public class ObjectCollectionPropertyValueModel

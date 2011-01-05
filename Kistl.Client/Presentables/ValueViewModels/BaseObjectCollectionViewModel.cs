@@ -66,7 +66,11 @@ namespace Kistl.Client.Presentables.ValueViewModels
         protected virtual GridDisplayConfiguration CreateDisplayedColumns()
         {
             var result = new GridDisplayConfiguration(FrozenContext);
-            result.BuildColumns(ReferencedClass, false);
+            GridDisplayConfiguration.Mode mode = (ObjectCollectionModel.IsInlineEditable ?? ReferencedClass.IsSimpleObject) ? 
+                  GridDisplayConfiguration.Mode.Editable 
+                : GridDisplayConfiguration.Mode.ReadOnly;
+
+            result.BuildColumns(ReferencedClass, mode);
             return result;
         }
 

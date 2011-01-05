@@ -873,7 +873,7 @@ namespace Kistl.Client.Presentables.KistlBase
         protected virtual GridDisplayConfiguration CreateDisplayedColumns()
         {
             var result = new GridDisplayConfiguration(FrozenContext);
-            result.BuildColumns(this._type, !IsEditable);
+            result.BuildColumns(this._type, IsEditable ? GridDisplayConfiguration.Mode.Editable : GridDisplayConfiguration.Mode.ReadOnly);
 
             DisplayedColumnsCreatedHandler temp = DisplayedColumnsCreated;
             if (temp != null)

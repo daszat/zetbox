@@ -46,7 +46,7 @@ namespace Kistl.App.GUI
         {
             e.Result = String.Format("{0} (default: {1}) [{2}]",
                 obj.Description,
-                obj.DefaultKind,
+                obj.DefaultEditorKind,
                 obj.ViewModelRef == null ? "(no type)" : obj.ViewModelRef.ToString());
         }
 

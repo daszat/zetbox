@@ -32,7 +32,7 @@ namespace Kistl.App.Extensions
             this ViewModelDescriptor pmd,
             Toolkit tk)
         {
-            return GetViewDescriptor(pmd, tk, GetDefaultKind(pmd));
+            return GetViewDescriptor(pmd, tk, GetDefaultEditorKind(pmd));
         }
 
         //// Steps for resolving a ViewModel to View
@@ -63,10 +63,10 @@ namespace Kistl.App.Extensions
             #endregion
 
             // If the ViewModel has a more specific DefaultKind respect its choice
-            if (self.DefaultKind != null 
-                && self.DefaultKind.AndParents().Select(i => i.ExportGuid).Contains(requestedControlKind.ExportGuid))
+            if (self.DefaultEditorKind != null
+                && self.DefaultEditorKind.AndParents().Select(i => i.ExportGuid).Contains(requestedControlKind.ExportGuid))
             {
-                requestedControlKind = self.DefaultKind;
+                requestedControlKind = self.DefaultEditorKind;
             }
             else
             {
@@ -156,9 +156,19 @@ namespace Kistl.App.Extensions
         /// </summary>
         /// <param name="pmd"></param>
         /// <returns></returns>
-        public static ControlKind GetDefaultKind(this ViewModelDescriptor pmd)
+        public static ControlKind GetDefaultEditorKind(this ViewModelDescriptor pmd)
         {
-            return pmd.AndParents().Select(p => p.DefaultKind).FirstOrDefault(dk => dk != null);
+            return pmd.AndParents().Select(p => p.DefaultEditorKind).FirstOrDefault(ck => ck != null);
+        }
+
+        /// <summary>
+        /// Returns the default display control kind of a given ViewModelDescriptor.
+        /// </summary>
+        /// <param name="pmd"></param>
+        /// <returns></returns>
+        public static ControlKind GetDefaultDisplayKind(this ViewModelDescriptor pmd)
+        {
+            return pmd.AndParents().Select(p => p.DefaultDisplayKind).FirstOrDefault(ck => ck != null) ?? pmd.GetDefaultEditorKind();
         }
 
         /// <summary>
@@ -166,9 +176,9 @@ namespace Kistl.App.Extensions
         /// </summary>
         /// <param name="pmd"></param>
         /// <returns></returns>
-        public static ControlKind GetDefaultGridCellKind(this ViewModelDescriptor pmd)
+        public static ControlKind GetDefaultGridCellPreEditorKind(this ViewModelDescriptor pmd)
         {
-            return pmd.AndParents().Select(p => p.DefaultGridCellKind).FirstOrDefault(dk => dk != null) ?? pmd.GetDefaultKind();
+            return pmd.AndParents().Select(p => p.DefaultGridCellPreEditorKind).FirstOrDefault(ck => ck != null) ?? pmd.GetDefaultGridCellDisplayKind();
 
         }
         /// <summary>
@@ -178,7 +188,16 @@ namespace Kistl.App.Extensions
         /// <returns></returns>
         public static ControlKind GetDefaultGridCellDisplayKind(this ViewModelDescriptor pmd)
         {
-            return pmd.AndParents().Select(p => p.DefaultGridCellDisplayKind).FirstOrDefault(dk => dk != null) ?? pmd.GetDefaultGridCellKind();
+            return pmd.AndParents().Select(p => p.DefaultGridCellDisplayKind).FirstOrDefault(ck => ck != null) ?? pmd.GetDefaultDisplayKind();
+        }
+        /// <summary>
+        /// Returns the default editor control kind for use in grid cells of a given ViewModelDescriptor. If empty, default grid cell is returned
+        /// </summary>
+        /// <param name="pmd"></param>
+        /// <returns></returns>
+        public static ControlKind GetDefaultGridCellEditorKind(this ViewModelDescriptor pmd)
+        {
+            return pmd.AndParents().Select(p => p.DefaultGridCellEditorKind).FirstOrDefault(ck => ck != null) ?? pmd.GetDefaultEditorKind();
         }
 
         /// <summary>
