@@ -951,6 +951,7 @@ namespace Kistl.Client.Presentables.KistlBase
         /// </summary>
         private void LoadInstances()
         {
+            OnUpdateFromUI();
             // Can execute?
             if (Filter.Count(f => !f.Enabled && f.Required) > 0) return;
 

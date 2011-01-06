@@ -30,7 +30,6 @@ namespace Kistl.Client.WPF.View.KistlBase
     public partial class InstanceListHorizontalDisplay
         : InstanceListBaseDisplay
     {
-
         /// <summary>
         /// Initializes a new instance of the ObjectClassDisplay class.
         /// </summary>

@@ -133,7 +133,13 @@ namespace Kistl.Client.WPF.View.KistlBase
                 }
                 // Attach to selection changed event on ViewModel side
                 ViewModel.SelectedItems.CollectionChanged += ViewModel_SelectedItems_CollectionChanged;
+                ViewModel.UpdateFromUI += new EventHandler(ViewModel_UpdateFromUI);
             }
+        }
+
+        void ViewModel_UpdateFromUI(object sender, EventArgs e)
+        {
+            WPFHelper.MoveFocus();
         }
 
         #region HeaderClickManagement
@@ -188,6 +194,11 @@ namespace Kistl.Client.WPF.View.KistlBase
             }
         }
         #endregion
+
+        protected void RefreshCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            ViewModel.ReloadInstances();
+        }
 
         #region IHasViewModel<DataTypeViewModel> Members
 

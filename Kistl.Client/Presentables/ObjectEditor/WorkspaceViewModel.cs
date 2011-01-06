@@ -195,6 +195,8 @@ namespace Kistl.Client.Presentables.ObjectEditor
 
         private IEnumerable<string> GetErrors()
         {
+            OnUpdateFromUI();
+
             return DataContext.AttachedObjects
                 .Where(o => o.ObjectState == DataObjectState.Modified || o.ObjectState == DataObjectState.New)
                 .OfType<IDataErrorInfo>()
@@ -218,15 +220,6 @@ namespace Kistl.Client.Presentables.ObjectEditor
             }
         }
 
-        public event EventHandler UpdateFromUI;
-        public void OnUpdateFromUI()
-        {
-            EventHandler temp = UpdateFromUI;
-            if (temp != null)
-            {
-                temp(this, EventArgs.Empty);
-            }
-        }
         #endregion
 
         #region AbortCommand
