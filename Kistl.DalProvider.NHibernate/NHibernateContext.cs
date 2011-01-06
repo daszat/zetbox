@@ -70,6 +70,8 @@ namespace Kistl.DalProvider.NHibernate
 
         public override IPersistenceObject Attach(IPersistenceObject obj)
         {
+            if (obj == null) { throw new ArgumentNullException("obj"); }
+
             // Handle created Objects
             if (obj.ID == Helper.INVALIDID)
             {
