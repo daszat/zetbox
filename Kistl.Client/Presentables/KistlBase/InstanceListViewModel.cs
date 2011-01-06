@@ -803,6 +803,54 @@ namespace Kistl.Client.Presentables.KistlBase
             }
         }
 
+        private bool _allowAddNew = false;
+        /// <summary>
+        /// If true, allow add new Items in the list directly.
+        /// </summary>
+        /// <remarks>
+        /// Default is false. Returnes always false, if IsEditable is set to false.
+        /// </remarks>
+        public bool AllowAddNew
+        {
+            get
+            {
+                if (!IsEditable) return false;
+                return _allowAddNew;
+            }
+            set
+            {
+                if (_allowAddNew != value)
+                {
+                    _allowAddNew = value;
+                    OnPropertyChanged("AllowAddNew");
+                }
+            }
+        }
+
+        private bool _allowDelete = false;
+        /// <summary>
+        /// If true, allow deleting Items in the list directly.
+        /// </summary>
+        /// <remarks>
+        /// Default is false. Returnes always false, if IsEditable is set to false.
+        /// </remarks>
+        public bool AllowDelete
+        {
+            get
+            {
+                if (!IsEditable) return false;
+                return _allowDelete;
+            }
+            set
+            {
+                if (_allowDelete != value)
+                {
+                    _allowDelete = value;
+                    OnPropertyChanged("AllowDelete");
+                }
+            }
+        }
+
         /// <returns>the default icon of this <see cref="DataType"/></returns>
         public Kistl.App.GUI.Icon Icon
         {

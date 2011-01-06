@@ -48,8 +48,8 @@
                             Margin="10"
                             BorderThickness="0"
                             ItemsSource="{Binding ProxyInstances}"
-                            CanUserAddRows="True"
-                            CanUserDeleteRows="True"
+                            CanUserAddRows="{Binding AllowAddNew}"
+                            CanUserDeleteRows="{Binding AllowDelete}"
                             AutoGenerateColumns="False"
                             SelectionChanged="lst_SelectionChanged"
                             GridViewColumnHeader.Click="ListView_HeaderClick">

@@ -67,7 +67,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
         protected virtual GridDisplayConfiguration CreateDisplayedColumns()
         {
             var result = new GridDisplayConfiguration();
-            GridDisplayConfiguration.Mode mode = (ObjectCollectionModel.IsInlineEditable ?? ReferencedClass.IsSimpleObject) ? 
+            GridDisplayConfiguration.Mode mode = IsInlineEditable ? 
                   GridDisplayConfiguration.Mode.Editable 
                 : GridDisplayConfiguration.Mode.ReadOnly;
 
@@ -119,6 +119,15 @@ namespace Kistl.Client.Presentables.ValueViewModels
         }
 
         #region Allow*
+
+        public bool IsInlineEditable
+        {
+            get
+            {
+                return ObjectCollectionModel.IsInlineEditable ?? ReferencedClass.IsSimpleObject;
+            }
+        }
+
         private bool _allowAddNew = true;
         public bool AllowAddNew
         {
@@ -132,6 +141,23 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 {
                     _allowAddNew = value;
                     OnPropertyChanged("AllowAddNew");
+                }
+            }
+        }
+
+        private bool? _allowInlineAddNew = null;
+        public bool AllowInlineAddNew
+        {
+            get
+            {
+                return AllowAddNew && IsInlineEditable && _allowInlineAddNew != false;
+            }
+            set
+            {
+                if (_allowInlineAddNew != value)
+                {
+                    _allowInlineAddNew = value;
+                    OnPropertyChanged("AllowInlineAddNew");
                 }
             }
         }

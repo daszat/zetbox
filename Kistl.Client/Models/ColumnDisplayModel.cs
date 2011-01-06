@@ -55,12 +55,17 @@ namespace Kistl.Client.Models
         {
         }
 
+        public ColumnDisplayModel(string header, string name, ControlKind kind, ControlKind gridPreviewKind)
+            : this(header, name, kind, gridPreviewKind, ColumnType.PropertyModel)
+        {
+        }
+
         public ColumnDisplayModel(string header, string name, ControlKind kind, ControlKind gridPreviewKind, ColumnType type)
         {
             this.Header = header;
             this.Name = name;
             this.ControlKind = kind;
-            this.GridPreEditKind = gridPreviewKind;
+            this.GridPreEditKind = gridPreviewKind ?? kind;
             this.Type = type;
         }
 

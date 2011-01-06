@@ -30,8 +30,8 @@
                         ItemsSource="{Binding ValueProxies, Mode=OneWay, ValidatesOnDataErrors=true}"
                         MinHeight="50"
                         MouseDoubleClick="ItemActivatedHandler"
-                        CanUserAddRows="True"
-                        CanUserDeleteRows="True"
+                        CanUserAddRows="{Binding AllowInlineAddNew}"
+                        CanUserDeleteRows="{Binding AllowDelete}"
                         AutoGenerateColumns="False"
                         SelectionChanged="lst_SelectionChanged">
             <wpftk:DataGrid.ContextMenu>
