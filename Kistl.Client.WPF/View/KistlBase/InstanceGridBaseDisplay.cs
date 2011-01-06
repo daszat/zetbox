@@ -69,6 +69,7 @@ namespace Kistl.Client.WPF.View.KistlBase
             e.Handled = true;
         }
 
+        #region Selection Changed
         private bool _selectedItemsChangedByViewModel = false;
         private bool _selectedItemsChangedByList = false;
 
@@ -91,7 +92,7 @@ namespace Kistl.Client.WPF.View.KistlBase
                 _selectedItemsChangedByList = false;
             }
         }
-
+        
         void ViewModel_SelectedProxies_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             if (_selectedItemsChangedByList) return;
@@ -114,6 +115,24 @@ namespace Kistl.Client.WPF.View.KistlBase
                 _selectedItemsChangedByViewModel = false;
             }
         }
+        #endregion
+
+        #region Continue Edit
+        bool continueEdit = false;
+        protected void lst_CellEditEnding(object sender, Microsoft.Windows.Controls.DataGridCellEditEndingEventArgs e)
+        {
+            continueEdit = e.EditAction == Microsoft.Windows.Controls.DataGridEditAction.Commit;
+        }
+
+        protected void lst_CurrentCellChanged(object sender, EventArgs e)
+        {
+            if (continueEdit)
+            {
+                DataGrid.BeginEdit();
+            }
+            continueEdit = false;
+        }
+        #endregion
 
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {

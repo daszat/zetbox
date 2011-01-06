@@ -25,8 +25,9 @@ namespace Kistl.Client.WPF.Toolkit
 
             // Change keyboard focus.
             if (elementWithFocus != null)
-            {                
-                elementWithFocus.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
+            {             
+                // Causes infinite loops with error validation
+                // elementWithFocus.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
             }
         }
 

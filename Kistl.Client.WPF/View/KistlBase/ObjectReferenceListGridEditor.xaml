@@ -33,6 +33,8 @@
                         CanUserAddRows="{Binding AllowInlineAddNew}"
                         CanUserDeleteRows="{Binding AllowDelete}"
                         AutoGenerateColumns="False"
+                        CellEditEnding="lst_CellEditEnding"
+                        CurrentCellChanged="lst_CurrentCellChanged"
                         SelectionChanged="lst_SelectionChanged">
             <wpftk:DataGrid.ContextMenu>
                 <ContextMenu ItemsSource="{Binding Commands}">

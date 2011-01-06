@@ -60,6 +60,8 @@
                             CanUserDeleteRows="{Binding AllowDelete}"
                             AutoGenerateColumns="False"
                             SelectionChanged="lst_SelectionChanged"
+                            CellEditEnding="lst_CellEditEnding"
+                            CurrentCellChanged="lst_CurrentCellChanged"
                             GridViewColumnHeader.Click="ListView_HeaderClick">
                 <wpftk:DataGrid.Resources>
                     <Style TargetType="ListViewItem">
