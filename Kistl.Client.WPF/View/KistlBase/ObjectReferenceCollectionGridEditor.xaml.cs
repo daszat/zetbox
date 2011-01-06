@@ -22,6 +22,7 @@ namespace Kistl.Client.WPF.View.KistlBase
     using Kistl.Client.Presentables.ValueViewModels;
     using Kistl.Client.WPF.Commands;
     using Microsoft.Windows.Controls;
+    using Kistl.Client.WPF.Toolkit;
 
     /// <summary>
     /// Interaction logic for DataObjectListView.xaml
@@ -58,8 +59,6 @@ namespace Kistl.Client.WPF.View.KistlBase
             if (ViewModel != null && ViewModel.SelectedItem != null)
             {
                 ViewModel.ActivateItem(ViewModel.SelectedItem, true);
-                // Attach to selection changed event on ViewModel side
-                ViewModel.SelectedItems.CollectionChanged += ViewModel_SelectedItems_CollectionChanged;
             }
         }
 
@@ -76,8 +75,8 @@ namespace Kistl.Client.WPF.View.KistlBase
                 if (e.OriginalSource == lst)
                 {
                     e.Handled = true;
-                    e.RemovedItems.ForEach<DataObjectViewModel>(i => ViewModel.SelectedItems.Remove(i));
-                    e.AddedItems.ForEach<DataObjectViewModel>(i => ViewModel.SelectedItems.Add(i));
+                    e.RemovedItems.ForEach<DataObjectViewModelProxy>(i => ViewModel.SelectedProxies.Remove(i));
+                    e.AddedItems.ForEach<DataObjectViewModelProxy>(i => ViewModel.SelectedProxies.Add(i, true));
                 }
             }
             finally
@@ -110,78 +109,18 @@ namespace Kistl.Client.WPF.View.KistlBase
         }
         #endregion
 
-        #region RefreshGridView
-        private void RefreshGridView()
-        {
-            if (ViewModel == null) return;
-
-            GridDisplayConfiguration cfg = ViewModel.DisplayedColumns;
-            if (cfg.ShowIcon)
-            {
-                lst.Columns.Add(new DataGridTemplateColumn() { CellTemplate = (DataTemplate)FindResource("iconCellTemplate") });
-            }
-
-            if (cfg.ShowId)
-            {
-                var col = new DataGridTemplateColumn() { CellTemplate = (DataTemplate)FindResource("idCellTemplate"), Header = "ID" };
-                lst.Columns.Add(col);
-                SetSortPropertyName(col, "ID");
-            }
-
-            if (cfg.ShowName)
-            {
-                var col = new DataGridTemplateColumn() { CellTemplate = (DataTemplate)FindResource("nameCellTemplate"), Header = "Name" };
-                lst.Columns.Add(col);
-                // Not possible
-                // SetSortPropertyName(col, "Name");               
-            }
-
-            foreach (var desc in cfg.Columns)
-            {
-                // TODO: use default controls after moving labeling to infrastructure
-                var editorFactory = new FrameworkElementFactory(typeof(ContentPresenter));
-                var labelFactory = new FrameworkElementFactory(typeof(ContentPresenter));
-                switch (desc.Type)
-                {
-                    case ColumnDisplayModel.ColumnType.MethodModel:
-                        editorFactory.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(String.Format("ActionViewModelsByName[{0}]", desc.Name)), Mode = BindingMode.OneWay });
-                        labelFactory.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(String.Format("ActionViewModelsByName[{0}]", desc.Name)), Mode = BindingMode.OneWay });
-                        break;
-                    case ColumnDisplayModel.ColumnType.PropertyModel:
-                        editorFactory.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(String.Format("PropertyModelsByName[{0}]", desc.Name)), Mode = BindingMode.OneWay });
-                        labelFactory.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(String.Format("PropertyModelsByName[{0}]", desc.Name)), Mode = BindingMode.OneWay });
-                        break;
-                    case ColumnDisplayModel.ColumnType.Property:
-                        editorFactory.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(desc.Name), Mode = BindingMode.OneWay });
-                        labelFactory.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(desc.Name), Mode = BindingMode.OneWay });
-                        break;
-                }
-                editorFactory.SetValue(VisualTypeTemplateSelector.RequestedKindProperty, desc.ControlKind);
-                editorFactory.SetValue(ContentPresenter.ContentTemplateSelectorProperty, FindResource("defaultTemplateSelector"));
-                editorFactory.SetValue(FrameworkElement.HorizontalAlignmentProperty, HorizontalAlignment.Stretch);
-
-                labelFactory.SetValue(VisualTypeTemplateSelector.RequestedKindProperty, desc.GridPreEditKind);
-                labelFactory.SetValue(ContentPresenter.ContentTemplateSelectorProperty, FindResource("defaultTemplateSelector"));
-                labelFactory.SetValue(FrameworkElement.HorizontalAlignmentProperty, HorizontalAlignment.Stretch);
-
-                var col = new DataGridTemplateColumn() { Header = desc.Header };
-                SetSortPropertyName(col, desc.Name);
-                col.CellTemplate = new DataTemplate() { VisualTree = labelFactory };
-                col.CellEditingTemplate = new DataTemplate() { VisualTree = editorFactory };
-                lst.Columns.Add(col);
-            }
-
-        }
 
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
             base.OnPropertyChanged(e);
-            if (e.Property == FrameworkElement.DataContextProperty)
+            if (ViewModel != null && e.Property == FrameworkElement.DataContextProperty)
             {
-                RefreshGridView();
+                WPFHelper.RefreshGridView(lst, ViewModel.DisplayedColumns, SortPropertyNameProperty);
+                // Attach to selection changed event on ViewModel side
+                ViewModel.SelectedProxies.CollectionChanged += ViewModel_SelectedItems_CollectionChanged;
             }
         }
-        #endregion
+
 
         #region HeaderClickManagement
         GridViewColumnHeader _lastHeaderClicked = null;

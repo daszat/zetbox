@@ -21,6 +21,7 @@ namespace Kistl.Client.WPF.View.KistlBase
     using Kistl.Client.Presentables;
     using Kistl.Client.Presentables.ValueViewModels;
     using Kistl.Client.WPF.Commands;
+    using Kistl.Client.WPF.Toolkit;
 
     /// <summary>
     /// Interaction logic for DataObjectListView.xaml
@@ -109,72 +110,14 @@ namespace Kistl.Client.WPF.View.KistlBase
         }
         #endregion
 
-        #region RefreshGridView
-        private void RefreshGridView()
-        {
-            if (ViewModel == null) return;
-
-            GridView view = new GridView() { AllowsColumnReorder = true };
-            lst.View = view;
-            GridDisplayConfiguration cfg = ViewModel.DisplayedColumns;
-            if (cfg.ShowIcon)
-            {
-                view.Columns.Add(new GridViewColumn() { CellTemplate = (DataTemplate)FindResource("iconCellTemplate") });
-            }
-
-            if (cfg.ShowId)
-            {
-                var col = new GridViewColumn() { CellTemplate = (DataTemplate)FindResource("idCellTemplate"), Header = "ID" };
-                view.Columns.Add(col);
-                SetSortPropertyName(col, "ID");
-            }
-
-            if (cfg.ShowName)
-            {
-                var col = new GridViewColumn() { CellTemplate = (DataTemplate)FindResource("nameCellTemplate"), Header = "Name" };
-                view.Columns.Add(col);
-                // Not possible
-                // SetSortPropertyName(col, "Name");               
-            }
-
-            foreach (var desc in cfg.Columns)
-            {
-                // TODO: use default controls after moving labeling to infrastructure
-                var col = new GridViewColumn() { Header = desc.Header };
-                SetSortPropertyName(col, desc.Name);
-
-                DataTemplate result = new DataTemplate();
-                var cpFef = new FrameworkElementFactory(typeof(ContentPresenter));
-                switch (desc.Type)
-                {
-                    case ColumnDisplayModel.ColumnType.MethodModel:
-                        cpFef.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(String.Format("ActionViewModelsByName[{0}]", desc.Name)), Mode = BindingMode.OneWay });
-                        break;
-                    case ColumnDisplayModel.ColumnType.PropertyModel:
-                        cpFef.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(String.Format("PropertyModelsByName[{0}]", desc.Name)), Mode = BindingMode.OneWay });
-                        break;
-                    case ColumnDisplayModel.ColumnType.Property:
-                        cpFef.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(desc.Name), Mode = BindingMode.OneWay });
-                        break;
-                }
-                cpFef.SetValue(VisualTypeTemplateSelector.RequestedKindProperty, desc.ControlKind);
-                cpFef.SetValue(ContentPresenter.ContentTemplateSelectorProperty, FindResource("defaultTemplateSelector"));
-                result.VisualTree = cpFef;
-                col.CellTemplate = result;
-                view.Columns.Add(col);
-            }
-
-        }
-
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
             base.OnPropertyChanged(e);
-            if (e.Property == FrameworkElement.DataContextProperty)
+            if (ViewModel != null && e.Property == FrameworkElement.DataContextProperty)
             {
-                RefreshGridView();
+                WPFHelper.RefreshGridView(lst, ViewModel.DisplayedColumns, SortPropertyNameProperty);
             }
-        }
-        #endregion
+        }        
 
         #region HeaderClickManagement
         GridViewColumnHeader _lastHeaderClicked = null;

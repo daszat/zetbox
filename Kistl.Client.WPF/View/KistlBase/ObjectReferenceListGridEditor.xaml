@@ -27,7 +27,7 @@
         <!-- configured from code, see RefreshGridView() -->
         <wpftk:DataGrid x:Name="lst"
                         BorderThickness="0"
-                        ItemsSource="{Binding Value, Mode=OneWay, ValidatesOnDataErrors=true}"
+                        ItemsSource="{Binding ValueProxies, Mode=OneWay, ValidatesOnDataErrors=true}"
                         MinHeight="50"
                         MouseDoubleClick="ItemActivatedHandler"
                         CanUserAddRows="True"

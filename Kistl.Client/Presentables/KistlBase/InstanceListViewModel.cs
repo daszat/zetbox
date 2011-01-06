@@ -512,16 +512,8 @@ namespace Kistl.Client.Presentables.KistlBase
             }
         }
 
-        public class Proxy
-        {
-            public Proxy()
-            {
-            }
-
-            public DataObjectViewModel Object { get; set; }
-        }
-        
-        private DataObjectViewModel GetObjectFromProxy(Proxy p)
+        #region Proxy
+        private DataObjectViewModel GetObjectFromProxy(DataObjectViewModelProxy p)
         {
             if (p.Object == null)
             {
@@ -532,28 +524,28 @@ namespace Kistl.Client.Presentables.KistlBase
             return p.Object;
         }
 
+        Dictionary<DataObjectViewModel, DataObjectViewModelProxy> _proxyCache = new Dictionary<DataObjectViewModel, DataObjectViewModelProxy>();
+        private DataObjectViewModelProxy GetProxy(DataObjectViewModel vm)
+        {
+            DataObjectViewModelProxy result;
+            if (!_proxyCache.TryGetValue(vm, out result))
+            {
+                result = new DataObjectViewModelProxy() { Object = vm };
+                _proxyCache[vm] = result;
+            }
+            return result;
+        }
+
         /// <summary>
         /// Hack for those who do not check element types by traversing from inherited interfaces
         /// e.g. DataGrid from WPF
         /// </summary>
-        public sealed class ProxyList : AbstractObservableProjectedList<DataObjectViewModel, Proxy>, IList, IList<Proxy>
+        public sealed class ProxyList : AbstractObservableProjectedList<DataObjectViewModel, DataObjectViewModelProxy>, IList, IList<DataObjectViewModelProxy>
         {
-            public ProxyList(INotifyCollectionChanged notifyingCollection, Func<DataObjectViewModel, Proxy> select, Func<Proxy, DataObjectViewModel> inverter)
+            public ProxyList(INotifyCollectionChanged notifyingCollection, Func<DataObjectViewModel, DataObjectViewModelProxy> select, Func<DataObjectViewModelProxy, DataObjectViewModel> inverter)
                 : base(notifyingCollection, notifyingCollection, select, inverter, false)
             {
             }
-        }
-
-        Dictionary<DataObjectViewModel, Proxy> _proxyCache = new Dictionary<DataObjectViewModel, Proxy>();
-        private Proxy GetProxy(DataObjectViewModel vm)
-        {
-            Proxy result;
-            if (!_proxyCache.TryGetValue(vm, out result))
-            {
-                result = new Proxy() { Object = vm };
-                _proxyCache[vm] = result;
-            }
-            return result;
         }
 
         private ProxyList _proxyInstances = null;
@@ -575,14 +567,14 @@ namespace Kistl.Client.Presentables.KistlBase
             }
         }
 
-        private ObservableProjectedList<DataObjectViewModel, Proxy> _selectedProxies = null;
-        public ObservableProjectedList<DataObjectViewModel, Proxy> SelectedProxies
+        private ObservableProjectedList<DataObjectViewModel, DataObjectViewModelProxy> _selectedProxies = null;
+        public ObservableProjectedList<DataObjectViewModel, DataObjectViewModelProxy> SelectedProxies
         {
             get
             {
                 if (_selectedProxies == null)
                 {
-                    _selectedProxies = new ObservableProjectedList<DataObjectViewModel, Proxy>(
+                    _selectedProxies = new ObservableProjectedList<DataObjectViewModel, DataObjectViewModelProxy>(
                         SelectedItems,
                         (vm) => GetProxy(vm),
                         (p) => GetObjectFromProxy(p));
@@ -590,8 +582,9 @@ namespace Kistl.Client.Presentables.KistlBase
                 return _selectedProxies;
             }
         }
+        #endregion
 
-
+        #region SelectedItems
         private ObservableCollection<DataObjectViewModel> _selectedItems = null;
         public ObservableCollection<DataObjectViewModel> SelectedItems
         {
@@ -651,6 +644,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 SelectedItem = value;
             }
         }
+        #endregion
 
         private bool _ShowMasterDetail = false;
         /// <summary>

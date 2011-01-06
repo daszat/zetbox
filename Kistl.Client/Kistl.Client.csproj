@@ -222,6 +222,7 @@
     <Compile Include="Presentables\KistlBase\TypeRefPropertyViewModel.Commands.cs" />
     <Compile Include="Presentables\KistlBase\TypeRefPropertyViewModel.cs" />
     <Compile Include="Presentables\KistlDebuggerAsViewModel.cs" />
+    <Compile Include="Presentables\ValueViewModels\DataObjectViewModelProxy.cs" />
     <Compile Include="Presentables\ValueViewModels\ObjectReferenceViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

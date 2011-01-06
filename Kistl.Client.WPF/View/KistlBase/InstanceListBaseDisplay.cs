@@ -21,6 +21,7 @@ namespace Kistl.Client.WPF.View.KistlBase
     using Kistl.Client.Models;
     using Kistl.Client.Presentables;
     using Kistl.Client.Presentables.KistlBase;
+    using Kistl.Client.WPF.Toolkit;
 
     public abstract class InstanceListBaseDisplay : UserControl, IHasViewModel<InstanceListViewModel>
     {
@@ -118,65 +119,7 @@ namespace Kistl.Client.WPF.View.KistlBase
             }
         }
 
-        #region RefreshGridView
-        protected void RefreshGridView()
-        {
-            GridView view = new GridView() { AllowsColumnReorder = true };
-            ListView.View = view;
-            GridDisplayConfiguration cfg = ViewModel.DisplayedColumns;
-            if (cfg.ShowIcon)
-            {
-                view.Columns.Add(new GridViewColumn() { CellTemplate = (DataTemplate)FindResource("iconCellTemplate") });
-            }
-
-            if (cfg.ShowId)
-            {
-                var col = new GridViewColumn() { CellTemplate = (DataTemplate)FindResource("idCellTemplate"), Header = "ID" };
-                view.Columns.Add(col);
-                // SetSortPropertyName(col, "ID");
-            }
-
-            if (cfg.ShowName)
-            {
-                var col = new GridViewColumn() { CellTemplate = (DataTemplate)FindResource("nameCellTemplate"), Header = "Name" };
-                view.Columns.Add(col);
-                // Not possible
-                // SetSortPropertyName(col, "Name");               
-            }
-
-            foreach (var desc in cfg.Columns)
-            {
-                // TODO: use default controls after moving labeling to infrastructure
-                var col = new GridViewColumn() { Header = desc.Header };
-                SetSortPropertyName(col, desc.Name);
-
-                DataTemplate result = new DataTemplate();
-                var cpFef = new FrameworkElementFactory(typeof(ContentPresenter));
-                switch (desc.Type)
-                {
-                    case ColumnDisplayModel.ColumnType.MethodModel:
-                        cpFef.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(String.Format("ActionViewModelsByName[{0}]", desc.Name)), Mode = BindingMode.OneWay });
-                        break;
-                    case ColumnDisplayModel.ColumnType.PropertyModel:
-                        {
-                            var tmp = desc.Name.Split('.').Select(i => String.Format("PropertyModelsByName[{0}]", i));
-                            var binding = string.Join(".Value.", tmp.ToArray());
-                            cpFef.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(binding), Mode = BindingMode.OneWay });
-                            break;
-                        }
-                    case ColumnDisplayModel.ColumnType.Property:
-                        cpFef.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(desc.Name), Mode = BindingMode.OneWay });
-                        break;
-                }
-                cpFef.SetValue(VisualTypeTemplateSelector.RequestedKindProperty, desc.ControlKind);
-                cpFef.SetValue(ContentPresenter.ContentTemplateSelectorProperty, FindResource("defaultTemplateSelector"));
-                cpFef.SetValue(FrameworkElement.HorizontalAlignmentProperty, HorizontalAlignment.Stretch);
-                result.VisualTree = cpFef;
-                col.CellTemplate = result;
-                view.Columns.Add(col);
-            }
-
-        }
+        
 
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
@@ -185,14 +128,13 @@ namespace Kistl.Client.WPF.View.KistlBase
             {
                 if (ViewModel.ViewMethod == InstanceListViewMethod.Details)
                 {
-                    RefreshGridView();
+                    WPFHelper.RefreshGridView(ListView, ViewModel.DisplayedColumns, SortPropertyNameProperty);
                     ListView.ItemContainerStyle = Application.Current.Resources["GridViewItemContainerStyle"] as Style;
                 }
                 // Attach to selection changed event on ViewModel side
                 ViewModel.SelectedItems.CollectionChanged += ViewModel_SelectedItems_CollectionChanged;
             }
         }
-        #endregion
 
         #region HeaderClickManagement
         GridViewColumnHeader _lastHeaderClicked = null;

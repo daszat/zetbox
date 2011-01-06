@@ -22,6 +22,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
     public abstract class BaseObjectCollectionViewModel<TCollection, TModelCollection>
         : ValueViewModel<TCollection, TModelCollection>
         where TModelCollection : ICollection<IDataObject>
+        where TCollection : INotifyCollectionChanged
     {
         public new delegate BaseObjectCollectionViewModel<TCollection, TModelCollection> Factory(IKistlContext dataCtx, IValueModel mdl);
 
@@ -456,6 +457,79 @@ namespace Kistl.Client.Presentables.ValueViewModels
             ValueModel.Value.Clear();
         }
 
+        #endregion
+
+        #region Proxy
+        private DataObjectViewModel GetObjectFromProxy(DataObjectViewModelProxy p)
+        {
+            if (p.Object == null)
+            {
+                var obj = DataContext.Create(DataContext.GetInterfaceType(this.ReferencedClass.GetDataType()));
+                p.Object = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, obj);
+                _proxyCache[p.Object.Object] = p;
+            }
+            return p.Object;
+        }
+
+        Dictionary<IDataObject, DataObjectViewModelProxy> _proxyCache = new Dictionary<IDataObject, DataObjectViewModelProxy>();
+        private DataObjectViewModelProxy GetProxy(IDataObject obj)
+        {
+            DataObjectViewModelProxy result;
+            if (!_proxyCache.TryGetValue(obj, out result))
+            {
+                result = new DataObjectViewModelProxy() { Object = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, obj) };
+                _proxyCache[obj] = result;
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Hack for those who do not check element types by traversing from inherited interfaces
+        /// e.g. DataGrid from WPF
+        /// </summary>
+        public sealed class ProxyList : AbstractObservableProjectedList<IDataObject, DataObjectViewModelProxy>, IList, IList<DataObjectViewModelProxy>
+        {
+            public ProxyList(INotifyCollectionChanged notifier, object collection, Func<IDataObject, DataObjectViewModelProxy> select, Func<DataObjectViewModelProxy, IDataObject> inverter)
+                : base(notifier, collection, select, inverter, false)
+            {
+            }
+        }
+
+        private ProxyList _proxyInstances = null;
+        /// <summary>
+        /// Allow instances to be added external
+        /// </summary>
+        public ProxyList ValueProxies
+        {
+            get
+            {
+                if (_proxyInstances == null)
+                {
+                    _proxyInstances = new ProxyList(
+                        ObjectCollectionModel,
+                        ObjectCollectionModel.Value,
+                        (vm) => GetProxy(vm),
+                        (p) => GetObjectFromProxy(p).Object);
+                }
+                return _proxyInstances;
+            }
+        }
+
+        private ObservableProjectedList<DataObjectViewModel, DataObjectViewModelProxy> _selectedProxies = null;
+        public ObservableProjectedList<DataObjectViewModel, DataObjectViewModelProxy> SelectedProxies
+        {
+            get
+            {
+                if (_selectedProxies == null)
+                {
+                    _selectedProxies = new ObservableProjectedList<DataObjectViewModel, DataObjectViewModelProxy>(
+                        SelectedItems,
+                        (vm) => GetProxy(vm.Object),
+                        (p) => GetObjectFromProxy(p));
+                }
+                return _selectedProxies;
+            }
+        }
         #endregion
 
         protected override void ParseValue(string str)

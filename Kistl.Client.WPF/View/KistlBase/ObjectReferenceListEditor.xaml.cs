@@ -21,6 +21,7 @@ namespace Kistl.Client.WPF.View.KistlBase
     using Kistl.Client.Presentables;
     using Kistl.Client.Presentables.ValueViewModels;
     using Kistl.Client.WPF.Commands;
+    using Kistl.Client.WPF.Toolkit;
 
     /// <summary>
     /// Interaction logic for DataObjectListView.xaml
@@ -42,60 +43,13 @@ namespace Kistl.Client.WPF.View.KistlBase
             }
         }
 
-        private void RefreshGridView()
-        {
-            GridView view = new GridView() { AllowsColumnReorder = true };
-            lst.View = view;
-            GridDisplayConfiguration cfg = ViewModel.DisplayedColumns;
-            if (cfg.ShowIcon)
-            {
-                view.Columns.Add(new GridViewColumn() { CellTemplate = (DataTemplate)FindResource("iconCellTemplate") });
-            }
-
-            if (cfg.ShowId)
-            {
-                view.Columns.Add(new GridViewColumn() { CellTemplate = (DataTemplate)FindResource("idCellTemplate"), Header = "ID" });
-            }
-
-            if (cfg.ShowName)
-            {
-                view.Columns.Add(new GridViewColumn() { CellTemplate = (DataTemplate)FindResource("nameCellTemplate"), Header = "Name" });
-            }
-
-            foreach (var desc in cfg.Columns)
-            {
-                // TODO: use default controls after moving labeling to infrastructure
-                var col = new GridViewColumn() { Header = desc };
-
-                DataTemplate result = new DataTemplate();
-                var cpFef = new FrameworkElementFactory(typeof(ContentPresenter));
-                switch (desc.Type)
-                {
-                    case ColumnDisplayModel.ColumnType.MethodModel:
-                        cpFef.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(String.Format("ActionViewModelsByName[{0}]", desc.Name)), Mode = BindingMode.OneWay });
-                        break;
-                    case ColumnDisplayModel.ColumnType.PropertyModel:
-                        cpFef.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(String.Format("PropertyModelsByName[{0}]", desc.Name)), Mode = BindingMode.OneWay });
-                        break;
-                    case ColumnDisplayModel.ColumnType.Property:
-                        cpFef.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(desc.Name), Mode = BindingMode.OneWay });
-                        break;
-                }
-                cpFef.SetValue(VisualTypeTemplateSelector.RequestedKindProperty, desc.ControlKind);
-                cpFef.SetValue(ContentPresenter.ContentTemplateSelectorProperty, FindResource("defaultTemplateSelector"));
-                result.VisualTree = cpFef;
-                col.CellTemplate = result;
-                view.Columns.Add(col);
-            }
-
-        }
 
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
             base.OnPropertyChanged(e);
             if (ViewModel != null && e.Property == FrameworkElement.DataContextProperty)
             {
-                RefreshGridView();
+                WPFHelper.RefreshGridView(lst, ViewModel.DisplayedColumns, null);
                 // Attach to selection changed event on ViewModel side
                 ViewModel.SelectedItems.CollectionChanged += ViewModel_SelectedItems_CollectionChanged;
             }
