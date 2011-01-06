@@ -30,7 +30,7 @@
             <ToolBar.ItemTemplate>
                 <DataTemplate>
                     <Button Command="{Binding Converter={StaticResource CommandConverter}}"
-                            CommandParameter="{Binding DataContext.SelectedItems, RelativeSource={RelativeSource AncestorType={x:Type clientKistlBase:InstanceListDisplay}}}"
+                            CommandParameter="{Binding DataContext.SelectedItems, RelativeSource={RelativeSource AncestorType={x:Type clientKistlBase:InstanceGridDisplay}}}"
                             Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
                             Content="{Binding Label}"
                             ToolTip="{Binding ToolTip}" />

@@ -441,7 +441,7 @@ namespace Kistl.Client.Presentables.KistlBase
             {
                 if (_DeleteCommand == null)
                 {
-                    _DeleteCommand = ViewModelFactory.CreateViewModel<DeleteDataObjectCommand.Factory>().Invoke(DataContext, this, IsItemsReadOnly);
+                    _DeleteCommand = ViewModelFactory.CreateViewModel<DeleteDataObjectCommand.Factory>().Invoke(DataContext, this, !IsItemsReadOnly);
                 }
                 return _DeleteCommand;
             }
