@@ -105,7 +105,7 @@ this.WriteObjects("\r\n");
 this.WriteObjects("                // shortcut noops\r\n");
 this.WriteObjects("                if (value == null && this.Proxy.",  name , " == null)\r\n");
 this.WriteObjects("                    return;\r\n");
-this.WriteObjects("                else if (value != null && value.ID == this.Proxy.",  name , ".ID)\r\n");
+this.WriteObjects("                else if (value != null && this.Proxy.",  name , " != null && value.ID == this.Proxy.",  name , ".ID)\r\n");
 this.WriteObjects("                    return;\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("                // cache old value to remove inverse references later\r\n");

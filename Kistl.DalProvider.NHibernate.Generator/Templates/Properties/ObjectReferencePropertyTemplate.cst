@@ -61,7 +61,7 @@
                 // shortcut noops
                 if (value == null && this.Proxy.<%= name %> == null)
                     return;
-                else if (value != null && value.ID == this.Proxy.<%= name %>.ID)
+                else if (value != null && this.Proxy.<%= name %> != null && value.ID == this.Proxy.<%= name %>.ID)
                     return;
 
                 // cache old value to remove inverse references later

@@ -20,9 +20,15 @@ namespace Kistl.DalProvider.NHibernate
         }
         protected override TEntry CreateEntry(object item)
         {
-            throw new NotImplementedException();
+            return (TEntry)ParentObject.Context.Internals().CreateRelationCollectionEntry(ParentObject.Context.GetImplementationType(typeof(TEntry)).ToInterfaceType());
+        }
+        protected override void OnEntryRemoved(TEntry entry)
+        {
+            ParentObject.Context.Delete(entry);
+            base.OnEntryRemoved(entry);
         }
     }
+    
     public class NHibernateBSideCollectionWrapper<TA, TB, TEntry>
         : RelationBSideCollectionWrapper<TA, TB, TEntry, ICollection<TEntry>>
         where TA : class, IDataObject
@@ -35,10 +41,14 @@ namespace Kistl.DalProvider.NHibernate
         }
         protected override TEntry CreateEntry(object item)
         {
-            throw new NotImplementedException();
+            return (TEntry)ParentObject.Context.Internals().CreateRelationCollectionEntry(ParentObject.Context.GetImplementationType(typeof(TEntry)).ToInterfaceType());
+        }
+        protected override void OnEntryRemoved(TEntry entry)
+        {
+            ParentObject.Context.Delete(entry);
+            base.OnEntryRemoved(entry);
         }
     }
-
 
     public class NHibernateASideListWrapper<TA, TB, TEntry>
         : RelationASideListWrapper<TA, TB, TEntry, ICollection<TEntry>>
@@ -52,9 +62,15 @@ namespace Kistl.DalProvider.NHibernate
         }
         protected override TEntry CreateEntry(object item)
         {
-            throw new NotImplementedException();
+            return (TEntry)ParentObject.Context.Internals().CreateRelationCollectionEntry(ParentObject.Context.GetImplementationType(typeof(TEntry)).ToInterfaceType());
+        }
+        protected override void OnEntryRemoved(TEntry entry)
+        {
+            ParentObject.Context.Delete(entry);
+            base.OnEntryRemoved(entry);
         }
     }
+
     public class NHibernateBSideListWrapper<TA, TB, TEntry>
         : RelationBSideListWrapper<TA, TB, TEntry, ICollection<TEntry>>
         where TA : class, IDataObject
@@ -67,7 +83,12 @@ namespace Kistl.DalProvider.NHibernate
         }
         protected override TEntry CreateEntry(object item)
         {
-            throw new NotImplementedException();
+            return (TEntry)ParentObject.Context.Internals().CreateRelationCollectionEntry(ParentObject.Context.GetImplementationType(typeof(TEntry)).ToInterfaceType());
+        }
+        protected override void OnEntryRemoved(TEntry entry)
+        {
+            ParentObject.Context.Delete(entry);
+            base.OnEntryRemoved(entry);
         }
     }
 }

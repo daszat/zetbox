@@ -75,7 +75,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AbstractNHibernateProxy.cs" />
     <Compile Include="IProxyObject.cs" />
     <Compile Include="NHibernateList.cs" />
     <Compile Include="NHibernateQueryTranslatorProvider.cs" />
