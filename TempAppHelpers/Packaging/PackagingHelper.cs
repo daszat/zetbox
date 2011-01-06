@@ -32,7 +32,12 @@ namespace Kistl.App.Packaging
                 .OrderBy(i => i.ObjectClass.Name).ThenBy(i => i.Name).ThenBy(i => i.ExportGuid));
             AddMetaObjects(result, ctx.GetQuery<Relation>().Where(i => i.Module.ID == moduleID)
                 .OrderBy(i => i.A.Type.Name).ThenBy(i => i.Verb).ThenBy(i => i.B.Type.Name).ThenBy(i => i.ExportGuid));
-            AddMetaObjects(result, ctx.GetQuery<RelationEnd>().Where(i => (i.AParent != null && i.AParent.Module.ID == moduleID) || (i.BParent != null && i.BParent.Module.ID == moduleID))
+            // workaround a limitation / mapping error in NHibernate:
+            AddMetaObjects(result, ctx.GetQuery<Relation>().Where(i => i.Module.ID == moduleID)
+                .ToList()
+                .SelectMany(rel => new RelationEnd[] { rel.A, rel.B })
+                .AsQueryable()
+            //AddMetaObjects(result, ctx.GetQuery<RelationEnd>().Where(i => (i.AParent != null && i.AParent.Module.ID == moduleID) || (i.BParent != null && i.BParent.Module.ID == moduleID))
                 .OrderBy(i => i.Type.Name).ThenBy(i => i.RoleName).ThenBy(i => i.ExportGuid));
             AddMetaObjects(result, ctx.GetQuery<EnumerationEntry>().Where(i => i.Enumeration.Module.ID == moduleID)
                 .OrderBy(i => i.Enumeration.Name).ThenBy(i => i.Name).ThenBy(i => i.ExportGuid));
@@ -89,6 +94,8 @@ namespace Kistl.App.Packaging
                 .OrderBy(i => i.A.ControlRef.Assembly.Name).ThenBy(i => i.A.ControlRef.FullName).ThenBy(i => i.A.ExportGuid));
             AddMetaObjects(result, ctx.GetQuery<NavigationScreen>()
                 .Where(i => i.Module.ID == moduleID)
+                .ToList()
+                .AsQueryable()
                 .OrderBy(i => i.Title)
                 .ThenBy(i => i.Parent != null ? i.Parent.Title : String.Empty)
                 .ThenBy(i => i.ExportGuid));
