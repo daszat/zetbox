@@ -409,11 +409,9 @@ namespace Kistl.DalProvider.Client
             // Handle created Objects
             if (obj.ID == Helper.INVALIDID)
             {
-                ((PersistenceObjectBaseImpl)obj).ID = --_newIDCounter;
-                // do not allow to create new objects that have positive IDs
-                if (obj.ID >= Helper.INVALIDID)
+                checked
                 {
-                    throw new ApplicationException(String.Format("Created object with potential ID collision ({0}). Overflow?", obj.ID));
+                    ((PersistenceObjectBaseImpl)obj).ID = --_newIDCounter;
                 }
             }
             else

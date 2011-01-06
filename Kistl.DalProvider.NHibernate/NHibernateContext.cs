@@ -3,6 +3,7 @@ namespace Kistl.DalProvider.NHibernate
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Text;
     using global::NHibernate.Linq;
@@ -20,7 +21,14 @@ namespace Kistl.DalProvider.NHibernate
         private readonly INHibernateImplementationTypeChecker _implChecker;
 
         private readonly ContextCache _attachedObjects;
-        
+
+        /// <summary>
+        /// Counter for newly created Objects to give them a valid ID for the ContextCache
+        /// </summary>
+        [SuppressMessage("Microsoft.Performance", "CA1805:DoNotInitializeUnnecessarily", Justification = "Uses global constant")]
+        private int _newIDCounter = Helper.INVALIDID;
+
+
         internal NHibernateContext(
             IMetaDataResolver metaDataResolver,
             Identity identity,
@@ -62,7 +70,33 @@ namespace Kistl.DalProvider.NHibernate
 
         public override IPersistenceObject Attach(IPersistenceObject obj)
         {
+            // Handle created Objects
+            if (obj.ID == Helper.INVALIDID)
+            {
+                checked
+                {
+                    ((NHibernatePersistenceObject)obj).ID = --_newIDCounter;
+                }
+            }
+            else
+            {
+                // Check if Object is already in this Context
+                var attachedObj = ContainsObject(GetInterfaceType(obj), obj.ID);
+                if (attachedObj != null)
+                {
+                    // already attached, nothing to do
+                    return attachedObj;
+                }
+
+                // Check ID <-> newIDCounter
+                if (obj.ID < _newIDCounter)
+                {
+                    _newIDCounter = obj.ID;
+                }
+            }
+
             _attachedObjects.Add(obj);
+
             return base.Attach(obj);
         }
 
@@ -205,9 +239,14 @@ namespace Kistl.DalProvider.NHibernate
             {
                 foreach (var obj in notifySaveList)
                 {
+                    _attachedObjects.Remove(obj);
                     obj.SaveOrUpdateTo(_nhSession);
                 }
                 _nhSession.Flush();
+                foreach (var obj in notifySaveList)
+                {
+                    _attachedObjects.Add(obj);
+                }
                 Logging.Log.InfoFormat("[{0}] changes submitted.", notifySaveList.Count);
             }
             catch (Exception ex)
