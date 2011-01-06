@@ -30,7 +30,13 @@ namespace Kistl.DalProvider.NHibernate
 
         protected override object WrapResult(object item)
         {
-            return _ctx.AttachAndWrap((IProxyObject)base.WrapResult(item));
+            item = base.WrapResult(item);
+
+            var proxy = item as IProxyObject;
+            if (proxy == null)
+                return item;
+            else
+                return _ctx.AttachAndWrap(proxy);
         }
 
         protected override string ImplementationSuffix
