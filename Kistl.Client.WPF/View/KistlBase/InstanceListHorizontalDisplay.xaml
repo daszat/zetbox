@@ -58,22 +58,16 @@
                     </DataTemplate>
                 </ToolBar.ItemTemplate>
             </ctrls:WorkaroundToolBar>
-            <ListView x:Name="lst"
-                      Margin="10"
-                      BorderThickness="0"
-                      ItemsSource="{Binding Instances}"
-                      ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
-                      SelectionChanged="lst_SelectionChanged"
-                      KeyboardNavigation.TabNavigation="Continue"
-                      GridViewColumnHeader.Click="ListView_HeaderClick">
-                <ListView.Resources>
-                    <Style TargetType="ListViewItem">
-                        <EventSetter Event="MouseDoubleClick"
-                                     Handler="ObjectList_MouseDoubleClick" />
-                    </Style>
-                </ListView.Resources>
-
-            </ListView>
+            <ctrls:ZBoxListView x:Name="lst"
+                                Margin="10"
+                                BorderThickness="0"
+                                ItemsSource="{Binding Instances}"
+                                ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
+                                SelectedZBoxItems="{Binding SelectedItems}"
+                                KeyboardNavigation.TabNavigation="Continue"
+                                MouseDoubleClick="ItemActivatedHandler"
+                                GridViewColumnHeader.Click="ListView_HeaderClick">
+            </ctrls:ZBoxListView>
 
         </DockPanel>
 

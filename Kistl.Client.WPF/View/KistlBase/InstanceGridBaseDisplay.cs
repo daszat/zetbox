@@ -46,77 +46,16 @@ namespace Kistl.Client.WPF.View.KistlBase
         /// </summary>
         /// <param name="sender">the sender of this event, a <see cref="ListViewItem"/> is expected</param>
         /// <param name="e">the arguments of this event</param>
-        protected void ObjectList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        protected void ItemActivatedHandler(object sender, RoutedEventArgs e)
         {
-            var listItem = sender as ListViewItem;
-            if (listItem == null)
+            if (ViewModel != null && ViewModel.SelectedItem != null)
             {
-                return;
+                ViewModel.OnItemsDefaultAction(new DataObjectViewModel[] { ViewModel.SelectedItem });
             }
 
-            var dataObject = listItem.Content as DataObjectViewModel;
-            if (dataObject == null)
-            {
-                return;
-            }
-
-            // only react to left mouse button double clicks
-            if (e.ChangedButton != MouseButton.Left)
-            {
-                return;
-            }
-
-            ViewModel.OnItemsDefaultAction(new DataObjectViewModel[] { dataObject });
             e.Handled = true;
         }
 
-        #region Selection Changed
-        private bool _selectedItemsChangedByViewModel = false;
-        private bool _selectedItemsChangedByList = false;
-
-        protected void lst_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (_selectedItemsChangedByViewModel) return;
-
-            _selectedItemsChangedByList = true;
-            try
-            {
-                if (e.OriginalSource == DataGrid)
-                {
-                    e.Handled = true;
-                    e.RemovedItems.OfType<DataObjectViewModelProxy>().ForEach(i => ViewModel.SelectedProxies.Remove(i));
-                    e.AddedItems.OfType<DataObjectViewModelProxy>().ForEach(i => ViewModel.SelectedProxies.Add(i, true));
-                }
-            }
-            finally
-            {
-                _selectedItemsChangedByList = false;
-            }
-        }
-        
-        void ViewModel_SelectedProxies_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            if (_selectedItemsChangedByList) return;
-
-            _selectedItemsChangedByViewModel = true;
-            try
-            {
-                if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Reset)
-                {
-                    DataGrid.SelectedItems.Clear();
-                }
-                else
-                {
-                    if (e.OldItems != null) e.OldItems.ForEach<object>(i => DataGrid.SelectedItems.Remove(i));
-                    if (e.NewItems != null) e.NewItems.ForEach<object>(i => DataGrid.SelectedItems.Add(i));
-                }
-            }
-            finally
-            {
-                _selectedItemsChangedByViewModel = false;
-            }
-        }
-        #endregion
 
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
@@ -128,7 +67,6 @@ namespace Kistl.Client.WPF.View.KistlBase
                     WPFHelper.RefreshGridView(DataGrid, ViewModel.DisplayedColumns, SortPropertyNameProperty);
                 }
                 // Attach to selection changed event on ViewModel side
-                ViewModel.SelectedProxies.CollectionChanged += ViewModel_SelectedProxies_CollectionChanged;
                 ViewModel.UpdateFromUI += new EventHandler(ViewModel_UpdateFromUI);
             }
         }

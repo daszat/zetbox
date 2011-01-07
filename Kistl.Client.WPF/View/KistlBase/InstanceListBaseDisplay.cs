@@ -49,77 +49,16 @@ namespace Kistl.Client.WPF.View.KistlBase
         /// </summary>
         /// <param name="sender">the sender of this event, a <see cref="ListViewItem"/> is expected</param>
         /// <param name="e">the arguments of this event</param>
-        protected void ObjectList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        protected void ItemActivatedHandler(object sender, RoutedEventArgs e)
         {
-            var listItem = sender as ListViewItem;
-            if (listItem == null)
+            if (ViewModel != null && ViewModel.SelectedItem != null)
             {
-                return;
+                ViewModel.OnItemsDefaultAction(new DataObjectViewModel[] { ViewModel.SelectedItem });
             }
 
-            var dataObject = listItem.Content as DataObjectViewModel;
-            if (dataObject == null)
-            {
-                return;
-            }
-
-            // only react to left mouse button double clicks
-            if (e.ChangedButton != MouseButton.Left)
-            {
-                return;
-            }
-
-            ViewModel.OnItemsDefaultAction(new DataObjectViewModel[] { dataObject });
             e.Handled = true;
         }
 
-        private bool _selectedItemsChangedByViewModel = false;
-        private bool _selectedItemsChangedByList = false;
-
-        protected void lst_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (_selectedItemsChangedByViewModel) return;
-
-            _selectedItemsChangedByList = true;
-            try
-            {
-                if (e.OriginalSource == ListView)
-                {
-                    e.Handled = true;
-                    e.RemovedItems.ForEach<DataObjectViewModel>(i => ViewModel.SelectedItems.Remove(i));
-                    e.AddedItems.ForEach<DataObjectViewModel>(i => ViewModel.SelectedItems.Add(i));
-                }
-            }
-            finally
-            {
-                _selectedItemsChangedByList = false;
-            }
-        }
-
-        void ViewModel_SelectedItems_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            if (_selectedItemsChangedByList) return;
-
-            _selectedItemsChangedByViewModel = true;
-            try
-            {
-                if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Reset)
-                {
-                    ListView.SelectedItems.Clear();
-                }
-                else
-                {
-                    if (e.OldItems != null) e.OldItems.ForEach<object>(i => ListView.SelectedItems.Remove(i));
-                    if (e.NewItems != null) e.NewItems.ForEach<object>(i => ListView.SelectedItems.Add(i));
-                }
-            }
-            finally
-            {
-                _selectedItemsChangedByViewModel = false;
-            }
-        }
-
-        
 
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
@@ -131,8 +70,6 @@ namespace Kistl.Client.WPF.View.KistlBase
                     WPFHelper.RefreshGridView(ListView, ViewModel.DisplayedColumns, SortPropertyNameProperty);
                     ListView.ItemContainerStyle = Application.Current.Resources["GridViewItemContainerStyle"] as Style;
                 }
-                // Attach to selection changed event on ViewModel side
-                ViewModel.SelectedItems.CollectionChanged += ViewModel_SelectedItems_CollectionChanged;
                 ViewModel.UpdateFromUI += new EventHandler(ViewModel_UpdateFromUI);
             }
         }

@@ -24,15 +24,15 @@
         </ctrls:WorkaroundToolBar>
 
         <!-- configured from code, see RefreshGridView() -->
-        <ListView x:Name="lst"
+        <ctrls:ZBoxListView x:Name="lst"
                   ItemsSource="{Binding Value, Mode=OneWay, ValidatesOnDataErrors=true}"
                   SelectedItem="{Binding SelectedItem}"
                   MinHeight="50"
-                  SelectionChanged="lst_SelectionChanged"
+                  SelectedZBoxItems="{Binding SelectedItems}"
                   ItemContainerStyle="{StaticResource GridViewItemContainerStyle}"
                   MouseDoubleClick="ItemActivatedHandler"
                   KeyboardNavigation.TabNavigation="Continue">
-            <ListView.ContextMenu>
+            <ctrls:ZBoxListView.ContextMenu>
                 <ContextMenu ItemsSource="{Binding Commands}">
                     <ContextMenu.ItemContainerStyle>
                         <Style TargetType="MenuItem">
@@ -45,7 +45,7 @@
                         </Style>
                     </ContextMenu.ItemContainerStyle>
                 </ContextMenu>
-            </ListView.ContextMenu>
-        </ListView>
+            </ctrls:ZBoxListView.ContextMenu>
+        </ctrls:ZBoxListView>
     </DockPanel>
 </view:PropertyEditor>

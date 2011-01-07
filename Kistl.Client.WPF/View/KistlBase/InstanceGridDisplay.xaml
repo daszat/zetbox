@@ -56,19 +56,14 @@
         </GroupBox>
 
         <ctrls:ZBoxDataGrid x:Name="lst"
-                        BorderThickness="0"
-                        ItemsSource="{Binding ProxyInstances}"
-                        CanUserAddRows="{Binding AllowAddNew}"
-                        CanUserDeleteRows="{Binding AllowDelete}"
-                        AutoGenerateColumns="False"
-                        SelectionChanged="lst_SelectionChanged"
-                        GridViewColumnHeader.Click="ListView_HeaderClick">
-            <ctrls:ZBoxDataGrid.Resources>
-                <Style TargetType="ListViewItem">
-                    <EventSetter Event="MouseDoubleClick"
-                                 Handler="ObjectList_MouseDoubleClick" />
-                </Style>
-            </ctrls:ZBoxDataGrid.Resources>
+                            BorderThickness="0"
+                            ItemsSource="{Binding ProxyInstances}"
+                            CanUserAddRows="{Binding AllowAddNew}"
+                            CanUserDeleteRows="{Binding AllowDelete}"
+                            AutoGenerateColumns="False"
+                            SelectedZBoxItems="{Binding SelectedProxies}"
+                            MouseDoubleClick="ItemActivatedHandler"
+                            GridViewColumnHeader.Click="ListView_HeaderClick">
         </ctrls:ZBoxDataGrid>
     </DockPanel>
 </local:InstanceGridBaseDisplay>

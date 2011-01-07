@@ -19,21 +19,21 @@
             <ToolBar.ItemTemplate>
                 <DataTemplate>
                     <ctrls:CommandButton CommandViewModel="{Binding}"
-                                         Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"/>
+                                         Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" />
                 </DataTemplate>
             </ToolBar.ItemTemplate>
         </ctrls:WorkaroundToolBar>
 
         <!-- configured from code, see RefreshGridView() -->
         <ctrls:ZBoxDataGrid x:Name="lst"
-                        BorderThickness="0"
-                        ItemsSource="{Binding ValueProxies, Mode=OneWay, ValidatesOnDataErrors=true}"
-                        MinHeight="50"
-                        MouseDoubleClick="ItemActivatedHandler"
-                        CanUserAddRows="{Binding AllowInlineAddNew}"
-                        CanUserDeleteRows="{Binding AllowDelete}"
-                        AutoGenerateColumns="False"
-                        SelectionChanged="lst_SelectionChanged">
+                            BorderThickness="0"
+                            ItemsSource="{Binding ValueProxies, Mode=OneWay, ValidatesOnDataErrors=true}"
+                            MinHeight="50"
+                            MouseDoubleClick="ItemActivatedHandler"
+                            CanUserAddRows="{Binding AllowInlineAddNew}"
+                            CanUserDeleteRows="{Binding AllowDelete}"
+                            AutoGenerateColumns="False"
+                            SelectedZBoxItems="{Binding SelectedProxies}">
             <ctrls:ZBoxDataGrid.ContextMenu>
                 <ContextMenu ItemsSource="{Binding Commands}">
                     <ContextMenu.ItemContainerStyle>

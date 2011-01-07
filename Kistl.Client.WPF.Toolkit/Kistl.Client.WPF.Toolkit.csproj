@@ -106,6 +106,7 @@
     </Compile>
     <Compile Include="CustomControls\WindowView.cs" />
     <Compile Include="CustomControls\WorkaroundToolBar.cs" />
+    <Compile Include="CustomControls\ZBoxListView.cs" />
     <Compile Include="WPFHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VisualTypeTemplateSelector.cs" />

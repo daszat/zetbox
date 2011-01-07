@@ -17,16 +17,29 @@
             </ToolBar.ItemTemplate>
         </ctrls:WorkaroundToolBar>
         <!-- configured from code, see RefreshGridView() -->
-        <ListView x:Name="lst"
+        <ctrls:ZBoxListView x:Name="lst"
                   ItemsSource="{Binding Value, Mode=OneWay, ValidatesOnDataErrors=true}"
                   SelectedItem="{Binding SelectedItem}"
                   MinHeight="50"
-                  SelectionChanged="lst_SelectionChanged"
+                  SelectedZBoxItems="{Binding SelectedItems}"
                   MouseDoubleClick="ItemActivatedHandler"
                   ItemContainerStyle="{StaticResource GridViewItemContainerStyle}"
                   GridViewColumnHeader.Click="ListView_HeaderClick"
                   KeyboardNavigation.TabNavigation="Continue">
-
-        </ListView>
+            <ctrls:ZBoxListView.ContextMenu>
+                <ContextMenu ItemsSource="{Binding Commands}">
+                    <ContextMenu.ItemContainerStyle>
+                        <Style TargetType="MenuItem">
+                            <Setter Property="Command"
+                                    Value="{Binding Converter={StaticResource CommandConverter}}" />
+                            <Setter Property="Header"
+                                    Value="{Binding Label}" />
+                            <Setter Property="ToolTip"
+                                    Value="{Binding ToolTip}" />
+                        </Style>
+                    </ContextMenu.ItemContainerStyle>
+                </ContextMenu>
+            </ctrls:ZBoxListView.ContextMenu>
+        </ctrls:ZBoxListView>
     </DockPanel>
 </view:PropertyEditor>
