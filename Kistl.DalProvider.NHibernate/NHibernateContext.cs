@@ -149,7 +149,7 @@ namespace Kistl.DalProvider.NHibernate
             //            throw new NotImplementedException(String.Format("Unknown RelationEndRole [{0}]", endRole));
             //    }
             //}
-            Logging.Linq.Warn("Called useless FetchRelation for NHibernate");
+            Logging.Linq.Warn("Called empty FetchRelation for NHibernate");
             return null;
         }
 

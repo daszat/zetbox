@@ -223,6 +223,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Client.Bootstrapper", "Kistl.Client.Bootstrapper\Kistl.Client.Bootstrapper.csproj", "{8D980F88-514B-44F0-A9B3-B9195FAD33FD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.DalProvider.NHibernate.Tests", "Tests\Kistl.DalProvider.NHibernate.Tests\Kistl.DalProvider.NHibernate.Tests.csproj", "{A77331CC-350D-472D-8737-AAB47AF5A4D8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C0992804-A195-4087-B77C-910ABEAB74B9} = {C0992804-A195-4087-B77C-910ABEAB74B9}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Objects.NHibernate", "Kistl.Objects.NHibernate\Kistl.Objects.NHibernate.csproj", "{5514C9AF-6C2E-4713-8EAC-FAAADFFDB029}"
 	ProjectSection(ProjectDependencies) = postProject

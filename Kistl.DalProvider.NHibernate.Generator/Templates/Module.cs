@@ -23,7 +23,6 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates
                     "Kistl.API.Configuration",
                     "global::NHibernate",
                     "global::NHibernate.Cfg",
-                    "global::NHibernate.Cfg.Loquacious",
                 });
         }
     }

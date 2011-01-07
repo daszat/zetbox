@@ -14,15 +14,17 @@
                     c => {
                         var kistlConfig = c.Resolve<KistlConfig>();
                         var result = new Configuration();
-                        result.DataBaseIntegration(db => 
-                            {
-                                db.Dialect<global::NHibernate.Dialect.PostgreSQL82Dialect>();
-                                db.ConnectionString = kistlConfig.Server.ConnectionString;
-                            });
+                        result.Properties["dialect"] = "NHibernate.Dialect.PostgreSQL82Dialect";
+                        result.Properties["connection.connection_string"] = kistlConfig.Server.ConnectionString;
+                        result.Properties["proxyfactory.factory_class"] = "NHibernate.ByteCode.LinFu.ProxyFactoryFactory, NHibernate.ByteCode.LinFu";
+#if DEBUG
+                        // make debugging easier by removing reflection optimizations
+                        result.Properties["use_reflection_optimizer"] = "false";
+                        result.Properties["bytecode.provider"] = "null";
+#endif
 
                         return result
                             .AddAssembly(typeof(NHibernateModule).Assembly)
-                            .Configure()
                             .BuildSessionFactory();
                     })
                 .SingleInstance();

@@ -197,7 +197,7 @@ namespace Kistl.API.Configuration
             /// <summary>
             /// Overrides the current system culture
             /// </summary>
-            [XmlElement(IsNullable=true)]
+            [XmlElement(IsNullable = true)]
             public string Culture { get; set; }
 
             /// <summary>
@@ -283,7 +283,11 @@ namespace Kistl.API.Configuration
         public static KistlConfig FromFile(string filename)
         {
             filename = String.IsNullOrEmpty(filename) ? "DefaultConfig.xml" : filename;
-            using (XmlTextReader r = new XmlTextReader(filename))
+
+            if (!File.Exists(filename))
+                throw new FileNotFoundException("Configuration file not found", filename);
+
+            using (var r = new XmlTextReader(filename))
             {
                 KistlConfig result = (KistlConfig)xml.Deserialize(r);
                 result.ConfigFilePath = filename;
@@ -302,14 +306,14 @@ namespace Kistl.API.Configuration
             get
             {
                 string workingFolder = System.Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-                
+
                 workingFolder = Path.Combine(workingFolder, "dasz");
                 workingFolder = Path.Combine(workingFolder, "zbox");
                 workingFolder = Path.Combine(workingFolder, Helper.GetLegalPathName(this.ConfigName));
-                
+
                 // TODO: very bad idea because this may change when passing the config between AppDomains
                 workingFolder = Path.Combine(workingFolder, Helper.GetLegalPathName(AppDomain.CurrentDomain.FriendlyName));
-                
+
                 System.IO.Directory.CreateDirectory(workingFolder);
                 return workingFolder;
             }

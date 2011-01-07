@@ -52,7 +52,7 @@ namespace Kistl.Tests.Utilities.PostgresSql
                     pi.UseShellExecute = false;
                     pi.WorkingDirectory = Environment.GetEnvironmentVariable("PGSQLBinPath").Trim('\"');
                     var p = System.Diagnostics.Process.Start(pi);
-                    if (!p.WaitForExit(RESET_TIMEOUT * 1000)) 
+                    if (!p.WaitForExit(RESET_TIMEOUT * 1000))
                     {
                         throw new InvalidOperationException(string.Format("pg_dump did not completed within {0} seconds", RESET_TIMEOUT));
                     }
