@@ -520,6 +520,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 var obj = DataContext.Create(DataContext.GetInterfaceType(_type.GetDataType()));
                 p.Object = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, obj);
                 _proxyCache[p.Object] = p;
+                OnObjectCreated(obj);
             }
             return p.Object;
         }

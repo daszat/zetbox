@@ -335,7 +335,8 @@ namespace Kistl.Client.Presentables.ValueViewModels
         {
             if (Value == null) return string.Empty;
             // This hurts, but looks funny
-            return PossibleValues.Single(key => key.Key == Value.Value).Value;
+            // Don't die on invalid values
+            return PossibleValues.FirstOrDefault(key => key.Key == Value.Value).Value;
         }
 
         protected override void ParseValue(string str)
@@ -346,7 +347,8 @@ namespace Kistl.Client.Presentables.ValueViewModels
             }
             else
             {
-                var item = PossibleValues.SingleOrDefault(value => string.Compare(value.Value, str, true) == 0);
+                // Don't die on invalid values
+                var item = PossibleValues.FirstOrDefault(value => string.Compare(value.Value, str, true) == 0);
                 if (item.Key != null)
                 {
                     Value = item.Key.Value;

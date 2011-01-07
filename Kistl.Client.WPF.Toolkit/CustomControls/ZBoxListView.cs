@@ -36,6 +36,15 @@ namespace Kistl.Client.WPF.CustomControls
             if (SelectedZBoxItems is INotifyCollectionChanged)
             {
                 ((INotifyCollectionChanged)SelectedZBoxItems).CollectionChanged += new NotifyCollectionChangedEventHandler(ZBoxDataGrid_CollectionChanged);
+                try
+                {
+                    _selectedItemsChangedByViewModel = true;
+                    ((IEnumerable)SelectedZBoxItems).ForEach<object>(i => this.SelectedItems.Add(i));
+                }
+                finally
+                {
+                    _selectedItemsChangedByViewModel = false;
+                }
             }
         }
 

@@ -6,6 +6,7 @@ using System.Windows;
 using System.Collections.Specialized;
 using Kistl.API;
 using System.Collections;
+using System.Windows.Data;
 
 namespace Kistl.Client.WPF.CustomControls
 {
@@ -54,6 +55,16 @@ namespace Kistl.Client.WPF.CustomControls
             if (SelectedZBoxItems is INotifyCollectionChanged)
             {
                 ((INotifyCollectionChanged)SelectedZBoxItems).CollectionChanged += new NotifyCollectionChangedEventHandler(ZBoxDataGrid_CollectionChanged);
+                try
+                {
+                    _selectedItemsChangedByViewModel = true;
+                    ((IEnumerable)SelectedZBoxItems).ForEach<object>(i => this.SelectedItems.Add(i));
+                }
+                finally
+                {
+                    _selectedItemsChangedByViewModel = false;
+                }
+
             }
         }
 
@@ -98,14 +109,14 @@ namespace Kistl.Client.WPF.CustomControls
                     if (SelectedZBoxItems is IList)
                     {
                         var lst = (IList)SelectedZBoxItems;
-                        e.RemovedItems.OfType<object>().ForEach(i => lst.Remove(i));
-                        e.AddedItems.OfType<object>().ForEach(i => lst.Add(i));
+                        e.RemovedItems.OfType<object>().Where(i=> i != CollectionView.NewItemPlaceholder).ForEach(i => lst.Remove(i));
+                        e.AddedItems.OfType<object>().Where(i => i != CollectionView.NewItemPlaceholder).ForEach(i => lst.Add(i));
                     }
                     else if (SelectedZBoxItems is ICollection)
                     {
                         var lst = (ICollection)SelectedZBoxItems;
-                        e.RemovedItems.OfType<object>().ForEach(i => lst.Remove(i));
-                        e.AddedItems.OfType<object>().ForEach(i => lst.Add(i, true));
+                        e.RemovedItems.OfType<object>().Where(i => i != CollectionView.NewItemPlaceholder).ForEach(i => lst.Remove(i));
+                        e.AddedItems.OfType<object>().Where(i => i != CollectionView.NewItemPlaceholder).ForEach(i => lst.Add(i, true));
                     }
                 }
             }

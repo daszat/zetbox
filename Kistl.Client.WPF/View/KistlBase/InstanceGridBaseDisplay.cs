@@ -62,10 +62,7 @@ namespace Kistl.Client.WPF.View.KistlBase
             base.OnPropertyChanged(e);
             if (ViewModel != null && e.Property == FrameworkElement.DataContextProperty)
             {
-                if (ViewModel.ViewMethod == InstanceListViewMethod.Details)
-                {
-                    WPFHelper.RefreshGridView(DataGrid, ViewModel.DisplayedColumns, SortPropertyNameProperty);
-                }
+                WPFHelper.RefreshGridView(DataGrid, ViewModel.DisplayedColumns, SortPropertyNameProperty);
                 // Attach to selection changed event on ViewModel side
                 ViewModel.UpdateFromUI += new EventHandler(ViewModel_UpdateFromUI);
             }

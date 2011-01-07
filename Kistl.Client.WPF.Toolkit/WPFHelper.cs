@@ -33,6 +33,7 @@ namespace Kistl.Client.WPF.Toolkit
 
         public static void RefreshGridView(DataGrid lst, GridDisplayConfiguration cfg, DependencyProperty sortProperty)
         {
+            lst.Columns.Clear();
             if (cfg.ShowIcon)
             {
                 lst.Columns.Add(new DataGridTemplateColumn() { CellTemplate = (DataTemplate)lst.FindResource("iconCellTemplate") });
