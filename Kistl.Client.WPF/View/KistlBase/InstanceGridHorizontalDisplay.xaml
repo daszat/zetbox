@@ -52,7 +52,7 @@
                     </DataTemplate>
                 </ToolBar.ItemTemplate>
             </ctrls:WorkaroundToolBar>
-            <wpftk:DataGrid x:Name="lst"
+            <ctrls:ZBoxDataGrid x:Name="lst"
                             Margin="10"
                             BorderThickness="0"
                             ItemsSource="{Binding ProxyInstances}"
@@ -60,16 +60,14 @@
                             CanUserDeleteRows="{Binding AllowDelete}"
                             AutoGenerateColumns="False"
                             SelectionChanged="lst_SelectionChanged"
-                            CellEditEnding="lst_CellEditEnding"
-                            CurrentCellChanged="lst_CurrentCellChanged"
                             GridViewColumnHeader.Click="ListView_HeaderClick">
-                <wpftk:DataGrid.Resources>
+                <ctrls:ZBoxDataGrid.Resources>
                     <Style TargetType="ListViewItem">
                         <EventSetter Event="MouseDoubleClick"
                                      Handler="ObjectList_MouseDoubleClick" />
                     </Style>
-                </wpftk:DataGrid.Resources>
-            </wpftk:DataGrid>
+                </ctrls:ZBoxDataGrid.Resources>
+            </ctrls:ZBoxDataGrid>
 
         </DockPanel>
 

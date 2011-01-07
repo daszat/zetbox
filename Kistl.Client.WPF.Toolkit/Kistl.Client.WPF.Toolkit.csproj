@@ -90,6 +90,7 @@
     <Compile Include="Converter\IconConverter.cs" />
     <Compile Include="Converter\ImageConverter.cs" />
     <Compile Include="CustomControls\CommandButton.cs" />
+    <Compile Include="CustomControls\ZBoxDataGrid.cs" />
     <Compile Include="CustomControls\DropDownButton.cs" />
     <Compile Include="CustomControls\LabeledContainer.xaml.cs">
       <DependentUpon>LabeledContainer.xaml</DependentUpon>

@@ -23,6 +23,7 @@ namespace Kistl.Client.WPF.View.KistlBase
     using Kistl.Client.Presentables;
     using Kistl.Client.Presentables.KistlBase;
     using Microsoft.Windows.Controls;
+    using Kistl.Client.WPF.CustomControls;
 
     /// <summary>
     /// Shows all instances of a given DataTypeViewModel
@@ -40,7 +41,7 @@ namespace Kistl.Client.WPF.View.KistlBase
             InitializeComponent();
         }
 
-        public override DataGrid DataGrid
+        public override ZBoxDataGrid DataGrid
         {
             get { return lst; }
         }

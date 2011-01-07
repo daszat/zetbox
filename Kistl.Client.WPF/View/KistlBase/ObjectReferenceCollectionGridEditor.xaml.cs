@@ -110,22 +110,6 @@ namespace Kistl.Client.WPF.View.KistlBase
             }
         }
         #endregion
-        #region Continue Edit
-        bool continueEdit = false;
-        private void lst_CellEditEnding(object sender, Microsoft.Windows.Controls.DataGridCellEditEndingEventArgs e)
-        {
-            continueEdit = e.EditAction == Microsoft.Windows.Controls.DataGridEditAction.Commit;
-        }
-
-        private void lst_CurrentCellChanged(object sender, EventArgs e)
-        {
-            if (continueEdit)
-            {
-                lst.BeginEdit();
-            }
-            continueEdit = false;
-        }
-        #endregion
 
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {

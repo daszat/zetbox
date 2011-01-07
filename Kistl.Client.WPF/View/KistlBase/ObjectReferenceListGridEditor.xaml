@@ -25,7 +25,7 @@
         </ctrls:WorkaroundToolBar>
 
         <!-- configured from code, see RefreshGridView() -->
-        <wpftk:DataGrid x:Name="lst"
+        <ctrls:ZBoxDataGrid x:Name="lst"
                         BorderThickness="0"
                         ItemsSource="{Binding ValueProxies, Mode=OneWay, ValidatesOnDataErrors=true}"
                         MinHeight="50"
@@ -33,10 +33,8 @@
                         CanUserAddRows="{Binding AllowInlineAddNew}"
                         CanUserDeleteRows="{Binding AllowDelete}"
                         AutoGenerateColumns="False"
-                        CellEditEnding="lst_CellEditEnding"
-                        CurrentCellChanged="lst_CurrentCellChanged"
                         SelectionChanged="lst_SelectionChanged">
-            <wpftk:DataGrid.ContextMenu>
+            <ctrls:ZBoxDataGrid.ContextMenu>
                 <ContextMenu ItemsSource="{Binding Commands}">
                     <ContextMenu.ItemContainerStyle>
                         <Style TargetType="MenuItem">
@@ -49,7 +47,7 @@
                         </Style>
                     </ContextMenu.ItemContainerStyle>
                 </ContextMenu>
-            </wpftk:DataGrid.ContextMenu>
-        </wpftk:DataGrid>
+            </ctrls:ZBoxDataGrid.ContextMenu>
+        </ctrls:ZBoxDataGrid>
     </DockPanel>
 </view:PropertyEditor>

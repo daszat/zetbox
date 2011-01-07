@@ -24,10 +24,11 @@ namespace Kistl.Client.WPF.View.KistlBase
     using Microsoft.Windows.Controls;
     using Kistl.Client.WPF.Toolkit;
     using Kistl.Client.Presentables.ValueViewModels;
+    using Kistl.Client.WPF.CustomControls;
 
     public abstract class InstanceGridBaseDisplay : UserControl, IHasViewModel<InstanceListViewModel>
     {
-        public abstract DataGrid DataGrid { get; }
+        public abstract ZBoxDataGrid DataGrid { get; }
 
         #region Sort dependency properties
         public static readonly DependencyProperty SortPropertyNameProperty =
@@ -114,23 +115,6 @@ namespace Kistl.Client.WPF.View.KistlBase
             {
                 _selectedItemsChangedByViewModel = false;
             }
-        }
-        #endregion
-
-        #region Continue Edit
-        bool continueEdit = false;
-        protected void lst_CellEditEnding(object sender, Microsoft.Windows.Controls.DataGridCellEditEndingEventArgs e)
-        {
-            continueEdit = e.EditAction == Microsoft.Windows.Controls.DataGridEditAction.Commit;
-        }
-
-        protected void lst_CurrentCellChanged(object sender, EventArgs e)
-        {
-            if (continueEdit)
-            {
-                DataGrid.BeginEdit();
-            }
-            continueEdit = false;
         }
         #endregion
 
