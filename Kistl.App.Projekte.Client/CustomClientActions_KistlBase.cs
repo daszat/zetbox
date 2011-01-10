@@ -256,6 +256,25 @@ namespace Kistl.App.Base
             e.Result = obj.Parameter.SingleOrDefault(param => param.IsReturnParameter);
         }
 
+        #region Update MethodInvocation.MemberName
+        private static void UpdateMethodInvocationMemberName(Kistl.App.Base.MethodInvocation obj)
+        {
+            if (string.IsNullOrEmpty(obj.MemberName) && obj.Method != null && obj.InvokeOnObjectClass != null)
+            {
+                obj.MemberName = obj.GetMemberName();
+            }
+        }
+
+        public static void OnMethod_PostSetter_MethodInvocation(Kistl.App.Base.MethodInvocation obj, PropertyPostSetterEventArgs<Kistl.App.Base.Method> e)
+        {
+            UpdateMethodInvocationMemberName(obj);
+        }
+        public static void OnInvokeOnObjectClass_PostSetter_MethodInvocation(Kistl.App.Base.MethodInvocation obj, PropertyPostSetterEventArgs<Kistl.App.Base.DataType> e)
+        {
+            UpdateMethodInvocationMemberName(obj);
+        }
+        #endregion
+
         public static void OnGetInheritedMethods_ObjectClass(ObjectClass obj, MethodReturnEventArgs<IList<Method>> e)
         {
             ObjectClass baseObjectClass = obj.BaseObjectClass;

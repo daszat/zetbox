@@ -30,6 +30,7 @@ namespace Kistl.App.Packaging
                 .OrderBy(i => i.A.Name).ThenBy(i => i.B.Name).ThenBy(i => i.A.ExportGuid).ThenBy(i => i.B.ExportGuid));
             AddMetaObjects(result, ctx.GetQuery<Property>().Where(i => i.Module.ID == moduleID)
                 .OrderBy(i => i.ObjectClass.Name).ThenBy(i => i.Name).ThenBy(i => i.ExportGuid));
+
             AddMetaObjects(result, ctx.GetQuery<Relation>().Where(i => i.Module.ID == moduleID)
                 .OrderBy(i => i.A.Type.Name).ThenBy(i => i.Verb).ThenBy(i => i.B.Type.Name).ThenBy(i => i.ExportGuid));
             // workaround a limitation / mapping error in NHibernate:
@@ -84,8 +85,10 @@ namespace Kistl.App.Packaging
                 .ThenBy(i => i.AIndex).ThenBy(i => i.BIndex)
                 .ThenBy(i => i.A.ExportGuid).ThenBy(i => i.B.ExportGuid));
 
-            AddMetaObjects(result, ctx.GetQuery<Icon>().Where(i => i.Module.ID == moduleID)
-                .OrderBy(i => i.IconFile).ThenBy(i => i.ExportGuid));
+            var icons = ctx.GetQuery<Icon>().Where(i => i.Module.ID == moduleID)
+                .OrderBy(i => i.IconFile).ThenBy(i => i.ExportGuid).ToList();
+            AddMetaObjects(result, icons.AsQueryable());
+            AddMetaObjects(result, icons.Select(i => i.Blob).AsQueryable());
             AddMetaObjects(result, ctx.GetQuery<ViewModelDescriptor>().Where(i => i.Module.ID == moduleID)
                 .OrderBy(i => i.ViewModelRef.Assembly.Name).ThenBy(i => i.ViewModelRef.FullName).ThenBy(i => i.ExportGuid));
             AddMetaObjects(result, ctx.GetQuery<ViewDescriptor>().Where(i => i.Module.ID == moduleID)
@@ -135,7 +138,7 @@ namespace Kistl.App.Packaging
             return result;
         }
 
-        private static void AddMetaObjects<T>(List<IPersistenceObject> result, IOrderedQueryable<T> objects)
+        private static void AddMetaObjects<T>(List<IPersistenceObject> result, IQueryable<T> objects)
             where T : IPersistenceObject
         {
             // TODO: always do a final stabilisation sort by ExportGuid

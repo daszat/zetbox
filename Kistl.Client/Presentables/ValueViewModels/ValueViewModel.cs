@@ -257,7 +257,14 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
         protected override void ParseValue(string str)
         {
-            this.Value = String.IsNullOrEmpty(str) ? null : (Nullable<TValue>)System.Convert.ChangeType(str, typeof(TValue));
+            try
+            {
+                this.Value = String.IsNullOrEmpty(str) ? null : (Nullable<TValue>)System.Convert.ChangeType(str, typeof(TValue));
+            }
+            catch
+            {
+                // One of the rare cases where exceptions can be gracefully ignored
+            }
         }
 
         public override TValue? Value

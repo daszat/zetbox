@@ -16,7 +16,7 @@ namespace at.dasz.DocumentManagement
         public static void OnHandleBlobChange_DynamicFile(at.dasz.DocumentManagement.DynamicFile obj, MethodReturnEventArgs<Kistl.App.Base.Blob> e, Kistl.App.Base.Blob oldBlob, Kistl.App.Base.Blob newBlob)
         {
             // Delete old blob
-            if (oldBlob != null)
+            if (oldBlob != null && newBlob != oldBlob)
             {
                 obj.Context.Delete(oldBlob);
             }

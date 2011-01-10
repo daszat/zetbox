@@ -110,7 +110,7 @@ namespace Kistl.Client.WPF
                 SplashScreen.SetInfo(Kistl.Client.Properties.Resources.Startup_Launcher);
 
                 // Init Resources
-                this.Resources["IconConverter"] = new IconConverter(config.Client.DocumentStore, container.Resolve<IFrozenContext>());
+                this.Resources["IconConverter"] = new IconConverter(container.Resolve<IFrozenContext>(), container.Resolve<IKistlContext>());
                 var templateSelectorFactory = container.Resolve<Kistl.Client.WPF.View.VisualTypeTemplateSelector.Factory>();
                 this.Resources["defaultTemplateSelector"] = templateSelectorFactory(null);
                 this.Resources["listItemTemplateSelector"] = templateSelectorFactory("Kistl.App.GUI.SingleLineKind");

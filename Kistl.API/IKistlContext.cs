@@ -451,6 +451,14 @@ namespace Kistl.API
         T CreateUnattached<T>() where T : class, IPersistenceObject;
 
         /// <summary>
+        /// Stores a blob stream
+        /// </summary>
+        /// <param name="s">Stream to store</param>
+        /// <param name="filename">optional filename</param>
+        /// <returns>The relative storage path. Must be stored in Blob.StoragePath</returns>
+        string StoreBlobStream(System.IO.Stream s, string filename);
+
+        /// <summary>
         /// Creates a new IRelationEntry by Type
         /// </summary>
         /// <param name="ifType">Type of the new IRelationEntry</param>

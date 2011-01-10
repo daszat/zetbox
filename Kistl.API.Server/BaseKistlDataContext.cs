@@ -502,12 +502,18 @@ namespace Kistl.API.Server
                 throw new ArgumentNullException("mimetype");
 
             var blob = (Kistl.App.Base.Blob)this.CreateInternal(iftFactory(typeof(Kistl.App.Base.Blob)));
-            DateTime today = DateTime.Today;
-            blob.StoragePath = string.Format(@"{0:0000}\{1:00}\{2:00}\({3}) - {4}", today.Year, today.Month, today.Day, Guid.NewGuid(), filename);
             blob.OriginalName = filename;
             blob.MimeType = mimetype;
+            blob.StoragePath = this.Internals().StoreBlobStream(s, filename);
 
-            string path = System.IO.Path.Combine(config.Server.DocumentStore, blob.StoragePath);
+            return blob.ID;
+        }
+
+        string IZBoxContextInternals.StoreBlobStream(System.IO.Stream s, string filename)
+        {
+            DateTime today = DateTime.Today;
+            var storagePath = string.Format(@"{0:0000}\{1:00}\{2:00}\({3}) - {4}", today.Year, today.Month, today.Day, Guid.NewGuid(), filename);
+            string path = System.IO.Path.Combine(config.Server.DocumentStore, storagePath);
             System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(path));
 
             using (var file = System.IO.File.Open(path, System.IO.FileMode.Create, System.IO.FileAccess.Write))
@@ -516,8 +522,7 @@ namespace Kistl.API.Server
                 s.CopyTo(file);
             }
             System.IO.File.SetAttributes(path, System.IO.FileAttributes.ReadOnly);
-
-            return blob.ID;
+            return storagePath;
         }
 
         public int CreateBlob(System.IO.FileInfo fi, string mimetype)

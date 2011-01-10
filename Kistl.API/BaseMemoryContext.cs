@@ -584,5 +584,55 @@ namespace Kistl.API
         }
 
         #endregion
+
+        #region IZBoxContextInternals Members
+
+
+        IPersistenceObject IZBoxContextInternals.CreateUnattached(InterfaceType ifType)
+        {
+            throw new NotImplementedException();
+        }
+
+        T IZBoxContextInternals.CreateUnattached<T>()
+        {
+            throw new NotImplementedException();
+        }
+
+        string IZBoxContextInternals.StoreBlobStream(System.IO.Stream s, string filename)
+        {
+            throw new NotImplementedException();
+        }
+
+        IRelationEntry IZBoxContextInternals.CreateRelationCollectionEntry(InterfaceType ifType)
+        {
+            throw new NotImplementedException();
+        }
+
+        T IZBoxContextInternals.CreateRelationCollectionEntry<T>()
+        {
+            throw new NotImplementedException();
+        }
+
+        IValueCollectionEntry IZBoxContextInternals.CreateValueCollectionEntry(InterfaceType ifType)
+        {
+            throw new NotImplementedException();
+        }
+
+        T IZBoxContextInternals.CreateValueCollectionEntry<T>()
+        {
+            throw new NotImplementedException();
+        }
+
+        IQueryable<T> IZBoxContextInternals.GetPersistenceObjectQuery<T>()
+        {
+            throw new NotImplementedException();
+        }
+
+        IQueryable<IPersistenceObject> IZBoxContextInternals.GetPersistenceObjectQuery(InterfaceType ifType)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

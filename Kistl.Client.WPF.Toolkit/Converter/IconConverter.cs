@@ -10,67 +10,64 @@ namespace Kistl.Client.WPF.Converter
     using Kistl.API;
     using Kistl.API.Client;
     using Kistl.App.Extensions;
+    using System.Windows.Media.Imaging;
 
     [ValueConversion(typeof(IDataObject), typeof(string))]
     public class IconConverter : IValueConverter
     {
         private readonly IFrozenContext FrozenContext;
-        public IconConverter(string docStore, IFrozenContext frozenCtx)
+        private readonly IKistlContext Context;
+        private readonly Dictionary<Guid, BitmapImage> _cache = new Dictionary<Guid, BitmapImage>();
+
+        public IconConverter(IFrozenContext frozenCtx, IKistlContext ctx)
         {
-            this.DocumentStore = docStore;
             this.FrozenContext = frozenCtx;
-        }
-
-        private readonly string DocumentStore;
-
-        private string GetIconPath(string name)
-        {
-            string result = DocumentStore
-                + @"\GUI.Icons\"
-                + name;
-            result = System.IO.Path.IsPathRooted(result) ? result : Environment.CurrentDirectory + "\\" + result;
-            return result;
+            this.Context = ctx;
         }
 
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
+            Kistl.App.GUI.Icon icon = null;
             if (value is Kistl.App.Base.ObjectClass)
             {
                 Kistl.App.Base.ObjectClass objClass = (Kistl.App.Base.ObjectClass)value;
-                if (objClass.DefaultIcon != null)
-                {
-                    return GetIconPath(objClass.DefaultIcon.IconFile);
-                }
-                else
-                {
-                    return Binding.DoNothing;
-                }
+                icon = objClass.DefaultIcon;
             }
             else if (value is Kistl.App.GUI.Icon)
             {
-                Kistl.App.GUI.Icon obj = (Kistl.App.GUI.Icon)value;
-                return GetIconPath(obj.IconFile);
+                icon = (Kistl.App.GUI.Icon)value;
             }
             else if (value is IDataObject)
             {
                 IDataObject obj = (IDataObject)value;
-                var cls = obj.GetObjectClass(FrozenContext);
-                if (cls.DefaultIcon != null)
-                {
-                    return GetIconPath(cls.DefaultIcon.IconFile);
-                }
-                else
-                {
-                    return Binding.DoNothing;
-                }
+                icon = obj.GetObjectClass(FrozenContext).DefaultIcon;
             }
             else if (value is Kistl.Client.Presentables.IViewModelWithIcon)
             {
-                var ico = (value as Kistl.Client.Presentables.IViewModelWithIcon).Icon;
-                return ico == null ? Binding.DoNothing : GetIconPath(ico.IconFile);
+                icon = ((Kistl.Client.Presentables.IViewModelWithIcon)value).Icon;
             }
 
-            return GetIconPath("error.ico");
+            if (icon == null)
+            {
+                return Binding.DoNothing;
+            }
+            else
+            {
+                // Not initialized yet
+                if (icon.ObjectState == DataObjectState.New) return Binding.DoNothing;
+
+                BitmapImage bmp;
+                if (!_cache.TryGetValue(icon.ExportGuid, out bmp))
+                {
+                    var realIcon = Context.FindPersistenceObject<Kistl.App.GUI.Icon>(icon.ExportGuid);
+                    bmp = new BitmapImage();
+                    bmp.BeginInit();
+                    bmp.StreamSource = realIcon.Blob != null ? realIcon.Blob.GetStream() : null;
+                    bmp.EndInit();
+                    _cache[icon.ExportGuid] = bmp;
+                }
+                return bmp;
+            }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)

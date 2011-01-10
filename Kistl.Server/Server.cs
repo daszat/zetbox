@@ -70,10 +70,9 @@ namespace Kistl.Server
         {
             using (Log.InfoTraceMethodCallFormat("Deploy", "file=[{0}]", file))
             using (var subContainer = container.BeginLifetimeScope())
-            using (FileStream fs = File.OpenRead(file))
             {
                 var ctx = subContainer.Resolve<IKistlServerContext>();
-                Importer.Deploy(ctx, fs);
+                Importer.Deploy(ctx, file);
                 Log.Info("Submitting changes");
                 ctx.SubmitRestore();
             }

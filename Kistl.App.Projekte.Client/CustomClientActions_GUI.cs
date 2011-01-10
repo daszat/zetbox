@@ -11,14 +11,17 @@ namespace Kistl.App.GUI
     using Kistl.Client.Models;
     using Kistl.Client.Presentables.FilterViewModels;
     using Kistl.Client;
+    using Kistl.Client.Presentables;
 
     public class CustomClientActions_GUI
     {
         private static IFrozenContext ForzenContext;
+        private static IViewModelFactory _factory;
 
-        public CustomClientActions_GUI(IFrozenContext frozenCtx)
+        public CustomClientActions_GUI(IFrozenContext frozenCtx, IViewModelFactory factory)
         {
             ForzenContext = frozenCtx;
+            _factory = factory;
         }
 
         public static void OnToString_Icon(Icon obj, MethodReturnEventArgs<string> e)
@@ -178,6 +181,29 @@ namespace Kistl.App.GUI
         }
         #endregion
 
+        #endregion
+
+        #region Icon
+        public static void OnUpload_Icon(Kistl.App.GUI.Icon obj)
+        {
+            // UI Code in Custom Actions!
+            // ASP.NET would have a big Problem with that function
+            string path = _factory.GetSourceFileNameFromUser();
+            if (!string.IsNullOrEmpty(path))
+            {
+                var fi = new System.IO.FileInfo(path);
+                int id = obj.Context.CreateBlob(fi, fi.GetMimeType());
+                obj.Blob = obj.Context.Find<Kistl.App.Base.Blob>(id);
+                obj.IconFile = obj.Blob.OriginalName;
+            }
+        }
+        public static void OnOpen_Icon(Kistl.App.GUI.Icon obj)
+        {
+            if (obj.Blob != null)
+            {
+                obj.Blob.Open();
+            }
+        }
         #endregion
     }
 }

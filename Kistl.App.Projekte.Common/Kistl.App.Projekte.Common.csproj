@@ -78,6 +78,7 @@
     <Compile Include="CustomCommonActions_KistlBase.ToString.cs" />
     <Compile Include="CustomCommonActionsModule.cs" />
     <Compile Include="Gui\ControlKindActions.cs" />
+    <Compile Include="Gui\IconActions.cs" />
     <Compile Include="KistlBase\ObjectReferencePropertyActions.cs" />
     <Compile Include="KistlBase\RelationActions.cs" />
     <Compile Include="KistlBase\RelationEndActions.cs" />
