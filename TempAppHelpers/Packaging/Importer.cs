@@ -284,7 +284,10 @@ namespace Kistl.App.Packaging
                 if (obj is Blob && s.SupportsBlobs)
                 {
                     var blob = (Blob)obj;
-                    blob.StoragePath = ctx.Internals().StoreBlobStream(s.GetBlob(blob.ExportGuid), blob.OriginalName);
+                    using (var stream = s.GetBlob(blob.ExportGuid))
+                    {
+                        blob.StoragePath = ctx.Internals().StoreBlobStream(stream, blob.OriginalName);
+                    }
                 }
 
                 return obj;

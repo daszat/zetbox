@@ -555,7 +555,10 @@ namespace Kistl.API
 
         string IZBoxContextInternals.StoreBlobStream(System.IO.Stream s, string filename)
         {
-            throw new NotImplementedException();
+            // No supprt, but do not throw an exception
+            // A memory context could be loaded from a file
+            // FileSystemPackageProvider support blobs
+            return string.Empty;
         }
 
         #endregion
