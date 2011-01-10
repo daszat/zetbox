@@ -11,6 +11,14 @@ namespace Kistl.Client
     /// </summary>
     public static class NamedObjects
     {
+        public static readonly Guid Module_KistlBase = new Guid("ef6d5bd8-5826-4ce6-a9ca-c8438ddde773");
+        public static readonly Guid Module_GUI = new Guid("84f486f7-19fe-49ad-8e4a-6c05089e7684");
+
+        public static readonly Guid Icon_delete_ico = new Guid("339276c9-1c1c-4b8e-a1a5-52b35adc2754");
+        public static readonly Guid Icon_NewDocumentHS_png = new Guid("5a1ad4e3-3b76-4b40-8b04-1b39753efa8e");
+        public static readonly Guid Icon_RefreshDocViewHS_png = new Guid("16bcca1c-6bc5-4be1-88da-e1704c5db4d3");
+        public static readonly Guid Icon_openHS_png = new Guid("5378cea1-3d09-4cbf-ac48-2b116b7da17b");
+
         public static readonly Guid ViewModelDescriptor_NullableValuePropertyModel_Bool = new Guid("09d1f453-d0d9-429e-88e7-e84b33de7c2e");
         public static readonly Guid ViewModelDescriptor_NullableValuePropertyModel_DateTime = new Guid("fc74b434-3801-4e4a-ab67-e65a9e014005");
         public static readonly Guid ViewModelDescriptor_NullableMonthPropertyViewModel = new Guid("e66f8cad-f532-4c75-8fb0-e1aa8baddd06");

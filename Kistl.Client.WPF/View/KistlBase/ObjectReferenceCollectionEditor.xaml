@@ -12,7 +12,7 @@
             <ToolBar.ItemTemplate>
                 <DataTemplate>
                     <ctrls:CommandButton CommandViewModel="{Binding}"
-                                         Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" />
+                                         Style="{StaticResource ImageToolbarButton}" />
                 </DataTemplate>
             </ToolBar.ItemTemplate>
         </ctrls:WorkaroundToolBar>
@@ -36,6 +36,8 @@
                                     Value="{Binding Label}" />
                             <Setter Property="ToolTip"
                                     Value="{Binding ToolTip}" />
+                            <Setter Property="Icon"
+                                    Value="{Binding Icon.Source, Converter={StaticResource IconConverter}}" />
                         </Style>
                     </ContextMenu.ItemContainerStyle>
                 </ContextMenu>

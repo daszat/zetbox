@@ -177,6 +177,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                         ObjectReferenceViewModelResources.OpenReferenceCommand_Tooltip, 
                         () => OpenReference(), 
                         () => Value != null);
+                    _openReferenceCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_openHS_png);
                 }
                 return _openReferenceCommand;
             }
@@ -249,6 +250,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                         ObjectReferenceViewModelResources.CreateNewItemAndSetValueCommand_Tooltip, 
                         () => CreateNewItemAndSetValue(null), 
                         () => AllowCreateNewItem && !DataContext.IsReadonly && !IsReadOnly);
+                    _createNewItemAndSetValueCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_NewDocumentHS_png);
                 }
                 return _createNewItemAndSetValueCommand;
             }

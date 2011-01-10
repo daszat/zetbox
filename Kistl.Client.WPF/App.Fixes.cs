@@ -109,7 +109,7 @@ namespace Kistl.Client.WPF
         //        ctx.SubmitChanges();
         //    }
         //}
-        
+
         //private static void PrintControlKindTypes()
         //{
         //    using (IKistlContext ctx = GetContext())
@@ -125,6 +125,7 @@ namespace Kistl.Client.WPF
         /// </summary>
         internal static void FixupDatabase(Func<IKistlContext> ctxFactory)
         {
+            //ImportIcons(ctxFactory());
             //FixIcons(ctxFactory());
             //FixupTypeRefParents(ctxFactory());
             // PrintEagerLoadingGraphViz();
@@ -133,6 +134,23 @@ namespace Kistl.Client.WPF
             //FixupCallImplementInterfaces(ctx);
             //RegenerateTypeRefs(ctxFactory());
         }
+
+        //private static void ImportIcons(IKistlContext ctx)
+        //{
+        //    if (ctx == null) throw new ArgumentNullException("ctx");
+
+        //    var kistlBase = ctx.FindPersistenceObject<Module>(NamedObjects.Module_KistlBase);
+
+        //    foreach (var f in System.IO.Directory.GetFiles("C:\\temp\\Icons"))
+        //    {
+        //        var fi = new System.IO.FileInfo(f);
+        //        var icon = ctx.Create<Icon>();
+        //        icon.IconFile = System.IO.Path.GetFileName(f);
+        //        icon.Module = kistlBase;
+        //        icon.Blob = ctx.Find<Blob>(ctx.CreateBlob(fi, fi.GetMimeType()));
+        //    }
+        //    ctx.SubmitChanges();
+        //}
 
         //private static string GetIconPath(string name)
         //{

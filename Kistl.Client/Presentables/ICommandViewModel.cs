@@ -54,6 +54,11 @@ namespace Kistl.Client.Presentables
         /// Suitable for display in a tool tip.
         /// </summary>
         string ToolTip { get; }
+
+        /// <summary>
+        /// Gets an optional Icon for the Command
+        /// </summary>
+        Kistl.App.GUI.Icon Icon { get; set; }
     }
 
     /// <summary>
@@ -226,6 +231,23 @@ namespace Kistl.Client.Presentables
                 {
                     _toolTipCache = value;
                     OnPropertyChanged("ToolTip");
+                }
+            }
+        }
+
+        private Kistl.App.GUI.Icon _Icon = null;
+        public Kistl.App.GUI.Icon Icon
+        {
+            get
+            {
+                return _Icon;
+            }
+            set
+            {
+                if (_Icon != value)
+                {
+                    _Icon = value;
+                    OnPropertyChanged("Icon");
                 }
             }
         }

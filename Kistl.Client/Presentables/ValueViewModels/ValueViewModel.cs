@@ -151,6 +151,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                         ValueViewModelResources.ClearValueCommand_Tooltip, 
                         () => ClearValue(), 
                         () => AllowNullInput && !DataContext.IsReadonly && !IsReadOnly);
+                    //_ClearValueCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.
                 }
                 return _ClearValueCommand;
             }

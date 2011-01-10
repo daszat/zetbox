@@ -30,6 +30,10 @@ namespace Kistl.Client.WPF.CustomControls
             bTooltip.RelativeSource = RelativeSource.Self;
             this.SetBinding(ToolTipProperty, bTooltip);
 
+            var bIcon = new Binding("CommandViewModel.Icon");
+            bIcon.RelativeSource = RelativeSource.Self;
+            this.SetBinding(ImageProperty, bIcon);
+
             this.Loaded += new RoutedEventHandler(CommandButton_Loaded);
         }
 
