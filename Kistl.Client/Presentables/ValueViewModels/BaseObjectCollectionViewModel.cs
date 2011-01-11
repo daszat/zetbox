@@ -255,6 +255,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                         BaseObjectCollectionViewModelResources.CreateNewCommand_Tooltip, 
                         () => CreateNewItem(), 
                         () => AllowAddNew && !DataContext.IsReadonly && !IsReadOnly);
+                    _CreateNewCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_NewDocumentHS_png);
                 }
                 return _CreateNewCommand;
             }
@@ -273,6 +274,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                         BaseObjectCollectionViewModelResources.AddExistingCommand_Tooltip, 
                         () => AddExistingItem(), 
                         () => AllowAddExisting && !DataContext.IsReadonly && !IsReadOnly);
+                    _AddExistingCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_SearchFolderHS_png);
                 }
                 return _AddExistingCommand;
             }

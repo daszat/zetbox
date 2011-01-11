@@ -383,6 +383,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 if (_RefreshCommand == null)
                 {
                     _RefreshCommand = ViewModelFactory.CreateViewModel<RefreshCommand.Factory>().Invoke(DataContext, this);
+                    _RefreshCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_RefreshDocViewHS_png);
                 }
                 return _RefreshCommand;
             }
@@ -396,6 +397,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 if (_OpenCommand == null)
                 {
                     _OpenCommand = ViewModelFactory.CreateViewModel<OpenDataObjectCommand.Factory>().Invoke(DataContext, RequestedWorkspaceKind, RequestedEditorKind);
+                    _OpenCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_openHS_png);
                 }
                 return _OpenCommand;
             }
@@ -410,6 +412,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 {
                     _NewCommand = ViewModelFactory.CreateViewModel<NewDataObjectCommand.Factory>().Invoke(DataContext, _type, RequestedWorkspaceKind, RequestedEditorKind, null /* I do it my way */);
                     _NewCommand.ObjectCreated += new NewDataObjectCommand.ObjectCreatedHandler(_NewCommand_ObjectCreated);
+                    _NewCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_NewDocumentHS_png);
                 }
                 return _NewCommand;
             }

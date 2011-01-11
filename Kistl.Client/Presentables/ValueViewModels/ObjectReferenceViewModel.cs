@@ -295,6 +295,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                         ObjectReferenceViewModelResources.SelectValueCommand_Tooltip, 
                         () => SelectValue(), 
                         () => !DataContext.IsReadonly && !IsReadOnly);
+                    _SelectValueCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_SearchFolderHS_png);
                 }
                 return _SelectValueCommand;
             }

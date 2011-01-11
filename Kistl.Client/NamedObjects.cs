@@ -19,6 +19,7 @@ namespace Kistl.Client
         public static readonly Guid Icon_RefreshDocViewHS_png = new Guid("16bcca1c-6bc5-4be1-88da-e1704c5db4d3");
         public static readonly Guid Icon_openHS_png = new Guid("5378cea1-3d09-4cbf-ac48-2b116b7da17b");
         public static readonly Guid Icon_deleteHS_png = new Guid("fc07f581-a70c-465d-8b41-c8767061dec3");
+        public static readonly Guid Icon_SearchFolderHS_png = new Guid("4a7e8b01-eb07-47e1-bc08-fd713b4351be");
         
 
         public static readonly Guid ViewModelDescriptor_NullableValuePropertyModel_Bool = new Guid("09d1f453-d0d9-429e-88e7-e84b33de7c2e");
