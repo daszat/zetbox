@@ -13,7 +13,7 @@
             <ToolBar.ItemTemplate>
                 <DataTemplate>
                     <ctrls:CommandButton CommandViewModel="{Binding}"
-                                         Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" />
+                                         Style="{StaticResource ImageToolbarButton}" />
                 </DataTemplate>
             </ToolBar.ItemTemplate>
         </ctrls:WorkaroundToolBar>
@@ -29,18 +29,8 @@
                             SelectedZBoxItems="{Binding SelectedProxies}"
                             GridViewColumnHeader.Click="ListView_HeaderClick">
             <ctrls:ZBoxDataGrid.ContextMenu>
-                <ContextMenu ItemsSource="{Binding Commands}">
-                    <ContextMenu.ItemContainerStyle>
-                        <Style TargetType="MenuItem">
-                            <Setter Property="Command"
-                                    Value="{Binding Converter={StaticResource CommandConverter}}" />
-                            <Setter Property="Header"
-                                    Value="{Binding Label}" />
-                            <Setter Property="ToolTip"
-                                    Value="{Binding ToolTip}" />
-                        </Style>
-                    </ContextMenu.ItemContainerStyle>
-                </ContextMenu>
+                <ContextMenu ItemsSource="{Binding Commands}"
+                             ItemContainerStyle="{StaticResource CommandMenuItem}" />
             </ctrls:ZBoxDataGrid.ContextMenu>
         </ctrls:ZBoxDataGrid>
     </DockPanel>

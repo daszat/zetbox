@@ -27,20 +27,8 @@
                   GridViewColumnHeader.Click="ListView_HeaderClick"
                   KeyboardNavigation.TabNavigation="Continue">
             <ctrls:ZBoxListView.ContextMenu>
-                <ContextMenu ItemsSource="{Binding Commands}">
-                    <ContextMenu.ItemContainerStyle>
-                        <Style TargetType="MenuItem">
-                            <Setter Property="Command"
-                                    Value="{Binding Converter={StaticResource CommandConverter}}" />
-                            <Setter Property="Header"
-                                    Value="{Binding Label}" />
-                            <Setter Property="ToolTip"
-                                    Value="{Binding ToolTip}" />
-                            <Setter Property="Icon"
-                                    Value="{Binding Icon.Source, Converter={StaticResource IconConverter}}" />
-                        </Style>
-                    </ContextMenu.ItemContainerStyle>
-                </ContextMenu>
+                <ContextMenu ItemsSource="{Binding Commands}"
+                             ItemContainerStyle="{StaticResource CommandMenuItem}" />
             </ctrls:ZBoxListView.ContextMenu>
         </ctrls:ZBoxListView>
     </DockPanel>

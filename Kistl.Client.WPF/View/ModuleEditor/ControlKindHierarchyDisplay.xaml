@@ -10,12 +10,16 @@
              commands:SmartRoutedUICommand.IsCommandSink="True">
     <DockPanel>
         <ctrls:WorkaroundToolBar DockPanel.Dock="Top">
-            <ctrls:CommandButton CommandViewModel="{Binding NewCommand}" />
+            <ctrls:CommandButton CommandViewModel="{Binding NewCommand}"
+                                 Style="{StaticResource ImageToolbarButton}" />
             <ctrls:CommandButton CommandViewModel="{Binding OpenCommand}"
-                                 CommandParameter="{Binding SelectedItem}" />
-            <ctrls:CommandButton CommandViewModel="{Binding RefreshCommand}" />
+                                 CommandParameter="{Binding SelectedItem}"
+                                 Style="{StaticResource ImageToolbarButton}" />
+            <ctrls:CommandButton CommandViewModel="{Binding RefreshCommand}"
+                                 Style="{StaticResource ImageToolbarButton}" />
             <ctrls:CommandButton CommandViewModel="{Binding DeleteCommand}"
-                                 CommandParameter="{Binding SelectedItem}"/>
+                                 CommandParameter="{Binding SelectedItem}"
+                                 Style="{StaticResource ImageToolbarButton}" />
         </ctrls:WorkaroundToolBar>
         <TreeView x:Name="NavTree"
                   ItemsSource="{Binding Path=RootControlKinds}"

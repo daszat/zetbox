@@ -19,6 +19,7 @@ namespace Kistl.Client.WPF.CustomControls
             : base()
         {
             KeyboardNavigation.SetTabNavigation(this, KeyboardNavigationMode.Continue);
+            this.Height = 33; // Fixed height
         }
 
         private delegate void MethodeInvoke();

@@ -12,7 +12,7 @@ namespace Kistl.Client.WPF.Converter
     using Kistl.App.Extensions;
     using System.Windows.Media.Imaging;
 
-    [ValueConversion(typeof(IDataObject), typeof(string))]
+    [ValueConversion(typeof(object), typeof(BitmapImage))]
     public class IconConverter : IValueConverter
     {
         private readonly IFrozenContext FrozenContext;

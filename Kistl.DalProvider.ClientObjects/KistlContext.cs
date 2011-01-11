@@ -1002,14 +1002,5 @@ namespace Kistl.DalProvider.Client
         {
             throw new NotSupportedException();
         }
-
-        #region IZBoxClientContextInternals Members
-
-        object IZBoxClientContextInternals.InvokeServerMethod<T>(T obj, string name, IEnumerable<Type> parameterTypes, params object[] parameter)
-        {
-            throw new NotSupportedException();
-        }
-
-        #endregion
     }
 }

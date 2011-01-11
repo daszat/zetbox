@@ -5,18 +5,8 @@
                      xmlns:view="clr-namespace:Kistl.Client.WPF.View.KistlBase"
                      ToolTip="{Binding ToolTip, Mode=OneWay}">
     <view:PropertyEditor.ContextMenu>
-        <ContextMenu ItemsSource="{Binding Commands}">
-            <ContextMenu.ItemContainerStyle>
-                <Style TargetType="MenuItem">
-                    <Setter Property="Command"
-                            Value="{Binding Converter={StaticResource CommandConverter}}" />
-                    <Setter Property="Header"
-                            Value="{Binding Label}" />
-                    <Setter Property="ToolTip"
-                            Value="{Binding ToolTip}" />
-                </Style>
-            </ContextMenu.ItemContainerStyle>
-        </ContextMenu>
+        <ContextMenu ItemsSource="{Binding Commands}"
+                     ItemContainerStyle="{StaticResource CommandMenuItem}"/>
     </view:PropertyEditor.ContextMenu>
     <DockPanel>
         <ctrls:DropDownButton>
@@ -27,18 +17,8 @@
                        Source="/Kistl.Client.WPF;component/Images/EditTableHS.png" />
             </ctrls:DropDownButton.Content>
             <ctrls:DropDownButton.DropDown>
-                <ContextMenu ItemsSource="{Binding Commands}">
-                    <ContextMenu.ItemContainerStyle>
-                        <Style TargetType="MenuItem">
-                            <Setter Property="Command"
-                                    Value="{Binding Converter={StaticResource CommandConverter}}" />
-                            <Setter Property="Header"
-                                    Value="{Binding Label}" />
-                            <Setter Property="ToolTip"
-                                    Value="{Binding ToolTip}" />
-                        </Style>
-                    </ContextMenu.ItemContainerStyle>
-                </ContextMenu>
+                <ContextMenu ItemsSource="{Binding Commands}"
+                             ItemContainerStyle="{StaticResource CommandMenuItem}"/>
             </ctrls:DropDownButton.DropDown>
         </ctrls:DropDownButton>
         <ContentPresenter Content="{Binding Value, Mode=OneWay}"

@@ -32,15 +32,13 @@
 
         <ctrls:WorkaroundToolBar DockPanel.Dock="Top"
                                  ItemsSource="{Binding Commands}"
-                                 Visibility="{Binding ShowCommands, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                 Visibility="{Binding ShowCommands, Converter={StaticResource BooleanToVisibilityConverter}}"                                 
                                  Margin="0 0 0 5">
             <ToolBar.ItemTemplate>
                 <DataTemplate>
-                    <Button Command="{Binding Converter={StaticResource CommandConverter}}"
-                            CommandParameter="{Binding DataContext.SelectedItems, RelativeSource={RelativeSource AncestorType={x:Type clientKistlBase:InstanceListDisplay}}}"
-                            Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
-                            Content="{Binding Label}"
-                            ToolTip="{Binding ToolTip}" />
+                    <ctrls:CommandButton CommandViewModel="{Binding}"
+                                         CommandParameter="{Binding DataContext.SelectedItems, RelativeSource={RelativeSource AncestorType={x:Type clientKistlBase:InstanceListDisplay}}}"
+                                         Style="{StaticResource ImageToolbarButton}" />
                 </DataTemplate>
             </ToolBar.ItemTemplate>
         </ctrls:WorkaroundToolBar>

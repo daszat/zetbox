@@ -11,6 +11,7 @@ namespace Kistl.Client.WPF.CustomControls
     using Kistl.Client.Presentables;
     using System.ComponentModel;
     using System.Windows.Media;
+    using Kistl.Client.WPF.Converter;
     
     public class CommandButton
         : Button
@@ -30,9 +31,10 @@ namespace Kistl.Client.WPF.CustomControls
             bTooltip.RelativeSource = RelativeSource.Self;
             this.SetBinding(ToolTipProperty, bTooltip);
 
-            var bIcon = new Binding("CommandViewModel.Icon");
-            bIcon.RelativeSource = RelativeSource.Self;
-            this.SetBinding(ImageProperty, bIcon);
+            var bImage = new Binding("CommandViewModel.Icon");
+            bImage.RelativeSource = RelativeSource.Self;
+            bImage.Converter = (IValueConverter)Application.Current.Resources["IconConverter"];
+            this.SetBinding(ImageProperty, bImage);
 
             this.Loaded += new RoutedEventHandler(CommandButton_Loaded);
         }

@@ -110,14 +110,17 @@ namespace Kistl.Client.WPF
                 SplashScreen.SetInfo(Kistl.Client.Properties.Resources.Startup_Launcher);
 
                 // Init Resources
-                this.Resources["IconConverter"] = new IconConverter(container.Resolve<IFrozenContext>(), container.Resolve<IKistlContext>());
+                var iconConverter = new IconConverter(container.Resolve<IFrozenContext>(), container.Resolve<IKistlContext>());
+                this.Resources["IconConverter"] = iconConverter;
+                this.Resources["ImageCtrlConverter"] = new ImageCtrlConverter(iconConverter);
                 var templateSelectorFactory = container.Resolve<Kistl.Client.WPF.View.VisualTypeTemplateSelector.Factory>();
                 this.Resources["defaultTemplateSelector"] = templateSelectorFactory(null);
                 this.Resources["listItemTemplateSelector"] = templateSelectorFactory("Kistl.App.GUI.SingleLineKind");
                 this.Resources["dashBoardTemplateSelector"] = templateSelectorFactory("Kistl.App.GUI.DashboardKind");
 
-                // Manually add DefaultViews
+                // Manually add DefaultStyles and DefaultViews
                 // Otherwise converter are unknown
+                this.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Kistl.Client.WPF;component/View/DefaultStyles.xaml", UriKind.Relative) });
                 this.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Kistl.Client.WPF;component/View/DefaultViews.xaml", UriKind.Relative) });
 
                 // Load registrated dictionaries from autofac
