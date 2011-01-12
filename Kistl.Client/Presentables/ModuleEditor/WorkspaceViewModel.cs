@@ -28,15 +28,15 @@ namespace Kistl.Client.Presentables.ModuleEditor
         }
 
         private Module _CurrentModule;
-        public Module CurrentModule 
+        public Module CurrentModule
         {
-            get 
+            get
             {
                 if (_CurrentModule == null)
                 {
                     _CurrentModule = DataContext.GetQuery<Module>().FirstOrDefault();
                 }
-                return _CurrentModule; 
+                return _CurrentModule;
             }
             set
             {
@@ -123,7 +123,6 @@ namespace Kistl.Client.Presentables.ModuleEditor
                                     ctx.SubmitChanges();
                                 }
                             }
-
                         }));
                     lst.Add(lstMdl);
 
@@ -188,7 +187,6 @@ namespace Kistl.Client.Presentables.ModuleEditor
 
                     var diagMdl = ViewModelFactory.CreateViewModel<DiagramViewModel.Factory>().Invoke(DataContext, CurrentModule);
                     lst.Add(diagMdl);
-
                     _TreeItems = new ReadOnlyObservableCollection<ViewModel>(lst);
                 }
                 return _TreeItems;

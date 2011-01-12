@@ -56,6 +56,25 @@ namespace Kistl.Client.Presentables.GUI
 
             _screen = screen;
             _additionalCommandsRO = new ReadOnlyObservableCollection<CommandViewModel>(_additionalCommands);
+
+            _screen.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(_screen_PropertyChanged);
+        }
+
+        void _screen_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            switch(e.PropertyName)
+            {
+                case "Title":
+                    OnPropertyChanged("Name");
+                    OnPropertyChanged("Title");
+                    break;
+                case "Parent":
+                    OnPropertyChanged("Parent");
+                    break;
+                case "Children":
+                    OnPropertyChanged("Children");
+                    break;
+            }
         }
 
         public override string Name
