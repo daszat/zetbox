@@ -33,12 +33,11 @@ namespace Kistl.Client.Presentables.TimeRecords
         /// <param name="appCtx">which GuiApplicationContext to use</param>
         /// <param name="dataCtx">which <see cref="IKistlContext"/> to use</param>
         /// <param name="obj">the modelled <see cref="WorkEffort"/></param>
-        /// <param name="config"></param>
         public WorkEffortModel(
-            IViewModelDependencies appCtx, KistlConfig config,
+            IViewModelDependencies appCtx,
             IKistlContext dataCtx,
             WorkEffort obj)
-            : base(appCtx, config, dataCtx, obj)
+            : base(appCtx, dataCtx, obj)
         {
             this._entry = obj;
             this._entry.PropertyChanged += (sender, args) =>

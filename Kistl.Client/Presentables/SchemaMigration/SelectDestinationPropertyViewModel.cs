@@ -139,9 +139,9 @@ namespace Kistl.Client.Presentables.SchemaMigration
         private readonly PossibleDestPropertyViewModel _parent;
 
         public PossibleDestPropertyViewModel(
-            IViewModelDependencies appCtx, KistlConfig config, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, IKistlContext dataCtx,
             Property obj, PossibleDestPropertyViewModel parent)
-            : base(appCtx, config, dataCtx, obj)
+            : base(appCtx, dataCtx, obj)
         {
             this._prop = obj;
             this._parent = parent;

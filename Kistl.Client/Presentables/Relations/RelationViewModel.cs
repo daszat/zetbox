@@ -24,9 +24,9 @@ namespace Kistl.Client.Presentables.Relations
         private Relation _relation;
 
         public RelationViewModel(
-            IViewModelDependencies appCtx, KistlConfig config, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, IKistlContext dataCtx,
             Relation rel)
-            : base(appCtx, config, dataCtx, rel)
+            : base(appCtx, dataCtx, rel)
         {
             _relation = rel;
             _relation.PropertyChanged += (sender, args) => OnPropertyChanged(args.PropertyName);

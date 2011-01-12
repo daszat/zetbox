@@ -21,9 +21,9 @@ namespace Kistl.Client.Presentables
 #endif
 
         public DescribedMethodViewModel(
-            IViewModelDependencies appCtx, KistlConfig config, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, IKistlContext dataCtx,
             Method meth)
-            : base(appCtx, config, dataCtx, meth)
+            : base(appCtx, dataCtx, meth)
         {
             _method = meth;
         }

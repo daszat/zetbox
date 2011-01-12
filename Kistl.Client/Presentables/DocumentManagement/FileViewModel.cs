@@ -16,7 +16,7 @@ namespace Kistl.Client.Presentables.DocumentManagement
         public FileViewModel(
             IViewModelDependencies appCtx, KistlConfig config, IKistlContext dataCtx,
             File obj)
-            : base(appCtx, config, dataCtx, obj)
+            : base(appCtx, dataCtx, obj)
         {
             this.File = obj;
         }

@@ -37,14 +37,11 @@ namespace Kistl.Client.Presentables
             return (DataObjectViewModel)dataCtx.GetViewModelCache().LookupOrCreate(obj, () => f.CreateViewModel<DataObjectViewModel.Factory>(obj).Invoke(dataCtx, obj));
         }
 
-        protected readonly KistlConfig config;
-
         public DataObjectViewModel(
-            IViewModelDependencies appCtx, KistlConfig config, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, IKistlContext dataCtx,
             IDataObject obj)
             : base(appCtx, dataCtx)
         {
-            this.config = config;
             _object = obj;
             _object.PropertyChanged += Object_PropertyChanged;
         }

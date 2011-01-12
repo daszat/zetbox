@@ -44,8 +44,8 @@ namespace Kistl.Client.Presentables.ModuleEditor
             return Name;
         }
 
-        private ViewModel _selectedItem;
-        public ViewModel SelectedItem
+        private NavigationScreenViewModel _selectedItem;
+        public NavigationScreenViewModel SelectedItem
         {
             get
             {
@@ -115,6 +115,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
                 if (_NewCommand == null)
                 {
                     _NewCommand = ViewModelFactory.CreateViewModel<NewDataObjectCommand.Factory>().Invoke(DataContext, typeof(NavigationScreen).GetObjectClass(FrozenContext), null, null, this);
+                    _NewCommand.ObjectCreated += (obj) => ((NavigationScreen)obj).Parent = SelectedItem != null ? obj.Context.Find<NavigationScreen>(SelectedItem.ID) : null;
                 }
                 return _NewCommand;
             }

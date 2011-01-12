@@ -29,11 +29,7 @@
                 <HierarchicalDataTemplate DataType="{x:Type viewModels:NavigationScreenViewModel}"
                                           ItemsSource="{Binding Children}">
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="{Binding Converter={StaticResource IconConverter}}"
-                               Width="14"
-                               Height="14" />
-                        <TextBlock Text="{Binding PropertyModelsByName[Title].Value}"
-                                   Margin="3,0,0,0" />
+                        <TextBlock Text="{Binding Title}" />
                     </StackPanel>
                 </HierarchicalDataTemplate>
             </TreeView.Resources>

@@ -13,7 +13,7 @@ namespace Kistl.Client.Presentables.GUI
 
     [ViewModelDescriptor]
     public class NavigationScreenViewModel
-        : ViewModel
+        : DataObjectViewModel
     {
 #if MONO
         // See https://bugzilla.novell.com/show_bug.cgi?id=660553
@@ -42,9 +42,7 @@ namespace Kistl.Client.Presentables.GUI
         }
 
         private readonly NavigationScreen _screen;
-        private readonly NavigationScreenViewModel _parent;
-        private readonly ObservableCollection<NavigationScreenViewModel> _children = new ObservableCollection<NavigationScreenViewModel>();
-        private readonly ReadOnlyObservableCollection<NavigationScreenViewModel> _childrenRO;
+        private NavigationScreenViewModel _parent;
 
         private readonly ObservableCollection<CommandViewModel> _additionalCommands = new ObservableCollection<CommandViewModel>();
         private readonly ReadOnlyObservableCollection<CommandViewModel> _additionalCommandsRO;
@@ -52,17 +50,11 @@ namespace Kistl.Client.Presentables.GUI
         private NavigatorViewModel _displayer = null;
 
         public NavigationScreenViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, NavigationScreen screen)
-            : base(dependencies, dataCtx)
+            : base(dependencies, dataCtx, screen)
         {
             if (screen == null) throw new ArgumentNullException("screen");
 
-            if(screen.Parent != null) _parent = Fetch(ViewModelFactory, DataContext, screen.Parent);
             _screen = screen;
-            foreach (var s in _screen.Children)
-            {
-                _children.Add(NavigationScreenViewModel.Fetch(ViewModelFactory, DataContext, s));
-            }
-            _childrenRO = new ReadOnlyObservableCollection<NavigationScreenViewModel>(_children);
             _additionalCommandsRO = new ReadOnlyObservableCollection<CommandViewModel>(_additionalCommands);
         }
 
@@ -75,6 +67,8 @@ namespace Kistl.Client.Presentables.GUI
         {
             get { return _screen.Title; }
         }
+
+        public NavigationScreen Screen { get { return _screen; } }
 
         public Guid ExportGuid { get { return _screen.ExportGuid; } }
 
@@ -89,7 +83,7 @@ namespace Kistl.Client.Presentables.GUI
                 if (_displayer != value)
                 {
                     _displayer = value;
-                    foreach (var c in _children)
+                    foreach (var c in Children)
                     {
                         c.Displayer = value;
                     }
@@ -100,13 +94,31 @@ namespace Kistl.Client.Presentables.GUI
 
         public NavigationScreenViewModel Parent
         {
-            get { return _parent; }
+            get 
+            {
+                if (_parent == null && _screen.Parent != null)
+                {
+                    _parent = Fetch(ViewModelFactory, DataContext, _screen.Parent);
+                }
+                return _parent; 
+            }
         }
 
+        private ObservableCollection<NavigationScreenViewModel> _children;
+        private ReadOnlyObservableCollection<NavigationScreenViewModel> _childrenRO;
         public ReadOnlyObservableCollection<NavigationScreenViewModel> Children
         {
             get
             {
+                if (_childrenRO == null)
+                {
+                    _children = new ObservableCollection<NavigationScreenViewModel>();
+                    foreach (var s in _screen.Children)
+                    {
+                        _children.Add(NavigationScreenViewModel.Fetch(ViewModelFactory, DataContext, s));
+                    }
+                    _childrenRO = new ReadOnlyObservableCollection<NavigationScreenViewModel>(_children);
+                }
                 return _childrenRO;
             }
         }

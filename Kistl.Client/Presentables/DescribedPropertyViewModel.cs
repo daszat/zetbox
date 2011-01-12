@@ -20,9 +20,9 @@ namespace Kistl.Client.Presentables
 #endif
 
         public DescribedPropertyViewModel(
-            IViewModelDependencies appCtx, KistlConfig config, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, IKistlContext dataCtx,
             Property prop)
-            : base(appCtx, config, dataCtx, prop)
+            : base(appCtx, dataCtx, prop)
         {
             _prop = prop;
         }

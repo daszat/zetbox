@@ -22,9 +22,9 @@ namespace Kistl.Client.Presentables
 #endif
 
         public DataTypeViewModel(
-            IViewModelDependencies appCtx, KistlConfig config, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, IKistlContext dataCtx,
             DataType dt)
-            : base(appCtx, config, dataCtx, dt)
+            : base(appCtx, dataCtx, dt)
         {
             _dataType = dt;
         }

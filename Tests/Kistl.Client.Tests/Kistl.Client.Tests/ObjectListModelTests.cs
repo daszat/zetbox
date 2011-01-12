@@ -57,7 +57,7 @@ namespace Kistl.Client.Tests
         private DataObjectViewModel CreateNewDataObjectViewModel()
         {
             var newMock = scope.Resolve<KistlMockFactory>().CreateTestObject();
-            var dom = new DataObjectViewModel(null, null, GetContext(), newMock.Object);
+            var dom = new DataObjectViewModel(null, GetContext(), newMock.Object);
             models[objMock.Object] = dom;
             return dom;
         }

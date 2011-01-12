@@ -21,9 +21,9 @@ namespace Kistl.Client.Presentables.Relations
 #endif
 
         public RelationEndViewModel(
-            IViewModelDependencies appCtx, KistlConfig config, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, IKistlContext dataCtx,
             RelationEnd relEnd)
-            : base(appCtx, config, dataCtx, relEnd)
+            : base(appCtx, dataCtx, relEnd)
         {
         }
 

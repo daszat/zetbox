@@ -23,9 +23,9 @@ namespace Kistl.Client.Presentables.ObjectBrowser
 #endif
 
         public ModuleViewModel(
-            IViewModelDependencies appCtx, KistlConfig config, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, IKistlContext dataCtx,
             Module mdl)
-            : base(appCtx, config, dataCtx, mdl)
+            : base(appCtx, dataCtx, mdl)
         {
             _module = mdl;
             _module.PropertyChanged += ModulePropertyChanged;

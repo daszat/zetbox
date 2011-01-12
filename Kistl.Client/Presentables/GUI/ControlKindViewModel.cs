@@ -21,8 +21,8 @@ namespace Kistl.Client.Presentables.GUI
         public new delegate ControlKindViewModel Factory(IKistlContext dataCtx, ControlKind obj);
 #endif
 
-        public ControlKindViewModel(IViewModelDependencies dependencies, KistlConfig config, IKistlContext dataCtx, ControlKind obj)
-            : base(dependencies, config, dataCtx, obj)
+        public ControlKindViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ControlKind obj)
+            : base(dependencies, dataCtx, obj)
         {
             Kind = obj;
         }

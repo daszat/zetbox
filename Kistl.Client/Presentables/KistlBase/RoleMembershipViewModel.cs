@@ -24,9 +24,9 @@ namespace Kistl.Client.Presentables.KistlBase
 #endif
 
         public RoleMembershipViewModel(
-            IViewModelDependencies appCtx, KistlConfig config, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, IKistlContext dataCtx,
             RoleMembership roleMembership)
-            : base(appCtx, config, dataCtx, roleMembership)
+            : base(appCtx, dataCtx, roleMembership)
         {
             _roleMembership = roleMembership;
             _roleMembership.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(_roleMembership_PropertyChanged);

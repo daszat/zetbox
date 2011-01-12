@@ -27,9 +27,9 @@ namespace Kistl.Client.Presentables.KistlBase
 #endif
 
         public MethodInvocationViewModel(
-            IViewModelDependencies appCtx, KistlConfig config, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, IKistlContext dataCtx,
             MethodInvocation mdl)
-            : base(appCtx, config, dataCtx, mdl)
+            : base(appCtx, dataCtx, mdl)
         {
         }
 

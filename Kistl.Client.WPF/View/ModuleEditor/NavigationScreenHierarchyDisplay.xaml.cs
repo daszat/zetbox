@@ -16,6 +16,7 @@ using Kistl.Client.Presentables.ModuleEditor;
 using QuickGraph;
 using Kistl.App.Base;
 using GraphSharp.Controls;
+using Kistl.Client.Presentables.GUI;
 
 namespace Kistl.Client.WPF.View.ModuleEditor
 {
@@ -37,7 +38,7 @@ namespace Kistl.Client.WPF.View.ModuleEditor
 
         private void NavTree_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            var item = NavTree.SelectedItem as Kistl.Client.Presentables.ViewModel;
+            var item = NavTree.SelectedItem as NavigationScreenViewModel;
             if (item != null)
             {
                 this.ViewModel.SelectedItem = item;

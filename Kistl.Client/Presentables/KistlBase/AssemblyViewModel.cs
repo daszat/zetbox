@@ -24,9 +24,9 @@ namespace Kistl.Client.Presentables.KistlBase
         private Assembly _assembly;
 
         public AssemblyViewModel(
-            IViewModelDependencies appCtx, KistlConfig config, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, IKistlContext dataCtx,
             Assembly obj)
-            : base(appCtx, config, dataCtx, obj)
+            : base(appCtx, dataCtx, obj)
         {
             _assembly = obj;
         }

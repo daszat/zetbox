@@ -35,9 +35,9 @@ namespace Kistl.Client.Presentables.ModuleEditor
         private DiagramViewModel _diagMdl;
         protected readonly Func<IKistlContext> ctxFactory;
 
-        public DataTypeGraphModel(IViewModelDependencies appCtx, KistlConfig config, IKistlContext dataCtx,
+        public DataTypeGraphModel(IViewModelDependencies appCtx, IKistlContext dataCtx,
             DataType obj, DiagramViewModel parent, Func<IKistlContext> ctxFactory)
-            : base(appCtx, config, dataCtx, obj)
+            : base(appCtx, dataCtx, obj)
         {
             this._diagMdl = parent;
             this.ctxFactory = ctxFactory;

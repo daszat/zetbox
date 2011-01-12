@@ -23,9 +23,9 @@ namespace Kistl.Client.Presentables
 #endif
 
         public ObjectClassViewModel(
-            IViewModelDependencies appCtx, KistlConfig config, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, IKistlContext dataCtx,
             ObjectClass cls)
-            : base(appCtx, config, dataCtx, cls)
+            : base(appCtx, dataCtx, cls)
         {
             _class = cls;
         }
