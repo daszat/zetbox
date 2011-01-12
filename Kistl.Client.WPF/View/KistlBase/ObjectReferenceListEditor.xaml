@@ -26,7 +26,6 @@
         <!-- configured from code, see RefreshGridView() -->
         <ctrls:ZBoxListView x:Name="lst"
                   ItemsSource="{Binding Value, Mode=OneWay, ValidatesOnDataErrors=true}"
-                  SelectedItem="{Binding SelectedItem}"
                   MinHeight="50"
                   SelectedZBoxItems="{Binding SelectedItems}"
                   ItemContainerStyle="{StaticResource GridViewItemContainerStyle}"
