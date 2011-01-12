@@ -52,9 +52,12 @@ namespace Kistl.Client.WPF.View
         /// <param name="e"></param>
         private void InfoTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            var binding = BindingOperations.GetBindingExpressionBase(txt, TextBox.TextProperty);
-            binding.UpdateSource();
-            binding.UpdateTarget();
+            if (ViewModel != null && ViewModel.IsReadOnly == false)
+            {
+                var binding = BindingOperations.GetBindingExpressionBase(txt, TextBox.TextProperty);
+                binding.UpdateSource();
+                binding.UpdateTarget();
+            }
         }
 
         protected override FrameworkElement MainControl

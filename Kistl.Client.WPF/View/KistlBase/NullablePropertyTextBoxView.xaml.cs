@@ -22,23 +22,23 @@ namespace Kistl.Client.WPF.View
     /// <summary>
     /// Interaction logic for NullablePropertyTextBoxView.xaml
     /// </summary>
-    public partial class NullablePropertyTextBoxView : PropertyEditor, IHasViewModel<IValueViewModel<string>>, IHasViewModel<IFormattedValueViewModel>
+    public partial class NullablePropertyTextBoxView : PropertyEditor, IHasViewModel<BaseValueViewModel>, IHasViewModel<IFormattedValueViewModel>
     {
         public NullablePropertyTextBoxView()
         {
             InitializeComponent();
         }
 
-        #region IHasViewModel<IValueModelAsString> Members
+        #region IHasViewModel<BaseValueViewModel> Members
 
-        public IValueViewModel<string> ViewModel
+        public BaseValueViewModel ViewModel
         {
-            get { return (IValueViewModel<string>)DataContext; }
+            get { return (BaseValueViewModel)DataContext; }
         }
 
         #endregion
 
-        #region IHasViewModel<IValueModelAsString> Members
+        #region IHasViewModel<IFormattedValueViewModel> Members
 
         IFormattedValueViewModel IHasViewModel<IFormattedValueViewModel>.ViewModel
         {
@@ -54,9 +54,12 @@ namespace Kistl.Client.WPF.View
         /// <param name="e"></param>
         private void InfoTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            var binding = BindingOperations.GetBindingExpressionBase(txt, TextBox.TextProperty);
-            binding.UpdateSource();
-            binding.UpdateTarget();
+            if (ViewModel != null && ViewModel.IsReadOnly == false)
+            {
+                var binding = BindingOperations.GetBindingExpressionBase(txt, TextBox.TextProperty);
+                binding.UpdateSource();
+                binding.UpdateTarget();
+            }
         }
 
         protected override FrameworkElement MainControl

@@ -113,9 +113,9 @@ namespace Kistl.Client.Presentables.ModuleEditor
                                 var ctx = ctxFactory(ClientIsolationLevel.PrefereClientData);
                                 
                                 var a = ctx.Find<Assembly>(mdl.ID);
-                                a.RegenerateTypeRefs();
+                                var workspaceShown = a.RegenerateTypeRefs();
 
-                                if (ctx.AttachedObjects.OfType<IPersistenceObject>().Count(d => d.ObjectState == DataObjectState.New) == 0)
+                                if (!workspaceShown)
                                 {
                                     // Submit only if no new Descriptor has been created
                                     // when new Descriptor has been created a Workspace will 

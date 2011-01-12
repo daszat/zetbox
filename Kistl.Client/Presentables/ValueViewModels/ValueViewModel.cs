@@ -146,10 +146,10 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 if (_ClearValueCommand == null)
                 {
                     _ClearValueCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
-                        DataContext, 
-                        ValueViewModelResources.ClearValueCommand_Name, 
-                        ValueViewModelResources.ClearValueCommand_Tooltip, 
-                        () => ClearValue(), 
+                        DataContext,
+                        ValueViewModelResources.ClearValueCommand_Name,
+                        ValueViewModelResources.ClearValueCommand_Tooltip,
+                        () => ClearValue(),
                         () => AllowNullInput && !DataContext.IsReadonly && !IsReadOnly);
                     //_ClearValueCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.
                 }
@@ -264,7 +264,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             }
             catch
             {
-                // One of the rare cases where exceptions can be gracefully ignored
+                // TODO: Set Error in ValueModel
             }
         }
 
@@ -429,10 +429,10 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 if (_EditCommand == null)
                 {
                     _EditCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
-                        DataContext, 
-                        ValueViewModelResources.EditCommand_Name, 
-                        ValueViewModelResources.EditCommand_Tooltip, 
-                        () => Edit(), 
+                        DataContext,
+                        ValueViewModelResources.EditCommand_Name,
+                        ValueViewModelResources.EditCommand_Tooltip,
+                        () => Edit(),
                         null);
                 }
                 return _EditCommand;
@@ -447,6 +447,28 @@ namespace Kistl.Client.Presentables.ValueViewModels
                         Value,
                         (v) => Value = v),
                     true);
+        }
+    }
+
+    public class NullableGuidPropertyViewModel : NullableStructValueViewModel<Guid>
+    {
+        public new delegate NullableGuidPropertyViewModel Factory(IKistlContext dataCtx, IValueModel mdl);
+
+        public NullableGuidPropertyViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, IValueModel mdl)
+            : base(dependencies, dataCtx, mdl)
+        {
+        }
+
+        protected override void ParseValue(string str)
+        {
+            try
+            {
+                this.Value = new Guid(str);
+            }
+            catch
+            {
+                // TODO: Set Error in ValueModel
+            }
         }
     }
 

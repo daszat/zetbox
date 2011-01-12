@@ -17,9 +17,7 @@ namespace Kistl.App.Base
 {
     public partial class CustomClientActions_KistlBase
     {
-
-
-        public static void OnRegenerateTypeRefs_Assembly(Assembly assembly)
+        public static void OnRegenerateTypeRefs_Assembly(Assembly assembly, MethodReturnEventArgs<System.Boolean> e)
         {
             using (Logging.Log.InfoTraceMethodCall(assembly.Name))
             {
@@ -56,15 +54,18 @@ namespace Kistl.App.Base
                         }
 
                         _mdlFactory.ShowModel(workSpace, true);
+                        e.Result = true;
                     }
                     else
                     {
                         _mdlFactory.ShowMessage("Regenerating TypeRefs finished successfully, no new Descriptors or Assemblies found", "Success");
+                        e.Result = false;
                     }
                 }
                 catch (FileNotFoundException ex)
                 {
                     Logging.Log.Warn("Failed to RegenerateTypeRefs", ex);
+                    e.Result = false;
                 }
             }
         }

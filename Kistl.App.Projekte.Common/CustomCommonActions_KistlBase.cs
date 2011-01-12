@@ -160,7 +160,7 @@ namespace Kistl.App.Base
             }
             else
             {
-                sb.AppendFormat("<<TYPE>> obj", obj.InvokeOnProperty.ObjectClass.Module.Namespace, obj.InvokeOnProperty.ObjectClass.Name);
+                sb.AppendFormat("<<TYPE>> obj");
             }
 
             string propType = obj.InvokeOnProperty != null ? obj.InvokeOnProperty.GetPropertyTypeString() : "<<TYPE>>";
@@ -288,10 +288,11 @@ namespace Kistl.App.Base
             obj.UpdateToStringCache();
         }
 
-        public static void OnGenericArguments_PostSetter_TypeRef(Kistl.App.Base.TypeRef obj, PropertyPostSetterEventArgs<Kistl.App.Base.TypeRef> e)
-        {
-            obj.UpdateToStringCache();
-        }
+        // Not supported yet
+        //public static void OnGenericArguments_PostSetter_TypeRef(Kistl.App.Base.TypeRef obj, PropertyPostSetterEventArgs<Kistl.App.Base.TypeRef> e)
+        //{
+        //    obj.UpdateToStringCache();
+        //}
 
         private const string transientTypeTypeRefCacheKey = "__TypeTypeRefCache__";
         public static void OnAsType_TypeRef(TypeRef obj, MethodReturnEventArgs<Type> e, bool throwOnError)
