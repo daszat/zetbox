@@ -745,10 +745,10 @@ namespace Kistl.Client.Presentables.KistlBase
         #region UI
         private bool _isItemsReadOnly = true;
         /// <summary>
-        /// If true, all Items will be set to readonly
+        /// If true, all Items will be set to readonly. Default is true.
         /// </summary>
         /// <remarks>
-        /// Default value is true
+        /// Default value is true because normaly a InstanceList represents a Search Result
         /// </remarks>
         public bool IsItemsReadOnly
         {

@@ -138,11 +138,8 @@ namespace Kistl.Client.Presentables.ModuleEditor
                     lst.Add(lstMdl);
 
                     // NavigationScreens
-                    lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, null, DataContext.GetQuery<NavigationScreen>());
-                    lstMdl.EnableAutoFilter = false;
-                    lstMdl.Filter.Add(new ConstantValueFilterModel("Module = @0", CurrentModule));
-                    lstMdl.Filter.Add(new ToStringFilterModel(FrozenContext));
-                    lst.Add(lstMdl);
+                    var navScreenMdl = ViewModelFactory.CreateViewModel<NavigationScreenHierarchyViewModel.Factory>().Invoke(DataContext, CurrentModule);
+                    lst.Add(navScreenMdl);
 
                     // ViewDescriptor
                     lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, null, DataContext.GetQuery<ViewDescriptor>());
@@ -168,6 +165,13 @@ namespace Kistl.Client.Presentables.ModuleEditor
                     // ControlKinds
                     var ctrlKindMdl = ViewModelFactory.CreateViewModel<ControlKindHierarchyViewModel.Factory>().Invoke(DataContext, CurrentModule);
                     lst.Add(ctrlKindMdl);
+
+                    // Icons
+                    lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, null, DataContext.GetQuery<Icon>());
+                    lstMdl.EnableAutoFilter = false;
+                    lstMdl.Filter.Add(new ConstantValueFilterModel("Module = @0", CurrentModule));
+                    lstMdl.Filter.Add(new ToStringFilterModel(FrozenContext));
+                    lst.Add(lstMdl);
 
                     // Relation
                     lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, null, DataContext.GetQuery<Relation>());

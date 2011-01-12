@@ -14,16 +14,16 @@ namespace Kistl.Client.Presentables.ModuleEditor
     using Kistl.Client.Presentables.KistlBase;
 
     [ViewModelDescriptor]
-    public class ControlKindHierarchyViewModel : ViewModel, IRefreshCommandListener
+    public class NavigationScreenHierarchyViewModel : ViewModel, IRefreshCommandListener
     {
 #if MONO
         // See https://bugzilla.novell.com/show_bug.cgi?id=660553
         public delegate ControlKindHierarchyViewModel Factory(IKistlContext dataCtx, Module module);
 #else
-        public new delegate ControlKindHierarchyViewModel Factory(IKistlContext dataCtx, Module module);
+        public new delegate NavigationScreenHierarchyViewModel Factory(IKistlContext dataCtx, Module module);
 #endif
 
-        public ControlKindHierarchyViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, Module module, Func<IKistlContext> ctxFactory)
+        public NavigationScreenHierarchyViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, Module module, Func<IKistlContext> ctxFactory)
             : base(appCtx, dataCtx)
         {
             this.ctxFactory = ctxFactory;
@@ -36,7 +36,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
 
         public override string Name
         {
-            get { return "ControlKind Hierarchy"; }
+            get { return "NavigationScreen Hierarchy"; }
         }
 
         public override string ToString()
@@ -61,29 +61,22 @@ namespace Kistl.Client.Presentables.ModuleEditor
             }
         }
 
-        private ReadOnlyObservableCollection<ControlKindViewModel> _rootControlKinds = null;
-        public ReadOnlyObservableCollection<ControlKindViewModel> RootControlKinds
+        private ReadOnlyObservableCollection<NavigationScreenViewModel> _rootScreens = null;
+        public ReadOnlyObservableCollection<NavigationScreenViewModel> RootScreens
         {
             get
             {
-                if (_rootControlKinds == null)
+                if (_rootScreens == null)
                 {
                     var moduleID = Module.ID;
-                    _rootControlKinds = new ReadOnlyObservableCollection<ControlKindViewModel>(new ObservableCollection<ControlKindViewModel>(
-                        DataContext.GetQuery<ControlKind>()
+                    _rootScreens = new ReadOnlyObservableCollection<NavigationScreenViewModel>(new ObservableCollection<NavigationScreenViewModel>(
+                        DataContext.GetQuery<NavigationScreen>()
                         .Where(i => i.Module.ID == moduleID)
                         .Where(i => i.Parent == null)
-                        .ToList()
-                        .Union(DataContext.GetQuery<ControlKind>()
-                            .Where(i => i.Module.ID == moduleID)
-                            .Where(i => i.Parent != null)
-                            .Where(i => i.Parent.Module.ID != moduleID)
-                            .ToList()
-                        )
-                        .OrderBy(i => i.Name)
-                        .Select(i => ViewModelFactory.CreateViewModel<ControlKindViewModel.Factory>().Invoke(DataContext, i))));
+                        .OrderBy(i => i.Title)
+                        .Select(i => NavigationScreenViewModel.Fetch(ViewModelFactory, DataContext, i))));
                 }
-                return _rootControlKinds;
+                return _rootScreens;
             }
         }
 
@@ -121,7 +114,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
             {
                 if (_NewCommand == null)
                 {
-                    _NewCommand = ViewModelFactory.CreateViewModel<NewDataObjectCommand.Factory>().Invoke(DataContext, typeof(ControlKind).GetObjectClass(FrozenContext), null, null, this);
+                    _NewCommand = ViewModelFactory.CreateViewModel<NewDataObjectCommand.Factory>().Invoke(DataContext, typeof(NavigationScreen).GetObjectClass(FrozenContext), null, null, this);
                 }
                 return _NewCommand;
             }
@@ -145,8 +138,8 @@ namespace Kistl.Client.Presentables.ModuleEditor
 
         public void Refresh()
         {
-            _rootControlKinds = null;
-            OnPropertyChanged("RootControlKinds");
+            _rootScreens = null;
+            OnPropertyChanged("RootScreens");
         }
 
         #endregion

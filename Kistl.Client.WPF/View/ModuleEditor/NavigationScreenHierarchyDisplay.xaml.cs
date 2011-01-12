@@ -23,16 +23,16 @@ namespace Kistl.Client.WPF.View.ModuleEditor
     /// Interaction logic for DiagramDisplay.xaml
     /// </summary>
     [ViewDescriptor(Kistl.App.GUI.Toolkit.WPF)]
-    public partial class ControlKindHierarchyDisplay : UserControl, IHasViewModel<ControlKindHierarchyViewModel>
+    public partial class NavigationScreenHierarchyDisplay : UserControl, IHasViewModel<NavigationScreenHierarchyViewModel>
     {
-        public ControlKindHierarchyDisplay()
+        public NavigationScreenHierarchyDisplay()
         {
             InitializeComponent();
         }
 
-        public ControlKindHierarchyViewModel ViewModel
+        public NavigationScreenHierarchyViewModel ViewModel
         {
-            get { return (ControlKindHierarchyViewModel)DataContext; }
+            get { return (NavigationScreenHierarchyViewModel)DataContext; }
         }
 
         private void NavTree_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)

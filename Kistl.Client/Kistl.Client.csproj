@@ -156,6 +156,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RelationChainViewModelResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Presentables\ModuleEditor\NavigationScreenHierarchyViewModel.cs" />
     <Compile Include="Presentables\ObjectBrowser\WorkspaceViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

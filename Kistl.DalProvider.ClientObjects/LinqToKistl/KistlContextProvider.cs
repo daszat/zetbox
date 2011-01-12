@@ -332,6 +332,12 @@ namespace Kistl.DalProvider.Client
                 // No special processing needed
                 base.Visit(m.Arguments[0]);
             }
+            else if (m.IsMethodCallExpression("Union"))
+            {
+                // OK - Union is allowed
+                // No special processing needed
+                base.Visit(m.Arguments[0]);
+            }
             else if (m.IsMethodCallExpression("WithEagerLoading", typeof(KistlContextQueryableExtensions)))
             {
                 _eagerLoadLists = true;

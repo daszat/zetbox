@@ -19,23 +19,26 @@ namespace Kistl.Client.Presentables.GUI
         // See https://bugzilla.novell.com/show_bug.cgi?id=660553
         public delegate NavigationScreenViewModel Factory(IKistlContext dataCtx, NavigationScreenViewModel parent, NavigationScreen screen);
 #else
-        public new delegate NavigationScreenViewModel Factory(IKistlContext dataCtx, NavigationScreenViewModel parent, NavigationScreen screen);
+        public new delegate NavigationScreenViewModel Factory(IKistlContext dataCtx, NavigationScreen screen);
 #endif
 
-        public static NavigationScreenViewModel Create(IViewModelFactory ModelFactory, IKistlContext dataCtx, NavigationScreenViewModel parent, NavigationScreen screen)
+        public static NavigationScreenViewModel Fetch(IViewModelFactory ModelFactory, IKistlContext dataCtx, NavigationScreen screen)
         {
             if (ModelFactory == null) throw new ArgumentNullException("ModelFactory");
             if (screen == null) throw new ArgumentNullException("screen");
 
-            if (screen.ViewModelDescriptor != null)
+            return (NavigationScreenViewModel)dataCtx.GetViewModelCache().LookupOrCreate(screen, () =>
             {
-                var t = screen.ViewModelDescriptor.ViewModelRef.AsType(true);
-                return ModelFactory.CreateViewModel<NavigationScreenViewModel.Factory>(t).Invoke(dataCtx, parent, screen);
-            }
-            else
-            {
-                return ModelFactory.CreateViewModel<NavigationScreenViewModel.Factory>().Invoke(dataCtx, parent, screen);
-            }
+                if (screen.ViewModelDescriptor != null)
+                {
+                    var t = screen.ViewModelDescriptor.ViewModelRef.AsType(true);
+                    return ModelFactory.CreateViewModel<NavigationScreenViewModel.Factory>(t).Invoke(dataCtx, screen);
+                }
+                else
+                {
+                    return ModelFactory.CreateViewModel<NavigationScreenViewModel.Factory>().Invoke(dataCtx, screen);
+                }
+            });
         }
 
         private readonly NavigationScreen _screen;
@@ -48,18 +51,16 @@ namespace Kistl.Client.Presentables.GUI
         
         private NavigatorViewModel _displayer = null;
 
-        public NavigationScreenViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, NavigationScreenViewModel parent, NavigationScreen screen)
+        public NavigationScreenViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, NavigationScreen screen)
             : base(dependencies, dataCtx)
         {
             if (screen == null) throw new ArgumentNullException("screen");
-            if (parent == null && screen.Parent != null) throw new ArgumentOutOfRangeException("parent", "parent missing");
-            if (parent != null && parent._screen != screen.Parent) throw new ArgumentOutOfRangeException("parent", "inconsistent parent found");
 
-            _parent = parent;
+            if(screen.Parent != null) _parent = Fetch(ViewModelFactory, DataContext, screen.Parent);
             _screen = screen;
             foreach (var s in _screen.Children)
             {
-                _children.Add(NavigationScreenViewModel.Create(ViewModelFactory, DataContext, this, s));
+                _children.Add(NavigationScreenViewModel.Fetch(ViewModelFactory, DataContext, s));
             }
             _childrenRO = new ReadOnlyObservableCollection<NavigationScreenViewModel>(_children);
             _additionalCommandsRO = new ReadOnlyObservableCollection<CommandViewModel>(_additionalCommands);

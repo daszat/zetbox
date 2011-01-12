@@ -318,6 +318,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\ModuleEditor\NavigationScreenHierarchyDisplay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\ModuleEditor\DiagramDisplay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -591,6 +595,9 @@
     <Compile Include="View\ModuleEditor\Converter\GraphConverterHelper.cs" />
     <Compile Include="View\ModuleEditor\ControlKindHierarchyDisplay.xaml.cs">
       <DependentUpon>ControlKindHierarchyDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ModuleEditor\NavigationScreenHierarchyDisplay.xaml.cs">
+      <DependentUpon>NavigationScreenHierarchyDisplay.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ModuleEditor\DiagramDisplay.xaml.cs">
       <DependentUpon>DiagramDisplay.xaml</DependentUpon>

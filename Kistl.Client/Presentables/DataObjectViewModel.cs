@@ -241,9 +241,9 @@ namespace Kistl.Client.Presentables
                     isReadOnlyStore = value;
                     if (_propertyModels != null)
                     {
-                        foreach (var p in _propertyModels.Cast<BaseValueViewModel>())
+                        foreach (var e in _propertyModels)
                         {
-                            p.IsReadOnly = IsReadOnly;
+                            e.Value.IsReadOnly = IsReadOnly;
                         }
                     }
                     OnPropertyChanged("IsReadOnly");
