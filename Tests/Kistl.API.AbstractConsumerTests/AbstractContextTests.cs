@@ -12,11 +12,14 @@ namespace Kistl.API.AbstractConsumerTests
     using Kistl.App.Test;
     using NUnit.Framework;
 
-    public abstract class AbstractReadonlyContextTests : AbstractTestFixture
+    public abstract class AbstractContextTests : AbstractTestFixture 
     {
         protected int firstId;
         protected int secondId;
         protected InterfaceType.Factory iftFactory;
+
+        protected static Guid sequence = new Guid("5c3d9012-a36d-4910-9e7b-1bf7d8f7d09d");
+        protected static Guid continuousSequence = new Guid("57a01b4f-940d-4089-b239-fa5a46dc7d00");
 
         public override void SetUp()
         {
@@ -25,9 +28,13 @@ namespace Kistl.API.AbstractConsumerTests
 
             using (IKistlContext ctx = GetContext())
             {
-                var result = ctx.GetQuery<TestObjClass>();
-                var list = result.ToList();
+                ctx.GetQuery<TestObjClass>().ForEach(obj => { obj.ObjectProp = null; ctx.Delete(obj); });
+                ProjectDataFixture.DeleteData(ctx);
+                ctx.SubmitChanges();
+            }
 
+            using (IKistlContext ctx = GetContext())
+            {
                 var kunde = ctx.GetQuery<Kunde>().FirstOrDefault();
 
                 if (kunde == null)
@@ -41,6 +48,7 @@ namespace Kistl.API.AbstractConsumerTests
                     kunde.PLZ = "1234";
                 }
 
+                var list = new List<TestObjClass>();
                 while (list.Count < 2)
                 {
                     var newObj = ctx.Create<TestObjClass>();
@@ -59,9 +67,23 @@ namespace Kistl.API.AbstractConsumerTests
                 list[1].StringProp = "Second";
                 list[1].TestEnumProp = TestEnum.Second;
 
+                ProjectDataFixture.CreateTestData(ctx);
+
                 ctx.SubmitChanges();
             }
         }
+
+        public override void TearDown()
+        {
+            using (var ctx = GetContext())
+            {
+                ctx.GetQuery<TestObjClass>().ForEach(obj => { obj.ObjectProp = null; ctx.Delete(obj); });
+                ProjectDataFixture.DeleteData(ctx);
+                ctx.SubmitChanges();
+            }
+            base.TearDown();
+        }
+
 
         [Test]
         public void query_should_execute_twice()
@@ -107,35 +129,7 @@ namespace Kistl.API.AbstractConsumerTests
                 Assert.That(results2, Is.EquivalentTo(results1), "Query.ToList() didn't return the same collection on the second execution");
             }
         }
-    }
-
-    public abstract class AbstractContextTests : AbstractReadonlyContextTests
-    {
-        protected static Guid sequence = new Guid("5c3d9012-a36d-4910-9e7b-1bf7d8f7d09d");
-        protected static Guid continuousSequence = new Guid("57a01b4f-940d-4089-b239-fa5a46dc7d00");
-
-        public override void SetUp()
-        {
-            base.SetUp();
-            using (var ctx = GetContext())
-            {
-                ProjectDataFixture.DeleteData(ctx);
-                ctx.GetQuery<TestObjClass>().ForEach(obj => { obj.ObjectProp = null; ctx.Delete(obj); });
-                ProjectDataFixture.CreateTestData(ctx);
-                ctx.SubmitChanges();
-            }
-        }
-
-        public override void TearDown()
-        {
-            using (var ctx = GetContext())
-            {
-                ProjectDataFixture.DeleteData(ctx);
-                ctx.GetQuery<TestObjClass>().ForEach(obj => { obj.ObjectProp = null; ctx.Delete(obj); });
-                ctx.SubmitChanges();
-            }
-            base.TearDown();
-        }
+    
 
         [Test]
         public void should_find_new_objects()
