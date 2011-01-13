@@ -21,7 +21,7 @@ namespace Kistl.API.Client.KistlService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://dasz.at/ZBox/IKistlService/GetList", ReplyAction="http://dasz.at/ZBox/IKistlService/GetListResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(System.Exception), Action="http://dasz.at/ZBox/IKistlService/GetListExceptionFault", Name="Exception", Namespace="http://schemas.datacontract.org/2004/07/System")]
-        System.IO.MemoryStream GetList(Kistl.API.SerializableType type, int maxListCount, bool eagerLoadLists, Kistl.API.SerializableExpression[] filter, Kistl.API.SerializableExpression[] orderBy);
+        System.IO.MemoryStream GetList(Kistl.API.SerializableType type, int maxListCount, bool eagerLoadLists, Kistl.API.SerializableExpression[] filter, Kistl.API.OrderByContract[] orderBy);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://dasz.at/ZBox/IKistlService/GetListOf", ReplyAction="http://dasz.at/ZBox/IKistlService/GetListOfResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(System.Exception), Action="http://dasz.at/ZBox/IKistlService/GetListOfExceptionFault", Name="Exception", Namespace="http://schemas.datacontract.org/2004/07/System")]
@@ -122,7 +122,7 @@ namespace Kistl.API.Client.KistlService {
             return base.Channel.SetObjects(msg, notificationRequests);
         }
         
-        public System.IO.MemoryStream GetList(Kistl.API.SerializableType type, int maxListCount, bool eagerLoadLists, Kistl.API.SerializableExpression[] filter, Kistl.API.SerializableExpression[] orderBy) {
+        public System.IO.MemoryStream GetList(Kistl.API.SerializableType type, int maxListCount, bool eagerLoadLists, Kistl.API.SerializableExpression[] filter, Kistl.API.OrderByContract[] orderBy) {
             return base.Channel.GetList(type, maxListCount, eagerLoadLists, filter, orderBy);
         }
         

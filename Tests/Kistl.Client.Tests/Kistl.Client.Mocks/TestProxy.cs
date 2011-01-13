@@ -21,7 +21,7 @@ namespace Kistl.Client.Mocks
             throw new NotImplementedException();
         }
 
-        public IEnumerable<IDataObject> GetList(IKistlContext ctx, InterfaceType ifType, int maxListCount, bool withEagerLoading, IEnumerable<Expression> filter, IEnumerable<Expression> orderBy, out List<IStreamable> auxObjects)
+        public IEnumerable<IDataObject> GetList(IKistlContext ctx, InterfaceType ifType, int maxListCount, bool withEagerLoading, IEnumerable<Expression> filter, IEnumerable<OrderBy> orderBy, out List<IStreamable> auxObjects)
         {
             if (orderBy != null) throw new ArgumentException("OrderBy is not supported yet");
 

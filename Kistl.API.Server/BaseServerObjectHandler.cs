@@ -25,7 +25,7 @@ using System.IO;
         /// <param name="filter">a Linq filter to apply</param>
         /// <param name="orderBy">a number of linq expressions to order by</param>
         /// <returns>the filtered and ordered list of objects, containing at most <paramref name="maxListCount"/> objects</returns>
-        IEnumerable<IStreamable> GetList(IKistlContext ctx, int maxListCount, List<Expression> filter, List<Expression> orderBy);
+        IEnumerable<IStreamable> GetList(IKistlContext ctx, int maxListCount, List<Expression> filter, List<OrderBy> orderBy);
 
         /// <summary>
         /// Return the list of objects referenced by the specified property.
@@ -75,7 +75,7 @@ using System.IO;
         {
         }
 
-        public IEnumerable<IStreamable> GetList(IKistlContext ctx, int maxListCount, List<Expression> filter, List<Expression> orderBy)
+        public IEnumerable<IStreamable> GetList(IKistlContext ctx, int maxListCount, List<Expression> filter, List<OrderBy> orderBy)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
 
@@ -99,8 +99,20 @@ using System.IO;
                 bool first = true;
                 foreach (var o in orderBy)
                 {
-                    if (first) result = result.AddOrderBy<T>(o);
-                    else result = result.AddThenBy<T>(o);
+                    if (first)
+                    {
+                        if(o.Type == OrderByType.ASC)
+                            result = result.AddOrderBy<T>(o.Expression);
+                        else
+                            result = result.AddOrderByDescending<T>(o.Expression);
+                    }
+                    else
+                    {
+                        if (o.Type == OrderByType.ASC)
+                            result = result.AddThenBy<T>(o.Expression);
+                        else
+                            result = result.AddThenByDescending<T>(o.Expression);                        
+                    }
                     first = false;
                 }
             }

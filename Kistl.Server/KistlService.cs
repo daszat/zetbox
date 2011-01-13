@@ -83,7 +83,7 @@ namespace Kistl.Server
         /// <param name="filter">Serializable linq expression used a filter</param>
         /// <param name="orderBy">List of derializable linq expressions used as orderby</param>
         /// <returns>the found objects</returns>
-        public MemoryStream GetList(SerializableType type, int maxListCount, bool eagerLoadLists, List<SerializableExpression> filter, List<SerializableExpression> orderBy)
+        public MemoryStream GetList(SerializableType type, int maxListCount, bool eagerLoadLists, List<SerializableExpression> filter, List<OrderByContract> orderBy)
         {
             try
             {
@@ -100,7 +100,7 @@ namespace Kistl.Server
                             .GetServerObjectHandler(_iftFactory(type.GetSystemType()))
                             .GetList(ctx, maxListCount,
                                 filterExpresstions,
-                                orderBy != null ? orderBy.Select(o => SerializableExpression.ToExpression(o)).ToList() : null);
+                                orderBy != null ? orderBy.Select(o => new OrderBy(o.Type, SerializableExpression.ToExpression(o.Expression))).ToList() : null);
 
                         return SendObjects(lst, eagerLoadLists);
                     }

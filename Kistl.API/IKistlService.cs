@@ -43,7 +43,7 @@ namespace Kistl.API
         /// <returns>the found objects</returns>
         [OperationContract]
         [FaultContract(typeof(Exception))]
-        MemoryStream GetList(SerializableType type, int maxListCount, bool eagerLoadLists, List<SerializableExpression> filter, List<SerializableExpression> orderBy);
+        MemoryStream GetList(SerializableType type, int maxListCount, bool eagerLoadLists, List<SerializableExpression> filter, List<OrderByContract> orderBy);
 
         /// <summary>
         /// returns a list of objects referenced by a specified Property. Use an equivalent query in GetList() instead.
@@ -124,5 +124,15 @@ namespace Kistl.API
 
         [DataMember]
         public int[] IDs { get; set; }
+    }
+
+    [DataContract(Namespace = "http://dasz.at/ZBox/")]
+    public class OrderByContract
+    {
+        [DataMember]
+        public OrderByType Type { get; set; }
+
+        [DataMember]
+        public SerializableExpression Expression { get; set; }
     }
 }

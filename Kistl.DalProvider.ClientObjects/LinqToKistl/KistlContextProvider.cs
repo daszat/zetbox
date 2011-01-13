@@ -45,7 +45,7 @@ namespace Kistl.DalProvider.Client
         /// <summary>
         /// OrderBy Expression for GetList SearchType.
         /// </summary>
-        private LinkedList<Expression> _orderBy = null;
+        private LinkedList<OrderBy> _orderBy = null;
 
         private IProxy _proxy;
 
@@ -298,8 +298,14 @@ namespace Kistl.DalProvider.Client
             }
             else if (m.IsMethodCallExpression("OrderBy") || m.IsMethodCallExpression("ThenBy"))
             {
-                if (_orderBy == null) _orderBy = new LinkedList<Expression>();
-                _orderBy.AddFirst(m.Arguments[1]);
+                if (_orderBy == null) _orderBy = new LinkedList<OrderBy>();
+                _orderBy.AddFirst(new OrderBy(OrderByType.ASC, m.Arguments[1]));
+                base.Visit(m.Arguments[0]);
+            }
+            else if (m.IsMethodCallExpression("OrderByDescending") || m.IsMethodCallExpression("ThenByDescending"))
+            {
+                if (_orderBy == null) _orderBy = new LinkedList<OrderBy>();
+                _orderBy.AddFirst(new OrderBy(OrderByType.DESC, m.Arguments[1]));
                 base.Visit(m.Arguments[0]);
             }
             else if (m.IsMethodCallExpression("Select"))
@@ -335,6 +341,12 @@ namespace Kistl.DalProvider.Client
             else if (m.IsMethodCallExpression("Union"))
             {
                 // OK - Union is allowed
+                // No special processing needed
+                base.Visit(m.Arguments[0]);
+            }
+            else if (m.IsMethodCallExpression("Distinct"))
+            {
+                // OK - Distinct is allowed
                 // No special processing needed
                 base.Visit(m.Arguments[0]);
             }

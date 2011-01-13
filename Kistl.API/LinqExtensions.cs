@@ -145,12 +145,12 @@ namespace Kistl.API
         }
 
         /// <summary>
-        /// Appends a Expression Tree Order By to a Linq Expression
+        /// Appends a expression tree OrderBy to a linq expression
         /// </summary>
         /// <typeparam name="T">Typeparameter for IQueryable</typeparam>
         /// <param name="queryable">IQueryable (Expression Tree) to add filter</param>
-        /// <param name="orderBy">Order By Expression Tree</param>
-        /// <returns>IQueryable with this Order By Expression</returns>
+        /// <param name="orderBy">OrderBy expression tree</param>
+        /// <returns>IQueryable with this OrderBy expression</returns>
         public static IQueryable<T> AddOrderBy<T>(this IQueryable<T> queryable, Expression orderBy)
         {
             if (queryable == null) throw new ArgumentNullException("queryable");
@@ -171,12 +171,12 @@ namespace Kistl.API
         }
 
         /// <summary>
-        /// Appends a Expression Tree Order By to a Linq Expression
+        /// Appends a expression tree OrderBy to a linq expression
         /// </summary>
         /// <typeparam name="T">Typeparameter for IQueryable</typeparam>
         /// <param name="queryable">IQueryable (Expression Tree) to add filter</param>
-        /// <param name="orderBy">Order By Expression Tree</param>
-        /// <returns>IQueryable with this Order By Expression</returns>
+        /// <param name="orderBy">OrderBy expression tree</param>
+        /// <returns>IQueryable with this OrderBy expression</returns>
         public static IQueryable<T> AddThenBy<T>(this IQueryable<T> queryable, Expression orderBy)
         {
             if (queryable == null) throw new ArgumentNullException("queryable");
@@ -192,6 +192,58 @@ namespace Kistl.API
             type = orderBy.Type.GetGenericArguments()[0].GetGenericArguments()[1];
             return queryable.Provider.CreateQuery<T>(
                 Expression.Call(typeof(Queryable), "ThenBy",
+                new Type[] { queryable.ElementType, type },
+                queryable.Expression, orderBy));
+        }
+
+        /// <summary>
+        /// Appends a expression tree OrderByDescending to a linq expression
+        /// </summary>
+        /// <typeparam name="T">Typeparameter for IQueryable</typeparam>
+        /// <param name="queryable">IQueryable (Expression Tree) to add filter</param>
+        /// <param name="orderBy">OrderByDescending expression Tree</param>
+        /// <returns>IQueryable with this OrderByDescending expression</returns>
+        public static IQueryable<T> AddOrderByDescending<T>(this IQueryable<T> queryable, Expression orderBy)
+        {
+            if (queryable == null) throw new ArgumentNullException("queryable");
+            if (orderBy == null) throw new ArgumentNullException("orderBy");
+
+            Type type = null;
+
+            if (orderBy.NodeType != ExpressionType.Quote)
+            {
+                orderBy = Expression.Quote(orderBy);
+            }
+
+            type = orderBy.Type.GetGenericArguments()[0].GetGenericArguments()[1];
+            return queryable.Provider.CreateQuery<T>(
+                Expression.Call(typeof(Queryable), "OrderByDescending",
+                new Type[] { queryable.ElementType, type },
+                queryable.Expression, orderBy));
+        }
+
+        /// <summary>
+        /// Appends a expression tree OrderBy Descending to a Linq Expression
+        /// </summary>
+        /// <typeparam name="T">Typeparameter for IQueryable</typeparam>
+        /// <param name="queryable">IQueryable (Expression Tree) to add filter</param>
+        /// <param name="orderBy">OrderByDescending expression tree</param>
+        /// <returns>IQueryable with this OrderByDescending expression</returns>
+        public static IQueryable<T> AddThenByDescending<T>(this IQueryable<T> queryable, Expression orderBy)
+        {
+            if (queryable == null) throw new ArgumentNullException("queryable");
+            if (orderBy == null) throw new ArgumentNullException("orderBy");
+
+            Type type = null;
+
+            if (orderBy.NodeType != ExpressionType.Quote)
+            {
+                orderBy = Expression.Quote(orderBy);
+            }
+
+            type = orderBy.Type.GetGenericArguments()[0].GetGenericArguments()[1];
+            return queryable.Provider.CreateQuery<T>(
+                Expression.Call(typeof(Queryable), "ThenByDescending",
                 new Type[] { queryable.ElementType, type },
                 queryable.Expression, orderBy));
         }
