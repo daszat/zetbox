@@ -659,7 +659,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
         private DateTime? GetValue()
         {
-            return Year != null && Month != null ? new DateTime(Year.Value, Month.Value, 1) : (DateTime?)null;
+            return Year != null && Month != null && Year > 0 && Month >= 1 && Month <= 12 ? new DateTime(Year.Value, Month.Value, 1) : (DateTime?)null;
         }
 
         public override DateTime? Value

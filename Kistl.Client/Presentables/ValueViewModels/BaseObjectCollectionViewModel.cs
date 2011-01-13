@@ -394,9 +394,9 @@ namespace Kistl.Client.Presentables.ValueViewModels
                         }
                     }),
                     null);
-            lstMdl.ListViewModel.ShowDeleteCommand = false;
+            lstMdl.ListViewModel.AllowDelete = false;
             lstMdl.ListViewModel.ShowOpenCommand = false;
-            lstMdl.ListViewModel.ShowNewCommand = AllowAddNew;
+            lstMdl.ListViewModel.AllowAddNew = AllowAddNew;
 
             ViewModelFactory.ShowModel(lstMdl, true);
         }

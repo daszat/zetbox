@@ -274,38 +274,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 }
             }
         }
-        private bool _ShowNewCommand = true;
-        public bool ShowNewCommand
-        {
-            get
-            {
-                return _ShowNewCommand;
-            }
-            set
-            {
-                if (_ShowNewCommand != value)
-                {
-                    _ShowNewCommand = value;
-                    UpdateCommands();
-                }
-            }
-        }
-        private bool _ShowDeleteCommand = true;
-        public bool ShowDeleteCommand
-        {
-            get
-            {
-                return _ShowDeleteCommand;
-            }
-            set
-            {
-                if (_ShowDeleteCommand != value)
-                {
-                    _ShowDeleteCommand = value;
-                    UpdateCommands();
-                }
-            }
-        }
+        
         private bool _ShowRefreshCommand = true;
         public bool ShowRefreshCommand
         {
@@ -326,15 +295,15 @@ namespace Kistl.Client.Presentables.KistlBase
         private void UpdateCommands()
         {
             if (_commands == null) return;
-            if (!ShowNewCommand && _commands.Contains(NewCommand)) _commands.Remove(NewCommand);
+            if (!AllowAddNew && _commands.Contains(NewCommand)) _commands.Remove(NewCommand);
             if (!ShowOpenCommand && _commands.Contains(OpenCommand)) _commands.Remove(OpenCommand);
             if (!ShowRefreshCommand && _commands.Contains(RefreshCommand)) _commands.Remove(RefreshCommand);
-            if (!ShowDeleteCommand && _commands.Contains(DeleteCommand)) _commands.Remove(DeleteCommand);
+            if (!AllowDelete && _commands.Contains(DeleteCommand)) _commands.Remove(DeleteCommand);
 
-            if (ShowNewCommand && !_commands.Contains(NewCommand)) _commands.Insert(0, NewCommand);
-            if (ShowOpenCommand && !_commands.Contains(OpenCommand)) _commands.Insert(ShowNewCommand ? 1 : 0, OpenCommand);
-            if (ShowRefreshCommand && !_commands.Contains(RefreshCommand)) _commands.Insert((ShowNewCommand ? 1 : 0) + (ShowOpenCommand ? 1 : 0), RefreshCommand);
-            if (ShowDeleteCommand && !_commands.Contains(DeleteCommand)) _commands.Insert((ShowNewCommand ? 1 : 0) + (ShowOpenCommand ? 1 : 0) + (ShowRefreshCommand ? 1 : 0), DeleteCommand);
+            if (AllowAddNew && !_commands.Contains(NewCommand)) _commands.Insert(0, NewCommand);
+            if (ShowOpenCommand && !_commands.Contains(OpenCommand)) _commands.Insert(AllowAddNew ? 1 : 0, OpenCommand);
+            if (ShowRefreshCommand && !_commands.Contains(RefreshCommand)) _commands.Insert((AllowAddNew ? 1 : 0) + (ShowOpenCommand ? 1 : 0), RefreshCommand);
+            if (AllowDelete && !_commands.Contains(DeleteCommand)) _commands.Insert((AllowAddNew ? 1 : 0) + (ShowOpenCommand ? 1 : 0) + (ShowRefreshCommand ? 1 : 0), DeleteCommand);
         }
 
         private bool? _showCommands = null;
@@ -959,7 +928,7 @@ namespace Kistl.Client.Presentables.KistlBase
             // Can execute?
             if (Filter.Count(f => !f.Enabled && f.Required) > 0) return;
 
-            foreach (var obj in GetQuery().Cast<IDataObject>().ToList().OrderBy(obj => obj.ToString()))
+            foreach (IDataObject obj in GetQuery()) // No order by - may be set from outside in LinqQuery! .Cast<IDataObject>().ToList().OrderBy(obj => obj.ToString()))
             {
                 var mdl = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, obj);
                 mdl.IsReadOnly = IsItemsReadOnly;

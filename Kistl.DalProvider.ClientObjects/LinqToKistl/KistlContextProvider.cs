@@ -153,8 +153,8 @@ namespace Kistl.DalProvider.Client
 
                 _context.PlaybackNotifications();
 
-                IQueryable selectResult = result.AsQueryable().AddSelector(selector, sourceType, typeof(T).FindElementTypes().First());
-                return (T)Activator.CreateInstance(typeof(T), selectResult.GetEnumerator());
+                IQueryable selectResult = result.AsQueryable().AddSelector(selector, sourceType, selector.Body.Type); // typeof(T).FindElementTypes().First());
+                return (T)Activator.CreateInstance(typeof(T), selectResult.AddCast(typeof(T).FindElementTypes().First()).GetEnumerator());
             }
             else
             {

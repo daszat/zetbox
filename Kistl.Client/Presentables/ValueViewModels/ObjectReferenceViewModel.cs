@@ -274,9 +274,9 @@ namespace Kistl.Client.Presentables.ValueViewModels
                     }
                 }),
                 null);
-            selectionTask.ListViewModel.ShowDeleteCommand = false;
+            selectionTask.ListViewModel.AllowDelete = false;
             selectionTask.ListViewModel.ShowOpenCommand = false;
-            selectionTask.ListViewModel.ShowNewCommand = AllowCreateNewItem;
+            selectionTask.ListViewModel.AllowAddNew = AllowCreateNewItem;
 
             ViewModelFactory.ShowModel(selectionTask, true);
         }
