@@ -23,6 +23,9 @@
       <Module>Kistl.App.Projekte.Server.CustomServerActionsModule, Kistl.App.Projekte.Server</Module>
       <Module>Kistl.App.Projekte.Common.CustomCommonActionsModule, Kistl.App.Projekte.Common</Module>
 
+      <!-- Service Control Manager -->
+      <Module>Kistl.App.Extensions.ServiceControlManagerModule, TempAppHelpers</Module>
+
       <!-- Development/Master Server modules-->
       <Module>Kistl.Generator.GeneratorModule, Kistl.Generator</Module>
       <Module>Kistl.DalProvider.Client.Generator.ClientGeneratorProvider, Kistl.DalProvider.Client.Generator</Module>
@@ -33,6 +36,8 @@
         cant be used since it won't compile under mono
       <Module>Kistl.Generator.ClickOnce.ClickOnceModule, Kistl.Generator.ClickOnce</Module>
       -->
+      <!-- Customers modules -->
+      <Module>Ini50.App.Server.Ini50Module, Ini50.App.Server</Module>
     </Modules>
     <ClientFilesLocations>
       <Location Name="Client">P:\Kistl\bin\Debug\bin\Client</Location>
