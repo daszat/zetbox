@@ -44,7 +44,9 @@
       <Module>Kistl.DalProvider.Memory.MemoryProvider, Kistl.DalProvider.Memory</Module>
       <Module>Kistl.App.Projekte.Client.CustomClientActionsModule, Kistl.App.Projekte.Client</Module>
       <Module>Kistl.App.Projekte.Common.CustomCommonActionsModule, Kistl.App.Projekte.Common</Module>
-      <Module>Ini50.App.Client.Ini50Module, Ini50.App.Client</Module>
+      <!-- Do not load customers modules! Nothing to test there
+        <Module>Ini50.App.Client.Ini50Module, Ini50.App.Client</Module>
+        -->
 
       <!-- needed for resetDatabase running in the "client's" appdomain -->
       <Module>Kistl.Tests.Utilities.MsSql.UtilityModule, Kistl.Tests.Utilities.MsSql</Module>
