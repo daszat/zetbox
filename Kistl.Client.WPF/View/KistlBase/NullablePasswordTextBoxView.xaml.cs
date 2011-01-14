@@ -19,12 +19,20 @@ using Kistl.Client.Presentables.ValueViewModels;
 
 namespace Kistl.Client.WPF.View
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <remarks>
+    /// Password property is not a dependency property. See here (http://stackoverflow.com/questions/1483892/wpf-binding-to-the-passwordbox-in-mvvm-working-solution) why.
+    /// Sadly, we rely on MVVM, so ther's no other way.
+    /// </remarks>
     [ViewDescriptor(Kistl.App.GUI.Toolkit.WPF)]
     public partial class NullablePasswordTextBoxView : PropertyEditor, IHasViewModel<IValueViewModel<string>>, IHasViewModel<IFormattedValueViewModel>
     {
         public NullablePasswordTextBoxView()
         {
             InitializeComponent();
+            txt.PasswordChanged += new RoutedEventHandler(txt_PasswordChanged);
         }
 
         #region IHasViewModel<IValueModelAsString> Members
@@ -45,24 +53,15 @@ namespace Kistl.Client.WPF.View
 
         #endregion
 
-        /// <summary>
-        /// Foreces a manual refresh, as WPF ignores notifications on UpdateSource.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void InfoTextBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (ViewModel != null && ViewModel.IsReadOnly == false)
-            {
-                var binding = BindingOperations.GetBindingExpressionBase(txt, TextBox.TextProperty);
-                binding.UpdateSource();
-                binding.UpdateTarget();
-            }
-        }
-
         protected override FrameworkElement MainControl
         {
             get { return txt; }
+        }
+
+        void txt_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            // Changed every keystroke
+            if (ViewModel != null) ViewModel.Value = txt.Password;
         }
     }
 }
