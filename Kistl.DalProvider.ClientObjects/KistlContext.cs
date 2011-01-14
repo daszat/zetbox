@@ -806,11 +806,19 @@ namespace Kistl.DalProvider.Client
             return GetFileInfo(ID).OpenRead();
         }
 
+        private string DocumentCache
+        {
+            get
+            {
+                return Path.Combine(config.WorkingFolder, "DocumentCache");
+            }
+        }
+
         public FileInfo GetFileInfo(int ID)
         {
             var blob = this.Find<Kistl.App.Base.Blob>(ID);
 
-            string path = Path.Combine(config.Client.DocumentStore, blob.StoragePath);
+            string path = Path.Combine(DocumentCache, blob.StoragePath);
             Directory.CreateDirectory(Path.GetDirectoryName(path));
 
             if (!File.Exists(path))

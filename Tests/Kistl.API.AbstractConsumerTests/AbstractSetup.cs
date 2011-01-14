@@ -43,11 +43,6 @@ namespace Kistl.API.AbstractConsumerTests
                     config.Server.DocumentStore = Path.Combine(Path.GetTempPath(), GetHostType().ToString());
                     Log.InfoFormat("Setting Server.DocumentStore=[{0}]", config.Server.DocumentStore);
                 }
-                if (config.Client != null)
-                {
-                    config.Client.DocumentStore = Path.Combine(Path.GetTempPath(), GetHostType().ToString());
-                    Log.InfoFormat("Setting Client.DocumentStore=[{0}]", config.Client.DocumentStore);
-                }
 
                 AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
 

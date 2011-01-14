@@ -26,7 +26,6 @@ namespace Kistl.API.Tests
             Assert.That(cfg.SourceFileLocation, Is.Not.Empty, "SourceFileLocation");
 
             Assert.That(cfg.Client, Is.Not.Null, "Client");
-            Assert.That(cfg.Client.DocumentStore, Is.Not.Empty, "DocumentStore");
 
             Assert.That(cfg.Server, Is.Not.Null, "Server");
             Assert.That(cfg.Server.ConnectionString, Is.Not.Empty, "ConnectionString");
