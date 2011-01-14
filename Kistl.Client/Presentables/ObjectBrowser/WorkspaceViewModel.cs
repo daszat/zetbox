@@ -86,30 +86,6 @@ namespace Kistl.Client.Presentables.ObjectBrowser
 
         #endregion
 
-        #region Commands
-
-        #region Create New Instance Externally
-
-        private static CreateNewInstanceExternallyCommand _createNewInstanceExternallyCommand = null;
-        /// <summary>
-        /// Creates a new instance of an <see cref="ObjectClass"/> and makes it the currently selected instance.
-        /// </summary>
-        public ICommandViewModel CreateNewInstanceExternallyCommand
-        {
-            get
-            {
-                if (_createNewInstanceExternallyCommand == null)
-                {
-                    _createNewInstanceExternallyCommand = ViewModelFactory.CreateViewModel<CreateNewInstanceExternallyCommand.Factory>().Invoke(DataContext);
-                }
-                return _createNewInstanceExternallyCommand;
-            }
-        }
-
-        #endregion
-
-        #endregion
-
         #region Utilities and UI callbacks
 
         private void LoadModules()
@@ -141,47 +117,6 @@ namespace Kistl.Client.Presentables.ObjectBrowser
         public override string Name
         {
             get { return WorkspaceViewModelResources.Name; }
-        }
-    }
-
-
-
-    /// <summary>
-    /// Creates a new instance of an <see cref="ObjectClass"/> and opens it in a new WorkspaceView.
-    /// </summary>
-    internal class CreateNewInstanceExternallyCommand : CommandViewModel
-    {
-        public new delegate CreateNewInstanceExternallyCommand Factory(IKistlContext dataCtx);
-
-        private readonly Func<IKistlContext> ctxFactory;
-
-        public CreateNewInstanceExternallyCommand(IViewModelDependencies appCtx, IKistlContext dataCtx, Func<IKistlContext> ctxFactory)
-            : base(appCtx, dataCtx, WorkspaceViewModelResources.CreateNewInstanceExternallyCommand_Name, WorkspaceViewModelResources.CreateNewInstanceExternallyCommand_Tooltip)
-        {
-            this.ctxFactory = ctxFactory;
-        }
-
-        public override bool CanExecute(object data)
-        {
-            return data != null
-                && data is ObjectClassViewModel;
-        }
-
-        protected override void DoExecute(object data)
-        {
-            if (CanExecute(data))
-            {
-                var externalCtx = ctxFactory();
-                var objectClass = data as ObjectClassViewModel;
-
-                // responsibility to externalCtx's disposal passes to newWorkspace
-                var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditor.WorkspaceViewModel.Factory>().Invoke(externalCtx);
-                var newObject = externalCtx.Create(objectClass.GetDescribedInterfaceType());
-                var newModel = DataObjectViewModel.Fetch(ViewModelFactory, externalCtx, newObject);
-
-                newWorkspace.SelectedItem = newModel;
-                ViewModelFactory.ShowModel(newWorkspace, true);
-            }
         }
     }
 }

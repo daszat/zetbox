@@ -59,6 +59,8 @@ namespace Kistl.Client.Presentables.ObjectBrowser
             foreach (var cls in datatypes)
             {
                 var mdl = ViewModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, cls, null);
+                mdl.AllowAddNew = true;
+                mdl.AllowDelete = true;
                 mdl.Commands.Add(ViewModelFactory.CreateViewModel<EditDataObjectClassCommand.Factory>().Invoke(DataContext, cls));
                 ObjectClasses.Add(mdl);
             }

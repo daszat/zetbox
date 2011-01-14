@@ -413,7 +413,7 @@ namespace Kistl.Client.Presentables.KistlBase
             {
                 if (_DeleteCommand == null)
                 {
-                    _DeleteCommand = ViewModelFactory.CreateViewModel<DeleteDataObjectCommand.Factory>().Invoke(DataContext, this, !IsItemsReadOnly);
+                    _DeleteCommand = ViewModelFactory.CreateViewModel<DeleteDataObjectCommand.Factory>().Invoke(DataContext, this, AllowDelete);
                 }
                 return _DeleteCommand;
             }
@@ -712,56 +712,17 @@ namespace Kistl.Client.Presentables.KistlBase
         #endregion
 
         #region UI
-        private bool _isItemsReadOnly = true;
+        private bool _isEditable = false;
         /// <summary>
-        /// If true, all Items will be set to readonly. Default is true.
+        /// If true, all Items are editable in the list directly. Default is false
         /// </summary>
         /// <remarks>
-        /// Default value is true because normaly a InstanceList represents a Search Result
-        /// </remarks>
-        public bool IsItemsReadOnly
-        {
-            get
-            {
-                return _isItemsReadOnly;
-            }
-            set
-            {
-                if (_isItemsReadOnly != value)
-                {
-                    _isItemsReadOnly = value;
-                    OnIsItemsReadOnlyChanged();
-                }
-            }
-        }
-
-        protected virtual void OnIsItemsReadOnlyChanged()
-        {
-            _displayedColumns = null;
-            if (_instancesCache != null)
-            {
-                foreach (var i in _instancesCache)
-                {
-                    i.IsReadOnly = _isItemsReadOnly;
-                }
-            }
-            OnPropertyChanged("IsItemsReadOnly");
-            OnPropertyChanged("IsEditable");
-            OnPropertyChanged("DisplayedColumns");
-        }
-
-        private bool _isEditable = true;
-        /// <summary>
-        /// If true, all Items are editable in the list directly.
-        /// </summary>
-        /// <remarks>
-        /// This does not affect the details pane. Returnes always false, if IsItemsReadOnly is set to true.
+        /// This does not affect the details pane. 
         /// </remarks>
         public bool IsEditable
         {
             get
             {
-                if (IsItemsReadOnly) return false;
                 return _isEditable;
             }
             set
@@ -778,16 +739,12 @@ namespace Kistl.Client.Presentables.KistlBase
 
         private bool _allowAddNew = false;
         /// <summary>
-        /// If true, allow add new Items in the list directly.
+        /// If true, allow add new Items in the list directly. Default is false
         /// </summary>
-        /// <remarks>
-        /// Default is false. Returnes always false, if IsEditable is set to false.
-        /// </remarks>
         public bool AllowAddNew
         {
             get
             {
-                if (!IsEditable) return false;
                 return _allowAddNew;
             }
             set
@@ -802,16 +759,12 @@ namespace Kistl.Client.Presentables.KistlBase
 
         private bool _allowDelete = false;
         /// <summary>
-        /// If true, allow deleting Items in the list directly.
+        /// If true, allow deleting Items in the list directly. Default is false.
         /// </summary>
-        /// <remarks>
-        /// Default is false. Returnes always false, if IsEditable is set to false.
-        /// </remarks>
         public bool AllowDelete
         {
             get
             {
-                if (!IsEditable) return false;
                 return _allowDelete;
             }
             set
@@ -931,7 +884,6 @@ namespace Kistl.Client.Presentables.KistlBase
             foreach (IDataObject obj in GetQuery()) // No order by - may be set from outside in LinqQuery! .Cast<IDataObject>().ToList().OrderBy(obj => obj.ToString()))
             {
                 var mdl = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, obj);
-                mdl.IsReadOnly = IsItemsReadOnly;
                 _instancesCache.Add(mdl);
             }
             OnInstancesChanged();
