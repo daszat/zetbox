@@ -292,7 +292,9 @@ namespace Kistl.API.Configuration
         /// The WorkingFolder of this application contains all local state of the app.
         /// The Path is [LocalApplicationData]\dasz\Kistl\[Current Configuration Name]\[AppDomain.FriendlyName]\
         /// </summary>
+        /// <remarks>
         /// eg.: C:\Users\Arthur\AppData\Local\dasz\Kistl\Arthur's Configuration\Kistl.Client.exe\
+        /// </remarks>
         [XmlIgnore]
         public string WorkingFolder
         {
