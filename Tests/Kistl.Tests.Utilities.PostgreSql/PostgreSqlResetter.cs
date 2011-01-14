@@ -50,7 +50,12 @@ namespace Kistl.Tests.Utilities.PostgresSql
                     var args = string.Format("/C pg_dump {0} {1} | psql {0} {2}", userCmdString, srcDB, destDB);
                     System.Diagnostics.ProcessStartInfo pi = new System.Diagnostics.ProcessStartInfo("cmd.exe", args);
                     pi.UseShellExecute = false;
-                    pi.WorkingDirectory = Environment.GetEnvironmentVariable("PGSQLBinPath").Trim('\"');
+                    var pgSQLBinPath = Environment.GetEnvironmentVariable("PGSQLBinPath");
+                    if (string.IsNullOrEmpty(pgSQLBinPath))
+                    {
+                        throw new InvalidOperationException("Environment Variable PGSQLBinPath is not set, unable to reset test database");
+                    }
+                    pi.WorkingDirectory = pgSQLBinPath.Trim('\"');
                     var p = System.Diagnostics.Process.Start(pi);
                     if (!p.WaitForExit(RESET_TIMEOUT * 1000))
                     {

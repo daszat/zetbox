@@ -130,6 +130,7 @@
   <ItemGroup>
     <None Include="Kistl.DalProvider.NHibernate.Tests.Config.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>
