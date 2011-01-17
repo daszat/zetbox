@@ -118,6 +118,14 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                             type = "ICollection<" + type + ">";
                         }
                     }
+                    else
+                    {
+                        var cop = p as CompoundObjectProperty;
+                        if (cop != null && cop.IsList)
+                        {
+                            type = "ICollection<" + type + ">";
+                        }
+                    }
                     return new KeyValuePair<string, string>(type, p.Name);
                 })
                 .Concat(relationPosProperties)
