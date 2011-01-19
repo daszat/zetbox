@@ -115,6 +115,14 @@
       <DependentUpon>PropertiesHbm.cst</DependentUpon>
     </Compile>
     <Compile Include="Templates\Module.cs" />
+    <Compile Include="Templates\ObjectClasses\AttachToContextTemplate.cs">
+      <DependentUpon>AttachToContextTemplate.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\ObjectClasses\AttachToContextTemplate.Designer.cs">
+      <DependentUpon>AttachToContextTemplate.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Templates\ObjectClasses\Constructors.cs">
       <DependentUpon>Constructors.cst</DependentUpon>
     </Compile>
@@ -183,6 +191,14 @@
       <DependentUpon>ProxyProperty.cst</DependentUpon>
     </Compile>
     <Compile Include="Templates\Properties\NotifyingValueProperty.cs" />
+    <Compile Include="Templates\Properties\ValueCollectionProperty.cs">
+      <DependentUpon>ValueCollectionProperty.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Properties\ValueCollectionProperty.Designer.cs">
+      <DependentUpon>ValueCollectionProperty.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Templates\Registrations.cs">
       <DependentUpon>Registrations.cst</DependentUpon>
     </Compile>
@@ -242,6 +258,10 @@
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>PropertiesHbm.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Templates\ObjectClasses\AttachToContextTemplate.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>AttachToContextTemplate.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Templates\ObjectClasses\Constructors.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>Constructors.Designer.cs</LastGenOutput>
@@ -273,6 +293,10 @@
     <None Include="Templates\Properties\ProxyProperty.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ProxyProperty.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\Properties\ValueCollectionProperty.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>ValueCollectionProperty.Designer.cs</LastGenOutput>
     </None>
     <None Include="Templates\Registrations.cst">
       <Generator>Arebis Template Processor</Generator>

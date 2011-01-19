@@ -139,6 +139,16 @@ namespace Kistl.API.Utils
             throw new ArgumentException(String.Format("Unable to determine ListWrapper for {0}", potentialList.GetType().FullName), "potentialList");
         }
 
+        /// <summary>
+        /// Helper method to avoid explicit generic parameter when possible.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="potentialList"></param>
+        /// <returns></returns>
+        public static IList<T> WrapAsList<T>(ICollection<T> potentialList)
+        {
+            return WrapAsList<T>((object)potentialList);
+        }
     }
 
     /// <summary>

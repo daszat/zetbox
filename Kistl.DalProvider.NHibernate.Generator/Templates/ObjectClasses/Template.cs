@@ -83,9 +83,15 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                 .Properties
                 .OfType<CompoundObjectProperty>()
                 .Where(cop => cop.IsList)
-                .Select(cop => new KeyValuePair<string, string>(cop.Name, String.Format("new Collection<{0}>()", cop.ReferencedTypeAsCSharp())));
+                .Select(cop => new KeyValuePair<string, string>(cop.Name, String.Format("new Collection<{0}>()", cop.GetCollectionEntryClassName() + ImplementationSuffix)));
 
-            return orps.Concat(cops).OrderBy(pair => pair.Key);
+            var vtps = this.ObjectClass
+                .Properties
+                .OfType<ValueTypeProperty>()
+                .Where(vtp => vtp.IsList)
+                .Select(vtp => new KeyValuePair<string, string>(vtp.Name, String.Format("new Collection<{0}>()", vtp.GetCollectionEntryClassName() + ImplementationSuffix)));
+
+            return orps.Concat(cops).Concat(vtps).OrderBy(pair => pair.Key);
         }
 
         private IEnumerable<KeyValuePair<string, string>> GetPersistentProperties()
@@ -155,7 +161,15 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                         var cop = p as CompoundObjectProperty;
                         if (cop != null && cop.IsList)
                         {
-                            type = "ICollection<" + type + ">";
+                            type = "ICollection<" + cop.GetCollectionEntryClassName() + ImplementationSuffix + ">";
+                        }
+                        else
+                        {
+                            var vtp = p as ValueTypeProperty;
+                            if (vtp != null && vtp.IsList)
+                            {
+                                type = "ICollection<" + vtp.GetCollectionEntryClassName() + ImplementationSuffix + ">";
+                            }
                         }
                     }
                     return new KeyValuePair<string, string>(type, p.Name);
