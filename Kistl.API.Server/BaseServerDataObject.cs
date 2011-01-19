@@ -96,9 +96,11 @@ namespace Kistl.API.Server
 
         /// <summary>
         /// Reflects the current access rights by the current Identity. 
-        /// Base implementations returnes allways Full
+        /// Base implementations returnes always Full
         /// </summary>
         public virtual Kistl.API.AccessRights CurrentAccessRights { get { return AccessRights.Full; } }
+
+        public abstract void UpdateParent(string propertyName, int? id);
     }
 
     /// <summary>

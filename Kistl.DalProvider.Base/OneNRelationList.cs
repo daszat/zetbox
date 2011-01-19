@@ -139,7 +139,7 @@ namespace Kistl.DalProvider.Base
         {
             if (item.GetPrivateFieldValue<int?>("_fk_" + _propertyName) != _owner.ID)
             {
-                (item as DataObjectBaseImpl).UpdateParent(_propertyName, _owner.ID);
+                (item as IDataObject).UpdateParent(_propertyName, _owner.ID);
             }
         }
 
@@ -156,7 +156,7 @@ namespace Kistl.DalProvider.Base
         {
             if (item.GetPrivateFieldValue<int?>("_fk_" + _propertyName) != null)
             {
-                (item as DataObjectBaseImpl).UpdateParent(_propertyName, null);
+                (item as IDataObject).UpdateParent(_propertyName, null);
             }
             // TODO: Optimize in Generator
             // Clears the position Property for a 1:n Relation

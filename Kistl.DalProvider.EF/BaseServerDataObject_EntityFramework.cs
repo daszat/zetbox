@@ -175,7 +175,7 @@ namespace Kistl.DalProvider.Ef
             }
         }
 
-        public virtual void UpdateParent(string propertyName, int? id)
+        public override void UpdateParent(string propertyName, int? id)
         {
             throw new MemberAccessException(String.Format("No {0} property in {1}", propertyName, GetImplementedInterface().FullName));
         }

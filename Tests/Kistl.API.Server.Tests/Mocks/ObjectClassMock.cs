@@ -451,5 +451,11 @@ namespace Kistl.API.Server.Mocks
         }
 
         #endregion
+
+
+        public void UpdateParent(string propertyName, int? id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

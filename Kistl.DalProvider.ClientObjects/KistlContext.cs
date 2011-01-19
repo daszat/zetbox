@@ -49,7 +49,7 @@ namespace Kistl.DalProvider.Client
         /// <summary>
         /// List of Objects (IDataObject and ICollectionEntry) in this Context.
         /// </summary>
-        private ContextCache _objects;
+        private ContextCache<int> _objects;
 
         /// <summary>
         /// Counter for newly created Objects to give them a valid ID
@@ -63,7 +63,7 @@ namespace Kistl.DalProvider.Client
             this.config = config;
             this.proxy = proxy;
             this._ClientImplementationAssembly = clientImplementationAssembly;
-            this._objects = new ContextCache(this);
+            this._objects = new ContextCache<int>(this, item => item.ID);
             this._lazyCtx = lazyCtx;
             this._iftFactory = iftFactory;
             this._implTypeFactory = implTypeFactory;

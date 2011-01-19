@@ -217,5 +217,10 @@ namespace Kistl.API.Server.Mocks
         {
             throw new NotImplementedException();
         }
+
+        public override void UpdateParent(string propertyName, int? id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -286,5 +286,11 @@ using System.Xml.Serialization;
         }
 
         #endregion
+
+
+        public void UpdateParent(string propertyName, int? id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

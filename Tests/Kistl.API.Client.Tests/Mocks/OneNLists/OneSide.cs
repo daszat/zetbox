@@ -288,5 +288,11 @@ namespace Kistl.API.Client.Mocks.OneNLists
         #endregion
 
         #endregion
+
+
+        public void UpdateParent(string propertyName, int? id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

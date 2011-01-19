@@ -190,6 +190,9 @@ namespace Kistl.API
         /// </summary>
         bool IsReadonly { get; }
 
+        #region //// INTERNALS /////
+        // TODO: move to separate interface
+
         /// <summary>
         /// Notifies that a property is beeing changing
         /// </summary>
@@ -223,6 +226,7 @@ namespace Kistl.API
         /// </summary>
         /// <param name="obj">the object to copy from</param>
         void ApplyChangesFrom(IPersistenceObject obj);
+        #endregion
     }
 
     /// <summary>
@@ -230,6 +234,14 @@ namespace Kistl.API
     /// </summary>
     public interface IDataObject : IPersistenceObject, IDataErrorInfo
     {
+        /// <summary>
+        /// Reflects the current access rights by the current Identity. 
+        /// </summary>
+        AccessRights CurrentAccessRights { get; }
+
+        #region //// INTERNALS /////
+        // TODO: move to separate interface
+
         /// <summary>
         /// Fires an Event before an Object is saved.
         /// </summary>
@@ -251,9 +263,12 @@ namespace Kistl.API
         void NotifyDeleting();
 
         /// <summary>
-        /// Reflects the current access rights by the current Identity. 
+        /// Update 
         /// </summary>
-        AccessRights CurrentAccessRights { get; }
+        /// <param name="propertyName"></param>
+        /// <param name="id"></param>
+        void UpdateParent(string propertyName, int? id);
+        #endregion
     }
 
     /// <summary>
