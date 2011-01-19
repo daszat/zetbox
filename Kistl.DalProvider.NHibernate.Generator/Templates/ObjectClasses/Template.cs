@@ -45,6 +45,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                     Host, ctx,
                     this.GetInterfaces().First(),
                     Mappings.ObjectClassHbm.GetProxyTypeReference(parent, this.Settings),
+                    GetPersistentInitialisations(),
                     GetPersistentProperties());
             }
             else
@@ -52,8 +53,39 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                 ProxyClass.Call(
                     Host, ctx,
                     this.GetInterfaces().First(),
+                    GetPersistentInitialisations(),
                     GetPersistentProperties());
             }
+        }
+
+        private IEnumerable<KeyValuePair<string, string>> GetPersistentInitialisations()
+        {
+            var orps = this.ObjectClass
+                .Properties
+                .OfType<ObjectReferenceProperty>()
+                .Where(orp => orp.IsList())
+                .Select(orp =>
+                {
+                    var type = orp.ReferencedTypeAsCSharp();
+                    Relation rel = RelationExtensions.Lookup(ctx, orp);
+                    if (rel.Storage == StorageType.Separate)
+                    {
+                        type = rel.GetRelationFullName() + ImplementationSuffix;
+                    }
+                    else
+                    {
+                        type += ImplementationSuffix + "." + orp.GetReferencedObjectClass().Name + "Proxy";
+                    }
+                    return new KeyValuePair<string, string>(orp.Name, String.Format("new Collection<{0}>()", type));
+                });
+
+            var cops = this.ObjectClass
+                .Properties
+                .OfType<CompoundObjectProperty>()
+                .Where(cop => cop.IsList)
+                .Select(cop => new KeyValuePair<string, string>(cop.Name, String.Format("new Collection<{0}>()", cop.ReferencedTypeAsCSharp())));
+
+            return orps.Concat(cops).OrderBy(pair => pair.Key);
         }
 
         private IEnumerable<KeyValuePair<string, string>> GetPersistentProperties()
