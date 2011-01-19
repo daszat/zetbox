@@ -26,7 +26,7 @@ namespace Kistl.API.Client
 
         IEnumerable<IPersistenceObject> SetObjects(IKistlContext ctx, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests);
 
-        object InvokeServerMethod(IKistlContext ctx, InterfaceType ifType, int ID, string method, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests, out IEnumerable<IPersistenceObject> changedObjects);
+        object InvokeServerMethod(IKistlContext ctx, InterfaceType ifType, int ID, string method, Type retValType, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests, out IEnumerable<IPersistenceObject> changedObjects);
 
         IEnumerable<T> FetchRelation<T>(IKistlContext ctx, Guid relationId, RelationEndRole role, IDataObject parent, out List<IStreamable> auxObjects)
             where T : class, IRelationEntry;
@@ -338,7 +338,7 @@ namespace Kistl.API.Client
             }
         }
 
-        public object InvokeServerMethod(IKistlContext ctx, InterfaceType ifType, int ID, string method, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests, out IEnumerable<IPersistenceObject> changedObjects)
+        public object InvokeServerMethod(IKistlContext ctx, InterfaceType ifType, int ID, string method, Type retValType, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests, out IEnumerable<IPersistenceObject> changedObjects)
         {
             using (Logging.Facade.InfoTraceMethodCallFormat("InvokeServerMethod", "ID=[{0}]", ID))
             {
@@ -368,11 +368,32 @@ namespace Kistl.API.Client
                             changedObjectsStream,
                             notificationRequests.ToArray());
 
-                        BinaryReader br = new BinaryReader(retChangedObjects);
-                        tmpChangedObjects = ReceiveObjectList(ctx, br).Cast<IPersistenceObject>();
+                        {
+                            BinaryReader br = new BinaryReader(retChangedObjects);
+                            tmpChangedObjects = ReceiveObjectList(ctx, br).Cast<IPersistenceObject>();
+                        }
 
                         resultStream.Seek(0, SeekOrigin.Begin);
-                        result = bf.Deserialize(resultStream);
+
+                        if (retValType.IsIStreamable())
+                        {
+                            BinaryReader br = new BinaryReader(resultStream);
+                            result = ReceiveObjectList(ctx, br).Cast<IPersistenceObject>().FirstOrDefault();
+                        }
+                        else if (retValType.IsIEnumerable() && retValType.FindElementTypes().First().IsIPersistenceObject())
+                        {
+                            BinaryReader br = new BinaryReader(resultStream);
+                            IList lst = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(retValType.FindElementTypes().First()));
+                            foreach (object resultObj in ReceiveObjectList(ctx, br))
+                            {
+                                lst.Add(resultObj);
+                            }
+                            result = lst;
+                        }
+                        else
+                        {
+                            result = bf.Deserialize(resultStream);
+                        }
                     });
 
                     changedObjects = tmpChangedObjects;

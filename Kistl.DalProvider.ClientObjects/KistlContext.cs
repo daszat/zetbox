@@ -17,7 +17,7 @@ namespace Kistl.DalProvider.Client
 
     public interface IZBoxClientContextInternals
     {
-        object InvokeServerMethod<T>(T obj, string name, IEnumerable<Type> parameterTypes, params object[] parameter) where T : class, IDataObject;
+        object InvokeServerMethod<T>(T obj, string name, Type retValType, IEnumerable<Type> parameterTypes, params object[] parameter) where T : class, IDataObject;
     }
 
     /// <summary>
@@ -938,16 +938,18 @@ namespace Kistl.DalProvider.Client
 
         private class InvokeServerMethodHandler<T> : ExchangeObjectsHandler where T : class, IDataObject
         {
-            public InvokeServerMethodHandler(T obj, string name, IEnumerable<Type> parameterTypes, params object[] parameter)
+            public InvokeServerMethodHandler(T obj, string name, Type retValType, IEnumerable<Type> parameterTypes, params object[] parameter)
             {
                 this.obj = obj;
                 this.name = name;
+                this.retValType = retValType;
                 this.parameterTypes = parameterTypes;
                 this.parameter = parameter;
             }
 
             private readonly T obj;
             private readonly string name;
+            private readonly Type retValType;
             private readonly IEnumerable<Type> parameterTypes;
             private readonly object[] parameter;
 
@@ -959,6 +961,7 @@ namespace Kistl.DalProvider.Client
                     ctx.GetInterfaceType(obj),
                     obj.ID,
                     name,
+                    retValType,
                     parameterTypes,
                     parameter,
                     objectsToSubmit,
@@ -976,10 +979,10 @@ namespace Kistl.DalProvider.Client
             }
         }
 
-        public object InvokeServerMethod<T>(T obj, string name, IEnumerable<Type> parameterTypes, params object[] parameter) where T : class, IDataObject
+        public object InvokeServerMethod<T>(T obj, string name, Type retValType, IEnumerable<Type> parameterTypes, params object[] parameter) where T : class, IDataObject
         {
             CheckDisposed();
-            InvokeServerMethodHandler<T> handler = new InvokeServerMethodHandler<T>(obj, name, parameterTypes, parameter);
+            InvokeServerMethodHandler<T> handler = new InvokeServerMethodHandler<T>(obj, name, retValType, parameterTypes, parameter);
             handler.ExchangeObjects(this);
             return handler.Result;
         }

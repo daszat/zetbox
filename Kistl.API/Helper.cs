@@ -146,6 +146,20 @@ namespace Kistl.API
             return type.IsAbstract && type.IsSealed;
         }
 
+        public static bool IsIList(this Type type)
+        {
+            return typeof(IList).IsAssignableFrom(type);
+        }
+
+        public static bool IsIEnumerable(this Type type)
+        {
+            return typeof(IEnumerable).IsAssignableFrom(type);
+        }
+
+        public static bool IsIStreamable(this Type type)
+        {
+            return typeof(IStreamable).IsAssignableFrom(type);
+        }
         public static bool IsIDataObject(this Type type)
         {
             return typeof(IDataObject).IsAssignableFrom(type);

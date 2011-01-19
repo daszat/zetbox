@@ -381,9 +381,23 @@ namespace Kistl.Server
 
                         retChangedObjects = SendObjects(changedObjectsList.Cast<IStreamable>(), true);
 
-                        MemoryStream resultStream = new MemoryStream();
-                        bf.Serialize(resultStream, result);
-                        return resultStream;
+
+                        if (result != null && result.GetType().IsIStreamable())
+                        {
+                            IStreamable resultObj = (IStreamable)result;
+                            return SendObjects(new IStreamable[] { resultObj }, false);
+                        }
+                        else if (result != null && result.GetType().IsIEnumerable() && result.GetType().FindElementTypes().First().IsIPersistenceObject())
+                        {
+                            var lst = ((IEnumerable)result).AsQueryable().Cast<IStreamable>().Take(Kistl.API.Helper.MAXLISTCOUNT);
+                            return SendObjects(lst, false);
+                        }
+                        else
+                        {
+                            MemoryStream resultStream = new MemoryStream();
+                            bf.Serialize(resultStream, result);
+                            return resultStream;
+                        }
                     }
                 }
             }

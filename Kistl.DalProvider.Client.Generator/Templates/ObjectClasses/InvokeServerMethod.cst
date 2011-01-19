@@ -31,7 +31,7 @@
     {
 %>
         {
-            Context.ClientInternals().InvokeServerMethod(this, "<%= m.Name %>", <%= argumentTypes%><%= argumentDefs %>);
+            Context.ClientInternals().InvokeServerMethod(this, "<%= m.Name %>", typeof(<%= GetReturnType() %>), <%= argumentTypes%><%= argumentDefs %>);
         }
 <%
     }
@@ -39,7 +39,7 @@
     {
 %>
         {
-            return (<%= returnParam.ReturnedTypeAsCSharp() %>)Context.ClientInternals().InvokeServerMethod(this, "<%= m.Name %>", <%= argumentTypes %><%= argumentDefs %>);
+            return (<%= GetReturnType() %>)Context.ClientInternals().InvokeServerMethod(this, "<%= m.Name %>", typeof(<%= GetReturnType() %>), <%= argumentTypes %><%= argumentDefs %>);
         }
 <%
     }
