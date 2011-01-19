@@ -219,12 +219,21 @@ namespace Kistl.App.Base
                 var returnParam = mi.Method.GetReturnParameter();
                 if (returnParam != null)
                 {
-                    sb.AppendFormat(", MethodReturnEventArgs<{0}> e", returnParam.GetParameterTypeString());
+                    if (returnParam.IsList)
+                    {
+                        sb.AppendFormat(", MethodReturnEventArgs<IList<{0}>> e", returnParam.GetParameterTypeString());
+                    }
+                    else
+                    {
+                        sb.AppendFormat(", MethodReturnEventArgs<{0}> e", returnParam.GetParameterTypeString());
+                    }
                 }
 
                 foreach (var param in mi.Method.Parameter.Where(p => !p.IsReturnParameter))
                 {
-                    sb.AppendFormat(", {0} {1}", param.GetParameterTypeString(), param.Name);
+                    sb.AppendFormat(", {0} {1}",
+                        param.IsList ? string.Format("IList<{0}>", param.GetParameterTypeString()) : param.GetParameterTypeString(), 
+                        param.Name);
                 }
             }
 

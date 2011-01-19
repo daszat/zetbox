@@ -370,7 +370,7 @@ namespace Kistl.API.Server
                 var baseIfType = rootClass.GetDescribedInterfaceType();
                 var rights_type = Type.GetType(baseIfType.Type.FullName + "_Rights" + ImplementationSuffix + ", " + type.Assembly.FullName, true);
 
-                // .Where(o => o.Projekte_Rights.Count(r => r.Identity == 12) == 1)
+                // .Where(o => o.Projekte_Rights.Any(r => r.Identity == 12))
                 ParameterExpression pe_o = Expression.Parameter(type, "o");
                 ParameterExpression pe_r = Expression.Parameter(rights_type, "r");
 
@@ -385,24 +385,24 @@ namespace Kistl.API.Server
                 var eq_identity_lambda = Expression.Lambda(eq_identity, pe_r);
 
                 // o.Projekte_Rights
-                var count_src = Expression.PropertyOrField(pe_o, "SecurityRightsCollection" + Kistl.API.Helper.ImplementationSuffix);
+                var any_src = Expression.PropertyOrField(pe_o, "SecurityRightsCollection" + Kistl.API.Helper.ImplementationSuffix);
 
-                // o.Projekte_Rights.Count(r => r.Identity == 12)
-                var count = Expression.Call(typeof(System.Linq.Enumerable), "Count", new Type[] { rights_type },
-                    count_src,
+                // o.Projekte_Rights.Any(r => r.Identity == 12)
+                var any = Expression.Call(typeof(System.Linq.Enumerable), "Any", new Type[] { rights_type },
+                    any_src,
                     eq_identity_lambda);
 
-                // o.Projekte_Rights.Count(r => r.Identity == 12) == 1
-                var eq_count = Expression.Equal(
-                                count,
-                                Expression.Constant(1),
-                                false,
-                                typeof(int).GetMethod("op_Equality"));
+                // o.Projekte_Rights.Any(r => r.Identity == 12)
+                //var eq_count = Expression.Equal(
+                //                count,
+                //                Expression.Constant(1),
+                //                false,
+                //                typeof(int).GetMethod("op_Equality"));
 
-                // (o => o.Projekte_Rights.Count(r => r.Identity == 12) == 1)
-                var filter = Expression.Lambda(eq_count, new ParameterExpression[] { pe_o });
+                // (o => o.Projekte_Rights.Any(r => r.Identity == 12))
+                var filter = Expression.Lambda(any, new ParameterExpression[] { pe_o });
 
-                // e.Where(o => o.Projekte_Rights.Count(r => r.Identity == 12) == 1)
+                // e.Where(o => o.Projekte_Rights.Any(r => r.Identity == 12))
                 var result = Expression.Call(typeof(Queryable), "Where", new Type[] { type }, e, filter);
                 return result;
             }
