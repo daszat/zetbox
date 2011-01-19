@@ -16,45 +16,58 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
     {
 		protected IKistlContext ctx;
 		protected string className;
+		protected IEnumerable<KeyValuePair<string, string>> nameAndInitialiserList;
 		protected IEnumerable<KeyValuePair<string, string>> typeAndNameList;
 
 
-        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string className, IEnumerable<KeyValuePair<string, string>> typeAndNameList)
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string className, IEnumerable<KeyValuePair<string, string>> nameAndInitialiserList, IEnumerable<KeyValuePair<string, string>> typeAndNameList)
         {
             if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
 
-            _host.CallTemplate("ObjectClasses.ProxyClass", ctx, className, typeAndNameList);
+            _host.CallTemplate("ObjectClasses.ProxyClass", ctx, className, nameAndInitialiserList, typeAndNameList);
         }
 
-        public ProxyClass(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string className, IEnumerable<KeyValuePair<string, string>> typeAndNameList)
+        public ProxyClass(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string className, IEnumerable<KeyValuePair<string, string>> nameAndInitialiserList, IEnumerable<KeyValuePair<string, string>> typeAndNameList)
             : base(_host)
         {
 			this.ctx = ctx;
 			this.className = className;
+			this.nameAndInitialiserList = nameAndInitialiserList;
 			this.typeAndNameList = typeAndNameList;
 
         }
 
         public override void Generate()
         {
-#line 17 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClass.cst"
+#line 18 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClass.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        public class ",  className , "Proxy\r\n");
 this.WriteObjects("            : IProxyObject\r\n");
 this.WriteObjects("        {\r\n");
+this.WriteObjects("            public ",  className , "Proxy()\r\n");
+this.WriteObjects("            {\r\n");
+#line 24 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClass.cst"
+foreach(var p in nameAndInitialiserList) { 
+#line 25 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClass.cst"
+this.WriteObjects("                ",  p.Key , " = ",  p.Value , ";\r\n");
+#line 26 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClass.cst"
+} 
+#line 27 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClass.cst"
+this.WriteObjects("            }\r\n");
+this.WriteObjects("\r\n");
 this.WriteObjects("            public virtual int ID { get; set; }\r\n");
 this.WriteObjects("\r\n");
-this.WriteObjects("			public virtual Type ZBoxWrapper { get { return typeof(",  className , "",  ImplementationSuffix , "); } }\r\n");
-this.WriteObjects("			public virtual Type ZBoxProxy { get { return typeof(",  className , "Proxy); } }\r\n");
+this.WriteObjects("            public virtual Type ZBoxWrapper { get { return typeof(",  className , "",  ImplementationSuffix , "); } }\r\n");
+this.WriteObjects("            public virtual Type ZBoxProxy { get { return typeof(",  className , "Proxy); } }\r\n");
 this.WriteObjects("\r\n");
-#line 26 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClass.cst"
+#line 34 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClass.cst"
 foreach(var p in typeAndNameList) { 
-#line 27 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClass.cst"
+#line 35 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClass.cst"
 this.WriteObjects("            public virtual ",  p.Key , " ",  p.Value , " { get; set; }\r\n");
 this.WriteObjects("\r\n");
-#line 29 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClass.cst"
+#line 37 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClass.cst"
 } 
-#line 30 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClass.cst"
+#line 38 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClass.cst"
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("        // make proxy available for the provider\r\n");

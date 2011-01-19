@@ -14,14 +14,22 @@
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 <%@ Parameter Name="className" Type="string" %>
 <%@ Parameter Name="parentClassName" Type="string" %>
+<%@ Parameter Name="nameAndInitialiserList" Type="IEnumerable<KeyValuePair<string, string>>" %>
 <%@ Parameter Name="typeAndNameList" Type="IEnumerable<KeyValuePair<string, string>>" %>
 
         public class <%= className %>Proxy
             : <%= parentClassName %>
         {
+            public <%= className %>Proxy()
+            {
+<% foreach(var p in nameAndInitialiserList) { %>
+                <%= p.Key %> = <%= p.Value %>;
+<% } %>
+            }
+
             public override Type ZBoxWrapper { get { return typeof(<%= className %><%= ImplementationSuffix %>); } }
 
-			public override Type ZBoxProxy { get { return typeof(<%= className %>Proxy); } }
+            public override Type ZBoxProxy { get { return typeof(<%= className %>Proxy); } }
 
 <% foreach(var p in typeAndNameList) { %>
             public virtual <%= p.Key %> <%= p.Value %> { get; set; }

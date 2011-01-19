@@ -36,7 +36,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries
         {
             Templates.Properties.DelegatingProperty.Call(Host, ctx, "ValueIndex", "int?", "this.Proxy.Value" + Kistl.API.Helper.PositionSuffix, "int?");
         }
-        
+
         protected override void ApplyClassTailTemplate()
         {
             base.ApplyClassTailTemplate();
@@ -59,7 +59,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries
             }
 
 
-            ObjectClasses.ProxyClass.Call(Host, ctx, interfaceName, typeAndNameList);
+            ObjectClasses.ProxyClass.Call(Host, ctx, interfaceName, new KeyValuePair<string, string>[0], typeAndNameList);
         }
 
         protected override string GetExportGuidBackingStoreReference()

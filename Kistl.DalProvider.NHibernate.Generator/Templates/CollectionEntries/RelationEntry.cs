@@ -65,7 +65,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries
                 typeAndNameList.Add(new KeyValuePair<string, string>("Guid", "ExportGuid"));
             }
 
-            ObjectClasses.ProxyClass.Call(Host, ctx, interfaceName, typeAndNameList);
+            ObjectClasses.ProxyClass.Call(Host, ctx, interfaceName, new KeyValuePair<string, string>[0], typeAndNameList);
         }
 
         protected override string GetExportGuidBackingStoreReference()

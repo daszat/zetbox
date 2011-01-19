@@ -13,15 +13,23 @@
 <%@ Import Namespace="Kistl.Generator.Extensions" %>
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 <%@ Parameter Name="className" Type="string" %>
+<%@ Parameter Name="nameAndInitialiserList" Type="IEnumerable<KeyValuePair<string, string>>" %>
 <%@ Parameter Name="typeAndNameList" Type="IEnumerable<KeyValuePair<string, string>>" %>
 
         public class <%= className %>Proxy
             : IProxyObject
         {
+            public <%= className %>Proxy()
+            {
+<% foreach(var p in nameAndInitialiserList) { %>
+                <%= p.Key %> = <%= p.Value %>;
+<% } %>
+            }
+
             public virtual int ID { get; set; }
 
-			public virtual Type ZBoxWrapper { get { return typeof(<%= className %><%= ImplementationSuffix %>); } }
-			public virtual Type ZBoxProxy { get { return typeof(<%= className %>Proxy); } }
+            public virtual Type ZBoxWrapper { get { return typeof(<%= className %><%= ImplementationSuffix %>); } }
+            public virtual Type ZBoxProxy { get { return typeof(<%= className %>Proxy); } }
 
 <% foreach(var p in typeAndNameList) { %>
             public virtual <%= p.Key %> <%= p.Value %> { get; set; }
