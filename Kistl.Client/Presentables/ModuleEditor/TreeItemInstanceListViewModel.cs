@@ -11,16 +11,16 @@ namespace Kistl.Client.Presentables.ModuleEditor
 {
     public class TreeItemInstanceListViewModel : InstanceListViewModel
     {
-        public new delegate TreeItemInstanceListViewModel Factory(IKistlContext dataCtx, ObjectClass type, IQueryable qry);
+        public new delegate TreeItemInstanceListViewModel Factory(IKistlContext dataCtx/*, Func<IKistlContext> workingCtxFactory // not needed, injected by AutoFac */, ObjectClass type, IQueryable qry);
 
         public TreeItemInstanceListViewModel(
             IViewModelDependencies appCtx,
             KistlConfig config,
             IKistlContext dataCtx,
+            Func<IKistlContext> workingCtxFactory,
             ObjectClass type,
-            IQueryable qry,
-            Func<IKistlContext> ctxFactory)
-            : base(appCtx, config, dataCtx, type, qry, ctxFactory)
+            IQueryable qry)
+            : base(appCtx, config, dataCtx, workingCtxFactory, type, qry)
         {
         }
 

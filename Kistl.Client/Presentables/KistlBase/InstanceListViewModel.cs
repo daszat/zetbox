@@ -16,6 +16,7 @@ namespace Kistl.Client.Presentables.KistlBase
     using Kistl.API.Utils;
     using Kistl.App.Base;
     using Kistl.App.GUI;
+    using Kistl.App.Extensions;
     using Kistl.Client.Models;
     using Kistl.Client.Presentables.FilterViewModels;
     using Kistl.Client.Presentables.ValueViewModels;
@@ -37,12 +38,12 @@ namespace Kistl.Client.Presentables.KistlBase
     {
 #if MONO
         // See https://bugzilla.novell.com/show_bug.cgi?id=660553
-        public delegate InstanceListViewModel Factory(IKistlContext dataCtx, ObjectClass type, IQueryable qry);
+        public delegate InstanceListViewModel Factory(IKistlContext dataCtx, Func<IKistlContext> workingCtxFactory, ObjectClass type, IQueryable qry);
 #else
-        public new delegate InstanceListViewModel Factory(IKistlContext dataCtx, ObjectClass type, IQueryable qry);
+        public new delegate InstanceListViewModel Factory(IKistlContext dataCtx, Func<IKistlContext> workingCtxFactory, ObjectClass type, IQueryable qry);
 #endif
 
-        protected readonly Func<IKistlContext> ctxFactory;
+        protected readonly Func<IKistlContext> workingCtxFactory;
 
         /// <summary>
         /// Initializes a new instance of the DataTypeViewModel class.
@@ -50,19 +51,20 @@ namespace Kistl.Client.Presentables.KistlBase
         /// <param name="appCtx">the application context to use</param>
         /// <param name="config"></param>
         /// <param name="dataCtx">the data context to use</param>
+        /// <param name="workingCtxFactory">A factory for creating a working context. If the InstanceList is embeddet in a workspace which the user has to submit manually, the factory should return the same context as passed in the dataCtx parameter.</param>
         /// <param name="type">optional: the data type to model. If null, qry must be a Query of a valid DataType</param>
         /// <param name="qry">optional: the query to display. If null, Query will be constructed from type</param>
-        /// <param name="ctxFactory"></param>
         public InstanceListViewModel(
             IViewModelDependencies appCtx,
             KistlConfig config,
             IKistlContext dataCtx,
+            Func<IKistlContext> workingCtxFactory,
             ObjectClass type,
-            IQueryable qry,
-            Func<IKistlContext> ctxFactory)
+            IQueryable qry)
             : base(appCtx, dataCtx)
         {
             if (dataCtx == null) throw new ArgumentNullException("dataCtx");
+            if (workingCtxFactory == null) throw new ArgumentNullException("workingCtxFactory");
             if (qry == null && type == null) throw new ArgumentException("qry and type may not be null");
 
             if (type != null)
@@ -85,7 +87,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 _query = qry;
             }
 
-            this.ctxFactory = ctxFactory;
+            this.workingCtxFactory = workingCtxFactory;
         }
 
         #region Kind Management
@@ -258,6 +260,17 @@ namespace Kistl.Client.Presentables.KistlBase
 
         #region Commands
 
+        /// <summary>
+        /// Retruns true if DataContext is the same as the working context returned by the working context factory.
+        /// This is an indicator for an embedded InstanceList (embedded in a workspace which a User must submit manually).
+        /// </summary>
+        /// <param name="workingCtx"></param>
+        /// <returns></returns>
+        protected bool isEmbedded(IKistlContext workingCtx)
+        {
+            return workingCtx == DataContext;
+        }
+
         private bool _ShowOpenCommand = true;
         public bool ShowOpenCommand
         {
@@ -358,40 +371,57 @@ namespace Kistl.Client.Presentables.KistlBase
             }
         }
 
-        private OpenDataObjectCommand _OpenCommand;
-        public OpenDataObjectCommand OpenCommand
+        private ICommandViewModel _OpenCommand;
+        public ICommandViewModel OpenCommand
         {
             get
             {
                 if (_OpenCommand == null)
                 {
-                    _OpenCommand = ViewModelFactory.CreateViewModel<OpenDataObjectCommand.Factory>().Invoke(DataContext, RequestedWorkspaceKind, RequestedEditorKind);
+                    _OpenCommand = ViewModelFactory.CreateViewModel<SimpleItemCommandViewModel<DataObjectViewModel>.Factory>().Invoke(
+                        DataContext, CommonCommandsResources.OpenDataObjectCommand_Name, 
+                        CommonCommandsResources.OpenDataObjectCommand_Tooltip, 
+                        OpenObjects);
                     _OpenCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_openHS_png);
                 }
                 return _OpenCommand;
             }
         }
 
-        private NewDataObjectCommand _NewCommand;
-        public NewDataObjectCommand NewCommand
+        private ICommandViewModel _NewCommand;
+        public ICommandViewModel NewCommand
         {
             get
             {
                 if (_NewCommand == null)
                 {
-                    _NewCommand = ViewModelFactory.CreateViewModel<NewDataObjectCommand.Factory>().Invoke(DataContext, _type, RequestedWorkspaceKind, RequestedEditorKind, null /* I do it my way */);
-                    _NewCommand.ObjectCreated += new NewDataObjectCommand.ObjectCreatedHandler(_NewCommand_ObjectCreated);
+                    _NewCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
+                        DataContext, CommonCommandsResources.NewDataObjectCommand_Name, CommonCommandsResources.NewDataObjectCommand_Tooltip, NewObject, () => AllowAddNew);
                     _NewCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_NewDocumentHS_png);
                 }
                 return _NewCommand;
             }
         }
 
-        void _NewCommand_ObjectCreated(IDataObject obj)
+        private void NewObject()
         {
+            var workingCtx = workingCtxFactory();
+            var obj = workingCtx.Create(DataContext.GetInterfaceType(_type.GetDataType()));
             OnObjectCreated(obj);
-            this.ReloadInstances();
-            this.SelectedItem = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, obj);
+
+            if (isEmbedded(workingCtx))
+            {
+                this.ReloadInstances();
+                var mdl = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, obj);
+                this.SelectedItem = mdl;
+                ViewModelFactory.ShowModel(mdl, true);
+            }
+            else
+            {
+                var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditor.WorkspaceViewModel.Factory>().Invoke(workingCtx);
+                newWorkspace.ShowForeignModel(DataObjectViewModel.Fetch(ViewModelFactory, workingCtx, obj), RequestedEditorKind);
+                ViewModelFactory.ShowModel(newWorkspace, RequestedWorkspaceKind, true);
+            }
         }
 
         public delegate void ObjectCreatedHandler(IDataObject obj);
@@ -406,17 +436,42 @@ namespace Kistl.Client.Presentables.KistlBase
             }
         }
 
-        private DeleteDataObjectCommand _DeleteCommand;
-        public DeleteDataObjectCommand DeleteCommand
+        private ICommandViewModel _DeleteCommand;
+        public ICommandViewModel DeleteCommand
         {
             get
             {
                 if (_DeleteCommand == null)
                 {
-                    _DeleteCommand = ViewModelFactory.CreateViewModel<DeleteDataObjectCommand.Factory>().Invoke(DataContext, this, AllowDelete);
+                    _DeleteCommand = ViewModelFactory.CreateViewModel<SimpleItemCommandViewModel<DataObjectViewModel>.Factory>().Invoke(
+                        DataContext, 
+                        CommonCommandsResources.DeleteDataObjectCommand_Name, 
+                        CommonCommandsResources.DeleteDataObjectCommand_Tooltip, 
+                        DeleteObjects);
                 }
                 return _DeleteCommand;
             }
+        }
+
+        public void DeleteObjects(IEnumerable<DataObjectViewModel> objects)
+        {
+            if (objects == null) throw new ArgumentNullException("objects");
+            if (!AllowDelete) throw new InvalidOperationException("Deleting items is not allowed. See AllowDelete property");
+
+            var workingCtx = workingCtxFactory();
+
+            foreach (var item in objects)
+            {
+                var working = workingCtx.Find(workingCtx.GetInterfaceType(item.Object), item.ID);
+                workingCtx.Delete(working);
+            }
+
+            if (!isEmbedded(workingCtx))
+            {
+                workingCtx.SubmitChanges();
+            }
+
+            ReloadInstances();
         }
         #endregion
 
@@ -690,8 +745,28 @@ namespace Kistl.Client.Presentables.KistlBase
         public void OpenObjects(IEnumerable<DataObjectViewModel> objects)
         {
             if (objects == null) throw new ArgumentNullException("objects");
-            // TODO: Refactor this
-            OpenCommand.Execute(objects);
+            var workingCtx = workingCtxFactory();
+            if (isEmbedded(workingCtx))
+            {
+                foreach (var item in objects)
+                {
+                    ViewModelFactory.ShowModel(item, true);
+                }
+            }
+            else
+            {
+                var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditor.WorkspaceViewModel.Factory>().Invoke(workingCtx);
+                foreach (var item in objects)
+                {
+                    var newMdl = newWorkspace.ShowForeignModel(item, RequestedEditorKind);
+                    //ModelCreatedEventHandler temp = ModelCreated;
+                    //if (temp != null)
+                    //{
+                    //    temp(newMdl);
+                    //}
+                }
+                ViewModelFactory.ShowModel(newWorkspace, RequestedWorkspaceKind, true);
+            }
         }
 
         public delegate void ItemsDefaultActionHandler(IEnumerable<DataObjectViewModel> objects);

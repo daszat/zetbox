@@ -51,7 +51,7 @@ namespace Kistl.Client.Presentables
         {
             _callback = callback;
             _additionalActions = new ReadOnlyCollection<CommandViewModel>(additionalActions ?? new CommandViewModel[] { });
-            ListViewModel = ViewModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(dataCtx, type, qry);
+            ListViewModel = ViewModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(dataCtx, () => dataCtx, type, qry);
             ListViewModel.AllowAddNew = true;
 
             foreach (var cmd in _additionalActions)
