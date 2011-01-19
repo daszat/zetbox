@@ -10,19 +10,21 @@ namespace Kistl.API.Utils
     /// <summary>
     /// Store IPersistenceObjects ordered by (root-)Type and ID for fast access by type or Export Guid.
     /// </summary>
-    public class ContextCache
+    public class ContextCache<TKey>
         : ICollection<IPersistenceObject>
     {
-        private Dictionary<InterfaceType, Dictionary<int, IPersistenceObject>> _objects = new Dictionary<InterfaceType, Dictionary<int, IPersistenceObject>>();
+        private Dictionary<InterfaceType, Dictionary<TKey, IPersistenceObject>> _objects = new Dictionary<InterfaceType, Dictionary<TKey, IPersistenceObject>>();
         private Dictionary<Guid, IPersistenceObject> _exportableobjects = new Dictionary<Guid, IPersistenceObject>();
         private readonly IKistlContext ctx;
+        private readonly Func<IPersistenceObject, TKey> keyFromItem;
 
-        public ContextCache(IKistlContext parent)
+        public ContextCache(IKistlContext parent, Func<IPersistenceObject, TKey> keyFromItem)
         {
             this.ctx = parent;
+            this.keyFromItem = keyFromItem;
         }
 
-        public IPersistenceObject Lookup(InterfaceType t, int id)
+        public IPersistenceObject Lookup(InterfaceType t, TKey id)
         {
             // Interface types are structs and can't be null
             //if (t == null) { throw new ArgumentNullException("t"); }
@@ -31,7 +33,7 @@ namespace Kistl.API.Utils
             if (!_objects.ContainsKey(rootT))
                 return null;
 
-            IDictionary<int, IPersistenceObject> typeList = _objects[rootT];
+            IDictionary<TKey, IPersistenceObject> typeList = _objects[rootT];
             if (!typeList.ContainsKey(id))
                 return null;
 
@@ -56,7 +58,7 @@ namespace Kistl.API.Utils
                 if (!_objects.ContainsKey(rootT))
                     return null;
 
-                Dictionary<int, IPersistenceObject> typeList = _objects[rootT];
+                Dictionary<TKey, IPersistenceObject> typeList = _objects[rootT];
                 return typeList.Values;
             }
         }
@@ -70,9 +72,9 @@ namespace Kistl.API.Utils
 
             // create per-Type dictionary on-demand
             if (!_objects.ContainsKey(rootT))
-                _objects[rootT] = new Dictionary<int, IPersistenceObject>();
+                _objects[rootT] = new Dictionary<TKey, IPersistenceObject>();
 
-            _objects[rootT][item.ID] = item;
+            _objects[rootT][keyFromItem(item)] = item;
 
             if (item is IExportableInternal)
             {
@@ -92,7 +94,7 @@ namespace Kistl.API.Utils
         {
             if (item == null) { throw new ArgumentNullException("item"); }
             var rootT = ctx.GetInterfaceType(item).GetRootType();
-            return _objects.ContainsKey(rootT) && _objects[rootT].ContainsKey(item.ID);
+            return _objects.ContainsKey(rootT) && _objects[rootT].ContainsKey(keyFromItem(item));
         }
 
         public void CopyTo(IPersistenceObject[] array, int arrayIndex)
@@ -120,7 +122,7 @@ namespace Kistl.API.Utils
 
             if (Contains(item))
                 // should always return true
-                return _objects[rootT].Remove(item.ID);
+                return _objects[rootT].Remove(keyFromItem(item));
             else
                 return false;
         }

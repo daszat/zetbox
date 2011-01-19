@@ -20,7 +20,8 @@ namespace Kistl.DalProvider.NHibernate
         private readonly global::NHibernate.ISession _nhSession;
         private readonly INHibernateImplementationTypeChecker _implChecker;
 
-        private readonly ContextCache _attachedObjects;
+        private readonly ContextCache<int> _attachedObjects;
+        private readonly ContextCache<IProxyObject> _attachedObjectsByProxy;
 
         /// <summary>
         /// Counter for newly created Objects to give them a valid ID for the ContextCache
@@ -44,7 +45,8 @@ namespace Kistl.DalProvider.NHibernate
             _nhSession = nhSession;
             _implChecker = implChecker;
 
-            _attachedObjects = new ContextCache(this);
+            _attachedObjects = new ContextCache<int>(this, item => item.ID);
+            _attachedObjectsByProxy = new ContextCache<IProxyObject>(this, item => ((NHibernatePersistenceObject)item).NHibernateProxy);
         }
 
         public IQueryable<IPersistenceObject> PrepareQueryableGeneric<Tinterface, Timpl>()
@@ -98,6 +100,7 @@ namespace Kistl.DalProvider.NHibernate
             }
 
             _attachedObjects.Add(obj);
+            _attachedObjectsByProxy.Add(obj);
 
             return base.Attach(obj);
         }
@@ -242,12 +245,15 @@ namespace Kistl.DalProvider.NHibernate
                 foreach (var obj in notifySaveList)
                 {
                     _attachedObjects.Remove(obj);
+                    _attachedObjectsByProxy.Remove(obj);
+
                     obj.SaveOrUpdateTo(_nhSession);
                 }
                 _nhSession.Flush();
                 foreach (var obj in notifySaveList)
                 {
                     _attachedObjects.Add(obj);
+                    _attachedObjectsByProxy.Add(obj);
                 }
                 Logging.Log.InfoFormat("[{0}] changes submitted.", notifySaveList.Count);
             }
@@ -455,7 +461,7 @@ namespace Kistl.DalProvider.NHibernate
             if (proxy == null)
                 return null;
 
-            var item = (NHibernatePersistenceObject)_attachedObjects.Lookup(GetImplementationType(proxy.ZBoxWrapper).ToInterfaceType(), proxy.ID);
+            var item = (NHibernatePersistenceObject)_attachedObjectsByProxy.Lookup(GetImplementationType(proxy.ZBoxWrapper).ToInterfaceType(), proxy);
             if (item == null)
             {
                 if (proxy.ID > Kistl.API.Helper.INVALIDID)

@@ -58,15 +58,18 @@
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
-                // shortcut noops
+                // shortcut noop with nulls
                 if (value == null && this.Proxy.<%= name %> == null)
-                    return;
-                else if (value != null && this.Proxy.<%= name %> != null && value.ID == this.Proxy.<%= name %>.ID)
                     return;
 
                 // cache old value to remove inverse references later
                 var __oldValue = (<%= referencedImplementation %>)OurContext.AttachAndWrap(this.Proxy.<%= name %>);
                 var __newValue = (<%= referencedImplementation %>)value;
+
+                // shortcut noop on objects
+                // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
+                if (__oldValue == __newValue)
+                    return;
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("<%= name %>", __oldValue, __newValue);
@@ -81,7 +84,14 @@
 <% } %>
 
                 // next, set the local reference
-                this.Proxy.<%= name %> = __newValue.Proxy;
+                if (__newValue == null)
+                {
+                    this.Proxy.<%= name %> = null;
+                }
+                else
+                {
+                    this.Proxy.<%= name %> = __newValue.Proxy;
+                }
 
 <% if (!String.IsNullOrEmpty(inverseNavigatorName)) { %>
                 // now fixup redundant, inverse references
