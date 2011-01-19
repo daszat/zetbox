@@ -458,7 +458,10 @@ namespace Kistl.DalProvider.NHibernate
             var item = (NHibernatePersistenceObject)_attachedObjects.Lookup(GetImplementationType(proxy.ZBoxWrapper).ToInterfaceType(), proxy.ID);
             if (item == null)
             {
-                proxy = (IProxyObject)_nhSession.Load(proxy.ZBoxProxy, proxy.ID);
+                if (proxy.ID > Kistl.API.Helper.INVALIDID)
+                {
+                    proxy = (IProxyObject)_nhSession.Load(proxy.ZBoxProxy, proxy.ID);
+                }
                 item = (NHibernatePersistenceObject)Activator.CreateInstance(proxy.ZBoxWrapper, null, proxy);
                 Attach(item);
             }
