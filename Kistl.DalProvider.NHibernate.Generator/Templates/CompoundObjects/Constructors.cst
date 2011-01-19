@@ -1,0 +1,49 @@
+﻿<%@ CodeTemplate Language="C#" 
+    Name="CompoundObjects.Constructors"
+    ClassName="Kistl.DalProvider.NHibernate.Generator.Templates.CompoundObjects.Constructors" 
+    Inherits="Kistl.Generator.ResourceTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="System.Linq" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.App.Extensions" %>
+<%@ Import Namespace="Kistl.Generator" %>
+<%@ Import Namespace="Kistl.Generator.Extensions" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="compoundObjectProperties" Type="IEnumerable<CompoundObjectProperty>" %>
+<%@ Parameter Name="interfaceName" Type="string" %>
+<%@ Parameter Name="className" Type="string" %>
+<%@ Parameter Name="baseClassName" Type="string" %>
+        // used by NHibernate
+        public <%= className %>()
+            : this(null, null, null, null)
+        {
+        }
+
+        // used by CreateUnattachedInstance
+        public <%= className %>(Func<IFrozenContext> lazyCtx)
+            : this(null, null, lazyCtx, null)
+        {
+        }
+
+        /// <summary>Create a instance, wrapping the specified proxy</summary>
+        public <%= className %>(IPersistenceObject parent, string property, Func<IFrozenContext> lazyCtx, <%= interfaceName %>Proxy proxy)
+<% if (String.IsNullOrEmpty(baseClassName)) { %>
+            : base(lazyCtx) // do not pass proxy to base data object
+<% } else { %>
+            : base(lazyCtx, proxy) // pass proxy to base nhibernate object
+<% } %>
+        {
+            this.Proxy = proxy;
+            AttachToObject(parent, property);
+<% ApplyCompoundObjectPropertyInitialisers(); %>
+        }
+
+        /// <summary>the NHibernate proxy of the represented entity</summary>
+<% if (String.IsNullOrEmpty(baseClassName)) { %>
+        internal readonly <%= interfaceName %>Proxy Proxy;
+<% } else { %>
+        internal new readonly <%= interfaceName %>Proxy Proxy;
+<% } %>

@@ -64,4 +64,4 @@
 <%
         AddSerialization(serializationList, coType, propName, coImplementationType, backingPropertyName);
 %>
-           // END <%= this.GetType() %>
+        // END <%= this.GetType() %>

@@ -1,18 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Kistl.API;
-using Kistl.App.Test;
-
-using NUnit.Framework;
-using System.Globalization;
 
 namespace Kistl.API.AbstractConsumerTests.CompoundObjects
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Globalization;
+    using System.Linq;
+    using System.Text;
+    using Kistl.API;
+    using Kistl.App.Test;
+    using NUnit.Framework;
 
-    public abstract class CompoundObjectFixture : AbstractTestFixture
+    public abstract class CompoundObjectFixture
+        : AbstractTestFixture
     {
         protected const int MINLISTCOUNT = 5;
 
@@ -96,7 +95,8 @@ namespace Kistl.API.AbstractConsumerTests.CompoundObjects
         [TearDown]
         public virtual void DisposeContext()
         {
-            ctx.Dispose();
+            if (ctx != null)
+                ctx.Dispose();
         }
     }
 

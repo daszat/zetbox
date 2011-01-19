@@ -76,6 +76,14 @@
     <Compile Include="Templates\CollectionEntries\ValueCollectionEntry.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Templates\CompoundObjects\Constructors.cs">
+      <DependentUpon>Constructors.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\CompoundObjects\Constructors.Designer.cs">
+      <DependentUpon>Constructors.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Templates\CompoundObjects\Template.cs" />
     <Compile Include="Templates\Mappings\CollectionEntriesHbm.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -218,6 +226,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Templates\CompoundObjects\Constructors.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>Constructors.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Templates\Mappings\CollectionEntriesHbm.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>CollectionEntriesHbm.Designer.cs</LastGenOutput>

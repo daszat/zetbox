@@ -1,14 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Autofac;
-using Kistl.API.Configuration;
-using Kistl.API.Utils;
-using NUnit.Framework;
 
 namespace Kistl.API.AbstractConsumerTests
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using Autofac;
+    using Kistl.API.Configuration;
+    using Kistl.API.Utils;
+    using NUnit.Framework;
+
     public abstract class AbstractTestFixture
     {
         protected ILifetimeScope scope;
@@ -22,7 +23,8 @@ namespace Kistl.API.AbstractConsumerTests
         [TearDown]
         public virtual void TearDown()
         {
-            scope.Dispose();
+            if (scope != null)
+                scope.Dispose();
         }
 
         protected IKistlContext GetContext()

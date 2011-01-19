@@ -101,7 +101,7 @@ this.WriteObjects("        }\r\n");
 AddSerialization(serializationList, coType, propName, coImplementationType, backingPropertyName);
 
 #line 67 "P:\Kistl\Kistl.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
-this.WriteObjects("           // END ",  this.GetType() , "");
+this.WriteObjects("        // END ",  this.GetType() , "");
 
         }
 

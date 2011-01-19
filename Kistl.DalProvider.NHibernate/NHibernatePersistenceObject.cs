@@ -82,7 +82,7 @@ namespace Kistl.DalProvider.NHibernate
         protected NHibernateContext OurContext { get { return (NHibernateContext)Context; } }
         public abstract IProxyObject NHibernateProxy { get; }
 
-        public void SaveOrUpdateTo(global::NHibernate.ISession session)
+        public virtual void SaveOrUpdateTo(global::NHibernate.ISession session)
         {
             if (session == null) { throw new ArgumentNullException("session"); }
 

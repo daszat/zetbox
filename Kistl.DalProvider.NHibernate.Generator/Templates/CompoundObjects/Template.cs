@@ -22,12 +22,12 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.CompoundObjects
         protected override void ApplyConstructorTemplate()
         {
             // replace base constructor
-            // base.ApplyExtraConstructorTemplate();
+            // base.ApplyConstructorTemplate();
 
             string interfaceName = DataType.Name;
             string className = GetTypeName();
             string baseClassName = null;
-            ObjectClasses.Constructors.Call(Host, ctx, this.DataType.Properties.OfType<CompoundObjectProperty>(), interfaceName, className, baseClassName);
+            Constructors.Call(Host, ctx, this.DataType.Properties.OfType<CompoundObjectProperty>(), interfaceName, className, baseClassName);
         }
 
         protected override void ApplyClassTailTemplate()
