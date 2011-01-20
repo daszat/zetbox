@@ -387,7 +387,7 @@ namespace Kistl.Server
                             IStreamable resultObj = (IStreamable)result;
                             return SendObjects(new IStreamable[] { resultObj }, false);
                         }
-                        else if (result != null && result.GetType().IsIEnumerable() && result.GetType().FindElementTypes().First().IsIPersistenceObject())
+                        else if (result != null && result.GetType().IsIEnumerable() && result.GetType().FindElementTypes().First().IsIStreamable())
                         {
                             var lst = ((IEnumerable)result).AsQueryable().Cast<IStreamable>().Take(Kistl.API.Helper.MAXLISTCOUNT);
                             return SendObjects(lst, false);

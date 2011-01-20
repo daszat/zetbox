@@ -14,6 +14,7 @@ namespace Kistl.DalProvider.Client
     using Kistl.API.Configuration;
     using Kistl.API.Utils;
     using Kistl.DalProvider.Base;
+    using System.Collections;
 
     public interface IZBoxClientContextInternals
     {
@@ -967,6 +968,19 @@ namespace Kistl.DalProvider.Client
                     objectsToSubmit,
                     notificationRequests,
                     out changedObjects);
+
+                if (Result != null && Result.GetType().IsIPersistenceObject())
+                {
+                    Result = ctx.AttachRespectingIsolationLevel((IPersistenceObject)Result);
+                }
+                else if (Result != null && Result.GetType().IsIList() && Result.GetType().FindElementTypes().First().IsIPersistenceObject())
+                {
+                    var lst = (IList)Result;
+                    for(int i= 0;i<lst.Count;i++)
+                    {
+                        lst[i] = ctx.AttachRespectingIsolationLevel((IPersistenceObject)lst[i]);
+                    }
+                }
 
                 return changedObjects;
             }
