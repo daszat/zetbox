@@ -60,84 +60,8 @@
     </class>
 <% } %>
 
-    <!-- ValueCollectionEntries -->
-<%
-    foreach (var vtp in ctx.GetQuery<ValueTypeProperty>()
-        .Where(p => p.IsList)
-        .OrderBy(p => p.Name))
-    {
-        var collectionEntryNamespace = vtp.Module.Namespace;
-        var collectionEntryClassName = vtp.GetCollectionEntryClassName() + ImplementationSuffix;
-        var proxyClassName = vtp.GetCollectionEntryClassName() + "Proxy";
-        var tableName = vtp.GetCollectionEntryTable();
-%>
-    <class name="<%= collectionEntryNamespace %>.<%= collectionEntryClassName %>+<%= proxyClassName %>"
-           proxy="<%= collectionEntryNamespace %>.<%= collectionEntryClassName %>+<%= proxyClassName %>"
-           table="`<%= tableName %>`">
-        <id name="ID"
-            column="`ID`"
-            type="Int32">
+    <!-- ValueCollectionEntries are defined directly on use -->
 
-            <generator class="native">
-                <param name="sequence">`<%= tableName %>_ID_seq`</param>
-            </generator>
-        </id>
+    <!-- CompoundObjectCollectionEntries are defined directly on use -->
 
-        <many-to-one name="Parent"
-                     column="`<%= vtp.GetCollectionEntryReverseKeyColumnName() %>`" />
-        <property name="Value"
-                  column="`<%= vtp.Name %>`" />
-<% if (vtp.HasPersistentOrder) { %>
-        <property name="<%= vtp.Name %>Index"
-                  column="`<%= vtp.Name %>Index`" />
-<%  
-    throw new NotImplementedException();
-} %>
-<% if (((ObjectClass)vtp.ObjectClass).ImplementsIExportable()) { %>
-        <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
-<% } %>
-    </class>
-<% } %>
-
-    <!-- CompoundObjectCollectionEntries -->
-<%
-    foreach (var cop in ctx.GetQuery<CompoundObjectProperty>()
-        .Where(p => p.IsList)
-        .OrderBy(p => p.Name))
-    {
-        var collectionEntryNamespace = cop.Module.Namespace;
-        var collectionEntryClassName = cop.GetCollectionEntryClassName() + ImplementationSuffix;
-        var proxyClassName = cop.GetCollectionEntryClassName() + "Proxy";
-        var tableName = cop.GetCollectionEntryTable();
-%>
-    <class name="<%= collectionEntryNamespace %>.<%= collectionEntryClassName %>+<%= proxyClassName %>"
-           proxy="<%= collectionEntryNamespace %>.<%= collectionEntryClassName %>+<%= proxyClassName %>"
-           table="`<%= tableName %>`">
-        <id name="ID"
-            column="`ID`"
-            type="Int32">
-
-            <generator class="native">
-                <param name="sequence">`<%= tableName %>_ID_seq`</param>
-            </generator>
-        </id>
-
-        <many-to-one name="Parent"
-                     column="`<%= cop.GetCollectionEntryReverseKeyColumnName() %>`" />
-        <component name="Value"
-                   class="<%= cop.CompoundObjectDefinition.Module.Namespace %>.<%= cop.CompoundObjectDefinition.Name %><%= ImplementationSuffix %>,Kistl.Objects.NHibernateImpl">
-<% PropertiesHbm.Call(Host, ctx, cop.Name + "_", cop.CompoundObjectDefinition.Properties); %>
-        </component>
-
-<% if (cop.HasPersistentOrder) { %>
-        <property name="<%= cop.Name %>Index"
-                    column="`<%= cop.Name %>Index`" />
-<% 
-    throw new NotImplementedException();
-} %>
-<% if (((ObjectClass)cop.ObjectClass).ImplementsIExportable()) { %>
-        <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
-<% } %>
-    </class>
-<% } %>
 </hibernate-mapping>

@@ -31,7 +31,6 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries
                 null);
         }
 
-
         protected override void ApplyBIndexPropertyTemplate()
         {
             Templates.Properties.DelegatingProperty.Call(Host, ctx, "ValueIndex", "int?", "this.Proxy.Value" + Kistl.API.Helper.PositionSuffix, "int?");
@@ -45,6 +44,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries
 
             List<KeyValuePair<string, string>> typeAndNameList = new List<KeyValuePair<string, string>>() {
                 new KeyValuePair<string, string>(Mappings.ObjectClassHbm.GetProxyTypeReference(prop.ObjectClass as ObjectClass, this.Settings), "Parent"),
+                new KeyValuePair<string, string>("bool", "ValueIsNull"),
                 new KeyValuePair<string, string>(prop.GetPropertyTypeString(), "Value"),
             };
 
@@ -58,6 +58,12 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries
                 typeAndNameList.Add(new KeyValuePair<string, string>("Guid", "ExportGuid"));
             }
 
+            this.WriteLine("        public override void SaveOrUpdateTo(NHibernate.ISession session)");
+            this.WriteLine("        {");
+            this.WriteLine("            // ValueCollectionEntries and CompoundCollectionEntries are saved by cascade");
+            this.WriteLine("            //base.SaveOrUpdateTo(session);");
+            this.WriteLine("        }");
+            this.WriteLine("");
 
             ObjectClasses.ProxyClass.Call(Host, ctx, interfaceName, new KeyValuePair<string, string>[0], typeAndNameList);
         }

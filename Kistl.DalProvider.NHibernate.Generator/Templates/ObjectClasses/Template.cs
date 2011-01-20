@@ -158,17 +158,22 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                     }
                     else
                     {
+                        var ceClassName = p.GetCollectionEntryClassName();
+                        var ceCollectionType = String.Format("ICollection<{0}.{1}{2}+{1}Proxy>",
+                            p.ObjectClass.Module.Namespace,
+                            ceClassName,
+                            ImplementationSuffix);
                         var cop = p as CompoundObjectProperty;
                         if (cop != null && cop.IsList)
                         {
-                            type = "ICollection<" + cop.GetCollectionEntryClassName() + ImplementationSuffix + ">";
+                            type = ceCollectionType;
                         }
                         else
                         {
                             var vtp = p as ValueTypeProperty;
                             if (vtp != null && vtp.IsList)
                             {
-                                type = "ICollection<" + vtp.GetCollectionEntryClassName() + ImplementationSuffix + ">";
+                                type = ceCollectionType;
                             }
                         }
                     }

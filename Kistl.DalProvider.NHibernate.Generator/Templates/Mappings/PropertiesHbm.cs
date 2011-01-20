@@ -260,7 +260,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
             string nameAttr = String.Format("name=\"{0}\"", prop.Name);
             string tableName = prop.GetCollectionEntryTable();
             string tableAttr = String.Format("table=\"`{0}`\"", tableName);
-            string classAttr = String.Format("class=\"{0}.{1}{2},Kistl.Objects.NHibernateImpl\"",
+            string valueClassAttr = String.Format("class=\"{0}.{1}{2},Kistl.Objects.NHibernateImpl\"",
                 prop.CompoundObjectDefinition.Module.Namespace,
                 prop.CompoundObjectDefinition.Name,
                 ImplementationSuffix);
@@ -269,6 +269,12 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
 
             if (prop.IsList)
             {
+                string ceClassAttr = String.Format("class=\"{0}.{1}{2}+{1},Kistl.Objects.NHibernateImpl\"",
+                    prop.Module.Namespace,
+                    prop.GetCollectionEntryClassName(),
+                    ImplementationSuffix);
+                string isNullColumnAttr = String.Format("column=\"`{0}`\"", prop.Name);
+
                 this.WriteObjects("<", mappingType, " ", nameAttr, " ", tableAttr, ">");
                 this.WriteLine();
 
@@ -290,11 +296,17 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
                     this.WriteLine();
                 }
 
-                this.WriteObjects("    <composite-element ", classAttr, ">");
+                this.WriteObjects("    <composite-element ", ceClassAttr, ">");
+                this.WriteLine();
+                this.WriteObjects("        <property name=\"ValueIsNull\" ", isNullColumnAttr, " type=\"bool\" />");
+                this.WriteLine();
+                this.WriteObjects("        <nested-composite-element name=\"Value\" ", valueClassAttr, ">");
                 this.WriteLine();
 
                 Call(Host, ctx, prefix + prop.Name + "_", prop.CompoundObjectDefinition.Properties);
 
+                this.WriteObjects("        </nested-composite-element>");
+                this.WriteLine();
                 this.WriteObjects("    </composite-element>");
                 this.WriteLine();
                 this.WriteObjects("</", mappingType, ">");
@@ -302,7 +314,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
             }
             else
             {
-                this.WriteObjects("<component ", nameAttr, " ", classAttr, " >");
+                this.WriteObjects("<component ", nameAttr, " ", valueClassAttr, " >");
                 this.WriteLine();
 
                 Call(Host, ctx, prefix + prop.Name + "_", prop.CompoundObjectDefinition.Properties);
