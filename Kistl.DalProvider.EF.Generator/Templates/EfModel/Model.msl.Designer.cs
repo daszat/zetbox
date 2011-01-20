@@ -50,7 +50,7 @@ ApplyEntityTypeMapping(cls);
 #line 26 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 this.WriteObjects("    </EntitySetMapping>\r\n");
 #line 28 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
-if(cls.NeedsRightsTable())
+if (cls.NeedsRightsTable())
 		{
 
 #line 31 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
@@ -98,7 +98,7 @@ this.WriteObjects("      <EntityTypeMapping TypeName=\"IsTypeOf(Model.",  rel.Ge
 this.WriteObjects("        <MappingFragment StoreEntitySet=\"",  rel.GetRelationClassName() , "\">\r\n");
 this.WriteObjects("          <ScalarProperty Name=\"ID\" ColumnName=\"ID\" />\r\n");
 #line 72 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
-if(rel.A.Type.ImplementsIExportable() && rel.B.Type.ImplementsIExportable())
+if (rel.A.Type.ImplementsIExportable() && rel.B.Type.ImplementsIExportable())
 		{
 
 #line 75 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"

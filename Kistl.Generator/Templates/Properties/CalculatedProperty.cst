@@ -14,7 +14,7 @@
 		{
 			get
 			{
-				if(<%= getterEventName %> == null)
+				if (<%= getterEventName %> == null)
 				{
 					return null;
 				}

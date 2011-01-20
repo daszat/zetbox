@@ -18,28 +18,35 @@
 <%@ Parameter Name="exposedCollectionInterface" Type="string" %>
 <%@ Parameter Name="thisInterface" Type="string" %>
 <%@ Parameter Name="referencedType" Type="string" %>
-<%@ Parameter Name="entryType" Type="string" %>
+<%@ Parameter Name="referencedCollectionEntry" Type="string" %>
+<%@ Parameter Name="referencedCollectionEntryProxy" Type="string" %>
 <%@ Parameter Name="providerCollectionType" Type="string" %>
 <%@ Parameter Name="underlyingCollectionName" Type="string" %>
 <%@ Parameter Name="orderByB" Type="bool" %>
 <%@ Parameter Name="moduleNamespace" Type="string" %>
-<% AddSerialization(serializationList, "Proxy." + name); %>
-        // <%= this.GetType() %>
+        // BEGIN <%= this.GetType() %>
+<% AddSerialization(serializationList, underlyingCollectionName); %>
         <%= GetModifiers() %> <%= exposedCollectionInterface %><<%= referencedType %>> <%= name %>
         {
             get
             {
                 if (<%= backingName %> == null)
                 {
-                    <%= backingName %> 
-                        = new <%= backingCollectionType %><<%= thisInterface %>, <%= referencedType %>, <%= entryType %>, <%= providerCollectionType %>>(
+                    <%= underlyingCollectionName %> = new ProjectedList<<%= referencedCollectionEntryProxy %>, <%= referencedCollectionEntry %>>(
+                                MagicCollectionFactory.WrapAsList(this.Proxy.<%= name %>),
+                                p => (<%= referencedCollectionEntry %>)OurContext.AttachAndWrap(p),
+                                d => (<%= referencedCollectionEntryProxy %>)((NHibernatePersistenceObject)d).NHibernateProxy);
+
+                    <%= backingName %> = new <%= backingCollectionType %>(
                             this.Context,
-                            this, 
+                            this,
                             // () => this.NotifyPropertyChanged("<%= name %>", null, null),
-                            Kistl.API.Utils.MagicCollectionFactory.WrapAsList(this.Proxy.<%= name %>));
+                            <%= underlyingCollectionName %>);
                 }
                 return <%= backingName %>;
             }
         }
 
-        private <%= backingCollectionType %><<%= thisInterface %>, <%= referencedType %>, <%= entryType %>, <%= providerCollectionType %>> <%= backingName %>;
+        private <%= backingCollectionType %> <%= backingName %>;
+        private ProjectedList<<%= referencedCollectionEntryProxy %>, <%= referencedCollectionEntry %>> <%= underlyingCollectionName %>;
+        // END <%= this.GetType() %>

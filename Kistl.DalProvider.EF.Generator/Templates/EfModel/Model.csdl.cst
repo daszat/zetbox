@@ -23,7 +23,7 @@
 %>
     <EntitySet Name="<%= cls.Name %>" EntityType="Model.<%= cls.Name %>" />
 <%  
-		if(cls.NeedsRightsTable())
+		if (cls.NeedsRightsTable())
 		{
 %>
     <EntitySet Name="<%= Construct.SecurityRulesClassName(cls) %>" EntityType="Model.<%= Construct.SecurityRulesClassName(cls) %>" />
@@ -37,7 +37,7 @@
 %>
     <!-- EntitySets and AssociationSets for all object-object CollectionEntrys -->
 <%
-    foreach(var rel in ctx.GetRelationsWithSeparateStorage())
+    foreach (var rel in ctx.GetRelationsWithSeparateStorage())
     {
         string entityName = rel.GetRelationClassName();
         string assocNameA = rel.GetRelationAssociationName(RelationEndRole.A);
@@ -58,7 +58,7 @@
 
     <!-- EntitySets and AssociationSets for all object-value CollectionEntrys -->
 <%
-    foreach(var prop in ctx.GetQuery<ValueTypeProperty>()
+    foreach (var prop in ctx.GetQuery<ValueTypeProperty>()
         .Where(p => p.IsList)
         .OrderBy(p => p.ObjectClass.Name)
         .ThenBy(p => p.Name))
@@ -77,7 +77,7 @@
 
     <!-- EntitySets and AssociationSets for all object-struct CollectionEntrys -->
 <%
-    foreach(var prop in ctx.GetQuery<CompoundObjectProperty>()
+    foreach (var prop in ctx.GetQuery<CompoundObjectProperty>()
         .Where(p => p.IsList)
         .OrderBy(p => p.ObjectClass.Name)
         .ThenBy(p => p.Name))
@@ -96,7 +96,7 @@
 
     <!-- AssociationSets for all object-object relations without CollectionEntrys -->
 <%
-    foreach(var rel in ctx.GetRelationsWithoutSeparateStorage())
+    foreach (var rel in ctx.GetRelationsWithoutSeparateStorage())
     {
         string assocName = rel.GetAssociationName();
 %>
@@ -120,7 +120,7 @@
   
   <!-- EntityTypes for all base classes -->
 <%
-    foreach(var cls in ctx.GetBaseClasses().OrderBy(c => c.Name))
+    foreach (var cls in ctx.GetBaseClasses().OrderBy(c => c.Name))
     {
 %>
   <EntityType Name="<%= cls.Name %>"<%= GetAbstractModifier(cls) %>>
@@ -130,7 +130,7 @@
     <Property Name="ID" Type="Int32" Nullable="false" />
 <% 
 		ApplyEntityTypeFieldDefs(cls.Properties.Cast<Property>());
-		if(cls.NeedsRightsTable())
+		if (cls.NeedsRightsTable())
 		{
 %>
     <NavigationProperty Name="SecurityRightsCollection<%= ImplementationPropertySuffix %>" Relationship="Model.<%= Construct.SecurityRulesFKName(cls) %>" FromRole="<%= cls.Name %>" ToRole="<%= Construct.SecurityRulesClassName(cls) %>" />
@@ -139,7 +139,7 @@
 %>
   </EntityType>
 <%
-		if(cls.NeedsRightsTable())
+		if (cls.NeedsRightsTable())
 		{
 %>
   <EntityType Name="<%= Construct.SecurityRulesClassName(cls) %>">
@@ -170,7 +170,7 @@
 
   <!-- EntityTypes for all other classes -->
 <%
-    foreach(var cls in ctx.GetDerivedClasses().OrderBy(c => c.Name))
+    foreach (var cls in ctx.GetDerivedClasses().OrderBy(c => c.Name))
     {
 %>
   <EntityType Name="<%= cls.Name %>" BaseType="Model.<%= cls.BaseObjectClass.Name %>"<%= GetAbstractModifier(cls) %>>
@@ -182,7 +182,7 @@
 
   <!-- EntityTypes and Associations for all object-object CollectionEntrys -->
 <%
-    foreach(var rel in ctx.GetRelationsWithSeparateStorage())
+    foreach (var rel in ctx.GetRelationsWithSeparateStorage())
     {
 
 %>
@@ -197,7 +197,7 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
 <% 
-	if(rel.A.Type.ImplementsIExportable() && rel.B.Type.ImplementsIExportable())
+	if (rel.A.Type.ImplementsIExportable() && rel.B.Type.ImplementsIExportable())
 	{
 %>
 	<Property Name="ExportGuid" Type="Guid" Nullable="false" />
@@ -257,7 +257,7 @@
 
   <!-- EntityTypes and Associations for all object-value CollectionEntrys -->
 <%
-    foreach(var prop in ctx.GetQuery<ValueTypeProperty>()
+    foreach (var prop in ctx.GetQuery<ValueTypeProperty>()
         .Where(p => p.IsList)
         .OrderBy(p => p.ObjectClass.Name)
         .ThenBy(p => p.Name))
@@ -347,7 +347,7 @@
 
   <!-- Associations for all object-object relations without CollectionEntrys -->
 <%
-    foreach(var rel in ctx.GetRelationsWithoutSeparateStorage())
+    foreach (var rel in ctx.GetRelationsWithoutSeparateStorage())
     {
 %>
   <Association Name="<%= rel.GetAssociationName() %>" >
@@ -365,7 +365,7 @@
 
   <!-- ComplexTypes for all CompoundObjects -->
 <%
-    foreach(var cls in ctx.GetQuery<CompoundObject>().OrderBy(s => s.Name))
+    foreach (var cls in ctx.GetQuery<CompoundObject>().OrderBy(s => s.Name))
     {
 %>
   <ComplexType Name="<%= cls.Name %>" >

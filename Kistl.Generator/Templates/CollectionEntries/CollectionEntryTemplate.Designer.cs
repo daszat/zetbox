@@ -96,7 +96,7 @@ Serialization.SerializerTemplate.Call(Host, ctx,
     Serialization.SerializerTemplate.Call(Host, ctx,
         Serialization.SerializerDirection.FromXmlStream, this.MembersToSerialize, true, null);
 
-    if(IsExportable())
+    if (IsExportable())
     {
         Serialization.SerializerTemplate.Call(Host, ctx,
             Serialization.SerializerDirection.Export, this.MembersToSerialize, false, GetExportGuidBackingStoreReference());

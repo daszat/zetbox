@@ -40,7 +40,7 @@
 	else
 	{
 %>
-					if(!<%= name %>_was_eagerLoaded) Context.FetchRelation<<%= entryType %>>(new Guid("<%= relId %>"), RelationEndRole.<%= role %>, this);
+					if (!<%= name %>_was_eagerLoaded) Context.FetchRelation<<%= entryType %>>(new Guid("<%= relId %>"), RelationEndRole.<%= role %>, this);
 <%
 	}
 %>
@@ -55,7 +55,7 @@
 
 		private <%= backingCollectionType %><<%= aSideType %>, <%= bSideType %>, <%= entryType %>> <%= backingName %>;
 <%
-	if(eagerLoading)
+	if (eagerLoading)
 	{
 %>		
 		private bool <%= name %>_was_eagerLoaded = false;

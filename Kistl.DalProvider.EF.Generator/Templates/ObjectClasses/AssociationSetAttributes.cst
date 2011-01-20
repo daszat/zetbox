@@ -112,7 +112,7 @@ using Kistl.DalProvider.Ef;
 	foreach (var cls in ctx.GetQuery<ObjectClass>().Where(c => c.BaseObjectClass == null)
 		.OrderBy(c => c.Name))
 	{
-		if(cls.NeedsRightsTable())
+		if (cls.NeedsRightsTable())
 		{
 %>
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "<%= Construct.SecurityRulesFKName(cls) %>", 

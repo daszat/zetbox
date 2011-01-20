@@ -42,8 +42,8 @@
             {
                 <%= referencedImplementation %> __value = (<%= referencedImplementation %>)OurContext.AttachAndWrap(this.Proxy.<%= name %>);
 
-<% if(callGetterSetterEvents) { %>
-                if(<%= eventName %>_Getter != null)
+<% if (callGetterSetterEvents) { %>
+                if (<%= eventName %>_Getter != null)
                 {
                     var e = new PropertyGetterEventArgs<<%= referencedInterface %>>(__value);
                     <%= eventName %>_Getter(this, e);
@@ -74,8 +74,8 @@
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("<%= name %>", __oldValue, __newValue);
 
-<% if(callGetterSetterEvents) { %>
-                if(<%= eventName %>_PreSetter != null && IsAttached)
+<% if (callGetterSetterEvents) { %>
+                if (<%= eventName %>_PreSetter != null && IsAttached)
                 {
                     var e = new PropertyPreSetterEventArgs<<%= referencedInterface %>>(__oldValue, __newValue);
                     <%= eventName %>_PreSetter(this, e);
@@ -126,8 +126,8 @@
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("<%= name %>", __oldValue, __newValue);
 
-<% if(callGetterSetterEvents) { %>
-                if(<%= eventName %>_PostSetter != null && IsAttached)
+<% if (callGetterSetterEvents) { %>
+                if (<%= eventName %>_PostSetter != null && IsAttached)
                 {
                     var e = new PropertyPostSetterEventArgs<<%= referencedInterface %>>(__oldValue, __newValue);
                     <%= eventName %>_PostSetter(this, e);

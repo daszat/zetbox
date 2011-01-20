@@ -100,7 +100,7 @@ string methodName = direction.ToString();
 this.WriteObjects("        public ",  overrideAndCallBase ? "override" : "virtual" , " void ",  methodName , "(",  argType , " ",  argName , "",  additionalArgs , ")\r\n");
 this.WriteObjects("        {\r\n");
 #line 76 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
-if(overrideAndCallBase)
+if (overrideAndCallBase)
     {
 
 #line 78 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
@@ -108,7 +108,7 @@ this.WriteObjects("            \r\n");
 this.WriteObjects("            base.",  methodName , "(",  argName , "",  callBaseWithAdditionalArgs , ");\r\n");
 #line 81 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
 }
-    else if(direction == SerializerDirection.Export && !String.IsNullOrEmpty(exportGuidBackingStore))
+    else if (direction == SerializerDirection.Export && !String.IsNullOrEmpty(exportGuidBackingStore))
     {
 
 #line 84 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"

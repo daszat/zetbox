@@ -24,7 +24,7 @@
 		case SerializerDirection.ToStream:
 %>
 			BinarySerializer.ToStream(eagerLoadLists, <%= streamName %>);
-			if(eagerLoadLists)
+			if (eagerLoadLists)
 			{
 <% if (serializeIds) { %>
 				BinarySerializer.ToStream(true, <%= streamName %>);
@@ -55,7 +55,7 @@
 			{
 				bool containsList;
 				BinarySerializer.FromStream(out containsList, <%= streamName %>);
-				if(containsList)
+				if (containsList)
 				{
 					int numElements;
 					BinarySerializer.FromStream(out numElements, <%= streamName %>);

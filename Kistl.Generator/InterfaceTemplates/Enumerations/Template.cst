@@ -20,7 +20,7 @@ namespace <%= e.Module.Namespace %>
     /// <%= e.Description %>
     /// </summary>
 <%
-	if(e.AreFlags)
+	if (e.AreFlags)
 	{	
 %>
     [System.Flags]

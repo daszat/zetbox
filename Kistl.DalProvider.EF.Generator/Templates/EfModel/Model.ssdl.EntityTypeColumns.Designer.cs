@@ -74,7 +74,7 @@ ApplyEntityTypeColumnDefs(
 			if (p is StringProperty)
 			{
 				int maxLength = ((StringProperty)p).GetMaxLength();
-				if(maxLength != int.MaxValue)
+				if (maxLength != int.MaxValue)
 				{
 					// must have one space at the end
 					maxLengthAttr = String.Format("MaxLength=\"{0}\" ", maxLength);

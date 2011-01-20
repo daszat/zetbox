@@ -83,13 +83,13 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                 .Properties
                 .OfType<CompoundObjectProperty>()
                 .Where(cop => cop.IsList)
-                .Select(cop => new KeyValuePair<string, string>(cop.Name, String.Format("new Collection<{0}>()", cop.GetCollectionEntryClassName() + ImplementationSuffix)));
+                .Select(cop => new KeyValuePair<string, string>(cop.Name, String.Format("new Collection<{0}.{1}{2}.{1}Proxy>()", cop.Module.Namespace, cop.GetCollectionEntryClassName(), ImplementationSuffix)));
 
             var vtps = this.ObjectClass
                 .Properties
                 .OfType<ValueTypeProperty>()
                 .Where(vtp => vtp.IsList)
-                .Select(vtp => new KeyValuePair<string, string>(vtp.Name, String.Format("new Collection<{0}>()", vtp.GetCollectionEntryClassName() + ImplementationSuffix)));
+                .Select(vtp => new KeyValuePair<string, string>(vtp.Name, String.Format("new Collection<{0}.{1}{2}.{1}Proxy>()", vtp.Module.Namespace, vtp.GetCollectionEntryClassName(), ImplementationSuffix)));
 
             return orps.Concat(cops).Concat(vtps).OrderBy(pair => pair.Key);
         }
@@ -159,7 +159,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                     else
                     {
                         var ceClassName = p.GetCollectionEntryClassName();
-                        var ceCollectionType = String.Format("ICollection<{0}.{1}{2}+{1}Proxy>",
+                        var ceCollectionType = String.Format("ICollection<{0}.{1}{2}.{1}Proxy>",
                             p.ObjectClass.Module.Namespace,
                             ceClassName,
                             ImplementationSuffix);
@@ -217,7 +217,11 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
 
         protected override void ApplyCompoundObjectListTemplate(CompoundObjectProperty prop)
         {
-            base.ApplyCompoundObjectListTemplate(prop);
+            // use local template
+            this.WriteLine("        // CompoundObject list property");
+            Properties.ValueCollectionProperty.Call(Host, ctx,
+                this.MembersToSerialize,
+                prop);
         }
 
         protected override void ApplyCompoundObjectPropertyTemplate(CompoundObjectProperty prop)
@@ -274,7 +278,9 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
 
         protected override void ApplyValueTypeListTemplate(ValueTypeProperty prop)
         {
-            base.ApplyValueTypeListTemplate(prop);
+            // use local template
+            this.WriteLine("        // value list property");
+            Properties.ValueCollectionProperty.Call(Host, ctx, MembersToSerialize, prop);
         }
 
         protected override void ApplyValueTypePropertyTemplate(ValueTypeProperty prop)

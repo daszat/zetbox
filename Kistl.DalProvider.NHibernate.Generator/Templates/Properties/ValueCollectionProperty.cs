@@ -44,23 +44,28 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
 
             string name = prop.Name;
             string backingName = "_" + name;
-            string backingCollectionType = (hasPersistentOrder ? "ClientValueListWrapper" : "ClientValueCollectionWrapper");
-
             string exposedCollectionInterface = hasPersistentOrder ? "IList" : "ICollection";
 
             string thisInterface = prop.ObjectClass.Name;
             string referencedType = prop.ReferencedTypeAsCSharp();
             string referencedCollectionEntry = prop.GetCollectionEntryClassName() + host.Settings["extrasuffix"] + Kistl.API.Helper.ImplementationSuffix;
+            string referencedCollectionEntryProxy = prop.GetCollectionEntryClassName() + host.Settings["extrasuffix"] + Kistl.API.Helper.ImplementationSuffix + "." + prop.GetCollectionEntryClassName() + "Proxy";
 
             string providerCollectionType = "IList<" + referencedCollectionEntry + ">";
-            string underlyingCollectionName = null;
-
+            string underlyingCollectionName = backingName + "Collection";
             string moduleNamespace = prop.Module.Namespace;
+
+            string backingCollectionType = (hasPersistentOrder ? "ClientValueListWrapper" : "ClientValueCollectionWrapper")
+                + String.Format("<{0}, {1}, {2}, {3}>",
+                    thisInterface,
+                    referencedType,
+                    referencedCollectionEntry,
+                    providerCollectionType);
 
             Call(
                 host, ctx, serializationList,
                 name, backingName, backingCollectionType, exposedCollectionInterface,
-                thisInterface, referencedType, referencedCollectionEntry,
+                thisInterface, referencedType, referencedCollectionEntry, referencedCollectionEntryProxy,
                 providerCollectionType, underlyingCollectionName, !hasPersistentOrder,
                 moduleNamespace);
         }

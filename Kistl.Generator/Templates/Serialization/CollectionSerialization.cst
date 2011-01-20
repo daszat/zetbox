@@ -17,7 +17,7 @@
 <%@ Parameter Name="collectionName" Type="string" %>
 <%@ Parameter Name="orderByB" Type="bool" %>
 <%
-	if(ShouldSerialize())
+	if (ShouldSerialize())
 	{
 		switch(direction)
 		{

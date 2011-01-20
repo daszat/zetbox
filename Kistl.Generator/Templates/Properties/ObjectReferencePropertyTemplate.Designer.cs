@@ -105,11 +105,11 @@ this.WriteObjects("                else\r\n");
 this.WriteObjects("                    __value = null;\r\n");
 this.WriteObjects("\r\n");
 #line 62 "P:\Kistl\Kistl.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
-if(callGetterSetterEvents)
+if (callGetterSetterEvents)
                 {
 
 #line 65 "P:\Kistl\Kistl.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
-this.WriteObjects("                if(",  eventName , "_Getter != null)\r\n");
+this.WriteObjects("                if (",  eventName , "_Getter != null)\r\n");
 this.WriteObjects("                {\r\n");
 this.WriteObjects("                    var e = new PropertyGetterEventArgs<",  referencedInterface , ">(__value);\r\n");
 this.WriteObjects("                    ",  eventName , "_Getter(this, e);\r\n");
@@ -141,11 +141,11 @@ this.WriteObjects("                // Changing Event fires before anything is to
 this.WriteObjects("                NotifyPropertyChanging(\"",  name , "\", __oldValue, __newValue);\r\n");
 this.WriteObjects("\r\n");
 #line 96 "P:\Kistl\Kistl.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
-if(callGetterSetterEvents)
+if (callGetterSetterEvents)
                 {
 
 #line 99 "P:\Kistl\Kistl.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
-this.WriteObjects("                if(",  eventName , "_PreSetter != null && IsAttached)\r\n");
+this.WriteObjects("                if (",  eventName , "_PreSetter != null && IsAttached)\r\n");
 this.WriteObjects("                {\r\n");
 this.WriteObjects("                    var e = new PropertyPreSetterEventArgs<",  referencedInterface , ">(__oldValue, __newValue);\r\n");
 this.WriteObjects("                    ",  eventName , "_PreSetter(this, e);\r\n");
@@ -224,11 +224,11 @@ this.WriteObjects("                // everything is done. fire the Changed event
 this.WriteObjects("                NotifyPropertyChanged(\"",  name , "\", __oldValue, __newValue);\r\n");
 this.WriteObjects("\r\n");
 #line 169 "P:\Kistl\Kistl.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
-if(callGetterSetterEvents)
+if (callGetterSetterEvents)
                 {
 
 #line 172 "P:\Kistl\Kistl.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
-this.WriteObjects("                if(",  eventName , "_PostSetter != null && IsAttached)\r\n");
+this.WriteObjects("                if (",  eventName , "_PostSetter != null && IsAttached)\r\n");
 this.WriteObjects("                {\r\n");
 this.WriteObjects("                    var e = new PropertyPostSetterEventArgs<",  referencedInterface , ">(__oldValue, __newValue);\r\n");
 this.WriteObjects("                    ",  eventName , "_PostSetter(this, e);\r\n");

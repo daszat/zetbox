@@ -51,7 +51,7 @@ this.WriteObjects("    {\r\n");
 #line 29 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Interfaces\Template.cst"
 foreach(Property p in dataType.Properties.OrderBy(p => p.Name))
     {
-        if(!IsDeclaredInImplementsInterface(p))
+        if (!IsDeclaredInImplementsInterface(p))
         {
 
 #line 34 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Interfaces\Template.cst"
@@ -69,7 +69,7 @@ ApplyPropertyTemplate(p);
         int index = 0;
         foreach(var m in mg.OrderByDefault())
         {
-            if(!IsDeclaredInImplementsInterface(m))
+            if (!IsDeclaredInImplementsInterface(m))
             {
 
 #line 51 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Interfaces\Template.cst"

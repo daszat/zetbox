@@ -269,7 +269,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
 
             if (prop.IsList)
             {
-                string ceClassAttr = String.Format("class=\"{0}.{1}{2}+{1},Kistl.Objects.NHibernateImpl\"",
+                string ceClassAttr = String.Format("class=\"{0}.{1}{2}+{1}Proxy,Kistl.Objects.NHibernateImpl\"",
                     prop.Module.Namespace,
                     prop.GetCollectionEntryClassName(),
                     ImplementationSuffix);

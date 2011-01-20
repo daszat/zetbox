@@ -78,7 +78,7 @@ this.WriteObjects("                    {\r\n");
 #line 47 "P:\Kistl\Kistl.Generator\Templates\Properties\ObjectListProperty.cst"
 if (eagerLoading) { 
 #line 48 "P:\Kistl\Kistl.Generator\Templates\Properties\ObjectListProperty.cst"
-this.WriteObjects("                        if(",  idsListName , " != null)\r\n");
+this.WriteObjects("                        if (",  idsListName , " != null)\r\n");
 this.WriteObjects("                        {\r\n");
 this.WriteObjects("                            serverList = ",  idsListName , ".Select(id => Context.Find<",  referencedInterface , ">(id)).ToList();\r\n");
 this.WriteObjects("                            ",  idsListName , " = null; // allow id list to be garbage collected\r\n");

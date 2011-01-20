@@ -29,7 +29,7 @@
 %>
     <EntitySet Name="<%= cls.Name %>" EntityType="Model.Store.<%= cls.Name %>" Table="<%= cls.TableName %>"/>
 <%	
-		if(cls.NeedsRightsTable())
+		if (cls.NeedsRightsTable())
 		{
 %>
     <EntitySet Name="<%= Construct.SecurityRulesClassName(cls) %>" EntityType="Model.Store.<%= Construct.SecurityRulesClassName(cls) %>" Table="<%= Construct.SecurityRulesTableName(cls) %>"/>
@@ -90,7 +90,7 @@
 
     <!-- AssociationSets for all object-object relations which do not need CollectionEntrys -->
 <%
-	foreach(var rel in ctx.GetRelationsWithoutSeparateStorage())
+	foreach (var rel in ctx.GetRelationsWithoutSeparateStorage())
 	{
 		string assocName = rel.GetAssociationName();
 		
@@ -162,7 +162,7 @@
 %>
   </EntityType>
 <%	
-		if(cls.NeedsRightsTable())
+		if (cls.NeedsRightsTable())
 		{
 %>
     <EntityType Name="<%= Construct.SecurityRulesClassName(cls) %>">
@@ -206,7 +206,7 @@
     </Key>
     <Property Name="ID" Type="<%= schemaProvider.DbTypeToNative(DbType.Int32) %>" Nullable="false" StoreGeneratedPattern="Identity" />
 <% 
-		if(rel.A.Type.ImplementsIExportable() && rel.B.Type.ImplementsIExportable())
+		if (rel.A.Type.ImplementsIExportable() && rel.B.Type.ImplementsIExportable())
 		{
 %>
 	<Property Name="ExportGuid" Type="<%= schemaProvider.DbTypeToNative(DbType.Guid) %>" Nullable="false" />

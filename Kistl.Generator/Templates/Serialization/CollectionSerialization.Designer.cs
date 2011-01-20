@@ -44,7 +44,7 @@ namespace Kistl.Generator.Templates.Serialization
         public override void Generate()
         {
 #line 20 "P:\Kistl\Kistl.Generator\Templates\Serialization\CollectionSerialization.cst"
-if(ShouldSerialize())
+if (ShouldSerialize())
 	{
 		switch(direction)
 		{

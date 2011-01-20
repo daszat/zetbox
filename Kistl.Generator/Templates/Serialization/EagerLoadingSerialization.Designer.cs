@@ -52,7 +52,7 @@ switch(direction)
 
 #line 26 "P:\Kistl\Kistl.Generator\Templates\Serialization\EagerLoadingSerialization.cst"
 this.WriteObjects("			BinarySerializer.ToStream(eagerLoadLists, ",  streamName , ");\r\n");
-this.WriteObjects("			if(eagerLoadLists)\r\n");
+this.WriteObjects("			if (eagerLoadLists)\r\n");
 this.WriteObjects("			{\r\n");
 #line 29 "P:\Kistl\Kistl.Generator\Templates\Serialization\EagerLoadingSerialization.cst"
 if (serializeIds) { 
@@ -97,7 +97,7 @@ if (serializeIds) {
 this.WriteObjects("			{\r\n");
 this.WriteObjects("				bool containsList;\r\n");
 this.WriteObjects("				BinarySerializer.FromStream(out containsList, ",  streamName , ");\r\n");
-this.WriteObjects("				if(containsList)\r\n");
+this.WriteObjects("				if (containsList)\r\n");
 this.WriteObjects("				{\r\n");
 this.WriteObjects("					int numElements;\r\n");
 this.WriteObjects("					BinarySerializer.FromStream(out numElements, ",  streamName , ");\r\n");

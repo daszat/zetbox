@@ -73,13 +73,13 @@
         public <%= overrideAndCallBase ? "override" : "virtual" %> void <%= methodName %>(<%= argType %> <%= argName %><%= additionalArgs %>)
         {
 <%            
-    if(overrideAndCallBase)
+    if (overrideAndCallBase)
     {
 %>            
             base.<%= methodName %>(<%= argName %><%= callBaseWithAdditionalArgs %>);
 <%
     }
-    else if(direction == SerializerDirection.Export && !String.IsNullOrEmpty(exportGuidBackingStore))
+    else if (direction == SerializerDirection.Export && !String.IsNullOrEmpty(exportGuidBackingStore))
     {
 %>            
             xml.WriteAttributeString("ExportGuid", <%= exportGuidBackingStore %>.ToString());

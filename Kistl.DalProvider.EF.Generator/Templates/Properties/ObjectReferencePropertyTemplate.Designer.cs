@@ -114,11 +114,11 @@ this.WriteObjects("                        r.Value.AttachToContext(this.Context)
 this.WriteObjects("                }\r\n");
 this.WriteObjects("                __value = r.Value;\r\n");
 #line 73 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
-if(callGetterSetterEvents)
+if (callGetterSetterEvents)
                 {
 
 #line 76 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
-this.WriteObjects("                if(",  eventName , "_Getter != null)\r\n");
+this.WriteObjects("                if (",  eventName , "_Getter != null)\r\n");
 this.WriteObjects("                {\r\n");
 this.WriteObjects("                    var e = new PropertyGetterEventArgs<",  referencedInterface , ">(__value);\r\n");
 this.WriteObjects("                    ",  eventName , "_Getter(this, e);\r\n");
@@ -148,11 +148,11 @@ this.WriteObjects("                ",  referencedInterface , " __oldValue = (", 
 this.WriteObjects("                ",  referencedInterface , " __newValue = (",  referencedInterface , ")value;\r\n");
 this.WriteObjects("\r\n");
 #line 105 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
-if(callGetterSetterEvents)
+if (callGetterSetterEvents)
                 {
 
 #line 108 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
-this.WriteObjects("                if(",  eventName , "_PreSetter != null)\r\n");
+this.WriteObjects("                if (",  eventName , "_PreSetter != null)\r\n");
 this.WriteObjects("                {\r\n");
 this.WriteObjects("                    var e = new PropertyPreSetterEventArgs<",  referencedInterface , ">(__oldValue, __newValue);\r\n");
 this.WriteObjects("                    ",  eventName , "_PreSetter(this, e);\r\n");
@@ -164,11 +164,11 @@ this.WriteObjects("                }\r\n");
 #line 117 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("                r.Value = (",  referencedImplementation , ")__newValue;\r\n");
 #line 119 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
-if(callGetterSetterEvents)
+if (callGetterSetterEvents)
                 {
 
 #line 122 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
-this.WriteObjects("                if(",  eventName , "_PostSetter != null)\r\n");
+this.WriteObjects("                if (",  eventName , "_PostSetter != null)\r\n");
 this.WriteObjects("                {\r\n");
 this.WriteObjects("                    var e = new PropertyPostSetterEventArgs<",  referencedInterface , ">(__oldValue, __newValue);\r\n");
 this.WriteObjects("                    ",  eventName , "_PostSetter(this, e);\r\n");

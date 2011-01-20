@@ -43,7 +43,7 @@ this.WriteObjects("    /// <summary>\r\n");
 this.WriteObjects("    /// ",  e.Description , "\r\n");
 this.WriteObjects("    /// </summary>\r\n");
 #line 23 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Enumerations\Template.cst"
-if(e.AreFlags)
+if (e.AreFlags)
 	{	
 
 #line 26 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Enumerations\Template.cst"

@@ -49,7 +49,7 @@ namespace Kistl.Generator.Templates.Serialization
 	// string interfaceName = prop.ObjectClass.Name;
     // string memberName = prop.Name;
     // string enumName =  prop.Enumeration.Module.Namespace + "." +  prop.Enumeration.Name;
-    // if(prop.IsNullable()) enumName += "?";
+    // if (prop.IsNullable()) enumName += "?";
 	// string methodName = direction.ToString();
 	
 	////

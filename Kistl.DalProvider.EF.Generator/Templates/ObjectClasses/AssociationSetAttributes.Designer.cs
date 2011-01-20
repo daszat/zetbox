@@ -143,7 +143,7 @@ this.WriteObjects("\r\n");
 foreach (var cls in ctx.GetQuery<ObjectClass>().Where(c => c.BaseObjectClass == null)
 		.OrderBy(c => c.Name))
 	{
-		if(cls.NeedsRightsTable())
+		if (cls.NeedsRightsTable())
 		{
 
 #line 118 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"

@@ -70,10 +70,10 @@
                 }
                 __value = r.Value;
 <%
-                if(callGetterSetterEvents)
+                if (callGetterSetterEvents)
                 {
 %>
-                if(<%= eventName %>_Getter != null)
+                if (<%= eventName %>_Getter != null)
                 {
                     var e = new PropertyGetterEventArgs<<%= referencedInterface %>>(__value);
                     <%= eventName %>_Getter(this, e);
@@ -102,10 +102,10 @@
                 <%= referencedInterface %> __newValue = (<%= referencedInterface %>)value;
 
 <%
-                if(callGetterSetterEvents)
+                if (callGetterSetterEvents)
                 {
 %>
-                if(<%= eventName %>_PreSetter != null)
+                if (<%= eventName %>_PreSetter != null)
                 {
                     var e = new PropertyPreSetterEventArgs<<%= referencedInterface %>>(__oldValue, __newValue);
                     <%= eventName %>_PreSetter(this, e);
@@ -116,10 +116,10 @@
 %>
                 r.Value = (<%= referencedImplementation %>)__newValue;
 <%
-                if(callGetterSetterEvents)
+                if (callGetterSetterEvents)
                 {
 %>
-                if(<%= eventName %>_PostSetter != null)
+                if (<%= eventName %>_PostSetter != null)
                 {
                     var e = new PropertyPostSetterEventArgs<<%= referencedInterface %>>(__oldValue, __newValue);
                     <%= eventName %>_PostSetter(this, e);

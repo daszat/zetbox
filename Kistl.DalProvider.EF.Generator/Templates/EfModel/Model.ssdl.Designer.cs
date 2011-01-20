@@ -53,7 +53,7 @@ foreach(var cls in ctx.GetBaseClasses().OrderBy(c => c.Name))
 #line 30 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
 this.WriteObjects("    <EntitySet Name=\"",  cls.Name , "\" EntityType=\"Model.Store.",  cls.Name , "\" Table=\"",  cls.TableName , "\"/>\r\n");
 #line 32 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
-if(cls.NeedsRightsTable())
+if (cls.NeedsRightsTable())
 		{
 
 #line 35 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
@@ -121,7 +121,7 @@ this.WriteObjects("\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("    <!-- AssociationSets for all object-object relations which do not need CollectionEntrys -->\r\n");
 #line 93 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
-foreach(var rel in ctx.GetRelationsWithoutSeparateStorage())
+foreach (var rel in ctx.GetRelationsWithoutSeparateStorage())
 	{
 		string assocName = rel.GetAssociationName();
 		
@@ -202,7 +202,7 @@ ApplyEntityTypeColumnDefs(cls);
 #line 163 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
 this.WriteObjects("  </EntityType>\r\n");
 #line 165 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
-if(cls.NeedsRightsTable())
+if (cls.NeedsRightsTable())
 		{
 
 #line 168 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
@@ -250,7 +250,7 @@ this.WriteObjects("      <PropertyRef Name=\"ID\" />\r\n");
 this.WriteObjects("    </Key>\r\n");
 this.WriteObjects("    <Property Name=\"ID\" Type=\"",  schemaProvider.DbTypeToNative(DbType.Int32) , "\" Nullable=\"false\" StoreGeneratedPattern=\"Identity\" />\r\n");
 #line 209 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
-if(rel.A.Type.ImplementsIExportable() && rel.B.Type.ImplementsIExportable())
+if (rel.A.Type.ImplementsIExportable() && rel.B.Type.ImplementsIExportable())
 		{
 
 #line 212 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"

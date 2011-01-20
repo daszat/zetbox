@@ -139,7 +139,7 @@ Serialization.SerializerTemplate.Call(Host, ctx,
         Serialization.SerializerTemplate.Call(Host, ctx,
             Serialization.SerializerDirection.FromXmlStream, this.MembersToSerialize, true, null);
 
-        if((DataType is ObjectClass) && ((ObjectClass)DataType).ImplementsIExportable())
+        if ((DataType is ObjectClass) && ((ObjectClass)DataType).ImplementsIExportable())
         {
             ObjectClass cls = (ObjectClass)DataType;            
             Serialization.SerializerTemplate.Call(Host, ctx,

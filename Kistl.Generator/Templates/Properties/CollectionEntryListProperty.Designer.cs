@@ -77,7 +77,7 @@ this.WriteObjects("					Context.FetchRelation<",  entryType , ">(new Guid(\"",  
 	{
 
 #line 43 "P:\Kistl\Kistl.Generator\Templates\Properties\CollectionEntryListProperty.cst"
-this.WriteObjects("					if(!",  name , "_was_eagerLoaded) Context.FetchRelation<",  entryType , ">(new Guid(\"",  relId , "\"), RelationEndRole.",  role , ", this);\r\n");
+this.WriteObjects("					if (!",  name , "_was_eagerLoaded) Context.FetchRelation<",  entryType , ">(new Guid(\"",  relId , "\"), RelationEndRole.",  role , ", this);\r\n");
 #line 45 "P:\Kistl\Kistl.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 }
 
@@ -93,7 +93,7 @@ this.WriteObjects("		}\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("		private ",  backingCollectionType , "<",  aSideType , ", ",  bSideType , ", ",  entryType , "> ",  backingName , ";\r\n");
 #line 58 "P:\Kistl\Kistl.Generator\Templates\Properties\CollectionEntryListProperty.cst"
-if(eagerLoading)
+if (eagerLoading)
 	{
 
 #line 60 "P:\Kistl\Kistl.Generator\Templates\Properties\CollectionEntryListProperty.cst"

@@ -40,7 +40,7 @@ this.WriteObjects("		",  GetModifiers() , " ",  referencedType , " ",  propertyN
 this.WriteObjects("		{\r\n");
 this.WriteObjects("			get\r\n");
 this.WriteObjects("			{\r\n");
-this.WriteObjects("				if(",  getterEventName , " == null)\r\n");
+this.WriteObjects("				if (",  getterEventName , " == null)\r\n");
 this.WriteObjects("				{\r\n");
 this.WriteObjects("					return null;\r\n");
 this.WriteObjects("				}\r\n");
