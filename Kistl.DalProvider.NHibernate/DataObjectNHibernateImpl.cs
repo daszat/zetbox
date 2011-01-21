@@ -26,10 +26,9 @@ namespace Kistl.DalProvider.NHibernate
         public virtual void NotifyDeleting() { }
 
         /// <inheritdoc />
-        public AccessRights CurrentAccessRights
+        public virtual AccessRights CurrentAccessRights
         {
-            get;
-            protected set;
+            get { return AccessRights.Full; }
         }
 
         #endregion

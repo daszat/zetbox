@@ -165,24 +165,5 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.ObjectClasses
                 SecurityRulesClass.Call(Host, ctx, (ObjectClass)this.DataType);
             }
         }
-
-        private bool NeedsRightsTable()
-        {
-            if (this.DataType is ObjectClass)
-            {
-                ObjectClass cls = (ObjectClass)this.DataType;
-
-                if (cls.NeedsRightsTable())
-                {
-                    if (cls.BaseObjectClass != null)
-                    {
-                        // TODO: Currently only Basesclasses are supported
-                        throw new NotSupportedException("Security Rules for derived classes are not supported yet");
-                    }
-                    return true;
-                }
-            }
-            return false;
-        }
     }
 }

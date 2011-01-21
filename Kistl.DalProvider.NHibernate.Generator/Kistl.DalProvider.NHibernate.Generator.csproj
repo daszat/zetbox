@@ -131,6 +131,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Templates\ObjectClasses\RightsClass.cs">
+      <DependentUpon>RightsClass.cst</DependentUpon>
+    </Compile>
     <Compile Include="Templates\ObjectClasses\ProxyClassChild.cs">
       <DependentUpon>ProxyClassChild.cst</DependentUpon>
     </Compile>
@@ -163,6 +166,11 @@
       <DependentUpon>ReloadReferences.cst</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Templates\ObjectClasses\RightsClass.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RightsClass.cst</DependentUpon>
     </Compile>
     <Compile Include="Templates\ObjectClasses\Template.cs" />
     <Compile Include="Templates\ProjectFile.cs" />
@@ -273,6 +281,10 @@
     <None Include="Templates\ObjectClasses\Constructors.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>Constructors.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\ObjectClasses\RightsClass.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>RightsClass.Designer.cs</LastGenOutput>
     </None>
     <None Include="Templates\ObjectClasses\ProxyClassChild.cst">
       <Generator>Arebis Template Processor</Generator>

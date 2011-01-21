@@ -22,16 +22,18 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
 		protected bool isAbstract;
 		protected List<Property> properties;
 		protected List<ObjectClass> subClasses;
+		protected bool needsRightsTable;
+		protected string qualifiedRightsClassName;
 
 
-        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string interfaceName, string implementationName, string tableName, string qualifiedImplementationName, bool isAbstract, List<Property> properties, List<ObjectClass> subClasses)
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string interfaceName, string implementationName, string tableName, string qualifiedImplementationName, bool isAbstract, List<Property> properties, List<ObjectClass> subClasses, bool needsRightsTable, string qualifiedRightsClassName)
         {
             if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
 
-            _host.CallTemplate("Mappings.ObjectClassHbm", ctx, interfaceName, implementationName, tableName, qualifiedImplementationName, isAbstract, properties, subClasses);
+            _host.CallTemplate("Mappings.ObjectClassHbm", ctx, interfaceName, implementationName, tableName, qualifiedImplementationName, isAbstract, properties, subClasses, needsRightsTable, qualifiedRightsClassName);
         }
 
-        public ObjectClassHbm(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string interfaceName, string implementationName, string tableName, string qualifiedImplementationName, bool isAbstract, List<Property> properties, List<ObjectClass> subClasses)
+        public ObjectClassHbm(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string interfaceName, string implementationName, string tableName, string qualifiedImplementationName, bool isAbstract, List<Property> properties, List<ObjectClass> subClasses, bool needsRightsTable, string qualifiedRightsClassName)
             : base(_host)
         {
 			this.ctx = ctx;
@@ -42,12 +44,14 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
 			this.isAbstract = isAbstract;
 			this.properties = properties;
 			this.subClasses = subClasses;
+			this.needsRightsTable = needsRightsTable;
+			this.qualifiedRightsClassName = qualifiedRightsClassName;
 
         }
 
         public override void Generate()
         {
-#line 22 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
+#line 24 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
 this.WriteObjects("<?xml version=\"1.0\"?>\r\n");
 this.WriteObjects("<hibernate-mapping xmlns=\"urn:nhibernate-mapping-2.2\" \r\n");
 this.WriteObjects("                   default-cascade=\"save-update\"\r\n");
@@ -67,14 +71,32 @@ this.WriteObjects("            </generator>\r\n");
 this.WriteObjects("        </id>\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("        <!-- define the properties -->\r\n");
-#line 41 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
+#line 43 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
 ApplyPropertyDefinitions(properties); 
-#line 42 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
-this.WriteObjects("\r\n");
-this.WriteObjects("        <!-- define the subclasses -->\r\n");
 #line 44 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
-ApplyJoinedSubclasses(subClasses); 
+this.WriteObjects("\r\n");
 #line 45 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
+if (needsRightsTable) { 
+#line 46 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
+this.WriteObjects("        <!-- map rights -->\r\n");
+this.WriteObjects("        <set name=\"SecurityRightsCollectionImpl\"\r\n");
+this.WriteObjects("             table=\"`",  tableName , "_Rights`\"\r\n");
+this.WriteObjects("             lazy=\"true\"\r\n");
+this.WriteObjects("             fetch=\"select\">\r\n");
+this.WriteObjects("            <key column=\"`ID`\" />\r\n");
+this.WriteObjects("            <composite-element class=\"",  qualifiedRightsClassName , "\">\r\n");
+this.WriteObjects("                <property name=\"Identity\" column=\"`Identity`\" />\r\n");
+this.WriteObjects("                <property name=\"Right\" column=\"`Right`\" />\r\n");
+this.WriteObjects("            </composite-element>\r\n");
+this.WriteObjects("        </set>\r\n");
+this.WriteObjects("\r\n");
+#line 58 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
+} 
+#line 59 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
+this.WriteObjects("        <!-- define the subclasses -->\r\n");
+#line 60 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
+ApplyJoinedSubclasses(subClasses); 
+#line 61 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("    </class>\r\n");
 this.WriteObjects("</hibernate-mapping>");

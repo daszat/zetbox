@@ -9,6 +9,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
     using Arebis.CodeGeneration;
     using Kistl.API;
     using Kistl.App.Base;
+    using Kistl.Generator;
 
     public partial class ObjectClassHbm
     {
@@ -37,7 +38,6 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
                 + "." + cls.Name + "Proxy";
         }
 
-
         public static object[] MakeArgs(IKistlContext ctx, ObjectClass cls, NameValueCollection templateSettings)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
@@ -56,7 +56,13 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
             List<Property> properties = cls.Properties.ToList();
             List<ObjectClass> subClasses = cls.SubClasses.ToList();
 
-            return new object[] { interfaceName, implementationName, tableName, qualifiedImplementationName, isAbstract, properties, subClasses };
+            bool needsRightTable = Templates.ObjectClasses.Template.NeedsRightsTable(cls);
+            string qualifiedRightsClassName =
+                cls.Module.Namespace + "."
+                + Construct.SecurityRulesClassName(cls) + extraSuffix + Kistl.API.Helper.ImplementationSuffix
+                + ", Kistl.Objects." + extraSuffix + Kistl.API.Helper.ImplementationSuffix;
+
+            return new object[] { interfaceName, implementationName, tableName, qualifiedImplementationName, isAbstract, properties, subClasses, needsRightTable, qualifiedRightsClassName };
         }
 
         protected virtual void ApplyPropertyDefinitions(List<Property> properties)

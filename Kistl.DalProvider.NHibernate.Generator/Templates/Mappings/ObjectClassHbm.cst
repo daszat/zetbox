@@ -19,6 +19,8 @@
 <%@ Parameter Name="isAbstract" Type="bool" %>
 <%@ Parameter Name="properties" Type="List<Property>" %>
 <%@ Parameter Name="subClasses" Type="List<ObjectClass>" %>
+<%@ Parameter Name="needsRightsTable" Type="bool" %>
+<%@ Parameter Name="qualifiedRightsClassName" Type="string" %>
 <?xml version="1.0"?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
                    default-cascade="save-update"
@@ -40,6 +42,20 @@
         <!-- define the properties -->
 <% ApplyPropertyDefinitions(properties); %>
 
+<% if (needsRightsTable) { %>
+        <!-- map rights -->
+        <set name="SecurityRightsCollectionImpl"
+             table="`<%= tableName %>_Rights`"
+             lazy="true"
+             fetch="select">
+            <key column="`ID`" />
+            <composite-element class="<%= qualifiedRightsClassName %>">
+                <property name="Identity" column="`Identity`" />
+                <property name="Right" column="`Right`" />
+            </composite-element>
+        </set>
+
+<% } %>
         <!-- define the subclasses -->
 <% ApplyJoinedSubclasses(subClasses); %>
 

@@ -160,5 +160,28 @@ namespace Kistl.Generator.Templates.ObjectClasses
                 yield return cls;
             }
         }
+
+        public static bool NeedsRightsTable(DataType dt)
+        {
+            var cls = dt as ObjectClass;
+            if (cls != null)
+            {
+                if (cls.NeedsRightsTable())
+                {
+                    if (cls.BaseObjectClass != null)
+                    {
+                        // TODO: Currently only Basesclasses are supported
+                        throw new NotSupportedException("Security Rules for derived classes are not supported yet");
+                    }
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        protected bool NeedsRightsTable()
+        {
+            return NeedsRightsTable(this.DataType);
+        }
     }
 }

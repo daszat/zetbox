@@ -1,0 +1,26 @@
+﻿<%@ CodeTemplate Language="C#" 
+    Name="ObjectClasses.RightsClass"
+    ClassName="Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.RightsClass" 
+    Inherits="Kistl.Generator.ResourceTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="System.Linq" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.App.Extensions" %>
+<%@ Import Namespace="Kistl.Generator" %>
+<%@ Import Namespace="Kistl.Generator.Extensions" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="className" Type="string" %>
+
+        public class <%= className %><%= ImplementationSuffix %>
+        {
+            public <%= className %><%= ImplementationSuffix %>()
+            {
+            }
+
+            public virtual int ID { get; set; }
+            public virtual int Identity { get; set; }
+            public virtual int Right { get; set; }
+        }

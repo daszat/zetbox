@@ -9,6 +9,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
     using Kistl.App.Extensions;
     using Kistl.Generator.Extensions;
     using Templates = Kistl.Generator.Templates;
+    using Kistl.Generator;
 
     public class Template
         : Templates.ObjectClasses.Template
@@ -55,6 +56,20 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                     this.GetInterfaces().First(),
                     GetPersistentInitialisations(),
                     GetPersistentProperties());
+
+            }
+
+            if (NeedsRightsTable())
+            {
+                this.WriteLine();
+                this.WriteObjects("        public override Kistl.API.AccessRights CurrentAccessRights");
+                this.WriteLine();
+                this.WriteObjects("        {");
+                this.WriteLine();
+                this.WriteObjects("           get { return (Kistl.API.AccessRights)this.Proxy.SecurityRightsCollectionImpl.Single().Right; }");
+                this.WriteLine();
+                this.WriteObjects("        }");
+                this.WriteLine();
             }
         }
 
@@ -131,6 +146,10 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                 .Where(p => p.IsList)
                 .Select(p => new KeyValuePair<string, string>("int?", p.Name + Kistl.API.Helper.PositionSuffix));
 
+            var securityProperties = NeedsRightsTable()
+                ? new[] { new KeyValuePair<string, string>("ICollection<" + Construct.SecurityRulesClassName(this.ObjectClass as ObjectClass) + ImplementationSuffix + ">", "SecurityRightsCollectionImpl") }
+                : new KeyValuePair<string, string>[0];
+
             return this.ObjectClass
                 .Properties
                 .Select(p =>
@@ -188,7 +207,9 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                 .Concat(valuePosProperties)
                 .Concat(compoundPosProperties)
                 .Concat(enumPosProperties)
-                .OrderBy(kv => kv.Value);
+                .OrderBy(kv => kv.Value)
+                // always add at the end
+                .Concat(securityProperties);
         }
 
         protected override string GetExportGuidBackingStoreReference()
@@ -293,5 +314,15 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
         }
 
         #endregion
+
+        protected override void ApplyNamespaceTailTemplate()
+        {
+            base.ApplyNamespaceTailTemplate();
+
+            if (NeedsRightsTable())
+            {
+                RightsClass.Call(Host, ctx, Construct.SecurityRulesClassName(this.DataType as ObjectClass));
+            }
+        }
     }
 }
