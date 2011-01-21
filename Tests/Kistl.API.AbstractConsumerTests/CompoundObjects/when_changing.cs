@@ -114,6 +114,7 @@ namespace Kistl.API.AbstractConsumerTests.CompoundObjects
         [Test]
         public void should_be_modified_when_changing_to_existing_reference()
         {
+            obj = ctx.GetQuery<TestCustomObject>().ToList().Where(o => o.PhoneNumberMobile != null).First();
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
             Assert.That(obj.PhoneNumberOffice, Is.Not.Null);
             Assert.That(obj.PhoneNumberMobile, Is.Not.Null);

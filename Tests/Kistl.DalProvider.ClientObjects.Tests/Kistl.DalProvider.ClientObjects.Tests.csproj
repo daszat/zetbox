@@ -83,6 +83,7 @@
     <Compile Include="Tests\BaseClientDataObjectTests.cs" />
     <Compile Include="Tests\BinarySerializers\should_work_with_IStructs.cs" />
     <Compile Include="Tests\Blobs\when_using.cs" />
+    <Compile Include="Tests\CompoundObjects\when_querying.cs" />
     <Compile Include="Tests\CompoundObjects\when_changing.cs" />
     <Compile Include="Tests\CompoundObjects\when_changing_a_CompoundObject_list.cs" />
     <Compile Include="Tests\CompoundObjects\when_changing_a_CompoundObject_member.cs" />

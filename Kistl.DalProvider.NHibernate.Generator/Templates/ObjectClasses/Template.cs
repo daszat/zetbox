@@ -158,15 +158,19 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                     }
                     else
                     {
+
                         var ceClassName = p.GetCollectionEntryClassName();
                         var ceCollectionType = String.Format("ICollection<{0}.{1}{2}.{1}Proxy>",
                             p.ObjectClass.Module.Namespace,
                             ceClassName,
                             ImplementationSuffix);
                         var cop = p as CompoundObjectProperty;
-                        if (cop != null && cop.IsList)
+                        if (cop != null)
                         {
-                            type = ceCollectionType;
+                            if (cop.IsList)
+                                type = ceCollectionType;
+                            else
+                                type += ImplementationSuffix;
                         }
                         else
                         {

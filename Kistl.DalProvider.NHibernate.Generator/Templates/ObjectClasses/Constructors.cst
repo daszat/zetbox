@@ -25,7 +25,6 @@
         public <%= className %>(Func<IFrozenContext> lazyCtx)
             : this(lazyCtx, new <%= interfaceName %>Proxy())
         {
-<% ApplyCompoundObjectPropertyInitialisers(); %>
         }
 
         /// <summary>Create a instance, wrapping the specified proxy</summary>

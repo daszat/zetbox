@@ -107,6 +107,7 @@
     <Compile Include="Tests\Blobs\when_using.cs" />
     <Compile Include="Tests\CompoundObject\when_changing_a_CompoundObject_list.cs" />
     <Compile Include="Tests\CompoundObject\when_changing.cs" />
+    <Compile Include="Tests\CompoundObject\when_querying.cs" />
     <Compile Include="Tests\CompoundObject\when_roundtrip.cs" />
     <Compile Include="Tests\RelationListWrapperTests.cs" />
     <Compile Include="Tests\GenericRelationCollectionWrapperTests.cs" />

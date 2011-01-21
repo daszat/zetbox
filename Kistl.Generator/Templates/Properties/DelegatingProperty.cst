@@ -12,12 +12,12 @@
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 <%@ Parameter Name="propName" Type="string" %>
 <%@ Parameter Name="presentedType" Type="string" %>
-<%@ Parameter Name="backingPropName" Type="string" %>
+<%@ Parameter Name="backingPropertyName" Type="string" %>
 <%@ Parameter Name="backingType" Type="string" %>
         // BEGIN <%= this.GetType() %>
         <%= GetModifiers() %> <%= presentedType %> <%= propName %>
         {
-            get { return <%= backingPropName %>; }
-            set { <%= backingPropName %> = (<%= backingType %>)value; }
+            get { return <%= backingPropertyName %>; }
+            set { <%= backingPropertyName %> = (<%= backingType %>)value; }
         }
         // END <%= this.GetType() %>

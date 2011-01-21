@@ -41,11 +41,15 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries
             base.ApplyClassTailTemplate();
 
             string interfaceName = GetCeInterface();
-
+            string referencedType = prop.GetPropertyTypeString();
+            if (prop is CompoundObjectProperty)
+            {
+                referencedType += ImplementationSuffix;
+            }
             List<KeyValuePair<string, string>> typeAndNameList = new List<KeyValuePair<string, string>>() {
                 new KeyValuePair<string, string>(Mappings.ObjectClassHbm.GetProxyTypeReference(prop.ObjectClass as ObjectClass, this.Settings), "Parent"),
                 new KeyValuePair<string, string>("bool", "ValueIsNull"),
-                new KeyValuePair<string, string>(prop.GetPropertyTypeString(), "Value"),
+                new KeyValuePair<string, string>(referencedType, "Value"),
             };
 
             if (IsOrdered())

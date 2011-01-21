@@ -14,7 +14,7 @@ namespace Kistl.API.AbstractConsumerTests.CompoundObjects
         : AbstractTestFixture
     {
         protected const int MINLISTCOUNT = 5;
-
+        protected const string TEST_MOBILE_NUMBER = "m123456";
         protected Random rnd = new Random();
         protected string testNumber;
         protected IKistlContext ctx;
@@ -62,10 +62,17 @@ namespace Kistl.API.AbstractConsumerTests.CompoundObjects
                 create_obj.PersonName = "Second Person";
                 create_obj.PhoneNumberMobile = create_ctx.CreateCompoundObject<TestPhoneCompoundObject>();
                 create_obj.PhoneNumberMobile.AreaCode = "2";
-                create_obj.PhoneNumberMobile.Number = "22222222";
+                create_obj.PhoneNumberMobile.Number = TEST_MOBILE_NUMBER;
                 create_obj.PhoneNumberOffice.AreaCode = "o1";
                 create_obj.PhoneNumberOffice.Number = "o2222222";
                 AddPhoneNumberOther(create_ctx, create_obj, MINLISTCOUNT + 5);
+
+                create_obj = create_ctx.Create<TestCustomObject>();
+                create_obj.Birthday = DateTime.Now;
+                create_obj.PersonName = "No Mobile";
+                create_obj.PhoneNumberOffice.AreaCode = "o1";
+                create_obj.PhoneNumberOffice.Number = "o2222222";
+                AddPhoneNumberOther(create_ctx, create_obj, MINLISTCOUNT + 2);
 
                 create_obj = create_ctx.Create<TestCustomObject>();
                 create_obj.Birthday = DateTime.Now;

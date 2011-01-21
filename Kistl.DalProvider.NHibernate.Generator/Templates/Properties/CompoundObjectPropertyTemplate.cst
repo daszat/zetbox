@@ -1,6 +1,6 @@
 ﻿<%@ CodeTemplate Language="C#"
     Name="Properties.CompoundObjectPropertyTemplate"
-    ClassName="Kistl.Generator.Templates.Properties.CompoundObjectPropertyTemplate"
+    ClassName="Kistl.DalProvider.NHibernate.Generator.Templates.Properties.CompoundObjectPropertyTemplate"
     Inherits="Kistl.Generator.MemberTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="Kistl.API" %>
@@ -19,11 +19,15 @@
 <%@ Parameter Name="coImplementationType" Type="string" %>
 <%@ Parameter Name="isNullable" Type="bool" %>
         // BEGIN <%= this.GetType() %>
+<%
+    backingStoreName = "this.Proxy." + propName;
+%>
         // implement the user-visible interface
-<% DelegatingProperty.Call(Host, ctx, propName, coType, backingPropertyName, coImplementationType); %>
-
-        /// <summary>backing store for <%= propName %></summary>
-        private <%= coImplementationType %> <%= backingStoreName %>;
+        <%= GetModifiers() %> <%= coType %> <%= propName %>
+        {
+            get { return <%= backingPropertyName %>.CompoundObject_IsNull ? null : <%= backingPropertyName %>; }
+            set { <%= backingPropertyName %> = (<%= coImplementationType %>)value; }
+        }
 
         /// <summary>backing property for <%= propName %>, takes care of attaching/detaching the values</summary>
         <%= GetModifiers() %> <%= coImplementationType %> <%= backingPropertyName %>
@@ -49,15 +53,14 @@
 					}
 					if (__newValue == null)
 					{
-						<%= backingStoreName %> = null;
-<% ApplyStoreNull(); %>
+						<%= backingStoreName %> = new <%= coImplementationType %>(this, "<%= propName %>", null, null) { CompoundObject_IsNull = true };
 					}
                     else
                     {
 					    __newValue = (<%= coImplementationType %>)__newValue.Clone();
 					    <%= backingStoreName %> = __newValue;
+                        <%= backingStoreName %>.CompoundObject_IsNull = false;
 					    <%= backingStoreName %>.AttachToObject(this, "<%= propName %>");
-<% ApplyStoreValue(); %>
                     }
 
 					NotifyPropertyChanged("<%= propName %>", __oldValue, __newValue);

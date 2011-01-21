@@ -18,12 +18,28 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
             foreach (var property in compoundObjectProperties.Where(cop => !cop.IsList).OrderBy(cop => cop.Name))
             {
                 string propertyName = property.Name;
-                //string backingStoreName = propertyName + ImplementationPropertySuffix;
+                string backingStoreName = "this.Proxy." + propertyName;
                 string typeName = property.GetPropertyTypeString();
                 string implementationTypeName = typeName + ImplementationSuffix;
-                bool isNull = property.IsNullable();
+                string isNull = property.IsNullable() ? "true" : "false";
 
-                this.WriteObjects("            _", propertyName, " = new ", implementationTypeName, "(this, \"", propertyName, "\", null, null);");
+                this.WriteObjects("            if (", backingStoreName, " == null)");
+                this.WriteLine();
+                this.WriteObjects("            {");
+                this.WriteLine();
+                this.WriteObjects("                ", backingStoreName, " = new ", implementationTypeName, "(this, \"", propertyName, "\", null, null) { CompoundObject_IsNull = ", isNull , " };");
+                this.WriteLine();
+                this.WriteObjects("            }");
+                this.WriteLine();
+                this.WriteObjects("            else");
+                this.WriteLine();
+                this.WriteObjects("            {");
+                this.WriteLine();
+                this.WriteObjects("                ", backingStoreName, ".AttachToObject(this, \"", propertyName, "\");");
+                this.WriteLine();
+                this.WriteObjects("            }");
+                this.WriteLine();
+
                 this.WriteLine();
             }
         }

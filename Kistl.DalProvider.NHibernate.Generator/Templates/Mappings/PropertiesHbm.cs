@@ -264,6 +264,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
                 prop.CompoundObjectDefinition.Module.Namespace,
                 prop.CompoundObjectDefinition.Name,
                 ImplementationSuffix);
+            string isNullColumnAttr = String.Format("column=\"`{0}`\"", prop.Name);
 
             string mappingType = prop.HasPersistentOrder ? "list" : "idbag";
 
@@ -273,7 +274,6 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
                     prop.Module.Namespace,
                     prop.GetCollectionEntryClassName(),
                     ImplementationSuffix);
-                string isNullColumnAttr = String.Format("column=\"`{0}`\"", prop.Name);
 
                 this.WriteObjects("<", mappingType, " ", nameAttr, " ", tableAttr, ">");
                 this.WriteLine();
@@ -315,6 +315,9 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
             else
             {
                 this.WriteObjects("<component ", nameAttr, " ", valueClassAttr, " >");
+                this.WriteLine();
+
+                this.WriteObjects("    <property name=\"CompoundObject_IsNull\" ", isNullColumnAttr, " type=\"bool\" />");
                 this.WriteLine();
 
                 Call(Host, ctx, prefix + prop.Name + "_", prop.CompoundObjectDefinition.Properties);

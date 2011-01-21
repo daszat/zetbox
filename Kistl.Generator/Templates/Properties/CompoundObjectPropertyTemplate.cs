@@ -44,7 +44,7 @@ namespace Kistl.Generator.Templates.Properties
 
         protected virtual void AddSerialization(
             Serialization.SerializationMembersList list,
-            string memberType, string memberName, 
+            string memberType, string memberName,
             string backingStoreType, string backingStoreName)
         {
             if (list != null)
@@ -55,5 +55,8 @@ namespace Kistl.Generator.Templates.Properties
                     this.xmlNamespace, xmlname, memberType, memberName, backingStoreType, backingStoreName);
             }
         }
+
+        protected virtual void ApplyStoreNull() { }
+        protected virtual void ApplyStoreValue() { }
     }
 }

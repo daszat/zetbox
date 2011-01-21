@@ -15,24 +15,24 @@ namespace Kistl.Generator.Templates.Properties
 		protected IKistlContext ctx;
 		protected string propName;
 		protected string presentedType;
-		protected string backingPropName;
+		protected string backingPropertyName;
 		protected string backingType;
 
 
-        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string propName, string presentedType, string backingPropName, string backingType)
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string propName, string presentedType, string backingPropertyName, string backingType)
         {
             if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
 
-            _host.CallTemplate("Properties.DelegatingProperty", ctx, propName, presentedType, backingPropName, backingType);
+            _host.CallTemplate("Properties.DelegatingProperty", ctx, propName, presentedType, backingPropertyName, backingType);
         }
 
-        public DelegatingProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string propName, string presentedType, string backingPropName, string backingType)
+        public DelegatingProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string propName, string presentedType, string backingPropertyName, string backingType)
             : base(_host)
         {
 			this.ctx = ctx;
 			this.propName = propName;
 			this.presentedType = presentedType;
-			this.backingPropName = backingPropName;
+			this.backingPropertyName = backingPropertyName;
 			this.backingType = backingType;
 
         }
@@ -43,8 +43,8 @@ namespace Kistl.Generator.Templates.Properties
 this.WriteObjects("        // BEGIN ",  this.GetType() , "\r\n");
 this.WriteObjects("        ",  GetModifiers() , " ",  presentedType , " ",  propName , "\r\n");
 this.WriteObjects("        {\r\n");
-this.WriteObjects("            get { return ",  backingPropName , "; }\r\n");
-this.WriteObjects("            set { ",  backingPropName , " = (",  backingType , ")value; }\r\n");
+this.WriteObjects("            get { return ",  backingPropertyName , "; }\r\n");
+this.WriteObjects("            set { ",  backingPropertyName , " = (",  backingType , ")value; }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        // END ",  this.GetType() , "\r\n");
 
