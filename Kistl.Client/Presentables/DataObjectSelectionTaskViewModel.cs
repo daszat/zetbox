@@ -18,13 +18,13 @@ namespace Kistl.Client.Presentables
         // See https://bugzilla.novell.com/show_bug.cgi?id=660553
         public delegate DataObjectSelectionTaskViewModel Factory(IKistlContext dataCtx,
             ObjectClass type,
-            IQueryable qry,
+            Func<IQueryable> qry,
             Action<DataObjectViewModel> callback,
             IList<CommandViewModel> additionalActions);
 #else
         public new delegate DataObjectSelectionTaskViewModel Factory(IKistlContext dataCtx,
             ObjectClass type,
-            IQueryable qry,
+            Func<IQueryable> qry,
             Action<DataObjectViewModel> callback,
             IList<CommandViewModel> additionalActions);
 #endif

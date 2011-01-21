@@ -211,8 +211,8 @@ namespace Kistl.Client.Presentables.ValueViewModels
             {
                 var lstMdl = ViewModelFactory.CreateViewModel<DataObjectSelectionTaskViewModel.Factory>().Invoke(
                         DataContext,
-                        null,
-                        children.AsQueryable(),
+                        typeof(ObjectClass).GetObjectClass(FrozenContext),
+                        () => children.AsQueryable(),
                         new Action<DataObjectViewModel>(delegate(DataObjectViewModel chosen)
                         {
                             if (chosen != null)

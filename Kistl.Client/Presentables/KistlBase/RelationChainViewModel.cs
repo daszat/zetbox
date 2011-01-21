@@ -95,8 +95,8 @@ namespace Kistl.Client.Presentables.KistlBase
 
             var selTaskVMdl = ViewModelFactory.CreateViewModel<DataObjectSelectionTaskViewModel.Factory>().Invoke(
                     DataContext,
-                    null,
-                    qry,
+                    typeof(Relation).GetObjectClass(FrozenContext),
+                    () => qry,
                     new Action<DataObjectViewModel>(delegate(DataObjectViewModel chosen)
                     {
                         if (chosen != null)
@@ -115,8 +115,8 @@ namespace Kistl.Client.Presentables.KistlBase
         {
             var lstMdl = ViewModelFactory.CreateViewModel<DataObjectSelectionTaskViewModel.Factory>().Invoke(
                     DataContext,
-                    null,
-                    DataContext.GetQuery<ObjectClass>(),
+                    typeof(ObjectClass).GetObjectClass(FrozenContext),
+                    () => DataContext.GetQuery<ObjectClass>(),
                     new Action<DataObjectViewModel>(delegate(DataObjectViewModel chosen)
                     {
                         if (chosen != null)

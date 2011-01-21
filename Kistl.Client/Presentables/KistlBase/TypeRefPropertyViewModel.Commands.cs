@@ -8,6 +8,7 @@ namespace Kistl.Client.Presentables.KistlBase
 
     using Kistl.API;
     using Kistl.App.Base;
+    using Kistl.App.Extensions;
     using Kistl.Client.Models;
 
     /// <summary>
@@ -89,8 +90,8 @@ namespace Kistl.Client.Presentables.KistlBase
             var regenerateCmd = ViewModelFactory.CreateViewModel<RegenerateTypeRefsCommand.Factory>().Invoke(DataContext, this);
             var selectionTask = ViewModelFactory.CreateViewModel<DataObjectSelectionTaskViewModel.Factory>().Invoke(
                 DataContext,
-                null,
-                DataContext.GetQuery<Kistl.App.Base.TypeRef>(),
+                typeof(TypeRef).GetObjectClass(FrozenContext),
+                () => DataContext.GetQuery<Kistl.App.Base.TypeRef>(),
                 new Action<DataObjectViewModel>(delegate(DataObjectViewModel chosen)
                 {
                     if (chosen != null)
