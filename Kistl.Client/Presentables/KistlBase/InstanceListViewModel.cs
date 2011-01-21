@@ -38,9 +38,9 @@ namespace Kistl.Client.Presentables.KistlBase
     {
 #if MONO
         // See https://bugzilla.novell.com/show_bug.cgi?id=660553
-        public delegate InstanceListViewModel Factory(IKistlContext dataCtx, Func<IKistlContext> workingCtxFactory, ObjectClass type, IQueryable qry);
+        public delegate InstanceListViewModel Factory(IKistlContext dataCtx, Func<IKistlContext> workingCtxFactory, ObjectClass type, Func<IQueryable> qry);
 #else
-        public new delegate InstanceListViewModel Factory(IKistlContext dataCtx, Func<IKistlContext> workingCtxFactory, ObjectClass type, IQueryable qry);
+        public new delegate InstanceListViewModel Factory(IKistlContext dataCtx, Func<IKistlContext> workingCtxFactory, ObjectClass type, Func<IQueryable> qry);
 #endif
 
         protected readonly Func<IKistlContext> workingCtxFactory;
@@ -52,7 +52,7 @@ namespace Kistl.Client.Presentables.KistlBase
         /// <param name="config"></param>
         /// <param name="dataCtx">the data context to use</param>
         /// <param name="workingCtxFactory">A factory for creating a working context. If the InstanceList is embeddet in a workspace which the user has to submit manually, the factory should return the same context as passed in the dataCtx parameter.</param>
-        /// <param name="type">optional: the data type to model. If null, qry must be a Query of a valid DataType</param>
+        /// <param name="type">the data type to model. If null, qry must be a Query of a valid DataType</param>
         /// <param name="qry">optional: the query to display. If null, Query will be constructed from type</param>
         public InstanceListViewModel(
             IViewModelDependencies appCtx,
@@ -60,27 +60,19 @@ namespace Kistl.Client.Presentables.KistlBase
             IKistlContext dataCtx,
             Func<IKistlContext> workingCtxFactory,
             ObjectClass type,
-            IQueryable qry)
+            Func<IQueryable> qry)
             : base(appCtx, dataCtx)
         {
             if (dataCtx == null) throw new ArgumentNullException("dataCtx");
             if (workingCtxFactory == null) throw new ArgumentNullException("workingCtxFactory");
-            if (qry == null && type == null) throw new ArgumentException("qry and type may not be null");
+            if (type == null) throw new ArgumentNullException("type");
 
-            if (type != null)
-            {
-                _type = type;
-            }
-            else
-            {
-                this._type = FrozenContext.GetQuery<ObjectClass>().SingleOrDefault(dt => dt.GetDataType() == qry.ElementType);
-                if (_type == null) throw new ArgumentException("Cannot resolve type from Query");
-            }
+            _type = type;
             if (qry == null)
             {
                 MethodInfo mi = this.GetType().FindGenericMethod("GetTypedQuery", new Type[] { DataContext.GetInterfaceType(_type.GetDataType()).Type }, null);
                 // See Case 552
-                _query = (IQueryable)mi.Invoke(this, new object[] { });
+                _query = () => (IQueryable)mi.Invoke(this, new object[] { });
             }
             else
             {
@@ -929,10 +921,10 @@ namespace Kistl.Client.Presentables.KistlBase
         #endregion
 
         #region Execute Filter and fill List
-        private IQueryable _query;
+        private Func<IQueryable> _query;
         protected virtual IQueryable GetQuery()
         {
-            var result = _query;
+            var result = _query();
 
             foreach (var f in Filter.Where(f => f.Enabled))
             {

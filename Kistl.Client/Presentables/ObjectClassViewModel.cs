@@ -46,7 +46,7 @@ namespace Kistl.Client.Presentables
         {
             var result = base.CreatePropertyGroups();
 
-            var relListMdl = ViewModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, () => DataContext, null, DataContext.GetQuery<Relation>());
+            var relListMdl = ViewModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, () => DataContext, typeof(Relation).GetObjectClass(FrozenContext), () => DataContext.GetQuery<Relation>());
             relListMdl.EnableAutoFilter = false;
             relListMdl.Filter.Add(new ConstantValueFilterModel("A.Type = @0 || B.Type = @0", this.Object));
             relListMdl.Commands.Add(ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, "New Relation", "Creates a new Relation", CreateRelation, null));

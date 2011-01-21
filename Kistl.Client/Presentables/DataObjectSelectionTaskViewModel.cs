@@ -44,7 +44,7 @@ namespace Kistl.Client.Presentables
         public DataObjectSelectionTaskViewModel(
             IViewModelDependencies appCtx, IKistlContext dataCtx,
             ObjectClass type,
-            IQueryable qry,
+            Func<IQueryable> qry,
             Action<DataObjectViewModel> callback,
             IList<CommandViewModel> additionalActions)
             : base(appCtx, dataCtx)

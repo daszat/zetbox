@@ -19,7 +19,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
             IKistlContext dataCtx,
             Func<IKistlContext> workingCtxFactory,
             ObjectClass type,
-            IQueryable qry)
+            Func<IQueryable> qry)
             : base(appCtx, config, dataCtx, workingCtxFactory, type, qry)
         {
         }
