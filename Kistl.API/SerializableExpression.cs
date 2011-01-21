@@ -436,25 +436,25 @@ namespace Kistl.API
                 MethodInfo[] methods = type.GetMethods();
                 foreach (MethodInfo method in methods)
                 {
-                    if (method.Name == methodName)
+                    if (method.IsGenericMethod && method.Name == methodName)
                     {
+                        if (method.GetGenericArguments().Length != typeArguments.Length) continue;
+                        if (method.GetParameters().Length != parameterTypes.Length) continue;
+
                         MethodInfo mi = method.MakeGenericMethod(typeArguments);
                         ParameterInfo[] parameters = mi.GetParameters();
 
-                        if (parameters.Length == parameterTypes.Length)
+                        bool paramSame = true;
+                        for (int i = 0; i < parameters.Length; i++)
                         {
-                            bool paramSame = true;
-                            for (int i = 0; i < parameters.Length; i++)
+                            if (parameters[i].ParameterType != parameterTypes[i])
                             {
-                                if (parameters[i].ParameterType != parameterTypes[i])
-                                {
-                                    paramSame = false;
-                                    break;
-                                }
+                                paramSame = false;
+                                break;
                             }
-
-                            if (paramSame) return mi;
                         }
+
+                        if (paramSame) return mi;
                     }
                 }
             }
