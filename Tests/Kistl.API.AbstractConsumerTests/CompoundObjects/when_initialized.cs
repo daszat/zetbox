@@ -45,7 +45,7 @@ namespace Kistl.API.AbstractConsumerTests.CompoundObjects
         {
             Assert.That((newObj.PhoneNumberOffice as BaseCompoundObject).ParentObject, Is.SameAs(newObj));
             Assert.That((obj.PhoneNumberOffice as BaseCompoundObject).ParentObject, Is.SameAs(obj));
-            Assert.That((obj.PhoneNumberMobile as BaseCompoundObject).ParentObject, Is.SameAs(obj));
+            // nullable, ignore: Assert.That((obj.PhoneNumberMobile as BaseCompoundObject).ParentObject, Is.SameAs(obj));
         }
 
         [Test]
@@ -53,7 +53,7 @@ namespace Kistl.API.AbstractConsumerTests.CompoundObjects
         {
             Assert.That((newObj.PhoneNumberOffice as BaseCompoundObject).ParentProperty, Is.EqualTo("PhoneNumberOffice"));
             Assert.That((obj.PhoneNumberOffice as BaseCompoundObject).ParentProperty, Is.EqualTo("PhoneNumberOffice"));
-            Assert.That((obj.PhoneNumberMobile as BaseCompoundObject).ParentProperty, Is.EqualTo("PhoneNumberMobile"));
+            // nullable, ignore: Assert.That((obj.PhoneNumberMobile as BaseCompoundObject).ParentProperty, Is.EqualTo("PhoneNumberMobile"));
         }
     }
 }

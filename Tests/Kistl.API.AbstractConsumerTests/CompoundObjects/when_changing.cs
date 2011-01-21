@@ -12,6 +12,7 @@ namespace Kistl.API.AbstractConsumerTests.CompoundObjects
         [Test]
         public void should_be_set_null()
         {
+            obj = ctx.GetQuery<TestCustomObject>().ToList().Where(o => o.PhoneNumberMobile != null).First();
             Assert.That(obj.PhoneNumberMobile, Is.Not.Null);
             obj.PhoneNumberMobile = null;
             Assert.That(obj.PhoneNumberMobile, Is.Null);
@@ -21,6 +22,7 @@ namespace Kistl.API.AbstractConsumerTests.CompoundObjects
         [ExpectedException(typeof(ArgumentNullException))]
         public void should_not_be_set_null()
         {
+            // NOT NULLable
             Assert.That(obj.PhoneNumberOffice, Is.Not.Null);
             obj.PhoneNumberOffice = null;
         }
@@ -55,6 +57,7 @@ namespace Kistl.API.AbstractConsumerTests.CompoundObjects
         [Test]
         public void should_clone_reference()
         {
+            obj = ctx.GetQuery<TestCustomObject>().ToList().Where(o => o.PhoneNumberMobile != null).First();
             string orig_number_mobile = obj.PhoneNumberMobile.Number;
             string orig_number_office = obj.PhoneNumberOffice.Number;
             string new_number = "Should changed " + DateTime.Now;
@@ -94,6 +97,7 @@ namespace Kistl.API.AbstractConsumerTests.CompoundObjects
         [Test]
         public void should_be_modified_when_setting_nullable_to_new_reference()
         {
+            obj = ctx.GetQuery<TestCustomObject>().ToList().Where(o => o.PhoneNumberMobile != null).First();
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
             Assert.That(obj.PhoneNumberMobile, Is.Not.Null);
             

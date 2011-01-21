@@ -385,16 +385,6 @@ namespace Kistl.DalProvider.Ef
             }
         }
 
-        public override void NotifyPropertyChanging(string property, object oldValue, object newValue)
-        {
-            base.NotifyPropertyChanging(property, oldValue, newValue);
-        }
-
-        public override void NotifyPropertyChanged(string property, object oldValue, object newValue)
-        {
-            base.NotifyPropertyChanged(property, oldValue, newValue);
-        }
-
         /// <summary>
         /// Special NotifyPropertyChanged implementation. Use this if the 
         /// underlying EF-Property name doesn't match the public property

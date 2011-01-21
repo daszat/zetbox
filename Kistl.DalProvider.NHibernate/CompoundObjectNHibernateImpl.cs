@@ -15,5 +15,23 @@ namespace Kistl.DalProvider.NHibernate
             : base(lazyCtx)
         {
         }
+
+        protected override void OnPropertyChanging(string property, object oldValue, object newValue)
+        {
+            base.OnPropertyChanging(property, oldValue, newValue);
+            if (ParentObject != null)
+            {
+                ((IDataObject)ParentObject).NotifyPropertyChanging(property, oldValue, newValue);
+            }
+        }
+
+        protected override void OnPropertyChanged(string property, object oldValue, object newValue)
+        {
+            base.OnPropertyChanged(property, oldValue, newValue);
+            if (ParentObject != null)
+            {
+                ((IDataObject)ParentObject).NotifyPropertyChanging(property, oldValue, newValue);
+            }
+        }
     }
 }

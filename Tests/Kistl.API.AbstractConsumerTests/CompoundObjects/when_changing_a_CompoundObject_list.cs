@@ -15,6 +15,13 @@ namespace Kistl.API.AbstractConsumerTests.CompoundObjects
     public abstract class when_changing_a_CompoundObject_list
         : CompoundObjectFixture
     {
+        [SetUp]
+        public new void SetUp()
+        {
+            obj = ctx.GetQuery<TestCustomObject>().Where(o => o.PhoneNumbersOther.Count >= MINLISTCOUNT).FirstOrDefault();
+            Assert.That(obj, Is.Not.Null);
+        }
+
         [Test]
         public void should_not_be_modified_on_add()
         {
