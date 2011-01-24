@@ -41,6 +41,11 @@ namespace Kistl.DalProvider.NHibernate
             }
         }
 
+        internal void Delete()
+        {
+            _objectState = DataObjectState.Deleted;
+        }
+
         private int _ID;
         public override int ID
         {
