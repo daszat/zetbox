@@ -305,6 +305,8 @@ namespace Kistl.DalProvider.NHibernate
         public override IPersistenceObject FindPersistenceObject(InterfaceType ifType, int ID)
         {
             CheckDisposed();
+            if (ID <= Kistl.API.Helper.INVALIDID) { throw new ArgumentOutOfRangeException("ID"); }
+
             return (IPersistenceObject)this.GetType()
                 .FindGenericMethod("FindPersistenceObject",
                     new Type[] { ifType.Type },
@@ -312,9 +314,11 @@ namespace Kistl.DalProvider.NHibernate
                 .Invoke(this, new object[] { ID });
         }
 
-        private IPersistenceObject NhFindById(ImplementationType implType, int id)
+        private IPersistenceObject NhFindById(ImplementationType implType, int ID)
         {
-            return AttachAndWrap((IProxyObject)_nhSession.Load(ToProxyType(implType).FullName, id));
+            if (ID <= Kistl.API.Helper.INVALIDID) { throw new ArgumentOutOfRangeException("ID"); }
+
+            return AttachAndWrap((IProxyObject)_nhSession.Load(ToProxyType(implType).FullName, ID));
         }
 
         private object NhFindByExportGuid(ImplementationType implType, Guid exportGuid)
