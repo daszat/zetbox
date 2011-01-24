@@ -21,7 +21,7 @@ namespace Kistl.DalProvider.Ef
     /// <summary>
     /// Entityframework IKistlContext implementation
     /// </summary>
-    public sealed class KistlDataContext
+    public sealed class EfDataContext
         : BaseKistlDataContext, IKistlContext, IDisposable
     {
         private static readonly object _lock = new object();
@@ -66,7 +66,7 @@ namespace Kistl.DalProvider.Ef
         /// <summary>
         /// Internal Constructor
         /// </summary>
-        public KistlDataContext(IMetaDataResolver metaDataResolver, Identity identity, KistlConfig config, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory, EfImplementationType.EfFactory implTypeFactory)
+        public EfDataContext(IMetaDataResolver metaDataResolver, Identity identity, KistlConfig config, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory, EfImplementationType.EfFactory implTypeFactory)
             : base(metaDataResolver, identity, config, lazyCtx, iftFactory)
         {
             _ctx = new EfObjectContext(config);

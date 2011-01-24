@@ -32,7 +32,7 @@ namespace Kistl.DalProvider.Ef
             if (ID < Kistl.API.Helper.INVALIDID)
             {
                 // new object -> look in current context
-                ObjectContext efCtx = ((KistlDataContext)ctx).ObjectContext;
+                ObjectContext efCtx = ((EfDataContext)ctx).ObjectContext;
                 return (T)efCtx.ObjectStateManager.GetObjectStateEntries(System.Data.EntityState.Added)
                     .FirstOrDefault(e => e.Entity is IDataObject && ((IDataObject)e.Entity).ID == ID).Entity;
             }
