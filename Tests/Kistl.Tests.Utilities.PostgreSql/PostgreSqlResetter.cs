@@ -47,6 +47,8 @@ namespace Kistl.Tests.Utilities.PostgresSql
                     var srcDB = cb.Database.Substring(0, cb.Database.Length - "_test".Length);
                     var destDB = cb.Database;
                     var userCmdString = "-U postgres -w";
+                    // Change /c to /k to debug issues with this command
+                    // /k will keep the cmd.exe open to inspection
                     var args = string.Format("/C pg_dump {0} {1} | psql {0} {2}", userCmdString, srcDB, destDB);
                     System.Diagnostics.ProcessStartInfo pi = new System.Diagnostics.ProcessStartInfo("cmd.exe", args);
                     pi.UseShellExecute = false;
