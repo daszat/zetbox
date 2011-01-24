@@ -310,10 +310,9 @@ namespace Kistl.DalProvider.NHibernate
                 .Invoke(this, new object[] { ID });
         }
 
-
-        private object NhFindById(ImplementationType implType, int id)
+        private IPersistenceObject NhFindById(ImplementationType implType, int id)
         {
-            return _nhSession.Load(ToProxyType(implType).FullName, id);
+            return AttachAndWrap((IProxyObject)_nhSession.Load(ToProxyType(implType).FullName, id));
         }
 
         private object NhFindByExportGuid(ImplementationType implType, Guid exportGuid)
