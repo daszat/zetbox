@@ -48,6 +48,8 @@ namespace Kistl.DalProvider.Memory.Generator
 
             // This file is manually included in ProjectFile.cs
             // TODO: only export frozen stuff
+            // This is realy bad, frozen objects has nothing to do with objects beeing published
+            // Currently both subsets are the same - by chance
             _server.Publish(Path.Combine(CodeBasePath, "FrozenObjects.xml"), new[] { "*" });
 
             return files;
