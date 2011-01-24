@@ -7,13 +7,13 @@ namespace Kistl.Tests.Utilities.PostgresSql
     using System.Linq;
     using System.Text;
     using System.Text.RegularExpressions;
+    using Autofac;
     using Kistl.API.AbstractConsumerTests;
     using Kistl.API.Configuration;
+    using Kistl.API.Server;
     using Kistl.API.Utils;
     using Npgsql;
     using NUnit.Framework;
-    using Kistl.API.Server;
-    using Autofac;
 
     public sealed class PostgreSqlResetter
         : IDatabaseResetter
@@ -55,11 +55,20 @@ namespace Kistl.Tests.Utilities.PostgresSql
                     {
                         throw new InvalidOperationException("Environment Variable PGSQLBinPath is not set, unable to reset test database");
                     }
+                    else
+                    {
+                        Log.Info("Using binaries from PGSQLBinPath=" + pgSQLBinPath);
+                    }
                     pi.WorkingDirectory = pgSQLBinPath.Trim('\"');
                     var p = System.Diagnostics.Process.Start(pi);
                     if (!p.WaitForExit(RESET_TIMEOUT * 1000))
                     {
                         throw new InvalidOperationException(string.Format("pg_dump did not completed within {0} seconds", RESET_TIMEOUT));
+                    }
+
+                    if (p.ExitCode != 0)
+                    {
+                        throw new ApplicationException("Failed to reset database, maybe you need to put your postgres password into AppData\\Roaming\\postgresql\\pgpass.conf");
                     }
 
                     // After recreating the database, all connection pools should be cleard
