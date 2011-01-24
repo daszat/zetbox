@@ -111,7 +111,7 @@ namespace Kistl.App.Packaging
                     foreach (var objClass in ctx.GetQuery<ObjectClass>().Where(o => o.Module == module).ToList().Where(o => o.ImplementsInterfaces.Contains(iexpIf)).OrderBy(o => o.Name))
                     {
                         Log.InfoFormat("    {0} ", objClass.Name);
-                        foreach (var obj in ctx.GetQuery(objClass.GetDescribedInterfaceType()).OrderBy(obj => ((IExportable)obj).ExportGuid))
+                        foreach (var obj in ctx.Internals().GetAll(objClass.GetDescribedInterfaceType()).OrderBy(obj => ((IExportable)obj).ExportGuid))
                         {
                             ExportObject(s, obj, moduleNamespaces);
                         }

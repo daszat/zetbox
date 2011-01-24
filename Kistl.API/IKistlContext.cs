@@ -108,12 +108,6 @@ namespace Kistl.API
         /// <typeparam name="T">Type</typeparam>
         /// <returns>IQueryable</returns>
         IQueryable<T> GetQuery<T>() where T : class, IDataObject;
-        /// <summary>
-        /// Returns a Query by InterfaceType
-        /// </summary>
-        /// <param name="ifType">the interface to look for</param>
-        /// <returns>IQueryable</returns>
-        IQueryable<IDataObject> GetQuery(InterfaceType ifType);
 
         /// <summary>
         /// Returns the List referenced by the given Name.
@@ -494,13 +488,13 @@ namespace Kistl.API
         /// <returns>IQueryable</returns>
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         IQueryable<T> GetPersistenceObjectQuery<T>() where T : class, IPersistenceObject;
+
         /// <summary>
-        /// Returns a PersistenceObject Query by InterfaceType
+        /// Returns a list of all objects of the specified type. This method is marked as internal, because it is used only for very specific use-cases in the guts of the product.
         /// </summary>
-        /// <param name="ifType">the interface to look for</param>
-        /// <returns>IQueryable</returns>
-        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
-        IQueryable<IPersistenceObject> GetPersistenceObjectQuery(InterfaceType ifType);
+        /// <param name="t"></param>
+        /// <returns></returns>
+        List<IDataObject> GetAll(InterfaceType t);
     }
 
     public interface IDebuggingKistlContext : IKistlContext

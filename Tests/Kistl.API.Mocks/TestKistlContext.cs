@@ -59,17 +59,7 @@ namespace Kistl.API.Mocks
             throw new NotImplementedException();
         }
 
-        public IQueryable<IDataObject> GetQuery(InterfaceType ifType)
-        {
-            throw new NotImplementedException();
-        }
-
         public IQueryable<T> GetPersistenceObjectQuery<T>() where T : class, IPersistenceObject
-        {
-            throw new NotImplementedException();
-        }
-
-        public IQueryable<IPersistenceObject> GetPersistenceObjectQuery(InterfaceType ifType)
         {
             throw new NotImplementedException();
         }
@@ -390,5 +380,11 @@ namespace Kistl.API.Mocks
         }
 
         #endregion
+
+
+        public List<IDataObject> GetAll(InterfaceType t)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

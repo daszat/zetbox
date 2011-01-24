@@ -112,25 +112,12 @@ namespace Kistl.DalProvider.NHibernate
             return GetPersistenceObjectQuery<Tinterface>();
         }
 
-        public override IQueryable<IDataObject> GetQuery(InterfaceType ifType)
-        {
-            CheckDisposed();
-            return GetPersistenceObjectQuery(ifType).Cast<IDataObject>();
-        }
-
         public override IQueryable<Tinterface> GetPersistenceObjectQuery<Tinterface>()
         {
             CheckDisposed();
 
             var ifType = GetInterfaceType(typeof(Tinterface));
             return PrepareQueryable(ifType).Cast<Tinterface>();
-        }
-
-        public override IQueryable<IPersistenceObject> GetPersistenceObjectQuery(InterfaceType ifType)
-        {
-            CheckDisposed();
-            //CheckInterfaceAssembly("ifType", ifType.Type);
-            return PrepareQueryable(ifType);
         }
 
         public override IList<T> FetchRelation<T>(Guid relationId, RelationEndRole endRole, IDataObject parent)
@@ -427,7 +414,7 @@ namespace Kistl.DalProvider.NHibernate
         public override ImplementationType ToImplementationType(InterfaceType t)
         {
             CheckDisposed();
-            return _implTypeFactory(Type.GetType(String.Format("{0}NHibernate{1},{2}", t.Type.FullName, Kistl.API.Helper.ImplementationSuffix, NHibernateProvider.ServerAssembly)));
+            return _implTypeFactory(Type.GetType(String.Format("{0}NHibernate{1},{2}", t.Type.FullName, Kistl.API.Helper.ImplementationSuffix, NHibernateProvider.ServerAssembly), true));
         }
 
         internal Type ToProxyType(ImplementationType implType)

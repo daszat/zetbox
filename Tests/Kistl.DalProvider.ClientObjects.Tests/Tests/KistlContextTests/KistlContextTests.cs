@@ -30,14 +30,6 @@ namespace Kistl.DalProvider.Client.Tests.KistlContextTests
         }
 
         [Test]
-        public void GetQuery_ObjectType_should_create_query_with_proper_ElementType()
-        {
-            IQueryable<IDataObject> query = ctx.GetQuery(_iftFactory(typeof(TestObjClass)));
-            Assert.That(query, Is.Not.Null);
-            Assert.That(query.ElementType, Is.EqualTo(typeof(IDataObject)));
-        }
-
-        [Test]
         public void GetQuery_T_should_create_query_with_proper_ElementType()
         {
             IQueryable<TestObjClass> query = ctx.GetQuery<TestObjClass>();

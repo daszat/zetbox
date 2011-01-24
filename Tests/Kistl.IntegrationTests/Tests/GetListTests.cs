@@ -180,29 +180,6 @@ namespace Kistl.IntegrationTests
         }
 
         [Test]
-        public void GetListByTypeWithOrderBy()
-        {
-            using (IKistlContext ctx = GetContext())
-            {
-                var list = ctx.GetQuery(ctx.GetInterfaceType(typeof(ObjectClass))).Cast<ObjectClass>()
-                    .OrderBy(o => o.Name)
-                    .ToList().Cast<ObjectClass>();
-                Assert.That(list.Count(), Is.GreaterThan(0));
-                List<ObjectClass> result = list.ToList();
-                List<ObjectClass> sorted = list.ToList().OrderBy(o => o.Name).ToList();
-
-                for (int i = 0; i < result.Count; i++)
-                {
-                    if (result[i].ID != sorted[i].ID)
-                    {
-                        Assert.Fail("List was not sorted");
-                        break;
-                    }
-                }
-            }
-        }
-
-        [Test]
         public void GetListWithOrderByAndWhere()
         {
             using (IKistlContext ctx = GetContext())

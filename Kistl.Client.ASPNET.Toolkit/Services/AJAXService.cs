@@ -21,15 +21,16 @@ namespace Kistl.Client.ASPNET.Toolkit
         {
             if (type == null) { throw new ArgumentNullException("type"); }
 
-            try
-            {
-                return KistlContextManagerModule.KistlContext.GetQuery(KistlContextManagerModule.IftFactory(type.GetSystemType()))
-                    .Select(i => new JavaScriptObjectMoniker(KistlContextManagerModule.KistlContext, i)).ToList();
-            }
-            catch (Exception ex)
-            {
-                throw new FaultException(ex.Message);
-            }
+            throw new NotImplementedException();
+            //try
+            //{
+            //    return KistlContextManagerModule.KistlContext.GetQuery(KistlContextManagerModule.IftFactory(type.GetSystemType()))
+            //        .Select(i => new JavaScriptObjectMoniker(KistlContextManagerModule.KistlContext, i)).ToList();
+            //}
+            //catch (Exception ex)
+            //{
+            //    throw new FaultException(ex.Message);
+            //}
         }
     }
 }

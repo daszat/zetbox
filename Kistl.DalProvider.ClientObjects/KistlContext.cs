@@ -1027,5 +1027,10 @@ namespace Kistl.DalProvider.Client
         {
             throw new NotSupportedException();
         }
+
+        public List<IDataObject> GetAll(InterfaceType t)
+        {
+            throw new NotSupportedException("Use GetQuery<T>().Take(x) instead");
+        }
     }
 }

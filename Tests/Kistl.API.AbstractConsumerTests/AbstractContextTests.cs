@@ -374,19 +374,6 @@ namespace Kistl.API.AbstractConsumerTests
         }
 
         [Test]
-        public void GetQuery_ObjType()
-        {
-            using (IKistlContext ctx = GetContext())
-            {
-                var result = ctx.GetQuery(iftFactory(typeof(TestObjClass)));
-                Assert.That(result, Is.Not.Null);
-                var testObj = result.First(o => o.ID == firstId);
-                Assert.That(testObj, Is.Not.Null);
-                Assert.That(testObj, Is.InstanceOf(typeof(TestObjClass)));
-            }
-        }
-
-        [Test]
         public void Find_T_returns_right_object()
         {
             using (IKistlContext ctx = GetContext())

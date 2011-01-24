@@ -121,27 +121,6 @@ namespace Kistl.Server.Tests
         }
 
         [Test]
-        [Ignore("Case 617")]
-        public void GetList_ByType_With_OrderBy()
-        {
-            var list = ctx.GetQuery(ctx.GetInterfaceType(typeof(ObjectClass)))
-                .OrderBy<IDataObject, string>(o => ((ObjectClass)o).Name)
-                .ToList().Cast<ObjectClass>();
-            Assert.That(list.Count(), Is.GreaterThan(0));
-            List<Kistl.App.Base.ObjectClass> result = list.ToList();
-            List<Kistl.App.Base.ObjectClass> sorted = list.ToList().OrderBy(o => o.Name).ToList();
-
-            for (int i = 0; i < result.Count; i++)
-            {
-                if (result[i].ID != sorted[i].ID)
-                {
-                    Assert.Fail("List was not sorted");
-                    break;
-                }
-            }
-        }
-
-        [Test]
         public void GetList_With_OrderBy_And_Where()
         {
             var list = ctx.GetQuery<Kistl.App.Base.ObjectClass>().Where(o => o.Module.Name == "KistlBase").OrderBy(o => o.Name).ToList();

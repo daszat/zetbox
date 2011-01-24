@@ -152,12 +152,26 @@ namespace Kistl.API.Server
         /// <returns>IQueryable</returns>
         public abstract IQueryable<T> GetQuery<T>() where T : class, IDataObject;
 
-        /// <summary>
-        /// Returns a Query by System.Type.
-        /// </summary>
-        /// <param name="ifType">the requested type of objects</param>
-        /// <returns>IQueryable</returns>
-        public abstract IQueryable<IDataObject> GetQuery(InterfaceType ifType);
+        private List<IDataObject> GetAllHack<T>()
+            where T : class, IDataObject
+        {
+            // The query translator cannot properly handle the IDataObject cast:
+            // return GetQuery<T>().Cast<IDataObject>();
+
+            var result = new List<IDataObject>();
+            foreach (var o in GetQuery<T>())
+            {
+                result.Add(o);
+            }
+            return result;
+        }
+
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public List<IDataObject> GetAll(InterfaceType t)
+        {
+            var mi = this.GetType().FindGenericMethod("GetAllHack", new[] { t.Type }, new Type[0]);
+            return (List<IDataObject>)mi.Invoke(this, new object[0]);
+        }
 
         /// <summary>
         /// Returns a PersistenceObject Query by T
@@ -166,13 +180,6 @@ namespace Kistl.API.Server
         /// <returns>IQueryable</returns>
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         public abstract IQueryable<T> GetPersistenceObjectQuery<T>() where T : class, IPersistenceObject;
-        /// <summary>
-        /// Returns a PersistenceObject Query by InterfaceType
-        /// </summary>
-        /// <param name="ifType">the interface to look for</param>
-        /// <returns>IQueryable</returns>
-        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public abstract IQueryable<IPersistenceObject> GetPersistenceObjectQuery(InterfaceType ifType);
 
         /// <summary>
         /// Returns the List referenced by the given Name.

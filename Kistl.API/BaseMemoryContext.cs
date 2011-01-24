@@ -127,14 +127,6 @@ namespace Kistl.API
         }
 
         /// <inheritdoc />
-        public IQueryable<IDataObject> GetQuery(InterfaceType ifType)
-        {
-            CheckDisposed();
-            //CheckInterfaceAssembly("ifType", ifType.Type);
-            return GetPersistenceObjectQuery(ifType).Cast<IDataObject>();
-        }
-
-        /// <inheritdoc />
         public IQueryable<T> GetPersistenceObjectQuery<T>() where T : class, IPersistenceObject
         {
             CheckDisposed();
@@ -142,10 +134,30 @@ namespace Kistl.API
             return GetPersistenceObjectQuery(_iftFactory(typeof(T))).Cast<T>();
         }
 
+        private List<IDataObject> GetAllHack<T>()
+            where T : class, IDataObject
+        {
+            // The query translator cannot properly handle the IDataObject cast:
+            // return GetQuery<T>().Cast<IDataObject>();
+
+            var result = new List<IDataObject>();
+            foreach (var o in GetQuery<T>())
+            {
+                result.Add(o);
+            }
+            return result;
+        }
+
+        public List<IDataObject> GetAll(InterfaceType t)
+        {
+            var mi = this.GetType().FindGenericMethod("GetAllHack", new[] { t.Type }, new Type[0]);
+            return (List<IDataObject>)mi.Invoke(this, new object[0]);
+        }
+
         /// <summary>Retrieves a new query on top of the attached objects.</summary>
         /// <remarks>Implementors can override this method to modify queries 
         /// according to their provider's needs.</remarks>
-        public virtual IQueryable<IPersistenceObject> GetPersistenceObjectQuery(InterfaceType ifType)
+        protected virtual IQueryable<IPersistenceObject> GetPersistenceObjectQuery(InterfaceType ifType)
         {
             CheckDisposed();
             //CheckInterfaceAssembly("ifType", ifType.Type);

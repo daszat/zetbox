@@ -53,16 +53,6 @@ namespace Kistl.API.Server.Mocks
             return TestObjClasses.Values.Cast<T>().AsQueryable();
         }
 
-        public override IQueryable<IDataObject> GetQuery(InterfaceType ifType)
-        {
-            if (ifType != typeof(TestObjClass))
-            {
-                throw new ArgumentOutOfRangeException("ifType");
-            }
-
-            return TestObjClasses.Values.Cast<IDataObject>().AsQueryable();
-        }
-
         public override IQueryable<T> GetPersistenceObjectQuery<T>()
         {
             if (typeof(T) != typeof(TestObjClass))
@@ -71,16 +61,6 @@ namespace Kistl.API.Server.Mocks
             }
 
             return TestObjClasses.Values.Cast<T>().AsQueryable();
-        }
-
-        public override IQueryable<IPersistenceObject> GetPersistenceObjectQuery(InterfaceType ifType)
-        {
-            if (ifType != typeof(TestObjClass))
-            {
-                throw new ArgumentOutOfRangeException("ifType");
-            }
-
-            return TestObjClasses.Values.Cast<IPersistenceObject>().AsQueryable();
         }
 
         public override IPersistenceObject ContainsObject(InterfaceType type, int ID)
