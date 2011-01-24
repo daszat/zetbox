@@ -182,7 +182,7 @@
     </ProjectReference>
     <ProjectReference Include="..\Kistl.Tests.Utilities.MsSql\Kistl.Tests.Utilities.MsSql.csproj">
       <Project>{1E56A7BA-61B7-4283-B65F-ADFA6418F72B}</Project>
-      <Name>Tests.Utilities.MsSql</Name>
+      <Name>Kistl.Tests.Utilities.MsSql</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

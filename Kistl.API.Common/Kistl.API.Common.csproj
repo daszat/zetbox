@@ -8,8 +8,8 @@
     <ProjectGuid>{9677AE11-CB92-4F0A-A248-87A21586F0DA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Kistl.App.Extensions</RootNamespace>
-    <AssemblyName>TempAppHelpers</AssemblyName>
+    <RootNamespace>Kistl.API.Common</RootNamespace>
+    <AssemblyName>Kistl.API.Common</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SignAssembly>true</SignAssembly>
@@ -25,7 +25,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <DocumentationFile>..\bin\Debug\bin\Common\TempAppHelpers.XML</DocumentationFile>
+    <DocumentationFile>..\bin\Debug\bin\Common\Kistl.API.Common.XML</DocumentationFile>
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -36,7 +36,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <DocumentationFile>..\bin\Release\bin\Common\TempAppHelpers.XML</DocumentationFile>
+    <DocumentationFile>..\bin\Release\bin\Common\Kistl.API.Common.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Linux.Debug|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
@@ -47,7 +47,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <DocumentationFile>..\bin\Debug\bin\Common\TempAppHelpers.XML</DocumentationFile>
+    <DocumentationFile>..\bin\Debug\bin\Common\Kistl.API.Common.XML</DocumentationFile>
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>

@@ -142,9 +142,9 @@
       <Name>Kistl.Objects</Name>
       <Private>True</Private>
     </ProjectReference>
-    <ProjectReference Include="..\..\TempAppHelpers\TempAppHelpers.csproj">
+    <ProjectReference Include="..\..\TempAppHelpers\Kistl.API.Common.csproj">
       <Project>{9677AE11-CB92-4F0A-A248-87A21586F0DA}</Project>
-      <Name>TempAppHelpers</Name>
+      <Name>Kistl.API.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\Kistl.API.AbstractConsumerTests\Kistl.API.AbstractConsumerTests.csproj">
       <Project>{1EEA57CD-4824-4A14-9447-3BD0E57997F4}</Project>
