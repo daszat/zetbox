@@ -44,8 +44,8 @@ namespace Kistl.Generator.Templates.CollectionEntries
             return String.Format("{0}.RelationEntry{1}<{2}, {2}{1}, {3}, {3}{1}>",
                 ImplementationNamespace,
                 ImplementationSuffix,
-                rel.A.Type.GetDescribedInterfaceType().Type.FullName,
-                rel.B.Type.GetDescribedInterfaceType().Type.FullName);
+                rel.A.Type.Module.Name + "." + rel.A.Type.Name,
+                rel.B.Type.Module.Name + "." + rel.B.Type.Name);
         }
 
         protected override bool IsExportable()
