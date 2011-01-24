@@ -95,6 +95,7 @@ namespace Kistl.App.Packaging
                 .OrderBy(i => i.ControlRef.Assembly.Name).ThenBy(i => i.ControlRef.FullName).ThenBy(i => i.ExportGuid));
             AddMetaObjects(result, ctx.Internals().GetPersistenceObjectQuery<ViewDescriptor_supports_TypeRef_RelationEntry>().Where(i => i.A.Module.ID == moduleID)
                 .OrderBy(i => i.A.ControlRef.Assembly.Name).ThenBy(i => i.A.ControlRef.FullName).ThenBy(i => i.A.ExportGuid));
+            
             AddMetaObjects(result, ctx.GetQuery<NavigationScreen>()
                 .Where(i => i.Module.ID == moduleID)
                 .ToList()
@@ -102,6 +103,13 @@ namespace Kistl.App.Packaging
                 .OrderBy(i => i.Title)
                 .ThenBy(i => i.Parent != null ? i.Parent.Title : String.Empty)
                 .ThenBy(i => i.ExportGuid));
+            AddMetaObjects(result, ctx.Internals().GetPersistenceObjectQuery<NavigationScreen_accessed_by_Group_RelationEntry>()
+                .Where(i => i.A.Module.ID == moduleID)
+                .ToList()
+                .AsQueryable()
+                .OrderBy(i => i.A.Title)
+                .ThenBy(i => i.A.Parent != null ? i.A.Parent.Title : String.Empty)
+                .ThenBy(i => i.A.ExportGuid));
 
             // Security
             AddMetaObjects(result, ctx.GetQuery<Group>().Where(i => i.Module.ID == moduleID)

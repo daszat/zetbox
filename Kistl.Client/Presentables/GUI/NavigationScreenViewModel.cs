@@ -9,6 +9,7 @@ namespace Kistl.Client.Presentables.GUI
     using Kistl.API;
     using Kistl.API.Common;
     using Kistl.App.GUI;
+    using Kistl.App.Extensions;
     using Kistl.Client.Presentables.KistlBase;
 
     [ViewModelDescriptor]
@@ -53,6 +54,8 @@ namespace Kistl.Client.Presentables.GUI
             : base(dependencies, dataCtx, screen)
         {
             if (screen == null) throw new ArgumentNullException("screen");
+
+            if (!CurrentIdentity.IsAdmininistrator() && !screen.Groups.Any(g => CurrentIdentity.Groups.Select(grp => grp.ExportGuid).Contains(g.ExportGuid))) throw new InvalidOperationException("The current identity is not allowed to see this screen. The screen should not be displayed! Check your filters.");
 
             _screen = screen;
             _additionalCommandsRO = new ReadOnlyObservableCollection<CommandViewModel>(_additionalCommands);
@@ -132,7 +135,7 @@ namespace Kistl.Client.Presentables.GUI
                 if (_childrenRO == null)
                 {
                     _children = new ObservableCollection<NavigationScreenViewModel>();
-                    foreach (var s in _screen.Children)
+                    foreach (var s in _screen.Children.Where(c => CurrentIdentity.IsAdmininistrator() || c.Groups.Any(g => CurrentIdentity.Groups.Select(grp => grp.ExportGuid).Contains(g.ExportGuid))))
                     {
                         _children.Add(NavigationScreenViewModel.Fetch(ViewModelFactory, DataContext, s));
                     }
