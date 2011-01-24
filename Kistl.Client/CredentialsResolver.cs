@@ -30,6 +30,7 @@ namespace Kistl.Client
         public void InitCredentials(System.ServiceModel.Description.ClientCredentials c)
         {
             // Gracefully do nothing
+            // Set implicity by WindowsAuthentication
         }
     }
 

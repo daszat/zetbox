@@ -113,7 +113,7 @@ namespace Kistl.DalProvider.Ef
                     var manager = args.Context.Resolve<IEfActionsManager>();
                     manager.Init(args.Context.Resolve<IFrozenContext>());
                 })
-                .SingleInstance();
+                .InstancePerDependency();
 
             moduleBuilder
                 .Register(c => new EfServerObjectHandlerFactory())
