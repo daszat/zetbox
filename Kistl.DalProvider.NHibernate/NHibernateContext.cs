@@ -6,6 +6,7 @@ namespace Kistl.DalProvider.NHibernate
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Text;
+    using global::NHibernate;
     using global::NHibernate.Linq;
     using Kistl.API;
     using Kistl.API.Configuration;
@@ -433,27 +434,30 @@ namespace Kistl.DalProvider.NHibernate
             throw new NotImplementedException();
         }
 
+        private ITransaction _transaction;
         protected override bool IsTransactionRunning
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { return _transaction != null; }
         }
 
         public override void BeginTransaction()
         {
-            throw new NotImplementedException();
+            if (_transaction != null) throw new InvalidOperationException("A transaction is already running. Nested transaction are not supported");
+            _transaction = _nhSession.BeginTransaction();
         }
 
         public override void CommitTransaction()
         {
-            throw new NotImplementedException();
+            if (_transaction == null) throw new InvalidOperationException("No transaction running");
+            _transaction.Commit();
+            _transaction = null;
         }
 
         public override void RollbackTransaction()
         {
-            throw new NotImplementedException();
+            if (_transaction == null) throw new InvalidOperationException("No transaction running");
+            _transaction.Rollback();
+            _transaction = null;
         }
 
         public IPersistenceObject AttachAndWrap(IProxyObject proxy)
