@@ -40,9 +40,9 @@ namespace Kistl.Generator.Templates
             this.WriteLine(@"    </Reference>");
 
             // common functionality for all
-            this.WriteLine(@"    <Reference Include=""TempAppHelpers"">");
+            this.WriteLine(@"    <Reference Include=""Kistl.API.Common"">");
             this.WriteLine(@"      <SpecificVersion>False</SpecificVersion>");
-            this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Common\TempAppHelpers.dll</HintPath>");
+            this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Common\Kistl.API.Common.dll</HintPath>");
             this.WriteLine(@"      <Private>False</Private>");
             this.WriteLine(@"    </Reference>");
         }
