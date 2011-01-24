@@ -287,6 +287,8 @@ namespace Kistl.DalProvider.NHibernate
         public override IDataObject Find(InterfaceType ifType, int ID)
         {
             CheckDisposed();
+            if (ID <= Kistl.API.Helper.INVALIDID) { throw new ArgumentOutOfRangeException("ID"); }
+
             return (IDataObject)this.GetType()
                 .FindGenericMethod("Find",
                     new Type[] { ifType.Type },
