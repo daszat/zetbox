@@ -139,7 +139,7 @@ namespace Kistl.Server.SchemaManagement
                     viewRel.JoinColumnName = new[] { new ColumnRef("ID", ColumnRef.Local) };
                     viewRel.FKColumnName = new[] { new ColumnRef(Construct.ForeignKeyColumnName(nextRelEnd), lastJoin) };
 
-                    lastColumName = viewRel.FKColumnName.Single().ColumnName;
+                    lastColumName = "ID"; // viewRel.FKColumnName.Single().ColumnName;
                     lastJoin = viewRel;
                 }
                 else
