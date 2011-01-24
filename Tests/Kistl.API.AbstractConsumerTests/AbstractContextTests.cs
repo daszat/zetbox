@@ -8,11 +8,11 @@ namespace Kistl.API.AbstractConsumerTests
     using Autofac;
     using Kistl.API;
     using Kistl.App.Base;
-    using Kistl.App.Projekte;
     using Kistl.App.Test;
     using NUnit.Framework;
 
-    public abstract class AbstractContextTests : AbstractTestFixture 
+    public abstract class AbstractContextTests
+        : AbstractTestFixture
     {
         protected int firstId;
         protected int secondId;
@@ -35,24 +35,11 @@ namespace Kistl.API.AbstractConsumerTests
 
             using (IKistlContext ctx = GetContext())
             {
-                var kunde = ctx.GetQuery<Kunde>().FirstOrDefault();
-
-                if (kunde == null)
-                {
-                    kunde = ctx.Create<Kunde>();
-                    kunde.Adresse = "Testadresse";
-                    kunde.EMails.Add("test@example.com");
-                    kunde.Kundenname = "Testkundenname";
-                    kunde.Land = "AT";
-                    kunde.Ort = "Wien";
-                    kunde.PLZ = "1234";
-                }
-
                 var list = new List<TestObjClass>();
                 while (list.Count < 2)
                 {
                     var newObj = ctx.Create<TestObjClass>();
-                    newObj.ObjectProp = kunde;
+                    newObj.ObjectProp = null; // kunde;
                     newObj.StringProp = "blah" + list.Count;
                     list.Add(newObj);
                 }
@@ -66,8 +53,6 @@ namespace Kistl.API.AbstractConsumerTests
                 secondId = list[1].ID;
                 list[1].StringProp = "Second";
                 list[1].TestEnumProp = TestEnum.Second;
-
-                ProjectDataFixture.CreateTestData(ctx);
 
                 ctx.SubmitChanges();
             }
@@ -129,7 +114,7 @@ namespace Kistl.API.AbstractConsumerTests
                 Assert.That(results2, Is.EquivalentTo(results1), "Query.ToList() didn't return the same collection on the second execution");
             }
         }
-    
+
 
         [Test]
         public void should_find_new_objects()

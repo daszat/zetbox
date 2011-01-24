@@ -1,6 +1,6 @@
 @echo off
 echo ********************************************************************************
-echo Deployes and generates a updated ZBox Schema
+echo Deploys and generates an updated ZBox Schema
 echo Used to apply changes from SVN
 echo ********************************************************************************
 
