@@ -39,6 +39,11 @@ M: System.Void Kistl.DalProvider.Client.KistlContextProvider::AddNewLocalObjects
 M: System.Collections.Generic.IEnumerable`1<Kistl.API.IRelationEntry> Kistl.DalProvider.Ef.ServerCollectionHandler`4::GetCollectionEntriesInternal(TParent,Kistl.App.Base.Relation,Kistl.API.RelationEndRole)
 # Helper method which is only called by reflection from GetPersistenceObjectQuery
 M: System.Linq.IQueryable`1<Kistl.API.IPersistenceObject> Kistl.DalProvider.NHibernate.NHibernateContext::PrepareQueryable()
+# Helper method which is only called by reflection from GetUntypedQuery
+M: System.Linq.IQueryable`1<Kistl.API.IDataObject> Kistl.Client.Presentables.ValueViewModels.ObjectReferenceViewModel::GetUntypedQueryHack()
+# Helper method which is only called by reflection from GetAll
+M: System.Collections.Generic.List`1<Kistl.API.IDataObject> Kistl.API.BaseMemoryContext::GetAllHack()
+M: System.Collections.Generic.List`1<Kistl.API.IDataObject> Kistl.API.Server.BaseKistlDataContext::GetAllHack()
 # generated code (wpf)
 M: System.Delegate Kistl.Client.WPF.View.KistlBase.DataObjectLineDisplay::_CreateDelegate(System.Type,System.String)
 M: System.Delegate Kistl.Client.WPF.View.KistlBase.ObjectReferenceEditor::_CreateDelegate(System.Type,System.String)

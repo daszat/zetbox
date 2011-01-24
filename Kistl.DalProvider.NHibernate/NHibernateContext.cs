@@ -262,9 +262,9 @@ namespace Kistl.DalProvider.NHibernate
         public override void Delete(IPersistenceObject obj)
         {
             CheckDisposed();
-            if (obj == null) { new ArgumentNullException("obj"); }
+            if (obj == null) { throw new ArgumentNullException("obj"); }
             var nhObj = obj as DataObjectNHibernateImpl;
-            if (nhObj == null) { new ArgumentOutOfRangeException("obj", "should be a DataObjectNHibernateImpl, but is a " + obj.GetType()); }
+            if (nhObj == null) { throw new ArgumentOutOfRangeException("obj", "should be a DataObjectNHibernateImpl, but is a " + obj.GetType()); }
 
             nhObj.Delete();
 
