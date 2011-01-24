@@ -155,7 +155,13 @@ namespace Kistl.App.Extensions
         public static InterfaceType GetDescribedInterfaceType(this ObjectClass cls)
         {
             if (cls == null) { throw new ArgumentNullException("cls"); }
-            return cls.ReadOnlyContext.GetInterfaceType(cls.Module.Namespace + "." + cls.Name);
+            return cls.ReadOnlyContext.GetInterfaceType(GetDescribedInterfaceTypeName(cls));
+        }
+
+        public static string GetDescribedInterfaceTypeName(this ObjectClass cls)
+        {
+            if (cls == null) { throw new ArgumentNullException("cls"); }
+            return cls.Module.Namespace + "." + cls.Name;
         }
 
         public static bool ImplementsIExportable(this ObjectClass cls)

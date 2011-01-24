@@ -44,8 +44,8 @@ namespace Kistl.Generator.Templates.CollectionEntries
             return String.Format("{0}.RelationEntry{1}<{2}, {2}{1}, {3}, {3}{1}>",
                 ImplementationNamespace,
                 ImplementationSuffix,
-                rel.A.Type.Module.Name + "." + rel.A.Type.Name,
-                rel.B.Type.Module.Name + "." + rel.B.Type.Name);
+                rel.A.Type.GetDescribedInterfaceTypeName(),
+                rel.B.Type.GetDescribedInterfaceTypeName());
         }
 
         protected override bool IsExportable()
@@ -91,7 +91,7 @@ namespace Kistl.Generator.Templates.CollectionEntries
             this.WriteLine("            set");
             this.WriteLine("            {");
             this.WriteLine("                // settor will do checking for us");
-            this.WriteLine("                A = ({0})value;", rel.A.Type.GetDescribedInterfaceType().Type.FullName);
+            this.WriteLine("                A = ({0})value;", rel.A.Type.GetDescribedInterfaceTypeName());
             this.WriteLine("            }");
             this.WriteLine("        }");
             this.WriteLine();
@@ -104,7 +104,7 @@ namespace Kistl.Generator.Templates.CollectionEntries
             this.WriteLine("            set");
             this.WriteLine("            {");
             this.WriteLine("                // settor will do checking for us");
-            this.WriteLine("                B = ({0})value;", rel.B.Type.GetDescribedInterfaceType().Type.FullName);
+            this.WriteLine("                B = ({0})value;", rel.B.Type.GetDescribedInterfaceTypeName());
             this.WriteLine("            }");
             this.WriteLine("        }");
             this.WriteLine();
