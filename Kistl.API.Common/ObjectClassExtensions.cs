@@ -137,7 +137,7 @@ namespace Kistl.App.Extensions
             if (cls == null) throw new ArgumentNullException("cls");
             if (id == null) throw new ArgumentNullException("id");
             cls = cls.GetRootClass();
-            var groups = id.GetGroups().ToLookup(i => i.ExportGuid);
+            var groups = id.Groups.ToLookup(i => i.ExportGuid);
 
             var result = Kistl.App.Base.AccessRights.None;
 
