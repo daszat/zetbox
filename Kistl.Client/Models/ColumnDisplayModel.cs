@@ -152,6 +152,8 @@ namespace Kistl.Client.Models
 
         public static List<ColumnDisplayModel> CreateColumnDisplayModels(Mode mode, Property p, string parentLabel, string parentProp)
         {
+            if (p == null) throw new ArgumentNullException("p");
+
             var result = new List<ColumnDisplayModel>();
             var lb = p.GetLabel();
 
