@@ -273,37 +273,73 @@ namespace Kistl.DalProvider.NHibernate
         public override IDataObject Find(InterfaceType ifType, int ID)
         {
             CheckDisposed();
-            if (ID <= Kistl.API.Helper.INVALIDID) { throw new ArgumentOutOfRangeException("ID"); }
-
-            return (IDataObject)this.GetType()
-                .FindGenericMethod("Find",
-                    new Type[] { ifType.Type },
-                    new Type[] { typeof(int) })
-                .Invoke(this, new object[] { ID });
+            try
+            {
+                return (IDataObject)this.GetType()
+                    .FindGenericMethod("Find",
+                        new Type[] { ifType.Type },
+                        new Type[] { typeof(int) })
+                    .Invoke(this, new object[] { ID });
+            }
+            catch (System.Reflection.TargetInvocationException ex)
+            {
+                if (ex.InnerException is ArgumentOutOfRangeException)
+                {
+                    // wrap in new AOORE, to preserve all stack traces
+                    throw new ArgumentOutOfRangeException("ID", ex);
+                }
+                else
+                {
+                    // huhu, something bad happened
+                    throw;
+                }
+            }
         }
 
         public override T Find<T>(int ID)
         {
-            return FindPersistenceObject<T>(ID);
+            CheckDisposed();
+
+            var result = FindPersistenceObject<T>(ID);
+            if (result == null) { throw new ArgumentOutOfRangeException("ID", String.Format("no object of type {0} with ID={1}", typeof(T).FullName, ID)); }
+            return result;
         }
 
         public override IPersistenceObject FindPersistenceObject(InterfaceType ifType, int ID)
         {
             CheckDisposed();
             if (ID <= Kistl.API.Helper.INVALIDID) { throw new ArgumentOutOfRangeException("ID"); }
-
-            return (IPersistenceObject)this.GetType()
-                .FindGenericMethod("FindPersistenceObject",
-                    new Type[] { ifType.Type },
-                    new Type[] { typeof(int) })
-                .Invoke(this, new object[] { ID });
+            try
+            {
+                return (IPersistenceObject)this.GetType()
+                    .FindGenericMethod("FindPersistenceObject",
+                        new Type[] { ifType.Type },
+                        new Type[] { typeof(int) })
+                    .Invoke(this, new object[] { ID });
+            }
+            catch (System.Reflection.TargetInvocationException ex)
+            {
+                if (ex.InnerException is ArgumentOutOfRangeException)
+                {
+                    // wrap in new AOORE, to preserve all stack traces
+                    throw new ArgumentOutOfRangeException("ID", ex);
+                }
+                else
+                {
+                    // huhu, something bad happened
+                    throw;
+                }
+            }
         }
 
         private IProxyObject NhFindById(ImplementationType implType, int ID)
         {
             if (ID <= Kistl.API.Helper.INVALIDID) { throw new ArgumentOutOfRangeException("ID"); }
 
-            return (IProxyObject)_nhSession.Load(ToProxyType(implType).FullName, ID);
+            return (IProxyObject)_nhSession
+                        .CreateCriteria(ToProxyType(implType).FullName)
+                        .Add(global::NHibernate.Criterion.Restrictions.Eq("ID", ID))
+                        .UniqueResult();
         }
 
         private IProxyObject NhFindByExportGuid(ImplementationType implType, Guid exportGuid)
@@ -315,7 +351,7 @@ namespace Kistl.DalProvider.NHibernate
         }
 
         public T FindPersistenceProxy<T>(int ID)
-            where T: IProxyObject
+            where T : IProxyObject
         {
             CheckDisposed();
 
@@ -330,6 +366,7 @@ namespace Kistl.DalProvider.NHibernate
 
             var q = NhFindById(implType, ID);
             return (T)q;
+
         }
 
         public override T FindPersistenceObject<T>(int ID)
