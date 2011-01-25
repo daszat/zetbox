@@ -400,13 +400,13 @@ namespace Kistl.Client.Presentables.ValueViewModels
             }
         }
 
-        private IQueryable<IDataObject> GetUntypedQueryHack<T>()
+        public IQueryable<IDataObject> GetUntypedQueryHack<T>()
             where T : class, IDataObject
         {
             return DataContext.GetQuery<T>().Cast<IDataObject>();
         }
 
-        private IQueryable<IDataObject> GetUntypedQuery(ObjectClass cls)
+        public IQueryable<IDataObject> GetUntypedQuery(ObjectClass cls)
         {
             var mi = this.GetType().FindGenericMethod("GetUntypedQueryHack", new[] { cls.GetDescribedInterfaceType().Type }, new Type[0]);
             return (IQueryable<IDataObject>)mi.Invoke(this, new object[0]);
