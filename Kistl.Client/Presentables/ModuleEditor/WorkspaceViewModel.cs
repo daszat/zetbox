@@ -85,6 +85,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
                     lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, typeof(ObjectClass).GetObjectClass(FrozenContext), () => DataContext.GetQuery<ObjectClass>());
                     SetupViewModel(lstMdl);
                     lstMdl.Filter.Add(new ConstantValueFilterModel("Module = @0", CurrentModule));
+                    lstMdl.Filter.Add(new ToStringFilterModel(FrozenContext));
                     lst.Add(lstMdl);
 
                     // Interface
@@ -135,6 +136,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
                     lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, typeof(TypeRef).GetObjectClass(FrozenContext), () => DataContext.GetQuery<TypeRef>());
                     SetupViewModel(lstMdl);
                     lstMdl.Filter.Add(new ConstantValueFilterModel("Assembly.Module = @0", CurrentModule));
+                    lstMdl.Filter.Add(new ToStringFilterModel(FrozenContext));
                     lst.Add(lstMdl);
 
                     // Application

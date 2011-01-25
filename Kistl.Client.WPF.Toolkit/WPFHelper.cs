@@ -60,37 +60,46 @@ namespace Kistl.Client.WPF.Toolkit
                 var col = new DataGridTemplateColumn() { Header = desc.Header };
                 if (sortProperty != null) col.SetValue(sortProperty, desc.Name);
 
-                var editorFactory = new FrameworkElementFactory(typeof(ContentPresenter));
+                var needEditor = desc.ControlKind != desc.GridPreEditKind;
+
+                var editorFactory = needEditor ? new FrameworkElementFactory(typeof(ContentPresenter)) : null;
                 var labelFactory = new FrameworkElementFactory(typeof(ContentPresenter));
                 switch (desc.Type)
                 {
                     case ColumnDisplayModel.ColumnType.MethodModel:
-                        editorFactory.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(String.Format("Object.ActionViewModelsByName[{0}]", desc.Name)), Mode = BindingMode.OneWay });
+                        if(needEditor) editorFactory.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(String.Format("Object.ActionViewModelsByName[{0}]", desc.Name)), Mode = BindingMode.OneWay });
                         labelFactory.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(String.Format("Object.ActionViewModelsByName[{0}]", desc.Name)), Mode = BindingMode.OneWay });
                         break;
                     case ColumnDisplayModel.ColumnType.PropertyModel:
                         {
                             var tmp = desc.Name.Split('.').Select(i => String.Format("PropertyModelsByName[{0}]", i));
                             var binding = "Object." + string.Join(".Value.", tmp.ToArray());
-                            editorFactory.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(binding), Mode = BindingMode.OneWay });
+                            if (needEditor) editorFactory.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(binding), Mode = BindingMode.OneWay });
                             labelFactory.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(binding), Mode = BindingMode.OneWay });
                             break;
                         }
                     case ColumnDisplayModel.ColumnType.Property:
-                        editorFactory.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath("Object." + desc.Name), Mode = BindingMode.OneWay });
+                        if (needEditor) editorFactory.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath("Object." + desc.Name), Mode = BindingMode.OneWay });
                         labelFactory.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath("Object." + desc.Name), Mode = BindingMode.OneWay });
                         break;
                 }
-                editorFactory.SetValue(VisualTypeTemplateSelector.RequestedKindProperty, desc.ControlKind);
-                editorFactory.SetValue(ContentPresenter.ContentTemplateSelectorProperty, lst.FindResource("defaultTemplateSelector"));
-                editorFactory.SetValue(FrameworkElement.HorizontalAlignmentProperty, HorizontalAlignment.Stretch);
+                if (needEditor)
+                {
+                    editorFactory.SetValue(VisualTypeTemplateSelector.RequestedKindProperty, desc.ControlKind);
+                    editorFactory.SetValue(ContentPresenter.ContentTemplateSelectorProperty, lst.FindResource("defaultTemplateSelector"));
+                    editorFactory.SetValue(FrameworkElement.HorizontalAlignmentProperty, HorizontalAlignment.Stretch);
+                }
 
                 labelFactory.SetValue(VisualTypeTemplateSelector.RequestedKindProperty, desc.GridPreEditKind);
                 labelFactory.SetValue(ContentPresenter.ContentTemplateSelectorProperty, lst.FindResource("defaultTemplateSelector"));
                 labelFactory.SetValue(FrameworkElement.HorizontalAlignmentProperty, HorizontalAlignment.Stretch);
 
                 col.CellTemplate = new DataTemplate() { VisualTree = labelFactory };
-                col.CellEditingTemplate = new DataTemplate() { VisualTree = editorFactory };
+                // set template only if different
+                if (needEditor)
+                {
+                    col.CellEditingTemplate = new DataTemplate() { VisualTree = editorFactory };
+                }
                 lst.Columns.Add(col);
             }
         }

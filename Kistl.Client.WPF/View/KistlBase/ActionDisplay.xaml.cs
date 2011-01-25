@@ -20,7 +20,7 @@ namespace Kistl.Client.WPF.View.KistlBase
     /// <summary>
     /// Interaction logic for ActionView.xaml
     /// </summary>
-    public partial class ActionDisplay : CommandButton, IHasViewModel<ActionViewModel>
+    public partial class ActionDisplay : UserControl, IHasViewModel<ActionViewModel>
     {
         public ActionDisplay()
         {

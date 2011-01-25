@@ -200,8 +200,11 @@ namespace Kistl.Client.Presentables.KistlBase
                             }
                         }
 
-                        // Add default ToString Filter for all
-                        _filter.Add(new ToStringFilterModel(FrozenContext));
+                        if (_filter.Count == 0)
+                        {
+                            // Add default ToString Filter only if there is no filter configuration
+                            _filter.Add(new ToStringFilterModel(FrozenContext));
+                        }
                     }
                 }
                 return _filter;

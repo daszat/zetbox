@@ -93,7 +93,7 @@ namespace Kistl.Client.Models
         public bool ShowIcon { get; set; }
         public bool ShowName { get; set; }
 
-        public IList<ColumnDisplayModel> Columns { get; set; }
+        public List<ColumnDisplayModel> Columns { get; set; }
 
         public GridDisplayConfiguration()
         {
@@ -150,7 +150,7 @@ namespace Kistl.Client.Models
             }
         }
 
-        private List<ColumnDisplayModel> CreateColumnDisplayModels(Mode mode, Property p, string parentLabel, string parentProp)
+        public static List<ColumnDisplayModel> CreateColumnDisplayModels(Mode mode, Property p, string parentLabel, string parentProp)
         {
             var result = new List<ColumnDisplayModel>();
             var lb = p.GetLabel();
