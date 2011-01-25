@@ -21,7 +21,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.CompoundObjects
                 //string backingStoreName = propertyName + ImplementationPropertySuffix;
                 string typeName = property.GetPropertyTypeString();
                 string implementationTypeName = typeName + ImplementationSuffix;
-                bool isNull = property.IsNullable();
+                //bool isNull = property.IsNullable();
 
                 this.WriteObjects("            _", propertyName, " = new ", implementationTypeName, "(this, \"", propertyName, "\", null, null);");
                 this.WriteLine();

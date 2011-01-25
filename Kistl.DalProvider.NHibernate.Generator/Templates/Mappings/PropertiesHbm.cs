@@ -143,7 +143,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
                 ImplementationSuffix);
 
             string fkThisColumnAttr = String.Format("column=\"`{0}`\"", Construct.ForeignKeyColumnName(relEnd));
-            string fkOtherColumnAttr = String.Format("column=\"`{0}`\"", Construct.ForeignKeyColumnName(otherEnd));
+            //string fkOtherColumnAttr = String.Format("column=\"`{0}`\"", Construct.ForeignKeyColumnName(otherEnd));
 
             // always map as set, the wrapper has to translate/order the elements
             this.WriteObjects("        <set ", nameAttr, " ", tableAttr, " ");
