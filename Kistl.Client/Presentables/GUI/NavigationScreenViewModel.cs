@@ -18,7 +18,7 @@ namespace Kistl.Client.Presentables.GUI
     {
 #if MONO
         // See https://bugzilla.novell.com/show_bug.cgi?id=660553
-        public delegate NavigationScreenViewModel Factory(IKistlContext dataCtx, NavigationScreenViewModel parent, NavigationScreen screen);
+        public delegate NavigationScreenViewModel Factory(IKistlContext dataCtx, NavigationScreen screen);
 #else
         public new delegate NavigationScreenViewModel Factory(IKistlContext dataCtx, NavigationScreen screen);
 #endif
