@@ -136,17 +136,17 @@ namespace Kistl.API
         {
             if (string.IsNullOrEmpty(filename)) throw new ArgumentNullException("filename");
             _fileName = filename;
-            _blobDir = Path.Combine(Path.GetDirectoryName(filename), Path.GetFileNameWithoutExtension(filename));
+            _blobDir = Path.Combine(Path.GetDirectoryName(_fileName), Path.GetFileNameWithoutExtension(_fileName));
 
             switch (mode)
             {
                 case Modes.Read:
-                    _data = File.OpenRead(filename);
+                    _data = File.OpenRead(_fileName);
                     break;
                 case Modes.Write:
-                    Directory.CreateDirectory(Path.GetDirectoryName(filename));
+                    Directory.CreateDirectory(Path.GetDirectoryName(_fileName));
                     Directory.CreateDirectory(_blobDir);
-                    _data = File.OpenWrite(filename);
+                    _data = File.OpenWrite(_fileName);
                     _data.SetLength(0);
                     break;
                 default:
