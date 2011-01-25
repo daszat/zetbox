@@ -107,7 +107,18 @@ namespace Kistl.Client.Presentables.FilterViewModels
                 {
                     _Arguments = new ObservableCollection<IValueViewModel>(
                         Filter.FilterArguments
-                            .Select(f => BaseValueViewModel.Fetch(ViewModelFactory, DataContext, f.ViewModelType, f.Value))
+                            .Select(f =>
+                            {
+                                var mdl = BaseValueViewModel.Fetch(ViewModelFactory, DataContext, f.ViewModelType, f.Value);
+                                // I know, a hack, but better then allowing user to create new objects during a search
+                                if (mdl is ObjectReferenceViewModel)
+                                {
+                                    var objRefMdl = (ObjectReferenceViewModel)mdl;
+                                    objRefMdl.AllowCreateNewItem = false;
+                                    objRefMdl.AllowDelete = false;
+                                }
+                                return mdl;
+                            })
                             .Cast<IValueViewModel>()
                     );
                 }

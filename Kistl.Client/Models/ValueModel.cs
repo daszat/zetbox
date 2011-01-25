@@ -14,7 +14,7 @@ namespace Kistl.Client.Models
 
     public static class BaseParameterExtensionsThisShouldBeMovedToAZBoxMethod
     {
-        public static IValueModel GetValueModel(this BaseParameter parameter)
+        public static IValueModel GetValueModel(this BaseParameter parameter, bool allowNullInput)
         {
             if (parameter == null)
                 throw new ArgumentNullException("parameter");
@@ -23,35 +23,35 @@ namespace Kistl.Client.Models
 
             if (parameter is BoolParameter && !parameter.IsList)
             {
-                return new NullableStructValueModel<bool>(lb, parameter.Description, false, false);
+                return new NullableStructValueModel<bool>(lb, parameter.Description, allowNullInput, false);
             }
             else if (parameter is DateTimeParameter && !parameter.IsList)
             {
-                return new DateTimeValueModel(lb, parameter.Description, false, false);
+                return new DateTimeValueModel(lb, parameter.Description, allowNullInput, false);
             }
             else if (parameter is DoubleParameter && !parameter.IsList)
             {
-                return new NullableStructValueModel<double>(lb, parameter.Description, false, false);
+                return new NullableStructValueModel<double>(lb, parameter.Description, allowNullInput, false);
             }
             else if (parameter is IntParameter && !parameter.IsList)
             {
-                return new NullableStructValueModel<int>(lb, parameter.Description, false, false);
+                return new NullableStructValueModel<int>(lb, parameter.Description, allowNullInput, false);
             }
             else if (parameter is DecimalParameter && !parameter.IsList)
             {
-                return new NullableStructValueModel<decimal>(lb, parameter.Description, false, false);
+                return new NullableStructValueModel<decimal>(lb, parameter.Description, allowNullInput, false);
             }
             else if (parameter is StringParameter && !parameter.IsList)
             {
-                return new ClassValueModel<string>(lb, parameter.Description, false, false);
+                return new ClassValueModel<string>(lb, parameter.Description, allowNullInput, false);
             }
             else if (parameter is ObjectParameter && !parameter.IsList)
             {
-                return new ObjectReferenceValueModel(lb, parameter.Description, false, false, (ObjectClass)((ObjectParameter)parameter).DataType);
+                return new ObjectReferenceValueModel(lb, parameter.Description, allowNullInput, false, (ObjectClass)((ObjectParameter)parameter).DataType);
             }
             else if (parameter is EnumParameter && !parameter.IsList)
             {
-                return new EnumerationValueModel(lb, parameter.Description, false, false, ((EnumParameter)parameter).Enumeration);
+                return new EnumerationValueModel(lb, parameter.Description, allowNullInput, false, ((EnumParameter)parameter).Enumeration);
             }
             else
             {
