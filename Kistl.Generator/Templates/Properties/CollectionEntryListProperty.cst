@@ -45,7 +45,7 @@
 	}
 %>
 					<%= backingName %> 
-						= new <%= backingCollectionType %><<%= aSideType %>, <%= bSideType %>, <%= entryType %>>(
+						= new <%= backingCollectionType %><<%= aSideType %>, <%= bSideType %>, <%= entryType %>, ICollection<<%= entryType %>>>(
 							this, 
 							new RelationshipFilter<%= role %>SideCollection<<%= entryType %>>(this.Context, this));
 				}
@@ -53,7 +53,7 @@
 			}
 		}
 
-		private <%= backingCollectionType %><<%= aSideType %>, <%= bSideType %>, <%= entryType %>> <%= backingName %>;
+		private <%= backingCollectionType %><<%= aSideType %>, <%= bSideType %>, <%= entryType %>, ICollection<<%= entryType %>>> <%= backingName %>;
 <%
 	if (eagerLoading)
 	{

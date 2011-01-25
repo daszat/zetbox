@@ -28,6 +28,7 @@ namespace <%= DataType.Module.Namespace %>
     using System.Xml.Serialization;
 
     using Kistl.API;
+    using Kistl.DalProvider.Base.RelationWrappers;
 
 <% foreach(string ns in GetAdditionalImports().Distinct().OrderBy(s => s)) { %>
     using <%= ns %>;

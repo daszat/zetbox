@@ -83,7 +83,7 @@ this.WriteObjects("					if (!",  name , "_was_eagerLoaded) Context.FetchRelation
 
 #line 47 "P:\Kistl\Kistl.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 this.WriteObjects("					",  backingName , " \r\n");
-this.WriteObjects("						= new ",  backingCollectionType , "<",  aSideType , ", ",  bSideType , ", ",  entryType , ">(\r\n");
+this.WriteObjects("						= new ",  backingCollectionType , "<",  aSideType , ", ",  bSideType , ", ",  entryType , ", ICollection<",  entryType , ">>(\r\n");
 this.WriteObjects("							this, \r\n");
 this.WriteObjects("							new RelationshipFilter",  role , "SideCollection<",  entryType , ">(this.Context, this));\r\n");
 this.WriteObjects("				}\r\n");
@@ -91,7 +91,7 @@ this.WriteObjects("				return (",  exposedCollectionInterface , "<",  referenced
 this.WriteObjects("			}\r\n");
 this.WriteObjects("		}\r\n");
 this.WriteObjects("\r\n");
-this.WriteObjects("		private ",  backingCollectionType , "<",  aSideType , ", ",  bSideType , ", ",  entryType , "> ",  backingName , ";\r\n");
+this.WriteObjects("		private ",  backingCollectionType , "<",  aSideType , ", ",  bSideType , ", ",  entryType , ", ICollection<",  entryType , ">> ",  backingName , ";\r\n");
 #line 58 "P:\Kistl\Kistl.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 if (eagerLoading)
 	{

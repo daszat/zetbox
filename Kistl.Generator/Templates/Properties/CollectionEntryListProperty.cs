@@ -63,11 +63,11 @@ namespace Kistl.Generator.Templates.Properties
 
             if (rel.NeedsPositionStorage(otherEnd.GetRole()))
             {
-                result = String.Format("ClientRelation{0}SideListWrapper", otherEnd.GetRole());
+                result = String.Format("Observable{0}SideListWrapper", otherEnd.GetRole());
             }
             else
             {
-                result = String.Format("ClientRelation{0}SideCollectionWrapper", otherEnd.GetRole());
+                result = String.Format("Observable{0}SideCollectionWrapper", otherEnd.GetRole());
             }
 
             return result;

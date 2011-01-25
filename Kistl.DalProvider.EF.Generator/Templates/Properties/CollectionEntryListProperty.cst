@@ -34,22 +34,22 @@
     {
         if (otherEnd.GetRole() == RelationEndRole.A)
         {
-            wrapperClass = "EntityRelationASideListWrapper";
+            wrapperClass = "ASideListWrapper";
         }
         else if (otherEnd.GetRole() == RelationEndRole.B)
         {
-            wrapperClass = "EntityRelationBSideListWrapper";
+            wrapperClass = "BSideListWrapper";
         }
     }
     else
     {
         if (otherEnd.GetRole() == RelationEndRole.A)
         {
-            wrapperClass = "EntityRelationASideCollectionWrapper";
+            wrapperClass = "ASideCollectionWrapper";
         }
         else if (otherEnd.GetRole() == RelationEndRole.B)
         {
-            wrapperClass = "EntityRelationBSideCollectionWrapper";
+            wrapperClass = "BSideCollectionWrapper";
         }
     }
 
@@ -87,7 +87,7 @@
             {
                 if (<%= wrapperName %> == null)
                 {
-                    <%= wrapperName %> = new <%= wrapperClass %><<%= rel.A.Type.GetDataTypeString() %>, <%= rel.B.Type.GetDataTypeString() %>, <%= ceName %>>(
+                    <%= wrapperName %> = new <%= wrapperClass %><<%= rel.A.Type.GetDataTypeString() %>, <%= rel.B.Type.GetDataTypeString() %>, <%= ceName %>, EntityCollection<<%= ceName %>>>(
                             this,
                             <%= efName %>);
                 }
@@ -113,7 +113,7 @@
                 return c;
             }
         }
-        private <%= wrapperClass %><<%= rel.A.Type.GetDataTypeString() %>, <%= rel.B.Type.GetDataTypeString() %>, <%= ceName %>> <%= wrapperName %>;
+        private <%= wrapperClass %><<%= rel.A.Type.GetDataTypeString() %>, <%= rel.B.Type.GetDataTypeString() %>, <%= ceName %>, EntityCollection<<%= ceName %>>> <%= wrapperName %>;
 
 <%
     if (eagerLoading)

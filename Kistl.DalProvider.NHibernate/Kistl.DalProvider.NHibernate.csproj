@@ -76,7 +76,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IProxyObject.cs" />
-    <Compile Include="NHibernateList.cs" />
     <Compile Include="NHibernateQueryTranslatorProvider.cs" />
     <Compile Include="NHibernateServerCollectionHandler.cs" />
     <Compile Include="NHibernateServerObjectHandler.cs" />

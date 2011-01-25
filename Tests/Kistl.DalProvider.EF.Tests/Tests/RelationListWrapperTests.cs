@@ -12,6 +12,7 @@ namespace Kistl.DalProvider.Ef.Tests
     using Kistl.API;
     using Kistl.API.Tests;
     using Kistl.App.Projekte;
+    using Kistl.DalProvider.Base.RelationWrappers;
 
     using NUnit.Framework;
 
@@ -20,7 +21,7 @@ namespace Kistl.DalProvider.Ef.Tests
     [TestFixture(10)]
     [TestFixture(50)]
     public class RelationListWrapperTests
-        : BasicListTests<EntityRelationBSideListWrapper<Projekt, Mitarbeiter, Projekt_haben_Mitarbeiter_RelationEntryEfImpl>, Mitarbeiter>
+        : BasicListTests<BSideListWrapper<Projekt, Mitarbeiter, Projekt_haben_Mitarbeiter_RelationEntryEfImpl, EntityCollection<Projekt_haben_Mitarbeiter_RelationEntryEfImpl>>, Mitarbeiter>
     {
         protected EntityCollection<Projekt_haben_Mitarbeiter_RelationEntryEfImpl> wrappedCollection;
 
@@ -41,7 +42,7 @@ namespace Kistl.DalProvider.Ef.Tests
             return result;
         }
 
-        protected override EntityRelationBSideListWrapper<Projekt, Mitarbeiter, Projekt_haben_Mitarbeiter_RelationEntryEfImpl> CreateCollection(List<Mitarbeiter> items)
+        protected override BSideListWrapper<Projekt, Mitarbeiter, Projekt_haben_Mitarbeiter_RelationEntryEfImpl, EntityCollection<Projekt_haben_Mitarbeiter_RelationEntryEfImpl>> CreateCollection(List<Mitarbeiter> items)
         {
             parent = (ProjektEfImpl)ctx.Create<Projekt>();
             parent.Name = "proj#" + parent.ID;
@@ -50,7 +51,7 @@ namespace Kistl.DalProvider.Ef.Tests
             {
                 parent.Mitarbeiter.Add(item);
             }
-            return (EntityRelationBSideListWrapper<Projekt, Mitarbeiter, Projekt_haben_Mitarbeiter_RelationEntryEfImpl>)parent.Mitarbeiter;
+            return (BSideListWrapper<Projekt, Mitarbeiter, Projekt_haben_Mitarbeiter_RelationEntryEfImpl, EntityCollection<Projekt_haben_Mitarbeiter_RelationEntryEfImpl>>)parent.Mitarbeiter;
         }
 
         protected override void AssertInvariants(List<Mitarbeiter> expectedItems)

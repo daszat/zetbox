@@ -235,7 +235,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
             Templates.Properties.CollectionEntryListProperty.Call(Host, ctx,
                  this.MembersToSerialize,
                  rel, relEnd.GetRole(),
-                 String.Format("NHibernate{0}Side{1}Wrapper",
+                 String.Format("{0}Side{1}Wrapper",
                     otherEnd.GetRole(),
                     relEnd.HasPersistentOrder ? "List" : "Collection"));
         }

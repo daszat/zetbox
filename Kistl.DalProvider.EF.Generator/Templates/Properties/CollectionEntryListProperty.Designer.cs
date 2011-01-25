@@ -57,22 +57,22 @@ RelationEnd relEnd = rel.GetEndFromRole(endRole);
     {
         if (otherEnd.GetRole() == RelationEndRole.A)
         {
-            wrapperClass = "EntityRelationASideListWrapper";
+            wrapperClass = "ASideListWrapper";
         }
         else if (otherEnd.GetRole() == RelationEndRole.B)
         {
-            wrapperClass = "EntityRelationBSideListWrapper";
+            wrapperClass = "BSideListWrapper";
         }
     }
     else
     {
         if (otherEnd.GetRole() == RelationEndRole.A)
         {
-            wrapperClass = "EntityRelationASideCollectionWrapper";
+            wrapperClass = "ASideCollectionWrapper";
         }
         else if (otherEnd.GetRole() == RelationEndRole.B)
         {
-            wrapperClass = "EntityRelationBSideCollectionWrapper";
+            wrapperClass = "BSideCollectionWrapper";
         }
     }
 
@@ -111,7 +111,7 @@ this.WriteObjects("            get\r\n");
 this.WriteObjects("            {\r\n");
 this.WriteObjects("                if (",  wrapperName , " == null)\r\n");
 this.WriteObjects("                {\r\n");
-this.WriteObjects("                    ",  wrapperName , " = new ",  wrapperClass , "<",  rel.A.Type.GetDataTypeString() , ", ",  rel.B.Type.GetDataTypeString() , ", ",  ceName , ">(\r\n");
+this.WriteObjects("                    ",  wrapperName , " = new ",  wrapperClass , "<",  rel.A.Type.GetDataTypeString() , ", ",  rel.B.Type.GetDataTypeString() , ", ",  ceName , ", EntityCollection<",  ceName , ">>(\r\n");
 this.WriteObjects("                            this,\r\n");
 this.WriteObjects("                            ",  efName , ");\r\n");
 this.WriteObjects("                }\r\n");
@@ -137,7 +137,7 @@ this.WriteObjects("                }\r\n");
 this.WriteObjects("                return c;\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
-this.WriteObjects("        private ",  wrapperClass , "<",  rel.A.Type.GetDataTypeString() , ", ",  rel.B.Type.GetDataTypeString() , ", ",  ceName , "> ",  wrapperName , ";\r\n");
+this.WriteObjects("        private ",  wrapperClass , "<",  rel.A.Type.GetDataTypeString() , ", ",  rel.B.Type.GetDataTypeString() , ", ",  ceName , ", EntityCollection<",  ceName , ">> ",  wrapperName , ";\r\n");
 this.WriteObjects("\r\n");
 #line 119 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 if (eagerLoading)

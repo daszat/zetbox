@@ -1,53 +1,21 @@
 
-namespace Kistl.API
+namespace Kistl.DalProvider.Base.RelationWrappers
 {
     using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using Kistl.API;
 
-    public abstract class RelationASideCollectionWrapper<TA, TB, TEntry, TBaseCollection>
-        : BaseRelationCollectionWrapper<TA, TB, TB, TA, TEntry, TBaseCollection>
-        where TA : class, IDataObject
-        where TB : class, IDataObject
-        where TEntry : class, IRelationEntry<TA, TB>
-        where TBaseCollection : class, ICollection<TEntry>
-    {
-        protected RelationASideCollectionWrapper(TB parentObject, TBaseCollection baseCollection)
-            : base(parentObject, baseCollection)
-        {
-        }
-
-        protected override IEnumerable<TA> GetItems()
-        {
-            Collection.ForEach(e => e.AttachToContext(ParentObject.Context));
-            return Collection.Select(e => e.A);
-        }
-
-        protected override TA ItemFromEntry(TEntry entry)
-        {
-            entry.AttachToContext(ParentObject.Context);
-            return entry.A;
-        }
-
-        protected override TEntry InitialiseEntry(TEntry entry, TA item)
-        {
-            entry.B = ParentObject;
-            entry.A = item;
-            return entry;
-        }
-
-    }
-
-    public abstract class RelationASideListWrapper<TA, TB, TEntry, TBaseCollection>
-        : BaseRelationListWrapper<TA, TB, TB, TA, TEntry, TBaseCollection>
+    public class ASideListWrapper<TA, TB, TEntry, TBaseCollection>
+        : BaseListWrapper<TA, TB, TB, TA, TEntry, TBaseCollection>
         where TA : class, IDataObject
         where TB : class, IDataObject
         where TEntry : class, IRelationListEntry<TA, TB>
         where TBaseCollection : class, ICollection<TEntry>
     {
-        protected RelationASideListWrapper(TB parentObject, TBaseCollection baseCollection)
+        public ASideListWrapper(TB parentObject, TBaseCollection baseCollection)
             : base(parentObject, baseCollection)
         {
         }
@@ -107,46 +75,14 @@ namespace Kistl.API
         }
     }
 
-    public abstract class RelationBSideCollectionWrapper<TA, TB, TEntry, TBaseCollection>
-        : BaseRelationCollectionWrapper<TA, TB, TA, TB, TEntry, TBaseCollection>
-        where TA : class, IDataObject
-        where TB : class, IDataObject
-        where TEntry : class, IRelationEntry<TA, TB>
-        where TBaseCollection : class, ICollection<TEntry>
-    {
-        protected RelationBSideCollectionWrapper(TA parentObject, TBaseCollection baseCollection)
-            : base(parentObject, baseCollection)
-        {
-        }
-
-        protected override IEnumerable<TB> GetItems()
-        {
-            Collection.ForEach(e => e.AttachToContext(ParentObject.Context));
-            return Collection.Select(e => e.B);
-        }
-
-        protected override TB ItemFromEntry(TEntry entry)
-        {
-            entry.AttachToContext(ParentObject.Context);
-            return entry.B;
-        }
-
-        protected override TEntry InitialiseEntry(TEntry entry, TB item)
-        {
-            entry.A = ParentObject;
-            entry.B = item;
-            return entry;
-        }
-    }
-
-    public abstract class RelationBSideListWrapper<TA, TB, TEntry, TBaseCollection>
-        : BaseRelationListWrapper<TA, TB, TA, TB, TEntry, TBaseCollection>
+    public class BSideListWrapper<TA, TB, TEntry, TBaseCollection>
+        : BaseListWrapper<TA, TB, TA, TB, TEntry, TBaseCollection>
         where TA : class, IDataObject
         where TB : class, IDataObject
         where TEntry : class, IRelationListEntry<TA, TB>
         where TBaseCollection : class, ICollection<TEntry>
     {
-        protected RelationBSideListWrapper(TA parentObject, TBaseCollection baseCollection)
+        public BSideListWrapper(TA parentObject, TBaseCollection baseCollection)
             : base(parentObject, baseCollection)
         {
         }
@@ -205,5 +141,4 @@ namespace Kistl.API
             entry.B = item;
         }
     }
-
 }

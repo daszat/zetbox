@@ -49,6 +49,10 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=2.3.2.632, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\AutoFac 2\Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml" />
@@ -57,7 +61,8 @@
   <ItemGroup>
     <Compile Include="ClientValueCollectionWrapper.cs" />
     <Compile Include="CollectionEntryBaseImpl.cs" />
-    <Compile Include="CollectionWrapperImplementations.cs" />
+    <Compile Include="RelationWrappers\BaseCollectionWrapper.cs" />
+    <Compile Include="RelationWrappers\BaseListWrapper.cs" />
     <Compile Include="CompoundCollectionEntryBaseImpl.cs" />
     <Compile Include="CompoundObjectDefaultImpl.cs" />
     <Compile Include="DataObjectBaseImpl.cs" />
@@ -68,6 +73,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyDescriptorBaseImpl.cs" />
     <Compile Include="RelationEntryBaseImpl.cs" />
+    <Compile Include="RelationWrappers\CollectionWrapper.cs" />
+    <Compile Include="RelationWrappers\ObservableCollectionWrapper.cs" />
+    <Compile Include="RelationWrappers\ObservableListWrapper.cs" />
+    <Compile Include="RelationWrappers\ListWrapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Kistl.API\Kistl.API.csproj">

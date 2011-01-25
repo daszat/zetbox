@@ -53,45 +53,46 @@ this.WriteObjects("    using System.Xml;\r\n");
 this.WriteObjects("    using System.Xml.Serialization;\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("    using Kistl.API;\r\n");
+this.WriteObjects("    using Kistl.DalProvider.Base.RelationWrappers;\r\n");
 this.WriteObjects("\r\n");
-#line 32 "P:\Kistl\Kistl.Generator\Templates\TypeBase.cst"
-foreach(string ns in GetAdditionalImports().Distinct().OrderBy(s => s)) { 
 #line 33 "P:\Kistl\Kistl.Generator\Templates\TypeBase.cst"
-this.WriteObjects("    using ",  ns , ";\r\n");
+foreach(string ns in GetAdditionalImports().Distinct().OrderBy(s => s)) { 
 #line 34 "P:\Kistl\Kistl.Generator\Templates\TypeBase.cst"
-} 
+this.WriteObjects("    using ",  ns , ";\r\n");
 #line 35 "P:\Kistl\Kistl.Generator\Templates\TypeBase.cst"
-this.WriteObjects("\r\n");
+} 
 #line 36 "P:\Kistl\Kistl.Generator\Templates\TypeBase.cst"
-ApplyNamespacePreambleTemplate(); 
+this.WriteObjects("\r\n");
 #line 37 "P:\Kistl\Kistl.Generator\Templates\TypeBase.cst"
+ApplyNamespacePreambleTemplate(); 
+#line 38 "P:\Kistl\Kistl.Generator\Templates\TypeBase.cst"
 this.WriteObjects("    /// <summary>\r\n");
 this.WriteObjects("    /// ",  DataType.Description , "\r\n");
 this.WriteObjects("    /// </summary>\r\n");
-#line 41 "P:\Kistl\Kistl.Generator\Templates\TypeBase.cst"
+#line 42 "P:\Kistl\Kistl.Generator\Templates\TypeBase.cst"
 var mungedClassName = GetTypeName();
 
     ApplyClassAttributeTemplate();
 
-#line 45 "P:\Kistl\Kistl.Generator\Templates\TypeBase.cst"
+#line 46 "P:\Kistl\Kistl.Generator\Templates\TypeBase.cst"
 this.WriteObjects("    [System.Diagnostics.DebuggerDisplay(\"",  DataType.Name , "\")]\r\n");
 this.WriteObjects("    public",  GetClassModifiers() , " class ",  mungedClassName , " ",  GetInheritance() , "\r\n");
 this.WriteObjects("    {\r\n");
-#line 48 "P:\Kistl\Kistl.Generator\Templates\TypeBase.cst"
-ApplyClassHeadTemplate(); 
 #line 49 "P:\Kistl\Kistl.Generator\Templates\TypeBase.cst"
+ApplyClassHeadTemplate(); 
+#line 50 "P:\Kistl\Kistl.Generator\Templates\TypeBase.cst"
 ApplyConstructorTemplate(); 
-#line 51 "P:\Kistl\Kistl.Generator\Templates\TypeBase.cst"
+#line 52 "P:\Kistl\Kistl.Generator\Templates\TypeBase.cst"
 // TODO: decouple serializing format from Name order
         foreach(Property p in DataType.Properties.OrderBy(p => p.Name))
         {
 
-#line 55 "P:\Kistl\Kistl.Generator\Templates\TypeBase.cst"
+#line 56 "P:\Kistl\Kistl.Generator\Templates\TypeBase.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        /// <summary>\r\n");
 this.WriteObjects("        /// ",  p.Description , "\r\n");
 this.WriteObjects("        /// </summary>\r\n");
-#line 60 "P:\Kistl\Kistl.Generator\Templates\TypeBase.cst"
+#line 61 "P:\Kistl\Kistl.Generator\Templates\TypeBase.cst"
 ApplyPropertyTemplate(p);
         }
 
@@ -101,32 +102,32 @@ ApplyPropertyTemplate(p);
             foreach(var m in mg.OrderByDefault())
             {
 
-#line 69 "P:\Kistl\Kistl.Generator\Templates\TypeBase.cst"
+#line 70 "P:\Kistl\Kistl.Generator\Templates\TypeBase.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        /// <summary>\r\n");
 this.WriteObjects("        /// ",  m.Description , "\r\n");
 this.WriteObjects("        /// </summary>\r\n");
-#line 74 "P:\Kistl\Kistl.Generator\Templates\TypeBase.cst"
+#line 75 "P:\Kistl\Kistl.Generator\Templates\TypeBase.cst"
 ApplyMethodTemplate(m, index++);
             }
         }
 
-#line 78 "P:\Kistl\Kistl.Generator\Templates\TypeBase.cst"
+#line 79 "P:\Kistl\Kistl.Generator\Templates\TypeBase.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        public override Type GetImplementedInterface()\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            return typeof(",  DataType.Name , ");\r\n");
 this.WriteObjects("        }\r\n");
-#line 84 "P:\Kistl\Kistl.Generator\Templates\TypeBase.cst"
+#line 85 "P:\Kistl\Kistl.Generator\Templates\TypeBase.cst"
 ApplyApplyChangesFromMethod();
         ApplyAttachToContextMethod();
         ApplyClassTailTemplate();
 
-#line 88 "P:\Kistl\Kistl.Generator\Templates\TypeBase.cst"
+#line 89 "P:\Kistl\Kistl.Generator\Templates\TypeBase.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        #region Serializer\r\n");
 this.WriteObjects("\r\n");
-#line 92 "P:\Kistl\Kistl.Generator\Templates\TypeBase.cst"
+#line 93 "P:\Kistl\Kistl.Generator\Templates\TypeBase.cst"
 Serialization.SerializerTemplate.Call(Host, ctx,
             Serialization.SerializerDirection.ToStream, this.MembersToSerialize, true, null);
         
@@ -149,14 +150,14 @@ Serialization.SerializerTemplate.Call(Host, ctx,
                 Serialization.SerializerDirection.MergeImport, this.MembersToSerialize, cls.BaseObjectClass != null, GetExportGuidBackingStoreReference());
         }
 
-#line 114 "P:\Kistl\Kistl.Generator\Templates\TypeBase.cst"
+#line 115 "P:\Kistl\Kistl.Generator\Templates\TypeBase.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        #endregion\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("    }\r\n");
-#line 118 "P:\Kistl\Kistl.Generator\Templates\TypeBase.cst"
-ApplyNamespaceTailTemplate(); 
 #line 119 "P:\Kistl\Kistl.Generator\Templates\TypeBase.cst"
+ApplyNamespaceTailTemplate(); 
+#line 120 "P:\Kistl\Kistl.Generator\Templates\TypeBase.cst"
 this.WriteObjects("}");
 
         }
