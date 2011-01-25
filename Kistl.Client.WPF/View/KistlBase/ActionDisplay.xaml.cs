@@ -20,21 +20,24 @@ namespace Kistl.Client.WPF.View.KistlBase
     /// <summary>
     /// Interaction logic for ActionView.xaml
     /// </summary>
-    public partial class ActionDisplay : PropertyEditor, IHasViewModel<ActionViewModel>
+    public partial class ActionDisplay : CommandButton, IHasViewModel<ActionViewModel>
     {
         public ActionDisplay()
         {
             InitializeComponent();
+
+            this.Loaded += new RoutedEventHandler(ActionDisplay_Loaded);
+        }
+
+        void ActionDisplay_Loaded(object sender, RoutedEventArgs e)
+        {
+            // Set Keyboardmanager manual, because this Control has to be a CommandButton (Styling, Toolbar, etc.)
+            this.SetValue(FocusManager.FocusedElementProperty, this);
         }
 
         public ActionViewModel ViewModel
         {
             get { return (ActionViewModel)DataContext; }
-        }
-
-        protected override FrameworkElement MainControl
-        {
-            get { return cmd; }
         }
     }
 }
