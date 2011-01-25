@@ -8,7 +8,7 @@
                      xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.DateControls;assembly=WPFSamplesLib"
                      ToolTip="{Binding ToolTip}"                     
                      MinWidth="1">
-    <DockPanel FocusManager.FocusedElement="{Binding ElementName=txtDate}">
+    <DockPanel>
         <TextBox x:Name="txtTime"
                  DockPanel.Dock="Right"
                  MinWidth="60"

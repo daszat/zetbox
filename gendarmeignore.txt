@@ -56,6 +56,9 @@ M: System.Delegate Kistl.Client.WPF.View.KistlBase.StringDisplay::_CreateDelegat
 M: System.Delegate Kistl.Client.WPF.View.KistlBase.TypeRefPropertyView::_CreateDelegate(System.Type,System.String)
 M: System.Delegate Kistl.Client.WPF.View.KistlBase.CompoundObjectPropertyEditor::_CreateDelegate(System.Type,System.String)
 
+M: System.Delegate Kistl.Client.WPF.View.KistlBase.CommandDisplay::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.KistlBase.ActionDisplay::_CreateDelegate(System.Type,System.String)
+
 M: System.Delegate Kistl.Client.WPF.View.KistlBase.InstanceListDisplay::_CreateDelegate(System.Type,System.String)
 M: System.Delegate Kistl.Client.WPF.View.KistlBase.InstanceListHorizontalDisplay::_CreateDelegate(System.Type,System.String)
 M: System.Delegate Kistl.Client.WPF.View.KistlBase.InstanceGridDisplay::_CreateDelegate(System.Type,System.String)

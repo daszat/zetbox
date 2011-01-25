@@ -20,7 +20,7 @@ namespace Kistl.Client.WPF.View.KistlBase
     /// Interaction logic for ActionView.xaml
     /// </summary>
     [ViewDescriptor(Kistl.App.GUI.Toolkit.WPF)]
-    public partial class CommandDisplay : UserControl, IHasViewModel<CommandViewModel>
+    public partial class CommandDisplay : PropertyEditor, IHasViewModel<CommandViewModel>
     {
         public CommandDisplay()
         {
@@ -30,6 +30,11 @@ namespace Kistl.Client.WPF.View.KistlBase
         public CommandViewModel ViewModel
         {
             get { return (CommandViewModel)DataContext; }
+        }
+
+        protected override FrameworkElement MainControl
+        {
+            get { return cmd; }
         }
     }
 }

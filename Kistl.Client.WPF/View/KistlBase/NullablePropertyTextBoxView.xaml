@@ -6,19 +6,17 @@
                      xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
                      xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
                      ToolTip="{Binding ToolTip}">
-    <Grid FocusManager.FocusedElement="{Binding ElementName=txt}">
-        <kevin:InfoTextBox x:Name="txt"
-                           Text="{Binding FormattedValue, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=true}"
-                           LostFocus="InfoTextBox_LostFocus"
-                           TextBoxInfo="{Binding ToolTip}"
-                           IsReadOnly="{Binding IsReadOnly}">
-            <kevin:InfoTextBox.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Command="{Binding ClearValueCommand, Converter={StaticResource CommandConverter}}"
-                              Header="{Binding ClearValueCommand.Label}"
-                              ToolTip="{Binding ClearValueCommand.ToolTip}" />
-                </ContextMenu>
-            </kevin:InfoTextBox.ContextMenu>
-        </kevin:InfoTextBox>
-    </Grid>
+    <kevin:InfoTextBox x:Name="txt"
+                       Text="{Binding FormattedValue, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=true}"
+                       LostFocus="InfoTextBox_LostFocus"
+                       TextBoxInfo="{Binding ToolTip}"
+                       IsReadOnly="{Binding IsReadOnly}">
+        <kevin:InfoTextBox.ContextMenu>
+            <ContextMenu>
+                <MenuItem Command="{Binding ClearValueCommand, Converter={StaticResource CommandConverter}}"
+                          Header="{Binding ClearValueCommand.Label}"
+                          ToolTip="{Binding ClearValueCommand.ToolTip}" />
+            </ContextMenu>
+        </kevin:InfoTextBox.ContextMenu>
+    </kevin:InfoTextBox>
 </view:PropertyEditor>

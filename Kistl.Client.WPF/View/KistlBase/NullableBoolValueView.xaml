@@ -5,7 +5,6 @@
                      xmlns:view="clr-namespace:Kistl.Client.WPF.View.KistlBase"
                      xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
                      ToolTip="{Binding ToolTip}"
-                     FocusManager.FocusedElement="{Binding ElementName=cb}"
                      MinWidth="1">
 
     <CheckBox x:Name="cb"

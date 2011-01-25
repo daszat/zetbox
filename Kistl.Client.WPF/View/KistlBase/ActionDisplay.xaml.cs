@@ -20,7 +20,7 @@ namespace Kistl.Client.WPF.View.KistlBase
     /// <summary>
     /// Interaction logic for ActionView.xaml
     /// </summary>
-    public partial class ActionDisplay : UserControl, IHasViewModel<ActionViewModel>
+    public partial class ActionDisplay : PropertyEditor, IHasViewModel<ActionViewModel>
     {
         public ActionDisplay()
         {
@@ -30,6 +30,11 @@ namespace Kistl.Client.WPF.View.KistlBase
         public ActionViewModel ViewModel
         {
             get { return (ActionViewModel)DataContext; }
+        }
+
+        protected override FrameworkElement MainControl
+        {
+            get { return cmd; }
         }
     }
 }
