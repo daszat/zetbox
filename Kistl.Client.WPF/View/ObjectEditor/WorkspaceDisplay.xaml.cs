@@ -30,23 +30,23 @@ namespace Kistl.Client.WPF.View.ObjectEditor
             InitializeComponent();
         }
 
-        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
-        {
-            base.OnPropertyChanged(e);
-            if (ViewModel != null && e.Property == FrameworkElement.DataContextProperty)
-            {
-                ViewModel.UpdateFromUI += new EventHandler(ViewModel_UpdateFromUI);
-            }
-        }
-
-        void ViewModel_UpdateFromUI(object sender, EventArgs e)
-        {
-            WPFHelper.MoveFocus();
-        }
-
         public WorkspaceViewModel ViewModel
         {
             get { return (WorkspaceViewModel)this.DataContext; }
         }
+
+        #region Expander
+        private GridLength? _columnWidth;
+        private void Expander_Expanded(object sender, RoutedEventArgs e)
+        {
+            column0.Width = _columnWidth ?? new GridLength(150);
+        }
+
+        private void Expander_Collapsed(object sender, RoutedEventArgs e)
+        {
+            _columnWidth = column0.Width;
+            column0.Width = GridLength.Auto;
+        }
+        #endregion
     }
 }

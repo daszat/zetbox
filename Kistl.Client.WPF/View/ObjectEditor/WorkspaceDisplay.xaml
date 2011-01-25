@@ -35,20 +35,36 @@
         </Menu>
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="250" />
+                <ColumnDefinition x:Name="column0"
+                                  Width="Auto" />
                 <ColumnDefinition Width="5" />
                 <ColumnDefinition Width="2*" />
             </Grid.ColumnDefinitions>
 
-            <DockPanel Grid.Column="0">
-                <TextBlock DockPanel.Dock="Top"
-                           HorizontalAlignment="Center"
-                           Text="{Binding ItemsLabel}" />
-                <ListBox ItemsSource="{Binding Items}"
-                         SelectedItem="{Binding SelectedItem}"
-                         ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
-                         BorderThickness="0" />
-            </DockPanel>
+            <Expander Grid.Column="0"
+                      IsExpanded="{Binding ShowItemsList}"
+                      ExpandDirection="Left"
+                      Expanded="Expander_Expanded"
+                      Collapsed="Expander_Collapsed">
+                <Expander.HeaderTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding ItemsLabel}">
+                                    <TextBlock.LayoutTransform>
+                                        <RotateTransform Angle="-90" />
+                                    </TextBlock.LayoutTransform>
+                        </TextBlock>
+                    </DataTemplate>
+                </Expander.HeaderTemplate>
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Top"
+                               HorizontalAlignment="Center"
+                               Text="{Binding ItemsLabel}" />
+                    <ListBox ItemsSource="{Binding Items}"
+                             SelectedItem="{Binding SelectedItem}"
+                             ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
+                             BorderThickness="0" />
+                </DockPanel>
+            </Expander>
 
             <GridSplitter Grid.Column="1"
                           HorizontalAlignment="Stretch" />
