@@ -284,8 +284,7 @@ namespace Kistl.DalProvider.NHibernate
 
         public override T Find<T>(int ID)
         {
-            CheckDisposed();
-            return (T)NhFindById(ToImplementationType(GetInterfaceType(typeof(T))), ID);
+            return FindPersistenceObject<T>(ID);
         }
 
         public override IPersistenceObject FindPersistenceObject(InterfaceType ifType, int ID)
@@ -300,22 +299,23 @@ namespace Kistl.DalProvider.NHibernate
                 .Invoke(this, new object[] { ID });
         }
 
-        private IPersistenceObject NhFindById(ImplementationType implType, int ID)
+        private IProxyObject NhFindById(ImplementationType implType, int ID)
         {
             if (ID <= Kistl.API.Helper.INVALIDID) { throw new ArgumentOutOfRangeException("ID"); }
 
-            return AttachAndWrap((IProxyObject)_nhSession.Load(ToProxyType(implType).FullName, ID));
+            return (IProxyObject)_nhSession.Load(ToProxyType(implType).FullName, ID);
         }
 
-        private object NhFindByExportGuid(ImplementationType implType, Guid exportGuid)
+        private IProxyObject NhFindByExportGuid(ImplementationType implType, Guid exportGuid)
         {
-            return _nhSession
+            return (IProxyObject)_nhSession
                         .CreateCriteria(ToProxyType(implType).FullName)
                         .Add(global::NHibernate.Criterion.Restrictions.Eq("ExportGuid", exportGuid))
                         .UniqueResult();
         }
 
         public T FindPersistenceProxy<T>(int ID)
+            where T: IProxyObject
         {
             CheckDisposed();
 
