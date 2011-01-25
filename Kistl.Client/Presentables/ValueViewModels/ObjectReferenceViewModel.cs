@@ -172,10 +172,10 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 if (_openReferenceCommand == null)
                 {
                     _openReferenceCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
-                        DataContext, 
-                        ObjectReferenceViewModelResources.OpenReferenceCommand_Name, 
-                        ObjectReferenceViewModelResources.OpenReferenceCommand_Tooltip, 
-                        () => OpenReference(), 
+                        DataContext,
+                        ObjectReferenceViewModelResources.OpenReferenceCommand_Name,
+                        ObjectReferenceViewModelResources.OpenReferenceCommand_Tooltip,
+                        () => OpenReference(),
                         () => Value != null);
                     _openReferenceCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_openHS_png);
                 }
@@ -245,10 +245,10 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 if (_createNewItemAndSetValueCommand == null)
                 {
                     _createNewItemAndSetValueCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
-                        DataContext, 
-                        ObjectReferenceViewModelResources.CreateNewItemAndSetValueCommand_Name, 
-                        ObjectReferenceViewModelResources.CreateNewItemAndSetValueCommand_Tooltip, 
-                        () => CreateNewItemAndSetValue(null), 
+                        DataContext,
+                        ObjectReferenceViewModelResources.CreateNewItemAndSetValueCommand_Name,
+                        ObjectReferenceViewModelResources.CreateNewItemAndSetValueCommand_Tooltip,
+                        () => CreateNewItemAndSetValue(null),
                         () => AllowCreateNewItem && !DataContext.IsReadonly && !IsReadOnly);
                     _createNewItemAndSetValueCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_NewDocumentHS_png);
                 }
@@ -290,10 +290,10 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 if (_SelectValueCommand == null)
                 {
                     _SelectValueCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
-                        DataContext, 
-                        ObjectReferenceViewModelResources.SelectValueCommand_Name, 
-                        ObjectReferenceViewModelResources.SelectValueCommand_Tooltip, 
-                        () => SelectValue(), 
+                        DataContext,
+                        ObjectReferenceViewModelResources.SelectValueCommand_Name,
+                        ObjectReferenceViewModelResources.SelectValueCommand_Tooltip,
+                        () => SelectValue(),
                         () => !DataContext.IsReadonly && !IsReadOnly);
                     _SelectValueCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_SearchFolderHS_png);
                 }
@@ -309,8 +309,14 @@ namespace Kistl.Client.Presentables.ValueViewModels
             throw new NotImplementedException();
         }
 
-        private bool _valueCacheInititalized = false;
-        private DataObjectViewModel _valueCache;
+        protected override void OnPropertyChanged(string propertyName)
+        {
+            base.OnPropertyChanged(propertyName);
+            if (propertyName == "Value")
+            {
+                ClearValueCache();
+            }
+        }
 
         /// <summary>
         /// Gets or sets the value of the property presented by this model
@@ -327,8 +333,6 @@ namespace Kistl.Client.Presentables.ValueViewModels
             }
             set
             {
-                _valueCache = value;
-                _valueCacheInititalized = true;
                 ValueModel.Value = value != null ? value.Object : null;
                 if (_possibleValues != null)
                 {
@@ -338,7 +342,17 @@ namespace Kistl.Client.Presentables.ValueViewModels
                         _possibleValues.Add(value);
                     }
                 }
+                OnPropertyChanged("Value");
             }
+        }
+
+        private bool _valueCacheInititalized = false;
+        private DataObjectViewModel _valueCache;
+
+        private void ClearValueCache()
+        {
+            _valueCache = null;
+            _valueCacheInititalized = false;
         }
 
         private void UpdateValueCache()
@@ -385,10 +399,10 @@ namespace Kistl.Client.Presentables.ValueViewModels
                     if (needMoreButton)
                     {
                         var cmdMdl = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
-                            DataContext, 
-                            ObjectReferenceViewModelResources.PossibleValues_More, 
-                            ObjectReferenceViewModelResources.PossibleValues_More_Tooltip, 
-                            SelectValue, 
+                            DataContext,
+                            ObjectReferenceViewModelResources.PossibleValues_More,
+                            ObjectReferenceViewModelResources.PossibleValues_More_Tooltip,
+                            SelectValue,
                             null);
                         cmdMdl.RequestedKind = FrozenContext.FindPersistenceObject<ControlKind>(NamedObjects.ControlKind_Kistl_App_GUI_CommandLinkKind);
                         mdlList.Add(cmdMdl);

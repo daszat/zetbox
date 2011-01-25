@@ -51,6 +51,11 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
         void Model_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
+            OnValueModelPropertyChanged(e);
+        }
+
+        protected virtual void OnValueModelPropertyChanged(PropertyChangedEventArgs e)
+        {
             switch (e.PropertyName)
             {
                 case "Value":
