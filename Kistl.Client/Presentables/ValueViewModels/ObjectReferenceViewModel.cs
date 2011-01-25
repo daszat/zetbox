@@ -15,6 +15,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
     using Kistl.Client.Models;
     using Kistl.Client.Presentables.ValueViewModels;
     using Kistl.App.GUI;
+    using System.ComponentModel;
 
     [ViewModelDescriptor]
     public class ObjectReferenceViewModel
@@ -309,13 +310,22 @@ namespace Kistl.Client.Presentables.ValueViewModels
             throw new NotImplementedException();
         }
 
+        protected override void OnValueModelPropertyChanged(PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "Value")
+            {
+                ClearValueCache();
+            }
+            base.OnValueModelPropertyChanged(e);
+        }
+
         protected override void OnPropertyChanged(string propertyName)
         {
-            base.OnPropertyChanged(propertyName);
             if (propertyName == "Value")
             {
                 ClearValueCache();
             }
+            base.OnPropertyChanged(propertyName);
         }
 
         /// <summary>

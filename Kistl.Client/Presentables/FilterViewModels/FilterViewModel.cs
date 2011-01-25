@@ -87,7 +87,7 @@ namespace Kistl.Client.Presentables.FilterViewModels
         public new delegate FilterViewModel Factory(IKistlContext dataCtx, IUIFilterModel mdl);
 #endif
 
-        
+
 
         public FilterViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, IUIFilterModel mdl)
             : base(dependencies, dataCtx)

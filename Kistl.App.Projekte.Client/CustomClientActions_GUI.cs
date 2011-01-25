@@ -100,7 +100,7 @@ namespace Kistl.App.GUI
             mdl.ValueSource = FilterValueSource.FromProperty(obj.Property);
 
             mdl.ViewModelType = obj.ViewModelDescriptor;
-            mdl.FilterArguments.Add(new FilterArgumentConfig(obj.Property.GetDetachedValueModel(), /*cfg.ArgumentViewModel ?? */ obj.Property.ValueModelDescriptor));
+            mdl.FilterArguments.Add(new FilterArgumentConfig(obj.Property.GetDetachedValueModel(true), /*cfg.ArgumentViewModel ?? */ obj.Property.ValueModelDescriptor));
             if (obj.Property is StringProperty)
             {
                 mdl.Operator = FilterOperators.Contains;
@@ -123,7 +123,7 @@ namespace Kistl.App.GUI
             mdl.ValueSource = FilterValueSource.FromProperty(obj.Property);
 
             mdl.ViewModelType = obj.ViewModelDescriptor;
-            mdl.FilterArguments.Add(new FilterArgumentConfig(obj.Property.GetDetachedValueModel(), /*cfg.ArgumentViewModel ?? */ obj.Context.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableMonthPropertyViewModel)));
+            mdl.FilterArguments.Add(new FilterArgumentConfig(obj.Property.GetDetachedValueModel(true), /*cfg.ArgumentViewModel ?? */ obj.Context.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableMonthPropertyViewModel)));
 
             if (obj.IsCurrentMonthDefault == true)
             {
@@ -173,8 +173,8 @@ namespace Kistl.App.GUI
             mdl.ValueSource = FilterValueSource.FromProperty(obj.Property);
 
             mdl.ViewModelType = obj.ViewModelDescriptor;
-            mdl.FilterArguments.Add(new FilterArgumentConfig(obj.Property.GetDetachedValueModel(), /*cfg.ArgumentViewModel ?? */ obj.Property.ValueModelDescriptor));
-            mdl.FilterArguments.Add(new FilterArgumentConfig(obj.Property.GetDetachedValueModel(), /*cfg.ArgumentViewModel ?? */ obj.Property.ValueModelDescriptor));
+            mdl.FilterArguments.Add(new FilterArgumentConfig(obj.Property.GetDetachedValueModel(true), /*cfg.ArgumentViewModel ?? */ obj.Property.ValueModelDescriptor));
+            mdl.FilterArguments.Add(new FilterArgumentConfig(obj.Property.GetDetachedValueModel(true), /*cfg.ArgumentViewModel ?? */ obj.Property.ValueModelDescriptor));
             e.Result = mdl;
         }
 

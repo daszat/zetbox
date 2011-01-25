@@ -86,7 +86,7 @@ namespace Kistl.Client.Models
             }
         }
 
-        public static IValueModel GetDetachedValueModel(this Property prop)
+        public static IValueModel GetDetachedValueModel(this Property prop, bool allowNullInput)
         {
             if (prop == null)
                 throw new ArgumentNullException("prop");
@@ -95,35 +95,35 @@ namespace Kistl.Client.Models
 
             if (prop is IntProperty)
             {
-                return new NullableStructValueModel<int>(lb, prop.Description, prop.IsNullable(), false, prop.RequestedKind);
+                return new NullableStructValueModel<int>(lb, prop.Description, allowNullInput, false, prop.RequestedKind);
             }
             else if (prop is BoolProperty)
             {
-                return new NullableStructValueModel<bool>(lb, prop.Description, prop.IsNullable(), false, prop.RequestedKind);
+                return new NullableStructValueModel<bool>(lb, prop.Description, allowNullInput, false, prop.RequestedKind);
             }
             else if (prop is DoubleProperty)
             {
-                return new NullableStructValueModel<double>(lb, prop.Description, prop.IsNullable(), false, prop.RequestedKind);
+                return new NullableStructValueModel<double>(lb, prop.Description, allowNullInput, false, prop.RequestedKind);
             }
             else if (prop is DecimalProperty)
             {
-                return new NullableStructValueModel<decimal>(lb, prop.Description, prop.IsNullable(), false, prop.RequestedKind);
+                return new NullableStructValueModel<decimal>(lb, prop.Description, allowNullInput, false, prop.RequestedKind);
             }
             else if (prop is GuidProperty)
             {
-                return new NullableStructValueModel<Guid>(lb, prop.Description, prop.IsNullable(), false, prop.RequestedKind);
+                return new NullableStructValueModel<Guid>(lb, prop.Description, allowNullInput, false, prop.RequestedKind);
             }
             else if (prop is DateTimeProperty)
             {
-                return new DateTimeValueModel(lb, prop.Description, prop.IsNullable(), false, prop.RequestedKind);
+                return new DateTimeValueModel(lb, prop.Description, allowNullInput, false, prop.RequestedKind);
             }
             else if (prop is EnumerationProperty)
             {
-                return new EnumerationValueModel(lb, prop.Description, prop.IsNullable(), false, prop.RequestedKind, ((EnumerationProperty)prop).Enumeration);
+                return new EnumerationValueModel(lb, prop.Description, allowNullInput, false, prop.RequestedKind, ((EnumerationProperty)prop).Enumeration);
             }
             else if (prop is StringProperty)
             {
-                return new ClassValueModel<string>(lb, prop.Description, prop.IsNullable(), false, prop.RequestedKind);
+                return new ClassValueModel<string>(lb, prop.Description, allowNullInput, false, prop.RequestedKind);
             }
             else if (prop is ObjectReferenceProperty)
             {
@@ -142,12 +142,12 @@ namespace Kistl.Client.Models
                 }
                 else
                 {
-                    return new ObjectReferenceValueModel(lb, prop.Description, prop.IsNullable(), false, prop.RequestedKind, objRefProp.GetReferencedObjectClass());
+                    return new ObjectReferenceValueModel(lb, prop.Description, allowNullInput, false, prop.RequestedKind, objRefProp.GetReferencedObjectClass());
                 }
             }
             else if (prop is CompoundObjectProperty)
             {
-                return new CompoundObjectValueModel(lb, prop.Description, prop.IsNullable(), false, prop.RequestedKind, ((CompoundObjectProperty)prop).CompoundObjectDefinition);
+                return new CompoundObjectValueModel(lb, prop.Description, allowNullInput, false, prop.RequestedKind, ((CompoundObjectProperty)prop).CompoundObjectDefinition);
             }
 
             throw new NotImplementedException(string.Format("GetValueModel is not implemented for {0} properties yet", prop.GetPropertyTypeString()));
