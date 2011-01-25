@@ -88,7 +88,6 @@
     <Compile Include="CompoundObjectNHibernateImpl.cs" />
     <Compile Include="DataObjectNHibernateImpl.cs" />
     <Compile Include="INHibernateActionsManager.cs" />
-    <Compile Include="KistlContextNHibernateImpl.cs" />
     <Compile Include="NHibernateImplementationTypeChecker.cs" />
     <Compile Include="NHibernateServerObjectSetHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
