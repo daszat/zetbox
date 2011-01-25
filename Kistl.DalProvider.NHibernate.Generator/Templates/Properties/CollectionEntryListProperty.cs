@@ -1,5 +1,5 @@
 
-namespace Kistl.Generator.Templates.Properties
+namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
 {
     using System;
     using System.Collections.Generic;
@@ -10,12 +10,13 @@ namespace Kistl.Generator.Templates.Properties
     using Kistl.App.Base;
     using Kistl.App.Extensions;
     using Kistl.Generator.Extensions;
+    using Templates = Kistl.Generator.Templates;
 
     public partial class CollectionEntryListProperty
     {
         public static void Call(Arebis.CodeGeneration.IGenerationHost host,
             IKistlContext ctx,
-            Serialization.SerializationMembersList serializationList,
+            Templates.Serialization.SerializationMembersList serializationList,
             Relation rel, RelationEndRole endRole)
         {
             if (rel == null) { throw new ArgumentNullException("rel"); }
@@ -30,10 +31,12 @@ namespace Kistl.Generator.Templates.Properties
 
         public static void Call(Arebis.CodeGeneration.IGenerationHost host,
             IKistlContext ctx,
-            Serialization.SerializationMembersList serializationList,
+            Templates.Serialization.SerializationMembersList serializationList,
             Relation rel, RelationEndRole endRole, string backingCollectionType)
         {
+            if (host == null) { throw new ArgumentNullException("host"); }
             if (rel == null) { throw new ArgumentNullException("rel"); }
+
 
             RelationEnd relEnd = rel.GetEndFromRole(endRole);
             RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
@@ -51,7 +54,9 @@ namespace Kistl.Generator.Templates.Properties
 
             bool eagerLoading = relEnd.Navigator != null && relEnd.Navigator.EagerLoading;
 
-            Call(host, ctx, serializationList, name, exposedCollectionInterface, referencedInterface, backingName, backingCollectionType, aSideType, bSideType, entryType, providerCollectionType, rel.ExportGuid, endRole, eagerLoading);
+            string entryProxyType = entryType + "." + rel.GetRelationClassName() + "Proxy";
+
+            Call(host, ctx, serializationList, name, exposedCollectionInterface, referencedInterface, backingName, backingCollectionType, aSideType, bSideType, entryType, providerCollectionType, rel.ExportGuid, endRole, eagerLoading, entryProxyType);
         }
 
         public static string RelationToBackingCollectionType(Relation rel, RelationEnd otherEnd)
@@ -63,21 +68,22 @@ namespace Kistl.Generator.Templates.Properties
 
             if (rel.NeedsPositionStorage(otherEnd.GetRole()))
             {
-                result = String.Format("Observable{0}SideListWrapper", otherEnd.GetRole());
+                result = String.Format("{0}SideListWrapper", otherEnd.GetRole());
             }
             else
             {
-                result = String.Format("Observable{0}SideCollectionWrapper", otherEnd.GetRole());
+                result = String.Format("{0}SideCollectionWrapper", otherEnd.GetRole());
             }
 
             return result;
         }
 
-        protected virtual void AddSerialization(Serialization.SerializationMembersList list, string memberName, bool eagerLoading)
+
+        protected virtual void AddSerialization(Templates.Serialization.SerializationMembersList list, string memberName, bool eagerLoading)
         {
             if (list != null && eagerLoading)
             {
-                list.Add("Serialization.EagerLoadingSerialization", Serialization.SerializerType.Binary, null, null, memberName, false);
+                list.Add("Serialization.EagerLoadingSerialization", Templates.Serialization.SerializerType.Binary, null, null, memberName, false);
             }
         }
     }

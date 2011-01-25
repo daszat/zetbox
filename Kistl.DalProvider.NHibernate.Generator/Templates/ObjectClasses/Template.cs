@@ -226,18 +226,15 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
             Properties.ProxyProperty.Call(Host, ctx, serList, prop.Module.Namespace, prop.ReferencedTypeAsCSharp(), prop.Name, false, true);
         }
 
+
         protected override void ApplyCollectionEntryListTemplate(ObjectReferenceProperty prop)
         {
             var rel = RelationExtensions.Lookup(ctx, prop);
             var relEnd = rel.GetEnd(prop);
-            var otherEnd = rel.GetOtherEnd(relEnd);
 
-            Templates.Properties.CollectionEntryListProperty.Call(Host, ctx,
+            Properties.CollectionEntryListProperty.Call(Host, ctx,
                  this.MembersToSerialize,
-                 rel, relEnd.GetRole(),
-                 String.Format("{0}Side{1}Wrapper",
-                    otherEnd.GetRole(),
-                    relEnd.HasPersistentOrder ? "List" : "Collection"));
+                 rel, relEnd.GetRole());
         }
 
         protected override void ApplyCompoundObjectListTemplate(CompoundObjectProperty prop)

@@ -1,0 +1,52 @@
+﻿<%@ CodeTemplate Language="C#" 
+	Name="Properties.CollectionEntryListProperty"
+	ClassName="Kistl.DalProvider.NHibernate.Generator.Templates.Properties.CollectionEntryListProperty" 
+	Inherits="Kistl.Generator.MemberTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.Generator" %>
+<%@ Import Namespace="Kistl.Generator.Extensions" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="serializationList" Type="Kistl.Generator.Templates.Serialization.SerializationMembersList" %>
+<%@ Parameter Name="name" Type="string" %>
+<%@ Parameter Name="exposedCollectionInterface" Type="string" %>
+<%@ Parameter Name="referencedInterface" Type="string" %>
+<%@ Parameter Name="backingName" Type="string" %>
+<%@ Parameter Name="backingCollectionType" Type="string" %>
+<%@ Parameter Name="aSideType" Type="string" %>
+<%@ Parameter Name="bSideType" Type="string" %>
+<%@ Parameter Name="entryType" Type="string" %>
+<%@ Parameter Name="providerCollectionType" Type="string" %>
+<%@ Parameter Name="relId" Type="Guid" %>
+<%@ Parameter Name="role" Type="RelationEndRole" %>
+<%@ Parameter Name="eagerLoading" Type="bool" %>
+<%@ Parameter Name="entryProxyType" Type="string" %>
+   		// <%= this.GetType() %>
+		<%= GetModifiers() %> <%= exposedCollectionInterface %><<%= referencedInterface %>> <%= name %>
+		{
+			get
+			{
+				if (<%= backingName %> == null)
+				{
+					<%= backingName %> 
+						= new <%= backingCollectionType %><<%= aSideType %>, <%= bSideType %>, <%= entryType %>, ICollection<<%= entryType %>>>(
+							this, 
+							new ProjectedCollection<<%= entryProxyType %>, <%= entryType %>>(
+                                this.Proxy.<%= name %>,
+                                p => (<%= entryType %>)OurContext.AttachAndWrap(p),
+                                ce => (<%= entryProxyType %>)((NHibernatePersistenceObject)ce).NHibernateProxy));
+                    if (<%= name %>_was_eagerLoaded) { <%= name %>_was_eagerLoaded = false; }
+				}
+				return (<%= exposedCollectionInterface %><<%= referencedInterface %>>)<%= backingName %>;
+			}
+		}
+
+		private <%= backingCollectionType %><<%= aSideType %>, <%= bSideType %>, <%= entryType %>, ICollection<<%= entryType %>>> <%= backingName %>;
+
+        // ignored, but required for Serialization
+        private bool <%= name %>_was_eagerLoaded;
+<%
+        AddSerialization(serializationList, name, eagerLoading);
+%>
