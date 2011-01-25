@@ -164,16 +164,16 @@ namespace Kistl.DalProvider.NHibernate
             CheckDisposed();
             DebugTraceChangedObjects();
 
-            var notifySaveList = GetModifiedObjects();
+            var objects = GetModifiedObjects();
+            var notifyList = objects.OfType<IDataObject>().ToList();
 
-            NotifyChanging(notifySaveList);
+            NotifyChanging(notifyList);
 
-            // TODO: refactor this to always talk about NHibernatePersistenceObject
-            FlushSession(_attachedObjects.Cast<NHibernatePersistenceObject>().ToList());
+            FlushSession(objects);
 
-            NotifyChanged(notifySaveList);
+            NotifyChanged(notifyList);
 
-            return notifySaveList.Count;
+            return objects.Count;
         }
 
         public override int SubmitRestore()
@@ -182,8 +182,7 @@ namespace Kistl.DalProvider.NHibernate
 
             var objects = GetModifiedObjects();
 
-            // TODO: refactor this to always talk about NHibernatePersistenceObject
-            FlushSession(_attachedObjects.Cast<NHibernatePersistenceObject>().ToList());
+            FlushSession(objects);
 
             return objects.Count;
         }
@@ -218,11 +217,11 @@ namespace Kistl.DalProvider.NHibernate
             }
         }
 
-        private List<IDataObject> GetModifiedObjects()
+        private List<NHibernatePersistenceObject> GetModifiedObjects()
         {
             return _attachedObjects
                 .Where(obj => obj.ObjectState != DataObjectState.Unmodified)
-                    .OfType<IDataObject>()
+                    .OfType<NHibernatePersistenceObject>()
                     .ToList();
         }
 
