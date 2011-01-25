@@ -85,7 +85,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                     Relation rel = RelationExtensions.Lookup(ctx, orp);
                     if (rel.Storage == StorageType.Separate)
                     {
-                        type = rel.GetRelationFullName() + ImplementationSuffix;
+                        type = rel.GetRelationFullName() + ImplementationSuffix + "." + rel.GetRelationClassName() + "Proxy";
                     }
                     else
                     {
@@ -163,7 +163,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                         Relation rel = RelationExtensions.Lookup(ctx, orp);
                         if (rel.Storage == StorageType.Separate)
                         {
-                            type = rel.GetRelationFullName() + ImplementationSuffix;
+                            type = rel.GetRelationFullName() + ImplementationSuffix + "." + rel.GetRelationClassName() + "Proxy";
                         }
                         else
                         {

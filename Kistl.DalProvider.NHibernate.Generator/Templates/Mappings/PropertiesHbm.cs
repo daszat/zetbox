@@ -53,7 +53,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
                     if (rel.HasStorage(relEnd.GetRole()))
                     {
                         string columnAttr = String.Format("column=\"`{0}`\"", Construct.ForeignKeyColumnName(otherEnd, prefix));
-                        this.WriteObjects("<many-to-one ", nameAttr, " ", columnAttr, " ", classAttr, " unique=\"true\" ");
+                        this.WriteObjects("        <many-to-one ", nameAttr, " ", columnAttr, " ", classAttr, " unique=\"true\" ");
                         if (prop.EagerLoading)
                         {
                             this.WriteObjects("fetch=\"join\" ");
@@ -62,7 +62,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
                     }
                     else
                     {
-                        this.WriteObjects("<one-to-one ", nameAttr, " ", classAttr,
+                        this.WriteObjects("        <one-to-one ", nameAttr, " ", classAttr,
                             " constrained=\"false\" ", // constrained must be false, because else the reference is not optional(!)
                             prop.EagerLoading ? "fetch=\"join\" " : String.Empty,
                             "property-ref=\"" + (otherEnd.Navigator != null ? otherEnd.Navigator.Name : "(no nav)") + "\" />");
@@ -72,7 +72,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
                     if (otherEnd.Multiplicity.UpperBound() > 1) // we are 1-side
                     {
                         // always map as set, the wrapper has to translate/order the elements
-                        this.WriteObjects("<set ", nameAttr, " ");
+                        this.WriteObjects("        <set ", nameAttr, " ");
                         if (prop.EagerLoading)
                         {
                             this.WriteObjects("lazy=\"false\" fetch=\"join\" ");
@@ -88,16 +88,16 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
                         }
                         this.WriteLine(">");
                         string columnAttr = String.Format("column=\"`{0}`\"", Construct.ForeignKeyColumnName(relEnd, prefix));
-                        this.WriteObjects("    <key ", columnAttr, " />");
+                        this.WriteObjects("            <key ", columnAttr, " />");
                         this.WriteLine();
-                        this.WriteObjects("    <one-to-many ", classAttr, " />");
+                        this.WriteObjects("            <one-to-many ", classAttr, " />");
                         this.WriteLine();
-                        this.WriteLine("</set>");
+                        this.WriteLine("        </set>");
                     }
                     else // we are n-side
                     {
                         string columnAttr = String.Format("column=\"`{0}`\"", Construct.ForeignKeyColumnName(otherEnd, prefix));
-                        this.WriteObjects("<many-to-one ", nameAttr, " ", columnAttr, " ", classAttr, " ");
+                        this.WriteObjects("        <many-to-one ", nameAttr, " ", columnAttr, " ", classAttr, " ");
                         if (prop.EagerLoading)
                         {
                             this.WriteObjects("fetch=\"join\" ");
@@ -120,7 +120,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
 
             if (rel.NeedsPositionStorage(relEnd.GetRole()))
             {
-                this.WriteLine("<!-- pos storage missing -->");
+                this.WriteLine("        <!-- pos storage missing -->");
             }
         }
 
@@ -129,19 +129,15 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
             ObjectReferenceProperty prop,
             bool inverse)
         {
-            this.WriteLine("<!-- NMProperty -->");
-            this.WriteLine("<!-- rel={0} -->", rel.GetRelationClassName());
-            this.WriteLine("<!-- relEnd={0} otherEnd={1} -->", relEnd.RoleName, otherEnd.RoleName);
+            this.WriteLine("        <!-- NMProperty -->");
+            this.WriteLine("        <!-- rel={0} -->", rel.GetRelationClassName());
+            this.WriteLine("        <!-- relEnd={0} otherEnd={1} -->", relEnd.RoleName, otherEnd.RoleName);
 
             string nameAttr = String.Format("name=\"{0}\"", prop.Name);
             string tableName = rel.GetRelationTableName();
             string tableAttr = String.Format("table=\"`{0}`\"", tableName);
-            string otherClassAttr = String.Format("class=\"{0}\"",
-                ObjectClassHbm.GetAssemblyQualifiedProxy(otherEnd.Type, this.Settings));
-            string inverseAttr = String.Format("inverse=\"{0}\"", inverse ? "true" : "false");
-            string mappingType = otherEnd.HasPersistentOrder ? "list" : "idbag";
 
-            string relationEntryClassAttr = String.Format("class=\"{0}.{1}{2},Kistl.Objects.NHibernateImpl\"",
+            string relationEntryClassAttr = String.Format("class=\"{0}.{1}{2}+{1}Proxy,Kistl.Objects.NHibernateImpl\"",
                 rel.Module.Namespace,
                 rel.GetRelationClassName(),
                 ImplementationSuffix);
@@ -149,55 +145,29 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
             string fkThisColumnAttr = String.Format("column=\"`{0}`\"", Construct.ForeignKeyColumnName(relEnd));
             string fkOtherColumnAttr = String.Format("column=\"`{0}`\"", Construct.ForeignKeyColumnName(otherEnd));
 
-            this.WriteObjects("<", mappingType, " ", nameAttr, " ", tableAttr, " ", inverseAttr, ">");
-            this.WriteLine();
-
-            if (!otherEnd.HasPersistentOrder)
+            // always map as set, the wrapper has to translate/order the elements
+            this.WriteObjects("        <set ", nameAttr, " ", tableAttr, " ");
+            if (prop.EagerLoading)
             {
-                this.WriteObjects("    <collection-id column=\"`ID`\" type=\"Int32\">");
-                this.WriteLine();
-                DefineIdGenerator(tableName);
-                this.WriteObjects("    </collection-id>");
-                this.WriteLine();
-            }
-
-            this.WriteObjects("    <key ", fkThisColumnAttr, " />");
-            this.WriteLine();
-
-            if (otherEnd.HasPersistentOrder)
-            {
-                this.WriteObjects("    <index column=\"`", Construct.ListPositionColumnName(otherEnd), "`\" />");
-                this.WriteLine();
-            }
-
-
-            if (relEnd.Type.ImplementsIExportable() && otherEnd.Type.ImplementsIExportable())
-            {
-                string propertyNameAttr = String.Format("name=\"{0}\"", otherEnd.GetRole().ToString());
-                this.WriteObjects("    <composite-element ", relationEntryClassAttr, " >");
-                this.WriteLine();
-                this.WriteObjects("        <many-to-one ",
-                    propertyNameAttr, " ",
-                    otherClassAttr, " ",
-                    fkOtherColumnAttr, " />");
-                this.WriteLine();
-                this.WriteObjects("        <property name=\"ExportGuid\" column=\"`ExportGuid`\" type=\"Guid\" />");
-                this.WriteLine();
-                this.WriteObjects("    </composite-element>");
-                this.WriteLine();
+                this.WriteObjects("lazy=\"false\" fetch=\"join\" ");
             }
             else
             {
-                this.WriteObjects("    <many-to-many ", otherClassAttr, " ", fkOtherColumnAttr, " />");
-                this.WriteLine();
+                this.WriteObjects("batch-size=\"100\" ");
             }
-            this.WriteObjects("</", mappingType, ">");
+            this.WriteLine(">");
+
+            this.WriteObjects("            <key ", fkThisColumnAttr, " />");
+            this.WriteLine();
+            this.WriteObjects("            <one-to-many ", relationEntryClassAttr, " />");
+            this.WriteLine();
+            this.WriteObjects("        </set>");
             this.WriteLine();
         }
 
         protected virtual void ApplyValueTypeProperty(string prefix, ValueTypeProperty prop)
         {
-            this.WriteLine("<!-- ValueTypeProperty -->");
+            this.WriteLine("        <!-- ValueTypeProperty -->");
             string nameAttr = String.Format("name=\"{0}\"", prop.Name);
             string tableName = prop.GetCollectionEntryTable();
             string tableAttr = String.Format("table=\"`{0}`\"", tableName);
@@ -206,39 +176,39 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
 
             if (prop.IsList)
             {
-                this.WriteObjects("<", mappingType, " ", nameAttr, " ", tableAttr, ">");
+                this.WriteObjects("        <", mappingType, " ", nameAttr, " ", tableAttr, ">");
                 this.WriteLine();
 
                 if (!prop.HasPersistentOrder)
                 {
-                    this.WriteObjects("    <collection-id column=\"`ID`\" type=\"Int32\">");
+                    this.WriteObjects("            <collection-id column=\"`ID`\" type=\"Int32\">");
                     this.WriteLine();
                     DefineIdGenerator(tableName);
-                    this.WriteObjects("    </collection-id>");
+                    this.WriteObjects("            </collection-id>");
                     this.WriteLine();
                 }
 
-                this.WriteObjects("    <key column=\"`", prop.GetCollectionEntryReverseKeyColumnName(), "`\" />");
+                this.WriteObjects("            <key column=\"`", prop.GetCollectionEntryReverseKeyColumnName(), "`\" />");
                 this.WriteLine();
 
                 if (prop.HasPersistentOrder)
                 {
-                    this.WriteObjects("    <index column=\"`", Construct.ListPositionColumnName(prop), "`\" />");
+                    this.WriteObjects("            <index column=\"`", Construct.ListPositionColumnName(prop), "`\" />");
                     this.WriteLine();
                 }
 
-                this.WriteObjects("    <element column=\"`", prop.Name, "`\" ", typeAttr, " />");
+                this.WriteObjects("            <element column=\"`", prop.Name, "`\" ", typeAttr, " />");
                 this.WriteLine();
-                this.WriteObjects("</", mappingType, ">");
+                this.WriteObjects("        </", mappingType, ">");
                 this.WriteLine();
             }
             else
             {
-                this.WriteObjects("<property ", nameAttr);
+                this.WriteObjects("        <property ", nameAttr);
                 this.WriteLine();
-                this.WriteObjects("          column=\"`", prefix, prop.Name, "`\"");
+                this.WriteObjects("                  column=\"`", prefix, prop.Name, "`\"");
                 this.WriteLine();
-                this.WriteObjects("          ", typeAttr, " />");
+                this.WriteObjects("                  ", typeAttr, " />");
                 this.WriteLine();
             }
         }
@@ -246,17 +216,17 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
         private void DefineIdGenerator(string tableName)
         {
             var sequenceName = tableName + "_ID_seq";
-            this.WriteObjects("        <generator class=\"native\">");
+            this.WriteObjects("                <generator class=\"native\">");
             this.WriteLine();
-            this.WriteObjects("            <param name=\"sequence\">`", sequenceName, "`</param>");
+            this.WriteObjects("                    <param name=\"sequence\">`", sequenceName, "`</param>");
             this.WriteLine();
-            this.WriteObjects("        </generator>");
+            this.WriteObjects("                </generator>");
             this.WriteLine();
         }
 
         protected virtual void ApplyCompoundObjectProperty(string prefix, CompoundObjectProperty prop)
         {
-            this.WriteLine("<!-- CompoundObjectProperty -->");
+            this.WriteLine("        <!-- CompoundObjectProperty -->");
             string nameAttr = String.Format("name=\"{0}\"", prop.Name);
             string tableName = prop.GetCollectionEntryTable();
             string tableAttr = String.Format("table=\"`{0}`\"", tableName);
@@ -275,54 +245,54 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
                     prop.GetCollectionEntryClassName(),
                     ImplementationSuffix);
 
-                this.WriteObjects("<", mappingType, " ", nameAttr, " ", tableAttr, ">");
+                this.WriteObjects("        <", mappingType, " ", nameAttr, " ", tableAttr, ">");
                 this.WriteLine();
 
                 if (!prop.HasPersistentOrder)
                 {
-                    this.WriteObjects("    <collection-id column=\"`ID`\" type=\"Int32\">");
+                    this.WriteObjects("            <collection-id column=\"`ID`\" type=\"Int32\">");
                     this.WriteLine();
                     DefineIdGenerator(tableName);
-                    this.WriteObjects("    </collection-id>");
+                    this.WriteObjects("            </collection-id>");
                     this.WriteLine();
                 }
 
-                this.WriteObjects("    <key column=\"`", prop.GetCollectionEntryReverseKeyColumnName(), "`\" />");
+                this.WriteObjects("            <key column=\"`", prop.GetCollectionEntryReverseKeyColumnName(), "`\" />");
                 this.WriteLine();
 
                 if (prop.HasPersistentOrder)
                 {
-                    this.WriteObjects("    <index column=\"`", Construct.ListPositionColumnName(prop), "`\" />");
+                    this.WriteObjects("            <index column=\"`", Construct.ListPositionColumnName(prop), "`\" />");
                     this.WriteLine();
                 }
 
-                this.WriteObjects("    <composite-element ", ceClassAttr, ">");
+                this.WriteObjects("            <composite-element ", ceClassAttr, ">");
                 this.WriteLine();
-                this.WriteObjects("        <property name=\"ValueIsNull\" ", isNullColumnAttr, " type=\"bool\" />");
+                this.WriteObjects("                <property name=\"ValueIsNull\" ", isNullColumnAttr, " type=\"bool\" />");
                 this.WriteLine();
-                this.WriteObjects("        <nested-composite-element name=\"Value\" ", valueClassAttr, ">");
+                this.WriteObjects("                <nested-composite-element name=\"Value\" ", valueClassAttr, ">");
                 this.WriteLine();
 
                 Call(Host, ctx, prefix + prop.Name + "_", prop.CompoundObjectDefinition.Properties);
 
-                this.WriteObjects("        </nested-composite-element>");
+                this.WriteObjects("                </nested-composite-element>");
                 this.WriteLine();
-                this.WriteObjects("    </composite-element>");
+                this.WriteObjects("            </composite-element>");
                 this.WriteLine();
                 this.WriteObjects("</", mappingType, ">");
                 this.WriteLine();
             }
             else
             {
-                this.WriteObjects("<component ", nameAttr, " ", valueClassAttr, " >");
+                this.WriteObjects("        <component ", nameAttr, " ", valueClassAttr, " >");
                 this.WriteLine();
 
-                this.WriteObjects("    <property name=\"CompoundObject_IsNull\" ", isNullColumnAttr, " type=\"bool\" />");
+                this.WriteObjects("            <property name=\"CompoundObject_IsNull\" ", isNullColumnAttr, " type=\"bool\" />");
                 this.WriteLine();
 
                 Call(Host, ctx, prefix + prop.Name + "_", prop.CompoundObjectDefinition.Properties);
 
-                this.WriteObjects("</component>");
+                this.WriteObjects("        </component>");
                 this.WriteLine();
             }
         }

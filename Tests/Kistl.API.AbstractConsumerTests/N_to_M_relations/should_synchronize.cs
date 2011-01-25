@@ -31,7 +31,8 @@ namespace Kistl.API.AbstractConsumerTests.N_to_M_relations
         [TearDown]
         public void DisposeTestObjects()
         {
-            ctx.Dispose();
+            if (ctx != null)
+                ctx.Dispose();
         }
 
         private void SubmitAndReload()
