@@ -332,27 +332,23 @@ namespace Kistl.DalProvider.Client
                 else
                     base.Visit(m.Arguments[0]);
             }
-            else if (m.IsMethodCallExpression("OfType") || m.IsMethodCallExpression("Cast"))
-            {
-                // OK - just a cast
-                // No special processing needed
-                base.Visit(m.Arguments[0]);
-            }
-            else if (m.IsMethodCallExpression("Union"))
-            {
-                // OK - Union is allowed
-                // No special processing needed
-                base.Visit(m.Arguments[0]);
-            }
-            else if (m.IsMethodCallExpression("Distinct"))
-            {
-                // OK - Distinct is allowed
-                // No special processing needed
-                base.Visit(m.Arguments[0]);
-            }
             else if (m.IsMethodCallExpression("WithEagerLoading", typeof(KistlContextQueryableExtensions)))
             {
                 _eagerLoadLists = true;
+            }
+            else if (m.IsMethodCallExpression(typeof(IQueryable)))
+            {
+                // Lets serialize, server has to ensure security
+                m.Arguments.ForEach(a => base.Visit(a));
+            }
+            else if (m.IsMethodCallExpression(typeof(IEnumerable)))
+            {
+                // Lets serialize, server has to ensure security
+                m.Arguments.ForEach(a => base.Visit(a));
+            }
+            else if (m.IsMethodCallExpression(typeof(string)))
+            {
+                m.Arguments.ForEach(a => base.Visit(a));
             }
             else
             {

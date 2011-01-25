@@ -359,6 +359,14 @@ namespace Kistl.API
                 ((MethodCallExpression)e).Method.DeclaringType == type;
         }
 
+        public static bool IsMethodCallExpression(this Expression e, Type type)
+        {
+            if (e == null) { throw new ArgumentNullException("e"); }
+
+            return e.NodeType == ExpressionType.Call &&
+                ((MethodCallExpression)e).Method.DeclaringType == type;
+        }
+
         public static StringBuilder Trace(this Expression e)
         {
             StringBuilder sb = new StringBuilder();

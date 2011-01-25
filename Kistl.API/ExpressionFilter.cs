@@ -37,7 +37,13 @@ namespace Kistl.API
     /// <summary>
     /// Implements an Expression Filter. This class Ensures that only legal Expression are passed to the Server.
     /// Illegal Expression: Every MethodCall Expression not implemented on System.String
+    /// 
+    /// ** Rethink this!!
+    /// Security should be implemented in querytranslator corretly
+    /// That means, that Aggregations &amp; Co are allowed on the client side
+    /// But that's an topic to discuss
     /// </summary>
+    /// 
     public static class ExpressionFilter
     {
         /// <summary>
@@ -80,11 +86,15 @@ namespace Kistl.API
             {
                 base.VisitMethodCall(m);
 
-                if (m.Method.DeclaringType != typeof(string))
-                {
-                    IsLegal = false;
-                    IllegalExpression.Add(new IllegalExpression() { MethodCall = m.Method.DeclaringType.FullName + "." + m.Method.Name });
-                }
+                // Rethink this
+                // Security should be implemented in querytranslator corretly
+                // That means, that Aggregations & Co are allowed on the client side
+                // But that's an topic to discuss
+                //if (m.Method.DeclaringType != typeof(string))
+                //{
+                //    IsLegal = false;
+                //    IllegalExpression.Add(new IllegalExpression() { MethodCall = m.Method.DeclaringType.FullName + "." + m.Method.Name });
+                //}
             }
         }
     }
