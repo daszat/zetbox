@@ -152,7 +152,7 @@ namespace Kistl.API.Server
         /// <returns>IQueryable</returns>
         public abstract IQueryable<T> GetQuery<T>() where T : class, IDataObject;
 
-        private List<IDataObject> GetAllHack<T>()
+        public List<IDataObject> GetAllHack<T>()
             where T : class, IDataObject
         {
             // The query translator cannot properly handle the IDataObject cast:

@@ -134,7 +134,7 @@ namespace Kistl.API
             return GetPersistenceObjectQuery(_iftFactory(typeof(T))).Cast<T>();
         }
 
-        private List<IDataObject> GetAllHack<T>()
+        public List<IDataObject> GetAllHack<T>()
             where T : class, IDataObject
         {
             // The query translator cannot properly handle the IDataObject cast:
