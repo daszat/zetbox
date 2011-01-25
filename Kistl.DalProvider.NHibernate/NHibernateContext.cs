@@ -263,8 +263,8 @@ namespace Kistl.DalProvider.NHibernate
         {
             CheckDisposed();
             if (obj == null) { throw new ArgumentNullException("obj"); }
-            var nhObj = obj as DataObjectNHibernateImpl;
-            if (nhObj == null) { throw new ArgumentOutOfRangeException("obj", "should be a DataObjectNHibernateImpl, but is a " + obj.GetType()); }
+            var nhObj = obj as NHibernatePersistenceObject;
+            if (nhObj == null) { throw new ArgumentOutOfRangeException("obj", "should be a NHibernatePersistenceObject, but is a " + obj.GetType()); }
 
             nhObj.Delete();
 
