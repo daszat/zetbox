@@ -168,14 +168,14 @@ namespace Kistl.Server.Service
                     }
                     else
                     {
-                        Log.Info("Starging ZBox Services");
+                        Log.Info("Starting ZBox Services");
                         IServiceControlManager scm = null;
                         if(container.TryResolve<IServiceControlManager>(out scm))
                         {
                             scm.Start();
                         }
 
-                        Log.Info("Starging WCF Service");
+                        Log.Info("Starting WCF Service");
                         var wcfServer = container.Resolve<IKistlAppDomain>();
                         wcfServer.Start(config);
 
