@@ -2,6 +2,7 @@
 namespace Kistl.Client.Presentables.KistlBase
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Collections.Specialized;
@@ -15,13 +16,12 @@ namespace Kistl.Client.Presentables.KistlBase
     using Kistl.API.Configuration;
     using Kistl.API.Utils;
     using Kistl.App.Base;
-    using Kistl.App.GUI;
     using Kistl.App.Extensions;
+    using Kistl.App.GUI;
     using Kistl.Client.Models;
     using Kistl.Client.Presentables.FilterViewModels;
     using Kistl.Client.Presentables.ValueViewModels;
     using ObjectEditor = Kistl.Client.Presentables.ObjectEditor;
-    using System.Collections;
 
     public enum InstanceListViewMethod
     {
@@ -750,7 +750,8 @@ namespace Kistl.Client.Presentables.KistlBase
                 var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditor.WorkspaceViewModel.Factory>().Invoke(workingCtx);
                 foreach (var item in objects)
                 {
-                    var newMdl = newWorkspace.ShowForeignModel(item, RequestedEditorKind);
+                    //var newMdl = 
+                    newWorkspace.ShowForeignModel(item, RequestedEditorKind);
                     //ModelCreatedEventHandler temp = ModelCreated;
                     //if (temp != null)
                     //{
