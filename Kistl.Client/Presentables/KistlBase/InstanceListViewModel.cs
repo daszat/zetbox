@@ -279,7 +279,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 }
             }
         }
-        
+
         private bool _ShowRefreshCommand = true;
         public bool ShowRefreshCommand
         {
@@ -371,8 +371,8 @@ namespace Kistl.Client.Presentables.KistlBase
                 if (_OpenCommand == null)
                 {
                     _OpenCommand = ViewModelFactory.CreateViewModel<SimpleItemCommandViewModel<DataObjectViewModel>.Factory>().Invoke(
-                        DataContext, CommonCommandsResources.OpenDataObjectCommand_Name, 
-                        CommonCommandsResources.OpenDataObjectCommand_Tooltip, 
+                        DataContext, CommonCommandsResources.OpenDataObjectCommand_Name,
+                        CommonCommandsResources.OpenDataObjectCommand_Tooltip,
                         OpenObjects);
                     _OpenCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_openHS_png);
                 }
@@ -436,9 +436,9 @@ namespace Kistl.Client.Presentables.KistlBase
                 if (_DeleteCommand == null)
                 {
                     _DeleteCommand = ViewModelFactory.CreateViewModel<SimpleItemCommandViewModel<DataObjectViewModel>.Factory>().Invoke(
-                        DataContext, 
-                        CommonCommandsResources.DeleteDataObjectCommand_Name, 
-                        CommonCommandsResources.DeleteDataObjectCommand_Tooltip, 
+                        DataContext,
+                        CommonCommandsResources.DeleteDataObjectCommand_Name,
+                        CommonCommandsResources.DeleteDataObjectCommand_Tooltip,
                         DeleteObjects);
                 }
                 return _DeleteCommand;
@@ -856,11 +856,21 @@ namespace Kistl.Client.Presentables.KistlBase
             }
         }
 
+        private string _name;
         public override string Name
         {
             get
             {
-                return string.Format(InstanceListViewModelResources.Name, _type.Name);
+                return _name ?? string.Format(InstanceListViewModelResources.Name, _type.Name);
+            }
+        }
+
+        public void SetName(string value)
+        {
+            if (_name != value)
+            {
+                _name = value;
+                OnPropertyChanged("Name");
             }
         }
 

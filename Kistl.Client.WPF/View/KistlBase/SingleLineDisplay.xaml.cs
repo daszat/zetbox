@@ -18,18 +18,19 @@ using Kistl.Client.Presentables;
 namespace Kistl.Client.WPF.View.KistlBase
 {
     /// <summary>
-    /// Interaction logic for DataObjectLineDisplay.xaml
+    /// Interaction logic for SingleLineDisplay.xaml
     /// </summary>
-    public partial class DataObjectLineDisplay : UserControl, IHasViewModel<DataObjectViewModel>
+    [ViewDescriptor(Kistl.App.GUI.Toolkit.WPF)]
+    public partial class SingleLineDisplay : UserControl, IHasViewModel<ViewModel>
     {
-        public DataObjectLineDisplay()
+        public SingleLineDisplay()
         {
             InitializeComponent();
         }
 
-        public DataObjectViewModel ViewModel
+        public ViewModel ViewModel
         {
-            get { return (DataObjectViewModel)DataContext; }
+            get { return (ViewModel)DataContext; }
         }
     }
 }

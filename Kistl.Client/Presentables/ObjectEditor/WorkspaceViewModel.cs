@@ -24,7 +24,13 @@ namespace Kistl.Client.Presentables.ObjectEditor
         {
             dataCtx.IsModifiedChanged += dataCtx_IsModifiedChanged;
             Items = new ObservableCollection<ViewModel>();
+            Items.CollectionChanged += new NotifyCollectionChangedEventHandler(Items_CollectionChanged);
             appCtx.Factory.OnIMultipleInstancesManagerCreated(dataCtx, this);
+        }
+
+        void Items_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            OnPropertyChanged("ShowItemsList");
         }
 
         #region Data
@@ -57,6 +63,23 @@ namespace Kistl.Client.Presentables.ObjectEditor
                 {
                     _selectedItem = value;
                     OnPropertyChanged("SelectedItem");
+                }
+            }
+        }
+
+        private bool? _ShowItemsList;
+        public bool ShowItemsList
+        {
+            get
+            {
+                return _ShowItemsList ?? Items.Count > 1;
+            }
+            set
+            {
+                if (_ShowItemsList != value)
+                {
+                    _ShowItemsList = value;
+                    OnPropertyChanged("ShowItemsList");
                 }
             }
         }
@@ -315,6 +338,16 @@ namespace Kistl.Client.Presentables.ObjectEditor
             vm.RequestedKind = requestedKind;
             AddItem(vm);
             return vm;
+        }
+
+        public void ShowModel(ViewModel mdl)
+        {
+            if (!Items.Contains(mdl))
+            {
+                Items.Add(mdl);
+            }
+            // reestablish selection 
+            SelectedItem = mdl;            
         }
 
         /// <summary>

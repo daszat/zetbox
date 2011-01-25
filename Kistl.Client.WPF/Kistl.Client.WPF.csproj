@@ -202,6 +202,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\KistlBase\SingleLineDisplay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\KistlBase\ObjectReferenceListGridEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -519,6 +523,9 @@
     </Compile>
     <Compile Include="View\KistlBase\CommandLinkDisplay.xaml.cs">
       <DependentUpon>CommandLinkDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\KistlBase\SingleLineDisplay.xaml.cs">
+      <DependentUpon>SingleLineDisplay.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\KistlBase\ObjectReferenceListGridEditor.xaml.cs">
       <DependentUpon>ObjectReferenceListGridEditor.xaml</DependentUpon>

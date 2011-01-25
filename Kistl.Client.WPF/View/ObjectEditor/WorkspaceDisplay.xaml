@@ -4,7 +4,7 @@
                   xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"
                   xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
                   xmlns:commands="clr-namespace:Kistl.Client.WPF.Commands;assembly=Kistl.Client.WPF.Toolkit"
-                  Title="DesktopView"
+                  Title="{Binding Name}"
                   Height="600"
                   Width="800"
                   commands:SmartRoutedUICommand.IsCommandSink="True">
@@ -26,7 +26,7 @@
                         <Setter Property="Header"
                                 Value="{Binding Name}" />
                         <Setter Property="Command"
-                                Value="{Binding OpenApplicationCommand, Converter={StaticResource CommandConverter}}" />
+                                Value="{Binding Converter={StaticResource CommandConverter}}" />
                         <Setter Property="CommandParameter"
                                 Value="{Binding}" />
                     </Style>
