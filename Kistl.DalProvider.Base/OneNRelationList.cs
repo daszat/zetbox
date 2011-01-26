@@ -137,10 +137,7 @@ namespace Kistl.DalProvider.Base
 
         private void SetPointerProperty(T item)
         {
-            if (item.GetPrivateFieldValue<int?>("_fk_" + _propertyName) != _owner.ID)
-            {
-                (item as IDataObject).UpdateParent(_propertyName, _owner.ID);
-            }
+            (item as IDataObject).UpdateParent(_propertyName, _owner.ID);
         }
 
         private void SetPosition(T item, int index)
@@ -154,10 +151,7 @@ namespace Kistl.DalProvider.Base
 
         private void ClearPointerProperty(T item)
         {
-            if (item.GetPrivateFieldValue<int?>("_fk_" + _propertyName) != null)
-            {
-                (item as IDataObject).UpdateParent(_propertyName, null);
-            }
+            (item as IDataObject).UpdateParent(_propertyName, null);
             // TODO: Optimize in Generator
             // Clears the position Property for a 1:n Relation
             // eg. Method 1-n Parameter

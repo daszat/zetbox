@@ -15,22 +15,22 @@ namespace Kistl.API.AbstractConsumerTests.one_to_N_relations
     public abstract class should_synchronize : AbstractTestFixture
     {
         IKistlContext ctx;
-        One_to_N_relations_One proj1;
-        One_to_N_relations_One proj2;
-        One_to_N_relations_N task1;
-        One_to_N_relations_N task2;
+        One_to_N_relations_One oneSide1;
+        One_to_N_relations_One oneSide2;
+        One_to_N_relations_N nSide1;
+        One_to_N_relations_N nSide2;
 
         [SetUp]
         public void InitTestObjects()
         {
             ctx = GetContext();
-            proj1 = ctx.Create<One_to_N_relations_One>();
-            proj2 = ctx.Create<One_to_N_relations_One>();
+            oneSide1 = ctx.Create<One_to_N_relations_One>();
+            oneSide2 = ctx.Create<One_to_N_relations_One>();
             var proj = ctx.Create<One_to_N_relations_One>();
-            task1 = ctx.Create<One_to_N_relations_N>();
-            task1.OneSide = proj;
-            task2 = ctx.Create<One_to_N_relations_N>();
-            task2.OneSide = proj;
+            nSide1 = ctx.Create<One_to_N_relations_N>();
+            nSide1.OneSide = proj;
+            nSide2 = ctx.Create<One_to_N_relations_N>();
+            nSide2.OneSide = proj;
             ctx.SubmitChanges();
         }
 
@@ -43,55 +43,56 @@ namespace Kistl.API.AbstractConsumerTests.one_to_N_relations
         [Test]
         public void init_correct()
         {
-            Assert.That(proj1.NSide, Is.Empty, "new project should not have NSide");
-            Assert.That(proj2.NSide, Is.Empty, "new project should not have NSide");
-            Assert.That(task1.OneSide, Is.Not.SameAs(proj1), "new task should not have project");
-            Assert.That(task1.OneSide, Is.Not.SameAs(proj2), "new task should not have project");
-            Assert.That(task2.OneSide, Is.Not.SameAs(proj1), "new task should not have project");
-            Assert.That(task2.OneSide, Is.Not.SameAs(proj2), "new task should not have project");
+            Assert.That(oneSide1.NSide, Is.Empty, "new project should not have NSide");
+            Assert.That(oneSide2.NSide, Is.Empty, "new project should not have NSide");
+            Assert.That(nSide1.OneSide, Is.Not.SameAs(oneSide1), "new task should not have OneSide");
+            Assert.That(nSide1.OneSide, Is.Not.SameAs(oneSide2), "new task should not have OneSide");
+            Assert.That(nSide2.OneSide, Is.Not.SameAs(oneSide1), "new task should not have OneSide");
+            Assert.That(nSide2.OneSide, Is.Not.SameAs(oneSide2), "new task should not have OneSide");
         }
 
         [Test]
         public void when_setting_1_side()
         {
-            task1.OneSide = proj1;
+            nSide1.OneSide = oneSide1;
 
-            Assert.That(task1.OneSide, Is.SameAs(proj1), "strange reference after setting project");
-            Assert.That(proj1.NSide.ToArray(), Is.EquivalentTo(new[] { task1 }));
+            Assert.That(nSide1.OneSide, Is.SameAs(oneSide1), "strange reference after setting OneSide");
+            Assert.That(oneSide1.NSide.ToArray(), Is.EquivalentTo(new[] { nSide1 }));
 
-            Assert.That(proj1.ObjectState, Is.EqualTo(DataObjectState.Modified));
-            Assert.That(task1.ObjectState, Is.EqualTo(DataObjectState.Modified));
+            Assert.That(oneSide1.ObjectState, Is.EqualTo(DataObjectState.Modified));
+            Assert.That(nSide1.ObjectState, Is.EqualTo(DataObjectState.Modified));
         }
 
         [Test]
         public void when_setting_N_side()
         {
-            proj1.NSide.Add(task1);
+            oneSide1.NSide.Add(nSide1);
 
-            Assert.That(task1.OneSide, Is.SameAs(proj1), "strange reference after setting project");
-            Assert.That(proj1.NSide.ToArray(), Is.EquivalentTo(new[] { task1 }));
+            Assert.That(nSide1.OneSide.ID, Is.EqualTo(oneSide1.ID), "has not set OneSide correctly");
+            Assert.That(nSide1.OneSide, Is.SameAs(oneSide1), "strange reference after setting OneSide");
+            Assert.That(oneSide1.NSide.ToArray(), Is.EquivalentTo(new[] { nSide1 }));
 
-            Assert.That(proj1.ObjectState, Is.EqualTo(DataObjectState.Modified));
-            Assert.That(task1.ObjectState, Is.EqualTo(DataObjectState.Modified));
+            Assert.That(oneSide1.ObjectState, Is.EqualTo(DataObjectState.Modified));
+            Assert.That(nSide1.ObjectState, Is.EqualTo(DataObjectState.Modified));
         }
 
         [Test]
         public void when_resetting_1_side()
         {
-            task1.OneSide = proj1;
+            nSide1.OneSide = oneSide1;
 
-            Assert.That(task1.OneSide, Is.SameAs(proj1), "Setting the first property destroyed the object reference");
-            Assert.That(proj1.NSide, Is.EquivalentTo(new[] { task1 }), "first task list not correct");
+            Assert.That(nSide1.OneSide, Is.SameAs(oneSide1), "Setting the first property destroyed the object reference");
+            Assert.That(oneSide1.NSide, Is.EquivalentTo(new[] { nSide1 }), "first NSide list not correct");
 
-            task1.OneSide = proj2;
+            nSide1.OneSide = oneSide2;
 
-            Assert.That(task1.OneSide, Is.SameAs(proj2), "Setting the second property destroyed the object reference");
-            Assert.That(proj1.NSide, Is.Empty, "first Task list was not cleared");
-            Assert.That(proj2.NSide.ToArray(), Is.EquivalentTo(new[] { task1 }), "second task list not correct");
+            Assert.That(nSide1.OneSide, Is.SameAs(oneSide2), "Setting the second property destroyed the object reference");
+            Assert.That(oneSide1.NSide, Is.Empty, "first NSide list was not cleared");
+            Assert.That(oneSide2.NSide.ToArray(), Is.EquivalentTo(new[] { nSide1 }), "second NSide list not correct");
 
-            Assert.That(proj1.ObjectState, Is.EqualTo(DataObjectState.Modified));
-            Assert.That(proj2.ObjectState, Is.EqualTo(DataObjectState.Modified));
-            Assert.That(task1.ObjectState, Is.EqualTo(DataObjectState.Modified));
+            Assert.That(oneSide1.ObjectState, Is.EqualTo(DataObjectState.Modified));
+            Assert.That(oneSide2.ObjectState, Is.EqualTo(DataObjectState.Modified));
+            Assert.That(nSide1.ObjectState, Is.EqualTo(DataObjectState.Modified));
         }
 
 
@@ -133,53 +134,57 @@ namespace Kistl.API.AbstractConsumerTests.one_to_N_relations
         [Test]
         public void when_setting_N_side_with_remove()
         {
-            Console.WriteLine("proj1.State={0}, task1.State={1}, task2.State={2}", proj1.ObjectState, task1.ObjectState, task2.ObjectState);
-            proj1.NSide.Add(task1);
-            Console.WriteLine("proj1.State={0}, task1.State={1}, task2.State={2}", proj1.ObjectState, task1.ObjectState, task2.ObjectState);
+            Console.WriteLine("oneSide1.State={0}, nSide1.State={1}, nSide2.State={2}", oneSide1.ObjectState, nSide1.ObjectState, nSide2.ObjectState);
+            oneSide1.NSide.Add(nSide1);
+            Console.WriteLine("oneSide1.State={0}, nSide1.State={1}, nSide2.State={2}", oneSide1.ObjectState, nSide1.ObjectState, nSide2.ObjectState);
 
-            Assert.That(task1.OneSide, Is.SameAs(proj1), "first parent: strange reference");
-            Assert.That(proj1.NSide.ToArray(), Is.EquivalentTo(new[] { task1 }), "collection wrong after first Add");
-            Assert.That(proj1.ObjectState, Is.EqualTo(DataObjectState.Modified));
-            Assert.That(task1.ObjectState, Is.EqualTo(DataObjectState.Modified));
-            Assert.That(task2.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
+            Assert.That(nSide1.OneSide, Is.SameAs(oneSide1), "first parent: strange reference");
+            Assert.That(oneSide1.NSide.ToArray(), Is.EquivalentTo(new[] { nSide1 }), "collection wrong after first Add");
+            Assert.That(oneSide1.ObjectState, Is.EqualTo(DataObjectState.Modified));
+            Assert.That(nSide1.ObjectState, Is.EqualTo(DataObjectState.Modified));
+            Assert.That(nSide2.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
 
-            proj1.NSide.Remove(task1);
-            Assert.That(proj1.NSide.ToArray(), Is.Empty, "collection not empty after Remove()");
-            Assert.That(proj1.ObjectState, Is.EqualTo(DataObjectState.Modified));
-            Assert.That(task1.ObjectState, Is.EqualTo(DataObjectState.Modified));
-            Assert.That(task2.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
+            oneSide1.NSide.Remove(nSide1);
 
-            proj1.NSide.Add(task2);
+            Assert.That(nSide1.OneSide, Is.Null, "first parent not reset");
+            Assert.That(oneSide1.NSide.ToArray(), Is.Empty, "collection not empty after Remove()");
+            Assert.That(oneSide1.ObjectState, Is.EqualTo(DataObjectState.Modified));
+            Assert.That(nSide1.ObjectState, Is.EqualTo(DataObjectState.Modified));
+            Assert.That(nSide2.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
 
-            Assert.That(task1.OneSide, Is.Null, "first parent not reset");
-            Assert.That(task2.OneSide, Is.SameAs(proj1), "second parent: strange reference");
-            Assert.That(proj1.NSide.ToArray(), Is.EquivalentTo(new[] { task2 }), "collection wrong after second Add");
+            oneSide1.NSide.Add(nSide2);
 
-            Assert.That(proj1.ObjectState, Is.EqualTo(DataObjectState.Modified));
-            Assert.That(task1.ObjectState, Is.EqualTo(DataObjectState.Modified));
-            Assert.That(task2.ObjectState, Is.EqualTo(DataObjectState.Modified));
+            Assert.That(nSide1.OneSide, Is.Null, "first parent not reset");
+            Assert.That(nSide2.OneSide, Is.SameAs(oneSide1), "second parent: strange reference");
+            Assert.That(oneSide1.NSide.ToArray(), Is.EquivalentTo(new[] { nSide2 }), "collection wrong after second Add");
+
+            Assert.That(oneSide1.ObjectState, Is.EqualTo(DataObjectState.Modified));
+            Assert.That(nSide1.ObjectState, Is.EqualTo(DataObjectState.Modified));
+            Assert.That(nSide2.ObjectState, Is.EqualTo(DataObjectState.Modified));
         }
 
         [Test]
         public void when_setting_N_side_with_clear()
         {
-            proj1.NSide.Add(task1);
+            oneSide1.NSide.Add(nSide1);
 
-            Assert.That(task1.OneSide, Is.SameAs(proj1), "first parent: strange reference");
-            Assert.That(proj1.NSide.ToArray(), Is.EquivalentTo(new[] { task1 }), "collection wrong after first Add");
+            Assert.That(nSide1.OneSide, Is.SameAs(oneSide1), "first parent: strange reference");
+            Assert.That(oneSide1.NSide.ToArray(), Is.EquivalentTo(new[] { nSide1 }), "collection wrong after first Add");
 
-            proj1.NSide.Clear();
-            Assert.That(proj1.NSide.ToArray(), Is.Empty, "collection not empty after Clear()");
+            oneSide1.NSide.Clear();
 
-            proj1.NSide.Add(task2);
+            Assert.That(nSide1.OneSide, Is.Null, "first parent not reset");
+            Assert.That(oneSide1.NSide.ToArray(), Is.Empty, "collection not empty after Clear()");
 
-            Assert.That(task1.OneSide, Is.Null, "first parent not reset");
-            Assert.That(task2.OneSide, Is.SameAs(proj1), "second parent: strange reference");
-            Assert.That(proj1.NSide.ToArray(), Is.EquivalentTo(new[] { task2 }), "collection wrong after second Add");
+            oneSide1.NSide.Add(nSide2);
 
-            Assert.That(proj1.ObjectState, Is.EqualTo(DataObjectState.Modified));
-            Assert.That(task1.ObjectState, Is.EqualTo(DataObjectState.Modified));
-            Assert.That(task2.ObjectState, Is.EqualTo(DataObjectState.Modified));
+            Assert.That(nSide1.OneSide, Is.Null, "first parent not reset");
+            Assert.That(nSide2.OneSide, Is.SameAs(oneSide1), "second parent: strange reference");
+            Assert.That(oneSide1.NSide.ToArray(), Is.EquivalentTo(new[] { nSide2 }), "collection wrong after second Add");
+
+            Assert.That(oneSide1.ObjectState, Is.EqualTo(DataObjectState.Modified));
+            Assert.That(nSide1.ObjectState, Is.EqualTo(DataObjectState.Modified));
+            Assert.That(nSide2.ObjectState, Is.EqualTo(DataObjectState.Modified));
         }
     }
 }

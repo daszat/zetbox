@@ -1,0 +1,39 @@
+﻿<%@ CodeTemplate Language="C#" 
+    Name="ObjectClasses.UpdateParentTemplate"
+    ClassName="Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.UpdateParentTemplate" 
+    Inherits="Kistl.Generator.ResourceTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="System.Diagnostics" %>
+<%@ Import Namespace="System.Linq" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.App.Extensions" %>
+<%@ Import Namespace="Kistl.Generator" %>
+<%@ Import Namespace="Kistl.Generator.Extensions" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="props" Type="List<ObjectReferenceProperty>" %>
+
+<%
+if (props.Count > 0)
+{
+%>
+        public override void UpdateParent(string propertyName, int? id)
+        {
+            switch(propertyName)
+            {
+<%
+    foreach(var prop in props)
+    {
+        ApplyCase(prop);
+    }
+%>
+                default:
+                    base.UpdateParent(propertyName, id);
+                    break;
+            }
+        }
+<%
+}
+%>
