@@ -16,13 +16,13 @@
     </Server>
   <SourceFileLocation>
     <!-- default probe path for CC.net on srv2008 -->
-    <string>f:\CruiseControl.NET\Projects\ZBox-EF\bin\CodeGen\bin\Debug</string>
+    <string>f:\CruiseControl.NET\Projects\ZBox-NH\bin\CodeGen\bin\Debug</string>
     <!-- common libaries for CC.net on srv2008 -->
-    <string>f:\CruiseControl.NET\Projects\ZBox-EF\bin\Debug\bin\Common</string>
+    <string>f:\CruiseControl.NET\Projects\ZBox-NH\bin\Debug\bin\Common</string>
     <!-- Fallback path for CC.net on srv2008 -->
-    <string>f:\CruiseControl.Net\Projects\ZBox-EF\bin\Debug\bin\Server\Fallback</string>
+    <string>f:\CruiseControl.Net\Projects\ZBox-NH\bin\Debug\bin\Server\Fallback</string>
     <!-- All other assemblies -->
-    <string>f:\CruiseControl.Net\Projects\ZBox-EF\bin\Debug\bin\Server</string>
-    <string>f:\CruiseControl.Net\Projects\ZBox-EF\bin\Debug\bin\Client</string>
+    <string>f:\CruiseControl.Net\Projects\ZBox-NH\bin\Debug\bin\Server</string>
+    <string>f:\CruiseControl.Net\Projects\ZBox-NH\bin\Debug\bin\Client</string>
   </SourceFileLocation>
 </KistlConfig>
