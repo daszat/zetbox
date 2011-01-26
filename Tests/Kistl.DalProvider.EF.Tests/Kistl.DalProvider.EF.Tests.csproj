@@ -109,6 +109,8 @@
     <Compile Include="Tests\CompoundObject\when_changing.cs" />
     <Compile Include="Tests\CompoundObject\when_querying.cs" />
     <Compile Include="Tests\CompoundObject\when_roundtrip.cs" />
+    <Compile Include="Tests\one_to_N_relations\should_obey_order.cs" />
+    <Compile Include="Tests\one_to_N_relations\should_synchronize.cs" />
     <Compile Include="Tests\RelationListWrapperTests.cs" />
     <Compile Include="Tests\GenericRelationCollectionWrapperTests.cs" />
     <Compile Include="Tests\EntityListWrapperTests.cs" />
