@@ -512,7 +512,7 @@ namespace Kistl.DalProvider.NHibernate
                 {
                     proxy = (IProxyObject)_nhSession.Load(proxy.ZBoxProxy, proxy.ID);
                 }
-                item = (NHibernatePersistenceObject)Activator.CreateInstance(proxy.ZBoxWrapper, null, proxy);
+                item = (NHibernatePersistenceObject)Activator.CreateInstance(proxy.ZBoxWrapper, lazyCtx, proxy);
                 Attach(item);
             }
             return item;
