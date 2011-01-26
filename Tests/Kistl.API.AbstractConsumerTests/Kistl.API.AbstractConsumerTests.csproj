@@ -87,6 +87,7 @@
     <Compile Include="N_to_M_relations\should_synchronize.cs" />
     <Compile Include="one_to_N_relations\should_obey_order.cs" />
     <Compile Include="one_to_N_relations\should_synchronize.cs" />
+    <Compile Include="PersistenceObjects\when_initializing.cs" />
     <Compile Include="PersistenceObjects\navigator_context_checks.cs" />
     <Compile Include="PersistenceObjects\ObjectLoadFixture.cs" />
     <Compile Include="PersistenceObjects\when_changed.cs" />

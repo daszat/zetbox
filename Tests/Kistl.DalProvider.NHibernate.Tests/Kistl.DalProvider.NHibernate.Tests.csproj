@@ -71,6 +71,7 @@
     <Compile Include="Tests\N_to_M_relations\should_synchronize.cs" />
     <Compile Include="Tests\one_to_N_relations\should_obey_order.cs" />
     <Compile Include="Tests\one_to_N_relations\should_synchronize.cs" />
+    <Compile Include="Tests\PersistenceObjects\when_initializing.cs" />
     <Compile Include="Tests\PersistenceObjects\navigator_context_checks.cs" />
     <Compile Include="Tests\PersistenceObjects\when_changed.cs" />
     <Compile Include="Tests\PersistenceObjects\when_loaded.cs" />

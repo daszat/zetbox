@@ -1,14 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Kistl.API;
-
-using NUnit.Framework;
 
 namespace Kistl.API.AbstractConsumerTests.PersistenceObjects
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    using Kistl.API;
+
+    using NUnit.Framework;
 
     public abstract class when_loaded
         : ObjectLoadFixture
@@ -25,7 +25,5 @@ namespace Kistl.API.AbstractConsumerTests.PersistenceObjects
         {
             Assert.That(obj.IsAttached, Is.True);
         }
-
     }
-
 }

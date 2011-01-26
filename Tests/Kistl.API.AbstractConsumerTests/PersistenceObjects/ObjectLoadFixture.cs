@@ -13,7 +13,6 @@ namespace Kistl.API.AbstractConsumerTests.PersistenceObjects
 
     public abstract class ObjectLoadFixture : AbstractTestFixture
     {
-
         public override void SetUp()
         {
             base.SetUp();
@@ -57,7 +56,5 @@ namespace Kistl.API.AbstractConsumerTests.PersistenceObjects
 
         protected IKistlContext ctx { get; private set; }
         protected TestCustomObject obj { get; private set; }
-
     }
-
 }
