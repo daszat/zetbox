@@ -14,7 +14,15 @@
                     c => {
                         var kistlConfig = c.Resolve<KistlConfig>();
                         var result = new Configuration();
-                        result.Properties["dialect"] = "NHibernate.Dialect.PostgreSQL82Dialect";
+                        switch (kistlConfig.Server.DatabaseProvider)
+                        {
+                            case "MSSQL":
+                                result.Properties["dialect"] = "NHibernate.Dialect.MsSql2005Dialect";
+                                break;
+                            case "POSTGRESQL":
+                                result.Properties["dialect"] = "NHibernate.Dialect.PostgreSQL82Dialect";
+                                break;
+                        }
                         result.Properties["connection.connection_string"] = kistlConfig.Server.ConnectionString;
                         result.Properties["proxyfactory.factory_class"] = "NHibernate.ByteCode.LinFu.ProxyFactoryFactory, NHibernate.ByteCode.LinFu";
 #if DEBUG
