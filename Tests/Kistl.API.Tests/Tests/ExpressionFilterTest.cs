@@ -34,6 +34,7 @@ namespace Kistl.API.Tests
         }
 
         [Test]
+        [Ignore("Illegal Expression checking disabled for now")]
         public void IllegalExpression()
         {
             var list = from o in ctx
