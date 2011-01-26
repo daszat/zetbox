@@ -151,7 +151,7 @@
     <value>Speichert ausstehenden Änderungen an den Daten.</value>
   </data>
   <data name="VerifyContextCommand_Name" xml:space="preserve">
-    <value>Überprüfuen</value>
+    <value>Überprüfen</value>
   </data>
   <data name="VerifyContextCommand_Tootlip" xml:space="preserve">
     <value>Überprüft, ob alle Daten gültig sind.</value>
