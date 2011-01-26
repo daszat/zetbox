@@ -146,7 +146,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
             //string fkOtherColumnAttr = String.Format("column=\"`{0}`\"", Construct.ForeignKeyColumnName(otherEnd));
 
             // always map as set, the wrapper has to translate/order the elements
-            this.WriteObjects("        <set ", nameAttr, " ", tableAttr, "inverse=\"true\" ");
+            this.WriteObjects("        <set ", nameAttr, " ", tableAttr, " inverse=\"true\" ");
             if (prop.EagerLoading)
             {
                 this.WriteObjects("lazy=\"false\" fetch=\"join\" ");
