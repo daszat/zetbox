@@ -37,7 +37,7 @@ this.WriteObjects("                .Register<ISessionFactory>(\r\n");
 this.WriteObjects("                    c => {\r\n");
 this.WriteObjects("                        var kistlConfig = c.Resolve<KistlConfig>();\r\n");
 this.WriteObjects("                        var result = new Configuration();\r\n");
-this.WriteObjects("                        switch (kistlConfig.Server.DatabaseProvider)\r\n");
+this.WriteObjects("                        switch (kistlConfig.Server.SchemaProvider)\r\n");
 this.WriteObjects("                        {\r\n");
 this.WriteObjects("                            case \"MSSQL\":\r\n");
 this.WriteObjects("                                result.Properties[\"dialect\"] = \"NHibernate.Dialect.MsSql2005Dialect\";\r\n");

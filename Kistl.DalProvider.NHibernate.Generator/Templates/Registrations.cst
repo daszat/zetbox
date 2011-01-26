@@ -14,7 +14,7 @@
                     c => {
                         var kistlConfig = c.Resolve<KistlConfig>();
                         var result = new Configuration();
-                        switch (kistlConfig.Server.DatabaseProvider)
+                        switch (kistlConfig.Server.SchemaProvider)
                         {
                             case "MSSQL":
                                 result.Properties["dialect"] = "NHibernate.Dialect.MsSql2005Dialect";
