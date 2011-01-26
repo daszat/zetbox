@@ -12,6 +12,7 @@ namespace Kistl.DalProvider.Client.Tests.one_to_N_relations
 
     using NUnit.Framework;
 
+    [Ignore("No proxy support for these tests")]
     public class should_synchronize
         : Kistl.API.AbstractConsumerTests.one_to_N_relations.should_synchronize
     {

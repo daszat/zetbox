@@ -285,6 +285,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Templates\Properties\ComputeDefaultValue.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ComputeDefaultValue.cst</DependentUpon>
+    </Compile>
     <Compile Include="Templates\Properties\DefaultProperty.cs">
       <DependentUpon>DefaultProperty.cst</DependentUpon>
     </Compile>
@@ -389,8 +394,18 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Templates\Serialization\SimplePropertyWithDefaultSerialization.cs">
+      <DependentUpon>SimplePropertyWithDefaultSerialization.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Serialization\SimplePropertyWithDefaultSerialization.Designer.cs">
+      <DependentUpon>SimplePropertyWithDefaultSerialization.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Templates\Serialization\EnumBinarySerialization.cs" />
-    <Compile Include="Templates\Serialization\SimplePropertySerialization.cs" />
+    <Compile Include="Templates\Serialization\SimplePropertySerialization.cs">
+      <DependentUpon>SimplePropertySerialization.cst</DependentUpon>
+    </Compile>
     <Compile Include="Templates\Serialization\SimplePropertySerialization.Designer.cs">
       <DependentUpon>SimplePropertySerialization.cst</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -602,6 +617,10 @@
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>CompoundObjectSerialization.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Templates\Serialization\SimplePropertyWithDefaultSerialization.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>SimplePropertyWithDefaultSerialization.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Templates\Serialization\SimplePropertySerialization.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>SimplePropertySerialization.Designer.cs</LastGenOutput>
@@ -676,6 +695,12 @@
     <None Include="Templates\ObjectClasses\DefaultMethods.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>DefaultMethods.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Templates\Properties\ComputeDefaultValue.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>ComputeDefaultValue.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,6 +1,6 @@
 ﻿<%@ CodeTemplate Language="C#"
-    Name="Serialization.NotifyingDataPropertyWithDefaultSerialization"
-    ClassName="Kistl.Generator.Templates.Serialization.NotifyingDataPropertyWithDefaultSerialization"
+    Name="Serialization.SimplePropertyWithDefaultSerialization"
+    ClassName="Kistl.Generator.Templates.Serialization.SimplePropertyWithDefaultSerialization"
     Inherits="Kistl.Generator.ResourceTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Collections.Generic" %>
@@ -14,7 +14,8 @@
 <%@ Parameter Name="streamName" Type="string" %>
 <%@ Parameter Name="xmlnamespace" Type="string" %>
 <%@ Parameter Name="xmlname" Type="string" %>
-<%@ Parameter Name="backingStoreName" Type="string" %>
+<%@ Parameter Name="memberType" Type="string" %>
+<%@ Parameter Name="memberName" Type="string" %>
 <%@ Parameter Name="isSetFlagName" Type="string" %>
 <%
     switch(direction)
@@ -23,7 +24,7 @@
 %>
             BinarySerializer.ToStream(this.<%= isSetFlagName %>, <%= streamName %>);
             if (this.<%= isSetFlagName %>) {
-                BinarySerializer.ToStream(this.<%= backingStoreName %>, <%= streamName %>);
+                BinarySerializer.ToStream(this.<%= memberName %>, <%= streamName %>);
             }
 <%
             break;
@@ -31,7 +32,9 @@
 %>
             BinarySerializer.FromStream(out this.<%= isSetFlagName %>, <%= streamName %>);
             if (this.<%= isSetFlagName %>) {
-                BinarySerializer.FromStream(out this.<%= backingStoreName %>, <%= streamName %>);
+                <%= memberType %> tmp;
+                BinarySerializer.FromStream(out tmp, <%= streamName %>);
+                this.<%= memberName %> = tmp;
             }
 <%
             break;
@@ -39,7 +42,7 @@
 %>
             XmlStreamer.ToStream(this.<%= isSetFlagName %>, <%= streamName %>, "Is<%= xmlname %>Set", "<%= xmlnamespace %>");
             if (this.<%= isSetFlagName %>) {
-                XmlStreamer.ToStream(this.<%= backingStoreName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
+                XmlStreamer.ToStream(this.<%= memberName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
             }
 <%
             break;
@@ -47,21 +50,29 @@
 %>
             XmlStreamer.FromStream(ref this.<%= isSetFlagName %>, <%= streamName %>, "Is<%= xmlname %>Set", "<%= xmlnamespace %>");
             if (this.<%= isSetFlagName %>) {
-                XmlStreamer.FromStream(ref this.<%= backingStoreName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
+                // yuck
+                <%= memberType %> tmp = this.<%= memberName %>;
+                XmlStreamer.FromStream(ref tmp, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
+                this.<%= memberName %> = tmp;
             }
 <%
             break;
         case SerializerDirection.Export:
 %>
             System.Diagnostics.Debug.Assert(this.<%= isSetFlagName %>, "Exported objects need to have all default values evaluated");
-            if (modules.Contains("*") || modules.Contains("<%= xmlnamespace %>")) XmlStreamer.ToStream(this.<%= backingStoreName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
+            if (modules.Contains("*") || modules.Contains("<%= xmlnamespace %>")) XmlStreamer.ToStream(this.<%= memberName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
 <%
             break;
         case SerializerDirection.MergeImport:
 %>
             // Import must have default value set
-            XmlStreamer.FromStream(ref this.<%= backingStoreName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
-            this.<%= isSetFlagName %> = true;
+            {
+                // yuck
+                <%= memberType %> tmp = this.<%= memberName %>;
+                XmlStreamer.FromStream(ref tmp, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
+                this.<%= memberName %> = tmp;
+                this.<%= isSetFlagName %> = true;
+            }
 <%
             break;
         default:

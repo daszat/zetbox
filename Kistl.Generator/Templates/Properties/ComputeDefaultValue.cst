@@ -1,0 +1,35 @@
+﻿<%@ CodeTemplate Language="C#"
+    Name="Properties.ComputeDefaultValue"
+    ClassName="Kistl.Generator.Templates.Properties.ComputeDefaultValue"
+    Inherits="Kistl.Generator.MemberTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.App.Extensions" %>
+<%@ Import Namespace="Kistl.Generator" %>
+<%@ Import Namespace="Kistl.Generator.Extensions" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="className" Type="string" %>
+<%@ Parameter Name="propertyName" Type="string" %>
+<%@ Parameter Name="isNullable" Type="bool" %>
+<%@ Parameter Name="isSetFlagName" Type="string" %>
+<%@ Parameter Name="propertyGuid" Type="Guid" %>
+<%@ Parameter Name="backingStoreType" Type="string" %>
+<%@ Parameter Name="backingStoreName" Type="string" %>
+                if (!<%= isSetFlagName %>) {
+                    var __p = FrozenContext.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("<%= propertyGuid %>"));
+                    if (__p != null) {
+                        <%= isSetFlagName %> = true;
+                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
+                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
+<%  if (isNullable) { %>
+                            if (__tmp_value == null)
+                                __result = this.<%= backingStoreName %> = null;
+                            else
+    <% } // Fix indent for next line %>
+                        __result = this.<%= backingStoreName %> = (<%= backingStoreType.TrimEnd('?') %>)__tmp_value;
+                    } else {
+                        Kistl.API.Utils.Logging.Log.Warn("Unable to get default value for property '<%= className %>.<%= propertyName %>'");
+                    }
+                }

@@ -32,6 +32,10 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
 
         protected virtual void ApplyOnGetTemplate()
         {
+            if (hasDefaultValue)
+            {
+                Templates.Properties.ComputeDefaultValue.Call(Host, ctx, className, propertyName, isNullable, isSetFlagName, propertyGuid, backingStoreType, backingStoreName);
+            }
             if (useEvents)
             {
                 this.WriteObjects("                if (", EventName, "_Getter != null)\r\n");
@@ -40,6 +44,16 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
                 this.WriteObjects("                    ", EventName, "_Getter(this, __e);\r\n");
                 this.WriteObjects("                    __result = __e.Result;\r\n");
                 this.WriteObjects("                }\r\n");
+            }
+        }
+
+        protected virtual void ApplyOnAllSetTemplate()
+        {
+            if (hasDefaultValue)
+            {
+                // this has to happen before the value comparison, because we 
+                // need to flag the *intent* of setting this property, even if the value set is == the default value
+                this.WriteObjects("                ", isSetFlagName, " = true;\r\n");
             }
         }
 
@@ -75,8 +89,16 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
         {
             if (list != null)
             {
-                Templates.Serialization.SimplePropertySerialization
-                    .AddToSerializers(list, Templates.Serialization.SerializerType.All, moduleNamespace, propertyName, propertyType, "Proxy." + propertyName);
+                if (hasDefaultValue)
+                {
+                    Templates.Serialization.SimplePropertyWithDefaultSerialization
+                        .AddToSerializers(list, Templates.Serialization.SerializerType.All, moduleNamespace, propertyName, propertyType, "Proxy." + propertyName, isSetFlagName);
+                }
+                else
+                {
+                    Templates.Serialization.SimplePropertySerialization
+                        .AddToSerializers(list, Templates.Serialization.SerializerType.All, moduleNamespace, propertyName, propertyType, "Proxy." + propertyName);
+                }
             }
         }
     }

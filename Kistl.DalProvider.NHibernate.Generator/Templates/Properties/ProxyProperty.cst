@@ -18,6 +18,14 @@
 <%@ Parameter Name="propertyName" Type="string" %>
 <%@ Parameter Name="overrideParent" Type="bool" %>
 <%@ Parameter Name="useEvents" Type="bool" %>
+<%@ Parameter Name="hasDefaultValue" Type="bool" %>
+<%@ Parameter Name="className" Type="string" %>
+<%@ Parameter Name="isNullable" Type="bool" %>
+<%@ Parameter Name="isSetFlagName" Type="string" %>
+<%@ Parameter Name="propertyGuid" Type="Guid" %>
+<%@ Parameter Name="backingStoreType" Type="string" %>
+<%@ Parameter Name="backingStoreName" Type="string" %>
+
         // BEGIN <%= this.GetType() %>
         <%= GetModifiers() %> <%= propertyType %> <%= propertyName %>
         {
@@ -32,7 +40,7 @@
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
-
+<% ApplyOnAllSetTemplate(); %>
                 if (Proxy.<%= propertyName %> != value)
                 {
                     var __oldValue = Proxy.<%= propertyName %>;
@@ -45,5 +53,9 @@
                 }
             }
         }
+<% if (hasDefaultValue) { %>
+
+        private bool <%= isSetFlagName %> = false;
+<% } %>
 <% AddSerialization(serializationList, propertyName, "Proxy." + propertyName); %>
         // END <%= this.GetType() %>

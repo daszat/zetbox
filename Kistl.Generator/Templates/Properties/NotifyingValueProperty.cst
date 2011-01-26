@@ -29,35 +29,25 @@
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = <%= backingName %>;
-<%
-    ApplyOnGetTemplate();
-%>
+<% ApplyOnGetTemplate(); %>
                 return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
-<%
-    ApplyOnAllSetTemplate();
-%>
+<% ApplyOnAllSetTemplate(); %>
                 if (<%= backingName %> != value)
                 {
                     var __oldValue = <%= backingName %>;
                     var __newValue = value;
-<%
-    ApplyPreSetTemplate();
-%>
+<% ApplyPreSetTemplate(); %>
                     NotifyPropertyChanging("<%= name %>", __oldValue, __newValue);
                     <%= backingName %> = __newValue;
                     NotifyPropertyChanged("<%= name %>", __oldValue, __newValue);
-<%
-    ApplyPostSetTemplate();
-%>
+<% ApplyPostSetTemplate(); %>
                 }
             }
         }
 <% ApplyBackingStoreDefinition(); %>
-<%
-    AddSerialization(serializationList, name);
-%>
+<% AddSerialization(serializationList, name); %>
         // END <%= this.GetType() %>

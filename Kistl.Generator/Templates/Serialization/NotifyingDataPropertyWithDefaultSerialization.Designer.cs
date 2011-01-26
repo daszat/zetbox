@@ -84,8 +84,7 @@ this.WriteObjects("            }\r\n");
 break;
         case SerializerDirection.Export:
 
-#line 55 "P:\Kistl\Kistl.Generator\Templates\Serialization\NotifyingDataPropertyWithDefaultSerialization.cst"
-this.WriteObjects("    \r\n");
+#line 56 "P:\Kistl\Kistl.Generator\Templates\Serialization\NotifyingDataPropertyWithDefaultSerialization.cst"
 this.WriteObjects("            System.Diagnostics.Debug.Assert(this.",  isSetFlagName , ", \"Exported objects need to have all default values evaluated\");\r\n");
 this.WriteObjects("            if (modules.Contains(\"*\") || modules.Contains(\"",  xmlnamespace , "\")) XmlStreamer.ToStream(this.",  backingStoreName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
 #line 59 "P:\Kistl\Kistl.Generator\Templates\Serialization\NotifyingDataPropertyWithDefaultSerialization.cst"
@@ -93,9 +92,10 @@ break;
         case SerializerDirection.MergeImport:
 
 #line 62 "P:\Kistl\Kistl.Generator\Templates\Serialization\NotifyingDataPropertyWithDefaultSerialization.cst"
+this.WriteObjects("            // Import must have default value set\r\n");
 this.WriteObjects("            XmlStreamer.FromStream(ref this.",  backingStoreName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
 this.WriteObjects("            this.",  isSetFlagName , " = true;\r\n");
-#line 65 "P:\Kistl\Kistl.Generator\Templates\Serialization\NotifyingDataPropertyWithDefaultSerialization.cst"
+#line 66 "P:\Kistl\Kistl.Generator\Templates\Serialization\NotifyingDataPropertyWithDefaultSerialization.cst"
 break;
         default:
             throw new ArgumentOutOfRangeException("direction");

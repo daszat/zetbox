@@ -223,7 +223,9 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
             Property prop,
             Templates.Serialization.SerializationMembersList serList)
         {
-            Properties.ProxyProperty.Call(Host, ctx, serList, prop.Module.Namespace, prop.ReferencedTypeAsCSharp(), prop.Name, false, true);
+            Properties.ProxyProperty.Call(Host, ctx, 
+                serList, prop.Module.Namespace, prop.ReferencedTypeAsCSharp(), prop.Name, false, true,
+                prop.DefaultValue != null, prop.GetClassName(), prop.IsNullable(), prop.Name + "_IsSet", prop.ExportGuid, prop.ReferencedTypeAsCSharp(), "Proxy." + prop.Name);
         }
 
 

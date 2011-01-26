@@ -58,26 +58,16 @@ namespace Kistl.Generator.Templates.Properties
         {
             base.ApplyOnGetTemplate();
 
-            // TODO: morph to real template
             if (HasDefaultValue)
             {
-                this.WriteObjects("                if (!", IsSetFlagName, ") {\r\n");
-                this.WriteObjects("                    var __p = FrozenContext.FindPersistenceObject<Kistl.App.Base.Property>(new Guid(\"", _prop.ExportGuid, "\"));\r\n");
-                this.WriteObjects("                    if (__p != null) {\r\n");
-                this.WriteObjects("                        ", IsSetFlagName, " = true;\r\n");
-                this.WriteObjects("                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum\r\n");
-                this.WriteObjects("                        object __tmp_value = __p.DefaultValue.GetDefaultValue();\r\n");
-                if (this._prop.IsNullable())
-                {
-                    this.WriteObjects("                        if (__tmp_value == null)\r\n");
-                    this.WriteObjects("                            __result = this.", backingName, " = null;\r\n");
-                    this.WriteObjects("                        else\r\n    "); // Fix indent
-                }
-                this.WriteObjects("                        __result = this.", backingName, " = (", type.TrimEnd('?'), ")__tmp_value;\r\n");
-                this.WriteObjects("                    } else {\r\n");
-                this.WriteObjects("                        Kistl.API.Utils.Logging.Log.Warn(\"Unable to get default value for property '", _prop.ObjectClass.Name, ".", _prop.Name, "'\");\r\n");
-                this.WriteObjects("                    }\r\n");
-                this.WriteObjects("                }\r\n");
+                ComputeDefaultValue.Call(Host, ctx,
+                    _prop.ObjectClass.Name,
+                    _prop.Name,
+                    this._prop.IsNullable(),
+                    IsSetFlagName,
+                    _prop.ExportGuid,
+                    type,
+                    backingName);
             }
             this.WriteObjects("                if (", EventName, "_Getter != null)\r\n");
             this.WriteObjects("                {\r\n");
@@ -93,7 +83,7 @@ namespace Kistl.Generator.Templates.Properties
             if (HasDefaultValue)
             {
                 // this has to happen before the value comparison, because we 
-                // need to flag the *intent* of setting this property
+                // need to flag the *intent* of setting this property, even if the value set is == the default value
                 this.WriteObjects("                ", IsSetFlagName, " = true;\r\n");
             }
         }

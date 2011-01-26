@@ -11,6 +11,7 @@ namespace Kistl.DalProvider.Client.Tests.one_to_N_relations
 
     using NUnit.Framework;
 
+    [Ignore("No proxy support for these tests")]
     public class should_obey_order 
         : Kistl.API.AbstractConsumerTests.one_to_N_relations.should_obey_order
     {
