@@ -1850,12 +1850,15 @@ namespace Kistl.Server.SchemaManagement
         }
         public void DoDeleteObjectClassSecurityRules(ObjectClass objClass)
         {
+            var tblName = db.GetQualifiedTableName(objClass.TableName);
             var tblRightsName = db.GetQualifiedTableName(Construct.SecurityRulesTableName(objClass));
             var rightsViewUnmaterializedName = db.GetQualifiedTableName(Construct.SecurityRulesRightsViewUnmaterializedName(objClass));
             var refreshRightsOnProcedureName = Construct.SecurityRulesRefreshRightsOnProcedureName(objClass);
+            var updateRightsTriggerName = Construct.SecurityRulesUpdateRightsTriggerName(objClass);
 
             Log.InfoFormat("Delete ObjectClass Security Rules: {0}", objClass.Name);
 
+            db.DropTrigger(tblName, updateRightsTriggerName);
             db.DropProcedure(db.GetQualifiedProcedureName(refreshRightsOnProcedureName));
             db.DropView(rightsViewUnmaterializedName);
             db.DropTable(tblRightsName);

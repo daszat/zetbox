@@ -30,6 +30,7 @@ namespace Kistl.Server.SchemaManagement
                     UpdateRelations();
                     UpdateInheritance();
                     UpdateSecurityTables();
+                    UpdateContraints();
 
                     UpdateDeletedRelations();
                     UpdateDeletedTables();
@@ -47,6 +48,47 @@ namespace Kistl.Server.SchemaManagement
                     Log.Debug(String.Empty);
                     Log.Error("An error ocurred while updating the schema", ex);
                     throw;
+                }
+            }
+        }
+
+        private void UpdateContraints()
+        {
+            Log.Info("Updating Constraints");
+            Log.Debug("--------------------");
+
+            foreach (ObjectClass objClass in schema.GetQuery<ObjectClass>().OrderBy(o => o.Module.Namespace).ThenBy(o => o.Name))
+            {
+                Log.DebugFormat("Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.Name);
+
+                UpdateUniqueContraints(objClass);
+                UpdateDeletedUniqueContraints(objClass);
+            }
+            Log.Debug(String.Empty);
+        }
+
+        private void UpdateUniqueContraints(ObjectClass objClass)
+        {
+            foreach (var uc in objClass.Constraints.OfType<UniqueConstraint>())
+            {
+                if (Case.IsNewUniqueConstraint(uc))
+                {
+                    Case.DoNewUniqueConstraint(uc);
+                }
+                else if (Case.IsChangeUniqueConstraint(uc))
+                {
+                    Case.DoChangeUniqueConstraint(uc);
+                }
+            }
+        }
+
+        private void UpdateDeletedUniqueContraints(ObjectClass objClass)
+        {
+            foreach (UniqueConstraint uc in Case.savedSchema.GetQuery<UniqueConstraint>().Where(p => p.Constrained.ExportGuid == objClass.ExportGuid))
+            {
+                if (Case.IsDeleteUniqueConstraint(uc))
+                {
+                    Case.DoDeleteUniqueConstraint(uc);
                 }
             }
         }
@@ -171,38 +213,9 @@ namespace Kistl.Server.SchemaManagement
 
                 UpdateColumns(objClass, objClass.Properties, String.Empty);
                 UpdateDeletedColumns(objClass, String.Empty);
-                UpdateUniqueContraints(objClass);
-                UpdateDeletedUniqueContraints(objClass);
             }
             Log.Debug(String.Empty);
         }
-
-        private void UpdateUniqueContraints(ObjectClass objClass)
-        {
-            foreach (var uc in objClass.Constraints.OfType<UniqueConstraint>())
-            {
-                if (Case.IsNewUniqueConstraint(uc))
-                {
-                    Case.DoNewUniqueConstraint(uc);
-                }
-                else if (Case.IsChangeUniqueConstraint(uc))
-                {
-                    Case.DoChangeUniqueConstraint(uc);
-                }
-            }
-        }
-
-        private void UpdateDeletedUniqueContraints(ObjectClass objClass)
-        {
-            foreach (UniqueConstraint uc in Case.savedSchema.GetQuery<UniqueConstraint>().Where(p => p.Constrained.ExportGuid == objClass.ExportGuid))
-            {
-                if (Case.IsDeleteUniqueConstraint(uc))
-                {
-                    Case.DoDeleteUniqueConstraint(uc);
-                }
-            }
-        }
-
 
         private void UpdateColumns(ObjectClass objClass, ICollection<Property> properties, string prefix)
         {
