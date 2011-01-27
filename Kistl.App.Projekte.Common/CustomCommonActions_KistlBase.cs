@@ -284,7 +284,7 @@ namespace Kistl.App.Base
                 obj.GenericArguments.Count > 0
                     ? "<" + String.Join(", ", obj.GenericArguments.Select(tr => tr.FullName).ToArray()) + ">"
                     : String.Empty,
-                obj.Assembly);
+                    obj.Assembly == null ? "(no assembly)" : obj.Assembly.Name);
         }
 
         public static void OnFullName_PostSetter_TypeRef(Kistl.App.Base.TypeRef obj, PropertyPostSetterEventArgs<System.String> e)
