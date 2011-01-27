@@ -105,7 +105,7 @@
             // TODO: check whether __oldValue is loaded before potentially triggering a DB Call
 %>
                     // remove from old list
-                    (__oldValue.<%= inverseNavigatorName %> as OneNRelationList<<%= ownInterface %>>).RemoveWithoutClearParent(this);
+                    (__oldValue.<%= inverseNavigatorName %> as IRelationListSync<<%= ownInterface %>>).RemoveWithoutClearParent(this);
 <%      } else { %>
                     // unset old reference
                     __oldValue.<%= inverseNavigatorName %> = null;
@@ -116,7 +116,7 @@
                 {
 <%      if (inverseNavigatorIsList) { %>
                     // add to new list
-                    (__newValue.<%= inverseNavigatorName %> as OneNRelationList<<%= ownInterface %>>).AddWithoutSetParent(this);
+                    (__newValue.<%= inverseNavigatorName %> as IRelationListSync<<%= ownInterface %>>).AddWithoutSetParent(this);
 <%      } else { %>
                     // set new reference
                     __newValue.<%= inverseNavigatorName %> = this;

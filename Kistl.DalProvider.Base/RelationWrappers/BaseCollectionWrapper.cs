@@ -18,7 +18,7 @@ namespace Kistl.DalProvider.Base.RelationWrappers
     /// <typeparam name="TEntry">the wrapped CollectionEntry type</typeparam>
     /// <typeparam name="TBaseCollection">the provider's collection type</typeparam>
     public abstract class BaseCollectionWrapper<TA, TB, TParent, TItem, TEntry, TBaseCollection>
-        : ICollection<TItem>, ICollection, IEnumerable
+        : ICollection<TItem>, IRelationListSync<TEntry>, ICollection, IEnumerable
         where TA : class, IDataObject
         where TB : class, IDataObject
         where TParent : class, IDataObject
@@ -184,6 +184,18 @@ namespace Kistl.DalProvider.Base.RelationWrappers
             {
                 return false;
             }
+        }
+
+        #endregion
+
+        #region IRelationListSync<TEntry> Members
+
+        void IRelationListSync<TEntry>.AddWithoutSetParent(TEntry item)
+        {
+        }
+
+        void IRelationListSync<TEntry>.RemoveWithoutClearParent(TEntry item)
+        {
         }
 
         #endregion

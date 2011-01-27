@@ -7,9 +7,9 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
     using System.Text;
     using Kistl.App.Base;
     using Kistl.App.Extensions;
+    using Kistl.Generator;
     using Kistl.Generator.Extensions;
     using Templates = Kistl.Generator.Templates;
-    using Kistl.Generator;
 
     public class Template
         : Templates.ObjectClasses.Template
@@ -223,7 +223,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
             Property prop,
             Templates.Serialization.SerializationMembersList serList)
         {
-            Properties.ProxyProperty.Call(Host, ctx, 
+            Properties.ProxyProperty.Call(Host, ctx,
                 serList, prop.Module.Namespace, prop.ReferencedTypeAsCSharp(), prop.Name, false, true,
                 prop.DefaultValue != null, prop.GetClassName(), prop.IsNullable(), prop.Name + "_IsSet", prop.ExportGuid, prop.ReferencedTypeAsCSharp(), "Proxy." + prop.Name);
         }
@@ -233,10 +233,37 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
         {
             var rel = RelationExtensions.Lookup(ctx, prop);
             var relEnd = rel.GetEnd(prop);
+            var otherEnd = rel.GetOtherEnd(relEnd);
 
             Properties.CollectionEntryListProperty.Call(Host, ctx,
                  this.MembersToSerialize,
                  rel, relEnd.GetRole());
+
+            //string name = prop.Name;
+            //string wrapperName = "_" + name;
+            //string wrapperClass = "OneNRelationList";
+            //string exposedListType = otherEnd.HasPersistentOrder ? "IList" : "ICollection";
+            //string positionPropertyName = rel.NeedsPositionStorage(otherEnd.GetRole()) ? Construct.ListPositionPropertyName(otherEnd) : String.Empty;
+            //string otherName = relEnd.GetRole().ToString();
+            //string referencedInterface = String.Format("{0}.{1}",
+            //    rel.Module.Namespace,
+            //    rel.GetRelationClassName());
+            //string referencedProxy = String.Format("{0}.{1}{2}.{1}Proxy",
+            //    rel.Module.Namespace,
+            //    rel.GetRelationClassName(),
+            //    Kistl.API.Helper.ImplementationSuffix);
+
+            //Properties.ObjectListProperty.Call(Host,
+            //    ctx,
+            //    MembersToSerialize,
+            //    name,
+            //    wrapperName,
+            //    wrapperClass,
+            //    exposedListType,
+            //    positionPropertyName,
+            //    otherName,
+            //    referencedInterface,
+            //    referencedProxy);
         }
 
         protected override void ApplyCompoundObjectListTemplate(CompoundObjectProperty prop)

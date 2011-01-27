@@ -8,7 +8,7 @@ namespace Kistl.API.Client.Tests
     using Kistl.API;
     using Kistl.API.Client.Mocks.OneNLists;
     using Kistl.API.Tests;
-    using Kistl.DalProvider.Base;
+    using Kistl.DalProvider.Base.RelationWrappers;
     using NUnit.Framework;
 
     [TestFixture(0)]

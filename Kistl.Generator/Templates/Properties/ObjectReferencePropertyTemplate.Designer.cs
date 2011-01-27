@@ -179,7 +179,7 @@ if (inverseNavigatorIsList)
 
 #line 129 "P:\Kistl\Kistl.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("                    // remove from old list\r\n");
-this.WriteObjects("                    (__oldValue.",  inverseNavigatorName , " as OneNRelationList<",  ownInterface , ">).RemoveWithoutClearParent(this);\r\n");
+this.WriteObjects("                    (__oldValue.",  inverseNavigatorName , " as IRelationListSync<",  ownInterface , ">).RemoveWithoutClearParent(this);\r\n");
 #line 132 "P:\Kistl\Kistl.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 }
         else
@@ -202,7 +202,7 @@ if (inverseNavigatorIsList)
 
 #line 149 "P:\Kistl\Kistl.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("                    // add to new list\r\n");
-this.WriteObjects("                    (__newValue.",  inverseNavigatorName , " as OneNRelationList<",  ownInterface , ">).AddWithoutSetParent(this);\r\n");
+this.WriteObjects("                    (__newValue.",  inverseNavigatorName , " as IRelationListSync<",  ownInterface , ">).AddWithoutSetParent(this);\r\n");
 #line 152 "P:\Kistl\Kistl.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 }
         else

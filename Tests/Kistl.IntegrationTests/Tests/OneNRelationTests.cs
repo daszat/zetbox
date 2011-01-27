@@ -10,7 +10,7 @@ namespace Kistl.IntegrationTests
     using Kistl.API.Tests;
     using Kistl.App.Base;
     using Kistl.App.GUI;
-    using Kistl.DalProvider.Base;
+    using Kistl.DalProvider.Base.RelationWrappers;
     using NUnit.Framework;
 
     [Ignore("takes way too long")]

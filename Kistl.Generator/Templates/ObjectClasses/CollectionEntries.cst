@@ -23,6 +23,7 @@ using System.Xml.Serialization;
 using System.Linq;
 
 using Kistl.API;
+using Kistl.DalProvider.Base.RelationWrappers;
 <%
     foreach(string ns in GetAdditionalImports().Distinct().OrderBy(s => s))
     {

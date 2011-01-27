@@ -157,7 +157,7 @@ if (inverseNavigatorIsList) {
 
 #line 107 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("                    // remove from old list\r\n");
-this.WriteObjects("                    (__oldValue.",  inverseNavigatorName , " as OneNRelationList<",  ownInterface , ">).RemoveWithoutClearParent(this);\r\n");
+this.WriteObjects("                    (__oldValue.",  inverseNavigatorName , " as IRelationListSync<",  ownInterface , ">).RemoveWithoutClearParent(this);\r\n");
 #line 109 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 } else { 
 #line 110 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
@@ -174,7 +174,7 @@ this.WriteObjects("                {\r\n");
 if (inverseNavigatorIsList) { 
 #line 118 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("                    // add to new list\r\n");
-this.WriteObjects("                    (__newValue.",  inverseNavigatorName , " as OneNRelationList<",  ownInterface , ">).AddWithoutSetParent(this);\r\n");
+this.WriteObjects("                    (__newValue.",  inverseNavigatorName , " as IRelationListSync<",  ownInterface , ">).AddWithoutSetParent(this);\r\n");
 #line 120 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 } else { 
 #line 121 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"

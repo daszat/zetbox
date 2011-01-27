@@ -6,7 +6,7 @@ namespace Kistl.API.Client.Mocks.OneNLists
     using System.ComponentModel;
     using System.Linq;
     using System.Text;
-    using Kistl.DalProvider.Base;
+    using Kistl.DalProvider.Base.RelationWrappers;
 
     class OneSide : IOneSide
     {

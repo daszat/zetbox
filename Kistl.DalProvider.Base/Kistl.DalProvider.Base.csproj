@@ -68,12 +68,13 @@
     <Compile Include="DataObjectBaseImpl.cs" />
     <Compile Include="IBaseActionsManager.cs" />
     <Compile Include="IBaseImplementationTypeChecker.cs" />
-    <Compile Include="OneNRelationList.cs" />
+    <Compile Include="RelationWrappers\OneNRelationList.cs" />
     <Compile Include="PersistenceObjectBaseImpl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyDescriptorBaseImpl.cs" />
     <Compile Include="RelationEntryBaseImpl.cs" />
     <Compile Include="RelationWrappers\CollectionWrapper.cs" />
+    <Compile Include="RelationWrappers\IRelationListSync.cs" />
     <Compile Include="RelationWrappers\ObservableCollectionWrapper.cs" />
     <Compile Include="RelationWrappers\ObservableListWrapper.cs" />
     <Compile Include="RelationWrappers\ListWrapper.cs" />

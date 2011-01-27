@@ -1,5 +1,5 @@
 
-namespace Kistl.DalProvider.Base
+namespace Kistl.DalProvider.Base.RelationWrappers
 {
     using System;
     using System.Collections;
@@ -17,7 +17,7 @@ namespace Kistl.DalProvider.Base
     /// 
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class OneNRelationList<T> : IList<T>, IList, INotifyCollectionChanged
+    public class OneNRelationList<T> : IList<T>, IRelationListSync<T>, IList, INotifyCollectionChanged
         where T : class, INotifyingObject, IDataObject
     {
         private readonly string _propertyName;
@@ -45,6 +45,7 @@ namespace Kistl.DalProvider.Base
             //}
         }
 
+        //void IRelationListSync<T>.AddWithoutSetParent(T item)
         public void AddWithoutSetParent(T item)
         {
             // on ReloadReference, the _posProperty has a valid value
@@ -70,6 +71,7 @@ namespace Kistl.DalProvider.Base
             OnItemAdded(item, collection.Count - 1);
         }
 
+        //void IRelationListSync<T>.RemoveWithoutClearParent(T item)
         public void RemoveWithoutClearParent(T item)
         {
             int index = collection.IndexOf(item);

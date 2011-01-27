@@ -31,6 +31,56 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries
                 null);
         }
 
+        // test copy of base.ApplyObjectReferenceProperty() setting inverseNavigatorIsList = true and the proper ownInterface name
+        // this can be folded into base when all N:M relations use OneNRelationLists
+        protected override void ApplyObjectReferenceProperty(Relation rel, RelationEndRole endRole, string propertyName)
+        {
+            RelationEnd relEnd = rel.GetEndFromRole(endRole);
+            RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
+
+            // TODO: create/use ObjectReference*IMPLEMENTATION* instead (_fk* can already be made available)
+            string moduleNamespace = rel.Module.Namespace;
+            string ownInterface = moduleNamespace + "." + rel.GetRelationClassName() + ImplementationSuffix;
+            string name = propertyName;
+            string implName = propertyName + ImplementationPropertySuffix;
+            string eventName = "On" + name;
+            string fkBackingName = "_fk_" + name;
+            string fkGuidBackingName = "_fk_guid_" + name;
+            string referencedInterface = relEnd.Type.GetDataTypeString();
+            string referencedImplementation = referencedInterface + ImplementationSuffix;
+            string associationName = rel.GetAssociationName();
+            string targetRoleName = otherEnd.RoleName;
+            string positionPropertyName = rel.NeedsPositionStorage(endRole)
+                ? name + Kistl.API.Helper.PositionSuffix
+                : null;
+            string inverseNavigatorName = relEnd.Navigator != null ? relEnd.Navigator.Name : null;
+            bool inverseNavigatorIsList = true;
+            bool eagerLoading = relEnd.Navigator != null && relEnd.Navigator.EagerLoading;
+            bool relDataTypeExportable = rel.A.Type.ImplementsIExportable() && rel.B.Type.ImplementsIExportable();
+            bool callGetterSetterEvents = false;
+
+            Properties.ObjectReferencePropertyTemplate.Call(Host,
+                ctx,
+                MembersToSerialize,
+                moduleNamespace,
+                ownInterface,
+                name,
+                implName,
+                eventName,
+                fkBackingName,
+                fkGuidBackingName,
+                referencedInterface,
+                referencedImplementation,
+                associationName,
+                targetRoleName,
+                positionPropertyName,
+                inverseNavigatorName,
+                inverseNavigatorIsList,
+                eagerLoading,
+                relDataTypeExportable,
+                callGetterSetterEvents);
+        }
+
         protected override void ApplyAIndexPropertyTemplate()
         {
             // delegate interface to actual implementation
