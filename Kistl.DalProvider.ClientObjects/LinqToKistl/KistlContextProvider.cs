@@ -341,6 +341,11 @@ namespace Kistl.DalProvider.Client
                 // Lets serialize, server has to ensure security
                 m.Arguments.ForEach(a => base.Visit(a));
             }
+            else if (m.IsMethodCallExpression(typeof(Queryable)))
+            {
+                // Lets serialize, server has to ensure security
+                m.Arguments.ForEach(a => base.Visit(a));
+            }
             else if (m.IsMethodCallExpression(typeof(IEnumerable)))
             {
                 // Lets serialize, server has to ensure security
