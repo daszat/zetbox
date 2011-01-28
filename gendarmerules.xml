@@ -17,8 +17,11 @@
 		<rules include="*" from="Gendarme.Rules.Exceptions.dll" />
 		<rules include="*" from="Gendarme.Rules.Interoperability.dll"/>
 		<rules include="*" from="Gendarme.Rules.Naming.dll"/>
-		<!-- PreferLiteralOverInitOnlyFieldsRule: const considered harmful (makes the value part of the API) -->
-		<rules include="*" exclude="PreferLiteralOverInitOnlyFieldsRule" from="Gendarme.Rules.Performance.dll" />
+		<!--
+			PreferLiteralOverInitOnlyFieldsRule: const considered harmful (makes the value part of the API) 
+			ReviewLinqMethodRule: Crashes on Kistl.Client.dll
+		-->
+		<rules include="*" exclude="PreferLiteralOverInitOnlyFieldsRule | ReviewLinqMethodRule" from="Gendarme.Rules.Performance.dll" />
 		<rules include="*" from="Gendarme.Rules.Portability.dll" />
 		<rules include="*" from="Gendarme.Rules.Security.dll" />
 		<rules include="*" from="Gendarme.Rules.Security.Cas.dll" />
