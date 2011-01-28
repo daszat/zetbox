@@ -19,7 +19,7 @@
 		<rules include="*" from="Gendarme.Rules.Naming.dll"/>
 		<!--
 			PreferLiteralOverInitOnlyFieldsRule: const considered harmful (makes the value part of the API) 
-			ReviewLinqMethodRule: Crashes on Kistl.Client.dll
+			ReviewLinqMethodRule: Crashes on Kistl.Client.dll (see https://bugzilla.novell.com/show_bug.cgi?id=656790)
 		-->
 		<rules include="*" exclude="PreferLiteralOverInitOnlyFieldsRule | ReviewLinqMethodRule" from="Gendarme.Rules.Performance.dll" />
 		<rules include="*" from="Gendarme.Rules.Portability.dll" />
