@@ -74,6 +74,15 @@
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("<%= name %>", __oldValue, __newValue);
 
+<% if (!String.IsNullOrEmpty(inverseNavigatorName) && inverseNavigatorIsList) { %>
+                if (__oldValue != null) {
+                    __oldValue.NotifyPropertyChanging("<%= inverseNavigatorName %>", null, null);
+                }
+                if (__newValue != null) {
+                    __newValue.NotifyPropertyChanging("<%= inverseNavigatorName %>", null, null);
+                }
+
+<% } %>
 <% if (callGetterSetterEvents) { %>
                 if (<%= eventName %>_PreSetter != null && IsAttached)
                 {
@@ -81,8 +90,8 @@
                     <%= eventName %>_PreSetter(this, e);
                     __newValue = (<%= referencedImplementation %>)e.Result;
                 }
-<% } %>
 
+<% } %>
                 // next, set the local reference
                 if (__newValue == null)
                 {

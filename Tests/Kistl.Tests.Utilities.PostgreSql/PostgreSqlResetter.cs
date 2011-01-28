@@ -39,42 +39,42 @@ namespace Kistl.Tests.Utilities.PostgresSql
 
                 try
                 {
-                    //Log.Info("Restoring Database");
-                    //schemaProvider.Open(config.Server.ConnectionString);
-                    //schemaProvider.DropAllObjects();
+                    Log.Info("Restoring Database");
+                    schemaProvider.Open(config.Server.ConnectionString);
+                    schemaProvider.DropAllObjects();
 
-                    //var cb = new NpgsqlConnectionStringBuilder(config.Server.ConnectionString);
-                    //var srcDB = cb.Database.Substring(0, cb.Database.Length - "_test".Length);
-                    //var destDB = cb.Database;
-                    //var userCmdString = "-U postgres -w";
-                    //// Change /c to /k to debug issues with this command
-                    //// /k will keep the cmd.exe open to inspection
-                    //var args = string.Format("/C pg_dump {0} {1} | psql {0} {2}", userCmdString, srcDB, destDB);
-                    //System.Diagnostics.ProcessStartInfo pi = new System.Diagnostics.ProcessStartInfo("cmd.exe", args);
-                    //pi.UseShellExecute = false;
-                    //var pgSQLBinPath = Environment.GetEnvironmentVariable("PGSQLBinPath");
-                    //if (string.IsNullOrEmpty(pgSQLBinPath))
-                    //{
-                    //    throw new InvalidOperationException("Environment Variable PGSQLBinPath is not set, unable to reset test database");
-                    //}
-                    //else
-                    //{
-                    //    Log.Info("Using binaries from PGSQLBinPath=" + pgSQLBinPath);
-                    //}
-                    //pi.WorkingDirectory = pgSQLBinPath.Trim('\"');
-                    //var p = System.Diagnostics.Process.Start(pi);
-                    //if (!p.WaitForExit(RESET_TIMEOUT * 1000))
-                    //{
-                    //    throw new InvalidOperationException(string.Format("pg_dump did not completed within {0} seconds", RESET_TIMEOUT));
-                    //}
+                    var cb = new NpgsqlConnectionStringBuilder(config.Server.ConnectionString);
+                    var srcDB = cb.Database.Substring(0, cb.Database.Length - "_test".Length);
+                    var destDB = cb.Database;
+                    var userCmdString = "-U postgres -w";
+                    // Change /c to /k to debug issues with this command
+                    // /k will keep the cmd.exe open to inspection
+                    var args = string.Format("/C pg_dump {0} {1} | psql {0} {2}", userCmdString, srcDB, destDB);
+                    System.Diagnostics.ProcessStartInfo pi = new System.Diagnostics.ProcessStartInfo("cmd.exe", args);
+                    pi.UseShellExecute = false;
+                    var pgSQLBinPath = Environment.GetEnvironmentVariable("PGSQLBinPath");
+                    if (string.IsNullOrEmpty(pgSQLBinPath))
+                    {
+                        throw new InvalidOperationException("Environment Variable PGSQLBinPath is not set, unable to reset test database");
+                    }
+                    else
+                    {
+                        Log.Info("Using binaries from PGSQLBinPath=" + pgSQLBinPath);
+                    }
+                    pi.WorkingDirectory = pgSQLBinPath.Trim('\"');
+                    var p = System.Diagnostics.Process.Start(pi);
+                    if (!p.WaitForExit(RESET_TIMEOUT * 1000))
+                    {
+                        throw new InvalidOperationException(string.Format("pg_dump did not completed within {0} seconds", RESET_TIMEOUT));
+                    }
 
-                    //if (p.ExitCode != 0)
-                    //{
-                    //    throw new ApplicationException("Failed to reset database, maybe you need to put your postgres password into AppData\\Roaming\\postgresql\\pgpass.conf");
-                    //}
+                    if (p.ExitCode != 0)
+                    {
+                        throw new ApplicationException("Failed to reset database, maybe you need to put your postgres password into AppData\\Roaming\\postgresql\\pgpass.conf");
+                    }
 
-                    //// After recreating the database, all connection pools should be cleard
-                    //NpgsqlConnection.ClearAllPools();
+                    // After recreating the database, all connection pools should be cleard
+                    NpgsqlConnection.ClearAllPools();
                 }
                 catch (Exception ex)
                 {
