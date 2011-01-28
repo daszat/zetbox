@@ -1098,6 +1098,15 @@ namespace Kistl.API
         {
             return new DateTime(dt.Year, 1, 1);
         }
-
+        public static int GetAge(this DateTime birthday)
+        {           
+            return GetAge(birthday, DateTime.Today);
+        }
+        public static int GetAge(this DateTime birthday, DateTime refDate)
+        {
+            int age = (refDate.Year - birthday.Year);
+            if (birthday > refDate.AddYears(-age)) age--;
+            return age;
+        }
     }
 }
