@@ -31,35 +31,6 @@ namespace Kistl.DalProvider.Ef
         {
         }
 
-        public override DataObjectState ObjectState
-        {
-            get
-            {
-                switch (EntityState)
-                {
-                    case System.Data.EntityState.Added:
-                        return DataObjectState.New;
-                    case System.Data.EntityState.Modified:
-                        return DataObjectState.Modified;
-                    case System.Data.EntityState.Unchanged:
-                        return DataObjectState.Unmodified;
-                    case System.Data.EntityState.Deleted:
-                        return DataObjectState.Deleted;
-                    // special case, might need more thinking
-                    case System.Data.EntityState.Detached:
-                        return DataObjectState.Unmodified;
-                    default:
-                        throw new InvalidOperationException("Invalid Entity Object State: " + EntityState.ToString());
-                }
-            }
-        }
-
-        protected override void SetModified()
-        {
-            // EF will do that for us
-            if (this.Context != null) this.Context.Internals().SetModified(this);
-        }
-
         #region IEntityWithKey Members
         private System.Data.EntityKey _entityKey = null;
         public System.Data.EntityKey EntityKey
@@ -131,12 +102,26 @@ namespace Kistl.DalProvider.Ef
 
         public override void NotifyPropertyChanging(string property, object oldValue, object newValue)
         {
-            NotifyPropertyChanging(property, property, oldValue, newValue);
+            if (property == "ObjectState")
+            {
+                base.NotifyPropertyChanging(property, oldValue, newValue);
+            }
+            else
+            {
+                NotifyPropertyChanging(property, property, oldValue, newValue);
+            }
         }
 
         public override void NotifyPropertyChanged(string property, object oldValue, object newValue)
         {
-            NotifyPropertyChanged(property, property, oldValue, newValue);
+            if (property == "ObjectState")
+            {
+                base.NotifyPropertyChanged(property, oldValue, newValue);
+            }
+            else
+            {
+                NotifyPropertyChanged(property, property, oldValue, newValue);
+            }
         }
 
         /// <summary>
@@ -151,7 +136,7 @@ namespace Kistl.DalProvider.Ef
         public void NotifyPropertyChanged(string property, string efProperty, object oldValue, object newValue)
         {
             base.NotifyPropertyChanged(property, oldValue, newValue);
-            if (_changeTracker != null)
+            if (_changeTracker != null && !String.IsNullOrEmpty(efProperty))
             {
                 _changeTracker.EntityMemberChanged(efProperty);
             }
@@ -169,7 +154,7 @@ namespace Kistl.DalProvider.Ef
         public void NotifyPropertyChanging(string property, string efProperty, object oldValue, object newValue)
         {
             base.NotifyPropertyChanging(property, oldValue, newValue);
-            if (_changeTracker != null)
+            if (_changeTracker != null && !String.IsNullOrEmpty(efProperty))
             {
                 _changeTracker.EntityMemberChanging(efProperty);
             }
@@ -187,32 +172,6 @@ namespace Kistl.DalProvider.Ef
         protected BaseServerCollectionEntry_EntityFramework(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
-        }
-
-        public override DataObjectState ObjectState
-        {
-            get
-            {
-                switch (EntityState)
-                {
-                    case System.Data.EntityState.Added:
-                        return DataObjectState.New;
-                    case System.Data.EntityState.Modified:
-                        return DataObjectState.Modified;
-                    case System.Data.EntityState.Unchanged:
-                        return DataObjectState.Unmodified;
-                    case System.Data.EntityState.Deleted:
-                        return DataObjectState.Deleted;
-                    default:
-                        throw new InvalidOperationException("Invalid Entity Object State: " + EntityState.ToString());
-                }
-            }
-        }
-
-        protected override void SetModified()
-        {
-            // EF will do that for us
-            if (this.Context != null) this.Context.Internals().SetModified(this);
         }
 
         #region IEntityWithKey Members
@@ -290,12 +249,26 @@ namespace Kistl.DalProvider.Ef
 
         public override void NotifyPropertyChanging(string property, object oldValue, object newValue)
         {
-            NotifyPropertyChanging(property, property, oldValue, newValue);
+            if (property == "ObjectState")
+            {
+                base.NotifyPropertyChanging(property, oldValue, newValue);
+            }
+            else
+            {
+                NotifyPropertyChanging(property, property, oldValue, newValue);
+            }
         }
 
         public override void NotifyPropertyChanged(string property, object oldValue, object newValue)
         {
-            NotifyPropertyChanged(property, property, oldValue, newValue);
+            if (property == "ObjectState")
+            {
+                base.NotifyPropertyChanged(property, oldValue, newValue);
+            }
+            else
+            {
+                NotifyPropertyChanged(property, property, oldValue, newValue);
+            }
         }
 
         /// <summary>
@@ -322,7 +295,7 @@ namespace Kistl.DalProvider.Ef
         public void NotifyPropertyChanged(string property, string efProperty, object oldValue, object newValue)
         {
             base.NotifyPropertyChanged(property, oldValue, newValue);
-            if (_changeTracker != null)
+            if (_changeTracker != null && !String.IsNullOrEmpty(efProperty))
             {
                 _changeTracker.EntityMemberChanged(efProperty);
             }
@@ -340,7 +313,7 @@ namespace Kistl.DalProvider.Ef
         public void NotifyPropertyChanging(string property, string efProperty, object oldValue, object newValue)
         {
             base.NotifyPropertyChanging(property, oldValue, newValue);
-            if (_changeTracker != null)
+            if (_changeTracker != null && !String.IsNullOrEmpty(efProperty))
             {
                 _changeTracker.EntityMemberChanging(efProperty);
             }

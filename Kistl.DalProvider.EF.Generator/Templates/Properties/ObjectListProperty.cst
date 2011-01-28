@@ -55,7 +55,11 @@
                 if (<%= wrapperName %> == null)
                 {
                     <%= wrapperName %> = new <%= wrapperClass %><<%= referencedInterface %>, <%= referencedImplementation %>>(
-                            this.Context, <%= efName %><%
+                            this.Context, <%= efName %>,
+                            () => this.NotifyPropertyChanging("<%= name %>", null, null, null),
+                            () => this.NotifyPropertyChanged("<%= name %>", null, null, null),
+                            (item) => item.NotifyPropertyChanging("<%= otherName %>", null, null, null),
+                            (item) => item.NotifyPropertyChanged("<%= otherName %>", null, null, null)<%
     // TODO: improve this!
     if (rel.NeedsPositionStorage(otherEnd.GetRole()))
     {

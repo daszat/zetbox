@@ -45,6 +45,16 @@ namespace Kistl.API
         }
 
         #region Notifications
+        
+        protected void NotifyOwner()
+        {
+            if (parentNotifier != null)
+            {
+                parentNotifier();
+            }
+        }
+
+
         /// <summary>
         /// called before an entry is added to the list
         /// </summary>
@@ -57,10 +67,7 @@ namespace Kistl.API
         /// <param name="entry">the new entry</param>
         protected virtual void OnEntryAdded(TEntry entry)
         {
-            if (parentNotifier != null)
-            {
-                parentNotifier();
-            }
+            NotifyOwner();
         }
 
         /// <summary>
@@ -73,7 +80,11 @@ namespace Kistl.API
         /// called after an entry is removed from the list
         /// </summary>
         /// <param name="entry">the removed entry</param>
-        protected virtual void OnEntryRemoved(TEntry entry) { }
+        protected virtual void OnEntryRemoved(TEntry entry)
+        {
+            NotifyOwner();
+        }
+
         #endregion
 
         protected virtual TEntry CreateEntry()

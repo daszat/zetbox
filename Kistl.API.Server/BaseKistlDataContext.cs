@@ -86,6 +86,10 @@ namespace Kistl.API.Server
         {
             CheckDisposed();
             if (obj == null) { throw new ArgumentNullException("obj"); }
+            if (obj.ObjectState != DataObjectState.Detached && obj.ObjectState != DataObjectState.New)
+            {
+                throw new ArgumentOutOfRangeException("obj", String.Format("Cannot attach object unless it is New or Detached. obj.ObjectState == {0}", obj.ObjectState));
+            }
 
             // Do not only check in IKistlContext.Create for creation rights, also here
             // Object might be created by SerializableType
@@ -303,9 +307,13 @@ namespace Kistl.API.Server
         /// <returns>a newly initialised provider-specific object of the specified type, which is not yet attached</returns>
         protected abstract object CreateUnattachedInstance(InterfaceType ifType);
 
-        private IPersistenceObject CreateInternal(InterfaceType ifType)
+        private IPersistenceObject CreateInternal(InterfaceType ifType, bool isNew)
         {
-            var obj = (IPersistenceObject)CreateUnattachedInstance(ifType);
+            var obj = (BaseServerPersistenceObject)CreateUnattachedInstance(ifType);
+            if (isNew)
+            {
+                obj.SetNew();
+            }
             Attach(obj);
             IsModified = true;
             OnObjectCreated(obj);
@@ -332,7 +340,7 @@ namespace Kistl.API.Server
             {
                 throw new System.Security.SecurityException(string.Format("The current identity has no rights to create an Object of type '{0}'", ifType.Type.FullName));
             }
-            return (IDataObject)CreateInternal(ifType);
+            return (IDataObject)CreateInternal(ifType, true);
         }
 
         /// <summary>
@@ -354,7 +362,8 @@ namespace Kistl.API.Server
         }
 
         /// <inheritdoc />
-        public T CreateUnattached<T>() where T : class, IPersistenceObject
+        public T CreateUnattached<T>()
+            where T : class, IPersistenceObject
         {
             CheckDisposed();
             return (T)CreateUnattachedInstance(iftFactory(typeof(T)));
@@ -368,7 +377,7 @@ namespace Kistl.API.Server
         public virtual IRelationEntry CreateRelationCollectionEntry(InterfaceType ifType)
         {
             CheckDisposed();
-            return (IRelationEntry)CreateInternal(ifType);
+            return (IRelationEntry)CreateInternal(ifType, true);
         }
 
         /// <summary>
@@ -390,7 +399,7 @@ namespace Kistl.API.Server
         public virtual IValueCollectionEntry CreateValueCollectionEntry(InterfaceType ifType)
         {
             CheckDisposed();
-            return (IValueCollectionEntry)CreateInternal(ifType);
+            return (IValueCollectionEntry)CreateInternal(ifType, true);
         }
 
         /// <summary>
@@ -508,7 +517,7 @@ namespace Kistl.API.Server
             if (string.IsNullOrEmpty(mimetype))
                 throw new ArgumentNullException("mimetype");
 
-            var blob = (Kistl.App.Base.Blob)this.CreateInternal(iftFactory(typeof(Kistl.App.Base.Blob)));
+            var blob = (Kistl.App.Base.Blob)this.CreateInternal(iftFactory(typeof(Kistl.App.Base.Blob)), true);
             blob.OriginalName = filename;
             blob.MimeType = mimetype;
             blob.StoragePath = this.Internals().StoreBlobStream(s, filename);

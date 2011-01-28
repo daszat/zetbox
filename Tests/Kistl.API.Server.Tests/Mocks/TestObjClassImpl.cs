@@ -23,16 +23,6 @@ namespace Kistl.API.Server.Mocks
 
         public override int ID { get; set; }
 
-        protected override void SetModified()
-        {
-
-        }
-
-        public override DataObjectState ObjectState
-        {
-            get { return DataObjectState.Unmodified; }
-        }
-
         public int fk_BaseTestObjClass = -1;
         public TestObjClass BaseTestObjClass
         {

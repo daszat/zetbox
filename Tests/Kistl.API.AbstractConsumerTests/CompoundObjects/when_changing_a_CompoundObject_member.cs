@@ -18,46 +18,11 @@ namespace Kistl.API.AbstractConsumerTests.CompoundObjects
         private void TestChangeNotification<TNOTIFIER>(TNOTIFIER notifier, string expectedPropertyName)
             where TNOTIFIER : INotifyPropertyChanging, INotifyPropertyChanged
         {
-            bool hasChanged = false;
-            bool hasChanging = false;
-
-            var changingHandler = new PropertyChangingEventHandler(delegate(object sender, PropertyChangingEventArgs e)
-            {
-                if (e.PropertyName == expectedPropertyName)
-                {
-                    Assert.That(hasChanging, Is.False, "changing event should be only triggered once");
-                    Assert.That(sender, Is.SameAs(notifier), "sender should be the notifying object (OnChanging)");
-                    Assert.That(obj.PhoneNumberOffice.Number, Is.Not.EqualTo(testNumber), "changing event should be triggered before the value has changed");
-                    hasChanging = true;
-                }
-            });
-            var changedHandler = new PropertyChangedEventHandler(delegate(object sender, PropertyChangedEventArgs e)
-            {
-                if (e.PropertyName == expectedPropertyName)
-                {
-                    Assert.That(hasChanged, Is.False, "changed event should be only triggered once");
-                    Assert.That(sender, Is.SameAs(notifier), "sender should be the notifying object (OnChanged)");
-                    Assert.That(obj.PhoneNumberOffice.Number, Is.EqualTo(testNumber), "changed event should be triggered after the value has changed");
-                    hasChanged = true;
-                }
-            });
-
-            Assert.DoesNotThrow(() =>
-            {
-                notifier.PropertyChanging += changingHandler;
-                notifier.PropertyChanged += changedHandler;
-            });
-
-            obj.PhoneNumberOffice.Number = testNumber;
-
-            Assert.That(hasChanging, Is.True, "should be notified about changing");
-            Assert.That(hasChanged, Is.True, "should be notified about change");
-
-            Assert.DoesNotThrow(() =>
-            {
-                notifier.PropertyChanging -= changingHandler;
-                notifier.PropertyChanged -= changedHandler;
-            });
+            TestChangeNotification(notifier, expectedPropertyName,
+                () => { obj.PhoneNumberOffice.Number = testNumber; },
+                () => { Assert.That(obj.PhoneNumberOffice.Number, Is.Not.EqualTo(testNumber), "changing event should be triggered before the value has changed"); },
+                () => { Assert.That(obj.PhoneNumberOffice.Number, Is.EqualTo(testNumber), "changed event should be triggered after the value has changed"); }
+                );
         }
 
         [Test]
@@ -86,6 +51,5 @@ namespace Kistl.API.AbstractConsumerTests.CompoundObjects
                 Assert.That(obj2.PhoneNumberOffice.Number, Is.EqualTo(testNumber), "changes were not written to database");
             }
         }
-
     }
 }

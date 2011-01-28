@@ -31,9 +31,10 @@ namespace Kistl.Generator.Templates.Properties
 
             var rel = RelationExtensions.Lookup(ctx, prop);
             var endRole = rel.GetEnd(prop).GetRole();
-            Call(host, ctx, serializationList,
-                ownInterface, name, referencedInterface, rel, endRole, callGetterSetterEvents, updateInverseNavigator, String.Empty);
+            var assocNameSuffix = String.Empty;
 
+            Call(host, ctx, serializationList,
+                ownInterface, name, referencedInterface, rel, endRole, callGetterSetterEvents, updateInverseNavigator, assocNameSuffix);
         }
 
         public static void Call(Arebis.CodeGeneration.IGenerationHost host,

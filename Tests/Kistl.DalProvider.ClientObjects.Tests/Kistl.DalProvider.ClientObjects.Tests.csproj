@@ -89,11 +89,15 @@
     <Compile Include="Tests\CompoundObjects\when_changing_a_CompoundObject_member.cs" />
     <Compile Include="Tests\CompoundObjects\when_initialized.cs" />
     <Compile Include="Tests\CompoundObjects\when_roundtrip.cs" />
+    <Compile Include="Tests\ContextTests\when_deleting.cs" />
     <Compile Include="Tests\KistlContextTests\KistlContextTests.cs" />
     <Compile Include="Tests\KistlContextTests\when_using_ClientIsolationLevel_MergeServerData.cs" />
     <Compile Include="Tests\NMRelationTests.cs" />
+    <Compile Include="Tests\one_to_N_relations\when_removing_from_NSide_property.cs" />
+    <Compile Include="Tests\one_to_N_relations\when_adding_to_NSide_property.cs" />
     <Compile Include="Tests\one_to_N_relations\should_obey_order.cs" />
     <Compile Include="Tests\one_to_N_relations\should_synchronize.cs" />
+    <Compile Include="Tests\one_to_N_relations\when_setting_OneSide_property.cs" />
     <Compile Include="Tests\PersistenceObjects\when_initializing.cs" />
     <Compile Include="Tests\PersistenceObjects\navigator_context_checks.cs" />
     <Compile Include="Tests\PersistenceObjects\when_changed.cs" />

@@ -23,7 +23,7 @@ namespace Kistl.API.AbstractConsumerTests.CompoundObjects
         }
 
         [Test]
-        public void should_not_be_modified_on_add()
+        public void should_be_modified_on_add()
         {
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
             Assert.That(obj.PhoneNumbersOther, Is.Not.Null);
@@ -36,11 +36,11 @@ namespace Kistl.API.AbstractConsumerTests.CompoundObjects
             obj.PhoneNumbersOther.Add(c);
 
             Assert.That(obj.PhoneNumbersOther.Count, Is.EqualTo(count + 1));
-            Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
+            Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Modified));
         }
 
         [Test]
-        public void should_not_be_modified_on_delete()
+        public void should_be_modified_on_remove()
         {
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
             Assert.That(obj.PhoneNumbersOther, Is.Not.Null);
@@ -51,7 +51,7 @@ namespace Kistl.API.AbstractConsumerTests.CompoundObjects
             obj.PhoneNumbersOther.Remove(c);
 
             Assert.That(obj.PhoneNumbersOther.Count, Is.EqualTo(count - 1));
-            Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
+            Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Modified));
         }
 
         [Test]

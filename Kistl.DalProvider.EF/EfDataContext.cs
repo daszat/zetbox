@@ -267,6 +267,23 @@ namespace Kistl.DalProvider.Ef
 
             NotifyChanged(notifySaveList);
 
+            foreach (var o in AttachedObjects.Cast<BaseServerPersistenceObject>().ToList())
+            {
+                switch (o.ObjectState)
+                {
+                    case DataObjectState.New:
+                    case DataObjectState.Modified:
+                        o.SetUnmodified();
+                        break;
+                    case DataObjectState.Unmodified:
+                        // ignore
+                        break;
+                    default:
+                        Logging.Log.WarnFormat("found [{3}] object after SubmitChanges: {0}#{1}", o.GetType().AssemblyQualifiedName, o.ID, o.ObjectState);
+                        break;
+                }
+            }
+
             return result;
         }
 
@@ -349,10 +366,11 @@ namespace Kistl.DalProvider.Ef
         protected override object CreateUnattachedInstance(InterfaceType ifType)
         {
             var obj = Activator.CreateInstance(ToImplementationType(ifType).Type, lazyCtx);
-            // Set a temporary ID
-            if (obj is BasePersistenceObject)
+            var bpo = obj as BaseServerPersistenceObject;
+            if (bpo != null)
             {
-                ((BasePersistenceObject)obj).ID = --_newIDCounter;
+                // Set a temporary ID
+                bpo.ID = --_newIDCounter;
             }
             return obj;
         }
@@ -366,6 +384,10 @@ namespace Kistl.DalProvider.Ef
         {
             CheckDisposed();
             if (obj == null) { throw new ArgumentNullException("obj"); }
+            if (obj.Context != null && obj.Context != this) { throw new WrongKistlContextException("Ef.Attach"); }
+
+            // already attached?
+            if (obj.Context == this) return obj;
 
             var serverObj = (BaseServerPersistenceObject)obj;
             string entityName = GetEntityName(GetInterfaceType(obj));
@@ -407,6 +429,7 @@ namespace Kistl.DalProvider.Ef
         {
             CheckDisposed();
             _ctx.DeleteObject(obj);
+            ((BaseServerPersistenceObject)obj).SetDeleted();
             base.Delete(obj);
         }
 
@@ -681,7 +704,7 @@ namespace Kistl.DalProvider.Ef
             cmd.Parameters.Add(pIn);
 
             var pOut = cmd.CreateParameter();
-            pOut.ParameterName = "result";
+            pOut.ParameterName = "nullResult";
             pOut.DbType = DbType.Int32;
             pOut.Direction = ParameterDirection.Output;
             cmd.Parameters.Add(pOut);

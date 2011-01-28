@@ -69,19 +69,14 @@
                         r.Value.AttachToContext(this.Context);
                 }
                 __value = r.Value;
-<%
-                if (callGetterSetterEvents)
-                {
-%>
+<% if (callGetterSetterEvents) { %>
                 if (<%= eventName %>_Getter != null)
                 {
                     var e = new PropertyGetterEventArgs<<%= referencedInterface %>>(__value);
                     <%= eventName %>_Getter(this, e);
                     __value = (<%= referencedImplementation %>)e.Result;
                 }
-<%
-                }
-%>
+<% } %>
                 return __value;
             }
             set
@@ -98,35 +93,51 @@
                 {
                     r.Load();
                 }
-                <%= referencedInterface %> __oldValue = (<%= referencedInterface %>)r.Value;
-                <%= referencedInterface %> __newValue = (<%= referencedInterface %>)value;
+                <%= referencedImplementation %> __oldValue = (<%= referencedImplementation %>)r.Value;
+                <%= referencedImplementation %> __newValue = (<%= referencedImplementation %>)value;
 
-<%
-                if (callGetterSetterEvents)
-                {
-%>
+                // Changing Event fires before anything is touched
+                // navigators may not be notified to entity framework
+                NotifyPropertyChanging("<%= name %>", null, __oldValue, __newValue);
+<% if (!String.IsNullOrEmpty(inverseNavigatorName)) { %>
+                if (__oldValue != null) {
+                    __oldValue.NotifyPropertyChanging("<%= inverseNavigatorName %>", null, null, null);
+                }
+                if (__newValue != null) {
+                    __newValue.NotifyPropertyChanging("<%= inverseNavigatorName %>", null, null, null);
+                }
+<% } %>
+
+<% if (callGetterSetterEvents) { %>
                 if (<%= eventName %>_PreSetter != null)
                 {
                     var e = new PropertyPreSetterEventArgs<<%= referencedInterface %>>(__oldValue, __newValue);
                     <%= eventName %>_PreSetter(this, e);
-                    __newValue = e.Result;
+                    __newValue = (<%= referencedImplementation %>)e.Result;
                 }
-<%
-                }
-%>
+
+<% } %>
                 r.Value = (<%= referencedImplementation %>)__newValue;
-<%
-                if (callGetterSetterEvents)
-                {
-%>
+
+<% if (callGetterSetterEvents) { %>
                 if (<%= eventName %>_PostSetter != null)
                 {
                     var e = new PropertyPostSetterEventArgs<<%= referencedInterface %>>(__oldValue, __newValue);
                     <%= eventName %>_PostSetter(this, e);
                 }
-<%
+
+<% } %>
+                // everything is done. fire the Changed event
+                // navigators may not be notified to entity framework
+                NotifyPropertyChanged("<%= name %>", null, __oldValue, __newValue);
+<% if (!String.IsNullOrEmpty(inverseNavigatorName)) { %>
+                if (__oldValue != null) {
+                    __oldValue.NotifyPropertyChanged("<%= inverseNavigatorName %>", null, null, null);
                 }
-%>
+                if (__newValue != null) {
+                    __newValue.NotifyPropertyChanged("<%= inverseNavigatorName %>", null, null, null);
+                }
+<% } %>
             }
         }
 

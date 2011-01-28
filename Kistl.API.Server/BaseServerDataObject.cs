@@ -50,6 +50,69 @@ namespace Kistl.API.Server
 
         public DataObjectState ClientObjectState { get; set; }
 
+        private DataObjectState _ObjectState = DataObjectState.Detached;
+        public override sealed DataObjectState ObjectState
+        {
+            get { return _ObjectState; }
+        }
+
+        private void SetObjectState(DataObjectState newState)
+        {
+            var oldValue = this._ObjectState;
+            NotifyPropertyChanging("ObjectState", oldValue, newState);
+            this._ObjectState = newState;
+            if (this.Context != null && newState.In(DataObjectState.Modified, DataObjectState.Deleted))
+                this.Context.Internals().SetModified(this);
+            NotifyPropertyChanged("ObjectState", oldValue, newState);
+        }
+
+        protected override sealed void SetModified()
+        {
+            if (this.ObjectState == DataObjectState.Unmodified)
+            {
+                SetObjectState(DataObjectState.Modified);
+            }
+        }
+
+        public void SetNew()
+        {
+            if (_ObjectState != DataObjectState.Detached) { throw new InvalidOperationException(String.Format("ObjectState is {0}, but should be Detached", _ObjectState)); }
+            SetObjectState(DataObjectState.New);
+        }
+
+        public void SetUnmodified()
+        {
+            var oldValue = this._ObjectState;
+            SetObjectState(DataObjectState.Unmodified);
+        }
+
+        public void SetDeleted()
+        {
+            var oldValue = this._ObjectState;
+            SetObjectState(DataObjectState.Deleted);
+        }
+
+        public override void AttachToContext(IKistlContext ctx)
+        {
+            // avoid double-attaches
+            if (this.Context != null && this.Context == ctx)
+            {
+                return;
+            }
+            else if (this.Context != null && this.Context != ctx)
+            {
+                throw new WrongKistlContextException("Object cannot be attached to a new Context while attached to another Context.");
+            }
+
+            if (!ObjectState.In(DataObjectState.Detached, DataObjectState.New))
+            {
+                throw new InvalidOperationException(String.Format("Cannot attach object unless it is New or Detached. obj.ObjectState == {0}", ObjectState));
+            }
+
+            SetObjectState(DataObjectState.Unmodified);
+            base.AttachToContext(ctx);
+        }
+
         public override void ToStream(BinaryWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(sw, auxObjects, eagerLoadLists);

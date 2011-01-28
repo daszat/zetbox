@@ -37,6 +37,11 @@ namespace Kistl.API
         /// unpacked from the incoming stream yet.
         /// </summary>
         NotDeserialized,
+
+        /// <summary>
+        /// The instance is not yet attached to a context.
+        /// </summary>
+        Detached,
     }
 
     /// <summary>

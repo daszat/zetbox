@@ -95,9 +95,9 @@
       <Project>{1BF9C9A2-9A22-4C22-AFE8-DDB711CC1EEB}</Project>
       <Name>Kistl.DalProvider.ClientObjects.Tests</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Kistl.DalProvider.EF.Tests\Kistl.DalProvider.EF.Tests.csproj">
+    <ProjectReference Include="..\Kistl.DalProvider.EF.Tests\Kistl.DalProvider.Ef.Tests.csproj">
       <Project>{980874F0-D9C1-4EDB-8143-AD51C1E2666F}</Project>
-      <Name>Kistl.DalProvider.EF.Tests</Name>
+      <Name>Kistl.DalProvider.Ef.Tests</Name>
     </ProjectReference>
     <ProjectReference Include="..\Kistl.DalProvider.Memory.Tests\Kistl.DalProvider.Memory.Tests.csproj">
       <Project>{CF5E170F-DC31-4AAE-AFFC-8BECA0B366EF}</Project>

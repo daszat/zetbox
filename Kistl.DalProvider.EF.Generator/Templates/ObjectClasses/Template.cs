@@ -95,7 +95,7 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.ObjectClasses
                 Host,
                 ctx,
                 this.MembersToSerialize,
-                prop, true, false);
+                prop, true, true);
         }
 
         protected override void ApplyObjectReferenceListTemplate(ObjectReferenceProperty prop)

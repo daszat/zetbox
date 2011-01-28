@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("API.Server.Tests")]
+[assembly: AssemblyTitle("Kistl.DalProvider.Ef.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("dasz.at OG")]
-[assembly: AssemblyProduct("API.Server.Tests")]
-[assembly: AssemblyCopyright("Copyright © dasz.at OG 2007-2009")]
+[assembly: AssemblyProduct("Kistl.DalProvider.Ef.Tests")]
+[assembly: AssemblyCopyright("Copyright © dasz.at OG 2007-2011")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

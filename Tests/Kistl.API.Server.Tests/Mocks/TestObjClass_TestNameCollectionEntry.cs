@@ -45,17 +45,6 @@ namespace Kistl.API.Server.Mocks
 
         public override int ID { get; set; }
 
-        protected override void SetModified()
-        {
-
-        }
-
-        public override DataObjectState ObjectState
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-
         public override bool IsAttached { get { return _IsAttached; } }
         private bool _IsAttached = false;
 

@@ -29,10 +29,11 @@ namespace Kistl.API.AbstractConsumerTests.N_to_M_relations
         }
 
         [TearDown]
-        public void DisposeTestObjects()
+        public void ForgetTestObjects()
         {
-            if (ctx != null)
-                ctx.Dispose();
+            aSide1 = aSide2 = null;
+            bSide1 = bSide2 = null;
+            ctx = null;
         }
 
         private void SubmitAndReload()
@@ -228,6 +229,19 @@ namespace Kistl.API.AbstractConsumerTests.N_to_M_relations
             Assert.That(aSide1.BSide, Is.EquivalentTo(new[] { bSide1, bSide2, bSide1, bSide2 }));
             Assert.That(aSide2.BSide, Is.EquivalentTo(new[] { bSide1, bSide2, bSide1, bSide2 }));
             Assert.That(ctx.AttachedObjects.Count(), Is.EqualTo(12));
+        }
+
+        [Test]
+        public void when_deleting_items()
+        {
+            aSide1.BSide.Add(bSide1);
+            SubmitAndReload();
+
+            aSide1.BSide.Clear();
+
+            ctx.Delete(aSide1);
+            ctx.Delete(bSide1);
+            ctx.SubmitChanges();
         }
     }
 }

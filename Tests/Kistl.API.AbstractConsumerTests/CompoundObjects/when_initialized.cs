@@ -22,10 +22,11 @@ namespace Kistl.API.AbstractConsumerTests.CompoundObjects
             newObj = newCtx.Create<TestCustomObject>();
         }
 
-        public override void DisposeContext()
+        public override void ForgetContext()
         {
-            base.DisposeContext();
-            newCtx.Dispose();
+            base.ForgetContext();
+            newCtx = null;
+            newObj = null;
         }
 
         [Test]

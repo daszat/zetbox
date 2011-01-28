@@ -155,7 +155,7 @@ namespace Kistl.API.AbstractConsumerTests.CompoundObjects
             obj.PhoneNumbersOther.Add(c);
 
             Assert.That(obj.PhoneNumbersOther.Count, Is.EqualTo(count + 1));
-            Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
+            Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Modified));
 
             Assert.That(ctx.SubmitChanges(), Is.GreaterThan(0));
 
@@ -182,7 +182,7 @@ namespace Kistl.API.AbstractConsumerTests.CompoundObjects
             obj.PhoneNumbersOther.Remove(c);
 
             Assert.That(obj.PhoneNumbersOther.Count, Is.EqualTo(count - 1));
-            Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
+            Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Modified));
 
             Assert.That(ctx.SubmitChanges(), Is.GreaterThan(0));
 

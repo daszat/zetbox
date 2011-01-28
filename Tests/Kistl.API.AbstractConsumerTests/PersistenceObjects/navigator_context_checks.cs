@@ -25,6 +25,7 @@ namespace Kistl.API.AbstractConsumerTests.PersistenceObjects
         public void set_1_N_wrong_context()
         {
             var otherCtx = GetContext();
+            Assert.That(ctx, Is.Not.SameAs(otherCtx));
             var a = ctx.Create<TestCustomObject>();
             var b = otherCtx.Create<Muhblah>();
             a.MubBlah_Nav = b;
@@ -43,6 +44,7 @@ namespace Kistl.API.AbstractConsumerTests.PersistenceObjects
         public void set_N_1_wrong_context()
         {
             var otherCtx = GetContext();
+            Assert.That(ctx, Is.Not.SameAs(otherCtx));
             var a = ctx.Create<TestCustomObject>();
             var b = otherCtx.Create<Muhblah>();
             b.TestCustomObjects_List_Nav.Add(a);
@@ -61,6 +63,7 @@ namespace Kistl.API.AbstractConsumerTests.PersistenceObjects
         public void set_N_M_wrong_context()
         {
             var otherCtx = GetContext();
+            Assert.That(ctx, Is.Not.SameAs(otherCtx));
             var a = ctx.Create<TestCustomObject>();
             var b = otherCtx.Create<Muhblah>();
             b.TestCustomObjects_ManyList_Nav.Add(a);
@@ -79,6 +82,7 @@ namespace Kistl.API.AbstractConsumerTests.PersistenceObjects
         public void set_1_1_wrong_context()
         {
             var otherCtx = GetContext();
+            Assert.That(ctx, Is.Not.SameAs(otherCtx));
             var a = ctx.Create<TestCustomObject>();
             var b = otherCtx.Create<Muhblah>();
             a.MuhBlah_One_Nav = b;

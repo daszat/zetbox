@@ -119,6 +119,7 @@ M: System.Void Kistl.DalProvider.Ef.EntityCollectionWrapper`2::Add(TInterface)
 M: System.Boolean Kistl.DalProvider.Ef.EntityCollectionWrapper`2::Contains(TInterface)
 M: System.Boolean Kistl.DalProvider.Ef.EntityCollectionWrapper`2::Remove(TInterface)
 M: System.Void Kistl.DalProvider.Ef.EntityCollectionWrapper`2::CopyTo(System.Array,System.Int32)
+M: System.Void Kistl.DalProvider.Ef.EntityListWrapper`2::Insert(System.Int32,TInterface)
 M: System.Void Kistl.Client.Presentables.ModuleEditor.WorkspaceViewModel::.ctor(Kistl.Client.Presentables.IViewModelDependencies,Kistl.API.IKistlContext,System.Func`2<Kistl.API.Client.ClientIsolationLevel,Kistl.API.IKistlContext>)
 
 R: Gendarme.Rules.Portability.DoNotHardcodePathsRule

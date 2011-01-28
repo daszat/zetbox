@@ -12,11 +12,13 @@ namespace Kistl.API.AbstractConsumerTests.one_to_N_relations
 
     using NUnit.Framework;
 
-    public abstract class should_synchronize : AbstractTestFixture
+    public abstract class should_synchronize
+        : AbstractTestFixture
     {
         IKistlContext ctx;
         One_to_N_relations_One oneSide1;
         One_to_N_relations_One oneSide2;
+        One_to_N_relations_One oneSide3;
         One_to_N_relations_N nSide1;
         One_to_N_relations_N nSide2;
 
@@ -26,29 +28,37 @@ namespace Kistl.API.AbstractConsumerTests.one_to_N_relations
             ctx = GetContext();
             oneSide1 = ctx.Create<One_to_N_relations_One>();
             oneSide2 = ctx.Create<One_to_N_relations_One>();
-            var proj = ctx.Create<One_to_N_relations_One>();
+            oneSide3 = ctx.Create<One_to_N_relations_One>();
             nSide1 = ctx.Create<One_to_N_relations_N>();
-            nSide1.OneSide = proj;
+            nSide1.OneSide = oneSide3;
             nSide2 = ctx.Create<One_to_N_relations_N>();
-            nSide2.OneSide = proj;
+            nSide2.OneSide = oneSide3;
             ctx.SubmitChanges();
+            ctx = GetContext();
+            oneSide1 = ctx.Find<One_to_N_relations_One>(oneSide1.ID);
+            oneSide2 = ctx.Find<One_to_N_relations_One>(oneSide2.ID);
+            oneSide3 = ctx.Find<One_to_N_relations_One>(oneSide3.ID);
+            nSide1 = ctx.Find<One_to_N_relations_N>(nSide1.ID);
+            nSide2 = ctx.Find<One_to_N_relations_N>(nSide2.ID);
         }
 
         [TearDown]
         public void DisposeTestObjects()
         {
-            ctx.Dispose();
+            ctx = null;
+            oneSide1 = oneSide2 = oneSide3 = null;
+            nSide1 = nSide2 = null;
         }
 
         [Test]
         public void init_correct()
         {
-            Assert.That(oneSide1.NSide, Is.Empty, "new project should not have NSide");
-            Assert.That(oneSide2.NSide, Is.Empty, "new project should not have NSide");
-            Assert.That(nSide1.OneSide, Is.Not.SameAs(oneSide1), "new task should not have OneSide");
-            Assert.That(nSide1.OneSide, Is.Not.SameAs(oneSide2), "new task should not have OneSide");
-            Assert.That(nSide2.OneSide, Is.Not.SameAs(oneSide1), "new task should not have OneSide");
-            Assert.That(nSide2.OneSide, Is.Not.SameAs(oneSide2), "new task should not have OneSide");
+            Assert.That(oneSide1.NSide, Is.Empty, "new OneSide should not have NSide");
+            Assert.That(oneSide2.NSide, Is.Empty, "new OneSide should not have NSide");
+            Assert.That(nSide1.OneSide, Is.Not.SameAs(oneSide1), "new NSide should not have OneSide");
+            Assert.That(nSide1.OneSide, Is.Not.SameAs(oneSide2), "new NSide should not have OneSide");
+            Assert.That(nSide2.OneSide, Is.Not.SameAs(oneSide1), "new NSide should not have OneSide");
+            Assert.That(nSide2.OneSide, Is.Not.SameAs(oneSide2), "new NSide should not have OneSide");
         }
 
         [Test]

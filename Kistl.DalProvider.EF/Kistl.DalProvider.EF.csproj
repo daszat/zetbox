@@ -93,7 +93,7 @@
     <Compile Include="ValueCollectionEntryEfImpl.cs" />
     <Compile Include="EfProvider.cs" />
     <Compile Include="EfSerializer.cs" />
-    <Compile Include="EFValueCollectionWrapper.cs" />
+    <Compile Include="EfValueCollectionWrapper.cs" />
     <Compile Include="EntityCollectionWrapper.cs" />
     <Compile Include="EfDataContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

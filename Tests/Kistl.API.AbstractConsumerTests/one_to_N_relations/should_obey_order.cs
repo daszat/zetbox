@@ -29,8 +29,8 @@ namespace Kistl.API.AbstractConsumerTests.one_to_N_relations
                 var method = ctx.GetQuery<Method>().ToList().Where(m => m.Module.Name == "Projekte")
                     .OrderByDescending(m => m.Parameter.Count).First();
 
-                // needs more than one Parameter to test ordering
-                Assume.That(method.Parameter.Count, Is.GreaterThan(1));
+                Assert.That(method.Parameter.Count, Is.GreaterThan(1), "Test data failure: needs more than one Parameter to test ordering");
+                Assert.That(method.ObjectState, Is.EqualTo(DataObjectState.Unmodified), "Test data failure: method should be unmodified at start of test");
 
                 methodID = method.ID;
 

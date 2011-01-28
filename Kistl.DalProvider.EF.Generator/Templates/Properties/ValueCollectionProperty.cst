@@ -26,7 +26,7 @@
 	// the name of the private backing store for the conversion wrapper list
 	string wrapperName = "_" + name;
 	// the name of the wrapper class for wrapping the EntityCollection
-	string wrapperClass = (hasPersistentOrder ? "EFValueListWrapper" : "EFValueCollectionWrapper");
+	string wrapperClass = (hasPersistentOrder ? "EfValueListWrapper" : "EfValueCollectionWrapper");
 	
 	// the name of the EF association
 	string assocName = prop.GetAssociationName();
@@ -58,7 +58,7 @@
                     <%= wrapperName %> = new <%= wrapperClass %><<%= thisInterface %>, <%= referencedType %>, <%= referencedCollectionEntry %>, EntityCollection<<%= referencedCollectionEntry %>>>(
 						this.Context,
                         this,
-              			// () => this.NotifyPropertyChanged("<%= name %>", "<%= efName %>", null, null),
+              			() => this.NotifyPropertyChanged("<%= name %>", null, null, null),
           	            <%= efName %>);
                 }
                 return <%= wrapperName %>;

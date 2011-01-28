@@ -18,20 +18,43 @@ namespace Kistl.DalProvider.Ef
         where TInterface : class, IDataObject
         where TImpl : class, IEntityWithRelationships, TInterface, IDataObject
     {
-        protected EntityCollection<TImpl> underlyingCollection;
-        protected IKistlContext ctx;
+        protected readonly EntityCollection<TImpl> underlyingCollection;
+        protected readonly IKistlContext ctx;
+        private readonly Action _changingNotifier;
+        private readonly Action _changedNotifier;
+
+        private readonly Action<TImpl> _itemChangingNotifier;
+        private readonly Action<TImpl> _itemChangedNotifier;
+
+        public EntityCollectionWrapper(IKistlContext ctx, EntityCollection<TImpl> ec, Action changingNotifier, Action changedNotifier)
+            : this(ctx, ec, changingNotifier, changedNotifier, null, null)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the EntityCollectionWrapper class using the specified context and <see cref="EntityCollection{TImpl}"/>
         /// </summary>
         /// <param name="ctx">the parent data context (optional)</param>
         /// <param name="ec">the <see cref="EntityCollection{TImpl}"/> that should be wrapped</param>
-        public EntityCollectionWrapper(IKistlContext ctx, EntityCollection<TImpl> ec)
+        /// <param name="changingNotifier">an action called to notify the owner of this collection before a change happens</param>
+        /// <param name="changedNotifier">an action called to notify the owner of this collection after a change has happened</param>
+        /// <param name="itemChangingNotifier">an action called to notify the modified item before a change happens</param>
+        /// <param name="itemChangedNotifier">an action called to notify the modified item after a change has happened</param>
+        public EntityCollectionWrapper(IKistlContext ctx, EntityCollection<TImpl> ec, Action changingNotifier, Action changedNotifier, Action<TImpl> itemChangingNotifier, Action<TImpl> itemChangedNotifier)
         {
+            // TODO: when can the ctx be legally null? 
+            // if (ctx == null) { throw new ArgumentNullException("ctx"); }
+
             if (ec == null) { throw new ArgumentNullException("ec"); }
 
             this.ctx = ctx;
             underlyingCollection = ec;
+            _changingNotifier = changingNotifier;
+            _changedNotifier = changedNotifier;
+            _itemChangingNotifier = itemChangingNotifier;
+            _itemChangedNotifier = itemChangedNotifier;
+
+            // TODO: remove "if", see above
             if (ctx != null)
             {
                 foreach (IPersistenceObject obj in underlyingCollection)
@@ -39,6 +62,30 @@ namespace Kistl.DalProvider.Ef
                     obj.AttachToContext(ctx);
                 }
             }
+        }
+
+        protected void NotifyOwnerChanging()
+        {
+            if (_changingNotifier != null)
+                _changingNotifier();
+        }
+
+        protected void NotifyOwnerChanged()
+        {
+            if (_changedNotifier != null)
+                _changedNotifier();
+        }
+
+        protected void NotifyItemChanging(TImpl item)
+        {
+            if (_itemChangingNotifier != null)
+                _itemChangingNotifier(item);
+        }
+
+        protected void NotifyItemChanged(TImpl item)
+        {
+            if (_itemChangedNotifier != null)
+                _itemChangedNotifier(item);
         }
 
         public virtual void Add(TInterface item)
@@ -51,12 +98,26 @@ namespace Kistl.DalProvider.Ef
 
             if (ctx != item.Context) { throw new WrongKistlContextException(); }
 
-            underlyingCollection.Add((TImpl)item);
+            var impl = item as TImpl;
+
+            if (impl == null) { throw new ArgumentOutOfRangeException("item", String.Format("item is of wrong type: [{0}] instead of [{1}]", item.GetType().AssemblyQualifiedName, typeof(TImpl).AssemblyQualifiedName)); }
+
+            NotifyOwnerChanging();
+            NotifyItemChanging(impl);
+            underlyingCollection.Add(impl);
+            NotifyItemChanged(impl);
+            NotifyOwnerChanged();
         }
 
         public virtual void Clear()
         {
+            // copy list to keep reference to items after Clear()
+            var items = underlyingCollection.ToArray();
+            NotifyOwnerChanging();
+            items.ForEach(i => NotifyItemChanging(i));
             underlyingCollection.Clear();
+            items.ForEach(i => NotifyItemChanged(i));
+            NotifyOwnerChanged();
         }
 
         public virtual bool Contains(TInterface item)
@@ -108,12 +169,23 @@ namespace Kistl.DalProvider.Ef
         {
             if (item == null)
             {
-                return underlyingCollection.Remove(null);
+                NotifyOwnerChanging();
+                var nullResult = underlyingCollection.Remove(null);
+                NotifyOwnerChanged();
+                return nullResult;
             }
 
             if (ctx != item.Context) { throw new WrongKistlContextException(); }
 
-            return underlyingCollection.Remove((TImpl)item);
+            var impl = item as TImpl;
+            if (impl == null) { throw new ArgumentOutOfRangeException("item", String.Format("item is of wrong type: [{0}] instead of [{1}]", item.GetType().AssemblyQualifiedName, typeof(TImpl).AssemblyQualifiedName)); }
+
+            NotifyOwnerChanging();
+            NotifyItemChanging(impl);
+            var result = underlyingCollection.Remove(impl);
+            NotifyItemChanged(impl);
+            NotifyOwnerChanged();
+            return result;
         }
 
         public virtual IEnumerator<TInterface> GetEnumerator()
@@ -162,8 +234,13 @@ namespace Kistl.DalProvider.Ef
         private readonly string _positionProperty;
         private List<TImpl> _orderedItems;
 
-        public EntityListWrapper(IKistlContext ctx, EntityCollection<TImpl> ec, string pointerProperty, string positionProperty)
-            : base(ctx, ec)
+        public EntityListWrapper(IKistlContext ctx, EntityCollection<TImpl> ec, Action changingNotifier, Action changedNotifier, string pointerProperty, string positionProperty)
+            : this(ctx, ec, changingNotifier, changedNotifier, null, null, pointerProperty, positionProperty)
+        {
+        }
+
+        public EntityListWrapper(IKistlContext ctx, EntityCollection<TImpl> ec, Action changingNotifier, Action changedNotifier, Action<TImpl> itemChangingNotifier, Action<TImpl> itemChangedNotifier, string pointerProperty, string positionProperty)
+            : base(ctx, ec, changingNotifier, changedNotifier, itemChangingNotifier, itemChangedNotifier)
         {
             if (String.IsNullOrEmpty(pointerProperty)) { throw new ArgumentOutOfRangeException("pointerProperty"); }
             if (String.IsNullOrEmpty(positionProperty)) { throw new ArgumentOutOfRangeException("positionProperty"); }
@@ -248,12 +325,31 @@ namespace Kistl.DalProvider.Ef
 
         public void Insert(int index, TInterface item)
         {
+            if (item == null)
+            {
+                NotifyOwnerChanging();
+                _orderedItems.Insert(index, null);
+                FixIndices();
+                underlyingCollection.Add(null);
+                NotifyOwnerChanged();
+                return;
+            }
+
+            var impl = item as TImpl;
+            if (impl == null) { throw new ArgumentOutOfRangeException("item", String.Format("item is of wrong type: [{0}] instead of [{1}]", item.GetType().AssemblyQualifiedName, typeof(TImpl).AssemblyQualifiedName)); }
+
+            NotifyOwnerChanging();
+            NotifyItemChanging(impl);
+
             // insert item without index and rely on FixIndices
             // to set the proper index and propagate changes
             UpdateIndexProperty(item, null);
-            _orderedItems.Insert(index, (TImpl)item);
+            _orderedItems.Insert(index, impl);
             FixIndices();
-            underlyingCollection.Add((TImpl)item);
+            underlyingCollection.Add(impl);
+
+            NotifyItemChanged(impl);
+            NotifyOwnerChanged();
         }
 
         public void RemoveAt(int index)

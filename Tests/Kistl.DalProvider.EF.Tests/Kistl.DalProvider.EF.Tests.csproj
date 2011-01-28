@@ -8,8 +8,8 @@
     <ProjectGuid>{980874F0-D9C1-4EDB-8143-AD51C1E2666F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Kistl.DalProvider.EF</RootNamespace>
-    <AssemblyName>Kistl.DalProvider.EF.Tests</AssemblyName>
+    <RootNamespace>Kistl.DalProvider.Ef</RootNamespace>
+    <AssemblyName>Kistl.DalProvider.Ef.Tests</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <PublishUrl>publish\</PublishUrl>
@@ -110,8 +110,12 @@
     <Compile Include="Tests\CompoundObject\when_changing.cs" />
     <Compile Include="Tests\CompoundObject\when_querying.cs" />
     <Compile Include="Tests\CompoundObject\when_roundtrip.cs" />
+    <Compile Include="Tests\ContextTests\when_deleting.cs" />
+    <Compile Include="Tests\one_to_N_relations\when_removing_from_NSide_property.cs" />
+    <Compile Include="Tests\one_to_N_relations\when_adding_to_NSide_property.cs" />
     <Compile Include="Tests\one_to_N_relations\should_obey_order.cs" />
     <Compile Include="Tests\one_to_N_relations\should_synchronize.cs" />
+    <Compile Include="Tests\one_to_N_relations\when_setting_OneSide_property.cs" />
     <Compile Include="Tests\RelationListWrapperTests.cs" />
     <Compile Include="Tests\GenericRelationCollectionWrapperTests.cs" />
     <Compile Include="Tests\EntityListWrapperTests.cs" />
@@ -125,7 +129,7 @@
     <Compile Include="Tests\ServerCollectionEntry_EF.cs" />
     <Compile Include="Tests\BaseServerDataObjectTests.cs" />
     <Compile Include="Tests\BaseServerCompoundObjectTests.cs" />
-    <Compile Include="Tests\ContextTests.cs" />
+    <Compile Include="Tests\EfContextTests.cs" />
     <Compile Include="Tests\CompoundObject\when_changing_a_CompoundObject_member.cs" />
     <Compile Include="Tests\CompoundObject\when_initialized.cs" />
   </ItemGroup>

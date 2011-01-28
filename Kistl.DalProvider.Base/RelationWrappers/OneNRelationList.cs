@@ -45,8 +45,7 @@ namespace Kistl.DalProvider.Base.RelationWrappers
             //}
         }
 
-        //void IRelationListSync<T>.AddWithoutSetParent(T item)
-        public void AddWithoutSetParent(T item)
+        void IRelationListSync<T>.AddWithoutSetParent(T item)
         {
             // on ReloadReference, the _posProperty has a valid value
             // we need to insert correctly
@@ -71,12 +70,17 @@ namespace Kistl.DalProvider.Base.RelationWrappers
             OnItemAdded(item, collection.Count - 1);
         }
 
-        //void IRelationListSync<T>.RemoveWithoutClearParent(T item)
-        public void RemoveWithoutClearParent(T item)
+        void IRelationListSync<T>.RemoveWithoutClearParent(T item)
         {
             int index = collection.IndexOf(item);
             collection.Remove(item);
             OnItemRemoved(item, index);
+        }
+
+        private void NotifyOwner()
+        {
+            if (_ownerNotifier != null)
+                _ownerNotifier();
         }
 
         private void DoInsert(T item, int index)
@@ -289,8 +293,7 @@ namespace Kistl.DalProvider.Base.RelationWrappers
 
         protected virtual void OnItemAdded(T newItem, int index)
         {
-            if (_ownerNotifier != null)
-                _ownerNotifier();
+            NotifyOwner();
 
             if (_CollectionChanged != null)
                 _CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, newItem, index));
@@ -300,8 +303,7 @@ namespace Kistl.DalProvider.Base.RelationWrappers
 
         protected virtual void OnItemRemoved(T removedItem, int index)
         {
-            if (_ownerNotifier != null)
-                _ownerNotifier();
+            NotifyOwner();
 
             if (_CollectionChanged != null)
                 _CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, removedItem, index));
@@ -311,8 +313,7 @@ namespace Kistl.DalProvider.Base.RelationWrappers
 
         protected virtual void OnCollectionReset()
         {
-            if (_ownerNotifier != null)
-                _ownerNotifier();
+            NotifyOwner();
 
             if (_CollectionChanged != null)
                 _CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));

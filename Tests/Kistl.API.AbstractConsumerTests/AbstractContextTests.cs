@@ -128,39 +128,41 @@ namespace Kistl.API.AbstractConsumerTests
         }
 
         [Test]
-        [Ignore("Discuss")]
-        public void should_create_objects_with_valid_IDs()
+        public void should_create_objects_with_valid_new_IDs()
         {
             using (var ctx = GetContext())
             {
                 int objCount = 10;
+                var objs = new List<TestObjClass>();
                 while (objCount-- > 0)
                 {
                     var obj = ctx.Create<TestObjClass>();
-                    Assert.That(obj.ID, Is.Not.EqualTo(Kistl.API.Helper.INVALIDID));
+                    Assert.That(obj.ID, Is.LessThan(Kistl.API.Helper.INVALIDID));
+                    obj.StringProp = "Muh " + objCount; // avoid not null constraint
+                    objs.Add(obj);
+                }
+                ctx.SubmitChanges();
+
+                foreach (var obj in objs)
+                {
+                    Assert.That(obj.ID, Is.GreaterThan(Kistl.API.Helper.INVALIDID));
                 }
             }
         }
 
         [Test]
-        [Ignore("Discuss")]
         public void should_create_objects_with_different_IDs()
         {
-            var objList = new List<TestObjClass>();
             using (var ctx = GetContext())
             {
+                var objList = new List<TestObjClass>();
                 int objCount = 10;
                 while (objCount-- > 0)
                 {
                     objList.Add(ctx.Create<TestObjClass>());
                 }
+                Assert.That(objList.Select(o => o.ID).ToList(), Is.Unique);
             }
-
-            Assert.DoesNotThrow(delegate()
-            {
-                // throws exception on duplicate keys
-                objList.ToDictionary(o => o.ID);
-            });
         }
 
         [Test]

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
-
+using Autofac;
 using Kistl.API;
 using Kistl.API.AbstractConsumerTests;
 using Kistl.API.Server;
@@ -11,14 +11,12 @@ using Kistl.App.Base;
 using Kistl.App.Projekte;
 using Kistl.App.Test;
 using Kistl.DalProvider.Ef.Mocks;
-
 using NUnit.Framework;
-using Autofac;
 
 namespace Kistl.DalProvider.Ef.Tests
 {
     [TestFixture]
-    public class ContextTests : AbstractContextTests
+    public class EfContextTests : AbstractContextTests
     {
         [Test]
         public void Attach_IDataObject_New()

@@ -100,10 +100,10 @@ namespace Kistl.API.AbstractConsumerTests.CompoundObjects
         }
 
         [TearDown]
-        public virtual void DisposeContext()
+        public virtual void ForgetContext()
         {
-            if (ctx != null)
-                ctx.Dispose();
+            ctx = null;
+            obj = null;
         }
     }
 

@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractNHibernateTestFixture.cs" />
+    <Compile Include="Tests\ContextTests\when_deleting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SetUpFixture.cs" />
     <Compile Include="Tests\BinarySerializers\should_work_with_ICompoundObjects.cs" />
@@ -65,12 +66,15 @@
     <Compile Include="Tests\CompoundObject\when_initialized.cs" />
     <Compile Include="Tests\CompoundObject\when_querying.cs" />
     <Compile Include="Tests\CompoundObject\when_roundtrip.cs" />
-    <Compile Include="Tests\ContextTests.cs" />
+    <Compile Include="Tests\NhContextTests.cs" />
     <Compile Include="Tests\Linq.cs" />
     <Compile Include="Tests\ListPropertiesTests.cs" />
     <Compile Include="Tests\N_to_M_relations\should_synchronize.cs" />
+    <Compile Include="Tests\one_to_N_relations\when_removing_from_NSide_property.cs" />
     <Compile Include="Tests\one_to_N_relations\should_obey_order.cs" />
     <Compile Include="Tests\one_to_N_relations\should_synchronize.cs" />
+    <Compile Include="Tests\one_to_N_relations\when_adding_to_NSide_property.cs" />
+    <Compile Include="Tests\one_to_N_relations\when_setting_OneSide_property.cs" />
     <Compile Include="Tests\PersistenceObjects\when_initializing.cs" />
     <Compile Include="Tests\PersistenceObjects\navigator_context_checks.cs" />
     <Compile Include="Tests\PersistenceObjects\when_changed.cs" />
