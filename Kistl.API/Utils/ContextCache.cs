@@ -155,5 +155,24 @@ namespace Kistl.API.Utils
 
         #endregion
 
+        /// <summary>
+        /// Rebuilds the internal caches without changing the set of contained objects.
+        /// This is necessary after a SubmitChanges, if the IDs have changed.
+        /// </summary>
+        public void Rebuild()
+        {
+            foreach (var dict in _objects.Values)
+            {
+                foreach (var kv in dict.ToList())
+                {
+                    var newKey = keyFromItem(kv.Value);
+                    if (Object.Equals(kv.Key, newKey))
+                    {
+                        dict.Remove(kv.Key);
+                        dict[newKey] = kv.Value;
+                    }
+                }
+            }
+        }
     }
 }
