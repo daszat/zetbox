@@ -22,12 +22,32 @@ namespace Kistl.API.AbstractConsumerTests.PersistenceObjects
         }
 
         [Test]
-        public void should_set_ExportGuid()
+        public void should_have_New_ObjectState()
+        {
+            var m1 = ctx.Create<Method>();
+            Assert.That(m1.ObjectState, Is.EqualTo(DataObjectState.New));
+        }
+
+        [Test]
+        public void should_set_non_null_ExportGuid()
         {
             var m1 = ctx.Create<Method>();
             Assert.That(m1.ExportGuid, Is.Not.Null);
+        }
+        
+        [Test]
+        public void should_set_non_empty_ExportGuid()
+        {
+            var m1 = ctx.Create<Method>();
             Assert.That(m1.ExportGuid, Is.Not.EqualTo(Guid.Empty));
+            var m2 = ctx.Create<Method>();
+            Assert.That(m1.ExportGuid, Is.Not.EqualTo(m2.ExportGuid));
+        }
 
+        [Test]
+        public void should_have_unique_ExportGuid()
+        {
+            var m1 = ctx.Create<Method>();
             var m2 = ctx.Create<Method>();
             Assert.That(m1.ExportGuid, Is.Not.EqualTo(m2.ExportGuid));
         }

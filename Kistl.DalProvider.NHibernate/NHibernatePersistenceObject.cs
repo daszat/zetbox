@@ -32,7 +32,7 @@ namespace Kistl.DalProvider.NHibernate
             get
             {
                 var result = _ID;
-                if (this.ObjectState != DataObjectState.New)
+                if (NHibernateProxy.ID != 0)
                     result = _ID = NHibernateProxy.ID;
 
                 return result;

@@ -113,7 +113,9 @@ namespace Kistl.API.Server
                 throw new InvalidOperationException(String.Format("Cannot attach object unless it is New or Detached. obj.ObjectState == {0}", ObjectState));
             }
 
-            SetObjectState(DataObjectState.Unmodified);
+            if (ObjectState == DataObjectState.Detached)
+                SetObjectState(DataObjectState.Unmodified);
+
             base.AttachToContext(ctx);
         }
 

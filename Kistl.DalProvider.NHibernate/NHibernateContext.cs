@@ -74,6 +74,10 @@ namespace Kistl.DalProvider.NHibernate
         public override IPersistenceObject Attach(IPersistenceObject obj)
         {
             if (obj == null) { throw new ArgumentNullException("obj"); }
+            if (obj.Context != null && obj.Context != this) { throw new WrongKistlContextException("Nh.Attach"); }
+
+            // already attached?
+            if (obj.Context == this) return obj;
 
             // Handle created Objects
             if (obj.ID == Helper.INVALIDID)
@@ -161,7 +165,6 @@ namespace Kistl.DalProvider.NHibernate
 
         private void UpdateObjectState()
         {
-
             foreach (var o in AttachedObjects.Cast<BaseServerPersistenceObject>().ToList())
             {
                 switch (o.ObjectState)
@@ -363,7 +366,7 @@ namespace Kistl.DalProvider.NHibernate
 
         private IProxyObject NhFindById(ImplementationType implType, int ID)
         {
-            if (ID <= Kistl.API.Helper.INVALIDID) { throw new ArgumentOutOfRangeException("ID"); }
+            if (ID <= Kistl.API.Helper.INVALIDID) { throw new ArgumentOutOfRangeException("ID", ID, "Cannot ask NHibernate for INVALIDID"); }
 
             return (IProxyObject)_nhSession
                         .CreateCriteria(ToProxyType(implType).FullName)
