@@ -8,27 +8,28 @@ namespace Kistl.API.AbstractConsumerTests
 
     using Kistl.API;
     using Kistl.App.Base;
-    using Kistl.App.Projekte;
+    using Kistl.App.Test;
 
     using NUnit.Framework;
 
     public abstract class AbstractReadonlyListPropertiesTests
-        : ProjectDataFixture
+        : AbstractTestFixture
     {
-        [Test]
-        public void value_lists_should_have_elements()
-        {
-            using (IKistlContext ctx = GetContext())
-            {
-                var list = ctx.GetQuery<Kunde>();
-                int count = 0;
-                foreach (Kunde k in list)
-                {
-                    count += k.EMails.Count;
-                }
-                Assert.That(count, Is.GreaterThan(0));
-            }
-        }
+        // TODO: create Test object with value list
+        //[Test]
+        //public void value_lists_should_have_elements()
+        //{
+        //    using (IKistlContext ctx = GetContext())
+        //    {
+        //        var list = ctx.GetQuery<Kunde>();
+        //        int count = 0;
+        //        foreach (Kunde k in list)
+        //        {
+        //            count += k.EMails.Count;
+        //        }
+        //        Assert.That(count, Is.GreaterThan(0));
+        //    }
+        //}
 
         [Test]
         public void object_lists_should_have_elements()
@@ -113,17 +114,28 @@ namespace Kistl.API.AbstractConsumerTests
         }
 
         [Test]
-        [Ignore("NpgSql produces an invalid SQL Statement")]
+        //[Ignore("EF/NpgSql produces an invalid SQL Statement")]
         public void list_and_query_should_yield_consistent_results()
         {
-            using (IKistlContext ctx = GetContext())
-            {
-                var tasks = ctx.GetQuery<Task>().Where(t => t.Projekt.Name == "Kistl").ToList();
-                var prj = ctx.GetQuery<Projekt>().Where(p => p.Name == "Kistl").ToList().Single();
+            var ctx = GetContext();
 
-                Assert.That(tasks, Is.EquivalentTo(prj.Tasks), "mismatch of tasks and project.tasks");
-                Assert.That(tasks.Select(t => t.Projekt), Has.All.EqualTo(prj), "task has wrong parent Project");
-            }
+            var oneSide = ctx.Create<One_to_N_relations_One>();
+            var name = oneSide.Name = "oneSide." + new Random().Next();
+
+            var nSide1 = ctx.Create<One_to_N_relations_N>();
+            nSide1.Name = "nSide1";
+            nSide1.OneSide = oneSide;
+            var nSide2 = ctx.Create<One_to_N_relations_N>();
+            nSide2.Name = "nSide2";
+            nSide2.OneSide = oneSide;
+
+            ctx.SubmitChanges();
+
+            var ns = ctx.GetQuery<One_to_N_relations_N>().Where(t => t.OneSide.Name == name).ToList();
+            var one = ctx.GetQuery<One_to_N_relations_One>().Where(p => p.Name == name).ToList().Single();
+
+            Assert.That(ns, Is.EquivalentTo(oneSide.NSide), "mismatch of query and navigator");
+            Assert.That(ns.Select(t => t.OneSide), Has.All.EqualTo(oneSide), "NSide has wrong parent OneSide");
         }
 
 
@@ -153,111 +165,112 @@ namespace Kistl.API.AbstractConsumerTests
 
     }
 
-    public abstract class AbstractListPropertiesTests 
+    // TODO: create Test object with value list
+    public abstract class AbstractListPropertiesTests
         : AbstractReadonlyListPropertiesTests
     {
-        [Test]
-        public void AddStringListPropertyContent()
-        {
-            int ID = Kistl.API.Helper.INVALIDID;
-            string mail = String.Empty;
-            using (IKistlContext ctx = GetContext())
-            {
-                var k = ctx.GetQuery<Kunde>().First();
-                Assert.That(k.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
-                mail = "UnitTest" + DateTime.Now + "@example.com";
-                ID = k.ID;
-                k.EMails.Add(mail);
-                //Assert.That(k.ObjectState, Is.EqualTo(DataObjectState.Modified));
-                Assert.That(mail, Is.Not.EqualTo(String.Empty));
-                Assert.That(ctx.SubmitChanges(), Is.GreaterThan(0));
-            }
+    //    [Test]
+    //    public void AddStringListPropertyContent()
+    //    {
+    //        int ID = Kistl.API.Helper.INVALIDID;
+    //        string mail = String.Empty;
+    //        using (IKistlContext ctx = GetContext())
+    //        {
+    //            var k = ctx.GetQuery<Kunde>().First();
+    //            Assert.That(k.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
+    //            mail = "UnitTest" + DateTime.Now + "@example.com";
+    //            ID = k.ID;
+    //            k.EMails.Add(mail);
+    //            //Assert.That(k.ObjectState, Is.EqualTo(DataObjectState.Modified));
+    //            Assert.That(mail, Is.Not.EqualTo(String.Empty));
+    //            Assert.That(ctx.SubmitChanges(), Is.GreaterThan(0));
+    //        }
 
-            using (IKistlContext ctx = GetContext())
-            {
-                var kunde = ctx.Find<Kunde>(ID);
-                Assert.That(kunde, Is.Not.Null);
-                Assert.That(kunde.EMails.Count, Is.GreaterThan(0));
-                var result = kunde.EMails.SingleOrDefault(m => m == mail);
-                Assert.That(result, Is.Not.Null);
-            }
-        }
+    //        using (IKistlContext ctx = GetContext())
+    //        {
+    //            var kunde = ctx.Find<Kunde>(ID);
+    //            Assert.That(kunde, Is.Not.Null);
+    //            Assert.That(kunde.EMails.Count, Is.GreaterThan(0));
+    //            var result = kunde.EMails.SingleOrDefault(m => m == mail);
+    //            Assert.That(result, Is.Not.Null);
+    //        }
+    //    }
 
-        [Test]
-        public void UpdateStringListPropertyContent()
-        {
-            int ID = Kistl.API.Helper.INVALIDID;
-            string mail = String.Empty;
-            using (IKistlContext ctx = GetContext())
-            {
-                var list = ctx.GetQuery<Kunde>();
-                bool set = false;
-                foreach (Kunde k in list)
-                {
-                    if (k.EMails.Count > 0)
-                    {
-                        Assert.That(k.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
-                        mail = "UnitTest" + DateTime.Now + "@example.com";
-                        // TODO: Set IsSorted on Kunde.EMails
-                        //k.EMails[0] = mail;
-                        k.EMails.Clear();
-                        k.EMails.Add(mail);
-                        ID = k.ID;
-                        set = true;
-                        //Assert.That(k.ObjectState, Is.EqualTo(DataObjectState.Modified));
-                        break;
-                    }
-                }
-                Assert.That(set, "No usable test object found");
-                Assert.That(mail, Is.Not.EqualTo(String.Empty));
-                Assert.That(ctx.SubmitChanges(), Is.GreaterThan(0));
-            }
+    //    [Test]
+    //    public void UpdateStringListPropertyContent()
+    //    {
+    //        int ID = Kistl.API.Helper.INVALIDID;
+    //        string mail = String.Empty;
+    //        using (IKistlContext ctx = GetContext())
+    //        {
+    //            var list = ctx.GetQuery<Kunde>();
+    //            bool set = false;
+    //            foreach (Kunde k in list)
+    //            {
+    //                if (k.EMails.Count > 0)
+    //                {
+    //                    Assert.That(k.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
+    //                    mail = "UnitTest" + DateTime.Now + "@example.com";
+    //                    // TODO: Set IsSorted on Kunde.EMails
+    //                    //k.EMails[0] = mail;
+    //                    k.EMails.Clear();
+    //                    k.EMails.Add(mail);
+    //                    ID = k.ID;
+    //                    set = true;
+    //                    //Assert.That(k.ObjectState, Is.EqualTo(DataObjectState.Modified));
+    //                    break;
+    //                }
+    //            }
+    //            Assert.That(set, "No usable test object found");
+    //            Assert.That(mail, Is.Not.EqualTo(String.Empty));
+    //            Assert.That(ctx.SubmitChanges(), Is.GreaterThan(0));
+    //        }
 
-            using (IKistlContext ctx = GetContext())
-            {
-                var kunde = ctx.Find<Kunde>(ID);
-                Assert.That(kunde, Is.Not.Null);
-                Assert.That(kunde.EMails.Count, Is.GreaterThan(0));
-                var result = kunde.EMails.SingleOrDefault(m => m == mail);
-                Assert.That(result, Is.Not.Null);
-            }
-        }
+    //        using (IKistlContext ctx = GetContext())
+    //        {
+    //            var kunde = ctx.Find<Kunde>(ID);
+    //            Assert.That(kunde, Is.Not.Null);
+    //            Assert.That(kunde.EMails.Count, Is.GreaterThan(0));
+    //            var result = kunde.EMails.SingleOrDefault(m => m == mail);
+    //            Assert.That(result, Is.Not.Null);
+    //        }
+    //    }
 
-        [Test]
-        public void DeleteStringListPropertyContent()
-        {
-            int ID = Kistl.API.Helper.INVALIDID;
-            int mailCount = 0;
-            string mail = String.Empty;
-            using (IKistlContext ctx = GetContext())
-            {
-                var list = ctx.GetQuery<Kunde>();
-                foreach (Kunde k in list)
-                {
-                    if (k.EMails.Count > 2)
-                    {
-                        Assert.That(k.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
-                        mail = k.EMails.First();
-                        k.EMails.Remove(mail);
-                        mailCount = k.EMails.Count;
-                        ID = k.ID;
-                        //Assert.That(k.ObjectState, Is.EqualTo(DataObjectState.Modified));
-                        break;
-                    }
-                }
-                Assert.That(ctx.SubmitChanges(), Is.GreaterThan(0));
-            }
+    //    [Test]
+    //    public void DeleteStringListPropertyContent()
+    //    {
+    //        int ID = Kistl.API.Helper.INVALIDID;
+    //        int mailCount = 0;
+    //        string mail = String.Empty;
+    //        using (IKistlContext ctx = GetContext())
+    //        {
+    //            var list = ctx.GetQuery<Kunde>();
+    //            foreach (Kunde k in list)
+    //            {
+    //                if (k.EMails.Count > 2)
+    //                {
+    //                    Assert.That(k.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
+    //                    mail = k.EMails.First();
+    //                    k.EMails.Remove(mail);
+    //                    mailCount = k.EMails.Count;
+    //                    ID = k.ID;
+    //                    //Assert.That(k.ObjectState, Is.EqualTo(DataObjectState.Modified));
+    //                    break;
+    //                }
+    //            }
+    //            Assert.That(ctx.SubmitChanges(), Is.GreaterThan(0));
+    //        }
 
-            using (IKistlContext ctx = GetContext())
-            {
-                var kunde = ctx.Find<Kunde>(ID);
-                Assert.That(kunde, Is.Not.Null);
-                Assert.That(kunde.EMails.Count, Is.GreaterThan(0));
-                Assert.That(kunde.EMails.Count, Is.EqualTo(mailCount));
+    //        using (IKistlContext ctx = GetContext())
+    //        {
+    //            var kunde = ctx.Find<Kunde>(ID);
+    //            Assert.That(kunde, Is.Not.Null);
+    //            Assert.That(kunde.EMails.Count, Is.GreaterThan(0));
+    //            Assert.That(kunde.EMails.Count, Is.EqualTo(mailCount));
 
-                var result = kunde.EMails.SingleOrDefault(m => m == mail);
-                Assert.That(result, Is.Null);
-            }
-        }
+    //            var result = kunde.EMails.SingleOrDefault(m => m == mail);
+    //            Assert.That(result, Is.Null);
+    //        }
+    //    }
     }
 }

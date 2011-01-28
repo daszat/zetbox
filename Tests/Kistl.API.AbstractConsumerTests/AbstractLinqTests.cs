@@ -1,3 +1,4 @@
+
 namespace Kistl.API.AbstractConsumerTests
 {
     using System;
@@ -8,18 +9,15 @@ namespace Kistl.API.AbstractConsumerTests
     using System.Text;
 
     using Kistl.API;
-    using Kistl.API.AbstractConsumerTests;
     using Kistl.App.Base;
-    using Kistl.App.Projekte;
     using Kistl.App.Test;
 
     using NUnit.Framework;
     
     [TestFixture]
     public abstract class AbstractLinqTests
-        : ProjectDataFixture
+        : AbstractTestFixture
     {
-
         IKistlContext ctx;
 
         [SetUp]
@@ -33,7 +31,7 @@ namespace Kistl.API.AbstractConsumerTests
                 while (list.Count < 2)
                 {
                     var newObj = localCtx.Create<TestObjClass>();
-                    newObj.ObjectProp = localCtx.GetQuery<Kunde>().First();
+                    //newObj.ObjectProp = localCtx.GetQuery<Kunde>().First();
                     list.Add(newObj);
                 }
 
