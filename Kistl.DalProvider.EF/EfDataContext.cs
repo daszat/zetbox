@@ -267,6 +267,14 @@ namespace Kistl.DalProvider.Ef
 
             NotifyChanged(notifySaveList);
 
+            UpdateObjectState();
+
+            return result;
+        }
+
+        private void UpdateObjectState()
+        {
+
             foreach (var o in AttachedObjects.Cast<BaseServerPersistenceObject>().ToList())
             {
                 switch (o.ObjectState)
@@ -283,8 +291,6 @@ namespace Kistl.DalProvider.Ef
                         break;
                 }
             }
-
-            return result;
         }
 
         /// <summary>
@@ -305,6 +311,7 @@ namespace Kistl.DalProvider.Ef
             {
                 var result = _ctx.SaveChanges();
                 Logging.Log.InfoFormat("[{0}] changes submitted without Notifications.", result);
+                UpdateObjectState();
                 return result;
             }
             catch (UpdateException updex)

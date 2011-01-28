@@ -159,6 +159,31 @@ namespace Kistl.DalProvider.NHibernate
             }
         }
 
+        private void UpdateObjectState()
+        {
+
+            foreach (var o in AttachedObjects.Cast<BaseServerPersistenceObject>().ToList())
+            {
+                switch (o.ObjectState)
+                {
+                    case DataObjectState.New:
+                    case DataObjectState.Modified:
+                        o.SetUnmodified();
+                        break;
+                    case DataObjectState.Unmodified:
+                        // ignore
+                        break;
+                    case DataObjectState.Deleted:
+                        _attachedObjects.Remove(o);
+                        _attachedObjectsByProxy.Remove(o);
+                        break;
+                    default:
+                        Logging.Log.WarnFormat("found [{3}] object after SubmitChanges: {0}#{1}", o.GetType().AssemblyQualifiedName, o.ID, o.ObjectState);
+                        break;
+                }
+            }
+        }
+
         public override int SubmitChanges()
         {
             CheckDisposed();
@@ -173,6 +198,8 @@ namespace Kistl.DalProvider.NHibernate
 
             NotifyChanged(notifyList);
 
+            UpdateObjectState();
+
             return objects.Count;
         }
 
@@ -183,6 +210,8 @@ namespace Kistl.DalProvider.NHibernate
             var objects = GetModifiedObjects();
 
             FlushSession(objects);
+            
+            UpdateObjectState();
 
             return objects.Count;
         }
