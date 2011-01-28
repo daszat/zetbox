@@ -376,8 +376,11 @@ namespace Kistl.DalProvider.Ef
             var bpo = obj as BaseServerPersistenceObject;
             if (bpo != null)
             {
-                // Set a temporary ID
-                bpo.ID = --_newIDCounter;
+                checked
+                {
+                    // Set a temporary ID
+                    bpo.ID = --_newIDCounter;
+                }
             }
             return obj;
         }
