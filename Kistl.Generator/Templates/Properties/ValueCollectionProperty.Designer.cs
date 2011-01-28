@@ -72,7 +72,7 @@ this.WriteObjects("				    ",  backingName , " \r\n");
 this.WriteObjects("				        = new ",  backingCollectionType , "<",  thisInterface , ", ",  referencedType , ", ",  entryType , ", ",  providerCollectionType , ">(\r\n");
 this.WriteObjects("							this.Context,\r\n");
 this.WriteObjects("				            this, \r\n");
-this.WriteObjects("				            // () => this.NotifyPropertyChanged(\"",  name , "\", null, null),\r\n");
+this.WriteObjects("				            () => this.NotifyPropertyChanged(\"",  name , "\", null, null),\r\n");
 this.WriteObjects("				            ",  underlyingCollectionName , ");\r\n");
 this.WriteObjects("				}\r\n");
 this.WriteObjects("				return ",  backingName , ";\r\n");

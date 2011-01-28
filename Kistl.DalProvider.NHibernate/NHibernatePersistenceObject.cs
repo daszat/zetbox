@@ -6,9 +6,10 @@ namespace Kistl.DalProvider.NHibernate
     using System.Linq;
     using System.Text;
     using Kistl.API;
+    using Kistl.API.Server;
 
     public abstract class NHibernatePersistenceObject
-       : BasePersistenceObject
+       : BaseServerPersistenceObject
     {
         protected NHibernatePersistenceObject(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
@@ -20,30 +21,9 @@ namespace Kistl.DalProvider.NHibernate
             get { return Context != null; }
         }
 
-        private DataObjectState _objectState = DataObjectState.Unmodified;
-        public override DataObjectState ObjectState
-        {
-            get
-            {
-                // Calc Objectstate
-                if (_objectState != DataObjectState.Deleted)
-                {
-                    if (NHibernateProxy.ID == 0)
-                    {
-                        _objectState = DataObjectState.New;
-                    }
-                    else if (_objectState == DataObjectState.New)
-                    {
-                        _objectState = DataObjectState.Unmodified;
-                    }
-                }
-                return _objectState;
-            }
-        }
-
         internal void Delete()
         {
-            _objectState = DataObjectState.Deleted;
+            SetDeleted();
         }
 
         private int _ID;
@@ -75,13 +55,6 @@ namespace Kistl.DalProvider.NHibernate
                     NotifyPropertyChanged("ID", oldValue, newValue);
                 }
             }
-        }
-
-        protected override void SetModified()
-        {
-            _objectState = DataObjectState.Modified;
-            if (this.Context != null)
-                this.Context.Internals().SetModified(this);
         }
 
         protected NHibernateContext OurContext { get { return (NHibernateContext)Context; } }

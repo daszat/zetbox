@@ -40,7 +40,7 @@
                     <%= backingName %> = new <%= backingCollectionType %>(
                             this.Context,
                             this,
-                            // () => this.NotifyPropertyChanged("<%= name %>", null, null),
+                            () => this.NotifyPropertyChanged("<%= name %>", null, null),
                             <%= underlyingCollectionName %>);
                 }
                 return <%= backingName %>;
