@@ -82,7 +82,11 @@ namespace Kistl.API.Server
 
         public void SetUnmodified()
         {
-            var oldValue = this._ObjectState;
+            if (!_ObjectState.In(DataObjectState.Detached, DataObjectState.New, DataObjectState.Modified, DataObjectState.Unmodified))
+            {
+                throw new InvalidOperationException("Cannot set object to Unmodified when in State " + _ObjectState);
+            }
+
             SetObjectState(DataObjectState.Unmodified);
         }
 
