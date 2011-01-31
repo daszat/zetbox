@@ -3,7 +3,7 @@
                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                   xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"
                   xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
-                  Title="Choose Object"
+                  Title="{Binding Name}"
                   ResizeMode="CanResize"
                   MinWidth="300"
                   MinHeight="300"

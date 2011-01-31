@@ -53,13 +53,22 @@ namespace Kistl.Client.Presentables
             _additionalActions = new ReadOnlyCollection<CommandViewModel>(additionalActions ?? new CommandViewModel[] { });
             ListViewModel = ViewModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(dataCtx, () => dataCtx, type, qry);
             ListViewModel.AllowAddNew = true;
+            ListViewModel.ObjectCreated += new InstanceListViewModel.ObjectCreatedHandler(ListViewModel_ObjectCreated);
+            ListViewModel.ItemsDefaultAction += new InstanceListViewModel.ItemsDefaultActionHandler(ListViewModel_ItemsDefaultAction);
 
             foreach (var cmd in _additionalActions)
             {
                 ListViewModel.Commands.Add(cmd);
             }
+        }
 
-            ListViewModel.ItemsDefaultAction += new InstanceListViewModel.ItemsDefaultActionHandler(ListViewModel_ItemsDefaultAction);
+        void ListViewModel_ObjectCreated(IDataObject obj)
+        {
+            if (obj == null) throw new ArgumentNullException("obj");
+
+            // Same like choose
+            var mdl = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, obj);
+            Choose(mdl);
         }
 
         void ListViewModel_ItemsDefaultAction(IEnumerable<DataObjectViewModel> objects)
@@ -82,14 +91,7 @@ namespace Kistl.Client.Presentables
 
         public void Choose(DataObjectViewModel choosen)
         {
-            if (ListViewModel.Instances.Contains(choosen))
-            {
-                _callback(choosen);
-            }
-            else
-            {
-                _callback(null);
-            }
+            _callback(choosen);
             Show = false;
         }
 

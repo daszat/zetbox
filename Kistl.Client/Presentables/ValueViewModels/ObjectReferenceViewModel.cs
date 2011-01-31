@@ -190,7 +190,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
         /// <summary>
         /// creates a new target and references it
         /// </summary>
-        public void CreateNewItemAndSetValue(Action<DataObjectViewModel> onCreated)
+        public void CreateNewItemAndSetValue()
         {
             ObjectClass baseclass = ObjectReferenceModel.ReferencedClass;
 
@@ -204,9 +204,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 var model = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, item);
 
                 Value = model;
-
-                if (onCreated != null)
-                    onCreated(model);
+                ViewModelFactory.ShowModel(model, true);
             }
             else
             {
@@ -223,13 +221,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                                 var model = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, item);
 
                                 Value = model;
-                                if (onCreated != null)
-                                    onCreated(model);
-                            }
-                            else
-                            {
-                                if (onCreated != null)
-                                    onCreated(null);
+                                ViewModelFactory.ShowModel(model, true);
                             }
                         }), null);
                 lstMdl.ListViewModel.ShowCommands = false;
@@ -249,7 +241,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                         DataContext,
                         ObjectReferenceViewModelResources.CreateNewItemAndSetValueCommand_Name,
                         ObjectReferenceViewModelResources.CreateNewItemAndSetValueCommand_Tooltip,
-                        () => CreateNewItemAndSetValue(null),
+                        CreateNewItemAndSetValue,
                         () => AllowCreateNewItem && !DataContext.IsReadonly && !IsReadOnly);
                     _createNewItemAndSetValueCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_NewDocumentHS_png);
                 }
