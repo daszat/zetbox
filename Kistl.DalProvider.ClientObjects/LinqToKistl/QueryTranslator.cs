@@ -21,10 +21,19 @@ namespace Kistl.DalProvider.Client
         {
             if (b.NodeType == ExpressionType.Equal && b.Left.Type.IsIDataObject() && b.Right.Type.IsIDataObject())
             {
-                // TODO: Case# 1717: Check for nulls!
-                return Expression.MakeBinary(b.NodeType,
-                    Expression.MakeMemberAccess(Visit(b.Left), b.Left.Type.FindFirstOrDefaultMember("ID")),
-                    Expression.MakeMemberAccess(Visit(b.Right), b.Right.Type.FindFirstOrDefaultMember("ID")));
+                var left = Visit(b.Left);
+                var right = Visit(b.Right);
+
+                return Expression.AndAlso(
+                    Expression.NotEqual(left, Expression.Constant(null)),
+                    Expression.AndAlso(
+                        Expression.NotEqual(right, Expression.Constant(null)),
+                        Expression.MakeBinary(
+                            b.NodeType,
+                            Expression.MakeMemberAccess(left, b.Left.Type.FindFirstOrDefaultMember("ID")),
+                            Expression.MakeMemberAccess(right, b.Right.Type.FindFirstOrDefaultMember("ID")))
+                        )
+                    );
             }
             return base.VisitBinary(b);
         }
