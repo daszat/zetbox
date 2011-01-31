@@ -71,36 +71,6 @@ namespace Kistl.Client.WPF.View
             set { SetValue(RequestedKindProperty, value); }
         }
 
-        public bool? IsReadOnly
-        {
-            get { return (bool?)GetValue(IsReadOnlyProperty); }
-            set { SetValue(IsReadOnlyProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for IsReadOnly.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty IsReadOnlyProperty =
-            DependencyProperty.Register("IsReadOnly", typeof(bool?), typeof(LabeledView), new UIPropertyMetadata(null, new PropertyChangedCallback(IsReadOnly_Changed)));
-
-        private static void IsReadOnly_Changed(DependencyObject obj, DependencyPropertyChangedEventArgs e)
-        {
-            LabeledView v = (LabeledView)obj;
-
-            if (v.ViewModel is BaseValueViewModel && e.NewValue != null)
-            {
-                ((BaseValueViewModel)v.ViewModel).IsReadOnly = (bool)e.NewValue;
-            }
-        }
-
-        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
-        {
-            base.OnPropertyChanged(e);
-
-            if (ViewModel is BaseValueViewModel && e.Property == DataContextProperty && IsReadOnly != null)
-            {
-                ((BaseValueViewModel)ViewModel).IsReadOnly = IsReadOnly.Value;
-            }
-        }
-
         #region IHasViewModel<ILabeledViewModel> Members
 
         public ILabeledViewModel ViewModel
