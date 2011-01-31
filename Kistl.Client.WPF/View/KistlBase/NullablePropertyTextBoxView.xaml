@@ -8,7 +8,6 @@
                      ToolTip="{Binding ToolTip}">
     <kevin:InfoTextBox x:Name="txt"
                        Text="{Binding FormattedValue, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=true}"
-                       LostFocus="InfoTextBox_LostFocus"
                        TextBoxInfo="{Binding ToolTip}"
                        IsReadOnly="{Binding IsReadOnly}">
         <kevin:InfoTextBox.ContextMenu>

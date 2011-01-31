@@ -18,16 +18,18 @@ namespace Kistl.Client.WPF.Toolkit
         /// <summary>
         /// Don't ask. WPF isn't able to handle FocusLost in an acceptable, simple way
         /// </summary>
-        public static void MoveFocus()
+        public static void UpdateFocusedElement()
         {
-            // Gets the element with keyboard focus.
-            UIElement elementWithFocus = Keyboard.FocusedElement as UIElement;
+            TryUpdateFocusedElement<TextBox>(TextBox.TextProperty);
+        }
 
-            // Change keyboard focus.
-            if (elementWithFocus != null)
-            {             
-                // Causes infinite loops with error validation
-                // elementWithFocus.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
+        private static void TryUpdateFocusedElement<T>(DependencyProperty dp)
+        {
+            if (Keyboard.FocusedElement is T)
+            {
+                FrameworkElement ctrl = Keyboard.FocusedElement as FrameworkElement;
+                BindingExpression e = ctrl.GetBindingExpression(dp);
+                if (e != null) e.UpdateSource();
             }
         }
 

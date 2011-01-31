@@ -47,21 +47,6 @@ namespace Kistl.Client.WPF.View
 
         #endregion
 
-        /// <summary>
-        /// Foreces a manual refresh, as WPF ignores notifications on UpdateSource.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void InfoTextBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (ViewModel != null && ViewModel.IsReadOnly == false)
-            {
-                var binding = BindingOperations.GetBindingExpressionBase(txt, TextBox.TextProperty);
-                binding.UpdateSource();
-                binding.UpdateTarget();
-            }
-        }
-
         protected override FrameworkElement MainControl
         {
             get { return txt; }

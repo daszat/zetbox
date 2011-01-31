@@ -216,27 +216,42 @@ namespace Kistl.Client.Presentables.ObjectEditor
             this.Show = false;
         }
 
-        private IEnumerable<string> GetErrors()
+        private IEnumerable<string> UpdateErrors()
         {
             OnUpdateFromUI();
 
-            return DataContext.AttachedObjects
+            var result = DataContext.AttachedObjects
                 .Where(o => o.ObjectState == DataObjectState.Modified || o.ObjectState == DataObjectState.New)
                 .OfType<IDataErrorInfo>()
                 .Select(o => o.Error)
-                .Where(s => !String.IsNullOrEmpty(s));
+                .Where(s => !String.IsNullOrEmpty(s))
+                .ToList();
+
+            // Cache that result
+            _canSave = result.Count == 0;
+
+            return result;
         }
 
+        // Defaults to true
+        // error validation is not called automatically yet
+        private bool _canSave = true;
+
+        /// <summary>
+        /// Returns a cached result.
+        /// Called too often, will slow UI down if it would realy evaluate errors
+        /// </summary>
+        /// <returns></returns>
         public bool CanSave()
         {
-            return GetErrors().Count() == 0;
+            return _canSave;
         }
 
         public void Save()
         {
             OnUpdateFromUI();
 
-            var errors = GetErrors().ToArray();
+            var errors = UpdateErrors().ToArray();
             if (errors.Length == 0)
             {
                 DataContext.SubmitChanges();
@@ -286,6 +301,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
 
         public void ShowVerificationResults()
         {
+            UpdateErrors();
             var elm = ViewModelFactory.CreateViewModel<ErrorListViewModel.Factory>().Invoke(DataContext);
             elm.RefreshErrors();
             ViewModelFactory.ShowModel(elm, true);

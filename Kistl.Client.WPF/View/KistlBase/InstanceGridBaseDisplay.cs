@@ -70,7 +70,7 @@ namespace Kistl.Client.WPF.View.KistlBase
 
         void ViewModel_UpdateFromUI(object sender, EventArgs e)
         {
-            WPFHelper.MoveFocus();
+            WPFHelper.UpdateFocusedElement();
         }
 
         #region HeaderClickManagement
