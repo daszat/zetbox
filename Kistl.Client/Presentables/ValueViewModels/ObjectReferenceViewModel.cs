@@ -178,7 +178,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                         ObjectReferenceViewModelResources.OpenReferenceCommand_Tooltip,
                         () => OpenReference(),
                         () => Value != null);
-                    _openReferenceCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_openHS_png);
+                    _openReferenceCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_fileopen_png);
                 }
                 return _openReferenceCommand;
             }
@@ -243,7 +243,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                         ObjectReferenceViewModelResources.CreateNewItemAndSetValueCommand_Tooltip,
                         CreateNewItemAndSetValue,
                         () => AllowCreateNewItem && !DataContext.IsReadonly && !IsReadOnly);
-                    _createNewItemAndSetValueCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_NewDocumentHS_png);
+                    _createNewItemAndSetValueCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_new_png);
                 }
                 return _createNewItemAndSetValueCommand;
             }
@@ -288,7 +288,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                         ObjectReferenceViewModelResources.SelectValueCommand_Tooltip,
                         () => SelectValue(),
                         () => !DataContext.IsReadonly && !IsReadOnly);
-                    _SelectValueCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_SearchFolderHS_png);
+                    _SelectValueCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_search_png);
                 }
                 return _SelectValueCommand;
             }

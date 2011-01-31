@@ -27,46 +27,55 @@ namespace Kistl.Client.WPF.Converter
 
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            Kistl.App.GUI.Icon icon = null;
-            if (value is Kistl.App.Base.ObjectClass)
+            try
             {
-                Kistl.App.Base.ObjectClass objClass = (Kistl.App.Base.ObjectClass)value;
-                icon = objClass.DefaultIcon;
-            }
-            else if (value is Kistl.App.GUI.Icon)
-            {
-                icon = (Kistl.App.GUI.Icon)value;
-            }
-            else if (value is IDataObject)
-            {
-                IDataObject obj = (IDataObject)value;
-                icon = obj.GetObjectClass(FrozenContext).DefaultIcon;
-            }
-            else if (value is Kistl.Client.Presentables.IViewModelWithIcon)
-            {
-                icon = ((Kistl.Client.Presentables.IViewModelWithIcon)value).Icon;
-            }
-
-            if (icon == null)
-            {
-                return Binding.DoNothing;
-            }
-            else
-            {
-                // Not initialized yet
-                if (icon.ObjectState == DataObjectState.New) return Binding.DoNothing;
-
-                BitmapImage bmp;
-                if (!_cache.TryGetValue(icon.ExportGuid, out bmp))
+                Kistl.App.GUI.Icon icon = null;
+                if (value is Kistl.App.Base.ObjectClass)
                 {
-                    var realIcon = Context.FindPersistenceObject<Kistl.App.GUI.Icon>(icon.ExportGuid);
-                    bmp = new BitmapImage();
-                    bmp.BeginInit();
-                    bmp.StreamSource = realIcon.Blob != null ? realIcon.Blob.GetStream() : null;
-                    bmp.EndInit();
-                    _cache[icon.ExportGuid] = bmp;
+                    Kistl.App.Base.ObjectClass objClass = (Kistl.App.Base.ObjectClass)value;
+                    icon = objClass.DefaultIcon;
                 }
-                return bmp;
+                else if (value is Kistl.App.GUI.Icon)
+                {
+                    icon = (Kistl.App.GUI.Icon)value;
+                }
+                else if (value is IDataObject)
+                {
+                    IDataObject obj = (IDataObject)value;
+                    icon = obj.GetObjectClass(FrozenContext).DefaultIcon;
+                }
+                else if (value is Kistl.Client.Presentables.IViewModelWithIcon)
+                {
+                    icon = ((Kistl.Client.Presentables.IViewModelWithIcon)value).Icon;
+                }
+
+                if (icon == null)
+                {
+                    return Binding.DoNothing;
+                }
+                else
+                {
+                    // Not initialized yet
+                    if (icon.ObjectState == DataObjectState.New) return Binding.DoNothing;
+
+                    BitmapImage bmp;
+                    if (!_cache.TryGetValue(icon.ExportGuid, out bmp))
+                    {
+                        var realIcon = Context.FindPersistenceObject<Kistl.App.GUI.Icon>(icon.ExportGuid);
+                        bmp = new BitmapImage();
+                        bmp.BeginInit();
+                        bmp.StreamSource = realIcon.Blob != null ? realIcon.Blob.GetStream() : null;
+                        bmp.EndInit();
+                        _cache[icon.ExportGuid] = bmp;
+                    }
+                    return bmp;
+                }
+            }
+            catch
+            {
+                // Grafully ignore binding errors in icons
+                // no one cares
+                return Binding.DoNothing;
             }
         }
 

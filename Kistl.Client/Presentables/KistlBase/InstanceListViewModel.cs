@@ -360,7 +360,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 if (_RefreshCommand == null)
                 {
                     _RefreshCommand = ViewModelFactory.CreateViewModel<RefreshCommand.Factory>().Invoke(DataContext, this);
-                    _RefreshCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_RefreshDocViewHS_png);
+                    _RefreshCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_reload_png);
                 }
                 return _RefreshCommand;
             }
@@ -377,7 +377,7 @@ namespace Kistl.Client.Presentables.KistlBase
                         DataContext, CommonCommandsResources.OpenDataObjectCommand_Name,
                         CommonCommandsResources.OpenDataObjectCommand_Tooltip,
                         OpenObjects);
-                    _OpenCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_openHS_png);
+                    _OpenCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_fileopen_png);
                 }
                 return _OpenCommand;
             }
@@ -392,7 +392,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 {
                     _NewCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
                         DataContext, CommonCommandsResources.NewDataObjectCommand_Name, CommonCommandsResources.NewDataObjectCommand_Tooltip, NewObject, () => AllowAddNew);
-                    _NewCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_NewDocumentHS_png);
+                    _NewCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_new_png);
                 }
                 return _NewCommand;
             }

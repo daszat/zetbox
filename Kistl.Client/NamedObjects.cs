@@ -14,12 +14,12 @@ namespace Kistl.Client
         public static readonly Guid Module_KistlBase = new Guid("ef6d5bd8-5826-4ce6-a9ca-c8438ddde773");
         public static readonly Guid Module_GUI = new Guid("84f486f7-19fe-49ad-8e4a-6c05089e7684");
 
-        public static readonly Guid Icon_delete_ico = new Guid("339276c9-1c1c-4b8e-a1a5-52b35adc2754");
-        public static readonly Guid Icon_NewDocumentHS_png = new Guid("5a1ad4e3-3b76-4b40-8b04-1b39753efa8e");
-        public static readonly Guid Icon_RefreshDocViewHS_png = new Guid("16bcca1c-6bc5-4be1-88da-e1704c5db4d3");
-        public static readonly Guid Icon_openHS_png = new Guid("5378cea1-3d09-4cbf-ac48-2b116b7da17b");
-        public static readonly Guid Icon_deleteHS_png = new Guid("fc07f581-a70c-465d-8b41-c8767061dec3");
-        public static readonly Guid Icon_SearchFolderHS_png = new Guid("4a7e8b01-eb07-47e1-bc08-fd713b4351be");
+        public static readonly Guid Icon_delete_png = new Guid("30eab798-1c8f-4391-acbd-7e630f40ca8c");
+        public static readonly Guid Icon_new_png = new Guid("c9b11ee6-8a62-4af3-9ee7-d6e78eeadad7");
+        public static readonly Guid Icon_reload_png = new Guid("bbfd9a59-257a-42e6-a1f4-90de28bd7f7a");
+        public static readonly Guid Icon_fileopen_png = new Guid("f1f14c5c-4cbd-499e-a388-3cf56aa80a11");
+        public static readonly Guid Icon_trash_png = new Guid("93e1ac12-c3d5-47d8-a414-e6be0a3fd9a1");
+        public static readonly Guid Icon_search_png = new Guid("dbb2f49e-48f4-49fc-a9a6-53a403f8ac4b");
         
 
         public static readonly Guid ViewModelDescriptor_NullableValuePropertyModel_Bool = new Guid("09d1f453-d0d9-429e-88e7-e84b33de7c2e");

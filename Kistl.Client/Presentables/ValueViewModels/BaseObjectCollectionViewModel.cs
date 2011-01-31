@@ -255,7 +255,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                         BaseObjectCollectionViewModelResources.CreateNewCommand_Tooltip, 
                         () => CreateNewItem(), 
                         () => AllowAddNew && !DataContext.IsReadonly && !IsReadOnly);
-                    _CreateNewCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_NewDocumentHS_png);
+                    _CreateNewCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_new_png);
                 }
                 return _CreateNewCommand;
             }
@@ -274,7 +274,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                         BaseObjectCollectionViewModelResources.AddExistingCommand_Tooltip, 
                         () => AddExistingItem(), 
                         () => AllowAddExisting && !DataContext.IsReadonly && !IsReadOnly);
-                    _AddExistingCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_SearchFolderHS_png);
+                    _AddExistingCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_search_png);
                 }
                 return _AddExistingCommand;
             }
@@ -311,7 +311,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                         BaseObjectCollectionViewModelResources.DeleteCommand_Tooltip,
                         () => SelectedItems.ToList().ForEach(i => DeleteItem(i)), // Collection will change while deleting!
                         () => SelectedItems != null && SelectedItems.Count() > 0 && AllowDelete && !DataContext.IsReadonly && !IsReadOnly);
-                    _DeleteCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_deleteHS_png);
+                    _DeleteCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_delete_png);
                 }
                 return _DeleteCommand;
             }
