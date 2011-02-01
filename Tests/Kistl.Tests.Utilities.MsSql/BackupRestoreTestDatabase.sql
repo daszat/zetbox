@@ -51,7 +51,7 @@ declare @logfile nvarchar(500)
 SELECT @dbfile = filename FROM zbox_test.sys.sysfiles where filename like '%.mdf'
 SELECT @logfile = filename FROM zbox_test.sys.sysfiles where filename like '%.ldf'
 
-RESTORE DATABASE Kistl_test FROM DISK = 'c:\temp\zbox.bak' 
+RESTORE DATABASE zbox_test FROM DISK = 'c:\temp\zbox.bak' 
 	WITH RECOVERY, REPLACE, 
 	MOVE 'zbox' to @dbfile,
 	MOVE 'zbox_log' to @logfile
@@ -60,7 +60,7 @@ RESTORE DATABASE Kistl_test FROM DISK = 'c:\temp\zbox.bak'
 -- SELECT filename FROM zbox.sys.sysfiles where filename like '%.mdf'
 -- SELECT  filename FROM zbox.sys.sysfiles where filename like '%.ldf'
 
--- RESTORE DATABASE Kistl_test FROM DISK = 'c:\temp\kistl.bak' 
+-- RESTORE DATABASE zbox_test FROM DISK = 'c:\temp\kistl.bak' 
 -- 	WITH RECOVERY, REPLACE, 
 -- 	MOVE 'zbox' to 'C:\ProgramData\MSSQL10.SQLEXPRESS\MSSQL\DATA\zbox_test.mdf',
 -- 	MOVE 'zbox_log' to 'C:\ProgramData\MSSQL10.SQLEXPRESS\MSSQL\DATA\zbox_test_log.ldf'
