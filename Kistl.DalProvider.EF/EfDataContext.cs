@@ -714,7 +714,7 @@ namespace Kistl.DalProvider.Ef
             cmd.Parameters.Add(pIn);
 
             var pOut = cmd.CreateParameter();
-            pOut.ParameterName = "nullResult";
+            pOut.ParameterName = "result";
             pOut.DbType = DbType.Int32;
             pOut.Direction = ParameterDirection.Output;
             cmd.Parameters.Add(pOut);
