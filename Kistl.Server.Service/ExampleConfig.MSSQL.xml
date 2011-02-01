@@ -4,7 +4,7 @@
   <Server StartServer="true">
     <SchemaProvider>MSSQL</SchemaProvider>
     <DatabaseProvider>System.Data.SqlClient</DatabaseProvider>
-    <ConnectionString>Data Source=.\SQLEXPRESS;Initial Catalog=Kistl;Integrated Security=True;MultipleActiveResultSets=true;</ConnectionString>
+    <ConnectionString>Data Source=.\SQLEXPRESS;Initial Catalog=zbox;Integrated Security=True;MultipleActiveResultSets=true;</ConnectionString>
     <!--
     <SchemaProvider>POSTGRESQL</SchemaProvider>
     <DatabaseProvider>Npgsql</DatabaseProvider>

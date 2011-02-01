@@ -1,7 +1,7 @@
 @echo off
 echo ********************************************************************************
-echo Full reset with roundtrip of ZBox Database
-echo Used to initialize a new dev enviromnent
+echo Full reset of ZBox Database
+echo Used to reset dev database
 echo ********************************************************************************
 
 bin\debug\bin\Server\Kistl.Server.Service.exe Kistl.Server.Service\DefaultConfig%zenv%.xml -wipe
