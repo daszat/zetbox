@@ -116,8 +116,8 @@
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
                         <Image Source="{Binding Path=(ctrls:CommandButton.Image), RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ctrls:CommandButton}}}"
-                               MaxHeight="64"
-                               MaxWidth="64"/>
+                               MaxHeight="32"
+                               MaxWidth="32"/>
                         <ContentPresenter Content="{Binding Path=Content, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ctrls:CommandButton}}}"
                                           Margin="5 0 0 0"
                                           VerticalAlignment="Center" />
