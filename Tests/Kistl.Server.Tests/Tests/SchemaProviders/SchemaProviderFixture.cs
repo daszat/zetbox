@@ -14,8 +14,8 @@ namespace Kistl.Server.SchemaTests.SchemaProviders
         // TODO: move to config file
         public static readonly string PostgresqlTestDatabase = "zbox_test";
         public static readonly string PostgresqlTestConnection = "Server=localhost;Database=zbox_test;User Id=zbox;Password=b-cXqMyXEYea2kkjUhkS";
-        public static readonly string SqlServerTestDatabase = "Kistl_test";
-        public static readonly string SqlServerTestConnection = "Data Source=.\\SQLEXPRESS;Initial Catalog=Kistl_test;Integrated Security=True;MultipleActiveResultSets=true;";
+        public static readonly string SqlServerTestDatabase = "zbox_test";
+        public static readonly string SqlServerTestConnection = "Data Source=.\\SQLEXPRESS;Initial Catalog=zbox_test;Integrated Security=True;MultipleActiveResultSets=true;";
 
         protected TProvider Provider;
 
