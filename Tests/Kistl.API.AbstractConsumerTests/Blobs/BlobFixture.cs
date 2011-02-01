@@ -33,7 +33,8 @@ namespace Kistl.API.AbstractConsumerTests.Blobs
             {
                 ctx.GetQuery<at.dasz.DocumentManagement.Document>().ForEach(obj => obj.Revisions.Clear());
                 ctx.GetQuery<at.dasz.DocumentManagement.File>().ForEach(obj => ctx.Delete(obj));
-                ctx.GetQuery<Kistl.App.Base.Blob>().ForEach(obj => ctx.Delete(obj));
+                // Can't delete all blobs - icons are using them
+                // ctx.GetQuery<Kistl.App.Base.Blob>().ForEach(obj => ctx.Delete(obj));
                 ctx.SubmitChanges();
             }
         }
