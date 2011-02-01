@@ -755,12 +755,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\EditTableHS.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Dialogs\" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\DropDown.png" />
     <Content Include="ProfilingSessions\Session20101221_180452.sdps" />
     <Content Include="ProfilingSessions\Session20101221_184007.sdps" />
     <Content Include="ProfilingSessions\Session20101221_185350.sdps" />
