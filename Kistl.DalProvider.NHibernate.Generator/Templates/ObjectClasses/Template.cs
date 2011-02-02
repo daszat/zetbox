@@ -233,37 +233,11 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
         {
             var rel = RelationExtensions.Lookup(ctx, prop);
             var relEnd = rel.GetEnd(prop);
-            var otherEnd = rel.GetOtherEnd(relEnd);
+            //var otherEnd = rel.GetOtherEnd(relEnd);
 
             Properties.CollectionEntryListProperty.Call(Host, ctx,
                  this.MembersToSerialize,
                  rel, relEnd.GetRole());
-
-            //string name = prop.Name;
-            //string wrapperName = "_" + name;
-            //string wrapperClass = "OneNRelationList";
-            //string exposedListType = otherEnd.HasPersistentOrder ? "IList" : "ICollection";
-            //string positionPropertyName = rel.NeedsPositionStorage(otherEnd.GetRole()) ? Construct.ListPositionPropertyName(otherEnd) : String.Empty;
-            //string otherName = relEnd.GetRole().ToString();
-            //string referencedInterface = String.Format("{0}.{1}",
-            //    rel.Module.Namespace,
-            //    rel.GetRelationClassName());
-            //string referencedProxy = String.Format("{0}.{1}{2}.{1}Proxy",
-            //    rel.Module.Namespace,
-            //    rel.GetRelationClassName(),
-            //    Kistl.API.Helper.ImplementationSuffix);
-
-            //Properties.ObjectListProperty.Call(Host,
-            //    ctx,
-            //    MembersToSerialize,
-            //    name,
-            //    wrapperName,
-            //    wrapperClass,
-            //    exposedListType,
-            //    positionPropertyName,
-            //    otherName,
-            //    referencedInterface,
-            //    referencedProxy);
         }
 
         protected override void ApplyCompoundObjectListTemplate(CompoundObjectProperty prop)

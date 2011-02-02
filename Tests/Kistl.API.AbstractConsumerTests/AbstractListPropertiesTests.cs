@@ -131,11 +131,13 @@ namespace Kistl.API.AbstractConsumerTests
 
             ctx.SubmitChanges();
 
+            // test cross-navigator queries
             var ns = ctx.GetQuery<One_to_N_relations_N>().Where(t => t.OneSide.Name == name).ToList();
-            var one = ctx.GetQuery<One_to_N_relations_One>().Where(p => p.Name == name).ToList().Single();
-
             Assert.That(ns, Is.EquivalentTo(oneSide.NSide), "mismatch of query and navigator");
             Assert.That(ns.Select(t => t.OneSide), Has.All.EqualTo(oneSide), "NSide has wrong parent OneSide");
+
+            var one = ctx.GetQuery<One_to_N_relations_One>().Where(p => p.Name == name).ToList().SingleOrDefault();
+            Assert.That(one, Is.Not.Null);
         }
 
 
