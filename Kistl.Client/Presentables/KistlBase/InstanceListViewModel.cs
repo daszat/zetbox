@@ -443,6 +443,7 @@ namespace Kistl.Client.Presentables.KistlBase
                         CommonCommandsResources.DeleteDataObjectCommand_Name,
                         CommonCommandsResources.DeleteDataObjectCommand_Tooltip,
                         DeleteObjects);
+                    _DeleteCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_delete_png);
                 }
                 return _DeleteCommand;
             }

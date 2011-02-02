@@ -14,11 +14,10 @@ namespace Kistl.Client
         public static readonly Guid Module_KistlBase = new Guid("ef6d5bd8-5826-4ce6-a9ca-c8438ddde773");
         public static readonly Guid Module_GUI = new Guid("84f486f7-19fe-49ad-8e4a-6c05089e7684");
 
-        public static readonly Guid Icon_delete_png = new Guid("30eab798-1c8f-4391-acbd-7e630f40ca8c");
+        public static readonly Guid Icon_delete_png = new Guid("84e97f4c-ceca-49d6-be50-aaa92b5b1ba8");
         public static readonly Guid Icon_new_png = new Guid("c9b11ee6-8a62-4af3-9ee7-d6e78eeadad7");
         public static readonly Guid Icon_reload_png = new Guid("bbfd9a59-257a-42e6-a1f4-90de28bd7f7a");
         public static readonly Guid Icon_fileopen_png = new Guid("f1f14c5c-4cbd-499e-a388-3cf56aa80a11");
-        public static readonly Guid Icon_trash_png = new Guid("93e1ac12-c3d5-47d8-a414-e6be0a3fd9a1");
         public static readonly Guid Icon_search_png = new Guid("dbb2f49e-48f4-49fc-a9a6-53a403f8ac4b");
         
 
