@@ -27,31 +27,28 @@ namespace Kistl.IntegrationTests
 
         protected override void SetUp(IContainer container)
         {
-            using (Log.InfoTraceMethodCall("Starting up"))
+            try
             {
-                try
+                base.SetUp(container);
+                ResetDatabase(container);
+
+                var config = container.Resolve<KistlConfig>();
+
+                manager = new ServerDomainManager();
+                manager.Start(config);
+
+                using (var initCtx = container.Resolve<IKistlContext>())
                 {
-                    base.SetUp(container);
-                    ResetDatabase(container);
-
-                    var config = container.Resolve<KistlConfig>();
-
-                    manager = new ServerDomainManager();
-                    manager.Start(config);
-
-                    using (var initCtx = container.Resolve<IKistlContext>())
-                    {
-                        // load up all infrastructure from the DalProvider
-                        // TODO: remove ToList() call!
-                        Console.WriteLine(initCtx.GetQuery<Kistl.App.Base.ObjectClass>().ToList().Count());
-                    }
+                    // load up all infrastructure from the DalProvider
+                    // TODO: remove ToList() call!
+                    Console.WriteLine(initCtx.GetQuery<Kistl.App.Base.ObjectClass>().ToList().Count());
                 }
-                catch (Exception error)
-                {
-                    Log.Error("Error while initialising Integration Tests", error);
-                    DisposeManager();
-                    throw;
-                }
+            }
+            catch (Exception error)
+            {
+                Log.Error("Error while initialising Integration Tests", error);
+                DisposeManager();
+                throw;
             }
         }
 

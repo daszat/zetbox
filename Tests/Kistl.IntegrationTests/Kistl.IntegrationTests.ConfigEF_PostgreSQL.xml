@@ -49,6 +49,10 @@
       <!-- Do not load customers modules! Nothing to test there
         <Module>Ini50.App.Client.Ini50Module, Ini50.App.Client</Module>
         -->
+
+      <!-- since the test are driven from the client app domain, we need to reset the database from here -->
+      <Module>Tests.Utilities.PostgreSql.UtilityModule, Tests.Utilities.PostgreSql</Module>
+
     </Modules>
   </Client>
   <SourceFileLocation>

@@ -10,7 +10,6 @@ namespace Kistl.Tests.Utilities.PostgresSql
     using Autofac;
     using Kistl.API.AbstractConsumerTests;
     using Kistl.API.Configuration;
-    using Kistl.API.Server;
     using Kistl.API.Utils;
     using Npgsql;
     using NUnit.Framework;
@@ -21,14 +20,12 @@ namespace Kistl.Tests.Utilities.PostgresSql
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Tests.PostgreSqlUtils");
 
         private readonly KistlConfig config;
-        private readonly ISchemaProvider schemaProvider;
 
         private const int RESET_TIMEOUT = 2 * 60;
 
-        public PostgreSqlResetter(KistlConfig config, Autofac.ILifetimeScope scope)
+        public PostgreSqlResetter(KistlConfig config)
         {
             this.config = config;
-            this.schemaProvider = scope.ResolveNamed<ISchemaProvider>("POSTGRESQL");
         }
 
         public void ResetDatabase()
@@ -40,8 +37,6 @@ namespace Kistl.Tests.Utilities.PostgresSql
                 try
                 {
                     Log.Info("Restoring Database");
-                    schemaProvider.Open(config.Server.ConnectionString);
-                    schemaProvider.DropAllObjects();
 
                     var cb = new NpgsqlConnectionStringBuilder(config.Server.ConnectionString);
                     var srcDB = cb.Database.Substring(0, cb.Database.Length - "_test".Length);
@@ -49,7 +44,7 @@ namespace Kistl.Tests.Utilities.PostgresSql
                     var userCmdString = "-U postgres -w";
                     // Change /c to /k to debug issues with this command
                     // /k will keep the cmd.exe open to inspection
-                    var args = string.Format("/C pg_dump {0} {1} | psql {0} {2}", userCmdString, srcDB, destDB);
+                    var args = string.Format("/C pg_dump --format c {0} {1} | pg_restore --clean {0} {2}", userCmdString, srcDB, destDB);
                     System.Diagnostics.ProcessStartInfo pi = new System.Diagnostics.ProcessStartInfo("cmd.exe", args);
                     pi.UseShellExecute = false;
                     var pgSQLBinPath = Environment.GetEnvironmentVariable("PGSQLBinPath");

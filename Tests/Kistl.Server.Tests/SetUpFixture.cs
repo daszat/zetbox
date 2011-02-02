@@ -40,15 +40,15 @@ namespace Kistl.Server.Tests
 
         protected override void SetUp(IContainer container)
         {
-            using (Log.InfoTraceMethodCall("Starting up"))
+            base.SetUp(container);
+            ResetDatabase(container);
+
+            AutofacServiceHostFactory.Container = container;
+
+            var config = container.Resolve<KistlConfig>();
+
+            using (Log.InfoTraceMethodCall("Starting server domain"))
             {
-                base.SetUp(container);
-                ResetDatabase(container);
-
-                AutofacServiceHostFactory.Container = container;
-
-                var config = container.Resolve<KistlConfig>();
-
                 manager = container.Resolve<IKistlAppDomain>();
                 manager.Start(config);
             }

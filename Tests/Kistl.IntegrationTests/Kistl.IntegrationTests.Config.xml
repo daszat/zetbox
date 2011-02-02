@@ -28,8 +28,6 @@
       <Module>Kistl.DalProvider.Client.Generator.ClientGeneratorProvider, Kistl.DalProvider.Client.Generator</Module>
       <Module>Kistl.DalProvider.Memory.Generator.MemoryGeneratorProvider, Kistl.DalProvider.Memory.Generator</Module>
       <Module>Kistl.DalProvider.Ef.Generator.EfGeneratorProvider, Kistl.DalProvider.Ef.Generator</Module>
-
-      <Module>Kistl.Tests.Utilities.MsSql.UtilityModule, Kistl.Tests.Utilities.MsSql</Module>
     </Modules>
   </Server>
   <Client StartClient="false" ThrowErrors="true">
@@ -49,6 +47,10 @@
       <!-- Do not load customers modules! Nothing to test there
         <Module>Ini50.App.Client.Ini50Module, Ini50.App.Client</Module>
         -->
+
+      <!-- since the test are driven from the client app domain, we need to reset the database from here -->
+      <Module>Kistl.Tests.Utilities.MsSql.UtilityModule, Kistl.Tests.Utilities.MsSql</Module>
+
     </Modules>
   </Client>
   <SourceFileLocation>
