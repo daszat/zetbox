@@ -33,7 +33,28 @@ namespace Kistl.Client.WPF.Converter
         {
             var img = _iconConverter.Convert(value, targetType, parameter, culture) as BitmapImage;
             if (img == null) return Binding.DoNothing;
-            return new Image() { Source = img };
+
+            var result = new Image() { Source = img };
+            
+            var strParam = parameter as string;
+            if (strParam != null)
+            {
+                var dim = strParam.Split(',');
+                if (dim != null && dim.Length == 2)
+                {
+                    int w, h;
+                    if (int.TryParse(dim[0], out w))
+                    {
+                        result.MaxWidth = w;
+                    }
+                    if (int.TryParse(dim[1], out h))
+                    {
+                        result.MaxHeight = h;
+                    }
+                }
+            }
+            
+            return result;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)

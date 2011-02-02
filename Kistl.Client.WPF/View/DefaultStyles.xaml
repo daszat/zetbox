@@ -134,7 +134,9 @@
             <Setter.Value>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="{Binding Path=(ctrls:CommandButton.Image), RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ctrls:CommandButton}}}" />
+                        <Image Source="{Binding Path=(ctrls:CommandButton.Image), RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ctrls:CommandButton}}}"
+                               MaxHeight="16"
+                               MaxWidth="16" />
                         <ContentPresenter Content="{Binding Path=Content, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ctrls:CommandButton}}}"
                                           Margin="5 0 0 0"
                                           VerticalAlignment="Center" />
@@ -153,7 +155,7 @@
         <Setter Property="ToolTip"
                 Value="{Binding ToolTip}" />
         <Setter Property="Icon"
-                Value="{Binding Icon, Converter={StaticResource ImageCtrlConverter}}" />
+                Value="{Binding Icon, Converter={StaticResource ImageCtrlConverter}, ConverterParameter='16,16'}" />
     </Style>
 
     <!-- from http://stackoverflow.com/questions/780426/link-button-in-wpf by Anderson Imes -->
