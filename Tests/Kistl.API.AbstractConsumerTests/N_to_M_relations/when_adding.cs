@@ -56,9 +56,17 @@ namespace Kistl.API.AbstractConsumerTests.N_to_M_relations
             }
 
             [Test]
-            public void should_synchronize_B_side()
+            public void should_synchronize_other_side()
             {
                 aSide1.BSide.Add(bSide1);
+                Assert.That(bSide1.ASide, Is.EquivalentTo(new[] { aSide1 }));
+            }
+
+            [Test]
+            public void should_synchronize_other_side_after_persisting()
+            {
+                aSide1.BSide.Add(bSide1);
+                SubmitAndReload();
                 Assert.That(bSide1.ASide, Is.EquivalentTo(new[] { aSide1 }));
             }
         }
@@ -108,9 +116,17 @@ namespace Kistl.API.AbstractConsumerTests.N_to_M_relations
             }
 
             [Test]
-            public void should_synchronize_B_side()
+            public void should_synchronize_other_side()
             {
                 bSide1.ASide.Add(aSide1);
+                Assert.That(aSide1.BSide, Is.EquivalentTo(new[] { bSide1 }));
+            }
+            [Test]
+
+            public void should_synchronize_other_side_after_persisting()
+            {
+                bSide1.ASide.Add(aSide1);
+                SubmitAndReload();
                 Assert.That(aSide1.BSide, Is.EquivalentTo(new[] { bSide1 }));
             }
         }

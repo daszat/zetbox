@@ -190,12 +190,14 @@ namespace Kistl.DalProvider.Base.RelationWrappers
 
         #region IRelationListSync<TEntry> Members
 
-        void IRelationListSync<TEntry>.AddWithoutSetParent(TEntry item)
+        public virtual void AddWithoutSetParent(TEntry item)
         {
+            throw new NotImplementedException();
         }
 
-        void IRelationListSync<TEntry>.RemoveWithoutClearParent(TEntry item)
+        public virtual void RemoveWithoutClearParent(TEntry item)
         {
+            throw new NotImplementedException();
         }
 
         #endregion

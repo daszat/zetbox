@@ -56,7 +56,9 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
 
             string entryProxyType = entryType + "." + rel.GetRelationClassName() + "Proxy";
 
-            Call(host, ctx, serializationList, name, exposedCollectionInterface, referencedInterface, backingName, backingCollectionType, aSideType, bSideType, entryType, providerCollectionType, rel.ExportGuid, endRole, eagerLoading, entryProxyType);
+            string inverseNavigatorName = otherEnd.Navigator != null ? otherEnd.Navigator.Name : null;
+
+            Call(host, ctx, serializationList, name, exposedCollectionInterface, referencedInterface, backingName, backingCollectionType, aSideType, bSideType, entryType, providerCollectionType, rel.ExportGuid, endRole, eagerLoading, entryProxyType, inverseNavigatorName);
         }
 
         public static string RelationToBackingCollectionType(Relation rel, RelationEnd otherEnd)
@@ -68,11 +70,11 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
 
             if (rel.NeedsPositionStorage(otherEnd.GetRole()))
             {
-                result = String.Format("{0}SideListWrapper", otherEnd.GetRole());
+                result = String.Format("NHibernate{0}SideListWrapper", otherEnd.GetRole());
             }
             else
             {
-                result = String.Format("{0}SideCollectionWrapper", otherEnd.GetRole());
+                result = String.Format("NHibernate{0}SideCollectionWrapper", otherEnd.GetRole());
             }
 
             return result;

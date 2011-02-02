@@ -23,6 +23,7 @@
 <%@ Parameter Name="role" Type="RelationEndRole" %>
 <%@ Parameter Name="eagerLoading" Type="bool" %>
 <%@ Parameter Name="entryProxyType" Type="string" %>
+<%@ Parameter Name="inverseNavigatorName" Type="string" %>
    		// <%= this.GetType() %>
 		<%= GetModifiers() %> <%= exposedCollectionInterface %><<%= referencedInterface %>> <%= name %>
 		{
@@ -31,19 +32,24 @@
 				if (<%= backingName %> == null)
 				{
 					<%= backingName %> 
-						= new <%= backingCollectionType %><<%= aSideType %>, <%= bSideType %>, <%= entryType %>, ICollection<<%= entryType %>>>(
+						= new <%= backingCollectionType %><<%= aSideType %>, <%= bSideType %>, <%= entryType %>>(
 							this, 
 							new ProjectedCollection<<%= entryProxyType %>, <%= entryType %>>(
                                 this.Proxy.<%= name %>,
                                 p => (<%= entryType %>)OurContext.AttachAndWrap(p),
-                                ce => (<%= entryProxyType %>)((NHibernatePersistenceObject)ce).NHibernateProxy));
+                                ce => (<%= entryProxyType %>)((NHibernatePersistenceObject)ce).NHibernateProxy),
+<% if (!String.IsNullOrEmpty(inverseNavigatorName)) { %>
+                            entry => (IRelationListSync<<%= entryType %>>)entry.<%= role == RelationEndRole.A ? "B" : "A" %>.<%= inverseNavigatorName %>);
+<% } else { %>
+                            entry => (IRelationListSync<<%= entryType %>>)null);
+<% } %>
                     if (<%= name %>_was_eagerLoaded) { <%= name %>_was_eagerLoaded = false; }
 				}
 				return (<%= exposedCollectionInterface %><<%= referencedInterface %>>)<%= backingName %>;
 			}
 		}
 
-		private <%= backingCollectionType %><<%= aSideType %>, <%= bSideType %>, <%= entryType %>, ICollection<<%= entryType %>>> <%= backingName %>;
+		private <%= backingCollectionType %><<%= aSideType %>, <%= bSideType %>, <%= entryType %>> <%= backingName %>;
 
         // ignored, but required for Serialization
         private bool <%= name %>_was_eagerLoaded;
