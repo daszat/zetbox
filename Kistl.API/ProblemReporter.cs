@@ -26,7 +26,9 @@ namespace Kistl.API
             try
             {
                 System.Diagnostics.ProcessStartInfo si = new System.Diagnostics.ProcessStartInfo();
-                si.FileName = Path.Combine(ProgramFilesx86(), "FogBugz" + Path.DirectorySeparatorChar + "Screenshot" + Path.DirectorySeparatorChar + "screenshot.exe");
+                var filename = Path.Combine(ProgramFilesx86(), "FogBugz" + Path.DirectorySeparatorChar + "Screenshot" + Path.DirectorySeparatorChar + "screenshot.exe");
+                if (!File.Exists(filename)) throw new InvalidOperationException("FogBugz screenshot tool not found. Maybe it's not installed");
+                si.FileName = filename;
                 si.Arguments = "/picture";
                 System.Diagnostics.Process.Start(si);
             }

@@ -504,14 +504,13 @@ namespace Kistl.Client.Presentables.KistlBase
         #endregion
 
         #region Instances
-        private ObservableCollection<DataObjectViewModel> _instancesCache = null;
-        protected ObservableCollection<DataObjectViewModel> InstancesCache
+        private List<DataObjectViewModel> _instancesCache = null;
+        protected List<DataObjectViewModel> InstancesCache
         {
             get
             {
                 if (_instancesCache == null)
                 {
-                    _instancesCache = new ObservableCollection<DataObjectViewModel>();
                     LoadInstances();
                 }
                 return _instancesCache;
@@ -695,12 +694,7 @@ namespace Kistl.Client.Presentables.KistlBase
         /// </summary>
         public void ReloadInstances()
         {
-            if (_instancesCache != null)
-            {
-                _instancesCache.Clear();
-                LoadInstances();
-                ExecutePostFilter();
-            }
+            LoadInstances();
         }
 
         private bool _SelectFirstOnLoad = false;
@@ -953,21 +947,42 @@ namespace Kistl.Client.Presentables.KistlBase
             return DataContext.GetQuery<T>();
         }
 
+        private bool loadingInstances = false;
         /// <summary>
         /// Loads the instances of this DataType and adds them to the Instances collection
         /// </summary>
         private void LoadInstances()
         {
-            OnUpdateFromUI();
-            // Can execute?
-            if (Filter.Count(f => !f.Enabled && f.Required) > 0) return;
-
-            foreach (IDataObject obj in GetQuery()) // No order by - may be set from outside in LinqQuery! .Cast<IDataObject>().ToList().OrderBy(obj => obj.ToString()))
+            // Prevent loading instances twice
+            if (loadingInstances) return;
+            loadingInstances = true;
+            try
             {
-                var mdl = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, obj);
-                _instancesCache.Add(mdl);
+                // This may change a filter value
+                // Changing a filter value causes the view
+                // to call ReloadInstances
+                OnUpdateFromUI();
+
+                // Can execute?
+                if (Filter.Count(f => !f.Enabled && f.Required) > 0)
+                {
+                    // leave result or return empty result
+                    if (_instancesCache == null) _instancesCache = new List<DataObjectViewModel>();
+                    return;
+                }
+
+                _instancesCache = new List<DataObjectViewModel>();
+                foreach (IDataObject obj in GetQuery()) // No order by - may be set from outside in LinqQuery! .Cast<IDataObject>().ToList().OrderBy(obj => obj.ToString()))
+                {
+                    var mdl = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, obj);
+                    _instancesCache.Add(mdl);
+                }
+                OnInstancesChanged();
             }
-            OnInstancesChanged();
+            finally
+            {
+                loadingInstances = false;
+            }
         }
 
         /// <summary>
@@ -1018,7 +1033,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 _instances = new ObservableCollection<DataObjectViewModel>(tmp);
             }
 
-            // Can be chaned -> listen to that
+            // Can be changed in UI -> listen to that
             _instances.CollectionChanged += new NotifyCollectionChangedEventHandler(_instances_CollectionChanged);
 
             _proxyCache.Clear();
