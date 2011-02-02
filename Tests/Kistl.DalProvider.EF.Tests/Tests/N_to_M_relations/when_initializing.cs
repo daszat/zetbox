@@ -1,5 +1,5 @@
 
-namespace Kistl.DalProvider.EF.Tests.N_to_M_relations
+namespace Kistl.DalProvider.Ef.Tests.N_to_M_relations
 {
     using System;
     using System.Collections.Generic;
