@@ -232,15 +232,33 @@ namespace Kistl.API.AbstractConsumerTests.N_to_M_relations
         }
 
         [Test]
-        public void when_deleting_items()
+        public void when_clearing_the_list()
         {
             aSide1.BSide.Add(bSide1);
             SubmitAndReload();
 
             aSide1.BSide.Clear();
 
+            Assert.That(
+                ctx.AttachedObjects
+                    .OfType<IRelationEntry>()
+                    .Where(re => re.ObjectState != DataObjectState.Deleted)
+                    .ToArray(),
+                Is.Empty,
+                "After clearing the collection, an undeleted relation entry remained");
+
+            ctx.SubmitChanges();
+        }
+
+        [Test]
+        public void when_deleting_items()
+        {
+            aSide1.BSide.Add(bSide1);
+            SubmitAndReload();
+
             ctx.Delete(aSide1);
             ctx.Delete(bSide1);
+
             ctx.SubmitChanges();
         }
     }

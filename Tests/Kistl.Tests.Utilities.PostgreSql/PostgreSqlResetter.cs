@@ -89,13 +89,14 @@ namespace Kistl.Tests.Utilities.PostgreSql
         {
             var binPath = Path.Combine(GetPgSqlBinPath(), String.Format("{0}.exe", util));
 
-            var dumpInfo = new ProcessStartInfo(binPath, args);
-            dumpInfo.UseShellExecute = false;
-            dumpInfo.RedirectStandardOutput = true;
-            dumpInfo.RedirectStandardError = true;
-            dumpInfo.ErrorDialog = false;
+            var pi = new ProcessStartInfo(binPath, args);
+            pi.UseShellExecute = false;
+            pi.RedirectStandardOutput = true;
+            pi.RedirectStandardError = true;
+            pi.ErrorDialog = false;
+            pi.CreateNoWindow = true;
 
-            var p = Process.Start(dumpInfo);
+            var p = Process.Start(pi);
 
             p.ErrorDataReceived += (object sender, DataReceivedEventArgs e) =>
             {
