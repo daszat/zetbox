@@ -1,5 +1,5 @@
 
-namespace Kistl.DalProvider.NHibernate.Tests.N_to_M_relations
+namespace Kistl.DalProvider.Client.Tests.N_to_M_relations
 {
     using System;
     using System.Collections.Generic;
@@ -10,7 +10,7 @@ namespace Kistl.DalProvider.NHibernate.Tests.N_to_M_relations
     using NUnit.Framework;
     using Base = Kistl.API.AbstractConsumerTests.N_to_M_relations;
 
-    public class should_synchronize : Base.should_synchronize
+    public class when_deleting : Base.when_deleting
     {
     }
 }

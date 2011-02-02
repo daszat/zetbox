@@ -111,6 +111,9 @@
     <Compile Include="Tests\CompoundObject\when_querying.cs" />
     <Compile Include="Tests\CompoundObject\when_roundtrip.cs" />
     <Compile Include="Tests\ContextTests\when_deleting.cs" />
+    <Compile Include="Tests\N_to_M_relations\when_adding.cs" />
+    <Compile Include="Tests\N_to_M_relations\when_deleting.cs" />
+    <Compile Include="Tests\N_to_M_relations\when_initializing.cs" />
     <Compile Include="Tests\one_to_N_relations\when_removing_from_NSide_property.cs" />
     <Compile Include="Tests\one_to_N_relations\when_adding_to_NSide_property.cs" />
     <Compile Include="Tests\one_to_N_relations\should_obey_order.cs" />
