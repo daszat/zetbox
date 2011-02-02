@@ -1,5 +1,5 @@
 -- Backup Database
-BACKUP DATABASE Kistl TO DISK = 'c:\temp\zbox.bak' WITH FORMAT
+BACKUP DATABASE zbox TO DISK = 'c:\temp\zbox.bak' WITH FORMAT
 GO
 -- Kill existing users
 DECLARE @dbname varchar(40)
