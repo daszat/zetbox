@@ -51,7 +51,7 @@
         -->
 
       <!-- since the test are driven from the client app domain, we need to reset the database from here -->
-      <Module>Tests.Utilities.PostgreSql.UtilityModule, Tests.Utilities.PostgreSql</Module>
+      <Module>Kistl.Tests.Utilities.PostgreSql.UtilityModule, Kistl.Tests.Utilities.PostgreSql</Module>
 
     </Modules>
   </Client>

@@ -1,5 +1,5 @@
 
-namespace Kistl.Tests.Utilities.PostgresSql
+namespace Kistl.Tests.Utilities.PostgreSql
 {
     using System;
     using System.Collections.Generic;
