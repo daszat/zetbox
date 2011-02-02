@@ -50,6 +50,7 @@ namespace Kistl.Client.WPF
                 {
                     _thread = new Thread(new ThreadStart(Run));
                     _thread.SetApartmentState(ApartmentState.STA);
+                    _thread.IsBackground = true; // do not block main process from closing
                     _thread.Start();
 
                     _created.WaitOne();
