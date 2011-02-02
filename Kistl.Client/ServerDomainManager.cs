@@ -58,8 +58,11 @@ namespace Kistl.Client
                     try
                     {
                         clientSponsor.Unregister(serverManager as MarshalByRefObject);
+                        Logging.Log.Info("Closing client sponsor");
                         clientSponsor.Close();
+                        Logging.Log.Info("Stopping server manager");
                         serverManager.Stop();
+                        Logging.Log.Info("Unloading AssemblyLoader from server app domain");
                         AssemblyLoader.Unload(serverDomain);
                     }
                     catch (Exception ex)
@@ -68,13 +71,22 @@ namespace Kistl.Client
                         throw;
                     }
                 }
+                else
+                {
+                    Logging.Log.Error("Tried unloading an already unloaded server manager.");
+                }
                 
                 clientSponsor = null;
                 serverManager = null;
 
                 if (serverDomain != null)
                 {
+                    Logging.Log.Info("Unloading server app domain");
                     AppDomain.Unload(serverDomain);
+                }
+                else
+                {
+                    Logging.Log.Warn("Server app domain already vanished.");
                 }
 
                 serverDomain = null;
