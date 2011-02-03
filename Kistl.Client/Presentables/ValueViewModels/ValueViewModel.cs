@@ -585,6 +585,8 @@ namespace Kistl.Client.Presentables.ValueViewModels
         {
             get
             {
+                // It makes no sense to display the 01.01.0001 in the View - empty is better
+                if (base.Value == DateTime.MinValue) return null;
                 return base.Value;
             }
             set
