@@ -203,7 +203,7 @@ namespace Kistl.App.Base
         {
             e.Result = String.Format("{0}{1}",
                 obj.Deleted == true ? "(DELETED) " : string.Empty,
-                obj.ToStringCache);
+                obj.FullName);
 
             FixupFloatingObjectsToString(obj, e);
         }

@@ -279,12 +279,12 @@ namespace Kistl.App.Base
         #region TypeRef
         public static void OnUpdateToStringCache_TypeRef(Kistl.App.Base.TypeRef obj)
         {
-            obj.ToStringCache = String.Format("{0}{1}, {2}",
-                obj.FullName,
-                obj.GenericArguments.Count > 0
-                    ? "<" + String.Join(", ", obj.GenericArguments.Select(tr => tr.FullName).ToArray()) + ">"
-                    : String.Empty,
-                    obj.Assembly == null ? "(no assembly)" : obj.Assembly.Name);
+            //obj.ToStringCache = String.Format("{0}{1}, {2}",
+            //    obj.FullName,
+            //    obj.GenericArguments.Count > 0
+            //        ? "<" + String.Join(", ", obj.GenericArguments.Select(tr => tr.FullName).ToArray()) + ">"
+            //        : String.Empty,
+            //        obj.Assembly == null ? "(no assembly)" : obj.Assembly.Name);
         }
 
         public static void OnFullName_PostSetter_TypeRef(Kistl.App.Base.TypeRef obj, PropertyPostSetterEventArgs<System.String> e)
