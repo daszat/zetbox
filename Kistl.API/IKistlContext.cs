@@ -448,9 +448,11 @@ namespace Kistl.API
         /// Stores a blob stream
         /// </summary>
         /// <param name="s">Stream to store</param>
+        /// <param name="exportGuid">The export guid of the blob to store</param>
+        /// <param name="timestamp">The created on timestamp of the blob to store</param>
         /// <param name="filename">optional filename</param>
         /// <returns>The relative storage path. Must be stored in Blob.StoragePath</returns>
-        string StoreBlobStream(System.IO.Stream s, string filename);
+        string StoreBlobStream(System.IO.Stream s, Guid exportGuid, DateTime timestamp, string filename);
 
         /// <summary>
         /// Creates a new IRelationEntry by Type

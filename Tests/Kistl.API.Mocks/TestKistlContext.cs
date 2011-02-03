@@ -343,7 +343,7 @@ namespace Kistl.API.Mocks
                 }
             }
         }
-        string IZBoxContextInternals.StoreBlobStream(System.IO.Stream s, string filename)
+        string IZBoxContextInternals.StoreBlobStream(System.IO.Stream s, Guid exportGuid, DateTime timestamp, string filename)
         {
             throw new NotImplementedException();
         }

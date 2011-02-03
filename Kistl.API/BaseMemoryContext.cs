@@ -565,7 +565,7 @@ namespace Kistl.API
             }
         }
 
-        string IZBoxContextInternals.StoreBlobStream(System.IO.Stream s, string filename)
+        string IZBoxContextInternals.StoreBlobStream(System.IO.Stream s, Guid exportGuid, DateTime timestamp, string filename)
         {
             // No supprt, but do not throw an exception
             // A memory context could be loaded from a file

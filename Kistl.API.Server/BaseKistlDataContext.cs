@@ -520,15 +520,17 @@ namespace Kistl.API.Server
             var blob = (Kistl.App.Base.Blob)this.CreateInternal(iftFactory(typeof(Kistl.App.Base.Blob)), true);
             blob.OriginalName = filename;
             blob.MimeType = mimetype;
-            blob.StoragePath = this.Internals().StoreBlobStream(s, filename);
+            blob.StoragePath = this.Internals().StoreBlobStream(s, blob.ExportGuid, DateTime.Today /* but should be blob.CreatedOn. Around midnight the path may differ */, filename);
 
             return blob.ID;
         }
 
-        string IZBoxContextInternals.StoreBlobStream(System.IO.Stream s, string filename)
+        string IZBoxContextInternals.StoreBlobStream(System.IO.Stream s, Guid exportGuid, DateTime timestamp, string filename)
         {
-            DateTime today = DateTime.Today;
-            var storagePath = string.Format(@"{0:0000}\{1:00}\{2:00}\({3}) - {4}", today.Year, today.Month, today.Day, Guid.NewGuid(), filename);
+            if (exportGuid == Guid.Empty) throw new ArgumentOutOfRangeException("exportGuid", "exportGuid cannot be empty");
+            if (timestamp == DateTime.MinValue) throw new ArgumentOutOfRangeException("timestamp", "timestamp cannot be empty");
+
+            var storagePath = string.Format(@"{0:0000}\{1:00}\{2:00}\({3}) - {4}", timestamp.Year, timestamp.Month, timestamp.Day, exportGuid, filename);
             string path = System.IO.Path.Combine(config.Server.DocumentStore, storagePath);
             System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(path));
 

@@ -928,7 +928,7 @@ namespace Kistl.DalProvider.Client
                 IsModified = true;
             }
         }
-        string IZBoxContextInternals.StoreBlobStream(Stream s, string filename)
+        string IZBoxContextInternals.StoreBlobStream(Stream s, Guid exportGuid, DateTime timestamp, string filename)
         {
             throw new NotImplementedException();
         }
