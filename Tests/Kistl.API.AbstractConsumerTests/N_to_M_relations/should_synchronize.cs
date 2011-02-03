@@ -12,11 +12,11 @@ namespace Kistl.API.AbstractConsumerTests.N_to_M_relations
     public abstract class should_synchronize
         : AbstractTestFixture
     {
-        IKistlContext ctx;
-        N_to_M_relations_A aSide1;
-        N_to_M_relations_A aSide2;
-        N_to_M_relations_B bSide1;
-        N_to_M_relations_B bSide2;
+        protected IKistlContext ctx;
+        protected N_to_M_relations_A aSide1;
+        protected N_to_M_relations_A aSide2;
+        protected N_to_M_relations_B bSide1;
+        protected N_to_M_relations_B bSide2;
 
         [SetUp]
         public void InitTestObjects()
@@ -36,7 +36,7 @@ namespace Kistl.API.AbstractConsumerTests.N_to_M_relations
             ctx = null;
         }
 
-        private void SubmitAndReload()
+        protected void SubmitAndReload()
         {
             ctx.SubmitChanges();
             ctx = GetContext();
@@ -255,6 +255,9 @@ namespace Kistl.API.AbstractConsumerTests.N_to_M_relations
         {
             aSide1.BSide.Add(bSide1);
             SubmitAndReload();
+
+            // TODO: remove this after case 2115 is fixed
+            aSide1.BSide.Clear();
 
             ctx.Delete(aSide1);
             ctx.Delete(bSide1);
