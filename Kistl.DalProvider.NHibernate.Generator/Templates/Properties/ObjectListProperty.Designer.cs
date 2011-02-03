@@ -76,6 +76,7 @@ this.WriteObjects("null");
 #line 34 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ObjectListProperty.cst"
 this.WriteObjects(",\r\n");
 this.WriteObjects("                        this,\r\n");
+this.WriteObjects("                        () => this.NotifyPropertyChanging(\"",  name , "\", null, null),\r\n");
 this.WriteObjects("                        () => this.NotifyPropertyChanged(\"",  name , "\", null, null),\r\n");
 this.WriteObjects("                        new ProjectedCollection<",  referencedProxy , ", ",  referencedInterface , ">(\r\n");
 this.WriteObjects("                            Proxy.",  name , ",\r\n");
@@ -87,7 +88,7 @@ this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("    \r\n");
 this.WriteObjects("        private ",  wrapperClass , "<",  referencedInterface , "> ",  wrapperName , ";\r\n");
-#line 47 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 48 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ObjectListProperty.cst"
 AddSerialization(serializationList, name, false); 
 
         }

@@ -15,41 +15,6 @@ namespace Kistl.API.AbstractConsumerTests
     public abstract class AbstractReadonlyListPropertiesTests
         : AbstractTestFixture
     {
-        // TODO: create Test object with value list
-        //[Test]
-        //public void value_lists_should_have_elements()
-        //{
-        //    using (IKistlContext ctx = GetContext())
-        //    {
-        //        var list = ctx.GetQuery<Kunde>();
-        //        int count = 0;
-        //        foreach (Kunde k in list)
-        //        {
-        //            count += k.EMails.Count;
-        //        }
-        //        Assert.That(count, Is.GreaterThan(0));
-        //    }
-        //}
-
-        [Test]
-        public void object_lists_should_have_elements()
-        {
-            using (IKistlContext ctx = GetContext())
-            {
-                var list = ctx.GetQuery<ObjectClass>();
-                int count = 0;
-                foreach (var cls in list)
-                {
-                    count += cls.ImplementsInterfaces.Count;
-                    foreach (var m in cls.ImplementsInterfaces)
-                    {
-                        Assert.That(m.ID, Is.Not.EqualTo(Kistl.API.Helper.INVALIDID));
-                    }
-                }
-                Assert.That(count, Is.GreaterThan(0));
-            }
-        }
-
         [Test]
         public void navigating_a_fk_list_property_should_yield_related_objects()
         {

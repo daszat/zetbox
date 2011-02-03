@@ -33,6 +33,7 @@
                         "<%= otherName %>",
                         <% if (!String.IsNullOrEmpty(positionPropertyName)) { %>"<%= positionPropertyName %>"<% } else { %>null<% } %>,
                         this,
+                        () => this.NotifyPropertyChanging("<%= name %>", null, null),
                         () => this.NotifyPropertyChanged("<%= name %>", null, null),
                         new ProjectedCollection<<%= referencedProxy %>, <%= referencedInterface %>>(
                             Proxy.<%= name %>,

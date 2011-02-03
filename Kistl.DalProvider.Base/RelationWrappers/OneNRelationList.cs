@@ -23,20 +23,32 @@ namespace Kistl.DalProvider.Base.RelationWrappers
         private readonly string _propertyName;
         private readonly string _posProperty;
         private readonly IDataObject _owner;
-        private readonly Action _ownerNotifier;
+        private readonly Action _ownerChangingNotifier;
+        private readonly Action _ownerChangedNotifier;
         private List<T> collection; // can change
 
+        #region legacy constructors, invalidly still used by Memory provider
         ///// <param name="fkProperty">the name of the fk_Property which does notification, but not collection fixing</param>
         public OneNRelationList(string fkProperty, string posProperty, IDataObject owner, Action ownerNotifier)
             : this(fkProperty, posProperty, owner, ownerNotifier, new List<T>()) { }
 
         ///// <param name="fkProperty">the name of the fk_Property which does notification, but not collection fixing</param>
         public OneNRelationList(string fkProperty, string posProperty, IDataObject owner, Action ownerNotifier, IEnumerable<T> collection)
+            : this(fkProperty, posProperty, owner, ownerNotifier, ownerNotifier, new List<T>()) { }
+        #endregion
+
+        ///// <param name="fkProperty">the name of the fk_Property which does notification, but not collection fixing</param>
+        public OneNRelationList(string fkProperty, string posProperty, IDataObject owner, Action ownerChangingNotifier, Action ownerChangedNotifier)
+            : this(fkProperty, posProperty, owner, ownerChangingNotifier, ownerChangedNotifier, new List<T>()) { }
+
+        ///// <param name="fkProperty">the name of the fk_Property which does notification, but not collection fixing</param>
+        public OneNRelationList(string fkProperty, string posProperty, IDataObject owner, Action ownerChangingNotifier, Action ownerChangedNotifier, IEnumerable<T> collection)
         {
             _propertyName = fkProperty;
             _posProperty = posProperty;
             _owner = owner;
-            _ownerNotifier = ownerNotifier;
+            _ownerChangingNotifier = ownerChangingNotifier;
+            _ownerChangedNotifier = ownerChangedNotifier;
             this.collection = collection != null ? new List<T>(collection.OrderBy(i => GetPosition(i))) : new List<T>();
 
             //foreach (var item in this.collection)
@@ -58,6 +70,7 @@ namespace Kistl.DalProvider.Base.RelationWrappers
                     int idx = collection.FindIndex(i => GetPosition(i) > pos.Value);
                     if (idx >= 0)
                     {
+                        NotifyOwnerChanging();
                         collection.Insert(idx, item);
                         OnItemAdded(item, idx);
 
@@ -66,6 +79,7 @@ namespace Kistl.DalProvider.Base.RelationWrappers
                 }
             }
 
+            NotifyOwnerChanging();
             collection.Add(item);
             OnItemAdded(item, collection.Count - 1);
         }
@@ -73,14 +87,21 @@ namespace Kistl.DalProvider.Base.RelationWrappers
         void IRelationListSync<T>.RemoveWithoutClearParent(T item)
         {
             int index = collection.IndexOf(item);
+            NotifyOwnerChanging();
             collection.Remove(item);
             OnItemRemoved(item, index);
         }
 
-        private void NotifyOwner()
+        private void NotifyOwnerChanging()
         {
-            if (_ownerNotifier != null)
-                _ownerNotifier();
+            if (_ownerChangingNotifier != null)
+                _ownerChangingNotifier();
+        }
+
+        private void NotifyOwnerChanged()
+        {
+            if (_ownerChangedNotifier != null)
+                _ownerChangedNotifier();
         }
 
         private void DoInsert(T item, int index)
@@ -89,6 +110,7 @@ namespace Kistl.DalProvider.Base.RelationWrappers
                 throw new ArgumentNullException("item", "Cannot add a NULL Object to this collection");
             if (_owner.Context != item.Context)
                 throw new WrongKistlContextException();
+            NotifyOwnerChanging();
             collection.Insert(index, item);
             SetPointerProperty(item);
             if (!String.IsNullOrEmpty(_posProperty))
@@ -100,6 +122,7 @@ namespace Kistl.DalProvider.Base.RelationWrappers
 
         private void DoRemoveAt(T item, int index)
         {
+            NotifyOwnerChanging();
             collection.RemoveAt(index);
             ClearPointerProperty(item);
             OnItemRemoved(item, index);
@@ -293,7 +316,7 @@ namespace Kistl.DalProvider.Base.RelationWrappers
 
         protected virtual void OnItemAdded(T newItem, int index)
         {
-            NotifyOwner();
+            NotifyOwnerChanged();
 
             if (_CollectionChanged != null)
                 _CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, newItem, index));
@@ -303,7 +326,7 @@ namespace Kistl.DalProvider.Base.RelationWrappers
 
         protected virtual void OnItemRemoved(T removedItem, int index)
         {
-            NotifyOwner();
+            NotifyOwnerChanged();
 
             if (_CollectionChanged != null)
                 _CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, removedItem, index));
@@ -313,7 +336,7 @@ namespace Kistl.DalProvider.Base.RelationWrappers
 
         protected virtual void OnCollectionReset()
         {
-            NotifyOwner();
+            NotifyOwnerChanged();
 
             if (_CollectionChanged != null)
                 _CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
@@ -321,6 +344,7 @@ namespace Kistl.DalProvider.Base.RelationWrappers
 
         protected virtual void OnCollectionResetting()
         {
+            NotifyOwnerChanging();
             //foreach (var item in collection)
             //{
             //    item.PropertyChanged -= item_PropertyChanged;

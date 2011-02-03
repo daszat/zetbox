@@ -31,8 +31,6 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries
                 null);
         }
 
-        // test copy of base.ApplyObjectReferenceProperty() setting inverseNavigatorIsList = true and the proper ownInterface name
-        // this can be folded into base when all N:M relations use OneNRelationLists
         protected override void ApplyObjectReferenceProperty(Relation rel, RelationEndRole endRole, string propertyName)
         {
             RelationEnd relEnd = rel.GetEndFromRole(endRole);
