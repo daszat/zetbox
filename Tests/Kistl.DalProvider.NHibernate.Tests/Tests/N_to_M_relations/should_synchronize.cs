@@ -14,7 +14,7 @@ namespace Kistl.DalProvider.NHibernate.Tests.N_to_M_relations
     {
         // TODO: remove this after case 2115 is fixed
         [Test]
-        public void when_deleting_items()
+        public void when_deleting_items_without_workaround()
         {
             aSide1.BSide.Add(bSide1);
             SubmitAndReload();
