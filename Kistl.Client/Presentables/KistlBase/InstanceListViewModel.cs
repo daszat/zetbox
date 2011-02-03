@@ -945,7 +945,7 @@ namespace Kistl.Client.Presentables.KistlBase
 
         public IQueryable GetTypedQuery<T>() where T : class, IDataObject
         {
-            return DataContext.GetQuery<T>();
+            return DataContext.GetQuery<T>().ToList().OrderBy(obj => obj.ToString()).AsQueryable();
         }
 
         private bool loadingInstances = false;
@@ -975,6 +975,10 @@ namespace Kistl.Client.Presentables.KistlBase
                 _instancesCache = new List<DataObjectViewModel>();
                 foreach (IDataObject obj in GetQuery()) // No order by - may be set from outside in LinqQuery! .Cast<IDataObject>().ToList().OrderBy(obj => obj.ToString()))
                 {
+                    // Not interested in deleted objects
+                    // TODO: Discuss if a query should return deleted objects
+                    if (obj.ObjectState == DataObjectState.Deleted) continue;
+
                     var mdl = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, obj);
                     _instancesCache.Add(mdl);
                 }

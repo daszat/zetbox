@@ -8,6 +8,7 @@ namespace Kistl.Client.Presentables
     using System.Text;
 
     using Kistl.API;
+    using System.Collections;
     
     /// <summary>
     /// This interface describes common operations and properties of action which can be taken by the user.
@@ -357,6 +358,10 @@ namespace Kistl.Client.Presentables
             {
                 return ((IEnumerable<T>)data).Count() > 0;
             }
+            else if (data is IEnumerable)
+            {
+                return ((IEnumerable)data).OfType<T>().Count() > 0;
+            }
             else return (data is T);
         }
 
@@ -366,6 +371,10 @@ namespace Kistl.Client.Presentables
             if (data is IEnumerable<T>)
             {
                 objects = (IEnumerable<T>)data;
+            }
+            else if (data is IEnumerable)
+            {
+                objects = ((IEnumerable)data).OfType<T>();
             }
             else if (data is T)
             {
