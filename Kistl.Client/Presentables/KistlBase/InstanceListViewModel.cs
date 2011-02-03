@@ -945,7 +945,7 @@ namespace Kistl.Client.Presentables.KistlBase
 
         public IQueryable GetTypedQuery<T>() where T : class, IDataObject
         {
-            return DataContext.GetQuery<T>().ToList().OrderBy(obj => obj.ToString()).AsQueryable();
+            return DataContext.GetQuery<T>(); // ToList would make all filter client side filter .ToList().OrderBy(obj => obj.ToString()).AsQueryable();
         }
 
         private bool loadingInstances = false;
