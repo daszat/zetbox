@@ -534,6 +534,12 @@ namespace Kistl.API.Server
             string path = System.IO.Path.Combine(config.Server.DocumentStore, storagePath);
             System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(path));
 
+            if (System.IO.File.Exists(path))
+            {
+                System.IO.File.SetAttributes(path, System.IO.FileAttributes.Normal);
+                System.IO.File.Delete(path);
+            }
+
             using (var file = System.IO.File.Open(path, System.IO.FileMode.Create, System.IO.FileAccess.Write))
             {
                 file.SetLength(0);
