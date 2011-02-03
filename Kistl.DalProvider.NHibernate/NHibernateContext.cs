@@ -13,6 +13,7 @@ namespace Kistl.DalProvider.NHibernate
     using Kistl.API.Server;
     using Kistl.API.Utils;
     using Kistl.App.Base;
+    using System.Data;
 
     public sealed class NHibernateContext
         : BaseKistlDataContext, IKistlServerContext
@@ -496,14 +497,39 @@ namespace Kistl.DalProvider.NHibernate
             return ToProxyType(ToImplementationType(ifType));
         }
 
+
         protected override int ExecGetSequenceNumber(Guid sequenceGuid)
         {
-            throw new NotImplementedException();
+            return CallGetSequenceNumber(sequenceGuid, "GetSequenceNumber");
         }
 
         protected override int ExecGetContinuousSequenceNumber(Guid sequenceGuid)
         {
-            throw new NotImplementedException();
+            return CallGetSequenceNumber(sequenceGuid, "GetContinuousSequenceNumber");
+        }
+
+        private int CallGetSequenceNumber(Guid sequenceGuid, string procName)
+        {
+            var cmd = _nhSession.Connection.CreateCommand();
+            cmd.CommandText = "dbo.\"" + procName + "\"";
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            var pIn = cmd.CreateParameter();
+            pIn.ParameterName = "seqNumber";
+            pIn.Value = sequenceGuid;
+            pIn.DbType = DbType.Guid;
+            pIn.Direction = ParameterDirection.Input;
+            cmd.Parameters.Add(pIn);
+
+            var pOut = cmd.CreateParameter();
+            pOut.ParameterName = "result";
+            pOut.DbType = DbType.Int32;
+            pOut.Direction = ParameterDirection.Output;
+            cmd.Parameters.Add(pOut);
+
+            cmd.ExecuteNonQuery();
+
+            return (int)pOut.Value;
         }
 
         private ITransaction _transaction;
