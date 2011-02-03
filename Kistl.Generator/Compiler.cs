@@ -279,6 +279,11 @@ namespace Kistl.Generator
             var archivePath = _config.Server.CodeGenArchivePath;
             if (!String.IsNullOrEmpty(archivePath))
             {
+                if (!Directory.Exists(archivePath))
+                {
+                    Log.InfoFormat("Creating archive destination at [{0}]", archivePath);
+                    Directory.CreateDirectory(archivePath);
+                }
                 var destDir = Path.Combine(archivePath, DateTime.Now.ToString("'CodeGen'yyyyMMdd'_'HHmmss"));
                 if (Directory.Exists(outputPath))
                 {

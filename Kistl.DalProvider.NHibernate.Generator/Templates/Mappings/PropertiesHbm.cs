@@ -107,6 +107,13 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
                             // invalid: this.WriteObjects("inverse=\"true\" ");
                         }
                         this.WriteLine("/>");
+                        if (rel.NeedsPositionStorage(relEnd.GetRole()))
+                        {
+                            string posNameAttr = String.Format("name=\"{0}\"", Construct.ListPositionPropertyName(relEnd));
+                            string posColumnAttr = String.Format("column=\"`{0}`\"", Construct.ListPositionColumnName(otherEnd, prefix));
+                            this.WriteObjects("        <property ", posNameAttr, " ", posColumnAttr, " />");
+                            this.WriteLine();
+                        }
                     }
                     break;
                 case RelationType.n_m:
@@ -118,10 +125,6 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
 
             this.WriteLine();
 
-            if (rel.NeedsPositionStorage(relEnd.GetRole()))
-            {
-                this.WriteLine("        <!-- pos storage missing -->");
-            }
         }
 
         private void ApplyNMProperty(

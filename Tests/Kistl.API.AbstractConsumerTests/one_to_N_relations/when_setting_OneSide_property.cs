@@ -15,9 +15,19 @@ namespace Kistl.API.AbstractConsumerTests.one_to_N_relations
     public abstract class when_setting_OneSide_property
         : when_changing_one_to_n_relations
     {
+        protected override NUnit.Framework.Constraints.Constraint GetOneSideChangingConstraint()
+        {
+            return Has.No.Member(nSide1);
+        }
+
         protected override void DoModification()
         {
-            nSide.OneSide = oneSide;
+            nSide1.OneSide = oneSide1;
+        }
+
+        protected override NUnit.Framework.Constraints.Constraint GetOneSideChangedConstraint()
+        {
+            return Has.Member(nSide1);
         }
 
         [Test]
@@ -25,11 +35,11 @@ namespace Kistl.API.AbstractConsumerTests.one_to_N_relations
         {
             DoModification();
 
-            Assert.That(nSide.OneSide, Is.EqualTo(oneSide));
+            Assert.That(nSide1.OneSide, Is.EqualTo(oneSide1));
 
             SubmitAndReload();
 
-            Assert.That(nSide.OneSide, Is.EqualTo(oneSide));
+            Assert.That(nSide1.OneSide, Is.EqualTo(oneSide1));
         }
 
         [Test]
@@ -37,11 +47,11 @@ namespace Kistl.API.AbstractConsumerTests.one_to_N_relations
         {
             DoModification();
 
-            Assert.That(oneSide.NSide, Has.Member(nSide));
+            Assert.That(oneSide1.NSide, Has.Member(nSide1));
 
             SubmitAndReload();
 
-            Assert.That(oneSide.NSide, Has.Member(nSide));
+            Assert.That(oneSide1.NSide, Has.Member(nSide1));
         }
     }
 }

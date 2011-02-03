@@ -1,5 +1,5 @@
 
-namespace Kistl.DalProvider.Client.Tests.one_to_N_relations
+namespace Kistl.IntegrationTests.one_to_N_relations
 {
     using System;
     using System.Collections.Generic;
@@ -11,11 +11,11 @@ namespace Kistl.DalProvider.Client.Tests.one_to_N_relations
 
     using NUnit.Framework;
 
-    public class when_adding_to_NSide_property
-        : Kistl.API.AbstractConsumerTests.one_to_N_relations.when_adding_to_NSide_property
+    public class when_setting_OneSide_property
+        : Kistl.API.AbstractConsumerTests.one_to_N_relations.when_setting_OneSide_property
     {
         public class after_reloading
-            : when_adding_to_NSide_property
+            : when_setting_OneSide_property
         {
             public override void InitTestObjects()
             {
@@ -24,7 +24,7 @@ namespace Kistl.DalProvider.Client.Tests.one_to_N_relations
             }
         }
         public class and_reloading
-            : when_adding_to_NSide_property
+            : when_setting_OneSide_property
         {
             protected override void DoModification()
             {

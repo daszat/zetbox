@@ -3,13 +3,13 @@ namespace Kistl.API.AbstractConsumerTests
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Linq;
     using System.Text;
     using Autofac;
     using Kistl.API.Configuration;
     using Kistl.API.Utils;
     using NUnit.Framework;
-    using System.ComponentModel;
 
     public abstract class AbstractTestFixture
     {
@@ -43,8 +43,8 @@ namespace Kistl.API.AbstractConsumerTests
             {
                 if (e.PropertyName == expectedPropertyName)
                 {
-                    Assert.That(hasChanging, Is.False, "changing event should be only triggered once");
-                    Assert.That(sender, Is.SameAs(notifier), "sender should be the notifying object (OnChanging)");
+                    Assert.That(hasChanging, Is.False, "changing event should be only triggered once for " + expectedPropertyName);
+                    Assert.That(sender, Is.SameAs(notifier), "sender should be the notifying object (OnChanging) for " + expectedPropertyName);
                     if (changingAsserts != null)
                         changingAsserts();
                     hasChanging = true;
@@ -54,10 +54,10 @@ namespace Kistl.API.AbstractConsumerTests
             {
                 if (e.PropertyName == expectedPropertyName)
                 {
-                    Assert.That(hasChanged, Is.False, "changed event should be only triggered once");
-                    Assert.That(sender, Is.SameAs(notifier), "sender should be the notifying object (OnChanged)");
+                    Assert.That(hasChanged, Is.False, "changed event should be only triggered once" + expectedPropertyName);
+                    Assert.That(sender, Is.SameAs(notifier), "sender should be the notifying object (OnChanged) for " + expectedPropertyName);
                     if (changedAsserts != null)
-                        changedAsserts(); 
+                        changedAsserts();
                     hasChanged = true;
                 }
             });
@@ -70,8 +70,8 @@ namespace Kistl.API.AbstractConsumerTests
 
             doChange();
 
-            Assert.That(hasChanging, Is.True, "should be notified about changing");
-            Assert.That(hasChanged, Is.True, "should be notified about change");
+            Assert.That(hasChanging, Is.True, "should be notified about changing of " + expectedPropertyName);
+            Assert.That(hasChanged, Is.True, "should be notified about change of " + expectedPropertyName);
 
             Assert.DoesNotThrow(() =>
             {

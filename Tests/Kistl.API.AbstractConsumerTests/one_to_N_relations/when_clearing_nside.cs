@@ -7,27 +7,35 @@ namespace Kistl.API.AbstractConsumerTests.one_to_N_relations
     using System.Text;
 
     using Kistl.API;
-    using Kistl.App.Base;
     using Kistl.App.Test;
 
     using NUnit.Framework;
 
-    public abstract class when_adding_to_NSide_property
+    public abstract class when_clearing_nside
         : when_changing_one_to_n_relations
     {
+        public override void InitTestObjects()
+        {
+            base.InitTestObjects();
+            // prepare
+            oneSide1.NSide.Add(nSide1);
+            oneSide1.NSide.Add(nSide2);
+        }
+
         protected override NUnit.Framework.Constraints.Constraint GetOneSideChangingConstraint()
         {
-            return Has.No.Member(nSide1);
+            return Is.EquivalentTo(new[] { nSide1, nSide2 });
         }
 
         protected override void DoModification()
         {
-            oneSide1.NSide.Add(nSide1);
+            // and go
+            oneSide1.NSide.Clear();
         }
 
         protected override NUnit.Framework.Constraints.Constraint GetOneSideChangedConstraint()
         {
-            return Has.Member(nSide1);
+            return Is.Empty;
         }
 
         [Test]
@@ -35,11 +43,13 @@ namespace Kistl.API.AbstractConsumerTests.one_to_N_relations
         {
             DoModification();
 
-            Assert.That(nSide1.OneSide, Is.EqualTo(oneSide1));
+            Assert.That(nSide1.OneSide, Is.Null);
+            Assert.That(nSide2.OneSide, Is.Null);
 
             SubmitAndReload();
 
-            Assert.That(nSide1.OneSide, Is.EqualTo(oneSide1));
+            Assert.That(nSide1.OneSide, Is.Null);
+            Assert.That(nSide2.OneSide, Is.Null);
         }
 
         [Test]
@@ -47,11 +57,13 @@ namespace Kistl.API.AbstractConsumerTests.one_to_N_relations
         {
             DoModification();
 
-            Assert.That(oneSide1.NSide, Has.Member(nSide1));
+            Assert.That(oneSide1.NSide, Has.No.Member(nSide1));
+            Assert.That(oneSide1.NSide, Has.No.Member(nSide2));
 
             SubmitAndReload();
 
-            Assert.That(oneSide1.NSide, Has.Member(nSide1));
+            Assert.That(oneSide1.NSide, Has.No.Member(nSide1));
+            Assert.That(oneSide1.NSide, Has.No.Member(nSide2));
         }
     }
 }
