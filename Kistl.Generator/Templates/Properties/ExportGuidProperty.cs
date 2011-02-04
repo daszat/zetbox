@@ -12,17 +12,17 @@ namespace Kistl.Generator.Templates.Properties
         : NotifyingValueProperty
     {
         public static void Call(Arebis.CodeGeneration.IGenerationHost host,
-          IKistlContext ctx, Serialization.SerializationMembersList serializationList)
+          IKistlContext ctx, Serialization.SerializationMembersList serializationList, string backingName)
         {
             if (host == null) { throw new ArgumentNullException("host"); }
 
             host.CallTemplate("Properties.ExportGuidProperty",
-                ctx, serializationList);
+                ctx, serializationList, backingName);
         }
 
         public ExportGuidProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx,
-            Serialization.SerializationMembersList serializationList)
-            : base(_host, ctx, serializationList, "Guid", "ExportGuid", String.Empty, "_ExportGuid") // TODO: use proper namespace
+            Serialization.SerializationMembersList serializationList, string backingName)
+            : base(_host, ctx, serializationList, "Guid", "ExportGuid", String.Empty, backingName) // TODO: use proper namespace
         {
         }
 

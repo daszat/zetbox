@@ -13,8 +13,8 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.Properties
     public class ExportGuidProperty
         : Templates.Properties.ExportGuidProperty
     {
-        public ExportGuidProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Serialization.SerializationMembersList list)
-            : base(_host, ctx, list)
+        public ExportGuidProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Serialization.SerializationMembersList list, string backingName)
+            : base(_host, ctx, list, backingName)
         {
         }
 

@@ -103,6 +103,14 @@ namespace Kistl.Generator
             {
                 // decouple from loop variable
                 var generator = gen;
+
+#if SERIALIZE_GENERATION_THREADS
+                Log.Warn("Serializing generation threads.");
+                using (var innerContainer = _container.BeginLifetimeScope())
+                {
+                    generator.Generate(innerContainer.Resolve<IKistlContext>(), workingPath);
+                }
+#else
                 var genThread = new Thread(() =>
                 {
                     try
@@ -124,11 +132,6 @@ namespace Kistl.Generator
                 genThread.Name = generator.BaseName;
                 genThread.Start();
                 threads.Add(genThread);
-
-#if SERIALIZE_GENERATION_THREADS
-                // serialize execution
-                Log.Warn("Serializing generation threads.");
-                genThread.Join();
 #endif
             }
 

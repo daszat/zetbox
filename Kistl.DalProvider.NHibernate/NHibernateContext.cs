@@ -31,7 +31,6 @@ namespace Kistl.DalProvider.NHibernate
         [SuppressMessage("Microsoft.Performance", "CA1805:DoNotInitializeUnnecessarily", Justification = "Uses global constant")]
         private int _newIDCounter = Helper.INVALIDID;
 
-
         internal NHibernateContext(
             IMetaDataResolver metaDataResolver,
             Identity identity,
@@ -76,39 +75,46 @@ namespace Kistl.DalProvider.NHibernate
         {
             if (obj == null) { throw new ArgumentNullException("obj"); }
             if (obj.Context != null && obj.Context != this) { throw new WrongKistlContextException("Nh.Attach"); }
+            if (obj.ID == Helper.INVALIDID) { throw new ArgumentException("NHibernate: cannot attach object without valid ID", "obj"); }
 
             // already attached?
             if (obj.Context == this) return obj;
 
-            // Handle created Objects
-            if (obj.ID == Helper.INVALIDID)
+            // Check if Object is already in this Context
+            var attachedObj = ContainsObject(GetInterfaceType(obj), obj.ID);
+            if (attachedObj != null)
             {
-                checked
-                {
-                    ((NHibernatePersistenceObject)obj).ID = --_newIDCounter;
-                }
+                // already attached, nothing to do
+                return attachedObj;
             }
-            else
-            {
-                // Check if Object is already in this Context
-                var attachedObj = ContainsObject(GetInterfaceType(obj), obj.ID);
-                if (attachedObj != null)
-                {
-                    // already attached, nothing to do
-                    return attachedObj;
-                }
 
-                // Check ID <-> newIDCounter
-                if (obj.ID < _newIDCounter)
-                {
-                    _newIDCounter = obj.ID;
-                }
+            // Check ID <-> newIDCounter
+            if (obj.ID < _newIDCounter)
+            {
+                _newIDCounter = obj.ID;
             }
 
             _attachedObjects.Add(obj);
             _attachedObjectsByProxy.Add(obj);
 
             return base.Attach(obj);
+        }
+
+        protected override void AttachAsNew(IPersistenceObject obj)
+        {
+            if (obj == null) { throw new ArgumentNullException("obj"); }
+            if (obj.Context != null && obj.Context != this) { throw new WrongKistlContextException("Nh.Attach"); }
+            if (obj.ID != Helper.INVALIDID) { throw new ArgumentException("cannot attach object as new with valid ID", "obj"); }
+
+            checked
+            {
+                ((BasePersistenceObject)obj).ID = --_newIDCounter;
+            }
+
+            _attachedObjects.Add(obj);
+            _attachedObjectsByProxy.Add(obj);
+
+            base.AttachAsNew(obj);
         }
 
         public override IQueryable<Tinterface> GetQuery<Tinterface>()
@@ -214,7 +220,7 @@ namespace Kistl.DalProvider.NHibernate
             var objects = GetModifiedObjects();
 
             FlushSession(objects);
-            
+
             UpdateObjectState();
 
             return objects.Count;
@@ -370,7 +376,7 @@ namespace Kistl.DalProvider.NHibernate
             if (ID <= Kistl.API.Helper.INVALIDID) { throw new ArgumentOutOfRangeException("ID", ID, "Cannot ask NHibernate for INVALIDID"); }
 
             return (IProxyObject)_nhSession
-                        .CreateCriteria(ToProxyType(implType).FullName)
+                        .CreateCriteria(ToProxyType(implType))
                         .Add(global::NHibernate.Criterion.Restrictions.Eq("ID", ID))
                         .UniqueResult();
         }
@@ -378,7 +384,7 @@ namespace Kistl.DalProvider.NHibernate
         private IProxyObject NhFindByExportGuid(ImplementationType implType, Guid exportGuid)
         {
             return (IProxyObject)_nhSession
-                        .CreateCriteria(ToProxyType(implType).FullName)
+                        .CreateCriteria(ToProxyType(implType))
                         .Add(global::NHibernate.Criterion.Restrictions.Eq("ExportGuid", exportGuid))
                         .UniqueResult();
         }
@@ -433,10 +439,10 @@ namespace Kistl.DalProvider.NHibernate
             if (result != null)
                 return result.GetPrivateFieldValue<T>("Proxy");
 
-            var implType = GetImplementationType(typeof(T));
-            var q = NhFindByExportGuid(implType, exportGuid);
-
-            return (T)q;
+            return (T)_nhSession
+                    .CreateCriteria(typeof(T))
+                    .Add(global::NHibernate.Criterion.Restrictions.Eq("ExportGuid", exportGuid))
+                    .UniqueResult();
         }
 
         public override T FindPersistenceObject<T>(Guid exportGuid)
@@ -571,7 +577,14 @@ namespace Kistl.DalProvider.NHibernate
                     proxy = (IProxyObject)_nhSession.Load(proxy.ZBoxProxy, proxy.ID);
                 }
                 item = (NHibernatePersistenceObject)Activator.CreateInstance(proxy.ZBoxWrapper, lazyCtx, proxy);
-                Attach(item);
+                if (proxy.ID == Kistl.API.Helper.INVALIDID)
+                {
+                    AttachAsNew(item);
+                }
+                else
+                {
+                    Attach(item);
+                }
             }
             return item;
         }

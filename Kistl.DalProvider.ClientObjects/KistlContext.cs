@@ -445,6 +445,36 @@ namespace Kistl.DalProvider.Client
         }
 
         /// <summary>
+        /// Attach an IPersistenceObject. This Method checks, if the Object is already in that Context. 
+        /// If so, it returns the Object in that Context.
+        /// </summary>
+        /// <param name="obj">IDataObject</param>
+        /// <returns>The Object in already Context or obj if not</returns>
+        public void AttachAsNew(IPersistenceObject obj)
+        {
+            CheckDisposed();
+            if (obj == null)
+                throw new ArgumentNullException("obj");
+
+            // Handle created Objects
+            if (obj.ID == Helper.INVALIDID)
+            {
+                checked
+                {
+                    ((PersistenceObjectBaseImpl)obj).ID = --_newIDCounter;
+                }
+            }
+
+            // Attach & set Objectstate to Unmodified
+            _objects.Add(obj);
+            ((IClientObject)obj).SetNew();
+
+            // Call Objects Attach Method to ensure, that every Child Object is also attached
+            obj.AttachToContext(this);
+
+            OnChanged();
+        }
+        /// <summary>
         /// Detach an IPersistenceObject.
         /// </summary>
         /// <param name="obj">IDataObject</param>

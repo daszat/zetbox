@@ -62,7 +62,7 @@ namespace Kistl.Generator.Templates.CollectionEntries
 
         protected virtual string GetExportGuidBackingStoreReference()
         {
-            return "this._ExportGuid";
+            return "_ExportGuid";
         }
 
         /// <returns>The interfaces this class implements</returns>

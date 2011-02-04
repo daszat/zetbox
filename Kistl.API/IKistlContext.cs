@@ -445,6 +445,13 @@ namespace Kistl.API
         T CreateUnattached<T>() where T : class, IPersistenceObject;
 
         /// <summary>
+        /// Attaches the specified object and sets its ObjectState to new.
+        /// This functionality is needed when deserializing from external sources (e.g.: import, facade)
+        /// </summary>
+        /// <param name="obj">the "new" object</param>
+        void AttachAsNew(IPersistenceObject obj);
+
+        /// <summary>
         /// Stores a blob stream
         /// </summary>
         /// <param name="s">Stream to store</param>

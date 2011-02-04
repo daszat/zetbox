@@ -46,7 +46,7 @@ namespace Kistl.Tests.Utilities.PostgreSql
                     var srcDB = cb.Database.Substring(0, cb.Database.Length - "_test".Length);
                     var destDB = cb.Database;
                     var userCmdString = "--username=postgres --no-password";
-                    var dumpFile = @"C:\temp\zbox.dump";
+                    var dumpFile = @"C:\temp\zbox.backup";
                     {
                         var pgDumpArgs = String.Format("--format c {0} --file={1} {2}", userCmdString, dumpFile, srcDB);
 
@@ -54,7 +54,7 @@ namespace Kistl.Tests.Utilities.PostgreSql
                         var dump = RunPgUtil("pg_dump", pgDumpArgs);
                         if (dump.ExitCode != 0)
                         {
-                            throw new ApplicationException("Failed to dump database, maybe you need to put your password into AppData\\Roaming\\postgresql\\pgpass.conf");
+                            throw new ApplicationException(String.Format("Failed to dump database (exit={0}), maybe you need to put your password into AppData\\Roaming\\postgresql\\pgpass.conf", dump.ExitCode));
                         }
                     }
                     {
@@ -64,7 +64,7 @@ namespace Kistl.Tests.Utilities.PostgreSql
                         var restore = RunPgUtil("pg_restore", pgRestoreArgs);
                         if (restore.ExitCode != 0)
                         {
-                            throw new ApplicationException("Failed to restore database, maybe you need to put your password into AppData\\Roaming\\postgresql\\pgpass.conf");
+                            throw new ApplicationException(String.Format("Failed to restore database (exit={0}), maybe you need to put your password into AppData\\Roaming\\postgresql\\pgpass.conf", restore.ExitCode));
                         }
                     }
                     // After recreating the database, all connection pools should be cleard

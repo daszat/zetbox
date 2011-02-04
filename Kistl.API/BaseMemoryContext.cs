@@ -52,29 +52,21 @@ namespace Kistl.API
         {
             CheckDisposed();
             if (obj == null) { throw new ArgumentNullException("obj"); }
+            if (obj.ID == Helper.INVALIDID) { throw new ArgumentException("cannot attach object without valid ID", "obj"); }
             //CheckImplementationAssembly("obj", obj.GetType());
 
-            // Handle created Objects
-            if (obj.ID == Helper.INVALIDID)
+            // Check if Object is already in this Context
+            var attachedObj = ContainsObject(GetInterfaceType(obj), obj.ID);
+            if (attachedObj != null)
             {
-                // TODO: security: check for overflow
-                ((BasePersistenceObject)obj).ID = --_newIDCounter;
+                // already attached, nothing to do
+                return attachedObj;
             }
-            else
-            {
-                // Check if Object is already in this Context
-                var attachedObj = ContainsObject(GetInterfaceType(obj), obj.ID);
-                if (attachedObj != null)
-                {
-                    // already attached, nothing to do
-                    return attachedObj;
-                }
 
-                // Check ID <-> newIDCounter
-                if (obj.ID < _newIDCounter)
-                {
-                    _newIDCounter = obj.ID;
-                }
+            // Check ID <-> newIDCounter
+            if (obj.ID < _newIDCounter)
+            {
+                _newIDCounter = obj.ID;
             }
 
             // Attach & set Objectstate to Unmodified
@@ -87,6 +79,32 @@ namespace Kistl.API
             obj.AttachToContext(this);
 
             return obj;
+        }
+
+        /// <inheritdoc />
+        void IZBoxContextInternals.AttachAsNew(IPersistenceObject obj)
+        {
+            CheckDisposed();
+            if (obj == null) { throw new ArgumentNullException("obj"); }
+            if (obj.ID != Helper.INVALIDID) { throw new ArgumentException("cannot attach object as new with valid ID", "obj"); }
+            //CheckImplementationAssembly("obj", obj.GetType());
+
+            checked
+            {
+                ((BasePersistenceObject)obj).ID = --_newIDCounter;
+            }
+
+            // Attach & set Objectstate to Unmodified
+            objects.Add(obj);
+            // TODO: Since providers are not required to use BasePersistenceObject
+            // this doesn't work. Improve IDataObject interface to contain this too?
+            //((BasePersistenceObject)obj).SetUnmodified();
+
+
+            ((BasePersistenceObject)obj).SetNew();
+
+            // Call Objects Attach Method to ensure, that every Child Object is also attached
+            obj.AttachToContext(this);
         }
 
         /// <inheritdoc />

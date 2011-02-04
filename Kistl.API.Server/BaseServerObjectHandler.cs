@@ -221,7 +221,7 @@ using System.IO;
             // Fist of all, attach new Objects
             foreach (var obj in objects.Where(o => o.ClientObjectState == DataObjectState.New))
             {
-                ctx.Attach(obj);
+                ctx.Internals().AttachAsNew(obj);
                 entityObjects[obj] = obj;
             }
 

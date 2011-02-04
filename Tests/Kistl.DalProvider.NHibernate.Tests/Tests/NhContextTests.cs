@@ -14,7 +14,10 @@ namespace Kistl.DalProvider.NHibernate.Tests
     public class NhContextTests
         : Kistl.API.AbstractConsumerTests.AbstractContextTests
     {
-        // Add nhibernate specific tests here
-
+        [Test]
+        public void should_be_NHibernateContext()
+        {
+            Assert.That(GetContext(), Is.InstanceOf<NHibernateContext>());
+        }
     }
 }

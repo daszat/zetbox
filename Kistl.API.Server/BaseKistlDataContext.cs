@@ -91,6 +91,48 @@ namespace Kistl.API.Server
                 throw new ArgumentOutOfRangeException("obj", String.Format("Cannot attach object unless it is New or Detached. obj.ObjectState == {0}", obj.ObjectState));
             }
 
+            CheckCreateRights(obj);
+
+            // call Attach on Subitems
+            obj.AttachToContext(this);
+
+            OnChanged();
+
+            return obj;
+        }
+
+        void IZBoxContextInternals.AttachAsNew(IPersistenceObject obj)
+        {
+            // delegate to protected virtual method below
+            this.AttachAsNew(obj);
+        }
+
+        /// <summary>
+        /// Attach an IPersistenceObject. The EntityFramework guarantees the all Objects are unique. No check required.
+        /// </summary>
+        /// <param name="obj">Object to Attach</param>
+        /// <returns>Object Attached</returns>
+        protected virtual void AttachAsNew(IPersistenceObject obj)
+        {
+            CheckDisposed();
+            if (obj == null) { throw new ArgumentNullException("obj"); }
+            if (obj.ObjectState != DataObjectState.Detached)
+            {
+                throw new ArgumentOutOfRangeException("obj", String.Format("Cannot attach object as new unless it is Detached. obj.ObjectState == {0}", obj.ObjectState));
+            }
+
+            CheckCreateRights(obj);
+
+            ((BaseServerPersistenceObject)obj).SetNew();
+
+            // call Attach on Subitems
+            obj.AttachToContext(this);
+
+            OnChanged();
+        }
+
+        private void CheckCreateRights(IPersistenceObject obj)
+        {
             // Do not only check in IKistlContext.Create for creation rights, also here
             // Object might be created by SerializableType
             if (obj is IDataObject && obj.ObjectState == DataObjectState.New)
@@ -109,13 +151,6 @@ namespace Kistl.API.Server
                     throw new System.Security.SecurityException(string.Format("The current identity has no rights to create an Object of type '{0}'", ifType.Type.FullName));
                 }
             }
-
-            // call Attach on Subitems
-            obj.AttachToContext(this);
-
-            OnChanged();
-
-            return obj;
         }
 
         /// <summary>
@@ -307,14 +342,10 @@ namespace Kistl.API.Server
         /// <returns>a newly initialised provider-specific object of the specified type, which is not yet attached</returns>
         protected abstract object CreateUnattachedInstance(InterfaceType ifType);
 
-        private IPersistenceObject CreateInternal(InterfaceType ifType, bool isNew)
+        private IPersistenceObject CreateInternal(InterfaceType ifType)
         {
             var obj = (BaseServerPersistenceObject)CreateUnattachedInstance(ifType);
-            if (isNew)
-            {
-                obj.SetNew();
-            }
-            Attach(obj);
+            AttachAsNew(obj);
             IsModified = true;
             OnObjectCreated(obj);
             if (obj is IDataObject)
@@ -340,7 +371,7 @@ namespace Kistl.API.Server
             {
                 throw new System.Security.SecurityException(string.Format("The current identity has no rights to create an Object of type '{0}'", ifType.Type.FullName));
             }
-            return (IDataObject)CreateInternal(ifType, true);
+            return (IDataObject)CreateInternal(ifType);
         }
 
         /// <summary>
@@ -377,7 +408,7 @@ namespace Kistl.API.Server
         public virtual IRelationEntry CreateRelationCollectionEntry(InterfaceType ifType)
         {
             CheckDisposed();
-            return (IRelationEntry)CreateInternal(ifType, true);
+            return (IRelationEntry)CreateInternal(ifType);
         }
 
         /// <summary>
@@ -399,7 +430,7 @@ namespace Kistl.API.Server
         public virtual IValueCollectionEntry CreateValueCollectionEntry(InterfaceType ifType)
         {
             CheckDisposed();
-            return (IValueCollectionEntry)CreateInternal(ifType, true);
+            return (IValueCollectionEntry)CreateInternal(ifType);
         }
 
         /// <summary>
@@ -517,7 +548,7 @@ namespace Kistl.API.Server
             if (string.IsNullOrEmpty(mimetype))
                 throw new ArgumentNullException("mimetype");
 
-            var blob = (Kistl.App.Base.Blob)this.CreateInternal(iftFactory(typeof(Kistl.App.Base.Blob)), true);
+            var blob = (Kistl.App.Base.Blob)this.CreateInternal(iftFactory(typeof(Kistl.App.Base.Blob)));
             blob.OriginalName = filename;
             blob.MimeType = mimetype;
             blob.StoragePath = this.Internals().StoreBlobStream(s, blob.ExportGuid, DateTime.Today /* but should be blob.CreatedOn. Around midnight the path may differ */, filename);

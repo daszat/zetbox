@@ -31,6 +31,12 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries
                 null);
         }
 
+        protected override void ApplyIdPropertyTemplate()
+        {
+            // inherited from Base
+            //base.ApplyIdPropertyTemplate();
+        }
+
         protected override void ApplyObjectReferenceProperty(Relation rel, RelationEndRole endRole, string propertyName)
         {
             RelationEnd relEnd = rel.GetEndFromRole(endRole);
@@ -119,6 +125,11 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries
         protected override string GetExportGuidBackingStoreReference()
         {
             return "this.Proxy.ExportGuid";
+        }
+
+        protected override void ApplyExportGuidPropertyTemplate()
+        {
+            Properties.ExportGuidProperty.Call(Host, ctx, this.MembersToSerialize, rel.Module.Namespace);
         }
 
         protected override void ApplyReloadReferenceBody()

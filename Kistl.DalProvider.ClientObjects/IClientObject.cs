@@ -11,6 +11,7 @@ namespace Kistl.DalProvider.Client
     {
         void SetUnmodified();
         void SetDeleted();
+        void SetNew();
 
         BasePersistenceObject UnderlyingObject { get; }
     }

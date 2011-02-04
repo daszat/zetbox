@@ -49,7 +49,7 @@ namespace Kistl.DalProvider.NHibernate
                     NotifyPropertyChanging("ID", oldValue, newValue);
 
                     _ID = newValue;
-                    if (this.ObjectState != DataObjectState.New)
+                    if (!this.ObjectState.In(DataObjectState.Detached, DataObjectState.New))
                         NHibernateProxy.ID = newValue;
 
                     NotifyPropertyChanged("ID", oldValue, newValue);

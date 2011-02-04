@@ -287,7 +287,7 @@ namespace Kistl.API
             if (type == null) throw new ArgumentNullException("type");
             if (iftFactory == null) throw new ArgumentNullException("iftFactory");
             if (implTypeChecker == null) throw new ArgumentNullException("implTypeChecker");
-            if (!implTypeChecker.IsImplementationType(type)) { throw new ArgumentOutOfRangeException("type"); }
+            if (!implTypeChecker.IsImplementationType(type)) { throw new ArgumentOutOfRangeException("type", String.Format("Type {0} is not an ImplementationType", type.AssemblyQualifiedName)); }
 
             this._type = type;
             this._iftFactory = iftFactory;

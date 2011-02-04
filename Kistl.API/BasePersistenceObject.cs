@@ -73,6 +73,8 @@ namespace Kistl.API
         /// </summary>
         public abstract DataObjectState ObjectState { get; }
 
+        public abstract void SetNew();
+
         /// <summary>
         /// Attach this Object to a Context. This Method is called by the Context.
         /// </summary>

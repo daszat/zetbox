@@ -21,7 +21,7 @@ namespace Kistl.Generator.Templates.CollectionEntries
 
         protected virtual void ApplyExportGuidPropertyTemplate()
         {
-            Properties.ExportGuidProperty.Call(Host, ctx, this.MembersToSerialize);
+            Properties.ExportGuidProperty.Call(Host, ctx, this.MembersToSerialize, GetExportGuidBackingStoreReference());
         }
 
         protected abstract void ApplyAPropertyTemplate();

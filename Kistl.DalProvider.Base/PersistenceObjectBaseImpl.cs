@@ -83,6 +83,16 @@ namespace Kistl.DalProvider.Base
             NotifyPropertyChanged("ObjectState", oldValue, DataObjectState.Deleted);
         }
 
+        public override void SetNew()
+        {
+            var oldValue = this._ObjectState;
+            NotifyPropertyChanging("ObjectState", oldValue, DataObjectState.New);
+            this._ObjectState = DataObjectState.New;
+            if (this.Context != null)
+                this.Context.Internals().SetModified(this);
+            NotifyPropertyChanged("ObjectState", oldValue, DataObjectState.New);
+        }
+
         public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);

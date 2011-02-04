@@ -39,5 +39,10 @@ namespace Kistl.DalProvider.Memory
             _objectState = DataObjectState.Modified;
             if (this.Context != null) this.Context.Internals().SetModified(this);
         }
+
+        public override void SetNew()
+        {
+            _objectState = DataObjectState.New;
+        }
     }
 }

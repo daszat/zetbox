@@ -310,7 +310,7 @@ namespace Kistl.App.Packaging
                 IPersistenceObject obj = ctx.Internals().CreateUnattached(ifType);
                 objects[exportGuid] = obj;
                 ((Kistl.App.Base.IExportable)obj).ExportGuid = exportGuid;
-                ctx.Attach(obj);
+                ctx.Internals().AttachAsNew(obj);
                 return obj;
             }
             else

@@ -386,5 +386,11 @@ namespace Kistl.API.Mocks
         {
             throw new NotImplementedException();
         }
+
+
+        public void AttachAsNew(IPersistenceObject obj)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

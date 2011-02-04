@@ -402,22 +402,23 @@ namespace Kistl.DalProvider.Ef
             var serverObj = (BaseServerPersistenceObject)obj;
             string entityName = GetEntityName(GetInterfaceType(obj));
 
-            if (serverObj.ClientObjectState == DataObjectState.New
-                || serverObj.ClientObjectState == DataObjectState.NotDeserialized)
-            {
-                _ctx.AddObject(entityName, obj);
-            }
-            else if (serverObj.ClientObjectState == DataObjectState.Deleted)
-            {
-                _ctx.AttachTo(entityName, obj);
-                _ctx.DeleteObject(obj);
-            }
-            else
-            {
-                _ctx.AttachTo(entityName, obj);
-            }
+            _ctx.AttachTo(entityName, obj);
 
             return base.Attach(obj);
+        }
+
+        protected override void AttachAsNew(IPersistenceObject obj)
+        {
+            CheckDisposed();
+            if (obj == null) { throw new ArgumentNullException("obj"); }
+            if (obj.Context != null) { throw new WrongKistlContextException("Ef.Attach"); }
+
+            var serverObj = (BaseServerPersistenceObject)obj;
+            string entityName = GetEntityName(GetInterfaceType(obj));
+
+            _ctx.AddObject(entityName, obj);
+
+            base.AttachAsNew(obj);
         }
 
         /// <summary>
