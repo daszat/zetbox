@@ -8,18 +8,21 @@
                      xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.DateControls;assembly=WPFSamplesLib"
                      ToolTip="{Binding ToolTip}"                     
                      MinWidth="1">
-    <DockPanel>
+    <DockPanel KeyboardNavigation.TabNavigation="Local">
         <TextBox x:Name="txtTime"
                  DockPanel.Dock="Right"
                  MinWidth="60"
                  Text="{Binding TimePart, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=true}"
                  IsReadOnly="{Binding IsReadOnly}"
+                 KeyboardNavigation.TabIndex="1"
                  Visibility="{Binding TimePartVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
         <kevin:DatePicker x:Name="txtDate"
                           Value="{Binding DatePart, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=true}"
                           Visibility="{Binding DatePartVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
                           IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertedBoolConverter}}"
+                          KeyboardNavigation.TabIndex="0"
+                          KeyboardNavigation.TabNavigation="Local"
                           CanEdit="True" />
     </DockPanel>
 </view:PropertyEditor>
