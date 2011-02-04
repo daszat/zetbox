@@ -22,7 +22,7 @@ namespace Kistl.API.Client.Tests
         private bool _hasCollectionChanged;
         private bool _hasParentChanged;
         
-        private OneNRelationList<INSide> wrapper { get { return _parent.List; } }
+        private OneNRelationList<INSide> Wrapper { get { return _parent.List; } }
 
         public BasicOneNRelationTests(int items)
             : base(items) { }
@@ -44,12 +44,12 @@ namespace Kistl.API.Client.Tests
             }
 
             _hasCollectionChanged = false;
-            wrapper.CollectionChanged += (sender, args) => { _hasCollectionChanged = true; };
+            Wrapper.CollectionChanged += (sender, args) => { _hasCollectionChanged = true; };
 
             _hasParentChanged = false;
             _parent.PropertyChanged += (sender, args) => { if (args.PropertyName == "NSide") { _hasParentChanged = true; } };
 
-            return wrapper;
+            return Wrapper;
         }
 
         protected override void AssertCollectionIsChanged()

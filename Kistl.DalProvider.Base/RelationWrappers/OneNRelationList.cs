@@ -34,7 +34,7 @@ namespace Kistl.DalProvider.Base.RelationWrappers
 
         ///// <param name="fkProperty">the name of the fk_Property which does notification, but not collection fixing</param>
         public OneNRelationList(string fkProperty, string posProperty, IDataObject owner, Action ownerNotifier, IEnumerable<T> collection)
-            : this(fkProperty, posProperty, owner, ownerNotifier, ownerNotifier, new List<T>()) { }
+            : this(fkProperty, posProperty, owner, null, ownerNotifier, collection) { }
         #endregion
 
         ///// <param name="fkProperty">the name of the fk_Property which does notification, but not collection fixing</param>
