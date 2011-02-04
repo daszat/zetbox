@@ -165,35 +165,5 @@ namespace Kistl.DalProvider.Ef.Tests
                 }
             }
         }
-
-        [Test]
-        public void DetachFromContext()
-        {
-            Assert.That(obj.Context, Is.Not.Null);
-            obj.ID = 10;
-            obj.ClientObjectState = DataObjectState.Unmodified;
-            obj.DetachFromContext(ctx);
-            Assert.That(obj.Context, Is.Null);
-            Assert.That(obj.EntityState, Is.EqualTo(System.Data.EntityState.Added));
-        }
-
-        [Test]
-        [ExpectedException(typeof(WrongKistlContextException))]
-        public void DetachFromContext_Other()
-        {
-            Assert.That(obj.Context, Is.Not.Null);
-            obj.ID = 10;
-            obj.ClientObjectState = DataObjectState.Unmodified;
-            obj.DetachFromContext(ctx);
-            Assert.That(obj.Context, Is.Null);
-            Assert.That(obj.EntityState, Is.EqualTo(System.Data.EntityState.Added));
-
-            using (IKistlContext ctx2 = GetContext())
-            {
-                obj.DetachFromContext(ctx2);
-                Assert.That(obj.Context, Is.Null);
-                Assert.That(obj.EntityState, Is.EqualTo(System.Data.EntityState.Added));
-            }
-        }
     }
 }

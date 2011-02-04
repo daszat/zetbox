@@ -1,20 +1,21 @@
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using Autofac;
-using Kistl.API;
-using Kistl.API.AbstractConsumerTests;
-using Kistl.API.Server;
-using Kistl.App.Base;
-using Kistl.App.Projekte;
-using Kistl.App.Test;
-using Kistl.DalProvider.Ef.Mocks;
-using NUnit.Framework;
 
 namespace Kistl.DalProvider.Ef.Tests
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Data;
+    using System.Linq;
+    using System.Text;
+    using Autofac;
+    using Kistl.API;
+    using Kistl.API.AbstractConsumerTests;
+    using Kistl.API.Server;
+    using Kistl.App.Base;
+    using Kistl.App.Projekte;
+    using Kistl.App.Test;
+    using Kistl.DalProvider.Ef.Mocks;
+    using NUnit.Framework;
+
     [TestFixture]
     public class EfContextTests : AbstractContextTests
     {
@@ -25,7 +26,7 @@ namespace Kistl.DalProvider.Ef.Tests
             {
                 TestObjClass obj = new TestObjClassEfImpl(null);
                 Assert.That(((TestObjClassEfImpl)obj).EntityState, Is.EqualTo(EntityState.Detached));
-                ctx.Attach(obj);
+                ctx.Internals().AttachAsNew(obj);
                 Assert.That(((TestObjClassEfImpl)obj).EntityState, Is.EqualTo(EntityState.Added));
             }
         }
