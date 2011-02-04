@@ -82,6 +82,7 @@
     <Compile Include="CompoundObjects\when_roundtrip.cs" />
     <Compile Include="ContextTests\when_deleting.cs" />
     <Compile Include="DatabaseResetup.cs" />
+    <Compile Include="DefaultValues\when_submitting.cs" />
     <Compile Include="IDatabaseResetter.cs" />
     <Compile Include="AbstractLinqTests.cs" />
     <Compile Include="MockImplementationTypeChecker.cs" />
