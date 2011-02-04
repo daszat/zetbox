@@ -166,6 +166,26 @@ namespace Kistl.Client.Presentables.KistlBase
             }
         }
 
+        private bool _RespectRequieredFilter = true;
+        /// <summary>
+        /// If set to false, no filter is requiered. Default value is true. Use this setting if a small, preselected list (query) is provides as data source.
+        /// </summary>
+        public bool RespectRequieredFilter
+        {
+            get
+            {
+                return _RespectRequieredFilter;
+            }
+            set
+            {
+                if (_RespectRequieredFilter != value)
+                {
+                    _RespectRequieredFilter = value;
+                    OnPropertyChanged("RespectRequieredFilter");
+                }
+            }
+        }
+
         private ObservableCollection<IFilterModel> _filter = null;
         public ICollection<IFilterModel> Filter
         {
@@ -965,7 +985,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 OnUpdateFromUI();
 
                 // Can execute?
-                if (Filter.Count(f => !f.Enabled && f.Required) > 0)
+                if (RespectRequieredFilter && Filter.Count(f => !f.Enabled && f.Required) > 0)
                 {
                     // leave result or return empty result
                     if (_instancesCache == null) _instancesCache = new List<DataObjectViewModel>();

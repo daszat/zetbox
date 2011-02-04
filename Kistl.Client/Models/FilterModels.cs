@@ -188,6 +188,23 @@ namespace Kistl.Client.Models
 
     public class SingleValueFilterModel : FilterModel
     {
+        public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, string predicate)
+        {
+            if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
+
+            var fmdl = new SingleValueFilterModel()
+            {
+                Label = label,
+                ValueSource = FilterValueSource.FromExpression(predicate),
+                Operator = FilterOperators.Contains,
+                ViewModelType = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_SingleValueFilterViewModel)
+            };
+            fmdl.FilterArguments.Add(new FilterArgumentConfig(
+                new ClassValueModel<string>(label, "", true, false),
+                frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_ReferencePropertyModel_String)));
+            return fmdl;
+        }
+
         public SingleValueFilterModel()
         {
             Operator = FilterOperators.Equals;
@@ -349,6 +366,23 @@ namespace Kistl.Client.Models
     /// </summary>
     public class OptionalPredicateFilterModel : FilterModel
     {
+        public static OptionalPredicateFilterModel Create(IFrozenContext frozenCtx, string label, string predicate)
+        {
+            if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
+
+            var fmdl = new OptionalPredicateFilterModel()
+            {
+                Label = label,
+                ValueSource = FilterValueSource.FromExpression(predicate),
+                ViewModelType = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_OptionalPredicateFilterViewModel)
+            };
+            var valueMdl = new NullableStructValueModel<bool>(label, "", false, false);
+            valueMdl.Value = false;
+            fmdl.FilterArguments.Add(new FilterArgumentConfig(valueMdl,
+                frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableValuePropertyModel_Bool)));
+            return fmdl;
+        }
+
         protected override string GetPredicate()
         {
             return ValueSource.Expression;
