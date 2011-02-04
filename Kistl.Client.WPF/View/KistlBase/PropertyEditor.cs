@@ -27,6 +27,15 @@ namespace Kistl.Client.WPF.View.KistlBase
             MinWidth = 100;
 
             this.Loaded += new RoutedEventHandler(PropertyEditor_Loaded);
+            this.GotFocus += new RoutedEventHandler(PropertyEditor_GotFocus);
+        }
+
+        void PropertyEditor_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (e.OriginalSource is TextBox)
+            {
+                ((TextBox)e.OriginalSource).SelectAll();
+            }
         }
 
         void PropertyEditor_Loaded(object sender, RoutedEventArgs e)
