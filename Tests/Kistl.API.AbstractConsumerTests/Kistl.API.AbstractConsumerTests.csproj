@@ -81,6 +81,7 @@
     <Compile Include="CompoundObjects\when_changing.cs" />
     <Compile Include="CompoundObjects\when_roundtrip.cs" />
     <Compile Include="ContextTests\when_deleting.cs" />
+    <Compile Include="ContextTests\when_searching.cs" />
     <Compile Include="DatabaseResetup.cs" />
     <Compile Include="DefaultValues\when_submitting.cs" />
     <Compile Include="IDatabaseResetter.cs" />

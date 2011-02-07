@@ -111,6 +111,7 @@
     <Compile Include="Tests\CompoundObject\when_querying.cs" />
     <Compile Include="Tests\CompoundObject\when_roundtrip.cs" />
     <Compile Include="Tests\ContextTests\when_deleting.cs" />
+    <Compile Include="Tests\ContextTests\when_searching.cs" />
     <Compile Include="Tests\DefaultValues\when_submitting.cs" />
     <Compile Include="Tests\N_to_M_relations\when_adding.cs" />
     <Compile Include="Tests\N_to_M_relations\when_deleting.cs" />

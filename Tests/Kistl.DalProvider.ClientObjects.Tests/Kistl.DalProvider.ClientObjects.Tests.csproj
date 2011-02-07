@@ -90,6 +90,7 @@
     <Compile Include="Tests\CompoundObjects\when_initialized.cs" />
     <Compile Include="Tests\CompoundObjects\when_roundtrip.cs" />
     <Compile Include="Tests\ContextTests\when_deleting.cs" />
+    <Compile Include="Tests\ContextTests\when_searching.cs" />
     <Compile Include="Tests\DefaultValues\when_submitting.cs" />
     <Compile Include="Tests\KistlContextTests\KistlContextTests.cs" />
     <Compile Include="Tests\KistlContextTests\when_using_ClientIsolationLevel_MergeServerData.cs" />

@@ -1,5 +1,5 @@
 
-namespace Kistl.DalProvider.ClientObjects.Tests.ContextTests
+namespace Kistl.DalProvider.NHibernate.Tests.ContextTests
 {
     using System;
     using System.Collections.Generic;
@@ -10,9 +10,9 @@ namespace Kistl.DalProvider.ClientObjects.Tests.ContextTests
     using Kistl.App.Test;
 
     using NUnit.Framework;
-    
-    public class when_deleting
-        : Kistl.API.AbstractConsumerTests.ContextTests.when_deleting
+
+    public class when_searching
+        : Kistl.API.AbstractConsumerTests.ContextTests.when_searching
     {
     }
 }
