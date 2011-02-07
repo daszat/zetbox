@@ -43,7 +43,7 @@ namespace Kistl.Generator
                 return;
             }
 
-            using (Log.DebugTraceMethodCall())
+            using (Log.InfoTraceMethodCall("GenerateCode", "Generating DAL-classes"))
             {
                 var workingPath = _config.Server.CodeGenWorkingPath;
                 if (String.IsNullOrEmpty(workingPath))

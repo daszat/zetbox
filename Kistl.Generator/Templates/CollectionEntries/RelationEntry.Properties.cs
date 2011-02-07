@@ -90,11 +90,12 @@ namespace Kistl.Generator.Templates.CollectionEntries
                 // provided by ObjectReferencePropertyTemplate
                 string posBackingStore = "_" + endRole + Kistl.API.Helper.PositionSuffix;
 
-                this.MembersToSerialize.Add(
-                    Serialization.SerializerType.All,
-                    relEnd.Type.Module.Namespace,
-                    endRole + Kistl.API.Helper.PositionSuffix,
-                    posBackingStore);
+                // is serialized by the ObjectReferenceProperty
+                //this.MembersToSerialize.Add(
+                //    Serialization.SerializerType.All,
+                //    relEnd.Type.Module.Namespace,
+                //    endRole + Kistl.API.Helper.PositionSuffix,
+                //    posBackingStore);
 
                 this.WriteObjects("        public int? ", endRole, "Index { get { return ",
                     posBackingStore, "; } set { ",

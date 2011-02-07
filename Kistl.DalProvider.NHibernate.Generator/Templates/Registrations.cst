@@ -24,6 +24,7 @@
                                 break;
                         }
                         result.Properties["connection.connection_string"] = kistlConfig.Server.ConnectionString;
+                        result.Properties["max_fetch_depth"] = "1"; // keep SQL statements small
                         result.Properties["proxyfactory.factory_class"] = "NHibernate.ByteCode.LinFu.ProxyFactoryFactory, NHibernate.ByteCode.LinFu";
 #if DEBUG
                         // make debugging easier by removing reflection optimizations

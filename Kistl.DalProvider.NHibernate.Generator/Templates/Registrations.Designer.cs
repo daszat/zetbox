@@ -47,6 +47,7 @@ this.WriteObjects("                                result.Properties[\"dialect\"
 this.WriteObjects("                                break;\r\n");
 this.WriteObjects("                        }\r\n");
 this.WriteObjects("                        result.Properties[\"connection.connection_string\"] = kistlConfig.Server.ConnectionString;\r\n");
+this.WriteObjects("                        result.Properties[\"max_fetch_depth\"] = \"1\"; // keep SQL statements small\r\n");
 this.WriteObjects("                        result.Properties[\"proxyfactory.factory_class\"] = \"NHibernate.ByteCode.LinFu.ProxyFactoryFactory, NHibernate.ByteCode.LinFu\";\r\n");
 this.WriteObjects("#if DEBUG\r\n");
 this.WriteObjects("                        // make debugging easier by removing reflection optimizations\r\n");
