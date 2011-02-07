@@ -171,10 +171,10 @@ namespace Kistl.Client.Models
         {
             if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
             base.IsServerSideFilter = false;
-            base.Label = "Name";
+            base.Label = FilterModelsResources.ToStringFilterModel_Label;
             base.ViewModelType = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_SingleValueFilterViewModel);
             base.FilterArguments.Add(new FilterArgumentConfig(
-                new ClassValueModel<string>(base.Label, "Name of an Instance", true, false), 
+                new ClassValueModel<string>(base.Label, FilterModelsResources.ToStringFilterModel_Description, true, false), 
                 frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_ReferencePropertyModel_String)
             )); // ClassValueViewModel<string>
         }

@@ -89,9 +89,51 @@ namespace Kistl.Client.Presentables
             }
         }
 
-        public void Choose(DataObjectViewModel choosen)
+        private ICommandViewModel _ChooseCommand = null;
+        public ICommandViewModel ChooseCommand
         {
-            _callback(choosen);
+            get
+            {
+                if (_ChooseCommand == null)
+                {
+                    _ChooseCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
+                        DataContext, 
+                        DataObjectSelectionTaskViewModelResources.Choose,
+                        DataObjectSelectionTaskViewModelResources.Choose_Tooltip, 
+                        () => Choose(SelectedItem), 
+                        () => SelectedItem != null);
+                }
+                return _ChooseCommand;
+            }
+        }
+
+        public void Choose(DataObjectViewModel obj)
+        {
+            _callback(obj);
+            Show = false;
+        }
+
+        private ICommandViewModel _CancelCommand = null;
+        public ICommandViewModel CancelCommand
+        {
+            get
+            {
+                if (_CancelCommand == null)
+                {
+                    _CancelCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
+                        DataContext,
+                        DataObjectSelectionTaskViewModelResources.Cancel,
+                        DataObjectSelectionTaskViewModelResources.Cancel_Tooltip,
+                        Cancel, 
+                        null);
+                }
+                return _CancelCommand;
+            }
+        }
+
+        public void Cancel()
+        {
+            _callback(null);
             Show = false;
         }
 

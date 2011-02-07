@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,19 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Cancel" xml:space="preserve">
-    <value>Abbrechen</value>
+  <data name="ToStringFilterModel_Description" xml:space="preserve">
+    <value>Text enthalten in einem Datensatz</value>
   </data>
-  <data name="Cancel_Tooltip" xml:space="preserve">
-    <value>Bricht die Auswal ab</value>
-  </data>
-  <data name="Choose" xml:space="preserve">
-    <value>Auswählen</value>
-  </data>
-  <data name="Choose_Tooltip" xml:space="preserve">
-    <value>Wählt den aktuellen Datensatz aus</value>
-  </data>
-  <data name="Name" xml:space="preserve">
-    <value>Wählen Sie einen Datensatz vom Typ {0}</value>
+  <data name="ToStringFilterModel_Label" xml:space="preserve">
+    <value>Text</value>
   </data>
 </root>

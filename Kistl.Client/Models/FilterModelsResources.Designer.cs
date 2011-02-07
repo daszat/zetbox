@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Kistl.Client.Presentables {
+namespace Kistl.Client.Models {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace Kistl.Client.Presentables {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class DataObjectSelectionTaskViewModelResources {
+    internal class FilterModelsResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal DataObjectSelectionTaskViewModelResources() {
+        internal FilterModelsResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Kistl.Client.Presentables {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Kistl.Client.Presentables.DataObjectSelectionTaskViewModelResources", typeof(DataObjectSelectionTaskViewModelResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Kistl.Client.Models.FilterModelsResources", typeof(FilterModelsResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,47 +61,20 @@ namespace Kistl.Client.Presentables {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cancel.
+        ///   Looks up a localized string similar to Text contained in an Item.
         /// </summary>
-        internal static string Cancel {
+        internal static string ToStringFilterModel_Description {
             get {
-                return ResourceManager.GetString("Cancel", resourceCulture);
+                return ResourceManager.GetString("ToStringFilterModel_Description", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cancel this selection task.
+        ///   Looks up a localized string similar to Text.
         /// </summary>
-        internal static string Cancel_Tooltip {
+        internal static string ToStringFilterModel_Label {
             get {
-                return ResourceManager.GetString("Cancel_Tooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Select.
-        /// </summary>
-        internal static string Choose {
-            get {
-                return ResourceManager.GetString("Choose", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Selects the current item.
-        /// </summary>
-        internal static string Choose_Tooltip {
-            get {
-                return ResourceManager.GetString("Choose_Tooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Select an object of Type {0}.
-        /// </summary>
-        internal static string Name {
-            get {
-                return ResourceManager.GetString("Name", resourceCulture);
+                return ResourceManager.GetString("ToStringFilterModel_Label", resourceCulture);
             }
         }
     }

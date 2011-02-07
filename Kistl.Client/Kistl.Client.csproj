@@ -89,6 +89,11 @@
     <Compile Include="GUI\IHasViewModel.cs" />
     <Compile Include="GUI\IRenderer.cs" />
     <Compile Include="GUI\ViewDescriptorAttribute.cs" />
+    <Compile Include="Models\FilterModelsResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FilterModelsResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Models\FilterValueSource.cs" />
     <Compile Include="Models\IValueModel.cs" />
     <Compile Include="Models\MethodResultModel.cs" />
@@ -276,6 +281,11 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="TheseMethodsShouldBeImplementedOnKistlObjects.cs" />
+    <EmbeddedResource Include="Models\FilterModelsResources.de.resx" />
+    <EmbeddedResource Include="Models\FilterModelsResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>FilterModelsResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Presentables\ActionViewModelResources.de.resx">
     </EmbeddedResource>
     <EmbeddedResource Include="Presentables\ActionViewModelResources.resx">

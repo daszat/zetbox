@@ -7,7 +7,6 @@
                   ResizeMode="CanResize"
                   MinWidth="300"
                   MinHeight="300"
-                  Loaded="Window_Loaded"
                   xmlns:commands="clr-namespace:Kistl.Client.WPF.Commands;assembly=Kistl.Client.WPF.Toolkit"
                   commands:SmartRoutedUICommand.IsCommandSink="True">
     <ctrls:WindowView.Resources>
@@ -22,12 +21,12 @@
         <UniformGrid DockPanel.Dock="Bottom"
                      Style="{StaticResource addedMargins}"
                      Rows="1">
-            <Button IsDefault="True"
-                    Click="ChooseClickHandler"
-                    Style="{StaticResource addedMargins}">Choose!</Button>
-            <Button IsCancel="True"
-                    Click="CancelClickHandler"
-                    Style="{StaticResource addedMargins}">Cancel</Button>
+            <ctrls:CommandButton CommandViewModel="{Binding ChooseCommand}"
+                                 Style="{StaticResource addedMargins}"
+                                 IsDefault="True"/>
+            <ctrls:CommandButton CommandViewModel="{Binding CancelCommand}"
+                                 Style="{StaticResource addedMargins}"
+                                 IsCancel="True" />
         </UniformGrid>
 
         <ContentPresenter ContentTemplateSelector="{StaticResource defaultTemplateSelector}"
