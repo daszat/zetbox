@@ -64,7 +64,8 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
                     {
                         this.WriteObjects("        <one-to-one ", nameAttr, " ", classAttr,
                             " constrained=\"false\" ", // constrained must be false, because else the reference is not optional(!)
-                            prop.EagerLoading ? "fetch=\"join\" " : String.Empty,
+                            String.Empty,
+                            //prop.EagerLoading ? "fetch=\"join\" " : "fetch=\"select\" ",
                             "property-ref=\"" + (otherEnd.Navigator != null ? otherEnd.Navigator.Name : "(no nav)") + "\" />");
                     }
                     break;
@@ -75,7 +76,8 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
                         this.WriteObjects("        <set ", nameAttr, " ");
                         if (prop.EagerLoading)
                         {
-                            this.WriteObjects("lazy=\"false\" fetch=\"join\" ");
+                            this.WriteObjects("lazy=\"true\" ");
+                            //this.WriteObjects("lazy=\"false\" fetch=\"join\" ");
                         }
                         else
                         {
@@ -100,7 +102,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
                         this.WriteObjects("        <many-to-one ", nameAttr, " ", columnAttr, " ", classAttr, " ");
                         if (prop.EagerLoading)
                         {
-                            this.WriteObjects("fetch=\"join\" ");
+                            //this.WriteObjects("fetch=\"join\" ");
                         }
                         if (inverse)
                         {
@@ -152,7 +154,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
             this.WriteObjects("        <set ", nameAttr, " ", tableAttr, " inverse=\"true\" cascade=\"all-delete-orphan\" ");
             if (prop.EagerLoading)
             {
-                this.WriteObjects("lazy=\"false\" fetch=\"join\" ");
+                //this.WriteObjects("lazy=\"false\" fetch=\"join\" ");
             }
             else
             {

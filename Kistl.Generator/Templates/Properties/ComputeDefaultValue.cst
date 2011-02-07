@@ -10,6 +10,7 @@
 <%@ Import Namespace="Kistl.Generator" %>
 <%@ Import Namespace="Kistl.Generator.Extensions" %>
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="interfaceName" Type="string" %>
 <%@ Parameter Name="className" Type="string" %>
 <%@ Parameter Name="propertyName" Type="string" %>
 <%@ Parameter Name="isNullable" Type="bool" %>
@@ -17,7 +18,7 @@
 <%@ Parameter Name="propertyGuid" Type="Guid" %>
 <%@ Parameter Name="backingStoreType" Type="string" %>
 <%@ Parameter Name="backingStoreName" Type="string" %>
-                if (!<%= isSetFlagName %>) {
+                if (!<%= isSetFlagName %> && ObjectState == DataObjectState.New) {
                     var __p = FrozenContext.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("<%= propertyGuid %>"));
                     if (__p != null) {
                         <%= isSetFlagName %> = true;
@@ -30,6 +31,6 @@
     <% } // Fix indent for next line %>
                         __result = this.<%= backingStoreName %> = (<%= backingStoreType.TrimEnd('?') %>)__tmp_value;
                     } else {
-                        Kistl.API.Utils.Logging.Log.Warn("Unable to get default value for property '<%= className %>.<%= propertyName %>'");
+                        Kistl.API.Utils.Logging.Log.Warn("Unable to get default value for property '<%= interfaceName %>.<%= propertyName %>'");
                     }
                 }

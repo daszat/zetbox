@@ -131,6 +131,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Templates\ObjectClasses\DefaultMethods.cs" />
     <Compile Include="Templates\ObjectClasses\RightsClass.cs">
       <DependentUpon>RightsClass.cst</DependentUpon>
     </Compile>

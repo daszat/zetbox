@@ -129,7 +129,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries
 
         protected override void ApplyExportGuidPropertyTemplate()
         {
-            Properties.ExportGuidProperty.Call(Host, ctx, this.MembersToSerialize, rel.Module.Namespace);
+            Properties.ExportGuidProperty.Call(Host, ctx, this.MembersToSerialize, rel.Module.Namespace, rel.GetRelationFullName());
         }
 
         protected override void ApplyReloadReferenceBody()

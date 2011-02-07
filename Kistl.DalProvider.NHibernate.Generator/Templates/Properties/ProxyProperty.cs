@@ -32,18 +32,20 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
 
         protected virtual void ApplyOnGetTemplate()
         {
-            if (hasDefaultValue)
-            {
-                Templates.Properties.ComputeDefaultValue.Call(Host, ctx, className, propertyName, isNullable, isSetFlagName, propertyGuid, backingStoreType, backingStoreName);
-            }
             if (useEvents)
             {
-                this.WriteObjects("                if (", EventName, "_Getter != null)\r\n");
-                this.WriteObjects("                {\r\n");
-                this.WriteObjects("                    var __e = new PropertyGetterEventArgs<", propertyType, ">(__result);\r\n");
-                this.WriteObjects("                    ", EventName, "_Getter(this, __e);\r\n");
-                this.WriteObjects("                    __result = __e.Result;\r\n");
-                this.WriteObjects("                }\r\n");
+                this.WriteObjects("                if (", EventName, "_Getter != null)");
+                this.WriteLine();
+                this.WriteObjects("                {");
+                this.WriteLine();
+                this.WriteObjects("                    var __e = new PropertyGetterEventArgs<", propertyType, ">(__result);");
+                this.WriteLine();
+                this.WriteObjects("                    ", EventName, "_Getter(this, __e);");
+                this.WriteLine();
+                this.WriteObjects("                    __result = __e.Result;");
+                this.WriteLine();
+                this.WriteObjects("                }");
+                this.WriteLine();
             }
         }
 
@@ -53,7 +55,8 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
             {
                 // this has to happen before the value comparison, because we 
                 // need to flag the *intent* of setting this property, even if the value set is == the default value
-                this.WriteObjects("                ", isSetFlagName, " = true;\r\n");
+                this.WriteObjects("                ", isSetFlagName, " = true;");
+                this.WriteLine();
             }
         }
 
@@ -61,12 +64,18 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
         {
             if (useEvents)
             {
-                this.WriteObjects("                    if (", EventName, "_PreSetter != null && IsAttached)\r\n");
-                this.WriteObjects("                    {\r\n");
-                this.WriteObjects("                        var __e = new PropertyPreSetterEventArgs<", propertyType, ">(__oldValue, __newValue);\r\n");
-                this.WriteObjects("                        ", EventName, "_PreSetter(this, __e);\r\n");
-                this.WriteObjects("                        __newValue = __e.Result;\r\n");
-                this.WriteObjects("                    }\r\n");
+                this.WriteObjects("                    if (", EventName, "_PreSetter != null && IsAttached)");
+                this.WriteLine();
+                this.WriteObjects("                    {");
+                this.WriteLine();
+                this.WriteObjects("                        var __e = new PropertyPreSetterEventArgs<", propertyType, ">(__oldValue, __newValue);");
+                this.WriteLine();
+                this.WriteObjects("                        ", EventName, "_PreSetter(this, __e);");
+                this.WriteLine();
+                this.WriteObjects("                        __newValue = __e.Result;");
+                this.WriteLine();
+                this.WriteObjects("                    }");
+                this.WriteLine();
             }
         }
 
@@ -74,11 +83,39 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
         {
             if (useEvents)
             {
-                this.WriteObjects("                    if (", EventName, "_PostSetter != null && IsAttached)\r\n");
-                this.WriteObjects("                    {\r\n");
-                this.WriteObjects("                        var __e = new PropertyPostSetterEventArgs<", propertyType, ">(__oldValue, __newValue);\r\n");
-                this.WriteObjects("                        ", EventName, "_PostSetter(this, __e);\r\n");
-                this.WriteObjects("                    }\r\n");
+                this.WriteObjects("                    if (", EventName, "_PostSetter != null && IsAttached)");
+                this.WriteLine();
+                this.WriteObjects("                    {");
+                this.WriteLine();
+                this.WriteObjects("                        var __e = new PropertyPostSetterEventArgs<", propertyType, ">(__oldValue, __newValue);");
+                this.WriteLine();
+                this.WriteObjects("                        ", EventName, "_PostSetter(this, __e);");
+                this.WriteLine();
+                this.WriteObjects("                    }");
+                this.WriteLine();
+            }
+        }
+
+        protected virtual void ApplyTailTemplate()
+        {
+            if (hasDefaultValue)
+            {
+                this.WriteLine();
+                this.WriteObjects("        private ", propertyType, " Fetch", propertyName, "OrDefault()");
+                this.WriteLine();
+                this.WriteObjects("        {");
+                this.WriteLine();
+                this.WriteObjects("            var __result = Proxy.", propertyName, ";");
+                this.WriteLine();
+                Templates.Properties.ComputeDefaultValue.Call(Host, ctx, interfaceName, className, propertyName, isNullable, isSetFlagName, propertyGuid, backingStoreType, backingStoreName);
+                this.WriteObjects("            return __result;");
+                this.WriteLine();
+                this.WriteObjects("        }");
+                this.WriteLine();
+                this.WriteLine();
+
+                this.WriteObjects("        private bool ", isSetFlagName, " = false;");
+                this.WriteLine();
             }
         }
 

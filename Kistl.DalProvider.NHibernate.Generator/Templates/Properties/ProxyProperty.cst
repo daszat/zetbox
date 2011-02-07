@@ -19,6 +19,7 @@
 <%@ Parameter Name="overrideParent" Type="bool" %>
 <%@ Parameter Name="useEvents" Type="bool" %>
 <%@ Parameter Name="hasDefaultValue" Type="bool" %>
+<%@ Parameter Name="interfaceName" Type="string" %>
 <%@ Parameter Name="className" Type="string" %>
 <%@ Parameter Name="isNullable" Type="bool" %>
 <%@ Parameter Name="isSetFlagName" Type="string" %>
@@ -33,7 +34,11 @@
             {
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
+<% if (hasDefaultValue) { %>
+                var __result = Fetch<%= propertyName %>OrDefault();
+<% } else { %>
                 var __result = Proxy.<%= propertyName %>;
+<% } %>
 <% ApplyOnGetTemplate(); %>
                 return __result;
             }
@@ -53,9 +58,6 @@
                 }
             }
         }
-<% if (hasDefaultValue) { %>
-
-        private bool <%= isSetFlagName %> = false;
-<% } %>
+<% ApplyTailTemplate(); %>
 <% AddSerialization(serializationList, propertyName, "Proxy." + propertyName); %>
         // END <%= this.GetType() %>

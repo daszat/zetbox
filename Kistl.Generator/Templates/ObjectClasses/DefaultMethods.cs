@@ -10,5 +10,13 @@ namespace Kistl.Generator.Templates.ObjectClasses
 
     public partial class DefaultMethods
     {
+        protected virtual void ApplyPrePreSaveTemplate() { }
+        protected virtual void ApplyPostPreSaveTemplate() { }
+        protected virtual void ApplyPrePostSaveTemplate() { }
+        protected virtual void ApplyPostPostSaveTemplate() { }
+        protected virtual void ApplyPreCreatedTemplate() { }
+        protected virtual void ApplyPostCreatedTemplate() { }
+        protected virtual void ApplyPreDeletingTemplate() { }
+        protected virtual void ApplyPostDeletingTemplate() { }
     }
 }

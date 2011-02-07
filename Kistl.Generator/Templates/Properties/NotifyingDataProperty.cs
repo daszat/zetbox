@@ -62,6 +62,7 @@ namespace Kistl.Generator.Templates.Properties
             {
                 ComputeDefaultValue.Call(Host, ctx,
                     _prop.ObjectClass.Name,
+                    _prop.ObjectClass.Name,
                     _prop.Name,
                     this._prop.IsNullable(),
                     IsSetFlagName,
@@ -92,7 +93,7 @@ namespace Kistl.Generator.Templates.Properties
         {
             base.ApplyPreSetTemplate();
 
-            this.WriteObjects("                    if(", EventName, "_PreSetter != null && IsAttached)\r\n");
+            this.WriteObjects("                    if (", EventName, "_PreSetter != null && IsAttached)\r\n");
             this.WriteObjects("                    {\r\n");
             this.WriteObjects("                        var __e = new PropertyPreSetterEventArgs<", type, ">(__oldValue, __newValue);\r\n");
             this.WriteObjects("                        ", EventName, "_PreSetter(this, __e);\r\n");
@@ -103,16 +104,16 @@ namespace Kistl.Generator.Templates.Properties
         protected override void ApplyPostSetTemplate()
         {
             base.ApplyPostSetTemplate();
-            this.WriteObjects("                    if(", EventName, "_PostSetter != null && IsAttached)\r\n");
+            this.WriteObjects("                    if (", EventName, "_PostSetter != null && IsAttached)\r\n");
             this.WriteObjects("                    {\r\n");
             this.WriteObjects("                        var __e = new PropertyPostSetterEventArgs<", type, ">(__oldValue, __newValue);\r\n");
             this.WriteObjects("                        ", EventName, "_PostSetter(this, __e);\r\n");
             this.WriteObjects("                    }\r\n");
         }
 
-        protected override void ApplyRequisitesTemplate()
+        protected override void ApplyBackingStoreDefinition()
         {
-            base.ApplyRequisitesTemplate();
+            base.ApplyBackingStoreDefinition();
             if (HasDefaultValue)
             {
                 this.WriteObjects("        private bool ", IsSetFlagName, " = false;\r\n");

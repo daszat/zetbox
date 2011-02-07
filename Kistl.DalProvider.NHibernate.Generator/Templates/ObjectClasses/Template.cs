@@ -225,7 +225,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
         {
             Properties.ProxyProperty.Call(Host, ctx,
                 serList, prop.Module.Namespace, prop.ReferencedTypeAsCSharp(), prop.Name, false, true,
-                prop.DefaultValue != null, prop.GetClassName(), prop.IsNullable(), prop.Name + "_IsSet", prop.ExportGuid, prop.ReferencedTypeAsCSharp(), "Proxy." + prop.Name);
+                prop.DefaultValue != null, prop.ObjectClass.GetDataTypeString(), prop.GetClassName(), prop.IsNullable(), "_is" + prop.Name + "Set", prop.ExportGuid, prop.ReferencedTypeAsCSharp(), "Proxy." + prop.Name);
         }
 
 
