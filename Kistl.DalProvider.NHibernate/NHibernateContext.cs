@@ -476,7 +476,9 @@ namespace Kistl.DalProvider.NHibernate
             // TODO: do batching here
             foreach (var guid in exportGuids)
             {
-                yield return FindPersistenceObject<T>(guid);
+                var result = FindPersistenceObject<T>(guid);
+                if (result != null)
+                    yield return result;
             }
         }
 
@@ -583,7 +585,7 @@ namespace Kistl.DalProvider.NHibernate
                 }
                 else
                 {
-                    Attach(item);
+                    item = (NHibernatePersistenceObject)Attach(item);
                 }
             }
             return item;
