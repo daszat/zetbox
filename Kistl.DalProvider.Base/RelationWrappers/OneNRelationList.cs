@@ -49,7 +49,7 @@ namespace Kistl.DalProvider.Base.RelationWrappers
             _owner = owner;
             _ownerChangingNotifier = ownerChangingNotifier;
             _ownerChangedNotifier = ownerChangedNotifier;
-            this.collection = collection != null ? new List<T>(collection.OrderBy(i => GetPosition(i))) : new List<T>();
+            this.collection = collection != null ? collection.OrderBy(i => GetPosition(i)).ToList() : new List<T>();
 
             //foreach (var item in this.collection)
             //{

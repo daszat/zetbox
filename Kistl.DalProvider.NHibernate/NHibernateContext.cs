@@ -158,7 +158,7 @@ namespace Kistl.DalProvider.NHibernate
         public override IPersistenceObject ContainsObject(InterfaceType type, int ID)
         {
             CheckDisposed();
-            return AttachedObjects.Where(obj => GetInterfaceType(obj) == type && obj.ID == ID).SingleOrDefault();
+            return _attachedObjects.Lookup(type, ID);
         }
 
         public override IEnumerable<IPersistenceObject> AttachedObjects

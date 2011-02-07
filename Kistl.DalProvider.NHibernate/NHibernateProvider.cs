@@ -3,20 +3,14 @@ namespace Kistl.DalProvider.NHibernate
 {
     using System;
     using System.Collections.Generic;
-    using System.IO;
     using System.Linq;
-    using System.Reflection;
     using System.Text;
     using Autofac;
     using Autofac.Core;
-    //using AutofacContrib.NHibernate.Bytecode;
     using Kistl.API;
     using Kistl.API.Common;
     using Kistl.API.Configuration;
     using Kistl.API.Server;
-    using Kistl.API.Utils;
-    using Kistl.App.Extensions;
-    using Kistl.App.Packaging;
 
     public class NHibernateProvider
         : Autofac.Module
@@ -28,10 +22,14 @@ namespace Kistl.DalProvider.NHibernate
             base.Load(moduleBuilder);
 
             moduleBuilder
-                .RegisterType<NHibernateImplementationType>()
-                .As<NHibernateImplementationType>()
-                .As<ImplementationType>()
-                .InstancePerDependency();
+                .Register<NHibernateImplementationType>(
+                    (c, p) => new NHibernateImplementationType(
+                        p.Named<Type>("type"),
+                        c.Resolve<InterfaceType.Factory>(),
+                        c.Resolve<INHibernateImplementationTypeChecker>()))
+                    .As<NHibernateImplementationType>()
+                    .As<ImplementationType>()
+                    .InstancePerDependency();
 
             RegisterContext<IKistlServerContext>(moduleBuilder)
                 .InstancePerDependency();
