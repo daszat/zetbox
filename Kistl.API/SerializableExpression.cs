@@ -169,11 +169,11 @@ namespace Kistl.API
         /// </summary>
         internal class SerializationContext
         {
-            private Dictionary<string, Expression> _Parameter = new Dictionary<string, Expression>();
+            private Dictionary<Guid, Expression> _Parameter = new Dictionary<Guid, Expression>();
             /// <summary>
             /// Collection of LINQ Parameter
             /// </summary>
-            public Dictionary<string, Expression> Parameter
+            public Dictionary<Guid, Expression> Parameter
             {
                 get
                 {
@@ -538,6 +538,15 @@ namespace Kistl.API
             : base(e, ctx, iftFactory)
         {
             this.Name = e.Name;
+            if (!ctx.Parameter.ContainsValue(e))
+            {
+                this.Guid = Guid.NewGuid();
+                ctx.Parameter[this.Guid] = e;
+            }
+            else
+            {
+                this.Guid = ctx.Parameter.Single(i => i.Value == e).Key;
+            }
         }
 
         /// <summary>
@@ -546,13 +555,19 @@ namespace Kistl.API
         [DataMember]
         public string Name { get; set; }
 
+        /// <summary>
+        /// Guid to find parameter instance
+        /// </summary>
+        [DataMember]
+        public Guid Guid { get; set; }
+
         internal override Expression ToExpressionInternal(SerializationContext ctx)
         {
-            if (!ctx.Parameter.ContainsKey(Name))
+            if (!ctx.Parameter.ContainsKey(Guid))
             {
-                ctx.Parameter[Name] = Expression.Parameter(Type, Name);
+                ctx.Parameter[Guid] = Expression.Parameter(Type, Name);
             }
-            return ctx.Parameter[Name];
+            return ctx.Parameter[Guid];
         }
     }
     #endregion

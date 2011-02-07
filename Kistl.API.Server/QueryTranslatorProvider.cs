@@ -160,7 +160,7 @@ namespace Kistl.API.Server
 
         private void ResetProvider()
         {
-            _Parameter = new Dictionary<string, ParameterExpression>();
+            _Parameter = new Dictionary<ParameterExpression, ParameterExpression>();
         }
         #endregion
 
@@ -245,14 +245,14 @@ namespace Kistl.API.Server
             }
         }
 
-        private Dictionary<string, ParameterExpression> _Parameter = new Dictionary<string, ParameterExpression>();
+        private Dictionary<ParameterExpression, ParameterExpression> _Parameter = new Dictionary<ParameterExpression, ParameterExpression>();
         protected override ParameterExpression VisitParameter(ParameterExpression p)
         {
-            if (!_Parameter.ContainsKey(p.Name))
+            if (!_Parameter.ContainsKey(p))
             {
-                _Parameter[p.Name] = Expression.Parameter(TranslateType(p.Type), p.Name);
+                _Parameter[p] = Expression.Parameter(TranslateType(p.Type), p.Name);
             }
-            return _Parameter[p.Name];
+            return _Parameter[p];
         }
 
         protected override Expression VisitMemberAccess(MemberExpression m)
