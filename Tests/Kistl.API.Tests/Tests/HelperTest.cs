@@ -335,6 +335,8 @@ namespace Kistl.API.Tests
 
         #endregion
 
+        // see https://bugzilla.novell.com/show_bug.cgi?id=670331
+#if !MONO
         [TestCase(typeof(IEnumerable<string>), new Type[] { typeof(IEnumerable<string>), typeof(IEnumerable) })]
         [TestCase(typeof(IList<string>), new Type[] { typeof(IEnumerable<string>), typeof(IEnumerable) })]
         [TestCase(typeof(TestSequence), new Type[] { typeof(IEnumerable<string>), typeof(IEnumerable<int>), typeof(IEnumerable) })]
@@ -345,6 +347,7 @@ namespace Kistl.API.Tests
             Assert.That(value.FindSequences().OrderBy(t => t.ToString()).ToArray(),
                 Is.EquivalentTo(expected.OrderBy(t => t.ToString()).ToArray()));
         }
+#endif
 
         [TestCase(typeof(IEnumerable<string>), new Type[] { typeof(string), typeof(object) })]
         [TestCase(typeof(IList<string>), new Type[] { typeof(string), typeof(object) })]
