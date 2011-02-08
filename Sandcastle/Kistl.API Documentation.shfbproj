@@ -7,7 +7,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{7227b94a-9e76-4582-838b-6f93bb62f7bd}</ProjectGuid>
-    <SHFBSchemaVersion>1.8.0.0</SHFBSchemaVersion>
+    <SHFBSchemaVersion>1.9.0.0</SHFBSchemaVersion>
     <!-- AssemblyName, Name, and RootNamespace are not used by SHFB but Visual
          Studio adds them anyway -->
     <AssemblyName>Documentation</AssemblyName>
@@ -19,9 +19,18 @@
     <FrameworkVersion>3.5</FrameworkVersion>
     <HelpTitle>Kistl API Reference</HelpTitle>
     <DocumentationSources>
-      <DocumentationSource sourceFile="..\Kistl.API.Client\Kistl.API.Client.csproj" xmlns="" />
-<DocumentationSource sourceFile="..\Kistl.API\Kistl.API.csproj" xmlns="" />
-<DocumentationSource sourceFile="..\Kistl.API.Server\Kistl.API.Server.csproj" xmlns="" /></DocumentationSources>
+      <DocumentationSource sourceFile="..\Kistl.API.Client\Kistl.API.Client.csproj" />
+      <DocumentationSource sourceFile="..\Kistl.API\Kistl.API.csproj" />
+      <DocumentationSource sourceFile="..\Kistl.API.Server\Kistl.API.Server.csproj" />
+      <DocumentationSource sourceFile="..\bin\Debug\bin\Server\Fallback\Kistl.Objects.dll" />
+      <DocumentationSource sourceFile="..\bin\Debug\bin\Server\Fallback\Kistl.Objects.xml" />
+    </DocumentationSources>
+    <HelpFileFormat>HtmlHelp1, Website</HelpFileFormat>
+    <ApiFilter>
+      <Filter entryType="Namespace" fullName="at.dasz.CourseOrganiser" isExposed="False" xmlns="" />
+      <Filter entryType="Namespace" fullName="Initiative50" isExposed="False" xmlns="" />
+    </ApiFilter>
+    <SelfBranded>True</SelfBranded>
   </PropertyGroup>
   <!-- There are no properties for these two groups but they need to appear in
        order for Visual Studio to perform the build. -->
