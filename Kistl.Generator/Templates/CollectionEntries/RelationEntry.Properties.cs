@@ -83,8 +83,6 @@ namespace Kistl.Generator.Templates.CollectionEntries
 
         protected virtual void ApplyIndexPropertyTemplate(Relation rel, RelationEndRole endRole)
         {
-            RelationEnd relEnd = rel.GetEndFromRole(endRole);
-
             if (rel.NeedsPositionStorage(endRole))
             {
                 // provided by ObjectReferencePropertyTemplate
