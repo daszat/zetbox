@@ -146,8 +146,8 @@ namespace Kistl.Server
                 Major = maj;
                 Minor = min;
             }
-            short Major;
-            short Minor;
+            public short Major;
+            public short Minor;
         }
         [StructLayout(LayoutKind.Sequential)]
         struct HTTP_SERVICE_CONFIG_URLACL_KEY

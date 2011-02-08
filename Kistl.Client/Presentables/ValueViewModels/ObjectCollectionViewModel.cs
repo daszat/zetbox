@@ -62,7 +62,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             {
                 _collection = collection;
                 _notifier = notifier;
-                notifier.CollectionChanged += new NotifyCollectionChangedEventHandler(notifier_CollectionChanged);
+                _notifier.CollectionChanged += new NotifyCollectionChangedEventHandler(notifier_CollectionChanged);
                 Sort(_sortProp, _direction);
             }
 
