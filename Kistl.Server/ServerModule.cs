@@ -48,19 +48,6 @@ namespace Kistl.Server
                 .As<IKistlAppDomain>()
                 .SingleInstance();
 
-            //moduleBuilder
-            //    .RegisterType<Generators.Interfaces.InterfaceGenerator>()
-            //    .As<Generators.BaseDataObjectGenerator>()
-            //    .SingleInstance();
-            //moduleBuilder
-            //    .RegisterType<Generators.ClientObjects.ClientObjectGenerator>()
-            //    .As<Generators.BaseDataObjectGenerator>()
-            //    .SingleInstance();
-
-            //moduleBuilder
-            //    .RegisterType<Generators.Generator>()
-            //    .SingleInstance();
-
             moduleBuilder
                 .Register(c => new AutofacServiceHostFactory())
                 .As<AutofacServiceHostFactory>()
@@ -106,6 +93,18 @@ namespace Kistl.Server
                 .As<ISchemaProvider>()
                 .Named<ISchemaProvider>("MSSQL")
                 .InstancePerDependency();
+
+#if MONO
+            moduleBuilder
+                .Register(c => new PosixIdentitySource())
+                .As<IIdentitySource>()
+                .InstancePerLifetimeScope();
+#else
+            moduleBuilder
+                .Register(c => new ActiveDirectoryIdentitySource())
+                .As<IIdentitySource>()
+                .InstancePerLifetimeScope();
+#endif
         }
     }
 }

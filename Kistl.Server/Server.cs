@@ -162,46 +162,24 @@ namespace Kistl.Server
             using (var subContainer = container.BeginLifetimeScope())
             {
                 IKistlContext ctx = subContainer.Resolve<IKistlContext>();
-                var userList = new Dictionary<string, string>();
-                ReadUsers(Environment.UserDomainName, userList);
-                ReadUsers(Environment.MachineName, userList);
+                var userList = subContainer.Resolve<IIdentitySource>().GetAllIdentities();
 
                 var identities = ctx.GetQuery<Kistl.App.Base.Identity>().ToLookup(k => k.UserName.ToUpper());
                 var everyone = ctx.FindPersistenceObject<Kistl.App.Base.Group>(Groups_Everyone);
 
                 foreach (var user in userList)
                 {
-                    if (!identities.Contains(user.Key.ToUpper()))
+                    if (!identities.Contains(user.UserName.ToUpper()))
                     {
                         var id = ctx.Create<Kistl.App.Base.Identity>();
-                        id.UserName = user.Key;
-                        id.DisplayName = user.Value;
+                        id.UserName = user.UserName;
+                        id.DisplayName = user.DisplayName;
                         id.Groups.Add(everyone);
                         Log.InfoFormat("Adding Identity {0} ({1})", id.DisplayName, id.UserName);
                     }
                 }
 
                 ctx.SubmitChanges();
-            }
-        }
-
-        private void ReadUsers(string machine, Dictionary<string, string> userList)
-        {
-            try
-            {
-                using (DirectoryEntry root = new DirectoryEntry("WinNT://" + machine))
-                {
-                    root.Children.SchemaFilter.Add("User");
-                    foreach (DirectoryEntry d in root.Children)
-                    {
-                        var login = machine + "\\" + d.Name;
-                        userList[login] = (d.Properties["FullName"].Value ?? login).ToString();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Log.Error("Error reading users from " + machine, ex);
             }
         }
 
