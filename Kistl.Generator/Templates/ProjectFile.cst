@@ -31,7 +31,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <NoWarn>1591,0168,0414</NoWarn>
+    <NoWarn>1591,0168,0414,0219</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
     <OutputPath>..\bin\Debug\bin\<%= GetRelativeOutputPath() %></OutputPath>
@@ -43,7 +43,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <NoWarn>1591,0168,0414</NoWarn>
+    <NoWarn>1591,0168,0414,0219</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
     <OutputPath>..\bin\Release\bin\<%= GetRelativeOutputPath() %></OutputPath>
@@ -57,7 +57,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <!-- mono is quite more pedantic; ignore superfluous local vars and fields for now -->
-    <NoWarn>1591,0168,0414</NoWarn>
+    <NoWarn>1591,0168,0414,0219</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
     <OutputPath>..\bin\Debug\bin\<%= GetRelativeOutputPath() %></OutputPath>
