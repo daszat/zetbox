@@ -17,12 +17,7 @@ namespace Kistl.Client.Presentables.TimeRecords
     public class PresenceRecordModel
         : DataObjectViewModel
     {
-#if MONO
-        // See https://bugzilla.novell.com/show_bug.cgi?id=660553
-        public delegate PresenceRecordModel Factory(IKistlContext dataCtx, PresenceRecord obj);
-#else
         public new delegate PresenceRecordModel Factory(IKistlContext dataCtx, PresenceRecord obj);
-#endif
 
         /// <summary>Gets the presented <see cref="PresenceRecord"/></summary>
         public PresenceRecord Entry

@@ -16,12 +16,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
     [ViewModelDescriptor]
     public class NavigationScreenHierarchyViewModel : ViewModel, IRefreshCommandListener
     {
-#if MONO
-        // See https://bugzilla.novell.com/show_bug.cgi?id=660553
-        public delegate ControlKindHierarchyViewModel Factory(IKistlContext dataCtx, Module module);
-#else
         public new delegate NavigationScreenHierarchyViewModel Factory(IKistlContext dataCtx, Module module);
-#endif
 
         public NavigationScreenHierarchyViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, Module module, Func<IKistlContext> ctxFactory)
             : base(appCtx, dataCtx)

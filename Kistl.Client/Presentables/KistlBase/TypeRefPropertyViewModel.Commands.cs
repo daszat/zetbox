@@ -113,12 +113,7 @@ namespace Kistl.Client.Presentables.KistlBase
 
         private class RegenerateTypeRefsCommand : CommandViewModel
         {
-#if MONO
-            // See https://bugzilla.novell.com/show_bug.cgi?id=660553
-            public delegate RegenerateTypeRefsCommand Factory(IKistlContext dataCtx, LoadTypeRefCommand outer);
-#else
             public new delegate RegenerateTypeRefsCommand Factory(IKistlContext dataCtx, LoadTypeRefCommand outer);
-#endif
 
             public InstanceListViewModel ListModel { get; set; }
 
@@ -159,12 +154,7 @@ namespace Kistl.Client.Presentables.KistlBase
     internal class LoadTypeRefFromAssemblyFileCommand
         : LoadTypeRefCommand
     {
-#if MONO
-        // See https://bugzilla.novell.com/show_bug.cgi?id=660553
-        public delegate LoadTypeRefFromAssemblyFileCommand Factory(IKistlContext dataCtx, TypeRefPropertyViewModel parent);
-#else
         public new delegate LoadTypeRefFromAssemblyFileCommand Factory(IKistlContext dataCtx, TypeRefPropertyViewModel parent);
-#endif
 
         /// <summary>
         /// Initializes a new instance of the LoadTypeRefFromAssemblyFileCommand class.
@@ -219,12 +209,7 @@ namespace Kistl.Client.Presentables.KistlBase
     internal class LoadTypeRefFromAssemblyRefCommand
         : LoadTypeRefCommand
     {
-#if MONO
-        // See https://bugzilla.novell.com/show_bug.cgi?id=660553
-        public delegate LoadTypeRefFromAssemblyRefCommand Factory(IKistlContext dataCtx, TypeRefPropertyViewModel parent);
-#else
         public new delegate LoadTypeRefFromAssemblyRefCommand Factory(IKistlContext dataCtx, TypeRefPropertyViewModel parent);
-#endif
 
         /// <summary>
         /// Initializes a new instance of the LoadTypeRefFromAssemblyRefCommand class.

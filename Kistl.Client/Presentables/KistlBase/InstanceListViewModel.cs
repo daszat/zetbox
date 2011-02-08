@@ -36,12 +36,7 @@ namespace Kistl.Client.Presentables.KistlBase
     public class InstanceListViewModel
         : ViewModel, IViewModelWithIcon, IRefreshCommandListener
     {
-#if MONO
-        // See https://bugzilla.novell.com/show_bug.cgi?id=660553
-        public delegate InstanceListViewModel Factory(IKistlContext dataCtx, Func<IKistlContext> workingCtxFactory, ObjectClass type, Func<IQueryable> qry);
-#else
         public new delegate InstanceListViewModel Factory(IKistlContext dataCtx, Func<IKistlContext> workingCtxFactory, ObjectClass type, Func<IQueryable> qry);
-#endif
 
         protected readonly Func<IKistlContext> workingCtxFactory;
 

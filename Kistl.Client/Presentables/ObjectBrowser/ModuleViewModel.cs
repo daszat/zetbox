@@ -15,12 +15,7 @@ namespace Kistl.Client.Presentables.ObjectBrowser
 {
     public class ModuleViewModel : DataObjectViewModel
     {
-#if MONO
-        // See https://bugzilla.novell.com/show_bug.cgi?id=660553
-        public delegate ModuleViewModel Factory(IKistlContext dataCtx, Module mdl);
-#else
         public new delegate ModuleViewModel Factory(IKistlContext dataCtx, Module mdl);
-#endif
 
         private Func<IKistlContext> _ctxFactory;
 

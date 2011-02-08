@@ -13,12 +13,7 @@ namespace Kistl.Client.Presentables
     public class DescribedMethodViewModel
         : DataObjectViewModel
     {
-#if MONO
-        // See https://bugzilla.novell.com/show_bug.cgi?id=660553
-        public delegate DescribedMethodViewModel Factory(IKistlContext dataCtx, Method meth);
-#else
         public new delegate DescribedMethodViewModel Factory(IKistlContext dataCtx, Method meth);
-#endif
 
         public DescribedMethodViewModel(
             IViewModelDependencies appCtx, IKistlContext dataCtx,

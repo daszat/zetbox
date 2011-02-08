@@ -13,12 +13,7 @@ namespace Kistl.Client.Presentables.GUI
     public class NavigatorViewModel
         : WindowViewModel
     {
-#if MONO
-        // See https://bugzilla.novell.com/show_bug.cgi?id=660553
-        public delegate NavigatorViewModel Factory(IKistlContext dataCtx, NavigationScreen root);
-#else
         public new delegate NavigatorViewModel Factory(IKistlContext dataCtx, NavigationScreen root);
-#endif
 
         private readonly NavigationScreenViewModel _root;
         private NavigationScreenViewModel _current;

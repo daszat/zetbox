@@ -19,13 +19,7 @@ namespace Kistl.Client.Presentables
     public class ValueInputTaskViewModel
         : WindowViewModel, Kistl.Client.Presentables.IValueInputTaskViewModel
     {
-#if MONO
-        // See https://bugzilla.novell.com/show_bug.cgi?id=660553
-        public delegate ValueInputTaskViewModel Factory(IKistlContext dataCtx, string name, IList<BaseValueViewModel> valueModels, Action<object[]> callback);
-#else
         public new delegate ValueInputTaskViewModel Factory(IKistlContext dataCtx, string name, IList<BaseValueViewModel> valueModels, Action<object[]> callback);
-#endif
-
 
         public ValueInputTaskViewModel(
             IViewModelDependencies appCtx, IKistlContext dataCtx, string name, IList<BaseValueViewModel> valueModels, Action<object[]> callback)

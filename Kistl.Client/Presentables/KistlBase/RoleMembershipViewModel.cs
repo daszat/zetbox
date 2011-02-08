@@ -16,12 +16,7 @@ namespace Kistl.Client.Presentables.KistlBase
     [ViewModelDescriptor]
     public class RoleMembershipViewModel : DataObjectViewModel
     {
-#if MONO
-        // See https://bugzilla.novell.com/show_bug.cgi?id=660553
-        public delegate RoleMembershipViewModel Factory(IKistlContext dataCtx, RoleMembership roleMembership);
-#else
         public new delegate RoleMembershipViewModel Factory(IKistlContext dataCtx, RoleMembership roleMembership);
-#endif
 
         public RoleMembershipViewModel(
             IViewModelDependencies appCtx, IKistlContext dataCtx,

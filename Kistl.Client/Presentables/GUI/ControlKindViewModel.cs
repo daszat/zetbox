@@ -14,12 +14,7 @@ namespace Kistl.Client.Presentables.GUI
     public class ControlKindViewModel
         : DataObjectViewModel
     {
-#if MONO
-        // See https://bugzilla.novell.com/show_bug.cgi?id=660553
-        public delegate ControlKindViewModel Factory(IKistlContext dataCtx, ControlKind obj);
-#else
         public new delegate ControlKindViewModel Factory(IKistlContext dataCtx, ControlKind obj);
-#endif
 
         public ControlKindViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ControlKind obj)
             : base(dependencies, dataCtx, obj)

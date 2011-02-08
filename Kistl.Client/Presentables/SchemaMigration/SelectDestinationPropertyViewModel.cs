@@ -13,16 +13,9 @@ namespace Kistl.Client.Presentables.SchemaMigration
     [ViewModelDescriptor]
     public class SelectDestinationPropertyViewModel : WindowViewModel
     {
-#if MONO
-        // See https://bugzilla.novell.com/show_bug.cgi?id=660553
-        public delegate SelectDestinationPropertyViewModel Factory(IKistlContext dataCtx,
-            SourceColumn srcCol,
-            Action<IEnumerable<Property>> callback);
-#else
         public new delegate SelectDestinationPropertyViewModel Factory(IKistlContext dataCtx,
             SourceColumn srcCol,
             Action<IEnumerable<Property>> callback);
-#endif
         
         private readonly Action<IEnumerable<Property>> _callback;
         private readonly SourceColumn _srcCol;
@@ -128,12 +121,7 @@ namespace Kistl.Client.Presentables.SchemaMigration
 
     public class PossibleDestPropertyViewModel : DataObjectViewModel
     {
-#if MONO
-        // See https://bugzilla.novell.com/show_bug.cgi?id=660553
-        public delegate PossibleDestPropertyViewModel Factory(IKistlContext dataCtx, Property obj, PossibleDestPropertyViewModel parent);
-#else
         public new delegate PossibleDestPropertyViewModel Factory(IKistlContext dataCtx, Property obj, PossibleDestPropertyViewModel parent);
-#endif
 
         private readonly Property _prop;
         private readonly PossibleDestPropertyViewModel _parent;

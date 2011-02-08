@@ -80,14 +80,7 @@ namespace Kistl.Client.Presentables.FilterViewModels
 
     public abstract class FilterViewModel : ViewModel
     {
-#if MONO
-        // See https://bugzilla.novell.com/show_bug.cgi?id=660553
-        public delegate FilterViewModel Factory(IKistlContext dataCtx, IUIFilterModel mdl);
-#else
         public new delegate FilterViewModel Factory(IKistlContext dataCtx, IUIFilterModel mdl);
-#endif
-
-
 
         public FilterViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, IUIFilterModel mdl)
             : base(dependencies, dataCtx)

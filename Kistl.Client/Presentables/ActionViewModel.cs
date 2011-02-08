@@ -13,12 +13,7 @@ namespace Kistl.Client.Presentables
     public class ActionViewModel
         : ViewModel
     {
-#if MONO
-        // See https://bugzilla.novell.com/show_bug.cgi?id=660553
-        public delegate ActionViewModel Factory(IKistlContext dataCtx, IDataObject obj, Method m);
-#else
         public new delegate ActionViewModel Factory(IKistlContext dataCtx, IDataObject obj, Method m);
-#endif
 
         public ActionViewModel(
             IViewModelDependencies appCtx, IKistlContext dataCtx,

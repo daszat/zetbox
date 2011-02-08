@@ -41,12 +41,7 @@ namespace Kistl.Client.Presentables.TimeRecords
         /// </summary>
         private class StartNewWorkEffortCommand : CommandViewModel
         {
-#if MONO
-            // See https://bugzilla.novell.com/show_bug.cgi?id=660553
-            public delegate StartNewWorkEffortCommand Factory(IKistlContext dataCtx, WorkEffortRecorderModel parent);
-#else
             public new delegate StartNewWorkEffortCommand Factory(IKistlContext dataCtx, WorkEffortRecorderModel parent);
-#endif
 
             /// <summary>The <see cref="WorkEffortRecorderModel"/> to work on.</summary>
             private WorkEffortRecorderModel _parent;
@@ -132,12 +127,7 @@ namespace Kistl.Client.Presentables.TimeRecords
         /// </summary>
         private class FinishWorkEffortCommand : CommandViewModel
         {
-#if MONO
-            // See https://bugzilla.novell.com/show_bug.cgi?id=660553
-            public delegate FinishWorkEffortCommand Factory(IKistlContext dataCtx, WorkEffortRecorderModel parent);
-#else
             public new delegate FinishWorkEffortCommand Factory(IKistlContext dataCtx, WorkEffortRecorderModel parent);
-#endif
 
             /// <summary>The <see cref="WorkEffortRecorderModel"/> to work on.</summary>
             private WorkEffortRecorderModel _parent;

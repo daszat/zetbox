@@ -18,12 +18,7 @@ namespace Kistl.Client.Presentables
     public abstract class PropertyGroupViewModel
         : ViewModel, IDataErrorInfo
     {
-#if MONO
-        // See https://bugzilla.novell.com/show_bug.cgi?id=660553
-        public delegate PropertyGroupViewModel Factory(IKistlContext dataCtx, string title, IEnumerable<ViewModel> obj);
-#else
         public new delegate PropertyGroupViewModel Factory(IKistlContext dataCtx, string title, IEnumerable<ViewModel> obj);
-#endif
 
         private string _title;
         protected ObservableCollection<ViewModel> properties;

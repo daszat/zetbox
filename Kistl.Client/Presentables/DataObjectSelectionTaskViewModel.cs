@@ -14,20 +14,11 @@ namespace Kistl.Client.Presentables
     public class DataObjectSelectionTaskViewModel
         : WindowViewModel, IRefreshCommandListener
     {
-#if MONO
-        // See https://bugzilla.novell.com/show_bug.cgi?id=660553
-        public delegate DataObjectSelectionTaskViewModel Factory(IKistlContext dataCtx,
-            ObjectClass type,
-            Func<IQueryable> qry,
-            Action<DataObjectViewModel> callback,
-            IList<CommandViewModel> additionalActions);
-#else
         public new delegate DataObjectSelectionTaskViewModel Factory(IKistlContext dataCtx,
             ObjectClass type,
             Func<IQueryable> qry,
             Action<DataObjectViewModel> callback,
             IList<CommandViewModel> additionalActions);
-#endif
 
         /// <summary>
         /// Initializes a new instance of the SelectionTaskModel class. This is protected since there 

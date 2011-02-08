@@ -19,12 +19,7 @@ namespace Kistl.Client.Presentables
     public class ParameterInputTaskViewModel
         : WindowViewModel, IValueInputTaskViewModel
     {
-#if MONO
-        // See https://bugzilla.novell.com/show_bug.cgi?id=660553
-        public delegate ParameterInputTaskViewModel Factory(IKistlContext dataCtx, Method method, Action<object[]> callback);
-#else
         public new delegate ParameterInputTaskViewModel Factory(IKistlContext dataCtx, Method method, Action<object[]> callback);
-#endif
 
         public ParameterInputTaskViewModel(
             IViewModelDependencies appCtx, IKistlContext dataCtx, Method method, Action<object[]> callback)

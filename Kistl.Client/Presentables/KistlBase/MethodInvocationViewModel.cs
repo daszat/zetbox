@@ -19,12 +19,7 @@ namespace Kistl.Client.Presentables.KistlBase
     public class MethodInvocationViewModel
         : DataObjectViewModel
     {
-#if MONO
-        // See https://bugzilla.novell.com/show_bug.cgi?id=660553
-        public delegate MethodInvocationViewModel Factory(IKistlContext dataCtx, MethodInvocation mdl);
-#else
         public new delegate MethodInvocationViewModel Factory(IKistlContext dataCtx, MethodInvocation mdl);
-#endif
 
         public MethodInvocationViewModel(
             IViewModelDependencies appCtx, IKistlContext dataCtx,
