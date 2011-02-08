@@ -50,9 +50,9 @@ namespace Kistl.DalProvider.NHibernate
             _attachedObjectsByProxy = new ContextCache<IProxyObject>(this, item => ((NHibernatePersistenceObject)item).NHibernateProxy);
         }
 
-        public IQueryable<IPersistenceObject> PrepareQueryableGeneric<Tinterface, Timpl>()
+        public IQueryable<IPersistenceObject> PrepareQueryableGeneric<Tinterface, Tproxy>()
         {
-            var query = _nhSession.Query<Timpl>();
+            var query = _nhSession.Query<Tproxy>();
             return new QueryTranslator<Tinterface>(
                 new NHibernateQueryTranslatorProvider<Tinterface>(
                     metaDataResolver, this.identity,
