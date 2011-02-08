@@ -906,7 +906,7 @@ namespace Kistl.API
         }
 
         /// <summary>
-        /// Finds all implemented IEnumerables of the given Type
+        /// Finds all implemented IEnumerables, IQueryables and IOrderedQueryables of the given Type
         /// </summary>
         public static IQueryable<Type> FindSequences(this Type seqType)
         {
@@ -919,6 +919,9 @@ namespace Kistl.API
             if (seqType.IsArray || seqType == typeof(IQueryable))
                 return new Type[] { typeof(IQueryable) }.AsQueryable();
 
+            if (seqType.IsArray || seqType == typeof(IOrderedQueryable))
+                return new Type[] { typeof(IOrderedQueryable) }.AsQueryable();
+
             if (seqType.IsGenericType && seqType.GetGenericArguments().Length == 1 && seqType.GetGenericTypeDefinition() == typeof(IEnumerable<>))
             {
                 return new Type[] { seqType, typeof(IEnumerable) }.AsQueryable();
@@ -927,6 +930,11 @@ namespace Kistl.API
             if (seqType.IsGenericType && seqType.GetGenericArguments().Length == 1 && seqType.GetGenericTypeDefinition() == typeof(IQueryable<>))
             {
                 return new Type[] { seqType, typeof(IQueryable) }.AsQueryable();
+            }
+
+            if (seqType.IsGenericType && seqType.GetGenericArguments().Length == 1 && seqType.GetGenericTypeDefinition() == typeof(IOrderedQueryable<>))
+            {
+                return new Type[] { seqType, typeof(IOrderedQueryable) }.AsQueryable();
             }
 
             var result = new List<Type>();
