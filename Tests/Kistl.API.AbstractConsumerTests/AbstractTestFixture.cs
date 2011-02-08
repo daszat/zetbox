@@ -28,7 +28,7 @@ namespace Kistl.API.AbstractConsumerTests
                 scope.Dispose();
         }
 
-        protected IKistlContext GetContext()
+        protected virtual IKistlContext GetContext()
         {
             return scope.Resolve<IKistlContext>();
         }
