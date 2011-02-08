@@ -389,25 +389,6 @@ namespace Kistl.DalProvider.NHibernate
                         .UniqueResult();
         }
 
-        public T FindPersistenceProxy<T>(int ID)
-            where T : IProxyObject
-        {
-            CheckDisposed();
-
-            var ifType = GetInterfaceType(typeof(T).FullName);
-
-            var result = _attachedObjects.Lookup(ifType, ID);
-
-            if (result != null)
-                return result.GetPrivateFieldValue<T>("Proxy");
-
-            var implType = ToImplementationType(ifType);
-
-            var q = NhFindById(implType, ID);
-            return (T)q;
-
-        }
-
         public override T FindPersistenceObject<T>(int ID)
         {
             CheckDisposed();
@@ -429,20 +410,6 @@ namespace Kistl.DalProvider.NHibernate
         {
             CheckDisposed();
             return (IPersistenceObject)this.GetType().FindGenericMethod("FindPersistenceObject", new Type[] { ifType.Type }, new Type[] { typeof(Guid) }).Invoke(this, new object[] { exportGuid });
-        }
-
-        public T FindPersistenceProxy<T>(Guid exportGuid)
-        {
-            CheckDisposed();
-            var result = _attachedObjects.Lookup(exportGuid);
-
-            if (result != null)
-                return result.GetPrivateFieldValue<T>("Proxy");
-
-            return (T)_nhSession
-                    .CreateCriteria(typeof(T))
-                    .Add(global::NHibernate.Criterion.Restrictions.Eq("ExportGuid", exportGuid))
-                    .UniqueResult();
         }
 
         public override T FindPersistenceObject<T>(Guid exportGuid)

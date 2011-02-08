@@ -21,10 +21,10 @@
 
 <% if (isExportable) { %>
             if (<%= fkGuidBackingName %>.HasValue)
-                this.Proxy.<%= name %> = OurContext.FindPersistenceProxy<<%= referencedImplementation %>>(<%= fkGuidBackingName %>.Value);
+                this.Proxy.<%= name %> = OurContext.FindPersistenceObject<<%= referencedImplementation %>>(<%= fkGuidBackingName %>.Value).Proxy;
             else
 <% } %>
             if (<%= fkBackingName %>.HasValue)
-                this.Proxy.<%= name %> = OurContext.FindPersistenceProxy<<%= referencedImplementation %>>(<%= fkBackingName %>.Value);
+                this.Proxy.<%= name %> = OurContext.FindPersistenceObject<<%= referencedImplementation %>>(<%= fkBackingName %>.Value).Proxy;
             else
                 this.Proxy.<%= name %> = null;

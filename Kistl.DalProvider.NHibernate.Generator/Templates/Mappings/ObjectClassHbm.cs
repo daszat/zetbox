@@ -38,6 +38,17 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
                 + "." + cls.Name + "Proxy";
         }
 
+        public static string GetWrapperTypeReference(ObjectClass cls, NameValueCollection templateSettings)
+        {
+            if (cls == null) { throw new ArgumentNullException("cls"); }
+            if (templateSettings == null) { throw new ArgumentNullException("templateSettings"); }
+
+            string extraSuffix = templateSettings["extrasuffix"];
+
+            return cls.Module.Namespace + "."
+                + cls.Name + extraSuffix + Kistl.API.Helper.ImplementationSuffix;
+        }
+
         public static object[] MakeArgs(IKistlContext ctx, ObjectClass cls, NameValueCollection templateSettings)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }

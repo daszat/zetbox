@@ -14,14 +14,10 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
     public class Template
         : Templates.ObjectClasses.Template
     {
-        private readonly ObjectClass cls;
 
         public Template(Arebis.CodeGeneration.IGenerationHost _host, Kistl.API.IKistlContext ctx, Kistl.App.Base.ObjectClass cls)
             : base(_host, ctx, cls)
         {
-            if (cls == null) { throw new ArgumentNullException("cls"); }
-
-            this.cls = cls;
         }
 
         protected override void ApplyConstructorTemplate()
@@ -29,10 +25,10 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
             // replace base constructors
             //base.ApplyConstructorTemplate();
             Constructors.Call(Host, ctx,
-                cls.Properties.OfType<CompoundObjectProperty>(),
-                cls.Name,
+                ObjectClass.Properties.OfType<CompoundObjectProperty>(),
+                ObjectClass.Name,
                 GetTypeName(),
-                cls.BaseObjectClass == null ? null : cls.BaseObjectClass.Name);
+                ObjectClass.BaseObjectClass == null ? null : ObjectClass.BaseObjectClass.Name);
         }
 
         protected override void ApplyClassTailTemplate()
