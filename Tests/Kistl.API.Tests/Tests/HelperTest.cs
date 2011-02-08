@@ -347,7 +347,6 @@ namespace Kistl.API.Tests
             Assert.That(value.FindSequences().OrderBy(t => t.ToString()).ToArray(),
                 Is.EquivalentTo(expected.OrderBy(t => t.ToString()).ToArray()));
         }
-#endif
 
         [TestCase(typeof(IEnumerable<string>), new Type[] { typeof(string), typeof(object) })]
         [TestCase(typeof(IList<string>), new Type[] { typeof(string), typeof(object) })]
@@ -388,6 +387,7 @@ namespace Kistl.API.Tests
             var result = typeof(FgmTestClass).FindGenericMethod(methodName, typeArguments, null);
             Assert.That(result, Is.Null); // TODO: implement extension lookup in FindGenericMethod
         }
+#endif
     }
 
     public class FgmTestClass
