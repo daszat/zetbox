@@ -908,7 +908,7 @@ namespace Kistl.API
         /// <summary>
         /// Finds all implemented IEnumerables of the given Type
         /// </summary>
-        public static IQueryable<Type> FindIEnumerables(this Type seqType)
+        public static IQueryable<Type> FindSequences(this Type seqType)
         {
             if (seqType == null || seqType == typeof(object) || seqType == typeof(string))
                 return new Type[] { }.AsQueryable();
@@ -916,19 +916,27 @@ namespace Kistl.API
             if (seqType.IsArray || seqType == typeof(IEnumerable))
                 return new Type[] { typeof(IEnumerable) }.AsQueryable();
 
+            if (seqType.IsArray || seqType == typeof(IQueryable))
+                return new Type[] { typeof(IQueryable) }.AsQueryable();
+
             if (seqType.IsGenericType && seqType.GetGenericArguments().Length == 1 && seqType.GetGenericTypeDefinition() == typeof(IEnumerable<>))
             {
                 return new Type[] { seqType, typeof(IEnumerable) }.AsQueryable();
+            }
+
+            if (seqType.IsGenericType && seqType.GetGenericArguments().Length == 1 && seqType.GetGenericTypeDefinition() == typeof(IQueryable<>))
+            {
+                return new Type[] { seqType, typeof(IQueryable) }.AsQueryable();
             }
 
             var result = new List<Type>();
 
             foreach (var iface in (seqType.GetInterfaces() ?? new Type[] { }))
             {
-                result.AddRange(FindIEnumerables(iface));
+                result.AddRange(FindSequences(iface));
             }
 
-            return FindIEnumerables(seqType.BaseType).Union(result);
+            return FindSequences(seqType.BaseType).Union(result);
         }
 
         /// <summary>
@@ -937,7 +945,7 @@ namespace Kistl.API
         /// </summary>
         public static IQueryable<Type> FindElementTypes(this Type seqType)
         {
-            return seqType.FindIEnumerables().Select(t => t.IsGenericType ? t.GetGenericArguments().Single() : typeof(object));
+            return seqType.FindSequences().Select(t => t.IsGenericType ? t.GetGenericArguments().Single() : typeof(object));
         }
 
         /// <summary>

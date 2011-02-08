@@ -59,17 +59,17 @@ namespace Kistl.API.Tests
         [TestCase(null)]
         [TestCase(typeof(object))]
         [TestCase(typeof(string))]
-        public void FindIEnumerables_should_not_invent_stuff(Type value)
+        public void FindSequences_should_not_invent_stuff(Type value)
         {
-            Assert.That(value.FindIEnumerables().ToArray(), Is.EquivalentTo(new Type[] { }));
+            Assert.That(value.FindSequences().ToArray(), Is.EquivalentTo(new Type[] { }));
         }
 
         [TestCase(typeof(object[]), typeof(IEnumerable))]
         [TestCase(typeof(string[]), typeof(IEnumerable))]
         [TestCase(typeof(IEnumerable), typeof(IEnumerable))]
-        public void FindIEnumerables_should_find_single_IEnumerable(Type value, Type expected)
+        public void FindSequences_should_find_single_IEnumerable(Type value, Type expected)
         {
-            Assert.That(value.FindIEnumerables().ToArray(), Is.EquivalentTo(new Type[] { expected }));
+            Assert.That(value.FindSequences().ToArray(), Is.EquivalentTo(new Type[] { expected }));
         }
 
         [TestCase(null)]
@@ -340,9 +340,9 @@ namespace Kistl.API.Tests
         [TestCase(typeof(TestSequence), new Type[] { typeof(IEnumerable<string>), typeof(IEnumerable<int>), typeof(IEnumerable) })]
         [TestCase(typeof(TestSequenceInheritance), new Type[] { typeof(IEnumerable<string>), typeof(IEnumerable<int>), typeof(IEnumerable) })]
         [TestCase(typeof(TestSequenceGeneric), new Type[] { typeof(IEnumerable<TestSequence>), typeof(IEnumerable) })]
-        public void FindIEnumerables_should_find_multiple_IEnumerable(Type value, Type[] expected)
+        public void FindSequences_should_find_multiple_IEnumerable(Type value, Type[] expected)
         {
-            Assert.That(value.FindIEnumerables().OrderBy(t => t.ToString()).ToArray(),
+            Assert.That(value.FindSequences().OrderBy(t => t.ToString()).ToArray(),
                 Is.EquivalentTo(expected.OrderBy(t => t.ToString()).ToArray()));
         }
 
