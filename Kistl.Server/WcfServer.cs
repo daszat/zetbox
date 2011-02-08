@@ -8,11 +8,10 @@ namespace Kistl.Server
     using System.ServiceModel.Activation;
     using System.Text;
     using System.Threading;
-
+    using Autofac.Integration.Wcf;
     using Kistl.API;
     using Kistl.API.Configuration;
     using Kistl.API.Utils;
-    using Autofac.Integration.Wcf;
 
     public class WcfServer
         : MarshalByRefObject, IKistlAppDomain, IDisposable
@@ -46,19 +45,19 @@ namespace Kistl.Server
 
             _mainHost = factory.CreateServiceHost(typeof(KistlService).AssemblyQualifiedName, new Uri[] { });
             _mainHost.UnknownMessageReceived += new EventHandler<UnknownMessageReceivedEventArgs>(host_UnknownMessageReceived);
-            _mainHost.Faulted += new EventHandler(host_Faulted);
-            _mainHost.Closed += new EventHandler(_host_Closed);
-            _mainHost.Opened += new EventHandler(_host_Opened);
+            _mainHost.Faulted += host_Faulted;
+            _mainHost.Closed += host_Closed;
+            _mainHost.Opened += host_Opened;
 
             _bootstrapperHost = webFactory.CreateServiceHost(typeof(BootstrapperService).AssemblyQualifiedName, new Uri[] { });
         }
 
-        void _host_Opened(object sender, EventArgs e)
+        void host_Opened(object sender, EventArgs e)
         {
             Log.Info("Host opened");
         }
 
-        void _host_Closed(object sender, EventArgs e)
+        void host_Closed(object sender, EventArgs e)
         {
             Log.Info("Host closed");
         }
