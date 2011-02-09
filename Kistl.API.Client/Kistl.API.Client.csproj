@@ -85,6 +85,7 @@
     <Compile Include="ClientIsolationLevel.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="ICredentialsResolver.cs" />
+    <Compile Include="InfoLoggingProxyDecorator.cs" />
     <Compile Include="IToolkit.cs" />
     <Compile Include="IToolkitResources.Designer.cs">
       <AutoGen>True</AutoGen>

@@ -15,10 +15,16 @@ namespace Kistl.API.Client
         {
             base.Load(moduleBuilder);
 
+            // TODO: should be moved to a WcfClient module
             moduleBuilder
                 .Register<ProxyImplementation>(c => new ProxyImplementation(c.Resolve<InterfaceType.Factory>(), c.Resolve<ICredentialsResolver>(), c.Resolve<IToolkit>()))
-                .As<IProxy>()
+                .Named<IProxy>("implementor")
                 .InstancePerDependency(); // No singelton!
+
+            moduleBuilder
+                .RegisterDecorator<IProxy>(
+                    (c, inner) => new InfoLoggingProxyDecorator(inner),
+                    "implementor");
 
             moduleBuilder
                 .Register<ClientDeploymentRestrictor>(c => new ClientDeploymentRestrictor())
