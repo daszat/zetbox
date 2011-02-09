@@ -17,7 +17,7 @@ namespace Kistl.Server.SchemaManagement
     {
         public void CheckSchema(bool withRepair)
         {
-            using (Log.DebugTraceMethodCall())
+            using (Log.DebugTraceMethodCall("CheckSchema"))
             {
                 this.repair = withRepair;
                 WriteReportHeader(withRepair ? "Check Schema Report with repair" : "Check Schema Report");

@@ -470,7 +470,7 @@ namespace Kistl.API
         /// <returns>XML string</returns>
         public static string ToXmlString(this object obj)
         {
-            using (Logging.Log.DebugTraceMethodCall())
+            using (Logging.Log.DebugTraceMethodCall("ToXmlString"))
             {
                 if (obj == null) { throw new ArgumentNullException("obj"); }
 

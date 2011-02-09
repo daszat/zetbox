@@ -480,7 +480,7 @@ namespace Kistl.Server.SchemaManagement
             if (!CheckTableExists(currentSchemaRef))
                 throw new InvalidOperationException("Unable to save Schema. Schematable does not exist.");
 
-            using (Log.DebugTraceMethodCall("Saving schema"))
+            using (Log.DebugTraceMethodCall("SaveSchema"))
             {
                 long count = CountRows(currentSchemaRef);
                 switch (count)

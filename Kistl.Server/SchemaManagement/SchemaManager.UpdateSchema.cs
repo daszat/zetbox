@@ -17,7 +17,7 @@ namespace Kistl.Server.SchemaManagement
     {
         public void UpdateSchema()
         {
-            using (Log.DebugTraceMethodCall())
+            using (Log.DebugTraceMethodCall("UpdateSchema"))
             {
                 WriteReportHeader("Update Schema Report");
 

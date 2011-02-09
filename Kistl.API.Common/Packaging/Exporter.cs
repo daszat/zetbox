@@ -38,7 +38,7 @@ namespace Kistl.App.Packaging
 
         public static void PublishFromContext(IKistlContext ctx, IPackageProvider s, string[] moduleNamespaces)
         {
-            using (Log.DebugTraceMethodCall())
+            using (Log.DebugTraceMethodCall("PublishFromContext"))
             {
                 Log.InfoFormat("Starting Publish for Modules {0}", string.Join(", ", moduleNamespaces));
                 Log.Debug("Loading modulelist");
@@ -96,7 +96,7 @@ namespace Kistl.App.Packaging
 
         public static void ExportFromContext(IKistlContext ctx, IPackageProvider s, string[] moduleNames)
         {
-            using (Log.DebugTraceMethodCall())
+            using (Log.DebugTraceMethodCall("ExportFromContext"))
             {
                 Log.InfoFormat("Starting Export for Modules {0}", string.Join(", ", moduleNames));
                 var moduleList = GetModules(ctx, moduleNames);

@@ -182,33 +182,24 @@ namespace Kistl.API.Utils
         #endregion
 
         /// <summary>
-        /// Internal Helper to get the calling Methodname
-        /// </summary>
-        /// <returns>Methodname from the current StackTrace</returns>
-        private static string GetCallingMethodName(ILog log, StackTrace stackTrace)
-        {
-            MethodBase mi = stackTrace.GetFrame(2).GetMethod();
-            return mi.DeclaringType.FullName + "." + mi.Name;
-        }
-
-        /// <summary>
         /// Traces a method call context without a message if the DEBUG level is active.
         /// Usage: using(Log.DebugTraceMethodCall()) { ... }
         /// </summary>
         /// <param name="log">The logger to log to.</param>
+        /// <param name="method">The calling method</param>
         /// <returns>An IDisposable helper that closes the context when it's disposed.</returns>
-        public static IDisposable DebugTraceMethodCall(this ILog log)
+        public static IDisposable DebugTraceMethodCall(this ILog log, string method)
         {
             if (log == null || !log.IsDebugEnabled) { return null; }
 
             try
             {
                 StackTrace s = new StackTrace();
-                return new DebugTraceMethodCallContext(log, GetCallingMethodName(log, s), s, String.Empty);
+                return new DebugTraceMethodCallContext(log, method, s, String.Empty);
             }
             catch
             {
-                return new DebugTraceMethodCallContext(log, "<unknown method>", null, String.Empty);
+                return new DebugTraceMethodCallContext(log, method, null, String.Empty);
             }
         }
 
@@ -217,43 +208,45 @@ namespace Kistl.API.Utils
         /// Usage: using(Log.DebugTraceMethodCall("additional info")) { ... }
         /// </summary>
         /// <param name="log">The logger to log to.</param>
+        /// <param name="method">The calling method</param>
         /// <param name="msg">The additional message to log.</param>
         /// <returns>An IDisposable helper that closes the context when it's disposed.</returns>
-        public static IDisposable DebugTraceMethodCall(this ILog log, string msg)
+        public static IDisposable DebugTraceMethodCall(this ILog log, string method, string msg)
         {
             if (log == null || !log.IsDebugEnabled) { return null; }
 
             try
             {
                 StackTrace s = new StackTrace();
-                return new DebugTraceMethodCallContext(log, GetCallingMethodName(log, s), s, msg);
+                return new DebugTraceMethodCallContext(log, method, s, msg);
             }
             catch
             {
-                return new DebugTraceMethodCallContext(log, "<unknown Method>", null, msg);
+                return new DebugTraceMethodCallContext(log, method, null, msg);
             }
         }
 
         /// <summary>
         /// Traces a method call context with a message if the DEBUG level is active.
-        /// Usage: using(Log.DebugTraceMethodCallFormat("foobar=[{0}]", foobar)) { ... }
+        /// Usage: using(Log.DebugTraceMethodCallFormat("Methodname", "foobar=[{0}]", foobar)) { ... }
         /// </summary>
         /// <param name="log">The logger to log to.</param>
+        /// <param name="method">The calling method</param>
         /// <param name="format">The format string for the log message</param>
         /// <param name="p">the parameters for the log message format</param>
         /// <returns>An IDisposable helper that closes the context when it's disposed.</returns>
-        public static IDisposable DebugTraceMethodCallFormat(this ILog log, string format, params object[] p)
+        public static IDisposable DebugTraceMethodCallFormat(this ILog log, string method, string format, params object[] p)
         {
             if (log == null || !log.IsDebugEnabled) { return null; }
 
             try
             {
                 StackTrace s = new StackTrace();
-                return new DebugTraceMethodCallContext(log, GetCallingMethodName(log, s), s, String.Format(format, p));
+                return new DebugTraceMethodCallContext(log, method, s, String.Format(format, p));
             }
             catch
             {
-                return new DebugTraceMethodCallContext(log, "<unknown Method>", null, String.Format(format, p));
+                return new DebugTraceMethodCallContext(log, method, null, String.Format(format, p));
             }
         }
 

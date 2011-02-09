@@ -95,7 +95,7 @@ namespace Kistl.API.Server
             if (expression == null) throw new ArgumentNullException("expression");
             ResetProvider();
 
-            using (Logging.Linq.DebugTraceMethodCall())
+            using (Logging.Linq.DebugTraceMethodCall("Execute"))
             {
                 if (Logging.Linq.IsInfoEnabled)
                 {
@@ -127,7 +127,7 @@ namespace Kistl.API.Server
             if (expression == null) throw new ArgumentNullException("expression");
             ResetProvider();
 
-            using (Logging.Linq.DebugTraceMethodCall())
+            using (Logging.Linq.DebugTraceMethodCall("ExecuteEnumerable"))
             {
                 if (Logging.Linq.IsInfoEnabled)
                 {

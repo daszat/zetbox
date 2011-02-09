@@ -26,7 +26,7 @@ namespace Kistl.Client
 
         public void Start(KistlConfig config)
         {
-            using (Logging.Log.DebugTraceMethodCall("Starting AppDomain for Server"))
+            using (Logging.Log.DebugTraceMethodCall("Start", "Starting AppDomain for Server"))
             {
                 serverDomain = AppDomain.CreateDomain("ServerAppDomain",
                     AppDomain.CurrentDomain.Evidence,

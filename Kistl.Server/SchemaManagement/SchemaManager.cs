@@ -224,7 +224,7 @@ namespace Kistl.Server.SchemaManagement
 
         private void SaveSchema(IKistlContext schema)
         {
-            using (Logging.Log.DebugTraceMethodCall())
+            using (Logging.Log.DebugTraceMethodCall("SaveSchema"))
             {
                 using (var ms = new MemoryStream())
                 {

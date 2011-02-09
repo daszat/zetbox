@@ -87,7 +87,7 @@ namespace Kistl.Server
         /// <returns>the found objects</returns>
         public byte[] GetList(SerializableType type, int maxListCount, bool eagerLoadLists, SerializableExpression[] filter, OrderByContract[] orderBy)
         {
-            using (Logging.Facade.DebugTraceMethodCallFormat("GetList", "{0}", type))
+            using (Logging.Facade.DebugTraceMethodCallFormat("GetList", "type={0}", type))
             {
                 DebugLogIdentity();
                 try
@@ -210,7 +210,7 @@ namespace Kistl.Server
         [Obsolete]
         public byte[] GetListOf(SerializableType type, int ID, string property)
         {
-            using (Logging.Facade.DebugTraceMethodCallFormat("GetListOf", "{0}", type))
+            using (Logging.Facade.DebugTraceMethodCallFormat("GetListOf", "type={0}", type))
             {
                 DebugLogIdentity();
                 try
@@ -345,7 +345,7 @@ namespace Kistl.Server
 
         public byte[] InvokeServerMethod(SerializableType type, int ID, string method, SerializableType[] parameterTypes, byte[] parameterArray, byte[] changedObjectsArray, ObjectNotificationRequest[] notificationRequests, out byte[] retChangedObjects)
         {
-            using (Logging.Facade.DebugTraceMethodCall("InvokeServerMethod"))
+            using (Logging.Facade.DebugTraceMethodCallFormat("InvokeServerMethod", "method={0}, ID={1}", method, ID))
             {
                 if (type == null)
                     throw new ArgumentNullException("type");
