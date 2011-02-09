@@ -30,7 +30,7 @@ namespace Kistl.API
         /// <returns>a streamable list of <see cref="IPersistenceObject"/>s</returns>
         [OperationContract]
         [FaultContract(typeof(Exception))]
-        MemoryStream SetObjects(MemoryStream msg, IEnumerable<ObjectNotificationRequest> notificationRequests);
+        MemoryStream SetObjects(MemoryStream msg, ObjectNotificationRequest[] notificationRequests);
 
         /// <summary>
         /// Returns a list of objects from the datastore, matching the specified filters.
@@ -43,7 +43,7 @@ namespace Kistl.API
         /// <returns>the found objects</returns>
         [OperationContract]
         [FaultContract(typeof(Exception))]
-        MemoryStream GetList(SerializableType type, int maxListCount, bool eagerLoadLists, List<SerializableExpression> filter, List<OrderByContract> orderBy);
+        MemoryStream GetList(SerializableType type, int maxListCount, bool eagerLoadLists, SerializableExpression[] filter, OrderByContract[] orderBy);
 
         /// <summary>
         /// returns a list of objects referenced by a specified Property. Use an equivalent query in GetList() instead.
@@ -91,7 +91,7 @@ namespace Kistl.API
 
         [OperationContract]
         [FaultContract(typeof(Exception))]
-        MemoryStream InvokeServerMethod(SerializableType type, int ID, string method, IEnumerable<SerializableType> parameterTypes, MemoryStream parameter, MemoryStream changedObjects, IEnumerable<ObjectNotificationRequest> notificationRequests, out MemoryStream retChangedObjects);
+        MemoryStream InvokeServerMethod(SerializableType type, int ID, string method, SerializableType[] parameterTypes, MemoryStream parameter, MemoryStream changedObjects, ObjectNotificationRequest[] notificationRequests, out MemoryStream retChangedObjects);
     }
 
     [MessageContract]

@@ -42,7 +42,7 @@ namespace Kistl.Server
         /// <param name="msg">a streamable list of <see cref="IPersistenceObject"/>s</param>
         /// <param name="notificationRequests">A list of objects the client wants to be notified about, if they change.</param>
         /// <returns>a streamable list of <see cref="IPersistenceObject"/>s</returns>
-        public MemoryStream SetObjects(MemoryStream msg, IEnumerable<ObjectNotificationRequest> notificationRequests)
+        public MemoryStream SetObjects(MemoryStream msg, ObjectNotificationRequest[] notificationRequests)
         {
             try
             {
@@ -83,7 +83,7 @@ namespace Kistl.Server
         /// <param name="filter">Serializable linq expression used a filter</param>
         /// <param name="orderBy">List of derializable linq expressions used as orderby</param>
         /// <returns>the found objects</returns>
-        public MemoryStream GetList(SerializableType type, int maxListCount, bool eagerLoadLists, List<SerializableExpression> filter, List<OrderByContract> orderBy)
+        public MemoryStream GetList(SerializableType type, int maxListCount, bool eagerLoadLists, SerializableExpression[] filter, OrderByContract[] orderBy)
         {
             try
             {
@@ -340,7 +340,7 @@ namespace Kistl.Server
             }
         }
 
-        public MemoryStream InvokeServerMethod(SerializableType type, int ID, string method, IEnumerable<SerializableType> parameterTypes, MemoryStream parameter, MemoryStream changedObjects, IEnumerable<ObjectNotificationRequest> notificationRequests, out MemoryStream retChangedObjects)
+        public MemoryStream InvokeServerMethod(SerializableType type, int ID, string method, SerializableType[] parameterTypes, MemoryStream parameter, MemoryStream changedObjects, ObjectNotificationRequest[] notificationRequests, out MemoryStream retChangedObjects)
         {
             if (type == null)
                 throw new ArgumentNullException("type");
