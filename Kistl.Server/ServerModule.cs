@@ -60,7 +60,6 @@ namespace Kistl.Server
 
             moduleBuilder
                 .RegisterType<KistlService>()
-                .Named<IKistlService>("implementor")
                 .SingleInstance();
 
             moduleBuilder
