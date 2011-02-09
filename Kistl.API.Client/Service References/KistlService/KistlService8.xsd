@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://dasz.at/ZBox/" elementFormDefault="qualified" targetNamespace="http://dasz.at/ZBox/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/System.IO" />
-  <xs:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-  <xs:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/Kistl.API" />
+  <xs:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Kistl.API" />
   <xs:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-  <xs:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd6" namespace="http://schemas.microsoft.com/Message" />
+  <xs:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd5" namespace="http://schemas.microsoft.com/Message" />
   <xs:element name="SetObjects">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/System.IO" minOccurs="0" name="msg" nillable="true" type="q1:MemoryStream" />
+        <xs:element minOccurs="0" name="msg" nillable="true" type="xs:base64Binary" />
         <xs:element minOccurs="0" name="notificationRequests" nillable="true" type="tns:ArrayOfObjectNotificationRequest" />
       </xs:sequence>
     </xs:complexType>
@@ -21,7 +20,7 @@
   <xs:element name="ArrayOfObjectNotificationRequest" nillable="true" type="tns:ArrayOfObjectNotificationRequest" />
   <xs:complexType name="ObjectNotificationRequest">
     <xs:sequence>
-      <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="IDs" nillable="true" type="q2:ArrayOfint" />
+      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="IDs" nillable="true" type="q1:ArrayOfint" />
       <xs:element minOccurs="0" name="Type" nillable="true" type="tns:SerializableType" />
     </xs:sequence>
   </xs:complexType>
@@ -43,7 +42,7 @@
   <xs:element name="SetObjectsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/System.IO" minOccurs="0" name="SetObjectsResult" nillable="true" type="q3:MemoryStream" />
+        <xs:element minOccurs="0" name="SetObjectsResult" nillable="true" type="xs:base64Binary" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -103,14 +102,14 @@
   <xs:complexType name="OrderByContract">
     <xs:sequence>
       <xs:element minOccurs="0" name="Expression" nillable="true" type="tns:SerializableExpression" />
-      <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Kistl.API" minOccurs="0" name="Type" type="q4:OrderByType" />
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Kistl.API" minOccurs="0" name="Type" type="q2:OrderByType" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="OrderByContract" nillable="true" type="tns:OrderByContract" />
   <xs:element name="GetListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/System.IO" minOccurs="0" name="GetListResult" nillable="true" type="q5:MemoryStream" />
+        <xs:element minOccurs="0" name="GetListResult" nillable="true" type="xs:base64Binary" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -126,14 +125,14 @@
   <xs:element name="GetListOfResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/System.IO" minOccurs="0" name="GetListOfResult" nillable="true" type="q6:MemoryStream" />
+        <xs:element minOccurs="0" name="GetListOfResult" nillable="true" type="xs:base64Binary" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="FetchRelation">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="relId" type="q7:guid" />
+        <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="relId" type="q3:guid" />
         <xs:element minOccurs="0" name="role" type="xs:int" />
         <xs:element minOccurs="0" name="ID" type="xs:int" />
       </xs:sequence>
@@ -142,7 +141,7 @@
   <xs:element name="FetchRelationResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/System.IO" minOccurs="0" name="FetchRelationResult" nillable="true" type="q8:MemoryStream" />
+        <xs:element minOccurs="0" name="FetchRelationResult" nillable="true" type="xs:base64Binary" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -156,14 +155,14 @@
   <xs:element name="GetBlobStreamResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.microsoft.com/Message" name="GetBlobStreamResult" type="q9:StreamBody" />
+        <xs:element xmlns:q4="http://schemas.microsoft.com/Message" name="GetBlobStreamResult" type="q4:StreamBody" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="BlobMessage">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.microsoft.com/Message" name="Stream" type="q10:StreamBody" />
+        <xs:element xmlns:q5="http://schemas.microsoft.com/Message" name="Stream" type="q5:StreamBody" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -172,7 +171,7 @@
   <xs:element name="BlobResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.microsoft.com/Message" name="BlobInstance" type="q11:StreamBody" />
+        <xs:element xmlns:q6="http://schemas.microsoft.com/Message" name="BlobInstance" type="q6:StreamBody" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -184,8 +183,8 @@
         <xs:element minOccurs="0" name="ID" type="xs:int" />
         <xs:element minOccurs="0" name="method" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="parameterTypes" nillable="true" type="tns:ArrayOfSerializableType" />
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/System.IO" minOccurs="0" name="parameter" nillable="true" type="q12:MemoryStream" />
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/System.IO" minOccurs="0" name="changedObjects" nillable="true" type="q13:MemoryStream" />
+        <xs:element minOccurs="0" name="parameter" nillable="true" type="xs:base64Binary" />
+        <xs:element minOccurs="0" name="changedObjects" nillable="true" type="xs:base64Binary" />
         <xs:element minOccurs="0" name="notificationRequests" nillable="true" type="tns:ArrayOfObjectNotificationRequest" />
       </xs:sequence>
     </xs:complexType>
@@ -193,8 +192,8 @@
   <xs:element name="InvokeServerMethodResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/System.IO" minOccurs="0" name="InvokeServerMethodResult" nillable="true" type="q14:MemoryStream" />
-        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/System.IO" minOccurs="0" name="retChangedObjects" nillable="true" type="q15:MemoryStream" />
+        <xs:element minOccurs="0" name="InvokeServerMethodResult" nillable="true" type="xs:base64Binary" />
+        <xs:element minOccurs="0" name="retChangedObjects" nillable="true" type="xs:base64Binary" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

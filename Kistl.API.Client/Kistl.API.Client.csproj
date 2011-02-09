@@ -121,9 +121,6 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="Service References\KistlService\KistlService.wsdl" />
-    <None Include="Service References\KistlService\KistlService.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Service References\KistlService\KistlService1.wsdl" />
     <None Include="Service References\KistlService\KistlService1.xsd">
       <SubType>Designer</SubType>

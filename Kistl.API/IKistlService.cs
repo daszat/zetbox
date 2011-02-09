@@ -30,7 +30,7 @@ namespace Kistl.API
         /// <returns>a streamable list of <see cref="IPersistenceObject"/>s</returns>
         [OperationContract]
         [FaultContract(typeof(Exception))]
-        MemoryStream SetObjects(MemoryStream msg, ObjectNotificationRequest[] notificationRequests);
+        byte[] SetObjects(byte[] msg, ObjectNotificationRequest[] notificationRequests);
 
         /// <summary>
         /// Returns a list of objects from the datastore, matching the specified filters.
@@ -43,7 +43,7 @@ namespace Kistl.API
         /// <returns>the found objects</returns>
         [OperationContract]
         [FaultContract(typeof(Exception))]
-        MemoryStream GetList(SerializableType type, int maxListCount, bool eagerLoadLists, SerializableExpression[] filter, OrderByContract[] orderBy);
+        byte[] GetList(SerializableType type, int maxListCount, bool eagerLoadLists, SerializableExpression[] filter, OrderByContract[] orderBy);
 
         /// <summary>
         /// returns a list of objects referenced by a specified Property. Use an equivalent query in GetList() instead.
@@ -55,7 +55,7 @@ namespace Kistl.API
         [Obsolete]
         [OperationContract]
         [FaultContract(typeof(Exception))]
-        MemoryStream GetListOf(SerializableType type, int ID, string property);
+        byte[] GetListOf(SerializableType type, int ID, string property);
 
         /// <summary>
         /// Fetches a list of CollectionEntry objects of the Relation 
@@ -68,7 +68,7 @@ namespace Kistl.API
         /// <returns>the requested collection entries</returns>
         [OperationContract]
         [FaultContract(typeof(Exception))]
-        MemoryStream FetchRelation(Guid relId, int role, int ID);
+        byte[] FetchRelation(Guid relId, int role, int ID);
 
         /// <summary>
         /// Gets the content stream of the given Blob instance ID
@@ -91,7 +91,7 @@ namespace Kistl.API
 
         [OperationContract]
         [FaultContract(typeof(Exception))]
-        MemoryStream InvokeServerMethod(SerializableType type, int ID, string method, SerializableType[] parameterTypes, MemoryStream parameter, MemoryStream changedObjects, ObjectNotificationRequest[] notificationRequests, out MemoryStream retChangedObjects);
+        byte[] InvokeServerMethod(SerializableType type, int ID, string method, SerializableType[] parameterTypes, byte[] parameter, byte[] changedObjects, ObjectNotificationRequest[] notificationRequests, out byte[] retChangedObjects);
     }
 
     [MessageContract]

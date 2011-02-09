@@ -5,10 +5,9 @@
       <xsd:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd0" namespace="http://dasz.at/ZBox/" />
       <xsd:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System" />
       <xsd:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/System.IO" />
-      <xsd:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-      <xsd:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/Kistl.API" />
-      <xsd:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd6" namespace="http://schemas.microsoft.com/Message" />
+      <xsd:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Kistl.API" />
+      <xsd:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd5" namespace="http://schemas.microsoft.com/Message" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IKistlService_SetObjects_InputMessage">

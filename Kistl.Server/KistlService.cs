@@ -39,14 +39,15 @@ namespace Kistl.Server
         /// <summary>
         /// Puts a number of changed objects into the database. The resultant objects are sent back to the client.
         /// </summary>
-        /// <param name="msg">a streamable list of <see cref="IPersistenceObject"/>s</param>
+        /// <param name="msgArray">a streamable list of <see cref="IPersistenceObject"/>s</param>
         /// <param name="notificationRequests">A list of objects the client wants to be notified about, if they change.</param>
         /// <returns>a streamable list of <see cref="IPersistenceObject"/>s</returns>
-        public MemoryStream SetObjects(MemoryStream msg, ObjectNotificationRequest[] notificationRequests)
+        public byte[] SetObjects(byte[] msgArray, ObjectNotificationRequest[] notificationRequests)
         {
             try
             {
-                if (msg == null) { throw new ArgumentNullException("msg"); }
+                if (msgArray == null) { throw new ArgumentNullException("msgArray"); }
+                MemoryStream msg = new MemoryStream(msgArray);
 
                 msg.Seek(0, SeekOrigin.Begin);
                 using (Logging.Facade.DebugTraceMethodCall())
@@ -62,7 +63,7 @@ namespace Kistl.Server
                             .GetServerObjectSetHandler()
                             .SetObjects(ctx, objects, notificationRequests ?? new ObjectNotificationRequest[0])
                             .Cast<IStreamable>();
-                        return SendObjects(changedObjects, true);
+                        return SendObjects(changedObjects, true).ToArray();
                     }
                 }
             }
@@ -83,7 +84,7 @@ namespace Kistl.Server
         /// <param name="filter">Serializable linq expression used a filter</param>
         /// <param name="orderBy">List of derializable linq expressions used as orderby</param>
         /// <returns>the found objects</returns>
-        public MemoryStream GetList(SerializableType type, int maxListCount, bool eagerLoadLists, SerializableExpression[] filter, OrderByContract[] orderBy)
+        public byte[] GetList(SerializableType type, int maxListCount, bool eagerLoadLists, SerializableExpression[] filter, OrderByContract[] orderBy)
         {
             try
             {
@@ -102,7 +103,7 @@ namespace Kistl.Server
                                 filterExpresstions,
                                 orderBy != null ? orderBy.Select(o => new OrderBy(o.Type, SerializableExpression.ToExpression(o.Expression))).ToList() : null);
 
-                        return SendObjects(lst, eagerLoadLists);
+                        return SendObjects(lst, eagerLoadLists).ToArray();
                     }
                 }
             }
@@ -179,7 +180,7 @@ namespace Kistl.Server
             return result;
         }
 
-        private List<IPersistenceObject> ReadObjects(MemoryStream msg, IKistlContext ctx)
+        private List<IPersistenceObject> ReadObjects(Stream msg, IKistlContext ctx)
         {
             var objects = new List<IPersistenceObject>();
             BinaryReader sr = new BinaryReader(msg);
@@ -207,7 +208,7 @@ namespace Kistl.Server
         /// <param name="property">Property</param>
         /// <returns>the referenced objects</returns>
         [Obsolete]
-        public MemoryStream GetListOf(SerializableType type, int ID, string property)
+        public byte[] GetListOf(SerializableType type, int ID, string property)
         {
             try
             {
@@ -222,7 +223,7 @@ namespace Kistl.Server
                         IEnumerable<IStreamable> lst = _sohFactory
                             .GetServerObjectHandler(_iftFactory(type.GetSystemType()))
                             .GetListOf(ctx, ID, property);
-                        return SendObjects(lst, true);
+                        return SendObjects(lst, true).ToArray();
                     }
                 }
             }
@@ -243,7 +244,7 @@ namespace Kistl.Server
         /// <param name="serializableRole">the parent role (1 == A, 2 == B)</param>
         /// <param name="parentObjID">the ID of the parent object</param>
         /// <returns>the requested collection entries</returns>
-        public MemoryStream FetchRelation(Guid relId, int serializableRole, int parentObjID)
+        public byte[] FetchRelation(Guid relId, int serializableRole, int parentObjID)
         {
             try
             {
@@ -264,7 +265,7 @@ namespace Kistl.Server
                                 endRole)
                             .GetCollectionEntries(ctx, relId, endRole, parentObjID);
 
-                        return SendObjects(lst.Cast<IStreamable>(), true);
+                        return SendObjects(lst.Cast<IStreamable>(), true).ToArray();
                     }
                 }
             }
@@ -340,7 +341,7 @@ namespace Kistl.Server
             }
         }
 
-        public MemoryStream InvokeServerMethod(SerializableType type, int ID, string method, SerializableType[] parameterTypes, MemoryStream parameter, MemoryStream changedObjects, ObjectNotificationRequest[] notificationRequests, out MemoryStream retChangedObjects)
+        public byte[] InvokeServerMethod(SerializableType type, int ID, string method, SerializableType[] parameterTypes, byte[] parameterArray, byte[] changedObjectsArray, ObjectNotificationRequest[] notificationRequests, out byte[] retChangedObjects)
         {
             if (type == null)
                 throw new ArgumentNullException("type");
@@ -348,10 +349,13 @@ namespace Kistl.Server
                 throw new ArgumentNullException("method");
             if (parameterTypes == null)
                 throw new ArgumentNullException("parameterTypes");
-            if (parameter == null)
-                throw new ArgumentNullException("parameter");
-            if (changedObjects == null)
-                throw new ArgumentNullException("changedObjects");
+            if (parameterArray == null)
+                throw new ArgumentNullException("parameterArray");
+            if (changedObjectsArray == null)
+                throw new ArgumentNullException("changedObjectsArray");
+
+            var parameter = new MemoryStream(parameterArray);
+            var changedObjects = new MemoryStream(changedObjectsArray);
 
             parameter.Seek(0, SeekOrigin.Begin);
             changedObjects.Seek(0, SeekOrigin.Begin);
@@ -379,24 +383,24 @@ namespace Kistl.Server
                                 notificationRequests ?? new ObjectNotificationRequest[0],
                                 out changedObjectsList);
 
-                        retChangedObjects = SendObjects(changedObjectsList.Cast<IStreamable>(), true);
+                        retChangedObjects = SendObjects(changedObjectsList.Cast<IStreamable>(), true).ToArray();
 
 
                         if (result != null && result.GetType().IsIStreamable())
                         {
                             IStreamable resultObj = (IStreamable)result;
-                            return SendObjects(new IStreamable[] { resultObj }, false);
+                            return SendObjects(new IStreamable[] { resultObj }, false).ToArray();
                         }
                         else if (result != null && result.GetType().IsIEnumerable() && result.GetType().FindElementTypes().First().IsIStreamable())
                         {
                             var lst = ((IEnumerable)result).AsQueryable().Cast<IStreamable>().Take(Kistl.API.Helper.MAXLISTCOUNT);
-                            return SendObjects(lst, false);
+                            return SendObjects(lst, false).ToArray();
                         }
                         else
                         {
                             MemoryStream resultStream = new MemoryStream();
                             bf.Serialize(resultStream, result);
-                            return resultStream;
+                            return resultStream.ToArray();
                         }
                     }
                 }

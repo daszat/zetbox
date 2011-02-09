@@ -17,19 +17,19 @@ namespace Kistl.API.Client.KistlService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://dasz.at/ZBox/IKistlService/SetObjects", ReplyAction="http://dasz.at/ZBox/IKistlService/SetObjectsResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(System.Exception), Action="http://dasz.at/ZBox/IKistlService/SetObjectsExceptionFault", Name="Exception", Namespace="http://schemas.datacontract.org/2004/07/System")]
-        System.IO.MemoryStream SetObjects(System.IO.MemoryStream msg, Kistl.API.ObjectNotificationRequest[] notificationRequests);
+        byte[] SetObjects(byte[] msg, Kistl.API.ObjectNotificationRequest[] notificationRequests);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://dasz.at/ZBox/IKistlService/GetList", ReplyAction="http://dasz.at/ZBox/IKistlService/GetListResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(System.Exception), Action="http://dasz.at/ZBox/IKistlService/GetListExceptionFault", Name="Exception", Namespace="http://schemas.datacontract.org/2004/07/System")]
-        System.IO.MemoryStream GetList(Kistl.API.SerializableType type, int maxListCount, bool eagerLoadLists, Kistl.API.SerializableExpression[] filter, Kistl.API.OrderByContract[] orderBy);
+        byte[] GetList(Kistl.API.SerializableType type, int maxListCount, bool eagerLoadLists, Kistl.API.SerializableExpression[] filter, Kistl.API.OrderByContract[] orderBy);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://dasz.at/ZBox/IKistlService/GetListOf", ReplyAction="http://dasz.at/ZBox/IKistlService/GetListOfResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(System.Exception), Action="http://dasz.at/ZBox/IKistlService/GetListOfExceptionFault", Name="Exception", Namespace="http://schemas.datacontract.org/2004/07/System")]
-        System.IO.MemoryStream GetListOf(Kistl.API.SerializableType type, int ID, string property);
+        byte[] GetListOf(Kistl.API.SerializableType type, int ID, string property);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://dasz.at/ZBox/IKistlService/FetchRelation", ReplyAction="http://dasz.at/ZBox/IKistlService/FetchRelationResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(System.Exception), Action="http://dasz.at/ZBox/IKistlService/FetchRelationExceptionFault", Name="Exception", Namespace="http://schemas.datacontract.org/2004/07/System")]
-        System.IO.MemoryStream FetchRelation(System.Guid relId, int role, int ID);
+        byte[] FetchRelation(System.Guid relId, int role, int ID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://dasz.at/ZBox/IKistlService/GetBlobStream", ReplyAction="http://dasz.at/ZBox/IKistlService/GetBlobStreamResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(System.Exception), Action="http://dasz.at/ZBox/IKistlService/GetBlobStreamExceptionFault", Name="Exception", Namespace="http://schemas.datacontract.org/2004/07/System")]
@@ -42,7 +42,7 @@ namespace Kistl.API.Client.KistlService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://dasz.at/ZBox/IKistlService/InvokeServerMethod", ReplyAction="http://dasz.at/ZBox/IKistlService/InvokeServerMethodResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(System.Exception), Action="http://dasz.at/ZBox/IKistlService/InvokeServerMethodExceptionFault", Name="Exception", Namespace="http://schemas.datacontract.org/2004/07/System")]
-        System.IO.MemoryStream InvokeServerMethod(out System.IO.MemoryStream retChangedObjects, Kistl.API.SerializableType type, int ID, string method, Kistl.API.SerializableType[] parameterTypes, System.IO.MemoryStream parameter, System.IO.MemoryStream changedObjects, Kistl.API.ObjectNotificationRequest[] notificationRequests);
+        byte[] InvokeServerMethod(out byte[] retChangedObjects, Kistl.API.SerializableType type, int ID, string method, Kistl.API.SerializableType[] parameterTypes, byte[] parameter, byte[] changedObjects, Kistl.API.ObjectNotificationRequest[] notificationRequests);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -118,19 +118,19 @@ namespace Kistl.API.Client.KistlService {
                 base(binding, remoteAddress) {
         }
         
-        public System.IO.MemoryStream SetObjects(System.IO.MemoryStream msg, Kistl.API.ObjectNotificationRequest[] notificationRequests) {
+        public byte[] SetObjects(byte[] msg, Kistl.API.ObjectNotificationRequest[] notificationRequests) {
             return base.Channel.SetObjects(msg, notificationRequests);
         }
         
-        public System.IO.MemoryStream GetList(Kistl.API.SerializableType type, int maxListCount, bool eagerLoadLists, Kistl.API.SerializableExpression[] filter, Kistl.API.OrderByContract[] orderBy) {
+        public byte[] GetList(Kistl.API.SerializableType type, int maxListCount, bool eagerLoadLists, Kistl.API.SerializableExpression[] filter, Kistl.API.OrderByContract[] orderBy) {
             return base.Channel.GetList(type, maxListCount, eagerLoadLists, filter, orderBy);
         }
         
-        public System.IO.MemoryStream GetListOf(Kistl.API.SerializableType type, int ID, string property) {
+        public byte[] GetListOf(Kistl.API.SerializableType type, int ID, string property) {
             return base.Channel.GetListOf(type, ID, property);
         }
         
-        public System.IO.MemoryStream FetchRelation(System.Guid relId, int role, int ID) {
+        public byte[] FetchRelation(System.Guid relId, int role, int ID) {
             return base.Channel.FetchRelation(relId, role, ID);
         }
         
@@ -153,7 +153,7 @@ namespace Kistl.API.Client.KistlService {
             return retVal.ID;
         }
         
-        public System.IO.MemoryStream InvokeServerMethod(out System.IO.MemoryStream retChangedObjects, Kistl.API.SerializableType type, int ID, string method, Kistl.API.SerializableType[] parameterTypes, System.IO.MemoryStream parameter, System.IO.MemoryStream changedObjects, Kistl.API.ObjectNotificationRequest[] notificationRequests) {
+        public byte[] InvokeServerMethod(out byte[] retChangedObjects, Kistl.API.SerializableType type, int ID, string method, Kistl.API.SerializableType[] parameterTypes, byte[] parameter, byte[] changedObjects, Kistl.API.ObjectNotificationRequest[] notificationRequests) {
             return base.Channel.InvokeServerMethod(out retChangedObjects, type, ID, method, parameterTypes, parameter, changedObjects, notificationRequests);
         }
     }

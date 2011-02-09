@@ -87,12 +87,12 @@ namespace Kistl.API.Client
                     IEnumerable<IDataObject> result = null;
                     _toolkit.WithWaitDialog(() =>
                     {
-                        using (MemoryStream s = Service.GetList(
+                        using (MemoryStream s = new MemoryStream(Service.GetList(
                             ifType.ToSerializableType(),
                             maxListCount,
                             eagerLoadLists,
                             filter != null ? filter.Select(f => SerializableExpression.FromExpression(f, _iftFactory)).ToArray() : null,
-                            orderBy != null ? orderBy.Select(o => new OrderByContract() { Type = o.Type, Expression = SerializableExpression.FromExpression(o.Expression, _iftFactory) } ).ToArray() : null))
+                            orderBy != null ? orderBy.Select(o => new OrderByContract() { Type = o.Type, Expression = SerializableExpression.FromExpression(o.Expression, _iftFactory) }).ToArray() : null)))
                         {
                             using (var sr = new BinaryReader(s))
                             {
@@ -122,7 +122,7 @@ namespace Kistl.API.Client
 
                     _toolkit.WithWaitDialog(() =>
                     {
-                        using (MemoryStream s = Service.GetListOf(ifType.ToSerializableType(), ID, property))
+                        using (MemoryStream s = new MemoryStream(Service.GetListOf(ifType.ToSerializableType(), ID, property)))
                         {
                             using (var sr = new BinaryReader(s))
                             {
@@ -159,7 +159,7 @@ namespace Kistl.API.Client
                             {
                                 SendObjects(objects, sw);
 
-                                using (MemoryStream s = Service.SetObjects(ms, notficationRequests.ToArray()))
+                                using (MemoryStream s = new MemoryStream(Service.SetObjects(ms.ToArray(), notficationRequests.ToArray())))
                                 {
                                     using (var sr = new BinaryReader(s))
                                     {
@@ -238,12 +238,10 @@ namespace Kistl.API.Client
                     List<IStreamable> tmpAuxObjects = null;
                     _toolkit.WithWaitDialog(() =>
                     {
-                        using (MemoryStream s = Service.FetchRelation(relationId, (int)role, parent.ID))
+                        using (MemoryStream s = new MemoryStream(Service.FetchRelation(relationId, (int)role, parent.ID)))
+                        using (var sr = new BinaryReader(s))
                         {
-                            using (var sr = new BinaryReader(s))
-                            {
-                                result = ReceiveObjects(ctx, sr, out tmpAuxObjects).Cast<T>();
-                            }
+                            result = ReceiveObjects(ctx, sr, out tmpAuxObjects).Cast<T>();
                         }
                     });
 
@@ -357,18 +355,18 @@ namespace Kistl.API.Client
                         BinaryWriter sw = new BinaryWriter(changedObjectsStream);
                         SendObjects(objects, sw);
 
-                        MemoryStream retChangedObjects;
-                        var resultStream = Service.InvokeServerMethod(
-                            out retChangedObjects,
+                        byte[] retChangedObjectsArray;
+                        var resultStream = new MemoryStream(Service.InvokeServerMethod(
+                            out retChangedObjectsArray,
                             ifType.ToSerializableType(),
                             ID,
                             method,
                             parameterTypes.Select(t => ifType.ToSerializableType()).ToArray(),
-                            parameterStream,
-                            changedObjectsStream,
-                            notificationRequests.ToArray());
-
+                            parameterStream.ToArray(),
+                            changedObjectsStream.ToArray(),
+                            notificationRequests.ToArray()));
                         {
+                            MemoryStream retChangedObjects = new MemoryStream(retChangedObjectsArray);
                             BinaryReader br = new BinaryReader(retChangedObjects);
                             tmpChangedObjects = ReceiveObjectList(ctx, br).Cast<IPersistenceObject>();
                         }
