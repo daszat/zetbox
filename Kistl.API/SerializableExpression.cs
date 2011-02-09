@@ -1,13 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Linq.Expressions;
-using System.Reflection;
-using System.Runtime.Serialization;
 
 namespace Kistl.API
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Linq.Expressions;
+    using System.Reflection;
+    using System.Runtime.Serialization;
+    using System.Text;
+
     [DataContract(Namespace = "http://dasz.at/ZBox/")]
     [Serializable]
     public class SerializableMemberInfo
@@ -25,9 +26,9 @@ namespace Kistl.API
             this.Name = mi.Name;
         }
 
-        [DataMember]
+        [DataMember(Name = "Type")]
         public SerializableType Type { get; set; }
-        [DataMember]
+        [DataMember(Name = "Name")]
         public string Name { get; set; }
 
         public MemberInfo GetMemberInfo()
@@ -67,12 +68,11 @@ namespace Kistl.API
     /// Abstract Base Class for a serializable Expression
     /// </summary>
     [Serializable]
-    [DataContract(Namespace = "http://dasz.at/ZBox/")]
+    [DataContract(Namespace = "http://dasz.at/ZBox/", Name = "Expression")]
     [KnownType(typeof(SerializableBinaryExpression))]
     [KnownType(typeof(SerializableConditionalExpression))]
     [KnownType(typeof(SerializableConstantExpression))]
-    // abstract, no need to specify
-    //[KnownType(typeof(SerializableCompoundExpression))]
+    [KnownType(typeof(SerializableCompoundExpression))]
     [KnownType(typeof(SerializableLambdaExpression))]
     [KnownType(typeof(SerializableMemberExpression))]
     [KnownType(typeof(SerializableMethodCallExpression))]
@@ -236,6 +236,7 @@ namespace Kistl.API
     /// Serializable Compound Expression
     /// </summary>
     [Serializable]
+    [DataContract(Namespace = "http://dasz.at/ZBox/", Name = "CompoundExpression")]
     public abstract class SerializableCompoundExpression : SerializableExpression
     {
         internal SerializableCompoundExpression(Expression e, SerializableExpression.SerializationContext ctx, InterfaceType.Factory iftFactory)
@@ -248,7 +249,7 @@ namespace Kistl.API
         /// <summary>
         /// Child Expressions
         /// </summary>
-        [DataMember(Name="Children")]
+        [DataMember(Name = "Children")]
         public SerializableExpression[] Children { get; set; }
     }
     #endregion
@@ -258,6 +259,7 @@ namespace Kistl.API
     /// Serializable Binary Expression
     /// </summary>
     [Serializable]
+    [DataContract(Namespace = "http://dasz.at/ZBox/", Name = "BinaryExpression")]
     public class SerializableBinaryExpression : SerializableCompoundExpression
     {
         internal SerializableBinaryExpression(BinaryExpression e, SerializableExpression.SerializationContext ctx, InterfaceType.Factory iftFactory)
@@ -278,6 +280,7 @@ namespace Kistl.API
     /// Serializable Unary Expression
     /// </summary>
     [Serializable]
+    [DataContract(Namespace = "http://dasz.at/ZBox/", Name = "UnaryExpression")]
     public class SerializableUnaryExpression : SerializableCompoundExpression
     {
         internal SerializableUnaryExpression(UnaryExpression e, SerializableExpression.SerializationContext ctx, InterfaceType.Factory iftFactory)
@@ -298,6 +301,7 @@ namespace Kistl.API
     /// Serializable Constant Expression
     /// </summary>
     [Serializable]
+    [DataContract(Namespace = "http://dasz.at/ZBox/", Name = "ConstantExpression")]
     public class SerializableConstantExpression : SerializableExpression
     {
         internal SerializableConstantExpression(ConstantExpression e, SerializationContext ctx, InterfaceType.Factory iftFactory)
@@ -344,6 +348,7 @@ namespace Kistl.API
     /// Serializable Member Expression
     /// </summary>
     [Serializable]
+    [DataContract(Namespace = "http://dasz.at/ZBox/", Name = "MemberExpression")]
     public class SerializableMemberExpression : SerializableCompoundExpression
     {
         internal SerializableMemberExpression(MemberExpression e, SerializationContext ctx, InterfaceType.Factory iftFactory)
@@ -373,6 +378,7 @@ namespace Kistl.API
     /// Serializable MethodCall Expression
     /// </summary>
     [Serializable]
+    [DataContract(Namespace = "http://dasz.at/ZBox/", Name = "MethodCallExpression")]
     public class SerializableMethodCallExpression : SerializableCompoundExpression
     {
         internal SerializableMethodCallExpression(MethodCallExpression e, SerializationContext ctx, InterfaceType.Factory iftFactory)
@@ -508,6 +514,7 @@ namespace Kistl.API
     /// Serializable Lambda Expression
     /// </summary>
     [Serializable]
+    [DataContract(Namespace = "http://dasz.at/ZBox/", Name = "LambdaExpression")]
     public class SerializableLambdaExpression : SerializableCompoundExpression
     {
         internal SerializableLambdaExpression(LambdaExpression e, SerializationContext ctx, InterfaceType.Factory iftFactory)
@@ -533,6 +540,7 @@ namespace Kistl.API
     /// Serializable Parameter Expression
     /// </summary>
     [Serializable]
+    [DataContract(Namespace = "http://dasz.at/ZBox/", Name = "ParameterExpression")]
     public class SerializableParameterExpression : SerializableExpression
     {
         internal SerializableParameterExpression(ParameterExpression e, SerializationContext ctx, InterfaceType.Factory iftFactory)
@@ -578,6 +586,7 @@ namespace Kistl.API
     /// Serializable New Expression
     /// </summary>
     [Serializable]
+    [DataContract(Namespace = "http://dasz.at/ZBox/", Name = "NewExpression")]
     public class SerializableNewExpression : SerializableCompoundExpression
     {
         [DataMember]
@@ -614,10 +623,12 @@ namespace Kistl.API
     }
     #endregion
 
+    #region ConditionalExpression
     /// <summary>
     /// Serializable ConditionalExpression
     /// </summary>
     [Serializable]
+    [DataContract(Namespace = "http://dasz.at/ZBox/", Name = "ConditionalExpression")]
     public class SerializableConditionalExpression : SerializableExpression
     {
         [DataMember]
@@ -642,5 +653,6 @@ namespace Kistl.API
                 IfFalse.ToExpressionInternal(ctx));
         }
     }
+    #endregion
 
 }
