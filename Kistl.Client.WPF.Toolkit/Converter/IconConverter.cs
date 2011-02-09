@@ -11,6 +11,7 @@ namespace Kistl.Client.WPF.Converter
     using Kistl.API.Client;
     using Kistl.App.Extensions;
     using System.Windows.Media.Imaging;
+    using Kistl.API.Utils;
 
     [ValueConversion(typeof(object), typeof(BitmapImage))]
     public class IconConverter : IValueConverter
@@ -62,9 +63,14 @@ namespace Kistl.Client.WPF.Converter
                     if (!_cache.TryGetValue(icon.ExportGuid, out bmp))
                     {
                         var realIcon = Context.FindPersistenceObject<Kistl.App.GUI.Icon>(icon.ExportGuid);
+                        if (realIcon.Blob == null)
+                        {
+                            Logging.Log.WarnFormat("Icon#{0} has no associated blob", realIcon.ID);
+                            return Binding.DoNothing;
+                        }
                         bmp = new BitmapImage();
                         bmp.BeginInit();
-                        bmp.StreamSource = realIcon.Blob != null ? realIcon.Blob.GetStream() : null;
+                        bmp.StreamSource = realIcon.Blob.GetStream();
                         bmp.EndInit();
                         _cache[icon.ExportGuid] = bmp;
                     }
