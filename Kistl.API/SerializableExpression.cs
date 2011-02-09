@@ -71,6 +71,8 @@ namespace Kistl.API
     [KnownType(typeof(SerializableBinaryExpression))]
     [KnownType(typeof(SerializableConditionalExpression))]
     [KnownType(typeof(SerializableConstantExpression))]
+    // abstract, no need to specify
+    //[KnownType(typeof(SerializableCompoundExpression))]
     [KnownType(typeof(SerializableLambdaExpression))]
     [KnownType(typeof(SerializableMemberExpression))]
     [KnownType(typeof(SerializableMethodCallExpression))]
@@ -246,7 +248,7 @@ namespace Kistl.API
         /// <summary>
         /// Child Expressions
         /// </summary>
-        [DataMember]
+        [DataMember(Name="Children")]
         public SerializableExpression[] Children { get; set; }
     }
     #endregion
