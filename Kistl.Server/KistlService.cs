@@ -31,10 +31,6 @@ namespace Kistl.Server
             _iftFactory = iftFactory;
         }
 
-        private static void DebugLogIdentity()
-        {
-            Logging.Facade.DebugFormat("Called IsAuthenticated = {0}, Identity = {1}", System.Threading.Thread.CurrentPrincipal.Identity.IsAuthenticated, System.Threading.Thread.CurrentPrincipal.Identity.Name);
-        }
 
         /// <summary>
         /// Puts a number of changed objects into the database. The resultant objects are sent back to the client.
@@ -50,21 +46,17 @@ namespace Kistl.Server
                 MemoryStream msg = new MemoryStream(msgArray);
 
                 msg.Seek(0, SeekOrigin.Begin);
-                using (Logging.Facade.DebugTraceMethodCall())
+
+                using (IKistlContext ctx = _ctxFactory())
                 {
-                    DebugLogIdentity();
+                    var objects = ReadObjects(msg, ctx);
 
-                    using (IKistlContext ctx = _ctxFactory())
-                    {
-                        var objects = ReadObjects(msg, ctx);
-
-                        // Set Operation
-                        var changedObjects = _sohFactory
-                            .GetServerObjectSetHandler()
-                            .SetObjects(ctx, objects, notificationRequests ?? new ObjectNotificationRequest[0])
-                            .Cast<IStreamable>();
-                        return SendObjects(changedObjects, true).ToArray();
-                    }
+                    // Set Operation
+                    var changedObjects = _sohFactory
+                        .GetServerObjectSetHandler()
+                        .SetObjects(ctx, objects, notificationRequests ?? new ObjectNotificationRequest[0])
+                        .Cast<IStreamable>();
+                    return SendObjects(changedObjects, true).ToArray();
                 }
             }
             catch (Exception ex)
@@ -90,21 +82,16 @@ namespace Kistl.Server
             {
                 if (type == null) { throw new ArgumentNullException("type"); }
 
-                using (Logging.Facade.DebugTraceMethodCall(type.ToString()))
+                using (IKistlContext ctx = _ctxFactory())
                 {
-                    DebugLogIdentity();
+                    var filterExpresstions = filter != null ? filter.Select(f => SerializableExpression.ToExpression(f)).ToList() : null;
+                    IEnumerable<IStreamable> lst = _sohFactory
+                        .GetServerObjectHandler(_iftFactory(type.GetSystemType()))
+                        .GetList(ctx, maxListCount,
+                            filterExpresstions,
+                            orderBy != null ? orderBy.Select(o => new OrderBy(o.Type, SerializableExpression.ToExpression(o.Expression))).ToList() : null);
 
-                    using (IKistlContext ctx = _ctxFactory())
-                    {
-                        var filterExpresstions = filter != null ? filter.Select(f => SerializableExpression.ToExpression(f)).ToList() : null;
-                        IEnumerable<IStreamable> lst = _sohFactory
-                            .GetServerObjectHandler(_iftFactory(type.GetSystemType()))
-                            .GetList(ctx, maxListCount,
-                                filterExpresstions,
-                                orderBy != null ? orderBy.Select(o => new OrderBy(o.Type, SerializableExpression.ToExpression(o.Expression))).ToList() : null);
-
-                        return SendObjects(lst, eagerLoadLists).ToArray();
-                    }
+                    return SendObjects(lst, eagerLoadLists).ToArray();
                 }
             }
             catch (Exception ex)
@@ -214,17 +201,12 @@ namespace Kistl.Server
             {
                 if (type == null) { throw new ArgumentNullException("type"); }
 
-                using (Logging.Facade.DebugTraceMethodCall(type.ToString()))
+                using (IKistlContext ctx = _ctxFactory())
                 {
-                    DebugLogIdentity();
-
-                    using (IKistlContext ctx = _ctxFactory())
-                    {
-                        IEnumerable<IStreamable> lst = _sohFactory
-                            .GetServerObjectHandler(_iftFactory(type.GetSystemType()))
-                            .GetListOf(ctx, ID, property);
-                        return SendObjects(lst, true).ToArray();
-                    }
+                    IEnumerable<IStreamable> lst = _sohFactory
+                        .GetServerObjectHandler(_iftFactory(type.GetSystemType()))
+                        .GetListOf(ctx, ID, property);
+                    return SendObjects(lst, true).ToArray();
                 }
             }
             catch (Exception ex)
@@ -248,25 +230,20 @@ namespace Kistl.Server
         {
             try
             {
-                using (Logging.Facade.DebugTraceMethodCallFormat("FetchRelation", "relId = [{0}], role = [{1}], parentObjID = [{2}]", relId, serializableRole, parentObjID))
+                using (IKistlContext ctx = _ctxFactory())
                 {
-                    DebugLogIdentity();
+                    var endRole = (RelationEndRole)serializableRole;
+                    Relation rel = ctx.FindPersistenceObject<Relation>(relId);
 
-                    using (IKistlContext ctx = _ctxFactory())
-                    {
-                        var endRole = (RelationEndRole)serializableRole;
-                        Relation rel = ctx.FindPersistenceObject<Relation>(relId);
+                    var lst = _sohFactory
+                        .GetServerCollectionHandler(
+                            ctx,
+                            _iftFactory(rel.A.Type.GetDataType()),
+                            _iftFactory(rel.B.Type.GetDataType()),
+                            endRole)
+                        .GetCollectionEntries(ctx, relId, endRole, parentObjID);
 
-                        var lst = _sohFactory
-                            .GetServerCollectionHandler(
-                                ctx,
-                                _iftFactory(rel.A.Type.GetDataType()),
-                                _iftFactory(rel.B.Type.GetDataType()),
-                                endRole)
-                            .GetCollectionEntries(ctx, relId, endRole, parentObjID);
-
-                        return SendObjects(lst.Cast<IStreamable>(), true).ToArray();
-                    }
+                    return SendObjects(lst.Cast<IStreamable>(), true).ToArray();
                 }
             }
             catch (Exception ex)
@@ -286,16 +263,11 @@ namespace Kistl.Server
         {
             try
             {
-                using (Logging.Facade.DebugTraceMethodCall(ID.ToString()))
+                using (IKistlContext ctx = _ctxFactory())
                 {
-                    DebugLogIdentity();
-
-                    using (IKistlContext ctx = _ctxFactory())
-                    {
-                        return _sohFactory
-                            .GetServerDocumentHandler()
-                            .GetBlobStream(ctx, ID);
-                    }
+                    return _sohFactory
+                        .GetServerDocumentHandler()
+                        .GetBlobStream(ctx, ID);
                 }
             }
             catch (Exception ex)
@@ -317,20 +289,15 @@ namespace Kistl.Server
                 throw new ArgumentNullException("blob");
             try
             {
-                using (Logging.Facade.DebugTraceMethodCall())
+                using (IKistlContext ctx = _ctxFactory())
                 {
-                    DebugLogIdentity();
-
-                    using (IKistlContext ctx = _ctxFactory())
-                    {
-                        var result = _sohFactory
-                            .GetServerDocumentHandler()
-                            .SetBlobStream(ctx, blob.Stream, blob.FileName, blob.MimeType);
-                        BlobResponse resp = new BlobResponse();
-                        resp.ID = result.ID;
-                        resp.BlobInstance = SendObjects(new IDataObject[] { result }, true);
-                        return resp;
-                    }
+                    var result = _sohFactory
+                        .GetServerDocumentHandler()
+                        .SetBlobStream(ctx, blob.Stream, blob.FileName, blob.MimeType);
+                    BlobResponse resp = new BlobResponse();
+                    resp.ID = result.ID;
+                    resp.BlobInstance = SendObjects(new IDataObject[] { result }, true);
+                    return resp;
                 }
             }
             catch (Exception ex)
@@ -363,45 +330,40 @@ namespace Kistl.Server
             retChangedObjects = null;
             try
             {
-                using (Logging.Facade.DebugTraceMethodCall())
+                using (IKistlContext ctx = _ctxFactory())
                 {
-                    DebugLogIdentity();
+                    BinaryFormatter bf = new BinaryFormatter();
 
-                    using (IKistlContext ctx = _ctxFactory())
+                    IEnumerable<IPersistenceObject> changedObjectsList;
+                    IEnumerable<object> parameterList = (IEnumerable<object>)bf.Deserialize(parameter);
+
+                    var result = _sohFactory
+                        .GetServerObjectHandler(_iftFactory(type.GetSystemType()))
+                        .InvokeServerMethod(ctx, ID, method,
+                            parameterTypes.Select(t => t.GetSystemType()),
+                            parameterList,
+                            ReadObjects(changedObjects, ctx),
+                            notificationRequests ?? new ObjectNotificationRequest[0],
+                            out changedObjectsList);
+
+                    retChangedObjects = SendObjects(changedObjectsList.Cast<IStreamable>(), true).ToArray();
+
+
+                    if (result != null && result.GetType().IsIStreamable())
                     {
-                        BinaryFormatter bf = new BinaryFormatter();
-
-                        IEnumerable<IPersistenceObject> changedObjectsList;
-                        IEnumerable<object> parameterList = (IEnumerable<object>)bf.Deserialize(parameter);
-
-                        var result = _sohFactory
-                            .GetServerObjectHandler(_iftFactory(type.GetSystemType()))
-                            .InvokeServerMethod(ctx, ID, method,
-                                parameterTypes.Select(t => t.GetSystemType()),
-                                parameterList,
-                                ReadObjects(changedObjects, ctx),
-                                notificationRequests ?? new ObjectNotificationRequest[0],
-                                out changedObjectsList);
-
-                        retChangedObjects = SendObjects(changedObjectsList.Cast<IStreamable>(), true).ToArray();
-
-
-                        if (result != null && result.GetType().IsIStreamable())
-                        {
-                            IStreamable resultObj = (IStreamable)result;
-                            return SendObjects(new IStreamable[] { resultObj }, false).ToArray();
-                        }
-                        else if (result != null && result.GetType().IsIEnumerable() && result.GetType().FindElementTypes().First().IsIStreamable())
-                        {
-                            var lst = ((IEnumerable)result).AsQueryable().Cast<IStreamable>().Take(Kistl.API.Helper.MAXLISTCOUNT);
-                            return SendObjects(lst, false).ToArray();
-                        }
-                        else
-                        {
-                            MemoryStream resultStream = new MemoryStream();
-                            bf.Serialize(resultStream, result);
-                            return resultStream.ToArray();
-                        }
+                        IStreamable resultObj = (IStreamable)result;
+                        return SendObjects(new IStreamable[] { resultObj }, false).ToArray();
+                    }
+                    else if (result != null && result.GetType().IsIEnumerable() && result.GetType().FindElementTypes().First().IsIStreamable())
+                    {
+                        var lst = ((IEnumerable)result).AsQueryable().Cast<IStreamable>().Take(Kistl.API.Helper.MAXLISTCOUNT);
+                        return SendObjects(lst, false).ToArray();
+                    }
+                    else
+                    {
+                        MemoryStream resultStream = new MemoryStream();
+                        bf.Serialize(resultStream, result);
+                        return resultStream.ToArray();
                     }
                 }
             }

@@ -23,7 +23,7 @@ namespace Kistl
                 .InstancePerLifetimeScope();
 
             builder.RegisterType<TestProxy>()
-                .As<IProxy>()
+                .Named<IProxy>("implementor")
                 .InstancePerDependency();
         }
 

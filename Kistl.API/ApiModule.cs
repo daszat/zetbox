@@ -22,6 +22,11 @@ namespace Kistl.API
                 .Register<LoggingProblemReporter>(c => new LoggingProblemReporter())
                 .As<IProblemReporter>()
                 .SingleInstance();
+
+            moduleBuilder
+                .RegisterDecorator<IKistlService>(
+                    (c, inner) => new Utils.InfoLoggingKistlServiceDecorator(inner),
+                    "implementor");
         }
     }
 }

@@ -79,6 +79,7 @@
     <Compile Include="IKistlAppDomain.cs" />
     <Compile Include="IKistlContext.cs" />
     <Compile Include="IKistlService.cs" />
+    <Compile Include="Utils\InfoLoggingKistlServiceDecorator.cs" />
     <Compile Include="IPackageProvider.cs" />
     <Compile Include="IService.cs" />
     <Compile Include="KistlContextDebugger.cs" />
