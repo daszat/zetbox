@@ -36,13 +36,13 @@ namespace Kistl.API
 
                 GenericTypeParameter = type.GetGenericArguments()
                     .Select(t => new SerializableType(iftFactory(t), iftFactory))
-                    .ToList();
+                    .ToArray();
             }
             else
             {
                 TypeName = type.FullName;
                 AssemblyQualifiedName = type.AssemblyQualifiedName;
-                GenericTypeParameter = new List<SerializableType>();
+                GenericTypeParameter = new SerializableType[] { };
             }
 
             // This is null if the Type is e.g. a Generic Parameter - not supported
@@ -66,7 +66,7 @@ namespace Kistl.API
         /// List of Generiy Type Parameter
         /// </summary>
         [DataMember]
-        public List<SerializableType> GenericTypeParameter { get; set; }
+        public SerializableType[] GenericTypeParameter { get; set; }
 
         /// <summary>
         /// Returns the serialized System.Type
@@ -79,7 +79,7 @@ namespace Kistl.API
                 throw new InvalidOperationException("FullName doesn't match AssemblyQualifiedName");
             }
             Type result = null;
-            if (GenericTypeParameter.Count > 0)
+            if (GenericTypeParameter.Length > 0)
             {
                 Type type = Type.GetType(AssemblyQualifiedName);
                 if (type != null) result = type.MakeGenericType(GenericTypeParameter.Select(t => t.GetSystemType()).ToArray());
@@ -93,7 +93,7 @@ namespace Kistl.API
             {
                 throw new InvalidOperationException(string.Format("Unable to create Type {0}{1}",
                     TypeName,
-                    GenericTypeParameter.Count > 0 ? "<" + string.Join(", ", GenericTypeParameter.Select(t => t.TypeName).ToArray()) + ">" : String.Empty));
+                    GenericTypeParameter.Length > 0 ? "<" + string.Join(", ", GenericTypeParameter.Select(t => t.TypeName).ToArray()) + ">" : String.Empty));
             }
 
             return result;

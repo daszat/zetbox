@@ -41,11 +41,11 @@ namespace Kistl.API
     public class SerializableConstructorInfo : SerializableMemberInfo
     {
         [DataMember]
-        public List<SerializableType> ParameterTypes { get; set; }
+        public SerializableType[] ParameterTypes { get; set; }
 
         public SerializableConstructorInfo()
         {
-            this.ParameterTypes = new List<SerializableType>();
+            this.ParameterTypes = new SerializableType[] { };
         }
 
         public SerializableConstructorInfo(ConstructorInfo ci, InterfaceType.Factory iftFactory)
@@ -54,7 +54,7 @@ namespace Kistl.API
             if (ci == null) throw new ArgumentNullException("ci");
             if (iftFactory == null) throw new ArgumentNullException("iftFactory");
 
-            this.ParameterTypes = new List<SerializableType>(ci.GetParameters().Select(i => new SerializableType(iftFactory(i.ParameterType), iftFactory)).ToArray());
+            this.ParameterTypes = ci.GetParameters().Select(i => new SerializableType(iftFactory(i.ParameterType), iftFactory)).ToArray();
         }
 
         public ConstructorInfo GetConstructorInfo()
@@ -239,7 +239,7 @@ namespace Kistl.API
         internal SerializableCompoundExpression(Expression e, SerializableExpression.SerializationContext ctx, InterfaceType.Factory iftFactory)
             : base(e, ctx, iftFactory)
         {
-            this.Children = new List<SerializableExpression>();
+            this.Children = new SerializableExpression[] { };
         }
 
 
@@ -247,7 +247,7 @@ namespace Kistl.API
         /// Child Expressions
         /// </summary>
         [DataMember]
-        public List<SerializableExpression> Children { get; set; }
+        public SerializableExpression[] Children { get; set; }
     }
     #endregion
 
@@ -261,8 +261,7 @@ namespace Kistl.API
         internal SerializableBinaryExpression(BinaryExpression e, SerializableExpression.SerializationContext ctx, InterfaceType.Factory iftFactory)
             : base(e, ctx, iftFactory)
         {
-            Children.Add(SerializableExpression.FromExpression(e.Left, ctx, iftFactory));
-            Children.Add(SerializableExpression.FromExpression(e.Right, ctx, iftFactory));
+            Children = new[] { SerializableExpression.FromExpression(e.Left, ctx, iftFactory), SerializableExpression.FromExpression(e.Right, ctx, iftFactory) };
         }
 
         internal override Expression ToExpressionInternal(SerializationContext ctx)
@@ -282,7 +281,7 @@ namespace Kistl.API
         internal SerializableUnaryExpression(UnaryExpression e, SerializableExpression.SerializationContext ctx, InterfaceType.Factory iftFactory)
             : base(e, ctx, iftFactory)
         {
-            Children.Add(SerializableExpression.FromExpression(e.Operand, ctx, iftFactory));
+            Children = new[] { SerializableExpression.FromExpression(e.Operand, ctx, iftFactory) };
         }
 
         internal override Expression ToExpressionInternal(SerializationContext ctx)
@@ -349,7 +348,7 @@ namespace Kistl.API
             : base(e, ctx, iftFactory)
         {
             MemberName = e.Member.Name;
-            Children.Add(SerializableExpression.FromExpression(e.Expression, ctx, iftFactory));
+            Children = new[] { SerializableExpression.FromExpression(e.Expression, ctx, iftFactory) };
         }
 
         internal override Expression ToExpressionInternal(SerializationContext ctx)
@@ -381,12 +380,12 @@ namespace Kistl.API
 
             MethodName = e.Method.Name;
             SerializableMethodType = iftFactory(e.Method.DeclaringType).ToSerializableType();
-            ParameterTypes = e.Method.GetParameters().Select(p => iftFactory(p.ParameterType).ToSerializableType()).ToList();
-            GenericArguments = e.Method.GetGenericArguments().Select(p => iftFactory(p).ToSerializableType()).ToList();
+            ParameterTypes = e.Method.GetParameters().Select(p => iftFactory(p.ParameterType).ToSerializableType()).ToArray();
+            GenericArguments = e.Method.GetGenericArguments().Select(p => iftFactory(p).ToSerializableType()).ToArray();
 
             if (e.Arguments != null)
             {
-                Children = e.Arguments.Select(a => SerializableExpression.FromExpression(a, ctx, iftFactory)).ToList();
+                Children = e.Arguments.Select(a => SerializableExpression.FromExpression(a, ctx, iftFactory)).ToArray();
             }
         }
 
@@ -400,13 +399,13 @@ namespace Kistl.API
         /// Parameter Types
         /// </summary>
         [DataMember]
-        public List<SerializableType> ParameterTypes { get; set; }
+        public SerializableType[] ParameterTypes { get; set; }
 
         /// <summary>
         /// Generic Arguments
         /// </summary>
         [DataMember]
-        public List<SerializableType> GenericArguments { get; set; }
+        public SerializableType[] GenericArguments { get; set; }
 
         [DataMember]
         public SerializableType SerializableMethodType { get; set; }
@@ -467,7 +466,7 @@ namespace Kistl.API
         private MethodInfo GetMethodInfo()
         {
             MethodInfo mi;
-            if (GenericArguments != null && GenericArguments.Count > 0)
+            if (GenericArguments != null && GenericArguments.Length > 0)
             {
                 mi = FindGenericMethod(MethodType, MethodName,
                         GenericArguments.Select(p => p.GetSystemType()).ToArray(),
@@ -512,8 +511,8 @@ namespace Kistl.API
         internal SerializableLambdaExpression(LambdaExpression e, SerializationContext ctx, InterfaceType.Factory iftFactory)
             : base(e, ctx, iftFactory)
         {
-            Children.Add(SerializableExpression.FromExpression(e.Body, ctx, iftFactory));
-            Children.AddRange(e.Parameters.Select(p => SerializableExpression.FromExpression(p, ctx, iftFactory)));
+            Children = new[] { SerializableExpression.FromExpression(e.Body, ctx, iftFactory) }
+                .Union(e.Parameters.Select(p => SerializableExpression.FromExpression(p, ctx, iftFactory))).ToArray();
         }
 
         internal override Expression ToExpressionInternal(SerializationContext ctx)
@@ -583,7 +582,7 @@ namespace Kistl.API
         public SerializableConstructorInfo Constructor { get; set; }
 
         [DataMember]
-        public List<SerializableMemberInfo> Members;
+        public SerializableMemberInfo[] Members;
 
         internal SerializableNewExpression(NewExpression source, SerializationContext ctx, InterfaceType.Factory iftFactory)
             : base(source, ctx, iftFactory)
@@ -591,10 +590,10 @@ namespace Kistl.API
             Constructor = new SerializableConstructorInfo(source.Constructor, iftFactory);
             if (source.Members != null)
             {
-                Members = source.Members.Select(i => new SerializableMemberInfo(i, iftFactory)).ToList();
+                Members = source.Members.Select(i => new SerializableMemberInfo(i, iftFactory)).ToArray();
             }
 
-            Children = source.Arguments.Select(a => SerializableExpression.FromExpression(a, ctx, iftFactory)).ToList();
+            Children = source.Arguments.Select(a => SerializableExpression.FromExpression(a, ctx, iftFactory)).ToArray();
         }
 
         internal override Expression ToExpressionInternal(SerializationContext ctx)
