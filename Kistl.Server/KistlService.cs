@@ -87,7 +87,7 @@ namespace Kistl.Server
         /// <returns>the found objects</returns>
         public byte[] GetList(SerializableType type, int maxListCount, bool eagerLoadLists, SerializableExpression[] filter, OrderByContract[] orderBy)
         {
-            using (Logging.Facade.DebugTraceMethodCall(type.ToString()))
+            using (Logging.Facade.DebugTraceMethodCallFormat("GetList", "{0}", type))
             {
                 DebugLogIdentity();
                 try
@@ -210,13 +210,13 @@ namespace Kistl.Server
         [Obsolete]
         public byte[] GetListOf(SerializableType type, int ID, string property)
         {
-            try
+            using (Logging.Facade.DebugTraceMethodCallFormat("GetListOf", "{0}", type))
             {
-                if (type == null) { throw new ArgumentNullException("type"); }
-
-                using (Logging.Facade.DebugTraceMethodCall(type.ToString()))
+                DebugLogIdentity();
+                try
                 {
-                    DebugLogIdentity();
+                    if (type == null) { throw new ArgumentNullException("type"); }
+
 
                     using (IKistlContext ctx = _ctxFactory())
                     {
@@ -226,12 +226,12 @@ namespace Kistl.Server
                         return SendObjects(lst, true).ToArray();
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                Helper.ThrowFaultException(ex);
-                // Never called, Handle errors throws an Exception
-                return null;
+                catch (Exception ex)
+                {
+                    Helper.ThrowFaultException(ex);
+                    // Never called, Handle errors throws an Exception
+                    return null;
+                }
             }
         }
 
@@ -246,9 +246,9 @@ namespace Kistl.Server
         /// <returns>the requested collection entries</returns>
         public byte[] FetchRelation(Guid relId, int serializableRole, int parentObjID)
         {
-            try
+            using (Logging.Facade.DebugTraceMethodCallFormat("FetchRelation", "relId = [{0}], role = [{1}], parentObjID = [{2}]", relId, serializableRole, parentObjID))
             {
-                using (Logging.Facade.DebugTraceMethodCallFormat("FetchRelation", "relId = [{0}], role = [{1}], parentObjID = [{2}]", relId, serializableRole, parentObjID))
+                try
                 {
                     DebugLogIdentity();
 
@@ -268,12 +268,12 @@ namespace Kistl.Server
                         return SendObjects(lst.Cast<IStreamable>(), true).ToArray();
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                Helper.ThrowFaultException(ex);
-                // Never called, Handle errors throws an Exception
-                return null;
+                catch (Exception ex)
+                {
+                    Helper.ThrowFaultException(ex);
+                    // Never called, Handle errors throws an Exception
+                    return null;
+                }
             }
         }
 
@@ -284,10 +284,11 @@ namespace Kistl.Server
         /// <returns>Stream containing the Document content</returns>
         public Stream GetBlobStream(int ID)
         {
-            try
+            using (Logging.Facade.DebugTraceMethodCallFormat("GetBlobStream", "ID={0}", ID))
             {
-                using (Logging.Facade.DebugTraceMethodCall(ID.ToString()))
+                try
                 {
+
                     DebugLogIdentity();
 
                     using (IKistlContext ctx = _ctxFactory())
@@ -297,12 +298,12 @@ namespace Kistl.Server
                             .GetBlobStream(ctx, ID);
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                Helper.ThrowFaultException(ex);
-                // Never called, Handle errors throws an Exception
-                return null;
+                catch (Exception ex)
+                {
+                    Helper.ThrowFaultException(ex);
+                    // Never called, Handle errors throws an Exception
+                    return null;
+                }
             }
         }
 
@@ -313,12 +314,13 @@ namespace Kistl.Server
         /// <returns>the newly created Blob instance</returns>
         public BlobResponse SetBlobStream(BlobMessage blob)
         {
-            if (blob == null)
-                throw new ArgumentNullException("blob");
-            try
+            using (Logging.Facade.DebugTraceMethodCall("SetBlobStream"))
             {
-                using (Logging.Facade.DebugTraceMethodCall())
+                if (blob == null)
+                    throw new ArgumentNullException("blob");
+                try
                 {
+
                     DebugLogIdentity();
 
                     using (IKistlContext ctx = _ctxFactory())
@@ -332,39 +334,40 @@ namespace Kistl.Server
                         return resp;
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                Helper.ThrowFaultException(ex);
-                // Never called, Handle errors throws an Exception
-                return null;
+                catch (Exception ex)
+                {
+                    Helper.ThrowFaultException(ex);
+                    // Never called, Handle errors throws an Exception
+                    return null;
+                }
             }
         }
 
         public byte[] InvokeServerMethod(SerializableType type, int ID, string method, SerializableType[] parameterTypes, byte[] parameterArray, byte[] changedObjectsArray, ObjectNotificationRequest[] notificationRequests, out byte[] retChangedObjects)
         {
-            if (type == null)
-                throw new ArgumentNullException("type");
-            if (string.IsNullOrEmpty(method))
-                throw new ArgumentNullException("method");
-            if (parameterTypes == null)
-                throw new ArgumentNullException("parameterTypes");
-            if (parameterArray == null)
-                throw new ArgumentNullException("parameterArray");
-            if (changedObjectsArray == null)
-                throw new ArgumentNullException("changedObjectsArray");
-
-            var parameter = new MemoryStream(parameterArray);
-            var changedObjects = new MemoryStream(changedObjectsArray);
-
-            parameter.Seek(0, SeekOrigin.Begin);
-            changedObjects.Seek(0, SeekOrigin.Begin);
-
-            retChangedObjects = null;
-            try
+            using (Logging.Facade.DebugTraceMethodCall("InvokeServerMethod"))
             {
-                using (Logging.Facade.DebugTraceMethodCall())
+                if (type == null)
+                    throw new ArgumentNullException("type");
+                if (string.IsNullOrEmpty(method))
+                    throw new ArgumentNullException("method");
+                if (parameterTypes == null)
+                    throw new ArgumentNullException("parameterTypes");
+                if (parameterArray == null)
+                    throw new ArgumentNullException("parameterArray");
+                if (changedObjectsArray == null)
+                    throw new ArgumentNullException("changedObjectsArray");
+
+                var parameter = new MemoryStream(parameterArray);
+                var changedObjects = new MemoryStream(changedObjectsArray);
+
+                parameter.Seek(0, SeekOrigin.Begin);
+                changedObjects.Seek(0, SeekOrigin.Begin);
+
+                retChangedObjects = null;
+                try
                 {
+
                     DebugLogIdentity();
 
                     using (IKistlContext ctx = _ctxFactory())
@@ -404,12 +407,12 @@ namespace Kistl.Server
                         }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                Helper.ThrowFaultException(ex);
-                // Never called, Handle errors throws an Exception
-                return null;
+                catch (Exception ex)
+                {
+                    Helper.ThrowFaultException(ex);
+                    // Never called, Handle errors throws an Exception
+                    return null;
+                }
             }
         }
 
