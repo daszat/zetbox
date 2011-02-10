@@ -10,6 +10,7 @@ namespace Kistl.App.Packaging
     using Kistl.API;
     using Kistl.App.Base;
     using Kistl.App.GUI;
+    using Kistl.API.Utils;
 
     internal static class PackagingHelper
     {
@@ -38,7 +39,7 @@ namespace Kistl.App.Packaging
                 .ToList()
                 .SelectMany(rel => new RelationEnd[] { rel.A, rel.B })
                 .AsQueryable()
-            //AddMetaObjects(result, ctx.GetQuery<RelationEnd>().Where(i => (i.AParent != null && i.AParent.Module.ID == moduleID) || (i.BParent != null && i.BParent.Module.ID == moduleID))
+                //AddMetaObjects(result, ctx.GetQuery<RelationEnd>().Where(i => (i.AParent != null && i.AParent.Module.ID == moduleID) || (i.BParent != null && i.BParent.Module.ID == moduleID))
                 .OrderBy(i => i.Type.Name).ThenBy(i => i.RoleName).ThenBy(i => i.ExportGuid));
             AddMetaObjects(result, ctx.GetQuery<EnumerationEntry>().Where(i => i.Enumeration.Module.ID == moduleID)
                 .OrderBy(i => i.Enumeration.Name).ThenBy(i => i.Name).ThenBy(i => i.ExportGuid));
@@ -95,7 +96,7 @@ namespace Kistl.App.Packaging
                 .OrderBy(i => i.ControlRef.Assembly.Name).ThenBy(i => i.ControlRef.FullName).ThenBy(i => i.ExportGuid));
             AddMetaObjects(result, ctx.Internals().GetPersistenceObjectQuery<ViewDescriptor_supports_TypeRef_RelationEntry>().Where(i => i.A.Module.ID == moduleID)
                 .OrderBy(i => i.A.ControlRef.Assembly.Name).ThenBy(i => i.A.ControlRef.FullName).ThenBy(i => i.A.ExportGuid));
-            
+
             AddMetaObjects(result, ctx.GetQuery<NavigationScreen>()
                 .Where(i => i.Module.ID == moduleID)
                 .ToList()
@@ -153,9 +154,22 @@ namespace Kistl.App.Packaging
         private static void AddMetaObjects<T>(List<IPersistenceObject> result, IQueryable<T> objects)
             where T : IPersistenceObject
         {
+            IEnumerable qryResult;
+            try
+            {
+                // catch a possible exception
+                // during an upgrade it might be, that certian meta objects are not available yet
+                qryResult = objects.ToList();
+            }
+            catch (Exception ex)
+            {
+                Logging.Log.WarnFormat("Warning: Unable to query {0}, but will continue loading MetaObjects. Error was: \n{1}", objects.ElementType.FullName, ex);
+                return;
+            }
+
             // TODO: always do a final stabilisation sort by ExportGuid
             // currently doesn't work, since EF doesn't like the cast
-            foreach (IPersistenceObject obj in objects) //.ThenBy(o => ((IExportable)o).ExportGuid))
+            foreach (IPersistenceObject obj in qryResult) //.ThenBy(o => ((IExportable)o).ExportGuid))
             {
                 if (((IExportable)obj).ExportGuid == Guid.Empty)
                 {
