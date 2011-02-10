@@ -1042,6 +1042,13 @@ namespace Kistl.API
                 return Guid.Empty;
             }
         }
+
+        public static string GetInnerMessage(this Exception ex)
+        {
+            if (ex == null) throw new ArgumentNullException("ex");
+            while (ex.InnerException != null) ex = ex.InnerException;
+            return ex.Message;
+        }
     }
 
     public static class FileExtensions
