@@ -294,6 +294,11 @@ namespace Kistl.App.Base
         public static void OnImplementInterfaces_ObjectClass(ObjectClass objClass)
         {
             IKistlContext ctx = objClass.Context;
+            if (objClass.Module == null)
+            {
+                _mdlFactory.ShowMessage("ObjectClass has no Module yet", "Error");
+                return;
+            }
 
             foreach (var iface in objClass.ImplementsInterfaces)
             {
@@ -301,10 +306,10 @@ namespace Kistl.App.Base
                 #region Properties
                 foreach (var prop in iface.Properties)
                 {
-                    if (!objClass.Properties.Select(p => p.Name).Contains(prop.Name))
+                    Property newProp = objClass.Properties.SingleOrDefault(p => p.Name == prop.Name);
+                    if (newProp == null)
                     {
                         // Add Property
-                        Property newProp;
                         if (prop is ValueTypeProperty)
                         {
                             newProp = (Property)ctx.Create(ctx.GetInterfaceType(prop));
@@ -333,22 +338,6 @@ namespace Kistl.App.Base
                         newProp.Module = objClass.Module;
                         newProp.ValueModelDescriptor = prop.ValueModelDescriptor;
 
-                        // Copy Constrains
-                        foreach (var c in prop.Constraints)
-                        {
-                            var newC = (Constraint)ctx.Create(ctx.GetInterfaceType(c));
-                            newProp.Constraints.Add(newC);
-                            newC.Reason = c.Reason;
-                        }
-
-                        // Copy Default Value
-                        if (prop.DefaultValue != null)
-                        {
-                            var dv = prop.DefaultValue;
-                            var newDV = (DefaultPropertyValue)ctx.Create(ctx.GetInterfaceType(dv));
-                            newProp.DefaultValue = newDV;
-                        }
-
                         if (prop is ObjectReferencePlaceholderProperty)
                         {
                             var ph = (ObjectReferencePlaceholderProperty)prop;
@@ -370,6 +359,25 @@ namespace Kistl.App.Base
                             rel.B.Multiplicity = ph.IsList ? Multiplicity.ZeroOrMore : Multiplicity.ZeroOrOne;
                             rel.B.RoleName = string.IsNullOrEmpty(ph.ItemRoleName) ? ph.ReferencedObjectClass.Name : ph.ItemRoleName;
                         }
+                    }
+
+                    // Copy Constrains
+                    foreach (var c in prop.Constraints)
+                    {
+                        if (!newProp.Constraints.Select(i => i.GetObjectClass(ctx)).Contains(c.GetObjectClass(ctx)))
+                        {
+                            var newC = (Constraint)ctx.Create(ctx.GetInterfaceType(c));
+                            newProp.Constraints.Add(newC);
+                            newC.Reason = c.Reason;
+                        }
+                    }
+
+                    // Copy Default Value
+                    if (newProp.DefaultValue == null && prop.DefaultValue != null)
+                    {
+                        var dv = prop.DefaultValue;
+                        var newDV = (DefaultPropertyValue)ctx.Create(ctx.GetInterfaceType(dv));
+                        newProp.DefaultValue = newDV;
                     }
                 }
                 #endregion
