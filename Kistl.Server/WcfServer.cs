@@ -51,8 +51,13 @@ namespace Kistl.Server
             _mainHost.Closed += host_Closed;
             _mainHost.Opened += host_Opened;
 
+            // vvvvv this is right vvvvvvv
             //_bootstrapperHost = webFactory.CreateServiceHost(typeof(BootstrapperService).AssemblyQualifiedName, new Uri[] { });
+
+            // vvvvv this works with mono vvvvvvv
             _bootstrapperHost = new WebServiceHost(new BootstrapperService(config));
+            var adr = _bootstrapperHost.BaseAddresses[0].AbsoluteUri;
+            ((WebServiceHost)_bootstrapperHost).AddServiceEndpoint(typeof(IBootstrapperService), new WebHttpBinding(), adr);
         }
 
         void host_Opened(object sender, EventArgs e)
