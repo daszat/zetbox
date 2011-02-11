@@ -12,6 +12,7 @@ namespace Kistl.Server
     using Kistl.API;
     using Kistl.API.Configuration;
     using Kistl.API.Utils;
+    using System.ServiceModel.Web;
 
     public class WcfServer
         : MarshalByRefObject, IKistlAppDomain, IDisposable
@@ -38,10 +39,11 @@ namespace Kistl.Server
         /// </summary>
         private AutoResetEvent serverStarted = new AutoResetEvent(false);
 
-        public WcfServer(AutofacServiceHostFactory factory, AutofacWebServiceHostFactory webFactory)
+        public WcfServer(AutofacServiceHostFactory factory, AutofacWebServiceHostFactory webFactory, KistlConfig config)
         {
             if (factory == null) { throw new ArgumentNullException("factory"); }
             if (webFactory == null) { throw new ArgumentNullException("webFactory"); }
+            if (config == null) throw new ArgumentNullException("config");
 
             _mainHost = factory.CreateServiceHost(typeof(KistlService).AssemblyQualifiedName, new Uri[] { });
             _mainHost.UnknownMessageReceived += new EventHandler<UnknownMessageReceivedEventArgs>(host_UnknownMessageReceived);
@@ -49,7 +51,8 @@ namespace Kistl.Server
             _mainHost.Closed += host_Closed;
             _mainHost.Opened += host_Opened;
 
-            _bootstrapperHost = webFactory.CreateServiceHost(typeof(BootstrapperService).AssemblyQualifiedName, new Uri[] { });
+            //_bootstrapperHost = webFactory.CreateServiceHost(typeof(BootstrapperService).AssemblyQualifiedName, new Uri[] { });
+            _bootstrapperHost = new WebServiceHost(new BootstrapperService(config));
         }
 
         void host_Opened(object sender, EventArgs e)

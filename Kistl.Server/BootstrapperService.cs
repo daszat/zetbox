@@ -18,7 +18,7 @@ namespace Kistl.Server
         AppConfig = 3,
     }
 
-    [DataContract(Namespace="http://dasz.at/ZBox/Bootstrapper")]
+    [DataContract(Namespace = "http://dasz.at/ZBox/Bootstrapper")]
     public class FileInfo
     {
         [DataMember]
@@ -33,7 +33,7 @@ namespace Kistl.Server
         public FileType Type { get; set; }
     }
 
-    [ServiceContract(SessionMode = SessionMode.NotAllowed, Namespace="http://dasz.at/ZBox/Bootstrapper")]
+    [ServiceContract(SessionMode = SessionMode.NotAllowed, Namespace = "http://dasz.at/ZBox/Bootstrapper")]
     public interface IBootstrapperService
     {
         [OperationContract]
@@ -48,7 +48,7 @@ namespace Kistl.Server
     /// <summary>
     /// Bootstrapper service
     /// </summary>
-    [ServiceBehavior(AddressFilterMode = AddressFilterMode.Any, Namespace = "http://dasz.at/ZBox/Bootstrapper")]
+    [ServiceBehavior(AddressFilterMode = AddressFilterMode.Any, Namespace = "http://dasz.at/ZBox/Bootstrapper", InstanceContextMode = InstanceContextMode.Single)]
     public class BootstrapperService : IBootstrapperService
     {
         private KistlConfig config;
