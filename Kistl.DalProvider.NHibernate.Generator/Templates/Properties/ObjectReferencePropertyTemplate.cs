@@ -53,7 +53,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
             if (host == null) { throw new ArgumentNullException("host"); }
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
             if (rel == null) { throw new ArgumentNullException("rel"); }
-            
+
             // TODO: split off relation expansion in own Call() method
             RelationEnd relEnd = rel.GetEndFromRole(endRole);
             RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
@@ -104,15 +104,16 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
                 callGetterSetterEvents);
         }
 
-        protected virtual void AddSerialization(Templates.Serialization.SerializationMembersList list, string memberName, string fkBackingName)
+        protected virtual void AddSerialization(Templates.Serialization.SerializationMembersList list, string sourceMember, string targetMember, string targetGuidMember)
         {
             if (list != null)
             {
                 if (relDataTypeExportable)
                 {
-                    list.Add("Serialization.ObjectReferencePropertySerialization", Templates.Serialization.SerializerType.ImportExport, moduleNamespace, name, memberName);
+                    list.Add("Serialization.ObjectReferencePropertySerialization", Templates.Serialization.SerializerType.ImportExport, moduleNamespace, name, sourceMember, targetMember, targetGuidMember);
                 }
-                list.Add(Templates.Serialization.SerializerType.Service, moduleNamespace, name, fkBackingName);
+                list.Add("Serialization.ObjectReferencePropertySerialization",
+                    Templates.Serialization.SerializerType.Service, moduleNamespace, name, sourceMember, targetMember, targetGuidMember);
             }
         }
     }

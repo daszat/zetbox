@@ -12,6 +12,7 @@
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 <%@ Parameter Name="serializationList" Type="Kistl.Generator.Templates.Serialization.SerializationMembersList" %>
 <%@ Parameter Name="name" Type="string" %>
+<%@ Parameter Name="eagerLoading" Type="bool" %>
 <%@ Parameter Name="wrapperName" Type="string" %>
 <%@ Parameter Name="wrapperClass" Type="string" %>
 <%@ Parameter Name="exposedListType" Type="string" %>
@@ -45,4 +46,8 @@
         }
     
         private <%= wrapperClass %><<%= referencedInterface %>> <%= wrapperName %>;
-<% AddSerialization(serializationList, name, false); %>
+<% if (eagerLoading) { %>
+        private List<int> <%= name %>Ids;
+        private bool <%= name %>_was_eagerLoaded = false;
+<% } %>
+<% AddSerialization(serializationList, name, eagerLoading); %>

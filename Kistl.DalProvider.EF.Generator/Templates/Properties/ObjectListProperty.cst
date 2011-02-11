@@ -91,14 +91,10 @@
         }
         private <%= wrapperClass %><<%= referencedInterface %>, <%= referencedImplementation %>> <%= wrapperName %>;
 
-<%
-    if (eagerLoading)
-    {
-%>
+<% if (eagerLoading) { %>
         private List<int> <%= name %>Ids;
         private bool <%= name %>_was_eagerLoaded = false;
 <%
-    
         if (serializationList != null)
         {
             serializationList.Add("Serialization.EagerLoadingSerialization", Kistl.Generator.Templates.Serialization.SerializerType.Binary, null, null, name, true);

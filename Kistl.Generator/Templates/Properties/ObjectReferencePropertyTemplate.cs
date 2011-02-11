@@ -99,15 +99,16 @@ namespace Kistl.Generator.Templates.Properties
                 callGetterSetterEvents);
         }
 
-        protected virtual void AddSerialization(Serialization.SerializationMembersList list, string memberName, string fkBackingName)
+        protected virtual void AddSerialization(Serialization.SerializationMembersList list, string sourceMember, string targetMember, string targetGuidMember)
         {
             if (list != null)
             {
                 if (relDataTypeExportable)
                 {
-                    list.Add("Serialization.ObjectReferencePropertySerialization", Serialization.SerializerType.ImportExport, moduleNamespace, name, memberName);
+                    list.Add("Serialization.ObjectReferencePropertySerialization", Serialization.SerializerType.ImportExport, moduleNamespace, name, sourceMember, targetMember, targetGuidMember);
                 }
-                list.Add(Serialization.SerializerType.Service, moduleNamespace, name, fkBackingName);
+                list.Add("Serialization.ObjectReferencePropertySerialization",
+                    Templates.Serialization.SerializerType.Service, moduleNamespace, name, sourceMember, targetMember, targetGuidMember);
             }
         }
 

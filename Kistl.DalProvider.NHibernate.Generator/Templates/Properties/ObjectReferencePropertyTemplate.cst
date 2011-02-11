@@ -154,7 +154,7 @@
 <% } %>
 
 <%
-    AddSerialization(serializationList, name, fkBackingName);
+    AddSerialization(serializationList, name, fkBackingName, fkGuidBackingName);
 
     if (!String.IsNullOrEmpty(positionPropertyName))
     {

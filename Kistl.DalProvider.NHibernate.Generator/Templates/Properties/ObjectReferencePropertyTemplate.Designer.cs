@@ -229,7 +229,7 @@ this.WriteObjects("        private Guid? ",  fkGuidBackingName , " = null;\r\n")
 #line 155 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("\r\n");
 #line 157 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
-AddSerialization(serializationList, name, fkBackingName);
+AddSerialization(serializationList, name, fkBackingName, fkGuidBackingName);
 
     if (!String.IsNullOrEmpty(positionPropertyName))
     {
