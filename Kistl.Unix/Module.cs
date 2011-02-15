@@ -15,7 +15,7 @@ namespace Kistl.Unix
         {
             base.Load(builder);
             builder.RegisterType<PosixIdentitySource>()
-                .AsImplementedInterfaces().
+                .AsImplementedInterfaces()
                 .InstancePerLifetimeScope();
         }
     }
