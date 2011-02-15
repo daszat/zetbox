@@ -204,7 +204,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Templates\ObjectClasses\CollectionSerialization.cs" />
     <Compile Include="Templates\ObjectClasses\Constructors.cs">
       <DependentUpon>Constructors.cst</DependentUpon>
     </Compile>
