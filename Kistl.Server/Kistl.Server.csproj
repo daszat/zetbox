@@ -104,7 +104,6 @@
   <ItemGroup>
     <Compile Include="BootstrapperService.cs" />
     <Compile Include="Helper.cs" />
-    <Compile Include="IIdentitySource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="KistlService.cs" />
   </ItemGroup>
@@ -168,6 +167,7 @@
     <Compile Include="Server.cs" />
     <Compile Include="ServerModule.cs" />
     <Compile Include="WcfServer.cs" />
+    <Compile Include="ActiveDirectoryIdentitySource.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
