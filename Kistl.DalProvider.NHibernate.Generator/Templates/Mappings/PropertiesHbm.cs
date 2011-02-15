@@ -174,7 +174,16 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
             string nameAttr = String.Format("name=\"{0}\"", prop.Name);
             string tableName = prop.GetCollectionEntryTable();
             string tableAttr = String.Format("table=\"`{0}`\"", tableName);
-            string typeAttr = String.Format("type=\"{0}\"", prop.GetPropertyType().AssemblyQualifiedName);
+            Type propertyType = prop.GetPropertyType();
+            string typeAttr;
+            if (propertyType == typeof(DateTime) || propertyType == typeof(DateTime?))
+            {
+                typeAttr = "type=\"DateTime2\"";
+            }
+            else
+            {
+                typeAttr = String.Format("type=\"{0}\"", propertyType.AssemblyQualifiedName);
+            }
             string mappingType = prop.HasPersistentOrder ? "list" : "idbag";
 
             if (prop.IsList)
