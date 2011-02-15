@@ -94,12 +94,7 @@ namespace Kistl.Server
                 .Named<ISchemaProvider>("MSSQL")
                 .InstancePerDependency();
 
-#if MONO
-            moduleBuilder
-                .Register(c => new PosixIdentitySource())
-                .As<IIdentitySource>()
-                .InstancePerLifetimeScope();
-#else
+#if !MONO
             moduleBuilder
                 .Register(c => new ActiveDirectoryIdentitySource())
                 .As<IIdentitySource>()
