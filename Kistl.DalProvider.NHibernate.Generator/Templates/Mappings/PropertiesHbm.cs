@@ -174,7 +174,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
             string nameAttr = String.Format("name=\"{0}\"", prop.Name);
             string tableName = prop.GetCollectionEntryTable();
             string tableAttr = String.Format("table=\"`{0}`\"", tableName);
-            string typeAttr = String.Format("type=\"{0}\"", prop.GetPropertyType().AssemblyQualifiedName);
+            string typeAttr = String.Empty; // NHibernate via reflection String.Format("type=\"{0}\"", prop.GetPropertyTypeString());
             string mappingType = prop.HasPersistentOrder ? "list" : "idbag";
 
             if (prop.IsList)
