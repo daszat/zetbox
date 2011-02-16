@@ -486,6 +486,8 @@ namespace Kistl.DalProvider.NHibernate
         private int CallGetSequenceNumber(Guid sequenceGuid, string procName)
         {
             var cmd = _nhSession.Connection.CreateCommand();
+            if (_transaction != null)
+                _transaction.Enlist(cmd);
             cmd.CommandText = "dbo.\"" + procName + "\"";
             cmd.CommandType = CommandType.StoredProcedure;
 
