@@ -39,6 +39,16 @@ namespace Kistl.API.AbstractConsumerTests.one_to_N_relations
         }
 
         [Test]
+        public void should_notify_OneSide_property_no_content_check()
+        {
+            TestChangeNotification(nSide1, "OneSide",
+                DoModification,
+                null,
+                null
+            );
+        }
+
+        [Test]
         public void should_notify_NSide_property()
         {
             TestChangeNotification(oneSide1, "NSide",
