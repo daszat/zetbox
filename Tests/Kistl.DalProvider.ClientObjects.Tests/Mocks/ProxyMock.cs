@@ -68,9 +68,9 @@ namespace Kistl.DalProvider.Client.Mocks
             return (T)CreateInstance(ctx, ifType, id);
         }
 
-        private static IDataObject CreateInstance(IKistlContext ctx, InterfaceType ifType, int id)
+        private static IPersistenceObject CreateInstance(IKistlContext ctx, InterfaceType ifType, int id)
         {
-            var result = (IDataObject)Activator.CreateInstance(ctx.ToImplementationType(ifType).Type);
+            var result = (IPersistenceObject)Activator.CreateInstance(ctx.ToImplementationType(ifType).Type);
             result.SetPrivatePropertyValue<int>("ID", id);
             return result;
         }
