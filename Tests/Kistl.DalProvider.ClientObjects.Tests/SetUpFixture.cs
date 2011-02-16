@@ -36,7 +36,7 @@ namespace Kistl.DalProvider.Client.Tests
             builder.RegisterModule(new Kistl.Objects.MemoryModule());
 
             builder
-                .Register(c => new ProxyMock(c.Resolve<InterfaceType.Factory>()))
+                .RegisterType<ProxyMock>()
                 .As<IProxy>()
                 .InstancePerDependency();
         }
