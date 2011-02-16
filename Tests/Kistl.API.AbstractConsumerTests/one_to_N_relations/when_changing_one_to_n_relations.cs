@@ -50,6 +50,7 @@ namespace Kistl.API.AbstractConsumerTests.one_to_N_relations
         }
 
         [Test]
+        [Ignore("Case#2162: Currently NHibernate has troubles with correclty sequencing the notifications")]
         public void should_notify_NSide_property()
         {
             TestChangeNotification(oneSide1, "NSide",
