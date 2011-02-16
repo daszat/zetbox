@@ -124,9 +124,7 @@
     <Content Include="Kistl.Server.Tests.ConfigNHibernate_MSSQL.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Kistl.Server.Tests.ConfigNHibernate_PostgreSQL .xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Kistl.Server.Tests.ConfigNHibernate_PostgreSQL.xml" />
     <Content Include="Kistl.Server.Tests.PartCoverSettings.xml" />
   </ItemGroup>
   <ItemGroup>
