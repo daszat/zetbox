@@ -79,8 +79,9 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries
 
         protected override void ApplyReloadReferenceBody()
         {
+            string referencedInterface = prop.ObjectClass.Module.Namespace + "." + prop.ObjectClass.Name;
             string referencedImplementation = Mappings.ObjectClassHbm.GetWrapperTypeReference(prop.ObjectClass as ObjectClass, this.Settings);
-            ObjectClasses.ReloadOneReference.Call(Host, ctx, null, referencedImplementation, "Parent", "Parent", "_fk_Parent", "_fk_guid_Parent", IsExportable());
+            ObjectClasses.ReloadOneReference.Call(Host, ctx, referencedInterface, referencedImplementation, "Parent", "Parent", "_fk_Parent", "_fk_guid_Parent", IsExportable());
         }
     }
 }

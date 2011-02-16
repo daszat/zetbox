@@ -11,7 +11,7 @@
 <%@ Import Namespace="Kistl.Generator" %>
 <%@ Import Namespace="Kistl.Generator.Extensions" %>
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
-<%@ Parameter Name="referencedInterfaceUnused" Type="string" %>
+<%@ Parameter Name="referencedInterface" Type="string" %>
 <%@ Parameter Name="referencedImplementation" Type="string" %>
 <%@ Parameter Name="name" Type="string" %>
 <%@ Parameter Name="implNameUnused" Type="string" %>
@@ -21,10 +21,10 @@
 
 <% if (isExportable) { %>
             if (<%= fkGuidBackingName %>.HasValue)
-                this.Proxy.<%= name %> = OurContext.FindPersistenceObject<<%= referencedImplementation %>>(<%= fkGuidBackingName %>.Value).Proxy;
+                this.Proxy.<%= name %> = ((<%= referencedImplementation %>)OurContext.FindPersistenceObject<<%= referencedInterface %>>(<%= fkGuidBackingName %>.Value)).Proxy;
             else
 <% } %>
             if (<%= fkBackingName %>.HasValue)
-                this.Proxy.<%= name %> = OurContext.FindPersistenceObject<<%= referencedImplementation %>>(<%= fkBackingName %>.Value).Proxy;
+                this.Proxy.<%= name %> = ((<%= referencedImplementation %>)OurContext.FindPersistenceObject<<%= referencedInterface %>>(<%= fkBackingName %>.Value)).Proxy;
             else
                 this.Proxy.<%= name %> = null;

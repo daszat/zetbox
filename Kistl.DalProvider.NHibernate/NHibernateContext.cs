@@ -393,7 +393,7 @@ namespace Kistl.DalProvider.NHibernate
         {
             CheckDisposed();
 
-            var ifType = GetInterfaceType(typeof(T).FullName);
+            var ifType = GetInterfaceType(typeof(T));
 
             var result = _attachedObjects.Lookup(ifType, ID);
 
@@ -421,7 +421,7 @@ namespace Kistl.DalProvider.NHibernate
             if (result != null)
                 return (T)result;
 
-            var implType = ToImplementationType(GetInterfaceType(typeof(T).FullName));
+            var implType = ToImplementationType(GetInterfaceType(typeof(T)));
             var q = NhFindByExportGuid(implType, exportGuid);
             return (T)AttachAndWrap((IProxyObject)q);
         }

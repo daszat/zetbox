@@ -23,7 +23,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
             RelationEnd relEnd = rel.GetEnd(prop);
             RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
 
-            string referencedInterfaceUnused = null; // Mappings.ObjectClassHbm.GetInterfaceTypeReference(otherEnd.Type, _host.Settings);
+            string referencedInterface = otherEnd.Type.Module.Namespace + "." + otherEnd.Type.Name;
             string referencedImplementation = Mappings.ObjectClassHbm.GetWrapperTypeReference(otherEnd.Type, _host.Settings);
             string name = prop.Name;
             string implNameUnused = null;
@@ -31,7 +31,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
             string fkGuidBackingName = "_fk_guid_" + name;
             bool isExportable = relEnd.Type.ImplementsIExportable() && otherEnd.Type.ImplementsIExportable();
 
-            ReloadOneReference.Call(_host, ctx, referencedInterfaceUnused, referencedImplementation, name, implNameUnused, fkBackingName, fkGuidBackingName, isExportable);
+            ReloadOneReference.Call(_host, ctx, referencedInterface, referencedImplementation, name, implNameUnused, fkBackingName, fkGuidBackingName, isExportable);
         }
     }
 }
