@@ -38,7 +38,7 @@ namespace Kistl.DalProvider.Client.Tests
             builder
                 .RegisterType<ProxyMock>()
                 .As<IProxy>()
-                .InstancePerDependency();
+                .InstancePerLifetimeScope();
         }
 
         protected override string GetConfigFile()
