@@ -4,14 +4,16 @@ namespace Kistl.DalProvider.Client.Mocks
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Linq.Expressions;
     using System.Reflection;
     using System.Text;
     using Kistl.API;
     using Kistl.API.Client;
+    using Kistl.App.Packaging;
     using Kistl.App.Test;
-    using System.IO;
+    using Kistl.DalProvider.Memory;
 
     public class ProxyMock
         : IProxy
@@ -23,10 +25,9 @@ namespace Kistl.DalProvider.Client.Mocks
         {
             this._iftFactory = iftFactory;
             this._backingStore = backingStore;
-            var pipe = new MemoryStream();
-            Kistl.App.Packaging.Exporter.ExportFromContext(frozen, pipe, new[] { "*" });
-            pipe.Seek(0, SeekOrigin.Begin);
-            Kistl.App.Packaging.Importer.Deploy(_backingStore, new StreamPackageProvider(pipe, BasePackageProvider.Modes.Read));
+
+            var generatedAssembly = Assembly.Load(MemoryProvider.GeneratedAssemblyName);
+            Importer.LoadFromXml(_backingStore, generatedAssembly.GetManifestResourceStream("Kistl.Objects.MemoryImpl.FrozenObjects.xml"));
         }
 
         public IEnumerable<IDataObject> GetList(IKistlContext ctx, InterfaceType ifType, int maxListCount, bool withEagerLoading, IEnumerable<Expression> filter, IEnumerable<OrderBy> orderBy, out List<IStreamable> auxObjects)
