@@ -521,7 +521,7 @@ namespace Kistl.API
     /// </summary>
     public static class ZBoxContextExtensions
     {
-        public static IZBoxContextInternals Internals(this IKistlContext ctx)
+        public static IZBoxContextInternals Internals(this IReadOnlyKistlContext ctx)
         {
             return (IZBoxContextInternals)ctx;
         }

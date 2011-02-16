@@ -78,7 +78,7 @@ namespace Kistl.App.Packaging
             }
         }
 
-        public static void ExportFromContext(IKistlContext ctx, string filename, string[] moduleNames)
+        public static void ExportFromContext(IReadOnlyKistlContext ctx, string filename, string[] moduleNames)
         {
             using (var s = new FileSystemPackageProvider(filename, BasePackageProvider.Modes.Write))
             {
@@ -86,7 +86,7 @@ namespace Kistl.App.Packaging
             }
         }
 
-        public static void ExportFromContext(IKistlContext ctx, Stream stream, string[] moduleNames)
+        public static void ExportFromContext(IReadOnlyKistlContext ctx, Stream stream, string[] moduleNames)
         {
             using (var s = new StreamPackageProvider(stream, BasePackageProvider.Modes.Write))
             {
@@ -94,7 +94,7 @@ namespace Kistl.App.Packaging
             }
         }
 
-        public static void ExportFromContext(IKistlContext ctx, IPackageProvider s, string[] moduleNames)
+        public static void ExportFromContext(IReadOnlyKistlContext ctx, IPackageProvider s, string[] moduleNames)
         {
             using (Log.DebugTraceMethodCall("ExportFromContext"))
             {
@@ -174,7 +174,7 @@ namespace Kistl.App.Packaging
             s.Writer.WriteEndElement();
         }
 
-        private static void WriteStartDocument(IPackageProvider s, IKistlContext ctx, IEnumerable<Kistl.App.Base.Module> moduleList)
+        private static void WriteStartDocument(IPackageProvider s, IReadOnlyKistlContext ctx, IEnumerable<Kistl.App.Base.Module> moduleList)
         {
             s.Writer.WriteStartDocument();
             if (moduleList.Count() == 1)
@@ -215,7 +215,7 @@ namespace Kistl.App.Packaging
             s.Writer.WriteAttributeString("date", XmlConvert.ToString(lastChanged ?? DateTime.Now, XmlDateTimeSerializationMode.Utc));
         }
 
-        private static List<Kistl.App.Base.Module> GetModules(IKistlContext ctx, string[] moduleNames)
+        private static List<Kistl.App.Base.Module> GetModules(IReadOnlyKistlContext ctx, string[] moduleNames)
         {
             var moduleList = new List<Kistl.App.Base.Module>();
             if (moduleNames.Contains("*"))
