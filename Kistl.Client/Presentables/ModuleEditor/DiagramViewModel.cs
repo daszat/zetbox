@@ -186,7 +186,11 @@ namespace Kistl.Client.Presentables.ModuleEditor
             {
                 if (_dataTypes == null)
                 {
-                    _dataTypes = DataContext.GetQuery<DataType>().Where(i => i.Module == Module).OrderBy(i => i.Name).ToList();
+                    // Get all DataTypes
+                    _dataTypes = DataContext.GetQuery<DataType>().ToList()
+                        .OrderBy(i => i.Module.Name)
+                        .ThenBy(i => i.Name)
+                        .ToList();
                 }
                 return _dataTypes;
             }
@@ -210,7 +214,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
             _relations = null;
             if (_dataTypes != null)
             {
-                var newDataTypes = DataContext.GetQuery<DataType>().Where(i => i.Module == Module).ToList();
+                var newDataTypes = DataContext.GetQuery<DataType>().ToList();
                 // Add new ones, keep old ones
                 _dataTypes.AddRange(newDataTypes.Except(_dataTypes));
                 _dataTypes.RemoveAll(dt => !newDataTypes.Contains(dt));
