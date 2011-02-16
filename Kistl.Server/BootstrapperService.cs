@@ -97,7 +97,7 @@ namespace Kistl.Server
                 System.IO.FileInfo fi = new System.IO.FileInfo(probe);
                 return fi.OpenRead();
             }
-            throw new FileNotFoundException("File not found in Bootstrapper directories", Path.Combine(path, name));
+            throw new FileNotFoundException(String.Format("File [{0}] not found in Bootstrapper directories ({1})", name, path), Path.Combine(path, name));
         }
     }
 }

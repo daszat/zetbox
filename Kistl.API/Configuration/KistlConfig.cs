@@ -278,7 +278,7 @@ namespace Kistl.API.Configuration
             filename = String.IsNullOrEmpty(filename) ? "DefaultConfig.xml" : filename;
 
             if (!File.Exists(filename))
-                throw new FileNotFoundException("Configuration file not found", filename);
+                throw new FileNotFoundException(String.Format("Configuration file [{0}] not found", filename), filename);
 
             using (var r = new XmlTextReader(filename))
             {
