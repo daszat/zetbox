@@ -174,7 +174,17 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
             string nameAttr = String.Format("name=\"{0}\"", prop.Name);
             string tableName = prop.GetCollectionEntryTable();
             string tableAttr = String.Format("table=\"`{0}`\"", tableName);
-            string typeAttr = String.Empty; // NHibernate via reflection String.Format("type=\"{0}\"", prop.GetPropertyTypeString());
+            string typeAttr;
+            if (prop.IsList)
+            {
+                // set the proper type for relation entries
+                typeAttr = String.Format("type=\"{0}\"", prop.GetPropertyTypeString());
+            }
+            else
+            {
+                // let NHibernate work it out via reflection
+                typeAttr = String.Empty; 
+            }
             string mappingType = prop.HasPersistentOrder ? "list" : "idbag";
 
             if (prop.IsList)
