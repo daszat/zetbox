@@ -30,10 +30,10 @@
   </Client>
   <SourceFileLocation>
     <!-- default probe path -->
-    <string>..\..\..\CodeGen\bin\Debug</string>
+    <string>P:\Kistl\bin\CodeGen\bin\Debug</string>
     <!-- common libaries -->
-    <string>..\Common</string>
-    <!-- All other assemblies -->
-    <string>..\Client</string>
+    <string>P:\Kistl\bin\Debug\bin\Common</string>
+    <!-- Fallback path for local development -->
+    <string>P:\Kistl\bin\Debug\bin\Server\fallback</string>
   </SourceFileLocation>
 </KistlConfig>
