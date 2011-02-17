@@ -121,6 +121,7 @@
     <Compile Include="Tests.Serializables\SerializerMockTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Kistl.API.Tests.PartCoverSettings.xml" />
     <None Include="Kistl.API.Tests.Config.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
