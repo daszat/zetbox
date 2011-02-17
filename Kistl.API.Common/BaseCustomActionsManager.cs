@@ -289,7 +289,7 @@ namespace Kistl.App.Extensions
                     break;
 
                 default:
-                    throw new ArgumentOutOfRangeException("type");
+                    throw new ArgumentOutOfRangeException("invocationType");
             }
 
             string key = string.Format("{0}.{1}Actions.{2}{3}", prop.ObjectClass.Module.Namespace, prop.ObjectClass.Name, methodPrefix, prop.Name);
