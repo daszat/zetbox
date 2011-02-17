@@ -35,6 +35,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libs\AutoFac 2\Autofac.dll</HintPath>
     </Reference>
+    <Reference Include="LinFu.DynamicProxy">
+      <HintPath>..\..\Libs\NHibernate3\Required_For_LazyLoading\LinFu\LinFu.DynamicProxy.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.ByteCode.LinFu">
+      <HintPath>..\..\Libs\NHibernate3\Required_For_LazyLoading\LinFu\NHibernate.ByteCode.LinFu.dll</HintPath>
+    </Reference>
     <Reference Include="Npgsql, Version=2.0.11.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libs\Npgsql2\Npgsql.dll</HintPath>
