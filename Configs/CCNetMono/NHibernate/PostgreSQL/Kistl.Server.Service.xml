@@ -38,7 +38,7 @@
     <!-- common libaries -->
     <string>/srv/CCNet/Projects/zbox/repo/bin/Debug/bin/Common</string>
     <!-- Fallback path for local development -->
-    <string>/srv/CCNet/Projects/zbox/repo/bin/Debug/bin/Server/fallback</string>
+    <string>/srv/CCNet/Projects/zbox/repo/bin/Debug/bin/Server/Fallback</string>
     <!-- All other assemblies -->
     <string>/srv/CCNet/Projects/zbox/repo/bin/Debug/bin/Server</string>
     <string>/srv/CCNet/Projects/zbox/repo/bin/Debug/binClient</string>
