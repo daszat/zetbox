@@ -27,7 +27,7 @@ namespace Kistl.API.Utils
         private readonly Dictionary<TInput, TOutput> _selectorCache = new Dictionary<TInput, TOutput>();
         private readonly Dictionary<TOutput, TInput> _inverterCache = new Dictionary<TOutput, TInput>();
         private readonly bool _isReadOnly;
-        
+
         /// <summary>
         /// </summary>
         /// <param name="collection">the collection to project</param>
@@ -108,11 +108,13 @@ namespace Kistl.API.Utils
                 throw new ArgumentNullException("array");
 
             if (arrayIndex < 0)
-                throw new ArgumentOutOfRangeException("arrayIndex");
+                throw new ArgumentOutOfRangeException("arrayIndex", String.Format("arrayIndex={0} < 0", arrayIndex));
 
-            if (arrayIndex >= array.Length
-                || (array.Length - arrayIndex) < _collection.Count)
-                throw new ArgumentOutOfRangeException("arrayIndex");
+            if (arrayIndex >= array.Length)
+                throw new ArgumentOutOfRangeException("arrayIndex", String.Format("arrayIndex={0} >= array.Length={1}", arrayIndex, array.Length));
+
+            if ((array.Length - arrayIndex) < _collection.Count)
+                throw new ArgumentOutOfRangeException("arrayIndex", String.Format("(array.Length={0} - arrayIndex={1})={2} < _collection.Count={3}", array.Length, arrayIndex, array.Length - arrayIndex, _collection.Count));
 
             foreach (var output in this)
             {
