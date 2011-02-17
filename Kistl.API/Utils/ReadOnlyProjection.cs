@@ -110,8 +110,8 @@ namespace Kistl.API.Utils
             if (arrayIndex < 0)
                 throw new ArgumentOutOfRangeException("arrayIndex", String.Format("arrayIndex={0} < 0", arrayIndex));
 
-            if (arrayIndex >= array.Length)
-                throw new ArgumentOutOfRangeException("arrayIndex", String.Format("arrayIndex={0} >= array.Length={1}", arrayIndex, array.Length));
+            if (arrayIndex >= array.Length && _collection.Count > 0)
+                throw new ArgumentOutOfRangeException("arrayIndex", String.Format("arrayIndex={0} >= array.Length={1} && _collection.Count={2} > 0", arrayIndex, array.Length, _collection.Count));
 
             if ((array.Length - arrayIndex) < _collection.Count)
                 throw new ArgumentOutOfRangeException("arrayIndex", String.Format("(array.Length={0} - arrayIndex={1})={2} < _collection.Count={3}", array.Length, arrayIndex, array.Length - arrayIndex, _collection.Count));
