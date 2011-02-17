@@ -100,6 +100,7 @@
     <Compile Include="Tests\QueryTranslatorTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Kistl.API.Server.Tests.Config.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
