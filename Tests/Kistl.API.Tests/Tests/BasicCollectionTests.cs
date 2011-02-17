@@ -175,6 +175,16 @@ namespace Kistl.API.Tests
             AssertInvariants(initialItems);
         }
 
+#if MONO
+        // See https://bugzilla.novell.com/show_bug.cgi?id=672907
+        [Test]
+        public void copyto_should_check_array_dimensions()
+        {
+            Assert.That(() => collection.CopyTo(new TItem[10, 1], 0), Throws.RankException);
+            AssertCollectionIsUnchanged();
+            AssertInvariants(initialItems);
+        }
+#else
         [Test]
         public void copyto_should_check_array_dimensions()
         {
@@ -182,6 +192,7 @@ namespace Kistl.API.Tests
             AssertCollectionIsUnchanged();
             AssertInvariants(initialItems);
         }
+#endif
 
         [Test]
         public void copyto_should_check_index_not_greater_than_or_equal_array_length(
@@ -231,6 +242,17 @@ namespace Kistl.API.Tests
         // TItem never can be cast to this type
         private sealed class Incompatible { }
 
+#if MONO
+        [Test]
+        public void copyto_should_fail_on_wrong_destination_type()
+        {
+            Assert.That(
+                () => collection.CopyTo(new Incompatible[initialItems.Count + 1], 0),
+                Throws.ArrayTypeMismatchException);
+            AssertCollectionIsUnchanged();
+            AssertInvariants(initialItems);
+        }
+#else
         [Test]
         public void copyto_should_fail_on_wrong_destination_type()
         {
@@ -240,6 +262,7 @@ namespace Kistl.API.Tests
             AssertCollectionIsUnchanged();
             AssertInvariants(initialItems);
         }
+#endif
 
         [Test]
         public void copyto_should_copy_items(
