@@ -543,6 +543,7 @@ namespace Kistl.DalProvider.NHibernate
             var item = (NHibernatePersistenceObject)_attachedObjectsByProxy.Lookup(GetImplementationType(proxy.ZBoxWrapper).ToInterfaceType(), proxy);
             if (item == null)
             {
+                // re-load proxy to avoid aliasing issues from unloaded proxies
                 if (proxy.ID > Kistl.API.Helper.INVALIDID)
                 {
                     proxy = (IProxyObject)_nhSession.Load(proxy.ZBoxProxy, proxy.ID);
