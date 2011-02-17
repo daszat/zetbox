@@ -180,7 +180,7 @@ namespace Kistl.API.Tests
         [Test]
         public void copyto_should_check_array_dimensions()
         {
-            Assert.That(() => collection.CopyTo(new TItem[10, 1], 0), Throws.RankException);
+            Assert.That(() => collection.CopyTo(new TItem[10, 1], 0), Throws.InstanceOf<RankException>());
             AssertCollectionIsUnchanged();
             AssertInvariants(initialItems);
         }
@@ -248,7 +248,7 @@ namespace Kistl.API.Tests
         {
             Assert.That(
                 () => collection.CopyTo(new Incompatible[initialItems.Count + 1], 0),
-                Throws.ArrayTypeMismatchException);
+                Throws.InstanceOf<ArrayTypeMismatchException>());
             AssertCollectionIsUnchanged();
             AssertInvariants(initialItems);
         }
