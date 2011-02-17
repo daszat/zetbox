@@ -211,11 +211,18 @@ namespace Kistl.API
             }
         }
 
+        private static Dictionary<string, bool> _requestedAssemblies = new Dictionary<string, bool>();
+
         private static Assembly LoadAssemblyByName(string name, bool reflectOnly)
         {
             // Be nice & Thread Save
             lock (_lock)
             {
+                // prevent calling load assembly twice for the same assembly. 
+                // a second try wont load the assembly either
+                if (_requestedAssemblies.ContainsKey(name.ToLower())) return null;                
+                _requestedAssemblies[name.ToLower()] = true;
+
                 AssemblyName assemblyName = new AssemblyName(name);
                 string baseName = assemblyName.Name;
 
