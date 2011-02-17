@@ -228,7 +228,7 @@ namespace Kistl.Server.Service
             {
                 configFilePath = String.Empty;
             }
-            return KistlConfig.FromFile(configFilePath);
+            return KistlConfig.FromFile(configFilePath, "Kistl.Server.Service.xml");
         }
     }
 }

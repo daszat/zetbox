@@ -6,6 +6,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
+using Kistl.API.Utils;
 
 namespace Kistl.API.Configuration
 {
@@ -272,10 +273,11 @@ namespace Kistl.API.Configuration
         /// Deserialize from a TextReader
         /// </summary>
         /// <param name="filename">configuration file w/ or w/o path</param>
+        /// <param name="fallbackBaseName">A configuration name to search in the %zenv% environmentvariable, if none is specified in the first parameter</param>
         /// <returns>Current Configuration</returns>
-        public static KistlConfig FromFile(string filename)
+        public static KistlConfig FromFile(string filename, string fallbackBaseName)
         {
-            filename = String.IsNullOrEmpty(filename) ? "DefaultConfig.xml" : filename;
+            filename = String.IsNullOrEmpty(filename) ? GetDefaultConfigName(fallbackBaseName) : filename;
 
             if (!File.Exists(filename))
                 throw new FileNotFoundException(String.Format("Configuration file [{0}] not found", filename), filename);
@@ -286,6 +288,21 @@ namespace Kistl.API.Configuration
                 result.ConfigFilePath = filename;
                 return result;
             }
+        }
+
+        public static string GetDefaultConfigName(string basename)
+        {
+            var zenv = Environment.GetEnvironmentVariable("zenv");
+            var file = Path.Combine(Path.Combine("Configs", zenv), basename);
+            Logging.Log.InfoFormat("Got zenv=[{0}], trying file=[{1}]", zenv, file);
+            while (!Path.IsPathRooted(zenv) && !File.Exists(file) && !String.IsNullOrEmpty(zenv))
+            {
+                // this will reduce zenv directory component-wise until nothing is left
+                zenv = Path.GetDirectoryName(zenv);
+                file = Path.Combine(Path.Combine("Configs", zenv), basename);
+                Logging.Log.InfoFormat("Got zenv=[{0}], trying file=[{1}]", zenv, file);
+            }
+            return file;
         }
 
         /// <summary>

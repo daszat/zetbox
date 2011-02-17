@@ -121,7 +121,7 @@ namespace Kistl.API.Migration
             Log.DebugFormat("Trying to load config from [{0}]", configFilePath);
             try
             {
-                return KistlConfig.FromFile(configFilePath);
+                return KistlConfig.FromFile(configFilePath, "MigrationConfig.xml");
             }
             catch (Exception ex)
             {

@@ -40,7 +40,7 @@ namespace Kistl.API.Tests
             {
                 File.Copy(ConfigFile, "DefaultConfig.xml");
             }
-            var config = KistlConfig.FromFile(String.Empty);
+            var config = KistlConfig.FromFile(String.Empty, "DefaultConfig.xml");
 
             Assert.That(config, Is.Not.Null, "Configuration");
             Assert.That(config.ConfigFilePath, Is.Not.Empty, "ConfigFilePath");
@@ -50,7 +50,7 @@ namespace Kistl.API.Tests
         [Test]
         public void LoadFile()
         {
-            var config = KistlConfig.FromFile(ConfigFile);
+            var config = KistlConfig.FromFile(ConfigFile, "DefaultConfig.xml");
 
             Assert.That(config, Is.Not.Null, "Configuration");
             Assert.That(config.ConfigFilePath, Is.EqualTo(ConfigFile), "ConfigFilePath");
@@ -88,7 +88,7 @@ namespace Kistl.API.Tests
             {
                 File.Delete(filename);
             }
-            var config = KistlConfig.FromFile(String.Empty);
+            var config = KistlConfig.FromFile(String.Empty, "DefaultConfig.xml");
             config.ToFile(filename);
             Assert.That(File.Exists(filename), Is.True);
             Assert.That(new FileInfo(filename).Length, Is.GreaterThan(0));

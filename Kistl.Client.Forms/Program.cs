@@ -22,7 +22,7 @@ namespace Kistl.Client.Forms
         [STAThread]
         static void Main()
         {
-            var config = KistlConfig.FromFile("DefaultFormsConfig.xml");
+            var config = KistlConfig.FromFile(null, "DefaultFormsConfig.xml");
             AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
 
             var builder = Kistl.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Client.Modules);

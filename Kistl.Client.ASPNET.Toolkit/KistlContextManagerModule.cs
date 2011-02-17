@@ -60,7 +60,7 @@ namespace Kistl.Client.ASPNET.Toolkit
             {
                 Logging.Configure();
 
-                var config = KistlConfig.FromFile(HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["configFile"]));
+                var config = KistlConfig.FromFile(HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["configFile"]), "AspNet.xml");
                 AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
 
                 var builder = Kistl.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Client.Modules);

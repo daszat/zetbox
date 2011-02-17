@@ -85,7 +85,7 @@ namespace Kistl.Client.WPF
                 string configFilePath;
                 var args = HandleCommandline(e.Args, out configFilePath);
 
-                var config = KistlConfig.FromFile(configFilePath);
+                var config = KistlConfig.FromFile(configFilePath, "Kistl.Client.WPF.xml");
                 InitCulture(config);
 
                 SplashScreen.ShowSplashScreen(Kistl.Client.Properties.Resources.Startup_Message, Kistl.Client.Properties.Resources.Startup_InitApp, 5);
