@@ -38,6 +38,9 @@ namespace Kistl.Tests.Utilities.PostgreSql
             {
                 Assert.That(config.Server.ConnectionString, Is.StringContaining("_test"), "test databases should be marked with '_test' in the connection string");
 
+                Log.InfoFormat("Current Directory=[{0}]", Environment.CurrentDirectory);
+                Log.InfoFormat("Using config from [{0}]", config.ConfigFilePath);
+
                 try
                 {
                     Log.Info("Restoring Database");
@@ -46,29 +49,45 @@ namespace Kistl.Tests.Utilities.PostgreSql
                     var srcDB = cb.Database.Substring(0, cb.Database.Length - "_test".Length);
                     var destDB = cb.Database;
                     var userCmdString = "--username=postgres --no-password";
-                    var dumpFile = @"C:\temp\zbox.backup";
+                    var dumpFile = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName() + ".zbox.backup");
+                    while (File.Exists(dumpFile))
                     {
-                        var pgDumpArgs = String.Format("--format c {0} --file={1} {2}", userCmdString, dumpFile, srcDB);
-
-                        Log.InfoFormat("pgDumpArgs = {0}", pgDumpArgs);
-                        var dump = RunPgUtil("pg_dump", pgDumpArgs);
-                        if (dump.ExitCode != 0)
+                        dumpFile = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName() + ".zbox.backup");
+                    }
+                    try
+                    {
                         {
-                            throw new ApplicationException(String.Format("Failed to dump database (exit={0}), maybe you need to put your password into AppData\\Roaming\\postgresql\\pgpass.conf", dump.ExitCode));
+                            var pgDumpArgs = String.Format("--format c {0} --file={1} {2}", userCmdString, dumpFile, srcDB);
+
+                            Log.InfoFormat("pgDumpArgs = {0}", pgDumpArgs);
+                            var dump = RunPgUtil("pg_dump", pgDumpArgs);
+                            if (dump.ExitCode != 0)
+                            {
+                                throw new ApplicationException(String.Format("Failed to dump database (exit={0}), maybe you need to put your password into AppData\\Roaming\\postgresql\\pgpass.conf", dump.ExitCode));
+                            }
+                        }
+                        {
+                            var pgRestoreArgs = String.Format("--format c --clean {0} --dbname={2} {1}", userCmdString, dumpFile, destDB);
+                            Log.InfoFormat("pgRestoreArgs = {0}", pgRestoreArgs);
+
+                            var restore = RunPgUtil("pg_restore", pgRestoreArgs);
+                            if (restore.ExitCode != 0)
+                            {
+                                Log.Warn("Retrying after failed pg_restore, since the tool can become confused by schema changes");
+                                restore = RunPgUtil("pg_restore", pgRestoreArgs);
+
+                                if (restore.ExitCode != 0)
+                                    throw new ApplicationException(String.Format("Failed to restore database (exit={0})", restore.ExitCode));
+                            }
                         }
                     }
+                    finally
                     {
-                        var pgRestoreArgs = String.Format("--format c --clean {0} --dbname={2} {1}", userCmdString, dumpFile, destDB);
-                        Log.InfoFormat("pgRestoreArgs = {0}", pgRestoreArgs);
-
-                        var restore = RunPgUtil("pg_restore", pgRestoreArgs);
-                        if (restore.ExitCode != 0)
-                        {
-                            throw new ApplicationException(String.Format("Failed to restore database (exit={0}), maybe you need to put your password into AppData\\Roaming\\postgresql\\pgpass.conf", restore.ExitCode));
-                        }
+                        // cleanup
+                        File.Delete(dumpFile);
+                        // After recreating the database, all connection pools should be cleard
+                        NpgsqlConnection.ClearAllPools();
                     }
-                    // After recreating the database, all connection pools should be cleard
-                    NpgsqlConnection.ClearAllPools();
                 }
                 catch (ApplicationException)
                 {
@@ -79,15 +98,16 @@ namespace Kistl.Tests.Utilities.PostgreSql
                     Log.Error("Error while restoring database", ex);
                     throw;
                 }
-
-                Log.InfoFormat("Current Directory=[{0}]", Environment.CurrentDirectory);
-                Log.InfoFormat("Using config from [{0}]", config.ConfigFilePath);
             }
         }
 
         private static Process RunPgUtil(string util, string args)
         {
-            var binPath = Path.Combine(GetPgSqlBinPath(), String.Format("{0}.exe", util));
+            var binPath = Path.Combine(GetPgSqlBinPath(), util);
+
+#if !MONO
+            binPath += ".exe";
+#endif
 
             var pi = new ProcessStartInfo(binPath, args);
             pi.UseShellExecute = false;
