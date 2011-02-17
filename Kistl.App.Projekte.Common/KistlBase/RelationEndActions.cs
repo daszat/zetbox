@@ -1,5 +1,5 @@
 
-namespace Kistl.App.Projekte.Common.KistlBase
+namespace Kistl.App.Base
 {
     using System;
     using System.Collections.Generic;

@@ -45,7 +45,7 @@ namespace Kistl.Generator.Templates
             }
             else if (p is CalculatedObjectReferenceProperty)
             {
-                ApplyCalculatedObjectReferencePropertyTemplate((CalculatedObjectReferenceProperty)p);
+                ApplyCalculatedPropertyTemplate((CalculatedObjectReferenceProperty)p);
                 ApplyPropertyEvents(p, true);
             }
             else if (p is CompoundObjectProperty)
@@ -62,13 +62,19 @@ namespace Kistl.Generator.Templates
             }
             else if (p is ValueTypeProperty)
             {
-                if (((ValueTypeProperty)p).IsList)
+                var vtp = (ValueTypeProperty)p;
+                if (vtp.IsCalculated)
                 {
-                    ApplyValueTypeListTemplate((ValueTypeProperty)p);
+                    ApplyCalculatedPropertyTemplate(p);
+                    ApplyPropertyEvents(p, false);
+                }
+                else if (vtp.IsList)
+                {
+                    ApplyValueTypeListTemplate(vtp);
                 }
                 else
                 {
-                    ApplyValueTypePropertyTemplate((ValueTypeProperty)p);
+                    ApplyValueTypePropertyTemplate(vtp);
                     ApplyPropertyEvents(p, false);
                 }
             }
@@ -111,9 +117,9 @@ namespace Kistl.Generator.Templates
             ApplyNotifyingValueProperty(prop, this.MembersToSerialize);
         }
 
-        protected virtual void ApplyCalculatedObjectReferencePropertyTemplate(CalculatedObjectReferenceProperty prop)
+        protected virtual void ApplyCalculatedPropertyTemplate(Property prop)
         {
-            this.WriteLine("        // calculated object reference property");
+            this.WriteLine("        // calculated  property");
             ApplyCalculatedProperty(prop, this.MembersToSerialize);
         }
 
@@ -168,7 +174,7 @@ namespace Kistl.Generator.Templates
                 prop);
         }
 
-        protected virtual void ApplyCalculatedProperty(CalculatedObjectReferenceProperty prop, Serialization.SerializationMembersList serList)
+        protected virtual void ApplyCalculatedProperty(Property prop, Serialization.SerializationMembersList serList)
         {
             Properties.CalculatedProperty.Call(Host, ctx,
                 serList, prop);

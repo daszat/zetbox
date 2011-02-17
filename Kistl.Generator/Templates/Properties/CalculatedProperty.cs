@@ -8,17 +8,18 @@ namespace Kistl.Generator.Templates.Properties
     using Kistl.API;
     using Kistl.App.Base;
     using Kistl.App.Extensions;
+    using Kistl.Generator.Extensions;
 
     public partial class CalculatedProperty
     {
         public static void Call(Arebis.CodeGeneration.IGenerationHost host,
             IKistlContext ctx,
             Serialization.SerializationMembersList serList,
-            CalculatedObjectReferenceProperty prop)
+            Property prop)
         {
             if (prop == null) { throw new ArgumentNullException("prop"); }
 
-            Call(host, ctx, prop.ObjectClass.GetDataTypeString(), prop.ReferencedClass.GetDataTypeString(), prop.Name, "On" + prop.Name + "_Getter");
+            Call(host, ctx, prop.ObjectClass.GetDataTypeString(), prop.ReferencedTypeAsCSharp(), prop.Name, "On" + prop.Name + "_Getter");
         }
 
         //public static void Call(Arebis.CodeGeneration.IGenerationHost host,
