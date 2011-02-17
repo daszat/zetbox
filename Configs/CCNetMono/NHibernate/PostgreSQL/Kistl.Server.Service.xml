@@ -34,13 +34,13 @@
   </Server>
   <SourceFileLocation>
     <!-- default probe path -->
-    <string>../../../CodeGen/bin/Debug</string>
+    <string>/srv/CCNet/Projects/zbox/repo/bin/CodeGen/bin/Debug</string>
     <!-- common libaries -->
-    <string>../Common</string>
+    <string>/srv/CCNet/Projects/zbox/repo/bin/Debug/binCommon</string>
     <!-- Fallback path for local development -->
-    <string>../Server/fallback</string>
+    <string>/srv/CCNet/Projects/zbox/repo/bin/Debug/binServer/fallback</string>
     <!-- All other assemblies -->
-    <string>../Server</string>
-    <string>../Client</string>
+    <string>/srv/CCNet/Projects/zbox/repo/bin/Debug/binServer</string>
+    <string>/srv/CCNet/Projects/zbox/repo/bin/Debug/binClient</string>
   </SourceFileLocation>
 </KistlConfig>

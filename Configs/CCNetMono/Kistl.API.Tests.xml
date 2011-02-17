@@ -23,8 +23,8 @@
   </Client>
   <SourceFileLocation>
     <!-- default probe path -->
-    <string>../../../CodeGen/bin/Debug</string>
+    <string>/srv/CCNet/Projects/zbox/repo/bin/CodeGen/bin/Debug</string>
     <!-- common libaries -->
-    <string>../Common</string>
+    <string>/srv/CCNet/Projects/zbox/repo/bin/Debug/binCommon</string>
   </SourceFileLocation>
 </KistlConfig>
