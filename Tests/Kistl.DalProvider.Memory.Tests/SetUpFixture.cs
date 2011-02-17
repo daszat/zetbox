@@ -29,7 +29,7 @@ public sealed class SetUpFixture : Kistl.API.AbstractConsumerTests.AbstractSetUp
 
     protected override string GetConfigFile()
     {
-        return "Kistl.DalProvider.Memory.Tests.Config{0}.xml";
+        return "Kistl.DalProvider.Memory.Tests.xml";
     }
 
     protected override HostType GetHostType()

@@ -123,9 +123,6 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="Kistl.API.Tests.PartCoverSettings.xml" />
-    <None Include="Kistl.API.Tests.Config.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Kistl.API\Kistl.API.csproj">

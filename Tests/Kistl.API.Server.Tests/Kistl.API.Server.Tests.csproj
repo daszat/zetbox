@@ -101,9 +101,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Kistl.API.Server.Tests.Config.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <Content Include="Kistl.API.ServerTests.PartCoverSettings.xml" />
   </ItemGroup>
   <ItemGroup>

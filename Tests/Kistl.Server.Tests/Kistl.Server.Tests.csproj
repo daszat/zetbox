@@ -112,21 +112,6 @@
     <Compile Include="Tests\Security\when_selected.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Kistl.Server.Tests.Config.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Kistl.Server.Tests.ConfigEF_PostgreSQL.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Kistl.Server.Tests.ConfigEF_MSSQL.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Kistl.Server.Tests.ConfigNHibernate_MSSQL.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Kistl.Server.Tests.ConfigNHibernate_PostgreSQL.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Kistl.Server.Tests.PartCoverSettings.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -144,17 +129,9 @@
       <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
       <Name>Kistl.API</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Kistl.DalProvider.EF\Kistl.DalProvider.EF.csproj">
-      <Project>{52EC8DFB-9C75-4FDB-9EE1-E78847F7F711}</Project>
-      <Name>Kistl.DalProvider.EF</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Kistl.DalProvider.Memory\Kistl.DalProvider.Memory.csproj">
       <Project>{7E3CE048-00C1-4357-BE27-801AB5B75FE3}</Project>
       <Name>Kistl.DalProvider.Memory</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Kistl.Objects.Ef\Kistl.Objects.Ef.csproj">
-      <Project>{62B9344A-87D1-4715-9ABB-EAE0ACC4F523}</Project>
-      <Name>Kistl.Objects.Ef</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Kistl.Objects.Memory\Kistl.Objects.Memory.csproj">
       <Project>{01E60FD5-CD96-466A-83B1-8EFC7452B47C}</Project>

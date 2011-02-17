@@ -154,25 +154,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Kistl.DalProvider.NHibernate.Tests.Config.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Kistl.DalProvider.NHibernate.Tests.PartCoverSettings.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Kistl.DalProvider.NHibernate.Tests.ConfigMSSQL.xml">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Kistl.DalProvider.NHibernate.Tests.ConfigPostgreSQL.xml">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

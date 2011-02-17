@@ -27,7 +27,7 @@ namespace Kistl.API
 
         protected override string GetConfigFile()
         {
-            return "Kistl.API.Tests.Config{0}.xml";
+            return "Kistl.API.Tests.xml";
         }
 
         protected override HostType GetHostType()

@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<KistlConfig xmlns="http://dasz.at/Kistl/">
+  <ConfigName>Kistl.IntegrationTests' NH/PostgreSQL Configuration</ConfigName>
+  <Server StartServer="false">
+    <SchemaProvider>POSTGRESQL</SchemaProvider>
+    <DatabaseProvider>Npgsql</DatabaseProvider>
+    <ConnectionString>Server=localhost;Port=5432;Database=zbox_test;User Id=zbox;Password=b-cXqMyXEYea2kkjUhkS</ConnectionString>
+    <DocumentStore>DocumentStore\Server\</DocumentStore>
+    <LogFilePath>bin\LogFiles</LogFilePath>
+    <CodeGenWorkingPath>bin\CodeGenNext</CodeGenWorkingPath>
+    <CodeGenOutputPath>bin\CodeGen</CodeGenOutputPath>
+    <CodeGenArchivePath>Backup</CodeGenArchivePath>
+    <Modules>
+      <Module>Kistl.API.ApiModule, Kistl.API</Module>
+      <Module>Kistl.API.Server.ServerApiModule, Kistl.API.Server</Module>
+      <Module>Kistl.Server.ServerModule, Kistl.Server</Module>
+      <Module>Kistl.Objects.InterfaceModule, Kistl.Objects</Module>
+      <Module>Kistl.Objects.NHibernateModule, Kistl.Objects.NHibernateImpl</Module>
+      <Module>Kistl.Objects.MemoryModule, Kistl.Objects.MemoryImpl</Module>
+      <Module>Kistl.DalProvider.NHibernate.NHibernateProvider, Kistl.DalProvider.NHibernate</Module>
+      <Module>Kistl.DalProvider.Memory.MemoryProvider, Kistl.DalProvider.Memory</Module>
+      <Module>Kistl.App.Projekte.Server.CustomServerActionsModule, Kistl.App.Projekte.Server</Module>
+      <Module>Kistl.App.Projekte.Common.CustomCommonActionsModule, Kistl.App.Projekte.Common</Module>
+
+      <!-- Development/Master Server modules -->
+      <Module>Kistl.Generator.GeneratorModule, Kistl.Generator</Module>
+      <Module>Kistl.DalProvider.Client.Generator.ClientGeneratorProvider, Kistl.DalProvider.Client.Generator</Module>
+      <Module>Kistl.DalProvider.Memory.Generator.MemoryGeneratorProvider, Kistl.DalProvider.Memory.Generator</Module>
+      <Module>Kistl.DalProvider.NHibernate.Generator.NhGeneratorProvider, Kistl.DalProvider.NHibernate.Generator</Module>
+    </Modules>
+  </Server>
+  <Client StartClient="false" ThrowErrors="true">
+    <DocumentStore>DocumentStore\Client\</DocumentStore>
+    <Modules>
+      <Module>Kistl.API.ApiModule, Kistl.API</Module>
+      <Module>Kistl.API.Client.ClientApiModule, Kistl.API.Client</Module>
+      <Module>Kistl.Client.ClientModule, Kistl.Client</Module>
+      <Module>Kistl.Client.WPF.WPFModule, Kistl.Client.WPF</Module>
+      <Module>Kistl.Objects.InterfaceModule, Kistl.Objects</Module>
+      <Module>Kistl.Objects.ClientModule, Kistl.Objects.ClientImpl</Module>
+      <Module>Kistl.Objects.MemoryModule, Kistl.Objects.MemoryImpl</Module>
+      <Module>Kistl.DalProvider.Client.ClientProvider, Kistl.DalProvider.ClientObjects</Module>
+      <Module>Kistl.DalProvider.Memory.MemoryProvider, Kistl.DalProvider.Memory</Module>
+      <Module>Kistl.App.Projekte.Client.CustomClientActionsModule, Kistl.App.Projekte.Client</Module>
+      <Module>Kistl.App.Projekte.Common.CustomCommonActionsModule, Kistl.App.Projekte.Common</Module>
+      <!-- Do not load customers modules! Nothing to test there
+        <Module>Ini50.App.Client.Ini50Module, Ini50.App.Client</Module>
+        -->
+
+        <!-- since the test are driven from the client app domain, we need to reset the database from here -->
+      <Module>Kistl.Tests.Utilities.PostgreSql.UtilityModule, Kistl.Tests.Utilities.PostgreSql</Module>
+
+    </Modules>
+  </Client>
+  <SourceFileLocation>
+    <!-- default probe path for CC.net on srv2008 -->
+    <string>P:\Kistl\bin\CodeGen\bin\Debug</string>
+    <!-- common libaries for CC.net on srv2008 -->
+    <string>P:\Kistl\bin\Debug\bin\Common</string>
+    <!-- Fallback path for CC.net on srv2008 -->
+    <string>P:\Kistl\bin\Debug\bin\Server\Fallback</string>
+    <!-- All other assemblies -->
+    <string>P:\Kistl\bin\Debug\bin\Server</string>
+    <string>P:\Kistl\bin\Debug\bin\Client</string>
+  </SourceFileLocation>
+</KistlConfig>

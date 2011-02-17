@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<KistlConfig xmlns="http://dasz.at/Kistl/">
+  <ConfigName>Default Server Configuration</ConfigName>
+  <Server StartServer="true">
+    <SchemaProvider>POSTGRESQL</SchemaProvider>
+    <DatabaseProvider>Npgsql</DatabaseProvider>
+    <ConnectionString>Server=localhost;Port=5432;Database=zbox;User Id=zbox;Password=b-cXqMyXEYea2kkjUhkS</ConnectionString>
+    <DocumentStore>DocumentStore\Server\</DocumentStore>
+    <LogFilePath>bin\LogFiles</LogFilePath>
+    <CodeGenWorkingPath>bin\CodeGenNext</CodeGenWorkingPath>
+    <CodeGenOutputPath>bin\CodeGen</CodeGenOutputPath>
+    <CodeGenArchivePath>Backup</CodeGenArchivePath>
+    <Modules>
+      <Module>Kistl.API.ApiModule, Kistl.API</Module>
+      <Module>Kistl.API.Server.ServerApiModule, Kistl.API.Server</Module>
+      <Module>Kistl.Server.ServerModule, Kistl.Server</Module>
+      <Module>Kistl.Objects.InterfaceModule, Kistl.Objects</Module>
+      <Module>Kistl.Objects.NHibernateModule, Kistl.Objects.NHibernateImpl</Module>
+      <Module>Kistl.Objects.MemoryModule, Kistl.Objects.MemoryImpl</Module>
+      <Module>Kistl.DalProvider.NHibernate.NHibernateProvider, Kistl.DalProvider.NHibernate</Module>
+      <Module>Kistl.DalProvider.Memory.MemoryProvider, Kistl.DalProvider.Memory</Module>
+      <Module>Kistl.App.Projekte.Server.CustomServerActionsModule, Kistl.App.Projekte.Server</Module>
+      <Module>Kistl.App.Projekte.Common.CustomCommonActionsModule, Kistl.App.Projekte.Common</Module>
+
+      <!-- Development/Master Server modules -->
+      <Module>Kistl.Generator.GeneratorModule, Kistl.Generator</Module>
+      <Module>Kistl.DalProvider.Memory.Generator.MemoryGeneratorProvider, Kistl.DalProvider.Memory.Generator</Module>
+      <Module>Kistl.DalProvider.NHibernate.Generator.NhGeneratorProvider, Kistl.DalProvider.NHibernate.Generator</Module>
+      <Module>Kistl.DalProvider.Client.Generator.ClientGeneratorProvider, Kistl.DalProvider.Client.Generator</Module>
+      <Module>Kistl.DalProvider.Ef.Generator.EfGeneratorProvider, Kistl.DalProvider.Ef.Generator</Module>
+      <!--
+      -->
+    </Modules>
+  </Server>
+  <SourceFileLocation>
+    <!-- default probe path for CC.net on srv2008 -->
+    <string>F:\CruiseControl.NET\Projects\ZBox-NH\bin\CodeGen\bin\Debug</string>
+    <!-- common libaries for CC.net on srv2008 -->
+    <string>F:\CruiseControl.NET\Projects\ZBox-NH\bin\Debug\bin\Common</string>
+    <!-- Fallback path for CC.net on srv2008 -->
+    <string>F:\CruiseControl.NET\Projects\ZBox-NH\bin\Debug\bin\Server\Fallback</string>
+    <!-- All other assemblies -->
+    <string>F:\CruiseControl.NET\Projects\ZBox-NH\bin\Debug\bin\Server</string>
+    <string>F:\CruiseControl.NET\Projects\ZBox-NH\bin\Debug\bin\Client</string>
+  </SourceFileLocation>
+</KistlConfig>

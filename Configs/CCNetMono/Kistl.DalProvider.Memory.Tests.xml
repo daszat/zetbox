@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<KistlConfig xmlns="http://dasz.at/Kistl/">
+  <ConfigName>Memory DalProvider Test Configuration</ConfigName>  
+  <SourceFileLocation>
+    <!-- default probe path -->
+    <string>../../../CodeGen/bin/Debug</string>
+    <!-- common libaries -->
+    <string>../Common</string>
+    <!-- All other assemblies -->
+    <string>../Client</string>
+  </SourceFileLocation>
+</KistlConfig>

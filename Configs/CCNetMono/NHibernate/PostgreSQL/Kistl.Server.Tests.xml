@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<KistlConfig xmlns="http://dasz.at/Kistl/">
+  <ConfigName>Kistl.Server.Tests' PostgreSQL Configuration</ConfigName>
+  <Server StartServer="false">
+    <SchemaProvider>POSTGRESQL</SchemaProvider>
+    <DatabaseProvider>Npgsql</DatabaseProvider>
+    <ConnectionString>Server=localhost;Port=5432;Database=zbox_test;User Id=zbox;Password=b-cXqMyXEYea2kkjUhkS</ConnectionString>
+    <DocumentStore>DocumentStore/Server/</DocumentStore>
+    <LogFilePath>bin/LogFiles</LogFilePath>
+    <CodeGenWorkingPath>bin/CodeGenNext</CodeGenWorkingPath>
+    <CodeGenOutputPath>bin/CodeGen</CodeGenOutputPath>
+    <CodeGenArchivePath>Backup</CodeGenArchivePath>
+    <Modules>
+      <Module>Kistl.Objects.NHibernateModule, Kistl.Objects.NHibernateImpl</Module>
+      <Module>Kistl.DalProvider.NHibernate.NHibernateProvider, Kistl.DalProvider.NHibernate</Module>
+      <Module>Kistl.Tests.Utilities.PostgreSql.UtilityModule, Kistl.Tests.Utilities.PostgreSql</Module>
+    </Modules>
+  </Server>
+  <SourceFileLocation>
+    <!-- default probe path -->
+    <string>../../../CodeGen/bin/Debug</string>
+    <!-- common libaries -->
+    <string>../Common</string>
+    <!-- Fallback path for local development -->
+    <string>../Server/fallback</string>
+    <!-- All other assemblies -->
+    <string>../Server</string>
+    <string>../Client</string>
+  </SourceFileLocation>
+</KistlConfig>

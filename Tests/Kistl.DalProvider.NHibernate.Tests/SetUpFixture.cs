@@ -47,7 +47,7 @@ namespace Kistl.DalProvider.NHibernate.Tests
 
         protected override string GetConfigFile()
         {
-            return "Kistl.DalProvider.NHibernate.Tests.Config{0}.xml";
+            return "Kistl.DalProvider.NHibernate.Tests.xml";
         }
 
         protected override HostType GetHostType()

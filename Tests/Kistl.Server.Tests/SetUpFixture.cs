@@ -30,9 +30,7 @@ namespace Kistl.Server.Tests
             builder.RegisterModule(new Kistl.API.ApiModule());
             builder.RegisterModule(new Kistl.API.Server.ServerApiModule());
             builder.RegisterModule(new Kistl.Server.ServerModule());
-            builder.RegisterModule(new Kistl.DalProvider.Ef.EfProvider());
             builder.RegisterModule(new Kistl.DalProvider.Memory.MemoryProvider());
-            builder.RegisterModule(new Kistl.Objects.EfModule());
             builder.RegisterModule(new Kistl.Objects.MemoryModule());
 
             // load DB Utility from config
@@ -80,7 +78,7 @@ namespace Kistl.Server.Tests
 
         protected override string GetConfigFile()
         {
-            return "Kistl.Server.Tests.Config{0}.xml";
+            return "Kistl.Server.Tests.xml";
         }
 
         protected override HostType GetHostType()

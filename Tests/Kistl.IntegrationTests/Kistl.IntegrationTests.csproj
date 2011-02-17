@@ -122,18 +122,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Kistl.IntegrationTests.Config.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Kistl.IntegrationTests.ConfigEF_MSSQL.xml">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Kistl.IntegrationTests.ConfigEF_PostgreSQL.xml">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <Content Include="Kistl.IntegrationTests.PartCoverSettings.xml" />
   </ItemGroup>
   <ItemGroup>

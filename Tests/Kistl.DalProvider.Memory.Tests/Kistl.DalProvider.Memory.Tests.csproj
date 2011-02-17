@@ -101,11 +101,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Kistl.DalProvider.Memory.Tests.Config.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.config" />
     <None Include="Kistl.DalProvider.Memory.Tests.nunit" />
   </ItemGroup>

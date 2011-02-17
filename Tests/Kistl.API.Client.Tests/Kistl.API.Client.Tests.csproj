@@ -87,9 +87,6 @@
     <Compile Include="Tests\OneNRelationTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Kistl.API.Client.Tests.Config.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Kistl.API.Client.Tests.PartCoverSettings.xml" />
   </ItemGroup>
   <ItemGroup>

@@ -48,7 +48,7 @@ namespace Kistl.DalProvider.Ef.Tests
 
         protected override string GetConfigFile()
         {
-            return "Kistl.DalProvider.Ef.Tests.Config{0}.xml";
+            return "Kistl.DalProvider.Ef.Tests.xml";
         }
 
         protected override HostType GetHostType()

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<KistlConfig xmlns="http://dasz.at/Kistl/">
+  <ConfigName>ClientObjects DalProvider Test Configuration</ConfigName>  
+  <Client StartClient="false" ThrowErrors="true">
+    <DocumentStore>DocumentStore/Client/</DocumentStore>
+    <Modules>
+      <!-- has to be loaded dynamically -->
+      <Module>Kistl.Objects.ClientModule, Kistl.Objects.ClientImpl</Module>
+    </Modules>
+  </Client>
+  <SourceFileLocation>
+    <!-- default probe path -->
+    <string>../../../CodeGen/bin/Debug</string>
+    <!-- common libaries -->
+    <string>../Common</string>
+    <!-- All other assemblies -->
+    <string>../Client</string>
+  </SourceFileLocation>
+</KistlConfig>

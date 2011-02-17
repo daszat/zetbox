@@ -121,10 +121,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Kistl.Client.Tests.Config.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="Kistl.Client.Tests.PartCoverSettings.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

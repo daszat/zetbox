@@ -118,11 +118,6 @@
     <None Include="Kistl.snk" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Kistl.DalProvider.ClientObjects.Tests.Config.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\Kistl.API.Client\Kistl.API.Client.csproj">
       <Project>{DD11A4F6-24C2-4935-8042-DE49CA6B32C0}</Project>
       <Name>Kistl.API.Client</Name>

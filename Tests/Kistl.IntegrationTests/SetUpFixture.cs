@@ -84,7 +84,7 @@ namespace Kistl.IntegrationTests
 
         protected override string GetConfigFile()
         {
-            return "Kistl.IntegrationTests.Config{0}.xml";
+            return "Kistl.IntegrationTests.xml";
         }
 
         protected override HostType GetHostType()
