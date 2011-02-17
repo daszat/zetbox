@@ -103,6 +103,13 @@ namespace Kistl.App.Extensions
                 }
                 catch (FileLoadException)
                 {
+                    // Microsoft's Version
+                    // don't care
+                    continue;
+                }
+                catch (FileNotFoundException)
+                {
+                    // Mono's Version
                     // don't care
                     continue;
                 }
