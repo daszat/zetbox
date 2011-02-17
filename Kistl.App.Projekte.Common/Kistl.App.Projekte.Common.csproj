@@ -82,6 +82,8 @@
     <Compile Include="KistlBase\ObjectReferencePropertyActions.cs" />
     <Compile Include="KistlBase\RelationActions.cs" />
     <Compile Include="KistlBase\RelationEndActions.cs" />
+    <Compile Include="Parties\OrganizationActions.cs" />
+    <Compile Include="Parties\PersonActions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

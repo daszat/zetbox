@@ -13,6 +13,7 @@ namespace Kistl.App.Extensions
     using Kistl.App.Base;
 
     using Autofac;
+    using System.IO;
 
     /// <summary>
     /// A utility class implementing basic operations and caching needed by all CustomActionsManagers.
@@ -26,7 +27,7 @@ namespace Kistl.App.Extensions
 
         private readonly IDeploymentRestrictor _restrictor;
         private readonly ILifetimeScope _container;
-
+        Dictionary<string, MethodInfo> _reflectedMethods = new Dictionary<string, MethodInfo>();
 
         /// <summary>
         /// Gets or sets the extra suffix which is used to create the implementation class' name.
@@ -65,14 +66,92 @@ namespace Kistl.App.Extensions
                     Log.InfoFormat("Initialising Actions for [{0}] by [{1}]", ExtraSuffix, implType.Name);
                     Log.TraceTotalMemory("Before BaseCustomActionsManager.Init()");
 
-                    // Init
-                    CreateInvokeInfosForObjectClasses(ctx, ExtraSuffix, ImplementationAssemblyName);
+                    ReflectMethods(ctx);
+                    CreateInvokeInfosForObjectClasses(ctx);
+
+                    foreach (var mi in _reflectedMethods.Values)
+                    {
+                        Log.Warn(string.Format("Couldn't find any method for Invocation {0}.{1}", mi.DeclaringType.Name, mi.Name));
+                    }
 
                     Log.TraceTotalMemory("After BaseCustomActionsManager.Init()");
                 }
                 finally
                 {
                     _initImpls[implType] = implType;
+                }
+            }
+        }
+
+        private void ReflectMethods(IReadOnlyKistlContext metaCtx)
+        {
+            if (metaCtx == null) { throw new ArgumentNullException("metaCtx"); }
+
+            // Load all Implementor Types and Invocations
+            foreach (var assembly in metaCtx.GetQuery<Kistl.App.Base.Assembly>())
+            {
+                var restr = assembly.DeploymentRestrictions;
+                if (!_restrictor.IsAcceptableDeploymentRestriction((int)restr))
+                {
+                    continue;
+                }
+
+                System.Reflection.Assembly a;
+                try
+                {
+                    a = System.Reflection.Assembly.Load(assembly.Name);
+                }
+                catch (FileLoadException)
+                {
+                    // don't care
+                    continue;
+                }
+
+                foreach (var t in a.GetTypes())
+                {
+                    if (t.GetCustomAttributes(typeof(Implementor), false).Length != 0)
+                    {
+                        if (!t.Name.EndsWith("Actions"))
+                        {
+                            Log.Warn(string.Format("Type {0} does not end with 'Actions'. Ignoring this type", t.FullName));
+                            continue;
+                        }
+
+                        // Found Implementor Type
+                        foreach (var m in t.GetMethods(BindingFlags.Public | BindingFlags.Static | BindingFlags.Instance | BindingFlags.DeclaredOnly))
+                        {
+                            if (m.GetCustomAttributes(typeof(Invocation), false).Length != 0)
+                            {
+                                var key = string.Format("{0}.{1}", t.FullName, m.Name);
+                                _reflectedMethods[key] = m;
+                            }
+                            else
+                            {
+                                Log.Warn(string.Format("Found public method {0}.{1} which has no Invocation attribute. Ignoring this method", t.Namespace, m.Name));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        /// <summary>
+        /// Initializes caches for the provider of the given Context
+        /// </summary>
+        /// <param name="metaCtx">the context used to access the meta data</param>
+        private void CreateInvokeInfosForObjectClasses(IReadOnlyKistlContext metaCtx)
+        {
+            if (metaCtx == null) { throw new ArgumentNullException("metaCtx"); }
+
+            foreach (ObjectClass objClass in metaCtx.GetQuery<ObjectClass>())
+            {
+                try
+                {
+                    CreateInvokeInfosForAssembly(objClass);
+                }
+                catch (Exception ex)
+                {
+                    Log.Error("Exception in CreateInvokeInfosForObjectClasses", ex);
+                    throw;
                 }
             }
         }
@@ -92,41 +171,17 @@ namespace Kistl.App.Extensions
             clrEvent.AddEventHandler(null, newDelegate);
         }
 
-        /// <summary>
-        /// Initializes caches for the provider of the given Context
-        /// </summary>
-        /// <param name="metaCtx">the context used to access the meta data</param>
-        /// <param name="extraSuffix">an extra suffix to put into the created implementation class names</param>
-        /// <param name="assemblyName">the name of the assembly to load implementation classes from</param>
-        private void CreateInvokeInfosForObjectClasses(IReadOnlyKistlContext metaCtx, string extraSuffix, string assemblyName)
-        {
-            if (metaCtx == null) { throw new ArgumentNullException("metaCtx"); }
-
-            foreach (ObjectClass objClass in metaCtx.GetQuery<ObjectClass>())
-            {
-                try
-                {
-                    CreateInvokeInfosForAssembly(objClass, extraSuffix, assemblyName);
-                }
-                catch (Exception ex)
-                {
-                    Log.Error("Exception in CreateInvokeInfosForObjectClasses", ex);
-                    throw;
-                }
-            }
-        }
-
         #region Walk through objectclass and create InvocationInfos
 
-        private void CreateInvokeInfosForAssembly(ObjectClass objClass, string extraSuffix, string assemblyName)
+        private void CreateInvokeInfosForAssembly(ObjectClass objClass)
         {
             // baseObjClass.GetDataType(); is not possible here, because this
             // Method is currently attaching
             var implTypeName = objClass.Module.Namespace
                 + "."
                 + objClass.Name
-                + extraSuffix
-                + ", " + assemblyName;
+                + ExtraSuffix
+                + ", " + ImplementationAssemblyName;
             var implType = Type.GetType(implTypeName);
             if (implType != null)
             {
@@ -138,50 +193,148 @@ namespace Kistl.App.Extensions
             }
         }
 
-        private void CreateInvokeInfos(ObjectClass objObjClass, Type objType)
+        private EventBasedMethodAttribute FindEventBasedMethodAttribute(Method method, Type implType)
         {
-            if (objType == null)
+            Type[] paramTypes = method.Parameter
+                    .Where(p => !p.IsReturnParameter)
+                    .Select(p => p.GuessParameterType())
+                    .ToArray();
+            MethodInfo methodInfo = implType.FindMethod(method.Name, paramTypes);
+            if (methodInfo == null)
             {
-                throw new ArgumentNullException("objType");
+                Log.WarnFormat(
+                    "Couldn't find method '{0}.{1}' with parameters: {2}\n",
+                    method.ObjectClass.Name,
+                    method.Name,
+                    String.Join(", ", paramTypes.Select(t => t == null ? "null" : t.FullName).ToArray()));
+                return null;
             }
-
-            foreach (ObjectClass baseObjClass in objObjClass.GetObjectHierarchie())
+            else
             {
-                // Method invocations
-                foreach (var mi in baseObjClass.MethodInvocations)
-                {
-                    Type[] paramTypes = mi.Method.Parameter
-                        .Where(p => !p.IsReturnParameter)
-                        .Select(p => p.GuessParameterType())
-                        .ToArray();
-                    MethodInfo methodInfo = objType.FindMethod(mi.Method.Name, paramTypes);
-                    if (methodInfo == null)
-                    {
-                        Log.WarnFormat(
-                            "Couldn't find method '{0}.{1}' with parameters: {2}\n",
-                            mi.InvokeOnObjectClass.Name,
-                            mi.Method.Name,
-                            String.Join(", ", paramTypes.Select(t => t == null ? "null" : t.FullName).ToArray()));
-                    }
-                    else
-                    {
-                        // May be null on Methods without events like server side invocations or "embedded" methods
-                        var attr = (EventBasedMethodAttribute)methodInfo.GetCustomAttributes(typeof(EventBasedMethodAttribute), false).SingleOrDefault();
-                        if(attr != null) CreateInvokeInfo(objType, mi, attr.EventName);
-                    }
-                }
-            }
-            // PropertyInvocations
-            foreach (Property prop in objObjClass.Properties)
-            {
-                foreach (PropertyInvocation pi in prop.Invocations)
-                {
-                    CreateInvokeInfo(objType, pi, "On" + prop.Name + "_" + pi.InvocationType);
-                }
+                // May be null on Methods without events like server side invocatiaons or "embedded" methods
+                return (EventBasedMethodAttribute)methodInfo.GetCustomAttributes(typeof(EventBasedMethodAttribute), false).SingleOrDefault();
             }
         }
 
-        private void CreateInvokeInfo(Type objType, IInvocation invoke, string eventName)
+        private void CreateInvokeInfos(ObjectClass objClass, Type implType)
+        {
+            if (implType == null) throw new ArgumentNullException("implType");
+            if (objClass == null) throw new ArgumentNullException("objClass");
+
+            // Method invocations
+            foreach (var mi in objClass.MethodInvocations)
+            {
+                // May be null on Methods without events like server side invocatiaons or "embedded" methods
+                // or null if not found
+                var attr = FindEventBasedMethodAttribute(mi.Method, implType);
+                if (attr != null) CreateInvokeInfo(implType, mi, attr.EventName);
+            }
+            // PropertyInvocations
+            foreach (Property prop in objClass.Properties)
+            {
+                foreach (PropertyInvocation pi in prop.Invocations)
+                {
+                    CreateInvokeInfo(implType, pi, "On" + prop.Name + "_" + pi.InvocationType);
+                }
+            }
+
+            // Reflected Methods
+            // New style
+            foreach (var method in GetAllMethods(objClass))
+            {
+                string key = string.Format("{0}.{1}Actions.{2}", objClass.Module.Namespace, objClass.Name, method.Name);
+                if (_reflectedMethods.ContainsKey(key))
+                {
+                    var reflectedMethod = _reflectedMethods[key];
+
+                    // May be null on Methods without events like server side invocatiaons or "embedded" methods
+                    // or null if not found
+                    var attr = FindEventBasedMethodAttribute(method, implType);
+                    if (attr != null) CreateInvokeInfo(implType, reflectedMethod, attr.EventName);
+
+                    _reflectedMethods.Remove(key);
+                }
+            }
+
+            // Reflected Properties
+            // New style
+            foreach (Property prop in objClass.Properties)
+            {
+                CreatePropertyInvocations(implType, prop, PropertyInvocationType.Getter);
+                CreatePropertyInvocations(implType, prop, PropertyInvocationType.PreSetter);
+                CreatePropertyInvocations(implType, prop, PropertyInvocationType.PostSetter);
+            }
+        }
+
+        private void CreatePropertyInvocations(Type implType, Property prop, PropertyInvocationType invocationType)
+        {
+            string methodPrefix;
+            switch(invocationType)
+            {
+                case PropertyInvocationType.Getter:
+                    methodPrefix = "get_";
+                    break;
+                case PropertyInvocationType.PreSetter:
+                    methodPrefix = "preSet_";
+                    break;
+                case PropertyInvocationType.PostSetter:
+                    methodPrefix = "postSet_";
+                    break;
+
+                default:
+                    throw new ArgumentOutOfRangeException("type");
+            }
+
+            string key = string.Format("{0}.{1}Actions.{2}{3}", prop.ObjectClass.Module.Namespace, prop.ObjectClass.Name, methodPrefix, prop.Name);
+            if (_reflectedMethods.ContainsKey(key))
+            {
+                var reflectedMethod = _reflectedMethods[key];
+                CreateInvokeInfo(implType, reflectedMethod, "On" + prop.Name + "_" + invocationType);
+                _reflectedMethods.Remove(key);
+            }
+        }
+
+        private List<Method> GetAllMethods(ObjectClass objClass)
+        {
+            if (objClass != null)
+            {
+                var result = GetAllMethods(objClass.BaseObjectClass);
+                objClass.Methods.ForEach<Method>(m => result.Add(m));
+                return result;
+            }
+            else
+            {
+                return new List<Method>();
+            }
+        }
+
+        private void CreateInvokeInfo(Type implType, MethodInfo clrMethod, string eventName)
+        {
+            try
+            {
+                Type t = clrMethod.DeclaringType;
+                if (!t.IsStatic())
+                {
+                    // initialize t's handler
+                    _container.Resolve(t);
+                }
+
+                EventInfo ei = implType.FindEvent(eventName);
+                if (ei == null)
+                {
+                    Log.ErrorFormat("CLR Event {0} not found", eventName);
+                    return;
+                }
+
+                AttachEvents(clrMethod, ei);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Exception in CreateInvokeInfo", ex);
+            }
+        }
+
+        private void CreateInvokeInfo(Type implType, IInvocation invoke, string eventName)
         {
             try
             {
@@ -215,7 +368,7 @@ namespace Kistl.App.Extensions
                     return;
                 }
 
-                EventInfo ei = objType.FindEvent(eventName);
+                EventInfo ei = implType.FindEvent(eventName);
                 if (ei == null)
                 {
                     Log.ErrorFormat("CLR Event {0} not found", eventName);

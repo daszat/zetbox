@@ -27,4 +27,14 @@ namespace Kistl.API
         /// <returns>whether or not the given deployment restriction is acceptable for the environment</returns>
         bool IsAcceptableDeploymentRestriction(int r);
     }
+
+    [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
+    public sealed class Implementor : Attribute
+    {
+    }
+
+    [AttributeUsage(AttributeTargets.Method, Inherited = false, AllowMultiple = false)]
+    public sealed class Invocation : Attribute
+    {
+    }
 }
