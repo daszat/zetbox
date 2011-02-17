@@ -24,5 +24,14 @@ namespace Kistl.App.Base
 
             e.Result = otherEnd.Multiplicity.UpperBound() > 1;
         }
+
+        [Invocation]
+        public static void ToString(ObjectReferenceProperty obj, MethodReturnEventArgs<string> e)
+        {
+            e.Result = "-> " + e.Result;
+
+            // already handled by base OnToString_Property()
+            // ToStringHelper.FixupFloatingObjects(obj, e);
+        }
     }
 }

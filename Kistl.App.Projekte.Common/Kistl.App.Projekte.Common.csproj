@@ -69,22 +69,60 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomCommonActions_KistlBase.Parameter.cs" />
-    <Compile Include="CustomCommonActions_SchemaMigration.cs" />
-    <Compile Include="CustomCommonActions_DocumentManagement.cs" />
-    <Compile Include="CustomCommonActions_KistlBase.DefaultPropertyValues.cs" />
-    <Compile Include="CustomCommonActions_KistlBase.cs" />
+    <Compile Include="KistlBase\BaseParameterActions.cs" />
+    <Compile Include="KistlBase\AssemblyActions.cs" />
+    <Compile Include="KistlBase\ServiceDescriptorActions.cs" />
+    <Compile Include="KistlBase\IdentityActions.cs" />
+    <Compile Include="KistlBase\GroupActions.cs" />
+    <Compile Include="KistlBase\AccessControlActions.cs" />
+    <Compile Include="KistlBase\BlobActions.cs" />
+    <Compile Include="KistlBase\ModuleActions.cs" />
+    <Compile Include="KistlBase\DataTypeActions.cs" />
+    <Compile Include="KistlBase\DecimalParameterActions.cs" />
+    <Compile Include="KistlBase\ToStringHelper.cs" />
+    <Compile Include="Parties\CustomCommonActions_KistlBase.Parameter.cs" />
     <Compile Include="CustomCommonActions_KistlBase.Constraints.cs" />
-    <Compile Include="CustomCommonActions_KistlBase.ToString.cs" />
     <Compile Include="CustomCommonActionsModule.cs" />
+    <Compile Include="DocumentManagement\DocumentActions.cs" />
+    <Compile Include="DocumentManagement\StaticFileActions.cs" />
+    <Compile Include="DocumentManagement\DynamicFileActions.cs" />
+    <Compile Include="DocumentManagement\FileActions.cs" />
     <Compile Include="Gui\ControlKindActions.cs" />
     <Compile Include="Gui\IconActions.cs" />
+    <Compile Include="KistlBase\ClientReadOnlyConstraintActions.cs" />
+    <Compile Include="KistlBase\ConstraintInvocationActions.cs" />
+    <Compile Include="KistlBase\EnumDefaultValueActions.cs" />
+    <Compile Include="KistlBase\CurrentDateTimeDefaultValueActions.cs" />
+    <Compile Include="KistlBase\NewGuidDefaultValueActions.cs" />
+    <Compile Include="KistlBase\PropertyActions.cs" />
+    <Compile Include="KistlBase\EnumerationActions.cs" />
+    <Compile Include="KistlBase\EnumerationEntryActions.cs" />
+    <Compile Include="KistlBase\TypeRefActions.cs" />
+    <Compile Include="KistlBase\ObjectReferencePlaceholderPropertyActions.cs" />
+    <Compile Include="KistlBase\MethodInvocationActions.cs" />
+    <Compile Include="KistlBase\PropertyInvocationActions.cs" />
+    <Compile Include="KistlBase\MethodActions.cs" />
+    <Compile Include="KistlBase\ObjectClassActions.cs" />
+    <Compile Include="KistlBase\ReadOnlyConstraintActions.cs" />
+    <Compile Include="KistlBase\UniqueConstraintActions.cs" />
+    <Compile Include="KistlBase\InvokingConstraintActions.cs" />
+    <Compile Include="KistlBase\InitOnlyConstraintActions.cs" />
+    <Compile Include="KistlBase\ViewReadOnlyConstraintActions.cs" />
+    <Compile Include="KistlBase\IsValidIdentifierConstraintActions.cs" />
+    <Compile Include="KistlBase\MethodInvocationConstraintActions.cs" />
+    <Compile Include="KistlBase\StringRangeConstraintActions.cs" />
+    <Compile Include="KistlBase\IntegerRangeConstraintActions.cs" />
+    <Compile Include="KistlBase\NotNullableConstraintActions.cs" />
     <Compile Include="KistlBase\ObjectReferencePropertyActions.cs" />
     <Compile Include="KistlBase\RelationActions.cs" />
     <Compile Include="KistlBase\RelationEndActions.cs" />
     <Compile Include="Parties\OrganizationActions.cs" />
     <Compile Include="Parties\PersonActions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SchemaMigration\SourceColumnActions.cs" />
+    <Compile Include="SchemaMigration\StagingDatabaseActions.cs" />
+    <Compile Include="SchemaMigration\SourceTableActions.cs" />
+    <Compile Include="SchemaMigration\MigrationProjectActions.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Kistl.API\Kistl.API.csproj">
@@ -104,6 +142,7 @@
   <ItemGroup>
     <None Include="Kistl.snk" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

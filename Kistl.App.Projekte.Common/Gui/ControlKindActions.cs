@@ -1,5 +1,5 @@
 
-namespace Kistl.App.GUI.Common
+namespace Kistl.App.GUI
 {
     using System;
     using System.Collections.Generic;
@@ -11,12 +11,14 @@ namespace Kistl.App.GUI.Common
     /// <summary>
     /// The collected default actions for ControlKind
     /// </summary>
+    [Implementor]
     public static class ControlKindActions
     {
         /// <summary>
         /// Creates the ToString() result for a specified ControlKind.
         /// </summary>
-        public static void OnToString(ControlKind kind, MethodReturnEventArgs<string> e)
+        [Invocation]
+        public static void ToString(ControlKind kind, MethodReturnEventArgs<string> e)
         {
             if (kind == null)
             {

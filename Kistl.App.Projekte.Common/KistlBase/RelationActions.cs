@@ -15,6 +15,51 @@ namespace Kistl.App.Base
     public static class RelationActions
     {
         [Invocation]
+        public static void ToString(Relation obj, MethodReturnEventArgs<string> e)
+        {
+            if (obj.A == null ||
+                obj.B == null ||
+                obj.A.Type == null ||
+                obj.B.Type == null)
+            {
+                e.Result = "incomplete relation:";
+                if (obj.A == null)
+                {
+                    e.Result += " A missing";
+                }
+                else
+                {
+                    e.Result += " A.Type missing";
+                }
+
+                if (obj.B == null)
+                {
+                    e.Result += " B missing";
+                }
+                else
+                {
+                    e.Result += " B.Type missing";
+                }
+            }
+            else
+            {
+                string aDesc = (obj.A.RoleName ?? String.Empty).Equals(obj.A.Type.Name)
+                    ? obj.A.RoleName
+                    : String.Format("{0}({1})", obj.A.RoleName, obj.A.Type.Name);
+
+                string bDesc = (obj.B.RoleName ?? String.Empty).Equals(obj.B.Type.Name)
+                    ? obj.B.RoleName
+                    : String.Format("{0}({1})", obj.B.RoleName, obj.B.Type.Name);
+
+                e.Result = String.Format("Relation: {0} {1} {2}",
+                    aDesc,
+                    obj.Verb,
+                    bDesc);
+            }
+
+            ToStringHelper.FixupFloatingObjectsToString(obj, e);
+        }
+        [Invocation]
         public static void GetOtherEnd(Relation rel, MethodReturnEventArgs<RelationEnd> e, RelationEnd relEnd)
         {
             if (rel.A == relEnd)

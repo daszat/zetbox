@@ -71,7 +71,7 @@ namespace Kistl.App.Extensions
 
                     foreach (var mi in _reflectedMethods.Values)
                     {
-                        Log.Error(string.Format("Couldn't find any method for Invocation {0}.{1}", mi.DeclaringType.Name, mi.Name));
+                        Log.Error(string.Format("Couldn't find any method for Invocation {0}.{1}", mi.DeclaringType.FullName, mi.Name));
                     }
 
                     Log.TraceTotalMemory("After BaseCustomActionsManager.Init()");
@@ -134,7 +134,7 @@ namespace Kistl.App.Extensions
                             }
                             else
                             {
-                                Log.Warn(string.Format("Found public method {0}.{1} which has no Invocation attribute. Ignoring this method", t.Namespace, m.Name));
+                                Log.Warn(string.Format("Found public method {0}.{1} which has no Invocation attribute. Ignoring this method", t.FullName, m.Name));
                             }
                         }
                     }
@@ -358,7 +358,7 @@ namespace Kistl.App.Extensions
                 Type t = Type.GetType(invoke.Implementor.FullName + ", " + invoke.Implementor.Assembly.Name);
                 if (t == null)
                 {
-                    Log.ErrorFormat("Type {0}, {1} not found", invoke.Implementor.FullName, invoke.Implementor.Assembly.Name);
+                    //Log.ErrorFormat("Type {0}, {1} not found", invoke.Implementor.FullName, invoke.Implementor.Assembly.Name);
                     return;
                 }
 
@@ -371,14 +371,14 @@ namespace Kistl.App.Extensions
                 MethodInfo clrMethod = t.GetMethod(invoke.MemberName);
                 if (clrMethod == null)
                 {
-                    Log.ErrorFormat("CLR Method {0} not found", invoke.MemberName);
+                    //Log.ErrorFormat("CLR Method {0} not found", invoke.MemberName);
                     return;
                 }
 
                 EventInfo ei = implType.FindEvent(eventName);
                 if (ei == null)
                 {
-                    Log.ErrorFormat("CLR Event {0} not found", eventName);
+                    //Log.ErrorFormat("CLR Event {0} not found", eventName);
                     return;
                 }
 

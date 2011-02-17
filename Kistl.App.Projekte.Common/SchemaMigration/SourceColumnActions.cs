@@ -1,53 +1,24 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Xml;
-
-using Kistl.API;
-using Kistl.App.Base;
-
 namespace ZBox.App.SchemaMigration
 {
-    public static class CustomCommonActions_SchemaMigration
-    {
-        public static void OnToString_MigrationProject(ZBox.App.SchemaMigration.MigrationProject obj, MethodReturnEventArgs<System.String> e)
-        {
-            e.Result = !string.IsNullOrEmpty(obj.Description) ? obj.Description : "new Migration Project";
-        }
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using Kistl.API;
+    using Kistl.App.Base;
 
-        public static void OnToString_SourceColumn(ZBox.App.SchemaMigration.SourceColumn obj, MethodReturnEventArgs<System.String> e)
+    [Implementor]
+    public static class SourceColumnActions
+    {
+        [Invocation]
+        public static void ToString(ZBox.App.SchemaMigration.SourceColumn obj, MethodReturnEventArgs<System.String> e)
         {
             e.Result = (obj.SourceTable != null ? obj.SourceTable.Name : null) ?? string.Empty;
             e.Result += "." + (!string.IsNullOrEmpty(obj.Name) ? obj.Name : "new Source Column");
         }
 
-        public static void OnToString_SourceTable(ZBox.App.SchemaMigration.SourceTable obj, MethodReturnEventArgs<System.String> e)
-        {
-            e.Result = "[" + ((obj.StagingDatabase != null ? obj.StagingDatabase.Description : null) ?? string.Empty) + "]";
-            e.Result += "." + (!string.IsNullOrEmpty(obj.Name) ? obj.Name : "new Source Table");
-        }
-
-        public static void OnToString_StagingDatabase(ZBox.App.SchemaMigration.StagingDatabase obj, MethodReturnEventArgs<System.String> e)
-        {
-            e.Result = obj.Description;
-        }
-
-        public static void OnCreateObjectClass_SourceTable(ZBox.App.SchemaMigration.SourceTable obj)
-        {
-            if (obj.StagingDatabase == null) throw new InvalidOperationException("Not attached to a staging database");
-            if (obj.StagingDatabase.MigrationProject == null) throw new InvalidOperationException("Not attached to a migration project");
-            if (obj.StagingDatabase.MigrationProject.DestinationModule == null) throw new InvalidOperationException("No destination module provided");
-            if (obj.DestinationObjectClass != null) throw new InvalidOperationException("there is already a destination object class");
-
-            obj.DestinationObjectClass = obj.Context.Create<ObjectClass>();
-            obj.DestinationObjectClass.Name = obj.Name;
-            obj.DestinationObjectClass.Module = obj.StagingDatabase.MigrationProject.DestinationModule;
-            obj.DestinationObjectClass.Description = obj.Description;
-        }
-
-        public static void OnCreateProperty_SourceColumn(ZBox.App.SchemaMigration.SourceColumn obj)
+        [Invocation]
+        public static void CreateProperty(ZBox.App.SchemaMigration.SourceColumn obj)
         {
             if (obj.SourceTable == null) throw new InvalidOperationException("Not attached to a source table");
             if (obj.SourceTable.DestinationObjectClass == null) throw new InvalidOperationException("Source table has no destination object class");
@@ -58,7 +29,7 @@ namespace ZBox.App.SchemaMigration
 
             Property p = null;
 
-            switch(obj.DbType)
+            switch (obj.DbType)
             {
                 case ColumnType.AnsiString:
                 case ColumnType.AnsiStringFixedLength:
@@ -85,7 +56,7 @@ namespace ZBox.App.SchemaMigration
                 case ColumnType.Double:
                     p = obj.Context.Create<DoubleProperty>();
                     break;
-                
+
                 case ColumnType.Byte:
                 case ColumnType.Int16:
                 case ColumnType.Int32:
@@ -128,6 +99,5 @@ namespace ZBox.App.SchemaMigration
             p.ObjectClass = obj.SourceTable.DestinationObjectClass;
             p.Module = obj.SourceTable.StagingDatabase.MigrationProject.DestinationModule;
         }
-
     }
 }
