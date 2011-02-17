@@ -11,7 +11,7 @@ using Kistl.Generator.Extensions;
 
 namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\Constructors.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/ObjectClasses/Constructors.cst")]
     public partial class Constructors : Kistl.Generator.ResourceTemplate
     {
 		protected IKistlContext ctx;
@@ -41,7 +41,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
 
         public override void Generate()
         {
-#line 19 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\Constructors.cst"
+#line 19 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/ObjectClasses/Constructors.cst"
 this.WriteObjects("        public ",  className , "()\r\n");
 this.WriteObjects("            : this(null)\r\n");
 this.WriteObjects("        {\r\n");
@@ -55,34 +55,34 @@ this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("        /// <summary>Create a instance, wrapping the specified proxy</summary>\r\n");
 this.WriteObjects("        public ",  className , "(Func<IFrozenContext> lazyCtx, ",  interfaceName , "Proxy proxy)\r\n");
-#line 32 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\Constructors.cst"
+#line 32 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/ObjectClasses/Constructors.cst"
 if (String.IsNullOrEmpty(baseClassName)) { 
-#line 33 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\Constructors.cst"
+#line 33 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/ObjectClasses/Constructors.cst"
 this.WriteObjects("            : base(lazyCtx) // do not pass proxy to base data object\r\n");
-#line 34 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\Constructors.cst"
+#line 34 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/ObjectClasses/Constructors.cst"
 } else { 
-#line 35 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\Constructors.cst"
+#line 35 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/ObjectClasses/Constructors.cst"
 this.WriteObjects("            : base(lazyCtx, proxy) // pass proxy to parent\r\n");
-#line 36 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\Constructors.cst"
+#line 36 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/ObjectClasses/Constructors.cst"
 } 
-#line 37 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\Constructors.cst"
+#line 37 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/ObjectClasses/Constructors.cst"
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            this.Proxy = proxy;\r\n");
-#line 39 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\Constructors.cst"
+#line 39 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/ObjectClasses/Constructors.cst"
 ApplyCompoundObjectPropertyInitialisers(); 
-#line 40 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\Constructors.cst"
+#line 40 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/ObjectClasses/Constructors.cst"
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("        /// <summary>the NHibernate proxy of the represented entity</summary>\r\n");
-#line 43 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\Constructors.cst"
+#line 43 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/ObjectClasses/Constructors.cst"
 if (String.IsNullOrEmpty(baseClassName)) { 
-#line 44 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\Constructors.cst"
+#line 44 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/ObjectClasses/Constructors.cst"
 this.WriteObjects("        internal readonly ",  interfaceName , "Proxy Proxy;\r\n");
-#line 45 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\Constructors.cst"
+#line 45 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/ObjectClasses/Constructors.cst"
 } else { 
-#line 46 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\Constructors.cst"
+#line 46 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/ObjectClasses/Constructors.cst"
 this.WriteObjects("        internal new readonly ",  interfaceName , "Proxy Proxy;\r\n");
-#line 47 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\Constructors.cst"
+#line 47 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/ObjectClasses/Constructors.cst"
 } 
 
         }

@@ -10,7 +10,7 @@ using Kistl.Generator.Extensions;
 
 namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ReloadReferences.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/ObjectClasses/ReloadReferences.cst")]
     public partial class ReloadReferences : Kistl.Generator.ResourceTemplate
     {
 		protected IKistlContext ctx;
@@ -34,7 +34,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
 
         public override void Generate()
         {
-#line 15 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ReloadReferences.cst"
+#line 15 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/ObjectClasses/ReloadReferences.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        public override void ReloadReferences()\r\n");
 this.WriteObjects("        {\r\n");
@@ -44,7 +44,7 @@ this.WriteObjects("            //if (this.ObjectState == DataObjectState.Deleted
 this.WriteObjects("            base.ReloadReferences();\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("            // fix direct object references\r\n");
-#line 25 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ReloadReferences.cst"
+#line 25 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/ObjectClasses/ReloadReferences.cst"
 // TODO: Use only 1 side relation ends
     foreach(var prop in cls.Properties.OfType<ObjectReferenceProperty>()
         .Where(orp => !orp.IsList())
@@ -54,7 +54,7 @@ this.WriteObjects("            // fix direct object references\r\n");
         ReloadOneReference.Call(Host, ctx, prop);
     }
 
-#line 34 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ReloadReferences.cst"
+#line 34 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/ObjectClasses/ReloadReferences.cst"
 this.WriteObjects("        }\r\n");
 
         }

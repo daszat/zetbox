@@ -6,7 +6,7 @@ using Kistl.API;
 
 namespace Kistl.Generator.Templates
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Generator\Templates\TypeChecker.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/TypeChecker.cst")]
     public partial class TypeChecker : Kistl.Generator.ResourceTemplate
     {
 		protected IKistlContext ctx;
@@ -30,7 +30,7 @@ namespace Kistl.Generator.Templates
 
         public override void Generate()
         {
-#line 11 "P:\Kistl\Kistl.Generator\Templates\TypeChecker.cst"
+#line 11 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/TypeChecker.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("    internal sealed class ",  shortName , "ImplementationTypeChecker\r\n");
 this.WriteObjects("        : Kistl.API.BaseImplementationTypeChecker, I",  shortName , "ImplementationTypeChecker\r\n");

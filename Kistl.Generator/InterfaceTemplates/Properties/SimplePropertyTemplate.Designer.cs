@@ -8,7 +8,7 @@ using Kistl.Generator.Extensions;
 
 namespace Kistl.Generator.InterfaceTemplates.Properties
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Generator\InterfaceTemplates\Properties\SimplePropertyTemplate.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"/srv/CCNet/Projects/zbox/repo/Kistl.Generator/InterfaceTemplates/Properties/SimplePropertyTemplate.cst")]
     public partial class SimplePropertyTemplate : Kistl.Generator.ResourceTemplate
     {
 		protected IKistlContext ctx;
@@ -34,23 +34,23 @@ namespace Kistl.Generator.InterfaceTemplates.Properties
 
         public override void Generate()
         {
-#line 15 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Properties\SimplePropertyTemplate.cst"
+#line 15 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/InterfaceTemplates/Properties/SimplePropertyTemplate.cst"
 string name = prop.Name;
     string type = prop.ReferencedTypeAsCSharp();
 
-#line 18 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Properties\SimplePropertyTemplate.cst"
+#line 18 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/InterfaceTemplates/Properties/SimplePropertyTemplate.cst"
 this.WriteObjects("        ",  type , " ",  name , " {\r\n");
 this.WriteObjects("            get;\r\n");
-#line 21 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Properties\SimplePropertyTemplate.cst"
+#line 21 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/InterfaceTemplates/Properties/SimplePropertyTemplate.cst"
 if (!isReadonly)
     {
 
-#line 24 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Properties\SimplePropertyTemplate.cst"
+#line 24 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/InterfaceTemplates/Properties/SimplePropertyTemplate.cst"
 this.WriteObjects("            set;\r\n");
-#line 26 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Properties\SimplePropertyTemplate.cst"
+#line 26 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/InterfaceTemplates/Properties/SimplePropertyTemplate.cst"
 }
 
-#line 28 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Properties\SimplePropertyTemplate.cst"
+#line 28 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/InterfaceTemplates/Properties/SimplePropertyTemplate.cst"
 this.WriteObjects("        }\r\n");
 
         }

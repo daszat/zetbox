@@ -4,7 +4,7 @@ using Kistl.API.Server;
 
 namespace Kistl.Generator.Templates
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/ProjectFile.cst")]
     public partial class ProjectFile : Kistl.Generator.ResourceTemplate
     {
 		protected Kistl.API.IKistlContext ctx;
@@ -32,7 +32,7 @@ namespace Kistl.Generator.Templates
 
         public override void Generate()
         {
-#line 11 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 11 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/ProjectFile.cst"
 this.WriteObjects("<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n");
 this.WriteObjects("<Project ToolsVersion=\"4.0\" DefaultTargets=\"Build\" xmlns=\"http://schemas.microsoft.com/developer/msbuild/2003\">\r\n");
 this.WriteObjects("  <PropertyGroup>\r\n");
@@ -90,9 +90,9 @@ this.WriteObjects("    <KistlAPIPath>..\\bin\\Debug\\bin\\</KistlAPIPath>\r\n");
 this.WriteObjects("  </PropertyGroup>\r\n");
 this.WriteObjects("  <!-- Has to come in a separate group to receive correct $(OutputPath) -->\r\n");
 this.WriteObjects("  <PropertyGroup>\r\n");
-#line 68 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 68 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/ProjectFile.cst"
 ApplyAdditionalProperties(); 
-#line 69 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 69 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/ProjectFile.cst"
 this.WriteObjects("  </PropertyGroup>\r\n");
 this.WriteObjects("  <ItemGroup>\r\n");
 this.WriteObjects("    <AdditionalReferencePath Include=\"$(OutputPath)\" />\r\n");
@@ -118,25 +118,25 @@ this.WriteObjects("    </Reference>\r\n");
 this.WriteObjects("    <Reference Include=\"WindowsBase\">\r\n");
 this.WriteObjects("      <RequiredTargetFramework>3.5</RequiredTargetFramework>\r\n");
 this.WriteObjects("    </Reference>\r\n");
-#line 94 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 94 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/ProjectFile.cst"
 ApplyAdditionalReferences(); 
-#line 95 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 95 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/ProjectFile.cst"
 this.WriteObjects("  </ItemGroup>\r\n");
 this.WriteObjects("  <ItemGroup>\r\n");
-#line 97 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 97 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/ProjectFile.cst"
 foreach (var name in fileNames) { 
-#line 98 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 98 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/ProjectFile.cst"
 this.WriteObjects("    <Compile Include=\"",  name , "\" />\r\n");
-#line 99 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 99 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/ProjectFile.cst"
 } 
-#line 100 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 100 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/ProjectFile.cst"
 this.WriteObjects("  </ItemGroup>\r\n");
 this.WriteObjects("  <ItemGroup>\r\n");
 this.WriteObjects("    <None Include=\"Kistl.Objects.snk\" />\r\n");
 this.WriteObjects("  </ItemGroup>\r\n");
-#line 104 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 104 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/ProjectFile.cst"
 ApplyAdditionalItemGroups(); 
-#line 105 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 105 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/ProjectFile.cst"
 this.WriteObjects("  <Import Project=\"$(MSBuildBinPath)\\Microsoft.CSharp.targets\" />\r\n");
 this.WriteObjects("  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. \r\n");
 this.WriteObjects("       Other similar extension points exist, see Microsoft.Common.targets.\r\n");
@@ -145,9 +145,9 @@ this.WriteObjects("  </Target>\r\n");
 this.WriteObjects("  -->\r\n");
 this.WriteObjects("  <Target Name=\"AfterBuild\">\r\n");
 this.WriteObjects("  </Target>\r\n");
-#line 113 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 113 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/ProjectFile.cst"
 ApplyAdditionalPropertyGroups(); 
-#line 114 "P:\Kistl\Kistl.Generator\Templates\ProjectFile.cst"
+#line 114 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/ProjectFile.cst"
 this.WriteObjects("</Project>\r\n");
 
         }

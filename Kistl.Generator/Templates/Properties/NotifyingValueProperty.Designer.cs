@@ -8,7 +8,7 @@ using Kistl.Generator.Extensions;
 
 namespace Kistl.Generator.Templates.Properties
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Generator\Templates\Properties\NotifyingValueProperty.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/Properties/NotifyingValueProperty.cst")]
     public partial class NotifyingValueProperty : Kistl.Generator.MemberTemplate
     {
 		protected IKistlContext ctx;
@@ -40,15 +40,15 @@ namespace Kistl.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 17 "P:\Kistl\Kistl.Generator\Templates\Properties\NotifyingValueProperty.cst"
+#line 17 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/Properties/NotifyingValueProperty.cst"
 this.WriteObjects("        // BEGIN ",  this.GetType() , "\r\n");
-#line 20 "P:\Kistl\Kistl.Generator\Templates\Properties\NotifyingValueProperty.cst"
+#line 20 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/Properties/NotifyingValueProperty.cst"
 ApplyRequisitesTemplate();
 
     ApplyAttributesTemplate();
 
 
-#line 25 "P:\Kistl\Kistl.Generator\Templates\Properties\NotifyingValueProperty.cst"
+#line 25 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/Properties/NotifyingValueProperty.cst"
 this.WriteObjects("        ",  GetModifiers() , " ",  type , " ",  name , "\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            get\r\n");
@@ -56,38 +56,38 @@ this.WriteObjects("            {\r\n");
 this.WriteObjects("                // create local variable to create single point of return\r\n");
 this.WriteObjects("                // for the benefit of down-stream templates\r\n");
 this.WriteObjects("                var __result = ",  backingName , ";\r\n");
-#line 32 "P:\Kistl\Kistl.Generator\Templates\Properties\NotifyingValueProperty.cst"
+#line 32 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/Properties/NotifyingValueProperty.cst"
 ApplyOnGetTemplate(); 
-#line 33 "P:\Kistl\Kistl.Generator\Templates\Properties\NotifyingValueProperty.cst"
+#line 33 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/Properties/NotifyingValueProperty.cst"
 this.WriteObjects("                return __result;\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("            set\r\n");
 this.WriteObjects("            {\r\n");
 this.WriteObjects("                if (this.IsReadonly) throw new ReadOnlyObjectException();\r\n");
-#line 38 "P:\Kistl\Kistl.Generator\Templates\Properties\NotifyingValueProperty.cst"
+#line 38 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/Properties/NotifyingValueProperty.cst"
 ApplyOnAllSetTemplate(); 
-#line 39 "P:\Kistl\Kistl.Generator\Templates\Properties\NotifyingValueProperty.cst"
+#line 39 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/Properties/NotifyingValueProperty.cst"
 this.WriteObjects("                if (",  backingName , " != value)\r\n");
 this.WriteObjects("                {\r\n");
 this.WriteObjects("                    var __oldValue = ",  backingName , ";\r\n");
 this.WriteObjects("                    var __newValue = value;\r\n");
-#line 43 "P:\Kistl\Kistl.Generator\Templates\Properties\NotifyingValueProperty.cst"
+#line 43 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/Properties/NotifyingValueProperty.cst"
 ApplyPreSetTemplate(); 
-#line 44 "P:\Kistl\Kistl.Generator\Templates\Properties\NotifyingValueProperty.cst"
+#line 44 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/Properties/NotifyingValueProperty.cst"
 this.WriteObjects("                    NotifyPropertyChanging(\"",  name , "\", __oldValue, __newValue);\r\n");
 this.WriteObjects("                    ",  backingName , " = __newValue;\r\n");
 this.WriteObjects("                    NotifyPropertyChanged(\"",  name , "\", __oldValue, __newValue);\r\n");
-#line 47 "P:\Kistl\Kistl.Generator\Templates\Properties\NotifyingValueProperty.cst"
+#line 47 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/Properties/NotifyingValueProperty.cst"
 ApplyPostSetTemplate(); 
-#line 48 "P:\Kistl\Kistl.Generator\Templates\Properties\NotifyingValueProperty.cst"
+#line 48 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/Properties/NotifyingValueProperty.cst"
 this.WriteObjects("                }\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
-#line 51 "P:\Kistl\Kistl.Generator\Templates\Properties\NotifyingValueProperty.cst"
+#line 51 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/Properties/NotifyingValueProperty.cst"
 ApplyBackingStoreDefinition(); 
-#line 52 "P:\Kistl\Kistl.Generator\Templates\Properties\NotifyingValueProperty.cst"
+#line 52 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/Properties/NotifyingValueProperty.cst"
 AddSerialization(serializationList, name); 
-#line 53 "P:\Kistl\Kistl.Generator\Templates\Properties\NotifyingValueProperty.cst"
+#line 53 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/Properties/NotifyingValueProperty.cst"
 this.WriteObjects("        // END ",  this.GetType() , "\r\n");
 
         }

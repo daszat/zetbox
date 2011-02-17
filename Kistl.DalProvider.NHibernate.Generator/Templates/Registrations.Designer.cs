@@ -6,7 +6,7 @@ using Kistl.API;
 
 namespace Kistl.DalProvider.NHibernate.Generator.Templates
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Registrations.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Registrations.cst")]
     public partial class Registrations : Kistl.Generator.Templates.Registrations
     {
 
@@ -26,11 +26,11 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates
 
         public override void Generate()
         {
-#line 9 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Registrations.cst"
+#line 9 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Registrations.cst"
 this.WriteObjects("\r\n");
-#line 10 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Registrations.cst"
+#line 10 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Registrations.cst"
 base.Generate(); 
-#line 11 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Registrations.cst"
+#line 11 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Registrations.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("            builder\r\n");
 this.WriteObjects("                .Register<ISessionFactory>(\r\n");

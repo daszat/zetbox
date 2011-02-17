@@ -11,7 +11,7 @@ using Kistl.Generator.Extensions;
 
 namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Properties/ProxyProperty.cst")]
     public partial class ProxyProperty : Kistl.Generator.MemberTemplate
     {
 		protected IKistlContext ctx;
@@ -61,7 +61,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 29 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
+#line 29 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Properties/ProxyProperty.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        // BEGIN ",  this.GetType() , "\r\n");
 this.WriteObjects("        ",  GetModifiers() , " ",  propertyType , " ",  propertyName , "\r\n");
@@ -70,48 +70,48 @@ this.WriteObjects("            get\r\n");
 this.WriteObjects("            {\r\n");
 this.WriteObjects("                // create local variable to create single point of return\r\n");
 this.WriteObjects("                // for the benefit of down-stream templates\r\n");
-#line 37 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
+#line 37 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Properties/ProxyProperty.cst"
 if (hasDefaultValue) { 
-#line 38 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
+#line 38 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Properties/ProxyProperty.cst"
 this.WriteObjects("                var __result = Fetch",  propertyName , "OrDefault();\r\n");
-#line 39 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
+#line 39 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Properties/ProxyProperty.cst"
 } else { 
-#line 40 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
+#line 40 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Properties/ProxyProperty.cst"
 this.WriteObjects("                var __result = Proxy.",  propertyName , ";\r\n");
-#line 41 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
+#line 41 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Properties/ProxyProperty.cst"
 } 
-#line 42 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
+#line 42 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Properties/ProxyProperty.cst"
 ApplyOnGetTemplate(); 
-#line 43 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
+#line 43 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Properties/ProxyProperty.cst"
 this.WriteObjects("                return __result;\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("            set\r\n");
 this.WriteObjects("            {\r\n");
 this.WriteObjects("                if (this.IsReadonly) throw new ReadOnlyObjectException();\r\n");
-#line 48 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
+#line 48 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Properties/ProxyProperty.cst"
 ApplyOnAllSetTemplate(); 
-#line 49 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
+#line 49 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Properties/ProxyProperty.cst"
 this.WriteObjects("                if (Proxy.",  propertyName , " != value)\r\n");
 this.WriteObjects("                {\r\n");
 this.WriteObjects("                    var __oldValue = Proxy.",  propertyName , ";\r\n");
 this.WriteObjects("                    var __newValue = value;\r\n");
-#line 53 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
+#line 53 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Properties/ProxyProperty.cst"
 ApplyPreSetTemplate(); 
-#line 54 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
+#line 54 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Properties/ProxyProperty.cst"
 this.WriteObjects("                    NotifyPropertyChanging(\"",  propertyName , "\", __oldValue, __newValue);\r\n");
 this.WriteObjects("                    Proxy.",  propertyName , " = __newValue;\r\n");
 this.WriteObjects("                    NotifyPropertyChanged(\"",  propertyName , "\", __oldValue, __newValue);\r\n");
-#line 57 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
+#line 57 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Properties/ProxyProperty.cst"
 ApplyPostSetTemplate(); 
-#line 58 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
+#line 58 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Properties/ProxyProperty.cst"
 this.WriteObjects("                }\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
-#line 61 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
+#line 61 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Properties/ProxyProperty.cst"
 ApplyTailTemplate(); 
-#line 62 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
+#line 62 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Properties/ProxyProperty.cst"
 AddSerialization(serializationList, propertyName, "Proxy." + propertyName); 
-#line 63 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"
+#line 63 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Properties/ProxyProperty.cst"
 this.WriteObjects("        // END ",  this.GetType() , "\r\n");
 
         }

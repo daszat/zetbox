@@ -4,7 +4,7 @@ using Kistl.API;
 
 namespace Kistl.Generator.Templates.Properties
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Generator\Templates\Properties\CalculatedProperty.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/Properties/CalculatedProperty.cst")]
     public partial class CalculatedProperty : Kistl.Generator.MemberTemplate
     {
 		protected IKistlContext ctx;
@@ -34,7 +34,7 @@ namespace Kistl.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 12 "P:\Kistl\Kistl.Generator\Templates\Properties\CalculatedProperty.cst"
+#line 12 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/Properties/CalculatedProperty.cst"
 this.WriteObjects("        // BEGIN ",  this.GetType() , "\r\n");
 this.WriteObjects("		",  GetModifiers() , " ",  referencedType , " ",  propertyName , "\r\n");
 this.WriteObjects("		{\r\n");

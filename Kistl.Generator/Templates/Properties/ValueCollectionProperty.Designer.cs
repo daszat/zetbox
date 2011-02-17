@@ -10,7 +10,7 @@ using Kistl.Generator.Extensions;
 
 namespace Kistl.Generator.Templates.Properties
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Generator\Templates\Properties\ValueCollectionProperty.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/Properties/ValueCollectionProperty.cst")]
     public partial class ValueCollectionProperty : Kistl.Generator.MemberTemplate
     {
 		protected IKistlContext ctx;
@@ -56,11 +56,11 @@ namespace Kistl.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 28 "P:\Kistl\Kistl.Generator\Templates\Properties\ValueCollectionProperty.cst"
+#line 28 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/Properties/ValueCollectionProperty.cst"
 AddSerialization(serializationList, underlyingCollectionName);
 
 
-#line 31 "P:\Kistl\Kistl.Generator\Templates\Properties\ValueCollectionProperty.cst"
+#line 31 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/Properties/ValueCollectionProperty.cst"
 this.WriteObjects("		// ",  this.GetType() , "\r\n");
 this.WriteObjects("		",  GetModifiers() , " ",  exposedCollectionInterface , "<",  referencedType , "> ",  name , "\r\n");
 this.WriteObjects("		{\r\n");

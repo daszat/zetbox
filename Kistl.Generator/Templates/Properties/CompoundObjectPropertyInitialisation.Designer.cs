@@ -9,7 +9,7 @@ using Kistl.Generator.Extensions;
 
 namespace Kistl.Generator.Templates.Properties
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Generator\Templates\Properties\CompoundObjectPropertyInitialisation.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/Properties/CompoundObjectPropertyInitialisation.cst")]
     public partial class CompoundObjectPropertyInitialisation : Kistl.Generator.ResourceTemplate
     {
 		protected IKistlContext ctx;
@@ -39,7 +39,7 @@ namespace Kistl.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 17 "P:\Kistl\Kistl.Generator\Templates\Properties\CompoundObjectPropertyInitialisation.cst"
+#line 17 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/Properties/CompoundObjectPropertyInitialisation.cst"
 this.WriteObjects("            ",  backingStoreName , " = new ",  implementationTypeName , "(",  isNull ? "true": "false" , ", this, \"",  propertyName , "\");\r\n");
 
         }

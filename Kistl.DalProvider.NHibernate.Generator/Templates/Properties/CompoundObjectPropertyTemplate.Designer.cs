@@ -9,7 +9,7 @@ using Kistl.Generator.Extensions;
 
 namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Properties/CompoundObjectPropertyTemplate.cst")]
     public partial class CompoundObjectPropertyTemplate : Kistl.Generator.MemberTemplate
     {
 		protected IKistlContext ctx;
@@ -47,12 +47,12 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 21 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 21 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Properties/CompoundObjectPropertyTemplate.cst"
 this.WriteObjects("        // BEGIN ",  this.GetType() , "\r\n");
-#line 23 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 23 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Properties/CompoundObjectPropertyTemplate.cst"
 backingStoreName = "this.Proxy." + propName;
 
-#line 25 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 25 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Properties/CompoundObjectPropertyTemplate.cst"
 this.WriteObjects("        // implement the user-visible interface\r\n");
 this.WriteObjects("        ",  GetModifiers() , " ",  coType , " ",  propName , "\r\n");
 this.WriteObjects("        {\r\n");
@@ -67,14 +67,14 @@ this.WriteObjects("            get { return ",  backingStoreName , "; }\r\n");
 this.WriteObjects("            set\r\n");
 this.WriteObjects("            {\r\n");
 this.WriteObjects("                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();\r\n");
-#line 39 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 39 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Properties/CompoundObjectPropertyTemplate.cst"
 if (!isNullable) { 
-#line 40 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 40 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Properties/CompoundObjectPropertyTemplate.cst"
 this.WriteObjects("                if (value == null)\r\n");
 this.WriteObjects("                    throw new ArgumentNullException(\"value\");\r\n");
-#line 42 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 42 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Properties/CompoundObjectPropertyTemplate.cst"
 } 
-#line 43 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 43 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Properties/CompoundObjectPropertyTemplate.cst"
 this.WriteObjects("                if (!object.Equals(",  backingStoreName , ", value))\r\n");
 this.WriteObjects("                {\r\n");
 this.WriteObjects("					var __oldValue = ",  backingStoreName , ";\r\n");
@@ -102,10 +102,10 @@ this.WriteObjects("					NotifyPropertyChanged(\"",  propName , "\", __oldValue, 
 this.WriteObjects("				}\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
-#line 71 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 71 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Properties/CompoundObjectPropertyTemplate.cst"
 AddSerialization(serializationList, coType, propName, coImplementationType, backingPropertyName);
 
-#line 73 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 73 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Properties/CompoundObjectPropertyTemplate.cst"
 this.WriteObjects("        // END ",  this.GetType() , "");
 
         }

@@ -11,7 +11,7 @@ using Kistl.Generator.Extensions;
 
 namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\RightsClass.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/ObjectClasses/RightsClass.cst")]
     public partial class RightsClass : Kistl.Generator.ResourceTemplate
     {
 		protected IKistlContext ctx;
@@ -35,7 +35,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
 
         public override void Generate()
         {
-#line 16 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\RightsClass.cst"
+#line 16 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/ObjectClasses/RightsClass.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        public class ",  className , "",  ImplementationSuffix , "\r\n");
 this.WriteObjects("        {\r\n");

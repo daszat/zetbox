@@ -9,7 +9,7 @@ using Kistl.Generator.Extensions;
 
 namespace Kistl.Generator.Templates.Properties
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Generator\Templates\Properties\DelegatingProperty.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/Properties/DelegatingProperty.cst")]
     public partial class DelegatingProperty : Kistl.Generator.MemberTemplate
     {
 		protected IKistlContext ctx;
@@ -39,7 +39,7 @@ namespace Kistl.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 17 "P:\Kistl\Kistl.Generator\Templates\Properties\DelegatingProperty.cst"
+#line 17 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/Properties/DelegatingProperty.cst"
 this.WriteObjects("        // BEGIN ",  this.GetType() , "\r\n");
 this.WriteObjects("        ",  GetModifiers() , " ",  presentedType , " ",  propName , "\r\n");
 this.WriteObjects("        {\r\n");

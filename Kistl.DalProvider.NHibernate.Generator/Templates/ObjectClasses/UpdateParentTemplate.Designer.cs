@@ -12,7 +12,7 @@ using Kistl.Generator.Extensions;
 
 namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\UpdateParentTemplate.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/ObjectClasses/UpdateParentTemplate.cst")]
     public partial class UpdateParentTemplate : Kistl.Generator.ResourceTemplate
     {
 		protected IKistlContext ctx;
@@ -36,30 +36,30 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
 
         public override void Generate()
         {
-#line 17 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\UpdateParentTemplate.cst"
+#line 17 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/ObjectClasses/UpdateParentTemplate.cst"
 this.WriteObjects("\r\n");
-#line 19 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\UpdateParentTemplate.cst"
+#line 19 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/ObjectClasses/UpdateParentTemplate.cst"
 if (props.Count > 0)
 {
 
-#line 22 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\UpdateParentTemplate.cst"
+#line 22 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/ObjectClasses/UpdateParentTemplate.cst"
 this.WriteObjects("        public override void UpdateParent(string propertyName, int? id)\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            switch(propertyName)\r\n");
 this.WriteObjects("            {\r\n");
-#line 27 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\UpdateParentTemplate.cst"
+#line 27 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/ObjectClasses/UpdateParentTemplate.cst"
 foreach(var prop in props)
     {
         ApplyCase(prop);
     }
 
-#line 32 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\UpdateParentTemplate.cst"
+#line 32 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/ObjectClasses/UpdateParentTemplate.cst"
 this.WriteObjects("                default:\r\n");
 this.WriteObjects("                    base.UpdateParent(propertyName, id);\r\n");
 this.WriteObjects("                    break;\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
-#line 38 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\UpdateParentTemplate.cst"
+#line 38 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/ObjectClasses/UpdateParentTemplate.cst"
 }
 
 

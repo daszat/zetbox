@@ -12,7 +12,7 @@ using Kistl.Generator.Extensions;
 
 namespace Kistl.Generator.Templates.ObjectClasses
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Generator\Templates\ObjectClasses\UpdateParentTemplate.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/ObjectClasses/UpdateParentTemplate.cst")]
     public partial class UpdateParentTemplate : Kistl.Generator.ResourceTemplate
     {
 		protected IKistlContext ctx;
@@ -36,32 +36,32 @@ namespace Kistl.Generator.Templates.ObjectClasses
 
         public override void Generate()
         {
-#line 17 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\UpdateParentTemplate.cst"
+#line 17 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/ObjectClasses/UpdateParentTemplate.cst"
 this.WriteObjects("\r\n");
-#line 19 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\UpdateParentTemplate.cst"
+#line 19 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/ObjectClasses/UpdateParentTemplate.cst"
 if (props.Count > 0)
 {
 
-#line 22 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\UpdateParentTemplate.cst"
+#line 22 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/ObjectClasses/UpdateParentTemplate.cst"
 this.WriteObjects("		public override void UpdateParent(string propertyName, int? id)\r\n");
 this.WriteObjects("		{\r\n");
 this.WriteObjects("			int? __oldValue, __newValue = id;\r\n");
 this.WriteObjects("			\r\n");
 this.WriteObjects("			switch(propertyName)\r\n");
 this.WriteObjects("			{\r\n");
-#line 29 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\UpdateParentTemplate.cst"
+#line 29 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/ObjectClasses/UpdateParentTemplate.cst"
 foreach(var prop in props)
 	{
 		ApplyCase(prop);
 	}
 
-#line 34 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\UpdateParentTemplate.cst"
+#line 34 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/ObjectClasses/UpdateParentTemplate.cst"
 this.WriteObjects("				default:\r\n");
 this.WriteObjects("					base.UpdateParent(propertyName, id);\r\n");
 this.WriteObjects("					break;\r\n");
 this.WriteObjects("			}\r\n");
 this.WriteObjects("		}\r\n");
-#line 40 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\UpdateParentTemplate.cst"
+#line 40 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/ObjectClasses/UpdateParentTemplate.cst"
 }
 
 
