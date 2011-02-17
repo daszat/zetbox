@@ -218,10 +218,11 @@ namespace Kistl.API
             // Be nice & Thread Save
             lock (_lock)
             {
+                string key = string.Format("{0} - {1}", name.ToLower(), reflectOnly);
                 // prevent calling load assembly twice for the same assembly. 
                 // a second try wont load the assembly either
-                if (_requestedAssemblies.ContainsKey(name.ToLower())) return null;                
-                _requestedAssemblies[name.ToLower()] = true;
+                if (_requestedAssemblies.ContainsKey(key)) return null;
+                _requestedAssemblies[key] = true;
 
                 AssemblyName assemblyName = new AssemblyName(name);
                 string baseName = assemblyName.Name;
