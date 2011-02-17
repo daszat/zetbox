@@ -56,11 +56,11 @@
     <!-- default probe path -->
     <string>/srv/CCNet/Projects/zbox/repo/bin/CodeGen/bin/Debug</string>
     <!-- common libaries -->
-    <string>/srv/CCNet/Projects/zbox/repo/bin/Debug/binCommon</string>
+    <string>/srv/CCNet/Projects/zbox/repo/bin/Debug/bin/Common</string>
     <!-- Fallback path for local development -->
-    <string>/srv/CCNet/Projects/zbox/repo/bin/Debug/binServer/fallback</string>
+    <string>/srv/CCNet/Projects/zbox/repo/bin/Debug/bin/Server/fallback</string>
     <!-- All other assemblies -->
-    <string>/srv/CCNet/Projects/zbox/repo/bin/Debug/binServer</string>
+    <string>/srv/CCNet/Projects/zbox/repo/bin/Debug/bin/Server</string>
     <string>/srv/CCNet/Projects/zbox/repo/bin/Debug/binClient</string>
   </SourceFileLocation>
 </KistlConfig>

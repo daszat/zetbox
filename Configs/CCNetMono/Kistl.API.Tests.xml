@@ -25,6 +25,6 @@
     <!-- default probe path -->
     <string>/srv/CCNet/Projects/zbox/repo/bin/CodeGen/bin/Debug</string>
     <!-- common libaries -->
-    <string>/srv/CCNet/Projects/zbox/repo/bin/Debug/binCommon</string>
+    <string>/srv/CCNet/Projects/zbox/repo/bin/Debug/bin/Common</string>
   </SourceFileLocation>
 </KistlConfig>
