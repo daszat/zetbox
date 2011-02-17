@@ -263,7 +263,13 @@ namespace Kistl.API.Tests
             var otherItem = NewItem();
             TestDelegate remover = () => collection.Remove(otherItem);
 #if MONO
-            Assert.That(remover, Throws.InstanceOf<ArgumentOutOfRangeException>());
+            try
+            {
+                remover.Invoke();
+            }
+            catch
+            {
+            }
 #else
             Assert.That(remover, Throws.Nothing);
 #endif

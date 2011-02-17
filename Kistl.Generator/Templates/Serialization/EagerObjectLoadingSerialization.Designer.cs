@@ -9,7 +9,7 @@ using Kistl.Generator.Extensions;
 
 namespace Kistl.Generator.Templates.Serialization
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/Serialization/EagerObjectLoadingSerialization.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Generator\Templates\Serialization\EagerObjectLoadingSerialization.cst")]
     public partial class EagerObjectLoadingSerialization : Kistl.Generator.ResourceTemplate
     {
 		protected IKistlContext ctx;
@@ -41,16 +41,16 @@ namespace Kistl.Generator.Templates.Serialization
 
         public override void Generate()
         {
-#line 20 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/Serialization/EagerObjectLoadingSerialization.cst"
+#line 20 "P:\Kistl\Kistl.Generator\Templates\Serialization\EagerObjectLoadingSerialization.cst"
 switch(direction)
 	{
 		case SerializerDirection.ToStream:
 
-#line 24 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/Serialization/EagerObjectLoadingSerialization.cst"
+#line 24 "P:\Kistl\Kistl.Generator\Templates\Serialization\EagerObjectLoadingSerialization.cst"
 this.WriteObjects("			if (auxObjects != null) {\r\n");
 this.WriteObjects("				auxObjects.Add(",  propertyName , ");\r\n");
 this.WriteObjects("			}\r\n");
-#line 28 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/Serialization/EagerObjectLoadingSerialization.cst"
+#line 28 "P:\Kistl\Kistl.Generator\Templates\Serialization\EagerObjectLoadingSerialization.cst"
 break;
 		case SerializerDirection.FromStream:
 			break;

@@ -9,7 +9,7 @@ using Kistl.Generator.Extensions;
 
 namespace Kistl.Generator.Templates.CollectionEntries
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/CollectionEntries/CollectionEntryTemplate.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst")]
     public partial class CollectionEntryTemplate : Kistl.Generator.ResourceTemplate
     {
 		protected IKistlContext ctx;
@@ -31,59 +31,59 @@ namespace Kistl.Generator.Templates.CollectionEntries
 
         public override void Generate()
         {
-#line 14 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/CollectionEntries/CollectionEntryTemplate.cst"
+#line 14 "P:\Kistl\Kistl.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 ApplyClassAttributeTemplate();
 
-#line 16 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/CollectionEntries/CollectionEntryTemplate.cst"
+#line 16 "P:\Kistl\Kistl.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 this.WriteObjects("    [System.Diagnostics.DebuggerDisplay(\"",  GetCeClassName() , "\")]\r\n");
 this.WriteObjects("    public class ",  GetCeClassName() , " ",  GetInheritance() , "\r\n");
 this.WriteObjects("    {\r\n");
-#line 19 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/CollectionEntries/CollectionEntryTemplate.cst"
+#line 19 "P:\Kistl\Kistl.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 ApplyConstructorTemplate(); 
-#line 20 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/CollectionEntries/CollectionEntryTemplate.cst"
+#line 20 "P:\Kistl\Kistl.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 ApplyClassHeadTemplate(); 
-#line 21 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/CollectionEntries/CollectionEntryTemplate.cst"
+#line 21 "P:\Kistl\Kistl.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        /// <summary>\r\n");
 this.WriteObjects("        /// the A-side value of this CollectionEntry\r\n");
 this.WriteObjects("        /// </summary>\r\n");
-#line 26 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/CollectionEntries/CollectionEntryTemplate.cst"
+#line 26 "P:\Kistl\Kistl.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 ApplyAPropertyTemplate();
 
-#line 28 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/CollectionEntries/CollectionEntryTemplate.cst"
+#line 28 "P:\Kistl\Kistl.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        /// <summary>\r\n");
 this.WriteObjects("        /// the B-side value of this CollectionEntry\r\n");
 this.WriteObjects("        /// </summary>\r\n");
-#line 33 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/CollectionEntries/CollectionEntryTemplate.cst"
+#line 33 "P:\Kistl\Kistl.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 ApplyBPropertyTemplate();
 
 
     if (IsOrdered())
     {
 
-#line 39 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/CollectionEntries/CollectionEntryTemplate.cst"
+#line 39 "P:\Kistl\Kistl.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        /// <summary>\r\n");
 this.WriteObjects("        /// Index into the A-side list of this relation\r\n");
 this.WriteObjects("        /// </summary>\r\n");
-#line 44 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/CollectionEntries/CollectionEntryTemplate.cst"
+#line 44 "P:\Kistl\Kistl.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 ApplyAIndexPropertyTemplate();
 
-#line 46 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/CollectionEntries/CollectionEntryTemplate.cst"
+#line 46 "P:\Kistl\Kistl.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        /// <summary>\r\n");
 this.WriteObjects("        /// Index into the B-side list of this relation\r\n");
 this.WriteObjects("        /// </summary>\r\n");
-#line 51 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/CollectionEntries/CollectionEntryTemplate.cst"
+#line 51 "P:\Kistl\Kistl.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 ApplyBIndexPropertyTemplate();
     }
 
-#line 54 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/CollectionEntries/CollectionEntryTemplate.cst"
+#line 54 "P:\Kistl\Kistl.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        #region Serializer\r\n");
 this.WriteObjects("\r\n");
-#line 58 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/CollectionEntries/CollectionEntryTemplate.cst"
+#line 58 "P:\Kistl\Kistl.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 Serialization.SerializerTemplate.Call(Host, ctx,
         Serialization.SerializerDirection.ToStream, this.MembersToSerialize, true, null);
 
@@ -105,7 +105,7 @@ Serialization.SerializerTemplate.Call(Host, ctx,
             Serialization.SerializerDirection.MergeImport, this.MembersToSerialize, false, GetExportGuidBackingStoreReference());
     }
 
-#line 79 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/CollectionEntries/CollectionEntryTemplate.cst"
+#line 79 "P:\Kistl\Kistl.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        #endregion\r\n");
 this.WriteObjects("\r\n");
@@ -120,10 +120,10 @@ this.WriteObjects("            base.ApplyChangesFrom(obj);\r\n");
 this.WriteObjects("            var other = (",  GetCeClassName() , ")obj;\r\n");
 this.WriteObjects("            var me = (",  GetCeClassName() , ")this;\r\n");
 this.WriteObjects("\r\n");
-#line 94 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/CollectionEntries/CollectionEntryTemplate.cst"
+#line 94 "P:\Kistl\Kistl.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 ApplyChangesFromBody();
 
-#line 96 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/CollectionEntries/CollectionEntryTemplate.cst"
+#line 96 "P:\Kistl\Kistl.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("\r\n");
@@ -132,17 +132,17 @@ this.WriteObjects("        {\r\n");
 this.WriteObjects("            // Do not reload references if the current object has been deleted.\r\n");
 this.WriteObjects("            // TODO: enable when MemoryContext uses MemoryDataObjects\r\n");
 this.WriteObjects("            //if (this.ObjectState == DataObjectState.Deleted) return;\r\n");
-#line 105 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/CollectionEntries/CollectionEntryTemplate.cst"
+#line 105 "P:\Kistl\Kistl.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 ApplyReloadReferenceBody();
 
-#line 107 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/CollectionEntries/CollectionEntryTemplate.cst"
+#line 107 "P:\Kistl\Kistl.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
-#line 111 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/CollectionEntries/CollectionEntryTemplate.cst"
+#line 111 "P:\Kistl\Kistl.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 ApplyClassTailTemplate();
 
-#line 113 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/CollectionEntries/CollectionEntryTemplate.cst"
+#line 113 "P:\Kistl\Kistl.Generator\Templates\CollectionEntries\CollectionEntryTemplate.cst"
 this.WriteObjects("    }\r\n");
 
         }

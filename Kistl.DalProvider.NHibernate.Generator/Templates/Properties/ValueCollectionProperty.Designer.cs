@@ -10,7 +10,7 @@ using Kistl.Generator.Extensions;
 
 namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Properties/ValueCollectionProperty.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ValueCollectionProperty.cst")]
     public partial class ValueCollectionProperty : Kistl.Generator.MemberTemplate
     {
 		protected IKistlContext ctx;
@@ -58,11 +58,11 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 27 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Properties/ValueCollectionProperty.cst"
+#line 27 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ValueCollectionProperty.cst"
 this.WriteObjects("        // BEGIN ",  this.GetType() , "\r\n");
-#line 28 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Properties/ValueCollectionProperty.cst"
+#line 28 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ValueCollectionProperty.cst"
 AddSerialization(serializationList, underlyingCollectionName); 
-#line 29 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Properties/ValueCollectionProperty.cst"
+#line 29 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ValueCollectionProperty.cst"
 this.WriteObjects("        ",  GetModifiers() , " ",  exposedCollectionInterface , "<",  referencedType , "> ",  name , "\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            get\r\n");

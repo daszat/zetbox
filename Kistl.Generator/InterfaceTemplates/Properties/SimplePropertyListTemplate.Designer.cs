@@ -8,7 +8,7 @@ using Kistl.Generator.Extensions;
 
 namespace Kistl.Generator.InterfaceTemplates.Properties
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"/srv/CCNet/Projects/zbox/repo/Kistl.Generator/InterfaceTemplates/Properties/SimplePropertyListTemplate.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Generator\InterfaceTemplates\Properties\SimplePropertyListTemplate.cst")]
     public partial class SimplePropertyListTemplate : Kistl.Generator.ResourceTemplate
     {
 		protected IKistlContext ctx;
@@ -32,9 +32,9 @@ namespace Kistl.Generator.InterfaceTemplates.Properties
 
         public override void Generate()
         {
-#line 11 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/InterfaceTemplates/Properties/SimplePropertyListTemplate.cst"
+#line 11 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Properties\SimplePropertyListTemplate.cst"
 this.WriteObjects("\r\n");
-#line 14 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/InterfaceTemplates/Properties/SimplePropertyListTemplate.cst"
+#line 14 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Properties\SimplePropertyListTemplate.cst"
 this.WriteObjects("        ",  GetPropertyTypeString() , " ",  GetPropertyName() , " { get; }\r\n");
 
         }

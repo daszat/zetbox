@@ -10,7 +10,7 @@ using Kistl.Generator.Templates.Serialization;
 
 namespace Kistl.DalProvider.NHibernate.Generator.Templates.Serialization
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Serialization/ProxySerialization.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Serialization\ProxySerialization.cst")]
     public partial class ProxySerialization : Kistl.Generator.ResourceTemplate
     {
 		protected IKistlContext ctx;
@@ -42,40 +42,40 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Serialization
 
         public override void Generate()
         {
-#line 20 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Serialization/ProxySerialization.cst"
+#line 20 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Serialization\ProxySerialization.cst"
 switch(direction)
     {
         case SerializerDirection.ToStream:
 
-#line 24 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Serialization/ProxySerialization.cst"
+#line 24 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Serialization\ProxySerialization.cst"
 this.WriteObjects("            BinarySerializer.ToStream(this.",  backingStoreName , ", ",  streamName , ");\r\n");
-#line 26 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Serialization/ProxySerialization.cst"
+#line 26 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Serialization\ProxySerialization.cst"
 break;
         case SerializerDirection.FromStream:
 
-#line 29 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Serialization/ProxySerialization.cst"
+#line 29 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Serialization\ProxySerialization.cst"
 this.WriteObjects("            BinarySerializer.FromStreamConverter(v => this.",  backingStoreName , " = v, ",  streamName , ");\r\n");
-#line 31 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Serialization/ProxySerialization.cst"
+#line 31 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Serialization\ProxySerialization.cst"
 break;
         case SerializerDirection.ToXmlStream:
 
-#line 34 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Serialization/ProxySerialization.cst"
+#line 34 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Serialization\ProxySerialization.cst"
 this.WriteObjects("            XmlStreamer.ToStream(this.",  backingStoreName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
-#line 36 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Serialization/ProxySerialization.cst"
+#line 36 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Serialization\ProxySerialization.cst"
 break;
         case SerializerDirection.FromXmlStream:
         case SerializerDirection.MergeImport:
 
-#line 40 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Serialization/ProxySerialization.cst"
+#line 40 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Serialization\ProxySerialization.cst"
 this.WriteObjects("            XmlStreamer.FromStreamConverter(v => this.",  backingStoreName , " = v, ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
-#line 42 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Serialization/ProxySerialization.cst"
+#line 42 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Serialization\ProxySerialization.cst"
 break;
         case SerializerDirection.Export:
 
-#line 44 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Serialization/ProxySerialization.cst"
+#line 44 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Serialization\ProxySerialization.cst"
 this.WriteObjects("    \r\n");
 this.WriteObjects("            if (modules.Contains(\"*\") || modules.Contains(\"",  xmlnamespace , "\")) XmlStreamer.ToStream(this.",  backingStoreName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
-#line 47 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Serialization/ProxySerialization.cst"
+#line 47 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Serialization\ProxySerialization.cst"
 break;
         default:
             throw new ArgumentOutOfRangeException("direction");

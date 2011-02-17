@@ -9,7 +9,7 @@ using Kistl.Generator.Extensions;
 
 namespace Kistl.Generator.Templates.CollectionEntries
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/CollectionEntries/ValueCollectionEntryParentReference.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Generator\Templates\CollectionEntries\ValueCollectionEntryParentReference.cst")]
     public partial class ValueCollectionEntryParentReference : Kistl.Generator.ResourceTemplate
     {
 		protected IKistlContext ctx;
@@ -39,12 +39,12 @@ namespace Kistl.Generator.Templates.CollectionEntries
 
         public override void Generate()
         {
-#line 18 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/CollectionEntries/ValueCollectionEntryParentReference.cst"
+#line 18 "P:\Kistl\Kistl.Generator\Templates\CollectionEntries\ValueCollectionEntryParentReference.cst"
 string cacheName = "_" + propertyName + "Cache";
 	string fkName = "fk_" + propertyName;
 	string backingName = "_" + fkName;
 
-#line 22 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/CollectionEntries/ValueCollectionEntryParentReference.cst"
+#line 22 "P:\Kistl\Kistl.Generator\Templates\CollectionEntries\ValueCollectionEntryParentReference.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        public ",  referencedInterface , " ",  propertyName , "\r\n");
 this.WriteObjects("        {\r\n");
@@ -97,7 +97,7 @@ this.WriteObjects("\r\n");
 this.WriteObjects("        // backing store for serialization\r\n");
 this.WriteObjects("        private int? ",  backingName , ";\r\n");
 this.WriteObjects("        \r\n");
-#line 75 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/CollectionEntries/ValueCollectionEntryParentReference.cst"
+#line 75 "P:\Kistl\Kistl.Generator\Templates\CollectionEntries\ValueCollectionEntryParentReference.cst"
 if (serializationList != null)
 		serializationList.Add(Serialization.SerializerType.All, moduleNamespace, propertyName, backingName); // TODO: XML Namespace
 

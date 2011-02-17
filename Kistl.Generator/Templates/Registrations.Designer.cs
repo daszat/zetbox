@@ -6,7 +6,7 @@ using Kistl.API;
 
 namespace Kistl.Generator.Templates
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/Registrations.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Generator\Templates\Registrations.cst")]
     public partial class Registrations : Kistl.Generator.ResourceTemplate
     {
 		protected IKistlContext ctx;
@@ -30,7 +30,7 @@ namespace Kistl.Generator.Templates
 
         public override void Generate()
         {
-#line 11 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/Registrations.cst"
+#line 11 "P:\Kistl\Kistl.Generator\Templates\Registrations.cst"
 this.WriteObjects("            builder\r\n");
 this.WriteObjects("                .Register<",  shortName , "ImplementationTypeChecker>(\r\n");
 this.WriteObjects("                    c => new ",  shortName , "ImplementationTypeChecker(\r\n");

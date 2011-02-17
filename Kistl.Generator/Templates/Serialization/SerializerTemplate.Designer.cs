@@ -10,7 +10,7 @@ using Kistl.Generator.Extensions;
 
 namespace Kistl.Generator.Templates.Serialization
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/Serialization/SerializerTemplate.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst")]
     public partial class SerializerTemplate : Kistl.Generator.ResourceTemplate
     {
 		protected IKistlContext ctx;
@@ -40,9 +40,9 @@ namespace Kistl.Generator.Templates.Serialization
 
         public override void Generate()
         {
-#line 18 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/Serialization/SerializerTemplate.cst"
+#line 18 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
 this.WriteObjects("\r\n");
-#line 20 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/Serialization/SerializerTemplate.cst"
+#line 20 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
 string methodName = direction.ToString();
     string argName;
     string argType;
@@ -96,25 +96,25 @@ string methodName = direction.ToString();
     }
     
 
-#line 73 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/Serialization/SerializerTemplate.cst"
+#line 73 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
 this.WriteObjects("        public ",  overrideAndCallBase ? "override" : "virtual" , " void ",  methodName , "(",  argType , " ",  argName , "",  additionalArgs , ")\r\n");
 this.WriteObjects("        {\r\n");
-#line 76 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/Serialization/SerializerTemplate.cst"
+#line 76 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
 if (overrideAndCallBase)
     {
 
-#line 78 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/Serialization/SerializerTemplate.cst"
+#line 78 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
 this.WriteObjects("            \r\n");
 this.WriteObjects("            base.",  methodName , "(",  argName , "",  callBaseWithAdditionalArgs , ");\r\n");
-#line 81 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/Serialization/SerializerTemplate.cst"
+#line 81 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
 }
     else if (direction == SerializerDirection.Export && !String.IsNullOrEmpty(exportGuidBackingStore))
     {
 
-#line 84 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/Serialization/SerializerTemplate.cst"
+#line 84 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
 this.WriteObjects("            \r\n");
 this.WriteObjects("            xml.WriteAttributeString(\"ExportGuid\", ",  exportGuidBackingStore , ".ToString());\r\n");
-#line 87 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/Serialization/SerializerTemplate.cst"
+#line 87 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
 }
 
     foreach(var serMember in fields.Where(f => (f.SerializerType & serType) == serType))
@@ -126,7 +126,7 @@ this.WriteObjects("            xml.WriteAttributeString(\"ExportGuid\", ",  expo
         ApplySerializer(direction, serMember, argName);
     }
 
-#line 98 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/Serialization/SerializerTemplate.cst"
+#line 98 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
 this.WriteObjects("        }\r\n");
 
         }

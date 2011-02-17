@@ -11,7 +11,7 @@ using Kistl.Generator.Extensions;
 
 namespace Kistl.Generator.Templates.ObjectClasses
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/ObjectClasses/Constructors.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.Generator\Templates\ObjectClasses\Constructors.cst")]
     public partial class Constructors : Kistl.Generator.ResourceTemplate
     {
 		protected IKistlContext ctx;
@@ -37,22 +37,22 @@ namespace Kistl.Generator.Templates.ObjectClasses
 
         public override void Generate()
         {
-#line 17 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/ObjectClasses/Constructors.cst"
+#line 17 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\Constructors.cst"
 this.WriteObjects("        [Obsolete]\r\n");
 this.WriteObjects("        public ",  className , "()\r\n");
 this.WriteObjects("            : base(null)\r\n");
 this.WriteObjects("        {\r\n");
-#line 21 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/ObjectClasses/Constructors.cst"
+#line 21 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\Constructors.cst"
 ApplyCompoundObjectPropertyInitialisers(); 
-#line 22 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/ObjectClasses/Constructors.cst"
+#line 22 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\Constructors.cst"
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("        public ",  className , "(Func<IFrozenContext> lazyCtx)\r\n");
 this.WriteObjects("            : base(lazyCtx)\r\n");
 this.WriteObjects("        {\r\n");
-#line 27 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/ObjectClasses/Constructors.cst"
+#line 27 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\Constructors.cst"
 ApplyCompoundObjectPropertyInitialisers(); 
-#line 28 "/srv/CCNet/Projects/zbox/repo/Kistl.Generator/Templates/ObjectClasses/Constructors.cst"
+#line 28 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\Constructors.cst"
 this.WriteObjects("        }\r\n");
 
         }

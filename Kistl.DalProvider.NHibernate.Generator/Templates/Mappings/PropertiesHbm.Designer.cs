@@ -12,7 +12,7 @@ using Kistl.Generator.Extensions;
 
 namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Mappings/PropertiesHbm.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\PropertiesHbm.cst")]
     public partial class PropertiesHbm : Kistl.Generator.ResourceTemplate
     {
 		protected IKistlContext ctx;
@@ -38,7 +38,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
 
         public override void Generate()
         {
-#line 20 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Mappings/PropertiesHbm.cst"
+#line 20 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\PropertiesHbm.cst"
 /*
      * TODO: Actually, all this should die and become a bunch of polymorphic calls.
      * See also Kistl.DalProvider.Ef.Generator.Templates.EfModel.ModelCsdlEntityTypeFields

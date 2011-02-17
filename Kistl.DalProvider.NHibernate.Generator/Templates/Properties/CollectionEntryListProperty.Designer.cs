@@ -8,7 +8,7 @@ using Kistl.Generator.Extensions;
 
 namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Properties/CollectionEntryListProperty.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\CollectionEntryListProperty.cst")]
     public partial class CollectionEntryListProperty : Kistl.Generator.MemberTemplate
     {
 		protected IKistlContext ctx;
@@ -60,7 +60,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 27 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Properties/CollectionEntryListProperty.cst"
+#line 27 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 this.WriteObjects("   		// ",  this.GetType() , "\r\n");
 this.WriteObjects("		",  GetModifiers() , " ",  exposedCollectionInterface , "<",  referencedInterface , "> ",  name , "\r\n");
 this.WriteObjects("		{\r\n");
@@ -75,17 +75,17 @@ this.WriteObjects("							new ProjectedCollection<",  entryProxyType , ", ",  en
 this.WriteObjects("                                this.Proxy.",  name , ",\r\n");
 this.WriteObjects("                                p => (",  entryType , ")OurContext.AttachAndWrap(p),\r\n");
 this.WriteObjects("                                ce => (",  entryProxyType , ")((NHibernatePersistenceObject)ce).NHibernateProxy),\r\n");
-#line 41 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Properties/CollectionEntryListProperty.cst"
+#line 41 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 if (!String.IsNullOrEmpty(inverseNavigatorName)) { 
-#line 42 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Properties/CollectionEntryListProperty.cst"
+#line 42 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 this.WriteObjects("                            entry => (IRelationListSync<",  entryType , ">)entry.",  role == RelationEndRole.A ? "B" : "A" , ".",  inverseNavigatorName , ");\r\n");
-#line 43 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Properties/CollectionEntryListProperty.cst"
+#line 43 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 } else { 
-#line 44 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Properties/CollectionEntryListProperty.cst"
+#line 44 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 this.WriteObjects("                            entry => (IRelationListSync<",  entryType , ">)null);\r\n");
-#line 45 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Properties/CollectionEntryListProperty.cst"
+#line 45 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 } 
-#line 46 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Properties/CollectionEntryListProperty.cst"
+#line 46 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 this.WriteObjects("                    if (",  name , "_was_eagerLoaded) { ",  name , "_was_eagerLoaded = false; }\r\n");
 this.WriteObjects("				}\r\n");
 this.WriteObjects("				return (",  exposedCollectionInterface , "<",  referencedInterface , ">)",  backingName , ";\r\n");
@@ -96,7 +96,7 @@ this.WriteObjects("		private ",  backingCollectionType , "<",  aSideType , ", ",
 this.WriteObjects("\r\n");
 this.WriteObjects("        // ignored, but required for Serialization\r\n");
 this.WriteObjects("        private bool ",  name , "_was_eagerLoaded;\r\n");
-#line 57 "/srv/CCNet/Projects/zbox/repo/Kistl.DalProvider.NHibernate.Generator/Templates/Properties/CollectionEntryListProperty.cst"
+#line 57 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 AddSerialization(serializationList, name, eagerLoading);
 
 
