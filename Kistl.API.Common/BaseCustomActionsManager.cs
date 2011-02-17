@@ -71,7 +71,7 @@ namespace Kistl.App.Extensions
 
                     foreach (var mi in _reflectedMethods.Values)
                     {
-                        Log.Warn(string.Format("Couldn't find any method for Invocation {0}.{1}", mi.DeclaringType.Name, mi.Name));
+                        Log.Error(string.Format("Couldn't find any method for Invocation {0}.{1}", mi.DeclaringType.Name, mi.Name));
                     }
 
                     Log.TraceTotalMemory("After BaseCustomActionsManager.Init()");

@@ -1,5 +1,5 @@
 
-namespace Kistl.App.KistlBase.Common
+namespace Kistl.App.Base
 {
     using System;
     using System.Collections.Generic;
@@ -11,9 +11,11 @@ namespace Kistl.App.KistlBase.Common
     using Kistl.App.Extensions;
     using Kistl.API.Utils;
 
+    [Implementor]
     public static class RelationActions
     {
-        public static void OnGetOtherEnd(Relation rel, MethodReturnEventArgs<RelationEnd> e, RelationEnd relEnd)
+        [Invocation]
+        public static void GetOtherEnd(Relation rel, MethodReturnEventArgs<RelationEnd> e, RelationEnd relEnd)
         {
             if (rel.A == relEnd)
                 e.Result = rel.B;
@@ -23,7 +25,8 @@ namespace Kistl.App.KistlBase.Common
                 e.Result = null;
         }
 
-        public static void OnGetEndFromRole(Relation rel, MethodReturnEventArgs<RelationEnd> e, RelationEndRole role)
+        [Invocation]
+        public static void GetEndFromRole(Relation rel, MethodReturnEventArgs<RelationEnd> e, RelationEndRole role)
         {
             switch (role)
             {
@@ -38,7 +41,8 @@ namespace Kistl.App.KistlBase.Common
             }
         }
 
-        public static void OnGetEnd(Relation rel, MethodReturnEventArgs<RelationEnd> e, ObjectReferenceProperty prop)
+        [Invocation]
+        public static void GetEnd(Relation rel, MethodReturnEventArgs<RelationEnd> e, ObjectReferenceProperty prop)
         {
             if (rel.A != null && rel.A.Navigator == prop)
                 e.Result = rel.A;
@@ -48,7 +52,8 @@ namespace Kistl.App.KistlBase.Common
                 e.Result = null;
         }
 
-        public static void OnGetRelationType(Relation rel, MethodReturnEventArgs<RelationType> e)
+        [Invocation]
+        public static void GetRelationType(Relation rel, MethodReturnEventArgs<RelationType> e)
         {
             if (rel == null)
             {
@@ -82,7 +87,8 @@ namespace Kistl.App.KistlBase.Common
             }
         }
 
-        public static void OnNeedsPositionStorage(Relation rel, MethodReturnEventArgs<bool> e, RelationEndRole endRole)
+        [Invocation]
+        public static void NeedsPositionStorage(Relation rel, MethodReturnEventArgs<bool> e, RelationEndRole endRole)
         {
             if (rel == null)
             {
@@ -108,12 +114,14 @@ namespace Kistl.App.KistlBase.Common
                 );
         }
 
-        public static void OnGetEntryInterfaceType(Relation rel, MethodReturnEventArgs<InterfaceType> e)
+        [Invocation]
+        public static void GetEntryInterfaceType(Relation rel, MethodReturnEventArgs<InterfaceType> e)
         {
             e.Result = rel.Context.GetInterfaceType(String.Format("{0}.{1}_{2}_{3}_RelationEntry", rel.Module.Namespace, rel.A.Type.Name, rel.Verb, rel.B.Type.Name));
         }
 
-        public static void OnSwapRelationEnds_Relation(Kistl.App.Base.Relation obj)
+        [Invocation]
+        public static void SwapRelationEnds(Kistl.App.Base.Relation obj)
         {
             var tmp = obj.A;
             obj.A = obj.B;

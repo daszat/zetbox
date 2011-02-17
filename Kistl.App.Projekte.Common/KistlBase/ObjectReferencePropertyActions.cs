@@ -1,5 +1,5 @@
 
-namespace Kistl.App.Projekte.Common.KistlBase
+namespace Kistl.App.Base
 {
     using System;
     using System.Collections.Generic;
@@ -10,10 +10,12 @@ namespace Kistl.App.Projekte.Common.KistlBase
     using Kistl.App.Base;
     using Kistl.App.Extensions;
     using Kistl.API.Utils;
-    
+
+    [Implementor]
     public static class ObjectReferencePropertyActions
     {
-        public static void OnGetIsList(ObjectReferenceProperty prop, MethodReturnEventArgs<bool> e)
+        [Invocation]
+        public static void GetIsList(ObjectReferenceProperty prop, MethodReturnEventArgs<bool> e)
         {
             if (prop == null) { throw new ArgumentNullException("prop"); }
             RelationEnd relEnd = prop.RelationEnd;
