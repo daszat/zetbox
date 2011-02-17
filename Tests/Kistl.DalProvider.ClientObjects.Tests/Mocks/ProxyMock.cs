@@ -18,12 +18,10 @@ namespace Kistl.DalProvider.Client.Mocks
     public class ProxyMock
         : IProxy
     {
-        private InterfaceType.Factory _iftFactory;
         private BaseMemoryContext _backingStore;
 
-        public ProxyMock(InterfaceType.Factory iftFactory, BaseMemoryContext backingStore, IFrozenContext frozen)
+        public ProxyMock(BaseMemoryContext backingStore, IFrozenContext frozen)
         {
-            this._iftFactory = iftFactory;
             this._backingStore = backingStore;
 
             var generatedAssembly = Assembly.Load(MemoryProvider.GeneratedAssemblyName);
