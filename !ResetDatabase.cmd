@@ -4,16 +4,24 @@ echo Full reset of ZBox Database
 echo Used to reset dev database
 echo ********************************************************************************
 
-bin\debug\bin\Server\Kistl.Server.Service.exe Configs\%zenv%\Kistl.Server.Service.xml -wipe
+set config=Configs\%zenv%\Kistl.Server.Service.xml
+
+if .%1. == .. GOTO GOON
+
+set config=%1
+
+GOON:
+
+bin\debug\bin\Server\Kistl.Server.Service.exe %config% -wipe
 IF ERRORLEVEL 1 GOTO FAIL
 
-bin\debug\bin\Server\Kistl.Server.Service.exe Configs\%zenv%\Kistl.Server.Service.xml -updateschema Kistl.Server\Database\Database.xml
+bin\debug\bin\Server\Kistl.Server.Service.exe %config% -updateschema Kistl.Server\Database\Database.xml
 IF ERRORLEVEL 1 GOTO FAIL
 
-bin\debug\bin\Server\Kistl.Server.Service.exe Configs\%zenv%\Kistl.Server.Service.xml -deploy Kistl.Server\Database\Database.xml -checkdeployedschema
+bin\debug\bin\Server\Kistl.Server.Service.exe %config% -deploy Kistl.Server\Database\Database.xml -checkdeployedschema
 IF ERRORLEVEL 1 GOTO FAIL
 
-bin\debug\bin\Server\Kistl.Server.Service.exe Configs\%zenv%\Kistl.Server.Service.xml -repairschema -syncidentities
+bin\debug\bin\Server\Kistl.Server.Service.exe %config% -repairschema -syncidentities
 IF ERRORLEVEL 1 GOTO FAIL
 
 echo ********************************************************************************
