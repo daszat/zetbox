@@ -100,5 +100,22 @@ namespace Kistl.App.Base
             e.Result.Module = obj.Module;
             e.Result.ObjectClass = obj;
         }
+
+        [Invocation]
+        public static void GetInheritedMethods(ObjectClass obj, MethodReturnEventArgs<IList<Method>> e)
+        {
+            ObjectClass baseObjectClass = obj.BaseObjectClass;
+            if (baseObjectClass != null)
+            {
+                e.Result = baseObjectClass.GetInheritedMethods();
+                baseObjectClass.Methods.ForEach<Method>(m => e.Result.Add(m));
+            }
+            else
+            {
+                e.Result = new List<Method>();
+            }
+        }
+
+
     }
 }

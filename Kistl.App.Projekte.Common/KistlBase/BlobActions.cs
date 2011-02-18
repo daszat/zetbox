@@ -17,5 +17,10 @@ namespace Kistl.App.Base
             ToStringHelper.FixupFloatingObjectsToString(obj, e);
         }
 
+        [Invocation]
+        public static void GetStream(Kistl.App.Base.Blob obj, MethodReturnEventArgs<System.IO.Stream> e)
+        {
+            e.Result = obj.Context.GetStream(obj.ID);
+        }
     }
 }

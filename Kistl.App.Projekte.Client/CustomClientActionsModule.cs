@@ -22,8 +22,6 @@ namespace Kistl.App.Projekte.Client
                         .SingleInstance();
                 }
             }
-
-            // Register types explicit
         }
     }
 }

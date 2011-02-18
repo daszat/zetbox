@@ -14,17 +14,16 @@ namespace Kistl.App.Base
         {
             if (obj.ReferencedObjectClass == null)
             {
-                e.Result = "Empty ObjectReferencePlaceholderProperty";
-                return;
+                e.Result = "<no class>";
             }
-
-            if (obj.ReferencedObjectClass.Module == null)
+            else if (obj.ReferencedObjectClass.Module == null)
             {
-                e.Result = "Invalid ReferencedObjectClass (no module)";
-                return;
+                e.Result = "<no namespace>." + obj.ReferencedObjectClass.Name;
             }
-
-            e.Result = obj.ReferencedObjectClass.Module.Namespace + "." + obj.ReferencedObjectClass.Name;
+            else
+            {
+                e.Result = obj.ReferencedObjectClass.Module.Namespace + "." + obj.ReferencedObjectClass.Name;
+            }
         }
     }
 }

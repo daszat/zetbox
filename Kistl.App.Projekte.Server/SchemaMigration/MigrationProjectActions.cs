@@ -12,19 +12,19 @@ namespace ZBox.App.SchemaMigration
     using Kistl.App.Extensions;
     using ZBox.App.SchemaMigration;
 
-    public class CustomServerActions_SchemaMigration
+    public class MigrationProjectActions
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("ZBox.SchemaMigration");
 
         // TODO: fix this, as it is currently only working by accident
         private static ILifetimeScope _scope;
 
-        public CustomServerActions_SchemaMigration(ILifetimeScope scope)
+        public MigrationProjectActions(ILifetimeScope scope)
         {
             _scope = scope;
         }
 
-        public static void OnUpdateFromSourceSchema_MigrationProject(ZBox.App.SchemaMigration.MigrationProject obj)
+        public static void UpdateFromSourceSchema(ZBox.App.SchemaMigration.MigrationProject obj)
         {
             foreach (var s in obj.StagingDatabases)
             {

@@ -21,5 +21,25 @@ namespace Kistl.App.Base
                 e.Result = String.Format("{0} should not be NULL", obj.ConstrainedProperty.Name);
             }
         }
+
+        [Invocation]
+        public static void IsValid(
+            NotNullableConstraint obj,
+            MethodReturnEventArgs<bool> e,
+            object constrainedObjectParam,
+            object constrainedValueParam)
+        {
+            e.Result = constrainedValueParam != null;
+        }
+
+        [Invocation]
+        public static void GetErrorText(
+            NotNullableConstraint obj,
+            MethodReturnEventArgs<string> e,
+            object constrainedObjectParam,
+            object constrainedValueParam)
+        {
+            e.Result = String.IsNullOrEmpty(obj.Reason) ? "Value must be set" : String.Format("Value must be set: {0}", obj.Reason);
+        }
     }
 }

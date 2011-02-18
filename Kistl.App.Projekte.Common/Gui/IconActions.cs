@@ -20,5 +20,11 @@ namespace Kistl.App.GUI
 
             e.Result = e.NewValue;
         }
+
+        [Invocation]
+        public static void ToString(Icon obj, MethodReturnEventArgs<string> e)
+        {
+            e.Result = obj.IconFile;
+        }
     }
 }

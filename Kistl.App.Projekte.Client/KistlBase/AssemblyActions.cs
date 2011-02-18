@@ -1,23 +1,32 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Xml;
-
-using Kistl.API;
-using Kistl.App.Extensions;
-using System.Diagnostics;
-using Kistl.API.Utils;
-using Kistl.App.GUI;
-using Kistl.Client.Presentables;
-using Kistl.Client.GUI;
-
 namespace Kistl.App.Base
 {
-    public partial class CustomClientActions_KistlBase
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using Kistl.API;
+    using Kistl.API.Utils;
+    using Kistl.App.GUI;
+    using Kistl.Client.Presentables;
+    using System.IO;
+    using Kistl.Client.GUI;
+    using Kistl.App.Extensions;
+
+    /// <summary>
+    /// Client implementation
+    /// </summary>
+    [Implementor]
+    public class AssemblyActions
     {
-        public static void OnRegenerateTypeRefs_Assembly(Assembly assembly, MethodReturnEventArgs<System.Boolean> e)
+        private static IViewModelFactory _mdlFactory;
+
+        public AssemblyActions(IViewModelFactory mdlFactory)
+        {
+            _mdlFactory = mdlFactory;
+        }
+
+        [Invocation]
+        public static void RegenerateTypeRefs(Assembly assembly, MethodReturnEventArgs<System.Boolean> e)
         {
             using (Logging.Log.InfoTraceMethodCall(assembly.Name))
             {
@@ -168,7 +177,7 @@ namespace Kistl.App.Base
                             {
                                 descr = ctx.Create<ViewDescriptor>();
                                 descr.ControlRef = tr;
-                                if(tk != null) descr.Toolkit = tk.Value;
+                                if (tk != null) descr.Toolkit = tk.Value;
                             }
                         }
                     }
@@ -257,17 +266,5 @@ namespace Kistl.App.Base
             }
         }
 
-        public static void OnUpdateParent_TypeRef(TypeRef obj)
-        {
-            var baseType = obj.AsType(true).BaseType;
-            if (baseType == null)
-            {
-                obj.Parent = null;
-            }
-            else
-            {
-                obj.Parent = baseType.ToRef(obj.Context);
-            }
-        }
     }
 }

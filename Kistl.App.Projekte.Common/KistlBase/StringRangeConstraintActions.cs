@@ -32,5 +32,48 @@ namespace Kistl.App.Base
                     maxLength);
             }
         }
+
+        [Invocation]
+        public static void IsValid(
+            StringRangeConstraint obj,
+            MethodReturnEventArgs<bool> e,
+            object constrainedObjectParam,
+            object constrainedValueParam)
+        {
+            int length = (constrainedValueParam ?? String.Empty).ToString().Length;
+            e.Result = (obj.MinLength <= length) && (length <= (obj.MaxLength ?? int.MaxValue));
+        }
+
+        [Invocation]
+        public static void GetErrorText(
+            StringRangeConstraint obj,
+            MethodReturnEventArgs<string> e,
+            object constrainedObjectParam,
+            object constrainedValueParam)
+        {
+
+            if (obj.IsValid(constrainedObjectParam, constrainedValueParam))
+            {
+                e.Result = null;
+            }
+            else
+            {
+                constrainedValueParam = (constrainedValueParam ?? String.Empty);
+                int length = constrainedValueParam.ToString().Length;
+                StringBuilder result = new StringBuilder();
+                if (length < obj.MinLength)
+                    result.AppendFormat("{0} should be at least {1} characters long", obj.ConstrainedProperty.Name, obj.MinLength);
+                if (obj.MaxLength != null && length > obj.MaxLength)
+                    result.AppendFormat("{0} should be at most {1} characters long", obj.ConstrainedProperty.Name, obj.MaxLength);
+
+                if (!String.IsNullOrEmpty(obj.Reason))
+                {
+                    result.Append(": ");
+                    result.Append(obj.Reason);
+                }
+
+                e.Result = result.ToString();
+            }
+        }
     }
 }

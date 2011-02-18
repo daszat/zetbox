@@ -85,19 +85,35 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomClientActionsModule.cs" />
-    <Compile Include="CustomClientActions_DocumentManagement.cs" />
-    <Compile Include="CustomClientActions_KistlBase.Constraints.cs" />
-    <Compile Include="CustomClientActions_KistlBase.cs" />
-    <Compile Include="CustomClientActions_GUI.cs" />
-    <Compile Include="CustomClientActions_KistlBase.TypeRefs.cs" />
-    <Compile Include="CustomClientActions_Projekte.cs" />
-    <Compile Include="CustomClientActions_SchemaMigration.cs" />
-    <Compile Include="CustomClientActions_Zeiterfassung.cs" />
-    <Compile Include="Gui\PropertyActions.cs" />
+    <Compile Include="DocumentManagement\FileActions.cs" />
+    <Compile Include="Gui\MonthFilterConfigurationActions.cs" />
+    <Compile Include="Gui\OptionalPredicateFilterConfigurationActions.cs" />
+    <Compile Include="Gui\RangeFilterConfigurationActions.cs" />
+    <Compile Include="Gui\SinglePropertyFilterConfigurationActions.cs" />
+    <Compile Include="Gui\IconActions.cs" />
+    <Compile Include="KistlBase\BoolPropertyActions.cs" />
+    <Compile Include="KistlBase\DateTimePropertyActions.cs" />
+    <Compile Include="KistlBase\DoublePropertyActions.cs" />
+    <Compile Include="KistlBase\EnumerationPropertyActions.cs" />
+    <Compile Include="KistlBase\GuidPropertyActions.cs" />
+    <Compile Include="KistlBase\IntPropertyActions.cs" />
+    <Compile Include="KistlBase\DecimalPropertyActions.cs" />
+    <Compile Include="KistlBase\ObjectReferencePropertyActions.cs" />
+    <Compile Include="KistlBase\StringPropertyActions.cs" />
+    <Compile Include="KistlBase\CompoundObjectPropertyActions.cs" />
     <Compile Include="Helper\PdfReport.cs" />
+    <Compile Include="KistlBase\AssemblyActions.cs" />
+    <Compile Include="KistlBase\BlobActions.cs" />
+    <Compile Include="KistlBase\ObjectClassActions.cs" />
+    <Compile Include="KistlBase\RelationActions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Helper\RechnungXML.cs" />
     <Compile Include="Helper\WordHelper.cs" />
+    <Compile Include="SchemaMigration\MigrationProjectActions.cs" />
+    <Compile Include="SchemaMigration\Report.cs" />
+    <Compile Include="SchemaMigration\SourceColumnActions.cs" />
+    <Compile Include="SchemaMigration\SourceTableActions.cs" />
+    <Compile Include="SchemaMigration\StagingDatabaseActions.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Kistl.API.Client\Kistl.API.Client.csproj">

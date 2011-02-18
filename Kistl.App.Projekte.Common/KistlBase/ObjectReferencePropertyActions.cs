@@ -33,5 +33,23 @@ namespace Kistl.App.Base
             // already handled by base OnToString_Property()
             // ToStringHelper.FixupFloatingObjects(obj, e);
         }
+
+        [Invocation]
+        public static void GetPropertyTypeString(ObjectReferenceProperty obj, MethodReturnEventArgs<string> e)
+        {
+            ObjectClass objClass = obj.GetReferencedObjectClass();
+            if (objClass == null)
+            {
+                e.Result = "<no class>";
+            }
+            else if (objClass.Module == null)
+            {
+                e.Result = "<no namespace>." + objClass.Name;
+            }
+            else
+            {
+                e.Result = objClass.Module.Namespace + "." + objClass.Name;
+            }
+        }
     }
 }

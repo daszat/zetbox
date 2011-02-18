@@ -34,5 +34,33 @@ namespace Kistl.App.Base
             //if (obj.IsList) e.Result += " [0..n]";
             ToStringHelper.FixupFloatingObjectsToString(obj, e);
         }
+
+        [Invocation]
+        public static void GetPropertyType(Kistl.App.Base.Property obj, Kistl.API.MethodReturnEventArgs<System.Type> e)
+        {
+            string fullname = obj.GetPropertyTypeString();
+
+            if (obj is EnumerationProperty)
+            {
+                e.Result = Type.GetType(fullname + ", " + Kistl.API.Helper.InterfaceAssembly);
+            }
+            // ValueTypes all use mscorlib types,
+            else if (obj is ValueTypeProperty)
+            {
+                e.Result = Type.GetType(fullname);
+            }
+            else
+            {
+                // other properties not
+                string assembly = Kistl.API.Helper.InterfaceAssembly;
+                e.Result = Type.GetType(fullname + ", " + assembly, true);
+            }
+        }
+
+        [Invocation]
+        public static void GetPropertyTypeString(Kistl.App.Base.Property obj, Kistl.API.MethodReturnEventArgs<string> e)
+        {
+            e.Result = "<Invalid Datatype, please implement Property.GetPropertyTypeString()>";
+        }
     }
 }

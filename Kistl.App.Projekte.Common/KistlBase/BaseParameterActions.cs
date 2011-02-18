@@ -28,5 +28,11 @@ namespace Kistl.App.Base
             ToStringHelper.FixupFloatingObjectsToString(obj, e);
         }
 
+        [Invocation]
+        public static void GetParameterType(Kistl.App.Base.BaseParameter obj, Kistl.API.MethodReturnEventArgs<System.Type> e)
+        {
+            e.Result = Type.GetType(obj.GetParameterTypeString(), true);
+        }
+
     }
 }

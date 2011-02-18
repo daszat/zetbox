@@ -74,10 +74,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomServerActionsModule.cs" />
-    <Compile Include="CustomServerActions_KistlBase.cs" />
-    <Compile Include="CustomServerActions_Projekte.cs" />
-    <Compile Include="CustomServerActions_SchemaMigration.cs" />
-    <Compile Include="CustomServerActions_Zeiterfassung.cs" />
+    <Compile Include="KistlBase\BaseParameterActions.cs" />
+    <Compile Include="KistlBase\MethodActions.cs" />
+    <Compile Include="Projekte\TaskActions.cs" />
+    <Compile Include="Projekte\ProjektActions.cs" />
+    <Compile Include="SchemaMigration\MigrationProjectActions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -102,6 +103,7 @@
   <ItemGroup>
     <None Include="Kistl.snk" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -69,8 +69,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Gui\FilterConfigurationActions.cs" />
+    <Compile Include="Gui\PropertyFilterConfigurationActions.cs" />
+    <Compile Include="Gui\NavigationScreenActions.cs" />
+    <Compile Include="Gui\ViewDescriptorActions.cs" />
+    <Compile Include="Gui\ViewModelDescriptorActions.cs" />
     <Compile Include="KistlBase\BaseParameterActions.cs" />
     <Compile Include="KistlBase\AssemblyActions.cs" />
+    <Compile Include="KistlBase\BoolPropertyActions.cs" />
+    <Compile Include="KistlBase\CompoundObjectPropertyActions.cs" />
+    <Compile Include="KistlBase\ConstraintActions.cs" />
+    <Compile Include="KistlBase\IsValidNamespaceConstraintActions.cs" />
+    <Compile Include="KistlBase\StringParameterActions.cs" />
+    <Compile Include="KistlBase\DoubleParameterActions.cs" />
+    <Compile Include="KistlBase\BoolParameterActions.cs" />
+    <Compile Include="KistlBase\IntParameterActions.cs" />
+    <Compile Include="KistlBase\DateTimeParameterActions.cs" />
+    <Compile Include="KistlBase\CLRObjectParameterActions.cs" />
+    <Compile Include="KistlBase\EnumParameterActions.cs" />
+    <Compile Include="KistlBase\ObjectParameterActions.cs" />
+    <Compile Include="KistlBase\IntPropertyActions.cs" />
+    <Compile Include="KistlBase\DecimalPropertyActions.cs" />
+    <Compile Include="KistlBase\DateTimePropertyActions.cs" />
+    <Compile Include="KistlBase\GuidPropertyActions.cs" />
+    <Compile Include="KistlBase\EnumerationPropertyActions.cs" />
+    <Compile Include="KistlBase\CalculatedObjectReferencePropertyActions.cs" />
+    <Compile Include="KistlBase\DoublePropertyActions.cs" />
+    <Compile Include="KistlBase\StringPropertyActions.cs" />
     <Compile Include="KistlBase\ServiceDescriptorActions.cs" />
     <Compile Include="KistlBase\IdentityActions.cs" />
     <Compile Include="KistlBase\GroupActions.cs" />

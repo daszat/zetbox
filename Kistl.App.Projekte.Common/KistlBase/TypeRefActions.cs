@@ -5,6 +5,7 @@ namespace Kistl.App.Base
     using System.Linq;
     using System.Text;
     using Kistl.API;
+    using Kistl.App.Extensions;
 
     [Implementor]
     public static class TypeRefActions
@@ -110,6 +111,20 @@ namespace Kistl.App.Base
                 e.Result = e.Result.MakeGenericType(args);
             }
             cache[obj] = e.Result;
+        }
+
+        [Invocation]
+        public static void UpdateParent(TypeRef obj)
+        {
+            var baseType = obj.AsType(true).BaseType;
+            if (baseType == null)
+            {
+                obj.Parent = null;
+            }
+            else
+            {
+                obj.Parent = baseType.ToRef(obj.Context);
+            }
         }
     }
 }

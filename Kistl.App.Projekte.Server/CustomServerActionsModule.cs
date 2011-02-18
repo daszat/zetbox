@@ -21,10 +21,15 @@ namespace Kistl.App.Projekte.Server
                 .AsSelf()
                 .SingleInstance();
 
-            // Register types explicit
-            moduleBuilder
-                .RegisterType<ZBox.App.SchemaMigration.CustomServerActions_SchemaMigration>()
-                .SingleInstance();
+            // Register all non static ActionClasses
+            foreach (var t in typeof(CustomServerActionsModule).Assembly.GetTypes())
+            {
+                if (!t.IsStatic())
+                {
+                    moduleBuilder.RegisterType(t)
+                        .SingleInstance();
+                }
+            }
         }
     }
 }

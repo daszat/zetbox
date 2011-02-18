@@ -1,33 +1,27 @@
-
-namespace at.dasz.DocumentManagement
+namespace Kistl.App.GUI
 {
     using System;
     using System.Collections.Generic;
-    using System.IO;
     using System.Linq;
     using System.Text;
-    using Autofac;
     using Kistl.API;
-using Kistl.Client.Presentables;
-    
-    public class CustomClientActions_DocumentManagement
+    using Kistl.Client.Presentables;
+
+    /// <summary>
+    /// Client implementation
+    /// </summary>
+    [Implementor]
+    public class IconActions
     {
         private static IViewModelFactory _factory;
 
-        public CustomClientActions_DocumentManagement(IViewModelFactory factory)
+        public IconActions(IViewModelFactory factory)
         {
             _factory = factory;
         }
 
-        public static void OnOpen_File(File obj)
-        {
-            if (obj.Blob != null)
-            {
-                obj.Blob.Open();
-            }
-        }
-
-        public static void OnUpload_File(File obj)
+        [Invocation]
+        public static void Upload(Kistl.App.GUI.Icon obj)
         {
             // UI Code in Custom Actions!
             // ASP.NET would have a big Problem with that function
@@ -37,7 +31,16 @@ using Kistl.Client.Presentables;
                 var fi = new System.IO.FileInfo(path);
                 int id = obj.Context.CreateBlob(fi, fi.GetMimeType());
                 obj.Blob = obj.Context.Find<Kistl.App.Base.Blob>(id);
-                obj.Name = obj.Blob.OriginalName;
+                obj.IconFile = obj.Blob.OriginalName;
+            }
+        }
+
+        [Invocation]
+        public static void Open(Kistl.App.GUI.Icon obj)
+        {
+            if (obj.Blob != null)
+            {
+                obj.Blob.Open();
             }
         }
     }

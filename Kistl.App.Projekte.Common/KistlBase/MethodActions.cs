@@ -45,5 +45,12 @@ namespace Kistl.App.Base
                 e.Result = String.Format("new Method #{0}: {1}", obj.ID, obj.Name);
             }
         }
+
+        [Invocation]
+        public static void GetReturnParameter(Method obj, MethodReturnEventArgs<BaseParameter> e)
+        {
+            e.Result = obj.Parameter.SingleOrDefault(param => param.IsReturnParameter);
+        }
+
     }
 }
