@@ -11,8 +11,6 @@ namespace Kistl.App.Base
 
     public static partial class CustomCommonActions_KistlBase
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Common.CustomActions");
-
         #region Relation_Storage Constraint
 
         public static bool OnIsValid_Relation_Storage(object constrainedObject, object constrainedValue)
