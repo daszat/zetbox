@@ -293,6 +293,11 @@ namespace Kistl.API.Configuration
         public static string GetDefaultConfigName(string basename)
         {
             var zenv = Environment.GetEnvironmentVariable("zenv");
+            if (String.IsNullOrEmpty(zenv))
+            {
+                Logging.Log.WarnOnce("No zenc explicitely set, using [Local]");
+                zenv = "Local";
+            }
             var file = Path.Combine(Path.Combine("Configs", zenv), basename);
             Logging.Log.InfoFormat("Got zenv=[{0}], trying file=[{1}]", zenv, file);
             while (!Path.IsPathRooted(zenv) && !File.Exists(file) && !String.IsNullOrEmpty(zenv))
@@ -302,7 +307,16 @@ namespace Kistl.API.Configuration
                 file = Path.Combine(Path.Combine("Configs", zenv), basename);
                 Logging.Log.InfoFormat("Got zenv=[{0}], trying file=[{1}]", zenv, file);
             }
-            return file;
+            if (!File.Exists(file))
+            {
+                Logging.Log.WarnFormat("No default configuration found for zenv=[{0}], basename=[{1}]", Environment.GetEnvironmentVariable("zenv"), basename);
+                return Path.Combine("Configs", "DefaultConfig.xml");
+            }
+            else
+            {
+                Logging.Log.InfoFormat("Default configuration found for zenv=[{0}], basename=[{1}]: [{2}]", Environment.GetEnvironmentVariable("zenv"), basename, Path.GetFullPath(file));
+                return file;
+            }
         }
 
         /// <summary>
