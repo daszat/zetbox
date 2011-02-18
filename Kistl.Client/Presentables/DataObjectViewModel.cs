@@ -252,18 +252,23 @@ namespace Kistl.Client.Presentables
             // load properties from MetaContext
             ObjectClass cls = _object.GetObjectClass(FrozenContext);
             var methods = new List<Method>();
-            while (cls != null)
-            {
-                foreach (Method m in cls.Methods.Where(m =>
-                    m.IsDisplayable
-                    && m.Parameter.Count == 1
-                    && m.Parameter.Single().IsReturnParameter
-                    && !(m.Parameter.Single() is ObjectParameter))) // Could be a CreateRelatedUseCase, and we don't want to go around creating new objects
-                {
-                    methods.Add(m);
-                }
-                cls = cls.BaseObjectClass;
-            }
+
+            // TODO: Case #2174
+            // Delete this!
+            // Regenerate Typerefs on assembly is get called when opening a Assembly
+            // Use the new introduced calculated properties instead
+            //while (cls != null)
+            //{
+            //    foreach (Method m in cls.Methods.Where(m =>
+            //        m.IsDisplayable
+            //        && m.Parameter.Count == 1
+            //        && m.Parameter.Single().IsReturnParameter
+            //        && !(m.Parameter.Single() is ObjectParameter))) // Could be a CreateRelatedUseCase, and we don't want to go around creating new objects
+            //    {
+            //        methods.Add(m);
+            //    }
+            //    cls = cls.BaseObjectClass;
+            //}
 
             _MethodList = methods;
         }

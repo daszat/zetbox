@@ -321,7 +321,7 @@ namespace Kistl.App.Extensions
             }
             catch (Exception ex)
             {
-                Log.Error("Exception in CreateInvokeInfo", ex);
+                Log.Error(string.Format("Exception in CreateInvokeInfo: type: {0}, method: {1}", implType.FullName, clrMethod), ex);
             }
         }
         #endregion

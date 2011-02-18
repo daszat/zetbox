@@ -105,7 +105,6 @@
     <Compile Include="KistlBase\DataTypeActions.cs" />
     <Compile Include="KistlBase\DecimalParameterActions.cs" />
     <Compile Include="KistlBase\ToStringHelper.cs" />
-    <Compile Include="Parties\CustomCommonActions_KistlBase.Parameter.cs" />
     <Compile Include="CustomCommonActions_KistlBase.Constraints.cs" />
     <Compile Include="CustomCommonActionsModule.cs" />
     <Compile Include="DocumentManagement\DocumentActions.cs" />
@@ -138,6 +137,10 @@
     <Compile Include="KistlBase\ObjectReferencePropertyActions.cs" />
     <Compile Include="KistlBase\RelationActions.cs" />
     <Compile Include="KistlBase\RelationEndActions.cs" />
+    <Compile Include="Parties\PartyRelationshipActions.cs" />
+    <Compile Include="Parties\PartyRoleActions.cs" />
+    <Compile Include="Parties\EmploymentActions.cs" />
+    <Compile Include="Parties\EmployeeActions.cs" />
     <Compile Include="Parties\OrganizationActions.cs" />
     <Compile Include="Parties\PersonActions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
