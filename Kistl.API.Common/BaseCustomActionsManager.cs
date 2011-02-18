@@ -228,22 +228,6 @@ namespace Kistl.App.Extensions
             if (implType == null) throw new ArgumentNullException("implType");
             if (objClass == null) throw new ArgumentNullException("objClass");
 
-            // Method invocations
-            foreach (var mi in objClass.MethodInvocations)
-            {
-                // May be null on Methods without events like server side invocatiaons or "embedded" methods
-                // or null if not found
-                var attr = FindEventBasedMethodAttribute(mi.Method, implType);
-                if (attr != null) CreateInvokeInfo(implType, mi, attr.EventName);
-            }
-            // PropertyInvocations
-            foreach (Property prop in objClass.Properties)
-            {
-                foreach (PropertyInvocation pi in prop.Invocations)
-                {
-                    CreateInvokeInfo(implType, pi, "On" + prop.Name + "_" + pi.InvocationType);
-                }
-            }
 
             // Reflected Methods
             // New style
@@ -340,56 +324,6 @@ namespace Kistl.App.Extensions
                 Log.Error("Exception in CreateInvokeInfo", ex);
             }
         }
-
-        private void CreateInvokeInfo(Type implType, IInvocation invoke, string eventName)
-        {
-            try
-            {
-                var restr = invoke.Implementor.Assembly.DeploymentRestrictions;
-                if (!_restrictor.IsAcceptableDeploymentRestriction((int)restr))
-                {
-                    return;
-                }
-
-                // as noted above, no methods are 
-                // attached yet, so TypeRef.AsType() 
-                // and TypeRef.ToString() would be 
-                // nice, but aren't available yet.
-                Type t = Type.GetType(invoke.Implementor.FullName + ", " + invoke.Implementor.Assembly.Name);
-                if (t == null)
-                {
-                    //Log.ErrorFormat("Type {0}, {1} not found", invoke.Implementor.FullName, invoke.Implementor.Assembly.Name);
-                    return;
-                }
-
-                if (!t.IsStatic())
-                {
-                    // initialize t's handler
-                    _container.Resolve(t);
-                }
-
-                MethodInfo clrMethod = t.GetMethod(invoke.MemberName);
-                if (clrMethod == null)
-                {
-                    //Log.ErrorFormat("CLR Method {0} not found", invoke.MemberName);
-                    return;
-                }
-
-                EventInfo ei = implType.FindEvent(eventName);
-                if (ei == null)
-                {
-                    //Log.ErrorFormat("CLR Event {0} not found", eventName);
-                    return;
-                }
-
-                AttachEvents(clrMethod, ei);
-            }
-            catch (Exception ex)
-            {
-                Log.Error("Exception in CreateInvokeInfo", ex);
-            }
-        }
-
         #endregion
     }
 }

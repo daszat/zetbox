@@ -137,6 +137,7 @@ namespace Kistl.API
         {
             lock (_lock)
             {
+                if (type == null) return new InterfaceType(); // Possible, because a Type could be loaded from an XML File which does not exists in this ZBox instance
                 if (_cache.ContainsKey(type)) return _cache[type];
                 var ift = new InterfaceType(type, typeChecker);
                 _cache[type] = ift;

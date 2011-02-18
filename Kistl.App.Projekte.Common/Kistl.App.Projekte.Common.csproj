@@ -124,8 +124,6 @@
     <Compile Include="KistlBase\EnumerationEntryActions.cs" />
     <Compile Include="KistlBase\TypeRefActions.cs" />
     <Compile Include="KistlBase\ObjectReferencePlaceholderPropertyActions.cs" />
-    <Compile Include="KistlBase\MethodInvocationActions.cs" />
-    <Compile Include="KistlBase\PropertyInvocationActions.cs" />
     <Compile Include="KistlBase\MethodActions.cs" />
     <Compile Include="KistlBase\ObjectClassActions.cs" />
     <Compile Include="KistlBase\ReadOnlyConstraintActions.cs" />
@@ -134,7 +132,6 @@
     <Compile Include="KistlBase\InitOnlyConstraintActions.cs" />
     <Compile Include="KistlBase\ViewReadOnlyConstraintActions.cs" />
     <Compile Include="KistlBase\IsValidIdentifierConstraintActions.cs" />
-    <Compile Include="KistlBase\MethodInvocationConstraintActions.cs" />
     <Compile Include="KistlBase\StringRangeConstraintActions.cs" />
     <Compile Include="KistlBase\IntegerRangeConstraintActions.cs" />
     <Compile Include="KistlBase\NotNullableConstraintActions.cs" />

@@ -35,7 +35,6 @@ namespace Kistl.DalProvider.Ef.Tests
             obj.ImplementsInterfaces.Clear();
             obj.IsFrozenObject = false;
             obj.IsSimpleObject = false;
-            obj.MethodInvocations.Clear();
             obj.Methods.Clear();
             obj.Module = ctx.GetQuery<Module>().First();
             obj.Properties.Clear();
@@ -64,7 +63,6 @@ namespace Kistl.DalProvider.Ef.Tests
                 Assert.That((ICollection)result.ImplementsInterfaces, Is.EquivalentTo((ICollection)obj.ImplementsInterfaces));
                 Assert.That(result.IsFrozenObject, Is.EqualTo(obj.IsFrozenObject));
                 Assert.That(result.IsSimpleObject, Is.EqualTo(obj.IsSimpleObject));
-                Assert.That((ICollection)result.MethodInvocations, Is.EquivalentTo((ICollection)obj.MethodInvocations));
                 Assert.That((ICollection)result.Methods, Is.EquivalentTo((ICollection)obj.Methods));
                 // Cannot test ObjectReferences -> no Context available.
                 // Assert.That(nullResult.Module, Is.EqualTo(obj.Module));

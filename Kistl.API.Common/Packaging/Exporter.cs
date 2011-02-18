@@ -203,10 +203,8 @@ namespace Kistl.App.Packaging
                 ctx.GetQuery<Kistl.App.Base.DefaultPropertyValue>().Max(d => d.ChangedOn),
                 ctx.GetQuery<Kistl.App.Base.EnumerationEntry>().Max(d => d.ChangedOn),
                 ctx.GetQuery<Kistl.App.Base.Method>().Max(d => d.ChangedOn),
-                ctx.GetQuery<Kistl.App.Base.MethodInvocation>().Max(d => d.ChangedOn),
                 ctx.GetQuery<Kistl.App.Base.Module>().Max(d => d.ChangedOn),
                 ctx.GetQuery<Kistl.App.Base.Property>().Max(d => d.ChangedOn),
-                ctx.GetQuery<Kistl.App.Base.PropertyInvocation>().Max(d => d.ChangedOn),
                 ctx.GetQuery<Kistl.App.Base.Relation>().Max(d => d.ChangedOn),
                 ctx.GetQuery<Kistl.App.Base.RelationEnd>().Max(d => d.ChangedOn),
                 ctx.GetQuery<Kistl.App.Base.TypeRef>().Max(d => d.ChangedOn)

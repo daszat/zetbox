@@ -15,15 +15,6 @@ namespace Kistl.App.Base
     public static class MethodActions
     {
         [Invocation]
-        public static void CreateMethodInvocation(Kistl.App.Base.Method obj, MethodReturnEventArgs<Kistl.App.Base.MethodInvocation> e)
-        {
-            e.Result = obj.Context.Create<MethodInvocation>();
-            e.Result.InvokeOnObjectClass = obj.ObjectClass;
-            e.Result.Method = obj;
-            e.Result.Module = obj.Module;
-        }
-
-        [Invocation]
         public static void GetLabel(Kistl.App.Base.Method obj, MethodReturnEventArgs<System.String> e)
         {
             e.Result = !string.IsNullOrEmpty(obj.Label) ? obj.Label : obj.Name;

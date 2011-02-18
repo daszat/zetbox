@@ -230,7 +230,7 @@ namespace Kistl.App.Packaging
                         }
                         else
                         {
-                            Log.WarnFormat("Type {0} not found", ifTypeName);
+                            Log.WarnOnce(string.Format("Type {0} not found", ifTypeName));
                         }
                     }
                 }
@@ -262,11 +262,11 @@ namespace Kistl.App.Packaging
             {
                 string ifTypeName = string.Format("{0}.{1}", s.Reader.NamespaceURI, s.Reader.LocalName);
                 InterfaceType ifType = ctx.GetInterfaceType(ifTypeName);
-                // if (ifType == null)
-                // {
-                //     Log.WarnFormat("Type {0} not found", ifTypeName);
-                //     return null;
-                // }
+                if (ifType.Type == null)
+                {
+                    Log.WarnOnce(string.Format("Type {0} not found", ifTypeName));
+                    return null;
+                }
 
                 IPersistenceObject obj = FindObject(ctx, objects, exportGuid, ifType);
 

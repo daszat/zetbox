@@ -106,11 +106,6 @@ namespace Kistl.API.Server.Mocks
             set;
         }
 
-        public ICollection<Kistl.App.Base.MethodInvocation> MethodInvocations
-        {
-            get { throw new NotImplementedException(); }
-        }
-
         public ICollection<Kistl.App.Base.Method> Methods
         {
             get { throw new NotImplementedException(); }

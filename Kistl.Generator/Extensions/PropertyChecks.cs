@@ -107,6 +107,8 @@ namespace Kistl.Generator.Extensions
         public static bool IsList(this ObjectReferenceProperty prop)
         {
             if (prop == null) { throw new ArgumentNullException("prop"); }
+            if(prop.RelationEnd == null) throw new InvalidOperationException(string.Format("Error: object reference property {0} on ObjectClass {1} has no relation end", prop.Name, prop.ObjectClass));
+
             RelationEnd relEnd = prop.RelationEnd;
             Relation rel = relEnd.GetParent();
             RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
