@@ -27,7 +27,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                 this.WriteLine();
                 this.WriteObjects("            {");
                 this.WriteLine();
-                this.WriteObjects("                ", backingStoreName, " = new ", implementationTypeName, "(this, \"", propertyName, "\", null, null) { CompoundObject_IsNull = ", isNull , " };");
+                this.WriteObjects("                ", backingStoreName, " = new ", implementationTypeName, "(this, \"", propertyName, "\", null, null) { CompoundObject_IsNull = ", isNull, " };");
                 this.WriteLine();
                 this.WriteObjects("            }");
                 this.WriteLine();
@@ -40,6 +40,15 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                 this.WriteObjects("            }");
                 this.WriteLine();
 
+                this.WriteLine();
+            }
+        }
+
+        public virtual void ApplyDefaultValueSetFlagInitialisers()
+        {
+            foreach (var flag in valueSetFlags)
+            {
+                this.WriteObjects("            ", flag, " = Proxy.ID > 0;");
                 this.WriteLine();
             }
         }

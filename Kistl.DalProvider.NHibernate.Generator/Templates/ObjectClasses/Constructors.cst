@@ -13,6 +13,7 @@
 <%@ Import Namespace="Kistl.Generator.Extensions" %>
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 <%@ Parameter Name="compoundObjectProperties" Type="IEnumerable<CompoundObjectProperty>" %>
+<%@ Parameter Name="valueSetFlags" Type="IEnumerable<string>" %>
 <%@ Parameter Name="interfaceName" Type="string" %>
 <%@ Parameter Name="className" Type="string" %>
 <%@ Parameter Name="baseClassName" Type="string" %>
@@ -37,6 +38,7 @@
         {
             this.Proxy = proxy;
 <% ApplyCompoundObjectPropertyInitialisers(); %>
+<% ApplyDefaultValueSetFlagInitialisers(); %>
         }
 
         /// <summary>the NHibernate proxy of the represented entity</summary>

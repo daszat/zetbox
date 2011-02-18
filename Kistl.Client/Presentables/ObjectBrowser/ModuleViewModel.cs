@@ -4,11 +4,10 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
-
 using Kistl.API;
+using Kistl.API.Configuration;
 using Kistl.App.Base;
 using Kistl.App.Extensions;
-using Kistl.API.Configuration;
 using Kistl.Client.Presentables.KistlBase;
 
 namespace Kistl.Client.Presentables.ObjectBrowser
@@ -53,7 +52,8 @@ namespace Kistl.Client.Presentables.ObjectBrowser
         {
             var datatypes = FrozenContext.GetQuery<ObjectClass>()
                 .Where(dt => dt.Module.ExportGuid == _module.ExportGuid && !dt.IsSimpleObject)
-                .OrderBy(dt => dt.Name);
+                .OrderBy(dt => dt.Name)
+                .ToList();
             foreach (var cls in datatypes)
             {
                 var mdl = ViewModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, _ctxFactory, cls, null);

@@ -50,7 +50,8 @@ namespace Kistl.Client.Presentables.GUI
         {
             if (screen == null) throw new ArgumentNullException("screen");
 
-            if (!CurrentIdentity.IsAdmininistrator() && !screen.Groups.Any(g => CurrentIdentity.Groups.Select(grp => grp.ExportGuid).Contains(g.ExportGuid))) throw new InvalidOperationException("The current identity is not allowed to see this screen. The screen should not be displayed! Check your filters.");
+            if (!CurrentIdentity.IsAdmininistrator() && !screen.Groups.Any(g => CurrentIdentity.Groups.Any(grp => grp.ExportGuid == g.ExportGuid)))
+                throw new InvalidOperationException("The current identity is not allowed to see this screen. The screen should not be displayed! Check your filters.");
 
             _screen = screen;
             _additionalCommandsRO = new ReadOnlyObservableCollection<CommandViewModel>(_additionalCommands);

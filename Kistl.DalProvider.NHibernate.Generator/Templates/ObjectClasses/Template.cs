@@ -26,6 +26,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
             //base.ApplyConstructorTemplate();
             Constructors.Call(Host, ctx,
                 ObjectClass.Properties.OfType<CompoundObjectProperty>(),
+                ObjectClass.Properties.Where(p => p.DefaultValue != null).Select(p => "_is" + p.Name + "Set"),
                 ObjectClass.Name,
                 GetTypeName(),
                 ObjectClass.BaseObjectClass == null ? null : ObjectClass.BaseObjectClass.Name);

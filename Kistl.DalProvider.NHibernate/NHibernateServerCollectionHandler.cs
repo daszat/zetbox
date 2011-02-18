@@ -9,6 +9,7 @@ namespace Kistl.DalProvider.NHibernate
     using Kistl.API;
     using Kistl.API.Server;
     using Kistl.App.Base;
+    using Kistl.API.Utils;
 
     public class NHibernateServerCollectionHandler<TA, TB, TParent, TChild>
         : IServerCollectionHandler
@@ -38,20 +39,10 @@ namespace Kistl.DalProvider.NHibernate
         }
 
         //// Helper method which is only called by reflection from GetCollectionEntries
-        //private IEnumerable<IRelationEntry> GetCollectionEntriesInternal<IMPL>(TParent parent, Relation rel, RelationEndRole endRole)
-        //    where IMPL : class, IEntityWithRelationships
-        //{
-        //    var c = ((IEntityWithRelationships)(parent)).RelationshipManager
-        //            .GetRelatedCollection<IMPL>(
-        //                "Model." + rel.GetRelationAssociationName(endRole),
-        //                "CollectionEntry");
-        //    if (parent.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-        //        && !c.IsLoaded)
-        //    {
-        //        c.Load();
-        //    }
-        //    c.Cast<IRelationEntry>().ForEach(i => i.AttachToContext(parent.Context));
-        //    return c.Cast<IRelationEntry>();
-        //}
+        private IEnumerable<IRelationEntry> GetCollectionEntriesInternal<IMPL>(TParent parent, Relation rel, RelationEndRole endRole)
+            where IMPL : NHibernatePersistenceObject
+        {
+            return MagicCollectionFactory.WrapAsCollection<IRelationEntry>(parent.GetPrivatePropertyValue<object>(rel.GetEndFromRole(endRole).Navigator.Name)).ToList();
+        }
     }
 }

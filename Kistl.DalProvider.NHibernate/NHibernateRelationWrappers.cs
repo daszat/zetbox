@@ -9,7 +9,7 @@ namespace Kistl.DalProvider.NHibernate
     using Kistl.DalProvider.Base.RelationWrappers;
 
     public class NHibernateASideCollectionWrapper<TA, TB, TEntry>
-        : ASideCollectionWrapper<TA, TB, TEntry, ICollection<TEntry>>
+        : ASideCollectionWrapper<TA, TB, TEntry, ICollection<TEntry>>, IEnumerable<IRelationEntry>
         where TA : class, IDataObject
         where TB : class, IDataObject
         where TEntry : class, IRelationEntry<TA, TB>
@@ -69,10 +69,15 @@ namespace Kistl.DalProvider.NHibernate
         {
             Collection.Remove(item);
         }
+
+        IEnumerator<IRelationEntry> IEnumerable<IRelationEntry>.GetEnumerator()
+        {
+            return Collection.Cast<IRelationEntry>().GetEnumerator();
+        }
     }
 
     public class NHibernateBSideCollectionWrapper<TA, TB, TEntry>
-        : BSideCollectionWrapper<TA, TB, TEntry, ICollection<TEntry>>
+        : BSideCollectionWrapper<TA, TB, TEntry, ICollection<TEntry>>, IEnumerable<IRelationEntry>
         where TA : class, IDataObject
         where TB : class, IDataObject
         where TEntry : class, IRelationEntry<TA, TB>
@@ -132,11 +137,16 @@ namespace Kistl.DalProvider.NHibernate
         {
             Collection.Remove(item);
         }
+
+        IEnumerator<IRelationEntry> IEnumerable<IRelationEntry>.GetEnumerator()
+        {
+            return Collection.Cast<IRelationEntry>().GetEnumerator();
+        }
     }
 
 
     public class NHibernateASideListWrapper<TA, TB, TEntry>
-        : ASideListWrapper<TA, TB, TEntry, ICollection<TEntry>>
+        : ASideListWrapper<TA, TB, TEntry, ICollection<TEntry>>, IEnumerable<IRelationEntry>
         where TA : class, IDataObject
         where TB : class, IDataObject
         where TEntry : class, IRelationListEntry<TA, TB>
@@ -196,10 +206,15 @@ namespace Kistl.DalProvider.NHibernate
         {
             Collection.Remove(item);
         }
+
+        IEnumerator<IRelationEntry> IEnumerable<IRelationEntry>.GetEnumerator()
+        {
+            return Collection.Cast<IRelationEntry>().GetEnumerator();
+        }
     }
 
     public class NHibernateBSideListWrapper<TA, TB, TEntry>
-        : BSideListWrapper<TA, TB, TEntry, ICollection<TEntry>>
+        : BSideListWrapper<TA, TB, TEntry, ICollection<TEntry>>, IEnumerable<IRelationEntry>
         where TA : class, IDataObject
         where TB : class, IDataObject
         where TEntry : class, IRelationListEntry<TA, TB>
@@ -258,6 +273,11 @@ namespace Kistl.DalProvider.NHibernate
         public override void RemoveWithoutClearParent(TEntry item)
         {
             Collection.Remove(item);
+        }
+
+        IEnumerator<IRelationEntry> IEnumerable<IRelationEntry>.GetEnumerator()
+        {
+            return Collection.Cast<IRelationEntry>().GetEnumerator();
         }
     }
 }

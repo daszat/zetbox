@@ -1,17 +1,16 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Diagnostics;
 
 namespace Kistl.API.Utils
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.Reflection;
+    using System.Text;
 
     public static class MagicCollectionFactory
     {
-
         public static ICollection<TResult> WrapAsCollectionHelper<TFrom, TResult>(ICollection<TFrom> collection)
             where TFrom : TResult
         {
@@ -42,6 +41,11 @@ namespace Kistl.API.Utils
             else if (collection is IList<T>)
             {
                 return (IList<T>)collection;
+            }
+            else if (collection is IEnumerable<T>)
+            {
+                // TODO: implement a non-synchronized version for here
+                return new SynchronizedReadOnlyCollection<T>(new object(), (IEnumerable<T>)collection);
             }
             else
             {

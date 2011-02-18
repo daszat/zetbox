@@ -26,6 +26,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries
             //base.ApplyConstructorTemplate();
             ObjectClasses.Constructors.Call(Host, ctx,
                 new CompoundObjectProperty[0],
+                new string[0],
                 GetCeInterface(),
                 GetCeClassName(),
                 null);

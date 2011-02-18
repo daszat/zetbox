@@ -37,6 +37,7 @@ M: System.Void Kistl.API.BinarySerializer::SerializerTrace(System.String,System.
 M: System.Void Kistl.DalProvider.Client.KistlContextProvider::AddNewLocalObjectsGeneric(System.Collections.IList)
 # Helper method which is only called by reflection from GetCollectionEntries
 M: System.Collections.Generic.IEnumerable`1<Kistl.API.IRelationEntry> Kistl.DalProvider.Ef.ServerCollectionHandler`4::GetCollectionEntriesInternal(TParent,Kistl.App.Base.Relation,Kistl.API.RelationEndRole)
+M: System.Collections.Generic.IEnumerable`1<Kistl.API.IRelationEntry> Kistl.DalProvider.NHibernate.NHibernateServerCollectionHandler`4::GetCollectionEntriesInternal(TParent,Kistl.App.Base.Relation,Kistl.API.RelationEndRole)
 # Helper method which is only called by reflection from GetPersistenceObjectQuery
 M: System.Linq.IQueryable`1<Kistl.API.IPersistenceObject> Kistl.DalProvider.NHibernate.NHibernateContext::PrepareQueryable()
 # Helper method which is only called by reflection from GetUntypedQuery

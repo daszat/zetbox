@@ -15,7 +15,7 @@ namespace Kistl.App.Extensions
         public static bool IsAdmininistrator(this Identity id)
         {
             if (id == null) throw new ArgumentNullException("id");
-            return id.Groups.Count(g => g.ExportGuid == Groups_Adminstrator) > 0;
+            return id.Groups.Any(g => g.ExportGuid == Groups_Adminstrator);
         }
     }
 }
