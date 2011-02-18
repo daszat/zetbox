@@ -10,7 +10,7 @@ if .%1. == .. GOTO GOON
 
 set config=%1
 
-GOON:
+:GOON
 
 bin\debug\bin\Server\Kistl.Server.Service.exe %config% -wipe
 IF ERRORLEVEL 1 GOTO FAIL
