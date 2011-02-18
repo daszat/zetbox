@@ -5,11 +5,11 @@ namespace Kistl.API.Utils
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    
+
     using Autofac;
     using Autofac.Core;
     using Kistl.API.Configuration;
-    
+
     public static class AutoFacBuilder
     {
         public static ContainerBuilder CreateContainerBuilder(KistlConfig config)
@@ -34,6 +34,15 @@ namespace Kistl.API.Utils
                 try
                 {
                     Logging.Log.InfoFormat("Adding module [{0}]", m);
+#if MONO
+                    // workaround for https://bugzilla.novell.com/show_bug.cgi?id=661461
+                    var parts = m.Split(",".ToCharArray(), 2);
+                    if (parts.Length == 2)
+                    {
+                        var assemblyName = parts[1];
+                        System.Reflection.Assembly.Load(assemblyName);
+                    }
+#endif
                     builder.RegisterModule((IModule)Activator.CreateInstance(Type.GetType(m, true)));
                 }
                 catch (Exception ex)
