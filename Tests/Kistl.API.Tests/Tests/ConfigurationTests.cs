@@ -1,24 +1,24 @@
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
-using System.Text;
-
-using Kistl.API.Configuration;
-using Kistl.API.Mocks;
-
-using NUnit.Framework;
-using NUnit.Framework.Constraints;
 
 namespace Kistl.API.Tests
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.IO;
+    using System.Linq;
+    using System.Linq.Expressions;
+    using System.Reflection;
+    using System.Text;
+
+    using Kistl.API.Configuration;
+
+    using NUnit.Framework;
+
     [TestFixture]
-    public class KistlConfigTests : AbstractApiTestFixture
+    public class ConfigurationTests
+        : AbstractApiTestFixture
     {
-        readonly static string ConfigFile = "Kistl.API.Tests.Config.xml";
+        readonly static string ConfigFile = "Kistl.API.Tests.xml";
 
         private void CheckConfig(KistlConfig cfg)
         {
@@ -36,9 +36,10 @@ namespace Kistl.API.Tests
         [Test]
         public void DefaultLoading()
         {
-            if (!File.Exists("DefaultConfig.xml"))
+            var defaultDest = Path.Combine("Configs", "DefaultConfig.xml");
+            if (!File.Exists(defaultDest))
             {
-                File.Copy(ConfigFile, "DefaultConfig.xml");
+                File.Copy("TestConfig.xml", defaultDest);
             }
             var config = KistlConfig.FromFile(String.Empty, "DefaultConfig.xml");
 
@@ -50,17 +51,17 @@ namespace Kistl.API.Tests
         [Test]
         public void LoadFile()
         {
-            var config = KistlConfig.FromFile(ConfigFile, "DefaultConfig.xml");
+            var config = KistlConfig.FromFile("TestConfig.xml", "DoesNotExist.xml");
 
             Assert.That(config, Is.Not.Null, "Configuration");
-            Assert.That(config.ConfigFilePath, Is.EqualTo(ConfigFile), "ConfigFilePath");
+            Assert.That(config.ConfigFilePath, Is.EqualTo("TestConfig.xml"), "ConfigFilePath");
             Assert.That(config.ConfigName, Is.Not.Empty, "ConfigName");
         }
 
         [Test]
         public void FromStream()
         {
-            using (FileStream s = File.OpenRead(ConfigFile))
+            using (FileStream s = File.OpenRead(KistlConfig.GetDefaultConfigName(ConfigFile)))
             {
                 KistlConfig cfg = KistlConfig.FromStream(s);
                 Assert.That(cfg.ConfigFilePath, Is.Null);
@@ -71,7 +72,7 @@ namespace Kistl.API.Tests
         [Test]
         public void FromTextReader()
         {
-            using (FileStream s = File.OpenRead(ConfigFile))
+            using (FileStream s = File.OpenRead(KistlConfig.GetDefaultConfigName(ConfigFile)))
             {
                 TextReader rd = new StreamReader(s);
                 KistlConfig cfg = KistlConfig.FromStream(rd);

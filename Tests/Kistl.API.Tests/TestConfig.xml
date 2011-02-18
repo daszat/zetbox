@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- This config is used as test for the alternate config file loading code path -->
+<KistlConfig xmlns="http://dasz.at/Kistl/">
+  <ConfigName>Test Configuration File</ConfigName>
+  <Server StartServer="false">
+    <DocumentStore>DocumentStore/Server/</DocumentStore>
+    <LogFilePath>bin/LogFiles</LogFilePath>
+    <CodeGenWorkingPath>bin/CodeGenNext</CodeGenWorkingPath>
+    <CodeGenOutputPath>bin/CodeGen</CodeGenOutputPath>
+    <CodeGenArchivePath>Backup</CodeGenArchivePath>
+    <Modules>
+      <Module>Kistl.API.ApiModule, Kistl.API</Module>
+    </Modules>
+  </Server>
+  <Client StartClient="false" ThrowErrors="true">
+    <DocumentStore>DocumentStore/Client/</DocumentStore>
+    <Modules>
+      <Module>Kistl.API.ApiModule, Kistl.API</Module>
+    </Modules>
+  </Client>
+  <SourceFileLocation>
+    <!-- default probe path -->
+    <string>/srv/CCNet/Projects/zbox/repo/bin/CodeGen/bin/Debug</string>
+    <!-- common libaries -->
+    <string>/srv/CCNet/Projects/zbox/repo/bin/Debug/bin/Common</string>
+  </SourceFileLocation>
+</KistlConfig>

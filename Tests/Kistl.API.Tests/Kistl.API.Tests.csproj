@@ -109,7 +109,7 @@
     <Compile Include="Tests\BasicListTestsBaseline.cs" />
     <Compile Include="Tests\BasicListTests.cs" />
     <Compile Include="Tests\InterfaceTypes\when_looking_for_root_type.cs" />
-    <Compile Include="Tests\KistlConfigTests.cs" />
+    <Compile Include="Tests\ConfigurationTests.cs" />
     <Compile Include="Tests\ExpressionFilterTest.cs" />
     <Compile Include="Tests\ExtensionHelpersTest.cs" />
     <Compile Include="Tests\LinqExtensionsTests.cs" />
@@ -143,6 +143,11 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Kistl.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TestConfig.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
