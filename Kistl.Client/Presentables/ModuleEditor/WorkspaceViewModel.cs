@@ -150,7 +150,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
                     lst.Add(navScreenMdl);
 
                     // ViewDescriptor
-                    lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, typeof(ViewDescriptor).GetObjectClass(FrozenContext), () => DataContext.GetQuery<ViewDescriptor>().OrderBy(i => i.ControlKind));
+                    lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, typeof(ViewDescriptor).GetObjectClass(FrozenContext), () => DataContext.GetQuery<ViewDescriptor>().OrderBy(i => i.ControlKind.Name));
                     SetupViewModel(lstMdl);
                     lstMdl.EnableAutoFilter = false;
                     lstMdl.Filter.Add(new ConstantValueFilterModel("Module = @0", CurrentModule));

@@ -11,6 +11,8 @@ namespace Kistl.Client.Models
     using Kistl.App.Extensions;
     using Kistl.App.GUI;
     using Kistl.API.Utils;
+    using System.Collections;
+    using System.Collections.Specialized;
 
     public static class BaseParameterExtensionsThisShouldBeMovedToAZBoxMethod
     {
@@ -304,7 +306,119 @@ namespace Kistl.Client.Models
 
         public ObjectClass ReferencedClass
         {
-            get; private set;
+            get;
+            private set;
+        }
+
+        #endregion
+    }
+
+    /// <summary>
+    /// ValueModel for collections and lists
+    /// </summary>
+    /// <typeparam name="TCollection">a ICollection or IList</typeparam>
+    public class ObjectCollectionValueModel<TCollection>
+        : ClassValueModel<TCollection>, IObjectCollectionValueModel<TCollection>
+        where TCollection : class, IEnumerable
+    {
+        public ObjectCollectionValueModel(string label, string description, bool allowNullInput, bool isReadOnly, ObjectClass referencedClass, TCollection collection)
+            : this(label, description, allowNullInput, isReadOnly, null, referencedClass, collection)
+        {
+        }
+
+        public ObjectCollectionValueModel(string label, string description, bool allowNullInput, bool isReadOnly, ControlKind requestedKind, ObjectClass referencedClass, TCollection collection)
+            : base(label, description, allowNullInput, isReadOnly, requestedKind)
+        {
+            if (referencedClass == null) throw new ArgumentNullException("referencedClass");
+            if (collection == null) throw new ArgumentNullException("collection");
+
+            valueCache = collection;
+            _referencedClass = referencedClass;
+            if (collection is INotifyCollectionChanged)
+            {
+                ((INotifyCollectionChanged)collection).CollectionChanged += ValueCollectionChanged;
+            }
+        }
+
+        #region IValueModel<TValue> Members
+
+        protected TCollection valueCache;
+
+        /// <summary>
+        /// Gets or sets the value of the property presented by this model
+        /// </summary>
+        public override TCollection Value
+        {
+            get
+            {
+                return valueCache;
+            }
+            set
+            {
+                throw new NotSupportedException();
+            }
+        }
+
+        public IEnumerable UnderlyingCollection
+        {
+            get
+            {
+                return valueCache;
+            }
+        }
+
+        protected void ValueCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            NotifyCollectionChangedEventHandler temp = _CollectionChanged;
+            if (temp != null)
+            {
+                temp(sender, e);
+            }
+        }
+
+        #endregion
+
+        #region IObjectCollectionValueModel<TCollection> Members
+
+        private ObjectClass _referencedClass = null;
+        public ObjectClass ReferencedClass
+        {
+            get
+            {
+                return _referencedClass;
+            }
+        }
+
+        /// <summary>
+        /// No RelEnd, returns always null
+        /// </summary>
+        public RelationEnd RelEnd
+        {
+            get
+            {
+                return null;
+            }
+        }
+
+        public bool? IsInlineEditable
+        {
+            get { return false; }
+        }
+        #endregion
+
+        #region INotifyCollectionChanged Members
+
+        private event NotifyCollectionChangedEventHandler _CollectionChanged;
+        public event NotifyCollectionChangedEventHandler CollectionChanged
+        {
+            add
+            {
+                _CollectionChanged += value;
+            }
+            remove
+            {
+                _CollectionChanged -= value;
+            }
         }
 
         #endregion

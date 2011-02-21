@@ -177,6 +177,7 @@
       <DependentUpon>ParameterInputTaskViewModelResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Presentables\Parties\OrganizationViewModel.cs" />
+    <Compile Include="Presentables\Parties\PartyRolesViewModel.cs" />
     <Compile Include="Presentables\Parties\PersonViewModel.cs" />
     <Compile Include="Presentables\Parties\PartyViewModel.cs" />
     <Compile Include="Presentables\ValueInputTaskViewModel.cs" />

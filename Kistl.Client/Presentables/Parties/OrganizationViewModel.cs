@@ -6,6 +6,7 @@ namespace Kistl.Client.Presentables.Parties
     using System.Text;
     using Kistl.Client.Presentables;
     using Kistl.API;
+    using ZBox.Basic.Parties;
 
     [ViewModelDescriptor]
     public class OrganizationViewModel : PartyViewModel
@@ -14,14 +15,9 @@ namespace Kistl.Client.Presentables.Parties
             IDataObject obj);
 
         public OrganizationViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx,
-            IDataObject obj)
+            Organization obj)
             : base(appCtx, dataCtx, obj)
         {
-        }
-
-        public override string Name
-        {
-            get { throw new NotImplementedException(); }
         }
     }
 }
