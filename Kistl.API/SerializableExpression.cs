@@ -70,6 +70,7 @@ namespace Kistl.API
     /// </summary>
     [Serializable]
     [DataContract(Namespace = "http://dasz.at/ZBox/", Name = "Expression")]
+    [KnownType(typeof(SerializableType))]
     [KnownType(typeof(SerializableBinaryExpression))]
     [KnownType(typeof(SerializableConditionalExpression))]
     [KnownType(typeof(SerializableConstantExpression))]

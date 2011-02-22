@@ -631,7 +631,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>http://localhost:6666/KistlService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>DASZ\arthur</Upn>
+          <Upn>DASZ\david</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
