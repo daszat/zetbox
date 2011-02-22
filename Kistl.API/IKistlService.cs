@@ -126,7 +126,18 @@ namespace Kistl.API
         public int[] IDs { get; set; }
     }
 
-    [DataContract(Namespace = "http://dasz.at/ZBox/")]
+    [DataContract(Namespace = "http://dasz.at/ZBox/", Name="OrderBy")]
+    [KnownType(typeof(SerializableType))]
+    [KnownType(typeof(SerializableBinaryExpression))]
+    [KnownType(typeof(SerializableConditionalExpression))]
+    [KnownType(typeof(SerializableConstantExpression))]
+    [KnownType(typeof(SerializableCompoundExpression))]
+    [KnownType(typeof(SerializableLambdaExpression))]
+    [KnownType(typeof(SerializableMemberExpression))]
+    [KnownType(typeof(SerializableMethodCallExpression))]
+    [KnownType(typeof(SerializableNewExpression))]
+    [KnownType(typeof(SerializableParameterExpression))]
+    [KnownType(typeof(SerializableUnaryExpression))]
     public class OrderByContract
     {
         [DataMember(Name = "Type")]
