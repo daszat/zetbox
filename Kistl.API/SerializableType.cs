@@ -12,7 +12,7 @@ namespace Kistl.API
     /// Serialization Wrapper for a System.Type object
     /// </summary>
     [Serializable]
-    [DataContract(Namespace = "http://dasz.at/ZBox/")]
+    [DataContract(Namespace = "http://dasz.at/ZBox/", Name="Type")]
     public class SerializableType
     {
         /// <summary>
