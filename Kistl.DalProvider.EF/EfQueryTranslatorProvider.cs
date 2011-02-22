@@ -9,6 +9,7 @@ namespace Kistl.DalProvider.Ef
     using Kistl.API;
     using Kistl.API.Server;
     using Kistl.App.Base;
+    using System.Linq.Expressions;
 
     internal sealed class EfQueryTranslatorProvider<T>
         : QueryTranslatorProvider<T>
@@ -26,6 +27,23 @@ namespace Kistl.DalProvider.Ef
         protected override string ImplementationSuffix
         {
             get { return "Ef" + Kistl.API.Helper.ImplementationSuffix; }
+        }
+
+        protected override System.Linq.Expressions.Expression VisitConstant(System.Linq.Expressions.ConstantExpression c)
+        {
+            // Ef cannot map enumerations to the database, we need to use ints instead
+            if (c.Value != null && c.Type.IsEnum) // Handle Enums
+            {
+                return Expression.Constant((int)c.Value, typeof(int));
+            }
+            else if (c.Value != null && c.Type.IsGenericType && c.Type.GetGenericTypeDefinition() == typeof(Nullable<>) && c.Type.GetGenericArguments().Single().IsEnum)
+            {
+                return Expression.Constant((int)c.Value, typeof(int?)); // You can't extract a int? from an enum value
+            }
+            else
+            {
+                return base.VisitConstant(c);
+            }
         }
     }
 }
