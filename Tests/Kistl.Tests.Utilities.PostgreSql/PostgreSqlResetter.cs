@@ -59,9 +59,6 @@ namespace Kistl.Tests.Utilities.PostgreSql
                     }
                     try
                     {
-                        schemaManager.Open(config.Server.ConnectionString);
-                        schemaManager.DropAllObjects();
-
                         {
                             var pgDumpArgs = String.Format("--format c {0} --file={1} {2}", userCmdString, dumpFile, srcDB);
 
@@ -73,13 +70,19 @@ namespace Kistl.Tests.Utilities.PostgreSql
                             }
                         }
                         {
-                            var pgRestoreArgs = String.Format("--format c {0} --dbname={2} {1}", userCmdString, dumpFile, destDB);
+                            var pgRestoreArgs = String.Format("--format c --clean {0} --dbname={2} {1}", userCmdString, dumpFile, destDB);
                             Log.InfoFormat("pgRestoreArgs = {0}", pgRestoreArgs);
 
                             var restore = RunPgUtil("pg_restore", pgRestoreArgs);
                             if (restore.ExitCode != 0)
                             {
                                 Log.Warn("Retrying after failed pg_restore, since the tool can become confused by schema changes");
+
+                                schemaManager.Open(config.Server.ConnectionString);
+                                schemaManager.DropAllObjects();
+
+                                // now we should not need to clean anymore
+                                pgRestoreArgs = String.Format("--format c {0} --dbname={2} {1}", userCmdString, dumpFile, destDB);
                                 restore = RunPgUtil("pg_restore", pgRestoreArgs);
 
                                 if (restore.ExitCode != 0)
