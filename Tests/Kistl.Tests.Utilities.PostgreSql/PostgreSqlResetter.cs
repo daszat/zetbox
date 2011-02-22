@@ -73,7 +73,7 @@ namespace Kistl.Tests.Utilities.PostgreSql
                             }
                         }
                         {
-                            var pgRestoreArgs = String.Format("--format c --clean {0} --dbname={2} {1}", userCmdString, dumpFile, destDB);
+                            var pgRestoreArgs = String.Format("--format c {0} --dbname={2} {1}", userCmdString, dumpFile, destDB);
                             Log.InfoFormat("pgRestoreArgs = {0}", pgRestoreArgs);
 
                             var restore = RunPgUtil("pg_restore", pgRestoreArgs);
