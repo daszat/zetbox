@@ -207,12 +207,13 @@ namespace Kistl.API
         /// <summary>
         /// SerializableType of this Expression
         /// </summary>
-        [DataMember(Name = "SerializableType")]
+        [DataMember(Name = "Type")]
         public SerializableType SerializableType { get; set; }
 
         /// <summary>
         /// CLR Type of this Expression
         /// </summary>
+        [IgnoreDataMember]
         public Type Type
         {
             get
