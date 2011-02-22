@@ -250,7 +250,7 @@ namespace Kistl.Client.Presentables
         {
             if (_MethodList != null) return;
             // load properties from MetaContext
-            ObjectClass cls = _object.GetObjectClass(FrozenContext);
+            //ObjectClass cls = _object.GetObjectClass(FrozenContext);
             var methods = new List<Method>();
 
             // TODO: Case #2174
