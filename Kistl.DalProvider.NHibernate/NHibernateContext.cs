@@ -3,6 +3,7 @@ namespace Kistl.DalProvider.NHibernate
 {
     using System;
     using System.Collections.Generic;
+    using System.Data;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Text;
@@ -13,7 +14,6 @@ namespace Kistl.DalProvider.NHibernate
     using Kistl.API.Server;
     using Kistl.API.Utils;
     using Kistl.App.Base;
-    using System.Data;
 
     public sealed class NHibernateContext
         : BaseKistlDataContext, IKistlServerContext
@@ -133,26 +133,23 @@ namespace Kistl.DalProvider.NHibernate
 
         public override IList<T> FetchRelation<T>(Guid relationId, RelationEndRole endRole, IDataObject parent)
         {
-            //CheckDisposed();
-            //if (parent == null)
-            //{
-            //    return this.GetPersistenceObjectQuery<T>().ToList();
-            //}
-            //else
-            //{
-            //    // TODO: #1571 This method expects IF Types, but Impl types are passed
-            //    switch (endRole)
-            //    {
-            //        case RelationEndRole.A:
-            //            return GetPersistenceObjectQuery(GetImplementationType(typeof(T)).ToInterfaceType()).Cast<T>().Where(i => i.AObject == parent).ToList();
-            //        case RelationEndRole.B:
-            //            return GetPersistenceObjectQuery(GetImplementationType(typeof(T)).ToInterfaceType()).Cast<T>().Where(i => i.BObject == parent).ToList();
-            //        default:
-            //            throw new NotImplementedException(String.Format("Unknown RelationEndRole [{0}]", endRole));
-            //    }
-            //}
-            Logging.Linq.Warn("Called empty FetchRelation for NHibernate");
-            return null;
+            CheckDisposed();
+            if (parent == null)
+            {
+                return this.GetPersistenceObjectQuery<T>().ToList();
+            }
+            else
+            {
+                switch (endRole)
+                {
+                    case RelationEndRole.A:
+                        return GetPersistenceObjectQuery<T>().Where(i => i.AObject == parent).ToList();
+                    case RelationEndRole.B:
+                        return GetPersistenceObjectQuery<T>().Where(i => i.BObject == parent).ToList();
+                    default:
+                        throw new NotImplementedException(String.Format("Unknown RelationEndRole [{0}]", endRole));
+                }
+            }
         }
 
         public override IPersistenceObject ContainsObject(InterfaceType type, int ID)

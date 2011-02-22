@@ -46,7 +46,7 @@ namespace Kistl.Client.Presentables.KistlBase
         /// <param name="appCtx">the application context to use</param>
         /// <param name="config"></param>
         /// <param name="dataCtx">the data context to use</param>
-        /// <param name="workingCtxFactory">A factory for creating a working context. If the InstanceList is embeddet in a workspace which the user has to submit manually, the factory should return the same context as passed in the dataCtx parameter.</param>
+        /// <param name="workingCtxFactory">A factory for creating a working context. If the InstanceList is embedded in a workspace which the user has to submit manually, the factory should return the same context as passed in the dataCtx parameter.</param>
         /// <param name="type">the data type to model. If null, qry must be a Query of a valid DataType</param>
         /// <param name="qry">optional: the query to display. If null, Query will be constructed from type</param>
         public InstanceListViewModel(
