@@ -11,6 +11,7 @@ namespace Kistl.Tests.Utilities.PostgreSql
     using Autofac;
     using Kistl.API.AbstractConsumerTests;
     using Kistl.API.Configuration;
+    using Kistl.API.Server;
     using Kistl.API.Utils;
     using Npgsql;
     using NUnit.Framework;
@@ -21,15 +22,17 @@ namespace Kistl.Tests.Utilities.PostgreSql
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Tests.PostgreSqlUtils");
 
         private readonly KistlConfig config;
+        private readonly ISchemaProvider schemaManager;
 
         /// <summary>
         /// number of seconds to wait before cancelling _test reset.
         /// </summary>
         private const int RESET_TIMEOUT = 2 * 60;
 
-        public PostgreSqlResetter(KistlConfig config)
+        public PostgreSqlResetter(KistlConfig config, ISchemaProvider schemaManager)
         {
             this.config = config;
+            this.schemaManager = schemaManager;
         }
 
         public void ResetDatabase()
@@ -56,6 +59,9 @@ namespace Kistl.Tests.Utilities.PostgreSql
                     }
                     try
                     {
+                        schemaManager.Open(config.Server.ConnectionString);
+                        schemaManager.DropAllObjects();
+
                         {
                             var pgDumpArgs = String.Format("--format c {0} --file={1} {2}", userCmdString, dumpFile, srcDB);
 

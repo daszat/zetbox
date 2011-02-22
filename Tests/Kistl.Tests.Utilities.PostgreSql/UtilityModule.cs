@@ -7,6 +7,7 @@ namespace Kistl.Tests.Utilities.PostgreSql
     using System.Text;
     using Autofac;
     using Kistl.API.Server;
+    using Kistl.API.Configuration;
 
     public sealed class UtilityModule
         : Module
@@ -16,8 +17,13 @@ namespace Kistl.Tests.Utilities.PostgreSql
             base.Load(moduleBuilder);
 
             moduleBuilder
-                .RegisterAssemblyTypes(this.GetType().Assembly)
+                .RegisterAssemblyTypes(typeof(UtilityModule).Assembly)
                 .AsImplementedInterfaces();
+
+            moduleBuilder
+                .Register<PostgreSqlResetter>(c => new PostgreSqlResetter(c.Resolve<KistlConfig>(), c.ResolveNamed<ISchemaProvider>("POSTGRESQL")))
+                .AsImplementedInterfaces()
+                .InstancePerDependency();
         }
     }
 }
