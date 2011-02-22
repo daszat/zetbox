@@ -13,12 +13,7 @@ namespace Kistl.App.Projekte.Common
         {
             base.Load(moduleBuilder);
 
-            // Register all non static ActionClasses
-            foreach (var t in typeof(CustomCommonActionsModule).Assembly.GetTypes().Where(t => !t.IsStatic()))
-            {
-                moduleBuilder.RegisterType(t)
-                    .SingleInstance();
-            }
+            moduleBuilder.RegisterZBoxImplementors(typeof(CustomCommonActionsModule).Assembly);
 
             // Register explicit overrides here
         }

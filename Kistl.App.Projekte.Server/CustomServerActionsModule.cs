@@ -15,12 +15,7 @@ namespace Kistl.App.Projekte.Server
         {
             base.Load(moduleBuilder);
 
-            // Register all non static ActionClasses
-            foreach (var t in typeof(CustomServerActionsModule).Assembly.GetTypes().Where(t => !t.IsStatic()))
-            {
-                moduleBuilder.RegisterType(t)
-                    .SingleInstance();
-            }
+            moduleBuilder.RegisterZBoxImplementors(typeof(CustomServerActionsModule).Assembly);
 
             // Register explicit overrides here
         }

@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyLoader.cs" />
+    <Compile Include="AutofacExtensions.cs" />
     <Compile Include="BinarySerializer.cs" />
     <Compile Include="CollectionEntries.cs" />
     <Compile Include="Configuration\KistlConfig.cs" />
