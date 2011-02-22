@@ -10,6 +10,7 @@ namespace Kistl.API
     using System.Text;
 
     [DataContract(Namespace = "http://dasz.at/ZBox/")]
+    [KnownType(typeof(SerializableConstructorInfo))]
     [Serializable]
     public class SerializableMemberInfo
     {
