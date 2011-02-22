@@ -21,15 +21,15 @@ namespace Kistl.Server
     [DataContract(Namespace = "http://dasz.at/ZBox/Bootstrapper")]
     public class FileInfo
     {
-        [DataMember]
+        [DataMember(Name = "Name")]
         public string Name { get; set; }
-        [DataMember]
+        [DataMember(Name = "DestPath")]
         public string DestPath { get; set; }
-        [DataMember]
+        [DataMember(Name = "Date")]
         public DateTime Date { get; set; }
-        [DataMember]
+        [DataMember(Name = "Size")]
         public long Size { get; set; }
-        [DataMember]
+        [DataMember(Name = "Type")]
         public FileType Type { get; set; }
     }
 

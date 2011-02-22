@@ -16,11 +16,11 @@ namespace Kistl.Client.ASPNET.Toolkit
     [Serializable]
     public class JavaScriptObjectMoniker
     {
-        [DataMember]
+        [DataMember(Name = "ID")]
         public int ID { get; set; }
-        [DataMember]
+        [DataMember(Name = "Type")]
         public SerializableType Type { get; set; }
-        [DataMember]
+        [DataMember(Name = "Text")]
         public string Text { get; set; }
 
         public JavaScriptObjectMoniker()

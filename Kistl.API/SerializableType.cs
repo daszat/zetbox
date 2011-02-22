@@ -53,19 +53,19 @@ namespace Kistl.API
         /// <summary>
         /// Full Type Name
         /// </summary>
-        [DataMember]
+        [DataMember(Name = "TypeName")]
         public string TypeName { get; set; }
 
         /// <summary>
         /// AssemblyQualifiedName
         /// </summary>
-        [DataMember]
+        [DataMember(Name = "AssemblyQualifiedName")]
         public string AssemblyQualifiedName { get; set; }
 
         /// <summary>
         /// List of Generiy Type Parameter
         /// </summary>
-        [DataMember]
+        [DataMember(Name = "GenericTypeParameter")]
         public SerializableType[] GenericTypeParameter { get; set; }
 
         /// <summary>

@@ -41,7 +41,7 @@ namespace Kistl.API
     [Serializable]
     public class SerializableConstructorInfo : SerializableMemberInfo
     {
-        [DataMember]
+        [DataMember(Name = "ParameterTypes")]
         public SerializableType[] ParameterTypes { get; set; }
 
         public SerializableConstructorInfo()
@@ -200,13 +200,13 @@ namespace Kistl.API
         /// <summary>
         /// Expression Node Type
         /// </summary>
-        [DataMember]
+        [DataMember(Name = "NodeType")]
         public int NodeType { get; set; }
 
         /// <summary>
         /// SerializableType of this Expression
         /// </summary>
-        [DataMember]
+        [DataMember(Name = "SerializableType")]
         public SerializableType SerializableType { get; set; }
 
         /// <summary>
@@ -338,7 +338,7 @@ namespace Kistl.API
         /// <summary>
         /// Value of this Constant
         /// </summary>
-        [DataMember]
+        [DataMember(Name = "Value")]
         public object Value { get; set; }
     }
     #endregion
@@ -368,7 +368,7 @@ namespace Kistl.API
         /// <summary>
         /// Member Name
         /// </summary>
-        [DataMember]
+        [DataMember(Name = "MemberName")]
         public string MemberName { get; set; }
     }
     #endregion
@@ -400,22 +400,22 @@ namespace Kistl.API
         /// <summary>
         /// Method Name
         /// </summary>
-        [DataMember]
+        [DataMember(Name = "MethodName")]
         public string MethodName { get; set; }
 
         /// <summary>
         /// Parameter Types
         /// </summary>
-        [DataMember]
+        [DataMember(Name = "ParameterTypes")]
         public SerializableType[] ParameterTypes { get; set; }
 
         /// <summary>
         /// Generic Arguments
         /// </summary>
-        [DataMember]
+        [DataMember(Name = "GenericArguments")]
         public SerializableType[] GenericArguments { get; set; }
 
-        [DataMember]
+        [DataMember(Name = "SerializableMethodType")]
         public SerializableType SerializableMethodType { get; set; }
         /// <summary>
         /// Type where this Method is implemented
@@ -496,7 +496,7 @@ namespace Kistl.API
         /// <summary>
         /// Object Expression
         /// </summary>
-        [DataMember]
+        [DataMember(Name = "ObjectExpression")]
         public SerializableExpression ObjectExpression { get; set; }
 
         internal override Expression ToExpressionInternal(SerializationContext ctx)
@@ -561,13 +561,13 @@ namespace Kistl.API
         /// <summary>
         /// Parameter Name
         /// </summary>
-        [DataMember]
+        [DataMember(Name = "Name")]
         public string Name { get; set; }
 
         /// <summary>
         /// Guid to find parameter instance
         /// </summary>
-        [DataMember]
+        [DataMember(Name = "Guid")]
         public Guid Guid { get; set; }
 
         internal override Expression ToExpressionInternal(SerializationContext ctx)
@@ -589,10 +589,10 @@ namespace Kistl.API
     [DataContract(Namespace = "http://dasz.at/ZBox/", Name = "NewExpression")]
     public class SerializableNewExpression : SerializableCompoundExpression
     {
-        [DataMember]
+        [DataMember(Name = "Constructor")]
         public SerializableConstructorInfo Constructor { get; set; }
 
-        [DataMember]
+        [DataMember(Name = "Members")]
         public SerializableMemberInfo[] Members;
 
         internal SerializableNewExpression(NewExpression source, SerializationContext ctx, InterfaceType.Factory iftFactory)
@@ -631,11 +631,11 @@ namespace Kistl.API
     [DataContract(Namespace = "http://dasz.at/ZBox/", Name = "ConditionalExpression")]
     public class SerializableConditionalExpression : SerializableExpression
     {
-        [DataMember]
+        [DataMember(Name = "Test")]
         public SerializableExpression Test { get; set; }
-        [DataMember]
+        [DataMember(Name = "IfTrue")]
         public SerializableExpression IfTrue { get; set; }
-        [DataMember]
+        [DataMember(Name = "IfFalse")]
         public SerializableExpression IfFalse { get; set; }
 
         internal SerializableConditionalExpression(ConditionalExpression source, SerializationContext ctx, InterfaceType.Factory iftFactory)

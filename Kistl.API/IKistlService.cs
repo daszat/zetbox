@@ -119,20 +119,20 @@ namespace Kistl.API
     [DebuggerDisplay("{IDs.Length} reqs for {Type.TypeName}")]
     public class ObjectNotificationRequest
     {
-        [DataMember]
+        [DataMember(Name = "Type")]
         public SerializableType Type { get; set; }
 
-        [DataMember]
+        [DataMember(Name = "IDs")]
         public int[] IDs { get; set; }
     }
 
     [DataContract(Namespace = "http://dasz.at/ZBox/")]
     public class OrderByContract
     {
-        [DataMember]
+        [DataMember(Name = "Type")]
         public OrderByType Type { get; set; }
 
-        [DataMember]
+        [DataMember(Name = "Expression")]
         public SerializableExpression Expression { get; set; }
     }
 }
