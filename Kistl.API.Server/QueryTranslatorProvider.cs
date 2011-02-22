@@ -257,24 +257,14 @@ namespace Kistl.API.Server
 
         protected override Expression VisitMemberAccess(MemberExpression m)
         {
-            // e might be null if m.Member is a static reference
             Expression e = base.Visit(m.Expression);
 
-            string memberName = m.Member.Name;
-            Type type;
-            if (e is ParameterExpression)
-            {
-                type = e.Type;
-            }
-            else if (m.Expression != null)
-            {
-                type = TranslateType(m.Expression.Type);
-            }
-            else
-            {
-                type = TranslateType(m.Type);
-            }
+            // e might be null if m.Member is a static reference
+            var type = e == null
+                ? TranslateType(m.Type)
+                : e.Type;
 
+            string memberName = m.Member.Name;
             MemberExpression result;
             if (type.GetMember(memberName).Length > 0 && type.GetMember(memberName + Kistl.API.Helper.ImplementationSuffix).Length > 0)
             {

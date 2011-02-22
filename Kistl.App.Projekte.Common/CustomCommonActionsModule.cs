@@ -14,16 +14,13 @@ namespace Kistl.App.Projekte.Common
             base.Load(moduleBuilder);
 
             // Register all non static ActionClasses
-            foreach (var t in typeof(CustomCommonActionsModule).Assembly.GetTypes())
+            foreach (var t in typeof(CustomCommonActionsModule).Assembly.GetTypes().Where(t => !t.IsStatic()))
             {
-                if (!t.IsStatic())
-                {
-                    moduleBuilder.RegisterType(t)
-                        .SingleInstance();
-                }
+                moduleBuilder.RegisterType(t)
+                    .SingleInstance();
             }
 
-            // Register types explicit
+            // Register explicit overrides here
         }
     }
 }

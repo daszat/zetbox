@@ -16,20 +16,13 @@ namespace Kistl.App.Projekte.Server
             base.Load(moduleBuilder);
 
             // Register all non static ActionClasses
-            moduleBuilder
-                .RegisterAssemblyTypes(this.GetType().Assembly)
-                .AsSelf()
-                .SingleInstance();
-
-            // Register all non static ActionClasses
-            foreach (var t in typeof(CustomServerActionsModule).Assembly.GetTypes())
+            foreach (var t in typeof(CustomServerActionsModule).Assembly.GetTypes().Where(t => !t.IsStatic()))
             {
-                if (!t.IsStatic())
-                {
-                    moduleBuilder.RegisterType(t)
-                        .SingleInstance();
-                }
+                moduleBuilder.RegisterType(t)
+                    .SingleInstance();
             }
+
+            // Register explicit overrides here
         }
     }
 }
