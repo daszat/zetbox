@@ -58,7 +58,7 @@ namespace Kistl.Server
             _bootstrapperHost = new WebServiceHost(new BootstrapperService(config));
 
             var binding = new WebHttpBinding();
-            binding.Security.Mode = WebHttpSecurityMode.Transport;
+            binding.Security.Mode = WebHttpSecurityMode.TransportCredentialOnly;
             binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Basic;
 
             ((WebServiceHost)_bootstrapperHost).AddServiceEndpoint(
