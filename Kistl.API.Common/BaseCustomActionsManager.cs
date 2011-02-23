@@ -27,7 +27,30 @@ namespace Kistl.App.Extensions
 
         private readonly IDeploymentRestrictor _restrictor;
         private readonly ILifetimeScope _container;
-        Dictionary<string, MethodInfo> _reflectedMethods = new Dictionary<string, MethodInfo>();
+
+        private struct MethodKey
+        {
+            public MethodKey(string @namespace, string typeName, string methodName)
+            {
+                key = string.Format("{0}.{1}Actions.{2}", @namespace, typeName, methodName);
+            }
+
+            private string key;
+
+            public override bool Equals(object obj)
+            {
+                return this.key.Equals(((MethodKey)obj).key);
+            }
+
+            public override int GetHashCode()
+            {
+                return key.GetHashCode();
+            }
+        }
+
+        Dictionary<MethodKey, List<MethodInfo>> _reflectedMethods = new Dictionary<MethodKey, List<MethodInfo>>();
+        Dictionary<MethodKey, bool> _attachedMethods = new Dictionary<MethodKey, bool>();
+
 
         /// <summary>
         /// Gets or sets the extra suffix which is used to create the implementation class' name.
@@ -69,7 +92,7 @@ namespace Kistl.App.Extensions
                     ReflectMethods(ctx);
                     CreateInvokeInfosForObjectClasses(ctx);
 
-                    foreach (var mi in _reflectedMethods.Values)
+                    foreach (var mi in _reflectedMethods.Where(i => !_attachedMethods.ContainsKey(i.Key)).SelectMany(i => i.Value))
                     {
                         Log.Error(string.Format("Couldn't find any method for Invocation {0}.{1}", mi.DeclaringType.FullName, mi.Name));
                     }
@@ -129,8 +152,15 @@ namespace Kistl.App.Extensions
                         {
                             if (m.GetCustomAttributes(typeof(Invocation), false).Length != 0)
                             {
-                                var key = string.Format("{0}.{1}", t.FullName, m.Name);
-                                _reflectedMethods[key] = m;
+                                var key = new MethodKey(t.Namespace, t.Name.Substring(0, t.Name.Length - "Actions".Length), m.Name);
+                                if (_reflectedMethods.ContainsKey(key))
+                                {
+                                    _reflectedMethods[key].Add(m);
+                                }
+                                else
+                                {
+                                    _reflectedMethods[key] = new List<MethodInfo>() { m };
+                                }
                             }
                             else
                             {
@@ -233,17 +263,23 @@ namespace Kistl.App.Extensions
             // New style
             foreach (var method in GetAllMethods(objClass))
             {
-                string key = string.Format("{0}.{1}Actions.{2}", objClass.Module.Namespace, objClass.Name, method.Name);
+                var key = new MethodKey(objClass.Module.Namespace, objClass.Name, method.Name);
                 if (_reflectedMethods.ContainsKey(key))
                 {
-                    var reflectedMethod = _reflectedMethods[key];
+                    var methodInfos = _reflectedMethods[key];
 
                     // May be null on Methods without events like server side invocatiaons or "embedded" methods
                     // or null if not found
                     var attr = FindEventBasedMethodAttribute(method, implType);
-                    if (attr != null) CreateInvokeInfo(implType, reflectedMethod, attr.EventName);
+                    if (attr != null)
+                    {
+                        foreach (var mi in methodInfos)
+                        {
+                            CreateInvokeInfo(implType, mi, attr.EventName);
+                        }
+                    }
 
-                    _reflectedMethods.Remove(key);
+                    _attachedMethods[key] = true;
                 }
             }
 
@@ -260,7 +296,7 @@ namespace Kistl.App.Extensions
         private void CreatePropertyInvocations(Type implType, Property prop, PropertyInvocationType invocationType)
         {
             string methodPrefix;
-            switch(invocationType)
+            switch (invocationType)
             {
                 case PropertyInvocationType.Getter:
                     methodPrefix = "get_";
@@ -276,12 +312,15 @@ namespace Kistl.App.Extensions
                     throw new ArgumentOutOfRangeException("invocationType");
             }
 
-            string key = string.Format("{0}.{1}Actions.{2}{3}", prop.ObjectClass.Module.Namespace, prop.ObjectClass.Name, methodPrefix, prop.Name);
+            var key = new MethodKey(prop.ObjectClass.Module.Namespace, prop.ObjectClass.Name, string.Format("{0}{1}", methodPrefix, prop.Name));
             if (_reflectedMethods.ContainsKey(key))
             {
-                var reflectedMethod = _reflectedMethods[key];
-                CreateInvokeInfo(implType, reflectedMethod, "On" + prop.Name + "_" + invocationType);
-                _reflectedMethods.Remove(key);
+                var methodInfos = _reflectedMethods[key];
+                foreach (var mi in methodInfos)
+                {
+                    CreateInvokeInfo(implType, mi, "On" + prop.Name + "_" + invocationType);
+                }
+                _attachedMethods[key] = true;
             }
         }
 
