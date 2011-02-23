@@ -573,6 +573,12 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
         }
 
         /// <summary>Not supported.</summary>
+        void ISchemaProvider.DropDatabase(string dbName)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
         void ISchemaProvider.DropFKConstraint(TableRef tblName, string fkName)
         {
             throw new NotSupportedException();

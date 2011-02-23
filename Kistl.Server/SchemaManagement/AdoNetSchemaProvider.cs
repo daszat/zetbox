@@ -276,6 +276,15 @@ namespace Kistl.Server.SchemaManagement
 
         #endregion
 
+        #region Database Management
+
+        public void DropDatabase(string dbName)
+        {
+            ExecuteNonQuery(String.Format("DROP TABLE {0}", QuoteIdentifier(dbName)));
+        }
+
+        #endregion
+
         #region Database Schemas
 
         public abstract bool CheckSchemaExists(string schemaName);

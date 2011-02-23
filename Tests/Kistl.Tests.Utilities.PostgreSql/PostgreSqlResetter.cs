@@ -59,34 +59,28 @@ namespace Kistl.Tests.Utilities.PostgreSql
                     }
                     try
                     {
+                        var exitCode = RunPgUtil("pg_dump", String.Format("--format c {0} --file={1} {2}", userCmdString, dumpFile, srcDB));
+                        if (exitCode != 0)
                         {
-                            var pgDumpArgs = String.Format("--format c {0} --file={1} {2}", userCmdString, dumpFile, srcDB);
-
-                            Log.InfoFormat("pgDumpArgs = {0}", pgDumpArgs);
-                            var dump = RunPgUtil("pg_dump", pgDumpArgs);
-                            if (dump.ExitCode != 0)
-                            {
-                                throw new ApplicationException(String.Format("Failed to dump database (exit={0}), maybe you need to put your password into AppData\\Roaming\\postgresql\\pgpass.conf", dump.ExitCode));
-                            }
+                            throw new ApplicationException(String.Format("Failed to dump database (exit={0}), maybe you need to put your password into AppData\\Roaming\\postgresql\\pgpass.conf", exitCode));
                         }
+
+                        exitCode = RunPgUtil("pg_restore", String.Format("--format c --clean {0} --dbname={2} {1}", userCmdString, dumpFile, destDB));
+                        if (exitCode != 0)
                         {
-                            var pgRestoreArgs = String.Format("--format c --clean {0} --dbname={2} {1}", userCmdString, dumpFile, destDB);
-                            Log.InfoFormat("pgRestoreArgs = {0}", pgRestoreArgs);
+                            Log.WarnFormat("Retrying after failed pg_restore (exit={0}), since the tool can become confused by schema changes", exitCode);
 
-                            var restore = RunPgUtil("pg_restore", pgRestoreArgs);
-                            if (restore.ExitCode != 0)
+                            var admin = new NpgsqlConnectionStringBuilder(config.Server.ConnectionString);
+                            var dbName = admin.Database;
+                            admin.Database = "template0";
+                            schemaManager.Open(admin.ConnectionString);
+                            schemaManager.DropDatabase(dbName);
+
+                            // now we should not need to clean anymore, but we need to create the database anew
+                            exitCode = RunPgUtil("pg_restore", String.Format("--format c --create {0} --dbname={2} {1}", userCmdString, dumpFile, destDB));
+                            if (exitCode != 0)
                             {
-                                Log.Warn("Retrying after failed pg_restore, since the tool can become confused by schema changes");
-
-                                schemaManager.Open(config.Server.ConnectionString);
-                                schemaManager.DropAllObjects();
-
-                                // now we should not need to clean anymore
-                                pgRestoreArgs = String.Format("--format c {0} --dbname={2} {1}", userCmdString, dumpFile, destDB);
-                                restore = RunPgUtil("pg_restore", pgRestoreArgs);
-
-                                if (restore.ExitCode != 0)
-                                    throw new ApplicationException(String.Format("Failed to restore database (exit={0})", restore.ExitCode));
+                                throw new ApplicationException(String.Format("Failed to restore database (exit={0})", exitCode));
                             }
                         }
                     }
@@ -110,7 +104,7 @@ namespace Kistl.Tests.Utilities.PostgreSql
             }
         }
 
-        private static Process RunPgUtil(string util, string args)
+        private static int RunPgUtil(string util, string args)
         {
             var binPath = Path.Combine(GetPgSqlBinPath(), util);
 
@@ -125,6 +119,7 @@ namespace Kistl.Tests.Utilities.PostgreSql
             pi.ErrorDialog = false;
             pi.CreateNoWindow = true;
 
+            Log.InfoFormat("Calling [{0}] with arguments [{1}]", binPath, args);
             var p = Process.Start(pi);
 
             p.ErrorDataReceived += (object sender, DataReceivedEventArgs e) =>
@@ -147,7 +142,7 @@ namespace Kistl.Tests.Utilities.PostgreSql
                 throw new InvalidOperationException(String.Format("{0} did not completed within {0} seconds", util, RESET_TIMEOUT));
             }
 
-            return p;
+            return p.ExitCode;
         }
 
         private static string GetPgSqlBinPath()

@@ -452,6 +452,12 @@ namespace Kistl.Server.SchemaManagement
             _provider.EnsureInfrastructure();
         }
 
+        public void DropDatabase(string dbName)
+        {
+            Log.InfoFormat("Dropping Database [{0}]", dbName);
+            _provider.DropDatabase(dbName);
+        }
+
         public bool CheckSchemaExists(string schemaName)
         {
             return _provider.CheckSchemaExists(schemaName);

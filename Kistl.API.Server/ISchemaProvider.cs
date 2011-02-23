@@ -456,6 +456,12 @@ namespace Kistl.API.Server
 
         #endregion
 
+        #region Database Management
+
+        void DropDatabase(string dbName);
+
+        #endregion
+
         #region Database Schemas
 
         bool CheckSchemaExists(string schemaName);
