@@ -549,7 +549,7 @@ namespace Kistl.DalProvider.Ef
                 // else, we just want to pass the exception on.
                 // Since we do not want to rely on the exception string, 
                 // we have to check whether there is _any_ object with that ID
-                if (GetPersistenceObjectQuery<T>().Count(o => o.ID == ID) == 0)
+                if (!GetPersistenceObjectQuery<T>().Any(o => o.ID == ID))
                 {
                     throw new ArgumentOutOfRangeException("ID", ID, "No such object");
                 }

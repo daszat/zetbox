@@ -60,9 +60,10 @@ namespace Kistl.API
         /// <param name="newValue">new value of the changed property</param>
         public virtual void NotifyPropertyChanged(string property, object oldValue, object newValue)
         {
+            if (property != "ObjectState" && property != "ID") SetModified();
+
             if (notifications == null)
             {
-                if (property != "ObjectState" && property != "ID") SetModified();
                 OnPropertyChanged(property, oldValue, newValue);
             }
             else

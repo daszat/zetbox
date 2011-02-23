@@ -104,7 +104,7 @@ namespace Kistl.DalProvider.NHibernate
         {
             if (obj == null) { throw new ArgumentNullException("obj"); }
             if (obj.Context != null && obj.Context != this) { throw new WrongKistlContextException("Nh.Attach"); }
-            if (obj.ID != Helper.INVALIDID) { throw new ArgumentException("cannot attach object as new with valid ID", "obj"); }
+            if (obj.ID > Helper.INVALIDID) { throw new ArgumentException(String.Format("cannot attach object as new with valid ID ({0}#{1})", obj.GetType().FullName, obj.ID), "obj"); }
 
             checked
             {
@@ -344,7 +344,6 @@ namespace Kistl.DalProvider.NHibernate
         public override IPersistenceObject FindPersistenceObject(InterfaceType ifType, int ID)
         {
             CheckDisposed();
-            if (ID <= Kistl.API.Helper.INVALIDID) { throw new ArgumentOutOfRangeException("ID"); }
             try
             {
                 return (IPersistenceObject)this.GetType()
