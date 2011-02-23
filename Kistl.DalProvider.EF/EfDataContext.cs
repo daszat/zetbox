@@ -403,6 +403,11 @@ namespace Kistl.DalProvider.Ef
             string entityName = GetEntityName(GetInterfaceType(obj));
 
             _ctx.AttachTo(entityName, obj);
+                        
+            if (obj.ID < _newIDCounter)// Check ID <-> newIDCounter
+            {
+                _newIDCounter = obj.ID;
+            }
 
             return base.Attach(obj);
         }
@@ -418,6 +423,10 @@ namespace Kistl.DalProvider.Ef
 
             _ctx.AddObject(entityName, obj);
 
+            if (obj.ID < _newIDCounter)// Check ID <-> newIDCounter
+            {
+                _newIDCounter = obj.ID;
+            }
             base.AttachAsNew(obj);
         }
 

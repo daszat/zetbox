@@ -106,9 +106,17 @@ namespace Kistl.DalProvider.NHibernate
             if (obj.Context != null && obj.Context != this) { throw new WrongKistlContextException("Nh.Attach"); }
             if (obj.ID > Helper.INVALIDID) { throw new ArgumentException(String.Format("cannot attach object as new with valid ID ({0}#{1})", obj.GetType().FullName, obj.ID), "obj"); }
 
-            checked
+            // Handle created Objects
+            if (obj.ID == Helper.INVALIDID)
             {
-                ((BasePersistenceObject)obj).ID = --_newIDCounter;
+                checked
+                {
+                    ((BasePersistenceObject)obj).ID = --_newIDCounter;
+                }
+            }
+            else if (obj.ID < _newIDCounter)// Check ID <-> newIDCounter
+            {
+                _newIDCounter = obj.ID;
             }
 
             _attachedObjects.Add(obj);

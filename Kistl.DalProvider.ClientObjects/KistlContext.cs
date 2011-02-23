@@ -464,6 +464,10 @@ namespace Kistl.DalProvider.Client
                     ((PersistenceObjectBaseImpl)obj).ID = --_newIDCounter;
                 }
             }
+            else if (obj.ID < _newIDCounter)// Check ID <-> newIDCounter
+            {
+                _newIDCounter = obj.ID;
+            }
 
             // Attach & set Objectstate to Unmodified
             _objects.Add(obj);
