@@ -56,7 +56,15 @@ namespace Kistl.Server
 
             // vvvvv this works with mono vvvvvvv
             _bootstrapperHost = new WebServiceHost(new BootstrapperService(config));
-            ((WebServiceHost)_bootstrapperHost).AddServiceEndpoint(typeof(IBootstrapperService), new WebHttpBinding(), new Uri("Bootstrapper.svc", UriKind.Relative));
+
+            var binding = new WebHttpBinding();
+            binding.Security.Mode = WebHttpSecurityMode.Transport;
+            binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Basic;
+
+            ((WebServiceHost)_bootstrapperHost).AddServiceEndpoint(
+                typeof(IBootstrapperService),
+                binding,
+                new Uri("Bootstrapper.svc", UriKind.Relative));
         }
 
         void host_Opened(object sender, EventArgs e)
