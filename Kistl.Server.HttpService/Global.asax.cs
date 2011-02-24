@@ -56,7 +56,7 @@ namespace Kistl.Server.HttpService
 
             var config = KistlConfig.FromFile(
                 string.IsNullOrEmpty(cfgFile) ? string.Empty : Server.MapPath(cfgFile), 
-                KistlConfig.GetDefaultConfigName("Kistl.Service.HttpService.xml", Path.Combine(Path.Combine(Server.MapPath("~/"), ".."), "Configs")));
+                KistlConfig.GetDefaultConfigName("Kistl.Server.HttpService.xml", Path.Combine(Path.Combine(Server.MapPath("~/"), ".."), "Configs")));
             
             AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
             CreateMasterContainer(config);
