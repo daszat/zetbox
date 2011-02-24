@@ -116,6 +116,7 @@ namespace Kistl.API
 
 
     [DataContract(Namespace = "http://dasz.at/ZBox/")]
+    [Serializable]
     [DebuggerDisplay("{IDs.Length} reqs for {Type.TypeName}")]
     [KnownType(typeof(SerializableType))]
     public class ObjectNotificationRequest
