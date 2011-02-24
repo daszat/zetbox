@@ -35,7 +35,13 @@ namespace Kistl.Server.HttpService
                     }
                     break;
                 default:
-                    context.Response.StatusCode = 404;
+                    context.Response.StatusCode = 200;
+                    context.Response.ContentType = "text/plain";
+                    using (var outStream = new StreamWriter(context.Response.OutputStream))
+                    {
+                        outStream.WriteLine("haha!");
+                        outStream.WriteLine("Authenticated User: [{0}]", context.Request.Headers.Get("Authorization"));
+                    }
                     break;
             }
             Log.DebugFormat("Sending response [{0}]", context.Response.StatusCode);

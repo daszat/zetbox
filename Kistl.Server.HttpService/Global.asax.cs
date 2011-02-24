@@ -35,6 +35,9 @@ namespace Kistl.Server.HttpService
         void CreateMasterContainer(KistlConfig config)
         {
             var builder = Kistl.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Server.Modules);
+            builder.RegisterType<MonoAspNetBasicAuthIdentityResolver>()
+                .AsImplementedInterfaces()
+                .SingleInstance();
 
             // register deployment-specific components
             builder.RegisterModule(new ConfigurationSettingsReader("servercomponents"));
@@ -55,9 +58,9 @@ namespace Kistl.Server.HttpService
             var cfgFile = System.Configuration.ConfigurationManager.AppSettings["ConfigFile"];
 
             var config = KistlConfig.FromFile(
-                string.IsNullOrEmpty(cfgFile) ? string.Empty : Server.MapPath(cfgFile), 
+                string.IsNullOrEmpty(cfgFile) ? string.Empty : Server.MapPath(cfgFile),
                 KistlConfig.GetDefaultConfigName("Kistl.Server.HttpService.xml", Path.Combine(Path.Combine(Server.MapPath("~/"), ".."), "Configs")));
-            
+
             AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
             CreateMasterContainer(config);
         }
