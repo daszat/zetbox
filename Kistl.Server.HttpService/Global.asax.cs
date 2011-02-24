@@ -3,18 +3,18 @@ namespace Kistl.Server.HttpService
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Web;
     using System.Web.Security;
     using System.Web.SessionState;
-    using Kistl.API.Configuration;
-    using Autofac.Integration.Wcf;
-    using Kistl.API.Utils;
-    using Kistl.API;
     using Autofac;
     using Autofac.Configuration;
+    using Autofac.Integration.Wcf;
     using Autofac.Integration.Web;
-    using System.IO;
+    using Kistl.API;
+    using Kistl.API.Configuration;
+    using Kistl.API.Utils;
 
     public class Global : System.Web.HttpApplication, IContainerProviderAccessor
     {

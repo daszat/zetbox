@@ -1,13 +1,15 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
-using System.IO;
 
 namespace Kistl.Server.HttpService
 {
     public class KistlServiceFacade : IHttpHandler
     {
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Service.KistlServiceFacade");
+
         public bool IsReusable
         {
             get { return true; }
@@ -15,6 +17,7 @@ namespace Kistl.Server.HttpService
 
         public void ProcessRequest(HttpContext context)
         {
+            Log.DebugFormat("Processing request for [{0}]", context.Request.Url);
             switch (context.Request.Url.Segments.Last())
             {
                 case "SetObjects":
@@ -32,8 +35,10 @@ namespace Kistl.Server.HttpService
                     }
                     break;
                 default:
-                    throw new NotImplementedException();
+                    context.Response.StatusCode = 404;
+                    break;
             }
+            Log.DebugFormat("Sending response [{0}]", context.Response.StatusCode);
         }
     }
 }

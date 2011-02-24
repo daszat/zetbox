@@ -5,13 +5,15 @@ namespace Kistl.Server.HttpService
     using System.Collections.Generic;
     using System.Linq;
     using System.Web;
-    using Autofac.Integration.Web;
     using Autofac;
-    using Kistl.API.Configuration;
+    using Autofac.Integration.Web;
     using Kistl.API;
+    using Kistl.API.Configuration;
 
     public class BootstrapperFacade : IHttpHandler
     {
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Service.BootstrapperFacade");
+
         public bool IsReusable
         {
             get { return true; }
@@ -19,6 +21,8 @@ namespace Kistl.Server.HttpService
 
         public void ProcessRequest(HttpContext context)
         {
+            Log.DebugFormat("Processing request for [{0}]", context.Request.Url);
+
             var cpa = (IContainerProviderAccessor)HttpContext.Current.ApplicationInstance;
             var cp = cpa.ContainerProvider;
             BootstrapperService _service = cp.RequestLifetime.Resolve<BootstrapperService>();
@@ -30,6 +34,7 @@ namespace Kistl.Server.HttpService
                 context.Response.ContentType = "text/xml";
                 fis.ToXmlStream(context.Response.OutputStream);
             }
+            Log.DebugFormat("Sending response [{0}]", context.Response.StatusCode);
         }
     }
 }
