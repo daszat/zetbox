@@ -29,7 +29,7 @@
         }
         else
         {
-            currentUser = "no user found";
+            currentUser = "(no user found)";
         }
         
         Dictionary<string, int> cacheList = new Dictionary<string, int>();
