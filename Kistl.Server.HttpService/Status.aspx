@@ -28,6 +28,9 @@
         }
         repCache.DataSource = cacheList;
         repCache.DataBind();
+
+        repEnvironment.DataSource = Environment.GetEnvironmentVariables();
+        repEnvironment.DataBind();
     }    
 
     protected void OnClearCache(object sender, EventArgs e)
@@ -158,6 +161,36 @@
                         </th>
                         <th>
                             Count
+                        </th>
+                    </tr>
+            </HeaderTemplate>
+            <ItemTemplate>
+                <tr>
+                    <td style="width: 400px;">
+                        <%# Eval("Key") %>
+                    </td>
+                    <td>
+                        <%# Eval("Value") %>
+                    </td>
+                </tr>
+            </ItemTemplate>
+            <FooterTemplate>
+                </table>
+            </FooterTemplate>
+        </asp:Repeater>
+    </div>
+    <div>
+        <h2>
+            Environment</h2>
+        <asp:Repeater ID="repEnvironment" runat="server">
+            <HeaderTemplate>
+                <table border="1" style="border-collapse:collapse;">
+                    <tr>
+                        <th>
+                            Key
+                        </th>
+                        <th>
+                            Value
                         </th>
                     </tr>
             </HeaderTemplate>
