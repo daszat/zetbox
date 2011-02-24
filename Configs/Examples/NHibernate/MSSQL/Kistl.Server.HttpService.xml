@@ -2,9 +2,9 @@
 <KistlConfig xmlns="http://dasz.at/Kistl/">
   <ConfigName>Default Server Configuration</ConfigName>
   <Server StartServer="true">
-    <SchemaProvider>POSTGRESQL</SchemaProvider>
-    <DatabaseProvider>Npgsql</DatabaseProvider>
-    <ConnectionString>Server=localhost;Port=5432;Database=zbox;User Id=zbox;Password=b-cXqMyXEYea2kkjUhkS</ConnectionString>
+    <SchemaProvider>MSSQL</SchemaProvider>
+    <DatabaseProvider>System.Data.SqlClient</DatabaseProvider>
+    <ConnectionString>Data Source=.\SQLEXPRESS;Initial Catalog=zbox;Integrated Security=True;MultipleActiveResultSets=true;</ConnectionString>
     <DocumentStore>DocumentStore\Server\</DocumentStore>
     <LogFilePath>bin\LogFiles</LogFilePath>
     <CodeGenWorkingPath>bin\CodeGenNext</CodeGenWorkingPath>
@@ -30,14 +30,17 @@
       <Module>Kistl.DalProvider.Ef.Generator.EfGeneratorProvider, Kistl.DalProvider.Ef.Generator</Module>
     </Modules>
   </Server>
+    <ClientFilesLocations>
+      <Location Name="Client">P:\Kistl\bin\Debug\bin\Client</Location>
+      <Location Name="Common">P:\Kistl\bin\Debug\bin\Common</Location>
+      <Location Name="CodeGen">P:\Kistl\bin\CodeGen\bin\Debug</Location>
+    </ClientFilesLocations>
   <SourceFileLocation>
     <!-- default probe path -->
     <string>P:\Kistl\bin\CodeGen\bin\Debug</string>
     <!-- common libaries -->
     <string>P:\Kistl\bin\Debug\bin\Common</string>
-    <!-- server libraries -->
-    <string>P:\Kistl\bin\Debug\bin\Server</string>
-    <!-- Fallback path -->
-    <string>P:\Kistl\bin\Debug\bin\Server\Fallback</string>
+    <!-- Fallback path for local development -->
+    <string>P:\Kistl\bin\Debug\bin\Server\fallback</string>
   </SourceFileLocation>
 </KistlConfig>

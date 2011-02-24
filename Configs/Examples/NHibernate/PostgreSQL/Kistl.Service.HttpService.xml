@@ -29,6 +29,11 @@
       <Module>Kistl.DalProvider.Client.Generator.ClientGeneratorProvider, Kistl.DalProvider.Client.Generator</Module>
       <Module>Kistl.DalProvider.Ef.Generator.EfGeneratorProvider, Kistl.DalProvider.Ef.Generator</Module>
     </Modules>
+    <ClientFilesLocations>
+      <Location Name="Client">P:\Kistl\bin\Debug\bin\Client</Location>
+      <Location Name="Common">P:\Kistl\bin\Debug\bin\Common</Location>
+      <Location Name="CodeGen">P:\Kistl\bin\CodeGen\bin\Debug</Location>
+    </ClientFilesLocations>
   </Server>
   <SourceFileLocation>
     <!-- default probe path -->
