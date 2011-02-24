@@ -7,13 +7,31 @@
 
 <script runat="server">
     protected Process p = Process.GetCurrentProcess();
-
+    protected string currentUser;
+        
     protected void Page_Load(object sender, EventArgs e)
     {
     }
 
     protected void Page_PreRender(object sender, EventArgs e)
     {
+        if (!String.IsNullOrEmpty(User.Identity.Name))
+        {
+            currentUser = User.Identity.Name + " (User.Identity)";
+        }
+        else if (!String.IsNullOrEmpty(System.Threading.Thread.CurrentPrincipal.Identity.Name))
+        {
+            currentUser = System.Threading.Thread.CurrentPrincipal.Identity.Name + " (Thread.Identity)";
+        }
+        else if (!String.IsNullOrEmpty(System.Security.Principal.WindowsIdentity.GetCurrent().Name))
+        {
+            currentUser = System.Security.Principal.WindowsIdentity.GetCurrent().Name + " (WindowsIdentity)";
+        }
+        else
+        {
+            currentUser = "no user found";
+        }
+        
         Dictionary<string, int> cacheList = new Dictionary<string, int>();
         foreach (DictionaryEntry c in Cache)
         {
@@ -100,7 +118,7 @@
                     Current User:
                 </td>
                 <td>
-                    <%= User.Identity.Name %>
+                    <%= currentUser %>
                 </td>
             </tr>
             <tr>
