@@ -35,10 +35,7 @@ namespace Kistl.Server.HttpService
         void CreateMasterContainer(KistlConfig config)
         {
             var builder = Kistl.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Server.Modules);
-            builder.RegisterType<MonoAspNetBasicAuthIdentityResolver>()
-                .AsImplementedInterfaces()
-                .SingleInstance();
-
+          
             // register deployment-specific components
             builder.RegisterModule(new ConfigurationSettingsReader("servercomponents"));
 

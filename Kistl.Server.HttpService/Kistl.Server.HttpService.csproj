@@ -91,6 +91,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="MonoAspNetBasicAuthIdentityResolver.cs" />
+    <Compile Include="MonoModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ZBoxHttpFacade\Bootstrapper.cs" />
     <Compile Include="ZBoxHttpFacade\KistlService.cs" />
