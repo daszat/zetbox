@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="C#" EnableViewState="false" %>
 
+<%@ Import Namespace="System.Linq" %>
 <%@ Import Namespace="System.Diagnostics" %>
 <%@ Import Namespace="System.Collections.Generic" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -31,6 +32,9 @@
 
         repEnvironment.DataSource = Environment.GetEnvironmentVariables();
         repEnvironment.DataBind();
+
+        repHeaders.DataSource = Request.Headers.AllKeys.ToDictionary(k => k, k => Request.Headers.Get(k));
+        repHeaders.DataBind();
     }    
 
     protected void OnClearCache(object sender, EventArgs e)
@@ -161,6 +165,36 @@
                         </th>
                         <th>
                             Count
+                        </th>
+                    </tr>
+            </HeaderTemplate>
+            <ItemTemplate>
+                <tr>
+                    <td style="width: 400px;">
+                        <%# Eval("Key") %>
+                    </td>
+                    <td>
+                        <%# Eval("Value") %>
+                    </td>
+                </tr>
+            </ItemTemplate>
+            <FooterTemplate>
+                </table>
+            </FooterTemplate>
+        </asp:Repeater>
+    </div>
+    <div>
+        <h2>
+            Headers</h2>
+        <asp:Repeater ID="repHeaders" runat="server">
+            <HeaderTemplate>
+                <table border="1" style="border-collapse:collapse;">
+                    <tr>
+                        <th>
+                            Key
+                        </th>
+                        <th>
+                            Value
                         </th>
                     </tr>
             </HeaderTemplate>
