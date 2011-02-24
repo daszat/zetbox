@@ -482,6 +482,22 @@ namespace Kistl.API
         }
 
         /// <summary>
+        /// Converts a object to XML.
+        /// </summary>
+        /// <param name="obj">Any XML Serializable Object.</param>
+        /// <param name="s">Output stream</param>
+        public static void ToXmlStream(this object obj, Stream s)
+        {
+            using (Logging.Log.DebugTraceMethodCall("ToXmlString"))
+            {
+                if (obj == null) { throw new ArgumentNullException("obj"); }
+
+                XmlSerializer xml = new XmlSerializer(obj.GetType());
+                xml.Serialize(new StreamWriter(s), obj);
+            }
+        }
+
+        /// <summary>
         /// Converts a XML String to a Objekt.
         /// </summary>
         /// <typeparam name="T">Type of the Object.</typeparam>

@@ -244,6 +244,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Objects.NHibernate", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Unix", "Kistl.Unix\Kistl.Unix.csproj", "{36180B60-667C-485D-8DAC-304F27EA6EFB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Server.HttpService", "Kistl.Server.HttpService\Kistl.Server.HttpService.csproj", "{FD3C71B3-330F-4FFC-A525-37E1AD338FF8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|.NET = Debug|.NET
@@ -1288,6 +1290,24 @@ Global
 		{36180B60-667C-485D-8DAC-304F27EA6EFB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{36180B60-667C-485D-8DAC-304F27EA6EFB}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{36180B60-667C-485D-8DAC-304F27EA6EFB}.Release|x86.ActiveCfg = Release|Any CPU
+		{FD3C71B3-330F-4FFC-A525-37E1AD338FF8}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{FD3C71B3-330F-4FFC-A525-37E1AD338FF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD3C71B3-330F-4FFC-A525-37E1AD338FF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD3C71B3-330F-4FFC-A525-37E1AD338FF8}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{FD3C71B3-330F-4FFC-A525-37E1AD338FF8}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{FD3C71B3-330F-4FFC-A525-37E1AD338FF8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FD3C71B3-330F-4FFC-A525-37E1AD338FF8}.Linux.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{FD3C71B3-330F-4FFC-A525-37E1AD338FF8}.Linux.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD3C71B3-330F-4FFC-A525-37E1AD338FF8}.Linux.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD3C71B3-330F-4FFC-A525-37E1AD338FF8}.Linux.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{FD3C71B3-330F-4FFC-A525-37E1AD338FF8}.Linux.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{FD3C71B3-330F-4FFC-A525-37E1AD338FF8}.Linux.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FD3C71B3-330F-4FFC-A525-37E1AD338FF8}.Release|.NET.ActiveCfg = Release|Any CPU
+		{FD3C71B3-330F-4FFC-A525-37E1AD338FF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD3C71B3-330F-4FFC-A525-37E1AD338FF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD3C71B3-330F-4FFC-A525-37E1AD338FF8}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{FD3C71B3-330F-4FFC-A525-37E1AD338FF8}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{FD3C71B3-330F-4FFC-A525-37E1AD338FF8}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

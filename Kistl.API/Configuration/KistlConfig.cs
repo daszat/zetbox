@@ -292,6 +292,11 @@ namespace Kistl.API.Configuration
 
         public static string GetDefaultConfigName(string basename)
         {
+            return GetDefaultConfigName(basename, "Configs");
+        }
+
+        public static string GetDefaultConfigName(string basename, string baseDir)
+        {
             var zenv = Environment.GetEnvironmentVariable("zenv");
             if (String.IsNullOrEmpty(zenv))
             {
@@ -299,21 +304,21 @@ namespace Kistl.API.Configuration
                 zenv = "Local";
             }
             var file = Path.IsPathRooted(zenv)
-                ? Path.Combine(Path.Combine(zenv, "Configs"), basename)
-                : Path.GetFullPath(Path.Combine(Path.Combine("Configs", zenv), basename));
+                ? Path.Combine(Path.Combine(zenv, baseDir), basename)
+                : Path.GetFullPath(Path.Combine(Path.Combine(baseDir, zenv), basename));
             Logging.Log.InfoFormat("Got zenv=[{0}], trying file=[{1}]", zenv, file);
             while (!Path.IsPathRooted(zenv) && !File.Exists(file) && !String.IsNullOrEmpty(zenv))
             {
                 Logging.Log.InfoFormat("rooted={0}, exists={1}, zenv_empty={2}", Path.IsPathRooted(zenv), File.Exists(file), String.IsNullOrEmpty(zenv));
                 // this will reduce zenv directory component-wise until nothing is left
                 zenv = Path.GetDirectoryName(zenv);
-                file = Path.GetFullPath(Path.Combine(Path.Combine("Configs", zenv), basename));
+                file = Path.GetFullPath(Path.Combine(Path.Combine(baseDir, zenv), basename));
                 Logging.Log.InfoFormat("Got zenv=[{0}], trying file=[{1}]", zenv, file);
             }
             if (!File.Exists(file))
             {
                 Logging.Log.WarnFormat("No default configuration found for zenv=[{0}], basename=[{1}]", Environment.GetEnvironmentVariable("zenv"), basename);
-                return Path.Combine("Configs", "DefaultConfig.xml");
+                return Path.Combine(baseDir, "DefaultConfig.xml");
             }
             else
             {
