@@ -26,6 +26,21 @@ namespace Kistl.Server.HttpService
             get { return false; }
         }
 
+        private void SerializeArray<T>(Stream reqStream, T[] array)
+        {
+            var haveArray = array != null && array.Length == 0;
+            _formatter.Serialize(reqStream, haveArray);
+            if (haveArray)
+                _formatter.Serialize(reqStream, array);
+        }
+
+        private T[] DeserializeArray<T>(Stream reqStream)
+        {
+            return (bool)_formatter.Deserialize(reqStream)
+                ? (T[])_formatter.Deserialize(reqStream)
+                : null;
+        }
+
         public void ProcessRequest(HttpContext context)
         {
             var cpa = (IContainerProviderAccessor)HttpContext.Current.ApplicationInstance;
@@ -39,11 +54,10 @@ namespace Kistl.Server.HttpService
             {
                 case "SetObjects": // byte[] SetObjects(byte[] msg, ObjectNotificationRequest[] notificationRequests);
                     {
-                        var msg = (byte[])_formatter.Deserialize(context.Request.InputStream);
-                        var notificationRequests = (ObjectNotificationRequest[])_formatter.Deserialize(context.Request.InputStream);
+                        var msg = DeserializeArray<byte>(context.Request.InputStream);
+                        var notificationRequests = DeserializeArray<ObjectNotificationRequest>(context.Request.InputStream);
                         Log.DebugFormat("SetObjects(byte[{0}], ObjectNotificationRequest[{1}])", msg.Length, notificationRequests.Length);
                         var result = service.SetObjects(msg, notificationRequests);
-
                         SendByteArray(context, result);
                         break;
                     }
@@ -52,11 +66,10 @@ namespace Kistl.Server.HttpService
                         var type = (SerializableType)_formatter.Deserialize(context.Request.InputStream);
                         var maxListCount = (int)_formatter.Deserialize(context.Request.InputStream);
                         var eagerLoadLists = (bool)_formatter.Deserialize(context.Request.InputStream);
-                        var filter = (SerializableExpression[])_formatter.Deserialize(context.Request.InputStream);
-                        var orderBy = (OrderByContract[])_formatter.Deserialize(context.Request.InputStream);
+                        var filter = DeserializeArray<SerializableExpression>(context.Request.InputStream);
+                        var orderBy = DeserializeArray<OrderByContract>(context.Request.InputStream);
                         Log.DebugFormat("GetList(type=[{0}], maxListCount={1}, eagerLoadLists={2}, SerializableExpression[{3}], OrderByContract[{4}])", type, maxListCount, eagerLoadLists, filter != null ? filter.Length : -1, orderBy != null ? orderBy.Length : -1);
                         var result = service.GetList(type, maxListCount, eagerLoadLists, filter, orderBy);
-
                         SendByteArray(context, result);
                         break;
                     }
@@ -107,17 +120,17 @@ namespace Kistl.Server.HttpService
                         var type = (SerializableType)_formatter.Deserialize(context.Request.InputStream);
                         var ID = (int)_formatter.Deserialize(context.Request.InputStream);
                         var method = (string)_formatter.Deserialize(context.Request.InputStream);
-                        var parameterTypes = (SerializableType[])_formatter.Deserialize(context.Request.InputStream);
-                        var parameter = (byte[])_formatter.Deserialize(context.Request.InputStream);
-                        var changedObjects = (byte[])_formatter.Deserialize(context.Request.InputStream);
-                        var notificationRequests = (ObjectNotificationRequest[])_formatter.Deserialize(context.Request.InputStream);
+                        var parameterTypes = DeserializeArray<SerializableType>(context.Request.InputStream);
+                        var parameter = DeserializeArray<byte>(context.Request.InputStream);
+                        var changedObjects = DeserializeArray<byte>(context.Request.InputStream);
+                        var notificationRequests = DeserializeArray<ObjectNotificationRequest>(context.Request.InputStream);
 
                         Log.DebugFormat("InvokeServerMethod(type=[{0}], ID={1}, method=[{2}], SerializableType[{3}], byte[{4}], byte[{5}], ObjectNotificationRequest[{6}])", type, ID, method, parameterTypes.Length, parameter.Length, changedObjects.Length);
                         byte[] retChangedObjects;
                         var result = service.InvokeServerMethod(type, ID, method, parameterTypes, parameter, changedObjects, notificationRequests, out retChangedObjects);
 
                         SendByteArray(context, retChangedObjects);
-                        _formatter.Serialize(context.Response.OutputStream, result);
+                        SerializeArray(context.Response.OutputStream, result);
 
                         break;
                     }
@@ -140,7 +153,7 @@ namespace Kistl.Server.HttpService
         {
             context.Response.StatusCode = 200;
             context.Response.ContentType = "application/octet-stream";
-            _formatter.Serialize(context.Response.OutputStream, result);
+            SerializeArray(context.Response.OutputStream, result);
         }
     }
 }

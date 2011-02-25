@@ -56,7 +56,9 @@ namespace Kistl.API.Client
                 using (var response = req.GetResponse())
                 using (var input = response.GetResponseStream())
                 {
-                    return (byte[])_formatter.Deserialize(input);
+                    return (bool)_formatter.Deserialize(input)
+                        ? (byte[])_formatter.Deserialize(input)
+                        : null;
                 }
             }
             catch (WebException ex)
@@ -67,31 +69,44 @@ namespace Kistl.API.Client
             }
         }
 
+        private void SerializeArray<T>(Stream reqStream, T[] array)
+        {
+            var haveArray = array != null && array.Length == 0;
+            _formatter.Serialize(reqStream, haveArray);
+            if (haveArray)
+                _formatter.Serialize(reqStream, array);
+        }
+
         public byte[] SetObjects(byte[] msg, ObjectNotificationRequest[] notificationRequests)
         {
             return MakeRequest(SetObjectsUri,
                 reqStream =>
                 {
-                    _formatter.Serialize(reqStream, msg);
-                    _formatter.Serialize(reqStream, notificationRequests);
+                    SerializeArray(reqStream, msg);
+                    SerializeArray(reqStream, notificationRequests);
                 });
         }
 
         public byte[] GetList(SerializableType type, int maxListCount, bool eagerLoadLists, SerializableExpression[] filter, OrderByContract[] orderBy)
         {
+            if (type == null) throw new ArgumentNullException("type");
+
             return MakeRequest(GetListUri,
                 reqStream =>
                 {
                     _formatter.Serialize(reqStream, type);
                     _formatter.Serialize(reqStream, maxListCount);
                     _formatter.Serialize(reqStream, eagerLoadLists);
-                    _formatter.Serialize(reqStream, filter);
-                    _formatter.Serialize(reqStream, orderBy);
+                    SerializeArray(reqStream, filter);
+                    SerializeArray(reqStream, orderBy);
                 });
         }
 
         public byte[] GetListOf(SerializableType type, int ID, string property)
         {
+            if (type == null) throw new ArgumentNullException("type");
+            if (String.IsNullOrEmpty(property)) throw new ArgumentNullException("property");
+
             return MakeRequest(GetListOfUri,
                 reqStream =>
                 {
@@ -145,7 +160,7 @@ namespace Kistl.API.Client
             {
                 _formatter.Serialize(reqStream, request.FileName);
                 _formatter.Serialize(reqStream, request.MimeType);
-                _formatter.Serialize(reqStream, request.Stream);
+                request.Stream.CopyTo(reqStream);
             }
             try
             {
@@ -169,6 +184,8 @@ namespace Kistl.API.Client
 
         public byte[] InvokeServerMethod(out byte[] retChangedObjects, SerializableType type, int ID, string method, SerializableType[] parameterTypes, byte[] parameter, byte[] changedObjects, ObjectNotificationRequest[] notificationRequests)
         {
+            if (type == null) throw new ArgumentNullException("type");
+
             var req = WebRequest.Create(InvokeServerMethodUri);
             req.Method = "POST";
             using (var reqStream = req.GetRequestStream())
@@ -176,18 +193,23 @@ namespace Kistl.API.Client
                 _formatter.Serialize(reqStream, type);
                 _formatter.Serialize(reqStream, ID);
                 _formatter.Serialize(reqStream, method);
-                _formatter.Serialize(reqStream, parameterTypes);
-                _formatter.Serialize(reqStream, parameter);
-                _formatter.Serialize(reqStream, changedObjects);
-                _formatter.Serialize(reqStream, notificationRequests);
+                SerializeArray(reqStream, parameterTypes);
+                SerializeArray(reqStream, parameter);
+                SerializeArray(reqStream, changedObjects);
+                SerializeArray(reqStream, notificationRequests);
             }
             try
             {
                 using (var response = req.GetResponse())
                 using (var input = response.GetResponseStream())
                 {
-                    retChangedObjects = (byte[])_formatter.Deserialize(input);
-                    return (byte[])_formatter.Deserialize(input);
+                    retChangedObjects = (bool)_formatter.Deserialize(input)
+                        ? (byte[])_formatter.Deserialize(input)
+                        : retChangedObjects = null;
+
+                    return (bool)_formatter.Deserialize(input)
+                        ? (byte[])_formatter.Deserialize(input)
+                        : null;
                 }
             }
             catch (WebException ex)
