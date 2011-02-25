@@ -51,9 +51,6 @@ namespace Kistl.API.Client
             _service = service;
         }
 
-        private readonly static object _lock = new object();
-
-
         public IEnumerable<IDataObject> GetList(IKistlContext ctx, InterfaceType ifType, int maxListCount, bool eagerLoadLists, IEnumerable<Expression> filter, IEnumerable<OrderBy> orderBy, out List<IStreamable> auxObjects)
         {
             List<IStreamable> tmpAuxObjects = null;
