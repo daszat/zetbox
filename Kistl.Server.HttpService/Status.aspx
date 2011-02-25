@@ -4,34 +4,15 @@
 <%@ Import Namespace="System.Diagnostics" %>
 <%@ Import Namespace="System.Collections.Generic" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <script runat="server">
     protected Process p = Process.GetCurrentProcess();
-    protected string currentUser;
-        
+
     protected void Page_Load(object sender, EventArgs e)
     {
     }
 
     protected void Page_PreRender(object sender, EventArgs e)
     {
-        if (!String.IsNullOrEmpty(User.Identity.Name))
-        {
-            currentUser = User.Identity.Name + " (User.Identity)";
-        }
-        else if (!String.IsNullOrEmpty(System.Threading.Thread.CurrentPrincipal.Identity.Name))
-        {
-            currentUser = System.Threading.Thread.CurrentPrincipal.Identity.Name + " (Thread.Identity)";
-        }
-        else if (!String.IsNullOrEmpty(System.Security.Principal.WindowsIdentity.GetCurrent().Name))
-        {
-            currentUser = System.Security.Principal.WindowsIdentity.GetCurrent().Name + " (WindowsIdentity)";
-        }
-        else
-        {
-            currentUser = "(no user found)";
-        }
-        
         Dictionary<string, int> cacheList = new Dictionary<string, int>();
         foreach (DictionaryEntry c in Cache)
         {
@@ -53,7 +34,7 @@
 
         repHeaders.DataSource = Request.Headers.AllKeys.ToDictionary(k => k, k => Request.Headers.Get(k));
         repHeaders.DataBind();
-    }    
+    }
 
     protected void OnClearCache(object sender, EventArgs e)
     {
@@ -66,7 +47,7 @@
         foreach (string k in keys)
         {
             Cache.Remove(k);
-        }        
+        }
     }
 
     protected void Page_Unload(object sender, EventArgs e)
@@ -84,7 +65,6 @@
         GC.Collect();
     }
 </script>
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Website Status</title>
@@ -115,10 +95,26 @@
             </tr>
             <tr>
                 <td>
-                    Current User:
+                    User.Identity:
                 </td>
                 <td>
-                    <%= currentUser %>
+                    <%= User.Identity.Name %>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Thread.CurrentPrincipal:
+                </td>
+                <td>
+                    <%= System.Threading.Thread.CurrentPrincipal.Identity.Name %>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    WindowsIdentity:
+                </td>
+                <td>
+                    <%= System.Security.Principal.WindowsIdentity.GetCurrent().Name%>
                 </td>
             </tr>
             <tr>
@@ -176,7 +172,7 @@
         <asp:Button ID="btnClearCache" runat="server" Text="Clear Cache" OnClick="OnClearCache" />
         <asp:Repeater ID="repCache" runat="server">
             <HeaderTemplate>
-                <table border="1" style="border-collapse:collapse;">
+                <table border="1" style="border-collapse: collapse;">
                     <tr>
                         <th>
                             Type in Cache
@@ -206,7 +202,7 @@
             Headers</h2>
         <asp:Repeater ID="repHeaders" runat="server">
             <HeaderTemplate>
-                <table border="1" style="border-collapse:collapse;">
+                <table border="1" style="border-collapse: collapse;">
                     <tr>
                         <th>
                             Key
@@ -236,7 +232,7 @@
             Environment</h2>
         <asp:Repeater ID="repEnvironment" runat="server">
             <HeaderTemplate>
-                <table border="1" style="border-collapse:collapse;">
+                <table border="1" style="border-collapse: collapse;">
                     <tr>
                         <th>
                             Key
