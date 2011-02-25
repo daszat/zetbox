@@ -60,6 +60,8 @@ namespace Kistl.Server
 
             moduleBuilder
                 .RegisterType<KistlService>()
+                .As<KistlService>() // registration for WCF
+                .As<IKistlService>() // registration for KistlServiceFacade
                 .SingleInstance();
 
             moduleBuilder
