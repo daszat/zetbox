@@ -6,6 +6,7 @@
     <Modules>
       <Module>Kistl.API.ApiModule, Kistl.API</Module>
       <Module>Kistl.API.Client.ClientApiModule, Kistl.API.Client</Module>
+      <Module>Kistl.API.Client.HttpClientModule, Kistl.API.Client</Module>
       <Module>Kistl.Client.ClientModule, Kistl.Client</Module>
       <Module>Kistl.DalProvider.Memory.MemoryProvider, Kistl.DalProvider.Memory</Module>
       <Module>Kistl.Objects.InterfaceModule, Kistl.Objects</Module>

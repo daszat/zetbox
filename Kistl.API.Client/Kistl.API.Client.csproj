@@ -62,6 +62,7 @@
       <HintPath>..\Libs\log4net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -84,6 +85,7 @@
     <Compile Include="ClientDeploymentRestrictor.cs" />
     <Compile Include="ClientIsolationLevel.cs" />
     <Compile Include="Helper.cs" />
+    <Compile Include="HttpServiceClient.cs" />
     <Compile Include="ICredentialsResolver.cs" />
     <Compile Include="InfoLoggingProxyDecorator.cs" />
     <Compile Include="IToolkit.cs" />

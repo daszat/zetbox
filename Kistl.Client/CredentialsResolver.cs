@@ -3,14 +3,15 @@ namespace Kistl.Client
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Net;
     using System.Text;
-    using Kistl.API.Client;
     using Autofac;
-    using Kistl.Client.Presentables;
     using Kistl.API;
-    using Kistl.Client.Presentables.ValueViewModels;
-    using Kistl.Client.Models;
+    using Kistl.API.Client;
     using Kistl.App.GUI;
+    using Kistl.Client.Models;
+    using Kistl.Client.Presentables;
+    using Kistl.Client.Presentables.ValueViewModels;
 
     public class DefaultCredentialsResolver : ICredentialsResolver
     {
@@ -31,6 +32,14 @@ namespace Kistl.Client
         {
             // Gracefully do nothing
             // Set implicity by WindowsAuthentication
+        }
+
+
+        public void InitWebRequest(WebRequest req)
+        {
+            if (req == null) throw new ArgumentNullException("req");
+
+            req.Credentials = CredentialCache.DefaultCredentials;
         }
     }
 
@@ -101,6 +110,14 @@ namespace Kistl.Client
                     }
                 }
             }
+        }
+
+        public void InitWebRequest(WebRequest req)
+        {
+            if (req == null) throw new ArgumentNullException("req");
+
+            EnsureUsername();
+            req.Credentials = new NetworkCredential(UserName, Password);
         }
     }
 }

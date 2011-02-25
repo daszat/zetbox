@@ -36,6 +36,7 @@ this.WriteObjects("    <DevelopmentEnvironment>false</DevelopmentEnvironment>\r\
 this.WriteObjects("    <Modules>\r\n");
 this.WriteObjects("      <Module>Kistl.API.ApiModule, Kistl.API</Module>\r\n");
 this.WriteObjects("      <Module>Kistl.API.Client.ClientApiModule, Kistl.API.Client</Module>\r\n");
+this.WriteObjects("      <Module>Kistl.API.Client.HttpClientModule, Kistl.API.Client</Module>\r\n");
 this.WriteObjects("      <Module>Kistl.Client.ClientModule, Kistl.Client</Module>\r\n");
 this.WriteObjects("      <Module>Kistl.Client.WPF.WPFModule, Kistl.Client.WPF</Module>\r\n");
 this.WriteObjects("      <Module>Kistl.Objects.InterfaceModule, Kistl.Objects</Module>\r\n");

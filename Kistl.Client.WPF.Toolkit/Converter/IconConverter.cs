@@ -65,7 +65,7 @@ namespace Kistl.Client.WPF.Converter
                         var realIcon = Context.FindPersistenceObject<Kistl.App.GUI.Icon>(icon.ExportGuid);
                         if (realIcon.Blob == null)
                         {
-                            Logging.Log.WarnFormat("Icon#{0} has no associated blob", realIcon.ID);
+                            Logging.Log.WarnFormat("Icon#{0} has no associated request", realIcon.ID);
                             return Binding.DoNothing;
                         }
                         bmp = new BitmapImage();

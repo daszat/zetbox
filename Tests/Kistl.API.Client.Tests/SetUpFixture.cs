@@ -20,6 +20,7 @@ namespace Kistl.API.Client.Tests
 
             builder.RegisterModule(new Kistl.API.ApiModule());
             builder.RegisterModule(new Kistl.API.Client.ClientApiModule());
+            builder.RegisterModule(new Kistl.API.Client.HttpClientModule());
             builder.RegisterModule(new Kistl.DalProvider.Memory.MemoryProvider());
         }
 

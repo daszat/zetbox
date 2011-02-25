@@ -15,11 +15,14 @@ namespace Kistl.API.Client
         {
             base.Load(moduleBuilder);
 
-            // TODO: should be moved to a WcfClient module
             moduleBuilder
-                .Register<ProxyImplementation>(c => new ProxyImplementation(c.Resolve<InterfaceType.Factory>(), c.Resolve<ICredentialsResolver>(), c.Resolve<IToolkit>()))
+                .Register<ProxyImplementation>(c => new ProxyImplementation(
+                    c.Resolve<InterfaceType.Factory>(),
+                    c.Resolve<IToolkit>(),
+                    c.Resolve<Kistl.API.Client.KistlService.IKistlService>()
+                    ))
                 .Named<IProxy>("implementor")
-                .InstancePerDependency(); // No singelton!
+                .InstancePerDependency(); // No singleton!
 
             moduleBuilder
                 .RegisterDecorator<IProxy>(
@@ -30,6 +33,34 @@ namespace Kistl.API.Client
                 .Register<ClientDeploymentRestrictor>(c => new ClientDeploymentRestrictor())
                 .As<IDeploymentRestrictor>()
                 .SingleInstance();
+        }
+    }
+
+    public sealed class HttpClientModule : Autofac.Module
+    {
+        protected override void Load(ContainerBuilder moduleBuilder)
+        {
+            base.Load(moduleBuilder);
+
+            moduleBuilder.RegisterType<HttpServiceClient>()
+                .AsImplementedInterfaces()
+                .InstancePerLifetimeScope();
+        }
+    }
+
+    public sealed class WcfClientModule : Autofac.Module
+    {
+        protected override void Load(ContainerBuilder moduleBuilder)
+        {
+            base.Load(moduleBuilder);
+
+            moduleBuilder.RegisterType<KistlService.KistlServiceClient>()
+                .AsImplementedInterfaces()
+                .OnActivated(args =>
+                {
+                    args.Context.Resolve<ICredentialsResolver>().InitCredentials(args.Instance.ClientCredentials);
+                })
+                .InstancePerLifetimeScope();
         }
     }
 }

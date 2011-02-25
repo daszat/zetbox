@@ -41,40 +41,18 @@ namespace Kistl.API.Client
         : IProxy
     {
         private InterfaceType.Factory _iftFactory;
-        private ICredentialsResolver _credentialsResolver;
         private IToolkit _toolkit;
+        private KistlService.IKistlService _service;
 
-        public ProxyImplementation(InterfaceType.Factory iftFactory, ICredentialsResolver credentialsResolver, IToolkit toolkit)
+        public ProxyImplementation(InterfaceType.Factory iftFactory, IToolkit toolkit, Kistl.API.Client.KistlService.IKistlService service)
         {
             _iftFactory = iftFactory;
-            _credentialsResolver = credentialsResolver;
             _toolkit = toolkit;
+            _service = service;
         }
 
         private readonly static object _lock = new object();
 
-        private KistlServiceClient _service;
-
-        /// <summary>
-        /// Instantiates a WCF Proxy for KistlService, configured according 
-        /// to the app.config file.
-        /// </summary>        
-        private KistlServiceClient Service
-        {
-            get
-            {
-                lock (_lock)
-                {
-                    if (_service == null || _service.State != System.ServiceModel.CommunicationState.Opened)
-                    {
-                        Logging.Facade.Info("Initializing Service");
-                        _service = new KistlServiceClient();
-                        _credentialsResolver.InitCredentials(_service.ClientCredentials);
-                    }
-                    return _service;
-                }
-            }
-        }
 
         public IEnumerable<IDataObject> GetList(IKistlContext ctx, InterfaceType ifType, int maxListCount, bool eagerLoadLists, IEnumerable<Expression> filter, IEnumerable<OrderBy> orderBy, out List<IStreamable> auxObjects)
         {
@@ -82,7 +60,7 @@ namespace Kistl.API.Client
             IEnumerable<IDataObject> result = null;
             _toolkit.WithWaitDialog(() =>
             {
-                using (MemoryStream s = new MemoryStream(Service.GetList(
+                using (MemoryStream s = new MemoryStream(_service.GetList(
                     ifType.ToSerializableType(),
                     maxListCount,
                     eagerLoadLists,
@@ -106,7 +84,7 @@ namespace Kistl.API.Client
 
             _toolkit.WithWaitDialog(() =>
             {
-                using (MemoryStream s = new MemoryStream(Service.GetListOf(ifType.ToSerializableType(), ID, property)))
+                using (MemoryStream s = new MemoryStream(_service.GetListOf(ifType.ToSerializableType(), ID, property)))
                 {
                     using (var sr = new BinaryReader(s))
                     {
@@ -132,7 +110,7 @@ namespace Kistl.API.Client
                     {
                         SendObjects(objects, sw);
 
-                        using (MemoryStream s = new MemoryStream(Service.SetObjects(ms.ToArray(), notficationRequests.ToArray())))
+                        using (MemoryStream s = new MemoryStream(_service.SetObjects(ms.ToArray(), notficationRequests.ToArray())))
                         {
                             using (var sr = new BinaryReader(s))
                             {
@@ -200,7 +178,7 @@ namespace Kistl.API.Client
             List<IStreamable> tmpAuxObjects = null;
             _toolkit.WithWaitDialog(() =>
             {
-                using (MemoryStream s = new MemoryStream(Service.FetchRelation(relationId, (int)role, parent.ID)))
+                using (MemoryStream s = new MemoryStream(_service.FetchRelation(relationId, (int)role, parent.ID)))
                 using (var sr = new BinaryReader(s))
                 {
                     result = ReceiveObjects(ctx, sr, out tmpAuxObjects).Cast<T>();
@@ -211,38 +189,12 @@ namespace Kistl.API.Client
             return result;
         }
 
-        #region IDisposable Members
-
-        // as recommended on http://msdn2.microsoft.com/en-gb/ms182172.aspx
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                // dispose managed resources
-                if (_service != null)
-                {
-                    Logging.Facade.Debug("Closing Service");
-                    _service.Close();
-                    ((IDisposable)_service).Dispose();
-                    _service = null;
-                }
-            }
-            // free native resources
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-        #endregion
-
         public Stream GetBlobStream(int ID)
         {
             Stream result = null;
             _toolkit.WithWaitDialog(() =>
             {
-                result = Service.GetBlobStream(ID);
+                result = _service.GetBlobStream(ID);
             });
             return result;
         }
@@ -250,20 +202,13 @@ namespace Kistl.API.Client
         public Kistl.App.Base.Blob SetBlobStream(IKistlContext ctx, Stream stream, string filename, string mimetype)
         {
             Kistl.App.Base.Blob result = null;
-            Stream s;
             _toolkit.WithWaitDialog(() =>
             {
-                Service.SetBlobStream(filename, mimetype, stream, out s);
-                try
+                var response = _service.SetBlobStream(new BlobMessage() { FileName = filename, MimeType = mimetype, Stream = stream });
+
+                using (var sr = new BinaryReader(response.BlobInstance))
                 {
-                    using (var sr = new BinaryReader(s))
-                    {
-                        result = ReceiveObjectList(ctx, sr).Cast<Kistl.App.Base.Blob>().Single();
-                    }
-                }
-                finally
-                {
-                    s.Dispose();
+                    result = ReceiveObjectList(ctx, sr).Cast<Kistl.App.Base.Blob>().Single();
                 }
             });
             return result;
@@ -285,7 +230,7 @@ namespace Kistl.API.Client
                 SendObjects(objects, sw);
 
                 byte[] retChangedObjectsArray;
-                var resultStream = new MemoryStream(Service.InvokeServerMethod(
+                var resultStream = new MemoryStream(_service.InvokeServerMethod(
                     out retChangedObjectsArray,
                     ifType.ToSerializableType(),
                     ID,
@@ -325,6 +270,10 @@ namespace Kistl.API.Client
 
             changedObjects = tmpChangedObjects;
             return result;
+        }
+
+        public void Dispose()
+        {
         }
     }
 }

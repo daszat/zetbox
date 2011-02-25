@@ -52,7 +52,7 @@ namespace Kistl.API
         /// <param name="ID">Object id</param>
         /// <param name="property">Property</param>
         /// <returns>the referenced objects</returns>
-        [Obsolete]
+        //[Obsolete("Use a properly filtered GetList instead")]
         [OperationContract]
         [FaultContract(typeof(Exception))]
         byte[] GetListOf(SerializableType type, int ID, string property);

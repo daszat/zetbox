@@ -7,14 +7,13 @@ namespace Kistl.Server
     using System.IO;
     using System.Linq;
     using System.Runtime.Serialization.Formatters.Binary;
-    using System.ServiceModel;
     using Kistl.API;
     using Kistl.API.Server;
     using Kistl.API.Utils;
     using Kistl.App.Base;
 
     /// <summary>
-    /// Implements the main WCF interface.
+    /// Implements the main service interface.
     /// </summary>
     public class KistlService
         : IKistlService, IDisposable

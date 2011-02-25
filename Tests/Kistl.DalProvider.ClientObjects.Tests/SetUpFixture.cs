@@ -29,6 +29,7 @@ namespace Kistl.DalProvider.Client.Tests
             base.SetupBuilder(builder);
             builder.RegisterModule(new Kistl.API.ApiModule());
             builder.RegisterModule(new Kistl.API.Client.ClientApiModule());
+            builder.RegisterModule(new Kistl.API.Client.HttpClientModule());
             builder.RegisterModule(new Kistl.Client.ClientModule());
             builder.RegisterModule(new Kistl.DalProvider.Client.ClientProvider());
             builder.RegisterModule(new Kistl.DalProvider.Memory.MemoryProvider());
