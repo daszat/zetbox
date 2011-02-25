@@ -53,11 +53,13 @@ namespace Kistl.API.Client
             try
             {
                 using (var response = req.GetResponse())
-                using (var input = response.GetResponseStream())
+                using (var input = new BinaryReader(response.GetResponseStream()))
                 {
-                    return (bool)_formatter.Deserialize(input)
-                        ? (byte[])_formatter.Deserialize(input)
-                        : Empty;
+                    var length = input.ReadInt32();
+                    var result = input.ReadBytes(length);
+                    var canary = input.ReadInt64();
+                    Log.ErrorFormat("Read canary: {0:X}", canary);
+                    return result;
                 }
             }
             catch (WebException ex)
@@ -91,7 +93,7 @@ namespace Kistl.API.Client
             var httpWebRequest = req as HttpWebRequest;
             if (httpWebRequest != null)
             {
-                //httpWebRequest.SendChunked = true;
+                httpWebRequest.SendChunked = true;
                 httpWebRequest.Pipelined = false;
             }
 
@@ -105,17 +107,10 @@ namespace Kistl.API.Client
 
         private void SerializeArray<T>(Stream reqStream, T[] array)
         {
-            using (var ms = new MemoryStream())
-            {
-                var haveArray = array != null && array.Length > 0;
-                _formatter.Serialize(ms, haveArray);
-                if (haveArray)
-                    _formatter.Serialize(ms, array);
-
-                ms.Seek(0, SeekOrigin.Begin);
-                ms.CopyTo(reqStream);
-                reqStream.Flush();
-            }
+            var haveArray = array != null && array.Length > 0;
+            _formatter.Serialize(reqStream, haveArray);
+            if (haveArray)
+                _formatter.Serialize(reqStream, array);
         }
 
         public byte[] SetObjects(byte[] msg, ObjectNotificationRequest[] notificationRequests)
@@ -197,7 +192,7 @@ namespace Kistl.API.Client
         public KistlService.BlobResponse SetBlobStream(KistlService.BlobMessage request)
         {
             if (request == null) throw new ArgumentNullException("request");
-            
+
             var req = InitializeRequest(SetBlobStreamUri);
             using (var reqStream = req.GetRequestStream())
             {

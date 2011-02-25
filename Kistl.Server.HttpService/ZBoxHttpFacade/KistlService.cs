@@ -35,6 +35,23 @@ namespace Kistl.Server.HttpService
                 _formatter.Serialize(reqStream, array);
         }
 
+        private void SerializeArray(Stream reqStream, byte[] array)
+        {
+            var haveArray = array != null && array.Length > 0;
+            var binWriter = new BinaryWriter(reqStream);
+            if (haveArray)
+            {
+                binWriter.Write(array.Length);
+                binWriter.Write(array);
+            }
+            else
+            {
+                binWriter.Write(0);
+            }
+            // canary value
+            binWriter.Write(0xaffeaffeL);
+        }
+
         private T[] DeserializeArray<T>(Stream reqStream)
         {
             return (bool)_formatter.Deserialize(reqStream)
