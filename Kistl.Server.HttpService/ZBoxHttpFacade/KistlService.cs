@@ -71,6 +71,7 @@ namespace Kistl.Server.HttpService
                         {
                             var type = SerializableType.FromStream(reader);
                             canary = reader.ReadInt64();
+                            Log.ErrorFormat("Read canary: {0:X}", canary);
                             var maxListCount = (int)_formatter.Deserialize(context.Request.InputStream);
                             var eagerLoadLists = (bool)_formatter.Deserialize(context.Request.InputStream);
                             var filter = DeserializeArray<SerializableExpression>(context.Request.InputStream);
