@@ -3,6 +3,7 @@ namespace Kistl.API
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Reflection;
     using System.Runtime.Serialization;
@@ -12,7 +13,7 @@ namespace Kistl.API
     /// Serialization Wrapper for a System.Type object
     /// </summary>
     [Serializable]
-    [DataContract(Namespace = "http://dasz.at/ZBox/", Name="Type")]
+    [DataContract(Namespace = "http://dasz.at/ZBox/", Name = "Type")]
     public class SerializableType
     {
         /// <summary>
@@ -119,5 +120,43 @@ namespace Kistl.API
         {
             return String.Format(@"Type {{ TypeName=""{0}"", AssemblyQualifiedName=""{1}"" }}", TypeName, AssemblyQualifiedName);
         }
+
+        #region Serializer
+
+        private SerializableType()
+        {
+        }
+
+        public void ToStream(BinaryWriter binStream)
+        {
+            binStream.Write(TypeName);
+            binStream.Write(AssemblyQualifiedName);
+            foreach (var parameter in GenericTypeParameter)
+            {
+                binStream.Write(true);
+                parameter.ToStream(binStream);
+            }
+            binStream.Write(false);
+        }
+
+        public static SerializableType FromStream(BinaryReader binStream)
+        {
+            var result = new SerializableType()
+            {
+                TypeName = binStream.ReadString(),
+                AssemblyQualifiedName = binStream.ReadString(),
+            };
+
+            var arguments = new List<SerializableType>();
+            while (binStream.ReadBoolean())
+            {
+                arguments.Add(SerializableType.FromStream(binStream));
+            }
+            result.GenericTypeParameter = arguments.ToArray();
+
+            return result;
+        }
+
+        #endregion
     }
 }
