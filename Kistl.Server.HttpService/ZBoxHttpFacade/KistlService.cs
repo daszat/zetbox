@@ -89,10 +89,22 @@ namespace Kistl.Server.HttpService
                             var type = SerializableType.FromStream(reader);
                             canary = reader.ReadInt64();
                             Log.ErrorFormat("Read canary: {0:X}", canary);
-                            var maxListCount = (int)_formatter.Deserialize(context.Request.InputStream);
-                            var eagerLoadLists = (bool)_formatter.Deserialize(context.Request.InputStream);
-                            var filter = DeserializeArray<SerializableExpression>(context.Request.InputStream);
-                            var orderBy = DeserializeArray<OrderByContract>(context.Request.InputStream);
+                            var maxListCount = reader.ReadInt32();
+                            var eagerLoadLists = reader.ReadBoolean();
+
+                            var filterList = new List<SerializableExpression>();
+                            while (reader.ReadBoolean())
+                            {
+                                filterList.Add(null); //  DeserializeArray<SerializableExpression>(context.Request.InputStream);
+                            }
+                            var filter = filterList.ToArray();
+
+                            var orderByList = new List<OrderByContract>();
+                            while (reader.ReadBoolean())
+                            {
+                                orderByList.Add(null); //  DeserializeArray<OrderByContract>(context.Request.InputStream);
+                            }
+                            var orderBy = orderByList.ToArray();
                             Log.DebugFormat("GetList(type=[{0}], maxListCount={1}, eagerLoadLists={2}, SerializableExpression[{3}], OrderByContract[{4}])", type, maxListCount, eagerLoadLists, filter != null ? filter.Length : -1, orderBy != null ? orderBy.Length : -1);
                             var result = service.GetList(type, maxListCount, eagerLoadLists, filter, orderBy);
                             SendByteArray(context, result);
@@ -175,6 +187,7 @@ namespace Kistl.Server.HttpService
             }
             catch (Exception ex)
             {
+                context.Response.StatusCode = 500;
                 Log.Error("Error while processing request", ex);
             }
         }

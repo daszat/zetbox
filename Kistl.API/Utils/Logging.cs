@@ -119,10 +119,10 @@ namespace Kistl.API.Utils
                 else
                     LogFormat(">> {0}: {1}", Method, Message);
 
-                if (StackTrace != null)
-                {
-                    log.Debug(StackTrace.ToString());
-                }
+                //if (StackTrace != null)
+                //{
+                //    log.Debug(StackTrace.ToString());
+                //}
 
                 watch.Start();
 

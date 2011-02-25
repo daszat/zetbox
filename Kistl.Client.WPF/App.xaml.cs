@@ -7,15 +7,14 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Threading;
-
 using Autofac;
 using Kistl.API;
 using Kistl.API.Client;
 using Kistl.API.Configuration;
 using Kistl.API.Utils;
+using Kistl.App.Extensions;
 using Kistl.App.GUI;
 using Kistl.Client.Presentables;
-using Kistl.App.Extensions;
 using Kistl.Client.WPF.Converter;
 
 namespace Kistl.Client.WPF
