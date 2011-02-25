@@ -14,7 +14,7 @@ namespace Kistl.Client.Bootstrapper
         AppConfig = 3,
     }
 
-    [XmlRoot("ArrayOfFileInfo", Namespace = "http://dasz.at/ZBox/Bootstrapper/FileInfo")]
+    [XmlRoot("ArrayOfFileInfo", Namespace = "http://dasz.at/ZBox/Bootstrapper")]
     public class FileInfoArray
     {
         [XmlElement("FileInfo")]

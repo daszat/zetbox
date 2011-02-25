@@ -12,7 +12,7 @@ namespace Kistl.Server.HttpService
     using System.IO;
     using System.Xml.Serialization;
 
-    [XmlRoot("ArrayOfFileInfo", Namespace = "http://dasz.at/ZBox/Bootstrapper/FileInfo")]
+    [XmlRoot("ArrayOfFileInfo", Namespace = "http://dasz.at/ZBox/Bootstrapper")]
     public class FileInfoArray
     {
         [XmlElement("FileInfo")]
