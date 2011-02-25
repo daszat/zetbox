@@ -48,7 +48,7 @@ namespace Kistl.Server
     /// <summary>
     /// Bootstrapper service
     /// </summary>
-    [ServiceBehavior(AddressFilterMode = AddressFilterMode.Any, Namespace = "http://dasz.at/ZBox/Bootstrapper", InstanceContextMode = InstanceContextMode.Single)]
+    [ServiceBehavior(AddressFilterMode = AddressFilterMode.Any, Namespace = "http://dasz.at/ZBox/Bootstrapper")]
     public class BootstrapperService : IBootstrapperService
     {
         private KistlConfig config;
@@ -87,10 +87,15 @@ namespace Kistl.Server
             }
         }
 
-        public Stream GetFile(string path, string name)
+        public string GetFilePath(string path, string name)
         {
             var dir = config.Server.ClientFilesLocations.Single(i => i.Name == path);
-            var probe = Path.Combine(dir.Value, name);
+            return Path.Combine(dir.Value, name);
+        }
+
+        public Stream GetFile(string path, string name)
+        {
+            var probe = GetFilePath(path, name);
             if (File.Exists(probe))
             {
                 WebOperationContext.Current.OutgoingResponse.ContentType = "application/octet-stream";

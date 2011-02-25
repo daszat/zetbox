@@ -23,8 +23,6 @@ namespace Kistl.Server.HttpService
         // Provider that holds the application container.
         static IContainerProvider _containerProvider;
 
-        private static string useHttpFacade;
-
         // Instance property that will be used by Autofac HttpModules
         // to resolve and inject dependencies.
         public IContainerProvider ContainerProvider
@@ -51,7 +49,6 @@ namespace Kistl.Server.HttpService
 
             Log.Info("Starting Kistl Server");
 
-            useHttpFacade = System.Configuration.ConfigurationManager.AppSettings["UseHttpFacade"];
             var cfgFile = System.Configuration.ConfigurationManager.AppSettings["ConfigFile"];
 
             var config = KistlConfig.FromFile(
@@ -69,14 +66,7 @@ namespace Kistl.Server.HttpService
 
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
-            if (string.Equals(useHttpFacade, "true", StringComparison.CurrentCultureIgnoreCase))
-            {
-                if (HttpContext.Current.Request.Url.PathAndQuery.ToLower().Contains("bootstrapper.svc"))
-                {
-                    var newUrl = HttpContext.Current.Request.Url.PathAndQuery.Replace("Bootstrapper.svc", "Bootstrapper.facade");
-                    HttpContext.Current.Response.Redirect(newUrl);
-                }
-            }
+           
         }
 
         protected void Application_AuthenticateRequest(object sender, EventArgs e)

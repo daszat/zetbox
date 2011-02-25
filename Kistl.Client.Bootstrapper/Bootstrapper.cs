@@ -80,9 +80,8 @@ namespace Kistl.Client.Bootstrapper
         private FileInfoArray LoadFileInformations()
         {
             SetStatus("Loading Fileinformation");
-            var adr = new UriBuilder(address);
-            adr.Path += "/Bootstrapper.svc/GetFileInfos";
-            var filesBuffer = GetFileInfos(adr.Uri);
+            var adr = new Uri(new Uri(address), "Bootstrapper.svc/GetFileInfos");
+            var filesBuffer = GetFileInfos(adr);
 
             if (string.IsNullOrEmpty(filesBuffer))
             {
@@ -154,10 +153,8 @@ namespace Kistl.Client.Bootstrapper
 
             Directory.CreateDirectory(Path.Combine(targetDir, f.DestPath));
 
-            UriBuilder adr = new UriBuilder(address);
-            adr.Path += "/Bootstrapper.svc/GetFile/" + f.DestPath + "/" + f.Name;
-
-            service.DownloadFileAsync(adr.Uri, targetFile);
+            var adr = new Uri(new Uri(address), "Bootstrapper.svc/GetFile/" + f.DestPath + "/" + f.Name);
+            service.DownloadFileAsync(adr, targetFile);
             downloadEvent.WaitOne();
 
             File.SetCreationTimeUtc(targetFile, f.Date);

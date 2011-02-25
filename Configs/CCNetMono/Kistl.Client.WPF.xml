@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<KistlConfig xmlns="http://dasz.at/Kistl/">
+  <ConfigName>Default Client Configuration</ConfigName>
+  <Client StartClient="false" ThrowErrors="false">
+    <Culture>de-AT</Culture>
+    <UICulture>de-AT</UICulture>
+    <DocumentStore>P:/Kistl/DocumentStore/Client/</DocumentStore>
+    <DevelopmentEnvironment>false</DevelopmentEnvironment>
+    <Modules>
+      <Module>Kistl.API.ApiModule, Kistl.API</Module>
+      <Module>Kistl.API.Client.ClientApiModule, Kistl.API.Client</Module>
+      <Module>Kistl.Client.ClientModule, Kistl.Client</Module>
+      <Module>Kistl.Client.WPF.WPFModule, Kistl.Client.WPF</Module>
+      <Module>Kistl.Objects.InterfaceModule, Kistl.Objects</Module>
+      <Module>Kistl.Objects.ClientModule, Kistl.Objects.ClientImpl</Module>
+      <Module>Kistl.Objects.MemoryModule, Kistl.Objects.MemoryImpl</Module>
+      <Module>Kistl.DalProvider.Client.ClientProvider, Kistl.DalProvider.ClientObjects</Module>
+      <Module>Kistl.DalProvider.Memory.MemoryProvider, Kistl.DalProvider.Memory</Module>
+      <Module>Kistl.App.Projekte.Client.CustomClientActionsModule, Kistl.App.Projekte.Client</Module>
+      <Module>Kistl.App.Projekte.Common.CustomCommonActionsModule, Kistl.App.Projekte.Common</Module>
+      <Module>Ini50.App.Client.Ini50Module, Ini50.App.Client</Module>
+
+      <!-- Service Control Manager -->
+      <Module>Kistl.App.Extensions.ServiceControlManagerModule, Kistl.API.Common</Module>
+
+      <Module>Kistl.Client.BasicAuthCredentialsResolver+Module, Kistl.Client</Module>
+    </Modules>
+  </Client>
+  <SourceFileLocation>
+    <!-- default probe path -->
+    <string>P:\Kistl\bin\CodeGen\bin\Debug</string>
+    <!-- common libaries -->
+    <string>P:\Kistl\bin\Debug\bin\Common</string>
+    <!-- Fallback path for local development -->
+    <string>P:\Kistl\bin\Debug\bin\Server\fallback</string>
+  </SourceFileLocation>
+</KistlConfig>
