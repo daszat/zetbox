@@ -18,10 +18,10 @@
   </Server>
   <SourceFileLocation>
     <!-- default probe path -->
-    <string>F:\CruiseControl.NET\Projects\ZBox-NH\bin\CodeGen\bin\Debug</string>
+    <string>F:\CruiseControl.NET\Projects\ZBox-EF\bin\CodeGen\bin\Debug</string>
     <!-- common libaries -->
-    <string>F:\CruiseControl.NET\Projects\ZBox-NH\bin\Debug\bin\Common</string>
+    <string>F:\CruiseControl.NET\Projects\ZBox-EF\bin\Debug\bin\Common</string>
     <!-- Fallback path for local development -->
-    <string>F:\CruiseControl.NET\Projects\ZBox-NH\bin\Debug\bin\Server\fallback</string>
+    <string>F:\CruiseControl.NET\Projects\ZBox-EF\bin\Debug\bin\Server\fallback</string>
   </SourceFileLocation>
 </KistlConfig>
