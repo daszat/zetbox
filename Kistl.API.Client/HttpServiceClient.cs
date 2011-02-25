@@ -14,8 +14,7 @@ namespace Kistl.API.Client
         : Kistl.API.Client.KistlService.IKistlService
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.API.Client.HttpServiceClient");
-
-        private readonly BinaryFormatter _formatter = new BinaryFormatter();
+        private readonly static byte[] Empty = new byte[0];
 
         private readonly ICredentialsResolver _credentialsResolver;
 
@@ -56,25 +55,38 @@ namespace Kistl.API.Client
                 using (var response = req.GetResponse())
                 using (var input = response.GetResponseStream())
                 {
-                    return (bool)_formatter.Deserialize(input)
-                        ? (byte[])_formatter.Deserialize(input)
-                        : null;
+                    return (bool)new BinaryFormatter().Deserialize(input)
+                        ? (byte[])new BinaryFormatter().Deserialize(input)
+                        : Empty;
                 }
             }
             catch (WebException ex)
             {
-                var errorMsg = String.Format("Error when accessing server({0}): {1}: {2}", destination, ex.Status, ex.Response);
+                var errorMsg = String.Format("Error when accessing server({0}): {1}", destination, ex.Status);
                 Log.Error(errorMsg);
+                var httpResponse = ex.Response as HttpWebResponse;
+                if (httpResponse != null)
+                {
+                    Log.ErrorFormat("HTTP Error: {0}: {1}", httpResponse.StatusCode, httpResponse.StatusDescription);
+                    foreach (var header in ex.Response.Headers)
+                    {
+                        Log.Error(header.ToString());
+                    }
+                }
+                else
+                {
+                    Log.Error("No headers");
+                }
                 throw new ApplicationException(errorMsg, ex);
             }
         }
 
         private void SerializeArray<T>(Stream reqStream, T[] array)
         {
-            var haveArray = array != null && array.Length == 0;
-            _formatter.Serialize(reqStream, haveArray);
+            var haveArray = array != null && array.Length > 0;
+            new BinaryFormatter().Serialize(reqStream, haveArray);
             if (haveArray)
-                _formatter.Serialize(reqStream, array);
+                new BinaryFormatter().Serialize(reqStream, array);
         }
 
         public byte[] SetObjects(byte[] msg, ObjectNotificationRequest[] notificationRequests)
@@ -94,9 +106,9 @@ namespace Kistl.API.Client
             return MakeRequest(GetListUri,
                 reqStream =>
                 {
-                    _formatter.Serialize(reqStream, type);
-                    _formatter.Serialize(reqStream, maxListCount);
-                    _formatter.Serialize(reqStream, eagerLoadLists);
+                    new BinaryFormatter().Serialize(reqStream, type);
+                    new BinaryFormatter().Serialize(reqStream, maxListCount);
+                    new BinaryFormatter().Serialize(reqStream, eagerLoadLists);
                     SerializeArray(reqStream, filter);
                     SerializeArray(reqStream, orderBy);
                 });
@@ -110,9 +122,9 @@ namespace Kistl.API.Client
             return MakeRequest(GetListOfUri,
                 reqStream =>
                 {
-                    _formatter.Serialize(reqStream, type);
-                    _formatter.Serialize(reqStream, ID);
-                    _formatter.Serialize(reqStream, property);
+                    new BinaryFormatter().Serialize(reqStream, type);
+                    new BinaryFormatter().Serialize(reqStream, ID);
+                    new BinaryFormatter().Serialize(reqStream, property);
                 });
         }
 
@@ -121,9 +133,9 @@ namespace Kistl.API.Client
             return MakeRequest(FetchRelationUri,
                 reqStream =>
                 {
-                    _formatter.Serialize(reqStream, relId);
-                    _formatter.Serialize(reqStream, role);
-                    _formatter.Serialize(reqStream, ID);
+                    new BinaryFormatter().Serialize(reqStream, relId);
+                    new BinaryFormatter().Serialize(reqStream, role);
+                    new BinaryFormatter().Serialize(reqStream, ID);
                 });
         }
 
@@ -133,7 +145,7 @@ namespace Kistl.API.Client
             req.Method = "POST";
             using (var reqStream = req.GetRequestStream())
             {
-                _formatter.Serialize(reqStream, ID);
+                new BinaryFormatter().Serialize(reqStream, ID);
             }
             try
             {
@@ -158,8 +170,8 @@ namespace Kistl.API.Client
             req.Method = "POST";
             using (var reqStream = req.GetRequestStream())
             {
-                _formatter.Serialize(reqStream, request.FileName);
-                _formatter.Serialize(reqStream, request.MimeType);
+                new BinaryFormatter().Serialize(reqStream, request.FileName);
+                new BinaryFormatter().Serialize(reqStream, request.MimeType);
                 request.Stream.CopyTo(reqStream);
             }
             try
@@ -169,7 +181,7 @@ namespace Kistl.API.Client
                     var input = response.GetResponseStream();
                     return new KistlService.BlobResponse()
                     {
-                        ID = (int)_formatter.Deserialize(input),
+                        ID = (int)new BinaryFormatter().Deserialize(input),
                         BlobInstance = input
                     };
                 }
@@ -190,9 +202,9 @@ namespace Kistl.API.Client
             req.Method = "POST";
             using (var reqStream = req.GetRequestStream())
             {
-                _formatter.Serialize(reqStream, type);
-                _formatter.Serialize(reqStream, ID);
-                _formatter.Serialize(reqStream, method);
+                new BinaryFormatter().Serialize(reqStream, type);
+                new BinaryFormatter().Serialize(reqStream, ID);
+                new BinaryFormatter().Serialize(reqStream, method);
                 SerializeArray(reqStream, parameterTypes);
                 SerializeArray(reqStream, parameter);
                 SerializeArray(reqStream, changedObjects);
@@ -203,13 +215,13 @@ namespace Kistl.API.Client
                 using (var response = req.GetResponse())
                 using (var input = response.GetResponseStream())
                 {
-                    retChangedObjects = (bool)_formatter.Deserialize(input)
-                        ? (byte[])_formatter.Deserialize(input)
-                        : retChangedObjects = null;
+                    retChangedObjects = (bool)new BinaryFormatter().Deserialize(input)
+                        ? (byte[])new BinaryFormatter().Deserialize(input)
+                        : retChangedObjects = Empty;
 
-                    return (bool)_formatter.Deserialize(input)
-                        ? (byte[])_formatter.Deserialize(input)
-                        : null;
+                    return (bool)new BinaryFormatter().Deserialize(input)
+                        ? (byte[])new BinaryFormatter().Deserialize(input)
+                        : Empty;
                 }
             }
             catch (WebException ex)

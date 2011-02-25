@@ -33,6 +33,7 @@ namespace Kistl.Server.HttpService
             if ((autz == null) || (autz.Length == 0))
             {
                 // No credentials; anonymous request
+                return;
             }
 
             if (autz.ToUpperInvariant().StartsWith(authenticationMethod.ToUpperInvariant()))

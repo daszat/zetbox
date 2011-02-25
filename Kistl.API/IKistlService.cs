@@ -129,6 +129,7 @@ namespace Kistl.API
     }
 
     [DataContract(Namespace = "http://dasz.at/ZBox/", Name="OrderBy")]
+    [Serializable]
     [KnownType(typeof(SerializableType))]
     [KnownType(typeof(SerializableBinaryExpression))]
     [KnownType(typeof(SerializableConditionalExpression))]

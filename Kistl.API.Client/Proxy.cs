@@ -57,17 +57,16 @@ namespace Kistl.API.Client
             IEnumerable<IDataObject> result = null;
             _toolkit.WithWaitDialog(() =>
             {
-                using (MemoryStream s = new MemoryStream(_service.GetList(
+                var bytes = _service.GetList(
                     ifType.ToSerializableType(),
                     maxListCount,
                     eagerLoadLists,
                     filter != null ? filter.Select(f => SerializableExpression.FromExpression(f, _iftFactory)).ToArray() : null,
-                    orderBy != null ? orderBy.Select(o => new OrderByContract() { Type = o.Type, Expression = SerializableExpression.FromExpression(o.Expression, _iftFactory) }).ToArray() : null)))
+                    orderBy != null ? orderBy.Select(o => new OrderByContract() { Type = o.Type, Expression = SerializableExpression.FromExpression(o.Expression, _iftFactory) }).ToArray() : null);
+
+                using (var sr = new BinaryReader(new MemoryStream(bytes)))
                 {
-                    using (var sr = new BinaryReader(s))
-                    {
-                        result = ReceiveObjects(ctx, sr, out tmpAuxObjects).Cast<IDataObject>();
-                    }
+                    result = ReceiveObjects(ctx, sr, out tmpAuxObjects).Cast<IDataObject>();
                 }
             });
             auxObjects = tmpAuxObjects;
@@ -81,12 +80,11 @@ namespace Kistl.API.Client
 
             _toolkit.WithWaitDialog(() =>
             {
-                using (MemoryStream s = new MemoryStream(_service.GetListOf(ifType.ToSerializableType(), ID, property)))
+                var bytes = _service.GetListOf(ifType.ToSerializableType(), ID, property);
+
+                using (var sr = new BinaryReader(new MemoryStream(bytes)))
                 {
-                    using (var sr = new BinaryReader(s))
-                    {
-                        result = ReceiveObjects(ctx, sr, out tmpAuxObjects).Cast<IDataObject>();
-                    }
+                    result = ReceiveObjects(ctx, sr, out tmpAuxObjects).Cast<IDataObject>();
                 }
             });
 
@@ -102,21 +100,18 @@ namespace Kistl.API.Client
             {
                 // Serialize
                 using (var ms = new MemoryStream())
+                using (var sw = new BinaryWriter(ms))
                 {
-                    using (var sw = new BinaryWriter(ms))
-                    {
-                        SendObjects(objects, sw);
+                    SendObjects(objects, sw);
 
-                        using (MemoryStream s = new MemoryStream(_service.SetObjects(ms.ToArray(), notficationRequests.ToArray())))
-                        {
-                            using (var sr = new BinaryReader(s))
-                            {
-                                // merge auxiliary objects into primary set objects result
-                                List<IStreamable> auxObjects;
-                                var receivedObjects = ReceiveObjects(ctx, sr, out auxObjects);
-                                result = receivedObjects.Concat(auxObjects).Cast<IPersistenceObject>();
-                            }
-                        }
+                    var bytes = _service.SetObjects(ms.ToArray(), notficationRequests.ToArray());
+
+                    using (var sr = new BinaryReader(new MemoryStream(bytes)))
+                    {
+                        // merge auxiliary objects into primary set objects result
+                        List<IStreamable> auxObjects;
+                        var receivedObjects = ReceiveObjects(ctx, sr, out auxObjects);
+                        result = receivedObjects.Concat(auxObjects).Cast<IPersistenceObject>();
                     }
                 }
             });
