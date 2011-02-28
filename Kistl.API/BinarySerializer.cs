@@ -27,23 +27,23 @@ namespace Kistl.API
 
         private static void Trace(BinaryWriter sw, Action serializer)
         {
-            long beginPos = sw.BaseStream.Position;
+            long beginPos = sw.BaseStream.CanSeek ? sw.BaseStream.Position : -1;
             SerializerTrace("CurrentPos: {0}", beginPos);
 
             serializer();
 
-            long endPos = sw.BaseStream.Position;
+            long endPos = sw.BaseStream.CanSeek ? sw.BaseStream.Position : -1;
             SerializerTrace("Wrote {0} bytes", endPos - beginPos);
         }
 
         private static T Trace<T>(BinaryReader sr, Func<T> deserializer)
         {
-            long beginPos = sr.BaseStream.Position;
+            long beginPos = sr.BaseStream.CanSeek ? sr.BaseStream.Position : -1;
             SerializerTrace("CurrentPos: {0}", beginPos);
 
             var result = deserializer();
 
-            long endPos = sr.BaseStream.Position;
+            long endPos = sr.BaseStream.CanSeek ? sr.BaseStream.Position : -1;
             SerializerTrace("Read {0} bytes", endPos - beginPos);
 
             return result;
@@ -51,7 +51,7 @@ namespace Kistl.API
 
         private static void TraceArray<T>(BinaryWriter sw, T[] data, Action<T> serializer)
         {
-            long beginPos = sw.BaseStream.Position;
+            long beginPos = sw.BaseStream.CanSeek ? sw.BaseStream.Position : -1;
             SerializerTrace("CurrentPos: {0}", beginPos);
 
             var length = data.Length;
@@ -63,13 +63,13 @@ namespace Kistl.API
                 serializer(data[i]);
             }
 
-            long endPos = sw.BaseStream.Position;
+            long endPos = sw.BaseStream.CanSeek ? sw.BaseStream.Position : -1;
             SerializerTrace("Wrote {0} bytes", endPos - beginPos);
         }
 
         private static T[] TraceArray<T>(BinaryReader sr, Func<T> deserializer)
         {
-            long beginPos = sr.BaseStream.Position;
+            long beginPos = sr.BaseStream.CanSeek ? sr.BaseStream.Position : -1;
             SerializerTrace("CurrentPos: {0}", beginPos);
 
             var length = sr.ReadInt32();
@@ -81,7 +81,7 @@ namespace Kistl.API
                 result[i] = deserializer();
             }
 
-            long endPos = sr.BaseStream.Position;
+            long endPos = sr.BaseStream.CanSeek ? sr.BaseStream.Position : -1;
             SerializerTrace("Read {0} bytes", endPos - beginPos);
 
             return result;
@@ -98,7 +98,7 @@ namespace Kistl.API
         {
             if (sw == null)
                 throw new ArgumentNullException("sw");
-            SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
+            SerializerTrace("CurrentPos: {0}", sw.BaseStream.CanSeek ? sw.BaseStream.Position : -1);
             SerializerTrace("Writing bool {0} (1 byte)", val);
             sw.Write(val);
         }
@@ -113,7 +113,7 @@ namespace Kistl.API
         {
             if (sr == null)
                 throw new ArgumentNullException("sr");
-            SerializerTrace("CurrentPos: {0}", sr.BaseStream.Position);
+            SerializerTrace("CurrentPos: {0}", sr.BaseStream.CanSeek ? sr.BaseStream.Position : -1);
             val = sr.ReadBoolean();
             SerializerTrace("read bool {0}", val);
         }
@@ -128,7 +128,7 @@ namespace Kistl.API
             if (consumer == null) { throw new ArgumentNullException("consumer"); }
             if (sr == null) { throw new ArgumentNullException("sr"); }
 
-            SerializerTrace("CurrentPos: {0}", sr.BaseStream.Position);
+            SerializerTrace("CurrentPos: {0}", sr.BaseStream.CanSeek ? sr.BaseStream.Position : -1);
             var val = sr.ReadBoolean();
             consumer(val);
             SerializerTrace("read bool {0}", val);
@@ -143,7 +143,7 @@ namespace Kistl.API
         {
             if (sw == null)
                 throw new ArgumentNullException("sw");
-            SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
+            SerializerTrace("CurrentPos: {0}", sw.BaseStream.CanSeek ? sw.BaseStream.Position : -1);
             SerializerTrace("Writing bool? {0}", val);
             if (val.HasValue) { sw.Write(true); sw.Write(val.Value); }
             else
@@ -159,7 +159,7 @@ namespace Kistl.API
         {
             if (sr == null)
                 throw new ArgumentNullException("sr");
-            SerializerTrace("CurrentPos: {0}", sr.BaseStream.Position);
+            SerializerTrace("CurrentPos: {0}", sr.BaseStream.CanSeek ? sr.BaseStream.Position : -1);
             val = sr.ReadBoolean() ? (bool?)sr.ReadBoolean() : null;
             SerializerTrace("read bool? {0}", val);
         }
@@ -177,7 +177,7 @@ namespace Kistl.API
         {
             if (sw == null)
                 throw new ArgumentNullException("sw");
-            SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
+            SerializerTrace("CurrentPos: {0}", sw.BaseStream.CanSeek ? sw.BaseStream.Position : -1);
             SerializerTrace("Writing DateTime {0} (8 bytes)", val);
             sw.Write(val.ToBinary());
         }
@@ -191,7 +191,7 @@ namespace Kistl.API
         {
             if (sr == null)
                 throw new ArgumentNullException("sr");
-            SerializerTrace("CurrentPos: {0}", sr.BaseStream.Position);
+            SerializerTrace("CurrentPos: {0}", sr.BaseStream.CanSeek ? sr.BaseStream.Position : -1);
             val = DateTime.FromBinary(sr.ReadInt64());
             SerializerTrace("read DateTime {0}", val);
         }
@@ -205,7 +205,7 @@ namespace Kistl.API
         {
             if (sw == null)
                 throw new ArgumentNullException("sw");
-            SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
+            SerializerTrace("CurrentPos: {0}", sw.BaseStream.CanSeek ? sw.BaseStream.Position : -1);
             SerializerTrace("Writing DateTime? {0}", val);
             if (val.HasValue) { sw.Write(true); sw.Write(val.Value.ToBinary()); }
             else
@@ -221,7 +221,7 @@ namespace Kistl.API
         {
             if (sr == null)
                 throw new ArgumentNullException("sr");
-            SerializerTrace("CurrentPos: {0}", sr.BaseStream.Position);
+            SerializerTrace("CurrentPos: {0}", sr.BaseStream.CanSeek ? sr.BaseStream.Position : -1);
             val = sr.ReadBoolean() ? (DateTime?)DateTime.FromBinary(sr.ReadInt64()) : null;
             SerializerTrace("read DateTime? {0}", val);
         }
@@ -239,7 +239,7 @@ namespace Kistl.API
         {
             if (sw == null)
                 throw new ArgumentNullException("sw");
-            SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
+            SerializerTrace("CurrentPos: {0}", sw.BaseStream.CanSeek ? sw.BaseStream.Position : -1);
             SerializerTrace("Writing Guid {0}", val);
             sw.Write(val.ToString());
         }
@@ -253,7 +253,7 @@ namespace Kistl.API
         {
             if (sr == null)
                 throw new ArgumentNullException("sr");
-            SerializerTrace("CurrentPos: {0}", sr.BaseStream.Position);
+            SerializerTrace("CurrentPos: {0}", sr.BaseStream.CanSeek ? sr.BaseStream.Position : -1);
             val = new Guid(sr.ReadString());
             SerializerTrace("read Guid {0}", val);
         }
@@ -267,7 +267,7 @@ namespace Kistl.API
         {
             if (sw == null)
                 throw new ArgumentNullException("sw");
-            SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
+            SerializerTrace("CurrentPos: {0}", sw.BaseStream.CanSeek ? sw.BaseStream.Position : -1);
             SerializerTrace("Writing Guid? {0}", val);
             if (val.HasValue) { sw.Write(true); sw.Write(val.Value.ToString()); }
             else
@@ -283,7 +283,7 @@ namespace Kistl.API
         {
             if (sr == null)
                 throw new ArgumentNullException("sr");
-            SerializerTrace("CurrentPos: {0}", sr.BaseStream.Position);
+            SerializerTrace("CurrentPos: {0}", sr.BaseStream.CanSeek ? sr.BaseStream.Position : -1);
             val = sr.ReadBoolean() ? (Guid?)new Guid(sr.ReadString()) : null;
             SerializerTrace("read Guid? {0}", val);
         }
@@ -301,7 +301,7 @@ namespace Kistl.API
         {
             if (sw == null)
                 throw new ArgumentNullException("sw");
-            SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
+            SerializerTrace("CurrentPos: {0}", sw.BaseStream.CanSeek ? sw.BaseStream.Position : -1);
             SerializerTrace("Writing double {0}", val);
             sw.Write(val);
         }
@@ -315,7 +315,7 @@ namespace Kistl.API
         {
             if (sr == null)
                 throw new ArgumentNullException("sr");
-            SerializerTrace("CurrentPos: {0}", sr.BaseStream.Position);
+            SerializerTrace("CurrentPos: {0}", sr.BaseStream.CanSeek ? sr.BaseStream.Position : -1);
             val = sr.ReadDouble();
             SerializerTrace("read double {0}", val);
         }
@@ -329,7 +329,7 @@ namespace Kistl.API
         {
             if (sw == null)
                 throw new ArgumentNullException("sw");
-            SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
+            SerializerTrace("CurrentPos: {0}", sw.BaseStream.CanSeek ? sw.BaseStream.Position : -1);
             SerializerTrace("Writing double? {0}", val);
             if (val.HasValue) { sw.Write(true); sw.Write(val.Value); }
             else
@@ -345,7 +345,7 @@ namespace Kistl.API
         {
             if (sr == null)
                 throw new ArgumentNullException("sr");
-            SerializerTrace("CurrentPos: {0}", sr.BaseStream.Position);
+            SerializerTrace("CurrentPos: {0}", sr.BaseStream.CanSeek ? sr.BaseStream.Position : -1);
             val = sr.ReadBoolean() ? (double?)sr.ReadDouble() : null;
             SerializerTrace("read double? {0}", val);
         }
@@ -363,7 +363,7 @@ namespace Kistl.API
         {
             if (sw == null)
                 throw new ArgumentNullException("sw");
-            SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
+            SerializerTrace("CurrentPos: {0}", sw.BaseStream.CanSeek ? sw.BaseStream.Position : -1);
             SerializerTrace("Writing float {0}", val);
             sw.Write(val);
         }
@@ -377,7 +377,7 @@ namespace Kistl.API
         {
             if (sr == null)
                 throw new ArgumentNullException("sr");
-            SerializerTrace("CurrentPos: {0}", sr.BaseStream.Position);
+            SerializerTrace("CurrentPos: {0}", sr.BaseStream.CanSeek ? sr.BaseStream.Position : -1);
             val = sr.ReadSingle();
             SerializerTrace("read float {0}", val);
         }
@@ -391,7 +391,7 @@ namespace Kistl.API
         {
             if (sw == null)
                 throw new ArgumentNullException("sw");
-            SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
+            SerializerTrace("CurrentPos: {0}", sw.BaseStream.CanSeek ? sw.BaseStream.Position : -1);
             SerializerTrace("Writing float? {0}", val);
             if (val.HasValue) { sw.Write(true); sw.Write(val.Value); }
             else
@@ -407,7 +407,7 @@ namespace Kistl.API
         {
             if (sr == null)
                 throw new ArgumentNullException("sr");
-            SerializerTrace("CurrentPos: {0}", sr.BaseStream.Position);
+            SerializerTrace("CurrentPos: {0}", sr.BaseStream.CanSeek ? sr.BaseStream.Position : -1);
             val = sr.ReadBoolean() ? (float?)sr.ReadSingle() : null;
             SerializerTrace("read float? {0}", val);
         }
@@ -425,7 +425,7 @@ namespace Kistl.API
         {
             if (sw == null)
                 throw new ArgumentNullException("sw");
-            SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
+            SerializerTrace("CurrentPos: {0}", sw.BaseStream.CanSeek ? sw.BaseStream.Position : -1);
             SerializerTrace("Writing int {0} (four bytes)", val);
             sw.Write(val);
         }
@@ -439,7 +439,7 @@ namespace Kistl.API
         {
             if (sr == null)
                 throw new ArgumentNullException("sr");
-            SerializerTrace("CurrentPos: {0}", sr.BaseStream.Position);
+            SerializerTrace("CurrentPos: {0}", sr.BaseStream.CanSeek ? sr.BaseStream.Position : -1);
             val = sr.ReadInt32();
             SerializerTrace("read int {0} (4 bytes)", val);
         }
@@ -453,7 +453,7 @@ namespace Kistl.API
         {
             if (conv == null) { throw new ArgumentNullException("conv"); }
             if (sr == null) { throw new ArgumentNullException("sr"); }
-            SerializerTrace("CurrentPos: {0}", sr.BaseStream.Position);
+            SerializerTrace("CurrentPos: {0}", sr.BaseStream.CanSeek ? sr.BaseStream.Position : -1);
             int val = sr.ReadInt32();
             conv(val);
             SerializerTrace("read and converted int {0} (4 bytes)", val);
@@ -468,7 +468,7 @@ namespace Kistl.API
         {
             if (sw == null)
                 throw new ArgumentNullException("sw");
-            SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
+            SerializerTrace("CurrentPos: {0}", sw.BaseStream.CanSeek ? sw.BaseStream.Position : -1);
             SerializerTrace("Writing int? {0}", val);
             if (val.HasValue) { sw.Write(true); sw.Write(val.Value); }
             else
@@ -483,7 +483,7 @@ namespace Kistl.API
         {
             if (sr == null)
                 throw new ArgumentNullException("sr");
-            SerializerTrace("CurrentPos: {0}", sr.BaseStream.Position);
+            SerializerTrace("CurrentPos: {0}", sr.BaseStream.CanSeek ? sr.BaseStream.Position : -1);
             val = sr.ReadBoolean() ? (int?)sr.ReadInt32() : null;
             SerializerTrace("read int? {0}", val);
         }
@@ -501,7 +501,7 @@ namespace Kistl.API
         {
             if (sw == null)
                 throw new ArgumentNullException("sw");
-            SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
+            SerializerTrace("CurrentPos: {0}", sw.BaseStream.CanSeek ? sw.BaseStream.Position : -1);
             SerializerTrace("Writing int {0} (four bytes)", val);
             sw.Write(val);
         }
@@ -515,7 +515,7 @@ namespace Kistl.API
         {
             if (sr == null)
                 throw new ArgumentNullException("sr");
-            SerializerTrace("CurrentPos: {0}", sr.BaseStream.Position);
+            SerializerTrace("CurrentPos: {0}", sr.BaseStream.CanSeek ? sr.BaseStream.Position : -1);
             val = sr.ReadDecimal();
             SerializerTrace("read int {0} (4 bytes)", val);
         }
@@ -529,7 +529,7 @@ namespace Kistl.API
         {
             if (sw == null)
                 throw new ArgumentNullException("sw");
-            SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
+            SerializerTrace("CurrentPos: {0}", sw.BaseStream.CanSeek ? sw.BaseStream.Position : -1);
             SerializerTrace("Writing int? {0}", val);
             if (val.HasValue) { sw.Write(true); sw.Write(val.Value); }
             else
@@ -544,7 +544,7 @@ namespace Kistl.API
         {
             if (sr == null)
                 throw new ArgumentNullException("sr");
-            SerializerTrace("CurrentPos: {0}", sr.BaseStream.Position);
+            SerializerTrace("CurrentPos: {0}", sr.BaseStream.CanSeek ? sr.BaseStream.Position : -1);
             val = sr.ReadBoolean() ? (decimal?)sr.ReadDecimal() : null;
             SerializerTrace("read int? {0}", val);
         }
@@ -562,7 +562,7 @@ namespace Kistl.API
         public static void ToStream(ICompoundObject val, BinaryWriter sw)
         {
             if (sw == null) { throw new ArgumentNullException("sw"); }
-            SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
+            SerializerTrace("CurrentPos: {0}", sw.BaseStream.CanSeek ? sw.BaseStream.Position : -1);
             SerializerTrace("Writing ICompoundObject {0}", val);
             if (val != null) { sw.Write(true); val.ToStream(sw, null, false); } else { sw.Write(false); }
         }
@@ -576,7 +576,7 @@ namespace Kistl.API
             where T : class, ICompoundObject, new()
         {
             if (sr == null) { throw new ArgumentNullException("sr"); }
-            SerializerTrace("CurrentPos: {0}", sr.BaseStream.Position);
+            SerializerTrace("CurrentPos: {0}", sr.BaseStream.CanSeek ? sr.BaseStream.Position : -1);
             val = null;
             if (sr.ReadBoolean())
             {
@@ -600,7 +600,7 @@ namespace Kistl.API
         {
             if (sw == null)
                 throw new ArgumentNullException("sw");
-            SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
+            SerializerTrace("CurrentPos: {0}", sw.BaseStream.CanSeek ? sw.BaseStream.Position : -1);
             if (e != null)
             {
                 sw.Write(true);
@@ -623,7 +623,7 @@ namespace Kistl.API
             if (sr == null)
                 throw new ArgumentNullException("sr");
 
-            SerializerTrace("CurrentPos: {0}", sr.BaseStream.Position);
+            SerializerTrace("CurrentPos: {0}", sr.BaseStream.CanSeek ? sr.BaseStream.Position : -1);
             e = null;
             if (sr.ReadBoolean())
             {
@@ -673,17 +673,16 @@ namespace Kistl.API
                 throw new ArgumentNullException("type");
             if (sw == null)
                 throw new ArgumentNullException("sw");
-            SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
+            SerializerTrace("CurrentPos: {0}", sw.BaseStream.CanSeek ? sw.BaseStream.Position : -1);
             SerializerTrace("Writing SerializableType {0}", type);
 
-            long beginPos = sw.BaseStream.Position;
+            long beginPos = sw.BaseStream.CanSeek ? sw.BaseStream.Position : -1;
 
             BinaryFormatter bf = new BinaryFormatter();
             bf.Serialize(sw.BaseStream, type);
 
-            long endPos = sw.BaseStream.Position;
+            long endPos = sw.BaseStream.CanSeek ? sw.BaseStream.Position : -1;
             SerializerTrace("({0} bytes)", endPos - beginPos);
-
         }
 
         public static void ToStream(SerializableType[] types, BinaryWriter sw)
@@ -706,12 +705,12 @@ namespace Kistl.API
         {
             if (sr == null)
                 throw new ArgumentNullException("sr");
-            SerializerTrace("CurrentPos: {0}", sr.BaseStream.Position);
+            SerializerTrace("CurrentPos: {0}", sr.BaseStream.CanSeek ? sr.BaseStream.Position : -1);
 
-            long beginPos = sr.BaseStream.Position;
+            long beginPos = sr.BaseStream.CanSeek ? sr.BaseStream.Position : -1;
             BinaryFormatter bf = new BinaryFormatter();
             type = (SerializableType)bf.Deserialize(sr.BaseStream);
-            long endPos = sr.BaseStream.Position;
+            long endPos = sr.BaseStream.CanSeek ? sr.BaseStream.Position : -1;
             SerializerTrace("read SerializableType {0} ({1} bytes)", type, endPos - beginPos);
         }
 
@@ -741,12 +740,12 @@ namespace Kistl.API
         {
             if (sw == null)
                 throw new ArgumentNullException("sw");
-            SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
-            long beginPos = sw.BaseStream.Position;
+            SerializerTrace("CurrentPos: {0}", sw.BaseStream.CanSeek ? sw.BaseStream.Position : -1);
+            long beginPos = sw.BaseStream.CanSeek ? sw.BaseStream.Position : -1;
             if (val != null) { sw.Write(true); sw.Write(val); }
             else
                 sw.Write(false);
-            long endPos = sw.BaseStream.Position;
+            long endPos = sw.BaseStream.CanSeek ? sw.BaseStream.Position : -1;
             if (val == null)
             {
                 SerializerTrace("Wrote null string ({0} bytes)", endPos - beginPos);
@@ -766,10 +765,10 @@ namespace Kistl.API
         {
             if (sr == null)
                 throw new ArgumentNullException("sr");
-            SerializerTrace("CurrentPos: {0}", sr.BaseStream.Position);
-            long beginPos = sr.BaseStream.Position;
+            SerializerTrace("CurrentPos: {0}", sr.BaseStream.CanSeek ? sr.BaseStream.Position : -1);
+            long beginPos = sr.BaseStream.CanSeek ? sr.BaseStream.Position : -1;
             val = sr.ReadBoolean() ? sr.ReadString() : null;
-            long endPos = sr.BaseStream.Position;
+            long endPos = sr.BaseStream.CanSeek ? sr.BaseStream.Position : -1;
             if (val == null)
             {
                 SerializerTrace("read null string ({0} bytes)", endPos - beginPos);
@@ -791,7 +790,7 @@ namespace Kistl.API
                 throw new ArgumentNullException("conv");
             if (sr == null)
                 throw new ArgumentNullException("sr");
-            SerializerTrace("CurrentPos: {0}", sr.BaseStream.Position);
+            SerializerTrace("CurrentPos: {0}", sr.BaseStream.CanSeek ? sr.BaseStream.Position : -1);
             bool hasValue = sr.ReadBoolean();
             if (hasValue)
             {
@@ -822,16 +821,16 @@ namespace Kistl.API
 
             if (val == null)
             {
-                SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
+                SerializerTrace("CurrentPos: {0}", sw.BaseStream.CanSeek ? sw.BaseStream.Position : -1);
                 SerializerTrace("writing null collection as empty");
             }
             else
             {
-                SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
+                SerializerTrace("CurrentPos: {0}", sw.BaseStream.CanSeek ? sw.BaseStream.Position : -1);
                 foreach (IStreamable obj in val)
                 {
                     ToStream(true, sw);
-                    SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
+                    SerializerTrace("CurrentPos: {0}", sw.BaseStream.CanSeek ? sw.BaseStream.Position : -1);
                     SerializerTrace("Writing CollectionEntry {0}", val.ToString());
                     obj.ToStream(sw, null, false);
                 }
@@ -853,10 +852,10 @@ namespace Kistl.API
             if (sr == null)
                 throw new ArgumentNullException("sr");
 
-            SerializerTrace("CurrentPos: {0}", sr.BaseStream.Position);
+            SerializerTrace("CurrentPos: {0}", sr.BaseStream.CanSeek ? sr.BaseStream.Position : -1);
             while (sr.ReadBoolean())
             {
-                SerializerTrace("CurrentPos: {0}", sr.BaseStream.Position);
+                SerializerTrace("CurrentPos: {0}", sr.BaseStream.CanSeek ? sr.BaseStream.Position : -1);
 
                 // Read type
                 SerializableType t;
@@ -884,15 +883,15 @@ namespace Kistl.API
                 throw new ArgumentNullException("bytes");
             if (sw == null)
                 throw new ArgumentNullException("sw");
-            SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
+            SerializerTrace("CurrentPos: {0}", sw.BaseStream.CanSeek ? sw.BaseStream.Position : -1);
             SerializerTrace("Writing byte[{0}]", bytes.Length);
 
-            long beginPos = sw.BaseStream.Position;
+            long beginPos = sw.BaseStream.CanSeek ? sw.BaseStream.Position : -1;
 
             sw.Write(bytes.Length);
             sw.Write(bytes);
 
-            long endPos = sw.BaseStream.Position;
+            long endPos = sw.BaseStream.CanSeek ? sw.BaseStream.Position : -1;
             SerializerTrace("({0} bytes, including length)", endPos - beginPos);
         }
 
@@ -905,14 +904,14 @@ namespace Kistl.API
         {
             if (sr == null)
                 throw new ArgumentNullException("sr");
-            SerializerTrace("CurrentPos: {0}", sr.BaseStream.Position);
+            SerializerTrace("CurrentPos: {0}", sr.BaseStream.CanSeek ? sr.BaseStream.Position : -1);
 
-            long beginPos = sr.BaseStream.Position;
+            long beginPos = sr.BaseStream.CanSeek ? sr.BaseStream.Position : -1;
 
             int length = sr.ReadInt32();
             bytes = sr.ReadBytes(length);
 
-            long endPos = sr.BaseStream.Position;
+            long endPos = sr.BaseStream.CanSeek ? sr.BaseStream.Position : -1;
             SerializerTrace("read byte[{0}] ({1} bytes, including length)", bytes.Length, endPos - beginPos);
         }
 
@@ -926,10 +925,10 @@ namespace Kistl.API
                 throw new ArgumentNullException("notificationRequest");
             if (sw == null)
                 throw new ArgumentNullException("sw");
-            SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
+            SerializerTrace("CurrentPos: {0}", sw.BaseStream.CanSeek ? sw.BaseStream.Position : -1);
             SerializerTrace("Writing ObjectNotificationRequest for {0} with {1} IDs", notificationRequest.Type, notificationRequest.IDs.Length);
 
-            long beginPos = sw.BaseStream.Position;
+            long beginPos = sw.BaseStream.CanSeek ? sw.BaseStream.Position : -1;
 
             BinarySerializer.ToStream(notificationRequest.Type, sw);
             sw.Write(notificationRequest.IDs.Length);
@@ -938,7 +937,7 @@ namespace Kistl.API
                 sw.Write(id);
             }
 
-            long endPos = sw.BaseStream.Position;
+            long endPos = sw.BaseStream.CanSeek ? sw.BaseStream.Position : -1;
             SerializerTrace("({0} bytes)", endPos - beginPos);
         }
 
@@ -946,9 +945,9 @@ namespace Kistl.API
         {
             if (sr == null)
                 throw new ArgumentNullException("sr");
-            SerializerTrace("CurrentPos: {0}", sr.BaseStream.Position);
+            SerializerTrace("CurrentPos: {0}", sr.BaseStream.CanSeek ? sr.BaseStream.Position : -1);
 
-            long beginPos = sr.BaseStream.Position;
+            long beginPos = sr.BaseStream.CanSeek ? sr.BaseStream.Position : -1;
 
             SerializableType type;
             BinarySerializer.FromStream(out type, sr);
@@ -965,7 +964,7 @@ namespace Kistl.API
                 IDs = ids
             };
 
-            long endPos = sr.BaseStream.Position;
+            long endPos = sr.BaseStream.CanSeek ? sr.BaseStream.Position : -1;
             SerializerTrace("read ObjectNotificationRequest ({0} IDs, {1} bytes)", ids.Length, endPos - beginPos);
         }
 
