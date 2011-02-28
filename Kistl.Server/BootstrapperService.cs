@@ -106,6 +106,7 @@ namespace Kistl.Server
 
         public string GetFilePath(string path)
         {
+            if (String.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
             var parts = path.Split('/');
 
             var dir = config.Server.ClientFilesLocations.Single(i => i.Name == parts[0]);
@@ -116,12 +117,13 @@ namespace Kistl.Server
             }
             else
             {
-                throw new ArgumentException("path", String.Format("file [{0}] is not within configured directory [{1}]", file, dir.Value));
+                throw new ArgumentException(String.Format("file [{0}] is not within configured directory [{1}]", file, dir.Value), "path");
             }
         }
 
         public Stream GetFile(string path)
         {
+            if (String.IsNullOrEmpty(path)) throw new ArgumentNullException("path");
             var probe = GetFilePath(path);
             if (File.Exists(probe))
             {

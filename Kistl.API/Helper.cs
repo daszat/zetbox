@@ -1,14 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Xml.Serialization;
-
 using Kistl.API.Utils;
-using System.ComponentModel;
 
 namespace Kistl.API
 {
@@ -135,6 +134,19 @@ namespace Kistl.API
             {
                 dest.Write(buffer, 0, cnt);
             }
+        }
+
+        public static string PathCombine(params string[] components)
+        {
+            if (components == null) throw new ArgumentNullException("components");
+            if (components.Length == 0) throw new ArgumentOutOfRangeException("components", "need at least one element for PathCombine()");
+
+            var result = components[0];
+            for (int i = 1; i < components.Length; i++)
+            {
+                result = Path.Combine(result, components[i]);
+            }
+            return result;
         }
     }
 
@@ -1138,7 +1150,7 @@ namespace Kistl.API
             return new DateTime(dt.Year, 1, 1);
         }
         public static int GetAge(this DateTime birthday)
-        {           
+        {
             return GetAge(birthday, DateTime.Today);
         }
         public static int GetAge(this DateTime birthday, DateTime refDate)

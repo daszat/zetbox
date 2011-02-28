@@ -6,6 +6,7 @@ namespace Kistl.API.Server
     using System.Collections.Generic;
     using System.Data;
     using System.Data.Common;
+    using System.IO;
     using System.Linq;
     using System.Text;
     using Kistl.API.Configuration;
@@ -538,7 +539,7 @@ namespace Kistl.API.Server
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         public abstract IEnumerable<T> FindPersistenceObjects<T>(IEnumerable<Guid> exportGuids) where T : class, IPersistenceObject;
 
-        public int CreateBlob(System.IO.Stream s, string filename, string mimetype)
+        public int CreateBlob(Stream s, string filename, string mimetype)
         {
             CheckDisposed();
             if (s == null)
@@ -556,31 +557,31 @@ namespace Kistl.API.Server
             return blob.ID;
         }
 
-        string IZBoxContextInternals.StoreBlobStream(System.IO.Stream s, Guid exportGuid, DateTime timestamp, string filename)
+        string IZBoxContextInternals.StoreBlobStream(Stream s, Guid exportGuid, DateTime timestamp, string filename)
         {
             if (exportGuid == Guid.Empty) throw new ArgumentOutOfRangeException("exportGuid", "exportGuid cannot be empty");
             if (timestamp == DateTime.MinValue) throw new ArgumentOutOfRangeException("timestamp", "timestamp cannot be empty");
 
-            var storagePath = string.Format(@"{0:0000}\{1:00}\{2:00}\({3}) - {4}", timestamp.Year, timestamp.Month, timestamp.Day, exportGuid, filename);
-            string path = System.IO.Path.Combine(config.Server.DocumentStore, storagePath);
-            System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(path));
+            var storagePath = Helper.PathCombine(timestamp.Year.ToString("0000"), timestamp.Month.ToString("00"), timestamp.Day.ToString("00"), String.Format("({3}) - {4}", exportGuid, filename));
+            string path = Path.Combine(config.Server.DocumentStore, storagePath);
+            Directory.CreateDirectory(Path.GetDirectoryName(path));
 
-            if (System.IO.File.Exists(path))
+            if (File.Exists(path))
             {
-                System.IO.File.SetAttributes(path, System.IO.FileAttributes.Normal);
-                System.IO.File.Delete(path);
+                File.SetAttributes(path, FileAttributes.Normal);
+                File.Delete(path);
             }
 
-            using (var file = System.IO.File.Open(path, System.IO.FileMode.Create, System.IO.FileAccess.Write))
+            using (var file = File.Open(path, FileMode.Create, FileAccess.Write))
             {
                 file.SetLength(0);
                 s.CopyTo(file);
             }
-            System.IO.File.SetAttributes(path, System.IO.FileAttributes.ReadOnly);
+            File.SetAttributes(path, FileAttributes.ReadOnly);
             return storagePath;
         }
 
-        public int CreateBlob(System.IO.FileInfo fi, string mimetype)
+        public int CreateBlob(FileInfo fi, string mimetype)
         {
             CheckDisposed();
             if (fi == null)
@@ -591,18 +592,18 @@ namespace Kistl.API.Server
             }
         }
 
-        public System.IO.Stream GetStream(int ID)
+        public Stream GetStream(int ID)
         {
             CheckDisposed();
             return GetFileInfo(ID).OpenRead();
         }
 
-        public System.IO.FileInfo GetFileInfo(int ID)
+        public FileInfo GetFileInfo(int ID)
         {
             CheckDisposed();
             var blob = this.Find<Kistl.App.Base.Blob>(ID);
-            string path = System.IO.Path.Combine(config.Server.DocumentStore, blob.StoragePath);
-            return new System.IO.FileInfo(path);
+            string path = Path.Combine(config.Server.DocumentStore, blob.StoragePath);
+            return new FileInfo(path);
         }
 
         /// <inheritdoc />

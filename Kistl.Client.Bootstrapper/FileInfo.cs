@@ -31,7 +31,7 @@ namespace Kistl.Client.Bootstrapper
 
         public string GetFullFileName(string targetDir)
         {
-            return System.IO.Path.Combine(targetDir, Path.Combine(DestPath, Name));
+            return Path.GetFullPath(Path.Combine(targetDir, Path.Combine(DestPath, Name)));
         }
     }
 }

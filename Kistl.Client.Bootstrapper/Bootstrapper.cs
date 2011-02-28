@@ -187,6 +187,10 @@ namespace Kistl.Client.Bootstrapper
         #region Events
         void service_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
         {
+            // TODO: proper dialogbox/retry mechanism (Case #2183)
+            if (e.Error != null)
+                throw new InvalidOperationException("Download failed");
+
             downloadEvent.Set();
         }
 

@@ -449,7 +449,7 @@ namespace Kistl.Server.SchemaManagement
 
         public void ExecuteSqlResource(Type type, string scriptResourceNameFormat)
         {
-            using (Log.InfoTraceMethodCallFormat("ExecuteSqlResource", "Executing [{0}] for [{1}]", scriptResourceNameFormat, type.FullName))
+            using (Log.InfoTraceMethodCallFormat("ExecuteSqlResource", "Executing [{0}] for [{1}]", scriptResourceNameFormat, type == null ? "(null)" : type.FullName))
             {
                 _provider.ExecuteSqlResource(type, scriptResourceNameFormat);
             }
