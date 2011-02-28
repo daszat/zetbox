@@ -19,11 +19,72 @@ namespace Kistl.API
     /// </summary>
     public static class BinarySerializer
     {
-
         [Conditional("DEBUG_SERIALIZATION")]
         private static void SerializerTrace(string fmt, params object[] args)
         {
             Logging.Log.InfoFormat(fmt, args);
+        }
+
+        private static void Trace(BinaryWriter sw, Action serializer)
+        {
+            long beginPos = sw.BaseStream.Position;
+            SerializerTrace("CurrentPos: {0}", beginPos);
+
+            serializer();
+
+            long endPos = sw.BaseStream.Position;
+            SerializerTrace("Wrote {0} bytes", endPos - beginPos);
+        }
+
+        private static T Trace<T>(BinaryReader sr, Func<T> deserializer)
+        {
+            long beginPos = sr.BaseStream.Position;
+            SerializerTrace("CurrentPos: {0}", beginPos);
+
+            var result = deserializer();
+
+            long endPos = sr.BaseStream.Position;
+            SerializerTrace("Read {0} bytes", endPos - beginPos);
+
+            return result;
+        }
+
+        private static void TraceArray<T>(BinaryWriter sw, T[] data, Action<T> serializer)
+        {
+            long beginPos = sw.BaseStream.Position;
+            SerializerTrace("CurrentPos: {0}", beginPos);
+
+            var length = data.Length;
+            SerializerTrace("Writing array of {0} {1}", length, typeof(T).Name);
+
+            sw.Write(length);
+            for (int i = 0; i < length; i++)
+            {
+                serializer(data[i]);
+            }
+
+            long endPos = sw.BaseStream.Position;
+            SerializerTrace("Wrote {0} bytes", endPos - beginPos);
+        }
+
+        private static T[] TraceArray<T>(BinaryReader sr, Func<T> deserializer)
+        {
+            long beginPos = sr.BaseStream.Position;
+            SerializerTrace("CurrentPos: {0}", beginPos);
+
+            var length = sr.ReadInt32();
+            SerializerTrace("Reading array of {0} {1}", length, typeof(T).Name);
+
+            var result = new T[length];
+            for (int i = 0; i < length; i++)
+            {
+                result[i] = deserializer();
+            }
+
+            long endPos = sr.BaseStream.Position;
+            SerializerTrace("Read {0} bytes", endPos - beginPos);
+
+            return result;
         }
 
         #region bool
@@ -528,7 +589,7 @@ namespace Kistl.API
 
         #endregion
 
-        #region SerializableExpression
+        #region SerializableExpression and SerializableExpression[]
 
         /// <summary>
         /// Serialize a SerializableExpression
@@ -561,6 +622,7 @@ namespace Kistl.API
         {
             if (sr == null)
                 throw new ArgumentNullException("sr");
+
             SerializerTrace("CurrentPos: {0}", sr.BaseStream.Position);
             e = null;
             if (sr.ReadBoolean())
@@ -568,6 +630,32 @@ namespace Kistl.API
                 BinaryFormatter bf = new BinaryFormatter();
                 e = (SerializableExpression)bf.Deserialize(sr.BaseStream);
             }
+        }
+
+        public static void ToStream(SerializableExpression[] expressions, BinaryWriter sw)
+        {
+            if (expressions == null)
+                throw new ArgumentNullException("expressions");
+            if (sw == null)
+                throw new ArgumentNullException("sw");
+
+            TraceArray(sw, expressions, expression =>
+            {
+                BinarySerializer.ToStream(expression, sw);
+            });
+        }
+
+        public static void FromStream(out SerializableExpression[] expressions, BinaryReader sr)
+        {
+            if (sr == null)
+                throw new ArgumentNullException("sr");
+
+            expressions = TraceArray(sr, () =>
+            {
+                SerializableExpression result;
+                BinarySerializer.FromStream(out result, sr);
+                return result;
+            });
         }
 
         #endregion
@@ -598,6 +686,17 @@ namespace Kistl.API
 
         }
 
+        public static void ToStream(SerializableType[] types, BinaryWriter sw)
+        {
+            if (types == null) throw new ArgumentNullException("types");
+            if (sw == null) throw new ArgumentNullException("sw");
+
+            TraceArray(sw, types, type =>
+            {
+                BinarySerializer.ToStream(type, sw);
+            });
+        }
+
         /// <summary>
         /// Deserialize a SerializableType.
         /// </summary>
@@ -614,6 +713,19 @@ namespace Kistl.API
             type = (SerializableType)bf.Deserialize(sr.BaseStream);
             long endPos = sr.BaseStream.Position;
             SerializerTrace("read SerializableType {0} ({1} bytes)", type, endPos - beginPos);
+        }
+
+        public static void FromStream(out SerializableType[] types, BinaryReader sr)
+        {
+            if (sr == null)
+                throw new ArgumentNullException("sr");
+
+            types = TraceArray(sr, () =>
+            {
+                SerializableType result;
+                BinarySerializer.FromStream(out result, sr);
+                return result;
+            });
         }
 
         #endregion
@@ -758,5 +870,197 @@ namespace Kistl.API
         }
 
         #endregion
+
+        #region byte[]
+
+        /// <summary>
+        /// Serialize a SerializableType
+        /// </summary>
+        /// <param name="bytes">data to serialize.</param>
+        /// <param name="sw">BinaryWriter to serialize to.</param>
+        public static void ToStream(byte[] bytes, BinaryWriter sw)
+        {
+            if (bytes == null)
+                throw new ArgumentNullException("bytes");
+            if (sw == null)
+                throw new ArgumentNullException("sw");
+            SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
+            SerializerTrace("Writing byte[{0}]", bytes.Length);
+
+            long beginPos = sw.BaseStream.Position;
+
+            sw.Write(bytes.Length);
+            sw.Write(bytes);
+
+            long endPos = sw.BaseStream.Position;
+            SerializerTrace("({0} bytes, including length)", endPos - beginPos);
+        }
+
+        /// <summary>
+        /// Deserialize a SerializableType.
+        /// </summary>
+        /// <param name="bytes">data</param>
+        /// <param name="sr">BinaryReader to deserialize from.</param>
+        public static void FromStream(out byte[] bytes, BinaryReader sr)
+        {
+            if (sr == null)
+                throw new ArgumentNullException("sr");
+            SerializerTrace("CurrentPos: {0}", sr.BaseStream.Position);
+
+            long beginPos = sr.BaseStream.Position;
+
+            int length = sr.ReadInt32();
+            bytes = sr.ReadBytes(length);
+
+            long endPos = sr.BaseStream.Position;
+            SerializerTrace("read byte[{0}] ({1} bytes, including length)", bytes.Length, endPos - beginPos);
+        }
+
+        #endregion
+
+        #region ObjectNotificationRequest and ObjectNotificationRequest[]
+
+        public static void ToStream(ObjectNotificationRequest notificationRequest, BinaryWriter sw)
+        {
+            if (notificationRequest == null)
+                throw new ArgumentNullException("notificationRequest");
+            if (sw == null)
+                throw new ArgumentNullException("sw");
+            SerializerTrace("CurrentPos: {0}", sw.BaseStream.Position);
+            SerializerTrace("Writing ObjectNotificationRequest for {0} with {1} IDs", notificationRequest.Type, notificationRequest.IDs.Length);
+
+            long beginPos = sw.BaseStream.Position;
+
+            BinarySerializer.ToStream(notificationRequest.Type, sw);
+            sw.Write(notificationRequest.IDs.Length);
+            foreach (var id in notificationRequest.IDs)
+            {
+                sw.Write(id);
+            }
+
+            long endPos = sw.BaseStream.Position;
+            SerializerTrace("({0} bytes)", endPos - beginPos);
+        }
+
+        public static void FromStream(out ObjectNotificationRequest notificationRequest, BinaryReader sr)
+        {
+            if (sr == null)
+                throw new ArgumentNullException("sr");
+            SerializerTrace("CurrentPos: {0}", sr.BaseStream.Position);
+
+            long beginPos = sr.BaseStream.Position;
+
+            SerializableType type;
+            BinarySerializer.FromStream(out type, sr);
+            int length = sr.ReadInt32();
+            var ids = new int[length];
+            for (int i = 0; i < length; i++)
+            {
+                ids[i] = sr.ReadInt32();
+            }
+
+            notificationRequest = new ObjectNotificationRequest()
+            {
+                Type = type,
+                IDs = ids
+            };
+
+            long endPos = sr.BaseStream.Position;
+            SerializerTrace("read ObjectNotificationRequest ({0} IDs, {1} bytes)", ids.Length, endPos - beginPos);
+        }
+
+        public static void ToStream(ObjectNotificationRequest[] notificationRequests, BinaryWriter sw)
+        {
+            if (notificationRequests == null)
+                throw new ArgumentNullException("notificationRequests");
+            if (sw == null)
+                throw new ArgumentNullException("sw");
+
+            TraceArray(sw, notificationRequests, req =>
+            {
+                BinarySerializer.ToStream(req, sw);
+            });
+        }
+
+        public static void FromStream(out ObjectNotificationRequest[] notificationRequests, BinaryReader sr)
+        {
+            if (sr == null)
+                throw new ArgumentNullException("sr");
+
+            notificationRequests = TraceArray(sr, () =>
+            {
+                ObjectNotificationRequest result;
+                BinarySerializer.FromStream(out result, sr);
+                return result;
+            });
+        }
+
+        #endregion
+
+        #region OrderByContract and OrderByContract[]
+
+        public static void ToStream(OrderByContract orderBy, BinaryWriter sw)
+        {
+            if (orderBy == null)
+                throw new ArgumentNullException("orderBy");
+            if (sw == null)
+                throw new ArgumentNullException("sw");
+
+            Trace(sw, () =>
+            {
+                BinarySerializer.ToStream((int)orderBy.Type, sw);
+                BinarySerializer.ToStream(orderBy.Expression, sw);
+            });
+        }
+
+        public static void FromStream(out OrderByContract orderBy, BinaryReader sr)
+        {
+            if (sr == null)
+                throw new ArgumentNullException("sr");
+
+            orderBy = Trace(sr, () =>
+            {
+                int type;
+                BinarySerializer.FromStream(out type, sr);
+
+                SerializableExpression expression;
+                BinarySerializer.FromStream(out expression, sr);
+
+                return new OrderByContract()
+                {
+                    Type = (OrderByType)type,
+                    Expression = expression
+                };
+            });
+        }
+
+        public static void ToStream(OrderByContract[] orderBys, BinaryWriter sw)
+        {
+            if (orderBys == null)
+                throw new ArgumentNullException("orderBys");
+            if (sw == null)
+                throw new ArgumentNullException("sw");
+
+            TraceArray(sw, orderBys, orderBy =>
+            {
+                BinarySerializer.ToStream(orderBy, sw);
+            });
+        }
+
+        public static void FromStream(out OrderByContract[] orderBys, BinaryReader sr)
+        {
+            if (sr == null)
+                throw new ArgumentNullException("sr");
+
+            orderBys = TraceArray(sr, () =>
+            {
+                OrderByContract result;
+                BinarySerializer.FromStream(out result, sr);
+                return result;
+            });
+        }
+
+        #endregion
+
     }
 }

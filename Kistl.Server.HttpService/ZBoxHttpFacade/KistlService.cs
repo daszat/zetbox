@@ -72,13 +72,14 @@ namespace Kistl.Server.HttpService
                     context.Request.Url,
                     scope.Resolve<IIdentityResolver>().GetCurrent().DisplayName);
                 var reader = new BinaryReader(context.Request.InputStream);
-                long canary = 0;
                 switch (context.Request.Url.Segments.Last())
                 {
                     case "SetObjects": // byte[] SetObjects(byte[] msg, ObjectNotificationRequest[] notificationRequests);
                         {
-                            var msg = DeserializeArray<byte>(context.Request.InputStream);
-                            var notificationRequests = DeserializeArray<ObjectNotificationRequest>(context.Request.InputStream);
+                            byte[] msg;
+                            BinarySerializer.FromStream(out msg, reader);
+                            ObjectNotificationRequest[] notificationRequests;
+                            BinarySerializer.FromStream(out notificationRequests, reader);
                             Log.DebugFormat("SetObjects(byte[{0}], ObjectNotificationRequest[{1}])", msg.Length, notificationRequests.Length);
                             var result = service.SetObjects(msg, notificationRequests);
                             SendByteArray(context, result);
@@ -86,25 +87,21 @@ namespace Kistl.Server.HttpService
                         }
                     case "GetList": // byte[] GetList(SerializableType type, int maxListCount, bool eagerLoadLists, SerializableExpression[] filter, OrderByContract[] orderBy);
                         {
-                            var type = SerializableType.FromStream(reader);
-                            canary = reader.ReadInt64();
-                            Log.ErrorFormat("Read canary: {0:X}", canary);
-                            var maxListCount = reader.ReadInt32();
-                            var eagerLoadLists = reader.ReadBoolean();
+                            SerializableType type;
+                            BinarySerializer.FromStream(out type, reader);
 
-                            var filterList = new List<SerializableExpression>();
-                            while (reader.ReadBoolean())
-                            {
-                                filterList.Add(null); //  DeserializeArray<SerializableExpression>(context.Request.InputStream);
-                            }
-                            var filter = filterList.ToArray();
+                            int maxListCount;
+                            BinarySerializer.FromStream(out maxListCount, reader);
 
-                            var orderByList = new List<OrderByContract>();
-                            while (reader.ReadBoolean())
-                            {
-                                orderByList.Add(null); //  DeserializeArray<OrderByContract>(context.Request.InputStream);
-                            }
-                            var orderBy = orderByList.ToArray();
+                            bool eagerLoadLists;
+                            BinarySerializer.FromStream(out eagerLoadLists, reader);
+
+                            SerializableExpression[] filter;
+                            BinarySerializer.FromStream(out filter, reader);
+
+                            OrderByContract[] orderBy;
+                            BinarySerializer.FromStream(out orderBy, reader);
+
                             Log.DebugFormat("GetList(type=[{0}], maxListCount={1}, eagerLoadLists={2}, SerializableExpression[{3}], OrderByContract[{4}])", type, maxListCount, eagerLoadLists, filter != null ? filter.Length : -1, orderBy != null ? orderBy.Length : -1);
                             var result = service.GetList(type, maxListCount, eagerLoadLists, filter, orderBy);
                             SendByteArray(context, result);
@@ -112,9 +109,15 @@ namespace Kistl.Server.HttpService
                         }
                     case "GetListOf": // byte[] GetListOf(SerializableType type, int ID, string property);
                         {
-                            var type = (SerializableType)_formatter.Deserialize(context.Request.InputStream);
-                            var ID = (int)_formatter.Deserialize(context.Request.InputStream);
-                            var property = (string)_formatter.Deserialize(context.Request.InputStream);
+                            SerializableType type;
+                            BinarySerializer.FromStream(out type, reader);
+
+                            int ID;
+                            BinarySerializer.FromStream(out ID, reader);
+
+                            string property;
+                            BinarySerializer.FromStream(out property, reader);
+
                             Log.DebugFormat("GetListOf(type=[{0}], ID={1}, property=[{2}])", type, ID, property);
                             var result = service.GetListOf(type, ID, property);
                             SendByteArray(context, result);
@@ -122,9 +125,15 @@ namespace Kistl.Server.HttpService
                         }
                     case "FetchRelation": // byte[] FetchRelation(Guid relId, int role, int ID)
                         {
-                            var relId = (Guid)_formatter.Deserialize(context.Request.InputStream);
-                            var role = (int)_formatter.Deserialize(context.Request.InputStream);
-                            var ID = (int)_formatter.Deserialize(context.Request.InputStream);
+                            Guid relId;
+                            BinarySerializer.FromStream(out relId, reader);
+
+                            int role;
+                            BinarySerializer.FromStream(out role, reader);
+
+                            int ID;
+                            BinarySerializer.FromStream(out ID, reader);
+
                             Log.DebugFormat("FetchRelation(relId=[{0}], role={1}, ID=[{2}])", relId, role, ID);
                             var result = service.FetchRelation(relId, role, ID);
                             SendByteArray(context, result);
@@ -132,7 +141,8 @@ namespace Kistl.Server.HttpService
                         }
                     case "GetBlobStream": // Stream GetBlobStream(int ID)
                         {
-                            var ID = (int)_formatter.Deserialize(context.Request.InputStream);
+                            var ID = Int32.Parse(context.Request.QueryString["id"]);
+
                             Log.DebugFormat("GetBlobStream(ID={0})", ID);
                             var result = service.GetBlobStream(ID);
                             context.Response.StatusCode = 200;
@@ -142,33 +152,69 @@ namespace Kistl.Server.HttpService
                         }
                     case "SetBlobStream": // BlobResponse SetBlobStream(BlobMessage blob)
                         {
-                            var fileName = (string)_formatter.Deserialize(context.Request.InputStream);
-                            var mimeType = (string)_formatter.Deserialize(context.Request.InputStream);
-                            Log.DebugFormat("SetBlobStream(fileName=[{0}], mimeType=[{1}], Stream)", fileName, mimeType);
-                            var result = service.SetBlobStream(new BlobMessage() { FileName = fileName, MimeType = mimeType, Stream = context.Request.InputStream });
+                            string fileName;
+                            BinarySerializer.FromStream(out fileName, reader);
+
+                            string mimeType;
+                            BinarySerializer.FromStream(out mimeType, reader);
+
+                            byte[] data;
+                            BinarySerializer.FromStream(out data, reader);
+
+                            Log.DebugFormat("SetBlobStream(fileName=[{0}], mimeType=[{1}], Stream of {2} bytes)", fileName, mimeType, data.Length);
+                            var result = service.SetBlobStream(new BlobMessage()
+                            {
+                                FileName = fileName,
+                                MimeType = mimeType,
+                                Stream = new MemoryStream(data)
+                            });
+
                             context.Response.StatusCode = 200;
                             context.Response.ContentType = "application/octet-stream";
-                            _formatter.Serialize(context.Response.OutputStream, result.ID);
-                            result.BlobInstance.CopyTo(context.Response.OutputStream);
+                            using (var writer = new BinaryWriter(context.Response.OutputStream))
+                            using (var dataStream = new MemoryStream())
+                            {
+                                BinarySerializer.ToStream(result.ID, writer);
+                                result.BlobInstance.CopyTo(dataStream);
+                                var bytes = dataStream.ToArray();
+                                BinarySerializer.ToStream(bytes, writer);
+                            }
                             break;
                         }
                     case "InvokeServerMethod": // byte[] InvokeServerMethod(SerializableType type, int ID, string method, SerializableType[] parameterTypes, byte[] parameter, byte[] changedObjects, ObjectNotificationRequest[] notificationRequests, out byte[] retChangedObjects)
                         {
-                            var type = (SerializableType)_formatter.Deserialize(context.Request.InputStream);
-                            var ID = (int)_formatter.Deserialize(context.Request.InputStream);
-                            var method = (string)_formatter.Deserialize(context.Request.InputStream);
-                            var parameterTypes = DeserializeArray<SerializableType>(context.Request.InputStream);
-                            var parameter = DeserializeArray<byte>(context.Request.InputStream);
-                            var changedObjects = DeserializeArray<byte>(context.Request.InputStream);
-                            var notificationRequests = DeserializeArray<ObjectNotificationRequest>(context.Request.InputStream);
+                            SerializableType type;
+                            BinarySerializer.FromStream(out type, reader);
+
+                            int ID;
+                            BinarySerializer.FromStream(out ID, reader);
+
+                            string method;
+                            BinarySerializer.FromStream(out method, reader);
+
+                            SerializableType[] parameterTypes;
+                            BinarySerializer.FromStream(out parameterTypes, reader);
+
+                            byte[] parameter;
+                            BinarySerializer.FromStream(out parameter, reader);
+
+                            byte[] changedObjects;
+                            BinarySerializer.FromStream(out changedObjects, reader);
+
+                            ObjectNotificationRequest[] notificationRequests;
+                            BinarySerializer.FromStream(out notificationRequests, reader);
 
                             Log.DebugFormat("InvokeServerMethod(type=[{0}], ID={1}, method=[{2}], SerializableType[{3}], byte[{4}], byte[{5}], ObjectNotificationRequest[{6}])", type, ID, method, parameterTypes.Length, parameter.Length, changedObjects.Length);
                             byte[] retChangedObjects;
                             var result = service.InvokeServerMethod(type, ID, method, parameterTypes, parameter, changedObjects, notificationRequests, out retChangedObjects);
 
-                            SendByteArray(context, retChangedObjects);
-                            SerializeArray(context.Response.OutputStream, result);
-
+                            context.Response.StatusCode = 200;
+                            context.Response.ContentType = "application/octet-stream";
+                            using (var writer = new BinaryWriter(context.Response.OutputStream))
+                            {
+                                BinarySerializer.ToStream(retChangedObjects, writer);
+                                BinarySerializer.ToStream(result, writer);
+                            }
                             break;
                         }
                     default:
@@ -196,7 +242,10 @@ namespace Kistl.Server.HttpService
         {
             context.Response.StatusCode = 200;
             context.Response.ContentType = "application/octet-stream";
-            SerializeArray(context.Response.OutputStream, result);
+            using (var writer = new BinaryWriter(context.Response.OutputStream))
+            {
+                BinarySerializer.ToStream(result, writer);
+            }
         }
     }
 }

@@ -129,6 +129,8 @@ namespace Kistl.API
 
         public void ToStream(BinaryWriter binStream)
         {
+            if (binStream == null) throw new ArgumentNullException("binStream");
+
             binStream.Write(TypeName);
             binStream.Write(AssemblyQualifiedName);
             foreach (var parameter in GenericTypeParameter)
@@ -141,6 +143,8 @@ namespace Kistl.API
 
         public static SerializableType FromStream(BinaryReader binStream)
         {
+            if (binStream == null) throw new ArgumentNullException("binStream");
+
             var result = new SerializableType()
             {
                 TypeName = binStream.ReadString(),
