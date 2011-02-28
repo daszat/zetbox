@@ -65,11 +65,20 @@ namespace Kistl.Server.HttpService
                 var cpa = (IContainerProviderAccessor)HttpContext.Current.ApplicationInstance;
                 var scope = cpa.ContainerProvider.RequestLifetime;
                 var service = scope.Resolve<IKistlService>();
-
+                string username;
+                try
+                {
+                    username = scope.Resolve<IIdentityResolver>().GetCurrent().DisplayName;
+                }
+                catch (Exception ex)
+                {
+                    Log.Error("Error while trying to resolve user", ex);
+                    username = "(unknown)";
+                }
                 Log.DebugFormat("Processing {0}-request for [url={1}], as [user={2}]",
                     context.Request.HttpMethod,
                     context.Request.Url,
-                    scope.Resolve<IIdentityResolver>().GetCurrent().DisplayName);
+                    username);
                 var reader = new BinaryReader(context.Request.InputStream);
                 switch (context.Request.Url.Segments.Last())
                 {
