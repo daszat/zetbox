@@ -157,12 +157,12 @@ namespace Kistl.Server.SchemaManagement
                     else if (nextRelEnd == rel.A && rel.Storage == StorageType.MergeIntoB)
                     {
                         localCol = "ID";
-                        fkCol = Construct.ForeignKeyColumnName(nextRelEnd); 
+                        fkCol = Construct.ForeignKeyColumnName(nextRelEnd);
                     }
                     else if (nextRelEnd == rel.B && rel.Storage == StorageType.MergeIntoA)
                     {
                         localCol = "ID";
-                        fkCol = Construct.ForeignKeyColumnName(nextRelEnd); 
+                        fkCol = Construct.ForeignKeyColumnName(nextRelEnd);
                     }
                     else if (nextRelEnd == rel.B && rel.Storage == StorageType.MergeIntoB)
                     {
@@ -217,7 +217,7 @@ namespace Kistl.Server.SchemaManagement
             {
                 using (var ms = new MemoryStream(ASCIIEncoding.Default.GetBytes(schema)))
                 {
-                    Importer.LoadFromXml(targetCtx, ms);
+                    Importer.LoadFromXml(targetCtx, ms, "saved schema from " + provider.GetSafeConnectionString());
                 }
             }
         }
@@ -225,13 +225,11 @@ namespace Kistl.Server.SchemaManagement
         private void SaveSchema(IKistlContext schema)
         {
             using (Logging.Log.DebugTraceMethodCall("SaveSchema"))
+            using (var ms = new MemoryStream())
             {
-                using (var ms = new MemoryStream())
-                {
-                    Exporter.PublishFromContext(schema, ms, new string[] { "*" });
-                    string schemaStr = ASCIIEncoding.Default.GetString(ms.GetBuffer()).TrimEnd((char)0); // Trim possible C++/Database/whatever ending 0 char
-                    db.SaveSchema(schemaStr);
-                }
+                Exporter.PublishFromContext(schema, ms, new string[] { "*" }, "in-memory buffer for SaveSchema");
+                string schemaStr = ASCIIEncoding.Default.GetString(ms.GetBuffer()).TrimEnd((char)0); // Trim possible C++/Database/whatever ending 0 char
+                db.SaveSchema(schemaStr);
             }
         }
         #endregion

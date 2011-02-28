@@ -113,9 +113,9 @@ namespace Kistl.App.Packaging
             }
         }
 
-        public static void LoadFromXml(IKistlContext ctx, Stream stream)
+        public static void LoadFromXml(IKistlContext ctx, Stream stream, string streamDescription)
         {
-            using (var s = new StreamPackageProvider(stream, BasePackageProvider.Modes.Read))
+            using (var s = new StreamPackageProvider(stream, BasePackageProvider.Modes.Read, streamDescription))
             {
                 LoadFromXml(ctx, s);
             }
@@ -133,7 +133,7 @@ namespace Kistl.App.Packaging
 
             using (Log.InfoTraceMethodCall("LoadFromXml"))
             {
-                Log.InfoFormat("Starting Import from {0}", s is FileStream ? ((FileStream)s).Name : s.GetType().Name);
+                Log.InfoFormat("Starting Import from {0}", s);
                 try
                 {
                     using (Log.DebugTraceMethodCall("initialisation query"))

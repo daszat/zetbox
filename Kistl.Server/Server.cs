@@ -130,9 +130,9 @@ namespace Kistl.Server
                 // the schema
                 using (MemoryStream ms = new MemoryStream())
                 {
-                    Exporter.PublishFromContext(dbctx, ms, new string[] { "*" });
+                    Exporter.PublishFromContext(dbctx, ms, new string[] { "*" }, "in-memory buffer");
                     ms.Seek(0, SeekOrigin.Begin);
-                    Importer.LoadFromXml(ctx, ms);
+                    Importer.LoadFromXml(ctx, ms, "in-memory buffer");
                 }
 
                 var mgr = subContainer.Resolve<SchemaManagement.SchemaManager>(new NamedParameter("newSchema", ctx));

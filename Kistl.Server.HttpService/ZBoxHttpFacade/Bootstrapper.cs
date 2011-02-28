@@ -38,6 +38,7 @@ namespace Kistl.Server.HttpService
 
             var action = context.Request["action"];
 
+            Log.DebugFormat("Processing action [{0}]", action);
             switch (action)
             {
                 case "GetFileInfos":
@@ -56,6 +57,9 @@ namespace Kistl.Server.HttpService
                     {
                         context.Response.StatusCode = 404;
                     }
+                    break;
+                default:
+                    context.Response.StatusCode = 400;
                     break;
             }
             Log.DebugFormat("Sending response [{0}]", context.Response.StatusCode);

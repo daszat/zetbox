@@ -1,13 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
-using System.Xml;
 
 namespace Kistl.API
 {
-    public interface IPackageProvider : IDisposable
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Xml;
+
+    public interface IPackageProvider
+        : IDisposable
     {
         /// <summary>
         /// The stream of ZBox content
@@ -202,6 +204,11 @@ namespace Kistl.API
             base.Dispose();
             _data.Dispose();
         }
+
+        public override string ToString()
+        {
+            return String.Format("FileSystemPackage at {0}, with blobDir={1}", _fileName, _blobDir);
+        }
     }
 
     //public class ZipFilePackageProvider : BasePackageProvider
@@ -233,10 +240,13 @@ namespace Kistl.API
 
     public class StreamPackageProvider : BasePackageProvider
     {
-        public StreamPackageProvider(Stream data, Modes mode)
+        private readonly string _description;
+
+        public StreamPackageProvider(Stream data, Modes mode, string description)
             : base(mode)
         {
             this._data = data;
+            this._description = description;
         }
 
         #region IPackageProvider Members
@@ -270,6 +280,11 @@ namespace Kistl.API
         public override void Dispose()
         {
             base.Dispose();
+        }
+
+        public override string ToString()
+        {
+            return String.Format("Streaming from {0}: {1}", this._data.GetType().FullName, _description);
         }
     }
 }

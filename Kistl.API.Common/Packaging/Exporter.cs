@@ -28,9 +28,9 @@ namespace Kistl.App.Packaging
             }
         }
 
-        public static void PublishFromContext(IKistlContext ctx, Stream stream, string[] moduleNamespaces)
+        public static void PublishFromContext(IKistlContext ctx, Stream stream, string[] moduleNamespaces, string streamDescription)
         {
-            using (var s = new StreamPackageProvider(stream, BasePackageProvider.Modes.Write))
+            using (var s = new StreamPackageProvider(stream, BasePackageProvider.Modes.Write, streamDescription))
             {
                 PublishFromContext(ctx, s, moduleNamespaces);
             }
@@ -86,9 +86,9 @@ namespace Kistl.App.Packaging
             }
         }
 
-        public static void ExportFromContext(IReadOnlyKistlContext ctx, Stream stream, string[] moduleNames)
+        public static void ExportFromContext(IReadOnlyKistlContext ctx, Stream stream, string[] moduleNames, string streamDescription)
         {
-            using (var s = new StreamPackageProvider(stream, BasePackageProvider.Modes.Write))
+            using (var s = new StreamPackageProvider(stream, BasePackageProvider.Modes.Write, streamDescription))
             {
                 ExportFromContext(ctx, s, moduleNames);
             }

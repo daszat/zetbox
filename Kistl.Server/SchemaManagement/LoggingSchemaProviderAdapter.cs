@@ -449,7 +449,10 @@ namespace Kistl.Server.SchemaManagement
 
         public void ExecuteSqlResource(Type type, string scriptResourceNameFormat)
         {
-            _provider.ExecuteSqlResource(type, scriptResourceNameFormat);
+            using (Log.InfoTraceMethodCallFormat("ExecuteSqlResource", "Executing [{0}] for [{1}]", scriptResourceNameFormat, type.FullName))
+            {
+                _provider.ExecuteSqlResource(type, scriptResourceNameFormat);
+            }
         }
 
         public void Dispose()
@@ -465,8 +468,10 @@ namespace Kistl.Server.SchemaManagement
 
         public void DropDatabase(string dbName)
         {
-            Log.InfoFormat("Dropping Database [{0}]", dbName);
-            _provider.DropDatabase(dbName);
+            using (Log.InfoTraceMethodCallFormat("DropDatabase", "Dropping Database [{0}]", dbName))
+            {
+                _provider.DropDatabase(dbName);
+            }
         }
 
         public bool CheckSchemaExists(string schemaName)
@@ -486,7 +491,10 @@ namespace Kistl.Server.SchemaManagement
 
         public void DropSchema(string schemaName, bool force)
         {
-            _provider.DropSchema(schemaName, force);
+            using (Log.InfoTraceMethodCallFormat("DropSchema", "Dropping schema [{0}], force={1}", schemaName, force))
+            {
+                _provider.DropSchema(schemaName, force);
+            }
         }
 
         public ProcRef GetQualifiedFunctionName(string funcName)
@@ -506,8 +514,10 @@ namespace Kistl.Server.SchemaManagement
 
         public void DropFunction(ProcRef funcName)
         {
-            Log.DebugFormat("Dropping function [{0}]", funcName);
-            _provider.DropFunction(funcName);
+            using (Log.DebugTraceMethodCallFormat("DropFunction", "Dropping function [{0}]", funcName))
+            {
+                _provider.DropFunction(funcName);
+            }
         }
     }
 }
