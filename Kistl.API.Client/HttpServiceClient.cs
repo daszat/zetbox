@@ -14,9 +14,6 @@ namespace Kistl.API.Client
         : Kistl.API.Client.KistlService.IKistlService
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.API.Client.HttpServiceClient");
-        private readonly static byte[] Empty = new byte[0];
-
-        private readonly ICredentialsResolver _credentialsResolver;
 
         private readonly Uri SetObjectsUri;
         private readonly Uri GetListUri;
@@ -26,10 +23,8 @@ namespace Kistl.API.Client
         private readonly Uri SetBlobStreamUri;
         private readonly Uri InvokeServerMethodUri;
 
-        public HttpServiceClient(ICredentialsResolver credentialsResolver)
+        public HttpServiceClient()
         {
-            _credentialsResolver = credentialsResolver;
-
             SetObjectsUri = new Uri(ConfigurationManager.AppSettings["serviceUri"] + "/SetObjects");
             GetListUri = new Uri(ConfigurationManager.AppSettings["serviceUri"] + "/GetList");
             GetListOfUri = new Uri(ConfigurationManager.AppSettings["serviceUri"] + "/GetListOf");
