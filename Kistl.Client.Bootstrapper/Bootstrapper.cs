@@ -171,6 +171,7 @@ namespace Kistl.Client.Bootstrapper
 
             foreach (var f in toDelete)
             {
+                Debug.WriteLine(String.Format("Deleting {0}", f));
                 File.Delete(f);
             }
         }
@@ -189,7 +190,10 @@ namespace Kistl.Client.Bootstrapper
         {
             // TODO: proper dialogbox/retry mechanism (Case #2183)
             if (e.Error != null)
+            {
+                Debug.WriteLine(String.Format("Failed to download {0}", e));
                 throw new InvalidOperationException("Download failed");
+            }
 
             downloadEvent.Set();
         }

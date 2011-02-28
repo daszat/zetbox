@@ -34,7 +34,7 @@ namespace Kistl.App.Packaging
 
             using (Log.InfoTraceMethodCall("Deploy"))
             {
-                Log.InfoFormat("Starting Deployment from {0}", s is FileStream ? ((FileStream)s).Name : s.GetType().Name);
+                Log.InfoFormat("Starting Deployment from {0}", s);
                 try
                 {
                     // TODO: Das muss ich z.Z. machen, weil die erste Query eine Entity Query ist und noch nix geladen wurde....
