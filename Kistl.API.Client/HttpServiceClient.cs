@@ -3,11 +3,11 @@ namespace Kistl.API.Client
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.Specialized;
     using System.Configuration;
     using System.IO;
     using System.Linq;
     using System.Net;
-    using System.Runtime.Serialization.Formatters.Binary;
     using System.Text;
 
     public sealed class HttpServiceClient
@@ -48,10 +48,8 @@ namespace Kistl.API.Client
                 using (var response = req.GetResponse())
                 using (var input = new BinaryReader(response.GetResponseStream()))
                 {
-                    var length = input.ReadInt32();
-                    var result = input.ReadBytes(length);
-                    var canary = input.ReadInt64();
-                    Log.ErrorFormat("Read canary: {0:X}", canary);
+                    byte[] result;
+                    BinarySerializer.FromStream(out result, input);
                     return result;
                 }
             }
@@ -80,7 +78,7 @@ namespace Kistl.API.Client
         {
             var req = WebRequest.Create(destination);
 
-            req.Method = "POST";
+            req.Method = WebRequestMethods.Http.Post;
             req.ContentType = "application/octet-stream";
             req.PreAuthenticate = true;
             var httpWebRequest = req as HttpWebRequest;
@@ -122,6 +120,7 @@ namespace Kistl.API.Client
                     BinarySerializer.ToStream(eagerLoadLists, reqStream);
                     BinarySerializer.ToStream(filter, reqStream);
                     BinarySerializer.ToStream(orderBy, reqStream);
+                    reqStream.Write("\n");// required for basic.authenticated POST to apache
                 });
         }
 
@@ -136,6 +135,7 @@ namespace Kistl.API.Client
                     BinarySerializer.ToStream(type, reqStream);
                     BinarySerializer.ToStream(ID, reqStream);
                     BinarySerializer.ToStream(property, reqStream);
+                    reqStream.Write("\n");// required for basic.authenticated POST to apache
                 });
         }
 
@@ -147,6 +147,7 @@ namespace Kistl.API.Client
                     BinarySerializer.ToStream(relId, reqStream);
                     BinarySerializer.ToStream(role, reqStream);
                     BinarySerializer.ToStream(ID, reqStream);
+                    reqStream.Write("\n");// required for basic.authenticated POST to apache
                 });
         }
 
@@ -182,6 +183,7 @@ namespace Kistl.API.Client
                 request.Stream.CopyTo(upload);
                 var bytes = upload.ToArray();
                 BinarySerializer.ToStream(bytes, reqWriter);
+                reqWriter.Write("\n"); // required for basic.authenticated POST to apache
             }
             try
             {
