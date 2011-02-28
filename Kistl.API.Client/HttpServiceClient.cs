@@ -157,8 +157,11 @@ namespace Kistl.API.Client
             try
             {
                 using (var response = req.GetResponse())
+                using (var stream = response.GetResponseStream())
                 {
-                    return response.GetResponseStream();
+                    var result = new MemoryStream();
+                    stream.CopyTo(result);
+                    return result;
                 }
             }
             catch (WebException ex)

@@ -77,10 +77,9 @@ namespace Kistl.Client.WPF.Converter
                     return bmp;
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                // Grafully ignore binding errors in icons
-                // no one cares
+                Logging.Facade.Info("Error while loading Icon", ex);
                 return Binding.DoNothing;
             }
         }
