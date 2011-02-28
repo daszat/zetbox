@@ -27,62 +27,90 @@ namespace Kistl.API
 
         private static void Trace(BinaryWriter sw, Action serializer)
         {
-            long beginPos = sw.BaseStream.CanSeek ? sw.BaseStream.Position : -1;
-            SerializerTrace("CurrentPos: {0}", beginPos);
+            bool canSeek = sw.BaseStream.CanSeek;
+            long beginPos = canSeek ? sw.BaseStream.Position : -1;
+            if (canSeek)
+                SerializerTrace("CurrentPos: {0}", beginPos);
 
             serializer();
 
-            long endPos = sw.BaseStream.CanSeek ? sw.BaseStream.Position : -1;
-            SerializerTrace("Wrote {0} bytes", endPos - beginPos);
+            long endPos = canSeek ? sw.BaseStream.Position : -1;
+            if (canSeek)
+                SerializerTrace("Wrote {0} bytes", endPos - beginPos);
         }
 
         private static T Trace<T>(BinaryReader sr, Func<T> deserializer)
         {
-            long beginPos = sr.BaseStream.CanSeek ? sr.BaseStream.Position : -1;
-            SerializerTrace("CurrentPos: {0}", beginPos);
+            bool canSeek = sr.BaseStream.CanSeek;
+            long beginPos = canSeek ? sr.BaseStream.Position : -1;
+            if (canSeek)
+                SerializerTrace("CurrentPos: {0}", beginPos);
 
             var result = deserializer();
 
             long endPos = sr.BaseStream.CanSeek ? sr.BaseStream.Position : -1;
-            SerializerTrace("Read {0} bytes", endPos - beginPos);
+            if (canSeek)
+                SerializerTrace("Read {0} bytes", endPos - beginPos);
 
             return result;
         }
 
         private static void TraceArray<T>(BinaryWriter sw, T[] data, Action<T> serializer)
         {
-            long beginPos = sw.BaseStream.CanSeek ? sw.BaseStream.Position : -1;
-            SerializerTrace("CurrentPos: {0}", beginPos);
+            bool canSeek = sw.BaseStream.CanSeek;
+            long beginPos = canSeek ? sw.BaseStream.Position : -1;
+            if (canSeek)
+                SerializerTrace("CurrentPos: {0}", beginPos);
 
-            var length = data.Length;
-            SerializerTrace("Writing array of {0} {1}", length, typeof(T).Name);
-
-            sw.Write(length);
-            for (int i = 0; i < length; i++)
+            if (data == null)
             {
-                serializer(data[i]);
+                BinarySerializer.ToStream(false, sw);
             }
+            else
+            {
+                BinarySerializer.ToStream(true, sw);
 
-            long endPos = sw.BaseStream.CanSeek ? sw.BaseStream.Position : -1;
-            SerializerTrace("Wrote {0} bytes", endPos - beginPos);
+                var length = data.Length;
+                SerializerTrace("Writing array of {0} {1}", length, typeof(T).Name);
+
+                sw.Write(length);
+                for (int i = 0; i < length; i++)
+                {
+                    serializer(data[i]);
+                }
+            }
+            long endPos = canSeek ? sw.BaseStream.Position : -1;
+            if (canSeek)
+                SerializerTrace("Wrote {0} bytes", endPos - beginPos);
         }
 
         private static T[] TraceArray<T>(BinaryReader sr, Func<T> deserializer)
         {
-            long beginPos = sr.BaseStream.CanSeek ? sr.BaseStream.Position : -1;
-            SerializerTrace("CurrentPos: {0}", beginPos);
+            bool canSeek = sr.BaseStream.CanSeek;
+            long beginPos = canSeek ? sr.BaseStream.Position : -1;
+            if (canSeek)
+                SerializerTrace("CurrentPos: {0}", beginPos);
 
-            var length = sr.ReadInt32();
-            SerializerTrace("Reading array of {0} {1}", length, typeof(T).Name);
+            T[] result;
 
-            var result = new T[length];
-            for (int i = 0; i < length; i++)
+            if (sr.ReadBoolean())
             {
-                result[i] = deserializer();
-            }
+                var length = sr.ReadInt32();
+                SerializerTrace("Reading array of {0} {1}", length, typeof(T).Name);
 
-            long endPos = sr.BaseStream.CanSeek ? sr.BaseStream.Position : -1;
-            SerializerTrace("Read {0} bytes", endPos - beginPos);
+                result = new T[length];
+                for (int i = 0; i < length; i++)
+                {
+                    result[i] = deserializer();
+                }
+            }
+            else
+            {
+                result = null;
+            }
+            long endPos = canSeek ? sr.BaseStream.Position : -1;
+            if (canSeek)
+                SerializerTrace("Read {0} bytes", endPos - beginPos);
 
             return result;
         }
@@ -634,8 +662,6 @@ namespace Kistl.API
 
         public static void ToStream(SerializableExpression[] expressions, BinaryWriter sw)
         {
-            if (expressions == null)
-                throw new ArgumentNullException("expressions");
             if (sw == null)
                 throw new ArgumentNullException("sw");
 
@@ -883,16 +909,8 @@ namespace Kistl.API
                 throw new ArgumentNullException("bytes");
             if (sw == null)
                 throw new ArgumentNullException("sw");
-            SerializerTrace("CurrentPos: {0}", sw.BaseStream.CanSeek ? sw.BaseStream.Position : -1);
-            SerializerTrace("Writing byte[{0}]", bytes.Length);
 
-            long beginPos = sw.BaseStream.CanSeek ? sw.BaseStream.Position : -1;
-
-            sw.Write(bytes.Length);
-            sw.Write(bytes);
-
-            long endPos = sw.BaseStream.CanSeek ? sw.BaseStream.Position : -1;
-            SerializerTrace("({0} bytes, including length)", endPos - beginPos);
+            TraceArray(sw, bytes, b => sw.Write(b));
         }
 
         /// <summary>
@@ -904,15 +922,8 @@ namespace Kistl.API
         {
             if (sr == null)
                 throw new ArgumentNullException("sr");
-            SerializerTrace("CurrentPos: {0}", sr.BaseStream.CanSeek ? sr.BaseStream.Position : -1);
 
-            long beginPos = sr.BaseStream.CanSeek ? sr.BaseStream.Position : -1;
-
-            int length = sr.ReadInt32();
-            bytes = sr.ReadBytes(length);
-
-            long endPos = sr.BaseStream.CanSeek ? sr.BaseStream.Position : -1;
-            SerializerTrace("read byte[{0}] ({1} bytes, including length)", bytes.Length, endPos - beginPos);
+            bytes = TraceArray(sr, () => sr.ReadByte());
         }
 
         #endregion
@@ -970,8 +981,6 @@ namespace Kistl.API
 
         public static void ToStream(ObjectNotificationRequest[] notificationRequests, BinaryWriter sw)
         {
-            if (notificationRequests == null)
-                throw new ArgumentNullException("notificationRequests");
             if (sw == null)
                 throw new ArgumentNullException("sw");
 
@@ -1035,8 +1044,6 @@ namespace Kistl.API
 
         public static void ToStream(OrderByContract[] orderBys, BinaryWriter sw)
         {
-            if (orderBys == null)
-                throw new ArgumentNullException("orderBys");
             if (sw == null)
                 throw new ArgumentNullException("sw");
 
