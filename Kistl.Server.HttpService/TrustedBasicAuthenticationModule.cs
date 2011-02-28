@@ -42,7 +42,7 @@ namespace Kistl.Server.HttpService
                 byte[] userpass = Convert.FromBase64String(authentication);
                 string[] up = Encoding.UTF8.GetString(userpass).Split(separator);
                 string username = up[0];
-                string password = up[1];
+                //string password = up[1]; // as the name says, trusted
 
                 app.Context.User = new GenericPrincipal(new GenericIdentity(username, authenticationMethod), new string[0]);
             }
