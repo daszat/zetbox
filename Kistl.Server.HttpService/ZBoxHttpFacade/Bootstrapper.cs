@@ -50,7 +50,7 @@ namespace Kistl.Server.HttpService
                         fileInfoArray.ToXmlStream(context.Response.OutputStream);
                         break;
                     case "GetFile":
-                        var probe = _service.GetFilePath(context.Request["directory"], context.Request["file"]);
+                        var probe = _service.GetFilePath(context.Request["path"]);
                         if (File.Exists(probe))
                         {
                             context.Response.TransmitFile(probe);
