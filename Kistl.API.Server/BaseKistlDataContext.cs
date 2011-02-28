@@ -562,7 +562,7 @@ namespace Kistl.API.Server
             if (exportGuid == Guid.Empty) throw new ArgumentOutOfRangeException("exportGuid", "exportGuid cannot be empty");
             if (timestamp == DateTime.MinValue) throw new ArgumentOutOfRangeException("timestamp", "timestamp cannot be empty");
 
-            var storagePath = Helper.PathCombine(timestamp.Year.ToString("0000"), timestamp.Month.ToString("00"), timestamp.Day.ToString("00"), String.Format("({3}) - {4}", exportGuid, filename));
+            var storagePath = Helper.PathCombine(timestamp.Year.ToString("0000"), timestamp.Month.ToString("00"), timestamp.Day.ToString("00"), String.Format("({0}) - {1}", exportGuid, filename));
             string path = Path.Combine(config.Server.DocumentStore, storagePath);
             Directory.CreateDirectory(Path.GetDirectoryName(path));
 
