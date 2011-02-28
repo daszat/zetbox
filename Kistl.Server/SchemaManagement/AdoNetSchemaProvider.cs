@@ -199,10 +199,11 @@ namespace Kistl.Server.SchemaManagement
                 throw new InvalidOperationException("Database already opened");
             if (string.IsNullOrEmpty(connectionString))
                 throw new ArgumentNullException("connectionString");
-
             db = CreateConnection(connectionString);
             db.Open();
         }
+
+        public abstract string GetSafeConnectionString(string connectionString);
 
         public void BeginTransaction()
         {

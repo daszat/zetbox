@@ -49,6 +49,12 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
                 quoteSuffix = row["LiteralValue"] as string;
         }
 
+        public string GetSafeConnectionString(string connectionString)
+        {
+            // no password here, please move on!
+            return connectionString;
+        }
+
         public void BeginTransaction()
         {
             if (tx != null)

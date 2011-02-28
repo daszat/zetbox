@@ -442,6 +442,13 @@ namespace Kistl.API.Server
         #region Connection and Transaction Handling
 
         void Open(string connectionString);
+        
+        /// <summary>
+        /// Gets a copy of the connection string, safe for logging. That is, without any sensitive credential information.
+        /// </summary>
+        /// <returns></returns>
+        string GetSafeConnectionString(string connectionString);
+
         void BeginTransaction();
         void CommitTransaction();
         void RollbackTransaction();

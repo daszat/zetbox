@@ -56,7 +56,13 @@ namespace Kistl.Server.SchemaManagement
 
         public void Open(string connectionString)
         {
+            Log.InfoFormat("Opening connection to [{0}]", _provider.GetSafeConnectionString(connectionString));
             _provider.Open(connectionString);
+        }
+
+        public string GetSafeConnectionString(string connectionString)
+        {
+            return _provider.GetSafeConnectionString(connectionString);
         }
 
         private Guid? _currentTxId;

@@ -54,6 +54,13 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
             // nothing to do
         }
 
+        public override string GetSafeConnectionString(string connectionString)
+        {
+            var csb = new SqlConnectionStringBuilder(connectionString);
+            csb.Password = null;
+            return csb.ToString();
+        }
+
         #endregion
 
         #region Type Mapping

@@ -74,6 +74,13 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
             _dblinks[tblName.Database] = tblName.Database;
         }
 
+        public override string GetSafeConnectionString(string connectionString)
+        {
+            var csb = new NpgsqlConnectionStringBuilder(connectionString);
+            csb.Password = null;
+            return csb.ToString();
+        }
+
         #endregion
 
         #region Type Mapping
