@@ -18,6 +18,8 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Schema.OLEDB");
         private readonly static log4net.ILog QueryLog = log4net.LogManager.GetLogger("Kistl.Server.Schema.OLEDB.Queries");
 
+        private string currentConnectionString;
+
         protected OleDbConnection db;
         protected OleDbTransaction tx;
         protected string quotePrefix;
@@ -35,7 +37,8 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
             if (string.IsNullOrEmpty(connectionString))
                 throw new ArgumentNullException("connectionString");
 
-            db = new OleDbConnection(connectionString);
+            currentConnectionString = connectionString;
+            db = new OleDbConnection(currentConnectionString);
             db.Open();
 
             DataTable literals = db.GetOleDbSchemaTable(OleDbSchemaGuid.DbInfoLiterals, new object[] { });
@@ -47,6 +50,11 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
             row = literals.Rows.Find((int)OleDbLiteral.Quote_Suffix);
             if (row != null)
                 quoteSuffix = row["LiteralValue"] as string;
+        }
+
+        public string GetSafeConnectionString()
+        {
+            return currentConnectionString;
         }
 
         public string GetSafeConnectionString(string connectionString)

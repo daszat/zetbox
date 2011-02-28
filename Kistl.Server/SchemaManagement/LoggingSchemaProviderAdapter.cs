@@ -60,6 +60,11 @@ namespace Kistl.Server.SchemaManagement
             _provider.Open(connectionString);
         }
 
+        public string GetSafeConnectionString()
+        {
+            return _provider.GetSafeConnectionString();
+        }
+
         public string GetSafeConnectionString(string connectionString)
         {
             return _provider.GetSafeConnectionString(connectionString);

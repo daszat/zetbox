@@ -193,14 +193,22 @@ namespace Kistl.Server.SchemaManagement
 
         protected abstract TCommand CreateCommand(string query);
 
+        private string currentConnectionString;
         public void Open(string connectionString)
         {
             if (db != null)
                 throw new InvalidOperationException("Database already opened");
             if (string.IsNullOrEmpty(connectionString))
                 throw new ArgumentNullException("connectionString");
-            db = CreateConnection(connectionString);
+
+            currentConnectionString = connectionString;
+            db = CreateConnection(currentConnectionString);
             db.Open();
+        }
+
+        public string GetSafeConnectionString()
+        {
+            return currentConnectionString;
         }
 
         public abstract string GetSafeConnectionString(string connectionString);

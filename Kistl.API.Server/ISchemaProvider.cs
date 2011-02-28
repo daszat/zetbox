@@ -442,7 +442,13 @@ namespace Kistl.API.Server
         #region Connection and Transaction Handling
 
         void Open(string connectionString);
-        
+
+        /// <summary>
+        /// Gets a copy of the connection string for the currently open connection, safe for logging. That is, without any sensitive credential information.
+        /// </summary>
+        /// <returns></returns>
+        string GetSafeConnectionString();
+
         /// <summary>
         /// Gets a copy of the connection string, safe for logging. That is, without any sensitive credential information.
         /// </summary>
@@ -615,6 +621,5 @@ namespace Kistl.API.Server
         /// <param name="type">A Type to locate the Resource's Assembly</param>
         /// <param name="scriptResourceNameFormat">the Resource path to locate the SQL script. "{0}" is replaced by the ConfigName.</param>
         void ExecuteSqlResource(Type type, string scriptResourceNameFormat);
-
     }
 }
