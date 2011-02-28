@@ -18,7 +18,6 @@ namespace Kistl.Server.HttpService
     public sealed class KistlServiceFacade : IHttpHandler
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Service.KistlServiceFacade");
-        private readonly static byte[] Empty = new byte[0];
 
         private readonly BinaryFormatter _formatter = new BinaryFormatter();
 
