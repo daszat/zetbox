@@ -5,24 +5,24 @@ echo Used if schema has changed
 echo ********************************************************************************
 
 
-bin\Debug\bin\Server\Kistl.Server.Service.exe Configs\%zenv%\Kistl.Server.Service.xml -generate -updatedeployedschema -repairschema
+bin\Debug\Kistl.Server.Service.exe Configs\%zenv%\Kistl.Server.Service.xml -generate -updatedeployedschema -repairschema
 IF ERRORLEVEL 1 GOTO FAIL
 
 rem refresh local code
 call GetCodeGen.cmd
 IF ERRORLEVEL 1 GOTO FAIL
 
-bin\debug\bin\Server\Kistl.Server.Service.exe Configs\%zenv%\Kistl.Server.Service.xml -publish Kistl.Server\Database\Database.xml *
+bin\debug\Kistl.Server.Service.exe Configs\%zenv%\Kistl.Server.Service.xml -publish Kistl.Server\Database\Database.xml *
 IF ERRORLEVEL 1 GOTO FAIL
 
-bin\debug\bin\Server\Kistl.Server.Service.exe Configs\%zenv%\Kistl.Server.Service.xml -publish Kistl.Server\Database\KistlBase.xml KistlBase GUI
+bin\debug\Kistl.Server.Service.exe Configs\%zenv%\Kistl.Server.Service.xml -publish Kistl.Server\Database\KistlBase.xml KistlBase GUI
 IF ERRORLEVEL 1 GOTO FAIL
 
 rem managed in Database.xml
-rem bin\debug\bin\Server\Kistl.Server.Service.exe Configs\%zenv%\Kistl.Server.Service.xml -publish Kistl.Server\Database\SchemaMigrationSchema.xml SchemaMigration
+rem bin\debug\Kistl.Server.Service.exe Configs\%zenv%\Kistl.Server.Service.xml -publish Kistl.Server\Database\SchemaMigrationSchema.xml SchemaMigration
 rem IF ERRORLEVEL 1 GOTO FAIL
 
-bin\debug\bin\Server\Kistl.Server.Service.exe Configs\%zenv%\Kistl.Server.Service.xml -export Kistl.Server\Database\SchemaMigrationProjects.xml SchemaMigration
+bin\debug\Kistl.Server.Service.exe Configs\%zenv%\Kistl.Server.Service.xml -export Kistl.Server\Database\SchemaMigrationProjects.xml SchemaMigration
 IF ERRORLEVEL 1 GOTO FAIL
 
 echo ********************************************************************************

@@ -5,7 +5,7 @@ echo Used if only frozen objects has changed during development
 echo Call GenerateAndCopy before commit
 echo ********************************************************************************
 
-bin\Debug\bin\Server\Kistl.Server.Service.exe Configs\%zenv%\Kistl.Server.Service.xml -generate
+bin\Debug\Kistl.Server.Service.exe Configs\%zenv%\Kistl.Server.Service.xml -generate
 IF ERRORLEVEL 1 GOTO FAIL
 
 echo ********************************************************************************

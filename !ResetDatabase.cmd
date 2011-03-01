@@ -12,16 +12,16 @@ set config=%1
 
 :GOON
 
-bin\debug\bin\Server\Kistl.Server.Service.exe %config% -wipe
+bin\debug\Kistl.Server.Service.exe %config% -wipe
 IF ERRORLEVEL 1 GOTO FAIL
 
-bin\debug\bin\Server\Kistl.Server.Service.exe %config% -updateschema Kistl.Server\Database\Database.xml
+bin\debug\Kistl.Server.Service.exe %config% -updateschema Kistl.Server\Database\Database.xml
 IF ERRORLEVEL 1 GOTO FAIL
 
-bin\debug\bin\Server\Kistl.Server.Service.exe %config% -deploy Kistl.Server\Database\Database.xml -checkdeployedschema
+bin\debug\Kistl.Server.Service.exe %config% -deploy Kistl.Server\Database\Database.xml -checkdeployedschema
 IF ERRORLEVEL 1 GOTO FAIL
 
-bin\debug\bin\Server\Kistl.Server.Service.exe %config% -repairschema -syncidentities
+bin\debug\Kistl.Server.Service.exe %config% -repairschema -syncidentities
 IF ERRORLEVEL 1 GOTO FAIL
 
 echo ********************************************************************************
