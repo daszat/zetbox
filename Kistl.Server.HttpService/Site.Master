@@ -1,0 +1,62 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="Kistl.Server.HttpService.Site" %>
+
+<%@ Register TagPrefix="ctrls" Namespace="Kistl.Server.HttpService.Controls" Assembly="Kistl.Server.HttpService" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div class="container">
+        <div class="header">
+            <br />
+            <div id="logo">
+                <asp:HyperLink runat="server" NavigateUrl="~/">
+                    <asp:Image runat="server" SkinID="imgLogo" />
+                </asp:HyperLink>
+            </div>
+        </div>
+        <div id="content">
+            <div id="primary" class="maincontent">
+                <asp:ContentPlaceHolder ID="PrimaryContent" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+            <div id="secondary" class="sidebar">
+                <ctrls:Widget runat="server" Title="Applikation">
+                    Applikation <a href="/Client/Kistl.Client.Bootstrapper.exe">installieren</a>.
+                    <br />
+                    <br />
+                </ctrls:Widget>
+                <ctrls:Widget runat="server" Title="Kontakt">
+                    dasz.at OG <br/>
+                    Ignaz-Köck-Straße 10/4108<br/>
+                    1210 Wien <br/><br/>
+
+                    David Schmitt: +43 664 2602670<br/>
+                    Arthur Zaczek: +43 664 2357181<br/><br/>
+
+                    <a href="mailto:office@dasz.at">office@dasz.at</a> <br/>
+                    <a href="http://dasz.at">http://dasz.at</a>                    
+                    <br />
+                    <br />
+                </ctrls:Widget>
+            </div>
+            <asp:ContentPlaceHolder ID="SecondaryContent" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="footer_content">
+            <%= DateTime.Now.ToShortDateString() %> <%= DateTime.Now.ToShortTimeString() %>
+        </div>
+        <div class="footer_email">
+            <a href="mailto:office@dasz.at">office@dasz.at</a>
+        </div>
+    </div>
+    </div>
+    </form>
+</body>
+</html>

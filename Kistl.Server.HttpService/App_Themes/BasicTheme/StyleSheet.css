@@ -1,0 +1,411 @@
+﻿/**
+ * Default Stylesheet
+ * Based on Wordpress default theme
+ */
+
+
+/* Basic */
+body, input, textarea
+{
+    font: 12px/1.5 Arial;
+    color: #003c64;
+    background: #ffffff;
+}
+body
+{
+    margin-top: -20px;
+}
+/* Layout */
+#content
+{
+    margin-top: 10px;
+}
+.container
+{
+    width: 910px;
+    margin: 20px auto;
+}
+.maincontent
+{
+    width: 690px;
+    float: left;
+}
+.sidebar
+{
+    width: 180px;
+    float: right;
+    margin-top: -80px;
+}
+.footer
+{
+    clear: both;
+}
+
+.footer_content {
+	font-size: 8pt;
+	float:left;
+	width: 590px;
+	border-bottom: 1px solid #707f87;
+	border-top: 1px solid #707f87;
+	padding-left: 10px;
+	padding-top: 5px;
+	height: 25px;
+}
+
+.footer_email {
+	font-size: 8pt;
+	float: left;
+	width: 100px;
+	border-bottom: 1px solid #707f87;
+	border-top: 1px solid #707f87;
+	padding-left: 0px;
+	padding-top: 5px;
+	height: 25px;
+}
+
+.footer_email a {
+	float: right;
+	line-height: 1;
+	text-decoration: none;
+	font-weight: normal;
+}
+
+.footer_email a:hover {
+	text-decoration: underline;
+	font-weight: normal;
+}
+
+/* widgets  (sidebar) */
+.widget
+{
+    border: none;
+    font-size: 11px;
+}
+
+.widget-title
+{
+    border-bottom: 1px solid #b2b2b2;
+    padding: 10px 8px 2px 8px;
+    height: 20px;
+}
+
+#forum
+{
+    padding: 8px 8px 10px 8px;
+}
+
+.widget-content
+{
+    padding: 4px 8px 8px 8px;
+    color: #000;
+}
+
+.widget-content p
+{
+    margin-bottom: 5px;
+}
+
+/* round corners */
+.widget .ro
+{
+    background: url(dasz_sidebar_ecke_rechts_oben.png) top right no-repeat;
+}
+
+.widget .lo
+{
+    background: url(dasz_sidebar_ecke_links_oben.png) top left no-repeat;
+}
+
+.widget .ru
+{
+    background: url(dasz_sidebar_ecke_rechts_unten.png) bottom right no-repeat;
+}
+
+.widget .lu
+{
+    background: url(dasz_sidebar_ecke_links_unten.png) bottom left no-repeat;
+}
+
+.widget .left
+{
+    background: url(dasz_sidebar_links_steg_vertikal.png) left repeat-y;
+}
+
+.widget .right
+{
+    background: url(dasz_sidebar_rechts_steg_vertikal.png) right repeat-y;
+}
+
+.widget .top
+{
+    background: url(dasz_sidebar_oben_steg_horizontal.png) top repeat-x;
+}
+
+.widget .bottom
+{
+    background: url(dasz_sidebar_unten_steg_horizontal.png) bottom repeat-x;
+}
+
+.widget a
+{
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+/* Logo */
+#logo, #logo a
+{
+    font-size: 28pt;
+    line-height: 30px;
+    color: #000;
+    font-weight: bold;
+    margin-left: 0px;
+    margin-top: -5px;
+    margin-left: 1px;
+}
+#logo a:hover
+{
+    color: #003c64;
+    text-decoration: none;
+    font-weight: normal;
+}
+#tagline
+{
+    color: #333;
+}
+
+
+/* Links */
+a
+{
+    color: #003c64;
+    text-decoration: underline;
+    font-weight: bold;
+}
+a:hover
+{
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+/* Headings */
+h1, h4, h5, h6
+{
+    font-weight: bold;
+    clear: both;
+    color: #003c64;
+}
+
+h1
+{
+    font-size: 32px;
+    line-height: 30px;
+    padding: 25px 0px 25px 0px;
+}
+h2
+{
+    font-size: 28px;
+    line-height: 20px;
+    padding: 5px 0px 5px 0px;
+    clear: both;
+    font-weight: bold;
+}
+h3
+{
+    font-size: 19px;
+    line-height: 21px;
+    padding: 5px 0px 0px 0px;
+    font-weight: bold;
+}
+h4
+{
+    font-size: 17px;
+    line-height: 15px;
+    padding: 5px 0px 5px 0px;
+}
+h5
+{
+    font-size: 15px;
+    line-height: 14px;
+    padding: 5px 0px 5px 0px;
+}
+h6
+{
+    font-size: 19px;
+    line-height: 21px;
+    padding: 5px 0px 10px 0px;
+}
+
+/* Text Elements */
+address
+{
+    font-style: italic;
+}
+abbr[title], acronym[title], dfn[title]
+{
+    cursor: help;
+    border-bottom: 1px dotted #666;
+}
+
+blockquote
+{
+    color: #666;
+    font-style: italic;
+    border-left: 1px solid #ddd;
+    margin-left: 15px;
+    padding-left: 10px;
+}
+
+strong
+{
+    font-weight: bold;
+    color: #003c64;
+}
+em, dfn
+{
+    font-style: italic;
+}
+cite
+{
+    color: #003c64;
+    font-weight: bold;
+    font-style: normal;
+}
+dfn
+{
+    font-weight: bold;
+}
+
+sup
+{
+    bottom: 1ex;
+}
+sub
+{
+    top: .5ex;
+}
+small
+{
+    font-size: 11px;
+}
+small.grey
+{
+    color: #707f86;
+}
+
+del
+{
+    text-decoration: line-through;
+}
+ins
+{
+    text-decoration: underline;
+}
+
+code, pre
+{
+    line-height: 15px;
+}
+var, kbd, samp, code, pre
+{
+    font: 12px/1.4 Consolas, "Andale Mono" , Courier, "Courier New" , monospace;
+    background: #fafafa;
+}
+kbd
+{
+    font-weight: bold;
+}
+samp, var
+{
+    font-style: italic;
+}
+pre
+{
+    white-space: pre;
+    overflow: auto;
+    padding: 10px;
+    border: 1px solid #ddd;
+    clear: both;
+}
+code
+{
+    padding: 0px 3px;
+}
+
+/* Lists: (ul, ol, dl) */
+ul, ol, dl
+{
+    margin-left: 15px;
+}
+.nav
+{
+    margin-left: 0px;
+}
+.entry-content ul, .entry-content ol, #search-query
+{
+    margin-left: 25px;
+}
+
+li ul, li ol
+{
+    margin-bottom: 0;
+}
+ul ul, ol ol, ul ol, ol ul
+{
+    margin-bottom: 0;
+}
+
+ol
+{
+    list-style-type: decimal;
+}
+
+ul
+{
+    list-style-type: disc;
+}
+ul ul
+{
+    list-style-type: circle;
+}
+ul ul ul
+{
+    list-style-type: square;
+}
+
+dt
+{
+    font-weight: bold;
+}
+
+.fat li
+{
+    margin-bottom: 10px;
+}
+
+/* Tables */
+table
+{
+    border: 1px solid #ccc;
+    border-width: 1px;
+    line-height: 18px;
+    margin: 0 0 22px 0;
+    text-align: left;
+    padding: 0 5px;
+}
+table .even
+{
+    background: #ddd;
+}
+caption
+{
+    text-align: left;
+}
+tr
+{
+    border-bottom: 1px solid #ccc;
+}
+th, td
+{
+    padding: 5px 3px;
+}
