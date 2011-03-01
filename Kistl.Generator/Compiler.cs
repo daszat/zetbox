@@ -147,18 +147,27 @@ namespace Kistl.Generator
             }
         }
 
+        private static string GetConfiguration()
+        {
+            // TODO: read this from config file
+#if DEBUG
+            return "Debug";
+#else
+            return "Release";
+#endif
+        }
+
         private bool CompileCode(string workingPath)
         {
-            string referencePath = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(typeof(Compiler).Assembly.Location), @".."));
+            var kistlApiPath = GetApiPath();
 
-            Log.DebugFormat("referencePath = [{0}]", referencePath);
+            Log.DebugFormat("kistlApiPath = [{0}]", kistlApiPath);
 
             // TODO: move MsBuild logging to log4net
             if (File.Exists("TemplateCodegenLog.txt"))
                 File.Delete("TemplateCodegenLog.txt");
 
-            string binPath = Path.Combine(workingPath, @"bin\Debug");
-            binPath = Path.GetFullPath(binPath); // Ensure that path is an absolute path
+            string binPath = GetBinaryBasePath(workingPath);
 
             Log.DebugFormat("binPath = [{0}]", binPath);
 
@@ -172,6 +181,10 @@ namespace Kistl.Generator
             logger.Verbosity = LoggerVerbosity.Detailed;
             engine.RegisterLogger(logger);
 
+            engine.GlobalProperties.SetProperty("Configuration", GetConfiguration());
+            engine.GlobalProperties.SetProperty("OutputPathOverride", binPath);
+            engine.GlobalProperties.SetProperty("KistlAPIPathOverride", kistlApiPath);
+
             try
             {
                 var result = true;
@@ -182,7 +195,7 @@ namespace Kistl.Generator
                 {
                     foreach (var gen in gens)
                     {
-                        result &= CompileSingle(referencePath, binPath, engine, gen, null);
+                        result &= CompileSingle(engine, gen, null);
                     }
                 }
 
@@ -197,7 +210,7 @@ namespace Kistl.Generator
                     {
                         foreach (var target in gen.AdditionalTargets)
                         {
-                            result &= CompileSingle(referencePath, binPath, engine, gen, target);
+                            result &= CompileSingle(engine, gen, target);
                         }
                     }
                 }
@@ -211,7 +224,17 @@ namespace Kistl.Generator
             }
         }
 
-        private static bool CompileSingle(string apiPath, string binPath, Engine engine, AbstractBaseGenerator gen, string target)
+        private static string GetBinaryBasePath(string workingPath)
+        {
+            return Path.GetFullPath(Helper.PathCombine(workingPath, "bin", GetConfiguration()));
+        }
+
+        private static string GetApiPath()
+        {
+            return Path.GetFullPath(Helper.PathCombine(Path.GetDirectoryName(typeof(Compiler).Assembly.Location), "..", ".."));
+        }
+
+        private static bool CompileSingle(Engine engine, AbstractBaseGenerator gen, string target)
         {
             try
             {
@@ -220,16 +243,6 @@ namespace Kistl.Generator
                     Log.DebugFormat("Loading MsBuild Project");
                     var proj = new Project(engine);
                     proj.Load(gen.ProjectFileName);
-                    var defaultPropertyGroup = proj.AddNewPropertyGroup(false);
-                    defaultPropertyGroup.AddNewProperty("OutputPath", binPath, true);
-#if DEBUG
-                    defaultPropertyGroup.AddNewProperty("Configuration", "Debug", true);
-#else
-                    defaultPropertyGroup.AddNewProperty("Configuration", "Release", true);
-#endif
-                    // Fix XML Path
-                    defaultPropertyGroup.AddNewProperty("DocumentationFile", "$(OutputPath)\\$(AssemblyName).xml", false);
-                    defaultPropertyGroup.AddNewProperty("KistlAPIPath", apiPath, true);
 
                     Log.DebugFormat("Compiling");
                     if (!engine.BuildProject(proj, target))
@@ -267,8 +280,52 @@ namespace Kistl.Generator
                     Directory.Move(_config.Server.CodeGenWorkingPath, outputPath);
                 }
 
+                // source
+                var binaryBasePath = GetBinaryBasePath(outputPath);
+                // target
+                var binaryOutputPath = GetBinaryBasePath(_config.Server.CodeGenBinaryOutputPath);
+
+                Log.InfoFormat("Deploying binaries to CodeGenBinaryOutputPath [{0}]", binaryOutputPath);
+                DirectoryCopy(binaryBasePath, binaryOutputPath);
+
                 // Case #1382: Recompile to regenerate PDB's
                 // CompileCode(outputPath);
+            }
+        }
+
+        // adapted from http://msdn.microsoft.com/en-us/library/bb762914.aspx
+        private static void DirectoryCopy(string sourceDirName, string destDirName)
+        {
+            DirectoryInfo dir = new DirectoryInfo(sourceDirName);
+            DirectoryInfo[] dirs = dir.GetDirectories();
+
+            // If the source directory does not exist, throw an exception.
+            if (!dir.Exists)
+            {
+                throw new DirectoryNotFoundException("Source directory does not exist or could not be found: " + sourceDirName);
+            }
+
+            // If the destination directory does not exist, create it.
+            if (!Directory.Exists(destDirName))
+            {
+                Directory.CreateDirectory(destDirName);
+            }
+
+            // Get the file contents of the directory to copy.
+            FileInfo[] files = dir.GetFiles();
+
+            // Copy the files.
+            foreach (FileInfo file in files)
+            {
+                string temppath = Path.Combine(destDirName, file.Name);
+                file.CopyTo(temppath, false);
+            }
+
+            // Copy the subdirectories.
+            foreach (DirectoryInfo subdir in dirs)
+            {
+                string temppath = Path.Combine(destDirName, subdir.Name);
+                DirectoryCopy(subdir.FullName, temppath);
             }
         }
 

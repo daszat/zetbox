@@ -20,42 +20,52 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\bin\Debug\bin\Client\</OutputPath>
+    <OutputPath>..\bin\Debug\Client\WPF\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\bin\Debug\bin\Client\Kistl.Client.WPF.Toolkit.XML</DocumentationFile>
+    <DocumentationFile>..\bin\Debug\Client\WPF\Kistl.Client.WPF.Toolkit.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\bin\Release\Client\WPF\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\bin\Debug\bin\Client\Kistl.Client.WPF.Toolkit.XML</DocumentationFile>
+    <DocumentationFile>..\bin\Debug\Client\WPF\Kistl.Client.WPF.Toolkit.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Linux.Debug|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\bin\Debug\bin\Client\</OutputPath>
+    <OutputPath>..\bin\Debug\Client\WPF\</OutputPath>
     <DefineConstants>DEBUG;TRACE;MONO</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\bin\Debug\bin\Client\Kistl.Client.WPF.Toolkit.XML</DocumentationFile>
+    <DocumentationFile>..\bin\Debug\Client\WPF\Kistl.Client.WPF.Toolkit.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autofac">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\AutoFac 2\Autofac.dll</HintPath>
+      <Private>False</Private>
     </Reference>
-    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+    <Reference Include="log4net">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\log4net.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="GraphSharp">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\GraphSharp 1.0\GraphSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="GraphSharp.Controls">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\GraphSharp 1.0\GraphSharp.Controls.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
@@ -77,6 +87,11 @@
     </Reference>
     <Reference Include="WindowsBase">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WPFExtensions">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\WPFExtensions.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="WPFToolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
@@ -116,14 +131,17 @@
     <ProjectReference Include="..\Kistl.API.Client\Kistl.API.Client.csproj">
       <Project>{DD11A4F6-24C2-4935-8042-DE49CA6B32C0}</Project>
       <Name>Kistl.API.Client</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\Kistl.API\Kistl.API.csproj">
       <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
       <Name>Kistl.API</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\Kistl.Client\Kistl.Client.csproj">
       <Project>{A736E13F-D349-4CE5-A397-8438F58D0B9D}</Project>
       <Name>Kistl.Client</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\Kistl.Objects\Kistl.Objects.csproj">
       <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
@@ -133,6 +151,7 @@
     <ProjectReference Include="..\Kistl.API.Common\Kistl.API.Common.csproj">
       <Project>{9677AE11-CB92-4F0A-A248-87A21586F0DA}</Project>
       <Name>Kistl.API.Common</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

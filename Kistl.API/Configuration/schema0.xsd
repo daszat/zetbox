@@ -18,6 +18,7 @@
       <xs:element minOccurs="0" maxOccurs="1" name="LogFilePath" type="xs:string" />
       <xs:element minOccurs="0" maxOccurs="1" name="CodeGenWorkingPath" type="xs:string" />
       <xs:element minOccurs="0" maxOccurs="1" name="CodeGenOutputPath" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="CodeGenBinaryOutputPath" type="xs:string" />
       <xs:element minOccurs="0" maxOccurs="1" name="CodeGenArchivePath" type="xs:string" />
       <xs:element minOccurs="0" maxOccurs="1" name="Modules" type="tns:ArrayOfString" />
       <xs:element minOccurs="0" maxOccurs="1" name="ClientFilesLocations" type="tns:ArrayOfClientFilesLocation" />

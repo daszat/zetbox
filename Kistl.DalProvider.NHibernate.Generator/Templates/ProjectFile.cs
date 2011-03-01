@@ -33,28 +33,28 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates
             // Server API
             this.WriteLine(@"    <Reference Include=""Kistl.API.Server"">");
             this.WriteLine(@"      <SpecificVersion>False</SpecificVersion>");
-            this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Server\Kistl.API.Server.dll</HintPath>");
+            this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Server\Core\Kistl.API.Server.dll</HintPath>");
             this.WriteLine(@"      <Private>False</Private>");
             this.WriteLine(@"    </Reference>");
 
             // DAL Provider
             this.WriteLine(@"    <Reference Include=""Kistl.DalProvider.NHibernate"">");
             this.WriteLine(@"      <SpecificVersion>False</SpecificVersion>");
-            this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Server\Kistl.DalProvider.NHibernate.dll</HintPath>");
+            this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Server\NH\Kistl.DalProvider.NHibernate.dll</HintPath>");
             this.WriteLine(@"      <Private>False</Private>");
             this.WriteLine(@"    </Reference>");
 
             // NHibernate
             this.WriteLine(@"    <Reference Include=""NHibernate"">");
             this.WriteLine(@"      <SpecificVersion>False</SpecificVersion>");
-            this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Server\NHibernate.dll</HintPath>");
+            this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Server\NH\NHibernate.dll</HintPath>");
             this.WriteLine(@"      <Private>False</Private>");
             this.WriteLine(@"    </Reference>");
 
             // Base Provider
             this.WriteLine(@"    <Reference Include=""Kistl.DalProvider.Base"">");
             this.WriteLine(@"      <SpecificVersion>False</SpecificVersion>");
-            this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Common\Kistl.DalProvider.Base.dll</HintPath>");
+            this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Common\Core\Kistl.DalProvider.Base.dll</HintPath>");
             this.WriteLine(@"      <Private>False</Private>");
             this.WriteLine(@"    </Reference>");
         }
@@ -66,6 +66,11 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates
             this.WriteLine(@"        <EmbeddedResource Include=""*.hbm.xml"" />");
             this.WriteLine(@"        <EmbeddedResource Include=""*/*.hbm.xml"" />");
             this.WriteLine(@"    </ItemGroup>");
+        }
+
+        protected override string GetRelativeOutputPath()
+        {
+            return @"Server\NH";
         }
     }
 }

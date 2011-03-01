@@ -9,6 +9,7 @@
     <LogFilePath>bin/LogFiles</LogFilePath>
     <CodeGenWorkingPath>bin/CodeGenNext</CodeGenWorkingPath>
     <CodeGenOutputPath>bin/CodeGen</CodeGenOutputPath>
+    <CodeGenBinaryOutputPath>.</CodeGenBinaryOutputPath>
     <CodeGenArchivePath>Backup</CodeGenArchivePath>
     <Modules>
       <Module>Kistl.API.ApiModule, Kistl.API</Module>

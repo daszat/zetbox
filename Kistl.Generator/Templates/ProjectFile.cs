@@ -35,14 +35,14 @@ namespace Kistl.Generator.Templates
             // DAL Provider Base
             this.WriteLine(@"    <Reference Include=""Kistl.DalProvider.Base"">");
             this.WriteLine(@"      <SpecificVersion>False</SpecificVersion>");
-            this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Common\Kistl.DalProvider.Base.dll</HintPath>");
+            this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Common\Core\Kistl.DalProvider.Base.dll</HintPath>");
             this.WriteLine(@"      <Private>False</Private>");
             this.WriteLine(@"    </Reference>");
 
             // common functionality for all
             this.WriteLine(@"    <Reference Include=""Kistl.API.Common"">");
             this.WriteLine(@"      <SpecificVersion>False</SpecificVersion>");
-            this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Common\Kistl.API.Common.dll</HintPath>");
+            this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Common\Core\Kistl.API.Common.dll</HintPath>");
             this.WriteLine(@"      <Private>False</Private>");
             this.WriteLine(@"    </Reference>");
         }
@@ -53,7 +53,7 @@ namespace Kistl.Generator.Templates
         /// </summary>
         protected virtual string GetRelativeOutputPath()
         {
-            return @"Server\Fallback";
+            return "Unconfigured";
         }
 
         /// <summary>

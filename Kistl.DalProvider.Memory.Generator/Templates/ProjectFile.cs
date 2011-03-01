@@ -34,7 +34,7 @@ namespace Kistl.DalProvider.Memory.Generator.Templates
             // DAL Provider
             this.WriteLine(@"    <Reference Include=""Kistl.DalProvider.Memory"">");
             this.WriteLine(@"      <SpecificVersion>False</SpecificVersion>");
-            this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Common\Kistl.DalProvider.Memory.dll</HintPath>");
+            this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Common\Core\Kistl.DalProvider.Memory.dll</HintPath>");
             this.WriteLine(@"      <Private>False</Private>");
             this.WriteLine(@"    </Reference>");
         }
@@ -45,6 +45,11 @@ namespace Kistl.DalProvider.Memory.Generator.Templates
             this.WriteLine(@"  <ItemGroup>");
             this.WriteLine(@"    <EmbeddedResource Include=""FrozenObjects.xml""/>");
             this.WriteLine(@"  </ItemGroup>");
+        }
+
+        protected override string GetRelativeOutputPath()
+        {
+            return @"Common\Core";
         }
     }
 }

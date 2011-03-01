@@ -34,16 +34,21 @@ namespace Kistl.DalProvider.Client.Generator.Templates
             // DAL Provider
             this.WriteLine(@"    <Reference Include=""Kistl.DalProvider.ClientObjects"">");
             this.WriteLine(@"      <SpecificVersion>False</SpecificVersion>");
-            this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Client\Kistl.DalProvider.ClientObjects.dll</HintPath>");
+            this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Client\Core\Kistl.DalProvider.ClientObjects.dll</HintPath>");
             this.WriteLine(@"      <Private>False</Private>");
             this.WriteLine(@"    </Reference>");
 
             // Client API
             this.WriteLine(@"    <Reference Include=""Kistl.API.Client"">");
             this.WriteLine(@"      <SpecificVersion>False</SpecificVersion>");
-            this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Client\Kistl.API.Client.dll</HintPath>");
+            this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Client\Core\Kistl.API.Client.dll</HintPath>");
             this.WriteLine(@"      <Private>False</Private>");
             this.WriteLine(@"    </Reference>");
+        }
+
+        protected override string GetRelativeOutputPath()
+        {
+            return @"Client\Core";
         }
     }
 }

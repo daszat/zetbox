@@ -32,5 +32,10 @@ namespace Kistl.Generator.InterfaceTemplates
             base.ApplyAdditionalProperties();
             this.WriteObjects("     <DocumentationFile>$(OutputPath)\\", GetAssemblyName(), ".xml</DocumentationFile>\r\n");
         }
+
+        protected override string GetRelativeOutputPath()
+        {
+            return @"Common\Core";
+        }
     }
 }

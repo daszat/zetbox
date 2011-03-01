@@ -1,0 +1,6 @@
+
+* projects: always reference projects with private=false
+  - Tests: exception! always use private=true for all references, because we need to copy the files into the Tests/ directory
+* external dlls:
+  - reference within my module: private=true, to make file available to clients
+  - reference through dependency in other module: private=false, our dependency will provide the file for us

@@ -41,14 +41,14 @@ namespace Kistl.DalProvider.Ef.Generator.Templates
             // EF Provider infrastructure
             this.WriteLine(@"    <Reference Include=""Kistl.DalProvider.Ef"">");
             this.WriteLine(@"      <SpecificVersion>False</SpecificVersion>");
-            this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Server\Kistl.DalProvider.Ef.dll</HintPath>");
+            this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Server\EF\Kistl.DalProvider.Ef.dll</HintPath>");
             this.WriteLine(@"      <Private>False</Private>");
             this.WriteLine(@"    </Reference>");
 
             // Server API
             this.WriteLine(@"    <Reference Include=""Kistl.API.Server"">");
             this.WriteLine(@"      <SpecificVersion>False</SpecificVersion>");
-            this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Server\Kistl.API.Server.dll</HintPath>");
+            this.WriteLine(@"      <HintPath>$(KistlAPIPath)\Server\Core\Kistl.API.Server.dll</HintPath>");
             this.WriteLine(@"      <Private>False</Private>");
             this.WriteLine(@"    </Reference>");
         }
@@ -78,6 +78,11 @@ namespace Kistl.DalProvider.Ef.Generator.Templates
             // can only generate views for (globally-)registered data providers
             //this.WriteLine(@"    <PreBuildEvent>""%25windir%25\Microsoft.NET\Framework\v3.5\EdmGen.exe"" /nologo /language:CSharp /mode:ViewGeneration ""/inssdl:$(ProjectDir)Model.MSSQL.ssdl"" ""/incsdl:$(ProjectDir)Model.csdl"" ""/inmsl:$(ProjectDir)Model.msl"" ""/outviews:$(ProjectDir)Model.MSSQLViews.cs""</PreBuildEvent>");
             this.WriteLine(@"  </PropertyGroup>");
+        }
+
+        protected override string GetRelativeOutputPath()
+        {
+            return @"Server\EF";
         }
     }
 }

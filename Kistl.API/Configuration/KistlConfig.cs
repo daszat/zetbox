@@ -139,6 +139,12 @@ namespace Kistl.API.Configuration
             public string CodeGenOutputPath { get; set; }
 
             /// <summary>
+            /// Where the Generator will publish the generated binaries after a successful compile.
+            /// </summary>
+            [XmlElement(IsNullable = false)]
+            public string CodeGenBinaryOutputPath { get; set; }
+
+            /// <summary>
             /// Where the Generator will store the contents of the 
             /// <see cref="CodeGenOutputPath"/> before replacing it. Leave 
             /// this configuration parameter empty to suppress archival.

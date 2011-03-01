@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\bin\Debug\bin\Tests\</OutputPath>
+    <OutputPath>..\..\bin\Debug\Tests\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -25,7 +25,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\..\bin\Release\Tests\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -41,11 +41,11 @@
     <Reference Include="NHibernate.ByteCode.LinFu">
       <HintPath>..\..\Libs\NHibernate3\Required_For_LazyLoading\LinFu\NHibernate.ByteCode.LinFu.dll</HintPath>
     </Reference>
-    <Reference Include="Npgsql, Version=2.0.11.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+    <Reference Include="Npgsql">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libs\Npgsql2\Npgsql.dll</HintPath>
     </Reference>
-    <Reference Include="nunit.framework, Version=2.5.8.10295, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+    <Reference Include="nunit.framework">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libs\NUnit2\bin\net-2.0\nunit.framework.dll</HintPath>
     </Reference>
@@ -126,10 +126,12 @@
     <ProjectReference Include="..\..\Kistl.Objects.Memory\Kistl.Objects.Memory.csproj">
       <Project>{01E60FD5-CD96-466A-83B1-8EFC7452B47C}</Project>
       <Name>Kistl.Objects.Memory</Name>
+      <Private>True</Private>
     </ProjectReference>
     <ProjectReference Include="..\..\Kistl.Objects.NHibernate\Kistl.Objects.NHibernate.csproj">
       <Project>{5514C9AF-6C2E-4713-8EAC-FAAADFFDB029}</Project>
       <Name>Kistl.Objects.NHibernate</Name>
+      <Private>True</Private>
     </ProjectReference>
     <ProjectReference Include="..\..\Kistl.Objects\Kistl.Objects.csproj">
       <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
