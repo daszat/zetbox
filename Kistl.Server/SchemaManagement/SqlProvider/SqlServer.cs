@@ -57,7 +57,7 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
         public override string GetSafeConnectionString(string connectionString)
         {
             var csb = new SqlConnectionStringBuilder(connectionString);
-            csb.Password = null;
+            csb.Password = "<<removed>>"; // may not be null
             return csb.ToString();
         }
 
