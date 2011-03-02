@@ -27,19 +27,20 @@ namespace Kistl.DalProvider.Ef
         {
             base.Load(moduleBuilder);
 
-            var serverAssembly = Assembly.Load(ServerAssembly);
-            if (serverAssembly == null)
-                throw new InvalidOperationException("Unable to load Kistl.Objects.EfImpl Assembly, no Entity Framework Metadata will be loaded");
+            // As we are using the concrete Assembly name in our connection string, this should not be needed anymore
+            //var serverAssembly = Assembly.Load(ServerAssembly);
+            //if (serverAssembly == null)
+            //    throw new InvalidOperationException("Unable to load Kistl.Objects.EfImpl Assembly, no Entity Framework Metadata will be loaded");
 
-            // force-load a few assemblies to the reflection-only context so the DAL provider can find them
-            // this uses the AssemblyLoader directly because Assembly.ReflectionOnlyLoad doesn't go through all 
-            // the moves of resolving AssemblyNames to files. See http://stackoverflow.com/questions/570117/
-            var reflectedInterfaceAssembly = AssemblyLoader.ReflectionOnlyLoadFrom(Kistl.API.Helper.InterfaceAssembly);
-            if (reflectedInterfaceAssembly == null)
-                throw new InvalidOperationException("Unable to load Kistl.Objects Assembly for reflection, no Entity Framework Metadata will be loaded");
-            var reflectedServerAssembly = AssemblyLoader.ReflectionOnlyLoadFrom(EfProvider.ServerAssembly);
-            if (reflectedServerAssembly == null)
-                throw new InvalidOperationException("Unable to load Kistl.Objects.EfImpl Assembly for reflection, no Entity Framework Metadata will be loaded");
+            //// force-load a few assemblies to the reflection-only context so the DAL provider can find them
+            //// this uses the AssemblyLoader directly because Assembly.ReflectionOnlyLoad doesn't go through all 
+            //// the moves of resolving AssemblyNames to files. See http://stackoverflow.com/questions/570117/
+            //var reflectedInterfaceAssembly = AssemblyLoader.ReflectionOnlyLoadFrom(Kistl.API.Helper.InterfaceAssembly);
+            //if (reflectedInterfaceAssembly == null)
+            //    throw new InvalidOperationException("Unable to load Kistl.Objects Assembly for reflection, no Entity Framework Metadata will be loaded");
+            //var reflectedServerAssembly = AssemblyLoader.ReflectionOnlyLoadFrom(EfProvider.ServerAssembly);
+            //if (reflectedServerAssembly == null)
+            //    throw new InvalidOperationException("Unable to load Kistl.Objects.EfImpl Assembly for reflection, no Entity Framework Metadata will be loaded");
 
             moduleBuilder
                 .Register(c =>
