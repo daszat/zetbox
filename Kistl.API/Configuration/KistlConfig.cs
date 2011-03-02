@@ -324,7 +324,16 @@ namespace Kistl.API.Configuration
             if (!File.Exists(file))
             {
                 Logging.Log.WarnFormat("No default configuration found for zenv=[{0}], basename=[{1}]", Environment.GetEnvironmentVariable("zenv"), basename);
-                return Path.Combine(baseDir, "DefaultConfig.xml");
+                var defaultConfig = Path.Combine(baseDir, "DefaultConfig.xml");
+                if (File.Exists(defaultConfig))
+                {
+                    Logging.Log.WarnFormat("using default config from [{0}]", defaultConfig);
+                    return defaultConfig;
+                }
+                else
+                {
+                    throw new FileNotFoundException(String.Format("Could not find [{0}] in zenv [{1}]", basename, Environment.GetEnvironmentVariable("zenv")), basename);
+                }
             }
             else
             {
