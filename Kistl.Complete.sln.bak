@@ -239,6 +239,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Unix", "Kistl.Unix\Kistl.Unix.csproj", "{36180B60-667C-485D-8DAC-304F27EA6EFB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Server.HttpService", "Kistl.Server.HttpService\Kistl.Server.HttpService.csproj", "{FD3C71B3-330F-4FFC-A525-37E1AD338FF8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{26C035B1-A53D-44E0-BEED-CB97EC56B38E} = {26C035B1-A53D-44E0-BEED-CB97EC56B38E}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
