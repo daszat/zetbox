@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using System.ComponentModel;
 
 namespace Kistl.Server.HttpService.Controls
 {
     public class Widget : Control
     {
+        [Localizable(true)]
         public string Title { get; set; }
 
         protected override void Render(HtmlTextWriter writer)

@@ -25,12 +25,12 @@
                 </asp:ContentPlaceHolder>
             </div>
             <div id="secondary" class="sidebar">
-                <ctrls:Widget runat="server" Title="Applikation">
-                    Applikation <a href="/Client/Kistl.Client.Bootstrapper.exe">installieren</a>.
+                <ctrls:Widget runat="server" Title="<%$ Resources:Strings, ApplicationTitle %>">
+                    <asp:HyperLink runat="server" Text="<%$ Resources:Strings, DownloadApplication %>" NavigateUrl="~/Client/Kistl.Client.Bootstrapper.exe" />
                     <br />
                     <br />
                 </ctrls:Widget>
-                <ctrls:Widget runat="server" Title="Kontakt">
+                <ctrls:Widget runat="server" Title="<%$ Resources:Strings, ContactTitle %>">
                     dasz.at OG <br/>
                     Ignaz-Köck-Straße 10/4108<br/>
                     1210 Wien <br/><br/>
