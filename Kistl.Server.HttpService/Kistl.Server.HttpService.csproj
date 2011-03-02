@@ -182,7 +182,7 @@ xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Client" "$(ProjectDir)
 xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Bootstrapper" "$(ProjectDir)\Bootstrapper"
     </PostBuildEvent>
     <PostBuildEvent Condition=" '$(OS)' != 'Windows_NT' ">
-cp -r "$(SolutionDir)/bin/$(Configuration)"/{Common,Server,Client,Bootstrapper} "$(ProjectDir)"
+bash -c 'cp -r "$(SolutionDir)/bin/$(Configuration)"/{Common,Server,Client,Bootstrapper} "$(ProjectDir)"'
      </PostBuildEvent>
   </PropertyGroup>
 </Project>
