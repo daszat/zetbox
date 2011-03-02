@@ -28,6 +28,7 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <DocumentationFile>..\bin\Debug\Kistl.Server.Service.xml</DocumentationFile>
     <PlatformTarget>AnyCPU</PlatformTarget>
+    <NoWarn>1591</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -56,14 +57,13 @@
     <Reference Include="Autofac">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\AutoFac 2\Autofac.dll</HintPath>
-      <Private>False</Private>
     </Reference>
-    <Reference Include="Autofac">
+    <Reference Include="Autofac.Configuration">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\AutoFac 2\Autofac.Configuration.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Autofac">
+    <Reference Include="Autofac.Integration.Wcf">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\AutoFac 2\Autofac.Integration.Wcf.dll</HintPath>
       <Private>False</Private>
