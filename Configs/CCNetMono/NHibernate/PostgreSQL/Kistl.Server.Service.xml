@@ -39,6 +39,7 @@
     <string>Server/NH</string>
     <string>Server/NH.Generated</string>
     <string>Server/NH.Fallback</string>
+    <string>Server/Linux</string>
     <string>Common/App.ZBox</string>
     <string>Server/App.ZBox</string>
     <string>Common/App.Ini50</string>
