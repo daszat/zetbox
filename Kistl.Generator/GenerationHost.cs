@@ -144,16 +144,23 @@ namespace Kistl.Generator
                 this.Settings["providertemplatenamespace"],
                 templateClass,
                 this.Settings["providertemplateassembly"]);
+
             Type t = Type.GetType(providerName);
             if (t == null)
             {
-                Log.InfoFormat("provided template [{0}] not found", providerName);
                 var defaultName = String.Format("{0}.{1}", this.Settings["basetemplatepath"], templateClass);
                 t = Type.GetType(defaultName);
-            }
 
-            if (t == null)
-                throw new ArgumentOutOfRangeException("templateClass", String.Format("No class found for {0}", templateClass));
+                if (t == null)
+                {
+                    Log.InfoFormat("provided template [{0}] not found", providerName);
+                    throw new ArgumentOutOfRangeException("templateClass", String.Format("No class found for {0}", templateClass));
+                }
+                else
+                {
+                    Log.InfoFormat("provided template [{0}] not found, using [{1}] instead", providerName, defaultName);
+                }
+            }
 
             var fullParams = new object[] { this }.Concat(parameters).ToArray();
             ResourceTemplate template = null;

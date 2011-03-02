@@ -78,6 +78,11 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries
             return "this.Proxy.ExportGuid";
         }
 
+        protected override void ApplyExportGuidPropertyTemplate()
+        {
+            Properties.ExportGuidProperty.Call(Host, ctx, this.MembersToSerialize, prop.ObjectClass.Module.Namespace, GetCeInterface());
+        }
+
         protected override void ApplyReloadReferenceBody()
         {
             string referencedInterface = prop.ObjectClass.Module.Namespace + "." + prop.ObjectClass.Name;
