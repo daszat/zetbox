@@ -53,15 +53,15 @@
 
     </Modules>
   </Client>
-  <SourceFileLocation>
-    <!-- default probe path -->
-    <string>F:\CruiseControl.NET\Projects\ZBox-EF\bin\CodeGen\bin\Debug</string>
-    <!-- common libaries -->
-    <string>F:\CruiseControl.NET\Projects\ZBox-EF\bin\Debug\bin\Common</string>
-    <!-- Fallback path for local development -->
-    <string>F:\CruiseControl.NET\Projects\ZBox-EF\bin\Debug\bin\Server\fallback</string>
-    <!-- All other assemblies -->
-    <string>F:\CruiseControl.NET\Projects\ZBox-EF\bin\Debug\bin\Server</string>
-    <string>F:\CruiseControl.NET\Projects\ZBox-EF\bin\Debug\bin\Client</string>
-  </SourceFileLocation>
+  <AssemblySearchPaths>
+    <string>Common\Core</string>
+    <string>Common\Core.Generated</string>
+    <string>Common\Core.Fallback</string>
+    <string>Server\Core</string>
+    <string>Server\EF</string>
+    <string>Server\EF.Generated</string>
+    <string>Server\EF.Fallback</string>
+    <string>Common\App.ZBox</string>
+    <string>Server\App.ZBox</string>
+  </AssemblySearchPaths>
 </KistlConfig>

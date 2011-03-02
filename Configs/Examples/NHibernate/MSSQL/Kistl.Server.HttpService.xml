@@ -29,19 +29,24 @@
       <Module>Kistl.DalProvider.Client.Generator.ClientGeneratorProvider, Kistl.DalProvider.Client.Generator</Module>
       <Module>Kistl.DalProvider.Ef.Generator.EfGeneratorProvider, Kistl.DalProvider.Ef.Generator</Module>
     </Modules>
-  </Server>
     <ClientFilesLocations>
       <Location Name="Exe">P:\Kistl\bin\Debug\Kistl.Client.WPF.exe</Location>
       <Location Name="Configs">P:\Kistl\Configs\Examples\Kistl.Client.WPF.xml</Location>
       <Location Name="Common">P:\Kistl\bin\Debug\Common</Location>
       <Location Name="Client">P:\Kistl\bin\Debug\Client</Location>
     </ClientFilesLocations>
-  <SourceFileLocation>
-    <!-- default probe path -->
-    <string>P:\Kistl\bin\CodeGen\bin\Debug</string>
-    <!-- common libaries -->
-    <string>P:\Kistl\bin\Debug\bin\Common</string>
-    <!-- Fallback path for local development -->
-    <string>P:\Kistl\bin\Debug\bin\Server\fallback</string>
-  </SourceFileLocation>
+  </Server>
+  <AssemblySearchPaths>
+    <string>Common\Core</string>
+    <string>Common\Core.Generated</string>
+    <string>Common\Core.Fallback</string>
+    <string>Server\Core</string>
+    <string>Server\NH</string>
+    <string>Server\NH.Generated</string>
+    <string>Server\NH.Fallback</string>
+    <string>Common\App.ZBox</string>
+    <string>Server\App.ZBox</string>
+    <string>Common\App.Ini50</string>
+    <string>Server\App.Ini50</string>
+  </AssemblySearchPaths>
 </KistlConfig>

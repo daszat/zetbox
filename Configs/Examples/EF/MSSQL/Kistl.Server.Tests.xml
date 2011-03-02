@@ -16,12 +16,15 @@
       <Module>Kistl.Tests.Utilities.MsSql.UtilityModule, Kistl.Tests.Utilities.MsSql</Module>
     </Modules>
   </Server>
-  <SourceFileLocation>
-    <!-- default probe path -->
-    <string>P:\Kistl\bin\CodeGen\bin\Debug</string>
-    <!-- common libaries -->
-    <string>P:\Kistl\bin\Debug\bin\Common</string>
-    <!-- Fallback path for local development -->
-    <string>P:\Kistl\bin\Debug\bin\Server\fallback</string>
-  </SourceFileLocation>
+  <AssemblySearchPaths>
+    <string>Common\Core</string>
+    <string>Common\Core.Generated</string>
+    <string>Common\Core.Fallback</string>
+    <string>Server\Core</string>
+    <string>Server\EF</string>
+    <string>Server\EF.Generated</string>
+    <string>Server\EF.Fallback</string>
+    <string>Common\App.ZBox</string>
+    <string>Server\App.ZBox</string>
+  </AssemblySearchPaths>
 </KistlConfig>

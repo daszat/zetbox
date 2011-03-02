@@ -5,7 +5,6 @@
     <SchemaProvider>POSTGRESQL</SchemaProvider>
     <DatabaseProvider>Npgsql</DatabaseProvider>
     <ConnectionString>Server=localhost;Port=5432;Database=zbox_test;User Id=zbox;Password=b-cXqMyXEYea2kkjUhkS</ConnectionString>
-    
     <DocumentStore>DocumentStore\Server\</DocumentStore>
     <LogFilePath>bin\LogFiles</LogFilePath>
     <CodeGenWorkingPath>bin\CodeGenNext</CodeGenWorkingPath>
@@ -17,12 +16,15 @@
       <Module>Kistl.App.Projekte.Common.CustomCommonActionsModule, Kistl.App.Projekte.Common</Module>
     </Modules>
   </Server>
-  <SourceFileLocation>
-    <!-- default probe path -->
-    <string>P:\Kistl\bin\CodeGen\bin\Debug</string>
-    <!-- common libaries -->
-    <string>P:\Kistl\bin\Debug\bin\Common</string>
-    <!-- Fallback path for local development -->
-    <string>P:\Kistl\bin\Debug\bin\Server\fallback</string>
-  </SourceFileLocation>
+  <AssemblySearchPaths>
+    <string>Common\Core</string>
+    <string>Common\Core.Generated</string>
+    <string>Common\Core.Fallback</string>
+    <string>Server\Core</string>
+    <string>Server\EF</string>
+    <string>Server\EF.Generated</string>
+    <string>Server\EF.Fallback</string>
+    <string>Common\App.ZBox</string>
+    <string>Server\App.ZBox</string>
+  </AssemblySearchPaths>
 </KistlConfig>

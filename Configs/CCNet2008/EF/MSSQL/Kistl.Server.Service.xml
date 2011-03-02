@@ -39,7 +39,8 @@
     <string>Common\Core.Generated</string>
     <string>Common\Core.Fallback</string>
     <string>Common\App.Ini50</string>
-    <string>Common\App.ZBoxServer\Core</string>
+    <string>Common\App.ZBox</string>
+    <string>Server\Core</string>
     <string>Server\EF</string>
     <string>Server\EF.Generated</string>
     <string>Server\EF.Fallback</string>

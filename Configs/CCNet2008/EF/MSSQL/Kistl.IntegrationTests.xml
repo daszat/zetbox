@@ -44,24 +44,19 @@
       <Module>Kistl.DalProvider.Memory.MemoryProvider, Kistl.DalProvider.Memory</Module>
       <Module>Kistl.App.Projekte.Client.CustomClientActionsModule, Kistl.App.Projekte.Client</Module>
       <Module>Kistl.App.Projekte.Common.CustomCommonActionsModule, Kistl.App.Projekte.Common</Module>
-      <!-- Do not load customers modules! Nothing to test there
-        <Module>Ini50.App.Client.Ini50Module, Ini50.App.Client</Module>
-        -->
-
       <!-- since the test are driven from the client app domain, we need to reset the database from here -->
       <Module>Kistl.Tests.Utilities.MsSql.UtilityModule, Kistl.Tests.Utilities.MsSql</Module>
-
     </Modules>
   </Client>
-  <SourceFileLocation>
-    <!-- default probe path -->
-    <string>F:\CruiseControl.NET\Projects\ZBox-EF\bin\CodeGen\bin\Debug</string>
-    <!-- common libaries -->
-    <string>F:\CruiseControl.NET\Projects\ZBox-EF\bin\Debug\bin\Common</string>
-    <!-- Fallback path for local development -->
-    <string>F:\CruiseControl.NET\Projects\ZBox-EF\bin\Debug\bin\Server\fallback</string>
-    <!-- All other assemblies -->
-    <string>F:\CruiseControl.NET\Projects\ZBox-EF\bin\Debug\bin\Server</string>
-    <string>F:\CruiseControl.NET\Projects\ZBox-EF\bin\Debug\bin\Client</string>
-  </SourceFileLocation>
+  <AssemblySearchPaths>
+    <string>Common\Core</string>
+    <string>Common\Core.Generated</string>
+    <string>Common\Core.Fallback</string>
+    <string>Server\Core</string>
+    <string>Server\EF</string>
+    <string>Server\EF.Generated</string>
+    <string>Server\EF.Fallback</string>
+    <string>Common\App.ZBox</string>
+    <string>Server\App.ZBox</string>
+  </AssemblySearchPaths>
 </KistlConfig>

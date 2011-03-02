@@ -16,14 +16,15 @@
       <Module>Kistl.App.Projekte.Common.CustomCommonActionsModule, Kistl.App.Projekte.Common</Module>
     </Modules>
   </Server>
-  <SourceFileLocation>
-    <!-- default probe path for CC.net on srv2008 -->
-    <string>P:\Kistl\bin\CodeGen\bin\Debug</string>
-    <!-- common libaries for CC.net on srv2008 -->
-    <string>P:\Kistl\bin\Debug\bin\Common</string>
-    <!-- Fallback path for CC.net on srv2008 -->
-    <string>P:\Kistl\bin\Debug\bin\Server\Fallback</string>
-    <!-- All other assemblies -->
-    <string>P:\Kistl\bin\Debug\bin\Server</string>
-  </SourceFileLocation>
+  <AssemblySearchPaths>
+    <string>Common\Core</string>
+    <string>Common\Core.Generated</string>
+    <string>Common\Core.Fallback</string>
+    <string>Server\Core</string>
+    <string>Server\NH</string>
+    <string>Server\NH.Generated</string>
+    <string>Server\NH.Fallback</string>
+    <string>Common\App.ZBox</string>
+    <string>Server\App.ZBox</string>
+  </AssemblySearchPaths>
 </KistlConfig>

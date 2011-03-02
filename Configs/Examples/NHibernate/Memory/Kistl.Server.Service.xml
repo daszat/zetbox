@@ -15,7 +15,6 @@
       <Module>Kistl.API.Server.ServerApiModule, Kistl.API.Server</Module>
       <Module>Kistl.Server.ServerModule, Kistl.Server</Module>
       <Module>Kistl.Objects.InterfaceModule, Kistl.Objects</Module>
-      <Module>Kistl.Objects.EfModule, Kistl.Objects.EfImpl</Module>
       <Module>Kistl.Objects.MemoryModule, Kistl.Objects.MemoryImpl</Module>
       <Module>Kistl.DalProvider.Memory.MemoryProvider, Kistl.DalProvider.Memory</Module>
       <Module>Kistl.DalProvider.Memory.MemoryDatabaseProvider, Kistl.DalProvider.Memory</Module>
@@ -25,27 +24,18 @@
       <!-- Development/Master Server modules -->
       <Module>Kistl.Generator.GeneratorModule, Kistl.Generator</Module>
       <Module>Kistl.DalProvider.NHibernate.Generator.NhGeneratorProvider, Kistl.DalProvider.NHibernate.Generator</Module>
-      <!--
       <Module>Kistl.DalProvider.Memory.Generator.MemoryGeneratorProvider, Kistl.DalProvider.Memory.Generator</Module>
       <Module>Kistl.DalProvider.Client.Generator.ClientGeneratorProvider, Kistl.DalProvider.Client.Generator</Module>
       <Module>Kistl.DalProvider.Ef.Generator.EfGeneratorProvider, Kistl.DalProvider.Ef.Generator</Module>
-      -->
     </Modules>
   </Server>
-  <SourceFileLocation>
-    <!-- default probe path -->
-    <string>P:\Kistl\bin\CodeGen\bin\Debug</string>
-    <!-- common libaries -->
-    <string>P:\Kistl\bin\Debug\bin\Common</string>
-    <!-- Fallback path for local development -->
-    <string>P:\Kistl\bin\Debug\bin\Server\fallback</string>
-
-    <!-- CC.net on srv2008 -->
-    <!-- default probe path -->
-    <string>F:\CruiseControl.Net\Projects\Kistl\bin\CodeGen\bin\Debug</string>
-    <!-- common libaries -->
-    <string>F:\CruiseControl.Net\Projects\Kistl\bin\Debug\bin\Common</string>
-    <!-- Fallback path for local development -->
-    <string>F:\CruiseControl.Net\Projects\Kistl\bin\Debug\bin\Server\fallback</string>
-  </SourceFileLocation>
+  <AssemblySearchPaths>
+    <string>Common\Core</string>
+    <string>Common\Core.Generated</string>
+    <string>Common\Core.Fallback</string>
+    <string>Server\Core</string>
+    <string>Server\NH</string>
+    <string>Common\App.ZBox</string>
+    <string>Server\App.ZBox</string>
+  </AssemblySearchPaths>
 </KistlConfig>
