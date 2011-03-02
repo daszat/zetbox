@@ -49,14 +49,14 @@
     </Modules>
   </Client>
   <AssemblySearchPaths>
-    <string>Common\Core</string>
-    <string>Common\Core.Generated</string>
-    <string>Common\Core.Fallback</string>
-    <string>Server\Core</string>
-    <string>Server\NH</string>
-    <string>Server\NH.Generated</string>
-    <string>Server\NH.Fallback</string>
-    <string>Common\App.ZBox</string>
-    <string>Server\App.ZBox</string>
+    <string>Common/Core</string>
+    <string>Common/Core.Generated</string>
+    <string>Common/Core.Fallback</string>
+    <string>Server/Core</string>
+    <string>Server/NH</string>
+    <string>Server/NH.Generated</string>
+    <string>Server/NH.Fallback</string>
+    <string>Common/App.ZBox</string>
+    <string>Server/App.ZBox</string>
   </AssemblySearchPaths>
 </KistlConfig>
