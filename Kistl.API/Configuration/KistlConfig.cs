@@ -76,11 +76,11 @@ namespace Kistl.API.Configuration
         public bool ClientSpecified { get; set; }
 
         /// <summary>
-        /// Location (Path) to Assemblies - TODO: Will be replaced!
-        /// Deprecated: <see cref="AssemblyLoader.SearchPath"/>
+        /// Location (Path) to Assemblies
+        /// <see cref="AssemblyLoader.SearchPath"/>
         /// </summary>
         [XmlArray(IsNullable = false)]
-        public string[] SourceFileLocation { get; set; }
+        public string[] AssemblySearchPaths { get; set; }
 
         /// <summary>
         /// Server Configuration
@@ -141,8 +141,8 @@ namespace Kistl.API.Configuration
             /// <summary>
             /// Where the Generator will publish the generated binaries after a successful compile.
             /// </summary>
-            [XmlElement(IsNullable = false)]
-            public string CodeGenBinaryOutputPath { get; set; }
+            [XmlArray(IsNullable = false)]
+            public string[] CodeGenBinaryOutputPath { get; set; }
 
             /// <summary>
             /// Where the Generator will store the contents of the 

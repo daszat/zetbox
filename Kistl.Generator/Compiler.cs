@@ -231,7 +231,7 @@ namespace Kistl.Generator
 
         private static string GetApiPath()
         {
-            return Path.GetFullPath(Helper.PathCombine(Path.GetDirectoryName(typeof(Compiler).Assembly.Location), "..", ".."));
+            return AppDomain.CurrentDomain.BaseDirectory;
         }
 
         private static bool CompileSingle(Engine engine, AbstractBaseGenerator gen, string target)
@@ -283,13 +283,14 @@ namespace Kistl.Generator
                 // source
                 var binaryBasePath = GetBinaryBasePath(outputPath);
                 // target
-                var binaryOutputPath = GetBinaryBasePath(_config.Server.CodeGenBinaryOutputPath);
+                foreach (var binaryOutputPath in _config.Server.CodeGenBinaryOutputPath)
+                {
+                    Log.InfoFormat("Deploying binaries to CodeGenBinaryOutputPath [{0}]", binaryOutputPath);
+                    DirectoryCopy(binaryBasePath, binaryOutputPath);
 
-                Log.InfoFormat("Deploying binaries to CodeGenBinaryOutputPath [{0}]", binaryOutputPath);
-                DirectoryCopy(binaryBasePath, binaryOutputPath);
-
-                // Case #1382: Recompile to regenerate PDB's
-                // CompileCode(outputPath);
+                    // Case #1382: Recompile to regenerate PDB's
+                    // CompileCode(outputPath);
+                }
             }
         }
 
@@ -318,7 +319,7 @@ namespace Kistl.Generator
             foreach (FileInfo file in files)
             {
                 string temppath = Path.Combine(destDirName, file.Name);
-                file.CopyTo(temppath, false);
+                file.CopyTo(temppath, true);
             }
 
             // Copy the subdirectories.

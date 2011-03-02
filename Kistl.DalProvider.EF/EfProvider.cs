@@ -34,10 +34,10 @@ namespace Kistl.DalProvider.Ef
             // force-load a few assemblies to the reflection-only context so the DAL provider can find them
             // this uses the AssemblyLoader directly because Assembly.ReflectionOnlyLoad doesn't go through all 
             // the moves of resolving AssemblyNames to files. See http://stackoverflow.com/questions/570117/
-            var reflectedInterfaceAssembly = Assembly.ReflectionOnlyLoad(Kistl.API.Helper.InterfaceAssembly);
+            var reflectedInterfaceAssembly = AssemblyLoader.ReflectionOnlyLoadFrom(Kistl.API.Helper.InterfaceAssembly);
             if (reflectedInterfaceAssembly == null)
                 throw new InvalidOperationException("Unable to load Kistl.Objects Assembly for reflection, no Entity Framework Metadata will be loaded");
-            var reflectedServerAssembly = Assembly.ReflectionOnlyLoad(EfProvider.ServerAssembly);
+            var reflectedServerAssembly = AssemblyLoader.ReflectionOnlyLoadFrom(EfProvider.ServerAssembly);
             if (reflectedServerAssembly == null)
                 throw new InvalidOperationException("Unable to load Kistl.Objects.EfImpl Assembly for reflection, no Entity Framework Metadata will be loaded");
 

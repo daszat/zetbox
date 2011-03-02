@@ -27,7 +27,7 @@ namespace Kistl.DalProvider.Ef
             // Build connectionString
             // metadata=res://*;provider=System.Data.SqlClient;provider connection string='Data Source=.\SQLEXPRESS;Initial Catalog=Kistl;Integrated Security=True;MultipleActiveResultSets=true;'
             StringBuilder sb = new StringBuilder();
-            sb.AppendFormat("metadata=res://*/Kistl.Objects.EfImpl.Model.csdl|res://*/Kistl.Objects.EfImpl.Model.msl|res://*/Kistl.Objects.EfImpl.Model.{0}.ssdl;", config.Server.SchemaProvider);
+            sb.AppendFormat("metadata=res://Kistl.Objects.EfImpl/Kistl.Objects.EfImpl.Model.csdl|res://Kistl.Objects.EfImpl/Kistl.Objects.EfImpl.Model.msl|res://Kistl.Objects.EfImpl/Kistl.Objects.EfImpl.Model.{0}.ssdl;", config.Server.SchemaProvider);
             sb.AppendFormat("provider={0};", config.Server.DatabaseProvider);
             sb.AppendFormat("provider connection string='{0}'", config.Server.ConnectionString);
 

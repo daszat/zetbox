@@ -70,7 +70,7 @@ namespace Kistl.API
                 _isInitialised = true;
 
                 InitialiseTargetAssemblyFolder(config);
-                InitialiseSearchPath(config.SourceFileLocation);
+                InitialiseSearchPath(config.AssemblySearchPaths);
 
                 // Start resolving Assemblies
                 AppDomain.CurrentDomain.AssemblyResolve += AssemblyLoader.AssemblyResolve;
@@ -78,11 +78,18 @@ namespace Kistl.API
             }
         }
 
-        private static void InitialiseSearchPath(string[] sourcefilelocations)
+        private static void InitialiseSearchPath(string[] paths)
         {
-            foreach (var path in sourcefilelocations ?? new string[] { })
+            foreach (var path in paths ?? new string[] { })
             {
-                AssemblyLoader.SearchPath.Add(Path.GetFullPath(path));
+                if (Path.IsPathRooted(path))
+                {
+                    AssemblyLoader.SearchPath.Add(path);
+                }
+                else
+                {
+                    AssemblyLoader.SearchPath.Add(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path));
+                }
             }
         }
 
@@ -211,79 +218,75 @@ namespace Kistl.API
             }
         }
 
-        private static Dictionary<string, bool> _requestedAssemblies = new Dictionary<string, bool>();
+        private static string _currentlyLoading = null;
 
         private static Assembly LoadAssemblyByName(string name, bool reflectOnly)
         {
             // Be nice & Thread Save
             lock (_lock)
             {
-                string key = string.Format("{0} - {1}", name.ToLower(), reflectOnly);
-                // prevent calling load assembly twice for the same assembly. 
-                // a second try wont load the assembly either
-                if (_requestedAssemblies.ContainsKey(key)) return null;
-                _requestedAssemblies[key] = true;
-
-                AssemblyName assemblyName = new AssemblyName(name);
-                string baseName = assemblyName.Name;
-
-                //// If not only for reflection and found in cache, then return the cached Assembly
-                //if (_Assemblies.ContainsKey(baseName) && !reflectOnly)
-                //    return _Assemblies[baseName];
-
-                // search for file to load
-                string sourceDll = LocateAssembly(baseName);
-
-                // assembly could not be found?
-                if (String.IsNullOrEmpty(sourceDll))
-                    return null;
-
-                // Copy files to destination folder, unless the target file exists
-                // the folder should have been cleared on initialisation and once
-                // an assembly is loaded, we cannot re-load the assembly anyways.
-                string targetDll = Path.Combine(TargetAssemblyFolder, baseName + ".dll");
-                Logging.AssemblyLoader.DebugFormat("Loading {0} (from {1}){2}", sourceDll, targetDll, reflectOnly ? " for reflection" : String.Empty);
                 try
                 {
-                    if (!File.Exists(targetDll))
+                    AssemblyName assemblyName = new AssemblyName(name);
+                    string baseName = assemblyName.Name;
+
+                    // Prevent loading twice, it doesn't help
+                    if (baseName == _currentlyLoading) return null;
+                    _currentlyLoading = baseName;
+
+                    // search for file to load
+                    string sourceDll = LocateAssembly(baseName);
+
+                    // assembly could not be found?
+                    if (String.IsNullOrEmpty(sourceDll))
+                        return null;
+
+                    // Copy files to destination folder, unless the target file exists
+                    // the folder should have been cleared on initialisation and once
+                    // an assembly is loaded, we cannot re-load the assembly anyways.
+                    string targetDll = Path.Combine(TargetAssemblyFolder, baseName + ".dll");
+                    Logging.AssemblyLoader.DebugFormat("Loading {0} (from {1}){2}", sourceDll, targetDll, reflectOnly ? " for reflection" : String.Empty);
+                    try
                     {
-                        File.Copy(sourceDll, targetDll, true);
-                        // Also copy .PDB Files.
-                        string sourcePDBFile = PdbFromDll(sourceDll);
-                        string targetPDBFile = PdbFromDll(targetDll);
-                        if (File.Exists(sourcePDBFile))
+                        if (!File.Exists(targetDll))
                         {
-                            File.Copy(sourcePDBFile, targetPDBFile, true);
+                            File.Copy(sourceDll, targetDll, true);
+                            // Also copy .PDB Files.
+                            string sourcePDBFile = PdbFromDll(sourceDll);
+                            string targetPDBFile = PdbFromDll(targetDll);
+                            if (File.Exists(sourcePDBFile))
+                            {
+                                File.Copy(sourcePDBFile, targetPDBFile, true);
+                            }
                         }
                     }
-                }
-                catch (Exception ex)
-                {
-                    Logging.AssemblyLoader.Warn("Error loading assembly", ex);
-                }
-                Assembly result = null;
+                    catch (Exception ex)
+                    {
+                        Logging.AssemblyLoader.Warn("Error loading assembly", ex);
+                    }
+                    Assembly result = null;
 
-                // Finally load the Assembly
-                if (reflectOnly)
-                {
-                    result = Assembly.ReflectionOnlyLoadFrom(targetDll);
-                }
-                else
-                {
-                    assemblyName.CodeBase = targetDll;
-                    result = Assembly.Load(assemblyName);
+                    // Finally load the Assembly
+                    if (reflectOnly)
+                    {
+                        result = Assembly.ReflectionOnlyLoadFrom(targetDll);
+                    }
+                    else
+                    {
+                        assemblyName.CodeBase = targetDll;
+                        result = Assembly.Load(assemblyName);
 
-                    // If the assembly could not be loaded, do nothing! Return null. 
-                    // See http://forums.microsoft.com/MSDN/ShowPost.aspx?PostID=1109769&SiteID=1
-                    //if (result != null)
-                    //{
-                    //    // Add to cache.
-                    //    _Assemblies[baseName] = result;
-                    //}
+                        // If the assembly could not be loaded, do nothing! Return null. 
+                        // See http://forums.microsoft.com/MSDN/ShowPost.aspx?PostID=1109769&SiteID=1
+                    }
+                    if (result == null)
+                        Logging.AssemblyLoader.WarnFormat("Cannot load {0}", baseName);
+                    return result;
                 }
-                if (result == null)
-                    Logging.AssemblyLoader.WarnFormat("Cannot load {0}", baseName);
-                return result;
+                finally
+                {
+                    _currentlyLoading = null;
+                }
             }
         }
 

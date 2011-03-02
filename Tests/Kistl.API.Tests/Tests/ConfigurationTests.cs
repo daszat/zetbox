@@ -23,7 +23,7 @@ namespace Kistl.API.Tests
         private void CheckConfig(KistlConfig cfg)
         {
             Assert.That(cfg.ConfigName, Is.Not.Empty, "ConfigName");
-            Assert.That(cfg.SourceFileLocation, Is.Not.Empty, "SourceFileLocation");
+            Assert.That(cfg.AssemblySearchPaths, Is.Not.Empty, "AssemblySearchPaths");
 
             Assert.That(cfg.Client, Is.Not.Null, "Client");
 

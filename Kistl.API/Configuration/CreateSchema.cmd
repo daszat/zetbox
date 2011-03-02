@@ -1,2 +1,2 @@
 ﻿@echo off
-xsd ..\..\bin\Debug\bin\Client\Kistl.API.dll  /type:Kistl.API.Configuration.KistlConfig
+xsd ..\..\bin\Debug\Common\Core\Kistl.API.dll  /type:Kistl.API.Configuration.KistlConfig

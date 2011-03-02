@@ -6,7 +6,7 @@
       <xs:element minOccurs="0" maxOccurs="1" name="ConfigName" type="xs:string" />
       <xs:element minOccurs="0" maxOccurs="1" name="Server" type="tns:ServerConfig" />
       <xs:element minOccurs="0" maxOccurs="1" name="Client" type="tns:ClientConfig" />
-      <xs:element minOccurs="0" maxOccurs="1" name="SourceFileLocation" type="tns:ArrayOfString1" />
+      <xs:element minOccurs="0" maxOccurs="1" name="AssemblySearchPaths" type="tns:ArrayOfString" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="ServerConfig">
@@ -18,14 +18,19 @@
       <xs:element minOccurs="0" maxOccurs="1" name="LogFilePath" type="xs:string" />
       <xs:element minOccurs="0" maxOccurs="1" name="CodeGenWorkingPath" type="xs:string" />
       <xs:element minOccurs="0" maxOccurs="1" name="CodeGenOutputPath" type="xs:string" />
-      <xs:element minOccurs="0" maxOccurs="1" name="CodeGenBinaryOutputPath" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="CodeGenBinaryOutputPath" type="tns:ArrayOfString" />
       <xs:element minOccurs="0" maxOccurs="1" name="CodeGenArchivePath" type="xs:string" />
-      <xs:element minOccurs="0" maxOccurs="1" name="Modules" type="tns:ArrayOfString" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Modules" type="tns:ArrayOfString1" />
       <xs:element minOccurs="0" maxOccurs="1" name="ClientFilesLocations" type="tns:ArrayOfClientFilesLocation" />
     </xs:sequence>
     <xs:attribute name="StartServer" type="xs:boolean" use="required" />
   </xs:complexType>
   <xs:complexType name="ArrayOfString">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfString1">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="Module" nillable="true" type="xs:string" />
     </xs:sequence>
@@ -46,16 +51,10 @@
     <xs:sequence>
       <xs:element minOccurs="1" maxOccurs="1" name="Culture" nillable="true" type="xs:string" />
       <xs:element minOccurs="1" maxOccurs="1" name="UICulture" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" maxOccurs="1" name="DocumentStore" type="xs:string" />
       <xs:element minOccurs="0" maxOccurs="1" name="DevelopmentEnvironment" nillable="true" type="xs:boolean" />
-      <xs:element minOccurs="0" maxOccurs="1" name="Modules" type="tns:ArrayOfString" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Modules" type="tns:ArrayOfString1" />
     </xs:sequence>
     <xs:attribute name="StartClient" type="xs:boolean" use="required" />
     <xs:attribute name="ThrowErrors" type="xs:boolean" use="required" />
-  </xs:complexType>
-  <xs:complexType name="ArrayOfString1">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="xs:string" />
-    </xs:sequence>
   </xs:complexType>
 </xs:schema>

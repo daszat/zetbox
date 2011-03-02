@@ -9,7 +9,10 @@
     <LogFilePath>bin\LogFiles</LogFilePath>
     <CodeGenWorkingPath>bin\CodeGenNext</CodeGenWorkingPath>
     <CodeGenOutputPath>bin\CodeGen</CodeGenOutputPath>
-    <CodeGenBinaryOutputPath>.</CodeGenBinaryOutputPath>
+    <CodeGenBinaryOutputPath>
+		<string>.\bin\Debug</string>
+		<string>.\bin\Debug\Tests</string>
+	</CodeGenBinaryOutputPath>
     <CodeGenArchivePath>Backup</CodeGenArchivePath>
     <Modules>
       <Module>Kistl.API.ApiModule, Kistl.API</Module>
@@ -31,12 +34,16 @@
       <Module>Kistl.DalProvider.Ef.Generator.EfGeneratorProvider, Kistl.DalProvider.Ef.Generator</Module>
     </Modules>
   </Server>
-  <SourceFileLocation>
-    <!-- default probe path -->
-    <string>F:\CruiseControl.NET\Projects\ZBox-EF\bin\CodeGen\bin\Debug</string>
-    <!-- common libaries -->
-    <string>F:\CruiseControl.NET\Projects\ZBox-EF\bin\Debug\bin\Common</string>
-    <!-- Fallback path for local development -->
-    <string>F:\CruiseControl.NET\Projects\ZBox-EF\bin\Debug\bin\Server\fallback</string>
-  </SourceFileLocation>
+  <AssemblySearchPaths>
+    <string>Common\Core</string>
+    <string>Common\Core.Generated</string>
+    <string>Common\Core.Fallback</string>
+    <string>Common\App.Ini50</string>
+    <string>Common\App.ZBoxServer\Core</string>
+    <string>Server\EF</string>
+    <string>Server\EF.Generated</string>
+    <string>Server\EF.Fallback</string>
+    <string>Server\App.ZBox</string>
+    <string>Server\App.Ini50</string>
+  </AssemblySearchPaths>
 </KistlConfig>
