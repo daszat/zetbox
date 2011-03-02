@@ -10,7 +10,7 @@
     <CodeGenWorkingPath>bin\CodeGenNext</CodeGenWorkingPath>
     <CodeGenOutputPath>bin\CodeGen</CodeGenOutputPath>
     <CodeGenBinaryOutputPath>
-		<string>.\bin\Debug</string>
+		<string>bin\Debug</string>
 	</CodeGenBinaryOutputPath>
     <CodeGenArchivePath>Backup</CodeGenArchivePath>
     <Modules>

@@ -9,7 +9,9 @@
     <LogFilePath>bin\LogFiles</LogFilePath>
     <CodeGenWorkingPath>bin\CodeGenNext</CodeGenWorkingPath>
     <CodeGenOutputPath>bin\CodeGen</CodeGenOutputPath>
-    <CodeGenBinaryOutputPath>.</CodeGenBinaryOutputPath>
+    <CodeGenBinaryOutputPath>
+      <string>bin\Debug</string>
+    </CodeGenBinaryOutputPath>
     <CodeGenArchivePath>Backup</CodeGenArchivePath>
     <Modules>
       <Module>Kistl.API.ApiModule, Kistl.API</Module>
@@ -39,6 +41,7 @@
     <string>Server\NH</string>
     <string>Server\NH.Generated</string>
     <string>Server\NH.Fallback</string>
+    <string>Server\EF</string>
     <string>Common\App.ZBox</string>
     <string>Server\App.ZBox</string>
     <string>Common\App.Ini50</string>
