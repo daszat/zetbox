@@ -26,7 +26,7 @@
             </div>
             <div id="secondary" class="sidebar">
                 <ctrls:Widget runat="server" Title="<%$ Resources:Strings, ApplicationTitle %>">
-                    <asp:HyperLink runat="server" Text="<%$ Resources:Strings, DownloadApplication %>" NavigateUrl="~/Client/Kistl.Client.Bootstrapper.exe" />
+                    <asp:HyperLink runat="server" Text="<%$ Resources:Strings, DownloadApplication %>" NavigateUrl="~/Bootstrapper/Kistl.Client.Bootstrapper.exe" />
                     <br />
                     <br />
                 </ctrls:Widget>

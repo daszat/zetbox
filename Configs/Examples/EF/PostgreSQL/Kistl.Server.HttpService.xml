@@ -30,9 +30,10 @@
       <Module>Kistl.DalProvider.Ef.Generator.EfGeneratorProvider, Kistl.DalProvider.Ef.Generator</Module>
     </Modules>
     <ClientFilesLocations>
-      <Location Name="Client">P:\Kistl\bin\Debug\bin\Client</Location>
-      <Location Name="Common">P:\Kistl\bin\Debug\bin\Common</Location>
-      <Location Name="CodeGen">P:\Kistl\bin\CodeGen\bin\Debug</Location>
+      <Location Name="Exe">P:\Kistl\bin\Debug\Kistl.Client.WPF.exe</Location>
+      <Location Name="Configs">P:\Kistl\Configs\Examples\Kistl.Client.WPF.xml</Location>
+      <Location Name="Common">P:\Kistl\bin\Debug\Common</Location>
+      <Location Name="Client">P:\Kistl\bin\Debug\Client</Location>
     </ClientFilesLocations>
   </Server>
   <SourceFileLocation>
