@@ -2,9 +2,12 @@
   <Target Name="Build">
     <!--
     <Message Importance="high" Text="clean temp output" />
-    <RemoveDir Directories="bin" />
+    <RemoveDir Directories="bin;Kistl.Server.HttpService\Common;Kistl.Server.HttpService\Bootstrapper;Kistl.Server.HttpService\Client;Kistl.Server.HttpService\Server" />
     <MakeDir Directories="bin" />
     -->
+
+
+
 
     <Message Importance="high" Text="cleaning solution" />
     <MSBuild Projects="Kistl.Complete.sln" Targets="Clean" />
@@ -13,6 +16,8 @@
     <MSBuild Projects="Kistl.Complete.sln" Targets="Build" Properties="Configuration=Linux.Debug" />
 
     <Exec Command="cp Kistl.Server.Service\app.linux.config bin\Debug\Kistl.Server.Service.exe.config" />
+
+
 
     <Message Importance="high" Text="resetting database" />
     <Exec Command="./!ResetDatabase.sh" />
@@ -54,3 +59,4 @@
 
   </Target>
 </Project>
+

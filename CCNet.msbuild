@@ -1,7 +1,7 @@
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Target Name="Build">
     <Message Importance="high" Text="clean temp output" />
-    <RemoveDir Directories="bin" />
+    <RemoveDir Directories="bin;Kistl.Server.HttpService\Common;Kistl.Server.HttpService\Bootstrapper;Kistl.Server.HttpService\Client;Kistl.Server.HttpService\Server" />
     <MakeDir Directories="bin" />
 
     <Message Importance="high" Text="Create temp dir for database backup" />
