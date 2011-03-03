@@ -176,10 +176,13 @@ namespace Kistl.Generator
             var engine = new Engine(ToolsetDefinitionLocations.Registry);
             engine.RegisterLogger(new ConsoleLogger(LoggerVerbosity.Minimal));
 
+#if !MONO
+            // TODO: implement FileLogger in mono, reenable this
             var logger = new FileLogger();
             logger.Parameters = String.Format(@"logfile={0}", Path.Combine(workingPath, "compile.log"));
             logger.Verbosity = LoggerVerbosity.Detailed;
             engine.RegisterLogger(logger);
+#endif
 
             engine.GlobalProperties.SetProperty("Configuration", GetConfiguration());
             engine.GlobalProperties.SetProperty("OutputPathOverride", binPath);
