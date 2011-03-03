@@ -64,20 +64,52 @@ namespace Kistl.Server
 
             foreach (var dir in config.Server.ClientFilesLocations)
             {
-                var root = Path.GetFullPath(dir.Value);
-
-                foreach (var f in Directory.GetFiles(dir.Value, "*.*", SearchOption.AllDirectories))
+                switch (dir.Name)
                 {
-                    var fi = new System.IO.FileInfo(f);
-                    if (!fi.FullName.StartsWith(root)) throw new InvalidOperationException(String.Format("Aborting because [{0}] is outside the current root [{1}].", fi.FullName, root));
+                    case "Exe":
+                        if (File.Exists(dir.Value))
+                        {
+                            var directory = Path.GetDirectoryName(dir.Value);
 
-                    var relPath = Path.Combine(dir.Name, RelativePath(root, Path.GetDirectoryName(fi.FullName)));
+                            // need to collect .config
+                            foreach (var f in Directory.GetFiles(directory, Path.GetFileName(dir.Value) + "*", SearchOption.TopDirectoryOnly))
+                            {
+                                result.Add(InspectFile("Exe", Path.GetFullPath(directory), f));
+                            }
+                        }
+                        break;
+                    case "Configs":
+                        if (File.Exists(dir.Value))
+                        {
+                            var fi = InspectFile("Configs", Path.GetFullPath(Path.GetDirectoryName(dir.Value)), dir.Value);
+                            result.Add(fi);
+                        }
+                        break;
+                    default:
+                        {
+                            var root = Path.GetFullPath(dir.Value);
 
-                    result.Add(new FileInfo() { Name = fi.Name, DestPath = relPath, Date = fi.LastWriteTimeUtc, Size = fi.Length, Type = GetFileType(fi) });
+                            foreach (var f in Directory.GetFiles(dir.Value, "*.*", SearchOption.AllDirectories))
+                            {
+                                var fi = InspectFile(dir.Name, root, f);
+                                result.Add(fi);
+                            }
+                        }
+                        break;
                 }
             }
 
             return result.ToArray();
+        }
+
+        private FileInfo InspectFile(string baseDir, string root, string f)
+        {
+            var fi = new System.IO.FileInfo(f);
+            if (!fi.FullName.StartsWith(root)) throw new InvalidOperationException(String.Format("Aborting because [{0}] is outside the current root [{1}].", fi.FullName, root));
+
+            var relPath = Path.Combine(baseDir, RelativePath(root, Path.GetDirectoryName(fi.FullName)));
+            var fileInfo = new FileInfo() { Name = fi.Name, DestPath = relPath, Date = fi.LastWriteTimeUtc, Size = fi.Length, Type = GetFileType(fi) };
+            return fileInfo;
         }
 
         /// <summary>
@@ -110,7 +142,9 @@ namespace Kistl.Server
             var parts = path.Split('/');
 
             var dir = config.Server.ClientFilesLocations.Single(i => i.Name == parts[0]);
-            var file = Path.GetFullPath(Path.Combine(dir.Value, String.Join(Path.DirectorySeparatorChar.ToString(), parts.Skip(1).ToArray())));
+            var file = dir.Name == "Exe" || dir.Name == "Configs"
+                ? Path.GetFullPath(Path.Combine(Path.GetDirectoryName(dir.Value),String.Join(Path.DirectorySeparatorChar.ToString(), parts.Skip(1).ToArray()))) // Exe and Configs reference file directly
+                : Path.GetFullPath(Path.Combine(dir.Value, String.Join(Path.DirectorySeparatorChar.ToString(), parts.Skip(1).ToArray())));
             if (file.StartsWith(Path.GetFullPath(dir.Value)))
             {
                 return file;

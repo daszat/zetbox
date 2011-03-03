@@ -1453,7 +1453,7 @@ namespace Kistl.Server.SchemaManagement
         }
         public void DoChange_1_1_Storage(Relation rel)
         {
-            Log.InfoFormat("Chaning 1:1 Relation Storage: {0}", rel.GetAssociationName());
+            Log.InfoFormat("Changing 1:1 Relation Storage: {0}", rel.GetAssociationName());
             var saved = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
 
             if (saved.Storage == StorageType.Replicate)
@@ -1493,7 +1493,7 @@ namespace Kistl.Server.SchemaManagement
                 }
                 else
                 {
-                    throw new InvalidOperationException("Unexpected saved stroage type " + saved.Storage);
+                    throw new InvalidOperationException("Unexpected saved stroage type " + saved.Storage.ToString());
                 }
 
                 New_1_1_Relation_CreateColumns(rel, relEnd, otherEnd, role);

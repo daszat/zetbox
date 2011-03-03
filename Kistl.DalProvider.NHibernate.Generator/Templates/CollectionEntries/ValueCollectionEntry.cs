@@ -96,7 +96,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries
                 }
                 else
                 {
-                    Logging.Log.ErrorFormat("tried to create ReloadReferenceBody for non-ObjectClass: [{0}]", prop.ObjectClass);
+                    Logging.Log.ErrorFormat("tried to create ReloadReferenceBody for property [{0}] attached to non-ObjectClass: [{1}]", prop.Name, prop.ObjectClass);
                 }
             }
             else

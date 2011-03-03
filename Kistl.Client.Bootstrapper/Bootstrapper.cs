@@ -2,15 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using System.Threading;
-using System.IO;
-using System.Security;
 using System.Diagnostics;
+using System.Drawing;
+using System.IO;
+using System.Linq;
 using System.Net;
+using System.Security;
+using System.Text;
+using System.Threading;
+using System.Windows.Forms;
 
 namespace Kistl.Client.Bootstrapper
 {
@@ -126,7 +126,7 @@ namespace Kistl.Client.Bootstrapper
 
         private string PrepareTargetDir()
         {
-            var targetDir = System.Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            var targetDir = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
             targetDir = Path.Combine(targetDir, "dasz");
             targetDir = Path.Combine(targetDir, "ZBox");
             targetDir = Path.Combine(targetDir, "BootStrapper");
@@ -140,9 +140,9 @@ namespace Kistl.Client.Bootstrapper
         {
             var targetFile = f.GetFullFileName(targetDir);
 
-            if(f.Type == FileType.Exec)
+            if (f.Type == FileType.Exec)
             {
-                    startExec = targetFile;
+                startExec = targetFile;
             }
 
             if (File.Exists(targetFile))

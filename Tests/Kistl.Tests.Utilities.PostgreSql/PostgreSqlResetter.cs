@@ -139,7 +139,7 @@ namespace Kistl.Tests.Utilities.PostgreSql
             if (!p.WaitForExit(RESET_TIMEOUT * 1000))
             {
                 p.Kill();
-                throw new InvalidOperationException(String.Format("{0} did not completed within {0} seconds", util, RESET_TIMEOUT));
+                throw new InvalidOperationException(String.Format("{0} did not complete within {0} seconds", util, RESET_TIMEOUT));
             }
 
             return p.ExitCode;

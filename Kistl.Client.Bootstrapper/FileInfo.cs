@@ -31,7 +31,16 @@ namespace Kistl.Client.Bootstrapper
 
         public string GetFullFileName(string targetDir)
         {
-            return Path.GetFullPath(Path.Combine(targetDir, Path.Combine(DestPath, Name)));
+            switch (DestPath)
+            {
+                case "Exe":
+                    return Path.GetFullPath(Path.Combine(targetDir, Path.Combine(String.Empty, Name)));
+                case "Config":
+                case "Configs":
+                    return Path.GetFullPath(Path.Combine(targetDir, Path.Combine(DestPath, "DefaultConfig.xml")));
+                default:
+                    return Path.GetFullPath(Path.Combine(targetDir, Path.Combine(DestPath, Name)));
+            }
         }
     }
 }
