@@ -14,7 +14,24 @@ namespace Kistl.Generator
 
         public void Initialize(IEventSource eventSource)
         {
+#if MONO
+            // see https://bugzilla.novell.com/show_bug.cgi?id=676671
+            eventSource.BuildFinished += AnyEventRaisedHandler;
+            eventSource.BuildStarted += AnyEventRaisedHandler;
+            eventSource.CustomEventRaised += AnyEventRaisedHandler;
+            eventSource.ErrorRaised += AnyEventRaisedHandler;
+            eventSource.MessageRaised += AnyEventRaisedHandler;
+            eventSource.ProjectFinished += AnyEventRaisedHandler;
+            eventSource.ProjectStarted += AnyEventRaisedHandler;
+            eventSource.StatusEventRaised += AnyEventRaisedHandler;
+            eventSource.TargetFinished += AnyEventRaisedHandler;
+            eventSource.TargetStarted += AnyEventRaisedHandler;
+            eventSource.TaskFinished += AnyEventRaisedHandler;
+            eventSource.TaskStarted += AnyEventRaisedHandler;
+            eventSource.WarningRaised += AnyEventRaisedHandler;
+#else
             eventSource.AnyEventRaised += AnyEventRaisedHandler;
+#endif
         }
 
         private void AnyEventRaisedHandler(object sender, BuildEventArgs e)
