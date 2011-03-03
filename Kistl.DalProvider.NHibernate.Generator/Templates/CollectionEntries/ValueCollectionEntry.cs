@@ -11,6 +11,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries
     using Kistl.App.Extensions;
     using Kistl.Generator.Extensions;
     using Templates = Kistl.Generator.Templates;
+    using Kistl.API.Utils;
 
     public class ValueCollectionEntry
         : Templates.CollectionEntries.ValueCollectionEntry
@@ -86,8 +87,23 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries
         protected override void ApplyReloadReferenceBody()
         {
             string referencedInterface = prop.ObjectClass.Module.Namespace + "." + prop.ObjectClass.Name;
-            string referencedImplementation = Mappings.ObjectClassHbm.GetWrapperTypeReference(prop.ObjectClass as ObjectClass, this.Settings);
-            ObjectClasses.ReloadOneReference.Call(Host, ctx, referencedInterface, referencedImplementation, "Parent", "Parent", "_fk_Parent", "_fk_guid_Parent", IsExportable());
+            var cls = prop.ObjectClass as ObjectClass;
+            if (cls == null)
+            {
+                if (prop.ObjectClass == null)
+                {
+                    Logging.Log.ErrorFormat("tried to create ReloadReferenceBody for unattached property: [{0}]", prop.Name);
+                }
+                else
+                {
+                    Logging.Log.ErrorFormat("tried to create ReloadReferenceBody for non-ObjectClass: [{0}]", prop.ObjectClass);
+                }
+            }
+            else
+            {
+                string referencedImplementation = Mappings.ObjectClassHbm.GetWrapperTypeReference(prop.ObjectClass as ObjectClass, this.Settings);
+                ObjectClasses.ReloadOneReference.Call(Host, ctx, referencedInterface, referencedImplementation, "Parent", "Parent", "_fk_Parent", "_fk_guid_Parent", IsExportable());
+            }
         }
     }
 }
