@@ -61,9 +61,15 @@ namespace Kistl.API.Tests
         [Test]
         public void FromStream()
         {
-            using (FileStream s = File.OpenRead(KistlConfig.GetDefaultConfigName(ConfigFile)))
+            var filename = KistlConfig.GetDefaultConfigName(ConfigFile);
+            Assert.That(filename, Is.Not.Empty);
+            Assert.That(File.Exists(filename), Is.True, String.Format("configfile {0} doesn't exist", filename));
+
+            using (FileStream s = File.OpenRead(filename))
             {
+                
                 KistlConfig cfg = KistlConfig.FromStream(s);
+                Assert.That(cfg, Is.Not.Null);
                 Assert.That(cfg.ConfigFilePath, Is.Null);
                 CheckConfig(cfg);
             }
