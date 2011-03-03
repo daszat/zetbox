@@ -59,6 +59,7 @@ namespace <%= rel.A.Type.Module.Namespace %>
 <%
 	foreach (var prop in ctx.GetQuery<ValueTypeProperty>()
         .Where(p => p.IsList)
+        .ToList() // NHibernate-on-linux workaround
         .OrderBy(p => p.ObjectClass.Name)
         .ThenBy(p => p.Name))
 	{
@@ -77,6 +78,7 @@ namespace <%= prop.ObjectClass.Module.Namespace %>
 <%
 	foreach (var prop in ctx.GetQuery<CompoundObjectProperty>()
         .Where(p => p.IsList)
+        .ToList() // NHibernate-on-linux workaround
         .OrderBy(p => p.ObjectClass.Name)
         .ThenBy(p => p.Name))
 	{
