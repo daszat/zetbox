@@ -4,19 +4,17 @@ namespace Kistl.Generator
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.IO;
     using System.Linq;
     using System.Text;
     using System.Threading;
-
     using Autofac;
-
     using Kistl.API;
     using Kistl.API.Configuration;
     using Kistl.API.Server;
     using Kistl.API.Utils;
     using Kistl.App.Base;
-
     using Microsoft.Build.BuildEngine;
     using Microsoft.Build.Framework;
 
@@ -181,9 +179,9 @@ namespace Kistl.Generator
             Directory.CreateDirectory(binPath);
 
             var engine = new Engine(ToolsetDefinitionLocations.Registry);
+            engine.RegisterLogger(new Log4NetLogger());
 #if MONO
             engine.RegisterLogger(new ConsoleLogger(LoggerVerbosity.Normal));
-            engine.RegisterLogger(new Log4NetLogger());
 #else
             engine.RegisterLogger(new ConsoleLogger(LoggerVerbosity.Minimal));
             // TODO: implement FileLogger in mono, reenable this
@@ -252,6 +250,55 @@ namespace Kistl.Generator
             return AppDomain.CurrentDomain.BaseDirectory;
         }
 
+#if MONO
+        private static bool CompileSingle(Engine engine, AbstractBaseGenerator gen, string workingPath, string target)
+        {
+            try
+            {
+                using (log4net.NDC.Push("Compiling " + gen.Description))
+                {
+                    var props = String.Join(";", engine.GlobalProperties.OfType<BuildProperty>().Select(p => String.Format("{0}={1}", p.Name, p.Value)).ToArray());
+                    var args = String.Format("\"/p:{0}\" {1}", props, Helper.PathCombine(workingPath, gen.TargetNameSpace, gen.ProjectFileName));
+
+                    var pi = new ProcessStartInfo("xbuild", args);
+                    pi.UseShellExecute = false;
+                    pi.RedirectStandardOutput = true;
+                    pi.RedirectStandardError = true;
+                    pi.ErrorDialog = false;
+                    pi.CreateNoWindow = true;
+
+                    Log.InfoFormat("Calling xbuild with arguments [{0}]", args);
+                    var p = Process.Start(pi);
+                    p.ErrorDataReceived += (object sender, DataReceivedEventArgs e) =>
+                    {
+                        if (!String.IsNullOrEmpty(e.Data))
+                            Log.Error(e.Data);
+                    };
+                    p.BeginErrorReadLine();
+
+                    p.OutputDataReceived += (object sender, DataReceivedEventArgs e) =>
+                    {
+                        if (!String.IsNullOrEmpty(e.Data))
+                            Log.Info(e.Data);
+                    };
+                    p.BeginOutputReadLine();
+
+                    if (!p.WaitForExit(100 * 1000))
+                    {
+                        p.Kill();
+                        throw new InvalidOperationException(String.Format("xbuild did not complete within 100 seconds"));
+                    }
+
+                    return p.ExitCode == 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Failed compiling " + gen.Description, ex);
+                return false;
+            }
+        }
+#else
         private static bool CompileSingle(Engine engine, AbstractBaseGenerator gen, string workingPath, string target)
         {
             try
@@ -280,7 +327,7 @@ namespace Kistl.Generator
                 return false;
             }
         }
-
+#endif
         private void PublishOutput()
         {
             var outputPath = _config.Server.CodeGenOutputPath;

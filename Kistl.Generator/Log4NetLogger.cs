@@ -8,11 +8,11 @@ namespace Kistl.Generator
     using Microsoft.Build.Framework;
 
     public sealed class Log4NetLogger
-        : ILogger
+        : INodeLogger, ILogger
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Generator");
 
-        public void Initialize(IEventSource eventSource)
+        public void Initialize(IEventSource eventSource, int nodeCount)
         {
 #if MONO
             // see https://bugzilla.novell.com/show_bug.cgi?id=676671
@@ -32,6 +32,11 @@ namespace Kistl.Generator
 #else
             eventSource.AnyEventRaised += AnyEventRaisedHandler;
 #endif
+        }
+
+        public void Initialize(IEventSource eventSource)
+        {
+            this.Initialize(eventSource, 1);
         }
 
         private void AnyEventRaisedHandler(object sender, BuildEventArgs e)
@@ -55,5 +60,6 @@ namespace Kistl.Generator
             get;
             set;
         }
+
     }
 }
