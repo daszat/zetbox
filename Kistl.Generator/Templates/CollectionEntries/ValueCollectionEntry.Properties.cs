@@ -56,7 +56,7 @@ namespace Kistl.Generator.Templates.CollectionEntries
 
         protected override void ApplyBIndexPropertyTemplate()
         {
-            throw new NotImplementedException();
+            this.WriteLine("// TODO: implement element ordering");
         }
     }
 }
