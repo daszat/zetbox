@@ -257,7 +257,7 @@ namespace Kistl.Generator
             {
                 using (log4net.NDC.Push("Compiling " + gen.Description))
                 {
-                    var props = String.Join(";", engine.GlobalProperties.OfType<BuildProperty>().Select(p => String.Format("{0}={1}", p.Name, p.Value)).ToArray());
+                    var props = String.Join(";", engine.GlobalProperties.OfType<BuildProperty>().Select(prop => String.Format("{0}={1}", prop.Name, prop.Value)).ToArray());
                     var args = String.Format("\"/p:{0}\" {1}", props, Helper.PathCombine(workingPath, gen.TargetNameSpace, gen.ProjectFileName));
 
                     var pi = new ProcessStartInfo("xbuild", args);
