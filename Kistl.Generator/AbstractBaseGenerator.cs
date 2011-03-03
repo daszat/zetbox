@@ -151,29 +151,38 @@ namespace Kistl.Generator
 
         protected virtual string RunTemplate(IKistlContext ctx, string templateName, string filename, params object[] args)
         {
-            var gen = new TemplateExecutor();
+            try
+            {
+                var gen = new TemplateExecutor();
 
-            gen.Settings.Add("basetemplatepath", "Kistl.Generator.Templates");
-            gen.Settings.Add("providertemplatenamespace", TemplateProviderNamespace);
-            gen.Settings.Add("providertemplateassembly", TemplateProviderAssembly);
+                gen.Settings.Add("basetemplatepath", "Kistl.Generator.Templates");
+                gen.Settings.Add("providertemplatenamespace", TemplateProviderNamespace);
+                gen.Settings.Add("providertemplateassembly", TemplateProviderAssembly);
 
-            gen.Settings.Add("template", templateName);
+                gen.Settings.Add("template", templateName);
 
-            gen.Settings.Add("targetdir", this.CodeBasePath);
-            gen.Settings.Add("output", filename);
-            gen.Settings.Add("logfile", "TemplateCodegenLog.txt");
+                gen.Settings.Add("targetdir", this.CodeBasePath);
+                gen.Settings.Add("output", filename);
+                gen.Settings.Add("logfile", "TemplateCodegenLog.txt");
 
-            gen.Settings.Add("extrasuffix", ExtraSuffix);
-            gen.Settings.Add("namespaces", String.Join(",", RequiredNamespaces.ToArray()));
-            gen.Settings.Add("implementationnamespace", "Kistl.DalProvider." + BaseName);
+                gen.Settings.Add("extrasuffix", ExtraSuffix);
+                gen.Settings.Add("namespaces", String.Join(",", RequiredNamespaces.ToArray()));
+                gen.Settings.Add("implementationnamespace", "Kistl.DalProvider." + BaseName);
 
-            gen.Settings.Add("propertydescriptorname", CustomPropertyDescriptorName);
+                gen.Settings.Add("propertydescriptorname", CustomPropertyDescriptorName);
 
-            gen.TemplateParameters = new object[] { ctx }.Concat(args).ToArray();
+                gen.TemplateParameters = new object[] { ctx }.Concat(args).ToArray();
 
-            gen.ExecuteTemplate();
+                gen.ExecuteTemplate();
 
-            return filename;
+                return filename;
+            }
+            catch (Exception ex)
+            {
+                var msg = String.Format("Error while rendering template [{0}] to [{1}]", templateName, filename);
+                Log.Error(msg, ex);
+                throw new ApplicationException(msg, ex);
+            }
         }
 
         protected virtual string Generate_AssemblyInfo(IKistlContext ctx)
