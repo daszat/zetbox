@@ -46,7 +46,7 @@ this.WriteObjects("\r\n");
 #line 25 "P:\Kistl\Kistl.Generator\InterfaceTemplates\CollectionEntries\CollectionEntries.cst"
 foreach (var rel in ctx.GetQuery<Relation>()
         .Where(r => r.Storage == StorageType.Separate)
-        .ToList()
+        .ToList() // GetRelationClassName is not mapped
         .OrderBy(r => r.GetRelationClassName()))
     {
         ObjectCollectionEntry.Call(Host, ctx, rel);
@@ -55,6 +55,7 @@ foreach (var rel in ctx.GetQuery<Relation>()
 
     foreach (var prop in ctx.GetQuery<ValueTypeProperty>()
         .Where(p => p.IsList)
+        .ToList() // NHibernate-on-linux workaround
         .OrderBy(p => p.ObjectClass.Name)
         .ThenBy(p => p.Name))
     {
@@ -63,6 +64,7 @@ foreach (var rel in ctx.GetQuery<Relation>()
     
     foreach (var prop in ctx.GetQuery<CompoundObjectProperty>()
         .Where(p => p.IsList)
+        .ToList() // NHibernate-on-linux workaround
         .OrderBy(p => p.ObjectClass.Name)
         .ThenBy(p => p.Name))
     {
