@@ -174,9 +174,10 @@ namespace Kistl.Generator
             Directory.CreateDirectory(binPath);
 
             var engine = new Engine(ToolsetDefinitionLocations.Registry);
+#if MONO
+            engine.RegisterLogger(new ConsoleLogger(LoggerVerbosity.Normal));
+#else
             engine.RegisterLogger(new ConsoleLogger(LoggerVerbosity.Minimal));
-
-#if !MONO
             // TODO: implement FileLogger in mono, reenable this
             var logger = new FileLogger();
             logger.Parameters = String.Format(@"logfile={0}", Path.Combine(workingPath, "compile.log"));
