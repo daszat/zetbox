@@ -212,7 +212,7 @@ namespace Kistl.Generator
                 {
                     foreach (var gen in gens)
                     {
-                        result &= CompileSingle(engine, gen, null);
+                        result &= CompileSingle(engine, gen, workingPath, null);
                     }
                 }
 
@@ -227,7 +227,7 @@ namespace Kistl.Generator
                     {
                         foreach (var target in gen.AdditionalTargets)
                         {
-                            result &= CompileSingle(engine, gen, target);
+                            result &= CompileSingle(engine, gen, workingPath, target);
                         }
                     }
                 }
@@ -251,7 +251,7 @@ namespace Kistl.Generator
             return AppDomain.CurrentDomain.BaseDirectory;
         }
 
-        private static bool CompileSingle(Engine engine, AbstractBaseGenerator gen, string target)
+        private static bool CompileSingle(Engine engine, AbstractBaseGenerator gen, string workingPath, string target)
         {
             try
             {
@@ -259,7 +259,7 @@ namespace Kistl.Generator
                 {
                     Log.DebugFormat("Loading MsBuild Project");
                     var proj = new Project(engine);
-                    proj.Load(gen.ProjectFileName);
+                    proj.Load(Path.Combine(workingPath, gen.ProjectFileName));
 
                     Log.DebugFormat("Compiling");
                     if (engine.BuildProject(proj, target))

@@ -47,10 +47,7 @@ namespace Kistl.Generator
             generatedFileNames.AddRange(Generate_Other(ctx));
 
             Log.Info("  Project File");
-            string projectFileName = Generate_ProjectFile(ctx, ProjectGuid, generatedFileNames, _schemaProviders);
-
-            // Case #1382
-            this.ProjectFileName = Path.Combine(this.CodeBasePath, projectFileName);
+            Generate_ProjectFile(ctx, ProjectGuid, generatedFileNames, _schemaProviders);
         }
 
         protected virtual void SaveKeyFile()
@@ -124,9 +121,9 @@ namespace Kistl.Generator
         public abstract string ProjectGuid { get; }
 
         /// <summary>
-        /// The name of the generated MsBuild project file. This is only available after generating the source code.
+        /// The name of the generated MsBuild project file.
         /// </summary>
-        public string ProjectFileName { get; private set; }
+        public string ProjectFileName { get { return TargetNameSpace + ".csproj"; } }
 
         /// <summary>
         /// The type name of the custom PropertyDescriptor.
@@ -228,7 +225,7 @@ namespace Kistl.Generator
         protected virtual string Generate_ProjectFile(IKistlContext ctx, string projectGuid, List<string> generatedFileNames, IEnumerable<ISchemaProvider> schemaProviders)
         {
             return RunTemplate(ctx, "ProjectFile",
-                TargetNameSpace + ".csproj",
+                ProjectFileName,
                 projectGuid,
                 generatedFileNames.Where(s => !String.IsNullOrEmpty(s)).ToList(),
                 schemaProviders);
