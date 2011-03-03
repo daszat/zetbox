@@ -97,6 +97,9 @@ namespace Kistl.Server.Service
                         { "generate", "generates and compiles new data classes",
                             v => { if (v != null) { actions.Add((c, args) => c.Resolve<Kistl.Generator.Compiler>().GenerateCode()); } }
                             },
+                        { "compile", "compiles new data classes from already generated code; used mostly for testing",
+                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<Kistl.Generator.Compiler>().CompileCode()); } }
+                            },
                         { "fix", "[DEVEL] run ad-hoc fixes against the database",
                             v => { if (v != null) { actions.Add((c, args) => c.Resolve<IServer>().RunFixes()); } }
                             },

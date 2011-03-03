@@ -65,6 +65,13 @@ namespace Kistl.Generator
             }
         }
 
+        public void CompileCode()
+        {
+            CompileCodeOnStaThread(_config.Server.CodeGenWorkingPath);
+            ArchiveOldOutput();
+            PublishOutput();
+        }
+
         private void CompileCodeOnStaThread(string workingPath)
         {
             Exception failed = null;
@@ -189,6 +196,12 @@ namespace Kistl.Generator
             engine.GlobalProperties.SetProperty("OutputPathOverride", binPath);
             engine.GlobalProperties.SetProperty("KistlAPIPathOverride", kistlApiPath);
 
+            Log.Info("Dumping engine Properties");
+            foreach (BuildProperty prop in engine.GlobalProperties)
+            {
+                Log.InfoFormat("{0} = {1}", prop.Name, prop.Value);
+            }
+
             try
             {
                 var result = true;
@@ -249,12 +262,16 @@ namespace Kistl.Generator
                     proj.Load(gen.ProjectFileName);
 
                     Log.DebugFormat("Compiling");
-                    if (!engine.BuildProject(proj, target))
+                    if (engine.BuildProject(proj, target))
                     {
-                        throw new ApplicationException(String.Format("Failed to compile {0}", gen.Description));
+                        return true;
+                    }
+                    else
+                    {
+                        Log.ErrorFormat("Failed to compile {0}", gen.Description);
+                        return false;
                     }
                 }
-                return true;
             }
             catch (Exception ex)
             {
