@@ -12,7 +12,7 @@ namespace Kistl.Generator
 
     public abstract class AbstractBaseGenerator
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Generator");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Generator");
 
         private readonly IEnumerable<ISchemaProvider> _schemaProviders;
         protected IEnumerable<ISchemaProvider> SchemaProviders

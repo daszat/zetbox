@@ -124,6 +124,7 @@
     <Compile Include="Extensions\PropertyChecks.cs" />
     <Compile Include="Extensions\Reflection.cs" />
     <Compile Include="BaseGeneratorModule.cs" />
+    <Compile Include="Log4NetLogger.cs" />
     <Compile Include="ResourceTemplate.cs" />
     <Compile Include="TemplateExecutor.cs" />
     <Compile Include="Templates\AssemblyInfoTemplate.cs">

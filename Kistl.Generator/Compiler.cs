@@ -183,6 +183,7 @@ namespace Kistl.Generator
             var engine = new Engine(ToolsetDefinitionLocations.Registry);
 #if MONO
             engine.RegisterLogger(new ConsoleLogger(LoggerVerbosity.Normal));
+            engine.RegisterLogger(new Log4NetLogger());
 #else
             engine.RegisterLogger(new ConsoleLogger(LoggerVerbosity.Minimal));
             // TODO: implement FileLogger in mono, reenable this
@@ -259,7 +260,7 @@ namespace Kistl.Generator
                 {
                     Log.DebugFormat("Loading MsBuild Project");
                     var proj = new Project(engine);
-                    proj.Load(Path.Combine(workingPath, gen.ProjectFileName));
+                    proj.Load(Helper.PathCombine(workingPath, gen.TargetNameSpace, gen.ProjectFileName));
 
                     Log.DebugFormat("Compiling");
                     if (engine.BuildProject(proj, target))

@@ -15,7 +15,7 @@ namespace Kistl.Generator
     /// </summary>
     public class TemplateExecutor
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Generator.Templates");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Generator.Templates");
 
         private NameValueCollection settings = new NameValueCollection();
         private object[] templateParameters = new object[0];
