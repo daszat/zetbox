@@ -23,7 +23,7 @@
   <xsl:template name="defects">
     <xsl:param name="detailnodes"/>
     <xsl:for-each select="$detailnodes">
-      <xsl:value-of select="@Source"/>: error :[gendarme] <xsl:value-of select="../../problem"/> Target: <xsl:value-of select="../@Name"/>.
+      <xsl:value-of select="@Source"/>: error :[gendarme] <xsl:value-of select="../../problem"/> Target: <xsl:value-of select="../@Name"/> Defect: <xsl:value-of select="." />.
     </xsl:for-each>
   </xsl:template>
 

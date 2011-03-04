@@ -52,7 +52,7 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries
             string referencedInterface = relEnd.Type.GetDataTypeString();
             string referencedImplementation = referencedInterface
                 + Host.Settings["extrasuffix"] + Kistl.API.Helper.ImplementationSuffix;
-            string associationName = rel.GetAssociationName() + "_" + endRole;
+            string associationName = rel.GetAssociationName() + "_" + endRole.ToString();
             string targetRoleName = relEnd.RoleName;
 
             string positionPropertyName = rel.NeedsPositionStorage(endRole)

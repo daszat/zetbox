@@ -61,7 +61,7 @@ RelationEnd relEnd = rel.GetEndFromRole(endRole);
     string positionPropertyNameArgument = rel.NeedsPositionStorage(otherEnd.GetRole()) ? String.Format(@", ""{0}""", Construct.ListPositionPropertyName(otherEnd)) : String.Empty;
     
     // the name of the EF association
-    string assocName = rel.GetAssociationName() + (relEnd.Multiplicity.UpperBound() > 1 ? "_" + relEnd.GetRole() : String.Empty);
+    string assocName = rel.GetAssociationName() + (relEnd.Multiplicity.UpperBound() > 1 ? "_" + relEnd.GetRole().ToString() : String.Empty);
     string targetRoleName = otherEnd.RoleName;
 
     // which Kistl interface this is    
