@@ -49,7 +49,7 @@ namespace Kistl.Server
     /// Bootstrapper service
     /// </summary>
     [ServiceBehavior(AddressFilterMode = AddressFilterMode.Any, Namespace = "http://dasz.at/ZBox/Bootstrapper")]
-    public class BootstrapperService 
+    public class BootstrapperService
         : IBootstrapperService
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.BootstrapperService");
@@ -78,7 +78,7 @@ namespace Kistl.Server
                             var directory = Path.GetFullPath(Path.GetDirectoryName(dir.Value));
 
                             result.Add(InspectFile("Exe", directory, Path.GetFileName(dir.Value)));
-                         
+
                             // need to collect .config too
                             var dotConfig = dir.Value + ".config";
                             if (File.Exists(dotConfig))
@@ -113,7 +113,10 @@ namespace Kistl.Server
 
         private FileInfo InspectFile(string baseDir, string root, string f)
         {
-            var fi = new System.IO.FileInfo(f);
+            var fi = Path.IsPathRooted(f)
+                ? new System.IO.FileInfo(f)
+                : new System.IO.FileInfo(Path.Combine(root, f));
+
             if (!fi.FullName.StartsWith(root)) throw new InvalidOperationException(String.Format("Aborting because [{0}] is outside the current root [{1}].", fi.FullName, root));
 
             var relPath = Path.Combine(baseDir, RelativePath(root, Path.GetDirectoryName(fi.FullName)));
@@ -152,8 +155,8 @@ namespace Kistl.Server
 
             var dir = config.Server.ClientFilesLocations.Single(i => i.Name == parts[0]);
             var file = dir.Name == "Exe" || dir.Name == "Configs"
-                ? Path.GetFullPath(Path.Combine(Path.GetDirectoryName(dir.Value),String.Join(Path.DirectorySeparatorChar.ToString(), parts.Skip(1).ToArray()))) // Exe and Configs reference file directly
-                : Path.GetFullPath(Path.Combine(dir.Value, String.Join(Path.DirectorySeparatorChar.ToString(), parts.Skip(1).ToArray())));
+                ? Path.GetFullPath(Path.Combine(Path.GetDirectoryName(dir.Value), API.Helper.PathCombine(parts.Skip(1).ToArray()))) // Exe and Configs reference file directly
+                : Path.GetFullPath(Path.Combine(dir.Value, API.Helper.PathCombine(parts.Skip(1).ToArray())));
             if (file.StartsWith(Path.GetFullPath(dir.Value)))
             {
                 return file;

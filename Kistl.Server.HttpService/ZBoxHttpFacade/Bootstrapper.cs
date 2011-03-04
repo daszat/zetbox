@@ -47,24 +47,27 @@ namespace Kistl.Server.HttpService
                         var fileInfoArray = new FileInfoArray() { Files = _service.GetFileInfos() };
                         context.Response.StatusCode = 200;
                         context.Response.ContentType = "text/xml";
+                        Log.DebugFormat("Sending [{0}] file infos", fileInfoArray.Files.Length);
                         fileInfoArray.ToXmlStream(context.Response.OutputStream);
                         break;
                     case "GetFile":
                         var probe = _service.GetFilePath(context.Request["path"]);
                         if (File.Exists(probe))
                         {
+                            Log.DebugFormat("Sending file [{0}]", probe);
                             context.Response.TransmitFile(probe);
                         }
                         else
                         {
+                            Log.DebugFormat("file [{0}] not found", probe);
                             context.Response.StatusCode = 404;
                         }
                         break;
                     default:
+                        Log.DebugFormat("Unknown action [{0}]", action);
                         context.Response.StatusCode = 400;
                         break;
                 }
-                Log.DebugFormat("Sending response [{0}]", context.Response.StatusCode);
             }
             catch (Exception ex)
             {
