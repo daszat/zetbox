@@ -8,10 +8,13 @@ namespace Kistl.Client
     using Autofac;
     using Kistl.API;
     using Kistl.API.Client;
+    using Kistl.API.Common;
+    using Kistl.App.Base;
     using Kistl.App.GUI;
     using Kistl.Client.Models;
     using Kistl.Client.Presentables;
     using Kistl.Client.Presentables.ValueViewModels;
+    using System.Security.Principal;
 
     public class DefaultCredentialsResolver : ICredentialsResolver
     {
@@ -53,8 +56,15 @@ namespace Kistl.Client
 
                 builder
                     .Register<BasicAuthCredentialsResolver>(c => new BasicAuthCredentialsResolver(c.Resolve<IViewModelFactory>(), c.Resolve<Func<IKistlContext>>(), c.Resolve<IFrozenContext>()))
-                    .As<ICredentialsResolver>()
+                    .As<BasicAuthCredentialsResolver>() // for local use
+                    .As<ICredentialsResolver>() // for publication
                     .SingleInstance();
+
+                // since the user has entered credentials, now we also have a different Identity
+                builder
+                    .RegisterType<BasicAuthIdentityResolver>()
+                    .As<IIdentityResolver>()
+                    .InstancePerLifetimeScope();
             }
         }
 
@@ -118,6 +128,43 @@ namespace Kistl.Client
 
             EnsureUsername();
             req.Credentials = new NetworkCredential(UserName, Password);
+        }
+
+        internal string GetUsername()
+        {
+            EnsureUsername();
+            return UserName;
+        }
+    }
+
+    public class BasicAuthIdentityResolver
+        : IIdentityResolver
+    {
+        private readonly IReadOnlyKistlContext _resolverCtx;
+        private readonly BasicAuthCredentialsResolver _credentialResolver;
+
+        public BasicAuthIdentityResolver(IReadOnlyKistlContext resolverCtx, BasicAuthCredentialsResolver credentialResolver)
+        {
+            _resolverCtx = resolverCtx;
+            _credentialResolver = credentialResolver;
+        }
+
+        public Identity GetCurrent()
+        {
+            return Resolve(_credentialResolver.GetUsername());
+        }
+
+        public Identity Resolve(IIdentity identity)
+        {
+            if (identity == null) throw new ArgumentNullException("identity");
+
+            return Resolve(identity.Name);
+        }
+
+        private Identity Resolve(string name)
+        {
+            string id = name.ToLower();
+            return _resolverCtx.GetQuery<Identity>().Where(i => i.UserName.ToLower() == id).FirstOrDefault();
         }
     }
 }

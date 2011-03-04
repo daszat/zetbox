@@ -11,7 +11,7 @@ namespace Kistl.API.Common
     using Kistl.API;
     using Kistl.App.Base;
 
-    public class ThreadPrincipalResolver
+    public sealed class ThreadPrincipalResolver
         : IIdentityResolver
     {
         private readonly IReadOnlyKistlContext _resolverCtx;
