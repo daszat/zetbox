@@ -49,9 +49,12 @@ namespace Kistl.Server
     /// Bootstrapper service
     /// </summary>
     [ServiceBehavior(AddressFilterMode = AddressFilterMode.Any, Namespace = "http://dasz.at/ZBox/Bootstrapper")]
-    public class BootstrapperService : IBootstrapperService
+    public class BootstrapperService 
+        : IBootstrapperService
     {
-        private KistlConfig config;
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.BootstrapperService");
+
+        private readonly KistlConfig config;
 
         public BootstrapperService(KistlConfig config)
         {
@@ -64,6 +67,8 @@ namespace Kistl.Server
 
             foreach (var dir in config.Server.ClientFilesLocations)
             {
+                Log.InfoFormat("Processing client file location [{0}] ({0})", dir.Name, dir.Value);
+
                 switch (dir.Name)
                 {
                     case "Exe":
