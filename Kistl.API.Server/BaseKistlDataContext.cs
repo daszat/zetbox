@@ -562,7 +562,7 @@ namespace Kistl.API.Server
             if (exportGuid == Guid.Empty) throw new ArgumentOutOfRangeException("exportGuid", "exportGuid cannot be empty");
             if (timestamp == DateTime.MinValue) throw new ArgumentOutOfRangeException("timestamp", "timestamp cannot be empty");
 
-            var storagePath = Helper.PathCombine(timestamp.Year.ToString("0000"), timestamp.Month.ToString("00"), timestamp.Day.ToString("00"), String.Format("({0}) - {1}", exportGuid, filename));
+            var storagePath = BuildStoragePath(exportGuid, timestamp, filename);
             string path = Path.Combine(config.Server.DocumentStore, storagePath);
             Directory.CreateDirectory(Path.GetDirectoryName(path));
 
@@ -578,6 +578,12 @@ namespace Kistl.API.Server
                 s.CopyTo(file);
             }
             File.SetAttributes(path, FileAttributes.ReadOnly);
+            return storagePath;
+        }
+
+        private static string BuildStoragePath(Guid exportGuid, DateTime timestamp, string filename)
+        {
+            var storagePath = Helper.PathCombine(timestamp.Year.ToString("0000"), timestamp.Month.ToString("00"), timestamp.Day.ToString("00"), String.Format("({0}) - {1}", exportGuid, filename));
             return storagePath;
         }
 
@@ -602,7 +608,8 @@ namespace Kistl.API.Server
         {
             CheckDisposed();
             var blob = this.Find<Kistl.App.Base.Blob>(ID);
-            string path = Path.Combine(config.Server.DocumentStore, blob.StoragePath);
+            var storagePath = BuildStoragePath(blob.ExportGuid, blob.CreatedOn.Value, blob.OriginalName);
+            string path = Path.Combine(config.Server.DocumentStore, storagePath);
             return new FileInfo(path);
         }
 
