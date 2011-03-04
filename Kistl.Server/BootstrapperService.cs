@@ -69,12 +69,16 @@ namespace Kistl.Server
                     case "Exe":
                         if (File.Exists(dir.Value))
                         {
-                            var directory = Path.GetDirectoryName(dir.Value);
+                            // whole file is specified, get directory path
+                            var directory = Path.GetFullPath(Path.GetDirectoryName(dir.Value));
 
-                            // need to collect .config
-                            foreach (var f in Directory.GetFiles(directory, Path.GetFileName(dir.Value) + "*", SearchOption.TopDirectoryOnly))
+                            result.Add(InspectFile("Exe", directory, Path.GetFileName(dir.Value)));
+                         
+                            // need to collect .config too
+                            var dotConfig = dir.Value + ".config";
+                            if (File.Exists(dotConfig))
                             {
-                                result.Add(InspectFile("Exe", Path.GetFullPath(directory), f));
+                                result.Add(InspectFile("Exe", directory, dotConfig));
                             }
                         }
                         break;
