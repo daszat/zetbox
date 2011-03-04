@@ -45,7 +45,7 @@ namespace Kistl.Client.Bootstrapper
             this.btnCancel.Location = new System.Drawing.Point(363, 107);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 0;
+            this.btnCancel.TabIndex = 4;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -56,7 +56,7 @@ namespace Kistl.Client.Bootstrapper
             this.btnOK.Location = new System.Drawing.Point(282, 107);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
-            this.btnOK.TabIndex = 1;
+            this.btnOK.TabIndex = 3;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
@@ -77,7 +77,7 @@ namespace Kistl.Client.Bootstrapper
             this.txtUserName.Location = new System.Drawing.Point(105, 20);
             this.txtUserName.Name = "txtUserName";
             this.txtUserName.Size = new System.Drawing.Size(333, 20);
-            this.txtUserName.TabIndex = 3;
+            this.txtUserName.TabIndex = 0;
             // 
             // txtPassword
             // 
@@ -86,7 +86,7 @@ namespace Kistl.Client.Bootstrapper
             this.txtPassword.Location = new System.Drawing.Point(105, 46);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(333, 20);
-            this.txtPassword.TabIndex = 5;
+            this.txtPassword.TabIndex = 1;
             this.txtPassword.UseSystemPasswordChar = true;
             // 
             // label2
@@ -104,7 +104,7 @@ namespace Kistl.Client.Bootstrapper
             this.cbSave.Location = new System.Drawing.Point(105, 75);
             this.cbSave.Name = "cbSave";
             this.cbSave.Size = new System.Drawing.Size(15, 14);
-            this.cbSave.TabIndex = 6;
+            this.cbSave.TabIndex = 2;
             this.cbSave.UseVisualStyleBackColor = true;
             // 
             // label3
