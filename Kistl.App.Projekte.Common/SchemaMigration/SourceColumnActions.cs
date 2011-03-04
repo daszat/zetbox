@@ -28,6 +28,7 @@ namespace ZBox.App.SchemaMigration
             if (obj.DestinationProperty.Count > 0) throw new InvalidOperationException("there is already a destination object property");
 
             Property p = null;
+            var ctx = obj.Context;
 
             switch (obj.DbType)
             {
@@ -35,41 +36,41 @@ namespace ZBox.App.SchemaMigration
                 case ColumnType.AnsiStringFixedLength:
                 case ColumnType.String:
                 case ColumnType.StringFixedLength:
-                    p = obj.Context.Create<StringProperty>();
-                    var c = obj.Context.Create<StringRangeConstraint>();
+                    p = ctx.Create<StringProperty>();
+                    var c = ctx.Create<StringRangeConstraint>();
                     c.MaxLength = obj.Size;
                     p.Constraints.Add(c);
                     break;
 
 
                 case ColumnType.Boolean:
-                    p = obj.Context.Create<BoolProperty>();
+                    p = ctx.Create<BoolProperty>();
                     break;
 
                 case ColumnType.Date:
                 case ColumnType.DateTime:
                 case ColumnType.DateTime2:
-                    p = obj.Context.Create<DateTimeProperty>();
+                    p = ctx.Create<DateTimeProperty>();
                     break;
 
                 case ColumnType.Single:
                 case ColumnType.Double:
-                    p = obj.Context.Create<DoubleProperty>();
+                    p = ctx.Create<DoubleProperty>();
                     break;
 
                 case ColumnType.Byte:
                 case ColumnType.Int16:
                 case ColumnType.Int32:
-                    p = obj.Context.Create<IntProperty>();
+                    p = ctx.Create<IntProperty>();
                     break;
 
                 case ColumnType.Guid:
-                    p = obj.Context.Create<GuidProperty>();
+                    p = ctx.Create<GuidProperty>();
                     break;
                 case ColumnType.Currency:
                 case ColumnType.Decimal:
                 case ColumnType.VarNumeric:
-                    p = obj.Context.Create<DecimalProperty>();
+                    p = ctx.Create<DecimalProperty>();
                     ((DecimalProperty)p).Precision = (int)obj.Size;
                     ((DecimalProperty)p).Scale = 2;
                     break;
@@ -85,12 +86,12 @@ namespace ZBox.App.SchemaMigration
                 case ColumnType.UInt64:
                 case ColumnType.Xml:
                 default:
-                    throw new NotSupportedException("Unknown DbType " + obj.DbType);
+                    throw new NotSupportedException("Unknown DbType " + obj.DbType.ToString());
             }
 
             if (obj.IsNullable == false)
             {
-                p.Constraints.Add(obj.Context.Create<NotNullableConstraint>());
+                p.Constraints.Add(ctx.Create<NotNullableConstraint>());
             }
 
             obj.DestinationProperty.Add(p);

@@ -4,16 +4,15 @@ namespace Kistl.App.Extensions
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Globalization;
+    using System.IO;
     using System.Linq;
     using System.Reflection;
     using System.Text;
-
+    using Autofac;
     using Kistl.API;
     using Kistl.API.Utils;
     using Kistl.App.Base;
-
-    using Autofac;
-    using System.IO;
 
     /// <summary>
     /// A utility class implementing basic operations and caching needed by all CustomActionsManagers.
@@ -39,7 +38,10 @@ namespace Kistl.App.Extensions
 
             public override bool Equals(object obj)
             {
-                return this.key.Equals(((MethodKey)obj).key);
+                if (obj is MethodKey)
+                    return this.key.Equals(((MethodKey)obj).key);
+                else
+                    return false;
             }
 
             public override int GetHashCode()
@@ -318,7 +320,7 @@ namespace Kistl.App.Extensions
                 var methodInfos = _reflectedMethods[key];
                 foreach (var mi in methodInfos)
                 {
-                    CreateInvokeInfo(implType, mi, "On" + prop.Name + "_" + invocationType);
+                    CreateInvokeInfo(implType, mi, string.Format(CultureInfo.InvariantCulture, "On{0}_{1}", prop.Name, invocationType));
                 }
                 _attachedMethods[key] = true;
             }

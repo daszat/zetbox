@@ -304,7 +304,7 @@ namespace Kistl.API.Migration
                         case DbType.Time:
                         case DbType.Xml:
                         default:
-                            throw new NotSupportedException("Unknown DbType " + destType);
+                            throw new NotSupportedException("Unknown DbType " + destType.ToString());
 
                     }
                 }

@@ -1,19 +1,20 @@
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using Kistl.API;
-using Kistl.App.Base;
-using Kistl.App.Extensions;
-using Kistl.Client.Presentables.KistlBase;
-using Kistl.App.GUI;
-using ObjectEditorWorkspace = Kistl.Client.Presentables.ObjectEditor.WorkspaceViewModel;
-using Kistl.Client.Models;
-using Kistl.API.Client;
 
 namespace Kistl.Client.Presentables.ModuleEditor
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Linq;
+    using System.Text;
+    using Kistl.API;
+    using Kistl.API.Client;
+    using Kistl.App.Base;
+    using Kistl.App.Extensions;
+    using Kistl.App.GUI;
+    using Kistl.Client.Models;
+    using Kistl.Client.Presentables.KistlBase;
+    using ObjectEditorWorkspace = Kistl.Client.Presentables.ObjectEditor.WorkspaceViewModel;
+
     public class WorkspaceViewModel : WindowViewModel
     {
         public new delegate WorkspaceViewModel Factory(IKistlContext dataCtx);
@@ -32,10 +33,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
         {
             get
             {
-                if (_CurrentModule == null)
-                {
-                    _CurrentModule = DataContext.GetQuery<Module>().FirstOrDefault();
-                }
+                EnsureCurrentModule();
                 return _CurrentModule;
             }
             set
@@ -47,6 +45,14 @@ namespace Kistl.Client.Presentables.ModuleEditor
                     OnPropertyChanged("CurrentModule");
                     OnPropertyChanged("TreeItems");
                 }
+            }
+        }
+
+        private void EnsureCurrentModule()
+        {
+            if (_CurrentModule == null)
+            {
+                _CurrentModule = DataContext.GetQuery<Module>().FirstOrDefault();
             }
         }
 
@@ -80,7 +86,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
                     var lst = new ObservableCollection<ViewModel>();
 
                     InstanceListViewModel lstMdl;
-
+                    
                     // Object Classes
                     lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, typeof(ObjectClass).GetObjectClass(FrozenContext), () => DataContext.GetQuery<ObjectClass>().OrderBy(i => i.Name));
                     SetupViewModel(lstMdl);

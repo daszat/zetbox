@@ -47,8 +47,15 @@ using Kistl.API.Configuration;
 
             public override bool Equals(object obj)
             {
-                var b = (VMCacheKey)obj;
-                return this.requestedType == b.requestedType && this.factoryType == b.factoryType;
+                if (obj is VMCacheKey)
+                {
+                    var other = (VMCacheKey)obj;
+                    return this.requestedType == other.requestedType && this.factoryType == other.factoryType;
+                }
+                else
+                {
+                    return false;
+                }
             }
 
             public override int GetHashCode()

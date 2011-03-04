@@ -34,12 +34,12 @@ namespace Kistl.DalProvider.Ef
         /// <summary>
         /// Initializes a new instance of the EntityCollectionWrapper class using the specified context and <see cref="EntityCollection{TImpl}"/>
         /// </summary>
-        /// <param name="ctx">the parent data context (optional)</param>
-        /// <param name="ec">the <see cref="EntityCollection{TImpl}"/> that should be wrapped</param>
-        /// <param name="changingNotifier">an action called to notify the owner of this collection before a change happens</param>
-        /// <param name="changedNotifier">an action called to notify the owner of this collection after a change has happened</param>
-        /// <param name="itemChangingNotifier">an action called to notify the modified item before a change happens</param>
-        /// <param name="itemChangedNotifier">an action called to notify the modified item after a change has happened</param>
+        /// <param baseDir="ctx">the parent data context (optional)</param>
+        /// <param baseDir="ec">the <see cref="EntityCollection{TImpl}"/> that should be wrapped</param>
+        /// <param baseDir="changingNotifier">an action called to notify the owner of this collection before a change happens</param>
+        /// <param baseDir="changedNotifier">an action called to notify the owner of this collection after a change has happened</param>
+        /// <param baseDir="itemChangingNotifier">an action called to notify the modified item before a change happens</param>
+        /// <param baseDir="itemChangedNotifier">an action called to notify the modified item after a change has happened</param>
         public EntityCollectionWrapper(IKistlContext ctx, EntityCollection<TImpl> ec, Action changingNotifier, Action changedNotifier, Action<TImpl> itemChangingNotifier, Action<TImpl> itemChangedNotifier)
         {
             // TODO: when can the ctx be legally null? 

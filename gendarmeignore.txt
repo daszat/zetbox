@@ -1,3 +1,21 @@
+R: Gendarme.Rules.Performance.AvoidConcatenatingCharsRule
+# This rule will warn you if boxing is used to concatenate a string since this will slow down your code and can be easily avoided.
+# external code
+M: System.Type System.Linq.Dynamic.ClassFactory::CreateDynamicClass(System.Linq.Dynamic.DynamicProperty[])
+M: System.String System.Linq.Dynamic.ExpressionParser::GetTypeName(System.Type)
+M: System.Boolean Kistl.API.Utils.OptionSet::ParseBundledValue(System.String,System.String,Kistl.API.Utils.OptionContext)
+M: System.String Kistl.API.Utils.OptionSet::GetArgumentName(System.Int32,System.Int32,System.String)
+
+R: Gendarme.Rules.Performance.AvoidRepetitiveCallsToPropertiesRule
+# The rule warn if virtual, or unlikely to be inline-able, property getters are called several times by a method.
+# should be fixed upstream in MigraDoc
+M: System.Void ZBox.App.SchemaMigration.SourceTableMappingReport::RenderColumnMappings()
+# Method is only executed once
+# external code
+M: System.Boolean Kistl.API.Utils.OptionSet::GetOptionParts(System.String,System.String&,System.String&,System.String&,System.String&)
+# false positive, the referenced object changes beneath the access
+M: System.Collections.ObjectModel.ReadOnlyObservableCollection`1<Kistl.Client.Presentables.ViewModel> Kistl.Client.Presentables.ModuleEditor.WorkspaceViewModel::get_TreeItems()
+
 R: Gendarme.Rules.Maintainability.AvoidUnnecessarySpecializationRule
 # This method has a parameter whose type is more specialized than necessary. This can make it difficult to reuse the method in other contexts.
 T: Kistl.Server.WcfServer
@@ -133,6 +151,7 @@ A: Kistl.Client.WPF
 A: Kistl.DalProvider.Ef
 T: Kistl.Server.SchemaManagement.OleDbProvider.OleDb
 T: Kistl.Server.SchemaManagement.SqlProvider.SqlServer
+T: Kistl.Server.ActiveDirectoryIdentitySource
 M: System.Boolean Kistl.Server.SchemaManagement.OleDbProvider.OleDb/<GetTableNames>d__0::MoveNext()
 M: System.Boolean Kistl.Server.SchemaManagement.OleDbProvider.OleDb/<GetViewNames>d__8::MoveNext()
 M: System.Boolean Kistl.Server.SchemaManagement.OleDbProvider.OleDb/<GetTableColumns>d__30::MoveNext()

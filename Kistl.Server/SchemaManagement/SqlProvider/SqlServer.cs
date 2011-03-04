@@ -784,11 +784,17 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
         private int GetSQLServerVersion()
         {
             string verStr = (string)ExecuteScalar("SELECT SERVERPROPERTY('productversion')");
-            return int.Parse(verStr.Split('.').First());
+            int result;
+            return int.TryParse(verStr.Split('.').First(), out result)
+                ? result
+                : -1;
         }
 
         public override void CreateIndex(TableRef tblName, string idxName, bool unique, bool clustered, params string[] columns)
         {
+            if (columns == null) throw new ArgumentNullException("columns");
+            if (columns.Length == 0) throw new ArgumentOutOfRangeException("columns");
+
             string colSpec = string.Join(", ", columns.Select(c => "[" + c + "]").ToArray());
 
             Log.DebugFormat("Creating index {0}.[{1}] ({2})", FormatSchemaName(tblName), idxName, colSpec);
@@ -1116,9 +1122,9 @@ END";
             for (int i = 0; i < join.JoinColumnName.Length; i++)
             {
                 query.AppendFormat("{0}.[{1}] = {2}.[{3}]",
-                    join.JoinColumnName[i].Source == ColumnRef.PrimaryTable ? "t0" : (join.JoinColumnName[i].Source == ColumnRef.Local ? "t" + idx : join_alias[join.JoinColumnName[i].Source]),
+                    join.JoinColumnName[i].Source == ColumnRef.PrimaryTable ? "t0" : (join.JoinColumnName[i].Source == ColumnRef.Local ? "t" + idx.ToString() : join_alias[join.JoinColumnName[i].Source]),
                     join.JoinColumnName[i].ColumnName,
-                    join.FKColumnName[i].Source == ColumnRef.PrimaryTable ? "t0" : (join.FKColumnName[i].Source == ColumnRef.Local ? "t" + idx : join_alias[join.FKColumnName[i].Source]),
+                    join.FKColumnName[i].Source == ColumnRef.PrimaryTable ? "t0" : (join.FKColumnName[i].Source == ColumnRef.Local ? "t" + idx.ToString() : join_alias[join.FKColumnName[i].Source]),
                     join.FKColumnName[i].ColumnName);
                 if (i < join.JoinColumnName.Length - 1)
                     query.Append(" AND ");

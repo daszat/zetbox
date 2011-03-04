@@ -24,8 +24,8 @@ namespace Kistl.DalProvider.Ef
         /// <summary>
         /// Gibt eine typisierte Objektinstanz zurück.
         /// </summary>
-        /// <param name="ctx"></param>
-        /// <param name="ID"></param>
+        /// <param baseDir="ctx"></param>
+        /// <param baseDir="ID"></param>
         /// <returns></returns>
         protected override T GetObjectInstance(IKistlContext ctx, int ID)
         {

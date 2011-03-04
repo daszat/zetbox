@@ -396,7 +396,7 @@ namespace Kistl.API.Server
                 Name,
                 Type,
                 Size,
-                Scale.HasValue ? ", " + Scale.Value : String.Empty,
+                Scale.HasValue ? ", " + Scale.Value.ToString() : String.Empty,
                 IsNullable ? "NULL" : "NOT NULL");
         }
     }

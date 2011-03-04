@@ -72,13 +72,15 @@ namespace Kistl.App.Packaging
                 Dictionary<Guid, IPersistenceObject> importedObjects = new Dictionary<Guid, IPersistenceObject>();
                 Log.Info("Loading");
 
+                var reader = s.Reader;
+
                 // Find Root Element
-                while (s.Reader.Read() && s.Reader.NodeType != XmlNodeType.Element && s.Reader.LocalName != "KistlPackaging" && s.Reader.NamespaceURI != "http://dasz.at/Kistl") ;
+                while (reader.Read() && reader.NodeType != XmlNodeType.Element && reader.LocalName != "KistlPackaging" && reader.NamespaceURI != "http://dasz.at/Kistl") ;
 
                 // Read content
-                while (s.Reader.Read())
+                while (reader.Read())
                 {
-                    if (s.Reader.NodeType != XmlNodeType.Element) continue;
+                    if (reader.NodeType != XmlNodeType.Element) continue;
                     var obj = ImportElement(ctx, currentObjects, s);
                     if (obj == null) throw new InvalidOperationException("Invalid import format: ImportElement returned NULL");
                     importedObjects[((IExportableInternal)obj).ExportGuid] = obj;
@@ -158,14 +160,15 @@ namespace Kistl.App.Packaging
                 {
                     s.RewindData();
                     Log.Info("Loading");
+                    var reader = s.Reader;
 
                     // Find Root Element
-                    while (s.Reader.Read() && s.Reader.NodeType != XmlNodeType.Element && s.Reader.LocalName != "KistlPackaging" && s.Reader.NamespaceURI != "http://dasz.at/Kistl") ;
+                    while (reader.Read() && reader.NodeType != XmlNodeType.Element && reader.LocalName != "KistlPackaging" && reader.NamespaceURI != "http://dasz.at/Kistl") ;
 
                     // Read content
-                    while (s.Reader.Read())
+                    while (reader.Read())
                     {
-                        if (s.Reader.NodeType != XmlNodeType.Element) continue;
+                        if (reader.NodeType != XmlNodeType.Element) continue;
                         ImportElement(ctx, objects, s);
                     }
                 }
@@ -305,7 +308,7 @@ namespace Kistl.App.Packaging
                 if (!ifType.Type.IsIDataObject() &&
                     !ifType.Type.IsIRelationEntry())
                 {
-                    throw new NotSupportedException("Interfacetype " + ifType + " is not supported");
+                    throw new NotSupportedException(String.Format("Interfacetype {0} is not supported", ifType));
                 }
                 IPersistenceObject obj = ctx.Internals().CreateUnattached(ifType);
                 objects[exportGuid] = obj;

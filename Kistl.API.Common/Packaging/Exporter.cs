@@ -158,40 +158,42 @@ namespace Kistl.App.Packaging
         #region Xml/Export private Methods
         private static void ExportObject(IPackageProvider s, IPersistenceObject obj, string[] propNamespaces)
         {
+            XmlWriter writer = s.Writer;
             Type t = obj.ReadOnlyContext.GetInterfaceType(obj).Type;
-            s.Writer.WriteStartElement(t.Name, t.Namespace);
+            writer.WriteStartElement(t.Name, t.Namespace);
             if (((IExportable)obj).ExportGuid == Guid.Empty)
             {
                 throw new InvalidOperationException(string.Format("At least one object of type {0} has an empty ExportGuid", t.FullName));
             }
-            ((IExportableInternal)obj).Export(s.Writer, propNamespaces);
+            ((IExportableInternal)obj).Export(writer, propNamespaces);
 
             if (obj is Blob && s.SupportsBlobs)
             {
                 var blob = (Blob)obj;
                 s.PutBlob(blob.ExportGuid, blob.OriginalName, blob.GetStream());
             }
-            s.Writer.WriteEndElement();
+            writer.WriteEndElement();
         }
 
         private static void WriteStartDocument(IPackageProvider s, IReadOnlyKistlContext ctx, IEnumerable<Kistl.App.Base.Module> moduleList)
         {
-            s.Writer.WriteStartDocument();
+            XmlWriter writer = s.Writer;
+            writer.WriteStartDocument();
             if (moduleList.Count() == 1)
             {
                 // use exported module as default namespace
-                s.Writer.WriteStartElement("KistlPackaging", "http://dasz.at/Kistl");
+                writer.WriteStartElement("KistlPackaging", "http://dasz.at/Kistl");
                 foreach (var module in moduleList)
                 {
-                    s.Writer.WriteAttributeString("xmlns", module.Name, null, module.Namespace);
+                    writer.WriteAttributeString("xmlns", module.Name, null, module.Namespace);
                 }
             }
             else
             {
-                s.Writer.WriteStartElement("KistlPackaging", "http://dasz.at/Kistl");
+                writer.WriteStartElement("KistlPackaging", "http://dasz.at/Kistl");
                 foreach (var module in moduleList)
                 {
-                    s.Writer.WriteAttributeString("xmlns", module.Name, null, module.Namespace);
+                    writer.WriteAttributeString("xmlns", module.Name, null, module.Namespace);
                 }
             }
 
@@ -210,7 +212,7 @@ namespace Kistl.App.Packaging
                 ctx.GetQuery<Kistl.App.Base.TypeRef>().Max(d => d.ChangedOn)
             }.Max();
 
-            s.Writer.WriteAttributeString("date", XmlConvert.ToString(lastChanged ?? DateTime.Now, XmlDateTimeSerializationMode.Utc));
+            writer.WriteAttributeString("date", XmlConvert.ToString(lastChanged ?? DateTime.Now, XmlDateTimeSerializationMode.Utc));
         }
 
         private static List<Kistl.App.Base.Module> GetModules(IReadOnlyKistlContext ctx, string[] moduleNames)

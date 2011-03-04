@@ -236,7 +236,7 @@ namespace Kistl.Generator
             var generatedFileNames = new List<string>();
 
             Log.Info("  Object Classes");
-            foreach (ObjectClass objClass in Compiler.GetObjectClassList(ctx).OrderBy(x => x.Name).ToList())
+            foreach (ObjectClass objClass in Compiler.GetObjectClassList(ctx).ToList().OrderBy(x => x.Name).ToList())
             {
                 generatedFileNames.Add(Generate_ObjectClass(ctx, objClass));
                 Log.Debug("    " + objClass.Name);

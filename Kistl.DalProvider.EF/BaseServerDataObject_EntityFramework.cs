@@ -126,13 +126,13 @@ namespace Kistl.DalProvider.Ef
 
         /// <summary>
         /// Special NotifyPropertyChanged implementation. Use this if the 
-        /// underlying EF-Property name doesn't match the public property
-        /// name.
+        /// underlying EF-Property baseDir doesn't match the public property
+        /// baseDir.
         /// </summary>
-        /// <param name="property">the official name of the property</param>
-        /// <param name="efProperty">the EF name of the property</param>
-        /// <param name="oldValue">the old value of the property</param>
-        /// <param name="newValue">the new value of the property</param>
+        /// <param baseDir="property">the official baseDir of the property</param>
+        /// <param baseDir="efProperty">the EF baseDir of the property</param>
+        /// <param baseDir="oldValue">the old value of the property</param>
+        /// <param baseDir="newValue">the new value of the property</param>
         public void NotifyPropertyChanged(string property, string efProperty, object oldValue, object newValue)
         {
             base.NotifyPropertyChanged(property, oldValue, newValue);
@@ -144,13 +144,13 @@ namespace Kistl.DalProvider.Ef
 
         /// <summary>
         /// Special NotifyPropertyChanging implementation. Use this if the 
-        /// underlying EF-Property name doesn't match the public property
-        /// name.
+        /// underlying EF-Property baseDir doesn't match the public property
+        /// baseDir.
         /// </summary>
-        /// <param name="property">the official name of the property</param>
-        /// <param name="efProperty">the EF name of the property</param>
-        /// <param name="oldValue">the old value of the property</param>
-        /// <param name="newValue">the new value of the property</param>
+        /// <param baseDir="property">the official baseDir of the property</param>
+        /// <param baseDir="efProperty">the EF baseDir of the property</param>
+        /// <param baseDir="oldValue">the old value of the property</param>
+        /// <param baseDir="newValue">the new value of the property</param>
         public void NotifyPropertyChanging(string property, string efProperty, object oldValue, object newValue)
         {
             base.NotifyPropertyChanging(property, oldValue, newValue);
@@ -273,11 +273,11 @@ namespace Kistl.DalProvider.Ef
 
         /// <summary>
         /// Special NotifyPropertyChanging implementation. Use this if the 
-        /// underlying EF-Property name doesn't match the public property
-        /// name.
+        /// underlying EF-Property baseDir doesn't match the public property
+        /// baseDir.
         /// </summary>
-        /// <param name="property">the official name of the property</param>
-        /// <param name="efProperty">the EF name of the property</param>
+        /// <param baseDir="property">the official baseDir of the property</param>
+        /// <param baseDir="efProperty">the EF baseDir of the property</param>
         public void NotifyPropertyChanging(string property, string efProperty)
         {
             NotifyPropertyChanging(property, efProperty, null, null);
@@ -285,13 +285,13 @@ namespace Kistl.DalProvider.Ef
 
         /// <summary>
         /// Special NotifyPropertyChanged implementation. Use this if the 
-        /// underlying EF-Property name doesn't match the public property
-        /// name.
+        /// underlying EF-Property baseDir doesn't match the public property
+        /// baseDir.
         /// </summary>
-        /// <param name="property">the official name of the property</param>
-        /// <param name="efProperty">the EF name of the property</param>
-        /// <param name="oldValue">the old value of the property</param>
-        /// <param name="newValue">the new value of the property</param>
+        /// <param baseDir="property">the official baseDir of the property</param>
+        /// <param baseDir="efProperty">the EF baseDir of the property</param>
+        /// <param baseDir="oldValue">the old value of the property</param>
+        /// <param baseDir="newValue">the new value of the property</param>
         public void NotifyPropertyChanged(string property, string efProperty, object oldValue, object newValue)
         {
             base.NotifyPropertyChanged(property, oldValue, newValue);
@@ -303,13 +303,13 @@ namespace Kistl.DalProvider.Ef
 
         /// <summary>
         /// Special NotifyPropertyChanging implementation. Use this if the 
-        /// underlying EF-Property name doesn't match the public property
-        /// name.
+        /// underlying EF-Property baseDir doesn't match the public property
+        /// baseDir.
         /// </summary>
-        /// <param name="property">the official name of the property</param>
-        /// <param name="efProperty">the EF name of the property</param>
-        /// <param name="oldValue">the old value of the property</param>
-        /// <param name="newValue">the new value of the property</param>
+        /// <param baseDir="property">the official baseDir of the property</param>
+        /// <param baseDir="efProperty">the EF baseDir of the property</param>
+        /// <param baseDir="oldValue">the old value of the property</param>
+        /// <param baseDir="newValue">the new value of the property</param>
         public void NotifyPropertyChanging(string property, string efProperty, object oldValue, object newValue)
         {
             base.NotifyPropertyChanging(property, oldValue, newValue);
@@ -360,13 +360,13 @@ namespace Kistl.DalProvider.Ef
 
         /// <summary>
         /// Special NotifyPropertyChanged implementation. Use this if the 
-        /// underlying EF-Property name doesn't match the public property
-        /// name.
+        /// underlying EF-Property baseDir doesn't match the public property
+        /// baseDir.
         /// </summary>
-        /// <param name="property">the official name of the property</param>
-        /// <param name="efProperty">the EF name of the property</param>
-        /// <param name="oldValue">the old value of the property</param>
-        /// <param name="newValue">the new value of the property</param>
+        /// <param baseDir="property">the official baseDir of the property</param>
+        /// <param baseDir="efProperty">the EF baseDir of the property</param>
+        /// <param baseDir="oldValue">the old value of the property</param>
+        /// <param baseDir="newValue">the new value of the property</param>
         public void NotifyPropertyChanged(string property, string efProperty, object oldValue, object newValue)
         {
             base.NotifyPropertyChanged(property, oldValue, newValue);
@@ -374,13 +374,13 @@ namespace Kistl.DalProvider.Ef
 
         /// <summary>
         /// Special NotifyPropertyChanging implementation. Use this if the 
-        /// underlying EF-Property name doesn't match the public property
-        /// name.
+        /// underlying EF-Property baseDir doesn't match the public property
+        /// baseDir.
         /// </summary>
-        /// <param name="property">the official name of the property</param>
-        /// <param name="efProperty">the EF name of the property</param>
-        /// <param name="oldValue">the old value of the property</param>
-        /// <param name="newValue">the new value of the property</param>
+        /// <param baseDir="property">the official baseDir of the property</param>
+        /// <param baseDir="efProperty">the EF baseDir of the property</param>
+        /// <param baseDir="oldValue">the old value of the property</param>
+        /// <param baseDir="newValue">the new value of the property</param>
         public void NotifyPropertyChanging(string property, string efProperty, object oldValue, object newValue)
         {
             base.NotifyPropertyChanging(property, oldValue, newValue);

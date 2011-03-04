@@ -65,7 +65,7 @@ namespace Kistl.Client.ASPNET.Toolkit.View
                 foreach (DataObjectViewModel mdl in e.NewItems)
                 {
                     var container = new HtmlGenericControl("div");
-                    container.ID = "mdlContainer" + Model.Items.IndexOf(mdl);
+                    container.ID = "mdlContainer" + Model.Items.IndexOf(mdl).ToString();
                     container.Attributes.Add("display", "node");
                     containerObjectsCtrl.Controls.Add(container);
 

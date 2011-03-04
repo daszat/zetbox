@@ -84,7 +84,7 @@ namespace Kistl.API.Server
         {
             if (!_ObjectState.In(DataObjectState.Detached, DataObjectState.New, DataObjectState.Modified, DataObjectState.Unmodified))
             {
-                throw new InvalidOperationException("Cannot set object to Unmodified when in State " + _ObjectState);
+                throw new InvalidOperationException("Cannot set object to Unmodified when in State " + _ObjectState.ToString());
             }
 
             SetObjectState(DataObjectState.Unmodified);
@@ -94,7 +94,7 @@ namespace Kistl.API.Server
         {
             if (!_ObjectState.In(DataObjectState.New, DataObjectState.Modified, DataObjectState.Unmodified))
             {
-                throw new InvalidOperationException("Cannot delete object when in State " + _ObjectState);
+                throw new InvalidOperationException("Cannot delete object when in State " + _ObjectState.ToString());
             }
 
             SetObjectState(DataObjectState.Deleted);

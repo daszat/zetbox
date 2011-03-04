@@ -81,10 +81,10 @@ namespace Kistl.DalProvider.Ef
         private Dictionary<InterfaceType, object> _table = new Dictionary<InterfaceType, object>();
 
         /// <summary>
-        /// Returns the EntitySet name of the specified InterfaceType.
+        /// Returns the EntitySet baseDir of the specified InterfaceType.
         /// </summary>
-        /// <param name="intf">the interface to resolve</param>
-        /// <returns>the name of the underlying entity set</returns>
+        /// <param baseDir="intf">the interface to resolve</param>
+        /// <returns>the baseDir of the underlying entity set</returns>
         private string GetEntityName(InterfaceType intf)
         {
             if (intf == null)
@@ -96,7 +96,7 @@ namespace Kistl.DalProvider.Ef
         /// <summary>
         /// Returns a Query by T
         /// </summary>
-        /// <typeparam name="T">Type</typeparam>
+        /// <typeparam baseDir="T">Type</typeparam>
         /// <returns>IQueryable</returns>
         public override IQueryable<T> GetQuery<T>()
         {
@@ -145,7 +145,7 @@ namespace Kistl.DalProvider.Ef
         /// <summary>
         /// Returns a Query by T
         /// </summary>
-        /// <typeparam name="T">Type</typeparam>
+        /// <typeparam baseDir="T">Type</typeparam>
         /// <returns>IQueryable</returns>
         public override IQueryable<T> GetPersistenceObjectQuery<T>()
         {
@@ -207,8 +207,8 @@ namespace Kistl.DalProvider.Ef
         /// <summary>
         /// Checks if the given Object is already in that Context.
         /// </summary>
-        /// <param name="type">Type of Object</param>
-        /// <param name="ID">ID</param>
+        /// <param baseDir="type">Type of Object</param>
+        /// <param baseDir="ID">ID</param>
         /// <returns>If ID is InvalidID (Object is not inititalized) then an Exception will be thrown.
         /// If the Object is already in that Context, the Object Instace is returned.
         /// If the Object is not in that Context, null is returned.</returns>
@@ -351,10 +351,10 @@ namespace Kistl.DalProvider.Ef
                     // Logging.Log.Info(String.Empty);
                     #endregion
 
-                    Logging.Log.Debug("  Added: " + _ctx.ObjectStateManager.GetObjectStateEntries(EntityState.Added).Count());
-                    Logging.Log.Debug("  Modified: " + _ctx.ObjectStateManager.GetObjectStateEntries(EntityState.Modified).Count());
-                    Logging.Log.Debug("  Deleted: " + _ctx.ObjectStateManager.GetObjectStateEntries(EntityState.Deleted).Count());
-                    Logging.Log.Debug("  Unchanged: " + _ctx.ObjectStateManager.GetObjectStateEntries(EntityState.Unchanged).Count());
+                    Logging.Log.Debug("  Added: " + _ctx.ObjectStateManager.GetObjectStateEntries(EntityState.Added).Count().ToString());
+                    Logging.Log.Debug("  Modified: " + _ctx.ObjectStateManager.GetObjectStateEntries(EntityState.Modified).Count().ToString());
+                    Logging.Log.Debug("  Deleted: " + _ctx.ObjectStateManager.GetObjectStateEntries(EntityState.Deleted).Count().ToString());
+                    Logging.Log.Debug("  Unchanged: " + _ctx.ObjectStateManager.GetObjectStateEntries(EntityState.Unchanged).Count().ToString());
 
                     Logging.Log.Debug("************************* Submit Changes <<<< ******************************");
                 }
@@ -388,7 +388,7 @@ namespace Kistl.DalProvider.Ef
         /// <summary>
         /// Attach an IPersistenceObject. The EntityFramework guarantees the all Objects are unique. No check required.
         /// </summary>
-        /// <param name="obj">Object to Attach</param>
+        /// <param baseDir="obj">Object to Attach</param>
         /// <returns>Object Attached</returns>
         public override IPersistenceObject Attach(IPersistenceObject obj)
         {
@@ -433,7 +433,7 @@ namespace Kistl.DalProvider.Ef
         /// <summary>
         /// Detach an IPersistenceObject.
         /// </summary>
-        /// <param name="obj">IDataObject</param>
+        /// <param baseDir="obj">IDataObject</param>
         public override void Detach(IPersistenceObject obj)
         {
             CheckDisposed();
@@ -444,7 +444,7 @@ namespace Kistl.DalProvider.Ef
         /// <summary>
         /// Delete an IPersistenceObject.
         /// </summary>
-        /// <param name="obj">IPersistenceObject</param>
+        /// <param baseDir="obj">IPersistenceObject</param>
         public override void Delete(IPersistenceObject obj)
         {
             CheckDisposed();
@@ -459,8 +459,8 @@ namespace Kistl.DalProvider.Ef
         /// This could be moved to a common abstract IKistlContextBase
         /// <remarks>Entity Framework does not support queries on Interfaces. Please use GetQuery&lt;T&gt;()</remarks>
         /// </summary>
-        /// <param name="ifType">Object Type of the Object to find.</param>
-        /// <param name="ID">ID of the Object to find.</param>
+        /// <param baseDir="ifType">Object Type of the Object to find.</param>
+        /// <param baseDir="ID">ID of the Object to find.</param>
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
         public override IDataObject Find(InterfaceType ifType, int ID)
         {
@@ -482,8 +482,8 @@ namespace Kistl.DalProvider.Ef
         /// TODO: This is quite redundant here as it only uses other IKistlContext Methods.
         /// This could be moved to a common abstract IKistlContextBase
         /// </summary>
-        /// <typeparam name="T">Object Type of the Object to find.</typeparam>
-        /// <param name="ID">ID of the Object to find.</param>
+        /// <typeparam baseDir="T">Object Type of the Object to find.</typeparam>
+        /// <param baseDir="ID">ID of the Object to find.</param>
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
         public override T Find<T>(int ID)
         {
@@ -517,8 +517,8 @@ namespace Kistl.DalProvider.Ef
         /// This could be moved to a common abstract IKistlContextBase
         /// <remarks>Entity Framework does not support queries on Interfaces. Please use GetQuery&lt;T&gt;()</remarks>
         /// </summary>
-        /// <param name="ifType">Object Type of the Object to find.</param>
-        /// <param name="ID">ID of the Object to find.</param>
+        /// <param baseDir="ifType">Object Type of the Object to find.</param>
+        /// <param baseDir="ID">ID of the Object to find.</param>
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
         public override IPersistenceObject FindPersistenceObject(InterfaceType ifType, int ID)
         {
@@ -540,8 +540,8 @@ namespace Kistl.DalProvider.Ef
         /// TODO: This is quite redundant here as it only uses other IKistlContext Methods.
         /// This could be moved to a common abstract IKistlContextBase
         /// </summary>
-        /// <typeparam name="T">Object Type of the Object to find.</typeparam>
-        /// <param name="ID">ID of the Object to find.</param>
+        /// <typeparam baseDir="T">Object Type of the Object to find.</typeparam>
+        /// <param baseDir="ID">ID of the Object to find.</param>
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
         public override T FindPersistenceObject<T>(int ID)
         {
@@ -572,8 +572,8 @@ namespace Kistl.DalProvider.Ef
         /// <summary>
         /// Find the Persistence Object of the given type by an ExportGuid
         /// </summary>
-        /// <param name="ifType">Object Type of the Object to find.</param>
-        /// <param name="exportGuid">ExportGuid of the Object to find.</param>
+        /// <param baseDir="ifType">Object Type of the Object to find.</param>
+        /// <param baseDir="exportGuid">ExportGuid of the Object to find.</param>
         /// <returns>IPersistenceObject or null if the Object was not found.</returns>
         public override IPersistenceObject FindPersistenceObject(InterfaceType ifType, Guid exportGuid)
         {
@@ -593,8 +593,8 @@ namespace Kistl.DalProvider.Ef
         /// <summary>
         /// Find the Persistence Object of the given type by an ExportGuid
         /// </summary>
-        /// <typeparam name="T">Object Type of the Object to find.</typeparam>
-        /// <param name="exportGuid">ExportGuid of the Object to find.</param>
+        /// <typeparam baseDir="T">Object Type of the Object to find.</typeparam>
+        /// <param baseDir="exportGuid">ExportGuid of the Object to find.</param>
         /// <returns>IPersistenceObject or null if the Object was not found.</returns>
         public override T FindPersistenceObject<T>(Guid exportGuid)
         {
@@ -615,8 +615,8 @@ namespace Kistl.DalProvider.Ef
         /// <summary>
         /// Find Persistence Objects of the given type by ExportGuids
         /// </summary>
-        /// <param name="ifType">Object Type of the Object to find.</param>
-        /// <param name="exportGuids">ExportGuids of the Objects to find.</param>
+        /// <param baseDir="ifType">Object Type of the Object to find.</param>
+        /// <param baseDir="exportGuids">ExportGuids of the Objects to find.</param>
         /// <returns>A List of IPersistenceObject.</returns>
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         public override IEnumerable<IPersistenceObject> FindPersistenceObjects(InterfaceType ifType, IEnumerable<Guid> exportGuids)
@@ -638,8 +638,8 @@ namespace Kistl.DalProvider.Ef
         /// <summary>
         /// Find Persistence Objects of the given type by ExportGuids
         /// </summary>
-        /// <typeparam name="T">Object Type of the Object to find.</typeparam>
-        /// <param name="exportGuids">ExportGuids of the Objects to find.</param>
+        /// <typeparam baseDir="T">Object Type of the Object to find.</typeparam>
+        /// <param baseDir="exportGuids">ExportGuids of the Objects to find.</param>
         /// <returns>A List of IPersistenceObject.</returns>
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         public override IEnumerable<T> FindPersistenceObjects<T>(IEnumerable<Guid> exportGuids)

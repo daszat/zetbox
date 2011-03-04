@@ -27,7 +27,7 @@ namespace Kistl.DalProvider.Ef
         {
             base.Load(moduleBuilder);
 
-            // As we are using the concrete Assembly name in our connection string, this should not be needed anymore
+            // As we are using the concrete Assembly baseDir in our connection string, this should not be needed anymore
             //var serverAssembly = Assembly.Load(ServerAssembly);
             //if (serverAssembly == null)
             //    throw new InvalidOperationException("Unable to load Kistl.Objects.EfImpl Assembly, no Entity Framework Metadata will be loaded");

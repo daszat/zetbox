@@ -12,7 +12,10 @@ namespace Kistl.App.Base
         [Invocation]
         public static void ToString(Kistl.App.Base.AccessControl obj, MethodReturnEventArgs<string> e)
         {
-            e.Result = (obj.Name ?? string.Empty) + " (" + (obj.Rights ?? AccessRights.None) + ") " + (obj.Description ?? string.Empty);
+            e.Result = String.Format("{0} ({1}) {2}",
+                obj.Name ?? string.Empty,
+                obj.Rights ?? AccessRights.None,
+                obj.Description ?? string.Empty);
 
             ToStringHelper.FixupFloatingObjectsToString(obj, e);
         }
