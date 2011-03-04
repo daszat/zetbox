@@ -58,6 +58,7 @@ namespace Kistl.Server
 
         public BootstrapperService(KistlConfig config)
         {
+            Log.InfoFormat("Starting BootstrapperService from {0}", config.ConfigFilePath);
             this.config = config;
         }
 
