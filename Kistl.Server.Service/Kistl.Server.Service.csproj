@@ -45,8 +45,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>..\bin\Debug\</OutputPath>
-    <!-- try to use SERIALIZE_GENERATION_THREADS to avoid spurious LinFu hang when generating. -->
-    <DefineConstants>DEBUG;TRACE;MONO;SERIALIZE_GENERATION_THREADS</DefineConstants>
+    <DefineConstants>DEBUG;TRACE;MONO</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
