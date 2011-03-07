@@ -47,7 +47,7 @@ namespace Kistl.Server.HttpService
         {
             Logging.Configure();
 
-            Log.Info("Starting Kistl Server");
+            Log.Info("Starting HttpService Application");
 
             var cfgFile = System.Configuration.ConfigurationManager.AppSettings["ConfigFile"];
 
