@@ -235,6 +235,12 @@ namespace Kistl.API.Configuration
             public bool ThrowErrors { get; set; }
 
             /// <summary>
+            /// If a Guid is specified, the given Application is launched
+            /// </summary>
+            [XmlElement(IsNullable = true)]
+            public Guid? Application { get; set; }
+
+            /// <summary>
             /// Overrides the current system culture
             /// </summary>
             [XmlElement(IsNullable = true)]

@@ -11,6 +11,7 @@ namespace Kistl.Client.WPF
     using Kistl.Client.Presentables;
     using Kistl.Client.Presentables.ObjectBrowser;
     using Kistl.Client.Presentables.KistlBase;
+using Kistl.API.Configuration;
 
     public class Launcher
     {
@@ -18,13 +19,15 @@ namespace Kistl.Client.WPF
         private readonly Func<IKistlContext> ctxFactory;
         private readonly IViewModelFactory mdlFactory;
         private readonly IFrozenContext frozenCtx;
+        private readonly KistlConfig cfg;
 
-        public Launcher(IKistlContext ctx, Func<IKistlContext> ctxFactory, IViewModelFactory mdlFactory, IFrozenContext frozenCtx)
+        public Launcher(IKistlContext ctx, Func<IKistlContext> ctxFactory, IViewModelFactory mdlFactory, IFrozenContext frozenCtx, KistlConfig cfg)
         {
             this.ctx = ctx;
             this.frozenCtx = frozenCtx;
             this.ctxFactory = ctxFactory;
             this.mdlFactory = mdlFactory;
+            this.cfg = cfg;
         }
 
         public void Show(string[] args)
@@ -36,9 +39,11 @@ namespace Kistl.Client.WPF
             if (args.Length > 0)
             {
                 var appGuid = new Guid(args[0]);
-                var app = frozenCtx.FindPersistenceObject<Kistl.App.GUI.Application>(appGuid);
-                var appMdl = mdlFactory.CreateViewModel<ApplicationViewModel.Factory>().Invoke(ctxFactory.Invoke(), app);
-                appMdl.OpenApplication(appMdl);
+                LaunchApplication(appGuid);
+            }
+            else if (cfg.Client.Application != null && cfg.Client.Application != Guid.Empty)
+            {
+                LaunchApplication(cfg.Client.Application.Value);
             }
             else
             {
@@ -53,6 +58,13 @@ namespace Kistl.Client.WPF
 
             //var cacheDebugger = mdlFactory.CreateViewModel<CacheDebuggerViewModel.Factory>().Invoke(ctxFactory());
             //mdlFactory.ShowModel(cacheDebugger, true);
+        }
+
+        private void LaunchApplication(Guid appGuid)
+        {
+            var app = frozenCtx.FindPersistenceObject<Kistl.App.GUI.Application>(appGuid);
+            var appMdl = mdlFactory.CreateViewModel<ApplicationViewModel.Factory>().Invoke(ctxFactory.Invoke(), app);
+            appMdl.OpenApplication(appMdl);
         }
     }
 }

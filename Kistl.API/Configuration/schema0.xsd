@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://dasz.at/Kistl/" elementFormDefault="qualified" targetNamespace="http://dasz.at/Kistl/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://microsoft.com/wsdl/types/" />
   <xs:element name="KistlConfig" nillable="true" type="tns:KistlConfig" />
   <xs:complexType name="KistlConfig">
     <xs:sequence>
@@ -61,6 +62,7 @@
   </xs:complexType>
   <xs:complexType name="ClientConfig">
     <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Application" nillable="true" xmlns:q1="http://microsoft.com/wsdl/types/" type="q1:guid" />
       <xs:element minOccurs="1" maxOccurs="1" name="Culture" nillable="true" type="xs:string" />
       <xs:element minOccurs="1" maxOccurs="1" name="UICulture" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" maxOccurs="1" name="DevelopmentEnvironment" nillable="true" type="xs:boolean" />
