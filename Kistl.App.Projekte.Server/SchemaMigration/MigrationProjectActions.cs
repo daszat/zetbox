@@ -11,6 +11,7 @@ namespace ZBox.App.SchemaMigration
     using Kistl.API.Utils;
     using Kistl.App.Extensions;
     using ZBox.App.SchemaMigration;
+using Kistl.API.Configuration;
 
     public class MigrationProjectActions
     {
@@ -18,20 +19,23 @@ namespace ZBox.App.SchemaMigration
 
         // TODO: fix this, as it is currently only working by accident
         private static ILifetimeScope _scope;
+        private static KistlConfig _cfg;
 
-        public MigrationProjectActions(ILifetimeScope scope)
+        public MigrationProjectActions(ILifetimeScope scope, KistlConfig cfg)
         {
             _scope = scope;
+            _cfg = cfg;
         }
 
         public static void UpdateFromSourceSchema(ZBox.App.SchemaMigration.MigrationProject obj)
         {
             foreach (var s in obj.StagingDatabases)
             {
-                if (string.IsNullOrEmpty(s.ConnectionString)) throw new InvalidOperationException("Source ConnectionString is empty");
-                if (string.IsNullOrEmpty(s.Provider)) throw new InvalidOperationException("Source Provider is empty");
-                ISchemaProvider src = _scope.ResolveNamed<ISchemaProvider>(s.Provider);
-                src.Open(s.ConnectionString);
+                var connectionString = _cfg.Server.GetConnectionString(s.ConnectionStringKey);
+                if (string.IsNullOrEmpty(connectionString.ConnectionString)) throw new InvalidOperationException("Source ConnectionString is empty");
+                if (string.IsNullOrEmpty(connectionString.SchemaProvider)) throw new InvalidOperationException("Source Provider is empty");
+                ISchemaProvider src = _scope.ResolveNamed<ISchemaProvider>(connectionString.SchemaProvider);
+                src.Open(connectionString.ConnectionString);
 
                 var destTbls = s.SourceTables
                     .ToDictionary(k => k.Name);

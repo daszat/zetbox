@@ -173,7 +173,10 @@ namespace Kistl.API.Migration
 
         protected void ReloadStaging(StagingDatabase stage)
         {
-            if (String.IsNullOrEmpty(stage.OriginProvider) || String.IsNullOrEmpty(stage.OriginConnectionString))
+            var originConnectionString = Config.Server.GetConnectionString(stage.OriginConnectionStringKey);
+            var connectionString = Config.Server.GetConnectionString(stage.ConnectionStringKey);
+
+            if (String.IsNullOrEmpty(originConnectionString.SchemaProvider) || String.IsNullOrEmpty(originConnectionString.ConnectionString))
             {
                 Log.DebugFormat("Skipping staging reload for [{0}] because of empty Origin", stage.Description);
                 return;
@@ -182,8 +185,8 @@ namespace Kistl.API.Migration
             using (Log.InfoTraceMethodCallFormat("Reload", "Reloading staging database [{0}]", stage.Description))
             using (var reloadScope = _applicationScope.BeginLifetimeScope())
             {
-                var srcSchema = OpenProvider(reloadScope, stage.OriginProvider, stage.OriginConnectionString);
-                var dstSchema = OpenProvider(reloadScope, stage.Provider, stage.ConnectionString);
+                var srcSchema = OpenProvider(reloadScope, originConnectionString.SchemaProvider, originConnectionString.ConnectionString);
+                var dstSchema = OpenProvider(reloadScope, connectionString.SchemaProvider, connectionString.ConnectionString);
 
                 dstSchema.DropSchema(stage.Schema, true);
                 dstSchema.CreateSchema(stage.Schema);

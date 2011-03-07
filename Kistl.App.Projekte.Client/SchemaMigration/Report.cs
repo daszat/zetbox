@@ -381,12 +381,16 @@ namespace ZBox.App.SchemaMigration
                 t.AddColumn("10cm");
 
                 r = t.AddRow();
-                r.Cells[0].AddParagraph("Provider");
-                r.Cells[1].AddParagraph(s.Provider ?? string.Empty);
+                r.Cells[0].AddParagraph("Source ConnectionString Key");
+                r.Cells[1].AddParagraph(s.OriginConnectionStringKey ?? string.Empty);
 
                 r = t.AddRow();
-                r.Cells[0].AddParagraph("ConnectionString");
-                r.Cells[1].AddParagraph(s.ConnectionString ?? string.Empty);
+                r.Cells[0].AddParagraph("Dest ConnectionString Key");
+                r.Cells[1].AddParagraph(s.ConnectionStringKey ?? string.Empty);
+
+                r = t.AddRow();
+                r.Cells[0].AddParagraph("Dest Schema");
+                r.Cells[1].AddParagraph(s.Schema ?? string.Empty);
 
                 r = t.AddRow();
                 r.Cells[0].AddParagraph("SourceTables");

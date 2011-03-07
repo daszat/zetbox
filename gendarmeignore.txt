@@ -15,6 +15,7 @@ M: System.Void ZBox.App.SchemaMigration.SourceTableMappingReport::RenderColumnMa
 M: System.Boolean Kistl.API.Utils.OptionSet::GetOptionParts(System.String,System.String&,System.String&,System.String&,System.String&)
 # false positive, the referenced object changes beneath the access
 M: System.Collections.ObjectModel.ReadOnlyObservableCollection`1<Kistl.Client.Presentables.ViewModel> Kistl.Client.Presentables.ModuleEditor.WorkspaceViewModel::get_TreeItems()
+M: System.Void ZBox.App.SchemaMigration.MigrationProjectMappingReport::RenderFirstPage()
 # meh
 M: System.Void Kistl.DalProvider.Ef.Generator.Templates.ObjectClasses.AssociationSetAttributes::Generate()
 
