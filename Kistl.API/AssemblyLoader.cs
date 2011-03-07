@@ -55,7 +55,7 @@ namespace Kistl.API
         {
             lock (_lock)
             {
-                Log.DebugFormat("Unloading from {0}", AppDomain.CurrentDomain.FriendlyName);
+                Log.InfoFormat("Unloading from {0}", AppDomain.CurrentDomain.FriendlyName);
                 AppDomain.CurrentDomain.AssemblyResolve -= AssemblyLoader.AssemblyResolve;
                 AppDomain.CurrentDomain.ReflectionOnlyAssemblyResolve -= AssemblyLoader.ReflectionOnlyAssemblyResolve;
             }
@@ -71,7 +71,7 @@ namespace Kistl.API
                 if (_isInitialised) return;
                 _isInitialised = true;
 
-                Log.DebugFormat("Initializing {0}", AppDomain.CurrentDomain.FriendlyName);
+                Log.InfoFormat("Initializing {0}", AppDomain.CurrentDomain.FriendlyName);
                 InitialiseTargetAssemblyFolder(config);
                 InitialiseSearchPath(config.AssemblySearchPaths);
 
@@ -89,7 +89,7 @@ namespace Kistl.API
                     ? path
                     : Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path);
 
-                Log.DebugFormat("Added searchpath [{0}]", rootedPath);
+                Log.InfoFormat("Added searchpath [{0}]", rootedPath);
                 AssemblyLoader.SearchPath.Add(rootedPath);
             }
         }
@@ -103,7 +103,7 @@ namespace Kistl.API
             // Delete stale Assemblies
             try
             {
-                Directory.GetFiles(AssemblyLoader.TargetAssemblyFolder).ForEach<string>(f => System.IO.File.Delete(f));
+                Directory.GetFiles(AssemblyLoader.TargetAssemblyFolder).ForEach<string>(f => File.Delete(f));
                 Log.InfoFormat("Cleaned TargetAssemblyFolder {0}", AssemblyLoader.TargetAssemblyFolder);
             }
             catch (Exception ex)
@@ -137,13 +137,13 @@ namespace Kistl.API
         internal static Assembly AssemblyResolve(object sender, ResolveEventArgs args)
         {
             if (AssemblyLoader.SearchPath.Count <= 0) return null;
-            Log.DebugFormat("Resolving Assembly {0}", args.Name);
+            Log.InfoFormat("Resolving Assembly {0}", args.Name);
             return LoadAssemblyByName(args.Name, false);
         }
 
         internal static Assembly ReflectionOnlyAssemblyResolve(object sender, ResolveEventArgs args)
         {
-            Log.DebugFormat("Resolving Assembly {0} for reflection", args.Name);
+            Log.InfoFormat("Resolving Assembly {0} for reflection", args.Name);
             try
             {
                 // http://blogs.msdn.com/b/jmstall/archive/2006/11/22/reflection-type-load-exception.aspx
@@ -246,7 +246,7 @@ namespace Kistl.API
                     // the folder should have been cleared on initialisation and once
                     // an assembly is loaded, we cannot re-load the assembly anyways.
                     string targetDll = Path.Combine(TargetAssemblyFolder, baseName + ".dll");
-                    Log.DebugFormat("Loading {0} (from {1}){2}", sourceDll, targetDll, reflectOnly ? " for reflection" : String.Empty);
+                    Log.InfoFormat("Loading {0} (from {1}){2}", sourceDll, targetDll, reflectOnly ? " for reflection" : String.Empty);
                     try
                     {
                         if (!File.Exists(targetDll))
