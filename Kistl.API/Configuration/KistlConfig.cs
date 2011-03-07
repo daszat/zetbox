@@ -204,6 +204,8 @@ namespace Kistl.API.Configuration
             {
                 [XmlAttribute("Name")]
                 public string Name { get; set; }
+                [XmlAttribute("Exclude")]
+                public string Exclude { get; set; }
                 [XmlText]
                 public string Value { get; set; }
             }

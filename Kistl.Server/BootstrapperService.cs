@@ -10,6 +10,7 @@ namespace Kistl.Server
     using System.ServiceModel.Web;
     using System.Text;
     using Kistl.API.Configuration;
+    using System.Text.RegularExpressions;
 
     public enum FileType
     {
@@ -100,9 +101,11 @@ namespace Kistl.Server
                     default:
                         {
                             var root = Path.GetFullPath(dir.Value);
+                            var regex = !string.IsNullOrEmpty(dir.Exclude) ? new Regex(dir.Exclude) : null;
 
                             foreach (var f in Directory.GetFiles(dir.Value, "*.*", SearchOption.AllDirectories))
                             {
+                                if (regex != null && regex.IsMatch(f)) continue;
                                 var fi = InspectFile(dir.Name, root, f);
                                 result.Add(fi);
                             }

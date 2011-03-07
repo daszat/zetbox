@@ -100,12 +100,15 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Configuration\schema0.xsd" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Configuration\SampleConfig.xml" />
     <None Include="ClassDiagram.Kistl.API.cd" />
     <None Include="Configuration\CreateSchema.cmd" />
+    <None Include="Configuration\schema0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Configuration\schema1.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Kistl.snk" />
     <Compile Include="ApiModule.cs" />
     <Compile Include="BaseMemoryContext.cs" />
