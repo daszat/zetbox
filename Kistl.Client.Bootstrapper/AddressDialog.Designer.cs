@@ -40,7 +40,7 @@ namespace Kistl.Client.Bootstrapper
             this.btnCancel.Location = new System.Drawing.Point(300, 58);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 0;
+            this.btnCancel.TabIndex = 2;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -70,7 +70,7 @@ namespace Kistl.Client.Bootstrapper
             this.txtAddress.Location = new System.Drawing.Point(12, 25);
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(363, 20);
-            this.txtAddress.TabIndex = 3;
+            this.txtAddress.TabIndex = 0;
             // 
             // AddressDialog
             // 
