@@ -11,9 +11,7 @@
   </xs:complexType>
   <xs:complexType name="ServerConfig">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="1" name="SchemaProvider" type="xs:string" />
-      <xs:element minOccurs="0" maxOccurs="1" name="DatabaseProvider" type="xs:string" />
-      <xs:element minOccurs="0" maxOccurs="1" name="ConnectionString" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="ConnectionStrings" type="tns:ArrayOfDatabase" />
       <xs:element minOccurs="0" maxOccurs="1" name="DocumentStore" type="xs:string" />
       <xs:element minOccurs="0" maxOccurs="1" name="LogFilePath" type="xs:string" />
       <xs:element minOccurs="0" maxOccurs="1" name="CodeGenWorkingPath" type="xs:string" />
@@ -24,6 +22,20 @@
       <xs:element minOccurs="0" maxOccurs="1" name="ClientFilesLocations" type="tns:ArrayOfClientFilesLocation" />
     </xs:sequence>
     <xs:attribute name="StartServer" type="xs:boolean" use="required" />
+  </xs:complexType>
+  <xs:complexType name="ArrayOfDatabase">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Database" nillable="true" type="tns:Database" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Database">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="Name" type="xs:string" />
+        <xs:attribute name="Schema" type="xs:string" />
+        <xs:attribute name="Provider" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
   </xs:complexType>
   <xs:complexType name="ArrayOfString">
     <xs:sequence>

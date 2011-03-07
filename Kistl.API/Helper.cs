@@ -47,6 +47,11 @@ namespace Kistl.API
         public static readonly int DefaultStringPropertyLength = 1000;
 
         /// <summary>
+        /// Keyname for the Kistl connection string
+        /// </summary>
+        public static readonly string KistlConnectionStringKey = "Kistl";
+
+        /// <summary>
         /// Newly created objects are not yet saved to the server and therefore handle some data only locally.
         /// This method can distinguish them from "older" objects that already have a representation on the server.
         /// </summary>

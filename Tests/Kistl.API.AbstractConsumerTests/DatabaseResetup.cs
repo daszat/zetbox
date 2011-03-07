@@ -26,12 +26,13 @@ namespace Kistl.API.AbstractConsumerTests
         {
             using (Log.InfoTraceMethodCall("ResetDatabase"))
             {
-                Assert.That(config.Server.ConnectionString, Is.StringContaining("_test"), "test databases should be marked with '_test' in the connection string");
+                var connectionString = config.Server.GetConnectionString(Helper.KistlConnectionStringKey);
+                Assert.That(connectionString.ConnectionString, Is.StringContaining("_test"), "test databases should be marked with '_test' in the connection string");
 
                 try
                 {
                     Log.Info("Restoring Database");
-                    var cb = new SqlConnectionStringBuilder(config.Server.ConnectionString);
+                    var cb = new SqlConnectionStringBuilder(connectionString.ConnectionString);
                     cb.InitialCatalog = "master";
                     Log.InfoFormat("executing on database [{0}]", cb.ToString());
                     ExecuteScript(cb.ToString(), "Kistl.Server.Database.Scripts.BackupRestoreTestDatabase.sql");

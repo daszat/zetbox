@@ -115,9 +115,10 @@ namespace Kistl.Server.Tests.Security
 
             // Fix security tables
             // Own test checks if this works during object modifications too
-            using (var db = scope.ResolveNamed<ISchemaProvider>(config.Server.SchemaProvider))
+            var connectionString = config.Server.GetConnectionString(Helper.KistlConnectionStringKey);
+            using (var db = scope.ResolveNamed<ISchemaProvider>(connectionString.SchemaProvider))
             {
-                db.Open(config.Server.ConnectionString);
+                db.Open(connectionString.ConnectionString);
                 db.ExecRefreshRightsOnProcedure(db.GetQualifiedProcedureName("RefreshRightsOn_Projekte"));
                 db.ExecRefreshRightsOnProcedure(db.GetQualifiedProcedureName("RefreshRightsOn_Tasks"));
                 db.ExecRefreshRightsOnProcedure(db.GetQualifiedProcedureName("RefreshRightsOn_Auftraege"));

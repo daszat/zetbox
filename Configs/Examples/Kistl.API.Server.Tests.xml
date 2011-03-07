@@ -2,8 +2,9 @@
 <KistlConfig xmlns="http://dasz.at/Kistl/">
   <ConfigName>Server.API's Test Configuration</ConfigName>
   <Server StartServer="false">
-    <DatabaseProvider>System.Data.SqlServerCe.3.5</DatabaseProvider>
-    <ConnectionString></ConnectionString>
+    <ConnectionStrings>
+      <Database Name="Kistl" Schema="SQLCE" Provider="System.Data.SqlServerCe.3.5"></Database>
+    </ConnectionStrings>
     <DocumentStore>DocumentStore\Server\</DocumentStore>
     <LogFilePath>bin\LogFiles</LogFilePath>
     <CodeGenWorkingPath>bin\CodeGenNext</CodeGenWorkingPath>

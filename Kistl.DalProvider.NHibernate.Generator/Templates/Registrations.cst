@@ -14,16 +14,9 @@
                     c => {
                         var kistlConfig = c.Resolve<KistlConfig>();
                         var result = new Configuration();
-                        switch (kistlConfig.Server.SchemaProvider)
-                        {
-                            case "MSSQL":
-                                result.Properties["dialect"] = "NHibernate.Dialect.MsSql2005Dialect";
-                                break;
-                            case "POSTGRESQL":
-                                result.Properties["dialect"] = "NHibernate.Dialect.PostgreSQL82Dialect";
-                                break;
-                        }
-                        result.Properties["connection.connection_string"] = kistlConfig.Server.ConnectionString;
+                        var connectionString = kistlConfig.Server.GetConnectionString(Kistl.API.Helper.KistlConnectionStringKey);
+                        result.Properties["dialect"] = connectionString.DatabaseProvider;
+                        result.Properties["connection.connection_string"] = connectionString.ConnectionString;
                         result.Properties["max_fetch_depth"] = "1"; // keep SQL statements small
                         result.Properties["proxyfactory.factory_class"] = "NHibernate.ByteCode.LinFu.ProxyFactoryFactory, NHibernate.ByteCode.LinFu";
 #if DEBUG

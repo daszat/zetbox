@@ -2,9 +2,9 @@
 <KistlConfig xmlns="http://dasz.at/Kistl/">
   <ConfigName>Default Server Configuration</ConfigName>
   <Server StartServer="true">
-    <SchemaProvider>MSSQL</SchemaProvider>
-    <DatabaseProvider>System.Data.SqlClient</DatabaseProvider>
-    <ConnectionString>Data Source=.\SQLEXPRESS;Initial Catalog=zbox;Integrated Security=True;MultipleActiveResultSets=true;</ConnectionString>
+    <ConnectionStrings>
+      <Database Name="Kistl" Schema="MSSQL" Provider="NHibernate.Dialect.MsSql2005Dialect">Data Source=.\SQLEXPRESS;Initial Catalog=zbox;Integrated Security=True;MultipleActiveResultSets=true;</Database>
+    </ConnectionStrings>
     <DocumentStore>DocumentStore\Server\</DocumentStore>
     <LogFilePath>bin\LogFiles</LogFilePath>
     <CodeGenWorkingPath>bin\CodeGenNext</CodeGenWorkingPath>

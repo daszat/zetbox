@@ -39,7 +39,8 @@ namespace Kistl.Tests.Utilities.PostgreSql
         {
             using (Log.InfoTraceMethodCall("ResetDatabase"))
             {
-                Assert.That(config.Server.ConnectionString, Is.StringContaining("_test"), "test databases should be marked with '_test' in the connection string");
+                var connectionString = config.Server.GetConnectionString(Kistl.API.Helper.KistlConnectionStringKey);
+                Assert.That(connectionString.ConnectionString, Is.StringContaining("_test"), "test databases should be marked with '_test' in the connection string");
 
                 Log.InfoFormat("Current Directory=[{0}]", Environment.CurrentDirectory);
                 Log.InfoFormat("Using config from [{0}]", config.ConfigFilePath);
@@ -48,7 +49,7 @@ namespace Kistl.Tests.Utilities.PostgreSql
                 {
                     Log.Info("Restoring Database");
 
-                    var cb = new NpgsqlConnectionStringBuilder(config.Server.ConnectionString);
+                    var cb = new NpgsqlConnectionStringBuilder(connectionString.ConnectionString);
                     var srcDB = cb.Database.Substring(0, cb.Database.Length - "_test".Length);
                     var destDB = cb.Database;
                     var userCmdString = "--username=postgres --no-password";
@@ -70,7 +71,7 @@ namespace Kistl.Tests.Utilities.PostgreSql
                         {
                             Log.WarnFormat("Retrying after failed pg_restore (exit={0}), since the tool can become confused by schema changes", exitCode);
 
-                            var admin = new NpgsqlConnectionStringBuilder(config.Server.ConnectionString);
+                            var admin = new NpgsqlConnectionStringBuilder(connectionString.ConnectionString);
                             var dbName = admin.Database;
                             admin.Database = "template0";
                             schemaManager.Open(admin.ConnectionString);

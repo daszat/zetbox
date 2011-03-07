@@ -58,9 +58,11 @@ namespace Kistl.Server.SchemaManagement
 
         private void WriteReportHeader(string reportName)
         {
+            var connectionString = config.Server.GetConnectionString(Helper.KistlConnectionStringKey);
+
             Log.InfoFormat("== {0} ==", reportName);
             Log.InfoFormat("Date: {0}", DateTime.Now);
-            Log.InfoFormat("Database: {0}", config.Server.ConnectionString);
+            Log.InfoFormat("Database: {0}", connectionString.ConnectionString);
             Log.Info(String.Empty);
         }
 

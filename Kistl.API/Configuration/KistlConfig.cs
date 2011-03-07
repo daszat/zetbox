@@ -94,23 +94,56 @@ namespace Kistl.API.Configuration
             [XmlAttribute]
             public bool StartServer { get; set; }
 
-            /// <summary>
-            /// Schema Provider Name
-            /// </summary>
-            [XmlElement(IsNullable = false)]
-            public string SchemaProvider { get; set; }
+            [Serializable]
+            public class Database
+            {
+                /// <summary>
+                /// Keyname of the connection string
+                /// </summary>
+                [XmlAttribute]
+                public string Name { get; set; }
+
+                /// <summary>
+                /// Name of schema provider
+                /// </summary>
+                [XmlAttribute("Schema")]
+                public string SchemaProvider { get; set; }
+
+                /// <summary>
+                /// Name of database provider
+                /// </summary>
+                [XmlAttribute("Provider")]
+                public string DatabaseProvider { get; set; }
+
+                /// <summary>
+                /// The connection string
+                /// </summary>
+                [XmlText]
+                public string ConnectionString { get; set; }
+            }
+
+            public Database GetConnectionString(string key)
+            {
+                var result = ConnectionStrings.Where(i => i.Name == key).ToArray();
+                if (result.Length == 0)
+                {
+                    throw new ArgumentOutOfRangeException("key", string.Format("No connection string with key '{0}' found", key));
+                }
+                else if (result.Length > 1)
+                {
+                    throw new InvalidOperationException(string.Format("Found {0} connection strings with key '{0}' found", result.Length, key));
+                }
+                else
+                {
+                    return result.Single();
+                }
+            }
 
             /// <summary>
-            /// Database Provider Name
+            /// Collection of connection strings
             /// </summary>
-            [XmlElement(IsNullable = false)]
-            public string DatabaseProvider { get; set; }
-
-            /// <summary>
-            /// Connectionstring to Database.
-            /// </summary>
-            [XmlElement(IsNullable = false)]
-            public string ConnectionString { get; set; }
+            [XmlArray(IsNullable = false)]
+            public Database[] ConnectionStrings { get; set; }
 
             /// <summary>
             /// Path of the Document Store

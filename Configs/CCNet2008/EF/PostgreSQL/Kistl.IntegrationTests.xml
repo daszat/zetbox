@@ -2,9 +2,9 @@
 <KistlConfig xmlns="http://dasz.at/Kistl/">
   <ConfigName>Kistl.IntegrationTests' EF/PostgreSQL Configuration</ConfigName>
   <Server StartServer="false">
-    <SchemaProvider>POSTGRESQL</SchemaProvider>
-    <DatabaseProvider>Npgsql</DatabaseProvider>
-    <ConnectionString>Server=localhost;Port=5432;Database=zbox_test;User Id=zbox;Password=b-cXqMyXEYea2kkjUhkS</ConnectionString>
+    <ConnectionStrings>
+      <Database Name="Kistl" Schema="POSTGRESQL" Provider="Npgsql">Server=localhost;Port=5432;Database=zbox_test;User Id=zbox;Password=b-cXqMyXEYea2kkjUhkS</Database>
+    </ConnectionStrings>
     <DocumentStore>DocumentStore\Server\</DocumentStore>
     <LogFilePath>bin\LogFiles</LogFilePath>
     <CodeGenWorkingPath>bin\CodeGenNext</CodeGenWorkingPath>

@@ -26,8 +26,9 @@ namespace Kistl.Server
                 {
                     KistlConfig cfg = c.Resolve<KistlConfig>();
                     IKistlContext ctx = c.Resolve<BaseMemoryContext>();
-                    ISchemaProvider schemaProvider = c.ResolveNamed<ISchemaProvider>(cfg.Server.SchemaProvider);
-                    schemaProvider.Open(cfg.Server.ConnectionString);
+                    var connectionString = cfg.Server.GetConnectionString(Kistl.API.Helper.KistlConnectionStringKey);
+                    ISchemaProvider schemaProvider = c.ResolveNamed<ISchemaProvider>(connectionString.SchemaProvider);
+                    schemaProvider.Open(connectionString.ConnectionString);
                     SchemaManagement.SchemaManager.LoadSavedSchemaInto(schemaProvider, ctx);
 
                     return new SchemaManagement.SchemaManager(

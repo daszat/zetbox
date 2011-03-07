@@ -44,7 +44,8 @@ namespace Kistl.DalProvider.Memory
                 .OnActivated(args =>
                 {
                     var config = args.Context.Resolve<KistlConfig>();
-                    Importer.LoadFromXml(args.Instance, config.Server.ConnectionString);
+                    var connectionString = config.Server.GetConnectionString(Helper.KistlConnectionStringKey);
+                    Importer.LoadFromXml(args.Instance, connectionString.ConnectionString);
 
                     var manager = args.Context.Resolve<IMemoryActionsManager>();
                     manager.Init(args.Instance);

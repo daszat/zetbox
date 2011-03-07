@@ -28,8 +28,10 @@ namespace Kistl.API.Tests
             Assert.That(cfg.Client, Is.Not.Null, "Client");
 
             Assert.That(cfg.Server, Is.Not.Null, "Server");
-            Assert.That(cfg.Server.ConnectionString, Is.Not.Empty, "ConnectionString");
-            Assert.That(cfg.Server.DatabaseProvider, Is.Not.Empty, "DatabaseProvider");
+            var connectionString = cfg.Server.GetConnectionString(Helper.KistlConnectionStringKey);
+            Assert.That(connectionString.ConnectionString, Is.Not.Empty, "ConnectionString");
+            Assert.That(connectionString.SchemaProvider, Is.Not.Empty, "SchemaProvider");
+            Assert.That(connectionString.DatabaseProvider, Is.Not.Empty, "DatabaseProvider");
             Assert.That(cfg.Server.DocumentStore, Is.Not.Empty, "DocumentStore");
         }
 

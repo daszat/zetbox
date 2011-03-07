@@ -96,8 +96,9 @@ namespace Kistl.Server
             {
                 IKistlContext ctx = subContainer.Resolve<BaseMemoryContext>();
                 KistlConfig cfg = subContainer.Resolve<KistlConfig>();
-                ISchemaProvider schemaProvider = subContainer.ResolveNamed<ISchemaProvider>(cfg.Server.SchemaProvider);
-                schemaProvider.Open(cfg.Server.ConnectionString);
+                var connectionString = cfg.Server.GetConnectionString(Kistl.API.Helper.KistlConnectionStringKey);
+                ISchemaProvider schemaProvider = subContainer.ResolveNamed<ISchemaProvider>(connectionString.SchemaProvider);
+                schemaProvider.Open(connectionString.ConnectionString);
                 SchemaManagement.SchemaManager.LoadSavedSchemaInto(schemaProvider, ctx);
 
                 var mgr = subContainer.Resolve<SchemaManagement.SchemaManager>(new NamedParameter("newSchema", ctx));
@@ -254,8 +255,9 @@ namespace Kistl.Server
             using (var subContainer = container.BeginLifetimeScope())
             {
                 var config = subContainer.Resolve<KistlConfig>();
-                var schemaProvider = subContainer.ResolveNamed<ISchemaProvider>(config.Server.SchemaProvider);
-                schemaProvider.Open(config.Server.ConnectionString);
+                var connectionString = config.Server.GetConnectionString(Kistl.API.Helper.KistlConnectionStringKey);
+                var schemaProvider = subContainer.ResolveNamed<ISchemaProvider>(connectionString.SchemaProvider);
+                schemaProvider.Open(connectionString.ConnectionString);
                 schemaProvider.DropAllObjects();
             }
         }
