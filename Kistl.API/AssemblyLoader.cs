@@ -22,6 +22,7 @@ namespace Kistl.API
     // or Mono.Addins; or push all Assemblies to the GAC to avoid this mess.
     public static class AssemblyLoader
     {
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.AssemblyLoader");
         private readonly static object _lock = new object();
 
         /// <summary>
@@ -54,6 +55,7 @@ namespace Kistl.API
         {
             lock (_lock)
             {
+                Log.DebugFormat("Unloading from {0}", AppDomain.CurrentDomain.FriendlyName);
                 AppDomain.CurrentDomain.AssemblyResolve -= AssemblyLoader.AssemblyResolve;
                 AppDomain.CurrentDomain.ReflectionOnlyAssemblyResolve -= AssemblyLoader.ReflectionOnlyAssemblyResolve;
             }
@@ -69,6 +71,7 @@ namespace Kistl.API
                 if (_isInitialised) return;
                 _isInitialised = true;
 
+                Log.DebugFormat("Initializing {0}", AppDomain.CurrentDomain.FriendlyName);
                 InitialiseTargetAssemblyFolder(config);
                 InitialiseSearchPath(config.AssemblySearchPaths);
 
@@ -82,14 +85,12 @@ namespace Kistl.API
         {
             foreach (var path in paths ?? new string[] { })
             {
-                if (Path.IsPathRooted(path))
-                {
-                    AssemblyLoader.SearchPath.Add(path);
-                }
-                else
-                {
-                    AssemblyLoader.SearchPath.Add(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path));
-                }
+                var rootedPath = Path.IsPathRooted(path)
+                    ? path
+                    : Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path);
+
+                Log.DebugFormat("Added searchpath [{0}]", rootedPath);
+                AssemblyLoader.SearchPath.Add(rootedPath);
             }
         }
 
@@ -103,11 +104,11 @@ namespace Kistl.API
             try
             {
                 Directory.GetFiles(AssemblyLoader.TargetAssemblyFolder).ForEach<string>(f => System.IO.File.Delete(f));
-                Logging.AssemblyLoader.InfoFormat("Cleaned TargetAssemblyFolder {0}", AssemblyLoader.TargetAssemblyFolder);
+                Log.InfoFormat("Cleaned TargetAssemblyFolder {0}", AssemblyLoader.TargetAssemblyFolder);
             }
             catch (Exception ex)
             {
-                Logging.AssemblyLoader.WarnFormat("Couldn't clean TargetAssemblyFolder {0}: {1}", AssemblyLoader.TargetAssemblyFolder, ex.ToString());
+                Log.WarnFormat("Couldn't clean TargetAssemblyFolder {0}: {1}", AssemblyLoader.TargetAssemblyFolder, ex.ToString());
             }
         }
 
@@ -136,13 +137,13 @@ namespace Kistl.API
         internal static Assembly AssemblyResolve(object sender, ResolveEventArgs args)
         {
             if (AssemblyLoader.SearchPath.Count <= 0) return null;
-            Logging.AssemblyLoader.DebugFormat("Resolving Assembly {0}", args.Name);
+            Log.DebugFormat("Resolving Assembly {0}", args.Name);
             return LoadAssemblyByName(args.Name, false);
         }
 
         internal static Assembly ReflectionOnlyAssemblyResolve(object sender, ResolveEventArgs args)
         {
-            Logging.AssemblyLoader.DebugFormat("Resolving Assembly {0} for reflection", args.Name);
+            Log.DebugFormat("Resolving Assembly {0} for reflection", args.Name);
             try
             {
                 // http://blogs.msdn.com/b/jmstall/archive/2006/11/22/reflection-type-load-exception.aspx
@@ -245,7 +246,7 @@ namespace Kistl.API
                     // the folder should have been cleared on initialisation and once
                     // an assembly is loaded, we cannot re-load the assembly anyways.
                     string targetDll = Path.Combine(TargetAssemblyFolder, baseName + ".dll");
-                    Logging.AssemblyLoader.DebugFormat("Loading {0} (from {1}){2}", sourceDll, targetDll, reflectOnly ? " for reflection" : String.Empty);
+                    Log.DebugFormat("Loading {0} (from {1}){2}", sourceDll, targetDll, reflectOnly ? " for reflection" : String.Empty);
                     try
                     {
                         if (!File.Exists(targetDll))
@@ -262,7 +263,7 @@ namespace Kistl.API
                     }
                     catch (Exception ex)
                     {
-                        Logging.AssemblyLoader.Warn("Error loading assembly", ex);
+                        Log.Warn("Error loading assembly", ex);
                     }
                     Assembly result = null;
 
@@ -280,7 +281,7 @@ namespace Kistl.API
                         // See http://forums.microsoft.com/MSDN/ShowPost.aspx?PostID=1109769&SiteID=1
                     }
                     if (result == null)
-                        Logging.AssemblyLoader.WarnFormat("Cannot load {0}", baseName);
+                        Log.WarnFormat("Cannot load {0}", baseName);
                     return result;
                 }
                 finally
