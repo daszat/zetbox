@@ -57,7 +57,7 @@ namespace Kistl.Client.Bootstrapper
 
                     var f = files.Files[i];
 
-                    SetStatus(string.Format("Loading File {0}/{1}: {2}", i + 1, files.Files.Length, f.GetFullFileName(".")));
+                    SetStatus(string.Format("Loading File {0}/{1}: {2}", i + 1, files.Files.Length, f.GetDisplayFileName()));
                     SetProgressBar(i);
 
                     if (!DownloadFile(f)) return;

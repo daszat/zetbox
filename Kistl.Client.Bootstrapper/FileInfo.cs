@@ -42,5 +42,10 @@ namespace Kistl.Client.Bootstrapper
                     return Path.GetFullPath(Path.Combine(targetDir, Path.Combine(DestPath, Name)));
             }
         }
+
+        public string GetDisplayFileName()
+        {
+            return Path.Combine(DestPath, Name);
+        }
     }
 }
