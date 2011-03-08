@@ -24,10 +24,10 @@ namespace Kistl.Server
         /// </summary>
         private readonly ServiceHostBase _mainHost = null;
 
-        ///// <summary>
-        ///// Bootstrapper WCF Service Host
-        ///// </summary>
-        //private readonly ServiceHostBase _bootstrapperHost = null;
+        /// <summary>
+        /// Bootstrapper WCF Service Host
+        /// </summary>
+        private readonly ServiceHostBase _bootstrapperHost = null;
 
         /// <summary>
         /// WCF Service Thread
@@ -51,20 +51,7 @@ namespace Kistl.Server
             _mainHost.Closed += host_Closed;
             _mainHost.Opened += host_Opened;
 
-            // vvvvv this should be the right way vvvvvvv
-            //_bootstrapperHost = webFactory.CreateServiceHost(typeof(BootstrapperService).AssemblyQualifiedName, new Uri[] { });
-
-            // vvvvv this works with mono vvvvvvv
-            //_bootstrapperHost = new WebServiceHost(new BootstrapperService(config));
-
-            //var binding = new WebHttpBinding();
-            //binding.Security.Mode = WebHttpSecurityMode.TransportCredentialOnly;
-            //binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Basic;
-
-            //((WebServiceHost)_bootstrapperHost).AddServiceEndpoint(
-            //    typeof(IBootstrapperService),
-            //    binding,
-            //    new Uri("Bootstrapper.svc", UriKind.Relative));
+            _bootstrapperHost = webFactory.CreateServiceHost(typeof(BootstrapperService).AssemblyQualifiedName, new Uri[] { });
         }
 
         void host_Opened(object sender, EventArgs e)
@@ -105,7 +92,7 @@ namespace Kistl.Server
             Log.Info("Stopping Server");
 
             _mainHost.Close();
-            //_bootstrapperHost.Close();
+            _bootstrapperHost.Close();
 
             if (!serviceThread.Join(5000))
             {
@@ -134,7 +121,7 @@ namespace Kistl.Server
                 using (Log.DebugTraceMethodCall("Starting WCF Server"))
                 {
                     _mainHost.Open();
-                    //_bootstrapperHost.Open();
+                    _bootstrapperHost.Open();
                     serverStarted.Set();
                 }
 

@@ -42,7 +42,7 @@ namespace Kistl.Server
         FileInfo[] GetFileInfos();
 
         [OperationContract]
-        [WebGet(UriTemplate = "/GetFile/{path}")]
+        [WebGet(UriTemplate = "/GetFile/{*path}")]
         Stream GetFile(string path);
     }
 
