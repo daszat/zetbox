@@ -24,6 +24,7 @@ namespace Kistl.Client.Bootstrapper
         AutoResetEvent downloadEvent = new AutoResetEvent(false);
         string startExec = string.Empty;
         string targetDir = string.Empty;
+        bool downloadError = false;
         #endregion
 
         public Bootstrapper()
@@ -59,7 +60,7 @@ namespace Kistl.Client.Bootstrapper
                     SetStatus(string.Format("Loading File {0}/{1}: {2}", i + 1, files.Files.Length, f.GetFullFileName(".")));
                     SetProgressBar(i);
 
-                    DownloadFile(f);
+                    if (!DownloadFile(f)) return;
                 }
 
                 CleanupUnusedFiles(files);
@@ -136,7 +137,7 @@ namespace Kistl.Client.Bootstrapper
             return targetDir;
         }
 
-        private void DownloadFile(FileInfo f)
+        private bool DownloadFile(FileInfo f)
         {
             var targetFile = f.GetFullFileName(targetDir);
 
@@ -148,7 +149,7 @@ namespace Kistl.Client.Bootstrapper
             if (File.Exists(targetFile))
             {
                 var fi = new System.IO.FileInfo(targetFile);
-                if (fi.LastWriteTimeUtc == f.Date && fi.Length == f.Size) return;
+                if (fi.LastWriteTimeUtc == f.Date && fi.Length == f.Size) return true;
             }
 
             Directory.CreateDirectory(Path.Combine(targetDir, f.DestPath));
@@ -157,9 +158,17 @@ namespace Kistl.Client.Bootstrapper
             service.DownloadFileAsync(adr, targetFile);
             downloadEvent.WaitOne();
 
-            File.SetCreationTimeUtc(targetFile, f.Date);
-            File.SetLastWriteTimeUtc(targetFile, f.Date);
-            File.SetLastAccessTimeUtc(targetFile, f.Date);
+            if (!downloadError)
+            {
+                File.SetCreationTimeUtc(targetFile, f.Date);
+                File.SetLastWriteTimeUtc(targetFile, f.Date);
+                File.SetLastAccessTimeUtc(targetFile, f.Date);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private void CleanupUnusedFiles(FileInfoArray files)
@@ -192,7 +201,8 @@ namespace Kistl.Client.Bootstrapper
             if (e.Error != null)
             {
                 Debug.WriteLine(String.Format("Failed to download {0}", e));
-                throw new InvalidOperationException("Download failed");
+                SetStatus("Download failed:" + e.Error.Message);
+                downloadError = true;
             }
 
             downloadEvent.Set();
