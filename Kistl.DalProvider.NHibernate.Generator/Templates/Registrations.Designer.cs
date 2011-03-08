@@ -53,6 +53,15 @@ this.WriteObjects("                            .AddAssembly(typeof(NHibernateMod
 this.WriteObjects("                            .BuildSessionFactory();\r\n");
 this.WriteObjects("                    })\r\n");
 this.WriteObjects("                .SingleInstance();\r\n");
+this.WriteObjects("\r\n");
+this.WriteObjects("            builder\r\n");
+this.WriteObjects("                .Register<ISession>(\r\n");
+this.WriteObjects("                    c => c.Resolve<ISessionFactory>()\r\n");
+this.WriteObjects("                            .OpenSession())\r\n");
+this.WriteObjects("                // TODO: reconsider this configuration\r\n");
+this.WriteObjects("                //       using IPD makes it safer, but requires passing the session manually\r\n");
+this.WriteObjects("                //       on the other hand, the session should never escape the data context\r\n");
+this.WriteObjects("                .InstancePerDependency();\r\n");
 
         }
 

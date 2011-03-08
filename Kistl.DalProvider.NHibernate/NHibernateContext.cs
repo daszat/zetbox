@@ -39,7 +39,6 @@ namespace Kistl.DalProvider.NHibernate
             InterfaceType.Factory iftFactory,
             NHibernateImplementationType.Factory implTypeFactory,
             global::NHibernate.ISession nhSession,
-            NHibernateAttachInterceptor interceptor,
             INHibernateImplementationTypeChecker implChecker)
             : base(metaDataResolver, identity, config, lazyCtx, iftFactory)
         {
@@ -49,8 +48,6 @@ namespace Kistl.DalProvider.NHibernate
 
             _attachedObjects = new ContextCache<int>(this, item => item.ID);
             _attachedObjectsByProxy = new ContextCache<IProxyObject>(this, item => ((NHibernatePersistenceObject)item).NHibernateProxy);
-
-            interceptor.Context = this;
         }
 
         public IQueryable<IPersistenceObject> PrepareQueryableGeneric<Tinterface, Tproxy>()

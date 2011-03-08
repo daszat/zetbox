@@ -41,8 +41,6 @@ namespace Kistl.DalProvider.NHibernate
                 .Register((c, p) =>
                 {
                     var param = p.OfType<ConstantParameter>().FirstOrDefault();
-                    var interceptor = c.Resolve<NHibernateAttachInterceptor>();
-                    var session = c.Resolve<global::NHibernate.ISession>(new NamedParameter("interceptor", interceptor));
                     return new NHibernateContext(
                         c.Resolve<IMetaDataResolver>(),
                         param != null ? (Kistl.App.Base.Identity)param.Value : c.Resolve<IIdentityResolver>().GetCurrent(),
@@ -50,8 +48,7 @@ namespace Kistl.DalProvider.NHibernate
                         c.Resolve<Func<IFrozenContext>>(),
                         c.Resolve<InterfaceType.Factory>(),
                         c.Resolve<NHibernateImplementationType.Factory>(),
-                        session,
-                        interceptor,
+                        c.Resolve<global::NHibernate.ISession>(),
                         c.Resolve<INHibernateImplementationTypeChecker>()
                         );
                 })
@@ -67,23 +64,6 @@ namespace Kistl.DalProvider.NHibernate
                 .Register(c => new NHibernateServerObjectHandlerFactory())
                 .As(typeof(IServerObjectHandlerFactory));
 
-            moduleBuilder
-                .RegisterType<NHibernateAttachInterceptor>()
-                .InstancePerDependency();
-
-            moduleBuilder
-                .Register<global::NHibernate.ISession>(
-                    (c, p) =>
-                    {
-                        var interceptor = p.Named<global::NHibernate.IInterceptor>("interceptor");
-                        return c.Resolve<global::NHibernate.ISessionFactory>()
-                            .OpenSession(interceptor);
-                    })
-                // TODO: reconsider this configuration
-                //       using IPD makes it safer, but requires passing the session manually
-                //       on the other hand, the session should never escape the data context
-                .InstancePerDependency();
-
             //moduleBuilder
             //    .RegisterType<AutofacBytecodeProvider>()
             //    .As<global::NHibernate.Bytecode.IBytecodeProvider>()
@@ -96,8 +76,6 @@ namespace Kistl.DalProvider.NHibernate
             return moduleBuilder
                 .Register(c =>
                 {
-                    var interceptor = c.Resolve<NHibernateAttachInterceptor>();
-                    var session = c.Resolve<global::NHibernate.ISession>(new NamedParameter("interceptor", interceptor));
                     return new NHibernateContext(
                         c.Resolve<IMetaDataResolver>(),
                         null,
@@ -105,8 +83,7 @@ namespace Kistl.DalProvider.NHibernate
                         c.Resolve<Func<IFrozenContext>>(),
                         c.Resolve<InterfaceType.Factory>(),
                         c.Resolve<NHibernateImplementationType.Factory>(),
-                        session,
-                        interceptor,
+                        c.Resolve<global::NHibernate.ISession>(),
                         c.Resolve<INHibernateImplementationTypeChecker>()
                         );
                 })
