@@ -104,24 +104,23 @@ namespace Kistl.API.Migration
         protected virtual KistlConfig ReadConfig(List<string> extraArguments)
         {
             string configFilePath = null;
-            if (extraArguments == null)
+            if (extraArguments == null || extraArguments.Count == 0)
             {
-                configFilePath = "DefaultConfig.xml";
+                configFilePath = String.Empty;
             }
-            else if (extraArguments != null && extraArguments.Count == 1)
+            else if (extraArguments.Count == 1)
             {
-                configFilePath = extraArguments.Single();
+                configFilePath = extraArguments[0];
             }
             else
             {
-                Log.FatalFormat("Unrecognized Arguments: [{0}]", String.Join("], [", extraArguments.ToArray()));
+                Log.FatalFormat("Unerkannte Argumente: [{0}]", String.Join("], [", extraArguments.ToArray()));
                 PrintHelpAndExit();
             }
 
-            Log.DebugFormat("Trying to load config from [{0}]", configFilePath);
             try
             {
-                return KistlConfig.FromFile(configFilePath, "MigrationConfig.xml");
+                return KistlConfig.FromFile(configFilePath, "Ini50.Migrate.xml");
             }
             catch (Exception ex)
             {
