@@ -89,12 +89,8 @@ namespace Kistl.API.Client
                 httpWebRequest.Pipelined = false;
             }
 
-#if DEBUG
-            Log.Warn("Using debug credentials");
-            req.Credentials = new NetworkCredential("david", "plok");
-#else
             _credentialsResolver.InitWebRequest(req);
-#endif
+
             return req;
         }
 

@@ -78,6 +78,10 @@ namespace Kistl.Client
 
         public BasicAuthCredentialsResolver(IViewModelFactory vmf, Func<IKistlContext> ctxFactory, IFrozenContext frozenCtx)
         {
+            if (vmf == null) throw new ArgumentNullException("vmf");
+            if (ctxFactory == null) throw new ArgumentNullException("ctxFactory");
+            if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
+            
             _vmf = vmf;
             _ctxFactory = ctxFactory;
             _frozenCtx = frozenCtx;
@@ -145,6 +149,9 @@ namespace Kistl.Client
 
         public BasicAuthIdentityResolver(IReadOnlyKistlContext resolverCtx, BasicAuthCredentialsResolver credentialResolver)
         {
+            if (resolverCtx == null) throw new ArgumentNullException("resolverCtx");
+            if (credentialResolver == null) throw new ArgumentNullException("credentialResolver");
+
             _resolverCtx = resolverCtx;
             _credentialResolver = credentialResolver;
         }
