@@ -22,9 +22,12 @@ namespace Kistl.API.Client
         private readonly Uri GetBlobStreamUri;
         private readonly Uri SetBlobStreamUri;
         private readonly Uri InvokeServerMethodUri;
+        private readonly ICredentialsResolver _credentialsResolver;
 
-        public HttpServiceClient()
+        public HttpServiceClient(ICredentialsResolver credentialsResolver)
         {
+            if (credentialsResolver == null) throw new ArgumentNullException("credentialsResolver");
+
             SetObjectsUri = new Uri(ConfigurationManager.AppSettings["serviceUri"] + "/SetObjects");
             GetListUri = new Uri(ConfigurationManager.AppSettings["serviceUri"] + "/GetList");
             GetListOfUri = new Uri(ConfigurationManager.AppSettings["serviceUri"] + "/GetListOf");
@@ -32,6 +35,8 @@ namespace Kistl.API.Client
             GetBlobStreamUri = new Uri(ConfigurationManager.AppSettings["serviceUri"] + "/GetBlobStream");
             SetBlobStreamUri = new Uri(ConfigurationManager.AppSettings["serviceUri"] + "/SetBlobStream");
             InvokeServerMethodUri = new Uri(ConfigurationManager.AppSettings["serviceUri"] + "/InvokeServerMethod");
+
+            _credentialsResolver = credentialsResolver;
         }
 
         private byte[] MakeRequest(Uri destination, Action<BinaryWriter> sendRequest)
