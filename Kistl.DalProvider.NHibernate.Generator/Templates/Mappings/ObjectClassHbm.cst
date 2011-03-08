@@ -23,7 +23,6 @@
 <%@ Parameter Name="qualifiedRightsClassName" Type="string" %>
 <?xml version="1.0"?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
-                   default-cascade="save-update"
                    schema="`dbo`">
     <class name="<%= qualifiedImplementationName %>"
            proxy="<%= qualifiedImplementationName %>"
