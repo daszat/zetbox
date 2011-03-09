@@ -165,11 +165,11 @@ namespace Kistl.Server
                 ((IDisposable)_mainHost).Dispose();
             }
 
-            //if (_bootstrapperHost != null && _bootstrapperHost.State != CommunicationState.Closed)
-            //{
-            //    _bootstrapperHost.Close();
-            //    ((IDisposable)_bootstrapperHost).Dispose();
-            //}
+            if (_bootstrapperHost != null && _bootstrapperHost.State != CommunicationState.Closed)
+            {
+                _bootstrapperHost.Close();
+                ((IDisposable)_bootstrapperHost).Dispose();
+            }
 
             if (serverStarted != null)
             {
