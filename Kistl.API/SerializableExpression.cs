@@ -37,6 +37,37 @@ namespace Kistl.API
         {
             return this.Type.GetSystemType().GetMember(Name).SingleOrDefault();
         }
+
+        public virtual void ToStream(BinaryWriter binStream)
+        {
+            if (binStream == null) throw new ArgumentNullException("binStream");
+
+            binStream.Write(Name);
+            Type.ToStream(binStream);
+        }
+
+        internal static SerializableMemberInfo FromStream(BinaryReader binReader)
+        {
+            var type = binReader.ReadByte();
+            switch (type)
+            {
+                case 0:
+                    return new SerializableMemberInfo()
+                    {
+                        Name = binReader.ReadString(),
+                        Type = SerializableType.FromStream(binReader),
+                    };
+                case 1:
+                    return new SerializableConstructorInfo()
+                    {
+                        Name = binReader.ReadString(),
+                        Type = SerializableType.FromStream(binReader),
+                        ParameterTypes = SerializableExpression.ReadTypeArray(binReader)
+                    };
+                default:
+                    throw new NotImplementedException(String.Format("unrecognized SerializableMemberInfoType [{0}]", type));
+            }
+        }
     }
 
     [DataContract(Namespace = "http://dasz.at/ZBox/")]
@@ -63,6 +94,12 @@ namespace Kistl.API
         public ConstructorInfo GetConstructorInfo()
         {
             return this.Type.GetSystemType().GetConstructor(this.ParameterTypes.Select(i => i.GetSystemType()).ToArray());
+        }
+
+        public override void ToStream(BinaryWriter binStream)
+        {
+            base.ToStream(binStream);
+            SerializableExpression.WriteTypeArray(binStream, ParameterTypes);
         }
     }
 
@@ -874,18 +911,12 @@ namespace Kistl.API
         internal SerializableNewExpression(BinaryReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
             : base(binReader, ctx, iftFactory)
         {
-            Constructor = new SerializableConstructorInfo();
-            Constructor.ParameterTypes = ReadTypeArray(binReader);
+            Constructor = (SerializableConstructorInfo)SerializableMemberInfo.FromStream(binReader);
 
             var members = new List<SerializableMemberInfo>();
             while (binReader.ReadBoolean())
             {
-                var member = new SerializableMemberInfo()
-                {
-                    Name = binReader.ReadString(),
-                    Type = SerializableType.FromStream(binReader)
-                };
-                members.Add(member);
+                members.Add(SerializableMemberInfo.FromStream(binReader));
             }
             this.Members = members.ToArray();
         }
@@ -908,12 +939,11 @@ namespace Kistl.API
         {
             binStream.Write((byte)SerializableExpressionType.New);
             base.ToStream(binStream, ctx);
-            WriteTypeArray(binStream, Constructor.ParameterTypes);
+            Constructor.ToStream(binStream);
             for (int i = 0; i < Members.Length; i++)
             {
                 binStream.Write(true);
-                binStream.Write(Members[i].Name);
-                Members[i].Type.ToStream(binStream);
+                Members[i].ToStream(binStream);
             }
             binStream.Write(false);
         }
