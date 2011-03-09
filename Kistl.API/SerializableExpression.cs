@@ -723,6 +723,15 @@ namespace Kistl.API
         {
             binStream.Write((byte)SerializableExpressionType.MethodCall);
             base.ToStream(binStream, ctx);
+            if (this.ObjectExpression != null)
+            {
+                binStream.Write(true);
+                this.ObjectExpression.ToStream(binStream, ctx);
+            }
+            else
+            {
+                binStream.Write(false);
+            }
             binStream.Write(MethodName);
             this.SerializableMethodType.ToStream(binStream);
             WriteTypeArray(binStream, ParameterTypes);
