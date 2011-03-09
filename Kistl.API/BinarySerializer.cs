@@ -632,8 +632,7 @@ namespace Kistl.API
             if (e != null)
             {
                 sw.Write(true);
-                BinaryFormatter bf = new BinaryFormatter();
-                bf.Serialize(sw.BaseStream, e);
+                e.ToStream(sw);
             }
             else
             {
@@ -646,7 +645,8 @@ namespace Kistl.API
         /// </summary>
         /// <param name="e">Expression Tree.</param>
         /// <param name="sr">BinaryReader to deserialize from.</param>
-        public static void FromStream(out SerializableExpression e, BinaryReader sr)
+        /// <param name="iftFactory">InterfaceType.Factory to pass on the the read SerializableExpressions</param>
+        public static void FromStream(out SerializableExpression e, BinaryReader sr, InterfaceType.Factory iftFactory)
         {
             if (sr == null)
                 throw new ArgumentNullException("sr");
@@ -655,8 +655,7 @@ namespace Kistl.API
             e = null;
             if (sr.ReadBoolean())
             {
-                BinaryFormatter bf = new BinaryFormatter();
-                e = (SerializableExpression)bf.Deserialize(sr.BaseStream);
+                e = SerializableExpression.FromStream(sr, iftFactory);
             }
         }
 
@@ -671,7 +670,7 @@ namespace Kistl.API
             });
         }
 
-        public static void FromStream(out SerializableExpression[] expressions, BinaryReader sr)
+        public static void FromStream(out SerializableExpression[] expressions, BinaryReader sr, InterfaceType.Factory iftFactory)
         {
             if (sr == null)
                 throw new ArgumentNullException("sr");
@@ -679,7 +678,7 @@ namespace Kistl.API
             expressions = TraceArray(sr, () =>
             {
                 SerializableExpression result;
-                BinarySerializer.FromStream(out result, sr);
+                BinarySerializer.FromStream(out result, sr, iftFactory);
                 return result;
             });
         }
@@ -1021,7 +1020,7 @@ namespace Kistl.API
             });
         }
 
-        public static void FromStream(out OrderByContract orderBy, BinaryReader sr)
+        public static void FromStream(out OrderByContract orderBy, BinaryReader sr, InterfaceType.Factory iftFactory)
         {
             if (sr == null)
                 throw new ArgumentNullException("sr");
@@ -1032,7 +1031,7 @@ namespace Kistl.API
                 BinarySerializer.FromStream(out type, sr);
 
                 SerializableExpression expression;
-                BinarySerializer.FromStream(out expression, sr);
+                BinarySerializer.FromStream(out expression, sr, iftFactory);
 
                 return new OrderByContract()
                 {
@@ -1053,7 +1052,7 @@ namespace Kistl.API
             });
         }
 
-        public static void FromStream(out OrderByContract[] orderBys, BinaryReader sr)
+        public static void FromStream(out OrderByContract[] orderBys, BinaryReader sr, InterfaceType.Factory iftFactory)
         {
             if (sr == null)
                 throw new ArgumentNullException("sr");
@@ -1061,7 +1060,7 @@ namespace Kistl.API
             orderBys = TraceArray(sr, () =>
             {
                 OrderByContract result;
-                BinarySerializer.FromStream(out result, sr);
+                BinarySerializer.FromStream(out result, sr, iftFactory);
                 return result;
             });
         }

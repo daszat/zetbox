@@ -104,11 +104,13 @@ namespace Kistl.Server.HttpService
                             bool eagerLoadLists;
                             BinarySerializer.FromStream(out eagerLoadLists, reader);
 
+                            var iftFactory = scope.Resolve<InterfaceType.Factory>();
+
                             SerializableExpression[] filter;
-                            BinarySerializer.FromStream(out filter, reader);
+                            BinarySerializer.FromStream(out filter, reader, iftFactory);
 
                             OrderByContract[] orderBy;
-                            BinarySerializer.FromStream(out orderBy, reader);
+                            BinarySerializer.FromStream(out orderBy, reader, iftFactory);
 
                             Log.DebugFormat("GetList(type=[{0}], maxListCount={1}, eagerLoadLists={2}, SerializableExpression[{3}], OrderByContract[{4}])", type, maxListCount, eagerLoadLists, filter != null ? filter.Length : -1, orderBy != null ? orderBy.Length : -1);
                             var result = service.GetList(type, maxListCount, eagerLoadLists, filter, orderBy);

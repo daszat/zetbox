@@ -562,7 +562,7 @@ namespace Kistl.API.Tests
 				Assert.That(sr.ReadUInt32(), Is.EqualTo(preGuardValue), "inital guard wrong");
 
 				SerializableExpression fromval;
-				BinarySerializer.FromStream(out fromval, sr);
+				BinarySerializer.FromStream(out fromval, sr, null);
 				Assert.That(sr.ReadUInt32(), Is.EqualTo(postGuardValue), "final guard wrong");
 
 				Assert.That(fromval, Is.InstanceOf(value.GetType()));
@@ -587,7 +587,7 @@ namespace Kistl.API.Tests
 				Assert.That(sr.ReadUInt32(), Is.EqualTo(preGuardValue), "inital guard wrong");
 
 				SerializableExpression fromval;
-				BinarySerializer.FromStream(out fromval, sr);
+				BinarySerializer.FromStream(out fromval, sr, null);
 				Assert.That(sr.ReadUInt32(), Is.EqualTo(postGuardValue), "final guard wrong");
 
 				Assert.That(fromval, Is.Null);
@@ -605,7 +605,7 @@ namespace Kistl.API.Tests
 			public void should_fail_on_reading_from_null_stream()
 			{
 				SerializableExpression value;
-				Assert.That(() => BinarySerializer.FromStream(out value, null), Throws.InstanceOf<ArgumentNullException>());
+                Assert.That(() => BinarySerializer.FromStream(out value, null, null), Throws.InstanceOf<ArgumentNullException>());
 			}
 
 			/// <summary>
@@ -620,7 +620,7 @@ namespace Kistl.API.Tests
 				ms.Seek(0, SeekOrigin.Begin);
 
 				SerializableExpression fromval;
-				BinarySerializer.FromStream(out fromval, sr);
+                BinarySerializer.FromStream(out fromval, sr, null);
 				Assert.That(fromval.NodeType, Is.EqualTo(expression.NodeType));
 				Assert.That((ExpressionType)expression.NodeType, Is.EqualTo(SerializableExpression.ToExpression(fromval).NodeType));
 			}
