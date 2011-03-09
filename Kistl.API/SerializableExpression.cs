@@ -42,6 +42,7 @@ namespace Kistl.API
         {
             if (binStream == null) throw new ArgumentNullException("binStream");
 
+            binStream.Write((byte)0);
             binStream.Write(Name);
             Type.ToStream(binStream);
         }
@@ -98,7 +99,11 @@ namespace Kistl.API
 
         public override void ToStream(BinaryWriter binStream)
         {
-            base.ToStream(binStream);
+            if (binStream == null) throw new ArgumentNullException("binStream");
+
+            binStream.Write((byte)1);
+            binStream.Write(Name);
+            Type.ToStream(binStream);
             SerializableExpression.WriteTypeArray(binStream, ParameterTypes);
         }
     }
