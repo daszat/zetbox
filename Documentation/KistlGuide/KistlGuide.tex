@@ -14,9 +14,13 @@
 
 \lstnewenvironment{CS}{\lstset{language=[Sharp]C,frame=single,belowskip=0.5cm,breaklines=true,prebreak=\ldots}}{}
 
-\newcommand{\kw}{\it}
-\newcommand{\new}{\bf}
-\newcommand{\comment}{\it}
+\newenvironment{note}
+{\vspace*{5mm}\begin{framed}\rule{1ex}{1ex}\hspace{\stretch{1}} Note: }
+{\hspace{\stretch{1}}\rule{1ex}{1ex}\end{framed}}
+
+% \newcommand{\kw}{\it}
+% \newcommand{\new}{\bf}
+% \newcommand{\comment}{\it}
 
 \title{ZBox\\Guide}
 \author{Arthur Zaczek}

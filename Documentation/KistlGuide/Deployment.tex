@@ -1,1 +1,191 @@
 \section{\label{Deployment}Deployment}
+This section describes the possible deployment strategies. 
+
+\begin{note}
+this section is a subject to change
+\end{note} 
+
+\subsection{Continuous Integration Server}
+The \emph{Continuous Integration Server} does a publish in a directory
+structure. This directory structure is transformed by a \emph{fetch} script into the designated
+directory structure.
+
+It's not recommended to use the \emph{Continuous Integration Servers} structure
+directly. The next section will discuss the fetching process and the designated
+directory structure.
+
+\subsection{Fetching and Destination Directory Structure}
+
+The fetching script is responsible for
+\begin{itemize}
+  \item Creating the directory structure
+  \item Fetching all Assemblies and putting them in the right destination
+  directory
+  \item Copying all app configuration files to the right directories 
+\end{itemize} 
+
+The directory structure on the deployment server should look like this:
+
+  	\begin{itemize}
+  	  \item AppConfigs
+  	  \item { bin
+  	  	\begin{itemize}
+  	  	  \item Bootstrapper
+  	  	  \item { Client
+  	  	  	\begin{itemize}
+  	  	  	  \item { Client
+  	  	  	  	\begin{itemize}
+  	  	  	  	  \item App.ZBox
+  	  	  	  	  \item Core
+  	  	  	  	  \item Core.Generated
+  	  	  	  	  \item WPF
+  	  	  	  	  \item WinForms
+  	  	  	  	 \end{itemize}
+  	  	  	  }
+  	  	  	  \item { Common
+  	  	  	  	\begin{itemize}
+  	  	  	  	  \item App.ZBox
+  	  	  	  	  \item Core
+  	  	  	  	  \item Core.Generated
+  	  	  	  	 \end{itemize}
+  	  	  	  }
+  	  	  	  \item Kistl.Client.WPF.exe
+  	  	  	  \item Kistl.Client.WPF.exe.config
+  	  	  	  \item Kistl.Client.Forms.exe
+  	  	  	  \item Kistl.Client.Forms.exe.config
+  	  	  	\end{itemize}  
+  	  	  }
+  	  	  \item {Server
+  	  	  	\begin{itemize}
+  	  	  	  \item { Common
+  	  	  	  	\begin{itemize}
+  	  	  	  	  \item App.ZBox
+  	  	  	  	  \item Core
+  	  	  	  	  \item Core.Generated
+  	  	  	  	 \end{itemize}
+  	  	  	  }
+  	  	  	  \item { Server
+  	  	  	  	\begin{itemize}
+  	  	  	  	  \item App.ZBox
+  	  	  	  	  \item Core
+  	  	  	  	  \item Core.Generated
+  	  	  	  	  \item EF
+  	  	  	  	  \item EF.Generated
+  	  	  	  	  \item NH
+  	  	  	  	  \item NH.Generated
+  	  	  	  	 \end{itemize}
+  	  	  	  }
+  	  	  	  \item Kistl.Server.Service.exe
+  	  	  	  \item Kistl.Server.Service.exe.config
+  	  	  	\end{itemize}  
+  		}
+  	  	\end{itemize}
+  	  }
+  	  \item Configs
+  	  \item DocumentStore
+  	  \item { inetpub
+  	  	\begin{itemize} 
+  	  	  \item App\_Data
+  	  	  \item App\_GlobalResources
+  	  	  \item App\_Themes
+  	  	  \item bin
+  	  	  \item Bootstrapper
+  	  	  \item { Common
+  	  	  	\begin{itemize}
+  	  	  	  \item App.ZBox
+  	  	  	  \item Core
+  	  	  	  \item Core.Generated
+  	  	  	 \end{itemize}
+  	  	  }
+  	  	  \item { Server
+  	  	  	\begin{itemize}
+  	  	  	  \item App.ZBox
+  	  	  	  \item Core
+  	  	  	  \item Core.Generated
+  	  	  	  \item EF
+  	  	  	  \item EF.Generated
+  	  	  	  \item NH
+  	  	  	  \item NH.Generated
+  	  	  	 \end{itemize}
+  	  	  }
+  	  	  \end{itemize} 
+  	  }
+  	  \item logs
+  	  \item Packages
+  	  \item deploy.ps1
+  	  \item fetch.ps1
+  	\end{itemize} 
+
+\subsubsection{Root Directory}
+\begin{descriptionBorder}
+\item[deploy.ps1] The deployment script, responsible for upgrading the servers
+database
+
+\item[fetch.ps1] The fetch script, responsible for creating the directory
+structure and fetching all assemblies and configuration templates
+\end{descriptionBorder}
+
+\subsubsection{AppConfigs}
+This directory contains all app configuration files needed by the executing
+assemblies. E.g. in the \emph{Kistl.Server.Service.exe.config} all WCF Service
+stuff can be configured. In \emph{Kistl.Client.WPF.exe.config} all WCF Proxy
+stuff can be configured.
+
+The fetch script will copy those configuration files into the desired
+directories, right beside their executalables.
+
+So this is the place where all app specific configuration has to be defined.
+
+Besides WCF stuff, those configuration can be also found in those files:
+
+\begin{itemize}
+  \item log4net
+  \item WCF
+  \item Assembly Bindings
+  \item Database provider registration 
+\end{itemize} 
+
+\begin{note}
+The web.config is not located here, but this may change in the
+future
+\end{note}
+
+\subsubsection{Configs}
+This directory contains all ZBox configuration files. They are located by the
+executalable by probing 
+\begin{itemize}
+  \item the given command line parameter
+  \item then the \emph{zenv} environment variable plus executalable name
+  \item then each directory up to the \emph{Configs} directory, still with the
+  executalable name
+  \item at the end by looking for \emph{DefaultConfig.xml} in the configs
+  directory
+\end{itemize}
+
+\subsubsection{bin}
+The bin directory contains all assemblies used by ZBox, divided by theire use
+(Bootstrapper, Client or Server). The \emph{Client} and \emph{Server}
+directories contains sub directories to split Client/Server and Common parts.
+Those directories have for each Application (=ZBox Module) and Modules (not ZBox
+Modules!) a individual sub directory.
+
+The naming of Application (=ZBox Module) should be:
+
+\begin{center}
+App.\textless ModuleName\textgreater  
+\end{center}
+
+\emph{Core} contains all core assemblies like Kistl.API and all other
+assemblies that are referenced by default (log4net e.g.).
+
+\emph{Core.Generated} contains all genereated code. Code Generation is done by
+the \emph{Continuous Integration Server} so those assemblies will be copied by
+the fetch script.
+
+\begin{note}
+This is a topic of discussion
+\end{note}
+
+\emph{Bootstrapper} contains only one executalable. The Boostrapper itself which
+is downloading the whole client application with its configuration from an HTTP
+Server via REST.
