@@ -1,12 +1,12 @@
 ﻿<NUnitProject>
-  <Settings activeconfig="Debug" />
-  <Config name="Debug" appbase="..\..\bin\Debug\Tests" configfile="Kistl.API.Tests.dll.config" binpathtype="Auto">
-    <assembly path="Kistl.API.Tests.dll" />
+  <Settings activeconfig="Debug" appbase="P:\Kistl" />
+  <Config name="Debug" appbase="bin\Debug\Tests" configfile="Kistl.API.Tests.dll.config" binpathtype="Auto">
+    <assembly path="..\..\..\Tests\Kistl.API.Tests\..\..\bin\Debug\Tests\Kistl.API.Tests.dll" />
   </Config>
-  <Config name="Release" appbase="..\..\bin\Release\Tests" configfile="Kistl.API.Tests.dll.config" binpathtype="Auto">
-    <assembly path="Kistl.API.Tests.dll" />
+  <Config name="Release" appbase="P:\Kistl\..\..\bin\Release\Tests" configfile="Kistl.API.Tests.dll.config" binpathtype="Auto">
+    <assembly path="..\..\..\..\..\Tests\Kistl.API.Tests\..\..\bin\Release\Tests\Kistl.API.Tests.dll" />
   </Config>
   <Config name="Studio" appbase="" configfile="Kistl.API.Tests.dll.config" binpathtype="Auto">
-    <assembly path="Kistl.API.Tests.dll" />
+    <assembly path="Tests\Kistl.API.Tests\Kistl.API.Tests.dll" />
   </Config>
 </NUnitProject>
