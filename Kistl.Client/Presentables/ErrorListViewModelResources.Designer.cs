@@ -79,6 +79,24 @@ namespace Kistl.Client.Presentables {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show.
+        /// </summary>
+        internal static string GotoObjectCommand_Name {
+            get {
+                return ResourceManager.GetString("GotoObjectCommand_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Activates the Object.
+        /// </summary>
+        internal static string GotoObjectCommand_Tooltip {
+            get {
+                return ResourceManager.GetString("GotoObjectCommand_Tooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error List.
         /// </summary>
         internal static string Name {

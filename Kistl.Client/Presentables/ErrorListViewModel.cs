@@ -9,11 +9,15 @@ namespace Kistl.Client.Presentables
 
     using Kistl.API;
 
-    public class ErrorDescriptor
+    public class ErrorDescriptor : ViewModel
     {
+        public new delegate ErrorDescriptor Factory(IKistlContext dataCtx, DataObjectViewModel item, IList<string> errors);
+
         private readonly DataObjectViewModel _item;
         private readonly IList<string> _errors;
-        public ErrorDescriptor(DataObjectViewModel item, IList<string> errors)
+
+        public ErrorDescriptor(IViewModelDependencies dependencies, IKistlContext dataCtx, DataObjectViewModel item, IList<string> errors)
+            : base(dependencies, dataCtx)
         {
             this._item = item;
             this._errors = errors;
@@ -21,6 +25,33 @@ namespace Kistl.Client.Presentables
 
         public DataObjectViewModel Item { get { return _item; } }
         public IList<string> Errors { get { return _errors; } }
+
+        private ICommandViewModel _GotoObjectCommand = null;
+        public ICommandViewModel GotoObjectCommand
+        {
+            get
+            {
+                if (_GotoObjectCommand == null)
+                {
+                    _GotoObjectCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
+                        DataContext,
+                        ErrorListViewModelResources.GotoObjectCommand_Name,
+                        ErrorListViewModelResources.GotoObjectCommand_Tooltip,
+                        GotoObject, null);
+                }
+                return _GotoObjectCommand;
+            }
+        }
+
+        public void GotoObject()
+        {
+            ViewModelFactory.ShowModel(Item, true);
+        }
+
+        public override string Name
+        {
+            get { return Item.Name; }
+        }
     }
 
     /// <summary>
@@ -98,7 +129,8 @@ namespace Kistl.Client.Presentables
                 .Select(o => new { obj = o, err = o.Error })
                 .Where(tmp => !String.IsNullOrEmpty(tmp.err)))
             {
-                _errors.Add(new ErrorDescriptor(
+                _errors.Add(ViewModelFactory.CreateViewModel<ErrorDescriptor.Factory>().Invoke(
+                    DataContext,
                     DataObjectViewModel.Fetch(ViewModelFactory, DataContext, error.obj),
                     new List<string>() { error.err }));
             }

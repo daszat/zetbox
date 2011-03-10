@@ -3,24 +3,36 @@
                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                   xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"
                   xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
+                  xmlns:commands="clr-namespace:Kistl.Client.WPF.Commands;assembly=Kistl.Client.WPF.Toolkit"
+                  commands:SmartRoutedUICommand.IsCommandSink="True"
                   Title="ErrorListView"
-                  Height="300"
-                  Width="300">
+                  Height="480"
+                  Width="320">
     <DockPanel>
         <UniformGrid DockPanel.Dock="Bottom"
                      Rows="1">
             <ctrls:CommandButton CommandViewModel="{Binding RefreshErrorsCommand}" />
             <ctrls:CommandButton CommandViewModel="{Binding CloseCommand}" />
         </UniformGrid>
-        <ListView ItemsSource="{Binding Errors}">
-            <ListView.ItemTemplate>
+        <ItemsControl ItemsSource="{Binding Errors}"
+                      HorizontalContentAlignment="Stretch">
+            <ItemsControl.ItemTemplate>
                 <DataTemplate DataType="{x:Type client:ErrorDescriptor}">
-                    <StackPanel>
-                        <TextBlock Text="{Binding Item}" />
-                        <ListBox ItemsSource="{Binding Errors}" />
+                    <StackPanel Margin="0,0,0,10">
+                        <DockPanel>
+                            <ctrls:CommandButton DockPanel.Dock="Right"
+                                                 CommandViewModel="{Binding GotoObjectCommand}"
+                                                 CommandParameter="{Binding Item}" />
+                            <ContentPresenter Content="{Binding Item}"
+                                              ContentTemplateSelector="{StaticResource listItemTemplateSelector}" />
+                        </DockPanel>
+                        <ListBox ItemsSource="{Binding Errors}"
+                                 BorderBrush="{x:Null}"
+                                 BorderThickness="0"
+                                 Margin="20,0,0,0" />
                     </StackPanel>
                 </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </DockPanel>
 </ctrls:WindowView>

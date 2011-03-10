@@ -533,13 +533,14 @@ namespace Kistl.API
         internal SerializableConstantExpression(BinaryReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
             : base(binReader, ctx, iftFactory)
         {
-            var nullable = binReader.ReadBoolean();
-            if (nullable)
+            var isNull = binReader.ReadBoolean();
+            if (isNull)
             {
                 Value = null;
             }
             else
             {
+                // Deserialize only basic types
                 if (Type.IsAssignableFrom(typeof(int)) || Type.IsEnum)
                 {
                     Value = binReader.ReadInt32();
@@ -616,13 +617,14 @@ namespace Kistl.API
 
             if (Value == null)
             {
-                // nullable
+                // IsNull
                 binStream.Write(true);
             }
             else
             {
-                // nullable
+                // IsNull
                 binStream.Write(false);
+                // Serialize only basic types
                 if (Type.IsAssignableFrom(typeof(int)) || Type.IsEnum)
                 {
                     binStream.Write((int)Value);
@@ -660,10 +662,6 @@ namespace Kistl.API
                     throw new NotSupportedException(string.Format("Can't serialize Value '{0}' of type '{1}'.", Value, Type));
                 }
             }
-
-            //var bf = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-            //// let's hope that mono has at least the basic types covered here!
-            //bf.Serialize(binStream.BaseStream, Value);
         }
     }
     #endregion
