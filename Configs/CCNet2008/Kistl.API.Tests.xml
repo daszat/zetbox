@@ -22,6 +22,7 @@
     </Modules>
   </Client>
   <AssemblySearchPaths>
-    <string>..\Client\Core.Generated</string>
+    <string>Path1</string>
+    <string>Path2</string>
   </AssemblySearchPaths>
 </KistlConfig>

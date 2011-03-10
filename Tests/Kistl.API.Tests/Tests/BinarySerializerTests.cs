@@ -541,6 +541,7 @@ namespace Kistl.API.Tests
 		}
 
 		[TestFixture]
+        [Ignore("Unable to serialize a IQuerialable, extract the where clause and try again")]
 		public class when_serializing_SerializableExpressions
 			: BinarySerializerTests
 		{
