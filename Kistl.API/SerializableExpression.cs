@@ -533,9 +533,57 @@ namespace Kistl.API
         internal SerializableConstantExpression(BinaryReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
             : base(binReader, ctx, iftFactory)
         {
-            var bf = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-            // let's hope that mono has at least the basic types covered here!
-            Value = bf.Deserialize(binReader.BaseStream);
+            var nullable = binReader.ReadBoolean();
+            if (nullable)
+            {
+                Value = null;
+            }
+            else
+            {
+                if (Type.IsAssignableFrom(typeof(int)) || Type.IsEnum)
+                {
+                    Value = binReader.ReadInt32();
+                }
+                else if (Type.IsAssignableFrom(typeof(bool)))
+                {
+                    Value = binReader.ReadBoolean();
+                }
+                else if (Type.IsAssignableFrom(typeof(double)))
+                {
+                    Value = binReader.ReadDouble();
+                }
+                else if (Type.IsAssignableFrom(typeof(float)))
+                {
+                    Value = binReader.ReadSingle();
+                }
+                else if (Type == typeof(string))
+                {
+                    Value = binReader.ReadString();
+                }
+                else if (Type.IsAssignableFrom(typeof(decimal)))
+                {
+                    Value = binReader.ReadDecimal();
+                }
+                else if (Type.IsAssignableFrom(typeof(DateTime)))
+                {
+                    DateTime val;
+                    BinarySerializer.FromStream(out val, binReader);
+                    Value = val;
+                }
+                else if (Type.IsAssignableFrom(typeof(Guid)))
+                {
+                    Guid val;
+                    BinarySerializer.FromStream(out val, binReader);
+                    Value = val;
+                }
+                else
+                {
+                    throw new NotSupportedException(string.Format("Can't deserialize Value of type '{0}'.", Type));
+                }
+            }
+            //var bf = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+            //// let's hope that mono has at least the basic types covered here!
+            //Value = bf.Deserialize(binReader.BaseStream);
         }
 
         internal override Expression ToExpressionInternal(SerializationContext ctx)
@@ -565,9 +613,57 @@ namespace Kistl.API
         {
             binStream.Write((byte)SerializableExpressionType.Constant);
             base.ToStream(binStream, ctx);
-            var bf = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-            // let's hope that mono has at least the basic types covered here!
-            bf.Serialize(binStream.BaseStream, Value);
+
+            if (Value == null)
+            {
+                // nullable
+                binStream.Write(true);
+            }
+            else
+            {
+                // nullable
+                binStream.Write(false);
+                if (Type.IsAssignableFrom(typeof(int)) || Type.IsEnum)
+                {
+                    binStream.Write((int)Value);
+                }
+                else if (Type.IsAssignableFrom(typeof(bool)))
+                {
+                    binStream.Write((bool)Value);
+                }
+                else if (Type.IsAssignableFrom(typeof(double)))
+                {
+                    binStream.Write((double)Value);
+                }
+                else if (Type.IsAssignableFrom(typeof(float)))
+                {
+                    binStream.Write((float)Value);
+                }
+                else if (Type == typeof(string))
+                {
+                    binStream.Write((string)Value);
+                }
+                else if (Type.IsAssignableFrom(typeof(decimal)))
+                {
+                    binStream.Write((decimal)Value);
+                }
+                else if (Type.IsAssignableFrom(typeof(DateTime)))
+                {
+                    BinarySerializer.ToStream((DateTime)Value, binStream);
+                }
+                else if (Type.IsAssignableFrom(typeof(Guid)))
+                {
+                    BinarySerializer.ToStream((Guid)Value, binStream);
+                }
+                else
+                {
+                    throw new NotSupportedException(string.Format("Can't serialize Value '{0}' of type '{1}'.", Value, Type));
+                }
+            }
+
+            //var bf = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+            //// let's hope that mono has at least the basic types covered here!
+            //bf.Serialize(binStream.BaseStream, Value);
         }
     }
     #endregion
