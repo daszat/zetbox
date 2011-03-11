@@ -2,6 +2,7 @@
 <KistlConfig xmlns="http://dasz.at/Kistl/">
   <ConfigName>Default Client Configuration</ConfigName>
   <Client StartClient="false" ThrowErrors="false">
+    <!--<Application>6be0ba52-4589-48f1-832f-6cd463ba319a</Application>-->
     <Culture>de-AT</Culture>
     <UICulture>de-AT</UICulture>
     <DocumentStore>P:\Kistl\DocumentStore\Client\</DocumentStore>
