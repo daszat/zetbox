@@ -957,6 +957,7 @@ Global
 		{6412BE4C-6FEA-4693-B4B9-7A0A52590FE2}.Linux.Debug|.NET.ActiveCfg = Linux.Debug|Any CPU
 		{6412BE4C-6FEA-4693-B4B9-7A0A52590FE2}.Linux.Debug|Any CPU.ActiveCfg = Linux.Debug|Any CPU
 		{6412BE4C-6FEA-4693-B4B9-7A0A52590FE2}.Linux.Debug|Mixed Platforms.ActiveCfg = Linux.Debug|Any CPU
+		{6412BE4C-6FEA-4693-B4B9-7A0A52590FE2}.Linux.Debug|Mixed Platforms.Build.0 = Linux.Debug|Any CPU
 		{6412BE4C-6FEA-4693-B4B9-7A0A52590FE2}.Linux.Debug|x86.ActiveCfg = Linux.Debug|Any CPU
 		{6412BE4C-6FEA-4693-B4B9-7A0A52590FE2}.Release|.NET.ActiveCfg = Release|Any CPU
 		{6412BE4C-6FEA-4693-B4B9-7A0A52590FE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
