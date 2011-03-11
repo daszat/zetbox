@@ -288,15 +288,15 @@ namespace Kistl.API
             // apply composition of lambda expression bodies to parameters from the first expression                 
             return Expression.Lambda<T>(merge(first.Body, secondBody), first.Parameters);
         }
-        public static Expression<Func<T, bool>> And<T>(this Expression<Func<T, bool>> first, Expression<Func<T, bool>> second)
+        public static Expression<Func<T, bool>> AndAlso<T>(this Expression<Func<T, bool>> first, Expression<Func<T, bool>> second)
         {
             if (first == null) throw new ArgumentNullException("first");
-            return first.Compose(second, Expression.And);
+            return first.Compose(second, Expression.AndAlso);
         }
-        public static Expression<Func<T, bool>> Or<T>(this Expression<Func<T, bool>> first, Expression<Func<T, bool>> second)
+        public static Expression<Func<T, bool>> OrElse<T>(this Expression<Func<T, bool>> first, Expression<Func<T, bool>> second)
         {
             if (first == null) throw new ArgumentNullException("first");
-            return first.Compose(second, Expression.Or);
+            return first.Compose(second, Expression.OrElse);
         }
         #endregion
 
