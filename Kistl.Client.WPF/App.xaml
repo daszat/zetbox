@@ -5,7 +5,9 @@
              xmlns:converter="clr-namespace:Kistl.Client.WPF.Converter;assembly=Kistl.Client.WPF.Toolkit"
              Startup="Application_Startup"
              Exit="Application_Exit"
+             ShutdownMode="OnExplicitShutdown" 
              DispatcherUnhandledException="Application_DispatcherUnhandledException">
+    <!-- Shutdown managed by WPF Model Factory -->
     <Application.Resources>
         <ResourceDictionary>
             <converter:FormattingConverter x:Key="FormattingConverter" />

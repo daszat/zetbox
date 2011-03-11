@@ -32,6 +32,11 @@ namespace Kistl.Client.WPF
             get { return Kistl.App.GUI.Toolkit.WPF; }
         }
 
+        /// <summary>
+        /// Explicit shutdown counter
+        /// </summary>
+        private int windowCounter = 0;
+
         /// <inheritdoc/>
         protected override void ShowInView(ViewModel mdl, object view, bool activate, bool asDialog)
         {
@@ -39,22 +44,42 @@ namespace Kistl.Client.WPF
 
             if (view is Window)
             {
-                var viewControl = (Window)view;
-                viewControl.DataContext = mdl;
-                viewControl.ShowActivated = activate;
+                var window = (Window)view;
+                window.DataContext = mdl;
+                window.ShowActivated = activate;
                 if (asDialog)
                 {
-                    viewControl.ShowDialog();
+                    window.ShowDialog();
                 }
                 else
                 {
-                    viewControl.Show();
+                    window.Show();
+                    windowCounter++;
+                    window.Closed += new EventHandler(window_Closed);
                 }
             }
             else
             {
                 // TODO: what should be done here, really?
                 throw new NotImplementedException(String.Format("Cannot show view of type {0}, it's not a Window", view == null ? "(null)" : view.GetType().ToString()));
+            }
+        }
+
+        /// <summary>
+        /// Implemented explicit application shutdown
+        /// </summary>
+        /// <remarks>
+        /// In BasicAuth scenarios the Password Dialog is shown first and closed before the 
+        /// Main Application Window is created. This will let WPF think that the Application
+        /// should shut down.
+        /// </remarks>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void window_Closed(object sender, EventArgs e)
+        {
+            if (--windowCounter == 0)
+            {
+                Application.Current.Shutdown();
             }
         }
 
