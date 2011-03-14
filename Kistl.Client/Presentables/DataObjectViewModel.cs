@@ -243,6 +243,48 @@ namespace Kistl.Client.Presentables
             }
         }
 
+        private string _nameCache;
+        public override string Name
+        {
+            get
+            {
+                if (_nameCache == null) InitialiseToStringCache();
+                return _nameCache;
+            }
+        }
+
+        private string _longNameCache;
+        public string LongName
+        {
+            get
+            {
+                if (_longNameCache == null) InitialiseToStringCache();
+                return _longNameCache;
+            }
+        }
+
+        public override string ToString()
+        {
+            return Name;
+        }
+
+        /// <summary>
+        /// Schedules the underlying object for deletion.
+        /// </summary>
+        public void Delete()
+        {
+            DataContext.Delete(Object);
+        }
+
+        public InterfaceType GetInterfaceType()
+        {
+            return DataContext.GetInterfaceType(Object);
+        }
+
+
+
+        #endregion
+
         #region MethodResults
 
         private List<Method> _MethodList = null;
@@ -250,25 +292,26 @@ namespace Kistl.Client.Presentables
         {
             if (_MethodList != null) return;
             // load properties from MetaContext
-            //ObjectClass cls = _object.GetObjectClass(FrozenContext);
+            ObjectClass cls = _object.GetObjectClass(FrozenContext);
             var methods = new List<Method>();
 
             // TODO: Case #2174
             // Delete this!
             // Regenerate Typerefs on assembly is get called when opening a Assembly
             // Use the new introduced calculated properties instead
-            //while (cls != null)
-            //{
-            //    foreach (Method m in cls.Methods.Where(m =>
-            //        m.IsDisplayable
-            //        && m.Parameter.Count == 1
-            //        && m.Parameter.Single().IsReturnParameter
-            //        && !(m.Parameter.Single() is ObjectParameter))) // Could be a CreateRelatedUseCase, and we don't want to go around creating new objects
-            //    {
-            //        methods.Add(m);
-            //    }
-            //    cls = cls.BaseObjectClass;
-            //}
+            while (cls != null)
+            {
+                foreach (Method m in cls.Methods.Where(m =>
+                    m.IsDisplayable
+                    && m.Name.StartsWith("Get")
+                    && m.Parameter.Count == 1
+                    && m.Parameter.Single().IsReturnParameter
+                    && !(m.Parameter.Single() is ObjectParameter))) // Could be a CreateRelatedUseCase, and we don't want to go around creating new objects
+                {
+                    methods.Add(m);
+                }
+                cls = cls.BaseObjectClass;
+            }
 
             _MethodList = methods;
         }
@@ -320,6 +363,30 @@ namespace Kistl.Client.Presentables
         }
         #endregion
 
+        #region Actions
+        // TODO: should go to renderer and use database backed decision tables
+        protected virtual void SetClassActionViewModels(ObjectClass cls, IEnumerable<Method> methods)
+        {
+            foreach (var action in methods)
+            {
+                //Debug.Assert(action.Parameter.Count == 0);
+                _actionsCache.Add(ViewModelFactory.CreateViewModel<ActionViewModel.Factory>(action).Invoke(DataContext, _object, action));
+            }
+        }
+
+        private void FetchActions()
+        {
+            // load properties
+            ObjectClass cls = _object.GetObjectClass(FrozenContext);
+            var actions = new List<Method>();
+            while (cls != null)
+            {
+                actions.AddRange(cls.Methods.Where(m => m.IsDisplayable));
+                cls = cls.BaseObjectClass;
+            }
+
+            SetClassActionViewModels(cls, actions);
+        }
 
         private ObservableCollection<ActionViewModel> _actionsCache;
         private ReadOnlyObservableCollection<ActionViewModel> _actionsView;
@@ -348,73 +415,9 @@ namespace Kistl.Client.Presentables
                 return _ActionViewModelsByName;
             }
         }
-
-
-
-        private string _nameCache;
-        public override string Name
-        {
-            get
-            {
-                if (_nameCache == null) InitialiseToStringCache();
-                return _nameCache;
-            }
-        }
-
-        private string _longNameCache;
-        public string LongName
-        {
-            get
-            {
-                if (_longNameCache == null) InitialiseToStringCache();
-                return _longNameCache;
-            }
-        }
-
-        public override string ToString()
-        {
-            return Name;
-        }
-
-        /// <summary>
-        /// Schedules the underlying object for deletion.
-        /// </summary>
-        public void Delete()
-        {
-            DataContext.Delete(Object);
-        }
-
-        public InterfaceType GetInterfaceType()
-        {
-            return DataContext.GetInterfaceType(Object);
-        }
-
         #endregion
 
         #region Utilities and UI callbacks
-        private void FetchActions()
-        {
-            // load properties
-            ObjectClass cls = _object.GetObjectClass(FrozenContext);
-            var actions = new List<Method>();
-            while (cls != null)
-            {
-                actions.AddRange(cls.Methods.Where(m => m.IsDisplayable));
-                cls = cls.BaseObjectClass;
-            }
-
-            SetClassActionViewModels(cls, actions);
-        }
-
-        // TODO: should go to renderer and use database backed decision tables
-        protected virtual void SetClassActionViewModels(ObjectClass cls, IEnumerable<Method> methods)
-        {
-            foreach (var action in methods)
-            {
-                //Debug.Assert(action.Parameter.Count == 0);
-                _actionsCache.Add(ViewModelFactory.CreateViewModel<ActionViewModel.Factory>(action).Invoke(DataContext, _object, action));
-            }
-        }
 
         private void InitialiseToStringCache()
         {
