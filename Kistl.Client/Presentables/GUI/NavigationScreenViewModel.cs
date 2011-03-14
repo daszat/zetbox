@@ -136,7 +136,7 @@ namespace Kistl.Client.Presentables.GUI
             }
         }
 
-        private ObservableCollection<CommandViewModel> _additionalCommandsRW = new ObservableCollection<CommandViewModel>();
+        private ObservableCollection<CommandViewModel> _additionalCommandsRW;
         protected ObservableCollection<CommandViewModel> AdditionalCommandsRW
         {
             get
