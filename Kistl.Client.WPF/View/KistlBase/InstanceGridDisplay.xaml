@@ -60,6 +60,7 @@
                             CanUserDeleteRows="{Binding AllowDelete}"
                             AutoGenerateColumns="False"
                             SelectedZBoxItems="{Binding SelectedProxies}"
+                            SelectionMode="{Binding IsMultiselect, Converter={StaticResource BooleanMultiselectToSelectionModeConverter}}"
                             MouseDoubleClick="ItemActivatedHandler"
                             GridViewColumnHeader.Click="ListView_HeaderClick">
         </ctrls:ZBoxDataGrid>

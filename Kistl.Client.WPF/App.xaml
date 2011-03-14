@@ -16,6 +16,7 @@
             <converter:DebugConverter x:Key="debug" />
             <converter:HourConverter x:Key="HourConverter" />
             <converter:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+            <converter:BooleanMultiselectToSelectionModeConverter x:Key="BooleanMultiselectToSelectionModeConverter" />
             <converter:ImageConverter x:Key="ImageConverter" />
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
             <commands:Converter x:Key="CommandConverter" />

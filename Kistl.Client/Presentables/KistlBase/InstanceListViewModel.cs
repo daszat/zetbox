@@ -818,6 +818,26 @@ namespace Kistl.Client.Presentables.KistlBase
             }
         }
 
+        private bool _isMultiselect = true;
+        /// <summary>
+        /// If true, allow multiselect of items. Default is true
+        /// </summary>
+        public bool IsMultiselect
+        {
+            get
+            {
+                return _isMultiselect;
+            }
+            set
+            {
+                if (_isMultiselect != value)
+                {
+                    _isMultiselect = value;
+                    OnPropertyChanged("IsMultiselect");
+                }
+            }
+        }
+
         private bool _allowAddNew = false;
         /// <summary>
         /// If true, allow add new Items in the list directly. Default is false

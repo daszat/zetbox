@@ -62,6 +62,7 @@
                                 ItemsSource="{Binding Instances}"
                                 ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
                                 SelectedZBoxItems="{Binding SelectedItems}"
+                                SelectionMode="{Binding IsMultiselect, Converter={StaticResource BooleanMultiselectToSelectionModeConverter}}"
                                 KeyboardNavigation.TabNavigation="Continue"
                                 MouseDoubleClick="ItemActivatedHandler"
                                 GridViewColumnHeader.Click="ListView_HeaderClick">

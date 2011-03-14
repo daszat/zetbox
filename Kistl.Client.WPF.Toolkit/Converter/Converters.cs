@@ -202,4 +202,24 @@ namespace Kistl.Client.WPF.Converter
             return value != null ? !(bool?)value : null;
         }
     }
+
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    [ValueConversion(typeof(bool), typeof(SelectionMode))]
+    public class BooleanMultiselectToSelectionModeConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType,
+                            object parameter, System.Globalization.CultureInfo culture)
+        {
+            return value is bool && (bool)value ? SelectionMode.Extended : SelectionMode.Single;
+        }
+
+        public object ConvertBack(object value, Type targetType,
+                            object parameter, System.Globalization.CultureInfo culture)
+        {
+            return Binding.DoNothing;
+        }
+    }
 }
