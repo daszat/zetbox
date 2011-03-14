@@ -40,9 +40,6 @@ namespace Kistl.Client.Presentables.GUI
         private readonly NavigationScreen _screen;
         private NavigationScreenViewModel _parent;
 
-        private readonly ObservableCollection<CommandViewModel> _additionalCommands = new ObservableCollection<CommandViewModel>();
-        private readonly ReadOnlyObservableCollection<CommandViewModel> _additionalCommandsRO;
-        
         private NavigatorViewModel _displayer = null;
 
         public NavigationScreenViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, NavigationScreen screen)
@@ -54,14 +51,12 @@ namespace Kistl.Client.Presentables.GUI
                 throw new InvalidOperationException("The current identity is not allowed to see this screen. The screen should not be displayed! Check your filters.");
 
             _screen = screen;
-            _additionalCommandsRO = new ReadOnlyObservableCollection<CommandViewModel>(_additionalCommands);
-
             _screen.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(_screen_PropertyChanged);
         }
 
         void _screen_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            switch(e.PropertyName)
+            switch (e.PropertyName)
             {
                 case "Title":
                     OnPropertyChanged("Name");
@@ -112,13 +107,13 @@ namespace Kistl.Client.Presentables.GUI
 
         public NavigationScreenViewModel Parent
         {
-            get 
+            get
             {
                 if (_parent == null && _screen.Parent != null)
                 {
                     _parent = Fetch(ViewModelFactory, DataContext, _screen.Parent);
                 }
-                return _parent; 
+                return _parent;
             }
         }
 
@@ -141,14 +136,35 @@ namespace Kistl.Client.Presentables.GUI
             }
         }
 
+        private ObservableCollection<CommandViewModel> _additionalCommandsRW = new ObservableCollection<CommandViewModel>();
         protected ObservableCollection<CommandViewModel> AdditionalCommandsRW
         {
-            get { return _additionalCommands; }
+            get
+            {
+                if (_additionalCommandsRW == null)
+                {
+                    _additionalCommandsRW = new ObservableCollection<CommandViewModel>(CreateAdditionalCommands());
+                }
+                return _additionalCommandsRW;
+            }
         }
 
+        private ReadOnlyObservableCollection<CommandViewModel> _additionalCommands;
         public ReadOnlyObservableCollection<CommandViewModel> AdditionalCommands
         {
-            get { return _additionalCommandsRO; }
+            get
+            {
+                if (_additionalCommands == null)
+                {
+                    _additionalCommands = new ReadOnlyObservableCollection<CommandViewModel>(AdditionalCommandsRW);
+                }
+                return _additionalCommands;
+            }
+        }
+
+        protected virtual List<CommandViewModel> CreateAdditionalCommands()
+        {
+            return new List<CommandViewModel>(); 
         }
 
         public string Color
