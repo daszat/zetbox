@@ -59,10 +59,13 @@ namespace Kistl.DalProvider.Base
                 var oldValue = this._ObjectState;
                 NotifyPropertyChanging("ObjectState", oldValue, DataObjectState.Modified);
                 this._ObjectState = DataObjectState.Modified;
-                if (this.Context != null)
-                    this.Context.Internals().SetModified(this);
                 NotifyPropertyChanged("ObjectState", oldValue, DataObjectState.Modified);
             }
+            // Sadly, this is requiered on _every_ change because some ViewModels
+            // rely on the Context.IsModified change event
+            // TODO: Improve that!
+            if (this.Context != null)
+                this.Context.Internals().SetModified(this);
         }
 
         protected void SetUnmodified()
