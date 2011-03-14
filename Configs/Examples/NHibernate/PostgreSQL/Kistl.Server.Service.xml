@@ -24,6 +24,10 @@
       <Module>Kistl.DalProvider.Memory.MemoryProvider, Kistl.DalProvider.Memory</Module>
       <Module>Kistl.App.Projekte.Server.CustomServerActionsModule, Kistl.App.Projekte.Server</Module>
       <Module>Kistl.App.Projekte.Common.CustomCommonActionsModule, Kistl.App.Projekte.Common</Module>
+      <!--
+      <Module>Kistl.Unix.Module, Kistl.Unix</Module>
+      <Module>Kistl.Server.HtpasswdIdentitySource+Module, Kistl.Server</Module>
+      -->
 
       <!-- Development/Master Server modules -->
       <Module>Kistl.Generator.GeneratorModule, Kistl.Generator</Module>
