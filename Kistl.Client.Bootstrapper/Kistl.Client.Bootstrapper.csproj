@@ -80,6 +80,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebClientEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <EmbeddedResource Include="AddressDialog.de.resx">
       <DependentUpon>AddressDialog.cs</DependentUpon>
     </EmbeddedResource>

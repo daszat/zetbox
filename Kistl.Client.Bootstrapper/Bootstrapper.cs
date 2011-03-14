@@ -21,7 +21,7 @@ namespace Kistl.Client.Bootstrapper
         Thread thread;
         bool running = true;
         string address = string.Empty;
-        WebClient service = new WebClient();
+        WebClientEx service = new WebClientEx();
         AutoResetEvent downloadEvent = new AutoResetEvent(false);
         string startExec = string.Empty;
         string targetDir = string.Empty;
