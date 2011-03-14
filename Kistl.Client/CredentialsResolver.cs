@@ -142,36 +142,21 @@ namespace Kistl.Client
     }
 
     public class BasicAuthIdentityResolver
-        : IIdentityResolver
+        : BaseIdentityResolver
     {
-        private readonly IReadOnlyKistlContext _resolverCtx;
         private readonly BasicAuthCredentialsResolver _credentialResolver;
 
         public BasicAuthIdentityResolver(IReadOnlyKistlContext resolverCtx, BasicAuthCredentialsResolver credentialResolver)
+            : base(resolverCtx)
         {
-            if (resolverCtx == null) throw new ArgumentNullException("resolverCtx");
             if (credentialResolver == null) throw new ArgumentNullException("credentialResolver");
 
-            _resolverCtx = resolverCtx;
             _credentialResolver = credentialResolver;
         }
 
-        public Identity GetCurrent()
+        public override Identity GetCurrent()
         {
             return Resolve(_credentialResolver.GetUsername());
-        }
-
-        public Identity Resolve(IIdentity identity)
-        {
-            if (identity == null) throw new ArgumentNullException("identity");
-
-            return Resolve(identity.Name);
-        }
-
-        private Identity Resolve(string name)
-        {
-            string id = name.ToLower();
-            return _resolverCtx.GetQuery<Identity>().Where(i => i.UserName.ToLower() == id).FirstOrDefault();
         }
     }
 }
