@@ -1,19 +1,20 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Security;
-using System.Text;
-using System.Threading;
-using System.Windows.Forms;
 
 namespace Kistl.Client.Bootstrapper
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Data;
+    using System.Diagnostics;
+    using System.Drawing;
+    using System.IO;
+    using System.Linq;
+    using System.Net;
+    using System.Security;
+    using System.Text;
+    using System.Threading;
+    using System.Windows.Forms;
+
     public partial class Bootstrapper : Form
     {
         #region Fields
@@ -57,7 +58,7 @@ namespace Kistl.Client.Bootstrapper
 
                     var f = files.Files[i];
 
-                    SetStatus(string.Format("Loading File {0}/{1}: {2}", i + 1, files.Files.Length, f.GetDisplayFileName()));
+                    SetStatus(string.Format(Properties.Resources.LoadingFile, i + 1, files.Files.Length, f.GetDisplayFileName()));
                     SetProgressBar(i);
 
                     if (!DownloadFile(f)) return;
@@ -65,7 +66,7 @@ namespace Kistl.Client.Bootstrapper
 
                 CleanupUnusedFiles(files);
 
-                SetStatus("Starting ZBox");
+                SetStatus(Properties.Resources.StartingZToolbox);
                 StartZBox();
 
                 CloseBootstrapper();
@@ -80,13 +81,13 @@ namespace Kistl.Client.Bootstrapper
         #region BL
         private FileInfoArray LoadFileInformations()
         {
-            SetStatus("Loading Fileinformation");
+            SetStatus(Properties.Resources.LoadingFileinformation);
             var adr = new Uri(new Uri(address), "Bootstrapper.svc/GetFileInfos");
             var filesBuffer = GetFileInfos(adr);
 
             if (string.IsNullOrEmpty(filesBuffer))
             {
-                SetStatus("Could not connect to Service");
+                SetStatus(Properties.Resources.ConnectionError);
                 return null;
             }
 
@@ -173,14 +174,14 @@ namespace Kistl.Client.Bootstrapper
 
         private void CleanupUnusedFiles(FileInfoArray files)
         {
-            SetStatus("Cleanup unused files");
+            SetStatus(Properties.Resources.Cleanup);
 
             var allFiles = Directory.GetFiles(targetDir, "*.*", SearchOption.AllDirectories);
             var toDelete = allFiles.Except(files.Files.Select(i => i.GetFullFileName(targetDir)));
 
             foreach (var f in toDelete)
             {
-                Debug.WriteLine(String.Format("Deleting {0}", f));
+                Debug.WriteLine(String.Format(Properties.Resources.Deleting, f));
                 File.Delete(f);
             }
         }
@@ -201,7 +202,7 @@ namespace Kistl.Client.Bootstrapper
             if (e.Error != null)
             {
                 Debug.WriteLine(String.Format("Failed to download {0}", e));
-                SetStatus("Download failed:" + e.Error.Message);
+                SetStatus(String.Format(Properties.Resources.DownloadError, e.Error.Message));
                 downloadError = true;
             }
 

@@ -118,27 +118,27 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Cleanup" xml:space="preserve">
-    <value>Cleanup unused files</value>
+    <value>Alte Dateien aufräumen</value>
   </data>
   <data name="ConnectionError" xml:space="preserve">
-    <value>Could not connect to Service</value>
+    <value>Verbindungsfehler mit ZToolbox</value>
   </data>
   <data name="Deleting" xml:space="preserve">
-    <value>Deleting {0}</value>
+    <value>Lösche {0}</value>
   </data>
   <data name="DownloadError" xml:space="preserve">
-    <value>Download failed:</value>
+    <value>Fehler beim herunterladen: {0}</value>
   </data>
   <data name="LoadingFile" xml:space="preserve">
-    <value>Loading File {0}/{1}: {2}</value>
+    <value>Datei {0}/{1} laden: {2}</value>
   </data>
   <data name="LoadingFileinformation" xml:space="preserve">
-    <value>Loading file information</value>
+    <value>Datei Informationen laden</value>
   </data>
   <data name="NoAddressError" xml:space="preserve">
-    <value>No ZToolbox address specified</value>
+    <value>Keine ZToolbox Adresse angegeben</value>
   </data>
   <data name="StartingZToolbox" xml:space="preserve">
-    <value>Starting ZToolbox</value>
+    <value>ZToolbox wird gestartet ...</value>
   </data>
 </root>
