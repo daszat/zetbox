@@ -189,3 +189,31 @@ This is a topic of discussion
 \emph{Bootstrapper} contains only one executalable. The Boostrapper itself which
 is downloading the whole client application with its configuration from an HTTP
 Server via REST.
+
+\subsection{Deployment on a Linux Server}
+
+On Linux the following packages are needed
+
+\begin{itemize}
+  \item Mono 2.10 - master
+  \item Apache 2
+  \item mod\_mono
+  \item many other\ldots
+ \end{itemize}
+
+\subsubsection{Apache configuration}
+
+\begin{itemize}
+\item Install Apache
+\item install mod\_mono
+\item turn off KeepAlive - the .NET HTTP Client won't talk to Apache correctly 
+\item enable/configure your security model
+\item ensure that the
+\emph{Kistl.Server.HttpService.TrustedBasicAuthenticationModule} is enabled.
+\end{itemize}
+
+The Apache Server is responsible for authentication. The ZToolbox server trusts
+Apache and uses the passed identity (through the HTTP Header).
+ 
+
+\subsection{Deployment on a Windows Server}
