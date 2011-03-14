@@ -214,9 +214,17 @@ namespace Kistl.Server.HttpService
                             ObjectNotificationRequest[] notificationRequests;
                             BinarySerializer.FromStream(out notificationRequests, reader);
 
-                            Log.DebugFormat("InvokeServerMethod(type=[{0}], ID={1}, method=[{2}], SerializableType[{3}], byte[{4}], byte[{5}], ObjectNotificationRequest[{6}])", type, ID, method, parameterTypes.Length, parameter.Length, changedObjects.Length);
+                            Log.DebugFormat("InvokeServerMethod(type=[{0}], ID={1}, method=[{2}], SerializableType[{3}], byte[{4}], byte[{5}], ObjectNotificationRequest[{6}])", 
+                                type, 
+                                ID, 
+                                method, 
+                                parameterTypes.Length, 
+                                parameter.Length, 
+                                changedObjects.Length,
+                                notificationRequests.Length);
                             byte[] retChangedObjects;
                             var result = service.InvokeServerMethod(type, ID, method, parameterTypes, parameter, changedObjects, notificationRequests, out retChangedObjects);
+                            Log.DebugFormat("InvokeServerMethod received {0}B retChangedObjects");
 
                             context.Response.StatusCode = 200;
                             context.Response.ContentType = "application/octet-stream";
