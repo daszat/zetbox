@@ -421,6 +421,8 @@ namespace Kistl.Client.Presentables.ValueViewModels
         public void ActivateItem(DataObjectViewModel item, bool activate)
         {
             if (item == null) { throw new ArgumentNullException("item"); }
+            // Don't open simple objects
+            if (this.ReferencedClass.IsSimpleObject) return;
 
             ViewModelFactory.ShowModel(item, activate);
         }
