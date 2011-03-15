@@ -92,7 +92,7 @@ namespace Kistl.API.Server
 
         public void SetDeleted()
         {
-            if (!_ObjectState.In(DataObjectState.New, DataObjectState.Modified, DataObjectState.Unmodified))
+            if (!_ObjectState.In(DataObjectState.New, DataObjectState.Modified, DataObjectState.Unmodified, DataObjectState.Deleted))
             {
                 throw new InvalidOperationException("Cannot delete object when in State " + _ObjectState.ToString());
             }
