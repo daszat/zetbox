@@ -19,12 +19,28 @@ namespace Kistl.API.Utils
             return new GenericCastingCollectionWrapper<TFrom, TResult>(collection);
         }
 
+        public static ICollection<TResult> WrapListAsCollectionHelper<TFrom, TResult>(IList<TFrom> list)
+            where TFrom : TResult
+        {
+            if (list == null) { throw new ArgumentNullException("list"); }
+
+            return new GenericCastingListWrapper<TFrom, TResult>(list);
+        }
+
         public static object WrapAsCollectionReflectionHelper(Type TFrom, Type TResult, object collection)
         {
             if (collection == null) { throw new ArgumentNullException("collection"); }
 
             MethodInfo wrapAsCollection = typeof(MagicCollectionFactory).GetMethod("WrapAsCollectionHelper");
             return wrapAsCollection.MakeGenericMethod(TFrom, TResult).Invoke(null, new[] { collection });
+        }
+
+        public static object WrapListAsCollectionReflectionHelper(Type TFrom, Type TResult, object list)
+        {
+            if (list == null) { throw new ArgumentNullException("list"); }
+
+            MethodInfo wrapListAsCollection = typeof(MagicCollectionFactory).GetMethod("WrapListAsCollectionHelper");
+            return wrapListAsCollection.MakeGenericMethod(TFrom, TResult).Invoke(null, new[] { list });
         }
 
         /// <summary>
@@ -34,15 +50,17 @@ namespace Kistl.API.Utils
         {
             if (collection == null) { throw new ArgumentNullException("collection"); }
 
-            if (collection is ICollection<T>)
+            var collectionType = collection.GetType();
+
+            if (typeof(ICollection<T>).IsAssignableFrom(collectionType))
             {
                 return (ICollection<T>)collection;
             }
-            else if (collection is IList<T>)
+            else if (typeof(IList<T>).IsAssignableFrom(collectionType))
             {
                 return (IList<T>)collection;
             }
-            else if (collection is IEnumerable<T>)
+            else if (typeof(IEnumerable<T>).IsAssignableFrom(collectionType))
             {
                 // TODO: implement a non-synchronized version for here
                 return new SynchronizedReadOnlyCollection<T>(new object(), (IEnumerable<T>)collection);
@@ -62,11 +80,24 @@ namespace Kistl.API.Utils
                 }
                 else if (elementTypes.Count() == 1)
                 {
-                    return (ICollection<T>)WrapAsCollectionReflectionHelper(elementTypes.Single(), typeof(T), collection);
+                    var elementType = elementTypes.Single();
+                    var sourceListType = typeof(IList<>).MakeGenericType(elementType);
+                    if (sourceListType.IsAssignableFrom(collectionType))
+                    {
+                        return (ICollection<T>)WrapListAsCollectionReflectionHelper(elementType, typeof(T), collection);
+                    }
+                    else
+                    {
+                        var sourceCollectionType = typeof(ICollection<>).MakeGenericType(elementType);
+                        if (sourceCollectionType.IsAssignableFrom(collectionType))
+                        {
+                            return (ICollection<T>)WrapAsCollectionReflectionHelper(elementType, typeof(T), collection);
+                        }
+                    }
                 }
-                else if (collection is IList)
+                else if (typeof(IList).IsAssignableFrom(collectionType))
                 {
-                    return new CastingCollectionWrapper<T>((IList)collection);
+                    return new CastingListWrapper<T>((IList)collection);
                 }
             }
 
@@ -99,11 +130,13 @@ namespace Kistl.API.Utils
         {
             if (potentialList == null) { throw new ArgumentNullException("potentialList"); }
 
-            if (potentialList is IList<T>)
+            var listType = potentialList.GetType();
+
+            if (typeof(IList<T>).IsAssignableFrom(listType))
             {
                 return (IList<T>)potentialList;
             }
-            else if (potentialList is IList)
+            else if (typeof(IList).IsAssignableFrom(listType))
             {
                 var elementTypes = potentialList.GetType().FindElementTypes().Where(t => typeof(T).IsAssignableFrom(t)).ToArray();
 
@@ -156,16 +189,47 @@ namespace Kistl.API.Utils
     }
 
     /// <summary>
-    /// This wrapper takes a collection object and turns it into a ICollection&lt;T&gt;
+    /// This wrapper takes a collection object and turns it into an ICollection&lt;T&gt; and IList&lt;T&gt;
     /// </summary>
-    public class CastingCollectionWrapper<T> : ICollection<T>
+    public class CastingListWrapper<T> : ICollection<T>, IList<T>
     {
         protected IList baseList;
 
-        public CastingCollectionWrapper(IList baseList)
+        public CastingListWrapper(IList baseList)
         {
             this.baseList = baseList;
         }
+
+        #region IList<T> Members
+
+        public int IndexOf(T item)
+        {
+            return baseList.IndexOf(item);
+        }
+
+        public void Insert(int index, T item)
+        {
+            baseList.Insert(index, item);
+        }
+
+        public void RemoveAt(int index)
+        {
+            baseList.RemoveAt(index);
+        }
+
+        public T this[int index]
+        {
+            get
+            {
+                return (T)baseList[index];
+            }
+            set
+            {
+                baseList[index] = value;
+            }
+        }
+
+        #endregion
 
         #region ICollection<T> Members
 
@@ -231,46 +295,6 @@ namespace Kistl.API.Utils
         IEnumerator IEnumerable.GetEnumerator()
         {
             return baseList.GetEnumerator();
-        }
-
-        #endregion
-    }
-
-    public class CastingListWrapper<T> : CastingCollectionWrapper<T>, IList<T>
-    {
-
-        public CastingListWrapper(IList baseList)
-            : base(baseList)
-        {
-        }
-
-        #region IList<T> Members
-
-        public int IndexOf(T item)
-        {
-            return baseList.IndexOf(item);
-        }
-
-        public void Insert(int index, T item)
-        {
-            baseList.Insert(index, item);
-        }
-
-        public void RemoveAt(int index)
-        {
-            baseList.RemoveAt(index);
-        }
-
-        public T this[int index]
-        {
-            get
-            {
-                return (T)baseList[index];
-            }
-            set
-            {
-                baseList[index] = value;
-            }
         }
 
         #endregion
