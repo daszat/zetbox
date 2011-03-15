@@ -16,7 +16,7 @@
     </DataTemplate>
 
     <DataTemplate x:Key="nullTemplate">
-        <TextBlock FontWeight="Bold">(null)</TextBlock>
+        <TextBlock FontWeight="Bold">k. A.</TextBlock><!-- TODO: this is german, needs translation -->
     </DataTemplate>
 
     <DataTemplate x:Key="GridHeaderTemplateArrowUp">
