@@ -433,8 +433,6 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
         #region Utilities and UI callbacks
 
-        protected abstract void EnsureValueCache();
-
         private void CollectChildClasses(int id, List<ObjectClass> children)
         {
             var nextChildren = FrozenContext.GetQuery<ObjectClass>()
@@ -459,19 +457,27 @@ namespace Kistl.Client.Presentables.ValueViewModels
         {
             if (e.NewItems != null)
             {
-                foreach (var prop in e.NewItems.OfType<INotifyPropertyChanged>())
+                foreach (var obj in e.NewItems.OfType<INotifyPropertyChanged>())
                 {
-                    prop.PropertyChanged += AnyPropertyChangedHandler;
+                    obj.PropertyChanged += AnyPropertyChangedHandler;
                 }
             }
 
             if (e.OldItems != null)
             {
-                foreach (var prop in e.OldItems.OfType<INotifyPropertyChanged>())
+                foreach (var obj in e.OldItems.OfType<INotifyPropertyChanged>())
                 {
-                    prop.PropertyChanged -= AnyPropertyChangedHandler;
+                    obj.PropertyChanged -= AnyPropertyChangedHandler;
+
+                    // Delete dependent objects when they leave our scope
+                    if (obj is DataObjectViewModel && !AllowRemove && AllowDelete)
+                    {
+                        ((DataObjectViewModel)obj).Delete();
+                    }
                 }
             }
+
+            NotifyValueChanged();
         }
 
         private void AnyPropertyChangedHandler(object sender, EventArgs e)
@@ -489,6 +495,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             ValueModel.Value.Clear();
         }
 
+        protected abstract void EnsureValueCache();
         #endregion
 
         #region Proxy
@@ -537,6 +544,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             {
                 if (_proxyInstances == null)
                 {
+                    EnsureValueCache();
                     _proxyInstances = new ProxyList(
                         ObjectCollectionModel,
                         ObjectCollectionModel.Value,

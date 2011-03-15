@@ -33,23 +33,8 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
         #region Public interface and IReadOnlyValueModel<IReadOnlyObservableCollection<DataObjectViewModel>> Members
 
-        private ReadOnlyObservableProjectedList<IDataObject, DataObjectViewModel> _valueCache;
-        public override IReadOnlyObservableList<DataObjectViewModel> Value
-        {
-            get
-            {
-                EnsureValueCache();
-                return _valueCache;
-            }
-            set
-            {
-                throw new NotSupportedException();
-            }
-
-        }
-
         private SortedWrapper _wrapper = null;
-        private class SortedWrapper : INotifyCollectionChanged, IList<IDataObject>
+        private sealed class SortedWrapper : INotifyCollectionChanged, IList<IDataObject>
         {
             private List<IDataObject> _sortedList;
             private IEnumerable _collection;
@@ -63,10 +48,10 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 _collection = collection;
                 _notifier = notifier;
                 _notifier.CollectionChanged += new NotifyCollectionChangedEventHandler(notifier_CollectionChanged);
-                Sort(_sortProp, _direction);
+                Sort(_sortProp, _direction, null);
             }
 
-            public void Sort(string p, ListSortDirection direction)
+            internal void Sort(string p, ListSortDirection direction, NotifyCollectionChangedEventArgs eventArgs)
             {
                 _sortProp = p;
                 _direction = direction;
@@ -74,21 +59,45 @@ namespace Kistl.Client.Presentables.ValueViewModels
                     .OrderBy(string.Format("{0} {1}", _sortProp, _direction == ListSortDirection.Descending ? "desc" : string.Empty))
                     .Cast<IDataObject>()
                     .ToList();
-                OnCollectionChanged();
+
+                if (eventArgs != null)
+                    OnCollectionChanged(eventArgs);
             }
 
-            private void OnCollectionChanged()
+            private void OnCollectionChanged(NotifyCollectionChangedEventArgs eventArgs)
             {
                 var temp = CollectionChanged;
                 if (temp != null)
                 {
-                    temp(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+                    temp(this, eventArgs);
                 }
             }
 
             void notifier_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
             {
-                Sort(_sortProp, _direction);
+                if (e.OldItems == null && e.NewItems == null)
+                {
+                    // we would have to map here, ignore
+                    Sort(_sortProp, _direction, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+                    return;
+                }
+
+                switch (e.Action)
+                {
+                    case NotifyCollectionChangedAction.Add:
+                    case NotifyCollectionChangedAction.Remove:
+                        // we can pass the event on with the specified OldItems/NewItems
+                        Sort(_sortProp, _direction, e);
+                        break;
+                    case NotifyCollectionChangedAction.Move:
+                    case NotifyCollectionChangedAction.Replace:
+                    case NotifyCollectionChangedAction.Reset:
+                        // too complex to map (could result in multiple new events), just notify as reset
+                        Sort(_sortProp, _direction, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+                        break;
+                    default:
+                        break;
+                }
             }
 
             #region INotifyCollectionChanged Members
@@ -186,6 +195,20 @@ namespace Kistl.Client.Presentables.ValueViewModels
             #endregion
         }
 
+        private ReadOnlyObservableProjectedList<IDataObject, DataObjectViewModel> _valueCache;
+        public override IReadOnlyObservableList<DataObjectViewModel> Value
+        {
+            get
+            {
+                EnsureValueCache();
+                return _valueCache;
+            }
+            set
+            {
+                throw new NotSupportedException();
+            }
+        }
+
         protected override void EnsureValueCache()
         {
             if (_wrapper == null)
@@ -195,14 +218,8 @@ namespace Kistl.Client.Presentables.ValueViewModels
                     _wrapper,
                     obj => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, obj),
                     mdl => mdl.Object);
-                
-                _valueCache.CollectionChanged += _valueCache_CollectionChanged;
+                _valueCache.CollectionChanged += ValueListChanged;
             }
-        }
-
-        void _valueCache_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            NotifyValueChanged();
         }
 
         public bool HasPersistentOrder
@@ -220,7 +237,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             if (string.IsNullOrEmpty(propName))
                 throw new ArgumentNullException("propName");
             EnsureValueCache();
-            _wrapper.Sort(propName, direction);
+            _wrapper.Sort(propName, direction, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
         }
     }
 }

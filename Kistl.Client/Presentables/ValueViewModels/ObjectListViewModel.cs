@@ -45,7 +45,6 @@ namespace Kistl.Client.Presentables.ValueViewModels
             {
                 throw new NotSupportedException();
             }
-
         }
 
         protected override void EnsureValueCache()
@@ -56,13 +55,8 @@ namespace Kistl.Client.Presentables.ValueViewModels
                     ObjectCollectionModel, ObjectCollectionModel.Value,
                     obj => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, obj),
                     mdl => mdl.Object);
-                _valueCache.CollectionChanged += _valueCache_CollectionChanged;
+                _valueCache.CollectionChanged += ValueListChanged;
             }
-        }
-
-        void _valueCache_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            NotifyValueChanged();
         }
 
         public bool HasPersistentOrder
