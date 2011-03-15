@@ -7,11 +7,12 @@ namespace Kistl.Client.Presentables.ValueViewModels
     using System.ComponentModel;
     using System.Linq;
     using System.Text;
+    using System.Text.RegularExpressions;
     using Kistl.API;
     using Kistl.App.Base;
+    using Kistl.App.GUI;
     using Kistl.Client.Models;
     using Kistl.Client.Presentables.GUI;
-    using Kistl.App.GUI;
 
     public abstract class BaseValueViewModel : ViewModel, IValueViewModel, IFormattedValueViewModel, IDataErrorInfo, ILabeledViewModel
     {
@@ -188,12 +189,12 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
         #region IDataErrorInfo Members
 
-        public string Error
+        public virtual string Error
         {
             get { return ValueModel.Error; }
         }
 
-        public string this[string columnName]
+        public virtual string this[string columnName]
         {
             get { return ValueModel[columnName]; }
         }
@@ -576,6 +577,69 @@ namespace Kistl.Client.Presentables.ValueViewModels
             }
         }
 
+        private string _timePartInput;
+        private string _timePartError;
+        public string TimePartString
+        {
+            get
+            {
+                if (_timePartInput == null)
+                {
+                    _timePartInput = TimePart == null ? String.Empty : String.Format("{0:00}:{1:00}", TimePart.Value.Hours, TimePart.Value.Minutes);
+                }
+                return _timePartInput;
+            }
+            set
+            {
+                if (value == _timePartInput)
+                {
+                    return;
+                }
+
+                if (value == null)
+                {
+                    _timePartInput = String.Empty;
+                    OnPropertyChanged("TimePartString");
+
+                    _timePartError = null;
+                    OnPropertyChanged("Error");
+
+                    TimePart = TimeSpan.Zero;
+
+                    return;
+                }
+
+                _timePartInput = value;
+                OnPropertyChanged("TimePartString");
+
+                MatchCollection matches;
+                if (null != (matches = Regex.Matches(value, @"^(\d?\d):?(\d\d)$")))
+                {
+                    int hours, minutes;
+                    if (matches.Count == 1
+                        && matches[0].Groups.Count == 3
+                        && Int32.TryParse(matches[0].Groups[1].Captures[0].Value, out hours)
+                        && Int32.TryParse(matches[0].Groups[2].Captures[0].Value, out minutes)
+                        && hours >= 0 && hours < 24
+                        && minutes >= 0 && minutes < 60)
+                    {
+                        if (_timePartError != null)
+                        {
+                            _timePartError = null;
+                            OnPropertyChanged("Error");
+                        }
+
+                        TimePart = new TimeSpan(hours, minutes, 0);
+                    }
+                    else
+                    {
+                        _timePartError = string.Format("Fehler bei Zeiteingabe hh:mm : {0}", value);
+                        OnPropertyChanged("Error");
+                    }
+                }
+            }
+        }
+
         public override DateTime? Value
         {
             get
@@ -591,6 +655,36 @@ namespace Kistl.Client.Presentables.ValueViewModels
                     base.Value = value;
                     OnPropertyChanged("DatePart");
                     OnPropertyChanged("TimePart");
+                }
+            }
+        }
+
+        public override string Error
+        {
+            get
+            {
+                var baseError = base.Error;
+                if (string.IsNullOrEmpty(baseError))
+                {
+                    return _timePartError;
+                }
+                else
+                {
+                    return baseError + "\n" + _timePartError;
+                }
+            }
+        }
+
+        public override string this[string columnName]
+        {
+            get
+            {
+                switch (columnName)
+                {
+                    case "TimePartString":
+                        return _timePartError;
+                    default:
+                        return base[columnName];
                 }
             }
         }
