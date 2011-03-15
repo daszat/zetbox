@@ -1,20 +1,22 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Threading;
-using System.Windows.Threading;
 
 namespace Kistl.Client.WPF
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Data;
+    using System.Windows.Documents;
+    using System.Windows.Input;
+    using System.Windows.Media;
+    using System.Windows.Media.Imaging;
+    using System.Windows.Shapes;
+    using System.Windows.Threading;
+    using Kistl.API.Utils;
+
     /// <summary>
     /// Interaction logic for SplashScreen.xaml
     /// </summary>
@@ -25,8 +27,10 @@ namespace Kistl.Client.WPF
             Steps = 10;
             CurrentStep = 0;
             InitializeComponent();
+            Log.Debug("Initialization complete");
         }
 
+        private static readonly log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Client.WPF.SplashScreen");
         private static readonly object _lock = new object();
         private static SplashScreen _current = null;
         private static Thread _thread = null;
@@ -34,74 +38,102 @@ namespace Kistl.Client.WPF
 
         private static void Run()
         {
+            Log.Debug("Run: Start");
+
             _current = new SplashScreen();
             _current.Show();
             _current.Closed += (sender, e) => _current.Dispatcher.InvokeShutdown();
 
+            Log.Debug("Run: Set");
             _created.Set();
             System.Windows.Threading.Dispatcher.Run();
         }
 
         public static void ShowSplashScreen(string message, string info, int steps)
         {
-            lock (_lock)
+            using (Log.DebugTraceMethodCall("ShowSplashScreen"))
             {
-                if (_current == null)
+                lock (_lock)
                 {
-                    _thread = new Thread(new ThreadStart(Run));
-                    _thread.SetApartmentState(ApartmentState.STA);
-                    _thread.IsBackground = true; // do not block main process from closing
-                    _thread.Start();
-
-                    _created.WaitOne();
-
-                    _current.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(delegate()
+                    Log.Debug("Acquired lock for ShowSplashScreen");
+                    if (_current == null)
                     {
-                        _current.Message = message;
-                        _current.Info = info;
-                        _current.Steps = steps;
-                    }));
-                }
-                else
-                {
-                    _current.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(delegate()
-                    {
-                        _current.Message = message;
-                        _current.Info = info;
-                        _current.Steps = steps;
+                        Log.Debug("Will create new Thread");
+                        _thread = new Thread(new ThreadStart(Run));
+                        _thread.SetApartmentState(ApartmentState.STA);
+                        _thread.IsBackground = true; // do not block main process from closing
+                        _thread.Start();
 
-                        _current.Show();
-                        _current.Activate();
-                    }));
+                        Log.Debug("Waiting for thread to proceed");
+                        _created.WaitOne();
+
+                        _current.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(delegate()
+                        {
+                            Log.Debug("Setting new message");
+                            _current.Message = message;
+                            _current.Info = info;
+                            _current.Steps = steps;
+                        }));
+                    }
+                    else
+                    {
+                        Log.Debug("Reusing existing dispatcher");
+                        _current.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(delegate()
+                        {
+                            Log.Debug("Setting new message on reused thread");
+                            _current.Message = message;
+                            _current.Info = info;
+                            _current.Steps = steps;
+
+                            _current.Show();
+                            _current.Activate();
+                        }));
+                    }
                 }
             }
         }
 
         public static void HideSplashScreen()
         {
-            lock (_lock)
+            using (Log.DebugTraceMethodCall("HideSplashScreen"))
             {
-                if (_current != null)
+                lock (_lock)
                 {
-                    _current.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(delegate()
+                    Log.Debug("Acquired lock for HideSplashScreen");
+                    if (_current != null)
                     {
-                        _current.Hide();
-                    }));
+                        Log.Debug("Signalling Hide to the dispatcher");
+                        _current.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(delegate()
+                        {
+                            Log.Debug("Committing Hide to the dispatcher");
+                            _current.Hide();
+                        }));
+                    }
+                    else
+                    {
+                        Log.Debug("No current dispatcher");
+                    }
                 }
             }
         }
 
         public static void SetInfo(string info)
         {
-            lock (_lock)
+            using (Log.DebugTraceMethodCall("SetInfo"))
             {
-                if (_current != null)
+                lock (_lock)
                 {
-                    _current.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(delegate()
+                    Log.Debug("Acquired lock for SetInfo");
+                    if (_current != null)
                     {
-                        _current.Info = info;
-                        _current.CurrentStep++;
-                    }));
+                        Log.Debug("Signalling SetInfo to the dispatcher");
+                        _current.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(delegate()
+                        {
+                            Log.Debug("Set new Info and incremented CurrentStep");
+                            _current.Info = info;
+                            _current.CurrentStep++;
+                        }));
+                    }
                 }
             }
         }
@@ -136,8 +168,6 @@ namespace Kistl.Client.WPF
         public static readonly DependencyProperty StepsProperty =
             DependencyProperty.Register("Steps", typeof(int), typeof(SplashScreen));
 
-
-
         public int CurrentStep
         {
             get { return (int)GetValue(CurrentStepProperty); }
@@ -147,7 +177,5 @@ namespace Kistl.Client.WPF
         // Using a DependencyProperty as the backing store for CurrentStep.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CurrentStepProperty =
             DependencyProperty.Register("CurrentStep", typeof(int), typeof(SplashScreen));
-
-
     }
 }
