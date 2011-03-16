@@ -151,7 +151,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
         {
             get
             {
-                return AllowAddNew && IsInlineEditable && _allowInlineAddNew != false;
+                return AllowAddNew && IsInlineEditable && !HasChildClasses && _allowInlineAddNew != false;
             }
             set
             {
