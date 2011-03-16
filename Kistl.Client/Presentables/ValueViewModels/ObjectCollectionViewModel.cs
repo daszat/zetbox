@@ -84,10 +84,15 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
                 switch (e.Action)
                 {
+                    // we can pass the event on with the specified NewItems
+                    // but we must loose the indices, as they'll change on sort
                     case NotifyCollectionChangedAction.Add:
+                        Sort(_sortProp, _direction, new NotifyCollectionChangedEventArgs(e.Action, e.NewItems));
+                        break;
+                    // we can pass the event on with the specified OldItems
+                    // but we must loose the indices, as they'll change on sort
                     case NotifyCollectionChangedAction.Remove:
-                        // we can pass the event on with the specified OldItems/NewItems
-                        Sort(_sortProp, _direction, e);
+                        Sort(_sortProp, _direction, new NotifyCollectionChangedEventArgs(e.Action, e.OldItems));
                         break;
                     case NotifyCollectionChangedAction.Move:
                     case NotifyCollectionChangedAction.Replace:
