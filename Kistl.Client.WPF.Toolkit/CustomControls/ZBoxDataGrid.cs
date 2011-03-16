@@ -15,53 +15,66 @@ namespace Kistl.Client.WPF.CustomControls
     {
         #region CellEdit
         bool continueEdit = false;
+        bool isNewItemForContinueEdit = false;
+        bool isNewItemInitialized = false;
+
         protected override void OnCellEditEnding(Microsoft.Windows.Controls.DataGridCellEditEndingEventArgs e)
         {
             continueEdit = e.EditAction == Microsoft.Windows.Controls.DataGridEditAction.Commit;
             Logging.Client.InfoFormat("OnCellEditEnding(EditAction = {0})", e.EditAction);
+            Logging.Client.InfoFormat("    continueEdit={0}, isNewItem={1}", continueEdit, isNewItemForContinueEdit);
             base.OnCellEditEnding(e);
         }
 
         protected override void OnBeginningEdit(Microsoft.Windows.Controls.DataGridBeginningEditEventArgs e)
         {
             Logging.Client.InfoFormat("OnBeginningEdit(Row.Item.Type = {0})", e.Row.Item.GetType().Name);
+            Logging.Client.InfoFormat("    continueEdit={0}, isNewItem={1}", continueEdit, isNewItemForContinueEdit);
             base.OnBeginningEdit(e);
         }
 
         protected override void OnInitializingNewItem(Microsoft.Windows.Controls.InitializingNewItemEventArgs e)
         {
             Logging.Client.InfoFormat("OnInitializingNewItem(NewItem.Type = {0})", e.NewItem.GetType().Name);
+            Logging.Client.InfoFormat("    continueEdit={0}, isNewItem={1}", continueEdit, isNewItemForContinueEdit);
+            isNewItemInitialized = true;
             base.OnInitializingNewItem(e);
         }
 
         protected override void OnPreparingCellForEdit(Microsoft.Windows.Controls.DataGridPreparingCellForEditEventArgs e)
         {
             Logging.Client.InfoFormat("OnPreparingCellForEdit(Row.Item.Type = {0})", e.Row.Item.GetType().Name);
+            Logging.Client.InfoFormat("    continueEdit={0}, isNewItem={1}", continueEdit, isNewItemForContinueEdit);
             base.OnPreparingCellForEdit(e);
         }
 
         protected override void OnRowEditEnding(Microsoft.Windows.Controls.DataGridRowEditEndingEventArgs e)
         {
             Logging.Client.InfoFormat("OnRowEditEnding(Row.Item.Type = {0})", e.Row.Item.GetType().Name);
+            Logging.Client.InfoFormat("    continueEdit={0}, isNewItem={1}", continueEdit, isNewItemForContinueEdit);
             base.OnRowEditEnding(e);
         }
 
-        bool isNewItem = false;
         protected override void OnCurrentCellChanged(EventArgs e)
         {
             base.OnCurrentCellChanged(e);
             Logging.Client.InfoFormat("OnCurrentCellChanged(CurrentCell.Item.Type={0})", CurrentCell.Item.GetType().Name);
+            Logging.Client.InfoFormat("    continueEdit={0}, isNewItem={1}", continueEdit, isNewItemForContinueEdit);
             if (continueEdit)
             {
-                isNewItem = CurrentCell.Item == CollectionView.NewItemPlaceholder;
-                if (!isNewItem)
+                isNewItemForContinueEdit = CurrentCell.Item == CollectionView.NewItemPlaceholder;
+                if (!isNewItemForContinueEdit)
                 {
                     continueEdit = false;
+                    Logging.Client.Info("    OnCurrentCellChanged begins editing of existing item");
+                    Logging.Client.InfoFormat("    continueEdit={0}, isNewItem={1}", continueEdit, isNewItemForContinueEdit);
                     BeginEdit();
                 }
                 else
                 {
                     // delay until selectionChange
+                    Logging.Client.Info("    OnCurrentCellChanged delays edit of new item until selection changed");
+                    Logging.Client.InfoFormat("    continueEdit={0}, isNewItem={1}", continueEdit, isNewItemForContinueEdit);
                 }
             }
         }
@@ -133,13 +146,25 @@ namespace Kistl.Client.WPF.CustomControls
         protected override void OnSelectionChanged(System.Windows.Controls.SelectionChangedEventArgs e)
         {
             Logging.Client.Info("OnSelectionChanged()");
+            Logging.Client.InfoFormat("    continueEdit={0}, isNewItem={1}", continueEdit, isNewItemForContinueEdit);
             base.OnSelectionChanged(e);
 
-            if (isNewItem)
+            if (isNewItemForContinueEdit)
             {
-                isNewItem = false;
+                isNewItemForContinueEdit = false;
+                Logging.Client.Info("    OnSelectionChanged begins edit for creating new item");
+                Logging.Client.InfoFormat("    continueEdit={0}, isNewItem={1}", continueEdit, isNewItemForContinueEdit);
                 BeginEdit(); // to create a new item
+            }
+
+            if(isNewItemInitialized)
+            {
+                isNewItemInitialized = false;
+                Logging.Client.Info("    OnSelectionChanged commits edit to trigger new row");
+                Logging.Client.InfoFormat("    continueEdit={0}, isNewItem={1}", continueEdit, isNewItemForContinueEdit);
                 CommitEdit(Microsoft.Windows.Controls.DataGridEditingUnit.Row, false);
+                Logging.Client.Info("    OnSelectionChanged begins edit for real");
+                Logging.Client.InfoFormat("    continueEdit={0}, isNewItem={1}", continueEdit, isNewItemForContinueEdit);
                 BeginEdit(); // to continue editing                            ^^^^^ didn't help
             }
 
