@@ -16,7 +16,7 @@ using Kistl.Client.Presentables;
 using System.ComponentModel;
 using System.Windows.Markup;
 
-namespace Kistl.Client.WPF.View
+namespace Kistl.Client.WPF.CustomControls
 {
     /// <summary>
     /// Interaction logic for LabeledView.xaml

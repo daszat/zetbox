@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.WPF.View
+namespace Kistl.Client.WPF.Toolkit
 {
     using System;
     using System.Collections.Generic;

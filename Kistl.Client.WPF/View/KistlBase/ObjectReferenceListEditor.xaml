@@ -1,4 +1,4 @@
-﻿<view:PropertyEditor x:Class="Kistl.Client.WPF.View.KistlBase.ObjectReferenceListEditor"
+﻿<ctrls:PropertyEditor x:Class="Kistl.Client.WPF.View.KistlBase.ObjectReferenceListEditor"
                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                      xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"
@@ -37,4 +37,4 @@
             </ctrls:ZBoxListView.ContextMenu>
         </ctrls:ZBoxListView>
     </DockPanel>
-</view:PropertyEditor>
+</ctrls:PropertyEditor>

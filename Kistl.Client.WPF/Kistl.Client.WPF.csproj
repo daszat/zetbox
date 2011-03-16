@@ -602,7 +602,6 @@
     <Compile Include="View\KistlBase\PropertyGroupBoxView.xaml.cs">
       <DependentUpon>PropertyGroupBoxView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\KistlBase\PropertyEditor.cs" />
     <Compile Include="View\KistlBase\StringListView.xaml.cs">
       <DependentUpon>StringListView.xaml</DependentUpon>
     </Compile>

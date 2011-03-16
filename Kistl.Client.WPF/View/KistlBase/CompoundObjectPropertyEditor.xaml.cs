@@ -16,6 +16,7 @@ namespace Kistl.Client.WPF.View.KistlBase
     using System.Windows.Shapes;
     using Kistl.Client.GUI;
     using Kistl.Client.Presentables.ValueViewModels;
+    using Kistl.Client.WPF.CustomControls;
 
     /// <summary>
     /// Interaction logic for CompoundObjectPropertyEditor.xaml

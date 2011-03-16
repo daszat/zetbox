@@ -1,7 +1,7 @@
-﻿<view:PropertyEditor  x:Class="Kistl.Client.WPF.View.KistlBase.CompoundObjectPropertyEditor"
+﻿<ctrls:PropertyEditor  x:Class="Kistl.Client.WPF.View.KistlBase.CompoundObjectPropertyEditor"
                       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                      xmlns:ctrls="clr-namespace:Kistl.Client.WPF.View;assembly=Kistl.Client.WPF.Toolkit"
+                      xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"
                       xmlns:view="clr-namespace:Kistl.Client.WPF.View.KistlBase"
                       xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
                       xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
@@ -31,4 +31,4 @@
             </DataTemplate>
         </ItemsControl.ItemTemplate>
     </ItemsControl>
-</view:PropertyEditor >
+</ctrls:PropertyEditor >

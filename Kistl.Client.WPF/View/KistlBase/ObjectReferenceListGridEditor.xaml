@@ -1,4 +1,4 @@
-﻿<view:PropertyEditor x:Class="Kistl.Client.WPF.View.KistlBase.ObjectReferenceListGridEditor"
+﻿<ctrls:PropertyEditor x:Class="Kistl.Client.WPF.View.KistlBase.ObjectReferenceListGridEditor"
                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                      xmlns:wpftk="clr-namespace:Microsoft.Windows.Controls;assembly=WPFToolkit"
@@ -40,4 +40,4 @@
             </ctrls:ZBoxDataGrid.ContextMenu>
         </ctrls:ZBoxDataGrid>
     </DockPanel>
-</view:PropertyEditor>
+</ctrls:PropertyEditor>

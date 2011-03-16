@@ -4,7 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"
-             xmlns:view="clr-namespace:Kistl.Client.WPF.View;assembly=Kistl.Client.WPF.Toolkit"
              xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">

@@ -1,4 +1,4 @@
-﻿<view:PropertyEditor x:Class="Kistl.Client.WPF.View.SchemaMigration.DestinationPropertyEditor"
+﻿<ctrls:PropertyEditor x:Class="Kistl.Client.WPF.View.SchemaMigration.DestinationPropertyEditor"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -8,10 +8,10 @@
              xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
              ToolTip="{Binding ToolTip}"
              MinWidth="1">
-    <view:PropertyEditor.ContextMenu>
+    <ctrls:PropertyEditor.ContextMenu>
         <ContextMenu ItemsSource="{Binding Commands}"
                      ItemContainerStyle="{StaticResource CommandMenuItem}"/>
-    </view:PropertyEditor.ContextMenu>
+    </ctrls:PropertyEditor.ContextMenu>
     <DockPanel>
         <ctrls:DropDownButton>
             <ctrls:DropDownButton.Content>
@@ -27,4 +27,4 @@
         </ctrls:DropDownButton>
         <TextBlock Text="{Binding Name}" />
     </DockPanel>
-</view:PropertyEditor>
+</ctrls:PropertyEditor>

@@ -2,8 +2,7 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:viewKistlBase="clr-namespace:Kistl.Client.WPF.View.KistlBase"
-             xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"
-             xmlns:view="clr-namespace:Kistl.Client.WPF.View;assembly=Kistl.Client.WPF.Toolkit">
+             xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"             >
 
     <DockPanel>
 
@@ -13,19 +12,19 @@
                   Header="Details"
                   Margin="5,0">
             <DockPanel LastChildFill="False">
-                <view:LabeledView DockPanel.Dock="Top"
+                <ctrls:LabeledView DockPanel.Dock="Top"
                                   Margin="5,0,5,0"
                                   DataContext="{Binding PropertyModelsByName[Type], UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" />
 
-                <view:LabeledView DockPanel.Dock="Top"
+                <ctrls:LabeledView DockPanel.Dock="Top"
                                   Margin="5,0,5,0"
                                   DataContext="{Binding PropertyModelsByName[Multiplicity], UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" />
 
-                <view:LabeledView DockPanel.Dock="Top"
+                <ctrls:LabeledView DockPanel.Dock="Top"
                                   Margin="5,0,5,0"
                                   DataContext="{Binding PropertyModelsByName[HasPersistentOrder], UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" />
 
-                <view:LabeledView DockPanel.Dock="Top"
+                <ctrls:LabeledView DockPanel.Dock="Top"
                                   Margin="5,0,5,0"
                                   DataContext="{Binding PropertyModelsByName[Navigator], UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" />
 

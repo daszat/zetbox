@@ -12,7 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Kistl.GUI.Renderer.WPF.Controls
+namespace Kistl.Client.WPF.CustomControls
 {
     /// <summary>
     /// Interaction logic for ErrorReporter.xaml

@@ -22,6 +22,7 @@ namespace Kistl.Client.WPF.View.KistlBase
     using Kistl.Client.Presentables.ValueViewModels;
     using Kistl.Client.WPF.Commands;
     using Kistl.Client.WPF.Toolkit;
+    using Kistl.Client.WPF.CustomControls;
 
     /// <summary>
     /// Interaction logic for DataObjectListView.xaml

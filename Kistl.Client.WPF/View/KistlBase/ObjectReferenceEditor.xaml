@@ -1,13 +1,13 @@
-﻿<view:PropertyEditor x:Class="Kistl.Client.WPF.View.KistlBase.ObjectReferenceEditor"
+﻿<ctrls:PropertyEditor x:Class="Kistl.Client.WPF.View.KistlBase.ObjectReferenceEditor"
                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                      xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"
                      xmlns:view="clr-namespace:Kistl.Client.WPF.View.KistlBase"
                      ToolTip="{Binding ToolTip, Mode=OneWay}">
-    <view:PropertyEditor.ContextMenu>
+    <ctrls:PropertyEditor.ContextMenu>
         <ContextMenu ItemsSource="{Binding Commands}"
                      ItemContainerStyle="{StaticResource CommandMenuItem}"/>
-    </view:PropertyEditor.ContextMenu>
+    </ctrls:PropertyEditor.ContextMenu>
     <DockPanel>
         <ctrls:DropDownButton>
             <ctrls:DropDownButton.Content>
@@ -25,4 +25,4 @@
                           ContentTemplateSelector="{StaticResource listItemTemplateSelector}" />
     </DockPanel>
 
-</view:PropertyEditor>
+</ctrls:PropertyEditor>

@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using Kistl.Client.WPF.View.KistlBase;
 using Kistl.Client.GUI;
 using Kistl.Client.Presentables.SchemaMigration;
+using Kistl.Client.WPF.CustomControls;
 
 namespace Kistl.Client.WPF.View.SchemaMigration
 {

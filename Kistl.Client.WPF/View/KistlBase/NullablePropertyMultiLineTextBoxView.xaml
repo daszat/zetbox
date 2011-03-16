@@ -1,4 +1,4 @@
-﻿<view:PropertyEditor x:Class="Kistl.Client.WPF.View.NullablePropertyMultiLineTextBoxView"
+﻿<ctrls:PropertyEditor x:Class="Kistl.Client.WPF.View.NullablePropertyMultiLineTextBoxView"
                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                      xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"
@@ -22,4 +22,4 @@
         </TextBox.ContextMenu>
     </TextBox>
 
-</view:PropertyEditor>
+</ctrls:PropertyEditor>

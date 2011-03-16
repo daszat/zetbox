@@ -106,6 +106,7 @@
     <Compile Include="Converter\ImageConverter.cs" />
     <Compile Include="Converter\ImageCtrlConverter.cs" />
     <Compile Include="CustomControls\CommandButton.cs" />
+    <Compile Include="CustomControls\PropertyEditor.cs" />
     <Compile Include="CustomControls\ZBoxDataGrid.cs" />
     <Compile Include="CustomControls\DropDownButton.cs" />
     <Compile Include="CustomControls\LabeledContainer.xaml.cs">

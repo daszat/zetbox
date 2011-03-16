@@ -66,7 +66,7 @@ namespace Kistl.Client.WPF
                 .SingleInstance();
 
             builder
-                .Register<Kistl.Client.WPF.View.VisualTypeTemplateSelector>((c, p) => new Kistl.Client.WPF.View.VisualTypeTemplateSelector(
+                .Register<Kistl.Client.WPF.Toolkit.VisualTypeTemplateSelector>((c, p) => new Kistl.Client.WPF.Toolkit.VisualTypeTemplateSelector(
                     p.Named<object>("requestedKind"), 
                     c.Resolve<IFrozenContext>()))
                 .InstancePerDependency();
@@ -112,7 +112,7 @@ namespace Kistl.Client.WPF
                 var iconConverter = new IconConverter(container.Resolve<IFrozenContext>(), container.Resolve<IKistlContext>());
                 this.Resources["IconConverter"] = iconConverter;
                 this.Resources["ImageCtrlConverter"] = new ImageCtrlConverter(iconConverter);
-                var templateSelectorFactory = container.Resolve<Kistl.Client.WPF.View.VisualTypeTemplateSelector.Factory>();
+                var templateSelectorFactory = container.Resolve<Kistl.Client.WPF.Toolkit.VisualTypeTemplateSelector.Factory>();
                 this.Resources["defaultTemplateSelector"] = templateSelectorFactory(null);
                 this.Resources["listItemTemplateSelector"] = templateSelectorFactory("Kistl.App.GUI.SingleLineKind");
                 this.Resources["dashBoardTemplateSelector"] = templateSelectorFactory("Kistl.App.GUI.DashboardKind");

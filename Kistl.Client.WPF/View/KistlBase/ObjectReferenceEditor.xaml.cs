@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using Kistl.Client.GUI;
 using Kistl.Client.Presentables;
 using Kistl.Client.Presentables.ValueViewModels;
+using Kistl.Client.WPF.CustomControls;
 
 namespace Kistl.Client.WPF.View.KistlBase
 {

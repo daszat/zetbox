@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Kistl.Client.WPF.View.KistlBase;
+using Kistl.Client.WPF.CustomControls;
 
 namespace Kistl.Client.WPF.View
 {

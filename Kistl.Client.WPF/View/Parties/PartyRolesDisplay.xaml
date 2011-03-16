@@ -2,10 +2,9 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"
-             xmlns:view="clr-namespace:Kistl.Client.WPF.View;assembly=Kistl.Client.WPF.Toolkit"
              xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client">
     <DockPanel>
-        <view:LabeledView DockPanel.Dock="Top"
+        <ctrls:LabeledView DockPanel.Dock="Top"
                           DataContext="{Binding Roles}" />
         <ContentPresenter Content="{Binding SelectedRole}"
                           ContentTemplateSelector="{StaticResource defaultTemplateSelector}"/>

@@ -1,16 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Collections.Specialized;
-using Kistl.API;
-using System.Collections;
-using System.Windows.Data;
-using Kistl.API.Utils;
 
 namespace Kistl.Client.WPF.CustomControls
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Collections.Specialized;
+    using System.Linq;
+    using System.Text;
+    using System.Windows;
+    using System.Windows.Data;
+    using Kistl.API;
+    using Kistl.API.Utils;
+    using Kistl.Client.WPF.Toolkit;
+
     public class ZBoxDataGrid : Microsoft.Windows.Controls.DataGrid
     {
         #region CellEdit
@@ -46,6 +48,11 @@ namespace Kistl.Client.WPF.CustomControls
             Logging.Client.DebugFormat("OnPreparingCellForEdit(Row.Item.Type = {0})", e.Row.Item.GetType().Name);
             Logging.Client.DebugFormat("    continueEdit={0}, isNewItem={1}", continueEdit, isNewItemForContinueEdit);
             base.OnPreparingCellForEdit(e);
+            var editor = e.EditingElement.FindVisualChild<PropertyEditor>();
+            if (editor != null)
+            {
+                editor.Focus();
+            }
         }
 
         protected override void OnRowEditEnding(Microsoft.Windows.Controls.DataGridRowEditEndingEventArgs e)

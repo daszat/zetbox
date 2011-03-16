@@ -1,7 +1,7 @@
 ﻿<local:InstanceGridBaseDisplay x:Class="Kistl.Client.WPF.View.KistlBase.InstanceGridHorizontalDisplay"
                                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                               xmlns:tk="clr-namespace:Kistl.Client.WPF.View;assembly=Kistl.Client.WPF.Toolkit"
+                               xmlns:tk="clr-namespace:Kistl.Client.WPF.Toolkit;assembly=Kistl.Client.WPF.Toolkit"
                                xmlns:wpftk="clr-namespace:Microsoft.Windows.Controls;assembly=WPFToolkit"
                                xmlns:client="clr-namespace:Kistl.Client.WPF.View"
                                xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"

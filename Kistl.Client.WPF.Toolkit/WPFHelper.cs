@@ -1,18 +1,20 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.ComponentModel;
-using System.Windows.Data;
-using System.Windows.Input;
-using Microsoft.Windows.Controls;
-using Kistl.Client.Models;
-using System.Windows.Controls;
-using Kistl.Client.WPF.View;
 
 namespace Kistl.Client.WPF.Toolkit
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Windows;
+    using System.ComponentModel;
+    using System.Windows.Data;
+    using System.Windows.Input;
+    using Microsoft.Windows.Controls;
+    using Kistl.Client.Models;
+    using System.Windows.Controls;
+    using Kistl.Client.WPF.Toolkit;
+    using System.Windows.Media;
+
     public static class WPFHelper
     {
         /// <summary>
@@ -31,6 +33,31 @@ namespace Kistl.Client.WPF.Toolkit
                 BindingExpression e = ctrl.GetBindingExpression(dp);
                 if (e != null) e.UpdateSource();
             }
+        }
+
+        /// <summary>
+        /// http://stackoverflow.com/questions/980120/finding-control-within-wpf-itemscontrol
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="depObj"></param>
+        /// <returns></returns>
+        public static T FindVisualChild<T>(this DependencyObject depObj) where T : DependencyObject
+        {
+            if (depObj != null)
+            {
+                for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
+                {
+                    DependencyObject child = VisualTreeHelper.GetChild(depObj, i);
+                    if (child != null && child is T)
+                    {
+                        return (T)child;
+                    }
+
+                    T childItem = FindVisualChild<T>(child);
+                    if (childItem != null) return childItem;
+                }
+            }
+            return null;
         }
 
         public static void RefreshGridView(DataGrid lst, GridDisplayConfiguration cfg, DependencyProperty sortProperty)

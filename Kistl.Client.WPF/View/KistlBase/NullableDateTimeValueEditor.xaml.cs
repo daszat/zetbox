@@ -18,6 +18,7 @@ namespace Kistl.Client.WPF.View
     using Kistl.Client.GUI;
     using Kistl.Client.Presentables.ValueViewModels;
     using Kistl.Client.WPF.View.KistlBase;
+    using Kistl.Client.WPF.CustomControls;
 
     /// <summary>
     /// Interaction logic for NullableDateTimeValueEditor.xaml
@@ -54,7 +55,6 @@ namespace Kistl.Client.WPF.View
         {
             // Fix lonely Time Textbox
             txtTime.SetValue(DockPanel.DockProperty, ViewModel.DatePartVisible ? Dock.Right : Dock.Top);
-            InitializeFocusManager();
         }
 
         #region IHasViewModel<NullableDateTimePropertyViewModel> Members
