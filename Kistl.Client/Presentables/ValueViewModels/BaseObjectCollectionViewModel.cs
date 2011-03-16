@@ -433,6 +433,20 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
         #region Utilities and UI callbacks
 
+        private bool? _hasChildClasses;
+        public bool HasChildClasses
+        {
+            get
+            {
+                if (_hasChildClasses == null)
+                {
+                    _hasChildClasses = FrozenContext.GetQuery<ObjectClass>()
+                        .Any(oc => oc.BaseObjectClass == ReferencedClass);
+                }
+                return _hasChildClasses.Value;
+            }
+        }
+
         private void CollectChildClasses(int id, List<ObjectClass> children)
         {
             var nextChildren = FrozenContext.GetQuery<ObjectClass>()
@@ -522,30 +536,18 @@ namespace Kistl.Client.Presentables.ValueViewModels
             return result;
         }
 
-        /// <summary>
-        /// Hack for those who do not check element types by traversing from inherited interfaces
-        /// e.g. DataGrid from WPF
-        /// </summary>
-        public sealed class ProxyList : AbstractObservableProjectedList<IDataObject, DataObjectViewModelProxy>, IList, IList<DataObjectViewModelProxy>
-        {
-            public ProxyList(INotifyCollectionChanged notifier, object collection, Func<IDataObject, DataObjectViewModelProxy> select, Func<DataObjectViewModelProxy, IDataObject> inverter)
-                : base(notifier, collection, select, inverter, false)
-            {
-            }
-        }
-
-        private ProxyList _proxyInstances = null;
+        private BaseObjectCollectionViewModelProxyList _proxyInstances = null;
         /// <summary>
         /// Allow instances to be added external
         /// </summary>
-        public ProxyList ValueProxies
+        public BaseObjectCollectionViewModelProxyList ValueProxies
         {
             get
             {
                 if (_proxyInstances == null)
                 {
                     EnsureValueCache();
-                    _proxyInstances = new ProxyList(
+                    _proxyInstances = new BaseObjectCollectionViewModelProxyList(
                         ObjectCollectionModel,
                         ObjectCollectionModel.Value,
                         (vm) => GetProxy(vm),
@@ -575,6 +577,19 @@ namespace Kistl.Client.Presentables.ValueViewModels
         protected override void ParseValue(string str)
         {
             throw new NotSupportedException();
+        }
+    }
+
+    /// <summary>
+    /// Hack for those who do not check element types by traversing from inherited interfaces
+    /// e.g. DataGrid from WPF
+    /// Can't be a inner class, because it's deriving the generic parameter from BaseObjectCollectionViewModel. This confuses the WPF DataGrid
+    /// </summary>
+    public sealed class BaseObjectCollectionViewModelProxyList : AbstractObservableProjectedList<IDataObject, DataObjectViewModelProxy>, IList, IList<DataObjectViewModelProxy>
+    {
+        public BaseObjectCollectionViewModelProxyList(INotifyCollectionChanged notifier, object collection, Func<IDataObject, DataObjectViewModelProxy> select, Func<DataObjectViewModelProxy, IDataObject> inverter)
+            : base(notifier, collection, select, inverter, false)
+        {
         }
     }
 }
