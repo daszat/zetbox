@@ -35,6 +35,7 @@ namespace Kistl.Client.WPF.View.KistlBase
         /// </summary>
         public InstanceListHorizontalDisplay()
         {
+            if (DesignerProperties.GetIsInDesignMode(this)) return;
             InitializeComponent();
         }
 

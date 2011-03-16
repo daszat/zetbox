@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -10,9 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Kistl.Client.WPF.CustomControls;
 using Kistl.Client.GUI;
 using Kistl.Client.Presentables.SchemaMigration;
+using Kistl.Client.WPF.CustomControls;
 
 namespace Kistl.Client.WPF.View.SchemaMigration
 {
@@ -24,6 +25,7 @@ namespace Kistl.Client.WPF.View.SchemaMigration
     {
         public SelectDestinationPropertyDialog()
         {
+            if (DesignerProperties.GetIsInDesignMode(this)) return;
             InitializeComponent();
         }
 

@@ -1,13 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Runtime.InteropServices;
-using Microsoft.Win32.SafeHandles;
-using System.IO;
 
 namespace Kistl.Client.WPF
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Runtime.InteropServices;
+    using System.Text;
+    using Microsoft.Win32.SafeHandles;
+    
     internal static class DebugConsole
     {
         [DllImport("kernel32.dll",

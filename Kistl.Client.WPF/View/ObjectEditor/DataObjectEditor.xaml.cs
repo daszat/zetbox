@@ -26,6 +26,7 @@ namespace Kistl.Client.WPF.View.ObjectEditor
 
         public DataObjectEditor()
         {
+            if (DesignerProperties.GetIsInDesignMode(this)) return;
             InitializeComponent();
         }
 

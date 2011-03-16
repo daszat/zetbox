@@ -25,6 +25,7 @@ namespace Kistl.Client.WPF.CustomControls
     {
         public LabeledView()
         {
+            if (DesignerProperties.GetIsInDesignMode(this)) return;
             InitializeComponent();
         }
 

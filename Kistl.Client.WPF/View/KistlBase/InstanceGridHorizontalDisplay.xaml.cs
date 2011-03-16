@@ -38,6 +38,7 @@ namespace Kistl.Client.WPF.View.KistlBase
         /// </summary>
         public InstanceGridHorizontalDisplay()
         {
+            if (DesignerProperties.GetIsInDesignMode(this)) return;
             InitializeComponent();
         }
 

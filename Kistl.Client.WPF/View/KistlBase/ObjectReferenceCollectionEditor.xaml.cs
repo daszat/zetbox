@@ -50,6 +50,7 @@ namespace Kistl.Client.WPF.View.KistlBase
 
         public ObjectReferenceCollectionEditor()
         {
+            if (DesignerProperties.GetIsInDesignMode(this)) return;
             InitializeComponent();
         }
 

@@ -7,11 +7,11 @@ namespace Kistl.Client.WPF
     using System.Text;
     using Kistl.API;
     using Kistl.API.Client;
+    using Kistl.API.Configuration;
     using Kistl.App.GUI;
     using Kistl.Client.Presentables;
-    using Kistl.Client.Presentables.ObjectBrowser;
     using Kistl.Client.Presentables.KistlBase;
-using Kistl.API.Configuration;
+    using Kistl.Client.Presentables.ObjectBrowser;
 
     public class Launcher
     {

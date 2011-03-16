@@ -3,14 +3,14 @@ namespace Kistl.Client.WPF.CustomControls
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Linq;
     using System.Text;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Data;
-    using Kistl.Client.Presentables;
-    using System.ComponentModel;
     using System.Windows.Media;
+    using Kistl.Client.Presentables;
     using Kistl.Client.WPF.Converter;
     
     public class CommandButton

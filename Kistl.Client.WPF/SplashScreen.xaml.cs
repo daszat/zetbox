@@ -3,6 +3,7 @@ namespace Kistl.Client.WPF
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Linq;
     using System.Text;
     using System.Threading;
@@ -24,6 +25,8 @@ namespace Kistl.Client.WPF
     {
         public SplashScreen()
         {
+            if (DesignerProperties.GetIsInDesignMode(this)) return;
+
             Steps = 10;
             CurrentStep = 0;
             InitializeComponent();

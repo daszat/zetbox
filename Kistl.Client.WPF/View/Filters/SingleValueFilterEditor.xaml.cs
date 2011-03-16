@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -12,8 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Kistl.Client.GUI;
-using Kistl.Client.Presentables.KistlBase;
 using Kistl.Client.Presentables.FilterViewModels;
+using Kistl.Client.Presentables.KistlBase;
 
 namespace Kistl.Client.WPF.View.Filters
 {
@@ -25,6 +26,7 @@ namespace Kistl.Client.WPF.View.Filters
     {
         public SingleValueFilterEditor()
         {
+            if (DesignerProperties.GetIsInDesignMode(this)) return;
             InitializeComponent();
         }
 

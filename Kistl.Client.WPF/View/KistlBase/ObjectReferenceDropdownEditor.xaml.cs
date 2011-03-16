@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -11,11 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
 using Kistl.Client.GUI;
+using Kistl.Client.Models;
 using Kistl.Client.Presentables;
 using Kistl.Client.Presentables.ValueViewModels;
-using Kistl.Client.Models;
 using Kistl.Client.WPF.CustomControls;
 
 namespace Kistl.Client.WPF.View.KistlBase
@@ -28,6 +28,7 @@ namespace Kistl.Client.WPF.View.KistlBase
     {
         public ObjectReferenceDropdownEditor()
         {
+            if (DesignerProperties.GetIsInDesignMode(this)) return;
             InitializeComponent();
         }
 

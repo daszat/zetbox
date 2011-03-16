@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -11,11 +12,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Kistl.Client.WPF.View.KistlBase;
 using Kistl.Client.GUI;
 using Kistl.Client.Presentables;
 using Kistl.Client.Presentables.ValueViewModels;
 using Kistl.Client.WPF.CustomControls;
+using Kistl.Client.WPF.View.KistlBase;
 
 namespace Kistl.Client.WPF.View
 {
@@ -27,6 +28,7 @@ namespace Kistl.Client.WPF.View
     {
         public NullableBoolValueDropdownView()
         {
+            if (DesignerProperties.GetIsInDesignMode(this)) return;
             InitializeComponent();
 
             cbBool.ItemsSource = new[] { 

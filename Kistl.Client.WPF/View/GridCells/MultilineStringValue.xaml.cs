@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -12,9 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Kistl.App.GUI;
-
-using Kistl.Client.Presentables;
 using Kistl.Client.GUI;
+using Kistl.Client.Presentables;
 using Kistl.Client.Presentables.ValueViewModels;
 
 
@@ -28,6 +28,7 @@ namespace Kistl.Client.WPF.View.GridCells
     {
         public MultilineStringValue()
         {
+            if (DesignerProperties.GetIsInDesignMode(this)) return;
             InitializeComponent();
         }
 

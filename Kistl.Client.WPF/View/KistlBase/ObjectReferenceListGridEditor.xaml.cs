@@ -34,6 +34,7 @@ namespace Kistl.Client.WPF.View.KistlBase
     {
         public ObjectReferenceListGridEditor()
         {
+            if (DesignerProperties.GetIsInDesignMode(this)) return;
             InitializeComponent();
         }
 

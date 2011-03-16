@@ -26,6 +26,7 @@ namespace Kistl.Client.WPF.View.Relations
     {
         public RelationEndEditor()
         {
+            if (DesignerProperties.GetIsInDesignMode(this)) return;
             InitializeComponent();
         }
 

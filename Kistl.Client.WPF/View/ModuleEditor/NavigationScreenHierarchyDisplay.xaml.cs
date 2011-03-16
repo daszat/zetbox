@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -11,12 +12,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using GraphSharp.Controls;
+using Kistl.App.Base;
 using Kistl.Client.GUI;
+using Kistl.Client.Presentables.GUI;
 using Kistl.Client.Presentables.ModuleEditor;
 using QuickGraph;
-using Kistl.App.Base;
-using GraphSharp.Controls;
-using Kistl.Client.Presentables.GUI;
 
 namespace Kistl.Client.WPF.View.ModuleEditor
 {
@@ -28,6 +29,7 @@ namespace Kistl.Client.WPF.View.ModuleEditor
     {
         public NavigationScreenHierarchyDisplay()
         {
+            if (DesignerProperties.GetIsInDesignMode(this)) return;
             InitializeComponent();
         }
 

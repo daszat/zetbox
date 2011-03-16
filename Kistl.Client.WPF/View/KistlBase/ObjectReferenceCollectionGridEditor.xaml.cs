@@ -51,6 +51,7 @@ namespace Kistl.Client.WPF.View.KistlBase
 
         public ObjectReferenceCollectionGridEditor()
         {
+            if (DesignerProperties.GetIsInDesignMode(this)) return;
             InitializeComponent();
         }
 

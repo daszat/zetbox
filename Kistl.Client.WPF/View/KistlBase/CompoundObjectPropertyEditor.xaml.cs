@@ -3,6 +3,7 @@ namespace Kistl.Client.WPF.View.KistlBase
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Linq;
     using System.Text;
     using System.Windows;
@@ -26,6 +27,7 @@ namespace Kistl.Client.WPF.View.KistlBase
     {
         public CompoundObjectPropertyEditor()
         {
+            if (DesignerProperties.GetIsInDesignMode(this)) return;
             InitializeComponent();
         }
 

@@ -3,6 +3,7 @@ namespace Kistl.Client.WPF.View.ObjectBrowser
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Linq;
     using System.Text;
     using System.Windows;
@@ -14,10 +15,9 @@ namespace Kistl.Client.WPF.View.ObjectBrowser
     using System.Windows.Media.Imaging;
     using System.Windows.Navigation;
     using System.Windows.Shapes;
-
     using Kistl.API.Client;
-    using Kistl.Client.Presentables;
     using Kistl.Client.GUI;
+    using Kistl.Client.Presentables;
     using Kistl.Client.Presentables.ObjectBrowser;
     using Kistl.Client.WPF.CustomControls;
 
@@ -31,6 +31,7 @@ namespace Kistl.Client.WPF.View.ObjectBrowser
         /// </summary>
         public WorkspaceDisplay()
         {
+            if (DesignerProperties.GetIsInDesignMode(this)) return;
             InitializeComponent();
         }
 
