@@ -18,7 +18,7 @@
              Visibility="{Binding TimePartVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
     <kevin:DatePicker x:Name="txtDate"
-                      Value="{Binding DatePart, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=true}"
+                      Value="{Binding DatePart, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
                       Visibility="{Binding DatePartVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
                       IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertedBoolConverter}}"
                       KeyboardNavigation.TabIndex="0"

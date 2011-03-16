@@ -13,7 +13,7 @@
                   SelectedValuePath="Month"
                   ItemsSource="{Binding Months}"
                   IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertedBoolConverter}}"
-                  SelectedValue="{Binding Month, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=true}"
+                  SelectedValue="{Binding Month, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
                   MinWidth="75">
             <ComboBox.ContextMenu>
                 <ContextMenu>
@@ -24,7 +24,7 @@
             </ComboBox.ContextMenu>
         </ComboBox>
         <TextBox x:Name="txtYear"
-                 Text="{Binding Year, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=true}"
+                 Text="{Binding Year, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
                  MinWidth="75" />
     </StackPanel>
 
