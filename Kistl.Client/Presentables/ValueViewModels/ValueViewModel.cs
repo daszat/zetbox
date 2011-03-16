@@ -171,17 +171,49 @@ namespace Kistl.Client.Presentables.ValueViewModels
         #region IFormattedValueViewModel Members
 
         protected abstract string FormatValue();
-        protected abstract void ParseValue(string str);
+
+        /// <summary>
+        /// Parse the given string and set the underlying Value. In case of an parse error, do not touch the value but set the error string
+        /// </summary>
+        /// <param name="str">string to parse</param>
+        /// <param name="error">parse error to display</param>
+        protected abstract void ParseValue(string str, out string error);
+
+        private string _formattedValueError;
+        private string _formattedValueInput;
+
+        public virtual void CanocalizeInput()
+        {
+            if (string.IsNullOrEmpty(_formattedValueError))
+            {
+                _formattedValueInput = FormatValue();
+                OnPropertyChanged("FormattedValue");
+            }
+        }
 
         public string FormattedValue
         {
             get
             {
-                return FormatValue();
+                if (_formattedValueInput == null)
+                {
+                    _formattedValueInput = FormatValue();
+                }
+                return _formattedValueInput;
             }
             set
             {
-                ParseValue(value);
+                if (_formattedValueInput != value)
+                {
+                    _formattedValueInput = value;
+                    var oldformattedValueError = _formattedValueError;
+                    ParseValue(_formattedValueInput, out _formattedValueError);
+                    if (_formattedValueError != oldformattedValueError)
+                    {
+                        OnPropertyChanged("Error");
+                    }
+                    OnPropertyChanged("FormattedValue");
+                }
             }
         }
 
@@ -191,12 +223,32 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
         public virtual string Error
         {
-            get { return ValueModel.Error; }
+            get
+            {
+                var baseError = ValueModel.Error;
+                if (string.IsNullOrEmpty(baseError))
+                {
+                    return _formattedValueError;
+                }
+                else
+                {
+                    return baseError + "\n" + _formattedValueError;
+                }
+            }
         }
 
         public virtual string this[string columnName]
         {
-            get { return ValueModel[columnName]; }
+            get
+            {
+                switch (columnName)
+                {
+                    case "FormattedValue":
+                        return _formattedValueError;
+                    default:
+                        return ValueModel[columnName];
+                }
+            }
         }
 
         #endregion
@@ -257,15 +309,16 @@ namespace Kistl.Client.Presentables.ValueViewModels
         {
         }
 
-        protected override void ParseValue(string str)
+        protected override void ParseValue(string str, out string error)
         {
+            error = null;
             try
             {
                 this.Value = String.IsNullOrEmpty(str) ? null : (Nullable<TValue>)System.Convert.ChangeType(str, typeof(TValue));
             }
             catch
             {
-                // TODO: Set Error in ValueModel
+                error = "Unable to convert type";
             }
         }
 
@@ -292,9 +345,17 @@ namespace Kistl.Client.Presentables.ValueViewModels
         {
         }
 
-        protected override void ParseValue(string str)
+        protected override void ParseValue(string str, out string error)
         {
-            this.Value = String.IsNullOrEmpty(str) ? null : (TValue)System.Convert.ChangeType(str, typeof(TValue));
+            error = null;
+            try
+            {
+                this.Value = String.IsNullOrEmpty(str) ? null : (TValue)System.Convert.ChangeType(str, typeof(TValue));
+            }
+            catch
+            {
+                error = "Cannot change type";
+            }
         }
 
         public override TValue Value
@@ -348,8 +409,9 @@ namespace Kistl.Client.Presentables.ValueViewModels
             return PossibleValues.FirstOrDefault(key => key.Key == Value.Value).Value;
         }
 
-        protected override void ParseValue(string str)
+        protected override void ParseValue(string str, out string error)
         {
+            error = null;
             if (string.IsNullOrEmpty(str))
             {
                 Value = null;
@@ -364,7 +426,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 }
                 else
                 {
-                    // TODO: Set Error
+                    error = "Error converting Enumeration";
                 }
             }
         }
@@ -460,15 +522,16 @@ namespace Kistl.Client.Presentables.ValueViewModels
         {
         }
 
-        protected override void ParseValue(string str)
+        protected override void ParseValue(string str, out string error)
         {
+            error = null;
             try
             {
                 this.Value = new Guid(str);
             }
             catch
             {
-                // TODO: Set Error in ValueModel
+                error = "Error parsing Guid";
             }
         }
     }
@@ -686,6 +749,15 @@ namespace Kistl.Client.Presentables.ValueViewModels
                     default:
                         return base[columnName];
                 }
+            }
+        }
+
+        public override void CanocalizeInput()
+        {
+            if (string.IsNullOrEmpty(_timePartError))
+            {
+                _timePartInput = TimePart == null ? String.Empty : String.Format("{0:00}:{1:00}", TimePart.Value.Hours, TimePart.Value.Minutes);
+                OnPropertyChanged("TimePartString");
             }
         }
     }

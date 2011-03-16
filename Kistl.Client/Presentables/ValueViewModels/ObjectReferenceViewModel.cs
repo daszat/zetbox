@@ -297,7 +297,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
         #endregion
 
         #region Value
-        protected override void ParseValue(string str)
+        protected override void ParseValue(string str, out string error)
         {
             throw new NotImplementedException();
         }

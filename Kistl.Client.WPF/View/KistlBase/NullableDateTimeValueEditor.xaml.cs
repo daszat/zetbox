@@ -31,6 +31,13 @@ namespace Kistl.Client.WPF.View
             if (DesignerProperties.GetIsInDesignMode(this)) return;
 
             InitializeComponent();
+
+            txtTime.LostKeyboardFocus += new KeyboardFocusChangedEventHandler(txtTime_LostKeyboardFocus);
+        }
+
+        void txtTime_LostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            ViewModel.CanocalizeInput();
         }
 
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
