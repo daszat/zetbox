@@ -7,6 +7,7 @@ using System.Collections.Specialized;
 using Kistl.API;
 using System.Collections;
 using System.Windows.Data;
+using Kistl.API.Utils;
 
 namespace Kistl.Client.WPF.CustomControls
 {
@@ -17,17 +18,52 @@ namespace Kistl.Client.WPF.CustomControls
         protected override void OnCellEditEnding(Microsoft.Windows.Controls.DataGridCellEditEndingEventArgs e)
         {
             continueEdit = e.EditAction == Microsoft.Windows.Controls.DataGridEditAction.Commit;
+            Logging.Client.InfoFormat("OnCellEditEnding(EditAction = {0})", e.EditAction);
             base.OnCellEditEnding(e);
         }
 
+        protected override void OnBeginningEdit(Microsoft.Windows.Controls.DataGridBeginningEditEventArgs e)
+        {
+            Logging.Client.InfoFormat("OnBeginningEdit(Row.Item.Type = {0})", e.Row.Item.GetType().Name);
+            base.OnBeginningEdit(e);
+        }
+
+        protected override void OnInitializingNewItem(Microsoft.Windows.Controls.InitializingNewItemEventArgs e)
+        {
+            Logging.Client.InfoFormat("OnInitializingNewItem(NewItem.Type = {0})", e.NewItem.GetType().Name);
+            base.OnInitializingNewItem(e);
+        }
+
+        protected override void OnPreparingCellForEdit(Microsoft.Windows.Controls.DataGridPreparingCellForEditEventArgs e)
+        {
+            Logging.Client.InfoFormat("OnPreparingCellForEdit(Row.Item.Type = {0})", e.Row.Item.GetType().Name);
+            base.OnPreparingCellForEdit(e);
+        }
+
+        protected override void OnRowEditEnding(Microsoft.Windows.Controls.DataGridRowEditEndingEventArgs e)
+        {
+            Logging.Client.InfoFormat("OnRowEditEnding(Row.Item.Type = {0})", e.Row.Item.GetType().Name);
+            base.OnRowEditEnding(e);
+        }
+
+        bool isNewItem = false;
         protected override void OnCurrentCellChanged(EventArgs e)
         {
+            base.OnCurrentCellChanged(e);
+            Logging.Client.InfoFormat("OnCurrentCellChanged(CurrentCell.Item.Type={0})", CurrentCell.Item.GetType().Name);
             if (continueEdit)
             {
-                BeginEdit();
+                isNewItem = CurrentCell.Item == CollectionView.NewItemPlaceholder;
+                if (!isNewItem)
+                {
+                    continueEdit = false;
+                    BeginEdit();
+                }
+                else
+                {
+                    // delay until selectionChange
+                }
             }
-            continueEdit = false;
-            base.OnCurrentCellChanged(e);
         }
         #endregion
 
@@ -96,7 +132,16 @@ namespace Kistl.Client.WPF.CustomControls
 
         protected override void OnSelectionChanged(System.Windows.Controls.SelectionChangedEventArgs e)
         {
+            Logging.Client.Info("OnSelectionChanged()");
             base.OnSelectionChanged(e);
+
+            if (isNewItem)
+            {
+                isNewItem = false;
+                BeginEdit(); // to create a new item
+                CommitEdit(Microsoft.Windows.Controls.DataGridEditingUnit.Row, false);
+                BeginEdit(); // to continue editing                            ^^^^^ didn't help
+            }
 
             if (_selectedItemsChangedByViewModel) return;
 
