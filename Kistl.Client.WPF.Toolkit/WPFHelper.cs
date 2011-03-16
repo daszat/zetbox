@@ -18,24 +18,6 @@ namespace Kistl.Client.WPF.Toolkit
     public static class WPFHelper
     {
         /// <summary>
-        /// Don't ask. WPF isn't able to handle FocusLost in an acceptable, simple way
-        /// </summary>
-        public static void UpdateFocusedElement()
-        {
-            TryUpdateFocusedElement<TextBox>(TextBox.TextProperty);
-        }
-
-        private static void TryUpdateFocusedElement<T>(DependencyProperty dp)
-        {
-            if (Keyboard.FocusedElement is T)
-            {
-                FrameworkElement ctrl = Keyboard.FocusedElement as FrameworkElement;
-                BindingExpression e = ctrl.GetBindingExpression(dp);
-                if (e != null) e.UpdateSource();
-            }
-        }
-
-        /// <summary>
         /// http://stackoverflow.com/questions/980120/finding-control-within-wpf-itemscontrol
         /// </summary>
         /// <typeparam name="T"></typeparam>

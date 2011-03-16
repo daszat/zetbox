@@ -209,19 +209,6 @@ namespace Kistl.Client.Presentables
             if (_PropertyChangedEvent != null)
                 _PropertyChangedEvent(this, new PropertyChangedEventArgs(propertyName));
         }
-
-        /// <summary>
-        /// Is fired when the UI should ensure that every user input is bound back to the view models
-        /// </summary>
-        public event EventHandler UpdateFromUI;
-        public void OnUpdateFromUI()
-        {
-            EventHandler temp = UpdateFromUI;
-            if (temp != null)
-            {
-                temp(this, EventArgs.Empty);
-            }
-        }
         #endregion
 
         #region Design Mode 

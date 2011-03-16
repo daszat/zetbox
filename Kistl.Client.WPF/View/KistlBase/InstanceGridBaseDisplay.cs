@@ -63,14 +63,7 @@ namespace Kistl.Client.WPF.View.KistlBase
             if (ViewModel != null && e.Property == FrameworkElement.DataContextProperty)
             {
                 WPFHelper.RefreshGridView(DataGrid, ViewModel.DisplayedColumns, SortPropertyNameProperty);
-                // Attach to selection changed event on ViewModel side
-                ViewModel.UpdateFromUI += new EventHandler(ViewModel_UpdateFromUI);
             }
-        }
-
-        void ViewModel_UpdateFromUI(object sender, EventArgs e)
-        {
-            WPFHelper.UpdateFocusedElement();
         }
 
         #region HeaderClickManagement

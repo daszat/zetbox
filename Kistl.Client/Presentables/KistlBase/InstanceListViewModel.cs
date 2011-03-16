@@ -975,11 +975,6 @@ namespace Kistl.Client.Presentables.KistlBase
             loadingInstances = true;
             try
             {
-                // This may change a filter value
-                // Changing a filter value causes the view
-                // to call ReloadInstances
-                OnUpdateFromUI();
-
                 // Can execute?
                 if (RespectRequieredFilter && Filter.Count(f => !f.Enabled && f.Required) > 0)
                 {

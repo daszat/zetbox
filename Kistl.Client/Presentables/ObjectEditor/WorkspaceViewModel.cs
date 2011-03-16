@@ -218,8 +218,6 @@ namespace Kistl.Client.Presentables.ObjectEditor
 
         private IEnumerable<string> UpdateErrors()
         {
-            OnUpdateFromUI();
-
             var result = DataContext.AttachedObjects
                 .Where(o => o.ObjectState == DataObjectState.Modified || o.ObjectState == DataObjectState.New)
                 .OfType<IDataErrorInfo>()
@@ -249,8 +247,6 @@ namespace Kistl.Client.Presentables.ObjectEditor
 
         public void Save()
         {
-            OnUpdateFromUI();
-
             var errors = UpdateErrors().ToArray();
             if (errors.Length == 0)
             {

@@ -70,13 +70,7 @@ namespace Kistl.Client.WPF.View.KistlBase
                     WPFHelper.RefreshGridView(ListView, ViewModel.DisplayedColumns, SortPropertyNameProperty);
                     ListView.ItemContainerStyle = Application.Current.Resources["GridViewItemContainerStyle"] as Style;
                 }
-                ViewModel.UpdateFromUI += new EventHandler(ViewModel_UpdateFromUI);
             }
-        }
-
-        void ViewModel_UpdateFromUI(object sender, EventArgs e)
-        {
-            WPFHelper.UpdateFocusedElement();
         }
 
         #region HeaderClickManagement
