@@ -47,7 +47,16 @@ namespace Kistl.Client.WPF.CustomControls
         {
             if (e.OriginalSource is TextBox)
             {
-                ((TextBox)e.OriginalSource).SelectAll();
+                var txt = (TextBox)e.OriginalSource;
+                if (txt.AcceptsReturn && txt.MinLines > 1)
+                {
+                    // Multiline
+                    txt.SelectionStart = txt.Text.Length;
+                }
+                else
+                {
+                    txt.SelectAll();
+                }
             }
         }
     }
