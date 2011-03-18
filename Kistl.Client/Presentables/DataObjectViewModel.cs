@@ -72,9 +72,14 @@ namespace Kistl.Client.Presentables
                 {
                     FetchPropertyModels();
                     _propertyModelList = new ReadOnlyProjectedList<Property, BaseValueViewModel>(_propertyList, p => _propertyModels[p], m => null); //m.Property);
+                    OnPropertyModelsCreated();
                 }
                 return _propertyModelList;
             }
+        }
+
+        protected virtual void OnPropertyModelsCreated()
+        {            
         }
 
         private LookupDictionary<Property, Property, BaseValueViewModel> _propertyModels;

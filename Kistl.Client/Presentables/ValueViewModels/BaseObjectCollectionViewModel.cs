@@ -486,7 +486,10 @@ namespace Kistl.Client.Presentables.ValueViewModels
                     // Delete dependent objects when they leave our scope
                     if (obj is DataObjectViewModel && !AllowRemove && AllowDelete)
                     {
-                        ((DataObjectViewModel)obj).Delete();
+                        // Case 2282: Sorting Lists will delete 1:n Entries
+                        // This is evil, as it would delete an Object during 
+                        // resort of an ObjectRefList.
+                        // ((DataObjectViewModel)obj).Delete();
                     }
                 }
             }
