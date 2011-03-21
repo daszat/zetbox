@@ -64,7 +64,7 @@
                             </ItemsControl.ItemsPanel>
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate DataType="{x:Type client:ViewModel}">
-                                    <ctrls:LabeledView />
+                                    <ctrls:LabeledView VerticalContentAlignment="Stretch" />
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>

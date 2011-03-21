@@ -1,34 +1,41 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Kistl.Client.GUI;
-using Kistl.Client.Presentables;
-using System.ComponentModel;
-using Kistl.Client.Presentables.ValueViewModels;
 
 namespace Kistl.Client.WPF.CustomControls
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Linq;
+    using System.Text;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Data;
+    using System.Windows.Documents;
+    using System.Windows.Input;
+    using System.Windows.Media;
+    using System.Windows.Media.Imaging;
+    using System.Windows.Navigation;
+    using System.Windows.Shapes;
+    using Kistl.Client.GUI;
+    using Kistl.Client.Presentables;
+    using Kistl.Client.Presentables.ValueViewModels;
+
     /// <summary>
     /// Interaction logic for LabeledView.xaml
     /// </summary>
     public partial class LabeledView : UserControl, IHasViewModel<ILabeledViewModel>
     {
+        static LabeledView()
+        {
+            UserControl.VerticalContentAlignmentProperty.OverrideMetadata(
+                typeof(LabeledView),
+                new FrameworkPropertyMetadata(VerticalAlignment.Center));
+        }
+
         public LabeledView()
         {
             if (DesignerProperties.GetIsInDesignMode(this)) return;
             InitializeComponent();
         }
-
 
         [TypeConverter(typeof(LengthConverter))]
         public double LabelMinWidth
@@ -40,7 +47,6 @@ namespace Kistl.Client.WPF.CustomControls
         // Using a DependencyProperty as the backing store for LabelMinWidth.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty LabelMinWidthProperty =
             DependencyProperty.Register("LabelMinWidth", typeof(double), typeof(LabeledView), new UIPropertyMetadata(150.0));
-
 
         [TypeConverter(typeof(LengthConverter))]
         public double LabelWidth

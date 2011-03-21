@@ -14,7 +14,9 @@
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="0,3,0,0">
+        <StackPanel Grid.Column="0"
+                    Orientation="Horizontal"
+                    VerticalAlignment="{Binding VerticalContentAlignment, ElementName=lbView}">
             <TextBlock Text="{Binding Label, Mode=OneWay}"
                        ToolTip="{Binding ToolTip, Mode=OneWay}" />
             <TextBlock Text="*"
@@ -26,6 +28,7 @@
 
         <ContentPresenter Grid.Column="1"
                           Margin="5,0,0,0"
+                          VerticalAlignment="{Binding VerticalContentAlignment, ElementName=lbView}"
                           Content="{Binding Model, Mode=OneWay}"
                           tk:VisualTypeTemplateSelector.RequestedKind="{Binding RequestedKind, Mode=OneWay, ElementName=lbView}"
                           ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />

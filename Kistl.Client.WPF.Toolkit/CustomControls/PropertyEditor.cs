@@ -19,7 +19,7 @@ namespace Kistl.Client.WPF.CustomControls
     /// Defines common (Dependency-)Properties for Controls displaying/editing (Object)Properties
     /// </summary>
     [ContentProperty("Content")]
-    public abstract class PropertyEditor : UserControl
+    public abstract class PropertyEditor : ContentControl
     {
         public PropertyEditor()
         {
