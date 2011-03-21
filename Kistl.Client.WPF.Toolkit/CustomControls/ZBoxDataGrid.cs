@@ -164,7 +164,7 @@ namespace Kistl.Client.WPF.CustomControls
                 BeginEdit(); // to create a new item
             }
 
-            if(isNewItemInitialized)
+            if (isNewItemInitialized)
             {
                 isNewItemInitialized = false;
                 Logging.Client.Debug("    OnSelectionChanged commits edit to trigger new row");
@@ -186,7 +186,7 @@ namespace Kistl.Client.WPF.CustomControls
                     if (SelectedZBoxItems is IList)
                     {
                         var lst = (IList)SelectedZBoxItems;
-                        e.RemovedItems.OfType<object>().Where(i=> i != CollectionView.NewItemPlaceholder).ForEach(i => lst.Remove(i));
+                        e.RemovedItems.OfType<object>().Where(i => i != CollectionView.NewItemPlaceholder).ForEach(i => lst.Remove(i));
                         e.AddedItems.OfType<object>().Where(i => i != CollectionView.NewItemPlaceholder).ForEach(i => lst.Add(i));
                     }
                     else if (SelectedZBoxItems is ICollection)

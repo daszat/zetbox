@@ -9,6 +9,11 @@
                                xmlns:clientKistlBase="clr-namespace:Kistl.Client.WPF.View.KistlBase"
                                xmlns:commands="clr-namespace:Kistl.Client.WPF.Commands;assembly=Kistl.Client.WPF.Toolkit"
                                commands:SmartRoutedUICommand.IsCommandSink="True">
+    <local:InstanceGridBaseDisplay.Resources>
+        <!-- implement workaround for DeferRefresh exception as described on http://stackoverflow.com/questions/3461714/wpf-datagrid-combobox-causes-invalidoperationexception -->
+        <CollectionViewSource x:Key="itemsSource"
+                              Source="{Binding ProxyInstances}"/>
+    </local:InstanceGridBaseDisplay.Resources>
     <local:InstanceGridBaseDisplay.CommandBindings>
         <CommandBinding Command="NavigationCommands.Refresh"
                         Executed="RefreshCommand_Executed" />
@@ -55,7 +60,7 @@
 
         <ctrls:ZBoxDataGrid x:Name="lst"
                             BorderThickness="0"
-                            ItemsSource="{Binding ProxyInstances}"
+                            ItemsSource="{Binding Source={StaticResource itemsSource}}"
                             CanUserAddRows="{Binding AllowAddNew}"
                             CanUserDeleteRows="{Binding AllowDelete}"
                             AutoGenerateColumns="False"
