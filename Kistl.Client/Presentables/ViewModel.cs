@@ -1,18 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-
-using Kistl.API;
-using Kistl.App.GUI;
-using Kistl.API.Common;
-using Kistl.App.Base;
-using Kistl.Client.Presentables.ValueViewModels;
 
 namespace Kistl.Client.Presentables
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.Text;
+    using Kistl.API;
+    using Kistl.API.Common;
+    using Kistl.App.Base;
+    using Kistl.App.GUI;
+    using Kistl.Client.Presentables.ValueViewModels;
+
     public enum ModelState
     {
         Loading,

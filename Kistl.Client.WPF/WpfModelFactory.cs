@@ -37,25 +37,37 @@ namespace Kistl.Client.WPF
         /// </summary>
         private int windowCounter = 0;
 
+        private List<Window> _windowList = new List<Window>();
+
         /// <inheritdoc/>
         protected override void ShowInView(ViewModel mdl, object view, bool activate, bool asDialog)
         {
             uiThread.Verify();
 
-            if (view is Window)
+            var window = view as Window;
+
+            if (window != null)
             {
-                var window = (Window)view;
-                window.DataContext = mdl;
-                window.ShowActivated = activate;
-                if (asDialog)
+                if (_windowList.Contains(window))
                 {
-                    window.ShowDialog();
+                    window.Activate();
                 }
                 else
                 {
-                    window.Show();
-                    windowCounter++;
-                    window.Closed += new EventHandler(window_Closed);
+                    window.DataContext = mdl;
+                    window.ShowActivated = activate;
+                    if (asDialog)
+                    {
+                        window.ShowDialog();
+                    }
+                    else
+                    {
+                        _windowList.Add(window);
+                        window.Closed += new EventHandler(window_Closed);
+
+                        window.Show();
+                        windowCounter++;
+                    }
                 }
             }
             else
@@ -77,6 +89,7 @@ namespace Kistl.Client.WPF
         /// <param name="e"></param>
         void window_Closed(object sender, EventArgs e)
         {
+            _windowList.Remove(sender);
             if (--windowCounter == 0)
             {
                 Application.Current.Shutdown();

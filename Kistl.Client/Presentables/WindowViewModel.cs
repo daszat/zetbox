@@ -37,7 +37,7 @@ namespace Kistl.Client.Presentables
         }
 
         /// <summary>
-        /// Views should call this 
+        /// Views should call this before closing
         /// </summary>
         /// <returns></returns>
         public virtual bool CanClose()

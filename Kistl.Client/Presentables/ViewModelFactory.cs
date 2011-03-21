@@ -4,20 +4,20 @@ namespace Kistl.Client.Presentables
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.Linq;
     using System.Linq.Expressions;
     using System.Text;
+    using System.Threading;
     using Autofac;
     using Kistl.API;
+    using Kistl.API.Configuration;
     using Kistl.API.Utils;
     using Kistl.App.Base;
     using Kistl.App.Extensions;
     using Kistl.App.GUI;
     using Kistl.Client.GUI;
-    using System.Diagnostics;
     using Kistl.Client.Presentables.ValueViewModels;
-    using System.Threading;
-using Kistl.API.Configuration;
 
     /// <summary>
     /// Abstract base class to provide basic functionality of all model factories. Toolkit-specific implementations of this class will be 
@@ -141,7 +141,7 @@ using Kistl.API.Configuration;
             Type t;
             if (param is BoolParameter && !param.IsList)
             {
-                 t = typeof(NullableStructValueViewModel<bool>);
+                t = typeof(NullableStructValueViewModel<bool>);
             }
             else if (param is DateTimeParameter && !param.IsList)
             {
@@ -216,7 +216,6 @@ using Kistl.API.Configuration;
                     {
                         Logging.Log.WarnFormat("CreateViewModel with compiling a lambda was called {0} times", _resolveCompileCounter);
                     }
-
 
                     // Wrap delegate. This will implement inheritance
                     Delegate factoryDelegate = (Delegate)factory;
@@ -293,13 +292,11 @@ using Kistl.API.Configuration;
                 .ToRef(FrozenContext)
                 .GetViewModelDescriptor();
 
-            var vDesc = mdl.RequestedKind != null 
+            var vDesc = mdl.RequestedKind != null
                 ? pmd.GetViewDescriptor(Toolkit, mdl.RequestedKind)
                 : pmd.GetViewDescriptor(Toolkit);
 
-            return vDesc == null
-                ? null
-                : CreateView(vDesc);
+            return CreateSpecificView(mdl, vDesc);
         }
 
         /// <summary>
@@ -318,10 +315,80 @@ using Kistl.API.Configuration;
 
             var vDesc = pmd.GetViewDescriptor(Toolkit, kind);
 
-            return vDesc == null
-                ? null
-                : CreateView(vDesc);
+            return CreateSpecificView(mdl, vDesc);
         }
+
+        /// <summary>
+        /// Creates a specific View for the specified view model from the the specified view descriptor.
+        /// In case of <see cref="WindowViewModel"/>s, only a single View is ever created for the specified mdl/vDesc.ControlKind pair.
+        /// </summary>
+        /// <remarks>
+        /// WindowViews are currently expected to self-destruct when WindowViewModel.Show becomes false.
+        /// Therefore we will also remove the model and its view from the cache if this happens.
+        /// </remarks>
+        /// <param name="mdl"></param>
+        /// <param name="vDesc"></param>
+        /// <returns>a newly created view, an existing view or null</returns>
+        private object CreateSpecificView(ViewModel mdl, ViewDescriptor vDesc)
+        {
+            // no matching view found; aborting
+            if (vDesc == null)
+                return null;
+
+            object result;
+            var windowViewModel = mdl as WindowViewModel;
+            if (windowViewModel != null)
+            {
+                Dictionary<ControlKind, object> views;
+                if (_windowViews.TryGetValue(windowViewModel, out views))
+                {
+                    if (!views.TryGetValue(vDesc.ControlKind, out result))
+                    {
+                        result = CreateView(vDesc);
+                        views[vDesc.ControlKind] = result;
+                        InstallRemovalHandler(windowViewModel, vDesc.ControlKind);
+                    }
+                }
+                else
+                {
+                    result = CreateView(vDesc);
+                    _windowViews[windowViewModel] = new Dictionary<ControlKind, object>()
+                    {
+                        { vDesc.ControlKind, result }
+                    };
+                    InstallRemovalHandler(windowViewModel, vDesc.ControlKind);
+                }
+            }
+            else
+            {
+                result = CreateView(vDesc);
+            }
+
+            return result;
+        }
+
+        private void InstallRemovalHandler(WindowViewModel windowViewModel, ControlKind controlKind)
+        {
+            windowViewModel.PropertyChanged += (sender, e) =>
+            {
+                if (e.PropertyName == "Show" && !windowViewModel.Show)
+                {
+                    RemoveWindowViewModel(windowViewModel, controlKind);
+                }
+            };
+        }
+
+        private void RemoveWindowViewModel(WindowViewModel windowViewModel, ControlKind controlKind)
+        {
+            var views = _windowViews[windowViewModel];
+            views.Remove(controlKind);
+            if (views.Count == 0)
+            {
+                _windowViews.Remove(windowViewModel);
+            }
+        }
+
+        private Dictionary<WindowViewModel, Dictionary<ControlKind, object>> _windowViews = new Dictionary<WindowViewModel, Dictionary<ControlKind, object>>();
 
         /// <summary>
         /// Creates a view from a view descriptor. By default it just creates a new instance of the ControlRef
@@ -332,7 +399,6 @@ using Kistl.API.Configuration;
         {
             return vDesc.ControlRef.Create();
         }
-
 
         public void ShowModel(ViewModel mdl, ControlKind kind, bool activate)
         {
@@ -390,7 +456,6 @@ using Kistl.API.Configuration;
             }
         }
 
-
         protected abstract void ShowInView(ViewModel mdl, object view, bool activate, bool asDialog);
 
         #endregion
@@ -446,7 +511,7 @@ using Kistl.API.Configuration;
                 }
             }
         }
-        
+
         public void WithWaitDialog(Action task)
         {
             if (task == null) throw new ArgumentNullException("task");
@@ -497,6 +562,5 @@ using Kistl.API.Configuration;
         }
 
         #endregion
-
     }
 }
