@@ -8,12 +8,13 @@
       <Module>Kistl.Objects.ClientModule, Kistl.Objects.ClientImpl</Module>
     </Modules>
   </Client>
-  <SourceFileLocation>
-    <!-- default probe path -->
-    <string>/srv/CCNet/Projects/zbox/repo/bin/CodeGen/bin/Debug</string>
-    <!-- common libaries -->
-    <string>/srv/CCNet/Projects/zbox/repo/bin/Debug/bin/Common</string>
-    <!-- All other assemblies -->
-    <string>/srv/CCNet/Projects/zbox/repo/bin/Debug/binClient</string>
-  </SourceFileLocation>
+  <AssemblySearchPaths>
+    <string>../Common/Core</string>
+    <string>../Common/Core.Generated</string>
+    <string>../Common/Core.Fallback</string>
+    <string>../Client/Core</string>
+    <string>../Client/Core.Generated</string>
+    <string>../Common/App.ZBox</string>
+    <string>../Client/App.ZBox</string>
+  </AssemblySearchPaths>
 </KistlConfig>
