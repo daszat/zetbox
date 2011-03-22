@@ -339,6 +339,7 @@ namespace Kistl.Client.Presentables
             var windowViewModel = mdl as WindowViewModel;
             if (windowViewModel != null)
             {
+                windowViewModel.Show = true;
                 Dictionary<ControlKind, object> views;
                 if (_windowViews.TryGetValue(windowViewModel, out views))
                 {
@@ -369,13 +370,18 @@ namespace Kistl.Client.Presentables
 
         private void InstallRemovalHandler(WindowViewModel windowViewModel, ControlKind controlKind)
         {
-            windowViewModel.PropertyChanged += (sender, e) =>
+            PropertyChangedEventHandler handler = null;
+
+            handler = (object sender, PropertyChangedEventArgs e) =>
             {
                 if (e.PropertyName == "Show" && !windowViewModel.Show)
                 {
                     RemoveWindowViewModel(windowViewModel, controlKind);
+                    windowViewModel.PropertyChanged -= handler;
                 }
             };
+
+            windowViewModel.PropertyChanged += handler;
         }
 
         private void RemoveWindowViewModel(WindowViewModel windowViewModel, ControlKind controlKind)
