@@ -6,14 +6,14 @@
              xmlns:view="clr-namespace:Kistl.Client.WPF.View.KistlBase"
              xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
              ToolTip="{Binding ToolTip}">
-  <ctrls:LabeledContainer Label="{Binding Label}"
-                         Required="{Binding Required}">
+    <ctrls:LabeledContainer Label="{Binding Label}"
+                            Required="{Binding Required}">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="3*" />
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <ComboBox Grid.Column="0"
                       ItemsSource="{Binding FromOperators}"

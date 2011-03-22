@@ -3,17 +3,17 @@ namespace Kistl.Client.WPF.Toolkit
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Linq;
     using System.Text;
     using System.Windows;
-    using System.ComponentModel;
+    using System.Windows.Controls;
     using System.Windows.Data;
     using System.Windows.Input;
-    using Microsoft.Windows.Controls;
-    using Kistl.Client.Models;
-    using System.Windows.Controls;
-    using Kistl.Client.WPF.Toolkit;
     using System.Windows.Media;
+    using Kistl.Client.Models;
+    using Kistl.Client.WPF.Toolkit;
+    using Microsoft.Windows.Controls;
 
     public static class WPFHelper
     {
@@ -69,6 +69,8 @@ namespace Kistl.Client.WPF.Toolkit
             {
                 // TODO: use default controls after moving labeling to infrastructure
                 var col = new DataGridTemplateColumn() { Header = desc.Header };
+                if (desc.RequestedWidth > 0) col.Width = desc.RequestedWidth;
+
                 if (sortProperty != null) col.SetValue(sortProperty, desc.Name);
 
                 var needEditor = desc.ControlKind != desc.GridPreEditKind;
@@ -78,7 +80,7 @@ namespace Kistl.Client.WPF.Toolkit
                 switch (desc.Type)
                 {
                     case ColumnDisplayModel.ColumnType.MethodModel:
-                        if(needEditor) editorFactory.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(String.Format("Object.ActionViewModelsByName[{0}]", desc.Name)), Mode = BindingMode.OneWay });
+                        if (needEditor) editorFactory.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(String.Format("Object.ActionViewModelsByName[{0}]", desc.Name)), Mode = BindingMode.OneWay });
                         labelFactory.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(String.Format("Object.ActionViewModelsByName[{0}]", desc.Name)), Mode = BindingMode.OneWay });
                         break;
                     case ColumnDisplayModel.ColumnType.PropertyModel:
@@ -106,7 +108,7 @@ namespace Kistl.Client.WPF.Toolkit
                 labelFactory.SetValue(FrameworkElement.HorizontalAlignmentProperty, HorizontalAlignment.Stretch);
 
                 col.CellTemplate = new DataTemplate() { VisualTree = labelFactory };
-                // set template only if different
+                // set editing template only if different
                 if (needEditor)
                 {
                     col.CellEditingTemplate = new DataTemplate() { VisualTree = editorFactory };
@@ -143,6 +145,8 @@ namespace Kistl.Client.WPF.Toolkit
             {
                 // TODO: use default controls after moving labeling to infrastructure
                 var col = new GridViewColumn() { Header = desc.Header };
+                if (desc.RequestedWidth > 0) col.Width = desc.RequestedWidth;
+
                 if (sortProperty != null) col.SetValue(sortProperty, desc.Name);
 
                 DataTemplate result = new DataTemplate();
@@ -171,5 +175,5 @@ namespace Kistl.Client.WPF.Toolkit
                 view.Columns.Add(col);
             }
         }
-    } 
+    }
 }

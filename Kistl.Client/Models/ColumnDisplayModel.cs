@@ -45,28 +45,34 @@ namespace Kistl.Client.Models
         {
         }
 
+        public ColumnDisplayModel(string header, string name, ControlKind kind, int requestedWidth)
+            : this(header, name, kind, null, ColumnType.PropertyModel, requestedWidth)
+        {
+        }
+
         public ColumnDisplayModel(string header, string name, ColumnType type)
             : this(header, name, null, type)
         {
         }
 
         public ColumnDisplayModel(string header, string name, ControlKind kind, ColumnType type)
-            : this(header, name, kind, null, type)
+            : this(header, name, kind, null, type, -1)
         {
         }
 
         public ColumnDisplayModel(string header, string name, ControlKind kind, ControlKind gridPreviewKind)
-            : this(header, name, kind, gridPreviewKind, ColumnType.PropertyModel)
+            : this(header, name, kind, gridPreviewKind, ColumnType.PropertyModel, -1)
         {
         }
 
-        public ColumnDisplayModel(string header, string name, ControlKind kind, ControlKind gridPreviewKind, ColumnType type)
+        public ColumnDisplayModel(string header, string name, ControlKind kind, ControlKind gridPreviewKind, ColumnType type, int requestedWidth)
         {
             this.Header = header;
             this.Name = name;
             this.ControlKind = kind;
             this.GridPreEditKind = gridPreviewKind ?? kind;
             this.Type = type;
+            this.RequestedWidth = requestedWidth;
         }
 
         public ColumnType Type { get; set; }
@@ -74,6 +80,7 @@ namespace Kistl.Client.Models
         public string Name { get; set; }
         public ControlKind ControlKind { get; set; }
         public ControlKind GridPreEditKind { get; set; }
+        public int RequestedWidth { get; set; }
 
         public override string ToString()
         {
