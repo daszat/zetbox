@@ -21,6 +21,14 @@ namespace Kistl.Client.WPF.CustomControls
     [ContentProperty("Content")]
     public abstract class PropertyEditor : ContentControl
     {
+        static PropertyEditor()
+        {
+            // by default the PropertyEditor itself should not take part 
+            // in focus-stuff
+            FocusableProperty.OverrideMetadata(typeof(PropertyEditor),
+                new FrameworkPropertyMetadata(false));
+        }
+
         public PropertyEditor()
         {
             VerticalContentAlignment = VerticalAlignment.Top;
