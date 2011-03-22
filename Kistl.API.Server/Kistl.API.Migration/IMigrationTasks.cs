@@ -55,6 +55,33 @@ namespace Kistl.API.Migration
         public Func<IDataReader, object> Converter { get; set; }
     }
 
+    public class SimpleFieldConverter : FieldConverter
+    {
+        public SimpleFieldConverter()
+        {
+        }
+
+        public SimpleFieldConverter(SourceColumn column, Func<object, object> valueConverter)
+            : base(column, MakeConverter(valueConverter, column.Name))
+        {
+        }
+
+        public SimpleFieldConverter(SourceColumn column, Func<object, object> valueConverter, string errorMsg)
+            : base(column, MakeConverter(valueConverter, column.Name), errorMsg)
+        {
+        }
+
+        private static Func<IDataReader, object> MakeConverter(Func<object, object> valueConverter, string columnName)
+        {
+            return rd => valueConverter(rd.GetValue(rd.GetOrdinal(columnName)));
+        }
+
+        public void SetConverter(Func<object, object> valueConverter)
+        {
+            this.Converter = MakeConverter(valueConverter, this.Column.Name);
+        }
+    }
+
     public interface IMigrationTasks
     {
         /// <summary>
