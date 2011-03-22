@@ -219,7 +219,7 @@ namespace Kistl.Client.Models
                 case FilterOperators.Equals:
                     return string.Format("{0} = @0", ValueSource.Expression);
                 case FilterOperators.Contains:
-                    return string.Format("{0}.ToLower().Contains(@0.ToLower())", ValueSource.Expression);
+                    return string.Format("{0} != null && {0}.ToLower().Contains(@0.ToLower())", ValueSource.Expression);
                 default:
                     throw new InvalidOperationException("Operator is not defined");
             }
