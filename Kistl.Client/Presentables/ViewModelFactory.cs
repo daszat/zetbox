@@ -436,9 +436,17 @@ namespace Kistl.Client.Presentables
             }
             else
             {
-                var m = Managers[dom.Object.Context];
-                m.AddItem(dom);
-                m.SelectedItem = dom;
+                IMultipleInstancesManager m;
+                if (Managers.TryGetValue(dom.Object.Context, out m))
+                {
+                    m.AddItem(dom);
+                    m.SelectedItem = dom;
+                }
+                else
+                {
+                    // TODO: notify user too
+                    Logging.Client.ErrorFormat("Trying to open DataObjectViewModel without manager");
+                }
             }
         }
 
