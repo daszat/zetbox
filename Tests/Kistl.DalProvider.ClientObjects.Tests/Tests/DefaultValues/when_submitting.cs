@@ -1,5 +1,5 @@
 
-namespace Kistl.DalProvider.ClientObjects.Tests.DefaultValues
+namespace Kistl.DalProvider.Client.Tests.DefaultValues
 {
     using System;
     using System.Collections.Generic;

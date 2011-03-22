@@ -8,7 +8,7 @@
     <ProjectGuid>{1BF9C9A2-9A22-4C22-AFE8-DDB711CC1EEB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Kistl.DalProvider.ClientObjects</RootNamespace>
+    <RootNamespace>Kistl.DalProvider.Client</RootNamespace>
     <AssemblyName>Kistl.DalProvider.ClientObjects.Tests</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

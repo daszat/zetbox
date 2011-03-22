@@ -1,5 +1,5 @@
 
-namespace Kistl.DalProvider.ClientObjects.Tests.ContextTests
+namespace Kistl.DalProvider.Client.Tests.ContextTests
 {
     using System;
     using System.Collections.Generic;
