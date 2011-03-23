@@ -61,8 +61,15 @@ namespace Kistl.Client.Presentables.ObjectEditor
             {
                 if (_selectedItem != value)
                 {
+                    var old = _selectedItem;
                     _selectedItem = value;
+
+                    PropertyChangedEventHandler handler = (sender, e) => { if (e.PropertyName == "Name") OnPropertyChanged("Name"); };
+                    _selectedItem.PropertyChanged += handler;
+                    if (old != null) old.PropertyChanged -= handler;
+
                     OnPropertyChanged("SelectedItem");
+                    OnPropertyChanged("Name");
                 }
             }
         }
@@ -382,7 +389,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
         #region ViewModel Member
         public override string Name
         {
-            get { return WorkspaceViewModelResources.Name; }
+            get { return SelectedItem != null ? SelectedItem.Name : WorkspaceViewModelResources.Name; }
         }
         #endregion
 
