@@ -5,8 +5,9 @@
                   xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
                   Title="Invoke Method"
                   ResizeMode="CanResize"
+                  SizeToContent="WidthAndHeight"
                   MinWidth="300"
-                  MinHeight="300"
+                  MinHeight="200"
                   xmlns:commands="clr-namespace:Kistl.Client.WPF.Commands;assembly=Kistl.Client.WPF.Toolkit"
                   commands:SmartRoutedUICommand.IsCommandSink="True">
     <ctrls:WindowView.Resources>
@@ -29,7 +30,7 @@
                                  CommandViewModel="{Binding CancelCommand}"/>
         </UniformGrid>
 
-        <ScrollViewer VerticalScrollBarVisibility="Visible">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
             <ItemsControl ItemsSource="{Binding ValueViewModels, ValidatesOnDataErrors=true}"
                           BorderThickness="0"
                           HorizontalContentAlignment="Stretch"
