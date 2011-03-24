@@ -65,7 +65,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
                     _selectedItem = value;
 
                     PropertyChangedEventHandler handler = (sender, e) => { if (e.PropertyName == "Name") OnPropertyChanged("Name"); };
-                    _selectedItem.PropertyChanged += handler;
+                    if(_selectedItem != null) _selectedItem.PropertyChanged += handler;
                     if (old != null) old.PropertyChanged -= handler;
 
                     OnPropertyChanged("SelectedItem");
