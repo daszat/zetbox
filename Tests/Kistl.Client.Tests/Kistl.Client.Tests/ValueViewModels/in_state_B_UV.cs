@@ -281,14 +281,12 @@ namespace Kistl.Client.Tests.ValueViewModels
         public class when_setting_FormattedValue
             : in_state_B_UV
         {
-            private object value;
             private string formattedValue;
             bool parseValueCalled;
 
             public override void SetUp()
             {
                 base.SetUp();
-                value = new object();
                 formattedValue = "formattedObject";
                 parseValueCalled = false;
                 obj.OnParseValue += str =>
