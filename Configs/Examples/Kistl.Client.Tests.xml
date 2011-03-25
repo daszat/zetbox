@@ -1,6 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <KistlConfig xmlns="http://dasz.at/Kistl/">
   <ConfigName>Kistl.Client's Test Configuration</ConfigName>
+  <Server>
+    <ConnectionStrings>
+      <Database Name="Kistl">P:\Kistl\Kistl.Server\Database\Database.xml</Database>
+    </ConnectionStrings>
+  </Server>
   <Client StartClient="false" ThrowErrors="true">
     <DocumentStore>DocumentStore\Client\</DocumentStore>
     <Modules>
@@ -9,18 +14,23 @@
       <Module>Kistl.API.Client.WcfClientModule, Kistl.API.Client</Module>
       <Module>Kistl.Client.ClientModule, Kistl.Client</Module>
       <Module>Kistl.DalProvider.Memory.MemoryProvider, Kistl.DalProvider.Memory</Module>
+      <Module>Kistl.DalProvider.Memory.MemoryDatabaseProvider, Kistl.DalProvider.Memory</Module>
       <Module>Kistl.Objects.InterfaceModule, Kistl.Objects</Module>
+      <Module>Kistl.Objects.MemoryModule, Kistl.Objects.MemoryImpl</Module>
       <Module>Kistl.Objects.ClientModule, Kistl.Objects.ClientImpl</Module>
       <Module>Kistl.App.Projekte.Client.CustomClientActionsModule, Kistl.App.Projekte.Client</Module>
       <Module>Kistl.App.Projekte.Common.CustomCommonActionsModule, Kistl.App.Projekte.Common</Module>
     </Modules>
   </Client>
-  <SourceFileLocation>
-    <!-- default probe path -->
-    <string>..\..\..\CodeGen\bin\Debug</string>
-    <!-- common libaries -->
-    <string>..\Common</string>
-    <!-- All other assemblies -->
-    <string>..\Client</string>
-  </SourceFileLocation>
+  <AssemblySearchPaths>
+    <string>..\Common\Core</string>
+    <string>..\Common\Core.Generated</string>
+    <string>..\Client\Core</string>
+    <string>..\Client\Core.Generated</string>
+    <string>..\Client\WPF</string>
+    <string>..\Common\App.ZBox</string>
+    <string>..\Client\App.ZBox</string>
+    <string>..\Common\App.Ini50</string>
+    <string>..\Client\App.Ini50</string>
+  </AssemblySearchPaths>
 </KistlConfig>

@@ -89,7 +89,7 @@ namespace Kistl.Client.Presentables
         private void AsyncHandleReset()
         {
             Async.Verify();
-            UI.Queue(UI, () => _parentModel.State = ModelState.Loading);
+            UI.Queue(UI, () => _parentModel.LoadingState = ModelLoadingState.Loading);
 
             var newItems = _asyncOriginalList().ToList();
             UI.Queue(UI, () =>
@@ -103,7 +103,7 @@ namespace Kistl.Client.Presentables
                 {
                     _uiCache.Add(_uiTransform(i));
                 }
-                _parentModel.State = ModelState.Active;
+                _parentModel.LoadingState = ModelLoadingState.Active;
             });
         }
 
@@ -145,7 +145,7 @@ namespace Kistl.Client.Presentables
 
             DataContext = ctx;
             _parentModel = parentModel;
-            _parentModel.State = ModelState.Loading;
+            _parentModel.LoadingState = ModelLoadingState.Loading;
 
             _asyncOriginalList = asyncOriginalList;
             _asyncNotifier = asyncNotifier;
@@ -158,7 +158,7 @@ namespace Kistl.Client.Presentables
             {
                 _asyncNotifier().CollectionChanged += AsyncCollectionChangedHandler;
                 AsyncHandleReset();
-                UI.Queue(UI, () => _parentModel.State = ModelState.Active);
+                UI.Queue(UI, () => _parentModel.LoadingState = ModelLoadingState.Active);
             });
 
         }
@@ -201,7 +201,7 @@ namespace Kistl.Client.Presentables
         private void AsyncCollectionChangedHandler(object sender, NotifyCollectionChangedEventArgs e)
         {
             Async.Verify();
-            UI.Queue(UI, () => _parentModel.State = ModelState.Loading);
+            UI.Queue(UI, () => _parentModel.LoadingState = ModelLoadingState.Loading);
             switch (e.Action)
             {
                 // TODO: Optimize this!
@@ -215,7 +215,7 @@ namespace Kistl.Client.Presentables
                 default:
                     break;
             }
-            UI.Queue(UI, () => _parentModel.State = ModelState.Active);
+            UI.Queue(UI, () => _parentModel.LoadingState = ModelLoadingState.Active);
         }
 
         private void AsyncHandleReset()

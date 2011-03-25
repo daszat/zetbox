@@ -10,9 +10,15 @@ whether or not it currently has the focus\footnote{usually the keyboard focus}. 
 dimension is whether or not there are outstanding (partial) modifications to the Value.
 
 \begin{description}
-\item[B] {The ViewModel is \emph{blurred}. That is, it does not have the focus. User input will not reach the control.}
-\item[F] {The ViewModel is \emph{focused}. That is, it has the focus. The control will be notified of the user's next input.}
-\item[IF] {The ViewModel is \emph{implicitely focused}. This states is reached by signalling user input without first signalling a focusing event. It is a convenient shortcut for Toolkits which do not track the concept of focus.}
+\item[B] {The ViewModel is \emph{blurred}. That is, it does not have the focus. User input will not
+ reach the control.}
+\item[F] {The ViewModel is \emph{focused}. That is, it has the focus. The control will be notified
+ of the user's next input.}
+\item[IF] {The ViewModel is \emph{implicitely focused}. This states is reached by signalling user
+ input without first signalling a focusing event. It is a convenient shortcut for Toolkits which do
+ not track the concept of focus. Since this state is unaware of the user's focus, it has to bubble
+ changes to the canonically formatted Value immediately to the View, possibly disrupting the user's
+ input.}
 
 \item[UV] {The View should display the \emph{unmodified Value}. This is the common state when no input was received or all input was processed successfully.}
 \item[PUI] {The View should display a \emph{partial user input}. If the user cannot input a valid value atomically, the ViewModel will enter this state to keep track of the partial value to add more input from the user until a valid value is formed.}

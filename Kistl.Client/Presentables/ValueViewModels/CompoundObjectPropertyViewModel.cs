@@ -46,25 +46,20 @@ namespace Kistl.Client.Presentables.ValueViewModels
         private bool _valueCacheInititalized = false;
         private CompoundObjectViewModel _valueCache;
 
-        /// <summary>
-        /// Gets or sets the value of the property presented by this model
-        /// </summary>
-        public override CompoundObjectViewModel Value
+        protected override CompoundObjectViewModel GetValue()
         {
-            get
+            if (!_valueCacheInititalized)
             {
-                if (!_valueCacheInititalized)
-                {
-                    UpdateValueCache();
-                }
-                return _valueCache;
+                UpdateValueCache();
             }
-            set
-            {
-                _valueCache = value;
-                _valueCacheInititalized = true;
-                ValueModel.Value = value != null ? value.Object : null;
-            }
+            return _valueCache;
+        }
+
+        protected override void SetValue(CompoundObjectViewModel value)
+        {
+            _valueCache = value;
+            _valueCacheInititalized = true;
+            ValueModel.Value = value != null ? value.Object : null;
         }
 
         private void UpdateValueCache()

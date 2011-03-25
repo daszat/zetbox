@@ -13,7 +13,7 @@ namespace Kistl.Client.Presentables
     using Kistl.App.GUI;
     using Kistl.Client.Presentables.ValueViewModels;
 
-    public enum ModelState
+    public enum ModelLoadingState
     {
         Loading,
         Active,
@@ -129,18 +129,18 @@ namespace Kistl.Client.Presentables
         }
 
 
-        private ModelState _State = ModelState.Active;
-        public ModelState State
+        private ModelLoadingState _loadingState = ModelLoadingState.Active;
+        public ModelLoadingState LoadingState
         {
             get
             {
-                return _State;
+                return _loadingState;
             }
             internal set
             {
-                if (value != _State)
+                if (value != _loadingState)
                 {
-                    _State = value;
+                    _loadingState = value;
                     OnPropertyChanged("State");
                 }
             }

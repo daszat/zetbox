@@ -14,6 +14,13 @@ namespace Kistl.Client.Presentables.ValueViewModels
     using Kistl.Client.Models;
     using Kistl.Client.Presentables.GUI;
 
+    public enum ValueViewModelState
+    {
+        Blurred_UnmodifiedValue = 1,
+        ImplicitFocus_WritingModel,
+        ImplicitFocus_PartialUserInput,
+    }
+
     public abstract class BaseValueViewModel : ViewModel, IValueViewModel, IFormattedValueViewModel, IDataErrorInfo, ILabeledViewModel
     {
         public new delegate BaseValueViewModel Factory(IKistlContext dataCtx, IValueModel mdl);
@@ -42,7 +49,9 @@ namespace Kistl.Client.Presentables.ValueViewModels
             : base(dependencies, dataCtx)
         {
             this.ValueModel = mdl;
-            this.ValueModel.PropertyChanged += new PropertyChangedEventHandler(Model_PropertyChanged);
+            this.ValueModel.PropertyChanged += Model_PropertyChanged;
+
+            this.State = ValueViewModelState.Blurred_UnmodifiedValue;
         }
 
         void Model_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -55,7 +64,11 @@ namespace Kistl.Client.Presentables.ValueViewModels
             switch (e.PropertyName)
             {
                 case "Value":
-                    NotifyValueChanged();
+                    // MC1 && MC2
+                    if (State == ValueViewModelState.Blurred_UnmodifiedValue)
+                    {
+                        OnModelChanged();
+                    }
                     break;
                 case "Error":
                     OnPropertyChanged("Error");
@@ -179,14 +192,14 @@ namespace Kistl.Client.Presentables.ValueViewModels
         /// <param name="error">parse error to display</param>
         protected abstract void ParseValue(string str, out string error);
 
-        private string _formattedValueError;
-        private string _formattedValueInput;
+        private string _partialUserInputError;
+        private string _partialUserInput;
 
         public virtual void CanocalizeInput()
         {
-            if (string.IsNullOrEmpty(_formattedValueError))
+            if (string.IsNullOrEmpty(_partialUserInputError))
             {
-                _formattedValueInput = FormatValue();
+                _partialUserInput = FormatValue();
                 OnPropertyChanged("FormattedValue");
             }
         }
@@ -195,20 +208,33 @@ namespace Kistl.Client.Presentables.ValueViewModels
         {
             get
             {
-                if (_formattedValueInput == null)
-                {
-                    _formattedValueInput = FormatValue();
+                switch(State)  {
+                    case ValueViewModelState.Blurred_UnmodifiedValue:
+                    case ValueViewModelState.ImplicitFocus_WritingModel:
+                        return FormatValue();
+                    case ValueViewModelState.ImplicitFocus_PartialUserInput:
+                        return _partialUserInput;
+                    default:
+                        throw new InvalidOperationException();
                 }
-                return _formattedValueInput;
             }
             set
             {
-                if (_formattedValueInput != value)
+                if (_partialUserInput != value)
                 {
-                    _formattedValueInput = value;
-                    var oldformattedValueError = _formattedValueError;
-                    ParseValue(_formattedValueInput, out _formattedValueError);
-                    if (_formattedValueError != oldformattedValueError)
+                    _partialUserInput = value;
+                    var oldPartialUserInputError = _partialUserInputError;
+                    ParseValue(_partialUserInput, out _partialUserInputError);
+                    if (String.IsNullOrEmpty(_partialUserInputError))
+                    {
+                        OnValidInput();
+                    }
+                    else
+                    {
+                        OnPartialInput();
+                    }
+
+                    if (_partialUserInputError != oldPartialUserInputError)
                     {
                         OnPropertyChanged("Error");
                     }
@@ -228,11 +254,11 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 var baseError = ValueModel.Error;
                 if (string.IsNullOrEmpty(baseError))
                 {
-                    return _formattedValueError;
+                    return _partialUserInputError;
                 }
                 else
                 {
-                    return baseError + "\n" + _formattedValueError;
+                    return baseError + "\n" + _partialUserInputError;
                 }
             }
         }
@@ -244,7 +270,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 switch (columnName)
                 {
                     case "FormattedValue":
-                        return _formattedValueError;
+                        return _partialUserInputError;
                     default:
                         return ValueModel[columnName];
                 }
@@ -268,6 +294,92 @@ namespace Kistl.Client.Presentables.ValueViewModels
         }
 
         #endregion
+
+        #region State Machine
+
+        protected ValueViewModelState State
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Part of the ValueViewModel state machine as described in the KistlGuide. 
+        /// This method is called everytime the model changed and handles the MC1, MC2,
+        /// and MC3 events.
+        /// </summary>
+        protected virtual void OnModelChanged()
+        {
+            switch (State)
+            {
+                case ValueViewModelState.Blurred_UnmodifiedValue:
+                    // MC1
+                    NotifyValueChanged();
+                    break;
+                // case F/UV
+                case ValueViewModelState.ImplicitFocus_WritingModel:
+                    // MC3, B1
+                    _partialUserInput = null;
+                    _partialUserInputError = null;
+                    NotifyValueChanged();
+                    State = ValueViewModelState.Blurred_UnmodifiedValue;
+                    break;
+                // case F/WM
+                    // MC3
+                    //NotifyValueChanged();
+                    //State = F/UV;
+                    //break;
+                default:
+                    // MC2 
+                    throw new InvalidOperationException();
+            }
+        }
+
+        /// <summary>
+        /// Part of the ValueViewModel state machine as described in the KistlGuide. 
+        /// This method is called everytime valid input is received and handles 
+        /// the VI event.
+        /// </summary>
+        protected virtual void OnValidInput()
+        {
+            switch (State)
+            {
+                case ValueViewModelState.Blurred_UnmodifiedValue:
+                    State = ValueViewModelState.ImplicitFocus_WritingModel;
+                    break;
+                default:
+                    throw new InvalidOperationException();
+            }
+        }
+
+        /// <summary>
+        /// Part of the ValueViewModel state machine as described in the KistlGuide. 
+        /// This method is called everytime partial input is received and handles 
+        /// the PI event.
+        /// </summary>
+        protected virtual void OnPartialInput()
+        {
+            switch (State)
+            {
+                case ValueViewModelState.Blurred_UnmodifiedValue:
+                    State = ValueViewModelState.ImplicitFocus_PartialUserInput;
+                    break;
+                default:
+                    throw new InvalidOperationException();
+            }
+        }
+
+        public void Blur()
+        {
+            throw new InvalidOperationException();
+        }
+
+        public void Focus()
+        {
+            throw new InvalidOperationException();
+        }
+
+        #endregion
     }
 
     public abstract class ValueViewModel<TValue, TModel> : BaseValueViewModel, IValueViewModel<TValue>
@@ -284,7 +396,22 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
         #region IValueViewModel<TValue> Members
 
-        public abstract TValue Value { get; set; }
+        protected abstract TValue GetValue();
+        protected abstract void SetValue(TValue value);
+
+        public virtual TValue Value
+        {
+            get
+            {
+                return GetValue();
+            }
+            set
+            {
+                OnValidInput();
+                SetValue(value);
+                OnModelChanged();
+            }
+        }
 
         #endregion
 
@@ -322,16 +449,14 @@ namespace Kistl.Client.Presentables.ValueViewModels
             }
         }
 
-        public override TValue? Value
+        protected override TValue? GetValue()
         {
-            get
-            {
-                return ValueModel.Value;
-            }
-            set
-            {
-                ValueModel.Value = value;
-            }
+            return ValueModel.Value;
+        }
+
+        protected override void SetValue(TValue? value)
+        {
+            ValueModel.Value = value;
         }
     }
 
@@ -358,16 +483,14 @@ namespace Kistl.Client.Presentables.ValueViewModels
             }
         }
 
-        public override TValue Value
+        protected override TValue GetValue()
         {
-            get
-            {
-                return (TValue)ValueModel.Value;
-            }
-            set
-            {
-                ValueModel.Value = value;
-            }
+            return ValueModel.Value;
+        }
+
+        protected override void SetValue(TValue value)
+        {
+            ValueModel.Value = value;
         }
     }
 
@@ -786,7 +909,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 if (_year != value)
                 {
                     _year = value;
-                    base.Value = GetValue();
+                    base.Value = GetValueFromComponents();
                     OnPropertyChanged("Year");
                     OnPropertyChanged("Value");
                 }
@@ -807,7 +930,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 if (_month != value)
                 {
                     _month = value;
-                    base.Value = GetValue();
+                    base.Value = GetValueFromComponents();
                     OnPropertyChanged("Month");
                     OnPropertyChanged("Value");
                 }
@@ -825,33 +948,31 @@ namespace Kistl.Client.Presentables.ValueViewModels
             }
         }
 
-        private DateTime? GetValue()
+        private DateTime? GetValueFromComponents()
         {
             return Year != null && Month != null && Year > 0 && Month >= 1 && Month <= 12 ? new DateTime(Year.Value, Month.Value, 1) : (DateTime?)null;
         }
 
-        public override DateTime? Value
+        protected override DateTime? GetValue()
         {
-            get
+            return GetValueFromComponents();
+        }
+
+        protected override void SetValue(DateTime? value)
+        {
+            base.SetValue(value);
+            if (value != null)
             {
-                return GetValue();
+                _year = value.Value.Year;
+                _month = value.Value.Month;
             }
-            set
+            else
             {
-                base.Value = value;
-                if (value != null)
-                {
-                    _year = value.Value.Year;
-                    _month = value.Value.Month;
-                }
-                else
-                {
-                    _year = null;
-                    _month = null;
-                }
-                OnPropertyChanged("Year");
-                OnPropertyChanged("Month");
+                _year = null;
+                _month = null;
             }
+            OnPropertyChanged("Year");
+            OnPropertyChanged("Month");
         }
 
         public class MonthViewModel

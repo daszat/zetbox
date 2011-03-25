@@ -5,6 +5,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Collections.Specialized;
+    using System.ComponentModel;
     using System.Diagnostics;
     using System.Linq;
     using System.Text;
@@ -12,10 +13,9 @@ namespace Kistl.Client.Presentables.ValueViewModels
     using Kistl.API.Utils;
     using Kistl.App.Base;
     using Kistl.App.Extensions;
+    using Kistl.App.GUI;
     using Kistl.Client.Models;
     using Kistl.Client.Presentables.ValueViewModels;
-    using Kistl.App.GUI;
-    using System.ComponentModel;
 
     [ViewModelDescriptor]
     public class ObjectReferenceViewModel
@@ -320,32 +320,27 @@ namespace Kistl.Client.Presentables.ValueViewModels
             base.OnPropertyChanged(propertyName);
         }
 
-        /// <summary>
-        /// Gets or sets the value of the property presented by this model
-        /// </summary>
-        public override DataObjectViewModel Value
+        protected override DataObjectViewModel GetValue()
         {
-            get
+            if (!_valueCacheInititalized)
             {
-                if (!_valueCacheInititalized)
-                {
-                    UpdateValueCache();
-                }
-                return _valueCache;
+                UpdateValueCache();
             }
-            set
+            return _valueCache;
+        }
+
+        protected override void SetValue(DataObjectViewModel value)
+        {
+            ValueModel.Value = value != null ? value.Object : null;
+            if (_possibleValues != null)
             {
-                ValueModel.Value = value != null ? value.Object : null;
-                if (_possibleValues != null)
+                // Add if not found
+                if (!_possibleValues.Contains(value))
                 {
-                    // Add if not found
-                    if (!_possibleValues.Contains(value))
-                    {
-                        _possibleValues.Add(value);
-                    }
+                    _possibleValues.Add(value);
                 }
-                OnPropertyChanged("Value");
             }
+            OnPropertyChanged("Value");
         }
 
         private bool _valueCacheInititalized = false;

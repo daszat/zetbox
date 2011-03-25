@@ -54,7 +54,7 @@ namespace Kistl.API.AbstractConsumerTests
             {
                 if (e.PropertyName == expectedPropertyName)
                 {
-                    Assert.That(hasChanged, Is.False, "changed event should be only triggered once" + expectedPropertyName);
+                    Assert.That(hasChanged, Is.False, "changed event should be only triggered once for " + expectedPropertyName);
                     Assert.That(sender, Is.SameAs(notifier), "sender should be the notifying object (OnChanged) for " + expectedPropertyName);
                     if (changedAsserts != null)
                         changedAsserts();
@@ -76,6 +76,38 @@ namespace Kistl.API.AbstractConsumerTests
             Assert.DoesNotThrow(() =>
             {
                 notifier.PropertyChanging -= changingHandler;
+                notifier.PropertyChanged -= changedHandler;
+            }, "Error when removing event handlers");
+        }
+
+        protected void TestChangedNotification<TNOTIFIER>(TNOTIFIER notifier, string expectedPropertyName, Action doChange, Action changedAsserts)
+            where TNOTIFIER : INotifyPropertyChanged
+        {
+            bool hasChanged = false;
+
+            var changedHandler = new PropertyChangedEventHandler(delegate(object sender, PropertyChangedEventArgs e)
+            {
+                if (e.PropertyName == expectedPropertyName)
+                {
+                    Assert.That(hasChanged, Is.False, "changed event should be only triggered once for " + expectedPropertyName);
+                    Assert.That(sender, Is.SameAs(notifier), "sender should be the notifying object (OnChanged) for " + expectedPropertyName);
+                    if (changedAsserts != null)
+                        changedAsserts();
+                    hasChanged = true;
+                }
+            });
+
+            Assert.DoesNotThrow(() =>
+            {
+                notifier.PropertyChanged += changedHandler;
+            }, "Error when adding event handlers");
+
+            doChange();
+
+            Assert.That(hasChanged, Is.True, "should be notified about change of " + expectedPropertyName);
+
+            Assert.DoesNotThrow(() =>
+            {
                 notifier.PropertyChanged -= changedHandler;
             }, "Error when removing event handlers");
         }

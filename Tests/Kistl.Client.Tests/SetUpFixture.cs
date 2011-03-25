@@ -18,9 +18,19 @@ namespace Kistl
         {
             base.SetupBuilder(builder);
 
-            builder.RegisterType<Kistl.Client.Mocks.KistlMockFactory>()
+            builder.RegisterType<KistlMockFactory>()
                 .As<Kistl.Client.Mocks.KistlMockFactory>()
                 .InstancePerLifetimeScope();
+
+            builder.RegisterType<TestViewModelFactory>()
+                .AsSelf()
+                .AsImplementedInterfaces()
+                .InstancePerDependency();
+
+            builder.RegisterType<NullIdentityResolver>()
+                .AsSelf()
+                .AsImplementedInterfaces()
+                .InstancePerDependency();
 
             builder.RegisterType<TestProxy>()
                 .As<IProxy>()

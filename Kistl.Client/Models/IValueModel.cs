@@ -2,6 +2,7 @@
 namespace Kistl.Client.Models
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Collections.Specialized;
     using System.ComponentModel;
@@ -10,9 +11,8 @@ namespace Kistl.Client.Models
     using Kistl.API;
     using Kistl.API.Utils;
     using Kistl.App.Base;
-    using Kistl.Client.Presentables;
-using System.Collections;
     using Kistl.App.GUI;
+    using Kistl.Client.Presentables;
 
     public interface IValueModel : INotifyPropertyChanged, IDataErrorInfo
     {
@@ -77,7 +77,7 @@ using System.Collections;
     {
         CompoundObject CompoundObjectDefinition { get; }
     }
-    
+
 
     public interface IObjectCollectionValueModel<TCollection> : IValueModel<TCollection>, INotifyCollectionChanged
     {
