@@ -334,6 +334,10 @@ namespace Kistl.API
         {
             CheckDisposed();
             IPersistenceObject obj = (IPersistenceObject)CreateUnattachedInstance(ifType);
+            checked
+            {
+                ((BasePersistenceObject)obj).ID = --_newIDCounter;
+            }
             Attach(obj);
             OnObjectCreated(obj);
             if (obj is IDataObject)

@@ -343,7 +343,7 @@ namespace Kistl.DalProvider.Client.Tests.KistlContextTests
         [Test]
         public void Delete()
         {
-            TestObjClass obj = ctx.Find<TestObjClass>(1);
+            TestObjClass obj = ctx.GetQuery<TestObjClass>().First();
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
             ctx.Delete(obj);
             Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Deleted));

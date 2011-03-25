@@ -115,61 +115,67 @@ namespace Kistl.App.Extensions
             // Load all Implementor Types and Invocations
             foreach (var assembly in metaCtx.GetQuery<Kistl.App.Base.Assembly>())
             {
-                var restr = assembly.DeploymentRestrictions;
-                if (!_restrictor.IsAcceptableDeploymentRestriction((int)restr))
-                {
-                    continue;
-                }
-
-                System.Reflection.Assembly a;
                 try
                 {
-                    a = System.Reflection.Assembly.Load(assembly.Name);
-                }
-                catch (FileLoadException)
-                {
-                    // Microsoft's Version
-                    // don't care
-                    continue;
-                }
-                catch (FileNotFoundException)
-                {
-                    // Mono's Version
-                    // don't care
-                    continue;
-                }
-
-                foreach (var t in a.GetTypes())
-                {
-                    if (t.GetCustomAttributes(typeof(Implementor), false).Length != 0)
+                    var restr = assembly.DeploymentRestrictions;
+                    if (!_restrictor.IsAcceptableDeploymentRestriction((int)restr))
                     {
-                        if (!t.Name.EndsWith("Actions"))
-                        {
-                            Log.Warn(string.Format("Type {0} does not end with 'Actions'. Ignoring this type", t.FullName));
-                            continue;
-                        }
+                        continue;
+                    }
 
-                        // Found Implementor Type
-                        foreach (var m in t.GetMethods(BindingFlags.Public | BindingFlags.Static | BindingFlags.Instance | BindingFlags.DeclaredOnly))
+                    System.Reflection.Assembly a;
+                    a = System.Reflection.Assembly.Load(assembly.Name);
+
+                    foreach (var t in a.GetTypes())
+                    {
+                        if (t.GetCustomAttributes(typeof(Implementor), false).Length != 0)
                         {
-                            if (m.GetCustomAttributes(typeof(Invocation), false).Length != 0)
+                            if (!t.Name.EndsWith("Actions"))
                             {
-                                var key = new MethodKey(t.Namespace, t.Name.Substring(0, t.Name.Length - "Actions".Length), m.Name);
-                                if (_reflectedMethods.ContainsKey(key))
+                                Log.Warn(string.Format("Type {0} does not end with 'Actions'. Ignoring this type", t.FullName));
+                                continue;
+                            }
+
+                            // Found Implementor Type
+                            foreach (var m in t.GetMethods(BindingFlags.Public | BindingFlags.Static | BindingFlags.Instance | BindingFlags.DeclaredOnly))
+                            {
+                                if (m.GetCustomAttributes(typeof(Invocation), false).Length != 0)
                                 {
-                                    _reflectedMethods[key].Add(m);
+                                    var key = new MethodKey(t.Namespace, t.Name.Substring(0, t.Name.Length - "Actions".Length), m.Name);
+                                    if (_reflectedMethods.ContainsKey(key))
+                                    {
+                                        _reflectedMethods[key].Add(m);
+                                    }
+                                    else
+                                    {
+                                        _reflectedMethods[key] = new List<MethodInfo>() { m };
+                                    }
                                 }
                                 else
                                 {
-                                    _reflectedMethods[key] = new List<MethodInfo>() { m };
+                                    Log.Warn(string.Format("Found public method {0}.{1} which has no Invocation attribute. Ignoring this method", t.FullName, m.Name));
                                 }
-                            }
-                            else
-                            {
-                                Log.Warn(string.Format("Found public method {0}.{1} which has no Invocation attribute. Ignoring this method", t.FullName, m.Name));
                             }
                         }
                     }
+                }
+                catch (ReflectionTypeLoadException ex)
+                {
+                    if (ex.LoaderExceptions.Count() == 1)
+                    {
+                        Log.Warn(String.Format("Failed to reflect over Assembly [{0}]. Ignoring and continuing.", assembly.Name), ex.LoaderExceptions.Single());
+                    }
+                    else
+                    {
+                        foreach (var lex in ex.LoaderExceptions)
+                        {
+                            Log.Warn(String.Format("Failed to reflect over Assembly [{0}]. Ignoring and continuing. Multiple Errors:", assembly.Name), lex);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log.Warn(String.Format("Error while processing Assembly [{0}]. Ignoring and continuing.", assembly.Name), ex);
                 }
             }
         }

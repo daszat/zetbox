@@ -7,6 +7,7 @@ namespace Kistl.DalProvider.Memory
     using System.Text;
 
     using Kistl.API;
+    using System.IO;
 
     public abstract class BaseMemoryPersistenceObject
         : BasePersistenceObject
@@ -43,6 +44,24 @@ namespace Kistl.DalProvider.Memory
         public override void SetNew()
         {
             _objectState = DataObjectState.New;
+        }
+
+
+        public override void ToStream(BinaryWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        {
+            base.ToStream(sw, auxObjects, eagerLoadLists);
+            BinarySerializer.ToStream((int)ObjectState, sw);
+        }
+
+        public override void FromStream(BinaryReader sr)
+        {
+            base.FromStream(sr);
+            BinarySerializer.FromStreamConverter(i => _objectState = (DataObjectState)i, sr);
+        }
+
+        internal void SetUnmodified()
+        {
+            _objectState = DataObjectState.Unmodified;
         }
     }
 }

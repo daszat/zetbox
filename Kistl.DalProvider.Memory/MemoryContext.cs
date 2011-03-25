@@ -30,7 +30,33 @@ namespace Kistl.DalProvider.Memory
 
         public override int SubmitChanges()
         {
-            throw new NotSupportedException();
+            int count = 0;
+            var removals = new List<IPersistenceObject>();
+            foreach (var o in objects)
+            {
+                switch (o.ObjectState)
+                {
+                    case DataObjectState.New:
+                    case DataObjectState.Modified:
+                        ((BaseMemoryPersistenceObject)o).SetUnmodified();
+                        count += 1;
+                        break;
+                    case DataObjectState.Unmodified:
+                        break;
+                    case DataObjectState.Deleted:
+                        removals.Add(o);
+                        break;
+                    case DataObjectState.NotDeserialized:
+                    case DataObjectState.Detached:
+                    default:
+                        throw new NotSupportedException(string.Format("Unexpected ObjectState encountered: {0}", o.ObjectState));
+                }
+            }
+            foreach (var r in removals)
+            {
+                objects.Remove(r);
+            }
+            return count;
         }
 
         protected override object CreateUnattachedInstance(InterfaceType ifType)

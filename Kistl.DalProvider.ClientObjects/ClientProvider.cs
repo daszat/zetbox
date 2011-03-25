@@ -35,6 +35,7 @@ namespace Kistl.DalProvider.Client
                         c.Resolve<InterfaceType.Factory>(),
                         c.Resolve<ClientImplementationType.ClientFactory>());
                 })
+                .AsSelf()
                 .As<IKistlContext>()
                 .As<IReadOnlyKistlContext>()
                 .OnActivated(args =>

@@ -11,133 +11,333 @@ namespace Kistl.DalProvider.Client.Mocks
     using System.Text;
     using Kistl.API;
     using Kistl.API.Client;
+    using Kistl.API.Server;
     using Kistl.App.Packaging;
     using Kistl.App.Test;
     using Kistl.DalProvider.Memory;
+    using Kistl.App.Base;
 
     public class ProxyMock
         : IProxy
     {
-        private BaseMemoryContext _backingStore;
+        private readonly InterfaceType.Factory _iftFactory;
+        private readonly BaseMemoryContext _backingStore;
+        private readonly MemoryObjectHandlerFactory _memoryFactory;
 
-        public ProxyMock(BaseMemoryContext backingStore, IFrozenContext frozen)
+        public ProxyMock(InterfaceType.Factory iftFactory, BaseMemoryContext backingStore, IFrozenContext frozen)
         {
-            this._backingStore = backingStore;
+            _iftFactory = iftFactory;
+            _backingStore = backingStore;
+            _memoryFactory = new MemoryObjectHandlerFactory();
 
-            var generatedAssembly = Assembly.Load(MemoryProvider.GeneratedAssemblyName);
+            var generatedAssembly = System.Reflection.Assembly.Load(MemoryProvider.GeneratedAssemblyName);
             Importer.LoadFromXml(_backingStore, generatedAssembly.GetManifestResourceStream("Kistl.Objects.MemoryImpl.FrozenObjects.xml"), "FrozenObjects.xml from assembly");
+
+            // create default test data
+
+            var list = new List<TestObjClass>();
+            while (list.Count < 2)
+            {
+                var newObj = _backingStore.Create<TestObjClass>();
+                newObj.ObjectProp = null; // kunde;
+                newObj.StringProp = "blah" + list.Count;
+                list.Add(newObj);
+            }
+
+            list[0].StringProp = "First";
+            list[0].TestEnumProp = TestEnum.First;
+
+            list[1].StringProp = "Second";
+            list[1].TestEnumProp = TestEnum.Second;
+
+            _backingStore.SubmitChanges();
         }
 
-        public IEnumerable<IDataObject> GetList(IKistlContext ctx, InterfaceType ifType, int maxListCount, bool withEagerLoading, IEnumerable<Expression> filter, IEnumerable<OrderBy> orderBy, out List<IStreamable> auxObjects)
+        public IEnumerable<IDataObject> GetList(IKistlContext ctx, InterfaceType ifType, int maxListCount, bool eagerLoadLists, IEnumerable<Expression> filter, IEnumerable<OrderBy> orderBy, out List<IStreamable> auxObjects)
         {
-            if (orderBy != null) throw new ArgumentException("OrderBy is not supported yet");
+            List<IStreamable> tmpAuxObjects = null;
+            IEnumerable<IDataObject> result = null;
 
-            auxObjects = new List<IStreamable>();
-            var query = GetUntypedQuery(ifType);
-            IEnumerable<IDataObject> sourceList;
+            var handler = _memoryFactory.GetServerObjectHandler(ifType);
+            var objects = handler.GetList(_backingStore,
+                maxListCount,
+                filter != null ? filter.ToList() : null,
+                orderBy != null ? orderBy.ToList() : null);
+            var bytes = SendObjects(objects, eagerLoadLists).ToArray();
 
-            if (filter != null)
+            using (var sr = new BinaryReader(new MemoryStream(bytes)))
             {
-                var source = query.AsQueryable().AddCast(ifType.Type);
-                filter.ForEach(f => source = source.AddFilter(f.StripQuotes()));
-                sourceList = source.Cast<IDataObject>();
+                result = ReceiveObjects(ctx, sr, out tmpAuxObjects).Cast<IDataObject>();
             }
-            else
-            {
-                sourceList = query.Cast<IDataObject>();
-            }
-
-            return CreateUnattachedClones(ctx, ifType, sourceList);
+            auxObjects = tmpAuxObjects;
+            return result;
         }
 
         public IEnumerable<IDataObject> GetListOf(IKistlContext ctx, InterfaceType ifType, int ID, string property, out List<IStreamable> auxObjects)
         {
-            auxObjects = new List<IStreamable>();
+            List<IStreamable> tmpAuxObjects = null;
+            IEnumerable<IDataObject> result = null;
 
-            var obj = GetUntypedQuery(ifType).Where(o => o.ID == ID).Single();
-            var sourceList = obj.GetPropertyValue<IEnumerable>(property).Cast<IDataObject>();
-            return CreateUnattachedClones(ctx, ifType, sourceList);
+            var handler = _memoryFactory.GetServerObjectHandler(ifType);
+            var objects = handler.GetListOf(_backingStore, ID, property);
+            var bytes = SendObjects(objects, true).ToArray();
+
+            using (var sr = new BinaryReader(new MemoryStream(bytes)))
+            {
+                result = ReceiveObjects(ctx, sr, out tmpAuxObjects).Cast<IDataObject>();
+            }
+
+            auxObjects = tmpAuxObjects;
+            return result;
         }
 
-        public IEnumerable<IPersistenceObject> SetObjects(IKistlContext ctx, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests)
+        public IEnumerable<IPersistenceObject> SetObjects(IKistlContext ctx, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notficationRequests)
         {
-            var result = new List<IPersistenceObject>();
-            //foreach (var obj in objects)
-            //{
-            //    var type = ctx.GetInterfaceType(obj);
+            IEnumerable<IPersistenceObject> result = null;
 
-            //    if (obj.ObjectState != DataObjectState.Deleted)
-            //    {
-            //        var newObj = CreateInstance(ctx, type, 0);
+            // Serialize
+            using (var ms = new MemoryStream())
+            using (var sw = new BinaryWriter(ms))
+            {
+                SendObjects(objects, sw);
 
-            //        // Copy old object to new object
-            //        newObj.ApplyChangesFrom(obj);
-            //        if (newObj.ID < Helper.INVALIDID)
-            //        {
-            //            newObj.SetPrivatePropertyValue<int>("ID", ++newID);
-            //        }
-            //        result.Add(newObj);
-            //        SetPrivateFieldValue<DataObjectState>(newObj, "_ObjectState", DataObjectState.Unmodified);
-            //    }
-            //}
+                var handler = _memoryFactory.GetServerObjectSetHandler();
+                var changedObjects = handler
+                    .SetObjects(_backingStore, objects, notficationRequests ?? new ObjectNotificationRequest[0])
+                    .Cast<IStreamable>();
+                var bytes = SendObjects(changedObjects, true).ToArray();
+
+                using (var sr = new BinaryReader(new MemoryStream(bytes)))
+                {
+                    // merge auxiliary objects into primary set objects result
+                    List<IStreamable> auxObjects;
+                    var receivedObjects = ReceiveObjects(ctx, sr, out auxObjects);
+                    result = receivedObjects.Concat(auxObjects).Cast<IPersistenceObject>();
+                }
+            }
 
             return result;
         }
 
-        #region Utilities
-
-        private IQueryable<IDataObject> GetUntypedQueryHack<T>()
-            where T : class, IDataObject
+        public IEnumerable<T> FetchRelation<T>(IKistlContext ctx, Guid relationId, RelationEndRole role, IDataObject parent, out List<IStreamable> auxObjects)
+            where T : class, IRelationEntry
         {
-            return _backingStore.GetQuery<T>().Cast<IDataObject>();
+            // TODO: could be implemented in generated properties
+            if (parent.ObjectState == DataObjectState.New)
+            {
+                auxObjects = new List<IStreamable>();
+                return new List<T>();
+            }
+
+            Relation rel = ctx.FindPersistenceObject<Relation>(relationId);
+
+            IEnumerable<T> result = null;
+            List<IStreamable> tmpAuxObjects = null;
+
+            var handler = _memoryFactory
+                .GetServerCollectionHandler(
+                    _backingStore,
+                    _iftFactory(rel.A.Type.GetDataType()),
+                    _iftFactory(rel.B.Type.GetDataType()),
+                    role);
+            var objects = handler
+                .GetCollectionEntries(_backingStore, relationId, role, parent.ID)
+                .Cast<IStreamable>();
+            var bytes = SendObjects(objects, true).ToArray();
+
+            using (MemoryStream s = new MemoryStream(bytes))
+            using (var sr = new BinaryReader(s))
+            {
+                result = ReceiveObjects(ctx, sr, out tmpAuxObjects).Cast<T>();
+            }
+
+            auxObjects = tmpAuxObjects;
+            return result;
         }
 
-        public IQueryable<IDataObject> GetUntypedQuery(InterfaceType ifType)
+        public Stream GetBlobStream(int ID)
         {
-            var mi = this.GetType().FindGenericMethod(true, "GetUntypedQueryHack", new[] { ifType.Type }, new Type[0]);
-            return (IQueryable<IDataObject>)mi.Invoke(this, new object[0]);
+            Stream result = null;
+            var handler = _memoryFactory.GetServerDocumentHandler();
+            result = handler.GetBlobStream(_backingStore, ID);
+            return result;
         }
 
-        private static IEnumerable<IDataObject> CreateUnattachedClones(IKistlContext ctx, InterfaceType ifType, IEnumerable<IDataObject> sourceList)
+        public Kistl.App.Base.Blob SetBlobStream(IKistlContext ctx, Stream stream, string filename, string mimetype)
         {
-            return sourceList
-                .Select(obj =>
-                {
-                    var target = (IDataObject)ctx.Internals().CreateUnattached(ifType);
-                    target.ApplyChangesFrom(obj);
-                    return target;
-                })
-                .ToList();
+            Kistl.App.Base.Blob result = null;
+            var handler = _memoryFactory.GetServerDocumentHandler();
+            var serverBlob = handler.SetBlobStream(_backingStore, stream, filename, mimetype);
+
+            BlobResponse resp = new BlobResponse();
+            resp.ID = serverBlob.ID;
+            resp.BlobInstance = SendObjects(new IDataObject[] { serverBlob }, true);
+
+            using (var sr = new BinaryReader(resp.BlobInstance))
+            {
+                result = ReceiveObjectList(ctx, sr).Cast<Kistl.App.Base.Blob>().Single();
+            }
+            return result;
+        }
+
+        public object InvokeServerMethod(IKistlContext ctx, InterfaceType ifType, int ID, string method, Type retValType, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests, out IEnumerable<IPersistenceObject> changedObjects)
+        {
+            throw new NotImplementedException();
+
+            //object result = null;
+            //IEnumerable<IPersistenceObject> tmpChangedObjects = null;
+
+            //BinaryFormatter bf = new BinaryFormatter();
+            //MemoryStream parameterStream = new MemoryStream();
+            //bf.Serialize(parameterStream, parameter);
+
+            //MemoryStream changedObjectsStream = new MemoryStream();
+            //BinaryWriter sw = new BinaryWriter(changedObjectsStream);
+            //SendObjects(objects, sw);
+
+            //byte[] retChangedObjectsArray;
+            //var resultStream = new MemoryStream(_service.InvokeServerMethod(
+            //    out retChangedObjectsArray,
+            //    ifType.ToSerializableType(),
+            //    ID,
+            //    method,
+            //    parameterTypes.Select(t => ifType.ToSerializableType()).ToArray(),
+            //    parameterStream.ToArray(),
+            //    changedObjectsStream.ToArray(),
+            //    notificationRequests.ToArray()));
+            //{
+            //    MemoryStream retChangedObjects = new MemoryStream(retChangedObjectsArray);
+            //    BinaryReader br = new BinaryReader(retChangedObjects);
+            //    tmpChangedObjects = ReceiveObjectList(ctx, br).Cast<IPersistenceObject>();
+            //}
+
+            //resultStream.Seek(0, SeekOrigin.Begin);
+
+            //if (retValType.IsIStreamable())
+            //{
+            //    BinaryReader br = new BinaryReader(resultStream);
+            //    result = ReceiveObjectList(ctx, br).Cast<IPersistenceObject>().FirstOrDefault();
+            //}
+            //else if (retValType.IsIEnumerable() && retValType.FindElementTypes().First().IsIPersistenceObject())
+            //{
+            //    BinaryReader br = new BinaryReader(resultStream);
+            //    IList lst = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(retValType.FindElementTypes().First()));
+            //    foreach (object resultObj in ReceiveObjectList(ctx, br))
+            //    {
+            //        lst.Add(resultObj);
+            //    }
+            //    result = lst;
+            //}
+            //else
+            //{
+            //    result = bf.Deserialize(resultStream);
+            //}
+
+            //changedObjects = tmpChangedObjects;
+            //return result;
         }
 
         public void Dispose()
         {
         }
 
-        #endregion
-
-        #region Not implemented
-
-        public object InvokeServerMethod(IKistlContext ctx, InterfaceType ifType, int ID, string method, Type retValType, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests, out IEnumerable<IPersistenceObject> changedObjects)
+        private static void SendObjects(IEnumerable<IPersistenceObject> objects, BinaryWriter sw)
         {
-            throw new NotImplementedException();
+            foreach (var obj in objects)
+            {
+                BinarySerializer.ToStream(true, sw);
+                obj.ToStream(sw, new HashSet<IStreamable>(), false);
+            }
+            BinarySerializer.ToStream(false, sw);
         }
 
-        public IEnumerable<T> FetchRelation<T>(IKistlContext ctx, Guid relationId, RelationEndRole role, IDataObject parent, out List<IStreamable> auxObjects) where T : class, IRelationEntry
+        /// <summary>
+        /// Serializes a list of objects onto a <see cref="MemoryStream"/>.
+        /// </summary>
+        /// <param name="lst">the list of objects to send</param>
+        /// <param name="eagerLoadLists">True if Lists should be eager loaded</param>
+        /// <returns>a memory stream containing all objects and all eagerly loaded auxiliary objects</returns>
+        private static MemoryStream SendObjects(IEnumerable<IStreamable> lst, bool eagerLoadLists)
         {
-            throw new NotImplementedException();
+            HashSet<IStreamable> sentObjects = new HashSet<IStreamable>();
+            HashSet<IStreamable> auxObjects = new HashSet<IStreamable>();
+
+            MemoryStream result = new MemoryStream();
+            BinaryWriter sw = new BinaryWriter(result);
+            foreach (IStreamable obj in lst)
+            {
+                BinarySerializer.ToStream(true, sw);
+                // don't check sentObjects here, because a list might contain items twice
+                obj.ToStream(sw, auxObjects, eagerLoadLists);
+                sentObjects.Add(obj);
+            }
+            BinarySerializer.ToStream(false, sw);
+
+            SendAuxiliaryObjects(sw, auxObjects, sentObjects, eagerLoadLists);
+
+            // https://connect.microsoft.com/VisualStudio/feedback/details/541494/wcf-streaming-issue
+            BinarySerializer.ToStream(false, sw);
+            BinarySerializer.ToStream(false, sw);
+            BinarySerializer.ToStream(false, sw);
+
+            result.Seek(0, SeekOrigin.Begin);
+            return result;
         }
 
-        public System.IO.Stream GetBlobStream(int ID)
+        /// <summary>
+        /// Sends a list of auxiliary objects to the specified BinaryWriter while avoiding to send objects twice.
+        /// </summary>
+        /// <param name="sw">the stream to write to</param>
+        /// <param name="auxObjects">a set of objects to send; will not be modified by this call</param>
+        /// <param name="sentObjects">a set objects already sent; receives all newly sent objects too</param>
+        /// <param name="eagerLoadLists">True if Lists should be eager loaded</param>
+        private static void SendAuxiliaryObjects(BinaryWriter sw, HashSet<IStreamable> auxObjects, HashSet<IStreamable> sentObjects, bool eagerLoadLists)
         {
-            throw new NotImplementedException();
+            // clone auxObjects to avoid modification
+            auxObjects = new HashSet<IStreamable>(auxObjects);
+            auxObjects.ExceptWith(sentObjects);
+            // send all eagerly loaded objects
+            while (auxObjects.Count > 0)
+            {
+                HashSet<IStreamable> secondTierAuxObjects = new HashSet<IStreamable>();
+                foreach (var aux in auxObjects.Where(o => o != null))
+                {
+                    BinarySerializer.ToStream(true, sw);
+                    aux.ToStream(sw, secondTierAuxObjects, eagerLoadLists);
+                    sentObjects.Add(aux);
+                }
+                // check whether new objects where eagerly loaded
+                secondTierAuxObjects.ExceptWith(sentObjects);
+                auxObjects = secondTierAuxObjects;
+            }
+            // finish list
+            BinarySerializer.ToStream(false, sw);
         }
 
-        public App.Base.Blob SetBlobStream(IKistlContext ctx, System.IO.Stream stream, string filename, string mimetype)
+        private IEnumerable<IStreamable> ReceiveObjects(IKistlContext ctx, BinaryReader sr, out List<IStreamable> auxObjects)
         {
-            throw new NotImplementedException();
+            var result = ReceiveObjectList(ctx, sr);
+            auxObjects = ReceiveObjectList(ctx, sr);
+            return result;
         }
 
-        #endregion
+        private List<IStreamable> ReceiveObjectList(IKistlContext ctx, BinaryReader sr)
+        {
+            List<IStreamable> result = new List<IStreamable>();
+            bool cont = true;
+            BinarySerializer.FromStream(out cont, sr);
+            while (cont)
+            {
+                SerializableType objType;
+                BinarySerializer.FromStream(out objType, sr);
+
+                IStreamable obj = (IStreamable)ctx.Internals().CreateUnattached(_iftFactory(objType.GetSystemType()));
+                obj.FromStream(sr);
+
+                result.Add((IStreamable)obj);
+                BinarySerializer.FromStream(out cont, sr);
+            }
+            return result;
+        }
     }
 }
