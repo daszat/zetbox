@@ -22,6 +22,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
         Focused_UnmodifiedValue,
         Focused_WritingModel,
         Focused_PartialUserInput,
+        Blurred_PartialUserInput,
     }
 
     public abstract class BaseValueViewModel : ViewModel, IValueViewModel, IFormattedValueViewModel, IDataErrorInfo, ILabeledViewModel
@@ -338,6 +339,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                     case ValueViewModelState.Blurred_UnmodifiedValue:
                     case ValueViewModelState.ImplicitFocus_WritingModel:
                         return FormatValue();
+                    case ValueViewModelState.Blurred_PartialUserInput:
                     case ValueViewModelState.ImplicitFocus_PartialUserInput:
                     case ValueViewModelState.Focused_PartialUserInput:
                     case ValueViewModelState.Focused_UnmodifiedValue:
@@ -431,7 +433,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 //break;
                 default:
                     // MC2 
-                    throw new InvalidOperationException();
+                    throw new InvalidOperationException(string.Format("Unexpected State {0}", State));
             }
         }
 
@@ -464,6 +466,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                     NotifyValueChanged();
                     State = ValueViewModelState.Blurred_UnmodifiedValue;
                     break;
+                case ValueViewModelState.Focused_PartialUserInput:
                 case ValueViewModelState.Focused_UnmodifiedValue:
                     State = ValueViewModelState.Focused_WritingModel;
                     SetValueToModel(value);
@@ -471,7 +474,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                     State = ValueViewModelState.Focused_UnmodifiedValue;
                     break;
                 default:
-                    throw new InvalidOperationException();
+                    throw new InvalidOperationException(string.Format("Unexpected State {0}", State));
             }
         }
 
@@ -491,12 +494,13 @@ namespace Kistl.Client.Presentables.ValueViewModels
                     State = ValueViewModelState.ImplicitFocus_PartialUserInput;
                     break;
                 case ValueViewModelState.Focused_UnmodifiedValue:
+                case ValueViewModelState.Focused_PartialUserInput:
                     _partialUserInput = partialInput;
                     OnPropertyChanged("FormattedValue");
                     State = ValueViewModelState.Focused_PartialUserInput;
                     break;
                 default:
-                    throw new InvalidOperationException();
+                    throw new InvalidOperationException(string.Format("Unexpected State {0}", State));
             }
         }
 
@@ -514,7 +518,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                     State = ValueViewModelState.Focused_UnmodifiedValue;
                     break;
                 default:
-                    throw new InvalidOperationException();
+                    throw new InvalidOperationException(string.Format("Unexpected State {0}", State));
             }
         }
 
@@ -531,8 +535,11 @@ namespace Kistl.Client.Presentables.ValueViewModels
                     OnPropertyChanged("FormattedValue");
                     State = ValueViewModelState.Blurred_UnmodifiedValue;
                     break;
+                case ValueViewModelState.Focused_PartialUserInput:
+                    State = ValueViewModelState.Blurred_PartialUserInput;
+                    break;
                 default:
-                    throw new InvalidOperationException();
+                    throw new InvalidOperationException(string.Format("Unexpected State {0}", State));
             }
         }
 
