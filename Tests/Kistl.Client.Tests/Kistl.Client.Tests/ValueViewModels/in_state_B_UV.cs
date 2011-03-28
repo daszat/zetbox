@@ -27,7 +27,7 @@ namespace Kistl.Client.Tests.ValueViewModels
             {
                 base.SetUp();
                 formattedValue = "formattedValue";
-                obj.OnFormatValue += () => formattedValue;
+                obj.OnFormatValue += value => formattedValue;
 
             }
 
@@ -190,7 +190,7 @@ namespace Kistl.Client.Tests.ValueViewModels
                 bool formatValueCalled = false;
                 string formattedValue = "formattedValue";
 
-                obj.OnFormatValue += () =>
+                obj.OnFormatValue += v =>
                 {
                     formatValueCalled = true;
                     return formattedValue;
@@ -376,7 +376,7 @@ namespace Kistl.Client.Tests.ValueViewModels
 
                 bool formatValueCalled = false;
 
-                obj.OnFormatValue += () =>
+                obj.OnFormatValue += v =>
                 {
                     formatValueCalled = true;
                     return formattedValue;

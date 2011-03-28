@@ -290,7 +290,7 @@ namespace Kistl.Client.Tests.ValueViewModels
 
                 bool formatValueCalled = false;
 
-                obj.OnFormatValue += () =>
+                obj.OnFormatValue += v =>
                 {
                     formatValueCalled = true;
                     return formattedValue;

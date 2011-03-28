@@ -162,8 +162,6 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
         #region IFormattedValueViewModel Members
 
-        protected abstract string FormatValue();
-
         public abstract void CanocalizeInput();
 
         public abstract string FormattedValue
@@ -289,6 +287,12 @@ namespace Kistl.Client.Presentables.ValueViewModels
             }
             set
             {
+                if (State == ValueViewModelState.Focused_PartialUserInput)
+                {
+                    // replace partial user input with newly formatted input
+                    _partialUserInput = FormatValue(value);
+                    _partialUserInputError = null;
+                }
                 OnValidInput(value);
             }
         }
@@ -316,16 +320,30 @@ namespace Kistl.Client.Presentables.ValueViewModels
         /// <returns>The result of the parse.</returns>
         protected abstract ParseResult<TValue> ParseValue(string str);
 
-        protected override string FormatValue()
+        /// <summary>
+        /// Formats the specified value.
+        /// </summary>
+        /// <remarks>
+        /// <para>
+        /// FormatValue is allowed to be called in any state of the input state machine 
+        /// and should not touch the ViewModel's internal state.
+        /// </para>
+        /// <para>
+        /// The result of this function should be roundtrippable with ParseValue.
+        /// </para>
+        /// </remarks>
+        /// <param name="value">value to format</param>
+        /// <returns>The result of the formatting.</returns>
+        protected virtual string FormatValue(TValue value)
         {
-            return Value != null ? Value.ToString() : String.Empty;
+            return value != null ? value.ToString() : String.Empty;
         }
 
         public override void CanocalizeInput()
         {
             if (string.IsNullOrEmpty(_partialUserInputError))
             {
-                _partialUserInput = FormatValue();
+                _partialUserInput = FormatValue(this.GetValueFromModel());
                 OnPropertyChanged("FormattedValue");
             }
         }
@@ -338,7 +356,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 {
                     case ValueViewModelState.Blurred_UnmodifiedValue:
                     case ValueViewModelState.ImplicitFocus_WritingModel:
-                        return FormatValue();
+                        return FormatValue(this.GetValueFromModel());
                     case ValueViewModelState.Blurred_PartialUserInput:
                     case ValueViewModelState.ImplicitFocus_PartialUserInput:
                     case ValueViewModelState.Focused_PartialUserInput:
@@ -437,14 +455,6 @@ namespace Kistl.Client.Presentables.ValueViewModels
             }
         }
 
-        private void OnWriteModel()
-        {
-            // MC3, B1
-            _partialUserInput = null;
-            _partialUserInputError = null;
-            NotifyValueChanged();
-        }
-
         /// <summary>
         /// Part of the ValueViewModel state machine as described in the KistlGuide. 
         /// This method is called everytime valid input is received and handles 
@@ -514,8 +524,11 @@ namespace Kistl.Client.Presentables.ValueViewModels
             switch (State)
             {
                 case ValueViewModelState.Blurred_UnmodifiedValue:
-                    _partialUserInput = FormatValue();
+                    _partialUserInput = FormatValue(this.GetValueFromModel());
                     State = ValueViewModelState.Focused_UnmodifiedValue;
+                    break;
+                case ValueViewModelState.Blurred_PartialUserInput:
+                    State = ValueViewModelState.Focused_PartialUserInput;
                     break;
                 default:
                     throw new InvalidOperationException(string.Format("Unexpected State {0}", State));
@@ -698,12 +711,12 @@ namespace Kistl.Client.Presentables.ValueViewModels
             }
         }
 
-        protected override string FormatValue()
+        protected override string FormatValue(int? value)
         {
-            if (Value == null) return string.Empty;
+            if (value == null) return string.Empty;
             // This hurts, but looks funny
             // Don't die on invalid values
-            return PossibleValues.FirstOrDefault(key => key.Key == Value.Value).Value;
+            return PossibleValues.FirstOrDefault(key => key.Key == value.Value).Value;
         }
 
         protected override ParseResult<int?> ParseValue(string str)
@@ -861,17 +874,17 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
         public IDateTimeValueModel DateTimeModel { get; private set; }
 
-        protected override string FormatValue()
+        protected override string FormatValue(DateTime? value)
         {
-            if (Value == null) return string.Empty;
+            if (value == null) return string.Empty;
             switch (DateTimeModel.DateTimeStyle)
             {
                 case DateTimeStyles.Date:
-                    return Value.Value.ToShortDateString();
+                    return value.Value.ToShortDateString();
                 case DateTimeStyles.Time:
-                    return Value.Value.ToShortTimeString();
+                    return value.Value.ToShortTimeString();
                 default:
-                    return Value.Value.ToString();
+                    return value.Value.ToString();
             }
         }
 

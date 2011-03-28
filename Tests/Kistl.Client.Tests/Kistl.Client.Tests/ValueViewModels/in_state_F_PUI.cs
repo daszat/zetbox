@@ -26,7 +26,7 @@ namespace Kistl.Client.Tests.ValueViewModels
         {
             base.SetUp();
             formattedValue = "formattedValue";
-            obj.OnFormatValue += () => formattedValue;
+            obj.OnFormatValue += value => formattedValue;
             obj.Focus();
 
             partialInput = "partialInput";
@@ -143,7 +143,6 @@ namespace Kistl.Client.Tests.ValueViewModels
                 Assert.Fail();
             }
         }
-
 
         [TestFixture]
         public class when_setting_partial_FormattedValue
@@ -310,7 +309,7 @@ namespace Kistl.Client.Tests.ValueViewModels
 
                 bool formatValueCalled = false;
 
-                obj.OnFormatValue += () =>
+                obj.OnFormatValue += v =>
                 {
                     formatValueCalled = true;
                     return formattedValue;
@@ -321,7 +320,7 @@ namespace Kistl.Client.Tests.ValueViewModels
                 Assert.That(obj.FormattedValue, Is.EqualTo(finalInput));
 
                 // FormatValue should not be called while user is still editing
-                Assert.That(formatValueCalled, Is.False, "should call FormatValue");
+                Assert.That(formatValueCalled, Is.False, "should not call FormatValue");
 
                 valueModelMock.Verify();
             }
@@ -379,6 +378,152 @@ namespace Kistl.Client.Tests.ValueViewModels
                 obj.FormattedValue = finalInput;
 
                 Assert.That(obj.GetCurrentState(), Is.EqualTo(ValueViewModelState.Focused_UnmodifiedValue));
+                valueModelMock.Verify();
+            }
+        }
+
+        [TestFixture]
+        public class when_setting_Value
+            : in_state_F_PUI
+        {
+            private object value;
+
+            public override void SetUp()
+            {
+                base.SetUp();
+                value = new object();
+            }
+
+            private void SetupSetValueWithNotification()
+            {
+                valueModelMock
+                    .SetupSet(o => o.Value = value)
+                    .Callback(() => valueModelMock.Raise(
+                            o => o.PropertyChanged += null,
+                            new PropertyChangedEventArgs("Value")));
+            }
+
+            [Test]
+            public void should_set_Value_on_Model()
+            {
+                valueModelMock.SetupAllProperties();
+
+                obj.Value = value;
+                Assert.That(obj.Value, Is.SameAs(value));
+
+                valueModelMock.VerifySet(o => o.Value = value);
+            }
+
+            [Test]
+            public void should_switch_thru_F_WM()
+            {
+                bool hasReachedIfWm = false;
+                obj.StateChanged += (s, e) =>
+                {
+                    if (e.NewState == ValueViewModelState.Focused_WritingModel)
+                    {
+                        hasReachedIfWm = true;
+                    }
+                };
+
+                valueModelMock.SetupProperty(o => o.Value);
+                obj.Value = value;
+
+                Assert.That(hasReachedIfWm, Is.True, "has not reached ValueViewModelState.Focused_WritingModel");
+
+                valueModelMock.Verify();
+            }
+
+            [Test]
+            public void should_return_to_F_UV()
+            {
+                SetupSetValueWithNotification();
+
+                obj.Value = value;
+
+                Assert.That(obj.GetCurrentState(), Is.EqualTo(ValueViewModelState.Focused_UnmodifiedValue));
+                valueModelMock.Verify();
+            }
+
+            [Test]
+            public void should_notify_about_Value()
+            {
+                valueModelMock.SetupSet(o => o.Value = value).Verifiable();
+
+                TestChangedNotification(obj, "Value",
+                    () => obj.Value = value,
+                    null);
+
+                valueModelMock.Verify();
+            }
+
+            [Test]
+            public void should_notify_about_Value_only_once()
+            {
+                SetupSetValueWithNotification();
+
+                TestChangedNotification(obj, "Value",
+                    () => obj.Value = value,
+                    null);
+
+                valueModelMock.Verify();
+            }
+
+            [Test]
+            public void should_notify_about_FormattedValue()
+            {
+                valueModelMock.SetupSet(o => o.Value = value).Verifiable();
+
+                TestChangedNotification(obj, "FormattedValue",
+                    () => obj.Value = value,
+                    null);
+
+                valueModelMock.Verify();
+            }
+
+            [Test]
+            public void should_notify_about_FormattedValue_only_once()
+            {
+                SetupSetValueWithNotification();
+
+                TestChangedNotification(obj, "FormattedValue",
+                    () => obj.Value = value,
+                    null);
+
+                valueModelMock.Verify();
+            }
+
+            [Test]
+            public void should_FormatValue()
+            {
+                valueModelMock.SetupProperty(o => o.Value);
+
+                bool formatValueCalled = false;
+                string formattedValue = "formattedValue";
+
+                obj.OnFormatValue += v =>
+                {
+                    formatValueCalled = true;
+                    return formattedValue;
+                };
+
+                obj.Value = value;
+
+                // FormatValue is called by the state machine
+                Assert.That(formatValueCalled, Is.True, "should call FormatValue");
+
+                Assert.That(obj.FormattedValue, Is.EqualTo(formattedValue));
+
+                valueModelMock.Verify();
+            }
+
+            [Test]
+            public void should_not_set_Error()
+            {
+                valueModelMock.SetupProperty(o => o.Value);
+                obj.Value = value;
+
+                Assert.That(obj.Error, Is.Null.Or.Empty);
                 valueModelMock.Verify();
             }
         }

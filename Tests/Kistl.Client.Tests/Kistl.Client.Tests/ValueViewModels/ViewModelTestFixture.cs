@@ -28,11 +28,11 @@ namespace Kistl.Client.Tests.ValueViewModels
                 get { throw new NotImplementedException(); }
             }
 
-            protected override string FormatValue()
+            protected override string FormatValue(object value)
             {
                 if (OnFormatValue != null)
                 {
-                    return OnFormatValue();
+                    return OnFormatValue(value);
                 }
 
                 Assert.Fail("Unexpected FormatValue Call");
@@ -42,7 +42,7 @@ namespace Kistl.Client.Tests.ValueViewModels
             }
 
             public event FormatValueCallback OnFormatValue;
-            public delegate string FormatValueCallback();
+            public delegate string FormatValueCallback(object value);
 
             protected override ParseResult<object> ParseValue(string str)
             {
@@ -90,6 +90,7 @@ namespace Kistl.Client.Tests.ValueViewModels
             valueModelMock = new Mock<Models.IValueModel<object>>(MockBehavior.Strict);
             // ignore Error handling for now
             valueModelMock.SetupGet<string>(o => o.Error).Returns(String.Empty);
+            valueModelMock.SetupProperty(o => o.Value);
             obj = new TestValueViewModel(scope.Resolve<IViewModelDependencies>(), scope.Resolve<BaseMemoryContext>(), valueModelMock.Object);
         }
     }

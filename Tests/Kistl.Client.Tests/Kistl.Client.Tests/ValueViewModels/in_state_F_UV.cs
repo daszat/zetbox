@@ -23,7 +23,7 @@ namespace Kistl.Client.Tests.ValueViewModels
         {
             base.SetUp();
             formattedValue = "formattedValue";
-            obj.OnFormatValue += () => formattedValue;
+            obj.OnFormatValue += value => formattedValue;
             obj.Focus();
         }
 
@@ -38,7 +38,6 @@ namespace Kistl.Client.Tests.ValueViewModels
                 Assert.That(obj.GetCurrentState(), Is.EqualTo(ValueViewModelState.Focused_UnmodifiedValue));
                 valueModelMock.Verify();
             }
-
         }
 
         [TestFixture]
@@ -345,7 +344,7 @@ namespace Kistl.Client.Tests.ValueViewModels
 
                 bool formatValueCalled = false;
 
-                obj.OnFormatValue += () =>
+                obj.OnFormatValue += v =>
                 {
                     formatValueCalled = true;
                     return formattedValue;
