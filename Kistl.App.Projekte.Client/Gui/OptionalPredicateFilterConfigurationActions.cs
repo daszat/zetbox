@@ -5,10 +5,10 @@ namespace Kistl.App.GUI
     using System.Linq;
     using System.Text;
     using Kistl.API;
-    using Kistl.Client.Presentables;
-    using Kistl.Client.Models;
     using Kistl.App.Base;
     using Kistl.Client;
+    using Kistl.Client.Models;
+    using Kistl.Client.Presentables;
 
     /// <summary>
     /// Client implementation
@@ -16,13 +16,11 @@ namespace Kistl.App.GUI
     [Implementor]
     public class OptionalPredicateFilterConfigurationActions
     {
-        private static IViewModelFactory _factory;
-        private static IFrozenContext ForzenContext;
+        private static IFrozenContext FrozenContext;
 
-        public OptionalPredicateFilterConfigurationActions(IFrozenContext frozenCtx, IViewModelFactory factory)
+        public OptionalPredicateFilterConfigurationActions(IFrozenContext frozenCtx)
         {
-            ForzenContext = frozenCtx;
-            _factory = factory;
+            FrozenContext = frozenCtx;
         }
 
         [Invocation]
@@ -37,7 +35,7 @@ namespace Kistl.App.GUI
 
             var valueMdl = new NullableStructValueModel<bool>("", "", false, false);
             valueMdl.Value = false;
-            mdl.FilterArguments.Add(new FilterArgumentConfig(valueMdl, /*cfg.ArgumentViewModel ?? */ ForzenContext.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableValuePropertyModel_Bool)));
+            mdl.FilterArguments.Add(new FilterArgumentConfig(valueMdl, /*cfg.ArgumentViewModel ?? */ FrozenContext.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableValuePropertyModel_Bool)));
 
             e.Result = mdl;
         }

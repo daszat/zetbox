@@ -5,24 +5,17 @@ namespace Kistl.App.GUI
     using System.Linq;
     using System.Text;
     using Kistl.API;
-    using Kistl.Client.Presentables;
-    using Kistl.Client.Models;
     using Kistl.App.Base;
     using Kistl.Client;
+    using Kistl.Client.Models;
+    using Kistl.Client.Presentables;
 
     /// <summary>
     /// Client implementation
     /// </summary>
     [Implementor]
-    public class RangeFilterConfigurationActions
+    public static class RangeFilterConfigurationActions
     {
-        private static IViewModelFactory _factory;
-
-        public RangeFilterConfigurationActions(IViewModelFactory factory)
-        {
-            _factory = factory;
-        }
-
         [Invocation]
         public static void CreateFilterModel(Kistl.App.GUI.RangeFilterConfiguration obj, MethodReturnEventArgs<Kistl.API.IFilterModel> e)
         {

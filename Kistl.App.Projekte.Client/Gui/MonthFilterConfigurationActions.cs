@@ -5,10 +5,10 @@ namespace Kistl.App.GUI
     using System.Linq;
     using System.Text;
     using Kistl.API;
-    using Kistl.Client.Presentables;
-    using Kistl.Client.Models;
     using Kistl.App.Base;
     using Kistl.Client;
+    using Kistl.Client.Models;
+    using Kistl.Client.Presentables;
 
     /// <summary>
     /// Client implementation
@@ -16,13 +16,11 @@ namespace Kistl.App.GUI
     [Implementor]
     public class MonthFilterConfigurationActions
     {
-        private static IViewModelFactory _factory;
-        private static IFrozenContext ForzenContext;
+        private static IFrozenContext FrozenContext;
 
-        public MonthFilterConfigurationActions(IFrozenContext frozenCtx, IViewModelFactory factory)
+        public MonthFilterConfigurationActions(IFrozenContext frozenCtx)
         {
-            ForzenContext = frozenCtx;
-            _factory = factory;
+            FrozenContext = frozenCtx;
         }
 
         [Invocation]
@@ -34,7 +32,7 @@ namespace Kistl.App.GUI
             mdl.ValueSource = FilterValueSource.FromProperty(obj.Property);
 
             mdl.ViewModelType = obj.ViewModelDescriptor;
-            mdl.FilterArguments.Add(new FilterArgumentConfig(obj.Property.GetDetachedValueModel(true), /*cfg.ArgumentViewModel ?? */ ForzenContext.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableMonthPropertyViewModel)));
+            mdl.FilterArguments.Add(new FilterArgumentConfig(obj.Property.GetDetachedValueModel(true), /*cfg.ArgumentViewModel ?? */ FrozenContext.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableMonthPropertyViewModel)));
 
             if (obj.IsCurrentMonthDefault == true)
             {
