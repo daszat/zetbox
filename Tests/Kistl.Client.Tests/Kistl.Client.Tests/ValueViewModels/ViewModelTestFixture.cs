@@ -23,28 +23,6 @@ namespace Kistl.Client.Tests.ValueViewModels
             {
             }
 
-            protected override void OnValidInput()
-            {
-                var oldState = State;
-                base.OnValidInput();
-                OnStateChanged(oldState, State);
-            }
-
-            protected override void OnModelChanged()
-            {
-                var oldState = State;
-                base.OnModelChanged();
-                OnStateChanged(oldState, State);
-            }
-
-            protected virtual void OnStateChanged(ValueViewModelState oldState, ValueViewModelState newState)
-            {
-                if (StateChanged != null && oldState != newState)
-                {
-                    StateChanged(this, new StateChangedEventArgs(oldState, newState));
-                }
-            }
-
             public override bool HasValue
             {
                 get { throw new NotImplementedException(); }
@@ -66,38 +44,39 @@ namespace Kistl.Client.Tests.ValueViewModels
             public event FormatValueCallback OnFormatValue;
             public delegate string FormatValueCallback();
 
-            protected override void ParseValue(string str, out string error)
+            protected override ParseResult<object> ParseValue(string str)
             {
                 if (OnParseValue != null)
                 {
-                    error = OnParseValue(str);
-                    return;
+                    var result = OnParseValue(str);
+                    return new ParseResult<object>()
+                    {
+                        Value = result.Value,
+                        Error = result.Key
+                    };
                 }
                 
                 Assert.Fail("Unexpected ParseValue Call");
 
                 // unreachable code
-                error = String.Empty;
-                return;
+                return null;
             }
 
             public event ParseValueCallback OnParseValue;
-            public delegate string ParseValueCallback(string str);
+            public delegate KeyValuePair<string, object> ParseValueCallback(string str);
 
             public ValueViewModelState GetCurrentState()
             {
                 return State;
             }
 
-            public event StateChangedEventHandler StateChanged;
-            public delegate void StateChangedEventHandler(object sender, StateChangedEventArgs args);
 
-            protected override object GetValue()
+            protected override object GetValueFromModel()
             {
                 return ValueModel.Value;
             }
 
-            protected override void SetValue(object value)
+            protected override void SetValueToModel(object value)
             {
                 ValueModel.Value = value;
             }

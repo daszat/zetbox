@@ -38,7 +38,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
         }
         #endregion
 
-        protected override void ParseValue(string str, out string error)
+        protected override ParseResult<CompoundObjectViewModel> ParseValue(string str)
         {
             throw new NotSupportedException();
         }
@@ -46,7 +46,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
         private bool _valueCacheInititalized = false;
         private CompoundObjectViewModel _valueCache;
 
-        protected override CompoundObjectViewModel GetValue()
+        protected override CompoundObjectViewModel GetValueFromModel()
         {
             if (!_valueCacheInititalized)
             {
@@ -55,7 +55,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             return _valueCache;
         }
 
-        protected override void SetValue(CompoundObjectViewModel value)
+        protected override void SetValueToModel(CompoundObjectViewModel value)
         {
             _valueCache = value;
             _valueCacheInititalized = true;

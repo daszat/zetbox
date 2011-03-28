@@ -577,7 +577,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
         }
         #endregion
 
-        protected override void ParseValue(string str, out string error)
+        protected override ParseResult<TCollection> ParseValue(string str)
         {
             throw new NotSupportedException();
         }

@@ -3,6 +3,7 @@ namespace Kistl.Client.Tests.ValueViewModels
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Linq;
     using System.Text;
     using Autofac;
@@ -11,9 +12,7 @@ namespace Kistl.Client.Tests.ValueViewModels
     using Kistl.Client.Presentables;
     using Kistl.Client.Presentables.ValueViewModels;
     using Moq;
-    using Moq.Protected;
     using NUnit.Framework;
-    using System.ComponentModel;
 
     public abstract class in_state_B_UV
         : ViewModelTestFixture
@@ -27,6 +26,7 @@ namespace Kistl.Client.Tests.ValueViewModels
             {
                 obj.Focus();
                 Assert.That(obj.GetCurrentState(), Is.EqualTo(ValueViewModelState.Focused_UnmodifiedValue));
+                valueModelMock.Verify();
             }
         }
 
@@ -39,6 +39,7 @@ namespace Kistl.Client.Tests.ValueViewModels
             {
                 Assert.That(() => obj.Blur(), Throws.InvalidOperationException);
                 Assert.That(obj.GetCurrentState(), Is.EqualTo(ValueViewModelState.Blurred_UnmodifiedValue));
+                valueModelMock.Verify();
             }
         }
 
@@ -206,7 +207,7 @@ namespace Kistl.Client.Tests.ValueViewModels
                 {
                     Assert.That(str, Is.EqualTo(partialInput));
                     parseValueCalled = true;
-                    return errorString;
+                    return new KeyValuePair<string, object>(errorString, null);
                 };
             }
 
@@ -283,29 +284,34 @@ namespace Kistl.Client.Tests.ValueViewModels
         }
 
         [TestFixture]
-        public class when_setting_FormattedValue
+        public class when_setting_valid_FormattedValue
             : in_state_B_UV
         {
+            private string inputValue;
             private string formattedValue;
+            private string parsedValue;
             bool parseValueCalled;
 
             public override void SetUp()
             {
                 base.SetUp();
-                formattedValue = "formattedObject";
+                inputValue = "inputValue";
+                formattedValue = "formattedValue";
+                parsedValue = "parsedValue";
                 parseValueCalled = false;
                 obj.OnParseValue += str =>
                 {
-                    Assert.That(str, Is.EqualTo(formattedValue));
+                    Assert.That(str, Is.EqualTo(inputValue));
                     parseValueCalled = true;
-                    return null;
+                    return new KeyValuePair<string, object>(null, parsedValue);
                 };
+                valueModelMock.SetupSet(o => o.Value = parsedValue);
             }
 
             [Test]
             public void should_call_ParseValue()
             {
-                obj.FormattedValue = formattedValue;
+                obj.FormattedValue = inputValue;
 
                 Assert.That(parseValueCalled, Is.True);
                 valueModelMock.Verify();
@@ -317,7 +323,7 @@ namespace Kistl.Client.Tests.ValueViewModels
                 TestChangedNotification(
                     obj,
                     "FormattedValue",
-                    () => obj.FormattedValue = formattedValue,
+                    () => obj.FormattedValue = inputValue,
                     null);
 
                 valueModelMock.Verify();
@@ -326,15 +332,13 @@ namespace Kistl.Client.Tests.ValueViewModels
             [Test]
             public void should_notify_about_Value()
             {
-                // Since ParseValue is expected to set Value, this would only test our Mock
-                // still, the test remains as a reminder.
-                //TestChangedNotification(
-                //    obj,
-                //    "Value",
-                //    () => obj.FormattedValue = formattedValue,
-                //    null);
+                TestChangedNotification(
+                    obj,
+                    "Value",
+                    () => obj.FormattedValue = inputValue,
+                    null);
 
-                //valueModelMock.Verify();
+                valueModelMock.Verify();
             }
 
             [Test]
@@ -350,7 +354,7 @@ namespace Kistl.Client.Tests.ValueViewModels
                     return formattedValue;
                 };
 
-                obj.FormattedValue = formattedValue;
+                obj.FormattedValue = inputValue;
 
                 Assert.That(obj.FormattedValue, Is.EqualTo(formattedValue));
 
@@ -363,7 +367,7 @@ namespace Kistl.Client.Tests.ValueViewModels
             [Test]
             public void should_not_set_Error()
             {
-                obj.FormattedValue = formattedValue;
+                obj.FormattedValue = inputValue;
 
                 Assert.That(obj.Error, Is.Null.Or.Empty);
                 valueModelMock.Verify();
@@ -388,6 +392,7 @@ namespace Kistl.Client.Tests.ValueViewModels
                 RaiseValueModelChangedEvent();
 
                 Assert.That(obj.GetCurrentState(), Is.EqualTo(ValueViewModelState.Blurred_UnmodifiedValue));
+                valueModelMock.Verify();
             }
 
             [Test]
@@ -398,6 +403,7 @@ namespace Kistl.Client.Tests.ValueViewModels
                     "Value",
                     RaiseValueModelChangedEvent,
                     null);
+                valueModelMock.Verify();
             }
 
             [Test]
@@ -408,6 +414,7 @@ namespace Kistl.Client.Tests.ValueViewModels
                     "FormattedValue",
                     RaiseValueModelChangedEvent,
                     null);
+                valueModelMock.Verify();
             }
 
             [Test]

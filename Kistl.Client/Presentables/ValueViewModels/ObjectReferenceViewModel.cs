@@ -297,7 +297,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
         #endregion
 
         #region Value
-        protected override void ParseValue(string str, out string error)
+        protected override ParseResult<DataObjectViewModel> ParseValue(string str)
         {
             throw new NotImplementedException();
         }
@@ -320,7 +320,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             base.OnPropertyChanged(propertyName);
         }
 
-        protected override DataObjectViewModel GetValue()
+        protected override DataObjectViewModel GetValueFromModel()
         {
             if (!_valueCacheInititalized)
             {
@@ -329,7 +329,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             return _valueCache;
         }
 
-        protected override void SetValue(DataObjectViewModel value)
+        protected override void SetValueToModel(DataObjectViewModel value)
         {
             ValueModel.Value = value != null ? value.Object : null;
             if (_possibleValues != null)

@@ -34,13 +34,13 @@ namespace Kistl.Client.Presentables.ValueViewModels
         #region Public interface and IReadOnlyValueModel<IReadOnlyObservableCollection<DataObjectViewModel>> Members
 
         private ReadOnlyObservableProjectedList<IDataObject, DataObjectViewModel> _valueCache;
-        protected override IReadOnlyObservableList<DataObjectViewModel> GetValue()
+        protected override IReadOnlyObservableList<DataObjectViewModel> GetValueFromModel()
         {
             EnsureValueCache();
             return _valueCache;
         }
 
-        protected override void SetValue(IReadOnlyObservableList<DataObjectViewModel> value)
+        protected override void SetValueToModel(IReadOnlyObservableList<DataObjectViewModel> value)
         {
             throw new NotSupportedException();
         }
