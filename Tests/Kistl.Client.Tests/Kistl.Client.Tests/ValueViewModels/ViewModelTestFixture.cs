@@ -70,7 +70,6 @@ namespace Kistl.Client.Tests.ValueViewModels
                 return State;
             }
 
-
             protected override object GetValueFromModel()
             {
                 return ValueModel.Value;

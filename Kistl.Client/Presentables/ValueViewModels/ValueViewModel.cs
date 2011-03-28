@@ -20,6 +20,8 @@ namespace Kistl.Client.Presentables.ValueViewModels
         ImplicitFocus_WritingModel,
         ImplicitFocus_PartialUserInput,
         Focused_UnmodifiedValue,
+        Focused_WritingModel,
+        Focused_PartialUserInput,
     }
 
     public abstract class BaseValueViewModel : ViewModel, IValueViewModel, IFormattedValueViewModel, IDataErrorInfo, ILabeledViewModel
@@ -337,9 +339,12 @@ namespace Kistl.Client.Presentables.ValueViewModels
                     case ValueViewModelState.ImplicitFocus_WritingModel:
                         return FormatValue();
                     case ValueViewModelState.ImplicitFocus_PartialUserInput:
+                    case ValueViewModelState.Focused_PartialUserInput:
+                    case ValueViewModelState.Focused_UnmodifiedValue:
+                    case ValueViewModelState.Focused_WritingModel:
                         return _partialUserInput;
                     default:
-                        throw new InvalidOperationException();
+                        throw new InvalidOperationException(string.Format("Unexpected State {0}", State));
                 }
             }
             set
@@ -413,9 +418,11 @@ namespace Kistl.Client.Presentables.ValueViewModels
                     // MC1
                     NotifyValueChanged();
                     break;
-                // case F/UV
                 case ValueViewModelState.ImplicitFocus_WritingModel:
                     // ignore notifications from model while writing to it.
+                    break;
+                case ValueViewModelState.Focused_UnmodifiedValue:
+                    Kistl.API.Utils.Logging.Client.WarnFormat("Model changed while {0} has focus; ignoring.", this.GetType().FullName);
                     break;
                 // case F/WM
                 // MC3
@@ -457,6 +464,12 @@ namespace Kistl.Client.Presentables.ValueViewModels
                     NotifyValueChanged();
                     State = ValueViewModelState.Blurred_UnmodifiedValue;
                     break;
+                case ValueViewModelState.Focused_UnmodifiedValue:
+                    State = ValueViewModelState.Focused_WritingModel;
+                    SetValueToModel(value);
+                    NotifyValueChanged();
+                    State = ValueViewModelState.Focused_UnmodifiedValue;
+                    break;
                 default:
                     throw new InvalidOperationException();
             }
@@ -477,6 +490,11 @@ namespace Kistl.Client.Presentables.ValueViewModels
                     OnPropertyChanged("FormattedValue");
                     State = ValueViewModelState.ImplicitFocus_PartialUserInput;
                     break;
+                case ValueViewModelState.Focused_UnmodifiedValue:
+                    _partialUserInput = partialInput;
+                    OnPropertyChanged("FormattedValue");
+                    State = ValueViewModelState.Focused_PartialUserInput;
+                    break;
                 default:
                     throw new InvalidOperationException();
             }
@@ -492,7 +510,26 @@ namespace Kistl.Client.Presentables.ValueViewModels
             switch (State)
             {
                 case ValueViewModelState.Blurred_UnmodifiedValue:
+                    _partialUserInput = FormatValue();
                     State = ValueViewModelState.Focused_UnmodifiedValue;
+                    break;
+                default:
+                    throw new InvalidOperationException();
+            }
+        }
+
+        /// <summary>
+        /// Part of the ValueViewModel state machine as described in the KistlGuide. 
+        /// This method is called everytime the control looses focus and handles 
+        /// the B1,and B2 events.
+        /// </summary>
+        protected virtual void OnBlur()
+        {
+            switch (State)
+            {
+                case ValueViewModelState.Focused_UnmodifiedValue:
+                    OnPropertyChanged("FormattedValue");
+                    State = ValueViewModelState.Blurred_UnmodifiedValue;
                     break;
                 default:
                     throw new InvalidOperationException();
@@ -501,7 +538,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
         public void Blur()
         {
-            throw new InvalidOperationException();
+            OnBlur();
         }
 
         public void Focus()

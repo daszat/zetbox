@@ -14,66 +14,60 @@ namespace Kistl.Client.Tests.ValueViewModels
     using Moq;
     using NUnit.Framework;
 
-    public abstract class in_state_B_UV
+    public abstract class in_state_F_UV
         : ViewModelTestFixture
     {
-        [TestFixture]
-        public class when_focusing
-            : in_state_B_UV
+        protected string formattedValue;
+
+        public override void SetUp()
         {
-            string formattedValue;
-
-            public override void SetUp()
-            {
-                base.SetUp();
-                formattedValue = "formattedValue";
-                obj.OnFormatValue += () => formattedValue;
-
-            }
-
-            [Test]
-            public void should_switch_to_F_UV()
-            {
-                obj.Focus();
-                Assert.That(obj.GetCurrentState(), Is.EqualTo(ValueViewModelState.Focused_UnmodifiedValue));
-                valueModelMock.Verify();
-            }
-
-            [Test]
-            public void should_return_FormattedValue_from_FormatValue()
-            {
-                obj.Focus();
-                Assert.That(obj.FormattedValue, Is.EqualTo(formattedValue));
-                valueModelMock.Verify();
-            }
-
-            [Test]
-            public void should_not_notify_FormattedValue()
-            {
-                // a little white-box testing: 
-                // this requirement is necessary to avoid flickering in the UI
-                obj.PropertyChanged += (s, e) => Assert.That(e.PropertyName, Is.Not.EqualTo("FormattedValue"));
-                obj.Focus();
-                valueModelMock.Verify();
-            }
+            base.SetUp();
+            formattedValue = "formattedValue";
+            obj.OnFormatValue += () => formattedValue;
+            obj.Focus();
         }
 
         [TestFixture]
-        public class when_blurring
-            : in_state_B_UV
+        public class when_focusing
+            : in_state_F_UV
         {
             [Test]
             public void should_reject()
             {
-                Assert.That(() => obj.Blur(), Throws.InvalidOperationException);
+                Assert.That(() => obj.Focus(), Throws.InvalidOperationException);
+                Assert.That(obj.GetCurrentState(), Is.EqualTo(ValueViewModelState.Focused_UnmodifiedValue));
+                valueModelMock.Verify();
+            }
+
+        }
+
+        [TestFixture]
+        public class when_blurring
+            : in_state_F_UV
+        {
+            [Test]
+            public void should_switch_to_B_UV()
+            {
+                obj.Blur();
                 Assert.That(obj.GetCurrentState(), Is.EqualTo(ValueViewModelState.Blurred_UnmodifiedValue));
+                valueModelMock.Verify();
+            }
+
+            [Test]
+            public void should_notify_FormattedValue()
+            {
+                TestChangedNotification(
+                    obj,
+                    "FormattedValue",
+                    () => obj.Blur(),
+                    null);
                 valueModelMock.Verify();
             }
         }
 
         [TestFixture]
         public class when_setting_Value
-            : in_state_B_UV
+            : in_state_F_UV
         {
             private object value;
 
@@ -104,12 +98,12 @@ namespace Kistl.Client.Tests.ValueViewModels
             }
 
             [Test]
-            public void should_switch_thru_IF_WM()
+            public void should_switch_thru_F_WM()
             {
                 bool hasReachedIfWm = false;
                 obj.StateChanged += (s, e) =>
                 {
-                    if (e.NewState == ValueViewModelState.ImplicitFocus_WritingModel)
+                    if (e.NewState == ValueViewModelState.Focused_WritingModel)
                     {
                         hasReachedIfWm = true;
                     }
@@ -124,13 +118,13 @@ namespace Kistl.Client.Tests.ValueViewModels
             }
 
             [Test]
-            public void should_return_to_B_UV()
+            public void should_return_to_F_UV()
             {
                 SetupSetValueWithNotification();
 
                 obj.Value = value;
 
-                Assert.That(obj.GetCurrentState(), Is.EqualTo(ValueViewModelState.Blurred_UnmodifiedValue));
+                Assert.That(obj.GetCurrentState(), Is.EqualTo(ValueViewModelState.Focused_UnmodifiedValue));
                 valueModelMock.Verify();
             }
 
@@ -183,30 +177,6 @@ namespace Kistl.Client.Tests.ValueViewModels
             }
 
             [Test]
-            public void should_FormatValue()
-            {
-                valueModelMock.SetupProperty(o => o.Value);
-
-                bool formatValueCalled = false;
-                string formattedValue = "formattedValue";
-
-                obj.OnFormatValue += () =>
-                {
-                    formatValueCalled = true;
-                    return formattedValue;
-                };
-
-                obj.Value = value;
-
-                Assert.That(obj.FormattedValue, Is.EqualTo(formattedValue));
-
-                // FormatValue only called when accessing FormattedValue
-                Assert.That(formatValueCalled, Is.True, "should call FormatValue");
-
-                valueModelMock.Verify();
-            }
-
-            [Test]
             public void should_not_set_Error()
             {
                 valueModelMock.SetupProperty(o => o.Value);
@@ -219,7 +189,7 @@ namespace Kistl.Client.Tests.ValueViewModels
 
         [TestFixture]
         public class when_setting_partial_FormattedValue
-            : in_state_B_UV
+            : in_state_F_UV
         {
             private string partialInput;
             private string errorString;
@@ -240,11 +210,11 @@ namespace Kistl.Client.Tests.ValueViewModels
             }
 
             [Test]
-            public void should_switch_to_state_IF_PUI()
+            public void should_switch_to_state_F_PUI()
             {
                 obj.FormattedValue = partialInput;
 
-                Assert.That(obj.GetCurrentState(), Is.EqualTo(ValueViewModelState.ImplicitFocus_PartialUserInput));
+                Assert.That(obj.GetCurrentState(), Is.EqualTo(ValueViewModelState.Focused_PartialUserInput));
                 valueModelMock.Verify();
             }
 
@@ -313,10 +283,9 @@ namespace Kistl.Client.Tests.ValueViewModels
 
         [TestFixture]
         public class when_setting_valid_FormattedValue
-            : in_state_B_UV
+            : in_state_F_UV
         {
             private string inputValue;
-            private string formattedValue;
             private string parsedValue;
             bool parseValueCalled;
 
@@ -370,7 +339,7 @@ namespace Kistl.Client.Tests.ValueViewModels
             }
 
             [Test]
-            public void should_FormatValue()
+            public void should_not_FormatValue()
             {
                 valueModelMock.SetupProperty(o => o.Value);
 
@@ -384,10 +353,10 @@ namespace Kistl.Client.Tests.ValueViewModels
 
                 obj.FormattedValue = inputValue;
 
-                Assert.That(obj.FormattedValue, Is.EqualTo(formattedValue));
+                Assert.That(obj.FormattedValue, Is.EqualTo(inputValue));
 
-                // FormatValue only called when accessing FormattedValue
-                Assert.That(formatValueCalled, Is.True, "should call FormatValue");
+                // FormatValue should not be called while user is still editing
+                Assert.That(formatValueCalled, Is.False, "should not call FormatValue");
 
                 valueModelMock.Verify();
             }
@@ -404,7 +373,7 @@ namespace Kistl.Client.Tests.ValueViewModels
 
         [TestFixture]
         public class when_model_changes
-            : in_state_B_UV
+            : in_state_F_UV
         {
             private void RaiseValueModelChangedEvent()
             {
@@ -413,35 +382,29 @@ namespace Kistl.Client.Tests.ValueViewModels
             }
 
             [Test]
-            public void should_stay_in_B_UV()
+            public void should_stay_in_F_UV()
             {
                 obj.StateChanged += (s, e) => Assert.Fail("Unexpected {0}", e);
 
                 RaiseValueModelChangedEvent();
 
-                Assert.That(obj.GetCurrentState(), Is.EqualTo(ValueViewModelState.Blurred_UnmodifiedValue));
+                Assert.That(obj.GetCurrentState(), Is.EqualTo(ValueViewModelState.Focused_UnmodifiedValue));
                 valueModelMock.Verify();
             }
 
             [Test]
-            public void should_notify_Value()
+            public void should_not_notify_Value()
             {
-                TestChangedNotification(
-                    obj,
-                    "Value",
-                    RaiseValueModelChangedEvent,
-                    null);
+                obj.PropertyChanged += (s, e) => Assert.That(e.PropertyName, Is.Not.EqualTo("Value"));
+                RaiseValueModelChangedEvent();
                 valueModelMock.Verify();
             }
 
             [Test]
-            public void should_notify_FormattedValue()
+            public void should_not_notify_FormattedValue()
             {
-                TestChangedNotification(
-                    obj,
-                    "FormattedValue",
-                    RaiseValueModelChangedEvent,
-                    null);
+                obj.PropertyChanged += (s, e) => Assert.That(e.PropertyName, Is.Not.EqualTo("FormattedValue"));
+                RaiseValueModelChangedEvent();
                 valueModelMock.Verify();
             }
 

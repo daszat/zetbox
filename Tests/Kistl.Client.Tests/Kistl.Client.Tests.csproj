@@ -83,9 +83,9 @@
     <Compile Include="Kistl.Client.Tests\ObjectListModelTests.cs" />
     <Compile Include="Kistl.Client.Tests\PresenterModelTests.cs" />
     <Compile Include="Kistl.Client.Tests\SynchronousThreadManagerTests.cs" />
+    <Compile Include="Kistl.Client.Tests\ValueViewModels\in_state_F_UV.cs" />
     <Compile Include="Kistl.Client.Tests\ValueViewModels\in_state_B_UV.cs" />
     <Compile Include="Kistl.Client.Tests\ValueViewModels\in_state_IF_PUI.cs" />
-    <Compile Include="Kistl.Client.Tests\ValueViewModels\StateChangedEventArgs.cs" />
     <Compile Include="Kistl.Client.Tests\ValueViewModels\ViewModelTestFixture.cs" />
     <Compile Include="Kistl.Client.Tests\ValueViewModels\when_creating.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
