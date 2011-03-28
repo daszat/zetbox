@@ -15,12 +15,7 @@
       <Module>Kistl.App.Projekte.Common.CustomCommonActionsModule, Kistl.App.Projekte.Common</Module>
     </Modules>
   </Client>
-  <SourceFileLocation>
-    <!-- default probe path -->
-    <string>/srv/CCNet/Projects/zbox/repo/bin/CodeGen/bin/Debug</string>
-    <!-- common libaries -->
-    <string>/srv/CCNet/Projects/zbox/repo/bin/Debug/bin/Common</string>
-    <!-- All other assemblies -->
-    <string>/srv/CCNet/Projects/zbox/repo/bin/Debug/binClient</string>
-  </SourceFileLocation>
+  <AssemblySearchPaths>
+    <string>..\Client\Core.Generated</string>
+  </AssemblySearchPaths>
 </KistlConfig>
