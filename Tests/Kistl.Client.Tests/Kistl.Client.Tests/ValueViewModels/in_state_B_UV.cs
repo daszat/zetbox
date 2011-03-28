@@ -15,16 +15,32 @@ namespace Kistl.Client.Tests.ValueViewModels
     using NUnit.Framework;
     using System.ComponentModel;
 
-    [TestFixture]
-    public class in_state_B_UV
+    public abstract class in_state_B_UV
         : ViewModelTestFixture
     {
-        /*
-   * when_setting_FormattedValue
-   *      should_accept_partial_input_to_IF_PUI
-   * should_accept_focus_to_F_UV
-   * should_reject_blur
-   */
+        [TestFixture]
+        public class when_focusing
+            : in_state_B_UV
+        {
+            [Test]
+            public void should_switch_to_F_UV()
+            {
+                obj.Focus();
+                Assert.That(obj.GetCurrentState(), Is.EqualTo(ValueViewModelState.Focused_UnmodifiedValue));
+            }
+        }
+
+        [TestFixture]
+        public class when_blurring
+            : in_state_B_UV
+        {
+            [Test]
+            public void should_reject()
+            {
+                Assert.That(() => obj.Blur(), Throws.InvalidOperationException);
+                Assert.That(obj.GetCurrentState(), Is.EqualTo(ValueViewModelState.Blurred_UnmodifiedValue));
+            }
+        }
 
         [TestFixture]
         public class when_setting_Value
@@ -70,6 +86,7 @@ namespace Kistl.Client.Tests.ValueViewModels
                     }
                 };
 
+                valueModelMock.SetupProperty(o => o.Value);
                 obj.Value = value;
 
                 Assert.That(hasReachedIfWm, Is.True, "has not reached ValueViewModelState.ImplicitFocus_WritingModel");
@@ -163,6 +180,7 @@ namespace Kistl.Client.Tests.ValueViewModels
             [Test]
             public void should_not_set_Error()
             {
+                valueModelMock.SetupProperty(o => o.Value);
                 obj.Value = value;
 
                 Assert.That(obj.Error, Is.Null.Or.Empty);
@@ -240,6 +258,7 @@ namespace Kistl.Client.Tests.ValueViewModels
                 valueModelMock.Verify();
             }
 
+            [Test]
             public void should_not_set_Value()
             {
                 obj.FormattedValue = partialInput;
@@ -259,20 +278,6 @@ namespace Kistl.Client.Tests.ValueViewModels
 
                 obj.FormattedValue = partialInput;
 
-                valueModelMock.Verify();
-            }
-
-            [Test]
-            public void should_reject_Blur_event()
-            {
-                Assert.That(() => obj.Blur(), Throws.InvalidOperationException);
-                valueModelMock.Verify();
-            }
-
-            [Test]
-            public void should_reject_Focus_event()
-            {
-                Assert.That(() => obj.Focus(), Throws.InvalidOperationException);
                 valueModelMock.Verify();
             }
         }
@@ -319,6 +324,20 @@ namespace Kistl.Client.Tests.ValueViewModels
             }
 
             [Test]
+            public void should_notify_about_Value()
+            {
+                // Since ParseValue is expected to set Value, this would only test our Mock
+                // still, the test remains as a reminder.
+                //TestChangedNotification(
+                //    obj,
+                //    "Value",
+                //    () => obj.FormattedValue = formattedValue,
+                //    null);
+
+                //valueModelMock.Verify();
+            }
+
+            [Test]
             public void should_FormatValue()
             {
                 valueModelMock.SetupProperty(o => o.Value);
@@ -349,12 +368,6 @@ namespace Kistl.Client.Tests.ValueViewModels
                 Assert.That(obj.Error, Is.Null.Or.Empty);
                 valueModelMock.Verify();
             }
-        }
-
-        [TestFixture]
-        public class when_focusing
-            : in_state_B_UV
-        {
         }
 
         [TestFixture]

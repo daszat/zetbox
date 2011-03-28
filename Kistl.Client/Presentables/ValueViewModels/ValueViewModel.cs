@@ -19,6 +19,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
         Blurred_UnmodifiedValue = 1,
         ImplicitFocus_WritingModel,
         ImplicitFocus_PartialUserInput,
+        Focused_UnmodifiedValue,
     }
 
     public abstract class BaseValueViewModel : ViewModel, IValueViewModel, IFormattedValueViewModel, IDataErrorInfo, ILabeledViewModel
@@ -369,6 +370,23 @@ namespace Kistl.Client.Presentables.ValueViewModels
             }
         }
 
+        /// <summary>
+        /// Part of the ValueViewModel state machine as described in the KistlGuide. 
+        /// This method is called everytime the control receives focus and handles 
+        /// the F event.
+        /// </summary>
+        protected virtual void OnFocus()
+        {
+            switch (State)
+            {
+                case ValueViewModelState.Blurred_UnmodifiedValue:
+                    State = ValueViewModelState.Focused_UnmodifiedValue;
+                    break;
+                default:
+                    throw new InvalidOperationException();
+            }
+        }
+
         public void Blur()
         {
             throw new InvalidOperationException();
@@ -376,7 +394,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
         public void Focus()
         {
-            throw new InvalidOperationException();
+            OnFocus();
         }
 
         #endregion

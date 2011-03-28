@@ -109,7 +109,9 @@ namespace Kistl.Client.Tests.ValueViewModels
         public override void SetUp()
         {
             base.SetUp();
-            valueModelMock = new Mock<Models.IValueModel<object>>();
+            valueModelMock = new Mock<Models.IValueModel<object>>(MockBehavior.Strict);
+            // ignore Error handling for now
+            valueModelMock.SetupGet<string>(o => o.Error).Returns(String.Empty);
             obj = new TestValueViewModel(scope.Resolve<IViewModelDependencies>(), scope.Resolve<BaseMemoryContext>(), valueModelMock.Object);
         }
     }
