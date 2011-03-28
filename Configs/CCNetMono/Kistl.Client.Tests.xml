@@ -16,6 +16,6 @@
     </Modules>
   </Client>
   <AssemblySearchPaths>
-    <string>..\Client\Core.Generated</string>
+    <string>../Client/Core.Generated</string>
   </AssemblySearchPaths>
 </KistlConfig>
