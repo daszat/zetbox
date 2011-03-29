@@ -71,7 +71,6 @@ namespace Kistl.Client.Tests.ValueViewModels.DateTimes
         public void should_not_fail_invalid_FormattedValue(string newValue)
         {
             var oldValue = obj.Value;
-            var oldFormattedValue = obj.FormattedValue;
 
             obj.FormattedValue = newValue;
 
