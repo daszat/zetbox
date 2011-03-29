@@ -227,6 +227,62 @@ The \emph{ViewModelFactory} will look up the \emph{IDataObject}s type and tries
 to find it's \emph{ObjectClass}. Then it looks up the \emph{ViewModelDescriptor}
 and creates the \emph{ViewModel}.
 
+\subsection{Using ViewModels}
+
+\subsubsection{DataObjectViewModel}
+The \emph{DataObjectViewModel} wraps a whole \emph{IDataObject} in a ViewModel.
+
+The most important Properties and Methods are:
+
+\begin{description}
+\item[PropertyModels] A read only list of all known \emph{BaseValueViewModels}
+fetched from the \emph{ObjectClass}.
+\item[OnPropertyModelsCreated()] Called after the \emph{PropertyModels} list has
+been created. In a derived, custom \emph{ViewModel} this event can be used for
+additional \emph{ValueViewModel} setup routines. E.g. adding custom commands to
+\emph{ObjectReference*ViewModels}.
+\item[PropertyModelsByName] Dictionary of \emph{BaseValueViewModels} with the
+property name as the key.
+\item[OnPropertyModelsByNameCreated()] Called after the
+\emph{PropertyModelsByName} dictionary has been created.
+
+\item[PropertyGroups] A read only collection of property groups. See
+\emph{CreatePropertyGroups} for more information.
+\item[CreatePropertyGroups] Property groups are created based on the properties
+summary tags. Due to the fact, that properties can have more than one summary
+tag, properties may appear in more than one property group. Properties with no
+summary tags appears in the ``Uncategorised'' group. Note, that currently
+summary tags may not contain spaces as the space is defined as the seperator.
+You can override this method to add custom property groups. 
+\begin{CS}
+protected override List<PropertyGroupViewModel> CreatePropertyGroups()
+{
+    var result = base.CreatePropertyGroups();
+
+    var relListMdl = ViewModelFactory.CreateViewModel<InstanceListViewModel.Factory>()
+        .Invoke(DataContext, 
+            () => DataContext,
+             typeof(Relation).GetObjectClass(FrozenContext), 
+             () => DataContext.GetQuery<Relation>()
+        ); 
+
+    var lblMdl = ViewModelFactory.CreateViewModel<LabeledViewContainerViewModel.Factory>().Invoke(DataContext, "Relations", "", relListMdl);
+    var propGrpMdl = ViewModelFactory.CreateViewModel<SinglePropertyGroupViewModel.Factory>().Invoke(DataContext, "Relations", new ViewModel[] { lblMdl });
+    result.Add(propGrpMdl);
+    return result;
+}
+\end{CS}
+
+\item[PropertyGroupsByName] Dictionary of \emph{PropertyGroups} with the
+group name as the key.
+
+\item[IsReadOnly] Specifies, that the underlying object should be read only.
+\begin{note}This sets every property read only.\end{note}
+
+\end{description}
+
+\subsubsection{ValueViewModel}
+
 \subsection{Implementation}
 
 \subsubsection{Implementing a ViewModel}
@@ -237,7 +293,9 @@ and creates the \emph{ViewModel}.
 
 \subsection{Asynchronous Loading}
 
-\emph{Not yet implemented.}
+\begin{note}
+Not yet implemented.
+\end{note}
 
 To facilitate low-latency user interfaces, the ViewModels should implement a
 thin proxy layer to delegate all potential blocking operations onto a worker
