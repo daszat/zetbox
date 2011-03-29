@@ -1094,7 +1094,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
         {
             get
             {
-                UpdateValueCache();
+                UpdateValueCache(GetValueFromModel());
                 return _year;
             }
             set
@@ -1109,13 +1109,12 @@ namespace Kistl.Client.Presentables.ValueViewModels
             }
         }
 
-
         private int? _month;
         public int? Month
         {
             get
             {
-                UpdateValueCache();
+                UpdateValueCache(GetValueFromModel());
                 return _month;
             }
             set
@@ -1131,39 +1130,59 @@ namespace Kistl.Client.Presentables.ValueViewModels
         }
 
         private bool _cacheInititalized = false;
-        private void UpdateValueCache()
+        private void UpdateValueCache(DateTime? value)
         {
             if (!_cacheInititalized)
             {
-                _year = base.Value != null ? base.Value.Value.Year : (int?)null;
-                _month = base.Value != null ? base.Value.Value.Month : (int?)null;
-                _cacheInititalized = true;
+                ResetYearMonthCache(value);
             }
+        }
+
+        private void ResetYearMonthCache(DateTime? value)
+        {
+            _year = value != null ? value.Value.Year : (int?)null;
+            _month = value != null ? value.Value.Month : (int?)null;
+            _cacheInititalized = true;
+        }
+
+        protected override void OnValidInput(string formattedValue, DateTime? value)
+        {
+            ResetYearMonthCache(value);
+            base.OnValidInput(formattedValue, value);
         }
 
         private DateTime? GetValueFromComponents()
         {
-            return Year != null && Month != null && Year > 0 && Month >= 1 && Month <= 12 ? new DateTime(Year.Value, Month.Value, 1) : (DateTime?)null;
+            var oldDate = GetValueFromModel();
+            var localDateValid = Year != null && Month != null && Year > 0 && Month >= 1 && Month <= 12;
+
+            if (localDateValid)
+            {
+                if (oldDate != null)
+                {
+                    return new DateTime(Year.Value, Month.Value, oldDate.Value.Day)
+                        + oldDate.Value.TimeOfDay;
+                }
+                else
+                {
+                    return new DateTime(Year.Value, Month.Value, 1);
+                }
+            }
+            else
+            {
+                return oldDate;
+            }
         }
 
-        protected override DateTime? GetValueFromModel()
-        {
-            return GetValueFromComponents();
-        }
+        //protected override DateTime? GetValueFromModel()
+        //{
+        //    return GetValueFromComponents();
+        //}
 
         protected override void SetValueToModel(DateTime? value)
         {
             base.SetValueToModel(value);
-            if (value != null)
-            {
-                _year = value.Value.Year;
-                _month = value.Value.Month;
-            }
-            else
-            {
-                _year = null;
-                _month = null;
-            }
+            ResetYearMonthCache(value);
             OnPropertyChanged("Year");
             OnPropertyChanged("Month");
         }
