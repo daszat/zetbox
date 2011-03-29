@@ -68,7 +68,9 @@ namespace Kistl.Generator.InterfaceTemplates.Interfaces
 
             if (prop is ValueTypeProperty)
             {
-                isList = ((ValueTypeProperty)prop).IsList;
+                var vtp = (ValueTypeProperty)prop;
+                isList = vtp.IsList;
+                isReadOnly = vtp.IsCalculated;
             }
             else if (prop is CompoundObjectProperty)
             {

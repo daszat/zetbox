@@ -61,7 +61,11 @@
 		else if (p is ValueTypeProperty)
 		{
 			var prop = (ValueTypeProperty)p;
-			if (prop.IsList)
+			if(prop.IsCalculated)
+			{
+				// Not in database
+			}
+			else if (prop.IsList)
 			{
 %>
     <NavigationProperty Name="<%= prop.Name + ImplementationPropertySuffix %>"

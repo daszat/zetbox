@@ -174,7 +174,6 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                     }
                     else
                     {
-
                         var ceClassName = p.GetCollectionEntryClassName();
                         var ceCollectionType = String.Format("ICollection<{0}.{1}{2}.{1}Proxy>",
                             p.ObjectClass.Module.Namespace,
@@ -195,6 +194,10 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                             {
                                 type = ceCollectionType;
                             }
+                            if (vtp != null && vtp.IsCalculated)
+                            {
+                                type = null;
+                            }
                         }
                     }
                     return new KeyValuePair<string, string>(type, p.Name);
@@ -206,7 +209,8 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                 .Concat(enumPosProperties)
                 .OrderBy(kv => kv.Value)
                 // always add at the end
-                .Concat(securityProperties);
+                .Concat(securityProperties)
+                .Where(kv => kv.Key != null);
         }
 
         protected override string GetExportGuidBackingStoreReference()

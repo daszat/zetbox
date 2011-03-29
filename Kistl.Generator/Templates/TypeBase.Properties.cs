@@ -66,7 +66,7 @@ namespace Kistl.Generator.Templates
                 if (vtp.IsCalculated)
                 {
                     ApplyCalculatedPropertyTemplate(p);
-                    ApplyPropertyEvents(p, false);
+                    ApplyPropertyEvents(p, true);
                 }
                 else if (vtp.IsList)
                 {

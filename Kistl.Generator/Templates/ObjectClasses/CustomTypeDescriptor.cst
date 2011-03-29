@@ -67,6 +67,7 @@
                         null), // CalculatedObjectReferenceProperty is a read-only property
 <%
             } else {
+			        var isReadonly = (property is ValueTypeProperty) && ((ValueTypeProperty)property).IsCalculated;
 %>
                     // else
                     new <%= propertyDescriptorName %><<%= implName %>, <%= property.ReferencedTypeAsCSharp() %>>(
@@ -75,7 +76,11 @@
                         "<%= propertyName %>",
                         null,
                         obj => obj.<%= propertyName %>,
+						<% if(isReadonly) { %>
+						null), // calculated property
+						<% } else { %>
                         (obj, val) => obj.<%= propertyName %> = val),
+						<% } %>
 <%
             }
         }

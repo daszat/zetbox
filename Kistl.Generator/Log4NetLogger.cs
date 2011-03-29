@@ -10,7 +10,7 @@ namespace Kistl.Generator
     public sealed class Log4NetLogger
         : ILogger
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Generator");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Generator.MSBuild");
 
         public void Initialize(IEventSource eventSource)
         {

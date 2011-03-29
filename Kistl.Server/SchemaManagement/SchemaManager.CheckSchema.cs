@@ -159,7 +159,7 @@ namespace Kistl.Server.SchemaManagement
 
         private void GetExistingColumnNames(ObjectClass objClass, ICollection<Property> properties, string prefix, List<string> columns)
         {
-            columns.AddRange(properties.OfType<ValueTypeProperty>().Where(p => !p.IsList).Select(p => Construct.NestedColumnName(p, prefix)).ToArray());
+            columns.AddRange(properties.OfType<ValueTypeProperty>().Where(p => !p.IsList && !p.IsCalculated).Select(p => Construct.NestedColumnName(p, prefix)).ToArray());
 
             foreach (CompoundObjectProperty sprop in properties.OfType<CompoundObjectProperty>().Where(p => !p.IsList))
             {
@@ -536,7 +536,7 @@ namespace Kistl.Server.SchemaManagement
             Log.Debug("ValueType Collections: ");
 
             foreach (ValueTypeProperty prop in objClass.Properties.OfType<ValueTypeProperty>()
-            .Where(p => p.IsList)
+            .Where(p => p.IsList && !p.IsCalculated)
             .OrderBy(p => p.Module.Namespace).ThenBy(p => p.Name))
             {
                 var tblName = db.GetQualifiedTableName(prop.GetCollectionEntryTable());
@@ -740,7 +740,7 @@ namespace Kistl.Server.SchemaManagement
         {
             Log.Debug("  Columns: ");
             foreach (ValueTypeProperty prop in properties.OfType<ValueTypeProperty>()
-                .Where(p => !p.IsList)
+                .Where(p => !p.IsList && !p.IsCalculated)
                 .OrderBy(p => p.Module.Namespace).ThenBy(p => p.Name))
             {
                 var tblName = db.GetQualifiedTableName(objClass.TableName);

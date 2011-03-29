@@ -170,6 +170,11 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
 
         protected virtual void ApplyValueTypeProperty(string prefix, ValueTypeProperty prop)
         {
+            if (prop.IsCalculated)
+            {
+                this.WriteLine("        <!-- ValueTypeProperty {0}, is calculated -->", prop.Name);
+                return;
+            }
             this.WriteLine("        <!-- ValueTypeProperty -->");
             string nameAttr = String.Format("name=\"{0}\"", prop.Name);
             string tableName = prop.GetCollectionEntryTable();

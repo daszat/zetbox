@@ -48,7 +48,7 @@ this.WriteObjects("			var otherImpl = (",  implName , ")obj;\r\n");
 this.WriteObjects("			var me = (",  clsName , ")this;\r\n");
 this.WriteObjects("\r\n");
 #line 26 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
-foreach(var prop in cls.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsList).OrderBy(p => p.Name))
+foreach(var prop in cls.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsList && !p.IsCalculated).OrderBy(p => p.Name))
 			{
 
 #line 29 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"

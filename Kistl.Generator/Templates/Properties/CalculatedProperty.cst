@@ -16,10 +16,10 @@
 			{
 				if (<%= getterEventName %> == null)
 				{
-					return null;
+					throw new NotImplementedException("No handler registered on calculated property <%= className %>.<%= propertyName %>");
 				}
 
-				var e = new PropertyGetterEventArgs<<%= referencedType %>>(null);
+				var e = new PropertyGetterEventArgs<<%= referencedType %>>(default(<%= referencedType %>));
 				<%= getterEventName %>(this, e);
 				return e.Result;
 			}

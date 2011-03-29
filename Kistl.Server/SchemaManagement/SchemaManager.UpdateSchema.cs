@@ -219,7 +219,7 @@ namespace Kistl.Server.SchemaManagement
 
         private void UpdateColumns(ObjectClass objClass, ICollection<Property> properties, string prefix)
         {
-            foreach (ValueTypeProperty prop in properties.OfType<ValueTypeProperty>().Where(p => !p.IsList))
+            foreach (ValueTypeProperty prop in properties.OfType<ValueTypeProperty>().Where(p => !p.IsList && !p.IsCalculated))
             {
                 if (Case.IsNewValueTypePropertyNullable(prop))
                 {
@@ -264,7 +264,7 @@ namespace Kistl.Server.SchemaManagement
                 }
             }
 
-            foreach (ValueTypeProperty prop in properties.OfType<ValueTypeProperty>().Where(p => p.IsList))
+            foreach (ValueTypeProperty prop in properties.OfType<ValueTypeProperty>().Where(p => p.IsList && !p.IsCalculated))
             {
                 if (Case.IsNewValueTypePropertyList(prop))
                 {

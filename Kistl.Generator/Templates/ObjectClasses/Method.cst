@@ -59,7 +59,7 @@
         if (m.ObjectClass == dt || !(dt is ObjectClass))
         {
 %>
-                throw new NotImplementedException("No handler registered on <%= m.ObjectClass.Name %>.<%= m.Name %>");
+                throw new NotImplementedException("No handler registered on method <%= m.ObjectClass.Name %>.<%= m.Name %>");
 <%
         }
         else

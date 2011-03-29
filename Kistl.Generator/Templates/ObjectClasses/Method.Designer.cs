@@ -89,7 +89,7 @@ if (m.ObjectClass == dt || !(dt is ObjectClass))
         {
 
 #line 62 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\Method.cst"
-this.WriteObjects("                throw new NotImplementedException(\"No handler registered on ",  m.ObjectClass.Name , ".",  m.Name , "\");\r\n");
+this.WriteObjects("                throw new NotImplementedException(\"No handler registered on method ",  m.ObjectClass.Name , ".",  m.Name , "\");\r\n");
 #line 64 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\Method.cst"
 }
         else
