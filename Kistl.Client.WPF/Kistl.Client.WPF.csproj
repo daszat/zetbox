@@ -772,7 +772,9 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="ProfilingSessions\Session20110329_142250.sdps" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\DropDown.png" />
   </ItemGroup>

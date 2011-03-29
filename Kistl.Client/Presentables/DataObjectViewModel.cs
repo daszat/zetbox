@@ -64,6 +64,9 @@ namespace Kistl.Client.Presentables
         }
 
         private ReadOnlyProjectedList<Property, BaseValueViewModel> _propertyModelList;
+        /// <summary>
+        /// A read only list of all known BaseValueViewModels fetched from the ObjectClass.
+        /// </summary>
         public IReadOnlyList<BaseValueViewModel> PropertyModels
         {
             get
@@ -78,6 +81,9 @@ namespace Kistl.Client.Presentables
             }
         }
 
+        /// <summary>
+        /// Called after the PropertyModels list has been created.
+        /// </summary>
         protected virtual void OnPropertyModelsCreated()
         {            
         }
@@ -98,6 +104,9 @@ namespace Kistl.Client.Presentables
         }
 
         private LookupDictionary<string, Property, BaseValueViewModel> _propertyModelsByName;
+        /// <summary>
+        /// Dictionary of BaseValueViewModels with the property name as the key.
+        /// </summary>
         public LookupDictionary<string, Property, BaseValueViewModel> PropertyModelsByName
         {
             get
@@ -116,11 +125,18 @@ namespace Kistl.Client.Presentables
             }
         }
 
+        /// <summary>
+        /// Called after the PropertyModelsByName dictionary has been created.
+        /// </summary>
         protected virtual void OnPropertyModelsByNameCreated()
         {
         }
 
         private ReadOnlyCollection<PropertyGroupViewModel> _propertyGroups;
+
+        /// <summary>
+        /// A read only collection of property groups. See CreatePropertyGroups for more information.
+        /// </summary>
         public ReadOnlyCollection<PropertyGroupViewModel> PropertyGroups
         {
             get
@@ -134,6 +150,18 @@ namespace Kistl.Client.Presentables
             }
         }
 
+        /// <summary>
+        /// Creates the property groups list.
+        /// </summary>
+        /// <remarks>
+        /// Property groups are created based on the properties summary tags. Due to the fact, 
+        /// that properties can have more than one summary
+        /// tag, properties may appear in more than one property group. Properties with no
+        /// summary tags appears in the "Uncategorised" group. Note, that currently
+        /// summary tags may not contain spaces as the space is defined as the seperator.
+        /// You can override this method to add custom property groups.
+        /// </remarks>
+        /// <returns>List of property groups</returns>
         protected virtual List<PropertyGroupViewModel> CreatePropertyGroups()
         {
             FetchPropertyModels();
@@ -225,6 +253,9 @@ namespace Kistl.Client.Presentables
         }
 
         protected bool isReadOnlyStore = false;
+        /// <summary>
+        /// Specifies, that the underlying object should be read only. Note: this sets every property to read only true.
+        /// </summary>
         public virtual bool IsReadOnly
         {
             get
