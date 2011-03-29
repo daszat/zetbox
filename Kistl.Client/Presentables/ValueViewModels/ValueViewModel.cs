@@ -701,10 +701,9 @@ namespace Kistl.Client.Presentables.ValueViewModels
             {
                 if (_PossibleValues == null)
                 {
-                    var enumValues = EnumModel.Enumeration.EnumerationEntries.Select(e => new KeyValuePair<int?, string>(e.Value, e.GetLabel()));
                     this._PossibleValues = new ReadOnlyCollection<KeyValuePair<int?, string>>(
-                        new[] { new KeyValuePair<int?, string>(null, "") }
-                        .Concat(enumValues)
+                        new[] { new KeyValuePair<int?, string>(null, String.Empty) }
+                        .Concat(EnumModel.GetEntries().Select(kv => new KeyValuePair<int?, string>(kv.Key, kv.Value)))
                         .ToList()
                     );
                 }

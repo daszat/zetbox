@@ -2,17 +2,17 @@
 namespace Kistl.Client.Models
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
+    using System.Collections.Specialized;
     using System.ComponentModel;
     using System.Linq;
     using System.Text;
     using Kistl.API;
+    using Kistl.API.Utils;
     using Kistl.App.Base;
     using Kistl.App.Extensions;
     using Kistl.App.GUI;
-    using Kistl.API.Utils;
-    using System.Collections;
-    using System.Collections.Specialized;
 
     public static class BaseParameterExtensionsThisShouldBeMovedToAZBoxMethod
     {
@@ -476,6 +476,11 @@ namespace Kistl.Client.Models
         public Enumeration Enumeration
         {
             get { return enumDef; }
+        }
+
+        public IEnumerable<KeyValuePair<int, string>> GetEntries()
+        {
+            return enumDef.EnumerationEntries.Select(ee => new KeyValuePair<int, string>(ee.Value, ee.GetLabel()));
         }
 
         #endregion

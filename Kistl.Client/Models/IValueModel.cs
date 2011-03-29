@@ -61,6 +61,7 @@ namespace Kistl.Client.Models
     public interface IEnumerationValueModel : IValueModel<int?>
     {
         Enumeration Enumeration { get; }
+        IEnumerable<KeyValuePair<int, string>> GetEntries();
     }
 
     public interface IDateTimeValueModel : IValueModel<DateTime?>
