@@ -406,7 +406,7 @@ namespace Kistl.Client.Tests.ValueViewModels
             [Test]
             public void should_set_Value_on_Model()
             {
-                valueModelMock.SetupAllProperties();
+                valueModelMock.SetupProperty(o => o.Value);
 
                 obj.Value = value;
                 Assert.That(obj.Value, Is.SameAs(value));
