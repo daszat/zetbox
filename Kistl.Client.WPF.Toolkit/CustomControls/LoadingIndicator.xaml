@@ -6,17 +6,17 @@
     <UserControl.Style>
         <Style TargetType="{x:Type UserControl}">
             <Style.Triggers>
-                <DataTrigger Binding="{Binding State}"
+                <DataTrigger Binding="{Binding LoadingState}"
                              Value="Active">
                     <Setter Property="Visibility"
                             Value="Collapsed" />
                 </DataTrigger>
-                <DataTrigger Binding="{Binding State}"
+                <DataTrigger Binding="{Binding LoadingState}"
                              Value="Loading">
                     <Setter Property="Visibility"
                             Value="Visible" />
                 </DataTrigger>
-                <DataTrigger Binding="{Binding State}"
+                <DataTrigger Binding="{Binding LoadingState}"
                              Value="Invalid">
                     <Setter Property="Background"
                             Value="Red" />

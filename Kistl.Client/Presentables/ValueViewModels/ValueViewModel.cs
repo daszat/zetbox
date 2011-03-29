@@ -74,6 +74,9 @@ namespace Kistl.Client.Presentables.ValueViewModels
             }
         }
 
+        public abstract void Focus();
+        public abstract void Blur();
+
         #region Utilities and UI callbacks
         protected virtual void NotifyValueChanged()
         {
@@ -161,8 +164,6 @@ namespace Kistl.Client.Presentables.ValueViewModels
         #endregion
 
         #region IFormattedValueViewModel Members
-
-        public abstract void CanocalizeInput();
 
         public abstract string FormattedValue
         {
@@ -337,15 +338,6 @@ namespace Kistl.Client.Presentables.ValueViewModels
         protected virtual string FormatValue(TValue value)
         {
             return value != null ? value.ToString() : String.Empty;
-        }
-
-        public override void CanocalizeInput()
-        {
-            if (string.IsNullOrEmpty(_partialUserInputError))
-            {
-                _partialUserInput = FormatValue(this.GetValueFromModel());
-                OnPropertyChanged("FormattedValue");
-            }
         }
 
         public override string FormattedValue
@@ -565,12 +557,12 @@ namespace Kistl.Client.Presentables.ValueViewModels
             }
         }
 
-        public void Blur()
+        public override void Blur()
         {
             OnBlur();
         }
 
-        public void Focus()
+        public override void Focus()
         {
             OnFocus();
         }
@@ -1083,15 +1075,6 @@ namespace Kistl.Client.Presentables.ValueViewModels
                     default:
                         return base[columnName];
                 }
-            }
-        }
-
-        public override void CanocalizeInput()
-        {
-            if (string.IsNullOrEmpty(_timePartError))
-            {
-                _timePartInput = TimePart == null ? String.Empty : String.Format("{0:00}:{1:00}", TimePart.Value.Hours, TimePart.Value.Minutes);
-                OnPropertyChanged("TimePartString");
             }
         }
     }

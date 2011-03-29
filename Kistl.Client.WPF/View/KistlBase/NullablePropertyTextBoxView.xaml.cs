@@ -30,12 +30,8 @@ namespace Kistl.Client.WPF.View
             if (DesignerProperties.GetIsInDesignMode(this)) return;
             InitializeComponent();
 
-            txt.LostKeyboardFocus += new KeyboardFocusChangedEventHandler(txt_LostKeyboardFocus);
-        }
-
-        void txt_LostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
-        {
-            ViewModel.CanocalizeInput();
+            txt.GotKeyboardFocus += (s, e) => ViewModel.Focus();
+            txt.LostKeyboardFocus += (s, e) => ViewModel.Blur();
         }
 
         #region IHasViewModel<BaseValueViewModel> Members

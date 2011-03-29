@@ -74,6 +74,9 @@ namespace Kistl.Client.Presentables.ValueViewModels
     /// </summary>
     public interface IFormattedValueViewModel : IValueViewModel
     {
+        void Focus();
+        void Blur();
+
         string FormattedValue { get; set; }
     }
 

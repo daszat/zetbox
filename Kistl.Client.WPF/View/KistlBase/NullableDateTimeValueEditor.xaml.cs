@@ -32,12 +32,8 @@ namespace Kistl.Client.WPF.View
 
             InitializeComponent();
 
-            txtTime.LostKeyboardFocus += new KeyboardFocusChangedEventHandler(txtTime_LostKeyboardFocus);
-        }
-
-        void txtTime_LostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
-        {
-            ViewModel.CanocalizeInput();
+            txtTime.GotKeyboardFocus += (s, e) => ViewModel.Focus();
+            txtTime.LostKeyboardFocus += (s, e) => ViewModel.Blur();
         }
 
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
@@ -75,7 +71,7 @@ namespace Kistl.Client.WPF.View
 
         protected override FrameworkElement MainControl
         {
-            get 
+            get
             {
                 if (ViewModel == null) return null;
                 return ViewModel.DatePartVisible ? (FrameworkElement)txtDate : (FrameworkElement)txtTime;
