@@ -52,11 +52,7 @@
                         null,
                         obj => obj.<%= propertyName %>,
                         null), // lists are read-only properties
-<%
-            }
-            else if (property is CalculatedObjectReferenceProperty)
-            {
-%>
+<%          } else if (property is CalculatedObjectReferenceProperty) { %>
                     // property is CalculatedObjectReferenceProperty
                     new <%= propertyDescriptorName %><<%= implName %>, <%= property.ReferencedTypeAsCSharp() %>>(
                         lazyCtx,
@@ -65,10 +61,8 @@
                         null,
                         obj => obj.<%= propertyName %>,
                         null), // CalculatedObjectReferenceProperty is a read-only property
-<%
-            } else {
-			        var isReadonly = (property is ValueTypeProperty) && ((ValueTypeProperty)property).IsCalculated;
-%>
+<%          } else { %>
+<%              var isReadonly = (property is ValueTypeProperty) && ((ValueTypeProperty)property).IsCalculated; %>
                     // else
                     new <%= propertyDescriptorName %><<%= implName %>, <%= property.ReferencedTypeAsCSharp() %>>(
                         lazyCtx,
@@ -76,23 +70,17 @@
                         "<%= propertyName %>",
                         null,
                         obj => obj.<%= propertyName %>,
-						<% if(isReadonly) { %>
-						null), // calculated property
-						<% } else { %>
+<%              if(isReadonly) { %>
+                        null), // calculated property
+<%              } else { %>
                         (obj, val) => obj.<%= propertyName %> = val),
-						<% } %>
-<%
-            }
-        }
-
-
-        if ("Frozen".Equals(Settings["extrasuffix"]))
-        {
-%>
+<%              } %>
+<%          } %>
+<%      } %>
+<%      if ("Frozen".Equals(Settings["extrasuffix"])) %>
+<%      { %>
                     // skipping position columns for frozen context (not implemented)
-<%
-        } else {
-%>
+<%      } else { %>
                     // position columns
 <%
             foreach(var rel in rels.Where(r => r.GetRelationType() == RelationType.one_n))
@@ -147,7 +135,5 @@
             _InitializePropertyDescriptors(lazyCtx);
             props.AddRange(_properties);
         }
-<%
-    }
-%>
+<% } %>
         #endregion // <%= this.GetType() %>

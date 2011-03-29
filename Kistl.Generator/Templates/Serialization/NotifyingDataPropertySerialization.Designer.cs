@@ -71,8 +71,7 @@ this.WriteObjects("            XmlStreamer.FromStream(ref this.",  backingStoreN
 break;
         case SerializerDirection.Export:
 
-#line 43 "P:\Kistl\Kistl.Generator\Templates\Serialization\NotifyingDataPropertySerialization.cst"
-this.WriteObjects("    \r\n");
+#line 44 "P:\Kistl\Kistl.Generator\Templates\Serialization\NotifyingDataPropertySerialization.cst"
 this.WriteObjects("            if (modules.Contains(\"*\") || modules.Contains(\"",  xmlnamespace , "\")) XmlStreamer.ToStream(this.",  backingStoreName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
 #line 46 "P:\Kistl\Kistl.Generator\Templates\Serialization\NotifyingDataPropertySerialization.cst"
 break;

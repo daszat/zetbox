@@ -72,8 +72,7 @@ this.WriteObjects("            XmlStreamer.FromStreamConverter(v => this.",  bac
 break;
         case SerializerDirection.Export:
 
-#line 44 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Serialization\ProxySerialization.cst"
-this.WriteObjects("    \r\n");
+#line 45 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Serialization\ProxySerialization.cst"
 this.WriteObjects("            if (modules.Contains(\"*\") || modules.Contains(\"",  xmlnamespace , "\")) XmlStreamer.ToStream(this.",  backingStoreName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
 #line 47 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Serialization\ProxySerialization.cst"
 break;

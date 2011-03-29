@@ -1,6 +1,6 @@
-﻿<%@ CodeTemplate Language="C#" 
+﻿<%@ CodeTemplate Language="C#"
     Name="Serialization.SerializerTemplate"
-    ClassName="Kistl.Generator.Templates.Serialization.SerializerTemplate" 
+    ClassName="Kistl.Generator.Templates.Serialization.SerializerTemplate"
     Inherits="Kistl.Generator.ResourceTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Linq" %>
@@ -23,8 +23,8 @@
     string additionalArgs = String.Empty;
     string callBaseWithAdditionalArgs = String.Empty;
     SerializerType serType;
-    
-    switch(direction){
+
+    switch(direction) {
         case SerializerDirection.ToStream:
             argType = "System.IO.BinaryWriter";
             argName = "binStream";
@@ -68,20 +68,20 @@
         default:
             throw new ArgumentOutOfRangeException("direction");
     }
-    
+
 %>
         public <%= overrideAndCallBase ? "override" : "virtual" %> void <%= methodName %>(<%= argType %> <%= argName %><%= additionalArgs %>)
         {
-<%            
+<%
     if (overrideAndCallBase)
     {
-%>            
+%>
             base.<%= methodName %>(<%= argName %><%= callBaseWithAdditionalArgs %>);
 <%
     }
     else if (direction == SerializerDirection.Export && !String.IsNullOrEmpty(exportGuidBackingStore))
     {
-%>            
+%>
             xml.WriteAttributeString("ExportGuid", <%= exportGuidBackingStore %>.ToString());
 <%
     }

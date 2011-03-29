@@ -49,8 +49,8 @@ string methodName = direction.ToString();
     string additionalArgs = String.Empty;
     string callBaseWithAdditionalArgs = String.Empty;
     SerializerType serType;
-    
-    switch(direction){
+
+    switch(direction) {
         case SerializerDirection.ToStream:
             argType = "System.IO.BinaryWriter";
             argName = "binStream";
@@ -94,7 +94,7 @@ string methodName = direction.ToString();
         default:
             throw new ArgumentOutOfRangeException("direction");
     }
-    
+
 
 #line 73 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
 this.WriteObjects("        public ",  overrideAndCallBase ? "override" : "virtual" , " void ",  methodName , "(",  argType , " ",  argName , "",  additionalArgs , ")\r\n");
@@ -103,16 +103,14 @@ this.WriteObjects("        {\r\n");
 if (overrideAndCallBase)
     {
 
-#line 78 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
-this.WriteObjects("            \r\n");
+#line 79 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
 this.WriteObjects("            base.",  methodName , "(",  argName , "",  callBaseWithAdditionalArgs , ");\r\n");
 #line 81 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
 }
     else if (direction == SerializerDirection.Export && !String.IsNullOrEmpty(exportGuidBackingStore))
     {
 
-#line 84 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
-this.WriteObjects("            \r\n");
+#line 85 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
 this.WriteObjects("            xml.WriteAttributeString(\"ExportGuid\", ",  exportGuidBackingStore , ".ToString());\r\n");
 #line 87 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
 }

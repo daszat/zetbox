@@ -1,7 +1,7 @@
-﻿<%@ CodeTemplate Language="C#" 
-	Name="Serialization.SimpleFieldSerialization"
-	ClassName="Kistl.Generator.Templates.Serialization.SimpleFieldSerialization" 
-	Inherits="Kistl.Generator.ResourceTemplate" %>
+﻿<%@ CodeTemplate Language="C#"
+    Name="Serialization.SimpleFieldSerialization"
+    ClassName="Kistl.Generator.Templates.Serialization.SimpleFieldSerialization"
+    Inherits="Kistl.Generator.ResourceTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Collections.Generic" %>
 <%@ Import Namespace="Kistl.API" %>
@@ -16,36 +16,36 @@
 <%@ Parameter Name="xmlname" Type="string" %>
 <%@ Parameter Name="memberName" Type="string" %>
 <%
-	
-	switch(direction)
-	{
-		case SerializerDirection.ToStream:
+
+    switch(direction)
+    {
+        case SerializerDirection.ToStream:
 %>
             BinarySerializer.ToStream(this.<%= memberName %>, <%= streamName %>);
 <%
-			break;
-		case SerializerDirection.FromStream:
+            break;
+        case SerializerDirection.FromStream:
 %>
             BinarySerializer.FromStream(out this.<%= memberName %>, <%= streamName %>);
 <%
-			break;
-		case SerializerDirection.ToXmlStream:
+            break;
+        case SerializerDirection.ToXmlStream:
 %>
             XmlStreamer.ToStream(this.<%= memberName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
-<%		
+<%
             break;
-		case SerializerDirection.FromXmlStream:
-		case SerializerDirection.MergeImport:
+        case SerializerDirection.FromXmlStream:
+        case SerializerDirection.MergeImport:
 %>
             XmlStreamer.FromStream(ref this.<%= memberName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
-<%			
+<%
             break;
-		case SerializerDirection.Export:
-%>	
+        case SerializerDirection.Export:
+%>
             if (modules.Contains("*") || modules.Contains("<%= xmlnamespace %>")) XmlStreamer.ToStream(this.<%= memberName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
-<%			
-			break;
-		default:
-			throw new ArgumentOutOfRangeException("direction");
-	}
+<%
+            break;
+        default:
+            throw new ArgumentOutOfRangeException("direction");
+    }
 %>

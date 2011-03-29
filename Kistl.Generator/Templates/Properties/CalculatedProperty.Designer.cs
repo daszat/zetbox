@@ -36,20 +36,20 @@ namespace Kistl.Generator.Templates.Properties
         {
 #line 12 "P:\Kistl\Kistl.Generator\Templates\Properties\CalculatedProperty.cst"
 this.WriteObjects("        // BEGIN ",  this.GetType() , "\r\n");
-this.WriteObjects("		",  GetModifiers() , " ",  referencedType , " ",  propertyName , "\r\n");
-this.WriteObjects("		{\r\n");
-this.WriteObjects("			get\r\n");
-this.WriteObjects("			{\r\n");
-this.WriteObjects("				if (",  getterEventName , " == null)\r\n");
-this.WriteObjects("				{\r\n");
-this.WriteObjects("					throw new NotImplementedException(\"No handler registered on calculated property ",  className , ".",  propertyName , "\");\r\n");
-this.WriteObjects("				}\r\n");
+this.WriteObjects("        ",  GetModifiers() , " ",  referencedType , " ",  propertyName , "\r\n");
+this.WriteObjects("        {\r\n");
+this.WriteObjects("            get\r\n");
+this.WriteObjects("            {\r\n");
+this.WriteObjects("                if (",  getterEventName , " == null)\r\n");
+this.WriteObjects("                {\r\n");
+this.WriteObjects("                    throw new NotImplementedException(\"No handler registered on calculated property ",  className , ".",  propertyName , "\");\r\n");
+this.WriteObjects("                }\r\n");
 this.WriteObjects("\r\n");
-this.WriteObjects("				var e = new PropertyGetterEventArgs<",  referencedType , ">(default(",  referencedType , "));\r\n");
-this.WriteObjects("				",  getterEventName , "(this, e);\r\n");
-this.WriteObjects("				return e.Result;\r\n");
-this.WriteObjects("			}\r\n");
-this.WriteObjects("		}\r\n");
+this.WriteObjects("                var e = new PropertyGetterEventArgs<",  referencedType , ">(default(",  referencedType , "));\r\n");
+this.WriteObjects("                ",  getterEventName , "(this, e);\r\n");
+this.WriteObjects("                return e.Result;\r\n");
+this.WriteObjects("            }\r\n");
+this.WriteObjects("        }\r\n");
 this.WriteObjects("        // END ",  this.GetType() , "\r\n");
 
         }

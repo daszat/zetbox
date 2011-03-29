@@ -1,6 +1,6 @@
-﻿<%@ CodeTemplate Language="C#" 
+﻿<%@ CodeTemplate Language="C#"
     Name="Serialization.ProxySerialization"
-    ClassName="Kistl.DalProvider.NHibernate.Generator.Templates.Serialization.ProxySerialization" 
+    ClassName="Kistl.DalProvider.NHibernate.Generator.Templates.Serialization.ProxySerialization"
     Inherits="Kistl.Generator.ResourceTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Collections.Generic" %>
@@ -32,18 +32,18 @@
         case SerializerDirection.ToXmlStream:
 %>
             XmlStreamer.ToStream(this.<%= backingStoreName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
-<%        
+<%
             break;
         case SerializerDirection.FromXmlStream:
         case SerializerDirection.MergeImport:
 %>
             XmlStreamer.FromStreamConverter(v => this.<%= backingStoreName %> = v, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
-<%            
+<%
             break;
         case SerializerDirection.Export:
-%>    
+%>
             if (modules.Contains("*") || modules.Contains("<%= xmlnamespace %>")) XmlStreamer.ToStream(this.<%= backingStoreName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
-<%            
+<%
             break;
         default:
             throw new ArgumentOutOfRangeException("direction");

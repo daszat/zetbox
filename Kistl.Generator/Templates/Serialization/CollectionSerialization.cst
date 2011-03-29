@@ -1,7 +1,7 @@
-﻿<%@ CodeTemplate Language="C#" 
-	Name="ObjectClasses.CollectionSerialization"
-	ClassName="Kistl.Generator.Templates.Serialization.CollectionSerialization" 
-	Inherits="Kistl.Generator.ResourceTemplate" %>
+﻿<%@ CodeTemplate Language="C#"
+    Name="ObjectClasses.CollectionSerialization"
+    ClassName="Kistl.Generator.Templates.Serialization.CollectionSerialization"
+    Inherits="Kistl.Generator.ResourceTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Collections.Generic" %>
 <%@ Import Namespace="Kistl.API" %>
@@ -17,42 +17,42 @@
 <%@ Parameter Name="collectionName" Type="string" %>
 <%@ Parameter Name="orderByB" Type="bool" %>
 <%
-	if (ShouldSerialize())
-	{
-		switch(direction)
-		{
-			case SerializerDirection.ToStream:
+    if (ShouldSerialize())
+    {
+        switch(direction)
+        {
+            case SerializerDirection.ToStream:
 %>
             BinarySerializer.ToStreamCollectionEntries(this.<%= collectionName %>, <%= streamName %>);
 <%
-				break;
-			case SerializerDirection.FromStream:
+                break;
+            case SerializerDirection.FromStream:
 %>
             BinarySerializer.FromStreamCollectionEntries(this.<%= collectionName %>, <%= streamName %>);
 <%
-				break;
-			case SerializerDirection.ToXmlStream:
+                break;
+            case SerializerDirection.ToXmlStream:
 %>
             XmlStreamer.ToStreamCollectionEntries(this.<%= collectionName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
 <%
-				break;
-			case SerializerDirection.FromXmlStream:
+                break;
+            case SerializerDirection.FromXmlStream:
 %>
             XmlStreamer.FromStreamCollectionEntries(this.<%= collectionName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
 <%
-				break;
-			case SerializerDirection.MergeImport:
+                break;
+            case SerializerDirection.MergeImport:
 %>
             XmlStreamer.MergeImportCollectionEntries(this.<%= collectionName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
 <%
-				break;
-		case SerializerDirection.Export:			
-%>	
+                break;
+        case SerializerDirection.Export:
+%>
             if (modules.Contains("*") || modules.Contains("<%= xmlnamespace %>")) XmlStreamer.ExportCollectionEntries(this.<%= collectionName %><%= orderByB ? ".OrderBy(i => i.B)" : String.Empty %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
-<%			
-			break;
-			default:
-				throw new ArgumentOutOfRangeException("direction");
-		}
-	}
+<%
+            break;
+            default:
+                throw new ArgumentOutOfRangeException("direction");
+        }
+    }
 %>

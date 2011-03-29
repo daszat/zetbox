@@ -1,7 +1,7 @@
-﻿<%@ CodeTemplate Language="C#" 
-	Name="Serialization.ObjectReferencePropertySerialization"
-	ClassName="Kistl.Generator.Templates.Serialization.ObjectReferencePropertySerialization" 
-	Inherits="Kistl.Generator.ResourceTemplate" %>
+﻿<%@ CodeTemplate Language="C#"
+    Name="Serialization.ObjectReferencePropertySerialization"
+    ClassName="Kistl.Generator.Templates.Serialization.ObjectReferencePropertySerialization"
+    Inherits="Kistl.Generator.ResourceTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Collections.Generic" %>
 <%@ Import Namespace="Kistl.API" %>
@@ -18,39 +18,39 @@
 <%@ Parameter Name="targetMember" Type="string" %>
 <%@ Parameter Name="targetGuidMember" Type="string" %>
 <%
-	switch(direction)
-	{
-		case SerializerDirection.ToStream:
+    switch(direction)
+    {
+        case SerializerDirection.ToStream:
 %>
             BinarySerializer.ToStream(<%= sourceMember %> != null ? <%= sourceMember %>.ID : (int?)null, <%= streamName %>);
 <%
-			break;
-		case SerializerDirection.FromStream:
+            break;
+        case SerializerDirection.FromStream:
 %>
             BinarySerializer.FromStream(out this.<%= targetMember %>, <%= streamName %>);
 <%
-			break;
-		case SerializerDirection.ToXmlStream:
+            break;
+        case SerializerDirection.ToXmlStream:
 %>
             XmlStreamer.ToStream(<%= sourceMember %> != null ? <%= sourceMember %>.ID : (int?)null, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
-<%			
+<%
             break;
-		case SerializerDirection.FromXmlStream:
+        case SerializerDirection.FromXmlStream:
 %>
             XmlStreamer.FromStream(ref this.<%= targetMember %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
 <%
             break;
-		case SerializerDirection.Export:
+        case SerializerDirection.Export:
 %>
             if (modules.Contains("*") || modules.Contains("<%= xmlnamespace %>")) XmlStreamer.ToStream(<%= sourceMember %> != null ? <%= sourceMember %>.ExportGuid : (Guid?)null, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
-<%			
+<%
             break;
-		case SerializerDirection.MergeImport: 
+        case SerializerDirection.MergeImport:
 %>
             XmlStreamer.FromStream(ref this.<%= targetGuidMember %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
 <%
             break;
-		default:
-			throw new ArgumentOutOfRangeException("direction");
-	}
+        default:
+            throw new ArgumentOutOfRangeException("direction");
+    }
 %>

@@ -1,7 +1,7 @@
-﻿<%@ CodeTemplate Language="C#" 
-	Name="Serialization.EnumBinarySerialization"
-	ClassName="Kistl.Generator.Templates.Serialization.EnumBinarySerialization" 
-	Inherits="Kistl.Generator.ResourceTemplate" %>
+﻿<%@ CodeTemplate Language="C#"
+    Name="Serialization.EnumBinarySerialization"
+    ClassName="Kistl.Generator.Templates.Serialization.EnumBinarySerialization"
+    Inherits="Kistl.Generator.ResourceTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Collections.Generic" %>
 <%@ Import Namespace="Kistl.API" %>
@@ -18,49 +18,49 @@
 <%@ Parameter Name="backingStoreName" Type="string" %>
 <%@ Parameter Name="enumerationType" Type="string" %>
 <%
-	// always use the interface to get the "right" property
-	// string interfaceName = prop.ObjectClass.Name;
+    // always use the interface to get the "right" property
+    // string interfaceName = prop.ObjectClass.Name;
     // string memberName = prop.Name;
     // string enumName =  prop.Enumeration.Module.Namespace + "." +  prop.Enumeration.Name;
     // if (prop.IsNullable()) enumName += "?";
-	// string methodName = direction.ToString();
-	
-	////
-	////  This class always serializes as int? to avoid complicating the code
-	////
-	
-	switch(direction){
-		case SerializerDirection.ToStream:
+    // string methodName = direction.ToString();
+
+    ////
+    ////  This class always serializes as int? to avoid complicating the code
+    ////
+
+    switch(direction){
+        case SerializerDirection.ToStream:
 %>
             BinarySerializer.ToStream((int?)<%= backingStoreName %>, <%= streamName %>);
 <%
-			break;
-		case SerializerDirection.FromStream:
+            break;
+        case SerializerDirection.FromStream:
 %>
-			{
-				int? baseValue;
-				BinarySerializer.FromStream(out baseValue, <%= streamName %>);
-				<%= backingStoreName %> = (<%= enumerationType %>)baseValue;
-			}
+            {
+                int? baseValue;
+                BinarySerializer.FromStream(out baseValue, <%= streamName %>);
+                <%= backingStoreName %> = (<%= enumerationType %>)baseValue;
+            }
 <%
-			break;
-		case SerializerDirection.ToXmlStream:
+            break;
+        case SerializerDirection.ToXmlStream:
 %>
             XmlStreamer.ToStream((int?)<%= backingStoreName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
 <%
             break;
-		case SerializerDirection.FromXmlStream:
-		case SerializerDirection.MergeImport:
+        case SerializerDirection.FromXmlStream:
+        case SerializerDirection.MergeImport:
 %>
             XmlStreamer.FromStreamConverter(v => <%= backingStoreName %> = (<%= enumerationType %>)v, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
 <%
             break;
-		case SerializerDirection.Export:
+        case SerializerDirection.Export:
 %>
             if (modules.Contains("*") || modules.Contains("<%= xmlnamespace %>")) XmlStreamer.ToStream((int?)<%= backingStoreName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
 <%
             break;
-		default:
-			throw new ArgumentOutOfRangeException("direction");
-	}
+        default:
+            throw new ArgumentOutOfRangeException("direction");
+    }
 %>

@@ -1,7 +1,7 @@
-﻿<%@ CodeTemplate Language="C#" 
-	Name="Properties.CalculatedProperty"
-	ClassName="Kistl.Generator.Templates.Properties.CalculatedProperty" 
-	Inherits="Kistl.Generator.MemberTemplate" %>
+﻿<%@ CodeTemplate Language="C#"
+    Name="Properties.CalculatedProperty"
+    ClassName="Kistl.Generator.Templates.Properties.CalculatedProperty"
+    Inherits="Kistl.Generator.MemberTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="Kistl.API" %>
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
@@ -10,18 +10,18 @@
 <%@ Parameter Name="propertyName" Type="String" %>
 <%@ Parameter Name="getterEventName" Type="String" %>
         // BEGIN <%= this.GetType() %>
-		<%= GetModifiers() %> <%= referencedType %> <%= propertyName %>
-		{
-			get
-			{
-				if (<%= getterEventName %> == null)
-				{
-					throw new NotImplementedException("No handler registered on calculated property <%= className %>.<%= propertyName %>");
-				}
+        <%= GetModifiers() %> <%= referencedType %> <%= propertyName %>
+        {
+            get
+            {
+                if (<%= getterEventName %> == null)
+                {
+                    throw new NotImplementedException("No handler registered on calculated property <%= className %>.<%= propertyName %>");
+                }
 
-				var e = new PropertyGetterEventArgs<<%= referencedType %>>(default(<%= referencedType %>));
-				<%= getterEventName %>(this, e);
-				return e.Result;
-			}
-		}
+                var e = new PropertyGetterEventArgs<<%= referencedType %>>(default(<%= referencedType %>));
+                <%= getterEventName %>(this, e);
+                return e.Result;
+            }
+        }
         // END <%= this.GetType() %>

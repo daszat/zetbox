@@ -1,6 +1,6 @@
-﻿<%@ CodeTemplate Language="C#" 
+﻿<%@ CodeTemplate Language="C#"
     Name="Serialization.NotifyingDataPropertySerialization"
-    ClassName="Kistl.Generator.Templates.Serialization.NotifyingDataPropertySerialization" 
+    ClassName="Kistl.Generator.Templates.Serialization.NotifyingDataPropertySerialization"
     Inherits="Kistl.Generator.ResourceTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Collections.Generic" %>
@@ -31,18 +31,18 @@
         case SerializerDirection.ToXmlStream:
 %>
             XmlStreamer.ToStream(this.<%= backingStoreName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
-<%        
+<%
             break;
         case SerializerDirection.FromXmlStream:
         case SerializerDirection.MergeImport:
 %>
             XmlStreamer.FromStream(ref this.<%= backingStoreName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
-<%            
+<%
             break;
         case SerializerDirection.Export:
-%>    
+%>
             if (modules.Contains("*") || modules.Contains("<%= xmlnamespace %>")) XmlStreamer.ToStream(this.<%= backingStoreName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
-<%            
+<%
             break;
         default:
             throw new ArgumentOutOfRangeException("direction");
