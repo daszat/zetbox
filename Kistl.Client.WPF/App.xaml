@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:commands="clr-namespace:Kistl.Client.WPF.Commands;assembly=Kistl.Client.WPF.Toolkit"
              xmlns:converter="clr-namespace:Kistl.Client.WPF.Converter;assembly=Kistl.Client.WPF.Toolkit"
+             xmlns:tk="clr-namespace:Kistl.Client.WPF.Toolkit;assembly=Kistl.Client.WPF.Toolkit"
              Startup="Application_Startup"
              Exit="Application_Exit"
              ShutdownMode="OnExplicitShutdown" 
@@ -20,6 +21,7 @@
             <converter:ImageConverter x:Key="ImageConverter" />
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
             <commands:Converter x:Key="CommandConverter" />
+            <tk:TypeNameTemplateSelector x:Key="TypeNameTemplateSelector" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>
