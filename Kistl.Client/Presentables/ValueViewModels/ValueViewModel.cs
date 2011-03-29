@@ -293,7 +293,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                     _partialUserInput = FormatValue(value);
                     _partialUserInputError = null;
                 }
-                OnValidInput(value);
+                OnValidInput(_partialUserInput, value);
             }
         }
 
@@ -371,17 +371,15 @@ namespace Kistl.Client.Presentables.ValueViewModels
             {
                 if (_partialUserInput != value)
                 {
-                    _partialUserInput = value;
                     var oldPartialUserInputError = _partialUserInputError;
-                    var parseResult = ParseValue(_partialUserInput);
-                    _partialUserInputError = parseResult.Error;
+                    var parseResult = ParseValue(value);
                     if (parseResult.HasErrors)
                     {
-                        OnPartialInput(_partialUserInput);
+                        OnPartialInput(value, parseResult.Error);
                     }
                     else
                     {
-                        OnValidInput(parseResult.Value);
+                        OnValidInput(value, parseResult.Value);
                     }
 
                     if (_partialUserInputError != oldPartialUserInputError)
@@ -460,18 +458,22 @@ namespace Kistl.Client.Presentables.ValueViewModels
         /// This method is called everytime valid input is received and handles 
         /// the VI event.
         /// </summary>
-        protected virtual void OnValidInput(TValue value)
+        protected virtual void OnValidInput(string formattedValue, TValue value)
         {
             switch (State)
             {
                 case ValueViewModelState.Blurred_UnmodifiedValue:
                     State = ValueViewModelState.ImplicitFocus_WritingModel;
+                    _partialUserInput = null;
+                    _partialUserInputError = null;
                     SetValueToModel(value);
                     NotifyValueChanged();
                     State = ValueViewModelState.Blurred_UnmodifiedValue;
                     break;
                 case ValueViewModelState.ImplicitFocus_PartialUserInput:
                     State = ValueViewModelState.ImplicitFocus_WritingModel;
+                    _partialUserInput = null;
+                    _partialUserInputError = null;
                     SetValueToModel(value);
                     NotifyValueChanged();
                     State = ValueViewModelState.Blurred_UnmodifiedValue;
@@ -479,6 +481,8 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 case ValueViewModelState.Focused_PartialUserInput:
                 case ValueViewModelState.Focused_UnmodifiedValue:
                     State = ValueViewModelState.Focused_WritingModel;
+                    _partialUserInput = formattedValue;
+                    _partialUserInputError = null;
                     SetValueToModel(value);
                     NotifyValueChanged();
                     State = ValueViewModelState.Focused_UnmodifiedValue;
@@ -493,22 +497,27 @@ namespace Kistl.Client.Presentables.ValueViewModels
         /// This method is called everytime partial input is received and handles 
         /// the PI event.
         /// </summary>
-        protected virtual void OnPartialInput(string partialInput)
+        protected virtual void OnPartialInput(string partialInput, string errorMessage)
         {
             switch (State)
             {
                 case ValueViewModelState.Blurred_UnmodifiedValue:
                 case ValueViewModelState.ImplicitFocus_PartialUserInput:
                     _partialUserInput = partialInput;
+                    _partialUserInputError = errorMessage;
                     OnPropertyChanged("FormattedValue");
                     State = ValueViewModelState.ImplicitFocus_PartialUserInput;
                     break;
                 case ValueViewModelState.Focused_UnmodifiedValue:
                 case ValueViewModelState.Focused_PartialUserInput:
                     _partialUserInput = partialInput;
+                    _partialUserInputError = errorMessage;
                     OnPropertyChanged("FormattedValue");
                     State = ValueViewModelState.Focused_PartialUserInput;
                     break;
+                case ValueViewModelState.Blurred_PartialUserInput:
+                    // TODO: should start implicit focus
+                    throw new InvalidOperationException("Rejecting new PartialInput while being blurred");
                 default:
                     throw new InvalidOperationException(string.Format("Unexpected State {0}", State));
             }
