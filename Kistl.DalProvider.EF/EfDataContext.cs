@@ -490,8 +490,13 @@ namespace Kistl.DalProvider.Ef
             CheckDisposed();
             try
             {
-                return AttachedObjects.OfType<T>().SingleOrDefault(o => o.ID == ID)
+                var result = AttachedObjects.OfType<T>().SingleOrDefault(o => o.ID == ID)
                     ?? GetQuery<T>().First(o => o.ID == ID);
+                // Some objects are loaded by EF another way, I dind't find.
+                // So the objects was not attached to this context
+                // Fix this.
+                if (result.Context == null) result.AttachToContext(this);
+                return result;
             }
             catch (InvalidOperationException)
             {
@@ -548,8 +553,13 @@ namespace Kistl.DalProvider.Ef
             CheckDisposed();
             try
             {
-                return AttachedObjects.OfType<T>().SingleOrDefault(o => o.ID == ID)
+                var result = AttachedObjects.OfType<T>().SingleOrDefault(o => o.ID == ID)
                     ?? GetPersistenceObjectQuery<T>().First(o => o.ID == ID);
+                // Some objects are loaded by EF another way, I dind't find.
+                // So the objects was not attached to this context
+                // Fix this.
+                if (result.Context == null) result.AttachToContext(this);
+                return result;
             }
             catch (InvalidOperationException)
             {
@@ -606,9 +616,10 @@ namespace Kistl.DalProvider.Ef
                 var tmp = GetPersistenceObjectQuery<Kistl.App.Base.ObjectClass>().FirstOrDefault();
                 string sql = string.Format("SELECT VALUE e FROM Entities.[{0}] AS e WHERE e.[ExportGuid] = @guid", GetEntityName(iftFactory(typeof(T))));
                 result = _ctx.CreateQuery<T>(sql, new System.Data.Objects.ObjectParameter("guid", exportGuid)).FirstOrDefault();
-                if (result != null)
-                    result.AttachToContext(this);
             }
+
+            if (result != null && result.Context == null)
+                result.AttachToContext(this);
             return result;
         }
 
