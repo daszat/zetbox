@@ -13,6 +13,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
     using Kistl.App.GUI;
     using Kistl.Client.Models;
     using Kistl.Client.Presentables.GUI;
+    using Kistl.API.Utils;
 
     public enum ValueViewModelState
     {
@@ -405,6 +406,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
         protected virtual void OnStateChanged(ValueViewModelState oldState, ValueViewModelState newState)
         {
+            Logging.Client.DebugFormat("State Change of {0} from {1} -> {2}", this.Name, oldState, newState);
             if (StateChanged != null && oldState != newState)
             {
                 StateChanged(this, new StateChangedEventArgs(oldState, newState));
@@ -528,8 +530,14 @@ namespace Kistl.Client.Presentables.ValueViewModels
                     _partialUserInput = FormatValue(this.GetValueFromModel());
                     State = ValueViewModelState.Focused_UnmodifiedValue;
                     break;
+                case ValueViewModelState.ImplicitFocus_PartialUserInput: // confused with focus
+                case ValueViewModelState.Focused_PartialUserInput: // confused with focus
                 case ValueViewModelState.Blurred_PartialUserInput:
                     State = ValueViewModelState.Focused_PartialUserInput;
+                    break;
+                case ValueViewModelState.Focused_UnmodifiedValue:
+                    // Do nothing and stay
+                    // confused with focus
                     break;
                 default:
                     throw new InvalidOperationException(string.Format("Unexpected State {0}", State));
@@ -549,8 +557,13 @@ namespace Kistl.Client.Presentables.ValueViewModels
                     OnPropertyChanged("FormattedValue");
                     State = ValueViewModelState.Blurred_UnmodifiedValue;
                     break;
+                case ValueViewModelState.Blurred_PartialUserInput: // confused with focus
                 case ValueViewModelState.Focused_PartialUserInput:
                     State = ValueViewModelState.Blurred_PartialUserInput;
+                    break;
+                case ValueViewModelState.Blurred_UnmodifiedValue:
+                    // Do nothing and stay
+                    // confused with focus
                     break;
                 default:
                     throw new InvalidOperationException(string.Format("Unexpected State {0}", State));
