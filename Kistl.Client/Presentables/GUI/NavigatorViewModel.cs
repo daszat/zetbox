@@ -194,5 +194,12 @@ namespace Kistl.Client.Presentables.GUI
             CurrentScreen = screen;
         }
         #endregion
+
+        #region Closing
+        public override bool CanClose()
+        {
+            return ViewModelFactory.GetDecisionFromUser(NavigatorViewModelResources.CanClose, NavigatorViewModelResources.CanClose_Title);
+        }
+        #endregion
     }
 }

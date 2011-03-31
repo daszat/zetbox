@@ -79,6 +79,24 @@ namespace Kistl.Client.Presentables.GUI {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Do you want to close this Application?.
+        /// </summary>
+        internal static string CanClose {
+            get {
+                return ResourceManager.GetString("CanClose", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Close Application.
+        /// </summary>
+        internal static string CanClose_Title {
+            get {
+                return ResourceManager.GetString("CanClose_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Home.
         /// </summary>
         internal static string HomeCommand_Name {
