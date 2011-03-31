@@ -1060,6 +1060,13 @@ namespace Kistl.Client.Presentables.ValueViewModels
             }
         }
 
+        protected override void NotifyValueChanged()
+        {
+            base.NotifyValueChanged();
+            OnPropertyChanged("DatePart");
+            OnPropertyChanged("TimePart");
+        }
+
         public override string Error
         {
             get
@@ -1117,7 +1124,6 @@ namespace Kistl.Client.Presentables.ValueViewModels
                     _year = value;
                     base.Value = GetValueFromComponents();
                     OnPropertyChanged("Year");
-                    OnPropertyChanged("Value");
                 }
             }
         }
@@ -1137,7 +1143,6 @@ namespace Kistl.Client.Presentables.ValueViewModels
                     _month = value;
                     base.Value = GetValueFromComponents();
                     OnPropertyChanged("Month");
-                    OnPropertyChanged("Value");
                 }
             }
         }
@@ -1196,6 +1201,13 @@ namespace Kistl.Client.Presentables.ValueViewModels
         {
             base.SetValueToModel(value);
             ResetYearMonthCache(value);
+            OnPropertyChanged("Year");
+            OnPropertyChanged("Month");
+        }
+
+        protected override void NotifyValueChanged()
+        {
+            base.NotifyValueChanged();
             OnPropertyChanged("Year");
             OnPropertyChanged("Month");
         }
