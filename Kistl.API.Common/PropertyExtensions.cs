@@ -17,7 +17,7 @@ namespace Kistl.App.Extensions
         {
             if (prop == null) { throw new ArgumentNullException("prop"); }
             if (!(prop is ValueTypeProperty || prop is CompoundObjectProperty)) throw new NotSupportedException("Property must be either a ValueTypeProperty or StructProperty");
-            if (!(prop is ValueTypeProperty ? ((ValueTypeProperty)prop).IsList : ((CompoundObjectProperty)prop).IsList)) 
+            if (!(prop is ValueTypeProperty ? ((ValueTypeProperty)prop).IsList : ((CompoundObjectProperty)prop).IsList))
                 throw new NotSupportedException("GetAssociationName is only valid for Lists");
             return String.Format("FK_{0}_{1}_{2}", prop.ObjectClass.Name, "value", prop.Name);
         }
@@ -25,19 +25,19 @@ namespace Kistl.App.Extensions
         public static bool IsReadOnly(this Property p)
         {
             if (p == null) { throw new ArgumentNullException("p"); }
-            return p.Constraints.OfType<ReadOnlyConstraint>().Count() > 0;
+            return p.IsCalculated() || p.Constraints.OfType<ReadOnlyConstraint>().Count() > 0;
         }
 
         public static bool IsViewReadOnly(this Property p)
         {
             if (p == null) { throw new ArgumentNullException("p"); }
-            return p.Constraints.OfType<ViewReadOnlyConstraint>().Count() > 0;
+            return p.IsCalculated() || p.Constraints.OfType<ViewReadOnlyConstraint>().Count() > 0;
         }
 
         public static bool IsClientReadOnly(this Property p)
         {
             if (p == null) { throw new ArgumentNullException("p"); }
-            return p.Constraints.OfType<ClientReadOnlyConstraint>().Count() > 0;
+            return p.IsCalculated() || p.Constraints.OfType<ClientReadOnlyConstraint>().Count() > 0;
         }
 
         public static bool IsInitOnly(this Property p)
@@ -67,6 +67,11 @@ namespace Kistl.App.Extensions
             var otherEnd = rel.GetOtherEnd(relEnd);
 
             return otherEnd.IsNullable();
+        }
+
+        public static bool IsCalculated(this Property p)
+        {
+            return p is ValueTypeProperty && ((ValueTypeProperty)p).IsCalculated;
         }
 
         public static bool HasLengthConstraint(this StringProperty prop)
