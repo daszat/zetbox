@@ -406,7 +406,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
         protected virtual void OnStateChanged(ValueViewModelState oldState, ValueViewModelState newState)
         {
-            Logging.Client.DebugFormat("State Change of {0} from {1} -> {2}", this.Name, oldState, newState);
+            Logging.Client.DebugFormat("State Change of {0}.{1} from {2} -> {3}", this.GetType().Name, this.Name, oldState, newState);
             if (StateChanged != null && oldState != newState)
             {
                 StateChanged(this, new StateChangedEventArgs(oldState, newState));
@@ -424,6 +424,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
         /// </summary>
         protected virtual void OnModelChanged()
         {
+            Logging.Client.DebugFormat("Model Change on {0}.{1}", this.GetType().Name, this.Name);
             switch (State)
             {
                 case ValueViewModelState.Blurred_UnmodifiedValue:
@@ -454,6 +455,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
         /// </summary>
         protected virtual void OnValidInput(string formattedValue, TValue value)
         {
+            Logging.Client.DebugFormat("Received valid input [{0}] interpreted as [{1}]", formattedValue, value);
             switch (State)
             {
                 case ValueViewModelState.Blurred_UnmodifiedValue:
@@ -493,6 +495,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
         /// </summary>
         protected virtual void OnPartialInput(string partialInput, string errorMessage)
         {
+            Logging.Client.DebugFormat("Received partial input [{0}]; error message is [{1}]", partialInput, errorMessage);
             switch (State)
             {
                 case ValueViewModelState.Blurred_UnmodifiedValue:
@@ -554,8 +557,8 @@ namespace Kistl.Client.Presentables.ValueViewModels
             switch (State)
             {
                 case ValueViewModelState.Focused_UnmodifiedValue:
-                    OnPropertyChanged("FormattedValue");
                     State = ValueViewModelState.Blurred_UnmodifiedValue;
+                    OnPropertyChanged("FormattedValue");
                     break;
                 case ValueViewModelState.Blurred_PartialUserInput: // confused with focus
                 case ValueViewModelState.Focused_PartialUserInput:
