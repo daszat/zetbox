@@ -4,6 +4,7 @@ namespace Kistl.Client
     using System.Collections.Generic;
     using System.Linq;
     using System.Net;
+    using System.Security.Principal;
     using System.Text;
     using Autofac;
     using Kistl.API;
@@ -14,7 +15,6 @@ namespace Kistl.Client
     using Kistl.Client.Models;
     using Kistl.Client.Presentables;
     using Kistl.Client.Presentables.ValueViewModels;
-    using System.Security.Principal;
 
     public class DefaultCredentialsResolver : ICredentialsResolver
     {
@@ -81,7 +81,7 @@ namespace Kistl.Client
             if (vmf == null) throw new ArgumentNullException("vmf");
             if (ctxFactory == null) throw new ArgumentNullException("ctxFactory");
             if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
-            
+
             _vmf = vmf;
             _ctxFactory = ctxFactory;
             _frozenCtx = frozenCtx;
@@ -120,7 +120,7 @@ namespace Kistl.Client
                             this.Password = pwd.Value;
                         });
 
-                        _vmf.ShowDialog(dlg);
+                        _vmf.WithoutWaitDialog(() => _vmf.ShowDialog(dlg));
                     }
                 }
             }

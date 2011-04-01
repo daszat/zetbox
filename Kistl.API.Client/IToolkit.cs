@@ -14,6 +14,7 @@ namespace Kistl.API.Client
         bool GetDecisionFromUser(string message, string caption);
         void ShowMessage(string message, string caption);
         void WithWaitDialog(Action task);
+        void WithoutWaitDialog(Action task);
 
         Toolkit Toolkit { get; }
     }
@@ -51,10 +52,15 @@ namespace Kistl.API.Client
                 task();
         }
 
+        public void WithoutWaitDialog(Action task)
+        {
+            if (task != null)
+                task();
+        }
+
         public Toolkit Toolkit
         {
             get { return Toolkit.TEST; }
         }
     }
-
 }
