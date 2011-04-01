@@ -29,6 +29,7 @@ namespace Kistl.Client.Tests.ValueViewModels.DateTimes
             valueModelMock.SetupGet(o => o.Error).Returns(String.Empty);
             valueModelMock.SetupGet(o => o.DateTimeStyle).Returns(DateTimeStyles.DateTime);
             valueModelMock.SetupProperty(o => o.Value);
+            valueModelMock.SetupGet(o => o.Label).Returns("ValueLabel");
 
             obj = new NullableDateTimePropertyViewModel(
                 scope.Resolve<IViewModelDependencies>(), 

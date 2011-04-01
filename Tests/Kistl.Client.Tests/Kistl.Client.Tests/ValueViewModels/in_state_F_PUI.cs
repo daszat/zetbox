@@ -68,6 +68,7 @@ namespace Kistl.Client.Tests.ValueViewModels
         }
 
         [TestFixture]
+        [Ignore("TODO: Fix Case 2371")]
         public class when_focusing
             : in_state_F_PUI
         {

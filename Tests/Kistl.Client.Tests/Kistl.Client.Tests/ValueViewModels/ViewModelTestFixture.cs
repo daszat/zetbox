@@ -91,6 +91,7 @@ namespace Kistl.Client.Tests.ValueViewModels
             // ignore Error handling for now
             valueModelMock.SetupGet<string>(o => o.Error).Returns(String.Empty);
             valueModelMock.SetupProperty(o => o.Value);
+            valueModelMock.SetupGet(o => o.Label).Returns("ValueLabel");
             obj = new TestValueViewModel(scope.Resolve<IViewModelDependencies>(), scope.Resolve<BaseMemoryContext>(), valueModelMock.Object);
         }
     }

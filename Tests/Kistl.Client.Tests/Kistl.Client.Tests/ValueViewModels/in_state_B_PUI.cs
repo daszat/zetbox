@@ -72,6 +72,7 @@ namespace Kistl.Client.Tests.ValueViewModels
         }
 
         [TestFixture]
+        [Ignore("TODO: Fix Case 2371")]
         public class when_blurring
             : in_state_B_PUI
         {

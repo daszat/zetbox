@@ -27,6 +27,7 @@ namespace Kistl.Client.Tests.ValueViewModels
             obj.Focus();
         }
 
+        [Ignore("TODO: Fix Case 2371")]
         [TestFixture]
         public class when_focusing
             : in_state_F_UV

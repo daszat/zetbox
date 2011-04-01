@@ -50,6 +50,7 @@ namespace Kistl.Client.Tests.ValueViewModels
                 valueModelMock.Verify();
             }
 
+            [Ignore("TODO: Fix Case 2371")]
             [Test]
             public void should_reject_Focus()
             {
