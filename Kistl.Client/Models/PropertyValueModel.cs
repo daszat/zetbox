@@ -808,7 +808,7 @@ namespace Kistl.Client.Models
         #endregion
     }
 
-    public class DateTimePropertyValueModel : NullableStructPropertyValueModel<DateTime>, IDateTimeValueModel
+    public class DateTimePropertyValueModel : NullableStructPropertyValueModel<DateTime>, IValueModel<TimeSpan?>, IDateTimeValueModel
     {
         protected readonly DateTimeProperty dtProp;
 
@@ -827,5 +827,34 @@ namespace Kistl.Client.Models
         }
 
         #endregion
+
+        TimeSpan? IValueModel<TimeSpan?>.Value
+        {
+            get
+            {
+                return this.Value != null ? this.Value.Value.TimeOfDay : (TimeSpan?)null;
+            }
+            set
+            {
+                if (value == null && this.Value == null)
+                {
+                    // Do nothing
+                }
+                else if (value == null && this.Value != null)
+                {
+                    // Preserve date
+                    this.Value = this.Value.Value.Date;
+                }
+                else if (value != null && Value != null)
+                {
+                    // Preserve date
+                    this.Value = this.Value.Value.Date.Add(value.Value);
+                }
+                else //if (value != null && Value == null)
+                {
+                    this.Value = DateTime.MinValue.Add(value.Value);
+                }
+            }
+        }
     }
 }

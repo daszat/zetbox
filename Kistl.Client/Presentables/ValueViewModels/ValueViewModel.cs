@@ -82,7 +82,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
         protected virtual void NotifyValueChanged()
         {
             OnPropertyChanged("Value");
-            OnPropertyChanged("FormattedValue");
+            OnFormattedValueChanged();
             OnPropertyChanged("IsNull");
             OnPropertyChanged("HasValue");
             OnPropertyChanged("Name");
@@ -170,6 +170,11 @@ namespace Kistl.Client.Presentables.ValueViewModels
         {
             get;
             set;
+        }
+
+        protected virtual void OnFormattedValueChanged()
+        {
+            OnPropertyChanged("FormattedValue");
         }
 
         #endregion
@@ -380,7 +385,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                         OnPropertyChanged("Error");
                     }
                     // implicit via state machine
-                    //OnPropertyChanged("FormattedValue");
+                    //OnFormattedValueChanged("FormattedValue");
                 }
             }
         }
@@ -502,14 +507,14 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 case ValueViewModelState.ImplicitFocus_PartialUserInput:
                     _partialUserInput = partialInput;
                     _partialUserInputError = errorMessage;
-                    OnPropertyChanged("FormattedValue");
+                    OnFormattedValueChanged();
                     State = ValueViewModelState.ImplicitFocus_PartialUserInput;
                     break;
                 case ValueViewModelState.Focused_UnmodifiedValue:
                 case ValueViewModelState.Focused_PartialUserInput:
                     _partialUserInput = partialInput;
                     _partialUserInputError = errorMessage;
-                    OnPropertyChanged("FormattedValue");
+                    OnFormattedValueChanged();
                     State = ValueViewModelState.Focused_PartialUserInput;
                     break;
                 case ValueViewModelState.Blurred_PartialUserInput:
@@ -558,7 +563,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             {
                 case ValueViewModelState.Focused_UnmodifiedValue:
                     State = ValueViewModelState.Blurred_UnmodifiedValue;
-                    OnPropertyChanged("FormattedValue");
+                    OnFormattedValueChanged();
                     break;
                 case ValueViewModelState.Blurred_PartialUserInput: // confused with focus
                 case ValueViewModelState.Focused_PartialUserInput:
@@ -880,15 +885,60 @@ namespace Kistl.Client.Presentables.ValueViewModels
     public class NullableDateTimePropertyViewModel
         : NullableStructValueViewModel<DateTime>
     {
+        private class NullableTimePartPropertyViewModel : NullableStructValueViewModel<TimeSpan>
+        {
+            public new delegate NullableTimePartPropertyViewModel Factory(IKistlContext dataCtx, IValueModel mdl);
+
+            public NullableTimePartPropertyViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, IValueModel mdl)
+                : base(dependencies, dataCtx, mdl)
+            {
+            }
+            
+            protected override string FormatValue(TimeSpan? value)
+            {
+                return value == null ? String.Empty : String.Format("{0:00}:{1:00}", value.Value.Hours, value.Value.Minutes);
+            }
+
+            protected override ParseResult<TimeSpan?> ParseValue(string str)
+            {
+                ParseResult<TimeSpan?> result = new ParseResult<TimeSpan?>();
+                MatchCollection matches;
+                if (null != (matches = Regex.Matches(str, @"^(\d?\d):?(\d\d)$")))
+                {
+                    int hours, minutes;
+                    if (matches.Count == 1
+                        && matches[0].Groups.Count == 3
+                        && Int32.TryParse(matches[0].Groups[1].Captures[0].Value, out hours)
+                        && Int32.TryParse(matches[0].Groups[2].Captures[0].Value, out minutes)
+                        && hours >= 0 && hours < 24
+                        && minutes >= 0 && minutes < 60)
+                    {
+                        result.Value = new TimeSpan(hours, minutes, 0);
+                    }
+                    else
+                    {
+                        result.Error = string.Format("Fehler bei Zeiteingabe hh:mm : {0}", str);
+                    }
+                }
+                else
+                {
+                    result.Error = string.Format("Fehler bei Zeiteingabe hh:mm : {0}", str);
+                }
+                return result;
+            }
+        }
+
         public new delegate NullableDateTimePropertyViewModel Factory(IKistlContext dataCtx, IValueModel mdl);
 
         public NullableDateTimePropertyViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, IValueModel mdl)
             : base(dependencies, dataCtx, mdl)
         {
             DateTimeModel = (IDateTimeValueModel)mdl;
+            _timePartViewModel = ViewModelFactory.CreateViewModel<NullableTimePartPropertyViewModel.Factory>().Invoke(DataContext, mdl);
         }
 
         public IDateTimeValueModel DateTimeModel { get; private set; }
+        private readonly NullableTimePartPropertyViewModel _timePartViewModel;
 
         protected override string FormatValue(DateTime? value)
         {
@@ -955,92 +1005,25 @@ namespace Kistl.Client.Presentables.ValueViewModels
         {
             get
             {
-                return Value != null ? Value.Value.TimeOfDay : (TimeSpan?)null;
+                return _timePartViewModel.Value;
             }
             set
             {
-                if (value == null && Value == null)
-                {
-                    // Do nothing
-                }
-                else if (value == null && Value != null && DatePartVisible)
-                {
-                    // Preserve date
-                    Value = Value.Value.Date;
-                }
-                else if (value != null && Value != null && DatePartVisible)
-                {
-                    // Preserve date
-                    Value = Value.Value.Date.Add(value.Value);
-                }
-                else //if (value != null && Value == null)
-                {
-                    Value = DateTime.MinValue.Add(value.Value);
-                }
+                _timePartViewModel.Value = value;
                 OnPropertyChanged("TimePart");
             }
         }
 
-        private string _timePartInput;
-        private string _timePartError;
         public string TimePartString
         {
             get
             {
-                if (_timePartInput == null)
-                {
-                    _timePartInput = TimePart == null ? String.Empty : String.Format("{0:00}:{1:00}", TimePart.Value.Hours, TimePart.Value.Minutes);
-                }
-                return _timePartInput;
+                return _timePartViewModel.FormattedValue;
             }
             set
             {
-                if (value == _timePartInput)
-                {
-                    return;
-                }
-
-                if (value == null)
-                {
-                    _timePartInput = String.Empty;
-                    OnPropertyChanged("TimePartString");
-
-                    _timePartError = null;
-                    OnPropertyChanged("Error");
-
-                    TimePart = TimeSpan.Zero;
-
-                    return;
-                }
-
-                _timePartInput = value;
+                _timePartViewModel.FormattedValue = value;
                 OnPropertyChanged("TimePartString");
-
-                MatchCollection matches;
-                if (null != (matches = Regex.Matches(value, @"^(\d?\d):?(\d\d)$")))
-                {
-                    int hours, minutes;
-                    if (matches.Count == 1
-                        && matches[0].Groups.Count == 3
-                        && Int32.TryParse(matches[0].Groups[1].Captures[0].Value, out hours)
-                        && Int32.TryParse(matches[0].Groups[2].Captures[0].Value, out minutes)
-                        && hours >= 0 && hours < 24
-                        && minutes >= 0 && minutes < 60)
-                    {
-                        if (_timePartError != null)
-                        {
-                            _timePartError = null;
-                            OnPropertyChanged("Error");
-                        }
-
-                        TimePart = new TimeSpan(hours, minutes, 0);
-                    }
-                    else
-                    {
-                        _timePartError = string.Format("Fehler bei Zeiteingabe hh:mm : {0}", value);
-                        OnPropertyChanged("Error");
-                    }
-                }
             }
         }
 
@@ -1057,8 +1040,6 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 if (base.Value != value)
                 {
                     base.Value = value;
-                    OnPropertyChanged("DatePart");
-                    OnPropertyChanged("TimePart");
                 }
             }
         }
@@ -1070,6 +1051,24 @@ namespace Kistl.Client.Presentables.ValueViewModels
             OnPropertyChanged("TimePart");
         }
 
+        protected override void OnFormattedValueChanged()
+        {
+            base.OnFormattedValueChanged();
+            OnPropertyChanged("TimePartString");
+        }
+
+        protected override void OnBlur()
+        {
+            _timePartViewModel.Blur();
+            base.OnBlur();
+        }
+
+        protected override void OnFocus()
+        {
+            _timePartViewModel.Focus();
+            base.OnFocus();
+        }
+
         public override string Error
         {
             get
@@ -1077,11 +1076,11 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 var baseError = base.Error;
                 if (string.IsNullOrEmpty(baseError))
                 {
-                    return _timePartError;
+                    return _timePartViewModel.Error;
                 }
                 else
                 {
-                    return baseError + "\n" + _timePartError;
+                    return baseError + "\n" + _timePartViewModel.Error;
                 }
             }
         }
@@ -1093,7 +1092,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 switch (columnName)
                 {
                     case "TimePartString":
-                        return _timePartError;
+                        return _timePartViewModel.Error;
                     default:
                         return base[columnName];
                 }
