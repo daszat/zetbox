@@ -450,6 +450,23 @@ namespace Kistl.Client.Presentables
             }
         }
 
+        public bool CanShowModel(ViewModel mdl)
+        {
+            if (mdl == null)
+                throw new ArgumentNullException("mdl");
+
+            var dom = mdl as DataObjectViewModel;
+
+            if (dom == null)
+            {
+                return true;
+            }
+            else
+            {
+                return Managers.ContainsKey(dom.Object.Context);
+            }
+        }
+
         public void ShowDialog(ViewModel mdl)
         {
             ShowDialog(mdl, null);

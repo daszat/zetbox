@@ -13,6 +13,8 @@ namespace Kistl.Client.Presentables
         void ShowDialog(ViewModel mdl);
         void ShowDialog(ViewModel mdl, Kistl.App.GUI.ControlKind kind);
 
+        bool CanShowModel(ViewModel mdl);
+
         /// <summary>
         /// Initializes the requested culture form config on the current thread
         /// </summary>

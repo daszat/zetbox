@@ -159,9 +159,18 @@ namespace Kistl.Client.Presentables.ValueViewModels
         }
 
         #region OpenReference
+
+        private bool CanOpen
+        {
+            get
+            {
+                return Value != null ? ViewModelFactory.CanShowModel(Value) : false;
+            }
+        }
+
         public void OpenReference()
         {
-            if (Value != null)
+            if (CanOpen)
                 ViewModelFactory.ShowModel(Value, true);
         }
 
@@ -177,7 +186,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                         ObjectReferenceViewModelResources.OpenReferenceCommand_Name,
                         ObjectReferenceViewModelResources.OpenReferenceCommand_Tooltip,
                         () => OpenReference(),
-                        () => Value != null);
+                        () => CanOpen);
                     _openReferenceCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_fileopen_png);
                 }
                 return _openReferenceCommand;
