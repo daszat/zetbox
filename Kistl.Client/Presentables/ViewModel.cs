@@ -238,6 +238,129 @@ namespace Kistl.Client.Presentables
 
         #endregion
 
+        #region ColorManagement
+        /// <summary>
+        /// Override in custom ViewModels to provide an information about hightlighting
+        /// </summary>
+        public virtual Highlight Highlight
+        {
+            get
+            {
+                return null;
+            }
+        }
+        #endregion
+
+    }
+
+    public class Highlight : INotifyPropertyChanged
+    {
+        public Highlight()
+            : this(0)
+        {
+        }
+
+        public Highlight(int state)
+        {
+            this.stateStore = state;
+        }
+
+        protected int stateStore;
+        public virtual int State
+        {
+            get
+            {
+                // return an ZToolBox Enum
+                // Translated into a Workspace Backround and List Back/Foreground & Font Style
+                return stateStore; 
+            }
+            set
+            {
+                if (stateStore != value)
+                {
+                    stateStore = value;
+                    OnPropertyChanged("State");
+                }
+            }
+        }
+
+        protected string gridBackgroundStore;
+        public virtual string GridBackground
+        {
+            get
+            {
+                return gridBackgroundStore;
+            }
+            set
+            {
+                if (gridBackgroundStore != value)
+                {
+                    gridBackgroundStore = value;
+                    OnPropertyChanged("GridBackground");
+                }
+            }
+        }
+
+        protected string gridForegroundStore;
+        public virtual string GridForeground
+        {
+            get
+            {
+                return gridForegroundStore;
+            }
+            set
+            {
+                if (gridForegroundStore != value)
+                {
+                    gridForegroundStore = value;
+                    OnPropertyChanged("GridForeground");
+                }
+            }
+        }
+
+        protected System.Drawing.FontStyle gridFontStyleStore;
+        public virtual System.Drawing.FontStyle GridFontStyle
+        {
+            get
+            {
+                return gridFontStyleStore;
+            }
+            set
+            {
+                if (gridFontStyleStore != value)
+                {
+                    gridFontStyleStore = value;
+                    OnPropertyChanged("GridFontStyle");
+                }
+            }
+        }
+
+        protected string panelBackgroundStore;
+        public virtual string PanelBackground
+        {
+            get
+            {
+                return panelBackgroundStore;
+            }
+            set
+            {
+                if (panelBackgroundStore != value)
+                {
+                    panelBackgroundStore = value;
+                    OnPropertyChanged("PanelBackground");
+                }
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string p)
+        {
+            var temp = PropertyChanged;
+            if (temp != null)
+            {
+                temp(this, new PropertyChangedEventArgs(p));
+            }
+        }
     }
 
     internal class DesignerDependencies : IViewModelDependencies

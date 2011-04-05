@@ -60,6 +60,7 @@
                                 Margin="10"
                                 BorderThickness="0"
                                 ItemsSource="{Binding Instances}"
+                                ItemContainerStyle="{StaticResource ListViewItemContainerStyle}"
                                 ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
                                 SelectedZBoxItems="{Binding SelectedItems}"
                                 SelectionMode="{Binding IsMultiselect, Converter={StaticResource BooleanMultiselectToSelectionModeConverter}}"

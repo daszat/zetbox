@@ -188,10 +188,17 @@
         </Style.Triggers>
     </Style>
     
-    <!-- Force GridView content to be streched -->
-    <Style x:Key="GridViewItemContainerStyle"
-           TargetType="ListViewItem">
-        <Setter Property="HorizontalContentAlignment"
-                Value="Stretch" />
-    </Style>
+  <Style x:Key="ListViewItemContainerStyle"
+         TargetType="ListViewItem">
+    <Setter Property="Background"
+            Value="{Binding Highlight, Converter={StaticResource HighlightGridBackgroundConverter}}" />
+  </Style>
+
+  <!-- Force GridView content to be streched -->
+  <Style x:Key="ListViewAsGridViewItemContainerStyle"
+         TargetType="ListViewItem" BasedOn="{StaticResource ListViewItemContainerStyle}">
+    <Setter Property="HorizontalContentAlignment"
+            Value="Stretch" />
+  </Style>
+  
 </ResourceDictionary>

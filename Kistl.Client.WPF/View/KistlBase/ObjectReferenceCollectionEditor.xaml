@@ -22,7 +22,7 @@
                   MinHeight="50"
                   SelectedZBoxItems="{Binding SelectedItems}"
                   MouseDoubleClick="ItemActivatedHandler"
-                  ItemContainerStyle="{StaticResource GridViewItemContainerStyle}"
+                  ItemContainerStyle="{StaticResource ListViewAsGridViewItemContainerStyle}"
                   GridViewColumnHeader.Click="ListView_HeaderClick"
                   KeyboardNavigation.TabNavigation="Continue">
             <ctrls:ZBoxListView.ContextMenu>

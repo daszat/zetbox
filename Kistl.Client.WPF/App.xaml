@@ -22,6 +22,8 @@
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
             <commands:Converter x:Key="CommandConverter" />
             <tk:TypeNameTemplateSelector x:Key="TypeNameTemplateSelector" />
+
+            <converter:HighlightGridBackgroundConverter x:Key="HighlightGridBackgroundConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

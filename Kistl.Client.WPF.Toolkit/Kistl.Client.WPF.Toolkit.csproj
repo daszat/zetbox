@@ -101,6 +101,7 @@
     <Compile Include="Commands\SmartRoutedUICommand.cs" />
     <Compile Include="Commands\WrappedKistlCommand.cs" />
     <Compile Include="Converter\Converters.cs" />
+    <Compile Include="Converter\HighlightConverter.cs" />
     <Compile Include="Converter\DebugConverter.cs" />
     <Compile Include="Converter\IconConverter.cs" />
     <Compile Include="Converter\ImageConverter.cs" />

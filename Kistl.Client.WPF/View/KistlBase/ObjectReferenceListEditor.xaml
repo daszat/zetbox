@@ -28,7 +28,7 @@
                   ItemsSource="{Binding Value, Mode=OneWay, ValidatesOnDataErrors=true}"
                   MinHeight="50"
                   SelectedZBoxItems="{Binding SelectedItems}"
-                  ItemContainerStyle="{StaticResource GridViewItemContainerStyle}"
+                  ItemContainerStyle="{StaticResource ListViewAsGridViewItemContainerStyle}"
                   MouseDoubleClick="ItemActivatedHandler"
                   KeyboardNavigation.TabNavigation="Continue">
             <ctrls:ZBoxListView.ContextMenu>
