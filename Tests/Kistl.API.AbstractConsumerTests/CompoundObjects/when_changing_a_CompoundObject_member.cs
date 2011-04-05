@@ -34,7 +34,7 @@ namespace Kistl.API.AbstractConsumerTests.CompoundObjects
         [Test]
         public void should_notify_parent()
         {
-            TestChangeNotification(obj, "PhoneNumberOffice");
+            TestChangeNotification(obj, "PhoneNumberOffice.Number");
         }
 
         [Test]
