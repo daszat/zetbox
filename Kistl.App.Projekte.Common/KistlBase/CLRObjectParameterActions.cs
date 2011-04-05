@@ -12,7 +12,7 @@ namespace Kistl.App.Base
         [Invocation]
         public static void GetParameterTypeString(Kistl.App.Base.CLRObjectParameter obj, Kistl.API.MethodReturnEventArgs<string> e)
         {
-            e.Result = obj.Type.FullName;
+            e.Result = obj.Type != null ? obj.Type.FullName : string.Empty;
         }
     }
 }

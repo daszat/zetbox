@@ -227,7 +227,7 @@ namespace Kistl.API.Client
                     ifType.ToSerializableType(),
                     ID,
                     method,
-                    parameterTypes.Select(t => ifType.ToSerializableType()).ToArray(),
+                    parameterTypes.Select(t => _iftFactory(t).ToSerializableType()).ToArray(),
                     parameterStream.ToArray(),
                     changedObjectsStream.ToArray(),
                     notificationRequests.ToArray()));

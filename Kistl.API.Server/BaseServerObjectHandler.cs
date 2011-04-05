@@ -156,6 +156,10 @@ using System.IO;
             // Call Method
             var obj = GetObjectInstance(ctx, ID);
             var mi = obj.GetType().FindMethod(method, parameterTypes.ToArray());
+            if (mi == null)
+            {
+                throw new InvalidOperationException(string.Format("Method {0}.{1}({2}) not found", typeof(T).FullName, method, string.Join(", ", parameterTypes.Select(i => i.Name).ToArray())));
+            }
             object result = mi.Invoke(obj, parameter.ToArray());
 
             var requestedObjects = BaseServerObjectSetHandler.GetRequestedObjects(ctx, notificationRequests, entityObjects);
