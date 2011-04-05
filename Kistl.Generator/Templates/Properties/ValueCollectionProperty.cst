@@ -21,7 +21,7 @@
 <%@ Parameter Name="entryType" Type="string" %>
 <%@ Parameter Name="providerCollectionType" Type="string" %>
 <%@ Parameter Name="underlyingCollectionName" Type="string" %>
-<%@ Parameter Name="orderByB" Type="bool" %>
+<%@ Parameter Name="orderByValue" Type="bool" %>
 <%@ Parameter Name="moduleNamespace" Type="string" %>
 <%
 

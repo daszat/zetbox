@@ -102,7 +102,8 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries
             else
             {
                 string referencedImplementation = Mappings.ObjectClassHbm.GetWrapperTypeReference(prop.ObjectClass as ObjectClass, this.Settings);
-                ObjectClasses.ReloadOneReference.Call(Host, ctx, referencedInterface, referencedImplementation, "Parent", "Parent", "_fk_Parent", "_fk_guid_Parent", IsExportable());
+                // value collections are always exported / serialized inline. no need for parent guid
+                ObjectClasses.ReloadOneReference.Call(Host, ctx, referencedInterface, referencedImplementation, "Parent", "Parent", "_fk_Parent", null, false);
             }
         }
     }

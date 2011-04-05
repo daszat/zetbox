@@ -4,12 +4,11 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
-
 using Kistl.API;
 using Kistl.API.Server;
 using Kistl.App.Test;
+using Kistl.DalProvider.Base;
 using Kistl.DalProvider.NHibernate;
-
 using NUnit.Framework;
 
 namespace Kistl.DalProvider.NHibernate.Tests.BinarySerializers
@@ -18,7 +17,7 @@ namespace Kistl.DalProvider.NHibernate.Tests.BinarySerializers
     {
     }
 
-    public class CompoundObjectMockImpl : CompoundObjectNHibernateImpl
+    public class CompoundObjectMockImpl : CompoundObjectDefaultImpl
     {
         public CompoundObjectMockImpl() : base(null) { }
         public override Type GetImplementedInterface()

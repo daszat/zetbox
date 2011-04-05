@@ -31,7 +31,7 @@ namespace Kistl.Generator.Templates.CompoundObjects
         /// <returns>The base class to inherit from.</returns>
         protected override string GetBaseClass()
         {
-            return "CompoundObject" + ImplementationSuffix;
+            return "CompoundObjectDefaultImpl";
         }
 
         protected override void ApplyConstructorTemplate()

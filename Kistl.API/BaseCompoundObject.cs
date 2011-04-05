@@ -13,9 +13,11 @@ namespace Kistl.API
     /// </summary>
     public abstract class BaseCompoundObject : BaseNotifyingObject, ICompoundObject
     {
+        private readonly Func<IFrozenContext> _lazyCtx;
         protected BaseCompoundObject(Func<IFrozenContext> lazyCtx)
         // ignore for now: base(lazyCtx)
         {
+            _lazyCtx = lazyCtx;
         }
 
         #region ICompoundObject Members
@@ -136,5 +138,8 @@ namespace Kistl.API
         }
 
         public bool IsAttached { get { return ParentObject != null && ParentObject.IsAttached; } }
+
+        protected DataObjectState ObjectState { get { return ParentObject != null ?  ParentObject.ObjectState:DataObjectState.Detached ; } }
+        protected IFrozenContext FrozenContext { get { return _lazyCtx(); } }
     }
 }

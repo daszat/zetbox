@@ -18,17 +18,17 @@ namespace Kistl.Generator.Templates.Serialization
 		protected string xmlnamespace;
 		protected string xmlname;
 		protected string collectionName;
-		protected bool orderByB;
+		protected bool orderByValue;
 
 
-        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, SerializerDirection direction, string streamName, string xmlnamespace, string xmlname, string collectionName, bool orderByB)
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, SerializerDirection direction, string streamName, string xmlnamespace, string xmlname, string collectionName, bool orderByValue)
         {
             if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
 
-            _host.CallTemplate("ObjectClasses.CollectionSerialization", ctx, direction, streamName, xmlnamespace, xmlname, collectionName, orderByB);
+            _host.CallTemplate("ObjectClasses.CollectionSerialization", ctx, direction, streamName, xmlnamespace, xmlname, collectionName, orderByValue);
         }
 
-        public CollectionSerialization(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, SerializerDirection direction, string streamName, string xmlnamespace, string xmlname, string collectionName, bool orderByB)
+        public CollectionSerialization(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, SerializerDirection direction, string streamName, string xmlnamespace, string xmlname, string collectionName, bool orderByValue)
             : base(_host)
         {
 			this.ctx = ctx;
@@ -37,7 +37,7 @@ namespace Kistl.Generator.Templates.Serialization
 			this.xmlnamespace = xmlnamespace;
 			this.xmlname = xmlname;
 			this.collectionName = collectionName;
-			this.orderByB = orderByB;
+			this.orderByValue = orderByValue;
 
         }
 
@@ -81,7 +81,7 @@ break;
         case SerializerDirection.Export:
 
 #line 51 "P:\Kistl\Kistl.Generator\Templates\Serialization\CollectionSerialization.cst"
-this.WriteObjects("            if (modules.Contains(\"*\") || modules.Contains(\"",  xmlnamespace , "\")) XmlStreamer.ExportCollectionEntries(this.",  collectionName , "",  orderByB ? ".OrderBy(i => i.B)" : String.Empty , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
+this.WriteObjects("            if (modules.Contains(\"*\") || modules.Contains(\"",  xmlnamespace , "\")) XmlStreamer.ExportCollectionEntries(this.",  collectionName , "",  orderByValue ? ".OrderBy(i => i.Value)" : String.Empty , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
 #line 53 "P:\Kistl\Kistl.Generator\Templates\Serialization\CollectionSerialization.cst"
 break;
             default:

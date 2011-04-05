@@ -59,7 +59,8 @@
     <!-- EntitySets and AssociationSets for all object-value CollectionEntrys -->
 <%
     foreach (var prop in ctx.GetQuery<ValueTypeProperty>()
-        .Where(p => p.IsList)
+        .Where(p => p.IsList) // && !p.IsCalculated)
+        .Where(p => p.ObjectClass is ObjectClass)
         .OrderBy(p => p.ObjectClass.Name)
         .ThenBy(p => p.Name))
     {
@@ -78,7 +79,8 @@
     <!-- EntitySets and AssociationSets for all object-struct CollectionEntrys -->
 <%
     foreach (var prop in ctx.GetQuery<CompoundObjectProperty>()
-        .Where(p => p.IsList)
+        .Where(p => p.IsList) // && !p.IsCalculated)
+        .Where(p => p.ObjectClass is ObjectClass)
         .OrderBy(p => p.ObjectClass.Name)
         .ThenBy(p => p.Name))
     {
@@ -258,7 +260,8 @@
   <!-- EntityTypes and Associations for all object-value CollectionEntrys -->
 <%
     foreach (var prop in ctx.GetQuery<ValueTypeProperty>()
-        .Where(p => p.IsList)
+        .Where(p => p.IsList && !p.IsCalculated)
+        .Where(p => p.ObjectClass is ObjectClass)
         .OrderBy(p => p.ObjectClass.Name)
         .ThenBy(p => p.Name))
     {
@@ -302,7 +305,8 @@
 <!-- EntityTypes and Associations for all object-CompoundObject CollectionEntrys -->
 <%
     foreach(var prop in ctx.GetQuery<CompoundObjectProperty>()
-        .Where(p => p.IsList)
+        .Where(p => p.IsList) // && !p.IsCalculated)
+        .Where(p => p.ObjectClass is ObjectClass)
         .OrderBy(p => p.ObjectClass.Name)
         .ThenBy(p => p.Name))
     {

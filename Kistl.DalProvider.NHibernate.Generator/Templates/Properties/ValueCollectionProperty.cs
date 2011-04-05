@@ -75,7 +75,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
             // TODO: XML Namespace
             if (list != null)
             {
-                list.Add("Serialization.CollectionSerialization", Templates.Serialization.SerializerType.All, moduleNamespace, name, underlyingCollectionName, orderByB);
+                list.Add("Serialization.CollectionSerialization", Templates.Serialization.SerializerType.All, moduleNamespace, name, underlyingCollectionName, orderByValue);
             }
         }
     }

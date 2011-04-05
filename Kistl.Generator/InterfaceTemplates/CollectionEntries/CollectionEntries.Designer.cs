@@ -54,7 +54,8 @@ foreach (var rel in ctx.GetQuery<Relation>()
 
 
     foreach (var prop in ctx.GetQuery<ValueTypeProperty>()
-        .Where(p => p.IsList)
+        .Where(p => p.IsList && !p.IsCalculated)
+        .Where(p => p.ObjectClass is ObjectClass)
         .ToList() // NHibernate-on-linux workaround
         .OrderBy(p => p.ObjectClass.Name)
         .ThenBy(p => p.Name))
@@ -63,7 +64,8 @@ foreach (var rel in ctx.GetQuery<Relation>()
     }
     
     foreach (var prop in ctx.GetQuery<CompoundObjectProperty>()
-        .Where(p => p.IsList)
+        .Where(p => p.IsList) // && !p.IsCalculated
+        .Where(p => p.ObjectClass is ObjectClass)
         .ToList() // NHibernate-on-linux workaround
         .OrderBy(p => p.ObjectClass.Name)
         .ThenBy(p => p.Name))

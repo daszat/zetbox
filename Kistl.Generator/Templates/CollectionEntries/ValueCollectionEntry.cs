@@ -113,7 +113,17 @@ namespace Kistl.Generator.Templates.CollectionEntries
 
             string referencedInterface = prop.ObjectClass.Module.Namespace + "." + prop.ObjectClass.Name;
             string referencedImplementation = referencedInterface + ImplementationSuffix;
-            ObjectClasses.ReloadOneReference.Call(Host, ctx, referencedInterface, referencedImplementation, "Parent", "Parent", "_fk_Parent", "_fk_guid_Parent", IsExportable());
+            ObjectClasses.ReloadOneReference.Call(
+                Host,
+                ctx,
+                referencedInterface,
+                referencedImplementation,
+                "Parent",
+                "Parent",
+                "_fk_Parent",
+                null,
+                false // value collection entries are always streamed/exported in-place
+                );
         }
 
         protected override void ApplyChangesFromBody()

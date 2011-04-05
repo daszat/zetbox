@@ -41,11 +41,10 @@ namespace Kistl.Generator.Templates.CollectionEntries
         {
 #line 18 "P:\Kistl\Kistl.Generator\Templates\CollectionEntries\ValueCollectionEntryParentReference.cst"
 string cacheName = "_" + propertyName + "Cache";
-	string fkName = "fk_" + propertyName;
-	string backingName = "_" + fkName;
+    string fkName = "fk_" + propertyName;
+    string backingName = "_" + fkName;
 
 #line 22 "P:\Kistl\Kistl.Generator\Templates\CollectionEntries\ValueCollectionEntryParentReference.cst"
-this.WriteObjects("\r\n");
 this.WriteObjects("        public ",  referencedInterface , " ",  propertyName , "\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            get\r\n");
@@ -69,9 +68,9 @@ this.WriteObjects("                    return;\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("                ",  cacheName , " = value;\r\n");
 this.WriteObjects("                if (value != null)\r\n");
-this.WriteObjects("					",  fkName , " = value.ID;\r\n");
-this.WriteObjects("				else\r\n");
-this.WriteObjects("					",  fkName , " = null;\r\n");
+this.WriteObjects("                    ",  fkName , " = value.ID;\r\n");
+this.WriteObjects("                else\r\n");
+this.WriteObjects("                    ",  fkName , " = null;\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        private ",  referencedInterface , " ",  cacheName , ";\r\n");
@@ -86,7 +85,7 @@ this.WriteObjects("            set\r\n");
 this.WriteObjects("            {\r\n");
 this.WriteObjects("                if (",  backingName , " != value)\r\n");
 this.WriteObjects("                {\r\n");
-this.WriteObjects("					var __oldValue = ",  backingName , ";\r\n");
+this.WriteObjects("                    var __oldValue = ",  backingName , ";\r\n");
 this.WriteObjects("                    NotifyPropertyChanging(\"",  propertyName , "\", __oldValue, value);\r\n");
 this.WriteObjects("                    ",  backingName , " = value;\r\n");
 this.WriteObjects("                    NotifyPropertyChanged(\"",  propertyName , "\", __oldValue, value);\r\n");
@@ -96,10 +95,9 @@ this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("        // backing store for serialization\r\n");
 this.WriteObjects("        private int? ",  backingName , ";\r\n");
-this.WriteObjects("        \r\n");
-#line 75 "P:\Kistl\Kistl.Generator\Templates\CollectionEntries\ValueCollectionEntryParentReference.cst"
+#line 73 "P:\Kistl\Kistl.Generator\Templates\CollectionEntries\ValueCollectionEntryParentReference.cst"
 if (serializationList != null)
-		serializationList.Add(Serialization.SerializerType.All, moduleNamespace, propertyName, backingName); // TODO: XML Namespace
+        serializationList.Add(Serialization.SerializerType.All, moduleNamespace, propertyName, backingName); // TODO: XML Namespace
 
 
         }

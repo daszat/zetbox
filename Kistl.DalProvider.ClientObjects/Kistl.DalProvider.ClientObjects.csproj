@@ -67,7 +67,6 @@
     <Compile Include="ClientImplementationType.cs" />
     <Compile Include="ClientProvider.cs" />
     <Compile Include="CompoundCollectionEntryClientImpl.cs" />
-    <Compile Include="CompoundObjectClientImpl.cs" />
     <Compile Include="DataObjectClientImpl.cs" />
     <Compile Include="IClientObject.cs" />
     <Compile Include="KistlContext.cs" />

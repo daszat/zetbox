@@ -79,7 +79,7 @@ namespace Kistl.Generator.Templates.Properties
         ///// <param name="entryType">collection entries in this list</param>
         ///// <param name="providerCollectionType">the provider type of this collection</param>
         ///// <param name="underlyingCollectionName">how the underlying collection is called</param>
-        ///// <param name="orderByB">true if the collection sould be ordered during export</param>
+        ///// <param name="orderByValue">true if the collection sould be ordered during export</param>
         ///// <param name="moduleNamespace">the xml namespace of the module</param>
         //public static void Call(
         //    Arebis.CodeGeneration.IGenerationHost host,
@@ -87,7 +87,7 @@ namespace Kistl.Generator.Templates.Properties
         //    Serialization.SerializationMembersList serializationList,
         //    string name, string backingName, string backingCollectionType, string exposedCollectionInterface,
         //    string thisInterface, string referencedType, string entryType,
-        //    string providerCollectionType, string underlyingCollectionName, bool orderByB, string moduleNamespace)
+        //    string providerCollectionType, string underlyingCollectionName, bool orderByValue, string moduleNamespace)
         //{
         //    if (host == null) { throw new ArgumentNullException("host"); }
         //    if (ctx == null) { throw new ArgumentNullException("ctx"); }
@@ -95,7 +95,7 @@ namespace Kistl.Generator.Templates.Properties
         //    host.CallTemplate("Properties.ValueCollectionProperty",
         //        ctx, serializationList,
         //        name, backingName, backingCollectionType, exposedCollectionInterface,
-        //        thisInterface, referencedType, entryType, providerCollectionType, underlyingCollectionName, orderByB, moduleNamespace);
+        //        thisInterface, referencedType, entryType, providerCollectionType, underlyingCollectionName, orderByValue, moduleNamespace);
         //}
 
         protected virtual void AddSerialization(Serialization.SerializationMembersList list, string underlyingCollectionName)
@@ -103,7 +103,7 @@ namespace Kistl.Generator.Templates.Properties
             // TODO: XML Namespace
             if (list != null)
             {
-                list.Add("Serialization.CollectionSerialization", Serialization.SerializerType.All, moduleNamespace, name, underlyingCollectionName, orderByB);
+                list.Add("Serialization.CollectionSerialization", Serialization.SerializerType.All, moduleNamespace, name, underlyingCollectionName, orderByValue);
             }
         }
     }

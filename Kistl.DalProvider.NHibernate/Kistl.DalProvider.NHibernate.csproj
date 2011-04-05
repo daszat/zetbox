@@ -87,7 +87,6 @@
     <Compile Include="NHibernateProvider.cs" />
     <Compile Include="NHibernatePersistenceObject.cs" />
     <Compile Include="CompoundCollectionEntryNHibernateImpl.cs" />
-    <Compile Include="CompoundObjectNHibernateImpl.cs" />
     <Compile Include="DataObjectNHibernateImpl.cs" />
     <Compile Include="INHibernateActionsManager.cs" />
     <Compile Include="NHibernateImplementationTypeChecker.cs" />

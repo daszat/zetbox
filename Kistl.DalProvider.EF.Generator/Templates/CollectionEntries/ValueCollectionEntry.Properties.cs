@@ -29,7 +29,7 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries
                 "Parent" + ImplementationPropertySuffix,
                 "OnParent",
                 "_fk_Parent",
-                "_fk_Parent_guid",
+                null,
                 interfaceType,
                 implementationType,
                 prop.GetAssociationName(),
@@ -38,7 +38,7 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries
                 prop.Name,
                 true,
                 false, 
-                IsExportable(),
+                false, // value collection entries are always streamed/exported in-place
                 false);
 
             Templates.Properties.DelegatingProperty.Call(

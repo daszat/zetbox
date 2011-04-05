@@ -11,8 +11,8 @@ namespace Kistl.DalProvider.Client.Generator.Templates.Serialization
     public class CollectionSerialization
         : Templates.Serialization.CollectionSerialization
     {
-        public CollectionSerialization(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Serialization.SerializerDirection direction, string streamName, string xmlnamespace, string xmlname, string collectionName, bool orderByB)
-            : base(_host, ctx, direction, streamName, xmlnamespace, xmlname, collectionName, orderByB)
+        public CollectionSerialization(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Templates.Serialization.SerializerDirection direction, string streamName, string xmlnamespace, string xmlname, string collectionName, bool orderByValue)
+            : base(_host, ctx, direction, streamName, xmlnamespace, xmlname, collectionName, orderByValue)
         {
         }
 

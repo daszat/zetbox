@@ -25,18 +25,18 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
 		protected string referencedCollectionEntryProxy;
 		protected string providerCollectionType;
 		protected string underlyingCollectionName;
-		protected bool orderByB;
+		protected bool orderByValue;
 		protected string moduleNamespace;
 
 
-        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.Generator.Templates.Serialization.SerializationMembersList serializationList, string name, string backingName, string backingCollectionType, string exposedCollectionInterface, string thisInterface, string referencedType, string referencedCollectionEntry, string referencedCollectionEntryProxy, string providerCollectionType, string underlyingCollectionName, bool orderByB, string moduleNamespace)
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.Generator.Templates.Serialization.SerializationMembersList serializationList, string name, string backingName, string backingCollectionType, string exposedCollectionInterface, string thisInterface, string referencedType, string referencedCollectionEntry, string referencedCollectionEntryProxy, string providerCollectionType, string underlyingCollectionName, bool orderByValue, string moduleNamespace)
         {
             if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
 
-            _host.CallTemplate("Properties.ValueCollectionProperty", ctx, serializationList, name, backingName, backingCollectionType, exposedCollectionInterface, thisInterface, referencedType, referencedCollectionEntry, referencedCollectionEntryProxy, providerCollectionType, underlyingCollectionName, orderByB, moduleNamespace);
+            _host.CallTemplate("Properties.ValueCollectionProperty", ctx, serializationList, name, backingName, backingCollectionType, exposedCollectionInterface, thisInterface, referencedType, referencedCollectionEntry, referencedCollectionEntryProxy, providerCollectionType, underlyingCollectionName, orderByValue, moduleNamespace);
         }
 
-        public ValueCollectionProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.Generator.Templates.Serialization.SerializationMembersList serializationList, string name, string backingName, string backingCollectionType, string exposedCollectionInterface, string thisInterface, string referencedType, string referencedCollectionEntry, string referencedCollectionEntryProxy, string providerCollectionType, string underlyingCollectionName, bool orderByB, string moduleNamespace)
+        public ValueCollectionProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.Generator.Templates.Serialization.SerializationMembersList serializationList, string name, string backingName, string backingCollectionType, string exposedCollectionInterface, string thisInterface, string referencedType, string referencedCollectionEntry, string referencedCollectionEntryProxy, string providerCollectionType, string underlyingCollectionName, bool orderByValue, string moduleNamespace)
             : base(_host)
         {
 			this.ctx = ctx;
@@ -51,7 +51,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
 			this.referencedCollectionEntryProxy = referencedCollectionEntryProxy;
 			this.providerCollectionType = providerCollectionType;
 			this.underlyingCollectionName = underlyingCollectionName;
-			this.orderByB = orderByB;
+			this.orderByValue = orderByValue;
 			this.moduleNamespace = moduleNamespace;
 
         }

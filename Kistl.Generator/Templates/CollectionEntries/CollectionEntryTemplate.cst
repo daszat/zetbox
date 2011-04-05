@@ -10,6 +10,7 @@
 <%@ Import Namespace="Kistl.Generator" %>
 <%@ Import Namespace="Kistl.Generator.Extensions" %>
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
+    // BEGIN <%= this.GetType().FullName %>
 <%
     ApplyClassAttributeTemplate();
 %>
@@ -111,3 +112,4 @@
     ApplyClassTailTemplate();
 %>
     }
+    // END <%= this.GetType().FullName %>

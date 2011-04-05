@@ -15,7 +15,7 @@
 <%@ Parameter Name="xmlnamespace" Type="string" %>
 <%@ Parameter Name="xmlname" Type="string" %>
 <%@ Parameter Name="collectionName" Type="string" %>
-<%@ Parameter Name="orderByB" Type="bool" %>
+<%@ Parameter Name="orderByValue" Type="bool" %>
 <%
     if (ShouldSerialize())
     {
@@ -48,7 +48,7 @@
                 break;
         case SerializerDirection.Export:
 %>
-            if (modules.Contains("*") || modules.Contains("<%= xmlnamespace %>")) XmlStreamer.ExportCollectionEntries(this.<%= collectionName %><%= orderByB ? ".OrderBy(i => i.B)" : String.Empty %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
+            if (modules.Contains("*") || modules.Contains("<%= xmlnamespace %>")) XmlStreamer.ExportCollectionEntries(this.<%= collectionName %><%= orderByValue ? ".OrderBy(i => i.Value)" : String.Empty %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
 <%
             break;
             default:

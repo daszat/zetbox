@@ -19,8 +19,8 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.Serialization
             string xmlnamespace,
             string xmlname,
             string collectionName,
-            bool orderByB)
-            : base(_host, ctx, direction, streamName, xmlnamespace, xmlname, collectionName, orderByB)
+            bool orderByValue)
+            : base(_host, ctx, direction, streamName, xmlnamespace, xmlname, collectionName, orderByValue)
         {
         }
 
