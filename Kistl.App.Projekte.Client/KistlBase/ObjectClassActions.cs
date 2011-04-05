@@ -53,7 +53,7 @@ namespace Kistl.App.Base
                     if (newProp == null)
                     {
                         // Add Property
-                        if (prop is ValueTypeProperty)
+                        if (prop is ValueTypeProperty || prop is CompoundObjectProperty)
                         {
                             newProp = (Property)ctx.Create(ctx.GetInterfaceType(prop));
                         }
@@ -63,25 +63,29 @@ namespace Kistl.App.Base
                         }
                         else
                         {
-                            // TODO: Add CompoundObject
+                            Logging.Client.WarnFormat("Cannot implement interface for property [{0}] of Type [{1}]", prop.ToString(), prop.GetType().FullName);
                             continue;
                         }
                         objClass.Properties.Add(newProp);
 
                         // Default Values
                         newProp.Name = prop.Name;
+                        newProp.Label = prop.Label;
                         newProp.CategoryTags = prop.CategoryTags;
                         newProp.Description = prop.Description;
+
+                        // put the new property into the module of the class
+                        newProp.Module = objClass.Module;
+
+                        newProp.ValueModelDescriptor = prop.ValueModelDescriptor;
+                        newProp.RequestedKind = prop.RequestedKind;
+
                         if (prop is ValueTypeProperty)
                         {
                             ((ValueTypeProperty)newProp).HasPersistentOrder = ((ValueTypeProperty)prop).HasPersistentOrder;
                             ((ValueTypeProperty)newProp).IsList = ((ValueTypeProperty)prop).IsList;
                         }
-                        // put the new property into the module of the class
-                        newProp.Module = objClass.Module;
-                        newProp.ValueModelDescriptor = prop.ValueModelDescriptor;
-
-                        if (prop is ObjectReferencePlaceholderProperty)
+                        else if (prop is ObjectReferencePlaceholderProperty)
                         {
                             var ph = (ObjectReferencePlaceholderProperty)prop;
                             var objRef = (ObjectReferenceProperty)newProp;
@@ -101,6 +105,15 @@ namespace Kistl.App.Base
                             rel.B.Type = ph.ReferencedObjectClass;
                             rel.B.Multiplicity = ph.IsList ? Multiplicity.ZeroOrMore : Multiplicity.ZeroOrOne;
                             rel.B.RoleName = string.IsNullOrEmpty(ph.ItemRoleName) ? ph.ReferencedObjectClass.Name : ph.ItemRoleName;
+                        }
+                        else if (prop is CompoundObjectProperty)
+                        {
+                            var cop = prop as CompoundObjectProperty;
+                            var newCop = newProp as CompoundObjectProperty;
+
+                            newCop.CompoundObjectDefinition = cop.CompoundObjectDefinition;
+                            newCop.HasPersistentOrder = cop.HasPersistentOrder;
+                            newCop.IsList = cop.IsList;
                         }
                     }
 
