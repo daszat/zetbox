@@ -21,7 +21,7 @@ namespace Kistl.DalProvider.NHibernate
             base.OnPropertyChanging(property, oldValue, newValue);
             if (ParentObject != null)
             {
-                ((IDataObject)ParentObject).NotifyPropertyChanging(ParentProperty, oldValue, newValue);
+                ((IDataObject)ParentObject).NotifyPropertyChanging(ParentProperty + "." + property, oldValue, newValue);
             }
         }
 
@@ -30,7 +30,7 @@ namespace Kistl.DalProvider.NHibernate
             base.OnPropertyChanged(property, oldValue, newValue);
             if (ParentObject != null)
             {
-                ((IDataObject)ParentObject).NotifyPropertyChanged(ParentProperty, oldValue, newValue);
+                ((IDataObject)ParentObject).NotifyPropertyChanged(ParentProperty + "." + property, oldValue, newValue);
             }
         }
     }

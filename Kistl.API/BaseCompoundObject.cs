@@ -1,19 +1,20 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Text;
 
 namespace Kistl.API
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+
     /// <summary>
     /// Implements basic (serialisation) infrastructure of ICompoundObject objects
     /// </summary>
     public abstract class BaseCompoundObject : BaseNotifyingObject, ICompoundObject
     {
         protected BaseCompoundObject(Func<IFrozenContext> lazyCtx)
-            // ignore for now: base(lazyCtx)
+        // ignore for now: base(lazyCtx)
         {
         }
 
@@ -41,6 +42,9 @@ namespace Kistl.API
         }
 
         public virtual bool IsReadonly { get { return ParentObject != null ? ParentObject.IsReadonly : false; } }
+
+        public virtual void ApplyChangesFrom(ICompoundObject other) { }
+
         #endregion
 
         #region IStreamable Members

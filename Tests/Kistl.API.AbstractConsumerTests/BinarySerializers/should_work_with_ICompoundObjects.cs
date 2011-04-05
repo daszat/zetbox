@@ -97,6 +97,11 @@ namespace Kistl.API.AbstractConsumerTests.BinarySerializers
         public event PropertyChangeWithValueEventHandler PropertyChangingWithValue;
 
         #endregion
+
+        public void ApplyChangesFrom(ICompoundObject other)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     [TestFixture(typeof(MinimalCompoundObjectTest))]

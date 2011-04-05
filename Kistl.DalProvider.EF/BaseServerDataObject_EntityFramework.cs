@@ -344,7 +344,7 @@ namespace Kistl.DalProvider.Ef
             if (ParentObject != null)
             {
                 ((IEntityFrameworkNotifyingObject)ParentObject)
-                    .NotifyPropertyChanging(this.ParentProperty, this.ParentProperty + Kistl.API.Helper.ImplementationSuffix, null, null);
+                    .NotifyPropertyChanging(this.ParentProperty + "." + property, this.ParentProperty + Kistl.API.Helper.ImplementationSuffix, null, null);
             }
         }
 
@@ -354,7 +354,7 @@ namespace Kistl.DalProvider.Ef
             if (ParentObject != null)
             {
                 ((IEntityFrameworkNotifyingObject)ParentObject)
-                    .NotifyPropertyChanged(this.ParentProperty, this.ParentProperty + Kistl.API.Helper.ImplementationSuffix, null, null);
+                    .NotifyPropertyChanged(this.ParentProperty + "." + property, this.ParentProperty + Kistl.API.Helper.ImplementationSuffix, null, null);
             }
         }
 

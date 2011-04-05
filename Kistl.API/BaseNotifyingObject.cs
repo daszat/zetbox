@@ -68,8 +68,10 @@ namespace Kistl.API
             }
             else
             {
-                if (!notifications.Contains(property))
-                    notifications.Add(property);
+                if (notifications.ContainsKey(property))
+                    notifications[property] = new Notification(notifications[property], newValue);
+                else
+                    notifications[property] = new Notification(property, oldValue, newValue);
             }
         }
 
@@ -105,7 +107,26 @@ namespace Kistl.API
                 PropertyChangedWithValue(this, new PropertyChangeWithValueEventArgs(property, oldValue, newValue));
         }
 
-        private List<string> notifications = null;
+        private sealed class Notification
+        {
+            public readonly string property;
+            public readonly object oldValue;
+            public readonly object newValue;
+            public Notification(string property, object oldValue, object newValue)
+            {
+                this.property = property;
+                this.oldValue = oldValue;
+                this.newValue = newValue;
+            }
+            public Notification(Notification oldNotification, object newValue)
+            {
+                this.property = oldNotification.property;
+                this.oldValue = oldNotification.oldValue;
+                this.newValue = newValue;
+            }
+        }
+
+        private Dictionary<string, Notification> notifications = null;
         /// <summary>
         /// Records notifications. PropertyChanged &amp; PropertyChanging will not be fired until <see cref="PlaybackNotifications"/> is called.
         /// This function does nothing if it is called more then once.
@@ -114,7 +135,7 @@ namespace Kistl.API
         {
             if (notifications == null)
             {
-                notifications = new List<string>();
+                notifications = new Dictionary<string, Notification>();
             }
         }
 
@@ -128,12 +149,12 @@ namespace Kistl.API
 
             // enable normal notifications before playing back the old
             // this is neccessary to allow handlers to cause normal events
-            var localCopy = notifications;
+            Dictionary<string, Notification> localCopy = notifications;
             notifications = null;
 
-            if (PropertyChanged != null || PropertyChangedWithValue != null)
+            foreach (var notification in localCopy.Values)
             {
-                localCopy.ForEach(p => OnPropertyChanged(p, null, null));
+                OnPropertyChanged(notification.property, notification.oldValue, notification.newValue);
             }
         }
     }

@@ -43,5 +43,10 @@ namespace Kistl.API.Mocks
         {
             return typeof(TestCompoundObject);
         }
+
+        public override void ApplyChangesFrom(ICompoundObject other)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

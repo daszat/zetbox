@@ -5,7 +5,6 @@ namespace Kistl.Generator.Templates.CompoundObjects
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-
     using Kistl.API;
     using Kistl.App.Base;
     using Templates = Kistl.Generator.Templates;
@@ -26,7 +25,7 @@ namespace Kistl.Generator.Templates.CompoundObjects
 
         protected override string[] GetInterfaces()
         {
-            return base.GetInterfaces().Concat(new string[] { "ICompoundObject" }).OrderBy(s => s).ToArray();
+            return base.GetInterfaces().Concat(new string[] { typeof(ICompoundObject).Name }).OrderBy(s => s).ToArray();
         }
 
         /// <returns>The base class to inherit from.</returns>
@@ -40,7 +39,8 @@ namespace Kistl.Generator.Templates.CompoundObjects
             base.ApplyConstructorTemplate();
 
             ObjectClasses.Constructors.Call(
-                Host, ctx, 
+                Host,
+                ctx,
                 GetTypeName(),
                 this.DataType
                     .Properties
@@ -70,6 +70,12 @@ namespace Kistl.Generator.Templates.CompoundObjects
 
             this.WriteObjects("        }");
             this.WriteLine();
+        }
+
+        protected override void ApplyApplyChangesFromMethod()
+        {
+            base.ApplyApplyChangesFromMethod();
+            ObjectClasses.ApplyChangesFromMethod.Call(Host, ctx, typeof(ICompoundObject).Name, DataType, GetTypeName());
         }
     }
 }

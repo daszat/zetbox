@@ -300,6 +300,11 @@ namespace Kistl.API
         /// <param name="obj">the object to detach from</param>
         /// <param name="property">the property to detach from</param>
         void DetachFromObject(IPersistenceObject obj, string property);
+
+        /// <summary>
+        /// Applies the changes from the other compound object.
+        /// </summary>
+        void ApplyChangesFrom(ICompoundObject other);
     }
 
     /// <summary>

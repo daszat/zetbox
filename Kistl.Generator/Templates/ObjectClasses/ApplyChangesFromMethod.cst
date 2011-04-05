@@ -1,7 +1,7 @@
 ﻿<%@ CodeTemplate Language="C#" 
-	Name="ObjectClasses.ApplyChangesFromMethod"
-	ClassName="Kistl.Generator.Templates.ObjectClasses.ApplyChangesFromMethod" 
-	Inherits="Kistl.Generator.ResourceTemplate" %>
+    Name="ObjectClasses.ApplyChangesFromMethod"
+    ClassName="Kistl.Generator.Templates.ObjectClasses.ApplyChangesFromMethod" 
+    Inherits="Kistl.Generator.ResourceTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Linq" %>
 <%@ Import Namespace="Kistl.API" %>
@@ -11,43 +11,36 @@
 <%@ Import Namespace="Kistl.Generator" %>
 <%@ Import Namespace="Kistl.Generator.Extensions" %>
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="otherInterface" Type="string" %>
 <%@ Parameter Name="cls" Type="DataType" %>
 <%@ Parameter Name="clsName" Type="string" %>
 <%@ Parameter Name="implName" Type="string" %>
 
-		public override void ApplyChangesFrom(IPersistenceObject obj)
-		{
-			base.ApplyChangesFrom(obj);
-			var other = (<%= clsName %>)obj;
-			var otherImpl = (<%= implName %>)obj;
-			var me = (<%= clsName %>)this;
+        public override void ApplyChangesFrom(<%= otherInterface %> obj)
+        {
+            base.ApplyChangesFrom(obj);
+            var other = (<%= clsName %>)obj;
+            var otherImpl = (<%= implName %>)obj;
+            var me = (<%= clsName %>)this;
 
-<%			
-			foreach(var prop in cls.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsList && !p.IsCalculated).OrderBy(p => p.Name))
-			{
+<% foreach(var prop in cls.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsList && !p.IsCalculated).OrderBy(p => p.Name)) { %>
+            me.<%= prop.Name %> = other.<%= prop.Name %>;
+<% } %>
+<% foreach(var prop in cls.Properties.OfType<CompoundObjectProperty>().Where(p => !p.IsList).OrderBy(p => p.Name)) { %>
+            if (me.<%= prop.Name %> == null && other.<%= prop.Name %> != null) {
+                me.<%= prop.Name %> = (<%= prop.GetPropertyTypeString() %>)other.<%= prop.Name %>.Clone();
+            } else if (me.<%= prop.Name %> != null && other.<%= prop.Name %> == null) {
+                me.<%= prop.Name %> = null;
+            } else if (me.<%= prop.Name %> != null && other.<%= prop.Name %> != null) {
+                me.<%= prop.Name %>.ApplyChangesFrom(other.<%= prop.Name %>);
+            }
+<% } %>
+<% foreach(var prop in cls.Properties.OfType<ObjectReferenceProperty>().Where(p => !p.IsList()).OrderBy(p => p.Name)) {
+        if (prop.RelationEnd.HasPersistentOrder) {
+            var positionPropertyName = Construct.ListPositionPropertyName(prop.RelationEnd);
 %>
-			me.<%= prop.Name %> = other.<%= prop.Name %>;
-<%
-			}
-
-			foreach(var prop in cls.Properties.OfType<CompoundObjectProperty>().Where(p => !p.IsList).OrderBy(p => p.Name))
-			{
-%>
-			me.<%= prop.Name %> = other.<%= prop.Name %> != null ? (<%= prop.GetPropertyTypeString() %>)other.<%= prop.Name %>.Clone() : null;
-<%
-			}
-
-			foreach(var prop in cls.Properties.OfType<ObjectReferenceProperty>().Where(p => !p.IsList()).OrderBy(p => p.Name))
-			{
-				if (prop.RelationEnd.HasPersistentOrder) {
-					var positionPropertyName = Construct.ListPositionPropertyName(prop.RelationEnd);
-%>
-			this.<%= positionPropertyName %> = otherImpl.<%= positionPropertyName %>;
-<%
-				}
-%>
-			this._fk_<%= prop.Name %> = otherImpl._fk_<%= prop.Name %>;
-<%
-			}
-%>
-		}
+            this.<%= positionPropertyName %> = otherImpl.<%= positionPropertyName %>;
+<%      } %>
+            this._fk_<%= prop.Name %> = otherImpl._fk_<%= prop.Name %>;
+<% } %>
+        }

@@ -141,6 +141,8 @@ namespace Kistl.API.Server
     /// </summary>
     public abstract class BaseServerDataObject : BaseServerPersistenceObject, IDataObject
     {
+        private Dictionary<string, string> _auditLog;
+
         /// <summary>
         /// Attach to Events
         /// </summary>
@@ -152,7 +154,17 @@ namespace Kistl.API.Server
         /// <summary>
         /// Fires an Event before an Object is saved.
         /// </summary>
-        public virtual void NotifyPreSave() { }
+        public virtual void NotifyPreSave()
+        {
+            if (Kistl.API.Utils.Logging.Log.IsWarnEnabled && _auditLog != null)
+            {
+                foreach (var msg in _auditLog.Values)
+                {
+                    Kistl.API.Utils.Logging.Log.Warn(msg);
+                }
+            }
+        }
+
         /// <summary>
         /// Fires an Event after an Object is saved.
         /// </summary>
@@ -174,6 +186,17 @@ namespace Kistl.API.Server
         public virtual Kistl.API.AccessRights CurrentAccessRights { get { return AccessRights.Full; } }
 
         public abstract void UpdateParent(string propertyName, int? id);
+
+        protected override void OnPropertyChanged(string property, object oldValue, object newValue)
+        {
+            base.OnPropertyChanged(property, oldValue, newValue);
+            if (_auditLog == null)
+            {
+                _auditLog = new Dictionary<string, string>();
+            }
+            // TODO: remember real old value, to fix double writes
+            _auditLog[property] = String.Format("{0}.{1} changed from '{2}' to '{3}'", this.GetType().Name, property, oldValue, newValue);
+        }
     }
 
     /// <summary>
