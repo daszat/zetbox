@@ -14,6 +14,7 @@ namespace Kistl.Client.Tests.ValueViewModels.DateTimes
     using Moq;
     using NUnit.Framework;
 
+    [Ignore("Refactor the SUT to provide Date, DateTime and Time ViewModels separately to ease testing")]
     public class DateTimeFixture
         : AbstractClientTestFixture
     {
