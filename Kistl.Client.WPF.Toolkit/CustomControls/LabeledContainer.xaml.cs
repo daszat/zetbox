@@ -27,9 +27,8 @@ namespace Kistl.Client.WPF.CustomControls
         public LabeledContainer()
         {
             if (DesignerProperties.GetIsInDesignMode(this)) return;
-            InitializeComponent();            
+            InitializeComponent();
         }
-
 
         [TypeConverter(typeof(LengthConverter))]
         public double LabelMinWidth

@@ -34,7 +34,7 @@ namespace Kistl.Client.Presentables.KistlBase
     /// </summary>
     [ViewModelDescriptor]
     public class InstanceListViewModel
-        : ViewModel, IViewModelWithIcon, IRefreshCommandListener
+        : ViewModel, IViewModelWithIcon, ILabeledViewModel, IRefreshCommandListener
     {
         public new delegate InstanceListViewModel Factory(IKistlContext dataCtx, Func<IKistlContext> workingCtxFactory, ObjectClass type, Func<IQueryable> qry);
 
@@ -1086,6 +1086,52 @@ namespace Kistl.Client.Presentables.KistlBase
             ReloadInstances();
         }
 
+        #endregion
+
+        #region ILabeledViewModel
+        private string _label;
+        public string Label
+        {
+            get
+            {
+                return _label ?? Name;
+            }
+            set
+            {
+                if (_label != value )
+                {
+                    _label = value;
+                    OnPropertyChanged("Label");
+                }
+            }
+        }
+
+        private string _toolTip;
+        public string ToolTip
+        {
+            get
+            {
+                return _toolTip ?? Name;
+            }
+            set
+            {
+                if (_toolTip != value)
+                {
+                    _toolTip = value;
+                    OnPropertyChanged("ToolTip");
+                }
+            }
+        }
+
+        public ViewModel Model
+        {
+            get { return this; }
+        }
+
+        public bool Required
+        {
+            get { return false; }
+        }
         #endregion
     }
 }

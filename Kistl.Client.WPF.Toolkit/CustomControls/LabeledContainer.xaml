@@ -8,9 +8,9 @@
              x:Name="lbView">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition MinWidth="{Binding Path=LabelMinWidth, ElementName=lbView}"
-                              Width="{Binding Path=LabelWidth, ElementName=lbView}"
-                              SharedSizeGroup="{Binding Path=LabelSharedSizeGroup, ElementName=lbView}" />
+            <ColumnDefinition MinWidth="{Binding LabelMinWidth, ElementName=lbView}"
+                              Width="{Binding LabelWidth, ElementName=lbView}"
+                              SharedSizeGroup="{Binding LabelSharedSizeGroup, ElementName=lbView}" />
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
 
