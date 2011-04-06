@@ -203,15 +203,12 @@ namespace Kistl.API.Server
     /// </summary>
     public abstract class BaseServerDataObject : BaseServerPersistenceObject, IDataObject
     {
-        private readonly Kistl.App.Base.IAuditable _auditable;
-
         /// <summary>
         /// Attach to Events
         /// </summary>
         protected BaseServerDataObject(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
-            _auditable = this as Kistl.App.Base.IAuditable;
         }
 
         /// <summary>
