@@ -105,9 +105,11 @@ namespace Kistl.API
 
             if (PropertyChangedWithValue != null)
                 PropertyChangedWithValue(this, new PropertyChangeWithValueEventArgs(property, oldValue, newValue));
+
+            AuditPropertyChange(property, oldValue, newValue);
         }
 
-        private sealed class Notification
+        protected sealed class Notification
         {
             public readonly string property;
             public readonly object oldValue;
@@ -120,6 +122,7 @@ namespace Kistl.API
             }
             public Notification(Notification oldNotification, object newValue)
             {
+                if (oldNotification == null) throw new ArgumentNullException("oldNotification");
                 this.property = oldNotification.property;
                 this.oldValue = oldNotification.oldValue;
                 this.newValue = newValue;
@@ -157,5 +160,36 @@ namespace Kistl.API
                 OnPropertyChanged(notification.property, notification.oldValue, notification.newValue);
             }
         }
+
+        #region Auditing
+
+        private Dictionary<string, Notification> _auditLog;
+        protected Dictionary<string, Notification> AuditLog { get { return _auditLog; } }
+
+        protected void LogAudits()
+        {
+            if (!Kistl.API.Utils.Logging.Log.IsWarnEnabled || _auditLog == null)
+                return;
+
+            foreach (var msg in _auditLog.Values)
+            {
+                Kistl.API.Utils.Logging.Log.WarnFormat("{0}.{1} changed from '{2}' to '{3}'",
+                    this.GetType().Name, msg.property, msg.oldValue, msg.newValue);
+            }
+        }
+
+        protected virtual void AuditPropertyChange(string property, object oldValue, object newValue)
+        {
+            // save memory by allocating lazily
+            if (_auditLog == null)
+                _auditLog = new Dictionary<string, Notification>();
+
+            if (_auditLog.ContainsKey(property))
+                _auditLog[property] = new Notification(_auditLog[property], newValue);
+            else
+                _auditLog[property] = new Notification(property, oldValue, newValue);
+        }
+
+        #endregion
     }
 }

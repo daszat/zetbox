@@ -22,14 +22,14 @@ namespace Kistl.DalProvider.Base
         {
             base.OnPropertyChanging(property, oldValue, newValue);
             if (ParentObject != null)
-                ParentObject.NotifyPropertyChanging(ParentProperty + "." + property, null, null);
+                ParentObject.NotifyPropertyChanging(ParentProperty + "." + property, oldValue, newValue);
         }
 
         protected override void OnPropertyChanged(string property, object oldValue, object newValue)
         {
             base.OnPropertyChanged(property, oldValue, newValue);
             if (ParentObject != null)
-                ParentObject.NotifyPropertyChanged(ParentProperty + "." + property, null, null);
+                ParentObject.NotifyPropertyChanged(ParentProperty + "." + property, oldValue, newValue);
         }
     }
 }

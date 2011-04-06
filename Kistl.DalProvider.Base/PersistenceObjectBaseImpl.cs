@@ -7,12 +7,16 @@ namespace Kistl.DalProvider.Base
     using System.Linq;
     using System.Text;
     using Kistl.API;
+    using Kistl.App.Base;
 
     public abstract class PersistenceObjectBaseImpl : Kistl.API.BasePersistenceObject
     {
+        private readonly IAuditable _auditable;
+
         protected PersistenceObjectBaseImpl(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
+            _auditable = this as IAuditable;
         }
 
         private int _ID;
@@ -126,5 +130,63 @@ namespace Kistl.DalProvider.Base
             base.FromStream(sr);
             BinarySerializer.FromStreamConverter(i => _ObjectState = (DataObjectState)i, sr);
         }
+
+        #region Auditing
+
+        protected virtual void SaveAudits()
+        {
+            if (_auditable == null) return;
+
+            if (AuditLog != null)
+            {
+                foreach (var msg in AuditLog.Values)
+                {
+                    var entry = Context.CreateCompoundObject<AuditEntry>();
+                    entry.Identity = "unknown";
+                    entry.MessageFormat = "{0} changed from '{1}' to '{2}'";
+                    entry.PropertyName = msg.property;
+                    entry.OldValue = msg.oldValue == null ? String.Empty : msg.oldValue.ToString();
+                    entry.NewValue = msg.newValue == null ? String.Empty : msg.newValue.ToString();
+                    _auditable.AuditJournal.Add(entry);
+                }
+            }
+            else if (this.ObjectState == DataObjectState.New)
+            {
+                var entry = Context.CreateCompoundObject<AuditEntry>();
+                entry.Identity = "unknown";
+                entry.MessageFormat = "object created";
+                entry.PropertyName = String.Empty;
+                entry.OldValue = String.Empty;
+                entry.NewValue = String.Empty;
+                _auditable.AuditJournal.Add(entry);
+            }
+            AuditLog.Clear();
+        }
+
+        protected override void AuditPropertyChange(string property, object oldValue, object newValue)
+        {
+            // only audit if we can/want record the changes
+            if (_auditable == null)
+                return;
+
+            // only audit on modified objects
+            if (ObjectState != DataObjectState.Modified)
+                return;
+
+            // do not audit internal properties
+            switch (property)
+            {
+                case "ID":
+                case "ObjectState":
+                case "ChangedOn":
+                case "ChangedBy":
+                case "AuditJournal":
+                    return;
+            }
+
+            base.AuditPropertyChange(property, oldValue, newValue);
+        }
+
+        #endregion
     }
 }

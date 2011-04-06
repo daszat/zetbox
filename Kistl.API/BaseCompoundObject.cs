@@ -141,5 +141,10 @@ namespace Kistl.API
 
         protected DataObjectState ObjectState { get { return ParentObject != null ?  ParentObject.ObjectState:DataObjectState.Detached ; } }
         protected IFrozenContext FrozenContext { get { return _lazyCtx(); } }
+
+        protected override void AuditPropertyChange(string property, object oldValue, object newValue)
+        {
+            // Compound objects do not audit locally
+        }
     }
 }

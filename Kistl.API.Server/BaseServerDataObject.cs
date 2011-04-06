@@ -8,15 +8,19 @@ namespace Kistl.API.Server
     using System.IO;
     using System.Linq;
     using System.Text;
+    using Kistl.App.Base;
 
     /// <summary>
     /// Abstract Base Class for a PersistenceObject on the Server Side
     /// </summary>
     public abstract class BaseServerPersistenceObject : BasePersistenceObject
     {
+        private readonly IAuditable _auditable;
+
         protected BaseServerPersistenceObject(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
+            _auditable = this as IAuditable;
             ClientObjectState = DataObjectState.NotDeserialized;
 #if DEBUG
             var trace = new System.Diagnostics.StackTrace(true);
@@ -134,6 +138,64 @@ namespace Kistl.API.Server
             base.FromStream(sr);
             BinarySerializer.FromStreamConverter(i => ClientObjectState = (DataObjectState)i, sr);
         }
+
+        #region Auditing
+
+        protected virtual void SaveAudits()
+        {
+            if (_auditable == null) return;
+
+            if (AuditLog != null)
+            {
+                foreach (var msg in AuditLog.Values)
+                {
+                    var entry = Context.CreateCompoundObject<AuditEntry>();
+                    entry.Identity = "unknown";
+                    entry.MessageFormat = "{0} changed from '{1}' to '{2}'";
+                    entry.PropertyName = msg.property;
+                    entry.OldValue = msg.oldValue == null ? String.Empty : msg.oldValue.ToString();
+                    entry.NewValue = msg.newValue == null ? String.Empty : msg.newValue.ToString();
+                    _auditable.AuditJournal.Add(entry);
+                }
+            }
+            else if (this.ObjectState == DataObjectState.New)
+            {
+                var entry = Context.CreateCompoundObject<AuditEntry>();
+                entry.Identity = "unknown";
+                entry.MessageFormat = "object created";
+                entry.PropertyName = String.Empty;
+                entry.OldValue = String.Empty;
+                entry.NewValue = String.Empty;
+                _auditable.AuditJournal.Add(entry);
+            }
+            AuditLog.Clear();
+        }
+
+        protected override void AuditPropertyChange(string property, object oldValue, object newValue)
+        {
+            // only audit if we can/want record the changes
+            if (_auditable == null)
+                return;
+
+            // only audit on modified objects
+            if (ObjectState != DataObjectState.Modified)
+                return;
+
+            // do not audit internal properties
+            switch (property)
+            {
+                case "ID":
+                case "ObjectState":
+                case "ChangedOn":
+                case "ChangedBy":
+                case "AuditJournal":
+                    return;
+            }
+
+            base.AuditPropertyChange(property, oldValue, newValue);
+        }
+
+        #endregion
     }
 
     /// <summary>
@@ -141,7 +203,7 @@ namespace Kistl.API.Server
     /// </summary>
     public abstract class BaseServerDataObject : BaseServerPersistenceObject, IDataObject
     {
-        private Dictionary<string, string> _auditLog;
+        private readonly Kistl.App.Base.IAuditable _auditable;
 
         /// <summary>
         /// Attach to Events
@@ -149,6 +211,7 @@ namespace Kistl.API.Server
         protected BaseServerDataObject(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
+            _auditable = this as Kistl.App.Base.IAuditable;
         }
 
         /// <summary>
@@ -156,13 +219,8 @@ namespace Kistl.API.Server
         /// </summary>
         public virtual void NotifyPreSave()
         {
-            if (Kistl.API.Utils.Logging.Log.IsWarnEnabled && _auditLog != null)
-            {
-                foreach (var msg in _auditLog.Values)
-                {
-                    Kistl.API.Utils.Logging.Log.Warn(msg);
-                }
-            }
+            LogAudits();
+            SaveAudits();
         }
 
         /// <summary>
@@ -183,20 +241,9 @@ namespace Kistl.API.Server
         /// Reflects the current access rights by the current Identity. 
         /// Base implementations returnes always Full
         /// </summary>
-        public virtual Kistl.API.AccessRights CurrentAccessRights { get { return AccessRights.Full; } }
+        public virtual Kistl.API.AccessRights CurrentAccessRights { get { return Kistl.API.AccessRights.Full; } }
 
         public abstract void UpdateParent(string propertyName, int? id);
-
-        protected override void OnPropertyChanged(string property, object oldValue, object newValue)
-        {
-            base.OnPropertyChanged(property, oldValue, newValue);
-            if (_auditLog == null)
-            {
-                _auditLog = new Dictionary<string, string>();
-            }
-            // TODO: remember real old value, to fix double writes
-            _auditLog[property] = String.Format("{0}.{1} changed from '{2}' to '{3}'", this.GetType().Name, property, oldValue, newValue);
-        }
     }
 
     /// <summary>

@@ -3,11 +3,10 @@ namespace Kistl.DalProvider.Memory
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Text;
-
     using Kistl.API;
-    using System.IO;
 
     public abstract class BaseMemoryPersistenceObject
         : BasePersistenceObject
@@ -46,7 +45,6 @@ namespace Kistl.DalProvider.Memory
             _objectState = DataObjectState.New;
         }
 
-
         public override void ToStream(BinaryWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(sw, auxObjects, eagerLoadLists);
@@ -62,6 +60,11 @@ namespace Kistl.DalProvider.Memory
         internal void SetUnmodified()
         {
             _objectState = DataObjectState.Unmodified;
+        }
+
+        protected override void AuditPropertyChange(string property, object oldValue, object newValue)
+        {
+            // do nothing. memory objects are not auditable
         }
     }
 }

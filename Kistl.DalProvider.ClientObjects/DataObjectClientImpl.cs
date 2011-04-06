@@ -28,5 +28,10 @@ namespace Kistl.DalProvider.Client
         }
 
         #endregion
+
+        protected override void AuditPropertyChange(string property, object oldValue, object newValue)
+        {
+            // client objects do not audit changes
+        }
     }
 }
