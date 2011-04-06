@@ -192,6 +192,10 @@
          TargetType="ListViewItem">
     <Setter Property="Background"
             Value="{Binding Highlight, Converter={StaticResource HighlightGridBackgroundConverter}}" />
+    <Setter Property="Foreground"
+            Value="{Binding Highlight, Converter={StaticResource HighlightGridForegroundConverter}}" />
+    <Setter Property="FontStyle"
+            Value="{Binding Highlight, Converter={StaticResource HighlightGridFontStyleConverter}}" />
   </Style>
 
   <!-- Force GridView content to be streched -->
@@ -201,4 +205,11 @@
             Value="Stretch" />
   </Style>
   
+  <!-- Highlight ColorDefinitions -->
+  <SolidColorBrush x:Key="HighlightState_Warning_GridBackground" Color="#FFFF00" />
+  <SolidColorBrush x:Key="HighlightState_Warning_GridForeground" Color="#000000" />
+
+  <SolidColorBrush x:Key="HighlightState_Deactivated_GridBackground" Color="#FFFFFF" />
+  <SolidColorBrush x:Key="HighlightState_Deactivated_GridForeground" Color="#888888" />
+  <FontStyle x:Key="HighlightState_Deactivated_GridFontStyle">Italic</FontStyle>
 </ResourceDictionary>

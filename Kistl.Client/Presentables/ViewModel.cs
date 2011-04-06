@@ -260,13 +260,13 @@ namespace Kistl.Client.Presentables
         {
         }
 
-        public Highlight(int state)
+        public Highlight(HighlightState state)
         {
             this.stateStore = state;
         }
 
-        protected int stateStore;
-        public virtual int State
+        protected HighlightState stateStore;
+        public virtual HighlightState State
         {
             get
             {

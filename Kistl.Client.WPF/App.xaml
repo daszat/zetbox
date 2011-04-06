@@ -23,7 +23,10 @@
             <commands:Converter x:Key="CommandConverter" />
             <tk:TypeNameTemplateSelector x:Key="TypeNameTemplateSelector" />
 
-            <converter:HighlightGridBackgroundConverter x:Key="HighlightGridBackgroundConverter" />
+          <converter:HighlightGridBackgroundConverter x:Key="HighlightGridBackgroundConverter" />
+          <converter:HighlightGridForegroundConverter x:Key="HighlightGridForegroundConverter" />
+          <converter:HighlightGridFontStyleConverter x:Key="HighlightGridFontStyleConverter" />
+          <converter:HighlightPanelBackgroundConverter x:Key="HighlightPanelBackgroundConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>
