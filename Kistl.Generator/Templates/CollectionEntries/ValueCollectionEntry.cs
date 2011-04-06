@@ -84,6 +84,17 @@ namespace Kistl.Generator.Templates.CollectionEntries
             }
         }
 
+        protected override void ApplyExportGuidPropertyTemplate()
+        {
+            // Do nothing, export guid will not be saved
+            // value collection entries are always streamed/exported in-place
+        }
+
+        protected override string GetExportGuidBackingStoreReference()
+        {
+            return string.Empty;
+        }
+
         protected override string GetCeInterface()
         {
             return prop.GetCollectionEntryClassName();

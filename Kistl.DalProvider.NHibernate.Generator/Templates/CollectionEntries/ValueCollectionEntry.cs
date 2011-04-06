@@ -76,7 +76,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries
 
         protected override string GetExportGuidBackingStoreReference()
         {
-            return "this.Proxy.ExportGuid";
+            return string.Empty; // "this.Proxy.ExportGuid";
         }
 
         protected override void ApplyExportGuidPropertyTemplate()
