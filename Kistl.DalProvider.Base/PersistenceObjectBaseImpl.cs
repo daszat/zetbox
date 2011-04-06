@@ -142,7 +142,7 @@ namespace Kistl.DalProvider.Base
                 foreach (var msg in AuditLog.Values)
                 {
                     var entry = Context.CreateCompoundObject<AuditEntry>();
-                    entry.Identity = "unknown";
+                    entry.Identity = "unbekannt";
                     entry.MessageFormat = "{0} geändert von '{1}' auf '{2}'";
                     entry.PropertyName = msg.property;
                     entry.OldValue = msg.oldValue == null ? String.Empty : msg.oldValue.ToString();
@@ -154,7 +154,7 @@ namespace Kistl.DalProvider.Base
             else if (this.ObjectState == DataObjectState.New)
             {
                 var entry = Context.CreateCompoundObject<AuditEntry>();
-                entry.Identity = "unknown";
+                entry.Identity = "unbekannt";
                 entry.MessageFormat = "object created";
                 entry.PropertyName = String.Empty;
                 entry.OldValue = String.Empty;

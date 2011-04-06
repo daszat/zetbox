@@ -185,7 +185,7 @@ namespace Kistl.DalProvider.Ef
 #endif
                 _table[interfaceType] = new QueryTranslator<T>(
                     new EfQueryTranslatorProvider<T>(
-                        metaDataResolver, this.identity,
+                        metaDataResolver, this.identityStore,
                         query, this, iftFactory));
             }
         }

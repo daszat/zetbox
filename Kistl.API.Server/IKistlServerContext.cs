@@ -1,16 +1,23 @@
+
+namespace Kistl.API.Server
+{
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Kistl.App.Base;
 
-namespace Kistl.API.Server
-{
     /// <summary>
     /// A data context without identity, which is useful for various administrative tasks.
     /// </summary>
     public interface IKistlServerContext 
         : IKistlContext
     {
+        /// <summary>
+        /// The Identity of this context. May be null for administrative/system-level work.
+        /// </summary>
+        Identity Identity { get; }
+
         /// <summary>
         /// Submits the changes and returns the number of affected Objects.
         /// This method does not fire any events or methods on added/changed objects. 

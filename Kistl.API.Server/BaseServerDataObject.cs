@@ -152,7 +152,7 @@ namespace Kistl.API.Server
                 foreach (var msg in AuditLog.Values)
                 {
                     var entry = Context.CreateCompoundObject<AuditEntry>();
-                    entry.Identity = "unknown";
+                    entry.Identity = GetIdentity(Context as IKistlServerContext);
                     entry.MessageFormat = "{0} geändert von '{1}' auf '{2}'";
                     entry.PropertyName = msg.property;
                     entry.OldValue = msg.oldValue == null ? String.Empty : msg.oldValue.ToString();
@@ -164,13 +164,22 @@ namespace Kistl.API.Server
             else if (this.ObjectState == DataObjectState.New)
             {
                 var entry = Context.CreateCompoundObject<AuditEntry>();
-                entry.Identity = "unknown";
+                entry.Identity = GetIdentity(Context as IKistlServerContext);
                 entry.MessageFormat = "object created";
                 entry.PropertyName = String.Empty;
                 entry.OldValue = String.Empty;
                 entry.NewValue = String.Empty;
                 _auditable.AuditJournal.Add(entry);
             }
+        }
+
+        private static string GetIdentity(IKistlServerContext serverCtx)
+        {
+            return serverCtx != null && serverCtx.Identity != null
+                ? string.IsNullOrEmpty(serverCtx.Identity.DisplayName)
+                    ? serverCtx.Identity.UserName
+                    : serverCtx.Identity.DisplayName
+                : "System";
         }
 
         protected override void AuditPropertyChange(string property, object oldValue, object newValue)

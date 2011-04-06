@@ -55,7 +55,7 @@ namespace Kistl.DalProvider.NHibernate
             var query = _nhSession.Query<Tproxy>();
             return new QueryTranslator<Tinterface>(
                 new NHibernateQueryTranslatorProvider<Tinterface>(
-                    metaDataResolver, this.identity,
+                    metaDataResolver, this.identityStore,
                     query, this, iftFactory, _implChecker))
                 .Cast<IPersistenceObject>();
         }

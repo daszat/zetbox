@@ -19,7 +19,7 @@ namespace Kistl.API.Server
     public abstract class BaseKistlDataContext
         : IKistlServerContext, IZBoxContextInternals, IDisposable
     {
-        protected readonly Identity identity;
+        protected readonly Identity identityStore;
         protected readonly IMetaDataResolver metaDataResolver;
         protected KistlConfig config;
         protected InterfaceType.Factory iftFactory;
@@ -40,7 +40,7 @@ namespace Kistl.API.Server
             if (iftFactory == null) { throw new ArgumentNullException("iftFactory"); }
 
             this.metaDataResolver = metaDataResolver;
-            this.identity = identity;
+            this.identityStore = identity;
             this.config = config;
             this.iftFactory = iftFactory;
             this.lazyCtx = lazyCtx;
@@ -147,7 +147,7 @@ namespace Kistl.API.Server
                     throw new ApplicationException("Unexpected failure from metadata resolver");
                 }
                 cls = cls.GetRootClass();
-                if (identity != null && cls.HasAccessControlList() && (cls.GetGroupAccessRights(identity) & AccessRights.Create) != AccessRights.Create)
+                if (identityStore != null && cls.HasAccessControlList() && (cls.GetGroupAccessRights(identityStore) & AccessRights.Create) != AccessRights.Create)
                 {
                     throw new System.Security.SecurityException(string.Format("The current identity has no rights to create an Object of type '{0}'", ifType.Type.FullName));
                 }
@@ -312,11 +312,11 @@ namespace Kistl.API.Server
                     }
                     cb.ChangedOn = now;
 
-                    if (this.identity != null)
+                    if (this.identityStore != null)
                     {
                         if (localIdentity == null)
                         {
-                            localIdentity = this.identity.Context == this ? this.identity : this.GetQuery<Identity>().First(id => id.ID == this.identity.ID);
+                            localIdentity = this.identityStore.Context == this ? this.identityStore : this.GetQuery<Identity>().First(id => id.ID == this.identityStore.ID);
                         }
 
                         if (obj.ObjectState == DataObjectState.New)
@@ -368,7 +368,7 @@ namespace Kistl.API.Server
                 throw new InvalidOperationException("Creating a Blob is not supported. Use CreateBlob() instead");
 
             ObjectClass cls = metaDataResolver.GetObjectClass(ifType).GetRootClass();
-            if (identity != null && cls.HasAccessControlList() && (cls.GetGroupAccessRights(identity) & AccessRights.Create) != AccessRights.Create)
+            if (identityStore != null && cls.HasAccessControlList() && (cls.GetGroupAccessRights(identityStore) & AccessRights.Create) != AccessRights.Create)
             {
                 throw new System.Security.SecurityException(string.Format("The current identity has no rights to create an Object of type '{0}'", ifType.Type.FullName));
             }
@@ -767,5 +767,10 @@ namespace Kistl.API.Server
         public abstract void CommitTransaction();
         public abstract void RollbackTransaction();
         #endregion
+
+        public Identity Identity
+        {
+            get { return this.identityStore; }
+        }
     }
 }
