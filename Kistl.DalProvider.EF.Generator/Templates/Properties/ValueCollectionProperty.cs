@@ -16,8 +16,10 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.Properties
         {
             if (list != null)
             {
-                bool hasPersistentOrder = prop is ValueTypeProperty ? ((ValueTypeProperty)prop).HasPersistentOrder : ((CompoundObjectProperty)prop).HasPersistentOrder;
-                list.Add("Serialization.CollectionSerialization", Templates.Serialization.SerializerType.All, this.prop.Module.Namespace, this.prop.Name, efName, !hasPersistentOrder);
+                bool hasPersistentOrder = prop is ValueTypeProperty
+                    ? ((ValueTypeProperty)prop).HasPersistentOrder
+                    : ((CompoundObjectProperty)prop).HasPersistentOrder;
+                Serialization.CollectionSerialization.Add(list, ctx, this.prop.Module.Namespace, this.prop.Name, efName, !hasPersistentOrder, true);
             }
         }
     }

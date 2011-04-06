@@ -19,8 +19,9 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.Serialization
             string xmlnamespace,
             string xmlname,
             string collectionName,
-            bool orderByValue)
-            : base(_host, ctx, direction, streamName, xmlnamespace, xmlname, collectionName, orderByValue)
+            bool orderByValue,
+            bool inPlace)
+            : base(_host, ctx, direction, streamName, xmlnamespace, xmlname, collectionName, orderByValue, inPlace)
         {
         }
 
@@ -29,7 +30,7 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.Serialization
             // Do not deserialize colletion entries from client to server
             // they will be send by the Client KistlContext as seperate objects
             // from server to client the will be serialized - some kind of eager loading
-            return direction != Templates.Serialization.SerializerDirection.FromStream;
+            return inPlace || direction != Templates.Serialization.SerializerDirection.FromStream;
         }
     }
 }

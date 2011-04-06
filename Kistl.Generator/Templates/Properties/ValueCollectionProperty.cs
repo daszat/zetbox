@@ -103,7 +103,7 @@ namespace Kistl.Generator.Templates.Properties
             // TODO: XML Namespace
             if (list != null)
             {
-                list.Add("Serialization.CollectionSerialization", Serialization.SerializerType.All, moduleNamespace, name, underlyingCollectionName, orderByValue);
+                Serialization.CollectionSerialization.Add(list, ctx, moduleNamespace, name, underlyingCollectionName, orderByValue, true);
             }
         }
     }

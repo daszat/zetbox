@@ -59,10 +59,12 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries
                 typeAndNameList.Add(new KeyValuePair<string, string>("int?", "Value" + Kistl.API.Helper.PositionSuffix));
             }
 
-            if (IsExportable())
-            {
-                typeAndNameList.Add(new KeyValuePair<string, string>("Guid", "ExportGuid"));
-            }
+            // Even exportable value collection entries do not have an 
+            // export guid, since they are serialized in-place in the container
+            //if (IsExportable())
+            //{
+            //    typeAndNameList.Add(new KeyValuePair<string, string>("Guid", "ExportGuid"));
+            //}
 
             this.WriteLine("        public override void SaveOrUpdateTo(NHibernate.ISession session)");
             this.WriteLine("        {");
@@ -72,16 +74,6 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries
             this.WriteLine("");
 
             ObjectClasses.ProxyClass.Call(Host, ctx, interfaceName, new KeyValuePair<string, string>[0], typeAndNameList);
-        }
-
-        protected override string GetExportGuidBackingStoreReference()
-        {
-            return string.Empty; // "this.Proxy.ExportGuid";
-        }
-
-        protected override void ApplyExportGuidPropertyTemplate()
-        {
-            Properties.ExportGuidProperty.Call(Host, ctx, this.MembersToSerialize, prop.ObjectClass.Module.Namespace, GetCeInterface());
         }
 
         protected override void ApplyReloadReferenceBody()

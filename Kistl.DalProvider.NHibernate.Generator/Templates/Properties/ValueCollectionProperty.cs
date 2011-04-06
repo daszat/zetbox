@@ -52,7 +52,8 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
             string referencedCollectionEntryProxy = prop.GetCollectionEntryClassName() + host.Settings["extrasuffix"] + Kistl.API.Helper.ImplementationSuffix + "." + prop.GetCollectionEntryClassName() + "Proxy";
 
             string providerCollectionType = "IList<" + referencedCollectionEntry + ">";
-            string underlyingCollectionName = backingName + "Collection";
+            string underlyingCollectionName = name + "Collection";
+            string underlyingCollectionBackingName = backingName + "Collection";
             string moduleNamespace = prop.Module.Namespace;
 
             string backingCollectionType = (hasPersistentOrder ? "ClientValueListWrapper" : "ClientValueCollectionWrapper")
@@ -66,8 +67,8 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
                 host, ctx, serializationList,
                 name, backingName, backingCollectionType, exposedCollectionInterface,
                 thisInterface, referencedType, referencedCollectionEntry, referencedCollectionEntryProxy,
-                providerCollectionType, underlyingCollectionName, !hasPersistentOrder,
-                moduleNamespace);
+                providerCollectionType, underlyingCollectionName, underlyingCollectionBackingName,
+                !hasPersistentOrder, moduleNamespace);
         }
 
         protected virtual void AddSerialization(Templates.Serialization.SerializationMembersList list, string underlyingCollectionName)
@@ -75,7 +76,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
             // TODO: XML Namespace
             if (list != null)
             {
-                list.Add("Serialization.CollectionSerialization", Templates.Serialization.SerializerType.All, moduleNamespace, name, underlyingCollectionName, orderByValue);
+                Templates.Serialization.CollectionSerialization.Add(list, ctx, moduleNamespace, name, underlyingCollectionName, orderByValue, true);
             }
         }
     }

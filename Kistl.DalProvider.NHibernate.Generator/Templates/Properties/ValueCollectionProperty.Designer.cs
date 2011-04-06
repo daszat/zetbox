@@ -25,18 +25,19 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
 		protected string referencedCollectionEntryProxy;
 		protected string providerCollectionType;
 		protected string underlyingCollectionName;
+		protected string underlyingCollectionBackingName;
 		protected bool orderByValue;
 		protected string moduleNamespace;
 
 
-        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.Generator.Templates.Serialization.SerializationMembersList serializationList, string name, string backingName, string backingCollectionType, string exposedCollectionInterface, string thisInterface, string referencedType, string referencedCollectionEntry, string referencedCollectionEntryProxy, string providerCollectionType, string underlyingCollectionName, bool orderByValue, string moduleNamespace)
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.Generator.Templates.Serialization.SerializationMembersList serializationList, string name, string backingName, string backingCollectionType, string exposedCollectionInterface, string thisInterface, string referencedType, string referencedCollectionEntry, string referencedCollectionEntryProxy, string providerCollectionType, string underlyingCollectionName, string underlyingCollectionBackingName, bool orderByValue, string moduleNamespace)
         {
             if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
 
-            _host.CallTemplate("Properties.ValueCollectionProperty", ctx, serializationList, name, backingName, backingCollectionType, exposedCollectionInterface, thisInterface, referencedType, referencedCollectionEntry, referencedCollectionEntryProxy, providerCollectionType, underlyingCollectionName, orderByValue, moduleNamespace);
+            _host.CallTemplate("Properties.ValueCollectionProperty", ctx, serializationList, name, backingName, backingCollectionType, exposedCollectionInterface, thisInterface, referencedType, referencedCollectionEntry, referencedCollectionEntryProxy, providerCollectionType, underlyingCollectionName, underlyingCollectionBackingName, orderByValue, moduleNamespace);
         }
 
-        public ValueCollectionProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.Generator.Templates.Serialization.SerializationMembersList serializationList, string name, string backingName, string backingCollectionType, string exposedCollectionInterface, string thisInterface, string referencedType, string referencedCollectionEntry, string referencedCollectionEntryProxy, string providerCollectionType, string underlyingCollectionName, bool orderByValue, string moduleNamespace)
+        public ValueCollectionProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Kistl.Generator.Templates.Serialization.SerializationMembersList serializationList, string name, string backingName, string backingCollectionType, string exposedCollectionInterface, string thisInterface, string referencedType, string referencedCollectionEntry, string referencedCollectionEntryProxy, string providerCollectionType, string underlyingCollectionName, string underlyingCollectionBackingName, bool orderByValue, string moduleNamespace)
             : base(_host)
         {
 			this.ctx = ctx;
@@ -51,6 +52,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
 			this.referencedCollectionEntryProxy = referencedCollectionEntryProxy;
 			this.providerCollectionType = providerCollectionType;
 			this.underlyingCollectionName = underlyingCollectionName;
+			this.underlyingCollectionBackingName = underlyingCollectionBackingName;
 			this.orderByValue = orderByValue;
 			this.moduleNamespace = moduleNamespace;
 
@@ -58,22 +60,17 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 27 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ValueCollectionProperty.cst"
-this.WriteObjects("        // BEGIN ",  this.GetType() , "\r\n");
 #line 28 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ValueCollectionProperty.cst"
-AddSerialization(serializationList, underlyingCollectionName); 
+this.WriteObjects("        // BEGIN ",  this.GetType() , "\r\n");
 #line 29 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ValueCollectionProperty.cst"
+AddSerialization(serializationList, underlyingCollectionName); 
+#line 30 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ValueCollectionProperty.cst"
 this.WriteObjects("        ",  GetModifiers() , " ",  exposedCollectionInterface , "<",  referencedType , "> ",  name , "\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            get\r\n");
 this.WriteObjects("            {\r\n");
 this.WriteObjects("                if (",  backingName , " == null)\r\n");
 this.WriteObjects("                {\r\n");
-this.WriteObjects("                    ",  underlyingCollectionName , " = new ProjectedList<",  referencedCollectionEntryProxy , ", ",  referencedCollectionEntry , ">(\r\n");
-this.WriteObjects("                                MagicCollectionFactory.WrapAsList(this.Proxy.",  name , "),\r\n");
-this.WriteObjects("                                p => (",  referencedCollectionEntry , ")OurContext.AttachAndWrap(p),\r\n");
-this.WriteObjects("                                d => (",  referencedCollectionEntryProxy , ")((NHibernatePersistenceObject)d).NHibernateProxy);\r\n");
-this.WriteObjects("\r\n");
 this.WriteObjects("                    ",  backingName , " = new ",  backingCollectionType , "(\r\n");
 this.WriteObjects("                            this.Context,\r\n");
 this.WriteObjects("                            this,\r\n");
@@ -84,8 +81,22 @@ this.WriteObjects("                return ",  backingName , ";\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
+this.WriteObjects("        private ProjectedList<",  referencedCollectionEntryProxy , ", ",  referencedCollectionEntry , "> ",  underlyingCollectionName , "\r\n");
+this.WriteObjects("        {\r\n");
+this.WriteObjects("            get {\r\n");
+this.WriteObjects("                if (",  underlyingCollectionBackingName , " == null)\r\n");
+this.WriteObjects("                {\r\n");
+this.WriteObjects("                    ",  underlyingCollectionBackingName , " = new ProjectedList<",  referencedCollectionEntryProxy , ", ",  referencedCollectionEntry , ">(\r\n");
+this.WriteObjects("                        MagicCollectionFactory.WrapAsList(this.Proxy.",  name , "),\r\n");
+this.WriteObjects("                        p => (",  referencedCollectionEntry , ")OurContext.AttachAndWrap(p),\r\n");
+this.WriteObjects("                        d => (",  referencedCollectionEntryProxy , ")((NHibernatePersistenceObject)d).NHibernateProxy);\r\n");
+this.WriteObjects("                }\r\n");
+this.WriteObjects("                return ",  underlyingCollectionBackingName , ";\r\n");
+this.WriteObjects("            }\r\n");
+this.WriteObjects("        }\r\n");
+this.WriteObjects("\r\n");
 this.WriteObjects("        private ",  backingCollectionType , " ",  backingName , ";\r\n");
-this.WriteObjects("        private ProjectedList<",  referencedCollectionEntryProxy , ", ",  referencedCollectionEntry , "> ",  underlyingCollectionName , ";\r\n");
+this.WriteObjects("        private ProjectedList<",  referencedCollectionEntryProxy , ", ",  referencedCollectionEntry , "> ",  underlyingCollectionBackingName , ";\r\n");
 this.WriteObjects("        // END ",  this.GetType() , "\r\n");
 
         }
