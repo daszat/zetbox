@@ -159,6 +159,7 @@ namespace Kistl.API.Server
                     entry.NewValue = msg.newValue == null ? String.Empty : msg.newValue.ToString();
                     _auditable.AuditJournal.Add(entry);
                 }
+                AuditLog.Clear();
             }
             else if (this.ObjectState == DataObjectState.New)
             {
@@ -170,7 +171,6 @@ namespace Kistl.API.Server
                 entry.NewValue = String.Empty;
                 _auditable.AuditJournal.Add(entry);
             }
-            AuditLog.Clear();
         }
 
         protected override void AuditPropertyChange(string property, object oldValue, object newValue)
