@@ -143,7 +143,7 @@ namespace Kistl.DalProvider.Base
                 {
                     var entry = Context.CreateCompoundObject<AuditEntry>();
                     entry.Identity = "unknown";
-                    entry.MessageFormat = "{0} changed from '{1}' to '{2}'";
+                    entry.MessageFormat = "{0} geändert von '{1}' auf '{2}'";
                     entry.PropertyName = msg.property;
                     entry.OldValue = msg.oldValue == null ? String.Empty : msg.oldValue.ToString();
                     entry.NewValue = msg.newValue == null ? String.Empty : msg.newValue.ToString();
