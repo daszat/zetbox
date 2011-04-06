@@ -411,7 +411,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
         protected virtual void OnStateChanged(ValueViewModelState oldState, ValueViewModelState newState)
         {
-            Logging.Client.DebugFormat("State Change of {0}.{1} from {2} -> {3}", this.GetType().Name, this.Name, oldState, newState);
+            Logging.Client.DebugFormat("State Change of {0} from {1} -> {2}", this.GetType().Name, oldState, newState); // Do not log name, can be called through the constructor
             if (StateChanged != null && oldState != newState)
             {
                 StateChanged(this, new StateChangedEventArgs(oldState, newState));

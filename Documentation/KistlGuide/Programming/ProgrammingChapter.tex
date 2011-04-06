@@ -71,7 +71,31 @@ public interface ObjectClass : DataType
 }
 \end{CS}
 
+\begin{description}
+\item[IsAbstract]
+\item[IsSimpleObject] The \emph{ObjectClass} is marked as a simple, non complex
+object. Set it to true for all classes that have no inheritance and less
+enought and simple properties to edit them in grids and/or lists. This will
+prevent all list view models from opening such an object directly. Also the \emph{ObjectBrowser} will not provide any interface.
+\end{description}
+
 \input{Programming/Relations}
+
+\subsection{Properties}
+
+\begin{CS}
+public interface Property 
+{
+    string Name;
+	...
+}
+\end{CS}
+
+\begin{description}
+\item[Editable in Grid] This is an override for the inline editing behaviour for
+grid and list controls. The default behaviour is to evaluate if the referenced
+\emph{ObjectClass} is a simple object or not.
+\end{description}
 
 \subsection{Additional Metadata}
 
