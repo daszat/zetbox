@@ -59,7 +59,7 @@
     <!-- EntitySets and AssociationSets for all object-value CollectionEntrys -->
 <%
     foreach (var prop in ctx.GetQuery<ValueTypeProperty>()
-        .Where(p => p.IsList) // && !p.IsCalculated)
+        .Where(p => p.IsList && !p.IsCalculated)
         .Where(p => p.ObjectClass is ObjectClass)
         .OrderBy(p => p.ObjectClass.Name)
         .ThenBy(p => p.Name))

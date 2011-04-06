@@ -86,7 +86,7 @@ this.WriteObjects("\r\n");
 this.WriteObjects("    <!-- EntitySets and AssociationSets for all object-value CollectionEntrys -->\r\n");
 #line 61 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.cst"
 foreach (var prop in ctx.GetQuery<ValueTypeProperty>()
-        .Where(p => p.IsList) // && !p.IsCalculated)
+        .Where(p => p.IsList && !p.IsCalculated)
         .Where(p => p.ObjectClass is ObjectClass)
         .OrderBy(p => p.ObjectClass.Name)
         .ThenBy(p => p.Name))
