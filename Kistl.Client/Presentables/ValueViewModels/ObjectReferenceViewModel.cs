@@ -453,6 +453,13 @@ namespace Kistl.Client.Presentables.ValueViewModels
                         .ToList();
 
             needMoreButton = lst.Count > PossibleValuesLimit;
+
+            // Add current value if not already present
+            if (!mdlList.Contains(Value))
+            {
+                mdlList.Add(Value);
+            }
+
             return mdlList;
         }
 
