@@ -17,7 +17,7 @@
         <Binding Source="{StaticResource DataObjectViewModelDesignProvider}" />
     </UserControl.DataContext> -->
 
-    <DockPanel>
+    <DockPanel Style="{StaticResource DataObjectEditor_MainPanel}">
         <ctrls:WorkaroundToolBar DockPanel.Dock="Top"
                                  ItemsSource="{Binding Actions}"
                                  ItemTemplateSelector="{StaticResource defaultTemplateSelector}">
@@ -38,9 +38,7 @@
 
         <ctrls:LoadingIndicator DockPanel.Dock="Top" />
 
-        <Grid>
-
-
+        <Grid Style="{StaticResource DataObjectEditor_PropertyPanel}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />

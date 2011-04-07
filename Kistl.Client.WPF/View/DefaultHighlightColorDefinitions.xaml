@@ -1,0 +1,15 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+  
+  <!-- Warning -->
+  <SolidColorBrush x:Key="HighlightState_Warning_GridBackground" Color="#FFFF00" />
+  <SolidColorBrush x:Key="HighlightState_Warning_GridForeground" Color="#000000" />
+  <SolidColorBrush x:Key="HighlightState_Warning_PanelBackground" Color="#FFFF00" />
+
+  <!-- Deactivated -->
+  <SolidColorBrush x:Key="HighlightState_Deactivated_GridBackground" Color="#FFFFFF" />
+  <SolidColorBrush x:Key="HighlightState_Deactivated_GridForeground" Color="#888888" />
+  <FontStyle x:Key="HighlightState_Deactivated_GridFontStyle">Italic</FontStyle>
+  <SolidColorBrush x:Key="HighlightState_Deactivated_PanelBackground" Color="#888888" />
+</ResourceDictionary>

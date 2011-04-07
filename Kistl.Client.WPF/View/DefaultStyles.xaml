@@ -109,6 +109,7 @@
                 Value="Bold" />
     </Style>
 
+  <!-- Style buttons -->
     <Style x:Key="ImageButton"
            TargetType="{x:Type ctrls:CommandButton}">
         <Setter Property="ContentTemplate">
@@ -146,6 +147,7 @@
         </Setter>
     </Style>
 
+  <!--- Style menus -->
     <Style x:Key="CommandMenuItem"
            TargetType="MenuItem">
         <Setter Property="Command"
@@ -188,6 +190,7 @@
         </Style.Triggers>
     </Style>
     
+  <!-- Style Girds and lists -->
   <Style x:Key="ListViewItemContainerStyle"
          TargetType="ListViewItem">
     <Setter Property="Background"
@@ -205,11 +208,13 @@
             Value="Stretch" />
   </Style>
   
-  <!-- Highlight ColorDefinitions -->
-  <SolidColorBrush x:Key="HighlightState_Warning_GridBackground" Color="#FFFF00" />
-  <SolidColorBrush x:Key="HighlightState_Warning_GridForeground" Color="#000000" />
-
-  <SolidColorBrush x:Key="HighlightState_Deactivated_GridBackground" Color="#FFFFFF" />
-  <SolidColorBrush x:Key="HighlightState_Deactivated_GridForeground" Color="#888888" />
-  <FontStyle x:Key="HighlightState_Deactivated_GridFontStyle">Italic</FontStyle>
+  <!-- Style DataObject Editor -->
+  <Style x:Key="DataObjectEditor_MainPanel"
+         TargetType="Panel">
+    <Setter Property="Background"
+            Value="{Binding Highlight, Converter={StaticResource HighlightPanelBackgroundConverter}}" />
+  </Style>
+  <Style x:Key="DataObjectEditor_PropertyPanel"
+         TargetType="Panel">
+  </Style>
 </ResourceDictionary>

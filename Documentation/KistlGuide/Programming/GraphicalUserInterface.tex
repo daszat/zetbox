@@ -283,6 +283,49 @@ group name as the key.
 
 \subsubsection{ValueViewModel}
 
+\subsubsection{Highlighting}
+Every \emph{ViewModel} supports highlighting. Highlighting is the visual
+representation of an object state. It is the \emph{ViewModel} decision how to
+translate the business state to the visual state. Therefore, the
+\emph{ViewModel} exposes an property \emph{Highlight}.
+
+\begin{CS}
+public class Highlight : INotifyPropertyChanged
+{
+    HighlightState State { get; set; }
+    string GridBackground { get; set; }
+    string GridForeground { get; set; }
+    FontStyle GridFontStyle { get; set; }
+    string PanelBackground { get; set; }
+}
+\end{CS}
+
+Visual states (\emph{HighlightState}) are a fixed enumeration, described as the
+most common verbs like Good, Neutral, Bad, Archived, Deactivated, Active,
+Output, Input, Calculation, Info, Warning, Error, Fatal, Note, \ldots
+
+Each of this \emph{HighlightState} will be translated by the \emph{Toolkit} into
+it final visual representation. E.g. Warning will be rendered in Grid with an
+yellow background color and a black foreground color. Error will be rendered in
+a Grid with an red background color and a white foreground color. This color
+schema makes it easier for the user to identify an object business state
+quickly. Therefore a  \emph{Toolkit} should not implement another color schema.
+
+Sometimes, there is a need to use custom colors. E.g. if the sales volume should
+be formatted from green (high) smoothly to red (low). Something like a balanced
+score card. In this case the \emph{ViewModel} should return custom colors in the
+\emph{GridBackground}, \emph{GridForeground}, etc. properties.
+
+Thus, that every ViewModel supports highlighting it is possible to color the
+whole line plus color some cell individually.
+
+The \emph{HighlightState} is not only used in Grids and Lists. It is also used
+in panels. The color schema may be slightly different from the girds color
+schema. E.G. it makes no sense to color a panels background in a light gray
+color to signal the Deactivated state. It should be a darker gray. If the panels
+background color should be customized override the \emph{PanelBackground}
+property.
+
 \subsection{Implementation}
 
 \subsubsection{Implementing a ViewModel}
