@@ -6,9 +6,15 @@
              xmlns:clientKistlBase="clr-namespace:Kistl.Client.WPF.View.KistlBase"
              xmlns:commands="clr-namespace:Kistl.Client.WPF.Commands;assembly=Kistl.Client.WPF.Toolkit"
              commands:SmartRoutedUICommand.IsCommandSink="True"
-             MinWidth="150">
+             MinWidth="355">
     <DockPanel>
-        <ctrls:CommandButton DockPanel.Dock="Right" CommandViewModel="{Binding EditCommand}" />
-        <TextBlock Text="{Binding ShortText, Mode=OneWay}" />
+        <ctrls:CommandButton DockPanel.Dock="Right" 
+                             CommandViewModel="{Binding EditCommand}"
+                             Height="25"
+                             Width="25"
+                             Style="{StaticResource ImageButton}"
+                             Image="/Kistl.Client.WPF;component/Images/pen.png"/>
+        <TextBlock Text="{Binding ShortText, Mode=OneWay}"
+                   ToolTip="{Binding Value, Mode=OneWay}"/>
     </DockPanel>
 </UserControl>

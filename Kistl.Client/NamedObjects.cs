@@ -20,6 +20,7 @@ namespace Kistl.Client
         public static readonly Guid Icon_fileopen_png = new Guid("f1f14c5c-4cbd-499e-a388-3cf56aa80a11");
         public static readonly Guid Icon_search_png = new Guid("dbb2f49e-48f4-49fc-a9a6-53a403f8ac4b");
         public static readonly Guid Icon_Printer_png = new Guid("6b6376e1-519b-4601-9b88-4c7b5594ca2d");
+        public static readonly Guid Icon_Pen_png = new Guid("d7d4767f-0b2d-468a-8931-866ce07828cb");
         
 
         public static readonly Guid ViewModelDescriptor_NullableValuePropertyModel_Bool = new Guid("09d1f453-d0d9-429e-88e7-e84b33de7c2e");

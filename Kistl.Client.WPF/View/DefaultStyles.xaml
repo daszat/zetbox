@@ -128,7 +128,20 @@
         </Setter>
     </Style>
 
-    <Style x:Key="ImageToolbarButton"
+  <Style x:Key="ImageOnlyButton"
+         TargetType="{x:Type ctrls:CommandButton}">
+    <Setter Property="ContentTemplate">
+      <Setter.Value>
+        <DataTemplate>
+            <Image Source="{Binding Path=(ctrls:CommandButton.Image), RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ctrls:CommandButton}}}"
+                   MaxHeight="32"
+                   MaxWidth="32"/>
+        </DataTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <Style x:Key="ImageToolbarButton"
            BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
            TargetType="{x:Type ctrls:CommandButton}">
         <Setter Property="ContentTemplate">

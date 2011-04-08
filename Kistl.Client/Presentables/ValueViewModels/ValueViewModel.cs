@@ -789,7 +789,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             }
         }
 
-        private int _ShortTextLength = 20;
+        private int _ShortTextLength = 50;
         public int ShortTextLength
         {
             get
