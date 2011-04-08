@@ -131,13 +131,15 @@ namespace Kistl.API.Client
 
         private IEnumerable<IStreamable> ReceiveObjects(IKistlContext ctx, BinaryReader sr, out List<IStreamable> auxObjects)
         {
-            var result = ReceiveObjectList(ctx, sr);
-            auxObjects = ReceiveObjectList(ctx, sr);
+            auxObjects = new List<IStreamable>();
+            var result = ReceiveObjectList(ctx, sr, auxObjects);
+            var newAuxObjects = ReceiveObjectList(ctx, sr, auxObjects);
+            auxObjects.AddRange(newAuxObjects);
             Logging.Facade.DebugFormat("retrieved: {0} objects; {1} auxObjects", result.Count, auxObjects.Count);
             return result;
         }
 
-        private List<IStreamable> ReceiveObjectList(IKistlContext ctx, BinaryReader sr)
+        private List<IStreamable> ReceiveObjectList(IKistlContext ctx, BinaryReader sr, List<IStreamable> auxObjects)
         {
             List<IStreamable> result = new List<IStreamable>();
             bool cont = true;
@@ -148,9 +150,11 @@ namespace Kistl.API.Client
                 BinarySerializer.FromStream(out objType, sr);
 
                 IStreamable obj = (IStreamable)ctx.Internals().CreateUnattached(_iftFactory(objType.GetSystemType()));
-                obj.FromStream(sr);
-
+                var newAuxObjects = obj.FromStream(sr);
+                if (newAuxObjects != null)
+                    auxObjects.AddRange(newAuxObjects.Cast<IStreamable>());
                 result.Add((IStreamable)obj);
+
                 BinarySerializer.FromStream(out cont, sr);
             }
             return result;
@@ -200,7 +204,8 @@ namespace Kistl.API.Client
 
                 using (var sr = new BinaryReader(response.BlobInstance))
                 {
-                    result = ReceiveObjectList(ctx, sr).Cast<Kistl.App.Base.Blob>().Single();
+                    // ignore auxObjects for blobs, which should not have them
+                    result = ReceiveObjectList(ctx, sr, new List<IStreamable>()).Cast<Kistl.App.Base.Blob>().Single();
                 }
             });
             return result;
@@ -210,6 +215,7 @@ namespace Kistl.API.Client
         {
             object result = null;
             IEnumerable<IPersistenceObject> tmpChangedObjects = null;
+            var auxObjects = new List<IStreamable>();
 
             _toolkit.WithWaitDialog(() =>
             {
@@ -221,6 +227,7 @@ namespace Kistl.API.Client
                 BinaryWriter sw = new BinaryWriter(changedObjectsStream);
                 SendObjects(objects, sw);
 
+
                 byte[] retChangedObjectsArray;
                 var resultStream = new MemoryStream(_service.InvokeServerMethod(
                     out retChangedObjectsArray,
@@ -231,10 +238,11 @@ namespace Kistl.API.Client
                     parameterStream.ToArray(),
                     changedObjectsStream.ToArray(),
                     notificationRequests.ToArray()));
+
                 {
                     MemoryStream retChangedObjects = new MemoryStream(retChangedObjectsArray);
                     BinaryReader br = new BinaryReader(retChangedObjects);
-                    tmpChangedObjects = ReceiveObjectList(ctx, br).Cast<IPersistenceObject>();
+                    tmpChangedObjects = ReceiveObjectList(ctx, br, auxObjects).Cast<IPersistenceObject>();
                 }
 
                 resultStream.Seek(0, SeekOrigin.Begin);
@@ -242,13 +250,13 @@ namespace Kistl.API.Client
                 if (retValType.IsIStreamable())
                 {
                     BinaryReader br = new BinaryReader(resultStream);
-                    result = ReceiveObjectList(ctx, br).Cast<IPersistenceObject>().FirstOrDefault();
+                    result = ReceiveObjectList(ctx, br, auxObjects).Cast<IPersistenceObject>().FirstOrDefault();
                 }
                 else if (retValType.IsIEnumerable() && retValType.FindElementTypes().First().IsIPersistenceObject())
                 {
                     BinaryReader br = new BinaryReader(resultStream);
                     IList lst = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(retValType.FindElementTypes().First()));
-                    foreach (object resultObj in ReceiveObjectList(ctx, br))
+                    foreach (object resultObj in ReceiveObjectList(ctx, br, auxObjects))
                     {
                         lst.Add(resultObj);
                     }
@@ -260,7 +268,7 @@ namespace Kistl.API.Client
                 }
             });
 
-            changedObjects = tmpChangedObjects;
+            changedObjects = tmpChangedObjects.Concat(auxObjects.OfType<IPersistenceObject>());
             return result;
         }
 

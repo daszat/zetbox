@@ -69,11 +69,12 @@ namespace Kistl.API.Client.Tests
             BinarySerializer.ToStream(this.fk_Parent, sw);
         }
 
-        public override void FromStream(System.IO.BinaryReader sr)
+        public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader sr)
         {
-            base.FromStream(sr);
+            var baseResult = base.FromStream(sr);
             BinarySerializer.FromStream(out this._Value, sr);
             BinarySerializer.FromStream(out this._fk_Parent, sr);
+            return baseResult;
         }
 
         public override void ApplyChangesFrom(IPersistenceObject obj)

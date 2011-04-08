@@ -192,8 +192,10 @@ namespace Kistl.Server
                 BinarySerializer.FromStream(out objType, sr);
 
                 var obj = ctx.Internals().CreateUnattached(_iftFactory(objType.GetSystemType()));
-                obj.FromStream(sr);
                 objects.Add(obj);
+                var auxObjects = obj.FromStream(sr);
+                if (auxObjects != null)
+                    objects.AddRange(auxObjects);
                 BinarySerializer.FromStream(out @continue, sr);
             }
             return objects;
@@ -375,7 +377,7 @@ namespace Kistl.Server
 
                         IEnumerable<IPersistenceObject> changedObjectsList;
                         IEnumerable<object> parameterList = (IEnumerable<object>)bf.Deserialize(parameter);
-
+                        
                         var result = _sohFactory
                             .GetServerObjectHandler(_iftFactory(type.GetSystemType()))
                             .InvokeServerMethod(ctx, ID, method,

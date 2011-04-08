@@ -76,12 +76,13 @@ namespace Kistl.API.Server.Mocks
             BinarySerializer.ToStream(Value, sw);
         }
 
-        public override void FromStream(System.IO.BinaryReader sr)
+        public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader sr)
         {
-            base.FromStream(sr);
+            var baseResult = base.FromStream(sr);
             string s;
             BinarySerializer.FromStream(out s, sr);
             Value = s;
+            return baseResult;
         }
     }
 }

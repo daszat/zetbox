@@ -157,9 +157,11 @@ namespace Kistl.API.Server.Mocks
             BinarySerializer.ToStreamCollectionEntries(this.TestNamesImpl, sw);
         }
 
-        public override void FromStream(System.IO.BinaryReader sr)
+        public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader sr)
         {
-            base.FromStream(sr);
+            var baseResult = base.FromStream(sr);
+            var result = new List<IPersistenceObject>();
+
             int? id;
             BinarySerializer.FromStream(out id, sr);
             if (id.HasValue)
@@ -174,6 +176,12 @@ namespace Kistl.API.Server.Mocks
             BinarySerializer.FromStream(out this._StringProp, sr);
             BinarySerializer.FromStreamConverter(value => this._TestEnumProp = (TestEnum)value, sr);
             BinarySerializer.FromStreamCollectionEntries(this.TestNamesImpl, sr);
+
+            result.AddRange(this.TestNamesImpl.Cast<IPersistenceObject>());
+
+            return baseResult == null
+                ? result
+                : result.Concat(baseResult);
         }
 
         public delegate void TestMethod_Handler<T>(T obj, System.DateTime DateTimeParamForTestMethod);

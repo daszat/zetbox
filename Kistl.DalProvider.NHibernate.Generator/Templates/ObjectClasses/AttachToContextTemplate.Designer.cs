@@ -38,26 +38,22 @@ this.WriteObjects("\r\n");
 this.WriteObjects("        public override void AttachToContext(IKistlContext ctx)\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            base.AttachToContext(ctx);\r\n");
+this.WriteObjects("            var nhCtx = (NHibernateContext)ctx;\r\n");
 #line 19 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
-foreach(var prop in cls.Properties.OfType<ValueTypeProperty>().Where(p => p.IsList).OrderBy(p => p.Name))
-            {
-
+foreach(var prop in cls.Properties.OfType<ValueTypeProperty>().Where(p => p.IsList).OrderBy(p => p.Name)) { 
+#line 20 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
+this.WriteObjects("            if (_",  prop.Name , " != null)\r\n");
+this.WriteObjects("                this.Proxy.",  prop.Name , ".ForEach<IProxyObject>(i => nhCtx.AttachAndWrap(i));\r\n");
 #line 22 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
+} 
+#line 23 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
+foreach(var prop in cls.Properties.OfType<CompoundObjectProperty>().Where(p => p.IsList).OrderBy(p => p.Name)) { 
+#line 24 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
 this.WriteObjects("            if (_",  prop.Name , " != null)\r\n");
-this.WriteObjects("                this.Proxy.",  prop.Name , ".ForEach<IValueCollectionEntry>(i => ctx.Attach(i));\r\n");
-#line 25 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
-}
-
-            foreach(var prop in cls.Properties.OfType<CompoundObjectProperty>().Where(p => p.IsList).OrderBy(p => p.Name))
-            {
-
-#line 30 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
-this.WriteObjects("            if (_",  prop.Name , " != null)\r\n");
-this.WriteObjects("                this.Proxy.",  prop.Name , ".ForEach<IValueCollectionEntry>(i => ctx.Attach(i));\r\n");
-#line 33 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
-}
-
-#line 35 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
+this.WriteObjects("                this.Proxy.",  prop.Name , ".ForEach<IProxyObject>(i => nhCtx.AttachAndWrap(i));\r\n");
+#line 26 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
+} 
+#line 27 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
 this.WriteObjects("        }\r\n");
 
         }

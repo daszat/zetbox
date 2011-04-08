@@ -222,7 +222,7 @@ using System.IO;
                 objects.Count(),
                 notificationRequests.Sum(req => req.IDs.Length));
 
-            // Fist of all, attach new Objects
+            // First of all, attach new Objects
             foreach (var obj in objects.Where(o => o.ClientObjectState == DataObjectState.New))
             {
                 ctx.Internals().AttachAsNew(obj);

@@ -24,7 +24,8 @@
     string callBaseWithAdditionalArgs = String.Empty;
     SerializerType serType;
 
-    switch(direction) {
+    switch(direction)
+    {
         case SerializerDirection.ToStream:
             argType = "System.IO.BinaryWriter";
             argName = "binStream";
@@ -69,6 +70,12 @@
             throw new ArgumentOutOfRangeException("direction");
     }
 
+    switch(direction)
+    {
+        case SerializerDirection.ToStream:
+        case SerializerDirection.ToXmlStream:
+        case SerializerDirection.Export:
+        case SerializerDirection.MergeImport:
 %>
         public <%= overrideAndCallBase ? "override" : "virtual" %> void <%= methodName %>(<%= argType %> <%= argName %><%= additionalArgs %>)
         {
@@ -96,3 +103,52 @@
     }
 %>
         }
+<%
+            break;
+        case SerializerDirection.FromStream:
+        case SerializerDirection.FromXmlStream:
+%>
+        public <%= overrideAndCallBase ? "override" : "virtual" %> IEnumerable<IPersistenceObject> <%= methodName %>2(<%= argType %> <%= argName %><%= additionalArgs %>)
+        {
+<%
+    if (overrideAndCallBase)
+    {
+%>
+            var baseResult = base.<%= methodName %>2(<%= argName %><%= callBaseWithAdditionalArgs %>);
+            var result = new List<IPersistenceObject>();
+<%
+    }
+    else
+    {
+%>
+            object baseResult = null;
+            var result = new List<IPersistenceObject>();
+<%
+    }
+    
+    if (!overrideAndCallBase && direction == SerializerDirection.Export && !String.IsNullOrEmpty(exportGuidBackingStore))
+    {
+%>
+            xml.WriteAttributeString("ExportGuid", <%= exportGuidBackingStore %>.ToString());
+<%
+    }
+
+    foreach(var serMember in fields.Where(f => (f.SerializerType & serType) == serType))
+    {
+        if (direction == SerializerDirection.Export && serMember.XmlName == "ExportGuid")
+        {
+            continue;
+        }
+        ApplySerializer(direction, serMember, argName);
+    }
+%>
+            return baseResult == null
+                ? result.Count == 0
+                    ? null
+                    : result
+                : baseResult.Concat(result);
+        }
+<%
+            break;
+        }
+%>

@@ -7,7 +7,7 @@ namespace Kistl.API.Mocks
     using System.IO;
     using System.Linq;
     using System.Text;
-using System.Xml.Serialization;
+    using System.Xml.Serialization;
 
     public interface TestDataObject : IDataObject
     {
@@ -68,18 +68,13 @@ using System.Xml.Serialization;
             BinarySerializer.ToStream(BoolProperty, sw);
         }
 
-        public void FromStream(BinaryReader sr)
+        public IEnumerable<IPersistenceObject> FromStream(BinaryReader sr)
         {
             BinarySerializer.FromStream(out _ID, sr);
             BinarySerializer.FromStream(out _StringProperty, sr);
             BinarySerializer.FromStream(out _IntProperty, sr);
             BinarySerializer.FromStream(out _BoolProperty, sr);
-        }
-
-        [Obsolete]
-        public virtual void ToStream(System.Xml.XmlWriter xml, string[] modules)
-        {
-            if (xml == null) throw new ArgumentNullException("xml");
+            return null;
         }
 
         public virtual void ToStream(System.Xml.XmlWriter xml)
@@ -87,9 +82,10 @@ using System.Xml.Serialization;
             if (xml == null) throw new ArgumentNullException("xml");
         }
 
-        public virtual void FromStream(System.Xml.XmlReader xml)
+        public IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
         {
             if (xml == null) throw new ArgumentNullException("xml");
+            return null;
         }
 
         public void ReloadReferences()

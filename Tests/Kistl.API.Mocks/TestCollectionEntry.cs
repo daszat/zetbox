@@ -49,10 +49,11 @@ namespace Kistl.API.Mocks
             ((TestCollectionEntry)obj).TestName = this.TestName;
         }
 
-        public void FromStream(BinaryReader sr)
+        public IEnumerable<IPersistenceObject> FromStream(BinaryReader sr)
         {
             BinarySerializer.FromStream(out _ID, sr);
             BinarySerializer.FromStream(out _TestName, sr);
+            return null;
         }
 
         public void ToStream(BinaryWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
@@ -73,11 +74,11 @@ namespace Kistl.API.Mocks
             if (xml == null) throw new ArgumentNullException("xml");
         }
 
-        public virtual void FromStream(System.Xml.XmlReader xml)
+        public virtual IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
         {
             if (xml == null) throw new ArgumentNullException("xml");
+            return null;
         }
-
 
         public void ReloadReferences()
         {

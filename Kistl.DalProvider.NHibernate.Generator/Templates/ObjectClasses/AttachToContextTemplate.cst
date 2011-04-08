@@ -15,21 +15,13 @@
         public override void AttachToContext(IKistlContext ctx)
         {
             base.AttachToContext(ctx);
-<%
-            foreach(var prop in cls.Properties.OfType<ValueTypeProperty>().Where(p => p.IsList).OrderBy(p => p.Name))
-            {
-%>
+            var nhCtx = (NHibernateContext)ctx;
+<% foreach(var prop in cls.Properties.OfType<ValueTypeProperty>().Where(p => p.IsList).OrderBy(p => p.Name)) { %>
             if (_<%= prop.Name %> != null)
-                this.Proxy.<%= prop.Name %>.ForEach<IValueCollectionEntry>(i => ctx.Attach(i));
-<%
-            }
-
-            foreach(var prop in cls.Properties.OfType<CompoundObjectProperty>().Where(p => p.IsList).OrderBy(p => p.Name))
-            {
-%>
+                this.Proxy.<%= prop.Name %>.ForEach<IProxyObject>(i => nhCtx.AttachAndWrap(i));
+<% } %>
+<% foreach(var prop in cls.Properties.OfType<CompoundObjectProperty>().Where(p => p.IsList).OrderBy(p => p.Name)) { %>
             if (_<%= prop.Name %> != null)
-                this.Proxy.<%= prop.Name %>.ForEach<IValueCollectionEntry>(i => ctx.Attach(i));
-<%
-            }
-%>
+                this.Proxy.<%= prop.Name %>.ForEach<IProxyObject>(i => nhCtx.AttachAndWrap(i));
+<% } %>
         }

@@ -24,15 +24,16 @@ namespace Kistl.API.Server.Mocks
             BinarySerializer.ToStream(TestString, sw);
         }
 
-        public override void FromStream(System.IO.BinaryReader sr)
+        public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader sr)
         {
-            base.FromStream(sr);
+            var baseResult = base.FromStream(sr);
             int _tmpi;
             string _tmps;
             BinarySerializer.FromStream(out _tmpi, sr);
             BinarySerializer.FromStream(out _tmps, sr);
             TestInt = _tmpi;
             TestString = _tmps;
+            return baseResult;
         }
 
         public override Type GetImplementedInterface()

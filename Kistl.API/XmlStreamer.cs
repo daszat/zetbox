@@ -313,6 +313,7 @@ namespace Kistl.API
         public static void FromStreamCollectionEntries<T>(ICollection<T> val, XmlReader xml, string name, string ns)
             where T : IStreamable, new()
         {
+            // collection entries do not have sub-lists
             ReadCollectionEntries<T>(val, xml, name, ns, (obj, x) => obj.FromStream(x));
         }
 
@@ -400,6 +401,7 @@ namespace Kistl.API
                 {
                     while (entries.Read())
                     {
+                        // compound objects do not have sub-lists
                         val.FromStream(xml);
                     }
                 }

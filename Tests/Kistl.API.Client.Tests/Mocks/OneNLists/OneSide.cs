@@ -103,6 +103,11 @@ namespace Kistl.API.Client.Mocks.OneNLists
             get { throw new NotImplementedException(); }
         }
 
+        public void UpdateParent(string propertyName, int? id)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
 
         #region IPersistenceObject Members
@@ -187,7 +192,7 @@ namespace Kistl.API.Client.Mocks.OneNLists
             throw new NotImplementedException();
         }
 
-        public void FromStream(System.IO.BinaryReader sr)
+        public IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader sr)
         {
             throw new NotImplementedException();
         }
@@ -197,7 +202,7 @@ namespace Kistl.API.Client.Mocks.OneNLists
             throw new NotImplementedException();
         }
 
-        public void FromStream(System.Xml.XmlReader xml)
+        public IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
         {
             throw new NotImplementedException();
         }
@@ -289,10 +294,5 @@ namespace Kistl.API.Client.Mocks.OneNLists
 
         #endregion
 
-
-        public void UpdateParent(string propertyName, int? id)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

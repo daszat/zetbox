@@ -125,10 +125,11 @@ namespace Kistl.DalProvider.Base
             BinarySerializer.ToStream((int)ObjectState, sw);
         }
 
-        public override void FromStream(BinaryReader sr)
+        public override IEnumerable<IPersistenceObject> FromStream(BinaryReader sr)
         {
-            base.FromStream(sr);
+            var baseResult = base.FromStream(sr);
             BinarySerializer.FromStreamConverter(i => _ObjectState = (DataObjectState)i, sr);
+            return baseResult;
         }
 
         #region Auditing

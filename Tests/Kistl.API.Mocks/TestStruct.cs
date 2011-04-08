@@ -25,12 +25,13 @@ namespace Kistl.API.Mocks
             BinarySerializer.ToStream(TestProperty, sw);
         }
 
-        public override void FromStream(BinaryReader sr)
+        public override IEnumerable<IPersistenceObject> FromStream(BinaryReader sr)
         {
-            base.FromStream(sr);
+            var baseResult = base.FromStream(sr);
             string _tmp;
             BinarySerializer.FromStream(out _tmp, sr);
             TestProperty = _tmp;
+            return baseResult;
         }
 
         #region TestCompoundObject Members

@@ -137,8 +137,9 @@ namespace Kistl.API
         /// <summary>
         /// Deserialize this Object from a BinaryReader
         /// </summary>
-        /// <param name="sr">BinaryReader to deserialize to.</param>
-        void FromStream(BinaryReader sr);
+        /// <param name="sr">BinaryReader to deserialize from.</param>
+        /// <returns>Returns a list of objects that were in-place serialized. This ensures that they can be processed like everything else in the stream. May return null to indicate absence of additional objects.</returns>
+        IEnumerable<IPersistenceObject> FromStream(BinaryReader sr);
 
         /// <summary>
         /// Serialize this Object to a XmlWriter
@@ -149,8 +150,9 @@ namespace Kistl.API
         /// <summary>
         /// Deserialize this Object from a XmlReader
         /// </summary>
-        /// <param name="xml">XmlReader to deserialize to.</param>
-        void FromStream(XmlReader xml);
+        /// <param name="xml">XmlReader to deserialize from.</param>
+        /// <returns>Returns a list of objects that were in-place serialized. This ensures that they can be processed like everything else in the stream. May return null to indicate absence of additional objects.</returns>
+        IEnumerable<IPersistenceObject> FromStream(XmlReader xml);
 
         /// <summary>
         /// Reloads Relations from internal storage into the providers caches.

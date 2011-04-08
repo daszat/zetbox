@@ -13,7 +13,7 @@ namespace Kistl.App.Test
     using Kistl.API.Client;
     using Kistl.DalProvider.Base;
 
-    public class TestObjClassImpl 
+    public class TestObjClassImpl
         : DataObjectBaseImpl, TestObjClass
     {
         public TestObjClassImpl()
@@ -372,10 +372,9 @@ namespace Kistl.App.Test
             BinarySerializer.ToStream((int?)((TestObjClass)this).TestEnumProp, binStream);
         }
 
-        public override void FromStream(System.IO.BinaryReader binStream)
+        public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
         {
-
-            base.FromStream(binStream);
+            var baseResult = base.FromStream(binStream);
             BinarySerializer.FromStream(out this._MyIntProperty, binStream);
             BinarySerializer.FromStream(out this._fk_ObjectProp, binStream);
             BinarySerializer.FromStream(out this._StringProp, binStream);
@@ -384,6 +383,7 @@ namespace Kistl.App.Test
                 BinarySerializer.FromStream(out baseValue, binStream);
                 ((TestObjClass)this).TestEnumProp = (Kistl.App.Test.TestEnum)baseValue;
             }
+            return baseResult;
         }
 
         public override void ToStream(System.Xml.XmlWriter xml)
@@ -396,14 +396,14 @@ namespace Kistl.App.Test
             XmlStreamer.ToStream((int?)this.TestEnumProp, xml, "TestEnumProp", "Kistl.App.Test");
         }
 
-        public override void FromStream(System.Xml.XmlReader xml)
+        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
         {
-
-            base.FromStream(xml);
+            var baseResult = base.FromStream(xml);
             XmlStreamer.FromStream(ref this._MyIntProperty, xml, "MyIntProperty", "Kistl.App.Test");
             XmlStreamer.FromStream(ref this._fk_ObjectProp, xml, "ObjectProp", "http://dasz.at/Kistl");
             XmlStreamer.FromStream(ref this._StringProp, xml, "StringProp", "Kistl.App.Test");
             XmlStreamer.FromStreamConverter(v => ((TestObjClass)this).TestEnumProp = (Kistl.App.Test.TestEnum)v, xml, "TestEnumProp", "Kistl.App.Test");
+            return baseResult;
         }
 
         #endregion

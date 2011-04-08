@@ -610,6 +610,7 @@ namespace Kistl.API
             {
                 val = new T();
                 val.FromStream(sr);
+                // CompoundObjects cannot have lists
             }
 
             SerializerTrace("read {0} value: {1}", typeof(T), val);
@@ -888,6 +889,7 @@ namespace Kistl.API
 
                 T obj = new T();
                 obj.FromStream(sr);
+                // value collection entries cannot have lists
                 val.Add(obj);
                 SerializerTrace("read {0} value: {1}", typeof(T), val);
             }

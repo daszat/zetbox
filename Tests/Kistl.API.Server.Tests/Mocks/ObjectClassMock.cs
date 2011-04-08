@@ -17,7 +17,8 @@ namespace Kistl.API.Server.Mocks
 
         public Kistl.App.Base.ObjectClass BaseObjectClass
         {
-            get; set;
+            get;
+            set;
         }
 
         public ICollection<Kistl.App.Base.InstanceConstraint> Constraints
@@ -179,6 +180,11 @@ namespace Kistl.API.Server.Mocks
             get { throw new NotImplementedException(); }
         }
 
+        public void UpdateParent(string propertyName, int? id)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
 
         #region IPersistenceObject Members
@@ -275,7 +281,7 @@ namespace Kistl.API.Server.Mocks
             throw new NotImplementedException();
         }
 
-        public void FromStream(System.IO.BinaryReader sr)
+        public IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader sr)
         {
             throw new NotImplementedException();
         }
@@ -285,7 +291,7 @@ namespace Kistl.API.Server.Mocks
             throw new NotImplementedException();
         }
 
-        public void FromStream(System.Xml.XmlReader xml)
+        public IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
         {
             throw new NotImplementedException();
         }
@@ -446,11 +452,5 @@ namespace Kistl.API.Server.Mocks
         }
 
         #endregion
-
-
-        public void UpdateParent(string propertyName, int? id)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -9,7 +9,7 @@ using NUnit.Framework;
 
 namespace Kistl.API.AbstractConsumerTests.BinarySerializers
 {
-    class MinimalCompoundObjectTest 
+    class MinimalCompoundObjectTest
         : ICompoundObject
     {
         #region ICompoundObject Members
@@ -38,8 +38,9 @@ namespace Kistl.API.AbstractConsumerTests.BinarySerializers
 
         }
 
-        public void FromStream(BinaryReader sr)
+        public IEnumerable<IPersistenceObject> FromStream(BinaryReader sr)
         {
+            return null;
         }
 
         public virtual void ToStream(System.Xml.XmlWriter xml)
@@ -47,9 +48,10 @@ namespace Kistl.API.AbstractConsumerTests.BinarySerializers
             if (xml == null) throw new ArgumentNullException("xml");
         }
 
-        public virtual void FromStream(System.Xml.XmlReader xml)
+        public IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
         {
             if (xml == null) throw new ArgumentNullException("xml");
+            return null;
         }
 
         public void ReloadReferences()

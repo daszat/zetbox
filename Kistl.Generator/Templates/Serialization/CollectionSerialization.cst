@@ -30,6 +30,7 @@
             case SerializerDirection.FromStream:
 %>
             BinarySerializer.FromStreamCollectionEntries(this.<%= collectionName %>, <%= streamName %>);
+            result.AddRange(this.<%= collectionName %>.Cast<IPersistenceObject>());
 <%
                 break;
             case SerializerDirection.ToXmlStream:
@@ -40,6 +41,7 @@
             case SerializerDirection.FromXmlStream:
 %>
             XmlStreamer.FromStreamCollectionEntries(this.<%= collectionName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
+            result.AddRange(this.<%= collectionName %>.Cast<IPersistenceObject>());
 <%
                 break;
             case SerializerDirection.MergeImport:

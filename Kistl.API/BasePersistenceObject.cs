@@ -140,7 +140,7 @@ namespace Kistl.API
         /// Base method for deserializing this Object.
         /// </summary>
         /// <param name="sr">Stream to serialize from</param>
-        public virtual void FromStream(BinaryReader sr)
+        public virtual IEnumerable<IPersistenceObject> FromStream(BinaryReader sr)
         {
             if (sr == null)
                 throw new ArgumentNullException("sr");
@@ -148,18 +148,7 @@ namespace Kistl.API
                 throw new InvalidOperationException("Deserializing attached objects is not allowed");
 
             BinarySerializer.FromStreamConverter(i => this.ID = i, sr);
-        }
-
-        /// <summary>
-        /// Base method for serializing this Object to XML.
-        /// </summary>
-        /// <param name="xml">Stream to serialize to</param>
-        /// <param name="modules">an array of module names to constrain the output</param>
-        [Obsolete]
-        public virtual void ToStream(XmlWriter xml, string[] modules)
-        {
-            if (xml == null)
-                throw new ArgumentNullException("xml");
+            return null;
         }
 
         /// <summary>
@@ -176,10 +165,12 @@ namespace Kistl.API
         /// Base method for deserializing this Object from XML.
         /// </summary>
         /// <param name="xml">Stream to serialize from</param>
-        public virtual void FromStream(XmlReader xml)
+        public virtual IEnumerable<IPersistenceObject> FromStream(XmlReader xml)
         {
             if (xml == null)
                 throw new ArgumentNullException("xml");
+
+            return null;
         }
 
         /// <summary>

@@ -72,10 +72,12 @@ namespace Kistl.API
         /// using external means, e.g. by examining the position in the stream.
         /// </summary>
         /// <param name="sr">the stream to read from</param>
-        public virtual void FromStream(BinaryReader sr)
+        public virtual IEnumerable<IPersistenceObject> FromStream(BinaryReader sr)
         {
             if (sr == null)
                 throw new ArgumentNullException("sr");
+
+            return null;
         }
 
         public virtual void ToStream(System.Xml.XmlWriter xml)
@@ -83,9 +85,11 @@ namespace Kistl.API
             if (xml == null) throw new ArgumentNullException("xml");
         }
 
-        public virtual void FromStream(System.Xml.XmlReader xml)
+        public virtual IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
         {
             if (xml == null) throw new ArgumentNullException("xml");
+
+            return null;
         }
 
         /// <summary>

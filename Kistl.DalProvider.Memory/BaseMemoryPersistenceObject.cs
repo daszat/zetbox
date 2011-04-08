@@ -51,10 +51,11 @@ namespace Kistl.DalProvider.Memory
             BinarySerializer.ToStream((int)ObjectState, sw);
         }
 
-        public override void FromStream(BinaryReader sr)
+        public override IEnumerable<IPersistenceObject> FromStream(BinaryReader sr)
         {
-            base.FromStream(sr);
+            var baseResult = base.FromStream(sr);
             BinarySerializer.FromStreamConverter(i => _objectState = (DataObjectState)i, sr);
+            return baseResult;
         }
 
         internal void SetUnmodified()
