@@ -1,3 +1,4 @@
+#define INI50
 
 namespace Kistl.Client.Bootstrapper
 {
@@ -265,7 +266,11 @@ namespace Kistl.Client.Bootstrapper
 
         private void Bootstrapper_Load(object sender, EventArgs e)
         {
+#if INI50
+            this.address = Program.Args.Length > 0 ? Program.Args[0] : "http://db-server/";
+#else
             this.address = Program.Args.Length > 0 ? Program.Args[0] : Properties.Settings.Default.Address;
+#endif
 
             if (string.IsNullOrEmpty(address))
             {
