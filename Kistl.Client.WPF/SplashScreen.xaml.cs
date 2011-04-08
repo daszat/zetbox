@@ -1,4 +1,4 @@
-#define NO_SPLASH_SCREEN
+//#define NO_SPLASH_SCREEN
 
 namespace Kistl.Client.WPF
 {
