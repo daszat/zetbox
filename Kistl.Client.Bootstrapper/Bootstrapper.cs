@@ -41,7 +41,11 @@ namespace Kistl.Client.Bootstrapper
             {
                 running = true;
                 var files = LoadFileInformations();
-                if (files == null) return;
+                if (files == null)
+                {
+                    SetStatus("Unable to get files");
+                    return;
+                }
 
                 targetDir = PrepareTargetDir();
 
@@ -82,9 +86,29 @@ namespace Kistl.Client.Bootstrapper
         private FileInfoArray LoadFileInformations()
         {
             SetStatus(Properties.Resources.LoadingFileinformation);
-            var adr = new Uri(new Uri(address), "Bootstrapper.svc/GetFileInfos");
-            var filesBuffer = GetFileInfos(adr);
+            Uri adr;
+            while (true)
+            {
+                try
+                {
+                    adr = new Uri(new Uri(address), "Bootstrapper.svc/GetFileInfos");
+                    break;
+                }
+                catch (UriFormatException)
+                {
+                    var dlg = new AddressDialog();
+                    if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.Cancel)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        address = Properties.Settings.Default.Address;
+                    }
+                }
+            }
 
+            var filesBuffer = GetFileInfos(adr);
             if (string.IsNullOrEmpty(filesBuffer))
             {
                 SetStatus(Properties.Resources.ConnectionError);
@@ -112,16 +136,29 @@ namespace Kistl.Client.Bootstrapper
                 }
                 catch (WebException ex)
                 {
-                    if (ex.Response is HttpWebResponse && ((HttpWebResponse)ex.Response).StatusCode == HttpStatusCode.Unauthorized)
+                    if (ex.Response is HttpWebResponse)
                     {
-                        PasswordDialog dlg = new PasswordDialog();
-                        if (dlg.ShowDialog() == DialogResult.OK)
+                        var resp = (HttpWebResponse)ex.Response;
+                        switch (resp.StatusCode)
                         {
-                            service.Credentials = new NetworkCredential(dlg.UserName, dlg.Password);
-                            continue;
+                            case HttpStatusCode.Unauthorized:
+                                PasswordDialog dlg = new PasswordDialog();
+                                if (dlg.ShowDialog() == DialogResult.OK)
+                                {
+                                    service.Credentials = new NetworkCredential(dlg.UserName, dlg.Password);
+                                    continue;
+                                }
+                                else
+                                {
+                                    return null;
+                                }
+                            case HttpStatusCode.NotFound:
+                                SetStatus("Invalid URL");
+                                Properties.Settings.Default.Address = string.Empty;
+                                Properties.Settings.Default.Save();
+                                return null;
                         }
                     }
-                    return null;
                 }
             }
         }
