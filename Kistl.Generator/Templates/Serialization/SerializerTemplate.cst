@@ -108,13 +108,13 @@
         case SerializerDirection.FromStream:
         case SerializerDirection.FromXmlStream:
 %>
-        public <%= overrideAndCallBase ? "override" : "virtual" %> IEnumerable<IPersistenceObject> <%= methodName %>2(<%= argType %> <%= argName %><%= additionalArgs %>)
+        public <%= overrideAndCallBase ? "override" : "virtual" %> IEnumerable<IPersistenceObject> <%= methodName %>(<%= argType %> <%= argName %><%= additionalArgs %>)
         {
 <%
     if (overrideAndCallBase)
     {
 %>
-            var baseResult = base.<%= methodName %>2(<%= argName %><%= callBaseWithAdditionalArgs %>);
+            var baseResult = base.<%= methodName %>(<%= argName %><%= callBaseWithAdditionalArgs %>);
             var result = new List<IPersistenceObject>();
 <%
     }

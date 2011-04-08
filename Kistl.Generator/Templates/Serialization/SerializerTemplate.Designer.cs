@@ -139,14 +139,14 @@ break;
         case SerializerDirection.FromXmlStream:
 
 #line 111 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
-this.WriteObjects("        public ",  overrideAndCallBase ? "override" : "virtual" , " IEnumerable<IPersistenceObject> ",  methodName , "2(",  argType , " ",  argName , "",  additionalArgs , ")\r\n");
+this.WriteObjects("        public ",  overrideAndCallBase ? "override" : "virtual" , " IEnumerable<IPersistenceObject> ",  methodName , "(",  argType , " ",  argName , "",  additionalArgs , ")\r\n");
 this.WriteObjects("        {\r\n");
 #line 114 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
 if (overrideAndCallBase)
     {
 
 #line 117 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
-this.WriteObjects("            var baseResult = base.",  methodName , "2(",  argName , "",  callBaseWithAdditionalArgs , ");\r\n");
+this.WriteObjects("            var baseResult = base.",  methodName , "(",  argName , "",  callBaseWithAdditionalArgs , ");\r\n");
 this.WriteObjects("            var result = new List<IPersistenceObject>();\r\n");
 #line 120 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
 }
