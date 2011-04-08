@@ -47,6 +47,7 @@ namespace Kistl.Client.WPF.CustomControls
             {
                 WindowViewModel.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(WindowView_PropertyChanged);
             }
+            this.Activate();
         }
 
         void WindowView_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
