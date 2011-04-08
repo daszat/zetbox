@@ -1,3 +1,4 @@
+#define DONT_CACHE_TEMPLATE // Avoid caching, templates will be resused. At least the Combobox gets confused.
 
 namespace Kistl.Client.WPF.Toolkit
 {
@@ -83,7 +84,9 @@ namespace Kistl.Client.WPF.Toolkit
             return CreateTemplate(pmd.GetViewDescriptor(Toolkit.WPF));
         }
 
+#if !DONT_CACHE_TEMPLATE
         private static Dictionary<Type, DataTemplate> templateCache = new Dictionary<Type, DataTemplate>();
+#endif
 
         private static DataTemplate CreateTemplate(ViewDescriptor visualDesc)
         {
@@ -95,12 +98,15 @@ namespace Kistl.Client.WPF.Toolkit
             Logging.Log.DebugFormat("Creating Template with {0}", visualDesc.ToString());
             Type t = visualDesc.ControlRef.AsType(true);
             DataTemplate result;
+#if !DONT_CACHE_TEMPLATE
             lock (templateCache)
             {
                 if (!templateCache.ContainsKey(t))
                 {
+#endif
                     result = new DataTemplate();
                     result.VisualTree = new FrameworkElementFactory(t);
+#if !DONT_CACHE_TEMPLATE
                     templateCache[t] = result;
                 }
                 else
@@ -108,6 +114,8 @@ namespace Kistl.Client.WPF.Toolkit
                     result = templateCache[t];
                 }
             }
+#endif
+                    
             return result;
         }
 

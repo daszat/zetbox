@@ -1,3 +1,4 @@
+#define NO_SPLASH_SCREEN
 
 namespace Kistl.Client.WPF
 {
@@ -27,12 +28,15 @@ namespace Kistl.Client.WPF
         {
             if (DesignerProperties.GetIsInDesignMode(this)) return;
 
+#if !NO_SPLASH_SCREEN
             Steps = 10;
             CurrentStep = 0;
             InitializeComponent();
             Log.Debug("Initialization complete");
+#endif
         }
 
+#if !NO_SPLASH_SCREEN
         private static readonly log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Client.WPF.SplashScreen");
         private static readonly object _lock = new object();
         private static SplashScreen _current = null;
@@ -51,9 +55,10 @@ namespace Kistl.Client.WPF
             _created.Set();
             System.Windows.Threading.Dispatcher.Run();
         }
-
+#endif
         public static void ShowSplashScreen(string message, string info, int steps)
         {
+#if !NO_SPLASH_SCREEN
             using (Log.DebugTraceMethodCall("ShowSplashScreen"))
             {
                 lock (_lock)
@@ -94,10 +99,12 @@ namespace Kistl.Client.WPF
                     }
                 }
             }
+#endif
         }
 
         public static void HideSplashScreen()
         {
+#if !NO_SPLASH_SCREEN
             using (Log.DebugTraceMethodCall("HideSplashScreen"))
             {
                 lock (_lock)
@@ -118,10 +125,12 @@ namespace Kistl.Client.WPF
                     }
                 }
             }
+#endif
         }
 
         public static void SetInfo(string info)
         {
+#if !NO_SPLASH_SCREEN
             using (Log.DebugTraceMethodCall("SetInfo"))
             {
                 lock (_lock)
@@ -139,6 +148,7 @@ namespace Kistl.Client.WPF
                     }
                 }
             }
+#endif
         }
 
         public string Message
