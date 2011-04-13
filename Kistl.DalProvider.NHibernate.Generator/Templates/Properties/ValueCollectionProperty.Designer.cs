@@ -88,7 +88,7 @@ this.WriteObjects("                if (",  underlyingCollectionBackingName , " =
 this.WriteObjects("                {\r\n");
 this.WriteObjects("                    ",  underlyingCollectionBackingName , " = new ",  providerCollectionType , "(\r\n");
 this.WriteObjects("                        MagicCollectionFactory.WrapAsList(this.Proxy.",  name , "),\r\n");
-this.WriteObjects("                        p => (",  referencedCollectionEntry , ")OurContext.AttachAndWrap(p),\r\n");
+this.WriteObjects("                        p => OurContext != null ? (",  referencedCollectionEntry , ")OurContext.AttachAndWrap(p) : new ",  referencedCollectionEntry , "(() => FrozenContext, p),\r\n");
 this.WriteObjects("                        d => (",  referencedCollectionEntryProxy , ")((NHibernatePersistenceObject)d).NHibernateProxy);\r\n");
 this.WriteObjects("                }\r\n");
 this.WriteObjects("                return ",  underlyingCollectionBackingName , ";\r\n");

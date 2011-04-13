@@ -50,7 +50,7 @@
                 {
                     <%= underlyingCollectionBackingName %> = new <%= providerCollectionType %>(
                         MagicCollectionFactory.WrapAsList(this.Proxy.<%= name %>),
-                        p => (<%= referencedCollectionEntry %>)OurContext.AttachAndWrap(p),
+                        p => OurContext != null ? (<%= referencedCollectionEntry %>)OurContext.AttachAndWrap(p) : new <%= referencedCollectionEntry %>(() => FrozenContext, p),
                         d => (<%= referencedCollectionEntryProxy %>)((NHibernatePersistenceObject)d).NHibernateProxy);
                 }
                 return <%= underlyingCollectionBackingName %>;
