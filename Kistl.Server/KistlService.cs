@@ -193,9 +193,7 @@ namespace Kistl.Server
 
                 var obj = ctx.Internals().CreateUnattached(_iftFactory(objType.GetSystemType()));
                 objects.Add(obj);
-                var auxObjects = obj.FromStream(sr);
-                if (auxObjects != null)
-                    objects.AddRange(auxObjects);
+                obj.FromStream(sr);
                 BinarySerializer.FromStream(out @continue, sr);
             }
             return objects;

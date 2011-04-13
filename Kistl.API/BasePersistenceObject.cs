@@ -113,6 +113,43 @@ namespace Kistl.API
             this.ID = obj.ID;
         }
 
+        private void Synchronize<T>(IEnumerable<T> me, IEnumerable<T> other, Action<T> add, Action<T> delete) where T : class, IValueCollectionEntry
+        {
+            // Add/Modify
+            foreach (IPersistenceObject otherItem in other)
+            {
+                var meItem = me.SingleOrDefault(i => i.ID == otherItem.ID);
+                if (meItem == null)
+                {
+                    add((T)otherItem);
+                }
+                else
+                {
+                    meItem.ApplyChangesFrom(otherItem);
+                }
+            }
+            // Delete
+            foreach (IPersistenceObject meItem in me)
+            {
+                var otherItem = me.SingleOrDefault(i => i.ID == meItem.ID);
+                if (otherItem == null)
+                {
+                    delete((T)otherItem);
+                }
+            }
+        }
+
+        public virtual void SynchronizeCollections<T>(ICollection<T> me, ICollection<T> other) where T : class, IValueCollectionEntry
+        {
+            Synchronize<T>(me, other, (obj) => me.Add(obj), (obj) => me.Remove(obj));
+        }
+
+        public virtual void SynchronizeLists<T>(IList<T> me, IList<T> other) where T : class, IValueCollectionEntry
+        {
+            Synchronize<T>(me, other, (obj) => me.Add(obj), (obj) => me.Remove(obj));
+        }
+
+
         /// <summary>
         /// Returns the most specific System.Type implemented by this object.
         /// </summary>

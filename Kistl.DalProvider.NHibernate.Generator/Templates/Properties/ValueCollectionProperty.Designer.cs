@@ -81,12 +81,12 @@ this.WriteObjects("                return ",  backingName , ";\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
-this.WriteObjects("        private ProjectedList<",  referencedCollectionEntryProxy , ", ",  referencedCollectionEntry , "> ",  underlyingCollectionName , "\r\n");
+this.WriteObjects("        private ",  providerCollectionType , " ",  underlyingCollectionName , "\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            get {\r\n");
 this.WriteObjects("                if (",  underlyingCollectionBackingName , " == null)\r\n");
 this.WriteObjects("                {\r\n");
-this.WriteObjects("                    ",  underlyingCollectionBackingName , " = new ProjectedList<",  referencedCollectionEntryProxy , ", ",  referencedCollectionEntry , ">(\r\n");
+this.WriteObjects("                    ",  underlyingCollectionBackingName , " = new ",  providerCollectionType , "(\r\n");
 this.WriteObjects("                        MagicCollectionFactory.WrapAsList(this.Proxy.",  name , "),\r\n");
 this.WriteObjects("                        p => (",  referencedCollectionEntry , ")OurContext.AttachAndWrap(p),\r\n");
 this.WriteObjects("                        d => (",  referencedCollectionEntryProxy , ")((NHibernatePersistenceObject)d).NHibernateProxy);\r\n");
@@ -96,7 +96,7 @@ this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("        private ",  backingCollectionType , " ",  backingName , ";\r\n");
-this.WriteObjects("        private ProjectedList<",  referencedCollectionEntryProxy , ", ",  referencedCollectionEntry , "> ",  underlyingCollectionBackingName , ";\r\n");
+this.WriteObjects("        private ",  providerCollectionType , " ",  underlyingCollectionBackingName , ";\r\n");
 this.WriteObjects("        // END ",  this.GetType() , "\r\n");
 
         }

@@ -47,6 +47,16 @@ namespace Kistl.API
 
         public virtual void ApplyChangesFrom(ICompoundObject other) { }
 
+        public virtual void SynchronizeCollections<T>(ICollection<T> me, ICollection<T> other) where T : IPersistenceObject
+        {
+            throw new NotImplementedException();
+        }
+
+        public virtual void SynchronizeLists<T>(IList<T> me, IList<T> other) where T : IPersistenceObject
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
 
         #region IStreamable Members

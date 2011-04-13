@@ -20,7 +20,7 @@
             {
 %>
             if (_<%= prop.Name %> != null)
-                _<%= prop.Name %>Collection.ForEach<IValueCollectionEntry>(i => ctx.Attach(i));
+                _<%= prop.Name %>Collection.ForEach<IPersistenceObject>(i => ctx.Attach(i));
 <%
             }
 
@@ -28,7 +28,7 @@
             {
 %>
             if (_<%= prop.Name %> != null)
-                _<%= prop.Name %>Collection.ForEach<IValueCollectionEntry>(i => ctx.Attach(i));
+                _<%= prop.Name %>Collection.ForEach<IPersistenceObject>(i => ctx.Attach(i));
 <%
             }
 %>

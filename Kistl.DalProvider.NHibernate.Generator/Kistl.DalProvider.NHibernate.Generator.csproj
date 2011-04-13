@@ -118,6 +118,14 @@
       <DependentUpon>PropertiesHbm.cst</DependentUpon>
     </Compile>
     <Compile Include="Templates\Module.cs" />
+    <Compile Include="Templates\ObjectClasses\ApplyChangesFromMethod.cs">
+      <DependentUpon>ApplyChangesFromMethod.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\ObjectClasses\ApplyChangesFromMethod.Designer.cs">
+      <DependentUpon>ApplyChangesFromMethod.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Templates\ObjectClasses\AttachToContextTemplate.cs">
       <DependentUpon>AttachToContextTemplate.cst</DependentUpon>
     </Compile>
@@ -298,6 +306,10 @@
     <None Include="Templates\Mappings\PropertiesHbm.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>PropertiesHbm.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\ObjectClasses\ApplyChangesFromMethod.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>ApplyChangesFromMethod.Designer.cs</LastGenOutput>
     </None>
     <None Include="Templates\ObjectClasses\AttachToContextTemplate.cst">
       <Generator>Arebis Template Processor</Generator>

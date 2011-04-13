@@ -30,7 +30,6 @@
             case SerializerDirection.FromStream:
 %>
             BinarySerializer.FromStreamCollectionEntries(this.<%= collectionName %>, <%= streamName %>);
-            result.AddRange(this.<%= collectionName %>.Cast<IPersistenceObject>());
 <%
                 break;
             case SerializerDirection.ToXmlStream:

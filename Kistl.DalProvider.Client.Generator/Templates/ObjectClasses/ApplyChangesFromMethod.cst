@@ -1,13 +1,12 @@
 ﻿<%@ CodeTemplate Language="C#" 
     Name="ObjectClasses.ApplyChangesFromMethod"
-    ClassName="Kistl.Generator.Templates.ObjectClasses.ApplyChangesFromMethod" 
+    ClassName="Kistl.DalProvider.Client.Generator.Templates.ObjectClasses.ApplyChangesFromMethod" 
     Inherits="Kistl.Generator.ResourceTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Linq" %>
 <%@ Import Namespace="Kistl.API" %>
 <%@ Import Namespace="Kistl.API.Server" %>
 <%@ Import Namespace="Kistl.App.Base" %>
-<%@ Import Namespace="Kistl.App.Extensions" %>
 <%@ Import Namespace="Kistl.Generator" %>
 <%@ Import Namespace="Kistl.Generator.Extensions" %>
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
@@ -24,19 +23,15 @@
             var me = (<%= clsName %>)this;
 
 <% foreach(var prop in cls.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsCalculated).OrderBy(p => p.Name)) { %>
-<%      if (prop.IsList && prop.HasPersistentOrder) { %>
-            SynchronizeLists(this.<%= prop.Name %>Impl, otherImpl.<%= prop.Name %>Impl);
-<%      } else if (prop.IsList && !prop.HasPersistentOrder) { %>
-            SynchronizeCollections(this.<%= prop.Name %>Impl, otherImpl.<%= prop.Name %>Impl);
+<%      if (prop.IsList) { %>
+            SynchronizeLists(this._<%= prop.Name %>Collection, otherImpl._<%= prop.Name %>Collection);
 <%      } else { %>
             me.<%= prop.Name %> = other.<%= prop.Name %>;
 <%      } %>
 <% } %>
 <% foreach(var prop in cls.Properties.OfType<CompoundObjectProperty>()/*.Where(p => !p.IsCalculated)*/.OrderBy(p => p.Name)) { %>
-<%      if (prop.IsList && prop.HasPersistentOrder) { %>
-            SynchronizeLists(this.<%= prop.Name %>Impl, otherImpl.<%= prop.Name %>Impl);
-<%      } else if (prop.IsList && !prop.HasPersistentOrder) { %>
-            SynchronizeCollections(this.<%= prop.Name %>Impl, otherImpl.<%= prop.Name %>Impl);
+<%      if (prop.IsList) { %>
+            SynchronizeLists(this._<%= prop.Name %>Collection, otherImpl._<%= prop.Name %>Collection);
 <%      } else { %>
             if (me.<%= prop.Name %> == null && other.<%= prop.Name %> != null) {
                 me.<%= prop.Name %> = (<%= prop.GetPropertyTypeString() %>)other.<%= prop.Name %>.Clone();

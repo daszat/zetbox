@@ -47,4 +47,4 @@
 		}
 
 		private <%= backingCollectionType %><<%= thisInterface %>, <%= referencedType %>, <%= entryType %>, <%= providerCollectionType %>> <%= backingName %>;
-		private <%= providerCollectionType %> <%= underlyingCollectionName %> = new List<<%= entryType %>>();
+		private <%= providerCollectionType %> <%= underlyingCollectionName %> = new <%= providerCollectionType %>();

@@ -51,7 +51,7 @@ namespace Kistl.Generator.Templates.Properties
             string referencedType = prop.ReferencedTypeAsCSharp();
             string referencedCollectionEntry = prop.GetCollectionEntryClassName() + host.Settings["extrasuffix"] + Kistl.API.Helper.ImplementationSuffix;
 
-            string providerCollectionType = "IList<" + referencedCollectionEntry + ">";
+            string providerCollectionType = "ObservableCollection<" + referencedCollectionEntry + ">";
             string underlyingCollectionName = "_" + name + "Collection";
 
             string moduleNamespace = prop.Module.Namespace;

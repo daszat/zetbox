@@ -80,7 +80,7 @@ this.WriteObjects("			}\r\n");
 this.WriteObjects("		}\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("		private ",  backingCollectionType , "<",  thisInterface , ", ",  referencedType , ", ",  entryType , ", ",  providerCollectionType , "> ",  backingName , ";\r\n");
-this.WriteObjects("		private ",  providerCollectionType , " ",  underlyingCollectionName , " = new List<",  entryType , ">();\r\n");
+this.WriteObjects("		private ",  providerCollectionType , " ",  underlyingCollectionName , " = new ",  providerCollectionType , "();\r\n");
 
         }
 

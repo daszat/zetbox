@@ -43,12 +43,12 @@
             }
         }
 
-        private ProjectedList<<%= referencedCollectionEntryProxy %>, <%= referencedCollectionEntry %>> <%= underlyingCollectionName %>
+        private <%= providerCollectionType %> <%= underlyingCollectionName %>
         {
             get {
                 if (<%= underlyingCollectionBackingName %> == null)
                 {
-                    <%= underlyingCollectionBackingName %> = new ProjectedList<<%= referencedCollectionEntryProxy %>, <%= referencedCollectionEntry %>>(
+                    <%= underlyingCollectionBackingName %> = new <%= providerCollectionType %>(
                         MagicCollectionFactory.WrapAsList(this.Proxy.<%= name %>),
                         p => (<%= referencedCollectionEntry %>)OurContext.AttachAndWrap(p),
                         d => (<%= referencedCollectionEntryProxy %>)((NHibernatePersistenceObject)d).NHibernateProxy);
@@ -58,5 +58,5 @@
         }
 
         private <%= backingCollectionType %> <%= backingName %>;
-        private ProjectedList<<%= referencedCollectionEntryProxy %>, <%= referencedCollectionEntry %>> <%= underlyingCollectionBackingName %>;
+        private <%= providerCollectionType %> <%= underlyingCollectionBackingName %>;
         // END <%= this.GetType() %>

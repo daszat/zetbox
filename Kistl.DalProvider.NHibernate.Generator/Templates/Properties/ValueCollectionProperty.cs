@@ -51,7 +51,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
             string referencedCollectionEntry = prop.GetCollectionEntryClassName() + host.Settings["extrasuffix"] + Kistl.API.Helper.ImplementationSuffix;
             string referencedCollectionEntryProxy = prop.GetCollectionEntryClassName() + host.Settings["extrasuffix"] + Kistl.API.Helper.ImplementationSuffix + "." + prop.GetCollectionEntryClassName() + "Proxy";
 
-            string providerCollectionType = "IList<" + referencedCollectionEntry + ">";
+            string providerCollectionType = string.Format("ProjectedList<{0}, {1}>", referencedCollectionEntryProxy, referencedCollectionEntry);
             string underlyingCollectionName = name + "Collection";
             string underlyingCollectionBackingName = backingName + "Collection";
             string moduleNamespace = prop.Module.Namespace;

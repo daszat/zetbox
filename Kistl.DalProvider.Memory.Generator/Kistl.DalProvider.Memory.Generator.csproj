@@ -78,6 +78,14 @@
     <Compile Include="MemoryGeneratorProvider.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Templates\ObjectClasses\ApplyChangesFromMethod.cs">
+      <DependentUpon>ApplyChangesFromMethod.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\ObjectClasses\ApplyChangesFromMethod.Designer.cs">
+      <DependentUpon>ApplyChangesFromMethod.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Templates\ObjectClasses\CollectionEntries.cs" />
     <Compile Include="Templates\ProjectFile.cs" />
   </ItemGroup>
@@ -110,6 +118,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="MemoryGeneratorStructure.cd" />
+    <None Include="Templates\ObjectClasses\ApplyChangesFromMethod.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>ApplyChangesFromMethod.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
