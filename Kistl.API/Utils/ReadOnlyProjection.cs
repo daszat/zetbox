@@ -43,9 +43,37 @@ namespace Kistl.API.Utils
                 throw new ArgumentException("Writable projected collection was requested, but the underlying collection is read only.");
 
             _collection = collection;
-            _selector = input => { if (_selectorCache.ContainsKey(input)) { return _selectorCache[input]; } else { return _selectorCache[input] = selector(input); } };
+            _selector = input =>
+            {
+                if (_selectorCache.ContainsKey(input))
+                {
+                    return _selectorCache[input];
+                }
+                else
+                {
+                    var output = selector(input);
+                    _selectorCache[input] = output;
+                    _inverterCache[output] = input;
+                    return output;
+                }
+            };
             if (inverter != null)
-                _inverter = output => { if (_inverterCache.ContainsKey(output)) { return _inverterCache[output]; } else { return _inverterCache[output] = inverter(output); } };
+            {
+                _inverter = output =>
+                {
+                    if (_inverterCache.ContainsKey(output))
+                    {
+                        return _inverterCache[output];
+                    }
+                    else
+                    {
+                        var input = inverter(output);
+                        _inverterCache[output] = input;
+                        _selectorCache[input] = output;
+                        return input;
+                    }
+                };
+            }
             _isReadOnly = isReadOnly;
         }
 

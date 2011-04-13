@@ -142,7 +142,20 @@ namespace Kistl.Generator.Templates.CollectionEntries
             base.ApplyChangesFromBody();
 
             this.WriteLine("            me._fk_Parent = other._fk_Parent;");
-            this.WriteLine("            me.Value = other.Value;");
+            if (prop is CompoundObjectProperty)
+            {
+                this.WriteLine("            if (me.Value == null && other.Value != null) {");
+                this.WriteLine("                me.Value = ({0})other.Value.Clone();", prop.GetPropertyTypeString());
+                this.WriteLine("            } else if (me.Value != null && other.Value == null) {");
+                this.WriteLine("                me.Value = null;");
+                this.WriteLine("            } else if (me.Value != null && other.Value != null) {");
+                this.WriteLine("                me.Value.ApplyChangesFrom(other.Value);");
+                this.WriteLine("            }");
+            }
+            else
+            {
+                this.WriteLine("            me.Value = other.Value;");
+            }
         }
     }
 }

@@ -33,6 +33,12 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries
                 null);
         }
 
+        protected override void ApplyIdPropertyTemplate()
+        {
+            // inherited from Base
+            //base.ApplyIdPropertyTemplate();
+        }
+
         protected override void ApplyBIndexPropertyTemplate()
         {
             Templates.Properties.DelegatingProperty.Call(Host, ctx, "ValueIndex", "int?", "this.Proxy.Value" + Kistl.API.Helper.PositionSuffix, "int?");

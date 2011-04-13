@@ -122,6 +122,10 @@ namespace Kistl.API
                 if (meItem == null)
                 {
                     add((T)otherItem);
+                    if(otherItem.ID < Helper.INVALIDID)
+                        Context.Internals().AttachAsNew(otherItem);
+                    else
+                        Context.Attach(otherItem);
                 }
                 else
                 {

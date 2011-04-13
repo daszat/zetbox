@@ -159,12 +159,27 @@ namespace Kistl.API.Utils
                 }
             }
 
-            if (typeof(IDataObject).IsAssignableFrom(typeof(T)))
+            if (typeof(IPersistenceObject).IsAssignableFrom(typeof(T)))
             {
                 try
                 {
                     var potentialCollection = WrapAsCollection<T>(potentialList);
-                    var sortedList = new SortListFromCollection<int, T>(item => ((IDataObject)item).ID, potentialCollection);
+                    var sortedList = new SortListFromCollection<int, T>(item => ((IPersistenceObject)item).ID, potentialCollection);
+                    return sortedList;
+                }
+                catch (ArgumentException)
+                {
+                    // also failed to wrap as collection, ignore this exception and fall through to the final exception
+                }
+            }
+
+
+            if (typeof(IKeyed<int>).IsAssignableFrom(typeof(T)))
+            {
+                try
+                {
+                    var potentialCollection = WrapAsCollection<T>(potentialList);
+                    var sortedList = new SortListFromCollection<int, T>(item => ((IKeyed<int>)item).Key, potentialCollection);
                     return sortedList;
                 }
                 catch (ArgumentException)
@@ -553,5 +568,10 @@ namespace Kistl.API.Utils
         }
 
         #endregion
+    }
+
+    public interface IKeyed<T>
+    {
+        T Key { get; }
     }
 }

@@ -17,7 +17,7 @@
 <%@ Parameter Name="typeAndNameList" Type="IEnumerable<KeyValuePair<string, string>>" %>
 
         public class <%= className %>Proxy
-            : IProxyObject
+            : IProxyObject, IKeyed<int>
         {
             public <%= className %>Proxy()
             {
@@ -27,6 +27,8 @@
             }
 
             public virtual int ID { get; set; }
+
+			int IKeyed<int>.Key { get { return ID; } }
 
             public virtual Type ZBoxWrapper { get { return typeof(<%= className %><%= ImplementationSuffix %>); } }
             public virtual Type ZBoxProxy { get { return typeof(<%= className %>Proxy); } }
