@@ -239,3 +239,6 @@ T: Kistl.API.Server.ServerAssemblyConfiguration
 R: Gendarme.Rules.Correctness.ReviewInconsistentIdentityRule
 # The type does not manage identity consistently in its Equals, relational operator, CompareTo, GetHashCode, and Clone methods.
 T: System.Linq.Dynamic.Signature
+
+R: Gendarme.Rules.Maintainability.AvoidComplexMethodsRule
+# Methods with a large cyclomatic complexity are hard to understand and maintain.
