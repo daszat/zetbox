@@ -34,7 +34,6 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
 
             propName = string.IsNullOrEmpty(propName) ? prop.Name : propName;
             columnName = string.IsNullOrEmpty(columnName) ? propName : columnName;
-            string tableName = prop.GetCollectionEntryTable();
             string valueClassAttr = String.Format("class=\"{0}.{1}{2},Kistl.Objects.NHibernateImpl\"",
                 prop.CompoundObjectDefinition.Module.Namespace,
                 prop.CompoundObjectDefinition.Name,
