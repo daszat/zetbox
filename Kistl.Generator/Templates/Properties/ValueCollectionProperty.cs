@@ -52,7 +52,7 @@ namespace Kistl.Generator.Templates.Properties
             string referencedCollectionEntry = prop.GetCollectionEntryClassName();
             string referencedCollectionEntryImpl = referencedCollectionEntry + host.Settings["extrasuffix"] + Kistl.API.Helper.ImplementationSuffix;
 
-            string providerCollectionType = "IList<" + referencedCollectionEntryImpl + ">";
+            string providerCollectionType = "ObservableCollection<" + referencedCollectionEntryImpl + ">";
             string underlyingCollectionName = "_" + name + "Collection";
 
             string moduleNamespace = prop.Module.Namespace;

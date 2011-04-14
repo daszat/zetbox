@@ -22,10 +22,15 @@ namespace Kistl.DalProvider.Base
         public ClientValueCollectionWrapper(IKistlContext ctx, TParent parent, Action parentNotifier, TEntryCollection collection)
             : base(ctx, parent, parentNotifier, collection)
         {
+            if (collection == null) throw new ArgumentNullException("collection");
+
+            var notifier = collection as INotifyCollectionChanged;
+            if (notifier != null)
+                notifier.CollectionChanged += (sender, e) => this.NotifyOwner();
         }
 
         public ClientValueCollectionWrapper(IKistlContext ctx, TParent parent, TEntryCollection collection)
-            : base(ctx, parent, null, collection)
+            : this(ctx, parent, null, collection)
         {
         }
 
