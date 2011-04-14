@@ -1,0 +1,34 @@
+﻿<%@ CodeTemplate Language="C#" 
+    Name="Mappings.CompoundObjectPropertyHbm"
+    ClassName="Kistl.DalProvider.NHibernate.Generator.Templates.Mappings.CompoundObjectPropertyHbm" 
+    Inherits="Kistl.Generator.ResourceTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="System.Linq" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="prefix" Type="string" %>
+<%@ Parameter Name="propName" Type="string" %>
+<%@ Parameter Name="columnName" Type="string" %>
+<%@ Parameter Name="isList" Type="bool" %>
+<%@ Parameter Name="ceClassAttr" Type="string" %>
+<%@ Parameter Name="valueClassAttr" Type="string" %>
+<%@ Parameter Name="isNullColumnAttr" Type="string" %>
+<%@ Parameter Name="ceReverseKeyColumnName" Type="string" %>
+<%@ Parameter Name="properties" Type="IEnumerable<Property>" %>
+<% if (isList) {                                                                    %>
+        <!-- CompoundObjectProperty IsList -->
+        <set name="<%= propName %>" inverse="true" batch-size="100">
+            <key column="`<%= ceReverseKeyColumnName %>`" />
+            <one-to-many <%= ceClassAttr %> />
+        </set>
+<% } else {                                                                         %>
+        <!-- CompoundObjectProperty isValue -->
+        <component name="<%= propName %>" <%= valueClassAttr %>>
+            <property name="CompoundObject_IsNull"
+                      <%= isNullColumnAttr %>
+                      type="bool" />
+<%          PropertiesHbm.Call(Host, ctx, prefix + columnName + "_", properties);         %>
+        </component>
+<% }                                                                                %>

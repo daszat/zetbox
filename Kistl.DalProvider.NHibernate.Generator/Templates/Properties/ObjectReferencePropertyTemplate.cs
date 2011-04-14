@@ -67,8 +67,8 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
 
             string referencedImplementation = referencedInterface
                 + host.Settings["extrasuffix"] + Kistl.API.Helper.ImplementationSuffix;
-            string associationName = rel.GetAssociationName() + assocNameSuffix;
-            string targetRoleName = otherEnd.RoleName;
+            string associationNameUnused = rel.GetAssociationName() + assocNameSuffix;
+            string targetRoleNameUnused = otherEnd.RoleName;
 
             string positionPropertyName = rel.NeedsPositionStorage(endRole)
                 ? Construct.ListPositionPropertyName(relEnd)
@@ -94,8 +94,8 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
                 fkGuidBackingName,
                 referencedInterface,
                 referencedImplementation,
-                associationName,
-                targetRoleName,
+                associationNameUnused,
+                targetRoleNameUnused,
                 positionPropertyName,
                 inverseNavigatorName,
                 inverseNavigatorIsList,

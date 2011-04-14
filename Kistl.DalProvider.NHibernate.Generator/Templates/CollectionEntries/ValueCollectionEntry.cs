@@ -5,13 +5,12 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-
     using Kistl.API;
+    using Kistl.API.Utils;
     using Kistl.App.Base;
     using Kistl.App.Extensions;
     using Kistl.Generator.Extensions;
     using Templates = Kistl.Generator.Templates;
-    using Kistl.API.Utils;
 
     public class ValueCollectionEntry
         : Templates.CollectionEntries.ValueCollectionEntry
@@ -19,6 +18,47 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries
         public ValueCollectionEntry(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Property prop)
             : base(_host, ctx, prop)
         {
+        }
+
+        protected override void ApplyAPropertyTemplate()
+        {
+            string moduleNamespace = prop.ObjectClass.Module.Namespace;
+            string ownInterface = prop.GetCollectionEntryClassName();
+            string name = "Parent";
+            string eventName = "unused";
+            string fkBackingName = "_fk_Parent";
+            string fkGuidBackingName = "unused";
+            string referencedInterface = prop.ObjectClass.Module.Namespace + "." + prop.ObjectClass.Name;
+            string referencedImplementation = referencedInterface + ImplementationSuffix;
+            string positionPropertyName = string.Empty;
+            string inverseNavigatorName = prop.Name;
+
+            Properties.ObjectReferencePropertyTemplate.Call(
+                Host,
+                ctx,
+                MembersToSerialize,
+                moduleNamespace,
+                ownInterface,
+                name,
+                string.Empty /*implNameUnused*/,
+                eventName,
+                fkBackingName,
+                fkGuidBackingName,
+                referencedInterface,
+                referencedImplementation,
+                string.Empty /*associationNameUnused*/,
+                string.Empty /*targetRoleNameUnused*/,
+                positionPropertyName,
+                inverseNavigatorName,
+                true /*inverseNavigatorIsList*/,
+                false /*eagerLoading*/,
+                false /*relDataTypeExportable*/,
+                false /*callGetterSetterEvents*/);
+
+            Templates.Properties.DelegatingProperty.Call(
+                Host, ctx,
+                "ParentObject", "Kistl.API.IDataObject",
+                "Parent", referencedImplementation);
         }
 
         protected override void ApplyConstructorTemplate()

@@ -93,6 +93,27 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CollectionEntriesHbm.cst</DependentUpon>
     </Compile>
+    <Compile Include="Templates\Mappings\CompoundObjectPropertyHbm.Designer.cs">
+      <DependentUpon>CompoundObjectPropertyHbm.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Templates\Mappings\IdGeneratorHbm.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IdGeneratorHbm.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Mappings\ValueTypePropertyHbm.Designer.cs">
+      <DependentUpon>ValueTypePropertyHbm.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Templates\Mappings\CompoundObjectPropertyHbm.cs">
+      <DependentUpon>CompoundObjectPropertyHbm.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Mappings\ValueTypePropertyHbm.cs">
+      <DependentUpon>ValueTypePropertyHbm.cst</DependentUpon>
+    </Compile>
     <Compile Include="Templates\Mappings\JoinedSubclassHbm.cs">
       <DependentUpon>JoinedSubclassHbm.cst</DependentUpon>
     </Compile>
@@ -298,6 +319,18 @@
     <None Include="Templates\Mappings\CollectionEntriesHbm.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>CollectionEntriesHbm.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\Mappings\CompoundObjectPropertyHbm.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>CompoundObjectPropertyHbm.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\Mappings\IdGeneratorHbm.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>IdGeneratorHbm.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\Mappings\ValueTypePropertyHbm.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>ValueTypePropertyHbm.Designer.cs</LastGenOutput>
     </None>
     <None Include="Templates\Mappings\ObjectClassHbm.cst">
       <Generator>Arebis Template Processor</Generator>

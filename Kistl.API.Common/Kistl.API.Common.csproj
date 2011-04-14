@@ -75,10 +75,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseCustomActionsManager.cs" />
+    <Compile Include="BaseValueCollectionWrapper.cs" />
     <Compile Include="CompoundObjectExtensions.cs" />
     <Compile Include="GuiExtensions.cs" />
     <Compile Include="IdentityExtensions.cs" />
     <Compile Include="IIdentityResolver.cs" />
+    <Compile Include="IRelationListSync.cs" />
     <Compile Include="KistlContextExtensions.cs" />
     <Compile Include="MethodExtensions.cs" />
     <Compile Include="MultiplicityExtensions.cs" />

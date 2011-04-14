@@ -23,15 +23,19 @@
             var me = (<%= clsName %>)this;
 
 <% foreach(var prop in cls.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsCalculated).OrderBy(p => p.Name)) { %>
-<%      if (prop.IsList) { %>
+<%      if (prop.IsList && prop.HasPersistentOrder) { %>
             SynchronizeLists(this.<%= prop.Name %>Collection, otherImpl.<%= prop.Name %>Collection);
+<%      } else if (prop.IsList && !prop.HasPersistentOrder) { %>
+            SynchronizeCollections(this.<%= prop.Name %>Collection, otherImpl.<%= prop.Name %>Collection);
 <%      } else { %>
             me.<%= prop.Name %> = other.<%= prop.Name %>;
 <%      } %>
 <% } %>
 <% foreach(var prop in cls.Properties.OfType<CompoundObjectProperty>()/*.Where(p => !p.IsCalculated)*/.OrderBy(p => p.Name)) { %>
-<%      if (prop.IsList) { %>
+<%      if (prop.IsList && prop.HasPersistentOrder) { %>
             SynchronizeLists(this.<%= prop.Name %>Collection, otherImpl.<%= prop.Name %>Collection);
+<%      } else if (prop.IsList && !prop.HasPersistentOrder) { %>
+            SynchronizeCollections(this.<%= prop.Name %>Collection, otherImpl.<%= prop.Name %>Collection);
 <%      } else { %>
             if (me.<%= prop.Name %> == null && other.<%= prop.Name %> != null) {
                 me.<%= prop.Name %> = (<%= prop.GetPropertyTypeString() %>)other.<%= prop.Name %>.Clone();

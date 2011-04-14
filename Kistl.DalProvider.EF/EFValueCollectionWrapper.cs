@@ -7,6 +7,8 @@ namespace Kistl.DalProvider.Ef
     using System.Text;
 
     using Kistl.API;
+    using Kistl.API.Common;
+    using Kistl.DalProvider.Base.RelationWrappers;
 
     public class EfValueCollectionWrapper<TParent, TValue, TEntry, TEntryCollection>
         : ValueCollectionWrapper<TParent, TValue, TEntry, TEntryCollection>

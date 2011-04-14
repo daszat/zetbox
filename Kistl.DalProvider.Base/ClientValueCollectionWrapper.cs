@@ -1,47 +1,39 @@
 
+// TODO: move to Kistl.DalProvider.Base.RelationWrappers namespace
 namespace Kistl.DalProvider.Base
 {
     using System;
     using System.Collections.Generic;
     using System.Collections.Specialized;
-    using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text;
 
     using Kistl.API;
+    using Kistl.API.Common;
+    using Kistl.DalProvider.Base.RelationWrappers;
 
-    public class ClientValueCollectionWrapper<TParent, TValue, TEntry, TEntryCollection>
-        : ValueCollectionWrapper<TParent, TValue, TEntry, TEntryCollection>, INotifyCollectionChanged
+    public class ClientValueCollectionWrapper<TParent, TValue, TEntry, TEntryImpl, TEntryCollection>
+        : ValueCollectionWrapper<TParent, TValue, TEntryImpl, TEntryCollection>, IRelationListSync<TEntry>, INotifyCollectionChanged
         where TParent : IDataObject
-        where TEntry : class, IValueCollectionEntry<TParent, TValue>
-        where TEntryCollection : IList<TEntry>
+        where TEntry : IValueCollectionEntry<TParent, TValue>
+        where TEntryImpl : class, TEntry
+        where TEntryCollection : ICollection<TEntryImpl>
     {
         public ClientValueCollectionWrapper(IKistlContext ctx, TParent parent, Action parentNotifier, TEntryCollection collection)
             : base(ctx, parent, parentNotifier, collection)
         {
-            if (collection == null) throw new ArgumentNullException("collection");
-
-            var notifier = collection as INotifyCollectionChanged;
-            if (notifier != null)
-                notifier.CollectionChanged += new NotifyCollectionChangedEventHandler(collection_CollectionChanged);
         }
 
         public ClientValueCollectionWrapper(IKistlContext ctx, TParent parent, TEntryCollection collection)
-            : this(ctx, parent, null, collection)
+            : base(ctx, parent, null, collection)
         {
         }
-
-        void collection_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            NotifyOwner();
-        }
-
 
         #region INotifyCollectionChanged Members
 
         public event NotifyCollectionChangedEventHandler CollectionChanged;
 
-        protected override void OnEntryAdded(TEntry entry)
+        protected override void OnEntryAdded(TEntryImpl entry)
         {
             base.OnEntryAdded(entry);
             if (CollectionChanged != null)
@@ -50,7 +42,7 @@ namespace Kistl.DalProvider.Base
             }
         }
 
-        protected override void OnEntryRemoved(TEntry entry)
+        protected override void OnEntryRemoved(TEntryImpl entry)
         {
             base.OnEntryRemoved(entry);
             if (CollectionChanged != null)
@@ -59,12 +51,40 @@ namespace Kistl.DalProvider.Base
             }
         }
         #endregion
+
+        #region IRelationListSync<TEntry> Members
+
+        public virtual void AddWithoutSetParent(TEntry entry)
+        {
+            if (entry == null) { throw new ArgumentNullException("entry"); }
+            var entryImpl = entry as TEntryImpl;
+            if (entryImpl == null) { throw new ArgumentOutOfRangeException("entry"); }
+
+            OnEntryAdding(entryImpl);
+            collection.Add(entryImpl);
+            OnEntryAdded(entryImpl);
+        }
+
+        public virtual void RemoveWithoutClearParent(TEntry entry)
+        {
+            if (entry == null) { throw new ArgumentNullException("entry"); }
+            var entryImpl = entry as TEntryImpl;
+            if (entryImpl == null) { throw new ArgumentOutOfRangeException("entry"); }
+
+            OnEntryRemoving(entryImpl);
+            collection.Remove(entryImpl);
+            OnEntryRemoved(entryImpl);
+        }
+
+        #endregion
     }
 
-    public class ClientValueListWrapper<TParent, TValue, TEntry, TEntryCollection> : ValueListWrapper<TParent, TValue, TEntry, TEntryCollection>
+    public class ClientValueListWrapper<TParent, TValue, TEntry, TEntryImpl, TEntryCollection> 
+        : ValueListWrapper<TParent, TValue, TEntryImpl, TEntryCollection>
         where TParent : IDataObject
-        where TEntry : class, IValueListEntry<TParent, TValue>
-        where TEntryCollection : IList<TEntry>
+        where TEntry : IValueListEntry<TParent, TValue>
+        where TEntryImpl : class, TEntry
+        where TEntryCollection : IList<TEntryImpl>
     {
         public ClientValueListWrapper(IKistlContext ctx, TParent parent, Action parentNotifier, TEntryCollection collection)
             : base(ctx, parent, parentNotifier, collection)
@@ -75,5 +95,31 @@ namespace Kistl.DalProvider.Base
             : base(ctx, parent, null, collection)
         {
         }
+
+        #region IRelationListSync<TEntry> Members
+
+        public virtual void AddWithoutSetParent(TEntry entry)
+        {
+            if (entry == null) { throw new ArgumentNullException("entry"); }
+            var entryImpl = entry as TEntryImpl;
+            if (entryImpl == null) { throw new ArgumentOutOfRangeException("entry"); }
+
+            OnEntryAdding(entryImpl);
+            collection.Add(entryImpl);
+            OnEntryAdded(entryImpl);
+        }
+
+        public virtual void RemoveWithoutClearParent(TEntry entry)
+        {
+            if (entry == null) { throw new ArgumentNullException("entry"); }
+            var entryImpl = entry as TEntryImpl;
+            if (entryImpl == null) { throw new ArgumentOutOfRangeException("entry"); }
+
+            OnEntryRemoving(entryImpl);
+            collection.Remove(entryImpl);
+            OnEntryRemoved(entryImpl);
+        }
+
+        #endregion
     }
 }

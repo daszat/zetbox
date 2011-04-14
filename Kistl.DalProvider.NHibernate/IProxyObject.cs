@@ -5,6 +5,7 @@ namespace Kistl.DalProvider.NHibernate
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using Kistl.API;
 
     /// <summary>
     /// The required information to map from a proxy object to its ZBox wrapper

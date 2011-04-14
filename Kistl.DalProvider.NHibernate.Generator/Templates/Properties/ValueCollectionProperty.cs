@@ -48,27 +48,34 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
 
             string thisInterface = prop.ObjectClass.Name;
             string referencedType = prop.ReferencedTypeAsCSharp();
-            string referencedCollectionEntry = prop.GetCollectionEntryClassName() + host.Settings["extrasuffix"] + Kistl.API.Helper.ImplementationSuffix;
-            string referencedCollectionEntryProxy = prop.GetCollectionEntryClassName() + host.Settings["extrasuffix"] + Kistl.API.Helper.ImplementationSuffix + "." + prop.GetCollectionEntryClassName() + "Proxy";
+            string referencedCollectionEntry = prop.GetCollectionEntryClassName();
+            string referencedCollectionEntryImpl = referencedCollectionEntry + host.Settings["extrasuffix"] + Kistl.API.Helper.ImplementationSuffix;
+            string referencedCollectionEntryProxy = referencedCollectionEntryImpl + "." + prop.GetCollectionEntryClassName() + "Proxy";
 
-            string providerCollectionType = string.Format("ProjectedList<{0}, {1}>", referencedCollectionEntryProxy, referencedCollectionEntry);
+            // sometimes we have objects without ID, which cannot be used in a ProjectedList (ISortKey uses ID)
+            // TODO: Use list index as SortKey for PersistentOrder collection entries
+            string ListOrCollection = hasPersistentOrder ? "List" : "Collection";
+
+            string providerCollectionType = "I" + ListOrCollection + "<" + referencedCollectionEntryImpl + ">";
             string underlyingCollectionName = name + "Collection";
             string underlyingCollectionBackingName = backingName + "Collection";
             string moduleNamespace = prop.Module.Namespace;
 
             string backingCollectionType = (hasPersistentOrder ? "ClientValueListWrapper" : "ClientValueCollectionWrapper")
-                + String.Format("<{0}, {1}, {2}, {3}>",
+                + String.Format("<{0}, {1}, {2}, {3}, {4}>",
                     thisInterface,
                     referencedType,
                     referencedCollectionEntry,
+                    referencedCollectionEntryImpl,
                     providerCollectionType);
+
 
             Call(
                 host, ctx, serializationList,
                 name, backingName, backingCollectionType, exposedCollectionInterface,
-                thisInterface, referencedType, referencedCollectionEntry, referencedCollectionEntryProxy,
+                thisInterface, referencedType, referencedCollectionEntry, referencedCollectionEntryImpl, referencedCollectionEntryProxy,
                 providerCollectionType, underlyingCollectionName, underlyingCollectionBackingName,
-                !hasPersistentOrder, moduleNamespace);
+                !hasPersistentOrder, moduleNamespace, ListOrCollection);
         }
 
         protected virtual void AddSerialization(Templates.Serialization.SerializationMembersList list, string underlyingCollectionName)

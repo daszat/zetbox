@@ -33,14 +33,8 @@
     <class name="<%= collectionEntryNamespace %>.<%= collectionEntryClassName %>+<%= proxyClassName %>"
            proxy="<%= collectionEntryNamespace %>.<%= collectionEntryClassName %>+<%= proxyClassName %>"
            table="`<%= tableName %>`">
-        <id name="ID"
-            column="`ID`"
-            type="Int32">
 
-            <generator class="native">
-                <param name="sequence">`<%= tableName %>_ID_seq`</param>
-            </generator>
-        </id>
+<% IdGeneratorHbm.Call(Host, "id", tableName); %>
 
         <many-to-one name="A"
                      column="`<%= rel.GetRelationFkColumnName(RelationEndRole.A) %>`" />
@@ -61,7 +55,71 @@
 <% } %>
 
     <!-- ValueCollectionEntries are defined directly on use -->
+<%
+   foreach (var prop in ctx.GetQuery<ValueTypeProperty>()
+                            .Where(p => p.IsList && !p.IsCalculated)
+                            .Where(p => p.ObjectClass is ObjectClass)
+                            .OrderBy(p => p.Name))
+   {
+        var collectionEntryNamespace = prop.Module.Namespace;
+        var collectionEntryClassName = prop.GetCollectionEntryClassName() + ImplementationSuffix;
+        var proxyClassName = prop.GetCollectionEntryClassName() + "Proxy";
+        var tableName = prop.GetCollectionEntryTable();
+        var ceReverseKeyColumnName = prop.GetCollectionEntryReverseKeyColumnName();
+%>
+    <class name="<%= collectionEntryNamespace %>.<%= collectionEntryClassName %>+<%= proxyClassName %>"
+           proxy="<%= collectionEntryNamespace %>.<%= collectionEntryClassName %>+<%= proxyClassName %>"
+           table="`<%= tableName %>`">
 
-    <!-- CompoundObjectCollectionEntries are defined directly on use -->
+<% IdGeneratorHbm.Call(Host, "id", tableName); %>
 
+        <many-to-one name="Parent"
+                     column="`<%= ceReverseKeyColumnName %>`" />
+<% ValueTypePropertyHbm.Call(Host, String.Empty, prop, "Value", prop.Name, true, ImplementationSuffix); %>
+<% if (prop.HasPersistentOrder) { %>
+        <property name="Index"
+                  column="`Index`" />
+<% } %>
+<% if (((ObjectClass)prop.ObjectClass).ImplementsIExportable()) { %>
+        <!-- export guid is not needed since serialization is always "in-place"
+        <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
+        -->
+<% } %>
+    </class>
+
+<% } %>
+    <!-- CompoundObjectCollectionEntries -->
+<%
+   foreach (var prop in ctx.GetQuery<CompoundObjectProperty>()
+                            .Where(p => p.IsList /* && !p.IsCalculated */)
+                            .Where(p => p.ObjectClass is ObjectClass)
+                            .OrderBy(p => p.Name))
+   {
+        var collectionEntryNamespace = prop.Module.Namespace;
+        var collectionEntryClassName = prop.GetCollectionEntryClassName() + ImplementationSuffix;
+        var proxyClassName = prop.GetCollectionEntryClassName() + "Proxy";
+        var tableName = prop.GetCollectionEntryTable();
+        var ceReverseKeyColumnName = prop.GetCollectionEntryReverseKeyColumnName();
+%>
+    <class name="<%= collectionEntryNamespace %>.<%= collectionEntryClassName %>+<%= proxyClassName %>"
+           proxy="<%= collectionEntryNamespace %>.<%= collectionEntryClassName %>+<%= proxyClassName %>"
+           table="`<%= tableName %>`">
+
+<% IdGeneratorHbm.Call(Host, "id", tableName); %>
+
+        <many-to-one name="Parent"
+                     column="`<%= ceReverseKeyColumnName %>`" />
+<% CompoundObjectPropertyHbm.Call(Host, ctx, String.Empty, prop, "Value", prop.Name, true, ImplementationSuffix); %>
+<% if (prop.HasPersistentOrder) { %>
+        <property name="Index"
+                  column="`Index`" />
+<% } %>
+<% if (((ObjectClass)prop.ObjectClass).ImplementsIExportable()) { %>
+        <!-- export guid is not needed since serialization is always "in-place"
+        <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
+        -->
+<% } %>
+    </class>
+
+<% } %>
 </hibernate-mapping>

@@ -58,7 +58,6 @@ namespace Kistl.API.Utils
                 }
             };
             if (inverter != null)
-            {
                 _inverter = output =>
                 {
                     if (_inverterCache.ContainsKey(output))
@@ -68,12 +67,11 @@ namespace Kistl.API.Utils
                     else
                     {
                         var input = inverter(output);
-                        _inverterCache[output] = input;
                         _selectorCache[input] = output;
+                        _inverterCache[output] = input;
                         return input;
                     }
                 };
-            }
             _isReadOnly = isReadOnly;
         }
 

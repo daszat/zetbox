@@ -1,3 +1,4 @@
+using Kistl.API;
 
 namespace Kistl.API.Utils
 {
@@ -173,13 +174,12 @@ namespace Kistl.API.Utils
                 }
             }
 
-
-            if (typeof(IKeyed<int>).IsAssignableFrom(typeof(T)))
+            if (typeof(ISortKey<int>).IsAssignableFrom(typeof(T)))
             {
                 try
                 {
                     var potentialCollection = WrapAsCollection<T>(potentialList);
-                    var sortedList = new SortListFromCollection<int, T>(item => ((IKeyed<int>)item).Key, potentialCollection);
+                    var sortedList = new SortListFromCollection<int, T>(item => ((ISortKey<int>)item).ID, potentialCollection);
                     return sortedList;
                 }
                 catch (ArgumentException)

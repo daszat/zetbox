@@ -49,9 +49,10 @@ namespace Kistl.Generator.Templates.Properties
 
             string thisInterface = prop.ObjectClass.Name;
             string referencedType = prop.ReferencedTypeAsCSharp();
-            string referencedCollectionEntry = prop.GetCollectionEntryClassName() + host.Settings["extrasuffix"] + Kistl.API.Helper.ImplementationSuffix;
+            string referencedCollectionEntry = prop.GetCollectionEntryClassName();
+            string referencedCollectionEntryImpl = referencedCollectionEntry + host.Settings["extrasuffix"] + Kistl.API.Helper.ImplementationSuffix;
 
-            string providerCollectionType = "ObservableCollection<" + referencedCollectionEntry + ">";
+            string providerCollectionType = "IList<" + referencedCollectionEntryImpl + ">";
             string underlyingCollectionName = "_" + name + "Collection";
 
             string moduleNamespace = prop.Module.Namespace;
@@ -59,7 +60,8 @@ namespace Kistl.Generator.Templates.Properties
             Call(
                 host, ctx, serializationList,
                 name, backingName, backingCollectionType, exposedCollectionInterface,
-                thisInterface, referencedType, referencedCollectionEntry,
+                thisInterface, referencedType,
+                referencedCollectionEntry, referencedCollectionEntryImpl,
                 providerCollectionType, underlyingCollectionName, !hasPersistentOrder,
                 moduleNamespace);
         }

@@ -42,7 +42,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
 #line 18 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClass.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        public class ",  className , "Proxy\r\n");
-this.WriteObjects("            : IProxyObject, IKeyed<int>\r\n");
+this.WriteObjects("            : IProxyObject, ISortKey<int>\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            public ",  className , "Proxy()\r\n");
 this.WriteObjects("            {\r\n");
@@ -57,19 +57,17 @@ this.WriteObjects("            }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("            public virtual int ID { get; set; }\r\n");
 this.WriteObjects("\r\n");
-this.WriteObjects("			int IKeyed<int>.Key { get { return ID; } }\r\n");
-this.WriteObjects("\r\n");
 this.WriteObjects("            public virtual Type ZBoxWrapper { get { return typeof(",  className , "",  ImplementationSuffix , "); } }\r\n");
 this.WriteObjects("            public virtual Type ZBoxProxy { get { return typeof(",  className , "Proxy); } }\r\n");
 this.WriteObjects("\r\n");
-#line 36 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClass.cst"
+#line 34 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClass.cst"
 foreach(var p in typeAndNameList) { 
-#line 37 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClass.cst"
+#line 35 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClass.cst"
 this.WriteObjects("            public virtual ",  p.Key , " ",  p.Value , " { get; set; }\r\n");
 this.WriteObjects("\r\n");
-#line 39 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClass.cst"
+#line 37 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClass.cst"
 } 
-#line 40 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClass.cst"
+#line 38 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\ProxyClass.cst"
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("        // make proxy available for the provider\r\n");

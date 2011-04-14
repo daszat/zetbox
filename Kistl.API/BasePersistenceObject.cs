@@ -14,7 +14,7 @@ namespace Kistl.API
     /// Implement basic functionality needed by all persistent objects.
     /// </summary>
     public abstract class BasePersistenceObject
-        : BaseNotifyingObject, IPersistenceObject, IDataErrorInfo, ICustomTypeDescriptor
+        : BaseNotifyingObject, IPersistenceObject, IDataErrorInfo, ICustomTypeDescriptor, ISortKey<int>
     {
         // TODO 4.0: replace Func<> with Lazy<>
         // http://www.davidhayden.me/2010/01/auto-factories-in-autofac-for-lazy-instantiation-lazydependencymodule.html

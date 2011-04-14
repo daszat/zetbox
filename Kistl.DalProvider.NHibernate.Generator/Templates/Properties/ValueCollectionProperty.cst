@@ -19,12 +19,14 @@
 <%@ Parameter Name="thisInterface" Type="string" %>
 <%@ Parameter Name="referencedType" Type="string" %>
 <%@ Parameter Name="referencedCollectionEntry" Type="string" %>
+<%@ Parameter Name="referencedCollectionEntryImpl" Type="string" %>
 <%@ Parameter Name="referencedCollectionEntryProxy" Type="string" %>
 <%@ Parameter Name="providerCollectionType" Type="string" %>
 <%@ Parameter Name="underlyingCollectionName" Type="string" %>
 <%@ Parameter Name="underlyingCollectionBackingName" Type="string" %>
 <%@ Parameter Name="orderByValue" Type="bool" %>
 <%@ Parameter Name="moduleNamespace" Type="string" %>
+<%@ Parameter Name="ListOrCollection" Type="string" %>
         // BEGIN <%= this.GetType() %>
 <% AddSerialization(serializationList, underlyingCollectionName); %>
         <%= GetModifiers() %> <%= exposedCollectionInterface %><<%= referencedType %>> <%= name %>
@@ -43,14 +45,18 @@
             }
         }
 
-        private <%= providerCollectionType %> <%= underlyingCollectionName %>
+        private Projected<%= ListOrCollection %><<%= referencedCollectionEntryProxy %>, <%= referencedCollectionEntryImpl %>> <%= underlyingCollectionName %>
         {
             get {
                 if (<%= underlyingCollectionBackingName %> == null)
                 {
-                    <%= underlyingCollectionBackingName %> = new <%= providerCollectionType %>(
+                    <%= underlyingCollectionBackingName %> = new Projected<%= ListOrCollection %><<%= referencedCollectionEntryProxy %>, <%= referencedCollectionEntryImpl %>>(
+<% if (ListOrCollection == "List" ) { %>
                         MagicCollectionFactory.WrapAsList(this.Proxy.<%= name %>),
-                        p => OurContext != null ? (<%= referencedCollectionEntry %>)OurContext.AttachAndWrap(p) : new <%= referencedCollectionEntry %>(() => FrozenContext, p),
+<% } else { %>
+                        this.Proxy.<%= name %>,
+<% } %>
+                        p => (<%= referencedCollectionEntryImpl %>)OurContext.AttachAndWrap(p),
                         d => (<%= referencedCollectionEntryProxy %>)((NHibernatePersistenceObject)d).NHibernateProxy);
                 }
                 return <%= underlyingCollectionBackingName %>;
@@ -58,5 +64,5 @@
         }
 
         private <%= backingCollectionType %> <%= backingName %>;
-        private <%= providerCollectionType %> <%= underlyingCollectionBackingName %>;
+        private Projected<%= ListOrCollection %><<%= referencedCollectionEntryProxy %>, <%= referencedCollectionEntryImpl %>> <%= underlyingCollectionBackingName %>;
         // END <%= this.GetType() %>

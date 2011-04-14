@@ -115,7 +115,6 @@
     <Compile Include="BaseNotifyingObject.cs" />
     <Compile Include="BasePersistenceObject.cs" />
     <Compile Include="BaseCompoundObject.cs" />
-    <Compile Include="BaseValueCollectionWrapper.cs" />
     <Compile Include="DynamicLinq.cs" />
     <Compile Include="EventBasedMethodAttribute.cs" />
     <Compile Include="RelationEndRole.cs" />

@@ -407,4 +407,13 @@ namespace Kistl.API
     public delegate void PropertyGetterHandler<T, V>(T obj, PropertyGetterEventArgs<V> e);
     public delegate void PropertyPreSetterHandler<T, V>(T obj, PropertyPreSetterEventArgs<V> e);
     public delegate void PropertyPostSetterHandler<T, V>(T obj, PropertyPostSetterEventArgs<V> e);
+
+    /// <summary>
+    /// Provides a default sort order for lists
+    /// </summary>
+    /// <typeparam name="T">the type of the key. usually int or similar</typeparam>
+    public interface ISortKey<T>
+    {
+        T ID { get; }
+    }
 }

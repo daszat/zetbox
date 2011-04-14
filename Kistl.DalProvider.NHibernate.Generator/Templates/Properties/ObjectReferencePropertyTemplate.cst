@@ -20,8 +20,8 @@
 <%@ Parameter Name="fkGuidBackingName" Type="string" %>
 <%@ Parameter Name="referencedInterface" Type="string" %>
 <%@ Parameter Name="referencedImplementation" Type="string" %>
-<%@ Parameter Name="associationName" Type="string" %>
-<%@ Parameter Name="targetRoleName" Type="string" %>
+<%@ Parameter Name="associationNameUnused" Type="string" %>
+<%@ Parameter Name="targetRoleNameUnused" Type="string" %>
 <%@ Parameter Name="positionPropertyName" Type="string" %>
 <%@ Parameter Name="inverseNavigatorName" Type="string" %>
 <%@ Parameter Name="inverseNavigatorIsList" Type="bool" %>

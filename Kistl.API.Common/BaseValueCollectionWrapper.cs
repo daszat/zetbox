@@ -1,11 +1,13 @@
 
-namespace Kistl.API
+// TODO: move to Kistl.DalProvider.Base project
+namespace Kistl.DalProvider.Base.RelationWrappers
 {
     using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using Kistl.API;
 
     public abstract class ValueCollectionWrapper<TParent, TValue, TEntry, TEntryCollection>
         : ICollection<TValue>
@@ -45,7 +47,7 @@ namespace Kistl.API
         }
 
         #region Notifications
-        
+
         protected void NotifyOwner()
         {
             if (parentNotifier != null)

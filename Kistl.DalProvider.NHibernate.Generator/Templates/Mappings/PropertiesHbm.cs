@@ -14,16 +14,6 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
 
     public partial class PropertiesHbm
     {
-        //public static void Call(IGenerationHost host, IKistlContext ctx, string prefix, IEnumerable<Property> properties)
-        //{
-        //    if (host == null) { throw new ArgumentNullException("host"); }
-        //    if (ctx == null) { throw new ArgumentNullException("ctx"); }
-        //    if (prefix == null) { throw new ArgumentNullException("prefix"); }
-        //    if (properties == null) { throw new ArgumentNullException("properties"); }
-
-        //    host.CallTemplate("Mappings.PropertiesHbm", ctx, prefix, properties);
-        //}
-
         protected virtual void ApplyObjectReferenceProperty(string prefix, ObjectReferenceProperty prop)
         {
             this.WriteLine("<!-- ObjectReferenceProperty -->");
@@ -170,149 +160,12 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
 
         protected virtual void ApplyValueTypeProperty(string prefix, ValueTypeProperty prop)
         {
-            if (prop.IsCalculated)
-            {
-                this.WriteLine("        <!-- ValueTypeProperty {0}, is calculated -->", prop.Name);
-                return;
-            }
-            this.WriteLine("        <!-- ValueTypeProperty -->");
-            string nameAttr = String.Format("name=\"{0}\"", prop.Name);
-            string tableName = prop.GetCollectionEntryTable();
-            string tableAttr = String.Format("table=\"`{0}`\"", tableName);
-            string typeAttr;
-            if (prop.IsList)
-            {
-                // set the proper type for relation entries
-                typeAttr = String.Format("type=\"{0}\"", prop.GetPropertyTypeString());
-            }
-            else
-            {
-                // let NHibernate work it out via reflection
-                typeAttr = String.Empty; 
-            }
-            string mappingType = prop.HasPersistentOrder ? "list" : "idbag";
-
-            if (prop.IsList)
-            {
-                this.WriteObjects("        <", mappingType, " ", nameAttr, " ", tableAttr, ">");
-                this.WriteLine();
-
-                if (!prop.HasPersistentOrder)
-                {
-                    this.WriteObjects("            <collection-id column=\"`ID`\" type=\"Int32\">");
-                    this.WriteLine();
-                    DefineIdGenerator(tableName);
-                    this.WriteObjects("            </collection-id>");
-                    this.WriteLine();
-                }
-
-                this.WriteObjects("            <key column=\"`", prop.GetCollectionEntryReverseKeyColumnName(), "`\" />");
-                this.WriteLine();
-
-                if (prop.HasPersistentOrder)
-                {
-                    this.WriteObjects("            <index column=\"`", Construct.ListPositionColumnName(prop), "`\" />");
-                    this.WriteLine();
-                }
-
-                this.WriteObjects("            <element column=\"`", prop.Name, "`\" ", typeAttr, " />");
-                this.WriteLine();
-                this.WriteObjects("        </", mappingType, ">");
-                this.WriteLine();
-            }
-            else
-            {
-                this.WriteObjects("        <property ", nameAttr);
-                this.WriteLine();
-                this.WriteObjects("                  column=\"`", prefix, prop.Name, "`\"");
-                this.WriteLine();
-                this.WriteObjects("                  ", typeAttr, " />");
-                this.WriteLine();
-            }
-        }
-
-        private void DefineIdGenerator(string tableName)
-        {
-            var sequenceName = tableName + "_ID_seq";
-            this.WriteObjects("                <generator class=\"native\">");
-            this.WriteLine();
-            this.WriteObjects("                    <param name=\"sequence\">`", sequenceName, "`</param>");
-            this.WriteLine();
-            this.WriteObjects("                </generator>");
-            this.WriteLine();
+            ValueTypePropertyHbm.Call(Host, prefix, prop, null, null, false, ImplementationSuffix);
         }
 
         protected virtual void ApplyCompoundObjectProperty(string prefix, CompoundObjectProperty prop)
         {
-            this.WriteLine("        <!-- CompoundObjectProperty -->");
-            string nameAttr = String.Format("name=\"{0}\"", prop.Name);
-            string tableName = prop.GetCollectionEntryTable();
-            string tableAttr = String.Format("table=\"`{0}`\"", tableName);
-            string valueClassAttr = String.Format("class=\"{0}.{1}{2},Kistl.Objects.NHibernateImpl\"",
-                prop.CompoundObjectDefinition.Module.Namespace,
-                prop.CompoundObjectDefinition.Name,
-                ImplementationSuffix);
-            string isNullColumnAttr = String.Format("column=\"`{0}`\"", prop.Name);
-
-            string mappingType = prop.HasPersistentOrder ? "list" : "idbag";
-
-            if (prop.IsList)
-            {
-                string ceClassAttr = String.Format("class=\"{0}.{1}{2}+{1}Proxy,Kistl.Objects.NHibernateImpl\"",
-                    prop.Module.Namespace,
-                    prop.GetCollectionEntryClassName(),
-                    ImplementationSuffix);
-
-                this.WriteObjects("        <", mappingType, " ", nameAttr, " ", tableAttr, ">");
-                this.WriteLine();
-
-                if (!prop.HasPersistentOrder)
-                {
-                    this.WriteObjects("            <collection-id column=\"`ID`\" type=\"Int32\">");
-                    this.WriteLine();
-                    DefineIdGenerator(tableName);
-                    this.WriteObjects("            </collection-id>");
-                    this.WriteLine();
-                }
-
-                this.WriteObjects("            <key column=\"`", prop.GetCollectionEntryReverseKeyColumnName(), "`\" />");
-                this.WriteLine();
-
-                if (prop.HasPersistentOrder)
-                {
-                    this.WriteObjects("            <index column=\"`", Construct.ListPositionColumnName(prop), "`\" />");
-                    this.WriteLine();
-                }
-
-                this.WriteObjects("            <composite-element ", ceClassAttr, ">");
-                this.WriteLine();
-                this.WriteObjects("                <property name=\"ValueIsNull\" ", isNullColumnAttr, " type=\"bool\" />");
-                this.WriteLine();
-                this.WriteObjects("                <nested-composite-element name=\"Value\" ", valueClassAttr, ">");
-                this.WriteLine();
-
-                Call(Host, ctx, prefix + prop.Name + "_", prop.CompoundObjectDefinition.Properties);
-
-                this.WriteObjects("                </nested-composite-element>");
-                this.WriteLine();
-                this.WriteObjects("            </composite-element>");
-                this.WriteLine();
-                this.WriteObjects("</", mappingType, ">");
-                this.WriteLine();
-            }
-            else
-            {
-                this.WriteObjects("        <component ", nameAttr, " ", valueClassAttr, " >");
-                this.WriteLine();
-
-                this.WriteObjects("            <property name=\"CompoundObject_IsNull\" ", isNullColumnAttr, " type=\"bool\" />");
-                this.WriteLine();
-
-                Call(Host, ctx, prefix + prop.Name + "_", prop.CompoundObjectDefinition.Properties);
-
-                this.WriteObjects("        </component>");
-                this.WriteLine();
-            }
+            CompoundObjectPropertyHbm.Call(Host, ctx, prefix, prop, null, null, false, ImplementationSuffix);
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
+using Kistl.DalProvider.Base.RelationWrappers;
 
 namespace Kistl.API.Server.Mocks
 {

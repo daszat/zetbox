@@ -1,0 +1,25 @@
+﻿<%@ CodeTemplate Language="C#" 
+    Name="Mappings.ValueTypePropertyHbm"
+    ClassName="Kistl.DalProvider.NHibernate.Generator.Templates.Mappings.ValueTypePropertyHbm" 
+    Inherits="Kistl.Generator.ResourceTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="System.Linq" %>
+<%@ Parameter Name="prefix" Type="string" %>
+<%@ Parameter Name="propName" Type="string" %>
+<%@ Parameter Name="columnName" Type="string" %>
+<%@ Parameter Name="isList" Type="bool" %>
+<%@ Parameter Name="ceClassAttr" Type="string" %>
+<%@ Parameter Name="ceReverseKeyColumnName" Type="string" %>
+<%@ Parameter Name="listPositionColumnName" Type="string" %>
+<% if (isList) {                                                                    %>
+        <!-- ValueTypeProperty isList -->
+        <set name="<%= propName %>" inverse="true" batch-size="100">
+            <key column="`<%= ceReverseKeyColumnName %>`" />
+            <one-to-many <%= ceClassAttr %> />
+        </set>
+<% } else {                                                                         %>
+        <!-- ValueTypeProperty isValue -->
+        <property name="<%= propName %>"
+                  column="`<%= prefix %><%= columnName %>`" />
+<% }                                                                                %>

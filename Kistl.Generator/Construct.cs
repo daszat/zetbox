@@ -118,12 +118,12 @@ namespace Kistl.Generator
             return NestedColumnName(prop.Name, parentPropName);
         }
 
-        public static object ListPositionColumnName(ValueTypeProperty prop)
+        public static string ListPositionColumnName(ValueTypeProperty prop)
         {
             return prop.Name + Kistl.API.Helper.PositionSuffix;
         }
 
-        public static object ListPositionColumnName(CompoundObjectProperty prop)
+        public static string ListPositionColumnName(CompoundObjectProperty prop)
         {
             return prop.Name + Kistl.API.Helper.PositionSuffix;
         }

@@ -104,6 +104,10 @@
       <Project>{DD11A4F6-24C2-4935-8042-DE49CA6B32C0}</Project>
       <Name>Kistl.API.Client</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Kistl.API.Common\Kistl.API.Common.csproj">
+      <Project>{9677AE11-CB92-4F0A-A248-87A21586F0DA}</Project>
+      <Name>Kistl.API.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Kistl.API\Kistl.API.csproj">
       <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
       <Name>Kistl.API</Name>
