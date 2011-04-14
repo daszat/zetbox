@@ -32,8 +32,6 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
 
             propName = string.IsNullOrEmpty(propName) ? prop.Name : propName;
             columnName = string.IsNullOrEmpty(columnName) ? propName : columnName;
-            string tableName = prop.GetCollectionEntryTable();
-            string tableAttr = String.Format("table=\"`{0}`\"", tableName);
             string ceClassAttr;
 
             if (prop.IsList && !forceDefinition)
@@ -49,7 +47,6 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
                 // not needed
                 ceClassAttr = String.Empty;
             }
-            string mappingType = prop.HasPersistentOrder ? "list" : "idbag";
             string ceReverseKeyColumnName = prop.GetCollectionEntryReverseKeyColumnName();
             string listPositionColumnName = Construct.ListPositionColumnName(prop);
 
