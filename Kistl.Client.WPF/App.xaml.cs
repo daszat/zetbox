@@ -77,7 +77,10 @@ namespace Kistl.Client.WPF
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            DebugConsole.Show();
+            if (System.Configuration.ConfigurationManager.AppSettings["ShowDebugConsole"] == "true")
+            {
+                DebugConsole.Show();
+            }
             Logging.Configure();
 
             using (Logging.Log.InfoTraceMethodCall("Starting Client"))

@@ -8,8 +8,8 @@ namespace Kistl.Client.WPF
     using System.Runtime.InteropServices;
     using System.Text;
     using Microsoft.Win32.SafeHandles;
-    
-    internal static class DebugConsole
+
+    public class DebugConsole
     {
         [DllImport("kernel32.dll",
             EntryPoint = "GetStdHandle",
@@ -23,7 +23,7 @@ namespace Kistl.Client.WPF
             CharSet = CharSet.Auto,
             CallingConvention = CallingConvention.StdCall)]
         private static extern int AllocConsole();
-        
+
         private const int STD_OUTPUT_HANDLE = -11;
 
         private static IntPtr stdHandle;
@@ -42,6 +42,6 @@ namespace Kistl.Client.WPF
             System.Console.SetOut(standardOutput);
 
             System.Console.WriteLine("Debug Console allocated");
-        }  
+        }
     }
 }
