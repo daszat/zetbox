@@ -194,7 +194,8 @@ namespace Kistl.Server.SchemaManagement
             }
 
             var allACLTables = schema.GetQuery<ObjectClass>()
-                .Where(o => o.AccessControlList.Count > 0)
+                .ToList()
+                .Where(o => o.NeedsRightsTable())
                 .OrderBy(o => o.Module.Namespace)
                 .ThenBy(o => o.Name)
                 .ToList();

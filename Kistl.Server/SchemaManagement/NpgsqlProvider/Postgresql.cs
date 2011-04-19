@@ -1105,8 +1105,12 @@ LANGUAGE 'plpgsql' VOLATILE",
         {
             var sb = new StringBuilder();
             sb.AppendFormat("CREATE OR REPLACE FUNCTION {0}(IN refreshID integer) RETURNS void AS $BODY$BEGIN", FormatSchemaName(GetQualifiedProcedureName(Kistl.Generator.Construct.SecurityRulesRefreshAllRightsProcedureName())));
-            sb.Append(string.Join("\n", refreshProcNames.Select(i => string.Format("{0}(refreshID);", FormatSchemaName(i))).ToArray()));
+            sb.AppendLine();
+            sb.Append(string.Join("\n", refreshProcNames.Select(i => string.Format("PERFORM {0}(refreshID);", FormatSchemaName(i))).ToArray()));
+            sb.AppendLine();
             sb.Append("END$BODY$ LANGUAGE 'plpgsql' VOLATILE");
+
+            ExecuteNonQuery(sb.ToString());
         }
 
         public override void CreatePositionColumnValidCheckProcedures(ILookup<TableRef, KeyValuePair<TableRef, string>> refSpecs)

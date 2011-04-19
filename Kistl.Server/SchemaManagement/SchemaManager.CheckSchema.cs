@@ -96,6 +96,17 @@ namespace Kistl.Server.SchemaManagement
                     }
                 }
             }
+
+            if (repair)
+            {
+                var allACLTables = schema.GetQuery<ObjectClass>()
+                    .ToList()
+                    .Where(o => o.NeedsRightsTable())
+                    .OrderBy(o => o.Module.Namespace)
+                    .ThenBy(o => o.Name)
+                    .ToList();
+                Case.DoCreateRefreshAllRightsProcedure(allACLTables);
+            }
         }
 
         private void CheckInheritance()
