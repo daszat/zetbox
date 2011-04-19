@@ -596,6 +596,8 @@ namespace Kistl.API.Server
         void CreateEmptyRightsViewUnmaterialized(TableRef viewName);
         void CreateRefreshRightsOnProcedure(ProcRef procName, TableRef viewUnmaterializedName, TableRef tblName, TableRef tblNameRights);
         void ExecRefreshRightsOnProcedure(ProcRef procName);
+        void CreateRefreshAllRightsProcedure(List<ProcRef> refreshProcNames);
+        void ExecRefreshAllRightsProcedure();
 
         /// <summary>
         /// Creates a procedure to check position columns for their validity.

@@ -670,6 +670,17 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
             throw new NotSupportedException();
         }
 
+        void ISchemaProvider.CreateRefreshAllRightsProcedure(List<ProcRef> refreshProcNames)
+        {
+            throw new NotSupportedException();
+        }
+
+        void ISchemaProvider.ExecRefreshAllRightsProcedure()
+        {
+            throw new NotSupportedException();
+        }
+
+
         /// <summary>Not supported.</summary>
         void ISchemaProvider.CreatePositionColumnValidCheckProcedures(ILookup<TableRef, KeyValuePair<TableRef, string>> refSpecs)
         {
@@ -782,5 +793,7 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
         {
             throw new NotSupportedException();
         }
+
+
     }
 }

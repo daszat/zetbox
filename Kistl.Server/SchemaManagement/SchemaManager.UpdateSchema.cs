@@ -192,6 +192,13 @@ namespace Kistl.Server.SchemaManagement
                     Case.DoDeleteObjectClassSecurityRules(objClass);
                 }
             }
+
+            var allACLTables = schema.GetQuery<ObjectClass>()
+                .Where(o => o.AccessControlList.Count > 0)
+                .OrderBy(o => o.Module.Namespace)
+                .ThenBy(o => o.Name)
+                .ToList();
+            Case.DoCreateRefreshAllRightsProcedure(allACLTables);
         }
 
         private void UpdateTables()

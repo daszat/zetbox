@@ -972,6 +972,20 @@ FROM (", viewName.Schema, viewName.Name);
             ExecuteNonQuery(string.Format(@"EXEC {0}", FormatSchemaName(procName)));
         }
 
+        public override void ExecRefreshAllRightsProcedure()
+        {
+            Log.DebugFormat("Refreshing all rights");
+            ExecuteNonQuery(string.Format(@"EXEC {0}", FormatSchemaName(GetQualifiedProcedureName(Kistl.Generator.Construct.SecurityRulesRefreshAllRightsProcedureName()))));
+        }
+
+        public override void CreateRefreshAllRightsProcedure(List<ProcRef> refreshProcNames)
+        {
+            var sb = new StringBuilder();
+            sb.AppendFormat("CREATE PROCEDURE {0} (@ID INT = NULL) AS BEGIN", FormatSchemaName(GetQualifiedProcedureName(Kistl.Generator.Construct.SecurityRulesRefreshAllRightsProcedureName())));
+            sb.Append(string.Join("\n", refreshProcNames.Select(i => string.Format("EXEC {0}(@ID)", FormatSchemaName(i))).ToArray()));
+            sb.Append("END");
+        }
+
         public override void CreatePositionColumnValidCheckProcedures(ILookup<TableRef, KeyValuePair<TableRef, string>> refSpecs)
         {
             if (refSpecs == null) { throw new ArgumentNullException("refSpecs"); }

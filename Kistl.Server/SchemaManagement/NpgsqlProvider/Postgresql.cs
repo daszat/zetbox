@@ -1095,6 +1095,20 @@ LANGUAGE 'plpgsql' VOLATILE",
             ExecuteNonQuery(String.Format(@"SELECT {0}(NULL)", FormatSchemaName(procName)));
         }
 
+        public override void ExecRefreshAllRightsProcedure()
+        {
+            Log.DebugFormat("Refreshing all rights");
+            ExecuteNonQuery(string.Format(@"SELECT {0}(NULL)", FormatSchemaName(GetQualifiedProcedureName(Kistl.Generator.Construct.SecurityRulesRefreshAllRightsProcedureName()))));
+        }
+
+        public override void CreateRefreshAllRightsProcedure(List<ProcRef> refreshProcNames)
+        {
+            var sb = new StringBuilder();
+            sb.AppendFormat("CREATE OR REPLACE FUNCTION {0}(IN refreshID integer) RETURNS void AS $BODY$BEGIN", FormatSchemaName(GetQualifiedProcedureName(Kistl.Generator.Construct.SecurityRulesRefreshAllRightsProcedureName())));
+            sb.Append(string.Join("\n", refreshProcNames.Select(i => string.Format("{0}(refreshID);", FormatSchemaName(i))).ToArray()));
+            sb.Append("END$BODY$ LANGUAGE 'plpgsql' VOLATILE");
+        }
+
         public override void CreatePositionColumnValidCheckProcedures(ILookup<TableRef, KeyValuePair<TableRef, string>> refSpecs)
         {
             if (refSpecs == null) { throw new ArgumentNullException("refSpecs"); }

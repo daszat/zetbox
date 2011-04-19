@@ -179,6 +179,11 @@ namespace Kistl.Generator
             if (objClass == null) { throw new ArgumentNullException("objClass"); }
             return "RefreshRightsOn_" + objClass.TableName;
         }
+        
+        public static string SecurityRulesRefreshAllRightsProcedureName()
+        {
+            return "RefreshAllRights";
+        }
 
         public static string SecurityRulesIndexName(ObjectClass objClass)
         {
@@ -189,6 +194,7 @@ namespace Kistl.Generator
         {
             return "FK_" + SecurityRulesTableName(objClass);
         }
+
         #endregion
 
         public static string ValueListCollectionTableName(ValueTypeProperty prop)

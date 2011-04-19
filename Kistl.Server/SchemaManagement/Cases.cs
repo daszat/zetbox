@@ -1971,5 +1971,18 @@ namespace Kistl.Server.SchemaManagement
 
 
         #endregion
+
+        public void DoCreateRefreshAllRightsProcedure(List<ObjectClass> allACLTables)
+        {
+            var procName = db.GetQualifiedProcedureName(Construct.SecurityRulesRefreshAllRightsProcedureName());
+            if (db.CheckProcedureExists(procName))
+            {
+                db.DropProcedure(procName);
+            }
+            var refreshProcNames = allACLTables
+                .Select(i => db.GetQualifiedProcedureName(Construct.SecurityRulesRefreshRightsOnProcedureName(i)))
+                .ToList();
+            db.CreateRefreshAllRightsProcedure(refreshProcNames);
+        }
     }
 }

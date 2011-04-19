@@ -56,7 +56,7 @@ namespace Kistl.DalProvider.Base.RelationWrappers
         /// </summary>
         protected virtual TEntry GetEntryOrDefault(TItem item)
         {
-            var result = Collection.SingleOrDefault(e => Object.Equals(ItemFromEntry(e), item));
+            var result = Collection.FirstOrDefault(e => Object.Equals(ItemFromEntry(e), item));
             if (result != null && ParentObject.Context != null)
             {
                 result.AttachToContext(ParentObject.Context);

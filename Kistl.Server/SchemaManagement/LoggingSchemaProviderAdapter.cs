@@ -397,6 +397,16 @@ namespace Kistl.Server.SchemaManagement
             _provider.CreateRefreshRightsOnProcedure(procName, viewUnmaterializedName, tblName, tblNameRights);
         }
 
+        public void CreateRefreshAllRightsProcedure(List<ProcRef> refreshProcNames)
+        {
+            _provider.CreateRefreshAllRightsProcedure(refreshProcNames);
+        }
+
+        public void ExecRefreshAllRightsProcedure()
+        {
+            _provider.ExecRefreshAllRightsProcedure();
+        }
+
         public void ExecRefreshRightsOnProcedure(ProcRef procName)
         {
             _provider.ExecRefreshRightsOnProcedure(procName);
