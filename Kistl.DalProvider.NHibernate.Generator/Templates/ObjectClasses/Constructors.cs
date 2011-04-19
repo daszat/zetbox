@@ -13,21 +13,49 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
 
     public partial class Constructors
     {
+        public sealed class CompoundInitialisationDescriptor
+        {
+            public readonly string PropertyName;
+            public readonly string BackingStoreName;
+            public readonly string TypeName;
+            public readonly string ImplementationTypeName;
+            public readonly bool IsNull;
+
+            public CompoundInitialisationDescriptor(string propertyName, string backingStoreName, string typeName, string implementationTypeName, bool isNull)
+            {
+                this.PropertyName = propertyName;
+                this.BackingStoreName = backingStoreName;
+                this.TypeName = typeName;
+                this.ImplementationTypeName = implementationTypeName;
+                this.IsNull = isNull;
+            }
+
+            public static IEnumerable<CompoundInitialisationDescriptor> CreateDescriptors(IEnumerable<CompoundObjectProperty> props, string implementationSuffix)
+            {
+                return props.Select(cop =>
+                {
+                    string propertyName = cop.Name;
+                    string backingStoreName = "this.Proxy." + propertyName;
+                    string typeName = cop.GetPropertyTypeString();
+                    string implementationTypeName = typeName + implementationSuffix;
+                    bool isNull = cop.IsNullable();
+
+                    return new CompoundInitialisationDescriptor(propertyName, backingStoreName, typeName, implementationTypeName, isNull);
+                });
+            }
+        }
+
         public virtual void ApplyCompoundObjectPropertyInitialisers()
         {
-            foreach (var property in compoundObjectProperties.Where(cop => !cop.IsList).OrderBy(cop => cop.Name))
+            foreach (var desc in compoundObjectInitialisers) //.Where(cop => !cop.IsList).OrderBy(cop => cop.Name))
             {
-                string propertyName = property.Name;
-                string backingStoreName = "this.Proxy." + propertyName;
-                string typeName = property.GetPropertyTypeString();
-                string implementationTypeName = typeName + ImplementationSuffix;
-                string isNull = property.IsNullable() ? "true" : "false";
+                string isNullString = desc.IsNull ? "true" : "false"; // avoid Culture-dependence
 
-                this.WriteObjects("            if (", backingStoreName, " == null)");
+                this.WriteObjects("            if (", desc.BackingStoreName, " == null)");
                 this.WriteLine();
                 this.WriteObjects("            {");
                 this.WriteLine();
-                this.WriteObjects("                ", backingStoreName, " = new ", implementationTypeName, "(this, \"", propertyName, "\", null, null) { CompoundObject_IsNull = ", isNull, " };");
+                this.WriteObjects("                ", desc.BackingStoreName, " = new ", desc.ImplementationTypeName, "(this, \"", desc.PropertyName, "\", null, null) { CompoundObject_IsNull = ", isNullString, " };");
                 this.WriteLine();
                 this.WriteObjects("            }");
                 this.WriteLine();
@@ -35,7 +63,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                 this.WriteLine();
                 this.WriteObjects("            {");
                 this.WriteLine();
-                this.WriteObjects("                ", backingStoreName, ".AttachToObject(this, \"", propertyName, "\");");
+                this.WriteObjects("                ", desc.BackingStoreName, ".AttachToObject(this, \"", desc.PropertyName, "\");");
                 this.WriteLine();
                 this.WriteObjects("            }");
                 this.WriteLine();

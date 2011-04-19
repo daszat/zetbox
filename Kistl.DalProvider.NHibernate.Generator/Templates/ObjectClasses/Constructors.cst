@@ -12,7 +12,7 @@
 <%@ Import Namespace="Kistl.Generator" %>
 <%@ Import Namespace="Kistl.Generator.Extensions" %>
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
-<%@ Parameter Name="compoundObjectProperties" Type="IEnumerable<CompoundObjectProperty>" %>
+<%@ Parameter Name="compoundObjectInitialisers" Type="IEnumerable<CompoundInitialisationDescriptor>" %>
 <%@ Parameter Name="valueSetFlags" Type="IEnumerable<string>" %>
 <%@ Parameter Name="interfaceName" Type="string" %>
 <%@ Parameter Name="className" Type="string" %>

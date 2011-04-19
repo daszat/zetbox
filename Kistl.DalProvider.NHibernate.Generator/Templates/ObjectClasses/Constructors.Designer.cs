@@ -15,25 +15,25 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
     public partial class Constructors : Kistl.Generator.ResourceTemplate
     {
 		protected IKistlContext ctx;
-		protected IEnumerable<CompoundObjectProperty> compoundObjectProperties;
+		protected IEnumerable<CompoundInitialisationDescriptor> compoundObjectInitialisers;
 		protected IEnumerable<string> valueSetFlags;
 		protected string interfaceName;
 		protected string className;
 		protected string baseClassName;
 
 
-        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, IEnumerable<CompoundObjectProperty> compoundObjectProperties, IEnumerable<string> valueSetFlags, string interfaceName, string className, string baseClassName)
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, IEnumerable<CompoundInitialisationDescriptor> compoundObjectInitialisers, IEnumerable<string> valueSetFlags, string interfaceName, string className, string baseClassName)
         {
             if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
 
-            _host.CallTemplate("ObjectClasses.Constructors", ctx, compoundObjectProperties, valueSetFlags, interfaceName, className, baseClassName);
+            _host.CallTemplate("ObjectClasses.Constructors", ctx, compoundObjectInitialisers, valueSetFlags, interfaceName, className, baseClassName);
         }
 
-        public Constructors(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, IEnumerable<CompoundObjectProperty> compoundObjectProperties, IEnumerable<string> valueSetFlags, string interfaceName, string className, string baseClassName)
+        public Constructors(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, IEnumerable<CompoundInitialisationDescriptor> compoundObjectInitialisers, IEnumerable<string> valueSetFlags, string interfaceName, string className, string baseClassName)
             : base(_host)
         {
 			this.ctx = ctx;
-			this.compoundObjectProperties = compoundObjectProperties;
+			this.compoundObjectInitialisers = compoundObjectInitialisers;
 			this.valueSetFlags = valueSetFlags;
 			this.interfaceName = interfaceName;
 			this.className = className;

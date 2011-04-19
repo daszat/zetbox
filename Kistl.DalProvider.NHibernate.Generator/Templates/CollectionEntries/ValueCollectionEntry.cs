@@ -65,8 +65,18 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries
         {
             // replace base constructors
             //base.ApplyConstructorTemplate();
+            var valueInitialisation = prop is CompoundObjectProperty
+                ? new ObjectClasses.Constructors.CompoundInitialisationDescriptor[] {
+                    new ObjectClasses.Constructors.CompoundInitialisationDescriptor(
+                        "Value",
+                        "this.Proxy.Value",
+                        prop.GetPropertyTypeString(),
+                        prop.GetPropertyTypeString() + ImplementationSuffix,
+                        prop.IsNullable())
+                }
+                : new ObjectClasses.Constructors.CompoundInitialisationDescriptor[0];
             ObjectClasses.Constructors.Call(Host, ctx,
-                new CompoundObjectProperty[0],
+                valueInitialisation,
                 new string[0],
                 GetCeInterface(),
                 GetCeClassName(),
