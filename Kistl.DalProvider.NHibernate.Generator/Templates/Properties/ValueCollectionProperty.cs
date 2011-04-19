@@ -21,7 +21,11 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
         {
             if (prop == null)
                 throw new ArgumentNullException("prop");
-            Call(host, ctx, serializationList, prop, prop.HasPersistentOrder, prop.IsList);
+            
+            // CompoundObjects cannot be compared, therefore we have to avoid sorting the list here
+            // although it would be required to keep the exported collection stable
+            // TODO: implement a comparer for COs using a DefaultSortOrder property(-list) to re-enable this
+            Call(host, ctx, serializationList, prop, prop.HasPersistentOrder, prop.IsList, false);
         }
 
         public static void Call(Arebis.CodeGeneration.IGenerationHost host,
@@ -31,13 +35,13 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
         {
             if (prop == null)
                 throw new ArgumentNullException("prop");
-            Call(host, ctx, serializationList, prop, prop.HasPersistentOrder, prop.IsList);
+            Call(host, ctx, serializationList, prop, prop.HasPersistentOrder, prop.IsList, !prop.HasPersistentOrder);
         }
 
         private static void Call(Arebis.CodeGeneration.IGenerationHost host,
             IKistlContext ctx,
             Templates.Serialization.SerializationMembersList serializationList,
-            Property prop, bool hasPersistentOrder, bool isList)
+            Property prop, bool hasPersistentOrder, bool isList, bool orderByValue)
         {
             if (prop == null) { throw new ArgumentNullException("prop"); }
             if (!isList) { throw new ArgumentOutOfRangeException("prop", "prop must be a List-valued property"); }
@@ -75,7 +79,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
                 name, backingName, backingCollectionType, exposedCollectionInterface,
                 thisInterface, referencedType, referencedCollectionEntry, referencedCollectionEntryImpl, referencedCollectionEntryProxy,
                 providerCollectionType, underlyingCollectionName, underlyingCollectionBackingName,
-                !hasPersistentOrder, moduleNamespace, ListOrCollection);
+                orderByValue, moduleNamespace, ListOrCollection);
         }
 
         protected virtual void AddSerialization(Templates.Serialization.SerializationMembersList list, string underlyingCollectionName)

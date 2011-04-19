@@ -25,6 +25,9 @@ rem IF ERRORLEVEL 1 GOTO FAIL
 bin\debug\Kistl.Server.Service.exe Configs\%zenv%\Kistl.Server.Service.xml -export Kistl.Server\Database\SchemaMigrationProjects.xml SchemaMigration
 IF ERRORLEVEL 1 GOTO FAIL
 
+bin\debug\Kistl.Server.Service.exe Configs\%zenv%\Kistl.Server.Service.xml -export Ini50.App.Common\Ini50.Config.xml Ini50.Config
+IF ERRORLEVEL 1 GOTO FAIL
+
 echo ********************************************************************************
 echo ************************************ Success ***********************************
 echo ********************************************************************************

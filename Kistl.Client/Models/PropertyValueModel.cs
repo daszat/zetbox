@@ -78,7 +78,15 @@ namespace Kistl.Client.Models
             }
             else if (prop is CompoundObjectProperty)
             {
-                return new CompoundObjectPropertyValueModel(obj, (CompoundObjectProperty)prop);
+                var cop = (CompoundObjectProperty)prop;
+                if (cop.IsList)
+                {
+                    return new CompoundCollectionPropertyValueModel(obj, cop);
+                }
+                else
+                {
+                    return new CompoundObjectPropertyValueModel(obj, cop);
+                }
             }
             else
             {
@@ -595,6 +603,94 @@ namespace Kistl.Client.Models
         }
 
         #endregion
+    }
+
+    public class CompoundCollectionPropertyValueModel
+        : ClassPropertyValueModel<IList<ICompoundObject>>, ICompoundCollectionValueModel
+    {
+        private readonly CompoundObjectProperty _property;
+
+        public CompoundCollectionPropertyValueModel(INotifyingObject obj, CompoundObjectProperty prop)
+            : base(obj, prop)
+        {
+            _property = prop;
+        }
+
+        #region IValueModel<TValue> Members
+
+        protected IList<ICompoundObject> valueCache;
+
+        /// <summary>
+        /// Gets or sets the value of the property presented by this model
+        /// </summary>
+        public override IList<ICompoundObject> Value
+        {
+            get
+            {
+                UpdateValueCache();
+                return valueCache;
+            }
+            set
+            {
+                throw new NotSupportedException();
+            }
+        }
+
+        protected IEnumerable underlyingCollectionCache = null;
+        public IEnumerable UnderlyingCollection
+        {
+            get
+            {
+                UpdateValueCache();
+                return underlyingCollectionCache;
+            }
+        }
+
+        protected void ValueCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            NotifyCollectionChangedEventHandler temp = _CollectionChanged;
+            if (temp != null)
+            {
+                temp(sender, e);
+            }
+        }
+
+        #endregion
+
+        #region INotifyCollectionChanged Members
+
+        private event NotifyCollectionChangedEventHandler _CollectionChanged;
+        public event NotifyCollectionChangedEventHandler CollectionChanged
+        {
+            add
+            {
+                _CollectionChanged += value;
+            }
+            remove
+            {
+                _CollectionChanged -= value;
+            }
+        }
+
+        #endregion
+
+        protected override void UpdateValueCache()
+        {
+            if (valueCache == null) // Once is OK
+            {
+                var lst = Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name);
+                lst.CollectionChanged += ValueCollectionChanged;
+
+                underlyingCollectionCache = (IEnumerable)lst;
+
+                valueCache = MagicCollectionFactory.WrapAsList<ICompoundObject>(lst);
+            }
+        }
+
+        public CompoundObject CompoundObjectDefinition
+        {
+            get { return _property.CompoundObjectDefinition; }
+        }
     }
 
     public abstract class BaseObjectCollectionPropertyValueModel<TCollection>

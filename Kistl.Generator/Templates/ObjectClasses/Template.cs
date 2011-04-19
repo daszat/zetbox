@@ -58,7 +58,9 @@ namespace Kistl.Generator.Templates.ObjectClasses
             this.WriteLine("        // CompoundObject list property");
             Properties.ValueCollectionProperty.Call(Host, ctx,
                 this.MembersToSerialize,
-                prop);
+                prop,
+                "ClientValueCollectionWrapper",
+                "ClientValueListWrapper");
         }
 
         protected override void ApplyObjectReferenceListTemplate(ObjectReferenceProperty prop)
@@ -110,7 +112,11 @@ namespace Kistl.Generator.Templates.ObjectClasses
         protected override void ApplyValueTypeListTemplate(ValueTypeProperty prop)
         {
             this.WriteLine("        // value list property");
-            Properties.ValueCollectionProperty.Call(Host, ctx, MembersToSerialize, prop);
+            Properties.ValueCollectionProperty.Call(Host, ctx,
+                MembersToSerialize,
+                prop,
+                "ClientValueCollectionWrapper",
+                "ClientValueListWrapper");
         }
 
         protected override void ApplyConstructorTemplate()

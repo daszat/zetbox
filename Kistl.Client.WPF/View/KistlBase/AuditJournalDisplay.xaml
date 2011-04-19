@@ -1,0 +1,45 @@
+﻿<ctrls:PropertyEditor x:Class="Kistl.Client.WPF.View.KistlBase.AuditJournalView"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"
+                      xmlns:view="clr-namespace:Kistl.Client.WPF.View.KistlBase"
+                      xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
+                      ToolTip="{Binding ToolTip}">
+
+    <ListView x:Name="list"
+              ItemsSource="{Binding JournalEntries}"
+              VerticalContentAlignment="Top">
+        <ListView.ItemContainerStyle>
+            <Style TargetType="ListViewItem">
+                <Setter Property="VerticalContentAlignment"
+                        Value="Top"/>
+            </Style>
+        </ListView.ItemContainerStyle>
+        <ListView.View>
+            <GridView>
+                <GridViewColumn Header="Wer">
+                    <GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Key.Identity}" />
+                        </DataTemplate>
+                    </GridViewColumn.CellTemplate>
+                </GridViewColumn>
+                <GridViewColumn Header="Wann">
+                    <GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Key.Timestamp}" />
+                        </DataTemplate>
+                    </GridViewColumn.CellTemplate>
+                </GridViewColumn>
+                <GridViewColumn Header="Was">
+                    <GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Value}" />
+                        </DataTemplate>
+                    </GridViewColumn.CellTemplate>
+                </GridViewColumn>
+            </GridView>
+        </ListView.View>
+    </ListView >
+
+</ctrls:PropertyEditor>

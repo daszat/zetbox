@@ -79,7 +79,17 @@ namespace Kistl.Client.Models
         CompoundObject CompoundObjectDefinition { get; }
     }
 
+    public interface IListValueModel<TValue> : IValueModel<IList<TValue>>, INotifyCollectionChanged
+    {
+        IEnumerable UnderlyingCollection { get; }
+    }
 
+    public interface ICompoundCollectionValueModel : IListValueModel<ICompoundObject>
+    {
+        CompoundObject CompoundObjectDefinition { get; }
+    }
+
+    // TODO: refactor to use ICollectionValueModel<TValue>
     public interface IObjectCollectionValueModel<TCollection> : IValueModel<TCollection>, INotifyCollectionChanged
     {
         ObjectClass ReferencedClass { get; }

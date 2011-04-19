@@ -1,0 +1,43 @@
+﻿<ctrls:PropertyEditor x:Class="Kistl.Client.WPF.View.KistlBase.CompoundListGridEditor"
+                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:wpftk="clr-namespace:Microsoft.Windows.Controls;assembly=WPFToolkit"
+                     xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"
+                     xmlns:view="clr-namespace:Kistl.Client.WPF.View.KistlBase"
+                     xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
+                     xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
+                     VerticalContentAlignment="Stretch">
+    <DockPanel>
+        <UniformGrid DockPanel.Dock="Left"
+                     Rows="2">
+            <ctrls:CommandButton CommandViewModel="{Binding Path=MoveItemUpCommand}" />
+            <ctrls:CommandButton CommandViewModel="{Binding Path=MoveItemDownCommand}" />
+        </UniformGrid>
+
+        <ctrls:WorkaroundToolBar DockPanel.Dock="Top"
+                                 ItemsSource="{Binding Commands}">
+            <ToolBar.ItemTemplate>
+                <DataTemplate>
+                    <ctrls:CommandButton CommandViewModel="{Binding}"
+                                         Style="{StaticResource ImageToolbarButton}" />
+                </DataTemplate>
+            </ToolBar.ItemTemplate>
+        </ctrls:WorkaroundToolBar>
+
+        <!-- configured from code, see RefreshGridView() -->
+        <ctrls:ZBoxDataGrid x:Name="lst"
+                            BorderThickness="0"
+                            ItemsSource="{Binding ValueProxies, Mode=OneWay, ValidatesOnDataErrors=true}"
+                            MinHeight="50"
+                            MouseDoubleClick="ItemActivatedHandler"
+                            CanUserAddRows="{Binding AllowInlineAddNew}"
+                            CanUserDeleteRows="{Binding AllowDelete}"
+                            AutoGenerateColumns="False"
+                            SelectedZBoxItems="{Binding SelectedProxies}">
+            <ctrls:ZBoxDataGrid.ContextMenu>
+                <ContextMenu ItemsSource="{Binding Commands}"
+                             ItemContainerStyle="{StaticResource CommandMenuItem}"/>                    
+            </ctrls:ZBoxDataGrid.ContextMenu>
+        </ctrls:ZBoxDataGrid>
+    </DockPanel>
+</ctrls:PropertyEditor>

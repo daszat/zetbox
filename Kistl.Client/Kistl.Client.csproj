@@ -146,6 +146,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ApplicationViewModelResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Presentables\KistlBase\AuditJournalViewModel.cs" />
     <Compile Include="Presentables\KistlBase\CommonCommandsResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -207,6 +208,7 @@
       <DependentUpon>BaseObjectCollectionViewModelResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Presentables\ValueViewModels\CalculatedProperties.cs" />
+    <Compile Include="Presentables\ValueViewModels\CompoundListViewModel.cs" />
     <Compile Include="Presentables\ValueViewModels\CompoundObjectPropertyViewModel.cs" />
     <Compile Include="Presentables\CompoundObjectViewModel.cs" />
     <Compile Include="Presentables\GUI\NavigatorViewModel.cs" />

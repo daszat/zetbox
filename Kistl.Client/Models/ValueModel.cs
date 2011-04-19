@@ -478,6 +478,95 @@ namespace Kistl.Client.Models
         #endregion
     }
 
+    public class ListValueModel<TValue, TCollection>
+        : ClassValueModel<TCollection>, IListValueModel<TValue>
+        where TCollection : class, IList<TValue>
+    {
+        protected TCollection valueCache;
+
+        public ListValueModel(string label, string description, bool allowNullInput, bool isReadOnly, TCollection collection)
+            : this(label, description, allowNullInput, isReadOnly, null, collection)
+        {
+        }
+
+        public ListValueModel(string label, string description, bool allowNullInput, bool isReadOnly, ControlKind requestedKind, TCollection collection)
+            : base(label, description, allowNullInput, isReadOnly, requestedKind)
+        {
+            if (collection == null) throw new ArgumentNullException("collection");
+
+            valueCache = collection;
+            if (collection is INotifyCollectionChanged)
+            {
+                ((INotifyCollectionChanged)collection).CollectionChanged += ValueCollectionChanged;
+            }
+        }
+
+        #region IValueModel<TValue> Members
+
+        /// <summary>
+        /// Gets or sets the value of the property presented by this model
+        /// </summary>
+        public override TCollection Value
+        {
+            get
+            {
+                return valueCache;
+            }
+            set
+            {
+                throw new NotSupportedException();
+            }
+        }
+
+        IList<TValue> IValueModel<IList<TValue>>.Value
+        {
+            get
+            {
+                return valueCache;
+            }
+            set
+            {
+                throw new NotSupportedException();
+            }
+        }
+
+        public IEnumerable UnderlyingCollection
+        {
+            get
+            {
+                return valueCache;
+            }
+        }
+
+        protected void ValueCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            NotifyCollectionChangedEventHandler temp = _CollectionChanged;
+            if (temp != null)
+            {
+                temp(sender, e);
+            }
+        }
+
+        #endregion
+
+        #region INotifyCollectionChanged Members
+
+        private event NotifyCollectionChangedEventHandler _CollectionChanged;
+        public event NotifyCollectionChangedEventHandler CollectionChanged
+        {
+            add
+            {
+                _CollectionChanged += value;
+            }
+            remove
+            {
+                _CollectionChanged -= value;
+            }
+        }
+
+        #endregion
+    }
+
     public class EnumerationValueModel : NullableStructValueModel<int>, IEnumerationValueModel
     {
         protected readonly Enumeration enumDef;

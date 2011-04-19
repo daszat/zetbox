@@ -16,34 +16,40 @@ namespace Kistl.Generator.Templates.Properties
         public static void Call(Arebis.CodeGeneration.IGenerationHost host,
             IKistlContext ctx,
             Serialization.SerializationMembersList serializationList,
-            CompoundObjectProperty prop)
+            CompoundObjectProperty prop,
+            string collectionWrapperClass,
+            string listWrapperClass)
         {
             if (prop == null)
                 throw new ArgumentNullException("prop");
-            Call(host, ctx, serializationList, prop, prop.HasPersistentOrder, prop.IsList);
+            Call(host, ctx, serializationList, prop, prop.HasPersistentOrder, prop.IsList, collectionWrapperClass, listWrapperClass);
         }
 
         public static void Call(Arebis.CodeGeneration.IGenerationHost host,
             IKistlContext ctx,
             Serialization.SerializationMembersList serializationList,
-            ValueTypeProperty prop)
+            ValueTypeProperty prop,
+            string collectionWrapperClass,
+            string listWrapperClass)
         {
             if (prop == null)
                 throw new ArgumentNullException("prop");
-            Call(host, ctx, serializationList, prop, prop.HasPersistentOrder, prop.IsList);
+            Call(host, ctx, serializationList, prop, prop.HasPersistentOrder, prop.IsList, collectionWrapperClass, listWrapperClass);
         }
 
         private static void Call(Arebis.CodeGeneration.IGenerationHost host,
             IKistlContext ctx,
             Serialization.SerializationMembersList serializationList,
-            Property prop, bool hasPersistentOrder, bool isList)
+            Property prop, bool hasPersistentOrder, bool isList,
+            string collectionWrapperClass,
+            string listWrapperClass)
         {
             if (prop == null) { throw new ArgumentNullException("prop"); }
             if (!isList) { throw new ArgumentOutOfRangeException("prop", "prop must be a List-valued property"); }
 
             string name = prop.Name;
             string backingName = "_" + name;
-            string backingCollectionType = (hasPersistentOrder ? "ClientValueListWrapper" : "ClientValueCollectionWrapper");
+            string backingCollectionType = (hasPersistentOrder ? listWrapperClass : collectionWrapperClass);
 
             string exposedCollectionInterface = hasPersistentOrder ? "IList" : "ICollection";
 

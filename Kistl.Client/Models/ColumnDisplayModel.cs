@@ -106,17 +106,49 @@ namespace Kistl.Client.Models
         {
         }
 
-        public void BuildColumns(Kistl.App.Base.ObjectClass cls, Mode mode, bool showMethods)
+        private bool ContainsSummaryTag(string categoryTags)
+        {
+            return (categoryTags ?? String.Empty).Split(',', ' ').Contains("Summary");
+        }
+
+        public void BuildColumns(Kistl.App.Base.DataType cls, IEnumerable<Property> props, IEnumerable<Method> methods, Mode mode)
         {
             if (cls == null) throw new ArgumentNullException("cls");
+            if (props == null) throw new ArgumentNullException("props");
+            if (methods == null) throw new ArgumentNullException("methods");
 
             ShowIcon = cls.ShowIconInLists;
             ShowId = cls.ShowIdInLists;
             ShowName = cls.ShowNameInLists;
 
+            this.Columns = props
+                .SelectMany(p => CreateColumnDisplayModels(mode, p, string.Empty, string.Empty))
+                .Concat(
+                    methods
+                        .Select(m => new ColumnDisplayModel()
+                        {
+                            Header = m.GetLabel(),
+                            Name = m.Name,
+                            Type = ColumnDisplayModel.ColumnType.MethodModel
+                        })
+                    )
+                .ToList();
+        }
+
+        public void BuildColumns(Kistl.App.Base.CompoundObject cls, Mode mode)
+        {
+            BuildColumns(cls, cls.Properties, cls.Methods.Where(m => m.IsDisplayable), mode);
+        }
+
+        public void BuildColumns(Kistl.App.Base.ObjectClass cls, Mode mode, bool showMethods)
+        {
+            if (cls == null) throw new ArgumentNullException("cls");
+
             var props = cls.GetAllProperties()
-                .Where(p => (p.CategoryTags ?? String.Empty).Split(',', ' ').Contains("Summary"));
-            if (props.Count() == 0)
+                .Where(p => ContainsSummaryTag(p.CategoryTags))
+                .ToList();
+
+            if (props.Count == 0)
             {
                 props = cls.GetAllProperties().Where(p =>
                 {
@@ -135,26 +167,14 @@ namespace Kistl.Client.Models
                             break; // return false; // something went wrong
                     }
                     return false; // workaround for https://bugzilla.novell.com/show_bug.cgi?id=660569
-                });
+                })
+                .ToList();
             }
 
             var methods = cls.GetAllMethods()
-                .Where(m => m.IsDisplayable && (m.CategoryTags ?? String.Empty).Split(',', ' ').Contains("Summary"));
+                .Where(m => m.IsDisplayable && ContainsSummaryTag(m.CategoryTags));
 
-            this.Columns = props.SelectMany(p => CreateColumnDisplayModels(mode, p, string.Empty, string.Empty)).ToList();
-
-            if (showMethods)
-            {
-                this.Columns = this.Columns.Concat(
-                    methods
-                    .Select(m => new ColumnDisplayModel()
-                    {
-                        Header = m.GetLabel(),
-                        Name = m.Name,
-                        Type = ColumnDisplayModel.ColumnType.MethodModel
-                    })
-                ).ToList();
-            }
+            BuildColumns(cls, props, showMethods ? methods.ToArray() : new Method[0], mode);
         }
 
         public static List<ColumnDisplayModel> CreateColumnDisplayModels(Mode mode, Property p, string parentLabel, string parentProp)
@@ -166,7 +186,7 @@ namespace Kistl.Client.Models
 
             if (p is CompoundObjectProperty)
             {
-                foreach(var i in ((CompoundObjectProperty)p).CompoundObjectDefinition.Properties)
+                foreach (var i in ((CompoundObjectProperty)p).CompoundObjectDefinition.Properties)
                 {
                     result.AddRange(CreateColumnDisplayModels(mode, i, parentLabel + lb + ".", parentProp + p.Name + "."));
                 }
@@ -178,7 +198,7 @@ namespace Kistl.Client.Models
                     Header = parentLabel + lb,
                     Name = parentProp + p.Name,
                 };
-                switch(mode)
+                switch (mode)
                 {
                     case Mode.ReadOnly:
                         colMdl.ControlKind = p.ValueModelDescriptor.GetDefaultGridCellDisplayKind();

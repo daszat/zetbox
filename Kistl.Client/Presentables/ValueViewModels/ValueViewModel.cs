@@ -464,29 +464,47 @@ namespace Kistl.Client.Presentables.ValueViewModels
             switch (State)
             {
                 case ValueViewModelState.Blurred_UnmodifiedValue:
-                    State = ValueViewModelState.ImplicitFocus_WritingModel;
-                    _partialUserInput = null;
-                    _partialUserInputError = null;
-                    SetValueToModel(value);
-                    NotifyValueChanged();
-                    State = ValueViewModelState.Blurred_UnmodifiedValue;
+                    try
+                    {
+                        State = ValueViewModelState.ImplicitFocus_WritingModel;
+                        _partialUserInput = null;
+                        _partialUserInputError = null;
+                        SetValueToModel(value);
+                        NotifyValueChanged();
+                    }
+                    finally
+                    {
+                        State = ValueViewModelState.Blurred_UnmodifiedValue;
+                    }
                     break;
                 case ValueViewModelState.ImplicitFocus_PartialUserInput:
-                    State = ValueViewModelState.ImplicitFocus_WritingModel;
-                    _partialUserInput = null;
-                    _partialUserInputError = null;
-                    SetValueToModel(value);
-                    NotifyValueChanged();
-                    State = ValueViewModelState.Blurred_UnmodifiedValue;
+                    try
+                    {
+                        State = ValueViewModelState.ImplicitFocus_WritingModel;
+                        _partialUserInput = null;
+                        _partialUserInputError = null;
+                        SetValueToModel(value);
+                        NotifyValueChanged();
+                    }
+                    finally
+                    {
+                        State = ValueViewModelState.Blurred_UnmodifiedValue;
+                    }
                     break;
                 case ValueViewModelState.Focused_PartialUserInput:
                 case ValueViewModelState.Focused_UnmodifiedValue:
-                    State = ValueViewModelState.Focused_WritingModel;
-                    _partialUserInput = formattedValue;
-                    _partialUserInputError = null;
-                    SetValueToModel(value);
-                    NotifyValueChanged();
-                    State = ValueViewModelState.Focused_UnmodifiedValue;
+                    try
+                    {
+                        State = ValueViewModelState.Focused_WritingModel;
+                        _partialUserInput = formattedValue;
+                        _partialUserInputError = null;
+                        SetValueToModel(value);
+                        NotifyValueChanged();
+                    }
+                    finally
+                    {
+                        State = ValueViewModelState.Focused_UnmodifiedValue;
+                    }
                     break;
                 default:
                     throw new InvalidOperationException(string.Format("Unexpected State {0}", State));
@@ -505,17 +523,29 @@ namespace Kistl.Client.Presentables.ValueViewModels
             {
                 case ValueViewModelState.Blurred_UnmodifiedValue:
                 case ValueViewModelState.ImplicitFocus_PartialUserInput:
-                    _partialUserInput = partialInput;
-                    _partialUserInputError = errorMessage;
-                    OnFormattedValueChanged();
-                    State = ValueViewModelState.ImplicitFocus_PartialUserInput;
+                    try
+                    {
+                        _partialUserInput = partialInput;
+                        _partialUserInputError = errorMessage;
+                        OnFormattedValueChanged();
+                    }
+                    finally
+                    {
+                        State = ValueViewModelState.ImplicitFocus_PartialUserInput;
+                    }
                     break;
                 case ValueViewModelState.Focused_UnmodifiedValue:
                 case ValueViewModelState.Focused_PartialUserInput:
-                    _partialUserInput = partialInput;
-                    _partialUserInputError = errorMessage;
-                    OnFormattedValueChanged();
-                    State = ValueViewModelState.Focused_PartialUserInput;
+                    try
+                    {
+                        _partialUserInput = partialInput;
+                        _partialUserInputError = errorMessage;
+                        OnFormattedValueChanged();
+                    }
+                    finally
+                    {
+                        State = ValueViewModelState.Focused_PartialUserInput;
+                    }
                     break;
                 case ValueViewModelState.Blurred_PartialUserInput:
                     // TODO: should start implicit focus
@@ -535,8 +565,14 @@ namespace Kistl.Client.Presentables.ValueViewModels
             switch (State)
             {
                 case ValueViewModelState.Blurred_UnmodifiedValue:
-                    _partialUserInput = FormatValue(this.GetValueFromModel());
-                    State = ValueViewModelState.Focused_UnmodifiedValue;
+                    try
+                    {
+                        _partialUserInput = FormatValue(this.GetValueFromModel());
+                    }
+                    finally
+                    {
+                        State = ValueViewModelState.Focused_UnmodifiedValue;
+                    }
                     break;
                 case ValueViewModelState.ImplicitFocus_PartialUserInput: // confused with focus
                 case ValueViewModelState.Focused_PartialUserInput: // confused with focus
@@ -893,7 +929,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 : base(dependencies, dataCtx, mdl)
             {
             }
-            
+
             protected override string FormatValue(TimeSpan? value)
             {
                 return value == null ? String.Empty : String.Format("{0:00}:{1:00}", value.Value.Hours, value.Value.Minutes);
