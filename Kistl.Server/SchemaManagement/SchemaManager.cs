@@ -200,6 +200,14 @@ namespace Kistl.Server.SchemaManagement
             {
                 return new DateTimeDefaultConstraint();
             }
+            else if (prop.DefaultValue is Kistl.App.Base.BoolDefaultValue)
+            {
+                return new BoolDefaultConstraint() { Value = ((Kistl.App.Base.BoolDefaultValue)prop.DefaultValue).BoolValue };
+            }
+            else if (prop.DefaultValue is Kistl.App.Base.IntDefaultValue)
+            {
+                return new IntDefaultConstraint() { Value = ((Kistl.App.Base.IntDefaultValue)prop.DefaultValue).IntValue };
+            }
             else
             {
                 return null;
