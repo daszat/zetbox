@@ -983,7 +983,7 @@ FROM (", viewName.Schema, viewName.Name);
             var sb = new StringBuilder();
             sb.AppendFormat("CREATE PROCEDURE {0} (@ID INT = NULL) AS BEGIN", FormatSchemaName(GetQualifiedProcedureName(Kistl.Generator.Construct.SecurityRulesRefreshAllRightsProcedureName())));
             sb.AppendLine();
-            sb.Append(string.Join("\n", refreshProcNames.Select(i => string.Format("EXEC {0}(@ID)", FormatSchemaName(i))).ToArray()));
+            sb.Append(string.Join("\n", refreshProcNames.Select(i => string.Format("EXEC {0} @ID", FormatSchemaName(i))).ToArray()));
             sb.AppendLine();
             sb.Append("END");
 
