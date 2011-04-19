@@ -80,7 +80,8 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries
                 new string[0],
                 GetCeInterface(),
                 GetCeClassName(),
-                null);
+                null,
+                prop is CompoundObjectProperty);
         }
 
         protected override void ApplyIdPropertyTemplate()

@@ -29,7 +29,7 @@
                 break;
             case SerializerDirection.FromStream:
 %>
-            BinarySerializer.FromStreamCollectionEntries(this.<%= collectionName %>, <%= streamName %>);
+            BinarySerializer.FromStreamCollectionEntries(this, this.<%= collectionName %>, <%= streamName %>);
 <%
                 break;
             case SerializerDirection.ToXmlStream:
@@ -39,13 +39,13 @@
                 break;
             case SerializerDirection.FromXmlStream:
 %>
-            XmlStreamer.FromStreamCollectionEntries(this.<%= collectionName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
+            XmlStreamer.FromStreamCollectionEntries(this, this.<%= collectionName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
             result.AddRange(this.<%= collectionName %>.Cast<IPersistenceObject>());
 <%
                 break;
             case SerializerDirection.MergeImport:
 %>
-            XmlStreamer.MergeImportCollectionEntries(this.<%= collectionName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
+            XmlStreamer.MergeImportCollectionEntries(this, this.<%= collectionName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
 <%
                 break;
         case SerializerDirection.Export:

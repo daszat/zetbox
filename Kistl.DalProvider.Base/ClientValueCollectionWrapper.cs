@@ -160,17 +160,28 @@ namespace Kistl.DalProvider.Base
 
         public int IndexOf(TValue item)
         {
-            throw new NotImplementedException();
+            var entry = FindByItem(item);
+            if (entry == null)
+                return -1;
+            else
+                return collection.IndexOf(entry);
         }
 
         public void Insert(int index, TValue item)
         {
-            throw new NotImplementedException();
+            TEntryImpl entry = InitialiseEntry(CreateEntry(), item);
+            OnEntryAdding(entry);
+            collection.Insert(index, entry);
+            OnEntryAdded(entry);
         }
 
         public void RemoveAt(int index)
         {
-            throw new NotImplementedException();
+            TEntryImpl e = collection[index];
+            ctx.Delete(e);
+            OnEntryRemoving(e);
+            collection.Remove(e);
+            OnEntryRemoved(e);
         }
 
         public TValue this[int index]

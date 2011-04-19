@@ -1,4 +1,4 @@
-R: Gendarme.Rules.Performance.AvoidConcatenatingCharsRule
+﻿R: Gendarme.Rules.Performance.AvoidConcatenatingCharsRule
 # This rule will warn you if boxing is used to concatenate a string since this will slow down your code and can be easily avoided.
 # external code
 M: System.Type System.Linq.Dynamic.ClassFactory::CreateDynamicClass(System.Linq.Dynamic.DynamicProperty[])

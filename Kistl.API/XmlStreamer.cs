@@ -310,11 +310,11 @@ namespace Kistl.API
             WriteCollectionEntries<T>(val, xml, name, ns, (obj, x) => obj.ToStream(x));
         }
 
-        public static void FromStreamCollectionEntries<T>(ICollection<T> val, XmlReader xml, string name, string ns)
-            where T : IStreamable, new()
+        public static void FromStreamCollectionEntries<T>(IDataObject parent, ICollection<T> val, XmlReader xml, string name, string ns)
+            where T : IValueCollectionEntry, IStreamable, new()
         {
             // collection entries do not have sub-lists
-            ReadCollectionEntries<T>(val, xml, name, ns, (obj, x) => obj.FromStream(x));
+            ReadCollectionEntries<T>(parent,val, xml, name, ns, (obj, x) => obj.FromStream(x));
         }
 
         public static void ExportCollectionEntries<T>(IEnumerable<T> val, XmlWriter xml, string name, string ns)
@@ -323,10 +323,10 @@ namespace Kistl.API
             WriteCollectionEntries<T>(val, xml, name, ns, (obj, x) => obj.Export(x, new string[] { "*" }));
         }
 
-        public static void MergeImportCollectionEntries<T>(ICollection<T> val, XmlReader xml, string name, string ns)
-            where T : IExportableValueCollectionEntryInternal, new()
+        public static void MergeImportCollectionEntries<T>(IDataObject parent, ICollection<T> val, XmlReader xml, string name, string ns)
+            where T : IValueCollectionEntry, IExportableValueCollectionEntryInternal, new()
         {
-            ReadCollectionEntries<T>(val, xml, name, ns, (obj, x) => obj.MergeImport(x));
+            ReadCollectionEntries<T>(parent, val, xml, name, ns, (obj, x) => obj.MergeImport(x));
         }
 
         private static void WriteCollectionEntries<T>(IEnumerable<T> val, XmlWriter xml, string name, string ns, CallXmlFunction<T, XmlWriter> func)
@@ -344,14 +344,17 @@ namespace Kistl.API
             xml.WriteEndElement();
         }
 
-        private static void ReadCollectionEntries<T>(ICollection<T> val, XmlReader xml, string name, string ns, CallXmlFunction<T, XmlReader> func)
-            where T : new()
+        private static void ReadCollectionEntries<T>(IDataObject parent, ICollection<T> val, XmlReader xml, string name, string ns, CallXmlFunction<T, XmlReader> func)
+            where T : IValueCollectionEntry, new()
         {
             if (val == null) { throw new ArgumentNullException("val"); }
             if (xml == null) { throw new ArgumentNullException("xml"); }
 
             if (xml.LocalName == name && xml.NamespaceURI == ns)
             {
+                //// reset target collection
+                //val.Clear();
+
                 using (var entries = xml.ReadSubtree())
                 {
                     while (entries.Read())
@@ -369,7 +372,18 @@ namespace Kistl.API
                                     }
                                 }
                             }
-                            val.Add(obj);
+                            if (parent == null)
+                            {
+                                val.Add(obj);
+                            }
+                            else
+                            {
+                                if (parent.Context != null)
+                                {
+                                    parent.Context.Internals().AttachAsNew(obj);
+                                }
+                                obj.ParentObject = parent;
+                            }
                         }
                     }
                 }

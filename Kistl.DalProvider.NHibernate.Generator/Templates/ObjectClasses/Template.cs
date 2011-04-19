@@ -29,7 +29,8 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                 ObjectClass.Properties.Where(p => p.DefaultValue != null).Select(p => "_is" + p.Name + "Set"),
                 ObjectClass.Name,
                 GetTypeName(),
-                ObjectClass.BaseObjectClass == null ? null : ObjectClass.BaseObjectClass.Name);
+                ObjectClass.BaseObjectClass == null ? null : ObjectClass.BaseObjectClass.Name,
+                false);
         }
 
         protected override void ApplyClassTailTemplate()

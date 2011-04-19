@@ -175,7 +175,7 @@ namespace Kistl.API.Server.Mocks
 
             BinarySerializer.FromStream(out this._StringProp, sr);
             BinarySerializer.FromStreamConverter(value => this._TestEnumProp = (TestEnum)value, sr);
-            BinarySerializer.FromStreamCollectionEntries(this.TestNamesImpl, sr);
+            BinarySerializer.FromStreamCollectionEntries(this, this.TestNamesImpl, sr);
 
             result.AddRange(this.TestNamesImpl.Cast<IPersistenceObject>());
 

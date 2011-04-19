@@ -866,11 +866,12 @@ namespace Kistl.API
         }
 
         /// <summary>
-        /// Deserialize a ICollectionEntry Collection, expected format: CONTINUE (true/false), IDataObject (if Object is present).
+        /// Deserialize a IValueCollectionEntry Collection, expected format: CONTINUE (true/false), IDataObject (if Object is present).
         /// </summary>
+        /// <param name="parent">the parent container holding this collection.</param>
         /// <param name="val">Destination Value.</param>
         /// <param name="sr">BinaryReader to deserialize from.</param>
-        public static void FromStreamCollectionEntries<T>(ICollection<T> val, BinaryReader sr)
+        public static void FromStreamCollectionEntries<T>(IDataObject parent, ICollection<T> val, BinaryReader sr)
             where T : IStreamable, new()
         {
             if (val == null)
@@ -889,7 +890,6 @@ namespace Kistl.API
 
                 T obj = new T();
                 obj.FromStream(sr);
-                // value collection entries cannot have lists
                 val.Add(obj);
                 SerializerTrace("read {0} value: {1}", typeof(T), val);
             }

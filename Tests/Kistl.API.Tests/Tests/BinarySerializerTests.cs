@@ -657,7 +657,7 @@ namespace Kistl.API.Tests
 			[Test]
 			public void should_fail_on_reading_from_null_stream()
 			{
-				Assert.That(() => BinarySerializer.FromStreamCollectionEntries<TestCollectionEntry>(null, sr), Throws.InstanceOf<ArgumentNullException>());
+				Assert.That(() => BinarySerializer.FromStreamCollectionEntries<TestCollectionEntry>(null, null, sr), Throws.InstanceOf<ArgumentNullException>());
 			}
 			
 			[Test]
@@ -670,14 +670,14 @@ namespace Kistl.API.Tests
 			[Test]
 			public void cannot_deserialize_collection_entries_to_null_collection()
 			{
-				Assert.That(() => BinarySerializer.FromStreamCollectionEntries<TestCollectionEntry>(null, sr), Throws.InstanceOf<ArgumentNullException>());
+                Assert.That(() => BinarySerializer.FromStreamCollectionEntries<TestCollectionEntry>(null, null, sr), Throws.InstanceOf<ArgumentNullException>());
 			}
 
 			[Test]
 			public void cannot_deserialize_collection_entries_from_null_stream()
 			{
 				var collection = new List<TestCollectionEntry>();
-				Assert.That(() => BinarySerializer.FromStreamCollectionEntries(collection, null), Throws.InstanceOf<ArgumentNullException>());
+                Assert.That(() => BinarySerializer.FromStreamCollectionEntries(null, collection, null), Throws.InstanceOf<ArgumentNullException>());
 			}
 
 			[Test]
@@ -722,7 +722,7 @@ namespace Kistl.API.Tests
                     ms.Seek(0, SeekOrigin.Begin);
 
                     fromval = new List<TestCollectionEntry>();
-                    BinarySerializer.FromStreamCollectionEntries(fromval, sr);
+                    BinarySerializer.FromStreamCollectionEntries(null, fromval, sr);
                     if (toval == null)
                     {
                         Assert.That(toval, Is.Null);
@@ -748,7 +748,7 @@ namespace Kistl.API.Tests
                     ms.Seek(0, SeekOrigin.Begin);
 
                     ObservableCollection<TestCollectionEntry> fromvalobserbable = new ObservableCollection<TestCollectionEntry>();
-                    BinarySerializer.FromStreamCollectionEntries(fromvalobserbable, sr);
+                    BinarySerializer.FromStreamCollectionEntries(null, fromvalobserbable, sr);
                     Assert.That(toval, Is.EqualTo(fromvalobserbable));
                 }
 			}

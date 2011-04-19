@@ -16,7 +16,6 @@ namespace Kistl.Client.Presentables.KistlBase
     public class AuditJournalViewModel : CompoundListViewModel
     {
         public new delegate AuditJournalViewModel Factory(IKistlContext dataCtx, IValueModel mdl);
-        private readonly IList<ICompoundObject> _journal;
         private List<KeyValuePair<JournalEntryKey, string>> _journalEntries;
 
         public override string Name
@@ -29,8 +28,7 @@ namespace Kistl.Client.Presentables.KistlBase
             ICompoundCollectionValueModel mdl)
             : base(appCtx, dataCtx, mdl)
         {
-            _journal = mdl.Value;
-            var notifier = _journal as INotifyCollectionChanged;
+            var notifier = mdl.UnderlyingCollection as INotifyCollectionChanged;
             if (notifier != null)
             {
                 notifier.CollectionChanged += (sender, e) =>
@@ -81,11 +79,11 @@ namespace Kistl.Client.Presentables.KistlBase
             {
                 if (_journalEntries == null)
                 {
-                    var notifier = _journal as INotifyCollectionChanged;
+                    var notifier = this.ValueModel.UnderlyingCollection as INotifyCollectionChanged;
                     if (notifier != null)
                         notifier.CollectionChanged += (sender, e) => _journalEntries = null;
 
-                    _journalEntries = _journal
+                    _journalEntries = ((IEnumerable<AuditEntry>)this.ValueModel.UnderlyingCollection) // cast to correct interface
                         .OfType<AuditEntry>()
                         .GroupBy(e =>
                         {

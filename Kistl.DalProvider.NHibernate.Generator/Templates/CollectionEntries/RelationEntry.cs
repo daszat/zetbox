@@ -29,7 +29,8 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries
                 new string[0],
                 GetCeInterface(),
                 GetCeClassName(),
-                null);
+                null,
+                false);
         }
 
         protected override void ApplyIdPropertyTemplate()
