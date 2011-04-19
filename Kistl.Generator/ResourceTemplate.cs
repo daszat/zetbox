@@ -60,5 +60,16 @@ namespace Kistl.Generator
         {
             return String.Format("res://{0}/{1}.{2}", Settings["providertemplateassembly"], Settings["providertemplatenamespace"], template);
         }
+
+        /// <summary>
+        /// If someone finds a better implementation, let me now
+        /// </summary>
+        /// <param name="text">a text to XML Encode</param>
+        /// <returns>xml encoded string</returns>
+        protected string UglyXmlEncode(string text)
+        {
+            if (text == null) return null;
+            return text.Replace("&", "&amp;").Replace("<", "&lt;").Replace(">", "&gt;").Replace("\"", "&quot;").Replace("'", "&apos;");
+        }
     }
 }

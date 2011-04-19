@@ -216,13 +216,13 @@ this.WriteObjects("                }\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
-this.WriteObjects("        /// <summary>Backing store for ",  name , "'s id, used on dehydration only</summary>\r\n");
+this.WriteObjects("        /// <summary>Backing store for ",  UglyXmlEncode(name) , "'s id, used on dehydration only</summary>\r\n");
 this.WriteObjects("        private int? ",  fkBackingName , " = null;\r\n");
 this.WriteObjects("\r\n");
 #line 151 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 if (relDataTypeExportable) { 
 #line 152 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
-this.WriteObjects("        /// <summary>Backing store for ",  name , "'s guid, used on import only</summary>\r\n");
+this.WriteObjects("        /// <summary>Backing store for ",  UglyXmlEncode(name) , "'s guid, used on import only</summary>\r\n");
 this.WriteObjects("        private Guid? ",  fkGuidBackingName , " = null;\r\n");
 #line 154 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 } 

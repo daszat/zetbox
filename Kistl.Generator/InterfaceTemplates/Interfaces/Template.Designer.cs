@@ -44,7 +44,7 @@ this.WriteObjects("\r\n");
 this.WriteObjects("    using Kistl.API;\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("    /// <summary>\r\n");
-this.WriteObjects("    /// ",  dataType.Description , "\r\n");
+this.WriteObjects("    /// ",  UglyXmlEncode(dataType.Description) , "\r\n");
 this.WriteObjects("    /// </summary>\r\n");
 this.WriteObjects("    public interface ",  dataType.Name , " ",  GetInheritance() , " \r\n");
 this.WriteObjects("    {\r\n");
@@ -57,7 +57,7 @@ foreach(Property p in dataType.Properties.OrderBy(p => p.Name))
 #line 34 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Interfaces\Template.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        /// <summary>\r\n");
-this.WriteObjects("        /// ",  p.Description , "\r\n");
+this.WriteObjects("        /// ",  UglyXmlEncode(p.Description) , "\r\n");
 this.WriteObjects("        /// </summary>\r\n");
 #line 39 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Interfaces\Template.cst"
 ApplyPropertyTemplate(p);
@@ -75,7 +75,7 @@ ApplyPropertyTemplate(p);
 #line 51 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Interfaces\Template.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        /// <summary>\r\n");
-this.WriteObjects("        /// ",  m.Description , "\r\n");
+this.WriteObjects("        /// ",  UglyXmlEncode(m.Description) , "\r\n");
 this.WriteObjects("        /// </summary>\r\n");
 #line 56 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Interfaces\Template.cst"
 ApplyMethodTemplate(m, index++);

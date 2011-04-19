@@ -60,7 +60,7 @@ this.WriteObjects("            get { return ",  backingPropertyName , ".Compound
 this.WriteObjects("            set { ",  backingPropertyName , " = (",  coImplementationType , ")value; }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
-this.WriteObjects("        /// <summary>backing property for ",  propName , ", takes care of attaching/detaching the values</summary>\r\n");
+this.WriteObjects("        /// <summary>backing property for ",  UglyXmlEncode(propName) , ", takes care of attaching/detaching the values</summary>\r\n");
 this.WriteObjects("        ",  GetModifiers() , " ",  coImplementationType , " ",  backingPropertyName , "\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            get { return ",  backingStoreName , "; }\r\n");

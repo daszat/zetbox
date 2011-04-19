@@ -56,10 +56,10 @@ this.WriteObjects("            get { return ",  backingPropertyName , ".Compound
 this.WriteObjects("            set { ",  backingPropertyName , " = (",  coImplementationType , ")value; }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
-this.WriteObjects("        /// <summary>backing store for ",  propName , "</summary>\r\n");
+this.WriteObjects("        /// <summary>backing store for ",  UglyXmlEncode(propName) , "</summary>\r\n");
 this.WriteObjects("        private ",  coImplementationType , " ",  backingStoreName , ";\r\n");
 this.WriteObjects("\r\n");
-this.WriteObjects("        /// <summary>backing property for ",  propName , ", takes care of attaching/detaching the values, mapped via EF</summary>\r\n");
+this.WriteObjects("        /// <summary>backing property for ",  UglyXmlEncode(propName) , ", takes care of attaching/detaching the values, mapped via EF</summary>\r\n");
 this.WriteObjects("        [XmlIgnore()]\r\n");
 this.WriteObjects("        [EdmComplexProperty()]\r\n");
 this.WriteObjects("        public ",  coImplementationType , " ",  backingPropertyName , "\r\n");

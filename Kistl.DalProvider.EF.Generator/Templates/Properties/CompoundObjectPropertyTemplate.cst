@@ -26,10 +26,10 @@
             set { <%= backingPropertyName %> = (<%= coImplementationType %>)value; }
         }
 
-        /// <summary>backing store for <%= propName %></summary>
+        /// <summary>backing store for <%= UglyXmlEncode(propName) %></summary>
         private <%= coImplementationType %> <%= backingStoreName %>;
 
-        /// <summary>backing property for <%= propName %>, takes care of attaching/detaching the values, mapped via EF</summary>
+        /// <summary>backing property for <%= UglyXmlEncode(propName) %>, takes care of attaching/detaching the values, mapped via EF</summary>
         [XmlIgnore()]
         [EdmComplexProperty()]
         public <%= coImplementationType %> <%= backingPropertyName %>

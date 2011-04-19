@@ -202,6 +202,11 @@ namespace Kistl.Server.SchemaManagement
             foreach (ObjectClass objClass in schema.GetQuery<ObjectClass>().OrderBy(o => o.Module.Namespace).ThenBy(o => o.Name))
             {
                 Log.DebugFormat("Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.Name);
+                
+                // Delete early to avoid collisions with newly created columns (like changing data type)
+                // Note: migration of data types is not supported now. Only chance is to delete and recreate a column
+                UpdateDeletedColumns(objClass, String.Empty);
+
                 if (Case.IsNewObjectClass(objClass))
                 {
                     Case.DoNewObjectClass(objClass);
@@ -212,7 +217,6 @@ namespace Kistl.Server.SchemaManagement
                 }
 
                 UpdateColumns(objClass, objClass.Properties, String.Empty);
-                UpdateDeletedColumns(objClass, String.Empty);
             }
             Log.Debug(String.Empty);
         }

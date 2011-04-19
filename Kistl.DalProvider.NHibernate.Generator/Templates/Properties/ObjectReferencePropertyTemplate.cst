@@ -145,11 +145,11 @@
             }
         }
 
-        /// <summary>Backing store for <%= name %>'s id, used on dehydration only</summary>
+        /// <summary>Backing store for <%= UglyXmlEncode(name) %>'s id, used on dehydration only</summary>
         private int? <%= fkBackingName %> = null;
 
 <% if (relDataTypeExportable) { %>
-        /// <summary>Backing store for <%= name %>'s guid, used on import only</summary>
+        /// <summary>Backing store for <%= UglyXmlEncode(name) %>'s guid, used on import only</summary>
         private Guid? <%= fkGuidBackingName %> = null;
 <% } %>
 

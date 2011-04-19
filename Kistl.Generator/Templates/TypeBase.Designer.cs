@@ -67,7 +67,7 @@ this.WriteObjects("\r\n");
 ApplyNamespacePreambleTemplate(); 
 #line 38 "P:\Kistl\Kistl.Generator\Templates\TypeBase.cst"
 this.WriteObjects("    /// <summary>\r\n");
-this.WriteObjects("    /// ",  DataType.Description , "\r\n");
+this.WriteObjects("    /// ",  UglyXmlEncode(DataType.Description) , "\r\n");
 this.WriteObjects("    /// </summary>\r\n");
 #line 42 "P:\Kistl\Kistl.Generator\Templates\TypeBase.cst"
 var mungedClassName = GetTypeName();
@@ -90,7 +90,7 @@ ApplyConstructorTemplate();
 #line 56 "P:\Kistl\Kistl.Generator\Templates\TypeBase.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        /// <summary>\r\n");
-this.WriteObjects("        /// ",  p.Description , "\r\n");
+this.WriteObjects("        /// ",  UglyXmlEncode(p.Description) , "\r\n");
 this.WriteObjects("        /// </summary>\r\n");
 #line 61 "P:\Kistl\Kistl.Generator\Templates\TypeBase.cst"
 ApplyPropertyTemplate(p);
@@ -105,7 +105,7 @@ ApplyPropertyTemplate(p);
 #line 70 "P:\Kistl\Kistl.Generator\Templates\TypeBase.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        /// <summary>\r\n");
-this.WriteObjects("        /// ",  m.Description , "\r\n");
+this.WriteObjects("        /// ",  UglyXmlEncode(m.Description) , "\r\n");
 this.WriteObjects("        /// </summary>\r\n");
 #line 75 "P:\Kistl\Kistl.Generator\Templates\TypeBase.cst"
 ApplyMethodTemplate(m, index++);

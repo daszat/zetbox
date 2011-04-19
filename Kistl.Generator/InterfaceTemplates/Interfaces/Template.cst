@@ -21,7 +21,7 @@ namespace <%= dataType.Module.Namespace %>
     using Kistl.API;
 
     /// <summary>
-    /// <%= dataType.Description %>
+    /// <%= UglyXmlEncode(dataType.Description) %>
     /// </summary>
     public interface <%= dataType.Name %> <%= GetInheritance() %> 
     {
@@ -33,7 +33,7 @@ namespace <%= dataType.Module.Namespace %>
 %>
 
         /// <summary>
-        /// <%= p.Description %>
+        /// <%= UglyXmlEncode(p.Description) %>
         /// </summary>
 <%
             ApplyPropertyTemplate(p);
@@ -50,7 +50,7 @@ namespace <%= dataType.Module.Namespace %>
 %>
 
         /// <summary>
-        /// <%= m.Description %>
+        /// <%= UglyXmlEncode(m.Description) %>
         /// </summary>
 <%
                 ApplyMethodTemplate(m, index++);

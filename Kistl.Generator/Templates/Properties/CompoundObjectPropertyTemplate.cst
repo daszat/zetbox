@@ -22,10 +22,10 @@
         // implement the user-visible interface
 <% DelegatingProperty.Call(Host, ctx, propName, coType, backingPropertyName, coImplementationType); %>
 
-        /// <summary>backing store for <%= propName %></summary>
+        /// <summary>backing store for <%= UglyXmlEncode(propName) %></summary>
         private <%= coImplementationType %> <%= backingStoreName %>;
 
-        /// <summary>backing property for <%= propName %>, takes care of attaching/detaching the values</summary>
+        /// <summary>backing property for <%= UglyXmlEncode(propName) %>, takes care of attaching/detaching the values</summary>
         <%= GetModifiers() %> <%= coImplementationType %> <%= backingPropertyName %>
         {
             get { return <%= backingStoreName %>; }

@@ -17,7 +17,7 @@ namespace <%= e.Module.Namespace %>
 {
 
     /// <summary>
-    /// <%= e.Description %>
+    /// <%= UglyXmlEncode(e.Description) %>
     /// </summary>
 <%
 	if (e.AreFlags)
@@ -34,7 +34,7 @@ namespace <%= e.Module.Namespace %>
     {
 %>
 		/// <summary>
-		/// <%= entry.Description %>
+		/// <%= UglyXmlEncode(entry.Description) %>
 		/// </summary>
 		<%= entry.Name %> = <%= entry.Value %>,
 

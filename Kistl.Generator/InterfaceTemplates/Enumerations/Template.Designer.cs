@@ -40,7 +40,7 @@ this.WriteObjects("namespace ",  e.Module.Namespace , "\r\n");
 this.WriteObjects("{\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("    /// <summary>\r\n");
-this.WriteObjects("    /// ",  e.Description , "\r\n");
+this.WriteObjects("    /// ",  UglyXmlEncode(e.Description) , "\r\n");
 this.WriteObjects("    /// </summary>\r\n");
 #line 23 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Enumerations\Template.cst"
 if (e.AreFlags)
@@ -60,7 +60,7 @@ foreach(EnumerationEntry entry in e.EnumerationEntries.OrderBy(ee => ee.Value))
 
 #line 36 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Enumerations\Template.cst"
 this.WriteObjects("		/// <summary>\r\n");
-this.WriteObjects("		/// ",  entry.Description , "\r\n");
+this.WriteObjects("		/// ",  UglyXmlEncode(entry.Description) , "\r\n");
 this.WriteObjects("		/// </summary>\r\n");
 this.WriteObjects("		",  entry.Name , " = ",  entry.Value , ",\r\n");
 this.WriteObjects("\r\n");

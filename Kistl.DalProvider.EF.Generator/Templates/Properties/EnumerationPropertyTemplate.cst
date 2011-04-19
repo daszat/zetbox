@@ -92,10 +92,10 @@
             }
         }
         
-        /// <summary>backing store for <%= name %></summary>
+        /// <summary>backing store for <%= UglyXmlEncode(name) %></summary>
         private <%= enumType %> <%= backingName %>;
         
-        /// <summary>EF sees only this property, for <%= name %></summary>
+        /// <summary>EF sees only this property, for <%= UglyXmlEncode(name) %></summary>
         [XmlIgnore()]
         [EdmScalarProperty()]
         public int<%= isNullable ? "?" : String.Empty %> <%= efName %>

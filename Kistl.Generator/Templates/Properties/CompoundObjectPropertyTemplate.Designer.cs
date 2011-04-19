@@ -54,10 +54,10 @@ this.WriteObjects("        // implement the user-visible interface\r\n");
 DelegatingProperty.Call(Host, ctx, propName, coType, backingPropertyName, coImplementationType); 
 #line 24 "P:\Kistl\Kistl.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 this.WriteObjects("\r\n");
-this.WriteObjects("        /// <summary>backing store for ",  propName , "</summary>\r\n");
+this.WriteObjects("        /// <summary>backing store for ",  UglyXmlEncode(propName) , "</summary>\r\n");
 this.WriteObjects("        private ",  coImplementationType , " ",  backingStoreName , ";\r\n");
 this.WriteObjects("\r\n");
-this.WriteObjects("        /// <summary>backing property for ",  propName , ", takes care of attaching/detaching the values</summary>\r\n");
+this.WriteObjects("        /// <summary>backing property for ",  UglyXmlEncode(propName) , ", takes care of attaching/detaching the values</summary>\r\n");
 this.WriteObjects("        ",  GetModifiers() , " ",  coImplementationType , " ",  backingPropertyName , "\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            get { return ",  backingStoreName , "; }\r\n");
