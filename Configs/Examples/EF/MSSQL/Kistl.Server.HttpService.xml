@@ -6,7 +6,6 @@
       <Database Name="Kistl" Schema="MSSQL" Provider="System.Data.SqlClient">Data Source=.\SQLEXPRESS;Initial Catalog=zbox;Integrated Security=True;MultipleActiveResultSets=true;</Database>
     </ConnectionStrings>
     <DocumentStore>DocumentStore\Server\</DocumentStore>
-    <LogFilePath>bin\LogFiles</LogFilePath>
     <CodeGenWorkingPath>bin\CodeGenNext</CodeGenWorkingPath>
     <CodeGenOutputPath>bin\CodeGen</CodeGenOutputPath>
     <CodeGenArchivePath>Backup</CodeGenArchivePath>

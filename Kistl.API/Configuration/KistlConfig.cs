@@ -152,12 +152,6 @@ namespace Kistl.API.Configuration
             public string DocumentStore { get; set; }
 
             /// <summary>
-            /// Root path for log files
-            /// </summary>
-            [XmlElement(IsNullable = false)]
-            public string LogFilePath { get; set; }
-
-            /// <summary>
             /// Where the Generator will put its files while working. Contents 
             /// of this directory are nuked on each run.
             /// </summary>
@@ -208,13 +202,6 @@ namespace Kistl.API.Configuration
                 public string Exclude { get; set; }
                 [XmlText]
                 public string Value { get; set; }
-            }
-
-
-            public string GetLogFilePath(string name)
-            {
-                Directory.CreateDirectory(LogFilePath);
-                return Path.Combine(LogFilePath, name);
             }
         }
 
