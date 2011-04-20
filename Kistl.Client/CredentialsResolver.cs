@@ -44,6 +44,12 @@ namespace Kistl.Client
 
             req.Credentials = CredentialCache.DefaultCredentials;
         }
+
+        public void InvalidCredentials()
+        {
+            // Exit application, server won't talk to us
+            Environment.Exit(1);
+        }
     }
 
     public class BasicAuthCredentialsResolver : ICredentialsResolver
@@ -114,13 +120,22 @@ namespace Kistl.Client
                         pwdvm.RequestedKind = _frozenCtx.FindPersistenceObject<ControlKind>(NamedObjects.ControlKind_Kistl_App_GUI_PasswordKind);
                         valueModels.Add(pwdvm);
 
+                        var dlgOK = false;
+
                         var dlg = _vmf.CreateViewModel<ValueInputTaskViewModel.Factory>().Invoke(ctx, "Enter Credentials", valueModels, (p) =>
                         {
                             this.UserName = userName.Value;
                             this.Password = pwd.Value;
+                            dlgOK = true;
                         });
 
                         _vmf.WithoutWaitDialog(() => _vmf.ShowDialog(dlg));
+
+                        if (!dlgOK)
+                        {
+                            // No credentials? User pressed cancel? exit application
+                            Environment.Exit(1);
+                        }
                     }
                 }
             }
@@ -132,6 +147,13 @@ namespace Kistl.Client
 
             EnsureUsername();
             req.Credentials = new NetworkCredential(UserName, Password);
+        }
+
+        public void InvalidCredentials()
+        {
+            // nothing to do
+            UserName = null;
+            Password = null;
         }
 
         internal string GetUsername()

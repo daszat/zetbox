@@ -41,42 +41,51 @@ namespace Kistl.API.Client
 
         private byte[] MakeRequest(Uri destination, Action<BinaryWriter> sendRequest)
         {
-            var req = InitializeRequest(destination);
+            do
+            {
+                var req = InitializeRequest(destination);
 
-            using (var reqStream = req.GetRequestStream())
-            using (var reqWriter = new BinaryWriter(reqStream))
-            {
-                sendRequest(reqWriter);
-            }
-            try
-            {
-                using (var response = req.GetResponse())
-                using (var input = new BinaryReader(response.GetResponseStream()))
+                using (var reqStream = req.GetRequestStream())
+                using (var reqWriter = new BinaryWriter(reqStream))
                 {
-                    byte[] result;
-                    BinarySerializer.FromStream(out result, input);
-                    return result;
+                    sendRequest(reqWriter);
                 }
-            }
-            catch (WebException ex)
-            {
-                var errorMsg = String.Format("Error when accessing server({0}): {1}", destination, ex.Status);
-                Log.Error(errorMsg);
-                var httpResponse = ex.Response as HttpWebResponse;
-                if (httpResponse != null)
+                try
                 {
-                    Log.ErrorFormat("HTTP Error: {0}: {1}", httpResponse.StatusCode, httpResponse.StatusDescription);
-                    foreach (var header in ex.Response.Headers)
+                    using (var response = req.GetResponse())
+                    using (var input = new BinaryReader(response.GetResponseStream()))
                     {
-                        Log.Error(header.ToString());
+                        byte[] result;
+                        BinarySerializer.FromStream(out result, input);
+                        return result;
                     }
                 }
-                else
+                catch (WebException ex)
                 {
-                    Log.Error("No headers");
+                    var errorMsg = String.Format("Error when accessing server({0}): {1}", destination, ex.Status);
+                    Log.Error(errorMsg);
+                    var httpResponse = ex.Response as HttpWebResponse;
+                    if (httpResponse != null)
+                    {
+                        if (httpResponse.StatusCode == HttpStatusCode.Unauthorized)
+                        {
+                            _credentialsResolver.InvalidCredentials();
+                            continue; // Try it again
+                        }
+
+                        Log.ErrorFormat("HTTP Error: {0}: {1}", httpResponse.StatusCode, httpResponse.StatusDescription);
+                        foreach (var header in ex.Response.Headers)
+                        {
+                            Log.Error(header.ToString());
+                        }
+                    }
+                    else
+                    {
+                        Log.Error("No headers");
+                    }
+                    throw new ApplicationException(errorMsg, ex);
                 }
-                throw new ApplicationException(errorMsg, ex);
-            }
+            } while (true);
         }
 
         private WebRequest InitializeRequest(Uri destination)
@@ -95,7 +104,6 @@ namespace Kistl.API.Client
             }
 
             _credentialsResolver.InitWebRequest(req);
-
             return req;
         }
 

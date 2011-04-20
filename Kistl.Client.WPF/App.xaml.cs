@@ -188,8 +188,15 @@ namespace Kistl.Client.WPF
 
         private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
-            MessageBox.Show(e.Exception.ToString());
-            e.Handled = true;
+            if (e.Exception.GetInnerException() is Kistl.API.Common.UnresolvableIdentityException)
+            {
+                Environment.Exit(1);
+            }
+            else
+            {
+                MessageBox.Show(e.Exception.ToString());
+                e.Handled = true;
+            }
         }
 
 #if DONOTUSE

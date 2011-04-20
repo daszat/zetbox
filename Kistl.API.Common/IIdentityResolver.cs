@@ -6,11 +6,36 @@ namespace Kistl.API.Common
     using System;
     using System.Linq;
     using System.Collections.Generic;
+    using System.Runtime.Serialization;
 
     public interface IIdentityResolver
     {
         Identity GetCurrent();
         Identity Resolve(IIdentity identity);
+    }
+
+    [Serializable]
+    public class UnresolvableIdentityException : Exception
+    {
+        public UnresolvableIdentityException()
+            : this(string.Empty)
+        {
+        }
+
+        public UnresolvableIdentityException(string userName)
+            : base(string.Format("Unable to resolve identity {0}", userName))
+        {
+        }
+
+        public UnresolvableIdentityException(string userName, Exception inner)
+            : base(string.Format("Unable to resolve identity {0}", userName), inner)
+        {
+        }
+
+        protected UnresolvableIdentityException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+        }
     }
 
     public abstract class BaseIdentityResolver : IIdentityResolver
@@ -38,14 +63,23 @@ namespace Kistl.API.Common
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
             string id = name.ToLower();
 
+            Identity result;
+
             if (cache.ContainsKey(id))
             {
-                return cache[id];
+                result = cache[id];
             }
             else
             {
-                return cache[id] = resolverCtx.GetQuery<Identity>().Where(i => i.UserName.ToLower() == id).FirstOrDefault();
+                result = cache[id] = resolverCtx.GetQuery<Identity>().Where(i => i.UserName.ToLower() == id).FirstOrDefault();
             }
+
+            if (result == null)
+            {
+                throw new UnresolvableIdentityException(name);
+            }
+
+            return result;
         }
     }
 }
