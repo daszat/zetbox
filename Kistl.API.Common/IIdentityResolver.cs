@@ -7,6 +7,7 @@ namespace Kistl.API.Common
     using System.Linq;
     using System.Collections.Generic;
     using System.Runtime.Serialization;
+    using Kistl.API.Utils;
 
     public interface IIdentityResolver
     {
@@ -72,12 +73,13 @@ namespace Kistl.API.Common
             else
             {
                 result = cache[id] = resolverCtx.GetQuery<Identity>().Where(i => i.UserName.ToLower() == id).FirstOrDefault();
+
+                if (result == null)
+                {
+                    Logging.Log.WarnFormat("Unable to resolve Identity {0}", name);
+                }
             }
 
-            if (result == null)
-            {
-                throw new UnresolvableIdentityException(name);
-            }
 
             return result;
         }
