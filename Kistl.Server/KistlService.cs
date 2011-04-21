@@ -375,7 +375,7 @@ namespace Kistl.Server
 
                         IEnumerable<IPersistenceObject> changedObjectsList;
                         IEnumerable<object> parameterList = (IEnumerable<object>)bf.Deserialize(parameter);
-                        
+
                         var result = _sohFactory
                             .GetServerObjectHandler(_iftFactory(type.GetSystemType()))
                             .InvokeServerMethod(ctx, ID, method,
@@ -398,11 +398,15 @@ namespace Kistl.Server
                             var lst = ((IEnumerable)result).AsQueryable().Cast<IStreamable>().Take(Kistl.API.Helper.MAXLISTCOUNT);
                             return SendObjects(lst, false).ToArray();
                         }
-                        else
+                        else if (result != null)
                         {
                             MemoryStream resultStream = new MemoryStream();
                             bf.Serialize(resultStream, result);
                             return resultStream.ToArray();
+                        }
+                        else
+                        {
+                            return new byte[] { };
                         }
                     }
                 }

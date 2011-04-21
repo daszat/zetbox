@@ -257,9 +257,13 @@ namespace Kistl.API.Client
                     }
                     result = lst;
                 }
-                else
+                else if (resultStream.Length > 0)
                 {
                     result = bf.Deserialize(resultStream);
+                }
+                else
+                {
+                    result = null;
                 }
             });
 

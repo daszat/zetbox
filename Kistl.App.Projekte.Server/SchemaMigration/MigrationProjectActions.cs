@@ -11,8 +11,9 @@ namespace ZBox.App.SchemaMigration
     using Kistl.API.Utils;
     using Kistl.App.Extensions;
     using ZBox.App.SchemaMigration;
-using Kistl.API.Configuration;
+    using Kistl.API.Configuration;
 
+    [Implementor]
     public class MigrationProjectActions
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("ZBox.SchemaMigration");
@@ -27,6 +28,7 @@ using Kistl.API.Configuration;
             _cfg = cfg;
         }
 
+        [Invocation]
         public static void UpdateFromSourceSchema(ZBox.App.SchemaMigration.MigrationProject obj)
         {
             foreach (var s in obj.StagingDatabases)
@@ -44,6 +46,8 @@ using Kistl.API.Configuration;
                 // TODO: And views!!
                 foreach (var tbl in src.GetTableNames().ToList().Union(src.GetViewNames().ToList()))
                 {
+                    if (tbl.Schema != s.Schema) continue;
+
                     Log.InfoFormat("reading table {0}", tbl);
                     SourceTable destTbl;
                     if (!destTbls.ContainsKey(tbl.Name))
@@ -81,6 +85,10 @@ using Kistl.API.Configuration;
                     }
                 }
             }
+
+            // TODO: For now, submit changes
+            // Later, implement InvokeOnServer correctly
+            obj.Context.SubmitChanges();
         }
     }
 }

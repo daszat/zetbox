@@ -265,7 +265,8 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         public override IEnumerable<TableRef> GetViewNames()
         {
-            throw new NotImplementedException();
+            return ExecuteReader("SELECT schemaname, viewname FROM pg_views WHERE schemaname not in ('information_schema', 'pg_catalog')")
+                .Select(rd => new TableRef(CurrentConnection.Database, rd.GetString(0), rd.GetString(1)));
         }
 
         public override void CreateTable(TableRef tblName, IEnumerable<Column> cols)
@@ -353,7 +354,7 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
                         FROM pg_attribute
                             JOIN pg_class ON (attrelid = pg_class.oid)
                             JOIN pg_namespace ON (relnamespace = pg_namespace.oid)
-                        WHERE nspname = @schema AND relname = @table and relkind = 'r' AND attnum >= 0 AND NOT attisdropped",
+                        WHERE nspname = @schema AND relname = @table and relkind in ( 'r', 'v' ) AND attnum >= 0 AND NOT attisdropped",
                     new Dictionary<string, object>() {
                         { "@schema", tbl.Schema },
                         { "@table", tbl.Name }
@@ -372,7 +373,7 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
                         JOIN pg_class c ON (a.attrelid = c.oid)
                         JOIN pg_namespace n ON (c.relnamespace = n.oid)
                         JOIN pg_type t ON (a.atttypid = t.oid)
-                    WHERE n.nspname = @schema AND c.relname = @table and c.relkind = 'r' AND a.attnum >= 0 AND NOT attisdropped",
+                    WHERE n.nspname = @schema AND c.relname = @table and c.relkind in ( 'r', 'v' ) AND a.attnum >= 0 AND NOT attisdropped",
                 new Dictionary<string, object>() {
                     { "@schema", tblName.Schema },
                     { "@table", tblName.Name }
@@ -381,7 +382,7 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
                 {
                     Name = rd.GetString(0),
                     Type = NativeToDbType(rd.GetString(1)),
-                    Size = rd.GetBoolean(4) ? rd.GetInt16(2) : int.MaxValue,
+                    Size = rd.GetBoolean(4) ? rd.GetInt32(2) : int.MaxValue,
                     IsNullable = rd.GetBoolean(3)
                 });
         }
