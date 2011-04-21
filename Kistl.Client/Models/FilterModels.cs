@@ -228,6 +228,28 @@ namespace Kistl.Client.Models
 
     public class MonthValueFilterModel : FilterModel
     {
+        public static MonthValueFilterModel Create(IFrozenContext frozenCtx, string label,string predicate, bool setDefault)
+        {
+            if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
+
+            var valMdl = new DateTimeValueModel(label, "", true, false); 
+            var mdl = new MonthValueFilterModel();
+            mdl.Label = label;
+            mdl.ValueSource = FilterValueSource.FromExpression(predicate);
+            mdl.ViewModelType = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_SingleValueFilterViewModel);
+            mdl.FilterArguments.Add(new FilterArgumentConfig(
+                valMdl, 
+                /*cfg.ArgumentViewModel ?? */ frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableMonthPropertyViewModel)));
+
+            if (setDefault)
+            {
+                // Defaults to this month
+                valMdl.Value = DateTime.Today.FirstMonthDay();
+            }
+
+            return mdl;
+        }
+
         public MonthValueFilterModel()
         {
         }
@@ -240,6 +262,46 @@ namespace Kistl.Client.Models
 
     public class RangeFilterModel : FilterModel
     {
+        public static RangeFilterModel Create<T>(IFrozenContext frozenCtx, string label, string predicate)
+            where T : struct
+        {
+            if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
+
+            var rfmdl = new RangeFilterModel()
+            {
+                Label = label,
+                ValueSource = FilterValueSource.FromExpression(predicate),
+                ViewModelType = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_RangeFilterViewModel)
+            };
+
+            ViewModelDescriptor vDesc = null;
+            if (typeof(T) == typeof(decimal))
+            {
+                vDesc = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableValuePropertyModel_Decimal);
+            }
+            else if (typeof(T) == typeof(int))
+            {
+                vDesc = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableValuePropertyModel_Int);
+            }
+            else if (typeof(T) == typeof(double))
+            {
+                vDesc = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableValuePropertyModel_Double);
+            }
+            else
+            {
+                throw new NotSupportedException(string.Format("Rangefilters of Type {0} are not supported yet", typeof(T).Name));
+            }
+
+            rfmdl.FilterArguments.Add(new FilterArgumentConfig(
+                new NullableStructValueModel<T>("", "", true, false),
+                vDesc));
+            rfmdl.FilterArguments.Add(new FilterArgumentConfig(
+                new NullableStructValueModel<T>("", "", true, false),
+                vDesc));
+
+            return rfmdl;
+        }
+
         protected override string GetPredicate()
         {
             StringBuilder sb = new StringBuilder();
