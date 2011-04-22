@@ -134,22 +134,11 @@ namespace Kistl.Client.Presentables.ValueViewModels
         #endregion
 
         #region Commands
-        private ObservableCollection<ICommandViewModel> _Commands;
-        public ObservableCollection<ICommandViewModel> Commands
-        {
-            get
-            {
-                if (_Commands == null)
-                {
-                    _Commands = CreateCommands();
-                }
-                return _Commands;
-            }
-        }
 
-        protected virtual ObservableCollection<ICommandViewModel> CreateCommands()
+        protected override ObservableCollection<ICommandViewModel> CreateCommands()
         {
-            var cmds = new ObservableCollection<ICommandViewModel>();
+            var cmds = base.CreateCommands();
+
             cmds.Add(SelectValueCommand);
             cmds.Add(CreateNewItemAndSetValueCommand);
             cmds.Add(OpenReferenceCommand);

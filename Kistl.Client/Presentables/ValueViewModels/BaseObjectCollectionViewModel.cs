@@ -68,8 +68,8 @@ namespace Kistl.Client.Presentables.ValueViewModels
         protected virtual GridDisplayConfiguration CreateDisplayedColumns()
         {
             var result = new GridDisplayConfiguration();
-            GridDisplayConfiguration.Mode mode = IsInlineEditable ? 
-                  GridDisplayConfiguration.Mode.Editable 
+            GridDisplayConfiguration.Mode mode = IsInlineEditable ?
+                  GridDisplayConfiguration.Mode.Editable
                 : GridDisplayConfiguration.Mode.ReadOnly;
 
             result.BuildColumns(ReferencedClass, mode, true);
@@ -217,22 +217,9 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
         #region Commands
 
-        private ObservableCollection<ICommandViewModel> _Commands;
-        public ObservableCollection<ICommandViewModel> Commands
+        protected override ObservableCollection<ICommandViewModel> CreateCommands()
         {
-            get
-            {
-                if (_Commands == null)
-                {
-                    _Commands = CreateCommands();
-                }
-                return _Commands;
-            }
-        }
-
-        protected virtual ObservableCollection<ICommandViewModel> CreateCommands()
-        {
-            var cmds = new ObservableCollection<ICommandViewModel>();
+            var cmds = base.CreateCommands();
 
             if (AllowAddExisting) cmds.Add(AddExistingCommand);
             if (AllowAddNew) cmds.Add(CreateNewCommand);
@@ -250,10 +237,10 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 if (_CreateNewCommand == null)
                 {
                     _CreateNewCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
-                        DataContext, 
+                        DataContext,
                         BaseObjectCollectionViewModelResources.CreateNewCommand_Name,
-                        BaseObjectCollectionViewModelResources.CreateNewCommand_Tooltip, 
-                        () => CreateNewItem(), 
+                        BaseObjectCollectionViewModelResources.CreateNewCommand_Tooltip,
+                        () => CreateNewItem(),
                         () => AllowAddNew && !DataContext.IsReadonly && !IsReadOnly);
                     _CreateNewCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_new_png);
                 }
@@ -269,10 +256,10 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 if (_AddExistingCommand == null)
                 {
                     _AddExistingCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
-                        DataContext, 
+                        DataContext,
                         BaseObjectCollectionViewModelResources.AddExistingCommand_Name,
-                        BaseObjectCollectionViewModelResources.AddExistingCommand_Tooltip, 
-                        () => AddExistingItem(), 
+                        BaseObjectCollectionViewModelResources.AddExistingCommand_Tooltip,
+                        () => AddExistingItem(),
                         () => AllowAddExisting && !DataContext.IsReadonly && !IsReadOnly);
                     _AddExistingCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_search_png);
                 }
@@ -288,8 +275,8 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 if (_RemoveCommand == null)
                 {
                     _RemoveCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
-                        DataContext, 
-                        BaseObjectCollectionViewModelResources.RemoveCommand_Name, 
+                        DataContext,
+                        BaseObjectCollectionViewModelResources.RemoveCommand_Name,
                         BaseObjectCollectionViewModelResources.RemoveCommand_Tooltip,
                         () => SelectedItems.ToList().ForEach(i => RemoveItem(i)), // Collection will change while deleting!
                         () => SelectedItems != null && SelectedItems.Count() > 0 && AllowRemove && !IsReadOnly);
@@ -306,7 +293,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 if (_DeleteCommand == null)
                 {
                     _DeleteCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
-                        DataContext, 
+                        DataContext,
                         BaseObjectCollectionViewModelResources.DeleteCommand_Name,
                         BaseObjectCollectionViewModelResources.DeleteCommand_Tooltip,
                         () => SelectedItems.ToList().ForEach(i => DeleteItem(i)), // Collection will change while deleting!

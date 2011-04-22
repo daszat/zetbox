@@ -3,6 +3,7 @@ namespace Kistl.Client.Presentables
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Diagnostics;
     using System.Linq;
@@ -211,8 +212,8 @@ namespace Kistl.Client.Presentables
         }
         #endregion
 
-        #region Design Mode 
-        
+        #region Design Mode
+
         /// <summary>
         /// Creates a ViewModel in "design" mode
         /// </summary>
@@ -236,6 +237,28 @@ namespace Kistl.Client.Presentables
         /// No <see cref="IKistlContext"/>s or <see cref="IThreadManager"/>s are available.
         public bool IsInDesignMode { get; private set; }
 
+        #endregion
+
+        #region Commands
+
+        protected ObservableCollection<ICommandViewModel> commandsStore;
+        public ObservableCollection<ICommandViewModel> Commands
+        {
+            get
+            {
+                if (commandsStore == null)
+                {
+                    commandsStore = CreateCommands();
+                }
+                return commandsStore;
+            }
+        }
+
+        protected virtual ObservableCollection<ICommandViewModel> CreateCommands()
+        {
+            return new ObservableCollection<ICommandViewModel>();
+        }
+        
         #endregion
 
         #region ColorManagement
@@ -272,7 +295,7 @@ namespace Kistl.Client.Presentables
             {
                 // return an ZToolBox Enum
                 // Translated into a Workspace Backround and List Back/Foreground & Font Style
-                return stateStore; 
+                return stateStore;
             }
             set
             {

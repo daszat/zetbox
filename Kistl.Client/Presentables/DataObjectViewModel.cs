@@ -60,7 +60,6 @@ namespace Kistl.Client.Presentables
                     cls = cls.BaseObjectClass;
                 }
             }
-
         }
 
         private ReadOnlyProjectedList<Property, BaseValueViewModel> _propertyModelList;
@@ -74,7 +73,10 @@ namespace Kistl.Client.Presentables
                 if (_propertyModelList == null)
                 {
                     FetchPropertyModels();
-                    _propertyModelList = new ReadOnlyProjectedList<Property, BaseValueViewModel>(_propertyList, p => _propertyModels[p], m => null); //m.Property);
+                    _propertyModelList = new ReadOnlyProjectedList<Property, BaseValueViewModel>(
+                        _propertyList,
+                        p => _propertyModels[p],
+                        m => null); //m.Property);
                     OnPropertyModelsCreated();
                 }
                 return _propertyModelList;
@@ -85,7 +87,7 @@ namespace Kistl.Client.Presentables
         /// Called after the PropertyModels list has been created.
         /// </summary>
         protected virtual void OnPropertyModelsCreated()
-        {            
+        {
         }
 
         private LookupDictionary<Property, Property, BaseValueViewModel> _propertyModels;
@@ -94,12 +96,15 @@ namespace Kistl.Client.Presentables
             if (_propertyModels == null)
             {
                 FetchPropertyList();
-                _propertyModels = new LookupDictionary<Property, Property, BaseValueViewModel>(_propertyList, k => k, v =>
-                {
-                    var result = BaseValueViewModel.Fetch(ViewModelFactory, DataContext, v, v.GetPropertyValueModel(Object));
-                    result.IsReadOnly = IsReadOnly;
-                    return result;
-                });
+                _propertyModels = new LookupDictionary<Property, Property, BaseValueViewModel>(
+                    _propertyList,
+                    k => k,
+                    v =>
+                    {
+                        var result = BaseValueViewModel.Fetch(ViewModelFactory, DataContext, v, v.GetPropertyValueModel(Object));
+                        result.IsReadOnly = IsReadOnly;
+                        return result;
+                    });
             }
         }
 

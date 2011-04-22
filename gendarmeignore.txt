@@ -44,6 +44,8 @@ T: Kistl.API.ExtensionHelpers
 R: Gendarme.Rules.BadPractice.ConstructorShouldNotCallVirtualMethodsRule
 # private type where the brittle-ness doesn't matter
 T: Kistl.API.Utils.Logging/TraceMethodCallContext
+# false positive
+T: Kistl.Client.Presentables.DataObjectSelectionTaskViewModel
 
 R: Gendarme.Rules.BadPractice.AvoidCallingProblematicMethodsRule
 # automatically generated code

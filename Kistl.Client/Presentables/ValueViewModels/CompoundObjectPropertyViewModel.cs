@@ -18,7 +18,6 @@ namespace Kistl.Client.Presentables.ValueViewModels
     {
         public new delegate CompoundObjectPropertyViewModel Factory(IKistlContext dataCtx, IValueModel mdl);
 
-
         public CompoundObjectPropertyViewModel(
             IViewModelDependencies appCtx, IKistlContext dataCtx,
             IValueModel mdl)
@@ -70,6 +69,22 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 _valueCache = CompoundObjectViewModel.Fetch(ViewModelFactory, DataContext, obj);
             }
             _valueCacheInititalized = true;
+        }
+
+        public override bool IsReadOnly
+        {
+            get
+            {
+                return base.IsReadOnly;
+            }
+            set
+            {
+                base.IsReadOnly = value;
+                foreach (var propMdl in Value.PropertyModels)
+                {
+                    propMdl.IsReadOnly = value;
+                }
+            }
         }
     }
 }

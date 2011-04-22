@@ -870,7 +870,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                         ValueViewModelResources.EditCommand_Name,
                         ValueViewModelResources.EditCommand_Tooltip,
                         () => Edit(),
-                        null);
+                        () => !IsReadOnly);
                 }
                 return _EditCommand;
             }

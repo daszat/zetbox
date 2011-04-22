@@ -296,18 +296,30 @@ namespace Kistl.Client.Presentables.KistlBase
             }
         }
 
+        protected override ObservableCollection<ICommandViewModel> CreateCommands()
+        {
+            var result = base.CreateCommands();
+
+            if (AllowAddNew) result.Add(NewCommand);
+            if (ShowOpenCommand) result.Add(OpenCommand);
+            if (ShowRefreshCommand) result.Add(RefreshCommand);
+            if (AllowDelete) result.Add(DeleteCommand);
+
+            return result;
+        }
+
         private void UpdateCommands()
         {
-            if (_commands == null) return;
-            if (!AllowAddNew && _commands.Contains(NewCommand)) _commands.Remove(NewCommand);
-            if (!ShowOpenCommand && _commands.Contains(OpenCommand)) _commands.Remove(OpenCommand);
-            if (!ShowRefreshCommand && _commands.Contains(RefreshCommand)) _commands.Remove(RefreshCommand);
-            if (!AllowDelete && _commands.Contains(DeleteCommand)) _commands.Remove(DeleteCommand);
+            if (commandsStore == null) return;
+            if (!AllowAddNew && commandsStore.Contains(NewCommand)) commandsStore.Remove(NewCommand);
+            if (!ShowOpenCommand && commandsStore.Contains(OpenCommand)) commandsStore.Remove(OpenCommand);
+            if (!ShowRefreshCommand && commandsStore.Contains(RefreshCommand)) commandsStore.Remove(RefreshCommand);
+            if (!AllowDelete && commandsStore.Contains(DeleteCommand)) commandsStore.Remove(DeleteCommand);
 
-            if (AllowAddNew && !_commands.Contains(NewCommand)) _commands.Insert(0, NewCommand);
-            if (ShowOpenCommand && !_commands.Contains(OpenCommand)) _commands.Insert(AllowAddNew ? 1 : 0, OpenCommand);
-            if (ShowRefreshCommand && !_commands.Contains(RefreshCommand)) _commands.Insert((AllowAddNew ? 1 : 0) + (ShowOpenCommand ? 1 : 0), RefreshCommand);
-            if (AllowDelete && !_commands.Contains(DeleteCommand)) _commands.Insert((AllowAddNew ? 1 : 0) + (ShowOpenCommand ? 1 : 0) + (ShowRefreshCommand ? 1 : 0), DeleteCommand);
+            if (AllowAddNew && !commandsStore.Contains(NewCommand)) commandsStore.Insert(0, NewCommand);
+            if (ShowOpenCommand && !commandsStore.Contains(OpenCommand)) commandsStore.Insert(AllowAddNew ? 1 : 0, OpenCommand);
+            if (ShowRefreshCommand && !commandsStore.Contains(RefreshCommand)) commandsStore.Insert((AllowAddNew ? 1 : 0) + (ShowOpenCommand ? 1 : 0), RefreshCommand);
+            if (AllowDelete && !commandsStore.Contains(DeleteCommand)) commandsStore.Insert((AllowAddNew ? 1 : 0) + (ShowOpenCommand ? 1 : 0) + (ShowRefreshCommand ? 1 : 0), DeleteCommand);
         }
 
         private bool? _showCommands = null;
@@ -331,20 +343,6 @@ namespace Kistl.Client.Presentables.KistlBase
                     _showCommands = value;
                     OnPropertyChanged("ShowCommands");
                 }
-            }
-        }
-
-        private ObservableCollection<ICommandViewModel> _commands = null;
-        public ObservableCollection<ICommandViewModel> Commands
-        {
-            get
-            {
-                if (_commands == null)
-                {
-                    _commands = new ObservableCollection<ICommandViewModel>();
-                    UpdateCommands();
-                }
-                return _commands;
             }
         }
 
@@ -1098,7 +1096,7 @@ namespace Kistl.Client.Presentables.KistlBase
             }
             set
             {
-                if (_label != value )
+                if (_label != value)
                 {
                     _label = value;
                     OnPropertyChanged("Label");
