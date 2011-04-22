@@ -289,7 +289,7 @@ namespace Kistl.Server.SchemaManagement
 
         public void DropDatabase(string dbName)
         {
-            ExecuteNonQuery(String.Format("DROP TABLE {0}", QuoteIdentifier(dbName)));
+            ExecuteNonQuery(String.Format("DROP DATABASE {0}", QuoteIdentifier(dbName)));
         }
 
         #endregion
