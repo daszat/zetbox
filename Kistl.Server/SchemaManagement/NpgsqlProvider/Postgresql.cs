@@ -974,20 +974,19 @@ $BODY$BEGIN
 
                     sb.AppendFormat(@"
 	IF TG_OP = 'DELETE' OR TG_OP = 'UPDATE' THEN
-		DELETE FROM {0} WHERE {4} IN ({1});
+		DELETE FROM {0} WHERE ""ID"" IN ({1});
 	END IF;
 	IF TG_OP = 'INSERT' OR TG_OP = 'UPDATE' THEN
-		DELETE FROM {0} WHERE {4} IN ({2});
-		INSERT INTO {0} ({4}, ""Identity"", ""Right"")
-			SELECT {4}, ""Identity"", ""Right"" FROM {3}
-			WHERE {4} IN ({2});
+		DELETE FROM {0} WHERE ""ID"" IN ({2});
+		INSERT INTO {0} (""ID"", ""Identity"", ""Right"")
+			SELECT rights.""ID"", rights.""Identity"", rights.""Right"" FROM {3} as rights
+                INNER JOIN ({2}) as acl ON (acl.""ID"" = rights.""ID"");
 	END IF;
 ",
                         FormatSchemaName(tbl.TblNameRights),
                         String.Format(selectFormat, "OLD"),
                         String.Format(selectFormat, "NEW"),
-                        FormatSchemaName(tbl.ViewUnmaterializedName),
-                        QuoteIdentifier("ID"));
+                        FormatSchemaName(tbl.ViewUnmaterializedName));
 
                 }
                 sb.AppendLine();
