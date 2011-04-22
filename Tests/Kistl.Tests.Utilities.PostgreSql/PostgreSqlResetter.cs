@@ -73,7 +73,7 @@ namespace Kistl.Tests.Utilities.PostgreSql
 
                             var admin = new NpgsqlConnectionStringBuilder(connectionString.ConnectionString);
                             var dbName = admin.Database;
-                            admin.Database = "template0";
+                            admin.Database = "postgres"; // use "default" database to connect, when trying to drop "dbName"
                             schemaManager.Open(admin.ConnectionString);
                             schemaManager.DropDatabase(dbName);
 
