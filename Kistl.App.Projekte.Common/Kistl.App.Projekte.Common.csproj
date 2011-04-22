@@ -130,7 +130,7 @@
     <Compile Include="KistlBase\MethodActions.cs" />
     <Compile Include="KistlBase\ObjectClassActions.cs" />
     <Compile Include="KistlBase\ReadOnlyConstraintActions.cs" />
-    <Compile Include="KistlBase\UniqueConstraintActions.cs" />
+    <Compile Include="KistlBase\IndexConstraintActions.cs" />
     <Compile Include="KistlBase\InvokingConstraintActions.cs" />
     <Compile Include="KistlBase\InitOnlyConstraintActions.cs" />
     <Compile Include="KistlBase\ViewReadOnlyConstraintActions.cs" />

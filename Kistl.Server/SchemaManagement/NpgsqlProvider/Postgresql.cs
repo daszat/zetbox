@@ -417,7 +417,7 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
             if (GetHasColumnDefaultValue(tblName, colName))
             {
-                ExecuteNonQuery(String.Format("ALTER TABLE {0} ALTER COLUMN {0} DROP DEFAULT", FormatSchemaName(tblName), QuoteIdentifier(colName)));
+                ExecuteNonQuery(String.Format("ALTER TABLE {0} ALTER COLUMN {1} DROP DEFAULT", FormatSchemaName(tblName), QuoteIdentifier(colName)));
             }
 
             if (defConstraint != null)
@@ -1077,8 +1077,10 @@ FROM (", FormatSchemaName(viewName));
 CREATE OR REPLACE FUNCTION {0}(IN refreshID integer) RETURNS void AS
 $BODY$BEGIN
     IF (refreshID IS NULL) THEN
+            ALTER TABLE {1} DISABLE TRIGGER ALL;
             TRUNCATE TABLE {1};
             INSERT INTO {1} (""ID"", ""Identity"", ""Right"") SELECT ""ID"", ""Identity"", ""Right"" FROM {2};
+            ALTER TABLE {1} ENABLE TRIGGER ALL;
     ELSE
             DELETE FROM {1} WHERE ""ID"" = refreshID;
             INSERT INTO {1} (""ID"", ""Identity"", ""Right"") SELECT ""ID"", ""Identity"", ""Right"" FROM {2} WHERE ""ID"" = refreshID;

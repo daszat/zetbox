@@ -175,10 +175,11 @@ namespace Kistl.App.Base
                         InstanceConstraint newConstr = (InstanceConstraint)ctx.Create(ctx.GetInterfaceType(constr));
                         objClass.Constraints.Add(newConstr);
                         newConstr.Reason = constr.Reason;
-                        if (constr is UniqueConstraint)
+                        if (constr is IndexConstraint)
                         {
-                            var uConstr = (UniqueConstraint)constr;
-                            var newUConstr = (UniqueConstraint)newConstr;
+                            var uConstr = (IndexConstraint)constr;
+                            var newUConstr = (IndexConstraint)newConstr;
+                            newUConstr.IsUnique = uConstr.IsUnique;
                             foreach (var propname in uConstr.Properties.Select(p => p.Name))
                             {
                                 var np = objClass.Properties.FirstOrDefault(p => p.Name == propname);

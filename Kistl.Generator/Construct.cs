@@ -77,10 +77,6 @@ namespace Kistl.Generator
         {
             return "IDX_" + tblName + "_" + string.Join("_", colNames);
         }
-        public static string UniqueIndexName(string tblName, params string[] colNames)
-        {
-            return "UIDX_" + tblName + "_" + string.Join("_", colNames);
-        }
         #endregion
 
         #region Column Names

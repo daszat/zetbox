@@ -7,16 +7,16 @@ namespace Kistl.App.Base
     using Kistl.API;
 
     [Implementor]
-    public static class UniqueConstraintActions
+    public static class IndexConstraintActions
     {
         [Invocation]
-        public static void GetErrorText(Kistl.App.Base.UniqueConstraint obj, MethodReturnEventArgs<string> e, IDataObject constrainedObject)
+        public static void GetErrorText(Kistl.App.Base.IndexConstraint obj, MethodReturnEventArgs<string> e, IDataObject constrainedObject)
         {
             e.Result = "";
         }
 
         [Invocation]
-        public static void IsValid(Kistl.App.Base.UniqueConstraint obj, MethodReturnEventArgs<bool> e, Kistl.API.IDataObject constrainedObject)
+        public static void IsValid(Kistl.App.Base.IndexConstraint obj, MethodReturnEventArgs<bool> e, Kistl.API.IDataObject constrainedObject)
         {
             e.Result = true; // enforced by database
         }

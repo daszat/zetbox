@@ -57,7 +57,7 @@ namespace Kistl.App.Packaging
             // InstanceContstraints and Property Relation entries of UniqueConstraints
             AddMetaObjects(result, () => ctx.GetQuery<InstanceConstraint>().Where(i => i.Constrained.Module.ID == moduleID).ToList().AsQueryable() // local sorting because of GetInterfaceType
                 .OrderBy(i => i.Constrained.Name).ThenBy(i => ctx.GetInterfaceType(i).Type.Name).ThenBy(i => i.ExportGuid));
-            AddMetaObjects(result, () => ctx.Internals().GetPersistenceObjectQuery<UniqueConstraint_ensures_unique_on_Property_RelationEntry>().Where(i => i.A.Constrained.Module.ID == moduleID || i.B.Module.ID == moduleID).ToList().AsQueryable()
+            AddMetaObjects(result, () => ctx.Internals().GetPersistenceObjectQuery<IndexConstraint_ensures_unique_on_Property_RelationEntry>().Where(i => i.A.Constrained.Module.ID == moduleID || i.B.Module.ID == moduleID).ToList().AsQueryable()
                 .OrderBy(i => i.A.ExportGuid).ThenBy(i => i.B.ExportGuid));
 
             foreach (var invokingConstraint in ctx.GetQuery<InvokingConstraint>().Where(i => i.ConstrainedProperty.Module.ID == moduleID).ToList().AsQueryable() // local sorting because of GetInterfaceType

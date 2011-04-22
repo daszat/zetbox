@@ -61,34 +61,34 @@ namespace Kistl.Server.SchemaManagement
             {
                 Log.DebugFormat("Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.Name);
 
-                UpdateUniqueContraints(objClass);
-                UpdateDeletedUniqueContraints(objClass);
+                UpdateIndexContraints(objClass);
+                UpdateDeletedIndexContraints(objClass);
             }
             Log.Debug(String.Empty);
         }
 
-        private void UpdateUniqueContraints(ObjectClass objClass)
+        private void UpdateIndexContraints(ObjectClass objClass)
         {
-            foreach (var uc in objClass.Constraints.OfType<UniqueConstraint>())
+            foreach (var uc in objClass.Constraints.OfType<IndexConstraint>())
             {
-                if (Case.IsNewUniqueConstraint(uc))
+                if (Case.IsNewIndexConstraint(uc))
                 {
-                    Case.DoNewUniqueConstraint(uc);
+                    Case.DoNewIndexConstraint(uc);
                 }
-                else if (Case.IsChangeUniqueConstraint(uc))
+                else if (Case.IsChangeIndexConstraint(uc))
                 {
-                    Case.DoChangeUniqueConstraint(uc);
+                    Case.DoChangeIndexConstraint(uc);
                 }
             }
         }
 
-        private void UpdateDeletedUniqueContraints(ObjectClass objClass)
+        private void UpdateDeletedIndexContraints(ObjectClass objClass)
         {
-            foreach (UniqueConstraint uc in Case.savedSchema.GetQuery<UniqueConstraint>().Where(p => p.Constrained.ExportGuid == objClass.ExportGuid))
+            foreach (IndexConstraint uc in Case.savedSchema.GetQuery<IndexConstraint>().Where(p => p.Constrained.ExportGuid == objClass.ExportGuid))
             {
-                if (Case.IsDeleteUniqueConstraint(uc))
+                if (Case.IsDeleteIndexConstraint(uc))
                 {
-                    Case.DoDeleteUniqueConstraint(uc);
+                    Case.DoDeleteIndexConstraint(uc);
                 }
             }
         }

@@ -361,6 +361,15 @@ namespace Kistl.Server.SchemaManagement
                 }
             }
 
+            if (!db.CheckIndexExists(tblName, Construct.IndexName(tblName.Name, colName)))
+            {
+                Log.WarnFormat("Index '{0}' is missing", Construct.IndexName(tblName.Name, colName));
+                if (repair)
+                {
+                    db.CreateIndex(tblName, Construct.IndexName(tblName.Name, colName), false, false, colName);
+                }
+            }
+
             if (isIndexed)
             {
                 CheckOrderColumn(tblName, indexName);
@@ -418,6 +427,24 @@ namespace Kistl.Server.SchemaManagement
                 }
             }
 
+            if (!db.CheckIndexExists(tblName, Construct.IndexName(tblName.Name, fkAName)))
+            {
+                Log.WarnFormat("Index '{0}' is missing", Construct.IndexName(tblName.Name, fkAName));
+                if (repair)
+                {
+                    db.CreateIndex(tblName, Construct.IndexName(tblName.Name, fkAName), false, false, fkAName);
+                }
+            }
+            if (!db.CheckIndexExists(tblName, Construct.IndexName(tblName.Name, fkBName)))
+            {
+                Log.WarnFormat("Index '{0}' is missing", Construct.IndexName(tblName.Name, fkBName));
+                if (repair)
+                {
+                    db.CreateIndex(tblName, Construct.IndexName(tblName.Name, fkBName), false, false, fkBName);
+                }
+            }
+
+
             if (rel.NeedsPositionStorage(RelationEndRole.A))
             {
                 CheckColumn(tblName, fkAIndex, System.Data.DbType.Int32, 0, 0, true, null);
@@ -472,7 +499,7 @@ namespace Kistl.Server.SchemaManagement
                 {
                     Log.DebugFormat("  Table: {0}", objClass.TableName);
                     CheckColumns(objClass, objClass.Properties, String.Empty);
-                    CheckUniqueConstraints(objClass);
+                    CheckIndexConstraints(objClass);
                     CheckValueTypeCollections(objClass);
                     CheckCompoundObjectCollections(objClass);
                     CheckExtraColumns(objClass);
@@ -485,19 +512,19 @@ namespace Kistl.Server.SchemaManagement
             }
         }
 
-        private void CheckUniqueConstraints(ObjectClass objClass)
+        private void CheckIndexConstraints(ObjectClass objClass)
         {
-            foreach (var uc in objClass.Constraints.OfType<UniqueConstraint>())
+            foreach (var uc in objClass.Constraints.OfType<IndexConstraint>())
             {
                 var tblName = db.GetQualifiedTableName(objClass.TableName);
                 var columns = Cases.GetUCColNames(uc);
-                var idxName = Construct.UniqueIndexName(tblName.Name, columns);
+                var idxName = Construct.IndexName(tblName.Name, columns);
                 if (!db.CheckIndexExists(tblName, idxName))
                 {
-                    Log.WarnFormat("Unique Constraint '{0}' is missing", idxName);
+                    Log.WarnFormat("Index Constraint '{0}' is missing", idxName);
                     if (repair)
                     {
-                        Case.DoNewUniqueConstraint(uc);
+                        Case.DoNewIndexConstraint(uc);
                     }
                 }
             }

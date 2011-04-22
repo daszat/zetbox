@@ -341,6 +341,7 @@ namespace Kistl.Server.SchemaManagement
                 db.CreateColumn(tblName, valPropIndexName, System.Data.DbType.Int32, 0, 0, false, null);
             }
             db.CreateFKConstraint(tblName, db.GetQualifiedTableName(objClass.TableName), fkName, assocName, true);
+            db.CreateIndex(tblName, Construct.IndexName(tblName.Name, fkName), false, false, fkName);
         }
         #endregion
 
@@ -376,6 +377,7 @@ namespace Kistl.Server.SchemaManagement
                 db.CreateColumn(tblName, valPropIndexName, System.Data.DbType.Int32, 0, 0, false, null);
             }
             db.CreateFKConstraint(tblName, db.GetQualifiedTableName(objClass.TableName), fkName, assocName, true);
+            db.CreateIndex(tblName, Construct.IndexName(tblName.Name, fkName), false, false, fkName);
         }
         #endregion
 
@@ -697,6 +699,7 @@ namespace Kistl.Server.SchemaManagement
             }
 
             db.CreateFKConstraint(destTblRef, destRefTblName, destColName, destAssocName, false);
+            db.CreateIndex(destTblRef, Construct.IndexName(destTblRef.Name, destColName), false, false, destColName); 
             if (isIndexed)
             {
                 Log.InfoFormat("Creating position column '{0}.{1}'", destTblRef, destIndexName);
@@ -1252,6 +1255,7 @@ namespace Kistl.Server.SchemaManagement
 
             CreateFKColumn(otherEnd, tblName, colName);
             db.CreateFKConstraint(tblName, refTblName, colName, assocName, false);
+            db.CreateIndex(tblName, Construct.IndexName(tblName.Name, colName), false, false, colName);
 
             if (isIndexed)
             {
@@ -1352,7 +1356,9 @@ namespace Kistl.Server.SchemaManagement
             }
 
             db.CreateFKConstraint(tblName, db.GetQualifiedTableName(rel.A.Type.TableName), fkAName, rel.GetRelationAssociationName(RelationEndRole.A), false);
+            db.CreateIndex(tblName, Construct.IndexName(tblName.Name, fkAName), false, false, fkAName);
             db.CreateFKConstraint(tblName, db.GetQualifiedTableName(rel.B.Type.TableName), fkBName, rel.GetRelationAssociationName(RelationEndRole.B), false);
+            db.CreateIndex(tblName, Construct.IndexName(tblName.Name, fkBName), false, false, fkBName);
         }
         #endregion
 
@@ -1909,21 +1915,21 @@ namespace Kistl.Server.SchemaManagement
         }
         #endregion
 
-        #region NewUniqueConstraint
-        public bool IsNewUniqueConstraint(UniqueConstraint uc)
+        #region NewIndexConstraint
+        public bool IsNewIndexConstraint(IndexConstraint uc)
         {
-            return uc.Constrained is ObjectClass && savedSchema.FindPersistenceObject<UniqueConstraint>(uc.ExportGuid) == null;
+            return uc.Constrained is ObjectClass && savedSchema.FindPersistenceObject<IndexConstraint>(uc.ExportGuid) == null;
         }
-        public void DoNewUniqueConstraint(UniqueConstraint uc)
+        public void DoNewIndexConstraint(IndexConstraint uc)
         {
             var objClass = (ObjectClass)uc.Constrained;
             var tblName = db.GetQualifiedTableName(objClass.TableName);
             var columns = GetUCColNames(uc);
-            Log.InfoFormat("New Unique Contraint: {0} on {1}({2})", uc.Reason, tblName, string.Join(", ", columns));
-            db.CreateIndex(tblName, Construct.UniqueIndexName(objClass.TableName, columns), true, false, columns);
+            Log.InfoFormat("New Index Contraint: {0} on {1}({2})", uc.Reason, tblName, string.Join(", ", columns));
+            db.CreateIndex(tblName, Construct.IndexName(objClass.TableName, columns), uc.IsUnique, false, columns);
         }
 
-        internal static string[] GetUCColNames(UniqueConstraint uc)
+        internal static string[] GetUCColNames(IndexConstraint uc)
         {
             var vt_columns = uc.Properties.OfType<ValueTypeProperty>().Select(p => Construct.NestedColumnName(p, null)).ToArray();
             var columns = vt_columns.Union(uc.Properties.OfType<ObjectReferenceProperty>().Select(p => Construct.ForeignKeyColumnName(p.RelationEnd.Parent.GetOtherEnd(p.RelationEnd)))).OrderBy(n => n).ToArray();
@@ -1931,27 +1937,30 @@ namespace Kistl.Server.SchemaManagement
         }
         #endregion
 
-        #region DeleteUniqueConstraint
-        public bool IsDeleteUniqueConstraint(UniqueConstraint uc)
+        #region DeleteIndexConstraint
+        public bool IsDeleteIndexConstraint(IndexConstraint uc)
         {
-            return uc.Constrained is ObjectClass && schema.FindPersistenceObject<UniqueConstraint>(uc.ExportGuid) == null;
+            return uc.Constrained is ObjectClass && schema.FindPersistenceObject<IndexConstraint>(uc.ExportGuid) == null;
         }
-        public void DoDeleteUniqueConstraint(UniqueConstraint uc)
+        public void DoDeleteIndexConstraint(IndexConstraint uc)
         {
             var objClass = (ObjectClass)uc.Constrained;
             var tblName = db.GetQualifiedTableName(objClass.TableName);
             var columns = GetUCColNames(uc);
-            Log.InfoFormat("Drop Unique Contraint: {0} on {1}({2})", uc.Reason, objClass.TableName, string.Join(", ", columns));
-            db.DropIndex(tblName, Construct.UniqueIndexName(objClass.TableName, columns));
+            Log.InfoFormat("Drop Index Contraint: {0} on {1}({2})", uc.Reason, objClass.TableName, string.Join(", ", columns));
+            db.DropIndex(tblName, Construct.IndexName(objClass.TableName, columns));
         }
         #endregion
 
-        #region ChangeUniqueConstraint
-        public bool IsChangeUniqueConstraint(UniqueConstraint uc)
+        #region ChangeIndexConstraint
+        public bool IsChangeIndexConstraint(IndexConstraint uc)
         {
-            if (!(uc is UniqueConstraint)) return false;
-            var saved = savedSchema.FindPersistenceObject<UniqueConstraint>(uc.ExportGuid);
+            if (!(uc is IndexConstraint)) return false;
+            var saved = savedSchema.FindPersistenceObject<IndexConstraint>(uc.ExportGuid);
             if (saved == null) return false;
+
+            if (uc.IsUnique != saved.IsUnique) return true;
+
             var newCols = GetUCColNames(uc);
             var savedCols = GetUCColNames(saved);
             if (newCols.Length != savedCols.Length) return true;
@@ -1961,11 +1970,11 @@ namespace Kistl.Server.SchemaManagement
             }
             return false;
         }
-        public void DoChangeUniqueConstraint(UniqueConstraint uc)
+        public void DoChangeIndexConstraint(IndexConstraint uc)
         {
-            var saved = savedSchema.FindPersistenceObject<UniqueConstraint>(uc.ExportGuid);
-            DoDeleteUniqueConstraint(saved);
-            DoNewUniqueConstraint(uc);
+            var saved = savedSchema.FindPersistenceObject<IndexConstraint>(uc.ExportGuid);
+            DoDeleteIndexConstraint(saved);
+            DoNewIndexConstraint(uc);
         }
         #endregion
 
