@@ -66,28 +66,21 @@ namespace Kistl.Tests.Utilities.PostgreSql
                             throw new ApplicationException(String.Format("Failed to dump database (exit={0}), maybe you need to put your password into AppData\\Roaming\\postgresql\\pgpass.conf", exitCode));
                         }
 
-                        exitCode = RunPgUtil("pg_restore", String.Format("--format c --clean {0} --dbname={2} {1}", userCmdString, dumpFile, destDB));
+                        var admin = new NpgsqlConnectionStringBuilder(connectionString.ConnectionString);
+                        var dbName = admin.Database;
+                        admin.Database = "postgres"; // use "default" database to connect, when trying to drop "dbName"
+                        schemaManager.Open(admin.ConnectionString);
+                        if (schemaManager.CheckDatabaseExists(dbName))
+                        {
+                            schemaManager.DropDatabase(dbName);
+                        }
+
+                        schemaManager.CreateDatabase(dbName);
+
+                        exitCode = RunPgUtil("pg_restore", String.Format("--format c {0} --dbname={2} {1}", userCmdString, dumpFile, destDB));
                         if (exitCode != 0)
                         {
-                            Log.WarnFormat("Retrying after failed pg_restore (exit={0}), since the tool can become confused by schema changes", exitCode);
-
-                            var admin = new NpgsqlConnectionStringBuilder(connectionString.ConnectionString);
-                            var dbName = admin.Database;
-                            admin.Database = "postgres"; // use "default" database to connect, when trying to drop "dbName"
-                            schemaManager.Open(admin.ConnectionString);
-                            if (schemaManager.CheckDatabaseExists(dbName))
-                            {
-                                schemaManager.DropDatabase(dbName);
-                            }
-
-                            schemaManager.CreateDatabase(dbName);
-
-                            // now we should not need to clean anymore, but we need to create the database anew
-                            exitCode = RunPgUtil("pg_restore", String.Format("--format c --create {0} --dbname={2} {1}", userCmdString, dumpFile, destDB));
-                            if (exitCode != 0)
-                            {
-                                throw new ApplicationException(String.Format("Failed to restore database (exit={0})", exitCode));
-                            }
+                            throw new ApplicationException(String.Format("Failed to restore database (exit={0})", exitCode));
                         }
                     }
                     finally
