@@ -80,6 +80,8 @@ namespace Kistl.Tests.Utilities.PostgreSql
                                 schemaManager.DropDatabase(dbName);
                             }
 
+                            schemaManager.CreateDatabase(dbName);
+
                             // now we should not need to clean anymore, but we need to create the database anew
                             exitCode = RunPgUtil("pg_restore", String.Format("--format c --create {0} --dbname={2} {1}", userCmdString, dumpFile, destDB));
                             if (exitCode != 0)
