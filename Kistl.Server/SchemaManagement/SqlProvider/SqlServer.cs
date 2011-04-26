@@ -181,6 +181,22 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
 
         #endregion
 
+        #region Database Management
+
+        public override bool CheckDatabaseExists(string dbName)
+        {
+            if (string.IsNullOrEmpty(dbName))
+                throw new ArgumentNullException("dbName");
+
+            return (int)ExecuteScalar("SELECT COUNT(*) FROM sys.databases WHERE name = @dbName",
+                new Dictionary<string, object>()
+                {
+                    { "@dbName", dbName},
+                }) > 0;
+        }
+
+        #endregion
+
         #region Database Schemas
 
         public override bool CheckSchemaExists(string schemaName)

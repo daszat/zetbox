@@ -485,6 +485,12 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
         }
 
         /// <summary>Not supported.</summary>
+        bool ISchemaProvider.CheckDatabaseExists(string dbName)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
         bool ISchemaProvider.CheckFKConstraintExists(TableRef tblName, string fkName)
         {
             throw new NotSupportedException();

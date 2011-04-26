@@ -198,6 +198,22 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         #endregion
 
+        #region Database Management
+
+        public override bool CheckDatabaseExists(string dbName)
+        {
+            if (string.IsNullOrEmpty(dbName))
+                throw new ArgumentNullException("dbName");
+
+            return (bool)ExecuteScalar("SELECT COUNT(*) > 0 FROM pg_database WHERE datname=@dbName",
+                new Dictionary<string, object>()
+                {
+                    { "@dbName", dbName},
+                });
+        }
+
+        #endregion
+
         #region Database Schemas
 
         public override IEnumerable<string> GetSchemaNames()

@@ -287,6 +287,8 @@ namespace Kistl.Server.SchemaManagement
 
         #region Database Management
 
+        public abstract bool CheckDatabaseExists(string dbName);
+
         public void DropDatabase(string dbName)
         {
             ExecuteNonQuery(String.Format("DROP DATABASE {0}", QuoteIdentifier(dbName)));

@@ -476,6 +476,12 @@ namespace Kistl.Server.SchemaManagement
             _provider.EnsureInfrastructure();
         }
 
+        public bool CheckDatabaseExists(string dbName)
+        {
+            Log.Debug("Checking whether database [{0}] exists");
+            return _provider.CheckDatabaseExists(dbName);
+        }
+
         public void DropDatabase(string dbName)
         {
             using (Log.InfoTraceMethodCallFormat("DropDatabase", "Dropping Database [{0}]", dbName))

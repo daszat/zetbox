@@ -471,6 +471,17 @@ namespace Kistl.API.Server
 
         #region Database Management
 
+        /// <summary>
+        /// Checks whether the specified database exists.
+        /// </summary>
+        /// <param name="dbName">the name of the database</param>
+        /// <returns>true if the database exists, false otherwise</returns>
+        bool CheckDatabaseExists(string dbName);
+
+        /// <summary>
+        /// Deletes the specified database
+        /// </summary>
+        /// <param name="dbName">the name of the database</param>
         void DropDatabase(string dbName);
 
         #endregion
