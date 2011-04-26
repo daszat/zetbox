@@ -91,6 +91,10 @@ namespace Kistl.Client.WPF.Toolkit
                             labelFactory.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(binding), Mode = BindingMode.OneWay });
                             break;
                         }
+                    case ColumnDisplayModel.ColumnType.CalculatedProperty:
+                        if (needEditor) editorFactory.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(String.Format("Object.CalculatedPropertyModelsByName[{0}]", desc.Name)), Mode = BindingMode.OneWay });
+                        labelFactory.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(String.Format("Object.CalculatedPropertyModelsByName[{0}]", desc.Name)), Mode = BindingMode.OneWay });
+                        break;
                     case ColumnDisplayModel.ColumnType.Property:
                         if (needEditor) editorFactory.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath("Object." + desc.Name), Mode = BindingMode.OneWay });
                         labelFactory.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath("Object." + desc.Name), Mode = BindingMode.OneWay });
@@ -163,6 +167,9 @@ namespace Kistl.Client.WPF.Toolkit
                             cpFef.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(binding), Mode = BindingMode.OneWay });
                             break;
                         }
+                    case ColumnDisplayModel.ColumnType.CalculatedProperty:
+                        cpFef.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(String.Format("CalculatedPropertyModelsByName[{0}]", desc.Name)), Mode = BindingMode.OneWay });
+                        break;
                     case ColumnDisplayModel.ColumnType.Property:
                         cpFef.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(desc.Name), Mode = BindingMode.OneWay });
                         break;

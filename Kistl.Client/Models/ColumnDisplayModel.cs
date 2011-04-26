@@ -25,6 +25,10 @@ namespace Kistl.Client.Models
             /// </summary>
             Property,
             /// <summary>
+            /// References a ViewModels calculaded property
+            /// </summary>
+            CalculatedProperty,
+            /// <summary>
             /// References a DataObjectViewModel.ActionViewModelsByName[] ViewModel
             /// </summary>
             MethodModel,
