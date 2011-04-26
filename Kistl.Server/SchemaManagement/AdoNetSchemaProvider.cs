@@ -289,6 +289,15 @@ namespace Kistl.Server.SchemaManagement
 
         public abstract bool CheckDatabaseExists(string dbName);
 
+        public virtual void CreateDatabase(string dbName)
+        {
+            ExecuteNonQuery("CREATE DATABASE @dbName",
+                new Dictionary<string, object>()
+                {
+                    { "@dbName", dbName},
+                });
+        }
+
         public void DropDatabase(string dbName)
         {
             ExecuteNonQuery(String.Format("DROP DATABASE {0}", QuoteIdentifier(dbName)));

@@ -212,6 +212,15 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
                 });
         }
 
+        public override void CreateDatabase(string dbName)
+        {
+            ExecuteNonQuery("CREATE DATABASE @dbName WITH TEMPLATE template0",
+                new Dictionary<string, object>()
+                {
+                    { "@dbName", dbName},
+                });
+        }
+
         #endregion
 
         #region Database Schemas

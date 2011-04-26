@@ -539,6 +539,12 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
         }
 
         /// <summary>Not supported.</summary>
+        void ISchemaProvider.CreateDatabase(string dbName)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
         void ISchemaProvider.CreateTable(TableRef tbl, IEnumerable<Column> cols)
         {
             throw new NotSupportedException();

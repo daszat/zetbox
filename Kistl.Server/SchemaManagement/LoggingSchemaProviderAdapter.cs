@@ -482,6 +482,14 @@ namespace Kistl.Server.SchemaManagement
             return _provider.CheckDatabaseExists(dbName);
         }
 
+        public void CreateDatabase(string dbName)
+        {
+            using (Log.InfoTraceMethodCallFormat("CreateDatabase", "Creating Database [{0}]", dbName))
+            {
+                _provider.CreateDatabase(dbName);
+            }
+        }
+
         public void DropDatabase(string dbName)
         {
             using (Log.InfoTraceMethodCallFormat("DropDatabase", "Dropping Database [{0}]", dbName))

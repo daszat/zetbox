@@ -479,6 +479,12 @@ namespace Kistl.API.Server
         bool CheckDatabaseExists(string dbName);
 
         /// <summary>
+        /// Creates the specified database with default parameters.
+        /// </summary>
+        /// <param name="dbName">the name of the database</param>
+        void CreateDatabase(string dbName);
+
+        /// <summary>
         /// Deletes the specified database
         /// </summary>
         /// <param name="dbName">the name of the database</param>
