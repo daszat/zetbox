@@ -291,11 +291,7 @@ namespace Kistl.Server.SchemaManagement
 
         public virtual void CreateDatabase(string dbName)
         {
-            ExecuteNonQuery("CREATE DATABASE @dbName",
-                new Dictionary<string, object>()
-                {
-                    { "@dbName", dbName},
-                });
+            ExecuteNonQuery(string.Format("CREATE DATABASE {0}", QuoteIdentifier(dbName)));
         }
 
         public void DropDatabase(string dbName)
@@ -471,7 +467,7 @@ namespace Kistl.Server.SchemaManagement
         public abstract bool CheckFunctionExists(ProcRef funcName);
         public abstract void DropFunction(ProcRef funcName);
 
-                public abstract void EnsureInfrastructure();
+        public abstract void EnsureInfrastructure();
         public abstract void DropAllObjects();
 
         #endregion
@@ -589,7 +585,7 @@ namespace Kistl.Server.SchemaManagement
 
         public abstract void CreateSequenceNumberProcedure();
         public abstract void CreateContinuousSequenceNumberProcedure();
-        
+
         public abstract IDataReader ReadTableData(TableRef tbl, IEnumerable<string> colNames);
         public abstract IDataReader ReadTableData(string sql);
         public abstract IDataReader ReadJoin(TableRef tbl, IEnumerable<ProjectionColumn> colNames, IEnumerable<Join> joins);
