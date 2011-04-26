@@ -68,20 +68,26 @@ namespace Kistl.Tests.Utilities.PostgreSql
 
                         var admin = new NpgsqlConnectionStringBuilder(connectionString.ConnectionString);
                         var dbName = admin.Database;
-                        admin.Database = "postgres"; // use "default" database to connect, when trying to drop "dbName"
-                        schemaManager.Open(admin.ConnectionString);
-                        if (schemaManager.CheckDatabaseExists(dbName))
-                        {
-                            schemaManager.DropDatabase(dbName);
-                        }
 
-                        schemaManager.CreateDatabase(dbName);
+                        using (Log.InfoTraceMethodCall("DropCreateDatabase", string.Format("Recreating database {0}", dbName)))
+                        {
+                            admin.Database = "postgres"; // use "default" database to connect, when trying to drop "dbName"
+                            schemaManager.Open(admin.ConnectionString);
+                            if (schemaManager.CheckDatabaseExists(dbName))
+                            {
+                                schemaManager.DropDatabase(dbName);
+                            }
+
+                            schemaManager.CreateDatabase(dbName);
+                        }
 
                         exitCode = RunPgUtil("pg_restore", String.Format("--format c {0} --dbname={2} {1}", userCmdString, dumpFile, destDB));
                         if (exitCode != 0)
                         {
                             throw new ApplicationException(String.Format("Failed to restore database (exit={0})", exitCode));
                         }
+
+                        schemaManager.RefreshDbStats();
                     }
                     finally
                     {
