@@ -75,7 +75,10 @@ namespace Kistl.Tests.Utilities.PostgreSql
                             var dbName = admin.Database;
                             admin.Database = "postgres"; // use "default" database to connect, when trying to drop "dbName"
                             schemaManager.Open(admin.ConnectionString);
-                            schemaManager.DropDatabase(dbName);
+                            if (schemaManager.CheckDatabaseExists(dbName))
+                            {
+                                schemaManager.DropDatabase(dbName);
+                            }
 
                             // now we should not need to clean anymore, but we need to create the database anew
                             exitCode = RunPgUtil("pg_restore", String.Format("--format c --create {0} --dbname={2} {1}", userCmdString, dumpFile, destDB));
