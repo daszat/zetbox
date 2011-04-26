@@ -29,10 +29,11 @@
                                    BasedOn="{StaticResource NavigationBreadCrumb}" />
                         </StackPanel.Resources>
                         <TextBlock Text=">" />
-                        <Button Style="{StaticResource LinkButton}"
+                        <Button Style="{StaticResource NavigationBreadCrumbLinkButton}"
                                 Command="{Binding Displayer.NavigateToCommand, Converter={StaticResource CommandConverter}}"
                                 CommandParameter="{Binding}"
-                                Content="{Binding Name}" />
+                                Content="{Binding Name}">
+                        </Button>
                     </StackPanel>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
