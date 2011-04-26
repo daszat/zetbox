@@ -17,5 +17,12 @@ namespace Kistl.App.Extensions
             if (id == null) throw new ArgumentNullException("id");
             return id.Groups.Any(g => g.ExportGuid == Groups_Adminstrator);
         }
+
+        public static bool IsInGroup(this Identity id, Group grp)
+        {
+            if (id == null) throw new ArgumentNullException("id");
+            if (grp == null) throw new ArgumentNullException("grp");
+            return id.Groups.Any(g => g.ExportGuid == grp.ExportGuid);
+        }
     }
 }
