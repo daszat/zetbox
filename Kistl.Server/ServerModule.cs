@@ -82,11 +82,6 @@ namespace Kistl.Server
 
             // TODO: move to separate SchemaProvider-specific assembly, since the SQL-Schema should be independent of the DalProvider
             moduleBuilder
-                .Register(c => new SchemaManagement.LoggingSchemaProviderAdapter(new SchemaManagement.NpgsqlProvider.Postgresql()))
-                .As<ISchemaProvider>()
-                .Named<ISchemaProvider>("POSTGRESQL")
-                .InstancePerDependency();
-            moduleBuilder
                 .Register(c => new SchemaManagement.LoggingSchemaProviderAdapter(new SchemaManagement.OleDbProvider.OleDb()))
                 .As<ISchemaProvider>()
                 .Named<ISchemaProvider>("OLEDB")
@@ -95,6 +90,11 @@ namespace Kistl.Server
                 .Register(c => new SchemaManagement.LoggingSchemaProviderAdapter(new SchemaManagement.SqlProvider.SqlServer()))
                 .As<ISchemaProvider>()
                 .Named<ISchemaProvider>("MSSQL")
+                .InstancePerDependency();
+            moduleBuilder
+                .Register(c => new SchemaManagement.LoggingSchemaProviderAdapter(new SchemaManagement.NpgsqlProvider.Postgresql()))
+                .As<ISchemaProvider>()
+                .Named<ISchemaProvider>("POSTGRESQL")
                 .InstancePerDependency();
 
 #if !MONO
