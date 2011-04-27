@@ -15,9 +15,15 @@ namespace Kistl.Tests.Utilities.MsSql
         {
             base.Load(moduleBuilder);
 
+            // Do not register ALL types as the registration below does NOT override types properly
+            //moduleBuilder
+            //    .RegisterAssemblyTypes(typeof(UtilityModule).Assembly)
+            //    .AsImplementedInterfaces();
+
             moduleBuilder
-                .RegisterAssemblyTypes(this.GetType().Assembly)
-                .AsImplementedInterfaces();
+                .RegisterType<MsSqlResetter>()
+                .AsImplementedInterfaces()
+                .InstancePerDependency();
         }
     }
 }
