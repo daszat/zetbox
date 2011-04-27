@@ -10,7 +10,6 @@
     <CodeGenOutputPath>bin/CodeGen</CodeGenOutputPath>
     <CodeGenArchivePath>Backup</CodeGenArchivePath>
     <Modules>
-	  <Module>Kistl.Server.ServerModule, Kistl.Server</Module>
       <Module>Kistl.Tests.Utilities.PostgreSql.UtilityModule, Kistl.Tests.Utilities.PostgreSql</Module>
       <Module>Kistl.App.Projekte.Server.CustomServerActionsModule, Kistl.App.Projekte.Server</Module>
       <Module>Kistl.App.Projekte.Common.CustomCommonActionsModule, Kistl.App.Projekte.Common</Module>
