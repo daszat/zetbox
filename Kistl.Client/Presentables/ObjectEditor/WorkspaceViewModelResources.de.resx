@@ -124,7 +124,7 @@
     <value>Schließt diesen Arbeitsbereich ohne zu Speichern</value>
   </data>
   <data name="CanClose" xml:space="preserve">
-    <value>Der Arbeitsbereich enthält veränderte Daten. Trotzdem schließen?</value>
+    <value>Der Arbeitsbereich enthält veränderte Daten. Änderungen verwerfen?</value>
   </data>
   <data name="CanClose_Title" xml:space="preserve">
     <value>Nicht gespeicherte Daten</value>
