@@ -22,6 +22,8 @@ namespace Kistl.API
                 .Register<LoggingProblemReporter>(c => new LoggingProblemReporter())
                 .As<IProblemReporter>()
                 .SingleInstance();
+
+            moduleBuilder.RegisterModule(new Kistl.API.SmtpMailSender.Module());
         }
     }
 }

@@ -84,6 +84,7 @@
     <Compile Include="IService.cs" />
     <Compile Include="KistlContextDebugger.cs" />
     <Compile Include="LinqExtensions.cs" />
+    <Compile Include="MailSender.cs" />
     <Compile Include="ModuleRepositoryAttribute.cs" />
     <Compile Include="NotifyingObservableCollection.cs" />
     <Compile Include="OrderBy.cs" />

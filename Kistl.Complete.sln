@@ -249,6 +249,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Server.HttpService", 
 		{26C035B1-A53D-44E0-BEED-CB97EC56B38E} = {26C035B1-A53D-44E0-BEED-CB97EC56B38E}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kistl.Microsoft", "Kistl.Microsoft\Kistl.Microsoft.csproj", "{C071C75B-9FE5-4AF2-BD32-C3C1DD110928}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|.NET = Debug|.NET
@@ -1313,6 +1315,23 @@ Global
 		{FD3C71B3-330F-4FFC-A525-37E1AD338FF8}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{FD3C71B3-330F-4FFC-A525-37E1AD338FF8}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{FD3C71B3-330F-4FFC-A525-37E1AD338FF8}.Release|x86.ActiveCfg = Release|Any CPU
+		{C071C75B-9FE5-4AF2-BD32-C3C1DD110928}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{C071C75B-9FE5-4AF2-BD32-C3C1DD110928}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C071C75B-9FE5-4AF2-BD32-C3C1DD110928}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C071C75B-9FE5-4AF2-BD32-C3C1DD110928}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{C071C75B-9FE5-4AF2-BD32-C3C1DD110928}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{C071C75B-9FE5-4AF2-BD32-C3C1DD110928}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C071C75B-9FE5-4AF2-BD32-C3C1DD110928}.Linux.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{C071C75B-9FE5-4AF2-BD32-C3C1DD110928}.Linux.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C071C75B-9FE5-4AF2-BD32-C3C1DD110928}.Linux.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C071C75B-9FE5-4AF2-BD32-C3C1DD110928}.Linux.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{C071C75B-9FE5-4AF2-BD32-C3C1DD110928}.Linux.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C071C75B-9FE5-4AF2-BD32-C3C1DD110928}.Release|.NET.ActiveCfg = Release|Any CPU
+		{C071C75B-9FE5-4AF2-BD32-C3C1DD110928}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C071C75B-9FE5-4AF2-BD32-C3C1DD110928}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C071C75B-9FE5-4AF2-BD32-C3C1DD110928}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{C071C75B-9FE5-4AF2-BD32-C3C1DD110928}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{C071C75B-9FE5-4AF2-BD32-C3C1DD110928}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

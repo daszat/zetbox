@@ -184,6 +184,9 @@ namespace Kistl.Client.WPF
         {
             if (serverDomain != null)
                 serverDomain.Stop();
+
+            if(container != null)
+                container.Dispose();
         }
 
         private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
