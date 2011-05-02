@@ -48,6 +48,11 @@ namespace Kistl.App.Extensions
             {
                 return key.GetHashCode();
             }
+
+            public override string ToString()
+            {
+                return key;
+            }
         }
 
         Dictionary<MethodKey, List<MethodInfo>> _reflectedMethods = new Dictionary<MethodKey, List<MethodInfo>>();
@@ -94,9 +99,9 @@ namespace Kistl.App.Extensions
                     ReflectMethods(ctx);
                     CreateInvokeInfosForObjectClasses(ctx);
 
-                    foreach (var mi in _reflectedMethods.Where(i => !_attachedMethods.ContainsKey(i.Key)).SelectMany(i => i.Value))
+                    foreach (var key in _reflectedMethods.Where(i => !_attachedMethods.ContainsKey(i.Key)).Select(i => i.Key))
                     {
-                        Log.Error(string.Format("Couldn't find any method for Invocation {0}.{1}", mi.DeclaringType.FullName, mi.Name));
+                        Log.Error(string.Format("Couldn't find any method for Invocation {0}", key));
                     }
 
                     Log.TraceTotalMemory("After BaseCustomActionsManager.Init()");
