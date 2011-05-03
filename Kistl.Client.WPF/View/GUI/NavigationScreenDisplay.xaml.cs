@@ -17,6 +17,7 @@ namespace Kistl.Client.WPF.View.GUI
     using System.Windows.Shapes;
     using Kistl.Client.GUI;
     using Kistl.Client.Presentables.GUI;
+    using Kistl.Client.WPF.CustomControls;
 
     /// <summary>
     /// Interaction logic for NavigationScreenDisplay.xaml

@@ -91,26 +91,18 @@ namespace Kistl.Client.WPF
                 var config = KistlConfig.FromFile(configFilePath, "Kistl.Client.WPF.xml");
                 InitCulture(config);
 
-                SplashScreen.ShowSplashScreen(Kistl.Client.Properties.Resources.Startup_Message, Kistl.Client.Properties.Resources.Startup_InitApp, 5);
-
                 if (config.Server != null && config.Server.StartServer)
                 {
-                    SplashScreen.SetInfo(Kistl.Client.Properties.Resources.Startup_Server);
                     serverDomain = new ServerDomainManager();
                     serverDomain.Start(config);
                 }
                 else
                 {
-                    SplashScreen.SetInfo(Kistl.Client.Properties.Resources.Startup_NoServerStart);
                 }
-
                 
-                SplashScreen.SetInfo(Kistl.Client.Properties.Resources.Startup_AssemblyResolver);
                 AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
 
                 container = CreateMasterContainer(config);
-
-                SplashScreen.SetInfo(Kistl.Client.Properties.Resources.Startup_Launcher);
 
                 // Init Resources
                 var iconConverter = new IconConverter(container.Resolve<IFrozenContext>(), container.Resolve<IKistlContext>());
@@ -141,8 +133,6 @@ namespace Kistl.Client.WPF
                 var launcher = container.Resolve<Launcher>();
                 launcher.Show(args);
             }
-
-            SplashScreen.HideSplashScreen();
         }
 
         private static void InitCulture(KistlConfig config)

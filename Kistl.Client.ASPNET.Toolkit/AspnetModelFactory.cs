@@ -108,14 +108,6 @@ namespace Kistl.Client.ASPNET.Toolkit
         {
             throw new NotImplementedException();
         }
-
-        protected override void ShowWaitDialog()
-        {
-        }
-
-        protected override void CloseWaitDialog()
-        {
-        }
     }
 
     public static class AspnetModelFactoryExtensions

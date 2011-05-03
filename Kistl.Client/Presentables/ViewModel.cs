@@ -184,6 +184,7 @@ namespace Kistl.Client.Presentables
                 return _calcProperties;
             }
         }
+
         #endregion
 
         #region INotifyPropertyChanged Members

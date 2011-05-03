@@ -24,15 +24,32 @@ namespace Kistl.Client.Presentables
         private bool _show = true;
         public bool Show
         {
-            get 
-            { 
-                return _show; 
+            get
+            {
+                return _show;
             }
-            set 
+            set
             {
                 if (!value && !CanClose()) return;
-                _show = value; 
-                OnPropertyChanged("Show"); 
+                _show = value;
+                OnPropertyChanged("Show");
+            }
+        }
+
+        private bool _isBusy = false;
+        public bool IsBusy
+        {
+            get
+            {
+                return _isBusy;
+            }
+            set
+            {
+                if (_isBusy != value)
+                {
+                    _isBusy = value;
+                    OnPropertyChanged("IsBusy");
+                }
             }
         }
 

@@ -11,6 +11,7 @@ namespace Kistl.Client.Presentables
     using System.Threading;
     using Autofac;
     using Kistl.API;
+    using Kistl.API.Client;
     using Kistl.API.Configuration;
     using Kistl.API.Utils;
     using Kistl.App.Base;
@@ -528,88 +529,6 @@ namespace Kistl.Client.Presentables
 
         public abstract void ShowMessage(string message, string caption);
 
-        private static readonly object _waitDlgLock = new object();
-        private static int _waitDlgCounter = 0;
-        private static bool _waitDlgSuppress = false;
-
-        private void timer_callback(object args)
-        {
-            InitCulture();
-            lock (_waitDlgLock)
-            {
-                if (_waitDlgCounter++ == 0 && !_waitDlgSuppress)
-                {
-                    ShowWaitDialog();
-                }
-            }
-        }
-
-        public void WithWaitDialog(Action task)
-        {
-            if (task == null) throw new ArgumentNullException("task");
-            using (Timer timer = new Timer(new TimerCallback(timer_callback), null, 200, Timeout.Infinite))
-            {
-                try
-                {
-                    task();
-                }
-                finally
-                {
-                    lock (_waitDlgLock)
-                    {
-                        if (--_waitDlgCounter <= 0)
-                        {
-                            CloseWaitDialog();
-                            _waitDlgCounter = 0;
-                        }
-                    }
-                }
-            }
-        }
-
-        public void WithoutWaitDialog(Action task)
-        {
-            if (task == null) throw new ArgumentNullException("task");
-            try
-            {
-                lock (_waitDlgLock)
-                {
-                    _waitDlgSuppress = true;
-                    CloseWaitDialog();
-                }
-                task();
-            }
-            finally
-            {
-                lock (_waitDlgLock)
-                {
-                    _waitDlgSuppress = false;
-                    if (_waitDlgCounter > 0)
-                    {
-                        ShowWaitDialog();
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// A derived class should create a Wait Dialog.
-        /// </summary>
-        /// <remarks><para>
-        /// This Dialog must be created on a separate Thread!
-        /// </para>
-        /// <para>This method can be called multiple times but should only open a single dialog. Thus do not implement any kind of reference counting.</para>
-        /// </remarks>
-        protected abstract void ShowWaitDialog();
-
-        /// <summary>
-        /// A derived class should close the previos opened Wait Dialog.
-        /// </summary>
-        /// <remarks>
-        /// <para>This method can be called multiple times but should only close a single dialog immediately, if available. Thus do not implement any kind of reference counting.</para>
-        /// </remarks>
-        protected abstract void CloseWaitDialog();
-
         public void InitCulture()
         {
             if (Configuration.Client == null) return;
@@ -624,5 +543,10 @@ namespace Kistl.Client.Presentables
         }
 
         #endregion
+
+        public virtual IPropertyLoader CreatePropertyLoader(WindowViewModel displayer, Action loadAction)
+        {
+            return new DefaultPropertyLoader(loadAction);
+        }
     }
 }

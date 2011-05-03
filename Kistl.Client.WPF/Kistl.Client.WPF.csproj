@@ -400,12 +400,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="SplashScreen.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="View\ObjectEditor\DataObjectEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -667,9 +661,6 @@
     </Compile>
     <Compile Include="View\KistlDebuggerView.xaml.cs">
       <DependentUpon>KistlDebuggerView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="SplashScreen.xaml.cs">
-      <DependentUpon>SplashScreen.xaml</DependentUpon>
     </Compile>
     <Compile Include="UndoRedo.cs" />
     <Compile Include="View\ObjectEditor\DataObjectEditor.xaml.cs">

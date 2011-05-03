@@ -6,7 +6,7 @@
              xmlns:tk="clr-namespace:Kistl.Client.WPF.Toolkit;assembly=Kistl.Client.WPF.Toolkit"
              Startup="Application_Startup"
              Exit="Application_Exit"
-             ShutdownMode="OnExplicitShutdown" 
+             ShutdownMode="OnExplicitShutdown"
              DispatcherUnhandledException="Application_DispatcherUnhandledException">
     <!-- Shutdown managed by WPF Model Factory -->
     <Application.Resources>
@@ -23,10 +23,39 @@
             <commands:Converter x:Key="CommandConverter" />
             <tk:TypeNameTemplateSelector x:Key="TypeNameTemplateSelector" />
 
-          <converter:HighlightGridBackgroundConverter x:Key="HighlightGridBackgroundConverter" />
-          <converter:HighlightGridForegroundConverter x:Key="HighlightGridForegroundConverter" />
-          <converter:HighlightGridFontStyleConverter x:Key="HighlightGridFontStyleConverter" />
-          <converter:HighlightPanelBackgroundConverter x:Key="HighlightPanelBackgroundConverter" />
+            <converter:HighlightGridBackgroundConverter x:Key="HighlightGridBackgroundConverter" />
+            <converter:HighlightGridForegroundConverter x:Key="HighlightGridForegroundConverter" />
+            <converter:HighlightGridFontStyleConverter x:Key="HighlightGridFontStyleConverter" />
+            <converter:HighlightPanelBackgroundConverter x:Key="HighlightPanelBackgroundConverter" />
+
+            <DataTemplate x:Key="FakeProgressOverlay">
+                <Grid Background="#88888888">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Grid.Row="1"
+                            Grid.Column="1"
+                            Background="#AAAAAAAA"
+                            Padding="5"
+                            CornerRadius="10"
+                            Height="30" >
+                        <TextBlock HorizontalAlignment="Center" >Bitte warten...</TextBlock>
+                    </Border>
+                    <ProgressBar Grid.Row="2"
+                                 Grid.Column="1"
+                                 Height="30"
+                                 Maximum="100"
+                                 Value="33"/>
+                </Grid>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

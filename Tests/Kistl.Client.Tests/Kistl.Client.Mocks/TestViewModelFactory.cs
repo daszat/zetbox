@@ -51,13 +51,5 @@ namespace Kistl.Client.Mocks
         public override void ShowMessage(string message, string caption)
         {
         }
-
-        protected override void ShowWaitDialog()
-        {
-        }
-
-        protected override void CloseWaitDialog()
-        {
-        }
     }
 }

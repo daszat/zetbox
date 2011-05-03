@@ -91,6 +91,7 @@
     <Compile Include="HttpServiceClient.cs" />
     <Compile Include="ICredentialsResolver.cs" />
     <Compile Include="InfoLoggingProxyDecorator.cs" />
+    <Compile Include="IPropertyLoader.cs" />
     <Compile Include="IScreenshotTool.cs" />
     <Compile Include="IToolkit.cs" />
     <Compile Include="IToolkitResources.Designer.cs">

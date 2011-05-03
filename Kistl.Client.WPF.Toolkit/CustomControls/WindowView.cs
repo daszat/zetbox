@@ -2,8 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Windows;
+using Kistl.API.Utils;
 using Kistl.Client.Presentables;
+using System.Windows;
 
 namespace Kistl.Client.WPF.CustomControls
 {
@@ -12,12 +13,12 @@ namespace Kistl.Client.WPF.CustomControls
         public WindowView()
         {
             this.Loaded += new RoutedEventHandler(WindowView_Loaded);
-            this.Closing += new System.ComponentModel.CancelEventHandler(WindowView_Closing);
         }
 
         private bool _closing;
-        void WindowView_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
+            base.OnClosing(e);
             if (WindowViewModel != null && WindowViewModel.Show)
             {
                 _closing = true;
@@ -52,7 +53,24 @@ namespace Kistl.Client.WPF.CustomControls
 
         void WindowView_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "Show" && !_closing && !WindowViewModel.Show) this.Close();
+            switch (e.PropertyName)
+            {
+                case "Show":
+                    if (!_closing && !WindowViewModel.Show) this.Close();
+                    break;
+                case "IsBusy":
+                    var child = LogicalTreeHelper.GetChildren(this).OfType<FrameworkElement>().FirstOrDefault();
+                    if (child != null)
+                        if (WindowViewModel.IsBusy)
+                        {
+                            ContentAdorner.ShowWaitDialog(child);
+                        }
+                        else
+                        {
+                            ContentAdorner.HideWaitDialog(child);
+                        }
+                    break;
+            }
         }
 
         private WindowViewModel WindowViewModel

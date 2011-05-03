@@ -14,6 +14,7 @@ namespace Kistl.Client.WPF
     using Microsoft.Win32;
     using Kistl.API.Client;
     using Kistl.API.Configuration;
+    using Kistl.Client.WPF.Toolkit;
 
     public class WpfModelFactory
         : ViewModelFactory
@@ -175,14 +176,9 @@ namespace Kistl.Client.WPF
             MessageBox.Show(message, caption);
         }
 
-        protected override void ShowWaitDialog()
+        public override IPropertyLoader CreatePropertyLoader(WindowViewModel displayer, Action loadAction)
         {
-            SplashScreen.ShowSplashScreen(IToolkitResources.WaitDialog_Message, IToolkitResources.WaitDialog_Info, 1);
-        }
-
-        protected override void CloseWaitDialog()
-        {
-            SplashScreen.HideSplashScreen();
+            return new PropertyLoader(displayer, loadAction);
         }
     }
 }

@@ -129,7 +129,7 @@ namespace Kistl.Client
                             dlgOK = true;
                         });
 
-                        _vmf.WithoutWaitDialog(() => _vmf.ShowDialog(dlg));
+                        _vmf.ShowDialog(dlg);
 
                         if (!dlgOK)
                         {

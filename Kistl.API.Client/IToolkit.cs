@@ -13,8 +13,6 @@ namespace Kistl.API.Client
         string GetDestinationFileNameFromUser(string filename, params string[] filter);
         bool GetDecisionFromUser(string message, string caption);
         void ShowMessage(string message, string caption);
-        void WithWaitDialog(Action task);
-        void WithoutWaitDialog(Action task);
 
         Toolkit Toolkit { get; }
     }
@@ -44,18 +42,6 @@ namespace Kistl.API.Client
 
         public void ShowMessage(string message, string caption)
         {
-        }
-
-        public void WithWaitDialog(Action task)
-        {
-            if (task != null)
-                task();
-        }
-
-        public void WithoutWaitDialog(Action task)
-        {
-            if (task != null)
-                task();
         }
 
         public Toolkit Toolkit
