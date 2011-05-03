@@ -18,7 +18,6 @@ namespace Kistl.API.Client
             moduleBuilder
                 .Register<ProxyImplementation>(c => new ProxyImplementation(
                     c.Resolve<InterfaceType.Factory>(),
-                    c.Resolve<IToolkit>(),
                     c.Resolve<Kistl.API.Client.KistlService.IKistlService>()
                     ))
                 .Named<IProxy>("implementor")

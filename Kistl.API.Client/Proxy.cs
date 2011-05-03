@@ -41,13 +41,11 @@ namespace Kistl.API.Client
         : IProxy
     {
         private InterfaceType.Factory _iftFactory;
-        private IToolkit _toolkit;
         private KistlService.IKistlService _service;
 
-        public ProxyImplementation(InterfaceType.Factory iftFactory, IToolkit toolkit, Kistl.API.Client.KistlService.IKistlService service)
+        public ProxyImplementation(InterfaceType.Factory iftFactory, Kistl.API.Client.KistlService.IKistlService service)
         {
             _iftFactory = iftFactory;
-            _toolkit = toolkit;
             _service = service;
         }
 
