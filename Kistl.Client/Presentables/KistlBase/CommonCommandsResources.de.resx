@@ -163,7 +163,7 @@
     <value>Fehler</value>
   </data>
   <data name="ReportProblemCommand_MessageTemplate" xml:space="preserve">
-    <value>Problem gemeldet</value>
+    <value>Bitte fügen Sie Ihre Nachricht hier ein</value>
   </data>
   <data name="ReportProblemCommand_Name" xml:space="preserve">
     <value>Ein Problem melden</value>

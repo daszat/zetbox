@@ -11,12 +11,12 @@ namespace Kistl.API
 
     public interface IProblemReporter
     {
-        void Report(string message, string description, byte[] screenshot, Exception exeption);
+        void Report(string message, string description, System.Drawing.Bitmap screenshot, Exception exeption);
     }
 
     public class LoggingProblemReporter : IProblemReporter
     {
-        public void Report(string message, string description, byte[] screenshot, Exception exeption)
+        public void Report(string message, string description, System.Drawing.Bitmap screenshot, Exception exeption)
         {
             Logging.Log.Error(string.Format("{0}\n{1}\n", message, description), exeption);
         }
@@ -36,7 +36,7 @@ namespace Kistl.API
             }
         }
 
-        public void Report(string message, string description, byte[] screenshot, Exception exeption)
+        public void Report(string message, string description, System.Drawing.Bitmap screenshot, Exception exeption)
         {
             try
             {
@@ -96,11 +96,19 @@ namespace Kistl.API
             _mail = mail;
         }
 
-        public void Report(string message, string description, byte[] screenshot, Exception exeption)
+        public void Report(string message, string description, System.Drawing.Bitmap screenshot, Exception exeption)
         {
             // TODO: Hardocded mail addresses
             var msg = new MailMessage("office@dasz.at", "fogbugz@dasz.at", message, "");
-            msg.Body = string.Format("A Problem occured in ZBox Application\n\n{0}\n\nAdditional information;\n{1}\n\nException:\n{2}", message, description, exeption);
+            msg.Body = string.Format("{0}\n\n{1}\n\nException:\n{2}", message, description, exeption);
+
+            if (screenshot != null)
+            {
+                var ms = new MemoryStream();
+                screenshot.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                ms.Position = 0;
+                msg.Attachments.Add(new Attachment(ms, "screenshot.png"));
+            }
             _mail.Send(msg);
         }
     }

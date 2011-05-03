@@ -106,6 +106,9 @@
     <Compile Include="Converter\IconConverter.cs" />
     <Compile Include="Converter\ImageConverter.cs" />
     <Compile Include="Converter\ImageCtrlConverter.cs" />
+    <Compile Include="CustomControls\LabeledViewHorizontal.xaml.cs">
+      <DependentUpon>LabeledViewHorizontal.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TypeNameTemplateSelector.cs" />
     <Compile Include="CustomControls\CommandButton.cs" />
     <Compile Include="CustomControls\PropertyEditor.cs" />
@@ -161,6 +164,10 @@
     <None Include="Kistl.snk" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="CustomControls\LabeledViewHorizontal.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="CustomControls\LabeledContainer.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

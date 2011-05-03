@@ -9,6 +9,7 @@ namespace Kistl.Client.Presentables.KistlBase
     using Kistl.App.Base;
     using Kistl.App.GUI;
     using ObjectEditorWorkspace = Kistl.Client.Presentables.ObjectEditor.WorkspaceViewModel;
+    using Kistl.API.Client;
 
     public class OpenDataObjectCommand : ItemCommandViewModel<DataObjectViewModel>
     {
@@ -269,11 +270,16 @@ namespace Kistl.Client.Presentables.KistlBase
         public new delegate ReportProblemCommand Factory(IKistlContext dataCtx);
 
         private readonly IProblemReporter _reporter;
+        private readonly IScreenshotTool _screenShot;
 
-        public ReportProblemCommand(IViewModelDependencies appCtx, IProblemReporter reporter, IKistlContext dataCtx)
+        public ReportProblemCommand(IViewModelDependencies appCtx, IProblemReporter reporter, IScreenshotTool screenShot, IKistlContext dataCtx)
             : base(appCtx, dataCtx, CommonCommandsResources.ReportProblemCommand_Name, CommonCommandsResources.ReportProblemCommand_Tooltip)
         {
+            if (reporter == null) throw new ArgumentNullException("reporter");
+            if (screenShot == null) throw new ArgumentNullException("screenShot");
+
             this._reporter = reporter;
+            this._screenShot = screenShot;
         }
 
         public override bool CanExecute(object data)
@@ -287,7 +293,10 @@ namespace Kistl.Client.Presentables.KistlBase
             {
                 try
                 {
-                    _reporter.Report(CommonCommandsResources.ReportProblemCommand_MessageTemplate, CommonCommandsResources.ReportProblemCommand_DescriptionTemplate, null, null);
+                    _reporter.Report(CommonCommandsResources.ReportProblemCommand_MessageTemplate, 
+                        CommonCommandsResources.ReportProblemCommand_DescriptionTemplate,
+                        _screenShot.GetScreenshot(), 
+                        null);
                 }
                 catch (Exception ex)
                 {

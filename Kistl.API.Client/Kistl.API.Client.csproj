@@ -68,6 +68,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
@@ -90,6 +91,7 @@
     <Compile Include="HttpServiceClient.cs" />
     <Compile Include="ICredentialsResolver.cs" />
     <Compile Include="InfoLoggingProxyDecorator.cs" />
+    <Compile Include="IScreenshotTool.cs" />
     <Compile Include="IToolkit.cs" />
     <Compile Include="IToolkitResources.Designer.cs">
       <AutoGen>True</AutoGen>

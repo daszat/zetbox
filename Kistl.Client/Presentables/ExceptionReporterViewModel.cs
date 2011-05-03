@@ -81,6 +81,14 @@ using Kistl.Client.Presentables.ValueViewModels;
             }
         }
 
+        public Bitmap Screenshot
+        {
+            get
+            {
+                return screenShot;
+            }
+        }
+
         private ClassValueModel<string> _AdditionalTextModel = new ClassValueModel<string>(ExceptionReporterViewModelResources.AdditionalTextLabel, ExceptionReporterViewModelResources.AdditionalTextDescription, true, false);
         private MultiLineStringValueViewModel _AdditionalTextViewModel;
         public MultiLineStringValueViewModel AdditionalText
@@ -107,6 +115,7 @@ using Kistl.Client.Presentables.ValueViewModels;
                         ExceptionReporterViewModelResources.Report,
                         ExceptionReporterViewModelResources.Report_Tooltip, 
                         Report, null);
+                    _ReportCommand.Icon = FrozenContext.FindPersistenceObject<Kistl.App.GUI.Icon>(NamedObjects.Icon_todo_png);
                 }
                 return _ReportCommand;
             }
@@ -114,7 +123,7 @@ using Kistl.Client.Presentables.ValueViewModels;
 
         public void Report()
         {
-            problemReporter.Report(this.Title, this.AdditionalText.Value, null, exeption);
+            problemReporter.Report(this.Title, this.AdditionalText.Value, screenShot, exeption);
             this.Show = false;
         }
 
@@ -129,6 +138,7 @@ using Kistl.Client.Presentables.ValueViewModels;
                         ExceptionReporterViewModelResources.Cancel,
                         ExceptionReporterViewModelResources.Cancel_Tooltip, 
                         Cancel, null);
+                    _CancelCommand.Icon = FrozenContext.FindPersistenceObject<Kistl.App.GUI.Icon>(NamedObjects.Icon_no_png);
                 }
                 return _CancelCommand;
             }

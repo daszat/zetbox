@@ -21,6 +21,13 @@ namespace Kistl.Client
         public static readonly Guid Icon_search_png = new Guid("dbb2f49e-48f4-49fc-a9a6-53a403f8ac4b");
         public static readonly Guid Icon_Printer_png = new Guid("6b6376e1-519b-4601-9b88-4c7b5594ca2d");
         public static readonly Guid Icon_Pen_png = new Guid("d7d4767f-0b2d-468a-8931-866ce07828cb");
+        public static readonly Guid Icon_info_png = new Guid("d2c90a25-c93b-4f52-a358-199ac0d71248");
+        public static readonly Guid Icon_no_png = new Guid("f2db9015-0f03-41ef-9113-fb10a7b45d6c");
+        public static readonly Guid Icon_ok_png = new Guid("b2c884fb-87a7-4abe-9893-be4ef2cd4888");
+        public static readonly Guid Icon_todo_png = new Guid("32dc1dd9-6f33-486a-a504-133f93ae02b9");
+        public static readonly Guid Icon_stop_png = new Guid("da02708c-58e1-4219-8a55-06202c724171");
+        public static readonly Guid Icon_back_png = new Guid("e685b093-3732-4fee-958b-510474f0cedf");
+        
         
 
         public static readonly Guid ViewModelDescriptor_NullableValuePropertyModel_Bool = new Guid("09d1f453-d0d9-429e-88e7-e84b33de7c2e");

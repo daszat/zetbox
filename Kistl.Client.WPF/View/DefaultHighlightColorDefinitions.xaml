@@ -1,7 +1,12 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
-  
+
+  <!-- Error -->
+  <SolidColorBrush x:Key="HighlightState_Error_GridBackground" Color="#AA272F" />
+  <SolidColorBrush x:Key="HighlightState_Error_GridForeground" Color="#FFFFFF" />
+  <SolidColorBrush x:Key="HighlightState_Error_PanelBackground" Color="#AA272F" />
+
   <!-- Warning -->
   <SolidColorBrush x:Key="HighlightState_Warning_GridBackground" Color="#FFFF00" />
   <SolidColorBrush x:Key="HighlightState_Warning_GridForeground" Color="#000000" />

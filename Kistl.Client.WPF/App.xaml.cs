@@ -198,7 +198,7 @@ namespace Kistl.Client.WPF
             else
             {
                 var vmf = container.Resolve<IViewModelFactory>();
-                var mdl = vmf.CreateViewModel<ExceptionReporterViewModel.Factory>().Invoke(container.Resolve<IKistlContext>(), e.Exception, null);
+                var mdl = vmf.CreateViewModel<ExceptionReporterViewModel.Factory>().Invoke(container.Resolve<IKistlContext>(), e.Exception, container.Resolve<IScreenshotTool>().GetScreenshot());
                 vmf.ShowDialog(mdl);
                 e.Handled = true;
             }

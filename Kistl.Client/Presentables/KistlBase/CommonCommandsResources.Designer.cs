@@ -196,7 +196,7 @@ namespace Kistl.Client.Presentables.KistlBase {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Problem reported.
+        ///   Looks up a localized string similar to Add your message here.
         /// </summary>
         internal static string ReportProblemCommand_MessageTemplate {
             get {
