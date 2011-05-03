@@ -742,8 +742,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditor.WorkspaceViewModel.Factory>().Invoke(workingCtx);
                 ViewModelFactory.ShowModel(newWorkspace, RequestedWorkspaceKind, true);
 
-                newWorkspace.IsBusy = true;
-                System.Windows.Threading.Dispatcher.CurrentDispatcher.BeginInvoke(new Action(() =>
+                var loader = ViewModelFactory.CreatePropertyLoader(newWorkspace, () =>
                 {
                     foreach (var item in objects)
                     {
@@ -757,7 +756,9 @@ namespace Kistl.Client.Presentables.KistlBase
                     }
                     newWorkspace.SelectedItem = newWorkspace.Items.FirstOrDefault();
                     newWorkspace.IsBusy = false;
-                }), System.Windows.Threading.DispatcherPriority.Background);
+                });
+
+                loader.Reload();
             }
         }
 
