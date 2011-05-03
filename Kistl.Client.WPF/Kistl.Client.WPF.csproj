@@ -791,6 +791,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <SplashScreen Include="SplashScreenImage.png" />
     <Resource Include="Images\pen.png" />
     <Content Include="ProfilingSessions\Session20110329_142250.sdps" />
   </ItemGroup>

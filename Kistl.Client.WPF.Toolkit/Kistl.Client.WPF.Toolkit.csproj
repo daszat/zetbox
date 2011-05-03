@@ -125,9 +125,6 @@
     <Compile Include="CustomControls\LabeledView.xaml.cs">
       <DependentUpon>LabeledView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CustomControls\LoadingIndicator.xaml.cs">
-      <DependentUpon>LoadingIndicator.xaml</DependentUpon>
-    </Compile>
     <Compile Include="CustomControls\WindowView.cs" />
     <Compile Include="CustomControls\WorkaroundToolBar.cs" />
     <Compile Include="CustomControls\ZBoxListView.cs" />
@@ -183,12 +180,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="CustomControls\LabeledView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="CustomControls\LoadingIndicator.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -36,8 +36,6 @@
                        HorizontalAlignment="Center" />
         </DockPanel>
 
-        <ctrls:LoadingIndicator DockPanel.Dock="Top" />
-
         <Grid Style="{StaticResource DataObjectEditor_PropertyPanel}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />

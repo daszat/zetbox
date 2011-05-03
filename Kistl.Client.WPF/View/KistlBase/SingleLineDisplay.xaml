@@ -8,6 +8,5 @@
                Height="14" />
         <TextBlock Text="{Binding Name}"
                    Margin="3,0,0,0" />
-        <ctrls:LoadingIndicator DockPanel.Dock="Left" />
     </DockPanel>
 </UserControl>

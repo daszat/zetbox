@@ -6,8 +6,6 @@
 
     <DockPanel>
 
-        <ctrls:LoadingIndicator DockPanel.Dock="Top" />
-
         <GroupBox DockPanel.Dock="Top"
                   Header="Details"
                   Margin="5,0">

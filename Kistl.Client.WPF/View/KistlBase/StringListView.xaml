@@ -9,7 +9,6 @@
     <DockPanel>
         <WrapPanel DockPanel.Dock="Top"
                    Orientation="Horizontal">
-            <ctrls:LoadingIndicator />
             <Button Click="AddNewHandler">Add new ...</Button>
             <Button Click="RemoveHandler">Remove selection from list</Button>
         </WrapPanel>

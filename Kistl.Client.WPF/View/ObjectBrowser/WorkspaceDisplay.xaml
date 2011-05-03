@@ -70,9 +70,6 @@
                               IsExpanded="True" />
             </TreeView>
 
-            <!-- overlay on the tree -->
-            <ctrls:LoadingIndicator Grid.Row="0" />
-
             <GridSplitter Grid.Column="1"
                           HorizontalAlignment="Stretch" />
 

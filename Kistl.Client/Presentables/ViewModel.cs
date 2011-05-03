@@ -14,13 +14,6 @@ namespace Kistl.Client.Presentables
     using Kistl.App.GUI;
     using Kistl.Client.Presentables.ValueViewModels;
 
-    public enum ModelLoadingState
-    {
-        Loading,
-        Active,
-        Invalid,
-    }
-
     public interface IViewModelDependencies
     {
         /// <summary>
@@ -129,20 +122,19 @@ namespace Kistl.Client.Presentables
             set { _RequestedKind = value; OnPropertyChanged("ControlKind"); }
         }
 
-
-        private ModelLoadingState _loadingState = ModelLoadingState.Active;
-        public ModelLoadingState LoadingState
+        private bool _isBusy = false;
+        public bool IsBusy
         {
             get
             {
-                return _loadingState;
+                return _isBusy;
             }
-            internal set
+            set
             {
-                if (value != _loadingState)
+                if (_isBusy != value)
                 {
-                    _loadingState = value;
-                    OnPropertyChanged("State");
+                    _isBusy = value;
+                    OnPropertyChanged("IsBusy");
                 }
             }
         }

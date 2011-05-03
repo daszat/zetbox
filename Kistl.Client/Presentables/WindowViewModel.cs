@@ -36,23 +36,6 @@ namespace Kistl.Client.Presentables
             }
         }
 
-        private bool _isBusy = false;
-        public bool IsBusy
-        {
-            get
-            {
-                return _isBusy;
-            }
-            set
-            {
-                if (_isBusy != value)
-                {
-                    _isBusy = value;
-                    OnPropertyChanged("IsBusy");
-                }
-            }
-        }
-
         /// <summary>
         /// Views should call this before closing
         /// </summary>

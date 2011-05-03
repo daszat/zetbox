@@ -27,8 +27,6 @@
                        FontWeight="Bold" />
         </DockPanel>
 
-        <ctrls:LoadingIndicator DockPanel.Dock="Top" />
-
         <ScrollViewer HorizontalScrollBarVisibility="Disabled">
             <DockPanel>
 
