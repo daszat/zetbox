@@ -544,7 +544,7 @@ namespace Kistl.Client.Presentables
 
         #endregion
 
-        public virtual IPropertyLoader CreatePropertyLoader(WindowViewModel displayer, Action loadAction)
+        public virtual IPropertyLoader CreatePropertyLoader(ViewModel displayer, Action loadAction)
         {
             return new DefaultPropertyLoader(loadAction);
         }

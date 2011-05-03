@@ -22,6 +22,7 @@ namespace Kistl.Client.WPF.View.KistlBase
     using Kistl.Client.Presentables;
     using Kistl.Client.Presentables.KistlBase;
     using Kistl.Client.WPF.Toolkit;
+    using Kistl.Client.WPF.CustomControls;
 
     public abstract class InstanceListBaseDisplay : UserControl, IHasViewModel<InstanceListViewModel>
     {
@@ -70,6 +71,27 @@ namespace Kistl.Client.WPF.View.KistlBase
                     WPFHelper.RefreshGridView(ListView, ViewModel.DisplayedColumns, SortPropertyNameProperty);
                     ListView.ItemContainerStyle = Application.Current.Resources["ListViewAsGridViewItemContainerStyle"] as Style;
                 }
+
+                ViewModel.PropertyChanged += new PropertyChangedEventHandler(ViewModel_PropertyChanged);
+            }
+        }
+
+        void ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case "IsBusy":
+                    var child = LogicalTreeHelper.GetChildren(this).OfType<FrameworkElement>().FirstOrDefault();
+                    if (child != null)
+                        if (ViewModel.IsBusy)
+                        {
+                            ContentAdorner.ShowWaitDialog(child);
+                        }
+                        else
+                        {
+                            ContentAdorner.HideWaitDialog(child);
+                        }
+                    break;
             }
         }
 

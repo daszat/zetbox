@@ -176,7 +176,7 @@ namespace Kistl.Client.WPF
             MessageBox.Show(message, caption);
         }
 
-        public override IPropertyLoader CreatePropertyLoader(WindowViewModel displayer, Action loadAction)
+        public override IPropertyLoader CreatePropertyLoader(ViewModel displayer, Action loadAction)
         {
             return new PropertyLoader(displayer, loadAction);
         }

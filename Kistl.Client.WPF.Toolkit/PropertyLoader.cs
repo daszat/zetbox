@@ -9,10 +9,10 @@ namespace Kistl.Client.WPF.Toolkit
 {
     public class PropertyLoader : IPropertyLoader
     {
-        private WindowViewModel _displayer;
+        private ViewModel _displayer;
         private Action _loadAction;
 
-        public PropertyLoader(WindowViewModel displayer, Action loadAction)
+        public PropertyLoader(ViewModel displayer, Action loadAction)
         {
             if (displayer == null) throw new ArgumentNullException("displayer");
             if (loadAction == null) throw new ArgumentNullException("loadAction");
@@ -34,7 +34,7 @@ namespace Kistl.Client.WPF.Toolkit
                 {
                     _displayer.IsBusy = false;
                 }
-            }), System.Windows.Threading.DispatcherPriority.Loaded); // prio must be less than Render to let fakeprogressoverlay be rendered
+            }), System.Windows.Threading.DispatcherPriority.Background); // prio must be Background to let fakeprogressoverlay be rendered
         }
     }
 }

@@ -962,6 +962,7 @@ namespace Kistl.Client.Presentables.KistlBase
             return DataContext.GetQuery<T>(); // ToList would make all filter client side filter .ToList().OrderBy(obj => obj.ToString()).AsQueryable();
         }
 
+        private IPropertyLoader _loadInstancesLoader;
         private bool loadingInstances = false;
         /// <summary>
         /// Loads the instances of this DataType and adds them to the Instances collection
@@ -971,32 +972,38 @@ namespace Kistl.Client.Presentables.KistlBase
             // Prevent loading instances twice
             if (loadingInstances) return;
             loadingInstances = true;
-            try
+            if (_loadInstancesLoader == null) _loadInstancesLoader = ViewModelFactory.CreatePropertyLoader(this, () =>
             {
-                // Can execute?
-                if (RespectRequieredFilter && Filter.Count(f => !f.Enabled && f.Required) > 0)
+                try
                 {
-                    // leave result or return empty result
-                    if (_instancesCache == null) _instancesCache = new List<DataObjectViewModel>();
-                    return;
-                }
+                    // Can execute?
+                    if (RespectRequieredFilter && Filter.Count(f => !f.Enabled && f.Required) > 0)
+                    {
+                        // leave result or return empty result
+                        if (_instancesCache == null) _instancesCache = new List<DataObjectViewModel>();
+                        return;
+                    }
 
-                _instancesCache = new List<DataObjectViewModel>();
-                foreach (IDataObject obj in GetQuery()) // No order by - may be set from outside in LinqQuery! .Cast<IDataObject>().ToList().OrderBy(obj => obj.ToString()))
+                    _instancesCache = new List<DataObjectViewModel>();
+                    foreach (IDataObject obj in GetQuery()) // No order by - may be set from outside in LinqQuery! .Cast<IDataObject>().ToList().OrderBy(obj => obj.ToString()))
+                    {
+                        // Not interested in deleted objects
+                        // TODO: Discuss if a query should return deleted objects
+                        if (obj.ObjectState == DataObjectState.Deleted) continue;
+
+                        var mdl = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, obj);
+                        _instancesCache.Add(mdl);
+                    }
+                    OnInstancesChanged();
+                }
+                finally
                 {
-                    // Not interested in deleted objects
-                    // TODO: Discuss if a query should return deleted objects
-                    if (obj.ObjectState == DataObjectState.Deleted) continue;
-
-                    var mdl = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, obj);
-                    _instancesCache.Add(mdl);
+                    loadingInstances = false;
                 }
-                OnInstancesChanged();
-            }
-            finally
-            {
-                loadingInstances = false;
-            }
+            });
+
+            _loadInstancesLoader.Reload();
+
         }
 
         /// <summary>
@@ -1013,6 +1020,7 @@ namespace Kistl.Client.Presentables.KistlBase
         /// </summary>
         private void ExecutePostFilter()
         {
+
             var tmp = new List<DataObjectViewModel>(this.InstancesCache);
             // poor man's full text search
             foreach (var filter in Filter.Where(i => !i.IsServerSideFilter))
@@ -1053,8 +1061,8 @@ namespace Kistl.Client.Presentables.KistlBase
             _proxyCache.Clear();
             _proxyInstances = null;
 
-            OnPropertyChanged("Instances");
             OnPropertyChanged("ProxyInstances");
+            OnPropertyChanged("Instances");
 
             if (SelectFirstOnLoad)
             {
