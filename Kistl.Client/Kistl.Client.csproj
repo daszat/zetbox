@@ -125,6 +125,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ErrorListViewModelResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Presentables\ExceptionReporterViewModel.cs" />
+    <Compile Include="Presentables\ExceptionReporterViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ExceptionReporterViewModelResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Presentables\FilterViewModels\FilterViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -304,6 +310,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>CacheDebuggerViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\ExceptionReporterViewModelResources.de.resx" />
     <EmbeddedResource Include="Presentables\DataObjectSelectionTaskViewModelResources.de.resx">
     </EmbeddedResource>
     <EmbeddedResource Include="Presentables\DataObjectSelectionTaskViewModelResources.resx">
@@ -315,6 +322,10 @@
     <EmbeddedResource Include="Presentables\ErrorListViewModelResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ErrorListViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\ExceptionReporterViewModelResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ExceptionReporterViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentables\FilterViewModels\FilterViewModelResources.de.resx">
     </EmbeddedResource>

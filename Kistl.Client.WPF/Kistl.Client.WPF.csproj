@@ -100,6 +100,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.ServiceModel">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
@@ -158,6 +159,10 @@
       <Generator>MSBuild:Compile</Generator>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ExceptionReporterDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Filters\OptionalPredicateFilterEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -515,6 +520,9 @@
     </Compile>
     <Compile Include="View\ErrorListView.xaml.cs">
       <DependentUpon>ErrorListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ExceptionReporterDialog.xaml.cs">
+      <DependentUpon>ExceptionReporterDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Filters\OptionalPredicateFilterEditor.xaml.cs">
       <DependentUpon>OptionalPredicateFilterEditor.xaml</DependentUpon>

@@ -6,22 +6,37 @@ namespace Kistl.API
     using System.Text;
     using Kistl.API.Utils;
     using System.IO;
+    using Autofac;
+    using System.Net.Mail;
 
     public interface IProblemReporter
     {
-        void Report(/*string message, string description, byte[] screenshot, Exception ex*/); // would be nice, but doen't work today with FogBugz
+        void Report(string message, string description, byte[] screenshot, Exception exeption);
     }
 
     public class LoggingProblemReporter : IProblemReporter
     {
-        public void Report()
+        public void Report(string message, string description, byte[] screenshot, Exception exeption)
         {
+            Logging.Log.Error(string.Format("{0}\n{1}\n", message, description), exeption);
         }
     }
 
     public class FogBugzProblemReporter : IProblemReporter
     {
-        public void Report()
+        public class Module : Autofac.Module
+        {
+            protected override void Load(Autofac.ContainerBuilder builder)
+            {
+                base.Load(builder);
+
+                builder.Register<FogBugzProblemReporter>(c => new FogBugzProblemReporter())
+                    .As<IProblemReporter>()
+                    .SingleInstance();                
+            }
+        }
+
+        public void Report(string message, string description, byte[] screenshot, Exception exeption)
         {
             try
             {
@@ -32,7 +47,7 @@ namespace Kistl.API
                     filename = Helper.PathCombine(ProgramFilesx86(), "Screenshot", "screenshot.exe"); ;
                     if (!File.Exists(filename))
                     {
-                        throw new InvalidOperationException("FogBugz screenshot tool not found. Maybe it's not installed. screenshot.exe neither found in %ProgramFilesx86%\\FogBugz\\Screenshot nor %ProgramFilesx86%\\Screenshot");
+                        Logging.Log.Error("FogBugz screenshot tool not found. Maybe it's not installed. screenshot.exe neither found in %ProgramFilesx86%\\FogBugz\\Screenshot nor %ProgramFilesx86%\\Screenshot");
                     }
                 }
 
@@ -59,4 +74,34 @@ namespace Kistl.API
         }
     }
 
+    public class MailProblemReporter : IProblemReporter
+    {
+        public class Module : Autofac.Module
+        {
+            protected override void Load(Autofac.ContainerBuilder builder)
+            {
+                base.Load(builder);
+
+                builder.Register<MailProblemReporter>(c => new MailProblemReporter(c.Resolve<IMailSender>()))
+                    .As<IProblemReporter>()
+                    .SingleInstance();
+            }
+        }
+
+        private readonly IMailSender _mail;
+
+        public MailProblemReporter(IMailSender mail)
+        {
+            if (mail == null) throw new ArgumentNullException("mail");
+            _mail = mail;
+        }
+
+        public void Report(string message, string description, byte[] screenshot, Exception exeption)
+        {
+            // TODO: Hardocded mail addresses
+            var msg = new MailMessage("office@dasz.at", "fogbugz@dasz.at", message, "");
+            msg.Body = string.Format("A Problem occured in ZBox Application\n\n{0}\n\nAdditional information;\n{1}\n\nException:\n{2}", message, description, exeption);
+            _mail.Send(msg);
+        }
+    }
 }

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,58 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DeleteDataObjectCommand_Confirm" xml:space="preserve">
-    <value>Are you sure that you want to delete these items?</value>
+  <data name="AdditionalTextDescription" xml:space="preserve">
+    <value>Please provide additional information</value>
   </data>
-  <data name="DeleteDataObjectCommand_Confirm_Title" xml:space="preserve">
-    <value>Deleting items</value>
+  <data name="AdditionalTextLabel" xml:space="preserve">
+    <value>Additional Information</value>
   </data>
-  <data name="DeleteDataObjectCommand_Name" xml:space="preserve">
-    <value>Delete</value>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
   </data>
-  <data name="DeleteDataObjectCommand_Tooltip" xml:space="preserve">
-    <value>Deletes the current selected Object</value>
+  <data name="Cancel_Tooltip" xml:space="preserve">
+    <value>Cancel this error report</value>
   </data>
-  <data name="EditDataObjectClassCommand_Name" xml:space="preserve">
-    <value>Edit Class</value>
+  <data name="ExceptionDetailsLabel" xml:space="preserve">
+    <value>Details</value>
   </data>
-  <data name="EditDataObjectClassCommand_Tooltip" xml:space="preserve">
-    <value>Opens the Editor for the current lists class</value>
+  <data name="HelpText" xml:space="preserve">
+    <value>Please help us by sending this problem report</value>
   </data>
-  <data name="NewDataObjectCommand_Name" xml:space="preserve">
-    <value>New</value>
+  <data name="Name" xml:space="preserve">
+    <value>Problem in Application</value>
   </data>
-  <data name="NewDataObjectCommand_Tooltip" xml:space="preserve">
-    <value>Creates a new Object</value>
+  <data name="Report" xml:space="preserve">
+    <value>Report</value>
   </data>
-  <data name="OpenDataObjectCommand_Name" xml:space="preserve">
-    <value>Open</value>
-  </data>
-  <data name="OpenDataObjectCommand_Tooltip" xml:space="preserve">
-    <value>Opens the current selected Object</value>
-  </data>
-  <data name="RefreshCommand_Name" xml:space="preserve">
-    <value>Refresh</value>
-  </data>
-  <data name="RefreshCommand_Tooltip" xml:space="preserve">
-    <value>Refreshes the current list</value>
-  </data>
-  <data name="ReportProblemCommand_DescriptionTemplate" xml:space="preserve">
-    <value>Add your description here</value>
-  </data>
-  <data name="ReportProblemCommand_Error" xml:space="preserve">
-    <value>Unable to send Problem:\n{0}</value>
-  </data>
-  <data name="ReportProblemCommand_Error_Title" xml:space="preserve">
-    <value>Error</value>
-  </data>
-  <data name="ReportProblemCommand_MessageTemplate" xml:space="preserve">
-    <value>Problem reported</value>
-  </data>
-  <data name="ReportProblemCommand_Name" xml:space="preserve">
-    <value>Report a Problem</value>
-  </data>
-  <data name="ReportProblemCommand_Tooltip" xml:space="preserve">
-    <value>Reports a Problem</value>
+  <data name="Report_Tooltip" xml:space="preserve">
+    <value>Report this problem</value>
   </data>
 </root>

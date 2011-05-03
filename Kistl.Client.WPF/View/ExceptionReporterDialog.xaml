@@ -1,0 +1,38 @@
+﻿<ctrls:WindowView x:Class="Kistl.Client.WPF.View.ExceptionReporterDialog"
+                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"
+                  xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
+                  Title="{Binding Name}"
+                  ResizeMode="CanResize"
+                  Width="500"
+                  Height="300"
+                  xmlns:commands="clr-namespace:Kistl.Client.WPF.Commands;assembly=Kistl.Client.WPF.Toolkit"
+                  commands:SmartRoutedUICommand.IsCommandSink="True">
+  <DockPanel Margin="5">
+    <TextBlock DockPanel.Dock="Top"
+               Text="{Binding Title}"
+               Style="{StaticResource Title}" />
+    <TextBlock DockPanel.Dock="Top"
+               Text="{Binding HelpText}" />
+
+    <TextBlock DockPanel.Dock="Top"
+               Text="{Binding ExceptionMessage}" />
+    <Expander DockPanel.Dock="Top"
+              Header="{Binding ExceptionDetailsLabel}">
+      <TextBlock DockPanel.Dock="Top"
+                 Text="{Binding ExceptionText}" />
+    </Expander>
+
+    <UniformGrid DockPanel.Dock="Bottom" 
+                 Columns="2"
+                 Margin="5">
+      <ctrls:CommandButton CommandViewModel="{Binding ReportCommand}"
+                           IsDefault="True" />
+      <ctrls:CommandButton CommandViewModel="{Binding CancelCommand}"
+                           IsCancel="True" />
+    </UniformGrid>
+
+    <ctrls:LabeledView DataContext="{Binding AdditionalText}" />
+  </DockPanel>
+</ctrls:WindowView>

@@ -85,7 +85,7 @@ namespace Kistl.Client
                 .InstancePerLifetimeScope();
 
             moduleBuilder
-                .Register<FogBugzProblemReporter>(c => new FogBugzProblemReporter())
+                .Register<LoggingProblemReporter>(c => new LoggingProblemReporter())
                 .As<IProblemReporter>()
                 .SingleInstance();
 

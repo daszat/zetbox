@@ -287,7 +287,7 @@ namespace Kistl.Client.Presentables.KistlBase
             {
                 try
                 {
-                    _reporter.Report();
+                    _reporter.Report(CommonCommandsResources.ReportProblemCommand_MessageTemplate, CommonCommandsResources.ReportProblemCommand_DescriptionTemplate, null, null);
                 }
                 catch (Exception ex)
                 {

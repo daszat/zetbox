@@ -22,14 +22,14 @@ namespace Kistl.Client.Presentables {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class ErrorListViewModelResources {
+    internal class ExceptionReporterViewModelResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ErrorListViewModelResources() {
+        internal ExceptionReporterViewModelResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Kistl.Client.Presentables {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Kistl.Client.Presentables.ErrorListViewModelResources", typeof(ErrorListViewModelResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Kistl.Client.Presentables.ExceptionReporterViewModelResources", typeof(ExceptionReporterViewModelResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,43 +61,61 @@ namespace Kistl.Client.Presentables {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Close.
+        ///   Looks up a localized string similar to Please provide additional information.
         /// </summary>
-        internal static string CloseCommand_Name {
+        internal static string AdditionalTextDescription {
             get {
-                return ResourceManager.GetString("CloseCommand_Name", resourceCulture);
+                return ResourceManager.GetString("AdditionalTextDescription", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Closes this view.
+        ///   Looks up a localized string similar to Additional Information.
         /// </summary>
-        internal static string CloseCommand_Tooltip {
+        internal static string AdditionalTextLabel {
             get {
-                return ResourceManager.GetString("CloseCommand_Tooltip", resourceCulture);
+                return ResourceManager.GetString("AdditionalTextLabel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Show.
+        ///   Looks up a localized string similar to Cancel.
         /// </summary>
-        internal static string GotoObjectCommand_Name {
+        internal static string Cancel {
             get {
-                return ResourceManager.GetString("GotoObjectCommand_Name", resourceCulture);
+                return ResourceManager.GetString("Cancel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Activates the Object.
+        ///   Looks up a localized string similar to Cancel this error report.
         /// </summary>
-        internal static string GotoObjectCommand_Tooltip {
+        internal static string Cancel_Tooltip {
             get {
-                return ResourceManager.GetString("GotoObjectCommand_Tooltip", resourceCulture);
+                return ResourceManager.GetString("Cancel_Tooltip", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error List.
+        ///   Looks up a localized string similar to Details.
+        /// </summary>
+        internal static string ExceptionDetailsLabel {
+            get {
+                return ResourceManager.GetString("ExceptionDetailsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please help us by sending this problem report.
+        /// </summary>
+        internal static string HelpText {
+            get {
+                return ResourceManager.GetString("HelpText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Problem in Application.
         /// </summary>
         internal static string Name {
             get {
@@ -106,20 +124,20 @@ namespace Kistl.Client.Presentables {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Refresh errors.
+        ///   Looks up a localized string similar to Report.
         /// </summary>
-        internal static string RefreshCommand_Name {
+        internal static string Report {
             get {
-                return ResourceManager.GetString("RefreshCommand_Name", resourceCulture);
+                return ResourceManager.GetString("Report", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reevaluate errors.
+        ///   Looks up a localized string similar to Report this problem.
         /// </summary>
-        internal static string RefreshCommand_Tooltip {
+        internal static string Report_Tooltip {
             get {
-                return ResourceManager.GetString("RefreshCommand_Tooltip", resourceCulture);
+                return ResourceManager.GetString("Report_Tooltip", resourceCulture);
             }
         }
     }
