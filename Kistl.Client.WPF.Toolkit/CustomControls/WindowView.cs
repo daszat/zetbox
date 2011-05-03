@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Windows;
 using Kistl.API.Utils;
 using Kistl.Client.Presentables;
-using System.Windows;
 
 namespace Kistl.Client.WPF.CustomControls
 {
@@ -46,7 +47,7 @@ namespace Kistl.Client.WPF.CustomControls
         {
             if (WindowViewModel != null)
             {
-                WindowViewModel.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(WindowView_PropertyChanged);
+                WindowViewModel.PropertyChanged += WindowView_PropertyChanged;
             }
             this.Activate();
         }
@@ -78,6 +79,25 @@ namespace Kistl.Client.WPF.CustomControls
             get
             {
                 return DataContext as WindowViewModel;
+            }
+        }
+
+        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
+        {
+            base.OnPropertyChanged(e);
+            if (e.Property == DataContextProperty)
+            {
+                var inpc = e.OldValue as INotifyPropertyChanged;
+                if (inpc != null)
+                {
+                    inpc.PropertyChanged -= WindowView_PropertyChanged;
+                }
+
+                inpc = e.NewValue as INotifyPropertyChanged;
+                if (inpc != null)
+                {
+                    inpc.PropertyChanged += WindowView_PropertyChanged;
+                }
             }
         }
     }

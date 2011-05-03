@@ -21,31 +21,11 @@ namespace Kistl.Client.WPF.CustomControls
         public static void ShowWaitDialog(FrameworkElement target)
         {
             target.SetValue(ContentAdorner.AdornerContentTemplateProperty, target.FindResource("FakeProgressOverlay"));
-
-            // prod the dispatcher to redraw the window before progressing
-            //DoEvents();
-            target.Dispatcher.Invoke(EmptyDelegate, DispatcherPriority.Render);
         }
 
         public static void HideWaitDialog(FrameworkElement target)
         {
             target.SetValue(ContentAdorner.AdornerContentTemplateProperty, null);
-        }
-
-        [SecurityPermissionAttribute(SecurityAction.Demand, Flags = SecurityPermissionFlag.UnmanagedCode)]
-        private static void DoEvents()
-        {
-            DispatcherFrame frame = new DispatcherFrame();
-            Dispatcher.CurrentDispatcher.BeginInvoke(DispatcherPriority.Background,
-                new DispatcherOperationCallback(ExitFrame), frame);
-            Dispatcher.PushFrame(frame);
-        }
-
-        private static object ExitFrame(object f)
-        {
-            ((DispatcherFrame)f).Continue = false;
-
-            return null;
         }
 
         VisualCollection children;
@@ -128,7 +108,14 @@ namespace Kistl.Client.WPF.CustomControls
         private static void ApplyContentAdorner(FrameworkElement target)
         {
             var adornerLayer = AdornerLayer.GetAdornerLayer(target);
-
+            if (adornerLayer == null)
+            {
+                // windows do not have an adorner layer, try their first (and only) child
+                target = LogicalTreeHelper.GetChildren(target).OfType<FrameworkElement>().FirstOrDefault();
+                if (target == null) return; // no children found
+                adornerLayer = AdornerLayer.GetAdornerLayer(target);
+                if (adornerLayer == null) return; // nothing adornable found
+            }
             var adorner = new ContentAdorner(target);
 
             adornerLayer.Add(adorner);

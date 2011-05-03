@@ -740,17 +740,24 @@ namespace Kistl.Client.Presentables.KistlBase
             else
             {
                 var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditor.WorkspaceViewModel.Factory>().Invoke(workingCtx);
-                foreach (var item in objects)
-                {
-                    //var newMdl = 
-                    newWorkspace.ShowForeignModel(item, RequestedEditorKind);
-                    //ModelCreatedEventHandler temp = ModelCreated;
-                    //if (temp != null)
-                    //{
-                    //    temp(newMdl);
-                    //}
-                }
                 ViewModelFactory.ShowModel(newWorkspace, RequestedWorkspaceKind, true);
+
+                newWorkspace.IsBusy = true;
+                System.Windows.Threading.Dispatcher.CurrentDispatcher.BeginInvoke(new Action(() =>
+                {
+                    foreach (var item in objects)
+                    {
+                        //var newMdl = 
+                        newWorkspace.ShowForeignModel(item, RequestedEditorKind);
+                        //ModelCreatedEventHandler temp = ModelCreated;
+                        //if (temp != null)
+                        //{
+                        //    temp(newMdl);
+                        //}
+                    }
+                    newWorkspace.SelectedItem = newWorkspace.Items.FirstOrDefault();
+                    newWorkspace.IsBusy = false;
+                }), System.Windows.Threading.DispatcherPriority.Background);
             }
         }
 
