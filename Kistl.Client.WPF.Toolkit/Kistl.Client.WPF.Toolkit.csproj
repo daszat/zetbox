@@ -107,7 +107,7 @@
     <Compile Include="Converter\ImageConverter.cs" />
     <Compile Include="Converter\ImageCtrlConverter.cs" />
     <Compile Include="CustomControls\ContentAdorner.cs" />
-    <Compile Include="PropertyLoader.cs" />
+    <Compile Include="WpfDelayedTask.cs" />
     <Compile Include="CustomControls\LabeledViewHorizontal.xaml.cs">
       <DependentUpon>LabeledViewHorizontal.xaml</DependentUpon>
     </Compile>

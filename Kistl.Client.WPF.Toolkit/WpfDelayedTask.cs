@@ -7,28 +7,28 @@ using Kistl.Client.Presentables;
 
 namespace Kistl.Client.WPF.Toolkit
 {
-    public class PropertyLoader : IPropertyLoader
+    public class WpfDelayedTask : IDelayedTask
     {
         private ViewModel _displayer;
-        private Action _loadAction;
+        private Action _task;
 
-        public PropertyLoader(ViewModel displayer, Action loadAction)
+        public WpfDelayedTask(ViewModel displayer, Action task)
         {
             if (displayer == null) throw new ArgumentNullException("displayer");
-            if (loadAction == null) throw new ArgumentNullException("loadAction");
+            if (task == null) throw new ArgumentNullException("task");
 
             _displayer = displayer;
-            _loadAction = loadAction;
+            _task = task;
         }
 
-        public void Reload()
+        public void Trigger()
         {
             _displayer.IsBusy = true;
             System.Windows.Threading.Dispatcher.FromThread(System.Threading.Thread.CurrentThread).BeginInvoke(new Action(() =>
             {
                 try
                 {
-                    _loadAction();
+                    _task();
                 }
                 finally
                 {

@@ -30,7 +30,7 @@ namespace Kistl.Client.Presentables
         TModelFactory CreateViewModel<TModelFactory>(ViewModelDescriptor desc) where TModelFactory : class;
         TModelFactory CreateViewModel<TModelFactory>(System.Type t) where TModelFactory : class;
 
-        IPropertyLoader CreatePropertyLoader(ViewModel displayer, Action loadAction);
+        IDelayedTask CreateDelayedTask(ViewModel displayer, Action loadAction);
 
         // IMultipleInstancesManager
         void OnIMultipleInstancesManagerCreated(Kistl.API.IKistlContext ctx, IMultipleInstancesManager workspace);

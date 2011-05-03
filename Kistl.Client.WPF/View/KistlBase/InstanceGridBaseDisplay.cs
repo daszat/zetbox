@@ -63,27 +63,7 @@ namespace Kistl.Client.WPF.View.KistlBase
             if (ViewModel != null && e.Property == FrameworkElement.DataContextProperty)
             {
                 WPFHelper.RefreshGridView(DataGrid, ViewModel.DisplayedColumns, SortPropertyNameProperty);
-
-                ViewModel.PropertyChanged += new PropertyChangedEventHandler(ViewModel_PropertyChanged);
-            }
-        }
-
-        void ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case "IsBusy":
-                    var child = LogicalTreeHelper.GetChildren(this).OfType<FrameworkElement>().FirstOrDefault();
-                    if (child != null)
-                        if (ViewModel.IsBusy)
-                        {
-                            ContentAdorner.ShowWaitDialog(child);
-                        }
-                        else
-                        {
-                            ContentAdorner.HideWaitDialog(child);
-                        }
-                    break;
+                this.ApplyIsBusyBehaviour(ViewModel);
             }
         }
 

@@ -16,6 +16,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
     using Kistl.App.Base;
     using Kistl.App.Extensions;
     using Kistl.Client.Models;
+    using Kistl.API.Client;
 
     /// <summary>
     /// </summary>
@@ -38,6 +39,29 @@ namespace Kistl.Client.Presentables.ValueViewModels
         {
             EnsureValueCache();
             return _valueCache;
+        }
+
+        private IDelayedTask _valueLoader;
+
+        public override IReadOnlyObservableList<DataObjectViewModel> Value
+        {
+            get
+            {
+                if (_valueLoader == null)
+                {
+                    _valueLoader = ViewModelFactory.CreateDelayedTask(this, () =>
+                    {
+                        EnsureValueCache();
+                        OnPropertyChanged("Value");
+                    });
+                    _valueLoader.Trigger();
+                }
+                return _valueCache;
+            }
+            set
+            {
+                base.Value = value;
+            }
         }
 
         protected override void SetValueToModel(IReadOnlyObservableList<DataObjectViewModel> value)

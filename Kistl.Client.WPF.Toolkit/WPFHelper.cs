@@ -14,6 +14,8 @@ namespace Kistl.Client.WPF.Toolkit
     using Kistl.Client.Models;
     using Kistl.Client.WPF.Toolkit;
     using Microsoft.Windows.Controls;
+    using Kistl.Client.Presentables;
+    using Kistl.Client.WPF.CustomControls;
 
     public static class WPFHelper
     {
@@ -181,6 +183,28 @@ namespace Kistl.Client.WPF.Toolkit
                 col.CellTemplate = result;
                 view.Columns.Add(col);
             }
+        }
+
+        public static void ApplyIsBusyBehaviour(this FrameworkElement ctrl, ViewModel mdl)
+        {
+            mdl.PropertyChanged += (sender, e) =>
+            {
+                switch (e.PropertyName)
+                {
+                    case "IsBusy":
+                        var child = LogicalTreeHelper.GetChildren(ctrl).OfType<FrameworkElement>().FirstOrDefault();
+                        if (child != null)
+                            if (mdl.IsBusy)
+                            {
+                                ContentAdorner.ShowWaitDialog(child);
+                            }
+                            else
+                            {
+                                ContentAdorner.HideWaitDialog(child);
+                            }
+                        break;
+                }
+            };
         }
     }
 }

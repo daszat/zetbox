@@ -72,28 +72,10 @@ namespace Kistl.Client.WPF.View.KistlBase
                     ListView.ItemContainerStyle = Application.Current.Resources["ListViewAsGridViewItemContainerStyle"] as Style;
                 }
 
-                ViewModel.PropertyChanged += new PropertyChangedEventHandler(ViewModel_PropertyChanged);
+                this.ApplyIsBusyBehaviour(ViewModel);
             }
         }
 
-        void ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case "IsBusy":
-                    var child = LogicalTreeHelper.GetChildren(this).OfType<FrameworkElement>().FirstOrDefault();
-                    if (child != null)
-                        if (ViewModel.IsBusy)
-                        {
-                            ContentAdorner.ShowWaitDialog(child);
-                        }
-                        else
-                        {
-                            ContentAdorner.HideWaitDialog(child);
-                        }
-                    break;
-            }
-        }
 
         #region HeaderClickManagement
         GridViewColumnHeader _lastHeaderClicked = null;

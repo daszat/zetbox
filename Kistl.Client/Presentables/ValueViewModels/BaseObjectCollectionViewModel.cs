@@ -17,6 +17,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
     using Kistl.App.Extensions;
     using Kistl.Client.Models;
     using Kistl.App.GUI;
+    using Kistl.API.Client;
 
     /// <summary>
     /// </summary>
@@ -500,6 +501,18 @@ namespace Kistl.Client.Presentables.ValueViewModels
         }
 
         protected abstract void EnsureValueCache();
+
+        public override TCollection Value
+        {
+            get
+            {
+                throw new NotImplementedException("Implemented in derived classes");
+            }
+            set
+            {
+                throw new NotSupportedException("Value cannot be set on Lists or Collections");
+            }
+        }
         #endregion
 
         #region Proxy
@@ -526,6 +539,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             return result;
         }
 
+        private IDelayedTask _proxyLoader;
         private BaseObjectCollectionViewModelProxyList _proxyInstances = null;
         /// <summary>
         /// Allow instances to be added external
@@ -534,14 +548,19 @@ namespace Kistl.Client.Presentables.ValueViewModels
         {
             get
             {
-                if (_proxyInstances == null)
+                if (_proxyLoader == null)
                 {
-                    EnsureValueCache();
-                    _proxyInstances = new BaseObjectCollectionViewModelProxyList(
-                        ObjectCollectionModel,
-                        ObjectCollectionModel.Value,
-                        (vm) => GetProxy(vm),
-                        (p) => GetObjectFromProxy(p).Object);
+                    _proxyLoader = ViewModelFactory.CreateDelayedTask(this, () =>
+                    {
+                        EnsureValueCache();
+                        _proxyInstances = new BaseObjectCollectionViewModelProxyList(
+                            ObjectCollectionModel,
+                            ObjectCollectionModel.Value,
+                            (vm) => GetProxy(vm),
+                            (p) => GetObjectFromProxy(p).Object);
+                        OnPropertyChanged("ValueProxies");
+                    });
+                    _proxyLoader.Trigger();
                 }
                 return _proxyInstances;
             }

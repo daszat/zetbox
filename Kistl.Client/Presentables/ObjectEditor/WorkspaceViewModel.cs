@@ -65,7 +65,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
                     _selectedItem = value;
 
                     PropertyChangedEventHandler handler = (sender, e) => { if (e.PropertyName == "Name") OnPropertyChanged("Name"); };
-                    if(_selectedItem != null) _selectedItem.PropertyChanged += handler;
+                    if (_selectedItem != null) _selectedItem.PropertyChanged += handler;
                     if (old != null) old.PropertyChanged -= handler;
 
                     OnPropertyChanged("SelectedItem");
@@ -168,7 +168,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
                 if (_DeleteCommand == null)
                 {
                     _DeleteCommand = ViewModelFactory.CreateViewModel<SimpleItemCommandViewModel<DataObjectViewModel>.Factory>().Invoke(
-                        DataContext, 
+                        DataContext,
                         WorkspaceViewModelResources.DeleteCommand_Name,
                         WorkspaceViewModelResources.DeleteCommand_Tooltip,
                         (items) => items.ForEach(i => i.Delete()));
@@ -191,7 +191,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
             {
                 if (_saveCommand == null)
                     _saveCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
-                            DataContext, 
+                            DataContext,
                             WorkspaceViewModelResources.SaveCommand_Name,
                             WorkspaceViewModelResources.SaveCommand_Tooltip,
                             Save, CanSave);
@@ -254,11 +254,15 @@ namespace Kistl.Client.Presentables.ObjectEditor
 
         public void Save()
         {
-            var errors = UpdateErrors().ToArray();
-            if (errors.Length == 0)
+            var loader = ViewModelFactory.CreateDelayedTask(this, () =>
             {
-                DataContext.SubmitChanges();
-            }
+                var errors = UpdateErrors().ToArray();
+                if (errors.Length == 0)
+                {
+                    DataContext.SubmitChanges();
+                }
+            });
+            loader.Trigger();
         }
 
         #endregion
@@ -292,10 +296,10 @@ namespace Kistl.Client.Presentables.ObjectEditor
             {
                 if (_verifyCommand == null)
                     _verifyCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
-                            DataContext, 
+                            DataContext,
                             WorkspaceViewModelResources.VerifyContextCommand_Name,
-                            WorkspaceViewModelResources.VerifyContextCommand_Tootlip, 
-                            ShowVerificationResults, 
+                            WorkspaceViewModelResources.VerifyContextCommand_Tootlip,
+                            ShowVerificationResults,
                             null);
 
                 return _verifyCommand;
@@ -304,10 +308,14 @@ namespace Kistl.Client.Presentables.ObjectEditor
 
         public void ShowVerificationResults()
         {
-            UpdateErrors();
-            var elm = ViewModelFactory.CreateViewModel<ErrorListViewModel.Factory>().Invoke(DataContext);
-            elm.RefreshErrors();
-            ViewModelFactory.ShowModel(elm, true);
+            var loader = ViewModelFactory.CreateDelayedTask(this, () =>
+            {
+                UpdateErrors();
+                var elm = ViewModelFactory.CreateViewModel<ErrorListViewModel.Factory>().Invoke(DataContext);
+                elm.RefreshErrors();
+                ViewModelFactory.ShowModel(elm, true);
+            });
+            loader.Trigger();
         }
         #endregion
 
@@ -366,7 +374,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
                 Items.Add(mdl);
             }
             // reestablish selection 
-            SelectedItem = mdl;            
+            SelectedItem = mdl;
         }
 
         /// <summary>

@@ -6,6 +6,7 @@ using System.Text;
 using System.Windows;
 using Kistl.API.Utils;
 using Kistl.Client.Presentables;
+using Kistl.Client.WPF.Toolkit;
 
 namespace Kistl.Client.WPF.CustomControls
 {
@@ -59,18 +60,6 @@ namespace Kistl.Client.WPF.CustomControls
                 case "Show":
                     if (!_closing && !WindowViewModel.Show) this.Close();
                     break;
-                case "IsBusy":
-                    var child = LogicalTreeHelper.GetChildren(this).OfType<FrameworkElement>().FirstOrDefault();
-                    if (child != null)
-                        if (WindowViewModel.IsBusy)
-                        {
-                            ContentAdorner.ShowWaitDialog(child);
-                        }
-                        else
-                        {
-                            ContentAdorner.HideWaitDialog(child);
-                        }
-                    break;
             }
         }
 
@@ -98,6 +87,8 @@ namespace Kistl.Client.WPF.CustomControls
                 {
                     inpc.PropertyChanged += WindowView_PropertyChanged;
                 }
+
+                if(WindowViewModel != null) this.ApplyIsBusyBehaviour(WindowViewModel);
             }
         }
     }

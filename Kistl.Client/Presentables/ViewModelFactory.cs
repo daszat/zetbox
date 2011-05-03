@@ -544,9 +544,9 @@ namespace Kistl.Client.Presentables
 
         #endregion
 
-        public virtual IPropertyLoader CreatePropertyLoader(ViewModel displayer, Action loadAction)
+        public virtual IDelayedTask CreateDelayedTask(ViewModel displayer, Action loadAction)
         {
-            return new DefaultPropertyLoader(loadAction);
+            return new ImmediateTask(loadAction);
         }
     }
 }

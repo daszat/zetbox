@@ -53,6 +53,7 @@ namespace Kistl.Client.WPF.View.KistlBase
             if (ViewModel != null && e.Property == FrameworkElement.DataContextProperty)
             {
                 WPFHelper.RefreshGridView(lst, ViewModel.DisplayedColumns, null);
+                this.ApplyIsBusyBehaviour(ViewModel);
             }
         }
 

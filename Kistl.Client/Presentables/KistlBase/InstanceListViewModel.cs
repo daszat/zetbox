@@ -742,7 +742,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditor.WorkspaceViewModel.Factory>().Invoke(workingCtx);
                 ViewModelFactory.ShowModel(newWorkspace, RequestedWorkspaceKind, true);
 
-                var loader = ViewModelFactory.CreatePropertyLoader(newWorkspace, () =>
+                var loader = ViewModelFactory.CreateDelayedTask(newWorkspace, () =>
                 {
                     foreach (var item in objects)
                     {
@@ -758,7 +758,7 @@ namespace Kistl.Client.Presentables.KistlBase
                     newWorkspace.IsBusy = false;
                 });
 
-                loader.Reload();
+                loader.Trigger();
             }
         }
 
@@ -970,7 +970,7 @@ namespace Kistl.Client.Presentables.KistlBase
             return DataContext.GetQuery<T>(); // ToList would make all filter client side filter .ToList().OrderBy(obj => obj.ToString()).AsQueryable();
         }
 
-        private IPropertyLoader _loadInstancesLoader;
+        private IDelayedTask _loadInstancesLoader;
         private bool loadingInstances = false;
         /// <summary>
         /// Loads the instances of this DataType and adds them to the Instances collection
@@ -980,7 +980,7 @@ namespace Kistl.Client.Presentables.KistlBase
             // Prevent loading instances twice
             if (loadingInstances) return;
             loadingInstances = true;
-            if (_loadInstancesLoader == null) _loadInstancesLoader = ViewModelFactory.CreatePropertyLoader(this, () =>
+            if (_loadInstancesLoader == null) _loadInstancesLoader = ViewModelFactory.CreateDelayedTask(this, () =>
             {
                 try
                 {
@@ -1010,7 +1010,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 }
             });
 
-            _loadInstancesLoader.Reload();
+            _loadInstancesLoader.Trigger();
 
         }
 
