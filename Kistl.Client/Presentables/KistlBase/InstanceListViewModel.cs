@@ -161,22 +161,22 @@ namespace Kistl.Client.Presentables.KistlBase
             }
         }
 
-        private bool _RespectRequieredFilter = true;
+        private bool _RespectRequiredFilter = true;
         /// <summary>
-        /// If set to false, no filter is requiered. Default value is true. Use this setting if a small, preselected list (query) is provides as data source.
+        /// If set to false, no filter is required. Default value is true. Use this setting if a small, preselected list (query) is provides as data source.
         /// </summary>
-        public bool RespectRequieredFilter
+        public bool RespectRequiredFilter
         {
             get
             {
-                return _RespectRequieredFilter;
+                return _RespectRequiredFilter;
             }
             set
             {
-                if (_RespectRequieredFilter != value)
+                if (_RespectRequiredFilter != value)
                 {
-                    _RespectRequieredFilter = value;
-                    OnPropertyChanged("RespectRequieredFilter");
+                    _RespectRequiredFilter = value;
+                    OnPropertyChanged("RespectRequiredFilter");
                 }
             }
         }
@@ -981,47 +981,53 @@ namespace Kistl.Client.Presentables.KistlBase
         }
 
         private IDelayedTask _loadInstancesLoader;
-        private bool loadingInstances = false;
+        private bool _loadingInstances = false;
         /// <summary>
         /// Loads the instances of this DataType and adds them to the Instances collection
         /// </summary>
         private void LoadInstances()
         {
             // Prevent loading instances twice
-            if (loadingInstances) return;
-            loadingInstances = true;
+            if (_loadingInstances) return;
+            _loadingInstances = true;
             if (_loadInstancesLoader == null) _loadInstancesLoader = ViewModelFactory.CreateDelayedTask(this, () =>
             {
                 try
                 {
-                    // Can execute?
-                    if (RespectRequieredFilter && Filter.Count(f => !f.Enabled && f.Required) > 0)
-                    {
-                        // leave result or return empty result
-                        if (_instancesCache == null) _instancesCache = new List<DataObjectViewModel>();
-                        return;
-                    }
-
-                    _instancesCache = new List<DataObjectViewModel>();
-                    foreach (IDataObject obj in GetQuery()) // No order by - may be set from outside in LinqQuery! .Cast<IDataObject>().ToList().OrderBy(obj => obj.ToString()))
-                    {
-                        // Not interested in deleted objects
-                        // TODO: Discuss if a query should return deleted objects
-                        if (obj.ObjectState == DataObjectState.Deleted) continue;
-
-                        var mdl = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, obj);
-                        _instancesCache.Add(mdl);
-                    }
-                    OnInstancesChanged();
+                    if (_loadingInstances)
+                        _instancesCache = LoadInstancesCore();
                 }
                 finally
                 {
-                    loadingInstances = false;
+                    _loadingInstances = false;
                 }
             });
 
             _loadInstancesLoader.Trigger();
+        }
 
+        private List<DataObjectViewModel> LoadInstancesCore()
+        {
+            // Can execute?
+            if (RespectRequiredFilter && Filter.Count(f => !f.Enabled && f.Required) > 0)
+            {
+                // return previous _instancesCache or empty list
+                return _instancesCache ?? new List<DataObjectViewModel>();
+            }
+
+            var result = new List<DataObjectViewModel>();
+
+            foreach (IDataObject obj in GetQuery()) // No order by - may be set from outside in LinqQuery! .Cast<IDataObject>().ToList().OrderBy(obj => obj.ToString()))
+            {
+                // Not interested in deleted objects
+                // TODO: Discuss if a query should return deleted objects
+                if (obj.ObjectState == DataObjectState.Deleted) continue;
+
+                var mdl = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, obj);
+                result.Add(mdl);
+            }
+
+            return result;
         }
 
         /// <summary>
@@ -1038,6 +1044,18 @@ namespace Kistl.Client.Presentables.KistlBase
         /// </summary>
         private void ExecutePostFilter()
         {
+            // TODO: remove this bad hack
+            if (_instancesCache == null)
+            {
+                try
+                {
+                    _instancesCache = LoadInstancesCore();
+                }
+                finally
+                {
+                    _loadingInstances = false;
+                }
+            }
 
             var tmp = new List<DataObjectViewModel>(this.InstancesCache);
             // poor man's full text search
