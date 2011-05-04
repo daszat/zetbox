@@ -14,17 +14,15 @@ namespace Kistl.Client.Presentables
         public static ImmutableAsyncList<TAsync, TUi> UiCreateImmutable<TAsync, TUi>(
             IViewModelDependencies appCtx,
             IKistlContext ctx,
-            ViewModel parentModel,
             Func<IEnumerable<TAsync>> asyncOriginalList,
             Func<TAsync, TUi> uiTransform)
         {
-            return new ImmutableAsyncList<TAsync, TUi>(appCtx, ctx, parentModel, asyncOriginalList, uiTransform);
+            return new ImmutableAsyncList<TAsync, TUi>(appCtx, ctx, asyncOriginalList, uiTransform);
         }
 
         public static AsyncList<TAsync, TUi> UiCreateMutable<TAsync, TUi>(
             IViewModelDependencies appCtx,
             IKistlContext ctx,
-            ViewModel parentModel,
             Func<INotifyCollectionChanged> asyncNotifier,
             Func<IList<TAsync>> asyncOriginalList,
             Func<TAsync, TUi> uiTransform,
@@ -40,7 +38,6 @@ namespace Kistl.Client.Presentables
     public class ImmutableAsyncList<TAsync, TUi>
     {
         private IViewModelDependencies _appCtx;
-        private ViewModel _parentModel;
         private Func<IEnumerable<TAsync>> _asyncOriginalList;
         private Func<TAsync, TUi> _uiTransform;
 
@@ -54,7 +51,6 @@ namespace Kistl.Client.Presentables
         internal ImmutableAsyncList(
             IViewModelDependencies appCtx,
             IKistlContext ctx,
-            ViewModel parentModel,
             Func<IEnumerable<TAsync>> asyncOriginalList,
             Func<TAsync, TUi> uiTransform)
         {
@@ -63,7 +59,6 @@ namespace Kistl.Client.Presentables
             UI.Verify();
 
             DataContext = ctx;
-            _parentModel = parentModel;
             _asyncOriginalList = asyncOriginalList;
             _uiTransform = uiTransform;
 
