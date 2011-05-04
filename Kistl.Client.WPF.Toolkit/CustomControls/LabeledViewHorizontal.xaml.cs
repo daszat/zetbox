@@ -39,7 +39,7 @@ namespace Kistl.Client.WPF.CustomControls
 
         // Using a DependencyProperty as the backing store for LabelSharedSizeGroup.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty RequestedKindProperty =
-            DependencyProperty.Register("RequestedKind", typeof(object), typeof(LabeledView), new UIPropertyMetadata(null));
+            DependencyProperty.Register("RequestedKind", typeof(object), typeof(LabeledViewHorizontal), new UIPropertyMetadata(null));
         public object RequestedKind
         {
             get { return GetValue(RequestedKindProperty) ?? (ViewModel != null ? ViewModel.RequestedKind : null); }
