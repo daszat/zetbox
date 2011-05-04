@@ -22,7 +22,7 @@ namespace Kistl.API
     /// <configuration>
     ///   <system.net>
     ///     <mailSettings>
-    ///       <smtp deliveryMethod="network">
+    ///       <smtp deliveryMethod="Network">
     ///         <network
     ///           host="localhost"
     ///           port="25"
