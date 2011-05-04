@@ -995,7 +995,10 @@ namespace Kistl.Client.Presentables.KistlBase
                 try
                 {
                     if (_loadingInstances)
+                    {
                         _instancesCache = LoadInstancesCore();
+                        OnInstancesChanged();
+                    }
                 }
                 finally
                 {
