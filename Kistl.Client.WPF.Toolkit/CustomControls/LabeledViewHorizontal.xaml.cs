@@ -27,7 +27,7 @@ namespace Kistl.Client.WPF.CustomControls
         static LabeledViewHorizontal()
         {
             UserControl.VerticalContentAlignmentProperty.OverrideMetadata(
-                typeof(LabeledView),
+                typeof(LabeledViewHorizontal),
                 new FrameworkPropertyMetadata(VerticalAlignment.Center));
         }
 
