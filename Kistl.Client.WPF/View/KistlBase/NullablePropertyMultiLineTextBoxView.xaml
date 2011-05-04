@@ -12,6 +12,7 @@
              AcceptsTab="True"
              VerticalScrollBarVisibility="Visible"
              HorizontalScrollBarVisibility="Visible"
+             TextWrapping="Wrap"
              MinLines="10">
         <TextBox.ContextMenu>
             <ContextMenu>
