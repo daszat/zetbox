@@ -44,8 +44,8 @@ namespace Kistl.Client.Presentables
             _additionalActions = new ReadOnlyCollection<CommandViewModel>(additionalActions ?? new CommandViewModel[] { });
             ListViewModel = ViewModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(dataCtx, () => dataCtx, type, qry);
             ListViewModel.AllowAddNew = true;
-            ListViewModel.ObjectCreated += new InstanceListViewModel.ObjectCreatedHandler(ListViewModel_ObjectCreated);
-            ListViewModel.ItemsDefaultAction += new InstanceListViewModel.ItemsDefaultActionHandler(ListViewModel_ItemsDefaultAction);
+            ListViewModel.ObjectCreated += ListViewModel_ObjectCreated;
+            ListViewModel.ItemsDefaultAction += ListViewModel_ItemsDefaultAction;
 
             foreach (var cmd in _additionalActions)
             {
@@ -62,7 +62,7 @@ namespace Kistl.Client.Presentables
             Choose(mdl);
         }
 
-        void ListViewModel_ItemsDefaultAction(IEnumerable<DataObjectViewModel> objects)
+        void ListViewModel_ItemsDefaultAction(InstanceListViewModel sender, IEnumerable<DataObjectViewModel> objects)
         {
             var obj = objects.FirstOrDefault();
             if (obj != null) Choose(obj);

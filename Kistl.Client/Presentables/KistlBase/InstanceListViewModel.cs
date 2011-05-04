@@ -744,16 +744,10 @@ namespace Kistl.Client.Presentables.KistlBase
 
                 var loader = ViewModelFactory.CreateDelayedTask(newWorkspace, () =>
                 {
-                    foreach (var item in objects)
-                    {
-                        //var newMdl = 
-                        newWorkspace.ShowForeignModel(item, RequestedEditorKind);
-                        //ModelCreatedEventHandler temp = ModelCreated;
-                        //if (temp != null)
-                        //{
-                        //    temp(newMdl);
-                        //}
-                    }
+                    var openedItems = objects.Select(o => newWorkspace.ShowForeignModel(o, RequestedEditorKind)).ToList();
+
+                    OnItemsOpened(newWorkspace, openedItems);
+
                     newWorkspace.SelectedItem = newWorkspace.Items.FirstOrDefault();
                     newWorkspace.IsBusy = false;
                 });
@@ -762,7 +756,23 @@ namespace Kistl.Client.Presentables.KistlBase
             }
         }
 
-        public delegate void ItemsDefaultActionHandler(IEnumerable<DataObjectViewModel> objects);
+        public delegate void ItemsOpenedHandler(ObjectEditor.WorkspaceViewModel sender, IEnumerable<DataObjectViewModel> objects);
+
+        /// <summary>
+        /// Is triggered when items are opened in a new workspace. This can be used to give the ViewModels a context dependent finishing touch, like opening a non-default view
+        /// </summary>
+        public event ItemsOpenedHandler ItemsOpened = null;
+
+        protected virtual void OnItemsOpened(ObjectEditor.WorkspaceViewModel sender, IEnumerable<DataObjectViewModel> objects)
+        {
+            var temp = ItemsOpened;
+            if (temp != null)
+            {
+                temp(sender, objects);
+            }
+        }
+
+        public delegate void ItemsDefaultActionHandler(InstanceListViewModel sender, IEnumerable<DataObjectViewModel> objects);
         public event ItemsDefaultActionHandler ItemsDefaultAction = null;
 
         public void OnItemsDefaultAction(IEnumerable<DataObjectViewModel> objects)
@@ -770,7 +780,7 @@ namespace Kistl.Client.Presentables.KistlBase
             ItemsDefaultActionHandler temp = ItemsDefaultAction;
             if (temp != null)
             {
-                temp(objects);
+                temp(this, objects);
             }
             else
             {
