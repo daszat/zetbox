@@ -30,7 +30,7 @@ namespace Kistl.Client.Presentables
             Func<TAsync, TUi> uiTransform,
             Func<TUi, TAsync> uiInverseTransform)
         {
-            return new AsyncList<TAsync, TUi>(appCtx, ctx, parentModel, asyncNotifier, asyncOriginalList, uiTransform, uiInverseTransform);
+            return new AsyncList<TAsync, TUi>(appCtx, ctx, asyncNotifier, asyncOriginalList, uiTransform, uiInverseTransform);
         }
     }
 
@@ -115,7 +115,6 @@ namespace Kistl.Client.Presentables
     public class AsyncList<TAsync, TUi>
     {
         private IViewModelDependencies _appCtx;
-        private ViewModel _parentModel;
         private Func<IList<TAsync>> _asyncOriginalList;
         private Func<INotifyCollectionChanged> _asyncNotifier;
         private Func<TAsync, TUi> _uiTransform;
@@ -131,7 +130,6 @@ namespace Kistl.Client.Presentables
         internal AsyncList(
             IViewModelDependencies appCtx,
             IKistlContext ctx,
-            ViewModel parentModel,
             Func<INotifyCollectionChanged> asyncNotifier,
             Func<IList<TAsync>> asyncOriginalList,
             Func<TAsync, TUi> uiTransform,
@@ -142,7 +140,6 @@ namespace Kistl.Client.Presentables
             UI.Verify();
 
             DataContext = ctx;
-            _parentModel = parentModel;
 
             _asyncOriginalList = asyncOriginalList;
             _asyncNotifier = asyncNotifier;
