@@ -43,7 +43,7 @@ foreach(var prop in cls.Properties.OfType<ValueTypeProperty>().Where(p => p.IsLi
             {
 
 #line 22 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
-this.WriteObjects("            if (_",  prop.Name , " != null)\r\n");
+this.WriteObjects("            if (_",  prop.Name , "Collection != null)\r\n");
 this.WriteObjects("                _",  prop.Name , "Collection.ForEach<IPersistenceObject>(i => ctx.Attach(i));\r\n");
 #line 25 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
 }
@@ -52,7 +52,7 @@ this.WriteObjects("                _",  prop.Name , "Collection.ForEach<IPersist
             {
 
 #line 30 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
-this.WriteObjects("            if (_",  prop.Name , " != null)\r\n");
+this.WriteObjects("            if (_",  prop.Name , "Collection != null)\r\n");
 this.WriteObjects("                _",  prop.Name , "Collection.ForEach<IPersistenceObject>(i => ctx.Attach(i));\r\n");
 #line 33 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\AttachToContextTemplate.cst"
 }
