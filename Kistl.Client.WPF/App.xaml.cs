@@ -187,9 +187,16 @@ namespace Kistl.Client.WPF
             }
             else
             {
-                var vmf = container.Resolve<IViewModelFactory>();
-                var mdl = vmf.CreateViewModel<ExceptionReporterViewModel.Factory>().Invoke(container.Resolve<IKistlContext>(), e.Exception, container.Resolve<IScreenshotTool>().GetScreenshot());
-                vmf.ShowDialog(mdl);
+                if (container != null)
+                {
+                    var vmf = container.Resolve<IViewModelFactory>();
+                    var mdl = vmf.CreateViewModel<ExceptionReporterViewModel.Factory>().Invoke(container.Resolve<IKistlContext>(), e.Exception, container.Resolve<IScreenshotTool>().GetScreenshot());
+                    vmf.ShowDialog(mdl);
+                }
+                else
+                {
+                    MessageBox.Show(e.Exception.ToString());
+                }
                 e.Handled = true;
             }
         }
