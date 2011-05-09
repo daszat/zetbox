@@ -134,7 +134,7 @@ namespace Kistl.Client.Presentables
             Executing = true;
             try
             {
-                DoExecute(data);
+                ViewModelFactory.CreateDelayedTask(this, () => DoExecute(data)).Trigger();
             }
             finally
             {

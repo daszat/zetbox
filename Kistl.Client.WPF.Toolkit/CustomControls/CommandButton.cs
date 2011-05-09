@@ -12,7 +12,8 @@ namespace Kistl.Client.WPF.CustomControls
     using System.Windows.Media;
     using Kistl.Client.Presentables;
     using Kistl.Client.WPF.Converter;
-    
+    using Kistl.Client.WPF.Toolkit;
+
     public class CommandButton
         : Button
     {
@@ -50,7 +51,11 @@ namespace Kistl.Client.WPF.CustomControls
         public ICommandViewModel CommandViewModel
         {
             get { return (ICommandViewModel)GetValue(CommandViewModelProperty); }
-            set { SetValue(CommandViewModelProperty, value); }
+            set
+            {
+                SetValue(CommandViewModelProperty, value);
+                if(value is ViewModel) WPFHelper.ApplyIsBusyBehaviour(this, (ViewModel)value);
+            }
         }
 
         // Using a DependencyProperty as the backing store for CommandViewModel.  This enables animation, styling, binding, etc...
