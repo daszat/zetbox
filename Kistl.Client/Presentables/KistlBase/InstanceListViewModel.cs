@@ -711,6 +711,50 @@ namespace Kistl.Client.Presentables.KistlBase
                 }
             }
         }
+
+        public int InstancesCount
+        {
+            get
+            {
+                return _instances != null ? _instances.Count : 0;
+            }
+        }
+
+        private string _instancesCountAsTextFormatString;
+
+        /// <summary>
+        /// Format string for the <see cref="InstancesCountAsText" /> property. {0} = InstancesCount
+        /// </summary>
+        public string InstancesCountAsTextFormatString
+        {
+            get
+            {
+                return _instancesCountAsTextFormatString;
+            }
+            set
+            {
+                if (_instancesCountAsTextFormatString != value)
+                {
+                    _instancesCountAsTextFormatString = value;
+                    OnPropertyChanged("InstancesCountAsTextFormatString");
+                    OnPropertyChanged("InstancesCountAsText");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Uses <see cref="InstancesCountAsTextFormatString" /> as format string or the default format string "Items"
+        /// </summary>
+        public string InstancesCountAsText
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(InstancesCountAsTextFormatString))
+                    return string.Format(InstancesCountAsTextFormatString, InstancesCount);
+                else
+                    return string.Format("{0} {1}", InstancesCount, InstanceListViewModelResources.InstancesCountAsText);
+            }
+        }
         #endregion
 
         #region Sorting
@@ -1102,6 +1146,8 @@ namespace Kistl.Client.Presentables.KistlBase
 
             OnPropertyChanged("ProxyInstances");
             OnPropertyChanged("Instances");
+            OnPropertyChanged("InstancesCount");
+            OnPropertyChanged("InstancesCountAsText");
 
             if (SelectFirstOnLoad)
             {

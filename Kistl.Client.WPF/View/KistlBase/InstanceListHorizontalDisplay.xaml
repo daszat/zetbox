@@ -56,6 +56,8 @@
                     </DataTemplate>
                 </ToolBar.ItemTemplate>
             </ctrls:WorkaroundToolBar>
+          <TextBlock DockPanel.Dock="Top"
+                     Text="{Binding InstancesCountAsText}" />
             <ctrls:ZBoxListView x:Name="lst"
                                 Margin="10"
                                 BorderThickness="0"

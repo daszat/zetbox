@@ -50,7 +50,9 @@
                     </DataTemplate>
                 </ToolBar.ItemTemplate>
             </ctrls:WorkaroundToolBar>
-            <ctrls:ZBoxDataGrid x:Name="lst"
+          <TextBlock DockPanel.Dock="Top"
+                     Text="{Binding InstancesCountAsText}" />
+          <ctrls:ZBoxDataGrid x:Name="lst"
                                 Margin="10"
                                 BorderThickness="0"
                                 ItemsSource="{Binding ProxyInstances}"
