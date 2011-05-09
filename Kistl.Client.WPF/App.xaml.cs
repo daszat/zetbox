@@ -127,11 +127,19 @@ namespace Kistl.Client.WPF
 
                 RunFixes(container.Resolve<IKistlContext>());
 
-                // delegate all business logic into another class, which 
-                // allows us to load the Kistl.Objects assemblies _before_ 
-                // they are needed.
-                var launcher = container.Resolve<Launcher>();
-                launcher.Show(args);
+                try
+                {
+                    // delegate all business logic into another class, which 
+                    // allows us to load the Kistl.Objects assemblies _before_ 
+                    // they are needed.
+                    var launcher = container.Resolve<Launcher>();
+                    launcher.Show(args);
+                }
+                catch (Exception ex)
+                {
+                    ShowExceptionReporter(ex);
+                    System.Environment.Exit(1);
+                }
             }
         }
 
@@ -187,17 +195,22 @@ namespace Kistl.Client.WPF
             }
             else
             {
-                if (container != null)
-                {
-                    var vmf = container.Resolve<IViewModelFactory>();
-                    var mdl = vmf.CreateViewModel<ExceptionReporterViewModel.Factory>().Invoke(container.Resolve<IKistlContext>(), e.Exception, container.Resolve<IScreenshotTool>().GetScreenshot());
-                    vmf.ShowDialog(mdl);
-                }
-                else
-                {
-                    MessageBox.Show(e.Exception.ToString());
-                }
+                ShowExceptionReporter(e.Exception);
                 e.Handled = true;
+            }
+        }
+
+        private static void ShowExceptionReporter(Exception ex)
+        {
+            if (container != null)
+            {
+                var vmf = container.Resolve<IViewModelFactory>();
+                var mdl = vmf.CreateViewModel<ExceptionReporterViewModel.Factory>().Invoke(container.Resolve<IKistlContext>(), ex, container.Resolve<IScreenshotTool>().GetScreenshot());
+                vmf.ShowDialog(mdl);
+            }
+            else
+            {
+                MessageBox.Show(ex.ToString());
             }
         }
 
