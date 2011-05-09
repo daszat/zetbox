@@ -10,12 +10,24 @@ namespace Kistl.Microsoft
     using Kistl.API;
     using Outlook = global::Microsoft.Office.Interop.Outlook;
     using System.IO;
+    using System.Runtime.InteropServices;
+using Kistl.Client.Presentables;
+    using Kistl.API.Utils;
 
     /// <summary>
     /// Sends MailMessages using Outlook
     /// </summary>
     public class OutlookMailSender : IMailSender, IDisposable
     {
+        private const int E_ABORT = -2147467260;
+
+        private readonly IViewModelFactory _vmf;
+        public OutlookMailSender(IViewModelFactory vmf)
+        {
+            if (vmf == null) throw new ArgumentNullException("vmf");
+            _vmf = vmf;
+        }
+
         public void Send(MailMessage msg)
         {
             if (msg == null) throw new ArgumentNullException("msg");
@@ -23,47 +35,62 @@ namespace Kistl.Microsoft
             Outlook.Application app = new Outlook.Application();
             var ns = app.GetNamespace("MAPI");
             ns.Logon();
-            var fld = ns.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderOutbox);
-            Outlook.MailItem mail = (Outlook.MailItem)fld.Items.Add();
 
-            foreach (var to in msg.To)
+            try
             {
-                var r = mail.Recipients.Add(to.Address);
-                r.Type = (int)Outlook.OlMailRecipientType.olTo;
-            }
-            foreach (var to in msg.CC)
-            {
-                var r = mail.Recipients.Add(to.Address);
-                r.Type = (int)Outlook.OlMailRecipientType.olCC;
-            }
-            foreach (var to in msg.Bcc)
-            {
-                var r = mail.Recipients.Add(to.Address);
-                r.Type = (int)Outlook.OlMailRecipientType.olBCC;
-            }
+                var fld = ns.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderOutbox);
+                Outlook.MailItem mail = (Outlook.MailItem)fld.Items.Add();
 
-            mail.Subject = msg.Subject;
-            if (msg.IsBodyHtml)
-            {
-                mail.HTMLBody = msg.Body;
-            }
-            else
-            {
-                mail.Body = msg.Body;
-            }
-
-            foreach (var a in msg.Attachments)
-            {
-                var tmpFile = CreateTempFile(a.Name);
-                using (var fs = File.OpenWrite(tmpFile))
+                foreach (var to in msg.To)
                 {
-                    a.ContentStream.CopyTo(fs);
+                    var r = mail.Recipients.Add(to.Address);
+                    r.Type = (int)Outlook.OlMailRecipientType.olTo;
                 }
-                var olAttachment = mail.Attachments.Add(tmpFile, Type.Missing, Type.Missing, a.Name);
-            }
+                foreach (var to in msg.CC)
+                {
+                    var r = mail.Recipients.Add(to.Address);
+                    r.Type = (int)Outlook.OlMailRecipientType.olCC;
+                }
+                foreach (var to in msg.Bcc)
+                {
+                    var r = mail.Recipients.Add(to.Address);
+                    r.Type = (int)Outlook.OlMailRecipientType.olBCC;
+                }               
 
-            mail.Display();
-            ns.Logoff();
+                mail.Subject = msg.Subject;
+                if (msg.IsBodyHtml)
+                {
+                    mail.HTMLBody = msg.Body;
+                }
+                else
+                {
+                    mail.Body = msg.Body;
+                }
+
+                foreach (var a in msg.Attachments)
+                {
+                    var tmpFile = CreateTempFile(a.Name);
+                    using (var fs = File.OpenWrite(tmpFile))
+                    {
+                        a.ContentStream.CopyTo(fs);
+                    }
+                    var olAttachment = mail.Attachments.Add(tmpFile, Type.Missing, Type.Missing, a.Name);
+                }
+
+                mail.Display();
+            }
+            catch (COMException ex)
+            {
+                Logging.Client.Error("Unable to send mail throug Outlook", ex);
+                _vmf.ShowMessage(ex.ErrorCode == E_ABORT 
+                        ? OutlookMailSenderResources.AbortErrorMessage 
+                        : OutlookMailSenderResources.GenericErrorMessage, 
+                    OutlookMailSenderResources.ErrorCaption);
+            }
+            finally
+            {
+                ns.Logoff();
+            }
         }
 
         private List<string> _tempFiles = new List<string>();

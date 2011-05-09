@@ -52,6 +52,11 @@
   <ItemGroup>
     <Compile Include="Module.cs" />
     <Compile Include="OutlookMailSender.cs" />
+    <Compile Include="OutlookMailSenderResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OutlookMailSenderResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScreenshotTool.cs" />
   </ItemGroup>
@@ -64,6 +69,17 @@
       <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
       <Name>Kistl.API</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Kistl.Client\Kistl.Client.csproj">
+      <Project>{A736E13F-D349-4CE5-A397-8438F58D0B9D}</Project>
+      <Name>Kistl.Client</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="OutlookMailSenderResources.de.resx" />
+    <EmbeddedResource Include="OutlookMailSenderResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>OutlookMailSenderResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
