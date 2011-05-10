@@ -6,8 +6,9 @@ using Kistl.App.Base;
 
 using Autofac;
 using Kistl.API;
+using Kistl.API.Utils;
 
-namespace Kistl.App.Extensions
+namespace Kistl.API.Common
 {
     public interface IServiceControlManager
     {
@@ -20,6 +21,21 @@ namespace Kistl.App.Extensions
 
     public class ServiceControlManager : IServiceControlManager
     {
+        #region Module
+        public class Module : Autofac.Module
+        {
+            protected override void Load(ContainerBuilder builder)
+            {
+                base.Load(builder);
+
+                builder
+                    .RegisterType<ServiceControlManager>()
+                    .As<IServiceControlManager>()
+                    .SingleInstance();
+            }
+        }
+        #endregion
+
         private readonly Autofac.ILifetimeScope _container;
         private readonly IFrozenContext _frozenCtx;
         private readonly IDeploymentRestrictor _restrictor;
@@ -57,16 +73,40 @@ namespace Kistl.App.Extensions
         {
             if (descr == null) throw new ArgumentNullException("descr");
 
-            var service = GetInstance(descr);
-            service.Start();
+            try
+            {
+                Logging.Log.InfoFormat("Starting service {0}", descr.Description);
+
+                var service = GetInstance(descr);
+                service.Start();
+
+                Logging.Log.Info("Service started successfully");
+            }
+            catch (Exception ex)
+            {
+                Logging.Log.Error("Failed starting service", ex);
+                throw;
+            }
         }
 
         public void Stop(ServiceDescriptor descr)
         {
             if (descr == null) throw new ArgumentNullException("descr");
 
-            var service = GetInstance(descr);
-            service.Stop();
+            try
+            {
+                Logging.Log.InfoFormat("Stopping service {0}", descr.Description);
+
+                var service = GetInstance(descr);
+                service.Stop();
+
+                Logging.Log.Info("Service stopped successfully");
+            }
+            catch (Exception ex)
+            {
+                Logging.Log.Error("Failed stopping service", ex);
+                throw;
+            }
         }
         #endregion
 
@@ -83,19 +123,6 @@ namespace Kistl.App.Extensions
                 if (_restrictor.IsAcceptableDeploymentRestriction((int)s.DeploymentRestriction))
                     yield return s;
             }
-        }
-    }
-
-    public class ServiceControlManagerModule : Autofac.Module
-    {
-        protected override void Load(ContainerBuilder builder)
-        {
-            base.Load(builder);
-
-            builder
-                .RegisterType<ServiceControlManager>()
-                .As<IServiceControlManager>()
-                .SingleInstance();
         }
     }
 }

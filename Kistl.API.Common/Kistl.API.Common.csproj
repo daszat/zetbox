@@ -74,6 +74,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiCommonModule.cs" />
     <Compile Include="BaseCustomActionsManager.cs" />
     <Compile Include="BaseValueCollectionWrapper.cs" />
     <Compile Include="CompoundObjectExtensions.cs" />

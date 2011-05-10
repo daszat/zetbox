@@ -16,6 +16,7 @@ namespace Kistl.Server.Service
     using Kistl.API.Utils;
     using Kistl.App.Extensions;
     using Kistl.App.Packaging;
+    using Kistl.API.Common;
 
     /// <summary>
     /// Mainprogramm
@@ -173,9 +174,13 @@ namespace Kistl.Server.Service
                     {
                         Log.Info("Starting ZBox Services");
                         IServiceControlManager scm = null;
-                        if(container.TryResolve<IServiceControlManager>(out scm))
+                        if (container.TryResolve<IServiceControlManager>(out scm))
                         {
                             scm.Start();
+                        }
+                        else
+                        {
+                            Log.Info("Service control manager not registered");
                         }
 
                         Log.Info("Starting WCF Service");

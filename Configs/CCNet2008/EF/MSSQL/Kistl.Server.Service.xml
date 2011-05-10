@@ -15,6 +15,7 @@
     <Modules>
       <Module>Kistl.API.ApiModule, Kistl.API</Module>
       <Module>Kistl.API.Server.ServerApiModule, Kistl.API.Server</Module>
+      <Module>Kistl.API.Common.ApiCommonModule, Kistl.API.Common</Module>
       <Module>Kistl.Server.ServerModule, Kistl.Server</Module>
       <Module>Kistl.Objects.InterfaceModule, Kistl.Objects</Module>
       <Module>Kistl.Objects.EfModule, Kistl.Objects.EfImpl</Module>
