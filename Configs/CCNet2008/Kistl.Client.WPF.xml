@@ -22,9 +22,6 @@
       <Module>Kistl.App.Projekte.Common.CustomCommonActionsModule, Kistl.App.Projekte.Common</Module>
       <Module>Ini50.App.Client.Ini50Module, Ini50.App.Client</Module>
 
-      <!-- Service Control Manager -->
-      <Module>Kistl.API.Common.ServiceControlManager+Module, Kistl.API.Common</Module>
-
       <!-- 
       <Module>Kistl.Client.BasicAuthCredentialsResolver+Module, Kistl.Client</Module>
       -->

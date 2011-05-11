@@ -1,15 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Kistl.App.Base;
-
-using Autofac;
-using Kistl.API;
-using Kistl.API.Utils;
 
 namespace Kistl.API.Common
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using Autofac;
+    using Kistl.API;
+    using Kistl.API.Utils;
+    using Kistl.App.Base;
+    
     public interface IServiceControlManager
     {
         void Start();
@@ -21,21 +21,6 @@ namespace Kistl.API.Common
 
     public class ServiceControlManager : IServiceControlManager
     {
-        #region Module
-        public class Module : Autofac.Module
-        {
-            protected override void Load(ContainerBuilder builder)
-            {
-                base.Load(builder);
-
-                builder
-                    .RegisterType<ServiceControlManager>()
-                    .As<IServiceControlManager>()
-                    .SingleInstance();
-            }
-        }
-        #endregion
-
         private readonly Autofac.ILifetimeScope _container;
         private readonly IFrozenContext _frozenCtx;
         private readonly IDeploymentRestrictor _restrictor;

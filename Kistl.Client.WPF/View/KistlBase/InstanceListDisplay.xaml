@@ -32,8 +32,7 @@
 
         <ctrls:WorkaroundToolBar DockPanel.Dock="Top"
                                  ItemsSource="{Binding Commands}"
-                                 Visibility="{Binding ShowCommands, Converter={StaticResource BooleanToVisibilityConverter}}"                                 
-                                 Margin="0 0 0 5">
+                                 Visibility="{Binding ShowCommands, Converter={StaticResource BooleanToVisibilityConverter}}">
             <ToolBar.ItemTemplate>
                 <DataTemplate>
                     <ctrls:CommandButton CommandViewModel="{Binding}"
@@ -53,6 +52,7 @@
         </GroupBox>
 
       <TextBlock DockPanel.Dock="Top"
+                 Margin="5 0 0 5"
                  Text="{Binding InstancesCountAsText}" />
       <ctrls:ZBoxListView x:Name="lst"
                             BorderThickness="0"

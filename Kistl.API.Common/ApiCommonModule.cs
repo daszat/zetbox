@@ -1,11 +1,11 @@
 
 namespace Kistl.API.Common
 {
-    using Autofac;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using Autofac;
 
     public class ApiCommonModule : Autofac.Module
     {
@@ -13,7 +13,10 @@ namespace Kistl.API.Common
         {
             base.Load(builder);
 
-            builder.RegisterModule<ServiceControlManager.Module>();
+            builder
+                .RegisterType<ServiceControlManager>()
+                .As<IServiceControlManager>()
+                .SingleInstance();
         }
     }
 }
