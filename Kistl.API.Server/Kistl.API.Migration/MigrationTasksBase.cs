@@ -213,6 +213,10 @@ namespace Kistl.API.Migration
                             System.Data.DbType.Int32,
                             orp.Name);
                     }
+                    else if (nullConverter.Any(converter => converter.Column.Name == c.Name))
+                    {
+                        return new ProjectionColumn(c.Name, ColumnRef.PrimaryTable, c.DestinationProperty.Single().Name); 
+                    }
                     else
                     {
                         throw new InvalidOperationException(string.Format("No join found for {0}", c));
