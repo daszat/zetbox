@@ -69,6 +69,9 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>AppIcon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autofac">
       <SpecificVersion>False</SpecificVersion>
@@ -793,6 +796,7 @@
   <ItemGroup>
     <SplashScreen Include="SplashScreenImage.png" />
     <Resource Include="Images\pen.png" />
+    <EmbeddedResource Include="AppIcon.ico" />
     <Content Include="ProfilingSessions\Session20110329_142250.sdps" />
   </ItemGroup>
   <ItemGroup>
