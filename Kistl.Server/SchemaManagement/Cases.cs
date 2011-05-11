@@ -1895,19 +1895,29 @@ namespace Kistl.Server.SchemaManagement
         {
             string colName_IsNull = Construct.NestedColumnName(cprop, prefix);
             Log.InfoFormat("New is null column for CompoundObject Property: '{0}' ('{1}')", cprop.Name, colName_IsNull);
-            db.CreateColumn(db.GetQualifiedTableName(objClass.TableName), colName_IsNull, System.Data.DbType.Boolean, 0, 0, false, new BoolDefaultConstraint() { Value = true });
+            var tblName = db.GetQualifiedTableName(objClass.TableName);
+            var hasData = db.CheckTableContainsData(tblName);
+            if (!hasData)
+            {
+                db.CreateColumn(tblName, colName_IsNull, System.Data.DbType.Boolean, 0, 0, false, new BoolDefaultConstraint() { Value = true });
+            }
+            else
+            {
+                db.CreateColumn(tblName, colName_IsNull, System.Data.DbType.Boolean, 0, 0, true, new BoolDefaultConstraint() { Value = true });
+                Log.ErrorFormat("unable to create new not nullable CompoundObject Property '{0}' when table '{1}' contains data. Created nullable column instead.", cprop.Name, tblName);
+            }
 
             foreach (var valProp in cprop.CompoundObjectDefinition.Properties.OfType<ValueTypeProperty>())
             {
                 var colName = Construct.NestedColumnName(valProp, colName_IsNull);
                 Log.InfoFormat("New nullable ValueType Property: '{0}' ('{1}')", valProp.Name, colName);
                 db.CreateColumn(
-                    db.GetQualifiedTableName(objClass.TableName),
+                    tblName,
                     colName,
                     valProp.GetDbType(),
                     valProp.GetSize(),
                     valProp.GetScale(),
-                    cprop.IsNullable() || valProp.IsNullable(),
+                    hasData || cprop.IsNullable() || valProp.IsNullable(),
                     SchemaManager.GetDefaultContraint(valProp));
             }
 
