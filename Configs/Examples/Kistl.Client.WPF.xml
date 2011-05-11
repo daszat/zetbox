@@ -27,7 +27,7 @@
       <Module>Kistl.API.MailProblemReporter+Module, Kistl.API</Module>
 
       <!-- Service Control Manager -->
-      <Module>Kistl.App.Extensions.ServiceControlManagerModule, Kistl.API.Common</Module>
+      <Module>Kistl.API.Common.ServiceControlManager+Module, Kistl.API.Common</Module>
 
       <!-- 
       <Module>Kistl.Client.BasicAuthCredentialsResolver+Module, Kistl.Client</Module>
