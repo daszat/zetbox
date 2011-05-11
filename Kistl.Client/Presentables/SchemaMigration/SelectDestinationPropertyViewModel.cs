@@ -52,7 +52,7 @@ namespace Kistl.Client.Presentables.SchemaMigration
             {
                 if (_ChooseCommand == null)
                 {
-                    _ChooseCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, "Choose", "Select the current destination property",
+                    _ChooseCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Choose", "Select the current destination property",
                         Choose, () => SelectedItem != null);
                 }
                 return _ChooseCommand;
@@ -72,7 +72,7 @@ namespace Kistl.Client.Presentables.SchemaMigration
             {
                 if (_CancelCommand == null)
                 {
-                    _CancelCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, "Cancel", "Abort selecting a destination property", Cancel, null);
+                    _CancelCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, null, "Cancel", "Abort selecting a destination property", Cancel, null);
                 }
                 return _CancelCommand;
             }

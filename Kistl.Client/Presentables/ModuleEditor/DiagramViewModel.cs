@@ -89,7 +89,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
                 if (_open == null)
                 {
                     _open = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
-                        DataContext, "Open", "Opens the current DataType", () =>
+                        DataContext, this, "Open", "Opens the current DataType", () =>
                         {
                             var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(ctxFactory());
                             newWorkspace.ShowForeignModel(this);
@@ -379,7 +379,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
             {
                 if (_RefreshCommand == null)
                 {
-                    _RefreshCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, "Refresh", "Refresh the DataTypes list", () => Refresh(), null);
+                    _RefreshCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Refresh", "Refresh the DataTypes list", () => Refresh(), null);
                 }
                 return _RefreshCommand;
             }
@@ -392,7 +392,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
             {
                 if (_selectAllCommand == null)
                 {
-                    _selectAllCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, "Select all", "Selects all DataTypes", () => SelectAllDataTypes(), null);
+                    _selectAllCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Select all", "Selects all DataTypes", () => SelectAllDataTypes(), null);
                 }
                 return _selectAllCommand;
             }
@@ -405,7 +405,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
             {
                 if (_selectNoneCommand == null)
                 {
-                    _selectNoneCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, "Select None", "Selects no DataTypes", () => SelectNoDataTypes(), null);
+                    _selectNoneCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Select None", "Selects no DataTypes", () => SelectNoDataTypes(), null);
                 }
                 return _selectNoneCommand;
             }
@@ -418,7 +418,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
             {
                 if (_addRelatedCommand == null)
                 {
-                    _addRelatedCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, "Add Related", "Add related DataTypes", () => AddRelatedDataTypes(), null);
+                    _addRelatedCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Add Related", "Add related DataTypes", () => AddRelatedDataTypes(), null);
                 }
                 return _addRelatedCommand;
             }
@@ -431,7 +431,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
             {
                 if (_NewObjectClassCommand == null)
                 {
-                    _NewObjectClassCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, "New Class", "Creates a new Class", () =>
+                    _NewObjectClassCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "New Class", "Creates a new Class", () =>
                     {
                         var newCtx = ctxFactory();
                         var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx);
@@ -454,7 +454,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
             {
                 if (_NewRelationCommand == null)
                 {
-                    _NewRelationCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, "New Relation", "Creates a new Relation", () =>
+                    _NewRelationCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "New Relation", "Creates a new Relation", () =>
                     {
                         var newCtx = ctxFactory();
                         var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx);

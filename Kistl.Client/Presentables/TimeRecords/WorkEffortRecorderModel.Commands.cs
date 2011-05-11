@@ -51,9 +51,10 @@ namespace Kistl.Client.Presentables.TimeRecords
             /// </summary>
             /// <param name="appCtx">the application context to use</param>
             /// <param name="dataCtx">the data context to use</param>
+            /// <param name="progressDisplayer">a ViewModel which should be notified while this command is executing</param>
             /// <param name="parent">which <see cref="WorkEffortRecorderModel"/> to work on</param>
-            public StartNewWorkEffortCommand(IViewModelDependencies appCtx, IKistlContext dataCtx, WorkEffortRecorderModel parent)
-                : base(appCtx, dataCtx, "New Work Effort", "Create a new work effort")
+            public StartNewWorkEffortCommand(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel progressDisplayer, WorkEffortRecorderModel parent)
+                : base(appCtx, dataCtx, progressDisplayer, "New Work Effort", "Create a new work effort")
             {
                 if (parent == null)
                 {
@@ -116,7 +117,7 @@ namespace Kistl.Client.Presentables.TimeRecords
             {
                 if (_FinishWorkEffortCommand == null)
                 {
-                    _FinishWorkEffortCommand = ViewModelFactory.CreateViewModel<FinishWorkEffortCommand.Factory>().Invoke(DataContext, this);
+                    _FinishWorkEffortCommand = ViewModelFactory.CreateViewModel<FinishWorkEffortCommand.Factory>().Invoke(DataContext, this, this);
                 }
                 return _FinishWorkEffortCommand;
             }
@@ -127,7 +128,7 @@ namespace Kistl.Client.Presentables.TimeRecords
         /// </summary>
         private class FinishWorkEffortCommand : CommandViewModel
         {
-            public new delegate FinishWorkEffortCommand Factory(IKistlContext dataCtx, WorkEffortRecorderModel parent);
+            public new delegate FinishWorkEffortCommand Factory(IKistlContext dataCtx, ViewModel progressDisplayer, WorkEffortRecorderModel parent);
 
             /// <summary>The <see cref="WorkEffortRecorderModel"/> to work on.</summary>
             private WorkEffortRecorderModel _parent;
@@ -137,9 +138,10 @@ namespace Kistl.Client.Presentables.TimeRecords
             /// </summary>
             /// <param name="appCtx">the application context to use</param>
             /// <param name="dataCtx">the data context to use</param>
+            /// <param name="progressDisplayer">a ViewModel which should be notified while this command is executing</param>
             /// <param name="parent">which <see cref="WorkEffortRecorderModel"/> to work on</param>
-            public FinishWorkEffortCommand(IViewModelDependencies appCtx, IKistlContext dataCtx, WorkEffortRecorderModel parent)
-                : base(appCtx, dataCtx, "Finish", "Stops and closes this work effort")
+            public FinishWorkEffortCommand(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel progressDisplayer, WorkEffortRecorderModel parent)
+                : base(appCtx, dataCtx, progressDisplayer, "Finish", "Stops and closes this work effort")
             {
                 if (parent == null)
                 {

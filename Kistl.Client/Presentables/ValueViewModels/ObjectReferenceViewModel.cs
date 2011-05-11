@@ -172,6 +172,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 {
                     _openReferenceCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
                         DataContext,
+                        this,
                         ObjectReferenceViewModelResources.OpenReferenceCommand_Name,
                         ObjectReferenceViewModelResources.OpenReferenceCommand_Tooltip,
                         () => OpenReference(),
@@ -237,6 +238,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 {
                     _createNewItemAndSetValueCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
                         DataContext,
+                        this,
                         ObjectReferenceViewModelResources.CreateNewItemAndSetValueCommand_Name,
                         ObjectReferenceViewModelResources.CreateNewItemAndSetValueCommand_Tooltip,
                         CreateNewItemAndSetValue,
@@ -282,6 +284,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 {
                     _SelectValueCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
                         DataContext,
+                        this,
                         ObjectReferenceViewModelResources.SelectValueCommand_Name,
                         ObjectReferenceViewModelResources.SelectValueCommand_Tooltip,
                         () => SelectValue(),
@@ -395,6 +398,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                     {
                         var cmdMdl = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
                             DataContext,
+                            this,
                             ObjectReferenceViewModelResources.PossibleValues_More,
                             ObjectReferenceViewModelResources.PossibleValues_More_Tooltip,
                             SelectValue,

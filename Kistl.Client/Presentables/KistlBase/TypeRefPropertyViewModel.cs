@@ -44,7 +44,7 @@ namespace Kistl.Client.Presentables.KistlBase
             {
                 if (_loadTypeRefFromAssemblyFileCommand == null)
                 {
-                    _loadTypeRefFromAssemblyFileCommand = ViewModelFactory.CreateViewModel<LoadTypeRefFromAssemblyFileCommand.Factory>().Invoke(DataContext, this);
+                    _loadTypeRefFromAssemblyFileCommand = ViewModelFactory.CreateViewModel<LoadTypeRefFromAssemblyFileCommand.Factory>().Invoke(DataContext, this, this);
                 }
                 return _loadTypeRefFromAssemblyFileCommand;
             }
@@ -57,7 +57,7 @@ namespace Kistl.Client.Presentables.KistlBase
             {
                 if (_loadTypeRefFromAssemblyRefCommand == null)
                 {
-                    _loadTypeRefFromAssemblyRefCommand = ViewModelFactory.CreateViewModel<LoadTypeRefFromAssemblyRefCommand.Factory>().Invoke(DataContext, this);
+                    _loadTypeRefFromAssemblyRefCommand = ViewModelFactory.CreateViewModel<LoadTypeRefFromAssemblyRefCommand.Factory>().Invoke(DataContext, this, this);
                 }
                 return _loadTypeRefFromAssemblyRefCommand;
             }

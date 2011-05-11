@@ -75,6 +75,7 @@ namespace Kistl.Client.Presentables
                 {
                     _InvokeCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
                         DataContext, 
+                        this,
                         ValueInputTaskViewModelResources.InvokeCommand_Name,
                         ValueInputTaskViewModelResources.InvokeCommand_Tooltip, 
                         Invoke, 
@@ -100,6 +101,7 @@ namespace Kistl.Client.Presentables
                 {
                     _CancelCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
                         DataContext, 
+                        this,
                         ValueInputTaskViewModelResources.CancelCommand_Name,
                         ValueInputTaskViewModelResources.CancelCommand_Tooltip, 
                         Cancel, 

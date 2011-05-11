@@ -1,20 +1,25 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Kistl.API.Client;
-using Kistl.Client.Presentables;
 
 namespace Kistl.Client.WPF.Toolkit
 {
-    public class WpfDelayedTask : IDelayedTask
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading;
+    using System.Windows.Threading;
+    using Kistl.API.Client;
+    using Kistl.Client.Presentables;
+
+    /// <summary>
+    /// Implements a delayed task using the WPF Dispatcher for the current Thread.
+    /// </summary>
+    public sealed class WpfDelayedTask : IDelayedTask
     {
-        private ViewModel _displayer;
-        private Action _task;
+        private readonly ViewModel _displayer;
+        private readonly Action _task;
 
         public WpfDelayedTask(ViewModel displayer, Action task)
         {
-            if (displayer == null) throw new ArgumentNullException("displayer");
             if (task == null) throw new ArgumentNullException("task");
 
             _displayer = displayer;
@@ -23,8 +28,10 @@ namespace Kistl.Client.WPF.Toolkit
 
         public void Trigger()
         {
-            _displayer.IsBusy = true;
-            System.Windows.Threading.Dispatcher.FromThread(System.Threading.Thread.CurrentThread).BeginInvoke(new Action(() =>
+            if (_displayer != null)
+                _displayer.IsBusy = true;
+
+            Dispatcher.FromThread(Thread.CurrentThread).BeginInvoke(new Action(() =>
             {
                 try
                 {
@@ -32,9 +39,10 @@ namespace Kistl.Client.WPF.Toolkit
                 }
                 finally
                 {
-                    _displayer.IsBusy = false;
+                    if (_displayer != null)
+                        _displayer.IsBusy = false;
                 }
-            }), System.Windows.Threading.DispatcherPriority.Background); // prio must be Background to let fakeprogressoverlay be rendered
+            }), DispatcherPriority.Background); // prio must be Background to let fakeprogressoverlay be rendered
         }
     }
 }

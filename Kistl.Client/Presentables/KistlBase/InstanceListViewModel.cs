@@ -353,7 +353,7 @@ namespace Kistl.Client.Presentables.KistlBase
             {
                 if (_RefreshCommand == null)
                 {
-                    _RefreshCommand = ViewModelFactory.CreateViewModel<RefreshCommand.Factory>().Invoke(DataContext, this);
+                    _RefreshCommand = ViewModelFactory.CreateViewModel<RefreshCommand.Factory>().Invoke(DataContext, this, this);
                     _RefreshCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_reload_png);
                 }
                 return _RefreshCommand;
@@ -368,7 +368,9 @@ namespace Kistl.Client.Presentables.KistlBase
                 if (_OpenCommand == null)
                 {
                     _OpenCommand = ViewModelFactory.CreateViewModel<SimpleItemCommandViewModel<DataObjectViewModel>.Factory>().Invoke(
-                        DataContext, CommonCommandsResources.OpenDataObjectCommand_Name,
+                        DataContext,
+                        this, 
+                        CommonCommandsResources.OpenDataObjectCommand_Name,
                         CommonCommandsResources.OpenDataObjectCommand_Tooltip,
                         OpenObjects);
                     _OpenCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_fileopen_png);
@@ -385,7 +387,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 if (_NewCommand == null)
                 {
                     _NewCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
-                        DataContext, CommonCommandsResources.NewDataObjectCommand_Name, CommonCommandsResources.NewDataObjectCommand_Tooltip, NewObject, () => AllowAddNew);
+                        DataContext, this, CommonCommandsResources.NewDataObjectCommand_Name, CommonCommandsResources.NewDataObjectCommand_Tooltip, NewObject, () => AllowAddNew);
                     _NewCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_new_png);
                 }
                 return _NewCommand;
@@ -434,6 +436,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 {
                     _DeleteCommand = ViewModelFactory.CreateViewModel<SimpleItemCommandViewModel<DataObjectViewModel>.Factory>().Invoke(
                         DataContext,
+                        this,
                         CommonCommandsResources.DeleteDataObjectCommand_Name,
                         CommonCommandsResources.DeleteDataObjectCommand_Tooltip,
                         DeleteObjects);

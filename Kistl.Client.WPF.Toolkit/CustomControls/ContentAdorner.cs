@@ -20,11 +20,22 @@ namespace Kistl.Client.WPF.CustomControls
 
         public static void ShowWaitDialog(FrameworkElement target)
         {
-            target.SetValue(ContentAdorner.AdornerContentTemplateProperty, target.FindResource("FakeProgressOverlay"));
+            var overlayTemplate = target.FindResource("FakeProgressOverlay");
+            // windows do not have an adorner layer, try their first (and only) child
+            // else this is not working
+            // hooray for voodoo
+            if (target is Window)
+                target = LogicalTreeHelper.GetChildren(target).OfType<FrameworkElement>().FirstOrDefault();
+            target.SetValue(ContentAdorner.AdornerContentTemplateProperty, overlayTemplate);
         }
 
         public static void HideWaitDialog(FrameworkElement target)
         {
+            // windows do not have an adorner layer, try their first (and only) child
+            // else this is not working
+            // hooray for voodoo
+            if (target is Window)
+                target = LogicalTreeHelper.GetChildren(target).OfType<FrameworkElement>().FirstOrDefault();
             target.SetValue(ContentAdorner.AdornerContentTemplateProperty, null);
         }
 

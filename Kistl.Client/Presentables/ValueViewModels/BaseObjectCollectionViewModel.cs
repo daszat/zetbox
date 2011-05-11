@@ -239,6 +239,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 {
                     _CreateNewCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
                         DataContext,
+                        this,
                         BaseObjectCollectionViewModelResources.CreateNewCommand_Name,
                         BaseObjectCollectionViewModelResources.CreateNewCommand_Tooltip,
                         () => CreateNewItem(),
@@ -258,6 +259,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 {
                     _AddExistingCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
                         DataContext,
+                        this,
                         BaseObjectCollectionViewModelResources.AddExistingCommand_Name,
                         BaseObjectCollectionViewModelResources.AddExistingCommand_Tooltip,
                         () => AddExistingItem(),
@@ -277,6 +279,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 {
                     _RemoveCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
                         DataContext,
+                        this,
                         BaseObjectCollectionViewModelResources.RemoveCommand_Name,
                         BaseObjectCollectionViewModelResources.RemoveCommand_Tooltip,
                         () => SelectedItems.ToList().ForEach(i => RemoveItem(i)), // Collection will change while deleting!
@@ -295,6 +298,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 {
                     _DeleteCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
                         DataContext,
+                        this,
                         BaseObjectCollectionViewModelResources.DeleteCommand_Name,
                         BaseObjectCollectionViewModelResources.DeleteCommand_Tooltip,
                         () => SelectedItems.ToList().ForEach(i => DeleteItem(i)), // Collection will change while deleting!

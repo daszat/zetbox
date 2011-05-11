@@ -88,7 +88,7 @@ namespace Kistl.Client.WPF.CustomControls
                     inpc.PropertyChanged += WindowView_PropertyChanged;
                 }
 
-                if(WindowViewModel != null) this.ApplyIsBusyBehaviour(WindowViewModel);
+                if (WindowViewModel != null) this.ApplyIsBusyBehaviour(WindowViewModel);
             }
         }
     }

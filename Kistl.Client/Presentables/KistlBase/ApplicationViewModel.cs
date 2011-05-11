@@ -65,6 +65,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 if (_openApplicationCommand == null)
                 {
                     _openApplicationCommand = ViewModelFactory.CreateViewModel<SimpleItemCommandViewModel<ApplicationViewModel>.Factory>().Invoke(DataContext,
+                        this,
                         ApplicationViewModelResources.OpenApplicationCommand_Name,
                         ApplicationViewModelResources.OpenApplicationCommand_Tooltip,
                         (i) => i.ForEach(a => OpenApplication(a)));

@@ -548,5 +548,16 @@ namespace Kistl.Client.Presentables
         {
             return new ImmediateTask(loadAction);
         }
+
+        /// <summary>
+        /// Creates a delayed task using CreateDelayedTask and immediately triggers it.
+        /// </summary>
+        /// <param name="displayer"></param>
+        /// <param name="loadAction"></param>
+        public virtual void TriggerDelayedTask(ViewModel displayer, Action loadAction)
+        {
+            var task = CreateDelayedTask(displayer, loadAction);
+            task.Trigger();
+        }
     }
 }

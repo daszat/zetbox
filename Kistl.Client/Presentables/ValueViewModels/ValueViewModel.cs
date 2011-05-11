@@ -144,6 +144,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 {
                     _ClearValueCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
                         DataContext,
+                        this,
                         ValueViewModelResources.ClearValueCommand_Name,
                         ValueViewModelResources.ClearValueCommand_Tooltip,
                         () => ClearValue(),
@@ -867,6 +868,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 {
                     _EditCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
                         DataContext,
+                        this,
                         ValueViewModelResources.EditCommand_Name,
                         ValueViewModelResources.EditCommand_Tooltip,
                         () => Edit(),

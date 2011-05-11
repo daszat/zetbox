@@ -31,6 +31,7 @@ namespace Kistl.Client.Presentables
         TModelFactory CreateViewModel<TModelFactory>(System.Type t) where TModelFactory : class;
 
         IDelayedTask CreateDelayedTask(ViewModel displayer, Action loadAction);
+        void TriggerDelayedTask(ViewModel displayer, Action loadAction);
 
         // IMultipleInstancesManager
         void OnIMultipleInstancesManagerCreated(Kistl.API.IKistlContext ctx, IMultipleInstancesManager workspace);

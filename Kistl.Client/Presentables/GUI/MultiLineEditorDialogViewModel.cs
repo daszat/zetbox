@@ -57,6 +57,7 @@ namespace Kistl.Client.Presentables.GUI
                 {
                     _OKCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
                         DataContext, 
+                        this,
                         MultiLineEditorDialogViewModelResources.OKCommand_Name,
                         MultiLineEditorDialogViewModelResources.OKCommand_Tooltip, 
                         Ok, 
@@ -81,6 +82,7 @@ namespace Kistl.Client.Presentables.GUI
                 {
                     _CancelCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
                         DataContext,
+                        null,
                         MultiLineEditorDialogViewModelResources.CancelCommand_Name,
                         MultiLineEditorDialogViewModelResources.CancelCommand_Tooltip,
                         Cancel, 

@@ -111,7 +111,9 @@ using Kistl.Client.Presentables.ValueViewModels;
             {
                 if (_ReportCommand == null)
                 {
-                    _ReportCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, 
+                    _ReportCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
+                        DataContext,
+                        this,
                         ExceptionReporterViewModelResources.Report,
                         ExceptionReporterViewModelResources.Report_Tooltip, 
                         Report, null);
@@ -134,7 +136,9 @@ using Kistl.Client.Presentables.ValueViewModels;
             {
                 if (_CancelCommand == null)
                 {
-                    _CancelCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, 
+                    _CancelCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
+                        DataContext, 
+                        null,
                         ExceptionReporterViewModelResources.Cancel,
                         ExceptionReporterViewModelResources.Cancel_Tooltip, 
                         Cancel, null);

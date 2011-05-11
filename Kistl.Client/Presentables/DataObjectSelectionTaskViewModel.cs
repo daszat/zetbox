@@ -88,7 +88,8 @@ namespace Kistl.Client.Presentables
                 if (_ChooseCommand == null)
                 {
                     _ChooseCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
-                        DataContext, 
+                        DataContext,
+                        this,
                         DataObjectSelectionTaskViewModelResources.Choose,
                         DataObjectSelectionTaskViewModelResources.Choose_Tooltip, 
                         () => Choose(SelectedItem), 
@@ -113,6 +114,7 @@ namespace Kistl.Client.Presentables
                 {
                     _CancelCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
                         DataContext,
+                        this,
                         DataObjectSelectionTaskViewModelResources.Cancel,
                         DataObjectSelectionTaskViewModelResources.Cancel_Tooltip,
                         Cancel, 

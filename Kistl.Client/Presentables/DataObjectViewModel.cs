@@ -411,7 +411,7 @@ namespace Kistl.Client.Presentables
             foreach (var action in methods)
             {
                 //Debug.Assert(action.Parameter.Count == 0);
-                _actionsCache.Add(ViewModelFactory.CreateViewModel<ActionViewModel.Factory>(action).Invoke(DataContext, _object, action));
+                _actionsCache.Add(ViewModelFactory.CreateViewModel<ActionViewModel.Factory>(action).Invoke(DataContext, this, _object, action));
             }
         }
 

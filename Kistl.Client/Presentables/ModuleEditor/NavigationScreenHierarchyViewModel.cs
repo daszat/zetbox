@@ -83,7 +83,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
             {
                 if (_RefreshCommand == null)
                 {
-                    _RefreshCommand = ViewModelFactory.CreateViewModel<RefreshCommand.Factory>().Invoke(DataContext, this);
+                    _RefreshCommand = ViewModelFactory.CreateViewModel<RefreshCommand.Factory>().Invoke(DataContext, this, this);
                 }
                 return _RefreshCommand;
             }
@@ -96,7 +96,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
             {
                 if (_OpenCommand == null)
                 {
-                    _OpenCommand = ViewModelFactory.CreateViewModel<OpenDataObjectCommand.Factory>().Invoke(DataContext, null, null);
+                    _OpenCommand = ViewModelFactory.CreateViewModel<OpenDataObjectCommand.Factory>().Invoke(DataContext, this, null, null);
                 }
                 return _OpenCommand;
             }
@@ -109,7 +109,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
             {
                 if (_NewCommand == null)
                 {
-                    _NewCommand = ViewModelFactory.CreateViewModel<NewDataObjectCommand.Factory>().Invoke(DataContext, typeof(NavigationScreen).GetObjectClass(FrozenContext), null, null, this);
+                    _NewCommand = ViewModelFactory.CreateViewModel<NewDataObjectCommand.Factory>().Invoke(DataContext, this, typeof(NavigationScreen).GetObjectClass(FrozenContext), null, null, this);
                     _NewCommand.ObjectCreated += (obj) => ((NavigationScreen)obj).Parent = SelectedItem != null ? obj.Context.Find<NavigationScreen>(SelectedItem.ID) : null;
                 }
                 return _NewCommand;
@@ -123,7 +123,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
             {
                 if (_DeleteCommand == null)
                 {
-                    _DeleteCommand = ViewModelFactory.CreateViewModel<DeleteDataObjectCommand.Factory>().Invoke(DataContext, this, true);
+                    _DeleteCommand = ViewModelFactory.CreateViewModel<DeleteDataObjectCommand.Factory>().Invoke(DataContext, this, this, true);
                 }
                 return _DeleteCommand;
             }

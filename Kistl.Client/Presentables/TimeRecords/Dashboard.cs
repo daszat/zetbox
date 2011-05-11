@@ -35,7 +35,7 @@ namespace Kistl.Client.Presentables.TimeRecords
             {
                 if (_openRecorderCommand == null)
                 {
-                    _openRecorderCommand = ViewModelFactory.CreateViewModel<OpenRecorderCommand.Factory>().Invoke(DataContext);
+                    _openRecorderCommand = ViewModelFactory.CreateViewModel<OpenRecorderCommand.Factory>().Invoke(DataContext, this);
                 }
                 return _openRecorderCommand;
             }
@@ -50,12 +50,12 @@ namespace Kistl.Client.Presentables.TimeRecords
     internal class OpenRecorderCommand
         : CommandViewModel
     {
-        public new delegate OpenRecorderCommand Factory(IKistlContext dataCtx);
+        public new delegate OpenRecorderCommand Factory(IKistlContext dataCtx, ViewModel progressDisplayer);
 
         private readonly Func<IKistlContext> ctxFactory;
 
-        public OpenRecorderCommand(IViewModelDependencies appCtx, IKistlContext dataCtx, Func<IKistlContext> ctxFactory)
-            : base(appCtx, dataCtx, "Start recording", "Start recording")
+        public OpenRecorderCommand(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel progressDisplayer,Func<IKistlContext> ctxFactory)
+            : base(appCtx, dataCtx, progressDisplayer, "Start recording", "Start recording")
         {
             this.ctxFactory = ctxFactory;
         }

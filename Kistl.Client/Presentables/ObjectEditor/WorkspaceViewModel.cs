@@ -169,6 +169,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
                 {
                     _DeleteCommand = ViewModelFactory.CreateViewModel<SimpleItemCommandViewModel<DataObjectViewModel>.Factory>().Invoke(
                         DataContext,
+                        this,
                         WorkspaceViewModelResources.DeleteCommand_Name,
                         WorkspaceViewModelResources.DeleteCommand_Tooltip,
                         (items) => items.ForEach(i => i.Delete()));
@@ -192,6 +193,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
                 if (_saveCommand == null)
                     _saveCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
                             DataContext,
+                            this,
                             WorkspaceViewModelResources.SaveCommand_Name,
                             WorkspaceViewModelResources.SaveCommand_Tooltip,
                             Save, CanSave);
@@ -211,7 +213,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
             {
                 if (_saveAndCloseCommand == null)
                     _saveAndCloseCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>()
-                        .Invoke(DataContext, WorkspaceViewModelResources.SaveAndCloseCommand_Name, WorkspaceViewModelResources.SaveAndCloseCommand_Tooltip,
+                        .Invoke(DataContext, this, WorkspaceViewModelResources.SaveAndCloseCommand_Name, WorkspaceViewModelResources.SaveAndCloseCommand_Tooltip,
                         () => { Save(); Close(); }, CanSave);
 
                 return _saveAndCloseCommand;
@@ -276,7 +278,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
                 if (_AbortCommand == null)
                 {
                     _AbortCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>()
-                        .Invoke(DataContext, WorkspaceViewModelResources.AbortCommand_Name, WorkspaceViewModelResources.AbortCommand_Tooltip,
+                        .Invoke(DataContext, this, WorkspaceViewModelResources.AbortCommand_Name, WorkspaceViewModelResources.AbortCommand_Tooltip,
                         Close, null);
                 }
                 return _AbortCommand;
@@ -297,6 +299,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
                 if (_verifyCommand == null)
                     _verifyCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
                             DataContext,
+                            this,
                             WorkspaceViewModelResources.VerifyContextCommand_Name,
                             WorkspaceViewModelResources.VerifyContextCommand_Tootlip,
                             ShowVerificationResults,

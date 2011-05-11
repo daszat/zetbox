@@ -130,6 +130,7 @@ namespace Kistl.Client.Presentables.GUI
                 {
                     _HomeCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
                         DataContext,
+                        this,
                         NavigatorViewModelResources.HomeCommand_Name,
                         NavigatorViewModelResources.HomeCommand_Tooltip,
                         Home,
@@ -153,6 +154,7 @@ namespace Kistl.Client.Presentables.GUI
                 {
                     _BackCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
                         DataContext,
+                        this,
                         NavigatorViewModelResources.BackCommand_Name,
                         NavigatorViewModelResources.BackCommand_Tooltip,
                         Back,
@@ -180,6 +182,7 @@ namespace Kistl.Client.Presentables.GUI
                 {
                     _NavigateToCommand = ViewModelFactory.CreateViewModel<SimpleParameterCommandViewModel<NavigationScreenViewModel>.Factory>().Invoke(
                                 DataContext,
+                                this,
                                 NavigatorViewModelResources.NavigateToCommand_Name,
                                 NavigatorViewModelResources.NavigateToCommand_Tooltip,
                                 NavigateTo,

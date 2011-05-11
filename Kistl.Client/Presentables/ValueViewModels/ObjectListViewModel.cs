@@ -98,7 +98,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             {
                 if (_MoveItemUpCommand == null)
                 {
-                    _MoveItemUpCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, "Up", "Moves the item up", MoveItemUp, () => SelectedItem != null);
+                    _MoveItemUpCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Up", "Moves the item up", MoveItemUp, () => SelectedItem != null);
                 }
                 return _MoveItemUpCommand;
             }
@@ -132,7 +132,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             {
                 if (_MoveItemDownCommand == null)
                 {
-                    _MoveItemDownCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, "Down", "Moves the item down", MoveItemDown, () => SelectedItem != null);
+                    _MoveItemDownCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Down", "Moves the item down", MoveItemDown, () => SelectedItem != null);
                 }
                 return _MoveItemDownCommand;
             }

@@ -117,6 +117,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
                     SetupViewModel(lstMdl);
                     lstMdl.Filter.Add(new ConstantValueFilterModel("Module = @0", CurrentModule));
                     lstMdl.Commands.Add(ViewModelFactory.CreateViewModel<SimpleItemCommandViewModel<DataObjectViewModel>.Factory>().Invoke(DataContext,
+                        this,
                         "Refresh TypeRefs", "Refreshes the TypeRefs, ViewDescriptors and ViewModelDescriptors",
                         (i) =>
                         {
@@ -244,7 +245,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
             {
                 if (_NewModuleCommand == null)
                 {
-                    _NewModuleCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, "New Module", "Creates a new Module", () => CreateNewModule(), null);
+                    _NewModuleCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "New Module", "Creates a new Module", () => CreateNewModule(), null);
                 }
                 return _NewModuleCommand;
             }
@@ -257,7 +258,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
             {
                 if (_RefreshCommand == null)
                 {
-                    _RefreshCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, "Refresh", "Refresh", () => Refresh(), null);
+                    _RefreshCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Refresh", "Refresh", () => Refresh(), null);
                 }
                 return _RefreshCommand;
             }
@@ -270,7 +271,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
             {
                 if (_EditCurrentModuleCommand == null)
                 {
-                    _EditCurrentModuleCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, "Edit Module", "Opens the Editor for the current module", () => EditCurrentModule(), null);
+                    _EditCurrentModuleCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Edit Module", "Opens the Editor for the current module", () => EditCurrentModule(), null);
                 }
                 return _EditCurrentModuleCommand;
             }

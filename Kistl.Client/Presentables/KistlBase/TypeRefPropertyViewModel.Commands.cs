@@ -22,12 +22,13 @@ namespace Kistl.Client.Presentables.KistlBase
         /// </summary>
         /// <param name="appCtx">the application context to use</param>
         /// <param name="dataCtx">the data context to use</param>
+        /// <param name="progressDisplayer">a ViewModel which should be notified while this command is executing</param>
         /// <param name="label">a label for this command</param>
         /// <param name="tooltip">a tooltip for this command</param>
         /// <param name="parent">where to put the Command's result</param>
         /// This constructor is internal to avoid external inheritance of this class.
-        internal LoadTypeRefCommand(IViewModelDependencies appCtx, IKistlContext dataCtx, string label, string tooltip, TypeRefPropertyViewModel parent)
-            : base(appCtx, dataCtx, label, tooltip)
+        internal LoadTypeRefCommand(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel progressDisplayer, string label, string tooltip, TypeRefPropertyViewModel parent)
+            : base(appCtx, dataCtx, progressDisplayer, label, tooltip)
         {
             this.Parent = parent;
         }
@@ -87,7 +88,7 @@ namespace Kistl.Client.Presentables.KistlBase
         /// <param name="assembly">the assembly to choose from</param>
         protected void ChooseTypeRefFromAssembly(Kistl.App.Base.Assembly assembly)
         {
-            var regenerateCmd = ViewModelFactory.CreateViewModel<RegenerateTypeRefsCommand.Factory>().Invoke(DataContext, this);
+            var regenerateCmd = ViewModelFactory.CreateViewModel<RegenerateTypeRefsCommand.Factory>().Invoke(DataContext, ProgressDisplayer, this);
             var selectionTask = ViewModelFactory.CreateViewModel<DataObjectSelectionTaskViewModel.Factory>().Invoke(
                 DataContext,
                 typeof(TypeRef).GetObjectClass(FrozenContext),
@@ -113,12 +114,12 @@ namespace Kistl.Client.Presentables.KistlBase
 
         private class RegenerateTypeRefsCommand : CommandViewModel
         {
-            public new delegate RegenerateTypeRefsCommand Factory(IKistlContext dataCtx, LoadTypeRefCommand outer);
+            public new delegate RegenerateTypeRefsCommand Factory(IKistlContext dataCtx, ViewModel progressDisplayer, LoadTypeRefCommand outer);
 
             public InstanceListViewModel ListModel { get; set; }
 
-            public RegenerateTypeRefsCommand(IViewModelDependencies appCtx, IKistlContext dataCtx)
-                : base(appCtx, dataCtx, "Regenerate TypeRefs", "Regenerate TypeRefs")
+            public RegenerateTypeRefsCommand(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel progressDisplayer)
+                : base(appCtx, dataCtx, progressDisplayer, "Regenerate TypeRefs", "Regenerate TypeRefs")
             {
             }
 
@@ -154,17 +155,18 @@ namespace Kistl.Client.Presentables.KistlBase
     internal class LoadTypeRefFromAssemblyFileCommand
         : LoadTypeRefCommand
     {
-        public new delegate LoadTypeRefFromAssemblyFileCommand Factory(IKistlContext dataCtx, TypeRefPropertyViewModel parent);
+        public new delegate LoadTypeRefFromAssemblyFileCommand Factory(IKistlContext dataCtx, ViewModel progressDisplayer, TypeRefPropertyViewModel parent);
 
         /// <summary>
         /// Initializes a new instance of the LoadTypeRefFromAssemblyFileCommand class.
         /// </summary>
         /// <param name="appCtx">the application context to use</param>
         /// <param name="dataCtx">the data context to use</param>
+        /// <param name="progressDisplayer">a ViewModel which should be notified while this command is executing</param>
         /// <param name="parent">where to put the Command's result</param>
         /// This constructor is internal to avoid external inheritance of this class.
-        public LoadTypeRefFromAssemblyFileCommand(IViewModelDependencies appCtx, IKistlContext dataCtx, TypeRefPropertyViewModel parent)
-            : base(appCtx, dataCtx, "Load TypeRef From DLL", "Loads all types from a DLL", parent)
+        public LoadTypeRefFromAssemblyFileCommand(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel progressDisplayer, TypeRefPropertyViewModel parent)
+            : base(appCtx, dataCtx, progressDisplayer, "Load TypeRef From DLL", "Loads all types from a DLL", parent)
         {
         }
 
@@ -209,17 +211,18 @@ namespace Kistl.Client.Presentables.KistlBase
     internal class LoadTypeRefFromAssemblyRefCommand
         : LoadTypeRefCommand
     {
-        public new delegate LoadTypeRefFromAssemblyRefCommand Factory(IKistlContext dataCtx, TypeRefPropertyViewModel parent);
+        public new delegate LoadTypeRefFromAssemblyRefCommand Factory(IKistlContext dataCtx, ViewModel progressDisplayer, TypeRefPropertyViewModel parent);
 
         /// <summary>
         /// Initializes a new instance of the LoadTypeRefFromAssemblyRefCommand class.
         /// </summary>
         /// <param name="appCtx">the application context to use</param>
         /// <param name="dataCtx">the data context to use</param>
+        /// <param name="progressDisplayer">a ViewModel which should be notified while this command is executing</param>
         /// <param name="parent">where to put the Command's result</param>
         /// This constructor is internal to avoid external inheritance of this class.
-        public LoadTypeRefFromAssemblyRefCommand(IViewModelDependencies appCtx, IKistlContext dataCtx, TypeRefPropertyViewModel parent)
-            : base(appCtx, dataCtx, "Select TypeRef by Assembly", "Loads all types from an Assembly", parent)
+        public LoadTypeRefFromAssemblyRefCommand(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel progressDisplayer, TypeRefPropertyViewModel parent)
+            : base(appCtx, dataCtx, progressDisplayer, "Select TypeRef by Assembly", "Loads all types from an Assembly", parent)
         {
         }
 

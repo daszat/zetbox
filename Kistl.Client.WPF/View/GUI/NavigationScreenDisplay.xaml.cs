@@ -18,6 +18,7 @@ namespace Kistl.Client.WPF.View.GUI
     using Kistl.Client.GUI;
     using Kistl.Client.Presentables.GUI;
     using Kistl.Client.WPF.CustomControls;
+    using Kistl.Client.WPF.Toolkit;
 
     /// <summary>
     /// Interaction logic for NavigationScreenDisplay.xaml
@@ -39,5 +40,14 @@ namespace Kistl.Client.WPF.View.GUI
         }
 
         #endregion
+
+        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
+        {
+            base.OnPropertyChanged(e);
+            if (e.Property == DataContextProperty)
+            {
+                if (ViewModel != null) this.ApplyIsBusyBehaviour(ViewModel);
+            }
+        }
     }
 }

@@ -13,15 +13,16 @@ namespace Kistl.Client.Presentables
     public class ActionViewModel
         : ViewModel
     {
-        public new delegate ActionViewModel Factory(IKistlContext dataCtx, IDataObject obj, Method m);
+        public new delegate ActionViewModel Factory(IKistlContext dataCtx, ViewModel progressDisplayer, IDataObject obj, Method m);
 
         public ActionViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel progressDisplayer, 
             IDataObject obj, Method m)
             : base(appCtx, dataCtx)
         {
             Object = obj;
             Method = m;
+            ProgressDisplayer = progressDisplayer;
 
             Method.PropertyChanged += MethodPropertyChanged;
         }
@@ -50,6 +51,7 @@ namespace Kistl.Client.Presentables
                 {
                     _ExecuteCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
                         DataContext, 
+                        ProgressDisplayer,
                         Method.GetLabel(), 
                         Method.Description, 
                         Execute, 
@@ -116,6 +118,6 @@ namespace Kistl.Client.Presentables
 
         protected IDataObject Object { get; private set; }
         protected Method Method { get; private set; }
-
+        protected ViewModel ProgressDisplayer { get; private set; }
     }
 }

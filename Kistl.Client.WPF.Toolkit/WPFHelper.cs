@@ -187,21 +187,22 @@ namespace Kistl.Client.WPF.Toolkit
 
         public static void ApplyIsBusyBehaviour(this FrameworkElement ctrl, ViewModel mdl)
         {
+            if (ctrl == null) throw new ArgumentNullException("ctrl");
+            if (mdl == null) throw new ArgumentNullException("mdl");
+
             mdl.PropertyChanged += (sender, e) =>
             {
                 switch (e.PropertyName)
                 {
                     case "IsBusy":
-                        var child = LogicalTreeHelper.GetChildren(ctrl).OfType<FrameworkElement>().FirstOrDefault();
-                        if (child != null)
-                            if (mdl.IsBusy)
-                            {
-                                ContentAdorner.ShowWaitDialog(child);
-                            }
-                            else
-                            {
-                                ContentAdorner.HideWaitDialog(child);
-                            }
+                        if (mdl.IsBusy)
+                        {
+                            ContentAdorner.ShowWaitDialog(ctrl);
+                        }
+                        else
+                        {
+                            ContentAdorner.HideWaitDialog(ctrl);
+                        }
                         break;
                 }
             };

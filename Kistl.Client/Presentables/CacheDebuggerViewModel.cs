@@ -47,6 +47,7 @@ namespace Kistl.Client.Presentables
                 {
                     _clearCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
                         DataContext, 
+                        null,
                         CacheDebuggerViewModelResources.ClearCommand_Name,
                         CacheDebuggerViewModelResources.ClearCommand_Tooltip, 
                         Cache.ClearAll, 
