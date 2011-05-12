@@ -33,13 +33,15 @@
   <ItemGroup>
     <Reference Include="Autofac">
       <HintPath>..\Libs\AutoFac 2\Autofac.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="log4net">
       <HintPath>..\Libs\log4net.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Microsoft.Office.Interop.Outlook, Version=11.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
       <EmbedInteropTypes>True</EmbedInteropTypes>
-      <Private>False</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -64,14 +66,17 @@
     <ProjectReference Include="..\Kistl.API.Client\Kistl.API.Client.csproj">
       <Project>{DD11A4F6-24C2-4935-8042-DE49CA6B32C0}</Project>
       <Name>Kistl.API.Client</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\Kistl.API\Kistl.API.csproj">
       <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
       <Name>Kistl.API</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\Kistl.Client\Kistl.Client.csproj">
       <Project>{A736E13F-D349-4CE5-A397-8438F58D0B9D}</Project>
       <Name>Kistl.Client</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
