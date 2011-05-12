@@ -105,14 +105,8 @@ namespace Kistl.Client.Bootstrapper
 
                 // Retry
                 var dlg = new AddressDialog();
-                if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.Cancel)
-                {
-                    return null;
-                }
-                else
-                {
-                    address = Properties.Settings.Default.Address;
-                }
+                dlg.ShowDialog();
+                address = Properties.Settings.Default.Address;
             }
         }
 
@@ -141,15 +135,9 @@ namespace Kistl.Client.Bootstrapper
                         {
                             case HttpStatusCode.Unauthorized:
                                 PasswordDialog dlg = new PasswordDialog();
-                                if (dlg.ShowDialog() == DialogResult.OK)
-                                {
-                                    service.Credentials = new NetworkCredential(dlg.UserName, dlg.Password);
-                                    continue;
-                                }
-                                else
-                                {
-                                    return null;
-                                }
+                                dlg.ShowDialog();
+                                service.Credentials = new NetworkCredential(dlg.UserName, dlg.Password);
+                                continue;
                             case HttpStatusCode.NotFound:
                                 SetStatus("Invalid URL");
                                 Properties.Settings.Default.Address = string.Empty;
@@ -283,20 +271,13 @@ namespace Kistl.Client.Bootstrapper
                 address = Properties.Settings.Default.Address;
             }
 
-            if (!string.IsNullOrEmpty(address))
-            {
-                thread.Start();
-            }
-            else
-            {
-                SetStatus("No URL specified");
-            }
+            thread.Start();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
             running = false;
-            this.Close();
+            Environment.Exit(1);
         }
         #endregion
 

@@ -18,16 +18,18 @@ namespace Kistl.Client.Bootstrapper
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            Properties.Settings.Default.Address = txtAddress.Text;
-            Properties.Settings.Default.Save();
-            this.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.Close();
+            if (!string.IsNullOrEmpty(txtAddress.Text))
+            {
+                Properties.Settings.Default.Address = txtAddress.Text;
+                Properties.Settings.Default.Save();
+                this.DialogResult = System.Windows.Forms.DialogResult.OK;
+                this.Close();
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.Close();
+            Environment.Exit(1);
         }
 
         private void AddressDialog_Load(object sender, EventArgs e)

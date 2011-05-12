@@ -38,8 +38,7 @@ namespace Kistl.Client.Bootstrapper
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.Close();
+            Environment.Exit(1);
         }
 
         private void Password_Load(object sender, EventArgs e)
