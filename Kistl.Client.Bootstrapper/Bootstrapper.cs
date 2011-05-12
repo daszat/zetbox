@@ -93,30 +93,27 @@ namespace Kistl.Client.Bootstrapper
                 try
                 {
                     adr = new Uri(new Uri(address), "Bootstrapper.svc/GetFileInfos");
-                    break;
+                    var filesBuffer = GetFileInfos(adr);
+                    if (!string.IsNullOrEmpty(filesBuffer))
+                    {
+                        return filesBuffer.FromXmlString<FileInfoArray>();
+                    }
                 }
                 catch (UriFormatException)
                 {
-                    var dlg = new AddressDialog();
-                    if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.Cancel)
-                    {
-                        return null;
-                    }
-                    else
-                    {
-                        address = Properties.Settings.Default.Address;
-                    }
+                }
+
+                // Retry
+                var dlg = new AddressDialog();
+                if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.Cancel)
+                {
+                    return null;
+                }
+                else
+                {
+                    address = Properties.Settings.Default.Address;
                 }
             }
-
-            var filesBuffer = GetFileInfos(adr);
-            if (string.IsNullOrEmpty(filesBuffer))
-            {
-                SetStatus(Properties.Resources.ConnectionError);
-                return null;
-            }
-
-            return filesBuffer.FromXmlString<FileInfoArray>();
         }
 
         private string GetFileInfos(Uri adr)
@@ -159,6 +156,13 @@ namespace Kistl.Client.Bootstrapper
                                 Properties.Settings.Default.Save();
                                 return null;
                         }
+                    }
+                    else
+                    {
+                        SetStatus(Properties.Resources.ConnectionError + ": " + ex.Message);
+                        Properties.Settings.Default.Address = string.Empty;
+                        Properties.Settings.Default.Save();
+                        return null;
                     }
                 }
             }
