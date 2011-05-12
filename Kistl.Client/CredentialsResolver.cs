@@ -178,7 +178,13 @@ namespace Kistl.Client
 
         public override Identity GetCurrent()
         {
-            return Resolve(_credentialResolver.GetUsername());
+            Identity result = null;
+            while (result == null)
+            {
+                var userName = _credentialResolver.GetUsername();
+                result = Resolve(userName);
+            }
+            return result;
         }
     }
 }
