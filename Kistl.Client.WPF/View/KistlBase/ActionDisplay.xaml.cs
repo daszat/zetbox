@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using Kistl.Client.GUI;
 using Kistl.Client.Presentables;
 using Kistl.Client.WPF.CustomControls;
+using Microsoft.Windows.Controls;
 
 namespace Kistl.Client.WPF.View.KistlBase
 {
@@ -31,10 +32,21 @@ namespace Kistl.Client.WPF.View.KistlBase
             this.Loaded += new RoutedEventHandler(ActionDisplay_Loaded);
         }
 
+        // unset IsTabStop on the GridCell containing us.
+        // this is a bad hack to workaround Case 2602
         void ActionDisplay_Loaded(object sender, RoutedEventArgs e)
         {
-            // Set Keyboardmanager manual, because this Control has to be a CommandButton (Styling, Toolbar, etc.)
-            this.SetValue(FocusManager.FocusedElementProperty, this);
+            var vis = sender as Visual;
+            while (vis != null)
+            {
+                var cell = vis as DataGridCell;
+                if (cell != null)
+                {
+                    cell.IsTabStop = false;
+                    break;
+                }
+                vis = VisualTreeHelper.GetParent(vis) as Visual;
+            }
         }
 
         public ActionViewModel ViewModel
