@@ -1,5 +1,5 @@
 
-namespace Kistl.Server.SchemaTests.SchemaProviders.TableStructure
+namespace Kistl.Server.Tests.SchemaTests.SchemaProviders.TableStructure
 {
     using System;
     using System.Collections.Generic;

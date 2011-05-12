@@ -1,5 +1,5 @@
 
-namespace Kistl.Server.SchemaTests.SchemaProviders
+namespace Kistl.Server.Tests.SchemaTests.SchemaProviders
 {
     using System;
     using System.Collections.Generic;
