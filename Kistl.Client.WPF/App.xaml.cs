@@ -68,78 +68,82 @@ namespace Kistl.Client.WPF
 
             builder
                 .Register<Kistl.Client.WPF.Toolkit.VisualTypeTemplateSelector>((c, p) => new Kistl.Client.WPF.Toolkit.VisualTypeTemplateSelector(
-                    p.Named<object>("requestedKind"), 
+                    p.Named<object>("requestedKind"),
                     c.Resolve<IFrozenContext>()))
                 .InstancePerDependency();
-            
-            return builder.Build();
+
+            throw new Exception("test");
+
+            //return builder.Build();
         }
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            if (System.Configuration.ConfigurationManager.AppSettings["ShowDebugConsole"] == "true")
+            try
             {
-                DebugConsole.Show();
-            }
-            Logging.Configure();
-
-            using (Logging.Log.InfoTraceMethodCall("Starting Client"))
-            {
-                string configFilePath;
-                var args = HandleCommandline(e.Args, out configFilePath);
-
-                var config = KistlConfig.FromFile(configFilePath, "Kistl.Client.WPF.xml");
-                InitCulture(config);
-
-                if (config.Server != null && config.Server.StartServer)
+                if (System.Configuration.ConfigurationManager.AppSettings["ShowDebugConsole"] == "true")
                 {
-                    serverDomain = new ServerDomainManager();
-                    serverDomain.Start(config);
+                    DebugConsole.Show();
                 }
-                else
+                Logging.Configure();
+
+                using (Logging.Log.InfoTraceMethodCall("Starting Client"))
                 {
-                }
-                
-                AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
+                    string configFilePath;
+                    var args = HandleCommandline(e.Args, out configFilePath);
 
-                container = CreateMasterContainer(config);
+                    var config = KistlConfig.FromFile(configFilePath, "Kistl.Client.WPF.xml");
+                    InitCulture(config);
 
-                // Init Resources
-                var iconConverter = new IconConverter(container.Resolve<IFrozenContext>(), container.Resolve<IKistlContext>());
-                this.Resources["IconConverter"] = iconConverter;
-                this.Resources["ImageCtrlConverter"] = new ImageCtrlConverter(iconConverter);
-                var templateSelectorFactory = container.Resolve<Kistl.Client.WPF.Toolkit.VisualTypeTemplateSelector.Factory>();
-                this.Resources["defaultTemplateSelector"] = templateSelectorFactory(null);
-                this.Resources["listItemTemplateSelector"] = templateSelectorFactory("Kistl.App.GUI.SingleLineKind");
-                this.Resources["dashBoardTemplateSelector"] = templateSelectorFactory("Kistl.App.GUI.DashboardKind");
+                    if (config.Server != null && config.Server.StartServer)
+                    {
+                        serverDomain = new ServerDomainManager();
+                        serverDomain.Start(config);
+                    }
+                    else
+                    {
+                    }
 
-                // Manually add DefaultStyles and DefaultViews
-                // Otherwise converter are unknown
-                this.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Kistl.Client.WPF;component/View/DefaultStyles.xaml", UriKind.Relative) });
-                this.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Kistl.Client.WPF;component/View/DefaultHighlightColorDefinitions.xaml", UriKind.Relative) });
-                this.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Kistl.Client.WPF;component/View/DefaultViews.xaml", UriKind.Relative) });
+                    AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
 
-                // Load registrated dictionaries from autofac
-                foreach (var dict in container.Resolve<IEnumerable<ResourceDictionary>>())
-                {
-                    this.Resources.MergedDictionaries.Add(dict);
-                }
+                    container = CreateMasterContainer(config);
 
-                RunFixes(container.Resolve<IKistlContext>());
+                    // Init Resources
+                    var iconConverter = new IconConverter(container.Resolve<IFrozenContext>(), container.Resolve<IKistlContext>());
+                    this.Resources["IconConverter"] = iconConverter;
+                    this.Resources["ImageCtrlConverter"] = new ImageCtrlConverter(iconConverter);
+                    var templateSelectorFactory = container.Resolve<Kistl.Client.WPF.Toolkit.VisualTypeTemplateSelector.Factory>();
+                    this.Resources["defaultTemplateSelector"] = templateSelectorFactory(null);
+                    this.Resources["listItemTemplateSelector"] = templateSelectorFactory("Kistl.App.GUI.SingleLineKind");
+                    this.Resources["dashBoardTemplateSelector"] = templateSelectorFactory("Kistl.App.GUI.DashboardKind");
 
-                try
-                {
+                    // Manually add DefaultStyles and DefaultViews
+                    // Otherwise converter are unknown
+                    this.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Kistl.Client.WPF;component/View/DefaultStyles.xaml", UriKind.Relative) });
+                    this.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Kistl.Client.WPF;component/View/DefaultHighlightColorDefinitions.xaml", UriKind.Relative) });
+                    this.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Kistl.Client.WPF;component/View/DefaultViews.xaml", UriKind.Relative) });
+
+                    // Load registrated dictionaries from autofac
+                    foreach (var dict in container.Resolve<IEnumerable<ResourceDictionary>>())
+                    {
+                        this.Resources.MergedDictionaries.Add(dict);
+                    }
+
+                    RunFixes(container.Resolve<IKistlContext>());
+
                     // delegate all business logic into another class, which 
                     // allows us to load the Kistl.Objects assemblies _before_ 
                     // they are needed.
                     var launcher = container.Resolve<Launcher>();
                     launcher.Show(args);
                 }
-                catch (Exception ex)
-                {
-                    ShowExceptionReporter(ex);
-                    System.Environment.Exit(1);
-                }
+            }
+            catch (Exception ex)
+            {
+                ShowExceptionReporter(ex);
+
+                // unable to start, exit
+                System.Environment.Exit(1);
             }
         }
 
@@ -183,7 +187,7 @@ namespace Kistl.Client.WPF
             if (serverDomain != null)
                 serverDomain.Stop();
 
-            if(container != null)
+            if (container != null)
                 container.Dispose();
         }
 
