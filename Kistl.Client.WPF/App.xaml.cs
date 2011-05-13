@@ -72,9 +72,7 @@ namespace Kistl.Client.WPF
                     c.Resolve<IFrozenContext>()))
                 .InstancePerDependency();
 
-            throw new Exception("test");
-
-            //return builder.Build();
+            return builder.Build();
         }
 
         private void Application_Startup(object sender, StartupEventArgs e)
