@@ -56,6 +56,29 @@ namespace Kistl.Client.WPF.Converter
     }
 
     /// <summary>
+    /// multiplies a number N by a constant
+    /// </summary>
+    [ValueConversion(typeof(object), typeof(double))]
+    public class MultiplyingConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType,
+                            object parameter, CultureInfo culture)
+        {
+            if (value == null) { throw new ArgumentNullException("value"); }
+            if (parameter == null) { throw new ArgumentNullException("parameter"); }
+
+            return Double.Parse(value.ToString()) * Double.Parse(parameter.ToString(), CultureInfo.InvariantCulture.NumberFormat);
+        }
+
+        public object ConvertBack(object value, Type targetType,
+                            object parameter, System.Globalization.CultureInfo culture)
+        {
+            // Readonly
+            return Binding.DoNothing;
+        }
+    }
+
+    /// <summary>
     /// Converts a number N to (bool)(N &gt; parameter)
     /// </summary>
     [ValueConversion(typeof(object), typeof(bool))]
