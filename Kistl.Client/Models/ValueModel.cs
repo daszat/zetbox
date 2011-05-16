@@ -239,16 +239,26 @@ namespace Kistl.Client.Models
         public DateTimeValueModel(string label, string description, bool allowNullInput, bool isReadOnly)
             : base(label, description, allowNullInput, isReadOnly)
         {
+            _dateTimeStyle = DateTimeStyles.DateTime;
+        }
+
+        public DateTimeValueModel(string label, string description, bool allowNullInput, bool isReadOnly, DateTimeStyles dateTimeStyle)
+            : base(label, description, allowNullInput, isReadOnly)
+        {
+            _dateTimeStyle = dateTimeStyle;
         }
 
         public DateTimeValueModel(string label, string description, bool allowNullInput, bool isReadOnly, ControlKind requestedKind)
             : base(label, description, allowNullInput, isReadOnly, requestedKind)
         {
+            _dateTimeStyle = DateTimeStyles.DateTime;
         }
+
+        private readonly DateTimeStyles _dateTimeStyle;
 
         public DateTimeStyles DateTimeStyle
         {
-            get { return DateTimeStyles.DateTime; }
+            get { return _dateTimeStyle; }
         }
 
         TimeSpan? IValueModel<TimeSpan?>.Value
