@@ -30,6 +30,10 @@ T: Kistl.Server.SchemaManagement.SchemaManager
 T: Kistl.API.Migration.OutputStream
 T: Kistl.API.StreamPackageProvider
 
+# Floating point values should not be directly compared for equality (e.g. == or !=).
+R: Gendarme.Rules.Correctness.AvoidFloatingPointEqualityRule
+# guard clause for Property Setter: uses equality intentionally
+
 R: Gendarme.Rules.Serialization.MarkAllNonSerializableFieldsRule
 # automatically generated code
 T: Kistl.API.Client.KistlService.InternalCache
