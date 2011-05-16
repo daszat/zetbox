@@ -3,15 +3,17 @@ namespace Kistl.API.Client
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.IO;
     using System.Linq;
     using System.Linq.Expressions;
     using System.Text;
     using Kistl.API.Utils;
-    using System.IO;
 
     /// <summary>
     /// A simple decorator to log all calls to the decorated proxy
     /// </summary>
+    [DebuggerStepThrough]
     internal class InfoLoggingProxyDecorator : IProxy
     {
         private readonly IProxy _implementor;
