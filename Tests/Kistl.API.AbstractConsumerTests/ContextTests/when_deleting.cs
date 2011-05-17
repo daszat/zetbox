@@ -38,5 +38,29 @@ namespace Kistl.API.AbstractConsumerTests.ContextTests
 
             ctx.SubmitChanges();
         }
+
+        [Test]
+        public void should_remove_n_m()
+        {
+            var ctx = GetContext();
+            var a1 = ctx.Create<N_to_M_relations_A>();
+            var b1 = ctx.Create<N_to_M_relations_B>();
+            var b2 = ctx.Create<N_to_M_relations_B>();
+
+            a1.BSide.Add(b1);
+            a1.BSide.Add(b2);
+
+            ctx.SubmitChanges();
+
+            ctx.Delete(a1);
+            ctx.Delete(b1);
+            ctx.Delete(b2);
+
+            Assert.That(a1.ObjectState, Is.EqualTo(DataObjectState.Deleted));
+            Assert.That(b1.ObjectState, Is.EqualTo(DataObjectState.Deleted));
+            Assert.That(b2.ObjectState, Is.EqualTo(DataObjectState.Deleted));
+
+            ctx.SubmitChanges();
+        }
     }
 }

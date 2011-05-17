@@ -69,7 +69,7 @@ namespace Kistl.Server.Tests
             var prop_test = objclass.Properties.Single(p => p.ID == prop.ID);
             Assert.That(prop_test.Context, Is.EqualTo(ctx));
 
-            Assert.That(object.ReferenceEquals(prop, prop_test), "prop & prop_test are different Objects");
+            Assert.That(prop, Is.SameAs(prop_test), "prop & prop_test are different Objects");
         }
 
         [Test]
