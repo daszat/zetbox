@@ -308,6 +308,7 @@ namespace Kistl.Server.Tests
         }
 
         [Test]
+        [Ignore("Case 2629: Using an index setter is currently not implemented in NHibernate")]
         public void Change_Relation_n_m_Set_n_By_Index()
         {
             var prj = ctx.Create<Kistl.App.Projekte.Projekt>();
@@ -377,6 +378,7 @@ namespace Kistl.Server.Tests
             Assert.That(ma.Projekte.First(), Is.SameAs(prj2));
         }
         [Test]
+        [Ignore("Case 2629: Using an index setter is currently not implemented in NHibernate")]
         public void Change_Relation_n_m_Set_m_By_Index()
         {
             var prj = ctx.Create<Kistl.App.Projekte.Projekt>();

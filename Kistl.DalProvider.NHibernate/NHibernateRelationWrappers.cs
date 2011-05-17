@@ -211,6 +211,18 @@ namespace Kistl.DalProvider.NHibernate
         {
             return Collection.Cast<IRelationEntry>().GetEnumerator();
         }
+
+        public override TA this[int index]
+        {
+            get
+            {
+                return base[index];
+            }
+            set
+            {
+                throw new InvalidOperationException("Case 2629: Using an index setter is currently not implemented in NHibernate");
+            }
+        }
     }
 
     public class NHibernateBSideListWrapper<TA, TB, TEntry>
@@ -278,6 +290,18 @@ namespace Kistl.DalProvider.NHibernate
         IEnumerator<IRelationEntry> IEnumerable<IRelationEntry>.GetEnumerator()
         {
             return Collection.Cast<IRelationEntry>().GetEnumerator();
+        }
+
+        public override TB this[int index]
+        {
+            get
+            {
+                return base[index];
+            }
+            set
+            {
+                throw new InvalidOperationException("Case 2629: Using an index setter is currently not implemented in NHibernate");
+            }
         }
     }
 }

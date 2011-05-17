@@ -109,7 +109,7 @@ namespace Kistl.DalProvider.Base.RelationWrappers
             base.Remove(ItemFromEntry(oldEntry));
         }
 
-        public TItem this[int index]
+        public virtual TItem this[int index]
         {
             get
             {
