@@ -115,6 +115,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CacheDebuggerViewModelResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Presentables\Calendar\CalendarItemViewModel.cs" />
+    <Compile Include="Presentables\Calendar\DayCalendarViewModel.cs" />
+    <Compile Include="Presentables\Calendar\LedgerItemViewModel.cs" />
+    <Compile Include="Presentables\Calendar\LedgerViewModel.cs" />
+    <Compile Include="Presentables\Calendar\TimeSlotItemViewModel.cs" />
+    <Compile Include="Presentables\Calendar\WeekCalendarViewModel.cs" />
     <Compile Include="Presentables\DataObjectSelectionTaskViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

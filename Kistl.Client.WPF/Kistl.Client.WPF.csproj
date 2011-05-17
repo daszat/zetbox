@@ -145,6 +145,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\Calendar\CalendarDay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Calendar\WeekCalendar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Calendar\CalendarDayHeader.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Calendar\CalendarLedger.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\DefaultHighlightColorDefinitions.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -511,6 +527,18 @@
     </Compile>
     <Compile Include="View\CacheDebuggerDisplay.xaml.cs">
       <DependentUpon>CacheDebuggerDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Calendar\CalendarDay.xaml.cs">
+      <DependentUpon>CalendarDay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Calendar\CalendarDayHeader.xaml.cs">
+      <DependentUpon>CalendarDayHeader.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Calendar\CalendarLedger.xaml.cs">
+      <DependentUpon>CalendarLedger.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Calendar\WeekCalendar.xaml.cs">
+      <DependentUpon>WeekCalendar.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\DocumentManagement\ImageEditor.xaml.cs">
       <DependentUpon>ImageEditor.xaml</DependentUpon>

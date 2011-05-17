@@ -21,6 +21,7 @@
             <converter:InvertedBoolConverter x:Key="InvertedBoolConverter" />
             <converter:BooleanMultiselectToSelectionModeConverter x:Key="BooleanMultiselectToSelectionModeConverter" />
             <converter:ImageConverter x:Key="ImageConverter" />
+            <converter:SystemDrawingConverter x:Key="SystemDrawingConverter" />
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
             <commands:Converter x:Key="CommandConverter" />
             <tk:TypeNameTemplateSelector x:Key="TypeNameTemplateSelector" />

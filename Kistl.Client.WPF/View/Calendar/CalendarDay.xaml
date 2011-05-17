@@ -1,0 +1,92 @@
+﻿<UserControl x:Class="Kistl.Client.WPF.View.Calendar.CalendarDay"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Kistl.Client.WPF.View.Calendar"
+             xmlns:viewmdl="clr-namespace:Kistl.Client.Presentables.Calendar;assembly=Kistl.Client">
+    <Border Background="#E3EFFF"
+            BorderBrush="#A5BFE1"
+            BorderThickness="0,0.5,0,0.5">
+        <Grid x:Name="panelCalendarDay">
+            <ItemsControl ItemsSource="{Binding TimeSlotItems}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="{x:Type viewmdl:TimeSlotItemViewModel}">
+                        <Border Background="{Binding Background}"
+                                BorderBrush="#9493CF"
+                                BorderThickness="0,0,1,1"
+                                Height="22"
+                                HorizontalAlignment="Stretch"
+                                MouseLeftButtonDown="timeslot_MouseLeftButtonDown">
+                            <Grid x:Name="panelTimeSlotItem">
+                                <Border CornerRadius="4,4,4,4"
+                                        BorderThickness="1,1,1,1"
+                                        BorderBrush="#5D8CC9"
+                                        x:Name="item"
+                                        Opacity="0"
+                                        Background="#10000000">
+                                    <TextBlock Text="Neuer Termin"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"
+                                               Foreground="#A39DD8" />
+                                </Border>
+                            </Grid>
+                        </Border>
+                        <DataTemplate.Triggers>
+                            <Trigger Property="IsMouseOver"
+                                     Value="True">
+                                <Setter Property="Opacity"
+                                        Value="1"
+                                        TargetName="item" />
+                            </Trigger>
+                        </DataTemplate.Triggers>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <ItemsControl ItemsSource="{Binding CalendarItems}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas IsItemsHost="True"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="{x:Type viewmdl:CalendarItemViewModel}">
+                        <Border MouseLeftButtonDown="CalendarItem_MouseLeftButtonDown"
+                                CornerRadius="4,4,4,4"
+                                BorderThickness="1,1,1,1"
+                                BorderBrush="#5D8CC9"
+                                Background="{Binding Color}"
+                                Margin="{Binding Position, Converter={StaticResource SystemDrawingConverter}}"
+                                Padding="3"
+                                Height="{Binding Height}"
+                                Width="{Binding Width}"
+                                HorizontalAlignment="Stretch"
+                                x:Name="item">
+                            <Border.Effect>
+                                <DropShadowEffect Opacity="0.5" />
+                            </Border.Effect>
+                            <StackPanel>
+                                <TextBlock Text="{Binding Text}" FontWeight="Bold" />
+                                <TextBlock Text="{Binding FromToText}" />
+                            </StackPanel>
+                        </Border>
+                      <DataTemplate.Triggers>
+                        <DataTrigger Binding="{Binding IsSelected}"
+                                 Value="True">
+                          <Setter Property="BorderThickness"
+                                  Value="3,3,3,3"
+                                  TargetName="item" />
+                          <Setter Property="BorderBrush"
+                                  Value="Black"
+                                  TargetName="item" />
+                        </DataTrigger>
+                      </DataTemplate.Triggers>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
+    </Border>
+</UserControl>

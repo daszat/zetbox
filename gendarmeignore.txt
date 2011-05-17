@@ -123,6 +123,7 @@ M: System.Delegate Kistl.Client.WPF.View.GUI.MultiLineEditorDialog::_CreateDeleg
 
 M: System.Delegate Kistl.Client.WPF.View.SchemaMigration.DestinationPropertyEditor::_CreateDelegate(System.Type,System.String)
 
+M: System.Delegate Kistl.Client.WPF.View.Calendar.WeekCalendar::_CreateDelegate(System.Type,System.String)
 
 
 
