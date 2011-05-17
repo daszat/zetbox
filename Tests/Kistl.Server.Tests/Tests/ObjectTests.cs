@@ -59,7 +59,7 @@ namespace Kistl.Server.Tests
             deleteCtx.GetQuery<Task>().ForEach(obj => deleteCtx.Delete(obj));
             deleteCtx.SubmitChanges();
             deleteCtx.GetQuery<Mitarbeiter>().ForEach(obj => deleteCtx.Delete(obj));
-            deleteCtx.GetQuery<Projekt>().ForEach(obj => deleteCtx.Delete(obj));
+            deleteCtx.GetQuery<Projekt>().ForEach(obj => { obj.Mitarbeiter.Clear(); deleteCtx.Delete(obj); });
             deleteCtx.SubmitChanges();
         }
 

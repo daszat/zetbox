@@ -149,7 +149,7 @@ namespace Kistl.Server.Tests.Security
                 ctx.GetQuery<Kunde>().ForEach(obj => ctx.Delete(obj));
                 ctx.GetQuery<Auftrag>().ForEach(obj => ctx.Delete(obj));
                 ctx.GetQuery<Mitarbeiter>().ForEach(obj => ctx.Delete(obj));
-                ctx.GetQuery<Projekt>().ForEach(obj => ctx.Delete(obj));
+                ctx.GetQuery<Projekt>().ForEach(obj => { obj.Mitarbeiter.Clear(); ctx.Delete(obj); });
                 ctx.SubmitChanges();
             }
         }
