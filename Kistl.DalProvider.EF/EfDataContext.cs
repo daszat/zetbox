@@ -692,7 +692,7 @@ namespace Kistl.DalProvider.Ef
                 return new List<T>(0);
 
             StringBuilder sql = new StringBuilder();
-            sql.AppendFormat("SELECT VALUE e FROM Entities.{0} AS e WHERE e.ExportGuid IN {{Guid'", GetEntityName(iftFactory(typeof(T))));
+            sql.AppendFormat("SELECT VALUE e FROM Entities.[{0}] AS e WHERE e.ExportGuid IN {{Guid'", GetEntityName(iftFactory(typeof(T))));
             sql.Append(String.Join("',Guid'", cache));
             sql.Append("'}");
             return _ctx.CreateQuery<T>(sql.ToString()).ToList();
