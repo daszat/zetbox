@@ -73,7 +73,8 @@ namespace Kistl.DalProvider.Ef
             _implTypeFactory = implTypeFactory;
 
             // Don't understand, but EF needs an warmup on every context
-            var tmp = this.GetQuery<Kistl.App.Base.ObjectClass>().FirstOrDefault();
+            // Attn: use class with no instances in the (test-)database, to avoid loading something into AttachedObjects
+            var tmp = this.GetQuery<ZBox.Basic.Parties.Contact>().FirstOrDefault();
             System.Diagnostics.Debug.WriteLine(tmp != null ? tmp.ToString() : String.Empty);
         }
 

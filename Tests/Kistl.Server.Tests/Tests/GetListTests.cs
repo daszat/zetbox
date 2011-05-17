@@ -185,6 +185,7 @@ namespace Kistl.Server.Tests
         }
 
         [Test]
+        [Ignore("Case 471")]
         public void GetList_With_Single()
         {
             var guiModule = ctx.GetQuery<Kistl.App.Base.Module>().Where(m => m.Name == "GUI").Single();
@@ -193,6 +194,7 @@ namespace Kistl.Server.Tests
         }
 
         [Test]
+        [Ignore("Case 471")]
         public void GetList_Single()
         {
             var guiModule = ctx.GetQuery<Kistl.App.Base.Module>().Single(m => m.Name == "GUI");
