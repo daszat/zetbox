@@ -853,7 +853,8 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
             sb.AppendFormat(@"CREATE TRIGGER [{0}]
 ON {1}
 AFTER UPDATE, INSERT, DELETE AS
-BEGIN", triggerName, FormatSchemaName(tblName));
+BEGIN
+SET NOCOUNT ON", triggerName, FormatSchemaName(tblName));
             sb.AppendLine();
 
             foreach (var tbl in tblList)
@@ -901,7 +902,9 @@ BEGIN", triggerName, FormatSchemaName(tblName));
                 }
             }
 
-            sb.AppendLine("END");
+            sb.AppendLine(@"
+SET NOCOUNT OFF
+END");
             ExecuteNonQuery(sb.ToString());
         }
 
@@ -966,6 +969,7 @@ FROM (", viewName.Schema, viewName.Name);
             Log.DebugFormat("Creating refresh rights procedure for [{0}]", tblName);
             ExecuteNonQuery(string.Format(@"CREATE PROCEDURE {0} (@ID INT = NULL) AS
                     BEGIN
+                        SET NOCOUNT ON
 	                    IF (@ID IS NULL)
 		                    BEGIN
 			                    TRUNCATE TABLE {1}
@@ -976,6 +980,7 @@ FROM (", viewName.Schema, viewName.Name);
 			                    DELETE FROM {1} WHERE ID = @ID
 			                    INSERT INTO {1} ([ID], [Identity], [Right]) SELECT [ID], [Identity], [Right] FROM {2} WHERE [ID] = @ID
 		                    END
+                        SET NOCOUNT OFF
                     END",
                 FormatSchemaName(procName),
                 FormatSchemaName(tblNameRights),
@@ -999,9 +1004,11 @@ FROM (", viewName.Schema, viewName.Name);
             var sb = new StringBuilder();
             sb.AppendFormat("CREATE PROCEDURE {0} (@ID INT = NULL) AS BEGIN", FormatSchemaName(GetQualifiedProcedureName(Kistl.Generator.Construct.SecurityRulesRefreshAllRightsProcedureName())));
             sb.AppendLine();
+            sb.AppendLine("SET NOCOUNT OFF");
             sb.Append(string.Join("\n", refreshProcNames.Select(i => string.Format("EXEC {0} @ID", FormatSchemaName(i))).ToArray()));
             sb.AppendLine();
-            sb.Append("END");
+            sb.AppendLine("SET NOCOUNT ON");
+            sb.AppendLine("END");
 
             ExecuteNonQuery(sb.ToString());
         }
