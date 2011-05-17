@@ -139,16 +139,17 @@ namespace Kistl.Server.Tests.Security
         {
             using (var ctx = scope.Resolve<IKistlServerContext>())
             {
+                ctx.GetQuery<Task>().ForEach(obj => ctx.Delete(obj));
+                ctx.SubmitChanges();
+
                 if (identity1 != null) { var id = ctx.Find<Identity>(identity1.ID); id.Groups.Clear(); ctx.Delete(id); }
                 if (identity2 != null) { var id = ctx.Find<Identity>(identity2.ID); id.Groups.Clear(); ctx.Delete(id); }
                 if (identity3_low != null) { var id = ctx.Find<Identity>(identity3_low.ID); id.Groups.Clear(); ctx.Delete(id); }
 
                 ctx.GetQuery<Kunde>().ForEach(obj => ctx.Delete(obj));
                 ctx.GetQuery<Auftrag>().ForEach(obj => ctx.Delete(obj));
-                ctx.GetQuery<Projekt>().ForEach(obj => { obj.Mitarbeiter.Clear(); obj.Tasks.Clear(); ctx.Delete(obj); });
-                ctx.GetQuery<Task>().ForEach(obj => ctx.Delete(obj));
                 ctx.GetQuery<Mitarbeiter>().ForEach(obj => ctx.Delete(obj));
-
+                ctx.GetQuery<Projekt>().ForEach(obj => ctx.Delete(obj));
                 ctx.SubmitChanges();
             }
         }

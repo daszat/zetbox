@@ -40,6 +40,32 @@ namespace Kistl.API.AbstractConsumerTests.ContextTests
         }
 
         [Test]
+        public void should_remove_one_to_n_reverse()
+        {
+            var ctx = GetContext();
+            var one = ctx.Create<One_to_N_relations_One>();
+            var n1 = ctx.Create<One_to_N_relations_N>();
+            var n2 = ctx.Create<One_to_N_relations_N>();
+
+            one.NSide.Add(n1);
+            one.NSide.Add(n2);
+
+            ctx.SubmitChanges();
+
+            // use a different delete order as in should_remove_one_to_n
+            // this should make no difference
+            ctx.Delete(n1);
+            ctx.Delete(n2);
+            ctx.Delete(one);
+
+            Assert.That(one.ObjectState, Is.EqualTo(DataObjectState.Deleted));
+            Assert.That(n1.ObjectState, Is.EqualTo(DataObjectState.Deleted));
+            Assert.That(n2.ObjectState, Is.EqualTo(DataObjectState.Deleted));
+
+            ctx.SubmitChanges();
+        }
+
+        [Test]
         public void should_remove_n_m()
         {
             var ctx = GetContext();
@@ -51,6 +77,9 @@ namespace Kistl.API.AbstractConsumerTests.ContextTests
             a1.BSide.Add(b2);
 
             ctx.SubmitChanges();
+
+            // TODO: remove the need for this Clear() in EF provider
+            a1.BSide.Clear();
 
             ctx.Delete(a1);
             ctx.Delete(b1);
