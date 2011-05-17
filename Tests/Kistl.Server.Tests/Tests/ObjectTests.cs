@@ -56,9 +56,10 @@ namespace Kistl.Server.Tests
         public override void TearDown()
         {
             var deleteCtx = GetContext();
-            deleteCtx.GetQuery<Mitarbeiter>().ForEach(obj => deleteCtx.Delete(obj));
-            deleteCtx.GetQuery<Projekt>().ForEach(obj => { obj.Mitarbeiter.Clear(); obj.Tasks.Clear(); deleteCtx.Delete(obj); });
             deleteCtx.GetQuery<Task>().ForEach(obj => deleteCtx.Delete(obj));
+            deleteCtx.SubmitChanges();
+            deleteCtx.GetQuery<Mitarbeiter>().ForEach(obj => deleteCtx.Delete(obj));
+            deleteCtx.GetQuery<Projekt>().ForEach(obj => deleteCtx.Delete(obj));
             deleteCtx.SubmitChanges();
         }
 
