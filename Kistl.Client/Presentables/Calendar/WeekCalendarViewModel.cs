@@ -87,10 +87,10 @@ namespace Kistl.Client.Presentables.Calendar
                 {
                     _From = value;
                     _DayItems = null;
+                    LoadItems(); // Get new data
                     OnPropertyChanged("From");
                     OnPropertyChanged("To");
                     OnPropertyChanged("DayItems");
-                    Refresh();
                 }
             }
         }
@@ -127,28 +127,25 @@ namespace Kistl.Client.Presentables.Calendar
 
         private Func<DateTime, DateTime, IEnumerable<CalendarItemViewModel>> _Source = null;
 
-        private DataObjectViewModel _SelectedTermin;
-        public DataObjectViewModel SelectedTermin
+        private DataObjectViewModel _selectedItem;
+        public DataObjectViewModel SelectedItem
         {
             get
             {
-                return _SelectedTermin;
+                return _selectedItem;
             }
             set
             {
-                if (_SelectedTermin != value)
+                if (_selectedItem != value)
                 {
-                    var vivm = FindCalendarItemViewModel(_SelectedTermin);
-                    if (vivm != null)
-                    {
-                        vivm.IsSelected = false;
-                    }
+                    var vivm = FindCalendarItemViewModel(_selectedItem);
+                    if (vivm != null) vivm.IsSelected = false;
 
-                    _SelectedTermin = value;
-                    vivm = FindCalendarItemViewModel(_SelectedTermin);
-                    vivm.IsSelected = true;
+                    _selectedItem = value;
+                    vivm = FindCalendarItemViewModel(_selectedItem);
+                    if(vivm != null) vivm.IsSelected = true;
 
-                    OnPropertyChanged("SelectedTermin");
+                    OnPropertyChanged("SelectedItem");
                 }
             }
         }
@@ -159,31 +156,54 @@ namespace Kistl.Client.Presentables.Calendar
             return DayItems.SelectMany(i => i.CalendarItems.Where(c => c.ObjectViewModel == mdl)).FirstOrDefault();
         }
 
-        public void Refresh()
+        public void UpdateItems()
         {
-            var allTermine = _Source(From, To);
-
+            if (_allItems == null) LoadItemsInternal();
             foreach (var day in DayItems)
             {
-                day.CalendarItems = allTermine
+                day.CalendarItems = _allItems
                     .Where(i => i.From.Date == day.Day);
             }
         }
 
-        public void NewTermin(DateTime dt)
+        public void LoadItems()
         {
-            OnNewTerminCreated(dt);
+            LoadItemsInternal();
+            UpdateItems();
         }
 
-        public delegate void NewTerminCreatedEventHandler(DateTime dt);
-        public event NewTerminCreatedEventHandler NewTerminCreated;
-        public void OnNewTerminCreated(DateTime dt)
+        private IEnumerable<CalendarItemViewModel> _allItems;
+        private void LoadItemsInternal()
         {
-            var temp = NewTerminCreated;
+            _allItems = _Source(From, To);
+        }
+
+
+        public void NewItem(DateTime dt)
+        {
+            var result = new NewItemCreatingEventArgs();
+            OnNewItemCreating(dt, result);
+            UpdateItems();
+            SelectedItem = result.ObjectViewModel;
+        }
+
+        public event NewItemCreatingEventHandler NewItemCreating;
+        public void OnNewItemCreating(DateTime dt, NewItemCreatingEventArgs e)
+        {
+            var temp = NewItemCreating;
             if (temp != null)
             {
-                temp(dt);
+                temp(dt, e);
             }
         }
     }
+
+    public class NewItemCreatingEventArgs : EventArgs
+    {
+        public DataObjectViewModel ObjectViewModel;
+        public CalendarItemViewModel CalendarViewModel;
+    }
+
+    public delegate void NewItemCreatingEventHandler(DateTime dt, NewItemCreatingEventArgs e);
+
 }

@@ -142,7 +142,7 @@ namespace Kistl.Client.Presentables.Calendar
 
         public void NewTermin(DateTime dt)
         {
-            WeekCalendar.NewTermin(dt);
+            WeekCalendar.NewItem(dt);
         }
     }
 }

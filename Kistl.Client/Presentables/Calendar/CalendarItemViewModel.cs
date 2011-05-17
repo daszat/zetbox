@@ -9,25 +9,28 @@ namespace Kistl.Client.Presentables.Calendar
 
     public class CalendarItemViewModel : Kistl.Client.Presentables.ViewModel
     {
-        public new delegate CalendarItemViewModel Factory(IKistlContext dataCtx, DateTime from, DateTime to, string text, string color, DataObjectViewModel obj);
+        public new delegate CalendarItemViewModel Factory(IKistlContext dataCtx, DataObjectViewModel obj, Action<DataObjectViewModel, CalendarItemViewModel> update);
 
-        public CalendarItemViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, DateTime from, DateTime to, string text, string color, DataObjectViewModel obj)
+        public CalendarItemViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, DataObjectViewModel obj, Action<DataObjectViewModel, CalendarItemViewModel> update)
             : base(dependencies, dataCtx)
         {
+            if (obj == null) throw new ArgumentNullException("obj");
+            if (update == null) throw new ArgumentNullException("update");
+
             this.OverlappingWidth = 1.0;
             this.ObjectViewModel = obj;
+            this._update = update;
 
-            this.From = from;
-            this.To = to;
-            this.Text = text;
-            this.Color = color;
+            update(obj, this);
 
             ObjectViewModel.PropertyChanged += obj_PropertyChanged;
         }
 
+        private Action<DataObjectViewModel, CalendarItemViewModel> _update;
+
         void parent_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            switch(e.PropertyName)
+            switch (e.PropertyName)
             {
                 case "ActualWidth":
                     OnPropertyChanged("ActualWidth");
@@ -39,8 +42,11 @@ namespace Kistl.Client.Presentables.Calendar
 
         void obj_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            // TODO: Bruteforce method
-            DayCalendar.WeekCalendar.Refresh();
+            _update(ObjectViewModel, this);
+            OnPropertyChanged("Width");
+            OnPropertyChanged("Height");
+            OnPropertyChanged("Position");
+            if (DayCalendar != null) DayCalendar.WeekCalendar.UpdateItems();
         }
 
         private DayCalendarViewModel _DayCalendar;
@@ -49,6 +55,7 @@ namespace Kistl.Client.Presentables.Calendar
             get { return _DayCalendar; }
             set
             {
+                if (value == null) throw new ArgumentNullException("value");
                 _DayCalendar = value;
                 _DayCalendar.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(parent_PropertyChanged);
             }
@@ -56,10 +63,76 @@ namespace Kistl.Client.Presentables.Calendar
 
         public DataObjectViewModel ObjectViewModel { get; private set; }
 
-        public DateTime From { get; private set; }
-        public DateTime To { get; private set; }
-        public string Text { get; private set; }
-        public string Color { get; private set; }
+        private DateTime _From;
+        public DateTime From
+        {
+            get
+            {
+                return _From;
+            }
+            set
+            {
+                if (_From != value)
+                {
+                    _From = value;
+                    OnPropertyChanged("From");
+                }
+            }
+        }
+
+        private DateTime _To;
+        public DateTime To
+        {
+            get
+            {
+                return _To;
+            }
+            set
+            {
+                if (_To != value)
+                {
+                    _To = value;
+                    OnPropertyChanged("To");
+                }
+            }
+        }
+
+
+        private string _Text;
+        public string Text
+        {
+            get
+            {
+                return _Text;
+            }
+            set
+            {
+                if (_Text != value)
+                {
+                    _Text = value;
+                    OnPropertyChanged("Text");
+                }
+            }
+        }
+
+
+        private string _Color;
+        public string Color
+        {
+            get
+            {
+                return _Color;
+            }
+            set
+            {
+                if (_Color != value)
+                {
+                    _Color = value;
+                    OnPropertyChanged("Color");
+                }
+            }
+        }
+
 
         public string FromToText
         {
