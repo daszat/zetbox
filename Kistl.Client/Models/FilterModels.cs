@@ -228,14 +228,14 @@ namespace Kistl.Client.Models
 
     public class MonthValueFilterModel : FilterModel
     {
-        public static MonthValueFilterModel Create(IFrozenContext frozenCtx, string label,string predicate, bool setDefault)
+        public static MonthValueFilterModel Create(IFrozenContext frozenCtx, string label, IFilterValueSource valueSource, bool setDefault)
         {
             if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
 
             var valMdl = new DateTimeValueModel(label, "", true, false); 
             var mdl = new MonthValueFilterModel();
             mdl.Label = label;
-            mdl.ValueSource = FilterValueSource.FromExpression(predicate);
+            mdl.ValueSource = valueSource;
             mdl.ViewModelType = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_SingleValueFilterViewModel);
             mdl.FilterArguments.Add(new FilterArgumentConfig(
                 valMdl, 
@@ -250,7 +250,7 @@ namespace Kistl.Client.Models
             return mdl;
         }
 
-        public MonthValueFilterModel()
+        protected MonthValueFilterModel()
         {
         }
 

@@ -26,21 +26,7 @@ namespace Kistl.App.GUI
         [Invocation]
         public static void CreateFilterModel(Kistl.App.GUI.MonthFilterConfiguration obj, MethodReturnEventArgs<IFilterModel> e)
         {
-            var mdl = new MonthValueFilterModel();
-            mdl.Label = obj.GetLabel();
-            mdl.Required = obj.Required;
-            mdl.ValueSource = FilterValueSource.FromProperty(obj.Property);
-
-            mdl.ViewModelType = obj.ViewModelDescriptor;
-            mdl.FilterArguments.Add(new FilterArgumentConfig(obj.Property.GetDetachedValueModel(true), /*cfg.ArgumentViewModel ?? */ FrozenContext.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableMonthPropertyViewModel)));
-
-            if (obj.IsCurrentMonthDefault == true)
-            {
-                // Defaults to this month
-                ((DateTimeValueModel)mdl.FilterArguments[0].Value).Value = DateTime.Today.FirstMonthDay();
-            }
-
-            e.Result = mdl;
+            e.Result = MonthValueFilterModel.Create(FrozenContext, obj.GetLabel(), FilterValueSource.FromProperty(obj.Property), obj.IsCurrentMonthDefault ?? false);
         }
 
         [Invocation]
