@@ -289,7 +289,7 @@ namespace Kistl.Client.Presentables
         {
             get
             {
-                if (_nameCache == null) InitialiseToStringCache();
+                InitialiseToStringCache();
                 return _nameCache;
             }
         }
@@ -299,7 +299,7 @@ namespace Kistl.Client.Presentables
         {
             get
             {
-                if (_longNameCache == null) InitialiseToStringCache();
+                InitialiseToStringCache();
                 return _longNameCache;
             }
         }
@@ -321,8 +321,6 @@ namespace Kistl.Client.Presentables
         {
             return DataContext.GetInterfaceType(Object);
         }
-
-
 
         #endregion
 
@@ -463,17 +461,21 @@ namespace Kistl.Client.Presentables
         private void InitialiseToStringCache()
         {
             // update Name
-            _nameCache = String.Format("{0} {1}",
-                _object.ObjectState.ToUserString(),
-                _object.ToString());
-            _longNameCache = String.Format("{0}: {1}",
-                _object.ReadOnlyContext.GetInterfaceType(_object).Type.FullName,
-                _nameCache);
+            if (_nameCache == null)
+            {
+                _nameCache = String.Format("{0} {1}",
+                    _object.ObjectState.ToUserString(),
+                    _object.ToString());
+                _longNameCache = String.Format("{0}: {1}",
+                    _object.ReadOnlyContext.GetInterfaceType(_object).Type.FullName,
+                    _nameCache);
+            }
         }
 
         protected void UpdateToStringCache()
         {
-            InitialiseToStringCache();
+            _nameCache = null;
+            _longNameCache = null;
             OnPropertyChanged("Name");
             OnPropertyChanged("LongName");
         }
