@@ -1,0 +1,14 @@
+/Backup
+/bin
+/Configs/Local
+/DocumentStore/Server
+/Kistl.Server.HttpService/Server
+/Kistl.Server.HttpService/Bootstrapper
+/Kistl.Server.HttpService/Client
+/Kistl.Server.HttpService/Common
+*/obj
+*/bin
+*/Bin
+*/*/obj
+*/*/bin
+/Kistl.Complete.suo
