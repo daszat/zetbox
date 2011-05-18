@@ -20,17 +20,10 @@ namespace Kistl.Client.WPF.CustomControls
     using Kistl.Client.Presentables.ValueViewModels;
 
     /// <summary>
-    /// Interaction logic for LabeledView.xaml
+    /// Interaction logic for LabeledViewHorizontal.xaml
     /// </summary>
     public partial class LabeledViewHorizontal : UserControl, IHasViewModel<ILabeledViewModel>
     {
-        static LabeledViewHorizontal()
-        {
-            UserControl.VerticalContentAlignmentProperty.OverrideMetadata(
-                typeof(LabeledViewHorizontal),
-                new FrameworkPropertyMetadata(VerticalAlignment.Center));
-        }
-
         public LabeledViewHorizontal()
         {
             if (DesignerProperties.GetIsInDesignMode(this)) return;

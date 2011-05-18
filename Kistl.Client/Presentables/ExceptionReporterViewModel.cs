@@ -16,7 +16,7 @@ using Kistl.Client.Presentables.ValueViewModels;
     {
         public new delegate ExceptionReporterViewModel Factory(IKistlContext dataCtx, Exception ex, Bitmap screenShot);
 
-        private readonly Exception exeption;
+        private readonly Exception exception;
         private readonly Bitmap screenShot;
         private readonly IProblemReporter problemReporter;
 
@@ -26,7 +26,7 @@ using Kistl.Client.Presentables.ValueViewModels;
         {
             if (problemReporter == null) throw new ArgumentNullException("problemReporter");
 
-            this.exeption = ex;
+            this.exception = ex;
             this.screenShot = screenShot;
             this.problemReporter = problemReporter;
         }
@@ -55,9 +55,9 @@ using Kistl.Client.Presentables.ValueViewModels;
         {
             get
             {
-                if (exeption != null)
+                if (exception != null)
                 {
-                    return exeption.ToString();
+                    return exception.ToString();
                 }
                 else
                 {
@@ -70,9 +70,9 @@ using Kistl.Client.Presentables.ValueViewModels;
         {
             get
             {
-                if (exeption != null)
+                if (exception != null)
                 {
-                    return exeption.GetInnerMessage();
+                    return exception.GetInnerMessage();
                 }
                 else
                 {
@@ -89,7 +89,22 @@ using Kistl.Client.Presentables.ValueViewModels;
             }
         }
 
-        private ClassValueModel<string> _AdditionalTextModel = new ClassValueModel<string>(ExceptionReporterViewModelResources.AdditionalTextLabel, ExceptionReporterViewModelResources.AdditionalTextDescription, true, false);
+        private ClassValueModel<string> _subjectTextModel = new ClassValueModel<string>(ExceptionReporterViewModelResources.SummaryLabel, ExceptionReporterViewModelResources.SummaryDescription, false, false);
+        private ClassValueViewModel<string> _subjectTextViewModel;
+        public ClassValueViewModel<string> SubjectText
+        {
+            get
+            {
+                if (_subjectTextViewModel == null)
+                {
+                    _subjectTextViewModel = ViewModelFactory.CreateViewModel<ClassValueViewModel<string>.Factory>().Invoke(DataContext, _subjectTextModel);
+                    _subjectTextModel.Value = exception != null ? exception.GetInnerMessage() : String.Empty;
+                }
+                return _subjectTextViewModel;
+            }
+        }
+
+        private ClassValueModel<string> _AdditionalTextModel = new ClassValueModel<string>(ExceptionReporterViewModelResources.AdditionalTextLabel, ExceptionReporterViewModelResources.AdditionalTextDescription, false, false);
         private MultiLineStringValueViewModel _AdditionalTextViewModel;
         public MultiLineStringValueViewModel AdditionalText
         {
@@ -125,7 +140,7 @@ using Kistl.Client.Presentables.ValueViewModels;
 
         public void Report()
         {
-            problemReporter.Report(this.Title, this.AdditionalText.Value, screenShot, exeption);
+            problemReporter.Report(string.IsNullOrEmpty(this.SubjectText.Value) ? this.Title : this.SubjectText.Value, this.AdditionalText.Value, screenShot, exception);
             this.Show = false;
         }
 

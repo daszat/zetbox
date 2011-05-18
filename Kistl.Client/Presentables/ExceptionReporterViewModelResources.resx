@@ -144,4 +144,10 @@
   <data name="Report_Tooltip" xml:space="preserve">
     <value>Report this problem</value>
   </data>
+  <data name="SummaryDescription" xml:space="preserve">
+    <value>Please provide a short summary of the problem</value>
+  </data>
+  <data name="SummaryLabel" xml:space="preserve">
+    <value>Summary</value>
+  </data>
 </root>

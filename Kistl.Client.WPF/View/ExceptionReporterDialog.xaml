@@ -4,44 +4,46 @@
                   xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"
                   xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
                   Title="{Binding Name}"
-                  ResizeMode="CanResize"
-                  Width="500"
-                  Height="400"
+                  ResizeMode="CanResizeWithGrip"
+                  MinWidth="520"
+                  Width="520"
+                  MinHeight="430"
+                  Height="600"
                   Background="{StaticResource MainBackground2}"
                   xmlns:commands="clr-namespace:Kistl.Client.WPF.Commands;assembly=Kistl.Client.WPF.Toolkit"
                   commands:SmartRoutedUICommand.IsCommandSink="True">
-    <DockPanel Margin="5">
-        <TextBlock DockPanel.Dock="Top"
-                   Text="{Binding Title}"
-                   Style="{StaticResource Title}" />
-        <TextBlock DockPanel.Dock="Top"
-                   Text="{Binding HelpText}" />
+  <DockPanel Margin="5">
+    <TextBlock DockPanel.Dock="Top"
+               Text="{Binding Title}"
+               Style="{StaticResource Title}" />
+    <TextBlock DockPanel.Dock="Top"
+               Text="{Binding HelpText}" />
+    <ctrls:LabeledView DockPanel.Dock="Top"
+                       Margin="0 10 0 0"
+                       DataContext="{Binding SubjectText}" />
 
-        <TextBlock DockPanel.Dock="Top"
-                   Margin="0 10 0 0"
-                   Text="{Binding ExceptionMessage}" />
-        <Expander DockPanel.Dock="Top"
-                  Header="{Binding ExceptionDetailsLabel}">
-            <TextBox Text="{Binding ExceptionText, Mode=OneWay}"
-                     MaxHeight="200"
-                     VerticalScrollBarVisibility="Auto"
-                     HorizontalScrollBarVisibility="Auto"
-                     IsReadOnly="True" />
-        </Expander>
+    <UniformGrid DockPanel.Dock="Bottom"
+                 Columns="2"
+                 Height="60">
+      <ctrls:CommandButton CommandViewModel="{Binding ReportCommand}"
+                           Style="{StaticResource ImageButton}"
+                           Margin="5"
+                           IsDefault="True" />
+      <ctrls:CommandButton CommandViewModel="{Binding CancelCommand}"
+                           Style="{StaticResource ImageButton}"
+                           Margin="5"
+                           IsCancel="True" />
+    </UniformGrid>
 
-        <UniformGrid DockPanel.Dock="Bottom"
-                     Columns="2"
-                     Height="60">
-            <ctrls:CommandButton CommandViewModel="{Binding ReportCommand}"
-                                 Style="{StaticResource ImageButton}"
-                                 Margin="5"
-                                 IsDefault="True" />
-            <ctrls:CommandButton CommandViewModel="{Binding CancelCommand}"
-                                 Style="{StaticResource ImageButton}"
-                                 Margin="5"
-                                 IsCancel="True" />
-        </UniformGrid>
+    <Expander DockPanel.Dock="Bottom"
+              Header="{Binding ExceptionDetailsLabel}">
+      <TextBox Text="{Binding ExceptionText, Mode=OneWay}"
+               MaxHeight="200"
+               VerticalScrollBarVisibility="Auto"
+               HorizontalScrollBarVisibility="Auto"
+               IsReadOnly="True" />
+    </Expander>
 
-        <ctrls:LabeledViewHorizontal DataContext="{Binding AdditionalText}" />
-    </DockPanel>
+    <ctrls:LabeledViewHorizontal DataContext="{Binding AdditionalText}" />
+  </DockPanel>
 </ctrls:WindowView>

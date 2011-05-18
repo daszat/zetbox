@@ -140,5 +140,23 @@ namespace Kistl.Client.Presentables {
                 return ResourceManager.GetString("Report_Tooltip", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please provide a short summary of the problem.
+        /// </summary>
+        internal static string SummaryDescription {
+            get {
+                return ResourceManager.GetString("SummaryDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Summary.
+        /// </summary>
+        internal static string SummaryLabel {
+            get {
+                return ResourceManager.GetString("SummaryLabel", resourceCulture);
+            }
+        }
     }
 }
