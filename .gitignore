@@ -6,9 +6,8 @@
 /Kistl.Server.HttpService/Bootstrapper
 /Kistl.Server.HttpService/Client
 /Kistl.Server.HttpService/Common
-*/obj
-*/bin
-*/Bin
-*/*/obj
-*/*/bin
 /Kistl.Complete.suo
+obj
+bin
+*.csproj.user
+Bin
