@@ -214,7 +214,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
                 if (_saveAndCloseCommand == null)
                     _saveAndCloseCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>()
                         .Invoke(DataContext, this, WorkspaceViewModelResources.SaveAndCloseCommand_Name, WorkspaceViewModelResources.SaveAndCloseCommand_Tooltip,
-                        () => { Save(); Close(); }, CanSave);
+                        () => { SaveAndClose(); }, CanSave);
 
                 return _saveAndCloseCommand;
             }
@@ -256,16 +256,35 @@ namespace Kistl.Client.Presentables.ObjectEditor
 
         public void Save()
         {
-            var loader = ViewModelFactory.CreateDelayedTask(this, () =>
+            ViewModelFactory.TriggerDelayedTask(this, () =>
             {
-                var errors = UpdateErrors().ToArray();
-                if (errors.Length == 0)
+                SaveDelayed();
+            });
+        }
+
+        public void SaveAndClose()
+        {
+            ViewModelFactory.TriggerDelayedTask(this, () =>
+            {
+                if (SaveDelayed())
                 {
-                    DataContext.SubmitChanges();
+                    Close();
                 }
             });
-            loader.Trigger();
         }
+
+        private bool SaveDelayed()
+        {
+            var errors = UpdateErrors().ToArray();
+            if (errors.Length == 0)
+            {
+                DataContext.SubmitChanges();
+                return true;
+            }
+
+            return false;
+        }
+        
 
         #endregion
 
