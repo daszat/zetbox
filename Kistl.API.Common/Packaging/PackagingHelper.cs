@@ -51,7 +51,7 @@ namespace Kistl.App.Packaging
 
             // TODO: Add Module to Constraint - or should that not be changable by other modules?
             // All Property Contstraints
-            AddMetaObjects(result, () => ctx.GetQuery<Constraint>().Where(i => i.ConstrainedProperty.Module.ID == moduleID).ToList().AsQueryable() // local sorting because of GetInterfaceType
+            AddMetaObjects(result, () => ctx.GetQuery<Kistl.App.Base.Constraint>().Where(i => i.ConstrainedProperty.Module.ID == moduleID).ToList().AsQueryable() // local sorting because of GetInterfaceType
                 .OrderBy(i => i.ConstrainedProperty.ObjectClass.Name).ThenBy(i => i.ConstrainedProperty.Name).ThenBy(i => ctx.GetInterfaceType(i).Type.Name).ThenBy(i => i.ExportGuid));
 
             // InstanceContstraints and Property Relation entries of UniqueConstraints

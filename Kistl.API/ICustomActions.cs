@@ -37,4 +37,10 @@ namespace Kistl.API
     public sealed class Invocation : Attribute
     {
     }
+
+    [AttributeUsage(AttributeTargets.Method, Inherited = false, AllowMultiple = false)]
+    public sealed class Constraint : Attribute
+    {
+    }
+    
 }

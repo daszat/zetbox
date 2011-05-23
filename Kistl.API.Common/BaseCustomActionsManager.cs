@@ -156,6 +156,10 @@ namespace Kistl.App.Extensions
                                         _reflectedMethods[key] = new List<MethodInfo>() { m };
                                     }
                                 }
+                                else if (m.GetCustomAttributes(typeof(Kistl.API.Constraint), false).Length != 0)
+                                {
+                                    // TODO: Check if Invoking Constraint is valid
+                                }
                                 else
                                 {
                                     Log.Warn(string.Format("Found public method {0}.{1} which has no Invocation attribute. Ignoring this method", t.FullName, m.Name));

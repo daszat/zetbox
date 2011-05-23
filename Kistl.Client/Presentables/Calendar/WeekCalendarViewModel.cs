@@ -172,10 +172,10 @@ namespace Kistl.Client.Presentables.Calendar
             UpdateItems();
         }
 
-        private IEnumerable<CalendarItemViewModel> _allItems;
+        private List<CalendarItemViewModel> _allItems;
         private void LoadItemsInternal()
         {
-            _allItems = _Source(From, To);
+            _allItems = _Source(From, To).ToList();
         }
 
 
@@ -183,12 +183,25 @@ namespace Kistl.Client.Presentables.Calendar
         {
             var result = new NewItemCreatingEventArgs();
             OnNewItemCreating(dt, result);
+
+            if (result.CalendarViewModel == null || result.ObjectViewModel == null)
+            {
+                // Abort
+                return;
+            }
+
+            if (_allItems == null) LoadItemsInternal();
+            _allItems.Add(result.CalendarViewModel);
             UpdateItems();
             SelectedItem = result.ObjectViewModel;
         }
 
+        /// <summary>
+        /// Fired when a new Items should be created. The receiver is responsible for createing the new Item plus the corresponding Calender Item ViewModel.
+        /// If either CalendarViewModel or ObjectViewModel of the result is null, the operation will be aborted.
+        /// </summary>
         public event NewItemCreatingEventHandler NewItemCreating;
-        public void OnNewItemCreating(DateTime dt, NewItemCreatingEventArgs e)
+        protected void OnNewItemCreating(DateTime dt, NewItemCreatingEventArgs e)
         {
             var temp = NewItemCreating;
             if (temp != null)
