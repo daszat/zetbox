@@ -28,6 +28,10 @@
       <Module>Kistl.DalProvider.NHibernate.Generator.NhGeneratorProvider, Kistl.DalProvider.NHibernate.Generator</Module>
       <Module>Kistl.DalProvider.Client.Generator.ClientGeneratorProvider, Kistl.DalProvider.Client.Generator</Module>
       <Module>Kistl.DalProvider.Ef.Generator.EfGeneratorProvider, Kistl.DalProvider.Ef.Generator</Module>
+
+      <!-- application specific modules -->
+      <Module>Ini50.App.Server.Ini50Module, Ini50.App.Server</Module>
+      <Module>Ini50.App.Server.Ini50Service+Module, Ini50.App.Server</Module>
     </Modules>
     <ClientFilesLocations>
       <Location Name="Exe">P:\Kistl\bin\Debug\Kistl.Client.WPF.exe</Location>
