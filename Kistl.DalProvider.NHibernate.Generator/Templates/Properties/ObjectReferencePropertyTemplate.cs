@@ -108,12 +108,14 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
         {
             if (list != null)
             {
+                var proxyName = "this.Proxy." + name;
+
                 if (relDataTypeExportable)
                 {
-                    list.Add("Serialization.ObjectReferencePropertySerialization", Templates.Serialization.SerializerType.ImportExport, moduleNamespace, name, sourceMember, targetMember, targetGuidMember);
+                    list.Add("Serialization.ObjectReferencePropertySerialization", Templates.Serialization.SerializerType.ImportExport, moduleNamespace, name, proxyName, targetMember, targetGuidMember);
                 }
                 list.Add("Serialization.ObjectReferencePropertySerialization",
-                    Templates.Serialization.SerializerType.Service, moduleNamespace, name, sourceMember, targetMember, targetGuidMember);
+                    Templates.Serialization.SerializerType.Service, moduleNamespace, name, proxyName, targetMember, targetGuidMember);
             }
         }
     }
