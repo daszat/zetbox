@@ -70,7 +70,6 @@ namespace Kistl.API.Common
             catch (Exception ex)
             {
                 Logging.Log.Error("Failed starting service", ex);
-                throw;
             }
         }
 
@@ -90,7 +89,6 @@ namespace Kistl.API.Common
             catch (Exception ex)
             {
                 Logging.Log.Error("Failed stopping service", ex);
-                throw;
             }
         }
         #endregion
