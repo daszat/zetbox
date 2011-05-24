@@ -243,6 +243,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Templates\Serialization\ObjectReferencePropertySerialization.Designer.cs">
+      <DependentUpon>ObjectReferencePropertySerialization.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="EfGeneratorStructure.cd" />
@@ -326,6 +331,10 @@
     <None Include="Templates\Serialization\CompoundObjectSerialization.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>CompoundObjectSerialization.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\Serialization\ObjectReferencePropertySerialization.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>ObjectReferencePropertySerialization.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>

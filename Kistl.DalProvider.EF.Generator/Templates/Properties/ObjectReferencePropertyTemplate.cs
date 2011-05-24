@@ -11,17 +11,17 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.Properties
 
     public partial class ObjectReferencePropertyTemplate
     {
-        protected virtual void AddSerialization(Templates.Serialization.SerializationMembersList list, string sourceMember, string targetMember, string targetGuidMember)
+        protected virtual void AddSerialization(Templates.Serialization.SerializationMembersList list, string sourceMember, string targetMember, string targetGuidMember, string clsFullName, string assocName, string targetRoleName)
         {
             if (list != null)
             {
                 if (relDataTypeExportable)
                 {
                     list.Add("Serialization.ObjectReferencePropertySerialization",
-                        Templates.Serialization.SerializerType.ImportExport, moduleNamespace, name, sourceMember, targetMember, targetGuidMember);
+                        Templates.Serialization.SerializerType.ImportExport, moduleNamespace, name, sourceMember, targetMember, targetGuidMember, clsFullName, assocName, targetRoleName);
                 }
                 list.Add("Serialization.ObjectReferencePropertySerialization",
-                    Templates.Serialization.SerializerType.Service, moduleNamespace, name, sourceMember, targetMember, targetGuidMember);
+                    Templates.Serialization.SerializerType.Service, moduleNamespace, name, sourceMember, targetMember, targetGuidMember, clsFullName, assocName, targetRoleName);
                 if (eagerLoading)
                 {
                     list.Add("Serialization.EagerObjectLoadingSerialization",

@@ -141,7 +141,7 @@
         }
 
 <%
-    AddSerialization(serializationList, name, fkBackingName, fkGuidBackingName);
+    AddSerialization(serializationList, name, fkBackingName, fkGuidBackingName, referencedImplementation, associationName, targetRoleName);
 
     if (!String.IsNullOrEmpty(positionPropertyName))
     {
