@@ -5,8 +5,8 @@ namespace Kistl.API.Server.Tests
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    
     using Autofac;
+    using Kistl.API.Common;
     using Kistl.API.Configuration;
     using Kistl.API.Server.Mocks;
     using NUnit.Framework;

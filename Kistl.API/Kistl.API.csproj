@@ -94,6 +94,7 @@
     <Compile Include="SerializableExpression.cs" />
     <Compile Include="SerializableType.cs" />
     <Compile Include="Utils\ExpressionDumper.cs" />
+    <Compile Include="Utils\FuncCache.cs" />
     <Compile Include="Utils\ReadOnlyObservableProjection.cs" />
     <Compile Include="Utils\ReadOnlyProjection.cs" />
     <Compile Include="IIdentitySource.cs" />

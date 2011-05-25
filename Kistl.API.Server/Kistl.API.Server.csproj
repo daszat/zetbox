@@ -96,7 +96,6 @@
     <Compile Include="ServerApiModule.cs" />
     <Compile Include="QueryTranslatorProvider.cs" />
     <Compile Include="IKistlServerContext.cs" />
-    <Compile Include="IMetaDataResolver.cs" />
     <Compile Include="ISchemaProvider.cs" />
     <Compile Include="IServerObjectHandlerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

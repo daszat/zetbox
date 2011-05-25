@@ -70,12 +70,6 @@ namespace Kistl.Server
                 .SingleInstance();
 
             moduleBuilder
-                .RegisterType<CachingMetaDataResolver>()
-                .As<CachingMetaDataResolver>()
-                .As<IMetaDataResolver>()
-                .SingleInstance();
-
-            moduleBuilder
                 .RegisterType<ThreadPrincipalResolver>()
                 .As<IIdentityResolver>()
                 .InstancePerLifetimeScope();

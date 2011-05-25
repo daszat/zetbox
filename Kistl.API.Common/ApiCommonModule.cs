@@ -17,6 +17,12 @@ namespace Kistl.API.Common
                 .RegisterType<ServiceControlManager>()
                 .As<IServiceControlManager>()
                 .SingleInstance();
+
+            builder
+                .RegisterType<CachingMetaDataResolver>()
+                .As<CachingMetaDataResolver>()
+                .As<IMetaDataResolver>()
+                .SingleInstance();
         }
     }
 }

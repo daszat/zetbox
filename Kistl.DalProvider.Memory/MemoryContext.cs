@@ -19,13 +19,15 @@ namespace Kistl.DalProvider.Memory
 
         // private static readonly List<IPersistenceObject> emptylist = new List<IPersistenceObject>(0);
         private readonly Func<IFrozenContext> _lazyCtx;
+        private readonly FuncCache<Type, MemoryImplementationType> _implTypeFactoryCache;
         private readonly MemoryImplementationType.MemoryFactory _implTypeFactory;
 
         public MemoryContext(InterfaceType.Factory iftFactory, Func<IFrozenContext> lazyCtx, MemoryImplementationType.MemoryFactory implTypeFactory)
             : base(iftFactory)
         {
             _lazyCtx = lazyCtx;
-            _implTypeFactory = implTypeFactory;
+            _implTypeFactoryCache = new FuncCache<Type, MemoryImplementationType>(t=>implTypeFactory(t));
+            _implTypeFactory = t => _implTypeFactoryCache.Invoke(t);
         }
 
         public override int SubmitChanges()

@@ -12,6 +12,7 @@ namespace Kistl.DalProvider.Ef
     using System.Reflection;
     using System.Text;
     using Kistl.API;
+    using Kistl.API.Common;
     using Kistl.API.Configuration;
     using Kistl.API.Server;
     using Kistl.API.Utils;

@@ -9,6 +9,7 @@ namespace Kistl.API.Server
     using System.IO;
     using System.Linq;
     using System.Text;
+    using Kistl.API.Common;
     using Kistl.API.Configuration;
     using Kistl.API.Utils;
     using Kistl.App.Base;
@@ -21,9 +22,10 @@ namespace Kistl.API.Server
     {
         protected readonly Identity identityStore;
         protected readonly IMetaDataResolver metaDataResolver;
-        protected KistlConfig config;
-        protected InterfaceType.Factory iftFactory;
-        protected Func<IFrozenContext> lazyCtx;
+        protected readonly FuncCache<Type, InterfaceType> iftFactoryCache;
+        protected readonly InterfaceType.Factory iftFactory;
+        protected readonly Func<IFrozenContext> lazyCtx;
+        protected readonly KistlConfig config;
 
         /// <summary>
         /// Initializes a new instance of the BaseKistlDataContext class using the specified <see cref="Identity"/>.
@@ -42,7 +44,8 @@ namespace Kistl.API.Server
             this.metaDataResolver = metaDataResolver;
             this.identityStore = identity;
             this.config = config;
-            this.iftFactory = iftFactory;
+            this.iftFactoryCache = new FuncCache<Type, InterfaceType>(r => iftFactory(r));
+            this.iftFactory = t => iftFactoryCache.Invoke(t);
             this.lazyCtx = lazyCtx;
         }
 

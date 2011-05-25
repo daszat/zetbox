@@ -6,14 +6,12 @@ namespace Kistl.API.Server.Tests
     using System.Linq;
     using System.Linq.Expressions;
     using System.Text;
-
+    using Autofac;
+    using Kistl.API.Common;
+    using Kistl.API.Configuration;
     using Kistl.API.Server.Mocks;
     using Kistl.App.Base;
-
     using NUnit.Framework;
-
-    using Autofac;
-    using Kistl.API.Configuration;
 
     internal class TestQueryTranslatorProvider<T> : QueryTranslatorProvider<T>
     {

@@ -1,5 +1,5 @@
 
-namespace Kistl.API.Server
+namespace Kistl.API.Common
 {
     using System;
     using System.Collections.Generic;

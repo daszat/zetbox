@@ -19,6 +19,7 @@ namespace Kistl.API
         : IKistlContext, IZBoxContextInternals
     {
         protected readonly ContextCache<int> objects;
+        protected readonly FuncCache<Type, InterfaceType> iftFactoryCache;
         private readonly InterfaceType.Factory _iftFactory;
         protected InterfaceType.Factory IftFactory { get { return _iftFactory; } }
 
@@ -43,7 +44,8 @@ namespace Kistl.API
         protected BaseMemoryContext(InterfaceType.Factory iftFactory)
         {
             this.objects = new ContextCache<int>(this, item => item.ID);
-            this._iftFactory = iftFactory;
+            this.iftFactoryCache = new FuncCache<Type, InterfaceType>(t => iftFactory(t));
+            this._iftFactory = t => iftFactoryCache.Invoke(t);
             KistlContextDebuggerSingleton.Created(this);
         }
 

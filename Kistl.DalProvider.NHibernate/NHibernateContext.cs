@@ -10,6 +10,7 @@ namespace Kistl.DalProvider.NHibernate
     using global::NHibernate;
     using global::NHibernate.Linq;
     using Kistl.API;
+    using Kistl.API.Common;
     using Kistl.API.Configuration;
     using Kistl.API.Server;
     using Kistl.API.Utils;
