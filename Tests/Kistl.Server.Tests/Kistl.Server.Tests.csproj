@@ -123,6 +123,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Kistl.API.Common\Kistl.API.Common.csproj">
+      <Project>{9677AE11-CB92-4F0A-A248-87A21586F0DA}</Project>
+      <Name>Kistl.API.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Kistl.API.Server\Kistl.API.Server.csproj">
       <Project>{08902397-B9CA-43DA-8C8D-27DCEC097611}</Project>
       <Name>Kistl.API.Server</Name>

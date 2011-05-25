@@ -21,6 +21,7 @@ namespace Kistl.DalProvider.NHibernate.Tests
         {
             base.SetupBuilder(builder);
             builder.RegisterModule(new Kistl.API.ApiModule());
+            builder.RegisterModule(new Kistl.API.Common.ApiCommonModule());
             builder.RegisterModule(new Kistl.API.Server.ServerApiModule());
             builder.RegisterModule(new Kistl.Server.ServerModule());
             builder.RegisterModule(new Kistl.Objects.InterfaceModule());
