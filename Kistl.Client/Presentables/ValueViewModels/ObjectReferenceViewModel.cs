@@ -333,6 +333,12 @@ namespace Kistl.Client.Presentables.ValueViewModels
         protected override void SetValueToModel(DataObjectViewModel value)
         {
             ValueModel.Value = value != null ? value.Object : null;
+            EnsureValuePossible(value);
+            OnPropertyChanged("Value");
+        }
+
+        private void EnsureValuePossible(DataObjectViewModel value)
+        {
             if (_possibleValues != null)
             {
                 // Add if not found
@@ -341,7 +347,6 @@ namespace Kistl.Client.Presentables.ValueViewModels
                     _possibleValues.Add(value);
                 }
             }
-            OnPropertyChanged("Value");
         }
 
         private bool _valueCacheInititalized = false;
@@ -359,6 +364,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             if (obj != null)
             {
                 _valueCache = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ValueModel.Value);
+                EnsureValuePossible(_valueCache);
             }
             _valueCacheInititalized = true;
         }
