@@ -260,6 +260,40 @@ namespace Kistl.Client.Models
         }
     }
 
+    public class YearValueFilterModel : FilterModel
+    {
+        public static YearValueFilterModel Create(IFrozenContext frozenCtx, string label, IFilterValueSource valueSource, bool setDefault)
+        {
+            if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
+
+            var valMdl = new NullableStructValueModel<int>(label, "", true, false);
+            var mdl = new YearValueFilterModel();
+            mdl.Label = label;
+            mdl.ValueSource = valueSource;
+            mdl.ViewModelType = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_SingleValueFilterViewModel);
+            mdl.FilterArguments.Add(new FilterArgumentConfig(
+                valMdl,
+                /*cfg.ArgumentViewModel ?? */ frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableValuePropertyModel_Int)));
+
+            if (setDefault)
+            {
+                // Defaults to this month
+                valMdl.Value = DateTime.Today.FirstYearDay().Year;
+            }
+
+            return mdl;
+        }
+
+        protected YearValueFilterModel()
+        {
+        }
+
+        protected override string GetPredicate()
+        {
+            return string.Format("{0}.Year == @0", ValueSource.Expression);
+        }
+    }
+
     public class RangeFilterModel : FilterModel
     {
         public static RangeFilterModel Create<T>(IFrozenContext frozenCtx, string label, string predicate)
