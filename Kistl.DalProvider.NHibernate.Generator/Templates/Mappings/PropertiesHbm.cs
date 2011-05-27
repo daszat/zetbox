@@ -46,7 +46,8 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
                         this.WriteObjects("        <many-to-one ", nameAttr, " ", columnAttr, " ", classAttr, " unique=\"true\" ");
                         if (prop.EagerLoading)
                         {
-                            this.WriteObjects("fetch=\"join\" ");
+                            // TODO: re-think and re-test eagerloading
+                            //this.WriteObjects("fetch=\"join\" ");
                         }
                         this.WriteLine("/>");
                     }
@@ -65,7 +66,8 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
                         this.WriteObjects("        <set ", nameAttr, " ");
                         if (prop.EagerLoading)
                         {
-                            this.WriteObjects("lazy=\"false\" fetch=\"join\" ");
+                            // TODO: re-think and re-test eagerloading
+                            //this.WriteObjects("lazy=\"false\" fetch=\"join\" ");
                         }
                         else
                         {
@@ -90,7 +92,8 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
                         this.WriteObjects("        <many-to-one ", nameAttr, " ", columnAttr, " ", classAttr, " ");
                         if (prop.EagerLoading)
                         {
-                            this.WriteObjects("fetch=\"join\" ");
+                            // TODO: re-think and re-test eagerloading
+                            //this.WriteObjects("fetch=\"join\" ");
                         }
                         if (inverse)
                         {
@@ -142,7 +145,8 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
             this.WriteObjects("        <set ", nameAttr, " ", tableAttr, " inverse=\"true\" cascade=\"all-delete-orphan\" ");
             if (prop.EagerLoading)
             {
-                this.WriteObjects("lazy=\"false\" fetch=\"join\" ");
+                // TODO: re-think and re-test eagerloading
+                //this.WriteObjects("lazy=\"false\" fetch=\"join\" ");
             }
             else
             {
