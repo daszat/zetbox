@@ -239,7 +239,6 @@
     <Compile Include="Presentables\ILabeledViewModel.cs" />
     <Compile Include="Presentables\IViewModelFactory.cs" />
     <Compile Include="Presentables\IMultipleInstancesManager.cs" />
-    <Compile Include="Presentables\IViewModelWithIcon.cs" />
     <Compile Include="Presentables\KistlBase\ApplicationViewModel.cs" />
     <Compile Include="Presentables\KistlBase\AssemblyViewModel.cs" />
     <Compile Include="Presentables\KistlBase\AssemblyReferenceViewModel.cs" />

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Kistl.Client.Presentables.ValueViewModels
 {
-    public class DataObjectViewModelProxy : IViewModelWithIcon
+    public class DataObjectViewModelProxy
     {
         public DataObjectViewModelProxy()
         {
@@ -13,13 +13,9 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
         public DataObjectViewModel Object { get; set; }
 
-        #region IViewModelWithIcon Members
-
         public App.GUI.Icon Icon
         {
             get { return Object != null ? Object.Icon : null; }
         }
-
-        #endregion
     }
 }

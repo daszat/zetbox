@@ -25,7 +25,7 @@ namespace Kistl.Client.Models
 
             if (parameter is BoolParameter && !parameter.IsList)
             {
-                return new NullableStructValueModel<bool>(lb, parameter.Description, allowNullInput, false);
+                return new BoolValueModel(lb, parameter.Description, allowNullInput, false);
             }
             else if (parameter is DateTimeParameter && !parameter.IsList)
             {
@@ -289,6 +289,23 @@ namespace Kistl.Client.Models
                 }
             }
         }
+    }
+
+    public class BoolValueModel : NullableStructValueModel<bool>, IBoolValueModel
+    {
+        public BoolValueModel(string label, string description, bool allowNullInput, bool isReadOnly)
+            : base(label, description, allowNullInput, isReadOnly)
+        {
+        }
+
+        public Icon FalseIcon { get; set; }
+        public string FalseLabel { get; set; }
+
+        public Icon NullIcon { get; set; }
+        public string NullLabel { get; set; }
+
+        public Icon TrueIcon { get; set; }
+        public string TrueLabel { get; set; }
     }
 
     public class ClassValueModel<TValue> : ValueModel<TValue>

@@ -244,23 +244,6 @@ namespace Kistl.Client.Presentables
         private readonly ViewModel _progressDisplayer;
         protected ViewModel ProgressDisplayer { get { return _progressDisplayer; } }
 
-        private Kistl.App.GUI.Icon _Icon = null;
-        public Kistl.App.GUI.Icon Icon
-        {
-            get
-            {
-                return _Icon;
-            }
-            set
-            {
-                if (_Icon != value)
-                {
-                    _Icon = value;
-                    OnPropertyChanged("Icon");
-                }
-            }
-        }
-
         public override string Name
         {
             get { return Label; }

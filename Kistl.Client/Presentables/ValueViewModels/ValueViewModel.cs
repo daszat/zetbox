@@ -1145,6 +1145,94 @@ namespace Kistl.Client.Presentables.ValueViewModels
         public NullableBoolPropertyViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, IValueModel mdl)
             : base(dependencies, dataCtx, mdl)
         {
+            BoolModel = (IBoolValueModel)mdl;
+            usingDefinedPresentation =
+                   BoolModel.FalseIcon != null || !string.IsNullOrEmpty(BoolModel.FalseLabel)
+                || BoolModel.TrueIcon != null || !string.IsNullOrEmpty(BoolModel.TrueLabel)
+                || BoolModel.NullIcon != null || !string.IsNullOrEmpty(BoolModel.NullLabel);
+        }
+
+        public IBoolValueModel BoolModel { get; private set; }
+
+        protected readonly bool usingDefinedPresentation;
+
+        protected override void NotifyValueChanged()
+        {
+            base.NotifyValueChanged();
+            OnPropertyChanged("Icon");
+        }
+
+        public override string FormattedValue
+        {
+            get
+            {
+                if (!usingDefinedPresentation)
+                {
+                    if (base.Value == true)
+                    {
+                        return ValueViewModelResources.True;
+                    }
+                    else if (base.Value == false)
+                    {
+                        return ValueViewModelResources.False;
+                    }
+                    else
+                    {
+                        return ValueViewModelResources.Null;
+                    }
+                }
+                else
+                {
+                    if (base.Value == true)
+                    {
+                        return BoolModel.TrueLabel;
+                    }
+                    else if (base.Value == false)
+                    {
+                        return BoolModel.FalseLabel;
+                    }
+                    else
+                    {
+                        return BoolModel.NullLabel;
+                    }
+                }
+            }
+            set
+            {
+                throw new NotSupportedException("Parsing boolen in different languages is not supported now");
+            }
+        }
+
+        private Icon _customIcon;
+        public override Icon Icon
+        {
+            get
+            {
+                if (_customIcon != null)
+                {
+                    return _customIcon;
+                }
+                else if (base.Value == true)
+                {
+                    return BoolModel.TrueIcon;
+                }
+                else if (base.Value == false)
+                {
+                    return BoolModel.FalseIcon;
+                }
+                else
+                {
+                    return BoolModel.NullIcon;
+                }
+            }
+            set
+            {
+                if (_customIcon != value)
+                {
+                    _customIcon = value;
+                    OnPropertyChanged("Icon");
+                }
+            }
         }
     }
 

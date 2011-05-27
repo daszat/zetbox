@@ -26,7 +26,7 @@ namespace Kistl.Client.Models
 
             if (retParam is BoolParameter && !retParam.IsList)
             {
-                return new NullableStructMethodResultModel<bool>(obj, method);
+                return new BoolMethodResultModel(obj, method);
             }
             else if (retParam is DateTimeParameter && !retParam.IsList)
             {
@@ -350,6 +350,27 @@ namespace Kistl.Client.Models
                 }
             }
         }
+    }
+
+
+    public class BoolMethodResultModel : NullableStructMethodResultModel<bool>, IBoolValueModel
+    {
+        public BoolMethodResultModel(INotifyingObject obj, Method m)
+            : base(obj, m)
+        {
+        }
+
+        public Icon FalseIcon { get { return null; } }
+
+        public string FalseLabel { get { return null; } }
+
+        public Icon NullIcon { get { return null; } }
+
+        public string NullLabel { get { return null; } }
+
+        public Icon TrueIcon { get { return null; } }
+
+        public string TrueLabel { get { return null; } }
     }
 
     public class ObjectReferenceMethodResultModel : ClassMethodResultModel<IDataObject>, IObjectReferenceValueModel

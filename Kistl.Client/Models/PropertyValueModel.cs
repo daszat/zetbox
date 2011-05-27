@@ -30,7 +30,7 @@ namespace Kistl.Client.Models
             }
             else if (prop is BoolProperty)
             {
-                return new NullableStructPropertyValueModel<bool>(obj, prop);
+                return new BoolPropertyValueModel(obj, (BoolProperty)prop);
             }
             else if (prop is DoubleProperty)
             {
@@ -951,6 +951,47 @@ namespace Kistl.Client.Models
                     this.Value = DateTime.MinValue.Add(value.Value);
                 }
             }
+        }
+    }
+
+    public class BoolPropertyValueModel : NullableStructPropertyValueModel<bool>, IBoolValueModel
+    {
+        protected readonly BoolProperty bProp;
+
+        public BoolPropertyValueModel(INotifyingObject obj, BoolProperty prop)
+            : base(obj, prop)
+        {
+            bProp = prop;
+        }
+
+        public Icon FalseIcon
+        {
+            get { return bProp.FalseIcon; }
+        }
+
+        public string FalseLabel
+        {
+            get { return bProp.FalseLabel; }
+        }
+
+        public Icon NullIcon
+        {
+            get { return bProp.NullIcon; }
+        }
+
+        public string NullLabel
+        {
+            get { return bProp.NullLabel; }
+        }
+
+        public Icon TrueIcon
+        {
+            get { return bProp.TrueIcon; }
+        }
+
+        public string TrueLabel
+        {
+            get { return bProp.TrueLabel; }
         }
     }
 }

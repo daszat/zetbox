@@ -23,7 +23,7 @@ namespace Kistl.Client.Presentables
     /// Proxies a whole IDataObject
     /// </summary>
     public class DataObjectViewModel
-        : ViewModel, IDataErrorInfo, IViewModelWithIcon
+        : ViewModel, IDataErrorInfo
     {
         public new delegate DataObjectViewModel Factory(IKistlContext dataCtx, IDataObject obj);
 
@@ -485,7 +485,7 @@ namespace Kistl.Client.Presentables
         /// Override this to present a custom icon
         /// </summary>
         /// <returns>an <see cref="Icon"/> describing the desired icon</returns>
-        public virtual Icon Icon
+        public override Icon Icon
         {
             get
             {
@@ -501,6 +501,14 @@ namespace Kistl.Client.Presentables
                     }
                 }
                 return _iconCache;
+            }
+            set
+            {
+                if (_iconCache != null)
+                {
+                    _iconCache = value;
+                    OnPropertyChanged("Icon");
+                }
             }
         }
 

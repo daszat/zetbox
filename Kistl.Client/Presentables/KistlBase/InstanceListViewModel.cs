@@ -34,7 +34,7 @@ namespace Kistl.Client.Presentables.KistlBase
     /// </summary>
     [ViewModelDescriptor]
     public class InstanceListViewModel
-        : ViewModel, IViewModelWithIcon, ILabeledViewModel, IRefreshCommandListener
+        : ViewModel, ILabeledViewModel, IRefreshCommandListener
     {
         public new delegate InstanceListViewModel Factory(IKistlContext dataCtx, Func<IKistlContext> workingCtxFactory, ObjectClass type, Func<IQueryable> qry);
 
@@ -923,7 +923,7 @@ namespace Kistl.Client.Presentables.KistlBase
         }
 
         /// <returns>the default icon of this <see cref="DataType"/></returns>
-        public Kistl.App.GUI.Icon Icon
+        public override Kistl.App.GUI.Icon Icon
         {
             get
             {

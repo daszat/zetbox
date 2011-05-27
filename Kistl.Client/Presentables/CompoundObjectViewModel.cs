@@ -15,7 +15,7 @@ namespace Kistl.Client.Presentables
     using Kistl.Client.Presentables.ValueViewModels;
     
     public class CompoundObjectViewModel 
-        : ViewModel, IViewModelWithIcon
+        : ViewModel
     {
         public new delegate CompoundObjectViewModel Factory(IKistlContext dataCtx, ICompoundObject obj);
 
@@ -95,11 +95,6 @@ namespace Kistl.Client.Presentables
         public override string Name
         {
             get { return ""; }
-        }
-
-        public App.GUI.Icon Icon
-        {
-            get { return null; }
         }
     }
 }

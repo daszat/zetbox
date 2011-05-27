@@ -69,6 +69,18 @@ namespace Kistl.Client.Models
         DateTimeStyles DateTimeStyle { get; }
     }
 
+    public interface IBoolValueModel : IValueModel<bool?>
+    {
+        Kistl.App.GUI.Icon FalseIcon { get; }
+        string FalseLabel { get; }
+
+        Kistl.App.GUI.Icon NullIcon { get; }
+        string NullLabel { get; }
+
+        Kistl.App.GUI.Icon TrueIcon { get; }
+        string TrueLabel { get; }
+    }
+
     public interface IObjectReferenceValueModel : IValueModel<IDataObject>
     {
         ObjectClass ReferencedClass { get; }

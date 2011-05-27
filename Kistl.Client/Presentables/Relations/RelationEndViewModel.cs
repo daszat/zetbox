@@ -38,7 +38,7 @@ namespace Kistl.Client.Presentables.Relations
 
         public ObjectReferenceViewModel RelatedClass { get; private set; }
 
-        public NullableStructValueViewModel<bool> HasOrderPersisted { get; private set; }
+        public NullableBoolPropertyViewModel HasOrderPersisted { get; private set; }
 
         #endregion
 

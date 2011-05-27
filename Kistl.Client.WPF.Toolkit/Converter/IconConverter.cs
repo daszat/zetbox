@@ -45,9 +45,9 @@ namespace Kistl.Client.WPF.Converter
                     IDataObject obj = (IDataObject)value;
                     icon = obj.GetObjectClass(FrozenContext).DefaultIcon;
                 }
-                else if (value is Kistl.Client.Presentables.IViewModelWithIcon)
+                else if (value is Kistl.Client.Presentables.ViewModel)
                 {
-                    icon = ((Kistl.Client.Presentables.IViewModelWithIcon)value).Icon;
+                    icon = ((Kistl.Client.Presentables.ViewModel)value).Icon;
                 }
 
                 if (icon == null)

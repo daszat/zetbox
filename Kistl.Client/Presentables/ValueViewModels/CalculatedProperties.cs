@@ -19,7 +19,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
         private class CalculatedProperty<TModel> : ICalculatedProperty
         {
             public string Key { get; set; }
-            public ValueModel<TModel> Model { get; set; }
+            public IValueModel<TModel> Model { get; set; }
             public Kistl.Client.Presentables.ViewModel ViewModel { get; set; }
             public Func<TModel> Calculate { get; set; }
 
@@ -50,8 +50,48 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
             CalculatedProperty<Nullable<T>> p = new CalculatedProperty<Nullable<T>>();
             p.Calculate = calc;
-            p.Model = new NullableStructValueModel<T>(label, tooltip, true, true);
-            p.ViewModel = _vmf.CreateViewModel<NullableStructValueViewModel<T>.Factory>().Invoke(_ctx, p.Model);
+            // And now: The exceptions
+            if (typeof(T) == typeof(DateTime))
+            {
+                throw new NotSupportedException("Use AddDateTime instead");
+            }
+            else if (typeof(T) == typeof(bool))
+            {
+                throw new NotSupportedException("Use AddBool instead");
+            }
+            else
+            {
+                p.Model = new NullableStructValueModel<T>(label, tooltip, true, true);
+                p.ViewModel = _vmf.CreateViewModel<NullableStructValueViewModel<T>.Factory>().Invoke(_ctx, p.Model);
+            }
+
+            p.UpdateValue();
+            _properties[key] = p;
+        }
+        public void AddBool(string key, string label, string tooltip, Func<Nullable<bool>> calc)
+        {
+            if (string.IsNullOrEmpty(key)) throw new ArgumentNullException("key");
+            if (string.IsNullOrEmpty(label)) throw new ArgumentNullException("label");
+            if (calc == null) throw new ArgumentNullException("calc");
+
+            CalculatedProperty<Nullable<bool>> p = new CalculatedProperty<Nullable<bool>>();
+            p.Calculate = calc;
+            p.Model = new BoolValueModel(label, tooltip, true, true);
+            p.ViewModel = _vmf.CreateViewModel<NullableBoolPropertyViewModel.Factory>().Invoke(_ctx, p.Model);
+
+            p.UpdateValue();
+            _properties[key] = p;
+        }
+        public void AddDateTime(string key, string label, string tooltip, Func<Nullable<DateTime>> calc)
+        {
+            if (string.IsNullOrEmpty(key)) throw new ArgumentNullException("key");
+            if (string.IsNullOrEmpty(label)) throw new ArgumentNullException("label");
+            if (calc == null) throw new ArgumentNullException("calc");
+
+            CalculatedProperty<Nullable<DateTime>> p = new CalculatedProperty<Nullable<DateTime>>();
+            p.Calculate = calc;
+            p.Model = new DateTimeValueModel(label, tooltip, true, true);
+            p.ViewModel = _vmf.CreateViewModel<NullableDateTimePropertyViewModel.Factory>().Invoke(_ctx, p.Model);
 
             p.UpdateValue();
             _properties[key] = p;

@@ -142,7 +142,7 @@ namespace Kistl.Client.Presentables
             Type t;
             if (param is BoolParameter && !param.IsList)
             {
-                t = typeof(NullableStructValueViewModel<bool>);
+                t = typeof(NullableBoolPropertyViewModel);
             }
             else if (param is DateTimeParameter && !param.IsList)
             {

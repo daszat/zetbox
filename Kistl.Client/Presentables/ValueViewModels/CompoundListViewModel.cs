@@ -208,21 +208,17 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
     }
 
-    public class CompoundObjectViewModelProxy : IViewModelWithIcon
+    public class CompoundObjectViewModelProxy
     {
         public CompoundObjectViewModelProxy()
         {
         }
 
         public CompoundObjectViewModel Object { get; set; }
-        #region IViewModelWithIcon Members
-
         public App.GUI.Icon Icon
         {
             get { return Object != null ? Object.Icon : null; }
         }
-
-        #endregion
     }
 
     /// <summary>

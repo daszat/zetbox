@@ -101,7 +101,7 @@ namespace Kistl.App.Extensions
 
                     foreach (var key in _reflectedMethods.Where(i => !_attachedMethods.ContainsKey(i.Key)).Select(i => i.Key))
                     {
-                        Log.Error(string.Format("Couldn't find any method for Invocation {0}", key));
+                        Log.Warn(string.Format("Couldn't find any method for Invocation {0}", key));
                     }
 
                     Log.TraceTotalMemory("After BaseCustomActionsManager.Init()");
@@ -204,8 +204,7 @@ namespace Kistl.App.Extensions
                 }
                 catch (Exception ex)
                 {
-                    Log.Error("Exception in CreateInvokeInfosForObjectClasses", ex);
-                    throw;
+                    Log.Warn("Exception in CreateInvokeInfosForObjectClasses", ex);
                 }
             }
         }
@@ -243,7 +242,7 @@ namespace Kistl.App.Extensions
             }
             else
             {
-                Log.ErrorFormat("Cannot find Type {0}\n", implTypeName);
+                Log.WarnFormat("Cannot find Type {0}\n", implTypeName);
             }
         }
 
@@ -369,7 +368,7 @@ namespace Kistl.App.Extensions
                 EventInfo ei = implType.FindEvent(eventName);
                 if (ei == null)
                 {
-                    Log.ErrorFormat("CLR Event {0} not found", eventName);
+                    Log.WarnFormat("CLR Event {0} not found", eventName);
                     return;
                 }
 
@@ -377,7 +376,7 @@ namespace Kistl.App.Extensions
             }
             catch (Exception ex)
             {
-                Log.Error(string.Format("Exception in CreateInvokeInfo: type: {0}, method: {1}", implType.FullName, clrMethod), ex);
+                Log.Warn(string.Format("Exception in CreateInvokeInfo: type: {0}, method: {1}", implType.FullName, clrMethod), ex);
             }
         }
         #endregion

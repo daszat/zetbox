@@ -254,7 +254,7 @@ namespace Kistl.Client.Presentables
         
         #endregion
 
-        #region ColorManagement
+        #region ColorManagement/Icon
         /// <summary>
         /// Override in custom ViewModels to provide an information about hightlighting
         /// </summary>
@@ -263,6 +263,23 @@ namespace Kistl.Client.Presentables
             get
             {
                 return null;
+            }
+        }
+
+        private Icon _icon;
+        public virtual Icon Icon
+        {
+            get
+            {
+                return _icon;
+            }
+            set
+            {
+                if (_icon != value)
+                {
+                    _icon = value;
+                    OnPropertyChanged("Icon");
+                }
             }
         }
         #endregion

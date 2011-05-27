@@ -10,7 +10,7 @@ using Kistl.Client.Presentables.ValueViewModels;
 namespace Kistl.Client.ASPNET.Toolkit.View
 {
     [ControlLocation("~/View/NullableBoolValueView.ascx")]
-    public abstract class NullableBoolValueView : ModelUserControl<NullableStructValueViewModel<bool>>
+    public abstract class NullableBoolValueView : ModelUserControl<NullableBoolPropertyViewModel>
     {
         protected abstract RadioButton rbTrueCtrl { get; }
         protected abstract RadioButton rbFalseCtrl { get; }
