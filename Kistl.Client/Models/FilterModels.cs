@@ -188,7 +188,8 @@ namespace Kistl.Client.Models
 
     public class SingleValueFilterModel : FilterModel
     {
-        public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, string predicate)
+
+        public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, string predicate, Guid enumDef)
         {
             if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
 
@@ -196,12 +197,56 @@ namespace Kistl.Client.Models
             {
                 Label = label,
                 ValueSource = FilterValueSource.FromExpression(predicate),
-                Operator = FilterOperators.Contains,
+                Operator = FilterOperators.Equals,
                 ViewModelType = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_SingleValueFilterViewModel)
             };
             fmdl.FilterArguments.Add(new FilterArgumentConfig(
-                new ClassValueModel<string>(label, "", true, false),
-                frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_ReferencePropertyModel_String)));
+                new EnumerationValueModel(label, "", true, false, frozenCtx.FindPersistenceObject<Enumeration>(enumDef)),
+                frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableValuePropertyModel_Enum)));
+            return fmdl;
+        }
+
+        public static SingleValueFilterModel Create<T>(IFrozenContext frozenCtx, string label, string predicate)
+        {
+            if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
+
+            var fmdl = new SingleValueFilterModel()
+            {
+                Label = label,
+                ValueSource = FilterValueSource.FromExpression(predicate),
+                Operator = FilterOperators.Equals,
+                ViewModelType = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_SingleValueFilterViewModel)
+            };
+
+            ViewModelDescriptor vDesc = null;
+            BaseValueModel mdl = null;
+            if (typeof(T) == typeof(decimal))
+            {
+                vDesc = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableValuePropertyModel_Decimal);
+                mdl = new NullableStructValueModel<decimal>(label, "", true, false);
+            }
+            else if (typeof(T) == typeof(int))
+            {
+                vDesc = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableValuePropertyModel_Int);
+                mdl = new NullableStructValueModel<int>(label, "", true, false);
+            }
+            else if (typeof(T) == typeof(double))
+            {
+                vDesc = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableValuePropertyModel_Double);
+                mdl = new NullableStructValueModel<double>(label, "", true, false);
+            }
+            else if (typeof(T) == typeof(string))
+            {
+                vDesc = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_ReferencePropertyModel_String);
+                mdl = new ClassValueModel<string>(label, "", true, false);
+                fmdl.Operator = FilterOperators.Contains;
+            }
+            else
+            {
+                throw new NotSupportedException(string.Format("Singlevalue filters of Type {0} are not supported yet", typeof(T).Name));
+            }
+
+            fmdl.FilterArguments.Add(new FilterArgumentConfig(mdl, vDesc));
             return fmdl;
         }
 
