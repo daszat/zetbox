@@ -1138,6 +1138,16 @@ namespace Kistl.Client.Presentables.ValueViewModels
         }
     }
 
+    public class NullableBoolPropertyViewModel : NullableStructValueViewModel<bool>
+    {
+        public new delegate NullableBoolPropertyViewModel Factory(IKistlContext dataCtx, IValueModel mdl);
+
+        public NullableBoolPropertyViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, IValueModel mdl)
+            : base(dependencies, dataCtx, mdl)
+        {
+        }
+    }
+
     public class NullableMonthPropertyViewModel
         : NullableDateTimePropertyViewModel
     {
