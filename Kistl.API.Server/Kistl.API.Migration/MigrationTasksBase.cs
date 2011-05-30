@@ -6,6 +6,7 @@ namespace Kistl.API.Migration
     using System.Linq;
     using System.Text;
     using Kistl.API.Server;
+    using Kistl.API.Utils;
     using Kistl.App.Base;
     using ZBox.App.SchemaMigration;
 
@@ -120,24 +121,25 @@ namespace Kistl.API.Migration
                 return;
             }
 
-            Log.InfoFormat("Migrating {0} to {1}", tbl.Name, tbl.DestinationObjectClass.Name);
-
-            // ------------------- Build columns ------------------- 
-            var mappedColumns = tbl.SourceColumn
-                .Where(c => c.DestinationProperty.Count > 0)
-                .OrderBy(c => c.Name)
-                .ToList();
-            // Ref Cols
-            var referringCols = mappedColumns.Where(c => c.References != null).ToList();
-
-            // ------------------- Migrate ------------------- 
-            if (referringCols.Count == 0 && (additional_joins == null || additional_joins.Length == 0))
+            using (Log.InfoTraceMethodCallFormat("TableBaseMigration", "{0} to {1}", tbl.Name, tbl.DestinationObjectClass.Name))
             {
-                TableBaseSimpleMigration(tbl, nullConverter, mappedColumns);
-            }
-            else
-            {
-                TableBaseComplexMigration(tbl, nullConverter, mappedColumns, referringCols, additional_joins);
+                // ------------------- Build columns ------------------- 
+                var mappedColumns = tbl.SourceColumn
+                    .Where(c => c.DestinationProperty.Count > 0)
+                    .OrderBy(c => c.Name)
+                    .ToList();
+                // Ref Cols
+                var referringCols = mappedColumns.Where(c => c.References != null).ToList();
+
+                // ------------------- Migrate ------------------- 
+                if (referringCols.Count == 0 && (additional_joins == null || additional_joins.Length == 0))
+                {
+                    TableBaseSimpleMigration(tbl, nullConverter, mappedColumns);
+                }
+                else
+                {
+                    TableBaseComplexMigration(tbl, nullConverter, mappedColumns, referringCols, additional_joins);
+                }
             }
         }
 
