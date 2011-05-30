@@ -545,22 +545,29 @@ namespace Kistl.DalProvider.NHibernate
             if (proxy == null)
                 return null;
 
-            var item = (NHibernatePersistenceObject)_attachedObjectsByProxy.Lookup(GetImplementationType(proxy.ZBoxWrapper).ToInterfaceType(), proxy);
+            var ift = GetImplementationType(proxy.ZBoxWrapper).ToInterfaceType();
+            var item = (NHibernatePersistenceObject)_attachedObjectsByProxy.Lookup(ift, proxy);
             if (item == null)
             {
                 // re-load proxy to avoid aliasing issues from unloaded proxies
                 if (proxy.ID > Kistl.API.Helper.INVALIDID)
                 {
                     proxy = (IProxyObject)_nhSession.Load(proxy.ZBoxProxy, proxy.ID);
+                    item = (NHibernatePersistenceObject)ContainsObject(ift, proxy.ID);
                 }
-                item = (NHibernatePersistenceObject)Activator.CreateInstance(proxy.ZBoxWrapper, lazyCtx, proxy);
-                if (proxy.ID == Kistl.API.Helper.INVALIDID)
+
+                if (item == null)
                 {
-                    AttachAsNew(item);
-                }
-                else
-                {
-                    item = (NHibernatePersistenceObject)Attach(item);
+                    item = (NHibernatePersistenceObject)Activator.CreateInstance(proxy.ZBoxWrapper, lazyCtx, proxy);
+
+                    if (proxy.ID == Kistl.API.Helper.INVALIDID)
+                    {
+                        AttachAsNew(item);
+                    }
+                    else
+                    {
+                        item = (NHibernatePersistenceObject)Attach(item);
+                    }
                 }
             }
             return item;
