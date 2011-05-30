@@ -55,7 +55,8 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
                     {
                         this.WriteObjects("        <one-to-one ", nameAttr, " ", classAttr,
                             " constrained=\"false\" ", // constrained must be false, because else the reference is not optional(!)
-                            prop.EagerLoading ? "fetch=\"join\" " : String.Empty,
+                            // TODO: re-think and re-test eagerloading
+                            //prop.EagerLoading ? "fetch=\"join\" " : String.Empty,
                             "property-ref=\"" + (otherEnd.Navigator != null ? otherEnd.Navigator.Name : "(no nav)") + "\" />");
                     }
                     break;
