@@ -239,6 +239,8 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
 
         public string GetViewDefinition(TableRef view)
         {
+            if (view == null) return null;
+
             var views = db.GetSchema(OleDbMetaDataCollectionNames.Views, new string[] { null, null, view.Name });
             if (views.Rows.Count != 1)
             {
@@ -366,6 +368,8 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
 
         public string GetProcedureDefinition(ProcRef proc)
         {
+            if (proc == null) return null;
+
             var procs = db.GetSchema(OleDbMetaDataCollectionNames.Procedures, new string[] { null, null, proc.Name });
             if (procs.Rows.Count != 1)
             {
