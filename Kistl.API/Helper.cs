@@ -1161,6 +1161,11 @@ namespace Kistl.API
         {
             return new DateTime(dt.Year, 1, 1);
         }
+        public static DateTime LastMonthDay(this DateTime dt)
+        {
+            return dt.FirstMonthDay().AddMonths(1).AddDays(-1);
+        }
+
         public static int GetAge(this DateTime birthday)
         {
             return GetAge(birthday, DateTime.Today);
