@@ -36,6 +36,43 @@ namespace Kistl.Server
         /// </summary>
         private ILifetimeScope container;
 
+        public void AnalyzeDatabase(string connectionName, TextWriter output)
+        {
+            using (Log.InfoTraceMethodCall("AnalyzeDatabase", connectionName))
+            using (var subContainer = container.BeginLifetimeScope())
+            {
+                var config = subContainer.Resolve<KistlConfig>();
+                var connectionString = config.Server.GetConnectionString(connectionName);
+                var schemaProvider = subContainer.ResolveNamed<ISchemaProvider>(connectionString.SchemaProvider);
+                schemaProvider.Open(connectionString.ConnectionString);
+                output.WriteLine("# Tables");
+                foreach (var table in schemaProvider.GetTableNames().OrderBy(t => t.Name))
+                {
+                    output.WriteLine(" * {0}", table);
+                }
+                output.WriteLine("# Views");
+                foreach (var view in schemaProvider.GetViewNames().OrderBy(v => v.Name))
+                {
+                    output.WriteLine(" * {0}", view);
+                    foreach (var line in schemaProvider.GetViewDefinition(view).Split("\n\r".ToCharArray(), StringSplitOptions.RemoveEmptyEntries))
+                    {
+                        output.WriteLine(" > {0}", line);
+                    }
+                    output.WriteLine();
+                }
+                output.WriteLine("# Procedures");
+                foreach (var proc in schemaProvider.GetProcedureNames().OrderBy(p => p.Name))
+                {
+                    output.WriteLine(" * {0}", proc);
+                    foreach (var line in schemaProvider.GetProcedureDefinition(proc).Split("\n\r".ToCharArray(), StringSplitOptions.RemoveEmptyEntries))
+                    {
+                        output.WriteLine(" > {0}", line);
+                    }
+                    output.WriteLine();
+                }
+            }
+        }
+
         public void Export(string file, string[] names)
         {
             using (Log.InfoTraceMethodCallFormat("Export", "file=[{0}],names=[{1}]", file, String.Join(";", names ?? new string[] { })))

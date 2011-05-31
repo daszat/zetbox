@@ -291,6 +291,11 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
                 .Select(rd => new TableRef(CurrentConnection.Database, rd.GetString(0), rd.GetString(1)));
         }
 
+        public override string GetViewDefinition(TableRef view)
+        {
+            throw new NotImplementedException();
+        }
+
         public override void CreateTable(TableRef tblName, IEnumerable<Column> cols)
         {
             if (cols == null)

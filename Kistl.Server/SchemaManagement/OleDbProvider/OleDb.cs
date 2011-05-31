@@ -36,6 +36,8 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
                 throw new InvalidOperationException("Database already opened");
             if (string.IsNullOrEmpty(connectionString))
                 throw new ArgumentNullException("connectionString");
+            if (IntPtr.Size == 8)
+                throw new InvalidOperationException("Cannot open MDB in 64bit process, since there is no 64bit OLEDB driver (as of 2011-05-31)");
 
             currentConnectionString = connectionString;
             db = new OleDbConnection(currentConnectionString);
@@ -224,14 +226,26 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
                 yield return GetQualifiedTableName((string)tbl["TABLE_NAME"]);
             }
         }
+
         public IEnumerable<TableRef> GetViewNames()
         {
             QueryLog.Debug("GetSchema(VIEWS)");
-            var tables = db.GetSchema(OleDbMetaDataCollectionNames.Tables, new string[] { null, null, null, "VIEW" });
-            foreach (DataRow tbl in tables.Rows)
+            var views = db.GetSchema(OleDbMetaDataCollectionNames.Views);
+            foreach (DataRow tbl in views.Rows)
             {
                 yield return GetQualifiedTableName((string)tbl["TABLE_NAME"]);
             }
+        }
+
+        public string GetViewDefinition(TableRef view)
+        {
+            var views = db.GetSchema(OleDbMetaDataCollectionNames.Views, new string[] { null, null, view.Name });
+            if (views.Rows.Count != 1)
+            {
+                throw new InvalidOperationException(string.Format("Did not get exactly one result for View {0}", view));
+            }
+            var def = views.Rows[0]["VIEW_DEFINITION"];
+            return def.ToString();
         }
 
         private class DataType
@@ -334,6 +348,31 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
             {
                 yield return (string)col["COLUMN_NAME"];
             }
+        }
+
+        public ProcRef GetQualifiedProcedureName(string procName)
+        {
+            return new ProcRef(String.Empty, "dbo", procName);
+        }
+
+        public IEnumerable<ProcRef> GetProcedureNames()
+        {
+            var procs = db.GetSchema(OleDbMetaDataCollectionNames.Procedures);
+            foreach (DataRow row in procs.Rows)
+            {
+                yield return GetQualifiedProcedureName((string)row["PROCEDURE_NAME"]);
+            }
+        }
+
+        public string GetProcedureDefinition(ProcRef proc)
+        {
+            var procs = db.GetSchema(OleDbMetaDataCollectionNames.Procedures, new string[] { null, null, proc.Name });
+            if (procs.Rows.Count != 1)
+            {
+                throw new InvalidOperationException(string.Format("Did not get exactly one result for Procedure {0}", proc));
+            }
+            var def = procs.Rows[0]["PROCEDURE_TYPE"] + Environment.NewLine + procs.Rows[0]["PROCEDURE_DEFINITION"];
+            return def.ToString();
         }
 
         private void ExecuteNonQuery(string nonQueryFormat, params object[] args)
@@ -747,16 +786,6 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
 
         /// <summary>Not supported.</summary>
         void ISchemaProvider.EnsureInfrastructure()
-        {
-            throw new NotSupportedException();
-        }
-
-        IEnumerable<ProcRef> ISchemaProvider.GetProcedureNames()
-        {
-            throw new NotSupportedException();
-        }
-
-        ProcRef ISchemaProvider.GetQualifiedProcedureName(string procName)
         {
             throw new NotSupportedException();
         }

@@ -3,20 +3,20 @@ namespace Kistl.Server.Service
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Reflection;
     using System.Text;
-
     using Autofac;
     using Autofac.Configuration;
     using Autofac.Integration.Wcf;
     using Kistl.API;
+    using Kistl.API.Common;
     using Kistl.API.Configuration;
     using Kistl.API.Server;
     using Kistl.API.Utils;
     using Kistl.App.Extensions;
     using Kistl.App.Packaging;
-    using Kistl.API.Common;
 
     /// <summary>
     /// Mainprogramm
@@ -119,6 +119,9 @@ namespace Kistl.Server.Service
                             }},
                         { "syncidentities", "synchronices local and domain users with Kistl Identities",
                             v => { if (v != null) { actions.Add((c, args) => c.Resolve<IServer>().SyncIdentities()); } }
+                            },
+                        { "analyze=", "analyzes the configured database",
+                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<IServer>().AnalyzeDatabase(v, File.CreateText("analyzeReport.txt"))); } }
                             },
                         { "help", "prints this help", 
                             v => { if ( v != null) { PrintHelpAndExit(); } } 

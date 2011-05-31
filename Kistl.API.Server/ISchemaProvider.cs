@@ -509,6 +509,7 @@ namespace Kistl.API.Server
         bool CheckTableExists(TableRef tblName);
         IEnumerable<TableRef> GetTableNames();
         IEnumerable<TableRef> GetViewNames();
+        string GetViewDefinition(TableRef view);
 
         void CreateTable(TableRef tblName, IEnumerable<Column> cols);
         void CreateTable(TableRef tblName, bool idAsIdentityColumn);
@@ -572,6 +573,7 @@ namespace Kistl.API.Server
 
         ProcRef GetQualifiedProcedureName(string procName);
         IEnumerable<ProcRef> GetProcedureNames();
+        string GetProcedureDefinition(ProcRef proc);
         bool CheckProcedureExists(ProcRef procName);
         void DropProcedure(ProcRef procName);
 

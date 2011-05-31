@@ -1,9 +1,11 @@
 namespace Kistl.API.Server
 {
     using System;
+    using System.IO;
 
     public interface IServer
     {
+        void AnalyzeDatabase(string connectionName, TextWriter output);
         void CheckSchema(bool withRepair);
         void CheckSchema(string file, bool withRepair);
         void CheckSchemaFromCurrentMetaData(bool withRepair);

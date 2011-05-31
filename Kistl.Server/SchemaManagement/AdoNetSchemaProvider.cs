@@ -336,6 +336,7 @@ namespace Kistl.Server.SchemaManagement
 
         public abstract IEnumerable<TableRef> GetTableNames();
         public abstract IEnumerable<TableRef> GetViewNames();
+        public abstract string GetViewDefinition(TableRef view);
 
         public abstract void CreateTable(TableRef tblName, IEnumerable<Column> cols);
 
@@ -452,6 +453,10 @@ namespace Kistl.Server.SchemaManagement
         }
 
         public abstract IEnumerable<ProcRef> GetProcedureNames();
+        public string GetProcedureDefinition(ProcRef proc)
+        {
+            throw new NotImplementedException();
+        }
         public abstract bool CheckProcedureExists(ProcRef procName);
         public abstract void DropProcedure(ProcRef procName);
 

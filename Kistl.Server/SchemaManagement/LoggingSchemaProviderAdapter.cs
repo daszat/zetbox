@@ -133,6 +133,11 @@ namespace Kistl.Server.SchemaManagement
         {
             return _provider.GetViewNames();
         }
+        
+        public string GetViewDefinition(TableRef view)
+        {
+            return _provider.GetViewDefinition(view);
+        }
 
         public ProcRef GetQualifiedProcedureName(string procName)
         {
@@ -142,6 +147,11 @@ namespace Kistl.Server.SchemaManagement
         public IEnumerable<ProcRef> GetProcedureNames()
         {
             return _provider.GetProcedureNames();
+        }
+
+        public string GetProcedureDefinition(ProcRef proc)
+        {
+            return _provider.GetProcedureDefinition(proc);
         }
 
         public bool CheckColumnExists(TableRef tblName, string colName)
