@@ -9,6 +9,7 @@
       <Database Name="Stammdaten_KO_src" Schema="OLEDB" Provider="">Provider=Microsoft.Jet.OLEDB.4.0;Data Source=F:\DB_Statistik_BE\Stammdaten_KO.mdb</Database>
       <Database Name="Statisik_src" Schema="OLEDB" Provider="">Provider=Microsoft.Jet.OLEDB.4.0;Data Source=F:\DB_Statistik_BE\Statistik_BE.mdb</Database>
       <Database Name="Statisik_AKT" Schema="OLEDB" Provider="">Provider=Microsoft.Jet.OLEDB.4.0;Data Source=F:\DB_Statistik_BE\Statistik_AKT.mdb</Database>
+      <Database Name="Stammdaten_FE" Schema="OLEDB" Provider="">Provider=Microsoft.Jet.OLEDB.4.0;Data Source=F:\Datenbanken_FE\Stammdaten_FE.mdb</Database>
     </ConnectionStrings>
     <DocumentStore>DocumentStore\Server\</DocumentStore>
     <CodeGenWorkingPath>bin\CodeGenNext</CodeGenWorkingPath>

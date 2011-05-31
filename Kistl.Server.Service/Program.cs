@@ -121,7 +121,7 @@ namespace Kistl.Server.Service
                             v => { if (v != null) { actions.Add((c, args) => c.Resolve<IServer>().SyncIdentities()); } }
                             },
                         { "analyze=", "analyzes the configured database",
-                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<IServer>().AnalyzeDatabase(v, File.CreateText("analyzeReport.txt"))); } }
+                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<IServer>().AnalyzeDatabase(v, File.CreateText(string.Format("{0} Report.txt", v)))); } }
                             },
                         { "help", "prints this help", 
                             v => { if ( v != null) { PrintHelpAndExit(); } } 
@@ -193,10 +193,10 @@ namespace Kistl.Server.Service
                         Log.Info("Waiting for console input to shutdown");
                         Console.WriteLine("Server started, press the anykey to exit");
                         Console.ReadKey();
-                        
+
                         Log.Info("Shutting down");
                         wcfServer.Stop();
-                        if(scm != null) scm.Stop();
+                        if (scm != null) scm.Stop();
                     }
                 }
                 Log.Info("Exiting");
