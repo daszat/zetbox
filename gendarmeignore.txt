@@ -5,6 +5,7 @@ M: System.Type System.Linq.Dynamic.ClassFactory::CreateDynamicClass(System.Linq.
 M: System.String System.Linq.Dynamic.ExpressionParser::GetTypeName(System.Type)
 M: System.Boolean Kistl.API.Utils.OptionSet::ParseBundledValue(System.String,System.String,Kistl.API.Utils.OptionContext)
 M: System.String Kistl.API.Utils.OptionSet::GetArgumentName(System.Int32,System.Int32,System.String)
+# no concern here:
 
 R: Gendarme.Rules.Performance.AvoidRepetitiveCallsToPropertiesRule
 # The rule warn if virtual, or unlikely to be inline-able, property getters are called several times by a method.
