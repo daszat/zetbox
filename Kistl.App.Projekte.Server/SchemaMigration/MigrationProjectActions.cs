@@ -33,55 +33,58 @@ namespace ZBox.App.SchemaMigration
         {
             foreach (var s in obj.StagingDatabases)
             {
-                var connectionString = _cfg.Server.GetConnectionString(s.ConnectionStringKey);
-                if (string.IsNullOrEmpty(connectionString.ConnectionString)) throw new InvalidOperationException("Source ConnectionString is empty");
-                if (string.IsNullOrEmpty(connectionString.SchemaProvider)) throw new InvalidOperationException("Source Provider is empty");
-                ISchemaProvider src = _scope.ResolveNamed<ISchemaProvider>(connectionString.SchemaProvider);
-                src.Open(connectionString.ConnectionString);
-
-                var destTbls = s.SourceTables
-                    .ToDictionary(k => k.Name);
-
-                // foreach table in src
-                // TODO: And views!!
-                foreach (var tbl in src.GetTableNames().ToList().Union(src.GetViewNames().ToList()))
+                using (Log.InfoTraceMethodCall("UpdateFromSourceSchema", s.Description))
                 {
-                    if (tbl.Schema != s.Schema) continue;
+                    var connectionString = _cfg.Server.GetConnectionString(s.ConnectionStringKey);
+                    if (string.IsNullOrEmpty(connectionString.ConnectionString)) throw new InvalidOperationException("Source ConnectionString is empty");
+                    if (string.IsNullOrEmpty(connectionString.SchemaProvider)) throw new InvalidOperationException("Source Provider is empty");
+                    ISchemaProvider src = _scope.ResolveNamed<ISchemaProvider>(connectionString.SchemaProvider);
+                    src.Open(connectionString.ConnectionString);
 
-                    Log.InfoFormat("reading table {0}", tbl);
-                    SourceTable destTbl;
-                    if (!destTbls.ContainsKey(tbl.Name))
-                    {
-                        destTbl = obj.Context.Create<SourceTable>();
-                        destTbl.Name = tbl.Name;
-                        s.SourceTables.Add(destTbl);
-                    }
-                    else
-                    {
-                        destTbl = destTbls[tbl.Name];
-                    }
-
-                    var cols = src.GetTableColumns(tbl);
-                    var destCols = obj.Context.GetQuery<SourceColumn>()
-                        .Where(i => i.SourceTable == destTbl)
+                    var destTbls = s.SourceTables
                         .ToDictionary(k => k.Name);
 
-                    foreach (var col in cols)
+                    // foreach table in src
+                    // TODO: And views!!
+                    foreach (var tbl in src.GetTableNames().ToList().Union(src.GetViewNames().ToList()))
                     {
-                        SourceColumn destCol;
-                        if (!destCols.ContainsKey(col.Name))
+                        if (tbl.Schema != s.Schema) continue;
+
+                        Log.InfoFormat("reading table {0}", tbl);
+                        SourceTable destTbl;
+                        if (!destTbls.ContainsKey(tbl.Name))
                         {
-                            destCol = obj.Context.Create<SourceColumn>();
-                            destCol.Name = col.Name;
-                            destTbl.SourceColumn.Add(destCol);
+                            destTbl = obj.Context.Create<SourceTable>();
+                            destTbl.Name = tbl.Name;
+                            s.SourceTables.Add(destTbl);
                         }
                         else
                         {
-                            destCol = destCols[col.Name];
+                            destTbl = destTbls[tbl.Name];
                         }
-                        destCol.DbType = (ColumnType)col.Type;
-                        destCol.IsNullable = col.IsNullable;
-                        destCol.Size = col.Size;
+
+                        var cols = src.GetTableColumns(tbl);
+                        var destCols = obj.Context.GetQuery<SourceColumn>()
+                            .Where(i => i.SourceTable == destTbl)
+                            .ToDictionary(k => k.Name);
+
+                        foreach (var col in cols)
+                        {
+                            SourceColumn destCol;
+                            if (!destCols.ContainsKey(col.Name))
+                            {
+                                destCol = obj.Context.Create<SourceColumn>();
+                                destCol.Name = col.Name;
+                                destTbl.SourceColumn.Add(destCol);
+                            }
+                            else
+                            {
+                                destCol = destCols[col.Name];
+                            }
+                            destCol.DbType = (ColumnType)col.Type;
+                            destCol.IsNullable = col.IsNullable;
+                            destCol.Size = col.Size;
+                        }
                     }
                 }
             }

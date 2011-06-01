@@ -172,14 +172,14 @@ namespace Kistl.API.Migration
 
         protected void ReloadStaging(StagingDatabase stage)
         {
-            var originConnectionString = Config.Server.GetConnectionString(stage.OriginConnectionStringKey);
-            var connectionString = Config.Server.GetConnectionString(stage.ConnectionStringKey);
-
-            if (String.IsNullOrEmpty(originConnectionString.SchemaProvider) || String.IsNullOrEmpty(originConnectionString.ConnectionString))
+            if (String.IsNullOrEmpty(stage.OriginConnectionStringKey))
             {
-                Log.DebugFormat("Skipping staging reload for [{0}] because of empty Origin", stage.Description);
+                Log.DebugFormat("Skipping staging reload for [{0}] because of empty OriginConnectionStringKey", stage.Description);
                 return;
             }
+
+            var originConnectionString = Config.Server.GetConnectionString(stage.OriginConnectionStringKey);
+            var connectionString = Config.Server.GetConnectionString(stage.ConnectionStringKey);
 
             using (Log.InfoTraceMethodCallFormat("Reload", "Reloading staging database [{0}]", stage.Description))
             using (var reloadScope = _applicationScope.BeginLifetimeScope())
