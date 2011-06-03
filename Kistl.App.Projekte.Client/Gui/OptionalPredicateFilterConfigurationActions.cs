@@ -33,7 +33,7 @@ namespace Kistl.App.GUI
 
             mdl.ViewModelType = obj.ViewModelDescriptor;
 
-            var valueMdl = new NullableStructValueModel<bool>("", "", false, false);
+            var valueMdl = new BoolValueModel("", "", false, false);
             valueMdl.Value = false;
             mdl.FilterArguments.Add(new FilterArgumentConfig(valueMdl, /*cfg.ArgumentViewModel ?? */ FrozenContext.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableValuePropertyModel_Bool)));
 

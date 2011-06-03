@@ -298,6 +298,11 @@ namespace Kistl.Client.Models
         {
         }
 
+        public BoolValueModel(string label, string description, bool allowNullInput, bool isReadOnly, ControlKind requestedKind)
+            : base(label, description, allowNullInput, isReadOnly, requestedKind)
+        {
+        }
+
         public Icon FalseIcon { get; set; }
         public string FalseLabel { get; set; }
 

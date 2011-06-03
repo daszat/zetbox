@@ -107,7 +107,7 @@ namespace Kistl.Client.Models
             }
             else if (prop is BoolProperty)
             {
-                return new NullableStructValueModel<bool>(lb, prop.Description, allowNullInput, false, prop.RequestedKind);
+                return new BoolValueModel(lb, prop.Description, allowNullInput, false, prop.RequestedKind);
             }
             else if (prop is DoubleProperty)
             {

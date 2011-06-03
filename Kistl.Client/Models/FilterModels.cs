@@ -517,7 +517,7 @@ namespace Kistl.Client.Models
                 ValueSource = FilterValueSource.FromExpression(predicate),
                 ViewModelType = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_OptionalPredicateFilterViewModel)
             };
-            var valueMdl = new NullableStructValueModel<bool>(label, "", false, false);
+            var valueMdl = new BoolValueModel(label, "", false, false);
             valueMdl.Value = false;
             fmdl.FilterArguments.Add(new FilterArgumentConfig(valueMdl,
                 frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableValuePropertyModel_Bool)));
