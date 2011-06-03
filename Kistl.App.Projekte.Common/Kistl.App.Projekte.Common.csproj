@@ -82,6 +82,7 @@
     <Compile Include="KistlBase\CompoundObjectPropertyActions.cs" />
     <Compile Include="KistlBase\ConstraintActions.cs" />
     <Compile Include="KistlBase\BoolDefaultValueActions.cs" />
+    <Compile Include="KistlBase\StringDefaultValueActions.cs" />
     <Compile Include="KistlBase\IntDefaultValueActions.cs" />
     <Compile Include="KistlBase\IsValidNamespaceConstraintActions.cs" />
     <Compile Include="KistlBase\StringParameterActions.cs" />
