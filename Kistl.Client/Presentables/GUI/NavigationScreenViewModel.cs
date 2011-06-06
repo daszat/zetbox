@@ -49,7 +49,7 @@ namespace Kistl.Client.Presentables.GUI
 
             if (CurrentIdentity == null) throw new UnresolvableIdentityException();
 
-            if (!CurrentIdentity.IsAdmininistrator() && !screen.Groups.Any(g => CurrentIdentity.Groups.Any(grp => grp.ExportGuid == g.ExportGuid)))
+            if (screen.Groups.Count != 0 && !CurrentIdentity.IsAdmininistrator() && !screen.Groups.Any(g => CurrentIdentity.Groups.Any(grp => grp.ExportGuid == g.ExportGuid)))
                 throw new InvalidOperationException("The current identity is not allowed to see this screen. The screen should not be displayed! Check your filters.");
 
             _screen = screen;
@@ -128,7 +128,7 @@ namespace Kistl.Client.Presentables.GUI
                 if (_childrenRO == null)
                 {
                     _children = new ObservableCollection<NavigationScreenViewModel>();
-                    foreach (var s in _screen.Children.Where(c => CurrentIdentity.IsAdmininistrator() || c.Groups.Any(g => CurrentIdentity.Groups.Select(grp => grp.ExportGuid).Contains(g.ExportGuid))))
+                    foreach (var s in _screen.Children.Where(c => c.Groups.Count == 0 || CurrentIdentity.IsAdmininistrator() || c.Groups.Any(g => CurrentIdentity.Groups.Select(grp => grp.ExportGuid).Contains(g.ExportGuid))))
                     {
                         _children.Add(NavigationScreenViewModel.Fetch(ViewModelFactory, DataContext, s));
                     }
