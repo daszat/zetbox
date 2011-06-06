@@ -123,7 +123,8 @@ namespace Kistl.Client.Models
             }
             else if (prop is DateTimeProperty)
             {
-                return new DateTimeValueModel(lb, prop.Description, allowNullInput, false, prop.RequestedKind);
+                var dtp = (DateTimeProperty)prop;
+                return new DateTimeValueModel(lb, prop.Description, allowNullInput, false, dtp.DateTimeStyle ?? DateTimeStyles.DateTime, prop.RequestedKind);
             }
             else if (prop is EnumerationProperty)
             {

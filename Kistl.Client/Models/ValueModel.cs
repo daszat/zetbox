@@ -248,10 +248,10 @@ namespace Kistl.Client.Models
             _dateTimeStyle = dateTimeStyle;
         }
 
-        public DateTimeValueModel(string label, string description, bool allowNullInput, bool isReadOnly, ControlKind requestedKind)
+        public DateTimeValueModel(string label, string description, bool allowNullInput, bool isReadOnly, DateTimeStyles dateTimeStyle, ControlKind requestedKind)
             : base(label, description, allowNullInput, isReadOnly, requestedKind)
         {
-            _dateTimeStyle = DateTimeStyles.DateTime;
+            _dateTimeStyle = dateTimeStyle;
         }
 
         private readonly DateTimeStyles _dateTimeStyle;
