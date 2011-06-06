@@ -33,6 +33,9 @@
       <Module>Kistl.DalProvider.Ef.Generator.EfGeneratorProvider, Kistl.DalProvider.Ef.Generator</Module>
       <!--
       -->
+
+      <!-- application specific modules -->
+      <Module>Ini50.App.Server.Ini50Module, Ini50.App.Server</Module>
     </Modules>
   </Server>
   <AssemblySearchPaths>
