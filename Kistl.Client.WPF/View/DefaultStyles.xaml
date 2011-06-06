@@ -205,6 +205,8 @@
             Value="{Binding Highlight, Converter={StaticResource HighlightGridForegroundConverter}}" />
     <Setter Property="FontStyle"
             Value="{Binding Highlight, Converter={StaticResource HighlightGridFontStyleConverter}}" />
+    <Setter Property="FontWeight"
+            Value="{Binding Highlight, Converter={StaticResource HighlightGridFontWeightConverter}}" />
   </Style>
 
   <!-- Force GridView content to be streched -->
@@ -212,6 +214,18 @@
          TargetType="ListViewItem" BasedOn="{StaticResource ListViewItemContainerStyle}">
     <Setter Property="HorizontalContentAlignment"
             Value="Stretch" />
+  </Style>
+
+  <Style x:Key="DataGridItemContainerStyle"
+    TargetType="{x:Type wpftk:DataGridRow}">
+    <Setter Property="Background"
+            Value="{Binding Highlight, Converter={StaticResource HighlightGridBackgroundConverter}}" />
+    <Setter Property="Foreground"
+            Value="{Binding Highlight, Converter={StaticResource HighlightGridForegroundConverter}}" />
+    <Setter Property="FontStyle"
+            Value="{Binding Highlight, Converter={StaticResource HighlightGridFontStyleConverter}}" />
+    <Setter Property="FontWeight"
+            Value="{Binding Highlight, Converter={StaticResource HighlightGridFontWeightConverter}}" />
   </Style>
 
   <!-- Style DataObject Editor -->

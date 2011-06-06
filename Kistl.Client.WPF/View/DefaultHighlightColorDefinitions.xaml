@@ -1,6 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
+  <!-- None -->
+  <SolidColorBrush x:Key="HighlightState_None_GridBackground" Color="#FFFFFF" />
 
   <!-- Error -->
   <SolidColorBrush x:Key="HighlightState_Error_GridBackground" Color="#AA272F" />
@@ -17,4 +19,9 @@
   <SolidColorBrush x:Key="HighlightState_Deactivated_GridForeground" Color="#888888" />
   <FontStyle x:Key="HighlightState_Deactivated_GridFontStyle">Italic</FontStyle>
   <SolidColorBrush x:Key="HighlightState_Deactivated_PanelBackground" Color="#888888" />
+
+  <!-- Calculation -->
+  <SolidColorBrush x:Key="HighlightState_Calculation_GridBackground" Color="#F2F2F2" />
+  <SolidColorBrush x:Key="HighlightState_Calculation_GridForeground" Color="#FA7D00" />
+  <FontWeight x:Key="HighlightState_Calculation_GridFontWeight">Bold</FontWeight>
 </ResourceDictionary>

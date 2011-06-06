@@ -37,6 +37,41 @@ namespace Kistl.Client.WPF.CustomControls
             this.GotFocus += new RoutedEventHandler(PropertyEditor_GotFocus);
         }
 
+        protected override void OnInitialized(EventArgs e)
+        {
+            base.OnInitialized(e);
+        
+            // TODO: Doesn't work in Grids
+            // dies in snoop
+            //if (MainControl != null)
+            //{
+            //    {
+            //        var b = new Binding("Hightlight");
+            //        b.Mode = BindingMode.OneWay;
+            //        b.Converter = Application.Current.FindResource("HighlightGridBackgroundConverter") as IValueConverter;
+            //        MainControl.SetBinding(BackgroundProperty, b);
+            //    }
+            //    {
+            //        var b = new Binding("Hightlight");
+            //        b.Mode = BindingMode.OneWay;
+            //        b.Converter = Application.Current.FindResource("HighlightGridForegroundConverter") as IValueConverter;
+            //        MainControl.SetBinding(ForegroundProperty, b);
+            //    }
+            //    {
+            //        var b = new Binding("Hightlight");
+            //        b.Mode = BindingMode.OneWay;
+            //        b.Converter = Application.Current.FindResource("HighlightGridFontStyleConverter") as IValueConverter;
+            //        MainControl.SetBinding(FontStyleProperty, b);
+            //    }
+            //    {
+            //        var b = new Binding("Hightlight");
+            //        b.Mode = BindingMode.OneWay;
+            //        b.Converter = Application.Current.FindResource("HighlightGridFontWeightConverter") as IValueConverter;
+            //        MainControl.SetBinding(FontWeightProperty, b);
+            //    }
+            //}
+        }
+
         protected abstract FrameworkElement MainControl { get; }
 
         public new virtual void Focus()

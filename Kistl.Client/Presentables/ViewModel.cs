@@ -152,6 +152,7 @@ namespace Kistl.Client.Presentables
                 {
                     _isEnabled = value;
                     OnPropertyChanged("IsEnabled");
+                    OnPropertyChanged("Highlight");
                 }
             }
         }
@@ -262,6 +263,7 @@ namespace Kistl.Client.Presentables
         {
             get
             {
+                if (!IsEnabled) return Highlight.Deactivated;
                 return null;
             }
         }
@@ -288,6 +290,25 @@ namespace Kistl.Client.Presentables
 
     public class Highlight : INotifyPropertyChanged
     {
+        #region Static Highlight States
+        public static readonly Highlight None = new Highlight(HighlightState.None);
+        public static readonly Highlight Good = new Highlight(HighlightState.Good);
+        public static readonly Highlight Neutral = new Highlight(HighlightState.Neutral);
+        public static readonly Highlight Bad = new Highlight(HighlightState.Bad);
+        public static readonly Highlight Archived = new Highlight(HighlightState.Archived);
+        public static readonly Highlight Deactivated = new Highlight(HighlightState.Deactivated);
+        public static readonly Highlight Active = new Highlight(HighlightState.Active);
+        public static readonly Highlight Output = new Highlight(HighlightState.Output);
+        public static readonly Highlight Input = new Highlight(HighlightState.Input);
+        public static readonly Highlight Calculation = new Highlight(HighlightState.Calculation);
+        public static readonly Highlight Info = new Highlight(HighlightState.Info);
+        public static readonly Highlight Warning = new Highlight(HighlightState.Warning);
+        public static readonly Highlight Error = new Highlight(HighlightState.Error);
+        public static readonly Highlight Fatal = new Highlight(HighlightState.Fatal);
+        public static readonly Highlight ActionRequired = new Highlight(HighlightState.ActionRequired);
+        public static readonly Highlight Note = new Highlight(HighlightState.Note);
+        #endregion
+
         public Highlight()
             : this(0)
         {

@@ -4,6 +4,7 @@
                       xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"
                       xmlns:view="clr-namespace:Kistl.Client.WPF.View.KistlBase"
                       ToolTip="{Binding ToolTip}">
-    <TextBlock Text="{Binding FormattedValue, Mode=OneWay}"
+    <TextBlock x:Name="txtStringDisplay"
+               Text="{Binding FormattedValue, Mode=OneWay}"
                ToolTip="{Binding ToolTip}" />
 </ctrls:PropertyEditor>

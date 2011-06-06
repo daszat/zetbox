@@ -30,7 +30,7 @@ namespace Kistl.Client.WPF.View.KistlBase
 
         protected override FrameworkElement MainControl
         {
-            get { return null; }
+            get { return txtStringDisplay; }
         }
     }
 }

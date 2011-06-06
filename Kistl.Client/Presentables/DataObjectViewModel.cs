@@ -512,6 +512,16 @@ namespace Kistl.Client.Presentables
             }
         }
 
+        public override Highlight Highlight
+        {
+            get
+            {
+                if (!IsEnabled || IsReadOnly) return Highlight.Deactivated;
+                return null;
+            }
+        }
+
+
         public override ControlKind RequestedKind
         {
             get

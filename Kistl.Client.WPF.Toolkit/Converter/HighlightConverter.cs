@@ -20,14 +20,15 @@ namespace Kistl.Client.WPF.Converter
         {
             var h = value as Highlight;
             if (h == null) return Binding.DoNothing;
-            var color = GetValue(h);
-            if (!string.IsNullOrEmpty(color))
+            var val = GetValue(h);
+            if (!string.IsNullOrEmpty(val))
             {
-                return color;
+                return val;
             }
             else
             {
-                return Application.Current.TryFindResource(string.Format("HighlightState_{0}_{1}", h.State.ToString(), GetValueType()));
+                var resource = Application.Current.TryFindResource(string.Format("HighlightState_{0}_{1}", h.State.ToString(), GetValueType()));
+                return resource != null ? resource : Binding.DoNothing;
             }
         }
 
@@ -73,10 +74,10 @@ namespace Kistl.Client.WPF.Converter
         {
             switch(h.GridFontStyle)
             {
-                case System.Drawing.FontStyle.Regular:
-                    return string.Empty;
+                case System.Drawing.FontStyle.Italic:
+                    return "Italic";
                 default:
-                    return h.GridFontStyle.ToString();
+                    return string.Empty;
             }
         }
 
@@ -85,6 +86,27 @@ namespace Kistl.Client.WPF.Converter
             return "GridFontStyle";
         }
     }
+
+    [ValueConversion(typeof(Highlight), typeof(object))]
+    public class HighlightGridFontWeightConverter : HighlightConverter
+    {
+        protected override string GetValue(Highlight h)
+        {
+            switch (h.GridFontStyle)
+            {
+                case System.Drawing.FontStyle.Bold:
+                    return "Bold";
+                default:
+                    return string.Empty;
+            }
+        }
+
+        protected override string GetValueType()
+        {
+            return "GridFontWeight";
+        }
+    }
+
 
     [ValueConversion(typeof(Highlight), typeof(object))]
     public class HighlightPanelBackgroundConverter : HighlightConverter

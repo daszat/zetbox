@@ -15,6 +15,11 @@ namespace Kistl.Client.WPF.CustomControls
 
     public class ZBoxDataGrid : Microsoft.Windows.Controls.DataGrid
     {
+        public ZBoxDataGrid()
+        {
+            this.ItemContainerStyle = Application.Current.Resources["DataGridItemContainerStyle"] as Style;
+        }
+
         #region CellEdit
         bool continueEdit = false;
         bool isNewItemForContinueEdit = false;

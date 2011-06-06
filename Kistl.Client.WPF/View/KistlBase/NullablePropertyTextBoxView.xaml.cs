@@ -30,8 +30,8 @@ namespace Kistl.Client.WPF.View
             if (DesignerProperties.GetIsInDesignMode(this)) return;
             InitializeComponent();
 
-            txt.GotKeyboardFocus += (s, e) => ViewModel.Focus();
-            txt.LostKeyboardFocus += (s, e) => ViewModel.Blur();
+            txtNullablePropertyTextBoxView.GotKeyboardFocus += (s, e) => ViewModel.Focus();
+            txtNullablePropertyTextBoxView.LostKeyboardFocus += (s, e) => ViewModel.Blur();
         }
 
         #region IHasViewModel<BaseValueViewModel> Members
@@ -54,7 +54,7 @@ namespace Kistl.Client.WPF.View
 
         protected override FrameworkElement MainControl
         {
-            get { return txt; }
+            get { return txtNullablePropertyTextBoxView; }
         }
     }
 }
