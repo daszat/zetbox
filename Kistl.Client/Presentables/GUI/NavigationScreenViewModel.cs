@@ -16,9 +16,9 @@ namespace Kistl.Client.Presentables.GUI
     public class NavigationScreenViewModel
         : DataObjectViewModel
     {
-        public new delegate NavigationScreenViewModel Factory(IKistlContext dataCtx, NavigationScreen screen);
+        public new delegate NavigationScreenViewModel Factory(IKistlContext dataCtx, ViewModel parent, NavigationScreen screen);
 
-        public static NavigationScreenViewModel Fetch(IViewModelFactory ModelFactory, IKistlContext dataCtx, NavigationScreen screen)
+        public static NavigationScreenViewModel Fetch(IViewModelFactory ModelFactory, IKistlContext dataCtx, ViewModel parent, NavigationScreen screen)
         {
             if (ModelFactory == null) throw new ArgumentNullException("ModelFactory");
             if (screen == null) throw new ArgumentNullException("screen");
@@ -28,11 +28,11 @@ namespace Kistl.Client.Presentables.GUI
                 if (screen.ViewModelDescriptor != null)
                 {
                     var t = screen.ViewModelDescriptor.ViewModelRef.AsType(true);
-                    return ModelFactory.CreateViewModel<NavigationScreenViewModel.Factory>(t).Invoke(dataCtx, screen);
+                    return ModelFactory.CreateViewModel<NavigationScreenViewModel.Factory>(t).Invoke(dataCtx, parent, screen);
                 }
                 else
                 {
-                    return ModelFactory.CreateViewModel<NavigationScreenViewModel.Factory>().Invoke(dataCtx, screen);
+                    return ModelFactory.CreateViewModel<NavigationScreenViewModel.Factory>().Invoke(dataCtx, parent, screen);
                 }
             });
         }
@@ -42,8 +42,8 @@ namespace Kistl.Client.Presentables.GUI
 
         private NavigatorViewModel _displayer = null;
 
-        public NavigationScreenViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, NavigationScreen screen)
-            : base(dependencies, dataCtx, screen)
+        public NavigationScreenViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, NavigationScreen screen)
+            : base(dependencies, dataCtx, parent, screen)
         {
             if (screen == null) throw new ArgumentNullException("screen");
 
@@ -107,13 +107,13 @@ namespace Kistl.Client.Presentables.GUI
             }
         }
 
-        public NavigationScreenViewModel Parent
+        public NavigationScreenViewModel ParentScreen
         {
             get
             {
                 if (_parent == null && _screen.Parent != null)
                 {
-                    _parent = Fetch(ViewModelFactory, DataContext, _screen.Parent);
+                    _parent = Fetch(ViewModelFactory, DataContext, this._displayer, _screen.Parent);
                 }
                 return _parent;
             }
@@ -130,7 +130,7 @@ namespace Kistl.Client.Presentables.GUI
                     _children = new ObservableCollection<NavigationScreenViewModel>();
                     foreach (var s in _screen.Children.Where(c => c.Groups.Count == 0 || CurrentIdentity.IsAdmininistrator() || c.Groups.Any(g => CurrentIdentity.Groups.Select(grp => grp.ExportGuid).Contains(g.ExportGuid))))
                     {
-                        _children.Add(NavigationScreenViewModel.Fetch(ViewModelFactory, DataContext, s));
+                        _children.Add(NavigationScreenViewModel.Fetch(ViewModelFactory, DataContext, this, s));
                     }
                     _childrenRO = new ReadOnlyObservableCollection<NavigationScreenViewModel>(_children);
                 }
@@ -191,7 +191,7 @@ namespace Kistl.Client.Presentables.GUI
             {
                 if (_ReportProblemCommand == null)
                 {
-                    _ReportProblemCommand = ViewModelFactory.CreateViewModel<ReportProblemCommand.Factory>().Invoke(DataContext);
+                    _ReportProblemCommand = ViewModelFactory.CreateViewModel<ReportProblemCommand.Factory>().Invoke(DataContext, this);
                 }
                 return _ReportProblemCommand;
             }

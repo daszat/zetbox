@@ -14,15 +14,15 @@ using Kistl.Client.Presentables.ValueViewModels;
     public class ExceptionReporterViewModel
         : WindowViewModel
     {
-        public new delegate ExceptionReporterViewModel Factory(IKistlContext dataCtx, Exception ex, Bitmap screenShot);
+        public new delegate ExceptionReporterViewModel Factory(IKistlContext dataCtx, ViewModel parent, Exception ex, Bitmap screenShot);
 
         private readonly Exception exception;
         private readonly Bitmap screenShot;
         private readonly IProblemReporter problemReporter;
 
         public ExceptionReporterViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx, Exception ex, Bitmap screenShot, IProblemReporter problemReporter)
-            : base(appCtx, dataCtx)
+            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent, Exception ex, Bitmap screenShot, IProblemReporter problemReporter)
+            : base(appCtx, dataCtx, parent)
         {
             if (problemReporter == null) throw new ArgumentNullException("problemReporter");
 
@@ -97,7 +97,7 @@ using Kistl.Client.Presentables.ValueViewModels;
             {
                 if (_subjectTextViewModel == null)
                 {
-                    _subjectTextViewModel = ViewModelFactory.CreateViewModel<ClassValueViewModel<string>.Factory>().Invoke(DataContext, _subjectTextModel);
+                    _subjectTextViewModel = ViewModelFactory.CreateViewModel<ClassValueViewModel<string>.Factory>().Invoke(DataContext, this, _subjectTextModel);
                     _subjectTextModel.Value = exception != null ? exception.GetInnerMessage() : String.Empty;
                 }
                 return _subjectTextViewModel;
@@ -112,7 +112,7 @@ using Kistl.Client.Presentables.ValueViewModels;
             {
                 if(_AdditionalTextViewModel == null)
                 {
-                    _AdditionalTextViewModel = ViewModelFactory.CreateViewModel<MultiLineStringValueViewModel.Factory>().Invoke(DataContext, _AdditionalTextModel);
+                    _AdditionalTextViewModel = ViewModelFactory.CreateViewModel<MultiLineStringValueViewModel.Factory>().Invoke(DataContext, this, _AdditionalTextModel);
                 }
                 return _AdditionalTextViewModel;
             }

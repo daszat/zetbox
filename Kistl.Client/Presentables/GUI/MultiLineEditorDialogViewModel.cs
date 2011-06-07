@@ -12,15 +12,15 @@ namespace Kistl.Client.Presentables.GUI
     {
         private Action<string> _callback;
 
-        public new delegate MultiLineEditorDialogViewModel Factory(IKistlContext dataCtx,
+        public new delegate MultiLineEditorDialogViewModel Factory(IKistlContext dataCtx, ViewModel parent,
             string value,
             Action<string> callback);
 
         public MultiLineEditorDialogViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent,
             string value,
             Action<string> callback)
-            : base(appCtx, dataCtx)
+            : base(appCtx, dataCtx, parent)
         {
             this._callback = callback;
             this._value = value;

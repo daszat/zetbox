@@ -9,10 +9,10 @@ namespace Kistl.Client.Presentables
 
     public abstract class WindowViewModel : ViewModel
     {
-        public new delegate WindowViewModel Factory(IKistlContext dataCtx);
+        public new delegate WindowViewModel Factory(IKistlContext dataCtx, ViewModel parent);
 
-        public WindowViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx)
-            : base(appCtx, dataCtx)
+        public WindowViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent)
+            : base(appCtx, dataCtx, parent)
         {
         }
 

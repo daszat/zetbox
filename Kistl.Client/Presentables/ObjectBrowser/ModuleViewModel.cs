@@ -14,14 +14,14 @@ namespace Kistl.Client.Presentables.ObjectBrowser
 {
     public class ModuleViewModel : DataObjectViewModel
     {
-        public new delegate ModuleViewModel Factory(IKistlContext dataCtx, Module mdl);
+        public new delegate ModuleViewModel Factory(IKistlContext dataCtx, ViewModel parent, Module mdl);
 
         private Func<IKistlContext> _ctxFactory;
 
         public ModuleViewModel(
-            IViewModelDependencies appCtx, Func<IKistlContext> ctxFactory, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, Func<IKistlContext> ctxFactory, IKistlContext dataCtx, ViewModel parent,
             Module mdl)
-            : base(appCtx, dataCtx, mdl)
+            : base(appCtx, dataCtx, parent, mdl)
         {
             _ctxFactory = ctxFactory;
             _module = mdl;
@@ -56,7 +56,7 @@ namespace Kistl.Client.Presentables.ObjectBrowser
                 .ToList();
             foreach (var cls in datatypes)
             {
-                var mdl = ViewModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, _ctxFactory, cls, null);
+                var mdl = ViewModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, this, _ctxFactory, cls, null);
                 mdl.AllowAddNew = true;
                 mdl.AllowDelete = true;
                 mdl.Commands.Add(ViewModelFactory.CreateViewModel<EditDataObjectClassCommand.Factory>().Invoke(DataContext, this, cls));

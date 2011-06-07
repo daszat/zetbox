@@ -32,7 +32,7 @@ namespace Kistl.Client.Forms
             Application.SetCompatibleTextRenderingDefault(false);
 
             var mdlFactory = container.Resolve<IViewModelFactory>();
-            var initialWorkspace = mdlFactory.CreateViewModel<WorkspaceViewModel.Factory>().Invoke(container.Resolve<IKistlContext>());
+            var initialWorkspace = mdlFactory.CreateViewModel<WorkspaceViewModel.Factory>().Invoke(container.Resolve<IKistlContext>(), null);
             mdlFactory.ShowModel(initialWorkspace, true);
 
             Application.Run();

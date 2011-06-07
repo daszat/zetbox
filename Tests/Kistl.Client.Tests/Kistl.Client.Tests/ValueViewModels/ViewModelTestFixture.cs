@@ -18,8 +18,8 @@ namespace Kistl.Client.Tests.ValueViewModels
     {
         protected class TestValueViewModel : ValueViewModel<object, object>
         {
-            public TestValueViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, IValueModel mdl)
-                : base(dependencies, dataCtx, mdl)
+            public TestValueViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IValueModel mdl)
+                : base(dependencies, dataCtx, parent, mdl)
             {
             }
 
@@ -92,7 +92,7 @@ namespace Kistl.Client.Tests.ValueViewModels
             valueModelMock.SetupGet<string>(o => o.Error).Returns(String.Empty);
             valueModelMock.SetupProperty(o => o.Value);
             valueModelMock.SetupGet(o => o.Label).Returns("ValueLabel");
-            obj = new TestValueViewModel(scope.Resolve<IViewModelDependencies>(), scope.Resolve<BaseMemoryContext>(), valueModelMock.Object);
+            obj = new TestValueViewModel(scope.Resolve<IViewModelDependencies>(), scope.Resolve<BaseMemoryContext>(), null, valueModelMock.Object);
         }
     }
 }

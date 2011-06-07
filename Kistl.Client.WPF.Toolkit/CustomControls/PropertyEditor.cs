@@ -15,7 +15,8 @@ namespace Kistl.Client.WPF.CustomControls
     using System.Windows.Media;
     using System.Windows.Input;
     using Kistl.Client.Presentables;
-    
+    using Kistl.Client.WPF.Converter;
+
     /// <summary>
     /// Defines common (Dependency-)Properties for Controls displaying/editing (Object)Properties
     /// </summary>
@@ -59,24 +60,41 @@ namespace Kistl.Client.WPF.CustomControls
             editor.OnHighlightChanged();
         }
 
-        protected virtual void OnHighlightChanged() 
+        private static readonly BrushConverter _brushConverter = new BrushConverter();
+        private static readonly FontStyleConverter _fontStyleConverter = new FontStyleConverter();
+        private static readonly FontWeightConverter _fontWeightConverter = new FontWeightConverter();
+
+        private static readonly HighlightGridBackgroundConverter _highlightGridBackgroundConverter = new HighlightGridBackgroundConverter();
+        private static readonly HighlightGridForegroundConverter _highlightGridForegroundConverter = new HighlightGridForegroundConverter();
+        private static readonly HighlightGridFontStyleConverter _highlightGridFontStyleConverter = new HighlightGridFontStyleConverter();
+        private static readonly HighlightGridFontWeightConverter _highlightGridFontWeightConverter = new HighlightGridFontWeightConverter();
+
+        protected virtual void OnHighlightChanged()
         {
             if (MainControl != null)
             {
-                SetHighlightValue(MainControl, BackgroundProperty, Highlight, "HighlightGridBackgroundConverter");
-                SetHighlightValue(MainControl, ForegroundProperty, Highlight, "HighlightGridForegroundConverter");
-                SetHighlightValue(MainControl, FontStyleProperty, Highlight, "HighlightGridFontStyleConverter");
-                SetHighlightValue(MainControl, FontWeightProperty, Highlight, "HighlightGridFontWeightConverter");
+                SetHighlightValue(MainControl, BackgroundProperty, Highlight, _highlightGridBackgroundConverter, _brushConverter);
+                SetHighlightValue(MainControl, ForegroundProperty, Highlight, _highlightGridForegroundConverter, _brushConverter);
+                SetHighlightValue(MainControl, FontStyleProperty, Highlight, _highlightGridFontStyleConverter, _fontStyleConverter);
+                SetHighlightValue(MainControl, FontWeightProperty, Highlight, _highlightGridFontWeightConverter, _fontWeightConverter);
             }
         }
 
-        private static void SetHighlightValue(FrameworkElement ctrl, DependencyProperty dpProp, Highlight h, string converter)
+
+        protected virtual void SetHighlightValue(FrameworkElement ctrl, DependencyProperty dpProp, Highlight h, HighlightConverter converter, TypeConverter finalConverter)
         {
-            var value = ((IValueConverter)Application.Current.Resources[converter]).Convert(h, null, null, null);
+            if (converter == null) throw new ArgumentNullException("converter");
+            if (finalConverter == null) throw new ArgumentNullException("finalConverter");
+
+            var value = converter.Convert(h, null, null, null);
             if (value == Binding.DoNothing)
                 ctrl.SetValue(dpProp, DependencyProperty.UnsetValue);
-            else
+            else if (value == null)
+                ctrl.SetValue(dpProp, null);
+            else if (dpProp.PropertyType.IsAssignableFrom(value.GetType()))
                 ctrl.SetValue(dpProp, value);
+            else
+                ctrl.SetValue(dpProp, finalConverter.ConvertFrom(value));
         }
 
         protected abstract FrameworkElement MainControl { get; }

@@ -11,10 +11,10 @@ namespace Kistl.Client.Presentables.Calendar
     [ViewModelDescriptor]
     public class WeekCalendarViewModel : Kistl.Client.Presentables.ViewModel
     {
-        public new delegate WeekCalendarViewModel Factory(IKistlContext dataCtx, Func<DateTime, DateTime, IEnumerable<CalendarItemViewModel>> source);
+        public new delegate WeekCalendarViewModel Factory(IKistlContext dataCtx, ViewModel parent, Func<DateTime, DateTime, IEnumerable<CalendarItemViewModel>> source);
 
-        public WeekCalendarViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, Func<DateTime, DateTime, IEnumerable<CalendarItemViewModel>> source)
-            : base(dependencies, dataCtx)
+        public WeekCalendarViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, Func<DateTime, DateTime, IEnumerable<CalendarItemViewModel>> source)
+            : base(dependencies, dataCtx, parent)
         {
             this._Source = source;
         }
@@ -113,7 +113,7 @@ namespace Kistl.Client.Presentables.Calendar
                     _DayItems = new List<DayCalendarViewModel>();
                     for (int i = 0; i < 7; i++)
                     {
-                        _DayItems.Add(ViewModelFactory.CreateViewModel<DayCalendarViewModel.Factory>().Invoke(DataContext, From.AddDays(i), this));
+                        _DayItems.Add(ViewModelFactory.CreateViewModel<DayCalendarViewModel.Factory>().Invoke(DataContext, this, From.AddDays(i)));
                     }
                 }
                 return _DayItems;

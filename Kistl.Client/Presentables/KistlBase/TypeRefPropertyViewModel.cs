@@ -15,12 +15,12 @@ namespace Kistl.Client.Presentables.KistlBase
     public class TypeRefPropertyViewModel
            : ObjectReferenceViewModel
     {
-        public new delegate TypeRefPropertyViewModel Factory(IKistlContext dataCtx, IValueModel mdl);
+        public new delegate TypeRefPropertyViewModel Factory(IKistlContext dataCtx, ViewModel parent, IValueModel mdl);
 
         public TypeRefPropertyViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent,
             IValueModel mdl)
-            : base(appCtx, dataCtx, mdl)
+            : base(appCtx, dataCtx, parent, mdl)
         {
             // TODO: use a static reference here
             //if (prop.GetReferencedObjectClass().Name != "TypeRef")

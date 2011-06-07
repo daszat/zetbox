@@ -31,13 +31,16 @@ namespace Kistl.Client.Presentables.ValueViewModels
             }
         }
 
-        private readonly IViewModelFactory _vmf;
         private readonly IKistlContext _ctx;
+        private readonly ViewModel _parent;
 
-        public CalculatedProperties(IKistlContext ctx, IViewModelFactory vmf)
+        public CalculatedProperties(IKistlContext ctx, ViewModel parent)
         {
-            _vmf = vmf;
+            if (ctx == null) throw new ArgumentNullException("ctx");
+            if (parent == null) throw new ArgumentNullException("parent");
+
             _ctx = ctx;
+            _parent = parent;
         }
 
         private Dictionary<string, ICalculatedProperty> _properties = new Dictionary<string, ICalculatedProperty>();
@@ -62,7 +65,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             else
             {
                 p.Model = new NullableStructValueModel<T>(label, tooltip, true, true);
-                p.ViewModel = _vmf.CreateViewModel<NullableStructValueViewModel<T>.Factory>().Invoke(_ctx, p.Model);
+                p.ViewModel = _parent.ViewModelFactory.CreateViewModel<NullableStructValueViewModel<T>.Factory>().Invoke(_ctx, _parent, p.Model);
             }
 
             p.UpdateValue();
@@ -77,7 +80,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             CalculatedProperty<Nullable<bool>> p = new CalculatedProperty<Nullable<bool>>();
             p.Calculate = calc;
             p.Model = new BoolValueModel(label, tooltip, true, true);
-            p.ViewModel = _vmf.CreateViewModel<NullableBoolPropertyViewModel.Factory>().Invoke(_ctx, p.Model);
+            p.ViewModel = _parent.ViewModelFactory.CreateViewModel<NullableBoolPropertyViewModel.Factory>().Invoke(_ctx, _parent, p.Model);
 
             p.UpdateValue();
             _properties[key] = p;
@@ -91,7 +94,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             CalculatedProperty<Nullable<DateTime>> p = new CalculatedProperty<Nullable<DateTime>>();
             p.Calculate = calc;
             p.Model = new DateTimeValueModel(label, tooltip, true, true);
-            p.ViewModel = _vmf.CreateViewModel<NullableDateTimePropertyViewModel.Factory>().Invoke(_ctx, p.Model);
+            p.ViewModel = _parent.ViewModelFactory.CreateViewModel<NullableDateTimePropertyViewModel.Factory>().Invoke(_ctx, _parent, p.Model);
 
             p.UpdateValue();
             _properties[key] = p;
@@ -106,7 +109,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             CalculatedProperty<T> p = new CalculatedProperty<T>();
             p.Calculate = calc;
             p.Model = new ClassValueModel<T>(label, tooltip, true, true);
-            p.ViewModel = _vmf.CreateViewModel<ClassValueViewModel<T>.Factory>().Invoke(_ctx, p.Model);
+            p.ViewModel = _parent.ViewModelFactory.CreateViewModel<ClassValueViewModel<T>.Factory>().Invoke(_ctx, _parent, p.Model);
 
             p.UpdateValue();
             _properties[key] = p;

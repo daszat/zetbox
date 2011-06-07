@@ -14,14 +14,14 @@ namespace Kistl.Client.Presentables.KistlBase
     public class AssemblyViewModel
         : DataObjectViewModel
     {
-        public new delegate DataObjectViewModel Factory(IKistlContext dataCtx, Assembly obj);
+        public new delegate DataObjectViewModel Factory(IKistlContext dataCtx, ViewModel parent, Assembly obj);
 
         private Assembly _assembly;
 
         public AssemblyViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent,
             Assembly obj)
-            : base(appCtx, dataCtx, obj)
+            : base(appCtx, dataCtx, parent, obj)
         {
             _assembly = obj;
         }
@@ -37,7 +37,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 {
                     _typeList = new ReadOnlyProjectedList<Type, SystemTypeViewModel>(
                         System.Reflection.Assembly.ReflectionOnlyLoad(_assembly.Name).GetTypes(),
-                        t => ViewModelFactory.CreateViewModel<SystemTypeViewModel.Factory>().Invoke(DataContext, t),
+                        t => ViewModelFactory.CreateViewModel<SystemTypeViewModel.Factory>().Invoke(DataContext, this, t),
                         mdl => mdl.Value);
                 }
                 return _typeList;

@@ -26,12 +26,12 @@ namespace Kistl.Client.Presentables.ValueViewModels
         where TModelCollection : ICollection<IDataObject>
         where TCollection : INotifyCollectionChanged
     {
-        public new delegate BaseObjectCollectionViewModel<TCollection, TModelCollection> Factory(IKistlContext dataCtx, IValueModel mdl);
+        public new delegate BaseObjectCollectionViewModel<TCollection, TModelCollection> Factory(IKistlContext dataCtx, ViewModel parent, IValueModel mdl);
 
         public BaseObjectCollectionViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent,
             IObjectCollectionValueModel<TModelCollection> mdl)
-            : base(appCtx, dataCtx, mdl)
+            : base(appCtx, dataCtx, parent, mdl)
         {
             ObjectCollectionModel = mdl;
 
@@ -328,6 +328,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             {
                 var lstMdl = ViewModelFactory.CreateViewModel<DataObjectSelectionTaskViewModel.Factory>().Invoke(
                         DataContext,
+                        this,
                         typeof(ObjectClass).GetObjectClass(FrozenContext),
                         () => children.AsQueryable(),
                         new Action<DataObjectViewModel>(delegate(DataObjectViewModel chosen)
@@ -349,7 +350,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
         {
             var targetType = targetClass.GetDescribedInterfaceType();
             var item = this.DataContext.Create(targetType);
-            var result = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, item);
+            var result = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), item);
             AddItem(result);
             if (!targetClass.IsSimpleObject)
             {
@@ -376,6 +377,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
             var lstMdl = ViewModelFactory.CreateViewModel<DataObjectSelectionTaskViewModel.Factory>().Invoke(
                     DataContext,
+                    this,
                     ifType.GetObjectClass(FrozenContext),
                     null,
                     new Action<DataObjectViewModel>(delegate(DataObjectViewModel chosen)
@@ -525,7 +527,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             if (p.Object == null)
             {
                 var obj = DataContext.Create(DataContext.GetInterfaceType(this.ReferencedClass.GetDataType()));
-                p.Object = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, obj);
+                p.Object = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj);
                 _proxyCache[p.Object.Object] = p;
             }
             return p.Object;
@@ -537,7 +539,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             DataObjectViewModelProxy result;
             if (!_proxyCache.TryGetValue(obj, out result))
             {
-                result = new DataObjectViewModelProxy() { Object = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, obj) };
+                result = new DataObjectViewModelProxy() { Object = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj) };
                 _proxyCache[obj] = result;
             }
             return result;

@@ -12,10 +12,10 @@ namespace Kistl.Client.Presentables.FilterViewModels
     [ViewModelDescriptor]
     public class OptionalPredicateFilterViewModel : FilterViewModel
     {
-        public new delegate OptionalPredicateFilterViewModel Factory(IKistlContext dataCtx, IUIFilterModel mdl);
+        public new delegate OptionalPredicateFilterViewModel Factory(IKistlContext dataCtx, ViewModel parent, IUIFilterModel mdl);
 
-        public OptionalPredicateFilterViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, IUIFilterModel mdl)
-            : base(dependencies, dataCtx, mdl)
+        public OptionalPredicateFilterViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IUIFilterModel mdl)
+            : base(dependencies, dataCtx, parent, mdl)
         {
         }
     }

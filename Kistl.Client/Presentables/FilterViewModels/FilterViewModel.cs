@@ -80,10 +80,10 @@ namespace Kistl.Client.Presentables.FilterViewModels
 
     public abstract class FilterViewModel : ViewModel
     {
-        public new delegate FilterViewModel Factory(IKistlContext dataCtx, IUIFilterModel mdl);
+        public new delegate FilterViewModel Factory(IKistlContext dataCtx, ViewModel parent, IUIFilterModel mdl);
 
-        public FilterViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, IUIFilterModel mdl)
-            : base(dependencies, dataCtx)
+        public FilterViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IUIFilterModel mdl)
+            : base(dependencies, dataCtx, parent)
         {
             this.Filter = mdl;
             this._label = mdl.Label;
@@ -102,7 +102,7 @@ namespace Kistl.Client.Presentables.FilterViewModels
                         Filter.FilterArguments
                             .Select(f =>
                             {
-                                var mdl = BaseValueViewModel.Fetch(ViewModelFactory, DataContext, f.ViewModelType, f.Value);
+                                var mdl = BaseValueViewModel.Fetch(ViewModelFactory, DataContext, this, f.ViewModelType, f.Value);
                                 // I know, a hack, but better then allowing user to create new objects during a search
                                 if (mdl is ObjectReferenceViewModel)
                                 {

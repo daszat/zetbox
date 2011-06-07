@@ -9,16 +9,21 @@ namespace Kistl.Client.Presentables.Calendar
 
     public class DayCalendarViewModel : Kistl.Client.Presentables.ViewModel
     {
-        public new delegate DayCalendarViewModel Factory(IKistlContext dataCtx, DateTime day, WeekCalendarViewModel parent);
+        public new delegate DayCalendarViewModel Factory(IKistlContext dataCtx, WeekCalendarViewModel parent, DateTime day);
 
-        public DayCalendarViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, DateTime day, WeekCalendarViewModel parent)
-            : base(dependencies, dataCtx)
+        public DayCalendarViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, WeekCalendarViewModel parent, DateTime day)
+            : base(dependencies, dataCtx, parent)
         {
-            this.WeekCalendar = parent;
             this.Day = day;
         }
 
-        public WeekCalendarViewModel WeekCalendar { get; private set; }
+        public WeekCalendarViewModel WeekCalendar
+        {
+            get
+            {
+                return (WeekCalendarViewModel)Parent;
+            }
+        }
 
         private DateTime _Day = DateTime.Today;
         public DateTime Day
@@ -98,7 +103,7 @@ namespace Kistl.Client.Presentables.Calendar
                     {
                         CalcOverlappingChain(overlappingChain);
                         // Start a new one
-                        overlappingChain = new List<CalendarItemViewModel>(); 
+                        overlappingChain = new List<CalendarItemViewModel>();
                     }
                 }
                 overlappingChain.Add(item);

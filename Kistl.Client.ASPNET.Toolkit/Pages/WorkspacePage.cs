@@ -33,7 +33,7 @@ namespace Kistl.Client.ASPNET.Toolkit.Pages
         void WorkspacePage_Init(object sender, EventArgs e)
         {
             var mdl = KistlContextManagerModule.ViewModelFactory
-                .CreateViewModel<WorkspaceViewModel.Factory>().Invoke(KistlContextManagerModule.KistlContext);
+                .CreateViewModel<WorkspaceViewModel.Factory>().Invoke(KistlContextManagerModule.KistlContext, null);
 
             KistlContextManagerModule.ViewModelFactory.CreateDefaultView(mdl, ctrlMainContent);
         }

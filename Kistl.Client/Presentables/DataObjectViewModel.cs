@@ -25,17 +25,17 @@ namespace Kistl.Client.Presentables
     public class DataObjectViewModel
         : ViewModel, IDataErrorInfo
     {
-        public new delegate DataObjectViewModel Factory(IKistlContext dataCtx, IDataObject obj);
+        public new delegate DataObjectViewModel Factory(IKistlContext dataCtx, ViewModel parent, IDataObject obj);
 
-        public static DataObjectViewModel Fetch(IViewModelFactory f, IKistlContext dataCtx, IDataObject obj)
+        public static DataObjectViewModel Fetch(IViewModelFactory f, IKistlContext dataCtx, ViewModel parent, IDataObject obj)
         {
-            return (DataObjectViewModel)dataCtx.GetViewModelCache().LookupOrCreate(obj, () => f.CreateViewModel<DataObjectViewModel.Factory>(obj).Invoke(dataCtx, obj));
+            return (DataObjectViewModel)dataCtx.GetViewModelCache().LookupOrCreate(obj, () => f.CreateViewModel<DataObjectViewModel.Factory>(obj).Invoke(dataCtx, parent, obj));
         }
 
         public DataObjectViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent,
             IDataObject obj)
-            : base(appCtx, dataCtx)
+            : base(appCtx, dataCtx, parent)
         {
             _object = obj;
             _object.PropertyChanged += Object_PropertyChanged;
@@ -101,7 +101,7 @@ namespace Kistl.Client.Presentables
                     k => k,
                     v =>
                     {
-                        var result = BaseValueViewModel.Fetch(ViewModelFactory, DataContext, v, v.GetPropertyValueModel(Object));
+                        var result = BaseValueViewModel.Fetch(ViewModelFactory, DataContext, this, v, v.GetPropertyValueModel(Object));
                         result.IsReadOnly = IsReadOnly;
                         return result;
                     });
@@ -183,12 +183,12 @@ namespace Kistl.Client.Presentables
                             if (lst.Count == 1)
                             {
                                 return ViewModelFactory.CreateViewModel<SinglePropertyGroupViewModel.Factory>().Invoke(
-                                    DataContext, group.Key, lst);
+                                    DataContext, this, group.Key, lst);
                             }
                             else
                             {
                                 return ViewModelFactory.CreateViewModel<MultiplePropertyGroupViewModel.Factory>().Invoke(
-                                    DataContext, group.Key, lst);
+                                    DataContext, this, group.Key, lst);
                             }
                         })
                         .ToList();
@@ -378,7 +378,7 @@ namespace Kistl.Client.Presentables
                 _MethodModels = new LookupDictionary<Method, Method, BaseValueViewModel>(
                     _MethodList,
                     k => k,
-                    v => BaseValueViewModel.Fetch(ViewModelFactory, DataContext, v.GetReturnParameter(), v.GetValueModel(Object))
+                    v => BaseValueViewModel.Fetch(ViewModelFactory, DataContext, this, v.GetReturnParameter(), v.GetValueModel(Object))
                 );
             }
         }

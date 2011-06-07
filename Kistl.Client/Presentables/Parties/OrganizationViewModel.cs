@@ -11,12 +11,12 @@ namespace Kistl.Client.Presentables.Parties
     [ViewModelDescriptor]
     public class OrganizationViewModel : PartyViewModel
     {
-        public new delegate OrganizationViewModel Factory(IKistlContext dataCtx,
+        public new delegate OrganizationViewModel Factory(IKistlContext dataCtx, ViewModel parent,
             IDataObject obj);
 
-        public OrganizationViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx,
+        public OrganizationViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent,
             Organization obj)
-            : base(appCtx, dataCtx, obj)
+            : base(appCtx, dataCtx, parent, obj)
         {
         }
     }

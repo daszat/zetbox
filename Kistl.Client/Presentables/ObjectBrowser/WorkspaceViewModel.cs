@@ -16,10 +16,10 @@ namespace Kistl.Client.Presentables.ObjectBrowser
     public class WorkspaceViewModel
         : WindowViewModel
     {
-        public new delegate WorkspaceViewModel Factory(IKistlContext dataCtx);
+        public new delegate WorkspaceViewModel Factory(IKistlContext dataCtx, ViewModel parent);
 
-        public WorkspaceViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx)
-            : base(appCtx, dataCtx)
+        public WorkspaceViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent)
+            : base(appCtx, dataCtx, parent)
         {
         }
 
@@ -56,7 +56,7 @@ namespace Kistl.Client.Presentables.ObjectBrowser
                     _applicationsCache = new ObservableCollection<ApplicationViewModel>();
                     foreach (var app in FrozenContext.GetQuery<Kistl.App.GUI.Application>())
                     {
-                        _applicationsCache.Add(ViewModelFactory.CreateViewModel<ApplicationViewModel.Factory>().Invoke(DataContext, app));
+                        _applicationsCache.Add(ViewModelFactory.CreateViewModel<ApplicationViewModel.Factory>().Invoke(DataContext, null, app));
                     }
                 }
                 return _applicationsCache;
@@ -93,7 +93,7 @@ namespace Kistl.Client.Presentables.ObjectBrowser
             var modules = DataContext.GetQuery<Module>().ToList();
             foreach (var m in modules)
             {
-                Modules.Add(ViewModelFactory.CreateViewModel<ModuleViewModel.Factory>(m).Invoke(DataContext, m));
+                Modules.Add(ViewModelFactory.CreateViewModel<ModuleViewModel.Factory>(m).Invoke(DataContext, this, m));
             }
         }
 
@@ -111,7 +111,7 @@ namespace Kistl.Client.Presentables.ObjectBrowser
 
             var other = dataObject.Object;
             var here = DataContext.Find(DataContext.GetInterfaceType(other), other.ID);
-            SelectedItem = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, here);
+            SelectedItem = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this, here);
         }
 
         public override string Name

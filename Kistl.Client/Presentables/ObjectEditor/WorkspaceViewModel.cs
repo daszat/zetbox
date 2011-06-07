@@ -17,10 +17,10 @@ namespace Kistl.Client.Presentables.ObjectEditor
     public class WorkspaceViewModel
         : WindowViewModel, IMultipleInstancesManager, IDisposable
     {
-        public new delegate WorkspaceViewModel Factory(IKistlContext dataCtx);
+        public new delegate WorkspaceViewModel Factory(IKistlContext dataCtx, ViewModel parent);
 
-        public WorkspaceViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx)
-            : base(appCtx, dataCtx)
+        public WorkspaceViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent)
+            : base(appCtx, dataCtx, parent)
         {
             dataCtx.IsModifiedChanged += dataCtx_IsModifiedChanged;
             Items = new ObservableCollection<ViewModel>();
@@ -333,7 +333,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
             var loader = ViewModelFactory.CreateDelayedTask(this, () =>
             {
                 UpdateErrors();
-                var elm = ViewModelFactory.CreateViewModel<ErrorListViewModel.Factory>().Invoke(DataContext);
+                var elm = ViewModelFactory.CreateViewModel<ErrorListViewModel.Factory>().Invoke(DataContext, this);
                 elm.RefreshErrors();
                 ViewModelFactory.ShowModel(elm, true);
             });
@@ -349,7 +349,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
             {
                 if (_ReportProblemCommand == null)
                 {
-                    _ReportProblemCommand = ViewModelFactory.CreateViewModel<ReportProblemCommand.Factory>().Invoke(DataContext);
+                    _ReportProblemCommand = ViewModelFactory.CreateViewModel<ReportProblemCommand.Factory>().Invoke(DataContext, this);
                 }
                 return _ReportProblemCommand;
             }
@@ -382,7 +382,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
 
             var other = dataObject.Object;
             var here = DataContext.Find(DataContext.GetInterfaceType(other), other.ID);
-            var vm = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, here);
+            var vm = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this, here);
             SelectedItem = vm;
             vm.RequestedKind = requestedKind;
             AddItem(vm);

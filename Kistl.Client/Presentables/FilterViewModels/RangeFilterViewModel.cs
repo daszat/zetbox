@@ -12,10 +12,10 @@ namespace Kistl.Client.Presentables.FilterViewModels
     [ViewModelDescriptor]
     public class RangeFilterViewModel : FilterViewModel
     {
-        public new delegate RangeFilterViewModel Factory(IKistlContext dataCtx, IUIFilterModel mdl);
+        public new delegate RangeFilterViewModel Factory(IKistlContext dataCtx, ViewModel parent, IUIFilterModel mdl);
 
-        public RangeFilterViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, IUIFilterModel mdl)
-            : base(dependencies, dataCtx, mdl)
+        public RangeFilterViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IUIFilterModel mdl)
+            : base(dependencies, dataCtx, parent, mdl)
         {
             this.RangeFilter = (RangeFilterModel)mdl;
         }

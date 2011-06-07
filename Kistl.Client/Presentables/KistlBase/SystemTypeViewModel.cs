@@ -15,14 +15,14 @@ namespace Kistl.Client.Presentables.KistlBase
     public class SystemTypeViewModel
         : ViewModel
     {
-        public new delegate SystemTypeViewModel Factory(IKistlContext dataCtx, Type type);
+        public new delegate SystemTypeViewModel Factory(IKistlContext dataCtx, ViewModel parent, Type type);
 
         private Type _type;
 
         public SystemTypeViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent,
             Type type)
-            : base(appCtx, dataCtx)
+            : base(appCtx, dataCtx, parent)
         {
             _type = type;
         }

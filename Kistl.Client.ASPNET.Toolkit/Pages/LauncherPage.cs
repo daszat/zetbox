@@ -34,7 +34,7 @@ namespace Kistl.Client.ASPNET.Toolkit.Pages
         void LauncherPage_Init(object sender, EventArgs e)
         {
             var mdl = KistlContextManagerModule.ViewModelFactory
-                .CreateViewModel<WorkspaceViewModel.Factory>().Invoke(KistlContextManagerModule.KistlContext);
+                .CreateViewModel<WorkspaceViewModel.Factory>().Invoke(KistlContextManagerModule.KistlContext, null);
             ControlKind launcher = KistlContextManagerModule.KistlContext.FindPersistenceObject<ControlKind>(NamedObjects.ControlKind_Kistl_App_GUI_LauncherKind);
             KistlContextManagerModule.ViewModelFactory.CreateSpecificView(mdl, launcher, ctrlMainContent);
         }

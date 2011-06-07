@@ -21,12 +21,12 @@ namespace Kistl.Client.Presentables.ValueViewModels
     public class ObjectReferenceViewModel
         : ValueViewModel<DataObjectViewModel, IDataObject>
     {
-        public new delegate ObjectReferenceViewModel Factory(IKistlContext dataCtx, IValueModel mdl);
+        public new delegate ObjectReferenceViewModel Factory(IKistlContext dataCtx, ViewModel parent, IValueModel mdl);
 
         public ObjectReferenceViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent,
             IValueModel mdl)
-            : base(appCtx, dataCtx, mdl)
+            : base(appCtx, dataCtx, parent, mdl)
         {
             ObjectReferenceModel = (IObjectReferenceValueModel)mdl;
             _allowCreateNewItem = !dataCtx.IsReadonly;
@@ -200,7 +200,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             {
                 var targetType = baseclass.GetDescribedInterfaceType();
                 var item = this.DataContext.Create(targetType);
-                var model = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, item);
+                var model = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), item);
 
                 Value = model;
                 ViewModelFactory.ShowModel(model, true);
@@ -208,7 +208,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             else
             {
                 var lstMdl = ViewModelFactory.CreateViewModel<DataObjectSelectionTaskViewModel.Factory>().Invoke(
-                        DataContext,
+                        DataContext, this,
                         typeof(ObjectClass).GetObjectClass(FrozenContext),
                         () => children.AsQueryable(),
                         new Action<DataObjectViewModel>(delegate(DataObjectViewModel chosen)
@@ -217,7 +217,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                             {
                                 var targetType = ((ObjectClass)chosen.Object).GetDescribedInterfaceType();
                                 var item = this.DataContext.Create(targetType);
-                                var model = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, item);
+                                var model = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), item);
 
                                 Value = model;
                                 ViewModelFactory.ShowModel(model, true);
@@ -257,6 +257,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             var ifType = ReferencedClass.GetDescribedInterfaceType();
             var selectionTask = ViewModelFactory.CreateViewModel<DataObjectSelectionTaskViewModel.Factory>().Invoke(
                 DataContext,
+                this,
                 ifType.GetObjectClass(FrozenContext),
                 null,
                 new Action<DataObjectViewModel>(delegate(DataObjectViewModel chosen)
@@ -363,7 +364,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             var obj = ValueModel.Value;
             if (obj != null)
             {
-                _valueCache = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ValueModel.Value);
+                _valueCache = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), ValueModel.Value);
                 EnsureValuePossible(_valueCache);
             }
             _valueCacheInititalized = true;
@@ -446,7 +447,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
             var mdlList = lst
                         .Take(PossibleValuesLimit)
-                        .Select(i => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, i))
+                        .Select(i => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), i))
                         .Cast<ViewModel>()
                         .OrderBy(v => v.Name)
                         .ToList();

@@ -23,12 +23,12 @@ using Kistl.API.Client;
     public class ObjectCollectionViewModel
         : BaseObjectCollectionViewModel<IReadOnlyObservableList<DataObjectViewModel>, ICollection<IDataObject>>, IValueCollectionViewModel<DataObjectViewModel, IReadOnlyObservableList<DataObjectViewModel>>
     {
-        public new delegate ObjectCollectionViewModel Factory(IKistlContext dataCtx, IValueModel mdl);
+        public new delegate ObjectCollectionViewModel Factory(IKistlContext dataCtx, ViewModel parent, IValueModel mdl);
 
         public ObjectCollectionViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent,
             IObjectCollectionValueModel<ICollection<IDataObject>> mdl)
-            : base(appCtx, dataCtx, mdl)
+            : base(appCtx, dataCtx, parent, mdl)
         {
         }
 
@@ -244,7 +244,7 @@ using Kistl.API.Client;
                 _wrapper = new SortedWrapper(ObjectCollectionModel.UnderlyingCollection, ObjectCollectionModel);
                 _valueCache = new ReadOnlyObservableProjectedList<IDataObject, DataObjectViewModel>(
                     _wrapper,
-                    obj => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, obj),
+                    obj => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj),
                     mdl => mdl.Object);
                 _valueCache.CollectionChanged += ValueListChanged;
             }

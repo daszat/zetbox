@@ -16,10 +16,10 @@ namespace Kistl.Client.Presentables.ModuleEditor
     [ViewModelDescriptor]
     public class ControlKindHierarchyViewModel : ViewModel, IRefreshCommandListener
     {
-        public new delegate ControlKindHierarchyViewModel Factory(IKistlContext dataCtx, Module module);
+        public new delegate ControlKindHierarchyViewModel Factory(IKistlContext dataCtx, ViewModel parent, Module module);
 
-        public ControlKindHierarchyViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, Module module, Func<IKistlContext> ctxFactory)
-            : base(appCtx, dataCtx)
+        public ControlKindHierarchyViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent, Module module, Func<IKistlContext> ctxFactory)
+            : base(appCtx, dataCtx, parent)
         {
             this.ctxFactory = ctxFactory;
             this.Module = module;
@@ -76,7 +76,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
                             .ToList()
                         )
                         .OrderBy(i => i.Name)
-                        .Select(i => ViewModelFactory.CreateViewModel<ControlKindViewModel.Factory>().Invoke(DataContext, i))));
+                        .Select(i => ViewModelFactory.CreateViewModel<ControlKindViewModel.Factory>().Invoke(DataContext, this, i))));
                 }
                 return _rootControlKinds;
             }

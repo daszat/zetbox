@@ -12,12 +12,12 @@ namespace Kistl.Client.Presentables
     public class DescribedPropertyViewModel 
         : DataObjectViewModel
     {
-        public new delegate DescribedPropertyViewModel Factory(IKistlContext dataCtx, Property prop);
+        public new delegate DescribedPropertyViewModel Factory(IKistlContext dataCtx, ViewModel parent, Property prop);
 
         public DescribedPropertyViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent,
             Property prop)
-            : base(appCtx, dataCtx, prop)
+            : base(appCtx, dataCtx, parent, prop)
         {
             _prop = prop;
         }

@@ -13,10 +13,10 @@ namespace Kistl.Client.Presentables
     public class KistlDebuggerAsViewModel
         : ViewModel, IKistlContextDebugger
     {
-        public new delegate KistlDebuggerAsViewModel Factory(IKistlContext dataCtx);
+        public new delegate KistlDebuggerAsViewModel Factory(IKistlContext dataCtx, ViewModel parent);
 
-        public KistlDebuggerAsViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx)
-            : base(appCtx, dataCtx)
+        public KistlDebuggerAsViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent)
+            : base(appCtx, dataCtx, parent)
         {
             KistlContextDebuggerSingleton.SetDebugger(this);
         }

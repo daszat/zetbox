@@ -113,16 +113,16 @@ namespace Kistl.Client
                         var valueModels = new List<BaseValueViewModel>();
 
                         var userName = new ClassValueModel<string>("Username", "", false, false);
-                        valueModels.Add(_vmf.CreateViewModel<ClassValueViewModel<string>.Factory>().Invoke(ctx, userName));
+                        valueModels.Add(_vmf.CreateViewModel<ClassValueViewModel<string>.Factory>().Invoke(ctx, null, userName));
 
                         var pwd = new ClassValueModel<string>("Password", "", false, false);
-                        var pwdvm = _vmf.CreateViewModel<ClassValueViewModel<string>.Factory>().Invoke(ctx, pwd);
+                        var pwdvm = _vmf.CreateViewModel<ClassValueViewModel<string>.Factory>().Invoke(ctx, null, pwd);
                         pwdvm.RequestedKind = _frozenCtx.FindPersistenceObject<ControlKind>(NamedObjects.ControlKind_Kistl_App_GUI_PasswordKind);
                         valueModels.Add(pwdvm);
 
                         var dlgOK = false;
 
-                        var dlg = _vmf.CreateViewModel<ValueInputTaskViewModel.Factory>().Invoke(ctx, "Enter Credentials", valueModels, (p) =>
+                        var dlg = _vmf.CreateViewModel<ValueInputTaskViewModel.Factory>().Invoke(ctx, null, "Enter Credentials", valueModels, (p) =>
                         {
                             this.UserName = userName.Value;
                             this.Password = pwd.Value;

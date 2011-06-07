@@ -4,6 +4,7 @@ namespace Kistl.Client.Presentables
     using System;
     using Kistl.App.GUI;
     using Kistl.API.Client;
+using Kistl.API;
 
     public interface IViewModelFactory : IToolkit
     {
@@ -14,6 +15,8 @@ namespace Kistl.Client.Presentables
         void ShowDialog(ViewModel mdl, Kistl.App.GUI.ControlKind kind);
 
         bool CanShowModel(ViewModel mdl);
+
+        ViewModel GetWorkspace(IKistlContext ctx);
 
         /// <summary>
         /// Initializes the requested culture form config on the current thread

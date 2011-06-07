@@ -11,13 +11,13 @@ namespace Kistl.Client.Presentables
 
     public class ErrorDescriptor : ViewModel
     {
-        public new delegate ErrorDescriptor Factory(IKistlContext dataCtx, DataObjectViewModel item, IList<string> errors);
+        public new delegate ErrorDescriptor Factory(IKistlContext dataCtx, ViewModel parent, DataObjectViewModel item, IList<string> errors);
 
         private readonly DataObjectViewModel _item;
         private readonly IList<string> _errors;
 
-        public ErrorDescriptor(IViewModelDependencies dependencies, IKistlContext dataCtx, DataObjectViewModel item, IList<string> errors)
-            : base(dependencies, dataCtx)
+        public ErrorDescriptor(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, DataObjectViewModel item, IList<string> errors)
+            : base(dependencies, dataCtx, parent)
         {
             this._item = item;
             this._errors = errors;
@@ -61,10 +61,10 @@ namespace Kistl.Client.Presentables
     public class ErrorListViewModel
         : WindowViewModel
     {
-        public new delegate ErrorListViewModel Factory(IKistlContext dataCtx);
+        public new delegate ErrorListViewModel Factory(IKistlContext dataCtx, ViewModel parent);
 
-        public ErrorListViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx)
-            : base(appCtx, dataCtx)
+        public ErrorListViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent)
+            : base(appCtx, dataCtx, parent)
         {
             _errors = new ObservableCollection<ErrorDescriptor>();
             _roErrors = new ReadOnlyObservableCollection<ErrorDescriptor>(_errors);
@@ -133,8 +133,8 @@ namespace Kistl.Client.Presentables
                 .Where(tmp => !String.IsNullOrEmpty(tmp.err)))
             {
                 _errors.Add(ViewModelFactory.CreateViewModel<ErrorDescriptor.Factory>().Invoke(
-                    DataContext,
-                    DataObjectViewModel.Fetch(ViewModelFactory, DataContext, error.obj),
+                    DataContext, this,
+                    DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this, error.obj),
                     new List<string>() { error.err }));
             }
         }

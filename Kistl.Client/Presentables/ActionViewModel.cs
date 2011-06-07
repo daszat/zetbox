@@ -13,16 +13,15 @@ namespace Kistl.Client.Presentables
     public class ActionViewModel
         : ViewModel
     {
-        public new delegate ActionViewModel Factory(IKistlContext dataCtx, ViewModel progressDisplayer, IDataObject obj, Method m);
+        public new delegate ActionViewModel Factory(IKistlContext dataCtx, ViewModel parent, IDataObject obj, Method m);
 
         public ActionViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel progressDisplayer, 
+            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent, 
             IDataObject obj, Method m)
-            : base(appCtx, dataCtx)
+            : base(appCtx, dataCtx, parent)
         {
             Object = obj;
             Method = m;
-            ProgressDisplayer = progressDisplayer;
 
             Method.PropertyChanged += MethodPropertyChanged;
         }
@@ -51,7 +50,7 @@ namespace Kistl.Client.Presentables
                 {
                     _ExecuteCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
                         DataContext, 
-                        ProgressDisplayer,
+                        Parent,
                         Method.GetLabel(), 
                         Method.Description, 
                         Execute, 
@@ -74,7 +73,7 @@ namespace Kistl.Client.Presentables
 
             if (parameter.Length > 0)
             {
-                var pitMdl = ViewModelFactory.CreateViewModel<ParameterInputTaskViewModel.Factory>().Invoke(DataContext, Method, 
+                var pitMdl = ViewModelFactory.CreateViewModel<ParameterInputTaskViewModel.Factory>().Invoke(DataContext, this, Method, 
                     (p) => {
                         var result = info.Invoke(Object, p);
                         HandleResult(result);
@@ -93,7 +92,7 @@ namespace Kistl.Client.Presentables
             IDataObject obj = result as IDataObject;
             if (obj != null && obj.Context == DataContext)
             {
-                this.ViewModelFactory.ShowModel(DataObjectViewModel.Fetch(this.ViewModelFactory, DataContext, obj), true);
+                this.ViewModelFactory.ShowModel(DataObjectViewModel.Fetch(this.ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj), true);
             }
         }
 
@@ -118,6 +117,5 @@ namespace Kistl.Client.Presentables
 
         protected IDataObject Object { get; private set; }
         protected Method Method { get; private set; }
-        protected ViewModel ProgressDisplayer { get; private set; }
     }
 }

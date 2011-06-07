@@ -16,10 +16,10 @@ namespace Kistl.Client.Presentables.ModuleEditor
     [ViewModelDescriptor]
     public class NavigationScreenHierarchyViewModel : ViewModel, IRefreshCommandListener
     {
-        public new delegate NavigationScreenHierarchyViewModel Factory(IKistlContext dataCtx, Module module);
+        public new delegate NavigationScreenHierarchyViewModel Factory(IKistlContext dataCtx, ViewModel parent, Module module);
 
-        public NavigationScreenHierarchyViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, Module module, Func<IKistlContext> ctxFactory)
-            : base(appCtx, dataCtx)
+        public NavigationScreenHierarchyViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent, Module module, Func<IKistlContext> ctxFactory)
+            : base(appCtx, dataCtx, parent)
         {
             this.ctxFactory = ctxFactory;
             this.Module = module;
@@ -69,7 +69,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
                         .Where(i => i.Module.ID == moduleID)
                         .Where(i => i.Parent == null)
                         .OrderBy(i => i.Title)
-                        .Select(i => NavigationScreenViewModel.Fetch(ViewModelFactory, DataContext, i))));
+                        .Select(i => NavigationScreenViewModel.Fetch(ViewModelFactory, DataContext, this, i))));
                 }
                 return _rootScreens;
             }

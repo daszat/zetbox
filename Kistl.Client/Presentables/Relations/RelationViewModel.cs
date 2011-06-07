@@ -14,14 +14,14 @@ namespace Kistl.Client.Presentables.Relations
     public class RelationViewModel
         : DataObjectViewModel
     {
-        public new delegate RelationViewModel Factory(IKistlContext dataCtx, Relation rel);
+        public new delegate RelationViewModel Factory(IKistlContext dataCtx, ViewModel parent, Relation rel);
 
         private Relation _relation;
 
         public RelationViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent,
             Relation rel)
-            : base(appCtx, dataCtx, rel)
+            : base(appCtx, dataCtx, parent, rel)
         {
             _relation = rel;
             _relation.PropertyChanged += (sender, args) => OnPropertyChanged(args.PropertyName);

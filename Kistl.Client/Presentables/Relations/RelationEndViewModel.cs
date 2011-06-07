@@ -13,12 +13,12 @@ namespace Kistl.Client.Presentables.Relations
     public class RelationEndViewModel
         : DataObjectViewModel
     {
-        public new delegate RelationEndViewModel Factory(IKistlContext dataCtx, RelationEnd relEnd);
+        public new delegate RelationEndViewModel Factory(IKistlContext dataCtx, ViewModel parent, RelationEnd relEnd);
 
         public RelationEndViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent,
             RelationEnd relEnd)
-            : base(appCtx, dataCtx, relEnd)
+            : base(appCtx, dataCtx, parent, relEnd)
         {
         }
 

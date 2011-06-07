@@ -11,12 +11,12 @@ namespace Kistl.Client.Presentables.Parties
     [ViewModelDescriptor]
     public class PersonViewModel : PartyViewModel
     {
-        public new delegate PersonViewModel Factory(IKistlContext dataCtx,
+        public new delegate PersonViewModel Factory(IKistlContext dataCtx, ViewModel parent,
             IDataObject obj);
 
-        public PersonViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx,
+        public PersonViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent,
             Party obj)
-            : base(appCtx, dataCtx, obj)
+            : base(appCtx, dataCtx, parent, obj)
         {
         }
 

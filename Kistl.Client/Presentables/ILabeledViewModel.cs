@@ -23,10 +23,10 @@ namespace Kistl.Client.Presentables
     public class LabeledViewContainerViewModel
         : ViewModel, ILabeledViewModel
     {
-        public new delegate LabeledViewContainerViewModel Factory(IKistlContext dataCtx, string label, string toolTip, ViewModel mdl);
+        public new delegate LabeledViewContainerViewModel Factory(IKistlContext dataCtx, ViewModel parent, string label, string toolTip, ViewModel mdl);
 
-        public LabeledViewContainerViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, string label, string toolTip, ViewModel mdl)
-            : base(dependencies, dataCtx)
+        public LabeledViewContainerViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, string label, string toolTip, ViewModel mdl)
+            : base(dependencies, dataCtx, parent)
         {
             this._Label = label;
             this._ToolTip = toolTip;

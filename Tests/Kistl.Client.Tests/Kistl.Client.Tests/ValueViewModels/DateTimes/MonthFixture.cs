@@ -35,6 +35,7 @@ namespace Kistl.Client.Tests.ValueViewModels.DateTimes
             obj = new NullableMonthPropertyViewModel(
                 scope.Resolve<IViewModelDependencies>(), 
                 scope.Resolve<BaseMemoryContext>(),
+                null,
                 valueModelMock.Object);
         }
 

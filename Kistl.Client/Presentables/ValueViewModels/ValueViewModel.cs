@@ -28,30 +28,30 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
     public abstract class BaseValueViewModel : ViewModel, IValueViewModel, IFormattedValueViewModel, IDataErrorInfo, ILabeledViewModel
     {
-        public new delegate BaseValueViewModel Factory(IKistlContext dataCtx, IValueModel mdl);
+        public new delegate BaseValueViewModel Factory(IKistlContext dataCtx, ViewModel parent, IValueModel mdl);
 
-        public static BaseValueViewModel Fetch(IViewModelFactory f, IKistlContext dataCtx, Property prop, IValueModel mdl)
+        public static BaseValueViewModel Fetch(IViewModelFactory f, IKistlContext dataCtx, ViewModel parent, Property prop, IValueModel mdl)
         {
-            return (BaseValueViewModel)dataCtx.GetViewModelCache().LookupOrCreate(mdl, () => f.CreateViewModel<BaseValueViewModel.Factory>(prop).Invoke(dataCtx, mdl));
+            return (BaseValueViewModel)dataCtx.GetViewModelCache().LookupOrCreate(mdl, () => f.CreateViewModel<BaseValueViewModel.Factory>(prop).Invoke(dataCtx, parent, mdl));
         }
 
-        public static BaseValueViewModel Fetch(IViewModelFactory f, IKistlContext dataCtx, Method m, IValueModel mdl)
+        public static BaseValueViewModel Fetch(IViewModelFactory f, IKistlContext dataCtx, ViewModel parent, Method m, IValueModel mdl)
         {
-            return (BaseValueViewModel)dataCtx.GetViewModelCache().LookupOrCreate(mdl, () => f.CreateViewModel<BaseValueViewModel.Factory>(m).Invoke(dataCtx, mdl));
+            return (BaseValueViewModel)dataCtx.GetViewModelCache().LookupOrCreate(mdl, () => f.CreateViewModel<BaseValueViewModel.Factory>(m).Invoke(dataCtx, parent, mdl));
         }
 
-        public static BaseValueViewModel Fetch(IViewModelFactory f, IKistlContext dataCtx, ViewModelDescriptor desc, IValueModel mdl)
+        public static BaseValueViewModel Fetch(IViewModelFactory f, IKistlContext dataCtx, ViewModel parent, ViewModelDescriptor desc, IValueModel mdl)
         {
-            return (BaseValueViewModel)dataCtx.GetViewModelCache().LookupOrCreate(mdl, () => f.CreateViewModel<BaseValueViewModel.Factory>(desc).Invoke(dataCtx, mdl));
+            return (BaseValueViewModel)dataCtx.GetViewModelCache().LookupOrCreate(mdl, () => f.CreateViewModel<BaseValueViewModel.Factory>(desc).Invoke(dataCtx, parent, mdl));
         }
 
-        public static BaseValueViewModel Fetch(IViewModelFactory f, IKistlContext dataCtx, BaseParameter param, IValueModel mdl)
+        public static BaseValueViewModel Fetch(IViewModelFactory f, IKistlContext dataCtx, ViewModel parent, BaseParameter param, IValueModel mdl)
         {
-            return (BaseValueViewModel)dataCtx.GetViewModelCache().LookupOrCreate(mdl, () => f.CreateViewModel<BaseValueViewModel.Factory>(param).Invoke(dataCtx, mdl));
+            return (BaseValueViewModel)dataCtx.GetViewModelCache().LookupOrCreate(mdl, () => f.CreateViewModel<BaseValueViewModel.Factory>(param).Invoke(dataCtx, parent, mdl));
         }
 
-        public BaseValueViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, IValueModel mdl)
-            : base(dependencies, dataCtx)
+        public BaseValueViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IValueModel mdl)
+            : base(dependencies, dataCtx, parent)
         {
             this.ValueModel = mdl;
         }
@@ -79,6 +79,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
         {
             get
             {
+                if (Parent != null && Parent.Highlight != null) return Parent.Highlight;
                 if (!IsEnabled || IsReadOnly) return Highlight.Deactivated;
                 return null;
             }
@@ -254,10 +255,10 @@ namespace Kistl.Client.Presentables.ValueViewModels
             public TResultValue Value { get; set; }
         }
 
-        public new delegate ValueViewModel<TValue, TModel> Factory(IKistlContext dataCtx, IValueModel mdl);
+        public new delegate ValueViewModel<TValue, TModel> Factory(IKistlContext dataCtx, ViewModel parent, IValueModel mdl);
 
-        public ValueViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, IValueModel mdl)
-            : base(dependencies, dataCtx, mdl)
+        public ValueViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IValueModel mdl)
+            : base(dependencies, dataCtx, parent, mdl)
         {
             this.ValueModel = (IValueModel<TModel>)mdl;
             this.State = ValueViewModelState.Blurred_UnmodifiedValue;
@@ -675,10 +676,10 @@ namespace Kistl.Client.Presentables.ValueViewModels
     public class NullableStructValueViewModel<TValue> : ValueViewModel<Nullable<TValue>, Nullable<TValue>>
         where TValue : struct
     {
-        public new delegate NullableStructValueViewModel<TValue> Factory(IKistlContext dataCtx, IValueModel mdl);
+        public new delegate NullableStructValueViewModel<TValue> Factory(IKistlContext dataCtx, ViewModel parent, IValueModel mdl);
 
-        public NullableStructValueViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, IValueModel mdl)
-            : base(dependencies, dataCtx, mdl)
+        public NullableStructValueViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IValueModel mdl)
+            : base(dependencies, dataCtx, parent, mdl)
         {
         }
 
@@ -714,10 +715,10 @@ namespace Kistl.Client.Presentables.ValueViewModels
     public class ClassValueViewModel<TValue> : ValueViewModel<TValue, TValue>
         where TValue : class
     {
-        public new delegate ClassValueViewModel<TValue> Factory(IKistlContext dataCtx, IValueModel mdl);
+        public new delegate ClassValueViewModel<TValue> Factory(IKistlContext dataCtx, ViewModel parent, IValueModel mdl);
 
-        public ClassValueViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, IValueModel mdl)
-            : base(dependencies, dataCtx, mdl)
+        public ClassValueViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IValueModel mdl)
+            : base(dependencies, dataCtx, parent, mdl)
         {
         }
 
@@ -752,10 +753,10 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
     public class EnumerationValueViewModel : NullableStructValueViewModel<int>
     {
-        public new delegate EnumerationValueViewModel Factory(IKistlContext dataCtx, IValueModel mdl);
+        public new delegate EnumerationValueViewModel Factory(IKistlContext dataCtx, ViewModel parent, IValueModel mdl);
 
-        public EnumerationValueViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, IValueModel mdl)
-            : base(dependencies, dataCtx, mdl)
+        public EnumerationValueViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IValueModel mdl)
+            : base(dependencies, dataCtx, parent, mdl)
         {
             this.EnumModel = (IEnumerationValueModel)mdl;
         }
@@ -820,10 +821,10 @@ namespace Kistl.Client.Presentables.ValueViewModels
     public class MultiLineStringValueViewModel
         : ClassValueViewModel<string>
     {
-        public new delegate MultiLineStringValueViewModel Factory(IKistlContext dataCtx, IValueModel mdl);
+        public new delegate MultiLineStringValueViewModel Factory(IKistlContext dataCtx, ViewModel parent, IValueModel mdl);
 
-        public MultiLineStringValueViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, IValueModel mdl)
-            : base(dependencies, dataCtx, mdl)
+        public MultiLineStringValueViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IValueModel mdl)
+            : base(dependencies, dataCtx, parent, mdl)
         {
         }
 
@@ -893,6 +894,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             ViewModelFactory.ShowModel(
                     ViewModelFactory.CreateViewModel<MultiLineEditorDialogViewModel.Factory>().Invoke(
                         DataContext,
+                        this,
                         Value,
                         (v) => Value = v),
                     true);
@@ -901,10 +903,10 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
     public class NullableGuidPropertyViewModel : NullableStructValueViewModel<Guid>
     {
-        public new delegate NullableGuidPropertyViewModel Factory(IKistlContext dataCtx, IValueModel mdl);
+        public new delegate NullableGuidPropertyViewModel Factory(IKistlContext dataCtx, ViewModel parent, IValueModel mdl);
 
-        public NullableGuidPropertyViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, IValueModel mdl)
-            : base(dependencies, dataCtx, mdl)
+        public NullableGuidPropertyViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IValueModel mdl)
+            : base(dependencies, dataCtx, parent, mdl)
         {
         }
 
@@ -935,10 +937,10 @@ namespace Kistl.Client.Presentables.ValueViewModels
     {
         private class NullableTimePartPropertyViewModel : NullableStructValueViewModel<TimeSpan>
         {
-            public new delegate NullableTimePartPropertyViewModel Factory(IKistlContext dataCtx, IValueModel mdl);
+            public new delegate NullableTimePartPropertyViewModel Factory(IKistlContext dataCtx, ViewModel parent, IValueModel mdl);
 
-            public NullableTimePartPropertyViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, IValueModel mdl)
-                : base(dependencies, dataCtx, mdl)
+            public NullableTimePartPropertyViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IValueModel mdl)
+                : base(dependencies, dataCtx, parent, mdl)
             {
             }
 
@@ -976,13 +978,13 @@ namespace Kistl.Client.Presentables.ValueViewModels
             }
         }
 
-        public new delegate NullableDateTimePropertyViewModel Factory(IKistlContext dataCtx, IValueModel mdl);
+        public new delegate NullableDateTimePropertyViewModel Factory(IKistlContext dataCtx, ViewModel parent, IValueModel mdl);
 
-        public NullableDateTimePropertyViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, IValueModel mdl)
-            : base(dependencies, dataCtx, mdl)
+        public NullableDateTimePropertyViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IValueModel mdl)
+            : base(dependencies, dataCtx, parent, mdl)
         {
             DateTimeModel = (IDateTimeValueModel)mdl;
-            _timePartViewModel = ViewModelFactory.CreateViewModel<NullableTimePartPropertyViewModel.Factory>().Invoke(DataContext, mdl);
+            _timePartViewModel = ViewModelFactory.CreateViewModel<NullableTimePartPropertyViewModel.Factory>().Invoke(DataContext, this, mdl);
         }
 
         public IDateTimeValueModel DateTimeModel { get; private set; }
@@ -1150,10 +1152,10 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
     public class NullableBoolPropertyViewModel : NullableStructValueViewModel<bool>
     {
-        public new delegate NullableBoolPropertyViewModel Factory(IKistlContext dataCtx, IValueModel mdl);
+        public new delegate NullableBoolPropertyViewModel Factory(IKistlContext dataCtx, ViewModel parent, IValueModel mdl);
 
-        public NullableBoolPropertyViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, IValueModel mdl)
-            : base(dependencies, dataCtx, mdl)
+        public NullableBoolPropertyViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IValueModel mdl)
+            : base(dependencies, dataCtx, parent, mdl)
         {
             BoolModel = (IBoolValueModel)mdl;
             usingDefinedPresentation =
@@ -1249,10 +1251,10 @@ namespace Kistl.Client.Presentables.ValueViewModels
     public class NullableMonthPropertyViewModel
         : NullableDateTimePropertyViewModel
     {
-        public new delegate NullableMonthPropertyViewModel Factory(IKistlContext dataCtx, IValueModel mdl);
+        public new delegate NullableMonthPropertyViewModel Factory(IKistlContext dataCtx, ViewModel parent, IValueModel mdl);
 
-        public NullableMonthPropertyViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, IValueModel mdl)
-            : base(dependencies, dataCtx, mdl)
+        public NullableMonthPropertyViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IValueModel mdl)
+            : base(dependencies, dataCtx, parent, mdl)
         {
 
         }

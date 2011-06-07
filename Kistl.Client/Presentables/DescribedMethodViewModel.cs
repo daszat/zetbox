@@ -13,12 +13,12 @@ namespace Kistl.Client.Presentables
     public class DescribedMethodViewModel
         : DataObjectViewModel
     {
-        public new delegate DescribedMethodViewModel Factory(IKistlContext dataCtx, Method meth);
+        public new delegate DescribedMethodViewModel Factory(IKistlContext dataCtx, ViewModel parent, Method meth);
 
         public DescribedMethodViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent,
             Method meth)
-            : base(appCtx, dataCtx, meth)
+            : base(appCtx, dataCtx, parent, meth)
         {
             _method = meth;
         }

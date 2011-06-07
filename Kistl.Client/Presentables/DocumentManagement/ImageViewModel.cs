@@ -12,12 +12,12 @@ namespace Kistl.Client.Presentables.DocumentManagement
     [ViewModelDescriptor]
     public class ImageViewModel : FileViewModel
     {
-        public new delegate ImageViewModel Factory(IKistlContext dataCtx, IDataObject obj);
+        public new delegate ImageViewModel Factory(IKistlContext dataCtx, ViewModel parent, IDataObject obj);
 
         public ImageViewModel(
-            IViewModelDependencies appCtx, KistlConfig config, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, KistlConfig config, IKistlContext dataCtx, ViewModel parent,
             File obj)
-            : base(appCtx, config, dataCtx, obj)
+            : base(appCtx, config, dataCtx, parent, obj)
         {
 
         }

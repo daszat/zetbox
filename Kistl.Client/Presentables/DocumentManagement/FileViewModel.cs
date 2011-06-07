@@ -11,12 +11,12 @@ namespace Kistl.Client.Presentables.DocumentManagement
     [ViewModelDescriptor]
     public class FileViewModel : DataObjectViewModel
     {
-        public new delegate FileViewModel Factory(IKistlContext dataCtx, IDataObject obj);
+        public new delegate FileViewModel Factory(IKistlContext dataCtx, ViewModel parent, IDataObject obj);
 
         public FileViewModel(
-            IViewModelDependencies appCtx, KistlConfig config, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, KistlConfig config, IKistlContext dataCtx, ViewModel parent,
             File obj)
-            : base(appCtx, dataCtx, obj)
+            : base(appCtx, dataCtx, parent, obj)
         {
             this.File = obj;
         }

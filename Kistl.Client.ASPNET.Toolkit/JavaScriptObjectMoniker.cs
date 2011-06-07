@@ -34,7 +34,7 @@ namespace Kistl.Client.ASPNET.Toolkit
         
         public JavaScriptObjectMoniker(IKistlContext ctx, IDataObject obj)
         {
-            DataObjectViewModel m = DataObjectViewModel.Fetch(KistlContextManagerModule.ViewModelFactory, ctx, obj);
+            DataObjectViewModel m = DataObjectViewModel.Fetch(KistlContextManagerModule.ViewModelFactory, ctx, null, obj);
             Init(m);
         }
 
@@ -61,7 +61,7 @@ namespace Kistl.Client.ASPNET.Toolkit
                 obj = (IDataObject)ctx.Find(KistlContextManagerModule.IftFactory(Type.GetSystemType()), ID);
             }
 
-            return DataObjectViewModel.Fetch(KistlContextManagerModule.ViewModelFactory, ctx, obj);
+            return DataObjectViewModel.Fetch(KistlContextManagerModule.ViewModelFactory, ctx, null, obj);
         }
     }
 

@@ -12,10 +12,10 @@ namespace Kistl.Client.Presentables.FilterViewModels
     [ViewModelDescriptor]
     public class SingleValueFilterViewModel : FilterViewModel
     {
-        public new delegate SingleValueFilterViewModel Factory(IKistlContext dataCtx, IUIFilterModel mdl);
+        public new delegate SingleValueFilterViewModel Factory(IKistlContext dataCtx, ViewModel parent, IUIFilterModel mdl);
 
-        public SingleValueFilterViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, IUIFilterModel mdl)
-            : base(dependencies, dataCtx, mdl)
+        public SingleValueFilterViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IUIFilterModel mdl)
+            : base(dependencies, dataCtx, parent, mdl)
         {
         }
 

@@ -14,10 +14,10 @@ namespace Kistl.Client.Presentables.GUI
     public class ControlKindViewModel
         : DataObjectViewModel
     {
-        public new delegate ControlKindViewModel Factory(IKistlContext dataCtx, ControlKind obj);
+        public new delegate ControlKindViewModel Factory(IKistlContext dataCtx, ViewModel parent, ControlKind obj);
 
-        public ControlKindViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ControlKind obj)
-            : base(dependencies, dataCtx, obj)
+        public ControlKindViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, ControlKind obj)
+            : base(dependencies, dataCtx, parent, obj)
         {
             Kind = obj;
         }
@@ -34,7 +34,7 @@ namespace Kistl.Client.Presentables.GUI
                     _childControlKinds = new ReadOnlyObservableCollection<ControlKindViewModel>(new ObservableCollection<ControlKindViewModel>(
                         Kind.ChildControlKinds
                             .OrderBy(i => i.Name)
-                            .Select(i => ViewModelFactory.CreateViewModel<ControlKindViewModel.Factory>().Invoke(DataContext, i))));
+                            .Select(i => ViewModelFactory.CreateViewModel<ControlKindViewModel.Factory>().Invoke(DataContext, this, i))));
                 }
                 return _childControlKinds;
             }

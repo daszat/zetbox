@@ -18,9 +18,9 @@ namespace Kistl.Client.Presentables.KistlBase
         : ObjectReferenceViewModel
     {
         public AssemblyReferenceViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent,
             IValueModel mdl)
-            : base(appCtx, dataCtx,mdl)
+            : base(appCtx, dataCtx, parent, mdl)
         {
             //// TODO: use a static reference here
             //if (prop.GetReferencedObjectClass() != DataContext.GetQuery<ObjectClass>().Where(oc => oc.Name == "Assembly"))
@@ -40,7 +40,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 assemblyDescriptor.Name = assembly.FullName;
             }
 
-            this.Value = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, assemblyDescriptor);
+            this.Value = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), assemblyDescriptor);
         }
     }
 }

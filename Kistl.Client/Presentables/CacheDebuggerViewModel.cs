@@ -12,10 +12,10 @@ namespace Kistl.Client.Presentables
     public class CacheDebuggerViewModel
         : ViewModel
     {
-        public new delegate CacheDebuggerViewModel Factory(IKistlContext dataCtx);
+        public new delegate CacheDebuggerViewModel Factory(IKistlContext dataCtx, ViewModel parent);
 
-        public CacheDebuggerViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx)
-            : base(appCtx, dataCtx)
+        public CacheDebuggerViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent)
+            : base(appCtx, dataCtx, parent)
         {
             Cache.CachesCollectionChanged += new EventHandler(Cache_CachesCollectionChanged);
         }

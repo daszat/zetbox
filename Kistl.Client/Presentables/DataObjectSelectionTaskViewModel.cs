@@ -14,7 +14,7 @@ namespace Kistl.Client.Presentables
     public class DataObjectSelectionTaskViewModel
         : WindowViewModel, IRefreshCommandListener
     {
-        public new delegate DataObjectSelectionTaskViewModel Factory(IKistlContext dataCtx,
+        public new delegate DataObjectSelectionTaskViewModel Factory(IKistlContext dataCtx, ViewModel parent,
             ObjectClass type,
             Func<IQueryable> qry,
             Action<DataObjectViewModel> callback,
@@ -28,21 +28,22 @@ namespace Kistl.Client.Presentables
         /// </summary>
         /// <param name="appCtx"></param>
         /// <param name="dataCtx"></param>
+        /// <param name="parent">Parent ViewModel</param>
         /// <param name="type"></param>
         /// <param name="qry"></param>
         /// <param name="callback"></param>
         /// <param name="additionalActions"></param>
         public DataObjectSelectionTaskViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent,
             ObjectClass type,
             Func<IQueryable> qry,
             Action<DataObjectViewModel> callback,
             IList<CommandViewModel> additionalActions)
-            : base(appCtx, dataCtx)
+            : base(appCtx, dataCtx, parent)
         {
             _callback = callback;
             _additionalActions = new ReadOnlyCollection<CommandViewModel>(additionalActions ?? new CommandViewModel[] { });
-            ListViewModel = ViewModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(dataCtx, () => dataCtx, type, qry);
+            ListViewModel = ViewModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(dataCtx, this, () => dataCtx, type, qry);
             ListViewModel.AllowAddNew = true;
             ListViewModel.ObjectCreated += ListViewModel_ObjectCreated;
             ListViewModel.ItemsDefaultAction += ListViewModel_ItemsDefaultAction;
@@ -58,7 +59,7 @@ namespace Kistl.Client.Presentables
             if (obj == null) throw new ArgumentNullException("obj");
 
             // Same like choose
-            var mdl = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, obj);
+            var mdl = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj);
             Choose(mdl);
         }
 

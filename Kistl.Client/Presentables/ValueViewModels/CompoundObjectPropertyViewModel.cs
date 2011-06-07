@@ -16,12 +16,12 @@ namespace Kistl.Client.Presentables.ValueViewModels
     [ViewModelDescriptor]
     public class CompoundObjectPropertyViewModel : ValueViewModel<CompoundObjectViewModel, ICompoundObject>, IValueViewModel<CompoundObjectViewModel>
     {
-        public new delegate CompoundObjectPropertyViewModel Factory(IKistlContext dataCtx, IValueModel mdl);
+        public new delegate CompoundObjectPropertyViewModel Factory(IKistlContext dataCtx, ViewModel parent, IValueModel mdl);
 
         public CompoundObjectPropertyViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent,
             IValueModel mdl)
-            : base(appCtx, dataCtx, mdl)
+            : base(appCtx, dataCtx, parent, mdl)
         {
             CompoundObjectModel = (ICompoundObjectValueModel)mdl;
         }
@@ -66,7 +66,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             var obj = ValueModel.Value;
             if (obj != null)
             {
-                _valueCache = CompoundObjectViewModel.Fetch(ViewModelFactory, DataContext, obj);
+                _valueCache = CompoundObjectViewModel.Fetch(ViewModelFactory, DataContext, this, obj);
             }
             _valueCacheInititalized = true;
         }

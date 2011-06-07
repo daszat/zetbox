@@ -14,10 +14,10 @@ namespace Kistl.Client.Presentables.Parties
     [ViewModelDescriptor]
     public class PartyRolesViewModel : ViewModel
     {
-        public new delegate PartyRolesViewModel Factory(IKistlContext dataCtx, Party obj, InterfaceType roleType);
+        public new delegate PartyRolesViewModel Factory(IKistlContext dataCtx, ViewModel parent, Party obj, InterfaceType roleType);
 
-        public PartyRolesViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, Party obj, InterfaceType roleType)
-            : base(appCtx, dataCtx)
+        public PartyRolesViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent, Party obj, InterfaceType roleType)
+            : base(appCtx, dataCtx, parent)
         {
             if (obj == null) throw new ArgumentNullException("obj");
             if (roleType == null) throw new ArgumentNullException("roleType");
@@ -69,7 +69,7 @@ namespace Kistl.Client.Presentables.Parties
             {
                 if(_Roles == null)
                 {
-                    _Roles = ViewModelFactory.CreateViewModel<ValueViewModels.ObjectCollectionViewModel.Factory>().Invoke(DataContext, RolesModel);
+                    _Roles = ViewModelFactory.CreateViewModel<ValueViewModels.ObjectCollectionViewModel.Factory>().Invoke(DataContext, this, RolesModel);
                     _Roles.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(_Roles_PropertyChanged);
                     _Roles.SelectedItem = _Roles.Value.FirstOrDefault(i => ((PartyRole)i.Object).Thru == null);
                 }

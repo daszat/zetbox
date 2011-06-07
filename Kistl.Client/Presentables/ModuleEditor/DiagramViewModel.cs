@@ -25,14 +25,14 @@ namespace Kistl.Client.Presentables.ModuleEditor
 
     public class DataTypeGraphModel : Presentables.DataTypeViewModel
     {
-        public new delegate DataTypeGraphModel Factory(IKistlContext dataCtx, DataType obj, DiagramViewModel parent);
+        public new delegate DataTypeGraphModel Factory(IKistlContext dataCtx, DiagramViewModel parent, DataType obj);
 
         private DiagramViewModel _diagMdl;
         protected readonly Func<IKistlContext> ctxFactory;
 
-        public DataTypeGraphModel(IViewModelDependencies appCtx, IKistlContext dataCtx,
-            DataType obj, DiagramViewModel parent, Func<IKistlContext> ctxFactory)
-            : base(appCtx, dataCtx, obj)
+        public DataTypeGraphModel(IViewModelDependencies appCtx, IKistlContext dataCtx, DiagramViewModel parent,
+            DataType obj, Func<IKistlContext> ctxFactory)
+            : base(appCtx, dataCtx, parent, obj)
         {
             this._diagMdl = parent;
             this.ctxFactory = ctxFactory;
@@ -91,7 +91,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
                     _open = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
                         DataContext, this, "Open", "Opens the current DataType", () =>
                         {
-                            var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(ctxFactory());
+                            var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(ctxFactory(), null);
                             newWorkspace.ShowForeignModel(this);
                             ViewModelFactory.ShowModel(newWorkspace, true);
                         }, null);
@@ -104,10 +104,10 @@ namespace Kistl.Client.Presentables.ModuleEditor
 
     public class DiagramViewModel : ViewModel
     {
-        public new delegate DiagramViewModel Factory(IKistlContext dataCtx, Module module);
+        public new delegate DiagramViewModel Factory(IKistlContext dataCtx, ViewModel parent, Module module);
 
-        public DiagramViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, Module module, Func<IKistlContext> ctxFactory)
-            : base(appCtx, dataCtx)
+        public DiagramViewModel(IViewModelDependencies appCtx, ViewModel parent, IKistlContext dataCtx, Module module, Func<IKistlContext> ctxFactory)
+            : base(appCtx, dataCtx, parent)
         {
             this.ctxFactory = ctxFactory;
             this.Module = module;
@@ -172,7 +172,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
                 if (_DataTypeViewModels == null)
                 {
                     _DataTypeViewModels = new ReadOnlyProjectedList<DataType, DataTypeGraphModel>(DataTypes,
-                        i => ViewModelFactory.CreateViewModel<DataTypeGraphModel.Factory>().Invoke(DataContext, i, this),
+                        i => ViewModelFactory.CreateViewModel<DataTypeGraphModel.Factory>().Invoke(DataContext, this, i),
                         i => i.DataType);
                 }
                 return _DataTypeViewModels;
@@ -434,12 +434,12 @@ namespace Kistl.Client.Presentables.ModuleEditor
                     _NewObjectClassCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "New Class", "Creates a new Class", () =>
                     {
                         var newCtx = ctxFactory();
-                        var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx);
+                        var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx, null);
                         var newCls = newCtx.Create<ObjectClass>();
 
                         newCls.Module = newCtx.Find<Module>(Module.ID);
 
-                        newWorkspace.ShowForeignModel(DataObjectViewModel.Fetch(ViewModelFactory, newCtx, newCls));
+                        newWorkspace.ShowForeignModel(DataObjectViewModel.Fetch(ViewModelFactory, newCtx, newWorkspace, newCls));
                         ViewModelFactory.ShowModel(newWorkspace, true);
                     }, null);
                 }
@@ -457,7 +457,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
                     _NewRelationCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "New Relation", "Creates a new Relation", () =>
                     {
                         var newCtx = ctxFactory();
-                        var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx);
+                        var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx, null);
                         var newRel = newCtx.Create<Relation>();
 
                         newRel.Module = newCtx.Find<Module>(Module.ID);
@@ -465,7 +465,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
                         newRel.A.Type = newCtx.Find<ObjectClass>(SelectedGraphDataTypeViewModels.First().ID);
                         newRel.B.Type = newCtx.Find<ObjectClass>(SelectedGraphDataTypeViewModels.Last().ID);
 
-                        newWorkspace.ShowForeignModel(DataObjectViewModel.Fetch(ViewModelFactory, newCtx, newRel));
+                        newWorkspace.ShowForeignModel(DataObjectViewModel.Fetch(ViewModelFactory, newCtx, newWorkspace, newRel));
                         ViewModelFactory.ShowModel(newWorkspace, true);
                     },
                     () => (SelectedGraphDataTypeViewModels.Count() == 1 || SelectedGraphDataTypeViewModels.Count() == 2) && SelectedGraphDataTypeViewModels.Any(dt => dt.DataType is ObjectClass));

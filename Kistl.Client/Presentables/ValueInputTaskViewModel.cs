@@ -19,11 +19,11 @@ namespace Kistl.Client.Presentables
     public class ValueInputTaskViewModel
         : WindowViewModel, Kistl.Client.Presentables.IValueInputTaskViewModel
     {
-        public new delegate ValueInputTaskViewModel Factory(IKistlContext dataCtx, string name, IList<BaseValueViewModel> valueModels, Action<object[]> callback);
+        public new delegate ValueInputTaskViewModel Factory(IKistlContext dataCtx, ViewModel parent, string name, IList<BaseValueViewModel> valueModels, Action<object[]> callback);
 
         public ValueInputTaskViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx, string name, IList<BaseValueViewModel> valueModels, Action<object[]> callback)
-            : base(appCtx, dataCtx)
+            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent, string name, IList<BaseValueViewModel> valueModels, Action<object[]> callback)
+            : base(appCtx, dataCtx, parent)
         {
             if (callback == null) throw new ArgumentNullException("callback");
 

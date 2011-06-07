@@ -13,12 +13,12 @@ using ZBox.Basic.Parties;
     /// </summary>
     public class PartyViewModel : DataObjectViewModel
     {
-        public new delegate PartyViewModel Factory(IKistlContext dataCtx,
+        public new delegate PartyViewModel Factory(IKistlContext dataCtx, ViewModel parent,
             IDataObject obj);
 
-        public PartyViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx,
+        public PartyViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent,
             Party obj)
-            : base(appCtx, dataCtx, obj)
+            : base(appCtx, dataCtx, parent, obj)
         {
             this.Party = obj;
         }
@@ -31,9 +31,9 @@ using ZBox.Basic.Parties;
 
             foreach (var iftRole in Party.PartyRole.ToList().GroupBy(k => DataContext.GetInterfaceType(k)))
             {
-                var mdl = ViewModelFactory.CreateViewModel<PartyRolesViewModel.Factory>().Invoke(DataContext, Party, iftRole.Key);
-                var lblMdl = ViewModelFactory.CreateViewModel<LabeledViewContainerViewModel.Factory>().Invoke(DataContext, "Role", "", mdl);
-                var propGrpMdl = ViewModelFactory.CreateViewModel<SinglePropertyGroupViewModel.Factory>().Invoke(DataContext, iftRole.Key.Type.Name, new ViewModel[] { lblMdl });
+                var mdl = ViewModelFactory.CreateViewModel<PartyRolesViewModel.Factory>().Invoke(DataContext, this, Party, iftRole.Key);
+                var lblMdl = ViewModelFactory.CreateViewModel<LabeledViewContainerViewModel.Factory>().Invoke(DataContext, this, "Role", "", mdl);
+                var propGrpMdl = ViewModelFactory.CreateViewModel<SinglePropertyGroupViewModel.Factory>().Invoke(DataContext, this, iftRole.Key.Type.Name, new ViewModel[] { lblMdl });
                 groups.Add(propGrpMdl);
             }
 

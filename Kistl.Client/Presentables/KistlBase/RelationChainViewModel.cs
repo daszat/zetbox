@@ -17,12 +17,12 @@ namespace Kistl.Client.Presentables.KistlBase
     public class RelationChainViewModel
            : ObjectListViewModel
     {
-        public new delegate RelationChainViewModel Factory(IKistlContext dataCtx, IValueModel mdl);
+        public new delegate RelationChainViewModel Factory(IKistlContext dataCtx, ViewModel parent, IValueModel mdl);
 
         public RelationChainViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent,
             IObjectCollectionValueModel<IList<IDataObject>> mdl)
-            : base(appCtx, dataCtx, mdl)
+            : base(appCtx, dataCtx, parent, mdl)
         {
         }
 
@@ -96,6 +96,7 @@ namespace Kistl.Client.Presentables.KistlBase
 
             var selTaskVMdl = ViewModelFactory.CreateViewModel<DataObjectSelectionTaskViewModel.Factory>().Invoke(
                     DataContext,
+                    ViewModelFactory.GetWorkspace(DataContext),
                     typeof(Relation).GetObjectClass(FrozenContext),
                     () => qry,
                     new Action<DataObjectViewModel>(delegate(DataObjectViewModel chosen)
@@ -116,6 +117,7 @@ namespace Kistl.Client.Presentables.KistlBase
         {
             var lstMdl = ViewModelFactory.CreateViewModel<DataObjectSelectionTaskViewModel.Factory>().Invoke(
                     DataContext,
+                    this,
                     typeof(ObjectClass).GetObjectClass(FrozenContext),
                     () => DataContext.GetQuery<ObjectClass>(),
                     new Action<DataObjectViewModel>(delegate(DataObjectViewModel chosen)

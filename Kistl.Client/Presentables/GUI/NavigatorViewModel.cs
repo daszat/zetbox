@@ -13,7 +13,7 @@ namespace Kistl.Client.Presentables.GUI
     public class NavigatorViewModel
         : WindowViewModel
     {
-        public new delegate NavigatorViewModel Factory(IKistlContext dataCtx, NavigationScreen root);
+        public new delegate NavigatorViewModel Factory(IKistlContext dataCtx, ViewModel parent, NavigationScreen root);
 
         private readonly NavigationScreenViewModel _root;
         private NavigationScreenViewModel _current;
@@ -23,10 +23,10 @@ namespace Kistl.Client.Presentables.GUI
         private readonly ObservableCollection<NavigationScreenViewModel> _location;
         private readonly ReadOnlyObservableCollection<NavigationScreenViewModel> _locationRO;
 
-        public NavigatorViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, NavigationScreen root)
-            : base(dependencies, dataCtx)
+        public NavigatorViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, NavigationScreen root)
+            : base(dependencies, dataCtx, parent)
         {
-            _current = _root = NavigationScreenViewModel.Fetch(ViewModelFactory, dataCtx, root);
+            _current = _root = NavigationScreenViewModel.Fetch(ViewModelFactory, dataCtx, parent, root);
             _current.Displayer = this;
 
             _history = new ObservableCollection<NavigationScreenViewModel>() { _current };
@@ -84,7 +84,7 @@ namespace Kistl.Client.Presentables.GUI
             while (screen != null)
             {
                 newLocation.Add(screen);
-                screen = screen.Parent;
+                screen = screen.ParentScreen;
             }
             newLocation.Reverse();
 

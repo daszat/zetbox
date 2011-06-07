@@ -13,14 +13,14 @@ namespace Kistl.Client.Presentables.KistlBase
 
     public class OpenDataObjectCommand : ItemCommandViewModel<DataObjectViewModel>
     {
-        public new delegate OpenDataObjectCommand Factory(IKistlContext dataCtx, ViewModel progressDisplayer, ControlKind reqWorkspaceKind, ControlKind reqEditorKind);
+        public new delegate OpenDataObjectCommand Factory(IKistlContext dataCtx, ViewModel parent, ControlKind reqWorkspaceKind, ControlKind reqEditorKind);
 
         protected readonly Func<IKistlContext> ctxFactory;
 
         public OpenDataObjectCommand(IViewModelDependencies appCtx, Func<IKistlContext> ctxFactory,
-            IKistlContext dataCtx, ViewModel progressDisplayer, ControlKind reqWorkspaceKind, ControlKind reqEditorKind
+            IKistlContext dataCtx, ViewModel parent, ControlKind reqWorkspaceKind, ControlKind reqEditorKind
             )
-            : base(appCtx, dataCtx, progressDisplayer, CommonCommandsResources.OpenDataObjectCommand_Name, CommonCommandsResources.OpenDataObjectCommand_Tooltip)
+            : base(appCtx, dataCtx, parent, CommonCommandsResources.OpenDataObjectCommand_Name, CommonCommandsResources.OpenDataObjectCommand_Tooltip)
         {
             this.ctxFactory = ctxFactory;
             this._requestedWorkspaceKind = reqWorkspaceKind;
@@ -66,7 +66,7 @@ namespace Kistl.Client.Presentables.KistlBase
 
         protected override void DoExecute(IEnumerable<DataObjectViewModel> data)
         {
-            var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(ctxFactory());
+            var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(ctxFactory(), null);
             foreach (var item in data)
             {
                 var newMdl = newWorkspace.ShowForeignModel(item, RequestedEditorKind);
@@ -82,13 +82,13 @@ namespace Kistl.Client.Presentables.KistlBase
 
     public class DeleteDataObjectCommand : ItemCommandViewModel<DataObjectViewModel>
     {
-        public new delegate DeleteDataObjectCommand Factory(IKistlContext dataCtx, ViewModel progressDisplayer, IRefreshCommandListener listener, bool submitChanges);
+        public new delegate DeleteDataObjectCommand Factory(IKistlContext dataCtx, ViewModel parent, IRefreshCommandListener listener, bool submitChanges);
 
         protected IRefreshCommandListener Listener { get; private set; }
         protected bool SubmitChanges { get; private set; }
 
-        public DeleteDataObjectCommand(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel progressDisplayer, IRefreshCommandListener listener, bool submitChanges)
-            : base(appCtx, dataCtx, progressDisplayer, CommonCommandsResources.DeleteDataObjectCommand_Name, CommonCommandsResources.DeleteDataObjectCommand_Tooltip)
+        public DeleteDataObjectCommand(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent, IRefreshCommandListener listener, bool submitChanges)
+            : base(appCtx, dataCtx, parent, CommonCommandsResources.DeleteDataObjectCommand_Name, CommonCommandsResources.DeleteDataObjectCommand_Tooltip)
         {
             this.Listener = listener;
             this.SubmitChanges = submitChanges;
@@ -114,15 +114,15 @@ namespace Kistl.Client.Presentables.KistlBase
 
     public class NewDataObjectCommand : CommandViewModel
     {
-        public new delegate NewDataObjectCommand Factory(IKistlContext dataCtx, ViewModel progressDisplayer, DataType type, ControlKind reqWorkspaceKind, ControlKind reqEditorKind, IRefreshCommandListener listener);
+        public new delegate NewDataObjectCommand Factory(IKistlContext dataCtx, ViewModel parent, DataType type, ControlKind reqWorkspaceKind, ControlKind reqEditorKind, IRefreshCommandListener listener);
 
         protected readonly Func<IKistlContext> ctxFactory;
         protected DataType Type { get; private set; }
         protected IRefreshCommandListener Listener { get; private set; }
 
         public NewDataObjectCommand(IViewModelDependencies appCtx, Func<IKistlContext> ctxFactory,
-            IKistlContext dataCtx, ViewModel progressDisplayer, DataType type, ControlKind reqWorkspaceKind, ControlKind reqEditorKind, IRefreshCommandListener listener)
-            : base(appCtx, dataCtx, progressDisplayer, CommonCommandsResources.NewDataObjectCommand_Name, CommonCommandsResources.NewDataObjectCommand_Tooltip)
+            IKistlContext dataCtx, ViewModel parent, DataType type, ControlKind reqWorkspaceKind, ControlKind reqEditorKind, IRefreshCommandListener listener)
+            : base(appCtx, dataCtx, parent, CommonCommandsResources.NewDataObjectCommand_Name, CommonCommandsResources.NewDataObjectCommand_Tooltip)
         {
             this.Type = type;
             this.ctxFactory = ctxFactory;
@@ -180,8 +180,8 @@ namespace Kistl.Client.Presentables.KistlBase
 
             if (!isSimpleObject)
             {
-                var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx);
-                newWorkspace.ShowForeignModel(DataObjectViewModel.Fetch(ViewModelFactory, newCtx, newObj), RequestedEditorKind);
+                var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx, null);
+                newWorkspace.ShowForeignModel(DataObjectViewModel.Fetch(ViewModelFactory, newCtx, newWorkspace, newObj), RequestedEditorKind);
                 ViewModelFactory.ShowModel(newWorkspace, RequestedWorkspaceKind, true);
             }
             else if (Listener != null)
@@ -205,15 +205,15 @@ namespace Kistl.Client.Presentables.KistlBase
 
     public class EditDataObjectClassCommand : CommandViewModel
     {
-        public new delegate EditDataObjectClassCommand Factory(IKistlContext dataCtx, ViewModel progressDisplayer, DataType type);
+        public new delegate EditDataObjectClassCommand Factory(IKistlContext dataCtx, ViewModel parent, DataType type);
 
         protected readonly Func<IKistlContext> ctxFactory;
         protected DataType Type { get; private set; }
 
         public EditDataObjectClassCommand(IViewModelDependencies appCtx,
-            IKistlContext dataCtx, ViewModel progressDisplayer, DataType type,
+            IKistlContext dataCtx, ViewModel parent, DataType type,
             Func<IKistlContext> ctxFactory)
-            : base(appCtx, dataCtx, progressDisplayer, CommonCommandsResources.EditDataObjectClassCommand_Name, CommonCommandsResources.EditDataObjectClassCommand_Tooltip)
+            : base(appCtx, dataCtx, parent, CommonCommandsResources.EditDataObjectClassCommand_Name, CommonCommandsResources.EditDataObjectClassCommand_Tooltip)
         {
             this.Type = type;
             this.ctxFactory = ctxFactory;
@@ -228,8 +228,8 @@ namespace Kistl.Client.Presentables.KistlBase
         {
             var newCtx = ctxFactory();
             var objClass = newCtx.Find<DataType>(this.Type.ID);
-            var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx);
-            newWorkspace.ShowForeignModel(DataObjectViewModel.Fetch(ViewModelFactory, newCtx, objClass));
+            var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx,null);
+            newWorkspace.ShowForeignModel(DataObjectViewModel.Fetch(ViewModelFactory, newCtx, Parent, objClass));
             ViewModelFactory.ShowModel(newWorkspace, true);
         }
     }
@@ -241,12 +241,12 @@ namespace Kistl.Client.Presentables.KistlBase
 
     public class RefreshCommand : CommandViewModel
     {
-        public new delegate RefreshCommand Factory(IKistlContext dataCtx, ViewModel progressDisplayer, IRefreshCommandListener listener);
+        public new delegate RefreshCommand Factory(IKistlContext dataCtx, ViewModel parent, IRefreshCommandListener listener);
 
         protected IRefreshCommandListener Listener { get; private set; }
 
-        public RefreshCommand(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel progressDisplayer, IRefreshCommandListener listener)
-            : base(appCtx, dataCtx, progressDisplayer, CommonCommandsResources.RefreshCommand_Name, CommonCommandsResources.RefreshCommand_Tooltip)
+        public RefreshCommand(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent, IRefreshCommandListener listener)
+            : base(appCtx, dataCtx, parent, CommonCommandsResources.RefreshCommand_Name, CommonCommandsResources.RefreshCommand_Tooltip)
         {
             this.Listener = listener;
         }
@@ -267,13 +267,13 @@ namespace Kistl.Client.Presentables.KistlBase
 
     public class ReportProblemCommand : CommandViewModel
     {
-        public new delegate ReportProblemCommand Factory(IKistlContext dataCtx);
+        public new delegate ReportProblemCommand Factory(IKistlContext dataCtx, ViewModel parent);
 
         private readonly IProblemReporter _reporter;
         private readonly IScreenshotTool _screenShot;
 
-        public ReportProblemCommand(IViewModelDependencies appCtx, IProblemReporter reporter, IScreenshotTool screenShot, IKistlContext dataCtx)
-            : base(appCtx, dataCtx, null, CommonCommandsResources.ReportProblemCommand_Name, CommonCommandsResources.ReportProblemCommand_Tooltip)
+        public ReportProblemCommand(IViewModelDependencies appCtx, IProblemReporter reporter, IScreenshotTool screenShot, IKistlContext dataCtx, ViewModel parent)
+            : base(appCtx, dataCtx, parent, CommonCommandsResources.ReportProblemCommand_Name, CommonCommandsResources.ReportProblemCommand_Tooltip)
         {
             if (reporter == null) throw new ArgumentNullException("reporter");
             if (screenShot == null) throw new ArgumentNullException("screenShot");

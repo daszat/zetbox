@@ -19,11 +19,11 @@ namespace Kistl.Client.Presentables
     public class ParameterInputTaskViewModel
         : WindowViewModel, IValueInputTaskViewModel
     {
-        public new delegate ParameterInputTaskViewModel Factory(IKistlContext dataCtx, Method method, Action<object[]> callback);
+        public new delegate ParameterInputTaskViewModel Factory(IKistlContext dataCtx, ViewModel parent, Method method, Action<object[]> callback);
 
         public ParameterInputTaskViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx, Method method, Action<object[]> callback)
-            : base(appCtx, dataCtx)
+            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent, Method method, Action<object[]> callback)
+            : base(appCtx, dataCtx,  parent)
         {
             if (callback == null) throw new ArgumentNullException("callback");
 
@@ -67,7 +67,7 @@ namespace Kistl.Client.Presentables
                 FetchParameterList();
                 _parameterModels = new LookupDictionary<BaseParameter, BaseParameter, BaseValueViewModel>(_parameterList, k => k, v =>
                 {
-                    var result = BaseValueViewModel.Fetch(ViewModelFactory, DataContext, v, v.GetValueModel(false /* c.IsNullable */));
+                    var result = BaseValueViewModel.Fetch(ViewModelFactory, DataContext, this, v, v.GetValueModel(false /* c.IsNullable */));
                     return result;
                 });
             }

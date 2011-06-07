@@ -47,7 +47,7 @@ namespace Kistl.Client.WPF
             }
             else
             {
-                var ws = mdlFactory.CreateViewModel<WorkspaceViewModel.Factory>().Invoke(ctxFactory.Invoke());
+                var ws = mdlFactory.CreateViewModel<WorkspaceViewModel.Factory>().Invoke(ctxFactory.Invoke(), null);
                 ControlKind launcher = frozenCtx.FindPersistenceObject<ControlKind>(NamedObjects.ControlKind_Kistl_App_GUI_LauncherKind);
                 mdlFactory.ShowModel(ws, launcher, true);
             }
@@ -63,7 +63,7 @@ namespace Kistl.Client.WPF
         private void LaunchApplication(Guid appGuid)
         {
             var app = frozenCtx.FindPersistenceObject<Kistl.App.GUI.Application>(appGuid);
-            var appMdl = mdlFactory.CreateViewModel<ApplicationViewModel.Factory>().Invoke(ctxFactory.Invoke(), app);
+            var appMdl = mdlFactory.CreateViewModel<ApplicationViewModel.Factory>().Invoke(ctxFactory.Invoke(), null, app);
             appMdl.OpenApplication(appMdl);
         }
     }

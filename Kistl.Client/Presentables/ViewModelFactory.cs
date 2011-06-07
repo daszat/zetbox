@@ -451,6 +451,18 @@ namespace Kistl.Client.Presentables
             }
         }
 
+        public ViewModel GetWorkspace(IKistlContext ctx)
+        {
+            if (Managers.ContainsKey(ctx))
+            {
+                return Managers[ctx] as ViewModel;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         public bool CanShowModel(ViewModel mdl)
         {
             if (mdl == null)

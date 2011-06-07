@@ -72,11 +72,11 @@ namespace Kistl.Client.Presentables
         /// </summary>
         /// <param name="appCtx">the application context to use</param>
         /// <param name="dataCtx">the data context to use</param>
-        /// <param name="progressDisplayer">a ViewModel which should be notified while this command is executing</param>
+        /// <param name="parent">a ViewModel which should be notified while this command is executing</param>
         /// <param name="label">a label for this command</param>
         /// <param name="tooltip">a tooltip for this command</param>
-        protected CommandViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel progressDisplayer, string label, string tooltip)
-            : base(appCtx, dataCtx)
+        protected CommandViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent, string label, string tooltip)
+            : base(appCtx, dataCtx, parent)
         {
             if (label == null)
             {
@@ -85,14 +85,12 @@ namespace Kistl.Client.Presentables
 
             this._labelCache = label;
             this._toolTipCache = tooltip;
-            this._progressDisplayer = progressDisplayer;
         }
 
-        protected CommandViewModel(bool designMode, ViewModel progressDisplayer, string label)
+        protected CommandViewModel(bool designMode, ViewModel parent, string label)
             : base(designMode)
         {
             this._labelCache = label;
-            this._progressDisplayer = progressDisplayer;
         }
 
         #region ICommand Members
@@ -133,7 +131,7 @@ namespace Kistl.Client.Presentables
         /// <param name="data">may be <value>null</value> if no data is expected</param>
         public void Execute(object data)
         {
-            ViewModelFactory.TriggerDelayedTask(_progressDisplayer, () =>
+            ViewModelFactory.TriggerDelayedTask(Parent, () =>
             {
                 Executing = true;
                 try
@@ -241,9 +239,6 @@ namespace Kistl.Client.Presentables
             }
         }
 
-        private readonly ViewModel _progressDisplayer;
-        protected ViewModel ProgressDisplayer { get { return _progressDisplayer; } }
-
         public override string Name
         {
             get { return Label; }
@@ -255,13 +250,13 @@ namespace Kistl.Client.Presentables
     [ViewModelDescriptor]
     public sealed class SimpleCommandViewModel : CommandViewModel
     {
-        public new delegate SimpleCommandViewModel Factory(IKistlContext dataCtx, ViewModel progressDisplayer, string label, string tooltip, Action execute, Func<bool> canExecute);
+        public new delegate SimpleCommandViewModel Factory(IKistlContext dataCtx, ViewModel parent, string label, string tooltip, Action execute, Func<bool> canExecute);
 
         private readonly Action execute;
         private readonly Func<bool> canExecute;
 
-        public SimpleCommandViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel progressDisplayer, string label, string tooltip, Action execute, Func<bool> canExecute)
-            : base(appCtx, dataCtx, progressDisplayer, label, tooltip)
+        public SimpleCommandViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent, string label, string tooltip, Action execute, Func<bool> canExecute)
+            : base(appCtx, dataCtx, parent, label, tooltip)
         {
             if (execute == null) throw new ArgumentNullException("execute");
             this.execute = execute;
@@ -287,13 +282,13 @@ namespace Kistl.Client.Presentables
 
     public sealed class SimpleParameterCommandViewModel<T> : CommandViewModel
     {
-        public new delegate SimpleParameterCommandViewModel<T> Factory(IKistlContext dataCtx, ViewModel progressDisplayer, string label, string tooltip, Action<T> execute, Func<T, bool> canExecute);
+        public new delegate SimpleParameterCommandViewModel<T> Factory(IKistlContext dataCtx, ViewModel parent, string label, string tooltip, Action<T> execute, Func<T, bool> canExecute);
 
         private readonly Action<T> execute;
         private readonly Func<T, bool> canExecute;
 
-        public SimpleParameterCommandViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel progressDisplayer, string label, string tooltip, Action<T> execute, Func<T, bool> canExecute)
-            : base(appCtx, dataCtx, progressDisplayer, label, tooltip)
+        public SimpleParameterCommandViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent, string label, string tooltip, Action<T> execute, Func<T, bool> canExecute)
+            : base(appCtx, dataCtx, parent, label, tooltip)
         {
             if (execute == null) throw new ArgumentNullException("execute");
             this.execute = execute;
@@ -371,12 +366,12 @@ namespace Kistl.Client.Presentables
 
     public sealed class SimpleItemCommandViewModel<T> : ItemCommandViewModel<T>
     {
-        public new delegate SimpleItemCommandViewModel<T> Factory(IKistlContext dataCtx, ViewModel progressDisplayer, string label, string tooltip, Action<IEnumerable<T>> execute);
+        public new delegate SimpleItemCommandViewModel<T> Factory(IKistlContext dataCtx, ViewModel parent, string label, string tooltip, Action<IEnumerable<T>> execute);
 
         private readonly Action<IEnumerable<T>> execute;
 
-        public SimpleItemCommandViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel progressDisplayer, string label, string tooltip, Action<IEnumerable<T>> execute)
-            : base(appCtx, dataCtx, progressDisplayer, label, tooltip)
+        public SimpleItemCommandViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent, string label, string tooltip, Action<IEnumerable<T>> execute)
+            : base(appCtx, dataCtx, parent, label, tooltip)
         {
             this.execute = execute;
         }

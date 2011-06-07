@@ -13,7 +13,7 @@ namespace Kistl.Client.Presentables.SchemaMigration
     [ViewModelDescriptor]
     public class SelectDestinationPropertyViewModel : WindowViewModel
     {
-        public new delegate SelectDestinationPropertyViewModel Factory(IKistlContext dataCtx,
+        public new delegate SelectDestinationPropertyViewModel Factory(IKistlContext dataCtx, ViewModel parent,
             SourceColumn srcCol,
             Action<IEnumerable<Property>> callback);
         
@@ -21,10 +21,10 @@ namespace Kistl.Client.Presentables.SchemaMigration
         private readonly SourceColumn _srcCol;
 
         public SelectDestinationPropertyViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent,
             SourceColumn srcCol,
             Action<IEnumerable<Property>> callback)
-            : base(appCtx, dataCtx)
+            : base(appCtx, dataCtx, parent)
         {
             _callback = callback;
             _srcCol = srcCol;
@@ -38,7 +38,7 @@ namespace Kistl.Client.Presentables.SchemaMigration
             while (prop != null)
             {
                 result.Add(prop.Property);
-                prop = prop.Parent;
+                prop = prop.ParentProperty;
             }
 
             _callback(result.Reverse());
@@ -89,7 +89,7 @@ namespace Kistl.Client.Presentables.SchemaMigration
                     _PossibleValues = new List<PossibleDestPropertyViewModel>();
                     foreach (var prop in _srcCol.SourceTable.DestinationObjectClass.GetAllProperties())
                     {
-                        _PossibleValues.Add(ViewModelFactory.CreateViewModel<PossibleDestPropertyViewModel.Factory>().Invoke(DataContext, prop, null));
+                        _PossibleValues.Add(ViewModelFactory.CreateViewModel<PossibleDestPropertyViewModel.Factory>().Invoke(DataContext, this, prop, null));
                     }
                 }
                 return _PossibleValues;
@@ -121,18 +121,18 @@ namespace Kistl.Client.Presentables.SchemaMigration
 
     public class PossibleDestPropertyViewModel : DataObjectViewModel
     {
-        public new delegate PossibleDestPropertyViewModel Factory(IKistlContext dataCtx, Property obj, PossibleDestPropertyViewModel parent);
+        public new delegate PossibleDestPropertyViewModel Factory(IKistlContext dataCtx, ViewModel parent, Property obj, PossibleDestPropertyViewModel parentProp);
 
         private readonly Property _prop;
         private readonly PossibleDestPropertyViewModel _parent;
 
         public PossibleDestPropertyViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx,
-            Property obj, PossibleDestPropertyViewModel parent)
-            : base(appCtx, dataCtx, obj)
+            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent,
+            Property obj, PossibleDestPropertyViewModel parentProp)
+            : base(appCtx, dataCtx, parent, obj)
         {
             this._prop = obj;
-            this._parent = parent;
+            this._parent = parentProp;
         }
 
         public Property Property
@@ -143,7 +143,7 @@ namespace Kistl.Client.Presentables.SchemaMigration
             }
         }
 
-        public PossibleDestPropertyViewModel Parent
+        public PossibleDestPropertyViewModel ParentProperty
         {
             get
             {
@@ -163,7 +163,7 @@ namespace Kistl.Client.Presentables.SchemaMigration
                     {
                         foreach (var prop in ((CompoundObjectProperty)_prop).CompoundObjectDefinition.Properties)
                         {
-                            _PossibleValues.Add(ViewModelFactory.CreateViewModel<PossibleDestPropertyViewModel.Factory>().Invoke(DataContext, prop, this));
+                            _PossibleValues.Add(ViewModelFactory.CreateViewModel<PossibleDestPropertyViewModel.Factory>().Invoke(DataContext, this, prop, this));
                         }
                     }
                 }

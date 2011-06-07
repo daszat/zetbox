@@ -17,7 +17,7 @@ namespace Kistl.Client.Presentables.TimeRecords
     public class WorkEffortModel
         : DataObjectViewModel
     {
-        public new delegate WorkEffortModel Factory(IKistlContext dataCtx, WorkEffort obj);
+        public new delegate WorkEffortModel Factory(IKistlContext dataCtx, ViewModel parent, WorkEffort obj);
 
         /// <summary>The presented <see cref="WorkEffort"/></summary>
         private WorkEffort _entry;
@@ -27,12 +27,13 @@ namespace Kistl.Client.Presentables.TimeRecords
         /// </summary>
         /// <param name="appCtx">which GuiApplicationContext to use</param>
         /// <param name="dataCtx">which <see cref="IKistlContext"/> to use</param>
+        /// <param name="parent">Parent ViewModel</param>
         /// <param name="obj">the modelled <see cref="WorkEffort"/></param>
         public WorkEffortModel(
             IViewModelDependencies appCtx,
-            IKistlContext dataCtx,
+            IKistlContext dataCtx, ViewModel parent,
             WorkEffort obj)
-            : base(appCtx, dataCtx, obj)
+            : base(appCtx, dataCtx, parent, obj)
         {
             this._entry = obj;
             this._entry.PropertyChanged += (sender, args) =>
@@ -78,7 +79,7 @@ namespace Kistl.Client.Presentables.TimeRecords
         {
             get
             {
-                return DataObjectViewModel.Fetch(this.ViewModelFactory, this.DataContext, this._entry.Mitarbeiter);
+                return DataObjectViewModel.Fetch(this.ViewModelFactory, this.DataContext, ViewModelFactory.GetWorkspace(DataContext), this._entry.Mitarbeiter);
             }
             set
             {

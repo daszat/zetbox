@@ -17,7 +17,7 @@ namespace Kistl.Client.Presentables.TimeRecords
     public class PresenceRecordModel
         : DataObjectViewModel
     {
-        public new delegate PresenceRecordModel Factory(IKistlContext dataCtx, PresenceRecord obj);
+        public new delegate PresenceRecordModel Factory(IKistlContext dataCtx, ViewModel parent, PresenceRecord obj);
 
         /// <summary>Gets the presented <see cref="PresenceRecord"/></summary>
         public PresenceRecord Entry
@@ -31,12 +31,13 @@ namespace Kistl.Client.Presentables.TimeRecords
         /// </summary>
         /// <param name="appCtx">which GuiApplicationContext to use</param>
         /// <param name="dataCtx">which <see cref="IKistlContext"/> to use</param>
+        /// <param name="parent">Parent ViewModel</param>
         /// <param name="obj">the modelled <see cref="PresenceRecord"/></param>
         public PresenceRecordModel(
             IViewModelDependencies appCtx,
-            IKistlContext dataCtx,
+            IKistlContext dataCtx, ViewModel parent,
             PresenceRecord obj)
-            : base(appCtx, dataCtx, obj)
+            : base(appCtx, dataCtx, parent, obj)
         {
             this.Entry = obj;
         }

@@ -36,7 +36,7 @@ namespace Kistl.Client.Presentables.KistlBase
     public class InstanceListViewModel
         : ViewModel, ILabeledViewModel, IRefreshCommandListener
     {
-        public new delegate InstanceListViewModel Factory(IKistlContext dataCtx, Func<IKistlContext> workingCtxFactory, ObjectClass type, Func<IQueryable> qry);
+        public new delegate InstanceListViewModel Factory(IKistlContext dataCtx, ViewModel parent, Func<IKistlContext> workingCtxFactory, ObjectClass type, Func<IQueryable> qry);
 
         protected readonly Func<IKistlContext> workingCtxFactory;
 
@@ -46,17 +46,18 @@ namespace Kistl.Client.Presentables.KistlBase
         /// <param name="appCtx">the application context to use</param>
         /// <param name="config"></param>
         /// <param name="dataCtx">the data context to use</param>
+        /// <param name="parent">Parent ViewModel</param>
         /// <param name="workingCtxFactory">A factory for creating a working context. If the InstanceList is embedded in a workspace which the user has to submit manually, the factory should return the same context as passed in the dataCtx parameter.</param>
         /// <param name="type">the data type to model. If null, qry must be a Query of a valid DataType</param>
         /// <param name="qry">optional: the query to display. If null, Query will be constructed from type</param>
         public InstanceListViewModel(
             IViewModelDependencies appCtx,
             KistlConfig config,
-            IKistlContext dataCtx,
+            IKistlContext dataCtx, ViewModel parent,
             Func<IKistlContext> workingCtxFactory,
             ObjectClass type,
             Func<IQueryable> qry)
-            : base(appCtx, dataCtx)
+            : base(appCtx, dataCtx, parent)
         {
             if (dataCtx == null) throw new ArgumentNullException("dataCtx");
             if (workingCtxFactory == null) throw new ArgumentNullException("workingCtxFactory");
@@ -242,7 +243,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 {
                     _FilterViewModels = new List<FilterViewModel>(Filter
                         .OfType<IUIFilterModel>()
-                        .Select(f => ViewModelFactory.CreateViewModel<FilterViewModel.Factory>(f.ViewModelType).Invoke(DataContext, f)));
+                        .Select(f => ViewModelFactory.CreateViewModel<FilterViewModel.Factory>(f.ViewModelType).Invoke(DataContext, this, f)));
                 }
                 return _FilterViewModels;
             }
@@ -403,14 +404,14 @@ namespace Kistl.Client.Presentables.KistlBase
             if (isEmbedded(workingCtx))
             {
                 this.ReloadInstances();
-                var mdl = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, obj);
+                var mdl = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj);
                 this.SelectedItem = mdl;
                 ViewModelFactory.ShowModel(mdl, true);
             }
             else
             {
-                var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditor.WorkspaceViewModel.Factory>().Invoke(workingCtx);
-                newWorkspace.ShowForeignModel(DataObjectViewModel.Fetch(ViewModelFactory, workingCtx, obj), RequestedEditorKind);
+                var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditor.WorkspaceViewModel.Factory>().Invoke(workingCtx, null);
+                newWorkspace.ShowForeignModel(DataObjectViewModel.Fetch(ViewModelFactory, workingCtx, newWorkspace, obj), RequestedEditorKind);
                 ViewModelFactory.ShowModel(newWorkspace, RequestedWorkspaceKind, true);
             }
         }
@@ -486,7 +487,7 @@ namespace Kistl.Client.Presentables.KistlBase
             {
                 if (_dataTypeMdl == null)
                 {
-                    _dataTypeMdl = ViewModelFactory.CreateViewModel<ObjectClassViewModel.Factory>(_type).Invoke(DataContext, _type);
+                    _dataTypeMdl = ViewModelFactory.CreateViewModel<ObjectClassViewModel.Factory>(_type).Invoke(DataContext, this, _type);
                 }
                 return _dataTypeMdl;
             }
@@ -537,7 +538,7 @@ namespace Kistl.Client.Presentables.KistlBase
             if (p.Object == null)
             {
                 var obj = DataContext.Create(DataContext.GetInterfaceType(_type.GetDataType()));
-                p.Object = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, obj);
+                p.Object = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj);
                 _proxyCache[p.Object] = p;
                 OnObjectCreated(obj);
             }
@@ -786,7 +787,7 @@ namespace Kistl.Client.Presentables.KistlBase
             }
             else
             {
-                var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditor.WorkspaceViewModel.Factory>().Invoke(workingCtx);
+                var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditor.WorkspaceViewModel.Factory>().Invoke(workingCtx, null);
                 ViewModelFactory.ShowModel(newWorkspace, RequestedWorkspaceKind, true);
 
                 var loader = ViewModelFactory.CreateDelayedTask(newWorkspace, () =>
@@ -1073,7 +1074,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 // TODO: Discuss if a query should return deleted objects
                 if (obj.ObjectState == DataObjectState.Deleted) continue;
 
-                var mdl = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, obj);
+                var mdl = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj);
                 result.Add(mdl);
             }
 

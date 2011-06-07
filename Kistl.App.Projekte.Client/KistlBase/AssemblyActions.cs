@@ -56,10 +56,10 @@ namespace Kistl.App.Base
 
                     if (newDescriptors.Count > 0)
                     {
-                        var workSpace = _mdlFactory.CreateViewModel<Kistl.Client.Presentables.ObjectEditor.WorkspaceViewModel.Factory>().Invoke(ctx);
+                        var workSpace = _mdlFactory.CreateViewModel<Kistl.Client.Presentables.ObjectEditor.WorkspaceViewModel.Factory>().Invoke(ctx, null);
                         foreach (IDataObject i in newDescriptors)
                         {
-                            workSpace.AddItem(DataObjectViewModel.Fetch(_mdlFactory, ctx, i));
+                            workSpace.AddItem(DataObjectViewModel.Fetch(_mdlFactory, ctx, workSpace, i));
                         }
 
                         _mdlFactory.ShowModel(workSpace, true);

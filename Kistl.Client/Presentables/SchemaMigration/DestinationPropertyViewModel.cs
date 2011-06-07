@@ -13,12 +13,12 @@ namespace Kistl.Client.Presentables.SchemaMigration
     [ViewModelDescriptor]
     public class DestinationPropertyViewModel : Kistl.Client.Presentables.ValueViewModels.ObjectListViewModel
     {
-        public new delegate DestinationPropertyViewModel Factory(IKistlContext dataCtx, IValueModel mdl);
+        public new delegate DestinationPropertyViewModel Factory(IKistlContext dataCtx, ViewModel parent, IValueModel mdl);
 
         public DestinationPropertyViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent,
             IObjectCollectionValueModel<IList<IDataObject>> mdl)
-            : base(appCtx, dataCtx, mdl)
+            : base(appCtx, dataCtx, parent, mdl)
         {
         }
 
@@ -73,7 +73,7 @@ namespace Kistl.Client.Presentables.SchemaMigration
 
         public void Select()
         {
-            var dlg = ViewModelFactory.CreateViewModel<SelectDestinationPropertyViewModel.Factory>().Invoke(DataContext, SourceColumn, (result) =>
+            var dlg = ViewModelFactory.CreateViewModel<SelectDestinationPropertyViewModel.Factory>().Invoke(DataContext, Parent, SourceColumn, (result) =>
             {
                 if (result != null)
                 {

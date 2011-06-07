@@ -17,17 +17,17 @@ namespace Kistl.Client.Presentables
     public class CompoundObjectViewModel 
         : ViewModel
     {
-        public new delegate CompoundObjectViewModel Factory(IKistlContext dataCtx, ICompoundObject obj);
+        public new delegate CompoundObjectViewModel Factory(IKistlContext dataCtx, ViewModel parent, ICompoundObject obj);
 
-        public static CompoundObjectViewModel Fetch(IViewModelFactory f, IKistlContext dataCtx, ICompoundObject obj)
+        public static CompoundObjectViewModel Fetch(IViewModelFactory f, IKistlContext dataCtx, ViewModel parent, ICompoundObject obj)
         {
-            return (CompoundObjectViewModel)dataCtx.GetViewModelCache().LookupOrCreate(obj, () => f.CreateViewModel<CompoundObjectViewModel.Factory>(obj).Invoke(dataCtx, obj));
+            return (CompoundObjectViewModel)dataCtx.GetViewModelCache().LookupOrCreate(obj, () => f.CreateViewModel<CompoundObjectViewModel.Factory>(obj).Invoke(dataCtx, parent, obj));
         }
 
         public CompoundObjectViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent,
             ICompoundObject obj)
-            : base(appCtx, dataCtx)
+            : base(appCtx, dataCtx, parent)
         {
             _object = obj;
             _object.PropertyChanged += ObjectPropertyChanged;
@@ -57,7 +57,7 @@ namespace Kistl.Client.Presentables
                 {
                     _propertyModels = new ReadOnlyProjectedList<Property, BaseValueViewModel>(
                         FetchPropertyList().ToList(),
-                        property => BaseValueViewModel.Fetch(ViewModelFactory, DataContext, property, property.GetPropertyValueModel(Object)),
+                        property => BaseValueViewModel.Fetch(ViewModelFactory, DataContext, this, property, property.GetPropertyValueModel(Object)),
                         m => null); //m.Property);
                 }
                 return _propertyModels;
@@ -72,7 +72,7 @@ namespace Kistl.Client.Presentables
                 {
                     _propertyModelsByName = new LookupDictionary<string, Property, ViewModel>(FetchPropertyList().ToList(), 
                         prop => prop.Name,
-                        prop => BaseValueViewModel.Fetch(ViewModelFactory, DataContext, prop, prop.GetPropertyValueModel(Object)));
+                        prop => BaseValueViewModel.Fetch(ViewModelFactory, DataContext, this, prop, prop.GetPropertyValueModel(Object)));
                 }
                 return _propertyModelsByName;
             }

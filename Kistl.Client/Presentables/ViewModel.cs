@@ -57,7 +57,7 @@ namespace Kistl.Client.Presentables
     /// See http://blogs.msdn.com/dancre/archive/2006/10/11/datamodel-view-viewmodel-pattern-series.aspx
     public abstract class ViewModel : INotifyPropertyChanged
     {
-        public delegate ViewModel Factory(IKistlContext dataCtx);
+        public delegate ViewModel Factory(IKistlContext dataCtx, ViewModel parent);
 
         private readonly IViewModelDependencies _dependencies;
 
@@ -102,26 +102,28 @@ namespace Kistl.Client.Presentables
 
         /// <param name="dependencies">The <see cref="IViewModelDependencies"/> to access the current application context</param>
         /// <param name="dataCtx">The <see cref="IKistlContext"/> to access the current user's data session</param>
-        // <param name="parent">The parent <see cref="ViewModel"/> to ...</param>
-        protected ViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx/*, ViewModel parent*/)
+        /// <param name="parent">The parent <see cref="ViewModel"/> to ...</param>
+        protected ViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent)
         {
-            //_parent = parent;
+            _parent = parent;
             IsInDesignMode = false;
             _dependencies = dependencies;
             DataContext = dataCtx;
-            _calcProperties = new CalculatedProperties(dataCtx, dependencies.Factory);
+            _calcProperties = new CalculatedProperties(dataCtx, this);
+
+            if (_parent != null) _parent.PropertyChanged += (s, e) => { if (e.PropertyName == "Highlight") OnPropertyChanged("Highlight"); };
         }
 
         #region Public interface
 
-        //private readonly ViewModel _parent;
-        //public ViewModel Parent
-        //{
-        //    get
-        //    {
-        //        return _parent;
-        //    }
-        //}
+        private readonly ViewModel _parent;
+        public ViewModel Parent
+        {
+            get
+            {
+                return _parent;
+            }
+        }
 
         /// <summary>
         /// Used to override DefaultKind in code
@@ -274,7 +276,7 @@ namespace Kistl.Client.Presentables
         {
             get
             {
-                //if (Parent != null && Parent.Highlight != null) return Parent.Highlight;
+                if (Parent != null && Parent.Highlight != null) return Parent.Highlight;
                 if (!IsEnabled) return Highlight.Deactivated;
                 return null;
             }

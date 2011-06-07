@@ -23,12 +23,12 @@ namespace Kistl.Client.Presentables.ValueViewModels
     public class ObjectListViewModel
         : BaseObjectCollectionViewModel<IReadOnlyObservableList<DataObjectViewModel>, IList<IDataObject>>, IValueListViewModel<DataObjectViewModel, IReadOnlyObservableList<DataObjectViewModel>>
     {
-        public new delegate ObjectListViewModel Factory(IKistlContext dataCtx, IValueModel mdl);
+        public new delegate ObjectListViewModel Factory(IKistlContext dataCtx, ViewModel parent, IValueModel mdl);
 
         public ObjectListViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent,
             IObjectCollectionValueModel<IList<IDataObject>> mdl)
-            : base(appCtx, dataCtx, mdl)
+            : base(appCtx, dataCtx, parent, mdl)
         {
         }
 
@@ -75,7 +75,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             {
                 _valueCache = new ReadOnlyObservableProjectedList<IDataObject, DataObjectViewModel>(
                     ObjectCollectionModel, ObjectCollectionModel.Value,
-                    obj => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, obj),
+                    obj => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj),
                     mdl => mdl.Object);
                 _valueCache.CollectionChanged += ValueListChanged;
             }

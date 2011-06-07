@@ -9,10 +9,10 @@ namespace Kistl.Client.Presentables.Calendar
 
     public class CalendarItemViewModel : Kistl.Client.Presentables.ViewModel
     {
-        public new delegate CalendarItemViewModel Factory(IKistlContext dataCtx, DataObjectViewModel obj, Action<DataObjectViewModel, CalendarItemViewModel> update);
+        public new delegate CalendarItemViewModel Factory(IKistlContext dataCtx, ViewModel parent, DataObjectViewModel obj, Action<DataObjectViewModel, CalendarItemViewModel> update);
 
-        public CalendarItemViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, DataObjectViewModel obj, Action<DataObjectViewModel, CalendarItemViewModel> update)
-            : base(dependencies, dataCtx)
+        public CalendarItemViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, DataObjectViewModel obj, Action<DataObjectViewModel, CalendarItemViewModel> update)
+            : base(dependencies, dataCtx, parent)
         {
             if (obj == null) throw new ArgumentNullException("obj");
             if (update == null) throw new ArgumentNullException("update");

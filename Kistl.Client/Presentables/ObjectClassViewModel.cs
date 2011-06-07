@@ -15,12 +15,12 @@ namespace Kistl.Client.Presentables
 
     public class ObjectClassViewModel : DataTypeViewModel
     {
-        public new delegate ObjectClassViewModel Factory(IKistlContext dataCtx, ObjectClass cls);
+        public new delegate ObjectClassViewModel Factory(IKistlContext dataCtx, ViewModel parent, ObjectClass cls);
 
         public ObjectClassViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent,
             ObjectClass cls)
-            : base(appCtx, dataCtx, cls)
+            : base(appCtx, dataCtx, parent, cls)
         {
             _class = cls;
         }
@@ -41,13 +41,13 @@ namespace Kistl.Client.Presentables
         {
             var result = base.CreatePropertyGroups();
 
-            var relListMdl = ViewModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, () => DataContext, typeof(Relation).GetObjectClass(FrozenContext), () => DataContext.GetQuery<Relation>());
+            var relListMdl = ViewModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, this, () => DataContext, typeof(Relation).GetObjectClass(FrozenContext), () => DataContext.GetQuery<Relation>());
             relListMdl.EnableAutoFilter = false;
             relListMdl.Filter.Add(new ConstantValueFilterModel("A.Type = @0 || B.Type = @0", this.Object));
             relListMdl.Commands.Add(ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "New Relation", "Creates a new Relation", CreateRelation, null));
 
-            var lblMdl = ViewModelFactory.CreateViewModel<LabeledViewContainerViewModel.Factory>().Invoke(DataContext, "Relations", "", relListMdl);
-            var propGrpMdl = ViewModelFactory.CreateViewModel<SinglePropertyGroupViewModel.Factory>().Invoke(DataContext, "Relations", new ViewModel[] { lblMdl });
+            var lblMdl = ViewModelFactory.CreateViewModel<LabeledViewContainerViewModel.Factory>().Invoke(DataContext, this, "Relations", "", relListMdl);
+            var propGrpMdl = ViewModelFactory.CreateViewModel<SinglePropertyGroupViewModel.Factory>().Invoke(DataContext, this, "Relations", new ViewModel[] { lblMdl });
             result.Add(propGrpMdl);
             return result;
         }
@@ -55,7 +55,7 @@ namespace Kistl.Client.Presentables
         public void CreateRelation()
         {
             var rel = _class.CreateRelation();
-            ViewModelFactory.ShowModel(DataObjectViewModel.Fetch(ViewModelFactory, DataContext, rel), true);
+            ViewModelFactory.ShowModel(DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this, rel), true);
         }
     }
 }

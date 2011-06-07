@@ -61,7 +61,7 @@ namespace Kistl.Client.Tests.ValueViewModels.Enumerations
                 .Setup<IEnumerable<KeyValuePair<int, string>>>(o => o.GetEntries())
                 .Returns(values);
 
-            obj = new EnumerationValueViewModel(scope.Resolve<IViewModelDependencies>(), scope.Resolve<BaseMemoryContext>(), valueModelMock.Object);
+            obj = new EnumerationValueViewModel(scope.Resolve<IViewModelDependencies>(), scope.Resolve<BaseMemoryContext>(), null, valueModelMock.Object);
         }
 
         [Test]

@@ -21,12 +21,12 @@ namespace Kistl.Client.Presentables.ValueViewModels
     public class CompoundListViewModel
         : ValueViewModel<IReadOnlyObservableList<CompoundObjectViewModel>, IList<ICompoundObject>>, IValueListViewModel<CompoundObjectViewModel, IReadOnlyObservableList<CompoundObjectViewModel>>
     {
-        public new delegate CompoundListViewModel Factory(IKistlContext dataCtx, IValueModel mdl);
+        public new delegate CompoundListViewModel Factory(IKistlContext dataCtx, ViewModel parent, IValueModel mdl);
 
         public CompoundListViewModel(
-            IViewModelDependencies appCtx, IKistlContext dataCtx,
+            IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent,
             ICompoundCollectionValueModel mdl)
-            : base(appCtx, dataCtx, mdl)
+            : base(appCtx, dataCtx, parent, mdl)
         {
             this.ValueModel = mdl;
         }
@@ -106,7 +106,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             {
                 _valueCache = new ReadOnlyObservableProjectedList<ICompoundObject, CompoundObjectViewModel>(
                     ValueModel, ValueModel.Value,
-                    obj => CompoundObjectViewModel.Fetch(ViewModelFactory, DataContext, obj),
+                    obj => CompoundObjectViewModel.Fetch(ViewModelFactory, DataContext, this, obj),
                     mdl => mdl.Object);
                 //_valueCache.CollectionChanged += ValueListChanged;
             }
@@ -150,7 +150,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             if (p.Object == null)
             {
                 var obj = DataContext.CreateCompoundObject(DataContext.GetInterfaceType(this.ValueModel.CompoundObjectDefinition.GetDataType()));
-                p.Object = CompoundObjectViewModel.Fetch(ViewModelFactory, DataContext, obj);
+                p.Object = CompoundObjectViewModel.Fetch(ViewModelFactory, DataContext, this, obj);
                 _proxyCache[p.Object.Object] = p;
             }
             return p.Object;
@@ -162,7 +162,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             CompoundObjectViewModelProxy result;
             if (!_proxyCache.TryGetValue(obj, out result))
             {
-                result = new CompoundObjectViewModelProxy() { Object = CompoundObjectViewModel.Fetch(ViewModelFactory, DataContext, obj) };
+                result = new CompoundObjectViewModelProxy() { Object = CompoundObjectViewModel.Fetch(ViewModelFactory, DataContext, this, obj) };
                 _proxyCache[obj] = result;
             }
             return result;

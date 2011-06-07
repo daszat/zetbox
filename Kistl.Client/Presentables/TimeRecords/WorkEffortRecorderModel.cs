@@ -27,8 +27,9 @@ namespace Kistl.Client.Presentables.TimeRecords
         /// </summary>
         /// <param name="appCtx">the application context to use</param>
         /// <param name="dataCtx">the data context to use</param>
-        public WorkEffortRecorderModel(IViewModelDependencies appCtx, IKistlContext dataCtx)
-            : base(appCtx, dataCtx)
+        /// <param name="parent">Parent ViewModel</param>
+        public WorkEffortRecorderModel(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent)
+            : base(appCtx, dataCtx, parent)
         {
         }
 
@@ -83,7 +84,7 @@ namespace Kistl.Client.Presentables.TimeRecords
                     _availableUsers = new ReadOnlyCollection<DataObjectViewModel>(
                         DataContext
                             .GetQuery<Mitarbeiter>()
-                            .Select(o => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, o))
+                            .Select(o => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this, o))
                             .ToList());
                 }
                 return _availableUsers;
@@ -126,7 +127,7 @@ namespace Kistl.Client.Presentables.TimeRecords
                         nowPresent.From = DateTime.Now;
                         nowPresent.Mitarbeiter = (Mitarbeiter)CurrentUser.Object;
                         InitialisePresenceRecords();
-                        _presenceRecords.Add(ViewModelFactory.CreateViewModel<PresenceRecordModel.Factory>(nowPresent).Invoke(DataContext, nowPresent));
+                        _presenceRecords.Add(ViewModelFactory.CreateViewModel<PresenceRecordModel.Factory>(nowPresent).Invoke(DataContext, this, nowPresent));
                         DataContext.SubmitChanges();
                     }
                     else
@@ -199,7 +200,7 @@ namespace Kistl.Client.Presentables.TimeRecords
             {
                 var effortModels = DataContext.GetQuery<WorkEffort>()
                     .Where(o => o.Mitarbeiter.ID == CurrentUser.ID && (o.From > DateTime.Today || !o.Thru.HasValue || (o.Thru.HasValue && o.Thru.Value > DateTime.Today)))
-                    .Select(o => ViewModelFactory.CreateViewModel<WorkEffortModel.Factory>(o).Invoke(DataContext, o));
+                    .Select(o => ViewModelFactory.CreateViewModel<WorkEffortModel.Factory>(o).Invoke(DataContext, this, o));
 
                 foreach (var wem in effortModels)
                 {
@@ -309,7 +310,7 @@ namespace Kistl.Client.Presentables.TimeRecords
 
                 foreach (var pr in recordModels)
                 {
-                    _presenceRecords.Add(ViewModelFactory.CreateViewModel<PresenceRecordModel.Factory>(pr).Invoke(DataContext, pr));
+                    _presenceRecords.Add(ViewModelFactory.CreateViewModel<PresenceRecordModel.Factory>(pr).Invoke(DataContext, this, pr));
                 }
             }
         }
