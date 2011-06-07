@@ -75,6 +75,15 @@ namespace Kistl.Client.Presentables.ValueViewModels
             }
         }
 
+        public override Highlight Highlight
+        {
+            get
+            {
+                if (!IsEnabled || IsReadOnly) return Highlight.Deactivated;
+                return null;
+            }
+        }
+
         public abstract void Focus();
         public abstract void Blur();
 
@@ -126,6 +135,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 {
                     _IsReadOnly = value;
                     OnPropertyChanged("IsReadOnly");
+                    OnPropertyChanged("Highlight");
                 }
             }
         }

@@ -102,8 +102,10 @@ namespace Kistl.Client.Presentables
 
         /// <param name="dependencies">The <see cref="IViewModelDependencies"/> to access the current application context</param>
         /// <param name="dataCtx">The <see cref="IKistlContext"/> to access the current user's data session</param>
-        protected ViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx)
+        // <param name="parent">The parent <see cref="ViewModel"/> to ...</param>
+        protected ViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx/*, ViewModel parent*/)
         {
+            //_parent = parent;
             IsInDesignMode = false;
             _dependencies = dependencies;
             DataContext = dataCtx;
@@ -111,6 +113,15 @@ namespace Kistl.Client.Presentables
         }
 
         #region Public interface
+
+        //private readonly ViewModel _parent;
+        //public ViewModel Parent
+        //{
+        //    get
+        //    {
+        //        return _parent;
+        //    }
+        //}
 
         /// <summary>
         /// Used to override DefaultKind in code
@@ -263,6 +274,7 @@ namespace Kistl.Client.Presentables
         {
             get
             {
+                //if (Parent != null && Parent.Highlight != null) return Parent.Highlight;
                 if (!IsEnabled) return Highlight.Deactivated;
                 return null;
             }
@@ -291,22 +303,21 @@ namespace Kistl.Client.Presentables
     public class Highlight : INotifyPropertyChanged
     {
         #region Static Highlight States
-        public static readonly Highlight None = new Highlight(HighlightState.None);
-        public static readonly Highlight Good = new Highlight(HighlightState.Good);
-        public static readonly Highlight Neutral = new Highlight(HighlightState.Neutral);
-        public static readonly Highlight Bad = new Highlight(HighlightState.Bad);
-        public static readonly Highlight Archived = new Highlight(HighlightState.Archived);
-        public static readonly Highlight Deactivated = new Highlight(HighlightState.Deactivated);
-        public static readonly Highlight Active = new Highlight(HighlightState.Active);
-        public static readonly Highlight Output = new Highlight(HighlightState.Output);
-        public static readonly Highlight Input = new Highlight(HighlightState.Input);
-        public static readonly Highlight Calculation = new Highlight(HighlightState.Calculation);
-        public static readonly Highlight Info = new Highlight(HighlightState.Info);
-        public static readonly Highlight Warning = new Highlight(HighlightState.Warning);
-        public static readonly Highlight Error = new Highlight(HighlightState.Error);
-        public static readonly Highlight Fatal = new Highlight(HighlightState.Fatal);
-        public static readonly Highlight ActionRequired = new Highlight(HighlightState.ActionRequired);
-        public static readonly Highlight Note = new Highlight(HighlightState.Note);
+        public static readonly Highlight Good = new Highlight(HighlightState.Good, true);
+        public static readonly Highlight Neutral = new Highlight(HighlightState.Neutral, true);
+        public static readonly Highlight Bad = new Highlight(HighlightState.Bad, true);
+        public static readonly Highlight Archived = new Highlight(HighlightState.Archived, true);
+        public static readonly Highlight Deactivated = new Highlight(HighlightState.Deactivated, true);
+        public static readonly Highlight Active = new Highlight(HighlightState.Active, true);
+        public static readonly Highlight Output = new Highlight(HighlightState.Output, true);
+        public static readonly Highlight Input = new Highlight(HighlightState.Input, true);
+        public static readonly Highlight Calculation = new Highlight(HighlightState.Calculation, true);
+        public static readonly Highlight Info = new Highlight(HighlightState.Info, true);
+        public static readonly Highlight Warning = new Highlight(HighlightState.Warning, true);
+        public static readonly Highlight Error = new Highlight(HighlightState.Error, true);
+        public static readonly Highlight Fatal = new Highlight(HighlightState.Fatal, true);
+        public static readonly Highlight ActionRequired = new Highlight(HighlightState.ActionRequired, true);
+        public static readonly Highlight Note = new Highlight(HighlightState.Note, true);
         #endregion
 
         public Highlight()
@@ -319,6 +330,14 @@ namespace Kistl.Client.Presentables
             this.stateStore = state;
         }
 
+        private Highlight(HighlightState state, bool freeze)
+        {
+            this.stateStore = state;
+            this._fozen = freeze;
+        }
+
+        private bool _fozen = false;
+
         protected HighlightState stateStore;
         public virtual HighlightState State
         {
@@ -330,6 +349,7 @@ namespace Kistl.Client.Presentables
             }
             set
             {
+                if (_fozen) throw new InvalidOperationException("Cannot change a constant Highlight");
                 if (stateStore != value)
                 {
                     stateStore = value;
@@ -347,6 +367,7 @@ namespace Kistl.Client.Presentables
             }
             set
             {
+                if (_fozen) throw new InvalidOperationException("Cannot change a constant Highlight");
                 if (gridBackgroundStore != value)
                 {
                     gridBackgroundStore = value;
@@ -364,6 +385,7 @@ namespace Kistl.Client.Presentables
             }
             set
             {
+                if (_fozen) throw new InvalidOperationException("Cannot change a constant Highlight");
                 if (gridForegroundStore != value)
                 {
                     gridForegroundStore = value;
@@ -381,6 +403,7 @@ namespace Kistl.Client.Presentables
             }
             set
             {
+                if (_fozen) throw new InvalidOperationException("Cannot change a constant Highlight");
                 if (gridFontStyleStore != value)
                 {
                     gridFontStyleStore = value;
@@ -398,6 +421,7 @@ namespace Kistl.Client.Presentables
             }
             set
             {
+                if (_fozen) throw new InvalidOperationException("Cannot change a constant Highlight");
                 if (panelBackgroundStore != value)
                 {
                     panelBackgroundStore = value;

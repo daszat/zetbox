@@ -22,8 +22,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
         {
             get
             {
-                var h = Object != null ? Object.Highlight : null;
-                return h ?? Highlight.None; // Avoid transparent background
+                return Object != null ? Object.Highlight : null;
             }
         }
     }

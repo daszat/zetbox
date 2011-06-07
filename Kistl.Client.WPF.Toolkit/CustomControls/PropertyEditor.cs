@@ -14,6 +14,7 @@ namespace Kistl.Client.WPF.CustomControls
 
     using System.Windows.Media;
     using System.Windows.Input;
+    using Kistl.Client.Presentables;
     
     /// <summary>
     /// Defines common (Dependency-)Properties for Controls displaying/editing (Object)Properties
@@ -35,41 +36,47 @@ namespace Kistl.Client.WPF.CustomControls
             MinWidth = 100;
 
             this.GotFocus += new RoutedEventHandler(PropertyEditor_GotFocus);
+
+            var b = new Binding("Highlight");
+            b.Mode = BindingMode.OneWay;
+            BindingOperations.SetBinding(this, HighlightProperty, b);
         }
 
-        protected override void OnInitialized(EventArgs e)
+
+        public Highlight Highlight
         {
-            base.OnInitialized(e);
-        
-            // TODO: Doesn't work in Grids
-            // dies in snoop
-            //if (MainControl != null)
-            //{
-            //    {
-            //        var b = new Binding("Hightlight");
-            //        b.Mode = BindingMode.OneWay;
-            //        b.Converter = Application.Current.FindResource("HighlightGridBackgroundConverter") as IValueConverter;
-            //        MainControl.SetBinding(BackgroundProperty, b);
-            //    }
-            //    {
-            //        var b = new Binding("Hightlight");
-            //        b.Mode = BindingMode.OneWay;
-            //        b.Converter = Application.Current.FindResource("HighlightGridForegroundConverter") as IValueConverter;
-            //        MainControl.SetBinding(ForegroundProperty, b);
-            //    }
-            //    {
-            //        var b = new Binding("Hightlight");
-            //        b.Mode = BindingMode.OneWay;
-            //        b.Converter = Application.Current.FindResource("HighlightGridFontStyleConverter") as IValueConverter;
-            //        MainControl.SetBinding(FontStyleProperty, b);
-            //    }
-            //    {
-            //        var b = new Binding("Hightlight");
-            //        b.Mode = BindingMode.OneWay;
-            //        b.Converter = Application.Current.FindResource("HighlightGridFontWeightConverter") as IValueConverter;
-            //        MainControl.SetBinding(FontWeightProperty, b);
-            //    }
-            //}
+            get { return (Highlight)GetValue(HighlightProperty); }
+            set { SetValue(HighlightProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Highlight.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty HighlightProperty =
+            DependencyProperty.Register("Highlight", typeof(Highlight), typeof(PropertyEditor), new UIPropertyMetadata(null, _OnHighlightChanged));
+
+        private static void _OnHighlightChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            PropertyEditor editor = (PropertyEditor)d;
+            editor.OnHighlightChanged();
+        }
+
+        protected virtual void OnHighlightChanged() 
+        {
+            if (MainControl != null)
+            {
+                SetHighlightValue(MainControl, BackgroundProperty, Highlight, "HighlightGridBackgroundConverter");
+                SetHighlightValue(MainControl, ForegroundProperty, Highlight, "HighlightGridForegroundConverter");
+                SetHighlightValue(MainControl, FontStyleProperty, Highlight, "HighlightGridFontStyleConverter");
+                SetHighlightValue(MainControl, FontWeightProperty, Highlight, "HighlightGridFontWeightConverter");
+            }
+        }
+
+        private static void SetHighlightValue(FrameworkElement ctrl, DependencyProperty dpProp, Highlight h, string converter)
+        {
+            var value = ((IValueConverter)Application.Current.Resources[converter]).Convert(h, null, null, null);
+            if (value == Binding.DoNothing)
+                ctrl.SetValue(dpProp, DependencyProperty.UnsetValue);
+            else
+                ctrl.SetValue(dpProp, value);
         }
 
         protected abstract FrameworkElement MainControl { get; }

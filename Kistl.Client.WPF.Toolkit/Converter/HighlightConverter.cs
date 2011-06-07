@@ -19,7 +19,7 @@ namespace Kistl.Client.WPF.Converter
                             object parameter, System.Globalization.CultureInfo culture)
         {
             var h = value as Highlight;
-            if (h == null) return Binding.DoNothing;
+            if (h == null) return parameter ?? Binding.DoNothing;
             var val = GetValue(h);
             if (!string.IsNullOrEmpty(val))
             {
@@ -28,7 +28,7 @@ namespace Kistl.Client.WPF.Converter
             else
             {
                 var resource = Application.Current.TryFindResource(string.Format("HighlightState_{0}_{1}", h.State.ToString(), GetValueType()));
-                return resource != null ? resource : Binding.DoNothing;
+                return resource ?? parameter ?? Binding.DoNothing;
             }
         }
 
