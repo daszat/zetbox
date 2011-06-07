@@ -265,7 +265,7 @@ namespace Kistl.Client.Presentables
         {
             return new ObservableCollection<ICommandViewModel>();
         }
-        
+
         #endregion
 
         #region ColorManagement/Icon
@@ -302,145 +302,55 @@ namespace Kistl.Client.Presentables
 
     }
 
-    public class Highlight : INotifyPropertyChanged
+    public sealed class Highlight
     {
         #region Static Highlight States
-        public static readonly Highlight Good = new Highlight(HighlightState.Good, true);
-        public static readonly Highlight Neutral = new Highlight(HighlightState.Neutral, true);
-        public static readonly Highlight Bad = new Highlight(HighlightState.Bad, true);
-        public static readonly Highlight Archived = new Highlight(HighlightState.Archived, true);
-        public static readonly Highlight Deactivated = new Highlight(HighlightState.Deactivated, true);
-        public static readonly Highlight Active = new Highlight(HighlightState.Active, true);
-        public static readonly Highlight Output = new Highlight(HighlightState.Output, true);
-        public static readonly Highlight Input = new Highlight(HighlightState.Input, true);
-        public static readonly Highlight Calculation = new Highlight(HighlightState.Calculation, true);
-        public static readonly Highlight Info = new Highlight(HighlightState.Info, true);
-        public static readonly Highlight Warning = new Highlight(HighlightState.Warning, true);
-        public static readonly Highlight Error = new Highlight(HighlightState.Error, true);
-        public static readonly Highlight Fatal = new Highlight(HighlightState.Fatal, true);
-        public static readonly Highlight ActionRequired = new Highlight(HighlightState.ActionRequired, true);
-        public static readonly Highlight Note = new Highlight(HighlightState.Note, true);
+        public static readonly Highlight Good = new Highlight(HighlightState.Good);
+        public static readonly Highlight Neutral = new Highlight(HighlightState.Neutral);
+        public static readonly Highlight Bad = new Highlight(HighlightState.Bad);
+        public static readonly Highlight Archived = new Highlight(HighlightState.Archived);
+        public static readonly Highlight Deactivated = new Highlight(HighlightState.Deactivated);
+        public static readonly Highlight Active = new Highlight(HighlightState.Active);
+        public static readonly Highlight Output = new Highlight(HighlightState.Output);
+        public static readonly Highlight Input = new Highlight(HighlightState.Input);
+        public static readonly Highlight Calculation = new Highlight(HighlightState.Calculation);
+        public static readonly Highlight Info = new Highlight(HighlightState.Info);
+        public static readonly Highlight Warning = new Highlight(HighlightState.Warning);
+        public static readonly Highlight Error = new Highlight(HighlightState.Error);
+        public static readonly Highlight Fatal = new Highlight(HighlightState.Fatal);
+        public static readonly Highlight ActionRequired = new Highlight(HighlightState.ActionRequired);
+        public static readonly Highlight Note = new Highlight(HighlightState.Note);
         #endregion
 
         public Highlight()
-            : this(0)
+            : this(HighlightState.None)
         {
         }
 
         public Highlight(HighlightState state)
+            : this(state, null, null, System.Drawing.FontStyle.Regular, null)
         {
-            this.stateStore = state;
         }
 
-        private Highlight(HighlightState state, bool freeze)
+        public Highlight(string gridBackground, string gridForeground, System.Drawing.FontStyle gridFontStyle, string panelBackground)
+            : this(HighlightState.None, gridBackground, gridForeground, gridFontStyle, panelBackground)
         {
-            this.stateStore = state;
-            this._fozen = freeze;
         }
 
-        private bool _fozen = false;
-
-        protected HighlightState stateStore;
-        public virtual HighlightState State
+        public Highlight(HighlightState state, string gridBackground, string gridForeground, System.Drawing.FontStyle gridFontStyle, string panelBackground)
         {
-            get
-            {
-                // return an ZToolBox Enum
-                // Translated into a Workspace Backround and List Back/Foreground & Font Style
-                return stateStore;
-            }
-            set
-            {
-                if (_fozen) throw new InvalidOperationException("Cannot change a constant Highlight");
-                if (stateStore != value)
-                {
-                    stateStore = value;
-                    OnPropertyChanged("State");
-                }
-            }
+            this.State = state;
+            this.GridBackground = gridBackground;
+            this.GridForeground = gridForeground;
+            this.GridFontStyle = gridFontStyle;
+            this.PanelBackground = panelBackground;
         }
 
-        protected string gridBackgroundStore;
-        public virtual string GridBackground
-        {
-            get
-            {
-                return gridBackgroundStore;
-            }
-            set
-            {
-                if (_fozen) throw new InvalidOperationException("Cannot change a constant Highlight");
-                if (gridBackgroundStore != value)
-                {
-                    gridBackgroundStore = value;
-                    OnPropertyChanged("GridBackground");
-                }
-            }
-        }
-
-        protected string gridForegroundStore;
-        public virtual string GridForeground
-        {
-            get
-            {
-                return gridForegroundStore;
-            }
-            set
-            {
-                if (_fozen) throw new InvalidOperationException("Cannot change a constant Highlight");
-                if (gridForegroundStore != value)
-                {
-                    gridForegroundStore = value;
-                    OnPropertyChanged("GridForeground");
-                }
-            }
-        }
-
-        protected System.Drawing.FontStyle gridFontStyleStore;
-        public virtual System.Drawing.FontStyle GridFontStyle
-        {
-            get
-            {
-                return gridFontStyleStore;
-            }
-            set
-            {
-                if (_fozen) throw new InvalidOperationException("Cannot change a constant Highlight");
-                if (gridFontStyleStore != value)
-                {
-                    gridFontStyleStore = value;
-                    OnPropertyChanged("GridFontStyle");
-                }
-            }
-        }
-
-        protected string panelBackgroundStore;
-        public virtual string PanelBackground
-        {
-            get
-            {
-                return panelBackgroundStore;
-            }
-            set
-            {
-                if (_fozen) throw new InvalidOperationException("Cannot change a constant Highlight");
-                if (panelBackgroundStore != value)
-                {
-                    panelBackgroundStore = value;
-                    OnPropertyChanged("PanelBackground");
-                }
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged(string p)
-        {
-            var temp = PropertyChanged;
-            if (temp != null)
-            {
-                temp(this, new PropertyChangedEventArgs(p));
-            }
-        }
+        public HighlightState State { get; private set; }
+        public string GridBackground { get; private set; }
+        public string GridForeground { get; private set; }
+        public System.Drawing.FontStyle GridFontStyle { get; private set; }
+        public string PanelBackground { get; private set; }
     }
 
     internal class DesignerDependencies : IViewModelDependencies
