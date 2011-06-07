@@ -46,6 +46,11 @@ namespace Kistl.Client.Presentables.ValueViewModels
                         AllowAddExisting = false;
                         AllowRemove = false;
                     }
+                    else if (rel.GetRelationType() == RelationType.n_m)
+                    {
+                        AllowAddNew = false;
+                        AllowAddNewWhenAddingExisting = true;
+                    }
                 }
             }
         }
@@ -146,6 +151,25 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 }
             }
         }
+
+        private bool _allowAddNewWhenAddingExisting = true;
+        public bool AllowAddNewWhenAddingExisting
+        {
+            get
+            {
+                return _allowAddNewWhenAddingExisting;
+            }
+            set
+            {
+                if (_allowAddNewWhenAddingExisting != value)
+                {
+                    _allowAddNew = value;
+                    OnPropertyChanged("AllowAddNewWhenAddingExisting");
+                }
+            }
+        }
+
+        
 
         private bool? _allowInlineAddNew = null;
         public bool AllowInlineAddNew
@@ -390,7 +414,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                     null);
             lstMdl.ListViewModel.AllowDelete = false;
             lstMdl.ListViewModel.ShowOpenCommand = false;
-            lstMdl.ListViewModel.AllowAddNew = AllowAddNew;
+            lstMdl.ListViewModel.AllowAddNew = AllowAddNew || AllowAddNewWhenAddingExisting;
 
             ViewModelFactory.ShowModel(lstMdl, true);
         }
