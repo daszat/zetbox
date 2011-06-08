@@ -387,6 +387,15 @@ namespace Kistl.Client.Models
             private set;
         }
 
+        public RelationEnd RelEnd
+        {
+            get
+            {
+                return null;
+            }
+        }
+
+
         #endregion
     }
 

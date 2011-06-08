@@ -29,7 +29,32 @@ namespace Kistl.Client.Presentables.ValueViewModels
             : base(appCtx, dataCtx, parent, mdl)
         {
             ObjectReferenceModel = (IObjectReferenceValueModel)mdl;
-            _allowCreateNewItem = !dataCtx.IsReadonly;
+            var relEnd = ObjectReferenceModel.RelEnd;
+
+            if (relEnd != null)
+            {
+                var rel = relEnd.Parent;
+                if (rel != null)
+                {
+                    var relType = rel.GetRelationType();
+                    if (relType == RelationType.one_n && rel.Containment == ContainmentSpecification.Independent)
+                    {
+                        _allowCreateNewItem = false; // search first
+                    }
+                    else if (relType == RelationType.one_one)
+                    {
+                        if ((rel.Containment == ContainmentSpecification.AContainsB && rel.A == relEnd) ||
+                           (rel.Containment == ContainmentSpecification.BContainsA && rel.B == relEnd))
+                        {
+                            _allowSelectValue = false; // This end is creating the value, don't change another item
+                        }
+                        else
+                        {
+                            _allowCreateNewItem = false; // possibility to change parent, but do not create a new one
+                        }
+                    }
+                }
+            }
         }
 
         #region Public Interface
@@ -270,7 +295,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 null);
             selectionTask.ListViewModel.AllowDelete = false;
             selectionTask.ListViewModel.ShowOpenCommand = false;
-            selectionTask.ListViewModel.AllowAddNew = AllowCreateNewItem;
+            selectionTask.ListViewModel.AllowAddNew = true;
 
             ViewModelFactory.ShowModel(selectionTask, true);
         }
@@ -289,7 +314,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                         ObjectReferenceViewModelResources.SelectValueCommand_Name,
                         ObjectReferenceViewModelResources.SelectValueCommand_Tooltip,
                         () => SelectValue(),
-                        () => !DataContext.IsReadonly && !IsReadOnly);
+                        () => AllowSelectValue && !DataContext.IsReadonly && !IsReadOnly);
                     _SelectValueCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_search_png);
                 }
                 return _SelectValueCommand;

@@ -545,6 +545,19 @@ namespace Kistl.Client.Models
             }
         }
 
+        private RelationEnd _relEnd = null;
+        public RelationEnd RelEnd
+        {
+            get
+            {
+                if (_relEnd == null)
+                {
+                    _relEnd = objRefProp.RelationEnd;
+                }
+                return _relEnd;
+            }
+        }
+
         #endregion
     }
 

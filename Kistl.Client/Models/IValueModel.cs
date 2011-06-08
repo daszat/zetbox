@@ -84,6 +84,7 @@ namespace Kistl.Client.Models
     public interface IObjectReferenceValueModel : IValueModel<IDataObject>
     {
         ObjectClass ReferencedClass { get; }
+        RelationEnd RelEnd { get; }
     }
 
     public interface ICompoundObjectValueModel : IValueModel<ICompoundObject>
