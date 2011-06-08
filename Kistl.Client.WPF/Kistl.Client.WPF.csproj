@@ -161,6 +161,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\SimpleDataObjectEditorDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\DefaultHighlightColorDefinitions.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -539,6 +543,9 @@
     </Compile>
     <Compile Include="View\Calendar\WeekCalendar.xaml.cs">
       <DependentUpon>WeekCalendar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SimpleDataObjectEditorDialog.xaml.cs">
+      <DependentUpon>SimpleDataObjectEditorDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\DocumentManagement\ImageEditor.xaml.cs">
       <DependentUpon>ImageEditor.xaml</DependentUpon>

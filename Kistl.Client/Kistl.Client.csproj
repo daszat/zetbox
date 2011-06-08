@@ -121,6 +121,12 @@
     <Compile Include="Presentables\Calendar\LedgerViewModel.cs" />
     <Compile Include="Presentables\Calendar\TimeSlotItemViewModel.cs" />
     <Compile Include="Presentables\Calendar\WeekCalendarViewModel.cs" />
+    <Compile Include="Presentables\SimpleDataObjectEditorTaskViewModelResources1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SimpleDataObjectEditorTaskViewModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentables\SimpleDataObjectEditorTaskViewModel.cs" />
     <Compile Include="Presentables\DataObjectSelectionTaskViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -314,6 +320,11 @@
     <EmbeddedResource Include="Presentables\CacheDebuggerViewModelResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>CacheDebuggerViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\SimpleDataObjectEditorTaskViewModelResources.de.resx" />
+    <EmbeddedResource Include="Presentables\SimpleDataObjectEditorTaskViewModelResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SimpleDataObjectEditorTaskViewModelResources1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentables\ExceptionReporterViewModelResources.de.resx" />
     <EmbeddedResource Include="Presentables\DataObjectSelectionTaskViewModelResources.de.resx">

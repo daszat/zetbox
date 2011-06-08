@@ -376,10 +376,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             var item = this.DataContext.Create(targetType);
             var result = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), item);
             AddItem(result);
-            if (!targetClass.IsSimpleObject)
-            {
-                ActivateItem(result, true);
-            }
+            ActivateItem(result, true);
         }
 
         public virtual void AddItem(DataObjectViewModel item)
@@ -439,10 +436,18 @@ namespace Kistl.Client.Presentables.ValueViewModels
         public void ActivateItem(DataObjectViewModel item, bool activate)
         {
             if (item == null) { throw new ArgumentNullException("item"); }
-            // Don't open simple objects
-            if (this.ReferencedClass.IsSimpleObject) return;
 
-            ViewModelFactory.ShowModel(item, activate);
+            if (this.ReferencedClass.IsSimpleObject && !IsInlineEditable)
+            {
+                // Open in a Dialog
+                var dlg = ViewModelFactory.CreateViewModel<SimpleDataObjectEditorTaskViewModel.Factory>().Invoke(DataContext, this, item);
+                ViewModelFactory.ShowDialog(dlg);
+            }
+            else if (!this.ReferencedClass.IsSimpleObject)
+            {
+                ViewModelFactory.ShowModel(item, activate);
+            }
+            // Don't open simple objects
         }
 
         #endregion
