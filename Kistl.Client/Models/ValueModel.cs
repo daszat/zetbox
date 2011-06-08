@@ -49,7 +49,23 @@ namespace Kistl.Client.Models
             }
             else if (parameter is ObjectParameter && !parameter.IsList)
             {
-                return new ObjectReferenceValueModel(lb, parameter.Description, allowNullInput, false, (ObjectClass)((ObjectParameter)parameter).DataType);
+                var objParameter = (ObjectParameter)parameter;
+                if (objParameter.DataType is ObjectClass)
+                {
+                    return new ObjectReferenceValueModel(lb, parameter.Description, allowNullInput, false, (ObjectClass)objParameter.DataType);
+                }
+                else if (objParameter.DataType is CompoundObject)
+                {
+                    return new CompoundObjectValueModel(lb, parameter.Description, allowNullInput, false, (CompoundObject)objParameter.DataType);
+                }
+                else if (objParameter.DataType is Enumeration)
+                {
+                    return new EnumerationValueModel(lb, parameter.Description, allowNullInput, false, (Enumeration)objParameter.DataType);
+                }
+                else
+                {
+                    throw new NotSupportedException(string.Format("Object Parameter of DataType {0} are not supported", parameter.Context.GetInterfaceType(objParameter.DataType).Type.Name));
+                }
             }
             else if (parameter is EnumParameter && !parameter.IsList)
             {

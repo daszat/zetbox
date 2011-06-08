@@ -62,5 +62,23 @@ namespace Kistl.App.Base
         {
             e.Result = "<Invalid Datatype, please implement Property.GetPropertyTypeString()>";
         }
+
+        [Invocation]
+        public static void postSet_Name(Property obj, PropertyPostSetterEventArgs<string> e)
+        {
+            if (obj is ValueTypeProperty)
+            {
+                obj.NotifyPropertyChanged("CodeTemplate", string.Empty, string.Empty);
+            }
+        }
+
+        [Invocation]
+        public static void postSet_ObjectClass(Property obj, PropertyPostSetterEventArgs<DataType> e)
+        {
+            if (obj is ValueTypeProperty)
+            {
+                obj.NotifyPropertyChanged("CodeTemplate", string.Empty, string.Empty);
+            }
+        }
     }
 }

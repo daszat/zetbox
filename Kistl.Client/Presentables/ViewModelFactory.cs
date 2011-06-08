@@ -166,12 +166,28 @@ namespace Kistl.Client.Presentables
             }
             else if (param is ObjectParameter && !param.IsList)
             {
-                t = typeof(ObjectReferenceViewModel);
+                var objParam = (ObjectParameter)param;
+                if (objParam.DataType is ObjectClass)
+                {
+                    t = typeof(ObjectReferenceViewModel);
+                }
+                else if (objParam.DataType is CompoundObject)
+                {
+                    t = typeof(CompoundObjectPropertyViewModel);
+                }
+                else if (objParam.DataType is Enumeration)
+                {
+                    t = typeof(EnumerationValueViewModel);
+                }
+                else
+                {
+                    throw new NotSupportedException(String.Format("==>> No model for object parameter '{0}' of type '{1}'", param, param.Context.GetInterfaceType(objParam.DataType).Type.Name));
+                }
             }
-            //else if (retParam is EnumParameter && !retParam.IsList)
-            //{
-            //    return (ModelFactory.CreateViewModel<NullableResultModel<?>.Factory>().Invoke(DataContext, _object, pm));
-            //}
+            else if (param is EnumParameter && !param.IsList)
+            {
+                t = typeof(EnumerationValueViewModel);
+            }
             else
             {
                 throw new NotImplementedException(String.Format("==>> No model for parameter '{0}' with type '{1}'", param, param.GetParameterType()));
