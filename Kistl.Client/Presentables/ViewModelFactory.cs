@@ -173,7 +173,15 @@ namespace Kistl.Client.Presentables
                 }
                 else if (objParam.DataType is CompoundObject)
                 {
-                    t = typeof(CompoundObjectPropertyViewModel);
+                    var compObj = (CompoundObject)objParam.DataType;
+                    if (compObj.DefaultPropertyViewModelDescriptor != null)
+                    {
+                        t = compObj.DefaultPropertyViewModelDescriptor.ViewModelRef.AsType(true);
+                    }
+                    else
+                    {
+                        t = typeof(CompoundObjectPropertyViewModel);
+                    }
                 }
                 else if (objParam.DataType is Enumeration)
                 {

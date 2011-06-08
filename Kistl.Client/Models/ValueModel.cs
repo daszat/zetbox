@@ -504,7 +504,13 @@ namespace Kistl.Client.Models
     public class CompoundObjectValueModel : ClassValueModel<ICompoundObject>, ICompoundObjectValueModel
     {
         public CompoundObjectValueModel(string label, string description, bool allowNullInput, bool isReadOnly, CompoundObject def)
-            : this(label, description, allowNullInput, isReadOnly, null, def)
+            : this(
+                label, 
+                description, 
+                allowNullInput, 
+                isReadOnly, 
+                def.RequestedKind ?? (def.DefaultPropertyViewModelDescriptor != null ? def.DefaultPropertyViewModelDescriptor.DefaultEditorKind : null), 
+                def)
         {
         }
 
@@ -513,7 +519,6 @@ namespace Kistl.Client.Models
         {
             this.CompoundObjectDefinition = def;
         }
-
 
         #region IObjectReferenceValueModel Members
 
