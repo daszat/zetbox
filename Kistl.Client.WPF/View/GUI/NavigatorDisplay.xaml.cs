@@ -30,6 +30,11 @@ namespace Kistl.Client.WPF.View.GUI
             InitializeComponent();
         }
 
+        protected void BackCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            ViewModel.Back();
+        }
+
         #region IHasViewModel<NavigatorViewModel> Members
 
         public NavigatorViewModel ViewModel

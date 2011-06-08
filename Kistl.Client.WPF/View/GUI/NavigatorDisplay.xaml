@@ -8,7 +8,16 @@
                   Width="1024"
                   Height="768"
                   Title="{Binding Name}">
-    <DockPanel LastChildFill="True">
+  <ctrls:WindowView.CommandBindings>
+    <CommandBinding Command="NavigationCommands.BrowseBack"
+                    Executed="BackCommand_Executed" />
+  </ctrls:WindowView.CommandBindings>
+  <ctrls:WindowView.InputBindings>
+    <KeyBinding Key="BrowserBack"
+                Command="NavigationCommands.BrowseBack" />
+  </ctrls:WindowView.InputBindings>
+
+  <DockPanel LastChildFill="True">
         <!-- location breadcrumbs -->
         <ItemsControl DockPanel.Dock="Top"
                       ItemsSource="{Binding Location}"

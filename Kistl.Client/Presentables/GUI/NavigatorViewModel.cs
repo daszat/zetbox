@@ -166,11 +166,14 @@ namespace Kistl.Client.Presentables.GUI
 
         public void Back()
         {
-            // remove "current" screen from history
-            _history.RemoveAt(_history.Count - 1);
-            CurrentScreen = _history.Last();
-            // remove the back step from history too
-            _history.RemoveAt(_history.Count - 1);
+            if (_history.Count > 1)
+            {
+                // remove "current" screen from history
+                _history.RemoveAt(_history.Count - 1);
+                CurrentScreen = _history.Last();
+                // remove the back step from history too
+                _history.RemoveAt(_history.Count - 1);
+            }
         }
 
         private ICommandViewModel _NavigateToCommand = null;
