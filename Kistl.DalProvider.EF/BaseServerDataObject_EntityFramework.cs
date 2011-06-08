@@ -148,6 +148,12 @@ namespace Kistl.DalProvider.Ef
                     // for calculated properties. EF doesn't know about them
                     // so it throws this ArgumentException
                 }
+                catch (InvalidOperationException)
+                {
+                    // TODO: Sorry, but this public method is sometimes called
+                    // for calculated properties. EF doesn't know about them
+                    // so it throws this InvalidOperationException
+                }
             }
         }
 
@@ -174,6 +180,12 @@ namespace Kistl.DalProvider.Ef
                     // TODO: Sorry, but this public method is sometimes called
                     // for calculated properties. EF doesn't know about them
                     // so it throws this ArgumentException
+                }
+                catch (InvalidOperationException)
+                {
+                    // TODO: Sorry, but this public method is sometimes called
+                    // for calculated properties. EF doesn't know about them
+                    // so it throws this InvalidOperationException
                 }
             }
         }

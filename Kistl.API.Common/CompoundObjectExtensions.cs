@@ -17,7 +17,8 @@ namespace Kistl.App.Extensions
             if (obj == null) { throw new ArgumentNullException("obj"); }
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
 
-            return GetCompoundObjectDefinition(((BaseCompoundObject)obj).ParentObject.ReadOnlyContext.GetInterfaceType(obj), ctx);
+            //return GetCompoundObjectDefinition(((BaseCompoundObject)obj).ParentObject.ReadOnlyContext.GetInterfaceType(obj), ctx);
+            return GetCompoundObjectDefinition(ctx.GetInterfaceType(obj), ctx);
         }
 
         public static CompoundObject GetCompoundObjectDefinition(this InterfaceType ifType, IReadOnlyKistlContext ctx)

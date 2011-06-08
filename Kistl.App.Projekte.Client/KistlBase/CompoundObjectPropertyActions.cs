@@ -25,5 +25,16 @@ namespace Kistl.App.Base
         {
             obj.ValueModelDescriptor = obj.Context.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_CompoundObjectPropertyViewModel);
         }
+
+        [Invocation]
+        public static void postSet_CompoundObjectDefinition(CompoundObjectProperty obj, PropertyPostSetterEventArgs<CompoundObject> e)
+        {
+            var def = obj.Context.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_CompoundObjectPropertyViewModel);
+            if (obj.ValueModelDescriptor == def && e.OldValue == null && e.NewValue != null && e.NewValue.DefaultPropertyViewModelDescriptor != null)
+            {
+                // Only once, during initialize
+                obj.ValueModelDescriptor = e.NewValue.DefaultPropertyViewModelDescriptor;
+            }
+        }
     }
 }

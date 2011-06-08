@@ -64,10 +64,14 @@ namespace Kistl.Client.Presentables.ValueViewModels
         private void UpdateValueCache()
         {
             var obj = ValueModel.Value;
-            if (obj != null)
+            if (obj == null)
             {
-                _valueCache = CompoundObjectViewModel.Fetch(ViewModelFactory, DataContext, this, obj);
+                // if it's null, create one
+                // TODO: This may be a subject to change
+                // We still don't know, how to handle nullable CompoundObjects!!!
+                obj = DataContext.CreateCompoundObject(DataContext.GetInterfaceType(ReferencedType.GetDataType()));
             }
+            _valueCache = CompoundObjectViewModel.Fetch(ViewModelFactory, DataContext, this, obj);
             _valueCacheInititalized = true;
         }
 
