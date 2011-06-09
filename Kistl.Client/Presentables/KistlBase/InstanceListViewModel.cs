@@ -403,8 +403,20 @@ namespace Kistl.Client.Presentables.KistlBase
 
             if (isEmbedded(workingCtx))
             {
-                this.ReloadInstances();
+                // TODO: Reorganize this control - it's too complex
                 var mdl = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj);
+                if(_instancesCache == null) _instancesCache = new List<DataObjectViewModel>();
+                _instancesCache.Add(mdl);
+                _instances = new ObservableCollection<DataObjectViewModel>(_instancesCache);
+
+                _proxyCache.Clear();
+                _proxyInstances = null;
+
+                OnPropertyChanged("ProxyInstances");
+                OnPropertyChanged("Instances");
+                OnPropertyChanged("InstancesCount");
+                OnPropertyChanged("InstancesCountAsText");
+
                 this.SelectedItem = mdl;
                 ViewModelFactory.ShowModel(mdl, true);
             }
