@@ -97,7 +97,6 @@
     </Compile>
     <Compile Include="Models\FilterValueSource.cs" />
     <Compile Include="Models\IValueModel.cs" />
-    <Compile Include="Models\MethodResultModel.cs" />
     <Compile Include="Models\PropertyValueModel.cs" />
     <Compile Include="Models\ValueModel.cs" />
     <Compile Include="NamedObjects.cs" />
