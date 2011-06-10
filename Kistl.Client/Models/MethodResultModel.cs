@@ -48,10 +48,14 @@ namespace Kistl.Client.Models
             {
                 return new ClassMethodResultModel<string>(obj, method);
             }
-            else if (retParam is ObjectParameter && !retParam.IsList)
+            else if (retParam is ObjectReferenceParameter && !retParam.IsList)
             {
                 return new ObjectReferenceMethodResultModel(obj, method);
             }
+            //else if (retParam is CompoundObjectParameter && !retParam.IsList)
+            //{
+            //    return new CompoundObjectMethodResultModel(obj, method);
+            //}
             //else if (retParam is EnumParameter && !retParam.IsList)
             //{
             //    return (ModelFactory.CreateViewModel<NullableResultModel<?>.Factory>().Invoke(DataContext, _object, pm));
@@ -389,7 +393,7 @@ namespace Kistl.Client.Models
             {
                 if (_referencedClass == null)
                 {
-                    _referencedClass = (ObjectClass)((ObjectParameter)ReturnParameter).DataType;
+                    _referencedClass = (ObjectClass)((ObjectReferenceParameter)ReturnParameter).ObjectClass;
                 }
                 return _referencedClass;
             }

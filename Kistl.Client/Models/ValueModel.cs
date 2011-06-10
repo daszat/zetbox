@@ -47,29 +47,17 @@ namespace Kistl.Client.Models
             {
                 return new ClassValueModel<string>(lb, parameter.Description, allowNullInput, false);
             }
-            else if (parameter is ObjectParameter && !parameter.IsList)
+            else if (parameter is ObjectReferenceParameter && !parameter.IsList)
             {
-                var objParameter = (ObjectParameter)parameter;
-                if (objParameter.DataType is ObjectClass)
-                {
-                    return new ObjectReferenceValueModel(lb, parameter.Description, allowNullInput, false, (ObjectClass)objParameter.DataType);
-                }
-                else if (objParameter.DataType is CompoundObject)
-                {
-                    return new CompoundObjectValueModel(lb, parameter.Description, allowNullInput, false, (CompoundObject)objParameter.DataType);
-                }
-                else if (objParameter.DataType is Enumeration)
-                {
-                    return new EnumerationValueModel(lb, parameter.Description, allowNullInput, false, (Enumeration)objParameter.DataType);
-                }
-                else
-                {
-                    throw new NotSupportedException(string.Format("Object Parameter of DataType {0} are not supported", parameter.Context.GetInterfaceType(objParameter.DataType).Type.Name));
-                }
+                return new ObjectReferenceValueModel(lb, parameter.Description, allowNullInput, false, ((ObjectReferenceParameter)parameter).ObjectClass);
             }
             else if (parameter is EnumParameter && !parameter.IsList)
             {
                 return new EnumerationValueModel(lb, parameter.Description, allowNullInput, false, ((EnumParameter)parameter).Enumeration);
+            }
+            else if (parameter is CompoundObjectParameter && !parameter.IsList)
+            {
+                return new CompoundObjectValueModel(lb, parameter.Description, allowNullInput, false, ((CompoundObjectParameter)parameter).CompoundObject);
             }
             else
             {

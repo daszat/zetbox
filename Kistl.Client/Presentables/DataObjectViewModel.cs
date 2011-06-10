@@ -345,7 +345,7 @@ namespace Kistl.Client.Presentables
                     && m.Name.StartsWith("Get")
                     && m.Parameter.Count == 1
                     && m.Parameter.Single().IsReturnParameter
-                    && !(m.Parameter.Single() is ObjectParameter))) // Could be a CreateRelatedUseCase, and we don't want to go around creating new objects
+                    && !(m.Parameter.Single() is ObjectReferenceParameter))) // Could be a CreateRelatedUseCase, and we don't want to go around creating new objects
                 {
                     methods.Add(m);
                 }

@@ -54,10 +54,12 @@ namespace Kistl.App.Extensions
             else if (param is DecimalParameter && !param.IsList)
                 return typeof(decimal);
 
-            else if (param is ObjectParameter)
+            else if (param is ObjectReferenceParameter)
             {
-                var p = param as ObjectParameter;
-                Type t = Type.GetType(p.DataType.Module.Namespace + "." + p.DataType.Name + ", " + Kistl.API.Helper.InterfaceAssembly, true);
+                var p = param as ObjectReferenceParameter;
+                // TEMP
+                if (p.ObjectClass == null) return null;
+                Type t = Type.GetType(p.ObjectClass.Module.Namespace + "." + p.ObjectClass.Name + ", " + Kistl.API.Helper.InterfaceAssembly, true);
                 if (param.IsList)
                     t = typeof(IList<>).MakeGenericType(t);
 
@@ -68,6 +70,16 @@ namespace Kistl.App.Extensions
             {
                 var p = param as EnumParameter;
                 Type t = Type.GetType(p.Enumeration.Module.Namespace + "." + p.Enumeration.Name + ", " + Kistl.API.Helper.InterfaceAssembly, true);
+                if (param.IsList)
+                    t = typeof(IList<>).MakeGenericType(t);
+
+                return t;
+            }
+
+            else if (param is CompoundObjectParameter)
+            {
+                var p = param as CompoundObjectParameter;
+                Type t = Type.GetType(p.CompoundObject.Module.Namespace + "." + p.CompoundObject.Name + ", " + Kistl.API.Helper.InterfaceAssembly, true);
                 if (param.IsList)
                     t = typeof(IList<>).MakeGenericType(t);
 

@@ -164,37 +164,25 @@ namespace Kistl.Client.Presentables
             {
                 t = typeof(ClassValueViewModel<string>);
             }
-            else if (param is ObjectParameter && !param.IsList)
+            else if (param is ObjectReferenceParameter && !param.IsList)
             {
-                var objParam = (ObjectParameter)param;
-                if (objParam.DataType is ObjectClass)
-                {
-                    t = typeof(ObjectReferenceViewModel);
-                }
-                else if (objParam.DataType is CompoundObject)
-                {
-                    var compObj = (CompoundObject)objParam.DataType;
-                    if (compObj.DefaultPropertyViewModelDescriptor != null)
-                    {
-                        t = compObj.DefaultPropertyViewModelDescriptor.ViewModelRef.AsType(true);
-                    }
-                    else
-                    {
-                        t = typeof(CompoundObjectPropertyViewModel);
-                    }
-                }
-                else if (objParam.DataType is Enumeration)
-                {
-                    t = typeof(EnumerationValueViewModel);
-                }
-                else
-                {
-                    throw new NotSupportedException(String.Format("==>> No model for object parameter '{0}' of type '{1}'", param, param.Context.GetInterfaceType(objParam.DataType).Type.Name));
-                }
+                t = typeof(ObjectReferenceViewModel);
             }
             else if (param is EnumParameter && !param.IsList)
             {
                 t = typeof(EnumerationValueViewModel);
+            }
+            else if (param is CompoundObjectParameter && !param.IsList)
+            {
+                var compObj = ((CompoundObjectParameter)param).CompoundObject;
+                if (compObj.DefaultPropertyViewModelDescriptor != null)
+                {
+                    t = compObj.DefaultPropertyViewModelDescriptor.ViewModelRef.AsType(true);
+                }
+                else
+                {
+                    t = typeof(CompoundObjectPropertyViewModel);
+                }
             }
             else
             {

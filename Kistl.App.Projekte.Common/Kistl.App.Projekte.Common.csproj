@@ -82,6 +82,7 @@
     <Compile Include="KistlBase\CompoundObjectPropertyActions.cs" />
     <Compile Include="KistlBase\ConstraintActions.cs" />
     <Compile Include="KistlBase\BoolDefaultValueActions.cs" />
+    <Compile Include="KistlBase\CompoundObjectParameterActions.cs" />
     <Compile Include="KistlBase\ValueTypePropertyActions.cs" />
     <Compile Include="KistlBase\StringDefaultValueActions.cs" />
     <Compile Include="KistlBase\IntDefaultValueActions.cs" />
@@ -93,7 +94,7 @@
     <Compile Include="KistlBase\DateTimeParameterActions.cs" />
     <Compile Include="KistlBase\CLRObjectParameterActions.cs" />
     <Compile Include="KistlBase\EnumParameterActions.cs" />
-    <Compile Include="KistlBase\ObjectParameterActions.cs" />
+    <Compile Include="KistlBase\ObjectReferenceParameterActions.cs" />
     <Compile Include="KistlBase\IntPropertyActions.cs" />
     <Compile Include="KistlBase\DecimalPropertyActions.cs" />
     <Compile Include="KistlBase\DateTimePropertyActions.cs" />
