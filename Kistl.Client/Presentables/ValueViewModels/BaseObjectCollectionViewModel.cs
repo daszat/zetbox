@@ -341,7 +341,11 @@ namespace Kistl.Client.Presentables.ValueViewModels
         {
             ObjectClass baseclass = ReferencedClass;
 
-            var children = new List<ObjectClass>() { baseclass };
+            var children = new List<ObjectClass>();
+            if (baseclass.IsAbstract == false)
+            {
+                children.Add(baseclass);
+            }
             CollectChildClasses(baseclass.ID, children);
 
             if (children.Count == 1)

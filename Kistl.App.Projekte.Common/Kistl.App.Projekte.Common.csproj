@@ -71,6 +71,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Gui\CalendarActions.cs" />
+    <Compile Include="Gui\CalendarRuleActions.cs" />
+    <Compile Include="Gui\CommonCalendarRuleActions.cs" />
+    <Compile Include="Gui\FixedYearlyCalendarRuleActions.cs" />
+    <Compile Include="Gui\EasterCalendarRuleActions.cs" />
+    <Compile Include="Gui\YearlyCalendarRuleActions.cs" />
+    <Compile Include="Gui\DayOfWeekCalendarRuleActions.cs" />
     <Compile Include="Gui\FilterConfigurationActions.cs" />
     <Compile Include="Gui\PropertyFilterConfigurationActions.cs" />
     <Compile Include="Gui\NavigationScreenActions.cs" />

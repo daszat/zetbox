@@ -186,6 +186,8 @@ namespace Kistl.Server.Service
                             Log.Info("Service control manager not registered");
                         }
 
+                        //RunTestCode(container.Resolve<IKistlContext>());
+
                         Log.Info("Starting WCF Service");
                         var wcfServer = container.Resolve<IKistlAppDomain>();
                         wcfServer.Start(config);
@@ -215,6 +217,25 @@ namespace Kistl.Server.Service
                 return 1;
             }
         }
+
+        //private static void RunTestCode(IKistlContext ctx)
+        //{
+        //    // Test calendar
+        //    foreach (var cal in ctx.GetQuery<Kistl.App.GUI.Calendar>())
+        //    {
+        //        Logging.Log.InfoFormat("-------- Testing calendar {0}", cal.Name);
+        //        for (int i = 1; i <= 12; i++)
+        //        {
+        //            var from = new DateTime(2011, i, 1);
+        //            var until = from.LastMonthDay();
+        //            Logging.Log.InfoFormat("OffDays:      {0} - {1} = {2}", from.ToShortDateString(), until.ToShortDateString(), cal.GetOffDays(from, until));
+        //            Logging.Log.InfoFormat("WorkingDays:  {0} - {1} = {2}", from.ToShortDateString(), until.ToShortDateString(), cal.GetWorkingDays(from, until));
+        //            Logging.Log.InfoFormat("WorkingHours: {0} - {1} = {2}", from.ToShortDateString(), until.ToShortDateString(), cal.GetWorkingHours(from, until));
+        //        }
+        //    }
+        //    Logging.Log.InfoFormat("------------------------------");
+
+        //}
 
         internal static IContainer CreateMasterContainer(KistlConfig config)
         {
