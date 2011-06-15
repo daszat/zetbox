@@ -97,7 +97,7 @@ foreach (var prop in ctx.GetQuery<ValueTypeProperty>()
                             .Where(p => p.IsList && !p.IsCalculated)
                             .Where(p => p.ObjectClass is ObjectClass)
                             .OrderBy(p => p.ObjectClass.Name)
-                            .OrderBy(p => p.Name))
+                            .ThenBy(p => p.Name))
    {
         var collectionEntryNamespace = prop.Module.Namespace;
         var collectionEntryClassName = prop.GetCollectionEntryClassName() + ImplementationSuffix;
