@@ -73,68 +73,50 @@ M: System.Linq.IQueryable`1<Kistl.API.IDataObject> Kistl.Client.Presentables.Val
 # Helper method which is only called by reflection from GetAll
 M: System.Collections.Generic.List`1<Kistl.API.IDataObject> Kistl.API.BaseMemoryContext::GetAllHack()
 M: System.Collections.Generic.List`1<Kistl.API.IDataObject> Kistl.API.Server.BaseKistlDataContext::GetAllHack()
+
 # generated code (wpf)
-M: System.Delegate Kistl.Client.WPF.View.KistlBase.DataObjectLineDisplay::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.KistlBase.ObjectReferenceEditor::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.KistlBase.ObjectReferenceDropdownEditor::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.KistlBase.ObjectReferenceListEditor::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.KistlBase.ObjectReferenceCollectionEditor::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.KistlBase.ObjectReferenceListGridEditor::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.KistlBase.ObjectReferenceCollectionGridEditor::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.KistlBase.StringDisplay::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.KistlBase.TypeRefPropertyView::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.KistlBase.CompoundObjectPropertyEditor::_CreateDelegate(System.Type,System.String)
 
-M: System.Delegate Kistl.Client.WPF.View.KistlBase.CommandDisplay::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.KistlBase.ActionDisplay::_CreateDelegate(System.Type,System.String)
-
-M: System.Delegate Kistl.Client.WPF.View.KistlBase.InstanceListDisplay::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.KistlBase.InstanceListHorizontalDisplay::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.KistlBase.InstanceGridDisplay::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.KistlBase.InstanceGridHorizontalDisplay::_CreateDelegate(System.Type,System.String)
-
-M: System.Delegate Kistl.Client.WPF.View.ObjectEditor.DataObjectEditor::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.ObjectEditor.WorkspaceDisplay::_CreateDelegate(System.Type,System.String)
-
-M: System.Delegate Kistl.Client.WPF.View.ObjectBrowser.WorkspaceDisplay::_CreateDelegate(System.Type,System.String)
-
-M: System.Delegate Kistl.Client.WPF.View.ModuleEditor.ObjectClassInstanceList::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.ModuleEditor.DiagramDisplay::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.ModuleEditor.WorkspaceDisplay::_CreateDelegate(System.Type,System.String)
-
-M: System.Delegate Kistl.Client.WPF.View.Relations.RelationEndEditor::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.Relations.RelationEditor::_CreateDelegate(System.Type,System.String)
-
-M: System.Delegate Kistl.Client.WPF.View.SelectionDialog::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.LabeledView::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.TimeRecords.WorkEffortRecorderView::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.EnumSelectionView::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.NullableBoolValueView::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.NullablePropertyTextBoxView::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.NullablePasswordTextBoxView::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.NullablePropertyMultiLineTextBoxView::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.TextValueSelectionView::_CreateDelegate(System.Type,System.String)
 M: System.Delegate Kistl.Client.WPF.View.CacheDebuggerDisplay::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.NullableBoolValueDropdownView::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.NullableMonthValueEditor::_CreateDelegate(System.Type,System.String)
-M: System.Delegate Kistl.Client.WPF.View.NullableDateTimeValueEditor::_CreateDelegate(System.Type,System.String)
-
+M: System.Delegate Kistl.Client.WPF.View.Calendar.WeekCalendar::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.EnumSelectionView::_CreateDelegate(System.Type,System.String)
 M: System.Delegate Kistl.Client.WPF.View.GridCells.MultilineStringValue::_CreateDelegate(System.Type,System.String)
 M: System.Delegate Kistl.Client.WPF.View.GUI.MultiLineEditorDialog::_CreateDelegate(System.Type,System.String)
-
+M: System.Delegate Kistl.Client.WPF.View.KistlBase.ActionDisplay::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.KistlBase.CommandDisplay::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.KistlBase.CompoundObjectPropertyEditor::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.KistlBase.DataObjectLineDisplay::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.KistlBase.InstanceGridDisplay::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.KistlBase.InstanceGridHorizontalDisplay::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.KistlBase.InstanceListDisplay::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.KistlBase.InstanceListHorizontalDisplay::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.KistlBase.ObjectReferenceCollectionEditor::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.KistlBase.ObjectReferenceCollectionGridEditor::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.KistlBase.ObjectReferenceDropdownEditor::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.KistlBase.ObjectReferenceEditor::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.KistlBase.ObjectReferenceListEditor::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.KistlBase.ObjectReferenceListGridEditor::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.KistlBase.StringDisplay::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.KistlBase.TypeRefPropertyView::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.LabeledView::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.ModuleEditor.DiagramDisplay::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.ModuleEditor.ObjectClassInstanceList::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.ModuleEditor.WorkspaceDisplay::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.NullableBoolValueDropdownView::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.NullableBoolValueView::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.NullableDateTimeValueEditor::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.NullableMonthValueEditor::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.NullablePasswordTextBoxView::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.NullablePropertyMultiLineTextBoxView::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.NullablePropertyTextBoxView::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.ObjectBrowser.WorkspaceDisplay::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.ObjectEditor.DataObjectEditor::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.ObjectEditor.WorkspaceDisplay::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.Relations.RelationEditor::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.Relations.RelationEndEditor::_CreateDelegate(System.Type,System.String)
 M: System.Delegate Kistl.Client.WPF.View.SchemaMigration.DestinationPropertyEditor::_CreateDelegate(System.Type,System.String)
-
-M: System.Delegate Kistl.Client.WPF.View.Calendar.WeekCalendar::_CreateDelegate(System.Type,System.String)
-
-
-
-
-
-
-
-
-
-
+M: System.Delegate Kistl.Client.WPF.View.SelectionDialog::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.TextValueSelectionView::_CreateDelegate(System.Type,System.String)
+M: System.Delegate Kistl.Client.WPF.View.TimeRecords.WorkEffortRecorderView::_CreateDelegate(System.Type,System.String)
 
 # Called by a lambda
 M: System.Boolean System.Linq.Dynamic.ExpressionParser::IsBetterThan(System.Linq.Expressions.Expression[],System.Linq.Dynamic.ExpressionParser/MethodData,System.Linq.Dynamic.ExpressionParser/MethodData)
