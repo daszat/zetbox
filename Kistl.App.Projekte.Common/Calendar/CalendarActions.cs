@@ -1,4 +1,4 @@
-namespace Kistl.App.GUI
+namespace Kistl.App.Calendar
 {
     using System;
     using System.Collections.Generic;
@@ -6,6 +6,7 @@ namespace Kistl.App.GUI
     using System.Text;
 
     using Kistl.API;
+    using Kistl.API.Utils;
 
     [Implementor]
     public static class CalendarActions
@@ -41,6 +42,19 @@ namespace Kistl.App.GUI
             OffDays
         }
 
+        private static List<CalendarRule> RulesAndParents(this Calendar cal)
+        {
+            var result = new List<CalendarRule>();
+            result.AddRange(cal.CalendarRules);
+            var parent = cal.BaseCalendar;
+            while (parent != null)
+            {
+                result.AddRange(parent.CalendarRules);
+                parent = parent.BaseCalendar;
+            }
+            return result;
+        }
+
         private static decimal Calc(Calendar obj, DateTime from, DateTime until, CalcModes what)
         {
             decimal result = 0;
@@ -48,39 +62,40 @@ namespace Kistl.App.GUI
             while (from <= until)
             {
                 CalendarRule foundRule = null;
+                var rules = obj.RulesAndParents();
                 // Find YearlyRule
-                foundRule = obj.CalendarRules.OfType<YearlyCalendarRule>().FirstOrDefault(r => r.AppliesTo(from));
+                foundRule = rules.OfType<YearlyCalendarRule>().FirstOrDefault(r => r.AppliesTo(from));
                 // Find DayOfWeekRule
                 if (foundRule == null)
                 {
-                    foundRule = obj.CalendarRules.OfType<DayOfWeekCalendarRule>().FirstOrDefault(r => r.AppliesTo(from));
+                    foundRule = rules.OfType<DayOfWeekCalendarRule>().FirstOrDefault(r => r.AppliesTo(from));
                 }
                 // Find CommonRule
                 if (foundRule == null)
                 {
-                    foundRule = obj.CalendarRules.OfType<CommonCalendarRule>().FirstOrDefault(r => r.AppliesTo(from));
+                    foundRule = rules.OfType<CommonCalendarRule>().FirstOrDefault(r => r.AppliesTo(from));
                 }
 
                 if (foundRule != null)
                 {
-                    switch(what)
+                    switch (what)
                     {
                         case CalcModes.WorkingHours:
                             result += foundRule.WorkingHours;
                             break;
                         case CalcModes.WorkingDays:
-                            if(foundRule.WorkingHours != 0)
+                            if (foundRule.IsWorkingDay)
                                 result++;
                             break;
                         case CalcModes.OffDays:
-                            if (foundRule.WorkingHours == 0)
+                            if (!foundRule.IsWorkingDay)
                                 result++;
                             break;
                     }
                 }
-                else if (obj.BaseCalendar != null)
+                else
                 {
-                    result += Calc(obj.BaseCalendar, from, from, what);
+                    Logging.Log.WarnFormat("No Calendar rule found in {0} for {1}", obj.Name, from);
                 }
 
                 from = from.AddDays(1);

@@ -1,4 +1,4 @@
-namespace Kistl.App.GUI
+namespace Kistl.App.Calendar
 {
     using System;
     using System.Collections.Generic;

@@ -145,7 +145,7 @@ namespace Kistl.App.Packaging
                             Log.InfoFormat("    exporting parts of class {0} ", objClass.Name);
                             foreach (var obj in ctx.Internals().GetAll(objClass.GetDescribedInterfaceType())
                                 .Cast<IModuleMember>()
-                                .Where(mm => ownerModules.Contains(mm.Module.Name))
+                                .Where(mm => mm.Module != null && ownerModules.Contains(mm.Module.Name))
                                 .Cast<IExportable>()
                                 .OrderBy(obj => obj.ExportGuid)
                                 .Cast<IPersistenceObject>())

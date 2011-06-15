@@ -23,6 +23,9 @@ rem re-import Configuration Data for Ini50
 bin\debug\Kistl.Server.Service.exe Configs\%zenv%\Kistl.Server.Service.xml -import Ini50.App.Common\Ini50.Config.xml
 IF ERRORLEVEL 1 GOTO FAIL
 
+bin\debug\Kistl.Server.Service.exe Configs\%zenv%\Kistl.Server.Service.xml -import Ini50.App.Common\Calendar.xml
+IF ERRORLEVEL 1 GOTO FAIL
+
 rem re-migrate Ini50 data
 bin\debug\Ini50.Migrate.exe Configs\%zenv%\Ini50.Migrate.xml
 IF ERRORLEVEL 1 GOTO FAIL
