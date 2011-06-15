@@ -143,6 +143,11 @@ namespace Kistl.Client.Bootstrapper
                                 Properties.Settings.Default.Address = string.Empty;
                                 Properties.Settings.Default.Save();
                                 return null;
+                            default:
+                                SetStatus(string.Format("Unknown Error ({0})", resp.StatusCode));
+                                Properties.Settings.Default.Address = string.Empty;
+                                Properties.Settings.Default.Save();
+                                return null;
                         }
                     }
                     else
