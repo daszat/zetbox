@@ -13,6 +13,7 @@ namespace Kistl.App.Extensions
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
 
+            // TODO: use named objects
             return ctx.GetQuery<Kistl.App.Base.Interface>().First(o => o.Name == "IExportable" && o.Module.Name == "KistlBase"); 
         }
     }

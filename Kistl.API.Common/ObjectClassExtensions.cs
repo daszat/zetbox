@@ -175,7 +175,28 @@ namespace Kistl.App.Extensions
 
             while (cls != null)
             {
+                // TODO: use named objects
                 if (cls.ImplementsInterfaces.Count(o => o.Name == "IExportable" && o.Module.Name == "KistlBase") == 1)
+                    return true;
+                if (!lookupInBase) return false;
+                cls = cls.BaseObjectClass;
+            }
+            return false;
+        }
+
+        public static bool ImplementsIModuleMember(this ObjectClass cls)
+        {
+            return ImplementsIModuleMember(cls, true);
+        }
+
+        public static bool ImplementsIModuleMember(this ObjectClass cls, bool lookupInBase)
+        {
+            if (cls == null) { throw new ArgumentNullException("cls"); }
+
+            while (cls != null)
+            {
+                // TODO: use named objects
+                if (cls.ImplementsInterfaces.Count(o => o.Name == "IModuleMember" && o.Module.Name == "KistlBase") == 1)
                     return true;
                 if (!lookupInBase) return false;
                 cls = cls.BaseObjectClass;

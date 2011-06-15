@@ -73,12 +73,12 @@ namespace Kistl.Server
             }
         }
 
-        public void Export(string file, string[] names)
+        public void Export(string file, string[] schemaModules, string[] ownerModules)
         {
-            using (Log.InfoTraceMethodCallFormat("Export", "file=[{0}],names=[{1}]", file, String.Join(";", names ?? new string[] { })))
+            using (Log.InfoTraceMethodCallFormat("Export", "file=[{0}],schemaModules=[{1}],ownerModules=[{2}]", file, string.Join(";", schemaModules ?? new string[] { }), string.Join(";", ownerModules ?? new string[] { })))
             using (var subContainer = container.BeginLifetimeScope())
             {
-                Exporter.ExportFromContext(subContainer.Resolve<IKistlServerContext>(), file, names);
+                Exporter.ExportFromContext(subContainer.Resolve<IKistlServerContext>(), file, schemaModules, ownerModules);
             }
         }
 

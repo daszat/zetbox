@@ -15,6 +15,7 @@ namespace Kistl.App.Packaging
     using Kistl.API.Utils;
     using Kistl.App.Base;
     using Kistl.App.Extensions;
+    using System.Linq.Expressions;
 
     public class Exporter
     {
@@ -78,42 +79,83 @@ namespace Kistl.App.Packaging
             }
         }
 
-        public static void ExportFromContext(IReadOnlyKistlContext ctx, string filename, string[] moduleNames)
+        public static void ExportFromContext(IReadOnlyKistlContext ctx, string filename, string[] schemaModules, string[] ownerModules)
         {
             using (var s = new FileSystemPackageProvider(filename, BasePackageProvider.Modes.Write))
             {
-                ExportFromContext(ctx, s, moduleNames);
+                ExportFromContext(ctx, s, schemaModules, ownerModules);
             }
         }
 
-        public static void ExportFromContext(IReadOnlyKistlContext ctx, Stream stream, string[] moduleNames, string streamDescription)
+        public static void ExportFromContext(IReadOnlyKistlContext ctx, Stream stream, string[] schemaModules, string[] ownerModules, string streamDescription)
         {
             using (var s = new StreamPackageProvider(stream, BasePackageProvider.Modes.Write, streamDescription))
             {
-                ExportFromContext(ctx, s, moduleNames);
+                ExportFromContext(ctx, s, schemaModules, ownerModules);
             }
         }
 
-        public static void ExportFromContext(IReadOnlyKistlContext ctx, IPackageProvider s, string[] moduleNames)
+        /// <summary>
+        /// Exports data from the specified context into the specified package provider. Data is selected by defining
+        /// schema and owning module.
+        /// </summary>
+        /// <remarks>
+        /// <para>For example, exporting {"KistlBase", "GUI"}/{"*"} will export all schema information to recreate the
+        /// current database. Exporting {"Calendar"}/{"MyApplication"} will export all calendar data specific to the
+        /// "MyApplication" module.
+        /// </para>
+        /// </remarks>
+        /// <param name="ctx">The data source</param>
+        /// <param name="s">The export target</param>
+        /// <param name="schemaModules">A list of strings naming the schema-defining modules. This selects which data
+        /// (-classes) should be exported. Specify a single asterisk (<code>"*"</code>) to select all available
+        /// modules.</param>
+        /// <param name="ownerModules">A list of strings naming the data-owning modules. This selects whose data should
+        /// be exported.  Specify a single asterisk (<code>"*"</code>) to select all available data, independent of
+        /// module-membership. This also includes data that is not member of any module.</param>
+        public static void ExportFromContext(IReadOnlyKistlContext ctx, IPackageProvider s, string[] schemaModules, string[] ownerModules)
         {
             using (Log.DebugTraceMethodCall("ExportFromContext"))
             {
-                Log.InfoFormat("Starting Export for Modules {0}", string.Join(", ", moduleNames));
-                var moduleList = GetModules(ctx, moduleNames);
-                var moduleNamespaces = moduleList.Select(m => m.Namespace).ToArray();
+                Log.InfoFormat("Starting Export for Modules [{0}], data owned by [{1}]", string.Join(", ", schemaModules), string.Join(", ", ownerModules));
+                
+                var allData = ownerModules.Contains("*");
 
-                WriteStartDocument(s, ctx, moduleList);
+                var schemaList = GetModules(ctx, schemaModules);
+                var schemaNamespaces = schemaList.Select(m => m.Namespace).ToArray();
+
+                WriteStartDocument(s, ctx, schemaList);
 
                 var iexpIf = ctx.GetIExportableInterface();
-                foreach (var module in moduleList)
+                foreach (var module in schemaList)
                 {
-                    Log.InfoFormat("  exporting {0}", module.Name);
+                    Log.InfoFormat("  exporting module {0}", module.Name);
                     foreach (var objClass in ctx.GetQuery<ObjectClass>().Where(o => o.Module == module).ToList().Where(o => o.ImplementsInterfaces.Contains(iexpIf)).OrderBy(o => o.Name))
                     {
-                        Log.InfoFormat("    {0} ", objClass.Name);
-                        foreach (var obj in ctx.Internals().GetAll(objClass.GetDescribedInterfaceType()).OrderBy(obj => ((IExportable)obj).ExportGuid))
+                        if (allData)
                         {
-                            ExportObject(s, obj, moduleNamespaces);
+                            Log.InfoFormat("    exporting class {0} ", objClass.Name);
+                            foreach (var obj in ctx.Internals().GetAll(objClass.GetDescribedInterfaceType()).OrderBy(obj => ((IExportable)obj).ExportGuid))
+                            {
+                                ExportObject(s, obj, schemaNamespaces);
+                            }
+                        }
+                        else if (objClass.ImplementsIModuleMember())
+                        {
+                            Log.InfoFormat("    exporting parts of class {0} ", objClass.Name);
+                            foreach (var obj in ctx.Internals().GetAll(objClass.GetDescribedInterfaceType())
+                                .Cast<IModuleMember>()
+                                .Where(mm => ownerModules.Contains(mm.Module.Name))
+                                .Cast<IExportable>()
+                                .OrderBy(obj => obj.ExportGuid)
+                                .Cast<IPersistenceObject>())
+                            {
+                                ExportObject(s, obj, schemaNamespaces);
+                            }
+                        }
+                        else
+                        {
+                            Log.DebugFormat("    skipping {0} ", objClass.Name);
                         }
                     }
 
@@ -138,7 +180,7 @@ namespace Kistl.App.Packaging
 
                             foreach (var obj in relations.OrderBy(obj => ((IExportable)obj).ExportGuid))
                             {
-                                ExportObject(s, obj, moduleNamespaces);
+                                ExportObject(s, obj, schemaNamespaces);
                             }
                         }
                         catch (TypeLoadException ex)
@@ -163,7 +205,7 @@ namespace Kistl.App.Packaging
             writer.WriteStartElement(t.Name, t.Namespace);
             if (((IExportable)obj).ExportGuid == Guid.Empty)
             {
-                throw new InvalidOperationException(string.Format("At least one object of type {0} has an empty ExportGuid", t.FullName));
+                throw new InvalidOperationException(string.Format("At least one object of type {0} has an empty ExportGuid (ID={1})", t.FullName, obj.ID));
             }
             ((IExportableInternal)obj).Export(writer, propNamespaces);
 
@@ -229,7 +271,7 @@ namespace Kistl.App.Packaging
                     var module = ctx.GetQuery<Kistl.App.Base.Module>().Where(m => m.Name == name).FirstOrDefault();
                     if (module == null)
                     {
-                        Log.WarnFormat("Module {0} not found", name);
+                        Log.WarnFormat("Module {0} not found, skipping entry", name);
                         continue;
                     }
                     moduleList.Add(module);

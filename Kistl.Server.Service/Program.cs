@@ -55,11 +55,19 @@ namespace Kistl.Server.Service
             try
             {
                 List<Action<ILifetimeScope, List<string>>> actions = new List<Action<ILifetimeScope, List<string>>>();
+                string[] schemaModules = null;
+                string[] ownerModules = null;
 
                 options = new OptionSet()
                     {
+                        { "schemamodules=", "A semicolon-separated list of schema-defining modules to export",
+                            v => { if (v != null) { schemaModules = v.Split(";".ToCharArray(), StringSplitOptions.RemoveEmptyEntries); } }
+                            },
+                        { "ownermodules=", "A semicolon-separated list of data-owning modules to export",
+                            v => { if (v != null) { ownerModules = v.Split(";".ToCharArray(), StringSplitOptions.RemoveEmptyEntries); } }
+                            },
                         { "export=", "export the database to the specified xml file. Any extra argument is used as modulenames", 
-                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<IServer>().Export(v, args.ToArray())); } }
+                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<IServer>().Export(v, schemaModules ?? new string[]{"*"}, ownerModules ?? new string[]{"*"})); } }
                             },
                         { "import=", "import the database from the specified xml file",
                             v => { if (v != null) { actions.Add((c, args) => c.Resolve<IServer>().Import(v)); } }
