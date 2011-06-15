@@ -94,9 +94,9 @@ namespace Kistl.Client.Presentables
             {
                 this.ViewModelFactory.ShowModel(DataObjectViewModel.Fetch(this.ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj), true);
             }
-            else 
+            else if(result != null)
             {
-                ViewModelFactory.ShowMessage(result != null ? result.ToString() : "<<null>>", "Result");
+                ViewModelFactory.ShowMessage(result.ToString(), "Result");
             }
         }
 
