@@ -96,6 +96,7 @@ this.WriteObjects("    <!-- ValueCollectionEntries are defined directly on use -
 foreach (var prop in ctx.GetQuery<ValueTypeProperty>()
                             .Where(p => p.IsList && !p.IsCalculated)
                             .Where(p => p.ObjectClass is ObjectClass)
+                            .ToList()
                             .OrderBy(p => p.ObjectClass.Name)
                             .ThenBy(p => p.Name))
    {
@@ -105,45 +106,46 @@ foreach (var prop in ctx.GetQuery<ValueTypeProperty>()
         var tableName = prop.GetCollectionEntryTable();
         var ceReverseKeyColumnName = prop.GetCollectionEntryReverseKeyColumnName();
 
-#line 71 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
+#line 72 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
 this.WriteObjects("    <class name=\"",  collectionEntryNamespace , ".",  collectionEntryClassName , "+",  proxyClassName , "\"\r\n");
 this.WriteObjects("           proxy=\"",  collectionEntryNamespace , ".",  collectionEntryClassName , "+",  proxyClassName , "\"\r\n");
 this.WriteObjects("           table=\"`",  tableName , "`\">\r\n");
 this.WriteObjects("\r\n");
-#line 75 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
-IdGeneratorHbm.Call(Host, "id", tableName); 
 #line 76 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
+IdGeneratorHbm.Call(Host, "id", tableName); 
+#line 77 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        <many-to-one name=\"Parent\"\r\n");
 this.WriteObjects("                     column=\"`",  ceReverseKeyColumnName , "`\" />\r\n");
-#line 79 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
-ValueTypePropertyHbm.Call(Host, String.Empty, prop, "Value", prop.Name, true, ImplementationSuffix); 
 #line 80 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
-if (prop.HasPersistentOrder) { 
+ValueTypePropertyHbm.Call(Host, String.Empty, prop, "Value", prop.Name, true, ImplementationSuffix); 
 #line 81 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
+if (prop.HasPersistentOrder) { 
+#line 82 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
 this.WriteObjects("        <property name=\"Index\"\r\n");
 this.WriteObjects("                  column=\"`Index`\" />\r\n");
-#line 83 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
-} 
 #line 84 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
-if (((ObjectClass)prop.ObjectClass).ImplementsIExportable()) { 
+} 
 #line 85 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
+if (((ObjectClass)prop.ObjectClass).ImplementsIExportable()) { 
+#line 86 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
 this.WriteObjects("        <!-- export guid is not needed since serialization is always \"in-place\"\r\n");
 this.WriteObjects("        <property name=\"ExportGuid\" column=\"`ExportGuid`\" type=\"Guid\" />\r\n");
 this.WriteObjects("        -->\r\n");
-#line 88 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
-} 
 #line 89 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
+} 
+#line 90 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
 this.WriteObjects("    </class>\r\n");
 this.WriteObjects("\r\n");
-#line 91 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
-} 
 #line 92 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
+} 
+#line 93 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
 this.WriteObjects("    <!-- CompoundObjectCollectionEntries -->\r\n");
-#line 94 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
+#line 95 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
 foreach (var prop in ctx.GetQuery<CompoundObjectProperty>()
                             .Where(p => p.IsList /* && !p.IsCalculated */)
                             .Where(p => p.ObjectClass is ObjectClass)
+                            .ToList()
                             .OrderBy(p => p.ObjectClass.Name)
                             .ThenBy(p => p.Name))
    {
@@ -153,40 +155,40 @@ foreach (var prop in ctx.GetQuery<CompoundObjectProperty>()
         var tableName = prop.GetCollectionEntryTable();
         var ceReverseKeyColumnName = prop.GetCollectionEntryReverseKeyColumnName();
 
-#line 106 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
+#line 108 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
 this.WriteObjects("    <class name=\"",  collectionEntryNamespace , ".",  collectionEntryClassName , "+",  proxyClassName , "\"\r\n");
 this.WriteObjects("           proxy=\"",  collectionEntryNamespace , ".",  collectionEntryClassName , "+",  proxyClassName , "\"\r\n");
 this.WriteObjects("           table=\"`",  tableName , "`\">\r\n");
 this.WriteObjects("\r\n");
-#line 110 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
+#line 112 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
 IdGeneratorHbm.Call(Host, "id", tableName); 
-#line 111 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
+#line 113 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        <many-to-one name=\"Parent\"\r\n");
 this.WriteObjects("                     column=\"`",  ceReverseKeyColumnName , "`\" />\r\n");
-#line 114 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
-CompoundObjectPropertyHbm.Call(Host, ctx, String.Empty, prop, "Value", prop.Name, true, ImplementationSuffix); 
-#line 115 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
-if (prop.HasPersistentOrder) { 
 #line 116 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
+CompoundObjectPropertyHbm.Call(Host, ctx, String.Empty, prop, "Value", prop.Name, true, ImplementationSuffix); 
+#line 117 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
+if (prop.HasPersistentOrder) { 
+#line 118 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
 this.WriteObjects("        <property name=\"Index\"\r\n");
 this.WriteObjects("                  column=\"`Index`\" />\r\n");
-#line 118 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
-} 
-#line 119 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
-if (((ObjectClass)prop.ObjectClass).ImplementsIExportable()) { 
 #line 120 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
+} 
+#line 121 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
+if (((ObjectClass)prop.ObjectClass).ImplementsIExportable()) { 
+#line 122 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
 this.WriteObjects("        <!-- export guid is not needed since serialization is always \"in-place\"\r\n");
 this.WriteObjects("        <property name=\"ExportGuid\" column=\"`ExportGuid`\" type=\"Guid\" />\r\n");
 this.WriteObjects("        -->\r\n");
-#line 123 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
+#line 125 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
 } 
-#line 124 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
+#line 126 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
 this.WriteObjects("    </class>\r\n");
 this.WriteObjects("\r\n");
-#line 126 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
+#line 128 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
 } 
-#line 127 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
+#line 129 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
 this.WriteObjects("</hibernate-mapping>\r\n");
 
         }

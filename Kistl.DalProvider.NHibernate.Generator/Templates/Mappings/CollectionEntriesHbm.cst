@@ -59,6 +59,7 @@
    foreach (var prop in ctx.GetQuery<ValueTypeProperty>()
                             .Where(p => p.IsList && !p.IsCalculated)
                             .Where(p => p.ObjectClass is ObjectClass)
+                            .ToList()
                             .OrderBy(p => p.ObjectClass.Name)
                             .ThenBy(p => p.Name))
    {
@@ -94,6 +95,7 @@
    foreach (var prop in ctx.GetQuery<CompoundObjectProperty>()
                             .Where(p => p.IsList /* && !p.IsCalculated */)
                             .Where(p => p.ObjectClass is ObjectClass)
+                            .ToList()
                             .OrderBy(p => p.ObjectClass.Name)
                             .ThenBy(p => p.Name))
    {
