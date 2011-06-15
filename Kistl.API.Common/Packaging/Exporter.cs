@@ -21,29 +21,29 @@ namespace Kistl.App.Packaging
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Exporter");
 
-        public static void PublishFromContext(IKistlContext ctx, string filename, string[] moduleNamespaces)
+        public static void PublishFromContext(IKistlContext ctx, string filename, string[] ownerModules)
         {
             using (var s = new FileSystemPackageProvider(filename, BasePackageProvider.Modes.Write))
             {
-                PublishFromContext(ctx, s, moduleNamespaces);
+                PublishFromContext(ctx, s, ownerModules);
             }
         }
 
-        public static void PublishFromContext(IKistlContext ctx, Stream stream, string[] moduleNamespaces, string streamDescription)
+        public static void PublishFromContext(IKistlContext ctx, Stream stream, string[] ownerModules, string streamDescription)
         {
             using (var s = new StreamPackageProvider(stream, BasePackageProvider.Modes.Write, streamDescription))
             {
-                PublishFromContext(ctx, s, moduleNamespaces);
+                PublishFromContext(ctx, s, ownerModules);
             }
         }
 
-        public static void PublishFromContext(IKistlContext ctx, IPackageProvider s, string[] moduleNamespaces)
+        public static void PublishFromContext(IKistlContext ctx, IPackageProvider s, string[] ownerModules)
         {
             using (Log.DebugTraceMethodCall("PublishFromContext"))
             {
-                Log.InfoFormat("Starting Publish for Modules {0}", string.Join(", ", moduleNamespaces));
+                Log.InfoFormat("Starting Publish for Modules {0}", string.Join(", ", ownerModules));
                 Log.Debug("Loading modulelist");
-                var moduleList = GetModules(ctx, moduleNamespaces);
+                var moduleList = GetModules(ctx, ownerModules);
                 WriteStartDocument(s, ctx, new Kistl.App.Base.Module[] 
                         { 
                             ctx.GetQuery<Kistl.App.Base.Module>().First(m => m.Name == "KistlBase"),

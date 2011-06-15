@@ -55,8 +55,8 @@ namespace Kistl.Server.Service
             try
             {
                 List<Action<ILifetimeScope, List<string>>> actions = new List<Action<ILifetimeScope, List<string>>>();
-                string[] schemaModules = null;
-                string[] ownerModules = null;
+                string[] schemaModules = new string[] { "*" };
+                string[] ownerModules = new string[] { "*" };
 
                 options = new OptionSet()
                     {
@@ -66,14 +66,14 @@ namespace Kistl.Server.Service
                         { "ownermodules=", "A semicolon-separated list of data-owning modules to export",
                             v => { if (v != null) { ownerModules = v.Split(";".ToCharArray(), StringSplitOptions.RemoveEmptyEntries); } }
                             },
-                        { "export=", "export the database to the specified xml file. Any extra argument is used as modulenames", 
-                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<IServer>().Export(v, schemaModules ?? new string[]{"*"}, ownerModules ?? new string[]{"*"})); } }
+                        { "export=", "export the database to the specified xml file. Select the exported data with -schemamodules and -ownermodules", 
+                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<IServer>().Export(v, schemaModules, ownerModules )); } }
                             },
                         { "import=", "import the database from the specified xml file",
                             v => { if (v != null) { actions.Add((c, args) => c.Resolve<IServer>().Import(v)); } }
                             },
-                        { "publish=", "publish the specified modules to this xml file. Any extra argument is used as modulenames",
-                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<IServer>().Publish(v, args.ToArray())); } }
+                        { "publish=", "publish the specified modules to this xml file. Select the exported data with -ownermodules",
+                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<IServer>().Publish(v, ownerModules)); } }
                             },
                         { "deploy=", "deploy the database from the specified xml file",
                             v => { if (v != null) { actions.Add((c, args) => c.Resolve<IServer>().Deploy(v)); } }

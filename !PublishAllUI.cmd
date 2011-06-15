@@ -12,20 +12,20 @@ rem refresh local code
 call GetCodeGen.cmd
 IF ERRORLEVEL 1 GOTO FAIL
 
-bin\debug\Kistl.Server.Service.exe Configs\%zenv%\Kistl.Server.Service.xml -publish Kistl.Server\Database\Database.xml *
+bin\debug\Kistl.Server.Service.exe Configs\%zenv%\Kistl.Server.Service.xml -publish Kistl.Server\Database\Database.xml
 IF ERRORLEVEL 1 GOTO FAIL
 
-bin\debug\Kistl.Server.Service.exe Configs\%zenv%\Kistl.Server.Service.xml -publish Kistl.Server\Database\KistlBase.xml KistlBase GUI
+bin\debug\Kistl.Server.Service.exe Configs\%zenv%\Kistl.Server.Service.xml -publish Kistl.Server\Database\KistlBase.xml -ownermodules KistlBase;GUI
 IF ERRORLEVEL 1 GOTO FAIL
 
 rem managed in Database.xml
 rem bin\debug\Kistl.Server.Service.exe Configs\%zenv%\Kistl.Server.Service.xml -publish Kistl.Server\Database\SchemaMigrationSchema.xml SchemaMigration
 rem IF ERRORLEVEL 1 GOTO FAIL
 
-bin\debug\Kistl.Server.Service.exe Configs\%zenv%\Kistl.Server.Service.xml -export Kistl.Server\Database\SchemaMigrationProjects.xml SchemaMigration
+bin\debug\Kistl.Server.Service.exe Configs\%zenv%\Kistl.Server.Service.xml -export Kistl.Server\Database\SchemaMigrationProjects.xml -schemamodules SchemaMigration
 IF ERRORLEVEL 1 GOTO FAIL
 
-bin\debug\Kistl.Server.Service.exe Configs\%zenv%\Kistl.Server.Service.xml -export Ini50.App.Common\Ini50.Config.xml Ini50.Config
+bin\debug\Kistl.Server.Service.exe Configs\%zenv%\Kistl.Server.Service.xml -export Ini50.App.Common\Ini50.Config.xml -schemamodules Ini50.Config
 IF ERRORLEVEL 1 GOTO FAIL
 
 echo ********************************************************************************

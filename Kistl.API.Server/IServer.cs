@@ -12,7 +12,7 @@ namespace Kistl.API.Server
         void Deploy(string file);
         void Export(string file, string[] schemaModules, string[] ownerModules);
         void Import(string file);
-        void Publish(string file, string[] namespaces);
+        void Publish(string file, string[] ownerModules);
         void RunBenchmarks();
         void RunFixes();
         void SyncIdentities();
