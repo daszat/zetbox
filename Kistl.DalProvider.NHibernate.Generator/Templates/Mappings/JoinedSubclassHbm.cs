@@ -36,7 +36,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
 
         protected virtual void ApplyJoinedSubclasses(List<ObjectClass> subClasses)
         {
-            foreach (var subClass in subClasses)
+            foreach (var subClass in subClasses.OrderBy(cls => cls.Name))
             {
                 JoinedSubclassHbm.Call(Host, ctx, subClass);
             }
