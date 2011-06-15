@@ -19,7 +19,7 @@ namespace Kistl.App.Calendar
         [Invocation]
         public static void AppliesTo(YearlyCalendarRule obj, MethodReturnEventArgs<System.Boolean> e, System.DateTime date)
         {
-            e.Result = false; // Abstract
+            // Abstract
         }
     }
 }

@@ -19,7 +19,10 @@ namespace Kistl.App.Calendar
         [Invocation]
         public static void AppliesTo(DayOfWeekCalendarRule obj, MethodReturnEventArgs<System.Boolean> e, System.DateTime date)
         {
-            e.Result = (int)date.DayOfWeek == (int)obj.DayOfWeek;
+            if (obj.CheckValidDate(date))
+            {
+                e.Result = (int)date.DayOfWeek == (int)obj.DayOfWeek;
+            }
         }
     }
 }

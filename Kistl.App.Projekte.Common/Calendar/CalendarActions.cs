@@ -58,11 +58,11 @@ namespace Kistl.App.Calendar
         private static decimal Calc(Calendar obj, DateTime from, DateTime until, CalcModes what)
         {
             decimal result = 0;
+            var rules = obj.RulesAndParents();
 
             while (from <= until)
             {
                 CalendarRule foundRule = null;
-                var rules = obj.RulesAndParents();
                 // Find YearlyRule
                 foundRule = rules.OfType<YearlyCalendarRule>().FirstOrDefault(r => r.AppliesTo(from));
                 // Find DayOfWeekRule

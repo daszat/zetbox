@@ -19,7 +19,15 @@ namespace Kistl.App.Calendar
         [Invocation]
         public static void AppliesTo(CalendarRule obj, MethodReturnEventArgs<System.Boolean> e, System.DateTime date)
         {
-            e.Result = false; // Abstract class
+            // Abstract
+        }
+    }
+
+    internal static class CalendarRuleActionsExtensions
+    {
+        public static bool CheckValidDate(this CalendarRule obj, DateTime date)
+        {
+            return (obj.ValidFrom == null || obj.ValidFrom <= date) && (obj.ValidUntil == null || obj.ValidUntil >= date);
         }
     }
 }

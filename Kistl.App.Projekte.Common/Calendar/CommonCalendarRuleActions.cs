@@ -19,7 +19,8 @@ namespace Kistl.App.Calendar
         [Invocation]
         public static void AppliesTo(CommonCalendarRule obj, MethodReturnEventArgs<System.Boolean> e, System.DateTime date)
         {
-            e.Result = true; // Always true
+            // Always true if valid
+            e.Result = obj.CheckValidDate(date);
         }
     }
 }

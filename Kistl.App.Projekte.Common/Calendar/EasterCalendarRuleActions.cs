@@ -19,8 +19,11 @@ namespace Kistl.App.Calendar
         [Invocation]
         public static void AppliesTo(EasterCalendarRule obj, MethodReturnEventArgs<System.Boolean> e, System.DateTime date)
         {
-            var ostern = GetOstersonntag(date.Year);
-            e.Result = ostern.AddDays(obj.Offset ?? 0) == date.Date;
+            if (obj.CheckValidDate(date))
+            {
+                var ostern = GetOstersonntag(date.Year);
+                e.Result = ostern.AddDays(obj.Offset ?? 0) == date.Date;
+            }
         }
 
         private static DateTime GetOstersonntag(int jahr)
