@@ -1,12 +1,12 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
-using System.Windows.Controls;
 using System.Windows;
-using System.Collections.Specialized;
+using System.Windows.Controls;
 using Kistl.API;
-using System.Collections;
 
 namespace Kistl.Client.WPF.CustomControls
 {
@@ -60,12 +60,28 @@ namespace Kistl.Client.WPF.CustomControls
             {
                 if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Reset)
                 {
-                    this.SelectedItems.Clear();
+                    // do not touch SelectedItems in Single SelectionMode
+                    if (this.SelectionMode == SelectionMode.Single)
+                    {
+                        this.SelectedItem = null;
+                    }
+                    else
+                    {
+                        this.SelectedItems.Clear();
+                    }
                 }
                 else
                 {
-                    if (e.OldItems != null) e.OldItems.ForEach<object>(i => this.SelectedItems.Remove(i));
-                    if (e.NewItems != null) e.NewItems.ForEach<object>(i => this.SelectedItems.Add(i));
+                    // do not touch SelectedItems in Single SelectionMode
+                    if (this.SelectionMode == SelectionMode.Single)
+                    {
+                        this.SelectedItem = e.NewItems != null ? e.NewItems[0] : null;
+                    }
+                    else
+                    {
+                        if (e.OldItems != null) e.OldItems.ForEach<object>(i => this.SelectedItems.Remove(i));
+                        if (e.NewItems != null) e.NewItems.ForEach<object>(i => this.SelectedItems.Add(i));
+                    }
                 }
             }
             finally
