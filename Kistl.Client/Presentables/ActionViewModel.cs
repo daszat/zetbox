@@ -94,6 +94,10 @@ namespace Kistl.Client.Presentables
             {
                 this.ViewModelFactory.ShowModel(DataObjectViewModel.Fetch(this.ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj), true);
             }
+            else 
+            {
+                ViewModelFactory.ShowMessage(result != null ? result.ToString() : "<<null>>", "Result");
+            }
         }
 
         #endregion
