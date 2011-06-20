@@ -11,6 +11,9 @@ namespace Kistl.API.Common
     {
         public static void WriteAllTo(this Stream source, Stream dest)
         {
+            if (source == null) throw new ArgumentNullException("source");
+            if (dest == null) throw new ArgumentNullException("dest");
+
             byte[] buffer = new byte[1024*4];
             int readBytes = -1;
             while (readBytes != 0)
