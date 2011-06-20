@@ -1,0 +1,30 @@
+﻿<%@ CodeTemplate Language="C#"
+    Name="CompoundObjects.DefaultMethods"
+    ClassName="Kistl.Generator.Templates.CompoundObjects.DefaultMethods"
+    Inherits="Kistl.Generator.ResourceTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Linq" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.Generator" %>
+<%@ Import Namespace="Kistl.Generator.Extensions" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="dt" Type="DataType" %>
+        #region <%= this.GetType() %>
+
+        [System.Diagnostics.DebuggerHidden()]
+        [EventBasedMethod("OnToString_<%= dt.Name %>")]
+        public override string ToString()
+        {
+            MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
+            e.Result = base.ToString();
+            if (OnToString_<%= dt.Name %> != null)
+            {
+                OnToString_<%= dt.Name %>(this, e);
+            }
+            return e.Result;
+        }
+        public static event ToStringHandler<<%= dt.Name %>> OnToString_<%= dt.Name %>;
+
+        #endregion // <%= this.GetType() %>

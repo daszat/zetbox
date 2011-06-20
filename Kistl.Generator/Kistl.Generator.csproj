@@ -159,6 +159,14 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Templates\CompoundObjects\DefaultMethods.cs">
+      <DependentUpon>DefaultMethods.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\CompoundObjects\DefaultMethods.Designer.cs">
+      <DependentUpon>DefaultMethods.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Templates\CompoundObjects\Template.cs" />
     <Compile Include="InterfaceTemplates\AssemblyInfoTemplate.cs" />
     <Compile Include="InterfaceTemplates\Module.Designer.cs">
@@ -519,6 +527,10 @@
     <None Include="InterfaceTemplates\Interfaces\Template.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>Template.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\CompoundObjects\DefaultMethods.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>DefaultMethods.Designer.cs</LastGenOutput>
     </None>
     <None Include="Templates\Module.cst">
       <Generator>Arebis Template Processor</Generator>

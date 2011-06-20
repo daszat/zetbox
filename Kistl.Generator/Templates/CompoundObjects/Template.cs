@@ -77,5 +77,11 @@ namespace Kistl.Generator.Templates.CompoundObjects
             base.ApplyApplyChangesFromMethod();
             ObjectClasses.ApplyChangesFromMethod.Call(Host, ctx, typeof(ICompoundObject).Name, DataType, GetTypeName());
         }
+
+        protected override void ApplyClassTailTemplate()
+        {
+            base.ApplyClassTailTemplate();
+            DefaultMethods.Call(Host, ctx, this.DataType);
+        }
     }
 }

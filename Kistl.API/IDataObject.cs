@@ -282,7 +282,7 @@ namespace Kistl.API
     /// An ICompoundObject is a simple bag of named values.
     /// </summary>
     /// Supports <see cref="ICloneable"/>, because CompoundObject don't have a independent identity and thus can be copied freely.
-    public interface ICompoundObject : INotifyingObject, ICloneable, IStreamable
+    public interface ICompoundObject : INotifyingObject, ICloneable, IStreamable, IComparable
     {
         /// <summary>
         /// Gets a value indicating whether values of this object can be set. This mostly depends on the state of the containing object.
@@ -329,7 +329,7 @@ namespace Kistl.API
     //<typeparam name="T">Type of the implementing Object.</typeparam>
     //<param name="obj">Object that has fired this Event.</param>
     //<param name="e">Method return Arguments.</param>
-    public delegate void ToStringHandler<T>(T obj, MethodReturnEventArgs<string> e) where T : IDataObject;
+    public delegate void ToStringHandler<T>(T obj, MethodReturnEventArgs<string> e);
 
     // TODO: re-enable disabled doc comment after fix for https://bugzilla.novell.com/show_bug.cgi?id=643460
     //<summary>

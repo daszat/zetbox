@@ -188,14 +188,14 @@ namespace Kistl.Client.Models
             var result = new List<ColumnDisplayModel>();
             var lb = p.GetLabel();
 
-            if (p is CompoundObjectProperty)
-            {
-                foreach (var i in ((CompoundObjectProperty)p).CompoundObjectDefinition.Properties)
-                {
-                    result.AddRange(CreateColumnDisplayModels(mode, i, parentLabel + lb + ".", parentProp + p.Name + "."));
-                }
-            }
-            else
+            //if (p is CompoundObjectProperty)
+            //{
+            //    foreach (var i in ((CompoundObjectProperty)p).CompoundObjectDefinition.Properties)
+            //    {
+            //        result.AddRange(CreateColumnDisplayModels(mode, i, parentLabel + lb + ".", parentProp + p.Name + "."));
+            //    }
+            //}
+            //else
             {
                 var colMdl = new ColumnDisplayModel()
                 {

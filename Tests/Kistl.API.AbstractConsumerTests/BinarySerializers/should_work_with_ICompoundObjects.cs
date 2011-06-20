@@ -104,6 +104,18 @@ namespace Kistl.API.AbstractConsumerTests.BinarySerializers
         {
             throw new NotImplementedException();
         }
+
+        #region IComparable
+        int System.IComparable.CompareTo(object other)
+        {
+            if (other == null) return 1;
+            var aStr = this.ToString();
+            var bStr = other.ToString();
+            if (aStr == null && bStr == null) return 0;
+            if (aStr == null) return -1;
+            return aStr.CompareTo(bStr);
+        }
+        #endregion
     }
 
     [TestFixture(typeof(MinimalCompoundObjectTest))]

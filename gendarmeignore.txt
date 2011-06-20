@@ -238,3 +238,4 @@ R: Gendarme.Rules.Design.ImplementIComparableCorrectlyRule
 T: Kistl.API.Server.BaseServerDataObject
 T: Kistl.DalProvider.Memory.DataObjectMemoryImpl
 T: Kistl.DalProvider.NHibernate.DataObjectNHibernateImpl
+T: Kistl.API.BaseCompoundObject
