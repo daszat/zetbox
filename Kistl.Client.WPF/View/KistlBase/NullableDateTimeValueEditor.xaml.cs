@@ -77,5 +77,14 @@ namespace Kistl.Client.WPF.View
                 return ViewModel.DatePartVisible ? (FrameworkElement)txtDate : (FrameworkElement)txtTime;
             }
         }
+
+        private void txtDate_KeyDown(object sender, KeyEventArgs e)
+        {
+            // always bubble Enter-key to parent, to allow the RefreshCommand to trigger
+            if (e.Key == Key.Enter)
+            {
+                e.Handled = false;
+            }
+        }
     }
 }

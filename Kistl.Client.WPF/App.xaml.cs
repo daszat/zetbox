@@ -143,6 +143,20 @@ namespace Kistl.Client.WPF
                 // unable to start, exit
                 System.Environment.Exit(1);
             }
+
+            // The WPFToolkit library is not translated and does not support changeing the DateTimePickerTextbox.Watermark.
+            // Therefore, we have to replace the underlying ResourceManager.
+            try
+            {
+                var srType = typeof(Microsoft.Windows.Controls.DatePicker).Assembly.GetTypes().Single(t => t.Name == "SR");
+                var resourceManagerField = srType.GetField("_resourceManager", BindingFlags.Static | BindingFlags.NonPublic);
+                resourceManagerField.SetValue(null, WpfToolkitResources.ResourceManager);
+            }
+            catch (Exception /* ex */)
+            {
+                // ignore this
+                //ShowExceptionReporter(ex);
+            }
         }
 
         private static void InitCulture(KistlConfig config)

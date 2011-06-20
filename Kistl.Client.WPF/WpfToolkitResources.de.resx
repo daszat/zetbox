@@ -1,0 +1,249 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CalendarAutomationPeer_BlackoutDayHelpText" xml:space="preserve">
+    <value>Blackout Day - {0}</value>
+  </data>
+  <data name="CalendarAutomationPeer_CalendarButtonLocalizedControlType" xml:space="preserve">
+    <value>Calendar button</value>
+  </data>
+  <data name="CalendarAutomationPeer_DayButtonLocalizedControlType" xml:space="preserve">
+    <value>Day button</value>
+  </data>
+  <data name="CalendarAutomationPeer_DecadeMode" xml:space="preserve">
+    <value>Jahrzehnt</value>
+  </data>
+  <data name="CalendarAutomationPeer_MonthMode" xml:space="preserve">
+    <value>Monat</value>
+  </data>
+  <data name="CalendarAutomationPeer_YearMode" xml:space="preserve">
+    <value>Jahr</value>
+  </data>
+  <data name="CalendarCollection_MultiThreadedCollectionChangeNotSupported" xml:space="preserve">
+    <value>This type of Collection does not support changes to its SourceCollection from a thread different from the Dispatcher thread.</value>
+  </data>
+  <data name="Calendar_CheckSelectionMode_InvalidOperation" xml:space="preserve">
+    <value>The SelectedDates collection can be changed only in a multiple selection mode. Use the SelectedDate in a single selection mode.</value>
+  </data>
+  <data name="Calendar_NextButtonName" xml:space="preserve">
+    <value>Next button</value>
+  </data>
+  <data name="Calendar_OnDisplayModePropertyChanged_InvalidValue" xml:space="preserve">
+    <value>DisplayMode value is not valid.</value>
+  </data>
+  <data name="Calendar_OnFirstDayOfWeekChanged_InvalidValue" xml:space="preserve">
+    <value>FirstDayOfWeek value is not valid.</value>
+  </data>
+  <data name="Calendar_OnSelectedDateChanged_InvalidOperation" xml:space="preserve">
+    <value>The SelectedDate property cannot be set when the selection mode is None.</value>
+  </data>
+  <data name="Calendar_OnSelectedDateChanged_InvalidValue" xml:space="preserve">
+    <value>SelectedDate value is not valid.</value>
+  </data>
+  <data name="Calendar_OnSelectionModeChanged_InvalidValue" xml:space="preserve">
+    <value>SelectionMode value is not valid.</value>
+  </data>
+  <data name="Calendar_PreviousButtonName" xml:space="preserve">
+    <value>Previous button</value>
+  </data>
+  <data name="Calendar_UnSelectableDates" xml:space="preserve">
+    <value>Value is not valid.</value>
+  </data>
+  <data name="ClipboardCopyMode_Disabled" xml:space="preserve">
+    <value>Cannot perform copy if ClipboardCopyMode is None.</value>
+  </data>
+  <data name="DataGridCellItemAutomationPeer_NameCoreFormat" xml:space="preserve">
+    <value>Item: {0}, Column Display Index: {1}</value>
+  </data>
+  <data name="DataGridLength_Infinity" xml:space="preserve">
+    <value>Value should not be infinity.</value>
+  </data>
+  <data name="DataGridLength_InvalidType" xml:space="preserve">
+    <value>Invalid type.</value>
+  </data>
+  <data name="DataGridRow_CannotSelectRowWhenCells" xml:space="preserve">
+    <value>The current value of the SelectionUnit property on the parent DataGrid prevents rows from being selected.</value>
+  </data>
+  <data name="DataGrid_AutomationInvokeFailed" xml:space="preserve">
+    <value>Invoke operation failed. Cannot edit another cell or row while the current one has validation errors.</value>
+  </data>
+  <data name="DataGrid_CannotSelectCell" xml:space="preserve">
+    <value>Cannot change cell selection when the SelectionUnit is FullRow.</value>
+  </data>
+  <data name="DataGrid_ColumnDisplayIndexOutOfRange" xml:space="preserve">
+    <value>The DisplayIndex for the DataGridColumn with Header '{0}' is out of range.  DisplayIndex must be greater than or equal to 0 and less than Columns.Count.</value>
+  </data>
+  <data name="DataGrid_ColumnIndexOutOfRange" xml:space="preserve">
+    <value>The index for the DataGridColumn with Header '{0}' is out of range. Index must be greater than or equal to 0 and less than Columns.Count.</value>
+  </data>
+  <data name="DataGrid_DisplayIndexOutOfRange" xml:space="preserve">
+    <value>The given DisplayIndex is out of range.  DisplayIndex must be greater than or equal to 0 and less than Columns.Count.</value>
+  </data>
+  <data name="DataGrid_DuplicateDisplayIndex" xml:space="preserve">
+    <value>DisplayIndex is already used for other column.  DisplayIndex should be unique per column.</value>
+  </data>
+  <data name="DataGrid_InvalidColumnReuse" xml:space="preserve">
+    <value>DataGridColumn with Header '{0}' already exists in the Columns collection of a DataGrid. DataGrids cannot share columns and cannot contain duplicate column instances.</value>
+  </data>
+  <data name="DataGrid_InvalidSortDescription" xml:space="preserve">
+    <value>The SortDescriptions added are not valid. The probable solutions are to set the CanUserSort on the Column to false, or to use SortMemberPath property on the Column, or to handle the Sorting event on DataGrid.</value>
+  </data>
+  <data name="DataGrid_NewColumnInvalidDisplayIndex" xml:space="preserve">
+    <value>Cannot add a column with an invalid DisplayIndex to the DataGrid.Columns collection.</value>
+  </data>
+  <data name="DataGrid_NullColumn" xml:space="preserve">
+    <value>Cannot add a null column to a DataGrid's column collection.</value>
+  </data>
+  <data name="DataGrid_ProbableInvalidSortDescription" xml:space="preserve">
+    <value>Items refresh of the DataGrid failed. One of the probable causes is that the SortDescriptions added are not valid, in which case probable solutions are to set the CanUserSort on the Column to false, or to use SortMemberPath property on the Column, or to handle the Sorting event on DataGrid.</value>
+  </data>
+  <data name="DataGrid_ReadonlyCellsItemsSource" xml:space="preserve">
+    <value>The ItemsSource for the DataGridCellsPresenter is read-only.</value>
+  </data>
+  <data name="DatePickerAutomationPeer_LocalizedControlType" xml:space="preserve">
+    <value>date picker</value>
+  </data>
+  <data name="DatePickerTextBox_DefaultWatermarkText" xml:space="preserve">
+    <value>Datum eingeben</value>
+  </data>
+  <data name="DatePickerTextBox_TemplatePartIsOfIncorrectType" xml:space="preserve">
+    <value>The template part {0} is not an instance of {1}.</value>
+  </data>
+  <data name="DatePicker_DropDownButtonName" xml:space="preserve">
+    <value>Kalender anzeigen</value>
+  </data>
+  <data name="DatePicker_OnSelectedDateFormatChanged_InvalidValue" xml:space="preserve">
+    <value>DatePickerFormat value is not valid.</value>
+  </data>
+  <data name="DatePicker_WatermarkText" xml:space="preserve">
+    <value>Datum eingeben</value>
+  </data>
+  <data name="SelectedCellsCollection_DuplicateItem" xml:space="preserve">
+    <value>The collection already contains the item.</value>
+  </data>
+  <data name="SelectedCellsCollection_InvalidItem" xml:space="preserve">
+    <value>The DataGridItem is invalid.</value>
+  </data>
+  <data name="VirtualizedCellInfoCollection_DoesNotSupportIndexChanges" xml:space="preserve">
+    <value>This collection does not support changing values with specific indexes.</value>
+  </data>
+  <data name="VirtualizedCellInfoCollection_IsReadOnly" xml:space="preserve">
+    <value>The collection cannot be modified.</value>
+  </data>
+</root>
