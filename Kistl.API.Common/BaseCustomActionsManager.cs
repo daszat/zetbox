@@ -196,7 +196,7 @@ namespace Kistl.App.Extensions
         {
             if (metaCtx == null) { throw new ArgumentNullException("metaCtx"); }
 
-            foreach (ObjectClass objClass in metaCtx.GetQuery<ObjectClass>())
+            foreach (DataType objClass in metaCtx.GetQuery<ObjectClass>().Cast<DataType>().Union(metaCtx.GetQuery<CompoundObject>().Cast<DataType>()))
             {
                 try
                 {
@@ -226,7 +226,7 @@ namespace Kistl.App.Extensions
 
         #region Walk through objectclass and create InvocationInfos
 
-        private void CreateInvokeInfosForAssembly(ObjectClass objClass)
+        private void CreateInvokeInfosForAssembly(DataType objClass)
         {
             // baseObjClass.GetDataType(); is not possible here, because this
             // Method is currently attaching
@@ -269,39 +269,57 @@ namespace Kistl.App.Extensions
             }
         }
 
-        private void CreateInvokeInfos(ObjectClass objClass, Type implType)
+        private void CreateInvokeInfos(DataType dt, Type implType)
         {
             if (implType == null) throw new ArgumentNullException("implType");
-            if (objClass == null) throw new ArgumentNullException("objClass");
+            if (dt == null) throw new ArgumentNullException("dt");
 
 
-            // Reflected Methods
-            // New style
-            foreach (var method in GetAllMethods(objClass))
+            if (dt is ObjectClass)
             {
-                var key = new MethodKey(objClass.Module.Namespace, objClass.Name, method.Name);
+                var objClass = (ObjectClass)dt;
+                // Reflected Methods
+                // New style
+                foreach (var method in GetAllMethods(objClass))
+                {
+                    var key = new MethodKey(objClass.Module.Namespace, objClass.Name, method.Name);
+                    if (_reflectedMethods.ContainsKey(key))
+                    {
+                        var methodInfos = _reflectedMethods[key];
+
+                        // May be null on Methods without events like server side invocatiaons or "embedded" methods
+                        // or null if not found
+                        var attr = FindEventBasedMethodAttribute(method, implType);
+                        if (attr != null)
+                        {
+                            foreach (var mi in methodInfos)
+                            {
+                                CreateInvokeInfo(implType, mi, attr.EventName);
+                            }
+                        }
+
+                        _attachedMethods[key] = true;
+                    }
+                }
+            }
+
+            if (dt is CompoundObject)
+            {
+                var key = new MethodKey(dt.Module.Namespace, dt.Name, "ToString");
                 if (_reflectedMethods.ContainsKey(key))
                 {
                     var methodInfos = _reflectedMethods[key];
-
-                    // May be null on Methods without events like server side invocatiaons or "embedded" methods
-                    // or null if not found
-                    var attr = FindEventBasedMethodAttribute(method, implType);
-                    if (attr != null)
+                    foreach (var mi in methodInfos)
                     {
-                        foreach (var mi in methodInfos)
-                        {
-                            CreateInvokeInfo(implType, mi, attr.EventName);
-                        }
+                        CreateInvokeInfo(implType, mi, string.Format(CultureInfo.InvariantCulture, "OnToString_{0}", dt.Name));
                     }
-
                     _attachedMethods[key] = true;
                 }
             }
 
             // Reflected Properties
             // New style
-            foreach (Property prop in objClass.Properties)
+            foreach (Property prop in dt.Properties)
             {
                 CreatePropertyInvocations(implType, prop, PropertyInvocationType.Getter);
                 CreatePropertyInvocations(implType, prop, PropertyInvocationType.PreSetter);
@@ -344,7 +362,7 @@ namespace Kistl.App.Extensions
         {
             if (objClass != null)
             {
-                var result = GetAllMethods(objClass.BaseObjectClass);
+                var result = GetAllMethods(((ObjectClass)objClass).BaseObjectClass);
                 objClass.Methods.ForEach<Method>(m => result.Add(m));
                 return result;
             }
