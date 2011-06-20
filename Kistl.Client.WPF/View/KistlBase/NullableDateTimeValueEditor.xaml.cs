@@ -19,6 +19,7 @@ namespace Kistl.Client.WPF.View
     using Kistl.Client.Presentables.ValueViewModels;
     using Kistl.Client.WPF.View.KistlBase;
     using Kistl.Client.WPF.CustomControls;
+    using Microsoft.Windows.Controls;
 
     /// <summary>
     /// Interaction logic for NullableDateTimeValueEditor.xaml
@@ -78,12 +79,39 @@ namespace Kistl.Client.WPF.View
             }
         }
 
-        private void txtDate_KeyDown(object sender, KeyEventArgs e)
+        // The DatePicker handles the Enter-KeyDown event, but we have to bubble it to our consumers, 
+        // because this will trigger the RefreshCommand (or accept action) in filters (and dialogs)
+        private bool _isEnterPressed = false;
+        private KeyboardDevice _lastKeyboardDevice = null;
+        private PresentationSource _lastInputSource = null;
+        private int _lastTimestamp = -1;
+        private void txtDate_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            // always bubble Enter-key to parent, to allow the RefreshCommand to trigger
             if (e.Key == Key.Enter)
             {
-                e.Handled = false;
+                _isEnterPressed = true;
+                _lastKeyboardDevice = e.KeyboardDevice;
+                _lastInputSource = e.InputSource;
+                _lastTimestamp = e.Timestamp;
+            }
+        }
+
+        private void txtDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (_isEnterPressed)
+            {
+                _isEnterPressed = false;
+                
+                var args = new KeyEventArgs(_lastKeyboardDevice, _lastInputSource, _lastTimestamp, Key.Enter)
+                {
+                    RoutedEvent = UIElement.KeyDownEvent
+                };
+
+                _lastKeyboardDevice = null;
+                _lastInputSource = null;
+                _lastTimestamp = -1;
+                
+                this.RaiseEvent(args); 
             }
         }
     }

@@ -23,7 +23,7 @@
                    IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertedBoolConverter}}"
                    KeyboardNavigation.TabIndex="0"
                    KeyboardNavigation.TabNavigation="Local"
-                   VerticalContentAlignment="Center"
-                   KeyDown="txtDate_KeyDown" />
+                   PreviewKeyDown="txtDate_PreviewKeyDown"
+                   SelectedDateChanged="txtDate_SelectedDateChanged" />
   </DockPanel>
 </ctrls:PropertyEditor>
