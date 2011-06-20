@@ -95,6 +95,7 @@
     <Compile Include="RelationExtensions.cs" />
     <Compile Include="ObjectClassExtensions.cs" />
     <Compile Include="ServiceControlManager.cs" />
+    <Compile Include="StreamExtensions.cs" />
     <Compile Include="ThreadPrincipalResolver.cs" />
     <Compile Include="TypeRefExtensions.cs" />
   </ItemGroup>
