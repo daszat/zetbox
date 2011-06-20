@@ -37,6 +37,11 @@ namespace Kistl.API.Mocks
 
         public string TestField;
 
+        int System.IComparable.CompareTo(object other)
+        {
+            return 0;
+        }
+
         public object Clone()
         {
             return this.MemberwiseClone();

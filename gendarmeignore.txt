@@ -232,3 +232,9 @@ T: System.Linq.Dynamic.Signature
 
 R: Gendarme.Rules.Maintainability.AvoidComplexMethodsRule
 # Methods with a large cyclomatic complexity are hard to understand and maintain.
+
+R: Gendarme.Rules.Design.ImplementIComparableCorrectlyRule
+# This type implements IComparable so it should override Equals(object) and overload the ==, !=, &lt; and &gt; operators.
+T: Kistl.API.Server.BaseServerDataObject
+T: Kistl.DalProvider.Memory.DataObjectMemoryImpl
+T: Kistl.DalProvider.NHibernate.DataObjectNHibernateImpl

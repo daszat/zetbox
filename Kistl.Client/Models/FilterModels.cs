@@ -191,6 +191,11 @@ namespace Kistl.Client.Models
 
         public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, string predicate, Guid enumDef)
         {
+            return Create(frozenCtx, label, predicate, enumDef, null);
+        }
+
+        public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, string predicate, Guid enumDef, ControlKind requestedKind)
+        {
             if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
 
             var fmdl = new SingleValueFilterModel()
@@ -201,12 +206,40 @@ namespace Kistl.Client.Models
                 ViewModelType = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_SingleValueFilterViewModel)
             };
             fmdl.FilterArguments.Add(new FilterArgumentConfig(
-                new EnumerationValueModel(label, "", true, false, frozenCtx.FindPersistenceObject<Enumeration>(enumDef)),
+                new EnumerationValueModel(label, "", true, false, requestedKind, frozenCtx.FindPersistenceObject<Enumeration>(enumDef)),
                 frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableValuePropertyModel_Enum)));
             return fmdl;
         }
 
+
+        public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, string predicate, ObjectClass referencedClass)
+        {
+            return Create(frozenCtx, label, predicate, referencedClass, null);
+        }
+
+        public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, string predicate, ObjectClass referencedClass, ControlKind requestedKind)
+        {
+            if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
+
+            var fmdl = new SingleValueFilterModel()
+            {
+                Label = label,
+                ValueSource = FilterValueSource.FromExpression(predicate),
+                Operator = FilterOperators.Equals,
+                ViewModelType = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_SingleValueFilterViewModel)
+            };
+            fmdl.FilterArguments.Add(new FilterArgumentConfig(
+                new ObjectReferenceValueModel(label, "", true, false, requestedKind, referencedClass),
+                frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_ObjectReferenceModel)));
+            return fmdl;
+        }
+
         public static SingleValueFilterModel Create<T>(IFrozenContext frozenCtx, string label, string predicate)
+        {
+            return Create<T>(frozenCtx, label, predicate, null);
+        }
+
+        public static SingleValueFilterModel Create<T>(IFrozenContext frozenCtx, string label, string predicate, ControlKind requestedKind)
         {
             if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
 
@@ -223,22 +256,22 @@ namespace Kistl.Client.Models
             if (typeof(T) == typeof(decimal))
             {
                 vDesc = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableValuePropertyModel_Decimal);
-                mdl = new NullableStructValueModel<decimal>(label, "", true, false);
+                mdl = new NullableStructValueModel<decimal>(label, "", true, false, requestedKind);
             }
             else if (typeof(T) == typeof(int))
             {
                 vDesc = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableValuePropertyModel_Int);
-                mdl = new NullableStructValueModel<int>(label, "", true, false);
+                mdl = new NullableStructValueModel<int>(label, "", true, false, requestedKind);
             }
             else if (typeof(T) == typeof(double))
             {
                 vDesc = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableValuePropertyModel_Double);
-                mdl = new NullableStructValueModel<double>(label, "", true, false);
+                mdl = new NullableStructValueModel<double>(label, "", true, false, requestedKind);
             }
             else if (typeof(T) == typeof(string))
             {
                 vDesc = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_ReferencePropertyModel_String);
-                mdl = new ClassValueModel<string>(label, "", true, false);
+                mdl = new ClassValueModel<string>(label, "", true, false, requestedKind);
                 fmdl.Operator = FilterOperators.Contains;
             }
             else

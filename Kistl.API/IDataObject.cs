@@ -239,7 +239,7 @@ namespace Kistl.API
     /// <summary>
     /// DataObject Interface
     /// </summary>
-    public interface IDataObject : IPersistenceObject, IDataErrorInfo
+    public interface IDataObject : IPersistenceObject, IDataErrorInfo, IComparable
     {
         /// <summary>
         /// Reflects the current access rights by the current Identity. 

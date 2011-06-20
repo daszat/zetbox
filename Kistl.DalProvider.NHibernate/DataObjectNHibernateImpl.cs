@@ -46,5 +46,15 @@ namespace Kistl.DalProvider.NHibernate
         {
             throw new MemberAccessException(String.Format("No {0} property in {1}", propertyName, GetImplementedInterface().FullName));
         }
+
+        int System.IComparable.CompareTo(object other)
+        {
+            if (other == null) return 1;
+            var aStr = this.ToString();
+            var bStr = other.ToString();
+            if (aStr == null && bStr == null) return 0;
+            if (aStr == null) return -1;
+            return aStr.CompareTo(bStr);
+        }
     }
 }
