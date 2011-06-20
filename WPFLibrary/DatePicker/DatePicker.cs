@@ -937,8 +937,10 @@ namespace Microsoft.Samples.KMoore.WPFSamples.DateControls
         {
             if (e.Key == Key.Enter && EditableTextBoxSite != null)
             {
-                DoParse(EditableTextBoxSite.Text);
-                e.Handled = true;
+                // dasz: we need the Enter to bubble to our RefreshCommand, so we handle the event only 
+                // if the date is not valid. In this case the user should continue editing.
+                var isValidDate = DoParse(EditableTextBoxSite.Text);
+                e.Handled = !isValidDate;
             }
         }
 
@@ -1210,11 +1212,12 @@ namespace Microsoft.Samples.KMoore.WPFSamples.DateControls
         /// If the input entry is a valid date, Value will be set to the input date
         /// If the input entry isn't a valid date, InvalidEntry event will be fired, Value will still keep the old value (don't set to null)
         /// </remarks>
-        private void DoParse(string text)
+        /// <returns>true if the parsing was successful</returns>
+        private bool DoParse(string text)
         {
             if (GetFlag(Flags.IsParsing))
             {
-                return;
+                return false;
             }
 
             DateTime? date = null;
@@ -1295,6 +1298,7 @@ namespace Microsoft.Samples.KMoore.WPFSamples.DateControls
                 InvalidEntryEventArgs args = new InvalidEntryEventArgs(InvalidEntryEvent, text);
                 OnInvalidEntry(args);
             }
+            return isValidDate;
         }
 
         /// <summary>
