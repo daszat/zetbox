@@ -196,7 +196,7 @@ namespace Kistl.App.Extensions
         {
             if (metaCtx == null) { throw new ArgumentNullException("metaCtx"); }
 
-            foreach (DataType objClass in metaCtx.GetQuery<ObjectClass>().Cast<DataType>().Union(metaCtx.GetQuery<CompoundObject>().Cast<DataType>()))
+            foreach (DataType objClass in metaCtx.GetQuery<ObjectClass>().Cast<DataType>().Concat(metaCtx.GetQuery<CompoundObject>().Cast<DataType>()))
             {
                 try
                 {
