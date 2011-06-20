@@ -18,7 +18,8 @@ namespace Kistl.Client.Presentables.FilterViewModels
     {
         public OperatorViewModel()
         {
-            Name = "=";
+            _Operator = FilterOperators.Equals;
+            Name = FilterViewModelResources.OperatorEquals;
         }
 
         public OperatorViewModel(FilterOperators op)
@@ -27,7 +28,7 @@ namespace Kistl.Client.Presentables.FilterViewModels
             Operator = op;
         }
 
-        private FilterOperators _Operator = FilterOperators.Equals;
+        private FilterOperators _Operator;
         public FilterOperators Operator
         {
             get
@@ -42,31 +43,31 @@ namespace Kistl.Client.Presentables.FilterViewModels
                     switch (_Operator)
                     {
                         case FilterOperators.Equals:
-                            Name = "=";
+                            Name = FilterViewModelResources.OperatorEquals;
                             break;
                         case FilterOperators.Contains:
-                            Name = "*";
+                            Name = FilterViewModelResources.OperatorContains;
                             break;
                         case FilterOperators.Less:
-                            Name = "<";
+                            Name = FilterViewModelResources.OperatorLess;
                             break;
                         case FilterOperators.LessOrEqual:
-                            Name = "<=";
+                            Name = FilterViewModelResources.OperatorLessOrEqual;
                             break;
                         case FilterOperators.Greater:
-                            Name = ">";
+                            Name = FilterViewModelResources.OperatorGreater;
                             break;
                         case FilterOperators.GreaterOrEqual:
-                            Name = ">=";
+                            Name = FilterViewModelResources.OperatorGreaterOrEqual;
                             break;
                         case FilterOperators.Not:
-                            Name = "!";
+                            Name = FilterViewModelResources.OperatorNot;
                             break;
                         case FilterOperators.IsNull:
-                            Name = "is null";
+                            Name = FilterViewModelResources.OperatorIsNull;
                             break;
                         case FilterOperators.IsNotNull:
-                            Name = "is not null";
+                            Name = FilterViewModelResources.OperatorIsNotNull;
                             break;
                         default:
                             Name = _Operator.ToString();
