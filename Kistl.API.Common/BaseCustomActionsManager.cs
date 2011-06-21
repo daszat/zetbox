@@ -196,7 +196,21 @@ namespace Kistl.App.Extensions
         {
             if (metaCtx == null) { throw new ArgumentNullException("metaCtx"); }
 
-            foreach (DataType objClass in metaCtx.GetQuery<ObjectClass>().Cast<DataType>().Concat(metaCtx.GetQuery<CompoundObject>().Cast<DataType>()))
+            foreach (var objClass in metaCtx.GetQuery<CompoundObject>())
+            {
+                try
+                {
+                    CreateInvokeInfosForAssembly(objClass);
+                }
+                catch (Exception ex)
+                {
+                    Log.Warn("Exception in CreateInvokeInfosForObjectClasses", ex);
+                }
+            }
+
+            // put this in separate loop to avoid mono bug #701187
+            // see https://bugzilla.novell.com/show_bug.cgi?id=701187
+            foreach (var objClass in metaCtx.GetQuery<ObjectClass>())
             {
                 try
                 {
