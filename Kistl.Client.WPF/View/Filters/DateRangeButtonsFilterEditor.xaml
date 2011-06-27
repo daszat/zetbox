@@ -9,10 +9,78 @@
   <ctrls:LabeledContainer Label="{Binding Label}"
                          Required="{Binding Required}">
     <StackPanel>
-        <ContentPresenter Content="{Binding From, Mode=OneWay}"
+      <!--<ContentPresenter Content="{Binding From, Mode=OneWay}"
                           ContentTemplateSelector="{StaticResource defaultTemplateSelector}"/>
         <ContentPresenter Content="{Binding To, Mode=OneWay}"
-                          ContentTemplateSelector="{StaticResource defaultTemplateSelector}"/>
+                          ContentTemplateSelector="{StaticResource defaultTemplateSelector}"/>-->
+      <StackPanel Orientation="Horizontal">
+        <ComboBox
+              Margin="5"
+              DisplayMemberPath="Name"
+              SelectedValuePath="Value"
+              ItemsSource="{Binding Years}"
+              IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertedBoolConverter}}"
+              SelectedValue="{Binding Year, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
+              MinWidth="75">
+          <ComboBox.ContextMenu>
+            <ContextMenu>
+              <MenuItem Command="{Binding ClearValueCommand, Converter={StaticResource CommandConverter}}"
+                        Header="{Binding ClearValueCommand.Label}"
+                        ToolTip="{Binding ClearValueCommand.ToolTip}" />
+            </ContextMenu>
+          </ComboBox.ContextMenu>
+        </ComboBox>
+        <ItemsControl ItemsSource="{Binding YearsShort}">
+          <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+              <UniformGrid Columns="18"
+                          IsItemsHost="True" />
+            </ItemsPanelTemplate>
+          </ItemsControl.ItemsPanel>
+          <ItemsControl.ItemTemplate>
+            <DataTemplate>
+              <ToggleButton Command="{Binding SelectYearCommand, Converter={StaticResource CommandConverter}}"
+                      CommandParameter="{Binding Value}"
+                      Content="{Binding Name}"
+                      Margin="5" />
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+      </StackPanel>
+      <StackPanel Orientation="Horizontal">
+        <ItemsControl ItemsSource="{Binding Quaters}">
+          <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+              <UniformGrid Columns="5"
+                          IsItemsHost="True" />
+            </ItemsPanelTemplate>
+          </ItemsControl.ItemsPanel>
+          <ItemsControl.ItemTemplate>
+            <DataTemplate>
+              <ToggleButton Command="{Binding SelectQuaterCommand, Converter={StaticResource CommandConverter}}"
+                      CommandParameter="{Binding Value}"
+                      Content="{Binding Name}"
+                      Margin="5" />
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <ItemsControl ItemsSource="{Binding Months}">
+          <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+              <UniformGrid Columns="13"
+                          IsItemsHost="True" />
+            </ItemsPanelTemplate>
+          </ItemsControl.ItemsPanel>
+          <ItemsControl.ItemTemplate>
+            <DataTemplate>
+              <ToggleButton Command="{Binding SelectMonthCommand, Converter={StaticResource CommandConverter}}"
+                      CommandParameter="{Binding Value}"
+                      Content="{Binding Name}"
+                      Margin="5" />
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+      </StackPanel>
     </StackPanel>
   </ctrls:LabeledContainer>
 </UserControl>

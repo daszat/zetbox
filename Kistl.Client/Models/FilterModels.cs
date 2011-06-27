@@ -383,8 +383,8 @@ namespace Kistl.Client.Models
             mdl.ValueSource = valueSource;
             mdl.ViewModelType = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_DateRangeFilterViewModel);
 
-            var fromMdl = new DateTimeValueModel(label, "", true, false, DateTimeStyles.Date);
-            var toMdl = new DateTimeValueModel(label, "", true, false, DateTimeStyles.Date);
+            var fromMdl = new DateTimeValueModel(FilterModelsResources.From, "", true, false, DateTimeStyles.Date);
+            var toMdl = new DateTimeValueModel(FilterModelsResources.To, "", true, false, DateTimeStyles.Date);
 
             mdl.FilterArguments.Add(new FilterArgumentConfig(
                 fromMdl, 

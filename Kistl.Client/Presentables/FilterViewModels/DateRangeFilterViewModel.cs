@@ -125,6 +125,24 @@ namespace Kistl.Client.Presentables.FilterViewModels
             }
         }
 
+        private static IList<ItemViewModel> _YearsShort = null;
+        public IEnumerable<ItemViewModel> YearsShort
+        {
+            get
+            {
+                if (_YearsShort == null)
+                {
+                    _YearsShort = new List<ItemViewModel>();
+                    int current = DateTime.Today.Year;
+                    for (int i = current; i >= current - 17; i--)
+                    {
+                        _YearsShort.Add(new ItemViewModel(i, i.ToString("0000")));
+                    }
+                }
+                return _YearsShort;
+            }
+        }
+
         #endregion
 
         #region Quater
@@ -159,7 +177,7 @@ namespace Kistl.Client.Presentables.FilterViewModels
                 if (_Quaters == null)
                 {
                     _Quaters = new List<ItemViewModel>();
-                    _Quaters.Add(new ItemViewModel());
+                    _Quaters.Add(new ItemViewModel() { Name = FilterViewModelResources.Empty });
                     for (int i = 1; i <= 4; i++)
                     {
                         _Quaters.Add(new ItemViewModel(i, i.ToString() + ". " + FilterViewModelResources.Quater));
@@ -202,7 +220,7 @@ namespace Kistl.Client.Presentables.FilterViewModels
                 if (_Months == null)
                 {
                     _Months = new List<ItemViewModel>();
-                    _Months.Add(new ItemViewModel());
+                    _Months.Add(new ItemViewModel() { Name = FilterViewModelResources.Empty });
                     for (int i = 1; i <= 12; i++)
                     {
                         var dt = new DateTime(2000, i, 1);
