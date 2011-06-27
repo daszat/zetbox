@@ -49,6 +49,7 @@ namespace Kistl.Client
         public static readonly Guid ViewModelDescriptor_SingleValueFilterViewModel = new Guid("4FF2B6EC-A47F-431B-AA6D-D10B39F8D628");
         public static readonly Guid ViewModelDescriptor_OptionalPredicateFilterViewModel = new Guid("29550c38-e240-46e4-b856-c7066d8395eb");
         public static readonly Guid ViewModelDescriptor_RangeFilterViewModel = new Guid("47ea2958-1036-4fe2-afb5-84568651d817");
+        public static readonly Guid ViewModelDescriptor_DateRangeFilterViewModel = new Guid("e77b05ac-9908-4152-afed-f722410cde98");
 
         public static readonly Guid ControlKind_Kistl_App_GUI_TextKind = new Guid("A3F09EF3-2FAC-4D7E-AEA8-CBF0EAB4DE70");
         public static readonly Guid ControlKind_Kistl_App_GUI_LauncherKind = new Guid("90D5FF7F-0C82-4278-BB8D-49C240F6BC2C");

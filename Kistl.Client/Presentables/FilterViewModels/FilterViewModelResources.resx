@@ -147,4 +147,7 @@
   <data name="OperatorNot" xml:space="preserve">
     <value>is not</value>
   </data>
+  <data name="Quater" xml:space="preserve">
+    <value>Quater</value>
+  </data>
 </root>

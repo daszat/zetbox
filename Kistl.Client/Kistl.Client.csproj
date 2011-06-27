@@ -120,6 +120,7 @@
     <Compile Include="Presentables\Calendar\LedgerViewModel.cs" />
     <Compile Include="Presentables\Calendar\TimeSlotItemViewModel.cs" />
     <Compile Include="Presentables\Calendar\WeekCalendarViewModel.cs" />
+    <Compile Include="Presentables\FilterViewModels\DateRangeFilterViewModel.cs" />
     <Compile Include="Presentables\SimpleDataObjectEditorTaskViewModelResources1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

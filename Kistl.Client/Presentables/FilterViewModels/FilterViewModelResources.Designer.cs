@@ -149,5 +149,14 @@ namespace Kistl.Client.Presentables.FilterViewModels {
                 return ResourceManager.GetString("OperatorNot", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quater.
+        /// </summary>
+        public static string Quater {
+            get {
+                return ResourceManager.GetString("Quater", resourceCulture);
+            }
+        }
     }
 }

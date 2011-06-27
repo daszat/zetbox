@@ -372,6 +372,63 @@ namespace Kistl.Client.Models
         }
     }
 
+    public class DateRangeFilterModel : FilterModel
+    {
+        public static DateRangeFilterModel Create(IFrozenContext frozenCtx, string label, IFilterValueSource valueSource, bool setDefault)
+        {
+            if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
+
+            var mdl = new DateRangeFilterModel();
+            mdl.Label = label;
+            mdl.ValueSource = valueSource;
+            mdl.ViewModelType = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_DateRangeFilterViewModel);
+
+            var fromMdl = new DateTimeValueModel(label, "", true, false, DateTimeStyles.Date);
+            var toMdl = new DateTimeValueModel(label, "", true, false, DateTimeStyles.Date);
+
+            mdl.FilterArguments.Add(new FilterArgumentConfig(
+                fromMdl, 
+                /*cfg.ArgumentViewModel ?? */ frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableValuePropertyModel_DateTime)));
+            mdl.FilterArguments.Add(new FilterArgumentConfig(
+                toMdl,
+                /*cfg.ArgumentViewModel ?? */ frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableValuePropertyModel_DateTime)));
+
+            if (setDefault)
+            {
+                // Defaults to this month
+                fromMdl.Value = DateTime.Today.FirstMonthDay();
+                toMdl.Value = DateTime.Today.LastMonthDay();
+            }
+
+            return mdl;
+        }
+
+        protected DateRangeFilterModel()
+        {
+        }
+
+        protected override string GetPredicate()
+        {
+            return string.Format("{0} >= @0 AND {0} <= @1", ValueSource.Expression);
+        }
+
+        public DateTimeValueModel From
+        {
+            get
+            {
+                return (DateTimeValueModel)FilterArguments[0].Value;
+            }
+        }
+
+        public DateTimeValueModel To
+        {
+            get
+            {
+                return (DateTimeValueModel)FilterArguments[1].Value;
+            }
+        }
+    }
+    
     public class RangeFilterModel : FilterModel
     {
         public static RangeFilterModel Create<T>(IFrozenContext frozenCtx, string label, string predicate)

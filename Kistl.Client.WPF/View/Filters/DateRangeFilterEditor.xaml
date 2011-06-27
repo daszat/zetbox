@@ -1,0 +1,62 @@
+﻿<UserControl x:Class="Kistl.Client.WPF.View.Filters.DateRangeFilterEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"
+             xmlns:tk="clr-namespace:Kistl.Client.WPF.Toolkit;assembly=Kistl.Client.WPF.Toolkit"
+             xmlns:view="clr-namespace:Kistl.Client.WPF.View.KistlBase"
+             xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
+             ToolTip="{Binding ToolTip}">
+  <ctrls:LabeledContainer Label="{Binding Label}"
+                         Required="{Binding Required}">
+    <StackPanel Orientation="Horizontal">
+      <ContentPresenter Content="{Binding From, Mode=OneWay}"
+                        ContentTemplateSelector="{StaticResource defaultTemplateSelector}"/>
+      <ComboBox
+                  DisplayMemberPath="Name"
+                  SelectedValuePath="Value"
+                  ItemsSource="{Binding Years}"
+                  IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertedBoolConverter}}"
+                  SelectedValue="{Binding Year, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
+                  MinWidth="75">
+        <ComboBox.ContextMenu>
+          <ContextMenu>
+            <MenuItem Command="{Binding ClearValueCommand, Converter={StaticResource CommandConverter}}"
+                      Header="{Binding ClearValueCommand.Label}"
+                      ToolTip="{Binding ClearValueCommand.ToolTip}" />
+          </ContextMenu>
+        </ComboBox.ContextMenu>
+      </ComboBox>
+      <ComboBox
+                  DisplayMemberPath="Name"
+                  SelectedValuePath="Value"
+                  ItemsSource="{Binding Quaters}"
+                  IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertedBoolConverter}}"
+                  SelectedValue="{Binding Quater, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
+                  MinWidth="75">
+        <ComboBox.ContextMenu>
+          <ContextMenu>
+            <MenuItem Command="{Binding ClearValueCommand, Converter={StaticResource CommandConverter}}"
+                      Header="{Binding ClearValueCommand.Label}"
+                      ToolTip="{Binding ClearValueCommand.ToolTip}" />
+          </ContextMenu>
+        </ComboBox.ContextMenu>
+      </ComboBox>
+      <ComboBox
+                        DisplayMemberPath="Name"
+                        SelectedValuePath="Value"
+                        ItemsSource="{Binding Months}"
+                        IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertedBoolConverter}}"
+                        SelectedValue="{Binding Month, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
+                        MinWidth="75">
+        <ComboBox.ContextMenu>
+          <ContextMenu>
+            <MenuItem Command="{Binding ClearValueCommand, Converter={StaticResource CommandConverter}}"
+                      Header="{Binding ClearValueCommand.Label}"
+                      ToolTip="{Binding ClearValueCommand.ToolTip}" />
+          </ContextMenu>
+        </ComboBox.ContextMenu>
+      </ComboBox>      <ContentPresenter Content="{Binding To, Mode=OneWay}"
+                        ContentTemplateSelector="{StaticResource defaultTemplateSelector}"/>
+    </StackPanel>
+  </ctrls:LabeledContainer>
+</UserControl>
