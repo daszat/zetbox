@@ -88,6 +88,7 @@
   <ItemGroup>
     <Compile Include="CustomClientActionsModule.cs" />
     <Compile Include="DocumentManagement\FileActions.cs" />
+    <Compile Include="Gui\DateRangeFilterConfigurationActions.cs" />
     <Compile Include="Gui\YearFilterConfigurationActions.cs" />
     <Compile Include="Gui\MonthFilterConfigurationActions.cs" />
     <Compile Include="Gui\OptionalPredicateFilterConfigurationActions.cs" />

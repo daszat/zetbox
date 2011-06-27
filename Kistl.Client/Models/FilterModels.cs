@@ -374,7 +374,7 @@ namespace Kistl.Client.Models
 
     public class DateRangeFilterModel : FilterModel
     {
-        public static DateRangeFilterModel Create(IFrozenContext frozenCtx, string label, IFilterValueSource valueSource, bool setDefault)
+        public static DateRangeFilterModel Create(IFrozenContext frozenCtx, string label, IFilterValueSource valueSource, bool setYearDefault, bool setQuaterDefault, bool setMonthDefault)
         {
             if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
 
@@ -393,7 +393,19 @@ namespace Kistl.Client.Models
                 toMdl,
                 /*cfg.ArgumentViewModel ?? */ frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableValuePropertyModel_DateTime)));
 
-            if (setDefault)
+            if (setYearDefault)
+            {
+                // Defaults to this month
+                fromMdl.Value = DateTime.Today.FirstYearDay();
+                toMdl.Value = DateTime.Today.LastYearDay();
+            }
+            else if (setQuaterDefault)
+            {
+                // Defaults to this month
+                fromMdl.Value = DateTime.Today.FirstQuaterDay();
+                toMdl.Value = DateTime.Today.LastQuaterDay();
+            }
+            else if (setMonthDefault)
             {
                 // Defaults to this month
                 fromMdl.Value = DateTime.Today.FirstMonthDay();

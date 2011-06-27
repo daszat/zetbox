@@ -1176,9 +1176,27 @@ namespace Kistl.API
         {
             return new DateTime(dt.Year, 1, 1);
         }
+        public static DateTime FirstQuaterDay(this DateTime dt)
+        {
+            var q = dt.GetQuater();
+            return new DateTime(dt.Year, ((q - 1) * 3) + 1, 1);
+        }
         public static DateTime LastMonthDay(this DateTime dt)
         {
             return dt.FirstMonthDay().AddMonths(1).AddDays(-1);
+        }
+        public static DateTime LastYearDay(this DateTime dt)
+        {
+            return new DateTime(dt.Year, 12, 31);
+        }
+        public static DateTime LastQuaterDay(this DateTime dt)
+        {
+            return FirstQuaterDay(dt).AddMonths(3).AddDays(-1);
+        }
+
+        public static int GetQuater(this DateTime dt)
+        {
+            return ((dt.Month - 1) / 3) + 1;
         }
 
         public static int GetAge(this DateTime birthday)

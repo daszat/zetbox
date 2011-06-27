@@ -26,22 +26,22 @@ namespace Kistl.Client.Presentables.FilterViewModels
 
         public void UpdateFromRange()
         {
-            if(RangeFilter.From.Value != null && RangeFilter.To.Value != null)
+            if (RangeFilter.From.Value != null && RangeFilter.To.Value != null)
             {
                 _year = RangeFilter.From.Value.Value.Year;
                 var diff = (RangeFilter.From.Value.Value.Month - RangeFilter.To.Value.Value.Month);
                 if (diff == 12)
                 {
-                    // it's OK
+                    // one year
                 }
                 else if (diff == 3)
                 {
                     // Quater
-                    _quater = ((RangeFilter.From.Value.Value.Month - 1) / 3) + 1;
+                    _quater = RangeFilter.From.Value.Value.GetQuater();
                 }
                 else
                 {
-                    // OK, it's a Month
+                    // OK, lets assume: it's a Month
                     _month = RangeFilter.From.Value.Value.Month;
                 }
             }
@@ -49,9 +49,14 @@ namespace Kistl.Client.Presentables.FilterViewModels
 
         public void UpdateRange()
         {
-            if(_year != null && (_quater != null || _month != null))
+            if (_year != null)
             {
-                if (_quater != null)
+                if (_quater == null && _month == null)
+                {
+                    RangeFilter.From.Value = new DateTime(_year.Value, 1, 1);
+                    RangeFilter.To.Value = new DateTime(_year.Value, 12, 31);
+                }
+                else if (_quater != null)
                 {
                     RangeFilter.From.Value = new DateTime(_year.Value, ((_quater.Value - 1) * 3) + 1, 1);
                     RangeFilter.To.Value = RangeFilter.From.Value.Value.AddMonths(3).AddDays(-1);
@@ -74,7 +79,7 @@ namespace Kistl.Client.Presentables.FilterViewModels
                 return Arguments[0];
             }
         }
-        
+
         public IValueViewModel To
         {
             get
@@ -222,9 +227,9 @@ namespace Kistl.Client.Presentables.FilterViewModels
                 this.Name = name;
             }
 
-            public int Value { get; set; }
+            public int? Value { get; set; }
             public string Name { get; set; }
-        }        
+        }
         #endregion
     }
 }

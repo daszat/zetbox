@@ -9,8 +9,6 @@
   <ctrls:LabeledContainer Label="{Binding Label}"
                          Required="{Binding Required}">
     <StackPanel Orientation="Horizontal">
-      <ContentPresenter Content="{Binding From, Mode=OneWay}"
-                        ContentTemplateSelector="{StaticResource defaultTemplateSelector}"/>
       <ComboBox
                   DisplayMemberPath="Name"
                   SelectedValuePath="Value"
@@ -55,8 +53,7 @@
                       ToolTip="{Binding ClearValueCommand.ToolTip}" />
           </ContextMenu>
         </ComboBox.ContextMenu>
-      </ComboBox>      <ContentPresenter Content="{Binding To, Mode=OneWay}"
-                        ContentTemplateSelector="{StaticResource defaultTemplateSelector}"/>
+      </ComboBox>
     </StackPanel>
   </ctrls:LabeledContainer>
 </UserControl>
