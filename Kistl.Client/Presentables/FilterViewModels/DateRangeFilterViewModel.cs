@@ -9,6 +9,7 @@ namespace Kistl.Client.Presentables.FilterViewModels
     using System.Collections.ObjectModel;
     using Kistl.Client.Presentables.ValueViewModels;
     using Kistl.Client.Models;
+    using System.ComponentModel;
 
     [ViewModelDescriptor]
     public class DateRangeFilterViewModel : FilterViewModel
@@ -19,16 +20,16 @@ namespace Kistl.Client.Presentables.FilterViewModels
             : base(dependencies, dataCtx, parent, mdl)
         {
             this.RangeFilter = (DateRangeFilterModel)mdl;
-            UpdateFromRange();
+            InitializeFromRange();
             Arguments[0].IsReadOnly = true;
             Arguments[1].IsReadOnly = true;
         }
 
-        public void UpdateFromRange()
+        public void InitializeFromRange()
         {
             if (RangeFilter.From.Value != null && RangeFilter.To.Value != null)
             {
-                _year = RangeFilter.From.Value.Value.Year;
+                Year = Years.SingleOrDefault(i => i.Value == RangeFilter.From.Value.Value.Year);
                 var diff = (RangeFilter.From.Value.Value.Month - RangeFilter.To.Value.Value.Month);
                 if (diff == 12)
                 {
@@ -37,12 +38,12 @@ namespace Kistl.Client.Presentables.FilterViewModels
                 else if (diff == 3)
                 {
                     // Quater
-                    _quater = RangeFilter.From.Value.Value.GetQuater();
+                    Quater = Quaters.SingleOrDefault(i => i.Value == RangeFilter.From.Value.Value.GetQuater());
                 }
                 else
                 {
                     // OK, lets assume: it's a Month
-                    _month = RangeFilter.From.Value.Value.Month;
+                    Month = Months.SingleOrDefault(i => i.Value == RangeFilter.From.Value.Value.Month);
                 }
             }
         }
@@ -53,17 +54,17 @@ namespace Kistl.Client.Presentables.FilterViewModels
             {
                 if (_quater == null && _month == null)
                 {
-                    RangeFilter.From.Value = new DateTime(_year.Value, 1, 1);
-                    RangeFilter.To.Value = new DateTime(_year.Value, 12, 31);
+                    RangeFilter.From.Value = new DateTime(_year, 1, 1);
+                    RangeFilter.To.Value = new DateTime(_year, 12, 31);
                 }
                 else if (_quater != null)
                 {
-                    RangeFilter.From.Value = new DateTime(_year.Value, ((_quater.Value - 1) * 3) + 1, 1);
+                    RangeFilter.From.Value = new DateTime(_year, ((_quater - 1) * 3) + 1, 1);
                     RangeFilter.To.Value = RangeFilter.From.Value.Value.AddMonths(3).AddDays(-1);
                 }
                 else
                 {
-                    RangeFilter.From.Value = new DateTime(_year.Value, _month.Value, 1);
+                    RangeFilter.From.Value = new DateTime(_year, _month, 1);
                     RangeFilter.To.Value = RangeFilter.From.Value.Value.AddMonths(1).AddDays(-1);
                 }
             }
@@ -89,8 +90,8 @@ namespace Kistl.Client.Presentables.FilterViewModels
         }
 
         #region Year
-        private int? _year;
-        public int? Year
+        private ItemViewModel _year;
+        public ItemViewModel Year
         {
             get
             {
@@ -100,54 +101,84 @@ namespace Kistl.Client.Presentables.FilterViewModels
             {
                 if (_year != value)
                 {
-                    _year = value;
+                    _year = ItemViewModel.OnlyValid(value);
+                    UpdateIsSelected(Years, value);
                     OnPropertyChanged("Year");
                     UpdateRange();
                 }
             }
         }
 
-        private static IList<ItemViewModel> _Years = null;
+        private int _yearsCount = 100;
+        public int YearsCount
+        {
+            get
+            {
+                return _yearsCount;
+            }
+            set
+            {
+                if (_yearsCount != value)
+                {
+                    _yearsCount = value;
+                    _years = null;
+                    OnPropertyChanged("YearsCount");
+                    OnPropertyChanged("Years");
+                }
+            }
+        }
+
+        private IList<ItemViewModel> _years = null;
         public IEnumerable<ItemViewModel> Years
         {
             get
             {
-                if (_Years == null)
+                if (_years == null)
                 {
-                    _Years = new List<ItemViewModel>();
+                    _years = new List<ItemViewModel>();
                     int current = DateTime.Today.Year;
                     for (int i = current; i >= current - 100; i--)
                     {
-                        _Years.Add(new ItemViewModel(i, i.ToString("0000")));
+                        _years.Add(new ItemViewModel(i, i.ToString("0000")));
                     }
+
+                    AttachChangeEventListener(_years, i => Year = i);
                 }
-                return _Years;
+                return _years;
             }
         }
 
-        private static IList<ItemViewModel> _YearsShort = null;
+        private int _yearsShortCount = 15;
+        public int YearsShortCount
+        {
+            get
+            {
+                return _yearsShortCount;
+            }
+            set
+            {
+                if (_yearsShortCount != value)
+                {
+                    _yearsShortCount = value;
+                    OnPropertyChanged("YearsShortCount");
+                    OnPropertyChanged("YearsShort");
+                }
+            }
+        }
+
         public IEnumerable<ItemViewModel> YearsShort
         {
             get
             {
-                if (_YearsShort == null)
-                {
-                    _YearsShort = new List<ItemViewModel>();
-                    int current = DateTime.Today.Year;
-                    for (int i = current; i >= current - 17; i--)
-                    {
-                        _YearsShort.Add(new ItemViewModel(i, i.ToString("0000")));
-                    }
-                }
-                return _YearsShort;
+                return Years.Take(10);
             }
         }
 
         #endregion
 
         #region Quater
-        private int? _quater;
-        public int? Quater
+        private ItemViewModel _quater;
+        public ItemViewModel Quater
         {
             get
             {
@@ -157,11 +188,13 @@ namespace Kistl.Client.Presentables.FilterViewModels
             {
                 if (_quater != value)
                 {
-                    _quater = value;
+                    _quater = ItemViewModel.OnlyValid(value);
+                    UpdateIsSelected(Quaters, value);
                     OnPropertyChanged("Quater");
                     if (_quater != null)
                     {
                         _month = null;
+                        UpdateIsSelected(Months, null);
                         OnPropertyChanged("Month");
                     }
                     UpdateRange();
@@ -169,28 +202,36 @@ namespace Kistl.Client.Presentables.FilterViewModels
             }
         }
 
-        private static IList<ItemViewModel> _Quaters = null;
+        private IList<ItemViewModel> _quaters = null;
         public IEnumerable<ItemViewModel> Quaters
         {
             get
             {
-                if (_Quaters == null)
+                if (_quaters == null)
                 {
-                    _Quaters = new List<ItemViewModel>();
-                    _Quaters.Add(new ItemViewModel() { Name = FilterViewModelResources.Empty });
+                    _quaters = new List<ItemViewModel>();
+                    _quaters.Add(new ItemViewModel());
                     for (int i = 1; i <= 4; i++)
                     {
-                        _Quaters.Add(new ItemViewModel(i, i.ToString() + ". " + FilterViewModelResources.Quater));
+                        _quaters.Add(new ItemViewModel(i, i.ToString() + ". " + FilterViewModelResources.Quater));
                     }
+                    AttachChangeEventListener(_quaters, i => Quater = i);
                 }
-                return _Quaters;
+                return _quaters;
+            }
+        }
+        public IEnumerable<ItemViewModel> QuatersWithoutEmpty
+        {
+            get
+            {
+                return Quaters.Skip(1);
             }
         }
         #endregion
 
         #region Month
-        private int? _month;
-        public int? Month
+        private ItemViewModel _month;
+        public ItemViewModel Month
         {
             get
             {
@@ -200,11 +241,13 @@ namespace Kistl.Client.Presentables.FilterViewModels
             {
                 if (_month != value)
                 {
-                    _month = value;
+                    _month = ItemViewModel.OnlyValid(value);
+                    UpdateIsSelected(Months, value);
                     OnPropertyChanged("Month");
                     if (_month != null)
                     {
                         _quater = null;
+                        UpdateIsSelected(Quaters, null);
                         OnPropertyChanged("Quater");
                     }
                     UpdateRange();
@@ -212,28 +255,59 @@ namespace Kistl.Client.Presentables.FilterViewModels
             }
         }
 
-        private static IList<ItemViewModel> _Months = null;
+        private IList<ItemViewModel> _months = null;
         public IEnumerable<ItemViewModel> Months
         {
             get
             {
-                if (_Months == null)
+                if (_months == null)
                 {
-                    _Months = new List<ItemViewModel>();
-                    _Months.Add(new ItemViewModel() { Name = FilterViewModelResources.Empty });
+                    _months = new List<ItemViewModel>();
+                    _months.Add(new ItemViewModel());
                     for (int i = 1; i <= 12; i++)
                     {
                         var dt = new DateTime(2000, i, 1);
-                        _Months.Add(new ItemViewModel(i, dt.ToString("MMMM")));
+                        _months.Add(new ItemViewModel(i, dt.ToString("MMMM")));
                     }
+                    AttachChangeEventListener(_months, i => Month = i);
                 }
-                return _Months;
+                return _months;
+            }
+        }
+        public IEnumerable<ItemViewModel> MonthsWithoutEmpty
+        {
+            get
+            {
+                return Months.Skip(1);
             }
         }
         #endregion
 
-        #region Common
-        public class ItemViewModel
+        #region ItemViewModel
+        private void UpdateIsSelected(IEnumerable<ItemViewModel> collection, ItemViewModel value)
+        {
+            foreach (var i in collection)
+            {
+                i.SetIsSelected(i == value || (value == null && i.Value == null));
+            }
+        }
+
+        private void AttachChangeEventListener(IList<ItemViewModel> collection, Action<ItemViewModel> setter)
+        {
+            if (collection == null) throw new ArgumentNullException("collection");
+            if (setter == null) throw new ArgumentNullException("setter");
+
+            foreach (var i in collection)
+            {
+                i.IsSelectedChangedByUser += (s, e) =>
+                {
+                    var item = (ItemViewModel)s;
+                    setter(item);
+                };
+            }
+        }
+
+        public class ItemViewModel : INotifyPropertyChanged
         {
             public ItemViewModel()
             {
@@ -245,8 +319,59 @@ namespace Kistl.Client.Presentables.FilterViewModels
                 this.Name = name;
             }
 
+            public static ItemViewModel OnlyValid(ItemViewModel i)
+            {
+                return i != null && i.Value != null ? i : null;
+            }
+
+            public static implicit operator int(ItemViewModel i)
+            {
+                if (i == null || i.Value == null) return 0;
+                return i.Value.Value;
+            }
+
             public int? Value { get; set; }
             public string Name { get; set; }
+
+            private bool _isSelected = false;
+            public bool IsSelected
+            {
+                get
+                {
+                    return _isSelected;
+                }
+                set
+                {
+                    if (_isSelected != value)
+                    {
+                        _isSelected = value;
+                        OnPropertyChanged("IsSelected");
+                        var temp = IsSelectedChangedByUser;
+                        if (temp != null)
+                        {
+                            temp(this, EventArgs.Empty);
+                        }
+                    }
+                }
+            }
+
+            private void OnPropertyChanged(string name)
+            {
+                var temp = PropertyChanged;
+                if (temp != null)
+                {
+                    temp(this, new PropertyChangedEventArgs(name));
+                }
+            }
+
+            public void SetIsSelected(bool value)
+            {
+                _isSelected = value;
+                OnPropertyChanged("IsSelected");
+            }
+
+            public event PropertyChangedEventHandler PropertyChanged;
+            public event EventHandler IsSelectedChangedByUser;
         }
         #endregion
     }

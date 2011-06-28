@@ -8,52 +8,22 @@
              ToolTip="{Binding ToolTip}">
   <ctrls:LabeledContainer Label="{Binding Label}"
                          Required="{Binding Required}">
-    <StackPanel Orientation="Horizontal">
-      <ComboBox
-                  DisplayMemberPath="Name"
-                  SelectedValuePath="Value"
-                  ItemsSource="{Binding Years}"
-                  IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertedBoolConverter}}"
-                  SelectedValue="{Binding Year, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
-                  MinWidth="75">
-        <ComboBox.ContextMenu>
-          <ContextMenu>
-            <MenuItem Command="{Binding ClearValueCommand, Converter={StaticResource CommandConverter}}"
-                      Header="{Binding ClearValueCommand.Label}"
-                      ToolTip="{Binding ClearValueCommand.ToolTip}" />
-          </ContextMenu>
-        </ComboBox.ContextMenu>
-      </ComboBox>
-      <ComboBox
-                  DisplayMemberPath="Name"
-                  SelectedValuePath="Value"
-                  ItemsSource="{Binding Quaters}"
-                  IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertedBoolConverter}}"
-                  SelectedValue="{Binding Quater, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
-                  MinWidth="75">
-        <ComboBox.ContextMenu>
-          <ContextMenu>
-            <MenuItem Command="{Binding ClearValueCommand, Converter={StaticResource CommandConverter}}"
-                      Header="{Binding ClearValueCommand.Label}"
-                      ToolTip="{Binding ClearValueCommand.ToolTip}" />
-          </ContextMenu>
-        </ComboBox.ContextMenu>
-      </ComboBox>
-      <ComboBox
-                        DisplayMemberPath="Name"
-                        SelectedValuePath="Value"
-                        ItemsSource="{Binding Months}"
-                        IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertedBoolConverter}}"
-                        SelectedValue="{Binding Month, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
-                        MinWidth="75">
-        <ComboBox.ContextMenu>
-          <ContextMenu>
-            <MenuItem Command="{Binding ClearValueCommand, Converter={StaticResource CommandConverter}}"
-                      Header="{Binding ClearValueCommand.Label}"
-                      ToolTip="{Binding ClearValueCommand.ToolTip}" />
-          </ContextMenu>
-        </ComboBox.ContextMenu>
-      </ComboBox>
-    </StackPanel>
+    <UniformGrid Columns="3">
+      <ComboBox DisplayMemberPath="Name"
+                ItemsSource="{Binding Years}"
+                IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertedBoolConverter}}"
+                SelectedValue="{Binding Year, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
+                MinWidth="75" />
+      <ComboBox DisplayMemberPath="Name"
+                ItemsSource="{Binding Quaters}"
+                IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertedBoolConverter}}"
+                SelectedValue="{Binding Quater, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
+                MinWidth="75" />
+      <ComboBox DisplayMemberPath="Name"
+                ItemsSource="{Binding Months}"
+                IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertedBoolConverter}}"
+                SelectedValue="{Binding Month, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
+                MinWidth="75" />
+    </UniformGrid>
   </ctrls:LabeledContainer>
 </UserControl>
