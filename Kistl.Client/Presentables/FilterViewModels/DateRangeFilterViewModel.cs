@@ -170,7 +170,7 @@ namespace Kistl.Client.Presentables.FilterViewModels
         {
             get
             {
-                return Years.Take(10);
+                return Years.Take(YearsShortCount);
             }
         }
 
@@ -267,7 +267,7 @@ namespace Kistl.Client.Presentables.FilterViewModels
                     for (int i = 1; i <= 12; i++)
                     {
                         var dt = new DateTime(2000, i, 1);
-                        _months.Add(new ItemViewModel(i, dt.ToString("MMMM")));
+                        _months.Add(new ItemViewModel(i, dt.ToString("MMM")));
                     }
                     AttachChangeEventListener(_months, i => Month = i);
                 }
