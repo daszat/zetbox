@@ -13,8 +13,9 @@
                           ContentTemplateSelector="{StaticResource defaultTemplateSelector}"/>
         <ContentPresenter Content="{Binding To, Mode=OneWay}"
                           ContentTemplateSelector="{StaticResource defaultTemplateSelector}"/>-->
-      <StackPanel Orientation="Horizontal">
+      <DockPanel>
         <ComboBox
+              DockPanel.Dock="Left"
               Margin="5"
               DisplayMemberPath="Name"
               ItemsSource="{Binding Years}"
@@ -33,14 +34,16 @@
             <DataTemplate>
               <ToggleButton
                       IsChecked="{Binding IsSelected}"
+                      Unchecked="btn_OnUncheck"
                       Content="{Binding Name}"
                       Margin="5" />
             </DataTemplate>
           </ItemsControl.ItemTemplate>
         </ItemsControl>
-      </StackPanel>
-      <StackPanel Orientation="Horizontal">
-        <ItemsControl ItemsSource="{Binding QuatersWithoutEmpty}">
+      </DockPanel>
+      <DockPanel >
+        <ItemsControl DockPanel.Dock="Left"
+                      ItemsSource="{Binding QuatersWithoutEmpty}">
           <ItemsControl.ItemsPanel>
             <ItemsPanelTemplate>
               <UniformGrid Columns="4"
@@ -50,6 +53,7 @@
           <ItemsControl.ItemTemplate>
             <DataTemplate>
               <ToggleButton
+                      Unchecked="btn_OnUncheck"
                       IsChecked="{Binding IsSelected}"
                       Content="{Binding Name}"
                       Margin="5" />
@@ -66,12 +70,13 @@
           <ItemsControl.ItemTemplate>
             <DataTemplate>
               <ToggleButton IsChecked="{Binding IsSelected}"
-                      Content="{Binding Name}"
-                      Margin="5" />
+                            Unchecked="btn_OnUncheck"
+                            Content="{Binding Name}"
+                            Margin="5" />
             </DataTemplate>
           </ItemsControl.ItemTemplate>
         </ItemsControl>
-      </StackPanel>
+      </DockPanel>
     </StackPanel>
   </ctrls:LabeledContainer>
 </UserControl>

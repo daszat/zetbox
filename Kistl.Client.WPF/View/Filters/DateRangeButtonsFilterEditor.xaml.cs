@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using Kistl.Client.GUI;
 using Kistl.Client.Presentables.FilterViewModels;
 using Kistl.Client.Presentables.KistlBase;
+using System.Windows.Controls.Primitives;
 
 namespace Kistl.Client.WPF.View.Filters
 {
@@ -33,6 +34,16 @@ namespace Kistl.Client.WPF.View.Filters
         public DateRangeFilterViewModel ViewModel
         {
             get { return (DateRangeFilterViewModel)DataContext; }
+        }
+
+        public void btn_OnUncheck(object sender, RoutedEventArgs e)
+        {
+            var btn = (ToggleButton)sender;
+            var scope = FocusManager.GetFocusScope(btn);
+            var focus = FocusManager.GetFocusedElement(scope);
+            btn.Focus();
+
+            Dispatcher.BeginInvoke(new Action(() => focus.Focus()), System.Windows.Threading.DispatcherPriority.Background);
         }
     }
 }
