@@ -6,11 +6,10 @@ namespace Kistl.App.Packaging
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-
     using Kistl.API;
+    using Kistl.API.Utils;
     using Kistl.App.Base;
     using Kistl.App.GUI;
-    using Kistl.API.Utils;
 
     internal static class PackagingHelper
     {
@@ -24,10 +23,12 @@ namespace Kistl.App.Packaging
 
             AddMetaObjects(result, () => ctx.GetQuery<DataType>().Where(i => i.Module.ID == moduleID)
                 .OrderBy(i => i.Name).ThenBy(i => i.ExportGuid));
+
+            // export only relation entry ending on a "local" class. Since we do not have proper inter-module dependencies in place, we cannot support pushing interface implementations across modules.
             AddMetaObjects(result, () => ctx.Internals().GetPersistenceObjectQuery<ObjectClass_implements_Interface_RelationEntry>()
                 // Workaround for missing Module relation on ObjectClass_implements_Interface_RelationEntry when creating KistlBase.xml
-                .Where(i => i.A != null && i.A.Module != null && i.B != null && i.B.Module != null)
-                .Where(i => i.A.Module.ID == moduleID || i.B.Module.ID == moduleID)
+                .Where(i => i.A != null && i.A.Module != null && i.B != null)
+                .Where(i => i.A.Module == module)
                 .OrderBy(i => i.A.Name).ThenBy(i => i.B.Name).ThenBy(i => i.A.ExportGuid).ThenBy(i => i.B.ExportGuid));
             AddMetaObjects(result, () => ctx.GetQuery<Property>().Where(i => i.Module.ID == moduleID)
                 .OrderBy(i => i.ObjectClass.Name).ThenBy(i => i.Name).ThenBy(i => i.ExportGuid));
