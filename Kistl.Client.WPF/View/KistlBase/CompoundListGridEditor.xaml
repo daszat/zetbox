@@ -7,7 +7,12 @@
                      xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
                      xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
                      VerticalContentAlignment="Stretch">
-    <DockPanel>
+  <ctrls:PropertyEditor.Resources>
+    <!-- implement workaround for DeferRefresh exception as described on http://stackoverflow.com/questions/3461714/wpf-datagrid-combobox-causes-invalidoperationexception -->
+    <CollectionViewSource x:Key="itemsSource"
+                          Source="{Binding ValueProxies}"/>
+  </ctrls:PropertyEditor.Resources>
+  <DockPanel>
         <UniformGrid DockPanel.Dock="Left"
                      Rows="2">
             <ctrls:CommandButton CommandViewModel="{Binding Path=MoveItemUpCommand}" />
@@ -27,7 +32,7 @@
         <!-- configured from code, see RefreshGridView() -->
         <ctrls:ZBoxDataGrid x:Name="lst"
                             BorderThickness="0"
-                            ItemsSource="{Binding ValueProxies, Mode=OneWay, ValidatesOnDataErrors=true}"
+                            ItemsSource="{Binding Source={StaticResource itemsSource}}"
                             MinHeight="50"
                             MouseDoubleClick="ItemActivatedHandler"
                             CanUserAddRows="{Binding AllowInlineAddNew}"
