@@ -1988,6 +1988,18 @@ namespace Kistl.Server.SchemaManagement
         }
         #endregion
 
+        #region NewSchema
+        internal bool IsNewSchema(string schemaName)
+        {
+            return db.CheckSchemaExists(schemaName);
+        }
+
+        internal void DoNewSchema(string schemaName)
+        {
+            Log.InfoFormat("New Schema: {0}", schemaName);
+            db.CreateSchema(schemaName);
+        }
+        #endregion
 
         #endregion
 

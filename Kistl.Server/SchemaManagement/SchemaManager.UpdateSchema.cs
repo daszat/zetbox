@@ -26,6 +26,7 @@ namespace Kistl.Server.SchemaManagement
                 {
                     db.EnsureInfrastructure();
 
+                    UpdateDatabaseSchemas();
                     UpdateTables();
                     UpdateRelations();
                     UpdateInheritance();
@@ -49,6 +50,18 @@ namespace Kistl.Server.SchemaManagement
                     Log.Error("An error ocurred while updating the schema", ex);
                     throw;
                 }
+            }
+        }
+
+        private void UpdateDatabaseSchemas()
+        {
+            Log.Info("Updating database schemas");
+            Log.Debug("-------------------------");
+
+            // TODO: move to module-specific database schemas
+            if (!Case.IsNewSchema("dbo"))
+            {
+                Case.DoNewSchema("dbo");
             }
         }
 
