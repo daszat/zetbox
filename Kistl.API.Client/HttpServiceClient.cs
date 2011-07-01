@@ -13,6 +13,8 @@ namespace Kistl.API.Client
     public sealed class HttpServiceClient
         : Kistl.API.Client.KistlService.IKistlService
     {
+        private const int MAX_RETRY_COUNT = 2;
+
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.API.Client.HttpServiceClient");
 
         private readonly Uri SetObjectsUri;
@@ -83,7 +85,7 @@ namespace Kistl.API.Client
                     {
                         Log.Error("No headers");
                     }
-                    throw new ApplicationException(errorMsg, ex);
+                    throw new IOException(errorMsg, ex);
                 }
             } while (true);
         }

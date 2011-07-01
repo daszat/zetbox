@@ -40,6 +40,8 @@ namespace Kistl.API.Client
     internal class ProxyImplementation
         : IProxy
     {
+        private const int MAX_RETRY_COUNT = 2;
+
         private InterfaceType.Factory _iftFactory;
         private KistlService.IKistlService _service;
 
@@ -49,16 +51,44 @@ namespace Kistl.API.Client
             _service = service;
         }
 
+        private void MakeRequest(Action request)
+        {
+            Exception fault = null;
+            for (int i = 0; i < MAX_RETRY_COUNT; i++)
+            {
+                fault = null;
+                try
+                {
+                    request();
+                    break;
+                }
+                catch (Exception ex)
+                {
+                    fault = ex;
+                }
+            }
+
+            if (fault != null) throw new IOException("Error when accessing server", fault);
+        }
+
         public IEnumerable<IDataObject> GetList(IKistlContext ctx, InterfaceType ifType, int maxListCount, bool eagerLoadLists, IEnumerable<Expression> filter, IEnumerable<OrderBy> orderBy, out List<IStreamable> auxObjects)
         {
             List<IStreamable> tmpAuxObjects = null;
             IEnumerable<IDataObject> result = null;
-            var bytes = _service.GetList(
-                ifType.ToSerializableType(),
-                maxListCount,
-                eagerLoadLists,
-                filter != null ? filter.Select(f => SerializableExpression.FromExpression(f, _iftFactory)).ToArray() : null,
-                orderBy != null ? orderBy.Select(o => new OrderByContract() { Type = o.Type, Expression = SerializableExpression.FromExpression(o.Expression, _iftFactory) }).ToArray() : null);
+            var _ifType = ifType.ToSerializableType();
+            var _filter = filter != null ? filter.Select(f => SerializableExpression.FromExpression(f, _iftFactory)).ToArray() : null;
+            var _orderBy = orderBy != null ? orderBy.Select(o => new OrderByContract() { Type = o.Type, Expression = SerializableExpression.FromExpression(o.Expression, _iftFactory) }).ToArray() : null;
+            byte[] bytes = null;
+
+            MakeRequest(() =>
+            {
+                bytes = _service.GetList(
+                    _ifType,
+                    maxListCount,
+                    eagerLoadLists,
+                    _filter,
+                    _orderBy);
+            });
 
             using (var sr = new BinaryReader(new MemoryStream(bytes)))
             {
@@ -72,8 +102,14 @@ namespace Kistl.API.Client
         {
             List<IStreamable> tmpAuxObjects = null;
             IEnumerable<IDataObject> result = null;
+            var _ifType = ifType.ToSerializableType();
 
-            var bytes = _service.GetListOf(ifType.ToSerializableType(), ID, property);
+            byte[] bytes = null;
+
+            MakeRequest(() =>
+            {
+                bytes = _service.GetListOf(_ifType, ID, property);
+            });
 
             using (var sr = new BinaryReader(new MemoryStream(bytes)))
             {
@@ -93,8 +129,14 @@ namespace Kistl.API.Client
             using (var sw = new BinaryWriter(ms))
             {
                 SendObjects(objects, sw);
+                byte[] bytes = null;
+                var _ms = ms.ToArray();
+                var _nReq = notficationRequests.ToArray();
 
-                var bytes = _service.SetObjects(ms.ToArray(), notficationRequests.ToArray());
+                MakeRequest(() =>
+                {
+                    bytes = _service.SetObjects(_ms, _nReq);
+                });
 
                 using (var sr = new BinaryReader(new MemoryStream(bytes)))
                 {
@@ -157,7 +199,13 @@ namespace Kistl.API.Client
 
             IEnumerable<T> result = null;
             List<IStreamable> tmpAuxObjects = null;
-            using (MemoryStream s = new MemoryStream(_service.FetchRelation(relationId, (int)role, parent.ID)))
+            byte[] bytes = null;
+
+            MakeRequest(() =>
+            {
+                bytes = _service.FetchRelation(relationId, (int)role, parent.ID);
+            });
+            using (MemoryStream s = new MemoryStream(bytes))
             using (var sr = new BinaryReader(s))
             {
                 result = ReceiveObjects(ctx, sr, out tmpAuxObjects).Cast<T>();
@@ -170,14 +218,23 @@ namespace Kistl.API.Client
         public Stream GetBlobStream(int ID)
         {
             Stream result = null;
-            result = _service.GetBlobStream(ID);
+            MakeRequest(() =>
+            {
+                result = _service.GetBlobStream(ID);
+            });
             return result;
         }
 
         public Kistl.App.Base.Blob SetBlobStream(IKistlContext ctx, Stream stream, string filename, string mimetype)
         {
             Kistl.App.Base.Blob result = null;
-            var response = _service.SetBlobStream(new BlobMessage() { FileName = filename, MimeType = mimetype, Stream = stream });
+            BlobResponse response = null;
+            BlobMessage msg = new BlobMessage() { FileName = filename, MimeType = mimetype, Stream = stream };
+
+            MakeRequest(() =>
+            {
+                response = _service.SetBlobStream(msg);
+            });
 
             using (var sr = new BinaryReader(response.BlobInstance))
             {
@@ -200,18 +257,28 @@ namespace Kistl.API.Client
             BinaryWriter sw = new BinaryWriter(changedObjectsStream);
             SendObjects(objects, sw);
 
+            byte[] bytes = null;
+            byte[] retChangedObjectsArray = null;
+            var _ifType = ifType.ToSerializableType();
+            var _parameterTypes = parameterTypes.Select(t => _iftFactory(t).ToSerializableType()).ToArray();
+            var _parameterStream = parameterStream.ToArray();
+            var _changedObjStream = changedObjectsStream.ToArray();
+            var _nReq = notificationRequests.ToArray();
 
-            byte[] retChangedObjectsArray;
-            var resultStream = new MemoryStream(_service.InvokeServerMethod(
-                out retChangedObjectsArray,
-                ifType.ToSerializableType(),
-                ID,
-                method,
-                parameterTypes.Select(t => _iftFactory(t).ToSerializableType()).ToArray(),
-                parameterStream.ToArray(),
-                changedObjectsStream.ToArray(),
-                notificationRequests.ToArray()));
+            MakeRequest(() =>
+            {
+                bytes = _service.InvokeServerMethod(
+                     out retChangedObjectsArray,
+                     _ifType,
+                     ID,
+                     method,
+                     _parameterTypes,
+                     _parameterStream,
+                     _changedObjStream,
+                     _nReq);
+            });
 
+            var resultStream = new MemoryStream(bytes);
             {
                 MemoryStream retChangedObjects = new MemoryStream(retChangedObjectsArray);
                 BinaryReader br = new BinaryReader(retChangedObjects);
