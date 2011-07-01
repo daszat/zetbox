@@ -42,6 +42,11 @@
         </ItemsControl>
       </DockPanel>
       <DockPanel >
+        <ToggleButton DockPanel.Dock="Left"
+                      Unchecked="btn_OnUncheck"
+                      IsChecked="{Binding AllYear.IsSelected}"
+                      Content="{Binding AllYear.Name}"
+                      Margin="5" />
         <ItemsControl DockPanel.Dock="Left"
                       ItemsSource="{Binding QuatersWithoutEmpty}">
           <ItemsControl.ItemsPanel>

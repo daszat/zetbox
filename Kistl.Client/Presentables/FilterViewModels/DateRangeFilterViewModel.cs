@@ -46,6 +46,10 @@ namespace Kistl.Client.Presentables.FilterViewModels
                     Month = Months.SingleOrDefault(i => i.Value == RangeFilter.From.Value.Value.Month);
                 }
             }
+            else
+            {
+                Year = Years.SingleOrDefault(i => i.Value == DateTime.Today.Year);
+            }
         }
 
         public void UpdateRange()
@@ -99,13 +103,10 @@ namespace Kistl.Client.Presentables.FilterViewModels
             }
             set
             {
-                if (_year != value)
-                {
-                    _year = ItemViewModel.OnlyValid(value);
-                    UpdateIsSelected(Years, value);
-                    OnPropertyChanged("Year");
-                    UpdateRange();
-                }
+                _year = ItemViewModel.OnlyValid(value);
+                UpdateIsSelected(Years, value);
+                OnPropertyChanged("Year");
+                UpdateRange();
             }
         }
 
@@ -186,19 +187,14 @@ namespace Kistl.Client.Presentables.FilterViewModels
             }
             set
             {
-                if (_quater != value)
-                {
-                    _quater = ItemViewModel.OnlyValid(value);
-                    UpdateIsSelected(Quaters, value);
-                    OnPropertyChanged("Quater");
-                    if (_quater != null)
-                    {
-                        _month = null;
-                        UpdateIsSelected(Months, null);
-                        OnPropertyChanged("Month");
-                    }
-                    UpdateRange();
-                }
+                _quater = ItemViewModel.OnlyValid(value);
+                _month = null;
+                UpdateIsSelected(Months, _month);
+                UpdateIsSelected(Quaters, _quater);
+                OnPropertyChanged("Quater");
+                OnPropertyChanged("Month");
+                AllYear.IsSelected = _quater == null || !_quater.IsSelected;
+                UpdateRange();
             }
         }
 
@@ -239,19 +235,15 @@ namespace Kistl.Client.Presentables.FilterViewModels
             }
             set
             {
-                if (_month != value)
-                {
-                    _month = ItemViewModel.OnlyValid(value);
-                    UpdateIsSelected(Months, value);
-                    OnPropertyChanged("Month");
-                    if (_month != null)
-                    {
-                        _quater = null;
-                        UpdateIsSelected(Quaters, null);
-                        OnPropertyChanged("Quater");
-                    }
-                    UpdateRange();
-                }
+                _month = ItemViewModel.OnlyValid(value);
+                _quater = null;
+
+                UpdateIsSelected(Months, _month);
+                UpdateIsSelected(Quaters, _quater);
+                OnPropertyChanged("Month");
+                OnPropertyChanged("Quater");
+                AllYear.IsSelected = _month == null || !_month.IsSelected;
+                UpdateRange();
             }
         }
 
@@ -283,6 +275,35 @@ namespace Kistl.Client.Presentables.FilterViewModels
         }
         #endregion
 
+        #region AllYear
+        private ItemViewModel _allYear;
+        public ItemViewModel AllYear
+        {
+            get
+            {
+                if (_allYear == null)
+                {
+                    _allYear = new ItemViewModel(1, FilterViewModelResources.AllYear);
+                    _allYear.IsSelectedChangedByUser += (s, e) =>
+                    {
+                        if (_allYear.IsSelected)
+                        {
+                            var item = (ItemViewModel)s;
+                            _month = null;
+                            _quater = null;
+                            UpdateIsSelected(Months, null);
+                            UpdateIsSelected(Quaters, null);
+                            OnPropertyChanged("Month");
+                            OnPropertyChanged("Quater");
+                            UpdateRange();
+                        }
+                    };
+                }
+                return _allYear;
+            }
+        }
+        #endregion
+
         #region ItemViewModel
         private void UpdateIsSelected(IEnumerable<ItemViewModel> collection, ItemViewModel value)
         {
@@ -302,7 +323,7 @@ namespace Kistl.Client.Presentables.FilterViewModels
                 i.IsSelectedChangedByUser += (s, e) =>
                 {
                     var item = (ItemViewModel)s;
-                    setter(item);
+                    setter(item != null && item.IsSelected ? item : null);
                 };
             }
         }
