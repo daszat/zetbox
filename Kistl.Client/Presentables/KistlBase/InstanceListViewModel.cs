@@ -1165,7 +1165,7 @@ namespace Kistl.Client.Presentables.KistlBase
             OnPropertyChanged("InstancesCount");
             OnPropertyChanged("InstancesCountAsText");
 
-            if (SelectFirstOnLoad)
+            if (SelectFirstOnLoad && SelectedItem == null)
             {
                 this.SelectedItem = _instances.FirstOrDefault();
             }
