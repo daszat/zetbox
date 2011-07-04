@@ -381,4 +381,36 @@ namespace Kistl.Client.Presentables
             execute(data);
         }
     }
+
+    public class ContainerCommand : CommandViewModel
+    {
+        public new delegate ContainerCommand Factory(IKistlContext dataCtx, ViewModel parent, string label, string tooltip, params ICommandViewModel[] children);
+
+        public ContainerCommand(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent, string label, string tooltip, params ICommandViewModel[] children)
+            : base(appCtx, dataCtx, parent, label, tooltip)
+        {
+            if (children != null)
+            {
+                foreach (var c in children)
+                {
+                    base.Commands.Add(c);
+                }
+            }
+        }
+
+        public ContainerCommand(bool designMode, ViewModel progressDisplayer, string label)
+            : base(designMode, progressDisplayer, label)
+        {
+        }
+
+        public override bool CanExecute(object data)
+        {
+            return true;
+        }
+
+        protected override void DoExecute(object data)
+        {
+            // Nothing to do, just a container
+        }
+    }
 }

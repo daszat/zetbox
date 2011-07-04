@@ -7,63 +7,77 @@
                                xmlns:local="clr-namespace:Kistl.Client.WPF.View.KistlBase"
                                xmlns:clientKistlBase="clr-namespace:Kistl.Client.WPF.View.KistlBase"
                                xmlns:commands="clr-namespace:Kistl.Client.WPF.Commands;assembly=Kistl.Client.WPF.Toolkit"
+                               xmlns:viewmdl="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
                                commands:SmartRoutedUICommand.IsCommandSink="True">
-    <local:InstanceListBaseDisplay.CommandBindings>
-        <CommandBinding Command="NavigationCommands.Refresh"
-                        Executed="RefreshCommand_Executed" />
-    </local:InstanceListBaseDisplay.CommandBindings>
-    <DockPanel x:Name="ctrlInstanceList">
-        <StackPanel DockPanel.Dock="Top"
-                    Visibility="{Binding ShowFilter, Converter={StaticResource BooleanToVisibilityConverter}}"
-                    Margin="0 0 0 10">
-            <StackPanel.InputBindings>
-                <KeyBinding Key="Return"
-                            Command="NavigationCommands.Refresh" />
-            </StackPanel.InputBindings>
-            <ItemsControl ItemsSource="{Binding FilterViewModels}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <ContentPresenter Content="{Binding}"
-                                          ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </StackPanel>
-
-        <ctrls:WorkaroundToolBar DockPanel.Dock="Top"
-                                 ItemsSource="{Binding Commands}"
-                                 Visibility="{Binding ShowCommands, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <ToolBar.ItemTemplate>
-                <DataTemplate>
-                    <ctrls:CommandButton CommandViewModel="{Binding}"
-                                         CommandParameter="{Binding DataContext.SelectedItems, RelativeSource={RelativeSource AncestorType={x:Type clientKistlBase:InstanceListDisplay}}}"
-                                         Style="{StaticResource ImageToolbarButton}" />
-                </DataTemplate>
-            </ToolBar.ItemTemplate>
-        </ctrls:WorkaroundToolBar>
-
-        <GroupBox DockPanel.Dock="Top"
-                  Visibility="{Binding ShowMasterDetail, Converter={StaticResource BooleanToVisibilityConverter}}"
-                  Header="Details"
-                  Margin="0 0 0 10">
-            <ContentPresenter Content="{Binding SelectedDetailItem}"
-                              tk:VisualTypeTemplateSelector.RequestedKind="{Binding DataContext.RequestedEditorKind, ElementName=ctrlInstanceList, Mode=OneWay}"
+  <local:InstanceListBaseDisplay.CommandBindings>
+    <CommandBinding Command="NavigationCommands.Refresh"
+                    Executed="RefreshCommand_Executed" />
+  </local:InstanceListBaseDisplay.CommandBindings>
+  <DockPanel x:Name="ctrlInstanceList">
+    <StackPanel DockPanel.Dock="Top"
+                Visibility="{Binding ShowFilter, Converter={StaticResource BooleanToVisibilityConverter}}"
+                Margin="0 0 0 10">
+      <StackPanel.InputBindings>
+        <KeyBinding Key="Return"
+                    Command="NavigationCommands.Refresh" />
+      </StackPanel.InputBindings>
+      <ItemsControl ItemsSource="{Binding FilterViewModels}">
+        <ItemsControl.ItemTemplate>
+          <DataTemplate>
+            <ContentPresenter Content="{Binding}"
                               ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
-        </GroupBox>
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
+    </StackPanel>
 
-      <TextBlock DockPanel.Dock="Top"
-                 Margin="5 0 0 5"
-                 Text="{Binding InstancesCountAsText}" />
-      <ctrls:ZBoxListView x:Name="lst"
-                            BorderThickness="0"
-                            ItemsSource="{Binding Instances}"
-                            ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
-                            ItemContainerStyle="{StaticResource ListViewItemContainerStyle}"
-                            SelectedZBoxItems="{Binding SelectedItems}"
-                            SelectionMode="{Binding IsMultiselect, Converter={StaticResource BooleanMultiselectToSelectionModeConverter}}"
-                            KeyboardNavigation.TabNavigation="Continue"
-                            MouseDoubleClick="ItemActivatedHandler"
-                            GridViewColumnHeader.Click="ListView_HeaderClick">
-        </ctrls:ZBoxListView>
-    </DockPanel>
+    <ctrls:WorkaroundToolBar DockPanel.Dock="Top"
+                             ItemsSource="{Binding Commands}"
+                             Visibility="{Binding ShowCommands, Converter={StaticResource BooleanToVisibilityConverter}}">
+      <ctrls:WorkaroundToolBar.Resources>
+        <DataTemplate DataType="{x:Type viewmdl:CommandViewModel}">
+          <ctrls:CommandButton CommandViewModel="{Binding}"
+                               CommandParameter="{Binding DataContext.SelectedItems, RelativeSource={RelativeSource AncestorType={x:Type clientKistlBase:InstanceListDisplay}}}"
+                               Style="{StaticResource ImageToolbarButton}" />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmdl:ContainerCommand}">
+          <Menu>
+            <Menu.Resources>
+              <DataTemplate DataType="{x:Type viewmdl:CommandViewModel}">
+                <TextBlock Text="{Binding}"/>
+              </DataTemplate>
+            </Menu.Resources>
+            <MenuItem ItemsSource="{Binding Commands}"
+                      Header="{Binding Name}"
+                      ItemContainerStyle="{StaticResource CommandMenuItem}">
+            </MenuItem>
+          </Menu>
+        </DataTemplate>
+      </ctrls:WorkaroundToolBar.Resources>
+    </ctrls:WorkaroundToolBar>
+
+    <GroupBox DockPanel.Dock="Top"
+              Visibility="{Binding ShowMasterDetail, Converter={StaticResource BooleanToVisibilityConverter}}"
+              Header="Details"
+              Margin="0 0 0 10">
+      <ContentPresenter Content="{Binding SelectedDetailItem}"
+                        tk:VisualTypeTemplateSelector.RequestedKind="{Binding DataContext.RequestedEditorKind, ElementName=ctrlInstanceList, Mode=OneWay}"
+                        ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
+    </GroupBox>
+
+    <TextBlock DockPanel.Dock="Top"
+               Margin="5 0 0 5"
+               Text="{Binding InstancesCountAsText}" />
+    <ctrls:ZBoxListView x:Name="lst"
+                          BorderThickness="0"
+                          ItemsSource="{Binding Instances}"
+                          ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
+                          ItemContainerStyle="{StaticResource ListViewItemContainerStyle}"
+                          SelectedZBoxItems="{Binding SelectedItems}"
+                          SelectionMode="{Binding IsMultiselect, Converter={StaticResource BooleanMultiselectToSelectionModeConverter}}"
+                          KeyboardNavigation.TabNavigation="Continue"
+                          MouseDoubleClick="ItemActivatedHandler"
+                          GridViewColumnHeader.Click="ListView_HeaderClick">
+    </ctrls:ZBoxListView>
+  </DockPanel>
 </local:InstanceListBaseDisplay>

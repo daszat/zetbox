@@ -63,6 +63,24 @@ namespace Kistl.Client.Presentables.KistlBase {
         /// <summary>
         ///   Looks up a localized string similar to Export.
         /// </summary>
+        internal static string ExportContainerCommand {
+            get {
+                return ResourceManager.GetString("ExportContainerCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exports the current list.
+        /// </summary>
+        internal static string ExportContainerCommand_Tooltip {
+            get {
+                return ResourceManager.GetString("ExportContainerCommand_Tooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export.
+        /// </summary>
         internal static string ExportCSVCommand {
             get {
                 return ResourceManager.GetString("ExportCSVCommand", resourceCulture);

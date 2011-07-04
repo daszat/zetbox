@@ -325,6 +325,23 @@ namespace Kistl.Client.Presentables.KistlBase
             }
         }
 
+        private bool _ShowExportCommand = true;
+        public bool ShowExportCommand
+        {
+            get
+            {
+                return _ShowExportCommand;
+            }
+            set
+            {
+                if (_ShowExportCommand != value)
+                {
+                    _ShowExportCommand = value;
+                    UpdateCommands();
+                }
+            }
+        }
+
         protected override ObservableCollection<ICommandViewModel> CreateCommands()
         {
             var result = base.CreateCommands();
@@ -334,8 +351,7 @@ namespace Kistl.Client.Presentables.KistlBase
             if (ShowRefreshCommand) result.Add(RefreshCommand);
             if (AllowDelete) result.Add(DeleteCommand);
 
-            result.Add(PrintCommand);
-            result.Add(ExportCommand);
+            if (ShowExportCommand) result.Add(ExportContainerCommand);
 
             return result;
         }
@@ -347,11 +363,13 @@ namespace Kistl.Client.Presentables.KistlBase
             if (!ShowOpenCommand && commandsStore.Contains(OpenCommand)) commandsStore.Remove(OpenCommand);
             if (!ShowRefreshCommand && commandsStore.Contains(RefreshCommand)) commandsStore.Remove(RefreshCommand);
             if (!AllowDelete && commandsStore.Contains(DeleteCommand)) commandsStore.Remove(DeleteCommand);
+            if (!ShowExportCommand && commandsStore.Contains(ExportContainerCommand)) commandsStore.Remove(ExportContainerCommand);
 
             if (AllowAddNew && !commandsStore.Contains(NewCommand)) commandsStore.Insert(0, NewCommand);
             if (ShowOpenCommand && !commandsStore.Contains(OpenCommand)) commandsStore.Insert(AllowAddNew ? 1 : 0, OpenCommand);
             if (ShowRefreshCommand && !commandsStore.Contains(RefreshCommand)) commandsStore.Insert((AllowAddNew ? 1 : 0) + (ShowOpenCommand ? 1 : 0), RefreshCommand);
             if (AllowDelete && !commandsStore.Contains(DeleteCommand)) commandsStore.Insert((AllowAddNew ? 1 : 0) + (ShowOpenCommand ? 1 : 0) + (ShowRefreshCommand ? 1 : 0), DeleteCommand);
+            if (ShowExportCommand && !commandsStore.Contains(ExportContainerCommand)) commandsStore.Insert((AllowAddNew ? 1 : 0) + (ShowOpenCommand ? 1 : 0) + (ShowRefreshCommand ? 1 : 0) + (AllowDelete ? 1 : 0), ExportContainerCommand);
         }
 
         private bool? _showCommands = null;
@@ -656,6 +674,22 @@ namespace Kistl.Client.Presentables.KistlBase
             }
 
             new FileInfo(tmpFile).ShellExecute();
+        }
+
+        private ICommandViewModel _ExportContainerCommand = null;
+        public ICommandViewModel ExportContainerCommand
+        {
+            get
+            {
+                if (_ExportContainerCommand == null)
+                {
+                    _ExportContainerCommand = ViewModelFactory.CreateViewModel<ContainerCommand.Factory>().Invoke(DataContext, this,
+                        InstanceListViewModelResources.ExportContainerCommand,
+                        InstanceListViewModelResources.ExportContainerCommand_Tooltip,
+                        ExportCommand, PrintCommand);
+                }
+                return _ExportContainerCommand;
+            }
         }
 
         protected string CreateTempFile(string filename)

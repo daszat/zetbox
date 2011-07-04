@@ -6,81 +6,94 @@
                                xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"
                                xmlns:local="clr-namespace:Kistl.Client.WPF.View.KistlBase"
                                xmlns:clientKistlBase="clr-namespace:Kistl.Client.WPF.View.KistlBase"
+                               xmlns:viewmdl="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
                                xmlns:commands="clr-namespace:Kistl.Client.WPF.Commands;assembly=Kistl.Client.WPF.Toolkit"
                                commands:SmartRoutedUICommand.IsCommandSink="True">
-    <local:InstanceListBaseDisplay.Resources>
-        <!-- Force all grid cells to stretch -->
-        <Style TargetType="ListViewItem">
-            <Setter Property="HorizontalContentAlignment"
-                    Value="Stretch" />
-        </Style>
-    </local:InstanceListBaseDisplay.Resources>
-    <local:InstanceListBaseDisplay.CommandBindings>
-        <CommandBinding Command="NavigationCommands.Refresh"
-                        Executed="RefreshCommand_Executed" />
-    </local:InstanceListBaseDisplay.CommandBindings>
-    <Grid x:Name="ctrlInstanceList">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="250" />
-            <ColumnDefinition Width="5" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+  <local:InstanceListBaseDisplay.Resources>
+    <!-- Force all grid cells to stretch -->
+    <Style TargetType="ListViewItem">
+      <Setter Property="HorizontalContentAlignment"
+              Value="Stretch" />
+    </Style>
+  </local:InstanceListBaseDisplay.Resources>
+  <local:InstanceListBaseDisplay.CommandBindings>
+    <CommandBinding Command="NavigationCommands.Refresh"
+                    Executed="RefreshCommand_Executed" />
+  </local:InstanceListBaseDisplay.CommandBindings>
+  <Grid x:Name="ctrlInstanceList">
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="250" />
+      <ColumnDefinition Width="5" />
+      <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>
 
-        <DockPanel Grid.Column="0">
-            <StackPanel DockPanel.Dock="Top"
-                        Visibility="{Binding ShowFilter, Converter={StaticResource BooleanToVisibilityConverter}}"
-                        Margin="0 0 0 10">
-                <StackPanel.InputBindings>
-                    <KeyBinding Key="Return"
-                                Command="NavigationCommands.Refresh" />
-                </StackPanel.InputBindings>
-                <ItemsControl ItemsSource="{Binding FilterViewModels}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <ContentPresenter Grid.Column="1"
-                                              Content="{Binding}"
-                                              ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </StackPanel>
-            <ctrls:WorkaroundToolBar DockPanel.Dock="Top"
-                                     ItemsSource="{Binding Commands}"
-                                     Visibility="{Binding ShowCommands, Converter={StaticResource BooleanToVisibilityConverter}}">
-                <ToolBar.ItemTemplate>
-                    <DataTemplate>
-                        <ctrls:CommandButton CommandViewModel="{Binding}"
-                                             CommandParameter="{Binding DataContext.SelectedItems, RelativeSource={RelativeSource AncestorType={x:Type clientKistlBase:InstanceListHorizontalDisplay}}}"
-                                             Style="{StaticResource ImageToolbarButton}" />
-                    </DataTemplate>
-                </ToolBar.ItemTemplate>
-            </ctrls:WorkaroundToolBar>
-          <TextBlock DockPanel.Dock="Top"
-                     Text="{Binding InstancesCountAsText}"
-                     Margin="5 0 0 5"/>
-            <ctrls:ZBoxListView x:Name="lst"
-                                Margin="10"
-                                BorderThickness="0"
-                                ItemsSource="{Binding Instances}"
-                                ItemContainerStyle="{StaticResource ListViewItemContainerStyle}"
-                                ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
-                                SelectedZBoxItems="{Binding SelectedItems}"
-                                SelectionMode="{Binding IsMultiselect, Converter={StaticResource BooleanMultiselectToSelectionModeConverter}}"
-                                KeyboardNavigation.TabNavigation="Continue"
-                                MouseDoubleClick="ItemActivatedHandler"
-                                GridViewColumnHeader.Click="ListView_HeaderClick">
-            </ctrls:ZBoxListView>
-
-        </DockPanel>
-
-        <GridSplitter Grid.Column="1"
-                      HorizontalAlignment="Stretch" />
-
-        <ContentPresenter Grid.Column="2"
+    <DockPanel Grid.Column="0">
+      <StackPanel DockPanel.Dock="Top"
+                  Visibility="{Binding ShowFilter, Converter={StaticResource BooleanToVisibilityConverter}}"
+                  Margin="0 0 0 10">
+        <StackPanel.InputBindings>
+          <KeyBinding Key="Return"
+                      Command="NavigationCommands.Refresh" />
+        </StackPanel.InputBindings>
+        <ItemsControl ItemsSource="{Binding FilterViewModels}">
+          <ItemsControl.ItemTemplate>
+            <DataTemplate>
+              <ContentPresenter Grid.Column="1"
+                                Content="{Binding}"
+                                ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+      </StackPanel>
+      <ctrls:WorkaroundToolBar DockPanel.Dock="Top"
+                               ItemsSource="{Binding Commands}"
+                               Visibility="{Binding ShowCommands, Converter={StaticResource BooleanToVisibilityConverter}}">
+        <ctrls:WorkaroundToolBar.Resources>
+          <DataTemplate DataType="{x:Type viewmdl:CommandViewModel}">
+            <ctrls:CommandButton CommandViewModel="{Binding}"
+                                 CommandParameter="{Binding DataContext.SelectedItems, RelativeSource={RelativeSource AncestorType={x:Type clientKistlBase:InstanceListHorizontalDisplay}}}"
+                                 Style="{StaticResource ImageToolbarButton}" />
+          </DataTemplate>
+          <DataTemplate DataType="{x:Type viewmdl:ContainerCommand}">
+            <Menu Style="{StaticResource {x:Static ToolBar.MenuStyleKey}}">
+              <Menu.Resources>
+                <DataTemplate DataType="{x:Type viewmdl:CommandViewModel}">
+                  <TextBlock Text="{Binding}"/>
+                </DataTemplate>
+              </Menu.Resources>
+              <MenuItem ItemsSource="{Binding Commands}"
+                        Header="{Binding Name}"
+                        ItemContainerStyle="{StaticResource CommandMenuItem}">
+              </MenuItem>
+            </Menu>
+          </DataTemplate>        </ctrls:WorkaroundToolBar.Resources>
+      </ctrls:WorkaroundToolBar>
+      <TextBlock DockPanel.Dock="Top"
+                 Text="{Binding InstancesCountAsText}"
+                 Margin="5 0 0 5"/>
+      <ctrls:ZBoxListView x:Name="lst"
                           Margin="10"
-                          Visibility="{Binding ShowMasterDetail, Converter={StaticResource BooleanToVisibilityConverter}}"
-                          Content="{Binding SelectedDetailItem}"
-                          tk:VisualTypeTemplateSelector.RequestedKind="{Binding DataContext.RequestedEditorKind, ElementName=ctrlInstanceList, Mode=OneWay}"
-                          ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
-    </Grid>
+                          BorderThickness="0"
+                          ItemsSource="{Binding Instances}"
+                          ItemContainerStyle="{StaticResource ListViewItemContainerStyle}"
+                          ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
+                          SelectedZBoxItems="{Binding SelectedItems}"
+                          SelectionMode="{Binding IsMultiselect, Converter={StaticResource BooleanMultiselectToSelectionModeConverter}}"
+                          KeyboardNavigation.TabNavigation="Continue"
+                          MouseDoubleClick="ItemActivatedHandler"
+                          GridViewColumnHeader.Click="ListView_HeaderClick">
+      </ctrls:ZBoxListView>
+
+    </DockPanel>
+
+    <GridSplitter Grid.Column="1"
+                  HorizontalAlignment="Stretch" />
+
+    <ContentPresenter Grid.Column="2"
+                      Margin="10"
+                      Visibility="{Binding ShowMasterDetail, Converter={StaticResource BooleanToVisibilityConverter}}"
+                      Content="{Binding SelectedDetailItem}"
+                      tk:VisualTypeTemplateSelector.RequestedKind="{Binding DataContext.RequestedEditorKind, ElementName=ctrlInstanceList, Mode=OneWay}"
+                      ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
+  </Grid>
 </local:InstanceListBaseDisplay>
