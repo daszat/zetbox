@@ -165,7 +165,9 @@ namespace Kistl.Client.Presentables.Calendar
         {
             get
             {
-                return (int)((To - From).TotalHours * 44.0);
+                var length = (To - From).TotalHours;
+                if (length < 0.5) length = 0.5; // display at least half a line
+                return (int)(length * 44.0);
             }
         }
 
