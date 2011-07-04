@@ -150,6 +150,8 @@ namespace Kistl.Client.Models
 
         public bool Required { get; set; }
 
+        public bool RefreshOnFilterChanged { get; set; }
+
         public event EventHandler FilterChanged;
         protected void OnFilterChanged()
         {
@@ -177,6 +179,8 @@ namespace Kistl.Client.Models
                 new ClassValueModel<string>(base.Label, FilterModelsResources.ToStringFilterModel_Description, true, false), 
                 frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_ReferencePropertyModel_String)
             )); // ClassValueViewModel<string>
+
+            base.RefreshOnFilterChanged = false;
         }
 
         public override IEnumerable GetResult(IEnumerable src)
@@ -188,7 +192,6 @@ namespace Kistl.Client.Models
 
     public class SingleValueFilterModel : FilterModel
     {
-
         public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, string predicate, Guid enumDef)
         {
             return Create(frozenCtx, label, predicate, enumDef, null);
@@ -203,7 +206,8 @@ namespace Kistl.Client.Models
                 Label = label,
                 ValueSource = FilterValueSource.FromExpression(predicate),
                 Operator = FilterOperators.Equals,
-                ViewModelType = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_SingleValueFilterViewModel)
+                ViewModelType = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_SingleValueFilterViewModel),
+                RefreshOnFilterChanged = true,
             };
             fmdl.FilterArguments.Add(new FilterArgumentConfig(
                 new EnumerationValueModel(label, "", true, false, requestedKind, frozenCtx.FindPersistenceObject<Enumeration>(enumDef)),
@@ -226,7 +230,8 @@ namespace Kistl.Client.Models
                 Label = label,
                 ValueSource = FilterValueSource.FromExpression(predicate),
                 Operator = FilterOperators.Equals,
-                ViewModelType = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_SingleValueFilterViewModel)
+                ViewModelType = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_SingleValueFilterViewModel),
+                RefreshOnFilterChanged = true,
             };
             fmdl.FilterArguments.Add(new FilterArgumentConfig(
                 new ObjectReferenceValueModel(label, "", true, false, requestedKind, referencedClass),
@@ -248,7 +253,8 @@ namespace Kistl.Client.Models
                 Label = label,
                 ValueSource = FilterValueSource.FromExpression(predicate),
                 Operator = FilterOperators.Equals,
-                ViewModelType = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_SingleValueFilterViewModel)
+                ViewModelType = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_SingleValueFilterViewModel),
+                RefreshOnFilterChanged = false,
             };
 
             ViewModelDescriptor vDesc = null;
@@ -286,6 +292,7 @@ namespace Kistl.Client.Models
         public SingleValueFilterModel()
         {
             Operator = FilterOperators.Equals;
+            base.RefreshOnFilterChanged = false;
         }
 
         public FilterOperators Operator { get; set; }
@@ -330,6 +337,7 @@ namespace Kistl.Client.Models
 
         protected MonthValueFilterModel()
         {
+            base.RefreshOnFilterChanged = true;
         }
 
         protected override string GetPredicate()
@@ -417,6 +425,7 @@ namespace Kistl.Client.Models
 
         protected DateRangeFilterModel()
         {
+            base.RefreshOnFilterChanged = true;
         }
 
         protected override string GetPredicate()
@@ -624,6 +633,11 @@ namespace Kistl.Client.Models
             fmdl.FilterArguments.Add(new FilterArgumentConfig(valueMdl,
                 frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableValuePropertyModel_Bool)));
             return fmdl;
+        }
+
+        public OptionalPredicateFilterModel()
+        {
+            base.RefreshOnFilterChanged = true;
         }
 
         protected override string GetPredicate()

@@ -229,6 +229,28 @@ namespace Kistl.Client.Presentables.KistlBase
 
         void _filter_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
+            if (e.NewItems != null)
+            {
+                foreach (var item in e.NewItems.OfType<IUIFilterModel>())
+                {
+                    // attach change events
+                    item.FilterChanged += new EventHandler(delegate(object s, EventArgs a)
+                    {
+                        var f = s as FilterModel;
+                        if (f == null || !f.RefreshOnFilterChanged) return;
+
+                        if (f.IsServerSideFilter)
+                        {
+                            ReloadInstances();
+                        }
+                        else
+                        {
+                            ExecutePostFilter();
+                        }
+                    });
+                }
+            }
+
             _FilterViewModels = null;
             OnPropertyChanged("FilterViewModels");
             OnPropertyChanged("ShowFilter");

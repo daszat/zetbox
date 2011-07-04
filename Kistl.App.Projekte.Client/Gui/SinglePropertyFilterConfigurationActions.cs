@@ -30,6 +30,14 @@ namespace Kistl.App.GUI
             {
                 mdl.Operator = FilterOperators.Contains;
             }
+            else if (obj.Property is EnumerationProperty)
+            {
+                mdl.RefreshOnFilterChanged = true;
+            }
+            else if (obj.Property is ObjectReferenceProperty)
+            {
+                mdl.RefreshOnFilterChanged = true;
+            }
             e.Result = mdl;
         }
 
