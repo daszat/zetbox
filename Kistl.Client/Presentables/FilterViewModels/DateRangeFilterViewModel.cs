@@ -288,7 +288,6 @@ namespace Kistl.Client.Presentables.FilterViewModels
                     {
                         if (_allYear.IsSelected)
                         {
-                            var item = (ItemViewModel)s;
                             _month = null;
                             _quater = null;
                             UpdateIsSelected(Months, null);
