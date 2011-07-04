@@ -95,6 +95,8 @@ namespace Kistl.Client.Models
 
         public string ExtractFormattedValue(DataObjectViewModel obj)
         {
+            if (obj == null) return string.Empty;
+
             string val = null;
             switch (this.Type)
             {
