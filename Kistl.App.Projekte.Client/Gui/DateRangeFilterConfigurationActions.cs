@@ -26,7 +26,14 @@ namespace Kistl.App.GUI
         [Invocation]
         public static void CreateFilterModel(Kistl.App.GUI.DateRangeFilterConfiguration obj, MethodReturnEventArgs<IFilterModel> e)
         {
-            e.Result = DateRangeFilterModel.Create(FrozenContext, obj.GetLabel(), FilterValueSource.FromProperty(obj.Property), obj.IsCurrentYearDefault ?? false, obj.IsCurrentQuaterDefault ?? false, obj.IsCurrentMonthDefault ?? false);
+            e.Result = DateRangeFilterModel.Create(
+                FrozenContext, 
+                obj.GetLabel(), 
+                FilterValueSource.FromProperty(obj.Property), 
+                obj.RequestedKind,
+                obj.IsCurrentYearDefault ?? false, 
+                obj.IsCurrentQuaterDefault ?? false, 
+                obj.IsCurrentMonthDefault ?? false);
         }
 
         [Invocation]

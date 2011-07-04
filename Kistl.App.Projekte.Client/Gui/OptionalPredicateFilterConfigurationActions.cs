@@ -32,6 +32,7 @@ namespace Kistl.App.GUI
             mdl.ValueSource = FilterValueSource.FromExpression(obj.Predicate);
 
             mdl.ViewModelType = obj.ViewModelDescriptor;
+            mdl.RequestedKind = obj.RequestedKind;
 
             var valueMdl = new BoolValueModel("", "", false, false);
             valueMdl.Value = false;

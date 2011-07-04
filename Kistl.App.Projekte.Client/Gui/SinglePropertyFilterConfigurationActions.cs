@@ -25,6 +25,8 @@ namespace Kistl.App.GUI
             mdl.ValueSource = FilterValueSource.FromProperty(obj.Property);
 
             mdl.ViewModelType = obj.ViewModelDescriptor;
+            mdl.RequestedKind = obj.RequestedKind;
+
             mdl.FilterArguments.Add(new FilterArgumentConfig(obj.Property.GetDetachedValueModel(true), /*cfg.ArgumentViewModel ?? */ obj.Property.ValueModelDescriptor));
             if (obj.Property is StringProperty)
             {

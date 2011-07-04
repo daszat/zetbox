@@ -13,7 +13,7 @@ namespace Kistl.Client.Models
     using Kistl.App.Base;
     using Kistl.App.GUI;
     using Kistl.Client.Presentables.ValueViewModels;
-    
+
     public class FilterEvaluator
     {
         public List<FilterModel> Filters { get; private set; }
@@ -54,6 +54,8 @@ namespace Kistl.Client.Models
     public interface IUIFilterModel : IFilterModel
     {
         ViewModelDescriptor ViewModelType { get; set; }
+        ControlKind RequestedKind { get; set; }
+
 
         string Label { get; }
         ObservableCollection<FilterArgumentConfig> FilterArguments { get; }
@@ -133,6 +135,15 @@ namespace Kistl.Client.Models
         }
 
         public ViewModelDescriptor ViewModelType { get; set; }
+        /// <summary>
+        /// Used to override DefaultKind in code
+        /// </summary>
+        private ControlKind _RequestedKind;
+        public virtual ControlKind RequestedKind
+        {
+            get { return _RequestedKind; }
+            set { _RequestedKind = value; }
+        }
 
         public string Label
         {
@@ -176,7 +187,7 @@ namespace Kistl.Client.Models
             base.Label = FilterModelsResources.ToStringFilterModel_Label;
             base.ViewModelType = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_SingleValueFilterViewModel);
             base.FilterArguments.Add(new FilterArgumentConfig(
-                new ClassValueModel<string>(base.Label, FilterModelsResources.ToStringFilterModel_Description, true, false), 
+                new ClassValueModel<string>(base.Label, FilterModelsResources.ToStringFilterModel_Description, true, false),
                 frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_ReferencePropertyModel_String)
             )); // ClassValueViewModel<string>
 
@@ -194,10 +205,10 @@ namespace Kistl.Client.Models
     {
         public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, string predicate, Guid enumDef)
         {
-            return Create(frozenCtx, label, predicate, enumDef, null);
+            return Create(frozenCtx, label, predicate, enumDef, null, null);
         }
 
-        public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, string predicate, Guid enumDef, ControlKind requestedKind)
+        public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, string predicate, Guid enumDef, ControlKind requestedKind, ControlKind requestedArgumentKind)
         {
             if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
 
@@ -207,10 +218,11 @@ namespace Kistl.Client.Models
                 ValueSource = FilterValueSource.FromExpression(predicate),
                 Operator = FilterOperators.Equals,
                 ViewModelType = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_SingleValueFilterViewModel),
+                RequestedKind = requestedKind,
                 RefreshOnFilterChanged = true,
             };
             fmdl.FilterArguments.Add(new FilterArgumentConfig(
-                new EnumerationValueModel(label, "", true, false, requestedKind, frozenCtx.FindPersistenceObject<Enumeration>(enumDef)),
+                new EnumerationValueModel(label, "", true, false, requestedArgumentKind, frozenCtx.FindPersistenceObject<Enumeration>(enumDef)),
                 frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableValuePropertyModel_Enum)));
             return fmdl;
         }
@@ -218,10 +230,10 @@ namespace Kistl.Client.Models
 
         public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, string predicate, ObjectClass referencedClass)
         {
-            return Create(frozenCtx, label, predicate, referencedClass, null);
+            return Create(frozenCtx, label, predicate, referencedClass, null, null);
         }
 
-        public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, string predicate, ObjectClass referencedClass, ControlKind requestedKind)
+        public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, string predicate, ObjectClass referencedClass, ControlKind requestedKind, ControlKind requestedArgumentKind)
         {
             if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
 
@@ -231,20 +243,21 @@ namespace Kistl.Client.Models
                 ValueSource = FilterValueSource.FromExpression(predicate),
                 Operator = FilterOperators.Equals,
                 ViewModelType = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_SingleValueFilterViewModel),
+                RequestedKind = requestedKind,
                 RefreshOnFilterChanged = true,
             };
             fmdl.FilterArguments.Add(new FilterArgumentConfig(
-                new ObjectReferenceValueModel(label, "", true, false, requestedKind, referencedClass),
+                new ObjectReferenceValueModel(label, "", true, false, requestedArgumentKind, referencedClass),
                 frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_ObjectReferenceModel)));
             return fmdl;
         }
 
         public static SingleValueFilterModel Create<T>(IFrozenContext frozenCtx, string label, string predicate)
         {
-            return Create<T>(frozenCtx, label, predicate, null);
+            return Create<T>(frozenCtx, label, predicate, null, null);
         }
 
-        public static SingleValueFilterModel Create<T>(IFrozenContext frozenCtx, string label, string predicate, ControlKind requestedKind)
+        public static SingleValueFilterModel Create<T>(IFrozenContext frozenCtx, string label, string predicate, ControlKind requestedKind, ControlKind requestedArgumentKind)
         {
             if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
 
@@ -254,6 +267,7 @@ namespace Kistl.Client.Models
                 ValueSource = FilterValueSource.FromExpression(predicate),
                 Operator = FilterOperators.Equals,
                 ViewModelType = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_SingleValueFilterViewModel),
+                RequestedKind = requestedKind,
                 RefreshOnFilterChanged = false,
             };
 
@@ -262,22 +276,22 @@ namespace Kistl.Client.Models
             if (typeof(T) == typeof(decimal))
             {
                 vDesc = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableValuePropertyModel_Decimal);
-                mdl = new NullableStructValueModel<decimal>(label, "", true, false, requestedKind);
+                mdl = new NullableStructValueModel<decimal>(label, "", true, false, requestedArgumentKind);
             }
             else if (typeof(T) == typeof(int))
             {
                 vDesc = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableValuePropertyModel_Int);
-                mdl = new NullableStructValueModel<int>(label, "", true, false, requestedKind);
+                mdl = new NullableStructValueModel<int>(label, "", true, false, requestedArgumentKind);
             }
             else if (typeof(T) == typeof(double))
             {
                 vDesc = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableValuePropertyModel_Double);
-                mdl = new NullableStructValueModel<double>(label, "", true, false, requestedKind);
+                mdl = new NullableStructValueModel<double>(label, "", true, false, requestedArgumentKind);
             }
             else if (typeof(T) == typeof(string))
             {
                 vDesc = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_ReferencePropertyModel_String);
-                mdl = new ClassValueModel<string>(label, "", true, false, requestedKind);
+                mdl = new ClassValueModel<string>(label, "", true, false, requestedArgumentKind);
                 fmdl.Operator = FilterOperators.Contains;
             }
             else
@@ -315,15 +329,21 @@ namespace Kistl.Client.Models
     {
         public static MonthValueFilterModel Create(IFrozenContext frozenCtx, string label, IFilterValueSource valueSource, bool setDefault)
         {
+            return Create(frozenCtx, label, valueSource, setDefault, null);
+        }
+
+        public static MonthValueFilterModel Create(IFrozenContext frozenCtx, string label, IFilterValueSource valueSource, bool setDefault, ControlKind requestedKind)
+        {
             if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
 
-            var valMdl = new DateTimeValueModel(label, "", true, false); 
+            var valMdl = new DateTimeValueModel(label, "", true, false);
             var mdl = new MonthValueFilterModel();
             mdl.Label = label;
             mdl.ValueSource = valueSource;
             mdl.ViewModelType = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_SingleValueFilterViewModel);
+            mdl.RequestedKind = requestedKind;
             mdl.FilterArguments.Add(new FilterArgumentConfig(
-                valMdl, 
+                valMdl,
                 /*cfg.ArgumentViewModel ?? */ frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableMonthPropertyViewModel)));
 
             if (setDefault)
@@ -350,6 +370,11 @@ namespace Kistl.Client.Models
     {
         public static YearValueFilterModel Create(IFrozenContext frozenCtx, string label, IFilterValueSource valueSource, bool setDefault)
         {
+            return Create(frozenCtx, label, valueSource, setDefault, null);
+        }
+
+        public static YearValueFilterModel Create(IFrozenContext frozenCtx, string label, IFilterValueSource valueSource, bool setDefault, ControlKind requestedKind)
+        {
             if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
 
             var valMdl = new NullableStructValueModel<int>(label, "", true, false);
@@ -357,6 +382,7 @@ namespace Kistl.Client.Models
             mdl.Label = label;
             mdl.ValueSource = valueSource;
             mdl.ViewModelType = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_SingleValueFilterViewModel);
+            mdl.RequestedKind = requestedKind;
             mdl.FilterArguments.Add(new FilterArgumentConfig(
                 valMdl,
                 /*cfg.ArgumentViewModel ?? */ frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableValuePropertyModel_Int)));
@@ -382,7 +408,7 @@ namespace Kistl.Client.Models
 
     public class DateRangeFilterModel : FilterModel
     {
-        public static DateRangeFilterModel Create(IFrozenContext frozenCtx, string label, IFilterValueSource valueSource, bool setYearDefault, bool setQuaterDefault, bool setMonthDefault)
+        public static DateRangeFilterModel Create(IFrozenContext frozenCtx, string label, IFilterValueSource valueSource, ControlKind requestedKind, bool setYearDefault, bool setQuaterDefault, bool setMonthDefault)
         {
             if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
 
@@ -390,12 +416,13 @@ namespace Kistl.Client.Models
             mdl.Label = label;
             mdl.ValueSource = valueSource;
             mdl.ViewModelType = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_DateRangeFilterViewModel);
+            mdl.RequestedKind = requestedKind;
 
             var fromMdl = new DateTimeValueModel(FilterModelsResources.From, "", true, false, DateTimeStyles.Date);
             var toMdl = new DateTimeValueModel(FilterModelsResources.To, "", true, false, DateTimeStyles.Date);
 
             mdl.FilterArguments.Add(new FilterArgumentConfig(
-                fromMdl, 
+                fromMdl,
                 /*cfg.ArgumentViewModel ?? */ frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableValuePropertyModel_DateTime)));
             mdl.FilterArguments.Add(new FilterArgumentConfig(
                 toMdl,
@@ -449,10 +476,10 @@ namespace Kistl.Client.Models
             }
         }
     }
-    
+
     public class RangeFilterModel : FilterModel
     {
-        public static RangeFilterModel Create<T>(IFrozenContext frozenCtx, string label, string predicate)
+        public static RangeFilterModel Create<T>(IFrozenContext frozenCtx, string label, string predicate, ControlKind requestedKind, ControlKind requestedArgumentKind)
             where T : struct
         {
             if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
@@ -461,7 +488,8 @@ namespace Kistl.Client.Models
             {
                 Label = label,
                 ValueSource = FilterValueSource.FromExpression(predicate),
-                ViewModelType = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_RangeFilterViewModel)
+                ViewModelType = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_RangeFilterViewModel),
+                RequestedKind = requestedKind,
             };
 
             ViewModelDescriptor vDesc = null;
@@ -483,10 +511,10 @@ namespace Kistl.Client.Models
             }
 
             rfmdl.FilterArguments.Add(new FilterArgumentConfig(
-                new NullableStructValueModel<T>("", "", true, false),
+                new NullableStructValueModel<T>("", "", true, false, requestedArgumentKind),
                 vDesc));
             rfmdl.FilterArguments.Add(new FilterArgumentConfig(
-                new NullableStructValueModel<T>("", "", true, false),
+                new NullableStructValueModel<T>("", "", true, false, requestedArgumentKind),
                 vDesc));
 
             return rfmdl;
@@ -620,15 +648,21 @@ namespace Kistl.Client.Models
     {
         public static OptionalPredicateFilterModel Create(IFrozenContext frozenCtx, string label, string predicate)
         {
+            return Create(frozenCtx, label, predicate, null, null);
+        }
+
+        public static OptionalPredicateFilterModel Create(IFrozenContext frozenCtx, string label, string predicate, ControlKind requestedKind, ControlKind requestedArgumentKind)
+        {
             if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
 
             var fmdl = new OptionalPredicateFilterModel()
             {
                 Label = label,
                 ValueSource = FilterValueSource.FromExpression(predicate),
-                ViewModelType = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_OptionalPredicateFilterViewModel)
+                ViewModelType = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_OptionalPredicateFilterViewModel),
+                RequestedKind = requestedKind,
             };
-            var valueMdl = new BoolValueModel(label, "", false, false);
+            var valueMdl = new BoolValueModel(label, "", false, false, requestedArgumentKind);
             valueMdl.Value = false;
             fmdl.FilterArguments.Add(new FilterArgumentConfig(valueMdl,
                 frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableValuePropertyModel_Bool)));
@@ -702,7 +736,7 @@ namespace Kistl.Client.Models
             }
         }
 
-        
+
         public bool Enabled
         {
             get { return true; }
@@ -713,7 +747,7 @@ namespace Kistl.Client.Models
             get { return false; }
         }
 
-        
+
         #endregion
     }
 }

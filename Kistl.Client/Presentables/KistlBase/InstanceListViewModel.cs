@@ -265,7 +265,12 @@ namespace Kistl.Client.Presentables.KistlBase
                 {
                     _FilterViewModels = new List<FilterViewModel>(Filter
                         .OfType<IUIFilterModel>()
-                        .Select(f => ViewModelFactory.CreateViewModel<FilterViewModel.Factory>(f.ViewModelType).Invoke(DataContext, this, f)));
+                        .Select(f =>
+                        {
+                            var result = ViewModelFactory.CreateViewModel<FilterViewModel.Factory>(f.ViewModelType).Invoke(DataContext, this, f);
+                            result.RequestedKind = f.RequestedKind;
+                            return result;
+                        }));
                 }
                 return _FilterViewModels;
             }
