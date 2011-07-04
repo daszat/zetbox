@@ -11,6 +11,8 @@ namespace Kistl.Client.Models
     using Kistl.App.Base;
     using Kistl.App.Extensions;
     using Kistl.App.GUI;
+    using Kistl.Client.Presentables;
+    using Kistl.Client.Presentables.ValueViewModels;
 
     public class ColumnDisplayModel
     {
@@ -89,6 +91,37 @@ namespace Kistl.Client.Models
         public override string ToString()
         {
             return Header;
+        }
+
+        public string ExtractFormattedValue(DataObjectViewModel obj)
+        {
+            string val = null;
+            switch (this.Type)
+            {
+                case ColumnDisplayModel.ColumnType.CalculatedProperty:
+                    val = ((IFormattedValueViewModel)obj.CalculatedPropertyModelsByName[this.Name]).FormattedValue;
+                    break;
+                case ColumnDisplayModel.ColumnType.Property:
+                    var propVal = obj.GetPropertyValue<object>(this.Name);
+                    val = propVal != null ? propVal.ToString() : string.Empty;
+                    break;
+                case ColumnDisplayModel.ColumnType.PropertyModel:
+                    DataObjectViewModel objVmdl = obj;
+                    IFormattedValueViewModel resultVMdl = null;
+                    foreach (var current in this.Name.Split('.'))
+                    {
+                        if (objVmdl == null) break;
+
+                        resultVMdl = objVmdl.PropertyModelsByName[current];
+                        if (resultVMdl is ObjectReferenceViewModel)
+                        {
+                            objVmdl = ((ObjectReferenceViewModel)resultVMdl).Value;
+                        }
+                    }
+                    val = resultVMdl != null ? resultVMdl.FormattedValue : string.Empty;
+                    break;
+            }
+            return val;
         }
     }
 
@@ -188,33 +221,23 @@ namespace Kistl.Client.Models
             var result = new List<ColumnDisplayModel>();
             var lb = p.GetLabel();
 
-            //if (p is CompoundObjectProperty)
-            //{
-            //    foreach (var i in ((CompoundObjectProperty)p).CompoundObjectDefinition.Properties)
-            //    {
-            //        result.AddRange(CreateColumnDisplayModels(mode, i, parentLabel + lb + ".", parentProp + p.Name + "."));
-            //    }
-            //}
-            //else
+            var colMdl = new ColumnDisplayModel()
             {
-                var colMdl = new ColumnDisplayModel()
-                {
-                    Header = parentLabel + lb,
-                    Name = parentProp + p.Name,
-                };
-                switch (mode)
-                {
-                    case Mode.ReadOnly:
-                        colMdl.ControlKind = p.ValueModelDescriptor.GetDefaultGridCellDisplayKind();
-                        colMdl.GridPreEditKind = p.ValueModelDescriptor.GetDefaultGridCellDisplayKind();
-                        break;
-                    case Mode.Editable:
-                        colMdl.ControlKind = p.ValueModelDescriptor.GetDefaultGridCellEditorKind();
-                        colMdl.GridPreEditKind = p.ValueModelDescriptor.GetDefaultGridCellPreEditorKind();
-                        break;
-                }
-                result.Add(colMdl);
+                Header = parentLabel + lb,
+                Name = parentProp + p.Name,
+            };
+            switch (mode)
+            {
+                case Mode.ReadOnly:
+                    colMdl.ControlKind = p.ValueModelDescriptor.GetDefaultGridCellDisplayKind();
+                    colMdl.GridPreEditKind = p.ValueModelDescriptor.GetDefaultGridCellDisplayKind();
+                    break;
+                case Mode.Editable:
+                    colMdl.ControlKind = p.ValueModelDescriptor.GetDefaultGridCellEditorKind();
+                    colMdl.GridPreEditKind = p.ValueModelDescriptor.GetDefaultGridCellPreEditorKind();
+                    break;
             }
+            result.Add(colMdl);
             return result;
         }
     }

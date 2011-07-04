@@ -22,6 +22,7 @@ namespace Kistl.Client.Presentables.KistlBase
     using Kistl.Client.Presentables.FilterViewModels;
     using Kistl.Client.Presentables.ValueViewModels;
     using ObjectEditor = Kistl.Client.Presentables.ObjectEditor;
+    using System.IO;
 
     public enum InstanceListViewMethod
     {
@@ -333,6 +334,9 @@ namespace Kistl.Client.Presentables.KistlBase
             if (ShowRefreshCommand) result.Add(RefreshCommand);
             if (AllowDelete) result.Add(DeleteCommand);
 
+            result.Add(PrintCommand);
+            result.Add(ExportCommand);
+
             return result;
         }
 
@@ -505,6 +509,100 @@ namespace Kistl.Client.Presentables.KistlBase
             }
 
             ReloadInstances();
+        }
+        #endregion
+
+        #region Print/Export
+        private ICommandViewModel _PrintCommand = null;
+        public ICommandViewModel PrintCommand
+        {
+            get
+            {
+                if (_PrintCommand == null)
+                {
+                    _PrintCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, 
+                        InstanceListViewModelResources.PrintCommand,
+                        InstanceListViewModelResources.PrintCommand_Tooltip, 
+                        Print, null);
+                    _PrintCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_Printer_png);
+                }
+                return _PrintCommand;
+            }
+        }
+
+        public void Print()
+        {
+        }
+
+        private ICommandViewModel _ExportCommand = null;
+        public ICommandViewModel ExportCommand
+        {
+            get
+            {
+                if (_ExportCommand == null)
+                {
+                    _ExportCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, 
+                        InstanceListViewModelResources.ExportCSVCommand,
+                        InstanceListViewModelResources.ExportCSVCommand_Tooltip, 
+                        Export, null);
+                }
+                return _ExportCommand;
+            }
+        }
+
+        public void Export()
+        {
+            var tmpFile = CreateTempFile("Export.csv");
+            using (var sw = new StreamWriter(tmpFile, false, Encoding.UTF8)) // use this constructor to ensure BOM
+            {
+                var cols = DisplayedColumns.Columns
+                    .Where(i => i.Type != ColumnDisplayModel.ColumnType.MethodModel)
+                    .ToList();
+                // Header
+                sw.WriteLine(string.Join(";", 
+                    cols.Select(i => i.Header).ToArray())
+                );
+
+                // Data
+                foreach (var obj in Instances)
+                {
+                    for (int colIdx = 0; colIdx < cols.Count; colIdx++)
+                    {
+                        string val = cols[colIdx].ExtractFormattedValue(obj);
+                        if (val != null)
+                        {
+                            var needsQuoting = val.IndexOfAny(new[] { ';', '\n', '\r', '"' }) >= 0;
+                            if (needsQuoting)
+                            {
+                                val = val.Replace("\"", "\"\"");
+                                val = "\"" + val + "\"";
+                            }
+                            sw.Write(val);
+                        }
+                        if (colIdx < cols.Count - 1)
+                        {
+                            sw.Write(";");
+                        }
+                        else
+                        {
+                            sw.WriteLine();
+                        }
+                    }
+                }
+            }
+
+            new FileInfo(tmpFile).ShellExecute();
+        }
+
+        
+
+        protected string CreateTempFile(string filename)
+        {
+            // TODO: Move that to a global helper and delete files on shutdown
+            var tmp = Path.GetTempFileName();
+            if (File.Exists(tmp)) File.Delete(tmp);
+            Directory.CreateDirectory(tmp);
+            return Path.Combine(tmp, filename);
         }
         #endregion
 

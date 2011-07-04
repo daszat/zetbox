@@ -117,10 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ExportCSVCommand" xml:space="preserve">
+    <value>Exportieren</value>
+  </data>
+  <data name="ExportCSVCommand_Tooltip" xml:space="preserve">
+    <value>Export als CSV nach Excel</value>
+  </data>
   <data name="InstancesCountAsText" xml:space="preserve">
     <value>Datensätze</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Liste der {0}</value>
+  </data>
+  <data name="PrintCommand" xml:space="preserve">
+    <value>Drucken</value>
+  </data>
+  <data name="PrintCommand_Tooltip" xml:space="preserve">
+    <value>Druckt die aktuelle Liste aus</value>
   </data>
 </root>
