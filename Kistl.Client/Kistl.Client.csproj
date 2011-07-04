@@ -58,6 +58,15 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="MigraDoc.DocumentObjectModel">
+      <HintPath>..\Libs\PDFsharp\MigraDoc.DocumentObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.Rendering">
+      <HintPath>..\Libs\PDFsharp\MigraDoc.Rendering.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp">
+      <HintPath>..\Libs\PDFsharp\PdfSharp.dll</HintPath>
+    </Reference>
     <Reference Include="QuickGraph">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\GraphSharp 1.0\QuickGraph.dll</HintPath>

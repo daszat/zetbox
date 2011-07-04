@@ -532,6 +532,71 @@ namespace Kistl.Client.Presentables.KistlBase
 
         public void Print()
         {
+            var doc = new MigraDoc.DocumentObjectModel.Document();
+            var s = doc.AddSection();
+            s.PageSetup.Orientation = MigraDoc.DocumentObjectModel.Orientation.Landscape;
+            s.PageSetup.PageFormat = MigraDoc.DocumentObjectModel.PageFormat.A4;
+            s.PageSetup.TopMargin = "2cm";
+            s.PageSetup.BottomMargin = "2cm";
+            s.PageSetup.LeftMargin = "2cm";
+            s.PageSetup.RightMargin = "3cm";
+            var tbl = s.AddTable();
+            tbl.Borders.Visible = true;
+
+            // Footer
+            var p = s.Footers.Primary.AddParagraph();
+            p.Format.Font.Size = 10;
+            p.Format.AddTabStop("245mm", MigraDoc.DocumentObjectModel.TabAlignment.Right);
+
+            p.AddText(DateTime.Today.ToShortDateString());
+            p.AddTab();
+            p.AddPageField();
+            p.AddText("/");
+            p.AddNumPagesField();
+
+            var cols = DisplayedColumns.Columns
+                .Where(i => i.Type != ColumnDisplayModel.ColumnType.MethodModel)
+                .ToList();
+
+            // TODO: Calc width more sophisticated
+            var width = new MigraDoc.DocumentObjectModel.Unit(250.0 * (1.0 / (double)cols.Count), MigraDoc.DocumentObjectModel.UnitType.Millimeter);
+
+            // Header
+            for (int colIdx = 0; colIdx < cols.Count; colIdx++)
+            {
+                var col = cols[colIdx];
+                tbl.AddColumn(width);
+            }
+
+            var row = tbl.AddRow();
+            row.HeadingFormat = true;
+            for (int colIdx = 0; colIdx < cols.Count; colIdx++)
+            {
+                var col = cols[colIdx];
+                p = row.Cells[colIdx].AddParagraph(col.Header ?? string.Empty);
+                p.Format.Font.Bold = true;
+            }
+
+
+            // Data
+            foreach (var obj in Instances)
+            {
+                row = tbl.AddRow();
+                for (int colIdx = 0; colIdx < cols.Count; colIdx++)
+                {
+                    string val = cols[colIdx].ExtractFormattedValue(obj);
+                    p = row.Cells[colIdx].AddParagraph(val ?? string.Empty);                    
+                }
+            }
+
+            var filename = CreateTempFile("Export.pdf");
+
+            var pdf = new MigraDoc.Rendering.PdfDocumentRenderer(true, PdfSharp.Pdf.PdfFontEmbedding.None);
+            pdf.Document = doc;
+            pdf.RenderDocument();
+            pdf.Save(filename);
+
+            new FileInfo(filename).ShellExecute();
         }
 
         private ICommandViewModel _ExportCommand = null;
@@ -560,8 +625,7 @@ namespace Kistl.Client.Presentables.KistlBase
                     .ToList();
                 // Header
                 sw.WriteLine(string.Join(";", 
-                    cols.Select(i => i.Header).ToArray())
-                );
+                    cols.Select(i => i.Header).ToArray()));
 
                 // Data
                 foreach (var obj in Instances)
@@ -593,8 +657,6 @@ namespace Kistl.Client.Presentables.KistlBase
 
             new FileInfo(tmpFile).ShellExecute();
         }
-
-        
 
         protected string CreateTempFile(string filename)
         {
