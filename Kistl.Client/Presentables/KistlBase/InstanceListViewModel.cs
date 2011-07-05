@@ -7,6 +7,7 @@ namespace Kistl.Client.Presentables.KistlBase
     using System.Collections.ObjectModel;
     using System.Collections.Specialized;
     using System.ComponentModel;
+    using System.IO;
     using System.Linq;
     using System.Linq.Dynamic;
     using System.Reflection;
@@ -22,7 +23,6 @@ namespace Kistl.Client.Presentables.KistlBase
     using Kistl.Client.Presentables.FilterViewModels;
     using Kistl.Client.Presentables.ValueViewModels;
     using ObjectEditor = Kistl.Client.Presentables.ObjectEditor;
-    using System.IO;
 
     public enum InstanceListViewMethod
     {
@@ -582,7 +582,7 @@ namespace Kistl.Client.Presentables.KistlBase
             // Header
             for (int colIdx = 0; colIdx < cols.Count; colIdx++)
             {
-                var col = cols[colIdx];
+                //var col = cols[colIdx];
                 tbl.AddColumn(width);
             }
 
