@@ -70,6 +70,23 @@ namespace Kistl.Client.WPF.View.KistlBase
                 {
                     WPFHelper.RefreshGridView(ListView, ViewModel.DisplayedColumns, SortPropertyNameProperty);
                     ListView.ItemContainerStyle = Application.Current.Resources["ListViewAsGridViewItemContainerStyle"] as Style;
+
+                    _lastHeaderClicked = ((GridView)ListView.View).Columns.FirstOrDefault(i => GetSortPropertyName(i) == ViewModel.SortProperty);
+                    _lastDirection = ViewModel.SortDirection;
+                    if (_lastHeaderClicked != null)
+                    {
+                        // Add arrow
+                        if (ViewModel.SortDirection == ListSortDirection.Ascending)
+                        {
+                            _lastHeaderClicked.HeaderTemplate =
+                              TryFindResource("GridHeaderTemplateArrowUp") as DataTemplate;
+                        }
+                        else
+                        {
+                            _lastHeaderClicked.HeaderTemplate =
+                              TryFindResource("GridHeaderTemplateArrowDown") as DataTemplate;
+                        }
+                    }
                 }
 
                 this.ApplyIsBusyBehaviour(ViewModel);
@@ -78,7 +95,7 @@ namespace Kistl.Client.WPF.View.KistlBase
 
 
         #region HeaderClickManagement
-        GridViewColumnHeader _lastHeaderClicked = null;
+        GridViewColumn _lastHeaderClicked = null;
         ListSortDirection _lastDirection = ListSortDirection.Ascending;
 
         protected void ListView_HeaderClick(object sender, RoutedEventArgs e)
@@ -93,7 +110,7 @@ namespace Kistl.Client.WPF.View.KistlBase
                     if (string.IsNullOrEmpty(propName)) return;
 
                     ListSortDirection direction;
-                    if (headerClicked != _lastHeaderClicked)
+                    if (headerClicked.Column != _lastHeaderClicked)
                     {
                         direction = ListSortDirection.Ascending;
                     }
@@ -104,27 +121,27 @@ namespace Kistl.Client.WPF.View.KistlBase
 
                     ViewModel.Sort(propName, direction);
 
+                    // Remove arrow from previously sorted header
+                    if (_lastHeaderClicked != null && _lastHeaderClicked != headerClicked.Column)
+                    {
+                        _lastHeaderClicked.HeaderTemplate = null;
+                    }
+
+                    // Save
+                    _lastHeaderClicked = headerClicked.Column;
+                    _lastDirection = direction;
+
                     // Add arrow
                     if (direction == ListSortDirection.Ascending)
                     {
-                        headerClicked.Column.HeaderTemplate =
+                        _lastHeaderClicked.HeaderTemplate =
                           TryFindResource("GridHeaderTemplateArrowUp") as DataTemplate;
                     }
                     else
                     {
-                        headerClicked.Column.HeaderTemplate =
+                        _lastHeaderClicked.HeaderTemplate =
                           TryFindResource("GridHeaderTemplateArrowDown") as DataTemplate;
                     }
-
-                    // Remove arrow from previously sorted header
-                    if (_lastHeaderClicked != null && _lastHeaderClicked != headerClicked)
-                    {
-                        _lastHeaderClicked.Column.HeaderTemplate = null;
-                    }
-
-
-                    _lastHeaderClicked = headerClicked;
-                    _lastDirection = direction;
                 }
             }
         }
@@ -135,7 +152,7 @@ namespace Kistl.Client.WPF.View.KistlBase
             ViewModel.ReloadInstances();
         }
 
-        #region IHasViewModel<DataTypeViewModel> Members
+        #region IHasViewModel<InstanceListViewModel> Members
 
         public InstanceListViewModel ViewModel
         {

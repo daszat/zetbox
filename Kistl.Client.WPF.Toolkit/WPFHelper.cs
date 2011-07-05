@@ -73,8 +73,6 @@ namespace Kistl.Client.WPF.Toolkit
                 var col = new DataGridTemplateColumn() { Header = desc.Header };
                 if (desc.RequestedWidth > 0) col.Width = desc.RequestedWidth;
 
-                if (sortProperty != null) col.SetValue(sortProperty, desc.Name);
-
                 var needEditor = desc.ControlKind != desc.GridPreEditKind;
 
                 var editorFactory = needEditor ? new FrameworkElementFactory(typeof(ContentPresenter)) : null;
@@ -87,6 +85,10 @@ namespace Kistl.Client.WPF.Toolkit
                         break;
                     case ColumnDisplayModel.ColumnType.PropertyModel:
                         {
+                            // Only database properties can be sorted
+                            // TODO: On the client side, maybe also Calculated Properties and ViewModels Properties
+                            if (sortProperty != null) col.SetValue(sortProperty, desc.Name);
+
                             var tmp = desc.Name.Split('.').Select(i => String.Format("PropertyModelsByName[{0}]", i));
                             var binding = "Object." + string.Join(".Value.", tmp.ToArray());
                             if (needEditor) editorFactory.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(binding), Mode = BindingMode.OneWay });
@@ -153,8 +155,6 @@ namespace Kistl.Client.WPF.Toolkit
                 var col = new GridViewColumn() { Header = desc.Header };
                 if (desc.RequestedWidth > 0) col.Width = desc.RequestedWidth;
 
-                if (sortProperty != null) col.SetValue(sortProperty, desc.Name);
-
                 DataTemplate result = new DataTemplate();
                 var cpFef = new FrameworkElementFactory(typeof(ContentPresenter));
                 switch (desc.Type)
@@ -164,6 +164,8 @@ namespace Kistl.Client.WPF.Toolkit
                         break;
                     case ColumnDisplayModel.ColumnType.PropertyModel:
                         {
+                            if (sortProperty != null) col.SetValue(sortProperty, desc.Name);
+
                             var tmp = desc.Name.Split('.').Select(i => String.Format("PropertyModelsByName[{0}]", i));
                             var binding = string.Join(".Value.", tmp.ToArray());
                             cpFef.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(binding), Mode = BindingMode.OneWay });
