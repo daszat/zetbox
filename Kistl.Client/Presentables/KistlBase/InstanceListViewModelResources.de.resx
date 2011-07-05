@@ -141,4 +141,7 @@
   <data name="PrintCommand_Tooltip" xml:space="preserve">
     <value>Druckt die aktuelle Liste aus</value>
   </data>
+  <data name="InstancesCountWarning" xml:space="preserve">
+    <value>Warnung! Nicht alle Datensätze wurden geladen</value>
+  </data>
 </root>

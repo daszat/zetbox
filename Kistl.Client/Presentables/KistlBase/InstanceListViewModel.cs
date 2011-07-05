@@ -465,6 +465,8 @@ namespace Kistl.Client.Presentables.KistlBase
                 OnPropertyChanged("Instances");
                 OnPropertyChanged("InstancesCount");
                 OnPropertyChanged("InstancesCountAsText");
+                OnPropertyChanged("InstancesCountWarning");
+                OnPropertyChanged("InstancesCountWarningText");
 
                 this.SelectedItem = mdl;
                 ViewModelFactory.ShowModel(mdl, true);
@@ -992,6 +994,22 @@ namespace Kistl.Client.Presentables.KistlBase
                     return string.Format("{0} {1}", InstancesCount, InstanceListViewModelResources.InstancesCountAsText);
             }
         }
+
+        public bool InstancesCountWarning
+        {
+            get
+            {
+                return InstancesCount >= Helper.MAXLISTCOUNT;
+            }
+        }
+
+        public string InstancesCountWarningText
+        {
+            get
+            {
+                return InstancesCount >= Helper.MAXLISTCOUNT ? InstanceListViewModelResources.InstancesCountWarning : string.Empty;
+            }
+        }
         #endregion
 
         #region Sorting
@@ -1002,8 +1020,28 @@ namespace Kistl.Client.Presentables.KistlBase
             if (string.IsNullOrEmpty(propName)) throw new ArgumentNullException("propName");
             _sortProperty = propName;
             _sortDirection = direction;
-            ExecutePostFilter();
+            if (_instancesCache != null && _instancesCache.Count < Helper.MAXLISTCOUNT)
+            {
+                ExecutePostFilter();
+            }
+            else
+            {
+                LoadInstances();
+            }
         }
+        public void SetInitialSort(string propName)
+        {
+            SetInitialSort(propName, ListSortDirection.Ascending);
+        }
+        public void SetInitialSort(string propName, ListSortDirection direction)
+        {
+            if (string.IsNullOrEmpty(propName)) throw new ArgumentNullException("propName");
+            _sortProperty = propName;
+            _sortDirection = direction;
+        }
+
+        public string SortProperty { get { return _sortProperty; } }
+        public ListSortDirection SortDirection { get { return _sortDirection; } }
         #endregion
 
         #region Opening items
@@ -1387,6 +1425,8 @@ namespace Kistl.Client.Presentables.KistlBase
             OnPropertyChanged("Instances");
             OnPropertyChanged("InstancesCount");
             OnPropertyChanged("InstancesCountAsText");
+            OnPropertyChanged("InstancesCountWarning");
+            OnPropertyChanged("InstancesCountWarningText");
 
             if (SelectFirstOnLoad && SelectedItem == null)
             {

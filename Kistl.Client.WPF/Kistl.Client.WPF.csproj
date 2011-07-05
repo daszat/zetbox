@@ -169,6 +169,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\KistlBase\InstanceListElementCount.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\SimpleDataObjectEditorDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -542,6 +546,9 @@
     </Compile>
     <Compile Include="View\Filters\DateRangeFilterEditor.xaml.cs">
       <DependentUpon>DateRangeFilterEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\KistlBase\InstanceListElementCount.xaml.cs">
+      <DependentUpon>InstanceListElementCount.xaml</DependentUpon>
     </Compile>
     <Compile Include="WpfToolkitResources.Designer.cs">
       <AutoGen>True</AutoGen>

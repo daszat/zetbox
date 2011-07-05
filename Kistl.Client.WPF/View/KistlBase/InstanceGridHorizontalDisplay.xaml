@@ -75,9 +75,7 @@
           </Style>
         </ctrls:WorkaroundToolBar.Resources>
       </ctrls:WorkaroundToolBar>
-      <TextBlock DockPanel.Dock="Top"
-                 Text="{Binding InstancesCountAsText}"
-                 Margin="5 0 0 5" />
+      <local:InstanceListElementCount DockPanel.Dock="Top" />
       <ctrls:ZBoxDataGrid x:Name="lst"
                           Margin="10"
                           BorderThickness="0"

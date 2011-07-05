@@ -72,9 +72,7 @@
                         ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
     </GroupBox>
 
-    <TextBlock DockPanel.Dock="Top"
-               Margin="5 0 0 5"
-               Text="{Binding InstancesCountAsText}" />
+    <local:InstanceListElementCount DockPanel.Dock="Top" />
     <ctrls:ZBoxListView x:Name="lst"
                         BorderThickness="0"
                         ItemsSource="{Binding Instances}"

@@ -106,6 +106,15 @@ namespace Kistl.Client.Presentables.KistlBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Warning! Not all items has been loaded..
+        /// </summary>
+        internal static string InstancesCountWarning {
+            get {
+                return ResourceManager.GetString("InstancesCountWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to List of {0}.
         /// </summary>
         internal static string Name {
