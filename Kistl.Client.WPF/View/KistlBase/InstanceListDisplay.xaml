@@ -53,6 +53,13 @@
             </MenuItem>
           </Menu>
         </DataTemplate>
+        <!-- inspired by http://stackoverflow.com/q/6574377/4918 -->
+        <Style TargetType="Menu">
+          <Setter Property="Margin"
+                  Value="0,1,0,0"/>
+          <Setter Property="Background"
+                  Value="#00000000"/>
+        </Style>
       </ctrls:WorkaroundToolBar.Resources>
     </ctrls:WorkaroundToolBar>
 
@@ -69,15 +76,15 @@
                Margin="5 0 0 5"
                Text="{Binding InstancesCountAsText}" />
     <ctrls:ZBoxListView x:Name="lst"
-                          BorderThickness="0"
-                          ItemsSource="{Binding Instances}"
-                          ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
-                          ItemContainerStyle="{StaticResource ListViewItemContainerStyle}"
-                          SelectedZBoxItems="{Binding SelectedItems}"
-                          SelectionMode="{Binding IsMultiselect, Converter={StaticResource BooleanMultiselectToSelectionModeConverter}}"
-                          KeyboardNavigation.TabNavigation="Continue"
-                          MouseDoubleClick="ItemActivatedHandler"
-                          GridViewColumnHeader.Click="ListView_HeaderClick">
+                        BorderThickness="0"
+                        ItemsSource="{Binding Instances}"
+                        ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
+                        ItemContainerStyle="{StaticResource ListViewItemContainerStyle}"
+                        SelectedZBoxItems="{Binding SelectedItems}"
+                        SelectionMode="{Binding IsMultiselect, Converter={StaticResource BooleanMultiselectToSelectionModeConverter}}"
+                        KeyboardNavigation.TabNavigation="Continue"
+                        MouseDoubleClick="ItemActivatedHandler"
+                        GridViewColumnHeader.Click="ListView_HeaderClick">
     </ctrls:ZBoxListView>
   </DockPanel>
 </local:InstanceListBaseDisplay>
