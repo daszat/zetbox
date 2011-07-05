@@ -3,7 +3,7 @@
   <ConfigName>Default Server Configuration</ConfigName>
   <Server StartServer="true">
     <ConnectionStrings>
-      <Database Name="Memory" Schema="Memory" Provider="System.Data.SqlClient">P:\Kistl\Kistl.Server\Database\Database.xml</Database>
+      <Database Name="Kistl" Schema="Memory" Provider="System.Data.SqlClient">P:\Kistl\Kistl.Server\Database\Database.xml</Database>
     </ConnectionStrings>
     <DocumentStore>DocumentStore\Server\</DocumentStore>
     <CodeGenWorkingPath>bin\CodeGenNext</CodeGenWorkingPath>
