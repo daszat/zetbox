@@ -46,23 +46,28 @@ namespace Kistl.Client.WPF.CustomControls
             {
                 this.Content = "Command Button";
             }
+            this.CommandTarget = this;
         }
 
         public ICommandViewModel CommandViewModel
         {
             get { return (ICommandViewModel)GetValue(CommandViewModelProperty); }
-            set
-            {
-                SetValue(CommandViewModelProperty, value);
-                if(value is ViewModel) WPFHelper.ApplyIsBusyBehaviour(this, (ViewModel)value);
-            }
+            set { SetValue(CommandViewModelProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for CommandViewModel.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CommandViewModelProperty =
-            DependencyProperty.Register("CommandViewModel", typeof(ICommandViewModel), typeof(CommandButton));
+            DependencyProperty.Register("CommandViewModel", typeof(ICommandViewModel), typeof(CommandButton), new PropertyMetadata(OnCommandViewModelChanged));
 
-
+        private static void OnCommandViewModelChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var self = d as FrameworkElement;
+            var value = e.NewValue as ViewModel;
+            if (self != null && value != null)
+            {
+                WPFHelper.ApplyIsBusyBehaviour(self, value);
+            }
+        }
 
         public ImageSource Image
         {

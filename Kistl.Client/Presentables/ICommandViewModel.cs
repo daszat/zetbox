@@ -132,18 +132,21 @@ namespace Kistl.Client.Presentables
         /// <param name="data">may be <value>null</value> if no data is expected</param>
         public void Execute(object data)
         {
-            ViewModelFactory.TriggerDelayedTask(Parent, () =>
+            if (!Executing)
             {
                 Executing = true;
-                try
+                ViewModelFactory.TriggerDelayedTask(Parent, () =>
                 {
-                    DoExecute(data);
-                }
-                finally
-                {
-                    Executing = false;
-                }
-            });
+                    try
+                    {
+                        DoExecute(data);
+                    }
+                    finally
+                    {
+                        Executing = false;
+                    }
+                });
+            }
         }
 
         /// <summary>
