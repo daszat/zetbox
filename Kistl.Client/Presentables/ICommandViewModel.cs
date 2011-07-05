@@ -4,6 +4,7 @@ namespace Kistl.Client.Presentables
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Linq;
     using System.Text;
@@ -386,15 +387,17 @@ namespace Kistl.Client.Presentables
     {
         public new delegate ContainerCommand Factory(IKistlContext dataCtx, ViewModel parent, string label, string tooltip, params ICommandViewModel[] children);
 
+        private readonly List<ICommandViewModel> _children;
         public ContainerCommand(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent, string label, string tooltip, params ICommandViewModel[] children)
             : base(appCtx, dataCtx, parent, label, tooltip)
         {
             if (children != null)
             {
-                foreach (var c in children)
-                {
-                    base.Commands.Add(c);
-                }
+                _children = children.ToList();
+            }
+            else
+            {
+                _children = new List<ICommandViewModel>();
             }
         }
 
@@ -411,6 +414,11 @@ namespace Kistl.Client.Presentables
         protected override void DoExecute(object data)
         {
             // Nothing to do, just a container
+        }
+
+        protected override ObservableCollection<ICommandViewModel> CreateCommands()
+        {
+            return new ObservableCollection<ICommandViewModel>(base.CreateCommands().Concat(_children));
         }
     }
 }

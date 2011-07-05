@@ -46,6 +46,7 @@ R: Gendarme.Rules.Design.Linq.AvoidExtensionMethodOnSystemObjectRule
 T: Kistl.API.GetSetHasValueExtensions
 T: Kistl.API.ExtensionHelpers
 
+# A constructor calls an unsealed virtual method.
 R: Gendarme.Rules.BadPractice.ConstructorShouldNotCallVirtualMethodsRule
 # private type where the brittle-ness doesn't matter
 T: Kistl.API.Utils.Logging/TraceMethodCallContext
