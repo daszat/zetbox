@@ -8,7 +8,7 @@
              commands:SmartRoutedUICommand.IsCommandSink="True"
              MinWidth="355">
     <DockPanel>
-        <ctrls:CommandButton DockPanel.Dock="Right" 
+        <ctrls:CommandButton DockPanel.Dock="Left" 
                              CommandViewModel="{Binding EditCommand}"
                              Height="25"
                              Width="25"
