@@ -463,5 +463,16 @@ namespace Kistl.API
                 sb.AppendLine("null");
             }
         }
+
+        public static IQueryable AsQueryable(this IEnumerable lst, Type t)
+        {
+            MethodInfo mi = typeof(LinqExtensions).FindGenericMethod("AsTypedQueryable", new Type[] { t }, new Type[] { typeof(IEnumerable) });
+            return (IQueryable)mi.Invoke(null, new object[] { lst });
+        }
+
+        public static IQueryable AsTypedQueryable<T>(this IEnumerable lst)
+        {
+            return lst.Cast<T>().AsQueryable();
+        }
     }
 }

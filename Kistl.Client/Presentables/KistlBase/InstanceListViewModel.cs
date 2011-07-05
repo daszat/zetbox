@@ -419,7 +419,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 {
                     _OpenCommand = ViewModelFactory.CreateViewModel<SimpleItemCommandViewModel<DataObjectViewModel>.Factory>().Invoke(
                         DataContext,
-                        this, 
+                        this,
                         CommonCommandsResources.OpenDataObjectCommand_Name,
                         CommonCommandsResources.OpenDataObjectCommand_Tooltip,
                         OpenObjects);
@@ -454,7 +454,7 @@ namespace Kistl.Client.Presentables.KistlBase
             {
                 // TODO: Reorganize this control - it's too complex
                 var mdl = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj);
-                if(_instancesCache == null) _instancesCache = new List<DataObjectViewModel>();
+                if (_instancesCache == null) _instancesCache = new List<DataObjectViewModel>();
                 _instancesCache.Add(mdl);
                 _instances = new ObservableCollection<DataObjectViewModel>(_instancesCache);
 
@@ -538,9 +538,9 @@ namespace Kistl.Client.Presentables.KistlBase
             {
                 if (_PrintCommand == null)
                 {
-                    _PrintCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, 
+                    _PrintCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this,
                         InstanceListViewModelResources.PrintCommand,
-                        InstanceListViewModelResources.PrintCommand_Tooltip, 
+                        InstanceListViewModelResources.PrintCommand_Tooltip,
                         Print, null);
                     _PrintCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_Printer_png);
                 }
@@ -603,7 +603,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 for (int colIdx = 0; colIdx < cols.Count; colIdx++)
                 {
                     string val = cols[colIdx].ExtractFormattedValue(obj);
-                    p = row.Cells[colIdx].AddParagraph(val ?? string.Empty);                    
+                    p = row.Cells[colIdx].AddParagraph(val ?? string.Empty);
                 }
             }
 
@@ -624,9 +624,9 @@ namespace Kistl.Client.Presentables.KistlBase
             {
                 if (_ExportCommand == null)
                 {
-                    _ExportCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, 
+                    _ExportCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this,
                         InstanceListViewModelResources.ExportCSVCommand,
-                        InstanceListViewModelResources.ExportCSVCommand_Tooltip, 
+                        InstanceListViewModelResources.ExportCSVCommand_Tooltip,
                         Export, null);
                 }
                 return _ExportCommand;
@@ -642,7 +642,7 @@ namespace Kistl.Client.Presentables.KistlBase
                     .Where(i => i.Type != ColumnDisplayModel.ColumnType.MethodModel)
                     .ToList();
                 // Header
-                sw.WriteLine(string.Join(";", 
+                sw.WriteLine(string.Join(";",
                     cols.Select(i => i.Header).ToArray()));
 
                 // Data
@@ -1253,6 +1253,13 @@ namespace Kistl.Client.Presentables.KistlBase
                 result = f.GetQuery(result);
             }
 
+            if (!string.IsNullOrEmpty(_sortProperty))
+            {
+                result = result.OrderBy(string.Format("it.{0} {1}",                // Sorting CompundObjects does not work
+                                _sortProperty,                         // Maybe we should implement a custom comparer
+                                _sortDirection == ListSortDirection.Descending ? "desc" : string.Empty));
+            }
+
             return result;
         }
 
@@ -1354,20 +1361,15 @@ namespace Kistl.Client.Presentables.KistlBase
             // Sort
             if (!string.IsNullOrEmpty(_sortProperty))
             {
-                var tmpOrderBy = _sortProperty.Split('.').Select(i => String.Format("PropertyModelsByName[\"{0}\"]", i));
-                var orderby = string.Join(".Value.", tmpOrderBy.ToArray());
-
                 _instances =
                     new ObservableCollection<DataObjectViewModel>(
-                    tmp
-                        .AsQueryable()
-                    // Sorting CompundObjects does not work
-                    // Maybe we should implement a custom comparer
-                        .OrderBy(string.Format("it.{0}.UntypedValue {1}",
-                                    orderby,
-                                    _sortDirection == ListSortDirection.Descending ? "desc" : string.Empty
-                                )
-                            )
+                        tmp.Select(vm => vm.Object)                            // Back to a plain list of IDataObjects
+                           .AsQueryable(this.InterfaceType.Type)               // To a typed List
+                           .OrderBy(string.Format("it.{0} {1}",                // Sorting CompundObjects does not work
+                                        _sortProperty,                         // Maybe we should implement a custom comparer
+                                        _sortDirection == ListSortDirection.Descending ? "desc" : string.Empty))
+                           .Cast<IDataObject>()
+                           .Select(obj => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj))
                     );
             }
             else
