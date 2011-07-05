@@ -1,4 +1,4 @@
-//#define SERIALIZE_GENERATION_THREADS
+// #define SERIALIZE_GENERATION_THREADS
 
 namespace Kistl.Generator
 {
@@ -104,18 +104,18 @@ namespace Kistl.Generator
             List<Exception> failed = new List<Exception>();
             // TODO: use TaskExecutor to optimally use multicores
             var threads = new List<Thread>();
+#if SERIALIZE_GENERATION_THREADS
+            Log.Warn("Serializing generation threads.");
+            var ctx = _container.Resolve<IKistlContext>();
+            foreach (var gen in _generatorProviders)
+            {
+                gen.Generate(ctx, workingPath);
+            }
+#else
             foreach (var gen in _generatorProviders)
             {
                 // decouple from loop variable
                 var generator = gen;
-
-#if SERIALIZE_GENERATION_THREADS
-                Log.Warn("Serializing generation threads.");
-                using (var innerContainer = _container.BeginLifetimeScope())
-                {
-                    generator.Generate(innerContainer.Resolve<IKistlContext>(), workingPath);
-                }
-#else
                 var genThread = new Thread(() =>
                 {
                     try
@@ -137,8 +137,8 @@ namespace Kistl.Generator
                 genThread.Name = generator.BaseName;
                 genThread.Start();
                 threads.Add(genThread);
-#endif
             }
+#endif
 
             foreach (var t in threads)
             {
@@ -433,8 +433,7 @@ namespace Kistl.Generator
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
 
-            return from c in ctx.GetQuery<ObjectClass>()
-                   select c;
+            return ctx.GetQuery<ObjectClass>();
         }
 
         public static IQueryable<Interface> GetInterfaceList(IKistlContext ctx)
