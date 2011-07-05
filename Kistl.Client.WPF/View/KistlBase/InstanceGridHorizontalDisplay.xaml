@@ -69,7 +69,7 @@
           <!-- inspired by http://stackoverflow.com/q/6574377/4918 -->
           <Style TargetType="Menu">
             <Setter Property="Margin"
-                  Value="0,1,0,0"/>
+                  Value="0,2,0,0"/>
             <Setter Property="Background"
                   Value="#00000000"/>
           </Style>
