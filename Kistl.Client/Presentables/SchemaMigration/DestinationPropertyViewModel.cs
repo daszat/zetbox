@@ -54,7 +54,14 @@ namespace Kistl.Client.Presentables.SchemaMigration
         {
             get
             {
-                return string.Join(".", Value.Select(i => ((Property)i.Object).Name).ToArray());
+                if (Value == null || Value.Count == 0)
+                {
+                    return "[none]";
+                }
+                else
+                {
+                    return string.Join(".", Value.Select(i => ((Property)i.Object).Name).ToArray());
+                }
             }
         }
 
@@ -86,6 +93,17 @@ namespace Kistl.Client.Presentables.SchemaMigration
             });
 
             ViewModelFactory.ShowModel(dlg, true);
+        }
+
+        protected override void OnPropertyChanged(string propertyName)
+        {
+            base.OnPropertyChanged(propertyName);
+            switch (propertyName)
+            {
+                case "Value":
+                    OnPropertyChanged("Name");
+                    break;
+            }
         }
     }
 }
