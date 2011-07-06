@@ -16,15 +16,15 @@
 <%@ Parameter Name="xmlname" Type="string" %>
 <%@ Parameter Name="collectionName" Type="string" %>
 <%@ Parameter Name="serializeIds" Type="bool" %>
+<%@ Parameter Name="serializeRelationEntries" Type="bool" %>
 
 <%
-
 	switch(direction)
 	{
 		case SerializerDirection.ToStream:
 %>
 			BinarySerializer.ToStream(eagerLoadLists, <%= streamName %>);
-			if (eagerLoadLists)
+			if (eagerLoadLists && auxObjects != null)
 			{
 <% if (serializeIds) { %>
 				BinarySerializer.ToStream(true, <%= streamName %>);
@@ -32,13 +32,12 @@
 <% } %>
 				foreach(var obj in <%= collectionName %>)
 				{
-					if (auxObjects != null) {
-						auxObjects.Add(obj);
-					}
+					auxObjects.Add(obj);
 <% if (serializeIds) { %>
 					BinarySerializer.ToStream(obj.ID, <%= streamName %>);
 <% } %>
 				}
+<% if (serializeRelationEntries) { ApplyRelationEntrySerialization(); } %>
 			}
 <% if (serializeIds) { %>
 			else

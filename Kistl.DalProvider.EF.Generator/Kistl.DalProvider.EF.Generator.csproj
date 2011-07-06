@@ -243,6 +243,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Templates\Serialization\EagerLoadingSerialization.cs" />
     <Compile Include="Templates\Serialization\ObjectReferencePropertySerialization.Designer.cs">
       <DependentUpon>ObjectReferencePropertySerialization.cst</DependentUpon>
       <AutoGen>True</AutoGen>

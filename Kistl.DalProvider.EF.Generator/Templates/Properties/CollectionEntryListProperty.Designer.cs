@@ -138,17 +138,14 @@ this.WriteObjects("                return c;\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        private ",  wrapperClass , "<",  rel.A.Type.GetDataTypeString() , ", ",  rel.B.Type.GetDataTypeString() , ", ",  ceName , ", EntityCollection<",  ceName , ">> ",  wrapperName , ";\r\n");
-this.WriteObjects("\r\n");
+#line 117 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+if (eagerLoading) { 
+#line 118 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+this.WriteObjects("        private bool ",  name , "_was_eagerLoaded = false;\r\n");
 #line 119 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\CollectionEntryListProperty.cst"
-if (eagerLoading)
-    {
-
-#line 122 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\CollectionEntryListProperty.cst"
-this.WriteObjects("        private bool ",  efName , "_was_eagerLoaded = false;\r\n");
-#line 124 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\CollectionEntryListProperty.cst"
-}
-        AddSerialization(serializationList, efName, eagerLoading);
-
+} 
+#line 120 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+AddSerialization(serializationList, name, eagerLoading); 
 
         }
 

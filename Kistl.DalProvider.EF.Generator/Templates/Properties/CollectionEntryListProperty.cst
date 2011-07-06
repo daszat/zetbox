@@ -114,13 +114,7 @@
             }
         }
         private <%= wrapperClass %><<%= rel.A.Type.GetDataTypeString() %>, <%= rel.B.Type.GetDataTypeString() %>, <%= ceName %>, EntityCollection<<%= ceName %>>> <%= wrapperName %>;
-
-<%
-    if (eagerLoading)
-    {
-%>
-        private bool <%= efName %>_was_eagerLoaded = false;
-<%
-    }
-        AddSerialization(serializationList, efName, eagerLoading);
-%>
+<% if (eagerLoading) { %>
+        private bool <%= name %>_was_eagerLoaded = false;
+<% } %>
+<% AddSerialization(serializationList, name, eagerLoading); %>

@@ -405,6 +405,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Templates\Serialization\EagerLoadingSerialization.cs" />
     <Compile Include="Templates\Serialization\SimplePropertyWithDefaultSerialization.cs">
       <DependentUpon>SimplePropertyWithDefaultSerialization.cst</DependentUpon>
     </Compile>

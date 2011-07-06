@@ -273,6 +273,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Registrations.cst</DependentUpon>
     </Compile>
+    <Compile Include="Templates\Serialization\EagerLoadingSerialization.cs" />
     <Compile Include="Templates\Serialization\ProxySerialization.Designer.cs">
       <DependentUpon>ProxySerialization.cst</DependentUpon>
       <AutoGen>True</AutoGen>

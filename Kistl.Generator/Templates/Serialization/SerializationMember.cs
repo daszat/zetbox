@@ -10,6 +10,9 @@ namespace Kistl.Generator.Templates.Serialization
     {
         public SerializationMember(string templatename, SerializerType type, string xmlns, string xmlname, params object[] templateparams)
         {
+            if (templatename.Contains("EagerLoadingSerialization"))
+            {
+            }
             this.TemplateName = templatename;
             this.SerializerType = type;
             this.TemplateParams = templateparams;

@@ -53,12 +53,13 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
                 + entryType + ">";
 
             bool eagerLoading = relEnd.Navigator != null && relEnd.Navigator.EagerLoading;
+            bool serializeRelationEntries = rel.GetRelationType() == RelationType.n_m;
 
             string entryProxyType = entryType + "." + rel.GetRelationClassName() + "Proxy";
 
             string inverseNavigatorName = otherEnd.Navigator != null ? otherEnd.Navigator.Name : null;
 
-            Call(host, ctx, serializationList, name, exposedCollectionInterface, referencedInterface, backingName, backingCollectionType, aSideType, bSideType, entryType, providerCollectionType, rel.ExportGuid, endRole, eagerLoading, entryProxyType, inverseNavigatorName);
+            Call(host, ctx, serializationList, name, exposedCollectionInterface, referencedInterface, backingName, backingCollectionType, aSideType, bSideType, entryType, providerCollectionType, rel.ExportGuid, endRole, eagerLoading, serializeRelationEntries, entryProxyType, inverseNavigatorName);
         }
 
         public static string RelationToBackingCollectionType(Relation rel, RelationEnd otherEnd)
@@ -80,12 +81,11 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
             return result;
         }
 
-
         protected virtual void AddSerialization(Templates.Serialization.SerializationMembersList list, string memberName, bool eagerLoading)
         {
             if (list != null && eagerLoading)
             {
-                list.Add("Serialization.EagerLoadingSerialization", Templates.Serialization.SerializerType.Binary, null, null, memberName, false);
+                list.Add("Serialization.EagerLoadingSerialization", Templates.Serialization.SerializerType.Binary, null, null, memberName, false, serializeRelationEntries, "this.Proxy." + memberName);
             }
         }
     }

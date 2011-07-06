@@ -11,14 +11,15 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.Properties
     using Kistl.API;
     using Kistl.App.Base;
     using Templates = Kistl.Generator.Templates;
-    
+
     public partial class CollectionEntryListProperty
     {
         protected virtual void AddSerialization(Templates.Serialization.SerializationMembersList list, string memberName, bool eagerLoading)
         {
             if (list != null && eagerLoading)
             {
-                list.Add("Serialization.EagerLoadingSerialization", Templates.Serialization.SerializerType.Binary, null, null, memberName, false);
+                string efName = memberName + ImplementationPropertySuffix;
+                list.Add("Serialization.EagerLoadingSerialization", Templates.Serialization.SerializerType.Binary, null, null, memberName, false, rel.GetRelationType() == RelationType.n_m, efName);
             }
         }
     }

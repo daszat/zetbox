@@ -97,7 +97,7 @@
 <%
         if (serializationList != null)
         {
-            serializationList.Add("Serialization.EagerLoadingSerialization", Kistl.Generator.Templates.Serialization.SerializerType.Binary, null, null, name, true);
+            serializationList.Add("Serialization.EagerLoadingSerialization", Kistl.Generator.Templates.Serialization.SerializerType.Binary, null, null, name, true, false, null);
         }
     }
 %>

@@ -51,7 +51,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
         {
             if (list != null && eagerLoading)
             {
-                list.Add("Serialization.EagerLoadingSerialization", Templates.Serialization.SerializerType.Binary, null, null, memberName, true);
+                list.Add("Serialization.EagerLoadingSerialization", Templates.Serialization.SerializerType.Binary, null, null, memberName, true, false, null);
             }
         }
     }

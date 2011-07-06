@@ -77,7 +77,7 @@ namespace Kistl.Generator.Templates.Properties
         {
             if (list != null && eagerLoading)
             {
-                list.Add("Serialization.EagerLoadingSerialization", Serialization.SerializerType.Binary, null, null, memberName, false);
+                list.Add("Serialization.EagerLoadingSerialization", Serialization.SerializerType.Binary, null, null, memberName, false, false);
             }
         }
     }
