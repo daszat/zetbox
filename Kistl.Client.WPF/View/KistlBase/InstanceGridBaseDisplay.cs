@@ -25,37 +25,16 @@ namespace Kistl.Client.WPF.View.KistlBase
     using Kistl.Client.WPF.Toolkit;
     using Kistl.Client.Presentables.ValueViewModels;
     using Kistl.Client.WPF.CustomControls;
+    using Microsoft.Windows.Controls.Primitives;
 
-    public abstract class InstanceGridBaseDisplay : UserControl, IHasViewModel<InstanceListViewModel>
+    public abstract class InstanceGridBaseDisplay : InstanceCollectionBase
     {
         public abstract ZBoxDataGrid DataGrid { get; }
 
-        #region Sort dependency properties
-        public static readonly DependencyProperty SortPropertyNameProperty =
-            DependencyProperty.RegisterAttached("SortPropertyName", typeof(string), typeof(InstanceGridDisplay));
-
-        public static string GetSortPropertyName(DependencyObject obj)
+        protected override void SetHeaderTemplate(DependencyObject header, DataTemplate template)
         {
-            if (obj == null) throw new ArgumentNullException("obj");
-            return (string)obj.GetValue(SortPropertyNameProperty);
+            header.SetValue(DataGridColumn.HeaderTemplateProperty, template);
         }
-        #endregion
-
-        /// <summary>
-        /// Opens a new WorkspaceModel in its default view with the double clicked item opened.
-        /// </summary>
-        /// <param name="sender">the sender of this event, a <see cref="ListViewItem"/> is expected</param>
-        /// <param name="e">the arguments of this event</param>
-        protected void ItemActivatedHandler(object sender, RoutedEventArgs e)
-        {
-            if (ViewModel != null && ViewModel.SelectedItem != null)
-            {
-                ViewModel.OnItemsDefaultAction(new DataObjectViewModel[] { ViewModel.SelectedItem });
-            }
-
-            e.Handled = true;
-        }
-
 
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
@@ -63,92 +42,18 @@ namespace Kistl.Client.WPF.View.KistlBase
             if (ViewModel != null && e.Property == FrameworkElement.DataContextProperty)
             {
                 WPFHelper.RefreshGridView(DataGrid, ViewModel.DisplayedColumns, SortPropertyNameProperty);
-                var sortCol = DataGrid.Columns.FirstOrDefault(i => GetSortPropertyName(i) == ViewModel.SortProperty);
-                _lastDirection = ViewModel.SortDirection;
-                if (sortCol != null)
-                {
-                    // Add arrow
-                    if (ViewModel.SortDirection == ListSortDirection.Ascending)
-                    {
-                        sortCol.HeaderTemplate =
-                          TryFindResource("GridHeaderTemplateArrowUp") as DataTemplate;
-                    }
-                    else
-                    {
-                        sortCol.HeaderTemplate =
-                          TryFindResource("GridHeaderTemplateArrowDown") as DataTemplate;
-                    }
-                }
-
+                ApplyInitialSortTemplates(DataGrid.Columns.FirstOrDefault(i => GetSortPropertyName(i) == ViewModel.SortProperty));
                 this.ApplyIsBusyBehaviour(ViewModel);
             }
         }
 
-        #region HeaderClickManagement
-        GridViewColumn _lastHeaderClicked = null;
-        ListSortDirection _lastDirection = ListSortDirection.Ascending;
-
         protected void ListView_HeaderClick(object sender, RoutedEventArgs e)
         {
-            GridViewColumnHeader headerClicked = e.OriginalSource as GridViewColumnHeader;
-
-            if (headerClicked != null)
+            DataGridColumnHeader header = e.OriginalSource as DataGridColumnHeader;
+            if (header != null)
             {
-                if (headerClicked.Role != GridViewColumnHeaderRole.Padding)
-                {
-                    var propName = GetSortPropertyName(headerClicked.Column);
-                    if (string.IsNullOrEmpty(propName)) return;
-
-                    ListSortDirection direction;
-                    if (headerClicked.Column != _lastHeaderClicked)
-                    {
-                        direction = ListSortDirection.Ascending;
-                    }
-                    else
-                    {
-                        direction = _lastDirection == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
-                    }
-
-                    ViewModel.Sort(propName, direction);
-
-                    // Remove arrow from previously sorted header
-                    if (_lastHeaderClicked != null && _lastHeaderClicked != headerClicked.Column)
-                    {
-                        _lastHeaderClicked.HeaderTemplate = null;
-                    }
-
-                    // Save
-                    _lastHeaderClicked = headerClicked.Column;
-                    _lastDirection = direction;
-
-                    // Add arrow
-                    if (direction == ListSortDirection.Ascending)
-                    {
-                        _lastHeaderClicked.HeaderTemplate =
-                          TryFindResource("GridHeaderTemplateArrowUp") as DataTemplate;
-                    }
-                    else
-                    {
-                        _lastHeaderClicked.HeaderTemplate =
-                          TryFindResource("GridHeaderTemplateArrowDown") as DataTemplate;
-                    }
-                }
+                ApplySortHeaderTemplate(header.Column);
             }
         }
-        #endregion
-
-        protected void RefreshCommand_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
-            ViewModel.ReloadInstances();
-        }
-
-        #region IHasViewModel<InstanceListViewModel> Members
-
-        public InstanceListViewModel ViewModel
-        {
-            get { return (InstanceListViewModel)DataContext; }
-        }
-
-        #endregion
     }
 }

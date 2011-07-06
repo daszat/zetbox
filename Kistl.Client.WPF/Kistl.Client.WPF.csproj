@@ -547,6 +547,7 @@
     <Compile Include="View\Filters\DateRangeFilterEditor.xaml.cs">
       <DependentUpon>DateRangeFilterEditor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\KistlBase\InstanceCollectionBase.cs" />
     <Compile Include="View\KistlBase\InstanceListElementCount.xaml.cs">
       <DependentUpon>InstanceListElementCount.xaml</DependentUpon>
     </Compile>
