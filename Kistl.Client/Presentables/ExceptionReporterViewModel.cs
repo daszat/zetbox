@@ -140,7 +140,11 @@ using Kistl.Client.Presentables.ValueViewModels;
 
         public void Report()
         {
-            problemReporter.Report(string.IsNullOrEmpty(this.SubjectText.Value) ? this.Title : this.SubjectText.Value, this.AdditionalText.Value, screenShot, exception);
+            problemReporter.Report(
+                string.IsNullOrEmpty(this.SubjectText.Value) ? this.Title : this.SubjectText.Value, 
+                this.AdditionalText.Value, 
+                screenShot, 
+                exception);
             this.Show = false;
         }
 
