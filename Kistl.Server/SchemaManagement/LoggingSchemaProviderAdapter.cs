@@ -271,14 +271,14 @@ namespace Kistl.Server.SchemaManagement
             _provider.CreateTable(tblName, idAsIdentityColumn, createPrimaryKey);
         }
 
-        public void CreateColumn(TableRef tblName, string colName, DbType type, int size, int scale, bool isNullable, DefaultConstraint defConstraint)
+        public void CreateColumn(TableRef tblName, string colName, DbType type, int size, int scale, bool isNullable, params DatabaseConstraint[] constraints)
         {
-            _provider.CreateColumn(tblName, colName, type, size, scale, isNullable, defConstraint);
+            _provider.CreateColumn(tblName, colName, type, size, scale, isNullable, constraints);
         }
 
-        public void AlterColumn(TableRef tblName, string colName, DbType type, int size, int scale, bool isNullable, DefaultConstraint defConstraint)
+        public void AlterColumn(TableRef tblName, string colName, DbType type, int size, int scale, bool isNullable, params DatabaseConstraint[] constraints)
         {
-            _provider.AlterColumn(tblName, colName, type, size, scale, isNullable, defConstraint);
+            _provider.AlterColumn(tblName, colName, type, size, scale, isNullable, constraints);
         }
 
         public IEnumerable<TableConstraintNamePair> GetFKConstraintNames()

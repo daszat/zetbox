@@ -413,7 +413,7 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
                 });
         }
 
-        protected override void DoColumn(bool add, TableRef tblName, string colName, DbType type, int size, int scale, bool isNullable, DefaultConstraint defConstraint)
+        protected override void DoColumn(bool add, TableRef tblName, string colName, DbType type, int size, int scale, bool isNullable, params DatabaseConstraint[] constraints)
         {
             StringBuilder sb = new StringBuilder();
 
@@ -446,7 +446,7 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
                 ExecuteNonQuery(String.Format("ALTER TABLE {0} ALTER COLUMN {1} DROP DEFAULT", FormatSchemaName(tblName), QuoteIdentifier(colName)));
             }
 
-            if (defConstraint != null)
+            foreach (var defConstraint in (constraints ?? DatabaseConstraint.EmptyArray).OfType<DefaultConstraint>())
             {
                 string defValue;
                 if (defConstraint is NewGuidDefaultConstraint)
@@ -467,9 +467,26 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
                 }
                 else
                 {
-                    throw new ArgumentOutOfRangeException("defConstraint", "Unsupported default constraint " + defConstraint.GetType().Name);
+                    throw new ArgumentOutOfRangeException("constraints", "Unsupported default constraint " + defConstraint.GetType().Name);
                 }
                 ExecuteNonQuery(string.Format("ALTER TABLE {0} ALTER COLUMN {1} SET DEFAULT {2}", FormatSchemaName(tblName), QuoteIdentifier(colName), defValue));
+            }
+
+            foreach (var checkConstraint in (constraints ?? DatabaseConstraint.EmptyArray).OfType<CheckConstraint>())
+            {
+                string check;
+                if (checkConstraint is BoolCheckConstraint)
+                {
+                    check = string.Format("({0} = '{1}')", QuoteIdentifier(colName), ((BoolCheckConstraint)checkConstraint).Value ? "t" : "f");
+                }
+                else
+                {
+                    throw new ArgumentOutOfRangeException("constraints", "Unsupported check constraint " + checkConstraint.GetType().Name);
+                }
+                ExecuteNonQuery(string.Format("ALTER TABLE {0} ADD CONSTRAINT {1} CHECK {2}", 
+                    FormatSchemaName(tblName),
+                    ConstructCheckConstraintName(tblName, colName), 
+                    check));
             }
         }
 

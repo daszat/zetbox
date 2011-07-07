@@ -418,67 +418,75 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
                 });
         }
 
-        protected override void DoColumn(bool add, TableRef tblName, string colName, DbType type, int size, int scale, bool isNullable, DefaultConstraint defConstraint)
+        protected override void DoColumn(bool add, TableRef tblName, string colName, DbType type, int size, int scale, bool isNullable, params DatabaseConstraint[] constraints)
         {
             StringBuilder sb = new StringBuilder();
 
             // Prepare
-            string addOrAlter = add ? "ADD" : "ALTER COLUMN";
-            string defValue = string.Empty;
-            var constrName = ConstructDefaultConstraintName(tblName, colName);
+            var addOrAlter = add ? "ADD" : "ALTER COLUMN";
+            var defValue = string.Empty;
+            var defConstrName = ConstructDefaultConstraintName(tblName, colName);
 
-            if (defConstraint != null)
+            var checkConstr = string.Empty;
+            var checkConstrName = ConstructCheckConstraintName(tblName, colName);
+
+            foreach (var constr in (constraints ?? DatabaseConstraint.EmptyArray))
             {
-                if (defConstraint is NewGuidDefaultConstraint)
+                if (constr == null) continue; // It's leagal to pass null values.
+
+                if (constr is NewGuidDefaultConstraint)
                 {
                     defValue = "NEWID()";
                 }
-                else if (defConstraint is IntDefaultConstraint)
+                else if (constr is IntDefaultConstraint)
                 {
-                    defValue = ((IntDefaultConstraint)defConstraint).Value.ToString();
+                    defValue = ((IntDefaultConstraint)constr).Value.ToString();
                 }
-                else if (defConstraint is BoolDefaultConstraint)
+                else if (constr is BoolDefaultConstraint)
                 {
-                    defValue = ((BoolDefaultConstraint)defConstraint).Value ? "1" : "0";
+                    defValue = ((BoolDefaultConstraint)constr).Value ? "1" : "0";
                 }
-                else if (defConstraint is DateTimeDefaultConstraint)
+                else if (constr is DateTimeDefaultConstraint)
                 {
                     defValue = "getdate()";
                 }
+                else if (constr is BoolCheckConstraint)
+                {
+                    checkConstr = string.Format("({0} = {1})", QuoteIdentifier(colName), ((BoolCheckConstraint)constr).Value ? "1" : "0");
+                }
                 else
                 {
-                    throw new ArgumentOutOfRangeException("defConstraint", "Unsupported default constraint " + defConstraint.GetType().Name);
+                    throw new ArgumentOutOfRangeException("constraints", "Unsupported constraint " + constr.GetType().Name);
                 }
             }
 
-            // Drop an existing default constraint
+            // Drop an existing constraint
             if (!add)
             {
-                ExecuteNonQuery(string.Format("IF OBJECT_ID('[{0}]') IS NOT NULL\nALTER TABLE {1} DROP CONSTRAINT [{0}]", constrName, FormatSchemaName(tblName)));
+                ExecuteNonQuery(string.Format("IF OBJECT_ID('{0}') IS NOT NULL\nALTER TABLE {1} DROP CONSTRAINT {0}", QuoteIdentifier(defConstrName), FormatSchemaName(tblName)));
+                ExecuteNonQuery(string.Format("IF OBJECT_ID('{0}') IS NOT NULL\nALTER TABLE {1} DROP CONSTRAINT {0}", QuoteIdentifier(checkConstrName), FormatSchemaName(tblName)));
             }
 
             // Construct statement
             sb.AppendFormat("ALTER TABLE {0} {1} {2}", FormatSchemaName(tblName), addOrAlter, GetColumnDefinition(new Column() { Name = colName, Type = type, Size = size, Scale = scale, IsNullable = isNullable }));
 
-            // Add Default Constraint only if column is been added
-            if (defConstraint != null && add)
-            {
-                sb.AppendFormat(" CONSTRAINT {0} DEFAULT {1}", constrName, defValue);
-            }
-
             ExecuteNonQuery(sb.ToString());
 
-            // Recreate Constraint only if not done during add
-            if (defConstraint != null && !add)
+            // Recreate or add Constraint
+            if (!string.IsNullOrEmpty(defValue))
             {
-                ExecuteNonQuery(string.Format("ALTER TABLE {1} ADD CONSTRAINT [{0}] DEFAULT {3} FOR [{2}]", constrName, FormatSchemaName(tblName), colName, defValue));
+                ExecuteNonQuery(string.Format("ALTER TABLE {1} ADD CONSTRAINT {0} DEFAULT {2} FOR [{3}]", QuoteIdentifier(defConstrName), FormatSchemaName(tblName), defValue, colName));
+            }
+            if (!string.IsNullOrEmpty(checkConstr))
+            {
+                ExecuteNonQuery(string.Format("ALTER TABLE {1} ADD CONSTRAINT {0} CHECK {2}", QuoteIdentifier(checkConstrName), FormatSchemaName(tblName), checkConstr));
             }
         }
 
         public override void RenameColumn(TableRef tblName, string oldColName, string newColName)
         {
             // Do not qualify new name as it will stay part of the original table
-            ExecuteNonQuery(string.Format("EXEC sp_rename '{0}.[{1}]', '{2}', 'COLUMN'", FormatSchemaName(tblName), oldColName, newColName));
+            ExecuteNonQuery(string.Format("EXEC sp_rename '{0}.{1}', '{2}', 'COLUMN'", FormatSchemaName(tblName), QuoteIdentifier(oldColName), QuoteIdentifier(newColName)));
         }
 
         public override bool GetIsColumnNullable(TableRef tblName, string colName)

@@ -283,6 +283,11 @@ namespace Kistl.Server.SchemaManagement
             return String.Format("default_{0}_{1}", tblName.Name, colName);
         }
 
+        protected static string ConstructCheckConstraintName(TableRef tblName, string colName)
+        {
+            return String.Format("check_{0}_{1}", tblName.Name, colName);
+        }        
+
         #endregion
 
         #region Database Management
@@ -366,17 +371,17 @@ namespace Kistl.Server.SchemaManagement
 
         public abstract IEnumerable<Column> GetTableColumns(TableRef tblName);
 
-        public void CreateColumn(TableRef tblName, string colName, DbType type, int size, int scale, bool isNullable, DefaultConstraint defConstraint)
+        public void CreateColumn(TableRef tblName, string colName, DbType type, int size, int scale, bool isNullable, params DatabaseConstraint[] constraints)
         {
-            DoColumn(true, tblName, colName, type, size, scale, isNullable, defConstraint);
+            DoColumn(true, tblName, colName, type, size, scale, isNullable, constraints);
         }
 
-        public void AlterColumn(TableRef tblName, string colName, DbType type, int size, int scale, bool isNullable, DefaultConstraint defConstraint)
+        public void AlterColumn(TableRef tblName, string colName, DbType type, int size, int scale, bool isNullable, params DatabaseConstraint[] constraints)
         {
-            DoColumn(false, tblName, colName, type, size, scale, isNullable, defConstraint);
+            DoColumn(false, tblName, colName, type, size, scale, isNullable, constraints);
         }
 
-        protected abstract void DoColumn(bool add, TableRef tblName, string colName, DbType type, int size, int scale, bool isNullable, DefaultConstraint defConstraint);
+        protected abstract void DoColumn(bool add, TableRef tblName, string colName, DbType type, int size, int scale, bool isNullable, params DatabaseConstraint[] constraints);
 
         public abstract void RenameColumn(TableRef tblName, string oldColName, string newColName);
 

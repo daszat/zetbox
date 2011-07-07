@@ -401,7 +401,12 @@ namespace Kistl.API.Server
         }
     }
 
-    public abstract class DefaultConstraint
+    public abstract class DatabaseConstraint
+    {
+        public static readonly DatabaseConstraint[] EmptyArray = new DatabaseConstraint[] { };
+    }
+
+    public abstract class DefaultConstraint : DatabaseConstraint
     {
     }
 
@@ -421,6 +426,15 @@ namespace Kistl.API.Server
 
     public class DateTimeDefaultConstraint : DefaultConstraint
     {
+    }
+
+    public abstract class CheckConstraint : DatabaseConstraint
+    {
+    }
+
+    public class BoolCheckConstraint : CheckConstraint
+    {
+        public bool Value { get; set; }
     }
 
     public interface ISchemaProvider : IDisposable
@@ -523,8 +537,8 @@ namespace Kistl.API.Server
         IEnumerable<string> GetTableColumnNames(TableRef tblName);
         IEnumerable<Column> GetTableColumns(TableRef tblName);
 
-        void CreateColumn(TableRef tblName, string colName, DbType type, int size, int scale, bool isNullable, DefaultConstraint defConstraint);
-        void AlterColumn(TableRef tblName, string colName, DbType type, int size, int scale, bool isNullable, DefaultConstraint defConstraint);
+        void CreateColumn(TableRef tblName, string colName, DbType type, int size, int scale, bool isNullable, params DatabaseConstraint[] constraints);
+        void AlterColumn(TableRef tblName, string colName, DbType type, int size, int scale, bool isNullable, params DatabaseConstraint[] constraints);
 
         void RenameColumn(TableRef tblName, string oldColName, string newColName);
 

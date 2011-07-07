@@ -332,13 +332,13 @@ namespace Kistl.Server.SchemaManagement
             bool hasPersistentOrder = prop.HasPersistentOrder;
 
             db.CreateTable(tblName, true);
-            db.CreateColumn(tblName, fkName, System.Data.DbType.Int32, 0, 0, false, null);
+            db.CreateColumn(tblName, fkName, System.Data.DbType.Int32, 0, 0, false);
 
             db.CreateColumn(tblName, valPropName, prop.GetDbType(), prop.GetSize(), prop.GetScale(), false, SchemaManager.GetDefaultContraint(prop));
 
             if (hasPersistentOrder)
             {
-                db.CreateColumn(tblName, valPropIndexName, System.Data.DbType.Int32, 0, 0, false, null);
+                db.CreateColumn(tblName, valPropIndexName, System.Data.DbType.Int32, 0, 0, false);
             }
             db.CreateFKConstraint(tblName, db.GetQualifiedTableName(objClass.TableName), fkName, assocName, true);
             db.CreateIndex(tblName, Construct.IndexName(tblName.Name, fkName), false, false, fkName);
@@ -363,9 +363,9 @@ namespace Kistl.Server.SchemaManagement
             bool hasPersistentOrder = prop.HasPersistentOrder;
 
             db.CreateTable(tblName, true);
-            db.CreateColumn(tblName, fkName, System.Data.DbType.Int32, 0, 0, false, null);
+            db.CreateColumn(tblName, fkName, System.Data.DbType.Int32, 0, 0, false);
 
-            db.CreateColumn(tblName, valPropName, System.Data.DbType.Boolean, 0, 0, false, null);
+            db.CreateColumn(tblName, valPropName, System.Data.DbType.Boolean, 0, 0, false);
             // TODO: Support neested CompoundObject
             foreach (ValueTypeProperty p in prop.CompoundObjectDefinition.Properties)
             {
@@ -374,7 +374,7 @@ namespace Kistl.Server.SchemaManagement
 
             if (hasPersistentOrder)
             {
-                db.CreateColumn(tblName, valPropIndexName, System.Data.DbType.Int32, 0, 0, false, null);
+                db.CreateColumn(tblName, valPropIndexName, System.Data.DbType.Int32, 0, 0, false);
             }
             db.CreateFKConstraint(tblName, db.GetQualifiedTableName(objClass.TableName), fkName, assocName, true);
             db.CreateIndex(tblName, Construct.IndexName(tblName.Name, fkName), false, false, fkName);
@@ -442,7 +442,7 @@ namespace Kistl.Server.SchemaManagement
             var tblName = db.GetQualifiedTableName(relEnd.Type.TableName);
             string colName = Construct.ListPositionColumnName(otherEnd);
             // always allow nulls for items missing a definite order
-            db.CreateColumn(tblName, colName, System.Data.DbType.Int32, 0, 0, true, null);
+            db.CreateColumn(tblName, colName, System.Data.DbType.Int32, 0, 0, true);
         }
         #endregion
 
@@ -683,7 +683,7 @@ namespace Kistl.Server.SchemaManagement
             }
             else
             {
-                db.CreateColumn(destTblRef, destColName, System.Data.DbType.Int32, 0, 0, true, null);
+                db.CreateColumn(destTblRef, destColName, System.Data.DbType.Int32, 0, 0, true);
                 db.MigrateFKs(srcTblRef, srcColName, destTblRef, destColName);
                 if (!otherEnd.IsNullable())
                 {
@@ -703,7 +703,7 @@ namespace Kistl.Server.SchemaManagement
             if (isIndexed)
             {
                 Log.InfoFormat("Creating position column '{0}.{1}'", destTblRef, destIndexName);
-                db.CreateColumn(destTblRef, destIndexName, System.Data.DbType.Int32, 0, 0, true, null);
+                db.CreateColumn(destTblRef, destIndexName, System.Data.DbType.Int32, 0, 0, true);
             }
 
             // Cleanup
@@ -1260,7 +1260,7 @@ namespace Kistl.Server.SchemaManagement
             if (isIndexed)
             {
                 Log.InfoFormat("Creating position column '{0}.{1}'", tblName, indexName);
-                db.CreateColumn(tblName, indexName, System.Data.DbType.Int32, 0, 0, true, null);
+                db.CreateColumn(tblName, indexName, System.Data.DbType.Int32, 0, 0, true);
             }
         }
         #endregion
@@ -1280,7 +1280,7 @@ namespace Kistl.Server.SchemaManagement
             var tblName = db.GetQualifiedTableName(rel.GetRelationTableName());
             var fkName = rel.GetRelationFkColumnName(role);
 
-            db.CreateColumn(tblName, fkName + Kistl.API.Helper.PositionSuffix, System.Data.DbType.Int32, 0, 0, true, null);
+            db.CreateColumn(tblName, fkName + Kistl.API.Helper.PositionSuffix, System.Data.DbType.Int32, 0, 0, true);
         }
         #endregion
 
@@ -1338,16 +1338,16 @@ namespace Kistl.Server.SchemaManagement
 
             db.CreateTable(tblName, true);
 
-            db.CreateColumn(tblName, fkAName, System.Data.DbType.Int32, 0, 0, false, null);
+            db.CreateColumn(tblName, fkAName, System.Data.DbType.Int32, 0, 0, false);
             if (rel.NeedsPositionStorage(RelationEndRole.A))
             {
-                db.CreateColumn(tblName, fkAName + Kistl.API.Helper.PositionSuffix, System.Data.DbType.Int32, 0, 0, true, null);
+                db.CreateColumn(tblName, fkAName + Kistl.API.Helper.PositionSuffix, System.Data.DbType.Int32, 0, 0, true);
             }
 
-            db.CreateColumn(tblName, fkBName, System.Data.DbType.Int32, 0, 0, false, null);
+            db.CreateColumn(tblName, fkBName, System.Data.DbType.Int32, 0, 0, false);
             if (rel.NeedsPositionStorage(RelationEndRole.B))
             {
-                db.CreateColumn(tblName, fkBName + Kistl.API.Helper.PositionSuffix, System.Data.DbType.Int32, 0, 0, true, null);
+                db.CreateColumn(tblName, fkBName + Kistl.API.Helper.PositionSuffix, System.Data.DbType.Int32, 0, 0, true);
             }
 
             if (rel.A.Type.ImplementsIExportable() && rel.B.Type.ImplementsIExportable())
@@ -1440,11 +1440,11 @@ namespace Kistl.Server.SchemaManagement
         {
             if (otherEnd.IsNullable() || !db.CheckTableContainsData(tblName))
             {
-                db.CreateColumn(tblName, colName, System.Data.DbType.Int32, 0, 0, otherEnd.IsNullable(), null);
+                db.CreateColumn(tblName, colName, System.Data.DbType.Int32, 0, 0, otherEnd.IsNullable());
             }
             else
             {
-                db.CreateColumn(tblName, colName, System.Data.DbType.Int32, 0, 0, true, null);
+                db.CreateColumn(tblName, colName, System.Data.DbType.Int32, 0, 0, true);
                 Log.ErrorFormat("Unable to create NOT NULL column, since table contains data. Created nullable column instead");
             }
         }
@@ -1662,8 +1662,8 @@ namespace Kistl.Server.SchemaManagement
             var tblRightsName = db.GetQualifiedTableName(Construct.SecurityRulesTableName(objClass));
 
             db.CreateTable(tblRightsName, false, false);
-            db.CreateColumn(tblRightsName, "Identity", System.Data.DbType.Int32, 0, 0, false, null);
-            db.CreateColumn(tblRightsName, "Right", System.Data.DbType.Int32, 0, 0, false, null);
+            db.CreateColumn(tblRightsName, "Identity", System.Data.DbType.Int32, 0, 0, false);
+            db.CreateColumn(tblRightsName, "Right", System.Data.DbType.Int32, 0, 0, false);
 
             db.CreateIndex(tblRightsName, Construct.SecurityRulesIndexName(objClass), true, true, "ID", "Identity");
             db.CreateFKConstraint(tblRightsName, db.GetQualifiedTableName(objClass.TableName), "ID", Construct.SecurityRulesFKName(objClass), true);
@@ -1893,17 +1893,20 @@ namespace Kistl.Server.SchemaManagement
         }
         public void DoNewCompoundObjectProperty(ObjectClass objClass, CompoundObjectProperty cprop, string prefix)
         {
-            string colName_IsNull = Construct.NestedColumnName(cprop, prefix);
+            string colName_IsNull = Construct.NestedColumnName(cprop, prefix);            
             Log.InfoFormat("New is null column for CompoundObject Property: '{0}' ('{1}')", cprop.Name, colName_IsNull);
             var tblName = db.GetQualifiedTableName(objClass.TableName);
             var hasData = db.CheckTableContainsData(tblName);
+            var constr = cprop.IsNullable() 
+                ? (DatabaseConstraint)new BoolDefaultConstraint() { Value = true } 
+                : (DatabaseConstraint)new BoolCheckConstraint() { Value = false };
             if (!hasData)
             {
-                db.CreateColumn(tblName, colName_IsNull, System.Data.DbType.Boolean, 0, 0, false, new BoolDefaultConstraint() { Value = true });
+                db.CreateColumn(tblName, colName_IsNull, System.Data.DbType.Boolean, 0, 0, false, constr);
             }
             else
             {
-                db.CreateColumn(tblName, colName_IsNull, System.Data.DbType.Boolean, 0, 0, true, new BoolDefaultConstraint() { Value = true });
+                db.CreateColumn(tblName, colName_IsNull, System.Data.DbType.Boolean, 0, 0, true, constr);
                 Log.ErrorFormat("unable to create new not nullable CompoundObject Property '{0}' when table '{1}' contains data. Created nullable column instead.", cprop.Name, tblName);
             }
 
