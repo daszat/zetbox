@@ -486,7 +486,7 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
         public override void RenameColumn(TableRef tblName, string oldColName, string newColName)
         {
             // Do not qualify new name as it will stay part of the original table
-            ExecuteNonQuery(string.Format("EXEC sp_rename '{0}.{1}', '{2}', 'COLUMN'", FormatSchemaName(tblName), QuoteIdentifier(oldColName), QuoteIdentifier(newColName)));
+            ExecuteNonQuery(string.Format("EXEC sp_rename '{0}.{1}', '{2}', 'COLUMN'", FormatSchemaName(tblName), QuoteIdentifier(oldColName), newColName));
         }
 
         public override bool GetIsColumnNullable(TableRef tblName, string colName)
