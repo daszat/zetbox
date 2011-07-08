@@ -6,6 +6,7 @@ namespace Kistl.API.Utils
     using System.Linq;
     using System.Text;
     using System.Xml.Serialization;
+    using System.Collections.ObjectModel;
 
     // These two classes can be used to substitute for a Dictionary, when XmlSerialization is needed
 
@@ -13,10 +14,11 @@ namespace Kistl.API.Utils
     public sealed class XmlKeyValuePair<TKey, TValue>
     {
         public XmlKeyValuePair() { }
-        public XmlKeyValuePair(KeyValuePair<TKey, TValue> kvp)
+        public XmlKeyValuePair(KeyValuePair<TKey, TValue> kvp) : this(kvp.Key, kvp.Value) { }
+        public XmlKeyValuePair(TKey key, TValue value)
         {
-            this.Key = kvp.Key;
-            this.Value = kvp.Value;
+            this.Key = key;
+            this.Value = value;
         }
 
         public TKey Key { get; set; }
@@ -25,55 +27,60 @@ namespace Kistl.API.Utils
     }
 
     [Serializable]
-    public sealed class XmlDictionary<TKey, TValue> : IEnumerable<XmlKeyValuePair<TKey, TValue>>
+    public sealed class XmlDictionary<TKey, TValue>// : Collection<XmlKeyValuePair<TKey, TValue>>
     {
-        private readonly Dictionary<TKey, TValue> _dict = new Dictionary<TKey, TValue>();
+        private Dictionary<TKey, TValue> _dict = new Dictionary<TKey, TValue>();
 
-        public Dictionary<TKey, TValue> Dict { get { return _dict; } }
-
-        IEnumerator<XmlKeyValuePair<TKey, TValue>> IEnumerable<XmlKeyValuePair<TKey, TValue>>.GetEnumerator()
+        /// <summary>
+        /// This list can only be used by the XmlSerializer
+        /// </summary>
+        [XmlArray("Data")]
+        public XmlKeyValuePair<TKey, TValue>[] Data
         {
-            return Dict.Select(kvp => new XmlKeyValuePair<TKey, TValue>(kvp)).GetEnumerator();
+            get
+            {
+                return _dict.Select(kvp => new XmlKeyValuePair<TKey, TValue>(kvp.Key, kvp.Value)).ToArray();
+            }
+            set
+            {
+                _dict = value.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+            }
         }
 
-        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-        {
-            return Dict.Select(kvp => new XmlKeyValuePair<TKey, TValue>(kvp)).GetEnumerator();
-        }
-
-        [Obsolete("Only used for XmlSerializer")]
-        public void Add(object item)
-        {
-            var kvp = item as XmlKeyValuePair<TKey, TValue>;
-            if (kvp != null)
-                Dict.Add(kvp.Key, kvp.Value);
-        }
-
+        [XmlIgnore]
         public TValue this[TKey key]
         {
             get
             {
-                return Dict[key];
+                return _dict[key];
             }
             set
             {
-                Dict[key] = value;
+                _dict[key] = value;
+            }
+        }
+
+        [XmlIgnore]
+        public ICollection<TKey> Keys
+        {
+            get
+            {
+                return _dict.Keys;
+            }
+        }
+
+        [XmlIgnore]
+        public ICollection<TValue> Values
+        {
+            get
+            {
+                return _dict.Values;
             }
         }
 
         public void Add(TKey key, TValue value)
         {
-            Dict.Add(key, value);
-        }
-
-        public ICollection<TKey> Keys
-        {
-            get { return Dict.Keys; }
-        }
-
-        public ICollection<TValue> Values
-        {
-            get { return Dict.Values; }
+            _dict[key] = value;
         }
     }
 }
