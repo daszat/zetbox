@@ -1897,9 +1897,9 @@ namespace Kistl.Server.SchemaManagement
             Log.InfoFormat("New is null column for CompoundObject Property: '{0}' ('{1}')", cprop.Name, colName_IsNull);
             var tblName = db.GetQualifiedTableName(objClass.TableName);
             var hasData = db.CheckTableContainsData(tblName);
-            var constr = cprop.IsNullable() 
-                ? (DatabaseConstraint)new BoolDefaultConstraint() { Value = true } 
-                : (DatabaseConstraint)new BoolCheckConstraint() { Value = false };
+            var constr = cprop.IsNullable()
+                ? new DatabaseConstraint[] { new BoolDefaultConstraint() { Value = true } }
+                : new DatabaseConstraint[] { new BoolDefaultConstraint() { Value = false }, new BoolCheckConstraint() { Value = false } };
             if (!hasData)
             {
                 db.CreateColumn(tblName, colName_IsNull, System.Data.DbType.Boolean, 0, 0, false, constr);
