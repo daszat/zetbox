@@ -8,7 +8,7 @@
                                xmlns:clientKistlBase="clr-namespace:Kistl.Client.WPF.View.KistlBase"
                                xmlns:commands="clr-namespace:Kistl.Client.WPF.Commands;assembly=Kistl.Client.WPF.Toolkit"
                                xmlns:viewmdl="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
-                               commands:SmartRoutedUICommand.IsCommandSink="True">
+                               Focusable="False" >
   <local:InstanceListBaseDisplay.CommandBindings>
     <CommandBinding Command="NavigationCommands.Refresh"
                     Executed="RefreshCommand_Executed" />
@@ -16,12 +16,13 @@
   <DockPanel x:Name="ctrlInstanceList">
     <StackPanel DockPanel.Dock="Top"
                 Visibility="{Binding ShowFilter, Converter={StaticResource BooleanToVisibilityConverter}}"
+                Focusable="False"
                 Margin="0 0 0 10">
       <StackPanel.InputBindings>
         <KeyBinding Key="Return"
                     Command="NavigationCommands.Refresh" />
       </StackPanel.InputBindings>
-      <ItemsControl ItemsSource="{Binding FilterViewModels}">
+      <ItemsControl ItemsSource="{Binding FilterViewModels}" Focusable="False">
         <ItemsControl.ItemTemplate>
           <DataTemplate>
             <ContentPresenter Content="{Binding}"

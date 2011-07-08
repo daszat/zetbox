@@ -19,6 +19,10 @@ namespace Kistl.Client.WPF
     using Kistl.App.GUI;
     using Kistl.Client.Presentables;
     using Kistl.Client.WPF.Converter;
+    using System.Windows.Input;
+    using System.Windows.Controls;
+    using Kistl.Client.WPF.Toolkit;
+    using Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;
 
     /// <summary>
     /// Interaction logic for App.xaml
@@ -127,6 +131,11 @@ namespace Kistl.Client.WPF
                         this.Resources.MergedDictionaries.Add(dict);
                     }
 
+                    // Focus nightmare
+                    // http://stackoverflow.com/questions/673536/wpf-cant-set-focus-to-a-child-of-usercontrol/4785124#4785124
+                    EventManager.RegisterClassHandler(typeof(Window), Window.LoadedEvent, new RoutedEventHandler(FocusFixLoaded));
+                    EventManager.RegisterClassHandler(typeof(Kistl.Client.WPF.View.KistlBase.InstanceCollectionBase), UserControl.LoadedEvent, new RoutedEventHandler(FocusFixLoaded));
+
                     RunFixes(container.Resolve<IKistlContext>());
 
                     // delegate all business logic into another class, which 
@@ -157,6 +166,21 @@ namespace Kistl.Client.WPF
                 // ignore this
                 //ShowExceptionReporter(ex);
             }
+        }
+
+        // Focus nightmare
+        // http://stackoverflow.com/questions/673536/wpf-cant-set-focus-to-a-child-of-usercontrol/4785124#4785124
+        void FocusFixLoaded(object sender, RoutedEventArgs e)
+        {
+            var element = e.Source as FrameworkElement;
+            element.Dispatcher.Invoke(new Action(() =>
+            {
+                var firstTxt = element.FindVisualChild<InfoTextBox>();
+                if (firstTxt != null)
+                {
+                    Keyboard.Focus(firstTxt);
+                }
+            }),DispatcherPriority.ApplicationIdle);
         }
 
         private static void InitCulture(KistlConfig config)

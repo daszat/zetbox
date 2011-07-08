@@ -29,6 +29,10 @@ namespace Kistl.Client.WPF.View.KistlBase
     {
         protected abstract void SetHeaderTemplate(DependencyObject header, DataTemplate template);
 
+        public InstanceCollectionBase()
+        {
+        }
+
         #region Sort dependency properties
         public static readonly DependencyProperty SortPropertyNameProperty =
             DependencyProperty.RegisterAttached("SortPropertyName", typeof(string), typeof(InstanceListDisplay));

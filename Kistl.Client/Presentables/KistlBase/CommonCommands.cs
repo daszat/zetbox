@@ -10,6 +10,7 @@ namespace Kistl.Client.Presentables.KistlBase
     using Kistl.App.GUI;
     using ObjectEditorWorkspace = Kistl.Client.Presentables.ObjectEditor.WorkspaceViewModel;
     using Kistl.API.Client;
+    using Kistl.API.Utils;
 
     public class OpenDataObjectCommand : ItemCommandViewModel<DataObjectViewModel>
     {
@@ -253,7 +254,8 @@ namespace Kistl.Client.Presentables.KistlBase
 
         public override bool CanExecute(object data)
         {
-            return Listener != null;
+            var result = Listener != null;
+            return result;
         }
 
         protected override void DoExecute(object data)
