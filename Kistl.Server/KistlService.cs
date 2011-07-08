@@ -387,7 +387,6 @@ namespace Kistl.Server
 
                         retChangedObjects = SendObjects(changedObjectsList.Cast<IStreamable>(), true).ToArray();
 
-
                         if (result != null && result.GetType().IsIStreamable())
                         {
                             IStreamable resultObj = (IStreamable)result;

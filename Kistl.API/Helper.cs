@@ -502,6 +502,26 @@ namespace Kistl.API
         /// Converts a object to XML.
         /// </summary>
         /// <param name="obj">Any XML Serializable Object.</param>
+        /// <returns>XML in byte[]</returns>
+        public static byte[] ToXmlByteArray(this object obj)
+        {
+            using (Logging.Log.DebugTraceMethodCall("ToXmlString"))
+            {
+                if (obj == null) { throw new ArgumentNullException("obj"); }
+
+                var xml = new XmlSerializer(obj.GetType());
+                using (var stream = new MemoryStream())
+                {
+                    xml.Serialize(stream, obj);
+                    return stream.ToArray();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Converts a object to XML.
+        /// </summary>
+        /// <param name="obj">Any XML Serializable Object.</param>
         /// <param name="s">Output stream</param>
         public static void ToXmlStream(this object obj, Stream s)
         {
@@ -530,6 +550,27 @@ namespace Kistl.API
                 using (var sr = new StringReader(xmlStr))
                 {
                     XmlSerializer xml = new XmlSerializer(typeof(T));
+                    return (T)xml.Deserialize(sr);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Converts a XML byte array to a Objekt.
+        /// </summary>
+        /// <typeparam name="T">Type of the Object.</typeparam>
+        /// <param name="xmlByteArray">XML byte array. May not be null.</param>
+        /// <returns>Returns a Object or throws an XML-Exception (see MSDN, XmlSerializer)</returns>
+        public static T FromXmlByteArray<T>(this byte[] xmlByteArray)
+            where T : new()
+        {
+            if (xmlByteArray == null) throw new ArgumentNullException("xmlByteArray");
+
+            using (Logging.Log.DebugTraceMethodCallFormat("FromXmlByteArray<T>", "Size = [{0}]", xmlByteArray.Length))
+            {
+                using (var sr = new MemoryStream(xmlByteArray))
+                {
+                    var xml = new XmlSerializer(typeof(T));
                     return (T)xml.Deserialize(sr);
                 }
             }
