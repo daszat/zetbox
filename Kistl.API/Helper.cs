@@ -513,7 +513,7 @@ namespace Kistl.API
                 using (var stream = new MemoryStream())
                 using (var tw = new StreamWriter(stream))
                 {
-                    xml.Serialize(stream, obj);
+                    xml.Serialize(tw, obj);
                     return stream.ToArray();
                 }
             }
@@ -570,7 +570,7 @@ namespace Kistl.API
             using (Logging.Log.DebugTraceMethodCallFormat("FromXmlByteArray<T>", "Size = [{0}], T = {1}", xmlByteArray.Length, typeof(T).FullName))
             {
                 using (var ms = new MemoryStream(xmlByteArray))
-                using (var sr = new StreamReader(ms, Encoding.UTF8))
+                using (var sr = new StreamReader(ms))
                 {
                     var xml = new XmlSerializer(typeof(T));
                     return (T)xml.Deserialize(sr);
