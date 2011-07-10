@@ -4,7 +4,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="PrimaryContent" runat="server">
     <h3>
-        ZBox Http Service Facade</h3>
-        <p>TODO: Add your Marketingtext here
+        ZBox Http Service</h3>
+        <p>Laden Sie den Installer mit dem Link auf der rechten Seite herunter.
         </p>
 </asp:Content>
