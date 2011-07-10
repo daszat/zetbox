@@ -511,6 +511,7 @@ namespace Kistl.API
 
                 var xml = new XmlSerializer(obj.GetType());
                 using (var stream = new MemoryStream())
+                using (var tw = new StreamWriter(stream))
                 {
                     xml.Serialize(stream, obj);
                     return stream.ToArray();
@@ -545,7 +546,7 @@ namespace Kistl.API
         {
             if (xmlStr == null) throw new ArgumentNullException("xmlStr");
 
-            using (Logging.Log.DebugTraceMethodCallFormat("FromXmlString<T>", "Size = [{0}]", xmlStr.Length))
+            using (Logging.Log.DebugTraceMethodCallFormat("FromXmlString<T>", "Size = [{0}], T = {1}", xmlStr.Length, typeof(T).FullName))
             {
                 using (var sr = new StringReader(xmlStr))
                 {
@@ -566,9 +567,10 @@ namespace Kistl.API
         {
             if (xmlByteArray == null) throw new ArgumentNullException("xmlByteArray");
 
-            using (Logging.Log.DebugTraceMethodCallFormat("FromXmlByteArray<T>", "Size = [{0}]", xmlByteArray.Length))
+            using (Logging.Log.DebugTraceMethodCallFormat("FromXmlByteArray<T>", "Size = [{0}], T = {1}", xmlByteArray.Length, typeof(T).FullName))
             {
-                using (var sr = new MemoryStream(xmlByteArray))
+                using (var ms = new MemoryStream(xmlByteArray))
+                using (var sr = new StreamReader(ms, Encoding.UTF8))
                 {
                     var xml = new XmlSerializer(typeof(T));
                     return (T)xml.Deserialize(sr);
