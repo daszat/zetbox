@@ -72,12 +72,6 @@ namespace Kistl.DalProvider.Ef
         {
             _ctx = new EfObjectContext(config);
             _implTypeFactory = implTypeFactory;
-
-            // Don't understand, but EF needs an warmup on every context
-            // Attn: use count, to avoid loading something into AttachedObjects
-            // 07.07.2011 - or not...
-            //var tmp = this.GetQuery<Kistl.App.Base.DataType>().Count();
-            //System.Diagnostics.Debug.WriteLine(tmp != null ? tmp.ToString() : String.Empty);
         }
 
         internal ObjectContext ObjectContext { get { return _ctx; } }
@@ -689,6 +683,7 @@ namespace Kistl.DalProvider.Ef
         }
 
         private List<T> SelectByExportGuid<T>(string[] cache)
+            where T : class, IPersistenceObject
         {
             if (cache == null)
                 throw new ArgumentNullException("cache");
@@ -697,6 +692,10 @@ namespace Kistl.DalProvider.Ef
 
             if (cache.Length == 0)
                 return new List<T>(0);
+
+            // It looks like, that EF loads meta-data only during a CreateQuery<T>("[<<type>>]")
+            var interfaceType = iftFactory(typeof(T));
+            PrimeQueryCache<T>(interfaceType, ToImplementationType(interfaceType));
 
             StringBuilder sql = new StringBuilder();
             sql.AppendFormat("SELECT VALUE e FROM Entities.[{0}] AS e WHERE e.ExportGuid IN {{Guid'", GetEntityName(iftFactory(typeof(T))));
