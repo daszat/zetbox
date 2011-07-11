@@ -1,4 +1,5 @@
 // #define EAGERLOADING
+#define DIAG_QUERY_CACHE
 
 namespace Kistl.DalProvider.Ef
 {
@@ -62,6 +63,22 @@ namespace Kistl.DalProvider.Ef
                     _ctx.Dispose();
                 }
             }
+
+#if DIAG_QUERY_CACHE
+            try
+            {
+                System.Diagnostics.Debug.WriteLine("=========== Query Cache hit results ===========");
+                foreach (var ce in _table.OrderByDescending(i => i.Value.HitCounter))
+                {
+                    System.Diagnostics.Debug.WriteLine(string.Format("{0}: {1}", ce.Key.Type.Name, ce.Value.HitCounter));
+                }
+                System.Diagnostics.Debug.WriteLine("=========== Query Cache hit results ===========");
+            }
+            catch
+            {
+                // Just ignore it, no one cares
+            }
+#endif
         }
 
         /// <summary>
@@ -76,10 +93,21 @@ namespace Kistl.DalProvider.Ef
 
         internal ObjectContext ObjectContext { get { return _ctx; } }
 
+        private class QueryCacheEntry
+        {
+            public QueryCacheEntry(object q)
+            {
+                Query = q;
+            }
+
+            public object Query = null;
+            public int HitCounter = 1;
+        }
+
         /// <summary>
         /// Type/Query cache
         /// </summary>
-        private Dictionary<InterfaceType, object> _table = new Dictionary<InterfaceType, object>();
+        private Dictionary<InterfaceType, QueryCacheEntry> _table = new Dictionary<InterfaceType, QueryCacheEntry>();
 
         /// <summary>
         /// Returns the EntitySet baseDir of the specified InterfaceType.
@@ -154,7 +182,7 @@ namespace Kistl.DalProvider.Ef
             var interfaceType = iftFactory(typeof(T));
             PrimeQueryCache<T>(interfaceType, ToImplementationType(interfaceType));
             // OfType<T>() at the end adds the security filters
-            return ((IQueryable)_table[interfaceType]).OfType<T>();
+            return ((IQueryable)_table[interfaceType].Query).OfType<T>();
         }
 
         public System.Collections.IList GetListHack<T>()
@@ -165,7 +193,7 @@ namespace Kistl.DalProvider.Ef
             PrimeQueryCache<T>(interfaceType, ToImplementationType(interfaceType));
 
             // OfType<T>() at the end adds the security filters
-            return ((IQueryable)_table[interfaceType]).OfType<T>().ToList();
+            return ((IQueryable)_table[interfaceType].Query).OfType<T>().ToList();
         }
 
         private void PrimeQueryCache<T>(InterfaceType interfaceType, ImplementationType implementationType)
@@ -184,10 +212,14 @@ namespace Kistl.DalProvider.Ef
 #if EAGERLOADING
                 query = AddEagerLoading<T>(query);
 #endif
-                _table[interfaceType] = new QueryTranslator<T>(
+                _table[interfaceType] = new QueryCacheEntry(new QueryTranslator<T>(
                     new EfQueryTranslatorProvider<T>(
                         metaDataResolver, this.identityStore,
-                        query, this, iftFactory));
+                        query, this, iftFactory)));
+            }
+            else
+            {
+                _table[interfaceType].HitCounter++;
             }
         }
 
