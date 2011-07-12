@@ -7,6 +7,7 @@
 <%@ Import Namespace="Kistl.API" %>
 <%@ Import Namespace="Kistl.API.Server" %>
 <%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.App.Extensions" %>
 <%@ Import Namespace="Kistl.Generator" %>
 <%@ Import Namespace="Kistl.Generator.Extensions" %>
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
@@ -16,7 +17,7 @@
         #region <%= this.GetType() %>
 <%
     var properties = cls.Properties.OrderBy(p => p.Name).ToList();
-    var rels = cls.Context.GetQuery<Relation>().Where(r => r.A.Type == cls || r.B.Type == cls)
+    var rels = cls.GetRelations()
         .OrderBy(i => i.A.RoleName).ThenBy(i => i.Verb).ThenBy(i => i.B.RoleName)
         .OrderBy(i => i.A.Type.Name).ThenBy(i => i.B.Type.Name)
         .ThenBy(i => i.ExportGuid)

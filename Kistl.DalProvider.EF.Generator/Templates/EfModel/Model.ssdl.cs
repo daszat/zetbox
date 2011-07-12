@@ -30,7 +30,7 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.EfModel
 
         protected virtual void ApplyEntityTypeColumnDefs(ObjectClass cls)
         {
-            var relevantRelations = ctx.GetQuery<Relation>()
+            var relevantRelations = cls.GetRelations() // Managed by a cache
                 .Where(r => (r.A.Type.ID == cls.ID && r.Storage == StorageType.MergeIntoA)
                             || (r.B.Type.ID == cls.ID && r.Storage == StorageType.MergeIntoB))
                 .ToList()

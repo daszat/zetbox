@@ -248,6 +248,13 @@ namespace Kistl.App.Extensions
             return IsAssignableFrom(self, (other as ObjectClass).BaseObjectClass);
         }
 
+        private const string clsRelationsTransientCacheKey = "__ClassRelationsExtensionsCache__";
+        public static List<Relation> GetRelations(this ObjectClass cls)
+        {
+            if (cls == null) throw new ArgumentNullException("cls");
+            var ctx = cls.Context;
+            if (ctx == null) throw new InvalidOperationException("Passed an object without an Context");
+            return ctx.TransientState(clsRelationsTransientCacheKey, cls, () => cls.Context.GetQuery<Relation>().Where(r => r.A.Type == cls || r.B.Type == cls).ToList());
+        }
     }
-
 }

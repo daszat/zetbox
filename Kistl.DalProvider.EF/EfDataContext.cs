@@ -220,6 +220,12 @@ namespace Kistl.DalProvider.Ef
             else
             {
                 _table[interfaceType].HitCounter++;
+#if DEBUG
+                // For setting a conditional breakpoint
+                // _table[interfaceType].HitCounter > ?? is a invalid expression and confuses the debugger
+                var dbgCounter = _table[interfaceType].HitCounter;
+#endif
+                
             }
         }
 

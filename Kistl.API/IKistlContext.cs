@@ -543,4 +543,56 @@ namespace Kistl.API
             }
         }
     }
+
+    public static class ContextTransientStateExtensions
+    {
+        public static TCacheItem TransientState<TCacheItem, TKey>(this IReadOnlyKistlContext ctx, string transientCacheKey, TKey key, Func<TCacheItem> getter)
+        {
+            if (ctx == null) throw new ArgumentNullException("ctx");
+            if (string.IsNullOrEmpty(transientCacheKey)) throw new ArgumentNullException("transientCacheKey");
+            if (getter == null) throw new ArgumentNullException("getter");
+
+            // Ensure cache
+            // Ensure transient cache
+            if (!ctx.TransientState.ContainsKey(transientCacheKey))
+            {
+                ctx.TransientState[transientCacheKey] = new Dictionary<TKey, TCacheItem>();
+            }
+            Dictionary<TKey, TCacheItem> cache = (Dictionary<TKey, TCacheItem>)ctx.TransientState[transientCacheKey];
+
+            TCacheItem result;
+            if (!cache.TryGetValue(key, out result))
+            {
+                result = getter();
+                cache[key] = result;
+                return result;
+            }
+            else
+            {
+                // Cachehit
+                // Maybe count it here
+                return result;
+            }
+        }
+
+        public static TCacheItem TransientState<TCacheItem>(this IReadOnlyKistlContext ctx, string transientCacheKey, Func<TCacheItem> getter)
+        {
+            if (ctx == null) throw new ArgumentNullException("ctx");
+            if (string.IsNullOrEmpty(transientCacheKey)) throw new ArgumentNullException("transientCacheKey");
+            if (getter == null) throw new ArgumentNullException("getter");
+
+            if (!ctx.TransientState.ContainsKey(transientCacheKey))
+            {
+                var result = getter();
+                ctx.TransientState[transientCacheKey] = result;
+                return result;
+            }
+            else
+            {
+                // Cachehit
+                // Maybe count it here
+                return (TCacheItem)ctx.TransientState[transientCacheKey];
+            }
+        }
+    }
 }

@@ -178,7 +178,7 @@ namespace Kistl.Generator
             {
                 var msg = String.Format("Error while rendering template [{0}] to [{1}]", templateName, filename);
                 Log.Error(msg, ex);
-                throw new ApplicationException(msg, ex);
+                throw new InvalidOperationException(msg, ex);
             }
         }
 

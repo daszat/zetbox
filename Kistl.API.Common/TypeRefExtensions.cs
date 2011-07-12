@@ -35,11 +35,6 @@ namespace Kistl.App.Extensions
             result = LookupByType(ctx, ctx.GetQuery<TypeRef>(), t);
             if (result != null)  AddToCache(t, result, ctx);
 
-            //if (result == null)
-            //{
-            //    throw new ReadOnlyContextException(String.Format("Type [{0}] not available and context is read-only", t));
-            //}
-
             return result;
         }
 
