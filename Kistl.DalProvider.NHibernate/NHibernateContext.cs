@@ -26,6 +26,8 @@ namespace Kistl.DalProvider.NHibernate
         private readonly ContextCache<int> _attachedObjects;
         private readonly ContextCache<IProxyObject> _attachedObjectsByProxy;
 
+        private PerfServerCounter _perfCounter;
+
         /// <summary>
         /// Counter for newly created Objects to give them a valid ID for the ContextCache
         /// </summary>
@@ -40,7 +42,8 @@ namespace Kistl.DalProvider.NHibernate
             InterfaceType.Factory iftFactory,
             NHibernateImplementationType.Factory implTypeFactory,
             global::NHibernate.ISession nhSession,
-            INHibernateImplementationTypeChecker implChecker)
+            INHibernateImplementationTypeChecker implChecker,
+            PerfServerCounter perfCounter)
             : base(metaDataResolver, identity, config, lazyCtx, iftFactory)
         {
             _implTypeFactory = implTypeFactory;
@@ -49,6 +52,8 @@ namespace Kistl.DalProvider.NHibernate
 
             _attachedObjects = new ContextCache<int>(this, item => item.ID);
             _attachedObjectsByProxy = new ContextCache<IProxyObject>(this, item => ((NHibernatePersistenceObject)item).NHibernateProxy);
+
+            _perfCounter = perfCounter;
         }
 
         public IQueryable<IPersistenceObject> PrepareQueryableGeneric<Tinterface, Tproxy>()
@@ -63,6 +68,8 @@ namespace Kistl.DalProvider.NHibernate
 
         public IQueryable<IPersistenceObject> PrepareQueryable(InterfaceType ifType)
         {
+            if (_perfCounter != null) _perfCounter.IncrementQuery(ifType);
+
             var proxyType = ToProxyType(ifType);
 
             var mi = this.GetType().FindGenericMethod(
@@ -288,6 +295,7 @@ namespace Kistl.DalProvider.NHibernate
                     _attachedObjectsByProxy.Add(obj);
                 }
                 Logging.Log.InfoFormat("[{0}] changes submitted.", notifySaveList.Count);
+                if (_perfCounter != null) _perfCounter.IncrementSubmitChanges(notifySaveList.Count);
             }
             catch (Exception ex)
             {

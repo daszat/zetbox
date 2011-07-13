@@ -84,14 +84,16 @@ namespace Kistl.DalProvider.Ef
         /// <summary>
         /// Internal Constructor
         /// </summary>
-        public EfDataContext(IMetaDataResolver metaDataResolver, Identity identity, KistlConfig config, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory, EfImplementationType.EfFactory implTypeFactory)
+        public EfDataContext(IMetaDataResolver metaDataResolver, Identity identity, KistlConfig config, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory, EfImplementationType.EfFactory implTypeFactory, PerfServerCounter perfCounter)
             : base(metaDataResolver, identity, config, lazyCtx, iftFactory)
         {
             _ctx = new EfObjectContext(config);
             _implTypeFactory = implTypeFactory;
+            _perfCounter = perfCounter;
         }
 
         internal ObjectContext ObjectContext { get { return _ctx; } }
+        private PerfServerCounter _perfCounter;
 
         private class QueryCacheEntry
         {
@@ -199,6 +201,8 @@ namespace Kistl.DalProvider.Ef
         private void PrimeQueryCache<T>(InterfaceType interfaceType, ImplementationType implementationType)
             where T : class, IPersistenceObject
         {
+            if (_perfCounter != null) _perfCounter.IncrementQuery(interfaceType);
+
             if (!_table.ContainsKey(interfaceType))
             {
                 var objectQuery = _ctx.CreateQuery<BaseServerDataObject_EntityFramework>("[" + GetEntityName(interfaceType) + "]");
@@ -295,6 +299,7 @@ namespace Kistl.DalProvider.Ef
             {
                 result = _ctx.SaveChanges();
                 Logging.Log.InfoFormat("[{0}] changes submitted.", result);
+                if (_perfCounter != null) _perfCounter.IncrementSubmitChanges(result);
             }
             catch (UpdateException updex)
             {

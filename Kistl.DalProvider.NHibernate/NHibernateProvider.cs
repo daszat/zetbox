@@ -49,7 +49,8 @@ namespace Kistl.DalProvider.NHibernate
                         c.Resolve<InterfaceType.Factory>(),
                         c.Resolve<NHibernateImplementationType.Factory>(),
                         c.Resolve<global::NHibernate.ISession>(),
-                        c.Resolve<INHibernateImplementationTypeChecker>()
+                        c.Resolve<INHibernateImplementationTypeChecker>(),
+                        c.Resolve<PerfServerCounter>()
                         );
                 })
                 .As<IKistlContext>()
@@ -84,7 +85,8 @@ namespace Kistl.DalProvider.NHibernate
                         c.Resolve<InterfaceType.Factory>(),
                         c.Resolve<NHibernateImplementationType.Factory>(),
                         c.Resolve<global::NHibernate.ISession>(),
-                        c.Resolve<INHibernateImplementationTypeChecker>()
+                        c.Resolve<INHibernateImplementationTypeChecker>(),
+                        c.Resolve<PerfServerCounter>()
                         );
                 })
                 .As<TInterface>()

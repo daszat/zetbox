@@ -54,7 +54,8 @@ namespace Kistl.DalProvider.Ef
                             c.Resolve<KistlConfig>(),
                             c.Resolve<Func<IFrozenContext>>(),
                             c.Resolve<InterfaceType.Factory>(),
-                            c.Resolve<EfImplementationType.EfFactory>()
+                            c.Resolve<EfImplementationType.EfFactory>(),
+                            c.Resolve<PerfServerCounter>()
                             );
                     }
                 })
@@ -79,7 +80,8 @@ namespace Kistl.DalProvider.Ef
                             c.Resolve<KistlConfig>(),
                             c.Resolve<Func<IFrozenContext>>(),
                             c.Resolve<InterfaceType.Factory>(),
-                            c.Resolve<EfImplementationType.EfFactory>()
+                            c.Resolve<EfImplementationType.EfFactory>(),
+                            c.Resolve<PerfServerCounter>()
                             );
                     }
                 })
@@ -103,7 +105,8 @@ namespace Kistl.DalProvider.Ef
                             c.Resolve<KistlConfig>(),
                             c.Resolve<Func<IFrozenContext>>(),
                             c.Resolve<InterfaceType.Factory>(),
-                            c.Resolve<EfImplementationType.EfFactory>()
+                            c.Resolve<EfImplementationType.EfFactory>(),
+                            c.Resolve<PerfServerCounter>()
                             );
                         return result;
                     }

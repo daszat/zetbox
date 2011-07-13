@@ -93,6 +93,7 @@
     <Compile Include="Kistl.API.Migration\OutputStream.cs" />
     <Compile Include="Kistl.API.Migration\Record.cs" />
     <Compile Include="Kistl.API.Migration\Translator.cs" />
+    <Compile Include="PerfServerCounter.cs" />
     <Compile Include="ServerApiModule.cs" />
     <Compile Include="QueryTranslatorProvider.cs" />
     <Compile Include="IKistlServerContext.cs" />

@@ -24,6 +24,12 @@ namespace Kistl.API.Server
                 .RegisterType<Migration.MigrationTasksBase>()
                 .As<Migration.IMigrationTasks>()
                 .InstancePerDependency();
+
+            moduleBuilder
+                .RegisterType<PerfServerCounter>()
+                .AsSelf()
+                .OnActivated(args => args.Instance.Initialize(args.Context.Resolve<IFrozenContext>()))
+                .SingleInstance();
         }
     }
 }

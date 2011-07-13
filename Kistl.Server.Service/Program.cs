@@ -131,6 +131,12 @@ namespace Kistl.Server.Service
                         { "analyze=", "analyzes the configured database",
                             v => { if (v != null) { actions.Add((c, args) => c.Resolve<IServer>().AnalyzeDatabase(v, File.CreateText(string.Format("{0} Report.txt", v)))); } }
                             },
+                        { "installperfcounter", "Installs/Reinstalls the perfomance counters",
+                            v => { actions.Add((c, args) => c.Resolve<PerfServerCounter>().Install()); }
+                            },
+                        { "uninstallperfcounter", "Uninstalls the perfomance counters",
+                            v => { actions.Add((c, args) => c.Resolve<PerfServerCounter>().Uninstall()); }
+                            },
                         { "help", "prints this help", 
                             v => { if ( v != null) { PrintHelpAndExit(); } } 
                             },

@@ -89,6 +89,7 @@
     <Compile Include="ModuleRepositoryAttribute.cs" />
     <Compile Include="NotifyingObservableCollection.cs" />
     <Compile Include="OrderBy.cs" />
+    <Compile Include="ObjectsPerfCounter.cs" />
     <Compile Include="ProblemReporter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SerializableExpression.cs" />
