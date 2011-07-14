@@ -51,6 +51,8 @@
       <!-- application specific modules -->
       <Module>Ini50.App.Server.Ini50Module, Ini50.App.Server</Module>
       <Module>Ini50.App.Server.Ini50Service+Module, Ini50.App.Server</Module>
+
+      <Module>Kistl.API.Server.PerfCounter.PerfMonAppender+Module, Kistl.API.Server</Module>
     </Modules>
   </Server>
   <AssemblySearchPaths>

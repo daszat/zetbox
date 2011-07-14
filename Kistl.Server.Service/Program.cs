@@ -132,10 +132,10 @@ namespace Kistl.Server.Service
                             v => { if (v != null) { actions.Add((c, args) => c.Resolve<IServer>().AnalyzeDatabase(v, File.CreateText(string.Format("{0} Report.txt", v)))); } }
                             },
                         { "installperfcounter", "Installs/Reinstalls the perfomance counters",
-                            v => { actions.Add((c, args) => c.Resolve<PerfServerCounter>().Install()); }
+                            v => { actions.Add((c, args) => c.Resolve<IPerfCounter>().Install()); }
                             },
                         { "uninstallperfcounter", "Uninstalls the perfomance counters",
-                            v => { actions.Add((c, args) => c.Resolve<PerfServerCounter>().Uninstall()); }
+                            v => { actions.Add((c, args) => c.Resolve<IPerfCounter>().Uninstall()); }
                             },
                         { "help", "prints this help", 
                             v => { if ( v != null) { PrintHelpAndExit(); } } 

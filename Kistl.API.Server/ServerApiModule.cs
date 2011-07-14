@@ -5,8 +5,9 @@ namespace Kistl.API.Server
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    
+
     using Autofac;
+    using Kistl.API.Server.PerfCounter;
 
     public sealed class ServerApiModule
         : Autofac.Module
@@ -26,9 +27,13 @@ namespace Kistl.API.Server
                 .InstancePerDependency();
 
             moduleBuilder
-                .RegisterType<PerfServerCounter>()
-                .AsSelf()
+                .RegisterModule<MemoryAppender.Module>();
+                
+            moduleBuilder
+                .RegisterType<PerfCounterDispatcher>()
+                .As<IPerfCounter>()
                 .OnActivated(args => args.Instance.Initialize(args.Context.Resolve<IFrozenContext>()))
+                .OnRelease(obj => obj.Dump())
                 .SingleInstance();
         }
     }

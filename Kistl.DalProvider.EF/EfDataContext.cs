@@ -84,7 +84,7 @@ namespace Kistl.DalProvider.Ef
         /// <summary>
         /// Internal Constructor
         /// </summary>
-        public EfDataContext(IMetaDataResolver metaDataResolver, Identity identity, KistlConfig config, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory, EfImplementationType.EfFactory implTypeFactory, PerfServerCounter perfCounter)
+        public EfDataContext(IMetaDataResolver metaDataResolver, Identity identity, KistlConfig config, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory, EfImplementationType.EfFactory implTypeFactory, IPerfCounter perfCounter)
             : base(metaDataResolver, identity, config, lazyCtx, iftFactory)
         {
             _ctx = new EfObjectContext(config);
@@ -93,7 +93,7 @@ namespace Kistl.DalProvider.Ef
         }
 
         internal ObjectContext ObjectContext { get { return _ctx; } }
-        private PerfServerCounter _perfCounter;
+        private IPerfCounter _perfCounter;
 
         private class QueryCacheEntry
         {

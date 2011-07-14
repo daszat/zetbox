@@ -21,13 +21,16 @@ namespace Kistl.Server
         private readonly IServerObjectHandlerFactory _sohFactory;
         private readonly Func<IKistlContext> _ctxFactory;
         private readonly InterfaceType.Factory _iftFactory;
+        private readonly IPerfCounter _perfCounter;
 
-        public KistlService(IServerObjectHandlerFactory sohFactory, Func<IKistlContext> ctxFactory, InterfaceType.Factory iftFactory)
+
+        public KistlService(IServerObjectHandlerFactory sohFactory, Func<IKistlContext> ctxFactory, InterfaceType.Factory iftFactory, IPerfCounter perfCounter)
         {
             Logging.Facade.Info("Creating new KistlService instance");
             _sohFactory = sohFactory;
             _ctxFactory = ctxFactory;
             _iftFactory = iftFactory;
+            _perfCounter = perfCounter;
         }
 
         private static void DebugLogIdentity()
@@ -56,6 +59,7 @@ namespace Kistl.Server
                     using (IKistlContext ctx = _ctxFactory())
                     {
                         var objects = ReadObjects(msg, ctx);
+                        _perfCounter.IncrementSetObjects(objects.Count);
 
                         // Set Operation
                         var changedObjects = _sohFactory
@@ -96,12 +100,14 @@ namespace Kistl.Server
                     using (IKistlContext ctx = _ctxFactory())
                     {
                         var filterExpresstions = filter != null ? filter.Select(f => SerializableExpression.ToExpression(f)).ToList() : null;
+                        var ifType = _iftFactory(type.GetSystemType());
                         IEnumerable<IStreamable> lst = _sohFactory
-                            .GetServerObjectHandler(_iftFactory(type.GetSystemType()))
+                            .GetServerObjectHandler(ifType)
                             .GetList(ctx, maxListCount,
                                 filterExpresstions,
                                 orderBy != null ? orderBy.Select(o => new OrderBy(o.Type, SerializableExpression.ToExpression(o.Expression))).ToList() : null);
 
+                        _perfCounter.IncrementGetList(ifType, lst.Count());
                         return SendObjects(lst, eagerLoadLists).ToArray();
                     }
                 }
@@ -219,9 +225,11 @@ namespace Kistl.Server
 
                     using (IKistlContext ctx = _ctxFactory())
                     {
+                        var ifType = _iftFactory(type.GetSystemType());
                         IEnumerable<IStreamable> lst = _sohFactory
-                            .GetServerObjectHandler(_iftFactory(type.GetSystemType()))
+                            .GetServerObjectHandler(ifType)
                             .GetListOf(ctx, ID, property);
+                        _perfCounter.IncrementGetListOf(ifType, lst.Count());
                         return SendObjects(lst, true).ToArray();
                     }
                 }
@@ -255,15 +263,19 @@ namespace Kistl.Server
                     {
                         var endRole = (RelationEndRole)serializableRole;
                         Relation rel = ctx.FindPersistenceObject<Relation>(relId);
+                        var ifTypeA = _iftFactory(rel.A.Type.GetDataType());
+                        var ifTypeB = _iftFactory(rel.B.Type.GetDataType());
+                        var ifType = endRole == RelationEndRole.A ? ifTypeA : ifTypeB;
 
                         var lst = _sohFactory
                             .GetServerCollectionHandler(
                                 ctx,
-                                _iftFactory(rel.A.Type.GetDataType()),
-                                _iftFactory(rel.B.Type.GetDataType()),
+                                ifTypeA,
+                                ifTypeB,
                                 endRole)
                             .GetCollectionEntries(ctx, relId, endRole, parentObjID);
 
+                        _perfCounter.IncrementFetchRelation(ifType, lst.Count());
                         return SendObjects(lst.Cast<IStreamable>(), true).ToArray();
                     }
                 }
@@ -356,6 +368,8 @@ namespace Kistl.Server
                     throw new ArgumentNullException("parameterArray");
                 if (changedObjectsArray == null)
                     throw new ArgumentNullException("changedObjectsArray");
+
+                _perfCounter.IncrementServerMethodInvocation();
 
                 var parameter = new MemoryStream(parameterArray);
                 var changedObjects = new MemoryStream(changedObjectsArray);

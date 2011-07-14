@@ -82,6 +82,7 @@
     <Compile Include="BaseKistlDataContext.cs" />
     <Compile Include="BaseServerDataObject.cs" />
     <Compile Include="DbTypeMapper.cs" />
+    <Compile Include="IPerfCounter.cs" />
     <Compile Include="IServer.cs" />
     <Compile Include="Kistl.API.Migration\Extensions.cs" />
     <Compile Include="Kistl.API.Migration\IConverter.cs" />
@@ -93,7 +94,9 @@
     <Compile Include="Kistl.API.Migration\OutputStream.cs" />
     <Compile Include="Kistl.API.Migration\Record.cs" />
     <Compile Include="Kistl.API.Migration\Translator.cs" />
-    <Compile Include="PerfServerCounter.cs" />
+    <Compile Include="PerfCounter\MemoryAppender.cs" />
+    <Compile Include="PerfCounter\PerfCounter.cs" />
+    <Compile Include="PerfCounter\PerfMonAppender.cs" />
     <Compile Include="ServerApiModule.cs" />
     <Compile Include="QueryTranslatorProvider.cs" />
     <Compile Include="IKistlServerContext.cs" />

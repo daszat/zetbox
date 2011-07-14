@@ -1,4 +1,4 @@
-namespace Kistl.API.Server
+namespace Kistl.API.Server.PerfCounter
 {
     using System;
     using System.Collections.Generic;
@@ -7,15 +7,31 @@ namespace Kistl.API.Server
     using Kistl.API;
     using System.Diagnostics;
     using Kistl.API.Utils;
+    using Autofac;
 
-    public class PerfServerCounter
+    public class PerfMonAppender : Kistl.API.Server.IPerfCounterAppender
     {
+        public class Module : Autofac.Module
+        {
+            protected override void Load(ContainerBuilder moduleBuilder)
+            {
+                base.Load(moduleBuilder);
+
+                moduleBuilder
+                    .RegisterType<PerfMonAppender>()
+                    .As<IPerfCounterAppender>()
+                    .SingleInstance();
+            }
+        }
+
         public static string Category = "Kistl Server";
         public readonly string InstanceName;
 
-        public PerfServerCounter()
+        public PerfMonAppender(Kistl.API.Configuration.KistlConfig cfg)
         {
-            InstanceName = string.Format("{0} #{1}", AppDomain.CurrentDomain.FriendlyName, Process.GetCurrentProcess().Id);
+            if (cfg == null) throw new ArgumentNullException("cfg");
+            //InstanceName = string.Format("{0} - {1}", AppDomain.CurrentDomain.FriendlyName, Process.GetCurrentProcess().Id);
+            InstanceName = cfg.ConfigName;
         }
 
         public void Install()
@@ -58,7 +74,6 @@ namespace Kistl.API.Server
 
             PerformanceCounterCategory.Create(Category, "A custom counter category that tracks Kistl executions",
                 PerformanceCounterCategoryType.MultiInstance, counters);
-            checkCache = null;
             Logging.Log.Info("Performance counter sucessfully installed");
         }
 
@@ -68,94 +83,86 @@ namespace Kistl.API.Server
             {
                 Logging.Log.Info("Uninstalling performance counter");
                 PerformanceCounterCategory.Delete(Category);
-                checkCache = null;
+                initialized = false;
                 Logging.Log.Info("Performance counter sucessfully uninstalled");
             }
         }
 
         public void Initialize(IFrozenContext frozenCtx)
         {
-            if (!Check()) return;
-
-            (_QueriesPerSec = Get("QueriesPerSec")).RawValue = 0;
-            (_QueriesTotal = Get("QueriesTotal")).RawValue = 0;
-
-            (_GetListPerSec = Get("GetListPerSec")).RawValue = 0;
-            (_GetListTotal = Get("GetListTotal")).RawValue = 0;
-            (_GetListObjectsPerSec = Get("GetListObjectsPerSec")).RawValue = 0;
-            (_GetListObjectsTotal = Get("GetListObjectsTotal")).RawValue = 0;
-
-            (_GetListOfPerSec = Get("GetListOfPerSec")).RawValue = 0;
-            (_GetListOfTotal = Get("GetListOFTotal")).RawValue = 0;
-            (_GetListOfObjectsPerSec = Get("GetListOfObjectsPerSec")).RawValue = 0;
-            (_GetListOfObjectsTotal = Get("GetListOfObjectsTotal")).RawValue = 0;
-
-            (_SubmitChangesPerSec = Get("SubmitChangesPerSec")).RawValue = 0;
-            (_SubmitChangesTotal = Get("SubmitChangesTotal")).RawValue = 0;
-            (_SubmitChangesObjectsPerSec = Get("SubmitChangesObjectsPerSec")).RawValue = 0;
-            (_SubmitChangesObjectsTotal = Get("SubmitChangesObjectsTotal")).RawValue = 0;
-
-            (_GetListPerSec = Get("GetListPerSec")).RawValue = 0;
-            (_GetListTotal = Get("GetListTotal")).RawValue = 0;
-            (_GetListObjectsPerSec = Get("GetListObjectsPerSec")).RawValue = 0;
-            (_GetListObjectsTotal = Get("GetListObjectsTotal")).RawValue = 0;
-
-            (_FetchRelationPerSec = Get("FetchRelationPerSec")).RawValue = 0;
-            (_FetchRelationTotal = Get("FetchRelationTotal")).RawValue = 0;
-            (_FetchRelationObjectsPerSec = Get("FetchRelationObjectsPerSec")).RawValue = 0;
-            (_FetchRelationObjectsTotal = Get("FetchRelationObjectsTotal")).RawValue = 0;
-
-            (_SetObjectsPerSec = Get("SetObjectsPerSec")).RawValue = 0;
-            (_SetObjectsTotal = Get("SetObjectsTotal")).RawValue = 0;
-            (_SetObjectsObjectsPerSec = Get("SetObjectsObjectsPerSec")).RawValue = 0;
-            (_SetObjectsObjectsTotal = Get("SetObjectsObjectsTotal")).RawValue = 0;
-
-            (_ServerMethodInvocationPerSec = Get("ServerMethodInvocationPerSec")).RawValue = 0;
-            (_ServerMethodInvocationTotal = Get("ServerMethodInvocationTotal")).RawValue = 0;
-        }
-
-        private bool? checkCache = null;
-        public bool Check()
-        {
-            if (checkCache == null)
+            if (!PerformanceCounterCategory.Exists(Category))
             {
-                checkCache = PerformanceCounterCategory.Exists(Category);
-                if (checkCache == false)
-                {
-                    Logging.Log.Warn("PerfCounters are not installed, execute 'sudo Kistl.Server.Service.exe -installperfcounter'");
-                }
+                initialized = false;
+                Logging.Log.Warn("PerfCounters are not installed, execute 'sudo Kistl.Server.Service.exe -installperfcounter'");
+                return;
             }
-            return checkCache.Value;
+
+            try
+            {
+                (_QueriesPerSec = Get("QueriesPerSec")).RawValue = 0;
+                (_QueriesTotal = Get("QueriesTotal")).RawValue = 0;
+
+                (_GetListPerSec = Get("GetListPerSec")).RawValue = 0;
+                (_GetListTotal = Get("GetListTotal")).RawValue = 0;
+                (_GetListObjectsPerSec = Get("GetListObjectsPerSec")).RawValue = 0;
+                (_GetListObjectsTotal = Get("GetListObjectsTotal")).RawValue = 0;
+
+                (_GetListOfPerSec = Get("GetListOfPerSec")).RawValue = 0;
+                (_GetListOfTotal = Get("GetListOFTotal")).RawValue = 0;
+                (_GetListOfObjectsPerSec = Get("GetListOfObjectsPerSec")).RawValue = 0;
+                (_GetListOfObjectsTotal = Get("GetListOfObjectsTotal")).RawValue = 0;
+
+                (_SubmitChangesPerSec = Get("SubmitChangesPerSec")).RawValue = 0;
+                (_SubmitChangesTotal = Get("SubmitChangesTotal")).RawValue = 0;
+                (_SubmitChangesObjectsPerSec = Get("SubmitChangesObjectsPerSec")).RawValue = 0;
+                (_SubmitChangesObjectsTotal = Get("SubmitChangesObjectsTotal")).RawValue = 0;
+
+                (_GetListPerSec = Get("GetListPerSec")).RawValue = 0;
+                (_GetListTotal = Get("GetListTotal")).RawValue = 0;
+                (_GetListObjectsPerSec = Get("GetListObjectsPerSec")).RawValue = 0;
+                (_GetListObjectsTotal = Get("GetListObjectsTotal")).RawValue = 0;
+
+                (_FetchRelationPerSec = Get("FetchRelationPerSec")).RawValue = 0;
+                (_FetchRelationTotal = Get("FetchRelationTotal")).RawValue = 0;
+                (_FetchRelationObjectsPerSec = Get("FetchRelationObjectsPerSec")).RawValue = 0;
+                (_FetchRelationObjectsTotal = Get("FetchRelationObjectsTotal")).RawValue = 0;
+
+                (_SetObjectsPerSec = Get("SetObjectsPerSec")).RawValue = 0;
+                (_SetObjectsTotal = Get("SetObjectsTotal")).RawValue = 0;
+                (_SetObjectsObjectsPerSec = Get("SetObjectsObjectsPerSec")).RawValue = 0;
+                (_SetObjectsObjectsTotal = Get("SetObjectsObjectsTotal")).RawValue = 0;
+
+                (_ServerMethodInvocationPerSec = Get("ServerMethodInvocationPerSec")).RawValue = 0;
+                (_ServerMethodInvocationTotal = Get("ServerMethodInvocationTotal")).RawValue = 0;
+
+                initialized = true;
+            }
+            catch (Exception ex)
+            {
+                Logging.Log.Error("Unable to initialize PerfCounters", ex);
+                initialized = false;
+            }
         }
+
+        public void Dump()
+        {
+        }
+
+        private bool initialized = false;
 
         private PerformanceCounter Get(string perfCounter)
         {
             if (string.IsNullOrEmpty(perfCounter)) throw new ArgumentNullException("perfCounter");
-            var counter = new PerformanceCounter(PerfServerCounter.Category, perfCounter, InstanceName, false);
+            var counter = new PerformanceCounter(PerfMonAppender.Category, perfCounter, InstanceName, false);
             counter.RawValue = 0; // Initialize & create instance, see MSDN
             return counter;
-        }
-
-        private Dictionary<string, ObjectsPerfCounter> _objects = new Dictionary<string, ObjectsPerfCounter>();
-        private ObjectsPerfCounter Get(InterfaceType ifType)
-        {
-            var name = ifType.Type.FullName;
-            ObjectsPerfCounter result;
-            if (!_objects.TryGetValue(name, out result))
-            {
-                result = new ObjectsPerfCounter(name);
-                _objects[name] = result;
-            }
-            return result;
         }
 
         PerformanceCounter _QueriesTotal;
         PerformanceCounter _QueriesPerSec;
         public void IncrementQuery(InterfaceType ifType)
         {
-            Get(ifType).QueriesTotal++;
-
-            if (!Check()) return;
+            if (!initialized) return;
 
             _QueriesPerSec.Increment();
             _QueriesTotal.Increment();
@@ -167,7 +174,7 @@ namespace Kistl.API.Server
         PerformanceCounter _SubmitChangesObjectsTotal;
         public void IncrementSubmitChanges(int objectCount)
         {
-            if (!Check()) return;
+            if (!initialized) return;
 
             _SubmitChangesPerSec.Increment();
             _SubmitChangesTotal.Increment();
@@ -181,10 +188,7 @@ namespace Kistl.API.Server
         PerformanceCounter _GetListObjectsTotal;
         public void IncrementGetList(InterfaceType ifType, int resultSize)
         {
-            Get(ifType).GetListTotal++;
-            Get(ifType).GetListObjectsTotal += resultSize;
-
-            if (!Check()) return;
+            if (!initialized) return;
 
             _GetListPerSec.Increment();
             _GetListTotal.Increment();
@@ -198,10 +202,7 @@ namespace Kistl.API.Server
         PerformanceCounter _GetListOfObjectsTotal;
         public void IncrementGetListOf(InterfaceType ifType, int resultSize)
         {
-            Get(ifType).GetListOfTotal++;
-            Get(ifType).GetListOfObjectsTotal += resultSize;
-
-            if (!Check()) return;
+            if (!initialized) return;
 
             _GetListOfPerSec.Increment();
             _GetListOfTotal.Increment();
@@ -215,10 +216,7 @@ namespace Kistl.API.Server
         PerformanceCounter _FetchRelationObjectsTotal;
         public void IncrementFetchRelation(InterfaceType ifType, int resultSize)
         {
-            Get(ifType).FetchRelationTotal++;
-            Get(ifType).FetchRelationObjectsTotal += resultSize;
-
-            if (!Check()) return;
+            if (!initialized) return;
 
             _FetchRelationPerSec.Increment();
             _FetchRelationTotal.Increment();
@@ -232,7 +230,7 @@ namespace Kistl.API.Server
         PerformanceCounter _SetObjectsObjectsTotal;
         public void IncrementSetObjects(int objectCount)
         {
-            if (!Check()) return;
+            if (!initialized) return;
 
             _SetObjectsPerSec.Increment();
             _SetObjectsTotal.Increment();
@@ -244,7 +242,7 @@ namespace Kistl.API.Server
         PerformanceCounter _ServerMethodInvocationTotal;
         public void IncrementServerMethodInvocation()
         {
-            if (!Check()) return;
+            if (!initialized) return;
             _ServerMethodInvocationPerSec.Increment();
             _ServerMethodInvocationTotal.Increment();
         }

@@ -26,7 +26,7 @@ namespace Kistl.DalProvider.NHibernate
         private readonly ContextCache<int> _attachedObjects;
         private readonly ContextCache<IProxyObject> _attachedObjectsByProxy;
 
-        private PerfServerCounter _perfCounter;
+        private IPerfCounter _perfCounter;
 
         /// <summary>
         /// Counter for newly created Objects to give them a valid ID for the ContextCache
@@ -43,7 +43,7 @@ namespace Kistl.DalProvider.NHibernate
             NHibernateImplementationType.Factory implTypeFactory,
             global::NHibernate.ISession nhSession,
             INHibernateImplementationTypeChecker implChecker,
-            PerfServerCounter perfCounter)
+            IPerfCounter perfCounter)
             : base(metaDataResolver, identity, config, lazyCtx, iftFactory)
         {
             _implTypeFactory = implTypeFactory;
