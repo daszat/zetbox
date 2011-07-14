@@ -99,6 +99,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IToolkitResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="PerfCounter\IPerfCounter.cs" />
+    <Compile Include="PerfCounter\MemoryAppender.cs" />
+    <Compile Include="PerfCounter\PerfCounter.cs" />
+    <Compile Include="PerfCounter\PerfMonAppender.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

@@ -1,4 +1,4 @@
-namespace Kistl.API.Server
+namespace Kistl.API.Server.PerfCounter
 {
     using System;
 

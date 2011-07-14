@@ -5,6 +5,7 @@ namespace Kistl.Client.Presentables
     using Kistl.App.GUI;
     using Kistl.API.Client;
 using Kistl.API;
+using Kistl.API.Client.PerfCounter;
 
     public interface IViewModelFactory : IToolkit
     {
@@ -39,5 +40,7 @@ using Kistl.API;
         // IMultipleInstancesManager
         void OnIMultipleInstancesManagerCreated(Kistl.API.IKistlContext ctx, IMultipleInstancesManager workspace);
         void OnIMultipleInstancesManagerDisposed(Kistl.API.IKistlContext ctx, IMultipleInstancesManager workspace);
+
+        IPerfCounter PerfCounter { get; }
     }
 }

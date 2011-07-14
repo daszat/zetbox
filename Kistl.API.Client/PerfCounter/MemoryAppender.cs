@@ -1,4 +1,4 @@
-namespace Kistl.API.Server.PerfCounter
+namespace Kistl.API.Client.PerfCounter
 {
     using System;
     using System.Collections.Generic;
@@ -11,7 +11,7 @@ namespace Kistl.API.Server.PerfCounter
     using Kistl.API.Configuration;
     using log4net;
 
-    public class MemoryAppender : Kistl.API.Server.PerfCounter.IPerfCounterAppender
+    public class MemoryAppender : IPerfCounterAppender
     {
         public class Module : Autofac.Module
         {
@@ -70,7 +70,7 @@ namespace Kistl.API.Server.PerfCounter
 
                 if (_mainLogger != null)
                 {
-                    _mainLogger.InfoFormat("{0}; {1}; {2}; {3}; {4}; {5}; {6}; {7}; {8}; {9}; {10}; {11}",
+                    _mainLogger.InfoFormat("{0}; {1}; {2}; {3}; {4}; {5}; {6}; {7}; {8}; {9}; {10}; {11}; {12}; {13}",
                         this.QueriesTotal,
                         this.GetListTotal,
                         this.GetListObjectsTotal,
@@ -82,7 +82,9 @@ namespace Kistl.API.Server.PerfCounter
                         this.SetObjectsTotal,
                         this.SetObjectsObjectsTotal,
                         this.SubmitChangesTotal,
-                        this.SubmitChangesObjectsTotal);
+                        this.SubmitChangesObjectsTotal,
+                        this.ViewModelFetch,
+                        this.ViewModelCreate);
 
                     this.QueriesTotal =
                     this.GetListTotal =
@@ -95,7 +97,9 @@ namespace Kistl.API.Server.PerfCounter
                     this.SetObjectsTotal =
                     this.SetObjectsObjectsTotal =
                     this.SubmitChangesTotal =
-                    this.SubmitChangesObjectsTotal = 0;
+                    this.SubmitChangesObjectsTotal = 
+                    this.ViewModelFetch =
+                    this.ViewModelCreate = 0;
                 }
             }
         }
@@ -211,6 +215,29 @@ namespace Kistl.API.Server.PerfCounter
             lock (_lock)
             {
                 ServerMethodInvocation++;
+
+                ShouldDump();
+            }
+        }
+
+
+        private long ViewModelFetch = 0;
+        public void IncrementViewModelFetch()
+        {
+            lock (_lock)
+            {
+                ViewModelFetch++;
+
+                ShouldDump();
+            }
+        }
+
+        private long ViewModelCreate = 0;
+        public void IncrementViewModelCreate()
+        {
+            lock (_lock)
+            {
+                ViewModelCreate++;
 
                 ShouldDump();
             }

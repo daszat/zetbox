@@ -19,6 +19,7 @@ namespace Kistl.Client.Presentables
     using Kistl.App.GUI;
     using Kistl.Client.GUI;
     using Kistl.Client.Presentables.ValueViewModels;
+    using Kistl.API.Client.PerfCounter;
 
     /// <summary>
     /// Abstract base class to provide basic functionality of all model factories. Toolkit-specific implementations of this class will be 
@@ -67,7 +68,7 @@ namespace Kistl.Client.Presentables
 
         private readonly Dictionary<VMCacheKey, object> _viewModelFactoryCache;
 
-        protected ViewModelFactory(Autofac.ILifetimeScope container, IFrozenContext frozenCtx, KistlConfig cfg)
+        protected ViewModelFactory(Autofac.ILifetimeScope container, IFrozenContext frozenCtx, KistlConfig cfg, IPerfCounter perfCounter)
         {
             if (container == null) throw new ArgumentNullException("container");
             if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
@@ -78,6 +79,7 @@ namespace Kistl.Client.Presentables
             this.Configuration = cfg;
             this.Managers = new Dictionary<IKistlContext, IMultipleInstancesManager>();
             this._viewModelFactoryCache = new Dictionary<VMCacheKey, object>();
+            this.PerfCounter = perfCounter;
         }
 
         #region Model Management
@@ -582,6 +584,12 @@ namespace Kistl.Client.Presentables
         {
             var task = CreateDelayedTask(displayer, loadAction);
             task.Trigger();
+        }
+
+
+        public IPerfCounter PerfCounter
+        {
+            get; private set;
         }
     }
 }

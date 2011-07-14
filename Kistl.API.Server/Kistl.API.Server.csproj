@@ -82,7 +82,7 @@
     <Compile Include="BaseKistlDataContext.cs" />
     <Compile Include="BaseServerDataObject.cs" />
     <Compile Include="DbTypeMapper.cs" />
-    <Compile Include="IPerfCounter.cs" />
+    <Compile Include="PerfCounter\IPerfCounter.cs" />
     <Compile Include="IServer.cs" />
     <Compile Include="Kistl.API.Migration\Extensions.cs" />
     <Compile Include="Kistl.API.Migration\IConverter.cs" />

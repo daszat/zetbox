@@ -19,6 +19,7 @@ namespace Kistl.DalProvider.Ef
     using Kistl.API.Utils;
     using Kistl.App.Base;
     using Kistl.App.Extensions;
+    using Kistl.API.Server.PerfCounter;
 
     /// <summary>
     /// Entityframework IKistlContext implementation

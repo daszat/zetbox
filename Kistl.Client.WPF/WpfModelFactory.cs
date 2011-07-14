@@ -15,14 +15,15 @@ namespace Kistl.Client.WPF
     using Kistl.API.Client;
     using Kistl.API.Configuration;
     using Kistl.Client.WPF.Toolkit;
+    using Kistl.API.Client.PerfCounter;
 
     public class WpfModelFactory
         : ViewModelFactory
     {
         private readonly IUiThreadManager uiThread;
 
-        public WpfModelFactory(Autofac.ILifetimeScope container, IUiThreadManager uiThread, IFrozenContext frozenCtx, KistlConfig cfg)
-            : base(container, frozenCtx, cfg)
+        public WpfModelFactory(Autofac.ILifetimeScope container, IUiThreadManager uiThread, IFrozenContext frozenCtx, KistlConfig cfg, IPerfCounter perfCounter)
+            : base(container, frozenCtx, cfg, perfCounter)
         {
             this.uiThread = uiThread;
         }

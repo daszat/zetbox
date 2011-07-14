@@ -15,6 +15,7 @@ namespace Kistl.DalProvider.Client
     using Kistl.API.Utils;
     using Kistl.DalProvider.Base;
     using System.Collections;
+using Kistl.API.Client.PerfCounter;
 
     public interface IZBoxClientContextInternals
     {
@@ -46,6 +47,7 @@ namespace Kistl.DalProvider.Client
         private readonly InterfaceType.Factory _iftFactory;
         private readonly ClientImplementationType.ClientFactory _implTypeFactory;
         private readonly ClientIsolationLevel _clientIsolationLevel;
+        private readonly IPerfCounter _perfCounter;
 
         /// <summary>
         /// List of Objects (IDataObject and ICollectionEntry) in this Context.
@@ -58,7 +60,7 @@ namespace Kistl.DalProvider.Client
         [SuppressMessage("Microsoft.Performance", "CA1805:DoNotInitializeUnnecessarily", Justification = "Uses global constant")]
         private int _newIDCounter = Helper.INVALIDID;
 
-        public KistlContextImpl(ClientIsolationLevel il, KistlConfig config, IProxy proxy, string clientImplementationAssembly, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory, ClientImplementationType.ClientFactory implTypeFactory)
+        public KistlContextImpl(ClientIsolationLevel il, KistlConfig config, IProxy proxy, string clientImplementationAssembly, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory, ClientImplementationType.ClientFactory implTypeFactory, IPerfCounter perfCounter)
         {
             this._clientIsolationLevel = il;
             this.config = config;
@@ -68,6 +70,7 @@ namespace Kistl.DalProvider.Client
             this._lazyCtx = lazyCtx;
             this._iftFactory = iftFactory;
             this._implTypeFactory = implTypeFactory;
+            this._perfCounter = perfCounter;
 
             CreatedAt = new StackTrace(true);
             KistlContextDebuggerSingleton.Created(this);
@@ -159,6 +162,7 @@ namespace Kistl.DalProvider.Client
         public IQueryable<IDataObject> GetQuery(InterfaceType ifType)
         {
             CheckDisposed();
+            if (_perfCounter != null) _perfCounter.IncrementQuery(ifType); 
             return new KistlContextQuery<IDataObject>(this, ifType, proxy);
         }
 
@@ -170,6 +174,7 @@ namespace Kistl.DalProvider.Client
         public IQueryable<T> GetQuery<T>() where T : class, IDataObject
         {
             CheckDisposed();
+            if (_perfCounter != null) _perfCounter.IncrementQuery(_iftFactory(typeof(T)));
             return new KistlContextQuery<T>(this, _iftFactory(typeof(T)), proxy);
         }
 
@@ -182,6 +187,7 @@ namespace Kistl.DalProvider.Client
         public IQueryable<T> GetPersistenceObjectQuery<T>() where T : class, IPersistenceObject
         {
             CheckDisposed();
+            if (_perfCounter != null) _perfCounter.IncrementQuery(_iftFactory(typeof(T)));
             return new KistlContextQuery<T>(this, _iftFactory(typeof(T)), proxy);
         }
 
@@ -194,6 +200,7 @@ namespace Kistl.DalProvider.Client
         public IQueryable<IPersistenceObject> GetPersistenceObjectQuery(InterfaceType ifType)
         {
             CheckDisposed();
+            if (_perfCounter != null) _perfCounter.IncrementQuery(ifType);
             return new KistlContextQuery<IPersistenceObject>(this, ifType, proxy);
         }
 
@@ -644,7 +651,9 @@ namespace Kistl.DalProvider.Client
             // CacheController<IDataObject>.Current.Clear();
 
             if (_submitChangesHandler == null) _submitChangesHandler = new SubmitChangesHandler();
-            return _submitChangesHandler.ExchangeObjects(this);
+            var result = _submitChangesHandler.ExchangeObjects(this);
+            if (_perfCounter != null) _perfCounter.IncrementSubmitChanges(result); 
+            return result;
         }
 
         /// <summary>

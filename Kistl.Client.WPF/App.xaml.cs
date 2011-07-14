@@ -136,7 +136,7 @@ namespace Kistl.Client.WPF
                     EventManager.RegisterClassHandler(typeof(Window), Window.LoadedEvent, new RoutedEventHandler(FocusFixLoaded));
                     EventManager.RegisterClassHandler(typeof(Kistl.Client.WPF.View.KistlBase.InstanceCollectionBase), UserControl.LoadedEvent, new RoutedEventHandler(FocusFixLoaded));
 
-                    RunFixes(container.Resolve<IKistlContext>());
+                    FixupDatabase(container.Resolve<Func<IKistlContext>>());
 
                     // delegate all business logic into another class, which 
                     // allows us to load the Kistl.Objects assemblies _before_ 
@@ -194,28 +194,6 @@ namespace Kistl.Client.WPF
             {
                 System.Threading.Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.GetCultureInfo(config.Client.UICulture);
             }
-        }
-
-        private void RunFixes(IKistlContext ctx)
-        {
-            //var vmd = ctx.FindPersistenceObject<ViewModelDescriptor>(new Guid("67A49C49-B890-4D35-A8DB-1F8E43BFC7DF"));
-            //foreach (var p in ctx.GetQuery<Kistl.App.Base.ObjectReferenceProperty>())
-            //{
-            //    if (p.GetIsList())
-            //    {
-            //        if (!p.RelationEnd.Parent.GetOtherEnd(p.RelationEnd).HasPersistentOrder)
-            //        {
-            //            Logging.Log.InfoFormat("Changing VMD for {0}", p.Name);
-            //            p.ValueModelDescriptor = vmd;
-            //        }
-            //        else
-            //        {
-            //            Logging.Log.InfoFormat("Leaving VMD for {0}", p.Name);
-            //        }
-            //    }
-            //}
-
-            //ctx.SubmitChanges();
         }
 
         private void Application_Exit(object sender, ExitEventArgs e)

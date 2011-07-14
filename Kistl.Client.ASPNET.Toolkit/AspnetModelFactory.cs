@@ -14,6 +14,7 @@ namespace Kistl.Client.ASPNET.Toolkit
     using Kistl.Client.Presentables;
     using Kistl.API;
     using Kistl.API.Configuration;
+    using Kistl.API.Client.PerfCounter;
 
     [AttributeUsage(AttributeTargets.Class)]
     public class ControlLocation : Attribute
@@ -39,8 +40,8 @@ namespace Kistl.Client.ASPNET.Toolkit
         : ViewModelFactory
     {
 
-        public AspnetModelFactory(Autofac.ILifetimeScope container, IFrozenContext metaCtx, KistlConfig cfg)
-            : base(container, metaCtx, cfg)
+        public AspnetModelFactory(Autofac.ILifetimeScope container, IFrozenContext metaCtx, KistlConfig cfg, IPerfCounter perfCounter)
+            : base(container, metaCtx, cfg, perfCounter)
         {
 
         }

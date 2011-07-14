@@ -29,7 +29,7 @@ namespace Kistl.Client.Presentables
 
         public static DataObjectViewModel Fetch(IViewModelFactory f, IKistlContext dataCtx, ViewModel parent, IDataObject obj)
         {
-            return (DataObjectViewModel)dataCtx.GetViewModelCache().LookupOrCreate(obj, () => f.CreateViewModel<DataObjectViewModel.Factory>(obj).Invoke(dataCtx, parent, obj));
+            return (DataObjectViewModel)dataCtx.GetViewModelCache(f.PerfCounter).LookupOrCreate(obj, () => f.CreateViewModel<DataObjectViewModel.Factory>(obj).Invoke(dataCtx, parent, obj));
         }
 
         public DataObjectViewModel(

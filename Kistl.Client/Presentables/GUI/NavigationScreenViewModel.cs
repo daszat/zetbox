@@ -23,7 +23,7 @@ namespace Kistl.Client.Presentables.GUI
             if (ModelFactory == null) throw new ArgumentNullException("ModelFactory");
             if (screen == null) throw new ArgumentNullException("screen");
 
-            return (NavigationScreenViewModel)dataCtx.GetViewModelCache().LookupOrCreate(screen, () =>
+            return (NavigationScreenViewModel)dataCtx.GetViewModelCache(ModelFactory.PerfCounter).LookupOrCreate(screen, () =>
             {
                 if (screen.ViewModelDescriptor != null)
                 {

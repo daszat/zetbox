@@ -11,6 +11,7 @@ namespace Kistl.Server
     using Kistl.API.Server;
     using Kistl.API.Utils;
     using Kistl.App.Base;
+    using Kistl.API.Server.PerfCounter;
 
     /// <summary>
     /// Implements the main service interface.

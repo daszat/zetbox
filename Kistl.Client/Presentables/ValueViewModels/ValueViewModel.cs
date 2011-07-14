@@ -32,22 +32,22 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
         public static BaseValueViewModel Fetch(IViewModelFactory f, IKistlContext dataCtx, ViewModel parent, Property prop, IValueModel mdl)
         {
-            return (BaseValueViewModel)dataCtx.GetViewModelCache().LookupOrCreate(mdl, () => f.CreateViewModel<BaseValueViewModel.Factory>(prop).Invoke(dataCtx, parent, mdl));
+            return (BaseValueViewModel)dataCtx.GetViewModelCache(f.PerfCounter).LookupOrCreate(mdl, () => f.CreateViewModel<BaseValueViewModel.Factory>(prop).Invoke(dataCtx, parent, mdl));
         }
 
         public static BaseValueViewModel Fetch(IViewModelFactory f, IKistlContext dataCtx, ViewModel parent, Method m, IValueModel mdl)
         {
-            return (BaseValueViewModel)dataCtx.GetViewModelCache().LookupOrCreate(mdl, () => f.CreateViewModel<BaseValueViewModel.Factory>(m).Invoke(dataCtx, parent, mdl));
+            return (BaseValueViewModel)dataCtx.GetViewModelCache(f.PerfCounter).LookupOrCreate(mdl, () => f.CreateViewModel<BaseValueViewModel.Factory>(m).Invoke(dataCtx, parent, mdl));
         }
 
         public static BaseValueViewModel Fetch(IViewModelFactory f, IKistlContext dataCtx, ViewModel parent, ViewModelDescriptor desc, IValueModel mdl)
         {
-            return (BaseValueViewModel)dataCtx.GetViewModelCache().LookupOrCreate(mdl, () => f.CreateViewModel<BaseValueViewModel.Factory>(desc).Invoke(dataCtx, parent, mdl));
+            return (BaseValueViewModel)dataCtx.GetViewModelCache(f.PerfCounter).LookupOrCreate(mdl, () => f.CreateViewModel<BaseValueViewModel.Factory>(desc).Invoke(dataCtx, parent, mdl));
         }
 
         public static BaseValueViewModel Fetch(IViewModelFactory f, IKistlContext dataCtx, ViewModel parent, BaseParameter param, IValueModel mdl)
         {
-            return (BaseValueViewModel)dataCtx.GetViewModelCache().LookupOrCreate(mdl, () => f.CreateViewModel<BaseValueViewModel.Factory>(param).Invoke(dataCtx, parent, mdl));
+            return (BaseValueViewModel)dataCtx.GetViewModelCache(f.PerfCounter).LookupOrCreate(mdl, () => f.CreateViewModel<BaseValueViewModel.Factory>(param).Invoke(dataCtx, parent, mdl));
         }
 
         public BaseValueViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IValueModel mdl)

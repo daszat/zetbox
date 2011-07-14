@@ -11,6 +11,7 @@ namespace Kistl.DalProvider.NHibernate
     using Kistl.API.Common;
     using Kistl.API.Configuration;
     using Kistl.API.Server;
+    using Kistl.API.Server.PerfCounter;
 
     public class NHibernateProvider
         : Autofac.Module

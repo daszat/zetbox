@@ -1,4 +1,4 @@
-namespace Kistl.API.Server.PerfCounter
+namespace Kistl.API.Client.PerfCounter
 {
     using System;
     using System.Collections.Generic;
@@ -9,7 +9,7 @@ namespace Kistl.API.Server.PerfCounter
     using Kistl.API.Utils;
     using Autofac;
 
-    public class PerfMonAppender : Kistl.API.Server.PerfCounter.IPerfCounterAppender
+    public class PerfMonAppender : IPerfCounterAppender
     {
         public class Module : Autofac.Module
         {
@@ -24,7 +24,7 @@ namespace Kistl.API.Server.PerfCounter
             }
         }
 
-        public static string Category = "Kistl Server";
+        public static string Category = "Kistl Client";
         public readonly string InstanceName;
 
         public PerfMonAppender(Kistl.API.Configuration.KistlConfig cfg)
@@ -72,6 +72,11 @@ namespace Kistl.API.Server.PerfCounter
             counters.Add(new CounterCreationData("ServerMethodInvocationPerSec", "# of ServerMethodInvocation calls / sec.", PerformanceCounterType.RateOfCountsPerSecond32));
             counters.Add(new CounterCreationData("ServerMethodInvocationTotal", "# of ServerMethodInvocation calls.", PerformanceCounterType.NumberOfItems64));
 
+            counters.Add(new CounterCreationData("ViewModelFetchPerSec", "# of ViewModels fetched / sec.", PerformanceCounterType.RateOfCountsPerSecond32));
+            counters.Add(new CounterCreationData("ViewModelFetchTotal", "# of ViewModels fetched.", PerformanceCounterType.NumberOfItems64));
+            counters.Add(new CounterCreationData("ViewModelCreatePerSec", "# of ViewModels created / sec.", PerformanceCounterType.RateOfCountsPerSecond32));
+            counters.Add(new CounterCreationData("ViewModelCreateTotal", "# of ViewModels created.", PerformanceCounterType.NumberOfItems64));
+
             PerformanceCounterCategory.Create(Category, "A custom counter category that tracks Kistl executions",
                 PerformanceCounterCategoryType.MultiInstance, counters);
             Logging.Log.Info("Performance counter sucessfully installed");
@@ -93,7 +98,7 @@ namespace Kistl.API.Server.PerfCounter
             if (!PerformanceCounterCategory.Exists(Category))
             {
                 initialized = false;
-                Logging.Log.Warn("PerfCounters are not installed, execute 'sudo Kistl.Server.Service.exe -installperfcounter'");
+                Logging.Log.Warn("PerfCounters are not installed, execute 'sudo Kistl.Client.*.exe -installperfcounter'");
                 return;
             }
 
@@ -129,6 +134,11 @@ namespace Kistl.API.Server.PerfCounter
 
                 (_ServerMethodInvocationPerSec = Get("ServerMethodInvocationPerSec")).RawValue = 0;
                 (_ServerMethodInvocationTotal = Get("ServerMethodInvocationTotal")).RawValue = 0;
+
+                (_ViewModelFetchPerSec = Get("ViewModelFetchPerSec")).RawValue = 0;
+                (_ViewModelFetchTotal = Get("ViewModelFetchTotal")).RawValue = 0;
+                (_ViewModelCreatePerSec = Get("ViewModelCreatePerSec")).RawValue = 0;
+                (_ViewModelCreateTotal = Get("ViewModelCreateTotal")).RawValue = 0;
 
                 initialized = true;
             }
@@ -240,6 +250,25 @@ namespace Kistl.API.Server.PerfCounter
             if (!initialized) return;
             _ServerMethodInvocationPerSec.Increment();
             _ServerMethodInvocationTotal.Increment();
+        }
+
+
+        PerformanceCounter _ViewModelFetchPerSec;
+        PerformanceCounter _ViewModelFetchTotal;
+        public void IncrementViewModelFetch()
+        {
+            if (!initialized) return;
+            _ViewModelFetchPerSec.Increment();
+            _ViewModelFetchTotal.Increment();
+        }
+
+        PerformanceCounter _ViewModelCreatePerSec;
+        PerformanceCounter _ViewModelCreateTotal;
+        public void IncrementViewModelCreate()
+        {
+            if (!initialized) return;
+            _ViewModelCreatePerSec.Increment();
+            _ViewModelCreateTotal.Increment();
         }
     }
 }

@@ -527,7 +527,6 @@
   <ItemGroup>
     <Compile Include="App.Fixes.cs" />
     <Compile Include="DebugConsole.cs" />
-    <Compile Include="Launcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

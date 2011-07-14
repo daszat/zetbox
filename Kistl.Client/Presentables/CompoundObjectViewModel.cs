@@ -21,7 +21,7 @@ namespace Kistl.Client.Presentables
 
         public static CompoundObjectViewModel Fetch(IViewModelFactory f, IKistlContext dataCtx, ViewModel parent, ICompoundObject obj)
         {
-            return (CompoundObjectViewModel)dataCtx.GetViewModelCache().LookupOrCreate(obj, () => f.CreateViewModel<CompoundObjectViewModel.Factory>(obj).Invoke(dataCtx, parent, obj));
+            return (CompoundObjectViewModel)dataCtx.GetViewModelCache(f.PerfCounter).LookupOrCreate(obj, () => f.CreateViewModel<CompoundObjectViewModel.Factory>(obj).Invoke(dataCtx, parent, obj));
         }
 
         public CompoundObjectViewModel(

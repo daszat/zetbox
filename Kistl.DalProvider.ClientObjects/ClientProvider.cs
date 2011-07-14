@@ -11,6 +11,7 @@ namespace Kistl.DalProvider.Client
     using Kistl.API.Client;
     using Kistl.API.Configuration;
     using Kistl.API.Utils;
+    using Kistl.API.Client.PerfCounter;
 
     public interface IClientActionsManager : ICustomActionsManager { }
 
@@ -33,7 +34,8 @@ namespace Kistl.DalProvider.Client
                         "Kistl.Objects.ClientImpl, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7b69192d05046fdf",
                         c.Resolve<Func<IFrozenContext>>(),
                         c.Resolve<InterfaceType.Factory>(),
-                        c.Resolve<ClientImplementationType.ClientFactory>());
+                        c.Resolve<ClientImplementationType.ClientFactory>(),
+                        c.Resolve<IPerfCounter>());
                 })
                 .AsSelf()
                 .As<IKistlContext>()

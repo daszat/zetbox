@@ -1,5 +1,5 @@
 
-namespace Kistl.Client.WPF
+namespace Kistl.Client
 {
     using System;
     using System.Collections.Generic;
@@ -12,6 +12,7 @@ namespace Kistl.Client.WPF
     using Kistl.Client.Presentables;
     using Kistl.Client.Presentables.KistlBase;
     using Kistl.Client.Presentables.ObjectBrowser;
+    using Kistl.API.Client.PerfCounter;
 
     public class Launcher
     {
@@ -20,23 +21,31 @@ namespace Kistl.Client.WPF
         private readonly IViewModelFactory mdlFactory;
         private readonly IFrozenContext frozenCtx;
         private readonly KistlConfig cfg;
+        private readonly IPerfCounter perfCounter;
 
-        public Launcher(IKistlContext ctx, Func<IKistlContext> ctxFactory, IViewModelFactory mdlFactory, IFrozenContext frozenCtx, KistlConfig cfg)
+        public Launcher(IKistlContext ctx, Func<IKistlContext> ctxFactory, IViewModelFactory mdlFactory, IFrozenContext frozenCtx, KistlConfig cfg, IPerfCounter perfCounter)
         {
             this.ctx = ctx;
             this.frozenCtx = frozenCtx;
             this.ctxFactory = ctxFactory;
             this.mdlFactory = mdlFactory;
             this.cfg = cfg;
+            this.perfCounter = perfCounter;
         }
 
         public void Show(string[] args)
         {
             if (args == null) { throw new ArgumentNullException("args"); }
 
-            App.FixupDatabase(ctxFactory);
-
-            if (args.Length > 0)
+            if (args.Contains("-installperfcounter"))
+            {
+                if (perfCounter != null) perfCounter.Install();
+            }
+            else if (args.Contains("-uninstallperfcounter"))
+            {
+                if (perfCounter != null) perfCounter.Install();
+            }
+            else if (args.Length > 0)
             {
                 var appGuid = new Guid(args[0]);
                 LaunchApplication(appGuid);

@@ -9,14 +9,15 @@ namespace Kistl.Client.Mocks
     using Kistl.API.Configuration;
     using Kistl.App.GUI;
     using Kistl.Client.Presentables;
+using Kistl.API.Client.PerfCounter;
 
     class TestViewModelFactory
         : ViewModelFactory
     {
         public TestViewModelFactory(Autofac.ILifetimeScope container,
             IFrozenContext frozenCtx,
-            KistlConfig cfg)
-            : base(container, frozenCtx, cfg)
+            KistlConfig cfg, IPerfCounter perfCounter)
+            : base(container, frozenCtx, cfg, perfCounter)
         {
         }
 

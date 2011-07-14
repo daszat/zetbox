@@ -1,4 +1,4 @@
-namespace Kistl.API.Server.PerfCounter
+namespace Kistl.API.Client.PerfCounter
 {
     using System;
     using System.Collections.Generic;
@@ -8,7 +8,7 @@ namespace Kistl.API.Server.PerfCounter
     using System.Diagnostics;
     using Kistl.API.Utils;
 
-    public class PerfCounterDispatcher : Kistl.API.Server.PerfCounter.IPerfCounter
+    public class PerfCounterDispatcher : Kistl.API.Client.PerfCounter.IPerfCounter
     {
         private readonly IEnumerable<IPerfCounterAppender> _appender;
         private static IEnumerable<IPerfCounterAppender> Empty = new IPerfCounterAppender[] { };
@@ -71,6 +71,22 @@ namespace Kistl.API.Server.PerfCounter
             foreach (var a in _appender ?? Empty)
             {
                 a.IncrementSubmitChanges(objectCount);
+            }
+        }
+
+        public void IncrementViewModelFetch()
+        {
+            foreach (var a in _appender ?? Empty)
+            {
+                a.IncrementViewModelFetch();
+            }
+        }
+
+        public void IncrementViewModelCreate()
+        {
+            foreach (var a in _appender ?? Empty)
+            {
+                a.IncrementViewModelCreate();
             }
         }
 

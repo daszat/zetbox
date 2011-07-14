@@ -17,6 +17,7 @@ namespace Kistl.Server.Service
     using Kistl.API.Utils;
     using Kistl.App.Extensions;
     using Kistl.App.Packaging;
+    using Kistl.API.Server.PerfCounter;
 
     /// <summary>
     /// Mainprogramm

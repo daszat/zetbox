@@ -13,6 +13,7 @@ namespace Kistl.DalProvider.Ef
     using Kistl.API.Configuration;
     using Kistl.API.Server;
     using Kistl.API.Utils;
+    using Kistl.API.Server.PerfCounter;
 
     public interface IEfActionsManager : ICustomActionsManager { }
 

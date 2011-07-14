@@ -15,6 +15,7 @@ namespace Kistl.DalProvider.NHibernate
     using Kistl.API.Server;
     using Kistl.API.Utils;
     using Kistl.App.Base;
+    using Kistl.API.Server.PerfCounter;
 
     public sealed class NHibernateContext
         : BaseKistlDataContext, IKistlServerContext

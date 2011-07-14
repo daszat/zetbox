@@ -13,6 +13,7 @@ namespace Kistl.API.Client
     using System.Text;
     using Kistl.API.Client.KistlService;
     using Kistl.API.Utils;
+using Kistl.API.Client.PerfCounter;
 
     /// <summary>
     /// Proxy Interface for IKistlService
@@ -44,11 +45,13 @@ namespace Kistl.API.Client
 
         private InterfaceType.Factory _iftFactory;
         private KistlService.IKistlService _service;
+        private readonly IPerfCounter _perfCounter;
 
-        public ProxyImplementation(InterfaceType.Factory iftFactory, Kistl.API.Client.KistlService.IKistlService service)
+        public ProxyImplementation(InterfaceType.Factory iftFactory, Kistl.API.Client.KistlService.IKistlService service, IPerfCounter perfCounter)
         {
             _iftFactory = iftFactory;
             _service = service;
+            _perfCounter = perfCounter;
         }
 
         private void MakeRequest(Action request)
@@ -94,6 +97,7 @@ namespace Kistl.API.Client
             {
                 result = ReceiveObjects(ctx, sr, out tmpAuxObjects).Cast<IDataObject>();
             }
+            if (_perfCounter != null) _perfCounter.IncrementGetList(ifType, result.Count()); 
             auxObjects = tmpAuxObjects;
             return result;
         }
@@ -116,6 +120,7 @@ namespace Kistl.API.Client
                 result = ReceiveObjects(ctx, sr, out tmpAuxObjects).Cast<IDataObject>();
             }
 
+            if (_perfCounter != null) _perfCounter.IncrementGetListOf(ifType, result.Count());
             auxObjects = tmpAuxObjects;
             return result;
         }
@@ -123,6 +128,7 @@ namespace Kistl.API.Client
         public IEnumerable<IPersistenceObject> SetObjects(IKistlContext ctx, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notficationRequests)
         {
             IEnumerable<IPersistenceObject> result = null;
+            if(_perfCounter != null) _perfCounter.IncrementSetObjects(objects.Count()); 
 
             // Serialize
             using (var ms = new MemoryStream())
@@ -211,6 +217,8 @@ namespace Kistl.API.Client
                 result = ReceiveObjects(ctx, sr, out tmpAuxObjects).Cast<T>();
             }
 
+            if (_perfCounter != null) _perfCounter.IncrementFetchRelation(ctx.GetInterfaceType(parent), result.Count());
+
             auxObjects = tmpAuxObjects;
             return result;
         }
@@ -246,6 +254,8 @@ namespace Kistl.API.Client
 
         public object InvokeServerMethod(IKistlContext ctx, InterfaceType ifType, int ID, string method, Type retValType, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests, out IEnumerable<IPersistenceObject> changedObjects)
         {
+            if (_perfCounter != null) _perfCounter.IncrementServerMethodInvocation();
+
             object result = null;
             IEnumerable<IPersistenceObject> tmpChangedObjects = null;
 
