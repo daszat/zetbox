@@ -65,9 +65,12 @@ namespace Kistl.Generator
 
         public void CompileCode()
         {
-            CompileCodeOnStaThread(_config.Server.CodeGenWorkingPath);
-            ArchiveOldOutput();
-            PublishOutput();
+            using (Log.InfoTraceMethodCall("CompileCode", "Compiling the code"))
+            {
+                CompileCodeOnStaThread(_config.Server.CodeGenWorkingPath);
+                ArchiveOldOutput();
+                PublishOutput();
+            }
         }
 
         private void CompileCodeOnStaThread(string workingPath)
@@ -328,6 +331,7 @@ namespace Kistl.Generator
             }
         }
 #endif
+
         private void PublishOutput()
         {
             var outputPath = _config.Server.CodeGenOutputPath;

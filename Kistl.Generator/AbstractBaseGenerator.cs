@@ -30,24 +30,27 @@ namespace Kistl.Generator
 
         public virtual void Generate(Kistl.API.IKistlContext ctx, string basePath)
         {
-            InitCodeBasePath(basePath);
-            Directory.CreateDirectory(CodeBasePath);
-            DeleteOldFiles();
+            using (Log.InfoTraceMethodCall("Generate", "Generating " + this.BaseName))
+            {
+                InitCodeBasePath(basePath);
+                Directory.CreateDirectory(CodeBasePath);
+                DeleteOldFiles();
 
-            SaveKeyFile();
+                SaveKeyFile();
 
-            var generatedFileNames = new List<string>();
+                var generatedFileNames = new List<string>();
 
-            generatedFileNames.AddRange(Generate_Objects(ctx));
+                generatedFileNames.AddRange(Generate_Objects(ctx));
 
-            Log.Info("  Assemblyinfo");
-            generatedFileNames.Add(Generate_AssemblyInfo(ctx));
+                Log.Info("  Assemblyinfo");
+                generatedFileNames.Add(Generate_AssemblyInfo(ctx));
 
-            Log.Info("  Other Files");
-            generatedFileNames.AddRange(Generate_Other(ctx));
+                Log.Info("  Other Files");
+                generatedFileNames.AddRange(Generate_Other(ctx));
 
-            Log.Info("  Project File");
-            Generate_ProjectFile(ctx, ProjectGuid, generatedFileNames, _schemaProviders);
+                Log.Info("  Project File");
+                Generate_ProjectFile(ctx, ProjectGuid, generatedFileNames, _schemaProviders);
+            }
         }
 
         protected virtual void SaveKeyFile()
