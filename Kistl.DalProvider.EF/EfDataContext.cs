@@ -1,5 +1,4 @@
-// #define EAGERLOADING
-#define DIAG_QUERY_CACHE
+//#define EAGERLOADING
 
 namespace Kistl.DalProvider.Ef
 {
@@ -131,12 +130,18 @@ namespace Kistl.DalProvider.Ef
                 if (!_includeCache.ContainsKey(typeof(T)))
                 {
                     var lst = new List<string>();
-                    var objClass = metaDataResolver.GetObjectClass(new InterfaceType(typeof(T)));
+                    var objClass = metaDataResolver.GetObjectClass(iftFactory(typeof(T)));
                     if (objClass == null) return src;
                     GetIncludeProperties(lst, objClass);
                     _includeCache[typeof(T)] = lst;
                 }
-                foreach (var incl in _includeCache[typeof(T)])
+
+                var includes = _includeCache[typeof(T)];
+                if (Logging.Linq.IsInfoEnabled)
+                {
+                    Logging.Linq.InfoFormat("Including {0} to {1}", string.Join(",", includes.ToArray()), typeof(T).Name);
+                }
+                foreach (var incl in includes)
                 {
                     src = src.Include(incl);
                 }
@@ -189,6 +194,9 @@ namespace Kistl.DalProvider.Ef
             if (!_table.ContainsKey(interfaceType))
             {
                 var objectQuery = _ctx.CreateQuery<BaseServerDataObject_EntityFramework>("[" + GetEntityName(interfaceType) + "]");
+#if EAGERLOADING
+                objectQuery = AddEagerLoading<T>(objectQuery);
+#endif
 
                 // The reason is that "GetEntityName" returns a Query to the baseobject 
                 // but maybe a derived object is requested. OfType will filter this.
@@ -196,9 +204,6 @@ namespace Kistl.DalProvider.Ef
                 MethodInfo ofType = typeof(ObjectQuery<BaseServerDataObject_EntityFramework>).GetMethod("OfType").MakeGenericMethod(implementationType.Type);
                 var query = (IQueryable)ofType.Invoke(objectQuery, new object[] { });
 
-#if EAGERLOADING
-                query = AddEagerLoading<T>(query);
-#endif
                 _table[interfaceType] = new QueryCacheEntry(new QueryTranslator<T>(
                     new EfQueryTranslatorProvider<T>(
                         metaDataResolver, this.identityStore,

@@ -13,7 +13,7 @@ namespace Kistl.API.Server
     using Kistl.API.Utils;
     using Kistl.App.Base;
     using Kistl.App.Extensions;
-using Kistl.API.Server.PerfCounter;
+    using Kistl.API.Server.PerfCounter;
 
     // http://msdn.microsoft.com/en-us/library/bb549414.aspx
     // The Execute method executes queries that return a single value 

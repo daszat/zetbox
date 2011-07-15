@@ -18,7 +18,7 @@ namespace Kistl.App.Packaging
 
     public class Exporter
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Exporter");
+        private readonly static log4net.ILog Log = Logging.Exporter;
 
         public static void PublishFromContext(IKistlContext ctx, string filename, string[] ownerModules)
         {

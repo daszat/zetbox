@@ -17,10 +17,16 @@ namespace Kistl.API.Utils
         private readonly static ILog _linqquery = LogManager.GetLogger("Kistl.Linq.Query");
         private readonly static ILog _reflection = LogManager.GetLogger("Kistl.Reflection");
         private readonly static ILog _methods = LogManager.GetLogger("Kistl.PerfCounter.Methods");
+        private readonly static ILog _exporter = LogManager.GetLogger("Kistl.Exporter");
 
         public static ILog Log
         {
             get { return _logger; }
+        }
+
+        public static ILog Exporter
+        {
+            get { return _exporter; }
         }
 
         public static ILog Client
