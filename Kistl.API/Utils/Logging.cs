@@ -157,7 +157,7 @@ namespace Kistl.API.Utils
                     }
                     if (_methods != null)
                     {
-                        _methods.InfoFormat("{0}; {1}; \"{2}\"", Method, watch.ElapsedMilliseconds, (Message ?? string.Empty).Replace("\"", "\"\""));
+                        _methods.InfoFormat("{0};{1};\"{2}\"", Method, watch.ElapsedMilliseconds, (Message ?? string.Empty).Replace("\"", "\"\""));
                     }
                     watch = null;
                 }
