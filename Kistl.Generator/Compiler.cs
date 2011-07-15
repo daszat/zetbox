@@ -167,79 +167,82 @@ namespace Kistl.Generator
 
         private bool CompileCode(string workingPath)
         {
-            var kistlApiPath = GetApiPath();
+            using (Log.DebugTraceMethodCall("CompileCode", "Compile Code on STA thread to " + workingPath))
+            {
+                var kistlApiPath = GetApiPath();
 
-            Log.DebugFormat("kistlApiPath = [{0}]", kistlApiPath);
+                Log.DebugFormat("kistlApiPath = [{0}]", kistlApiPath);
 
-            // TODO: move MsBuild logging to log4net
-            if (File.Exists("TemplateCodegenLog.txt"))
-                File.Delete("TemplateCodegenLog.txt");
+                // TODO: move MsBuild logging to log4net
+                if (File.Exists("TemplateCodegenLog.txt"))
+                    File.Delete("TemplateCodegenLog.txt");
 
-            string binPath = GetBinaryBasePath(workingPath);
+                string binPath = GetBinaryBasePath(workingPath);
 
-            Log.DebugFormat("binPath = [{0}]", binPath);
+                Log.DebugFormat("binPath = [{0}]", binPath);
 
-            Directory.CreateDirectory(binPath);
+                Directory.CreateDirectory(binPath);
 
-            var engine = new Engine(ToolsetDefinitionLocations.Registry);
-            engine.RegisterLogger(new Log4NetLogger());
+                var engine = new Engine(ToolsetDefinitionLocations.Registry);
+                engine.RegisterLogger(new Log4NetLogger());
 #if MONO
-            engine.RegisterLogger(new ConsoleLogger(LoggerVerbosity.Normal));
+                engine.RegisterLogger(new ConsoleLogger(LoggerVerbosity.Normal));
 #else
-            engine.RegisterLogger(new ConsoleLogger(LoggerVerbosity.Minimal));
-            // TODO: implement FileLogger in mono, reenable this
-            var logger = new FileLogger();
-            logger.Parameters = String.Format(@"logfile={0}", Path.Combine(workingPath, "compile.log"));
-            logger.Verbosity = LoggerVerbosity.Detailed;
-            engine.RegisterLogger(logger);
+                engine.RegisterLogger(new ConsoleLogger(LoggerVerbosity.Minimal));
+                // TODO: implement FileLogger in mono, reenable this
+                var logger = new FileLogger();
+                logger.Parameters = String.Format(@"logfile={0}", Path.Combine(workingPath, "compile.log"));
+                logger.Verbosity = LoggerVerbosity.Detailed;
+                engine.RegisterLogger(logger);
 #endif
 
-            engine.GlobalProperties.SetProperty("Configuration", GetConfiguration());
-            engine.GlobalProperties.SetProperty("OutputPathOverride", binPath);
-            engine.GlobalProperties.SetProperty("KistlAPIPathOverride", kistlApiPath);
+                engine.GlobalProperties.SetProperty("Configuration", GetConfiguration());
+                engine.GlobalProperties.SetProperty("OutputPathOverride", binPath);
+                engine.GlobalProperties.SetProperty("KistlAPIPathOverride", kistlApiPath);
 
-            Log.Info("Dumping engine Properties");
-            foreach (BuildProperty prop in engine.GlobalProperties)
-            {
-                Log.InfoFormat("{0} = {1}", prop.Name, prop.Value);
-            }
-
-            try
-            {
-                var result = true;
-                var compileOrder = _generatorProviders
-                    .GroupBy(k => k.CompileOrder)
-                    .OrderBy(i => i.Key);
-                foreach (var gens in compileOrder)
+                Log.Info("Dumping engine Properties");
+                foreach (BuildProperty prop in engine.GlobalProperties)
                 {
-                    foreach (var gen in gens)
-                    {
-                        result &= CompileSingle(engine, gen, workingPath, null);
-                    }
+                    Log.InfoFormat("{0} = {1}", prop.Name, prop.Value);
                 }
 
-                // Additional Targets
-                var additionalTargets = _generatorProviders
-                    .Where(i => i.AdditionalTargets.Count() > 0)
-                    .GroupBy(k => k.CompileOrder)
-                    .OrderBy(i => i.Key);
-                foreach (var gens in additionalTargets)
+                try
                 {
-                    foreach (var gen in gens)
+                    var result = true;
+                    var compileOrder = _generatorProviders
+                        .GroupBy(k => k.CompileOrder)
+                        .OrderBy(i => i.Key);
+                    foreach (var gens in compileOrder)
                     {
-                        foreach (var target in gen.AdditionalTargets)
+                        foreach (var gen in gens)
                         {
-                            result &= CompileSingle(engine, gen, workingPath, target);
+                            result &= CompileSingle(engine, gen, workingPath, null);
                         }
                     }
-                }
 
-                return result;
-            }
-            finally
-            {
-                // close all logfiles
-                engine.UnregisterAllLoggers();
+                    // Additional Targets
+                    var additionalTargets = _generatorProviders
+                        .Where(i => i.AdditionalTargets.Count() > 0)
+                        .GroupBy(k => k.CompileOrder)
+                        .OrderBy(i => i.Key);
+                    foreach (var gens in additionalTargets)
+                    {
+                        foreach (var gen in gens)
+                        {
+                            foreach (var target in gen.AdditionalTargets)
+                            {
+                                result &= CompileSingle(engine, gen, workingPath, target);
+                            }
+                        }
+                    }
+
+                    return result;
+                }
+                finally
+                {
+                    // close all logfiles
+                    engine.UnregisterAllLoggers();
+                }
             }
         }
 
