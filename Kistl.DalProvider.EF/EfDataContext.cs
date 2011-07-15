@@ -64,22 +64,6 @@ namespace Kistl.DalProvider.Ef
                     _ctx.Dispose();
                 }
             }
-
-#if DIAG_QUERY_CACHE
-            try
-            {
-                System.Diagnostics.Debug.WriteLine("=========== Query Cache hit results ===========");
-                foreach (var ce in _table.OrderByDescending(i => i.Value.HitCounter))
-                {
-                    System.Diagnostics.Debug.WriteLine(string.Format("{0}: {1}", ce.Key.Type.Name, ce.Value.HitCounter));
-                }
-                System.Diagnostics.Debug.WriteLine("=========== Query Cache hit results ===========");
-            }
-            catch
-            {
-                // Just ignore it, no one cares
-            }
-#endif
         }
 
         /// <summary>
@@ -105,7 +89,6 @@ namespace Kistl.DalProvider.Ef
             }
 
             public object Query = null;
-            public int HitCounter = 1;
         }
 
         /// <summary>
@@ -203,8 +186,6 @@ namespace Kistl.DalProvider.Ef
         private void PrimeQueryCache<T>(InterfaceType interfaceType, ImplementationType implementationType)
             where T : class, IPersistenceObject
         {
-            if (_perfCounter != null) _perfCounter.IncrementQuery(interfaceType);
-
             if (!_table.ContainsKey(interfaceType))
             {
                 var objectQuery = _ctx.CreateQuery<BaseServerDataObject_EntityFramework>("[" + GetEntityName(interfaceType) + "]");
@@ -221,17 +202,7 @@ namespace Kistl.DalProvider.Ef
                 _table[interfaceType] = new QueryCacheEntry(new QueryTranslator<T>(
                     new EfQueryTranslatorProvider<T>(
                         metaDataResolver, this.identityStore,
-                        query, this, iftFactory)));
-            }
-            else
-            {
-                _table[interfaceType].HitCounter++;
-#if DEBUG
-                // For setting a conditional breakpoint
-                // _table[interfaceType].HitCounter > ?? is a invalid expression and confuses the debugger
-                var dbgCounter = _table[interfaceType].HitCounter;
-#endif
-                
+                        query, this, iftFactory, _perfCounter)));
             }
         }
 

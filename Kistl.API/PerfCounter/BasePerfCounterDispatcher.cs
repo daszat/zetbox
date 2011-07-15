@@ -70,11 +70,20 @@ namespace Kistl.API.PerfCounter
             }
         }
 
-        public void IncrementQuery(InterfaceType ifType)
+        public long IncrementQuery(InterfaceType ifType)
         {
             foreach (var a in _appender ?? Empty)
             {
                 a.IncrementQuery(ifType);
+            }
+            return Stopwatch.GetTimestamp();
+        }
+
+        public void DecrementQuery(InterfaceType ifType, int objectCount, long startTicks)
+        {
+            foreach (var a in _appender ?? Empty)
+            {
+                a.DecrementQuery(ifType, objectCount, startTicks);
             }
         }
 

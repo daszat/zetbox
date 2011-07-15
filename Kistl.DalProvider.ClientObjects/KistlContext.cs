@@ -163,8 +163,7 @@ using Kistl.API.Client.PerfCounter;
         public IQueryable<IDataObject> GetQuery(InterfaceType ifType)
         {
             CheckDisposed();
-            _perfCounter.IncrementQuery(ifType); 
-            return new KistlContextQuery<IDataObject>(this, ifType, proxy);
+            return new KistlContextQuery<IDataObject>(this, ifType, proxy, _perfCounter);
         }
 
         /// <summary>
@@ -175,8 +174,7 @@ using Kistl.API.Client.PerfCounter;
         public IQueryable<T> GetQuery<T>() where T : class, IDataObject
         {
             CheckDisposed();
-            _perfCounter.IncrementQuery(_iftFactory(typeof(T)));
-            return new KistlContextQuery<T>(this, _iftFactory(typeof(T)), proxy);
+            return new KistlContextQuery<T>(this, _iftFactory(typeof(T)), proxy, _perfCounter);
         }
 
         /// <summary>
@@ -188,8 +186,7 @@ using Kistl.API.Client.PerfCounter;
         public IQueryable<T> GetPersistenceObjectQuery<T>() where T : class, IPersistenceObject
         {
             CheckDisposed();
-            _perfCounter.IncrementQuery(_iftFactory(typeof(T)));
-            return new KistlContextQuery<T>(this, _iftFactory(typeof(T)), proxy);
+            return new KistlContextQuery<T>(this, _iftFactory(typeof(T)), proxy, _perfCounter);
         }
 
         /// <summary>
@@ -201,8 +198,7 @@ using Kistl.API.Client.PerfCounter;
         public IQueryable<IPersistenceObject> GetPersistenceObjectQuery(InterfaceType ifType)
         {
             CheckDisposed();
-            _perfCounter.IncrementQuery(ifType);
-            return new KistlContextQuery<IPersistenceObject>(this, ifType, proxy);
+            return new KistlContextQuery<IPersistenceObject>(this, ifType, proxy, _perfCounter);
         }
 
         /// <summary>
@@ -229,7 +225,7 @@ using Kistl.API.Client.PerfCounter;
         public List<T> GetListOf<T>(InterfaceType type, int ID, string propertyName) where T : class, IDataObject
         {
             CheckDisposed();
-            KistlContextQuery<T> query = new KistlContextQuery<T>(this, type, proxy);
+            KistlContextQuery<T> query = new KistlContextQuery<T>(this, type, proxy, _perfCounter);
             return ((KistlContextProvider)query.Provider).GetListOfCall(ID, propertyName).Cast<T>().ToList();
         }
 

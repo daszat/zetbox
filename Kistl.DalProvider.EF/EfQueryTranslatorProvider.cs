@@ -10,18 +10,19 @@ namespace Kistl.DalProvider.Ef
     using Kistl.API.Common;
     using Kistl.API.Server;
     using Kistl.App.Base;
+    using Kistl.API.Server.PerfCounter;
 
     internal sealed class EfQueryTranslatorProvider<T>
         : QueryTranslatorProvider<T>
     {
-        internal EfQueryTranslatorProvider(IMetaDataResolver metaDataResolver, Identity identity, IQueryable source, IKistlContext ctx, InterfaceType.Factory iftFactory)
-            : base(metaDataResolver, identity, source, ctx, iftFactory)
+        internal EfQueryTranslatorProvider(IMetaDataResolver metaDataResolver, Identity identity, IQueryable source, IKistlContext ctx, InterfaceType.Factory iftFactory, IPerfCounter perfCounter)
+            : base(metaDataResolver, identity, source, ctx, iftFactory, perfCounter)
         {
         }
 
         protected override QueryTranslatorProvider<TElement> GetSubProvider<TElement>()
         {
-            return new EfQueryTranslatorProvider<TElement>(MetaDataResolver, Identity, Source, Ctx, IftFactory);
+            return new EfQueryTranslatorProvider<TElement>(MetaDataResolver, Identity, Source, Ctx, IftFactory, perfCounter);
         }
 
         protected override string ImplementationSuffix

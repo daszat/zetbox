@@ -18,6 +18,29 @@ namespace Kistl.API.PerfCounter
         private readonly static ILog _objectsLogger = LogManager.GetLogger("Kistl.PerfCounter.Objects");
         private int dumpCounter = 0;
         private const int DUMPCOUNTERMAX = 100;
+        private const long TICKS_TO_MILLIS = 10000;
+
+        #region Counters
+        private long QueriesTotal = 0;
+        private long QueriesObjectsTotal;
+        private long QueriesSumDuration;
+        private long SubmitChangesTotal = 0;
+        private long SubmitChangesObjectsTotal = 0;
+        private long SubmitChangesSumDuration = 0;
+        private long GetListTotal = 0;
+        private long GetListObjectsTotal = 0;
+        private long GetListSumDuration = 0;
+        private long GetListOfTotal = 0;
+        private long GetListOfObjectsTotal = 0;
+        private long GetListOfSumDuration = 0;
+        private long FetchRelationTotal = 0;
+        private long FetchRelationObjectsTotal = 0;
+        private long FetchRelationSumDuration = 0;
+        private long SetObjectsTotal = 0;
+        private long SetObjectsObjectsTotal = 0;
+        private long SetObjectsSumDuration = 0;
+        private long ServerMethodInvocation = 0;
+        #endregion
 
         public BaseLog4NetAppender()
         {
@@ -37,6 +60,11 @@ namespace Kistl.API.PerfCounter
 
         protected abstract long[] Values { get; }
 
+        private long Avg(long duration, long count)
+        {
+            return count != 0 ? duration / count / TICKS_TO_MILLIS : 0;
+        }
+
         public void Dump()
         {
             lock (sync)
@@ -47,14 +75,26 @@ namespace Kistl.API.PerfCounter
                     {
                         foreach (var i in _objects)
                         {
-                            _objectsLogger.InfoFormat("{0}; {1}; {2}; {3}; {4}; {5}; {6}; {7}", i.Value.ClassName,
+                            var vals = new object[] {
+                                i.Value.ClassName,
                                 i.Value.QueriesTotal,
+                                i.Value.QueriesObjectsTotal,
+                                i.Value.QueriesSumDuration / TICKS_TO_MILLIS,
+                                Avg(i.Value.QueriesSumDuration, i.Value.QueriesTotal),
                                 i.Value.GetListTotal,
                                 i.Value.GetListObjectsTotal,
+                                i.Value.GetListSumDuration / TICKS_TO_MILLIS,
+                                Avg(i.Value.GetListSumDuration, i.Value.GetListTotal),
                                 i.Value.GetListOfTotal,
                                 i.Value.GetListOfObjectsTotal,
+                                i.Value.GetListOfSumDuration / TICKS_TO_MILLIS,
+                                Avg(i.Value.GetListOfSumDuration, i.Value.GetListOfTotal),
                                 i.Value.FetchRelationObjectsTotal,
-                                i.Value.FetchRelationTotal);
+                                i.Value.FetchRelationTotal,
+                                i.Value.FetchRelationSumDuration / TICKS_TO_MILLIS,
+                                Avg(i.Value.FetchRelationSumDuration, i.Value.FetchRelationTotal),
+                            };
+                            _objectsLogger.InfoFormat(string.Format(GetFormatString(vals.Length), vals));
                         }
                         _objects = new Dictionary<string, ObjectsPerfCounter>();
                     }
@@ -62,28 +102,34 @@ namespace Kistl.API.PerfCounter
                     if (_mainLogger != null)
                     {
                         var vals = new long[] {
-                                                this.QueriesTotal,
-                        this.GetListTotal,
-                        this.GetListObjectsTotal,
-                        this.GetListOfTotal,
-                        this.GetListOfObjectsTotal,
-                        this.FetchRelationTotal,
-                        this.FetchRelationObjectsTotal,
-                        this.ServerMethodInvocation,
-                        this.SetObjectsTotal,
-                        this.SetObjectsObjectsTotal,
-                        this.SubmitChangesTotal,
-                        this.SubmitChangesObjectsTotal,
-                    }.Concat(Values).ToArray();
+                            this.QueriesTotal,
+                            this.QueriesObjectsTotal,
+                            this.QueriesSumDuration / TICKS_TO_MILLIS,
+                            Avg(this.QueriesSumDuration, this.QueriesTotal),
+                            this.GetListTotal,
+                            this.GetListObjectsTotal,
+                            this.GetListSumDuration / TICKS_TO_MILLIS,
+                            Avg(this.GetListSumDuration, this.GetListTotal),
+                            this.GetListOfTotal,
+                            this.GetListOfObjectsTotal,
+                            this.GetListOfSumDuration / TICKS_TO_MILLIS,
+                            Avg(this.GetListOfSumDuration, this.GetListOfTotal),
+                            this.FetchRelationTotal,
+                            this.FetchRelationObjectsTotal,
+                            this.FetchRelationSumDuration / TICKS_TO_MILLIS,
+                            Avg(this.FetchRelationSumDuration, this.FetchRelationTotal),
+                            this.ServerMethodInvocation,
+                            this.SetObjectsTotal,
+                            this.SetObjectsObjectsTotal,
+                            this.SetObjectsSumDuration / TICKS_TO_MILLIS,
+                            Avg(this.SetObjectsSumDuration, this.SetObjectsTotal),
+                            this.SubmitChangesTotal,
+                            this.SubmitChangesObjectsTotal,
+                            this.SubmitChangesSumDuration,
+                            Avg(this.SubmitChangesSumDuration, this.SubmitChangesTotal),
+                        }.Concat(Values).ToArray();
 
-                        var sb = new StringBuilder();
-                        for (int i = 0; i < vals.Length; i++)
-                        {
-                            sb.AppendFormat("{{{0}}};", i);
-                        }
-                        sb.Remove(sb.Length - 1, 1);
-
-                        _mainLogger.InfoFormat(string.Format(sb.ToString(), vals.Cast<object>().ToArray()));
+                        _mainLogger.InfoFormat(string.Format(GetFormatString(vals.Length), vals.Cast<object>().ToArray()));
 
                         ResetValues();
                     }
@@ -95,20 +141,38 @@ namespace Kistl.API.PerfCounter
             }
         }
 
+        private static string GetFormatString(int count)
+        {
+            var sb = new StringBuilder();
+            for (int i = 0; i < count; i++)
+            {
+                sb.AppendFormat("{{{0}}};", i);
+            }
+            sb.Remove(sb.Length - 1, 1);
+            return sb.ToString();
+        }
+
         protected virtual void ResetValues()
         {
             this.QueriesTotal =
+            this.QueriesObjectsTotal =
+            this.QueriesSumDuration =
             this.GetListTotal =
             this.GetListObjectsTotal =
+            this.GetListSumDuration =
             this.GetListOfTotal =
             this.GetListOfObjectsTotal =
+            this.GetListOfSumDuration =
             this.FetchRelationTotal =
             this.FetchRelationObjectsTotal =
+            this.FetchRelationSumDuration =
             this.ServerMethodInvocation =
             this.SetObjectsTotal =
             this.SetObjectsObjectsTotal =
+            this.SetObjectsSumDuration =
             this.SubmitChangesTotal =
-            this.SubmitChangesObjectsTotal = 0;
+            this.SubmitChangesObjectsTotal =
+            this.SubmitChangesSumDuration = 0;
         }
 
         protected void ShouldDump()
@@ -133,20 +197,26 @@ namespace Kistl.API.PerfCounter
             return result;
         }
 
-        private long QueriesTotal = 0;
         public void IncrementQuery(InterfaceType ifType)
+        {
+        }
+
+        public void DecrementQuery(InterfaceType ifType, int objectCount, long startTicks)
         {
             lock (sync)
             {
                 QueriesTotal++;
+                QueriesObjectsTotal += objectCount;
+                QueriesSumDuration += Stopwatch.GetTimestamp() - startTicks;
+
                 Get(ifType).QueriesTotal++;
+                Get(ifType).QueriesObjectsTotal += objectCount;
+                Get(ifType).QueriesSumDuration += Stopwatch.GetTimestamp() - startTicks;
 
                 ShouldDump();
             }
         }
 
-        private long SubmitChangesTotal = 0;
-        private long SubmitChangesObjectsTotal = 0;
         public void IncrementSubmitChanges()
         {
         }
@@ -157,14 +227,13 @@ namespace Kistl.API.PerfCounter
             {
                 SubmitChangesTotal++;
                 SubmitChangesObjectsTotal += objectCount;
+                SubmitChangesSumDuration += Stopwatch.GetTimestamp() - startTicks;
 
                 ShouldDump();
             }
         }
 
 
-        private long GetListTotal = 0;
-        private long GetListObjectsTotal = 0;
         public void IncrementGetList(InterfaceType ifType)
         {
         }
@@ -174,15 +243,15 @@ namespace Kistl.API.PerfCounter
             {
                 GetListTotal++;
                 GetListObjectsTotal += resultSize;
+                GetListSumDuration += Stopwatch.GetTimestamp() - startTicks;
                 Get(ifType).GetListTotal++;
                 Get(ifType).GetListObjectsTotal += resultSize;
+                Get(ifType).GetListSumDuration += resultSize;
 
                 ShouldDump();
             }
         }
 
-        private long GetListOfTotal = 0;
-        private long GetListOfObjectsTotal = 0;
         public void IncrementGetListOf(InterfaceType ifType)
         {
         }
@@ -192,15 +261,15 @@ namespace Kistl.API.PerfCounter
             {
                 GetListOfTotal++;
                 GetListOfObjectsTotal += resultSize;
+                GetListOfSumDuration += Stopwatch.GetTimestamp() - startTicks;
                 Get(ifType).GetListOfTotal++;
                 Get(ifType).GetListOfObjectsTotal += resultSize;
+                Get(ifType).GetListOfSumDuration += resultSize;
 
                 ShouldDump();
             }
         }
 
-        private long FetchRelationTotal = 0;
-        private long FetchRelationObjectsTotal = 0;
         public void IncrementFetchRelation(InterfaceType ifType)
         {
         }
@@ -210,15 +279,15 @@ namespace Kistl.API.PerfCounter
             {
                 FetchRelationTotal++;
                 FetchRelationObjectsTotal += resultSize;
+                FetchRelationSumDuration += Stopwatch.GetTimestamp() - startTicks;
                 Get(ifType).FetchRelationTotal++;
                 Get(ifType).FetchRelationObjectsTotal += resultSize;
+                Get(ifType).FetchRelationSumDuration += resultSize;
             
                 ShouldDump();
             }
         }
 
-        private long SetObjectsTotal = 0;
-        private long SetObjectsObjectsTotal = 0;
         public void IncrementSetObjects()
         {
         }
@@ -229,12 +298,12 @@ namespace Kistl.API.PerfCounter
             {
                 SetObjectsTotal++;
                 SetObjectsObjectsTotal += objectCount;
+                SetObjectsSumDuration += Stopwatch.GetTimestamp() - startTicks;
 
                 ShouldDump();
             }
         }
 
-        private long ServerMethodInvocation = 0;
         public void IncrementServerMethodInvocation()
         {
             lock (sync)

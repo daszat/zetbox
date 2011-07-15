@@ -12,20 +12,21 @@ namespace Kistl.API.Server.Tests
     using Kistl.API.Server.Mocks;
     using Kistl.App.Base;
     using NUnit.Framework;
+    using Kistl.API.Server.PerfCounter;
 
     internal class TestQueryTranslatorProvider<T> : QueryTranslatorProvider<T>
     {
         private readonly InterfaceType.Factory _iftFactory;
 
-        internal TestQueryTranslatorProvider(IMetaDataResolver metaDataResolver, Identity identity, IQueryable source, IKistlContext ctx, InterfaceType.Factory iftFactory)
-            : base(metaDataResolver, identity, source, ctx, iftFactory)
+        internal TestQueryTranslatorProvider(IMetaDataResolver metaDataResolver, Identity identity, IQueryable source, IKistlContext ctx, InterfaceType.Factory iftFactory, IPerfCounter perfCounter)
+            : base(metaDataResolver, identity, source, ctx, iftFactory, perfCounter)
         {
             _iftFactory = iftFactory;
         }
 
         protected override QueryTranslatorProvider<TElement> GetSubProvider<TElement>()
         {
-            return new TestQueryTranslatorProvider<TElement>(MetaDataResolver, Identity, Source, Ctx, _iftFactory);
+            return new TestQueryTranslatorProvider<TElement>(MetaDataResolver, Identity, Source, Ctx, _iftFactory, perfCounter);
         }
 
         protected override string ImplementationSuffix
@@ -49,7 +50,7 @@ namespace Kistl.API.Server.Tests
         public void should_keep_Convert_nodes_on_primitive_data()
         {
             var q = ctx.GetQuery<TestObjClass>();
-            var subject = new TestQueryTranslatorProvider<TestObjClass>(scope.Resolve<IMetaDataResolver>(), null, q, ctx, scope.Resolve<InterfaceType.Factory>());
+            var subject = new TestQueryTranslatorProvider<TestObjClass>(scope.Resolve<IMetaDataResolver>(), null, q, ctx, scope.Resolve<InterfaceType.Factory>(), scope.Resolve<IPerfCounter>());
 
             var obj = Expression.MakeBinary(
                 ExpressionType.Equal,

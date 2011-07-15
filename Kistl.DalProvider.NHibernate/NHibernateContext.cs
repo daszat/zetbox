@@ -64,14 +64,12 @@ namespace Kistl.DalProvider.NHibernate
             return new QueryTranslator<Tinterface>(
                 new NHibernateQueryTranslatorProvider<Tinterface>(
                     metaDataResolver, this.identityStore,
-                    query, this, iftFactory, _implChecker))
+                    query, this, iftFactory, _implChecker, _perfCounter))
                 .Cast<IPersistenceObject>();
         }
 
         public IQueryable<IPersistenceObject> PrepareQueryable(InterfaceType ifType)
         {
-            _perfCounter.IncrementQuery(ifType);
-
             var proxyType = ToProxyType(ifType);
 
             var mi = this.GetType().FindGenericMethod(

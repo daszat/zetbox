@@ -13,6 +13,7 @@ namespace Kistl.DalProvider.Client
     using Kistl.API;
     using Kistl.API.Client;
     using Kistl.API.Utils;
+using Kistl.API.Client.PerfCounter;
 
     /// <summary>
     /// Provider for Kistl Linq Provider. See http://blogs.msdn.com/mattwar/archive/2007/07/30/linq-building-an-iqueryable-provider-part-i.aspx for details.
@@ -48,12 +49,14 @@ namespace Kistl.DalProvider.Client
         private LinkedList<OrderBy> _orderBy = null;
 
         private IProxy _proxy;
+        private readonly IPerfCounter perfCounter;
 
-        internal KistlContextProvider(KistlContextImpl ctx, InterfaceType ifType, IProxy proxy)
+        internal KistlContextProvider(KistlContextImpl ctx, InterfaceType ifType, IProxy proxy, IPerfCounter perfCounter)
         {
             _context = ctx;
             _type = ifType;
             _proxy = proxy;
+            this.perfCounter = perfCounter;
         }
 
         private void ResetState()
@@ -117,58 +120,68 @@ namespace Kistl.DalProvider.Client
         /// <returns></returns>
         internal T GetListCall<T>(Expression e)
         {
-            ResetState();
-
-            if (Logging.Linq.IsInfoEnabled)
+            int objectCount = 0;
+            var ticks = perfCounter.IncrementQuery(_type);
+            try
             {
-                Logging.Linq.Info(e.ToString());
-            }
+                ResetState();
 
-            List<IStreamable> auxObjects;
-            List<IDataObject> serviceResult = VisitAndCallService(e, out auxObjects);
-            // prepare caches
-            foreach (IPersistenceObject obj in auxObjects)
-            {
-                _context.AttachRespectingIsolationLevel(obj);
-            }
-
-            MethodCallExpression me = e as MethodCallExpression;
-
-            // Projection
-            if (e.IsMethodCallExpression("Select"))
-            {
-                // Get Selector and SourceType
-                // Sourcetype should be of type IDataObject
-                LambdaExpression selector = (LambdaExpression)me.Arguments[1].StripQuotes();
-                Type sourceType = selector.Parameters[0].Type;
-
-                // Create temporary result list for objects
-                IList result = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(sourceType));
-                foreach (IDataObject obj in serviceResult)
+                if (Logging.Linq.IsInfoEnabled)
                 {
-                    result.Add(_context.AttachRespectingIsolationLevel(obj));
+                    Logging.Linq.Info(e.ToString());
                 }
-                // Can't use T as it is a ListType
-                AddNewLocalObjects(_type, result);
 
-                _context.PlaybackNotifications();
-
-                IQueryable selectResult = result.AsQueryable().AddSelector(selector, sourceType, selector.Body.Type); // typeof(T).FindElementTypes().First());
-                return (T)Activator.CreateInstance(typeof(T), selectResult.AddCast(typeof(T).FindElementTypes().First()).GetEnumerator());
-            }
-            else
-            {
-                T result = Activator.CreateInstance<T>();
-                if (!(result is IList)) throw new InvalidOperationException("A GetListCall supports only ILists as return result");
-                foreach (IDataObject obj in serviceResult)
+                List<IStreamable> auxObjects;
+                List<IDataObject> serviceResult = VisitAndCallService(e, out auxObjects);
+                objectCount = serviceResult.Count;
+                // prepare caches
+                foreach (IPersistenceObject obj in auxObjects)
                 {
-                    ((IList)result).Add(_context.AttachRespectingIsolationLevel(obj));
+                    _context.AttachRespectingIsolationLevel(obj);
                 }
-                // Can't use T as it is a ListType
-                AddNewLocalObjects(_type, (IList)result);
 
-                _context.PlaybackNotifications();
-                return result;
+                MethodCallExpression me = e as MethodCallExpression;
+
+                // Projection
+                if (e.IsMethodCallExpression("Select"))
+                {
+                    // Get Selector and SourceType
+                    // Sourcetype should be of type IDataObject
+                    LambdaExpression selector = (LambdaExpression)me.Arguments[1].StripQuotes();
+                    Type sourceType = selector.Parameters[0].Type;
+
+                    // Create temporary result list for objects
+                    IList result = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(sourceType));
+                    foreach (IDataObject obj in serviceResult)
+                    {
+                        result.Add(_context.AttachRespectingIsolationLevel(obj));
+                    }
+                    // Can't use T as it is a ListType
+                    AddNewLocalObjects(_type, result);
+
+                    _context.PlaybackNotifications();
+
+                    IQueryable selectResult = result.AsQueryable().AddSelector(selector, sourceType, selector.Body.Type); // typeof(T).FindElementTypes().First());
+                    return (T)Activator.CreateInstance(typeof(T), selectResult.AddCast(typeof(T).FindElementTypes().First()).GetEnumerator());
+                }
+                else
+                {
+                    T result = Activator.CreateInstance<T>();
+                    if (!(result is IList)) throw new InvalidOperationException("A GetListCall supports only ILists as return result");
+                    foreach (IDataObject obj in serviceResult)
+                    {
+                        ((IList)result).Add(_context.AttachRespectingIsolationLevel(obj));
+                    }
+                    // Can't use T as it is a ListType
+                    AddNewLocalObjects(_type, (IList)result);
+
+                    _context.PlaybackNotifications();
+                    return result;
+                }
+            }
+            finally
+            {
+                perfCounter.DecrementQuery(_type, objectCount, ticks);
             }
         }
 
@@ -179,59 +192,70 @@ namespace Kistl.DalProvider.Client
         /// <returns>A Object an Expeption, if the Object was not found.</returns>
         internal T GetObjectCall<T>(Expression e)
         {
-            ResetState();
-
-            if (Logging.Linq.IsInfoEnabled)
+            int objectCount = 0;
+            var ticks = perfCounter.IncrementQuery(_type);
+            try
             {
-                Logging.Linq.Info(e.ToString());
-            }
+                ResetState();
 
-            // Visit
-            e = TransformExpression(e);
-            Visit(e);
-
-            // Try to find a local object first
-            List<T> result = new List<T>();
-            AddLocalObjects<T>(result);
-
-            // If nothing found local -> goto Server
-            if (result.Count == 0)
-            {
-                List<IStreamable> auxObjects;
-                List<IDataObject> serviceResult = CallService(out auxObjects);
-                // prepare caches
-                foreach (IPersistenceObject obj in auxObjects)
+                if (Logging.Linq.IsInfoEnabled)
                 {
-                    _context.AttachRespectingIsolationLevel(obj);
+                    Logging.Linq.Info(e.ToString());
                 }
 
-                foreach (IDataObject obj in serviceResult)
+                // Visit
+                e = TransformExpression(e);
+                Visit(e);
+
+                // Try to find a local object first
+                List<T> result = new List<T>();
+                AddLocalObjects<T>(result);
+
+                // If nothing found local -> goto Server
+                if (result.Count == 0)
                 {
-                    result.Add((T)_context.AttachRespectingIsolationLevel(obj));
+                    List<IStreamable> auxObjects;
+                    List<IDataObject> serviceResult = CallService(out auxObjects);
+                    // prepare caches
+                    foreach (IPersistenceObject obj in auxObjects)
+                    {
+                        _context.AttachRespectingIsolationLevel(obj);
+                    }
+
+                    foreach (IDataObject obj in serviceResult)
+                    {
+                        result.Add((T)_context.AttachRespectingIsolationLevel(obj));
+                    }
+
+                    _context.PlaybackNotifications();
                 }
 
-                _context.PlaybackNotifications();
-            }
+                objectCount = result.Count;
 
-            if (e.IsMethodCallExpression("First"))
-            {
-                return result.First();
+                if (e.IsMethodCallExpression("First"))
+                {
+                    return result.First();
+                }
+                else if (e.IsMethodCallExpression("FirstOrDefault"))
+                {
+                    return result.FirstOrDefault();
+                }
+                else if (e.IsMethodCallExpression("Single"))
+                {
+                    return result.Single();
+                }
+                else if (e.IsMethodCallExpression("SingleOrDefault"))
+                {
+                    return result.SingleOrDefault();
+                }
+                else
+                {
+                    throw new NotSupportedException("Expression is not supported");
+                }
             }
-            else if (e.IsMethodCallExpression("FirstOrDefault"))
+            finally
             {
-                return result.FirstOrDefault();
-            }
-            else if (e.IsMethodCallExpression("Single"))
-            {
-                return result.Single();
-            }
-            else if (e.IsMethodCallExpression("SingleOrDefault"))
-            {
-                return result.SingleOrDefault();
-            }
-            else
-            {
-                throw new NotSupportedException("Expression is not supported");
+                perfCounter.DecrementQuery(_type, objectCount, ticks);
             }
         }
 
@@ -263,7 +287,7 @@ namespace Kistl.DalProvider.Client
         #region IQueryProvider Members
         public IQueryable<TElement> CreateQuery<TElement>(Expression expression)
         {
-            return (IQueryable<TElement>)new KistlContextQuery<TElement>(_context, _type, this, expression);
+            return (IQueryable<TElement>)new KistlContextQuery<TElement>(_context, _type, this, expression, perfCounter);
         }
 
         public IQueryable CreateQuery(Expression expression)
@@ -272,7 +296,7 @@ namespace Kistl.DalProvider.Client
 
             Type elementType = expression.Type.FindElementTypes().First();
             return (IQueryable)Activator.CreateInstance(typeof(KistlContextQuery<>)
-                .MakeGenericType(elementType), new object[] { _context, _type, this, expression });
+                .MakeGenericType(elementType), new object[] { _context, _type, this, expression, perfCounter });
         }
 
         public TResult Execute<TResult>(Expression e)

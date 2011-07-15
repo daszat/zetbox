@@ -4,7 +4,8 @@ namespace Kistl.API.PerfCounter
 
     public interface IBasePerfCounter
     {
-        void IncrementQuery(Kistl.API.InterfaceType ifType);
+        long IncrementQuery(Kistl.API.InterfaceType ifType);
+        void DecrementQuery(Kistl.API.InterfaceType ifType, int objectCount, long startTicks);
 
         long IncrementSubmitChanges();
         void DecrementSubmitChanges(int objectCount, long startTicks);
@@ -32,6 +33,7 @@ namespace Kistl.API.PerfCounter
     public interface IBasePerfCounterAppender
     {
         void IncrementQuery(Kistl.API.InterfaceType ifType);
+        void DecrementQuery(Kistl.API.InterfaceType ifType, int objectCount, long startTicks);
 
         void IncrementSubmitChanges();
         void DecrementSubmitChanges(int objectCount, long startTicks);

@@ -9,6 +9,7 @@ namespace Kistl.DalProvider.NHibernate
     using Kistl.API.Common;
     using Kistl.API.Server;
     using Kistl.App.Base;
+using Kistl.API.Server.PerfCounter;
 
     internal sealed class NHibernateQueryTranslatorProvider<T>
         : QueryTranslatorProvider<T>
@@ -16,8 +17,8 @@ namespace Kistl.DalProvider.NHibernate
         private readonly NHibernateContext _ctx;
         private readonly INHibernateImplementationTypeChecker _implChecker;
 
-        internal NHibernateQueryTranslatorProvider(IMetaDataResolver metaDataResolver, Identity identity, IQueryable source, NHibernateContext ctx, InterfaceType.Factory iftFactory, INHibernateImplementationTypeChecker implChecker)
-            : base(metaDataResolver, identity, source, ctx, iftFactory)
+        internal NHibernateQueryTranslatorProvider(IMetaDataResolver metaDataResolver, Identity identity, IQueryable source, NHibernateContext ctx, InterfaceType.Factory iftFactory, INHibernateImplementationTypeChecker implChecker, IPerfCounter perfCounter)
+            : base(metaDataResolver, identity, source, ctx, iftFactory, perfCounter)
         {
             _ctx = ctx;
             _implChecker = implChecker;
@@ -25,7 +26,7 @@ namespace Kistl.DalProvider.NHibernate
 
         protected override QueryTranslatorProvider<TElement> GetSubProvider<TElement>()
         {
-            return new NHibernateQueryTranslatorProvider<TElement>(MetaDataResolver, Identity, Source, _ctx, IftFactory, _implChecker);
+            return new NHibernateQueryTranslatorProvider<TElement>(MetaDataResolver, Identity, Source, _ctx, IftFactory, _implChecker, perfCounter);
         }
 
         protected override object WrapResult(object item)

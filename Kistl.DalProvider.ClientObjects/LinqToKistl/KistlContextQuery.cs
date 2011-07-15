@@ -11,6 +11,7 @@ namespace Kistl.DalProvider.Client
 
     using Kistl.API;
     using Kistl.API.Client;
+using Kistl.API.Client.PerfCounter;
 
     // http://blogs.msdn.com/mattwar/archive/2007/07/30/linq-building-an-iqueryable-provider-part-i.aspx
 
@@ -20,30 +21,34 @@ namespace Kistl.DalProvider.Client
         private KistlContextProvider _provider = null;
         private InterfaceType _type;
         private KistlContextImpl _context;
+        private IPerfCounter _perfCounter;
 
         #region Constructor
-        public KistlContextQuery(KistlContextImpl ctx, InterfaceType type, IProxy proxy)
+        public KistlContextQuery(KistlContextImpl ctx, InterfaceType type, IProxy proxy, IPerfCounter perfCounter)
         {
             if (ctx == null) throw new ArgumentNullException("ctx");
             // if (type == null) throw new ArgumentNullException("type");
 
+            _perfCounter = perfCounter;
             _type = type;
             _context = ctx;
             _expression = System.Linq.Expressions.Expression.Constant(this);
-            _provider = new KistlContextProvider(_context, _type, proxy);
+            _provider = new KistlContextProvider(_context, _type, proxy, perfCounter);
         }
 
-        public KistlContextQuery(KistlContextImpl ctx, InterfaceType type, KistlContextProvider provider, Expression expression)
+        public KistlContextQuery(KistlContextImpl ctx, InterfaceType type, KistlContextProvider provider, Expression expression, IPerfCounter perfCounter)
         {
             if (ctx == null) throw new ArgumentNullException("ctx");
             // if (type == null) throw new ArgumentNullException("type");
             if (provider == null) throw new ArgumentNullException("provider");
             if (expression == null) throw new ArgumentNullException("expression");
+            if (perfCounter == null) throw new ArgumentNullException("perfCounter");
 
             _type = type;
             _context = ctx;
             _expression = expression;
             _provider = provider;
+            _perfCounter = perfCounter;
         }
         #endregion
 

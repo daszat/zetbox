@@ -15,6 +15,9 @@ namespace Kistl.API.PerfCounter
         #region Fiedls
         PerformanceCounter _QueriesTotal;
         PerformanceCounter _QueriesPerSec;
+        PerformanceCounter _QueriesCurrent;
+        PerformanceCounter _QueriesAvgDuration;
+        PerformanceCounter _QueriesAvgDurationBase;
         PerformanceCounter _SubmitChangesPerSec;
         PerformanceCounter _SubmitChangesTotal;
         PerformanceCounter _SubmitChangesObjectsPerSec;
@@ -161,6 +164,10 @@ namespace Kistl.API.PerfCounter
         { 
             new CounterDesc("QueriesPerSec", "# of Queries / sec.", PerformanceCounterType.RateOfCountsPerSecond32, (pma, desc) => pma._QueriesPerSec = desc.Get(pma)),
             new CounterDesc("QueriesTotal", "# of Queries.", PerformanceCounterType.NumberOfItems64, (pma, desc) => pma._QueriesTotal = desc.Get(pma)),
+            new CounterDesc("QueriesCurrent", "Current # of Queries.", PerformanceCounterType.NumberOfItems64, (pma, desc) => pma._QueriesCurrent = desc.Get(pma)),
+
+            new CounterDesc("QueriesAvgDuration", "Avg. duration of Queries.", PerformanceCounterType.AverageTimer32, (pma, desc) => pma._QueriesAvgDuration = desc.Get(pma)),
+            new CounterDesc("QueriesAvgDurationBase", "Avg. duration of Queries Base.", PerformanceCounterType.AverageBase, (pma, desc) => pma._QueriesAvgDurationBase = desc.Get(pma)),
 
             new CounterDesc("SubmitChangesPerSec", "# of SubmitChanges / sec.", PerformanceCounterType.RateOfCountsPerSecond32, (pma, desc) => pma._SubmitChangesPerSec = desc.Get(pma)),
             new CounterDesc("SubmitChangesTotal", "# of SubmitChanges.", PerformanceCounterType.NumberOfItems64, (pma, desc) => pma._SubmitChangesTotal = desc.Get(pma)),
@@ -221,13 +228,24 @@ namespace Kistl.API.PerfCounter
         public void IncrementQuery(InterfaceType ifType)
         {
             if (!initialized) return;
+            _QueriesCurrent.Increment();
+        }
+
+        public void DecrementQuery(InterfaceType ifType, int objectCount, long startTicks)
+        {
+            if (!initialized) return;
 
             _QueriesPerSec.Increment();
             _QueriesTotal.Increment();
+
+            _QueriesCurrent.Decrement();
+            _QueriesAvgDuration.IncrementBy(Stopwatch.GetTimestamp() - startTicks);
+            _QueriesAvgDurationBase.Increment();
         }
 
         public void IncrementSubmitChanges()
         {
+            if (!initialized) return;
             _SubmitChangesCurrent.Increment();
         }
 
@@ -247,6 +265,7 @@ namespace Kistl.API.PerfCounter
 
         public void IncrementGetList(InterfaceType ifType)
         {
+            if (!initialized) return;
             _GetListCurrent.Increment();
         }
 
@@ -266,6 +285,7 @@ namespace Kistl.API.PerfCounter
 
         public void IncrementGetListOf(InterfaceType ifType)
         {
+            if (!initialized) return;
             _GetListOfCurrent.Increment();
         }
         public void DecrementGetListOf(InterfaceType ifType, int resultSize, long startTicks)
@@ -284,6 +304,7 @@ namespace Kistl.API.PerfCounter
 
         public void IncrementFetchRelation(InterfaceType ifType)
         {
+            if (!initialized) return;
             _FetchRelationCurrent.Increment();
         }
 
@@ -303,6 +324,7 @@ namespace Kistl.API.PerfCounter
 
         public void IncrementSetObjects()
         {
+            if (!initialized) return;
             _SetObjectsCurrent.Increment();
         }
         public void DecrementSetObjects(int objectCount, long startTicks)

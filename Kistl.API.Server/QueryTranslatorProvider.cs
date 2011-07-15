@@ -13,6 +13,7 @@ namespace Kistl.API.Server
     using Kistl.API.Utils;
     using Kistl.App.Base;
     using Kistl.App.Extensions;
+using Kistl.API.Server.PerfCounter;
 
     // http://msdn.microsoft.com/en-us/library/bb549414.aspx
     // The Execute method executes queries that return a single value 
@@ -30,6 +31,7 @@ namespace Kistl.API.Server
         protected readonly IQueryable Source;
         protected readonly IKistlContext Ctx;
         protected readonly InterfaceType.Factory IftFactory;
+        protected readonly IPerfCounter perfCounter;
 
         /// <summary>
         /// Get a sub-provider using the same components as this provider but working on a different type.
@@ -48,17 +50,20 @@ namespace Kistl.API.Server
         /// <param name="source"></param>
         /// <param name="ctx"></param>
         /// <param name="iftFactory"></param>
-        protected QueryTranslatorProvider(IMetaDataResolver metaDataResolver, Identity identity, IQueryable source, IKistlContext ctx, InterfaceType.Factory iftFactory)
+        /// <param name="perfCounter"></param>
+        protected QueryTranslatorProvider(IMetaDataResolver metaDataResolver, Identity identity, IQueryable source, IKistlContext ctx, InterfaceType.Factory iftFactory, IPerfCounter perfCounter)
         {
             if (metaDataResolver == null) { throw new ArgumentNullException("metaDataResolver"); }
             if (source == null) { throw new ArgumentNullException("source"); }
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
+            if (perfCounter == null) throw new ArgumentNullException("perfCounter");
 
             this.MetaDataResolver = metaDataResolver;
             this.Identity = identity;
             this.Source = source;
             this.Ctx = ctx;
             this.IftFactory = iftFactory;
+            this.perfCounter = perfCounter;
         }
 
         protected abstract string ImplementationSuffix { get; }
@@ -93,63 +98,87 @@ namespace Kistl.API.Server
         public object Execute(Expression expression)
         {
             if (expression == null) throw new ArgumentNullException("expression");
-            ResetProvider();
-
-            using (Logging.Linq.DebugTraceMethodCall("Execute"))
+            var ifType = IftFactory(typeof(T));
+            int objectCount = 0;
+            var ticks = perfCounter.IncrementQuery(ifType);
+            try
             {
-                if (Logging.Linq.IsInfoEnabled)
+                ResetProvider();
+
+                using (Logging.Linq.DebugTraceMethodCall("Execute"))
                 {
-                    Logging.Linq.Info(expression.ToString());
+                    if (Logging.Linq.IsInfoEnabled)
+                    {
+                        Logging.Linq.Info(expression.ToString());
+                    }
+
+                    Expression translated = this.Visit(expression);
+
+                    if (Logging.LinqQuery.IsDebugEnabled)
+                    {
+                        Logging.LinqQuery.Debug(translated.Trace());
+                    }
+
+                    object result = Source.Provider.Execute(translated);
+
+                    if (result != null)
+                    {
+                        result = WrapResult(result);
+                        objectCount = 1;
+                    }
+
+                    if (result != null && result is IPersistenceObject)
+                    {
+                        ((IPersistenceObject)result).AttachToContext(Ctx);
+                    }
+                    return result;
                 }
-
-                Expression translated = this.Visit(expression);
-
-                if (Logging.LinqQuery.IsDebugEnabled)
-                {
-                    Logging.LinqQuery.Debug(translated.Trace());
-                }
-
-                object result = Source.Provider.Execute(translated);
-
-                if (result != null)
-                    result = WrapResult(result);
-
-                if (result != null && result is IPersistenceObject)
-                {
-                    ((IPersistenceObject)result).AttachToContext(Ctx);
-                }
-                return result;
+            }
+            finally
+            {
+                perfCounter.DecrementQuery(ifType, objectCount, ticks);
             }
         }
 
         internal IEnumerable ExecuteEnumerable(Expression expression)
         {
             if (expression == null) throw new ArgumentNullException("expression");
-            ResetProvider();
-
-            using (Logging.Linq.DebugTraceMethodCall("ExecuteEnumerable"))
+            int objectCount = 0;
+            var ifType = IftFactory(typeof(T));
+            var ticks = perfCounter.IncrementQuery(ifType);
+            try
             {
-                if (Logging.Linq.IsInfoEnabled)
-                {
-                    Logging.Linq.Info(expression.ToString());
-                }
+                ResetProvider();
 
-                Expression translated = this.Visit(expression);
-
-                if (Logging.LinqQuery.IsDebugEnabled)
+                using (Logging.Linq.DebugTraceMethodCall("ExecuteEnumerable"))
                 {
-                    Logging.LinqQuery.Debug(translated.Trace());
-                }
+                    if (Logging.Linq.IsInfoEnabled)
+                    {
+                        Logging.Linq.Info(expression.ToString());
+                    }
 
-                IQueryable newQuery = Source.Provider.CreateQuery(translated);
-                List<T> result = new List<T>();
-                foreach (object item in newQuery)
-                {
-                    var wrappedItem = (T)WrapResult(item);
-                    if (wrappedItem is IPersistenceObject) ((IPersistenceObject)wrappedItem).AttachToContext(Ctx);
-                    result.Add(wrappedItem);
+                    Expression translated = this.Visit(expression);
+
+                    if (Logging.LinqQuery.IsDebugEnabled)
+                    {
+                        Logging.LinqQuery.Debug(translated.Trace());
+                    }
+
+                    IQueryable newQuery = Source.Provider.CreateQuery(translated);
+                    List<T> result = new List<T>();
+                    foreach (object item in newQuery)
+                    {
+                        var wrappedItem = (T)WrapResult(item);
+                        if (wrappedItem is IPersistenceObject) ((IPersistenceObject)wrappedItem).AttachToContext(Ctx);
+                        result.Add(wrappedItem);
+                    }
+                    objectCount = result.Count;
+                    return result;
                 }
-                return result;
+            }
+            finally
+            {
+                perfCounter.DecrementQuery(ifType, objectCount, ticks);
             }
         }
 
