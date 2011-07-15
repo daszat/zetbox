@@ -7,25 +7,23 @@ namespace Kistl.Client
     using System.Text;
     using Kistl.API;
     using Kistl.API.Client;
+    using Kistl.API.Client.PerfCounter;
     using Kistl.API.Configuration;
     using Kistl.App.GUI;
     using Kistl.Client.Presentables;
     using Kistl.Client.Presentables.KistlBase;
     using Kistl.Client.Presentables.ObjectBrowser;
-    using Kistl.API.Client.PerfCounter;
 
     public class Launcher
     {
-        private readonly IKistlContext ctx;
         private readonly Func<IKistlContext> ctxFactory;
         private readonly IViewModelFactory mdlFactory;
         private readonly IFrozenContext frozenCtx;
         private readonly KistlConfig cfg;
         private readonly IPerfCounter perfCounter;
 
-        public Launcher(IKistlContext ctx, Func<IKistlContext> ctxFactory, IViewModelFactory mdlFactory, IFrozenContext frozenCtx, KistlConfig cfg, IPerfCounter perfCounter)
+        public Launcher(Func<IKistlContext> ctxFactory, IViewModelFactory mdlFactory, IFrozenContext frozenCtx, KistlConfig cfg, IPerfCounter perfCounter)
         {
-            this.ctx = ctx;
             this.frozenCtx = frozenCtx;
             this.ctxFactory = ctxFactory;
             this.mdlFactory = mdlFactory;
