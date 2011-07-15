@@ -90,6 +90,10 @@
     <Compile Include="NotifyingObservableCollection.cs" />
     <Compile Include="OrderBy.cs" />
     <Compile Include="ObjectsPerfCounter.cs" />
+    <Compile Include="PerfCounter\BasePerfMonAppender.cs" />
+    <Compile Include="PerfCounter\IBasePerfCounter.cs" />
+    <Compile Include="PerfCounter\BaseLog4NetAppender.cs" />
+    <Compile Include="PerfCounter\BasePerfCounterDispatcher.cs" />
     <Compile Include="ProblemReporter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SerializableExpression.cs" />

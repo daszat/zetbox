@@ -88,6 +88,7 @@ namespace Kistl.DalProvider.Ef
         public EfDataContext(IMetaDataResolver metaDataResolver, Identity identity, KistlConfig config, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory, EfImplementationType.EfFactory implTypeFactory, IPerfCounter perfCounter)
             : base(metaDataResolver, identity, config, lazyCtx, iftFactory)
         {
+            if (perfCounter == null) throw new ArgumentNullException("perfCounter");
             _ctx = new EfObjectContext(config);
             _implTypeFactory = implTypeFactory;
             _perfCounter = perfCounter;
@@ -285,35 +286,41 @@ namespace Kistl.DalProvider.Ef
         public override int SubmitChanges()
         {
             CheckDisposed();
-            DebugTraceChangedObjects();
-
-            var notifySaveList = _ctx.ObjectStateManager
-                .GetObjectStateEntries(EntityState.Added | EntityState.Modified)
-                .Select(e => e.Entity)
-                .OfType<IDataObject>()
-                .ToList();
-
-            NotifyChanging(notifySaveList);
-
             int result = 0;
+            var ticks = _perfCounter.IncrementSubmitChanges();
             try
             {
-                result = _ctx.SaveChanges();
-                Logging.Log.InfoFormat("[{0}] changes submitted.", result);
-                if (_perfCounter != null) _perfCounter.IncrementSubmitChanges(result);
+                DebugTraceChangedObjects();
+
+                var notifySaveList = _ctx.ObjectStateManager
+                    .GetObjectStateEntries(EntityState.Added | EntityState.Modified)
+                    .Select(e => e.Entity)
+                    .OfType<IDataObject>()
+                    .ToList();
+
+                NotifyChanging(notifySaveList);
+
+                try
+                {
+                    result = _ctx.SaveChanges();
+                    Logging.Log.InfoFormat("[{0}] changes submitted.", result);
+                }
+                catch (UpdateException updex)
+                {
+                    Logging.Log.Error("Error during SubmitChanges", updex);
+                    if (updex.InnerException == null)
+                        throw;
+                    throw updex.InnerException;
+                }
+
+                NotifyChanged(notifySaveList);
+
+                UpdateObjectState();
             }
-            catch (UpdateException updex)
+            finally
             {
-                Logging.Log.Error("Error during SubmitChanges", updex);
-                if (updex.InnerException == null)
-                    throw;
-                throw updex.InnerException;
+                _perfCounter.DecrementSubmitChanges(result, ticks);
             }
-
-            NotifyChanged(notifySaveList);
-
-            UpdateObjectState();
-
             return result;
         }
 

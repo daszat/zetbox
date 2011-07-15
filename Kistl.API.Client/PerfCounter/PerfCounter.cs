@@ -7,71 +7,17 @@ namespace Kistl.API.Client.PerfCounter
     using Kistl.API;
     using System.Diagnostics;
     using Kistl.API.Utils;
+    using Kistl.API.PerfCounter;
 
-    public class PerfCounterDispatcher : Kistl.API.Client.PerfCounter.IPerfCounter
+    public class PerfCounterDispatcher : BasePerfCounterDispatcher, IPerfCounter
     {
         private readonly IEnumerable<IPerfCounterAppender> _appender;
         private static IEnumerable<IPerfCounterAppender> Empty = new IPerfCounterAppender[] { };
 
-        public PerfCounterDispatcher(IEnumerable<IPerfCounterAppender> appender)
+        public PerfCounterDispatcher(IEnumerable<IPerfCounterAppender> appender) :
+            base(appender.Cast<IBasePerfCounterAppender>())
         {
             this._appender = appender;
-        }
-
-        public void IncrementFetchRelation(InterfaceType ifType, int resultSize)
-        {
-            foreach (var a in _appender ?? Empty)
-            {
-                a.IncrementFetchRelation(ifType, resultSize);
-            }
-        }
-
-        public void IncrementGetList(InterfaceType ifType, int resultSize)
-        {
-            foreach (var a in _appender ?? Empty)
-            {
-                a.IncrementGetList(ifType, resultSize);
-            }
-        }
-
-        public void IncrementGetListOf(InterfaceType ifType, int resultSize)
-        {
-            foreach (var a in _appender ?? Empty)
-            {
-                a.IncrementGetListOf(ifType, resultSize);
-            }
-        }
-
-        public void IncrementQuery(InterfaceType ifType)
-        {
-            foreach (var a in _appender ?? Empty)
-            {
-                a.IncrementQuery(ifType);
-            }
-        }
-
-        public void IncrementServerMethodInvocation()
-        {
-            foreach (var a in _appender ?? Empty)
-            {
-                a.IncrementServerMethodInvocation();
-            }
-        }
-
-        public void IncrementSetObjects(int objectCount)
-        {
-            foreach (var a in _appender ?? Empty)
-            {
-                a.IncrementSetObjects(objectCount);
-            }
-        }
-
-        public void IncrementSubmitChanges(int objectCount)
-        {
-            foreach (var a in _appender ?? Empty)
-            {
-                a.IncrementSubmitChanges(objectCount);
-            }
         }
 
         public void IncrementViewModelFetch()
@@ -90,37 +36,5 @@ namespace Kistl.API.Client.PerfCounter
             }
         }
 
-        public void Initialize(IFrozenContext frozenCtx)
-        {
-            foreach (var a in _appender ?? Empty)
-            {
-                a.Initialize(frozenCtx);
-            }
-        }
-
-        public void Install()
-        {
-            foreach (var a in _appender ?? Empty)
-            {
-                a.Install();
-            }
-        }
-
-        public void Uninstall()
-        {
-            foreach (var a in _appender ?? Empty)
-            {
-                a.Uninstall();
-            }
-        }
-
-        public void Dump()
-        {
-            foreach (var a in _appender ?? Empty)
-            {
-                a.Dump();
-            }
-        }
     }
-
 }

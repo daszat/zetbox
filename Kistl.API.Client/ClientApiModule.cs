@@ -36,7 +36,7 @@ namespace Kistl.API.Client
                 .SingleInstance();
 
             moduleBuilder
-               .RegisterModule<MemoryAppender.Module>();
+               .RegisterModule<Log4NetAppender.Module>();
 
             moduleBuilder
                 .RegisterType<PerfCounterDispatcher>()

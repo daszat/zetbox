@@ -47,6 +47,7 @@ namespace Kistl.DalProvider.NHibernate
             IPerfCounter perfCounter)
             : base(metaDataResolver, identity, config, lazyCtx, iftFactory)
         {
+            if (perfCounter == null) throw new ArgumentNullException("perfCounter");
             _implTypeFactory = implTypeFactory;
             _nhSession = nhSession;
             _implChecker = implChecker;
@@ -69,7 +70,7 @@ namespace Kistl.DalProvider.NHibernate
 
         public IQueryable<IPersistenceObject> PrepareQueryable(InterfaceType ifType)
         {
-            if (_perfCounter != null) _perfCounter.IncrementQuery(ifType);
+            _perfCounter.IncrementQuery(ifType);
 
             var proxyType = ToProxyType(ifType);
 
@@ -280,6 +281,7 @@ namespace Kistl.DalProvider.NHibernate
 
         private void FlushSession(List<NHibernatePersistenceObject> notifySaveList)
         {
+            var ticks = _perfCounter.IncrementSubmitChanges();
             try
             {
                 foreach (var obj in notifySaveList)
@@ -296,12 +298,15 @@ namespace Kistl.DalProvider.NHibernate
                     _attachedObjectsByProxy.Add(obj);
                 }
                 Logging.Log.InfoFormat("[{0}] changes submitted.", notifySaveList.Count);
-                if (_perfCounter != null) _perfCounter.IncrementSubmitChanges(notifySaveList.Count);
             }
             catch (Exception ex)
             {
                 Logging.Log.Error("Failed saving transaction", ex);
                 throw;
+            }
+            finally
+            {
+                _perfCounter.DecrementSubmitChanges(notifySaveList.Count, ticks);
             }
         }
 

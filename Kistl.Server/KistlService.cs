@@ -50,6 +50,8 @@ namespace Kistl.Server
             using (Logging.Facade.DebugTraceMethodCall("SetObjects"))
             {
                 DebugLogIdentity();
+                int resultCount = 0;
+                var ticks = _perfCounter.IncrementSetObjects();
                 try
                 {
                     if (msgArray == null) { throw new ArgumentNullException("msgArray"); }
@@ -60,13 +62,13 @@ namespace Kistl.Server
                     using (IKistlContext ctx = _ctxFactory())
                     {
                         var objects = ReadObjects(msg, ctx);
-                        _perfCounter.IncrementSetObjects(objects.Count);
 
                         // Set Operation
                         var changedObjects = _sohFactory
                             .GetServerObjectSetHandler()
                             .SetObjects(ctx, objects, notificationRequests ?? new ObjectNotificationRequest[0])
                             .Cast<IStreamable>();
+                        resultCount = objects.Count;
                         return SendObjects(changedObjects, true).ToArray();
                     }
 
@@ -76,6 +78,10 @@ namespace Kistl.Server
                     Helper.ThrowFaultException(ex);
                     // Never called, Handle errors throws an Exception
                     return null;
+                }
+                finally
+                {
+                    _perfCounter.DecrementSetObjects(resultCount, ticks);
                 }
             }
         }
@@ -97,19 +103,26 @@ namespace Kistl.Server
                 try
                 {
                     if (type == null) { throw new ArgumentNullException("type"); }
-
-                    using (IKistlContext ctx = _ctxFactory())
+                    var ifType = _iftFactory(type.GetSystemType());
+                    int resultCount = 0;
+                    var ticks = _perfCounter.IncrementGetList(ifType);
+                    try
                     {
-                        var filterExpresstions = filter != null ? filter.Select(f => SerializableExpression.ToExpression(f)).ToList() : null;
-                        var ifType = _iftFactory(type.GetSystemType());
-                        IEnumerable<IStreamable> lst = _sohFactory
-                            .GetServerObjectHandler(ifType)
-                            .GetList(ctx, maxListCount,
-                                filterExpresstions,
-                                orderBy != null ? orderBy.Select(o => new OrderBy(o.Type, SerializableExpression.ToExpression(o.Expression))).ToList() : null);
-
-                        _perfCounter.IncrementGetList(ifType, lst.Count());
-                        return SendObjects(lst, eagerLoadLists).ToArray();
+                        using (IKistlContext ctx = _ctxFactory())
+                        {
+                            var filterExpresstions = filter != null ? filter.Select(f => SerializableExpression.ToExpression(f)).ToList() : null;
+                            IEnumerable<IStreamable> lst = _sohFactory
+                                .GetServerObjectHandler(ifType)
+                                .GetList(ctx, maxListCount,
+                                    filterExpresstions,
+                                    orderBy != null ? orderBy.Select(o => new OrderBy(o.Type, SerializableExpression.ToExpression(o.Expression))).ToList() : null);
+                            resultCount = lst.Count();
+                            return SendObjects(lst, eagerLoadLists).ToArray();
+                        }
+                    }
+                    finally
+                    {
+                        _perfCounter.DecrementGetList(ifType, resultCount, ticks);
                     }
                 }
                 catch (Exception ex)
@@ -227,11 +240,20 @@ namespace Kistl.Server
                     using (IKistlContext ctx = _ctxFactory())
                     {
                         var ifType = _iftFactory(type.GetSystemType());
-                        IEnumerable<IStreamable> lst = _sohFactory
-                            .GetServerObjectHandler(ifType)
-                            .GetListOf(ctx, ID, property);
-                        _perfCounter.IncrementGetListOf(ifType, lst.Count());
-                        return SendObjects(lst, true).ToArray();
+                        int resultCount = 0;
+                        var ticks = _perfCounter.IncrementGetListOf(ifType);
+                        try
+                        {
+                            IEnumerable<IStreamable> lst = _sohFactory
+                                .GetServerObjectHandler(ifType)
+                                .GetListOf(ctx, ID, property);
+                            resultCount = lst.Count();
+                            return SendObjects(lst, false /*true*/).ToArray();
+                        }
+                        finally
+                        {
+                            _perfCounter.DecrementGetListOf(ifType, resultCount, ticks);
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -267,17 +289,24 @@ namespace Kistl.Server
                         var ifTypeA = _iftFactory(rel.A.Type.GetDataType());
                         var ifTypeB = _iftFactory(rel.B.Type.GetDataType());
                         var ifType = endRole == RelationEndRole.A ? ifTypeA : ifTypeB;
-
-                        var lst = _sohFactory
-                            .GetServerCollectionHandler(
-                                ctx,
-                                ifTypeA,
-                                ifTypeB,
-                                endRole)
-                            .GetCollectionEntries(ctx, relId, endRole, parentObjID);
-
-                        _perfCounter.IncrementFetchRelation(ifType, lst.Count());
-                        return SendObjects(lst.Cast<IStreamable>(), true).ToArray();
+                        int resultCount = 0;
+                        var ticks = _perfCounter.IncrementFetchRelation(ifType);
+                        try
+                        {
+                            var lst = _sohFactory
+                                .GetServerCollectionHandler(
+                                    ctx,
+                                    ifTypeA,
+                                    ifTypeB,
+                                    endRole)
+                                .GetCollectionEntries(ctx, relId, endRole, parentObjID);
+                            resultCount = lst.Count();
+                            return SendObjects(lst.Cast<IStreamable>(), true).ToArray();
+                        }
+                        finally
+                        {
+                            _perfCounter.DecrementFetchRelation(ifType, resultCount, ticks);
+                        }
                     }
                 }
                 catch (Exception ex)

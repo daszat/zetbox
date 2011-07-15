@@ -8,9 +8,11 @@ namespace Kistl.API.Server.PerfCounter
     using System.Diagnostics;
     using Kistl.API.Utils;
     using Autofac;
+    using Kistl.API.Configuration;
+    using log4net;
     using Kistl.API.PerfCounter;
 
-    public class PerfMonAppender : BasePerfMonAppender, IPerfCounterAppender
+    public class Log4NetAppender : BaseLog4NetAppender, IPerfCounterAppender
     {
         public class Module : Autofac.Module
         {
@@ -19,27 +21,24 @@ namespace Kistl.API.Server.PerfCounter
                 base.Load(moduleBuilder);
 
                 moduleBuilder
-                    .RegisterType<PerfMonAppender>()
+                    .RegisterType<Log4NetAppender>()
                     .As<IPerfCounterAppender>()
                     .SingleInstance();
             }
         }
 
-        public override string Category { get { return "Kistl Server"; } }
-
-        public PerfMonAppender(Kistl.API.Configuration.KistlConfig cfg)
-            : base(cfg)
+        public Log4NetAppender()
         {
         }
 
-        #region Counter Descriptors
-        protected override CounterDesc[] CounterDesciptors
+        protected override long[] Values
         {
-            get { return _counterDescs; }
+            get { return new long[] { }; }
         }
-        private static readonly CounterDesc[] _counterDescs = new CounterDesc[] 
-        { 
-        };
-        #endregion
+
+        protected override void ResetValues()
+        {
+            base.ResetValues();
+        }
     }
 }

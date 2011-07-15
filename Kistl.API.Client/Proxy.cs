@@ -49,6 +49,7 @@ using Kistl.API.Client.PerfCounter;
 
         public ProxyImplementation(InterfaceType.Factory iftFactory, Kistl.API.Client.KistlService.IKistlService service, IPerfCounter perfCounter)
         {
+            if (perfCounter == null) throw new ArgumentNullException("perfCounter");
             _iftFactory = iftFactory;
             _service = service;
             _perfCounter = perfCounter;
@@ -76,84 +77,107 @@ using Kistl.API.Client.PerfCounter;
 
         public IEnumerable<IDataObject> GetList(IKistlContext ctx, InterfaceType ifType, int maxListCount, bool eagerLoadLists, IEnumerable<Expression> filter, IEnumerable<OrderBy> orderBy, out List<IStreamable> auxObjects)
         {
+            int resultCount = 0;
             List<IStreamable> tmpAuxObjects = null;
-            IEnumerable<IDataObject> result = null;
             var _ifType = ifType.ToSerializableType();
-            var _filter = filter != null ? filter.Select(f => SerializableExpression.FromExpression(f, _iftFactory)).ToArray() : null;
-            var _orderBy = orderBy != null ? orderBy.Select(o => new OrderByContract() { Type = o.Type, Expression = SerializableExpression.FromExpression(o.Expression, _iftFactory) }).ToArray() : null;
-            byte[] bytes = null;
-
-            MakeRequest(() =>
+            var ticks = _perfCounter.IncrementGetList(ifType);
+            try
             {
-                bytes = _service.GetList(
-                    _ifType,
-                    maxListCount,
-                    eagerLoadLists,
-                    _filter,
-                    _orderBy);
-            });
+                var _filter = filter != null ? filter.Select(f => SerializableExpression.FromExpression(f, _iftFactory)).ToArray() : null;
+                var _orderBy = orderBy != null ? orderBy.Select(o => new OrderByContract() { Type = o.Type, Expression = SerializableExpression.FromExpression(o.Expression, _iftFactory) }).ToArray() : null;
+                byte[] bytes = null;
 
-            using (var sr = new BinaryReader(new MemoryStream(bytes)))
-            {
-                result = ReceiveObjects(ctx, sr, out tmpAuxObjects).Cast<IDataObject>();
+                MakeRequest(() =>
+                {
+                    bytes = _service.GetList(
+                        _ifType,
+                        maxListCount,
+                        eagerLoadLists,
+                        _filter,
+                        _orderBy);
+                });
+
+                IEnumerable<IDataObject> result = null;
+                using (var sr = new BinaryReader(new MemoryStream(bytes)))
+                {
+                    result = ReceiveObjects(ctx, sr, out tmpAuxObjects).Cast<IDataObject>();
+                }
+                resultCount = result.Count();
+                auxObjects = tmpAuxObjects;
+                return result;
             }
-            if (_perfCounter != null) _perfCounter.IncrementGetList(ifType, result.Count()); 
-            auxObjects = tmpAuxObjects;
-            return result;
+            finally
+            {
+                _perfCounter.DecrementGetList(ifType, resultCount, ticks);
+            }
         }
 
         public IEnumerable<IDataObject> GetListOf(IKistlContext ctx, InterfaceType ifType, int ID, string property, out List<IStreamable> auxObjects)
         {
             List<IStreamable> tmpAuxObjects = null;
-            IEnumerable<IDataObject> result = null;
+            int resultCount = 0;
             var _ifType = ifType.ToSerializableType();
-
-            byte[] bytes = null;
-
-            MakeRequest(() =>
+            var ticks = _perfCounter.IncrementGetListOf(ifType);
+            try
             {
-                bytes = _service.GetListOf(_ifType, ID, property);
-            });
+                byte[] bytes = null;
 
-            using (var sr = new BinaryReader(new MemoryStream(bytes)))
-            {
-                result = ReceiveObjects(ctx, sr, out tmpAuxObjects).Cast<IDataObject>();
+                MakeRequest(() =>
+                {
+                    bytes = _service.GetListOf(_ifType, ID, property);
+                });
+
+                IEnumerable<IDataObject> result = null;
+                using (var sr = new BinaryReader(new MemoryStream(bytes)))
+                {
+                    result = ReceiveObjects(ctx, sr, out tmpAuxObjects).Cast<IDataObject>();
+                }
+                resultCount = result.Count();
+
+                auxObjects = tmpAuxObjects;
+                return result;
             }
-
-            if (_perfCounter != null) _perfCounter.IncrementGetListOf(ifType, result.Count());
-            auxObjects = tmpAuxObjects;
-            return result;
+            finally
+            {
+                _perfCounter.DecrementGetListOf(ifType, resultCount, ticks);
+            }
         }
 
         public IEnumerable<IPersistenceObject> SetObjects(IKistlContext ctx, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notficationRequests)
         {
-            IEnumerable<IPersistenceObject> result = null;
-            if(_perfCounter != null) _perfCounter.IncrementSetObjects(objects.Count()); 
-
-            // Serialize
-            using (var ms = new MemoryStream())
-            using (var sw = new BinaryWriter(ms))
+            var ticks = _perfCounter.IncrementSetObjects();
+            try
             {
-                SendObjects(objects, sw);
-                byte[] bytes = null;
-                var _ms = ms.ToArray();
-                var _nReq = notficationRequests.ToArray();
-
-                MakeRequest(() =>
+                IEnumerable<IPersistenceObject> result = null;
+                // Serialize
+                using (var ms = new MemoryStream())
+                using (var sw = new BinaryWriter(ms))
                 {
-                    bytes = _service.SetObjects(_ms, _nReq);
-                });
+                    SendObjects(objects, sw);
+                    byte[] bytes = null;
+                    var _ms = ms.ToArray();
+                    var _nReq = notficationRequests.ToArray();
 
-                using (var sr = new BinaryReader(new MemoryStream(bytes)))
-                {
-                    // merge auxiliary objects into primary set objects result
-                    List<IStreamable> auxObjects;
-                    var receivedObjects = ReceiveObjects(ctx, sr, out auxObjects);
-                    result = receivedObjects.Concat(auxObjects).Cast<IPersistenceObject>();
+                    MakeRequest(() =>
+                    {
+                        bytes = _service.SetObjects(_ms, _nReq);
+                    });
+
+                    using (var sr = new BinaryReader(new MemoryStream(bytes)))
+                    {
+                        // merge auxiliary objects into primary set objects result
+                        List<IStreamable> auxObjects;
+                        var receivedObjects = ReceiveObjects(ctx, sr, out auxObjects);
+                        result = receivedObjects.Concat(auxObjects).Cast<IPersistenceObject>();
+                    }
                 }
-            }
 
-            return result;
+                return result;
+            }
+            finally
+            {
+                _perfCounter.DecrementSetObjects(objects.Count(), ticks);
+            }
         }
 
         private static void SendObjects(IEnumerable<IPersistenceObject> objects, BinaryWriter sw)
@@ -196,31 +220,40 @@ using Kistl.API.Client.PerfCounter;
         public IEnumerable<T> FetchRelation<T>(IKistlContext ctx, Guid relationId, RelationEndRole role, IDataObject parent, out List<IStreamable> auxObjects)
             where T : class, IRelationEntry
         {
-            // TODO: could be implemented in generated properties
-            if (parent.ObjectState == DataObjectState.New)
+            var ifType = ctx.GetInterfaceType(parent);
+            var ticks = _perfCounter.IncrementFetchRelation(ifType);
+            int resultCount = 0;
+            try
             {
-                auxObjects = new List<IStreamable>();
-                return new List<T>();
+                // TODO: could be implemented in generated properties
+                if (parent.ObjectState == DataObjectState.New)
+                {
+                    auxObjects = new List<IStreamable>();
+                    return new List<T>();
+                }
+
+                IEnumerable<T> result = null;
+                List<IStreamable> tmpAuxObjects = null;
+                byte[] bytes = null;
+
+                MakeRequest(() =>
+                {
+                    bytes = _service.FetchRelation(relationId, (int)role, parent.ID);
+                });
+                using (MemoryStream s = new MemoryStream(bytes))
+                using (var sr = new BinaryReader(s))
+                {
+                    result = ReceiveObjects(ctx, sr, out tmpAuxObjects).Cast<T>();
+                }
+                resultCount = result.Count();
+
+                auxObjects = tmpAuxObjects;
+                return result;
             }
-
-            IEnumerable<T> result = null;
-            List<IStreamable> tmpAuxObjects = null;
-            byte[] bytes = null;
-
-            MakeRequest(() =>
+            finally
             {
-                bytes = _service.FetchRelation(relationId, (int)role, parent.ID);
-            });
-            using (MemoryStream s = new MemoryStream(bytes))
-            using (var sr = new BinaryReader(s))
-            {
-                result = ReceiveObjects(ctx, sr, out tmpAuxObjects).Cast<T>();
+                _perfCounter.DecrementFetchRelation(ifType, resultCount, ticks);
             }
-
-            if (_perfCounter != null) _perfCounter.IncrementFetchRelation(ctx.GetInterfaceType(parent), result.Count());
-
-            auxObjects = tmpAuxObjects;
-            return result;
         }
 
         public Stream GetBlobStream(int ID)
@@ -254,7 +287,7 @@ using Kistl.API.Client.PerfCounter;
 
         public object InvokeServerMethod(IKistlContext ctx, InterfaceType ifType, int ID, string method, Type retValType, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests, out IEnumerable<IPersistenceObject> changedObjects)
         {
-            if (_perfCounter != null) _perfCounter.IncrementServerMethodInvocation();
+            _perfCounter.IncrementServerMethodInvocation();
 
             object result = null;
             IEnumerable<IPersistenceObject> tmpChangedObjects = null;

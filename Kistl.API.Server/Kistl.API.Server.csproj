@@ -94,7 +94,7 @@
     <Compile Include="Kistl.API.Migration\OutputStream.cs" />
     <Compile Include="Kistl.API.Migration\Record.cs" />
     <Compile Include="Kistl.API.Migration\Translator.cs" />
-    <Compile Include="PerfCounter\MemoryAppender.cs" />
+    <Compile Include="PerfCounter\Log4NetAppender.cs" />
     <Compile Include="PerfCounter\PerfCounter.cs" />
     <Compile Include="PerfCounter\PerfMonAppender.cs" />
     <Compile Include="ServerApiModule.cs" />

@@ -1,43 +1,17 @@
 namespace Kistl.API.Client.PerfCounter
 {
     using System;
+    using Kistl.API.PerfCounter;
 
-    public interface IPerfCounter
+    public interface IPerfCounter : IBasePerfCounter
     {
-        void IncrementFetchRelation(Kistl.API.InterfaceType ifType, int resultSize);
-        void IncrementGetList(Kistl.API.InterfaceType ifType, int resultSize);
-        void IncrementGetListOf(Kistl.API.InterfaceType ifType, int resultSize);
-        void IncrementQuery(Kistl.API.InterfaceType ifType);
-        void IncrementServerMethodInvocation();
-        void IncrementSetObjects(int objectCount);
-        void IncrementSubmitChanges(int objectCount);
-        
         void IncrementViewModelFetch();
         void IncrementViewModelCreate();
-        
-        void Initialize(Kistl.API.IFrozenContext frozenCtx);
-        void Install();
-        void Uninstall();
-        void Dump();
     }
 
-    public interface IPerfCounterAppender
+    public interface IPerfCounterAppender : IBasePerfCounterAppender
     {
-        void IncrementFetchRelation(Kistl.API.InterfaceType ifType, int resultSize);
-        void IncrementGetList(Kistl.API.InterfaceType ifType, int resultSize);
-        void IncrementGetListOf(Kistl.API.InterfaceType ifType, int resultSize);
-        void IncrementQuery(Kistl.API.InterfaceType ifType);
-        void IncrementServerMethodInvocation();
-        void IncrementSetObjects(int objectCount);
-        void IncrementSubmitChanges(int objectCount);
-        
         void IncrementViewModelFetch();
         void IncrementViewModelCreate();
-
-        void Initialize(Kistl.API.IFrozenContext frozenCtx);
-        void Install();
-        void Uninstall();
-        void Dump();
     }
-
 }

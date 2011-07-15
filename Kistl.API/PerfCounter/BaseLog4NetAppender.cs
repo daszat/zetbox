@@ -1,4 +1,4 @@
-namespace Kistl.API.Client.PerfCounter
+namespace Kistl.API.PerfCounter
 {
     using System;
     using System.Collections.Generic;
@@ -11,28 +11,15 @@ namespace Kistl.API.Client.PerfCounter
     using Kistl.API.Configuration;
     using log4net;
 
-    public class MemoryAppender : IPerfCounterAppender
+    public abstract class BaseLog4NetAppender : IBasePerfCounterAppender
     {
-        public class Module : Autofac.Module
-        {
-            protected override void Load(ContainerBuilder moduleBuilder)
-            {
-                base.Load(moduleBuilder);
-
-                moduleBuilder
-                    .RegisterType<MemoryAppender>()
-                    .As<IPerfCounterAppender>()
-                    .SingleInstance();
-            }
-        }
-
-        private static readonly object _lock = new object();
+        protected static readonly object sync = new object();
         private readonly static ILog _mainLogger = LogManager.GetLogger("Kistl.PerfCounter.Main");
         private readonly static ILog _objectsLogger = LogManager.GetLogger("Kistl.PerfCounter.Objects");
         private int dumpCounter = 0;
         private const int DUMPCOUNTERMAX = 100;
 
-        public MemoryAppender()
+        public BaseLog4NetAppender()
         {
         }
 
@@ -48,30 +35,34 @@ namespace Kistl.API.Client.PerfCounter
         {
         }
 
+        protected abstract long[] Values { get; }
+
         public void Dump()
         {
-            lock (_lock)
+            lock (sync)
             {
-                if (_objectsLogger != null)
+                try
                 {
-                    foreach (var i in _objects)
+                    if (_objectsLogger != null)
                     {
-                        _objectsLogger.InfoFormat("{0}; {1}; {2}; {3}; {4}; {5}; {6}; {7}", i.Value.ClassName,
-                            i.Value.QueriesTotal,
-                            i.Value.GetListTotal,
-                            i.Value.GetListObjectsTotal,
-                            i.Value.GetListOfTotal,
-                            i.Value.GetListOfObjectsTotal,
-                            i.Value.FetchRelationObjectsTotal,
-                            i.Value.FetchRelationTotal);
+                        foreach (var i in _objects)
+                        {
+                            _objectsLogger.InfoFormat("{0}; {1}; {2}; {3}; {4}; {5}; {6}; {7}", i.Value.ClassName,
+                                i.Value.QueriesTotal,
+                                i.Value.GetListTotal,
+                                i.Value.GetListObjectsTotal,
+                                i.Value.GetListOfTotal,
+                                i.Value.GetListOfObjectsTotal,
+                                i.Value.FetchRelationObjectsTotal,
+                                i.Value.FetchRelationTotal);
+                        }
+                        _objects = new Dictionary<string, ObjectsPerfCounter>();
                     }
-                    _objects = new Dictionary<string, ObjectsPerfCounter>();
-                }
 
-                if (_mainLogger != null)
-                {
-                    _mainLogger.InfoFormat("{0}; {1}; {2}; {3}; {4}; {5}; {6}; {7}; {8}; {9}; {10}; {11}; {12}; {13}",
-                        this.QueriesTotal,
+                    if (_mainLogger != null)
+                    {
+                        var vals = new long[] {
+                                                this.QueriesTotal,
                         this.GetListTotal,
                         this.GetListObjectsTotal,
                         this.GetListOfTotal,
@@ -83,28 +74,44 @@ namespace Kistl.API.Client.PerfCounter
                         this.SetObjectsObjectsTotal,
                         this.SubmitChangesTotal,
                         this.SubmitChangesObjectsTotal,
-                        this.ViewModelFetch,
-                        this.ViewModelCreate);
+                    }.Concat(Values).ToArray();
 
-                    this.QueriesTotal =
-                    this.GetListTotal =
-                    this.GetListObjectsTotal =
-                    this.GetListOfTotal =
-                    this.GetListOfObjectsTotal =
-                    this.FetchRelationTotal =
-                    this.FetchRelationObjectsTotal =
-                    this.ServerMethodInvocation =
-                    this.SetObjectsTotal =
-                    this.SetObjectsObjectsTotal =
-                    this.SubmitChangesTotal =
-                    this.SubmitChangesObjectsTotal = 
-                    this.ViewModelFetch =
-                    this.ViewModelCreate = 0;
+                        var sb = new StringBuilder();
+                        for (int i = 0; i < vals.Length; i++)
+                        {
+                            sb.AppendFormat("{{{0}}};", i);
+                        }
+                        sb.Remove(sb.Length - 1, 1);
+
+                        _mainLogger.InfoFormat(string.Format(sb.ToString(), vals.Cast<object>().ToArray()));
+
+                        ResetValues();
+                    }
+                }
+                catch
+                {
+                    // don't care
                 }
             }
         }
 
-        private void ShouldDump()
+        protected virtual void ResetValues()
+        {
+            this.QueriesTotal =
+            this.GetListTotal =
+            this.GetListObjectsTotal =
+            this.GetListOfTotal =
+            this.GetListOfObjectsTotal =
+            this.FetchRelationTotal =
+            this.FetchRelationObjectsTotal =
+            this.ServerMethodInvocation =
+            this.SetObjectsTotal =
+            this.SetObjectsObjectsTotal =
+            this.SubmitChangesTotal =
+            this.SubmitChangesObjectsTotal = 0;
+        }
+
+        protected void ShouldDump()
         {
             if (++dumpCounter >= DUMPCOUNTERMAX)
             {
@@ -129,7 +136,7 @@ namespace Kistl.API.Client.PerfCounter
         private long QueriesTotal = 0;
         public void IncrementQuery(InterfaceType ifType)
         {
-            lock (_lock)
+            lock (sync)
             {
                 QueriesTotal++;
                 Get(ifType).QueriesTotal++;
@@ -140,9 +147,13 @@ namespace Kistl.API.Client.PerfCounter
 
         private long SubmitChangesTotal = 0;
         private long SubmitChangesObjectsTotal = 0;
-        public void IncrementSubmitChanges(int objectCount)
+        public void IncrementSubmitChanges()
         {
-            lock (_lock)
+        }
+
+        public void DecrementSubmitChanges(int objectCount, long startTicks)
+        {
+            lock (sync)
             {
                 SubmitChangesTotal++;
                 SubmitChangesObjectsTotal += objectCount;
@@ -151,11 +162,15 @@ namespace Kistl.API.Client.PerfCounter
             }
         }
 
+
         private long GetListTotal = 0;
         private long GetListObjectsTotal = 0;
-        public void IncrementGetList(InterfaceType ifType, int resultSize)
+        public void IncrementGetList(InterfaceType ifType)
         {
-            lock (_lock)
+        }
+        public void DecrementGetList(InterfaceType ifType, int resultSize, long startTicks)
+        {
+            lock (sync)
             {
                 GetListTotal++;
                 GetListObjectsTotal += resultSize;
@@ -168,9 +183,12 @@ namespace Kistl.API.Client.PerfCounter
 
         private long GetListOfTotal = 0;
         private long GetListOfObjectsTotal = 0;
-        public void IncrementGetListOf(InterfaceType ifType, int resultSize)
+        public void IncrementGetListOf(InterfaceType ifType)
         {
-            lock (_lock)
+        }
+        public void DecrementGetListOf(InterfaceType ifType, int resultSize, long startTicks)
+        {
+            lock (sync)
             {
                 GetListOfTotal++;
                 GetListOfObjectsTotal += resultSize;
@@ -183,9 +201,12 @@ namespace Kistl.API.Client.PerfCounter
 
         private long FetchRelationTotal = 0;
         private long FetchRelationObjectsTotal = 0;
-        public void IncrementFetchRelation(InterfaceType ifType, int resultSize)
+        public void IncrementFetchRelation(InterfaceType ifType)
         {
-            lock (_lock)
+        }
+        public void DecrementFetchRelation(InterfaceType ifType, int resultSize, long startTicks)
+        {
+            lock (sync)
             {
                 FetchRelationTotal++;
                 FetchRelationObjectsTotal += resultSize;
@@ -198,9 +219,13 @@ namespace Kistl.API.Client.PerfCounter
 
         private long SetObjectsTotal = 0;
         private long SetObjectsObjectsTotal = 0;
-        public void IncrementSetObjects(int objectCount)
+        public void IncrementSetObjects()
         {
-            lock (_lock)
+        }
+
+        public void DecrementSetObjects(int objectCount, long startTicks)
+        {
+            lock (sync)
             {
                 SetObjectsTotal++;
                 SetObjectsObjectsTotal += objectCount;
@@ -212,32 +237,9 @@ namespace Kistl.API.Client.PerfCounter
         private long ServerMethodInvocation = 0;
         public void IncrementServerMethodInvocation()
         {
-            lock (_lock)
+            lock (sync)
             {
                 ServerMethodInvocation++;
-
-                ShouldDump();
-            }
-        }
-
-
-        private long ViewModelFetch = 0;
-        public void IncrementViewModelFetch()
-        {
-            lock (_lock)
-            {
-                ViewModelFetch++;
-
-                ShouldDump();
-            }
-        }
-
-        private long ViewModelCreate = 0;
-        public void IncrementViewModelCreate()
-        {
-            lock (_lock)
-            {
-                ViewModelCreate++;
 
                 ShouldDump();
             }

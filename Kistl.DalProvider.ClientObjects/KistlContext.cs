@@ -62,6 +62,7 @@ using Kistl.API.Client.PerfCounter;
 
         public KistlContextImpl(ClientIsolationLevel il, KistlConfig config, IProxy proxy, string clientImplementationAssembly, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory, ClientImplementationType.ClientFactory implTypeFactory, IPerfCounter perfCounter)
         {
+            if (perfCounter == null) throw new ArgumentNullException("perfCounter");
             this._clientIsolationLevel = il;
             this.config = config;
             this.proxy = proxy;
@@ -162,7 +163,7 @@ using Kistl.API.Client.PerfCounter;
         public IQueryable<IDataObject> GetQuery(InterfaceType ifType)
         {
             CheckDisposed();
-            if (_perfCounter != null) _perfCounter.IncrementQuery(ifType); 
+            _perfCounter.IncrementQuery(ifType); 
             return new KistlContextQuery<IDataObject>(this, ifType, proxy);
         }
 
@@ -174,7 +175,7 @@ using Kistl.API.Client.PerfCounter;
         public IQueryable<T> GetQuery<T>() where T : class, IDataObject
         {
             CheckDisposed();
-            if (_perfCounter != null) _perfCounter.IncrementQuery(_iftFactory(typeof(T)));
+            _perfCounter.IncrementQuery(_iftFactory(typeof(T)));
             return new KistlContextQuery<T>(this, _iftFactory(typeof(T)), proxy);
         }
 
@@ -187,7 +188,7 @@ using Kistl.API.Client.PerfCounter;
         public IQueryable<T> GetPersistenceObjectQuery<T>() where T : class, IPersistenceObject
         {
             CheckDisposed();
-            if (_perfCounter != null) _perfCounter.IncrementQuery(_iftFactory(typeof(T)));
+            _perfCounter.IncrementQuery(_iftFactory(typeof(T)));
             return new KistlContextQuery<T>(this, _iftFactory(typeof(T)), proxy);
         }
 
@@ -200,7 +201,7 @@ using Kistl.API.Client.PerfCounter;
         public IQueryable<IPersistenceObject> GetPersistenceObjectQuery(InterfaceType ifType)
         {
             CheckDisposed();
-            if (_perfCounter != null) _perfCounter.IncrementQuery(ifType);
+            _perfCounter.IncrementQuery(ifType);
             return new KistlContextQuery<IPersistenceObject>(this, ifType, proxy);
         }
 
@@ -647,12 +648,20 @@ using Kistl.API.Client.PerfCounter;
         public int SubmitChanges()
         {
             CheckDisposed();
-            // TODO: Add a better Cache Refresh Strategie
-            // CacheController<IDataObject>.Current.Clear();
+            int result = 0;
+            var ticks = _perfCounter.IncrementSubmitChanges();
+            try
+            {
+                // TODO: Add a better Cache Refresh Strategie
+                // CacheController<IDataObject>.Current.Clear();
 
-            if (_submitChangesHandler == null) _submitChangesHandler = new SubmitChangesHandler();
-            var result = _submitChangesHandler.ExchangeObjects(this);
-            if (_perfCounter != null) _perfCounter.IncrementSubmitChanges(result); 
+                if (_submitChangesHandler == null) _submitChangesHandler = new SubmitChangesHandler();
+                result = _submitChangesHandler.ExchangeObjects(this);
+            }
+            finally
+            {
+                _perfCounter.DecrementSubmitChanges(result, ticks);
+            }
             return result;
         }
 

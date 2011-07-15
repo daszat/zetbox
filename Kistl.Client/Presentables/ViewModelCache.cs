@@ -12,6 +12,7 @@ namespace Kistl.Client.Presentables
         private readonly IPerfCounter _perfCounter;
         public ViewModelCache(IPerfCounter perfCounter)
         {
+            if (perfCounter == null) throw new ArgumentNullException("perfCounter");
             _perfCounter = perfCounter;
         }
 
@@ -22,12 +23,12 @@ namespace Kistl.Client.Presentables
             if (key == null) throw new ArgumentNullException("key");
             if (create == null) throw new ArgumentNullException("create");
 
-            if (_perfCounter != null) _perfCounter.IncrementViewModelFetch();
+            _perfCounter.IncrementViewModelFetch();
 
             var result = _cache.ContainsKey(key) ? _cache[key] : null;
             if (result != null) return result;
 
-            if (_perfCounter != null) _perfCounter.IncrementViewModelCreate();
+            _perfCounter.IncrementViewModelCreate();
             result = create();
             _cache[key] = result;
             return result;
