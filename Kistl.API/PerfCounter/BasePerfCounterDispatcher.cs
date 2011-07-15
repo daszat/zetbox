@@ -24,7 +24,7 @@ namespace Kistl.API.PerfCounter
             {
                 a.IncrementFetchRelation(ifType);
             }
-            return DateTime.Now.Ticks;
+            return Stopwatch.GetTimestamp();
         }
 
         public void DecrementFetchRelation(InterfaceType ifType, int resultSize, long startTicks)
@@ -42,7 +42,7 @@ namespace Kistl.API.PerfCounter
             {
                 a.IncrementGetList(ifType);
             }
-            return DateTime.Now.Ticks;
+            return Stopwatch.GetTimestamp();
         }
 
         public void DecrementGetList(InterfaceType ifType, int resultSize, long startTicks)
@@ -59,7 +59,7 @@ namespace Kistl.API.PerfCounter
             {
                 a.IncrementGetListOf(ifType);
             }
-            return DateTime.Now.Ticks;
+            return Stopwatch.GetTimestamp();
         }
 
         public void DecrementGetListOf(InterfaceType ifType, int resultSize, long startTicks)
@@ -92,7 +92,7 @@ namespace Kistl.API.PerfCounter
             {
                 a.IncrementSetObjects();
             }
-            return DateTime.Now.Ticks;
+            return Stopwatch.GetTimestamp();
         }
 
         public void DecrementSetObjects(int objectCount, long startTicks)
@@ -110,7 +110,7 @@ namespace Kistl.API.PerfCounter
             {
                 a.IncrementSubmitChanges();
             }
-            return DateTime.Now.Ticks;
+            return Stopwatch.GetTimestamp();
         }
         public void DecrementSubmitChanges(int objectCount, long startTicks)
         {

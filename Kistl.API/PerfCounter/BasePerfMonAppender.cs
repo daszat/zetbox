@@ -48,6 +48,10 @@ namespace Kistl.API.PerfCounter
         PerformanceCounter _GetListAvgDurationBase;
         PerformanceCounter _GetListOfAvgDuration;
         PerformanceCounter _GetListOfAvgDurationBase;
+        PerformanceCounter _FetchRelationAvgDuration;
+        PerformanceCounter _FetchRelationAvgDurationBase;
+        PerformanceCounter _SetObjectsAvgDuration;
+        PerformanceCounter _SetObjectsAvgDurationBase;
         #endregion
 
         public BasePerfMonAppender(Kistl.API.Configuration.KistlConfig cfg)
@@ -191,12 +195,20 @@ namespace Kistl.API.PerfCounter
             new CounterDesc("FetchRelationPerSec", "# of FetchRelation calls / sec.", PerformanceCounterType.RateOfCountsPerSecond32, (pma, desc) => pma._FetchRelationPerSec = desc.Get(pma)),
             new CounterDesc("FetchRelationTotal", "# of FetchRelation calls.", PerformanceCounterType.NumberOfItems64, (pma, desc) => pma._FetchRelationTotal = desc.Get(pma)),
             new CounterDesc("FetchRelationCurrent", "Current # of FetchRelation calls.", PerformanceCounterType.NumberOfItems64, (pma, desc) => pma._FetchRelationCurrent = desc.Get(pma)),
+
+            new CounterDesc("FetchRelationAvgDuration", "Avg. duration of FetchRelation calls.", PerformanceCounterType.AverageTimer32, (pma, desc) => pma._FetchRelationAvgDuration = desc.Get(pma)),
+            new CounterDesc("FetchRelationAvgDurationBase", "Avg. duration of FetchRelation calls base.", PerformanceCounterType.AverageBase, (pma, desc) => pma._FetchRelationAvgDurationBase = desc.Get(pma)),
+
             new CounterDesc("FetchRelationObjectsPerSec", "# of Objects returned by FetchRelation calls / sec.", PerformanceCounterType.RateOfCountsPerSecond32, (pma, desc) => pma._FetchRelationObjectsPerSec = desc.Get(pma)),
             new CounterDesc("FetchRelationObjectsTotal", "# of Objects returned by FetchRelation calls.", PerformanceCounterType.NumberOfItems64, (pma, desc) => pma._FetchRelationObjectsTotal = desc.Get(pma)),
 
             new CounterDesc("SetObjectsPerSec", "# of SetObjects calls / sec.", PerformanceCounterType.RateOfCountsPerSecond32, (pma, desc) => pma._SetObjectsPerSec = desc.Get(pma)),
             new CounterDesc("SetObjectsTotal", "# of SetObjects calls.", PerformanceCounterType.NumberOfItems64, (pma, desc) => pma._SetObjectsTotal = desc.Get(pma)),
             new CounterDesc("SetObjectsCurrent", "Current # of SetObjects calls.", PerformanceCounterType.NumberOfItems64, (pma, desc) => pma._SetObjectsCurrent = desc.Get(pma)),
+
+            new CounterDesc("SetObjectsAvgDuration", "Avg. duration of SetObjects calls.", PerformanceCounterType.AverageTimer32, (pma, desc) => pma._SetObjectsAvgDuration = desc.Get(pma)),
+            new CounterDesc("SetObjectsAvgDurationBase", "Avg. duration of SetObjects calls base.", PerformanceCounterType.AverageBase, (pma, desc) => pma._SetObjectsAvgDurationBase = desc.Get(pma)),
+
             new CounterDesc("SetObjectsObjectsPerSec", "# of Objects sent to the SetObjects call / sec.", PerformanceCounterType.RateOfCountsPerSecond32, (pma, desc) => pma._SetObjectsObjectsPerSec = desc.Get(pma)),
             new CounterDesc("SetObjectsObjectsTotal", "# of Objects sent to the SetObjects call.", PerformanceCounterType.NumberOfItems64, (pma, desc) => pma._SetObjectsObjectsTotal = desc.Get(pma)),
 
@@ -229,7 +241,7 @@ namespace Kistl.API.PerfCounter
             _SubmitChangesObjectsTotal.IncrementBy(objectCount);
 
             _SubmitChangesCurrent.Decrement();
-            _SubmitChangesAvgDuration.IncrementBy(DateTime.Now.Ticks - startTicks);
+            _SubmitChangesAvgDuration.IncrementBy(Stopwatch.GetTimestamp() - startTicks);
             _SubmitChangesAvgDurationBase.Increment();
         }
 
@@ -248,7 +260,7 @@ namespace Kistl.API.PerfCounter
             _GetListObjectsTotal.IncrementBy(resultSize);
 
             _GetListCurrent.Decrement();
-            _GetListAvgDuration.IncrementBy(DateTime.Now.Ticks - startTicks);
+            _GetListAvgDuration.IncrementBy(Stopwatch.GetTimestamp() - startTicks);
             _GetListAvgDurationBase.Increment();
         }
 
@@ -266,12 +278,13 @@ namespace Kistl.API.PerfCounter
             _GetListOfObjectsTotal.IncrementBy(resultSize);
 
             _GetListOfCurrent.Decrement();
-            _GetListOfAvgDuration.IncrementBy(DateTime.Now.Ticks - startTicks);
+            _GetListOfAvgDuration.IncrementBy(Stopwatch.GetTimestamp() - startTicks);
             _GetListOfAvgDurationBase.Increment();
         }
 
         public void IncrementFetchRelation(InterfaceType ifType)
         {
+            _FetchRelationCurrent.Increment();
         }
 
         public void DecrementFetchRelation(InterfaceType ifType, int resultSize, long startTicks)
@@ -282,10 +295,15 @@ namespace Kistl.API.PerfCounter
             _FetchRelationTotal.Increment();
             _FetchRelationObjectsPerSec.IncrementBy(resultSize);
             _FetchRelationObjectsTotal.IncrementBy(resultSize);
+
+            _FetchRelationCurrent.Decrement();
+            _FetchRelationAvgDuration.IncrementBy(Stopwatch.GetTimestamp() - startTicks);
+            _FetchRelationAvgDurationBase.Increment();
         }
 
         public void IncrementSetObjects()
         {
+            _SetObjectsCurrent.Increment();
         }
         public void DecrementSetObjects(int objectCount, long startTicks)
         {
@@ -295,6 +313,10 @@ namespace Kistl.API.PerfCounter
             _SetObjectsTotal.Increment();
             _SetObjectsObjectsPerSec.IncrementBy(objectCount);
             _SetObjectsObjectsTotal.IncrementBy(objectCount);
+
+            _SetObjectsCurrent.Decrement();
+            _SetObjectsAvgDuration.IncrementBy(Stopwatch.GetTimestamp() - startTicks);
+            _SetObjectsAvgDurationBase.Increment();
         }
 
         public void IncrementServerMethodInvocation()
