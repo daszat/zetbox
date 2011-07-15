@@ -16,6 +16,7 @@ namespace Kistl.API.Utils
         private readonly static ILog _linq = LogManager.GetLogger("Kistl.Linq");
         private readonly static ILog _linqquery = LogManager.GetLogger("Kistl.Linq.Query");
         private readonly static ILog _reflection = LogManager.GetLogger("Kistl.Reflection");
+        private readonly static ILog _methods = LogManager.GetLogger("Kistl.PerfCounter.Methods");
 
         public static ILog Log
         {
@@ -147,9 +148,17 @@ namespace Kistl.API.Utils
                 {
                     watch.Stop();
                     if (string.IsNullOrEmpty(Message))
+                    {
                         LogFormat("<< {0:n0}ms {1}", watch.ElapsedMilliseconds, Method);
+                    }
                     else
+                    {
                         LogFormat("<< {0:n0}ms {1}: {2}", watch.ElapsedMilliseconds, Method, Message);
+                    }
+                    if (_methods != null)
+                    {
+                        _methods.InfoFormat("{0}; {1}; \"{2}\"", Method, watch.ElapsedMilliseconds, (Message ?? string.Empty).Replace("\"", "\"\""));
+                    }
                     watch = null;
                 }
                 else
