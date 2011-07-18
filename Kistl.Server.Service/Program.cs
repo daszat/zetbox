@@ -201,7 +201,7 @@ namespace Kistl.Server.Service
                             Log.Info("Service control manager not registered");
                         }
 
-                        //RunTestCode(container.Resolve<IKistlContext>());
+                        //RunTestCode(container.Resolve<Func<IKistlContext>>());
 
                         Log.Info("Starting WCF Service");
                         var wcfServer = container.Resolve<IKistlAppDomain>();
@@ -233,23 +233,22 @@ namespace Kistl.Server.Service
             }
         }
 
-        //private static void RunTestCode(IKistlContext ctx)
+        //private static void RunTestCode(Func<IKistlContext> ctx)
         //{
-        //    // Test calendar
-        //    foreach (var cal in ctx.GetQuery<Kistl.App.GUI.Calendar>())
-        //    {
-        //        Logging.Log.InfoFormat("-------- Testing calendar {0}", cal.Name);
-        //        for (int i = 1; i <= 12; i++)
-        //        {
-        //            var from = new DateTime(2011, i, 1);
-        //            var until = from.LastMonthDay();
-        //            Logging.Log.InfoFormat("OffDays:      {0} - {1} = {2}", from.ToShortDateString(), until.ToShortDateString(), cal.GetOffDays(from, until));
-        //            Logging.Log.InfoFormat("WorkingDays:  {0} - {1} = {2}", from.ToShortDateString(), until.ToShortDateString(), cal.GetWorkingDays(from, until));
-        //            Logging.Log.InfoFormat("WorkingHours: {0} - {1} = {2}", from.ToShortDateString(), until.ToShortDateString(), cal.GetWorkingHours(from, until));
-        //        }
-        //    }
-        //    Logging.Log.InfoFormat("------------------------------");
+        //    var ctx1 = ctx();
+        //    var ctx2 = ctx();
 
+        //    var cal1 = ctx1.GetQuery<Kistl.App.Calendar.Calendar>().First();
+        //    var cal2 = ctx2.FindPersistenceObject<Kistl.App.Calendar.Calendar>(cal1.ID);
+
+        //    System.Diagnostics.Debug.Assert(cal1.ID == cal2.ID);
+        //    System.Diagnostics.Debug.Assert(cal1.Name == cal2.Name);
+
+        //    cal1.Name = "Test1";
+        //    ctx1.SubmitChanges();
+
+        //    cal2.Name = "Test2";
+        //    ctx2.SubmitChanges();
         //}
 
         internal static IContainer CreateMasterContainer(KistlConfig config)

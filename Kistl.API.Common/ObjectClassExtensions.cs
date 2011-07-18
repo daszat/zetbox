@@ -204,6 +204,26 @@ namespace Kistl.App.Extensions
             return false;
         }
 
+        public static bool ImplementsIChangedBy(this ObjectClass cls)
+        {
+            return ImplementsIChangedBy(cls, true);
+        }
+
+        public static bool ImplementsIChangedBy(this ObjectClass cls, bool lookupInBase)
+        {
+            if (cls == null) { throw new ArgumentNullException("cls"); }
+
+            while (cls != null)
+            {
+                // TODO: use named objects
+                if (cls.ImplementsInterfaces.Count(o => o.Name == "IChangedBy" && o.Module.Name == "KistlBase") == 1)
+                    return true;
+                if (!lookupInBase) return false;
+                cls = cls.BaseObjectClass;
+            }
+            return false;
+        }
+
         public static IList<Property> GetAllProperties(this ObjectClass cls)
         {
             if (cls == null) { throw new ArgumentNullException("cls"); }

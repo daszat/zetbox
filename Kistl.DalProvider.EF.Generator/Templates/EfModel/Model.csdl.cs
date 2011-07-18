@@ -24,6 +24,7 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.EfModel
             string type = prop.GetPropertyTypeString();
             string maxlength = String.Empty;
             string precScaleAttr = String.Empty;
+            string concurrency = String.Empty;
 
             if (prop is EnumerationProperty)
             {
@@ -48,8 +49,13 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.EfModel
                 precScaleAttr = String.Format("Precision=\"{0}\" Scale=\"{1}\" ", dp.Precision, dp.Scale);
             }
 
-            return String.Format("<Property Name=\"{0}\" Type=\"{1}\" Nullable=\"{2}\" {3}{4}/>",
-                name, type, prop.IsNullable().ToString().ToLowerInvariant(), maxlength, precScaleAttr);
+            if (prop.ObjectClass is ObjectClass && ((ObjectClass)prop.ObjectClass).ImplementsIChangedBy() && prop.Name == "ChangedOn")
+            {
+                concurrency = "ConcurrencyMode=\"Fixed\"";
+            }
+
+            return String.Format("<Property Name=\"{0}\" Type=\"{1}\" Nullable=\"{2}\" {3}{4} {5}/>",
+                name, type, prop.IsNullable().ToString().ToLowerInvariant(), maxlength, precScaleAttr, concurrency);
         }
 
         protected virtual void ApplyEntityTypeFieldDefs(IEnumerable<Property> properties)
