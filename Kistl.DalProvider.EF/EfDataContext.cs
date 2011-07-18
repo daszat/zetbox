@@ -281,6 +281,11 @@ namespace Kistl.DalProvider.Ef
                     result = _ctx.SaveChanges();
                     Logging.Log.InfoFormat("[{0}] changes submitted.", result);
                 }
+                catch (OptimisticConcurrencyException cex)
+                {
+                    Logging.Log.Error("Error during SubmitChanges", cex);
+                    throw new ConcurrencyException();
+                }
                 catch (UpdateException updex)
                 {
                     Logging.Log.Error("Error during SubmitChanges", updex);

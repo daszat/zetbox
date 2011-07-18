@@ -82,6 +82,47 @@ namespace Kistl.API
         }
     }
 
+    [Serializable]
+    public class ConcurrencyException
+        : KistlContextException
+    {
+        [NonSerialized]
+        private IEnumerable<IDataObject> objects;
+        public IEnumerable<IDataObject> Objects
+        {
+            get
+            {
+                return objects;
+            }
+        }
+
+        public ConcurrencyException()
+            : base("At least one object has changed between fetch and submit changes")
+        {
+        }
+
+        public ConcurrencyException(string message)
+            : base(message)
+        {
+        }
+
+        public ConcurrencyException(string message, Exception inner)
+            : base(message, inner)
+        {
+        }
+
+        protected ConcurrencyException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+        }
+
+        public ConcurrencyException(IEnumerable<IDataObject> objects)
+            : base(string.Format("{0} object(s) has changed between fetch and submit changes", objects != null ? objects.Count().ToString() : "?"))
+        {
+            this.objects = objects;
+        }
+    }
+
     public interface IKistlContextDebugger
     {
         void Created(IKistlContext ctx);

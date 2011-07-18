@@ -229,13 +229,29 @@ using System.IO;
                 entityObjects[obj] = obj;
             }
 
+            var concurrencyFailed = new List<IDataObject>();
             // then apply changes
             foreach (var obj in objects.Where(o => o.ClientObjectState == DataObjectState.Modified))
             {
                 var ctxObj = ctx.FindPersistenceObject(ctx.GetInterfaceType(obj), obj.ID);
                 ((BasePersistenceObject)ctxObj).RecordNotifications();
+                // optimistic concurrency
+                if (obj is Kistl.App.Base.IChangedBy)
+                {
+                    var orig = (Kistl.App.Base.IChangedBy)ctxObj;
+                    var send = (Kistl.App.Base.IChangedBy)obj;
+                    if (orig.ChangedOn != send.ChangedOn)
+                    {
+                        concurrencyFailed.Add((IDataObject)obj);
+                    }
+                }
                 ctxObj.ApplyChangesFrom(obj);
                 entityObjects[ctxObj] = ctxObj;
+            }
+
+            if (concurrencyFailed.Count > 0)
+            {
+                throw new ConcurrencyException(concurrencyFailed);
             }
 
             // then update references
