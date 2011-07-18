@@ -40,7 +40,8 @@
         <set name="SecurityRightsCollectionImpl"
              table="`<%= tableName %>_Rights`"
              lazy="true"
-             fetch="select">
+             fetch="select" 
+			 batch-size="100" >
             <key column="`ID`" />
             <composite-element class="<%= qualifiedRightsClassName %>">
                 <property name="Identity" column="`Identity`" />

@@ -77,7 +77,8 @@ this.WriteObjects("        <!-- map rights -->\r\n");
 this.WriteObjects("        <set name=\"SecurityRightsCollectionImpl\"\r\n");
 this.WriteObjects("             table=\"`",  tableName , "_Rights`\"\r\n");
 this.WriteObjects("             lazy=\"true\"\r\n");
-this.WriteObjects("             fetch=\"select\">\r\n");
+this.WriteObjects("             fetch=\"select\" \r\n");
+this.WriteObjects("			 batch-size=\"100\" >\r\n");
 this.WriteObjects("            <key column=\"`ID`\" />\r\n");
 this.WriteObjects("            <composite-element class=\"",  qualifiedRightsClassName , "\">\r\n");
 this.WriteObjects("                <property name=\"Identity\" column=\"`Identity`\" />\r\n");
@@ -85,13 +86,13 @@ this.WriteObjects("                <property name=\"Right\" column=\"`Right`\" /
 this.WriteObjects("            </composite-element>\r\n");
 this.WriteObjects("        </set>\r\n");
 this.WriteObjects("\r\n");
-#line 51 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
-} 
 #line 52 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
-this.WriteObjects("        <!-- define the subclasses -->\r\n");
+} 
 #line 53 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
-ApplyJoinedSubclasses(subClasses); 
+this.WriteObjects("        <!-- define the subclasses -->\r\n");
 #line 54 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
+ApplyJoinedSubclasses(subClasses); 
+#line 55 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("    </class>\r\n");
 this.WriteObjects("</hibernate-mapping>");

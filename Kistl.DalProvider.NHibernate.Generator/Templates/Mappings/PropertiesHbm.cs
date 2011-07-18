@@ -64,15 +64,11 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
                     if (otherEnd.Multiplicity.UpperBound() > 1) // we are 1-side
                     {
                         // always map as set, the wrapper has to translate/order the elements
-                        this.WriteObjects("        <set ", nameAttr, " ");
+                        this.WriteObjects("        <set ", nameAttr, " batch-size=\"100\" ");
                         if (prop.EagerLoading)
                         {
                             // TODO: re-think and re-test eagerloading
                             //this.WriteObjects("lazy=\"false\" fetch=\"join\" ");
-                        }
-                        else
-                        {
-                            this.WriteObjects("batch-size=\"100\" ");
                         }
                         // TODO: always mark this side inverse. See p57 in the reference
                         if (inverse)
@@ -143,15 +139,11 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
             //string fkOtherColumnAttr = String.Format("column=\"`{0}`\"", Construct.ForeignKeyColumnName(otherEnd));
 
             // always map as set, the wrapper has to translate/order the elements
-            this.WriteObjects("        <set ", nameAttr, " ", tableAttr, " inverse=\"true\" cascade=\"all-delete-orphan\" ");
+            this.WriteObjects("        <set ", nameAttr, " ", tableAttr, " inverse=\"true\" cascade=\"all-delete-orphan\" batch-size=\"100\" ");
             if (prop.EagerLoading)
             {
                 // TODO: re-think and re-test eagerloading
                 //this.WriteObjects("lazy=\"false\" fetch=\"join\" ");
-            }
-            else
-            {
-                this.WriteObjects("batch-size=\"100\" ");
             }
             this.WriteLine(">");
 
