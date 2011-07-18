@@ -14,6 +14,7 @@ namespace Kistl.API.Client
     using Kistl.API.Client.KistlService;
     using Kistl.API.Utils;
 using Kistl.API.Client.PerfCounter;
+    using System.ServiceModel;
 
     /// <summary>
     /// Proxy Interface for IKistlService
@@ -65,6 +66,10 @@ using Kistl.API.Client.PerfCounter;
                 {
                     request();
                     break;
+                }
+                catch (FaultException<ConcurrencyException> cex)
+                {
+                    throw cex.Detail;
                 }
                 catch (Exception ex)
                 {

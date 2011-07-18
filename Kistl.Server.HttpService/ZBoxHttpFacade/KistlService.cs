@@ -11,6 +11,7 @@ namespace Kistl.Server.HttpService
     using Autofac.Integration.Web;
     using Kistl.API;
     using Kistl.API.Common;
+    using System.Net;
 
     /// <summary>
     /// trivial HTTP-based facade implementation of the IKistlService for hosting in non-WCF environments (like apache+mono)
@@ -249,16 +250,21 @@ namespace Kistl.Server.HttpService
                 }
                 Log.DebugFormat("Sending response [{0}]", context.Response.StatusCode);
             }
+            catch (ConcurrencyException cex)
+            {
+                context.Response.StatusCode = (int)HttpStatusCode.Conflict;
+                Log.Error("Concurrency error while processing request", cex);
+            }
             catch (Exception ex)
             {
-                context.Response.StatusCode = 500;
+                context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
                 Log.Error("Error while processing request", ex);
             }
         }
 
         private void SendByteArray(HttpContext context, byte[] result)
         {
-            context.Response.StatusCode = 200;
+            context.Response.StatusCode = (int)HttpStatusCode.OK;
             context.Response.ContentType = "application/octet-stream";
             using (var writer = new BinaryWriter(context.Response.OutputStream))
             {

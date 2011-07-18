@@ -12,6 +12,7 @@ namespace Kistl.Server
     using Kistl.API.Utils;
     using Kistl.App.Base;
     using Kistl.API.Server.PerfCounter;
+    using System.ServiceModel;
 
     /// <summary>
     /// Implements the main service interface.
@@ -72,6 +73,10 @@ namespace Kistl.Server
                         return SendObjects(changedObjects, true).ToArray();
                     }
 
+                }
+                catch (ConcurrencyException cex)
+                {
+                    throw new FaultException<ConcurrencyException>(cex);
                 }
                 catch (Exception ex)
                 {

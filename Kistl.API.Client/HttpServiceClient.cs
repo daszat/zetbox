@@ -74,6 +74,10 @@ namespace Kistl.API.Client
                             _credentialsResolver.InvalidCredentials();
                             continue; // Try it again
                         }
+                        else if (httpResponse.StatusCode == HttpStatusCode.Conflict)
+                        {
+                            throw new ConcurrencyException();
+                        }
 
                         Log.ErrorFormat("HTTP Error: {0}: {1}", httpResponse.StatusCode, httpResponse.StatusDescription);
                         foreach (var header in ex.Response.Headers)

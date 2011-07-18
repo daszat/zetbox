@@ -4,9 +4,9 @@
     <xsd:schema targetNamespace="http://dasz.at/ZBox/Imports">
       <xsd:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd0" namespace="http://dasz.at/ZBox/" />
       <xsd:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System" />
+      <xsd:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Kistl.API" />
       <xsd:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-      <xsd:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Kistl.API" />
       <xsd:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd5" namespace="http://schemas.microsoft.com/Message" />
     </xsd:schema>
   </wsdl:types>
@@ -19,6 +19,9 @@
   <wsdl:message name="IKistlService_SetObjects_ExceptionFault_FaultMessage">
     <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/System" name="detail" element="q1:Exception" />
   </wsdl:message>
+  <wsdl:message name="IKistlService_SetObjects_ConcurrencyExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/Kistl.API" name="detail" element="q2:ConcurrencyException" />
+  </wsdl:message>
   <wsdl:message name="IKistlService_GetList_InputMessage">
     <wsdl:part name="parameters" element="tns:GetList" />
   </wsdl:message>
@@ -26,7 +29,7 @@
     <wsdl:part name="parameters" element="tns:GetListResponse" />
   </wsdl:message>
   <wsdl:message name="IKistlService_GetList_ExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/System" name="detail" element="q2:Exception" />
+    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/System" name="detail" element="q3:Exception" />
   </wsdl:message>
   <wsdl:message name="IKistlService_GetListOf_InputMessage">
     <wsdl:part name="parameters" element="tns:GetListOf" />
@@ -35,7 +38,7 @@
     <wsdl:part name="parameters" element="tns:GetListOfResponse" />
   </wsdl:message>
   <wsdl:message name="IKistlService_GetListOf_ExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/System" name="detail" element="q3:Exception" />
+    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/System" name="detail" element="q4:Exception" />
   </wsdl:message>
   <wsdl:message name="IKistlService_FetchRelation_InputMessage">
     <wsdl:part name="parameters" element="tns:FetchRelation" />
@@ -44,7 +47,7 @@
     <wsdl:part name="parameters" element="tns:FetchRelationResponse" />
   </wsdl:message>
   <wsdl:message name="IKistlService_FetchRelation_ExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/System" name="detail" element="q4:Exception" />
+    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/System" name="detail" element="q5:Exception" />
   </wsdl:message>
   <wsdl:message name="IKistlService_GetBlobStream_InputMessage">
     <wsdl:part name="parameters" element="tns:GetBlobStream" />
@@ -53,7 +56,7 @@
     <wsdl:part name="parameters" element="tns:GetBlobStreamResponse" />
   </wsdl:message>
   <wsdl:message name="IKistlService_GetBlobStream_ExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/System" name="detail" element="q5:Exception" />
+    <wsdl:part xmlns:q6="http://schemas.datacontract.org/2004/07/System" name="detail" element="q6:Exception" />
   </wsdl:message>
   <wsdl:message name="BlobMessage">
     <wsdl:part name="parameters" element="tns:BlobMessage" />
@@ -69,7 +72,7 @@
     <wsdl:part name="ID" element="tns:ID" />
   </wsdl:message>
   <wsdl:message name="IKistlService_SetBlobStream_ExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q6="http://schemas.datacontract.org/2004/07/System" name="detail" element="q6:Exception" />
+    <wsdl:part xmlns:q7="http://schemas.datacontract.org/2004/07/System" name="detail" element="q7:Exception" />
   </wsdl:message>
   <wsdl:message name="IKistlService_InvokeServerMethod_InputMessage">
     <wsdl:part name="parameters" element="tns:InvokeServerMethod" />
@@ -78,13 +81,14 @@
     <wsdl:part name="parameters" element="tns:InvokeServerMethodResponse" />
   </wsdl:message>
   <wsdl:message name="IKistlService_InvokeServerMethod_ExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q7="http://schemas.datacontract.org/2004/07/System" name="detail" element="q7:Exception" />
+    <wsdl:part xmlns:q8="http://schemas.datacontract.org/2004/07/System" name="detail" element="q8:Exception" />
   </wsdl:message>
   <wsdl:portType msc:usingSession="false" name="IKistlService">
     <wsdl:operation name="SetObjects">
       <wsdl:input wsaw:Action="http://dasz.at/ZBox/IKistlService/SetObjects" message="tns:IKistlService_SetObjects_InputMessage" />
       <wsdl:output wsaw:Action="http://dasz.at/ZBox/IKistlService/SetObjectsResponse" message="tns:IKistlService_SetObjects_OutputMessage" />
       <wsdl:fault wsaw:Action="http://dasz.at/ZBox/IKistlService/SetObjectsExceptionFault" name="ExceptionFault" message="tns:IKistlService_SetObjects_ExceptionFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://dasz.at/ZBox/IKistlService/SetObjectsConcurrencyExceptionFault" name="ConcurrencyExceptionFault" message="tns:IKistlService_SetObjects_ConcurrencyExceptionFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetList">
       <wsdl:input wsaw:Action="http://dasz.at/ZBox/IKistlService/GetList" message="tns:IKistlService_GetList_InputMessage" />

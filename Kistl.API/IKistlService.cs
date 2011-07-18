@@ -30,6 +30,7 @@ namespace Kistl.API
         /// <returns>a streamable list of <see cref="IPersistenceObject"/>s</returns>
         [OperationContract]
         [FaultContract(typeof(Exception))]
+        [FaultContract(typeof(ConcurrencyException))]
         byte[] SetObjects(byte[] msg, ObjectNotificationRequest[] notificationRequests);
 
         /// <summary>

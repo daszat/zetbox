@@ -8,6 +8,7 @@ namespace Kistl.Server
     using System.Text;
 
     using Kistl.API.Utils;
+    using Kistl.API;
 
     /// <summary>
     /// Server Helper

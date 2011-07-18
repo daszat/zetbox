@@ -278,8 +278,23 @@ namespace Kistl.Client.Presentables.ObjectEditor
             var errors = UpdateErrors().ToArray();
             if (errors.Length == 0)
             {
-                DataContext.SubmitChanges();
-                return true;
+                try
+                {
+                    DataContext.SubmitChanges();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    if (ex.GetInnerException() is ConcurrencyException)
+                    {
+                        ViewModelFactory.ShowMessage(WorkspaceViewModelResources.ConcurrencyException_Message, WorkspaceViewModelResources.ConcurrencyException_Caption);
+                        return false;
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
             }
 
             return false;

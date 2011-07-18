@@ -159,4 +159,10 @@
   <data name="ItemsLabel" xml:space="preserve">
     <value>Datensätze:</value>
   </data>
+  <data name="ConcurrencyException_Caption" xml:space="preserve">
+    <value>Daten wurden inzwischen geändert</value>
+  </data>
+  <data name="ConcurrencyException_Message" xml:space="preserve">
+    <value>Mindestens ein Datensatz wurde zwischenzeitlich geändert. Bitte schließen Sie den Arbeitsbereich und führen Sie die Änderungen erneut durch.</value>
+  </data>
 </root>
