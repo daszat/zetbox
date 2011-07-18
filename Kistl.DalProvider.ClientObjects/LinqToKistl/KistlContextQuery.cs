@@ -11,7 +11,7 @@ namespace Kistl.DalProvider.Client
 
     using Kistl.API;
     using Kistl.API.Client;
-using Kistl.API.Client.PerfCounter;
+    using Kistl.API.Client.PerfCounter;
 
     // http://blogs.msdn.com/mattwar/archive/2007/07/30/linq-building-an-iqueryable-provider-part-i.aspx
 
@@ -33,7 +33,7 @@ using Kistl.API.Client.PerfCounter;
             _type = type;
             _context = ctx;
             _expression = System.Linq.Expressions.Expression.Constant(this);
-            _provider = new KistlContextProvider(_context, _type, proxy, perfCounter);
+            _provider = new KistlContextProvider(_context, _type, proxy, _perfCounter);
         }
 
         public KistlContextQuery(KistlContextImpl ctx, InterfaceType type, KistlContextProvider provider, Expression expression, IPerfCounter perfCounter)
