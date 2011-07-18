@@ -110,6 +110,7 @@
     <Compile Include="Tests\CompoundObject\when_changing.cs" />
     <Compile Include="Tests\CompoundObject\when_querying.cs" />
     <Compile Include="Tests\CompoundObject\when_roundtrip.cs" />
+    <Compile Include="Tests\ContextTests\when_concurrency.cs" />
     <Compile Include="Tests\ContextTests\when_deleting.cs" />
     <Compile Include="Tests\ContextTests\when_searching.cs" />
     <Compile Include="Tests\DefaultValues\when_submitting.cs" />

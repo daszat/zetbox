@@ -80,6 +80,7 @@
     <Compile Include="CompoundObjects\when_changing_a_CompoundObject_list.cs" />
     <Compile Include="CompoundObjects\when_changing.cs" />
     <Compile Include="CompoundObjects\when_roundtrip.cs" />
+    <Compile Include="ContextTests\when_concurrency.cs" />
     <Compile Include="ContextTests\when_deleting.cs" />
     <Compile Include="ContextTests\when_searching.cs" />
     <Compile Include="DatabaseResetup.cs" />
