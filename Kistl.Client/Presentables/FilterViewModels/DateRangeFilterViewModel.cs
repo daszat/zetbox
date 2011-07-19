@@ -29,8 +29,11 @@ namespace Kistl.Client.Presentables.FilterViewModels
         {
             if (RangeFilter.From.Value != null && RangeFilter.To.Value != null)
             {
-                Year = Years.SingleOrDefault(i => i.Value == RangeFilter.From.Value.Value.Year);
-                var diff = (RangeFilter.From.Value.Value.Month - RangeFilter.To.Value.Value.Month);
+                var from = RangeFilter.From.Value.Value;
+                var diff = (RangeFilter.From.Value.Value.Month - RangeFilter.To.Value.Value.Month) + 1;
+
+                // Always set year
+                Year = Years.SingleOrDefault(i => i.Value == from.Year);
                 if (diff == 12)
                 {
                     // one year
@@ -38,16 +41,17 @@ namespace Kistl.Client.Presentables.FilterViewModels
                 else if (diff == 3)
                 {
                     // Quater
-                    Quater = Quaters.SingleOrDefault(i => i.Value == RangeFilter.From.Value.Value.GetQuater());
+                    Quater = Quaters.SingleOrDefault(i => i.Value == from.GetQuater());
                 }
                 else
                 {
-                    // OK, lets assume: it's a Month
-                    Month = Months.SingleOrDefault(i => i.Value == RangeFilter.From.Value.Value.Month);
+                    // OK, lets assume it's a Month
+                    Month = Months.SingleOrDefault(i => i.Value == from.Month);
                 }
             }
             else
             {
+                // Default to current year
                 Year = Years.SingleOrDefault(i => i.Value == DateTime.Today.Year);
             }
         }
