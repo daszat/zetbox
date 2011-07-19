@@ -300,11 +300,18 @@ namespace Kistl.Client.Models
         public BoolValueModel(string label, string description, bool allowNullInput, bool isReadOnly)
             : base(label, description, allowNullInput, isReadOnly)
         {
+            // Initialize with false
+            // Case 3007
+            // TODO: This was done to prevent ParamInputTasksViewModels to show tri state checkboxes
+            // The better solution is to define default values on parameter of methods
+            if (!allowNullInput) Value = false;
         }
 
         public BoolValueModel(string label, string description, bool allowNullInput, bool isReadOnly, ControlKind requestedKind)
             : base(label, description, allowNullInput, isReadOnly, requestedKind)
         {
+            // Initialize with false
+            if (!allowNullInput) Value = false;
         }
 
         public Icon FalseIcon { get; set; }
