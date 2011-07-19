@@ -43,7 +43,8 @@
                     <ctrls:CommandButton CommandViewModel="{Binding SelectNoneCommand}" />
                     <ctrls:CommandButton CommandViewModel="{Binding AddRelatedCommand}" />
                 </StackPanel>
-                <ListBox  ItemsSource="{Binding DataTypeViewModels}">
+                <ListBox  ItemsSource="{Binding DataTypeViewModels}"
+                          ItemContainerStyle="{StaticResource ListBoxItemContainerStyle}">
                     <ListBox.ItemTemplate>
                         <HierarchicalDataTemplate>
                             <CheckBox IsChecked="{Binding IsChecked}">

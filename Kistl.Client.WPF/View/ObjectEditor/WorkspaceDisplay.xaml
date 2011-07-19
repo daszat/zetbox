@@ -61,6 +61,7 @@
                                Text="{Binding ItemsLabel}" />
                     <ListBox ItemsSource="{Binding Items}"
                              SelectedItem="{Binding SelectedItem}"
+                             ItemContainerStyle="{StaticResource ListBoxItemContainerStyle}"
                              ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
                              BorderThickness="0" />
                 </DockPanel>
