@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
-using System.ComponentModel;
 
 namespace Kistl.API
 {
@@ -166,16 +166,20 @@ namespace Kistl.API
         private Dictionary<string, Notification> _auditLog;
         protected Dictionary<string, Notification> AuditLog { get { return _auditLog; } }
 
+        private static readonly log4net.ILog _auditLogger = log4net.LogManager.GetLogger("Kistl.Audits");
+
         protected void LogAudits()
         {
-            if (!Kistl.API.Utils.Logging.Log.IsWarnEnabled || _auditLog == null)
+            if (!_auditLogger.IsDebugEnabled || _auditLog == null || _auditLog.Count == 0)
                 return;
 
             foreach (var msg in _auditLog.Values)
             {
-                Kistl.API.Utils.Logging.Log.WarnFormat("{0}.{1} changed from '{2}' to '{3}'",
+                _auditLogger.DebugFormat("{0}.{1} changed from '{2}' to '{3}'",
                     this.GetType().Name, msg.property, msg.oldValue, msg.newValue);
             }
+
+            _auditLog.Clear();
         }
 
         protected virtual void AuditPropertyChange(string property, object oldValue, object newValue)
