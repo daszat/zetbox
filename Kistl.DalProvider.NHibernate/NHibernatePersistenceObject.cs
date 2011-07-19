@@ -73,7 +73,8 @@ namespace Kistl.DalProvider.NHibernate
                 case DataObjectState.Modified:
                 case DataObjectState.Unmodified:
                     Kistl.API.Utils.Logging.Log.DebugFormat("SaveOrUpdate: {0}#{1}", this.GetType(), this.ID);
-                    session.SaveOrUpdate(this.NHibernateProxy);
+                    // according to NH Documentation this is not needed
+                    // session.SaveOrUpdate(this.NHibernateProxy);
                     break;
                 case DataObjectState.Deleted:
                     Kistl.API.Utils.Logging.Log.DebugFormat("Delete: {0}#{1}", this.GetType(), this.ID);
