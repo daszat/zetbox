@@ -77,7 +77,7 @@
 
         <many-to-one name="Parent"
                      column="`<%= ceReverseKeyColumnName %>`" />
-<% ValueTypePropertyHbm.Call(Host, String.Empty, prop, "Value", prop.Name, true, ImplementationSuffix); %>
+<% ValueTypePropertyHbm.Call(Host, String.Empty, prop, "Value", prop.Name, true, ImplementationSuffix, false); %>
 <% if (prop.HasPersistentOrder) { %>
         <property name="Index"
                   column="`Index`" />

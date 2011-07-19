@@ -23,17 +23,18 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
 		protected List<Property> properties;
 		protected List<ObjectClass> subClasses;
 		protected bool needsRightsTable;
+		protected bool needsConcurrency;
 		protected string qualifiedRightsClassName;
 
 
-        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string interfaceName, string implementationName, string tableName, string qualifiedImplementationName, bool isAbstract, List<Property> properties, List<ObjectClass> subClasses, bool needsRightsTable, string qualifiedRightsClassName)
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string interfaceName, string implementationName, string tableName, string qualifiedImplementationName, bool isAbstract, List<Property> properties, List<ObjectClass> subClasses, bool needsRightsTable, bool needsConcurrency, string qualifiedRightsClassName)
         {
             if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
 
-            _host.CallTemplate("Mappings.JoinedSubclassHbm", ctx, interfaceName, implementationName, tableName, qualifiedImplementationName, isAbstract, properties, subClasses, needsRightsTable, qualifiedRightsClassName);
+            _host.CallTemplate("Mappings.JoinedSubclassHbm", ctx, interfaceName, implementationName, tableName, qualifiedImplementationName, isAbstract, properties, subClasses, needsRightsTable, needsConcurrency, qualifiedRightsClassName);
         }
 
-        public JoinedSubclassHbm(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string interfaceName, string implementationName, string tableName, string qualifiedImplementationName, bool isAbstract, List<Property> properties, List<ObjectClass> subClasses, bool needsRightsTable, string qualifiedRightsClassName)
+        public JoinedSubclassHbm(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string interfaceName, string implementationName, string tableName, string qualifiedImplementationName, bool isAbstract, List<Property> properties, List<ObjectClass> subClasses, bool needsRightsTable, bool needsConcurrency, string qualifiedRightsClassName)
             : base(_host)
         {
 			this.ctx = ctx;
@@ -45,13 +46,14 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
 			this.properties = properties;
 			this.subClasses = subClasses;
 			this.needsRightsTable = needsRightsTable;
+			this.needsConcurrency = needsConcurrency;
 			this.qualifiedRightsClassName = qualifiedRightsClassName;
 
         }
 
         public override void Generate()
         {
-#line 24 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\JoinedSubclassHbm.cst"
+#line 25 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\JoinedSubclassHbm.cst"
 this.WriteObjects("        <joined-subclass name=\"",  qualifiedImplementationName , "\"\r\n");
 this.WriteObjects("                         proxy=\"",  qualifiedImplementationName , "\"\r\n");
 this.WriteObjects("                         table=\"`",  tableName , "`\">\r\n");
@@ -60,14 +62,14 @@ this.WriteObjects("            <!-- base class reference -->\r\n");
 this.WriteObjects("            <key column=\"`ID`\" />\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("            <!-- define the properties -->\r\n");
-#line 32 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\JoinedSubclassHbm.cst"
-ApplyPropertyDefinitions(properties); 
 #line 33 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\JoinedSubclassHbm.cst"
+ApplyPropertyDefinitions(properties); 
+#line 34 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\JoinedSubclassHbm.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("            <!-- define the subclasses -->\r\n");
-#line 35 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\JoinedSubclassHbm.cst"
-ApplyJoinedSubclasses(subClasses); 
 #line 36 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\JoinedSubclassHbm.cst"
+ApplyJoinedSubclasses(subClasses); 
+#line 37 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\JoinedSubclassHbm.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        </joined-subclass>\r\n");
 

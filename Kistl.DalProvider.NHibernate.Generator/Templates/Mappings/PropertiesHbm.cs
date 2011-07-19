@@ -157,7 +157,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
 
         protected virtual void ApplyValueTypeProperty(string prefix, ValueTypeProperty prop)
         {
-            ValueTypePropertyHbm.Call(Host, prefix, prop, null, null, false, ImplementationSuffix);
+            ValueTypePropertyHbm.Call(Host, prefix, prop, null, null, false, ImplementationSuffix, needsConcurrency);
         }
 
         protected virtual void ApplyCompoundObjectProperty(string prefix, CompoundObjectProperty prop)

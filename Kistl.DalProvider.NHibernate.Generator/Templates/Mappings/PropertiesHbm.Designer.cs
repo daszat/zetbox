@@ -18,27 +18,29 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
 		protected IKistlContext ctx;
 		protected string prefix;
 		protected IEnumerable<Property> properties;
+		protected bool needsConcurrency;
 
 
-        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string prefix, IEnumerable<Property> properties)
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string prefix, IEnumerable<Property> properties, bool needsConcurrency)
         {
             if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
 
-            _host.CallTemplate("Mappings.PropertiesHbm", ctx, prefix, properties);
+            _host.CallTemplate("Mappings.PropertiesHbm", ctx, prefix, properties, needsConcurrency);
         }
 
-        public PropertiesHbm(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string prefix, IEnumerable<Property> properties)
+        public PropertiesHbm(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, string prefix, IEnumerable<Property> properties, bool needsConcurrency)
             : base(_host)
         {
 			this.ctx = ctx;
 			this.prefix = prefix;
 			this.properties = properties;
+			this.needsConcurrency = needsConcurrency;
 
         }
 
         public override void Generate()
         {
-#line 20 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\PropertiesHbm.cst"
+#line 21 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\PropertiesHbm.cst"
 /*
      * TODO: Actually, all this should die and become a bunch of polymorphic calls.
      * See also Kistl.DalProvider.Ef.Generator.Templates.EfModel.ModelCsdlEntityTypeFields

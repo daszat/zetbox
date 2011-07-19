@@ -10,6 +10,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
     using Kistl.API;
     using Kistl.App.Base;
     using Kistl.Generator;
+    using Kistl.App.Extensions;
 
     public partial class ObjectClassHbm
     {
@@ -73,12 +74,14 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
                 + Construct.SecurityRulesClassName(cls) + extraSuffix + Kistl.API.Helper.ImplementationSuffix
                 + ", Kistl.Objects." + extraSuffix + Kistl.API.Helper.ImplementationSuffix;
 
-            return new object[] { interfaceName, implementationName, tableName, qualifiedImplementationName, isAbstract, properties, subClasses, needsRightTable, qualifiedRightsClassName };
+            bool needsConcurrency = cls.ImplementsIChangedBy(false);
+
+            return new object[] { interfaceName, implementationName, tableName, qualifiedImplementationName, isAbstract, properties, subClasses, needsRightTable, needsConcurrency, qualifiedRightsClassName };
         }
 
         protected virtual void ApplyPropertyDefinitions(List<Property> properties)
         {
-            PropertiesHbm.Call(Host, ctx, String.Empty, properties);
+            PropertiesHbm.Call(Host, ctx, String.Empty, properties, needsConcurrency);
         }
 
         protected virtual void ApplyJoinedSubclasses(List<ObjectClass> subClasses)

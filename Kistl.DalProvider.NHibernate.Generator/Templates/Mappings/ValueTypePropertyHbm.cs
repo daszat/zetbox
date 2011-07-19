@@ -19,21 +19,28 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
             string propName,
             string columnName,
             bool forceDefinition,
-            string implementationSuffix)
+            string implementationSuffix,
+            bool needsConcurrency)
         {
             if (_host == null) { throw new ArgumentNullException("_host"); }
 
             // shortcut unmapped properties
             if (prop.IsCalculated)
             {
-                _host.WriteOutput(string.Format("<!-- ValueTypeProperty {0} is calculated -->", prop.Name));
+                _host.WriteOutput(string.Format("<!-- ValueTypeProperty {0} is calculated -->\n", prop.Name));
                 return;
             }
 
             propName = string.IsNullOrEmpty(propName) ? prop.Name : propName;
             columnName = string.IsNullOrEmpty(columnName) ? propName : columnName;
-            string ceClassAttr;
 
+            if (needsConcurrency && propName == "ChangedOn")
+            {
+                _host.WriteOutput(string.Format("<!-- ValueTypeProperty {0} is used for optimistic concurrency, declared in version element -->\n", prop.Name));
+                return;
+            }
+
+            string ceClassAttr;
             if (prop.IsList && !forceDefinition)
             {
                 // set the proper type for collection entries

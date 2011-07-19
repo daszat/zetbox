@@ -60,16 +60,21 @@ namespace Kistl.API.AbstractConsumerTests
             var ma1 = ctx.Create<Mitarbeiter>();
             ma1.Geburtstag = new DateTime(1960, 01, 02);
             ma1.Name = "Mitarbeiter Alpha";
-            ma1.Projekte.Add(prj);
             ma1.SVNr = "123456789";
             ma1.TelefonNummer = "+43664123456789";
 
             var ma2 = ctx.Create<Mitarbeiter>();
             ma2.Geburtstag = new DateTime(1970, 12, 30);
             ma2.Name = "Mitarbeiter Beta";
-            ma2.Projekte.Add(prj);
             ma2.SVNr = "987654321";
             ma2.TelefonNummer = "+43664987654321";
+
+            // Make nHibernate happy
+            ctx.SubmitChanges();
+            
+            ma2.Projekte.Add(prj);
+            ma1.Projekte.Add(prj);
+
         }
 
         /// <summary>
@@ -80,9 +85,13 @@ namespace Kistl.API.AbstractConsumerTests
         {
             ctx.GetQuery<Kunde>().ForEach(obj => ctx.Delete(obj));
             ctx.GetQuery<Auftrag>().ForEach(obj => ctx.Delete(obj));
-            ctx.GetQuery<Projekt>().ForEach(obj => { obj.Mitarbeiter.Clear(); obj.Tasks.Clear(); ctx.Delete(obj); });
             ctx.GetQuery<Task>().ForEach(obj => ctx.Delete(obj));
-            ctx.GetQuery<Mitarbeiter>().ForEach(obj => { obj.Projekte.Clear(); ctx.Delete(obj); });
+            ctx.SubmitChanges();
+            ctx.GetQuery<Projekt>().ForEach(obj => { obj.Mitarbeiter.Clear(); });
+            ctx.GetQuery<Mitarbeiter>().ForEach(obj => { obj.Projekte.Clear(); });
+            ctx.SubmitChanges();
+            ctx.GetQuery<Projekt>().ForEach(obj => { ctx.Delete(obj); });
+            ctx.GetQuery<Mitarbeiter>().ForEach(obj => { ctx.Delete(obj); });
         }
 
         /// <summary>

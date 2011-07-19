@@ -31,7 +31,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
 
         protected virtual void ApplyPropertyDefinitions(List<Property> properties)
         {
-            PropertiesHbm.Call(Host, ctx, String.Empty, properties);
+            PropertiesHbm.Call(Host, ctx, String.Empty, properties, false);
         }
 
         protected virtual void ApplyJoinedSubclasses(List<ObjectClass> subClasses)

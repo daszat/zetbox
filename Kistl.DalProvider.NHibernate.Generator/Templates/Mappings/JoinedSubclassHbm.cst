@@ -20,6 +20,7 @@
 <%@ Parameter Name="properties" Type="List<Property>" %>
 <%@ Parameter Name="subClasses" Type="List<ObjectClass>" %>
 <%@ Parameter Name="needsRightsTable" Type="bool" %>
+<%@ Parameter Name="needsConcurrency" Type="bool" %>
 <%@ Parameter Name="qualifiedRightsClassName" Type="string" %>
         <joined-subclass name="<%= qualifiedImplementationName %>"
                          proxy="<%= qualifiedImplementationName %>"

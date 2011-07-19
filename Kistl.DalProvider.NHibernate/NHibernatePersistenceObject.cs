@@ -67,13 +67,16 @@ namespace Kistl.DalProvider.NHibernate
             switch (this.ObjectState)
             {
                 case DataObjectState.New:
+                    Kistl.API.Utils.Logging.Log.DebugFormat("Save: {0}#{1}", this.GetType(), this.ID);
                     session.Save(this.NHibernateProxy);
                     break;
                 case DataObjectState.Modified:
                 case DataObjectState.Unmodified:
+                    Kistl.API.Utils.Logging.Log.DebugFormat("SaveOrUpdate: {0}#{1}", this.GetType(), this.ID);
                     session.SaveOrUpdate(this.NHibernateProxy);
                     break;
                 case DataObjectState.Deleted:
+                    Kistl.API.Utils.Logging.Log.DebugFormat("Delete: {0}#{1}", this.GetType(), this.ID);
                     session.Delete(this.NHibernateProxy);
                     break;
                 case DataObjectState.NotDeserialized:

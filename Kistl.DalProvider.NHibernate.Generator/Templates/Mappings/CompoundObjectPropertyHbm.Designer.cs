@@ -64,7 +64,7 @@ this.WriteObjects("            <property name=\"CompoundObject_IsNull\"\r\n");
 this.WriteObjects("                      ",  isNullColumnAttr , "\r\n");
 this.WriteObjects("                      type=\"bool\" />\r\n");
 #line 32 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CompoundObjectPropertyHbm.cst"
-PropertiesHbm.Call(Host, ctx, prefix + columnName + "_", properties);         
+PropertiesHbm.Call(Host, ctx, prefix + columnName + "_", properties, false);         
 #line 33 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CompoundObjectPropertyHbm.cst"
 this.WriteObjects("        </component>\r\n");
 #line 34 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CompoundObjectPropertyHbm.cst"

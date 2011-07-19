@@ -297,6 +297,10 @@ namespace Kistl.DalProvider.NHibernate
                 }
                 Logging.Log.InfoFormat("[{0}] changes submitted.", notifySaveList.Count);
             }
+            catch (StaleObjectStateException)
+            {
+                throw new ConcurrencyException();
+            }
             catch (Exception ex)
             {
                 Logging.Log.Error("Failed saving transaction", ex);

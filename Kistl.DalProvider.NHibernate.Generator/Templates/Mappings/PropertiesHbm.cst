@@ -15,6 +15,7 @@
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 <%@ Parameter Name="prefix" Type="string" %>
 <%@ Parameter Name="properties" Type="IEnumerable<Property>" %>
+<%@ Parameter Name="needsConcurrency" Type="bool" %>
 <%
 
     /*

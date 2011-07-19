@@ -118,7 +118,7 @@ this.WriteObjects("\r\n");
 this.WriteObjects("        <many-to-one name=\"Parent\"\r\n");
 this.WriteObjects("                     column=\"`",  ceReverseKeyColumnName , "`\" />\r\n");
 #line 80 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
-ValueTypePropertyHbm.Call(Host, String.Empty, prop, "Value", prop.Name, true, ImplementationSuffix); 
+ValueTypePropertyHbm.Call(Host, String.Empty, prop, "Value", prop.Name, true, ImplementationSuffix, false); 
 #line 81 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
 if (prop.HasPersistentOrder) { 
 #line 82 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
