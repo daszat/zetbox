@@ -57,7 +57,6 @@ namespace Kistl.Generator
 
                 GenerateTo(workingPath);
                 CompileCodeOnStaThread(workingPath);
-                ArchiveOldOutput();
                 PublishOutput();
                 Log.Info("Finished generating Code");
             }
@@ -68,7 +67,6 @@ namespace Kistl.Generator
             using (Log.InfoTraceMethodCall("CompileCode", "Compiling the code"))
             {
                 CompileCodeOnStaThread(_config.Server.CodeGenWorkingPath);
-                ArchiveOldOutput();
                 PublishOutput();
             }
         }
@@ -403,34 +401,6 @@ namespace Kistl.Generator
             {
                 string temppath = Path.Combine(destDirName, subdir.Name);
                 DirectoryCopy(subdir.FullName, temppath);
-            }
-        }
-
-        private void ArchiveOldOutput()
-        {
-            var outputPath = _config.Server.CodeGenOutputPath;
-            if (String.IsNullOrEmpty(outputPath))
-            {
-                throw new ConfigurationException("CodeGenOutputPath is not defined in the current configuration file, but archival was requested: don't know what to archive.");
-            }
-            var archivePath = _config.Server.CodeGenArchivePath;
-            if (!String.IsNullOrEmpty(archivePath))
-            {
-                if (!Directory.Exists(archivePath))
-                {
-                    Log.InfoFormat("Creating archive destination at [{0}]", archivePath);
-                    Directory.CreateDirectory(archivePath);
-                }
-                var destDir = Path.Combine(archivePath, DateTime.Now.ToString("'CodeGen'yyyyMMdd'_'HHmmss"));
-                if (Directory.Exists(outputPath))
-                {
-                    Log.InfoFormat("Archiving old results to [{0}]", destDir);
-                    Directory.Move(outputPath, destDir);
-                }
-                else
-                {
-                    Log.InfoFormat("No old results found in [{0}]", outputPath);
-                }
             }
         }
 
