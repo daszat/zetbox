@@ -204,6 +204,12 @@ n.Number = "87654321"; // changes n.Number but does not change p.Tel.Number
 
 \input{Programming/GraphicalUserInterface}
 
+
+\section{Concurrency}
+Kistl supports optimistic concurrency. It's enabled, when a \emph{ObjectClass}
+implements the \emph{IChangedBy} interface. The versioning column is
+\emph{ChangedOn}.
+
 \section{Core Kistl Development Environment}
 
 \subsection{Preparing a clean local build}
