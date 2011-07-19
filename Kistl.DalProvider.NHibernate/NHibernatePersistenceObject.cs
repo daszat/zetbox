@@ -67,6 +67,8 @@ namespace Kistl.DalProvider.NHibernate
             switch (this.ObjectState)
             {
                 case DataObjectState.New:
+                    session.Save(this.NHibernateProxy);
+                    break;
                 case DataObjectState.Modified:
                 case DataObjectState.Unmodified:
                     session.SaveOrUpdate(this.NHibernateProxy);
