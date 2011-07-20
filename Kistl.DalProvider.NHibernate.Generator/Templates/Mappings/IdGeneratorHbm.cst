@@ -7,14 +7,14 @@
 <%@ Parameter Name="tableName" Type="string" %>
 <% switch(idType) {                                                             %>
 <%      case "id":                                                              %>
-        <id name="ID" column="`ID`" type="Int32">
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
             <generator class="native">
                 <param name="sequence">`<%= tableName %>_ID_seq`</param>
             </generator>
         </id>
 <%          break;                                                              %>
 <%      case "collection-id":                                                   %>
-        <collection-id column="`ID`" type="Int32">
+        <collection-id column="`ID`" type="Int32" unsaved-value="0">
             <generator class="native">
                 <param name="sequence">`<%= tableName %>_ID_seq`</param>
             </generator>
