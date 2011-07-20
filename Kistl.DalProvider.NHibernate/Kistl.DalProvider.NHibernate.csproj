@@ -64,12 +64,6 @@
     <Reference Include="NHibernate">
       <HintPath>..\Libs\NHibernate3\Required_Bins\NHibernate.dll</HintPath>
     </Reference>
-    <Reference Include="NHibernate.ByteCode.LinFu">
-      <HintPath>..\Libs\NHibernate3\Required_For_LazyLoading\LinFu\NHibernate.ByteCode.LinFu.dll</HintPath>
-    </Reference>
-    <Reference Include="Remotion.Data.Linq">
-      <HintPath>..\Libs\NHibernate3\Required_Bins\Remotion.Data.Linq.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
