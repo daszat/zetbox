@@ -320,11 +320,6 @@ namespace Kistl.Server.SchemaManagement
         protected abstract string FormatFullName(DboRef tblName);
         protected abstract string FormatSchemaName(DboRef tblName);
 
-        public TableRef GetQualifiedTableName(string tblName)
-        {
-            return GetTableName("dbo", tblName);
-        }
-
         public TableRef GetTableName(string schemaName, string tblName)
         {
             if (db == null)
@@ -449,12 +444,12 @@ namespace Kistl.Server.SchemaManagement
         public abstract bool CheckTriggerExists(TableRef objName, string triggerName);
         public abstract void DropTrigger(TableRef objName, string triggerName);
 
-        public ProcRef GetQualifiedProcedureName(string procName)
+        public ProcRef GetProcedureName(string schemaName, string procName)
         {
             if (db == null)
                 throw new InvalidOperationException("cannot qualify table name without database connection");
-            // keep "dbo" as default schema until we implement schemas in the infrastructure
-            return new ProcRef(db.Database, "dbo", procName);
+
+            return new ProcRef(db.Database, schemaName, procName);
         }
 
         public abstract IEnumerable<ProcRef> GetProcedureNames();
@@ -465,12 +460,12 @@ namespace Kistl.Server.SchemaManagement
         public abstract bool CheckProcedureExists(ProcRef procName);
         public abstract void DropProcedure(ProcRef procName);
 
-        public ProcRef GetQualifiedFunctionName(string funcName)
+        public ProcRef GetFunctionName(string schemaName, string funcName)
         {
             if (db == null)
                 throw new InvalidOperationException("cannot qualify table name without database connection");
-            // keep "dbo" as default schema until we implement schemas in the infrastructure
-            return new ProcRef(db.Database, "dbo", funcName);
+            
+            return new ProcRef(db.Database, schemaName, funcName);
         }
 
         public abstract IEnumerable<ProcRef> GetFunctionNames();
@@ -486,7 +481,7 @@ namespace Kistl.Server.SchemaManagement
 
         public string GetSavedSchema()
         {
-            var currentSchemaRef = GetQualifiedTableName("CurrentSchema");
+            var currentSchemaRef = GetTableName("base", "CurrentSchema");
             if (!CheckTableExists(currentSchemaRef))
             {
                 return String.Empty;
@@ -511,7 +506,7 @@ namespace Kistl.Server.SchemaManagement
 
         public void SaveSchema(string schema)
         {
-            var currentSchemaRef = GetQualifiedTableName("CurrentSchema");
+            var currentSchemaRef = GetTableName("base", "CurrentSchema");
             if (!CheckTableExists(currentSchemaRef))
                 throw new InvalidOperationException("Unable to save Schema. Schematable does not exist.");
 

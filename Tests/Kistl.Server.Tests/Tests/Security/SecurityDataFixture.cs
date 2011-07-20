@@ -142,9 +142,9 @@ namespace Kistl.Server.Tests.Security
             using (var db = scope.ResolveNamed<ISchemaProvider>(connectionString.SchemaProvider))
             {
                 db.Open(connectionString.ConnectionString);
-                db.ExecRefreshRightsOnProcedure(db.GetQualifiedProcedureName("RefreshRightsOn_Projekte"));
-                db.ExecRefreshRightsOnProcedure(db.GetQualifiedProcedureName("RefreshRightsOn_Tasks"));
-                db.ExecRefreshRightsOnProcedure(db.GetQualifiedProcedureName("RefreshRightsOn_Auftraege"));
+                db.ExecRefreshRightsOnProcedure(db.GetProcedureName("dbo", "RefreshRightsOn_Projekte"));
+                db.ExecRefreshRightsOnProcedure(db.GetProcedureName("dbo", "RefreshRightsOn_Tasks"));
+                db.ExecRefreshRightsOnProcedure(db.GetProcedureName("dbo", "RefreshRightsOn_Auftraege"));
             }
         }
 

@@ -52,7 +52,7 @@ namespace Kistl.API.Migration
                 Log.InfoFormat("Skipping cleaning of unmapped table [{0}]", tbl.Name);
                 return;
             }
-            CleanDestination(_dst.GetQualifiedTableName(tbl.DestinationObjectClass.TableName));
+            CleanDestination(_dst.GetTableName(tbl.DestinationObjectClass.Module.SchemaName, tbl.DestinationObjectClass.TableName));
         }
 
         public void CleanDestination(TableRef tbl)
@@ -166,7 +166,7 @@ namespace Kistl.API.Migration
                 && additional_joins.All(j => referringCols
                     .Select(c => c.DestinationProperty.Single())
                     .OfType<ObjectReferenceProperty>()
-                    .Any(orp => j.JoinTableName == _dst.GetQualifiedTableName(orp.RelationEnd.Parent.GetOtherEnd(orp.RelationEnd).Type.TableName))))
+                    .Any(orp => j.JoinTableName == _dst.GetTableName(orp.RelationEnd.Parent.GetOtherEnd(orp.RelationEnd).Type.Module.SchemaName, orp.RelationEnd.Parent.GetOtherEnd(orp.RelationEnd).Type.TableName))))
             {
                 throw new InvalidOperationException("Unmapped additional joins found");
             }
@@ -207,17 +207,17 @@ namespace Kistl.API.Migration
                     && orp != null)
                 {
                     if (additional_joins != null
-                        && additional_joins.Count(i => i.JoinTableName == _dst.GetQualifiedTableName(orp.RelationEnd.Parent.GetOtherEnd(orp.RelationEnd).Type.TableName)) > 0)
+                        && additional_joins.Count(i => i.JoinTableName == _dst.GetTableName(orp.RelationEnd.Parent.GetOtherEnd(orp.RelationEnd).Type.Module.SchemaName, orp.RelationEnd.Parent.GetOtherEnd(orp.RelationEnd).Type.TableName)) > 0)
                     {
                         return new ProjectionColumn(
                             "ID",
-                            additional_joins.Single(j => j.JoinTableName == _dst.GetQualifiedTableName(orp.RelationEnd.Parent.GetOtherEnd(orp.RelationEnd).Type.TableName)),
+                            additional_joins.Single(j => j.JoinTableName == _dst.GetTableName(orp.RelationEnd.Parent.GetOtherEnd(orp.RelationEnd).Type.Module.SchemaName, orp.RelationEnd.Parent.GetOtherEnd(orp.RelationEnd).Type.TableName)),
                             System.Data.DbType.Int32,
                             orp.Name);
                     }
                     else if (nullConverter.Any(converter => converter.Column.Name == c.Name))
                     {
-                        return new ProjectionColumn(c.Name, ColumnRef.PrimaryTable, c.DestinationProperty.Single().Name); 
+                        return new ProjectionColumn(c.Name, ColumnRef.PrimaryTable, c.DestinationProperty.Single().Name);
                     }
                     else
                     {
@@ -236,7 +236,7 @@ namespace Kistl.API.Migration
             using (var srcReader = _src.ReadJoin(_src.GetTableName(tbl.StagingDatabase.Schema, tbl.Name), srcColumnNames, joins))
             using (var translator = new Translator(tbl, srcReader, srcColumns, nullConverter))
             {
-                _dst.WriteTableData(_dst.GetQualifiedTableName(tbl.DestinationObjectClass.TableName), translator, dstColumnNames);
+                _dst.WriteTableData(_dst.GetTableName(tbl.DestinationObjectClass.Module.SchemaName, tbl.DestinationObjectClass.TableName), translator, dstColumnNames);
                 processedRows = translator.ProcessedRows;
             }
 
@@ -297,7 +297,7 @@ namespace Kistl.API.Migration
             var result = new Join()
             {
                 Type = JoinType.Left,
-                JoinTableName = _dst.GetQualifiedTableName(srcTbl.DestinationObjectClass.TableName),
+                JoinTableName = _dst.GetTableName(srcTbl.DestinationObjectClass.Module.SchemaName, srcTbl.DestinationObjectClass.TableName),
                 JoinColumnName = directRefs.Select(reference => new ColumnRef(reference.Value.References.DestinationProperty.Single().Name, ColumnRef.Local, reference.Value.References.DestinationProperty.Single().GetDbType())).ToArray(),
                 FKColumnName = directRefs.Select(reference => new ColumnRef(reference.Value.Name, ColumnRef.PrimaryTable, (System.Data.DbType)reference.Value.DbType)).ToArray()
             };
@@ -315,7 +315,7 @@ namespace Kistl.API.Migration
             using (var srcReader = _src.ReadTableData(tblRef, srcColumnNames))
             using (var translator = new Translator(tbl, srcReader, mappedColumns, nullConverter))
             {
-                _dst.WriteTableData(_dst.GetQualifiedTableName(tbl.DestinationObjectClass.TableName), translator, dstColumnNames);
+                _dst.WriteTableData(_dst.GetTableName(tbl.DestinationObjectClass.Module.SchemaName, tbl.DestinationObjectClass.TableName), translator, dstColumnNames);
 
                 WriteLog(
                     tbl.Name, translator.ProcessedRows,

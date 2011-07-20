@@ -130,14 +130,14 @@ namespace Kistl.Server.SchemaManagement
                 {
                     var viewRel = new Join();
                     result.Add(viewRel);
-                    viewRel.JoinTableName = db.GetQualifiedTableName(rel.GetRelationTableName());
+                    viewRel.JoinTableName = db.GetTableName(rel.Module.SchemaName, rel.GetRelationTableName());
                     viewRel.JoinColumnName = new[] { new ColumnRef(Construct.ForeignKeyColumnName(lastRelEnd), ColumnRef.Local) };
                     viewRel.FKColumnName = new[] { new ColumnRef(lastColumName, lastJoin) };
                     lastJoin = viewRel;
 
                     viewRel = new Join();
                     result.Add(viewRel);
-                    viewRel.JoinTableName = db.GetQualifiedTableName(nextRelEnd.Type.TableName);
+                    viewRel.JoinTableName = db.GetTableName(nextRelEnd.Type.Module.SchemaName, nextRelEnd.Type.TableName);
                     viewRel.JoinColumnName = new[] { new ColumnRef("ID", ColumnRef.Local) };
                     viewRel.FKColumnName = new[] { new ColumnRef(Construct.ForeignKeyColumnName(nextRelEnd), lastJoin) };
 
@@ -148,7 +148,7 @@ namespace Kistl.Server.SchemaManagement
                 {
                     var viewRel = new Join();
                     result.Add(viewRel);
-                    viewRel.JoinTableName = db.GetQualifiedTableName(nextRelEnd.Type.TableName);
+                    viewRel.JoinTableName = db.GetTableName(nextRelEnd.Type.Module.SchemaName, nextRelEnd.Type.TableName);
                     string localCol = string.Empty;
                     string fkCol = string.Empty;
                     if (nextRelEnd == rel.A && rel.Storage == StorageType.MergeIntoA)

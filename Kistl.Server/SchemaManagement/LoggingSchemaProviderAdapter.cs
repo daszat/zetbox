@@ -109,11 +109,6 @@ namespace Kistl.Server.SchemaManagement
             return _provider.NativeToDbType(type);
         }
 
-        public TableRef GetQualifiedTableName(string tblName)
-        {
-            return _provider.GetQualifiedTableName(tblName);
-        }
-
         public TableRef GetTableName(string schemaName, string tblName)
         {
             return _provider.GetTableName(schemaName, tblName);
@@ -139,9 +134,9 @@ namespace Kistl.Server.SchemaManagement
             return _provider.GetViewDefinition(view);
         }
 
-        public ProcRef GetQualifiedProcedureName(string procName)
+        public ProcRef GetProcedureName(string schemaName, string procName)
         {
-            return _provider.GetQualifiedProcedureName(procName);
+            return _provider.GetProcedureName(schemaName, procName);
         }
 
         public IEnumerable<ProcRef> GetProcedureNames()
@@ -531,9 +526,9 @@ namespace Kistl.Server.SchemaManagement
             }
         }
 
-        public ProcRef GetQualifiedFunctionName(string funcName)
+        public ProcRef GetFunctionName(string schemaName, string funcName)
         {
-            return _provider.GetQualifiedFunctionName(funcName);
+            return _provider.GetFunctionName(schemaName, funcName);
         }
 
         public IEnumerable<ProcRef> GetFunctionNames()

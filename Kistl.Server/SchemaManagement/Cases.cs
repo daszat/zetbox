@@ -64,7 +64,7 @@ namespace Kistl.Server.SchemaManagement
                 DoDeleteObjectClassSecurityRules(objClass);
             }
 
-            var tbl = db.GetQualifiedTableName(objClass.TableName);
+            var tbl = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
             Log.InfoFormat("Drop Table: {0}", tbl);
             db.DropTable(tbl);
         }
@@ -77,8 +77,8 @@ namespace Kistl.Server.SchemaManagement
         }
         public void DoNewObjectClass(ObjectClass objClass)
         {
-            Log.InfoFormat("New Table: {0}", db.GetQualifiedTableName(objClass.TableName));
-            db.CreateTable(db.GetQualifiedTableName(objClass.TableName), objClass.BaseObjectClass == null);
+            Log.InfoFormat("New Table: {0}", db.GetTableName(objClass.Module.SchemaName, objClass.TableName));
+            db.CreateTable(db.GetTableName(objClass.Module.SchemaName, objClass.TableName), objClass.BaseObjectClass == null);
         }
         #endregion
 
@@ -92,22 +92,22 @@ namespace Kistl.Server.SchemaManagement
         public void DoRenameObjectClassTable(ObjectClass objClass)
         {
             var saved = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
-            db.RenameTable(db.GetQualifiedTableName(saved.TableName), db.GetQualifiedTableName(objClass.TableName));
+            db.RenameTable(db.GetTableName(saved.Module.SchemaName, saved.TableName), db.GetTableName(objClass.Module.SchemaName, objClass.TableName));
         }
         #endregion
 
         #region RenameValueTypePropertyName
-        public bool IsRenameValueTypePropertyName(ValueTypeProperty prop)
+        public bool IsRenameValueTypePropertyName(ObjectClass objClass, ValueTypeProperty prop, string prefix)
         {
             var saved = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
             if (saved == null) return false;
-            return saved.Name != prop.Name;
+            return Construct.NestedColumnName(saved, prefix) != Construct.NestedColumnName(prop, prefix);
         }
         public void DoRenameValueTypePropertyName(ObjectClass objClass, ValueTypeProperty prop, string prefix)
         {
             var saved = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
             // TODO: What if prefix has changed
-            db.RenameColumn(db.GetQualifiedTableName(objClass.TableName), Construct.NestedColumnName(saved, prefix), Construct.NestedColumnName(prop, prefix));
+            db.RenameColumn(db.GetTableName(objClass.Module.SchemaName, objClass.TableName), Construct.NestedColumnName(saved, prefix), Construct.NestedColumnName(prop, prefix));
         }
         #endregion
 
@@ -126,8 +126,8 @@ namespace Kistl.Server.SchemaManagement
             var movedUp = IsParentOf(objClass, (ObjectClass)saved.ObjectClass);
             var movedDown = IsParentOf((ObjectClass)saved.ObjectClass, objClass);
 
-            var tblName = db.GetQualifiedTableName(objClass.TableName);
-            var srcTblName = db.GetQualifiedTableName(((ObjectClass)saved.ObjectClass).TableName);
+            var tblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
+            var srcTblName = db.GetTableName(saved.Module.SchemaName, ((ObjectClass)saved.ObjectClass).TableName);
             var colName = Construct.NestedColumnName(prop, prefix);
             var srcColName = Construct.NestedColumnName(saved, prefix); // TODO: What if prefix has changed
             var dbType = prop.GetDbType();
@@ -200,7 +200,7 @@ namespace Kistl.Server.SchemaManagement
         {
             string colName = Construct.NestedColumnName(prop, prefix);
             Log.InfoFormat("New nullable ValueType Property: '{0}' ('{1}')", prop.Name, colName);
-            db.CreateColumn(db.GetQualifiedTableName(objClass.TableName), colName, prop.GetDbType(), prop.GetSize(), prop.GetScale(), true, SchemaManager.GetDefaultContraint(prop));
+            db.CreateColumn(db.GetTableName(objClass.Module.SchemaName, objClass.TableName), colName, prop.GetDbType(), prop.GetSize(), prop.GetScale(), true, SchemaManager.GetDefaultContraint(prop));
         }
         #endregion
 
@@ -211,7 +211,7 @@ namespace Kistl.Server.SchemaManagement
         }
         public void DoNewValueTypePropertyNotNullable(ObjectClass objClass, ValueTypeProperty prop, string prefix)
         {
-            var tblName = db.GetQualifiedTableName(objClass.TableName);
+            var tblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
             var colName = Construct.NestedColumnName(prop, prefix);
             var dbType = prop.GetDbType();
             var size = prop.GetSize();
@@ -243,7 +243,7 @@ namespace Kistl.Server.SchemaManagement
         }
         public void DoChangeDefaultValue(ObjectClass objClass, ValueTypeProperty prop, string prefix)
         {
-            var tblName = db.GetQualifiedTableName(objClass.TableName);
+            var tblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
             var colName = Construct.NestedColumnName(prop, prefix);
 
             // Use current nullable definition. 
@@ -263,7 +263,7 @@ namespace Kistl.Server.SchemaManagement
         }
         public void DoChangeValueTypeProperty_To_NotNullable(ObjectClass objClass, ValueTypeProperty prop, string prefix)
         {
-            var tblName = db.GetQualifiedTableName(objClass.TableName);
+            var tblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
             var colName = Construct.NestedColumnName(prop, prefix);
 
             if (db.CheckColumnContainsNulls(tblName, colName))
@@ -286,7 +286,7 @@ namespace Kistl.Server.SchemaManagement
         }
         public void DoChangeValueTypeProperty_To_Nullable(ObjectClass objClass, ValueTypeProperty prop, string prefix)
         {
-            var tblName = db.GetQualifiedTableName(objClass.TableName);
+            var tblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
             var colName = Construct.NestedColumnName(prop, prefix);
 
             db.AlterColumn(tblName, colName, prop.GetDbType(), prop.GetSize(), prop.GetScale(), prop.IsNullable(), null);
@@ -329,7 +329,7 @@ namespace Kistl.Server.SchemaManagement
         public void DoNewValueTypePropertyList(ObjectClass objClass, ValueTypeProperty prop)
         {
             Log.InfoFormat("New ValueType Property List: {0}", prop.Name);
-            var tblName = db.GetQualifiedTableName(prop.GetCollectionEntryTable());
+            var tblName = db.GetTableName(prop.Module.SchemaName, prop.GetCollectionEntryTable());
             string fkName = prop.GetCollectionEntryReverseKeyColumnName();
             string valPropName = prop.Name;
             string valPropIndexName = prop.Name + "Index";
@@ -345,7 +345,7 @@ namespace Kistl.Server.SchemaManagement
             {
                 db.CreateColumn(tblName, valPropIndexName, System.Data.DbType.Int32, 0, 0, false);
             }
-            db.CreateFKConstraint(tblName, db.GetQualifiedTableName(objClass.TableName), fkName, assocName, true);
+            db.CreateFKConstraint(tblName, db.GetTableName(objClass.Module.SchemaName, objClass.TableName), fkName, assocName, true);
             db.CreateIndex(tblName, Construct.IndexName(tblName.Name, fkName), false, false, fkName);
         }
         #endregion
@@ -358,7 +358,7 @@ namespace Kistl.Server.SchemaManagement
         public void DoNewCompoundObjectPropertyList(ObjectClass objClass, CompoundObjectProperty prop)
         {
             Log.InfoFormat("New CompoundObject Property List: {0}", prop.Name);
-            var tblName = db.GetQualifiedTableName(prop.GetCollectionEntryTable());
+            var tblName = db.GetTableName(prop.Module.SchemaName, prop.GetCollectionEntryTable());
             string fkName = "fk_" + prop.ObjectClass.Name;
 
             // TODO: Support neested CompoundObject
@@ -381,7 +381,7 @@ namespace Kistl.Server.SchemaManagement
             {
                 db.CreateColumn(tblName, valPropIndexName, System.Data.DbType.Int32, 0, 0, false);
             }
-            db.CreateFKConstraint(tblName, db.GetQualifiedTableName(objClass.TableName), fkName, assocName, true);
+            db.CreateFKConstraint(tblName, db.GetTableName(objClass.Module.SchemaName, objClass.TableName), fkName, assocName, true);
             db.CreateIndex(tblName, Construct.IndexName(tblName.Name, fkName), false, false, fkName);
         }
         #endregion
@@ -444,7 +444,7 @@ namespace Kistl.Server.SchemaManagement
                     return;
             }
 
-            var tblName = db.GetQualifiedTableName(relEnd.Type.TableName);
+            var tblName = db.GetTableName(relEnd.Type.Module.SchemaName, relEnd.Type.TableName);
             string colName = Construct.ListPositionColumnName(otherEnd);
             // always allow nulls for items missing a definite order
             db.CreateColumn(tblName, colName, System.Data.DbType.Int32, 0, 0, true);
@@ -468,12 +468,12 @@ namespace Kistl.Server.SchemaManagement
             RelationEnd otherEnd;
             if (rel.HasStorage(RelationEndRole.A))
             {
-                tblName = db.GetQualifiedTableName(rel.A.Type.TableName);
+                tblName = db.GetTableName(rel.A.Type.Module.SchemaName, rel.A.Type.TableName);
                 otherEnd = rel.B;
             }
             else if (rel.HasStorage(RelationEndRole.B))
             {
-                tblName = db.GetQualifiedTableName(rel.B.Type.TableName);
+                tblName = db.GetTableName(rel.B.Type.Module.SchemaName, rel.B.Type.TableName);
                 otherEnd = rel.A;
             }
             else
@@ -516,7 +516,7 @@ namespace Kistl.Server.SchemaManagement
                     return;
             }
 
-            var tblName = db.GetQualifiedTableName(relEnd.Type.TableName);
+            var tblName = db.GetTableName(relEnd.Type.Module.SchemaName, relEnd.Type.TableName);
             var colName = Construct.ForeignKeyColumnName(otherEnd);
 
             db.AlterColumn(tblName, colName, System.Data.DbType.Int32, 0, 0, otherEnd.IsNullable(), null);
@@ -553,7 +553,7 @@ namespace Kistl.Server.SchemaManagement
                     return;
             }
 
-            var tblName = db.GetQualifiedTableName(relEnd.Type.TableName);
+            var tblName = db.GetTableName(relEnd.Type.Module.SchemaName, relEnd.Type.TableName);
             var colName = Construct.ForeignKeyColumnName(otherEnd);
 
             if (db.CheckColumnContainsNulls(tblName, colName))
@@ -582,13 +582,13 @@ namespace Kistl.Server.SchemaManagement
             RelationEnd otherEnd;
             if (rel.HasStorage(RelationEndRole.A))
             {
-                tblName = db.GetQualifiedTableName(rel.A.Type.TableName);
+                tblName = db.GetTableName(rel.A.Type.Module.SchemaName, rel.A.Type.TableName);
                 isIndexed = rel.NeedsPositionStorage(RelationEndRole.A);
                 otherEnd = rel.B;
             }
             else if (rel.HasStorage(RelationEndRole.B))
             {
-                tblName = db.GetQualifiedTableName(rel.B.Type.TableName);
+                tblName = db.GetTableName(rel.B.Type.Module.SchemaName, rel.B.Type.TableName);
                 isIndexed = rel.NeedsPositionStorage(RelationEndRole.B);
                 otherEnd = rel.A;
             }
@@ -652,13 +652,14 @@ namespace Kistl.Server.SchemaManagement
                     return;
             }
 
-            var destTblRef = db.GetQualifiedTableName(relEnd.Type.TableName);
-            var destRefTblName = db.GetQualifiedTableName(otherEnd.Type.TableName);
+            var destTblRef = db.GetTableName(relEnd.Type.Module.SchemaName, relEnd.Type.TableName);
+            var destRefTblName = db.GetTableName(otherEnd.Type.Module.SchemaName, otherEnd.Type.TableName);
             bool isIndexed = rel.NeedsPositionStorage(relEnd.GetRole());
 
             string destColName = Construct.ForeignKeyColumnName(otherEnd);
             string destIndexName = Construct.ListPositionColumnName(otherEnd);
 
+            string srcSchemaName = string.Empty;
             string srcTblName = string.Empty;
             string srcColName = string.Empty;
 
@@ -666,16 +667,18 @@ namespace Kistl.Server.SchemaManagement
             // use best matching
             if (saved.HasStorage(RelationEndRole.A))
             {
+                srcSchemaName = saved.A.Type.Module.SchemaName;
                 srcTblName = saved.A.Type.TableName;
                 srcColName = Construct.ForeignKeyColumnName(saved.B);
             }
-            if (saved.HasStorage(RelationEndRole.B) && (string.IsNullOrEmpty(srcTblName) || db.GetQualifiedTableName(srcTblName) != destTblRef))
+            if (saved.HasStorage(RelationEndRole.B) && (string.IsNullOrEmpty(srcSchemaName) || string.IsNullOrEmpty(srcTblName) || db.GetTableName(srcSchemaName, srcTblName) != destTblRef))
             {
+                srcSchemaName = saved.B.Type.Module.SchemaName;
                 srcTblName = saved.B.Type.TableName;
                 srcColName = Construct.ForeignKeyColumnName(saved.A);
             }
 
-            var srcTblRef = db.GetQualifiedTableName(srcTblName);
+            var srcTblRef = db.GetTableName(srcSchemaName, srcTblName);
 
             if (srcTblRef == destTblRef && srcColName == destColName)
             {
@@ -771,18 +774,18 @@ namespace Kistl.Server.SchemaManagement
                     return;
             }
 
-            var srcTblName = db.GetQualifiedTableName(relEnd.Type.TableName);
+            var srcTblName = db.GetTableName(relEnd.Type.Module.SchemaName, relEnd.Type.TableName);
             var srcColName = Construct.ForeignKeyColumnName(otherEnd);
 
-            var destTbl = db.GetQualifiedTableName(rel.GetRelationTableName());
+            var destTbl = db.GetTableName(rel.Module.SchemaName, rel.GetRelationTableName());
             var destCol = rel.GetRelationFkColumnName(relEnd.GetRole());
             var destFKCol = rel.GetRelationFkColumnName(otherEnd.GetRole());
 
             // Drop relations first as 1:1 and n:m relations share the same names
             var srcAssocA = saved.GetRelationAssociationName(RelationEndRole.A);
-            if (db.CheckFKConstraintExists(db.GetQualifiedTableName(rel.A.Type.TableName), srcAssocA)) db.DropFKConstraint(db.GetQualifiedTableName(rel.A.Type.TableName), srcAssocA);
+            if (db.CheckFKConstraintExists(db.GetTableName(rel.A.Type.Module.SchemaName, rel.A.Type.TableName), srcAssocA)) db.DropFKConstraint(db.GetTableName(rel.A.Type.Module.SchemaName, rel.A.Type.TableName), srcAssocA);
             var srcAssocB = saved.GetRelationAssociationName(RelationEndRole.B);
-            if (db.CheckFKConstraintExists(db.GetQualifiedTableName(rel.B.Type.TableName), srcAssocB)) db.DropFKConstraint(db.GetQualifiedTableName(rel.B.Type.TableName), srcAssocB);
+            if (db.CheckFKConstraintExists(db.GetTableName(rel.B.Type.Module.SchemaName, rel.B.Type.TableName), srcAssocB)) db.DropFKConstraint(db.GetTableName(rel.B.Type.Module.SchemaName, rel.B.Type.TableName), srcAssocB);
 
             DoNew_N_M_Relation(rel);
             db.InsertFKs(srcTblName, srcColName, destTbl, destCol, destFKCol);
@@ -790,11 +793,11 @@ namespace Kistl.Server.SchemaManagement
             // Drop columns
             if (saved.Storage == StorageType.MergeIntoA || saved.Storage == StorageType.Replicate)
             {
-                db.DropColumn(db.GetQualifiedTableName(saved.A.Type.TableName), Construct.ForeignKeyColumnName(saved.B));
+                db.DropColumn(db.GetTableName(saved.A.Type.Module.SchemaName, saved.A.Type.TableName), Construct.ForeignKeyColumnName(saved.B));
             }
             if (saved.Storage == StorageType.MergeIntoB || saved.Storage == StorageType.Replicate)
             {
-                db.DropColumn(db.GetQualifiedTableName(saved.B.Type.TableName), Construct.ForeignKeyColumnName(saved.A));
+                db.DropColumn(db.GetTableName(saved.B.Type.Module.SchemaName, saved.B.Type.TableName), Construct.ForeignKeyColumnName(saved.A));
             }
         }
         #endregion
@@ -830,7 +833,7 @@ namespace Kistl.Server.SchemaManagement
                     return;
             }
 
-            var srcTblName = db.GetQualifiedTableName(relEnd.Type.TableName);
+            var srcTblName = db.GetTableName(relEnd.Type.Module.SchemaName, relEnd.Type.TableName);
             string srcColName = Construct.ForeignKeyColumnName(otherEnd);
             bool srcIsIndexed = rel.NeedsPositionStorage(relEnd.GetRole());
             string srcIndexName = Construct.ListPositionColumnName(otherEnd);
@@ -855,7 +858,7 @@ namespace Kistl.Server.SchemaManagement
             // And only migrate because the source data might be used twice
             if (rel.HasStorage(RelationEndRole.A))
             {
-                var destTblName = db.GetQualifiedTableName(rel.A.Type.TableName);
+                var destTblName = db.GetTableName(rel.A.Type.Module.SchemaName, rel.A.Type.TableName);
                 var destColName = Construct.ForeignKeyColumnName(rel.B);
                 if (destTblName != srcTblName)
                 {
@@ -866,7 +869,7 @@ namespace Kistl.Server.SchemaManagement
             }
             if (rel.HasStorage(RelationEndRole.B))
             {
-                var destTblName = db.GetQualifiedTableName(rel.B.Type.TableName);
+                var destTblName = db.GetTableName(rel.B.Type.Module.SchemaName, rel.B.Type.TableName);
                 var destColName = Construct.ForeignKeyColumnName(rel.A);
                 if (destTblName != srcTblName)
                 {
@@ -879,28 +882,28 @@ namespace Kistl.Server.SchemaManagement
             // Then try to rename columns
             if (rel.HasStorage(RelationEndRole.A) && !aCreated)
             {
-                var destTblName = db.GetQualifiedTableName(rel.A.Type.TableName);
+                var destTblName = db.GetTableName(rel.A.Type.Module.SchemaName, rel.A.Type.TableName);
                 var destColName = Construct.ForeignKeyColumnName(rel.B);
                 if (destTblName == srcTblName && destColName != srcColName)
                 {
                     db.RenameColumn(destTblName, srcColName, destColName);
                 }
                 var assocName = rel.GetRelationAssociationName(RelationEndRole.A);
-                var refTblName = db.GetQualifiedTableName(rel.B.Type.TableName);
+                var refTblName = db.GetTableName(rel.B.Type.Module.SchemaName, rel.B.Type.TableName);
                 db.CreateFKConstraint(destTblName, refTblName, destColName, assocName, false);
                 db.CreateIndex(destTblName, Construct.IndexName(destTblName.Name, destColName), true, false, destColName);
                 srcColWasReused = true;
             }
             if (rel.HasStorage(RelationEndRole.B) && !bCreated)
             {
-                var destTblName = db.GetQualifiedTableName(rel.B.Type.TableName);
+                var destTblName = db.GetTableName(rel.B.Type.Module.SchemaName, rel.B.Type.TableName);
                 var destColName = Construct.ForeignKeyColumnName(rel.A);
                 if (destTblName == srcTblName && destColName != srcColName)
                 {
                     db.RenameColumn(destTblName, srcColName, destColName);
                 }
                 var assocName = rel.GetRelationAssociationName(RelationEndRole.B);
-                var refTblName = db.GetQualifiedTableName(rel.A.Type.TableName);
+                var refTblName = db.GetTableName(rel.A.Type.Module.SchemaName, rel.A.Type.TableName);
                 db.CreateFKConstraint(destTblName, refTblName, destColName, assocName, false);
                 db.CreateIndex(destTblName, Construct.IndexName(destTblName.Name, destColName), true, false, destColName);
                 srcColWasReused = true;
@@ -941,10 +944,10 @@ namespace Kistl.Server.SchemaManagement
                     return;
             }
 
-            var srcTblName = db.GetQualifiedTableName(relEnd.Type.TableName);
+            var srcTblName = db.GetTableName(relEnd.Type.Module.SchemaName, relEnd.Type.TableName);
             var srcColName = Construct.ForeignKeyColumnName(otherEnd);
 
-            var destTbl = db.GetQualifiedTableName(rel.GetRelationTableName());
+            var destTbl = db.GetTableName(rel.Module.SchemaName, rel.GetRelationTableName());
             var destCol = rel.GetRelationFkColumnName(relEnd.GetRole());
             var destFKCol = rel.GetRelationFkColumnName(otherEnd.GetRole());
 
@@ -968,7 +971,7 @@ namespace Kistl.Server.SchemaManagement
             string destAssocName = rel.GetAssociationName();
             var saved = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
 
-            var srcTblName = db.GetQualifiedTableName(saved.GetRelationTableName());
+            var srcTblName = db.GetTableName(saved.Module.SchemaName, saved.GetRelationTableName());
 
             // Drop relations first as 1:1 and n:m relations share the same names
             var srcAssocA = saved.GetRelationAssociationName(RelationEndRole.A);
@@ -980,7 +983,7 @@ namespace Kistl.Server.SchemaManagement
 
             if (rel.HasStorage(RelationEndRole.A))
             {
-                var destTblName = db.GetQualifiedTableName(rel.A.Type.TableName);
+                var destTblName = db.GetTableName(rel.A.Type.Module.SchemaName, rel.A.Type.TableName);
                 var destColName = Construct.ForeignKeyColumnName(rel.B);
                 var srcColName = rel.GetRelationFkColumnName(RelationEndRole.B);
                 var srcFKColName = rel.GetRelationFkColumnName(RelationEndRole.A);
@@ -994,7 +997,7 @@ namespace Kistl.Server.SchemaManagement
             }
             if (rel.HasStorage(RelationEndRole.B))
             {
-                var destTblName = db.GetQualifiedTableName(rel.B.Type.TableName);
+                var destTblName = db.GetTableName(rel.B.Type.Module.SchemaName, rel.B.Type.TableName);
                 var destColName = Construct.ForeignKeyColumnName(rel.A);
                 var srcColName = rel.GetRelationFkColumnName(RelationEndRole.A);
                 var srcFKColName = rel.GetRelationFkColumnName(RelationEndRole.B);
@@ -1043,7 +1046,7 @@ namespace Kistl.Server.SchemaManagement
 
             var saved = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
 
-            var srcTbl = db.GetQualifiedTableName(saved.GetRelationTableName());
+            var srcTbl = db.GetTableName(saved.Module.SchemaName, saved.GetRelationTableName());
             var srcCol = saved.GetRelationFkColumnName(otherEnd.GetRole());
             var srcFKCol = saved.GetRelationFkColumnName(relEnd.GetRole());
 
@@ -1053,7 +1056,7 @@ namespace Kistl.Server.SchemaManagement
                 return;
             }
 
-            var destTblName = db.GetQualifiedTableName(relEnd.Type.TableName);
+            var destTblName = db.GetTableName(relEnd.Type.Module.SchemaName, relEnd.Type.TableName);
             var destColName = Construct.ForeignKeyColumnName(otherEnd);
 
             DoNew_1_N_Relation(rel);
@@ -1078,7 +1081,7 @@ namespace Kistl.Server.SchemaManagement
 
             if (rel.GetRelationType() == RelationType.n_m)
             {
-                var tblName = db.GetQualifiedTableName(saved.GetRelationTableName());
+                var tblName = db.GetTableName(saved.Module.SchemaName, saved.GetRelationTableName());
                 if (db.CheckTableContainsData(tblName))
                 {
                     Log.WarnFormat("Unable to drop old relation. Relation has some instances. Table: " + tblName);
@@ -1108,7 +1111,7 @@ namespace Kistl.Server.SchemaManagement
                         return;
                 }
 
-                var tblName = db.GetQualifiedTableName(relEnd.Type.TableName);
+                var tblName = db.GetTableName(relEnd.Type.Module.SchemaName, relEnd.Type.TableName);
                 var colName = Construct.ForeignKeyColumnName(otherEnd);
 
                 if (db.CheckColumnContainsValues(tblName, colName))
@@ -1141,7 +1144,7 @@ namespace Kistl.Server.SchemaManagement
                         return;
                 }
 
-                var tblName = db.GetQualifiedTableName(relEnd.Type.TableName);
+                var tblName = db.GetTableName(relEnd.Type.Module.SchemaName, relEnd.Type.TableName);
                 var colName = Construct.ForeignKeyColumnName(otherEnd);
 
                 if (db.CheckColumnContainsValues(tblName, colName))
@@ -1172,8 +1175,8 @@ namespace Kistl.Server.SchemaManagement
 
             if (rel.GetRelationType() == RelationType.n_m)
             {
-                var srcRelTbl = db.GetQualifiedTableName(saved.GetRelationTableName());
-                var destRelTbl = db.GetQualifiedTableName(rel.GetRelationTableName());
+                var srcRelTbl = db.GetTableName(saved.Module.SchemaName, saved.GetRelationTableName());
+                var destRelTbl = db.GetTableName(rel.Module.SchemaName, rel.GetRelationTableName());
 
                 db.RenameFKConstraint(srcRelTbl, saved.GetRelationAssociationName(RelationEndRole.A), rel.GetRelationAssociationName(RelationEndRole.A));
                 db.RenameFKConstraint(srcRelTbl, saved.GetRelationAssociationName(RelationEndRole.B), rel.GetRelationAssociationName(RelationEndRole.B));
@@ -1188,14 +1191,14 @@ namespace Kistl.Server.SchemaManagement
                 if (saved.HasStorage(RelationEndRole.A) &&
                     Construct.ForeignKeyColumnName(saved.B) != Construct.ForeignKeyColumnName(rel.B))
                 {
-                    var tbl = db.GetQualifiedTableName(rel.A.Type.TableName);
+                    var tbl = db.GetTableName(rel.A.Type.Module.SchemaName, rel.A.Type.TableName);
                     db.RenameFKConstraint(tbl, saved.GetAssociationName(), rel.GetAssociationName());
                     db.RenameColumn(tbl, Construct.ForeignKeyColumnName(saved.B), Construct.ForeignKeyColumnName(rel.B));
                 }
                 else if (saved.HasStorage(RelationEndRole.B) &&
                     Construct.ForeignKeyColumnName(saved.A) != Construct.ForeignKeyColumnName(rel.A))
                 {
-                    var tbl = db.GetQualifiedTableName(rel.B.Type.TableName);
+                    var tbl = db.GetTableName(rel.B.Type.Module.SchemaName, rel.B.Type.TableName);
                     db.RenameFKConstraint(tbl, saved.GetAssociationName(), rel.GetAssociationName());
                     db.RenameColumn(tbl, Construct.ForeignKeyColumnName(saved.A), Construct.ForeignKeyColumnName(rel.A));
                 }
@@ -1204,7 +1207,7 @@ namespace Kistl.Server.SchemaManagement
             {
                 if (saved.HasStorage(RelationEndRole.A))
                 {
-                    var tbl = db.GetQualifiedTableName(rel.A.Type.TableName);
+                    var tbl = db.GetTableName(rel.A.Type.Module.SchemaName, rel.A.Type.TableName);
                     db.RenameFKConstraint(tbl, saved.GetRelationAssociationName(RelationEndRole.A), rel.GetRelationAssociationName(RelationEndRole.A));
                     if (Construct.ForeignKeyColumnName(saved.B) != Construct.ForeignKeyColumnName(rel.B))
                     {
@@ -1213,7 +1216,7 @@ namespace Kistl.Server.SchemaManagement
                 }
                 if (saved.HasStorage(RelationEndRole.B))
                 {
-                    var tbl = db.GetQualifiedTableName(rel.B.Type.TableName);
+                    var tbl = db.GetTableName(rel.B.Type.Module.SchemaName, rel.B.Type.TableName);
                     db.RenameFKConstraint(tbl, saved.GetRelationAssociationName(RelationEndRole.B), rel.GetRelationAssociationName(RelationEndRole.B));
                     if (Construct.ForeignKeyColumnName(saved.A) != Construct.ForeignKeyColumnName(rel.A))
                     {
@@ -1251,8 +1254,8 @@ namespace Kistl.Server.SchemaManagement
                     return;
             }
 
-            var tblName = db.GetQualifiedTableName(relEnd.Type.TableName);
-            var refTblName = db.GetQualifiedTableName(otherEnd.Type.TableName);
+            var tblName = db.GetTableName(relEnd.Type.Module.SchemaName, relEnd.Type.TableName);
+            var refTblName = db.GetTableName(otherEnd.Type.Module.SchemaName, otherEnd.Type.TableName);
             bool isIndexed = rel.NeedsPositionStorage(relEnd.GetRole());
 
             var colName = Construct.ForeignKeyColumnName(otherEnd);
@@ -1282,7 +1285,7 @@ namespace Kistl.Server.SchemaManagement
             string assocName = rel.GetAssociationName();
             Log.InfoFormat("Create N:M Relation {1} PositionStorage: {0}", assocName, role);
 
-            var tblName = db.GetQualifiedTableName(rel.GetRelationTableName());
+            var tblName = db.GetTableName(rel.Module.SchemaName, rel.GetRelationTableName());
             var fkName = rel.GetRelationFkColumnName(role);
 
             db.CreateColumn(tblName, fkName + Kistl.API.Helper.PositionSuffix, System.Data.DbType.Int32, 0, 0, true);
@@ -1301,7 +1304,7 @@ namespace Kistl.Server.SchemaManagement
             string assocName = rel.GetAssociationName();
             Log.InfoFormat("Drop N:M Relation {1} PositionStorage: {0}", assocName, role);
 
-            var tblName = db.GetQualifiedTableName(rel.GetRelationTableName());
+            var tblName = db.GetTableName(rel.Module.SchemaName, rel.GetRelationTableName());
             var fkName = rel.GetRelationFkColumnName(role);
 
             db.DropColumn(tblName, fkName + Kistl.API.Helper.PositionSuffix);
@@ -1318,7 +1321,7 @@ namespace Kistl.Server.SchemaManagement
             string assocName = rel.GetAssociationName();
             Log.InfoFormat("Deleting N:M Relation: {0}", assocName);
 
-            var tblName = db.GetQualifiedTableName(rel.GetRelationTableName());
+            var tblName = db.GetTableName(rel.Module.SchemaName, rel.GetRelationTableName());
 
             db.DropFKConstraint(tblName, rel.GetRelationAssociationName(RelationEndRole.A));
             db.DropFKConstraint(tblName, rel.GetRelationAssociationName(RelationEndRole.B));
@@ -1337,7 +1340,7 @@ namespace Kistl.Server.SchemaManagement
             string assocName = rel.GetAssociationName();
             Log.InfoFormat("New N:M Relation: {0}", assocName);
 
-            var tblName = db.GetQualifiedTableName(rel.GetRelationTableName());
+            var tblName = db.GetTableName(rel.Module.SchemaName, rel.GetRelationTableName());
             var fkAName = rel.GetRelationFkColumnName(RelationEndRole.A);
             var fkBName = rel.GetRelationFkColumnName(RelationEndRole.B);
 
@@ -1360,9 +1363,9 @@ namespace Kistl.Server.SchemaManagement
                 db.CreateColumn(tblName, "ExportGuid", System.Data.DbType.Guid, 0, 0, false, new NewGuidDefaultConstraint());
             }
 
-            db.CreateFKConstraint(tblName, db.GetQualifiedTableName(rel.A.Type.TableName), fkAName, rel.GetRelationAssociationName(RelationEndRole.A), false);
+            db.CreateFKConstraint(tblName, db.GetTableName(rel.A.Type.Module.SchemaName, rel.A.Type.TableName), fkAName, rel.GetRelationAssociationName(RelationEndRole.A), false);
             db.CreateIndex(tblName, Construct.IndexName(tblName.Name, fkAName), false, false, fkAName);
-            db.CreateFKConstraint(tblName, db.GetQualifiedTableName(rel.B.Type.TableName), fkBName, rel.GetRelationAssociationName(RelationEndRole.B), false);
+            db.CreateFKConstraint(tblName, db.GetTableName(rel.B.Type.Module.SchemaName, rel.B.Type.TableName), fkBName, rel.GetRelationAssociationName(RelationEndRole.B), false);
             db.CreateIndex(tblName, Construct.IndexName(tblName.Name, fkBName), false, false, fkBName);
         }
         #endregion
@@ -1387,9 +1390,9 @@ namespace Kistl.Server.SchemaManagement
             }
         }
 
-        private void Delete_1_1_Relation_DropColumns(Relation rel, RelationEnd end, RelationEnd otherEnd, RelationEndRole role)
+        private void Delete_1_1_Relation_DropColumns(Relation rel, RelationEnd relEnd, RelationEnd otherEnd, RelationEndRole role)
         {
-            var tblName = db.GetQualifiedTableName(end.Type.TableName);
+            var tblName = db.GetTableName(relEnd.Type.Module.SchemaName, relEnd.Type.TableName);
             var colName = Construct.ForeignKeyColumnName(otherEnd);
             var assocName = rel.GetRelationAssociationName(role);
 
@@ -1425,8 +1428,8 @@ namespace Kistl.Server.SchemaManagement
 
         private void New_1_1_Relation_CreateColumns(Relation rel, RelationEnd relEnd, RelationEnd otherEnd, RelationEndRole role)
         {
-            var tblName = db.GetQualifiedTableName(relEnd.Type.TableName);
-            var refTblName = db.GetQualifiedTableName(otherEnd.Type.TableName);
+            var tblName = db.GetTableName(relEnd.Type.Module.SchemaName, relEnd.Type.TableName);
+            var refTblName = db.GetTableName(otherEnd.Type.Module.SchemaName, otherEnd.Type.TableName);
             var colName = Construct.ForeignKeyColumnName(otherEnd);
             var assocName = rel.GetRelationAssociationName(role);
             var idxName = Construct.IndexName(tblName.Name, colName);
@@ -1508,9 +1511,9 @@ namespace Kistl.Server.SchemaManagement
                 }
 
                 New_1_1_Relation_CreateColumns(rel, relEnd, otherEnd, role);
-                var srcTbl = db.GetQualifiedTableName(otherEnd.Type.TableName);
+                var srcTbl = db.GetTableName(otherEnd.Type.Module.SchemaName, otherEnd.Type.TableName);
                 var srcCol = Construct.ForeignKeyColumnName(relEnd);
-                var destTbl = db.GetQualifiedTableName(relEnd.Type.TableName);
+                var destTbl = db.GetTableName(relEnd.Type.Module.SchemaName, relEnd.Type.TableName);
                 var destCol = Construct.ForeignKeyColumnName(otherEnd);
                 db.MigrateFKs(srcTbl, srcCol, destTbl, destCol);
                 if (!relEnd.IsNullable())
@@ -1551,7 +1554,7 @@ namespace Kistl.Server.SchemaManagement
             RelationEnd relEnd = rel.GetEndFromRole(role);
             RelationEnd otherEnd = rel.GetOtherEndFromRole(role);
 
-            var tblName = db.GetQualifiedTableName(relEnd.Type.TableName);
+            var tblName = db.GetTableName(relEnd.Type.Module.SchemaName, relEnd.Type.TableName);
             var colName = Construct.ForeignKeyColumnName(otherEnd);
 
             db.AlterColumn(tblName, colName, System.Data.DbType.Int32, 0, 0, otherEnd.IsNullable(), null);
@@ -1576,7 +1579,7 @@ namespace Kistl.Server.SchemaManagement
             RelationEnd relEnd = rel.GetEndFromRole(role);
             RelationEnd otherEnd = rel.GetOtherEndFromRole(role);
 
-            var tblName = db.GetQualifiedTableName(relEnd.Type.TableName);
+            var tblName = db.GetTableName(relEnd.Type.Module.SchemaName, relEnd.Type.TableName);
             var colName = Construct.ForeignKeyColumnName(otherEnd);
 
             if (db.CheckColumnContainsNulls(tblName, colName))
@@ -1601,7 +1604,7 @@ namespace Kistl.Server.SchemaManagement
         public void DoNewObjectClassInheritance(ObjectClass objClass)
         {
             var assocName = Construct.InheritanceAssociationName(objClass.BaseObjectClass, objClass);
-            var tblName = db.GetQualifiedTableName(objClass.TableName);
+            var tblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
 
             Log.InfoFormat("New ObjectClass Inheritance: {0} -> {1}: {2}", objClass.Name, objClass.BaseObjectClass.Name, assocName);
 
@@ -1611,7 +1614,7 @@ namespace Kistl.Server.SchemaManagement
                 return;
             }
 
-            db.CreateFKConstraint(tblName, db.GetQualifiedTableName(objClass.BaseObjectClass.TableName), "ID", assocName, false);
+            db.CreateFKConstraint(tblName, db.GetTableName(objClass.BaseObjectClass.Module.SchemaName, objClass.BaseObjectClass.TableName), "ID", assocName, false);
         }
         #endregion
 
@@ -1646,7 +1649,7 @@ namespace Kistl.Server.SchemaManagement
         {
             ObjectClass savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
             string assocName = Construct.InheritanceAssociationName(savedObjClass.BaseObjectClass, savedObjClass);
-            var tblName = db.GetQualifiedTableName(objClass.TableName);
+            var tblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
 
             Log.InfoFormat("Remove ObjectClass Inheritance: {0} -> {1}: {2}", savedObjClass.Name, savedObjClass.BaseObjectClass.Name, assocName);
 
@@ -1664,18 +1667,18 @@ namespace Kistl.Server.SchemaManagement
         public void DoNewObjectClassACL(ObjectClass objClass)
         {
             Log.InfoFormat("New ObjectClass Security Rules: {0}", objClass.Name);
-            var tblRightsName = db.GetQualifiedTableName(Construct.SecurityRulesTableName(objClass));
+            var tblRightsName = db.GetTableName(objClass.Module.SchemaName, Construct.SecurityRulesTableName(objClass));
 
             db.CreateTable(tblRightsName, false, false);
             db.CreateColumn(tblRightsName, "Identity", System.Data.DbType.Int32, 0, 0, false);
             db.CreateColumn(tblRightsName, "Right", System.Data.DbType.Int32, 0, 0, false);
 
             db.CreateIndex(tblRightsName, Construct.SecurityRulesIndexName(objClass), true, true, "ID", "Identity");
-            db.CreateFKConstraint(tblRightsName, db.GetQualifiedTableName(objClass.TableName), "ID", Construct.SecurityRulesFKName(objClass), true);
+            db.CreateFKConstraint(tblRightsName, db.GetTableName(objClass.Module.SchemaName, objClass.TableName), "ID", Construct.SecurityRulesFKName(objClass), true);
 
-            var tblName = db.GetQualifiedTableName(objClass.TableName);
-            var rightsViewUnmaterializedName = db.GetQualifiedTableName(Construct.SecurityRulesRightsViewUnmaterializedName(objClass));
-            var refreshRightsOnProcedureName = db.GetQualifiedProcedureName(Construct.SecurityRulesRefreshRightsOnProcedureName(objClass));
+            var tblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
+            var rightsViewUnmaterializedName = db.GetTableName(objClass.Module.SchemaName, Construct.SecurityRulesRightsViewUnmaterializedName(objClass));
+            var refreshRightsOnProcedureName = db.GetProcedureName(objClass.Module.SchemaName, Construct.SecurityRulesRefreshRightsOnProcedureName(objClass));
 
             DoCreateUpdateRightsTrigger(objClass);
             DoCreateRightsViewUnmaterialized(objClass);
@@ -1685,9 +1688,9 @@ namespace Kistl.Server.SchemaManagement
 
         public void DoCreateRightsViewUnmaterialized(ObjectClass objClass)
         {
-            var tblName = db.GetQualifiedTableName(objClass.TableName);
-            var tblRightsName = db.GetQualifiedTableName(Construct.SecurityRulesTableName(objClass));
-            var rightsViewUnmaterializedName = db.GetQualifiedTableName(Construct.SecurityRulesRightsViewUnmaterializedName(objClass));
+            var tblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
+            var tblRightsName = db.GetTableName(objClass.Module.SchemaName, Construct.SecurityRulesTableName(objClass));
+            var rightsViewUnmaterializedName = db.GetTableName(objClass.Module.SchemaName, Construct.SecurityRulesRightsViewUnmaterializedName(objClass));
 
             if (objClass.AccessControlList.Count == 0)
             {
@@ -1728,15 +1731,15 @@ namespace Kistl.Server.SchemaManagement
         public void DoCreateUpdateRightsTrigger(ObjectClass objClass)
         {
             var updateRightsTriggerName = Construct.SecurityRulesUpdateRightsTriggerName(objClass);
-            var tblName = db.GetQualifiedTableName(objClass.TableName);
+            var tblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
             if (db.CheckTriggerExists(tblName, updateRightsTriggerName)) db.DropTrigger(tblName, updateRightsTriggerName);
 
             var tblList = new List<RightsTrigger>();
             tblList.Add(new RightsTrigger()
             {
-                TblName = db.GetQualifiedTableName(objClass.TableName),
-                TblNameRights = db.GetQualifiedTableName(Construct.SecurityRulesTableName(objClass)),
-                ViewUnmaterializedName = db.GetQualifiedTableName(Construct.SecurityRulesRightsViewUnmaterializedName(objClass))
+                TblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName),
+                TblNameRights = db.GetTableName(objClass.Module.SchemaName, Construct.SecurityRulesTableName(objClass)),
+                ViewUnmaterializedName = db.GetTableName(objClass.Module.SchemaName, Construct.SecurityRulesRightsViewUnmaterializedName(objClass))
             });
 
             // Get all ObjectClasses that depends on current object class
@@ -1755,9 +1758,9 @@ namespace Kistl.Server.SchemaManagement
                     {
                         var rt = new RightsTrigger()
                         {
-                            TblName = db.GetQualifiedTableName(dep.TableName),
-                            TblNameRights = db.GetQualifiedTableName(Construct.SecurityRulesTableName(dep)),
-                            ViewUnmaterializedName = db.GetQualifiedTableName(Construct.SecurityRulesRightsViewUnmaterializedName(dep)),
+                            TblName = db.GetTableName(dep.Module.SchemaName, dep.TableName),
+                            TblNameRights = db.GetTableName(dep.Module.SchemaName, Construct.SecurityRulesTableName(dep)),
+                            ViewUnmaterializedName = db.GetTableName(dep.Module.SchemaName, Construct.SecurityRulesRightsViewUnmaterializedName(dep)),
                         };
                         try
                         {
@@ -1779,7 +1782,7 @@ namespace Kistl.Server.SchemaManagement
         public void DoCreateUpdateRightsTrigger(Relation rel)
         {
             var updateRightsTriggerName = Construct.SecurityRulesUpdateRightsTriggerName(rel);
-            var tblName = db.GetQualifiedTableName(rel.GetRelationTableName());
+            var tblName = db.GetTableName(rel.Module.SchemaName, rel.GetRelationTableName());
             if (db.CheckTriggerExists(tblName, updateRightsTriggerName)) db.DropTrigger(tblName, updateRightsTriggerName);
 
             var tblList = new List<RightsTrigger>();
@@ -1800,9 +1803,9 @@ namespace Kistl.Server.SchemaManagement
                     {
                         var rt = new RightsTrigger()
                         {
-                            TblName = db.GetQualifiedTableName(dep.TableName),
-                            TblNameRights = db.GetQualifiedTableName(Construct.SecurityRulesTableName(dep)),
-                            ViewUnmaterializedName = db.GetQualifiedTableName(Construct.SecurityRulesRightsViewUnmaterializedName(dep)),
+                            TblName = db.GetTableName(dep.Module.SchemaName, dep.TableName),
+                            TblNameRights = db.GetTableName(dep.Module.SchemaName, Construct.SecurityRulesTableName(dep)),
+                            ViewUnmaterializedName = db.GetTableName(dep.Module.SchemaName, Construct.SecurityRulesRightsViewUnmaterializedName(dep)),
                         };
                         try
                         {
@@ -1860,8 +1863,8 @@ namespace Kistl.Server.SchemaManagement
 
         public void DoChangeObjectClassACL(ObjectClass objClass)
         {
-            var rightsViewUnmaterializedName = db.GetQualifiedTableName(Construct.SecurityRulesRightsViewUnmaterializedName(objClass));
-            var refreshRightsOnProcedureName = db.GetQualifiedProcedureName(Construct.SecurityRulesRefreshRightsOnProcedureName(objClass));
+            var rightsViewUnmaterializedName = db.GetTableName(objClass.Module.SchemaName, Construct.SecurityRulesRightsViewUnmaterializedName(objClass));
+            var refreshRightsOnProcedureName = db.GetProcedureName(objClass.Module.SchemaName, Construct.SecurityRulesRefreshRightsOnProcedureName(objClass));
 
             db.DropView(rightsViewUnmaterializedName);
             DoCreateRightsViewUnmaterialized(objClass);
@@ -1878,16 +1881,16 @@ namespace Kistl.Server.SchemaManagement
         }
         public void DoDeleteObjectClassSecurityRules(ObjectClass objClass)
         {
-            var tblName = db.GetQualifiedTableName(objClass.TableName);
-            var tblRightsName = db.GetQualifiedTableName(Construct.SecurityRulesTableName(objClass));
-            var rightsViewUnmaterializedName = db.GetQualifiedTableName(Construct.SecurityRulesRightsViewUnmaterializedName(objClass));
+            var tblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
+            var tblRightsName = db.GetTableName(objClass.Module.SchemaName, Construct.SecurityRulesTableName(objClass));
+            var rightsViewUnmaterializedName = db.GetTableName(objClass.Module.SchemaName, Construct.SecurityRulesRightsViewUnmaterializedName(objClass));
             var refreshRightsOnProcedureName = Construct.SecurityRulesRefreshRightsOnProcedureName(objClass);
             var updateRightsTriggerName = Construct.SecurityRulesUpdateRightsTriggerName(objClass);
 
             Log.InfoFormat("Delete ObjectClass Security Rules: {0}", objClass.Name);
 
             db.DropTrigger(tblName, updateRightsTriggerName);
-            db.DropProcedure(db.GetQualifiedProcedureName(refreshRightsOnProcedureName));
+            db.DropProcedure(db.GetProcedureName(objClass.Module.SchemaName, refreshRightsOnProcedureName));
             db.DropView(rightsViewUnmaterializedName);
             db.DropTable(tblRightsName);
         }
@@ -1901,7 +1904,7 @@ namespace Kistl.Server.SchemaManagement
 
         public void DoDeleteValueTypeProperty(ObjectClass objClass, ValueTypeProperty prop, string prefix)
         {
-            var tblName = db.GetQualifiedTableName(objClass.TableName);
+            var tblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
             var colName = Construct.NestedColumnName(prop, prefix);
             Log.InfoFormat("Drop Column: {0}.{1}", tblName, colName);
             db.DropColumn(tblName, colName);
@@ -1917,7 +1920,7 @@ namespace Kistl.Server.SchemaManagement
         {
             string colName_IsNull = Construct.NestedColumnName(cprop, prefix);
             Log.InfoFormat("New is null column for CompoundObject Property: '{0}' ('{1}')", cprop.Name, colName_IsNull);
-            var tblName = db.GetQualifiedTableName(objClass.TableName);
+            var tblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
             var hasData = db.CheckTableContainsData(tblName);
             var constr = cprop.IsNullable()
                 ? new DatabaseConstraint[] { new BoolDefaultConstraint() { Value = true } }
@@ -1958,7 +1961,7 @@ namespace Kistl.Server.SchemaManagement
         public void DoNewIndexConstraint(IndexConstraint uc)
         {
             var objClass = (ObjectClass)uc.Constrained;
-            var tblName = db.GetQualifiedTableName(objClass.TableName);
+            var tblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
             var columns = GetUCColNames(uc);
             Log.InfoFormat("New Index Contraint: {0} on {1}({2})", uc.Reason, tblName, string.Join(", ", columns));
             db.CreateIndex(tblName, Construct.IndexName(objClass.TableName, columns), uc.IsUnique, false, columns);
@@ -1980,7 +1983,7 @@ namespace Kistl.Server.SchemaManagement
         public void DoDeleteIndexConstraint(IndexConstraint uc)
         {
             var objClass = (ObjectClass)uc.Constrained;
-            var tblName = db.GetQualifiedTableName(objClass.TableName);
+            var tblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
             var columns = GetUCColNames(uc);
             Log.InfoFormat("Drop Index Contraint: {0} on {1}({2})", uc.Reason, objClass.TableName, string.Join(", ", columns));
             db.DropIndex(tblName, Construct.IndexName(objClass.TableName, columns));
@@ -2030,13 +2033,13 @@ namespace Kistl.Server.SchemaManagement
 
         public void DoCreateRefreshAllRightsProcedure(List<ObjectClass> allACLTables)
         {
-            var procName = db.GetQualifiedProcedureName(Construct.SecurityRulesRefreshAllRightsProcedureName());
+            var procName = db.GetProcedureName("dbo", Construct.SecurityRulesRefreshAllRightsProcedureName());
             if (db.CheckProcedureExists(procName))
             {
                 db.DropProcedure(procName);
             }
             var refreshProcNames = allACLTables
-                .Select(i => db.GetQualifiedProcedureName(Construct.SecurityRulesRefreshRightsOnProcedureName(i)))
+                .Select(i => db.GetProcedureName(i.Module.SchemaName, Construct.SecurityRulesRefreshRightsOnProcedureName(i)))
                 .ToList();
             db.CreateRefreshAllRightsProcedure(refreshProcNames);
         }

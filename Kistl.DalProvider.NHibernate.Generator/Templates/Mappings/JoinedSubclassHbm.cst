@@ -14,6 +14,7 @@
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 <%@ Parameter Name="interfaceName" Type="string" %>
 <%@ Parameter Name="implementationName" Type="string" %>
+<%@ Parameter Name="schemaName" Type="string" %>
 <%@ Parameter Name="tableName" Type="string" %>
 <%@ Parameter Name="qualifiedImplementationName" Type="string" %>
 <%@ Parameter Name="isAbstract" Type="bool" %>
@@ -24,6 +25,7 @@
 <%@ Parameter Name="qualifiedRightsClassName" Type="string" %>
         <joined-subclass name="<%= qualifiedImplementationName %>"
                          proxy="<%= qualifiedImplementationName %>"
+                         schema="`<%= schemaName %>`"
                          table="`<%= tableName %>`">
             
             <!-- base class reference -->

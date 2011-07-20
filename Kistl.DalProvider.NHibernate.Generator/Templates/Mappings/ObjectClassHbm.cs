@@ -59,6 +59,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
             string extraSuffix = templateSettings["extrasuffix"];
             string interfaceName = cls.Name;
             string implementationName = cls.Name + extraSuffix + Kistl.API.Helper.ImplementationSuffix;
+            string schemaName = cls.Module.SchemaName;
             string tableName = cls.TableName;
 
             string qualifiedImplementationName = GetAssemblyQualifiedProxy(cls, templateSettings);
@@ -76,7 +77,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
 
             bool needsConcurrency = cls.ImplementsIChangedBy(false);
 
-            return new object[] { interfaceName, implementationName, tableName, qualifiedImplementationName, isAbstract, properties, subClasses, needsRightTable, needsConcurrency, qualifiedRightsClassName };
+            return new object[] { interfaceName, implementationName, schemaName, tableName, qualifiedImplementationName, isAbstract, properties, subClasses, needsRightTable, needsConcurrency, qualifiedRightsClassName };
         }
 
         protected virtual void ApplyPropertyDefinitions(List<Property> properties)

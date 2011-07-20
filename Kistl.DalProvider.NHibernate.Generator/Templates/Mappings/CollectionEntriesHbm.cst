@@ -14,7 +14,6 @@
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 <?xml version="1.0"?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
-                   schema="`dbo`"
                    default-cascade="save-update"
                    assembly="Kistl.Objects.NHibernateImpl">
 
@@ -28,13 +27,15 @@
         var collectionEntryNamespace = rel.A.Type.Module.Namespace;
         var collectionEntryClassName = rel.GetRelationClassName() + ImplementationSuffix;
         var proxyClassName = rel.GetRelationClassName() + "Proxy";
+        var schemaName = rel.Module.SchemaName;
         var tableName = rel.GetRelationTableName();
 %>
     <class name="<%= collectionEntryNamespace %>.<%= collectionEntryClassName %>+<%= proxyClassName %>"
            proxy="<%= collectionEntryNamespace %>.<%= collectionEntryClassName %>+<%= proxyClassName %>"
-           table="`<%= tableName %>`">
+           table="`<%= tableName %>`"
+           schema="`<%= schemaName %>`" >
 
-<% IdGeneratorHbm.Call(Host, "id", tableName); %>
+<% IdGeneratorHbm.Call(Host, "id", schemaName, tableName); %>
 
         <many-to-one name="A"
                      column="`<%= rel.GetRelationFkColumnName(RelationEndRole.A) %>`" />
@@ -66,14 +67,16 @@
         var collectionEntryNamespace = prop.Module.Namespace;
         var collectionEntryClassName = prop.GetCollectionEntryClassName() + ImplementationSuffix;
         var proxyClassName = prop.GetCollectionEntryClassName() + "Proxy";
+        var schemaName = prop.Module.SchemaName;
         var tableName = prop.GetCollectionEntryTable();
         var ceReverseKeyColumnName = prop.GetCollectionEntryReverseKeyColumnName();
 %>
     <class name="<%= collectionEntryNamespace %>.<%= collectionEntryClassName %>+<%= proxyClassName %>"
            proxy="<%= collectionEntryNamespace %>.<%= collectionEntryClassName %>+<%= proxyClassName %>"
-           table="`<%= tableName %>`">
+           table="`<%= tableName %>`"
+           schema="`<%= schemaName %>`" >
 
-<% IdGeneratorHbm.Call(Host, "id", tableName); %>
+<% IdGeneratorHbm.Call(Host, "id", schemaName, tableName); %>
 
         <many-to-one name="Parent"
                      column="`<%= ceReverseKeyColumnName %>`" />
@@ -102,14 +105,16 @@
         var collectionEntryNamespace = prop.Module.Namespace;
         var collectionEntryClassName = prop.GetCollectionEntryClassName() + ImplementationSuffix;
         var proxyClassName = prop.GetCollectionEntryClassName() + "Proxy";
+        var schemaName = prop.Module.SchemaName;
         var tableName = prop.GetCollectionEntryTable();
         var ceReverseKeyColumnName = prop.GetCollectionEntryReverseKeyColumnName();
 %>
     <class name="<%= collectionEntryNamespace %>.<%= collectionEntryClassName %>+<%= proxyClassName %>"
            proxy="<%= collectionEntryNamespace %>.<%= collectionEntryClassName %>+<%= proxyClassName %>"
-           table="`<%= tableName %>`">
+           table="`<%= tableName %>`"
+           schema="`<%= schemaName %>`" >
 
-<% IdGeneratorHbm.Call(Host, "id", tableName); %>
+<% IdGeneratorHbm.Call(Host, "id", schemaName, tableName); %>
 
         <many-to-one name="Parent"
                      column="`<%= ceReverseKeyColumnName %>`" />

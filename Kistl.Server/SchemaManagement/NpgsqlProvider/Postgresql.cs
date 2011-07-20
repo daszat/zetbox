@@ -231,12 +231,14 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
         {
             return (bool)ExecuteScalar("SELECT COUNT(*) > 0 FROM pg_catalog.pg_namespace WHERE nspname = @schemaName", new Dictionary<string, object>()
             {
-                { "@schemaName", schemaName}
+                { "@schemaName", schemaName }
             });
         }
 
         public override void CreateSchema(string schemaName)
         {
+            if (string.IsNullOrEmpty(schemaName)) throw new ArgumentNullException("schemaName");
+
             ExecuteNonQuery(String.Format("CREATE SCHEMA {0}", QuoteIdentifier(schemaName)));
         }
 
@@ -273,8 +275,8 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
             return (bool)ExecuteScalar("SELECT COUNT(*) > 0 FROM pg_tables WHERE schemaname=@schema AND tablename=@table",
                 new Dictionary<string, object>()
                 {
-                    { "@schema", tblName.Schema},
-                    { "@table", tblName.Name},
+                    { "@schema", tblName.Schema },
+                    { "@table", tblName.Name },
                 });
         }
 
@@ -316,7 +318,7 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
                 throw new ArgumentNullException("tblName");
 
             StringBuilder sb = new StringBuilder();
-            sb.AppendFormat("CREATE TABLE \"{0}\".\"{1}\" ( ", tblName.Schema, tblName.Name);
+            sb.AppendFormat("CREATE TABLE {0} ( ", FormatSchemaName(tblName));
             if (idAsIdentityColumn)
             {
                 sb.AppendLine("\"ID\" serial NOT NULL");
@@ -345,12 +347,21 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
             if (newTblName == null)
                 throw new ArgumentNullException("newTblName");
             if (!oldTblName.Database.Equals(newTblName.Database)) { throw new ArgumentOutOfRangeException("newTblName", "cannot rename table to different database"); }
-            if (!oldTblName.Schema.Equals(newTblName.Schema)) { throw new ArgumentOutOfRangeException("newTblName", "cannot rename table to different schema"); }
 
             ExecuteNonQuery(String.Format(
                 "ALTER TABLE {0} RENAME TO {1}",
                 FormatSchemaName(oldTblName),
                 QuoteIdentifier(newTblName.Name)));
+
+            if (!oldTblName.Schema.Equals(newTblName.Schema))
+            {
+                var intermediateName = new TableRef(oldTblName.Database, oldTblName.Schema, newTblName.Name);
+
+                ExecuteNonQuery(String.Format(
+                    "ALTER TABLE {0} SET SCHEMA {1}",
+                    FormatSchemaName(intermediateName),
+                    QuoteIdentifier(newTblName.Schema)));
+            }
         }
 
         public override bool CheckColumnExists(TableRef tblName, string colName)
@@ -365,9 +376,9 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
                 WHERE n.nspname = @schema AND c.relname = @table AND a.attname=@name",
                 new Dictionary<string, object>()
                 {
-                    { "@schema", tblName.Schema},
-                    { "@table", tblName.Name},
-                    { "@name", colName},
+                    { "@schema", tblName.Schema },
+                    { "@table", tblName.Name },
+                    { "@name", colName },
                 });
         }
 
@@ -483,9 +494,9 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
                 {
                     throw new ArgumentOutOfRangeException("constraints", "Unsupported check constraint " + checkConstraint.GetType().Name);
                 }
-                ExecuteNonQuery(string.Format("ALTER TABLE {0} ADD CONSTRAINT {1} CHECK {2}", 
+                ExecuteNonQuery(string.Format("ALTER TABLE {0} ADD CONSTRAINT {1} CHECK {2}",
                     FormatSchemaName(tblName),
-                    ConstructCheckConstraintName(tblName, colName), 
+                    ConstructCheckConstraintName(tblName, colName),
                     check));
             }
         }
@@ -513,8 +524,8 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
                     AND a.attnum >= 1 AND a.attname=@column",
                 new Dictionary<string, object>() { 
                     { "@schema", tblName.Schema },
-                    { "@table", tblName.Name}, 
-                    { "@column", colName}
+                    { "@table", tblName.Name }, 
+                    { "@column", colName }
                 });
         }
 
@@ -532,8 +543,8 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
                 WHERE n.nspname = @schema AND c.relname = @table AND a.attname = @column",
                 new Dictionary<string, object>() { 
                     { "@schema", tblName.Schema },
-                    { "@table", tblName.Name}, 
-                    { "@column", colName}
+                    { "@table", tblName.Name }, 
+                    { "@column", colName }
                 });
         }
 
@@ -550,8 +561,8 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
                 WHERE n.nspname = @schema AND c.relname = @table AND a.attname = @column",
                 new Dictionary<string, object>() { 
                     { "@schema", tblName.Schema },
-                    { "@table", tblName.Name}, 
-                    { "@column", colName}
+                    { "@table", tblName.Name }, 
+                    { "@column", colName }
                 });
         }
 
@@ -718,7 +729,7 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
                 FROM pg_proc p
                     JOIN pg_namespace n ON p.pronamespace = n.oid
                     JOIN pg_type t ON p.prorettype = t.oid
-                WHERE n.nspname = @schema AND p.proname = @trigger AND t.typname = 'trigger'",
+                WHERE t.typname = 'trigger' AND n.nspname = @schema AND p.proname = @trigger",
                 new Dictionary<string, object>(){
                     { "@schema", objName.Schema },
                     { "@trigger", triggerName },
@@ -727,7 +738,10 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         public override void DropTrigger(TableRef objName, string triggerName)
         {
-            ExecuteNonQuery(String.Format("DROP FUNCTION \"dbo\".{0}() CASCADE",
+            if (objName == null) throw new ArgumentNullException("objName");
+
+            ExecuteNonQuery(String.Format("DROP FUNCTION {0}.{1}() CASCADE",
+                QuoteIdentifier(objName.Schema),
                 QuoteIdentifier(triggerName)));
         }
 
@@ -846,12 +860,12 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         protected override string GetSchemaInsertStatement()
         {
-            return "INSERT INTO \"dbo\".\"CurrentSchema\" (\"Version\", \"Schema\") VALUES (1, @schema)";
+            return "INSERT INTO \"base\".\"CurrentSchema\" (\"Version\", \"Schema\") VALUES (1, @schema)";
         }
 
         protected override string GetSchemaUpdateStatement()
         {
-            return "UPDATE \"dbo\".\"CurrentSchema\" SET \"Schema\" = @schema, \"Version\" = \"Version\" + 1";
+            return "UPDATE \"base\".\"CurrentSchema\" SET \"Schema\" = @schema, \"Version\" = \"Version\" + 1";
         }
 
         #endregion
@@ -961,12 +975,14 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
         {
             if (String.IsNullOrEmpty(triggerName))
                 throw new ArgumentNullException("triggerName");
+            if (tblName == null)
+                throw new ArgumentNullException("tblName");
             if (tblList == null)
                 throw new ArgumentNullException("tblList");
 
             StringBuilder sb = new StringBuilder();
             sb.Append("CREATE OR REPLACE FUNCTION ");
-            sb.Append(QuoteIdentifier("dbo"));
+            sb.Append(QuoteIdentifier(tblName.Schema));
             sb.Append(".");
             sb.Append(QuoteIdentifier(triggerName));
             sb.Append("()");
@@ -1049,9 +1065,10 @@ END$BODY$
             ExecuteNonQuery(String.Format(@"
                 CREATE TRIGGER {0} AFTER INSERT OR UPDATE OR DELETE
                     ON {1} FOR EACH ROW
-                    EXECUTE PROCEDURE ""dbo"".{0}()",
+                    EXECUTE PROCEDURE {2}.{0}()",
                 QuoteIdentifier(triggerName),
-                FormatSchemaName(tblName)
+                FormatSchemaName(tblName),
+                QuoteIdentifier(tblName.Schema)
                 ));
         }
 
@@ -1148,13 +1165,13 @@ LANGUAGE 'plpgsql' VOLATILE",
         public override void ExecRefreshAllRightsProcedure()
         {
             Log.DebugFormat("Refreshing all rights");
-            ExecuteNonQuery(string.Format(@"SELECT {0}(NULL)", FormatSchemaName(GetQualifiedProcedureName(Kistl.Generator.Construct.SecurityRulesRefreshAllRightsProcedureName()))));
+            ExecuteNonQuery(string.Format(@"SELECT {0}(NULL)", FormatSchemaName(GetProcedureName("dbo", Kistl.Generator.Construct.SecurityRulesRefreshAllRightsProcedureName()))));
         }
 
         public override void CreateRefreshAllRightsProcedure(List<ProcRef> refreshProcNames)
         {
             var sb = new StringBuilder();
-            sb.AppendFormat("CREATE OR REPLACE FUNCTION {0}(IN refreshID integer) RETURNS void AS $BODY$BEGIN", FormatSchemaName(GetQualifiedProcedureName(Kistl.Generator.Construct.SecurityRulesRefreshAllRightsProcedureName())));
+            sb.AppendFormat("CREATE OR REPLACE FUNCTION {0}(IN refreshID integer) RETURNS void AS $BODY$BEGIN", FormatSchemaName(GetProcedureName("dbo", Kistl.Generator.Construct.SecurityRulesRefreshAllRightsProcedureName())));
             sb.AppendLine();
             sb.Append(string.Join("\n", refreshProcNames.Select(i => string.Format("PERFORM {0}(refreshID);", FormatSchemaName(i))).ToArray()));
             sb.AppendLine();
@@ -1230,21 +1247,21 @@ LANGUAGE 'plpgsql' VOLATILE",
 $BODY$
 BEGIN
 
-LOCK TABLE ""dbo"".""Sequences"";
-UPDATE ""dbo"".""Sequences"" SET ""CurrentNumber"" = ""CurrentNumber"" + 1 WHERE ""ExportGuid"" = ""seqNumber"";
-SELECT ""CurrentNumber"" INTO result FROM ""dbo"".""Sequences"" WHERE ""ExportGuid"" = ""seqNumber"";
+LOCK TABLE ""base"".""Sequences"";
+UPDATE ""base"".""Sequences"" SET ""CurrentNumber"" = ""CurrentNumber"" + 1 WHERE ""ExportGuid"" = ""seqNumber"";
+SELECT ""CurrentNumber"" INTO result FROM ""base"".""Sequences"" WHERE ""ExportGuid"" = ""seqNumber"";
 
 END$BODY$
   LANGUAGE plpgsql VOLATILE";
 
         public override void CreateSequenceNumberProcedure()
         {
-            ExecuteNonQuery(string.Format(sequenceNumberProcedure, FormatSchemaName(GetQualifiedProcedureName("GetSequenceNumber"))));
+            ExecuteNonQuery(string.Format(sequenceNumberProcedure, FormatSchemaName(GetProcedureName("dbo", "GetSequenceNumber"))));
         }
 
         public override void CreateContinuousSequenceNumberProcedure()
         {
-            ExecuteNonQuery(string.Format(sequenceNumberProcedure, FormatSchemaName(GetQualifiedProcedureName("GetContinuousSequenceNumber"))));
+            ExecuteNonQuery(string.Format(sequenceNumberProcedure, FormatSchemaName(GetProcedureName("dbo", "GetContinuousSequenceNumber"))));
         }
 
         public override IDataReader ReadTableData(TableRef tbl, IEnumerable<string> colNames)

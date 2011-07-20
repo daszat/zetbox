@@ -201,6 +201,8 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
 
         public override bool CheckSchemaExists(string schemaName)
         {
+            if (string.IsNullOrEmpty(schemaName)) throw new ArgumentNullException("schemaName");
+
             // TODO: optimize!
             return GetSchemaNames().Contains(schemaName);
         }
@@ -214,6 +216,8 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
 
         public override void CreateSchema(string schemaName)
         {
+            if (string.IsNullOrEmpty(schemaName)) throw new ArgumentNullException("schemaName");
+            
             ExecuteNonQuery(String.Format("CREATE SCHEMA {0}", QuoteIdentifier(schemaName)));
         }
 
@@ -247,9 +251,13 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
                 DropFunction(sp);
             }
 
-            if (!string.Equals(schemaName, "dbo", StringComparison.InvariantCultureIgnoreCase))
+            // Do not drop schema dbo!
+            if (string.Equals(schemaName, "dbo", StringComparison.InvariantCultureIgnoreCase))
             {
-                // Do not drop schema dbo!
+                _log.Debug("Not dropping main [dbo] schema");
+            }
+            else
+            {
                 ExecuteNonQuery(String.Format(
                         "DROP SCHEMA {0}",
                         QuoteIdentifier(schemaName)));
@@ -346,10 +354,19 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
             if (newTblName == null)
                 throw new ArgumentNullException("newTblName");
             if (!oldTblName.Database.Equals(newTblName.Database)) { throw new ArgumentOutOfRangeException("newTblName", "cannot rename table to different database"); }
-            if (!oldTblName.Schema.Equals(newTblName.Schema)) { throw new ArgumentOutOfRangeException("newTblName", "cannot rename table to different schema"); }
 
             // Do not qualify new name as it will be part of the old schema
             ExecuteNonQuery(string.Format("EXEC sp_rename '{0}', '{1}'", FormatSchemaName(oldTblName), newTblName.Name));
+
+            if (!oldTblName.Schema.Equals(newTblName.Schema))
+            {
+                var intermediateName = new TableRef(oldTblName.Database, oldTblName.Schema, newTblName.Name);
+
+                ExecuteNonQuery(String.Format(
+                    "ALTER SCHEMA {0} TRANSFER {1}",
+                    QuoteIdentifier(newTblName.Schema),
+                    FormatSchemaName(intermediateName)));
+            }
         }
 
         public override bool CheckColumnExists(TableRef tblName, string colName)
@@ -725,12 +742,12 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
 
         protected override string GetSchemaInsertStatement()
         {
-            return "INSERT INTO [CurrentSchema] ([Version], [Schema]) VALUES (1, @schema)";
+            return "INSERT INTO [base].[CurrentSchema] ([Version], [Schema]) VALUES (1, @schema)";
         }
 
         protected override string GetSchemaUpdateStatement()
         {
-            return "UPDATE [CurrentSchema] SET [Schema] = @schema, [Version] = [Version] + 1";
+            return "UPDATE [base].[CurrentSchema] SET [Schema] = @schema, [Version] = [Version] + 1";
         }
 
         #endregion
@@ -1009,13 +1026,13 @@ FROM (", viewName.Schema, viewName.Name);
         public override void ExecRefreshAllRightsProcedure()
         {
             Log.DebugFormat("Refreshing all rights");
-            ExecuteNonQuery(string.Format(@"EXEC {0}", FormatSchemaName(GetQualifiedProcedureName(Kistl.Generator.Construct.SecurityRulesRefreshAllRightsProcedureName()))));
+            ExecuteNonQuery(string.Format(@"EXEC {0}", FormatSchemaName(GetProcedureName("dbo", Kistl.Generator.Construct.SecurityRulesRefreshAllRightsProcedureName()))));
         }
 
         public override void CreateRefreshAllRightsProcedure(List<ProcRef> refreshProcNames)
         {
             var sb = new StringBuilder();
-            sb.AppendFormat("CREATE PROCEDURE {0} (@ID INT = NULL) AS BEGIN", FormatSchemaName(GetQualifiedProcedureName(Kistl.Generator.Construct.SecurityRulesRefreshAllRightsProcedureName())));
+            sb.AppendFormat("CREATE PROCEDURE {0} (@ID INT = NULL) AS BEGIN", FormatSchemaName(GetProcedureName("dbo", Kistl.Generator.Construct.SecurityRulesRefreshAllRightsProcedureName())));
             sb.AppendLine();
             sb.AppendLine("SET NOCOUNT OFF");
             sb.Append(string.Join("\n", refreshProcNames.Select(i => string.Format("EXEC {0} @ID", FormatSchemaName(i))).ToArray()));
@@ -1099,12 +1116,12 @@ END";
 
         public override void CreateSequenceNumberProcedure()
         {
-            ExecuteNonQuery(string.Format(sequenceNumberProcedure, FormatSchemaName(GetQualifiedProcedureName("GetSequenceNumber"))));
+            ExecuteNonQuery(string.Format(sequenceNumberProcedure, FormatSchemaName(GetProcedureName("dbo", "GetSequenceNumber"))));
         }
 
         public override void CreateContinuousSequenceNumberProcedure()
         {
-            ExecuteNonQuery(string.Format(sequenceNumberProcedure, FormatSchemaName(GetQualifiedProcedureName("GetContinuousSequenceNumber"))));
+            ExecuteNonQuery(string.Format(sequenceNumberProcedure, FormatSchemaName(GetProcedureName("dbo", "GetContinuousSequenceNumber"))));
         }
 
         public override IDataReader ReadTableData(TableRef tbl, IEnumerable<string> colNames)

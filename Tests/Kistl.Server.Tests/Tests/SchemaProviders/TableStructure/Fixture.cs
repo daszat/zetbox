@@ -19,18 +19,20 @@ namespace Kistl.Server.Tests.SchemaTests.SchemaProviders.TableStructure
         public void get_qualified_table_name()
         {
             var name = "TestTable";
-            var tblName = Provider.GetQualifiedTableName(name);
+            var tblName = Provider.GetTableName("muh", name);
             Assert.That(tblName.Database, Is.EqualTo(GetDatabaseName()));
-            // TODO: fix schema handling
-            Assert.That(tblName.Schema, Is.EqualTo("dbo"));
+            Assert.That(tblName.Schema, Is.EqualTo("muh"));
             Assert.That(tblName.Name, Is.EqualTo(name));
         }
 
         [Test]
         public void manipulates_tables()
         {
-            var tblName = Provider.GetQualifiedTableName("ISP_Test");
-            var newTblName = Provider.GetQualifiedTableName("ISP_Test2");
+            var tblName = Provider.GetTableName("schema1", "ISP_Test");
+            var newTblName = Provider.GetTableName("schema2", "ISP_Test2");
+
+            if (!Provider.CheckSchemaExists(tblName.Schema)) Provider.CreateSchema(tblName.Schema);
+            if (!Provider.CheckSchemaExists(newTblName.Schema)) Provider.CreateSchema(newTblName.Schema);
 
             Assert.That(Provider.CheckTableExists(tblName), Is.False);
             Assert.That(Provider.GetTableNames(), Has.No.Member(tblName));
@@ -70,7 +72,8 @@ namespace Kistl.Server.Tests.SchemaTests.SchemaProviders.TableStructure
         [Test]
         public void creates_table_with_columns()
         {
-            var tblName = Provider.GetQualifiedTableName("ISP_Test");
+            var tblName = Provider.GetTableName("schema1", "ISP_Test");
+            if (!Provider.CheckSchemaExists(tblName.Schema)) Provider.CreateSchema(tblName.Schema);
 
             Assert.That(Provider.CheckTableExists(tblName), Is.False);
             Assert.That(Provider.GetTableNames(), Has.No.Member(tblName));

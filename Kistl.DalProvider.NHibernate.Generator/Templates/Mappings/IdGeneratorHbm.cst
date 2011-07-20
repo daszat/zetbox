@@ -4,11 +4,13 @@
     Inherits="Kistl.Generator.ResourceTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Parameter Name="idType" Type="string" %>
+<%@ Parameter Name="schemaName" Type="string" %>
 <%@ Parameter Name="tableName" Type="string" %>
 <% switch(idType) {                                                             %>
 <%      case "id":                                                              %>
         <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
             <generator class="native">
+                <param name="schema">`<%= schemaName %>`</param>
                 <param name="sequence">`<%= tableName %>_ID_seq`</param>
             </generator>
         </id>
@@ -16,6 +18,7 @@
 <%      case "collection-id":                                                   %>
         <collection-id column="`ID`" type="Int32" unsaved-value="0">
             <generator class="native">
+                <param name="schema">`<%= schemaName %>`</param>
                 <param name="sequence">`<%= tableName %>_ID_seq`</param>
             </generator>
         </id>

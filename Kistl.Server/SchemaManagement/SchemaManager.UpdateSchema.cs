@@ -57,11 +57,12 @@ namespace Kistl.Server.SchemaManagement
         {
             Log.Info("Updating database schemas");
             Log.Debug("-------------------------");
-
-            // TODO: move to module-specific database schemas
-            if (!Case.IsNewSchema("dbo"))
+            foreach (var moduleName in schema.GetQuery<Module>().Select(m => m.SchemaName))
             {
-                Case.DoNewSchema("dbo");
+                if (!Case.IsNewSchema(moduleName))
+                {
+                    Case.DoNewSchema(moduleName);
+                }
             }
         }
 
@@ -121,7 +122,9 @@ namespace Kistl.Server.SchemaManagement
                 .Select(relEnd => new
                 {
                     OtherEnd = relEnd.AParent.B,
+                    schemaName = relEnd.Type.Module.SchemaName,
                     tblName = relEnd.Type.TableName,
+                    refSchemaName = relEnd.AParent.B.Type.Module.SchemaName,
                     refTableName = relEnd.AParent.B.Type.TableName,
                 })
                 .ToList();
@@ -136,35 +139,39 @@ namespace Kistl.Server.SchemaManagement
                 .Select(relEnd => new
                 {
                     OtherEnd = relEnd.BParent.A,
+                    schemaName = relEnd.Type.Module.SchemaName,
                     tblName = relEnd.Type.TableName,
+                    refSchemaName = relEnd.BParent.A.Type.Module.SchemaName,
                     refTableName = relEnd.BParent.A.Type.TableName,
                 })
                 .ToList();
 
             var refSpecs = refSpecsASide.Concat(refSpecsBSide)
                 .ToLookup(
-                    refSpec => db.GetQualifiedTableName(refSpec.tblName),
-                    refSpec => new KeyValuePair<TableRef, string>(db.GetQualifiedTableName(refSpec.refTableName), Construct.ForeignKeyColumnName(refSpec.OtherEnd)));
+                    refSpec => db.GetTableName(refSpec.schemaName, refSpec.tblName),
+                    refSpec => new KeyValuePair<TableRef, string>(db.GetTableName(refSpec.refSchemaName, refSpec.refTableName), Construct.ForeignKeyColumnName(refSpec.OtherEnd)));
 
             db.CreatePositionColumnValidCheckProcedures(refSpecs);
 
-            if (!db.CheckProcedureExists(db.GetQualifiedProcedureName("GetSequenceNumber")))
+            var getSequenceNumberRef = db.GetProcedureName("dbo", "GetSequenceNumber");
+            if (!db.CheckProcedureExists(getSequenceNumberRef))
             {
                 db.CreateSequenceNumberProcedure();
             }
             else if(repair)
             {
-                db.DropProcedure(db.GetQualifiedProcedureName("GetSequenceNumber"));
+                db.DropProcedure(getSequenceNumberRef);
                 db.CreateSequenceNumberProcedure();
             }
 
-            if (!db.CheckProcedureExists(db.GetQualifiedProcedureName("GetContinuousSequenceNumber")))
+            var getContinuousSequenceNumberRef = db.GetProcedureName("dbo", "GetContinuousSequenceNumber");
+            if (!db.CheckProcedureExists(getContinuousSequenceNumberRef))
             {
                 db.CreateContinuousSequenceNumberProcedure();
             }
             else if(repair)
             {
-                db.DropProcedure(db.GetQualifiedProcedureName("GetContinuousSequenceNumber"));
+                db.DropProcedure(getContinuousSequenceNumberRef);
                 db.CreateContinuousSequenceNumberProcedure();
             }
         }
@@ -254,7 +261,7 @@ namespace Kistl.Server.SchemaManagement
                 {
                     Case.DoNewValueTypePropertyNotNullable(objClass, prop, prefix);
                 }
-                if (Case.IsRenameValueTypePropertyName(prop))
+                if (Case.IsRenameValueTypePropertyName(objClass, prop, prefix))
                 {
                     Case.DoRenameValueTypePropertyName(objClass, prop, prefix);
                 }

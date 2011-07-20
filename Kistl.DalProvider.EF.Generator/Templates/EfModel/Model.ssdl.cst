@@ -27,12 +27,12 @@
 	foreach(var cls in ctx.GetBaseClasses().OrderBy(c => c.Name))
 	{
 %>
-    <EntitySet Name="<%= cls.Name %>" EntityType="Model.Store.<%= cls.Name %>" Table="<%= cls.TableName %>"/>
+    <EntitySet Name="<%= cls.Name %>" EntityType="Model.Store.<%= cls.Name %>" Schema="<%= cls.Module.SchemaName %>" Table="<%= cls.TableName %>"/>
 <%	
 		if (cls.NeedsRightsTable())
 		{
 %>
-    <EntitySet Name="<%= Construct.SecurityRulesClassName(cls) %>" EntityType="Model.Store.<%= Construct.SecurityRulesClassName(cls) %>" Table="<%= Construct.SecurityRulesTableName(cls) %>"/>
+    <EntitySet Name="<%= Construct.SecurityRulesClassName(cls) %>" EntityType="Model.Store.<%= Construct.SecurityRulesClassName(cls) %>" Schema="<%= cls.Module.SchemaName %>" Table="<%= Construct.SecurityRulesTableName(cls) %>"/>
     <AssociationSet Name="<%= Construct.SecurityRulesFKName(cls) %>" Association="Model.Store.<%= Construct.SecurityRulesFKName(cls) %>">
       <End Role="<%= cls.Name %>" EntitySet="<%= cls.Name %>" />
       <End Role="<%= Construct.SecurityRulesClassName(cls) %>" EntitySet="<%= Construct.SecurityRulesClassName(cls) %>" />
@@ -48,7 +48,7 @@
 	{
 		var info = new InheritanceStorageAssociationInfo(cls);
 %>
-    <EntitySet Name="<%= cls.Name %>" EntityType="Model.Store.<%= cls.Name %>" Table="<%= cls.TableName %>"/>
+    <EntitySet Name="<%= cls.Name %>" EntityType="Model.Store.<%= cls.Name %>" Schema="<%= cls.Module.SchemaName %>" Table="<%= cls.TableName %>"/>
     <!-- inherits from <%= info.ParentEntitySetName %> -->
     <AssociationSet Name="<%= info.AssociationName %>" Association="Model.Store.<%= info.AssociationName %>" >
       <End Role="<%= info.ParentRoleName %>" EntitySet="<%= info.ParentEntitySetName %>" />
@@ -65,6 +65,7 @@
 		string assocNameA = rel.GetRelationAssociationName(RelationEndRole.A);
 		string assocNameB = rel.GetRelationAssociationName(RelationEndRole.B);
 		string esName = rel.GetRelationClassName();
+		string esSchemaName = rel.Module.SchemaName;
 		string esTableName = rel.GetRelationTableName();
 		
 %>
@@ -73,7 +74,7 @@
     RelationDebugTemplate.Call(Host, ctx, rel);
 %>
     -->
-    <EntitySet Name="<%= esName %>" EntityType="Model.Store.<%= esName %>" Table="<%= esTableName %>" />
+    <EntitySet Name="<%= esName %>" EntityType="Model.Store.<%= esName %>" Schema="<%= esSchemaName %>" Table="<%= esTableName %>" />
     <AssociationSet Name="<%= assocNameA %>" Association="Model.Store.<%= assocNameA %>" >
       <End Role="<%= rel.A.RoleName %>" EntitySet="<%= rel.A.Type.Name %>" />
       <End Role="CollectionEntry" EntitySet="<%= esName %>" />
@@ -114,7 +115,7 @@
 		string assocName = prop.GetAssociationName();
 		string esName = prop.GetCollectionEntryClassName();
 %>
-    <EntitySet Name="<%= esName %>" EntityType="Model.Store.<%= esName %>" Table="<%= prop.GetCollectionEntryTable() %>" />
+    <EntitySet Name="<%= esName %>" EntityType="Model.Store.<%= esName %>" Schema="<%= prop.Module.SchemaName %>" Table="<%= prop.GetCollectionEntryTable() %>" />
     <AssociationSet Name="<%= assocName %>" Association="Model.Store.<%= assocName %>" >
       <End Role="<%= prop.ObjectClass.Name %>" EntitySet="<%= prop.ObjectClass.Name %>" />
       <End Role="CollectionEntry" EntitySet="<%= esName %>" />
@@ -135,7 +136,7 @@
 		string assocName = prop.GetAssociationName();
 		string esName = prop.GetCollectionEntryClassName();
 %>
-    <EntitySet Name="<%= esName %>" EntityType="Model.Store.<%= esName %>" Table="<%= prop.GetCollectionEntryTable() %>" />
+    <EntitySet Name="<%= esName %>" EntityType="Model.Store.<%= esName %>" Schema="<%= prop.Module.SchemaName %>" Table="<%= prop.GetCollectionEntryTable() %>" />
     <AssociationSet Name="<%= assocName %>" Association="Model.Store.<%= assocName %>" >
       <End Role="<%= prop.ObjectClass.Name %>" EntitySet="<%= prop.ObjectClass.Name %>" />
       <End Role="CollectionEntry" EntitySet="<%= esName %>" />

@@ -227,7 +227,7 @@ namespace Kistl.API.Migration
             foreach (var srcTbl in srcTables.OrderBy(tbl => tbl.Name))
             {
                 var srcCount = srcSchema.CountRows(srcSchema.GetTableName(srcTbl.StagingDatabase.Schema, srcTbl.Name));
-                var dstCount = dstSchema.CountRows(dstSchema.GetQualifiedTableName(srcTbl.DestinationObjectClass.TableName));
+                var dstCount = dstSchema.CountRows(dstSchema.GetTableName(srcTbl.DestinationObjectClass.Module.SchemaName, srcTbl.DestinationObjectClass.TableName));
 
                 Log.InfoFormat("Mapped [{0}] rows from [{1}] to [{2}] [{3}] entities",
                     srcCount,

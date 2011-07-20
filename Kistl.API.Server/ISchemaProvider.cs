@@ -517,7 +517,6 @@ namespace Kistl.API.Server
 
         #region Table Structure
 
-        TableRef GetQualifiedTableName(string tblName);
         TableRef GetTableName(string schemaName, string tblName);
 
         bool CheckTableExists(TableRef tblName);
@@ -585,13 +584,13 @@ namespace Kistl.API.Server
         bool CheckTriggerExists(TableRef objName, string triggerName);
         void DropTrigger(TableRef objName, string triggerName);
 
-        ProcRef GetQualifiedProcedureName(string procName);
+        ProcRef GetProcedureName(string schemaName, string procName);
         IEnumerable<ProcRef> GetProcedureNames();
         string GetProcedureDefinition(ProcRef proc);
         bool CheckProcedureExists(ProcRef procName);
         void DropProcedure(ProcRef procName);
 
-        ProcRef GetQualifiedFunctionName(string funcName);
+        ProcRef GetFunctionName(string schemaName, string funcName);
         IEnumerable<ProcRef> GetFunctionNames();
         bool CheckFunctionExists(ProcRef funcName);
         void DropFunction(ProcRef funcName);

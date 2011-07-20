@@ -207,11 +207,6 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
             }
         }
 
-        public TableRef GetQualifiedTableName(string tblName)
-        {
-            return GetTableName("dbo", tblName);
-        }
-
         public TableRef GetTableName(string schemaName, string tblName)
         {
             return new TableRef(db.Database, schemaName, tblName);
@@ -223,7 +218,7 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
             var tables = db.GetSchema(OleDbMetaDataCollectionNames.Tables, new string[] { null, null, null, "TABLE" });
             foreach (DataRow tbl in tables.Rows)
             {
-                yield return GetQualifiedTableName((string)tbl["TABLE_NAME"]);
+                yield return GetTableName((string)tbl["TABLE_SCHEMA"], (string)tbl["TABLE_NAME"]);
             }
         }
 
@@ -233,7 +228,7 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
             var views = db.GetSchema(OleDbMetaDataCollectionNames.Views);
             foreach (DataRow tbl in views.Rows)
             {
-                yield return GetQualifiedTableName((string)tbl["TABLE_NAME"]);
+                yield return GetTableName((string)tbl["TABLE_SCHEMA"], (string)tbl["TABLE_NAME"]);
             }
         }
 
@@ -352,9 +347,9 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
             }
         }
 
-        public ProcRef GetQualifiedProcedureName(string procName)
+        public ProcRef GetProcedureName(string schemaName, string procName)
         {
-            return new ProcRef(String.Empty, "dbo", procName);
+            return new ProcRef(String.Empty, schemaName, procName);
         }
 
         public IEnumerable<ProcRef> GetProcedureNames()
@@ -362,7 +357,7 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
             var procs = db.GetSchema(OleDbMetaDataCollectionNames.Procedures);
             foreach (DataRow row in procs.Rows)
             {
-                yield return GetQualifiedProcedureName((string)row["PROCEDURE_NAME"]);
+                yield return GetProcedureName((string)row["PROCEDURE_SCHEMA"], (string)row["PROCEDURE_NAME"]);
             }
         }
 
@@ -814,7 +809,7 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
             throw new NotSupportedException();
         }
 
-        ProcRef ISchemaProvider.GetQualifiedFunctionName(string funcName)
+        ProcRef ISchemaProvider.GetFunctionName(string schemaName, string funcName)
         {
             throw new NotImplementedException();
         }
