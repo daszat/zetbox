@@ -32,15 +32,18 @@ namespace Kistl.Server.Tests
             ma2.Name = "Testmitarbeiter Foobar";
 
             var prj1 = setupCtx.Create<Projekt>();
-            prj1.Mitarbeiter.Add(ma1);
-            prj1.Mitarbeiter.Add(ma2);
             prj1.Name = "blubb";
 
             var prj2 = setupCtx.Create<Projekt>();
-            prj2.Mitarbeiter.Add(ma1);
             prj2.Name = "flubb";
 
             setupCtx.SubmitChanges();
+
+            prj2.Mitarbeiter.Add(ma1);
+            prj1.Mitarbeiter.Add(ma1);
+            prj1.Mitarbeiter.Add(ma2);
+            setupCtx.SubmitChanges();
+
             ctx = GetContext();
         }
 

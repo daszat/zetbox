@@ -31,6 +31,8 @@ namespace Kistl.Server.Tests.Security
         protected Projekt prj2;
         protected Projekt prjCommon;
 
+        int prj1ID, prjCommonID, prj2ID;
+
         protected IKistlServerContext srvCtx;
         protected IKistlContext id1Ctx;
         protected IKistlContext id2Ctx;
@@ -46,72 +48,93 @@ namespace Kistl.Server.Tests.Security
 
         private void CreateTestData()
         {
-            srvCtx = scope.Resolve<IKistlServerContext>();
+            {
+                srvCtx = scope.Resolve<IKistlServerContext>();
 
-            var grpAdmin = srvCtx.FindPersistenceObject<Group>(new Guid("9C46F2B1-09D9-46B8-A7BF-812850921030"));
-            var grpEveryOne = srvCtx.FindPersistenceObject<Group>(new Guid("76D43CF2-4DDF-4A3A-9AD6-28CABFDDDFF1"));
+                var grpAdmin = srvCtx.FindPersistenceObject<Group>(new Guid("9C46F2B1-09D9-46B8-A7BF-812850921030"));
+                var grpEveryOne = srvCtx.FindPersistenceObject<Group>(new Guid("76D43CF2-4DDF-4A3A-9AD6-28CABFDDDFF1"));
 
-            // Create Identities
-            admin = srvCtx.Create<Identity>();
-            admin.DisplayName = "Administrator";
-            admin.UserName = "<TestDomain>\\Administrator";
-            admin.Groups.Add(grpAdmin);
-            admin.Groups.Add(grpEveryOne);
+                // Create Identities
+                admin = srvCtx.Create<Identity>();
+                admin.DisplayName = "Administrator";
+                admin.UserName = "<TestDomain>\\Administrator";
+                admin.Groups.Add(grpAdmin);
+                admin.Groups.Add(grpEveryOne);
 
-            identity1 = srvCtx.Create<Identity>();
-            identity1.DisplayName = "User 1";
-            identity1.UserName = "<TestDomain>\\User1";
-            identity1.Groups.Add(grpEveryOne);
+                identity1 = srvCtx.Create<Identity>();
+                identity1.DisplayName = "User 1";
+                identity1.UserName = "<TestDomain>\\User1";
+                identity1.Groups.Add(grpEveryOne);
 
-            identity2 = srvCtx.Create<Identity>();
-            identity2.DisplayName = "User 2";
-            identity2.UserName = "<TestDomain>\\User2";
-            identity2.Groups.Add(grpEveryOne);
+                identity2 = srvCtx.Create<Identity>();
+                identity2.DisplayName = "User 2";
+                identity2.UserName = "<TestDomain>\\User2";
+                identity2.Groups.Add(grpEveryOne);
 
-            identity3_low = srvCtx.Create<Identity>();
-            identity3_low.DisplayName = "User 3 with low privileges";
-            identity3_low.UserName = "<TestDomain>\\User3";
+                identity3_low = srvCtx.Create<Identity>();
+                identity3_low.DisplayName = "User 3 with low privileges";
+                identity3_low.UserName = "<TestDomain>\\User3";
 
-            ma1 = srvCtx.Create<Mitarbeiter>();
-            ma1.Name = identity1.DisplayName;
-            ma1.Identity = identity1;
+                ma1 = srvCtx.Create<Mitarbeiter>();
+                ma1.Name = identity1.DisplayName;
+                ma1.Identity = identity1;
 
-            ma2 = srvCtx.Create<Mitarbeiter>();
-            ma2.Name = identity2.DisplayName;
-            ma2.Identity = identity2;
+                ma2 = srvCtx.Create<Mitarbeiter>();
+                ma2.Name = identity2.DisplayName;
+                ma2.Identity = identity2;
 
-            ma3_low = srvCtx.Create<Mitarbeiter>();
-            ma3_low.Name = identity3_low.DisplayName;
-            ma3_low.Identity = identity3_low;
+                ma3_low = srvCtx.Create<Mitarbeiter>();
+                ma3_low.Name = identity3_low.DisplayName;
+                ma3_low.Identity = identity3_low;
 
-            srvCtx.SubmitChanges();
+                srvCtx.SubmitChanges();
+            }
 
-            // Create 3 identity context
+
+            {
+                // Create 3 identity context
+                var ctx = scope.Resolve<ServerKistlContextFactory>().Invoke(identity1);
+
+                // Create TestData with Identity 1
+                prj1 = ctx.Create<Projekt>();
+                prj1.Name = "Project User 1";
+                prj1.Mitarbeiter.Add(ctx.Find<Mitarbeiter>(ma1.ID));
+                CreateTasks(ctx, prj1);
+
+                // Create TestData with Identity 1, common
+                prjCommon = ctx.Create<Projekt>();
+                prjCommon.Name = "Project Common";
+                prjCommon.Mitarbeiter.Add(ctx.Find<Mitarbeiter>(ma1.ID));
+                prjCommon.Mitarbeiter.Add(ctx.Find<Mitarbeiter>(ma2.ID));
+                CreateTasks(ctx, prjCommon);
+
+                ctx.SubmitChanges();
+
+                prj1ID = prj1.ID;
+                prjCommonID = prjCommon.ID;
+            }
+
+            {
+                var ctx = scope.Resolve<ServerKistlContextFactory>().Invoke(identity2);
+
+                // Create TestData with Identity 2
+                prj2 = ctx.Create<Projekt>();
+                prj2.Name = "Project User 2";
+                prj2.Mitarbeiter.Add(ctx.Find<Mitarbeiter>(ma2.ID));
+                CreateTasks(ctx, prj2);
+                ctx.SubmitChanges();
+
+                prj2ID = prj2.ID;
+            }
+
             id1Ctx = scope.Resolve<ServerKistlContextFactory>().Invoke(identity1);
             id2Ctx = scope.Resolve<ServerKistlContextFactory>().Invoke(identity2);
             id3Ctx_low = scope.Resolve<ServerKistlContextFactory>().Invoke(identity3_low);
 
-            // Create TestData with Identity 1
-            prj1 = id1Ctx.Create<Projekt>();
-            prj1.Name = "Project User 1";
-            prj1.Mitarbeiter.Add(id1Ctx.Find<Mitarbeiter>(ma1.ID));
-            CreateTasks(id1Ctx, prj1);
+            prj1 = id1Ctx.Find<Projekt>(prj1ID);
+            prjCommon = id1Ctx.Find<Projekt>(prjCommonID);
+            prj2 = id2Ctx.Find<Projekt>(prj2ID);
 
-            // Create TestData with Identity 2
-            prj2 = id2Ctx.Create<Projekt>();
-            prj2.Name = "Project User 2";
-            prj2.Mitarbeiter.Add(id2Ctx.Find<Mitarbeiter>(ma2.ID));
-            CreateTasks(id2Ctx, prj2);
-
-            // Create TestData with Identity 1, common
-            prjCommon = id1Ctx.Create<Projekt>();
-            prjCommon.Name = "Project Common";
-            prjCommon.Mitarbeiter.Add(id1Ctx.Find<Mitarbeiter>(ma1.ID));
-            prjCommon.Mitarbeiter.Add(id1Ctx.Find<Mitarbeiter>(ma2.ID));
-            CreateTasks(id1Ctx, prjCommon);
-
-            id1Ctx.SubmitChanges();
-            id2Ctx.SubmitChanges();
 
             // Fix security tables
             // Own test checks if this works during object modifications too
