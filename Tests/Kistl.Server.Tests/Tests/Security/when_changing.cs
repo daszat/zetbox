@@ -25,6 +25,7 @@ namespace Kistl.Server.Tests.Security
         }
 
         [Test]
+        [Ignore("Case 3013: Add trigger for security tables also on n_m tables")]
         public void should_refresh_rights_on_remove_mitarbeiter()
         {
             // Add
