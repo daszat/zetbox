@@ -202,6 +202,7 @@ namespace Kistl.Server.Service
                         }
 
                         //RunTestCode(container.Resolve<Func<IKistlContext>>());
+                        RunFixes(container.Resolve<Func<IKistlContext>>());
 
                         Log.Info("Starting WCF Service");
                         var wcfServer = container.Resolve<IKistlAppDomain>();
@@ -231,6 +232,19 @@ namespace Kistl.Server.Service
                 }
                 return 1;
             }
+        }
+
+        private static void RunFixes(Func<IKistlContext> ctxFactory)
+        {
+            //using (var ctx = ctxFactory())
+            //{
+            //    foreach (var objCls in ctx.GetQuery<Kistl.App.Base.ObjectClass>())
+            //    {
+            //        objCls.ImplementInterfaces();
+            //    }
+
+            //    ctx.SubmitChanges();
+            //}
         }
 
         //private static void RunTestCode(Func<IKistlContext> ctx)

@@ -245,7 +245,12 @@ namespace Kistl.Server.SchemaManagement
         {
             var tblName = db.GetQualifiedTableName(objClass.TableName);
             var colName = Construct.NestedColumnName(prop, prefix);
-            db.AlterColumn(tblName, colName, prop.GetDbType(), prop.GetSize(), prop.GetScale(), prop.IsNullable(), SchemaManager.GetDefaultContraint(prop));
+
+            // Use current nullable definition. 
+            // Another case is responsible to change that.
+            var currentIsNullable = db.GetIsColumnNullable(tblName, colName);
+
+            db.AlterColumn(tblName, colName, prop.GetDbType(), prop.GetSize(), prop.GetScale(), currentIsNullable, SchemaManager.GetDefaultContraint(prop));
         }
         #endregion
 
@@ -699,7 +704,7 @@ namespace Kistl.Server.SchemaManagement
             }
 
             db.CreateFKConstraint(destTblRef, destRefTblName, destColName, destAssocName, false);
-            db.CreateIndex(destTblRef, Construct.IndexName(destTblRef.Name, destColName), false, false, destColName); 
+            db.CreateIndex(destTblRef, Construct.IndexName(destTblRef.Name, destColName), false, false, destColName);
             if (isIndexed)
             {
                 Log.InfoFormat("Creating position column '{0}.{1}'", destTblRef, destIndexName);
@@ -1754,7 +1759,15 @@ namespace Kistl.Server.SchemaManagement
                             TblNameRights = db.GetQualifiedTableName(Construct.SecurityRulesTableName(dep)),
                             ViewUnmaterializedName = db.GetQualifiedTableName(Construct.SecurityRulesRightsViewUnmaterializedName(dep)),
                         };
-                        rt.Relations.AddRange(SchemaManager.CreateJoinList(db, dep, ac.Relations, rel));
+                        try
+                        {
+                            rt.Relations.AddRange(SchemaManager.CreateJoinList(db, dep, ac.Relations, rel));
+                        }
+                        catch (Kistl.Server.SchemaManagement.SchemaManager.JoinListException ex)
+                        {
+                            Log.Warn("Unable to create UpdateRightsTrigger on " + objClass, ex);
+                            return;
+                        }
                         tblList.Add(rt);
                     }
                 }
@@ -1791,9 +1804,18 @@ namespace Kistl.Server.SchemaManagement
                             TblNameRights = db.GetQualifiedTableName(Construct.SecurityRulesTableName(dep)),
                             ViewUnmaterializedName = db.GetQualifiedTableName(Construct.SecurityRulesRightsViewUnmaterializedName(dep)),
                         };
-                        // Ignore last one - this is our n:m end
-                        var joinList = SchemaManager.CreateJoinList(db, dep, ac.Relations, rel);
-                        rt.Relations.AddRange(joinList.Take(joinList.Count - 1));
+                        try
+                        {
+                            // Ignore last one - this is our n:m end
+                            var joinList = SchemaManager.CreateJoinList(db, dep, ac.Relations, rel);
+                            rt.Relations.AddRange(joinList.Take(joinList.Count - 1));
+                        }
+                        catch (Kistl.Server.SchemaManagement.SchemaManager.JoinListException ex)
+                        {
+                            Log.Warn("Unable to create UpdateRightsTrigger on " + rel, ex);
+                            return;
+                        }
+
                         tblList.Add(rt);
                     }
                 }
@@ -1893,7 +1915,7 @@ namespace Kistl.Server.SchemaManagement
         }
         public void DoNewCompoundObjectProperty(ObjectClass objClass, CompoundObjectProperty cprop, string prefix)
         {
-            string colName_IsNull = Construct.NestedColumnName(cprop, prefix);            
+            string colName_IsNull = Construct.NestedColumnName(cprop, prefix);
             Log.InfoFormat("New is null column for CompoundObject Property: '{0}' ('{1}')", cprop.Name, colName_IsNull);
             var tblName = db.GetQualifiedTableName(objClass.TableName);
             var hasData = db.CheckTableContainsData(tblName);

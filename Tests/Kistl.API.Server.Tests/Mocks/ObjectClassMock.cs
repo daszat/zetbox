@@ -325,7 +325,7 @@ namespace Kistl.API.Server.Mocks
             set;
         }
 
-        public DateTime? ChangedOn
+        public DateTime ChangedOn
         {
             get;
             set;
@@ -337,7 +337,7 @@ namespace Kistl.API.Server.Mocks
             set;
         }
 
-        public DateTime? CreatedOn
+        public DateTime CreatedOn
         {
             get;
             set;

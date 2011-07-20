@@ -611,7 +611,7 @@ namespace Kistl.API.Server
         {
             CheckDisposed();
             var blob = this.Find<Kistl.App.Base.Blob>(ID);
-            var storagePath = BuildStoragePath(blob.ExportGuid, blob.CreatedOn.Value, blob.OriginalName);
+            var storagePath = BuildStoragePath(blob.ExportGuid, blob.CreatedOn, blob.OriginalName);
             string path = Path.Combine(config.Server.DocumentStore, storagePath);
             return new FileInfo(path);
         }

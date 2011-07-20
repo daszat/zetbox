@@ -814,6 +814,11 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
                 DropProcedureInternal(proc, true);
             }
 
+            foreach (var v in GetViewNames().ToList())
+            {
+                DropView(v);
+            }
+
             foreach (var tbl in GetTableNames().ToList())
             {
                 DropTableCascade(tbl);
