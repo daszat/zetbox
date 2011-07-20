@@ -33,7 +33,7 @@
 
 <% IdGeneratorHbm.Call(Host, "id", tableName); %>
 <% if (needsConcurrency) { %>
-		<version name="ChangedOn" column="`ChangedOn`" type="timestamp" />
+		<version name="ChangedOn" column="`ChangedOn`" type="timestamp" unsaved-value="undefined" />
 <% } %>
 
         <!-- define the properties -->

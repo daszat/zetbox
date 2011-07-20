@@ -68,7 +68,7 @@ IdGeneratorHbm.Call(Host, "id", tableName);
 #line 35 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
 if (needsConcurrency) { 
 #line 36 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
-this.WriteObjects("		<version name=\"ChangedOn\" column=\"`ChangedOn`\" type=\"timestamp\" />\r\n");
+this.WriteObjects("		<version name=\"ChangedOn\" column=\"`ChangedOn`\" type=\"timestamp\" unsaved-value=\"undefined\" />\r\n");
 #line 37 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
 } 
 #line 38 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\ObjectClassHbm.cst"
