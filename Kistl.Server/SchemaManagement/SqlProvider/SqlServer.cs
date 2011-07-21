@@ -556,6 +556,8 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
 
         public override bool GetHasColumnDefaultValue(TableRef tblName, string colName)
         {
+            if (tblName == null) throw new ArgumentNullException("tblName");
+
             return (int)ExecuteScalar("SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(@def) AND type IN (N'D')",
                 new Dictionary<string, object>(){
                     { "@def", FormatSchemaName(new ConstraintRef(tblName.Database, tblName.Schema, ConstructDefaultConstraintName(tblName, colName))) },
@@ -704,6 +706,8 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
 
         public override bool CheckTriggerExists(TableRef objName, string triggerName)
         {
+            if (objName == null) throw new ArgumentNullException("objName");
+
             return (int)ExecuteScalar(
                 "SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(@trigger) AND parent_object_id = OBJECT_ID(@parent) AND type IN (N'TR')",
                 new Dictionary<string, object>(){
@@ -714,6 +718,8 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
 
         public override void DropTrigger(TableRef objName, string triggerName)
         {
+            if (objName == null) throw new ArgumentNullException("objName");
+
             ExecuteNonQuery(string.Format("DROP TRIGGER {0}", FormatSchemaName(new TriggerRef(objName.Database, objName.Schema, triggerName))));
         }
 
