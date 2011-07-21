@@ -205,13 +205,14 @@ namespace Kistl.API.PerfCounter
         {
             lock (sync)
             {
+                var duration = Stopwatch.GetTimestamp() - startTicks;
                 QueriesTotal++;
                 QueriesObjectsTotal += objectCount;
-                QueriesSumDuration += Stopwatch.GetTimestamp() - startTicks;
+                QueriesSumDuration += duration;
 
                 Get(ifType).QueriesTotal++;
                 Get(ifType).QueriesObjectsTotal += objectCount;
-                Get(ifType).QueriesSumDuration += Stopwatch.GetTimestamp() - startTicks;
+                Get(ifType).QueriesSumDuration += duration;
 
                 ShouldDump();
             }
@@ -225,9 +226,11 @@ namespace Kistl.API.PerfCounter
         {
             lock (sync)
             {
+                var duration = Stopwatch.GetTimestamp() - startTicks;
+
                 SubmitChangesTotal++;
                 SubmitChangesObjectsTotal += objectCount;
-                SubmitChangesSumDuration += Stopwatch.GetTimestamp() - startTicks;
+                SubmitChangesSumDuration += duration;
 
                 ShouldDump();
             }
@@ -241,12 +244,14 @@ namespace Kistl.API.PerfCounter
         {
             lock (sync)
             {
+                var duration = Stopwatch.GetTimestamp() - startTicks;
+
                 GetListTotal++;
                 GetListObjectsTotal += resultSize;
-                GetListSumDuration += Stopwatch.GetTimestamp() - startTicks;
+                GetListSumDuration += duration;
                 Get(ifType).GetListTotal++;
                 Get(ifType).GetListObjectsTotal += resultSize;
-                Get(ifType).GetListSumDuration += resultSize;
+                Get(ifType).GetListSumDuration += duration;
 
                 ShouldDump();
             }
@@ -259,12 +264,14 @@ namespace Kistl.API.PerfCounter
         {
             lock (sync)
             {
+                var duration = Stopwatch.GetTimestamp() - startTicks;
+
                 GetListOfTotal++;
                 GetListOfObjectsTotal += resultSize;
-                GetListOfSumDuration += Stopwatch.GetTimestamp() - startTicks;
+                GetListOfSumDuration += duration;
                 Get(ifType).GetListOfTotal++;
                 Get(ifType).GetListOfObjectsTotal += resultSize;
-                Get(ifType).GetListOfSumDuration += resultSize;
+                Get(ifType).GetListOfSumDuration += duration;
 
                 ShouldDump();
             }
@@ -277,12 +284,14 @@ namespace Kistl.API.PerfCounter
         {
             lock (sync)
             {
+                var duration = Stopwatch.GetTimestamp() - startTicks;
+
                 FetchRelationTotal++;
                 FetchRelationObjectsTotal += resultSize;
-                FetchRelationSumDuration += Stopwatch.GetTimestamp() - startTicks;
+                FetchRelationSumDuration += duration;
                 Get(ifType).FetchRelationTotal++;
                 Get(ifType).FetchRelationObjectsTotal += resultSize;
-                Get(ifType).FetchRelationSumDuration += resultSize;
+                Get(ifType).FetchRelationSumDuration += duration;
             
                 ShouldDump();
             }
@@ -296,9 +305,11 @@ namespace Kistl.API.PerfCounter
         {
             lock (sync)
             {
+                var duration = Stopwatch.GetTimestamp() - startTicks;
+
                 SetObjectsTotal++;
                 SetObjectsObjectsTotal += objectCount;
-                SetObjectsSumDuration += Stopwatch.GetTimestamp() - startTicks;
+                SetObjectsSumDuration += duration;
 
                 ShouldDump();
             }
