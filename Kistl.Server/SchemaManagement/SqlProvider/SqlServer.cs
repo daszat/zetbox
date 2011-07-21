@@ -221,6 +221,39 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
             ExecuteNonQuery(String.Format("CREATE SCHEMA {0}", QuoteIdentifier(schemaName)));
         }
 
+        public override void DropAllObjects()
+        {
+            foreach (var rel in GetFKConstraintNames().ToList())
+            {
+                DropFKConstraint(rel.TableName, rel.ConstraintName);
+            }
+
+            foreach (var tbl in GetTableNames().ToList())
+            {
+                DropTable(tbl);
+            }
+
+            foreach (var v in GetViewNames().ToList())
+            {
+                DropView(v);
+            }
+
+            foreach (var sp in GetProcedureNames().ToList())
+            {
+                DropProcedure(sp);
+            }
+
+            foreach (var sp in GetFunctionNames().ToList())
+            {
+                DropFunction(sp);
+            }
+
+            foreach (var s in GetSchemaNames())
+            {
+                DropSchema(s, true);
+            }
+        }
+
         public override void DropSchema(string schemaName, bool force)
         {
             if (!CheckSchemaExists(schemaName))
@@ -726,14 +759,6 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
 
         public override void EnsureInfrastructure()
         {
-        }
-
-        public override void DropAllObjects()
-        {
-            foreach (var s in GetSchemaNames())
-            {
-                DropSchema(s, true);
-            }
         }
 
         #endregion
