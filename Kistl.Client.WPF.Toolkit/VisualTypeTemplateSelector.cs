@@ -95,7 +95,7 @@ namespace Kistl.Client.WPF.Toolkit
                 return null;
             }
 
-            Logging.Log.DebugFormat("Creating Template with {0}", visualDesc.ToString());
+            if (Logging.Log.IsDebugEnabled) { Logging.Log.DebugFormat("Creating Template with {0}", visualDesc.ToString()); }
             Type t = visualDesc.ControlRef.AsType(true);
             DataTemplate result;
 #if !DONT_CACHE_TEMPLATE
@@ -144,22 +144,22 @@ namespace Kistl.Client.WPF.Toolkit
             {
                 if (rk is ControlKind)
                 {
-                    Logging.Log.DebugFormat("Searching '{0}' Template for {1}", rk.ToString(), model.GetType().FullName);
+                	if (Logging.Log.IsDebugEnabled) { Logging.Log.DebugFormat("Searching '{0}' Template for {1}", rk.ToString(), model.GetType().FullName); }
                     result = SelectTemplate(model, rk as ControlKind, _frozenCtx);
                 }
                 else if (rk is String)
                 {
-                    Logging.Log.DebugFormat("Searching '{0}' Template for {1}", rk, model.GetType().FullName);
+                	if (Logging.Log.IsDebugEnabled) { Logging.Log.DebugFormat("Searching '{0}' Template for {1}", rk, model.GetType().FullName); }
                     result = SelectTemplate(model, rk as String, _frozenCtx);
                 }
                 else if (rk == null && model.RequestedKind != null)
                 {
-                    Logging.Log.DebugFormat("Searching '{0}' Template for {1}", model.RequestedKind.ToString(), model.GetType().FullName);
+                	if (Logging.Log.IsDebugEnabled) { Logging.Log.DebugFormat("Searching '{0}' Template for {1}", model.RequestedKind.ToString(), model.GetType().FullName); }
                     result = SelectTemplate(model, model.RequestedKind, _frozenCtx);
                 }
                 else if (rk == null)
                 {
-                    Logging.Log.DebugFormat("Searching default Template for {0}", model.GetType().FullName);
+                	if (Logging.Log.IsDebugEnabled) { Logging.Log.DebugFormat("Searching default Template for {0}", model.GetType().FullName); }
                     result = SelectDefaultTemplate(model, _frozenCtx);
                 }
                 else

@@ -429,12 +429,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\KistlBase\StringDisplay.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="View\ObjectEditor\DataObjectEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -550,6 +544,7 @@
     <Compile Include="View\KistlBase\InstanceListElementCount.xaml.cs">
       <DependentUpon>InstanceListElementCount.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\KistlBase\StringDisplay.cs" />
     <Compile Include="WpfToolkitResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -719,9 +714,6 @@
     </Compile>
     <Compile Include="View\GUI\DashboardDisplay.xaml.cs">
       <DependentUpon>DashboardDisplay.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\KistlBase\StringDisplay.xaml.cs">
-      <DependentUpon>StringDisplay.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\KistlDebuggerView.xaml.cs">
       <DependentUpon>KistlDebuggerView.xaml</DependentUpon>
