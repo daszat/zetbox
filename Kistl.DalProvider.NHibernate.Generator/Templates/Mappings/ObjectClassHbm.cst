@@ -43,6 +43,7 @@
 <% if (needsRightsTable) { %>
         <!-- map rights -->
         <set name="SecurityRightsCollectionImpl"
+             schema="`<%= schemaName %>`"
              table="`<%= tableName %>_Rights`"
              lazy="true"
              fetch="select" 
