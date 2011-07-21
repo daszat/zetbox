@@ -558,7 +558,7 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
         {
             return (int)ExecuteScalar("SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(@def) AND type IN (N'D')",
                 new Dictionary<string, object>(){
-                    { "@def", ConstructDefaultConstraintName(tblName, colName) },
+                    { "@def", FormatSchemaName(new ConstraintRef(tblName.Database, tblName.Schema, ConstructDefaultConstraintName(tblName, colName))) },
                 }) > 0;
         }
 
@@ -634,7 +634,7 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
 
             return (int)ExecuteScalar("SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(@constraint_name) AND type IN (N'F')",
                 new Dictionary<string, object>() {
-                    { "@constraint_name", QuoteIdentifier(tblName.Schema) + "." + QuoteIdentifier(fkName) },
+                    { "@constraint_name", FormatSchemaName(new ConstraintRef(tblName.Database, tblName.Schema,fkName)) },
                 }) > 0;
         }
 
@@ -707,14 +707,14 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
             return (int)ExecuteScalar(
                 "SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(@trigger) AND parent_object_id = OBJECT_ID(@parent) AND type IN (N'TR')",
                 new Dictionary<string, object>(){
-                    { "@trigger", triggerName },
+                    { "@trigger", FormatSchemaName(new TriggerRef(objName.Database, objName.Schema, triggerName)) },
                     { "@parent", FormatSchemaName(objName) },
                 }) > 0;
         }
 
         public override void DropTrigger(TableRef objName, string triggerName)
         {
-            ExecuteNonQuery(string.Format("DROP TRIGGER [{0}]", triggerName));
+            ExecuteNonQuery(string.Format("DROP TRIGGER {0}", FormatSchemaName(new TriggerRef(objName.Database, objName.Schema, triggerName))));
         }
 
         public override IEnumerable<ProcRef> GetProcedureNames()

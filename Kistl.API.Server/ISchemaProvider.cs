@@ -213,6 +213,98 @@ namespace Kistl.API.Server
         }
     }
 
+    public sealed class ConstraintRef : DboRef, IComparable<ConstraintRef>, ICloneable
+    {
+        public ConstraintRef(string database, string schema, string name)
+            : base(database, schema, name)
+        {
+        }
+
+        int IComparable<ConstraintRef>.CompareTo(ConstraintRef other)
+        {
+            return ((IComparable<DboRef>)this).CompareTo(other);
+        }
+
+        public static bool operator ==(ConstraintRef x, ConstraintRef y)
+        {
+            return ((DboRef)x) == ((DboRef)y);
+        }
+        public static bool operator !=(ConstraintRef x, ConstraintRef y)
+        {
+            return ((DboRef)x) != ((DboRef)y);
+        }
+        public static bool operator >(ConstraintRef x, ConstraintRef y)
+        {
+            return ((DboRef)x) > ((DboRef)y);
+        }
+        public static bool operator <(ConstraintRef x, ConstraintRef y)
+        {
+            return ((DboRef)x) < ((DboRef)y);
+        }
+
+        public override bool Equals(object obj)
+        {
+            return base.Equals(obj);
+        }
+
+
+        object ICloneable.Clone()
+        {
+            return new ConstraintRef(Database, Schema, Name);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+    }
+    
+    public sealed class TriggerRef : DboRef, IComparable<TriggerRef>, ICloneable
+    {
+        public TriggerRef(string database, string schema, string name)
+            : base(database, schema, name)
+        {
+        }
+
+        int IComparable<TriggerRef>.CompareTo(TriggerRef other)
+        {
+            return ((IComparable<DboRef>)this).CompareTo(other);
+        }
+
+        public static bool operator ==(TriggerRef x, TriggerRef y)
+        {
+            return ((DboRef)x) == ((DboRef)y);
+        }
+        public static bool operator !=(TriggerRef x, TriggerRef y)
+        {
+            return ((DboRef)x) != ((DboRef)y);
+        }
+        public static bool operator >(TriggerRef x, TriggerRef y)
+        {
+            return ((DboRef)x) > ((DboRef)y);
+        }
+        public static bool operator <(TriggerRef x, TriggerRef y)
+        {
+            return ((DboRef)x) < ((DboRef)y);
+        }
+
+        public override bool Equals(object obj)
+        {
+            return base.Equals(obj);
+        }
+
+
+        object ICloneable.Clone()
+        {
+            return new TriggerRef(Database, Schema, Name);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+    }
+
     public class TableConstraintNamePair
     {
         public TableRef TableName { get; set; }
