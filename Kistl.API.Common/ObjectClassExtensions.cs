@@ -33,19 +33,7 @@ namespace Kistl.App.Extensions
             if (type == null) { throw new ArgumentNullException("type"); }
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
 
-            ObjectClass result;
-            //if (ctx == FrozenContext.Single)
-            //{
-            //    // cache frozen classes by class name
-            //    InitializeFrozenCache(ctx);
-            //    if (_frozenClasses == null) return null; // Case #1363: GetObjectClass can be called by: InitializeFrozenCache -> QueryTranslator -> OfType Visit -> ApplySecurityFilter ->GetObjectClass
-            //    result = _frozenClasses[type.Name].First(o => o.Module.Namespace == type.Namespace && o.Name == type.Name);
-            //}
-            //else
-            {
-                result = ctx.GetQuery<ObjectClass>().First(o => o.Module.Namespace == type.Namespace && o.Name == type.Name);
-            }
-
+            ObjectClass result = ctx.TransientState("__ObjectClassExtensions__GetObjectClass__", type.FullName, () => ctx.GetQuery<ObjectClass>().First(o => o.Module.Namespace == type.Namespace && o.Name == type.Name));
             return result;
         }
 
