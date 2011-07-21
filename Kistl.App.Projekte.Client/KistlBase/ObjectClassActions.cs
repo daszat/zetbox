@@ -5,28 +5,20 @@ namespace Kistl.App.Base
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-
     using Kistl.API;
+    using Kistl.API.Utils;
     using Kistl.App.Base;
     using Kistl.App.Extensions;
-    using Kistl.API.Utils;
-    using Kistl.Client.Presentables;
     using Kistl.App.GUI;
     using Kistl.Client;
+    using Kistl.Client.Presentables;
 
     /// <summary>
     /// Client implementation
     /// </summary>
     [Implementor]
-    public class ObjectClassActions
+    public static class ObjectClassActions
     {
-        private static IViewModelFactory _mdlFactory = null;
-
-        public ObjectClassActions(IViewModelFactory mdlFactory)
-        {
-            _mdlFactory = mdlFactory;
-        }
-
         [Invocation]
         public static void NotifyCreated(ObjectClass obj)
         {
