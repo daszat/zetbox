@@ -6,9 +6,9 @@ namespace Kistl.Client.Presentables
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text;
-
     using Kistl.API;
     using Kistl.App.Base;
+    using Kistl.App.GUI;
     using Kistl.Client.Presentables.KistlBase;
 
     public class DataObjectSelectionTaskViewModel
@@ -47,6 +47,7 @@ namespace Kistl.Client.Presentables
             ListViewModel.AllowAddNew = true;
             ListViewModel.ObjectCreated += ListViewModel_ObjectCreated;
             ListViewModel.ItemsDefaultAction += ListViewModel_ItemsDefaultAction;
+            ListViewModel.ViewMethod = InstanceListViewMethod.Details;
 
             foreach (var cmd in _additionalActions)
             {
