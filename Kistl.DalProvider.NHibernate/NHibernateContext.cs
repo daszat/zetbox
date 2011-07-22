@@ -509,7 +509,7 @@ namespace Kistl.DalProvider.NHibernate
             var cmd = _nhSession.Connection.CreateCommand();
             if (_transaction != null)
                 _transaction.Enlist(cmd);
-            cmd.CommandText = "dbo.\"" + procName + "\"";
+            cmd.CommandText = "base.\"" + procName + "\"";
             cmd.CommandType = CommandType.StoredProcedure;
 
             var pIn = cmd.CreateParameter();
