@@ -218,7 +218,8 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
             var tables = db.GetSchema(OleDbMetaDataCollectionNames.Tables, new string[] { null, null, null, "TABLE" });
             foreach (DataRow tbl in tables.Rows)
             {
-                yield return GetTableName((string)tbl["TABLE_SCHEMA"], (string)tbl["TABLE_NAME"]);
+                var schema = tbl["TABLE_SCHEMA"] ?? DBNull.Value;
+                yield return GetTableName(schema == DBNull.Value ? String.Empty : schema.ToString(), (string)tbl["TABLE_NAME"]);
             }
         }
 
