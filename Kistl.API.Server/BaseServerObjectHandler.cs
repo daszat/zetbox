@@ -9,7 +9,7 @@ namespace Kistl.API.Server
 
     using Kistl.API;
     using Kistl.API.Utils;
-using System.IO;
+    using System.IO;
 
     /// <summary>
     /// This describes the common interface from the server frontend to the provider for servicing the common "Get" operations.
@@ -101,7 +101,7 @@ using System.IO;
                 {
                     if (first)
                     {
-                        if(o.Type == OrderByType.ASC)
+                        if (o.Type == OrderByType.ASC)
                             result = result.AddOrderBy<T>(o.Expression);
                         else
                             result = result.AddOrderByDescending<T>(o.Expression);
@@ -111,7 +111,7 @@ using System.IO;
                         if (o.Type == OrderByType.ASC)
                             result = result.AddThenBy<T>(o.Expression);
                         else
-                            result = result.AddThenByDescending<T>(o.Expression);                        
+                            result = result.AddThenByDescending<T>(o.Expression);
                     }
                     first = false;
                 }
@@ -240,7 +240,7 @@ using System.IO;
                 {
                     var orig = (Kistl.App.Base.IChangedBy)ctxObj;
                     var send = (Kistl.App.Base.IChangedBy)obj;
-                    if (orig.ChangedOn != send.ChangedOn)
+                    if (Math.Abs((orig.ChangedOn - send.ChangedOn).Ticks) > 15) // postgres is only accurate down to µs (1/1000th ms), but DateTime is accurate down to 1/10th µs. Rounding errors cause invalid concurrency failures.
                     {
                         concurrencyFailed.Add((IDataObject)obj);
                     }
