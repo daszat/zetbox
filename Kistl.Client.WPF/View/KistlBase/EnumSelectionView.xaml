@@ -4,7 +4,8 @@
                      xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"
                      xmlns:view="clr-namespace:Kistl.Client.WPF.View.KistlBase"
                      xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
-                     ToolTip="{Binding ToolTip}">
+                     ToolTip="{Binding ToolTip}"
+                     VerticalAlignment="Top">
 
     <ComboBox x:Name="cb"
               ItemsSource="{Binding PossibleValues, Mode=OneWay}"

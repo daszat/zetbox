@@ -5,7 +5,8 @@
                      xmlns:view="clr-namespace:Kistl.Client.WPF.View.KistlBase"
                      xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
                      xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
-                     ToolTip="{Binding ToolTip}">
+                     ToolTip="{Binding ToolTip}"
+                     VerticalAlignment="Top">
     <kevin:InfoTextBox x:Name="txtNullablePropertyTextBoxView"
                        Text="{Binding FormattedValue, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
                        TextBoxInfo="{Binding ToolTip}"

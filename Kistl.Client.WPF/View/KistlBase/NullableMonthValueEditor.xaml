@@ -5,7 +5,8 @@
                      xmlns:view="clr-namespace:Kistl.Client.WPF.View.KistlBase"
                      xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
                      ToolTip="{Binding ToolTip}"
-                     MinWidth="1">
+                     MinWidth="1"
+                     VerticalAlignment="Top">
 
     <StackPanel Orientation="Horizontal">
         <ComboBox x:Name="cbMonth"

@@ -41,6 +41,7 @@ namespace Kistl.Client.WPF.View.KistlBase
             // InitializeComponent
             txtStringDisplay = new TextBlock();
             Content = txtStringDisplay;
+            this.VerticalAlignment = System.Windows.VerticalAlignment.Top;
 
             {
                 var b = new Binding("FormattedValue");

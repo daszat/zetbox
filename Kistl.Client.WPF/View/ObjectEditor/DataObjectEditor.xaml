@@ -69,7 +69,7 @@
                         <ScrollViewer VerticalScrollBarVisibility="Visible">
                             <ItemsControl ItemsSource="{Binding PropertyModels, ValidatesOnDataErrors=true}"
                                           BorderThickness="0"
-                                          HorizontalContentAlignment="Stretch"
+                                          HorizontalContentAlignment="Top"
                                           VerticalContentAlignment="Stretch">
 
                                 <!-- use the whole horizontal space, but no more -->
