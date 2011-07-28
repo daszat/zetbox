@@ -83,6 +83,9 @@
     <Compile Include="Gui\NavigationScreenActions.cs" />
     <Compile Include="Gui\ViewDescriptorActions.cs" />
     <Compile Include="Gui\ViewModelDescriptorActions.cs" />
+    <Compile Include="Invoicing\AdjustmentTypeActions.cs" />
+    <Compile Include="Invoicing\InvoiceItemActions.cs" />
+    <Compile Include="Invoicing\InvoiceActions.cs" />
     <Compile Include="KistlBase\BaseParameterActions.cs" />
     <Compile Include="KistlBase\AssemblyActions.cs" />
     <Compile Include="KistlBase\BoolPropertyActions.cs" />
@@ -151,6 +154,9 @@
     <Compile Include="KistlBase\ObjectReferencePropertyActions.cs" />
     <Compile Include="KistlBase\RelationActions.cs" />
     <Compile Include="KistlBase\RelationEndActions.cs" />
+    <Compile Include="Parties\SupplierRelationshipActions.cs" />
+    <Compile Include="Parties\CustomerRelationshipActions.cs" />
+    <Compile Include="Parties\CustomerActions.cs" />
     <Compile Include="Parties\PartyRelationshipActions.cs" />
     <Compile Include="Parties\PartyRoleActions.cs" />
     <Compile Include="Parties\EmploymentActions.cs" />

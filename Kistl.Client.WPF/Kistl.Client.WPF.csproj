@@ -441,10 +441,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Parties\PartyRolesDisplay.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\Relations\RelationEndEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -722,9 +718,6 @@
     <Compile Include="View\ObjectEditor\DataObjectEditor.xaml.cs">
       <DependentUpon>DataObjectEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Parties\PartyRolesDisplay.xaml.cs">
-      <DependentUpon>PartyRolesDisplay.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\Relations\RelationEndEditor.xaml.cs">
       <DependentUpon>RelationEndEditor.xaml</DependentUpon>
     </Compile>
@@ -859,6 +852,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\DropDown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="View\Parties\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

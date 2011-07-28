@@ -29,11 +29,11 @@ using ZBox.Basic.Parties;
         {
             var groups = base.CreatePropertyGroups();
 
-            foreach (var iftRole in Party.PartyRole.ToList().GroupBy(k => DataContext.GetInterfaceType(k)))
+            foreach (var role in Party.PartyRole)
             {
-                var mdl = ViewModelFactory.CreateViewModel<PartyRolesViewModel.Factory>().Invoke(DataContext, this, Party, iftRole.Key);
-                var lblMdl = ViewModelFactory.CreateViewModel<LabeledViewContainerViewModel.Factory>().Invoke(DataContext, this, "Role", "", mdl);
-                var propGrpMdl = ViewModelFactory.CreateViewModel<SinglePropertyGroupViewModel.Factory>().Invoke(DataContext, this, iftRole.Key.Type.Name, new ViewModel[] { lblMdl });
+                var vMdl = ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>().Invoke(DataContext, this, role);
+                var lblMdl = ViewModelFactory.CreateViewModel<LabeledViewContainerViewModel.Factory>().Invoke(DataContext, this, "Role", "", vMdl);
+                var propGrpMdl = ViewModelFactory.CreateViewModel<SinglePropertyGroupViewModel.Factory>().Invoke(DataContext, this, vMdl.GetInterfaceType().Type.Name, new ViewModel[] { lblMdl });
                 groups.Add(propGrpMdl);
             }
 
