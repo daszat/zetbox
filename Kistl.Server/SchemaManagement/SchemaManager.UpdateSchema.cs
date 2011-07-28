@@ -57,6 +57,13 @@ namespace Kistl.Server.SchemaManagement
         {
             Log.Info("Updating database schemas");
             Log.Debug("-------------------------");
+
+            // Create/Check dbo shema
+            if (!db.CheckSchemaExists("dbo"))
+            {
+                db.CreateSchema("dbo");
+            }
+
             foreach (var moduleName in schema.GetQuery<Module>().Select(m => m.SchemaName))
             {
                 if (!Case.IsNewSchema(moduleName))
