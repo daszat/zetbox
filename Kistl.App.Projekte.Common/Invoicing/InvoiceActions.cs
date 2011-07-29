@@ -16,7 +16,7 @@ namespace ZBox.Basic.Invoicing
         }
 
         [Invocation]
-        public static void pstSet_Items(ZBox.Basic.Invoicing.Invoice obj, PropertyPostSetterEventArgs<IList<InvoiceItem>> e)
+        public static void postSet_Items(ZBox.Basic.Invoicing.Invoice obj, PropertyPostSetterEventArgs<IList<InvoiceItem>> e)
         {
             obj.NotifyPropertyChanged("Total", (decimal)0, (decimal)0);
         }
