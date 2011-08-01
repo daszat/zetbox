@@ -5,13 +5,14 @@ namespace Kistl.Server.HttpService
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Net;
     using System.Runtime.Serialization.Formatters.Binary;
+    using System.ServiceModel;
     using System.Web;
     using Autofac;
     using Autofac.Integration.Web;
     using Kistl.API;
     using Kistl.API.Common;
-    using System.Net;
 
     /// <summary>
     /// trivial HTTP-based facade implementation of the IKistlService for hosting in non-WCF environments (like apache+mono)
@@ -250,7 +251,7 @@ namespace Kistl.Server.HttpService
                 }
                 Log.DebugFormat("Sending response [{0}]", context.Response.StatusCode);
             }
-            catch (ConcurrencyException cex)
+            catch (FaultException<ConcurrencyException> cex)
             {
                 context.Response.StatusCode = (int)HttpStatusCode.Conflict;
                 Log.Error("Concurrency error while processing request", cex);
