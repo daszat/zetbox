@@ -290,6 +290,7 @@ namespace Kistl.Server
                     using (IKistlContext ctx = _ctxFactory())
                     {
                         var endRole = (RelationEndRole)serializableRole;
+                        // TODO: Use FrozenContext
                         Relation rel = ctx.FindPersistenceObject<Relation>(relId);
                         var ifTypeA = _iftFactory(rel.A.Type.GetDataType());
                         var ifTypeB = _iftFactory(rel.B.Type.GetDataType());
