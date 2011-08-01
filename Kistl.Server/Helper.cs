@@ -21,6 +21,7 @@ namespace Kistl.Server
         /// <param name="ex">Exception to handle</param>
         public static void ThrowFaultException(Exception ex)
         {
+            if (ex == null) throw new ArgumentNullException("ex");
             Logging.Log.Error("Error in Facade: " + ex.Message, ex);
 #if DEBUG
             if (ex is System.Data.DataException && ex.InnerException != null)
