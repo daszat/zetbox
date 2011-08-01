@@ -71,8 +71,13 @@ using Kistl.API.Client.PerfCounter;
                 {
                     throw cex.Detail;
                 }
+                catch (FaultException)
+                {
+                    throw;
+                }
                 catch (Exception ex)
                 {
+                    // Retry
                     fault = ex;
                 }
             }
