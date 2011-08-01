@@ -283,12 +283,12 @@ namespace Kistl.DalProvider.Ef
                 }
                 catch (OptimisticConcurrencyException cex)
                 {
-                    Logging.Log.Error("Error during SubmitChanges", cex);
+                    Logging.Log.Error("OptimisticConcurrencyException during SubmitChanges", cex);
                     throw new ConcurrencyException();
                 }
                 catch (UpdateException updex)
                 {
-                    Logging.Log.Error("Error during SubmitChanges", updex);
+                    Logging.Log.Error("UpdateException during SubmitChanges", updex);
                     if (updex.InnerException == null)
                         throw;
                     throw updex.InnerException;
