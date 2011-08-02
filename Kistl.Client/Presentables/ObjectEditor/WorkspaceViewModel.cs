@@ -296,6 +296,10 @@ namespace Kistl.Client.Presentables.ObjectEditor
                     }
                 }
             }
+            else
+            {
+                ShowVerificationResults();
+            }
 
             return false;
         }
