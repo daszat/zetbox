@@ -18,6 +18,7 @@ namespace Kistl.API.Utils
         private readonly static ILog _reflection = LogManager.GetLogger("Kistl.Reflection");
         private readonly static ILog _methods = LogManager.GetLogger("Kistl.PerfCounter.Methods");
         private readonly static ILog _exporter = LogManager.GetLogger("Kistl.Exporter");
+        private readonly static ILog _mails = LogManager.GetLogger("Kistl.MailNotification");
 
         public static ILog Log
         {
@@ -50,6 +51,15 @@ namespace Kistl.API.Utils
         public static ILog Reflection
         {
             get { return _reflection; }
+        }
+
+        /// <summary>
+        /// Use this logger to send mails to the admin. This should be done only sparingly to report success or failure of important technical processes.
+        /// </summary>
+        /// <remarks>See the app.config for example configurations to actually create useful mails.</remarks>
+        public static ILog MailNotification
+        {
+            get { return _mails; }
         }
 
         public static void Configure()

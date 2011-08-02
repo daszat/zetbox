@@ -61,7 +61,7 @@ namespace Kistl.API.Migration
             }
             catch (OptionException e)
             {
-                Log.Fatal("Error in commandline", e);
+                Logging.MailNotification.Fatal("Error in commandline", e);
                 PrintHelpAndExit();
             }
 
@@ -114,7 +114,7 @@ namespace Kistl.API.Migration
             }
             else
             {
-                Log.FatalFormat("Unerkannte Argumente: [{0}]", String.Join("], [", extraArguments.ToArray()));
+                Logging.MailNotification.FatalFormat("Unerkannte Argumente: [{0}]", String.Join("], [", extraArguments.ToArray()));
                 PrintHelpAndExit();
             }
 
@@ -124,7 +124,7 @@ namespace Kistl.API.Migration
             }
             catch (Exception ex)
             {
-                Log.Fatal(String.Format("Fehler beim Lesen der Config von [{0}]", configFilePath), ex);
+                Logging.MailNotification.Fatal(String.Format("Fehler beim Lesen der Config von [{0}]", configFilePath), ex);
                 PrintHelpAndExit();
             }
             // never reached
