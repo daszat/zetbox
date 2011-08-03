@@ -40,19 +40,19 @@ namespace Kistl.Client.Presentables.KistlBase
 
         public FilterViewModel FilterViewModel { get; private set; }
 
-        private bool _AllowRemove = true;
-        public bool AllowRemove
+        private bool _isUserFilter = true;
+        public bool IsUserFilter
         {
             get
             {
-                return _AllowRemove;
+                return _isUserFilter;
             }
             set
             {
-                if (_AllowRemove != value)
+                if (_isUserFilter != value)
                 {
-                    _AllowRemove = value;
-                    OnPropertyChanged("AllowRemove");
+                    _isUserFilter = value;
+                    OnPropertyChanged("IsUserFilter");
                 }
             }
         }
@@ -67,7 +67,7 @@ namespace Kistl.Client.Presentables.KistlBase
                     _RemoveCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, 
                         FilterListEntryViewModelResources.RemoveCommand, 
                         FilterListEntryViewModelResources.RemoveCommand_Tooltip, 
-                        Remove, () => AllowRemove);
+                        Remove, () => IsUserFilter);
                     _RemoveCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_delete_png);
                 }
                 return _RemoveCommand;

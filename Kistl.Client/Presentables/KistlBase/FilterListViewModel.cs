@@ -82,7 +82,7 @@ namespace Kistl.Client.Presentables.KistlBase
         {
             get
             {
-                return !HasCustomFilter && _RespectRequiredFilter;
+                return !HasUserFilter && _RespectRequiredFilter;
             }
             set
             {
@@ -103,12 +103,12 @@ namespace Kistl.Client.Presentables.KistlBase
             }
         }
 
-        public bool HasCustomFilter
+        public bool HasUserFilter
         {
             get
             {
                 if (_FilterListEntryViewModels == null) return false;
-                return _FilterListEntryViewModels.Any(i => i.AllowRemove);
+                return _FilterListEntryViewModels.Any(i => i.IsUserFilter);
             }
         }
 
@@ -224,7 +224,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 vmdl.RespectRequiredFilter = RespectRequiredFilter;
                 
                 var levmdl = FilterListEntryViewModel.Fetch(ViewModelFactory, DataContext, this, vmdl);
-                levmdl.AllowRemove = allowRemove;
+                levmdl.IsUserFilter = allowRemove;
 
                 _FilterViewModels.Add(vmdl);
                 _FilterListEntryViewModels.Add(levmdl);
@@ -232,7 +232,7 @@ namespace Kistl.Client.Presentables.KistlBase
             if(allowRemove) UpdateRespectRequieredFilter();
 
             OnPropertyChanged("RespectRequiredFilter");
-            OnPropertyChanged("HasCustomFilter");
+            OnPropertyChanged("HasUserFilter");
             OnPropertyChanged("Filter");
             OnPropertyChanged("FilterViewModels");
             OnPropertyChanged("FilterListEntryViewModels");
@@ -253,7 +253,7 @@ namespace Kistl.Client.Presentables.KistlBase
             UpdateRespectRequieredFilter();
 
             OnPropertyChanged("RespectRequiredFilter");
-            OnPropertyChanged("HasCustomFilter");
+            OnPropertyChanged("HasUserFilter");
             OnPropertyChanged("Filter");
             OnPropertyChanged("FilterViewModels");
             OnPropertyChanged("FilterListEntryViewModels");
@@ -310,7 +310,9 @@ namespace Kistl.Client.Presentables.KistlBase
                     {
                         if (sel != null)
                         {
-                            AddFilter(FilterModel.FromProperty(FrozenContext, (Property)sel.Object), true);
+                            var prop = (Property)sel.Object;
+                            AddFilter(FilterModel.FromProperty(FrozenContext, prop), true);
+                            OnUserFilterAdded(prop);
                         }
                     },
                     null);
@@ -320,6 +322,16 @@ namespace Kistl.Client.Presentables.KistlBase
             dlg.ListViewModel.AllowAddNew = false;
             dlg.ListViewModel.AllowDelete = false;
             ViewModelFactory.ShowDialog(dlg);
+        }
+
+        public event UserFilterAddedEventHander UserFilterAdded;
+        protected void OnUserFilterAdded(Property prop)
+        {
+            var temp = UserFilterAdded;
+            if (temp != null)
+            {
+                temp(this, new UserFilterAddedEventArgs(prop));
+            }
         }
 
         public IQueryable AppendFilter(IQueryable qry)
@@ -341,5 +353,16 @@ namespace Kistl.Client.Presentables.KistlBase
 
             return result;
         }
+    }
+
+    public delegate void UserFilterAddedEventHander(object sender, UserFilterAddedEventArgs e);
+    public class UserFilterAddedEventArgs : EventArgs
+    {
+        public UserFilterAddedEventArgs(Property prop)
+        {
+            this.Property = prop;
+        }
+
+        public Property Property { get; private set; }
     }
 }

@@ -80,7 +80,8 @@ namespace Kistl.Client.Presentables.KistlBase
             this._filterList = ViewModelFactory.CreateViewModel<FilterListViewModel.Factory>().Invoke(DataContext, this, _type);
             this._filterList.ExecuteFilter += (s, e) => ReloadInstances();
             this._filterList.ExecutePostFilter += (s, e) => ExecutePostFilter();
-            this._filterList.PropertyChanged += new PropertyChangedEventHandler(_filterList_PropertyChanged);
+            this._filterList.PropertyChanged += _filterList_PropertyChanged;
+            this._filterList.UserFilterAdded += _filterList_UserFilterAdded;
         }
 
         #region Kind Management
@@ -147,6 +148,15 @@ namespace Kistl.Client.Presentables.KistlBase
                    OnPropertyChanged(e.PropertyName);
                    break;
            }
+        }
+
+        void _filterList_UserFilterAdded(object sender, UserFilterAddedEventArgs e)
+        {
+            var prop = e.Property;
+            foreach (var c in GridDisplayConfiguration.CreateColumnDisplayModels(GridDisplayConfiguration.Mode.ReadOnly, prop, string.Empty, string.Empty))
+            {
+                DisplayedColumns.Columns.Add(c);
+            }
         }
 
         /// <summary>

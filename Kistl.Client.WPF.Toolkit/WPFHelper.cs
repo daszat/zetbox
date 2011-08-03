@@ -46,6 +46,8 @@ namespace Kistl.Client.WPF.Toolkit
 
         public static void RefreshGridView(DataGrid lst, GridDisplayConfiguration cfg, DependencyProperty sortProperty)
         {
+            cfg.Update += (s, e) => RefreshGridView(lst, cfg, sortProperty);
+
             lst.Columns.Clear();
             if (cfg.ShowIcon)
             {
@@ -127,6 +129,8 @@ namespace Kistl.Client.WPF.Toolkit
 
         public static void RefreshGridView(ListView lst, GridDisplayConfiguration cfg, DependencyProperty sortProperty)
         {
+            cfg.Update += (s, e) => RefreshGridView(lst, cfg, sortProperty);
+
             GridView view = new GridView() { AllowsColumnReorder = true };
             lst.View = view;
             if (cfg.ShowIcon)

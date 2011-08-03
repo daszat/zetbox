@@ -13,6 +13,7 @@ namespace Kistl.Client.Models
     using Kistl.App.GUI;
     using Kistl.Client.Presentables;
     using Kistl.Client.Presentables.ValueViewModels;
+    using System.Collections.ObjectModel;
 
     public class ColumnDisplayModel
     {
@@ -139,7 +140,7 @@ namespace Kistl.Client.Models
         public bool ShowIcon { get; set; }
         public bool ShowName { get; set; }
 
-        public List<ColumnDisplayModel> Columns { get; set; }
+        public ObservableCollection<ColumnDisplayModel> Columns { get; private set; }
 
         public GridDisplayConfiguration()
         {
@@ -160,7 +161,7 @@ namespace Kistl.Client.Models
             ShowId = cls.ShowIdInLists;
             ShowName = cls.ShowNameInLists;
 
-            this.Columns = props
+            this.Columns = new ObservableCollection<ColumnDisplayModel>(props
                 .SelectMany(p => CreateColumnDisplayModels(mode, p, string.Empty, string.Empty))
                 .Concat(
                     methods
@@ -171,7 +172,8 @@ namespace Kistl.Client.Models
                             Type = ColumnDisplayModel.ColumnType.MethodModel
                         })
                     )
-                .ToList();
+                .ToList());
+            this.Columns.CollectionChanged += (s,e) => OnUpdate();
         }
 
         public void BuildColumns(Kistl.App.Base.CompoundObject cls, Mode mode)
@@ -242,5 +244,16 @@ namespace Kistl.Client.Models
             result.Add(colMdl);
             return result;
         }
+
+        protected void OnUpdate()
+        {
+            var temp = Update;
+            if (temp != null)
+            {
+                temp(this, EventArgs.Empty);
+            }
+        }
+
+        public event EventHandler Update;
     }
 }
