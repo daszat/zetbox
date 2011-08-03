@@ -131,6 +131,18 @@
     <Compile Include="Presentables\Calendar\TimeSlotItemViewModel.cs" />
     <Compile Include="Presentables\Calendar\WeekCalendarViewModel.cs" />
     <Compile Include="Presentables\FilterViewModels\DateRangeFilterViewModel.cs" />
+    <Compile Include="Presentables\KistlBase\FilterListEntryViewModel.cs" />
+    <Compile Include="Presentables\KistlBase\FilterListEntryViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FilterListEntryViewModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentables\KistlBase\FilterListViewModel.cs" />
+    <Compile Include="Presentables\KistlBase\FilterListViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FilterListViewModelResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Presentables\SimpleDataObjectEditorTaskViewModelResources1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -329,6 +341,16 @@
     <EmbeddedResource Include="Presentables\CacheDebuggerViewModelResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>CacheDebuggerViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\KistlBase\FilterListEntryViewModelResources.de.resx" />
+    <EmbeddedResource Include="Presentables\KistlBase\FilterListEntryViewModelResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>FilterListEntryViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\KistlBase\FilterListViewModelResources.de.resx" />
+    <EmbeddedResource Include="Presentables\KistlBase\FilterListViewModelResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>FilterListViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentables\SimpleDataObjectEditorTaskViewModelResources.de.resx" />
     <EmbeddedResource Include="Presentables\SimpleDataObjectEditorTaskViewModelResources.resx">

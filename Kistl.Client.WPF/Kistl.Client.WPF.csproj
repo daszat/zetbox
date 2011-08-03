@@ -169,6 +169,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\KistlBase\FilterListDisplay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\KistlBase\FilterListEntryDisplay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\KistlBase\InstanceListElementCount.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -535,6 +543,12 @@
     </Compile>
     <Compile Include="View\Filters\DateRangeFilterEditor.xaml.cs">
       <DependentUpon>DateRangeFilterEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\KistlBase\FilterListDisplay.xaml.cs">
+      <DependentUpon>FilterListDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\KistlBase\FilterListEntryDisplay.xaml.cs">
+      <DependentUpon>FilterListEntryDisplay.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\KistlBase\InstanceCollectionBase.cs" />
     <Compile Include="View\KistlBase\InstanceListElementCount.xaml.cs">

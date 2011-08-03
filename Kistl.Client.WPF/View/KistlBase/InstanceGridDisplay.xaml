@@ -20,22 +20,12 @@
                     Executed="RefreshCommand_Executed" />
   </local:InstanceGridBaseDisplay.CommandBindings>
   <DockPanel x:Name="ctrlInstanceList">
-    <StackPanel DockPanel.Dock="Top"
-                Visibility="{Binding ShowFilter, Converter={StaticResource BooleanToVisibilityConverter}}"
-                Margin="0 0 0 10">
-      <StackPanel.InputBindings>
-        <KeyBinding Key="Return"
-                    Command="NavigationCommands.Refresh" />
-      </StackPanel.InputBindings>
-      <ItemsControl ItemsSource="{Binding FilterViewModels}">
-        <ItemsControl.ItemTemplate>
-          <DataTemplate>
-            <ContentPresenter Content="{Binding}"
-                              ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
-          </DataTemplate>
-        </ItemsControl.ItemTemplate>
-      </ItemsControl>
-    </StackPanel>
+    <ContentPresenter DockPanel.Dock="Top"
+                  Content="{Binding FilterList}"
+                  Visibility="{Binding ShowFilter, Converter={StaticResource BooleanToVisibilityConverter}}"
+                  ContentTemplateSelector="{StaticResource defaultTemplateSelector}"
+                  Focusable="False"
+                  Margin="0 0 0 10"/>
 
     <ctrls:WorkaroundToolBar DockPanel.Dock="Top"
                              ItemsSource="{Binding Commands}"

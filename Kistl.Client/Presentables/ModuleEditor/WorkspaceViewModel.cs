@@ -90,32 +90,32 @@ namespace Kistl.Client.Presentables.ModuleEditor
                     // Object Classes
                     lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this, typeof(ObjectClass).GetObjectClass(FrozenContext), () => DataContext.GetQuery<ObjectClass>().OrderBy(i => i.Name));
                     SetupViewModel(lstMdl);
-                    lstMdl.Filter.Add(new ConstantValueFilterModel("Module = @0", CurrentModule));
-                    lstMdl.Filter.Add(new ToStringFilterModel(FrozenContext));
+                    lstMdl.AddFilter(new ConstantValueFilterModel("Module = @0", CurrentModule));
+                    lstMdl.AddFilter(new ToStringFilterModel(FrozenContext));
                     lst.Add(lstMdl);
 
                     // Interface
                     lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this, typeof(Interface).GetObjectClass(FrozenContext), () => DataContext.GetQuery<Interface>().OrderBy(i => i.Name));
                     SetupViewModel(lstMdl);
-                    lstMdl.Filter.Add(new ConstantValueFilterModel("Module = @0", CurrentModule));
+                    lstMdl.AddFilter(new ConstantValueFilterModel("Module = @0", CurrentModule));
                     lst.Add(lstMdl);
 
                     // Enums
                     lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this, typeof(Enumeration).GetObjectClass(FrozenContext), () => DataContext.GetQuery<Enumeration>().OrderBy(i => i.Name));
                     SetupViewModel(lstMdl);
-                    lstMdl.Filter.Add(new ConstantValueFilterModel("Module = @0", CurrentModule));
+                    lstMdl.AddFilter(new ConstantValueFilterModel("Module = @0", CurrentModule));
                     lst.Add(lstMdl);
 
                     // CompoundObject
                     lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this, typeof(CompoundObject).GetObjectClass(FrozenContext), () => DataContext.GetQuery<CompoundObject>().OrderBy(i => i.Name));
                     SetupViewModel(lstMdl);
-                    lstMdl.Filter.Add(new ConstantValueFilterModel("Module = @0", CurrentModule));
+                    lstMdl.AddFilter(new ConstantValueFilterModel("Module = @0", CurrentModule));
                     lst.Add(lstMdl);
 
                     // Assembly
                     lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this, typeof(Assembly).GetObjectClass(FrozenContext), () => DataContext.GetQuery<Assembly>().OrderBy(i => i.Name));
                     SetupViewModel(lstMdl);
-                    lstMdl.Filter.Add(new ConstantValueFilterModel("Module = @0", CurrentModule));
+                    lstMdl.AddFilter(new ConstantValueFilterModel("Module = @0", CurrentModule));
                     lstMdl.Commands.Add(ViewModelFactory.CreateViewModel<SimpleItemCommandViewModel<DataObjectViewModel>.Factory>().Invoke(DataContext,
                         this,
                         "Refresh TypeRefs", "Refreshes the TypeRefs, ViewDescriptors and ViewModelDescriptors",
@@ -142,14 +142,14 @@ namespace Kistl.Client.Presentables.ModuleEditor
                     // TypeRefs
                     lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this, typeof(TypeRef).GetObjectClass(FrozenContext), () => DataContext.GetQuery<TypeRef>().OrderBy(i => i.FullName));
                     SetupViewModel(lstMdl);
-                    lstMdl.Filter.Add(new ConstantValueFilterModel("Assembly.Module = @0", CurrentModule));
-                    lstMdl.Filter.Add(new ToStringFilterModel(FrozenContext));
+                    lstMdl.AddFilter(new ConstantValueFilterModel("Assembly.Module = @0", CurrentModule));
+                    lstMdl.AddFilter(new ToStringFilterModel(FrozenContext));
                     lst.Add(lstMdl);
 
                     // Application
                     lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this, typeof(Application).GetObjectClass(FrozenContext), () => DataContext.GetQuery<Application>().OrderBy(i => i.Name));
                     SetupViewModel(lstMdl);
-                    lstMdl.Filter.Add(new ConstantValueFilterModel("Module = @0", CurrentModule));
+                    lstMdl.AddFilter(new ConstantValueFilterModel("Module = @0", CurrentModule));
                     lst.Add(lstMdl);
 
                     // NavigationScreens
@@ -160,24 +160,24 @@ namespace Kistl.Client.Presentables.ModuleEditor
                     lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this, typeof(ViewDescriptor).GetObjectClass(FrozenContext), () => DataContext.GetQuery<ViewDescriptor>().OrderBy(i => i.ControlKind.Name));
                     SetupViewModel(lstMdl);
                     lstMdl.EnableAutoFilter = false;
-                    lstMdl.Filter.Add(new ConstantValueFilterModel("Module = @0", CurrentModule));
-                    lstMdl.Filter.Add(new ToStringFilterModel(FrozenContext));
+                    lstMdl.AddFilter(new ConstantValueFilterModel("Module = @0", CurrentModule));
+                    lstMdl.AddFilter(new ToStringFilterModel(FrozenContext));
                     lst.Add(lstMdl);
 
                     // ViewModelDescriptor
                     lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this, typeof(ViewModelDescriptor).GetObjectClass(FrozenContext), () => DataContext.GetQuery<ViewModelDescriptor>().OrderBy(i => i.Description));
                     SetupViewModel(lstMdl);
                     lstMdl.EnableAutoFilter = false;
-                    lstMdl.Filter.Add(new ConstantValueFilterModel("Module = @0", CurrentModule));
-                    lstMdl.Filter.Add(new ToStringFilterModel(FrozenContext));
+                    lstMdl.AddFilter(new ConstantValueFilterModel("Module = @0", CurrentModule));
+                    lstMdl.AddFilter(new ToStringFilterModel(FrozenContext));
                     lst.Add(lstMdl);
 
                     // ServiceDescriptor
                     lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this, typeof(ServiceDescriptor).GetObjectClass(FrozenContext), () => DataContext.GetQuery<ServiceDescriptor>().OrderBy(i => i.Description));
                     SetupViewModel(lstMdl);
                     lstMdl.EnableAutoFilter = false;
-                    lstMdl.Filter.Add(new ConstantValueFilterModel("Module = @0", CurrentModule));
-                    lstMdl.Filter.Add(new ToStringFilterModel(FrozenContext));
+                    lstMdl.AddFilter(new ConstantValueFilterModel("Module = @0", CurrentModule));
+                    lstMdl.AddFilter(new ToStringFilterModel(FrozenContext));
                     lst.Add(lstMdl);
 
                     // ControlKinds
@@ -188,22 +188,22 @@ namespace Kistl.Client.Presentables.ModuleEditor
                     lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this, typeof(Icon).GetObjectClass(FrozenContext), () => DataContext.GetQuery<Icon>().OrderBy(i => i.IconFile));
                     SetupViewModel(lstMdl);
                     lstMdl.EnableAutoFilter = false;
-                    lstMdl.Filter.Add(new ConstantValueFilterModel("Module = @0", CurrentModule));
-                    lstMdl.Filter.Add(new ToStringFilterModel(FrozenContext));
+                    lstMdl.AddFilter(new ConstantValueFilterModel("Module = @0", CurrentModule));
+                    lstMdl.AddFilter(new ToStringFilterModel(FrozenContext));
                     lst.Add(lstMdl);
 
                     // Relation
                     lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this, typeof(Relation).GetObjectClass(FrozenContext), () => DataContext.GetQuery<Relation>().OrderBy(i => i.Description));
                     SetupViewModel(lstMdl);
                     lstMdl.EnableAutoFilter = false;
-                    lstMdl.Filter.Add(new ConstantValueFilterModel("Module = @0", CurrentModule));
-                    lstMdl.Filter.Add(new ToStringFilterModel(FrozenContext));
+                    lstMdl.AddFilter(new ConstantValueFilterModel("Module = @0", CurrentModule));
+                    lstMdl.AddFilter(new ToStringFilterModel(FrozenContext));
                     lst.Add(lstMdl);
 
                     // Sequences
                     lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this, typeof(Sequence).GetObjectClass(FrozenContext), () => DataContext.GetQuery<Sequence>().OrderBy(i => i.Description));
                     SetupViewModel(lstMdl);
-                    lstMdl.Filter.Add(new ConstantValueFilterModel("Module = @0", CurrentModule));
+                    lstMdl.AddFilter(new ConstantValueFilterModel("Module = @0", CurrentModule));
                     lst.Add(lstMdl);
 
 

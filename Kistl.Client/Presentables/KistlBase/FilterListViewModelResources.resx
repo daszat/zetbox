@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,37 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ExportContainerCommand" xml:space="preserve">
-    <value>Exportieren</value>
-  </data>
-  <data name="ExportContainerCommand_Tooltip" xml:space="preserve">
-    <value>Exportiert die aktuelle Liste</value>
-  </data>
-  <data name="ExportCSVCommand" xml:space="preserve">
-    <value>Exportieren</value>
-  </data>
-  <data name="ExportCSVCommand_Tooltip" xml:space="preserve">
-    <value>Export als CSV nach Excel</value>
-  </data>
-  <data name="InstancesCountAsText" xml:space="preserve">
-    <value>Datensätze</value>
-  </data>
   <data name="Name" xml:space="preserve">
-    <value>Liste der {0}</value>
-  </data>
-  <data name="PrintCommand" xml:space="preserve">
-    <value>Drucken</value>
-  </data>
-  <data name="PrintCommand_Tooltip" xml:space="preserve">
-    <value>Druckt die aktuelle Liste aus</value>
-  </data>
-  <data name="InstancesCountWarning" xml:space="preserve">
-    <value>Warnung! Nicht alle Datensätze wurden geladen</value>
-  </data>
-  <data name="AddFilterCommand" xml:space="preserve">
-    <value>Filter hinzufügen</value>
-  </data>
-  <data name="AddFilterCommand_Tooltip" xml:space="preserve">
-    <value>Neuen Filter hinzufügen</value>
+    <value>List of filter</value>
   </data>
 </root>

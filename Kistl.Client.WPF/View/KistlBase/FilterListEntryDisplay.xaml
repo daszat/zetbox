@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="Kistl.Client.WPF.View.KistlBase.FilterListEntryDisplay"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:tk="clr-namespace:Kistl.Client.WPF.Toolkit;assembly=Kistl.Client.WPF.Toolkit"
+             xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit">
+    <DockPanel>
+      <ctrls:CommandButton DockPanel.Dock="Right"
+                           CommandViewModel="{Binding RemoveCommand}"
+                           Style="{StaticResource ImageButton}"
+                           MaxHeight="28"/>
+
+      <ContentPresenter Content="{Binding FilterViewModel}"
+                        ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
+    </DockPanel>
+</UserControl>

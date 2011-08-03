@@ -144,4 +144,10 @@
   <data name="InstancesCountWarning" xml:space="preserve">
     <value>Warning! Not all items has been loaded.</value>
   </data>
+  <data name="AddFilterCommand" xml:space="preserve">
+    <value>Add filter</value>
+  </data>
+  <data name="AddFilterCommand_Tooltip" xml:space="preserve">
+    <value>Add a new custom filter</value>
+  </data>
 </root>

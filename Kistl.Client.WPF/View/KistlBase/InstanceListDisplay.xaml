@@ -14,23 +14,12 @@
                     Executed="RefreshCommand_Executed" />
   </local:InstanceListBaseDisplay.CommandBindings>
   <DockPanel x:Name="ctrlInstanceList">
-    <StackPanel DockPanel.Dock="Top"
-                Visibility="{Binding ShowFilter, Converter={StaticResource BooleanToVisibilityConverter}}"
-                Focusable="False"
-                Margin="0 0 0 10">
-      <StackPanel.InputBindings>
-        <KeyBinding Key="Return"
-                    Command="NavigationCommands.Refresh" />
-      </StackPanel.InputBindings>
-      <ItemsControl ItemsSource="{Binding FilterViewModels}" Focusable="False">
-        <ItemsControl.ItemTemplate>
-          <DataTemplate>
-            <ContentPresenter Content="{Binding}"
-                              ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
-          </DataTemplate>
-        </ItemsControl.ItemTemplate>
-      </ItemsControl>
-    </StackPanel>
+    <ContentPresenter DockPanel.Dock="Top"
+                      Content="{Binding FilterList}"
+                      Visibility="{Binding ShowFilter, Converter={StaticResource BooleanToVisibilityConverter}}"
+                      ContentTemplateSelector="{StaticResource defaultTemplateSelector}"
+                      Focusable="False"
+                      Margin="0 0 0 10"/>
 
     <ctrls:WorkaroundToolBar DockPanel.Dock="Top"
                              ItemsSource="{Binding Commands}"
@@ -39,7 +28,7 @@
         <DataTemplate DataType="{x:Type viewmdl:CommandViewModel}">
           <ctrls:CommandButton CommandViewModel="{Binding}"
                                CommandParameter="{Binding DataContext.SelectedItems, RelativeSource={RelativeSource AncestorType={x:Type clientKistlBase:InstanceListDisplay}}}"
-                               Style="{StaticResource ImageToolbarButton}" />
+                               Style="{StaticResource ImageToolbarButton}"/>
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewmdl:ContainerCommand}">
           <Menu>

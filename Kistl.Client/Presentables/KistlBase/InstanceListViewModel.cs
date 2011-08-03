@@ -77,6 +77,10 @@ namespace Kistl.Client.Presentables.KistlBase
             }
 
             this.workingCtxFactory = workingCtxFactory;
+            this._filterList = ViewModelFactory.CreateViewModel<FilterListViewModel.Factory>().Invoke(DataContext, this, _type);
+            this._filterList.ExecuteFilter += (s, e) => ReloadInstances();
+            this._filterList.ExecutePostFilter += (s, e) => ExecutePostFilter();
+            this._filterList.PropertyChanged += new PropertyChangedEventHandler(_filterList_PropertyChanged);
         }
 
         #region Kind Management
@@ -121,8 +125,29 @@ namespace Kistl.Client.Presentables.KistlBase
         }
         #endregion
 
-        #region Filter Collection
-        private bool _enableAutoFilter = true;
+        #region Filter
+        private FilterListViewModel _filterList;
+        public FilterListViewModel FilterList
+        {
+            get
+            {
+                return _filterList;
+            }
+        }
+
+        void _filterList_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+           switch(e.PropertyName)
+           {
+               case "EnableAutoFilter":
+               case "RespectRequiredFilter":
+               case "ShowFilter":
+               case "Filter":
+               case "FilterViewModels":
+                   OnPropertyChanged(e.PropertyName);
+                   break;
+           }
+        }
 
         /// <summary>
         /// Enables the auto filter feature. This is the default. Setting this property will cause the filter collection to be cleared.
@@ -131,39 +156,14 @@ namespace Kistl.Client.Presentables.KistlBase
         {
             get
             {
-                return _enableAutoFilter;
+                return _filterList.EnableAutoFilter;
             }
             set
             {
-                if (_enableAutoFilter != value)
-                {
-                    _enableAutoFilter = value;
-                    _filter = null;
-                    OnPropertyChanged("EnableAutoFilter");
-                    OnPropertyChanged("Filter");
-                    OnPropertyChanged("ShowFilter");
-                }
+                _filterList.EnableAutoFilter = value;
             }
         }
 
-        private bool? _showFilter = null;
-        public bool ShowFilter
-        {
-            get
-            {
-                return _showFilter ?? Filter.Count > 0;
-            }
-            set
-            {
-                if (_showFilter != value)
-                {
-                    _showFilter = value;
-                    OnPropertyChanged("ShowFilter");
-                }
-            }
-        }
-
-        private bool _RespectRequiredFilter = true;
         /// <summary>
         /// If set to false, no filter is required. Default value is true. Use this setting if a small, preselected list (query) is provides as data source.
         /// </summary>
@@ -171,110 +171,50 @@ namespace Kistl.Client.Presentables.KistlBase
         {
             get
             {
-                return _RespectRequiredFilter;
+                return _filterList.RespectRequiredFilter;
             }
             set
             {
-                if (_RespectRequiredFilter != value)
-                {
-                    _RespectRequiredFilter = value;
-                    OnPropertyChanged("RespectRequiredFilter");
-                }
+                _filterList.RespectRequiredFilter = value;
             }
         }
 
-        private ObservableCollection<IFilterModel> _filter = null;
-        public ICollection<IFilterModel> Filter
+        public bool ShowFilter
         {
             get
             {
-                if (_filter == null)
-                {
-                    _filter = new ObservableCollection<IFilterModel>();
-                    // React on changes -> attach to FilterChanged Event
-                    _filter.CollectionChanged += new NotifyCollectionChangedEventHandler(_filter_CollectionChanged);
-
-                    if (EnableAutoFilter)
-                    {
-                        // Resolve default property filter
-                        var t = _type;
-                        while (t != null)
-                        {
-                            // Add ObjectClass filter expressions
-                            foreach (var cfc in t.FilterConfigurations)
-                            {
-                                _filter.Add(cfc.CreateFilterModel());
-                            }
-
-                            // Add Property filter expressions
-                            foreach (var prop in t.Properties.Where(p => p.FilterConfiguration != null))
-                            {
-                                _filter.Add(prop.FilterConfiguration.CreateFilterModel());
-                            }
-                            if (t is ObjectClass)
-                            {
-                                t = ((ObjectClass)t).BaseObjectClass;
-                            }
-                        }
-
-                        if (_filter.Count == 0)
-                        {
-                            // Add default ToString Filter only if there is no filter configuration
-                            _filter.Add(new ToStringFilterModel(FrozenContext));
-                        }
-                    }
-                }
-                return _filter;
+                return _filterList.ShowFilter;
             }
-        }
-
-        void _filter_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            if (e.NewItems != null)
+            set
             {
-                foreach (var item in e.NewItems.OfType<IUIFilterModel>())
-                {
-                    // attach change events
-                    item.FilterChanged += new EventHandler(delegate(object s, EventArgs a)
-                    {
-                        var f = s as FilterModel;
-                        if (f == null || !f.RefreshOnFilterChanged) return;
-
-                        if (f.IsServerSideFilter)
-                        {
-                            ReloadInstances();
-                        }
-                        else
-                        {
-                            ExecutePostFilter();
-                        }
-                    });
-                }
+                _filterList.ShowFilter = value;
             }
-
-            _FilterViewModels = null;
-            OnPropertyChanged("FilterViewModels");
-            OnPropertyChanged("ShowFilter");
         }
 
-        private List<FilterViewModel> _FilterViewModels = null;
-        public IEnumerable<FilterViewModel> FilterViewModels
+        public ReadOnlyObservableCollection<IFilterModel> Filter
         {
             get
             {
-                if (_FilterViewModels == null)
-                {
-                    _FilterViewModels = new List<FilterViewModel>(Filter
-                        .OfType<IUIFilterModel>()
-                        .Select(f =>
-                        {
-                            var result = ViewModelFactory.CreateViewModel<FilterViewModel.Factory>(f.ViewModelType).Invoke(DataContext, this, f);
-                            result.RequestedKind = f.RequestedKind;
-                            return result;
-                        }));
-                }
-                return _FilterViewModels;
+                return _filterList.Filter;
             }
+        }
+
+        public ReadOnlyObservableCollection<FilterViewModel> FilterViewModels
+        {
+            get
+            {
+                return _filterList.FilterViewModels;
+            }
+        }
+
+        public void AddFilter(IFilterModel mdl)
+        {
+            _filterList.AddFilter(mdl);
+        }
+
+        public void RemoveFilter(IFilterModel mdl)
+        {
+            _filterList.RemoveFilter(mdl);
         }
         #endregion
 
@@ -713,7 +653,6 @@ namespace Kistl.Client.Presentables.KistlBase
                 return _type;
             }
         }
-
 
         private Kistl.Client.Presentables.ObjectClassViewModel _dataTypeMdl = null;
         public Kistl.Client.Presentables.ObjectClassViewModel DataTypeViewModel
@@ -1284,12 +1223,7 @@ namespace Kistl.Client.Presentables.KistlBase
         private Func<IQueryable> _query;
         protected virtual IQueryable GetQuery()
         {
-            var result = _query();
-
-            foreach (var f in Filter.Where(f => f.Enabled))
-            {
-                result = f.GetQuery(result);
-            }
+            var result = FilterList.AppendFilter(_query());
 
             if (!string.IsNullOrEmpty(_sortProperty))
             {
@@ -1338,7 +1272,7 @@ namespace Kistl.Client.Presentables.KistlBase
         private List<DataObjectViewModel> LoadInstancesCore()
         {
             // Can execute?
-            if (RespectRequiredFilter && Filter.Count(f => !f.Enabled && f.Required) > 0)
+            if (FilterList.RespectRequiredFilter && FilterList.Filter.Count(f => !f.Enabled && f.Required) > 0)
             {
                 // return previous _instancesCache or empty list
                 return _instancesCache ?? new List<DataObjectViewModel>();
@@ -1386,15 +1320,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 }
             }
 
-            var tmp = new List<DataObjectViewModel>(this.InstancesCache);
-            // poor man's full text search
-            foreach (var filter in Filter.Where(i => !i.IsServerSideFilter))
-            {
-                if (filter.Enabled)
-                {
-                    tmp = filter.GetResult(tmp).Cast<DataObjectViewModel>().ToList();
-                }
-            }
+            var tmp = FilterList.AppendPostFilter(new List<DataObjectViewModel>(this.InstancesCache));
 
             // Sort
             if (!string.IsNullOrEmpty(_sortProperty))

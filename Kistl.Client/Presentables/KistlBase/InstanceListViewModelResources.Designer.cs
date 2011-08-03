@@ -61,6 +61,24 @@ namespace Kistl.Client.Presentables.KistlBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add filter.
+        /// </summary>
+        internal static string AddFilterCommand {
+            get {
+                return ResourceManager.GetString("AddFilterCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add a new custom filter.
+        /// </summary>
+        internal static string AddFilterCommand_Tooltip {
+            get {
+                return ResourceManager.GetString("AddFilterCommand_Tooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Export.
         /// </summary>
         internal static string ExportContainerCommand {

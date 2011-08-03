@@ -109,7 +109,7 @@ namespace Kistl.Client.Presentables.KistlBase
                     null);
             selTaskVMdl.ListViewModel.ShowCommands = false;
             selTaskVMdl.ListViewModel.EnableAutoFilter = false;
-            selTaskVMdl.ListViewModel.Filter.Add(new ToStringFilterModel(FrozenContext));
+            selTaskVMdl.ListViewModel.AddFilter(new ToStringFilterModel(FrozenContext));
             ViewModelFactory.ShowModel(selTaskVMdl, true);
         }
 

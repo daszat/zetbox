@@ -83,6 +83,11 @@ namespace Kistl.Client.Presentables.FilterViewModels
     {
         public new delegate FilterViewModel Factory(IKistlContext dataCtx, ViewModel parent, IUIFilterModel mdl);
 
+        public static FilterViewModel Fetch(IViewModelFactory f, IKistlContext dataCtx, ViewModel parent, IUIFilterModel mdl)
+        {
+            return (FilterViewModel)dataCtx.GetViewModelCache(f.PerfCounter).LookupOrCreate(mdl, () => f.CreateViewModel<FilterViewModel.Factory>(mdl.ViewModelType).Invoke(dataCtx, parent, mdl));
+        }
+
         public FilterViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IUIFilterModel mdl)
             : base(dependencies, dataCtx, parent)
         {
@@ -154,7 +159,28 @@ namespace Kistl.Client.Presentables.FilterViewModels
         {
             get
             {
-                return Filter.Required;
+                return RespectRequiredFilter && Filter.Required;
+            }
+        }
+
+        private bool _RespectRequiredFilter = true;
+        /// <summary>
+        /// If set to false, no filter is required. Default value is true. Use this setting if a small, preselected list (query) is provides as data source.
+        /// </summary>
+        public bool RespectRequiredFilter
+        {
+            get
+            {
+                return _RespectRequiredFilter;
+            }
+            set
+            {
+                if (_RespectRequiredFilter != value)
+                {
+                    _RespectRequiredFilter = value;
+                    OnPropertyChanged("RespectRequiredFilter");
+                    OnPropertyChanged("Required");
+                }
             }
         }
     }
