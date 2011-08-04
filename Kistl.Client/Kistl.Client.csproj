@@ -143,6 +143,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FilterListViewModelResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Presentables\KistlBase\PropertySelectionTaskViewModel.cs" />
     <Compile Include="Presentables\SimpleDataObjectEditorTaskViewModelResources1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -235,7 +236,6 @@
     <Compile Include="Presentables\ModuleEditor\TreeItemInstanceListViewModel.cs" />
     <Compile Include="Presentables\ParameterInputTaskViewModel.cs" />
     <Compile Include="Presentables\SchemaMigration\DestinationPropertyViewModel.cs" />
-    <Compile Include="Presentables\SchemaMigration\SelectDestinationPropertyViewModel.cs" />
     <Compile Include="Presentables\ValueInputTaskViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

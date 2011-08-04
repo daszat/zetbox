@@ -1,9 +1,9 @@
-﻿<ctrls:WindowView x:Class="Kistl.Client.WPF.View.SchemaMigration.SelectDestinationPropertyDialog"
+﻿<ctrls:WindowView x:Class="Kistl.Client.WPF.View.PropertySelectionTaskDialog"
                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                   xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"
                   xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
-                  xmlns:local="clr-namespace:Kistl.Client.Presentables.SchemaMigration;assembly=Kistl.Client"
+                  xmlns:local="clr-namespace:Kistl.Client.Presentables.KistlBase;assembly=Kistl.Client"
                   Title="Select Destination Property"
                   ResizeMode="CanResize"
                   Height="400"
@@ -34,7 +34,7 @@
             ItemsSource="{Binding PossibleValues}"
                   SelectedItemChanged="TreeView_SelectedItemChanged">
             <TreeView.Resources>
-                <HierarchicalDataTemplate DataType="{x:Type local:PossibleDestPropertyViewModel}"
+                <HierarchicalDataTemplate DataType="{x:Type local:SelectedPropertyViewModel}"
                                           ItemsSource="{Binding PossibleValues}">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="{Binding Converter={StaticResource IconConverter}}"

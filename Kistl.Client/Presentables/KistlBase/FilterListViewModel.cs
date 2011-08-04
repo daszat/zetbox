@@ -301,26 +301,16 @@ namespace Kistl.Client.Presentables.KistlBase
 
         public void AddFilter()
         {
-            var dlg = ViewModelFactory.CreateViewModel<DataObjectSelectionTaskViewModel.Factory>()
+            var dlg = ViewModelFactory.CreateViewModel<PropertySelectionTaskViewModel.Factory>()
                 .Invoke(DataContext,
                     this,
-                    typeof(Property).GetObjectClass(FrozenContext),
-                    () => _type.AndParents(obj => obj.Properties, obj => obj.BaseObjectClass).AsQueryable(),
-                    sel =>
+                    _type,
+                    prop =>
                     {
-                        if (sel != null)
-                        {
-                            var prop = (Property)sel.Object;
-                            AddFilter(FilterModel.FromProperty(FrozenContext, prop), true);
-                            OnUserFilterAdded(prop);
-                        }
-                    },
-                    null);
-            dlg.ListViewModel.EnableAutoFilter = false;
-            dlg.ListViewModel.AddFilter(new ToStringFilterModel(FrozenContext));
-            dlg.ListViewModel.ViewMethod = InstanceListViewMethod.List;
-            dlg.ListViewModel.AllowAddNew = false;
-            dlg.ListViewModel.AllowDelete = false;
+                        AddFilter(FilterModel.FromProperty(FrozenContext, prop.Last()), true);
+                        OnUserFilterAdded(prop.Last());
+                    });
+            dlg.FollowRelations = true;
             ViewModelFactory.ShowDialog(dlg);
         }
 

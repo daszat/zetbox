@@ -173,7 +173,6 @@ namespace Kistl.Client.Models
                         })
                     )
                 .ToList());
-            this.Columns.CollectionChanged += (s,e) => OnUpdate();
         }
 
         public void BuildColumns(Kistl.App.Base.CompoundObject cls, Mode mode)
@@ -244,16 +243,5 @@ namespace Kistl.Client.Models
             result.Add(colMdl);
             return result;
         }
-
-        protected void OnUpdate()
-        {
-            var temp = Update;
-            if (temp != null)
-            {
-                temp(this, EventArgs.Empty);
-            }
-        }
-
-        public event EventHandler Update;
     }
 }

@@ -7,6 +7,7 @@ using Kistl.Client.Models;
 using Kistl.App.Base;
 using System.Collections.ObjectModel;
 using ZBox.App.SchemaMigration;
+using Kistl.Client.Presentables.KistlBase;
 
 namespace Kistl.Client.Presentables.SchemaMigration
 {
@@ -80,7 +81,7 @@ namespace Kistl.Client.Presentables.SchemaMigration
 
         public void Select()
         {
-            var dlg = ViewModelFactory.CreateViewModel<SelectDestinationPropertyViewModel.Factory>().Invoke(DataContext, Parent, SourceColumn, (result) =>
+            var dlg = ViewModelFactory.CreateViewModel<PropertySelectionTaskViewModel.Factory>().Invoke(DataContext, Parent, SourceColumn.SourceTable.DestinationObjectClass, (result) =>
             {
                 if (result != null)
                 {
@@ -91,6 +92,7 @@ namespace Kistl.Client.Presentables.SchemaMigration
                     }
                 }
             });
+            dlg.FollowCompundObjects = true;
 
             ViewModelFactory.ShowModel(dlg, true);
         }

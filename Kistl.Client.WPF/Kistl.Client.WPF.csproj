@@ -181,6 +181,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\KistlBase\PropertySelectionTaskDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\SimpleDataObjectEditorDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -465,10 +469,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\SchemaMigration\SelectDestinationPropertyDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\SelectionDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -553,6 +553,9 @@
     <Compile Include="View\KistlBase\InstanceCollectionBase.cs" />
     <Compile Include="View\KistlBase\InstanceListElementCount.xaml.cs">
       <DependentUpon>InstanceListElementCount.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\KistlBase\PropertySelectionTaskDialog.xaml.cs">
+      <DependentUpon>PropertySelectionTaskDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\KistlBase\StringDisplay.cs" />
     <Compile Include="WpfToolkitResources.Designer.cs">
@@ -740,9 +743,6 @@
     </Compile>
     <Compile Include="View\SchemaMigration\DestinationPropertyEditor.xaml.cs">
       <DependentUpon>DestinationPropertyEditor.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\SchemaMigration\SelectDestinationPropertyDialog.xaml.cs">
-      <DependentUpon>SelectDestinationPropertyDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SelectionDialog.xaml.cs">
       <DependentUpon>SelectionDialog.xaml</DependentUpon>
