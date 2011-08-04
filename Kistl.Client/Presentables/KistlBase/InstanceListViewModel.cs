@@ -138,25 +138,22 @@ namespace Kistl.Client.Presentables.KistlBase
 
         void _filterList_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-           switch(e.PropertyName)
-           {
-               case "EnableAutoFilter":
-               case "RespectRequiredFilter":
-               case "ShowFilter":
-               case "Filter":
-               case "FilterViewModels":
-                   OnPropertyChanged(e.PropertyName);
-                   break;
-           }
+            switch (e.PropertyName)
+            {
+                case "EnableAutoFilter":
+                case "RespectRequiredFilter":
+                case "ShowFilter":
+                case "Filter":
+                case "FilterViewModels":
+                    OnPropertyChanged(e.PropertyName);
+                    break;
+            }
         }
 
         void _filterList_UserFilterAdded(object sender, UserFilterAddedEventArgs e)
         {
-            var prop = e.Property;
-            foreach (var c in GridDisplayConfiguration.CreateColumnDisplayModels(GridDisplayConfiguration.Mode.ReadOnly, prop, string.Empty, string.Empty))
-            {
-                DisplayedColumns.Columns.Add(c);
-            }
+            if (DisplayedProperties.Contains(e.Property)) return;
+            DisplayedColumns.Columns.Add(GridDisplayConfiguration.CreateColumnDisplayModel(GridDisplayConfiguration.Mode.ReadOnly, e.Property, string.Empty, string.Empty));
         }
 
         /// <summary>
@@ -479,6 +476,51 @@ namespace Kistl.Client.Presentables.KistlBase
             }
 
             ReloadInstances();
+        }
+
+        private ICommandViewModel _SelectColumnsCommand = null;
+        public ICommandViewModel SelectColumnsCommand
+        {
+            get
+            {
+                if (_SelectColumnsCommand == null)
+                {
+                    _SelectColumnsCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext,
+                        null, // Hide Ardorner
+                        InstanceListViewModelResources.SelectColumnsCommand,
+                        InstanceListViewModelResources.SelectColumnsCommand_Tooltip,
+                        SelectColumns,
+                        null);
+                }
+                return _SelectColumnsCommand;
+            }
+        }
+
+        public void SelectColumns()
+        {
+            var dlg = ViewModelFactory.CreateViewModel<PropertySelectionTaskViewModel.Factory>()
+                .Invoke(DataContext,
+                    this,
+                    _type,
+                    props => { });
+            dlg.FollowRelations = true;
+            dlg.MultiSelect = true;
+            dlg.UpdateInitialSelectedProperties(this.DisplayedProperties);
+            dlg.SelectedPropertySelectionChanged += (s, e) =>
+            {
+                var prop = e.Item.Property;
+                if (e.Item.IsSelected)
+                {
+                    DisplayedColumns.Columns.Add(GridDisplayConfiguration.CreateColumnDisplayModel(GridDisplayConfiguration.Mode.ReadOnly, prop, string.Empty, string.Empty));
+                    ViewMethod = InstanceListViewMethod.Details;
+                }
+                else
+                {
+                    var col = DisplayedColumns.Columns.FirstOrDefault(c => c.Property == prop);
+                    if (col != null) DisplayedColumns.Columns.Remove(col);
+                }
+            };
+            ViewModelFactory.ShowDialog(dlg);
         }
         #endregion
 
@@ -1210,6 +1252,18 @@ namespace Kistl.Client.Presentables.KistlBase
                 return _displayedColumns;
             }
         }
+
+        /// <summary>
+        /// Properties displayed in <see cref="DisplayedColumns"/>
+        /// </summary>
+        public IEnumerable<Property> DisplayedProperties
+        {
+            get
+            {
+                return DisplayedColumns.Columns.Select(c => c.Property);
+            }
+        }
+
 
         public delegate void DisplayedColumnsCreatedHandler(GridDisplayConfiguration cols);
         public event DisplayedColumnsCreatedHandler DisplayedColumnsCreated;

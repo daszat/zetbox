@@ -10,41 +10,48 @@
                   Width="400"
                   xmlns:commands="clr-namespace:Kistl.Client.WPF.Commands;assembly=Kistl.Client.WPF.Toolkit"
                   commands:SmartRoutedUICommand.IsCommandSink="True">
-    <ctrls:WindowView.Resources>
-        <Style x:Key="addedMargins">
-            <Setter Property="FrameworkElement.Margin"
-                    Value="5" />
-        </Style>
-    </ctrls:WindowView.Resources>
-    <DockPanel Style="{StaticResource addedMargins}"
-               LastChildFill="True">
+  <ctrls:WindowView.Resources>
+    <Style x:Key="addedMargins">
+      <Setter Property="FrameworkElement.Margin"
+              Value="5" />
+    </Style>
+  </ctrls:WindowView.Resources>
+  <DockPanel Style="{StaticResource addedMargins}"
+             LastChildFill="True">
 
-        <UniformGrid DockPanel.Dock="Bottom"
-                     Style="{StaticResource addedMargins}"
-                     Rows="1">
-            <ctrls:CommandButton IsDefault="True"
-                                 CommandViewModel="{Binding ChooseCommand}"
-                                 Style="{StaticResource addedMargins}" />
-            <ctrls:CommandButton IsCancel="True"
-                                 CommandViewModel="{Binding CancelCommand}"
-                                 Style="{StaticResource addedMargins}" />
-        </UniformGrid>
+    <UniformGrid DockPanel.Dock="Bottom"
+                 Style="{StaticResource addedMargins}"
+                 Rows="1">
+      <ctrls:CommandButton IsDefault="True"
+                           CommandViewModel="{Binding ChooseCommand}"
+                           Style="{StaticResource addedMargins}" />
+      <ctrls:CommandButton IsCancel="True"
+                           CommandViewModel="{Binding CancelCommand}"
+                           Style="{StaticResource addedMargins}" />
+    </UniformGrid>
+    <ContentPresenter DockPanel.Dock="Top"
+                      Margin="0,0,0,5"
+                      Content="{Binding Filter, UpdateSourceTrigger=PropertyChanged}"
+                      ContentTemplateSelector="{StaticResource defaultTemplateSelector}"/>
 
-        <TreeView x:Name="treeValues"
-            ItemsSource="{Binding PossibleValues}"
-                  SelectedItemChanged="TreeView_SelectedItemChanged">
-            <TreeView.Resources>
-                <HierarchicalDataTemplate DataType="{x:Type local:SelectedPropertyViewModel}"
-                                          ItemsSource="{Binding PossibleValues}">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="{Binding Converter={StaticResource IconConverter}}"
-                               Width="14"
-                               Height="14" />
-                        <TextBlock Text="{Binding PropertyModelsByName[Name].Value}"
-                                   Margin="3,0,0,0" />
-                    </StackPanel>
-                </HierarchicalDataTemplate>
-            </TreeView.Resources>
-        </TreeView>
-    </DockPanel>
+    <TreeView x:Name="treeValues"
+        ItemsSource="{Binding PossibleValues}"
+              SelectedItemChanged="TreeView_SelectedItemChanged">
+      <TreeView.Resources>
+        <HierarchicalDataTemplate DataType="{x:Type local:SelectedPropertyViewModel}"
+                                  ItemsSource="{Binding PossibleValues}">
+          <StackPanel Orientation="Horizontal">
+            <CheckBox IsChecked="{Binding IsSelected}"
+                      IsThreeState="false"
+                      Visibility="{Binding Parent.MultiSelect, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <Image Source="{Binding Converter={StaticResource IconConverter}}"
+                   Width="14"
+                   Height="14" />
+            <TextBlock Text="{Binding PropertyModelsByName[Name].Value}"
+                       Margin="3,0,0,0" />
+          </StackPanel>
+        </HierarchicalDataTemplate>
+      </TreeView.Resources>
+    </TreeView>
+  </DockPanel>
 </ctrls:WindowView>

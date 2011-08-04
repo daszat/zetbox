@@ -65,7 +65,7 @@
           </Style>
         </ctrls:WorkaroundToolBar.Resources>
       </ctrls:WorkaroundToolBar>
-      <local:InstanceListElementCount DockPanel.Dock="Top" />
+      <local:InstanceListHeader DockPanel.Dock="Top" />
       <ctrls:ZBoxDataGrid x:Name="lst"
                           Margin="10"
                           BorderThickness="0"

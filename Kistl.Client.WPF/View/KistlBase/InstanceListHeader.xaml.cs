@@ -18,9 +18,9 @@ namespace Kistl.Client.WPF.View.KistlBase
     /// <summary>
     /// Internal only user control
     /// </summary>
-    public partial class InstanceListElementCount : UserControl
+    public partial class InstanceListHeader : UserControl
     {
-        public InstanceListElementCount()
+        public InstanceListHeader()
         {
             InitializeComponent();
         }

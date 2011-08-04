@@ -144,6 +144,11 @@
       <DependentUpon>FilterListViewModelResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Presentables\KistlBase\PropertySelectionTaskViewModel.cs" />
+    <Compile Include="Presentables\KistlBase\PropertySelectionTaskViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PropertySelectionTaskViewModelResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Presentables\SimpleDataObjectEditorTaskViewModelResources1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -351,6 +356,11 @@
     <EmbeddedResource Include="Presentables\KistlBase\FilterListViewModelResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>FilterListViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\KistlBase\PropertySelectionTaskViewModelResources.de.resx" />
+    <EmbeddedResource Include="Presentables\KistlBase\PropertySelectionTaskViewModelResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>PropertySelectionTaskViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentables\SimpleDataObjectEditorTaskViewModelResources.de.resx" />
     <EmbeddedResource Include="Presentables\SimpleDataObjectEditorTaskViewModelResources.resx">

@@ -38,15 +38,25 @@ namespace Kistl.Client.WPF.View.KistlBase
             base.OnPropertyChanged(e);
             if (ViewModel != null && e.Property == FrameworkElement.DataContextProperty)
             {
-                if (ViewModel.ViewMethod == InstanceListViewMethod.Details)
-                {
-                    WPFHelper.RefreshGridView(ListView, ViewModel.DisplayedColumns, SortPropertyNameProperty);
-                    ListView.ItemContainerStyle = Application.Current.Resources["ListViewAsGridViewItemContainerStyle"] as Style;
-
-                    ApplyInitialSortTemplates(((GridView)ListView.View).Columns.FirstOrDefault(i => GetSortPropertyName(i) == ViewModel.SortProperty));
-                }
-
+                ViewModel.PropertyChanged += (s, pce) => { if (pce.PropertyName == "ViewMethod") ApplyViewMethod(); };
+                ApplyViewMethod();
                 this.ApplyIsBusyBehaviour(ViewModel);
+            }
+        }
+
+        private void ApplyViewMethod()
+        {
+            if (ViewModel.ViewMethod == InstanceListViewMethod.Details)
+            {
+                WPFHelper.RefreshGridView(ListView, ViewModel.DisplayedColumns, SortPropertyNameProperty);
+                ListView.ItemContainerStyle = Application.Current.Resources["ListViewAsGridViewItemContainerStyle"] as Style;
+
+                ApplyInitialSortTemplates(((GridView)ListView.View).Columns.FirstOrDefault(i => GetSortPropertyName(i) == ViewModel.SortProperty));
+            }
+            else
+            {
+                ListView.ItemContainerStyle = Application.Current.Resources["ListViewItemContainerStyle"] as Style;
+                ListView.View = null; // ??
             }
         }
 

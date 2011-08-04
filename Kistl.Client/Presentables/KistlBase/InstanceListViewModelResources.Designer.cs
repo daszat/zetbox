@@ -158,5 +158,23 @@ namespace Kistl.Client.Presentables.KistlBase {
                 return ResourceManager.GetString("PrintCommand_Tooltip", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cols.
+        /// </summary>
+        internal static string SelectColumnsCommand {
+            get {
+                return ResourceManager.GetString("SelectColumnsCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select columns.
+        /// </summary>
+        internal static string SelectColumnsCommand_Tooltip {
+            get {
+                return ResourceManager.GetString("SelectColumnsCommand_Tooltip", resourceCulture);
+            }
+        }
     }
 }

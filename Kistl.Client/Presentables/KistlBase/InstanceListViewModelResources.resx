@@ -150,4 +150,10 @@
   <data name="AddFilterCommand_Tooltip" xml:space="preserve">
     <value>Add a new custom filter</value>
   </data>
+  <data name="SelectColumnsCommand" xml:space="preserve">
+    <value>Cols</value>
+  </data>
+  <data name="SelectColumnsCommand_Tooltip" xml:space="preserve">
+    <value>Select columns</value>
+  </data>
 </root>

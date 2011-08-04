@@ -305,10 +305,13 @@ namespace Kistl.Client.Presentables.KistlBase
                 .Invoke(DataContext,
                     this,
                     _type,
-                    prop =>
+                    props =>
                     {
-                        AddFilter(FilterModel.FromProperty(FrozenContext, prop.Last()), true);
-                        OnUserFilterAdded(prop.Last());
+                        if (props != null)
+                        {
+                            AddFilter(FilterModel.FromProperty(FrozenContext, props.Last()), true);
+                            OnUserFilterAdded(props.Last());
+                        }
                     });
             dlg.FollowRelations = true;
             ViewModelFactory.ShowDialog(dlg);

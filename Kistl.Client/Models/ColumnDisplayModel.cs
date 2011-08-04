@@ -37,7 +37,7 @@ namespace Kistl.Client.Models
             MethodModel,
         }
 
-        public ColumnDisplayModel()
+        internal ColumnDisplayModel()
             : this(string.Empty, string.Empty, null, ColumnType.PropertyModel)
         {
         }
@@ -88,6 +88,7 @@ namespace Kistl.Client.Models
         public ControlKind ControlKind { get; set; }
         public ControlKind GridPreEditKind { get; set; }
         public int RequestedWidth { get; set; }
+        public Property Property { get; set; }
 
         public override string ToString()
         {
@@ -161,18 +162,11 @@ namespace Kistl.Client.Models
             ShowId = cls.ShowIdInLists;
             ShowName = cls.ShowNameInLists;
 
-            this.Columns = new ObservableCollection<ColumnDisplayModel>(props
-                .SelectMany(p => CreateColumnDisplayModels(mode, p, string.Empty, string.Empty))
-                .Concat(
-                    methods
-                        .Select(m => new ColumnDisplayModel()
-                        {
-                            Header = m.GetLabel(),
-                            Name = m.Name,
-                            Type = ColumnDisplayModel.ColumnType.MethodModel
-                        })
-                    )
-                .ToList());
+            this.Columns = new ObservableCollection<ColumnDisplayModel>(
+                props.Select(p => CreateColumnDisplayModel(mode, p, string.Empty, string.Empty))
+                     .Concat(methods.Select(m => GridDisplayConfiguration.CreateColumnDisplayModel(m)))
+                     .ToList()
+            );
         }
 
         public void BuildColumns(Kistl.App.Base.CompoundObject cls, Mode mode)
@@ -217,7 +211,17 @@ namespace Kistl.Client.Models
             BuildColumns(cls, props, showMethods ? methods.ToArray() : new Method[0], mode);
         }
 
-        public static List<ColumnDisplayModel> CreateColumnDisplayModels(Mode mode, Property p, string parentLabel, string parentProp)
+        public static ColumnDisplayModel CreateColumnDisplayModel(Method m)
+        {
+            return new ColumnDisplayModel()
+            {
+                Header = m.GetLabel(),
+                Name = m.Name,
+                Type = ColumnDisplayModel.ColumnType.MethodModel
+            };
+        }
+
+        public static ColumnDisplayModel CreateColumnDisplayModel(Mode mode, Property p, string parentLabel, string parentProp)
         {
             if (p == null) throw new ArgumentNullException("p");
 
@@ -228,6 +232,7 @@ namespace Kistl.Client.Models
             {
                 Header = parentLabel + lb,
                 Name = parentProp + p.Name,
+                Property = p,
             };
             switch (mode)
             {
@@ -240,8 +245,7 @@ namespace Kistl.Client.Models
                     colMdl.GridPreEditKind = p.ValueModelDescriptor.GetDefaultGridCellPreEditorKind();
                     break;
             }
-            result.Add(colMdl);
-            return result;
+            return colMdl;
         }
     }
 }

@@ -68,7 +68,7 @@
                         ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
     </GroupBox>
 
-    <local:InstanceListElementCount DockPanel.Dock="Top" />
+    <local:InstanceListHeader DockPanel.Dock="Top" />
     <ctrls:ZBoxDataGrid x:Name="lst"
                         BorderThickness="0"
                         ItemsSource="{Binding Source={StaticResource itemsSource}}"
