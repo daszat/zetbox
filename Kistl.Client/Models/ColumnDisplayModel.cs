@@ -89,6 +89,7 @@ namespace Kistl.Client.Models
         public ControlKind GridPreEditKind { get; set; }
         public int RequestedWidth { get; set; }
         public Property Property { get; set; }
+        public App.Base.Property[] Properties { get; set; }
 
         public override string ToString()
         {
@@ -234,6 +235,7 @@ namespace Kistl.Client.Models
                 Header = string.Join(", ", p.Select(i => i.GetLabel()).ToArray()),
                 Name = string.Join(".", p.Select(i => i.Name).ToArray()),
                 Property = last,
+                Properties = p,
             };
             switch (mode)
             {

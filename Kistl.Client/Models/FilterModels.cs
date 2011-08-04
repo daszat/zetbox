@@ -69,25 +69,32 @@ namespace Kistl.Client.Models
     {
         public static FilterModel FromProperty(IFrozenContext frozenCtx, Property prop)
         {
-            if (prop is DateTimeProperty)
+            return FromProperty(frozenCtx, new[] { prop });
+        }
+
+        public static FilterModel FromProperty(IFrozenContext frozenCtx, IEnumerable<Property> props)
+        {
+            var last = props.Last();
+            var label = string.Join(", ", props.Select(i => i.GetLabel()).ToArray());
+            if (last is DateTimeProperty)
             {
-                return RangeFilterModel.Create(frozenCtx, prop.GetLabel(), FilterValueSource.FromProperty(prop), typeof(DateTime), null, null);
+                return RangeFilterModel.Create(frozenCtx, label, FilterValueSource.FromProperty(props), typeof(DateTime), null, null);
             }
-            else if (prop is IntProperty)
+            else if (last is IntProperty)
             {
-                return RangeFilterModel.Create(frozenCtx, prop.GetLabel(), FilterValueSource.FromProperty(prop), typeof(int), null, null);
+                return RangeFilterModel.Create(frozenCtx, label, FilterValueSource.FromProperty(props), typeof(int), null, null);
             }
-            else if (prop is DecimalProperty)
+            else if (last is DecimalProperty)
             {
-                return RangeFilterModel.Create(frozenCtx, prop.GetLabel(), FilterValueSource.FromProperty(prop), typeof(decimal), null, null);
+                return RangeFilterModel.Create(frozenCtx, label, FilterValueSource.FromProperty(props), typeof(decimal), null, null);
             }
-            else if (prop is DoubleProperty)
+            else if (last is DoubleProperty)
             {
-                return RangeFilterModel.Create(frozenCtx, prop.GetLabel(), FilterValueSource.FromProperty(prop), typeof(double), null, null);
+                return RangeFilterModel.Create(frozenCtx, label, FilterValueSource.FromProperty(props), typeof(double), null, null);
             }
             else
             {
-                return SingleValueFilterModel.Create(frozenCtx, prop.GetLabel(), prop);
+                return SingleValueFilterModel.Create(frozenCtx, label, props);
             }
         }
 
@@ -351,43 +358,54 @@ namespace Kistl.Client.Models
 
         public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, Property prop)
         {
-            return Create(frozenCtx, label, prop, null, null);
+            return Create(frozenCtx, label, new[] { prop });
+        }
+
+        public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, IEnumerable<Property> props)
+        {
+            return Create(frozenCtx, label, props, null, null);
         }
 
         public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, Property prop, ControlKind requestedKind, ControlKind requestedArgumentKind)
         {
-            var predicate = FilterValueSource.FromProperty(prop);
-            if (prop is DecimalProperty)
+            return Create(frozenCtx, label, new [] { prop }, requestedKind, requestedArgumentKind);
+        }
+
+        public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, IEnumerable<Property> props, ControlKind requestedKind, ControlKind requestedArgumentKind)
+        {
+            var predicate = FilterValueSource.FromProperty(props);
+            var last = props.Last();
+            if (last is DecimalProperty)
             {
                 return Create(frozenCtx, label, predicate, typeof(decimal), requestedKind, requestedArgumentKind);
             }
-            else if (prop is IntProperty)
+            else if (last is IntProperty)
             {
                 return Create(frozenCtx, label, predicate, typeof(int), requestedKind, requestedArgumentKind);
             }
-            else if (prop is DoubleProperty)
+            else if (last is DoubleProperty)
             {
                 return Create(frozenCtx, label, predicate, typeof(double), requestedKind, requestedArgumentKind);
             }
-            else if (prop is StringProperty)
+            else if (last is StringProperty)
             {
                 return Create(frozenCtx, label, predicate, typeof(string), requestedKind, requestedArgumentKind);
             }
-            else if (prop is BoolProperty)
+            else if (last is BoolProperty)
             {
                 return Create(frozenCtx, label, predicate, typeof(bool), requestedKind, requestedArgumentKind);
             }
-            else if (prop is EnumerationProperty)
+            else if (last is EnumerationProperty)
             {
-                return Create(frozenCtx, label, predicate, ((EnumerationProperty)prop).Enumeration.ExportGuid, requestedKind, requestedArgumentKind);
+                return Create(frozenCtx, label, predicate, ((EnumerationProperty)last).Enumeration.ExportGuid, requestedKind, requestedArgumentKind);
             }
-            else if (prop is ObjectReferenceProperty)
+            else if (last is ObjectReferenceProperty)
             {
-                return Create(frozenCtx, label, predicate, ((ObjectReferenceProperty)prop).GetReferencedObjectClass(), requestedKind, requestedArgumentKind);
+                return Create(frozenCtx, label, predicate, ((ObjectReferenceProperty)last).GetReferencedObjectClass(), requestedKind, requestedArgumentKind);
             }
             else
             {
-                throw new NotSupportedException(string.Format("Singlevalue filters of Property Type {0} are not supported yet", prop.GetType().Name));
+                throw new NotSupportedException(string.Format("Singlevalue filters of Property Type {0} are not supported yet", last.GetType().Name));
             }
         }
 

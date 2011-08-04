@@ -309,8 +309,8 @@ namespace Kistl.Client.Presentables.KistlBase
                     {
                         if (props != null)
                         {
-                            AddFilter(FilterModel.FromProperty(FrozenContext, props.Last()), true);
-                            OnUserFilterAdded(props.Last());
+                            AddFilter(FilterModel.FromProperty(FrozenContext, props), true);
+                            OnUserFilterAdded(props);
                         }
                     });
             dlg.FollowRelationsOne = true;
@@ -319,12 +319,12 @@ namespace Kistl.Client.Presentables.KistlBase
         }
 
         public event UserFilterAddedEventHander UserFilterAdded;
-        protected void OnUserFilterAdded(Property prop)
+        protected void OnUserFilterAdded(IEnumerable<Property> props)
         {
             var temp = UserFilterAdded;
             if (temp != null)
             {
-                temp(this, new UserFilterAddedEventArgs(prop));
+                temp(this, new UserFilterAddedEventArgs(props));
             }
         }
 
@@ -352,11 +352,11 @@ namespace Kistl.Client.Presentables.KistlBase
     public delegate void UserFilterAddedEventHander(object sender, UserFilterAddedEventArgs e);
     public class UserFilterAddedEventArgs : EventArgs
     {
-        public UserFilterAddedEventArgs(Property prop)
+        public UserFilterAddedEventArgs(IEnumerable<Property> props)
         {
-            this.Property = prop;
+            this.Properties = props;
         }
 
-        public Property Property { get; private set; }
+        public IEnumerable<Property> Properties { get; private set; }
     }
 }

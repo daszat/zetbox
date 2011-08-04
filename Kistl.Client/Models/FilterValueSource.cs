@@ -8,7 +8,7 @@ namespace Kistl.Client.Models
     using System.Text;
     using Kistl.App.Base;
     using Kistl.API;
-    
+
     public class FilterValueSource : IFilterValueSource
     {
         private FilterValueSource(string expression)
@@ -30,6 +30,12 @@ namespace Kistl.Client.Models
         {
             if (p == null) throw new ArgumentNullException("p");
             return new FilterValueSource(p.Name);
+        }
+
+        public static IFilterValueSource FromProperty(IEnumerable<Property> p)
+        {
+            if (p == null) throw new ArgumentNullException("p");
+            return new FilterValueSource(string.Join(".", p.Select(i => i.Name).ToArray()));
         }
 
         public static IFilterValueSource FromExpression(string exp)

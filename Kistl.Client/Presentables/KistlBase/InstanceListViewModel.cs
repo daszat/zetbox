@@ -152,8 +152,8 @@ namespace Kistl.Client.Presentables.KistlBase
 
         void _filterList_UserFilterAdded(object sender, UserFilterAddedEventArgs e)
         {
-            if (DisplayedProperties.Contains(e.Property)) return;
-            DisplayedColumns.Columns.Add(GridDisplayConfiguration.CreateColumnDisplayModel(GridDisplayConfiguration.Mode.ReadOnly, e.Property));
+            if (DisplayedProperties.Any(dp => dp.SequenceEqual(e.Properties))) return;
+            DisplayedColumns.Columns.Add(GridDisplayConfiguration.CreateColumnDisplayModel(GridDisplayConfiguration.Mode.ReadOnly, e.Properties.ToArray()));
         }
 
         /// <summary>
@@ -508,19 +508,14 @@ namespace Kistl.Client.Presentables.KistlBase
             dlg.UpdateInitialSelectedProperties(this.DisplayedProperties);
             dlg.SelectedPropertySelectionChanged += (s, e) =>
             {
-                var props = e.Item
-                    .AndParents(i => new [] { i.Property }, p => p.ParentProperty)
-                    .AsEnumerable()
-                    .Reverse()
-                    .ToArray();                
                 if (e.Item.IsSelected)
                 {
-                    DisplayedColumns.Columns.Add(GridDisplayConfiguration.CreateColumnDisplayModel(GridDisplayConfiguration.Mode.ReadOnly, props));
+                    DisplayedColumns.Columns.Add(GridDisplayConfiguration.CreateColumnDisplayModel(GridDisplayConfiguration.Mode.ReadOnly, e.Item.Properties));
                     ViewMethod = InstanceListViewMethod.Details;
                 }
                 else
                 {
-                    var col = DisplayedColumns.Columns.FirstOrDefault(c => c.Property == props.Last());
+                    var col = DisplayedColumns.Columns.FirstOrDefault(c => c.Property == e.Item.Property);
                     if (col != null) DisplayedColumns.Columns.Remove(col);
                 }
             };
@@ -1260,11 +1255,11 @@ namespace Kistl.Client.Presentables.KistlBase
         /// <summary>
         /// Properties displayed in <see cref="DisplayedColumns"/>
         /// </summary>
-        public IEnumerable<Property> DisplayedProperties
+        public IEnumerable<Property[]> DisplayedProperties
         {
             get
             {
-                return DisplayedColumns.Columns.Select(c => c.Property);
+                return DisplayedColumns.Columns.Select(c => c.Properties);
             }
         }
 

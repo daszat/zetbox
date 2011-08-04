@@ -10,7 +10,7 @@ namespace Kistl.Client.Presentables.KistlBase
     using ZBox.App.SchemaMigration;
     using Kistl.API.Configuration;
     using Kistl.App.Extensions;
-using Kistl.Client.Models;
+    using Kistl.Client.Models;
     using Kistl.Client.Presentables.ValueViewModels;
 
     [ViewModelDescriptor]
@@ -127,18 +127,18 @@ using Kistl.Client.Models;
         private ViewModel _filter;
         public ViewModel Filter
         {
-            get 
+            get
             {
                 if (_filter == null)
                 {
                     _filterMdl = new ClassValueModel<string>(
                         PropertySelectionTaskViewModelResources.Filter,
-                        PropertySelectionTaskViewModelResources.Filter_Description, 
+                        PropertySelectionTaskViewModelResources.Filter_Description,
                         true, false);
                     _filterMdl.PropertyChanged += (s, e) => { if (e.PropertyName == "Value") OnPropertyChanged("PossibleValues"); };
                     _filter = ViewModelFactory.CreateViewModel<ClassValueViewModel<string>.Factory>().Invoke(DataContext, this, _filterMdl);
                 }
-                return _filter; 
+                return _filter;
             }
         }
 
@@ -150,7 +150,7 @@ using Kistl.Client.Models;
                 if (_PossibleValues == null)
                 {
                     _PossibleValues = _objClass.GetAllProperties()
-                        .Select(prop => ViewModelFactory.CreateViewModel<SelectedPropertyViewModel.Factory>().Invoke(DataContext, this, prop, null, IsInitialSelected(prop)))
+                        .Select(prop => ViewModelFactory.CreateViewModel<SelectedPropertyViewModel.Factory>().Invoke(DataContext, this, prop, null))
                         .OrderBy(i => i.Name)
                         .ToList();
                 }
@@ -217,15 +217,15 @@ using Kistl.Client.Models;
         public event SelectedPropertySelectionChangedHandler SelectedPropertySelectionChanged;
 
 
-        private ILookup<Property, bool> _initialSelectedProps = null;
-        public void UpdateInitialSelectedProperties(IEnumerable<Property> props)
+        private ILookup<Property[], bool> _initialSelectedProps = null;
+        public void UpdateInitialSelectedProperties(IEnumerable<Property[]> props)
         {
             _initialSelectedProps = props.ToLookup(k => k, v => true);
         }
-        public bool IsInitialSelected(Property p)
+        public bool IsInitialSelected(Property[] p)
         {
             if (_initialSelectedProps == null) return false;
-            return _initialSelectedProps.Contains(p);
+            return _initialSelectedProps.Any(i => i.Key.SequenceEqual(p));
         }
     }
 
@@ -242,19 +242,19 @@ using Kistl.Client.Models;
 
     public class SelectedPropertyViewModel : DataObjectViewModel
     {
-        public new delegate SelectedPropertyViewModel Factory(IKistlContext dataCtx, PropertySelectionTaskViewModel parent, Property obj, SelectedPropertyViewModel parentProp, bool isSelected);
+        public new delegate SelectedPropertyViewModel Factory(IKistlContext dataCtx, PropertySelectionTaskViewModel parent, Property obj, SelectedPropertyViewModel parentProp);
 
         private readonly Property _prop;
         private readonly SelectedPropertyViewModel _parent;
 
         public SelectedPropertyViewModel(
             IViewModelDependencies appCtx, IKistlContext dataCtx, PropertySelectionTaskViewModel parent,
-            Property obj, SelectedPropertyViewModel parentProp, bool isSelected)
+            Property obj, SelectedPropertyViewModel parentProp)
             : base(appCtx, dataCtx, parent, obj)
         {
             this._prop = obj;
             this._parent = parentProp;
-            this._IsSelected = isSelected;
+            this._IsSelected = parent.IsInitialSelected(Properties);
         }
 
         public override string Name
@@ -272,6 +272,19 @@ using Kistl.Client.Models;
                 return _prop;
             }
         }
+
+        public Property[] Properties
+        {
+            get
+            {
+                return this
+                    .AndParents(i => new[] { i.Property }, p => p.ParentProperty)
+                    .AsEnumerable()
+                    .Reverse()
+                    .ToArray();
+            }
+        }
+
 
         public new PropertySelectionTaskViewModel Parent
         {
@@ -301,19 +314,19 @@ using Kistl.Client.Models;
                     {
                         foreach (var prop in ((CompoundObjectProperty)_prop).CompoundObjectDefinition.Properties)
                         {
-                            _PossibleValues.Add(ViewModelFactory.CreateViewModel<SelectedPropertyViewModel.Factory>().Invoke(DataContext, Parent, prop, this, Parent.IsInitialSelected(prop)));
+                            _PossibleValues.Add(ViewModelFactory.CreateViewModel<SelectedPropertyViewModel.Factory>().Invoke(DataContext, Parent, prop, this));
                         }
                     }
-                    if ((Parent.FollowRelationsOne || Parent.FollowRelationsMany) &&_prop is ObjectReferenceProperty)
+                    if ((Parent.FollowRelationsOne || Parent.FollowRelationsMany) && _prop is ObjectReferenceProperty)
                     {
                         var objRefProp = (ObjectReferenceProperty)_prop;
                         if ((Parent.FollowRelationsOne && !objRefProp.GetIsList()) ||
                             (Parent.FollowRelationsMany && objRefProp.GetIsList()))
                         {
-                                foreach (var prop in objRefProp.GetReferencedObjectClass().Properties)
-                                {
-                                    _PossibleValues.Add(ViewModelFactory.CreateViewModel<SelectedPropertyViewModel.Factory>().Invoke(DataContext, Parent, prop, this, Parent.IsInitialSelected(prop)));
-                                }
+                            foreach (var prop in objRefProp.GetReferencedObjectClass().Properties)
+                            {
+                                _PossibleValues.Add(ViewModelFactory.CreateViewModel<SelectedPropertyViewModel.Factory>().Invoke(DataContext, Parent, prop, this));
+                            }
                         }
                     }
 
