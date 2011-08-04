@@ -328,6 +328,12 @@ namespace Kistl.Client.Models
                 vDesc = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableValuePropertyModel_Double);
                 mdl = new NullableStructValueModel<double>(label, "", true, false, requestedArgumentKind);
             }
+            else if (propType == typeof(bool))
+            {
+                vDesc = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableValuePropertyModel_Bool);
+                fmdl.RefreshOnFilterChanged = true;
+                mdl = new BoolValueModel(label, "", true, false, requestedArgumentKind);
+            }
             else if (propType == typeof(string))
             {
                 vDesc = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_ReferencePropertyModel_String);
@@ -366,6 +372,10 @@ namespace Kistl.Client.Models
             else if (prop is StringProperty)
             {
                 return Create(frozenCtx, label, predicate, typeof(string), requestedKind, requestedArgumentKind);
+            }
+            else if (prop is BoolProperty)
+            {
+                return Create(frozenCtx, label, predicate, typeof(bool), requestedKind, requestedArgumentKind);
             }
             else if (prop is EnumerationProperty)
             {

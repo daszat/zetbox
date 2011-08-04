@@ -153,7 +153,7 @@ namespace Kistl.Client.Presentables.KistlBase
         void _filterList_UserFilterAdded(object sender, UserFilterAddedEventArgs e)
         {
             if (DisplayedProperties.Contains(e.Property)) return;
-            DisplayedColumns.Columns.Add(GridDisplayConfiguration.CreateColumnDisplayModel(GridDisplayConfiguration.Mode.ReadOnly, e.Property, string.Empty, string.Empty));
+            DisplayedColumns.Columns.Add(GridDisplayConfiguration.CreateColumnDisplayModel(GridDisplayConfiguration.Mode.ReadOnly, e.Property));
         }
 
         /// <summary>
@@ -503,20 +503,24 @@ namespace Kistl.Client.Presentables.KistlBase
                     this,
                     _type,
                     props => { });
-            dlg.FollowRelations = true;
+            dlg.FollowRelationsOne = true;
             dlg.MultiSelect = true;
             dlg.UpdateInitialSelectedProperties(this.DisplayedProperties);
             dlg.SelectedPropertySelectionChanged += (s, e) =>
             {
-                var prop = e.Item.Property;
+                var props = e.Item
+                    .AndParents(i => new [] { i.Property }, p => p.ParentProperty)
+                    .AsEnumerable()
+                    .Reverse()
+                    .ToArray();                
                 if (e.Item.IsSelected)
                 {
-                    DisplayedColumns.Columns.Add(GridDisplayConfiguration.CreateColumnDisplayModel(GridDisplayConfiguration.Mode.ReadOnly, prop, string.Empty, string.Empty));
+                    DisplayedColumns.Columns.Add(GridDisplayConfiguration.CreateColumnDisplayModel(GridDisplayConfiguration.Mode.ReadOnly, props));
                     ViewMethod = InstanceListViewMethod.Details;
                 }
                 else
                 {
-                    var col = DisplayedColumns.Columns.FirstOrDefault(c => c.Property == prop);
+                    var col = DisplayedColumns.Columns.FirstOrDefault(c => c.Property == props.Last());
                     if (col != null) DisplayedColumns.Columns.Remove(col);
                 }
             };

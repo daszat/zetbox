@@ -163,7 +163,7 @@ namespace Kistl.Client.Models
             ShowName = cls.ShowNameInLists;
 
             this.Columns = new ObservableCollection<ColumnDisplayModel>(
-                props.Select(p => CreateColumnDisplayModel(mode, p, string.Empty, string.Empty))
+                props.Select(p => CreateColumnDisplayModel(mode, p))
                      .Concat(methods.Select(m => GridDisplayConfiguration.CreateColumnDisplayModel(m)))
                      .ToList()
             );
@@ -221,28 +221,29 @@ namespace Kistl.Client.Models
             };
         }
 
-        public static ColumnDisplayModel CreateColumnDisplayModel(Mode mode, Property p, string parentLabel, string parentProp)
+        public static ColumnDisplayModel CreateColumnDisplayModel(Mode mode, params Property[] p)
         {
             if (p == null) throw new ArgumentNullException("p");
+            if (p.Length == 0) throw new ArgumentOutOfRangeException("p", "At least one property is requiered");
 
             var result = new List<ColumnDisplayModel>();
-            var lb = p.GetLabel();
+            var last = p.Last();
 
             var colMdl = new ColumnDisplayModel()
             {
-                Header = parentLabel + lb,
-                Name = parentProp + p.Name,
-                Property = p,
+                Header = string.Join(", ", p.Select(i => i.GetLabel()).ToArray()),
+                Name = string.Join(".", p.Select(i => i.Name).ToArray()),
+                Property = last,
             };
             switch (mode)
             {
                 case Mode.ReadOnly:
-                    colMdl.ControlKind = p.ValueModelDescriptor.GetDefaultGridCellDisplayKind();
-                    colMdl.GridPreEditKind = p.ValueModelDescriptor.GetDefaultGridCellDisplayKind();
+                    colMdl.ControlKind = last.ValueModelDescriptor.GetDefaultGridCellDisplayKind();
+                    colMdl.GridPreEditKind = last.ValueModelDescriptor.GetDefaultGridCellDisplayKind();
                     break;
                 case Mode.Editable:
-                    colMdl.ControlKind = p.ValueModelDescriptor.GetDefaultGridCellEditorKind();
-                    colMdl.GridPreEditKind = p.ValueModelDescriptor.GetDefaultGridCellPreEditorKind();
+                    colMdl.ControlKind = last.ValueModelDescriptor.GetDefaultGridCellEditorKind();
+                    colMdl.GridPreEditKind = last.ValueModelDescriptor.GetDefaultGridCellPreEditorKind();
                     break;
             }
             return colMdl;

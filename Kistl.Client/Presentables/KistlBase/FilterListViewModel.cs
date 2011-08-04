@@ -313,7 +313,8 @@ namespace Kistl.Client.Presentables.KistlBase
                             OnUserFilterAdded(props.Last());
                         }
                     });
-            dlg.FollowRelations = true;
+            dlg.FollowRelationsOne = true;
+            dlg.FollowRelationsMany = true;
             ViewModelFactory.ShowDialog(dlg);
         }
 

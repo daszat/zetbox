@@ -46,15 +46,25 @@ using Kistl.Client.Models;
                 OnPropertyChanged("FollowCompundObjects");
             }
         }
-        private bool _followRelations = false;
-
-        public bool FollowRelations
+        private bool _followRelationsOne = false;
+        public bool FollowRelationsOne
         {
-            get { return _followRelations; }
+            get { return _followRelationsOne; }
             set
             {
-                _followRelations = value;
-                OnPropertyChanged("FollowRelations");
+                _followRelationsOne = value;
+                OnPropertyChanged("FollowRelationsOne");
+            }
+        }
+
+        private bool _followRelationsMany = false;
+        public bool FollowRelationsMany
+        {
+            get { return _followRelationsMany; }
+            set
+            {
+                _followRelationsMany = value;
+                OnPropertyChanged("FollowRelationsMany");
             }
         }
         #endregion
@@ -294,11 +304,16 @@ using Kistl.Client.Models;
                             _PossibleValues.Add(ViewModelFactory.CreateViewModel<SelectedPropertyViewModel.Factory>().Invoke(DataContext, Parent, prop, this, Parent.IsInitialSelected(prop)));
                         }
                     }
-                    if (Parent.FollowRelations && _prop is ObjectReferenceProperty)
+                    if ((Parent.FollowRelationsOne || Parent.FollowRelationsMany) &&_prop is ObjectReferenceProperty)
                     {
-                        foreach (var prop in ((ObjectReferenceProperty)_prop).GetReferencedObjectClass().Properties)
+                        var objRefProp = (ObjectReferenceProperty)_prop;
+                        if ((Parent.FollowRelationsOne && !objRefProp.GetIsList()) ||
+                            (Parent.FollowRelationsMany && objRefProp.GetIsList()))
                         {
-                            _PossibleValues.Add(ViewModelFactory.CreateViewModel<SelectedPropertyViewModel.Factory>().Invoke(DataContext, Parent, prop, this, Parent.IsInitialSelected(prop)));
+                                foreach (var prop in objRefProp.GetReferencedObjectClass().Properties)
+                                {
+                                    _PossibleValues.Add(ViewModelFactory.CreateViewModel<SelectedPropertyViewModel.Factory>().Invoke(DataContext, Parent, prop, this, Parent.IsInitialSelected(prop)));
+                                }
                         }
                     }
 
