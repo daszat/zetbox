@@ -2,25 +2,25 @@ namespace Kistl.API.PerfCounter
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
     using System.Text;
     using Kistl.API;
-    using System.Diagnostics;
     using Kistl.API.Utils;
 
-    public class BasePerfCounterDispatcher : IBasePerfCounter
+    public abstract class BasePerfCounterDispatcher : IBasePerfCounter
     {
         private readonly IEnumerable<IBasePerfCounterAppender> _appender;
         private static IEnumerable<IBasePerfCounterAppender> Empty = new IBasePerfCounterAppender[] { };
 
         public BasePerfCounterDispatcher(IEnumerable<IBasePerfCounterAppender> appender)
         {
-            this._appender = appender;
+            this._appender = appender ?? Empty;
         }
 
         public long IncrementFetchRelation(InterfaceType ifType)
         {
-            foreach (var a in _appender ?? Empty)
+            foreach (var a in _appender)
             {
                 a.IncrementFetchRelation(ifType);
             }
@@ -29,16 +29,16 @@ namespace Kistl.API.PerfCounter
 
         public void DecrementFetchRelation(InterfaceType ifType, int resultSize, long startTicks)
         {
-            foreach (var a in _appender ?? Empty)
+            var endTicks = Stopwatch.GetTimestamp();
+            foreach (var a in _appender)
             {
-                a.DecrementFetchRelation(ifType, resultSize, startTicks);
+                a.DecrementFetchRelation(ifType, resultSize, startTicks, endTicks);
             }
         }
 
-
         public long IncrementGetList(InterfaceType ifType)
         {
-            foreach (var a in _appender ?? Empty)
+            foreach (var a in _appender)
             {
                 a.IncrementGetList(ifType);
             }
@@ -47,15 +47,16 @@ namespace Kistl.API.PerfCounter
 
         public void DecrementGetList(InterfaceType ifType, int resultSize, long startTicks)
         {
-            foreach (var a in _appender ?? Empty)
+            var endTicks = Stopwatch.GetTimestamp();
+            foreach (var a in _appender)
             {
-                a.DecrementGetList(ifType, resultSize, startTicks);
+                a.DecrementGetList(ifType, resultSize, startTicks, endTicks);
             }
         }
 
         public long IncrementGetListOf(InterfaceType ifType)
         {
-            foreach (var a in _appender ?? Empty)
+            foreach (var a in _appender)
             {
                 a.IncrementGetListOf(ifType);
             }
@@ -64,9 +65,10 @@ namespace Kistl.API.PerfCounter
 
         public void DecrementGetListOf(InterfaceType ifType, int resultSize, long startTicks)
         {
-            foreach (var a in _appender ?? Empty)
+            var endTicks = Stopwatch.GetTimestamp();
+            foreach (var a in _appender)
             {
-                a.DecrementGetListOf(ifType, resultSize, startTicks);
+                a.DecrementGetListOf(ifType, resultSize, startTicks, endTicks);
             }
         }
 
@@ -81,15 +83,16 @@ namespace Kistl.API.PerfCounter
 
         public void DecrementQuery(InterfaceType ifType, int objectCount, long startTicks)
         {
-            foreach (var a in _appender ?? Empty)
+            var endTicks = Stopwatch.GetTimestamp();
+            foreach (var a in _appender)
             {
-                a.DecrementQuery(ifType, objectCount, startTicks);
+                a.DecrementQuery(ifType, objectCount, startTicks, endTicks);
             }
         }
 
         public void IncrementServerMethodInvocation()
         {
-            foreach (var a in _appender ?? Empty)
+            foreach (var a in _appender)
             {
                 a.IncrementServerMethodInvocation();
             }
@@ -97,7 +100,7 @@ namespace Kistl.API.PerfCounter
 
         public long IncrementSetObjects()
         {
-            foreach (var a in _appender ?? Empty)
+            foreach (var a in _appender)
             {
                 a.IncrementSetObjects();
             }
@@ -106,32 +109,35 @@ namespace Kistl.API.PerfCounter
 
         public void DecrementSetObjects(int objectCount, long startTicks)
         {
-            foreach (var a in _appender ?? Empty)
+            var endTicks = Stopwatch.GetTimestamp();
+            foreach (var a in _appender)
             {
-                a.DecrementSetObjects(objectCount, startTicks);
+                a.DecrementSetObjects(objectCount, startTicks, endTicks);
             }
         }
 
-
         public long IncrementSubmitChanges()
         {
-            foreach (var a in _appender ?? Empty)
+            var endTicks = Stopwatch.GetTimestamp();
+            foreach (var a in _appender)
             {
                 a.IncrementSubmitChanges();
             }
             return Stopwatch.GetTimestamp();
         }
+
         public void DecrementSubmitChanges(int objectCount, long startTicks)
         {
-            foreach (var a in _appender ?? Empty)
+            var endTicks = Stopwatch.GetTimestamp();
+            foreach (var a in _appender)
             {
-                a.DecrementSubmitChanges(objectCount, startTicks);
+                a.DecrementSubmitChanges(objectCount, startTicks, endTicks);
             }
         }
 
         public void Initialize(IFrozenContext frozenCtx)
         {
-            foreach (var a in _appender ?? Empty)
+            foreach (var a in _appender)
             {
                 a.Initialize(frozenCtx);
             }
@@ -139,7 +145,7 @@ namespace Kistl.API.PerfCounter
 
         public void Install()
         {
-            foreach (var a in _appender ?? Empty)
+            foreach (var a in _appender)
             {
                 a.Install();
             }
@@ -147,7 +153,7 @@ namespace Kistl.API.PerfCounter
 
         public void Uninstall()
         {
-            foreach (var a in _appender ?? Empty)
+            foreach (var a in _appender)
             {
                 a.Uninstall();
             }
@@ -155,11 +161,10 @@ namespace Kistl.API.PerfCounter
 
         public void Dump()
         {
-            foreach (var a in _appender ?? Empty)
+            foreach (var a in _appender)
             {
-                a.Dump();
+                a.Dump(true);
             }
         }
     }
-
 }

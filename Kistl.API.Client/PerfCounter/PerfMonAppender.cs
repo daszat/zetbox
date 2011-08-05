@@ -2,13 +2,13 @@ namespace Kistl.API.Client.PerfCounter
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using System.Diagnostics;
-    using Kistl.API.Utils;
     using Autofac;
+    using Kistl.API;
     using Kistl.API.PerfCounter;
+    using Kistl.API.Utils;
 
     public class PerfMonAppender : BasePerfMonAppender, IPerfCounterAppender
     {
@@ -27,22 +27,31 @@ namespace Kistl.API.Client.PerfCounter
 
         public override string Category { get { return "Kistl Client"; } }
 
-        public PerfMonAppender(Kistl.API.Configuration.KistlConfig cfg)
+        public PerfMonAppender(Configuration.KistlConfig cfg)
             : base(cfg)
         {
         }
 
-        protected override BasePerfMonAppender.CounterDesc[] CounterDesciptors
+        protected override CounterDesc[] CounterDesciptors
         {
             get { return _counterDescs; }
         }
 
-        private static readonly CounterDesc[] _counterDescs = new CounterDesc[] 
+        private static readonly CounterDesc[] _counterDescs = new[] 
         { 
             new CounterDesc("ViewModelFetchPerSec", "# of ViewModels fetched / sec.", PerformanceCounterType.RateOfCountsPerSecond32, (pma, desc) => ((PerfMonAppender)pma)._ViewModelFetchPerSec = desc.Get(pma)),
             new CounterDesc("ViewModelFetchTotal", "# of ViewModels fetched.", PerformanceCounterType.NumberOfItems64, (pma, desc) => ((PerfMonAppender)pma)._ViewModelFetchTotal = desc.Get(pma)),
             new CounterDesc("ViewModelCreatePerSec", "# of ViewModels created / sec.", PerformanceCounterType.RateOfCountsPerSecond32, (pma, desc) => ((PerfMonAppender)pma)._ViewModelCreatePerSec = desc.Get(pma)),
             new CounterDesc("ViewModelCreateTotal", "# of ViewModels created.", PerformanceCounterType.NumberOfItems64, (pma, desc) => ((PerfMonAppender)pma)._ViewModelCreateTotal = desc.Get(pma)),
+        };
+
+        protected override MethodPerformanceCounter.Desc[] MethodCounterDesciptors
+        {
+            get { return _methodDescs; }
+        }
+
+        private MethodPerformanceCounter.Desc[] _methodDescs = new MethodPerformanceCounter.Desc[] 
+        {
         };
 
         PerformanceCounter _ViewModelFetchPerSec;

@@ -2,18 +2,16 @@ namespace Kistl.API.Server.PerfCounter
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using System.Diagnostics;
-    using Kistl.API.Utils;
     using Autofac;
-    using Kistl.API.Configuration;
-    using log4net;
     using Kistl.API.PerfCounter;
 
-    public class Log4NetAppender : BaseLog4NetAppender, IPerfCounterAppender
+    // server-side clone of Kistl.API.Client.PerfCounter.Log4NetAppender
+    public class Log4NetAppender : MemoryAppender
     {
+        #region Autofac Module
         public class Module : Autofac.Module
         {
             protected override void Load(ContainerBuilder moduleBuilder)
@@ -26,19 +24,40 @@ namespace Kistl.API.Server.PerfCounter
                     .SingleInstance();
             }
         }
+        #endregion
 
-        public Log4NetAppender()
-        {
-        }
+        private object dumpLock = new object();
+        private int dumpCounter = 0;
+        private Stopwatch dumpTimer = Stopwatch.StartNew();
+        private const int DUMPCOUNTERMAX = 100;
+        private const long DUMPTIMEMIN = 60 * 1000; // one minute in ms
 
-        protected override long[] Values
-        {
-            get { return new long[] { }; }
-        }
+        public Log4NetAppender() { }
 
-        protected override void ResetValues()
+        public override void Dump(bool force)
         {
-            base.ResetValues();
+            lock (dumpLock)
+            {
+                if (force || (++dumpCounter >= DUMPCOUNTERMAX && dumpTimer.ElapsedMilliseconds > DUMPTIMEMIN))
+                {
+                    var totalsCollector = new Dictionary<string, string>();
+                    Dictionary<string, ObjectMemoryCounters> objectsClone;
+
+                    lock (counterLock)
+                    {
+                        this.FormatTo(totalsCollector);
+                        objectsClone = new Dictionary<string, ObjectMemoryCounters>(this.Objects);
+                        this.ResetValues();
+                    }
+
+                    // don't write to log4net while holding the counterLock
+                    Log4NetAppenderUtils.Dump(objectsClone, totalsCollector);
+
+                    dumpCounter = 0;
+                    dumpTimer.Reset();
+                    dumpTimer.Start();
+                }
+            }
         }
     }
 }

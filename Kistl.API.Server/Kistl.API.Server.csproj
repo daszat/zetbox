@@ -95,8 +95,10 @@
     <Compile Include="Kistl.API.Migration\Record.cs" />
     <Compile Include="Kistl.API.Migration\Translator.cs" />
     <Compile Include="PerfCounter\Log4NetAppender.cs" />
+    <Compile Include="PerfCounter\MemoryAppender.cs" />
     <Compile Include="PerfCounter\PerfCounter.cs" />
     <Compile Include="PerfCounter\PerfMonAppender.cs" />
+    <Compile Include="PerfCounter\ResetOnReadAppender.cs" />
     <Compile Include="ServerApiModule.cs" />
     <Compile Include="QueryTranslatorProvider.cs" />
     <Compile Include="IKistlServerContext.cs" />

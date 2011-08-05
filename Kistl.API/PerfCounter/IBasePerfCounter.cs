@@ -32,30 +32,29 @@ namespace Kistl.API.PerfCounter
 
     public interface IBasePerfCounterAppender
     {
-        void IncrementQuery(Kistl.API.InterfaceType ifType);
-        void DecrementQuery(Kistl.API.InterfaceType ifType, int objectCount, long startTicks);
-
-        void IncrementSubmitChanges();
-        void DecrementSubmitChanges(int objectCount, long startTicks);
+        void IncrementFetchRelation(Kistl.API.InterfaceType ifType);
+        void DecrementFetchRelation(Kistl.API.InterfaceType ifType, int resultSize, long startTicks, long endTicks);
 
         void IncrementGetList(Kistl.API.InterfaceType ifType);
-        void DecrementGetList(Kistl.API.InterfaceType ifType, int resultSize, long startTicks);
+        void DecrementGetList(Kistl.API.InterfaceType ifType, int resultSize, long startTicks, long endTicks);
 
         void IncrementGetListOf(Kistl.API.InterfaceType ifType);
-        void DecrementGetListOf(Kistl.API.InterfaceType ifType, int resultSize, long startTicks);
+        void DecrementGetListOf(Kistl.API.InterfaceType ifType, int resultSize, long startTicks, long endTicks);
 
-        void IncrementFetchRelation(Kistl.API.InterfaceType ifType);
-        void DecrementFetchRelation(Kistl.API.InterfaceType ifType, int resultSize, long startTicks);
+        void IncrementQuery(Kistl.API.InterfaceType ifType);
+        void DecrementQuery(Kistl.API.InterfaceType ifType, int objectCount, long startTicks, long endTicks);
 
         void IncrementSetObjects();
-        void DecrementSetObjects(int objectCount, long startTicks);
+        void DecrementSetObjects(int objectCount, long startTicks, long endTicks);
+
+        void IncrementSubmitChanges();
+        void DecrementSubmitChanges(int objectCount, long startTicks, long endTicks);
 
         void IncrementServerMethodInvocation();
         
         void Initialize(Kistl.API.IFrozenContext frozenCtx);
         void Install();
         void Uninstall();
-        void Dump();
+        void Dump(bool force);
     }
-
 }

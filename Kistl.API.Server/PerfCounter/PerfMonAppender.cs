@@ -2,13 +2,13 @@ namespace Kistl.API.Server.PerfCounter
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
     using System.Text;
-    using Kistl.API;
-    using System.Diagnostics;
-    using Kistl.API.Utils;
     using Autofac;
+    using Kistl.API;
     using Kistl.API.PerfCounter;
+    using Kistl.API.Utils;
 
     public class PerfMonAppender : BasePerfMonAppender, IPerfCounterAppender
     {
@@ -33,13 +33,25 @@ namespace Kistl.API.Server.PerfCounter
         }
 
         #region Counter Descriptors
+        
         protected override CounterDesc[] CounterDesciptors
         {
             get { return _counterDescs; }
         }
+
         private static readonly CounterDesc[] _counterDescs = new CounterDesc[] 
         { 
         };
+
+        protected override MethodPerformanceCounter.Desc[] MethodCounterDesciptors
+        {
+            get { return _methodDescs; }
+        }
+
+        private MethodPerformanceCounter.Desc[] _methodDescs = new MethodPerformanceCounter.Desc[] 
+        {
+        };
+
         #endregion
     }
 }

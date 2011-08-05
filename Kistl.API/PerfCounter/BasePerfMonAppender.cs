@@ -1,60 +1,28 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Diagnostics;
-using Kistl.API.Utils;
 
 namespace Kistl.API.PerfCounter
 {
-    public abstract class BasePerfMonAppender
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using Kistl.API.Utils;
+    using System.Diagnostics;
+
+    public abstract class BasePerfMonAppender : IBasePerfCounterAppender
     {
         public readonly string InstanceName;
         public abstract string Category { get; }
 
-        #region Fiedls
-        PerformanceCounter _QueriesTotal;
-        PerformanceCounter _QueriesPerSec;
-        PerformanceCounter _QueriesCurrent;
-        PerformanceCounter _QueriesAvgDuration;
-        PerformanceCounter _QueriesAvgDurationBase;
-        PerformanceCounter _SubmitChangesPerSec;
-        PerformanceCounter _SubmitChangesTotal;
-        PerformanceCounter _SubmitChangesObjectsPerSec;
-        PerformanceCounter _SubmitChangesObjectsTotal;
-        PerformanceCounter _GetListPerSec;
-        PerformanceCounter _GetListTotal;
-        PerformanceCounter _GetListObjectsPerSec;
-        PerformanceCounter _GetListObjectsTotal;
-        PerformanceCounter _GetListOfPerSec;
-        PerformanceCounter _GetListOfTotal;
-        PerformanceCounter _GetListOfObjectsPerSec;
-        PerformanceCounter _GetListOfObjectsTotal;
+        #region Fields
+        private readonly MethodPerformanceCounter _FetchRelation = new MethodPerformanceCounter();
+        private readonly MethodPerformanceCounter _GetList = new MethodPerformanceCounter();
+        private readonly MethodPerformanceCounter _GetListOf = new MethodPerformanceCounter();
+        private readonly MethodPerformanceCounter _Queries = new MethodPerformanceCounter();
+        private readonly MethodPerformanceCounter _SetObjects = new MethodPerformanceCounter();
+        private readonly MethodPerformanceCounter _SubmitChanges = new MethodPerformanceCounter();
+
         PerformanceCounter _ServerMethodInvocationPerSec;
         PerformanceCounter _ServerMethodInvocationTotal;
-        PerformanceCounter _SubmitChangesCurrent;
-        PerformanceCounter _SetObjectsPerSec;
-        PerformanceCounter _SetObjectsTotal;
-        PerformanceCounter _SetObjectsObjectsPerSec;
-        PerformanceCounter _SetObjectsObjectsTotal;
-        PerformanceCounter _FetchRelationPerSec;
-        PerformanceCounter _FetchRelationTotal;
-        PerformanceCounter _FetchRelationObjectsPerSec;
-        PerformanceCounter _FetchRelationObjectsTotal;
-        PerformanceCounter _GetListCurrent;
-        PerformanceCounter _GetListOfCurrent;
-        PerformanceCounter _SetObjectsCurrent;
-        PerformanceCounter _FetchRelationCurrent;
-        PerformanceCounter _SubmitChangesAvgDuration;
-        PerformanceCounter _SubmitChangesAvgDurationBase;
-        PerformanceCounter _GetListAvgDuration;
-        PerformanceCounter _GetListAvgDurationBase;
-        PerformanceCounter _GetListOfAvgDuration;
-        PerformanceCounter _GetListOfAvgDurationBase;
-        PerformanceCounter _FetchRelationAvgDuration;
-        PerformanceCounter _FetchRelationAvgDurationBase;
-        PerformanceCounter _SetObjectsAvgDuration;
-        PerformanceCounter _SetObjectsAvgDurationBase;
         #endregion
 
         public BasePerfMonAppender(Kistl.API.Configuration.KistlConfig cfg)
@@ -98,7 +66,63 @@ namespace Kistl.API.PerfCounter
             }
         }
 
+        protected sealed class MethodPerformanceCounter
+        {
+            PerformanceCounter AvgDuration;
+            PerformanceCounter AvgDurationBase;
+            PerformanceCounter Current;
+            PerformanceCounter ObjectsPerSec;
+            PerformanceCounter ObjectsTotal;
+            PerformanceCounter PerSec;
+            PerformanceCounter Total;
+
+            public class Desc
+            {
+                public Desc(string name, string verb, Func<BasePerfMonAppender, MethodPerformanceCounter> accessor)
+                {
+                    this.Name = name;
+                    this.Verb = verb;
+                    this.Accessor = accessor;
+                }
+
+                public readonly string Name;
+                public readonly string Verb;
+                public readonly Func<BasePerfMonAppender, MethodPerformanceCounter> Accessor;
+
+                public CounterDesc[] CreateDescriptors()
+                {
+                    return new[] {
+                        new CounterDesc(Name + "AvgDuration", string.Format("Avg. duration of {0} calls", Name), PerformanceCounterType.AverageTimer32, (pma, desc) => Accessor(pma).AvgDuration = desc.Get(pma)),
+                        new CounterDesc(Name + "AvgDurationBase", string.Format("Base for avg. duration of {0} calls", Name), PerformanceCounterType.AverageBase, (pma, desc) => Accessor(pma).AvgDurationBase = desc.Get(pma)),
+                        new CounterDesc(Name + "Current", string.Format("Current # of {0} calls.", Name), PerformanceCounterType.NumberOfItems64, (pma, desc) => Accessor(pma).Current = desc.Get(pma)),
+                        new CounterDesc(Name + "ObjectsPerSec", string.Format("# Objects {1} by {0} / sec.", Name, Verb), PerformanceCounterType.RateOfCountsPerSecond32, (pma, desc) => Accessor(pma).ObjectsPerSec = desc.Get(pma)),
+                        new CounterDesc(Name + "ObjectsTotal", string.Format("# Objects {1} by {0}.", Name, Verb), PerformanceCounterType.NumberOfItems64, (pma, desc) => Accessor(pma).ObjectsTotal = desc.Get(pma)),
+                        new CounterDesc(Name + "PerSec", string.Format("# of {0} calls / sec.", Name), PerformanceCounterType.RateOfCountsPerSecond32, (pma, desc) => Accessor(pma).PerSec = desc.Get(pma)),
+                        new CounterDesc(Name + "Total", string.Format("# of {0} calls.", Name), PerformanceCounterType.NumberOfItems64, (pma, desc) => Accessor(pma).Total = desc.Get(pma)),
+                    };
+                }
+            }
+
+            public void Increment()
+            {
+                Current.Increment();
+            }
+
+            public void Decrement(int resultSize, long startTicks, long endTicks)
+            {
+                PerSec.Increment();
+                Total.Increment();
+                ObjectsPerSec.IncrementBy(resultSize);
+                ObjectsTotal.IncrementBy(resultSize);
+
+                Current.Decrement();
+                AvgDuration.IncrementBy(endTicks - startTicks);
+                AvgDurationBase.Increment();
+            }
+        }
+
         protected abstract CounterDesc[] CounterDesciptors { get; }
+        protected abstract MethodPerformanceCounter.Desc[] MethodCounterDesciptors { get; }
 
         public void Install()
         {
@@ -107,7 +131,7 @@ namespace Kistl.API.PerfCounter
             Logging.Log.Info("Installing performance counter");
             CounterCreationDataCollection counters = new CounterCreationDataCollection();
 
-            foreach (var desc in _counterDescs.Concat(CounterDesciptors))
+            foreach (var desc in _counterDescs.Concat(CounterDesciptors).Concat(_methodDescs.Concat(MethodCounterDesciptors).SelectMany(desc => desc.CreateDescriptors())))
             {
                 counters.Add(desc.Create());
             }
@@ -153,192 +177,101 @@ namespace Kistl.API.PerfCounter
             }
         }
 
-        public void Dump()
-        {
-        }
+        public void Dump(bool force) { }
 
         protected bool initialized = false;
 
         #region Base Descriptors
+
+        private static readonly MethodPerformanceCounter.Desc[] _methodDescs = new[]
+        {
+            new MethodPerformanceCounter.Desc("FetchRelation", "returned", pma => pma._FetchRelation),
+            new MethodPerformanceCounter.Desc("GetList", "returned", pma => pma._GetList),
+            new MethodPerformanceCounter.Desc("GetListOf", "returned", pma => pma._GetListOf),
+            new MethodPerformanceCounter.Desc("Queries", "returned", pma => pma._Queries),
+            new MethodPerformanceCounter.Desc("SetObjects", "returned", pma => pma._SetObjects),
+            new MethodPerformanceCounter.Desc("SubmitChanges", "submitted", pma => pma._SubmitChanges),
+        };
+
         private static readonly CounterDesc[] _counterDescs = new[] 
         { 
-            new CounterDesc("QueriesPerSec", "# of Queries / sec.", PerformanceCounterType.RateOfCountsPerSecond32, (pma, desc) => pma._QueriesPerSec = desc.Get(pma)),
-            new CounterDesc("QueriesTotal", "# of Queries.", PerformanceCounterType.NumberOfItems64, (pma, desc) => pma._QueriesTotal = desc.Get(pma)),
-            new CounterDesc("QueriesCurrent", "Current # of Queries.", PerformanceCounterType.NumberOfItems64, (pma, desc) => pma._QueriesCurrent = desc.Get(pma)),
-
-            new CounterDesc("QueriesAvgDuration", "Avg. duration of Queries.", PerformanceCounterType.AverageTimer32, (pma, desc) => pma._QueriesAvgDuration = desc.Get(pma)),
-            new CounterDesc("QueriesAvgDurationBase", "Avg. duration of Queries Base.", PerformanceCounterType.AverageBase, (pma, desc) => pma._QueriesAvgDurationBase = desc.Get(pma)),
-
-            new CounterDesc("SubmitChangesPerSec", "# of SubmitChanges / sec.", PerformanceCounterType.RateOfCountsPerSecond32, (pma, desc) => pma._SubmitChangesPerSec = desc.Get(pma)),
-            new CounterDesc("SubmitChangesTotal", "# of SubmitChanges.", PerformanceCounterType.NumberOfItems64, (pma, desc) => pma._SubmitChangesTotal = desc.Get(pma)),
-            new CounterDesc("SubmitChangesCurrent", "Current # of SubmitChanges.", PerformanceCounterType.NumberOfItems64, (pma, desc) => pma._SubmitChangesCurrent = desc.Get(pma)),
-
-            new CounterDesc("SubmitChangesAvgDuration", "Avg. duration of SubmitChanges.", PerformanceCounterType.AverageTimer32, (pma, desc) => pma._SubmitChangesAvgDuration = desc.Get(pma)),
-            new CounterDesc("SubmitChangesAvgDurationBase", "Avg. duration of SubmitChanges Base.", PerformanceCounterType.AverageBase, (pma, desc) => pma._SubmitChangesAvgDurationBase = desc.Get(pma)),
-            
-            new CounterDesc("SubmitChangesObjectsPerSec", "# Objects submitted / sec.", PerformanceCounterType.RateOfCountsPerSecond32, (pma, desc) => pma._SubmitChangesObjectsPerSec = desc.Get(pma)),
-            new CounterDesc("SubmitChangesObjectsTotal", "# Objects submitted.", PerformanceCounterType.NumberOfItems64, (pma, desc) => pma._SubmitChangesObjectsTotal = desc.Get(pma)),
-
-            new CounterDesc("GetListPerSec", "# of GetList calls / sec.", PerformanceCounterType.RateOfCountsPerSecond32, (pma, desc) => pma._GetListPerSec = desc.Get(pma)),
-            new CounterDesc("GetListTotal", "# of GetList calls.", PerformanceCounterType.NumberOfItems64, (pma, desc) => pma._GetListTotal = desc.Get(pma)),
-            new CounterDesc("GetListCurrent", "Current # of GetList calls.", PerformanceCounterType.NumberOfItems64, (pma, desc) => pma._GetListCurrent = desc.Get(pma)),
-
-            new CounterDesc("GetListAvgDuration", "Avg. duration of GetList calls.", PerformanceCounterType.AverageTimer32, (pma, desc) => pma._GetListAvgDuration = desc.Get(pma)),
-            new CounterDesc("GetListAvgDurationBase", "Avg. duration of GetList calls base.", PerformanceCounterType.AverageBase, (pma, desc) => pma._GetListAvgDurationBase = desc.Get(pma)),
-                        
-            new CounterDesc("GetListObjectsPerSec", "# of Objects returned by GetList calls / sec.", PerformanceCounterType.RateOfCountsPerSecond32, (pma, desc) => pma._GetListObjectsPerSec = desc.Get(pma)),
-            new CounterDesc("GetListObjectsTotal", "# of Objects returned by GetList calls.", PerformanceCounterType.NumberOfItems64, (pma, desc) => pma._GetListObjectsTotal = desc.Get(pma)),
-
-            new CounterDesc("GetListOfPerSec", "# of GetListOf calls / sec.", PerformanceCounterType.RateOfCountsPerSecond32, (pma, desc) => pma._GetListOfPerSec = desc.Get(pma)),
-            new CounterDesc("GetListOfTotal", "# of GetListOf calls.", PerformanceCounterType.NumberOfItems64, (pma, desc) => pma._GetListOfTotal = desc.Get(pma)),
-            new CounterDesc("GetListOfCurrent", "Current # of GetListOf calls.", PerformanceCounterType.NumberOfItems64, (pma, desc) => pma._GetListOfCurrent = desc.Get(pma)),
-
-            new CounterDesc("GetListOfAvgDuration", "Avg. duration of GetListOf calls.", PerformanceCounterType.AverageTimer32, (pma, desc) => pma._GetListOfAvgDuration = desc.Get(pma)),
-            new CounterDesc("GetListOfAvgDurationBase", "Avg. duration of GetListOf calls base.", PerformanceCounterType.AverageBase, (pma, desc) => pma._GetListOfAvgDurationBase = desc.Get(pma)),
-
-            new CounterDesc("GetListOfObjectsPerSec", "# of Objects returned by GetListOf calls / sec.", PerformanceCounterType.RateOfCountsPerSecond32, (pma, desc) => pma._GetListOfObjectsPerSec = desc.Get(pma)),
-            new CounterDesc("GetListOfObjectsTotal", "# of Objects returned by GetListOf calls.", PerformanceCounterType.NumberOfItems64, (pma, desc) => pma._GetListOfObjectsTotal = desc.Get(pma)),
-
-            new CounterDesc("FetchRelationPerSec", "# of FetchRelation calls / sec.", PerformanceCounterType.RateOfCountsPerSecond32, (pma, desc) => pma._FetchRelationPerSec = desc.Get(pma)),
-            new CounterDesc("FetchRelationTotal", "# of FetchRelation calls.", PerformanceCounterType.NumberOfItems64, (pma, desc) => pma._FetchRelationTotal = desc.Get(pma)),
-            new CounterDesc("FetchRelationCurrent", "Current # of FetchRelation calls.", PerformanceCounterType.NumberOfItems64, (pma, desc) => pma._FetchRelationCurrent = desc.Get(pma)),
-
-            new CounterDesc("FetchRelationAvgDuration", "Avg. duration of FetchRelation calls.", PerformanceCounterType.AverageTimer32, (pma, desc) => pma._FetchRelationAvgDuration = desc.Get(pma)),
-            new CounterDesc("FetchRelationAvgDurationBase", "Avg. duration of FetchRelation calls base.", PerformanceCounterType.AverageBase, (pma, desc) => pma._FetchRelationAvgDurationBase = desc.Get(pma)),
-
-            new CounterDesc("FetchRelationObjectsPerSec", "# of Objects returned by FetchRelation calls / sec.", PerformanceCounterType.RateOfCountsPerSecond32, (pma, desc) => pma._FetchRelationObjectsPerSec = desc.Get(pma)),
-            new CounterDesc("FetchRelationObjectsTotal", "# of Objects returned by FetchRelation calls.", PerformanceCounterType.NumberOfItems64, (pma, desc) => pma._FetchRelationObjectsTotal = desc.Get(pma)),
-
-            new CounterDesc("SetObjectsPerSec", "# of SetObjects calls / sec.", PerformanceCounterType.RateOfCountsPerSecond32, (pma, desc) => pma._SetObjectsPerSec = desc.Get(pma)),
-            new CounterDesc("SetObjectsTotal", "# of SetObjects calls.", PerformanceCounterType.NumberOfItems64, (pma, desc) => pma._SetObjectsTotal = desc.Get(pma)),
-            new CounterDesc("SetObjectsCurrent", "Current # of SetObjects calls.", PerformanceCounterType.NumberOfItems64, (pma, desc) => pma._SetObjectsCurrent = desc.Get(pma)),
-
-            new CounterDesc("SetObjectsAvgDuration", "Avg. duration of SetObjects calls.", PerformanceCounterType.AverageTimer32, (pma, desc) => pma._SetObjectsAvgDuration = desc.Get(pma)),
-            new CounterDesc("SetObjectsAvgDurationBase", "Avg. duration of SetObjects calls base.", PerformanceCounterType.AverageBase, (pma, desc) => pma._SetObjectsAvgDurationBase = desc.Get(pma)),
-
-            new CounterDesc("SetObjectsObjectsPerSec", "# of Objects sent to the SetObjects call / sec.", PerformanceCounterType.RateOfCountsPerSecond32, (pma, desc) => pma._SetObjectsObjectsPerSec = desc.Get(pma)),
-            new CounterDesc("SetObjectsObjectsTotal", "# of Objects sent to the SetObjects call.", PerformanceCounterType.NumberOfItems64, (pma, desc) => pma._SetObjectsObjectsTotal = desc.Get(pma)),
-
             new CounterDesc("ServerMethodInvocationPerSec", "# of ServerMethodInvocation calls / sec.", PerformanceCounterType.RateOfCountsPerSecond32, (pma, desc) => pma._ServerMethodInvocationPerSec = desc.Get(pma)),
             new CounterDesc("ServerMethodInvocationTotal", "# of ServerMethodInvocation calls.", PerformanceCounterType.NumberOfItems64, (pma, desc) => pma._ServerMethodInvocationTotal = desc.Get(pma)),
         };
+
         #endregion
 
         #region Common Counters
-        public void IncrementQuery(InterfaceType ifType)
+
+        public void IncrementFetchRelation(InterfaceType ifType)
         {
             if (!initialized) return;
-            _QueriesCurrent.Increment();
+            _FetchRelation.Increment();
         }
 
-        public void DecrementQuery(InterfaceType ifType, int objectCount, long startTicks)
+        public void DecrementFetchRelation(InterfaceType ifType, int resultSize, long startTicks, long endTicks)
         {
             if (!initialized) return;
-
-            _QueriesPerSec.Increment();
-            _QueriesTotal.Increment();
-
-            _QueriesCurrent.Decrement();
-            _QueriesAvgDuration.IncrementBy(Stopwatch.GetTimestamp() - startTicks);
-            _QueriesAvgDurationBase.Increment();
-        }
-
-        public void IncrementSubmitChanges()
-        {
-            if (!initialized) return;
-            _SubmitChangesCurrent.Increment();
-        }
-
-        public void DecrementSubmitChanges(int objectCount, long startTicks)
-        {
-            if (!initialized) return;
-
-            _SubmitChangesPerSec.Increment();
-            _SubmitChangesTotal.Increment();
-            _SubmitChangesObjectsPerSec.IncrementBy(objectCount);
-            _SubmitChangesObjectsTotal.IncrementBy(objectCount);
-
-            _SubmitChangesCurrent.Decrement();
-            _SubmitChangesAvgDuration.IncrementBy(Stopwatch.GetTimestamp() - startTicks);
-            _SubmitChangesAvgDurationBase.Increment();
+            _FetchRelation.Decrement(resultSize, startTicks, endTicks);
         }
 
         public void IncrementGetList(InterfaceType ifType)
         {
             if (!initialized) return;
-            _GetListCurrent.Increment();
+            _GetList.Increment();
         }
 
-        public void DecrementGetList(InterfaceType ifType, int resultSize, long startTicks)
+        public void DecrementGetList(InterfaceType ifType, int resultSize, long startTicks, long endTicks)
         {
             if (!initialized) return;
-
-            _GetListPerSec.Increment();
-            _GetListTotal.Increment();
-            _GetListObjectsPerSec.IncrementBy(resultSize);
-            _GetListObjectsTotal.IncrementBy(resultSize);
-
-            _GetListCurrent.Decrement();
-            _GetListAvgDuration.IncrementBy(Stopwatch.GetTimestamp() - startTicks);
-            _GetListAvgDurationBase.Increment();
+            _GetList.Decrement(resultSize, startTicks, endTicks);
         }
 
         public void IncrementGetListOf(InterfaceType ifType)
         {
             if (!initialized) return;
-            _GetListOfCurrent.Increment();
-        }
-        public void DecrementGetListOf(InterfaceType ifType, int resultSize, long startTicks)
-        {
-            if (!initialized) return;
-
-            _GetListOfPerSec.Increment();
-            _GetListOfTotal.Increment();
-            _GetListOfObjectsPerSec.IncrementBy(resultSize);
-            _GetListOfObjectsTotal.IncrementBy(resultSize);
-
-            _GetListOfCurrent.Decrement();
-            _GetListOfAvgDuration.IncrementBy(Stopwatch.GetTimestamp() - startTicks);
-            _GetListOfAvgDurationBase.Increment();
+            _GetListOf.Increment();
         }
 
-        public void IncrementFetchRelation(InterfaceType ifType)
+        public void DecrementGetListOf(InterfaceType ifType, int resultSize, long startTicks, long endTicks)
         {
             if (!initialized) return;
-            _FetchRelationCurrent.Increment();
+            _GetListOf.Decrement(resultSize, startTicks, endTicks);
         }
 
-        public void DecrementFetchRelation(InterfaceType ifType, int resultSize, long startTicks)
+        public void IncrementQuery(InterfaceType ifType)
         {
             if (!initialized) return;
+            _Queries.Increment();
+        }
 
-            _FetchRelationPerSec.Increment();
-            _FetchRelationTotal.Increment();
-            _FetchRelationObjectsPerSec.IncrementBy(resultSize);
-            _FetchRelationObjectsTotal.IncrementBy(resultSize);
-
-            _FetchRelationCurrent.Decrement();
-            _FetchRelationAvgDuration.IncrementBy(Stopwatch.GetTimestamp() - startTicks);
-            _FetchRelationAvgDurationBase.Increment();
+        public void DecrementQuery(InterfaceType ifType, int objectCount, long startTicks, long endTicks)
+        {
+            if (!initialized) return;
+            _Queries.Decrement(objectCount, startTicks, endTicks);
         }
 
         public void IncrementSetObjects()
         {
             if (!initialized) return;
-            _SetObjectsCurrent.Increment();
+            _SetObjects.Increment();
         }
-        public void DecrementSetObjects(int objectCount, long startTicks)
+        public void DecrementSetObjects(int objectCount, long startTicks, long endTicks)
         {
             if (!initialized) return;
+            _SetObjects.Decrement(objectCount, startTicks, endTicks);
+        }
 
-            _SetObjectsPerSec.Increment();
-            _SetObjectsTotal.Increment();
-            _SetObjectsObjectsPerSec.IncrementBy(objectCount);
-            _SetObjectsObjectsTotal.IncrementBy(objectCount);
+        public void IncrementSubmitChanges()
+        {
+            if (!initialized) return;
+            _SubmitChanges.Increment();
+        }
 
-            _SetObjectsCurrent.Decrement();
-            _SetObjectsAvgDuration.IncrementBy(Stopwatch.GetTimestamp() - startTicks);
-            _SetObjectsAvgDurationBase.Increment();
+        public void DecrementSubmitChanges(int objectCount, long startTicks, long endTicks)
+        {
+            if (!initialized) return;
+            _SubmitChanges.Decrement(objectCount, startTicks, endTicks);
         }
 
         public void IncrementServerMethodInvocation()
@@ -347,6 +280,7 @@ namespace Kistl.API.PerfCounter
             _ServerMethodInvocationPerSec.Increment();
             _ServerMethodInvocationTotal.Increment();
         }
+
         #endregion
 
     }

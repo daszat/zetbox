@@ -7,12 +7,12 @@ namespace Kistl.Server
     using System.IO;
     using System.Linq;
     using System.Runtime.Serialization.Formatters.Binary;
+    using System.ServiceModel;
     using Kistl.API;
     using Kistl.API.Server;
+    using Kistl.API.Server.PerfCounter;
     using Kistl.API.Utils;
     using Kistl.App.Base;
-    using Kistl.API.Server.PerfCounter;
-    using System.ServiceModel;
 
     /// <summary>
     /// Implements the main service interface.

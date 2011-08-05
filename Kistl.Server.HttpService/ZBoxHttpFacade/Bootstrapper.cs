@@ -3,14 +3,14 @@ namespace Kistl.Server.HttpService
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Web;
+    using System.Xml.Serialization;
     using Autofac;
     using Autofac.Integration.Web;
     using Kistl.API;
     using Kistl.API.Configuration;
-    using System.IO;
-    using System.Xml.Serialization;
 
     [XmlRoot("ArrayOfFileInfo", Namespace = "http://dasz.at/ZBox/Bootstrapper")]
     public class FileInfoArray
