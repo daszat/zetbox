@@ -227,7 +227,6 @@ namespace Kistl.Client.Models
             if (p == null) throw new ArgumentNullException("p");
             if (p.Length == 0) throw new ArgumentOutOfRangeException("p", "At least one property is requiered");
 
-            var result = new List<ColumnDisplayModel>();
             var last = p.Last();
 
             var colMdl = new ColumnDisplayModel()
