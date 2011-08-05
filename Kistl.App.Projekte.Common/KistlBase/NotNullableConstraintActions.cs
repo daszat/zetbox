@@ -39,7 +39,7 @@ namespace Kistl.App.Base
             object constrainedObjectParam,
             object constrainedValueParam)
         {
-            e.Result = String.IsNullOrEmpty(obj.Reason) ? "Value must be set" : String.Format("Value must be set: {0}", obj.Reason);
+            e.Result = String.IsNullOrEmpty(obj.Reason) ? "Wert muss gesetzt sein" : String.Format("Wert muss gesetzt sein: {0}", obj.Reason);
         }
     }
 }

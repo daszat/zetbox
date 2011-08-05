@@ -334,9 +334,9 @@ namespace Kistl.App.Test
 
         private static readonly System.ComponentModel.PropertyDescriptor[] _properties = new System.ComponentModel.PropertyDescriptor[] { };
 
-        protected override void CollectProperties(List<System.ComponentModel.PropertyDescriptor> props)
+        protected override void CollectProperties(Func<IFrozenContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
         {
-            base.CollectProperties(props);
+            base.CollectProperties(lazyCtx, props);
             props.AddRange(_properties);
         }
 

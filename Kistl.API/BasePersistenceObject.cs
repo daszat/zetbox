@@ -391,11 +391,6 @@ namespace Kistl.API
                 null)
         };
 
-        protected virtual void CollectProperties(List<PropertyDescriptor> props)
-        {
-            props.AddRange(_properties);
-        }
-
         protected virtual void CollectProperties(Func<IFrozenContext> lazyCtx, List<PropertyDescriptor> props)
         {
             props.AddRange(_properties);
