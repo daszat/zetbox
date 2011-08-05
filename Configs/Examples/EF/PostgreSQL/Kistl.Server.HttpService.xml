@@ -21,6 +21,7 @@
       <Module>Kistl.DalProvider.Memory.MemoryProvider, Kistl.DalProvider.Memory</Module>
       <Module>Kistl.App.Projekte.Server.CustomServerActionsModule, Kistl.App.Projekte.Server</Module>
       <Module>Kistl.App.Projekte.Common.CustomCommonActionsModule, Kistl.App.Projekte.Common</Module>
+      <!-- <Module>Kistl.API.Server.PerfCounter.ResetOnReadAppender+Module, Kistl.API.Server</Module> -->
 
       <!-- Development/Master Server modules -->
       <Module>Kistl.Generator.GeneratorModule, Kistl.Generator</Module>
