@@ -180,7 +180,7 @@ this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("        protected override void CollectProperties(Func<IFrozenContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)\r\n");
 this.WriteObjects("        {\r\n");
-this.WriteObjects("            base.CollectProperties(props);\r\n");
+this.WriteObjects("            base.CollectProperties(lazyCtx, props);\r\n");
 this.WriteObjects("            _InitializePropertyDescriptors(lazyCtx);\r\n");
 this.WriteObjects("            props.AddRange(_properties);\r\n");
 this.WriteObjects("        }\r\n");

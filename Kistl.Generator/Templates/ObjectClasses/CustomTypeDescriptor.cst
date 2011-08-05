@@ -132,7 +132,7 @@
 
         protected override void CollectProperties(Func<IFrozenContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
         {
-            base.CollectProperties(props);
+            base.CollectProperties(lazyCtx, props);
             _InitializePropertyDescriptors(lazyCtx);
             props.AddRange(_properties);
         }
