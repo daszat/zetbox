@@ -19,6 +19,10 @@ namespace Kistl.Client.WPF.Toolkit
 
     public static class WPFHelper
     {
+        public static readonly string RESOURCE_DICTIONARY_KIND = "Kind";
+        public static readonly string RESOURCE_DICTIONARY_STYLE = "Style";
+        public static readonly string RESOURCE_DICTIONARY_VIEW = "VIEW";
+
         /// <summary>
         /// http://stackoverflow.com/questions/980120/finding-control-within-wpf-itemscontrol
         /// </summary>

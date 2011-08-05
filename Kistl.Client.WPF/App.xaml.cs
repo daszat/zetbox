@@ -23,6 +23,7 @@ namespace Kistl.Client.WPF
     using System.Windows.Controls;
     using Kistl.Client.WPF.Toolkit;
     using Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;
+    using Autofac.Features.Metadata;
 
     /// <summary>
     /// Interaction logic for App.xaml
@@ -123,10 +124,16 @@ namespace Kistl.Client.WPF
                     // Otherwise converter are unknown
                     this.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Kistl.Client.WPF;component/View/DefaultStyles.xaml", UriKind.Relative) });
                     this.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Kistl.Client.WPF;component/View/DefaultHighlightColorDefinitions.xaml", UriKind.Relative) });
-                    this.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Kistl.Client.WPF;component/View/DefaultViews.xaml", UriKind.Relative) });
-
                     // Load registrated dictionaries from autofac
-                    foreach (var dict in container.Resolve<IEnumerable<ResourceDictionary>>())
+                    foreach (var dict in container.Resolve<IEnumerable<Meta<ResourceDictionary>>>().Where(m => WPFHelper.RESOURCE_DICTIONARY_STYLE.Equals(m.Metadata[WPFHelper.RESOURCE_DICTIONARY_KIND])).Select(m => m.Value))
+                    {
+                        this.Resources.MergedDictionaries.Add(dict);
+                    }
+
+
+                    this.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Kistl.Client.WPF;component/View/DefaultViews.xaml", UriKind.Relative) });
+                    // Load registrated dictionaries from autofac
+                    foreach (var dict in container.Resolve<IEnumerable<Meta<ResourceDictionary>>>().Where(m => WPFHelper.RESOURCE_DICTIONARY_VIEW.Equals(m.Metadata[WPFHelper.RESOURCE_DICTIONARY_KIND])).Select(m => m.Value))
                     {
                         this.Resources.MergedDictionaries.Add(dict);
                     }

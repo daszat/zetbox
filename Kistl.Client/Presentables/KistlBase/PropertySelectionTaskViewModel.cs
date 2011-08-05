@@ -220,7 +220,7 @@ namespace Kistl.Client.Presentables.KistlBase
         private ILookup<Property[], bool> _initialSelectedProps = null;
         public void UpdateInitialSelectedProperties(IEnumerable<Property[]> props)
         {
-            _initialSelectedProps = props.ToLookup(k => k, v => true);
+            _initialSelectedProps = props.Where(i => i != null).ToLookup(k => k, v => true);
         }
         public bool IsInitialSelected(Property[] p)
         {

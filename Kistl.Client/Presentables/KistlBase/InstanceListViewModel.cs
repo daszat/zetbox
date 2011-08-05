@@ -1259,7 +1259,7 @@ namespace Kistl.Client.Presentables.KistlBase
         {
             get
             {
-                return DisplayedColumns.Columns.Select(c => c.Properties);
+                return DisplayedColumns.Columns.Where(c => c.Properties != null).Select(c => c.Properties);
             }
         }
 

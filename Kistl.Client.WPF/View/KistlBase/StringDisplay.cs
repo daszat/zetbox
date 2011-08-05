@@ -17,21 +17,17 @@ namespace Kistl.Client.WPF.View.KistlBase
     using System.Windows.Shapes;
     using Kistl.Client.GUI;
     using Kistl.Client.WPF.CustomControls;
+    using Kistl.Client.WPF.Converter;
     
-    public class StringDisplay : PropertyEditor
+    public class StringDisplay : TextBlock // Simplyfiy, often used Control
     {
-        private TextBlock txtStringDisplay;
-
-//<ctrls:PropertyEditor x:Class="Kistl.Client.WPF.View.KistlBase.StringDisplay"
-//                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-//                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-//                      xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"
-//                      xmlns:view="clr-namespace:Kistl.Client.WPF.View.KistlBase"
-//                      ToolTip="{Binding ToolTip}">
 //    <TextBlock x:Name="txtStringDisplay"
 //               Text="{Binding FormattedValue, Mode=OneWay}"
 //               ToolTip="{Binding ToolTip}" />
-//</ctrls:PropertyEditor>
+        private static readonly HighlightGridBackgroundConverter _highlightGridBackgroundConverter = new HighlightGridBackgroundConverter();
+        private static readonly HighlightGridForegroundConverter _highlightGridForegroundConverter = new HighlightGridForegroundConverter();
+        private static readonly HighlightGridFontStyleConverter _highlightGridFontStyleConverter = new HighlightGridFontStyleConverter();
+        private static readonly HighlightGridFontWeightConverter _highlightGridFontWeightConverter = new HighlightGridFontWeightConverter();
 
 
         public StringDisplay()
@@ -39,32 +35,44 @@ namespace Kistl.Client.WPF.View.KistlBase
             if (DesignerProperties.GetIsInDesignMode(this)) return;
 
             // InitializeComponent
-            txtStringDisplay = new TextBlock();
-            Content = txtStringDisplay;
             this.VerticalAlignment = System.Windows.VerticalAlignment.Top;
 
             {
                 var b = new Binding("FormattedValue");
                 b.Mode = BindingMode.OneWay;
-                BindingOperations.SetBinding(txtStringDisplay, TextBlock.TextProperty, b);
+                BindingOperations.SetBinding(this, TextBlock.TextProperty, b);
             }
 
             {
                 var b = new Binding("ToolTip");
                 b.Mode = BindingMode.OneWay;
-                BindingOperations.SetBinding(txtStringDisplay, TextBlock.ToolTipProperty, b);
+                BindingOperations.SetBinding(this, TextBlock.ToolTipProperty, b);
             }
 
             {
-                var b = new Binding("ToolTip");
+                var b = new Binding("Highlight");
                 b.Mode = BindingMode.OneWay;
-                BindingOperations.SetBinding(txtStringDisplay, ContentControl.ToolTipProperty, b);
+                b.Converter = _highlightGridBackgroundConverter;
+                BindingOperations.SetBinding(this, TextBlock.BackgroundProperty, b);
             }
-        }
-
-        protected override FrameworkElement MainControl
-        {
-            get { return txtStringDisplay; }
+            {
+                var b = new Binding("Highlight");
+                b.Mode = BindingMode.OneWay;
+                b.Converter = _highlightGridForegroundConverter;
+                BindingOperations.SetBinding(this, TextBlock.ForegroundProperty, b);
+            }
+            {
+                var b = new Binding("Highlight");
+                b.Mode = BindingMode.OneWay;
+                b.Converter = _highlightGridFontStyleConverter;
+                BindingOperations.SetBinding(this, TextBlock.FontStyleProperty, b);
+            }
+            {
+                var b = new Binding("Highlight");
+                b.Mode = BindingMode.OneWay;
+                b.Converter = _highlightGridFontWeightConverter;
+                BindingOperations.SetBinding(this, TextBlock.FontWeightProperty, b);
+            }
         }
     }
 }

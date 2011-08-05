@@ -163,7 +163,7 @@ namespace Kistl.API.PerfCounter
 
             try
             {
-                foreach (var desc in _counterDescs.Concat(CounterDesciptors))
+                foreach (var desc in _counterDescs.Concat(CounterDesciptors).Concat(_methodDescs.Concat(MethodCounterDesciptors).SelectMany(desc => desc.CreateDescriptors())))
                 {
                     desc.Set(this);
                 }
