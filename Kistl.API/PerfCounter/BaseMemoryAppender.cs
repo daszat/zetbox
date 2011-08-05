@@ -16,24 +16,38 @@ namespace Kistl.API.PerfCounter
         public MethodMemoryCounters(string name)
         {
             this.Name = name;
+            Reset();
         }
 
         public long Duration { get; private set; }
         public long Objects { get; private set; }
         public long Calls { get; private set; }
+        public long MinDuration { get; private set; }
+        public long MaxDuration { get; private set; }
 
         internal void Reset()
         {
-            Duration =
-                Objects =
-                Calls = 0;
+            this.Duration =
+                this.Objects =
+                this.Calls = 0;
+            this.MinDuration = long.MinValue;
+            this.MaxDuration = long.MaxValue;
         }
 
         internal void Count(int objectCount, long startTicks, long endTicks)
         {
             Calls += 1;
             Objects += objectCount;
-            Duration += endTicks - startTicks;
+            var thisDuration = endTicks - startTicks;
+            Duration += thisDuration;
+            if (thisDuration < MinDuration)
+            {
+                MinDuration = thisDuration;
+            }
+            else if (thisDuration > MaxDuration)
+            {
+                MaxDuration = thisDuration;
+            }
         }
 
         internal void FormatTo(Dictionary<string, string> values)
@@ -42,6 +56,10 @@ namespace Kistl.API.PerfCounter
             values[Name + "Objects"] = Objects.ToString();
             values[Name + "Duration"] = Duration.ToString();
             values[Name + "AvgDuration"] = BaseMemoryAppender.Avg(Duration, Calls).ToString();
+            if (MinDuration != long.MinValue)
+                values[Name + "MinDuration"] = MinDuration.ToString();
+            if (MaxDuration != long.MaxValue)
+                values[Name + "MaxDuration"] = MaxDuration.ToString();
         }
     }
 
