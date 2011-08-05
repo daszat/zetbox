@@ -364,7 +364,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
         {
             ValueModel.Value = value != null ? value.Object : null;
             EnsureValuePossible(value);
-            OnPropertyChanged("Value");
+            NotifyValueChanged();
         }
 
         private void EnsureValuePossible(DataObjectViewModel value)
@@ -531,6 +531,16 @@ namespace Kistl.Client.Presentables.ValueViewModels
             var result = new GridDisplayConfiguration();
             result.BuildColumns(ReferencedClass, GridDisplayConfiguration.Mode.ReadOnly, false);
             return result;
+        }
+        #endregion
+
+        #region Highlight
+        public override Highlight Highlight
+        {
+            get
+            {
+                return (Value != null ? Value.Highlight : null) ?? base.Highlight;
+            }
         }
         #endregion
     }

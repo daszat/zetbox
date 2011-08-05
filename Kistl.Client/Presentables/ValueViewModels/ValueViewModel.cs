@@ -92,6 +92,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
         protected virtual void NotifyValueChanged()
         {
             OnPropertyChanged("Value");
+            OnPropertyChanged("Highlight");
             OnFormattedValueChanged();
             OnPropertyChanged("IsNull");
             OnPropertyChanged("HasValue");
