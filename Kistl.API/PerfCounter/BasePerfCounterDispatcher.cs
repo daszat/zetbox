@@ -118,7 +118,6 @@ namespace Kistl.API.PerfCounter
 
         public long IncrementSubmitChanges()
         {
-            var endTicks = Stopwatch.GetTimestamp();
             foreach (var a in _appender)
             {
                 a.IncrementSubmitChanges();
