@@ -261,6 +261,12 @@
   <Style x:Key="DataObjectEditor_PropertyPanel"
          TargetType="Panel">
   </Style>
+  <!-- Panel style for all (multiline) summary control of a DataObject -->
+  <Style x:Key="DataObjectSummary_Panel"
+         TargetType="Panel">
+    <Setter Property="Background"
+            Value="{Binding Highlight, Converter={StaticResource HighlightPanelBackgroundConverter}}" />
+  </Style>
 
   <!-- NavigationBreadCrumb -->
   <Style x:Key="NavigationBreadCrumb">
