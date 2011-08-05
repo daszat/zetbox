@@ -8,7 +8,7 @@
     <DockPanel>
       <ctrls:CommandButton DockPanel.Dock="Right"
                            CommandViewModel="{Binding RemoveCommand}"
-                           Style="{StaticResource ImageButton}"
+                           Style="{StaticResource ImageOnlyButton}"
                            MaxHeight="28"/>
 
       <ContentPresenter Content="{Binding FilterViewModel}"
