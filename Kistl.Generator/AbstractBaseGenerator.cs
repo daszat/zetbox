@@ -153,6 +153,7 @@ namespace Kistl.Generator
         {
             try
             {
+                filename = Unidecode(filename);
                 var gen = new TemplateExecutor();
 
                 gen.Settings.Add("basetemplatepath", "Kistl.Generator.Templates");
@@ -183,6 +184,29 @@ namespace Kistl.Generator
                 Log.Error(msg, ex);
                 throw new InvalidOperationException(msg, ex);
             }
+        }
+
+        private static readonly Dictionary<string, string> _transliterationTable = new Dictionary<string, string>() {
+            { "ä", "ae" },
+            { "Ä", "Ae" },
+            { "ö", "oe" },
+            { "Ö", "Oe" },
+            { "ü", "ue" },
+            { "Ü", "Ue" },
+            { "ß", "sz" },
+        };
+
+        /// <summary>
+        /// converts the string to ascii using transliteration. uses the _transliterationTable and a nice hack to reduce utf-8 to ASCII. probably works only with western characters.
+        /// </summary>
+        /// <remarks>See http://stackoverflow.com/questions/2173825/slugify-and-character-transliteration-in-c/2173922#2173922 </remarks>
+        protected static string Unidecode(string filename)
+        {
+            foreach (var kvp in _transliterationTable)
+            {
+                filename = filename.Replace(kvp.Key, kvp.Value);
+            }
+            return Encoding.ASCII.GetString(Encoding.GetEncoding("Cyrillic").GetBytes(filename));
         }
 
         protected virtual string Generate_AssemblyInfo(IKistlContext ctx)
