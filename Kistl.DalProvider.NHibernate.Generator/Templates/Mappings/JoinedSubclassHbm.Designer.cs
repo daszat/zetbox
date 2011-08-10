@@ -59,20 +59,21 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
 this.WriteObjects("        <joined-subclass name=\"",  qualifiedImplementationName , "\"\r\n");
 this.WriteObjects("                         proxy=\"",  qualifiedImplementationName , "\"\r\n");
 this.WriteObjects("                         schema=\"`",  schemaName , "`\"\r\n");
-this.WriteObjects("                         table=\"`",  tableName , "`\">\r\n");
+this.WriteObjects("                         table=\"`",  tableName , "`\"\r\n");
+this.WriteObjects("                         dynamic-update=\"",  needsConcurrency ? "true" : "false" , "\">\r\n");
 this.WriteObjects("            \r\n");
 this.WriteObjects("            <!-- base class reference -->\r\n");
 this.WriteObjects("            <key column=\"`ID`\" />\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("            <!-- define the properties -->\r\n");
-#line 35 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\JoinedSubclassHbm.cst"
-ApplyPropertyDefinitions(properties); 
 #line 36 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\JoinedSubclassHbm.cst"
+ApplyPropertyDefinitions(properties); 
+#line 37 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\JoinedSubclassHbm.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("            <!-- define the subclasses -->\r\n");
-#line 38 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\JoinedSubclassHbm.cst"
-ApplyJoinedSubclasses(subClasses); 
 #line 39 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\JoinedSubclassHbm.cst"
+ApplyJoinedSubclasses(subClasses); 
+#line 40 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\JoinedSubclassHbm.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        </joined-subclass>\r\n");
 

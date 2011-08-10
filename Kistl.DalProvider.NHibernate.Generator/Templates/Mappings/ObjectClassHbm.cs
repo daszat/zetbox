@@ -75,7 +75,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
                 + Construct.SecurityRulesClassName(cls) + extraSuffix + Kistl.API.Helper.ImplementationSuffix
                 + ", Kistl.Objects." + extraSuffix + Kistl.API.Helper.ImplementationSuffix;
 
-            bool needsConcurrency = cls.ImplementsIChangedBy(false);
+            bool needsConcurrency = cls.ImplementsIChangedBy(true);
 
             return new object[] { interfaceName, implementationName, schemaName, tableName, qualifiedImplementationName, isAbstract, properties, subClasses, needsRightTable, needsConcurrency, qualifiedRightsClassName };
         }

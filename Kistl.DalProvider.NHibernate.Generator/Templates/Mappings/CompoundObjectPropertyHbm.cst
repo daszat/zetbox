@@ -28,7 +28,8 @@
         <component name="<%= propName %>" <%= valueClassAttr %>>
             <property name="CompoundObject_IsNull"
                       <%= isNullColumnAttr %>
-                      type="bool" />
+                      type="bool"
+                      optimistic-lock="false" />
 <%          PropertiesHbm.Call(Host, ctx, prefix + columnName + "_", properties, false);         %>
         </component>
 <% }                                                                                %>

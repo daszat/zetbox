@@ -33,11 +33,12 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
 
             propName = string.IsNullOrEmpty(propName) ? prop.Name : propName;
             columnName = string.IsNullOrEmpty(columnName) ? propName : columnName;
+            var optimisticLock = needsConcurrency && propName == "ChangedOn";
 
-            if (needsConcurrency && propName == "ChangedOn")
+            string typeAttr = String.Empty;
+            if (prop is DateTimeProperty)
             {
-                _host.WriteOutput(string.Format("<!-- ValueTypeProperty {0} is used for optimistic concurrency, declared in version element -->\n", prop.Name));
-                return;
+                typeAttr = "type=\"Timestamp\"";
             }
 
             string ceClassAttr;
@@ -54,6 +55,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
                 // not needed
                 ceClassAttr = String.Empty;
             }
+
             string ceReverseKeyColumnName = prop.GetCollectionEntryReverseKeyColumnName();
             string listPositionColumnName = Construct.ListPositionColumnName(prop);
 
@@ -62,9 +64,11 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
                 propName,
                 columnName,
                 prop.IsList && !forceDefinition,
+                typeAttr,
                 ceClassAttr,
                 ceReverseKeyColumnName,
-                listPositionColumnName);
+                listPositionColumnName,
+                optimisticLock);
         }
     }
 }

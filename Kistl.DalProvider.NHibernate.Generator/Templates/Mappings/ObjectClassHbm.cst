@@ -30,12 +30,11 @@
            proxy="<%= qualifiedImplementationName %>"
            schema="`<%= schemaName %>`"
            table="`<%= tableName %>`"
-           abstract="<%= isAbstract ? "true" : "false" %>">
+           abstract="<%= isAbstract ? "true" : "false" %>"
+           dynamic-update="<%= needsConcurrency ? "true" : "false" %>"
+           optimistic-lock="<%= needsConcurrency ? "dirty" : "none" %>">
 
 <% IdGeneratorHbm.Call(Host, "id", schemaName, tableName); %>
-<% if (needsConcurrency) { %>
-		<version name="ChangedOn" column="`ChangedOn`" type="timestamp" unsaved-value="undefined" />
-<% } %>
 
         <!-- define the properties -->
 <% ApplyPropertyDefinitions(properties); %>

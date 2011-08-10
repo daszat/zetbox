@@ -12,48 +12,53 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
 		protected string propName;
 		protected string columnName;
 		protected bool isList;
+		protected string typeAttr;
 		protected string ceClassAttr;
 		protected string ceReverseKeyColumnName;
 		protected string listPositionColumnName;
+		protected bool optimisticLock;
 
 
-        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, string prefix, string propName, string columnName, bool isList, string ceClassAttr, string ceReverseKeyColumnName, string listPositionColumnName)
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, string prefix, string propName, string columnName, bool isList, string typeAttr, string ceClassAttr, string ceReverseKeyColumnName, string listPositionColumnName, bool optimisticLock)
         {
             if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
 
-            _host.CallTemplate("Mappings.ValueTypePropertyHbm", prefix, propName, columnName, isList, ceClassAttr, ceReverseKeyColumnName, listPositionColumnName);
+            _host.CallTemplate("Mappings.ValueTypePropertyHbm", prefix, propName, columnName, isList, typeAttr, ceClassAttr, ceReverseKeyColumnName, listPositionColumnName, optimisticLock);
         }
 
-        public ValueTypePropertyHbm(Arebis.CodeGeneration.IGenerationHost _host, string prefix, string propName, string columnName, bool isList, string ceClassAttr, string ceReverseKeyColumnName, string listPositionColumnName)
+        public ValueTypePropertyHbm(Arebis.CodeGeneration.IGenerationHost _host, string prefix, string propName, string columnName, bool isList, string typeAttr, string ceClassAttr, string ceReverseKeyColumnName, string listPositionColumnName, bool optimisticLock)
             : base(_host)
         {
 			this.prefix = prefix;
 			this.propName = propName;
 			this.columnName = columnName;
 			this.isList = isList;
+			this.typeAttr = typeAttr;
 			this.ceClassAttr = ceClassAttr;
 			this.ceReverseKeyColumnName = ceReverseKeyColumnName;
 			this.listPositionColumnName = listPositionColumnName;
+			this.optimisticLock = optimisticLock;
 
         }
 
         public override void Generate()
         {
-#line 15 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\ValueTypePropertyHbm.cst"
+#line 17 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\ValueTypePropertyHbm.cst"
 if (isList) {                                                                    
-#line 16 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\ValueTypePropertyHbm.cst"
+#line 18 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\ValueTypePropertyHbm.cst"
 this.WriteObjects("        <!-- ValueTypeProperty isList -->\r\n");
-this.WriteObjects("        <set name=\"",  propName , "\" inverse=\"true\" batch-size=\"100\">\r\n");
+this.WriteObjects("        <set name=\"",  propName , "\" ",  typeAttr , " inverse=\"true\" batch-size=\"100\">\r\n");
 this.WriteObjects("            <key column=\"`",  ceReverseKeyColumnName , "`\" />\r\n");
 this.WriteObjects("            <one-to-many ",  ceClassAttr , " />\r\n");
 this.WriteObjects("        </set>\r\n");
-#line 21 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\ValueTypePropertyHbm.cst"
+#line 23 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\ValueTypePropertyHbm.cst"
 } else {                                                                         
-#line 22 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\ValueTypePropertyHbm.cst"
+#line 24 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\ValueTypePropertyHbm.cst"
 this.WriteObjects("        <!-- ValueTypeProperty isValue -->\r\n");
-this.WriteObjects("        <property name=\"",  propName , "\"\r\n");
-this.WriteObjects("                  column=\"`",  prefix , "",  columnName , "`\" />\r\n");
-#line 25 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\ValueTypePropertyHbm.cst"
+this.WriteObjects("        <property name=\"",  propName , "\" ",  typeAttr , "\r\n");
+this.WriteObjects("                  column=\"`",  prefix , "",  columnName , "`\" \r\n");
+this.WriteObjects("                  optimistic-lock=\"",  optimisticLock ? "true" : "false" , "\"/>\r\n");
+#line 28 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\ValueTypePropertyHbm.cst"
 }                                                                                
 
         }

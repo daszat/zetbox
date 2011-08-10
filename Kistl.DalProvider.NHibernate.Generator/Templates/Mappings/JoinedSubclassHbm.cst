@@ -26,7 +26,8 @@
         <joined-subclass name="<%= qualifiedImplementationName %>"
                          proxy="<%= qualifiedImplementationName %>"
                          schema="`<%= schemaName %>`"
-                         table="`<%= tableName %>`">
+                         table="`<%= tableName %>`"
+                         dynamic-update="<%= needsConcurrency ? "true" : "false" %>">
             
             <!-- base class reference -->
             <key column="`ID`" />
