@@ -298,17 +298,18 @@ namespace Kistl.API.Server
         Identity localIdentity = null;
         protected virtual void NotifyChanging(IEnumerable<IDataObject> changedOrAdded)
         {
+            var now = DateTime.Now;
+
             foreach (IDataObject obj in changedOrAdded)
             {
                 if (obj is Kistl.App.Base.Blob && obj.ObjectState == DataObjectState.Modified)
                 {
-                    throw new InvalidOperationException("Modifing a Kistl.App.Base.Blob is not allowed. Upload a new Blob instead.");
+                    throw new InvalidOperationException("Modifying a Kistl.App.Base.Blob is not allowed. Upload a new Blob instead.");
                 }
 
                 if (obj is Kistl.App.Base.IChangedBy)
                 {
                     var cb = (Kistl.App.Base.IChangedBy)obj;
-                    var now = DateTime.Now;
                     if (obj.ObjectState == DataObjectState.New)
                     {
                         cb.CreatedOn = now;
