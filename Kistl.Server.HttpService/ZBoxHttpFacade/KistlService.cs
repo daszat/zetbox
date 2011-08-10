@@ -254,7 +254,7 @@ namespace Kistl.Server.HttpService
             catch (FaultException<ConcurrencyException> cex)
             {
                 context.Response.StatusCode = (int)HttpStatusCode.Conflict;
-                Log.Error("Concurrency error while processing request", cex);
+                Log.Info("Concurrency error while processing request", cex);
             }
             catch (Exception ex)
             {
