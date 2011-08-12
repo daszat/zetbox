@@ -86,6 +86,8 @@ namespace Kistl.API
     public class ConcurrencyException
         : KistlContextException
     {
+        private const string DEFAULT_MESSAGE = "At least one object has changed between fetch and submit changes";
+
         [NonSerialized]
         private IEnumerable<IDataObject> objects;
         public IEnumerable<IDataObject> Objects
@@ -97,7 +99,7 @@ namespace Kistl.API
         }
 
         public ConcurrencyException()
-            : base("At least one object has changed between fetch and submit changes")
+            : base(DEFAULT_MESSAGE)
         {
         }
 
@@ -108,6 +110,11 @@ namespace Kistl.API
 
         public ConcurrencyException(string message, Exception inner)
             : base(message, inner)
+        {
+        }
+
+        public ConcurrencyException(Exception inner)
+            : base(DEFAULT_MESSAGE, inner)
         {
         }
 

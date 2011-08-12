@@ -297,9 +297,10 @@ namespace Kistl.DalProvider.NHibernate
                 }
                 Logging.Log.InfoFormat("[{0}] changes submitted.", notifySaveList.Count);
             }
-            catch (StaleObjectStateException)
+            catch (StaleObjectStateException ex)
             {
-                throw new ConcurrencyException();
+                var error = string.Format("Concurrent modification on {0}#{1}: {2}", ex.EntityName, ex.Identifier, ex.Message);
+                throw new ConcurrencyException(error, ex);
             }
             catch (Exception ex)
             {
