@@ -13,9 +13,9 @@ namespace Kistl.DalProvider.NHibernate
     using Kistl.API.Common;
     using Kistl.API.Configuration;
     using Kistl.API.Server;
+    using Kistl.API.Server.PerfCounter;
     using Kistl.API.Utils;
     using Kistl.App.Base;
-    using Kistl.API.Server.PerfCounter;
 
     public sealed class NHibernateContext
         : BaseKistlDataContext, IKistlServerContext
@@ -299,7 +299,7 @@ namespace Kistl.DalProvider.NHibernate
             }
             catch (StaleObjectStateException ex)
             {
-                var error = string.Format("Concurrent modification on {0}#{1}: {2}", ex.EntityName, ex.Identifier, ex.Message);
+                var error = string.Format("Failed saving transaction: Concurrent modification on {0}#{1}", ex.EntityName, ex.Identifier);
                 throw new ConcurrencyException(error, ex);
             }
             catch (Exception ex)
