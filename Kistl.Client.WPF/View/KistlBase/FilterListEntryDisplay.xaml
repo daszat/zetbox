@@ -8,6 +8,7 @@
     <DockPanel>
       <ctrls:CommandButton DockPanel.Dock="Right"
                            CommandViewModel="{Binding RemoveCommand}"
+                           Visibility="{Binding Parent.AllowUserFilter, Converter={StaticResource BooleanToVisibilityConverter}}"
                            Style="{StaticResource ImageOnlyButton}"
                            MaxHeight="28"/>
 
