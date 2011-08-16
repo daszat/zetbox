@@ -4,7 +4,7 @@
                   xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"
                   xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
                   xmlns:local="clr-namespace:Kistl.Client.Presentables.KistlBase;assembly=Kistl.Client"
-                  Title="Select Destination Property"
+                  Title="{Binding Name}"
                   ResizeMode="CanResize"
                   Height="400"
                   Width="400"
