@@ -35,8 +35,9 @@
                       ContentTemplateSelector="{StaticResource defaultTemplateSelector}"/>
 
     <TreeView x:Name="treeValues"
-        ItemsSource="{Binding PossibleValues}"
-              SelectedItemChanged="TreeView_SelectedItemChanged">
+              ItemsSource="{Binding PossibleValues}"
+              SelectedItemChanged="TreeView_SelectedItemChanged"
+              MouseDoubleClick="TreeView_MouseDoubleClick">
       <TreeView.Resources>
         <HierarchicalDataTemplate DataType="{x:Type local:SelectedPropertyViewModel}"
                                   ItemsSource="{Binding PossibleValues}">

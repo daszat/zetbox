@@ -47,5 +47,11 @@ namespace Kistl.Client.WPF.View
                 this.ViewModel.SelectedItem = item;
             }
         }
+
+        private void TreeView_MouseDoubleClick(object sender, RoutedEventArgs e)
+        {
+            ViewModel.Choose();
+            e.Handled = true;
+        }
     }
 }

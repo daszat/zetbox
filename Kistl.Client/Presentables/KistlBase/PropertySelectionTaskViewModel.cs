@@ -70,8 +70,15 @@ namespace Kistl.Client.Presentables.KistlBase
         #endregion
 
         #region Commands
+        public bool CanChoose()
+        {
+            return SelectedItem != null || MultiSelect;
+        }
+
         public void Choose()
         {
+            if (!CanChoose()) return;
+
             IList<Property> result = new List<Property>();
             var prop = SelectedItem;
             while (prop != null)
@@ -94,7 +101,7 @@ namespace Kistl.Client.Presentables.KistlBase
                     _ChooseCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this,
                         PropertySelectionTaskViewModelResources.ChooseCommand,
                         PropertySelectionTaskViewModelResources.ChooseCommand_Tooltip,
-                        Choose, () => SelectedItem != null || MultiSelect);
+                        Choose, CanChoose);
                 }
                 return _ChooseCommand;
             }
