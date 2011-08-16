@@ -10,6 +10,7 @@ namespace Kistl.App.Extensions
     using System.Reflection;
     using System.Text;
     using Autofac;
+    using Autofac.Core.Registration;
     using Kistl.API;
     using Kistl.API.Utils;
     using Kistl.App.Base;
@@ -406,9 +407,13 @@ namespace Kistl.App.Extensions
 
                 AttachEvents(clrMethod, ei);
             }
+            catch (ComponentNotRegisteredException ex)
+            {
+                Log.Error(string.Format("Non-static handler for {0} or its dependencies not registered with autofac. Continuing without business logic", t.AssemblyQualifiedName), ex);
+            }
             catch (Exception ex)
             {
-                Log.Warn(string.Format("Exception in CreateInvokeInfo: type: {0}, method: {1}", implType.FullName, clrMethod), ex);
+                Log.Warn(string.Format("Exception in CreateInvokeInfo: type: {0}, method: {1} in {2}", implType.FullName, clrMethod, clrMethod.DeclaringType.Assembly.FullName), ex);
             }
         }
         #endregion
