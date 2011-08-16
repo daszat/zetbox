@@ -409,7 +409,7 @@ namespace Kistl.App.Extensions
             }
             catch (ComponentNotRegisteredException ex)
             {
-                Log.Error(string.Format("Non-static handler for {0} or its dependencies not registered with autofac. Continuing without business logic", t.AssemblyQualifiedName), ex);
+                Log.Error(string.Format("Non-static handler for {0} or its dependencies not registered with autofac. Continuing without business logic", clrMethod.DeclaringType.AssemblyQualifiedName), ex);
             }
             catch (Exception ex)
             {
