@@ -21,6 +21,7 @@
       </ItemsControl.ItemTemplate>
     </ItemsControl>
     <ctrls:CommandButton CommandViewModel="{Binding AddFilterCommand}"
+                         Visibility="{Binding AllowUserFilter, Converter={StaticResource BooleanToVisibilityConverter}}"
                          HorizontalAlignment="Right"
                          Style="{StaticResource ImageButton}"
                          MaxHeight="28"/>

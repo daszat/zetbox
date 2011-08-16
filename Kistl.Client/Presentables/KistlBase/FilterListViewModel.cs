@@ -95,6 +95,26 @@ namespace Kistl.Client.Presentables.KistlBase
             }
         }
 
+        private bool _allowUserFilter = true;
+        /// <summary>
+        /// Allow the user to modify the filter collection
+        /// </summary>
+        public bool AllowUserFilter
+        {
+            get
+            {
+                return _allowUserFilter;
+            }
+            set
+            {
+                if (_allowUserFilter != value)
+                {
+                    _allowUserFilter = value;
+                    OnPropertyChanged("AllowUserFilter");
+                }
+            }
+        }
+
         private void UpdateRespectRequieredFilter()
         {
             if (_FilterViewModels != null)
@@ -292,7 +312,7 @@ namespace Kistl.Client.Presentables.KistlBase
                         InstanceListViewModelResources.AddFilterCommand,
                         InstanceListViewModelResources.AddFilterCommand_Tooltip,
                         AddFilter,
-                        () => ShowFilter);
+                        () => ShowFilter && AllowUserFilter);
                     _AddFilterCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_new_png);
                 }
                 return _AddFilterCommand;

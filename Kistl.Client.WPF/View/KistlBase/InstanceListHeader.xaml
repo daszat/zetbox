@@ -10,6 +10,7 @@
   <DockPanel>
     <ctrls:CommandButton DockPanel.Dock="Right"
                          CommandViewModel="{Binding SelectColumnsCommand}"
+                         Visibility="{Binding AllowSelectColumns, Converter={StaticResource BooleanToVisibilityConverter}}"
                          HorizontalAlignment="Right"
                          Style="{StaticResource ImageButton}"
                          MaxHeight="28"/>

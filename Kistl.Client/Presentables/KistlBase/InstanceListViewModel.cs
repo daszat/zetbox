@@ -198,6 +198,21 @@ namespace Kistl.Client.Presentables.KistlBase
             }
         }
 
+        /// <summary>
+        /// Allow the user to modify the filter collection
+        /// </summary>
+        public bool AllowUserFilter
+        {
+            get
+            {
+                return _filterList.AllowUserFilter;
+            }
+            set
+            {
+                _filterList.AllowUserFilter = value;
+            }
+        }
+
         public ReadOnlyObservableCollection<IFilterModel> Filter
         {
             get
@@ -478,6 +493,29 @@ namespace Kistl.Client.Presentables.KistlBase
             ReloadInstances();
         }
 
+        private bool _allowSelectColumns = true;
+        /// <summary>
+        /// Allow the user to modify the column collection if the ViewMethod is Details
+        /// </summary>
+        /// <remarks>
+        /// Returns always false if the ViewMethod is List
+        /// </remarks>
+        public bool AllowSelectColumns
+        {
+            get
+            {
+                return ViewMethod == InstanceListViewMethod.Details && _allowSelectColumns;
+            }
+            set
+            {
+                if (_allowSelectColumns != value)
+                {
+                    _allowSelectColumns = value;
+                    OnPropertyChanged("AllowSelectColumns");
+                }
+            }
+        }
+
         private ICommandViewModel _SelectColumnsCommand = null;
         public ICommandViewModel SelectColumnsCommand
         {
@@ -490,7 +528,7 @@ namespace Kistl.Client.Presentables.KistlBase
                         InstanceListViewModelResources.SelectColumnsCommand,
                         InstanceListViewModelResources.SelectColumnsCommand_Tooltip,
                         SelectColumns,
-                        null);
+                        () => AllowSelectColumns);
                 }
                 return _SelectColumnsCommand;
             }
