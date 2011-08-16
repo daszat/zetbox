@@ -111,6 +111,7 @@ namespace Kistl.App.Packaging
                     .AsQueryable()
                     .OrderBy(i => i.A.Title)
                     .ThenBy(i => i.A.Parent != null ? i.A.Parent.Title : String.Empty)
+                    .ThenBy(i => i.B.Name)
                     .ThenBy(i => i.A.ExportGuid));
 
                 // Security
