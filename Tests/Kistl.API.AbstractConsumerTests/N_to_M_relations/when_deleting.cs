@@ -31,9 +31,9 @@ namespace Kistl.API.AbstractConsumerTests.N_to_M_relations
         {
             ctx.Delete(bSide1);
 
-            // TODO: Which of the following is this the desired behaviour?
-            //aSide1.BSide.Remove(bSide1);
-            //Assert.That(aSide1.BSide, Has.No.Member(bSide1));
+            // TODO: Remove the manual Remove() here.
+            aSide1.BSide.Remove(bSide1);
+            Assert.That(aSide1.BSide, Has.No.Member(bSide1));
 
             ctx.SubmitChanges();
         }
