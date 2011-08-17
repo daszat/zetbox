@@ -24,6 +24,7 @@ namespace Kistl.API.AbstractConsumerTests.N_to_M_relations
         {
             aSide1.BSide.Remove(bSide1);
             Assert.That(ctx.AttachedObjects.OfType<IRelationEntry>().Single().ObjectState, Is.EqualTo(DataObjectState.Deleted));
+            ctx.SubmitChanges();
         }
 
         [Test]
