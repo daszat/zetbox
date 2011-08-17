@@ -251,7 +251,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BaseObjectCollectionViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Presentables\ValueViewModels\CalculatedProperties.cs" />
     <Compile Include="Presentables\ValueViewModels\CompoundListViewModel.cs" />
     <Compile Include="Presentables\ValueViewModels\CompoundObjectPropertyViewModel.cs" />
     <Compile Include="Presentables\CompoundObjectViewModel.cs" />

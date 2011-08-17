@@ -75,7 +75,11 @@ namespace Kistl.Client.Presentables.ObjectEditor
         }
 
         private bool? _ShowItemsList;
-        public bool ShowItemsList
+
+        /// <summary>
+        /// Whether or not the Items list is shown. If set to null, it will reflect whether or not there is more than one Item.
+        /// </summary>
+        public bool? ShowItemsList
         {
             get
             {

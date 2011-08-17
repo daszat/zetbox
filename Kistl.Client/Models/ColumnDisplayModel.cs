@@ -28,10 +28,6 @@ namespace Kistl.Client.Models
             /// </summary>
             Property,
             /// <summary>
-            /// References a ViewModels calculaded property
-            /// </summary>
-            CalculatedProperty,
-            /// <summary>
             /// References a DataObjectViewModel.ActionViewModelsByName[] ViewModel
             /// </summary>
             MethodModel,
@@ -103,9 +99,6 @@ namespace Kistl.Client.Models
             string val = null;
             switch (this.Type)
             {
-                case ColumnDisplayModel.ColumnType.CalculatedProperty:
-                    val = ((IFormattedValueViewModel)obj.CalculatedPropertyModelsByName[this.Name]).FormattedValue;
-                    break;
                 case ColumnDisplayModel.ColumnType.Property:
                     var propVal = obj.GetPropertyValue<object>(this.Name);
                     val = propVal != null ? propVal.ToString() : string.Empty;

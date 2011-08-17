@@ -12,10 +12,10 @@ namespace Kistl.Client.WPF.Toolkit
     using System.Windows.Input;
     using System.Windows.Media;
     using Kistl.Client.Models;
-    using Kistl.Client.WPF.Toolkit;
-    using Microsoft.Windows.Controls;
     using Kistl.Client.Presentables;
     using Kistl.Client.WPF.CustomControls;
+    using Kistl.Client.WPF.Toolkit;
+    using Microsoft.Windows.Controls;
 
     public static class WPFHelper
     {
@@ -101,10 +101,6 @@ namespace Kistl.Client.WPF.Toolkit
                             labelFactory.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(binding), Mode = BindingMode.OneWay });
                             break;
                         }
-                    case ColumnDisplayModel.ColumnType.CalculatedProperty:
-                        if (needEditor) editorFactory.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(String.Format("Object.CalculatedPropertyModelsByName[{0}]", desc.Name)), Mode = BindingMode.OneWay });
-                        labelFactory.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(String.Format("Object.CalculatedPropertyModelsByName[{0}]", desc.Name)), Mode = BindingMode.OneWay });
-                        break;
                     case ColumnDisplayModel.ColumnType.Property:
                         if (needEditor) editorFactory.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath("Object." + desc.Name), Mode = BindingMode.OneWay });
                         labelFactory.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath("Object." + desc.Name), Mode = BindingMode.OneWay });
@@ -179,9 +175,6 @@ namespace Kistl.Client.WPF.Toolkit
                             cpFef.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(binding), Mode = BindingMode.OneWay });
                             break;
                         }
-                    case ColumnDisplayModel.ColumnType.CalculatedProperty:
-                        cpFef.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(String.Format("CalculatedPropertyModelsByName[{0}]", desc.Name)), Mode = BindingMode.OneWay });
-                        break;
                     case ColumnDisplayModel.ColumnType.Property:
                         cpFef.SetBinding(ContentPresenter.ContentProperty, new Binding() { Path = new PropertyPath(desc.Name), Mode = BindingMode.OneWay });
                         break;

@@ -98,8 +98,6 @@ namespace Kistl.Client.Presentables
             }
         }
 
-        private readonly CalculatedProperties _calcProperties;
-
         /// <param name="dependencies">The <see cref="IViewModelDependencies"/> to access the current application context</param>
         /// <param name="dataCtx">The <see cref="IKistlContext"/> to access the current user's data session</param>
         /// <param name="parent">The parent <see cref="ViewModel"/> to ...</param>
@@ -109,7 +107,6 @@ namespace Kistl.Client.Presentables
             IsInDesignMode = false;
             _dependencies = dependencies;
             DataContext = dataCtx;
-            _calcProperties = new CalculatedProperties(dataCtx, this);
 
             if (_parent != null) _parent.PropertyChanged += (s, e) => { if (e.PropertyName == "Highlight") OnPropertyChanged("Highlight"); };
         }
@@ -174,22 +171,6 @@ namespace Kistl.Client.Presentables
         /// A common "name" of this Model. May be used for generic filtering or displaying.
         /// </summary>
         public abstract string Name { get; }
-
-        public IDictionary<string, ViewModel> CalculatedPropertyModelsByName
-        {
-            get
-            {
-                return _calcProperties;
-            }
-        }
-
-        protected CalculatedProperties CalculatedProperties
-        {
-            get
-            {
-                return _calcProperties;
-            }
-        }
 
         #endregion
 
