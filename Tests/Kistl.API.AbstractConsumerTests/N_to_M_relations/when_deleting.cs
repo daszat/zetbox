@@ -25,5 +25,17 @@ namespace Kistl.API.AbstractConsumerTests.N_to_M_relations
             aSide1.BSide.Remove(bSide1);
             Assert.That(ctx.AttachedObjects.OfType<IRelationEntry>().Single().ObjectState, Is.EqualTo(DataObjectState.Deleted));
         }
+
+        [Test]
+        public void should_remove_from_Collection()
+        {
+            ctx.Delete(bSide1);
+
+            // TODO: Which of the following is this the desired behaviour?
+            //aSide1.BSide.Remove(bSide1);
+            //Assert.That(aSide1.BSide, Has.No.Member(bSide1));
+
+            ctx.SubmitChanges();
+        }
     }
 }

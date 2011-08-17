@@ -93,17 +93,18 @@
     <Compile Include="N_to_M_relations\when_adding.cs" />
     <Compile Include="N_to_M_relations\when_deleting.cs" />
     <Compile Include="N_to_M_relations\when_initializing.cs" />
-    <Compile Include="one_to_N_relations\OneNFixture.cs" />
-    <Compile Include="one_to_N_relations\when_clearing_nside.cs" />
-    <Compile Include="one_to_N_relations\when_initializing.cs" />
-    <Compile Include="one_to_N_relations\when_removing_from_NSide_property.cs" />
-    <Compile Include="one_to_N_relations\when_changing_one_to_n_relations.cs" />
-    <Compile Include="one_to_N_relations\when_adding_to_NSide_property.cs" />
-    <Compile Include="one_to_N_relations\when_resetting_one_side.cs" />
-    <Compile Include="one_to_N_relations\when_setting_OneSide_property.cs" />
-    <Compile Include="one_to_N_relations\with_persistent_order\OrderedOneNFixture.cs" />
-    <Compile Include="one_to_N_relations\with_persistent_order\when_adding_multiple_items.cs" />
-    <Compile Include="one_to_N_relations\with_persistent_order\when_setting_via_index.cs" />
+    <Compile Include="optional_parent\OneNFixture.cs" />
+    <Compile Include="optional_parent\when_clearing_nside.cs" />
+    <Compile Include="optional_parent\when_deleting_NSide_object.cs" />
+    <Compile Include="optional_parent\when_initializing.cs" />
+    <Compile Include="optional_parent\when_removing_from_NSide_property.cs" />
+    <Compile Include="optional_parent\when_changing_one_to_n_relations.cs" />
+    <Compile Include="optional_parent\when_adding_to_NSide_property.cs" />
+    <Compile Include="optional_parent\when_resetting_one_side.cs" />
+    <Compile Include="optional_parent\when_setting_OneSide_property.cs" />
+    <Compile Include="optional_parent\with_persistent_order\OrderedOneNFixture.cs" />
+    <Compile Include="optional_parent\with_persistent_order\when_adding_multiple_items.cs" />
+    <Compile Include="optional_parent\with_persistent_order\when_setting_via_index.cs" />
     <Compile Include="PersistenceObjects\when_initializing.cs" />
     <Compile Include="PersistenceObjects\navigator_context_checks.cs" />
     <Compile Include="PersistenceObjects\ObjectLoadFixture.cs" />
@@ -114,6 +115,9 @@
     <Compile Include="CompoundObjects\CompoundObjectFixture.cs" />
     <Compile Include="CompoundObjects\when_changing_a_CompoundObject_member.cs" />
     <Compile Include="CompoundObjects\when_initialized.cs" />
+    <Compile Include="required_parent\when_parent_set.cs" />
+    <Compile Include="required_parent\RequiredParentFixture.cs" />
+    <Compile Include="required_parent\when_parent_not_set.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Kistl.API\Kistl.API.csproj">

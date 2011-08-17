@@ -76,18 +76,21 @@
     <Compile Include="Tests\N_to_M_relations\should_synchronize.cs" />
     <Compile Include="Tests\N_to_M_relations\when_deleting.cs" />
     <Compile Include="Tests\N_to_M_relations\when_initializing.cs" />
-    <Compile Include="Tests\one_to_N_relations\when_resetting_one_side.cs" />
-    <Compile Include="Tests\one_to_N_relations\when_clearing_nside.cs" />
-    <Compile Include="Tests\one_to_N_relations\when_initializing.cs" />
-    <Compile Include="Tests\one_to_N_relations\when_removing_from_NSide_property.cs" />
-    <Compile Include="Tests\one_to_N_relations\when_adding_to_NSide_property.cs" />
-    <Compile Include="Tests\one_to_N_relations\when_setting_OneSide_property.cs" />
-    <Compile Include="Tests\one_to_N_relations\with_persistent_order\when_adding_multiple_items.cs" />
-    <Compile Include="Tests\one_to_N_relations\with_persistent_order\when_setting_via_index.cs" />
+    <Compile Include="Tests\optional_parent\when_deleting_NSide_object.cs" />
+    <Compile Include="Tests\optional_parent\when_resetting_one_side.cs" />
+    <Compile Include="Tests\optional_parent\when_clearing_nside.cs" />
+    <Compile Include="Tests\optional_parent\when_initializing.cs" />
+    <Compile Include="Tests\optional_parent\when_removing_from_NSide_property.cs" />
+    <Compile Include="Tests\optional_parent\when_adding_to_NSide_property.cs" />
+    <Compile Include="Tests\optional_parent\when_setting_OneSide_property.cs" />
+    <Compile Include="Tests\optional_parent\with_persistent_order\when_adding_multiple_items.cs" />
+    <Compile Include="Tests\optional_parent\with_persistent_order\when_setting_via_index.cs" />
     <Compile Include="Tests\PersistenceObjects\when_initializing.cs" />
     <Compile Include="Tests\PersistenceObjects\navigator_context_checks.cs" />
     <Compile Include="Tests\PersistenceObjects\when_changed.cs" />
     <Compile Include="Tests\PersistenceObjects\when_loaded.cs" />
+    <Compile Include="Tests\required_parent\when_parent_not_set.cs" />
+    <Compile Include="Tests\required_parent\when_parent_set.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
