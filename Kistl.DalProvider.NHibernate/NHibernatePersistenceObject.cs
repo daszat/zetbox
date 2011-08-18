@@ -77,14 +77,15 @@ namespace Kistl.DalProvider.NHibernate
                     // session.SaveOrUpdate(this.NHibernateProxy);
                     break;
                 case DataObjectState.Deleted:
-                    Kistl.API.Utils.Logging.Log.DebugFormat("Delete: {0}#{1}", this.GetType(), this.ID);
-                    session.Delete(this.NHibernateProxy);
-                    break;
+                    throw new InvalidOperationException("object should be deleted, not saved");
                 case DataObjectState.NotDeserialized:
                     throw new InvalidOperationException("object not deserialized");
                 default:
                     throw new NotImplementedException(String.Format("unknown DataObjectState encountered: '{0}'", this.ObjectState));
             }
         }
+
+        public virtual List<NHibernatePersistenceObject> GetParentsToDelete() { return new List<NHibernatePersistenceObject>(); }
+        public virtual List<NHibernatePersistenceObject> GetChildrenToDelete() { return new List<NHibernatePersistenceObject>(); }
     }
 }

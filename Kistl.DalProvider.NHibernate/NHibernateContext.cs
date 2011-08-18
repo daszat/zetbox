@@ -282,13 +282,28 @@ namespace Kistl.DalProvider.NHibernate
             var ticks = _perfCounter.IncrementSubmitChanges();
             try
             {
+                var deleted = new List<NHibernatePersistenceObject>();
                 foreach (var obj in notifySaveList)
                 {
                     _attachedObjects.Remove(obj);
                     _attachedObjectsByProxy.Remove(obj);
 
-                    obj.SaveOrUpdateTo(_nhSession);
+                    if (obj.ObjectState == DataObjectState.Deleted)
+                    {
+                        Kistl.API.Utils.Logging.Log.DebugFormat("Delete: {0}#{1}", obj.GetType(), obj.ID);
+                        deleted.Add(obj);
+                    }
+                    else
+                    {
+                        obj.SaveOrUpdateTo(_nhSession);
+                    }
                 }
+
+                foreach (var obj in RelationTopoSort(deleted))
+                {
+                    _nhSession.Delete(obj.NHibernateProxy);
+                }
+
                 _nhSession.Flush();
                 foreach (var obj in notifySaveList)
                 {
@@ -311,6 +326,63 @@ namespace Kistl.DalProvider.NHibernate
             {
                 _perfCounter.DecrementSubmitChanges(notifySaveList.Count, ticks);
             }
+        }
+
+        /// <summary>
+        /// Orders the specified input topologically by required relations. The output ordering can be used for deleting objects without violating FKs.
+        /// </summary>
+        /// <remarks>
+        /// See http://en.wikipedia.org/wiki/Topological_ordering#CITEREFKahn1962
+        /// </remarks>
+        private IEnumerable<NHibernatePersistenceObject> RelationTopoSort(List<NHibernatePersistenceObject> input)
+        {
+            var edges = input.ToDictionary(i => i, i => i.GetChildrenToDelete());
+
+            // > L ← Empty list that will contain the sorted elements
+            // will be yielded directly
+
+            // > S ← Set of all nodes with no incoming edges
+            var S = new Stack<NHibernatePersistenceObject>(edges.Where(kvp => kvp.Value.Count == 0).Select(kvp => kvp.Key));
+
+            // > while S is non-empty do
+            while (S.Count > 0)
+            {
+                // > remove a node n from S
+                var n = S.Pop();
+
+                // > insert n into L
+                yield return n;
+
+                // > for each node m with an edge e from n to m do
+                foreach (var m in n.GetParentsToDelete())
+                {
+                    // > remove edge e from the graph
+                    edges[m].Remove(n);
+
+                    // > if m has no other incoming edges then
+                    if (edges[m].Count == 0)
+                    {
+                        // > insert m into S
+                        S.Push(m);
+                    }
+                }
+            }
+
+            // > if graph has edges then
+            if (edges.Any(e => e.Value.Count > 0))
+            {
+                // > output error message (graph has at least one cycle)
+                var cycle = String.Join(", ",
+                    edges.Where(kvp => kvp.Value.Count > 0)
+                        .Select(kvp => string.Format("{0}#{1} => < {2} >",
+                            kvp.Key.GetType(),
+                            kvp.Key.ID,
+                            string.Join(", ", kvp.Value.Select(v => string.Format("{0}#{1}", v.GetType(), v.ID)).ToArray()))).ToArray());
+                throw new InvalidOperationException("deletion cycle detected: " + cycle);
+            }
+            // > else 
+            // >     output message (proposed topologically sorted order: L)
+            // already done by yielding
         }
 
         protected override object CreateUnattachedInstance(InterfaceType ifType)
