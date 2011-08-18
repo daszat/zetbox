@@ -212,7 +212,7 @@ namespace Kistl.DalProvider.NHibernate
             CheckDisposed();
             DebugTraceChangedObjects();
 
-            var objects = GetModifiedObjects();
+            var objects = GetModifiedObjects().Distinct().ToList();
             var notifyList = objects.OfType<IDataObject>().ToList();
 
             NotifyChanging(notifyList);
@@ -230,7 +230,7 @@ namespace Kistl.DalProvider.NHibernate
         {
             CheckDisposed();
 
-            var objects = GetModifiedObjects();
+            var objects = GetModifiedObjects().Distinct().ToList();
 
             FlushSession(objects);
 
