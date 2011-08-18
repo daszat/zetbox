@@ -58,7 +58,7 @@ namespace Kistl.Client.Models
             }
             else if (prop is ObjectReferenceProperty)
             {
-                ObjectReferenceProperty objRefProp = (ObjectReferenceProperty)prop;
+                var objRefProp = (ObjectReferenceProperty)prop;
                 if (objRefProp.GetIsList())
                 {
                     var sorted = objRefProp.RelationEnd.Parent.GetOtherEnd(objRefProp.RelationEnd).HasPersistentOrder;
@@ -75,6 +75,11 @@ namespace Kistl.Client.Models
                 {
                     return new ObjectReferencePropertyValueModel(obj, objRefProp);
                 }
+            }
+            else if (prop is CalculatedObjectReferenceProperty)
+            {
+                var objRefProp = (CalculatedObjectReferenceProperty)prop;
+                return new CalculatedObjectReferencePropertyValueModel(obj, objRefProp);
             }
             else if (prop is CompoundObjectProperty)
             {
@@ -557,6 +562,60 @@ namespace Kistl.Client.Models
                 return _relEnd;
             }
         }
+
+        #endregion
+    }
+
+    public class CalculatedObjectReferencePropertyValueModel
+        : ClassPropertyValueModel<IDataObject>, IObjectReferenceValueModel
+    {
+        protected readonly CalculatedObjectReferenceProperty objRefProp;
+
+        public CalculatedObjectReferencePropertyValueModel(INotifyingObject obj, CalculatedObjectReferenceProperty prop)
+            : base(obj, prop)
+        {
+            this.objRefProp = prop;
+        }
+
+        #region IValueModel<TValue> Members
+        private bool _valueCacheInititalized = false;
+        private IDataObject _valueCache;
+
+        /// <summary>
+        /// Gets or sets the value of the property presented by this model
+        /// </summary>
+        public override IDataObject Value
+        {
+            get
+            {
+                if (!_valueCacheInititalized)
+                {
+                    UpdateValueCache();
+                }
+                return _valueCache;
+            }
+            set
+            {
+                _valueCache = value;
+                _valueCacheInititalized = true;
+                Object.SetPropertyValue<IDataObject>(Property.Name, value);
+                CheckConstraints();
+                NotifyValueChanged();
+            }
+        }
+
+        protected override void UpdateValueCache()
+        {
+            _valueCache = Object.GetPropertyValue<IDataObject>(Property.Name);
+            _valueCacheInititalized = true;
+        }
+        #endregion
+
+        #region IObjectReferenceValueModel Members
+
+        public ObjectClass ReferencedClass { get { return this.objRefProp.ReferencedClass; } }
+
+        public RelationEnd RelEnd { get { return null; } }
 
         #endregion
     }

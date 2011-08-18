@@ -31,7 +31,15 @@ namespace Kistl.Client.Presentables.ValueViewModels
             ObjectReferenceModel = (IObjectReferenceValueModel)mdl;
             var relEnd = ObjectReferenceModel.RelEnd;
 
-            if (relEnd != null)
+            if (relEnd == null)
+            {
+                // not a relation => not editable
+                _allowClear = false;
+                _allowCreateNewItem = false;
+                _allowDelete = false;
+                _allowSelectValue = false;
+            }
+            else
             {
                 var rel = relEnd.Parent;
                 if (rel != null)
