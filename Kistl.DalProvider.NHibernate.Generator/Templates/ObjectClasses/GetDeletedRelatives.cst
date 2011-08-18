@@ -1,0 +1,83 @@
+﻿<%@ CodeTemplate Language="C#" 
+    Name="ObjectClasses.GetDeletedRelatives"
+    ClassName="Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.GetDeletedRelatives" 
+    Inherits="Kistl.Generator.ResourceTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="System.Linq" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.App.Extensions" %>
+<%@ Import Namespace="Kistl.Generator" %>
+<%@ Import Namespace="Kistl.Generator.Extensions" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="cls" Type="ObjectClass" %>
+        public override List<NHibernatePersistenceObject> GetParentsToDelete()
+        {
+            var result = base.GetParentsToDelete();
+
+<% foreach (var rel in cls.GetRelations()) {                                                                            %>
+<%      if (rel.Storage == StorageType.Separate) continue; // handled by cascading in the mapping                       %>
+<%      var relEnd = rel.GetEndFromClass(cls);                                                                          %>
+<%      var otherEnd = rel.GetOtherEndFromClass(cls);                                                                   %>
+<%      if (relEnd.Navigator == null && otherEnd.Navigator == null)                                                     %>
+<%          throw new NotImplementedException(string.Format("Cannot handle Relation#{0} without Navigators", rel.ID));  %>
+<%      var haveStorage = (rel.Storage == StorageType.MergeIntoA && rel.A == relEnd)                                    %>
+<%          || (rel.Storage == StorageType.MergeIntoB && rel.B == relEnd);                                              %>
+<%      if (!haveStorage) continue; // we are parent, skip this                                                         %>
+
+<%      if (relEnd.Navigator != null) {                                                                                 %>
+            if (this.<%= relEnd.Navigator.Name %> != null && this.<%= relEnd.Navigator.Name %>.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.<%= relEnd.Navigator.Name %>);
+<%      } else {                                                                                                        %>
+<%          GenerateParentSearch(otherEnd.Type.GetDataTypeString(), otherEnd.Navigator.Name, relEnd.Multiplicity.UpperBound()); %>
+<%      }                                                                                                               %>
+<% }                                                                                                                    %>
+
+            return result;
+        }
+
+        public override List<NHibernatePersistenceObject> GetChildrenToDelete()
+        {
+            var result = base.GetChildrenToDelete();
+
+<% foreach (var rel in cls.GetRelations()) {                                                                            %>
+<%      if (rel.Storage == StorageType.Separate) continue; // handled by cascading in the mapping                       %>
+<%      var relEnd = rel.GetEndFromClass(cls);                                                                          %>
+<%      var otherEnd = rel.GetOtherEndFromClass(cls);                                                                   %>
+<%      if (relEnd.Navigator == null && otherEnd.Navigator == null)                                                     %>
+<%          throw new NotImplementedException(string.Format("Cannot handle Relation#{0} without Navigators", rel.ID));  %>
+<%      var haveStorage = (rel.Storage == StorageType.MergeIntoA && rel.A == relEnd)                                    %>
+<%          || (rel.Storage == StorageType.MergeIntoB && rel.B == relEnd);                                              %>
+<%      if (haveStorage) continue; // we are child, skip this                                                           %>
+<%      if (relEnd.Navigator != null && otherEnd.Multiplicity == Multiplicity.One) {                                    %>
+            if (this.<%= relEnd.Navigator.Name %> != null && this.<%= relEnd.Navigator.Name %>.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.<%= relEnd.Navigator.Name %>);
+<%      } else {                                                                                                        %>
+<%          GenerateChildSearch(otherEnd.Type.GetDataTypeString(), otherEnd.Navigator.Name); %>
+<%      }                                                                                                               %>
+<% }                                                                                                                    %>
+
+            return result;
+        }
+
+<%%
+        public void GenerateChildSearch(string datatype, string navigatorName)
+        {
+            this.WriteObjects("            result.AddRange(Context.AttachedObjects\r\n");
+            this.WriteObjects("                .OfType<", datatype, ">()\r\n");
+            this.WriteObjects("                .Where(child => child.", navigatorName, " == this\r\n");
+            this.WriteObjects("                    && child.ObjectState == DataObjectState.Deleted)\r\n");
+            this.WriteObjects("                .Cast<NHibernatePersistenceObject>());\r\n");
+        }
+
+        public void GenerateParentSearch(string datatype, string navigatorName, int multiplicityUpperBound)
+        {
+            this.WriteObjects("            result.AddRange(Context.AttachedObjects\r\n");
+            this.WriteObjects("                .OfType<", datatype, ">()\r\n");
+            this.WriteObjects("                .Where(parent => parent.", navigatorName, multiplicityUpperBound == 1 ? " == this" : ".Contains(this)", "\r\n");
+            this.WriteObjects("                    && parent.ObjectState == DataObjectState.Deleted)\r\n");
+            this.WriteObjects("                .Cast<NHibernatePersistenceObject>());\r\n");
+        }
+%%>
