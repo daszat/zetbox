@@ -21,16 +21,6 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
             var rel = Kistl.App.Extensions.RelationExtensions.Lookup(ctx, prop);
             var relEnd = rel.GetEnd(prop);
             var otherEnd = rel.GetOtherEnd(relEnd);
-            bool inverse = false;
-
-            // mark this relation mapping as inverse if there are both navigators defined
-            // and we are currently working on the second
-            // TODO: actually we'd probably want to choose the n-side for setting inverse
-            //       except for lists, which are not supported as inverse by NHibernate
-            if (relEnd.Navigator != null && otherEnd.Navigator != null && relEnd == rel.B)
-            {
-                inverse = true;
-            }
 
             string nameAttr = String.Format("name=\"{0}\"", prop.Name);
             string classAttr = String.Format("class=\"{0}\"",
@@ -64,16 +54,11 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
                     if (otherEnd.Multiplicity.UpperBound() > 1) // we are 1-side
                     {
                         // always map as set, the wrapper has to translate/order the elements
-                        this.WriteObjects("        <set ", nameAttr, " batch-size=\"100\" ");
+                        this.WriteObjects("        <set ", nameAttr, " batch-size=\"100\" inverse=\"true\" ");
                         if (prop.EagerLoading)
                         {
                             // TODO: re-think and re-test eagerloading
                             //this.WriteObjects("lazy=\"false\" fetch=\"join\" ");
-                        }
-                        // TODO: always mark this side inverse. See p57 in the reference
-                        if (inverse)
-                        {
-                            this.WriteObjects("inverse=\"true\" ");
                         }
                         this.WriteLine(">");
                         string columnAttr = String.Format("column=\"`{0}`\"", Construct.ForeignKeyColumnName(relEnd, prefix));
@@ -92,10 +77,6 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
                             // TODO: re-think and re-test eagerloading
                             //this.WriteObjects("fetch=\"join\" ");
                         }
-                        if (inverse)
-                        {
-                            // invalid: this.WriteObjects("inverse=\"true\" ");
-                        }
                         this.WriteLine("/>");
                         if (rel.NeedsPositionStorage(relEnd.GetRole()))
                         {
@@ -107,7 +88,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
                     }
                     break;
                 case RelationType.n_m:
-                    ApplyNMProperty(rel, relEnd, otherEnd, prop, inverse);
+                    ApplyNMProperty(rel, relEnd, otherEnd, prop);
                     break;
                 default:
                     throw new NotImplementedException(String.Format("Unknown RelationType {0} found", rel.GetRelationType()));
@@ -119,8 +100,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
 
         private void ApplyNMProperty(
             Relation rel, RelationEnd relEnd, RelationEnd otherEnd,
-            ObjectReferenceProperty prop,
-            bool inverse)
+            ObjectReferenceProperty prop)
         {
             this.WriteLine("        <!-- NMProperty -->");
             this.WriteLine("        <!-- rel={0} -->", rel.GetRelationClassName());
