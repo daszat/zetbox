@@ -15,7 +15,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
     using System.Collections.Specialized;
 
     public class WorkspaceViewModel
-        : WindowViewModel, IMultipleInstancesManager, IDisposable
+        : WindowViewModel, IMultipleInstancesManager, IContextViewModel, IDisposable
     {
         public new delegate WorkspaceViewModel Factory(IKistlContext dataCtx, ViewModel parent);
 
@@ -176,10 +176,15 @@ namespace Kistl.Client.Presentables.ObjectEditor
                         this,
                         WorkspaceViewModelResources.DeleteCommand_Name,
                         WorkspaceViewModelResources.DeleteCommand_Tooltip,
-                        (items) => items.ForEach(i => i.Delete()));
+                        Delete);
                 }
                 return _DeleteCommand;
             }
+        }
+
+        public void Delete(IEnumerable<DataObjectViewModel> items)
+        {
+            items.ForEach(i => i.Delete());
         }
         #endregion
 
@@ -227,6 +232,11 @@ namespace Kistl.Client.Presentables.ObjectEditor
         public void Close()
         {
             this.Show = false;
+        }
+
+        void IContextViewModel.Abort()
+        {
+            Close();
         }
 
         private IEnumerable<string> UpdateErrors()
@@ -334,7 +344,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
         /// <summary>
         /// This command checks whether all constraints of the attached objects are satisfied.
         /// </summary>
-        public ICommandViewModel VerifyContextCommand
+        public ICommandViewModel VerifyCommand
         {
             get
             {
@@ -361,6 +371,10 @@ namespace Kistl.Client.Presentables.ObjectEditor
                 ViewModelFactory.ShowModel(elm, true);
             });
             loader.Trigger();
+        }
+        void IContextViewModel.Verify()
+        {
+            ShowVerificationResults();
         }
         #endregion
 
