@@ -282,30 +282,26 @@ namespace Kistl.DalProvider.NHibernate
             var ticks = _perfCounter.IncrementSubmitChanges();
             try
             {
-                var deleted = new List<NHibernatePersistenceObject>();
-                foreach (var obj in notifySaveList)
+                foreach (var obj in RelationTopoSort(notifySaveList.Where(obj => obj.ObjectState == DataObjectState.Deleted)))
                 {
                     _attachedObjects.Remove(obj);
                     _attachedObjectsByProxy.Remove(obj);
 
-                    if (obj.ObjectState == DataObjectState.Deleted)
-                    {
-                        Kistl.API.Utils.Logging.Log.DebugFormat("Delete: {0}#{1}", obj.GetType(), obj.ID);
-                        deleted.Add(obj);
-                    }
-                    else
-                    {
-                        obj.SaveOrUpdateTo(_nhSession);
-                    }
-                }
-
-                foreach (var obj in RelationTopoSort(deleted))
-                {
+                    Kistl.API.Utils.Logging.Log.ErrorFormat("Deleting: {0}#{1}", obj.GetType(), obj.ID);
                     _nhSession.Delete(obj.NHibernateProxy);
                 }
 
+                foreach (var obj in notifySaveList.Where(obj => obj.ObjectState != DataObjectState.Deleted))
+                {
+                    _attachedObjects.Remove(obj);
+                    _attachedObjectsByProxy.Remove(obj);
+
+                    obj.SaveOrUpdateTo(_nhSession);
+                }
+
                 _nhSession.Flush();
-                foreach (var obj in notifySaveList)
+
+                foreach (var obj in notifySaveList.Where(obj => obj.ObjectState != DataObjectState.Deleted))
                 {
                     _attachedObjects.Add(obj);
                     _attachedObjectsByProxy.Add(obj);
@@ -334,7 +330,7 @@ namespace Kistl.DalProvider.NHibernate
         /// <remarks>
         /// See http://en.wikipedia.org/wiki/Topological_ordering#CITEREFKahn1962
         /// </remarks>
-        private IEnumerable<NHibernatePersistenceObject> RelationTopoSort(List<NHibernatePersistenceObject> input)
+        private IEnumerable<NHibernatePersistenceObject> RelationTopoSort(IEnumerable<NHibernatePersistenceObject> input)
         {
             var edges = input.ToDictionary(i => i, i => i.GetChildrenToDelete());
 
