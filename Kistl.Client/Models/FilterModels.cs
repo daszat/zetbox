@@ -11,9 +11,9 @@ namespace Kistl.Client.Models
     using System.Text;
     using Kistl.API;
     using Kistl.App.Base;
+    using Kistl.App.Extensions;
     using Kistl.App.GUI;
     using Kistl.Client.Presentables.ValueViewModels;
-    using Kistl.App.Extensions;
 
     public class FilterEvaluator
     {
