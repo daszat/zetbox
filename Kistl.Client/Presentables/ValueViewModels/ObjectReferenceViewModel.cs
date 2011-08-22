@@ -31,13 +31,21 @@ namespace Kistl.Client.Presentables.ValueViewModels
             ObjectReferenceModel = (IObjectReferenceValueModel)mdl;
             var relEnd = ObjectReferenceModel.RelEnd;
 
-            if (relEnd == null)
+            if (relEnd == null && mdl.IsReadOnly)
             {
-                // not a relation => not editable
+                // could be e.g. a calculated object ref property
                 _allowClear = false;
                 _allowCreateNewItem = false;
                 _allowDelete = false;
                 _allowSelectValue = false;
+            }
+            else if (relEnd == null && !mdl.IsReadOnly)
+            {
+                // could be e.g. a filter
+                _allowClear = true;
+                _allowCreateNewItem = false;
+                _allowDelete = false;
+                _allowSelectValue = true;
             }
             else
             {
