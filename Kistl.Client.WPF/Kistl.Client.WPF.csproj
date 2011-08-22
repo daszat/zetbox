@@ -862,7 +862,6 @@
     <SplashScreen Include="SplashScreenImage.png" />
     <Resource Include="Images\pen.png" />
     <EmbeddedResource Include="AppIcon.ico" />
-    <Content Include="ProfilingSessions\Session20110329_142250.sdps" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\DropDown.png" />
