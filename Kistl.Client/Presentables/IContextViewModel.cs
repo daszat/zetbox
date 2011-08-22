@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.ComponentModel;
 
 namespace Kistl.Client.Presentables
 {
@@ -19,5 +20,7 @@ namespace Kistl.Client.Presentables
         void Delete(IEnumerable<DataObjectViewModel> items);
 
         bool IsContextModified { get; }
+
+        void RegisterError(IDataErrorInfo vmdl);
     }
 }

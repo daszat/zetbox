@@ -283,7 +283,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                     }
                     break;
                 case "Error":
-                    OnPropertyChanged("Error");
+                    OnErrorChanged();
                     break;
             }
         }
@@ -395,10 +395,24 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
                     if (_partialUserInputError != oldPartialUserInputError)
                     {
-                        OnPropertyChanged("Error");
+                        OnErrorChanged();
                     }
                     // implicit via state machine
                     //OnFormattedValueChanged("FormattedValue");
+                }
+            }
+        }
+
+        protected virtual void OnErrorChanged()
+        {
+            OnPropertyChanged("Error");
+            if (!string.IsNullOrEmpty(this.Error))
+            {
+                // Register with a IContextViewModel
+                var ctxVmdl = ViewModelFactory.GetWorkspace(DataContext) as IContextViewModel;
+                if (ctxVmdl != null)
+                {
+                    ctxVmdl.RegisterError(this);
                 }
             }
         }
@@ -938,11 +952,19 @@ namespace Kistl.Client.Presentables.ValueViewModels
     {
         private class NullableTimePartPropertyViewModel : NullableStructValueViewModel<TimeSpan>
         {
-            public new delegate NullableTimePartPropertyViewModel Factory(IKistlContext dataCtx, ViewModel parent, IValueModel mdl);
+            public new delegate NullableTimePartPropertyViewModel Factory(IKistlContext dataCtx, NullableDateTimePropertyViewModel parent, IValueModel mdl);
 
-            public NullableTimePartPropertyViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IValueModel mdl)
+            public NullableTimePartPropertyViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, NullableDateTimePropertyViewModel parent, IValueModel mdl)
                 : base(dependencies, dataCtx, parent, mdl)
             {
+            }
+
+            public new NullableDateTimePropertyViewModel Parent
+            {
+                get
+                {
+                    return (NullableDateTimePropertyViewModel)base.Parent;
+                }
             }
 
             protected override string FormatValue(TimeSpan? value)
@@ -977,6 +999,79 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 }
                 return result;
             }
+
+            protected override TimeSpan? GetValueFromModel()
+            {
+                var val  = Parent.GetValueFromModel();
+                if(val == null) return null;
+                return val.Value.TimeOfDay;
+            }
+
+            protected override void SetValueToModel(TimeSpan? value)
+            {
+                if (Parent.GetValueFromModel() == null && value == null)
+                {
+                    Parent.SetValueToModel(null);
+                }
+                else
+                {
+                    var date = (Parent.GetValueFromModel() ?? DateTime.MinValue).Date;
+                    Parent.SetValueToModel(date + (value ?? TimeSpan.Zero));
+                }
+            }
+
+            protected override void OnErrorChanged()
+            {
+                base.OnErrorChanged();
+                Parent.OnErrorChanged();
+            }
+        }
+
+        private class NullableDatePartPropertyViewModel : NullableStructValueViewModel<DateTime>
+        {
+            public new delegate NullableDatePartPropertyViewModel Factory(IKistlContext dataCtx, NullableDateTimePropertyViewModel parent, IValueModel mdl);
+
+            public NullableDatePartPropertyViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, NullableDateTimePropertyViewModel parent, IValueModel mdl)
+                : base(dependencies, dataCtx, parent, mdl)
+            {
+            }
+
+            public new NullableDateTimePropertyViewModel Parent
+            {
+                get
+                {
+                    return (NullableDateTimePropertyViewModel)base.Parent;
+                }
+            }
+
+            protected override string FormatValue(DateTime? value)
+            {
+                return value == null ? String.Empty : value.Value.ToShortDateString();
+            }
+
+            protected override DateTime? GetValueFromModel()
+            {
+                return Parent.GetValueFromModel() != null ? Parent.GetValueFromModel().Value.Date : (DateTime?)null;
+            }
+
+            protected override void SetValueToModel(DateTime? value)
+            {
+                if (Parent.GetValueFromModel() == null && value == null)
+                {
+                    Parent.SetValueToModel(null);
+                }
+                else
+                {
+                    var time = (Parent.GetValueFromModel() ?? DateTime.MinValue).TimeOfDay;
+                    Parent.SetValueToModel((value ?? DateTime.MinValue) + time);
+                }
+            }
+
+            protected override void OnErrorChanged()
+            {
+                base.OnErrorChanged();
+                Parent.OnErrorChanged();
+            }
         }
 
         public new delegate NullableDateTimePropertyViewModel Factory(IKistlContext dataCtx, ViewModel parent, IValueModel mdl);
@@ -986,10 +1081,12 @@ namespace Kistl.Client.Presentables.ValueViewModels
         {
             DateTimeModel = (IDateTimeValueModel)mdl;
             _timePartViewModel = ViewModelFactory.CreateViewModel<NullableTimePartPropertyViewModel.Factory>().Invoke(DataContext, this, mdl);
+            _datePartViewModel = ViewModelFactory.CreateViewModel<NullableDatePartPropertyViewModel.Factory>().Invoke(DataContext, this, mdl);
         }
 
         public IDateTimeValueModel DateTimeModel { get; private set; }
         private readonly NullableTimePartPropertyViewModel _timePartViewModel;
+        private readonly NullableDatePartPropertyViewModel _datePartViewModel;
 
         protected override string FormatValue(DateTime? value)
         {
@@ -1025,29 +1122,11 @@ namespace Kistl.Client.Presentables.ValueViewModels
         {
             get
             {
-                return Value != null ? Value.Value.Date : (DateTime?)null;
+                return _datePartViewModel.Value;
             }
             set
             {
-                if (value == null && Value == null)
-                {
-                    // Do nothing
-                }
-                else if (value == null && Value != null && TimePartVisible)
-                {
-                    // Preserve time
-                    Value = DateTime.MinValue.Add(Value.Value.TimeOfDay);
-                }
-                else if (value != null && Value != null && TimePartVisible)
-                {
-                    // Preserve time
-                    Value = value.Value.Add(Value.Value.TimeOfDay);
-                }
-                else //if (value != null && Value == null)
-                {
-                    Value = value;
-                }
-
+                _datePartViewModel.Value = value;
                 OnPropertyChanged("DatePart");
             }
         }
@@ -1075,6 +1154,19 @@ namespace Kistl.Client.Presentables.ValueViewModels
             {
                 _timePartViewModel.FormattedValue = value;
                 OnPropertyChanged("TimePartString");
+            }
+        }
+
+        public string DatePartString
+        {
+            get
+            {
+                return _datePartViewModel.FormattedValue;
+            }
+            set
+            {
+                _datePartViewModel.FormattedValue = value;
+                OnPropertyChanged("DatePartString");
             }
         }
 
@@ -1106,17 +1198,20 @@ namespace Kistl.Client.Presentables.ValueViewModels
         {
             base.OnFormattedValueChanged();
             OnPropertyChanged("TimePartString");
+            OnPropertyChanged("DatePartString");
         }
 
         protected override void OnBlur()
         {
             _timePartViewModel.Blur();
+            _datePartViewModel.Blur();
             base.OnBlur();
         }
 
         protected override void OnFocus()
         {
             _timePartViewModel.Focus();
+            _datePartViewModel.Focus();
             base.OnFocus();
         }
 
@@ -1124,15 +1219,8 @@ namespace Kistl.Client.Presentables.ValueViewModels
         {
             get
             {
-                var baseError = base.Error;
-                if (string.IsNullOrEmpty(baseError))
-                {
-                    return _timePartViewModel.Error;
-                }
-                else
-                {
-                    return baseError + "\n" + _timePartViewModel.Error;
-                }
+                var errors = new [] { base.Error, _datePartViewModel.Error, _timePartViewModel.Error };
+                return string.Join("\n", errors.Where(i => !string.IsNullOrEmpty(i)).ToArray());
             }
         }
 
@@ -1144,6 +1232,8 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 {
                     case "TimePartString":
                         return _timePartViewModel.Error;
+                    case "DatePartString":
+                        return _datePartViewModel.Error;
                     default:
                         return base[columnName];
                 }

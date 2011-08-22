@@ -239,24 +239,33 @@ namespace Kistl.Client.Presentables.ObjectEditor
             Close();
         }
 
-        private IEnumerable<string> UpdateErrors()
+        List<IDataErrorInfo> _currentErrors = new List<IDataErrorInfo>();
+
+        public IEnumerable<IDataErrorInfo> GetErrors()
         {
-            var result = DataContext.AttachedObjects
-                .Where(o => o.ObjectState == DataObjectState.Modified || o.ObjectState == DataObjectState.New)
-                .OfType<IDataErrorInfo>()
-                .Select(o => o.Error)
-                .Where(s => !String.IsNullOrEmpty(s))
-                .ToList();
-
-            // Cache that result
-            _canSave = result.Count == 0;
-
-            return result;
+            return _currentErrors;
         }
 
-        // Defaults to true
-        // error validation is not called automatically yet
-        private bool _canSave = true;
+        public void UpdateErrors()
+        {
+            _currentErrors = DataContext.AttachedObjects
+                .Where(o => o.ObjectState == DataObjectState.Modified || o.ObjectState == DataObjectState.New)
+                .OfType<IDataErrorInfo>()
+                .Where(s => !String.IsNullOrEmpty(s.Error))
+                .ToList();
+
+            foreach (var e in _errorViewModels.ToArray())
+            {
+                if (!string.IsNullOrEmpty(e.Error))
+                {
+                    _currentErrors.Add(e);
+                }
+                else
+                {
+                    _errorViewModels.Remove(e);
+                }
+            }
+        }
 
         /// <summary>
         /// Returns a cached result.
@@ -265,7 +274,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
         /// <returns></returns>
         public bool CanSave()
         {
-            return _canSave;
+            return _currentErrors.Count == 0;
         }
 
         public void Save()
@@ -289,8 +298,8 @@ namespace Kistl.Client.Presentables.ObjectEditor
 
         private bool SaveDelayed()
         {
-            var errors = UpdateErrors().ToArray();
-            if (errors.Length == 0)
+            UpdateErrors();            
+            if (_currentErrors.Count == 0)
             {
                 try
                 {
@@ -366,9 +375,10 @@ namespace Kistl.Client.Presentables.ObjectEditor
             var loader = ViewModelFactory.CreateDelayedTask(this, () =>
             {
                 UpdateErrors();
-                var elm = ViewModelFactory.CreateViewModel<ErrorListViewModel.Factory>().Invoke(DataContext, this);
-                elm.RefreshErrors();
-                ViewModelFactory.ShowModel(elm, true);
+                if (_currentErrors.Count > 0)
+                {
+                    ViewModelFactory.ShowModel(ViewModelFactory.CreateViewModel<ErrorListViewModel.Factory>().Invoke(DataContext, this), true);
+                }
             });
             loader.Trigger();
         }
@@ -393,6 +403,14 @@ namespace Kistl.Client.Presentables.ObjectEditor
         }
         #endregion
 
+        #endregion
+
+        #region ErrorManagement
+        private HashSet<IDataErrorInfo> _errorViewModels = new HashSet<IDataErrorInfo>();
+        public void RegisterError(IDataErrorInfo vmdl)
+        {
+            _errorViewModels.Add(vmdl);
+        }
         #endregion
 
         #region Model Management

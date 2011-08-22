@@ -8,6 +8,8 @@ namespace Kistl.Client.Presentables
     using System.Text;
 
     using Kistl.API;
+    using System.ComponentModel;
+    using Kistl.Client.Presentables.ObjectEditor;
 
     public class ErrorDescriptor : ViewModel
     {
@@ -61,13 +63,22 @@ namespace Kistl.Client.Presentables
     public class ErrorListViewModel
         : WindowViewModel
     {
-        public new delegate ErrorListViewModel Factory(IKistlContext dataCtx, ViewModel parent);
+        public new delegate ErrorListViewModel Factory(IKistlContext dataCtx, WorkspaceViewModel parent);
 
-        public ErrorListViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent)
+        public ErrorListViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, WorkspaceViewModel parent)
             : base(appCtx, dataCtx, parent)
         {
             _errors = new ObservableCollection<ErrorDescriptor>();
             _roErrors = new ReadOnlyObservableCollection<ErrorDescriptor>(_errors);
+            DisplayErrors();
+        }
+
+        public new WorkspaceViewModel Parent
+        {
+            get
+            {
+                return (WorkspaceViewModel)base.Parent;
+            }
         }
 
         public override string Name
@@ -125,17 +136,29 @@ namespace Kistl.Client.Presentables
 
         public void RefreshErrors()
         {
+            Parent.UpdateErrors();
+            DisplayErrors();
+        }
+
+        private void DisplayErrors()
+        {
             _errors.Clear();
-            foreach (var error in DataContext.AttachedObjects
-                .OfType<IDataObject>()
-                .Where(o => o.ObjectState == DataObjectState.Modified || o.ObjectState == DataObjectState.New)
-                .Select(o => new { obj = o, err = o.Error })
-                .Where(tmp => !String.IsNullOrEmpty(tmp.err)))
+            foreach (var error in Parent.GetErrors())
             {
+                IDataObject obj = error as IDataObject;
+                if (obj == null && error is ViewModel)
+                {
+                    var vmdl = (ViewModel)error;
+                    if(vmdl.Parent is DataObjectViewModel)
+                    {
+                        obj = ((DataObjectViewModel)vmdl.Parent).Object;
+                    }
+                }
+
                 _errors.Add(ViewModelFactory.CreateViewModel<ErrorDescriptor.Factory>().Invoke(
                     DataContext, this,
-                    DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this, error.obj),
-                    new List<string>() { error.err }));
+                    DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this, obj),
+                    new List<string>() { error.Error }));
             }
         }
     }

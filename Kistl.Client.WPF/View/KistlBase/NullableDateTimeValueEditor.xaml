@@ -19,7 +19,7 @@
              Visibility="{Binding TimePartVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
     <ms:DatePicker x:Name="txtDate"
-                   SelectedDate="{Binding DatePart, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
+                   Text="{Binding DatePartString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
                    Visibility="{Binding DatePartVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
                    IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertedBoolConverter}}"
                    KeyboardNavigation.TabIndex="0"
