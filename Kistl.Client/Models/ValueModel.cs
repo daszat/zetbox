@@ -29,7 +29,8 @@ namespace Kistl.Client.Models
             }
             else if (parameter is DateTimeParameter && !parameter.IsList)
             {
-                return new DateTimeValueModel(lb, parameter.Description, allowNullInput, false);
+                var dtp = (DateTimeParameter)parameter;
+                return new DateTimeValueModel(lb, parameter.Description, allowNullInput, false, dtp.DateTimeStyle ?? DateTimeStyles.DateTime);
             }
             else if (parameter is DoubleParameter && !parameter.IsList)
             {
