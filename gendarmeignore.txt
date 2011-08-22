@@ -23,6 +23,9 @@ M: System.Void Kistl.DalProvider.Ef.Generator.Templates.ObjectClasses.Associatio
 R: Gendarme.Rules.Maintainability.AvoidUnnecessarySpecializationRule
 # This method has a parameter whose type is more specialized than necessary. This can make it difficult to reuse the method in other contexts.
 T: Kistl.Server.WcfServer
+# Inner classes designed to work only with their parent
+M: System.Void Kistl.Client.Presentables.ValueViewModels.NullableDateTimePropertyViewModel/NullableTimePartPropertyViewModel::.ctor(Kistl.Client.Presentables.IViewModelDependencies,Kistl.API.IKistlContext,Kistl.Client.Presentables.ValueViewModels.NullableDateTimePropertyViewModel,Kistl.Client.Models.IValueModel)
+M: System.Void Kistl.Client.Presentables.ValueViewModels.NullableDateTimePropertyViewModel/NullableDatePartPropertyViewModel::.ctor(Kistl.Client.Presentables.IViewModelDependencies,Kistl.API.IKistlContext,Kistl.Client.Presentables.ValueViewModels.NullableDateTimePropertyViewModel,Kistl.Client.Models.IValueModel)
 
 R: Gendarme.Rules.Correctness.DisposableFieldsShouldBeDisposedRule
 # these classes have special disposal strategies since they need to hold disposable parts with lifecycles beyond themselves
