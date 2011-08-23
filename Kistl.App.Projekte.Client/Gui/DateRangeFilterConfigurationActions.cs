@@ -14,11 +14,11 @@ namespace Kistl.App.GUI
     /// Client implementation
     /// </summary>
     [Implementor]
-    public class DateRangeConfigurationActions
+    public class DateRangeFilterConfigurationActions
     {
         private static IFrozenContext FrozenContext;
 
-        public DateRangeConfigurationActions(IFrozenContext frozenCtx)
+        public DateRangeFilterConfigurationActions(IFrozenContext frozenCtx)
         {
             FrozenContext = frozenCtx;
         }
