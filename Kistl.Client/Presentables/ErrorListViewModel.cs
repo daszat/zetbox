@@ -157,7 +157,7 @@ namespace Kistl.Client.Presentables
 
                 _errors.Add(ViewModelFactory.CreateViewModel<ErrorDescriptor.Factory>().Invoke(
                     DataContext, this,
-                    DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this, obj),
+                    obj == null ? null : DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this, obj),
                     new List<string>() { error.Error }));
             }
         }
