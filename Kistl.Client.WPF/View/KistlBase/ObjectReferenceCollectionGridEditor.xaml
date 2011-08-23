@@ -29,7 +29,7 @@
                             MinHeight="50"
                             MouseDoubleClick="ItemActivatedHandler"
                             CanUserAddRows="{Binding AllowInlineAddNew}"
-                            CanUserDeleteRows="{Binding AllowDelete}"
+                            CanUserDeleteRows="{Binding AllowInlineDelete}"
                             AutoGenerateColumns="False"
                             SelectedZBoxItems="{Binding SelectedProxies}"
                             GridViewColumnHeader.Click="ListView_HeaderClick">

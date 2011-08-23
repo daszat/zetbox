@@ -238,6 +238,31 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 }
             }
         }
+
+        // Case 2282: Sorting Lists will delete 1:n Entries
+        // This is evil, as it would delete an Object during 
+        // resort of an ObjectRefList.
+        // so inline deleting is forbidden.
+        private bool _allowInlineDelete = false;
+        public bool AllowInlineDelete
+        {
+            get
+            {
+                return _allowInlineDelete;
+            }
+            set
+            {
+                if (_allowInlineDelete != value)
+                {
+                    if (value == true)
+                    {
+                        throw new NotSupportedException("Case 2282: Inline deleting is forbidden as it has some issues with resorting.");
+                    }
+                    _allowInlineDelete = value;
+                    OnPropertyChanged("AllowInlineDelete");
+                }
+            }
+        }
         #endregion
 
         #region Commands
