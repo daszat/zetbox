@@ -5,6 +5,7 @@
              MinWidth="100"
              MinHeight="26"
              Margin="2,1,2,1"
+             VerticalAlignment="Top"
              x:Name="lbView">
     <Grid>
         <Grid.ColumnDefinitions>
