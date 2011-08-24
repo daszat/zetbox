@@ -30,7 +30,8 @@ namespace Kistl.Client.Presentables.FilterViewModels
             if (RangeFilter.From.Value != null && RangeFilter.To.Value != null)
             {
                 var from = RangeFilter.From.Value.Value;
-                var diff = (RangeFilter.From.Value.Value.Month - RangeFilter.To.Value.Value.Month) + 1;
+                var to = RangeFilter.To.Value.Value;
+                var diff = (to.Month - from.Month) + 1;
 
                 // Always set year
                 Year = Years.SingleOrDefault(i => i.Value == from.Year);
