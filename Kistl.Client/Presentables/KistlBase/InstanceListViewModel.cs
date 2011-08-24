@@ -667,7 +667,13 @@ namespace Kistl.Client.Presentables.KistlBase
         public void Export()
         {
             var tmpFile = CreateTempFile("Export.csv");
-            using (var sw = new StreamWriter(tmpFile, false, Encoding.UTF8)) // use this constructor to ensure BOM
+            StreamWriter sw;
+            // http://stackoverflow.com/questions/545666/how-to-translate-ms-windows-os-version-numbers-into-product-names-in-net
+            if (Environment.OSVersion.Platform == PlatformID.Win32NT && Environment.OSVersion.Version.Major <= 5) // assuming Windox XP or lower
+                sw = new StreamWriter(tmpFile, false, Encoding.Default);
+            else
+                sw = new StreamWriter(tmpFile, false, Encoding.UTF8);
+            using (sw) // use this constructor to ensure BOM
             {
                 var cols = DisplayedColumns.Columns
                     .Where(i => i.Type != ColumnDisplayModel.ColumnType.MethodModel)
