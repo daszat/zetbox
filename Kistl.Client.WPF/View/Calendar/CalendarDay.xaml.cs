@@ -49,7 +49,7 @@ namespace Kistl.Client.WPF.View.Calendar
             }
         }
 
-        void timeslot_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        void timeslot_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (sender is FrameworkElement)
             {
