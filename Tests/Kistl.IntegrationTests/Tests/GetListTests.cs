@@ -243,16 +243,17 @@ namespace Kistl.IntegrationTests
 
         [Test]
         [ExpectedException(typeof(System.ServiceModel.FaultException))]
-        public void GetListWithParameterIllegal()
+        public void GetListWithParameterIllegalAggreggation()
         {
             using (IKistlContext ctx = GetContext())
             {
-                var test = from z in ctx.GetQuery<Kistl.App.TimeRecords.WorkEffortAccount>()
-                           where z.Mitarbeiter.Select(ma => ma.Geburtstag > new DateTime(1978, 1, 1)).Count() > 0
+                var test = from z in ctx.GetQuery<ObjectClass>()
+                           where z.Properties.Count() > 0
                            select z;
+
                 foreach (var t in test)
                 {
-                    Log.DebugFormat("GetListWithParameterIllegal: {0}", t.Name);
+                    Log.DebugFormat("GetListWithParameterIllegalAggreggation: {0}", t.Name);
                 }
             }
         }
@@ -277,8 +278,8 @@ namespace Kistl.IntegrationTests
         {
             using (IKistlContext ctx = GetContext())
             {
-                var test = from z in ctx.GetQuery<Kistl.App.TimeRecords.WorkEffortAccount>()
-                           select new { A = z.SpentHours, B = z.BudgetHours };
+                var test = from z in ctx.GetQuery<ObjectClass>()
+                           select new { A = z.Name, B = z.TableName };
                 foreach (var t in test)
                 {
                     Log.DebugFormat("GetListWithProjection: {0}", t.A);

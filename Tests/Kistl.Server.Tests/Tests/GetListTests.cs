@@ -176,8 +176,8 @@ namespace Kistl.Server.Tests
         [Test]
         public void GetList_With_Projection()
         {
-            var test = from z in ctx.GetQuery<Kistl.App.TimeRecords.WorkEffortAccount>()
-                       select new { A = z.SpentHours, B = z.BudgetHours };
+            var test = from z in ctx.GetQuery<ObjectClass>()
+                       select new { A = z.Name, B = z.TableName };
             foreach (var t in test)
             {
                 Log.DebugFormat("GetListWithProjection: {0}", t.A);
