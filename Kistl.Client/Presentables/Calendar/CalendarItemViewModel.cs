@@ -9,9 +9,9 @@ namespace Kistl.Client.Presentables.Calendar
 
     public class CalendarItemViewModel : Kistl.Client.Presentables.ViewModel
     {
-        public new delegate CalendarItemViewModel Factory(IKistlContext dataCtx, ViewModel parent, DataObjectViewModel obj, Action<DataObjectViewModel, CalendarItemViewModel> update);
+        public new delegate CalendarItemViewModel Factory(IKistlContext dataCtx, ViewModel parent, ViewModel obj, Action<ViewModel, CalendarItemViewModel> update);
 
-        public CalendarItemViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, DataObjectViewModel obj, Action<DataObjectViewModel, CalendarItemViewModel> update)
+        public CalendarItemViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, ViewModel obj, Action<ViewModel, CalendarItemViewModel> update)
             : base(dependencies, dataCtx, parent)
         {
             if (obj == null) throw new ArgumentNullException("obj");
@@ -26,7 +26,7 @@ namespace Kistl.Client.Presentables.Calendar
             ObjectViewModel.PropertyChanged += obj_PropertyChanged;
         }
 
-        private Action<DataObjectViewModel, CalendarItemViewModel> _update;
+        private Action<ViewModel, CalendarItemViewModel> _update;
 
         void parent_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
@@ -61,7 +61,7 @@ namespace Kistl.Client.Presentables.Calendar
             }
         }
 
-        public DataObjectViewModel ObjectViewModel { get; private set; }
+        public ViewModel ObjectViewModel { get; private set; }
 
         private DateTime _From;
         public DateTime From

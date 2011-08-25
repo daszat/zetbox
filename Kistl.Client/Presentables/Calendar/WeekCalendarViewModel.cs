@@ -127,8 +127,8 @@ namespace Kistl.Client.Presentables.Calendar
 
         private Func<DateTime, DateTime, IEnumerable<CalendarItemViewModel>> _Source = null;
 
-        private DataObjectViewModel _selectedItem;
-        public DataObjectViewModel SelectedItem
+        private ViewModel _selectedItem;
+        public ViewModel SelectedItem
         {
             get
             {
@@ -150,7 +150,7 @@ namespace Kistl.Client.Presentables.Calendar
             }
         }
 
-        private CalendarItemViewModel FindCalendarItemViewModel(DataObjectViewModel mdl)
+        private CalendarItemViewModel FindCalendarItemViewModel(ViewModel mdl)
         {
             if (mdl == null) return null;
             return DayItems.SelectMany(i => i.CalendarItems.Where(c => c.ObjectViewModel == mdl)).FirstOrDefault();
