@@ -41,7 +41,7 @@ this.WriteObjects("        {\r\n");
 this.WriteObjects("            var result = base.GetParentsToDelete();\r\n");
 this.WriteObjects("\r\n");
 #line 20 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
-foreach (var rel in cls.GetRelations()) {                                                                            
+foreach (var rel in cls.GetRelations().OrderBy(r => r.GetRelationClassName())) {                                     
 #line 21 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
 if (rel.Storage == StorageType.Separate) continue; // handled by cascading in the mapping                       
 #line 22 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
@@ -83,7 +83,7 @@ this.WriteObjects("        {\r\n");
 this.WriteObjects("            var result = base.GetChildrenToDelete();\r\n");
 this.WriteObjects("\r\n");
 #line 45 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
-foreach (var rel in cls.GetRelations()) {                                                                            
+foreach (var rel in cls.GetRelations().OrderBy(r => r.GetRelationClassName())) {                                     
 #line 46 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
 if (rel.Storage == StorageType.Separate) continue; // handled by cascading in the mapping                       
 #line 47 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"

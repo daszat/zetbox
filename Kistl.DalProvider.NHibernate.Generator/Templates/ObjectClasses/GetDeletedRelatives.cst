@@ -17,7 +17,7 @@
         {
             var result = base.GetParentsToDelete();
 
-<% foreach (var rel in cls.GetRelations()) {                                                                            %>
+<% foreach (var rel in cls.GetRelations().OrderBy(r => r.GetRelationClassName())) {                                     %>
 <%      if (rel.Storage == StorageType.Separate) continue; // handled by cascading in the mapping                       %>
 <%      var relEnd = rel.GetEndFromClass(cls);                                                                          %>
 <%      var otherEnd = rel.GetOtherEndFromClass(cls);                                                                   %>
@@ -42,7 +42,7 @@
         {
             var result = base.GetChildrenToDelete();
 
-<% foreach (var rel in cls.GetRelations()) {                                                                            %>
+<% foreach (var rel in cls.GetRelations().OrderBy(r => r.GetRelationClassName())) {                                     %>
 <%      if (rel.Storage == StorageType.Separate) continue; // handled by cascading in the mapping                       %>
 <%      var relEnd = rel.GetEndFromClass(cls);                                                                          %>
 <%      var otherEnd = rel.GetOtherEndFromClass(cls);                                                                   %>
