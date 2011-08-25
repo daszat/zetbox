@@ -4,31 +4,25 @@ echo Generating, Update Schema and Publish
 echo Used if schema has changed
 echo ********************************************************************************
 
+call "!PublishDev.cmd"
 
-bin\Debug\Kistl.Server.Service.exe Configs\%zenv%\Kistl.Server.Service.xml -generate -updatedeployedschema -repairschema
+bin\debug\Kistl.Server.Service.exe Configs\%zenv%\Kistl.Server.Service.xml -publish Modules\Examples.xml -ownermodules CourseOrganiser;Invoicing;Parties;TimeRecords
 IF ERRORLEVEL 1 GOTO FAIL
 
-rem refresh local code
-call GetCodeGen.cmd
+rem publish schema data for Ini50 project
+bin\debug\Kistl.Server.Service.exe Configs\%zenv%\Kistl.Server.Service.xml -publish Ini50.Modules\Ini50.xml -schemamodules Ini50;Ini50.Config
 IF ERRORLEVEL 1 GOTO FAIL
 
-bin\debug\Kistl.Server.Service.exe Configs\%zenv%\Kistl.Server.Service.xml -publish Kistl.Server\Database\Database.xml
+rem export Ini50's SchemaMigration project
+bin\debug\Kistl.Server.Service.exe Configs\%zenv%\Kistl.Server.Service.xml -export Ini50.Modules\SchemaMigrationProject.xml -schemamodules SchemaMigration
 IF ERRORLEVEL 1 GOTO FAIL
 
-bin\debug\Kistl.Server.Service.exe Configs\%zenv%\Kistl.Server.Service.xml -publish Kistl.Server\Database\KistlBase.xml -ownermodules KistlBase;GUI
+rem export Ini50's calendar data
+bin\debug\Kistl.Server.Service.exe Configs\%zenv%\Kistl.Server.Service.xml -export Ini50.Modules\Calendar.xml -schemamodules Calendar -ownermodules Ini50
 IF ERRORLEVEL 1 GOTO FAIL
 
-rem managed in Database.xml
-rem bin\debug\Kistl.Server.Service.exe Configs\%zenv%\Kistl.Server.Service.xml -publish Kistl.Server\Database\SchemaMigrationSchema.xml SchemaMigration
-rem IF ERRORLEVEL 1 GOTO FAIL
-
-bin\debug\Kistl.Server.Service.exe Configs\%zenv%\Kistl.Server.Service.xml -export Kistl.Server\Database\SchemaMigrationProjects.xml -schemamodules SchemaMigration
-IF ERRORLEVEL 1 GOTO FAIL
-
-bin\debug\Kistl.Server.Service.exe Configs\%zenv%\Kistl.Server.Service.xml -export Ini50.App.Common\Ini50.Config.xml -schemamodules Ini50.Config
-IF ERRORLEVEL 1 GOTO FAIL
-
-bin\debug\Kistl.Server.Service.exe Configs\%zenv%\Kistl.Server.Service.xml -export Ini50.App.Common\Calendar.xml -schemamodules Calendar -ownermodules Ini50
+rem export Ini50.Config data
+bin\debug\Kistl.Server.Service.exe Configs\%zenv%\Kistl.Server.Service.xml -export Ini50.Modules\Ini50.Config.xml -schemamodules Ini50.Config
 IF ERRORLEVEL 1 GOTO FAIL
 
 echo ********************************************************************************
@@ -37,10 +31,10 @@ echo ***************************************************************************
 GOTO EOF
 
 :FAIL
-echo ********************************************************************************
-echo ************************************* FAIL *************************************
-echo ********************************************************************************
-echo Aborting PublishAllUI.
+echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX FAIL XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+echo                              Aborting PublishAllUI
 
 :EOF
 pause

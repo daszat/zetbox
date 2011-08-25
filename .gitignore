@@ -7,6 +7,7 @@
 /Kistl.Server.HttpService/Client
 /Kistl.Server.HttpService/Common
 /Kistl.Complete.suo
+/Libs/Kistl
 obj
 bin
 *.csproj.user

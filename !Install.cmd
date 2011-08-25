@@ -1,20 +1,25 @@
 @echo off
 echo ********************************************************************************
-echo Only generates new Model binaries from the currently deployed modules.
-echo Used if only frozen objects has changed during development.
-echo XXXXXXXXXXXXX Do not forget to publish changes before committing! XXXXXXXXXXXXXX
+echo Installs the currently compiled binaries and modules from the working directory
+echo into the specified directory.
+echo Use this to install ZetBox Basic into a Module/App solution.
 echo ********************************************************************************
 
-set config=Configs\%zenv%\Kistl.Server.Service.xml
+set destination=.\Libs\Kistl
 
 if .%1. == .. GOTO GOON
 
-set config=%1
+set destination=%1\Libs\Kistl
 
 :GOON
 
-bin\Debug\Kistl.Server.Service.exe %configs% -generate
-IF ERRORLEVEL 1 GOTO FAIL
+robocopy bin\Debug %destination% /MIR 
+rem errorlevel 8 or higher indicates errors
+IF ERRORLEVEL 8 GOTO FAIL
+
+robocopy Modules %destination%\Modules /MIR 
+rem errorlevel 8 or higher indicates errors
+IF ERRORLEVEL 8 GOTO FAIL
 
 echo ********************************************************************************
 echo ************************************ Success ***********************************
@@ -25,7 +30,7 @@ GOTO EOF
 echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX FAIL XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-echo                                Aborting Generate
+echo                               Aborting Install
 rem return error without closing parent shell
 echo A | choice /c:A /n
 

@@ -1,20 +1,15 @@
 @echo off
 echo ********************************************************************************
-echo Only generates new Model binaries from the currently deployed modules.
-echo Used if only frozen objects has changed during development.
-echo XXXXXXXXXXXXX Do not forget to publish changes before committing! XXXXXXXXXXXXXX
+echo Cleans all deployed binaries and database, then builds and reinitialises everything.
+echo Afterwards the basic modules are published again to see that nothing has changed.
+echo Use this to get a really clean environment and verify changes to infrastructure code.
 echo ********************************************************************************
 
-set config=Configs\%zenv%\Kistl.Server.Service.xml
-
-if .%1. == .. GOTO GOON
-
-set config=%1
-
-:GOON
-
-bin\Debug\Kistl.Server.Service.exe %configs% -generate
+C:\Windows\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe CCNet.msbuild /p:SourceLocation=P:\Kistl /p:ArebisMsBuildPath=P:\Kistl\Libs\ArebisCGen\Arebis.CodeGeneration.MsBuild
 IF ERRORLEVEL 1 GOTO FAIL
+
+rem regenerate modules to prove roundtrippability
+call "!PublishDev.cmd"
 
 echo ********************************************************************************
 echo ************************************ Success ***********************************
@@ -25,9 +20,10 @@ GOTO EOF
 echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX FAIL XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-echo                                Aborting Generate
+echo                               Aborting FullResetDev
 rem return error without closing parent shell
 echo A | choice /c:A /n
 
 :EOF
 pause
+

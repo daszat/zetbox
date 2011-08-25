@@ -1,20 +1,27 @@
 @echo off
 echo ********************************************************************************
-echo Only generates new Model binaries from the currently deployed modules.
-echo Used if only frozen objects has changed during development.
-echo XXXXXXXXXXXXX Do not forget to publish changes before committing! XXXXXXXXXXXXXX
+echo Pull the binaries and scripts from a specified location.
+echo Use this to update your local environment to a locally compiled copy.
 echo ********************************************************************************
 
-set config=Configs\%zenv%\Kistl.Server.Service.xml
+set source=P:\Kistl
 
-if .%1. == .. GOTO GOON
+if .%1. == .. GOTO NO_SOURCE
+set source=%1
+:NO_SOURCE
 
-set config=%1
+set destination=.\Libs\Kistl
+if .%2. == .. GOTO NO_DESTINATION
+set destination=%2
+:NO_DESTINATION
 
-:GOON
+robocopy %source%\bin\Debug %destination% /MIR
+rem errorlevel 8 or higher indicates errors
+IF ERRORLEVEL 8 GOTO FAIL
 
-bin\Debug\Kistl.Server.Service.exe %configs% -generate
-IF ERRORLEVEL 1 GOTO FAIL
+robocopy %source%\Modules %destination%\Modules /MIR
+rem errorlevel 8 or higher indicates errors
+IF ERRORLEVEL 8 GOTO FAIL
 
 echo ********************************************************************************
 echo ************************************ Success ***********************************
@@ -25,9 +32,8 @@ GOTO EOF
 echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX FAIL XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-echo                                Aborting Generate
+echo                                  Aborting Pull
 rem return error without closing parent shell
 echo A | choice /c:A /n
 
 :EOF
-pause
