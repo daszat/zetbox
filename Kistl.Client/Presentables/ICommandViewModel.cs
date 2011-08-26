@@ -260,7 +260,7 @@ namespace Kistl.Client.Presentables
             {
                 if (_reason != value)
                 {
-                    _reason = value;
+                    _reason = (value ?? string.Empty).Trim();
                     OnPropertyChanged("Reason");
                     OnPropertyChanged("ToolTip");
                 }
@@ -314,8 +314,8 @@ namespace Kistl.Client.Presentables
             if (canExecute == null) return true;
             var canExec = canExecute();
             if (getReason != null) 
-            {                
-                base.Reason = canExec ? getReason() : string.Empty;
+            {
+                base.Reason = canExec ? string.Empty : getReason();
             }
             return canExec;
         }
