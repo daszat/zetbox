@@ -60,8 +60,8 @@ namespace Kistl.Client.Presentables.GUI
                         this,
                         MultiLineEditorDialogViewModelResources.OKCommand_Name,
                         MultiLineEditorDialogViewModelResources.OKCommand_Tooltip, 
-                        Ok, 
-                        null);
+                        Ok,
+                        null, null);
                 }
                 return _OKCommand;
             }
@@ -85,7 +85,8 @@ namespace Kistl.Client.Presentables.GUI
                         null,
                         MultiLineEditorDialogViewModelResources.CancelCommand_Name,
                         MultiLineEditorDialogViewModelResources.CancelCommand_Tooltip,
-                        Cancel, 
+                        Cancel,
+                        null, 
                         null);
                 }
                 return _CancelCommand;

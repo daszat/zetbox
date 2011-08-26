@@ -292,7 +292,8 @@ namespace Kistl.Client.Presentables.ValueViewModels
                         BaseObjectCollectionViewModelResources.CreateNewCommand_Name,
                         BaseObjectCollectionViewModelResources.CreateNewCommand_Tooltip,
                         () => CreateNewItem(),
-                        () => AllowAddNew && !DataContext.IsReadonly && !IsReadOnly);
+                        () => AllowAddNew && !DataContext.IsReadonly && !IsReadOnly, 
+                        null);
                     _CreateNewCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_new_png);
                 }
                 return _CreateNewCommand;
@@ -312,7 +313,8 @@ namespace Kistl.Client.Presentables.ValueViewModels
                         BaseObjectCollectionViewModelResources.AddExistingCommand_Name,
                         BaseObjectCollectionViewModelResources.AddExistingCommand_Tooltip,
                         () => AddExistingItem(),
-                        () => AllowAddExisting && !DataContext.IsReadonly && !IsReadOnly);
+                        () => AllowAddExisting && !DataContext.IsReadonly && !IsReadOnly, 
+                        null);
                     _AddExistingCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_search_png);
                 }
                 return _AddExistingCommand;
@@ -332,7 +334,8 @@ namespace Kistl.Client.Presentables.ValueViewModels
                         BaseObjectCollectionViewModelResources.RemoveCommand_Name,
                         BaseObjectCollectionViewModelResources.RemoveCommand_Tooltip,
                         () => SelectedItems.ToList().ForEach(i => RemoveItem(i)), // Collection will change while deleting!
-                        () => SelectedItems != null && SelectedItems.Count() > 0 && AllowRemove && !IsReadOnly);
+                        () => SelectedItems != null && SelectedItems.Count() > 0 && AllowRemove && !IsReadOnly, 
+                        null);
                 }
                 return _RemoveCommand;
             }
@@ -351,7 +354,8 @@ namespace Kistl.Client.Presentables.ValueViewModels
                         BaseObjectCollectionViewModelResources.DeleteCommand_Name,
                         BaseObjectCollectionViewModelResources.DeleteCommand_Tooltip,
                         () => SelectedItems.ToList().ForEach(i => DeleteItem(i)), // Collection will change while deleting!
-                        () => SelectedItems != null && SelectedItems.Count() > 0 && AllowDelete && !DataContext.IsReadonly && !IsReadOnly);
+                        () => SelectedItems != null && SelectedItems.Count() > 0 && AllowDelete && !DataContext.IsReadonly && !IsReadOnly, 
+                        null);
                     _DeleteCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_delete_png);
                 }
                 return _DeleteCommand;

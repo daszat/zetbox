@@ -40,7 +40,7 @@ namespace Kistl.Client.Presentables
                         null,
                         ErrorListViewModelResources.GotoObjectCommand_Name,
                         ErrorListViewModelResources.GotoObjectCommand_Tooltip,
-                        GotoObject, null);
+                        GotoObject, null, null);
                 }
                 return _GotoObjectCommand;
             }
@@ -103,8 +103,8 @@ namespace Kistl.Client.Presentables
                     _CloseCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
                         DataContext, 
                         null,
-                        ErrorListViewModelResources.CloseCommand_Name, 
-                        ErrorListViewModelResources.CloseCommand_Tooltip, Close, null);
+                        ErrorListViewModelResources.CloseCommand_Name,
+                        ErrorListViewModelResources.CloseCommand_Tooltip, Close, null, null);
                 }
                 return _CloseCommand;
             }
@@ -127,7 +127,8 @@ namespace Kistl.Client.Presentables
                         this,
                         ErrorListViewModelResources.RefreshCommand_Name,
                         ErrorListViewModelResources.RefreshCommand_Tooltip, 
-                        RefreshErrors, 
+                        RefreshErrors,
+                        null, 
                         null);
                 }
                 return _RefreshErrorsCommand;

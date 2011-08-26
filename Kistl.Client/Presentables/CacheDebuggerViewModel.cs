@@ -50,8 +50,8 @@ namespace Kistl.Client.Presentables
                         null,
                         CacheDebuggerViewModelResources.ClearCommand_Name,
                         CacheDebuggerViewModelResources.ClearCommand_Tooltip, 
-                        Cache.ClearAll, 
-                        null);
+                        Cache.ClearAll,
+                        null, null);
 
                 }
                 return _clearCommand;

@@ -37,6 +37,8 @@ namespace Kistl.Client.WPF.CustomControls
             bImage.Converter = (IValueConverter)Application.Current.Resources["IconConverter"];
             this.SetBinding(ImageProperty, bImage);
 
+            this.SetValue(ToolTipService.ShowOnDisabledProperty, true);
+
             this.Loaded += new RoutedEventHandler(CommandButton_Loaded);
         }
 

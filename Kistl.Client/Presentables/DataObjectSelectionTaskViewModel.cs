@@ -94,8 +94,9 @@ namespace Kistl.Client.Presentables
                         this,
                         DataObjectSelectionTaskViewModelResources.Choose,
                         DataObjectSelectionTaskViewModelResources.Choose_Tooltip, 
-                        () => Choose(SelectedItem), 
-                        () => SelectedItem != null);
+                        () => Choose(SelectedItem),
+                        () => SelectedItem != null, 
+                        null);
                 }
                 return _ChooseCommand;
             }
@@ -119,7 +120,8 @@ namespace Kistl.Client.Presentables
                         this,
                         DataObjectSelectionTaskViewModelResources.Cancel,
                         DataObjectSelectionTaskViewModelResources.Cancel_Tooltip,
-                        Cancel, 
+                        Cancel,
+                        null, 
                         null);
                 }
                 return _CancelCommand;

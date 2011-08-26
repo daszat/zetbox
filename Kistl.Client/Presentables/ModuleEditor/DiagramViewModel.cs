@@ -94,7 +94,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
                             var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(ctxFactory(), null);
                             newWorkspace.ShowForeignModel(this);
                             ViewModelFactory.ShowModel(newWorkspace, true);
-                        }, null);
+                        }, null, null);
                 }
 
                 return _open;
@@ -379,7 +379,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
             {
                 if (_RefreshCommand == null)
                 {
-                    _RefreshCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Refresh", "Refresh the DataTypes list", () => Refresh(), null);
+                    _RefreshCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Refresh", "Refresh the DataTypes list", () => Refresh(), null, null);
                 }
                 return _RefreshCommand;
             }
@@ -392,7 +392,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
             {
                 if (_selectAllCommand == null)
                 {
-                    _selectAllCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Select all", "Selects all DataTypes", () => SelectAllDataTypes(), null);
+                    _selectAllCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Select all", "Selects all DataTypes", () => SelectAllDataTypes(), null, null);
                 }
                 return _selectAllCommand;
             }
@@ -405,7 +405,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
             {
                 if (_selectNoneCommand == null)
                 {
-                    _selectNoneCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Select None", "Selects no DataTypes", () => SelectNoDataTypes(), null);
+                    _selectNoneCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Select None", "Selects no DataTypes", () => SelectNoDataTypes(), null, null);
                 }
                 return _selectNoneCommand;
             }
@@ -418,7 +418,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
             {
                 if (_addRelatedCommand == null)
                 {
-                    _addRelatedCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Add Related", "Add related DataTypes", () => AddRelatedDataTypes(), null);
+                    _addRelatedCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Add Related", "Add related DataTypes", () => AddRelatedDataTypes(), null, null);
                 }
                 return _addRelatedCommand;
             }
@@ -441,7 +441,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
 
                         newWorkspace.ShowForeignModel(DataObjectViewModel.Fetch(ViewModelFactory, newCtx, newWorkspace, newCls));
                         ViewModelFactory.ShowModel(newWorkspace, true);
-                    }, null);
+                    }, null, null);
                 }
                 return _NewObjectClassCommand;
             }
@@ -468,7 +468,8 @@ namespace Kistl.Client.Presentables.ModuleEditor
                         newWorkspace.ShowForeignModel(DataObjectViewModel.Fetch(ViewModelFactory, newCtx, newWorkspace, newRel));
                         ViewModelFactory.ShowModel(newWorkspace, true);
                     },
-                    () => (SelectedGraphDataTypeViewModels.Count() == 1 || SelectedGraphDataTypeViewModels.Count() == 2) && SelectedGraphDataTypeViewModels.Any(dt => dt.DataType is ObjectClass));
+                    () => (SelectedGraphDataTypeViewModels.Count() == 1 || SelectedGraphDataTypeViewModels.Count() == 2) && SelectedGraphDataTypeViewModels.Any(dt => dt.DataType is ObjectClass), 
+                    null);
                 }
                 return _NewRelationCommand;
             }

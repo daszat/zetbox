@@ -67,7 +67,7 @@ namespace Kistl.Client.Presentables.KistlBase
                         RelationChainViewModelResources.AddRelationCommand_Name,
                         RelationChainViewModelResources.AddRelationCommand_Tooltip,
                         AddRelation, 
-                        null);
+                        null, null);
                 }
                 return _AddRelationCommand;
             }

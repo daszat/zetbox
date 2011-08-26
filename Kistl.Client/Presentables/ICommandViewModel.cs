@@ -231,13 +231,37 @@ namespace Kistl.Client.Presentables
         {
             get
             {
-                return _toolTipCache;
+                return string.IsNullOrEmpty(_reason) ? _toolTipCache : _reason;
             }
             protected set
             {
                 if (_toolTipCache != value)
                 {
                     _toolTipCache = value;
+                    OnPropertyChanged("ToolTip");
+                }
+            }
+        }
+
+        /// <summary>The backing store for the <see cref="ToolTip"/> property.</summary>
+        private string _reason;
+
+        /// <summary>
+        /// Gets or sets a longer descriptive text for this command.
+        /// Suitable for display in a tool tip.
+        /// </summary>
+        public string Reason
+        {
+            get
+            {
+                return _reason;
+            }
+            protected set
+            {
+                if (_reason != value)
+                {
+                    _reason = value;
+                    OnPropertyChanged("Reason");
                     OnPropertyChanged("ToolTip");
                 }
             }
@@ -254,17 +278,30 @@ namespace Kistl.Client.Presentables
     [ViewModelDescriptor]
     public sealed class SimpleCommandViewModel : CommandViewModel
     {
-        public new delegate SimpleCommandViewModel Factory(IKistlContext dataCtx, ViewModel parent, string label, string tooltip, Action execute, Func<bool> canExecute);
+        /// <summary>
+        /// A simple command.
+        /// </summary>
+        /// <param name="dataCtx"></param>
+        /// <param name="parent"></param>
+        /// <param name="label">Label</param>
+        /// <param name="tooltip">Tooltip</param>
+        /// <param name="execute">The action to execure</param>
+        /// <param name="canExecute">A function to determinante if the action can be executet. If null, true is assumed.</param>
+        /// <param name="getReason">A function to receive a reason why the action cannot be executet. Can be null. If a function is provided, the tooltip will be overridden in case of can execute == false. Thus a simple string can always be returned.</param>
+        /// <returns></returns>
+        public new delegate SimpleCommandViewModel Factory(IKistlContext dataCtx, ViewModel parent, string label, string tooltip, Action execute, Func<bool> canExecute, Func<string> getReason);
 
         private readonly Action execute;
         private readonly Func<bool> canExecute;
+        private readonly Func<string> getReason;
 
-        public SimpleCommandViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent, string label, string tooltip, Action execute, Func<bool> canExecute)
+        public SimpleCommandViewModel(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent, string label, string tooltip, Action execute, Func<bool> canExecute, Func<string> getReason)
             : base(appCtx, dataCtx, parent, label, tooltip)
         {
             if (execute == null) throw new ArgumentNullException("execute");
             this.execute = execute;
             this.canExecute = canExecute;
+            this.getReason = getReason;
         }
 
         public SimpleCommandViewModel(bool designMode, ViewModel progressDisplayer, string label)
@@ -275,7 +312,12 @@ namespace Kistl.Client.Presentables
         public override bool CanExecute(object data)
         {
             if (canExecute == null) return true;
-            return canExecute();
+            var canExec = canExecute();
+            if (getReason != null) 
+            {                
+                base.Reason = canExec ? getReason() : string.Empty;
+            }
+            return canExec;
         }
 
         protected override void DoExecute(object data)

@@ -35,7 +35,7 @@ namespace Kistl.Client.Presentables
             {
                 if (_CloseCommand == null)
                 {
-                    _CloseCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, SimpleDataObjectEditorTaskViewModelResources.Close, SimpleDataObjectEditorTaskViewModelResources.Close_Tooltip, Close, null);
+                    _CloseCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, SimpleDataObjectEditorTaskViewModelResources.Close, SimpleDataObjectEditorTaskViewModelResources.Close_Tooltip, Close, null, null);
                 }
                 return _CloseCommand;
             }

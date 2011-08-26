@@ -312,7 +312,8 @@ namespace Kistl.Client.Presentables.KistlBase
                         InstanceListViewModelResources.AddFilterCommand,
                         InstanceListViewModelResources.AddFilterCommand_Tooltip,
                         AddFilter,
-                        () => ShowFilter && AllowUserFilter);
+                        () => ShowFilter && AllowUserFilter, 
+                        null);
                     _AddFilterCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_new_png);
                 }
                 return _AddFilterCommand;

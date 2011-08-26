@@ -205,7 +205,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
                             this,
                             WorkspaceViewModelResources.SaveCommand_Name,
                             WorkspaceViewModelResources.SaveCommand_Tooltip,
-                            Save, CanSave);
+                            Save, CanSave, null);
 
                 return _saveCommand;
             }
@@ -223,7 +223,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
                 if (_saveAndCloseCommand == null)
                     _saveAndCloseCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>()
                         .Invoke(DataContext, this, WorkspaceViewModelResources.SaveAndCloseCommand_Name, WorkspaceViewModelResources.SaveAndCloseCommand_Tooltip,
-                        () => { SaveAndClose(); }, CanSave);
+                        () => { SaveAndClose(); }, CanSave, null);
 
                 return _saveAndCloseCommand;
             }
@@ -340,7 +340,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
                 {
                     _AbortCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>()
                         .Invoke(DataContext, this, WorkspaceViewModelResources.AbortCommand_Name, WorkspaceViewModelResources.AbortCommand_Tooltip,
-                        Close, null);
+                        Close, null, null);
                 }
                 return _AbortCommand;
             }
@@ -364,7 +364,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
                             WorkspaceViewModelResources.VerifyContextCommand_Name,
                             WorkspaceViewModelResources.VerifyContextCommand_Tootlip,
                             ShowVerificationResults,
-                            null);
+                            null, null);
 
                 return _verifyCommand;
             }

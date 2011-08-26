@@ -66,8 +66,8 @@ namespace Kistl.Client.Presentables.KistlBase
                 {
                     _RemoveCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, 
                         FilterListEntryViewModelResources.RemoveCommand, 
-                        FilterListEntryViewModelResources.RemoveCommand_Tooltip, 
-                        Remove, () => IsUserFilter);
+                        FilterListEntryViewModelResources.RemoveCommand_Tooltip,
+                        Remove, () => IsUserFilter, null);
                     _RemoveCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_delete_png);
                 }
                 return _RemoveCommand;

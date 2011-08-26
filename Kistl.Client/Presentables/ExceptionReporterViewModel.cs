@@ -130,8 +130,8 @@ using Kistl.Client.Presentables.ValueViewModels;
                         DataContext,
                         this,
                         ExceptionReporterViewModelResources.Report,
-                        ExceptionReporterViewModelResources.Report_Tooltip, 
-                        Report, null);
+                        ExceptionReporterViewModelResources.Report_Tooltip,
+                        Report, null, null);
                     _ReportCommand.Icon = FrozenContext.FindPersistenceObject<Kistl.App.GUI.Icon>(NamedObjects.Icon_todo_png);
                 }
                 return _ReportCommand;
@@ -159,8 +159,8 @@ using Kistl.Client.Presentables.ValueViewModels;
                         DataContext, 
                         null,
                         ExceptionReporterViewModelResources.Cancel,
-                        ExceptionReporterViewModelResources.Cancel_Tooltip, 
-                        Cancel, null);
+                        ExceptionReporterViewModelResources.Cancel_Tooltip,
+                        Cancel, null, null);
                     _CancelCommand.Icon = FrozenContext.FindPersistenceObject<Kistl.App.GUI.Icon>(NamedObjects.Icon_no_png);
                 }
                 return _CancelCommand;

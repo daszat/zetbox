@@ -78,8 +78,8 @@ namespace Kistl.Client.Presentables
                         this,
                         ValueInputTaskViewModelResources.InvokeCommand_Name,
                         ValueInputTaskViewModelResources.InvokeCommand_Tooltip, 
-                        Invoke, 
-                        null);
+                        Invoke,
+                        null, null);
                 }
                 return _InvokeCommand;
             }
@@ -104,8 +104,8 @@ namespace Kistl.Client.Presentables
                         this,
                         ValueInputTaskViewModelResources.CancelCommand_Name,
                         ValueInputTaskViewModelResources.CancelCommand_Tooltip, 
-                        Cancel, 
-                        null);
+                        Cancel,
+                        null, null);
                 }
                 return _CancelCommand;
             }

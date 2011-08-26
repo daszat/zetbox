@@ -26,7 +26,7 @@ namespace Kistl.Client.Presentables.Calendar
             {
                 if (_NextWeekCommand == null)
                 {
-                    _NextWeekCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Nächste", "", NextWeek, null);
+                    _NextWeekCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Nächste", "", NextWeek, null, null);
                 }
                 return _NextWeekCommand;
             }
@@ -44,7 +44,7 @@ namespace Kistl.Client.Presentables.Calendar
             {
                 if (_PrevWeekCommand == null)
                 {
-                    _PrevWeekCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Vorherige", "", PrevWeek, null);
+                    _PrevWeekCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Vorherige", "", PrevWeek, null, null);
                 }
                 return _PrevWeekCommand;
             }
@@ -62,7 +62,7 @@ namespace Kistl.Client.Presentables.Calendar
             {
                 if (_ThisWeekCommand == null)
                 {
-                    _ThisWeekCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Heute", "", ThisWeek, null);
+                    _ThisWeekCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Heute", "", ThisWeek, null, null);
                 }
                 return _ThisWeekCommand;
             }

@@ -101,7 +101,7 @@ namespace Kistl.Client.Presentables.KistlBase
                     _ChooseCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this,
                         PropertySelectionTaskViewModelResources.ChooseCommand,
                         PropertySelectionTaskViewModelResources.ChooseCommand_Tooltip,
-                        Choose, CanChoose);
+                        Choose, CanChoose, null);
                 }
                 return _ChooseCommand;
             }
@@ -123,7 +123,7 @@ namespace Kistl.Client.Presentables.KistlBase
                     _CancelCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, null,
                         PropertySelectionTaskViewModelResources.CancelCommand,
                         PropertySelectionTaskViewModelResources.CancelCommand_Tooltip,
-                        Cancel, null);
+                        Cancel, null, null);
                 }
                 return _CancelCommand;
             }

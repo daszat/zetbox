@@ -53,8 +53,8 @@ namespace Kistl.Client.Presentables
                         Parent,
                         Method.GetLabel(), 
                         Method.Description, 
-                        Execute, 
-                        null
+                        Execute,
+                        null, null
                     );
                 }
                 return _ExecuteCommand;

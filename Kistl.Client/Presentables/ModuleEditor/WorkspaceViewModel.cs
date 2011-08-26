@@ -245,7 +245,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
             {
                 if (_NewModuleCommand == null)
                 {
-                    _NewModuleCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "New Module", "Creates a new Module", () => CreateNewModule(), null);
+                    _NewModuleCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "New Module", "Creates a new Module", () => CreateNewModule(), null, null);
                 }
                 return _NewModuleCommand;
             }
@@ -258,7 +258,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
             {
                 if (_RefreshCommand == null)
                 {
-                    _RefreshCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Refresh", "Refresh", () => Refresh(), null);
+                    _RefreshCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Refresh", "Refresh", () => Refresh(), null, null);
                 }
                 return _RefreshCommand;
             }
@@ -271,7 +271,7 @@ namespace Kistl.Client.Presentables.ModuleEditor
             {
                 if (_EditCurrentModuleCommand == null)
                 {
-                    _EditCurrentModuleCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Edit Module", "Opens the Editor for the current module", () => EditCurrentModule(), null);
+                    _EditCurrentModuleCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Edit Module", "Opens the Editor for the current module", () => EditCurrentModule(), null, null);
                 }
                 return _EditCurrentModuleCommand;
             }

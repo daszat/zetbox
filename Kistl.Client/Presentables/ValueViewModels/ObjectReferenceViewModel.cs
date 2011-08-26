@@ -217,7 +217,8 @@ namespace Kistl.Client.Presentables.ValueViewModels
                         ObjectReferenceViewModelResources.OpenReferenceCommand_Name,
                         ObjectReferenceViewModelResources.OpenReferenceCommand_Tooltip,
                         () => OpenReference(),
-                        () => CanOpen);
+                        () => CanOpen, 
+                        null);
                     _openReferenceCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_fileopen_png);
                 }
                 return _openReferenceCommand;
@@ -287,7 +288,8 @@ namespace Kistl.Client.Presentables.ValueViewModels
                         ObjectReferenceViewModelResources.CreateNewItemAndSetValueCommand_Name,
                         ObjectReferenceViewModelResources.CreateNewItemAndSetValueCommand_Tooltip,
                         CreateNewItemAndSetValue,
-                        () => AllowCreateNewItem && !DataContext.IsReadonly && !IsReadOnly);
+                        () => AllowCreateNewItem && !DataContext.IsReadonly && !IsReadOnly, 
+                        null);
                     _createNewItemAndSetValueCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_new_png);
                 }
                 return _createNewItemAndSetValueCommand;
@@ -334,7 +336,8 @@ namespace Kistl.Client.Presentables.ValueViewModels
                         ObjectReferenceViewModelResources.SelectValueCommand_Name,
                         ObjectReferenceViewModelResources.SelectValueCommand_Tooltip,
                         () => SelectValue(),
-                        () => AllowSelectValue && !DataContext.IsReadonly && !IsReadOnly);
+                        () => AllowSelectValue && !DataContext.IsReadonly && !IsReadOnly, 
+                        null);
                     _SelectValueCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_search_png);
                 }
                 return _SelectValueCommand;
@@ -454,6 +457,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                             ObjectReferenceViewModelResources.PossibleValues_More,
                             ObjectReferenceViewModelResources.PossibleValues_More_Tooltip,
                             SelectValue,
+                            null, 
                             null);
                         cmdMdl.RequestedKind = FrozenContext.FindPersistenceObject<ControlKind>(NamedObjects.ControlKind_Kistl_App_GUI_CommandLinkKind);
                         mdlList.Add(cmdMdl);

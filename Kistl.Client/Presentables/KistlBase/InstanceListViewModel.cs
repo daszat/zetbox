@@ -399,7 +399,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 if (_NewCommand == null)
                 {
                     _NewCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
-                        DataContext, this, CommonCommandsResources.NewDataObjectCommand_Name, CommonCommandsResources.NewDataObjectCommand_Tooltip, NewObject, () => AllowAddNew);
+                        DataContext, this, CommonCommandsResources.NewDataObjectCommand_Name, CommonCommandsResources.NewDataObjectCommand_Tooltip, NewObject, () => AllowAddNew, null);
                     _NewCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_new_png);
                 }
                 return _NewCommand;
@@ -528,7 +528,8 @@ namespace Kistl.Client.Presentables.KistlBase
                         InstanceListViewModelResources.SelectColumnsCommand,
                         InstanceListViewModelResources.SelectColumnsCommand_Tooltip,
                         SelectColumns,
-                        () => AllowSelectColumns);
+                        () => AllowSelectColumns, 
+                        null);
                 }
                 return _SelectColumnsCommand;
             }
@@ -572,7 +573,7 @@ namespace Kistl.Client.Presentables.KistlBase
                     _PrintCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this,
                         InstanceListViewModelResources.PrintCommand,
                         InstanceListViewModelResources.PrintCommand_Tooltip,
-                        Print, null);
+                        Print, null, null);
                     _PrintCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_Printer_png);
                 }
                 return _PrintCommand;
@@ -658,7 +659,7 @@ namespace Kistl.Client.Presentables.KistlBase
                     _ExportCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this,
                         InstanceListViewModelResources.ExportCSVCommand,
                         InstanceListViewModelResources.ExportCSVCommand_Tooltip,
-                        Export, null);
+                        Export, null, null);
                 }
                 return _ExportCommand;
             }

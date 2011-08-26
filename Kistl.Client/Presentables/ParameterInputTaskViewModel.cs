@@ -106,7 +106,8 @@ namespace Kistl.Client.Presentables
                         this,
                         ParameterInputTaskViewModelResources.InvokeCommand_Name,
                         ParameterInputTaskViewModelResources.InvokeCommand_Tooltip, 
-                        Invoke, 
+                        Invoke,
+                        null, 
                         null);
                 }
                 return _InvokeCommand;
@@ -132,7 +133,8 @@ namespace Kistl.Client.Presentables
                         null,
                         ParameterInputTaskViewModelResources.CancelCommand_Name,
                         ParameterInputTaskViewModelResources.CancelCommand_Tooltip, 
-                        Cancel, 
+                        Cancel,
+                        null, 
                         null);
                 }
                 return _CancelCommand;

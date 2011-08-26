@@ -134,7 +134,8 @@ namespace Kistl.Client.Presentables.GUI
                         NavigatorViewModelResources.HomeCommand_Name,
                         NavigatorViewModelResources.HomeCommand_Tooltip,
                         Home,
-                        () => CurrentScreen != _root);
+                        () => CurrentScreen != _root, 
+                        null);
                 }
                 return _HomeCommand;
             }
@@ -158,7 +159,8 @@ namespace Kistl.Client.Presentables.GUI
                         NavigatorViewModelResources.BackCommand_Name,
                         NavigatorViewModelResources.BackCommand_Tooltip,
                         Back,
-                        () => _history.Count > 1);
+                        () => _history.Count > 1, 
+                        null);
                 }
                 return _BackCommand;
             }

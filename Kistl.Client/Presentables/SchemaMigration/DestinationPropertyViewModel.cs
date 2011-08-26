@@ -73,7 +73,7 @@ namespace Kistl.Client.Presentables.SchemaMigration
             {
                 if (_SelectCommand == null)
                 {
-                    _SelectCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, null, "Select", "Select a destination property", Select, () => SourceColumn != null);
+                    _SelectCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, null, "Select", "Select a destination property", Select, () => SourceColumn != null, null);
                 }
                 return _SelectCommand;
             }

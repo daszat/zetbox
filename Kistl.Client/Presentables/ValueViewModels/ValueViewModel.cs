@@ -160,7 +160,8 @@ namespace Kistl.Client.Presentables.ValueViewModels
                         ValueViewModelResources.ClearValueCommand_Name,
                         ValueViewModelResources.ClearValueCommand_Tooltip,
                         () => ClearValue(),
-                        () => AllowNullInput && !DataContext.IsReadonly && !IsReadOnly);
+                        () => AllowNullInput && !DataContext.IsReadonly && !IsReadOnly, 
+                        null);
                     //_ClearValueCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.
                 }
                 return _ClearValueCommand;
@@ -898,7 +899,8 @@ namespace Kistl.Client.Presentables.ValueViewModels
                         ValueViewModelResources.EditCommand_Name,
                         ValueViewModelResources.EditCommand_Tooltip,
                         () => Edit(),
-                        () => !IsReadOnly);
+                        () => !IsReadOnly, 
+                        null);
                 }
                 return _EditCommand;
             }
