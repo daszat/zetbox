@@ -287,7 +287,6 @@ namespace Kistl.DalProvider.NHibernate
                     _attachedObjects.Remove(obj);
                     _attachedObjectsByProxy.Remove(obj);
 
-                    Kistl.API.Utils.Logging.Log.ErrorFormat("Deleting: {0}#{1}", obj.GetType(), obj.ID);
                     _nhSession.Delete(obj.NHibernateProxy);
                 }
 
