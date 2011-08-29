@@ -14,10 +14,10 @@ namespace Kistl.Server.Service
     using Kistl.API.Common;
     using Kistl.API.Configuration;
     using Kistl.API.Server;
+    using Kistl.API.Server.PerfCounter;
     using Kistl.API.Utils;
     using Kistl.App.Extensions;
     using Kistl.App.Packaging;
-    using Kistl.API.Server.PerfCounter;
 
     /// <summary>
     /// Mainprogramm
@@ -78,6 +78,9 @@ namespace Kistl.Server.Service
                             },
                         { "deploy=", "deploy the database from the specified xml file",
                             v => { if (v != null) { actions.Add((c, args) => c.Resolve<IServer>().Deploy(v)); } }
+                            },
+                        { "deploy-local:", "deploy all modules from the local Modules directory",
+                            v => { actions.AddRange(Directory.GetFiles(v ?? "Modules", "*.xml", SearchOption.TopDirectoryOnly).Select(f => new Action<ILifetimeScope, List<string>>((c, args) => c.Resolve<IServer>().Deploy(f)))); }
                             },
                         { "checkdeployedschema", "checks the sql schema against the deployed schema",
                             v => { if (v != null) { actions.Add((c, args) => c.Resolve<IServer>().CheckSchema(false)); } } 
