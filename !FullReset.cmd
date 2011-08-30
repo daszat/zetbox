@@ -9,7 +9,7 @@ C:\Windows\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe CCNet.msbuild /p:Sourc
 IF ERRORLEVEL 1 GOTO FAIL
 
 rem regenerate modules to prove roundtrippability
-call "!PublishDev.cmd"
+call "!Publish.cmd"
 GOTO EOF
 
 :FAIL

@@ -13,7 +13,7 @@
     <Message Importance="high" Text="rebuild entire solution" />
     <MSBuild Projects="Kistl.Complete.sln" Targets="Rebuild" />
 
-    <Exec Command="!ResetDatabaseDev Configs\$(zenv)\Kistl.Server.Service.xml" />
+    <Exec Command="!ResetDatabase Configs\$(zenv)\Kistl.Server.Service.xml" />
 
     <!-- Generate -->
     <Message Importance="high" Text="generate new objects" />
