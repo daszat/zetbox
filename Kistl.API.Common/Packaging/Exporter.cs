@@ -117,7 +117,7 @@ namespace Kistl.App.Packaging
             using (Log.DebugTraceMethodCall("ExportFromContext"))
             {
                 Log.InfoFormat("Starting Export for Modules [{0}], data owned by [{1}]", string.Join(", ", schemaModules), string.Join(", ", ownerModules));
-                
+
                 var allData = ownerModules.Contains("*");
 
                 var schemaList = GetModules(ctx, schemaModules);
@@ -129,11 +129,19 @@ namespace Kistl.App.Packaging
                 foreach (var module in schemaList)
                 {
                     Log.InfoFormat("  exporting module {0}", module.Name);
-                    foreach (var objClass in ctx.GetQuery<ObjectClass>().Where(o => o.Module == module).ToList().Where(o => o.ImplementsInterfaces.Contains(iexpIf)).OrderBy(o => o.Name))
+                    foreach (var objClass in ctx.GetQuery<ObjectClass>().Where(o => o.Module == module).OrderBy(o => o.Name).ToList())
                     {
-                        if (allData)
+                        if (objClass.SubClasses.Count > 0)
                         {
-                            Log.InfoFormat("    exporting class {0} ", objClass.Name);
+                            Log.DebugFormat("    skipping {0}: not a leaf class", objClass.Name);
+                        }
+                        else if (!objClass.AndParents(cls => new[] { cls }, cls => cls.BaseObjectClass).SelectMany(cls => cls.ImplementsInterfaces).Contains(iexpIf))
+                        {
+                            Log.DebugFormat("    skipping {0}: not exportable", objClass.Name);
+                        }
+                        else if (allData)
+                        {
+                            Log.InfoFormat("    exporting class {0}", objClass.Name);
                             foreach (var obj in ctx.Internals().GetAll(objClass.GetDescribedInterfaceType()).OrderBy(obj => ((IExportable)obj).ExportGuid))
                             {
                                 ExportObject(s, obj, schemaNamespaces);
@@ -141,7 +149,7 @@ namespace Kistl.App.Packaging
                         }
                         else if (objClass.ImplementsIModuleMember())
                         {
-                            Log.InfoFormat("    exporting parts of class {0} ", objClass.Name);
+                            Log.InfoFormat("    exporting parts of class {0}", objClass.Name);
                             foreach (var obj in ctx.Internals().GetAll(objClass.GetDescribedInterfaceType())
                                 .Cast<IModuleMember>()
                                 .Where(mm => mm.Module != null && ownerModules.Contains(mm.Module.Name))
@@ -154,7 +162,7 @@ namespace Kistl.App.Packaging
                         }
                         else
                         {
-                            Log.DebugFormat("    skipping {0} ", objClass.Name);
+                            Log.DebugFormat("    skipping {0}", objClass.Name);
                         }
                     }
 
