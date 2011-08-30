@@ -178,13 +178,16 @@ namespace Kistl.Server
             }
         }
 
-        public void UpdateSchema(string file)
+        public void UpdateSchema(string[] files)
         {
-            using (Log.InfoTraceMethodCallFormat("UpdateSchema", "file=[{0}]", file))
+            using (Log.InfoTraceMethodCallFormat("UpdateSchema", "file=[{0}]", string.Join(";", files)))
             using (var subContainer = container.BeginLifetimeScope())
             {
                 IKistlContext ctx = subContainer.Resolve<BaseMemoryContext>();
-                Importer.LoadFromXml(ctx, file);
+                foreach (var f in files)
+                {
+                    Importer.LoadFromXml(ctx, f);
+                }
 
                 var mgr = subContainer.Resolve<SchemaManagement.SchemaManager>(new NamedParameter("newSchema", ctx));
                 mgr.UpdateSchema();

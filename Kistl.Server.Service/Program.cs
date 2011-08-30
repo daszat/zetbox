@@ -105,7 +105,7 @@ namespace Kistl.Server.Service
                             v => { if (v != null) { actions.Add((c, args) => c.Resolve<IServer>().UpdateSchema()); } }
                             },
                         { "updateschema=", "updates the schema to the specified xml file",
-                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<IServer>().UpdateSchema(v)); } }
+                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<IServer>().UpdateSchema(v.Split(";".ToCharArray(), StringSplitOptions.RemoveEmptyEntries))); } }
                             },
                         { "generate", "generates and compiles new data classes",
                             v => { if (v != null) { actions.Add((c, args) => c.Resolve<Kistl.Generator.Compiler>().GenerateCode()); } }

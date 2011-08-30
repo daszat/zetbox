@@ -17,7 +17,7 @@ namespace Kistl.API.Server
         void RunFixes();
         void SyncIdentities();
         void UpdateSchema();
-        void UpdateSchema(string file);
+        void UpdateSchema(string[] files);
         void WipeDatabase();
     }
 }
