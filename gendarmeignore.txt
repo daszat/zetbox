@@ -5,13 +5,11 @@ M: System.Type System.Linq.Dynamic.ClassFactory::CreateDynamicClass(System.Linq.
 M: System.String System.Linq.Dynamic.ExpressionParser::GetTypeName(System.Type)
 M: System.Boolean Kistl.API.Utils.OptionSet::ParseBundledValue(System.String,System.String,Kistl.API.Utils.OptionContext)
 M: System.String Kistl.API.Utils.OptionSet::GetArgumentName(System.Int32,System.Int32,System.String)
-# no concern here:
 
 R: Gendarme.Rules.Performance.AvoidRepetitiveCallsToPropertiesRule
 # The rule warn if virtual, or unlikely to be inline-able, property getters are called several times by a method.
 # should be fixed upstream in MigraDoc
 M: System.Void ZBox.App.SchemaMigration.SourceTableMappingReport::RenderColumnMappings()
-# Method is only executed once
 # external code
 M: System.Boolean Kistl.API.Utils.OptionSet::GetOptionParts(System.String,System.String&,System.String&,System.String&,System.String&)
 # false positive, the referenced object changes beneath the access
@@ -79,7 +77,6 @@ M: System.Collections.Generic.List`1<Kistl.API.IDataObject> Kistl.API.BaseMemory
 M: System.Collections.Generic.List`1<Kistl.API.IDataObject> Kistl.API.Server.BaseKistlDataContext::GetAllHack()
 
 # generated code (wpf)
-
 M: System.Delegate Kistl.Client.WPF.View.CacheDebuggerDisplay::_CreateDelegate(System.Type,System.String)
 M: System.Delegate Kistl.Client.WPF.View.Calendar.WeekCalendar::_CreateDelegate(System.Type,System.String)
 M: System.Delegate Kistl.Client.WPF.View.EnumSelectionView::_CreateDelegate(System.Type,System.String)
@@ -233,9 +230,6 @@ T: Kistl.API.Server.ServerAssemblyConfiguration
 R: Gendarme.Rules.Correctness.ReviewInconsistentIdentityRule
 # The type does not manage identity consistently in its Equals, relational operator, CompareTo, GetHashCode, and Clone methods.
 T: System.Linq.Dynamic.Signature
-
-R: Gendarme.Rules.Maintainability.AvoidComplexMethodsRule
-# Methods with a large cyclomatic complexity are hard to understand and maintain.
 
 R: Gendarme.Rules.Design.ImplementIComparableCorrectlyRule
 # This type implements IComparable so it should override Equals(object) and overload the ==, !=, &lt; and &gt; operators.

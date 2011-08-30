@@ -21,7 +21,6 @@
       <Module>Kistl.DalProvider.Memory.MemoryProvider, Kistl.DalProvider.Memory</Module>
       <Module>Kistl.App.Projekte.Client.CustomClientActionsModule, Kistl.App.Projekte.Client</Module>
       <Module>Kistl.App.Projekte.Common.CustomCommonActionsModule, Kistl.App.Projekte.Common</Module>
-      <Module>Ini50.App.Client.Ini50Module, Ini50.App.Client</Module>
 	  <Module>Kistl.Microsoft.Module, Kistl.Microsoft</Module>
 	  <Module>Kistl.Microsoft.OutlookMailSender+Module, Kistl.Microsoft</Module>
       <Module>Kistl.API.MailProblemReporter+Module, Kistl.API</Module>
@@ -39,8 +38,6 @@
     <string>Client\WPF</string>
     <string>Common\App.ZBox</string>
     <string>Client\App.ZBox</string>
-    <string>Common\App.Ini50</string>
-    <string>Client\App.Ini50</string>
     <string>Common\Microsoft</string>
   </AssemblySearchPaths>
 </KistlConfig>

@@ -31,8 +31,6 @@
       <Module>Kistl.DalProvider.Ef.Generator.EfGeneratorProvider, Kistl.DalProvider.Ef.Generator</Module>
 
       <!-- application specific modules -->
-      <Module>Ini50.App.Server.Ini50Module, Ini50.App.Server</Module>
-      <Module>Ini50.App.Server.Ini50Service+Module, Ini50.App.Server</Module>
     </Modules>
     <ClientFilesLocations>
       <Location Name="Exe">P:\Kistl\bin\Debug\Kistl.Client.WPF.exe</Location>
@@ -51,7 +49,5 @@
     <string>Server\NH.Fallback</string>
     <string>Common\App.ZBox</string>
     <string>Server\App.ZBox</string>
-    <string>Common\App.Ini50</string>
-    <string>Server\App.Ini50</string>
   </AssemblySearchPaths>
 </KistlConfig>

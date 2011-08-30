@@ -25,7 +25,5 @@
     <string>Server\EF.Fallback</string>
     <string>Common\App.ZBox</string>
     <string>Server\App.ZBox</string>
-    <string>Common\App.Ini50</string>
-    <string>Server\App.Ini50</string>
   </AssemblySearchPaths>
 </KistlConfig>

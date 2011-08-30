@@ -6,7 +6,6 @@
                   xmlns:client="clr-namespace:Kistl.Client.Presentables;assembly=Kistl.Client"
                   xmlns:objBrowser="clr-namespace:Kistl.Client.Presentables.ObjectBrowser;assembly=Kistl.Client"
                   xmlns:clientKistlBase="clr-namespace:Kistl.Client.Presentables.KistlBase;assembly=Kistl.Client"
-                  xmlns:tr="clr-namespace:Kistl.Client.Presentables.TimeRecords;assembly=Kistl.Client"
                   xmlns:commands="clr-namespace:Kistl.Client.WPF.Commands;assembly=Kistl.Client.WPF.Toolkit"
                   commands:SmartRoutedUICommand.IsCommandSink="True"
                   Title="dasLauncher"

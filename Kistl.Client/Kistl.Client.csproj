@@ -225,9 +225,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ParameterInputTaskViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Presentables\Parties\OrganizationViewModel.cs" />
-    <Compile Include="Presentables\Parties\PersonViewModel.cs" />
-    <Compile Include="Presentables\Parties\PartyViewModel.cs" />
     <Compile Include="Presentables\ValueInputTaskViewModel.cs" />
     <Compile Include="Presentables\DocumentManagement\FileViewModel.cs" />
     <Compile Include="Presentables\DocumentManagement\ImageViewModel.cs" />
@@ -307,12 +304,7 @@
     <Compile Include="Presentables\Relations\RelationEndViewModel.cs" />
     <Compile Include="Presentables\Relations\RelationViewModel.cs" />
     <Compile Include="Presentables\DataObjectSelectionTaskViewModel.cs" />
-    <Compile Include="Presentables\TimeRecords\Dashboard.cs" />
-    <Compile Include="Presentables\TimeRecords\PresenceRecordModel.cs" />
-    <Compile Include="Presentables\TimeRecords\WorkEffortRecorderModel.Commands.cs" />
     <Compile Include="Presentables\ObjectEditor\WorkspaceViewModel.cs" />
-    <Compile Include="Presentables\TimeRecords\WorkEffortModel.cs" />
-    <Compile Include="Presentables\TimeRecords\WorkEffortRecorderModel.cs" />
     <Compile Include="Presentables\WindowViewModel.cs" />
     <Compile Include="ServerDomainManager.cs" />
     <Compile Include="ClientHelper.cs" />

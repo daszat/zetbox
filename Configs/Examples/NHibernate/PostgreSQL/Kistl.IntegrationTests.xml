@@ -43,9 +43,6 @@
       <Module>Kistl.DalProvider.Memory.MemoryProvider, Kistl.DalProvider.Memory</Module>
       <Module>Kistl.App.Projekte.Client.CustomClientActionsModule, Kistl.App.Projekte.Client</Module>
       <Module>Kistl.App.Projekte.Common.CustomCommonActionsModule, Kistl.App.Projekte.Common</Module>
-      <!-- Do not load customers modules! Nothing to test there
-        <Module>Ini50.App.Client.Ini50Module, Ini50.App.Client</Module>
-        -->
 
         <!-- since the test are driven from the client app domain, we need to reset the database from here -->
       <Module>Kistl.Tests.Utilities.PostgreSql.UtilityModule, Kistl.Tests.Utilities.PostgreSql</Module>
