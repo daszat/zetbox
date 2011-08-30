@@ -133,7 +133,7 @@ namespace Kistl.Server.SchemaManagement
             var dbType = prop.GetDbType();
             var size = prop.GetSize();
             var scale = prop.GetScale();
-            var defConstr = SchemaManager.GetDefaultContraint(prop);
+            var defConstr = SchemaManager.GetDefaultConstraint(prop);
 
             if (movedUp)
             {
@@ -200,7 +200,7 @@ namespace Kistl.Server.SchemaManagement
         {
             string colName = Construct.NestedColumnName(prop, prefix);
             Log.InfoFormat("New nullable ValueType Property: '{0}' ('{1}')", prop.Name, colName);
-            db.CreateColumn(db.GetTableName(objClass.Module.SchemaName, objClass.TableName), colName, prop.GetDbType(), prop.GetSize(), prop.GetScale(), true, SchemaManager.GetDefaultContraint(prop));
+            db.CreateColumn(db.GetTableName(objClass.Module.SchemaName, objClass.TableName), colName, prop.GetDbType(), prop.GetSize(), prop.GetScale(), true, SchemaManager.GetDefaultConstraint(prop));
         }
         #endregion
 
@@ -216,7 +216,7 @@ namespace Kistl.Server.SchemaManagement
             var dbType = prop.GetDbType();
             var size = prop.GetSize();
             var scale = prop.GetScale();
-            var def = SchemaManager.GetDefaultContraint(prop);
+            var def = SchemaManager.GetDefaultConstraint(prop);
             Log.InfoFormat("New not nullable ValueType Property: [{0}.{1}] (col:{2})", prop.ObjectClass.Name, prop.Name, colName);
             if (!db.CheckTableContainsData(tblName))
             {
@@ -250,7 +250,7 @@ namespace Kistl.Server.SchemaManagement
             // Another case is responsible to change that.
             var currentIsNullable = db.GetIsColumnNullable(tblName, colName);
 
-            db.AlterColumn(tblName, colName, prop.GetDbType(), prop.GetSize(), prop.GetScale(), currentIsNullable, SchemaManager.GetDefaultContraint(prop));
+            db.AlterColumn(tblName, colName, prop.GetDbType(), prop.GetSize(), prop.GetScale(), currentIsNullable, SchemaManager.GetDefaultConstraint(prop));
         }
         #endregion
 
@@ -339,7 +339,7 @@ namespace Kistl.Server.SchemaManagement
             db.CreateTable(tblName, true);
             db.CreateColumn(tblName, fkName, System.Data.DbType.Int32, 0, 0, false);
 
-            db.CreateColumn(tblName, valPropName, prop.GetDbType(), prop.GetSize(), prop.GetScale(), false, SchemaManager.GetDefaultContraint(prop));
+            db.CreateColumn(tblName, valPropName, prop.GetDbType(), prop.GetSize(), prop.GetScale(), false, SchemaManager.GetDefaultConstraint(prop));
 
             if (hasPersistentOrder)
             {
@@ -374,7 +374,7 @@ namespace Kistl.Server.SchemaManagement
             // TODO: Support neested CompoundObject
             foreach (ValueTypeProperty p in prop.CompoundObjectDefinition.Properties)
             {
-                db.CreateColumn(tblName, valPropName + "_" + p.Name, p.GetDbType(), p.GetSize(), p.GetScale(), true, SchemaManager.GetDefaultContraint(prop));
+                db.CreateColumn(tblName, valPropName + "_" + p.Name, p.GetDbType(), p.GetSize(), p.GetScale(), true, SchemaManager.GetDefaultConstraint(prop));
             }
 
             if (hasPersistentOrder)
@@ -1946,7 +1946,7 @@ namespace Kistl.Server.SchemaManagement
                     valProp.GetSize(),
                     valProp.GetScale(),
                     hasData || cprop.IsNullable() || valProp.IsNullable(),
-                    SchemaManager.GetDefaultContraint(valProp));
+                    SchemaManager.GetDefaultConstraint(valProp));
             }
 
             // TODO: Add neested CompoundObjectProperty
@@ -1963,7 +1963,7 @@ namespace Kistl.Server.SchemaManagement
             var objClass = (ObjectClass)uc.Constrained;
             var tblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
             var columns = GetUCColNames(uc);
-            Log.InfoFormat("New Index Contraint: {0} on {1}({2})", uc.Reason, tblName, string.Join(", ", columns));
+            Log.InfoFormat("New Index Constraint: {0} on {1}({2})", uc.Reason, tblName, string.Join(", ", columns));
             db.CreateIndex(tblName, Construct.IndexName(objClass.TableName, columns), uc.IsUnique, false, columns);
         }
 
@@ -1985,7 +1985,7 @@ namespace Kistl.Server.SchemaManagement
             var objClass = (ObjectClass)uc.Constrained;
             var tblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
             var columns = GetUCColNames(uc);
-            Log.InfoFormat("Drop Index Contraint: {0} on {1}({2})", uc.Reason, objClass.TableName, string.Join(", ", columns));
+            Log.InfoFormat("Drop Index Constraint: {0} on {1}({2})", uc.Reason, objClass.TableName, string.Join(", ", columns));
             db.DropIndex(tblName, Construct.IndexName(objClass.TableName, columns));
         }
         #endregion

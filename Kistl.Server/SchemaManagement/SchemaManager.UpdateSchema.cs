@@ -31,7 +31,7 @@ namespace Kistl.Server.SchemaManagement
                     UpdateRelations();
                     UpdateInheritance();
                     UpdateSecurityTables();
-                    UpdateContraints();
+                    UpdateConstraints();
 
                     UpdateDeletedRelations();
                     UpdateDeletedTables();
@@ -73,7 +73,7 @@ namespace Kistl.Server.SchemaManagement
             }
         }
 
-        private void UpdateContraints()
+        private void UpdateConstraints()
         {
             Log.Info("Updating Constraints");
             Log.Debug("--------------------");
@@ -82,13 +82,13 @@ namespace Kistl.Server.SchemaManagement
             {
                 Log.DebugFormat("Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.Name);
 
-                UpdateIndexContraints(objClass);
-                UpdateDeletedIndexContraints(objClass);
+                UpdateIndexConstraints(objClass);
+                UpdateDeletedIndexConstraints(objClass);
             }
             Log.Debug(String.Empty);
         }
 
-        private void UpdateIndexContraints(ObjectClass objClass)
+        private void UpdateIndexConstraints(ObjectClass objClass)
         {
             foreach (var uc in objClass.Constraints.OfType<IndexConstraint>())
             {
@@ -103,7 +103,7 @@ namespace Kistl.Server.SchemaManagement
             }
         }
 
-        private void UpdateDeletedIndexContraints(ObjectClass objClass)
+        private void UpdateDeletedIndexConstraints(ObjectClass objClass)
         {
             foreach (IndexConstraint uc in Case.savedSchema.GetQuery<IndexConstraint>().Where(p => p.Constrained.ExportGuid == objClass.ExportGuid))
             {

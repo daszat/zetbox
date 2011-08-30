@@ -249,7 +249,7 @@ namespace Kistl.App.Base
                 }
                 #endregion
 
-                #region Contraints
+                #region Constraints
                 foreach (InstanceConstraint constr in iface.Constraints)
                 {
                     if (!objClass.Constraints.Select(c => c.GetObjectClass(ctx)).Contains(constr.GetObjectClass(ctx)))

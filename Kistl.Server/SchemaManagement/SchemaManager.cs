@@ -189,7 +189,7 @@ namespace Kistl.Server.SchemaManagement
         #endregion
 
         #region Helper
-        public static DefaultConstraint GetDefaultContraint(Property prop)
+        public static DefaultConstraint GetDefaultConstraint(Property prop)
         {
             if (prop == null) throw new ArgumentNullException("prop");
             if (prop.DefaultValue is Kistl.App.Base.NewGuidDefaultValue)

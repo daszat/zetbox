@@ -588,7 +588,7 @@ namespace Kistl.Server.SchemaManagement
                 {
                     Log.DebugFormat("{0}", prop.Name);
                     CheckColumn(tblName, fkName, System.Data.DbType.Int32, 0, 0, false, null);
-                    CheckColumn(tblName, valPropName, prop.GetDbType(), prop.GetSize(), prop.GetScale(), false, SchemaManager.GetDefaultContraint(prop));
+                    CheckColumn(tblName, valPropName, prop.GetDbType(), prop.GetSize(), prop.GetScale(), false, SchemaManager.GetDefaultConstraint(prop));
 
                     if (hasPersistentOrder)
                     {
@@ -646,7 +646,7 @@ namespace Kistl.Server.SchemaManagement
                     // TODO: Support neested CompoundObject
                     foreach (ValueTypeProperty p in prop.CompoundObjectDefinition.Properties)
                     {
-                        CheckColumn(tblName, valPropName + "_" + p.Name, p.GetDbType(), p.GetSize(), p.GetScale(), true, SchemaManager.GetDefaultContraint(p));
+                        CheckColumn(tblName, valPropName + "_" + p.Name, p.GetDbType(), p.GetSize(), p.GetScale(), true, SchemaManager.GetDefaultConstraint(p));
                     }
                     if (hasPersistentOrder)
                     {
@@ -784,7 +784,7 @@ namespace Kistl.Server.SchemaManagement
                 var tblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
                 var colName = Construct.NestedColumnName(prop, prefix);
                 Log.DebugFormat("    {0}", colName);
-                CheckColumn(tblName, colName, prop.GetDbType(), prop.GetSize(), prop.GetScale(), prop.IsNullable(), SchemaManager.GetDefaultContraint(prop));
+                CheckColumn(tblName, colName, prop.GetDbType(), prop.GetSize(), prop.GetScale(), prop.IsNullable(), SchemaManager.GetDefaultConstraint(prop));
             }
 
             foreach (CompoundObjectProperty sprop in properties.OfType<CompoundObjectProperty>().Where(p => !p.IsList))
