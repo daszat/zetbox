@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
+                   default-cascade="save-update" >
+    <class name="Kistl.App.GUI.NavigationScreenNHibernateImpl+NavigationScreenProxy, Kistl.Objects.NHibernateImpl"
+           proxy="Kistl.App.GUI.NavigationScreenNHibernateImpl+NavigationScreenProxy, Kistl.Objects.NHibernateImpl"
+           schema="`gui`"
+           table="`NavigationScreens`"
+           abstract="false"
+           dynamic-update="true"
+           optimistic-lock="dirty">
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`gui`</param>
+                <param name="sequence">`NavigationScreens_ID_seq`</param>
+            </generator>
+        </id>
+
+        <!-- define the properties -->
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Kistl.App.Base.IdentityNHibernateImpl+IdentityProxy, Kistl.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="ChangedOn" type="Timestamp"
+                  column="`ChangedOn`" 
+                  optimistic-lock="true"/>
+<!-- ObjectReferenceProperty -->
+        <set name="Children" batch-size="100" inverse="true" >
+            <key column="`fk_Parent`" />
+            <one-to-many class="Kistl.App.GUI.NavigationScreenNHibernateImpl+NavigationScreenProxy, Kistl.Objects.NHibernateImpl" />
+        </set>
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="Color" 
+                  column="`Color`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Kistl.App.Base.IdentityNHibernateImpl+IdentityProxy, Kistl.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="CreatedOn" type="Timestamp"
+                  column="`CreatedOn`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ExportGuid" 
+                  column="`ExportGuid`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <!-- NMProperty -->
+        <!-- rel=NavigationScreen_accessed_by_Group_RelationEntry -->
+        <!-- relEnd=NavigationScreen otherEnd=Groups -->
+        <set name="Groups" table="`NavigationScreen_accessed_by_Groups`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
+            <key column="`fk_NavigationScreen`" />
+            <one-to-many class="Kistl.App.GUI.NavigationScreen_accessed_by_Group_RelationEntryNHibernateImpl+NavigationScreen_accessed_by_Group_RelationEntryProxy,Kistl.Objects.NHibernateImpl" />
+        </set>
+
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="Module" column="`fk_Module`" class="Kistl.App.Base.ModuleNHibernateImpl+ModuleProxy, Kistl.Objects.NHibernateImpl" />
+
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="Parent" column="`fk_Parent`" class="Kistl.App.GUI.NavigationScreenNHibernateImpl+NavigationScreenProxy, Kistl.Objects.NHibernateImpl" />
+        <property name="Children_pos" column="`fk_Parent_pos`" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="Title" 
+                  column="`Title`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="ViewModelDescriptor" column="`fk_ViewModelDescriptor`" class="Kistl.App.GUI.ViewModelDescriptorNHibernateImpl+ViewModelDescriptorProxy, Kistl.Objects.NHibernateImpl" />
+
+
+        <!-- define the subclasses -->
+
+    </class>
+</hibernate-mapping>

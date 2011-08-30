@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5514C9AF-6C2E-4713-8EAC-FAAADFFDB029}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Kistl.Objects.NHibernateImpl</RootNamespace>
+    <AssemblyName>Kistl.Objects.NHibernateImpl</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Kistl.Objects.snk</AssemblyOriginatorKeyFile>
+    <!-- this is referenced by the generator to put the results in their right place -->
+    <RelativeOutputPath>Server\NH</RelativeOutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>1591,0168,0414,0219</NoWarn>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
+    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Debug\Server\NH.Fallback\</OutputPath>
+    <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\Server\NH.Generated\</OutputPath>
+    <KistlAPIPath Condition=" '$(KistlAPIPathOverride)' == '' ">..\bin\Debug\</KistlAPIPath>
+    <KistlAPIPath Condition=" '$(KistlAPIPathOverride)' != '' ">$(KistlAPIPathOverride)</KistlAPIPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>1591,0168,0414,0219</NoWarn>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
+    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Release\Server\NH.Fallback\</OutputPath>
+    <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\Server\NH.Generated\</OutputPath>
+    <KistlAPIPath Condition=" '$(KistlAPIPathOverride)' == '' ">..\bin\Release\</KistlAPIPath>
+    <KistlAPIPath Condition=" '$(KistlAPIPathOverride)' != '' ">$(KistlAPIPathOverride)</KistlAPIPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Linux.Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineConstants>DEBUG;TRACE;MONO</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <!-- mono is quite more pedantic; ignore superfluous local vars and fields for now -->
+    <NoWarn>1591,0168,0414,0219</NoWarn>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
+    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Debug\Server\NH.Fallback\</OutputPath>
+    <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\Server\NH.Generated\</OutputPath>
+    <KistlAPIPath Condition=" '$(KistlAPIPathOverride)' == '' ">..\bin\Debug\</KistlAPIPath>
+    <KistlAPIPath Condition=" '$(KistlAPIPathOverride)' != '' ">$(KistlAPIPathOverride)</KistlAPIPath>
+  </PropertyGroup>
+  <!-- additional properties have to come in a separate group to receive correct $(OutputPath) -->
+  <PropertyGroup>
+  </PropertyGroup>
+  <ItemGroup>
+    <AdditionalReferencePath Include="$(OutputPath)" />
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="log4net">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(KistlAPIPath)\Common\Core\log4net.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Kistl.API">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(KistlAPIPath)\Common\Core\Kistl.API.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Autofac">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(KistlAPIPath)\Common\Core\Autofac.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <!-- local reference to newly generated code -->
+    <ProjectReference Include="..\Kistl.Objects\Kistl.Objects.csproj">
+      <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
+      <Name>Kistl.Objects</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <Reference Include="Kistl.DalProvider.Base">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(KistlAPIPath)\Common\Core\Kistl.DalProvider.Base.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Kistl.API.Common">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(KistlAPIPath)\Common\Core\Kistl.API.Common.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="Kistl.API.Server">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(KistlAPIPath)\Server\Core\Kistl.API.Server.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Kistl.DalProvider.NHibernate">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(KistlAPIPath)\Server\NH\Kistl.DalProvider.NHibernate.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="NHibernate">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(KistlAPIPath)\Server\NH\NHibernate.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Kistl.DalProvider.Base">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(KistlAPIPath)\Common\Core\Kistl.DalProvider.Base.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AbstractModuleMember.NHibernate.Designer.cs" />
+    <Compile Include="AccessControl.NHibernate.Designer.cs" />
+    <Compile Include="ANewObjectClass.NHibernate.Designer.cs" />
+    <Compile Include="AnotherTest.NHibernate.Designer.cs" />
+    <Compile Include="Antwort.NHibernate.Designer.cs" />
+    <Compile Include="Application.NHibernate.Designer.cs" />
+    <Compile Include="Assembly.NHibernate.Designer.cs" />
+    <Compile Include="Auftrag.NHibernate.Designer.cs" />
+    <Compile Include="BaseParameter.NHibernate.Designer.cs" />
+    <Compile Include="Blob.NHibernate.Designer.cs" />
+    <Compile Include="BoolDefaultValue.NHibernate.Designer.cs" />
+    <Compile Include="BoolParameter.NHibernate.Designer.cs" />
+    <Compile Include="BoolProperty.NHibernate.Designer.cs" />
+    <Compile Include="CalculatedObjectReferenceProperty.NHibernate.Designer.cs" />
+    <Compile Include="Calendar.NHibernate.Designer.cs" />
+    <Compile Include="CalendarRule.NHibernate.Designer.cs" />
+    <Compile Include="ClientReadOnlyConstraint.NHibernate.Designer.cs" />
+    <Compile Include="CLRObjectParameter.NHibernate.Designer.cs" />
+    <Compile Include="CommonCalendarRule.NHibernate.Designer.cs" />
+    <Compile Include="Company.NHibernate.Designer.cs" />
+    <Compile Include="CompoundObject.NHibernate.Designer.cs" />
+    <Compile Include="CompoundObjectParameter.NHibernate.Designer.cs" />
+    <Compile Include="CompoundObjectProperty.NHibernate.Designer.cs" />
+    <Compile Include="Constraint.NHibernate.Designer.cs" />
+    <Compile Include="ConstraintInvocation.NHibernate.Designer.cs" />
+    <Compile Include="ControlKind.NHibernate.Designer.cs" />
+    <Compile Include="CurrentDateTimeDefaultValue.NHibernate.Designer.cs" />
+    <Compile Include="CurrentSchema.NHibernate.Designer.cs" />
+    <Compile Include="DataType.NHibernate.Designer.cs" />
+    <Compile Include="DateRangeFilterConfiguration.NHibernate.Designer.cs" />
+    <Compile Include="DateTimeParameter.NHibernate.Designer.cs" />
+    <Compile Include="DateTimeProperty.NHibernate.Designer.cs" />
+    <Compile Include="DayOfWeekCalendarRule.NHibernate.Designer.cs" />
+    <Compile Include="DecimalParameter.NHibernate.Designer.cs" />
+    <Compile Include="DecimalProperty.NHibernate.Designer.cs" />
+    <Compile Include="DefaultPropertyValue.NHibernate.Designer.cs" />
+    <Compile Include="Document.NHibernate.Designer.cs" />
+    <Compile Include="DoubleParameter.NHibernate.Designer.cs" />
+    <Compile Include="DoubleProperty.NHibernate.Designer.cs" />
+    <Compile Include="DynamicFile.NHibernate.Designer.cs" />
+    <Compile Include="EasterCalendarRule.NHibernate.Designer.cs" />
+    <Compile Include="EnumDefaultValue.NHibernate.Designer.cs" />
+    <Compile Include="Enumeration.NHibernate.Designer.cs" />
+    <Compile Include="EnumerationEntry.NHibernate.Designer.cs" />
+    <Compile Include="EnumerationProperty.NHibernate.Designer.cs" />
+    <Compile Include="EnumParameter.NHibernate.Designer.cs" />
+    <Compile Include="ExceptionLogEntry.NHibernate.Designer.cs" />
+    <Compile Include="File.NHibernate.Designer.cs" />
+    <Compile Include="FilterConfiguration.NHibernate.Designer.cs" />
+    <Compile Include="FixedYearlyCalendarRule.NHibernate.Designer.cs" />
+    <Compile Include="Fragebogen.NHibernate.Designer.cs" />
+    <Compile Include="Group.NHibernate.Designer.cs" />
+    <Compile Include="GroupMembership.NHibernate.Designer.cs" />
+    <Compile Include="GuidProperty.NHibernate.Designer.cs" />
+    <Compile Include="Icon.NHibernate.Designer.cs" />
+    <Compile Include="Identity.NHibernate.Designer.cs" />
+    <Compile Include="IndexConstraint.NHibernate.Designer.cs" />
+    <Compile Include="InitOnlyConstraint.NHibernate.Designer.cs" />
+    <Compile Include="InstanceConstraint.NHibernate.Designer.cs" />
+    <Compile Include="IntDefaultValue.NHibernate.Designer.cs" />
+    <Compile Include="IntegerRangeConstraint.NHibernate.Designer.cs" />
+    <Compile Include="Interface.NHibernate.Designer.cs" />
+    <Compile Include="IntParameter.NHibernate.Designer.cs" />
+    <Compile Include="IntProperty.NHibernate.Designer.cs" />
+    <Compile Include="InvokingConstraint.NHibernate.Designer.cs" />
+    <Compile Include="IsValidIdentifierConstraint.NHibernate.Designer.cs" />
+    <Compile Include="IsValidNamespaceConstraint.NHibernate.Designer.cs" />
+    <Compile Include="Kunde.NHibernate.Designer.cs" />
+    <Compile Include="Method.NHibernate.Designer.cs" />
+    <Compile Include="MethodInvocationConstraint.NHibernate.Designer.cs" />
+    <Compile Include="MigrationLog.NHibernate.Designer.cs" />
+    <Compile Include="MigrationProject.NHibernate.Designer.cs" />
+    <Compile Include="Mitarbeiter.NHibernate.Designer.cs" />
+    <Compile Include="Module.NHibernate.Designer.cs" />
+    <Compile Include="MonthFilterConfiguration.NHibernate.Designer.cs" />
+    <Compile Include="Muhblah.NHibernate.Designer.cs" />
+    <Compile Include="N_to_M_relations_A.NHibernate.Designer.cs" />
+    <Compile Include="N_to_M_relations_B.NHibernate.Designer.cs" />
+    <Compile Include="NavigationScreen.NHibernate.Designer.cs" />
+    <Compile Include="NewGuidDefaultValue.NHibernate.Designer.cs" />
+    <Compile Include="NotNullableConstraint.NHibernate.Designer.cs" />
+    <Compile Include="ObjectClass.NHibernate.Designer.cs" />
+    <Compile Include="ObjectClassFilterConfiguration.NHibernate.Designer.cs" />
+    <Compile Include="ObjectReferenceParameter.NHibernate.Designer.cs" />
+    <Compile Include="ObjectReferencePlaceholderProperty.NHibernate.Designer.cs" />
+    <Compile Include="ObjectReferenceProperty.NHibernate.Designer.cs" />
+    <Compile Include="One_to_N_relations_N.NHibernate.Designer.cs" />
+    <Compile Include="One_to_N_relations_One.NHibernate.Designer.cs" />
+    <Compile Include="OptionalPredicateFilterConfiguration.NHibernate.Designer.cs" />
+    <Compile Include="OrderedNEnd.NHibernate.Designer.cs" />
+    <Compile Include="OrderedOneEnd.NHibernate.Designer.cs" />
+    <Compile Include="Projekt.NHibernate.Designer.cs" />
+    <Compile Include="Property.NHibernate.Designer.cs" />
+    <Compile Include="PropertyFilterConfiguration.NHibernate.Designer.cs" />
+    <Compile Include="RangeFilterConfiguration.NHibernate.Designer.cs" />
+    <Compile Include="ReadOnlyConstraint.NHibernate.Designer.cs" />
+    <Compile Include="Relation.NHibernate.Designer.cs" />
+    <Compile Include="RelationEnd.NHibernate.Designer.cs" />
+    <Compile Include="RequiredParent.NHibernate.Designer.cs" />
+    <Compile Include="RequiredParentChild.NHibernate.Designer.cs" />
+    <Compile Include="RoleMembership.NHibernate.Designer.cs" />
+    <Compile Include="Sequence.NHibernate.Designer.cs" />
+    <Compile Include="ServiceDescriptor.NHibernate.Designer.cs" />
+    <Compile Include="SinglePropertyFilterConfiguration.NHibernate.Designer.cs" />
+    <Compile Include="SourceColumn.NHibernate.Designer.cs" />
+    <Compile Include="SourceEnum.NHibernate.Designer.cs" />
+    <Compile Include="SourceTable.NHibernate.Designer.cs" />
+    <Compile Include="StagingDatabase.NHibernate.Designer.cs" />
+    <Compile Include="StaticFile.NHibernate.Designer.cs" />
+    <Compile Include="StringDefaultValue.NHibernate.Designer.cs" />
+    <Compile Include="StringParameter.NHibernate.Designer.cs" />
+    <Compile Include="StringProperty.NHibernate.Designer.cs" />
+    <Compile Include="StringRangeConstraint.NHibernate.Designer.cs" />
+    <Compile Include="Task.NHibernate.Designer.cs" />
+    <Compile Include="Template.NHibernate.Designer.cs" />
+    <Compile Include="TestCustomObject.NHibernate.Designer.cs" />
+    <Compile Include="TestDecimal.NHibernate.Designer.cs" />
+    <Compile Include="TestObjClass.NHibernate.Designer.cs" />
+    <Compile Include="TestStudent.NHibernate.Designer.cs" />
+    <Compile Include="TypeRef.NHibernate.Designer.cs" />
+    <Compile Include="ValueTypeProperty.NHibernate.Designer.cs" />
+    <Compile Include="ViewDescriptor.NHibernate.Designer.cs" />
+    <Compile Include="ViewModelDescriptor.NHibernate.Designer.cs" />
+    <Compile Include="ViewReadOnlyConstraint.NHibernate.Designer.cs" />
+    <Compile Include="Visual.NHibernate.Designer.cs" />
+    <Compile Include="YearFilterConfiguration.NHibernate.Designer.cs" />
+    <Compile Include="YearlyCalendarRule.NHibernate.Designer.cs" />
+    <Compile Include="CollectionEntries.NHibernate.Designer.cs" />
+    <Compile Include="AuditEntry.NHibernate.Designer.cs" />
+    <Compile Include="TestPhoneCompoundObject.NHibernate.Designer.cs" />
+    <Compile Include="AssemblyInfo.NHibernate.cs" />
+    <Compile Include="Module.NHibernate.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Kistl.Objects.snk" />
+  </ItemGroup>
+    <ItemGroup>
+        <EmbeddedResource Include="*.hbm.xml" />
+        <EmbeddedResource Include="*/*.hbm.xml" />
+    </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  -->
+  <Target Name="AfterBuild">
+  </Target>
+</Project>

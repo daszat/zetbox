@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
+                   default-cascade="save-update" >
+    <class name="Kistl.App.Test.One_to_N_relations_NNHibernateImpl+One_to_N_relations_NProxy, Kistl.Objects.NHibernateImpl"
+           proxy="Kistl.App.Test.One_to_N_relations_NNHibernateImpl+One_to_N_relations_NProxy, Kistl.Objects.NHibernateImpl"
+           schema="`test`"
+           table="`One_to_N_relations_Ns`"
+           abstract="false"
+           dynamic-update="false"
+           optimistic-lock="none">
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`test`</param>
+                <param name="sequence">`One_to_N_relations_Ns_ID_seq`</param>
+            </generator>
+        </id>
+
+        <!-- define the properties -->
+        <!-- ValueTypeProperty isValue -->
+        <property name="Name" 
+                  column="`Name`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="OneSide" column="`fk_OneSide`" class="Kistl.App.Test.One_to_N_relations_OneNHibernateImpl+One_to_N_relations_OneProxy, Kistl.Objects.NHibernateImpl" />
+
+
+        <!-- define the subclasses -->
+
+    </class>
+</hibernate-mapping>

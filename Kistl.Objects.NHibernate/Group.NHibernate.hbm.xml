@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
+                   default-cascade="save-update" >
+    <class name="Kistl.App.Base.GroupNHibernateImpl+GroupProxy, Kistl.Objects.NHibernateImpl"
+           proxy="Kistl.App.Base.GroupNHibernateImpl+GroupProxy, Kistl.Objects.NHibernateImpl"
+           schema="`base`"
+           table="`Groups`"
+           abstract="false"
+           dynamic-update="false"
+           optimistic-lock="none">
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`base`</param>
+                <param name="sequence">`Groups_ID_seq`</param>
+            </generator>
+        </id>
+
+        <!-- define the properties -->
+        <!-- ValueTypeProperty isValue -->
+        <property name="ExportGuid" 
+                  column="`ExportGuid`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <!-- NMProperty -->
+        <!-- rel=Identity_memberOf_Group_RelationEntry -->
+        <!-- relEnd=Groups otherEnd=Identities -->
+        <set name="Member" table="`Identities_memberOf_Groups`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
+            <key column="`fk_Groups`" />
+            <one-to-many class="Kistl.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl+Identity_memberOf_Group_RelationEntryProxy,Kistl.Objects.NHibernateImpl" />
+        </set>
+
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="Module" column="`fk_Module`" class="Kistl.App.Base.ModuleNHibernateImpl+ModuleProxy, Kistl.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="Name" 
+                  column="`Name`" 
+                  optimistic-lock="false"/>
+
+        <!-- define the subclasses -->
+
+    </class>
+</hibernate-mapping>

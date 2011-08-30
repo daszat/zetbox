@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{62B9344A-87D1-4715-9ABB-EAE0ACC4F523}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Kistl.Objects.EfImpl</RootNamespace>
+    <AssemblyName>Kistl.Objects.EfImpl</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Kistl.Objects.snk</AssemblyOriginatorKeyFile>
+    <!-- this is referenced by the generator to put the results in their right place -->
+    <RelativeOutputPath>Server\EF</RelativeOutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>1591,0168,0414,0219</NoWarn>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
+    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Debug\Server\EF.Fallback\</OutputPath>
+    <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\Server\EF.Generated\</OutputPath>
+    <KistlAPIPath Condition=" '$(KistlAPIPathOverride)' == '' ">..\bin\Debug\</KistlAPIPath>
+    <KistlAPIPath Condition=" '$(KistlAPIPathOverride)' != '' ">$(KistlAPIPathOverride)</KistlAPIPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>1591,0168,0414,0219</NoWarn>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
+    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Release\Server\EF.Fallback\</OutputPath>
+    <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\Server\EF.Generated\</OutputPath>
+    <KistlAPIPath Condition=" '$(KistlAPIPathOverride)' == '' ">..\bin\Release\</KistlAPIPath>
+    <KistlAPIPath Condition=" '$(KistlAPIPathOverride)' != '' ">$(KistlAPIPathOverride)</KistlAPIPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Linux.Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineConstants>DEBUG;TRACE;MONO</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <!-- mono is quite more pedantic; ignore superfluous local vars and fields for now -->
+    <NoWarn>1591,0168,0414,0219</NoWarn>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
+    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Debug\Server\EF.Fallback\</OutputPath>
+    <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\Server\EF.Generated\</OutputPath>
+    <KistlAPIPath Condition=" '$(KistlAPIPathOverride)' == '' ">..\bin\Debug\</KistlAPIPath>
+    <KistlAPIPath Condition=" '$(KistlAPIPathOverride)' != '' ">$(KistlAPIPathOverride)</KistlAPIPath>
+  </PropertyGroup>
+  <!-- additional properties have to come in a separate group to receive correct $(OutputPath) -->
+  <PropertyGroup>
+  </PropertyGroup>
+  <ItemGroup>
+    <AdditionalReferencePath Include="$(OutputPath)" />
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="log4net">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(KistlAPIPath)\Common\Core\log4net.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Kistl.API">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(KistlAPIPath)\Common\Core\Kistl.API.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Autofac">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(KistlAPIPath)\Common\Core\Autofac.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <!-- local reference to newly generated code -->
+    <ProjectReference Include="..\Kistl.Objects\Kistl.Objects.csproj">
+      <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
+      <Name>Kistl.Objects</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <Reference Include="Kistl.DalProvider.Base">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(KistlAPIPath)\Common\Core\Kistl.DalProvider.Base.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Kistl.API.Common">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(KistlAPIPath)\Common\Core\Kistl.API.Common.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="Kistl.DalProvider.Ef">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(KistlAPIPath)\Server\EF\Kistl.DalProvider.Ef.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Kistl.API.Server">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(KistlAPIPath)\Server\Core\Kistl.API.Server.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AbstractModuleMember.Ef.Designer.cs" />
+    <Compile Include="AccessControl.Ef.Designer.cs" />
+    <Compile Include="ANewObjectClass.Ef.Designer.cs" />
+    <Compile Include="AnotherTest.Ef.Designer.cs" />
+    <Compile Include="Antwort.Ef.Designer.cs" />
+    <Compile Include="Application.Ef.Designer.cs" />
+    <Compile Include="Assembly.Ef.Designer.cs" />
+    <Compile Include="Auftrag.Ef.Designer.cs" />
+    <Compile Include="BaseParameter.Ef.Designer.cs" />
+    <Compile Include="Blob.Ef.Designer.cs" />
+    <Compile Include="BoolDefaultValue.Ef.Designer.cs" />
+    <Compile Include="BoolParameter.Ef.Designer.cs" />
+    <Compile Include="BoolProperty.Ef.Designer.cs" />
+    <Compile Include="CalculatedObjectReferenceProperty.Ef.Designer.cs" />
+    <Compile Include="Calendar.Ef.Designer.cs" />
+    <Compile Include="CalendarRule.Ef.Designer.cs" />
+    <Compile Include="ClientReadOnlyConstraint.Ef.Designer.cs" />
+    <Compile Include="CLRObjectParameter.Ef.Designer.cs" />
+    <Compile Include="CommonCalendarRule.Ef.Designer.cs" />
+    <Compile Include="Company.Ef.Designer.cs" />
+    <Compile Include="CompoundObject.Ef.Designer.cs" />
+    <Compile Include="CompoundObjectParameter.Ef.Designer.cs" />
+    <Compile Include="CompoundObjectProperty.Ef.Designer.cs" />
+    <Compile Include="Constraint.Ef.Designer.cs" />
+    <Compile Include="ConstraintInvocation.Ef.Designer.cs" />
+    <Compile Include="ControlKind.Ef.Designer.cs" />
+    <Compile Include="CurrentDateTimeDefaultValue.Ef.Designer.cs" />
+    <Compile Include="CurrentSchema.Ef.Designer.cs" />
+    <Compile Include="DataType.Ef.Designer.cs" />
+    <Compile Include="DateRangeFilterConfiguration.Ef.Designer.cs" />
+    <Compile Include="DateTimeParameter.Ef.Designer.cs" />
+    <Compile Include="DateTimeProperty.Ef.Designer.cs" />
+    <Compile Include="DayOfWeekCalendarRule.Ef.Designer.cs" />
+    <Compile Include="DecimalParameter.Ef.Designer.cs" />
+    <Compile Include="DecimalProperty.Ef.Designer.cs" />
+    <Compile Include="DefaultPropertyValue.Ef.Designer.cs" />
+    <Compile Include="Document.Ef.Designer.cs" />
+    <Compile Include="DoubleParameter.Ef.Designer.cs" />
+    <Compile Include="DoubleProperty.Ef.Designer.cs" />
+    <Compile Include="DynamicFile.Ef.Designer.cs" />
+    <Compile Include="EasterCalendarRule.Ef.Designer.cs" />
+    <Compile Include="EnumDefaultValue.Ef.Designer.cs" />
+    <Compile Include="Enumeration.Ef.Designer.cs" />
+    <Compile Include="EnumerationEntry.Ef.Designer.cs" />
+    <Compile Include="EnumerationProperty.Ef.Designer.cs" />
+    <Compile Include="EnumParameter.Ef.Designer.cs" />
+    <Compile Include="ExceptionLogEntry.Ef.Designer.cs" />
+    <Compile Include="File.Ef.Designer.cs" />
+    <Compile Include="FilterConfiguration.Ef.Designer.cs" />
+    <Compile Include="FixedYearlyCalendarRule.Ef.Designer.cs" />
+    <Compile Include="Fragebogen.Ef.Designer.cs" />
+    <Compile Include="Group.Ef.Designer.cs" />
+    <Compile Include="GroupMembership.Ef.Designer.cs" />
+    <Compile Include="GuidProperty.Ef.Designer.cs" />
+    <Compile Include="Icon.Ef.Designer.cs" />
+    <Compile Include="Identity.Ef.Designer.cs" />
+    <Compile Include="IndexConstraint.Ef.Designer.cs" />
+    <Compile Include="InitOnlyConstraint.Ef.Designer.cs" />
+    <Compile Include="InstanceConstraint.Ef.Designer.cs" />
+    <Compile Include="IntDefaultValue.Ef.Designer.cs" />
+    <Compile Include="IntegerRangeConstraint.Ef.Designer.cs" />
+    <Compile Include="Interface.Ef.Designer.cs" />
+    <Compile Include="IntParameter.Ef.Designer.cs" />
+    <Compile Include="IntProperty.Ef.Designer.cs" />
+    <Compile Include="InvokingConstraint.Ef.Designer.cs" />
+    <Compile Include="IsValidIdentifierConstraint.Ef.Designer.cs" />
+    <Compile Include="IsValidNamespaceConstraint.Ef.Designer.cs" />
+    <Compile Include="Kunde.Ef.Designer.cs" />
+    <Compile Include="Method.Ef.Designer.cs" />
+    <Compile Include="MethodInvocationConstraint.Ef.Designer.cs" />
+    <Compile Include="MigrationLog.Ef.Designer.cs" />
+    <Compile Include="MigrationProject.Ef.Designer.cs" />
+    <Compile Include="Mitarbeiter.Ef.Designer.cs" />
+    <Compile Include="Module.Ef.Designer.cs" />
+    <Compile Include="MonthFilterConfiguration.Ef.Designer.cs" />
+    <Compile Include="Muhblah.Ef.Designer.cs" />
+    <Compile Include="N_to_M_relations_A.Ef.Designer.cs" />
+    <Compile Include="N_to_M_relations_B.Ef.Designer.cs" />
+    <Compile Include="NavigationScreen.Ef.Designer.cs" />
+    <Compile Include="NewGuidDefaultValue.Ef.Designer.cs" />
+    <Compile Include="NotNullableConstraint.Ef.Designer.cs" />
+    <Compile Include="ObjectClass.Ef.Designer.cs" />
+    <Compile Include="ObjectClassFilterConfiguration.Ef.Designer.cs" />
+    <Compile Include="ObjectReferenceParameter.Ef.Designer.cs" />
+    <Compile Include="ObjectReferencePlaceholderProperty.Ef.Designer.cs" />
+    <Compile Include="ObjectReferenceProperty.Ef.Designer.cs" />
+    <Compile Include="One_to_N_relations_N.Ef.Designer.cs" />
+    <Compile Include="One_to_N_relations_One.Ef.Designer.cs" />
+    <Compile Include="OptionalPredicateFilterConfiguration.Ef.Designer.cs" />
+    <Compile Include="OrderedNEnd.Ef.Designer.cs" />
+    <Compile Include="OrderedOneEnd.Ef.Designer.cs" />
+    <Compile Include="Projekt.Ef.Designer.cs" />
+    <Compile Include="Property.Ef.Designer.cs" />
+    <Compile Include="PropertyFilterConfiguration.Ef.Designer.cs" />
+    <Compile Include="RangeFilterConfiguration.Ef.Designer.cs" />
+    <Compile Include="ReadOnlyConstraint.Ef.Designer.cs" />
+    <Compile Include="Relation.Ef.Designer.cs" />
+    <Compile Include="RelationEnd.Ef.Designer.cs" />
+    <Compile Include="RequiredParent.Ef.Designer.cs" />
+    <Compile Include="RequiredParentChild.Ef.Designer.cs" />
+    <Compile Include="RoleMembership.Ef.Designer.cs" />
+    <Compile Include="Sequence.Ef.Designer.cs" />
+    <Compile Include="ServiceDescriptor.Ef.Designer.cs" />
+    <Compile Include="SinglePropertyFilterConfiguration.Ef.Designer.cs" />
+    <Compile Include="SourceColumn.Ef.Designer.cs" />
+    <Compile Include="SourceEnum.Ef.Designer.cs" />
+    <Compile Include="SourceTable.Ef.Designer.cs" />
+    <Compile Include="StagingDatabase.Ef.Designer.cs" />
+    <Compile Include="StaticFile.Ef.Designer.cs" />
+    <Compile Include="StringDefaultValue.Ef.Designer.cs" />
+    <Compile Include="StringParameter.Ef.Designer.cs" />
+    <Compile Include="StringProperty.Ef.Designer.cs" />
+    <Compile Include="StringRangeConstraint.Ef.Designer.cs" />
+    <Compile Include="Task.Ef.Designer.cs" />
+    <Compile Include="Template.Ef.Designer.cs" />
+    <Compile Include="TestCustomObject.Ef.Designer.cs" />
+    <Compile Include="TestDecimal.Ef.Designer.cs" />
+    <Compile Include="TestObjClass.Ef.Designer.cs" />
+    <Compile Include="TestStudent.Ef.Designer.cs" />
+    <Compile Include="TypeRef.Ef.Designer.cs" />
+    <Compile Include="ValueTypeProperty.Ef.Designer.cs" />
+    <Compile Include="ViewDescriptor.Ef.Designer.cs" />
+    <Compile Include="ViewModelDescriptor.Ef.Designer.cs" />
+    <Compile Include="ViewReadOnlyConstraint.Ef.Designer.cs" />
+    <Compile Include="Visual.Ef.Designer.cs" />
+    <Compile Include="YearFilterConfiguration.Ef.Designer.cs" />
+    <Compile Include="YearlyCalendarRule.Ef.Designer.cs" />
+    <Compile Include="CollectionEntries.Ef.Designer.cs" />
+    <Compile Include="AuditEntry.Ef.Designer.cs" />
+    <Compile Include="TestPhoneCompoundObject.Ef.Designer.cs" />
+    <Compile Include="AssemblyInfo.Ef.cs" />
+    <Compile Include="Module.Ef.cs" />
+    <Compile Include="AssociationSetAttributes.Ef.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Kistl.Objects.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model.csdl" />
+    <EmbeddedResource Include="Model.msl" />
+    <EmbeddedResource Include="Model.POSTGRESQL.ssdl" />
+    <EmbeddedResource Include="Model.MSSQL.ssdl" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  -->
+  <Target Name="AfterBuild">
+  </Target>
+  <PropertyGroup>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,205 @@
+<?xml version="1.0"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
+                   default-cascade="save-update" >
+    <class name="Kistl.App.GUI.FilterConfigurationNHibernateImpl+FilterConfigurationProxy, Kistl.Objects.NHibernateImpl"
+           proxy="Kistl.App.GUI.FilterConfigurationNHibernateImpl+FilterConfigurationProxy, Kistl.Objects.NHibernateImpl"
+           schema="`gui`"
+           table="`FilterConfigurations`"
+           abstract="true"
+           dynamic-update="true"
+           optimistic-lock="dirty">
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`gui`</param>
+                <param name="sequence">`FilterConfigurations_ID_seq`</param>
+            </generator>
+        </id>
+
+        <!-- define the properties -->
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Kistl.App.Base.IdentityNHibernateImpl+IdentityProxy, Kistl.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="ChangedOn" type="Timestamp"
+                  column="`ChangedOn`" 
+                  optimistic-lock="true"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Kistl.App.Base.IdentityNHibernateImpl+IdentityProxy, Kistl.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="CreatedOn" type="Timestamp"
+                  column="`CreatedOn`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ExportGuid" 
+                  column="`ExportGuid`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Label" 
+                  column="`Label`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="Module" column="`fk_Module`" class="Kistl.App.Base.ModuleNHibernateImpl+ModuleProxy, Kistl.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="RefreshOnFilterChanged" 
+                  column="`RefreshOnFilterChanged`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="RequestedKind" column="`fk_RequestedKind`" class="Kistl.App.GUI.ControlKindNHibernateImpl+ControlKindProxy, Kistl.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="Required" 
+                  column="`Required`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="ViewModelDescriptor" column="`fk_ViewModelDescriptor`" class="Kistl.App.GUI.ViewModelDescriptorNHibernateImpl+ViewModelDescriptorProxy, Kistl.Objects.NHibernateImpl" />
+
+
+        <!-- define the subclasses -->
+        <joined-subclass name="Kistl.App.GUI.ObjectClassFilterConfigurationNHibernateImpl+ObjectClassFilterConfigurationProxy, Kistl.Objects.NHibernateImpl"
+                         proxy="Kistl.App.GUI.ObjectClassFilterConfigurationNHibernateImpl+ObjectClassFilterConfigurationProxy, Kistl.Objects.NHibernateImpl"
+                         schema="`gui`"
+                         table="`ObjectClassFilterConfigurations`"
+                         dynamic-update="true">
+            
+            <!-- base class reference -->
+            <key column="`ID`" />
+
+            <!-- define the properties -->
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="ObjectClass" column="`fk_ObjectClass`" class="Kistl.App.Base.ObjectClassNHibernateImpl+ObjectClassProxy, Kistl.Objects.NHibernateImpl" />
+
+
+            <!-- define the subclasses -->
+        <joined-subclass name="Kistl.App.GUI.OptionalPredicateFilterConfigurationNHibernateImpl+OptionalPredicateFilterConfigurationProxy, Kistl.Objects.NHibernateImpl"
+                         proxy="Kistl.App.GUI.OptionalPredicateFilterConfigurationNHibernateImpl+OptionalPredicateFilterConfigurationProxy, Kistl.Objects.NHibernateImpl"
+                         schema="`gui`"
+                         table="`OptionalPredicateFilterConfigurations`"
+                         dynamic-update="true">
+            
+            <!-- base class reference -->
+            <key column="`ID`" />
+
+            <!-- define the properties -->
+        <!-- ValueTypeProperty isValue -->
+        <property name="Predicate" 
+                  column="`Predicate`" 
+                  optimistic-lock="false"/>
+
+            <!-- define the subclasses -->
+
+        </joined-subclass>
+
+        </joined-subclass>
+        <joined-subclass name="Kistl.App.GUI.PropertyFilterConfigurationNHibernateImpl+PropertyFilterConfigurationProxy, Kistl.Objects.NHibernateImpl"
+                         proxy="Kistl.App.GUI.PropertyFilterConfigurationNHibernateImpl+PropertyFilterConfigurationProxy, Kistl.Objects.NHibernateImpl"
+                         schema="`gui`"
+                         table="`PropertyFilterConfigurations`"
+                         dynamic-update="true">
+            
+            <!-- base class reference -->
+            <key column="`ID`" />
+
+            <!-- define the properties -->
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="Property" column="`fk_Property`" class="Kistl.App.Base.PropertyNHibernateImpl+PropertyProxy, Kistl.Objects.NHibernateImpl" unique="true" />
+
+
+            <!-- define the subclasses -->
+        <joined-subclass name="Kistl.App.GUI.DateRangeFilterConfigurationNHibernateImpl+DateRangeFilterConfigurationProxy, Kistl.Objects.NHibernateImpl"
+                         proxy="Kistl.App.GUI.DateRangeFilterConfigurationNHibernateImpl+DateRangeFilterConfigurationProxy, Kistl.Objects.NHibernateImpl"
+                         schema="`gui`"
+                         table="`DateRangeFilterConfigurations`"
+                         dynamic-update="true">
+            
+            <!-- base class reference -->
+            <key column="`ID`" />
+
+            <!-- define the properties -->
+        <!-- ValueTypeProperty isValue -->
+        <property name="IsCurrentMonthDefault" 
+                  column="`IsCurrentMonthDefault`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="IsCurrentQuaterDefault" 
+                  column="`IsCurrentQuaterDefault`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="IsCurrentYearDefault" 
+                  column="`IsCurrentYearDefault`" 
+                  optimistic-lock="false"/>
+
+            <!-- define the subclasses -->
+
+        </joined-subclass>
+        <joined-subclass name="Kistl.App.GUI.MonthFilterConfigurationNHibernateImpl+MonthFilterConfigurationProxy, Kistl.Objects.NHibernateImpl"
+                         proxy="Kistl.App.GUI.MonthFilterConfigurationNHibernateImpl+MonthFilterConfigurationProxy, Kistl.Objects.NHibernateImpl"
+                         schema="`gui`"
+                         table="`MonthFilterConfigurations`"
+                         dynamic-update="true">
+            
+            <!-- base class reference -->
+            <key column="`ID`" />
+
+            <!-- define the properties -->
+        <!-- ValueTypeProperty isValue -->
+        <property name="IsCurrentMonthDefault" 
+                  column="`IsCurrentMonthDefault`" 
+                  optimistic-lock="false"/>
+
+            <!-- define the subclasses -->
+
+        </joined-subclass>
+        <joined-subclass name="Kistl.App.GUI.RangeFilterConfigurationNHibernateImpl+RangeFilterConfigurationProxy, Kistl.Objects.NHibernateImpl"
+                         proxy="Kistl.App.GUI.RangeFilterConfigurationNHibernateImpl+RangeFilterConfigurationProxy, Kistl.Objects.NHibernateImpl"
+                         schema="`gui`"
+                         table="`RangeFilterConfigurations`"
+                         dynamic-update="true">
+            
+            <!-- base class reference -->
+            <key column="`ID`" />
+
+            <!-- define the properties -->
+
+            <!-- define the subclasses -->
+
+        </joined-subclass>
+        <joined-subclass name="Kistl.App.GUI.SinglePropertyFilterConfigurationNHibernateImpl+SinglePropertyFilterConfigurationProxy, Kistl.Objects.NHibernateImpl"
+                         proxy="Kistl.App.GUI.SinglePropertyFilterConfigurationNHibernateImpl+SinglePropertyFilterConfigurationProxy, Kistl.Objects.NHibernateImpl"
+                         schema="`gui`"
+                         table="`SinglePropertyFilterConfigurations`"
+                         dynamic-update="true">
+            
+            <!-- base class reference -->
+            <key column="`ID`" />
+
+            <!-- define the properties -->
+
+            <!-- define the subclasses -->
+
+        </joined-subclass>
+        <joined-subclass name="Kistl.App.GUI.YearFilterConfigurationNHibernateImpl+YearFilterConfigurationProxy, Kistl.Objects.NHibernateImpl"
+                         proxy="Kistl.App.GUI.YearFilterConfigurationNHibernateImpl+YearFilterConfigurationProxy, Kistl.Objects.NHibernateImpl"
+                         schema="`gui`"
+                         table="`YearFilterConfigurations`"
+                         dynamic-update="true">
+            
+            <!-- base class reference -->
+            <key column="`ID`" />
+
+            <!-- define the properties -->
+        <!-- ValueTypeProperty isValue -->
+        <property name="IsCurrentYearDefault" 
+                  column="`IsCurrentYearDefault`" 
+                  optimistic-lock="false"/>
+
+            <!-- define the subclasses -->
+
+        </joined-subclass>
+
+        </joined-subclass>
+
+    </class>
+</hibernate-mapping>

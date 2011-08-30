@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
+                   default-cascade="save-update" >
+    <class name="Kistl.App.Base.InstanceConstraintNHibernateImpl+InstanceConstraintProxy, Kistl.Objects.NHibernateImpl"
+           proxy="Kistl.App.Base.InstanceConstraintNHibernateImpl+InstanceConstraintProxy, Kistl.Objects.NHibernateImpl"
+           schema="`base`"
+           table="`InstanceConstraint`"
+           abstract="false"
+           dynamic-update="false"
+           optimistic-lock="none">
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`base`</param>
+                <param name="sequence">`InstanceConstraint_ID_seq`</param>
+            </generator>
+        </id>
+
+        <!-- define the properties -->
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="Constrained" column="`fk_Constrained`" class="Kistl.App.Base.DataTypeNHibernateImpl+DataTypeProxy, Kistl.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="ExportGuid" 
+                  column="`ExportGuid`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Reason" 
+                  column="`Reason`" 
+                  optimistic-lock="false"/>
+
+        <!-- define the subclasses -->
+        <joined-subclass name="Kistl.App.Base.IndexConstraintNHibernateImpl+IndexConstraintProxy, Kistl.Objects.NHibernateImpl"
+                         proxy="Kistl.App.Base.IndexConstraintNHibernateImpl+IndexConstraintProxy, Kistl.Objects.NHibernateImpl"
+                         schema="`base`"
+                         table="`IndexConstraints`"
+                         dynamic-update="false">
+            
+            <!-- base class reference -->
+            <key column="`ID`" />
+
+            <!-- define the properties -->
+        <!-- ValueTypeProperty isValue -->
+        <property name="IsUnique" 
+                  column="`IsUnique`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <!-- NMProperty -->
+        <!-- rel=IndexConstraint_ensures_unique_on_Property_RelationEntry -->
+        <!-- relEnd=UniqueContraints otherEnd=Properties -->
+        <set name="Properties" table="`UniqueContraints_ensures_unique_on_Properties`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
+            <key column="`fk_UniqueContraints`" />
+            <one-to-many class="Kistl.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl+IndexConstraint_ensures_unique_on_Property_RelationEntryProxy,Kistl.Objects.NHibernateImpl" />
+        </set>
+
+
+            <!-- define the subclasses -->
+
+        </joined-subclass>
+
+    </class>
+</hibernate-mapping>

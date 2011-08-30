@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
+                   default-cascade="save-update" >
+    <class name="ZBox.App.SchemaMigration.StagingDatabaseNHibernateImpl+StagingDatabaseProxy, Kistl.Objects.NHibernateImpl"
+           proxy="ZBox.App.SchemaMigration.StagingDatabaseNHibernateImpl+StagingDatabaseProxy, Kistl.Objects.NHibernateImpl"
+           schema="`migration`"
+           table="`StagingDatabases`"
+           abstract="false"
+           dynamic-update="true"
+           optimistic-lock="dirty">
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`migration`</param>
+                <param name="sequence">`StagingDatabases_ID_seq`</param>
+            </generator>
+        </id>
+
+        <!-- define the properties -->
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Kistl.App.Base.IdentityNHibernateImpl+IdentityProxy, Kistl.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="ChangedOn" type="Timestamp"
+                  column="`ChangedOn`" 
+                  optimistic-lock="true"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ConnectionStringKey" 
+                  column="`ConnectionStringKey`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Kistl.App.Base.IdentityNHibernateImpl+IdentityProxy, Kistl.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="CreatedOn" type="Timestamp"
+                  column="`CreatedOn`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Description" 
+                  column="`Description`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ExportGuid" 
+                  column="`ExportGuid`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="MigrationProject" column="`fk_MigrationProject`" class="ZBox.App.SchemaMigration.MigrationProjectNHibernateImpl+MigrationProjectProxy, Kistl.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="OriginConnectionStringKey" 
+                  column="`OriginConnectionStringKey`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Schema" 
+                  column="`Schema`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <set name="SourceTables" batch-size="100" inverse="true" >
+            <key column="`fk_StagingDatabase`" />
+            <one-to-many class="ZBox.App.SchemaMigration.SourceTableNHibernateImpl+SourceTableProxy, Kistl.Objects.NHibernateImpl" />
+        </set>
+
+
+        <!-- define the subclasses -->
+
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
+                   default-cascade="save-update" >
+    <class name="Kistl.App.GUI.ViewDescriptorNHibernateImpl+ViewDescriptorProxy, Kistl.Objects.NHibernateImpl"
+           proxy="Kistl.App.GUI.ViewDescriptorNHibernateImpl+ViewDescriptorProxy, Kistl.Objects.NHibernateImpl"
+           schema="`gui`"
+           table="`ViewDescriptors`"
+           abstract="false"
+           dynamic-update="false"
+           optimistic-lock="none">
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`gui`</param>
+                <param name="sequence">`ViewDescriptors_ID_seq`</param>
+            </generator>
+        </id>
+
+        <!-- define the properties -->
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="ControlKind" column="`fk_ControlKind`" class="Kistl.App.GUI.ControlKindNHibernateImpl+ControlKindProxy, Kistl.Objects.NHibernateImpl" />
+
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="ControlRef" column="`fk_ControlRef`" class="Kistl.App.Base.TypeRefNHibernateImpl+TypeRefProxy, Kistl.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="ExportGuid" 
+                  column="`ExportGuid`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="Module" column="`fk_Module`" class="Kistl.App.Base.ModuleNHibernateImpl+ModuleProxy, Kistl.Objects.NHibernateImpl" />
+
+<!-- ObjectReferenceProperty -->
+        <!-- NMProperty -->
+        <!-- rel=ViewDescriptor_supports_TypeRef_RelationEntry -->
+        <!-- relEnd=ViewDescriptor otherEnd=ViewModelTypeRefs -->
+        <set name="SupportedViewModels" table="`ViewDescriptor_supports_ViewModelTypeRefs`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
+            <key column="`fk_ViewDescriptor`" />
+            <one-to-many class="Kistl.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl+ViewDescriptor_supports_TypeRef_RelationEntryProxy,Kistl.Objects.NHibernateImpl" />
+        </set>
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="Toolkit" 
+                  column="`Toolkit`" 
+                  optimistic-lock="false"/>
+
+        <!-- define the subclasses -->
+
+    </class>
+</hibernate-mapping>

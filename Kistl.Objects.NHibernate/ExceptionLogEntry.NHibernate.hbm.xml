@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
+                   default-cascade="save-update" >
+    <class name="Kistl.App.Base.ExceptionLogEntryNHibernateImpl+ExceptionLogEntryProxy, Kistl.Objects.NHibernateImpl"
+           proxy="Kistl.App.Base.ExceptionLogEntryNHibernateImpl+ExceptionLogEntryProxy, Kistl.Objects.NHibernateImpl"
+           schema="`base`"
+           table="`ExceptionLog`"
+           abstract="false"
+           dynamic-update="false"
+           optimistic-lock="none">
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`base`</param>
+                <param name="sequence">`ExceptionLog_ID_seq`</param>
+            </generator>
+        </id>
+
+        <!-- define the properties -->
+        <!-- ValueTypeProperty isValue -->
+        <property name="Date" type="Timestamp"
+                  column="`Date`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Exception" 
+                  column="`Exception`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Level" 
+                  column="`Level`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Logger" 
+                  column="`Logger`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Message" 
+                  column="`Message`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Thread" 
+                  column="`Thread`" 
+                  optimistic-lock="false"/>
+
+        <!-- define the subclasses -->
+
+    </class>
+</hibernate-mapping>

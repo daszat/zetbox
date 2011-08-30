@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
+                   default-cascade="save-update" >
+    <class name="Kistl.App.Base.AccessControlNHibernateImpl+AccessControlProxy, Kistl.Objects.NHibernateImpl"
+           proxy="Kistl.App.Base.AccessControlNHibernateImpl+AccessControlProxy, Kistl.Objects.NHibernateImpl"
+           schema="`base`"
+           table="`AccessControls`"
+           abstract="false"
+           dynamic-update="true"
+           optimistic-lock="dirty">
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`base`</param>
+                <param name="sequence">`AccessControls_ID_seq`</param>
+            </generator>
+        </id>
+
+        <!-- define the properties -->
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Kistl.App.Base.IdentityNHibernateImpl+IdentityProxy, Kistl.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="ChangedOn" type="Timestamp"
+                  column="`ChangedOn`" 
+                  optimistic-lock="true"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Kistl.App.Base.IdentityNHibernateImpl+IdentityProxy, Kistl.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="CreatedOn" type="Timestamp"
+                  column="`CreatedOn`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Description" 
+                  column="`Description`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ExportGuid" 
+                  column="`ExportGuid`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="Module" column="`fk_Module`" class="Kistl.App.Base.ModuleNHibernateImpl+ModuleProxy, Kistl.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="Name" 
+                  column="`Name`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="ObjectClass" column="`fk_ObjectClass`" class="Kistl.App.Base.ObjectClassNHibernateImpl+ObjectClassProxy, Kistl.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="Rights" 
+                  column="`Rights`" 
+                  optimistic-lock="false"/>
+
+        <!-- define the subclasses -->
+        <joined-subclass name="Kistl.App.Base.GroupMembershipNHibernateImpl+GroupMembershipProxy, Kistl.Objects.NHibernateImpl"
+                         proxy="Kistl.App.Base.GroupMembershipNHibernateImpl+GroupMembershipProxy, Kistl.Objects.NHibernateImpl"
+                         schema="`base`"
+                         table="`GroupMemberships`"
+                         dynamic-update="true">
+            
+            <!-- base class reference -->
+            <key column="`ID`" />
+
+            <!-- define the properties -->
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="Group" column="`fk_Group`" class="Kistl.App.Base.GroupNHibernateImpl+GroupProxy, Kistl.Objects.NHibernateImpl" />
+
+
+            <!-- define the subclasses -->
+
+        </joined-subclass>
+        <joined-subclass name="Kistl.App.Base.RoleMembershipNHibernateImpl+RoleMembershipProxy, Kistl.Objects.NHibernateImpl"
+                         proxy="Kistl.App.Base.RoleMembershipNHibernateImpl+RoleMembershipProxy, Kistl.Objects.NHibernateImpl"
+                         schema="`base`"
+                         table="`RoleMemberships`"
+                         dynamic-update="true">
+            
+            <!-- base class reference -->
+            <key column="`ID`" />
+
+            <!-- define the properties -->
+<!-- ObjectReferenceProperty -->
+        <!-- NMProperty -->
+        <!-- rel=RoleMembership_resolves_Relation_RelationEntry -->
+        <!-- relEnd=RoleMembership otherEnd=Relations -->
+        <set name="Relations" table="`RoleMembership_resolves_Relations`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
+            <key column="`fk_RoleMembership`" />
+            <one-to-many class="Kistl.App.Base.RoleMembership_resolves_Relation_RelationEntryNHibernateImpl+RoleMembership_resolves_Relation_RelationEntryProxy,Kistl.Objects.NHibernateImpl" />
+        </set>
+
+
+            <!-- define the subclasses -->
+
+        </joined-subclass>
+
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,369 @@
+<?xml version="1.0"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
+                   default-cascade="save-update" >
+    <class name="Kistl.App.Base.PropertyNHibernateImpl+PropertyProxy, Kistl.Objects.NHibernateImpl"
+           proxy="Kistl.App.Base.PropertyNHibernateImpl+PropertyProxy, Kistl.Objects.NHibernateImpl"
+           schema="`base`"
+           table="`Properties`"
+           abstract="true"
+           dynamic-update="true"
+           optimistic-lock="dirty">
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`base`</param>
+                <param name="sequence">`Properties_ID_seq`</param>
+            </generator>
+        </id>
+
+        <!-- define the properties -->
+        <!-- ValueTypeProperty isValue -->
+        <property name="CategoryTags" 
+                  column="`CategoryTags`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Kistl.App.Base.IdentityNHibernateImpl+IdentityProxy, Kistl.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="ChangedOn" type="Timestamp"
+                  column="`ChangedOn`" 
+                  optimistic-lock="true"/>
+<!-- ValueTypeProperty CodeTemplate is calculated -->
+<!-- ObjectReferenceProperty -->
+        <set name="Constraints" batch-size="100" inverse="true" >
+            <key column="`fk_ConstrainedProperty`" />
+            <one-to-many class="Kistl.App.Base.ConstraintNHibernateImpl+ConstraintProxy, Kistl.Objects.NHibernateImpl" />
+        </set>
+
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Kistl.App.Base.IdentityNHibernateImpl+IdentityProxy, Kistl.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="CreatedOn" type="Timestamp"
+                  column="`CreatedOn`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <one-to-one name="DefaultValue" class="Kistl.App.Base.DefaultPropertyValueNHibernateImpl+DefaultPropertyValueProxy, Kistl.Objects.NHibernateImpl" constrained="false" property-ref="Property" />
+        <!-- ValueTypeProperty isValue -->
+        <property name="Description" 
+                  column="`Description`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ExportGuid" 
+                  column="`ExportGuid`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <one-to-one name="FilterConfiguration" class="Kistl.App.GUI.PropertyFilterConfigurationNHibernateImpl+PropertyFilterConfigurationProxy, Kistl.Objects.NHibernateImpl" constrained="false" property-ref="Property" />
+        <!-- ValueTypeProperty isValue -->
+        <property name="Label" 
+                  column="`Label`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="Module" column="`fk_Module`" class="Kistl.App.Base.ModuleNHibernateImpl+ModuleProxy, Kistl.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="Name" 
+                  column="`Name`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="ObjectClass" column="`fk_ObjectClass`" class="Kistl.App.Base.DataTypeNHibernateImpl+DataTypeProxy, Kistl.Objects.NHibernateImpl" />
+        <property name="Properties_pos" column="`fk_ObjectClass_pos`" />
+
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="RequestedKind" column="`fk_ControlKind`" class="Kistl.App.GUI.ControlKindNHibernateImpl+ControlKindProxy, Kistl.Objects.NHibernateImpl" />
+
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="ValueModelDescriptor" column="`fk_ValueModelDescriptor`" class="Kistl.App.GUI.ViewModelDescriptorNHibernateImpl+ViewModelDescriptorProxy, Kistl.Objects.NHibernateImpl" />
+
+
+        <!-- define the subclasses -->
+        <joined-subclass name="Kistl.App.Base.CalculatedObjectReferencePropertyNHibernateImpl+CalculatedObjectReferencePropertyProxy, Kistl.Objects.NHibernateImpl"
+                         proxy="Kistl.App.Base.CalculatedObjectReferencePropertyNHibernateImpl+CalculatedObjectReferencePropertyProxy, Kistl.Objects.NHibernateImpl"
+                         schema="`base`"
+                         table="`CalculatedObjectReferenceProperties`"
+                         dynamic-update="true">
+            
+            <!-- base class reference -->
+            <key column="`ID`" />
+
+            <!-- define the properties -->
+<!-- ObjectReferenceProperty -->
+        <!-- NMProperty -->
+        <!-- rel=CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry -->
+        <!-- relEnd=CalculatedReference otherEnd=InputProperties -->
+        <set name="Inputs" table="`CalculatedReference_dependsOn_InputProperties`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
+            <key column="`fk_CalculatedReference`" />
+            <one-to-many class="Kistl.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryNHibernateImpl+CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryProxy,Kistl.Objects.NHibernateImpl" />
+        </set>
+
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="ReferencedClass" column="`fk_ReferencedClass`" class="Kistl.App.Base.ObjectClassNHibernateImpl+ObjectClassProxy, Kistl.Objects.NHibernateImpl" />
+
+
+            <!-- define the subclasses -->
+
+        </joined-subclass>
+        <joined-subclass name="Kistl.App.Base.CompoundObjectPropertyNHibernateImpl+CompoundObjectPropertyProxy, Kistl.Objects.NHibernateImpl"
+                         proxy="Kistl.App.Base.CompoundObjectPropertyNHibernateImpl+CompoundObjectPropertyProxy, Kistl.Objects.NHibernateImpl"
+                         schema="`base`"
+                         table="`CompoundObjectProperties`"
+                         dynamic-update="true">
+            
+            <!-- base class reference -->
+            <key column="`ID`" />
+
+            <!-- define the properties -->
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="CompoundObjectDefinition" column="`fk_CompoundObjectDefinition`" class="Kistl.App.Base.CompoundObjectNHibernateImpl+CompoundObjectProxy, Kistl.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="HasPersistentOrder" 
+                  column="`HasPersistentOrder`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="IsList" 
+                  column="`IsList`" 
+                  optimistic-lock="false"/>
+
+            <!-- define the subclasses -->
+
+        </joined-subclass>
+        <joined-subclass name="Kistl.App.Base.ObjectReferencePlaceholderPropertyNHibernateImpl+ObjectReferencePlaceholderPropertyProxy, Kistl.Objects.NHibernateImpl"
+                         proxy="Kistl.App.Base.ObjectReferencePlaceholderPropertyNHibernateImpl+ObjectReferencePlaceholderPropertyProxy, Kistl.Objects.NHibernateImpl"
+                         schema="`base`"
+                         table="`ObjectReferencePlaceholderProperties`"
+                         dynamic-update="true">
+            
+            <!-- base class reference -->
+            <key column="`ID`" />
+
+            <!-- define the properties -->
+        <!-- ValueTypeProperty isValue -->
+        <property name="HasPersistentOrder" 
+                  column="`HasPersistentOrder`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ImplementorRoleName" 
+                  column="`ImplementorRoleName`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="IsList" 
+                  column="`IsList`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ItemRoleName" 
+                  column="`ItemRoleName`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="ReferencedObjectClass" column="`fk_ReferencedObjectClass`" class="Kistl.App.Base.ObjectClassNHibernateImpl+ObjectClassProxy, Kistl.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="Verb" 
+                  column="`Verb`" 
+                  optimistic-lock="false"/>
+
+            <!-- define the subclasses -->
+
+        </joined-subclass>
+        <joined-subclass name="Kistl.App.Base.ObjectReferencePropertyNHibernateImpl+ObjectReferencePropertyProxy, Kistl.Objects.NHibernateImpl"
+                         proxy="Kistl.App.Base.ObjectReferencePropertyNHibernateImpl+ObjectReferencePropertyProxy, Kistl.Objects.NHibernateImpl"
+                         schema="`base`"
+                         table="`ObjectReferenceProperties`"
+                         dynamic-update="true">
+            
+            <!-- base class reference -->
+            <key column="`ID`" />
+
+            <!-- define the properties -->
+        <!-- ValueTypeProperty isValue -->
+        <property name="EagerLoading" 
+                  column="`EagerLoading`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="IsInlineEditable" 
+                  column="`IsInlineEditable`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="RelationEnd" column="`fk_RelationEnd`" class="Kistl.App.Base.RelationEndNHibernateImpl+RelationEndProxy, Kistl.Objects.NHibernateImpl" unique="true" />
+
+
+            <!-- define the subclasses -->
+
+        </joined-subclass>
+        <joined-subclass name="Kistl.App.Base.ValueTypePropertyNHibernateImpl+ValueTypePropertyProxy, Kistl.Objects.NHibernateImpl"
+                         proxy="Kistl.App.Base.ValueTypePropertyNHibernateImpl+ValueTypePropertyProxy, Kistl.Objects.NHibernateImpl"
+                         schema="`base`"
+                         table="`ValueTypeProperties`"
+                         dynamic-update="true">
+            
+            <!-- base class reference -->
+            <key column="`ID`" />
+
+            <!-- define the properties -->
+        <!-- ValueTypeProperty isValue -->
+        <property name="HasPersistentOrder" 
+                  column="`HasPersistentOrder`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="IsCalculated" 
+                  column="`IsCalculated`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="IsList" 
+                  column="`IsList`" 
+                  optimistic-lock="false"/>
+
+            <!-- define the subclasses -->
+        <joined-subclass name="Kistl.App.Base.BoolPropertyNHibernateImpl+BoolPropertyProxy, Kistl.Objects.NHibernateImpl"
+                         proxy="Kistl.App.Base.BoolPropertyNHibernateImpl+BoolPropertyProxy, Kistl.Objects.NHibernateImpl"
+                         schema="`base`"
+                         table="`BoolProperties`"
+                         dynamic-update="true">
+            
+            <!-- base class reference -->
+            <key column="`ID`" />
+
+            <!-- define the properties -->
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="FalseIcon" column="`fk_FalseIcon`" class="Kistl.App.GUI.IconNHibernateImpl+IconProxy, Kistl.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="FalseLabel" 
+                  column="`FalseLabel`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="NullIcon" column="`fk_NullIcon`" class="Kistl.App.GUI.IconNHibernateImpl+IconProxy, Kistl.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="NullLabel" 
+                  column="`NullLabel`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="TrueIcon" column="`fk_TrueIcon`" class="Kistl.App.GUI.IconNHibernateImpl+IconProxy, Kistl.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="TrueLabel" 
+                  column="`TrueLabel`" 
+                  optimistic-lock="false"/>
+
+            <!-- define the subclasses -->
+
+        </joined-subclass>
+        <joined-subclass name="Kistl.App.Base.DateTimePropertyNHibernateImpl+DateTimePropertyProxy, Kistl.Objects.NHibernateImpl"
+                         proxy="Kistl.App.Base.DateTimePropertyNHibernateImpl+DateTimePropertyProxy, Kistl.Objects.NHibernateImpl"
+                         schema="`base`"
+                         table="`DateTimeProperties`"
+                         dynamic-update="true">
+            
+            <!-- base class reference -->
+            <key column="`ID`" />
+
+            <!-- define the properties -->
+        <!-- ValueTypeProperty isValue -->
+        <property name="DateTimeStyle" 
+                  column="`DateTimeStyle`" 
+                  optimistic-lock="false"/>
+
+            <!-- define the subclasses -->
+
+        </joined-subclass>
+        <joined-subclass name="Kistl.App.Base.DecimalPropertyNHibernateImpl+DecimalPropertyProxy, Kistl.Objects.NHibernateImpl"
+                         proxy="Kistl.App.Base.DecimalPropertyNHibernateImpl+DecimalPropertyProxy, Kistl.Objects.NHibernateImpl"
+                         schema="`base`"
+                         table="`DecimalProperties`"
+                         dynamic-update="true">
+            
+            <!-- base class reference -->
+            <key column="`ID`" />
+
+            <!-- define the properties -->
+        <!-- ValueTypeProperty isValue -->
+        <property name="Precision" 
+                  column="`Precision`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Scale" 
+                  column="`Scale`" 
+                  optimistic-lock="false"/>
+
+            <!-- define the subclasses -->
+
+        </joined-subclass>
+        <joined-subclass name="Kistl.App.Base.DoublePropertyNHibernateImpl+DoublePropertyProxy, Kistl.Objects.NHibernateImpl"
+                         proxy="Kistl.App.Base.DoublePropertyNHibernateImpl+DoublePropertyProxy, Kistl.Objects.NHibernateImpl"
+                         schema="`base`"
+                         table="`DoubleProperties`"
+                         dynamic-update="true">
+            
+            <!-- base class reference -->
+            <key column="`ID`" />
+
+            <!-- define the properties -->
+
+            <!-- define the subclasses -->
+
+        </joined-subclass>
+        <joined-subclass name="Kistl.App.Base.EnumerationPropertyNHibernateImpl+EnumerationPropertyProxy, Kistl.Objects.NHibernateImpl"
+                         proxy="Kistl.App.Base.EnumerationPropertyNHibernateImpl+EnumerationPropertyProxy, Kistl.Objects.NHibernateImpl"
+                         schema="`base`"
+                         table="`EnumerationProperties`"
+                         dynamic-update="true">
+            
+            <!-- base class reference -->
+            <key column="`ID`" />
+
+            <!-- define the properties -->
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="Enumeration" column="`fk_Enumeration`" class="Kistl.App.Base.EnumerationNHibernateImpl+EnumerationProxy, Kistl.Objects.NHibernateImpl" />
+
+
+            <!-- define the subclasses -->
+
+        </joined-subclass>
+        <joined-subclass name="Kistl.App.Base.GuidPropertyNHibernateImpl+GuidPropertyProxy, Kistl.Objects.NHibernateImpl"
+                         proxy="Kistl.App.Base.GuidPropertyNHibernateImpl+GuidPropertyProxy, Kistl.Objects.NHibernateImpl"
+                         schema="`base`"
+                         table="`GuidProperties`"
+                         dynamic-update="true">
+            
+            <!-- base class reference -->
+            <key column="`ID`" />
+
+            <!-- define the properties -->
+
+            <!-- define the subclasses -->
+
+        </joined-subclass>
+        <joined-subclass name="Kistl.App.Base.IntPropertyNHibernateImpl+IntPropertyProxy, Kistl.Objects.NHibernateImpl"
+                         proxy="Kistl.App.Base.IntPropertyNHibernateImpl+IntPropertyProxy, Kistl.Objects.NHibernateImpl"
+                         schema="`base`"
+                         table="`IntProperties`"
+                         dynamic-update="true">
+            
+            <!-- base class reference -->
+            <key column="`ID`" />
+
+            <!-- define the properties -->
+
+            <!-- define the subclasses -->
+
+        </joined-subclass>
+        <joined-subclass name="Kistl.App.Base.StringPropertyNHibernateImpl+StringPropertyProxy, Kistl.Objects.NHibernateImpl"
+                         proxy="Kistl.App.Base.StringPropertyNHibernateImpl+StringPropertyProxy, Kistl.Objects.NHibernateImpl"
+                         schema="`base`"
+                         table="`StringProperties`"
+                         dynamic-update="true">
+            
+            <!-- base class reference -->
+            <key column="`ID`" />
+
+            <!-- define the properties -->
+
+            <!-- define the subclasses -->
+
+        </joined-subclass>
+
+        </joined-subclass>
+
+    </class>
+</hibernate-mapping>

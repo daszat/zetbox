@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
+                   default-cascade="save-update" >
+    <class name="Kistl.App.Projekte.ProjektNHibernateImpl+ProjektProxy, Kistl.Objects.NHibernateImpl"
+           proxy="Kistl.App.Projekte.ProjektNHibernateImpl+ProjektProxy, Kistl.Objects.NHibernateImpl"
+           schema="`projekte`"
+           table="`Projekte`"
+           abstract="false"
+           dynamic-update="true"
+           optimistic-lock="dirty">
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`projekte`</param>
+                <param name="sequence">`Projekte_ID_seq`</param>
+            </generator>
+        </id>
+
+        <!-- define the properties -->
+<!-- ObjectReferenceProperty -->
+        <set name="Auftraege" batch-size="100" inverse="true" >
+            <key column="`fk_Projekt`" />
+            <one-to-many class="Kistl.App.Projekte.AuftragNHibernateImpl+AuftragProxy, Kistl.Objects.NHibernateImpl" />
+        </set>
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="AufwandGes" 
+                  column="`AufwandGes`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Kistl.App.Base.IdentityNHibernateImpl+IdentityProxy, Kistl.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="ChangedOn" type="Timestamp"
+                  column="`ChangedOn`" 
+                  optimistic-lock="true"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Kistl.App.Base.IdentityNHibernateImpl+IdentityProxy, Kistl.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="CreatedOn" type="Timestamp"
+                  column="`CreatedOn`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Kundenname" 
+                  column="`Kundenname`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <!-- NMProperty -->
+        <!-- rel=Projekt_haben_Mitarbeiter_RelationEntry -->
+        <!-- relEnd=Projekte otherEnd=Mitarbeiter -->
+        <set name="Mitarbeiter" table="`Projekte_haben_Mitarbeiter`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
+            <key column="`fk_Projekte`" />
+            <one-to-many class="Kistl.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl+Projekt_haben_Mitarbeiter_RelationEntryProxy,Kistl.Objects.NHibernateImpl" />
+        </set>
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="Name" 
+                  column="`Name`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <set name="Tasks" batch-size="100" inverse="true" >
+            <key column="`fk_Projekt`" />
+            <one-to-many class="Kistl.App.Projekte.TaskNHibernateImpl+TaskProxy, Kistl.Objects.NHibernateImpl" />
+        </set>
+
+
+        <!-- map rights -->
+        <set name="SecurityRightsCollectionImpl"
+             schema="`projekte`"
+             table="`Projekte_Rights`"
+             lazy="true"
+             fetch="select" 
+             batch-size="100" >
+            <key column="`ID`" />
+            <composite-element class="Kistl.App.Projekte.Projekt_RightsNHibernateImpl, Kistl.Objects.NHibernateImpl">
+                <property name="Identity" column="`Identity`" />
+                <property name="Right" column="`Right`" />
+            </composite-element>
+        </set>
+
+        <!-- define the subclasses -->
+
+    </class>
+</hibernate-mapping>

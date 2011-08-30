@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
+                   default-cascade="save-update" >
+    <class name="Kistl.App.Base.TypeRefNHibernateImpl+TypeRefProxy, Kistl.Objects.NHibernateImpl"
+           proxy="Kistl.App.Base.TypeRefNHibernateImpl+TypeRefProxy, Kistl.Objects.NHibernateImpl"
+           schema="`base`"
+           table="`TypeRefs`"
+           abstract="false"
+           dynamic-update="true"
+           optimistic-lock="dirty">
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`base`</param>
+                <param name="sequence">`TypeRefs_ID_seq`</param>
+            </generator>
+        </id>
+
+        <!-- define the properties -->
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="Assembly" column="`fk_Assembly`" class="Kistl.App.Base.AssemblyNHibernateImpl+AssemblyProxy, Kistl.Objects.NHibernateImpl" />
+
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Kistl.App.Base.IdentityNHibernateImpl+IdentityProxy, Kistl.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="ChangedOn" type="Timestamp"
+                  column="`ChangedOn`" 
+                  optimistic-lock="true"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Kistl.App.Base.IdentityNHibernateImpl+IdentityProxy, Kistl.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="CreatedOn" type="Timestamp"
+                  column="`CreatedOn`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Deleted" 
+                  column="`Deleted`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ExportGuid" 
+                  column="`ExportGuid`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="FullName" 
+                  column="`FullName`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <!-- NMProperty -->
+        <!-- rel=TypeRef_hasGenericArguments_TypeRef_RelationEntry -->
+        <!-- relEnd=TypeRef otherEnd=GenericArguments -->
+        <set name="GenericArguments" table="`TypeRef_hasGenericArguments_GenericArguments`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
+            <key column="`fk_TypeRef`" />
+            <one-to-many class="Kistl.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryNHibernateImpl+TypeRef_hasGenericArguments_TypeRef_RelationEntryProxy,Kistl.Objects.NHibernateImpl" />
+        </set>
+
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="Parent" column="`fk_Parent`" class="Kistl.App.Base.TypeRefNHibernateImpl+TypeRefProxy, Kistl.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="ToStringCache" 
+                  column="`ToStringCache`" 
+                  optimistic-lock="false"/>
+
+        <!-- define the subclasses -->
+
+    </class>
+</hibernate-mapping>

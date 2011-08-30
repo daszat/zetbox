@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
+                   default-cascade="save-update" >
+    <class name="Kistl.App.Test.OrderedNEndNHibernateImpl+OrderedNEndProxy, Kistl.Objects.NHibernateImpl"
+           proxy="Kistl.App.Test.OrderedNEndNHibernateImpl+OrderedNEndProxy, Kistl.Objects.NHibernateImpl"
+           schema="`test`"
+           table="`OrderedNEnds`"
+           abstract="false"
+           dynamic-update="false"
+           optimistic-lock="none">
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`test`</param>
+                <param name="sequence">`OrderedNEnds_ID_seq`</param>
+            </generator>
+        </id>
+
+        <!-- define the properties -->
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="OneEnd" column="`fk_OneEnd`" class="Kistl.App.Test.OrderedOneEndNHibernateImpl+OrderedOneEndProxy, Kistl.Objects.NHibernateImpl" />
+        <property name="NEnds_pos" column="`fk_OneEnd_pos`" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="OtherInt" 
+                  column="`OtherInt`" 
+                  optimistic-lock="false"/>
+
+        <!-- define the subclasses -->
+
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,144 @@
+<?xml version="1.0"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
+                   default-cascade="save-update" >
+    <class name="Kistl.App.Base.DefaultPropertyValueNHibernateImpl+DefaultPropertyValueProxy, Kistl.Objects.NHibernateImpl"
+           proxy="Kistl.App.Base.DefaultPropertyValueNHibernateImpl+DefaultPropertyValueProxy, Kistl.Objects.NHibernateImpl"
+           schema="`base`"
+           table="`DefaultPropertyValues`"
+           abstract="true"
+           dynamic-update="true"
+           optimistic-lock="dirty">
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`base`</param>
+                <param name="sequence">`DefaultPropertyValues_ID_seq`</param>
+            </generator>
+        </id>
+
+        <!-- define the properties -->
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Kistl.App.Base.IdentityNHibernateImpl+IdentityProxy, Kistl.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="ChangedOn" type="Timestamp"
+                  column="`ChangedOn`" 
+                  optimistic-lock="true"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Kistl.App.Base.IdentityNHibernateImpl+IdentityProxy, Kistl.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="CreatedOn" type="Timestamp"
+                  column="`CreatedOn`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ExportGuid" 
+                  column="`ExportGuid`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="Property" column="`fk_Property`" class="Kistl.App.Base.PropertyNHibernateImpl+PropertyProxy, Kistl.Objects.NHibernateImpl" unique="true" />
+
+
+        <!-- define the subclasses -->
+        <joined-subclass name="Kistl.App.Base.BoolDefaultValueNHibernateImpl+BoolDefaultValueProxy, Kistl.Objects.NHibernateImpl"
+                         proxy="Kistl.App.Base.BoolDefaultValueNHibernateImpl+BoolDefaultValueProxy, Kistl.Objects.NHibernateImpl"
+                         schema="`base`"
+                         table="`BoolDefaultValues`"
+                         dynamic-update="true">
+            
+            <!-- base class reference -->
+            <key column="`ID`" />
+
+            <!-- define the properties -->
+        <!-- ValueTypeProperty isValue -->
+        <property name="BoolValue" 
+                  column="`BoolValue`" 
+                  optimistic-lock="false"/>
+
+            <!-- define the subclasses -->
+
+        </joined-subclass>
+        <joined-subclass name="Kistl.App.Base.CurrentDateTimeDefaultValueNHibernateImpl+CurrentDateTimeDefaultValueProxy, Kistl.Objects.NHibernateImpl"
+                         proxy="Kistl.App.Base.CurrentDateTimeDefaultValueNHibernateImpl+CurrentDateTimeDefaultValueProxy, Kistl.Objects.NHibernateImpl"
+                         schema="`base`"
+                         table="`CurrentDateTimeDefaultValues`"
+                         dynamic-update="true">
+            
+            <!-- base class reference -->
+            <key column="`ID`" />
+
+            <!-- define the properties -->
+
+            <!-- define the subclasses -->
+
+        </joined-subclass>
+        <joined-subclass name="Kistl.App.Base.EnumDefaultValueNHibernateImpl+EnumDefaultValueProxy, Kistl.Objects.NHibernateImpl"
+                         proxy="Kistl.App.Base.EnumDefaultValueNHibernateImpl+EnumDefaultValueProxy, Kistl.Objects.NHibernateImpl"
+                         schema="`base`"
+                         table="`EnumDefaultValues`"
+                         dynamic-update="true">
+            
+            <!-- base class reference -->
+            <key column="`ID`" />
+
+            <!-- define the properties -->
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="EnumValue" column="`fk_EnumValue`" class="Kistl.App.Base.EnumerationEntryNHibernateImpl+EnumerationEntryProxy, Kistl.Objects.NHibernateImpl" />
+
+
+            <!-- define the subclasses -->
+
+        </joined-subclass>
+        <joined-subclass name="Kistl.App.Base.IntDefaultValueNHibernateImpl+IntDefaultValueProxy, Kistl.Objects.NHibernateImpl"
+                         proxy="Kistl.App.Base.IntDefaultValueNHibernateImpl+IntDefaultValueProxy, Kistl.Objects.NHibernateImpl"
+                         schema="`base`"
+                         table="`IntDefaultValues`"
+                         dynamic-update="true">
+            
+            <!-- base class reference -->
+            <key column="`ID`" />
+
+            <!-- define the properties -->
+        <!-- ValueTypeProperty isValue -->
+        <property name="IntValue" 
+                  column="`IntValue`" 
+                  optimistic-lock="false"/>
+
+            <!-- define the subclasses -->
+
+        </joined-subclass>
+        <joined-subclass name="Kistl.App.Base.NewGuidDefaultValueNHibernateImpl+NewGuidDefaultValueProxy, Kistl.Objects.NHibernateImpl"
+                         proxy="Kistl.App.Base.NewGuidDefaultValueNHibernateImpl+NewGuidDefaultValueProxy, Kistl.Objects.NHibernateImpl"
+                         schema="`base`"
+                         table="`NewGuidDefaultValues`"
+                         dynamic-update="true">
+            
+            <!-- base class reference -->
+            <key column="`ID`" />
+
+            <!-- define the properties -->
+
+            <!-- define the subclasses -->
+
+        </joined-subclass>
+        <joined-subclass name="Kistl.App.Base.StringDefaultValueNHibernateImpl+StringDefaultValueProxy, Kistl.Objects.NHibernateImpl"
+                         proxy="Kistl.App.Base.StringDefaultValueNHibernateImpl+StringDefaultValueProxy, Kistl.Objects.NHibernateImpl"
+                         schema="`base`"
+                         table="`StringDefaultValues`"
+                         dynamic-update="true">
+            
+            <!-- base class reference -->
+            <key column="`ID`" />
+
+            <!-- define the properties -->
+        <!-- ValueTypeProperty isValue -->
+        <property name="DefaultValue" 
+                  column="`DefaultValue`" 
+                  optimistic-lock="false"/>
+
+            <!-- define the subclasses -->
+
+        </joined-subclass>
+
+    </class>
+</hibernate-mapping>

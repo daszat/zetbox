@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
+                   default-cascade="save-update" >
+    <class name="Kistl.App.Test.FragebogenNHibernateImpl+FragebogenProxy, Kistl.Objects.NHibernateImpl"
+           proxy="Kistl.App.Test.FragebogenNHibernateImpl+FragebogenProxy, Kistl.Objects.NHibernateImpl"
+           schema="`test`"
+           table="`Frageboegen`"
+           abstract="false"
+           dynamic-update="false"
+           optimistic-lock="none">
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`test`</param>
+                <param name="sequence">`Frageboegen_ID_seq`</param>
+            </generator>
+        </id>
+
+        <!-- define the properties -->
+<!-- ObjectReferenceProperty -->
+        <set name="Antworten" batch-size="100" inverse="true" >
+            <key column="`fk_Ein_Fragebogen`" />
+            <one-to-many class="Kistl.App.Test.AntwortNHibernateImpl+AntwortProxy, Kistl.Objects.NHibernateImpl" />
+        </set>
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="BogenNummer" 
+                  column="`BogenNummer`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <!-- NMProperty -->
+        <!-- rel=TestStudent_füllt_aus_Fragebogen_RelationEntry -->
+        <!-- relEnd=Testbogen otherEnd=Student -->
+        <set name="Student" table="`Student_füllt_aus_Testbogen`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
+            <key column="`fk_Testbogen`" />
+            <one-to-many class="Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl+TestStudent_füllt_aus_Fragebogen_RelationEntryProxy,Kistl.Objects.NHibernateImpl" />
+        </set>
+
+
+        <!-- define the subclasses -->
+
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
+                   default-cascade="save-update" >
+    <class name="ZBox.App.SchemaMigration.MigrationLogNHibernateImpl+MigrationLogProxy, Kistl.Objects.NHibernateImpl"
+           proxy="ZBox.App.SchemaMigration.MigrationLogNHibernateImpl+MigrationLogProxy, Kistl.Objects.NHibernateImpl"
+           schema="`migration`"
+           table="`MigrationLogs`"
+           abstract="false"
+           dynamic-update="false"
+           optimistic-lock="none">
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`migration`</param>
+                <param name="sequence">`MigrationLogs_ID_seq`</param>
+            </generator>
+        </id>
+
+        <!-- define the properties -->
+        <!-- ValueTypeProperty isValue -->
+        <property name="Destination" 
+                  column="`Destination`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="DestinationRows" 
+                  column="`DestinationRows`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Source" 
+                  column="`Source`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="SourceRows" 
+                  column="`SourceRows`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Timestamp" type="Timestamp"
+                  column="`Timestamp`" 
+                  optimistic-lock="false"/>
+
+        <!-- define the subclasses -->
+
+    </class>
+</hibernate-mapping>

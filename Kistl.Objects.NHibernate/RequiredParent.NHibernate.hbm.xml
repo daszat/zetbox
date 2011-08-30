@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
+                   default-cascade="save-update" >
+    <class name="Kistl.App.Test.RequiredParentNHibernateImpl+RequiredParentProxy, Kistl.Objects.NHibernateImpl"
+           proxy="Kistl.App.Test.RequiredParentNHibernateImpl+RequiredParentProxy, Kistl.Objects.NHibernateImpl"
+           schema="`test`"
+           table="`RequiredParents`"
+           abstract="false"
+           dynamic-update="false"
+           optimistic-lock="none">
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`test`</param>
+                <param name="sequence">`RequiredParents_ID_seq`</param>
+            </generator>
+        </id>
+
+        <!-- define the properties -->
+<!-- ObjectReferenceProperty -->
+        <set name="Children" batch-size="100" inverse="true" >
+            <key column="`fk_Parent`" />
+            <one-to-many class="Kistl.App.Test.RequiredParentChildNHibernateImpl+RequiredParentChildProxy, Kistl.Objects.NHibernateImpl" />
+        </set>
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="Name" 
+                  column="`Name`" 
+                  optimistic-lock="false"/>
+
+        <!-- define the subclasses -->
+
+    </class>
+</hibernate-mapping>

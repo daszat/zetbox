@@ -1,0 +1,225 @@
+<?xml version="1.0"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
+                   default-cascade="save-update" >
+    <class name="Kistl.App.Base.ConstraintNHibernateImpl+ConstraintProxy, Kistl.Objects.NHibernateImpl"
+           proxy="Kistl.App.Base.ConstraintNHibernateImpl+ConstraintProxy, Kistl.Objects.NHibernateImpl"
+           schema="`base`"
+           table="`Constraints`"
+           abstract="false"
+           dynamic-update="true"
+           optimistic-lock="dirty">
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`base`</param>
+                <param name="sequence">`Constraints_ID_seq`</param>
+            </generator>
+        </id>
+
+        <!-- define the properties -->
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Kistl.App.Base.IdentityNHibernateImpl+IdentityProxy, Kistl.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="ChangedOn" type="Timestamp"
+                  column="`ChangedOn`" 
+                  optimistic-lock="true"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="ConstrainedProperty" column="`fk_ConstrainedProperty`" class="Kistl.App.Base.PropertyNHibernateImpl+PropertyProxy, Kistl.Objects.NHibernateImpl" />
+
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Kistl.App.Base.IdentityNHibernateImpl+IdentityProxy, Kistl.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="CreatedOn" type="Timestamp"
+                  column="`CreatedOn`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ExportGuid" 
+                  column="`ExportGuid`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Reason" 
+                  column="`Reason`" 
+                  optimistic-lock="false"/>
+
+        <!-- define the subclasses -->
+        <joined-subclass name="Kistl.App.Base.IntegerRangeConstraintNHibernateImpl+IntegerRangeConstraintProxy, Kistl.Objects.NHibernateImpl"
+                         proxy="Kistl.App.Base.IntegerRangeConstraintNHibernateImpl+IntegerRangeConstraintProxy, Kistl.Objects.NHibernateImpl"
+                         schema="`base`"
+                         table="`IntegerRangeConstraints`"
+                         dynamic-update="true">
+            
+            <!-- base class reference -->
+            <key column="`ID`" />
+
+            <!-- define the properties -->
+        <!-- ValueTypeProperty isValue -->
+        <property name="Max" 
+                  column="`Max`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Min" 
+                  column="`Min`" 
+                  optimistic-lock="false"/>
+
+            <!-- define the subclasses -->
+
+        </joined-subclass>
+        <joined-subclass name="Kistl.App.Base.InvokingConstraintNHibernateImpl+InvokingConstraintProxy, Kistl.Objects.NHibernateImpl"
+                         proxy="Kistl.App.Base.InvokingConstraintNHibernateImpl+InvokingConstraintProxy, Kistl.Objects.NHibernateImpl"
+                         schema="`base`"
+                         table="`InvokingConstraints`"
+                         dynamic-update="true">
+            
+            <!-- base class reference -->
+            <key column="`ID`" />
+
+            <!-- define the properties -->
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="GetErrorTextInvocation" column="`fk_GetErrorTextInvocation`" class="Kistl.App.Base.ConstraintInvocationNHibernateImpl+ConstraintInvocationProxy, Kistl.Objects.NHibernateImpl" unique="true" />
+
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="IsValidInvocation" column="`fk_IsValidInvocation`" class="Kistl.App.Base.ConstraintInvocationNHibernateImpl+ConstraintInvocationProxy, Kistl.Objects.NHibernateImpl" unique="true" />
+
+
+            <!-- define the subclasses -->
+
+        </joined-subclass>
+        <joined-subclass name="Kistl.App.Base.IsValidIdentifierConstraintNHibernateImpl+IsValidIdentifierConstraintProxy, Kistl.Objects.NHibernateImpl"
+                         proxy="Kistl.App.Base.IsValidIdentifierConstraintNHibernateImpl+IsValidIdentifierConstraintProxy, Kistl.Objects.NHibernateImpl"
+                         schema="`base`"
+                         table="`IsValidIdentifierConstraints`"
+                         dynamic-update="true">
+            
+            <!-- base class reference -->
+            <key column="`ID`" />
+
+            <!-- define the properties -->
+
+            <!-- define the subclasses -->
+        <joined-subclass name="Kistl.App.Base.IsValidNamespaceConstraintNHibernateImpl+IsValidNamespaceConstraintProxy, Kistl.Objects.NHibernateImpl"
+                         proxy="Kistl.App.Base.IsValidNamespaceConstraintNHibernateImpl+IsValidNamespaceConstraintProxy, Kistl.Objects.NHibernateImpl"
+                         schema="`base`"
+                         table="`IsValidNamespaceConstraints`"
+                         dynamic-update="true">
+            
+            <!-- base class reference -->
+            <key column="`ID`" />
+
+            <!-- define the properties -->
+
+            <!-- define the subclasses -->
+
+        </joined-subclass>
+
+        </joined-subclass>
+        <joined-subclass name="Kistl.App.Base.MethodInvocationConstraintNHibernateImpl+MethodInvocationConstraintProxy, Kistl.Objects.NHibernateImpl"
+                         proxy="Kistl.App.Base.MethodInvocationConstraintNHibernateImpl+MethodInvocationConstraintProxy, Kistl.Objects.NHibernateImpl"
+                         schema="`base`"
+                         table="`MethodInvocationConstraints`"
+                         dynamic-update="true">
+            
+            <!-- base class reference -->
+            <key column="`ID`" />
+
+            <!-- define the properties -->
+
+            <!-- define the subclasses -->
+
+        </joined-subclass>
+        <joined-subclass name="Kistl.App.Base.NotNullableConstraintNHibernateImpl+NotNullableConstraintProxy, Kistl.Objects.NHibernateImpl"
+                         proxy="Kistl.App.Base.NotNullableConstraintNHibernateImpl+NotNullableConstraintProxy, Kistl.Objects.NHibernateImpl"
+                         schema="`base`"
+                         table="`NotNullableConstraints`"
+                         dynamic-update="true">
+            
+            <!-- base class reference -->
+            <key column="`ID`" />
+
+            <!-- define the properties -->
+
+            <!-- define the subclasses -->
+
+        </joined-subclass>
+        <joined-subclass name="Kistl.App.Base.ReadOnlyConstraintNHibernateImpl+ReadOnlyConstraintProxy, Kistl.Objects.NHibernateImpl"
+                         proxy="Kistl.App.Base.ReadOnlyConstraintNHibernateImpl+ReadOnlyConstraintProxy, Kistl.Objects.NHibernateImpl"
+                         schema="`base`"
+                         table="`ReadOnlyConstraints`"
+                         dynamic-update="true">
+            
+            <!-- base class reference -->
+            <key column="`ID`" />
+
+            <!-- define the properties -->
+
+            <!-- define the subclasses -->
+        <joined-subclass name="Kistl.App.Base.ClientReadOnlyConstraintNHibernateImpl+ClientReadOnlyConstraintProxy, Kistl.Objects.NHibernateImpl"
+                         proxy="Kistl.App.Base.ClientReadOnlyConstraintNHibernateImpl+ClientReadOnlyConstraintProxy, Kistl.Objects.NHibernateImpl"
+                         schema="`base`"
+                         table="`ClientReadOnlyConstraints`"
+                         dynamic-update="true">
+            
+            <!-- base class reference -->
+            <key column="`ID`" />
+
+            <!-- define the properties -->
+
+            <!-- define the subclasses -->
+
+        </joined-subclass>
+        <joined-subclass name="Kistl.App.Base.InitOnlyConstraintNHibernateImpl+InitOnlyConstraintProxy, Kistl.Objects.NHibernateImpl"
+                         proxy="Kistl.App.Base.InitOnlyConstraintNHibernateImpl+InitOnlyConstraintProxy, Kistl.Objects.NHibernateImpl"
+                         schema="`base`"
+                         table="`InitOnlyConstraints`"
+                         dynamic-update="true">
+            
+            <!-- base class reference -->
+            <key column="`ID`" />
+
+            <!-- define the properties -->
+
+            <!-- define the subclasses -->
+
+        </joined-subclass>
+        <joined-subclass name="Kistl.App.Base.ViewReadOnlyConstraintNHibernateImpl+ViewReadOnlyConstraintProxy, Kistl.Objects.NHibernateImpl"
+                         proxy="Kistl.App.Base.ViewReadOnlyConstraintNHibernateImpl+ViewReadOnlyConstraintProxy, Kistl.Objects.NHibernateImpl"
+                         schema="`base`"
+                         table="`ViewReadOnlyConstraints`"
+                         dynamic-update="true">
+            
+            <!-- base class reference -->
+            <key column="`ID`" />
+
+            <!-- define the properties -->
+
+            <!-- define the subclasses -->
+
+        </joined-subclass>
+
+        </joined-subclass>
+        <joined-subclass name="Kistl.App.Base.StringRangeConstraintNHibernateImpl+StringRangeConstraintProxy, Kistl.Objects.NHibernateImpl"
+                         proxy="Kistl.App.Base.StringRangeConstraintNHibernateImpl+StringRangeConstraintProxy, Kistl.Objects.NHibernateImpl"
+                         schema="`base`"
+                         table="`StringRangeConstraints`"
+                         dynamic-update="true">
+            
+            <!-- base class reference -->
+            <key column="`ID`" />
+
+            <!-- define the properties -->
+        <!-- ValueTypeProperty isValue -->
+        <property name="MaxLength" 
+                  column="`MaxLength`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="MinLength" 
+                  column="`MinLength`" 
+                  optimistic-lock="false"/>
+
+            <!-- define the subclasses -->
+
+        </joined-subclass>
+
+    </class>
+</hibernate-mapping>

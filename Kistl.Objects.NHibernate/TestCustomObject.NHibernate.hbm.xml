@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
+                   default-cascade="save-update" >
+    <class name="Kistl.App.Test.TestCustomObjectNHibernateImpl+TestCustomObjectProxy, Kistl.Objects.NHibernateImpl"
+           proxy="Kistl.App.Test.TestCustomObjectNHibernateImpl+TestCustomObjectProxy, Kistl.Objects.NHibernateImpl"
+           schema="`test`"
+           table="`TestCustomObjects`"
+           abstract="false"
+           dynamic-update="false"
+           optimistic-lock="none">
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`test`</param>
+                <param name="sequence">`TestCustomObjects_ID_seq`</param>
+            </generator>
+        </id>
+
+        <!-- define the properties -->
+        <!-- ValueTypeProperty isValue -->
+        <property name="Birthday" type="Timestamp"
+                  column="`Birthday`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <set name="MubBlah_List_Nav" batch-size="100" inverse="true" >
+            <key column="`fk_TCO_Role`" />
+            <one-to-many class="Kistl.App.Test.MuhblahNHibernateImpl+MuhblahProxy, Kistl.Objects.NHibernateImpl" />
+        </set>
+
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="MubBlah_Nav" column="`fk_MB_Role`" class="Kistl.App.Test.MuhblahNHibernateImpl+MuhblahProxy, Kistl.Objects.NHibernateImpl" />
+
+<!-- ObjectReferenceProperty -->
+        <!-- NMProperty -->
+        <!-- rel=Muhblah_has_TestCustomObject_RelationEntry -->
+        <!-- relEnd=TCO_ManyList_Role otherEnd=MB_Many_Role -->
+        <set name="MuhBlah_ManyList_Nav" table="`MB_Many_Role_has_TCO_ManyList_Role`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
+            <key column="`fk_TCO_ManyList_Role`" />
+            <one-to-many class="Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl+Muhblah_has_TestCustomObject_RelationEntryProxy,Kistl.Objects.NHibernateImpl" />
+        </set>
+
+<!-- ObjectReferenceProperty -->
+        <one-to-one name="MuhBlah_One_Nav" class="Kistl.App.Test.MuhblahNHibernateImpl+MuhblahProxy, Kistl.Objects.NHibernateImpl" constrained="false" property-ref="TestCustomObjects_One_Nav" />
+        <!-- ValueTypeProperty isValue -->
+        <property name="PersonName" 
+                  column="`PersonName`" 
+                  optimistic-lock="false"/>
+        <!-- CompoundObjectProperty isValue -->
+        <component name="PhoneNumberMobile" class="Kistl.App.Test.TestPhoneCompoundObjectNHibernateImpl,Kistl.Objects.NHibernateImpl">
+            <property name="CompoundObject_IsNull"
+                      column="`PhoneNumberMobile`"
+                      type="bool"
+                      optimistic-lock="false" />
+        <!-- ValueTypeProperty isValue -->
+        <property name="AreaCode" 
+                  column="`PhoneNumberMobile_AreaCode`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Number" 
+                  column="`PhoneNumberMobile_Number`" 
+                  optimistic-lock="false"/>
+        </component>
+        <!-- CompoundObjectProperty isValue -->
+        <component name="PhoneNumberOffice" class="Kistl.App.Test.TestPhoneCompoundObjectNHibernateImpl,Kistl.Objects.NHibernateImpl">
+            <property name="CompoundObject_IsNull"
+                      column="`PhoneNumberOffice`"
+                      type="bool"
+                      optimistic-lock="false" />
+        <!-- ValueTypeProperty isValue -->
+        <property name="AreaCode" 
+                  column="`PhoneNumberOffice_AreaCode`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Number" 
+                  column="`PhoneNumberOffice_Number`" 
+                  optimistic-lock="false"/>
+        </component>
+        <!-- CompoundObjectProperty IsList -->
+        <set name="PhoneNumbersOther" inverse="true" batch-size="100">
+            <key column="`fk_TestCustomObject`" />
+            <one-to-many class="Kistl.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl+TestCustomObject_PhoneNumbersOther_CollectionEntryProxy,Kistl.Objects.NHibernateImpl" />
+        </set>
+
+        <!-- define the subclasses -->
+
+    </class>
+</hibernate-mapping>

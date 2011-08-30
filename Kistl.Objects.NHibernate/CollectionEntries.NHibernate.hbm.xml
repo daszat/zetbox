@@ -1,0 +1,397 @@
+<?xml version="1.0"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
+                   default-cascade="save-update"
+                   assembly="Kistl.Objects.NHibernateImpl">
+
+    <!-- RelationCollectionEntries -->
+    <class name="Kistl.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryNHibernateImpl+CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryProxy"
+           proxy="Kistl.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryNHibernateImpl+CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryProxy"
+           table="`CalculatedReference_dependsOn_InputProperties`"
+           schema="`base`" >
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`base`</param>
+                <param name="sequence">`CalculatedReference_dependsOn_InputProperties_ID_seq`</param>
+            </generator>
+        </id>
+
+        <many-to-one name="A"
+                     column="`fk_CalculatedReference`" />
+        <many-to-one name="B"
+                     column="`fk_InputProperties`" />
+        <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
+    </class>
+    <class name="at.dasz.DocumentManagement.Document_has_Blob_RelationEntryNHibernateImpl+Document_has_Blob_RelationEntryProxy"
+           proxy="at.dasz.DocumentManagement.Document_has_Blob_RelationEntryNHibernateImpl+Document_has_Blob_RelationEntryProxy"
+           table="`Document_has_Revisions`"
+           schema="`doc`" >
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`doc`</param>
+                <param name="sequence">`Document_has_Revisions_ID_seq`</param>
+            </generator>
+        </id>
+
+        <many-to-one name="A"
+                     column="`fk_Document`" />
+        <many-to-one name="B"
+                     column="`fk_Revisions`" />
+        <property name="A_pos"
+                    column="`fk_Revisions_pos`" />
+        <property name="B_pos"
+                  column="`fk_Document_pos`" />
+        <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
+    </class>
+    <class name="Kistl.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl+Identity_memberOf_Group_RelationEntryProxy"
+           proxy="Kistl.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl+Identity_memberOf_Group_RelationEntryProxy"
+           table="`Identities_memberOf_Groups`"
+           schema="`base`" >
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`base`</param>
+                <param name="sequence">`Identities_memberOf_Groups_ID_seq`</param>
+            </generator>
+        </id>
+
+        <many-to-one name="A"
+                     column="`fk_Identities`" />
+        <many-to-one name="B"
+                     column="`fk_Groups`" />
+    </class>
+    <class name="Kistl.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl+IndexConstraint_ensures_unique_on_Property_RelationEntryProxy"
+           proxy="Kistl.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl+IndexConstraint_ensures_unique_on_Property_RelationEntryProxy"
+           table="`UniqueContraints_ensures_unique_on_Properties`"
+           schema="`base`" >
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`base`</param>
+                <param name="sequence">`UniqueContraints_ensures_unique_on_Properties_ID_seq`</param>
+            </generator>
+        </id>
+
+        <many-to-one name="A"
+                     column="`fk_UniqueContraints`" />
+        <many-to-one name="B"
+                     column="`fk_Properties`" />
+        <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
+    </class>
+    <class name="Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl+Muhblah_has_TestCustomObject_RelationEntryProxy"
+           proxy="Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl+Muhblah_has_TestCustomObject_RelationEntryProxy"
+           table="`MB_Many_Role_has_TCO_ManyList_Role`"
+           schema="`test`" >
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`test`</param>
+                <param name="sequence">`MB_Many_Role_has_TCO_ManyList_Role_ID_seq`</param>
+            </generator>
+        </id>
+
+        <many-to-one name="A"
+                     column="`fk_MB_Many_Role`" />
+        <many-to-one name="B"
+                     column="`fk_TCO_ManyList_Role`" />
+    </class>
+    <class name="Kistl.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryNHibernateImpl+N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryProxy"
+           proxy="Kistl.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryNHibernateImpl+N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryProxy"
+           table="`ASide_connectsTo_BSide`"
+           schema="`test`" >
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`test`</param>
+                <param name="sequence">`ASide_connectsTo_BSide_ID_seq`</param>
+            </generator>
+        </id>
+
+        <many-to-one name="A"
+                     column="`fk_ASide`" />
+        <many-to-one name="B"
+                     column="`fk_BSide`" />
+    </class>
+    <class name="Kistl.App.GUI.NavigationScreen_accessed_by_Group_RelationEntryNHibernateImpl+NavigationScreen_accessed_by_Group_RelationEntryProxy"
+           proxy="Kistl.App.GUI.NavigationScreen_accessed_by_Group_RelationEntryNHibernateImpl+NavigationScreen_accessed_by_Group_RelationEntryProxy"
+           table="`NavigationScreen_accessed_by_Groups`"
+           schema="`gui`" >
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`gui`</param>
+                <param name="sequence">`NavigationScreen_accessed_by_Groups_ID_seq`</param>
+            </generator>
+        </id>
+
+        <many-to-one name="A"
+                     column="`fk_NavigationScreen`" />
+        <many-to-one name="B"
+                     column="`fk_Groups`" />
+        <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
+    </class>
+    <class name="Kistl.App.Base.ObjectClass_implements_Interface_RelationEntryNHibernateImpl+ObjectClass_implements_Interface_RelationEntryProxy"
+           proxy="Kistl.App.Base.ObjectClass_implements_Interface_RelationEntryNHibernateImpl+ObjectClass_implements_Interface_RelationEntryProxy"
+           table="`ObjectClass_implements_ImplementsInterfaces`"
+           schema="`base`" >
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`base`</param>
+                <param name="sequence">`ObjectClass_implements_ImplementsInterfaces_ID_seq`</param>
+            </generator>
+        </id>
+
+        <many-to-one name="A"
+                     column="`fk_ObjectClass`" />
+        <many-to-one name="B"
+                     column="`fk_ImplementsInterfaces`" />
+        <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
+    </class>
+    <class name="Kistl.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl+Projekt_haben_Mitarbeiter_RelationEntryProxy"
+           proxy="Kistl.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl+Projekt_haben_Mitarbeiter_RelationEntryProxy"
+           table="`Projekte_haben_Mitarbeiter`"
+           schema="`projekte`" >
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`projekte`</param>
+                <param name="sequence">`Projekte_haben_Mitarbeiter_ID_seq`</param>
+            </generator>
+        </id>
+
+        <many-to-one name="A"
+                     column="`fk_Projekte`" />
+        <many-to-one name="B"
+                     column="`fk_Mitarbeiter`" />
+        <property name="A_pos"
+                    column="`fk_Mitarbeiter_pos`" />
+        <property name="B_pos"
+                  column="`fk_Projekte_pos`" />
+    </class>
+    <class name="Kistl.App.Base.RoleMembership_resolves_Relation_RelationEntryNHibernateImpl+RoleMembership_resolves_Relation_RelationEntryProxy"
+           proxy="Kistl.App.Base.RoleMembership_resolves_Relation_RelationEntryNHibernateImpl+RoleMembership_resolves_Relation_RelationEntryProxy"
+           table="`RoleMembership_resolves_Relations`"
+           schema="`base`" >
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`base`</param>
+                <param name="sequence">`RoleMembership_resolves_Relations_ID_seq`</param>
+            </generator>
+        </id>
+
+        <many-to-one name="A"
+                     column="`fk_RoleMembership`" />
+        <many-to-one name="B"
+                     column="`fk_Relations`" />
+        <property name="A_pos"
+                    column="`fk_Relations_pos`" />
+        <property name="B_pos"
+                  column="`fk_RoleMembership_pos`" />
+        <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
+    </class>
+    <class name="ZBox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryNHibernateImpl+SourceColumn_created_Property_RelationEntryProxy"
+           proxy="ZBox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryNHibernateImpl+SourceColumn_created_Property_RelationEntryProxy"
+           table="`SourceColumn_created_Property`"
+           schema="`migration`" >
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`migration`</param>
+                <param name="sequence">`SourceColumn_created_Property_ID_seq`</param>
+            </generator>
+        </id>
+
+        <many-to-one name="A"
+                     column="`fk_SourceColumn`" />
+        <many-to-one name="B"
+                     column="`fk_Property`" />
+        <property name="A_pos"
+                    column="`fk_Property_pos`" />
+        <property name="B_pos"
+                  column="`fk_SourceColumn_pos`" />
+        <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
+    </class>
+    <class name="Kistl.App.GUI.Template_hasMenu_Visual_RelationEntryNHibernateImpl+Template_hasMenu_Visual_RelationEntryProxy"
+           proxy="Kistl.App.GUI.Template_hasMenu_Visual_RelationEntryNHibernateImpl+Template_hasMenu_Visual_RelationEntryProxy"
+           table="`Template_hasMenu_Menu`"
+           schema="`gui`" >
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`gui`</param>
+                <param name="sequence">`Template_hasMenu_Menu_ID_seq`</param>
+            </generator>
+        </id>
+
+        <many-to-one name="A"
+                     column="`fk_Template`" />
+        <many-to-one name="B"
+                     column="`fk_Menu`" />
+    </class>
+    <class name="Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl+TestStudent_füllt_aus_Fragebogen_RelationEntryProxy"
+           proxy="Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl+TestStudent_füllt_aus_Fragebogen_RelationEntryProxy"
+           table="`Student_füllt_aus_Testbogen`"
+           schema="`test`" >
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`test`</param>
+                <param name="sequence">`Student_füllt_aus_Testbogen_ID_seq`</param>
+            </generator>
+        </id>
+
+        <many-to-one name="A"
+                     column="`fk_Student`" />
+        <many-to-one name="B"
+                     column="`fk_Testbogen`" />
+    </class>
+    <class name="Kistl.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryNHibernateImpl+TypeRef_hasGenericArguments_TypeRef_RelationEntryProxy"
+           proxy="Kistl.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryNHibernateImpl+TypeRef_hasGenericArguments_TypeRef_RelationEntryProxy"
+           table="`TypeRef_hasGenericArguments_GenericArguments`"
+           schema="`base`" >
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`base`</param>
+                <param name="sequence">`TypeRef_hasGenericArguments_GenericArguments_ID_seq`</param>
+            </generator>
+        </id>
+
+        <many-to-one name="A"
+                     column="`fk_TypeRef`" />
+        <many-to-one name="B"
+                     column="`fk_GenericArguments`" />
+        <property name="A_pos"
+                    column="`fk_GenericArguments_pos`" />
+        <property name="B_pos"
+                  column="`fk_TypeRef_pos`" />
+        <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
+    </class>
+    <class name="Kistl.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl+ViewDescriptor_supports_TypeRef_RelationEntryProxy"
+           proxy="Kistl.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl+ViewDescriptor_supports_TypeRef_RelationEntryProxy"
+           table="`ViewDescriptor_supports_ViewModelTypeRefs`"
+           schema="`gui`" >
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`gui`</param>
+                <param name="sequence">`ViewDescriptor_supports_ViewModelTypeRefs_ID_seq`</param>
+            </generator>
+        </id>
+
+        <many-to-one name="A"
+                     column="`fk_ViewDescriptor`" />
+        <many-to-one name="B"
+                     column="`fk_ViewModelTypeRefs`" />
+        <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
+    </class>
+    <class name="Kistl.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl+ViewModelDescriptor_displayedBy_ControlKind_RelationEntryProxy"
+           proxy="Kistl.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl+ViewModelDescriptor_displayedBy_ControlKind_RelationEntryProxy"
+           table="`Presentable_displayedBy_SecondaryControlKinds`"
+           schema="`gui`" >
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`gui`</param>
+                <param name="sequence">`Presentable_displayedBy_SecondaryControlKinds_ID_seq`</param>
+            </generator>
+        </id>
+
+        <many-to-one name="A"
+                     column="`fk_Presentable`" />
+        <many-to-one name="B"
+                     column="`fk_SecondaryControlKinds`" />
+        <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
+    </class>
+    <class name="Kistl.App.GUI.Visual_contains_Visual_RelationEntryNHibernateImpl+Visual_contains_Visual_RelationEntryProxy"
+           proxy="Kistl.App.GUI.Visual_contains_Visual_RelationEntryNHibernateImpl+Visual_contains_Visual_RelationEntryProxy"
+           table="`Visual_contains_Children`"
+           schema="`gui`" >
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`gui`</param>
+                <param name="sequence">`Visual_contains_Children_ID_seq`</param>
+            </generator>
+        </id>
+
+        <many-to-one name="A"
+                     column="`fk_Visual`" />
+        <many-to-one name="B"
+                     column="`fk_Children`" />
+    </class>
+    <class name="Kistl.App.GUI.Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl+Visual_hasContextMenu_Visual_RelationEntryProxy"
+           proxy="Kistl.App.GUI.Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl+Visual_hasContextMenu_Visual_RelationEntryProxy"
+           table="`Visual_hasContextMenu_ContextMenu`"
+           schema="`gui`" >
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`gui`</param>
+                <param name="sequence">`Visual_hasContextMenu_ContextMenu_ID_seq`</param>
+            </generator>
+        </id>
+
+        <many-to-one name="A"
+                     column="`fk_Visual`" />
+        <many-to-one name="B"
+                     column="`fk_ContextMenu`" />
+    </class>
+
+    <!-- ValueCollectionEntries are defined directly on use -->
+    <class name="Kistl.App.Projekte.Kunde_EMails_CollectionEntryNHibernateImpl+Kunde_EMails_CollectionEntryProxy"
+           proxy="Kistl.App.Projekte.Kunde_EMails_CollectionEntryNHibernateImpl+Kunde_EMails_CollectionEntryProxy"
+           table="`Kunden_EMailsCollection`"
+           schema="`projekte`" >
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`projekte`</param>
+                <param name="sequence">`Kunden_EMailsCollection_ID_seq`</param>
+            </generator>
+        </id>
+
+        <many-to-one name="Parent"
+                     column="`fk_Kunde`" />
+        <!-- ValueTypeProperty isValue -->
+        <property name="Value" 
+                  column="`EMails`" 
+                  optimistic-lock="false"/>
+    </class>
+
+    <!-- CompoundObjectCollectionEntries -->
+    <class name="Kistl.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl+TestCustomObject_PhoneNumbersOther_CollectionEntryProxy"
+           proxy="Kistl.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl+TestCustomObject_PhoneNumbersOther_CollectionEntryProxy"
+           table="`TestCustomObjects_PhoneNumbersOtherCollection`"
+           schema="`test`" >
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`test`</param>
+                <param name="sequence">`TestCustomObjects_PhoneNumbersOtherCollection_ID_seq`</param>
+            </generator>
+        </id>
+
+        <many-to-one name="Parent"
+                     column="`fk_TestCustomObject`" />
+        <!-- CompoundObjectProperty isValue -->
+        <component name="Value" class="Kistl.App.Test.TestPhoneCompoundObjectNHibernateImpl,Kistl.Objects.NHibernateImpl">
+            <property name="CompoundObject_IsNull"
+                      column="`PhoneNumbersOther`"
+                      type="bool"
+                      optimistic-lock="false" />
+        <!-- ValueTypeProperty isValue -->
+        <property name="AreaCode" 
+                  column="`PhoneNumbersOther_AreaCode`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Number" 
+                  column="`PhoneNumbersOther_Number`" 
+                  optimistic-lock="false"/>
+        </component>
+    </class>
+
+</hibernate-mapping>

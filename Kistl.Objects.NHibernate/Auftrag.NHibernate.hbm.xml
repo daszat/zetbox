@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
+                   default-cascade="save-update" >
+    <class name="Kistl.App.Projekte.AuftragNHibernateImpl+AuftragProxy, Kistl.Objects.NHibernateImpl"
+           proxy="Kistl.App.Projekte.AuftragNHibernateImpl+AuftragProxy, Kistl.Objects.NHibernateImpl"
+           schema="`projekte`"
+           table="`Auftraege`"
+           abstract="false"
+           dynamic-update="true"
+           optimistic-lock="dirty">
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`projekte`</param>
+                <param name="sequence">`Auftraege_ID_seq`</param>
+            </generator>
+        </id>
+
+        <!-- define the properties -->
+        <!-- ValueTypeProperty isValue -->
+        <property name="Auftragsname" 
+                  column="`Auftragsname`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Auftragswert" 
+                  column="`Auftragswert`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Kistl.App.Base.IdentityNHibernateImpl+IdentityProxy, Kistl.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="ChangedOn" type="Timestamp"
+                  column="`ChangedOn`" 
+                  optimistic-lock="true"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Kistl.App.Base.IdentityNHibernateImpl+IdentityProxy, Kistl.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="CreatedOn" type="Timestamp"
+                  column="`CreatedOn`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="Kunde" column="`fk_Kunde`" class="Kistl.App.Projekte.KundeNHibernateImpl+KundeProxy, Kistl.Objects.NHibernateImpl" />
+
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="Mitarbeiter" column="`fk_Mitarbeiter`" class="Kistl.App.Projekte.MitarbeiterNHibernateImpl+MitarbeiterProxy, Kistl.Objects.NHibernateImpl" />
+
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="Projekt" column="`fk_Projekt`" class="Kistl.App.Projekte.ProjektNHibernateImpl+ProjektProxy, Kistl.Objects.NHibernateImpl" />
+
+
+        <!-- map rights -->
+        <set name="SecurityRightsCollectionImpl"
+             schema="`projekte`"
+             table="`Auftraege_Rights`"
+             lazy="true"
+             fetch="select" 
+             batch-size="100" >
+            <key column="`ID`" />
+            <composite-element class="Kistl.App.Projekte.Auftrag_RightsNHibernateImpl, Kistl.Objects.NHibernateImpl">
+                <property name="Identity" column="`Identity`" />
+                <property name="Right" column="`Right`" />
+            </composite-element>
+        </set>
+
+        <!-- define the subclasses -->
+
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
+                   default-cascade="save-update" >
+    <class name="at.dasz.DocumentManagement.FileNHibernateImpl+FileProxy, Kistl.Objects.NHibernateImpl"
+           proxy="at.dasz.DocumentManagement.FileNHibernateImpl+FileProxy, Kistl.Objects.NHibernateImpl"
+           schema="`doc`"
+           table="`Files`"
+           abstract="true"
+           dynamic-update="true"
+           optimistic-lock="dirty">
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`doc`</param>
+                <param name="sequence">`Files_ID_seq`</param>
+            </generator>
+        </id>
+
+        <!-- define the properties -->
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="Blob" column="`fk_Blob`" class="Kistl.App.Base.BlobNHibernateImpl+BlobProxy, Kistl.Objects.NHibernateImpl" />
+
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Kistl.App.Base.IdentityNHibernateImpl+IdentityProxy, Kistl.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="ChangedOn" type="Timestamp"
+                  column="`ChangedOn`" 
+                  optimistic-lock="true"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Kistl.App.Base.IdentityNHibernateImpl+IdentityProxy, Kistl.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="CreatedOn" type="Timestamp"
+                  column="`CreatedOn`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ExportGuid" 
+                  column="`ExportGuid`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Name" 
+                  column="`Name`" 
+                  optimistic-lock="false"/>
+
+        <!-- define the subclasses -->
+        <joined-subclass name="at.dasz.DocumentManagement.DocumentNHibernateImpl+DocumentProxy, Kistl.Objects.NHibernateImpl"
+                         proxy="at.dasz.DocumentManagement.DocumentNHibernateImpl+DocumentProxy, Kistl.Objects.NHibernateImpl"
+                         schema="`doc`"
+                         table="`Documents`"
+                         dynamic-update="true">
+            
+            <!-- base class reference -->
+            <key column="`ID`" />
+
+            <!-- define the properties -->
+<!-- ObjectReferenceProperty -->
+        <!-- NMProperty -->
+        <!-- rel=Document_has_Blob_RelationEntry -->
+        <!-- relEnd=Document otherEnd=Revisions -->
+        <set name="Revisions" table="`Document_has_Revisions`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
+            <key column="`fk_Document`" />
+            <one-to-many class="at.dasz.DocumentManagement.Document_has_Blob_RelationEntryNHibernateImpl+Document_has_Blob_RelationEntryProxy,Kistl.Objects.NHibernateImpl" />
+        </set>
+
+
+            <!-- define the subclasses -->
+
+        </joined-subclass>
+        <joined-subclass name="at.dasz.DocumentManagement.DynamicFileNHibernateImpl+DynamicFileProxy, Kistl.Objects.NHibernateImpl"
+                         proxy="at.dasz.DocumentManagement.DynamicFileNHibernateImpl+DynamicFileProxy, Kistl.Objects.NHibernateImpl"
+                         schema="`doc`"
+                         table="`DynamicFiles`"
+                         dynamic-update="true">
+            
+            <!-- base class reference -->
+            <key column="`ID`" />
+
+            <!-- define the properties -->
+
+            <!-- define the subclasses -->
+
+        </joined-subclass>
+        <joined-subclass name="at.dasz.DocumentManagement.StaticFileNHibernateImpl+StaticFileProxy, Kistl.Objects.NHibernateImpl"
+                         proxy="at.dasz.DocumentManagement.StaticFileNHibernateImpl+StaticFileProxy, Kistl.Objects.NHibernateImpl"
+                         schema="`doc`"
+                         table="`StaticFiles`"
+                         dynamic-update="true">
+            
+            <!-- base class reference -->
+            <key column="`ID`" />
+
+            <!-- define the properties -->
+
+            <!-- define the subclasses -->
+
+        </joined-subclass>
+
+    </class>
+</hibernate-mapping>
