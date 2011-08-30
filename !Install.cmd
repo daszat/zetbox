@@ -13,7 +13,7 @@ set destination=%1\Libs\Kistl
 
 :GOON
 
-robocopy bin\Debug %destination% /MIR 
+robocopy bin\Debug %destination% /MIR /PURGE /XD Tests "*Core.Generated" "*NH.Generated" "*EF.Generated"
 rem errorlevel 8 or higher indicates errors
 IF ERRORLEVEL 8 GOTO FAIL
 

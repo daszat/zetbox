@@ -15,7 +15,7 @@ if .%2. == .. GOTO NO_DESTINATION
 set destination=%2
 :NO_DESTINATION
 
-robocopy %source%\bin\Debug %destination% /MIR
+robocopy %source%\bin\Debug %destination% /MIR /PURGE /XD Tests "*Core.Generated" "*NH.Generated" "*EF.Generated"
 rem errorlevel 8 or higher indicates errors
 IF ERRORLEVEL 8 GOTO FAIL
 
