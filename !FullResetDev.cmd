@@ -10,10 +10,6 @@ IF ERRORLEVEL 1 GOTO FAIL
 
 rem regenerate modules to prove roundtrippability
 call "!PublishDev.cmd"
-
-echo ********************************************************************************
-echo ************************************ Success ***********************************
-echo ********************************************************************************
 GOTO EOF
 
 :FAIL
@@ -23,7 +19,7 @@ echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 echo                               Aborting FullResetDev
 rem return error without closing parent shell
 echo A | choice /c:A /n
+pause
 
 :EOF
-pause
 
