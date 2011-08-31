@@ -45,6 +45,7 @@ namespace Kistl.Client.WPF
 
         private static ServerDomainManager serverDomain;
         private static IContainer container;
+        private static bool wpfResourcesInitialized = false;
 
         private string[] HandleCommandline(string[] args, out string configFilePath)
         {
@@ -143,6 +144,8 @@ namespace Kistl.Client.WPF
                     EventManager.RegisterClassHandler(typeof(Window), Window.LoadedEvent, new RoutedEventHandler(FocusFixLoaded));
                     EventManager.RegisterClassHandler(typeof(Kistl.Client.WPF.View.KistlBase.InstanceCollectionBase), UserControl.LoadedEvent, new RoutedEventHandler(FocusFixLoaded));
 
+                    wpfResourcesInitialized = true;
+
                     FixupDatabase(container.Resolve<Func<IKistlContext>>());
 
                     // delegate all business logic into another class, which 
@@ -227,7 +230,7 @@ namespace Kistl.Client.WPF
 
         private static void ShowExceptionReporter(Exception ex)
         {
-            if (container != null)
+            if (wpfResourcesInitialized && container != null)
             {
                 var vmf = container.Resolve<IViewModelFactory>();
                 var mdl = vmf.CreateViewModel<ExceptionReporterViewModel.Factory>().Invoke(container.Resolve<IKistlContext>(), null, ex, container.Resolve<IScreenshotTool>().GetScreenshot());
