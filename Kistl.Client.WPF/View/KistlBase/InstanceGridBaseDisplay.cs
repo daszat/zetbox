@@ -31,20 +31,20 @@ namespace Kistl.Client.WPF.View.KistlBase
     {
         public abstract ZBoxDataGrid DataGrid { get; }
 
-        protected override void SetHeaderTemplate(DependencyObject header, DataTemplate template)
-        {
-            header.SetValue(DataGridColumn.HeaderTemplateProperty, template);
-        }
-
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
             base.OnPropertyChanged(e);
             if (ViewModel != null && e.Property == FrameworkElement.DataContextProperty)
             {
-                WPFHelper.RefreshGridView(DataGrid, ViewModel.DisplayedColumns, SortPropertyNameProperty);
-                ApplyInitialSortTemplates(DataGrid.Columns.FirstOrDefault(i => GetSortPropertyName(i) == ViewModel.SortProperty));
+                WPFHelper.RefreshGridView(DataGrid, ViewModel.DisplayedColumns, WpfSortHelper.SortPropertyNameProperty);
+                SortHelper.ApplyInitialSortTemplates(DataGrid.Columns.FirstOrDefault(i => WpfSortHelper.GetSortPropertyName(i) == ViewModel.SortProperty));
                 this.ApplyIsBusyBehaviour(ViewModel);
             }
+        }
+
+        protected override void SetHeaderTemplate(DependencyObject header, DataTemplate template)
+        {
+            header.SetValue(DataGridColumn.HeaderTemplateProperty, template);
         }
 
         protected void ListView_HeaderClick(object sender, RoutedEventArgs e)
@@ -52,7 +52,7 @@ namespace Kistl.Client.WPF.View.KistlBase
             DataGridColumnHeader header = e.OriginalSource as DataGridColumnHeader;
             if (header != null)
             {
-                ApplySortHeaderTemplate(header.Column);
+                SortHelper.ApplySort(header.Column);
             }
         }
     }

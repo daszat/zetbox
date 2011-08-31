@@ -35,7 +35,7 @@ namespace Kistl.Client.Presentables.KistlBase
     /// </summary>
     [ViewModelDescriptor]
     public class InstanceListViewModel
-        : ViewModel, ILabeledViewModel, IRefreshCommandListener
+        : ViewModel, ILabeledViewModel, IRefreshCommandListener, ISortableViewModel
     {
         public new delegate InstanceListViewModel Factory(IKistlContext dataCtx, ViewModel parent, Func<IKistlContext> workingCtxFactory, ObjectClass type, Func<IQueryable> qry);
 

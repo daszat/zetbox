@@ -137,6 +137,7 @@
     <Compile Include="Presentables\Calendar\WeekCalendarViewModel.cs" />
     <Compile Include="Presentables\FilterViewModels\DateRangeFilterViewModel.cs" />
     <Compile Include="Presentables\IContextViewModel.cs" />
+    <Compile Include="Presentables\ISortableViewModel.cs" />
     <Compile Include="Presentables\KistlBase\FilterListEntryViewModel.cs" />
     <Compile Include="Presentables\KistlBase\FilterListEntryViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>

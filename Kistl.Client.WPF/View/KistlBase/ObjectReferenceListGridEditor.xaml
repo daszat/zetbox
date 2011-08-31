@@ -35,6 +35,7 @@
                             ItemsSource="{Binding Source={StaticResource itemsSource}}"
                             MinHeight="50"
                             MouseDoubleClick="ItemActivatedHandler"
+                            GridViewColumnHeader.Click="ListView_HeaderClick"
                             CanUserAddRows="{Binding AllowInlineAddNew}"
                             CanUserDeleteRows="{Binding AllowInlineDelete}"
                             AutoGenerateColumns="False"

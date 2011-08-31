@@ -28,11 +28,6 @@ namespace Kistl.Client.WPF.View.KistlBase
     {
         public abstract ListView ListView { get; }
 
-        protected override void SetHeaderTemplate(DependencyObject header, DataTemplate template)
-        {
-            header.SetValue(GridViewColumn.HeaderTemplateProperty, template);
-        }
-
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
             base.OnPropertyChanged(e);
@@ -48,10 +43,10 @@ namespace Kistl.Client.WPF.View.KistlBase
         {
             if (ViewModel.ViewMethod == InstanceListViewMethod.Details)
             {
-                WPFHelper.RefreshGridView(ListView, ViewModel.DisplayedColumns, SortPropertyNameProperty);
+                WPFHelper.RefreshGridView(ListView, ViewModel.DisplayedColumns, WpfSortHelper.SortPropertyNameProperty);
                 ListView.ItemContainerStyle = Application.Current.Resources["ListViewAsGridViewItemContainerStyle"] as Style;
 
-                ApplyInitialSortTemplates(((GridView)ListView.View).Columns.FirstOrDefault(i => GetSortPropertyName(i) == ViewModel.SortProperty));
+                SortHelper.ApplyInitialSortTemplates(((GridView)ListView.View).Columns.FirstOrDefault(i => WpfSortHelper.GetSortPropertyName(i) == ViewModel.SortProperty));
             }
             else
             {
@@ -60,13 +55,18 @@ namespace Kistl.Client.WPF.View.KistlBase
             }
         }
 
+        protected override void SetHeaderTemplate(DependencyObject header, DataTemplate template)
+        {
+            header.SetValue(GridViewColumn.HeaderTemplateProperty, template);
+        }
+
         protected void ListView_HeaderClick(object sender, RoutedEventArgs e)
         {
             GridViewColumnHeader header = e.OriginalSource as GridViewColumnHeader;
 
             if (header != null && header.Role != GridViewColumnHeaderRole.Padding)
             {
-                ApplySortHeaderTemplate(header.Column);
+                SortHelper.ApplySort(header.Column);
             }
         }
     }

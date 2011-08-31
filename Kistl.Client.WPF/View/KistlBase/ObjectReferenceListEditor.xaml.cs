@@ -71,5 +71,14 @@ namespace Kistl.Client.WPF.View.KistlBase
         {
             get { return lst; }
         }
+
+        protected void ListView_HeaderClick(object sender, RoutedEventArgs e)
+        {
+            GridViewColumnHeader header = e.OriginalSource as GridViewColumnHeader;
+
+            if (header != null && header.Role != GridViewColumnHeaderRole.Padding)
+            {
+            }
+        }
     }
 }

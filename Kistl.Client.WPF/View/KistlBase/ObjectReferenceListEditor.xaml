@@ -30,6 +30,7 @@
                   SelectedZBoxItems="{Binding SelectedItems}"
                   ItemContainerStyle="{StaticResource ListViewAsGridViewItemContainerStyle}"
                   MouseDoubleClick="ItemActivatedHandler"
+                  GridViewColumnHeader.Click="ListView_HeaderClick"
                   KeyboardNavigation.TabNavigation="Continue">
             <ctrls:ZBoxListView.ContextMenu>
                 <ContextMenu ItemsSource="{Binding Commands}"

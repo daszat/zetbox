@@ -27,28 +27,9 @@ namespace Kistl.Client.WPF.View.KistlBase
 
     public abstract class InstanceCollectionBase : UserControl, IHasViewModel<InstanceListViewModel>
     {
-        protected abstract void SetHeaderTemplate(DependencyObject header, DataTemplate template);
-
         public InstanceCollectionBase()
         {
-        }
-
-        #region Sort dependency properties
-        public static readonly DependencyProperty SortPropertyNameProperty =
-            DependencyProperty.RegisterAttached("SortPropertyName", typeof(string), typeof(InstanceListDisplay));
-
-        public static string GetSortPropertyName(DependencyObject obj)
-        {
-            if (obj == null) throw new ArgumentNullException("obj");
-            return (string)obj.GetValue(SortPropertyNameProperty);
-        }
-
-        public static void SetSortPropertyName(DependencyObject obj, string value)
-        {
-            if (obj == null) throw new ArgumentNullException("obj");
-            obj.SetValue(SortPropertyNameProperty, value);
-        }
-        #endregion
+        }        
 
         #region ItemActivatedHandler
         /// <summary>
@@ -68,64 +49,21 @@ namespace Kistl.Client.WPF.View.KistlBase
         #endregion
 
         #region Sorting management
-        DependencyObject _lastColumnClicked = null;
-        ListSortDirection _lastDirection = ListSortDirection.Ascending;
 
-        protected void ApplyInitialSortTemplates(DependencyObject column)
+        protected abstract void SetHeaderTemplate(DependencyObject header, DataTemplate template);
+        private WpfSortHelper _sortHelper;
+        protected WpfSortHelper SortHelper
         {
-            _lastColumnClicked = column;
-            _lastDirection = ViewModel.SortDirection;
-            if (_lastColumnClicked != null)
+            get
             {
-                // Add arrow
-                if (ViewModel.SortDirection == ListSortDirection.Ascending)
+                if (_sortHelper == null)
                 {
-                    SetHeaderTemplate(_lastColumnClicked, TryFindResource("GridHeaderTemplateArrowUp") as DataTemplate);
+                    _sortHelper = new WpfSortHelper(this, ViewModel, SetHeaderTemplate);
                 }
-                else
-                {
-                    SetHeaderTemplate(_lastColumnClicked, TryFindResource("GridHeaderTemplateArrowDown") as DataTemplate);
-                }
+                return _sortHelper;
             }
         }
-
-        protected void ApplySortHeaderTemplate(DependencyObject currentColum)
-        {
-            var propName = GetSortPropertyName(currentColum);
-            if (string.IsNullOrEmpty(propName)) return;
-
-            ListSortDirection direction;
-            if (currentColum != _lastColumnClicked)
-            {
-                direction = ListSortDirection.Ascending;
-            }
-            else
-            {
-                direction = _lastDirection == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
-            }
-
-            ViewModel.Sort(propName, direction);
-
-            // Remove arrow from previously sorted header
-            if (_lastColumnClicked != null && _lastColumnClicked != currentColum)
-            {
-                SetHeaderTemplate(_lastColumnClicked, null);
-            }
-
-            // Save
-            _lastColumnClicked = currentColum;
-            _lastDirection = direction;
-
-            // Add arrow
-            if (ViewModel.SortDirection == ListSortDirection.Ascending)
-            {
-                SetHeaderTemplate(_lastColumnClicked, TryFindResource("GridHeaderTemplateArrowUp") as DataTemplate);
-            }
-            else
-            {
-                SetHeaderTemplate(_lastColumnClicked, TryFindResource("GridHeaderTemplateArrowDown") as DataTemplate);
-            }
-        }
+        
         #endregion
 
         protected void RefreshCommand_Executed(object sender, ExecutedRoutedEventArgs e)
