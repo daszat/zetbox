@@ -67,6 +67,7 @@ namespace Kistl.Client.WPF.View.KistlBase
             {
                 SortHelper.ApplySort(header.Column);
             }
+            e.Handled = true;
         }
     }
 }

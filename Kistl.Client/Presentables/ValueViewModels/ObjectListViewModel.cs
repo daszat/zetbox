@@ -21,7 +21,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
     /// <summary>
     /// </summary>
     public class ObjectListViewModel
-        : BaseObjectCollectionViewModel<IReadOnlyObservableList<DataObjectViewModel>, IList<IDataObject>>, IValueListViewModel<DataObjectViewModel, IReadOnlyObservableList<DataObjectViewModel>>
+        : BaseObjectCollectionViewModel<IReadOnlyObservableList<DataObjectViewModel>, IList<IDataObject>>, IValueListViewModel<DataObjectViewModel, IReadOnlyObservableList<DataObjectViewModel>>, ISortableViewModel
     {
         public new delegate ObjectListViewModel Factory(IKistlContext dataCtx, ViewModel parent, IValueModel mdl);
 
@@ -158,5 +158,20 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 //SelectedItem = item;
             }
         }
+
+        private string _sortProperty = null;
+        private ListSortDirection _sortDirection = ListSortDirection.Ascending;
+
+        public void Sort(string propName, ListSortDirection direction)
+        {
+            if (string.IsNullOrEmpty(propName))
+                throw new ArgumentNullException("propName");
+
+            _sortProperty = propName;
+            _sortDirection = direction;
+        }
+
+        public string SortProperty { get { return _sortProperty; } }
+        public ListSortDirection SortDirection { get { return _sortDirection; } }
     }
 }

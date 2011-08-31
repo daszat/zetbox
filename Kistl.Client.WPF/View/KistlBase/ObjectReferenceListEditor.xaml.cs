@@ -52,7 +52,7 @@ namespace Kistl.Client.WPF.View.KistlBase
             base.OnPropertyChanged(e);
             if (ViewModel != null && e.Property == FrameworkElement.DataContextProperty)
             {
-                WPFHelper.RefreshGridView(lst, ViewModel.DisplayedColumns, null);
+                WPFHelper.RefreshGridView(lst, ViewModel.DisplayedColumns, WpfSortHelper.SortPropertyNameProperty);
                 this.ApplyIsBusyBehaviour(ViewModel);
             }
         }
@@ -72,13 +72,36 @@ namespace Kistl.Client.WPF.View.KistlBase
             get { return lst; }
         }
 
+        #region HeaderClickManagement
+
+        protected void SetHeaderTemplate(DependencyObject header, DataTemplate template)
+        {
+            header.SetValue(GridViewColumn.HeaderTemplateProperty, template);
+        }
+
+        private WpfSortHelper _sortHelper;
+        protected WpfSortHelper SortHelper
+        {
+            get
+            {
+                if (_sortHelper == null)
+                {
+                    _sortHelper = new WpfSortHelper(this, ViewModel, SetHeaderTemplate);
+                }
+                return _sortHelper;
+            }
+        }
+
         protected void ListView_HeaderClick(object sender, RoutedEventArgs e)
         {
             var header = e.OriginalSource as GridViewColumnHeader;
-
             if (header != null && header.Role != GridViewColumnHeaderRole.Padding)
             {
+                SortHelper.ApplySort(header.Column);
             }
+            e.Handled = true;
         }
+
+        #endregion
     }
 }

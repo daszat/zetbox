@@ -52,7 +52,7 @@ namespace Kistl.Client.WPF.View.KistlBase
             base.OnPropertyChanged(e);
             if (ViewModel != null && e.Property == FrameworkElement.DataContextProperty)
             {
-                WPFHelper.RefreshGridView(lst, ViewModel.DisplayedColumns, null);
+                WPFHelper.RefreshGridView(lst, ViewModel.DisplayedColumns, WpfSortHelper.SortPropertyNameProperty);
             }
         }
 
