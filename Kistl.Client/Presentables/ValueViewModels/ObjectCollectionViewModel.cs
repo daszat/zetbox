@@ -21,7 +21,7 @@ using Kistl.API.Client;
     /// <summary>
     /// </summary>
     public class ObjectCollectionViewModel
-        : BaseObjectCollectionViewModel<IReadOnlyObservableList<DataObjectViewModel>, ICollection<IDataObject>>, IValueCollectionViewModel<DataObjectViewModel, IReadOnlyObservableList<DataObjectViewModel>>
+        : BaseObjectCollectionViewModel<IReadOnlyObservableList<DataObjectViewModel>, ICollection<IDataObject>>, IValueCollectionViewModel<DataObjectViewModel, IReadOnlyObservableList<DataObjectViewModel>>, ISortableViewModel
     {
         public new delegate ObjectCollectionViewModel Factory(IKistlContext dataCtx, ViewModel parent, IValueModel mdl);
 
@@ -260,12 +260,22 @@ using Kistl.API.Client;
 
         #endregion
 
+        private string _sortProperty = null;
+        private ListSortDirection _sortDirection = ListSortDirection.Ascending;
+
         public void Sort(string propName, ListSortDirection direction)
         {
             if (string.IsNullOrEmpty(propName))
                 throw new ArgumentNullException("propName");
+            
+            _sortProperty = propName;
+            _sortDirection = direction;
+
             EnsureValueCache();
             _wrapper.Sort(propName, direction, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
         }
+
+        public string SortProperty { get { return _sortProperty; } }
+        public ListSortDirection SortDirection { get { return _sortDirection; } }
     }
 }

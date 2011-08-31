@@ -49,7 +49,7 @@ namespace Kistl.Client.WPF.View.KistlBase
 
         protected void ListView_HeaderClick(object sender, RoutedEventArgs e)
         {
-            DataGridColumnHeader header = e.OriginalSource as DataGridColumnHeader;
+            var header = e.OriginalSource as DataGridColumnHeader;
             if (header != null)
             {
                 SortHelper.ApplySort(header.Column);

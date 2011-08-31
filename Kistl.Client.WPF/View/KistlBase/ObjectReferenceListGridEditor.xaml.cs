@@ -24,6 +24,7 @@ namespace Kistl.Client.WPF.View.KistlBase
     using Microsoft.Windows.Controls;
     using Kistl.Client.WPF.Toolkit;
     using Kistl.Client.WPF.CustomControls;
+    using Microsoft.Windows.Controls.Primitives;
 
     /// <summary>
     /// Interaction logic for DataObjectListView.xaml
@@ -73,9 +74,9 @@ namespace Kistl.Client.WPF.View.KistlBase
 
         protected void ListView_HeaderClick(object sender, RoutedEventArgs e)
         {
-            GridViewColumnHeader header = e.OriginalSource as GridViewColumnHeader;
+            var header = e.OriginalSource as DataGridColumnHeader;
 
-            if (header != null && header.Role != GridViewColumnHeaderRole.Padding)
+            if (header != null)
             {
             }
         }

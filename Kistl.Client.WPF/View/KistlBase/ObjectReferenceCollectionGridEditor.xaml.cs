@@ -24,6 +24,7 @@ namespace Kistl.Client.WPF.View.KistlBase
     using Microsoft.Windows.Controls;
     using Kistl.Client.WPF.Toolkit;
     using Kistl.Client.WPF.CustomControls;
+    using Microsoft.Windows.Controls.Primitives;
 
     /// <summary>
     /// Interaction logic for DataObjectListView.xaml
@@ -32,23 +33,6 @@ namespace Kistl.Client.WPF.View.KistlBase
     public partial class ObjectReferenceCollectionGridEditor
         : PropertyEditor, IHasViewModel<ObjectCollectionViewModel>
     {
-        #region Sort dependency properties
-        public static readonly DependencyProperty SortPropertyNameProperty =
-            DependencyProperty.RegisterAttached("SortPropertyName", typeof(string), typeof(ObjectReferenceCollectionGridEditor));
-
-        public static string GetSortPropertyName(DependencyObject obj)
-        {
-            if (obj == null) throw new ArgumentNullException("obj");
-            return (string)obj.GetValue(SortPropertyNameProperty);
-        }
-
-        public static void SetSortPropertyName(DependencyObject obj, string value)
-        {
-            if (obj == null) throw new ArgumentNullException("obj");
-            obj.SetValue(SortPropertyNameProperty, value);
-        }
-        #endregion
-
         public ObjectReferenceCollectionGridEditor()
         {
             if (DesignerProperties.GetIsInDesignMode(this)) return;
@@ -71,61 +55,37 @@ namespace Kistl.Client.WPF.View.KistlBase
             base.OnPropertyChanged(e);
             if (ViewModel != null && e.Property == FrameworkElement.DataContextProperty)
             {
-                WPFHelper.RefreshGridView(lst, ViewModel.DisplayedColumns, SortPropertyNameProperty);
+                WPFHelper.RefreshGridView(lst, ViewModel.DisplayedColumns, WpfSortHelper.SortPropertyNameProperty);
                 this.ApplyIsBusyBehaviour(ViewModel);
             }
         }
 
 
         #region HeaderClickManagement
-        GridViewColumnHeader _lastHeaderClicked = null;
-        ListSortDirection _lastDirection = ListSortDirection.Ascending;
-
-        private void ListView_HeaderClick(object sender, RoutedEventArgs e)
+        protected void SetHeaderTemplate(DependencyObject header, DataTemplate template)
         {
-            GridViewColumnHeader headerClicked = e.OriginalSource as GridViewColumnHeader;
+            header.SetValue(DataGridColumn.HeaderTemplateProperty, template);
+        }
 
-            if (headerClicked != null)
+        protected void ListView_HeaderClick(object sender, RoutedEventArgs e)
+        {
+            var header = e.OriginalSource as DataGridColumnHeader;
+            if (header != null)
             {
-                if (headerClicked.Role != GridViewColumnHeaderRole.Padding)
+                SortHelper.ApplySort(header.Column);
+            }
+        }
+
+        private WpfSortHelper _sortHelper;
+        protected WpfSortHelper SortHelper
+        {
+            get
+            {
+                if (_sortHelper == null)
                 {
-                    var propName = GetSortPropertyName(headerClicked.Column);
-                    if (string.IsNullOrEmpty(propName)) return;
-
-                    ListSortDirection direction;
-                    if (headerClicked != _lastHeaderClicked)
-                    {
-                        direction = ListSortDirection.Ascending;
-                    }
-                    else
-                    {
-                        direction = _lastDirection == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
-                    }
-
-                    ViewModel.Sort(propName, direction);
-
-                    // Add arrow
-                    if (direction == ListSortDirection.Ascending)
-                    {
-                        headerClicked.Column.HeaderTemplate =
-                          TryFindResource("GridHeaderTemplateArrowUp") as DataTemplate;
-                    }
-                    else
-                    {
-                        headerClicked.Column.HeaderTemplate =
-                          TryFindResource("GridHeaderTemplateArrowDown") as DataTemplate;
-                    }
-
-                    // Remove arrow from previously sorted header
-                    if (_lastHeaderClicked != null && _lastHeaderClicked != headerClicked)
-                    {
-                        _lastHeaderClicked.Column.HeaderTemplate = null;
-                    }
-
-
-                    _lastHeaderClicked = headerClicked;
-                    _lastDirection = direction;
+                    _sortHelper = new WpfSortHelper(this, ViewModel, SetHeaderTemplate);
                 }
+                return _sortHelper;
             }
         }
         #endregion
