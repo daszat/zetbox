@@ -15,6 +15,7 @@ namespace Kistl.Client
     using Kistl.Client.Models;
     using Kistl.Client.Presentables;
     using Kistl.Client.Presentables.ValueViewModels;
+    using Kistl.API.Utils;
 
     public class DefaultCredentialsResolver : ICredentialsResolver
     {
@@ -29,6 +30,12 @@ namespace Kistl.Client
                     .As<ICredentialsResolver>()
                     .SingleInstance();
             }
+        }
+
+        public void EnsureCredentials()
+        {
+            // Gracefully do nothing
+            // Using Windows Credentials, they are already set by the operating system
         }
 
         public void InitCredentials(System.ServiceModel.Description.ClientCredentials c)
@@ -61,7 +68,7 @@ namespace Kistl.Client
                 base.Load(builder);
 
                 builder
-                    .Register<BasicAuthCredentialsResolver>(c => new BasicAuthCredentialsResolver(c.Resolve<IViewModelFactory>(), c.Resolve<Func<IKistlContext>>(), c.Resolve<IFrozenContext>()))
+                    .Register<BasicAuthCredentialsResolver>(c => new BasicAuthCredentialsResolver(c.Resolve<IViewModelFactory>(), c.Resolve<Func<BaseMemoryContext>>(), c.Resolve<IFrozenContext>()))
                     .As<BasicAuthCredentialsResolver>() // for local use
                     .As<ICredentialsResolver>() // for publication
                     .SingleInstance();
@@ -77,12 +84,12 @@ namespace Kistl.Client
         private static object _lock = new object();
 
         private IViewModelFactory _vmf;
-        private Func<IKistlContext> _ctxFactory;
+        private Func<BaseMemoryContext> _ctxFactory;
         private IFrozenContext _frozenCtx;
         private string UserName = null;
         private string Password = null;
 
-        public BasicAuthCredentialsResolver(IViewModelFactory vmf, Func<IKistlContext> ctxFactory, IFrozenContext frozenCtx)
+        public BasicAuthCredentialsResolver(IViewModelFactory vmf, Func<BaseMemoryContext> ctxFactory, IFrozenContext frozenCtx)
         {
             if (vmf == null) throw new ArgumentNullException("vmf");
             if (ctxFactory == null) throw new ArgumentNullException("ctxFactory");
@@ -93,72 +100,86 @@ namespace Kistl.Client
             _frozenCtx = frozenCtx;
         }
 
+        private bool _isEnsuringCredentials = false;
+        public void EnsureCredentials()
+        {
+            lock (_lock) // singelton, once is enougth
+            {
+                if (_isEnsuringCredentials)
+                {
+                    Logging.Client.Warn("Nested credentials resolving detected");
+                    return;
+                }
+                _isEnsuringCredentials = true;
+                try
+                {
+                    if (string.IsNullOrEmpty(UserName))
+                    {
+                        using (var ctx = _ctxFactory())
+                        {
+                            var valueModels = new List<BaseValueViewModel>();
+
+                            var userName = new ClassValueModel<string>(CredentialsResolverResources.UserNameLabel, "", false, false);
+                            valueModels.Add(_vmf.CreateViewModel<ClassValueViewModel<string>.Factory>().Invoke(ctx, null, userName));
+
+                            var pwd = new ClassValueModel<string>(CredentialsResolverResources.PasswordLabel, "", false, false);
+                            var pwdvm = _vmf.CreateViewModel<ClassValueViewModel<string>.Factory>().Invoke(ctx, null, pwd);
+                            pwdvm.RequestedKind = _frozenCtx.FindPersistenceObject<ControlKind>(NamedObjects.ControlKind_Kistl_App_GUI_PasswordKind);
+                            valueModels.Add(pwdvm);
+
+                            var dlgOK = false;
+
+                            var dlg = _vmf.CreateViewModel<ValueInputTaskViewModel.Factory>().Invoke(ctx, null, CredentialsResolverResources.DialogTitle, valueModels, (p) =>
+                            {
+                                this.UserName = userName.Value;
+                                this.Password = pwd.Value;
+                                dlgOK = true;
+                            });
+
+                            _vmf.ShowDialog(dlg);
+
+                            if (!dlgOK)
+                            {
+                                // No credentials? User pressed cancel? exit application
+                                Environment.Exit(1);
+                            }
+                        }
+                    }
+                }
+                finally
+                {
+                    _isEnsuringCredentials = false;
+                }
+            }
+        }
+
         public void InitCredentials(System.ServiceModel.Description.ClientCredentials c)
         {
             if (c == null) throw new ArgumentNullException("c");
 
-            EnsureUsername();
+            EnsureCredentials();
             c.UserName.UserName = UserName;
             c.UserName.Password = Password;
-        }
-
-        private void EnsureUsername()
-        {
-            lock (_lock) // singelton, once is enougth
-            {
-                if (string.IsNullOrEmpty(UserName))
-                {
-                    using (var ctx = _ctxFactory())
-                    {
-                        var valueModels = new List<BaseValueViewModel>();
-
-                        var userName = new ClassValueModel<string>("Username", "", false, false);
-                        valueModels.Add(_vmf.CreateViewModel<ClassValueViewModel<string>.Factory>().Invoke(ctx, null, userName));
-
-                        var pwd = new ClassValueModel<string>("Password", "", false, false);
-                        var pwdvm = _vmf.CreateViewModel<ClassValueViewModel<string>.Factory>().Invoke(ctx, null, pwd);
-                        pwdvm.RequestedKind = _frozenCtx.FindPersistenceObject<ControlKind>(NamedObjects.ControlKind_Kistl_App_GUI_PasswordKind);
-                        valueModels.Add(pwdvm);
-
-                        var dlgOK = false;
-
-                        var dlg = _vmf.CreateViewModel<ValueInputTaskViewModel.Factory>().Invoke(ctx, null, "Enter Credentials", valueModels, (p) =>
-                        {
-                            this.UserName = userName.Value;
-                            this.Password = pwd.Value;
-                            dlgOK = true;
-                        });
-
-                        _vmf.ShowDialog(dlg);
-
-                        if (!dlgOK)
-                        {
-                            // No credentials? User pressed cancel? exit application
-                            Environment.Exit(1);
-                        }
-                    }
-                }
-            }
         }
 
         public void InitWebRequest(WebRequest req)
         {
             if (req == null) throw new ArgumentNullException("req");
 
-            EnsureUsername();
+            EnsureCredentials();
             req.Credentials = new NetworkCredential(UserName, Password);
         }
 
         public void InvalidCredentials()
         {
-            // nothing to do
+            // Reset username/password
             UserName = null;
             Password = null;
         }
 
         internal string GetUsername()
         {
-            EnsureUsername();
+            EnsureCredentials();
             return UserName;
         }
     }
@@ -168,8 +189,8 @@ namespace Kistl.Client
     {
         private readonly BasicAuthCredentialsResolver _credentialResolver;
 
-        public BasicAuthIdentityResolver(IReadOnlyKistlContext resolverCtx, BasicAuthCredentialsResolver credentialResolver)
-            : base(resolverCtx)
+        public BasicAuthIdentityResolver(Func<IReadOnlyKistlContext> resolverCtxFactory, BasicAuthCredentialsResolver credentialResolver)
+            : base(resolverCtxFactory)
         {
             if (credentialResolver == null) throw new ArgumentNullException("credentialResolver");
 

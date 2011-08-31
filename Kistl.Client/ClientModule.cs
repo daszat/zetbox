@@ -80,7 +80,7 @@ namespace Kistl.Client
                 .As<IViewModelDependencies>();
 
             moduleBuilder
-                .Register<ThreadPrincipalResolver>(c=> new ThreadPrincipalResolver(c.Resolve<IReadOnlyKistlContext>()))
+                .Register<ThreadPrincipalResolver>(c=> new ThreadPrincipalResolver(c.Resolve<Func<IReadOnlyKistlContext>>()))
                 .As<IIdentityResolver>()
                 .InstancePerLifetimeScope();
 

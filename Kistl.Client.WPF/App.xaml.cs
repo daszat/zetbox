@@ -112,32 +112,44 @@ namespace Kistl.Client.WPF
 
                     container = CreateMasterContainer(config);
 
-                    // Init Resources
-                    var iconConverter = new IconConverter(container.Resolve<IFrozenContext>(), container.Resolve<IKistlContext>());
-                    this.Resources["IconConverter"] = iconConverter;
-                    this.Resources["ImageCtrlConverter"] = new ImageCtrlConverter(iconConverter);
+                    // Make Gendarme happy
+                    var resources = this.Resources;
+
+                    // Introduce noop converter to prevent them to ask for credentials during initialization
+                    resources["IconConverter"] = new NoopConverter();
+                    resources["ImageCtrlConverter"] = new NoopConverter();
+
+                    // Init all Converter that are not using a Context
                     var templateSelectorFactory = container.Resolve<Kistl.Client.WPF.Toolkit.VisualTypeTemplateSelector.Factory>();
-                    this.Resources["defaultTemplateSelector"] = templateSelectorFactory(null);
-                    this.Resources["listItemTemplateSelector"] = templateSelectorFactory("Kistl.App.GUI.SingleLineKind");
-                    this.Resources["dashBoardTemplateSelector"] = templateSelectorFactory("Kistl.App.GUI.DashboardKind");
+                    resources["defaultTemplateSelector"] = templateSelectorFactory(null);
+                    resources["listItemTemplateSelector"] = templateSelectorFactory("Kistl.App.GUI.SingleLineKind");
+                    resources["dashBoardTemplateSelector"] = templateSelectorFactory("Kistl.App.GUI.DashboardKind");
 
                     // Manually add DefaultStyles and DefaultViews
                     // Otherwise converter are unknown
-                    this.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Kistl.Client.WPF;component/View/DefaultStyles.xaml", UriKind.Relative) });
-                    this.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Kistl.Client.WPF;component/View/DefaultHighlightColorDefinitions.xaml", UriKind.Relative) });
+                    resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Kistl.Client.WPF;component/View/DefaultStyles.xaml", UriKind.Relative) });
+                    resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Kistl.Client.WPF;component/View/DefaultHighlightColorDefinitions.xaml", UriKind.Relative) });
                     // Load registrated dictionaries from autofac
                     foreach (var dict in container.Resolve<IEnumerable<Meta<ResourceDictionary>>>().Where(m => WPFHelper.RESOURCE_DICTIONARY_STYLE.Equals(m.Metadata[WPFHelper.RESOURCE_DICTIONARY_KIND])).Select(m => m.Value))
                     {
-                        this.Resources.MergedDictionaries.Add(dict);
+                        resources.MergedDictionaries.Add(dict);
                     }
 
 
-                    this.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Kistl.Client.WPF;component/View/DefaultViews.xaml", UriKind.Relative) });
+                    resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Kistl.Client.WPF;component/View/DefaultViews.xaml", UriKind.Relative) });
                     // Load registrated dictionaries from autofac
                     foreach (var dict in container.Resolve<IEnumerable<Meta<ResourceDictionary>>>().Where(m => WPFHelper.RESOURCE_DICTIONARY_VIEW.Equals(m.Metadata[WPFHelper.RESOURCE_DICTIONARY_KIND])).Select(m => m.Value))
                     {
-                        this.Resources.MergedDictionaries.Add(dict);
+                        resources.MergedDictionaries.Add(dict);
                     }
+
+                    // Init credentials explicit
+                    container.Resolve<ICredentialsResolver>().EnsureCredentials();
+
+                    // Create real converter after credentials are resolved
+                    var iconConverter = new IconConverter(container.Resolve<IFrozenContext>(), container.Resolve<IKistlContext>());
+                    resources["IconConverter"] = iconConverter;
+                    resources["ImageCtrlConverter"] = new ImageCtrlConverter(iconConverter);
 
                     // Focus nightmare
                     // http://stackoverflow.com/questions/673536/wpf-cant-set-focus-to-a-child-of-usercontrol/4785124#4785124
@@ -230,6 +242,7 @@ namespace Kistl.Client.WPF
 
         private static void ShowExceptionReporter(Exception ex)
         {
+            Logging.Client.Error("Unhandled Exception", ex);
             if (wpfResourcesInitialized && container != null)
             {
                 var vmf = container.Resolve<IViewModelFactory>();

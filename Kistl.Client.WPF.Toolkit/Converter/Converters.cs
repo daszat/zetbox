@@ -10,6 +10,25 @@ using System.Windows.Media;
 namespace Kistl.Client.WPF.Converter
 {
     /// <summary>
+    /// This converter does nothing
+    /// </summary>
+    [ValueConversion(typeof(object), typeof(object))]
+    public class NoopConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType,
+                            object parameter, System.Globalization.CultureInfo culture)
+        {
+            return Binding.DoNothing;
+        }
+
+        public object ConvertBack(object value, Type targetType,
+                            object parameter, System.Globalization.CultureInfo culture)
+        {
+            return Binding.DoNothing;
+        }
+    }
+
+    /// <summary>
     /// Converts a number N to (bool)(N &lt; parameter)
     /// </summary>
     [ValueConversion(typeof(object), typeof(bool))]

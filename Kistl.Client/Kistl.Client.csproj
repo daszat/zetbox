@@ -96,6 +96,11 @@
   <ItemGroup>
     <Compile Include="ClientModule.cs" />
     <Compile Include="CredentialsResolver.cs" />
+    <Compile Include="CredentialsResolverResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CredentialsResolverResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="GUI\IHasViewModel.cs" />
     <Compile Include="GUI\IRenderer.cs" />
     <Compile Include="GUI\ViewDescriptorAttribute.cs" />
@@ -322,6 +327,11 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="TheseMethodsShouldBeImplementedOnKistlObjects.cs" />
+    <EmbeddedResource Include="CredentialsResolverResources.de.resx" />
+    <EmbeddedResource Include="CredentialsResolverResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CredentialsResolverResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Models\FilterModelsResources.de.resx" />
     <EmbeddedResource Include="Models\FilterModelsResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

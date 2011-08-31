@@ -41,14 +41,27 @@ namespace Kistl.API.Common
 
     public abstract class BaseIdentityResolver : IIdentityResolver
     {
-        protected readonly IReadOnlyKistlContext resolverCtx;
+        private readonly Func<IReadOnlyKistlContext> resolverCtxFactory;
+        private IReadOnlyKistlContext _resolverCtx;
         protected readonly Dictionary<string, Identity> cache;
 
-        protected BaseIdentityResolver(IReadOnlyKistlContext resolverCtx)
+        protected BaseIdentityResolver(Func<IReadOnlyKistlContext> resolverCtxFactory)
         {
-            if (resolverCtx == null) throw new ArgumentNullException("resolverCtx");
-            this.resolverCtx = resolverCtx;
+            if (resolverCtxFactory == null) throw new ArgumentNullException("resolverCtxFactory");
+            this.resolverCtxFactory = resolverCtxFactory;
             cache = new Dictionary<string, Identity>();
+        }
+
+        protected IReadOnlyKistlContext ResolverCtx
+        {
+            get
+            {
+                if (_resolverCtx == null)
+                {
+                    _resolverCtx = resolverCtxFactory();
+                }
+                return _resolverCtx;
+            }
         }
 
         public abstract Identity GetCurrent();
@@ -72,7 +85,7 @@ namespace Kistl.API.Common
             }
             else
             {
-                result = cache[id] = resolverCtx.GetQuery<Identity>().Where(i => i.UserName.ToLower() == id).FirstOrDefault();
+                result = cache[id] = ResolverCtx.GetQuery<Identity>().Where(i => i.UserName.ToLower() == id).FirstOrDefault();
 
                 if (result == null)
                 {

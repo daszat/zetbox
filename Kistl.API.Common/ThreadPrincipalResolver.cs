@@ -14,8 +14,8 @@ namespace Kistl.API.Common
     public sealed class ThreadPrincipalResolver
         : BaseIdentityResolver
     {
-        public ThreadPrincipalResolver(IReadOnlyKistlContext resolverCtx)
-            : base(resolverCtx)
+        public ThreadPrincipalResolver(Func<IReadOnlyKistlContext> resolverCtxFactory)
+            : base(resolverCtxFactory)
         {
         }
 

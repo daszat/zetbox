@@ -10,6 +10,11 @@ namespace Kistl.API.Client
     public interface ICredentialsResolver
     {
         /// <summary>
+        /// Ensures that credentials are initialized
+        /// </summary>
+        void EnsureCredentials();
+
+        /// <summary>
         /// Initializes the given ClientCredentials
         /// </summary>
         /// <param name="c">ClientCredentials to initialize</param>
