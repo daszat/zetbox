@@ -24,25 +24,19 @@ namespace Kistl.Client.WPF.View
     /// Interaction logic for NullableBoolValueView.xaml
     /// </summary>
     [ViewDescriptor(Kistl.App.GUI.Toolkit.WPF)]
-    public partial class NullableBoolValueDropdownView : PropertyEditor, IHasViewModel<IValueViewModel<bool>>
+    public partial class NullableBoolValueDropdownView : PropertyEditor, IHasViewModel<NullableBoolPropertyViewModel>
     {
         public NullableBoolValueDropdownView()
         {
             if (DesignerProperties.GetIsInDesignMode(this)) return;
             InitializeComponent();
-
-            cbBool.ItemsSource = new[] { 
-                new KeyValuePair<bool?, string>(null, string.Empty),
-                new KeyValuePair<bool?, string>(true, true.ToString()),
-                new KeyValuePair<bool?, string>(false, false.ToString())
-            };
         }
 
-        #region IHasViewModel<IValueModel<bool>> Members
+        #region IHasViewModel<NullableBoolPropertyViewModel> Members
 
-        public IValueViewModel<bool> ViewModel
+        public NullableBoolPropertyViewModel ViewModel
         {
-            get { return (IValueViewModel<bool>)DataContext; }
+            get { return (NullableBoolPropertyViewModel)DataContext; }
         }
 
         #endregion

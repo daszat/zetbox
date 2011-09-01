@@ -11,6 +11,7 @@
     <ComboBox x:Name="cbBool"
               DisplayMemberPath="Value"
               SelectedValuePath="Key"
+              ItemsSource="{Binding PossibleValues}"
               IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertedBoolConverter}}"
               SelectedValue="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}">
         <ComboBox.ContextMenu>

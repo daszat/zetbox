@@ -160,7 +160,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                         ValueViewModelResources.ClearValueCommand_Name,
                         ValueViewModelResources.ClearValueCommand_Tooltip,
                         () => ClearValue(),
-                        () => AllowNullInput && !DataContext.IsReadonly && !IsReadOnly, 
+                        () => AllowNullInput && !DataContext.IsReadonly && !IsReadOnly,
                         null);
                     //_ClearValueCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.
                 }
@@ -899,7 +899,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                         ValueViewModelResources.EditCommand_Name,
                         ValueViewModelResources.EditCommand_Tooltip,
                         () => Edit(),
-                        () => !IsReadOnly, 
+                        () => !IsReadOnly,
                         null);
                 }
                 return _EditCommand;
@@ -1004,8 +1004,8 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
             protected override TimeSpan? GetValueFromModel()
             {
-                var val  = Parent.GetValueFromModel();
-                if(val == null) return null;
+                var val = Parent.GetValueFromModel();
+                if (val == null) return null;
                 return val.Value.TimeOfDay;
             }
 
@@ -1221,7 +1221,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
         {
             get
             {
-                var errors = new [] { base.Error, _datePartViewModel.Error, _timePartViewModel.Error };
+                var errors = new[] { base.Error, _datePartViewModel.Error, _timePartViewModel.Error };
                 return string.Join("\n", errors.Where(i => !string.IsNullOrEmpty(i)).ToArray());
             }
         }
@@ -1265,6 +1265,34 @@ namespace Kistl.Client.Presentables.ValueViewModels
         {
             base.NotifyValueChanged();
             OnPropertyChanged("Icon");
+        }
+
+        private KeyValuePair<bool?, string>[] _possibleValues;
+        public KeyValuePair<bool?, string>[] PossibleValues
+        {
+            get
+            {
+                if (_possibleValues == null)
+                {
+                    if (!usingDefinedPresentation)
+                    {
+                        _possibleValues = new[] { 
+                            new KeyValuePair<bool?, string>(null, ValueViewModelResources.Null),
+                            new KeyValuePair<bool?, string>(true, ValueViewModelResources.True),
+                            new KeyValuePair<bool?, string>(false, ValueViewModelResources.False)
+                        };
+                    }
+                    else
+                    {
+                        _possibleValues = new[] { 
+                            new KeyValuePair<bool?, string>(null, BoolModel.NullLabel),
+                            new KeyValuePair<bool?, string>(true, BoolModel.TrueLabel),
+                            new KeyValuePair<bool?, string>(false, BoolModel.FalseLabel)
+                        };
+                    }
+                }
+                return _possibleValues;
+            }
         }
 
         public override string FormattedValue
