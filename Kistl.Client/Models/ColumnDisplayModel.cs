@@ -11,6 +11,7 @@ namespace Kistl.Client.Models
     using Kistl.App.Base;
     using Kistl.App.Extensions;
     using Kistl.App.GUI;
+    using Kistl.Client;
     using Kistl.Client.Presentables;
     using Kistl.Client.Presentables.ValueViewModels;
     using System.Collections.ObjectModel;
@@ -211,7 +212,8 @@ namespace Kistl.Client.Models
             {
                 Header = m.GetLabel(),
                 Name = m.Name,
-                Type = ColumnDisplayModel.ColumnType.MethodModel
+                Type = ColumnDisplayModel.ColumnType.MethodModel,
+                RequestedWidth = ClientExtensions.WIDTH_NORMAL,
             };
         }
 
@@ -228,6 +230,7 @@ namespace Kistl.Client.Models
                 Name = string.Join(".", p.Select(i => i.Name).ToArray()),
                 Property = last,
                 Properties = p,
+                RequestedWidth = p.Last().GetDisplayWidth(),
             };
             switch (mode)
             {
