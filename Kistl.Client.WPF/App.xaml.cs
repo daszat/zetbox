@@ -127,16 +127,16 @@ namespace Kistl.Client.WPF
 
                     // Manually add DefaultStyles and DefaultViews
                     // Otherwise converter are unknown
-                    resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Kistl.Client.WPF;component/View/DefaultStyles.xaml", UriKind.Relative) });
-                    resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Kistl.Client.WPF;component/View/DefaultHighlightColorDefinitions.xaml", UriKind.Relative) });
+                    resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Kistl.Client.WPF;component/Styles/DefaultStyles.xaml", UriKind.Relative) });
+                    resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Kistl.Client.WPF;component/Styles/DefaultHighlightColorDefinitions.xaml", UriKind.Relative) });
+
                     // Load registrated dictionaries from autofac
                     foreach (var dict in container.Resolve<IEnumerable<Meta<ResourceDictionary>>>().Where(m => WPFHelper.RESOURCE_DICTIONARY_STYLE.Equals(m.Metadata[WPFHelper.RESOURCE_DICTIONARY_KIND])).Select(m => m.Value))
                     {
                         resources.MergedDictionaries.Add(dict);
                     }
 
-
-                    resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Kistl.Client.WPF;component/View/DefaultViews.xaml", UriKind.Relative) });
+                    resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Kistl.Client.WPF;component/Styles/DefaultViews.xaml", UriKind.Relative) });
                     // Load registrated dictionaries from autofac
                     foreach (var dict in container.Resolve<IEnumerable<Meta<ResourceDictionary>>>().Where(m => WPFHelper.RESOURCE_DICTIONARY_VIEW.Equals(m.Metadata[WPFHelper.RESOURCE_DICTIONARY_KIND])).Select(m => m.Value))
                     {
