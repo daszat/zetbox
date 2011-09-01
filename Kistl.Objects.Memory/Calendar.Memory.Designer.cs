@@ -167,7 +167,7 @@ namespace Kistl.App.Calendar
                         "Calendar",
                         null,
                         this,
-                        () => this.NotifyPropertyChanged("CalendarRules", null, null),
+                        () => { this.NotifyPropertyChanged("CalendarRules", null, null); if(OnCalendarRules_PostSetter != null && IsAttached) OnCalendarRules_PostSetter(this); },
                         serverList);
                 }
                 return _CalendarRules;
@@ -176,6 +176,7 @@ namespace Kistl.App.Calendar
     
         private OneNRelationList<Kistl.App.Calendar.CalendarRule> _CalendarRules;
 
+public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCalendarRules_PostSetter;
 
         /// <summary>
         /// Identity which changed this object
@@ -356,7 +357,7 @@ namespace Kistl.App.Calendar
                         "BaseCalendar",
                         null,
                         this,
-                        () => this.NotifyPropertyChanged("ChildCalendar", null, null),
+                        () => { this.NotifyPropertyChanged("ChildCalendar", null, null); if(OnChildCalendar_PostSetter != null && IsAttached) OnChildCalendar_PostSetter(this); },
                         serverList);
                 }
                 return _ChildCalendar;
@@ -365,6 +366,7 @@ namespace Kistl.App.Calendar
     
         private OneNRelationList<Kistl.App.Calendar.Calendar> _ChildCalendar;
 
+public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnChildCalendar_PostSetter;
 
         /// <summary>
         /// Identity which created this object

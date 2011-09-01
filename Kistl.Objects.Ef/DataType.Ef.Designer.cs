@@ -229,7 +229,7 @@ namespace Kistl.App.Base
                     _Constraints = new EntityCollectionWrapper<Kistl.App.Base.InstanceConstraint, Kistl.App.Base.InstanceConstraintEfImpl>(
                             this.Context, ConstraintsImpl,
                             () => this.NotifyPropertyChanging("Constraints", null, null, null),
-                            () => this.NotifyPropertyChanged("Constraints", null, null, null),
+                            () => { this.NotifyPropertyChanged("Constraints", null, null, null); if(OnConstraints_PostSetter != null && IsAttached) OnConstraints_PostSetter(this); },
                             (item) => item.NotifyPropertyChanging("Constrained", null, null, null),
                             (item) => item.NotifyPropertyChanged("Constrained", null, null, null));
                 }
@@ -260,6 +260,7 @@ namespace Kistl.App.Base
         private List<int> ConstraintsIds;
         private bool Constraints_was_eagerLoaded = false;
 
+public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnConstraints_PostSetter;
 
         /// <summary>
         /// Identity which created this object
@@ -675,7 +676,7 @@ namespace Kistl.App.Base
                     _Methods = new EntityCollectionWrapper<Kistl.App.Base.Method, Kistl.App.Base.MethodEfImpl>(
                             this.Context, MethodsImpl,
                             () => this.NotifyPropertyChanging("Methods", null, null, null),
-                            () => this.NotifyPropertyChanged("Methods", null, null, null),
+                            () => { this.NotifyPropertyChanged("Methods", null, null, null); if(OnMethods_PostSetter != null && IsAttached) OnMethods_PostSetter(this); },
                             (item) => item.NotifyPropertyChanging("ObjectClass", null, null, null),
                             (item) => item.NotifyPropertyChanged("ObjectClass", null, null, null));
                 }
@@ -706,6 +707,7 @@ namespace Kistl.App.Base
         private List<int> MethodsIds;
         private bool Methods_was_eagerLoaded = false;
 
+public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnMethods_PostSetter;
 
         /// <summary>
         /// Modul der Objektklasse
@@ -887,7 +889,7 @@ namespace Kistl.App.Base
                     _Properties = new EntityListWrapper<Kistl.App.Base.Property, Kistl.App.Base.PropertyEfImpl>(
                             this.Context, PropertiesImpl,
                             () => this.NotifyPropertyChanging("Properties", null, null, null),
-                            () => this.NotifyPropertyChanged("Properties", null, null, null),
+                            () => { this.NotifyPropertyChanged("Properties", null, null, null); if(OnProperties_PostSetter != null && IsAttached) OnProperties_PostSetter(this); },
                             (item) => item.NotifyPropertyChanging("ObjectClass", null, null, null),
                             (item) => item.NotifyPropertyChanged("ObjectClass", null, null, null), "ObjectClass", "Properties_pos");
                 }
@@ -918,6 +920,7 @@ namespace Kistl.App.Base
         private List<int> PropertiesIds;
         private bool Properties_was_eagerLoaded = false;
 
+public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProperties_PostSetter;
 
         /// <summary>
         /// Optional requested ControlKind

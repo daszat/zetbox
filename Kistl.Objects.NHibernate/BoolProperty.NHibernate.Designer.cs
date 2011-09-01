@@ -739,11 +739,11 @@ namespace Kistl.App.Base
             if (this.FalseIcon != null && this.FalseIcon.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.FalseIcon);
 
-            if (this.NullIcon != null && this.NullIcon.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.NullIcon);
-
             if (this.TrueIcon != null && this.TrueIcon.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.TrueIcon);
+
+            if (this.NullIcon != null && this.NullIcon.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.NullIcon);
 
             return result;
         }

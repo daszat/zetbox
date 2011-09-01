@@ -114,7 +114,7 @@ namespace Kistl.App.Test
                     _TestCustomObjects_List_Nav = new EntityCollectionWrapper<Kistl.App.Test.TestCustomObject, Kistl.App.Test.TestCustomObjectEfImpl>(
                             this.Context, TestCustomObjects_List_NavImpl,
                             () => this.NotifyPropertyChanging("TestCustomObjects_List_Nav", null, null, null),
-                            () => this.NotifyPropertyChanged("TestCustomObjects_List_Nav", null, null, null),
+                            () => { this.NotifyPropertyChanged("TestCustomObjects_List_Nav", null, null, null); if(OnTestCustomObjects_List_Nav_PostSetter != null && IsAttached) OnTestCustomObjects_List_Nav_PostSetter(this); },
                             (item) => item.NotifyPropertyChanging("MubBlah_Nav", null, null, null),
                             (item) => item.NotifyPropertyChanged("MubBlah_Nav", null, null, null));
                 }
@@ -143,6 +143,7 @@ namespace Kistl.App.Test
         private EntityCollectionWrapper<Kistl.App.Test.TestCustomObject, Kistl.App.Test.TestCustomObjectEfImpl> _TestCustomObjects_List_Nav;
 
 
+public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCustomObjects_List_Nav_PostSetter;
 
         /// <summary>
         /// 

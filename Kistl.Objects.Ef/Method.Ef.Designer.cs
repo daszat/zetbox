@@ -1124,7 +1124,7 @@ namespace Kistl.App.Base
                     _Parameter = new EntityListWrapper<Kistl.App.Base.BaseParameter, Kistl.App.Base.BaseParameterEfImpl>(
                             this.Context, ParameterImpl,
                             () => this.NotifyPropertyChanging("Parameter", null, null, null),
-                            () => this.NotifyPropertyChanged("Parameter", null, null, null),
+                            () => { this.NotifyPropertyChanged("Parameter", null, null, null); if(OnParameter_PostSetter != null && IsAttached) OnParameter_PostSetter(this); },
                             (item) => item.NotifyPropertyChanging("Method", null, null, null),
                             (item) => item.NotifyPropertyChanged("Method", null, null, null), "Method", "Parameter_pos");
                 }
@@ -1153,6 +1153,7 @@ namespace Kistl.App.Base
         private EntityListWrapper<Kistl.App.Base.BaseParameter, Kistl.App.Base.BaseParameterEfImpl> _Parameter;
 
 
+public static event PropertyListChangedHandler<Kistl.App.Base.Method> OnParameter_PostSetter;
 
         /// <summary>
         /// 

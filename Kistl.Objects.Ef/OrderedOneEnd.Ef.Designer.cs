@@ -61,7 +61,7 @@ namespace Kistl.App.Test
                     _NEnds = new EntityListWrapper<Kistl.App.Test.OrderedNEnd, Kistl.App.Test.OrderedNEndEfImpl>(
                             this.Context, NEndsImpl,
                             () => this.NotifyPropertyChanging("NEnds", null, null, null),
-                            () => this.NotifyPropertyChanged("NEnds", null, null, null),
+                            () => { this.NotifyPropertyChanged("NEnds", null, null, null); if(OnNEnds_PostSetter != null && IsAttached) OnNEnds_PostSetter(this); },
                             (item) => item.NotifyPropertyChanging("OneEnd", null, null, null),
                             (item) => item.NotifyPropertyChanged("OneEnd", null, null, null), "OneEnd", "NEnds_pos");
                 }
@@ -90,6 +90,7 @@ namespace Kistl.App.Test
         private EntityListWrapper<Kistl.App.Test.OrderedNEnd, Kistl.App.Test.OrderedNEndEfImpl> _NEnds;
 
 
+public static event PropertyListChangedHandler<Kistl.App.Test.OrderedOneEnd> OnNEnds_PostSetter;
 
         /// <summary>
         /// 

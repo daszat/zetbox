@@ -304,7 +304,7 @@ namespace Kistl.App.Base
                     _Constraints = new EntityCollectionWrapper<Kistl.App.Base.Constraint, Kistl.App.Base.ConstraintEfImpl>(
                             this.Context, ConstraintsImpl,
                             () => this.NotifyPropertyChanging("Constraints", null, null, null),
-                            () => this.NotifyPropertyChanged("Constraints", null, null, null),
+                            () => { this.NotifyPropertyChanged("Constraints", null, null, null); if(OnConstraints_PostSetter != null && IsAttached) OnConstraints_PostSetter(this); },
                             (item) => item.NotifyPropertyChanging("ConstrainedProperty", null, null, null),
                             (item) => item.NotifyPropertyChanged("ConstrainedProperty", null, null, null));
                 }
@@ -335,6 +335,7 @@ namespace Kistl.App.Base
         private List<int> ConstraintsIds;
         private bool Constraints_was_eagerLoaded = false;
 
+public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstraints_PostSetter;
 
         /// <summary>
         /// Identity which created this object

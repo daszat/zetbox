@@ -1024,6 +1024,7 @@ namespace Kistl.App.Base
         /// Parameter der Methode
         /// </summary>
         // object list property
+
         // Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
@@ -1039,7 +1040,7 @@ namespace Kistl.App.Base
                         "Parameter_pos",
                         this,
                         () => this.NotifyPropertyChanging("Parameter", null, null),
-                        () => this.NotifyPropertyChanged("Parameter", null, null),
+                        () => { this.NotifyPropertyChanged("Parameter", null, null); if(OnParameter_PostSetter != null && IsAttached) OnParameter_PostSetter(this); },
                         new ProjectedCollection<Kistl.App.Base.BaseParameterNHibernateImpl.BaseParameterProxy, Kistl.App.Base.BaseParameter>(
                             Proxy.Parameter,
                             p => (Kistl.App.Base.BaseParameter)OurContext.AttachAndWrap(p),
@@ -1050,6 +1051,7 @@ namespace Kistl.App.Base
         }
     
         private OneNRelationList<Kistl.App.Base.BaseParameter> _Parameter;
+public static event PropertyListChangedHandler<Kistl.App.Base.Method> OnParameter_PostSetter;
 
         /// <summary>
         /// 
@@ -1446,11 +1448,11 @@ namespace Kistl.App.Base
             if (this.Module != null && this.Module.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.Module);
 
-            if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.ChangedBy);
-
             if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.CreatedBy);
+
+            if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.ChangedBy);
 
             return result;
         }

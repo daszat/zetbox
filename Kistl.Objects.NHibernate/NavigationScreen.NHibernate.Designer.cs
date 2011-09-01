@@ -205,6 +205,7 @@ namespace Kistl.App.GUI
         /// 
         /// </summary>
         // object list property
+
         // Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
@@ -220,7 +221,7 @@ namespace Kistl.App.GUI
                         "Children_pos",
                         this,
                         () => this.NotifyPropertyChanging("Children", null, null),
-                        () => this.NotifyPropertyChanged("Children", null, null),
+                        () => { this.NotifyPropertyChanged("Children", null, null); if(OnChildren_PostSetter != null && IsAttached) OnChildren_PostSetter(this); },
                         new ProjectedCollection<Kistl.App.GUI.NavigationScreenNHibernateImpl.NavigationScreenProxy, Kistl.App.GUI.NavigationScreen>(
                             Proxy.Children,
                             p => (Kistl.App.GUI.NavigationScreen)OurContext.AttachAndWrap(p),
@@ -231,6 +232,7 @@ namespace Kistl.App.GUI
         }
     
         private OneNRelationList<Kistl.App.GUI.NavigationScreen> _Children;
+public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationScreen> OnChildren_PostSetter;
 
         /// <summary>
         /// Color of the ViewScreen or default color if empty

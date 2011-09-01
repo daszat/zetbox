@@ -20,6 +20,10 @@
 <%@ Parameter Name="otherName" Type="string" %>
 <%@ Parameter Name="referencedInterface" Type="string" %>
 <%@ Parameter Name="referencedProxy" Type="string" %>
+
+<%
+	var eventName = "On" + name + "_PostSetter";
+%>
         // <%= this.GetType() %>
         // implement the user-visible interface
         [XmlIgnore()]
@@ -35,7 +39,7 @@
                         <% if (!String.IsNullOrEmpty(positionPropertyName)) { %>"<%= positionPropertyName %>"<% } else { %>null<% } %>,
                         this,
                         () => this.NotifyPropertyChanging("<%= name %>", null, null),
-                        () => this.NotifyPropertyChanged("<%= name %>", null, null),
+                        () => { this.NotifyPropertyChanged("<%= name %>", null, null); if(<%= eventName %> != null && IsAttached) <%= eventName%>(this); },
                         new ProjectedCollection<<%= referencedProxy %>, <%= referencedInterface %>>(
                             Proxy.<%= name %>,
                             p => (<%= referencedInterface %>)OurContext.AttachAndWrap(p),

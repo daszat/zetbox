@@ -98,6 +98,7 @@ namespace Kistl.App.Test
         /// 
         /// </summary>
         // object list property
+
         // Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
@@ -113,7 +114,7 @@ namespace Kistl.App.Test
                         null,
                         this,
                         () => this.NotifyPropertyChanging("NSide", null, null),
-                        () => this.NotifyPropertyChanged("NSide", null, null),
+                        () => { this.NotifyPropertyChanged("NSide", null, null); if(OnNSide_PostSetter != null && IsAttached) OnNSide_PostSetter(this); },
                         new ProjectedCollection<Kistl.App.Test.One_to_N_relations_NNHibernateImpl.One_to_N_relations_NProxy, Kistl.App.Test.One_to_N_relations_N>(
                             Proxy.NSide,
                             p => (Kistl.App.Test.One_to_N_relations_N)OurContext.AttachAndWrap(p),
@@ -124,6 +125,7 @@ namespace Kistl.App.Test
         }
     
         private OneNRelationList<Kistl.App.Test.One_to_N_relations_N> _NSide;
+public static event PropertyListChangedHandler<Kistl.App.Test.One_to_N_relations_One> OnNSide_PostSetter;
 
         public override Type GetImplementedInterface()
         {

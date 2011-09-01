@@ -112,7 +112,7 @@ namespace Kistl.App.Base
                         "Enumeration",
                         "EnumerationEntries_pos",
                         this,
-                        () => this.NotifyPropertyChanged("EnumerationEntries", null, null),
+                        () => { this.NotifyPropertyChanged("EnumerationEntries", null, null); if(OnEnumerationEntries_PostSetter != null && IsAttached) OnEnumerationEntries_PostSetter(this); },
                         serverList);
                 }
                 return _EnumerationEntries;
@@ -121,6 +121,7 @@ namespace Kistl.App.Base
     
         private OneNRelationList<Kistl.App.Base.EnumerationEntry> _EnumerationEntries;
 
+public static event PropertyListChangedHandler<Kistl.App.Base.Enumeration> OnEnumerationEntries_PostSetter;
 
         /// <summary>
         /// Returns the resulting Type of this Datatype Meta Object.

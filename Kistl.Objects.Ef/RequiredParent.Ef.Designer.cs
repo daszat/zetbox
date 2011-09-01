@@ -61,7 +61,7 @@ namespace Kistl.App.Test
                     _Children = new EntityCollectionWrapper<Kistl.App.Test.RequiredParentChild, Kistl.App.Test.RequiredParentChildEfImpl>(
                             this.Context, ChildrenImpl,
                             () => this.NotifyPropertyChanging("Children", null, null, null),
-                            () => this.NotifyPropertyChanged("Children", null, null, null),
+                            () => { this.NotifyPropertyChanged("Children", null, null, null); if(OnChildren_PostSetter != null && IsAttached) OnChildren_PostSetter(this); },
                             (item) => item.NotifyPropertyChanging("Parent", null, null, null),
                             (item) => item.NotifyPropertyChanged("Parent", null, null, null));
                 }
@@ -90,6 +90,7 @@ namespace Kistl.App.Test
         private EntityCollectionWrapper<Kistl.App.Test.RequiredParentChild, Kistl.App.Test.RequiredParentChildEfImpl> _Children;
 
 
+public static event PropertyListChangedHandler<Kistl.App.Test.RequiredParent> OnChildren_PostSetter;
 
         /// <summary>
         /// dummy property

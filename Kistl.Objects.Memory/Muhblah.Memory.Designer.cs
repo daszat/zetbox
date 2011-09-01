@@ -112,7 +112,7 @@ namespace Kistl.App.Test
                         "MubBlah_Nav",
                         null,
                         this,
-                        () => this.NotifyPropertyChanged("TestCustomObjects_List_Nav", null, null),
+                        () => { this.NotifyPropertyChanged("TestCustomObjects_List_Nav", null, null); if(OnTestCustomObjects_List_Nav_PostSetter != null && IsAttached) OnTestCustomObjects_List_Nav_PostSetter(this); },
                         serverList);
                 }
                 return _TestCustomObjects_List_Nav;
@@ -121,6 +121,7 @@ namespace Kistl.App.Test
     
         private OneNRelationList<Kistl.App.Test.TestCustomObject> _TestCustomObjects_List_Nav;
 
+public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCustomObjects_List_Nav_PostSetter;
 
         /// <summary>
         /// 

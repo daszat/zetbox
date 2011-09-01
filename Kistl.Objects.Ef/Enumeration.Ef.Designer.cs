@@ -114,7 +114,7 @@ namespace Kistl.App.Base
                     _EnumerationEntries = new EntityListWrapper<Kistl.App.Base.EnumerationEntry, Kistl.App.Base.EnumerationEntryEfImpl>(
                             this.Context, EnumerationEntriesImpl,
                             () => this.NotifyPropertyChanging("EnumerationEntries", null, null, null),
-                            () => this.NotifyPropertyChanged("EnumerationEntries", null, null, null),
+                            () => { this.NotifyPropertyChanged("EnumerationEntries", null, null, null); if(OnEnumerationEntries_PostSetter != null && IsAttached) OnEnumerationEntries_PostSetter(this); },
                             (item) => item.NotifyPropertyChanging("Enumeration", null, null, null),
                             (item) => item.NotifyPropertyChanged("Enumeration", null, null, null), "Enumeration", "EnumerationEntries_pos");
                 }
@@ -143,6 +143,7 @@ namespace Kistl.App.Base
         private EntityListWrapper<Kistl.App.Base.EnumerationEntry, Kistl.App.Base.EnumerationEntryEfImpl> _EnumerationEntries;
 
 
+public static event PropertyListChangedHandler<Kistl.App.Base.Enumeration> OnEnumerationEntries_PostSetter;
 
         /// <summary>
         /// Returns the resulting Type of this Datatype Meta Object.

@@ -49,6 +49,7 @@ namespace Kistl.App.Test
         /// 
         /// </summary>
         // object list property
+
         // Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
@@ -64,7 +65,7 @@ namespace Kistl.App.Test
                         "gute_Antworten_pos",
                         this,
                         () => this.NotifyPropertyChanging("Antworten", null, null),
-                        () => this.NotifyPropertyChanged("Antworten", null, null),
+                        () => { this.NotifyPropertyChanged("Antworten", null, null); if(OnAntworten_PostSetter != null && IsAttached) OnAntworten_PostSetter(this); },
                         new ProjectedCollection<Kistl.App.Test.AntwortNHibernateImpl.AntwortProxy, Kistl.App.Test.Antwort>(
                             Proxy.Antworten,
                             p => (Kistl.App.Test.Antwort)OurContext.AttachAndWrap(p),
@@ -77,6 +78,7 @@ namespace Kistl.App.Test
         private OneNRelationList<Kistl.App.Test.Antwort> _Antworten;
         private List<int> AntwortenIds;
         private bool Antworten_was_eagerLoaded = false;
+public static event PropertyListChangedHandler<Kistl.App.Test.Fragebogen> OnAntworten_PostSetter;
 
         /// <summary>
         /// 

@@ -116,7 +116,7 @@ namespace Kistl.App.Test
                         "TestCustomObjects_Nav",
                         null,
                         this,
-                        () => this.NotifyPropertyChanged("MubBlah_List_Nav", null, null),
+                        () => { this.NotifyPropertyChanged("MubBlah_List_Nav", null, null); if(OnMubBlah_List_Nav_PostSetter != null && IsAttached) OnMubBlah_List_Nav_PostSetter(this); },
                         serverList);
                 }
                 return _MubBlah_List_Nav;
@@ -125,6 +125,7 @@ namespace Kistl.App.Test
     
         private OneNRelationList<Kistl.App.Test.Muhblah> _MubBlah_List_Nav;
 
+public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> OnMubBlah_List_Nav_PostSetter;
 
         /// <summary>
         /// 
@@ -526,7 +527,7 @@ namespace Kistl.App.Test
 				        = new ClientValueCollectionWrapper<TestCustomObject, Kistl.App.Test.TestPhoneCompoundObject, TestCustomObject_PhoneNumbersOther_CollectionEntry, TestCustomObject_PhoneNumbersOther_CollectionEntryMemoryImpl, ObservableCollection<TestCustomObject_PhoneNumbersOther_CollectionEntryMemoryImpl>>(
 							this.Context,
 				            this, 
-				            () => this.NotifyPropertyChanged("PhoneNumbersOther", null, null),
+				            () => { this.NotifyPropertyChanged("PhoneNumbersOther", null, null); if(OnPhoneNumbersOther_PostSetter != null && IsAttached) OnPhoneNumbersOther_PostSetter(this); },
 				            _PhoneNumbersOtherCollection);
 				}
 				return _PhoneNumbersOther;
@@ -535,6 +536,7 @@ namespace Kistl.App.Test
 
 		private ClientValueCollectionWrapper<TestCustomObject, Kistl.App.Test.TestPhoneCompoundObject, TestCustomObject_PhoneNumbersOther_CollectionEntry, TestCustomObject_PhoneNumbersOther_CollectionEntryMemoryImpl, ObservableCollection<TestCustomObject_PhoneNumbersOther_CollectionEntryMemoryImpl>> _PhoneNumbersOther;
 		private ObservableCollection<TestCustomObject_PhoneNumbersOther_CollectionEntryMemoryImpl> _PhoneNumbersOtherCollection = new ObservableCollection<TestCustomObject_PhoneNumbersOther_CollectionEntryMemoryImpl>();
+public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> OnPhoneNumbersOther_PostSetter;
 
         public override Type GetImplementedInterface()
         {

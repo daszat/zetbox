@@ -70,7 +70,7 @@ namespace Kistl.App.Test
                         "Fragebogen",
                         "gute_Antworten_pos",
                         this,
-                        () => this.NotifyPropertyChanged("Antworten", null, null),
+                        () => { this.NotifyPropertyChanged("Antworten", null, null); if(OnAntworten_PostSetter != null && IsAttached) OnAntworten_PostSetter(this); },
                         serverList);
                 }
                 return _Antworten;
@@ -81,6 +81,7 @@ namespace Kistl.App.Test
 
         private List<int> AntwortenIds;
         private bool Antworten_was_eagerLoaded = false;
+public static event PropertyListChangedHandler<Kistl.App.Test.Fragebogen> OnAntworten_PostSetter;
 
         /// <summary>
         /// 

@@ -790,7 +790,7 @@ namespace ZBox.App.SchemaMigration
                     _SourceTables = new EntityCollectionWrapper<ZBox.App.SchemaMigration.SourceTable, ZBox.App.SchemaMigration.SourceTableEfImpl>(
                             this.Context, SourceTablesImpl,
                             () => this.NotifyPropertyChanging("SourceTables", null, null, null),
-                            () => this.NotifyPropertyChanged("SourceTables", null, null, null),
+                            () => { this.NotifyPropertyChanged("SourceTables", null, null, null); if(OnSourceTables_PostSetter != null && IsAttached) OnSourceTables_PostSetter(this); },
                             (item) => item.NotifyPropertyChanging("StagingDatabase", null, null, null),
                             (item) => item.NotifyPropertyChanged("StagingDatabase", null, null, null));
                 }
@@ -819,6 +819,7 @@ namespace ZBox.App.SchemaMigration
         private EntityCollectionWrapper<ZBox.App.SchemaMigration.SourceTable, ZBox.App.SchemaMigration.SourceTableEfImpl> _SourceTables;
 
 
+public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.StagingDatabase> OnSourceTables_PostSetter;
 
         public override Type GetImplementedInterface()
         {

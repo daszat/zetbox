@@ -407,6 +407,7 @@ namespace Kistl.API
     public delegate void PropertyGetterHandler<T, V>(T obj, PropertyGetterEventArgs<V> e);
     public delegate void PropertyPreSetterHandler<T, V>(T obj, PropertyPreSetterEventArgs<V> e);
     public delegate void PropertyPostSetterHandler<T, V>(T obj, PropertyPostSetterEventArgs<V> e);
+    public delegate void PropertyListChangedHandler<T>(T obj);
 
     /// <summary>
     /// Provides a default sort order for lists

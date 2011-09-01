@@ -61,7 +61,7 @@ namespace Kistl.App.Projekte
                     _Auftraege = new EntityCollectionWrapper<Kistl.App.Projekte.Auftrag, Kistl.App.Projekte.AuftragEfImpl>(
                             this.Context, AuftraegeImpl,
                             () => this.NotifyPropertyChanging("Auftraege", null, null, null),
-                            () => this.NotifyPropertyChanged("Auftraege", null, null, null),
+                            () => { this.NotifyPropertyChanged("Auftraege", null, null, null); if(OnAuftraege_PostSetter != null && IsAttached) OnAuftraege_PostSetter(this); },
                             (item) => item.NotifyPropertyChanging("Projekt", null, null, null),
                             (item) => item.NotifyPropertyChanged("Projekt", null, null, null));
                 }
@@ -90,6 +90,7 @@ namespace Kistl.App.Projekte
         private EntityCollectionWrapper<Kistl.App.Projekte.Auftrag, Kistl.App.Projekte.AuftragEfImpl> _Auftraege;
 
 
+public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuftraege_PostSetter;
 
         /// <summary>
         /// 
@@ -658,7 +659,7 @@ namespace Kistl.App.Projekte
                     _Tasks = new EntityCollectionWrapper<Kistl.App.Projekte.Task, Kistl.App.Projekte.TaskEfImpl>(
                             this.Context, TasksImpl,
                             () => this.NotifyPropertyChanging("Tasks", null, null, null),
-                            () => this.NotifyPropertyChanged("Tasks", null, null, null),
+                            () => { this.NotifyPropertyChanged("Tasks", null, null, null); if(OnTasks_PostSetter != null && IsAttached) OnTasks_PostSetter(this); },
                             (item) => item.NotifyPropertyChanging("Projekt", null, null, null),
                             (item) => item.NotifyPropertyChanged("Projekt", null, null, null));
                 }
@@ -687,6 +688,7 @@ namespace Kistl.App.Projekte
         private EntityCollectionWrapper<Kistl.App.Projekte.Task, Kistl.App.Projekte.TaskEfImpl> _Tasks;
 
 
+public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTasks_PostSetter;
 
         public override Type GetImplementedInterface()
         {

@@ -49,6 +49,7 @@ namespace Kistl.App.Base
         /// 
         /// </summary>
         // object list property
+
         // Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
@@ -64,7 +65,7 @@ namespace Kistl.App.Base
                         null,
                         this,
                         () => this.NotifyPropertyChanging("AccessControlList", null, null),
-                        () => this.NotifyPropertyChanged("AccessControlList", null, null),
+                        () => { this.NotifyPropertyChanged("AccessControlList", null, null); if(OnAccessControlList_PostSetter != null && IsAttached) OnAccessControlList_PostSetter(this); },
                         new ProjectedCollection<Kistl.App.Base.AccessControlNHibernateImpl.AccessControlProxy, Kistl.App.Base.AccessControl>(
                             Proxy.AccessControlList,
                             p => (Kistl.App.Base.AccessControl)OurContext.AttachAndWrap(p),
@@ -75,6 +76,7 @@ namespace Kistl.App.Base
         }
     
         private OneNRelationList<Kistl.App.Base.AccessControl> _AccessControlList;
+public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnAccessControlList_PostSetter;
 
         /// <summary>
         /// Pointer auf die Basisklasse
@@ -275,6 +277,7 @@ namespace Kistl.App.Base
         /// 
         /// </summary>
         // object list property
+
         // Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
@@ -290,7 +293,7 @@ namespace Kistl.App.Base
                         null,
                         this,
                         () => this.NotifyPropertyChanging("FilterConfigurations", null, null),
-                        () => this.NotifyPropertyChanged("FilterConfigurations", null, null),
+                        () => { this.NotifyPropertyChanged("FilterConfigurations", null, null); if(OnFilterConfigurations_PostSetter != null && IsAttached) OnFilterConfigurations_PostSetter(this); },
                         new ProjectedCollection<Kistl.App.GUI.ObjectClassFilterConfigurationNHibernateImpl.ObjectClassFilterConfigurationProxy, Kistl.App.GUI.ObjectClassFilterConfiguration>(
                             Proxy.FilterConfigurations,
                             p => (Kistl.App.GUI.ObjectClassFilterConfiguration)OurContext.AttachAndWrap(p),
@@ -301,6 +304,7 @@ namespace Kistl.App.Base
         }
     
         private OneNRelationList<Kistl.App.GUI.ObjectClassFilterConfiguration> _FilterConfigurations;
+public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnFilterConfigurations_PostSetter;
 
         /// <summary>
         /// Interfaces der Objektklasse
@@ -482,6 +486,7 @@ namespace Kistl.App.Base
         /// Liste der vererbten Klassen
         /// </summary>
         // object list property
+
         // Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
@@ -497,7 +502,7 @@ namespace Kistl.App.Base
                         null,
                         this,
                         () => this.NotifyPropertyChanging("SubClasses", null, null),
-                        () => this.NotifyPropertyChanged("SubClasses", null, null),
+                        () => { this.NotifyPropertyChanged("SubClasses", null, null); if(OnSubClasses_PostSetter != null && IsAttached) OnSubClasses_PostSetter(this); },
                         new ProjectedCollection<Kistl.App.Base.ObjectClassNHibernateImpl.ObjectClassProxy, Kistl.App.Base.ObjectClass>(
                             Proxy.SubClasses,
                             p => (Kistl.App.Base.ObjectClass)OurContext.AttachAndWrap(p),
@@ -508,6 +513,7 @@ namespace Kistl.App.Base
         }
     
         private OneNRelationList<Kistl.App.Base.ObjectClass> _SubClasses;
+public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSubClasses_PostSetter;
 
         /// <summary>
         /// Tabellenname in der Datenbank

@@ -61,7 +61,7 @@ namespace Kistl.App.Base
                     _AccessControlList = new EntityCollectionWrapper<Kistl.App.Base.AccessControl, Kistl.App.Base.AccessControlEfImpl>(
                             this.Context, AccessControlListImpl,
                             () => this.NotifyPropertyChanging("AccessControlList", null, null, null),
-                            () => this.NotifyPropertyChanged("AccessControlList", null, null, null),
+                            () => { this.NotifyPropertyChanged("AccessControlList", null, null, null); if(OnAccessControlList_PostSetter != null && IsAttached) OnAccessControlList_PostSetter(this); },
                             (item) => item.NotifyPropertyChanging("ObjectClass", null, null, null),
                             (item) => item.NotifyPropertyChanged("ObjectClass", null, null, null));
                 }
@@ -90,6 +90,7 @@ namespace Kistl.App.Base
         private EntityCollectionWrapper<Kistl.App.Base.AccessControl, Kistl.App.Base.AccessControlEfImpl> _AccessControlList;
 
 
+public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnAccessControlList_PostSetter;
 
         /// <summary>
         /// Pointer auf die Basisklasse
@@ -333,7 +334,7 @@ namespace Kistl.App.Base
                     _FilterConfigurations = new EntityCollectionWrapper<Kistl.App.GUI.ObjectClassFilterConfiguration, Kistl.App.GUI.ObjectClassFilterConfigurationEfImpl>(
                             this.Context, FilterConfigurationsImpl,
                             () => this.NotifyPropertyChanging("FilterConfigurations", null, null, null),
-                            () => this.NotifyPropertyChanged("FilterConfigurations", null, null, null),
+                            () => { this.NotifyPropertyChanged("FilterConfigurations", null, null, null); if(OnFilterConfigurations_PostSetter != null && IsAttached) OnFilterConfigurations_PostSetter(this); },
                             (item) => item.NotifyPropertyChanging("ObjectClass", null, null, null),
                             (item) => item.NotifyPropertyChanged("ObjectClass", null, null, null));
                 }
@@ -362,6 +363,7 @@ namespace Kistl.App.Base
         private EntityCollectionWrapper<Kistl.App.GUI.ObjectClassFilterConfiguration, Kistl.App.GUI.ObjectClassFilterConfigurationEfImpl> _FilterConfigurations;
 
 
+public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnFilterConfigurations_PostSetter;
 
         /// <summary>
         /// Interfaces der Objektklasse
@@ -594,7 +596,7 @@ namespace Kistl.App.Base
                     _SubClasses = new EntityCollectionWrapper<Kistl.App.Base.ObjectClass, Kistl.App.Base.ObjectClassEfImpl>(
                             this.Context, SubClassesImpl,
                             () => this.NotifyPropertyChanging("SubClasses", null, null, null),
-                            () => this.NotifyPropertyChanged("SubClasses", null, null, null),
+                            () => { this.NotifyPropertyChanged("SubClasses", null, null, null); if(OnSubClasses_PostSetter != null && IsAttached) OnSubClasses_PostSetter(this); },
                             (item) => item.NotifyPropertyChanging("BaseObjectClass", null, null, null),
                             (item) => item.NotifyPropertyChanged("BaseObjectClass", null, null, null));
                 }
@@ -623,6 +625,7 @@ namespace Kistl.App.Base
         private EntityCollectionWrapper<Kistl.App.Base.ObjectClass, Kistl.App.Base.ObjectClassEfImpl> _SubClasses;
 
 
+public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSubClasses_PostSetter;
 
         /// <summary>
         /// Tabellenname in der Datenbank

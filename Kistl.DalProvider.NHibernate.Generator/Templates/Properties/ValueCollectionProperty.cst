@@ -27,6 +27,10 @@
 <%@ Parameter Name="orderByValue" Type="bool" %>
 <%@ Parameter Name="moduleNamespace" Type="string" %>
 <%@ Parameter Name="ListOrCollection" Type="string" %>
+
+<%
+	var eventName = "On" + name + "_PostSetter";
+%>
         // BEGIN <%= this.GetType() %>
 <% AddSerialization(serializationList, underlyingCollectionName); %>
         <%= GetModifiers() %> <%= exposedCollectionInterface %><<%= referencedType %>> <%= name %>
@@ -38,7 +42,7 @@
                     <%= backingName %> = new <%= backingCollectionType %>(
                             this.Context,
                             this,
-                            () => this.NotifyPropertyChanged("<%= name %>", null, null),
+                            () => { this.NotifyPropertyChanged("<%= name %>", null, null); if(<%= eventName %> != null && IsAttached) <%= eventName%>(this); },
                             <%= underlyingCollectionName %>);
                 }
                 return <%= backingName %>;

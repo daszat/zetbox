@@ -1315,11 +1315,11 @@ namespace Kistl.App.Base
             if (this.Type != null && this.Type.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.Type);
 
-            if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.ChangedBy);
-
             if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.CreatedBy);
+
+            if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.ChangedBy);
 
             return result;
         }

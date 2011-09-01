@@ -24,6 +24,7 @@ namespace Kistl.Generator.Templates
                 if (((EnumerationProperty)p).IsList)
                 {
                     ApplyEnumerationListTemplate((EnumerationProperty)p);
+                    ApplyListChangedEvent(p);
                 }
                 else
                 {
@@ -33,13 +34,20 @@ namespace Kistl.Generator.Templates
             }
             else if (p is ObjectReferenceProperty)
             {
-                if (((ObjectReferenceProperty)p).IsList())
+                var orp = (ObjectReferenceProperty)p;
+                if (orp.IsList())
                 {
-                    ApplyObjectReferenceListTemplate((ObjectReferenceProperty)p);
+                    ApplyObjectReferenceListTemplate(orp);
+                    var rel = Kistl.App.Extensions.RelationExtensions.Lookup(ctx, orp);
+                    if (rel.GetRelationType() == API.RelationType.one_n)
+                    {
+                        // TODO: No idea how to implement this for n:m Relations
+                        ApplyListChangedEvent(p);
+                    }
                 }
                 else
                 {
-                    ApplyObjectReferencePropertyTemplate((ObjectReferenceProperty)p);
+                    ApplyObjectReferencePropertyTemplate(orp);
                     ApplyPropertyEvents(p, false);
                 }
             }
@@ -53,6 +61,7 @@ namespace Kistl.Generator.Templates
                 if (((CompoundObjectProperty)p).IsList)
                 {
                     ApplyCompoundObjectListTemplate((CompoundObjectProperty)p);
+                    ApplyListChangedEvent(p);
                 }
                 else
                 {
@@ -71,6 +80,7 @@ namespace Kistl.Generator.Templates
                 else if (vtp.IsList)
                 {
                     ApplyValueTypeListTemplate(vtp);
+                    ApplyListChangedEvent(p);
                 }
                 else
                 {
@@ -87,6 +97,11 @@ namespace Kistl.Generator.Templates
         protected virtual void ApplyPropertyEvents(Property p, bool isReadOnly)
         {
             Properties.PropertyEvents.Call(Host, ctx, p, isReadOnly);
+        }
+
+        protected virtual void ApplyListChangedEvent(Property p)
+        {
+            Properties.PropertyListChangedEvent.Call(Host, ctx, p);
         }
 
         protected virtual void ApplyEnumerationListTemplate(EnumerationProperty prop)

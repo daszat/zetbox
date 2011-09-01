@@ -562,6 +562,7 @@ namespace ZBox.App.SchemaMigration
         /// 
         /// </summary>
         // object list property
+
         // Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
@@ -577,7 +578,7 @@ namespace ZBox.App.SchemaMigration
                         null,
                         this,
                         () => this.NotifyPropertyChanging("StagingDatabases", null, null),
-                        () => this.NotifyPropertyChanged("StagingDatabases", null, null),
+                        () => { this.NotifyPropertyChanged("StagingDatabases", null, null); if(OnStagingDatabases_PostSetter != null && IsAttached) OnStagingDatabases_PostSetter(this); },
                         new ProjectedCollection<ZBox.App.SchemaMigration.StagingDatabaseNHibernateImpl.StagingDatabaseProxy, ZBox.App.SchemaMigration.StagingDatabase>(
                             Proxy.StagingDatabases,
                             p => (ZBox.App.SchemaMigration.StagingDatabase)OurContext.AttachAndWrap(p),
@@ -588,6 +589,7 @@ namespace ZBox.App.SchemaMigration
         }
     
         private OneNRelationList<ZBox.App.SchemaMigration.StagingDatabase> _StagingDatabases;
+public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.MigrationProject> OnStagingDatabases_PostSetter;
 
         /// <summary>
         /// Creates a mapping report
@@ -871,11 +873,11 @@ namespace ZBox.App.SchemaMigration
             if (this.DestinationModule != null && this.DestinationModule.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.DestinationModule);
 
-            if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.ChangedBy);
-
             if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.CreatedBy);
+
+            if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.ChangedBy);
 
             return result;
         }

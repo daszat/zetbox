@@ -29,7 +29,8 @@
     
     // whether or not the collection will be eagerly loaded
     bool eagerLoading = relEnd.Navigator != null && relEnd.Navigator.EagerLoading;
-    
+
+   	var eventName = "On" + name + "_PostSetter";
 %>
         // <%= this.GetType() %>
         // implement the user-visible interface
@@ -67,7 +68,7 @@
                         "<%= otherName %>",
                         <% if (!String.IsNullOrEmpty(positionPropertyName)) { %>"<%= positionPropertyName %>"<% } else { %>null<% } %>,
                         this,
-                        () => this.NotifyPropertyChanged("<%= name %>", null, null),
+                        () => { this.NotifyPropertyChanged("<%= name %>", null, null); if(<%= eventName %> != null && IsAttached) <%= eventName%>(this); },
                         serverList);
                 }
                 return <%= wrapperName %>;

@@ -49,6 +49,7 @@ namespace Kistl.App.Test
         /// 
         /// </summary>
         // object list property
+
         // Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
@@ -64,7 +65,7 @@ namespace Kistl.App.Test
                         "NEnds_pos",
                         this,
                         () => this.NotifyPropertyChanging("NEnds", null, null),
-                        () => this.NotifyPropertyChanged("NEnds", null, null),
+                        () => { this.NotifyPropertyChanged("NEnds", null, null); if(OnNEnds_PostSetter != null && IsAttached) OnNEnds_PostSetter(this); },
                         new ProjectedCollection<Kistl.App.Test.OrderedNEndNHibernateImpl.OrderedNEndProxy, Kistl.App.Test.OrderedNEnd>(
                             Proxy.NEnds,
                             p => (Kistl.App.Test.OrderedNEnd)OurContext.AttachAndWrap(p),
@@ -75,6 +76,7 @@ namespace Kistl.App.Test
         }
     
         private OneNRelationList<Kistl.App.Test.OrderedNEnd> _NEnds;
+public static event PropertyListChangedHandler<Kistl.App.Test.OrderedOneEnd> OnNEnds_PostSetter;
 
         /// <summary>
         /// 

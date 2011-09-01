@@ -75,7 +75,9 @@ RelationEnd relEnd = rel.GetEndFromRole(endRole);
     // override and ignore Base's notion of wrapper classes
     wrapperClass = rel.NeedsPositionStorage(otherEnd.GetRole()) ? "EntityListWrapper" : "EntityCollectionWrapper";
 
-#line 47 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
+	var eventName = "On" + name + "_PostSetter";
+
+#line 49 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
 this.WriteObjects("           // ",  this.GetType() , "\r\n");
 this.WriteObjects("        // implement the user-visible interface\r\n");
 this.WriteObjects("        [XmlIgnore()]\r\n");
@@ -89,17 +91,17 @@ this.WriteObjects("                {\r\n");
 this.WriteObjects("                    ",  wrapperName , " = new ",  wrapperClass , "<",  referencedInterface , ", ",  referencedImplementation , ">(\r\n");
 this.WriteObjects("                            this.Context, ",  efName , ",\r\n");
 this.WriteObjects("                            () => this.NotifyPropertyChanging(\"",  name , "\", null, null, null),\r\n");
-this.WriteObjects("                            () => this.NotifyPropertyChanged(\"",  name , "\", null, null, null),\r\n");
+this.WriteObjects("                            () => { this.NotifyPropertyChanged(\"",  name , "\", null, null, null); if(",  eventName , " != null && IsAttached) ",  eventName, "(this); },\r\n");
 this.WriteObjects("                            (item) => item.NotifyPropertyChanging(\"",  otherName , "\", null, null, null),\r\n");
 this.WriteObjects("                            (item) => item.NotifyPropertyChanged(\"",  otherName , "\", null, null, null)");
-#line 63 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 65 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
 // TODO: improve this!
     if (rel.NeedsPositionStorage(otherEnd.GetRole()))
     {
         this.WriteObjects(", \"", relEnd.RoleName, "\"");
     }
                             
-#line 68 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 70 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
 this.WriteObjects("",  positionPropertyNameArgument , ");\r\n");
 this.WriteObjects("                }\r\n");
 this.WriteObjects("                return ",  wrapperName , ";\r\n");
@@ -126,19 +128,19 @@ this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        private ",  wrapperClass , "<",  referencedInterface , ", ",  referencedImplementation , "> ",  wrapperName , ";\r\n");
 this.WriteObjects("\r\n");
-#line 94 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 96 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
 if (eagerLoading) { 
-#line 95 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 97 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
 this.WriteObjects("        private List<int> ",  name , "Ids;\r\n");
 this.WriteObjects("        private bool ",  name , "_was_eagerLoaded = false;\r\n");
-#line 98 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 100 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
 if (serializationList != null)
         {
             serializationList.Add("Serialization.EagerLoadingSerialization", Kistl.Generator.Templates.Serialization.SerializerType.Binary, null, null, name, true, false, null);
         }
     }
 
-#line 104 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 106 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
 this.WriteObjects("\r\n");
 
         }

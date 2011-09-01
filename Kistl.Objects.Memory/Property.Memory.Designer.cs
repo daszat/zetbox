@@ -293,7 +293,7 @@ namespace Kistl.App.Base
                         "ConstrainedProperty",
                         null,
                         this,
-                        () => this.NotifyPropertyChanged("Constraints", null, null),
+                        () => { this.NotifyPropertyChanged("Constraints", null, null); if(OnConstraints_PostSetter != null && IsAttached) OnConstraints_PostSetter(this); },
                         serverList);
                 }
                 return _Constraints;
@@ -304,6 +304,7 @@ namespace Kistl.App.Base
 
         private List<int> ConstraintsIds;
         private bool Constraints_was_eagerLoaded = false;
+public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstraints_PostSetter;
 
         /// <summary>
         /// Identity which created this object

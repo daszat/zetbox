@@ -374,22 +374,22 @@ namespace Kistl.App.Base
 
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Base.AbstractModuleMember>()
-                .Where(child => child.ChangedBy == this
+                .Where(child => child.CreatedBy == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Base.AbstractModuleMember>()
-                .Where(child => child.CreatedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.AccessControl>()
                 .Where(child => child.ChangedBy == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Base.AccessControl>()
                 .Where(child => child.CreatedBy == this
+                    && child.ObjectState == DataObjectState.Deleted)
+                .Cast<NHibernatePersistenceObject>());
+            result.AddRange(Context.AttachedObjects
+                .OfType<Kistl.App.Base.AccessControl>()
+                .Where(child => child.ChangedBy == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
             result.AddRange(Context.AttachedObjects
@@ -424,12 +424,12 @@ namespace Kistl.App.Base
                 .Cast<NHibernatePersistenceObject>());
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Base.BaseParameter>()
-                .Where(child => child.ChangedBy == this
+                .Where(child => child.CreatedBy == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Base.BaseParameter>()
-                .Where(child => child.CreatedBy == this
+                .Where(child => child.ChangedBy == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
             result.AddRange(Context.AttachedObjects
@@ -444,12 +444,12 @@ namespace Kistl.App.Base
                 .Cast<NHibernatePersistenceObject>());
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Calendar.Calendar>()
-                .Where(child => child.ChangedBy == this
+                .Where(child => child.CreatedBy == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Calendar.Calendar>()
-                .Where(child => child.CreatedBy == this
+                .Where(child => child.ChangedBy == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
             result.AddRange(Context.AttachedObjects
@@ -464,12 +464,12 @@ namespace Kistl.App.Base
                 .Cast<NHibernatePersistenceObject>());
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Base.Constraint>()
-                .Where(child => child.ChangedBy == this
+                .Where(child => child.CreatedBy == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Base.Constraint>()
-                .Where(child => child.CreatedBy == this
+                .Where(child => child.ChangedBy == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
             result.AddRange(Context.AttachedObjects
@@ -494,12 +494,12 @@ namespace Kistl.App.Base
                 .Cast<NHibernatePersistenceObject>());
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Base.EnumerationEntry>()
-                .Where(child => child.ChangedBy == this
+                .Where(child => child.CreatedBy == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Base.EnumerationEntry>()
-                .Where(child => child.CreatedBy == this
+                .Where(child => child.ChangedBy == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
             result.AddRange(Context.AttachedObjects
@@ -524,16 +524,11 @@ namespace Kistl.App.Base
                 .Cast<NHibernatePersistenceObject>());
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Projekte.Kunde>()
-                .Where(child => child.ChangedBy == this
+                .Where(child => child.CreatedBy == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Projekte.Kunde>()
-                .Where(child => child.CreatedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.Method>()
                 .Where(child => child.ChangedBy == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
@@ -543,13 +538,18 @@ namespace Kistl.App.Base
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
             result.AddRange(Context.AttachedObjects
-                .OfType<ZBox.App.SchemaMigration.MigrationProject>()
+                .OfType<Kistl.App.Base.Method>()
                 .Where(child => child.ChangedBy == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
             result.AddRange(Context.AttachedObjects
                 .OfType<ZBox.App.SchemaMigration.MigrationProject>()
                 .Where(child => child.CreatedBy == this
+                    && child.ObjectState == DataObjectState.Deleted)
+                .Cast<NHibernatePersistenceObject>());
+            result.AddRange(Context.AttachedObjects
+                .OfType<ZBox.App.SchemaMigration.MigrationProject>()
+                .Where(child => child.ChangedBy == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
             result.AddRange(Context.AttachedObjects
@@ -619,22 +619,22 @@ namespace Kistl.App.Base
                 .Cast<NHibernatePersistenceObject>());
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Base.RelationEnd>()
-                .Where(child => child.ChangedBy == this
+                .Where(child => child.CreatedBy == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Base.RelationEnd>()
-                .Where(child => child.CreatedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.Sequence>()
                 .Where(child => child.ChangedBy == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Base.Sequence>()
                 .Where(child => child.CreatedBy == this
+                    && child.ObjectState == DataObjectState.Deleted)
+                .Cast<NHibernatePersistenceObject>());
+            result.AddRange(Context.AttachedObjects
+                .OfType<Kistl.App.Base.Sequence>()
+                .Where(child => child.ChangedBy == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
             result.AddRange(Context.AttachedObjects
@@ -649,22 +649,22 @@ namespace Kistl.App.Base
                 .Cast<NHibernatePersistenceObject>());
             result.AddRange(Context.AttachedObjects
                 .OfType<ZBox.App.SchemaMigration.SourceColumn>()
-                .Where(child => child.ChangedBy == this
+                .Where(child => child.CreatedBy == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
             result.AddRange(Context.AttachedObjects
                 .OfType<ZBox.App.SchemaMigration.SourceColumn>()
-                .Where(child => child.CreatedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-            result.AddRange(Context.AttachedObjects
-                .OfType<ZBox.App.SchemaMigration.SourceEnum>()
                 .Where(child => child.ChangedBy == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
             result.AddRange(Context.AttachedObjects
                 .OfType<ZBox.App.SchemaMigration.SourceEnum>()
                 .Where(child => child.CreatedBy == this
+                    && child.ObjectState == DataObjectState.Deleted)
+                .Cast<NHibernatePersistenceObject>());
+            result.AddRange(Context.AttachedObjects
+                .OfType<ZBox.App.SchemaMigration.SourceEnum>()
+                .Where(child => child.ChangedBy == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
             result.AddRange(Context.AttachedObjects
@@ -679,22 +679,22 @@ namespace Kistl.App.Base
                 .Cast<NHibernatePersistenceObject>());
             result.AddRange(Context.AttachedObjects
                 .OfType<ZBox.App.SchemaMigration.StagingDatabase>()
-                .Where(child => child.ChangedBy == this
+                .Where(child => child.CreatedBy == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
             result.AddRange(Context.AttachedObjects
                 .OfType<ZBox.App.SchemaMigration.StagingDatabase>()
-                .Where(child => child.CreatedBy == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Projekte.Task>()
                 .Where(child => child.ChangedBy == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Projekte.Task>()
                 .Where(child => child.CreatedBy == this
+                    && child.ObjectState == DataObjectState.Deleted)
+                .Cast<NHibernatePersistenceObject>());
+            result.AddRange(Context.AttachedObjects
+                .OfType<Kistl.App.Projekte.Task>()
+                .Where(child => child.ChangedBy == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
             result.AddRange(Context.AttachedObjects

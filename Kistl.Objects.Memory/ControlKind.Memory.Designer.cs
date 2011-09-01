@@ -62,7 +62,7 @@ namespace Kistl.App.GUI
                         "Parent",
                         null,
                         this,
-                        () => this.NotifyPropertyChanged("ChildControlKinds", null, null),
+                        () => { this.NotifyPropertyChanged("ChildControlKinds", null, null); if(OnChildControlKinds_PostSetter != null && IsAttached) OnChildControlKinds_PostSetter(this); },
                         serverList);
                 }
                 return _ChildControlKinds;
@@ -71,6 +71,7 @@ namespace Kistl.App.GUI
     
         private OneNRelationList<Kistl.App.GUI.ControlKind> _ChildControlKinds;
 
+public static event PropertyListChangedHandler<Kistl.App.GUI.ControlKind> OnChildControlKinds_PostSetter;
 
         /// <summary>
         /// Export Guid

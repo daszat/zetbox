@@ -620,7 +620,7 @@ namespace ZBox.App.SchemaMigration
                     _EnumEntries = new EntityCollectionWrapper<ZBox.App.SchemaMigration.SourceEnum, ZBox.App.SchemaMigration.SourceEnumEfImpl>(
                             this.Context, EnumEntriesImpl,
                             () => this.NotifyPropertyChanging("EnumEntries", null, null, null),
-                            () => this.NotifyPropertyChanged("EnumEntries", null, null, null),
+                            () => { this.NotifyPropertyChanged("EnumEntries", null, null, null); if(OnEnumEntries_PostSetter != null && IsAttached) OnEnumEntries_PostSetter(this); },
                             (item) => item.NotifyPropertyChanging("SourceColumn", null, null, null),
                             (item) => item.NotifyPropertyChanged("SourceColumn", null, null, null));
                 }
@@ -649,6 +649,7 @@ namespace ZBox.App.SchemaMigration
         private EntityCollectionWrapper<ZBox.App.SchemaMigration.SourceEnum, ZBox.App.SchemaMigration.SourceEnumEfImpl> _EnumEntries;
 
 
+public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceColumn> OnEnumEntries_PostSetter;
 
         /// <summary>
         /// Export Guid
@@ -961,7 +962,7 @@ namespace ZBox.App.SchemaMigration
                     _Referers = new EntityCollectionWrapper<ZBox.App.SchemaMigration.SourceColumn, ZBox.App.SchemaMigration.SourceColumnEfImpl>(
                             this.Context, ReferersImpl,
                             () => this.NotifyPropertyChanging("Referers", null, null, null),
-                            () => this.NotifyPropertyChanged("Referers", null, null, null),
+                            () => { this.NotifyPropertyChanged("Referers", null, null, null); if(OnReferers_PostSetter != null && IsAttached) OnReferers_PostSetter(this); },
                             (item) => item.NotifyPropertyChanging("References", null, null, null),
                             (item) => item.NotifyPropertyChanged("References", null, null, null));
                 }
@@ -990,6 +991,7 @@ namespace ZBox.App.SchemaMigration
         private EntityCollectionWrapper<ZBox.App.SchemaMigration.SourceColumn, ZBox.App.SchemaMigration.SourceColumnEfImpl> _Referers;
 
 
+public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceColumn> OnReferers_PostSetter;
 
         /// <summary>
         /// 

@@ -62,7 +62,7 @@ namespace Kistl.App.Test
                         "Parent",
                         null,
                         this,
-                        () => this.NotifyPropertyChanged("Children", null, null),
+                        () => { this.NotifyPropertyChanged("Children", null, null); if(OnChildren_PostSetter != null && IsAttached) OnChildren_PostSetter(this); },
                         serverList);
                 }
                 return _Children;
@@ -71,6 +71,7 @@ namespace Kistl.App.Test
     
         private OneNRelationList<Kistl.App.Test.RequiredParentChild> _Children;
 
+public static event PropertyListChangedHandler<Kistl.App.Test.RequiredParent> OnChildren_PostSetter;
 
         /// <summary>
         /// dummy property

@@ -1032,7 +1032,7 @@ namespace Kistl.App.Base
                         "Method",
                         "Parameter_pos",
                         this,
-                        () => this.NotifyPropertyChanged("Parameter", null, null),
+                        () => { this.NotifyPropertyChanged("Parameter", null, null); if(OnParameter_PostSetter != null && IsAttached) OnParameter_PostSetter(this); },
                         serverList);
                 }
                 return _Parameter;
@@ -1041,6 +1041,7 @@ namespace Kistl.App.Base
     
         private OneNRelationList<Kistl.App.Base.BaseParameter> _Parameter;
 
+public static event PropertyListChangedHandler<Kistl.App.Base.Method> OnParameter_PostSetter;
 
         /// <summary>
         /// 

@@ -98,6 +98,7 @@ namespace Kistl.App.Base
         /// Einträge der Enumeration
         /// </summary>
         // object list property
+
         // Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
@@ -113,7 +114,7 @@ namespace Kistl.App.Base
                         "EnumerationEntries_pos",
                         this,
                         () => this.NotifyPropertyChanging("EnumerationEntries", null, null),
-                        () => this.NotifyPropertyChanged("EnumerationEntries", null, null),
+                        () => { this.NotifyPropertyChanged("EnumerationEntries", null, null); if(OnEnumerationEntries_PostSetter != null && IsAttached) OnEnumerationEntries_PostSetter(this); },
                         new ProjectedCollection<Kistl.App.Base.EnumerationEntryNHibernateImpl.EnumerationEntryProxy, Kistl.App.Base.EnumerationEntry>(
                             Proxy.EnumerationEntries,
                             p => (Kistl.App.Base.EnumerationEntry)OurContext.AttachAndWrap(p),
@@ -124,6 +125,7 @@ namespace Kistl.App.Base
         }
     
         private OneNRelationList<Kistl.App.Base.EnumerationEntry> _EnumerationEntries;
+public static event PropertyListChangedHandler<Kistl.App.Base.Enumeration> OnEnumerationEntries_PostSetter;
 
         /// <summary>
         /// Returns the resulting Type of this Datatype Meta Object.

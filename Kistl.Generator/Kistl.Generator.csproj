@@ -301,6 +301,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ComputeDefaultValue.cst</DependentUpon>
     </Compile>
+    <Compile Include="Templates\Properties\ListEvent1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PropertyListChangedEvent.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\Properties\PropertyListChangedEvent.cs">
+      <DependentUpon>PropertyListChangedEvent.cst</DependentUpon>
+    </Compile>
     <Compile Include="Templates\Properties\DefaultProperty.cs">
       <DependentUpon>DefaultProperty.cst</DependentUpon>
     </Compile>
@@ -584,6 +592,10 @@
     <None Include="Templates\Properties\CompoundObjectPropertyTemplate.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>CompoundObjectPropertyTemplate.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\Properties\PropertyListChangedEvent.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>ListEvent1.Designer.cs</LastGenOutput>
     </None>
     <None Include="Templates\Properties\DefaultProperty.cst">
       <Generator>Arebis Template Processor</Generator>

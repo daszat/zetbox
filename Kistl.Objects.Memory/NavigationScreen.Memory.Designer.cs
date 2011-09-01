@@ -213,7 +213,7 @@ namespace Kistl.App.GUI
                         "Parent",
                         "Children_pos",
                         this,
-                        () => this.NotifyPropertyChanged("Children", null, null),
+                        () => { this.NotifyPropertyChanged("Children", null, null); if(OnChildren_PostSetter != null && IsAttached) OnChildren_PostSetter(this); },
                         serverList);
                 }
                 return _Children;
@@ -222,6 +222,7 @@ namespace Kistl.App.GUI
     
         private OneNRelationList<Kistl.App.GUI.NavigationScreen> _Children;
 
+public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationScreen> OnChildren_PostSetter;
 
         /// <summary>
         /// Color of the ViewScreen or default color if empty

@@ -116,6 +116,7 @@ namespace Kistl.App.Test
         /// 
         /// </summary>
         // object list property
+
         // Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
@@ -131,7 +132,7 @@ namespace Kistl.App.Test
                         null,
                         this,
                         () => this.NotifyPropertyChanging("MubBlah_List_Nav", null, null),
-                        () => this.NotifyPropertyChanged("MubBlah_List_Nav", null, null),
+                        () => { this.NotifyPropertyChanged("MubBlah_List_Nav", null, null); if(OnMubBlah_List_Nav_PostSetter != null && IsAttached) OnMubBlah_List_Nav_PostSetter(this); },
                         new ProjectedCollection<Kistl.App.Test.MuhblahNHibernateImpl.MuhblahProxy, Kistl.App.Test.Muhblah>(
                             Proxy.MubBlah_List_Nav,
                             p => (Kistl.App.Test.Muhblah)OurContext.AttachAndWrap(p),
@@ -142,6 +143,7 @@ namespace Kistl.App.Test
         }
     
         private OneNRelationList<Kistl.App.Test.Muhblah> _MubBlah_List_Nav;
+public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> OnMubBlah_List_Nav_PostSetter;
 
         /// <summary>
         /// 
@@ -528,6 +530,7 @@ namespace Kistl.App.Test
         /// 
         /// </summary>
         // CompoundObject list property
+
         // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ValueCollectionProperty
         public ICollection<Kistl.App.Test.TestPhoneCompoundObject> PhoneNumbersOther
         {
@@ -538,7 +541,7 @@ namespace Kistl.App.Test
                     _PhoneNumbersOther = new ClientValueCollectionWrapper<TestCustomObject, Kistl.App.Test.TestPhoneCompoundObject, TestCustomObject_PhoneNumbersOther_CollectionEntry, TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl, ICollection<TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl>>(
                             this.Context,
                             this,
-                            () => this.NotifyPropertyChanged("PhoneNumbersOther", null, null),
+                            () => { this.NotifyPropertyChanged("PhoneNumbersOther", null, null); if(OnPhoneNumbersOther_PostSetter != null && IsAttached) OnPhoneNumbersOther_PostSetter(this); },
                             PhoneNumbersOtherCollection);
                 }
                 return _PhoneNumbersOther;
@@ -562,6 +565,7 @@ namespace Kistl.App.Test
         private ClientValueCollectionWrapper<TestCustomObject, Kistl.App.Test.TestPhoneCompoundObject, TestCustomObject_PhoneNumbersOther_CollectionEntry, TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl, ICollection<TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl>> _PhoneNumbersOther;
         private ProjectedCollection<TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl.TestCustomObject_PhoneNumbersOther_CollectionEntryProxy, TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl> _PhoneNumbersOtherCollection;
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ValueCollectionProperty
+public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> OnPhoneNumbersOther_PostSetter;
 
         public override Type GetImplementedInterface()
         {

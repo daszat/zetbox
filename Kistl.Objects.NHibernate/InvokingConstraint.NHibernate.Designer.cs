@@ -429,11 +429,11 @@ namespace Kistl.App.Base
             var result = base.GetParentsToDelete();
 
 
-            if (this.GetErrorTextInvocation != null && this.GetErrorTextInvocation.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.GetErrorTextInvocation);
-
             if (this.IsValidInvocation != null && this.IsValidInvocation.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.IsValidInvocation);
+
+            if (this.GetErrorTextInvocation != null && this.GetErrorTextInvocation.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.GetErrorTextInvocation);
 
             return result;
         }

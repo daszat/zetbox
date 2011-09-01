@@ -666,7 +666,7 @@ namespace ZBox.App.SchemaMigration
                         "SourceTable",
                         null,
                         this,
-                        () => this.NotifyPropertyChanged("SourceColumn", null, null),
+                        () => { this.NotifyPropertyChanged("SourceColumn", null, null); if(OnSourceColumn_PostSetter != null && IsAttached) OnSourceColumn_PostSetter(this); },
                         serverList);
                 }
                 return _SourceColumn;
@@ -675,6 +675,7 @@ namespace ZBox.App.SchemaMigration
     
         private OneNRelationList<ZBox.App.SchemaMigration.SourceColumn> _SourceColumn;
 
+public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceTable> OnSourceColumn_PostSetter;
 
         /// <summary>
         /// 

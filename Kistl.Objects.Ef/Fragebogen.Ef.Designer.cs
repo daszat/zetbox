@@ -61,7 +61,7 @@ namespace Kistl.App.Test
                     _Antworten = new EntityListWrapper<Kistl.App.Test.Antwort, Kistl.App.Test.AntwortEfImpl>(
                             this.Context, AntwortenImpl,
                             () => this.NotifyPropertyChanging("Antworten", null, null, null),
-                            () => this.NotifyPropertyChanged("Antworten", null, null, null),
+                            () => { this.NotifyPropertyChanged("Antworten", null, null, null); if(OnAntworten_PostSetter != null && IsAttached) OnAntworten_PostSetter(this); },
                             (item) => item.NotifyPropertyChanging("Fragebogen", null, null, null),
                             (item) => item.NotifyPropertyChanged("Fragebogen", null, null, null), "Ein_Fragebogen", "gute_Antworten_pos");
                 }
@@ -92,6 +92,7 @@ namespace Kistl.App.Test
         private List<int> AntwortenIds;
         private bool Antworten_was_eagerLoaded = false;
 
+public static event PropertyListChangedHandler<Kistl.App.Test.Fragebogen> OnAntworten_PostSetter;
 
         /// <summary>
         /// 

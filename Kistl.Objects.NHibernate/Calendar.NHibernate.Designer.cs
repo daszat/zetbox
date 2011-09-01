@@ -161,6 +161,7 @@ namespace Kistl.App.Calendar
         /// 
         /// </summary>
         // object list property
+
         // Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
@@ -176,7 +177,7 @@ namespace Kistl.App.Calendar
                         null,
                         this,
                         () => this.NotifyPropertyChanging("CalendarRules", null, null),
-                        () => this.NotifyPropertyChanged("CalendarRules", null, null),
+                        () => { this.NotifyPropertyChanged("CalendarRules", null, null); if(OnCalendarRules_PostSetter != null && IsAttached) OnCalendarRules_PostSetter(this); },
                         new ProjectedCollection<Kistl.App.Calendar.CalendarRuleNHibernateImpl.CalendarRuleProxy, Kistl.App.Calendar.CalendarRule>(
                             Proxy.CalendarRules,
                             p => (Kistl.App.Calendar.CalendarRule)OurContext.AttachAndWrap(p),
@@ -187,6 +188,7 @@ namespace Kistl.App.Calendar
         }
     
         private OneNRelationList<Kistl.App.Calendar.CalendarRule> _CalendarRules;
+public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCalendarRules_PostSetter;
 
         /// <summary>
         /// Identity which changed this object
@@ -345,6 +347,7 @@ namespace Kistl.App.Calendar
         /// 
         /// </summary>
         // object list property
+
         // Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
@@ -360,7 +363,7 @@ namespace Kistl.App.Calendar
                         null,
                         this,
                         () => this.NotifyPropertyChanging("ChildCalendar", null, null),
-                        () => this.NotifyPropertyChanged("ChildCalendar", null, null),
+                        () => { this.NotifyPropertyChanged("ChildCalendar", null, null); if(OnChildCalendar_PostSetter != null && IsAttached) OnChildCalendar_PostSetter(this); },
                         new ProjectedCollection<Kistl.App.Calendar.CalendarNHibernateImpl.CalendarProxy, Kistl.App.Calendar.Calendar>(
                             Proxy.ChildCalendar,
                             p => (Kistl.App.Calendar.Calendar)OurContext.AttachAndWrap(p),
@@ -371,6 +374,7 @@ namespace Kistl.App.Calendar
         }
     
         private OneNRelationList<Kistl.App.Calendar.Calendar> _ChildCalendar;
+public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnChildCalendar_PostSetter;
 
         /// <summary>
         /// Identity which created this object
@@ -1069,11 +1073,11 @@ namespace Kistl.App.Calendar
             if (this.Module != null && this.Module.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.Module);
 
-            if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.ChangedBy);
-
             if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.CreatedBy);
+
+            if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.ChangedBy);
 
             return result;
         }

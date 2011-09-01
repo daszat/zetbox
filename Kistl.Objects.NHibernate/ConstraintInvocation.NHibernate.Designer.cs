@@ -469,12 +469,12 @@ namespace Kistl.App.Base
 
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Base.InvokingConstraint>()
-                .Where(child => child.GetErrorTextInvocation == this
+                .Where(child => child.IsValidInvocation == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Base.InvokingConstraint>()
-                .Where(child => child.IsValidInvocation == this
+                .Where(child => child.GetErrorTextInvocation == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
 

@@ -229,7 +229,7 @@ namespace Kistl.App.GUI
                     _Children = new EntityListWrapper<Kistl.App.GUI.NavigationScreen, Kistl.App.GUI.NavigationScreenEfImpl>(
                             this.Context, ChildrenImpl,
                             () => this.NotifyPropertyChanging("Children", null, null, null),
-                            () => this.NotifyPropertyChanged("Children", null, null, null),
+                            () => { this.NotifyPropertyChanged("Children", null, null, null); if(OnChildren_PostSetter != null && IsAttached) OnChildren_PostSetter(this); },
                             (item) => item.NotifyPropertyChanging("Parent", null, null, null),
                             (item) => item.NotifyPropertyChanged("Parent", null, null, null), "Parent", "Children_pos");
                 }
@@ -258,6 +258,7 @@ namespace Kistl.App.GUI
         private EntityListWrapper<Kistl.App.GUI.NavigationScreen, Kistl.App.GUI.NavigationScreenEfImpl> _Children;
 
 
+public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationScreen> OnChildren_PostSetter;
 
         /// <summary>
         /// Color of the ViewScreen or default color if empty

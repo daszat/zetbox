@@ -98,6 +98,7 @@ namespace Kistl.App.Test
         /// 
         /// </summary>
         // object list property
+
         // Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
@@ -113,7 +114,7 @@ namespace Kistl.App.Test
                         null,
                         this,
                         () => this.NotifyPropertyChanging("TestCustomObjects_List_Nav", null, null),
-                        () => this.NotifyPropertyChanged("TestCustomObjects_List_Nav", null, null),
+                        () => { this.NotifyPropertyChanged("TestCustomObjects_List_Nav", null, null); if(OnTestCustomObjects_List_Nav_PostSetter != null && IsAttached) OnTestCustomObjects_List_Nav_PostSetter(this); },
                         new ProjectedCollection<Kistl.App.Test.TestCustomObjectNHibernateImpl.TestCustomObjectProxy, Kistl.App.Test.TestCustomObject>(
                             Proxy.TestCustomObjects_List_Nav,
                             p => (Kistl.App.Test.TestCustomObject)OurContext.AttachAndWrap(p),
@@ -124,6 +125,7 @@ namespace Kistl.App.Test
         }
     
         private OneNRelationList<Kistl.App.Test.TestCustomObject> _TestCustomObjects_List_Nav;
+public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCustomObjects_List_Nav_PostSetter;
 
         /// <summary>
         /// 

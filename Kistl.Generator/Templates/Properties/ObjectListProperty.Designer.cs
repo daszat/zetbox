@@ -59,9 +59,10 @@ RelationEnd relEnd = rel.GetEndFromRole(endRole);
     
     // whether or not the collection will be eagerly loaded
     bool eagerLoading = relEnd.Navigator != null && relEnd.Navigator.EagerLoading;
-    
 
-#line 34 "P:\Kistl\Kistl.Generator\Templates\Properties\ObjectListProperty.cst"
+   	var eventName = "On" + name + "_PostSetter";
+
+#line 35 "P:\Kistl\Kistl.Generator\Templates\Properties\ObjectListProperty.cst"
 this.WriteObjects("        // ",  this.GetType() , "\r\n");
 this.WriteObjects("        // implement the user-visible interface\r\n");
 this.WriteObjects("        [XmlIgnore()]\r\n");
@@ -75,9 +76,9 @@ this.WriteObjects("                {\r\n");
 this.WriteObjects("                    List<",  referencedInterface , "> serverList;\r\n");
 this.WriteObjects("                    if (Helper.IsPersistedObject(this))\r\n");
 this.WriteObjects("                    {\r\n");
-#line 47 "P:\Kistl\Kistl.Generator\Templates\Properties\ObjectListProperty.cst"
-if (eagerLoading) { 
 #line 48 "P:\Kistl\Kistl.Generator\Templates\Properties\ObjectListProperty.cst"
+if (eagerLoading) { 
+#line 49 "P:\Kistl\Kistl.Generator\Templates\Properties\ObjectListProperty.cst"
 this.WriteObjects("                        if (",  idsListName , " != null)\r\n");
 this.WriteObjects("                        {\r\n");
 this.WriteObjects("                            serverList = ",  idsListName , ".Select(id => Context.Find<",  referencedInterface , ">(id)).ToList();\r\n");
@@ -87,13 +88,13 @@ this.WriteObjects("                        else\r\n");
 this.WriteObjects("                        {\r\n");
 this.WriteObjects("                            serverList = Context.GetListOf<",  referencedInterface , ">(this, \"",  name , "\");\r\n");
 this.WriteObjects("                        }\r\n");
-#line 57 "P:\Kistl\Kistl.Generator\Templates\Properties\ObjectListProperty.cst"
-} else { 
 #line 58 "P:\Kistl\Kistl.Generator\Templates\Properties\ObjectListProperty.cst"
-this.WriteObjects("                        serverList = Context.GetListOf<",  referencedInterface , ">(this, \"",  name , "\");\r\n");
+} else { 
 #line 59 "P:\Kistl\Kistl.Generator\Templates\Properties\ObjectListProperty.cst"
-} 
+this.WriteObjects("                        serverList = Context.GetListOf<",  referencedInterface , ">(this, \"",  name , "\");\r\n");
 #line 60 "P:\Kistl\Kistl.Generator\Templates\Properties\ObjectListProperty.cst"
+} 
+#line 61 "P:\Kistl\Kistl.Generator\Templates\Properties\ObjectListProperty.cst"
 this.WriteObjects("                    }\r\n");
 this.WriteObjects("                    else\r\n");
 this.WriteObjects("                    {\r\n");
@@ -103,20 +104,20 @@ this.WriteObjects("    \r\n");
 this.WriteObjects("                    ",  wrapperName , " = new ",  wrapperClass , "<",  referencedInterface , ">(\r\n");
 this.WriteObjects("                        \"",  otherName , "\",\r\n");
 this.WriteObjects("                        ");
-#line 68 "P:\Kistl\Kistl.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 69 "P:\Kistl\Kistl.Generator\Templates\Properties\ObjectListProperty.cst"
 if (!String.IsNullOrEmpty(positionPropertyName)) { 
-#line 68 "P:\Kistl\Kistl.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 69 "P:\Kistl\Kistl.Generator\Templates\Properties\ObjectListProperty.cst"
 this.WriteObjects("\"",  positionPropertyName , "\"");
-#line 68 "P:\Kistl\Kistl.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 69 "P:\Kistl\Kistl.Generator\Templates\Properties\ObjectListProperty.cst"
 } else { 
-#line 68 "P:\Kistl\Kistl.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 69 "P:\Kistl\Kistl.Generator\Templates\Properties\ObjectListProperty.cst"
 this.WriteObjects("null");
-#line 68 "P:\Kistl\Kistl.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 69 "P:\Kistl\Kistl.Generator\Templates\Properties\ObjectListProperty.cst"
 } 
-#line 68 "P:\Kistl\Kistl.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 69 "P:\Kistl\Kistl.Generator\Templates\Properties\ObjectListProperty.cst"
 this.WriteObjects(",\r\n");
 this.WriteObjects("                        this,\r\n");
-this.WriteObjects("                        () => this.NotifyPropertyChanged(\"",  name , "\", null, null),\r\n");
+this.WriteObjects("                        () => { this.NotifyPropertyChanged(\"",  name , "\", null, null); if(",  eventName , " != null && IsAttached) ",  eventName, "(this); },\r\n");
 this.WriteObjects("                        serverList);\r\n");
 this.WriteObjects("                }\r\n");
 this.WriteObjects("                return ",  wrapperName , ";\r\n");
@@ -125,14 +126,14 @@ this.WriteObjects("        }\r\n");
 this.WriteObjects("    \r\n");
 this.WriteObjects("        private ",  wrapperClass , "<",  referencedInterface , "> ",  wrapperName , ";\r\n");
 this.WriteObjects("\r\n");
-#line 80 "P:\Kistl\Kistl.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 81 "P:\Kistl\Kistl.Generator\Templates\Properties\ObjectListProperty.cst"
 if (eagerLoading)
     {
 
-#line 83 "P:\Kistl\Kistl.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 84 "P:\Kistl\Kistl.Generator\Templates\Properties\ObjectListProperty.cst"
 this.WriteObjects("        private List<int> ",  name , "Ids;\r\n");
 this.WriteObjects("        private bool ",  name , "_was_eagerLoaded = false;\r\n");
-#line 86 "P:\Kistl\Kistl.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 87 "P:\Kistl\Kistl.Generator\Templates\Properties\ObjectListProperty.cst"
 }
 
     AddSerialization(serializationList, name, eagerLoading);

@@ -1222,11 +1222,11 @@ namespace Kistl.App.Base
             var result = base.GetParentsToDelete();
 
 
-            if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.ChangedBy);
-
             if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.CreatedBy);
+
+            if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.ChangedBy);
 
             if (this.Method != null && this.Method.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.Method);

@@ -52,6 +52,11 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
         public override void Generate()
         {
 #line 23 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ObjectListProperty.cst"
+this.WriteObjects("\r\n");
+#line 25 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ObjectListProperty.cst"
+var eventName = "On" + name + "_PostSetter";
+
+#line 27 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ObjectListProperty.cst"
 this.WriteObjects("        // ",  this.GetType() , "\r\n");
 this.WriteObjects("        // implement the user-visible interface\r\n");
 this.WriteObjects("        [XmlIgnore()]\r\n");
@@ -65,21 +70,21 @@ this.WriteObjects("                {\r\n");
 this.WriteObjects("                    ",  wrapperName , " = new ",  wrapperClass , "<",  referencedInterface , ">(\r\n");
 this.WriteObjects("                        \"",  otherName , "\",\r\n");
 this.WriteObjects("                        ");
-#line 35 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 39 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ObjectListProperty.cst"
 if (!String.IsNullOrEmpty(positionPropertyName)) { 
-#line 35 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 39 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ObjectListProperty.cst"
 this.WriteObjects("\"",  positionPropertyName , "\"");
-#line 35 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 39 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ObjectListProperty.cst"
 } else { 
-#line 35 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 39 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ObjectListProperty.cst"
 this.WriteObjects("null");
-#line 35 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 39 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ObjectListProperty.cst"
 } 
-#line 35 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 39 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ObjectListProperty.cst"
 this.WriteObjects(",\r\n");
 this.WriteObjects("                        this,\r\n");
 this.WriteObjects("                        () => this.NotifyPropertyChanging(\"",  name , "\", null, null),\r\n");
-this.WriteObjects("                        () => this.NotifyPropertyChanged(\"",  name , "\", null, null),\r\n");
+this.WriteObjects("                        () => { this.NotifyPropertyChanged(\"",  name , "\", null, null); if(",  eventName , " != null && IsAttached) ",  eventName, "(this); },\r\n");
 this.WriteObjects("                        new ProjectedCollection<",  referencedProxy , ", ",  referencedInterface , ">(\r\n");
 this.WriteObjects("                            Proxy.",  name , ",\r\n");
 this.WriteObjects("                            p => (",  referencedInterface , ")OurContext.AttachAndWrap(p),\r\n");
@@ -90,14 +95,14 @@ this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("    \r\n");
 this.WriteObjects("        private ",  wrapperClass , "<",  referencedInterface , "> ",  wrapperName , ";\r\n");
-#line 49 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 53 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ObjectListProperty.cst"
 if (eagerLoading) { 
-#line 50 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 54 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ObjectListProperty.cst"
 this.WriteObjects("        private List<int> ",  name , "Ids;\r\n");
 this.WriteObjects("        private bool ",  name , "_was_eagerLoaded = false;\r\n");
-#line 52 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 56 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ObjectListProperty.cst"
 } 
-#line 53 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 57 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ObjectListProperty.cst"
 AddSerialization(serializationList, name, eagerLoading); 
 
         }

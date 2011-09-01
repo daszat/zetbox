@@ -114,7 +114,7 @@ namespace Kistl.App.Test
                     _NSide = new EntityCollectionWrapper<Kistl.App.Test.One_to_N_relations_N, Kistl.App.Test.One_to_N_relations_NEfImpl>(
                             this.Context, NSideImpl,
                             () => this.NotifyPropertyChanging("NSide", null, null, null),
-                            () => this.NotifyPropertyChanged("NSide", null, null, null),
+                            () => { this.NotifyPropertyChanged("NSide", null, null, null); if(OnNSide_PostSetter != null && IsAttached) OnNSide_PostSetter(this); },
                             (item) => item.NotifyPropertyChanging("OneSide", null, null, null),
                             (item) => item.NotifyPropertyChanged("OneSide", null, null, null));
                 }
@@ -143,6 +143,7 @@ namespace Kistl.App.Test
         private EntityCollectionWrapper<Kistl.App.Test.One_to_N_relations_N, Kistl.App.Test.One_to_N_relations_NEfImpl> _NSide;
 
 
+public static event PropertyListChangedHandler<Kistl.App.Test.One_to_N_relations_One> OnNSide_PostSetter;
 
         public override Type GetImplementedInterface()
         {

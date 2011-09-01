@@ -406,6 +406,7 @@ namespace Kistl.App.Projekte
         /// EMails des Kunden - können mehrere sein
         /// </summary>
         // value list property
+
         // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ValueCollectionProperty
         public ICollection<string> EMails
         {
@@ -416,7 +417,7 @@ namespace Kistl.App.Projekte
                     _EMails = new ClientValueCollectionWrapper<Kunde, string, Kunde_EMails_CollectionEntry, Kunde_EMails_CollectionEntryNHibernateImpl, ICollection<Kunde_EMails_CollectionEntryNHibernateImpl>>(
                             this.Context,
                             this,
-                            () => this.NotifyPropertyChanged("EMails", null, null),
+                            () => { this.NotifyPropertyChanged("EMails", null, null); if(OnEMails_PostSetter != null && IsAttached) OnEMails_PostSetter(this); },
                             EMailsCollection);
                 }
                 return _EMails;
@@ -440,6 +441,7 @@ namespace Kistl.App.Projekte
         private ClientValueCollectionWrapper<Kunde, string, Kunde_EMails_CollectionEntry, Kunde_EMails_CollectionEntryNHibernateImpl, ICollection<Kunde_EMails_CollectionEntryNHibernateImpl>> _EMails;
         private ProjectedCollection<Kunde_EMails_CollectionEntryNHibernateImpl.Kunde_EMails_CollectionEntryProxy, Kunde_EMails_CollectionEntryNHibernateImpl> _EMailsCollection;
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ValueCollectionProperty
+public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMails_PostSetter;
 
         /// <summary>
         /// Name des Kunden
@@ -877,11 +879,11 @@ namespace Kistl.App.Projekte
             var result = base.GetParentsToDelete();
 
 
-            if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.ChangedBy);
-
             if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.CreatedBy);
+
+            if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.ChangedBy);
 
             return result;
         }

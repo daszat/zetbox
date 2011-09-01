@@ -928,11 +928,11 @@ namespace ZBox.App.SchemaMigration
             if (this.DestinationValue != null && this.DestinationValue.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.DestinationValue);
 
-            if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.ChangedBy);
-
             if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.CreatedBy);
+
+            if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.ChangedBy);
 
             return result;
         }

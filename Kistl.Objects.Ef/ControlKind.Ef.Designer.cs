@@ -61,7 +61,7 @@ namespace Kistl.App.GUI
                     _ChildControlKinds = new EntityCollectionWrapper<Kistl.App.GUI.ControlKind, Kistl.App.GUI.ControlKindEfImpl>(
                             this.Context, ChildControlKindsImpl,
                             () => this.NotifyPropertyChanging("ChildControlKinds", null, null, null),
-                            () => this.NotifyPropertyChanged("ChildControlKinds", null, null, null),
+                            () => { this.NotifyPropertyChanged("ChildControlKinds", null, null, null); if(OnChildControlKinds_PostSetter != null && IsAttached) OnChildControlKinds_PostSetter(this); },
                             (item) => item.NotifyPropertyChanging("Parent", null, null, null),
                             (item) => item.NotifyPropertyChanged("Parent", null, null, null));
                 }
@@ -90,6 +90,7 @@ namespace Kistl.App.GUI
         private EntityCollectionWrapper<Kistl.App.GUI.ControlKind, Kistl.App.GUI.ControlKindEfImpl> _ChildControlKinds;
 
 
+public static event PropertyListChangedHandler<Kistl.App.GUI.ControlKind> OnChildControlKinds_PostSetter;
 
         /// <summary>
         /// Export Guid

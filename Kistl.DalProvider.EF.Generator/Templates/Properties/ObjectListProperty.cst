@@ -43,6 +43,8 @@
 
     // override and ignore Base's notion of wrapper classes
     wrapperClass = rel.NeedsPositionStorage(otherEnd.GetRole()) ? "EntityListWrapper" : "EntityCollectionWrapper";
+
+	var eventName = "On" + name + "_PostSetter";
 %>
            // <%= this.GetType() %>
         // implement the user-visible interface
@@ -57,7 +59,7 @@
                     <%= wrapperName %> = new <%= wrapperClass %><<%= referencedInterface %>, <%= referencedImplementation %>>(
                             this.Context, <%= efName %>,
                             () => this.NotifyPropertyChanging("<%= name %>", null, null, null),
-                            () => this.NotifyPropertyChanged("<%= name %>", null, null, null),
+                            () => { this.NotifyPropertyChanged("<%= name %>", null, null, null); if(<%= eventName %> != null && IsAttached) <%= eventName%>(this); },
                             (item) => item.NotifyPropertyChanging("<%= otherName %>", null, null, null),
                             (item) => item.NotifyPropertyChanged("<%= otherName %>", null, null, null)<%
     // TODO: improve this!

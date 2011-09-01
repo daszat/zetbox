@@ -112,7 +112,7 @@ namespace Kistl.App.Test
                         "OneSide",
                         null,
                         this,
-                        () => this.NotifyPropertyChanged("NSide", null, null),
+                        () => { this.NotifyPropertyChanged("NSide", null, null); if(OnNSide_PostSetter != null && IsAttached) OnNSide_PostSetter(this); },
                         serverList);
                 }
                 return _NSide;
@@ -121,6 +121,7 @@ namespace Kistl.App.Test
     
         private OneNRelationList<Kistl.App.Test.One_to_N_relations_N> _NSide;
 
+public static event PropertyListChangedHandler<Kistl.App.Test.One_to_N_relations_One> OnNSide_PostSetter;
 
         public override Type GetImplementedInterface()
         {

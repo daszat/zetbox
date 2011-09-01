@@ -27,7 +27,7 @@
 <%
 
     AddSerialization(serializationList, underlyingCollectionName);
-
+	var eventName = "On" + name + "_PostSetter";
 %>
 		// <%= this.GetType() %>
 		<%= GetModifiers() %> <%= exposedCollectionInterface %><<%= referencedType %>> <%= name %>
@@ -40,7 +40,7 @@
 				        = new <%= backingCollectionType %><<%= thisInterface %>, <%= referencedType %>, <%= entryType %>, <%= entryTypeImpl %>, <%= providerCollectionType %>>(
 							this.Context,
 				            this, 
-				            () => this.NotifyPropertyChanged("<%= name %>", null, null),
+				            () => { this.NotifyPropertyChanged("<%= name %>", null, null); if(<%= eventName %> != null && IsAttached) <%= eventName%>(this); },
 				            <%= underlyingCollectionName %>);
 				}
 				return <%= backingName %>;

@@ -62,7 +62,7 @@ namespace Kistl.App.Test
                         "OneEnd",
                         "NEnds_pos",
                         this,
-                        () => this.NotifyPropertyChanged("NEnds", null, null),
+                        () => { this.NotifyPropertyChanged("NEnds", null, null); if(OnNEnds_PostSetter != null && IsAttached) OnNEnds_PostSetter(this); },
                         serverList);
                 }
                 return _NEnds;
@@ -71,6 +71,7 @@ namespace Kistl.App.Test
     
         private OneNRelationList<Kistl.App.Test.OrderedNEnd> _NEnds;
 
+public static event PropertyListChangedHandler<Kistl.App.Test.OrderedOneEnd> OnNEnds_PostSetter;
 
         /// <summary>
         /// 

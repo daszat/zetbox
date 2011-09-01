@@ -176,7 +176,7 @@ namespace Kistl.App.Calendar
                     _CalendarRules = new EntityCollectionWrapper<Kistl.App.Calendar.CalendarRule, Kistl.App.Calendar.CalendarRuleEfImpl>(
                             this.Context, CalendarRulesImpl,
                             () => this.NotifyPropertyChanging("CalendarRules", null, null, null),
-                            () => this.NotifyPropertyChanged("CalendarRules", null, null, null),
+                            () => { this.NotifyPropertyChanged("CalendarRules", null, null, null); if(OnCalendarRules_PostSetter != null && IsAttached) OnCalendarRules_PostSetter(this); },
                             (item) => item.NotifyPropertyChanging("Calendar", null, null, null),
                             (item) => item.NotifyPropertyChanged("Calendar", null, null, null));
                 }
@@ -205,6 +205,7 @@ namespace Kistl.App.Calendar
         private EntityCollectionWrapper<Kistl.App.Calendar.CalendarRule, Kistl.App.Calendar.CalendarRuleEfImpl> _CalendarRules;
 
 
+public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCalendarRules_PostSetter;
 
         /// <summary>
         /// Identity which changed this object
@@ -398,7 +399,7 @@ namespace Kistl.App.Calendar
                     _ChildCalendar = new EntityCollectionWrapper<Kistl.App.Calendar.Calendar, Kistl.App.Calendar.CalendarEfImpl>(
                             this.Context, ChildCalendarImpl,
                             () => this.NotifyPropertyChanging("ChildCalendar", null, null, null),
-                            () => this.NotifyPropertyChanged("ChildCalendar", null, null, null),
+                            () => { this.NotifyPropertyChanged("ChildCalendar", null, null, null); if(OnChildCalendar_PostSetter != null && IsAttached) OnChildCalendar_PostSetter(this); },
                             (item) => item.NotifyPropertyChanging("BaseCalendar", null, null, null),
                             (item) => item.NotifyPropertyChanged("BaseCalendar", null, null, null));
                 }
@@ -427,6 +428,7 @@ namespace Kistl.App.Calendar
         private EntityCollectionWrapper<Kistl.App.Calendar.Calendar, Kistl.App.Calendar.CalendarEfImpl> _ChildCalendar;
 
 
+public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnChildCalendar_PostSetter;
 
         /// <summary>
         /// Identity which created this object

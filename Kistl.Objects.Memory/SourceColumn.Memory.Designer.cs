@@ -539,7 +539,7 @@ namespace ZBox.App.SchemaMigration
                         "SourceColumn",
                         null,
                         this,
-                        () => this.NotifyPropertyChanged("EnumEntries", null, null),
+                        () => { this.NotifyPropertyChanged("EnumEntries", null, null); if(OnEnumEntries_PostSetter != null && IsAttached) OnEnumEntries_PostSetter(this); },
                         serverList);
                 }
                 return _EnumEntries;
@@ -548,6 +548,7 @@ namespace ZBox.App.SchemaMigration
     
         private OneNRelationList<ZBox.App.SchemaMigration.SourceEnum> _EnumEntries;
 
+public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceColumn> OnEnumEntries_PostSetter;
 
         /// <summary>
         /// Export Guid
@@ -845,7 +846,7 @@ namespace ZBox.App.SchemaMigration
                         "References",
                         null,
                         this,
-                        () => this.NotifyPropertyChanged("Referers", null, null),
+                        () => { this.NotifyPropertyChanged("Referers", null, null); if(OnReferers_PostSetter != null && IsAttached) OnReferers_PostSetter(this); },
                         serverList);
                 }
                 return _Referers;
@@ -854,6 +855,7 @@ namespace ZBox.App.SchemaMigration
     
         private OneNRelationList<ZBox.App.SchemaMigration.SourceColumn> _Referers;
 
+public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceColumn> OnReferers_PostSetter;
 
         /// <summary>
         /// 

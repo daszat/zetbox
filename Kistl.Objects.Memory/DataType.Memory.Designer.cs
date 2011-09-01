@@ -221,7 +221,7 @@ namespace Kistl.App.Base
                         "Constrained",
                         null,
                         this,
-                        () => this.NotifyPropertyChanged("Constraints", null, null),
+                        () => { this.NotifyPropertyChanged("Constraints", null, null); if(OnConstraints_PostSetter != null && IsAttached) OnConstraints_PostSetter(this); },
                         serverList);
                 }
                 return _Constraints;
@@ -232,6 +232,7 @@ namespace Kistl.App.Base
 
         private List<int> ConstraintsIds;
         private bool Constraints_was_eagerLoaded = false;
+public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnConstraints_PostSetter;
 
         /// <summary>
         /// Identity which created this object
@@ -622,7 +623,7 @@ namespace Kistl.App.Base
                         "ObjectClass",
                         null,
                         this,
-                        () => this.NotifyPropertyChanged("Methods", null, null),
+                        () => { this.NotifyPropertyChanged("Methods", null, null); if(OnMethods_PostSetter != null && IsAttached) OnMethods_PostSetter(this); },
                         serverList);
                 }
                 return _Methods;
@@ -633,6 +634,7 @@ namespace Kistl.App.Base
 
         private List<int> MethodsIds;
         private bool Methods_was_eagerLoaded = false;
+public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnMethods_PostSetter;
 
         /// <summary>
         /// Modul der Objektklasse
@@ -809,7 +811,7 @@ namespace Kistl.App.Base
                         "ObjectClass",
                         "Properties_pos",
                         this,
-                        () => this.NotifyPropertyChanged("Properties", null, null),
+                        () => { this.NotifyPropertyChanged("Properties", null, null); if(OnProperties_PostSetter != null && IsAttached) OnProperties_PostSetter(this); },
                         serverList);
                 }
                 return _Properties;
@@ -820,6 +822,7 @@ namespace Kistl.App.Base
 
         private List<int> PropertiesIds;
         private bool Properties_was_eagerLoaded = false;
+public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProperties_PostSetter;
 
         /// <summary>
         /// Optional requested ControlKind

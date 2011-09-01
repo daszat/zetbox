@@ -725,7 +725,7 @@ namespace ZBox.App.SchemaMigration
                     _SourceColumn = new EntityCollectionWrapper<ZBox.App.SchemaMigration.SourceColumn, ZBox.App.SchemaMigration.SourceColumnEfImpl>(
                             this.Context, SourceColumnImpl,
                             () => this.NotifyPropertyChanging("SourceColumn", null, null, null),
-                            () => this.NotifyPropertyChanged("SourceColumn", null, null, null),
+                            () => { this.NotifyPropertyChanged("SourceColumn", null, null, null); if(OnSourceColumn_PostSetter != null && IsAttached) OnSourceColumn_PostSetter(this); },
                             (item) => item.NotifyPropertyChanging("SourceTable", null, null, null),
                             (item) => item.NotifyPropertyChanged("SourceTable", null, null, null));
                 }
@@ -754,6 +754,7 @@ namespace ZBox.App.SchemaMigration
         private EntityCollectionWrapper<ZBox.App.SchemaMigration.SourceColumn, ZBox.App.SchemaMigration.SourceColumnEfImpl> _SourceColumn;
 
 
+public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceTable> OnSourceColumn_PostSetter;
 
         /// <summary>
         /// 

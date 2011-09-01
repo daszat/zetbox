@@ -49,12 +49,11 @@ namespace Kistl.App.Base
             obj.NotifyPropertyChanged("CodeTemplate", string.Empty, string.Empty);
         }
 
-        // TODO: Not supported yet
-        //[Invocation]
-        //public static void postSet_Parameter(Method obj, PropertyPostSetterEventArgs<IList<BaseParameter>> e)
-        //{
-        //    obj.NotifyPropertyChanged("CodeTemplate", string.Empty, string.Empty);
-        //}
+        [Invocation]
+        public static void postSet_Parameter(Method obj)
+        {
+            obj.NotifyPropertyChanged("CodeTemplate", string.Empty, string.Empty);
+        }
 
         [Invocation]
         public static void get_CodeTemplate(Method obj, PropertyGetterEventArgs<string> e)

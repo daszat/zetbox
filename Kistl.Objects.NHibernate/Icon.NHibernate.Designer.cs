@@ -587,12 +587,12 @@ namespace Kistl.App.GUI
                 .Cast<NHibernatePersistenceObject>());
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Base.BoolProperty>()
-                .Where(child => child.NullIcon == this
+                .Where(child => child.TrueIcon == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Base.BoolProperty>()
-                .Where(child => child.TrueIcon == this
+                .Where(child => child.NullIcon == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
             result.AddRange(Context.AttachedObjects

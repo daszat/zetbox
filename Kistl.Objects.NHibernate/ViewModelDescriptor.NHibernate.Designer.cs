@@ -1122,14 +1122,14 @@ namespace Kistl.App.GUI
             var result = base.GetParentsToDelete();
 
 
+            if (this.DefaultGridCellEditorKind != null && this.DefaultGridCellEditorKind.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.DefaultGridCellEditorKind);
+
             if (this.DefaultDisplayKind != null && this.DefaultDisplayKind.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.DefaultDisplayKind);
 
             if (this.DefaultGridCellDisplayKind != null && this.DefaultGridCellDisplayKind.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.DefaultGridCellDisplayKind);
-
-            if (this.DefaultGridCellEditorKind != null && this.DefaultGridCellEditorKind.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.DefaultGridCellEditorKind);
 
             if (this.DefaultGridCellPreEditorKind != null && this.DefaultGridCellPreEditorKind.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.DefaultGridCellPreEditorKind);

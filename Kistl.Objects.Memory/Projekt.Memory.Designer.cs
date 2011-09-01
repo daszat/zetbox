@@ -62,7 +62,7 @@ namespace Kistl.App.Projekte
                         "Projekt",
                         null,
                         this,
-                        () => this.NotifyPropertyChanged("Auftraege", null, null),
+                        () => { this.NotifyPropertyChanged("Auftraege", null, null); if(OnAuftraege_PostSetter != null && IsAttached) OnAuftraege_PostSetter(this); },
                         serverList);
                 }
                 return _Auftraege;
@@ -71,6 +71,7 @@ namespace Kistl.App.Projekte
     
         private OneNRelationList<Kistl.App.Projekte.Auftrag> _Auftraege;
 
+public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuftraege_PostSetter;
 
         /// <summary>
         /// 
@@ -575,7 +576,7 @@ namespace Kistl.App.Projekte
                         "Projekt",
                         null,
                         this,
-                        () => this.NotifyPropertyChanged("Tasks", null, null),
+                        () => { this.NotifyPropertyChanged("Tasks", null, null); if(OnTasks_PostSetter != null && IsAttached) OnTasks_PostSetter(this); },
                         serverList);
                 }
                 return _Tasks;
@@ -584,6 +585,7 @@ namespace Kistl.App.Projekte
     
         private OneNRelationList<Kistl.App.Projekte.Task> _Tasks;
 
+public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTasks_PostSetter;
 
         public override Type GetImplementedInterface()
         {

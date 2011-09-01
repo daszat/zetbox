@@ -401,7 +401,7 @@ namespace Kistl.App.Projekte
 				        = new ClientValueCollectionWrapper<Kunde, string, Kunde_EMails_CollectionEntry, Kunde_EMails_CollectionEntryMemoryImpl, ObservableCollection<Kunde_EMails_CollectionEntryMemoryImpl>>(
 							this.Context,
 				            this, 
-				            () => this.NotifyPropertyChanged("EMails", null, null),
+				            () => { this.NotifyPropertyChanged("EMails", null, null); if(OnEMails_PostSetter != null && IsAttached) OnEMails_PostSetter(this); },
 				            _EMailsCollection);
 				}
 				return _EMails;
@@ -410,6 +410,7 @@ namespace Kistl.App.Projekte
 
 		private ClientValueCollectionWrapper<Kunde, string, Kunde_EMails_CollectionEntry, Kunde_EMails_CollectionEntryMemoryImpl, ObservableCollection<Kunde_EMails_CollectionEntryMemoryImpl>> _EMails;
 		private ObservableCollection<Kunde_EMails_CollectionEntryMemoryImpl> _EMailsCollection = new ObservableCollection<Kunde_EMails_CollectionEntryMemoryImpl>();
+public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMails_PostSetter;
 
         /// <summary>
         /// Name des Kunden

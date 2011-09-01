@@ -118,7 +118,7 @@ namespace Kistl.App.Test
                     _MubBlah_List_Nav = new EntityCollectionWrapper<Kistl.App.Test.Muhblah, Kistl.App.Test.MuhblahEfImpl>(
                             this.Context, MubBlah_List_NavImpl,
                             () => this.NotifyPropertyChanging("MubBlah_List_Nav", null, null, null),
-                            () => this.NotifyPropertyChanged("MubBlah_List_Nav", null, null, null),
+                            () => { this.NotifyPropertyChanged("MubBlah_List_Nav", null, null, null); if(OnMubBlah_List_Nav_PostSetter != null && IsAttached) OnMubBlah_List_Nav_PostSetter(this); },
                             (item) => item.NotifyPropertyChanging("TestCustomObjects_Nav", null, null, null),
                             (item) => item.NotifyPropertyChanged("TestCustomObjects_Nav", null, null, null));
                 }
@@ -147,6 +147,7 @@ namespace Kistl.App.Test
         private EntityCollectionWrapper<Kistl.App.Test.Muhblah, Kistl.App.Test.MuhblahEfImpl> _MubBlah_List_Nav;
 
 
+public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> OnMubBlah_List_Nav_PostSetter;
 
         /// <summary>
         /// 
@@ -596,7 +597,7 @@ namespace Kistl.App.Test
                     _PhoneNumbersOther = new EfValueCollectionWrapper<TestCustomObject, Kistl.App.Test.TestPhoneCompoundObject, TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl, EntityCollection<TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl>>(
 						this.Context,
                         this,
-              			() => this.NotifyPropertyChanged("PhoneNumbersOther", null, null, null),
+              			() => { this.NotifyPropertyChanged("PhoneNumbersOther", null, null, null); if(OnPhoneNumbersOther_PostSetter != null && IsAttached) OnPhoneNumbersOther_PostSetter(this); },
           	            PhoneNumbersOtherImpl);
                 }
                 return _PhoneNumbersOther;
@@ -622,6 +623,7 @@ namespace Kistl.App.Test
             }
         }
         private EfValueCollectionWrapper<TestCustomObject, Kistl.App.Test.TestPhoneCompoundObject, TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl, EntityCollection<TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl>> _PhoneNumbersOther;
+public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> OnPhoneNumbersOther_PostSetter;
 
         public override Type GetImplementedInterface()
         {

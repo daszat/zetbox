@@ -65,7 +65,7 @@ Debug.Assert(prop is ValueTypeProperty ? ((ValueTypeProperty)prop).IsList : ((Co
 	string referencedCollectionEntry = prop.GetCollectionEntryClassName() + ImplementationSuffix;
 
     AddSerialization(serializationList, efName);
-
+	var eventName = "On" + name + "_PostSetter";
 
 #line 48 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ValueCollectionProperty.cst"
 this.WriteObjects("   		// ",  this.GetType() , "\r\n");
@@ -81,7 +81,7 @@ this.WriteObjects("                {\r\n");
 this.WriteObjects("                    ",  wrapperName , " = new ",  wrapperClass , "<",  thisInterface , ", ",  referencedType , ", ",  referencedCollectionEntry , ", EntityCollection<",  referencedCollectionEntry , ">>(\r\n");
 this.WriteObjects("						this.Context,\r\n");
 this.WriteObjects("                        this,\r\n");
-this.WriteObjects("              			() => this.NotifyPropertyChanged(\"",  name , "\", null, null, null),\r\n");
+this.WriteObjects("              			() => { this.NotifyPropertyChanged(\"",  name , "\", null, null, null); if(",  eventName , " != null && IsAttached) ",  eventName, "(this); },\r\n");
 this.WriteObjects("          	            ",  efName , ");\r\n");
 this.WriteObjects("                }\r\n");
 this.WriteObjects("                return ",  wrapperName , ";\r\n");

@@ -619,7 +619,7 @@ namespace ZBox.App.SchemaMigration
                     _StagingDatabases = new EntityCollectionWrapper<ZBox.App.SchemaMigration.StagingDatabase, ZBox.App.SchemaMigration.StagingDatabaseEfImpl>(
                             this.Context, StagingDatabasesImpl,
                             () => this.NotifyPropertyChanging("StagingDatabases", null, null, null),
-                            () => this.NotifyPropertyChanged("StagingDatabases", null, null, null),
+                            () => { this.NotifyPropertyChanged("StagingDatabases", null, null, null); if(OnStagingDatabases_PostSetter != null && IsAttached) OnStagingDatabases_PostSetter(this); },
                             (item) => item.NotifyPropertyChanging("MigrationProject", null, null, null),
                             (item) => item.NotifyPropertyChanged("MigrationProject", null, null, null));
                 }
@@ -648,6 +648,7 @@ namespace ZBox.App.SchemaMigration
         private EntityCollectionWrapper<ZBox.App.SchemaMigration.StagingDatabase, ZBox.App.SchemaMigration.StagingDatabaseEfImpl> _StagingDatabases;
 
 
+public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.MigrationProject> OnStagingDatabases_PostSetter;
 
         /// <summary>
         /// Creates a mapping report

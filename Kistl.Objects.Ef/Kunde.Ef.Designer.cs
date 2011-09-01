@@ -443,7 +443,7 @@ namespace Kistl.App.Projekte
                     _EMails = new EfValueCollectionWrapper<Kunde, string, Kunde_EMails_CollectionEntryEfImpl, EntityCollection<Kunde_EMails_CollectionEntryEfImpl>>(
 						this.Context,
                         this,
-              			() => this.NotifyPropertyChanged("EMails", null, null, null),
+              			() => { this.NotifyPropertyChanged("EMails", null, null, null); if(OnEMails_PostSetter != null && IsAttached) OnEMails_PostSetter(this); },
           	            EMailsImpl);
                 }
                 return _EMails;
@@ -469,6 +469,7 @@ namespace Kistl.App.Projekte
             }
         }
         private EfValueCollectionWrapper<Kunde, string, Kunde_EMails_CollectionEntryEfImpl, EntityCollection<Kunde_EMails_CollectionEntryEfImpl>> _EMails;
+public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMails_PostSetter;
 
         /// <summary>
         /// Name des Kunden

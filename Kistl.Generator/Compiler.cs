@@ -190,7 +190,7 @@ namespace Kistl.Generator
                 // TODO: implement FileLogger in mono, reenable this
                 var logger = new FileLogger();
                 logger.Parameters = String.Format(@"logfile={0}", Path.Combine(workingPath, "compile.log"));
-                logger.Verbosity = LoggerVerbosity.Detailed;
+                logger.Verbosity = LoggerVerbosity.Normal; // Detailed;
                 engine.RegisterLogger(logger);
 #endif
 

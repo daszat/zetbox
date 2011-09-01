@@ -534,6 +534,7 @@ namespace ZBox.App.SchemaMigration
         /// 
         /// </summary>
         // object list property
+
         // Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
@@ -549,7 +550,7 @@ namespace ZBox.App.SchemaMigration
                         null,
                         this,
                         () => this.NotifyPropertyChanging("EnumEntries", null, null),
-                        () => this.NotifyPropertyChanged("EnumEntries", null, null),
+                        () => { this.NotifyPropertyChanged("EnumEntries", null, null); if(OnEnumEntries_PostSetter != null && IsAttached) OnEnumEntries_PostSetter(this); },
                         new ProjectedCollection<ZBox.App.SchemaMigration.SourceEnumNHibernateImpl.SourceEnumProxy, ZBox.App.SchemaMigration.SourceEnum>(
                             Proxy.EnumEntries,
                             p => (ZBox.App.SchemaMigration.SourceEnum)OurContext.AttachAndWrap(p),
@@ -560,6 +561,7 @@ namespace ZBox.App.SchemaMigration
         }
     
         private OneNRelationList<ZBox.App.SchemaMigration.SourceEnum> _EnumEntries;
+public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceColumn> OnEnumEntries_PostSetter;
 
         /// <summary>
         /// Export Guid
@@ -841,6 +843,7 @@ namespace ZBox.App.SchemaMigration
         /// 
         /// </summary>
         // object list property
+
         // Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
@@ -856,7 +859,7 @@ namespace ZBox.App.SchemaMigration
                         null,
                         this,
                         () => this.NotifyPropertyChanging("Referers", null, null),
-                        () => this.NotifyPropertyChanged("Referers", null, null),
+                        () => { this.NotifyPropertyChanged("Referers", null, null); if(OnReferers_PostSetter != null && IsAttached) OnReferers_PostSetter(this); },
                         new ProjectedCollection<ZBox.App.SchemaMigration.SourceColumnNHibernateImpl.SourceColumnProxy, ZBox.App.SchemaMigration.SourceColumn>(
                             Proxy.Referers,
                             p => (ZBox.App.SchemaMigration.SourceColumn)OurContext.AttachAndWrap(p),
@@ -867,6 +870,7 @@ namespace ZBox.App.SchemaMigration
         }
     
         private OneNRelationList<ZBox.App.SchemaMigration.SourceColumn> _Referers;
+public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceColumn> OnReferers_PostSetter;
 
         /// <summary>
         /// 
@@ -1435,11 +1439,11 @@ namespace ZBox.App.SchemaMigration
             if (this.References != null && this.References.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.References);
 
-            if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.ChangedBy);
-
             if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.CreatedBy);
+
+            if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.ChangedBy);
 
             return result;
         }

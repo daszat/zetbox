@@ -62,7 +62,7 @@ namespace Kistl.App.Base
                         "ObjectClass",
                         null,
                         this,
-                        () => this.NotifyPropertyChanged("AccessControlList", null, null),
+                        () => { this.NotifyPropertyChanged("AccessControlList", null, null); if(OnAccessControlList_PostSetter != null && IsAttached) OnAccessControlList_PostSetter(this); },
                         serverList);
                 }
                 return _AccessControlList;
@@ -71,6 +71,7 @@ namespace Kistl.App.Base
     
         private OneNRelationList<Kistl.App.Base.AccessControl> _AccessControlList;
 
+public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnAccessControlList_PostSetter;
 
         /// <summary>
         /// Pointer auf die Basisklasse
@@ -294,7 +295,7 @@ namespace Kistl.App.Base
                         "ObjectClass",
                         null,
                         this,
-                        () => this.NotifyPropertyChanged("FilterConfigurations", null, null),
+                        () => { this.NotifyPropertyChanged("FilterConfigurations", null, null); if(OnFilterConfigurations_PostSetter != null && IsAttached) OnFilterConfigurations_PostSetter(this); },
                         serverList);
                 }
                 return _FilterConfigurations;
@@ -303,6 +304,7 @@ namespace Kistl.App.Base
     
         private OneNRelationList<Kistl.App.GUI.ObjectClassFilterConfiguration> _FilterConfigurations;
 
+public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnFilterConfigurations_PostSetter;
 
         /// <summary>
         /// Interfaces der Objektklasse
@@ -505,7 +507,7 @@ namespace Kistl.App.Base
                         "BaseObjectClass",
                         null,
                         this,
-                        () => this.NotifyPropertyChanged("SubClasses", null, null),
+                        () => { this.NotifyPropertyChanged("SubClasses", null, null); if(OnSubClasses_PostSetter != null && IsAttached) OnSubClasses_PostSetter(this); },
                         serverList);
                 }
                 return _SubClasses;
@@ -514,6 +516,7 @@ namespace Kistl.App.Base
     
         private OneNRelationList<Kistl.App.Base.ObjectClass> _SubClasses;
 
+public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSubClasses_PostSetter;
 
         /// <summary>
         /// Tabellenname in der Datenbank

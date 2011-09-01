@@ -276,6 +276,7 @@ namespace Kistl.App.Base
         /// The list of constraints applying to this Property
         /// </summary>
         // object list property
+
         // Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
@@ -291,7 +292,7 @@ namespace Kistl.App.Base
                         null,
                         this,
                         () => this.NotifyPropertyChanging("Constraints", null, null),
-                        () => this.NotifyPropertyChanged("Constraints", null, null),
+                        () => { this.NotifyPropertyChanged("Constraints", null, null); if(OnConstraints_PostSetter != null && IsAttached) OnConstraints_PostSetter(this); },
                         new ProjectedCollection<Kistl.App.Base.ConstraintNHibernateImpl.ConstraintProxy, Kistl.App.Base.Constraint>(
                             Proxy.Constraints,
                             p => (Kistl.App.Base.Constraint)OurContext.AttachAndWrap(p),
@@ -304,6 +305,7 @@ namespace Kistl.App.Base
         private OneNRelationList<Kistl.App.Base.Constraint> _Constraints;
         private List<int> ConstraintsIds;
         private bool Constraints_was_eagerLoaded = false;
+public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstraints_PostSetter;
 
         /// <summary>
         /// Identity which created this object

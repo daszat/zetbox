@@ -1,0 +1,10 @@
+﻿<%@ CodeTemplate Language="C#" 
+	Name="Properties.PropertyListChangedEvent"
+	ClassName="Kistl.Generator.Templates.Properties.PropertyListChangedEvent" 
+	Inherits="Kistl.Generator.MemberTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Parameter Name="ctx" Type="IKistlContext" %>
+<%@ Parameter Name="eventName" Type="string" %>
+<%@ Parameter Name="objType" Type="string" %>
+<%= GetModifiers() %> event PropertyListChangedHandler<<%= objType %>> <%= eventName %>;

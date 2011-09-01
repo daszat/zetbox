@@ -660,6 +660,7 @@ namespace ZBox.App.SchemaMigration
         /// 
         /// </summary>
         // object list property
+
         // Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
@@ -675,7 +676,7 @@ namespace ZBox.App.SchemaMigration
                         null,
                         this,
                         () => this.NotifyPropertyChanging("SourceColumn", null, null),
-                        () => this.NotifyPropertyChanged("SourceColumn", null, null),
+                        () => { this.NotifyPropertyChanged("SourceColumn", null, null); if(OnSourceColumn_PostSetter != null && IsAttached) OnSourceColumn_PostSetter(this); },
                         new ProjectedCollection<ZBox.App.SchemaMigration.SourceColumnNHibernateImpl.SourceColumnProxy, ZBox.App.SchemaMigration.SourceColumn>(
                             Proxy.SourceColumn,
                             p => (ZBox.App.SchemaMigration.SourceColumn)OurContext.AttachAndWrap(p),
@@ -686,6 +687,7 @@ namespace ZBox.App.SchemaMigration
         }
     
         private OneNRelationList<ZBox.App.SchemaMigration.SourceColumn> _SourceColumn;
+public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceTable> OnSourceColumn_PostSetter;
 
         /// <summary>
         /// 

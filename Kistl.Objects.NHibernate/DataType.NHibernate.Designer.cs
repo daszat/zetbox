@@ -205,6 +205,7 @@ namespace Kistl.App.Base
         /// 
         /// </summary>
         // object list property
+
         // Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
@@ -220,7 +221,7 @@ namespace Kistl.App.Base
                         null,
                         this,
                         () => this.NotifyPropertyChanging("Constraints", null, null),
-                        () => this.NotifyPropertyChanged("Constraints", null, null),
+                        () => { this.NotifyPropertyChanged("Constraints", null, null); if(OnConstraints_PostSetter != null && IsAttached) OnConstraints_PostSetter(this); },
                         new ProjectedCollection<Kistl.App.Base.InstanceConstraintNHibernateImpl.InstanceConstraintProxy, Kistl.App.Base.InstanceConstraint>(
                             Proxy.Constraints,
                             p => (Kistl.App.Base.InstanceConstraint)OurContext.AttachAndWrap(p),
@@ -233,6 +234,7 @@ namespace Kistl.App.Base
         private OneNRelationList<Kistl.App.Base.InstanceConstraint> _Constraints;
         private List<int> ConstraintsIds;
         private bool Constraints_was_eagerLoaded = false;
+public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnConstraints_PostSetter;
 
         /// <summary>
         /// Identity which created this object
@@ -595,6 +597,7 @@ namespace Kistl.App.Base
         /// Liste aller Methoden der Objektklasse.
         /// </summary>
         // object list property
+
         // Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
@@ -610,7 +613,7 @@ namespace Kistl.App.Base
                         null,
                         this,
                         () => this.NotifyPropertyChanging("Methods", null, null),
-                        () => this.NotifyPropertyChanged("Methods", null, null),
+                        () => { this.NotifyPropertyChanged("Methods", null, null); if(OnMethods_PostSetter != null && IsAttached) OnMethods_PostSetter(this); },
                         new ProjectedCollection<Kistl.App.Base.MethodNHibernateImpl.MethodProxy, Kistl.App.Base.Method>(
                             Proxy.Methods,
                             p => (Kistl.App.Base.Method)OurContext.AttachAndWrap(p),
@@ -623,6 +626,7 @@ namespace Kistl.App.Base
         private OneNRelationList<Kistl.App.Base.Method> _Methods;
         private List<int> MethodsIds;
         private bool Methods_was_eagerLoaded = false;
+public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnMethods_PostSetter;
 
         /// <summary>
         /// Modul der Objektklasse
@@ -763,6 +767,7 @@ namespace Kistl.App.Base
         /// Eigenschaften der Objektklasse
         /// </summary>
         // object list property
+
         // Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
@@ -778,7 +783,7 @@ namespace Kistl.App.Base
                         "Properties_pos",
                         this,
                         () => this.NotifyPropertyChanging("Properties", null, null),
-                        () => this.NotifyPropertyChanged("Properties", null, null),
+                        () => { this.NotifyPropertyChanged("Properties", null, null); if(OnProperties_PostSetter != null && IsAttached) OnProperties_PostSetter(this); },
                         new ProjectedCollection<Kistl.App.Base.PropertyNHibernateImpl.PropertyProxy, Kistl.App.Base.Property>(
                             Proxy.Properties,
                             p => (Kistl.App.Base.Property)OurContext.AttachAndWrap(p),
@@ -791,6 +796,7 @@ namespace Kistl.App.Base
         private OneNRelationList<Kistl.App.Base.Property> _Properties;
         private List<int> PropertiesIds;
         private bool Properties_was_eagerLoaded = false;
+public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProperties_PostSetter;
 
         /// <summary>
         /// Optional requested ControlKind

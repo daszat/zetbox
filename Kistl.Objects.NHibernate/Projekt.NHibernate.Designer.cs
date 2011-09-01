@@ -51,6 +51,7 @@ namespace Kistl.App.Projekte
         /// Aufträge
         /// </summary>
         // object list property
+
         // Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
@@ -66,7 +67,7 @@ namespace Kistl.App.Projekte
                         null,
                         this,
                         () => this.NotifyPropertyChanging("Auftraege", null, null),
-                        () => this.NotifyPropertyChanged("Auftraege", null, null),
+                        () => { this.NotifyPropertyChanged("Auftraege", null, null); if(OnAuftraege_PostSetter != null && IsAttached) OnAuftraege_PostSetter(this); },
                         new ProjectedCollection<Kistl.App.Projekte.AuftragNHibernateImpl.AuftragProxy, Kistl.App.Projekte.Auftrag>(
                             Proxy.Auftraege,
                             p => (Kistl.App.Projekte.Auftrag)OurContext.AttachAndWrap(p),
@@ -77,6 +78,7 @@ namespace Kistl.App.Projekte
         }
     
         private OneNRelationList<Kistl.App.Projekte.Auftrag> _Auftraege;
+public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuftraege_PostSetter;
 
         /// <summary>
         /// 
@@ -564,6 +566,7 @@ namespace Kistl.App.Projekte
         /// 
         /// </summary>
         // object list property
+
         // Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
@@ -579,7 +582,7 @@ namespace Kistl.App.Projekte
                         null,
                         this,
                         () => this.NotifyPropertyChanging("Tasks", null, null),
-                        () => this.NotifyPropertyChanged("Tasks", null, null),
+                        () => { this.NotifyPropertyChanged("Tasks", null, null); if(OnTasks_PostSetter != null && IsAttached) OnTasks_PostSetter(this); },
                         new ProjectedCollection<Kistl.App.Projekte.TaskNHibernateImpl.TaskProxy, Kistl.App.Projekte.Task>(
                             Proxy.Tasks,
                             p => (Kistl.App.Projekte.Task)OurContext.AttachAndWrap(p),
@@ -590,6 +593,7 @@ namespace Kistl.App.Projekte
         }
     
         private OneNRelationList<Kistl.App.Projekte.Task> _Tasks;
+public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTasks_PostSetter;
 
         public override Type GetImplementedInterface()
         {

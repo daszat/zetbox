@@ -60,7 +60,7 @@ namespace Kistl.Generator.Templates.Properties
         {
 #line 29 "P:\Kistl\Kistl.Generator\Templates\Properties\ValueCollectionProperty.cst"
 AddSerialization(serializationList, underlyingCollectionName);
-
+	var eventName = "On" + name + "_PostSetter";
 
 #line 32 "P:\Kistl\Kistl.Generator\Templates\Properties\ValueCollectionProperty.cst"
 this.WriteObjects("		// ",  this.GetType() , "\r\n");
@@ -74,7 +74,7 @@ this.WriteObjects("				    ",  backingName , " \r\n");
 this.WriteObjects("				        = new ",  backingCollectionType , "<",  thisInterface , ", ",  referencedType , ", ",  entryType , ", ",  entryTypeImpl , ", ",  providerCollectionType , ">(\r\n");
 this.WriteObjects("							this.Context,\r\n");
 this.WriteObjects("				            this, \r\n");
-this.WriteObjects("				            () => this.NotifyPropertyChanged(\"",  name , "\", null, null),\r\n");
+this.WriteObjects("				            () => { this.NotifyPropertyChanged(\"",  name , "\", null, null); if(",  eventName , " != null && IsAttached) ",  eventName, "(this); },\r\n");
 this.WriteObjects("				            ",  underlyingCollectionName , ");\r\n");
 this.WriteObjects("				}\r\n");
 this.WriteObjects("				return ",  backingName , ";\r\n");
