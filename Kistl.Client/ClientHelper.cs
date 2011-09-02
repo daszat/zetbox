@@ -35,8 +35,8 @@ namespace Kistl.Client
             }
         }
 
-        public static readonly int WIDTH_TINY = 50;
-        public static readonly int WIDTH_SMALL = 100;
+        public static readonly int WIDTH_TINY = 60;
+        public static readonly int WIDTH_SMALL = 120; // MinWidth for most controls is 100 plus some margins
         public static readonly int WIDTH_NORMAL = 200;
         public static readonly int WIDTH_LARGE = 300;
         public static readonly int WIDTH_HUGE = 500;
@@ -53,6 +53,10 @@ namespace Kistl.Client
                 return WIDTH_SMALL;
             }
             else if (p is ObjectReferenceProperty)
+            {
+                return WIDTH_NORMAL;
+            }
+            else if (p is DateTimeProperty)
             {
                 return WIDTH_NORMAL;
             }
