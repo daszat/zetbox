@@ -10,18 +10,17 @@ namespace Kistl.Client.Presentables.ValueViewModels
     using System.Linq;
     using System.Linq.Dynamic;
     using System.Text;
-
     using Kistl.API;
+    using Kistl.API.Client;
     using Kistl.API.Utils;
     using Kistl.App.Base;
     using Kistl.App.Extensions;
     using Kistl.Client.Models;
-    using Kistl.API.Client;
 
     /// <summary>
     /// </summary>
     public class ObjectListViewModel
-        : BaseObjectCollectionViewModel<IReadOnlyObservableList<DataObjectViewModel>, IList<IDataObject>>, IValueListViewModel<DataObjectViewModel, IReadOnlyObservableList<DataObjectViewModel>>, ISortableViewModel
+        : BaseObjectCollectionViewModel<IList<IDataObject>>, IValueListViewModel<DataObjectViewModel, IReadOnlyObservableList<DataObjectViewModel>>, ISortableViewModel
     {
         public new delegate ObjectListViewModel Factory(IKistlContext dataCtx, ViewModel parent, IValueModel mdl);
 
@@ -34,52 +33,8 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
         #region Public interface and IReadOnlyValueModel<IReadOnlyObservableCollection<DataObjectViewModel>> Members
 
-        private ReadOnlyObservableProjectedList<IDataObject, DataObjectViewModel> _valueCache;
-        protected override IReadOnlyObservableList<DataObjectViewModel> GetValueFromModel()
-        {
-            EnsureValueCache();
-            return _valueCache;
-        }
+        protected override string InitialSortProperty {get { return null;}}
 
-        private IDelayedTask _valueLoader;
-
-        public override IReadOnlyObservableList<DataObjectViewModel> Value
-        {
-            get
-            {
-                if (_valueLoader == null)
-                {
-                    _valueLoader = ViewModelFactory.CreateDelayedTask(this, () =>
-                    {
-                        EnsureValueCache();
-                        OnPropertyChanged("Value");
-                    });
-                    _valueLoader.Trigger();
-                }
-                return _valueCache;
-            }
-            set
-            {
-                base.Value = value;
-            }
-        }
-
-        protected override void SetValueToModel(IReadOnlyObservableList<DataObjectViewModel> value)
-        {
-            throw new NotSupportedException();
-        }
-
-        protected override void EnsureValueCache()
-        {
-            if (_valueCache == null)
-            {
-                _valueCache = new ReadOnlyObservableProjectedList<IDataObject, DataObjectViewModel>(
-                    ObjectCollectionModel, ObjectCollectionModel.Value,
-                    obj => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj),
-                    mdl => mdl.Object);
-                _valueCache.CollectionChanged += ValueListChanged;
-            }
-        }
 
         public bool HasPersistentOrder
         {
@@ -158,20 +113,5 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 //SelectedItem = item;
             }
         }
-
-        private string _sortProperty = null;
-        private ListSortDirection _sortDirection = ListSortDirection.Ascending;
-
-        public void Sort(string propName, ListSortDirection direction)
-        {
-            if (string.IsNullOrEmpty(propName))
-                throw new ArgumentNullException("propName");
-
-            _sortProperty = propName;
-            _sortDirection = direction;
-        }
-
-        public string SortProperty { get { return _sortProperty; } }
-        public ListSortDirection SortDirection { get { return _sortDirection; } }
     }
 }

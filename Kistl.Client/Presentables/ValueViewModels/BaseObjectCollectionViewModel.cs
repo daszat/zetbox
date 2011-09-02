@@ -21,12 +21,11 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
     /// <summary>
     /// </summary>
-    public abstract class BaseObjectCollectionViewModel<TCollection, TModelCollection>
-        : ValueViewModel<TCollection, TModelCollection>
+    public abstract class BaseObjectCollectionViewModel<TModelCollection>
+        : ValueViewModel<IReadOnlyObservableList<DataObjectViewModel>, TModelCollection>
         where TModelCollection : ICollection<IDataObject>
-        where TCollection : INotifyCollectionChanged
     {
-        public new delegate BaseObjectCollectionViewModel<TCollection, TModelCollection> Factory(IKistlContext dataCtx, ViewModel parent, IValueModel mdl);
+        public new delegate BaseObjectCollectionViewModel<TModelCollection> Factory(IKistlContext dataCtx, ViewModel parent, IValueModel mdl);
 
         public BaseObjectCollectionViewModel(
             IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent,
@@ -169,7 +168,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             }
         }
 
-        
+
 
         private bool? _allowInlineAddNew = null;
         public bool AllowInlineAddNew
@@ -292,7 +291,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                         BaseObjectCollectionViewModelResources.CreateNewCommand_Name,
                         BaseObjectCollectionViewModelResources.CreateNewCommand_Tooltip,
                         () => CreateNewItem(),
-                        () => AllowAddNew && !DataContext.IsReadonly && !IsReadOnly, 
+                        () => AllowAddNew && !DataContext.IsReadonly && !IsReadOnly,
                         null);
                     _CreateNewCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_new_png);
                 }
@@ -313,7 +312,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                         BaseObjectCollectionViewModelResources.AddExistingCommand_Name,
                         BaseObjectCollectionViewModelResources.AddExistingCommand_Tooltip,
                         () => AddExistingItem(),
-                        () => AllowAddExisting && !DataContext.IsReadonly && !IsReadOnly, 
+                        () => AllowAddExisting && !DataContext.IsReadonly && !IsReadOnly,
                         null);
                     _AddExistingCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_search_png);
                 }
@@ -334,7 +333,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                         BaseObjectCollectionViewModelResources.RemoveCommand_Name,
                         BaseObjectCollectionViewModelResources.RemoveCommand_Tooltip,
                         () => SelectedItems.ToList().ForEach(i => RemoveItem(i)), // Collection will change while deleting!
-                        () => SelectedItems != null && SelectedItems.Count() > 0 && AllowRemove && !IsReadOnly, 
+                        () => SelectedItems != null && SelectedItems.Count() > 0 && AllowRemove && !IsReadOnly,
                         null);
                 }
                 return _RemoveCommand;
@@ -354,7 +353,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                         BaseObjectCollectionViewModelResources.DeleteCommand_Name,
                         BaseObjectCollectionViewModelResources.DeleteCommand_Tooltip,
                         () => SelectedItems.ToList().ForEach(i => DeleteItem(i)), // Collection will change while deleting!
-                        () => SelectedItems != null && SelectedItems.Count() > 0 && AllowDelete && !DataContext.IsReadonly && !IsReadOnly, 
+                        () => SelectedItems != null && SelectedItems.Count() > 0 && AllowDelete && !DataContext.IsReadonly && !IsReadOnly,
                         null);
                     _DeleteCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_delete_png);
                 }
@@ -487,6 +486,61 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
         #endregion
 
+        #region GotFromDerivedClasses
+        private SortedWrapper _wrapper = null;
+
+        private ReadOnlyObservableProjectedList<IDataObject, DataObjectViewModel> _valueCache;
+
+        protected override IReadOnlyObservableList<DataObjectViewModel> GetValueFromModel()
+        {
+            EnsureValueCache();
+            return _valueCache;
+        }
+
+        private IDelayedTask _valueLoader;
+
+        public override IReadOnlyObservableList<DataObjectViewModel> Value
+        {
+            get
+            {
+                if (_valueLoader == null)
+                {
+                    _valueLoader = ViewModelFactory.CreateDelayedTask(this, () =>
+                    {
+                        EnsureValueCache();
+                        OnPropertyChanged("Value");
+                    });
+                    _valueLoader.Trigger();
+                }
+                return _valueCache;
+            }
+            set
+            {
+                throw new NotSupportedException();
+            }
+        }
+
+        protected override void SetValueToModel(IReadOnlyObservableList<DataObjectViewModel> value)
+        {
+            throw new NotSupportedException();
+        }
+
+        protected abstract string InitialSortProperty { get; }
+
+        protected void EnsureValueCache()
+        {
+            if (_wrapper == null)
+            {
+                _wrapper = new SortedWrapper(ObjectCollectionModel.UnderlyingCollection, ObjectCollectionModel, InitialSortProperty);
+                _valueCache = new ReadOnlyObservableProjectedList<IDataObject, DataObjectViewModel>(
+                    _wrapper,
+                    obj => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj),
+                    mdl => mdl.Object);
+                _valueCache.CollectionChanged += ValueListChanged;
+            }
+        }
+        #endregion
+
         #region Utilities and UI callbacks
 
         private bool? _hasChildClasses;
@@ -567,20 +621,6 @@ namespace Kistl.Client.Presentables.ValueViewModels
             EnsureValueCache();
             ValueModel.Value.Clear();
         }
-
-        protected abstract void EnsureValueCache();
-
-        public override TCollection Value
-        {
-            get
-            {
-                throw new NotImplementedException("Implemented in derived classes");
-            }
-            set
-            {
-                throw new NotSupportedException("Value cannot be set on Lists or Collections");
-            }
-        }
         #endregion
 
         #region Proxy
@@ -651,7 +691,28 @@ namespace Kistl.Client.Presentables.ValueViewModels
         }
         #endregion
 
-        protected override ParseResult<TCollection> ParseValue(string str)
+        #region Sorting
+        private string _sortProperty = null;
+        private ListSortDirection _sortDirection = ListSortDirection.Ascending;
+
+        public void Sort(string propName, ListSortDirection direction)
+        {
+            if (string.IsNullOrEmpty(propName))
+                throw new ArgumentNullException("propName");
+
+            _sortProperty = propName;
+            _sortDirection = direction;
+
+            EnsureValueCache();
+            _wrapper.Sort(propName, direction, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+            OnPropertyChanged("ValueProxies");
+        }
+
+        public string SortProperty { get { return _sortProperty; } }
+        public ListSortDirection SortDirection { get { return _sortDirection; } }
+        #endregion
+
+        protected override ParseResult<IReadOnlyObservableList<DataObjectViewModel>> ParseValue(string str)
         {
             throw new NotSupportedException();
         }
