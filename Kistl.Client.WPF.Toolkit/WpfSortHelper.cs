@@ -39,6 +39,8 @@ namespace Kistl.Client.WPF.Toolkit
             _parent = parent;
             _viewModel = viewModel;
             _setHeaderTemplate = setHeaderTemplate;
+
+            _viewModel.PropertyChanged += new PropertyChangedEventHandler(_viewModel_PropertyChanged);
         }
 
         private Action<DependencyObject, DataTemplate> _setHeaderTemplate;
@@ -65,6 +67,15 @@ namespace Kistl.Client.WPF.Toolkit
             if (_lastColumnClicked != null)
             {
                 ApplyHeaderTemplate();
+            }
+        }
+
+        void _viewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "SortProperty" && string.IsNullOrEmpty(_viewModel.SortProperty) && _lastColumnClicked != null)
+            {
+                // Remove arrow from previously sorted header
+                _setHeaderTemplate(_lastColumnClicked, null);
             }
         }
 

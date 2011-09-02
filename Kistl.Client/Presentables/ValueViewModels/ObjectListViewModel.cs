@@ -31,6 +31,13 @@ namespace Kistl.Client.Presentables.ValueViewModels
         {
         }
 
+        protected override ObservableCollection<ICommandViewModel> CreateCommands()
+        {
+            var commands = base.CreateCommands();
+            commands.Add(ClearSortCommand);
+            return commands;
+        }
+
         #region Public interface and IReadOnlyValueModel<IReadOnlyObservableCollection<DataObjectViewModel>> Members
 
         protected override string InitialSortProperty {get { return null;}}
@@ -46,6 +53,11 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
         #endregion
 
+        public bool CanMove()
+        {
+            return SelectedItem != null && !IsSorting;
+        }
+
         private ICommandViewModel _MoveItemUpCommand = null;
         public ICommandViewModel MoveItemUpCommand
         {
@@ -53,7 +65,10 @@ namespace Kistl.Client.Presentables.ValueViewModels
             {
                 if (_MoveItemUpCommand == null)
                 {
-                    _MoveItemUpCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Up", "Moves the item up", MoveItemUp, () => SelectedItem != null, null);
+                    _MoveItemUpCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Up", "Moves the item up", 
+                        MoveItemUp,
+                        CanMove, 
+                        null);
                 }
                 return _MoveItemUpCommand;
             }
@@ -87,7 +102,10 @@ namespace Kistl.Client.Presentables.ValueViewModels
             {
                 if (_MoveItemDownCommand == null)
                 {
-                    _MoveItemDownCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Down", "Moves the item down", MoveItemDown, () => SelectedItem != null, null);
+                    _MoveItemDownCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Down", "Moves the item down", 
+                        MoveItemDown,
+                        CanMove, 
+                        null);
                 }
                 return _MoveItemDownCommand;
             }
@@ -111,6 +129,50 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 ValueModel.Value.RemoveAt(idx);
                 ValueModel.Value.Insert(idx + 1, item.Object);
                 //SelectedItem = item;
+            }
+        }
+
+        protected override void OnPropertyChanged(string propertyName)
+        {
+            base.OnPropertyChanged(propertyName);
+
+            switch(propertyName)
+            {
+                case "SortProperty":
+                    OnPropertyChanged("IsSorting");
+                    break;
+            }
+        }
+
+        public bool IsSorting
+        {
+            get
+            {
+                return !string.IsNullOrEmpty(SortProperty);
+            }
+        }
+
+        private ICommandViewModel _ClearSortCommand = null;
+        public ICommandViewModel ClearSortCommand
+        {
+            get
+            {
+                if (_ClearSortCommand == null)
+                {
+                    _ClearSortCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Clear sort", "Clear the current sorting", 
+                        ClearSort, 
+                        () => IsSorting, 
+                        null);
+                }
+                return _ClearSortCommand;
+            }
+        }
+
+        public void ClearSort()
+        {
+            if (IsSorting)
+            {
+                Sort(null, SortDirection);
             }
         }
     }

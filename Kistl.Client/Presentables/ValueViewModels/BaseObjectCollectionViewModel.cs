@@ -697,11 +697,10 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
         public void Sort(string propName, ListSortDirection direction)
         {
-            if (string.IsNullOrEmpty(propName))
-                throw new ArgumentNullException("propName");
-
             _sortProperty = propName;
             _sortDirection = direction;
+            OnPropertyChanged("SortProperty");
+            OnPropertyChanged("SortDirection");
 
             EnsureValueCache();
             _wrapper.Sort(propName, direction, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
