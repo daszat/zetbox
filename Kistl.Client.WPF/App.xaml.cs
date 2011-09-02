@@ -115,6 +115,8 @@ namespace Kistl.Client.WPF
                     // Make Gendarme happy
                     var resources = this.Resources;
 
+                    resources.BeginInit();
+
                     // Introduce noop converter to prevent them to ask for credentials during initialization
                     resources["IconConverter"] = new NoopConverter();
                     resources["ImageCtrlConverter"] = new NoopConverter();
@@ -142,6 +144,8 @@ namespace Kistl.Client.WPF
                     {
                         resources.MergedDictionaries.Add(dict);
                     }
+
+                    resources.EndInit();
 
                     // Init credentials explicit
                     container.Resolve<ICredentialsResolver>().EnsureCredentials();

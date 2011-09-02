@@ -27,7 +27,6 @@
   <Style TargetType="TextBlock"
          BasedOn="{StaticResource baseTextStyle}">
   </Style>
-  <!--
   <Style TargetType="{x:Type view:StringDisplay}"
          BasedOn="{StaticResource baseTextStyle}">
   </Style>
@@ -70,6 +69,6 @@
             Value="LightBlue" />
     <Setter Property="RowHeaderWidth"
             Value="25" />
-  </Style>-->
+  </Style>
 
 </ResourceDictionary>
