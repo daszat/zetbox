@@ -13,3 +13,4 @@ bin
 *.csproj.user
 *.suo
 Bin
+/Libs/MSBuildVersioning/Source/MSBuildVersioning/Properties/VersionInfo.cs
