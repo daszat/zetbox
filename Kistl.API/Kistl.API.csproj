@@ -97,6 +97,11 @@
     <Compile Include="PerfCounter\Log4NetAppenderUtils.cs" />
     <Compile Include="ProblemReporter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="KistlSourceRevision.cs" />
+    <None Include="Properties\VersionInfo.cs" />
+    <Compile Include="Properties\VersionInfo.Designer.cs">
+      <DependentUpon>VersionInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="SerializableExpression.cs" />
     <Compile Include="SerializableType.cs" />
     <Compile Include="Utils\ExpressionDumper.cs" />
@@ -152,4 +157,8 @@
     <Copy SourceFiles="$(TargetDir)$(TargetName).dll;$(TargetDir)$(TargetName).pdb" DestinationFolder="$(OutputPath)\..\Client" />
   </Target>
   -->
+  <UsingTask TaskName="GitVersionFile" AssemblyFile="..\Libs\MSBuildVersioning\MSBuildVersioning.dll" />
+  <Target Name="BeforeBuild">
+    <GitVersionFile TemplateFile="Properties\VersionInfo.cs" DestinationFile="Properties\VersionInfo.Designer.cs" />
+  </Target>
 </Project>

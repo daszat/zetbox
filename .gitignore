@@ -14,3 +14,4 @@ bin
 *.suo
 Bin
 /Libs/MSBuildVersioning/Source/MSBuildVersioning/Properties/VersionInfo.cs
+VersionInfo.Designer.cs
