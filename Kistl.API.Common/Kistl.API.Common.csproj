@@ -91,6 +91,10 @@
     <Compile Include="Packaging\PackagingHelper.cs" />
     <Compile Include="ParameterExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="Properties\VersionInfo.cs" />
+    <Compile Include="Properties\VersionInfo.Designer.cs">
+      <DependentUpon>VersionInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="PropertyExtensions.cs" />
     <Compile Include="RelationExtensions.cs" />
     <Compile Include="ObjectClassExtensions.cs" />
@@ -122,4 +126,8 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <UsingTask TaskName="GitVersionFile" AssemblyFile="..\Libs\MSBuildVersioning\MSBuildVersioning.dll" />
+  <Target Name="BeforeBuild">
+    <GitVersionFile TemplateFile="Properties\VersionInfo.cs" DestinationFile="Properties\VersionInfo.Designer.cs" />
+  </Target>
 </Project>

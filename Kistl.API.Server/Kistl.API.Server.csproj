@@ -105,6 +105,10 @@
     <Compile Include="ISchemaProvider.cs" />
     <Compile Include="IServerObjectHandlerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="Properties\VersionInfo.cs" />
+    <Compile Include="Properties\VersionInfo.Designer.cs">
+      <DependentUpon>VersionInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="QueryTranslator.cs" />
     <Compile Include="BaseServerObjectHandler.cs" />
     <Compile Include="ServerDeploymentRestrictor.cs" />
@@ -138,5 +142,9 @@
   </Target>
   -->
   <Target Name="AfterBuild">
+  </Target>
+  <UsingTask TaskName="GitVersionFile" AssemblyFile="..\Libs\MSBuildVersioning\MSBuildVersioning.dll" />
+  <Target Name="BeforeBuild">
+    <GitVersionFile TemplateFile="Properties\VersionInfo.cs" DestinationFile="Properties\VersionInfo.Designer.cs" />
   </Target>
 </Project>

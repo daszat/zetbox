@@ -58,7 +58,11 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="Properties\VersionInfo.cs" />
+    <Compile Include="Properties\VersionInfo.Designer.cs">
+      <DependentUpon>VersionInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Module.cs" />
     <Compile Include="PosixIdentitySource.cs" />
     <None Include="Kistl.snk" />
@@ -79,4 +83,8 @@
     <Copy SourceFiles="$(TargetDir)$(TargetName).dll;$(TargetDir)$(TargetName).pdb" DestinationFolder="$(OutputPath)\..\Client" />
   </Target>
   -->
+  <UsingTask TaskName="GitVersionFile" AssemblyFile="..\Libs\MSBuildVersioning\MSBuildVersioning.dll" />
+  <Target Name="BeforeBuild">
+    <GitVersionFile TemplateFile="Properties\VersionInfo.cs" DestinationFile="Properties\VersionInfo.Designer.cs" />
+  </Target>
 </Project>

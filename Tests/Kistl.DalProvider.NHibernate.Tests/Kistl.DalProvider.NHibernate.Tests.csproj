@@ -58,6 +58,10 @@
     <Compile Include="Tests\ContextTests\when_concurrency.cs" />
     <Compile Include="Tests\ContextTests\when_deleting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="Properties\VersionInfo.cs" />
+    <Compile Include="Properties\VersionInfo.Designer.cs">
+      <DependentUpon>VersionInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="SetUpFixture.cs" />
     <Compile Include="Tests\BinarySerializers\should_work_with_ICompoundObjects.cs" />
     <Compile Include="Tests\Blobs\when_using.cs" />
@@ -169,4 +173,8 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <UsingTask TaskName="GitVersionFile" AssemblyFile="..\..\Libs\MSBuildVersioning\MSBuildVersioning.dll" />
+  <Target Name="BeforeBuild">
+    <GitVersionFile TemplateFile="Properties\VersionInfo.cs" DestinationFile="Properties\VersionInfo.Designer.cs" />
+  </Target>
 </Project>

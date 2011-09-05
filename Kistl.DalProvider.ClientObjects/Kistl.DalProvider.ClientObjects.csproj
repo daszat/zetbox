@@ -75,6 +75,10 @@
     <Compile Include="LinqToKistl\KistlContextQuery.cs" />
     <Compile Include="LinqToKistl\QueryTranslator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="Properties\VersionInfo.cs" />
+    <Compile Include="Properties\VersionInfo.Designer.cs">
+      <DependentUpon>VersionInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="PropertyDescriptorClientImpl.cs" />
     <Compile Include="RelationEntryClientImpl.cs" />
     <Compile Include="ValueCollectionEntryClientImpl.cs" />
@@ -118,5 +122,9 @@
   </Target>
   -->
   <Target Name="AfterBuild">
+  </Target>
+  <UsingTask TaskName="GitVersionFile" AssemblyFile="..\Libs\MSBuildVersioning\MSBuildVersioning.dll" />
+  <Target Name="BeforeBuild">
+    <GitVersionFile TemplateFile="Properties\VersionInfo.cs" DestinationFile="Properties\VersionInfo.Designer.cs" />
   </Target>
 </Project>

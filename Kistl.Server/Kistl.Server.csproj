@@ -100,6 +100,10 @@
     <Compile Include="Helper.cs" />
     <Compile Include="HtpasswdIdentitySource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="Properties\VersionInfo.cs" />
+    <Compile Include="Properties\VersionInfo.Designer.cs">
+      <DependentUpon>VersionInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="KistlService.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -206,4 +210,8 @@
     <PostBuildEvent>
     </PostBuildEvent>
   </PropertyGroup>
+  <UsingTask TaskName="GitVersionFile" AssemblyFile="..\Libs\MSBuildVersioning\MSBuildVersioning.dll" />
+  <Target Name="BeforeBuild">
+    <GitVersionFile TemplateFile="Properties\VersionInfo.cs" DestinationFile="Properties\VersionInfo.Designer.cs" />
+  </Target>
 </Project>

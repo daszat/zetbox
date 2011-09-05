@@ -72,6 +72,10 @@
     <Compile Include="RelationWrappers\OneNRelationList.cs" />
     <Compile Include="PersistenceObjectBaseImpl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="Properties\VersionInfo.cs" />
+    <Compile Include="Properties\VersionInfo.Designer.cs">
+      <DependentUpon>VersionInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="PropertyDescriptorBaseImpl.cs" />
     <Compile Include="RelationEntryBaseImpl.cs" />
     <Compile Include="RelationWrappers\CollectionWrapper.cs" />
@@ -107,4 +111,8 @@
 
   </Target>
   -->
+  <UsingTask TaskName="GitVersionFile" AssemblyFile="..\Libs\MSBuildVersioning\MSBuildVersioning.dll" />
+  <Target Name="BeforeBuild">
+    <GitVersionFile TemplateFile="Properties\VersionInfo.cs" DestinationFile="Properties\VersionInfo.Designer.cs" />
+  </Target>
 </Project>

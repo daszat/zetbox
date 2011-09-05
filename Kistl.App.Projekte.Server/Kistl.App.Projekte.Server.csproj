@@ -82,6 +82,10 @@
     <Compile Include="Projekte\ProjektActions.cs" />
     <Compile Include="SchemaMigration\MigrationProjectActions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="Properties\VersionInfo.cs" />
+    <Compile Include="Properties\VersionInfo.Designer.cs">
+      <DependentUpon>VersionInfo.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Kistl.API.Server\Kistl.API.Server.csproj">
@@ -116,5 +120,9 @@
   </Target>
   -->
   <Target Name="AfterBuild">
+  </Target>
+  <UsingTask TaskName="GitVersionFile" AssemblyFile="..\Libs\MSBuildVersioning\MSBuildVersioning.dll" />
+  <Target Name="BeforeBuild">
+    <GitVersionFile TemplateFile="Properties\VersionInfo.cs" DestinationFile="Properties\VersionInfo.Designer.cs" />
   </Target>
 </Project>

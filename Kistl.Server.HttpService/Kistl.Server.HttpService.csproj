@@ -97,6 +97,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="Properties\VersionInfo.cs" />
+    <Compile Include="Properties\VersionInfo.Designer.cs">
+      <DependentUpon>VersionInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -192,4 +196,8 @@ xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Bootstrapper" "$(Proje
 bash -c 'cp -r "$(SolutionDir)/bin/$(Configuration)"/{Common,Server,Client,Bootstrapper} "$(ProjectDir)"'
      </PostBuildEvent>
   </PropertyGroup>
+  <UsingTask TaskName="GitVersionFile" AssemblyFile="..\Libs\MSBuildVersioning\MSBuildVersioning.dll" />
+  <Target Name="BeforeBuild">
+    <GitVersionFile TemplateFile="Properties\VersionInfo.cs" DestinationFile="Properties\VersionInfo.Designer.cs" />
+  </Target>
 </Project>

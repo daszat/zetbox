@@ -112,6 +112,10 @@
     <Compile Include="PersistenceObjects\when_loaded.cs" />
     <Compile Include="ProjectDataFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="Properties\VersionInfo.cs" />
+    <Compile Include="Properties\VersionInfo.Designer.cs">
+      <DependentUpon>VersionInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="CompoundObjects\CompoundObjectFixture.cs" />
     <Compile Include="CompoundObjects\when_changing_a_CompoundObject_member.cs" />
     <Compile Include="CompoundObjects\when_initialized.cs" />
@@ -145,4 +149,8 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <UsingTask TaskName="GitVersionFile" AssemblyFile="..\..\Libs\MSBuildVersioning\MSBuildVersioning.dll" />
+  <Target Name="BeforeBuild">
+    <GitVersionFile TemplateFile="Properties\VersionInfo.cs" DestinationFile="Properties\VersionInfo.Designer.cs" />
+  </Target>
 </Project>
