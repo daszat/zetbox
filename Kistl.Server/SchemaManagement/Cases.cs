@@ -849,6 +849,7 @@ namespace Kistl.Server.SchemaManagement
             {
                 db.DropColumn(srcTblName, srcIndexName);
             }
+            db.DropIndex(srcTblName, Construct.IndexName(srcTblName.Name, srcColName));
 
             bool aCreated = false;
             bool bCreated = false;
