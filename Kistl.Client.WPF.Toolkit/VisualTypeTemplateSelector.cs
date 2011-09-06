@@ -32,6 +32,7 @@ namespace Kistl.Client.WPF.Toolkit
         private static DataTemplate SelectTemplate(ViewModel mdl, string controlKindName, IFrozenContext frozenCtx)
         {
             var ck = frozenCtx.GetQuery<ControlKind>().SingleOrDefault(c => c.Name == controlKindName);
+            if (ck == null) Logging.Log.WarnFormat("Control kind with name '{0}' was not found", controlKindName);
             return SelectTemplate(mdl, ck, frozenCtx);
         }
 

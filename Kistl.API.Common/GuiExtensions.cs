@@ -64,6 +64,7 @@ namespace Kistl.App.Extensions
 
             // If the ViewModel has a more specific DefaultKind respect its choice
             if (self.DefaultEditorKind != null
+                && requestedControlKind != null
                 && self.DefaultEditorKind.AndParents().Select(i => i.ExportGuid).Contains(requestedControlKind.ExportGuid))
             {
                 requestedControlKind = self.DefaultEditorKind;
