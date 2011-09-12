@@ -133,50 +133,41 @@ using Kistl.API.Client.PerfCounter;
 
                 List<IStreamable> auxObjects;
                 List<IDataObject> serviceResult = VisitAndCallService(e, out auxObjects);
-                objectCount = serviceResult.Count;
+                foreach (IDataObject obj in serviceResult)
+                {
+                    _context.AttachRespectingIsolationLevel(obj);
+                }
                 // prepare caches
                 foreach (IPersistenceObject obj in auxObjects)
                 {
                     _context.AttachRespectingIsolationLevel(obj);
                 }
+                objectCount = serviceResult.Count;
 
-                MethodCallExpression me = e as MethodCallExpression;
+                var result = QueryFromLocalObjectsHack(_type);
+                _context.PlaybackNotifications();
 
                 // Projection
                 if (e.IsMethodCallExpression("Select"))
                 {
                     // Get Selector and SourceType
                     // Sourcetype should be of type IDataObject
+                    MethodCallExpression me = e as MethodCallExpression;
                     LambdaExpression selector = (LambdaExpression)me.Arguments[1].StripQuotes();
                     Type sourceType = selector.Parameters[0].Type;
-
-                    // Create temporary result list for objects
-                    IList result = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(sourceType));
-                    foreach (IDataObject obj in serviceResult)
-                    {
-                        result.Add(_context.AttachRespectingIsolationLevel(obj));
-                    }
-                    // Can't use T as it is a ListType
-                    AddNewLocalObjects(_type, result);
-
-                    _context.PlaybackNotifications();
 
                     IQueryable selectResult = result.AsQueryable().AddSelector(selector, sourceType, selector.Body.Type); // typeof(T).FindElementTypes().First());
                     return (T)Activator.CreateInstance(typeof(T), selectResult.AddCast(typeof(T).FindElementTypes().First()).GetEnumerator());
                 }
                 else
                 {
-                    T result = Activator.CreateInstance<T>();
-                    if (!(result is IList)) throw new InvalidOperationException("A GetListCall supports only ILists as return result");
-                    foreach (IDataObject obj in serviceResult)
+                    T castResult = Activator.CreateInstance<T>();
+                    if (!(castResult is IList)) throw new InvalidOperationException("A GetListCall supports only ILists as return result");
+                    foreach (var obj in result)
                     {
-                        ((IList)result).Add(_context.AttachRespectingIsolationLevel(obj));
+                        ((IList)castResult).Add(obj);
                     }
-                    // Can't use T as it is a ListType
-                    AddNewLocalObjects(_type, (IList)result);
-
-                    _context.PlaybackNotifications();
-                    return result;
+                    return castResult;
                 }
             }
             finally
@@ -208,8 +199,7 @@ using Kistl.API.Client.PerfCounter;
                 Visit(e);
 
                 // Try to find a local object first
-                List<T> result = new List<T>();
-                AddLocalObjects<T>(result);
+                var result = QueryFromLocalObjects<T>();
 
                 // If nothing found local -> goto Server
                 if (result.Count == 0)
@@ -260,25 +250,20 @@ using Kistl.API.Client.PerfCounter;
         }
 
         #region Local Object handling
-        private void AddNewLocalObjects(InterfaceType ifType, IList result)
+        private IList QueryFromLocalObjectsHack(InterfaceType ifType)
         {
-            MethodInfo mi = typeof(KistlContextProvider).GetMethod("AddNewLocalObjectsGeneric", BindingFlags.Instance | BindingFlags.NonPublic)
+            MethodInfo mi = typeof(KistlContextProvider).GetMethod("QueryFromLocalObjects", BindingFlags.Instance | BindingFlags.NonPublic)
                 .MakeGenericMethod(ifType.Type);
-            mi.Invoke(this, new object[] { result });
+            return (IList)mi.Invoke(this, new object[] {  });
         }
 
-        private void AddNewLocalObjectsGeneric<T>(IList result)
+        private List<T> QueryFromLocalObjects<T>()
         {
-            var list = _context.AttachedObjects.AsQueryable().Where(o => o.ObjectState == DataObjectState.New).OfType<T>();
-            if (_filter != null) _filter.ForEach(f => list = list.AddFilter(f));
-            list.ForEach<T>(i => result.Add(i));
-        }
-
-        private void AddLocalObjects<T>(IList result)
-        {
+            List<T> result = new List<T>();
             var list = _context.AttachedObjects.AsQueryable().Where(o => o.ObjectState != DataObjectState.Deleted).OfType<T>();
             if (_filter != null) _filter.ForEach(f => list = list.AddFilter(f));
-            list.ForEach<T>(i => result.Add(i));
+            list.ForEach<T>(result.Add);
+            return result;
         }
         #endregion
 
