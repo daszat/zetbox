@@ -20,7 +20,27 @@ namespace Kistl.Generator
                .SingleInstance();
 
             builder
-                .RegisterType<Compiler>()
+                .RegisterType<MsBuildCompiler>()
+                .As<Compiler>()
+                .SingleInstance();
+        }
+    }
+
+    public sealed class XBuildGeneratorModule
+       : Module
+    {
+        protected override void Load(ContainerBuilder builder)
+        {
+            base.Load(builder);
+
+            builder
+               .RegisterType<InterfaceGenerator>()
+               .As<AbstractBaseGenerator>()
+               .SingleInstance();
+
+            builder
+                .RegisterType<XBuildCompiler>()
+                .As<Compiler>()
                 .SingleInstance();
         }
     }

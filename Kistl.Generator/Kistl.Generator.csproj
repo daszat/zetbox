@@ -126,6 +126,7 @@
     <Compile Include="Extensions\Reflection.cs" />
     <Compile Include="BaseGeneratorModule.cs" />
     <Compile Include="Log4NetLogger.cs" />
+    <Compile Include="MsBuildCompiler.cs" />
     <Compile Include="ResourceTemplate.cs" />
     <Compile Include="TemplateExecutor.cs" />
     <Compile Include="Templates\AssemblyInfoTemplate.cs">
@@ -386,6 +387,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="XBuildCompiler.cs" />
     <None Include="Properties\VersionInfo.cs" />
     <Compile Include="Properties\VersionInfo.Designer.cs">
       <DependentUpon>VersionInfo.cs</DependentUpon>
