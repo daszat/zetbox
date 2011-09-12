@@ -255,19 +255,15 @@ namespace Kistl.Generator
             if (!String.IsNullOrEmpty(outputPath))
             {
                 Log.InfoFormat("Publishing results to [{0}]", outputPath);
-                if (Directory.Exists(outputPath))
-                {
-                    Directory.Delete(outputPath, true);
-                }
                 try
                 {
-                    Directory.Move(_config.Server.CodeGenWorkingPath, outputPath);
+                    PreparePublishOutput(outputPath);
                 }
                 catch (IOException)
                 {
                     Thread.Sleep(1000);
                     // try again, might be locked by something
-                    Directory.Move(_config.Server.CodeGenWorkingPath, outputPath);
+                    PreparePublishOutput(outputPath);
                 }
 
                 // source
@@ -282,6 +278,15 @@ namespace Kistl.Generator
                     // CompileCode(outputPath);
                 }
             }
+        }
+
+        private void PreparePublishOutput(string outputPath)
+        {
+            if (Directory.Exists(outputPath))
+            {
+                Directory.Delete(outputPath, true);
+            }
+            Directory.Move(_config.Server.CodeGenWorkingPath, outputPath);
         }
 
         // adapted from http://msdn.microsoft.com/en-us/library/bb762914.aspx
