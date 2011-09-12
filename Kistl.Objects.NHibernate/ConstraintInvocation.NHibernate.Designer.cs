@@ -456,7 +456,7 @@ namespace Kistl.App.Base
         {
             var result = base.GetParentsToDelete();
 
-
+            // Follow ConstraintInvocation_has_TypeRef
             if (this.Implementor != null && this.Implementor.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.Implementor);
 
@@ -467,14 +467,17 @@ namespace Kistl.App.Base
         {
             var result = base.GetChildrenToDelete();
 
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.InvokingConstraint>()
-                .Where(child => child.IsValidInvocation == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
+            // Follow Constraint_invokes_GetErrorTextInvocation
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Base.InvokingConstraint>()
                 .Where(child => child.GetErrorTextInvocation == this
+                    && child.ObjectState == DataObjectState.Deleted)
+                .Cast<NHibernatePersistenceObject>());
+
+            // Follow Constraint_invokes_IsValidInvocation
+            result.AddRange(Context.AttachedObjects
+                .OfType<Kistl.App.Base.InvokingConstraint>()
+                .Where(child => child.IsValidInvocation == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
 

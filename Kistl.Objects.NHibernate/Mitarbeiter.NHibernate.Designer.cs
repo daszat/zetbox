@@ -934,13 +934,15 @@ namespace Kistl.App.Projekte
         {
             var result = base.GetParentsToDelete();
 
-
+            // Follow Mitarbeiter_is_a_Identity
             if (this.Identity != null && this.Identity.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.Identity);
 
+            // Follow Mitarbeiter_was_ChangedBy
             if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.ChangedBy);
 
+            // Follow Mitarbeiter_was_CreatedBy
             if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.CreatedBy);
 
@@ -951,6 +953,7 @@ namespace Kistl.App.Projekte
         {
             var result = base.GetChildrenToDelete();
 
+            // Follow Auftrag_has_Mitarbeiter
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Projekte.Auftrag>()
                 .Where(child => child.Mitarbeiter == this

@@ -1115,16 +1115,19 @@ namespace Kistl.App.Base
         {
             var result = base.GetParentsToDelete();
 
-
-            if (this.Assembly != null && this.Assembly.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.Assembly);
-
+            // Follow Child_has_Parent
             if (this.Parent != null && this.Parent.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.Parent);
 
+            // Follow TypeRef_has_Assembly
+            if (this.Assembly != null && this.Assembly.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.Assembly);
+
+            // Follow TypeRef_was_ChangedBy
             if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.ChangedBy);
 
+            // Follow TypeRef_was_CreatedBy
             if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.CreatedBy);
 
@@ -1135,29 +1138,38 @@ namespace Kistl.App.Base
         {
             var result = base.GetChildrenToDelete();
 
+            // Follow ClrObjectParameter_isOf_Type
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Base.CLRObjectParameter>()
                 .Where(child => child.Type == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
+
+            // Follow ConstraintInvocation_has_TypeRef
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Base.ConstraintInvocation>()
                 .Where(child => child.Implementor == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
+
+            // Follow Descriptor_has_ViewModelRef
+            result.AddRange(Context.AttachedObjects
+                .OfType<Kistl.App.GUI.ViewModelDescriptor>()
+                .Where(child => child.ViewModelRef == this
+                    && child.ObjectState == DataObjectState.Deleted)
+                .Cast<NHibernatePersistenceObject>());
+
+            // Follow ServiceDescriptor_describes_a_TypeRef
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Base.ServiceDescriptor>()
                 .Where(child => child.TypeRef == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
+
+            // Follow View_has_ControlRef
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.GUI.ViewDescriptor>()
                 .Where(child => child.ControlRef == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.GUI.ViewModelDescriptor>()
-                .Where(child => child.ViewModelRef == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
 

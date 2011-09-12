@@ -252,7 +252,6 @@ public static event PropertyListChangedHandler<Kistl.App.Test.RequiredParent> On
         {
             var result = base.GetParentsToDelete();
 
-
             return result;
         }
 
@@ -260,6 +259,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.RequiredParent> On
         {
             var result = base.GetChildrenToDelete();
 
+            // Follow Parent_of_Children
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Test.RequiredParentChild>()
                 .Where(child => child.Parent == this

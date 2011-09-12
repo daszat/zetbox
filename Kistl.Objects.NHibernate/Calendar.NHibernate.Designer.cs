@@ -1069,15 +1069,17 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
         {
             var result = base.GetParentsToDelete();
 
-
+            // Follow Calendar_has_Module
             if (this.Module != null && this.Module.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.Module);
 
-            if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.CreatedBy);
-
+            // Follow Calendar_was_ChangedBy
             if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.ChangedBy);
+
+            // Follow Calendar_was_CreatedBy
+            if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.CreatedBy);
 
             return result;
         }
@@ -1086,11 +1088,14 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
         {
             var result = base.GetChildrenToDelete();
 
+            // Follow BaseCalendar_has_ChildCalendar
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Calendar.Calendar>()
                 .Where(child => child.BaseCalendar == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
+
+            // Follow Calendar_has_CalendarRules
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Calendar.CalendarRule>()
                 .Where(child => child.Calendar == this

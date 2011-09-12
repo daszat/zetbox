@@ -337,7 +337,7 @@ namespace Kistl.App.Base
         {
             var result = base.GetParentsToDelete();
 
-
+            // Follow ClrObjectParameter_isOf_Type
             if (this.Type != null && this.Type.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.Type);
 
@@ -347,7 +347,6 @@ namespace Kistl.App.Base
         public override List<NHibernatePersistenceObject> GetChildrenToDelete()
         {
             var result = base.GetChildrenToDelete();
-
 
             return result;
         }

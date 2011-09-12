@@ -850,13 +850,15 @@ namespace at.dasz.DocumentManagement
         {
             var result = base.GetParentsToDelete();
 
-
+            // Follow File_has_Blob
             if (this.Blob != null && this.Blob.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.Blob);
 
+            // Follow File_was_ChangedBy
             if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.ChangedBy);
 
+            // Follow File_was_CreatedBy
             if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.CreatedBy);
 
@@ -866,7 +868,6 @@ namespace at.dasz.DocumentManagement
         public override List<NHibernatePersistenceObject> GetChildrenToDelete()
         {
             var result = base.GetChildrenToDelete();
-
 
             return result;
         }

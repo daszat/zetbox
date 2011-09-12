@@ -1170,19 +1170,23 @@ namespace Kistl.App.GUI
         {
             var result = base.GetParentsToDelete();
 
-
-            if (this.RequestedKind != null && this.RequestedKind.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.RequestedKind);
-
+            // Follow FilterConfiguration_has_Module
             if (this.Module != null && this.Module.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.Module);
 
+            // Follow FilterConfiguration_has_RequestedKind
+            if (this.RequestedKind != null && this.RequestedKind.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.RequestedKind);
+
+            // Follow FilterConfiguration_has_ViewModelDescriptor
             if (this.ViewModelDescriptor != null && this.ViewModelDescriptor.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.ViewModelDescriptor);
 
+            // Follow FilterConfiguration_was_ChangedBy
             if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.ChangedBy);
 
+            // Follow FilterConfiguration_was_CreatedBy
             if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.CreatedBy);
 
@@ -1192,7 +1196,6 @@ namespace Kistl.App.GUI
         public override List<NHibernatePersistenceObject> GetChildrenToDelete()
         {
             var result = base.GetChildrenToDelete();
-
 
             return result;
         }

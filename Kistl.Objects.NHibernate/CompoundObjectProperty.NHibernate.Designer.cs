@@ -453,7 +453,7 @@ namespace Kistl.App.Base
         {
             var result = base.GetParentsToDelete();
 
-
+            // Follow CompoundObjectProperty_has_CompoundObjectDefinition
             if (this.CompoundObjectDefinition != null && this.CompoundObjectDefinition.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.CompoundObjectDefinition);
 
@@ -463,7 +463,6 @@ namespace Kistl.App.Base
         public override List<NHibernatePersistenceObject> GetChildrenToDelete()
         {
             var result = base.GetChildrenToDelete();
-
 
             return result;
         }

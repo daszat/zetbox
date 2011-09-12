@@ -191,14 +191,12 @@ namespace at.dasz.DocumentManagement
         {
             var result = base.GetParentsToDelete();
 
-
             return result;
         }
 
         public override List<NHibernatePersistenceObject> GetChildrenToDelete()
         {
             var result = base.GetChildrenToDelete();
-
 
             return result;
         }

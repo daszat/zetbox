@@ -1415,19 +1415,23 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
         {
             var result = base.GetParentsToDelete();
 
-
+            // Follow DataType_has_DefaultIcon
             if (this.DefaultIcon != null && this.DefaultIcon.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.DefaultIcon);
 
+            // Follow DataType_may_request_ControlKind
             if (this.RequestedKind != null && this.RequestedKind.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.RequestedKind);
 
+            // Follow DataType_was_ChangedBy
             if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.ChangedBy);
 
+            // Follow DataType_was_CreatedBy
             if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.CreatedBy);
 
+            // Follow Module_contains_DataTypes
             if (this.Module != null && this.Module.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.Module);
 
@@ -1438,19 +1442,24 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
         {
             var result = base.GetChildrenToDelete();
 
+            // Follow Constraint_on_Constrained
+            result.AddRange(Context.AttachedObjects
+                .OfType<Kistl.App.Base.InstanceConstraint>()
+                .Where(child => child.Constrained == this
+                    && child.ObjectState == DataObjectState.Deleted)
+                .Cast<NHibernatePersistenceObject>());
+
+            // Follow ObjectClass_has_Methods
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Base.Method>()
                 .Where(child => child.ObjectClass == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
+
+            // Follow ObjectClass_has_Properties
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Base.Property>()
                 .Where(child => child.ObjectClass == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.InstanceConstraint>()
-                .Where(child => child.Constrained == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
 

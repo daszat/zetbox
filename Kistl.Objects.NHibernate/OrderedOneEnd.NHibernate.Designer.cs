@@ -252,7 +252,6 @@ public static event PropertyListChangedHandler<Kistl.App.Test.OrderedOneEnd> OnN
         {
             var result = base.GetParentsToDelete();
 
-
             return result;
         }
 
@@ -260,6 +259,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.OrderedOneEnd> OnN
         {
             var result = base.GetChildrenToDelete();
 
+            // Follow OneEnd_hasMany_NEnds
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Test.OrderedNEnd>()
                 .Where(child => child.OneEnd == this

@@ -833,10 +833,11 @@ namespace Kistl.App.Base
         {
             var result = base.GetParentsToDelete();
 
-
+            // Follow Document_was_ChangedBy
             if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.ChangedBy);
 
+            // Follow Document_was_CreatedBy
             if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.CreatedBy);
 
@@ -847,11 +848,14 @@ namespace Kistl.App.Base
         {
             var result = base.GetChildrenToDelete();
 
+            // Follow File_has_Blob
             result.AddRange(Context.AttachedObjects
                 .OfType<at.dasz.DocumentManagement.File>()
                 .Where(child => child.Blob == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
+
+            // Follow Icon_has_Blob
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.GUI.Icon>()
                 .Where(child => child.Blob == this

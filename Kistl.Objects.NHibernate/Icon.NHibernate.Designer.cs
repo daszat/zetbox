@@ -566,10 +566,11 @@ namespace Kistl.App.GUI
         {
             var result = base.GetParentsToDelete();
 
-
+            // Follow Icon_has_Blob
             if (this.Blob != null && this.Blob.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.Blob);
 
+            // Follow Icon_has_Module
             if (this.Module != null && this.Module.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.Module);
 
@@ -580,26 +581,35 @@ namespace Kistl.App.GUI
         {
             var result = base.GetChildrenToDelete();
 
+            // Follow BoolProperty_has_FalseIcon
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Base.BoolProperty>()
                 .Where(child => child.FalseIcon == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.BoolProperty>()
-                .Where(child => child.TrueIcon == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
+
+            // Follow BoolProperty_has_NullIcon
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Base.BoolProperty>()
                 .Where(child => child.NullIcon == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
+
+            // Follow BoolProperty_has_TrueIcon
+            result.AddRange(Context.AttachedObjects
+                .OfType<Kistl.App.Base.BoolProperty>()
+                .Where(child => child.TrueIcon == this
+                    && child.ObjectState == DataObjectState.Deleted)
+                .Cast<NHibernatePersistenceObject>());
+
+            // Follow DataType_has_DefaultIcon
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Base.DataType>()
                 .Where(child => child.DefaultIcon == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
+
+            // Follow Method_has_Icon
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Base.Method>()
                 .Where(child => child.Icon == this

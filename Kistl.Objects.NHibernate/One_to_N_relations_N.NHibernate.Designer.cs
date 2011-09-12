@@ -350,7 +350,7 @@ namespace Kistl.App.Test
         {
             var result = base.GetParentsToDelete();
 
-
+            // Follow OneSide_connectsTo_NSide
             if (this.OneSide != null && this.OneSide.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.OneSide);
 
@@ -360,7 +360,6 @@ namespace Kistl.App.Test
         public override List<NHibernatePersistenceObject> GetChildrenToDelete()
         {
             var result = base.GetChildrenToDelete();
-
 
             return result;
         }

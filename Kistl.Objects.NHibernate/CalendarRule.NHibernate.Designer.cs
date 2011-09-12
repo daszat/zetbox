@@ -1197,16 +1197,19 @@ namespace Kistl.App.Calendar
         {
             var result = base.GetParentsToDelete();
 
-
+            // Follow Calendar_has_CalendarRules
             if (this.Calendar != null && this.Calendar.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.Calendar);
 
+            // Follow CalendarRule_has_Module
             if (this.Module != null && this.Module.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.Module);
 
+            // Follow CalendarRule_was_ChangedBy
             if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.ChangedBy);
 
+            // Follow CalendarRule_was_CreatedBy
             if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.CreatedBy);
 
@@ -1216,7 +1219,6 @@ namespace Kistl.App.Calendar
         public override List<NHibernatePersistenceObject> GetChildrenToDelete()
         {
             var result = base.GetChildrenToDelete();
-
 
             return result;
         }

@@ -1369,19 +1369,23 @@ namespace Kistl.App.Base
         {
             var result = base.GetParentsToDelete();
 
-
+            // Follow Module_has_Relation
             if (this.Module != null && this.Module.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.Module);
 
+            // Follow Relation_hasA_A
             if (this.A != null && this.A.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.A);
 
+            // Follow Relation_hasB_B
             if (this.B != null && this.B.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.B);
 
+            // Follow Relation_was_ChangedBy
             if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.ChangedBy);
 
+            // Follow Relation_was_CreatedBy
             if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.CreatedBy);
 
@@ -1391,7 +1395,6 @@ namespace Kistl.App.Base
         public override List<NHibernatePersistenceObject> GetChildrenToDelete()
         {
             var result = base.GetChildrenToDelete();
-
 
             return result;
         }

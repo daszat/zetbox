@@ -878,12 +878,13 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
         {
             var result = base.GetParentsToDelete();
 
-
-            if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.CreatedBy);
-
+            // Follow Kunde_was_ChangedBy
             if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.ChangedBy);
+
+            // Follow Kunde_was_CreatedBy
+            if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.CreatedBy);
 
             return result;
         }
@@ -892,11 +893,14 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
         {
             var result = base.GetChildrenToDelete();
 
+            // Follow Auftrag_has_Kunde
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Projekte.Auftrag>()
                 .Where(child => child.Kunde == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
+
+            // Follow TestObjClass_has_ObjectProp
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Test.TestObjClass>()
                 .Where(child => child.ObjectProp == this

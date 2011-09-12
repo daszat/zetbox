@@ -869,15 +869,17 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.Migratio
         {
             var result = base.GetParentsToDelete();
 
-
+            // Follow MigrationProject_migrates_to_Module
             if (this.DestinationModule != null && this.DestinationModule.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.DestinationModule);
 
-            if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.CreatedBy);
-
+            // Follow MigrationProject_was_ChangedBy
             if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.ChangedBy);
+
+            // Follow MigrationProject_was_CreatedBy
+            if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.CreatedBy);
 
             return result;
         }
@@ -886,6 +888,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.Migratio
         {
             var result = base.GetChildrenToDelete();
 
+            // Follow MigrationProject_reads_from_StagingDatabases
             result.AddRange(Context.AttachedObjects
                 .OfType<ZBox.App.SchemaMigration.StagingDatabase>()
                 .Where(child => child.MigrationProject == this

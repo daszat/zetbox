@@ -337,7 +337,7 @@ namespace Kistl.App.Base
         {
             var result = base.GetParentsToDelete();
 
-
+            // Follow EnumerationProperty_has_Enumeration
             if (this.Enumeration != null && this.Enumeration.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.Enumeration);
 
@@ -347,7 +347,6 @@ namespace Kistl.App.Base
         public override List<NHibernatePersistenceObject> GetChildrenToDelete()
         {
             var result = base.GetChildrenToDelete();
-
 
             return result;
         }

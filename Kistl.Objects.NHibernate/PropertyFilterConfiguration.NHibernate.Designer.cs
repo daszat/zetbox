@@ -332,7 +332,7 @@ namespace Kistl.App.GUI
         {
             var result = base.GetParentsToDelete();
 
-
+            // Follow Property_Has_PropertyFilterConfiguration
             if (this.Property != null && this.Property.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.Property);
 
@@ -342,7 +342,6 @@ namespace Kistl.App.GUI
         public override List<NHibernatePersistenceObject> GetChildrenToDelete()
         {
             var result = base.GetChildrenToDelete();
-
 
             return result;
         }

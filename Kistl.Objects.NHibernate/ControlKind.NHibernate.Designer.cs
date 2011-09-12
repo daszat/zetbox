@@ -588,12 +588,13 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.ControlKind> OnChil
         {
             var result = base.GetParentsToDelete();
 
-
-            if (this.Module != null && this.Module.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.Module);
-
+            // Follow ChildControlKinds_have_a_Parent
             if (this.Parent != null && this.Parent.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.Parent);
+
+            // Follow ControlKind_has_Module
+            if (this.Module != null && this.Module.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.Module);
 
             return result;
         }
@@ -602,49 +603,66 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.ControlKind> OnChil
         {
             var result = base.GetChildrenToDelete();
 
+            // Follow DataType_may_request_ControlKind
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Base.DataType>()
                 .Where(child => child.RequestedKind == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
+
+            // Follow FilterConfiguration_has_RequestedKind
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.GUI.FilterConfiguration>()
                 .Where(child => child.RequestedKind == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
+
+            // Follow Presentable_has_DefaultKind
+            result.AddRange(Context.AttachedObjects
+                .OfType<Kistl.App.GUI.ViewModelDescriptor>()
+                .Where(child => child.DefaultEditorKind == this
+                    && child.ObjectState == DataObjectState.Deleted)
+                .Cast<NHibernatePersistenceObject>());
+
+            // Follow Property_may_request_ControlKind
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Base.Property>()
                 .Where(child => child.RequestedKind == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
+
+            // Follow ViewDescriptor_is_a_ControlKind
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.GUI.ViewDescriptor>()
                 .Where(child => child.ControlKind == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.GUI.ViewModelDescriptor>()
-                .Where(child => child.DefaultGridCellEditorKind == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
+
+            // Follow ViewModel_displayed_by_DefaultDisplayKind
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.GUI.ViewModelDescriptor>()
                 .Where(child => child.DefaultDisplayKind == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
+
+            // Follow ViewModel_displayed_by_DefaultGridCellEditorKind
+            result.AddRange(Context.AttachedObjects
+                .OfType<Kistl.App.GUI.ViewModelDescriptor>()
+                .Where(child => child.DefaultGridCellEditorKind == this
+                    && child.ObjectState == DataObjectState.Deleted)
+                .Cast<NHibernatePersistenceObject>());
+
+            // Follow ViewModel_displayed_by_DefaultGridDisplayKind
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.GUI.ViewModelDescriptor>()
                 .Where(child => child.DefaultGridCellDisplayKind == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
+
+            // Follow ViewModelDescriptor_displayedInGridBy_DefaultGridCellKind
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.GUI.ViewModelDescriptor>()
                 .Where(child => child.DefaultGridCellPreEditorKind == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.GUI.ViewModelDescriptor>()
-                .Where(child => child.DefaultEditorKind == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
 

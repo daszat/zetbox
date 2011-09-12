@@ -1438,21 +1438,25 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Method> OnParamete
         {
             var result = base.GetParentsToDelete();
 
-
-            if (this.ObjectClass != null && this.ObjectClass.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.ObjectClass);
-
+            // Follow Method_has_Icon
             if (this.Icon != null && this.Icon.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.Icon);
 
+            // Follow Method_has_Module
             if (this.Module != null && this.Module.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.Module);
 
+            // Follow Method_was_ChangedBy
+            if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.ChangedBy);
+
+            // Follow Method_was_CreatedBy
             if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.CreatedBy);
 
-            if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.ChangedBy);
+            // Follow ObjectClass_has_Methods
+            if (this.ObjectClass != null && this.ObjectClass.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.ObjectClass);
 
             return result;
         }
@@ -1461,11 +1465,14 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Method> OnParamete
         {
             var result = base.GetChildrenToDelete();
 
+            // Follow Method_has_Parameter
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Base.BaseParameter>()
                 .Where(child => child.Method == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
+
+            // Follow Visual_has_Method
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.GUI.Visual>()
                 .Where(child => child.Method == this

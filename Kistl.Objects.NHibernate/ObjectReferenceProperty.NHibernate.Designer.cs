@@ -491,7 +491,7 @@ namespace Kistl.App.Base
         {
             var result = base.GetParentsToDelete();
 
-
+            // Follow RelationEnd_has_Navigator
             if (this.RelationEnd != null && this.RelationEnd.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.RelationEnd);
 
@@ -501,7 +501,6 @@ namespace Kistl.App.Base
         public override List<NHibernatePersistenceObject> GetChildrenToDelete()
         {
             var result = base.GetChildrenToDelete();
-
 
             return result;
         }

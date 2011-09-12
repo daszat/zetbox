@@ -350,7 +350,7 @@ namespace Kistl.App.Test
         {
             var result = base.GetParentsToDelete();
 
-
+            // Follow Parent_of_Children
             if (this.Parent != null && this.Parent.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.Parent);
 
@@ -360,7 +360,6 @@ namespace Kistl.App.Test
         public override List<NHibernatePersistenceObject> GetChildrenToDelete()
         {
             var result = base.GetChildrenToDelete();
-
 
             return result;
         }

@@ -39,27 +39,27 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
 this.WriteObjects("        public override List<NHibernatePersistenceObject> GetParentsToDelete()\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            var result = base.GetParentsToDelete();\r\n");
-this.WriteObjects("\r\n");
+#line 19 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
+foreach (var rel in cls.GetRelations().OrderBy(r => r.GetRelationTableName())) {                                     
 #line 20 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
-foreach (var rel in cls.GetRelations().OrderBy(r => r.GetRelationClassName())) {                                     
-#line 21 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
 if (rel.Storage == StorageType.Separate) continue; // handled by cascading in the mapping                       
-#line 22 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
+#line 21 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
 var relEnd = rel.GetEndFromClass(cls);                                                                          
-#line 23 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
+#line 22 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
 var otherEnd = rel.GetOtherEndFromClass(cls);                                                                   
-#line 24 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
+#line 23 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
 if (relEnd.Navigator == null && otherEnd.Navigator == null)                                                     
-#line 25 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
+#line 24 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
 throw new NotImplementedException(string.Format("Cannot handle Relation#{0} without Navigators", rel.ID));  
-#line 26 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
+#line 25 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
 var haveStorage = (rel.Storage == StorageType.MergeIntoA && rel.A == relEnd)                                    
-#line 27 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
+#line 26 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
 || (rel.Storage == StorageType.MergeIntoB && rel.B == relEnd);                                              
-#line 28 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
+#line 27 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
 if (!haveStorage) continue; // we are parent, skip this                                                         
-#line 29 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
+#line 28 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
 this.WriteObjects("\r\n");
+this.WriteObjects("            // Follow ",  rel.GetRelationTableName() , "\r\n");
 #line 30 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
 if (relEnd.Navigator != null) {                                                                                 
 #line 31 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
@@ -81,46 +81,48 @@ this.WriteObjects("\r\n");
 this.WriteObjects("        public override List<NHibernatePersistenceObject> GetChildrenToDelete()\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            var result = base.GetChildrenToDelete();\r\n");
-this.WriteObjects("\r\n");
+#line 44 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
+foreach (var rel in cls.GetRelations().OrderBy(r => r.GetRelationTableName())) {                                     
 #line 45 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
-foreach (var rel in cls.GetRelations().OrderBy(r => r.GetRelationClassName())) {                                     
-#line 46 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
 if (rel.Storage == StorageType.Separate) continue; // handled by cascading in the mapping                       
-#line 47 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
+#line 46 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
 var relEnd = rel.GetEndFromClass(cls);                                                                          
-#line 48 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
+#line 47 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
 var otherEnd = rel.GetOtherEndFromClass(cls);                                                                   
-#line 49 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
+#line 48 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
 if (relEnd.Navigator == null && otherEnd.Navigator == null)                                                     
-#line 50 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
+#line 49 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
 throw new NotImplementedException(string.Format("Cannot handle Relation#{0} without Navigators", rel.ID));  
-#line 51 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
+#line 50 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
 var haveStorage = (rel.Storage == StorageType.MergeIntoA && rel.A == relEnd)                                    
-#line 52 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
+#line 51 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
 || (rel.Storage == StorageType.MergeIntoB && rel.B == relEnd);                                              
-#line 53 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
+#line 52 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
 if (haveStorage) continue; // we are child, skip this                                                           
-#line 54 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
-if (relEnd.Navigator != null && otherEnd.Multiplicity == Multiplicity.One) {                                    
+#line 53 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
+this.WriteObjects("\r\n");
+this.WriteObjects("            // Follow ",  rel.GetRelationTableName() , "\r\n");
 #line 55 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
+if (relEnd.Navigator != null && otherEnd.Multiplicity == Multiplicity.One) {                                    
+#line 56 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
 this.WriteObjects("            if (this.",  relEnd.Navigator.Name , " != null && this.",  relEnd.Navigator.Name , ".ObjectState == DataObjectState.Deleted)\r\n");
 this.WriteObjects("                result.Add((NHibernatePersistenceObject)this.",  relEnd.Navigator.Name , ");\r\n");
-#line 57 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
-} else {                                                                                                        
 #line 58 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
-GenerateChildSearch(otherEnd.Type.GetDataTypeString(), otherEnd.Navigator.Name); 
+} else {                                                                                                        
 #line 59 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
-}                                                                                                               
+GenerateChildSearch(otherEnd.Type.GetDataTypeString(), otherEnd.Navigator.Name); 
 #line 60 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
-}                                                                                                                    
+}                                                                                                               
 #line 61 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
+}                                                                                                                    
+#line 62 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("            return result;\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
 
         }
-#line 66 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
+#line 67 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\GetDeletedRelatives.cst"
 public void GenerateChildSearch(string datatype, string navigatorName)
         {
             this.WriteObjects("            result.AddRange(Context.AttachedObjects\r\n");

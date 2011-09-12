@@ -1221,13 +1221,15 @@ namespace Kistl.App.Base
         {
             var result = base.GetParentsToDelete();
 
-
-            if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.CreatedBy);
-
+            // Follow BaseParameter_was_ChangedBy
             if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.ChangedBy);
 
+            // Follow BaseParameter_was_CreatedBy
+            if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.CreatedBy);
+
+            // Follow Method_has_Parameter
             if (this.Method != null && this.Method.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.Method);
 
@@ -1237,7 +1239,6 @@ namespace Kistl.App.Base
         public override List<NHibernatePersistenceObject> GetChildrenToDelete()
         {
             var result = base.GetChildrenToDelete();
-
 
             return result;
         }

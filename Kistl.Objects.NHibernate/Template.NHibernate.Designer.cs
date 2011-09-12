@@ -550,10 +550,11 @@ namespace Kistl.App.GUI
         {
             var result = base.GetParentsToDelete();
 
-
+            // Follow Template_has_DisplayedTypeAssembly
             if (this.DisplayedTypeAssembly != null && this.DisplayedTypeAssembly.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.DisplayedTypeAssembly);
 
+            // Follow Template_has_VisualTree
             if (this.VisualTree != null && this.VisualTree.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.VisualTree);
 
@@ -563,7 +564,6 @@ namespace Kistl.App.GUI
         public override List<NHibernatePersistenceObject> GetChildrenToDelete()
         {
             var result = base.GetChildrenToDelete();
-
 
             return result;
         }

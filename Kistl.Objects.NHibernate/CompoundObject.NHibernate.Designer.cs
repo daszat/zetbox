@@ -316,7 +316,7 @@ namespace Kistl.App.Base
         {
             var result = base.GetParentsToDelete();
 
-
+            // Follow Presentable_may_has_DefaultPropViewModelDescriptor
             if (this.DefaultPropertyViewModelDescriptor != null && this.DefaultPropertyViewModelDescriptor.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.DefaultPropertyViewModelDescriptor);
 
@@ -327,14 +327,17 @@ namespace Kistl.App.Base
         {
             var result = base.GetChildrenToDelete();
 
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.CompoundObjectParameter>()
-                .Where(child => child.CompoundObject == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
+            // Follow CompoundObjectProperty_has_CompoundObjectDefinition
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Base.CompoundObjectProperty>()
                 .Where(child => child.CompoundObjectDefinition == this
+                    && child.ObjectState == DataObjectState.Deleted)
+                .Cast<NHibernatePersistenceObject>());
+
+            // Follow CPParameter_has_CompoundObject
+            result.AddRange(Context.AttachedObjects
+                .OfType<Kistl.App.Base.CompoundObjectParameter>()
+                .Where(child => child.CompoundObject == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
 

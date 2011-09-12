@@ -449,7 +449,7 @@ namespace Kistl.App.Base
         {
             var result = base.GetParentsToDelete();
 
-
+            // Follow Group_has_Module
             if (this.Module != null && this.Module.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.Module);
 
@@ -460,6 +460,7 @@ namespace Kistl.App.Base
         {
             var result = base.GetChildrenToDelete();
 
+            // Follow GroupMembership_has_Group
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Base.GroupMembership>()
                 .Where(child => child.Group == this

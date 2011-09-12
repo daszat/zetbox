@@ -382,7 +382,6 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Enumeration> OnEnu
         {
             var result = base.GetParentsToDelete();
 
-
             return result;
         }
 
@@ -390,16 +389,21 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Enumeration> OnEnu
         {
             var result = base.GetChildrenToDelete();
 
+            // Follow Enumeration_has_EnumerationEntries
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Base.EnumerationEntry>()
                 .Where(child => child.Enumeration == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
+
+            // Follow EnumerationProperty_has_Enumeration
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Base.EnumerationProperty>()
                 .Where(child => child.Enumeration == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
+
+            // Follow EnumParameter_has_Enumeration
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Base.EnumParameter>()
                 .Where(child => child.Enumeration == this

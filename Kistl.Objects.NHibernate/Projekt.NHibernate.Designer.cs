@@ -829,10 +829,11 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
         {
             var result = base.GetParentsToDelete();
 
-
+            // Follow Projekt_was_ChangedBy
             if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.ChangedBy);
 
+            // Follow Projekt_was_CreatedBy
             if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.CreatedBy);
 
@@ -843,11 +844,14 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
         {
             var result = base.GetChildrenToDelete();
 
+            // Follow Projekt_has_Auftraege
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Projekte.Auftrag>()
                 .Where(child => child.Projekt == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
+
+            // Follow Projekt_has_Tasks
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Projekte.Task>()
                 .Where(child => child.Projekt == this

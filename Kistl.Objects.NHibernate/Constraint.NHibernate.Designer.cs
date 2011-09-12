@@ -853,15 +853,17 @@ namespace Kistl.App.Base
         {
             var result = base.GetParentsToDelete();
 
+            // Follow ConstrainedProperty_has_Constraints
+            if (this.ConstrainedProperty != null && this.ConstrainedProperty.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.ConstrainedProperty);
 
-            if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.CreatedBy);
-
+            // Follow Constraint_was_ChangedBy
             if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.ChangedBy);
 
-            if (this.ConstrainedProperty != null && this.ConstrainedProperty.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.ConstrainedProperty);
+            // Follow Constraint_was_CreatedBy
+            if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.CreatedBy);
 
             return result;
         }
@@ -869,7 +871,6 @@ namespace Kistl.App.Base
         public override List<NHibernatePersistenceObject> GetChildrenToDelete()
         {
             var result = base.GetChildrenToDelete();
-
 
             return result;
         }

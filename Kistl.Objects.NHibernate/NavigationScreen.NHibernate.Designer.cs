@@ -1203,18 +1203,21 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationScreen> O
         {
             var result = base.GetParentsToDelete();
 
-
+            // Follow NavigationScreen_has_Module
             if (this.Module != null && this.Module.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.Module);
 
-            if (this.ViewModelDescriptor != null && this.ViewModelDescriptor.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.ViewModelDescriptor);
-
+            // Follow NavigationScreen_was_ChangedBy
             if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.ChangedBy);
 
+            // Follow NavigationScreen_was_CreatedBy
             if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.CreatedBy);
+
+            // Follow Screen_modeled_by_ViewModelDescriptor
+            if (this.ViewModelDescriptor != null && this.ViewModelDescriptor.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.ViewModelDescriptor);
 
             return result;
         }
@@ -1223,11 +1226,14 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationScreen> O
         {
             var result = base.GetChildrenToDelete();
 
+            // Follow Application_has_RootScreen
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.GUI.Application>()
                 .Where(child => child.RootScreen == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
+
+            // Follow Parent_navigates_to_Children
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.GUI.NavigationScreen>()
                 .Where(child => child.Parent == this

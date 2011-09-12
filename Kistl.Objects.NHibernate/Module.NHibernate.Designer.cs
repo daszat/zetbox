@@ -848,10 +848,11 @@ namespace Kistl.App.Base
         {
             var result = base.GetParentsToDelete();
 
-
+            // Follow Module_was_ChangedBy
             if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.ChangedBy);
 
+            // Follow Module_was_CreatedBy
             if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.CreatedBy);
 
@@ -862,101 +863,140 @@ namespace Kistl.App.Base
         {
             var result = base.GetChildrenToDelete();
 
+            // Follow AbstractModuleMember_has_Module
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Base.AbstractModuleMember>()
                 .Where(child => child.Module == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
+
+            // Follow AccessControl_has_Module
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Base.AccessControl>()
                 .Where(child => child.Module == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
+
+            // Follow Application_has_Module
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.GUI.Application>()
                 .Where(child => child.Module == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Calendar.Calendar>()
-                .Where(child => child.Module == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Calendar.CalendarRule>()
-                .Where(child => child.Module == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.GUI.ControlKind>()
-                .Where(child => child.Module == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.GUI.FilterConfiguration>()
-                .Where(child => child.Module == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.Group>()
-                .Where(child => child.Module == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.GUI.Icon>()
-                .Where(child => child.Module == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.Method>()
-                .Where(child => child.Module == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-            result.AddRange(Context.AttachedObjects
-                .OfType<ZBox.App.SchemaMigration.MigrationProject>()
-                .Where(child => child.DestinationModule == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.Assembly>()
-                .Where(child => child.Module == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.DataType>()
-                .Where(child => child.Module == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.Relation>()
-                .Where(child => child.Module == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.GUI.NavigationScreen>()
-                .Where(child => child.Module == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
+
+            // Follow BaseProperty_has_Module
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Base.Property>()
                 .Where(child => child.Module == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
+
+            // Follow Calendar_has_Module
+            result.AddRange(Context.AttachedObjects
+                .OfType<Kistl.App.Calendar.Calendar>()
+                .Where(child => child.Module == this
+                    && child.ObjectState == DataObjectState.Deleted)
+                .Cast<NHibernatePersistenceObject>());
+
+            // Follow CalendarRule_has_Module
+            result.AddRange(Context.AttachedObjects
+                .OfType<Kistl.App.Calendar.CalendarRule>()
+                .Where(child => child.Module == this
+                    && child.ObjectState == DataObjectState.Deleted)
+                .Cast<NHibernatePersistenceObject>());
+
+            // Follow ControlKind_has_Module
+            result.AddRange(Context.AttachedObjects
+                .OfType<Kistl.App.GUI.ControlKind>()
+                .Where(child => child.Module == this
+                    && child.ObjectState == DataObjectState.Deleted)
+                .Cast<NHibernatePersistenceObject>());
+
+            // Follow FilterConfiguration_has_Module
+            result.AddRange(Context.AttachedObjects
+                .OfType<Kistl.App.GUI.FilterConfiguration>()
+                .Where(child => child.Module == this
+                    && child.ObjectState == DataObjectState.Deleted)
+                .Cast<NHibernatePersistenceObject>());
+
+            // Follow Group_has_Module
+            result.AddRange(Context.AttachedObjects
+                .OfType<Kistl.App.Base.Group>()
+                .Where(child => child.Module == this
+                    && child.ObjectState == DataObjectState.Deleted)
+                .Cast<NHibernatePersistenceObject>());
+
+            // Follow Icon_has_Module
+            result.AddRange(Context.AttachedObjects
+                .OfType<Kistl.App.GUI.Icon>()
+                .Where(child => child.Module == this
+                    && child.ObjectState == DataObjectState.Deleted)
+                .Cast<NHibernatePersistenceObject>());
+
+            // Follow Method_has_Module
+            result.AddRange(Context.AttachedObjects
+                .OfType<Kistl.App.Base.Method>()
+                .Where(child => child.Module == this
+                    && child.ObjectState == DataObjectState.Deleted)
+                .Cast<NHibernatePersistenceObject>());
+
+            // Follow MigrationProject_migrates_to_Module
+            result.AddRange(Context.AttachedObjects
+                .OfType<ZBox.App.SchemaMigration.MigrationProject>()
+                .Where(child => child.DestinationModule == this
+                    && child.ObjectState == DataObjectState.Deleted)
+                .Cast<NHibernatePersistenceObject>());
+
+            // Follow Module_contains_Assemblies
+            result.AddRange(Context.AttachedObjects
+                .OfType<Kistl.App.Base.Assembly>()
+                .Where(child => child.Module == this
+                    && child.ObjectState == DataObjectState.Deleted)
+                .Cast<NHibernatePersistenceObject>());
+
+            // Follow Module_contains_DataTypes
+            result.AddRange(Context.AttachedObjects
+                .OfType<Kistl.App.Base.DataType>()
+                .Where(child => child.Module == this
+                    && child.ObjectState == DataObjectState.Deleted)
+                .Cast<NHibernatePersistenceObject>());
+
+            // Follow Module_has_Relation
+            result.AddRange(Context.AttachedObjects
+                .OfType<Kistl.App.Base.Relation>()
+                .Where(child => child.Module == this
+                    && child.ObjectState == DataObjectState.Deleted)
+                .Cast<NHibernatePersistenceObject>());
+
+            // Follow NavigationScreen_has_Module
+            result.AddRange(Context.AttachedObjects
+                .OfType<Kistl.App.GUI.NavigationScreen>()
+                .Where(child => child.Module == this
+                    && child.ObjectState == DataObjectState.Deleted)
+                .Cast<NHibernatePersistenceObject>());
+
+            // Follow Sequence_has_Module
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Base.Sequence>()
                 .Where(child => child.Module == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
+
+            // Follow ServiceDescriptor_has_Module
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Base.ServiceDescriptor>()
                 .Where(child => child.Module == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
+
+            // Follow ViewDescriptor_has_Module
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.GUI.ViewDescriptor>()
                 .Where(child => child.Module == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
+
+            // Follow ViewModelDescriptor_has_Module
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.GUI.ViewModelDescriptor>()
                 .Where(child => child.Module == this

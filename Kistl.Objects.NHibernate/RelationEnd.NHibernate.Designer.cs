@@ -1311,15 +1311,17 @@ namespace Kistl.App.Base
         {
             var result = base.GetParentsToDelete();
 
-
+            // Follow RelationEnd_has_Type
             if (this.Type != null && this.Type.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.Type);
 
-            if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.CreatedBy);
-
+            // Follow RelationEnd_was_ChangedBy
             if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.ChangedBy);
+
+            // Follow RelationEnd_was_CreatedBy
+            if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.CreatedBy);
 
             return result;
         }
@@ -1328,10 +1330,15 @@ namespace Kistl.App.Base
         {
             var result = base.GetChildrenToDelete();
 
+            // Follow Relation_hasA_A
             if (this.AParent != null && this.AParent.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.AParent);
+
+            // Follow Relation_hasB_B
             if (this.BParent != null && this.BParent.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.BParent);
+
+            // Follow RelationEnd_has_Navigator
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Base.ObjectReferenceProperty>()
                 .Where(child => child.RelationEnd == this

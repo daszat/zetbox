@@ -898,15 +898,17 @@ namespace Kistl.App.Projekte
         {
             var result = base.GetParentsToDelete();
 
-
+            // Follow Projekt_has_Tasks
             if (this.Projekt != null && this.Projekt.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.Projekt);
 
-            if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.CreatedBy);
-
+            // Follow Task_was_ChangedBy
             if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.ChangedBy);
+
+            // Follow Task_was_CreatedBy
+            if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.CreatedBy);
 
             return result;
         }
@@ -914,7 +916,6 @@ namespace Kistl.App.Projekte
         public override List<NHibernatePersistenceObject> GetChildrenToDelete()
         {
             var result = base.GetChildrenToDelete();
-
 
             return result;
         }

@@ -951,7 +951,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
         {
             var result = base.GetParentsToDelete();
 
-
+            // Follow Presentable_has_DefaultViewModelDescriptor
             if (this.DefaultViewModelDescriptor != null && this.DefaultViewModelDescriptor.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.DefaultViewModelDescriptor);
 
@@ -962,41 +962,56 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
         {
             var result = base.GetChildrenToDelete();
 
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.CalculatedObjectReferenceProperty>()
-                .Where(child => child.ReferencedClass == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.Base.AccessControl>()
-                .Where(child => child.ObjectClass == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
+            // Follow BaseObjectClass_has_SubClasses
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Base.ObjectClass>()
                 .Where(child => child.BaseObjectClass == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
+
+            // Follow CalculatedReference_references_ReferencedClass
+            result.AddRange(Context.AttachedObjects
+                .OfType<Kistl.App.Base.CalculatedObjectReferenceProperty>()
+                .Where(child => child.ReferencedClass == this
+                    && child.ObjectState == DataObjectState.Deleted)
+                .Cast<NHibernatePersistenceObject>());
+
+            // Follow ObjectClass_has_AccessControlList
+            result.AddRange(Context.AttachedObjects
+                .OfType<Kistl.App.Base.AccessControl>()
+                .Where(child => child.ObjectClass == this
+                    && child.ObjectState == DataObjectState.Deleted)
+                .Cast<NHibernatePersistenceObject>());
+
+            // Follow ObjectClass_Has_FilterConfigurations
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.GUI.ObjectClassFilterConfiguration>()
                 .Where(child => child.ObjectClass == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
+
+            // Follow ObjectParameter_has_ObjectClass
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Base.ObjectReferenceParameter>()
                 .Where(child => child.ObjectClass == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
+
+            // Follow ObjectReferencePlaceholderProperty_ofType_ReferencedObjectClass
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Base.ObjectReferencePlaceholderProperty>()
                 .Where(child => child.ReferencedObjectClass == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
+
+            // Follow RelationEnd_has_Type
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Base.RelationEnd>()
                 .Where(child => child.Type == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
+
+            // Follow SourceTable_created_ObjectClass
             result.AddRange(Context.AttachedObjects
                 .OfType<ZBox.App.SchemaMigration.SourceTable>()
                 .Where(child => child.DestinationObjectClass == this

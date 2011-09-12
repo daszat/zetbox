@@ -295,7 +295,7 @@ namespace Kistl.App.Base
         {
             var result = base.GetParentsToDelete();
 
-
+            // Follow EnumDefaultValue_defaults_to_EnumValue
             if (this.EnumValue != null && this.EnumValue.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.EnumValue);
 
@@ -305,7 +305,6 @@ namespace Kistl.App.Base
         public override List<NHibernatePersistenceObject> GetChildrenToDelete()
         {
             var result = base.GetChildrenToDelete();
-
 
             return result;
         }

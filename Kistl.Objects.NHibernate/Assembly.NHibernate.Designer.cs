@@ -866,13 +866,15 @@ namespace Kistl.App.Base
         {
             var result = base.GetParentsToDelete();
 
-
+            // Follow Assembly_was_ChangedBy
             if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.ChangedBy);
 
+            // Follow Assembly_was_CreatedBy
             if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.CreatedBy);
 
+            // Follow Module_contains_Assemblies
             if (this.Module != null && this.Module.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.Module);
 
@@ -883,11 +885,14 @@ namespace Kistl.App.Base
         {
             var result = base.GetChildrenToDelete();
 
+            // Follow Template_has_DisplayedTypeAssembly
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.GUI.Template>()
                 .Where(child => child.DisplayedTypeAssembly == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
+
+            // Follow TypeRef_has_Assembly
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Base.TypeRef>()
                 .Where(child => child.Assembly == this

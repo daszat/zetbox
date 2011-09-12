@@ -291,7 +291,6 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Fragebogen> OnAntw
         {
             var result = base.GetParentsToDelete();
 
-
             return result;
         }
 
@@ -299,6 +298,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Fragebogen> OnAntw
         {
             var result = base.GetChildrenToDelete();
 
+            // Follow Ein_Fragebogen_enthaelt_gute_Antworten
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Test.Antwort>()
                 .Where(child => child.Fragebogen == this

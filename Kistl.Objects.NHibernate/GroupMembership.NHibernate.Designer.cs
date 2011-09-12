@@ -274,7 +274,7 @@ namespace Kistl.App.Base
         {
             var result = base.GetParentsToDelete();
 
-
+            // Follow GroupMembership_has_Group
             if (this.Group != null && this.Group.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.Group);
 
@@ -284,7 +284,6 @@ namespace Kistl.App.Base
         public override List<NHibernatePersistenceObject> GetChildrenToDelete()
         {
             var result = base.GetChildrenToDelete();
-
 
             return result;
         }

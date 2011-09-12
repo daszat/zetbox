@@ -1432,18 +1432,21 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
         {
             var result = base.GetParentsToDelete();
 
-
-            if (this.SourceTable != null && this.SourceTable.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.SourceTable);
-
+            // Follow FK_Column_references_PK_Column
             if (this.References != null && this.References.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.References);
 
-            if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.CreatedBy);
+            // Follow SourceColumn_belongs_to_SourceTable
+            if (this.SourceTable != null && this.SourceTable.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.SourceTable);
 
+            // Follow SourceColumn_was_ChangedBy
             if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.ChangedBy);
+
+            // Follow SourceColumn_was_CreatedBy
+            if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.CreatedBy);
 
             return result;
         }
@@ -1452,6 +1455,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
         {
             var result = base.GetChildrenToDelete();
 
+            // Follow SourceColumn_may_have_EnumEntries
             result.AddRange(Context.AttachedObjects
                 .OfType<ZBox.App.SchemaMigration.SourceEnum>()
                 .Where(child => child.SourceColumn == this

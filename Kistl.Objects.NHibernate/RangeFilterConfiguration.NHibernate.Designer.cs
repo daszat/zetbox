@@ -172,14 +172,12 @@ namespace Kistl.App.GUI
         {
             var result = base.GetParentsToDelete();
 
-
             return result;
         }
 
         public override List<NHibernatePersistenceObject> GetChildrenToDelete()
         {
             var result = base.GetChildrenToDelete();
-
 
             return result;
         }

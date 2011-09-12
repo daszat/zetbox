@@ -384,7 +384,7 @@ namespace Kistl.App.Test
         {
             var result = base.GetParentsToDelete();
 
-
+            // Follow OneEnd_hasMany_NEnds
             if (this.OneEnd != null && this.OneEnd.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.OneEnd);
 
@@ -394,7 +394,6 @@ namespace Kistl.App.Test
         public override List<NHibernatePersistenceObject> GetChildrenToDelete()
         {
             var result = base.GetChildrenToDelete();
-
 
             return result;
         }

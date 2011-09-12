@@ -921,18 +921,21 @@ namespace ZBox.App.SchemaMigration
         {
             var result = base.GetParentsToDelete();
 
-
+            // Follow SourceColumn_may_have_EnumEntries
             if (this.SourceColumn != null && this.SourceColumn.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.SourceColumn);
 
+            // Follow SourceEnum_mapps_to_DestinationValue
             if (this.DestinationValue != null && this.DestinationValue.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.DestinationValue);
 
-            if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.CreatedBy);
-
+            // Follow SourceEnum_was_ChangedBy
             if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.ChangedBy);
+
+            // Follow SourceEnum_was_CreatedBy
+            if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.CreatedBy);
 
             return result;
         }
@@ -940,7 +943,6 @@ namespace ZBox.App.SchemaMigration
         public override List<NHibernatePersistenceObject> GetChildrenToDelete()
         {
             var result = base.GetChildrenToDelete();
-
 
             return result;
         }

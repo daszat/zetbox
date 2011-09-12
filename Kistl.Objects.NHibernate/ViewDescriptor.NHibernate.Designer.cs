@@ -673,13 +673,15 @@ namespace Kistl.App.GUI
         {
             var result = base.GetParentsToDelete();
 
-
-            if (this.Module != null && this.Module.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.Module);
-
+            // Follow View_has_ControlRef
             if (this.ControlRef != null && this.ControlRef.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.ControlRef);
 
+            // Follow ViewDescriptor_has_Module
+            if (this.Module != null && this.Module.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.Module);
+
+            // Follow ViewDescriptor_is_a_ControlKind
             if (this.ControlKind != null && this.ControlKind.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.ControlKind);
 
@@ -689,7 +691,6 @@ namespace Kistl.App.GUI
         public override List<NHibernatePersistenceObject> GetChildrenToDelete()
         {
             var result = base.GetChildrenToDelete();
-
 
             return result;
         }

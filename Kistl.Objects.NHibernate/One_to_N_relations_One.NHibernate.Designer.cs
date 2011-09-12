@@ -252,7 +252,6 @@ public static event PropertyListChangedHandler<Kistl.App.Test.One_to_N_relations
         {
             var result = base.GetParentsToDelete();
 
-
             return result;
         }
 
@@ -260,6 +259,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.One_to_N_relations
         {
             var result = base.GetChildrenToDelete();
 
+            // Follow OneSide_connectsTo_NSide
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Test.One_to_N_relations_N>()
                 .Where(child => child.OneSide == this

@@ -725,10 +725,11 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
         {
             var result = base.GetParentsToDelete();
 
-
+            // Follow MB_Lst_Role_hasOther_TCO_Role
             if (this.TestCustomObjects_Nav != null && this.TestCustomObjects_Nav.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.TestCustomObjects_Nav);
 
+            // Follow MB_One_Role_loves_TCO_One_Role
             if (this.TestCustomObjects_One_Nav != null && this.TestCustomObjects_One_Nav.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.TestCustomObjects_One_Nav);
 
@@ -739,6 +740,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
         {
             var result = base.GetChildrenToDelete();
 
+            // Follow MB_Role_has_TCO_Lst_Role
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Test.TestCustomObject>()
                 .Where(child => child.MubBlah_Nav == this

@@ -627,7 +627,7 @@ namespace Kistl.App.Base
         {
             var result = base.GetParentsToDelete();
 
-
+            // Follow ObjectReferencePlaceholderProperty_ofType_ReferencedObjectClass
             if (this.ReferencedObjectClass != null && this.ReferencedObjectClass.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.ReferencedObjectClass);
 
@@ -637,7 +637,6 @@ namespace Kistl.App.Base
         public override List<NHibernatePersistenceObject> GetChildrenToDelete()
         {
             var result = base.GetChildrenToDelete();
-
 
             return result;
         }

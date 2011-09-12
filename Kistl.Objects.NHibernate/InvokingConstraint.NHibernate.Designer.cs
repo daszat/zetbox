@@ -428,12 +428,13 @@ namespace Kistl.App.Base
         {
             var result = base.GetParentsToDelete();
 
-
-            if (this.IsValidInvocation != null && this.IsValidInvocation.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.IsValidInvocation);
-
+            // Follow Constraint_invokes_GetErrorTextInvocation
             if (this.GetErrorTextInvocation != null && this.GetErrorTextInvocation.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.GetErrorTextInvocation);
+
+            // Follow Constraint_invokes_IsValidInvocation
+            if (this.IsValidInvocation != null && this.IsValidInvocation.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.IsValidInvocation);
 
             return result;
         }
@@ -441,7 +442,6 @@ namespace Kistl.App.Base
         public override List<NHibernatePersistenceObject> GetChildrenToDelete()
         {
             var result = base.GetChildrenToDelete();
-
 
             return result;
         }

@@ -479,7 +479,7 @@ namespace Kistl.App.Base
         {
             var result = base.GetParentsToDelete();
 
-
+            // Follow Constraint_on_Constrained
             if (this.Constrained != null && this.Constrained.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.Constrained);
 
@@ -489,7 +489,6 @@ namespace Kistl.App.Base
         public override List<NHibernatePersistenceObject> GetChildrenToDelete()
         {
             var result = base.GetChildrenToDelete();
-
 
             return result;
         }

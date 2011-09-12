@@ -508,10 +508,11 @@ namespace Kistl.App.GUI
         {
             var result = base.GetParentsToDelete();
 
-
+            // Follow Visual_has_Method
             if (this.Method != null && this.Method.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.Method);
 
+            // Follow Visual_has_Property
             if (this.Property != null && this.Property.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.Property);
 
@@ -522,6 +523,7 @@ namespace Kistl.App.GUI
         {
             var result = base.GetChildrenToDelete();
 
+            // Follow Template_has_VisualTree
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.GUI.Template>()
                 .Where(child => child.VisualTree == this

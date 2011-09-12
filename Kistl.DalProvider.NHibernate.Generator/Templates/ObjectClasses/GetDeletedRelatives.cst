@@ -16,8 +16,7 @@
         public override List<NHibernatePersistenceObject> GetParentsToDelete()
         {
             var result = base.GetParentsToDelete();
-
-<% foreach (var rel in cls.GetRelations().OrderBy(r => r.GetRelationClassName())) {                                     %>
+<% foreach (var rel in cls.GetRelations().OrderBy(r => r.GetRelationTableName())) {                                     %>
 <%      if (rel.Storage == StorageType.Separate) continue; // handled by cascading in the mapping                       %>
 <%      var relEnd = rel.GetEndFromClass(cls);                                                                          %>
 <%      var otherEnd = rel.GetOtherEndFromClass(cls);                                                                   %>
@@ -27,6 +26,7 @@
 <%          || (rel.Storage == StorageType.MergeIntoB && rel.B == relEnd);                                              %>
 <%      if (!haveStorage) continue; // we are parent, skip this                                                         %>
 
+            // Follow <%= rel.GetRelationTableName() %>
 <%      if (relEnd.Navigator != null) {                                                                                 %>
             if (this.<%= relEnd.Navigator.Name %> != null && this.<%= relEnd.Navigator.Name %>.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.<%= relEnd.Navigator.Name %>);
@@ -41,8 +41,7 @@
         public override List<NHibernatePersistenceObject> GetChildrenToDelete()
         {
             var result = base.GetChildrenToDelete();
-
-<% foreach (var rel in cls.GetRelations().OrderBy(r => r.GetRelationClassName())) {                                     %>
+<% foreach (var rel in cls.GetRelations().OrderBy(r => r.GetRelationTableName())) {                                     %>
 <%      if (rel.Storage == StorageType.Separate) continue; // handled by cascading in the mapping                       %>
 <%      var relEnd = rel.GetEndFromClass(cls);                                                                          %>
 <%      var otherEnd = rel.GetOtherEndFromClass(cls);                                                                   %>
@@ -51,6 +50,8 @@
 <%      var haveStorage = (rel.Storage == StorageType.MergeIntoA && rel.A == relEnd)                                    %>
 <%          || (rel.Storage == StorageType.MergeIntoB && rel.B == relEnd);                                              %>
 <%      if (haveStorage) continue; // we are child, skip this                                                           %>
+
+            // Follow <%= rel.GetRelationTableName() %>
 <%      if (relEnd.Navigator != null && otherEnd.Multiplicity == Multiplicity.One) {                                    %>
             if (this.<%= relEnd.Navigator.Name %> != null && this.<%= relEnd.Navigator.Name %>.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.<%= relEnd.Navigator.Name %>);

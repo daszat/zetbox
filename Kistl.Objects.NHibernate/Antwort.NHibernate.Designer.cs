@@ -500,7 +500,7 @@ namespace Kistl.App.Test
         {
             var result = base.GetParentsToDelete();
 
-
+            // Follow Ein_Fragebogen_enthaelt_gute_Antworten
             if (this.Fragebogen != null && this.Fragebogen.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.Fragebogen);
 
@@ -510,7 +510,6 @@ namespace Kistl.App.Test
         public override List<NHibernatePersistenceObject> GetChildrenToDelete()
         {
             var result = base.GetChildrenToDelete();
-
 
             return result;
         }

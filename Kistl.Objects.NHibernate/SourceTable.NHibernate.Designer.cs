@@ -1178,18 +1178,21 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceTa
         {
             var result = base.GetParentsToDelete();
 
-
-            if (this.StagingDatabase != null && this.StagingDatabase.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.StagingDatabase);
-
+            // Follow SourceTable_created_ObjectClass
             if (this.DestinationObjectClass != null && this.DestinationObjectClass.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.DestinationObjectClass);
 
+            // Follow SourceTable_was_ChangedBy
             if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.ChangedBy);
 
+            // Follow SourceTable_was_CreatedBy
             if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.CreatedBy);
+
+            // Follow SourceTables_are_contained_in_StagingDatabase
+            if (this.StagingDatabase != null && this.StagingDatabase.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.StagingDatabase);
 
             return result;
         }
@@ -1198,6 +1201,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceTa
         {
             var result = base.GetChildrenToDelete();
 
+            // Follow SourceColumn_belongs_to_SourceTable
             result.AddRange(Context.AttachedObjects
                 .OfType<ZBox.App.SchemaMigration.SourceColumn>()
                 .Where(child => child.SourceTable == this

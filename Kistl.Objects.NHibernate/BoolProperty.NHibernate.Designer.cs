@@ -735,15 +735,17 @@ namespace Kistl.App.Base
         {
             var result = base.GetParentsToDelete();
 
-
+            // Follow BoolProperty_has_FalseIcon
             if (this.FalseIcon != null && this.FalseIcon.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.FalseIcon);
 
-            if (this.TrueIcon != null && this.TrueIcon.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.TrueIcon);
-
+            // Follow BoolProperty_has_NullIcon
             if (this.NullIcon != null && this.NullIcon.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.NullIcon);
+
+            // Follow BoolProperty_has_TrueIcon
+            if (this.TrueIcon != null && this.TrueIcon.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.TrueIcon);
 
             return result;
         }
@@ -751,7 +753,6 @@ namespace Kistl.App.Base
         public override List<NHibernatePersistenceObject> GetChildrenToDelete()
         {
             var result = base.GetChildrenToDelete();
-
 
             return result;
         }

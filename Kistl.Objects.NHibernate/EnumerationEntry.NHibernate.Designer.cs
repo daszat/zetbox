@@ -1039,15 +1039,17 @@ namespace Kistl.App.Base
         {
             var result = base.GetParentsToDelete();
 
-
+            // Follow Enumeration_has_EnumerationEntries
             if (this.Enumeration != null && this.Enumeration.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.Enumeration);
 
-            if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
-                result.Add((NHibernatePersistenceObject)this.CreatedBy);
-
+            // Follow EnumerationEntry_was_ChangedBy
             if (this.ChangedBy != null && this.ChangedBy.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.ChangedBy);
+
+            // Follow EnumerationEntry_was_CreatedBy
+            if (this.CreatedBy != null && this.CreatedBy.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.CreatedBy);
 
             return result;
         }
@@ -1056,11 +1058,14 @@ namespace Kistl.App.Base
         {
             var result = base.GetChildrenToDelete();
 
+            // Follow EnumDefaultValue_defaults_to_EnumValue
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Base.EnumDefaultValue>()
                 .Where(child => child.EnumValue == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
+
+            // Follow SourceEnum_mapps_to_DestinationValue
             result.AddRange(Context.AttachedObjects
                 .OfType<ZBox.App.SchemaMigration.SourceEnum>()
                 .Where(child => child.DestinationValue == this
