@@ -186,6 +186,7 @@
   </Target>
   -->
   <PropertyGroup>
+    <!-- deploys the compiled binaries into the local inetpub for debugging -->
     <PostBuildEvent Condition=" '$(OS)' == 'Windows_NT' ">
 xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Common" "$(ProjectDir)\Common"
 xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Server" "$(ProjectDir)\Server"
@@ -199,5 +200,17 @@ bash -c 'cp -r "$(SolutionDir)/bin/$(Configuration)"/{Common,Server,Client,Boots
   <UsingTask TaskName="GitVersionFile" AssemblyFile="..\Libs\MSBuildVersioning\MSBuildVersioning.dll" />
   <Target Name="BeforeBuild">
     <GitVersionFile TemplateFile="Properties\VersionInfo.cs" DestinationFile="Properties\VersionInfo.Designer.cs" />
+  </Target>
+  <!--
+    deploys this webapp to $(SolutionDir)\bin\$(Configuration).HttpService 
+	code from http://stackoverflow.com/questions/776635/replicate-vs2008-publish-web-site-from-command-line/1407910#1407910
+  -->
+  <Target Name="AfterBuild">
+    <Message Text="Copying to Deployment Dir:" />
+    <Copy SourceFiles="@(Content)" DestinationFolder="$(SolutionDir)\bin\$(Configuration).HttpService\%(Content.RelativeDir)" />
+    <CreateItem Include="$(OutputPath)\*">
+      <Output TaskParameter="Include" ItemName="WebBinaries"/>
+    </CreateItem>
+    <Copy SourceFiles="@(WebBinaries)" DestinationFolder="$(SolutionDir)\bin\$(Configuration).HttpService\bin" />
   </Target>
 </Project>
