@@ -60,6 +60,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.ConstraintInvocationNHibernateImpl __value = (Kistl.App.Base.ConstraintInvocationNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.GetErrorTextInvocation);
 
                 if (OnGetErrorTextInvocation_Getter != null)
@@ -146,6 +147,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.ConstraintInvocationNHibernateImpl __value = (Kistl.App.Base.ConstraintInvocationNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.IsValidInvocation);
 
                 if (OnIsValidInvocation_Getter != null)

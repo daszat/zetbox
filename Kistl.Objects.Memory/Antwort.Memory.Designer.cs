@@ -43,6 +43,7 @@ namespace Kistl.App.Test
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Frage;
@@ -114,6 +115,7 @@ namespace Kistl.App.Test
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Test.FragebogenMemoryImpl __value;
                 if (_fk_Fragebogen.HasValue)
                     __value = (Kistl.App.Test.FragebogenMemoryImpl)Context.Find<Kistl.App.Test.Fragebogen>(_fk_Fragebogen.Value);
@@ -188,6 +190,7 @@ namespace Kistl.App.Test
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(int?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _gute_Antworten_pos;
@@ -222,6 +225,7 @@ namespace Kistl.App.Test
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(int);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _FragenNummer;
@@ -272,6 +276,7 @@ namespace Kistl.App.Test
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(int?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _GegebeneAntwort;

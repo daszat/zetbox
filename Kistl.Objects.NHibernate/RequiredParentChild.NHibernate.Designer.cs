@@ -54,6 +54,7 @@ namespace Kistl.App.Test
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.Name;
@@ -109,6 +110,7 @@ namespace Kistl.App.Test
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Test.RequiredParentNHibernateImpl __value = (Kistl.App.Test.RequiredParentNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Parent);
 
                 if (OnParent_Getter != null)

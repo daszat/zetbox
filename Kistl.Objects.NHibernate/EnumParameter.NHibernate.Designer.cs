@@ -60,6 +60,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.EnumerationNHibernateImpl __value = (Kistl.App.Base.EnumerationNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Enumeration);
 
                 if (OnEnumeration_Getter != null)

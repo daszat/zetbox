@@ -73,6 +73,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.GUI.ViewModelDescriptorEfImpl __value;
                 EntityReference<Kistl.App.GUI.ViewModelDescriptorEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.ViewModelDescriptorEfImpl>(

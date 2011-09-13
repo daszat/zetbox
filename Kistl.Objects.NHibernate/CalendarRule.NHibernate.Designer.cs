@@ -64,6 +64,7 @@ namespace Kistl.App.Calendar
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Calendar.CalendarNHibernateImpl __value = (Kistl.App.Calendar.CalendarNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Calendar);
 
                 if (OnCalendar_Getter != null)
@@ -173,6 +174,7 @@ namespace Kistl.App.Calendar
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.IdentityNHibernateImpl __value = (Kistl.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ChangedBy);
 
                 if (OnChangedBy_Getter != null)
@@ -251,6 +253,7 @@ namespace Kistl.App.Calendar
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = FetchChangedOnOrDefault();
@@ -326,6 +329,7 @@ namespace Kistl.App.Calendar
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.IdentityNHibernateImpl __value = (Kistl.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.CreatedBy);
 
                 if (OnCreatedBy_Getter != null)
@@ -404,6 +408,7 @@ namespace Kistl.App.Calendar
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = FetchCreatedOnOrDefault();
@@ -473,6 +478,7 @@ namespace Kistl.App.Calendar
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = FetchExportGuidOrDefault();
@@ -542,6 +548,7 @@ namespace Kistl.App.Calendar
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(bool);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = FetchIsWorkingDayOrDefault();
@@ -617,6 +624,7 @@ namespace Kistl.App.Calendar
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.ModuleNHibernateImpl __value = (Kistl.App.Base.ModuleNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Module);
 
                 if (OnModule_Getter != null)
@@ -697,6 +705,7 @@ namespace Kistl.App.Calendar
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.Name;
@@ -746,6 +755,7 @@ namespace Kistl.App.Calendar
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(DateTime?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.ValidFrom;
@@ -795,6 +805,7 @@ namespace Kistl.App.Calendar
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(DateTime?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.ValidUntil;
@@ -844,6 +855,7 @@ namespace Kistl.App.Calendar
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(decimal);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.WorkingHours;

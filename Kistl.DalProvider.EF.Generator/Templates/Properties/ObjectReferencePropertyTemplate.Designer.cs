@@ -100,6 +100,7 @@ this.WriteObjects("        public ",  referencedImplementation , " ",  implName 
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            get\r\n");
 this.WriteObjects("            {\r\n");
+this.WriteObjects("                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;\r\n");
 this.WriteObjects("                ",  referencedImplementation , " __value;\r\n");
 this.WriteObjects("                EntityReference<",  referencedImplementation , "> r\r\n");
 this.WriteObjects("                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<",  referencedImplementation , ">(\r\n");
@@ -112,18 +113,18 @@ this.WriteObjects("                    r.Load();\r\n");
 this.WriteObjects("                }\r\n");
 this.WriteObjects("                if (r.Value != null) r.Value.AttachToContext(this.Context);\r\n");
 this.WriteObjects("                __value = r.Value;\r\n");
-#line 71 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
-if (callGetterSetterEvents) { 
 #line 72 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+if (callGetterSetterEvents) { 
+#line 73 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("                if (",  eventName , "_Getter != null)\r\n");
 this.WriteObjects("                {\r\n");
 this.WriteObjects("                    var e = new PropertyGetterEventArgs<",  referencedInterface , ">(__value);\r\n");
 this.WriteObjects("                    ",  eventName , "_Getter(this, e);\r\n");
 this.WriteObjects("                    __value = (",  referencedImplementation , ")e.Result;\r\n");
 this.WriteObjects("                }\r\n");
-#line 78 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
-} 
 #line 79 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+} 
+#line 80 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("                return __value;\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("            set\r\n");
@@ -146,22 +147,22 @@ this.WriteObjects("\r\n");
 this.WriteObjects("                // Changing Event fires before anything is touched\r\n");
 this.WriteObjects("                // navigators may not be notified to entity framework\r\n");
 this.WriteObjects("                NotifyPropertyChanging(\"",  name , "\", null, __oldValue, __newValue);\r\n");
-#line 101 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
-if (!String.IsNullOrEmpty(inverseNavigatorName)) { 
 #line 102 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+if (!String.IsNullOrEmpty(inverseNavigatorName)) { 
+#line 103 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("                if (__oldValue != null) {\r\n");
 this.WriteObjects("                    __oldValue.NotifyPropertyChanging(\"",  inverseNavigatorName , "\", null, null, null);\r\n");
 this.WriteObjects("                }\r\n");
 this.WriteObjects("                if (__newValue != null) {\r\n");
 this.WriteObjects("                    __newValue.NotifyPropertyChanging(\"",  inverseNavigatorName , "\", null, null, null);\r\n");
 this.WriteObjects("                }\r\n");
-#line 108 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
-} 
 #line 109 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
-this.WriteObjects("\r\n");
+} 
 #line 110 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
-if (callGetterSetterEvents) { 
+this.WriteObjects("\r\n");
 #line 111 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+if (callGetterSetterEvents) { 
+#line 112 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("                if (",  eventName , "_PreSetter != null)\r\n");
 this.WriteObjects("                {\r\n");
 this.WriteObjects("                    var e = new PropertyPreSetterEventArgs<",  referencedInterface , ">(__oldValue, __newValue);\r\n");
@@ -169,42 +170,42 @@ this.WriteObjects("                    ",  eventName , "_PreSetter(this, e);\r\n
 this.WriteObjects("                    __newValue = (",  referencedImplementation , ")e.Result;\r\n");
 this.WriteObjects("                }\r\n");
 this.WriteObjects("\r\n");
-#line 118 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
-} 
 #line 119 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+} 
+#line 120 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("                r.Value = (",  referencedImplementation , ")__newValue;\r\n");
 this.WriteObjects("\r\n");
-#line 121 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
-if (callGetterSetterEvents) { 
 #line 122 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+if (callGetterSetterEvents) { 
+#line 123 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("                if (",  eventName , "_PostSetter != null)\r\n");
 this.WriteObjects("                {\r\n");
 this.WriteObjects("                    var e = new PropertyPostSetterEventArgs<",  referencedInterface , ">(__oldValue, __newValue);\r\n");
 this.WriteObjects("                    ",  eventName , "_PostSetter(this, e);\r\n");
 this.WriteObjects("                }\r\n");
 this.WriteObjects("\r\n");
-#line 128 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
-} 
 #line 129 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+} 
+#line 130 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("                // everything is done. fire the Changed event\r\n");
 this.WriteObjects("                // navigators may not be notified to entity framework\r\n");
 this.WriteObjects("                NotifyPropertyChanged(\"",  name , "\", null, __oldValue, __newValue);\r\n");
-#line 132 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
-if (!String.IsNullOrEmpty(inverseNavigatorName)) { 
 #line 133 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+if (!String.IsNullOrEmpty(inverseNavigatorName)) { 
+#line 134 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("                if (__oldValue != null) {\r\n");
 this.WriteObjects("                    __oldValue.NotifyPropertyChanged(\"",  inverseNavigatorName , "\", null, null, null);\r\n");
 this.WriteObjects("                }\r\n");
 this.WriteObjects("                if (__newValue != null) {\r\n");
 this.WriteObjects("                    __newValue.NotifyPropertyChanged(\"",  inverseNavigatorName , "\", null, null, null);\r\n");
 this.WriteObjects("                }\r\n");
-#line 139 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
-} 
 #line 140 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+} 
+#line 141 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
-#line 144 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+#line 145 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 AddSerialization(serializationList, name, fkBackingName, fkGuidBackingName, referencedImplementation, associationName, targetRoleName);
 
     if (!String.IsNullOrEmpty(positionPropertyName))
@@ -214,7 +215,7 @@ AddSerialization(serializationList, name, fkBackingName, fkGuidBackingName, refe
             "int?", positionPropertyName, moduleNamespace);
     }
 
-#line 153 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+#line 154 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("        // END ",  this.GetType() , " for ",  name , "\r\n");
 
         }

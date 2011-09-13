@@ -104,6 +104,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(double?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _AufwandGes;
@@ -180,6 +181,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.IdentityEfImpl __value;
                 EntityReference<Kistl.App.Base.IdentityEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.IdentityEfImpl>(
@@ -259,6 +261,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ChangedOn;
@@ -348,6 +351,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.IdentityEfImpl __value;
                 EntityReference<Kistl.App.Base.IdentityEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.IdentityEfImpl>(
@@ -427,6 +431,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _CreatedOn;
@@ -493,6 +498,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Kundenname;
@@ -594,6 +600,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Name;
@@ -919,6 +926,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(int);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ID;
@@ -940,11 +948,19 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
         private int _ID;
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty
 
+        private Kistl.API.AccessRights? __currentAccessRights;
         public override Kistl.API.AccessRights CurrentAccessRights
         {
             get
             {
-                return (Kistl.API.AccessRights)SecurityRightsCollectionImpl.First().Right;
+				if(Context == null) return Kistl.API.AccessRights.Full;
+                if (__currentAccessRights == null)
+                {
+					__currentAccessRights = base.CurrentAccessRights;
+					var secRight = SecurityRightsCollectionImpl.FirstOrDefault(); // TODO: should be SingleOrDefault() instead of FirstOrDefault()
+                    __currentAccessRights |= secRight != null ? (Kistl.API.AccessRights)secRight.Right : Kistl.API.AccessRights.None;
+                }
+                return __currentAccessRights.Value;
             }
         }
 

@@ -73,6 +73,7 @@ namespace Kistl.App.Calendar
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Calendar.CalendarEfImpl __value;
                 EntityReference<Kistl.App.Calendar.CalendarEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Calendar.CalendarEfImpl>(
@@ -187,6 +188,7 @@ namespace Kistl.App.Calendar
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.IdentityEfImpl __value;
                 EntityReference<Kistl.App.Base.IdentityEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.IdentityEfImpl>(
@@ -266,6 +268,7 @@ namespace Kistl.App.Calendar
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ChangedOn;
@@ -355,6 +358,7 @@ namespace Kistl.App.Calendar
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.IdentityEfImpl __value;
                 EntityReference<Kistl.App.Base.IdentityEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.IdentityEfImpl>(
@@ -434,6 +438,7 @@ namespace Kistl.App.Calendar
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _CreatedOn;
@@ -500,6 +505,7 @@ namespace Kistl.App.Calendar
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
@@ -566,6 +572,7 @@ namespace Kistl.App.Calendar
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(bool);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _IsWorkingDay;
@@ -656,6 +663,7 @@ namespace Kistl.App.Calendar
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.ModuleEfImpl __value;
                 EntityReference<Kistl.App.Base.ModuleEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ModuleEfImpl>(
@@ -735,6 +743,7 @@ namespace Kistl.App.Calendar
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Name;
@@ -788,6 +797,7 @@ namespace Kistl.App.Calendar
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(DateTime?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ValidFrom;
@@ -841,6 +851,7 @@ namespace Kistl.App.Calendar
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(DateTime?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ValidUntil;
@@ -894,6 +905,7 @@ namespace Kistl.App.Calendar
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(decimal);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _WorkingHours;
@@ -1235,6 +1247,7 @@ namespace Kistl.App.Calendar
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(int);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ID;

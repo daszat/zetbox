@@ -47,6 +47,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(Kistl.App.Base.DateTimeStyles?);
 				var __value = _DateTimeStyle;
 				if(OnDateTimeStyle_Getter != null)
 				{

@@ -64,6 +64,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.IdentityMemoryImpl __value;
                 if (_fk_ChangedBy.HasValue)
                     __value = (Kistl.App.Base.IdentityMemoryImpl)Context.Find<Kistl.App.Base.Identity>(_fk_ChangedBy.Value);
@@ -131,6 +132,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ChangedOn;
@@ -264,6 +266,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnConstr
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.IdentityMemoryImpl __value;
                 if (_fk_CreatedBy.HasValue)
                     __value = (Kistl.App.Base.IdentityMemoryImpl)Context.Find<Kistl.App.Base.Identity>(_fk_CreatedBy.Value);
@@ -331,6 +334,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnConstr
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _CreatedOn;
@@ -416,6 +420,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnConstr
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.GUI.IconMemoryImpl __value;
                 if (_fk_DefaultIcon.HasValue)
                     __value = (Kistl.App.GUI.IconMemoryImpl)Context.Find<Kistl.App.GUI.Icon>(_fk_DefaultIcon.Value);
@@ -483,6 +488,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnConstr
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Description;
@@ -533,6 +539,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnConstr
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
@@ -667,6 +674,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnMethod
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.ModuleMemoryImpl __value;
                 if (_fk_Module.HasValue)
                     __value = (Kistl.App.Base.ModuleMemoryImpl)Context.Find<Kistl.App.Base.Module>(_fk_Module.Value);
@@ -734,6 +742,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnMethod
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Name;
@@ -855,6 +864,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.GUI.ControlKindMemoryImpl __value;
                 if (_fk_RequestedKind.HasValue)
                     __value = (Kistl.App.GUI.ControlKindMemoryImpl)Context.Find<Kistl.App.GUI.ControlKind>(_fk_RequestedKind.Value);
@@ -922,6 +932,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(bool);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ShowIconInLists;
@@ -972,6 +983,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(bool);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ShowIdInLists;
@@ -1022,6 +1034,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(bool);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ShowNameInLists;

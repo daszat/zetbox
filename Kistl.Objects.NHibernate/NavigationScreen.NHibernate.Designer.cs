@@ -63,6 +63,7 @@ namespace Kistl.App.GUI
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.IdentityNHibernateImpl __value = (Kistl.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ChangedBy);
 
                 if (OnChangedBy_Getter != null)
@@ -141,6 +142,7 @@ namespace Kistl.App.GUI
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = FetchChangedOnOrDefault();
@@ -243,6 +245,7 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationScreen> O
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.Color;
@@ -298,6 +301,7 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationScreen> O
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.IdentityNHibernateImpl __value = (Kistl.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.CreatedBy);
 
                 if (OnCreatedBy_Getter != null)
@@ -376,6 +380,7 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationScreen> O
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = FetchCreatedOnOrDefault();
@@ -445,6 +450,7 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationScreen> O
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = FetchExportGuidOrDefault();
@@ -549,6 +555,7 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationScreen> O
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.ModuleNHibernateImpl __value = (Kistl.App.Base.ModuleNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Module);
 
                 if (OnModule_Getter != null)
@@ -635,6 +642,7 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationScreen> O
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.GUI.NavigationScreenNHibernateImpl __value = (Kistl.App.GUI.NavigationScreenNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Parent);
 
                 if (OnParent_Getter != null)
@@ -729,6 +737,7 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationScreen> O
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(int?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.Children_pos;
@@ -762,6 +771,7 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationScreen> O
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.Title;
@@ -817,6 +827,7 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationScreen> O
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.GUI.ViewModelDescriptorNHibernateImpl __value = (Kistl.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ViewModelDescriptor);
 
                 if (OnViewModelDescriptor_Getter != null)

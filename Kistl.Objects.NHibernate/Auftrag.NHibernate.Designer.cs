@@ -56,6 +56,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.Auftragsname;
@@ -105,6 +106,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(double?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.Auftragswert;
@@ -160,6 +162,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.IdentityNHibernateImpl __value = (Kistl.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ChangedBy);
 
                 if (OnChangedBy_Getter != null)
@@ -238,6 +241,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = FetchChangedOnOrDefault();
@@ -313,6 +317,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.IdentityNHibernateImpl __value = (Kistl.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.CreatedBy);
 
                 if (OnCreatedBy_Getter != null)
@@ -391,6 +396,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = FetchCreatedOnOrDefault();
@@ -466,6 +472,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Projekte.KundeNHibernateImpl __value = (Kistl.App.Projekte.KundeNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Kunde);
 
                 if (OnKunde_Getter != null)
@@ -550,6 +557,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Projekte.MitarbeiterNHibernateImpl __value = (Kistl.App.Projekte.MitarbeiterNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Mitarbeiter);
 
                 if (OnMitarbeiter_Getter != null)
@@ -634,6 +642,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Projekte.ProjektNHibernateImpl __value = (Kistl.App.Projekte.ProjektNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Projekt);
 
                 if (OnProjekt_Getter != null)
@@ -1084,9 +1093,17 @@ namespace Kistl.App.Projekte
 
         // make proxy available for the provider
         public override IProxyObject NHibernateProxy { get { return Proxy; } }
+        private Kistl.API.AccessRights? __currentAccessRights;
         public override Kistl.API.AccessRights CurrentAccessRights
         {
-           get { return (Kistl.API.AccessRights)this.Proxy.SecurityRightsCollectionImpl.Single().Right; }
+           get { 
+             if(Context == null) return Kistl.API.AccessRights.Full;
+             if(__currentAccessRights == null) { 
+                 __currentAccessRights = base.CurrentAccessRights; 
+                 var secRight = this.Proxy.SecurityRightsCollectionImpl != null ? this.Proxy.SecurityRightsCollectionImpl.SingleOrDefault() : null;
+                 __currentAccessRights |= secRight != null ? (Kistl.API.AccessRights)secRight.Right : Kistl.API.AccessRights.None; 
+             } 
+             return __currentAccessRights.Value; }
         }
 
         #region Serializer

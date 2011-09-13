@@ -49,6 +49,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _CategoryTags;
@@ -125,6 +126,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.IdentityEfImpl __value;
                 EntityReference<Kistl.App.Base.IdentityEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.IdentityEfImpl>(
@@ -204,6 +206,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ChangedOn;
@@ -372,6 +375,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.IdentityEfImpl __value;
                 EntityReference<Kistl.App.Base.IdentityEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.IdentityEfImpl>(
@@ -451,6 +455,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _CreatedOn;
@@ -541,6 +546,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.DefaultPropertyValueEfImpl __value;
                 EntityReference<Kistl.App.Base.DefaultPropertyValueEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.DefaultPropertyValueEfImpl>(
@@ -632,6 +638,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Description;
@@ -685,6 +692,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
@@ -775,6 +783,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.GUI.PropertyFilterConfigurationEfImpl __value;
                 EntityReference<Kistl.App.GUI.PropertyFilterConfigurationEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.PropertyFilterConfigurationEfImpl>(
@@ -866,6 +875,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Label;
@@ -943,6 +953,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.ModuleEfImpl __value;
                 EntityReference<Kistl.App.Base.ModuleEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ModuleEfImpl>(
@@ -1022,6 +1033,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Name;
@@ -1099,6 +1111,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.DataTypeEfImpl __value;
                 EntityReference<Kistl.App.Base.DataTypeEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.DataTypeEfImpl>(
@@ -1181,6 +1194,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(int?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Properties_pos;
@@ -1242,6 +1256,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.GUI.ControlKindEfImpl __value;
                 EntityReference<Kistl.App.GUI.ControlKindEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.ControlKindEfImpl>(
@@ -1345,6 +1360,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.GUI.ViewModelDescriptorEfImpl __value;
                 EntityReference<Kistl.App.GUI.ViewModelDescriptorEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.ViewModelDescriptorEfImpl>(
@@ -1853,6 +1869,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(int);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ID;

@@ -65,6 +65,7 @@ namespace Kistl.App.Calendar
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Calendar.CalendarMemoryImpl __value;
                 if (_fk_BaseCalendar.HasValue)
                     __value = (Kistl.App.Calendar.CalendarMemoryImpl)Context.Find<Kistl.App.Calendar.Calendar>(_fk_BaseCalendar.Value);
@@ -208,6 +209,7 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCa
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.IdentityMemoryImpl __value;
                 if (_fk_ChangedBy.HasValue)
                     __value = (Kistl.App.Base.IdentityMemoryImpl)Context.Find<Kistl.App.Base.Identity>(_fk_ChangedBy.Value);
@@ -275,6 +277,7 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCa
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ChangedOn;
@@ -398,6 +401,7 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.IdentityMemoryImpl __value;
                 if (_fk_CreatedBy.HasValue)
                     __value = (Kistl.App.Base.IdentityMemoryImpl)Context.Find<Kistl.App.Base.Identity>(_fk_CreatedBy.Value);
@@ -465,6 +469,7 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _CreatedOn;
@@ -528,6 +533,7 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
@@ -613,6 +619,7 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.ModuleMemoryImpl __value;
                 if (_fk_Module.HasValue)
                     __value = (Kistl.App.Base.ModuleMemoryImpl)Context.Find<Kistl.App.Base.Module>(_fk_Module.Value);
@@ -680,6 +687,7 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Name;

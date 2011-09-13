@@ -73,6 +73,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.CompoundObjectEfImpl __value;
                 EntityReference<Kistl.App.Base.CompoundObjectEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.CompoundObjectEfImpl>(

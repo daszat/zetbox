@@ -64,6 +64,7 @@ namespace Kistl.App.GUI
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.IdentityMemoryImpl __value;
                 if (_fk_ChangedBy.HasValue)
                     __value = (Kistl.App.Base.IdentityMemoryImpl)Context.Find<Kistl.App.Base.Identity>(_fk_ChangedBy.Value);
@@ -131,6 +132,7 @@ namespace Kistl.App.GUI
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ChangedOn;
@@ -215,6 +217,7 @@ namespace Kistl.App.GUI
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.IdentityMemoryImpl __value;
                 if (_fk_CreatedBy.HasValue)
                     __value = (Kistl.App.Base.IdentityMemoryImpl)Context.Find<Kistl.App.Base.Identity>(_fk_CreatedBy.Value);
@@ -282,6 +285,7 @@ namespace Kistl.App.GUI
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _CreatedOn;
@@ -345,6 +349,7 @@ namespace Kistl.App.GUI
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
@@ -408,6 +413,7 @@ namespace Kistl.App.GUI
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Label;
@@ -480,6 +486,7 @@ namespace Kistl.App.GUI
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.ModuleMemoryImpl __value;
                 if (_fk_Module.HasValue)
                     __value = (Kistl.App.Base.ModuleMemoryImpl)Context.Find<Kistl.App.Base.Module>(_fk_Module.Value);
@@ -547,6 +554,7 @@ namespace Kistl.App.GUI
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(bool?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _RefreshOnFilterChanged;
@@ -619,6 +627,7 @@ namespace Kistl.App.GUI
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.GUI.ControlKindMemoryImpl __value;
                 if (_fk_RequestedKind.HasValue)
                     __value = (Kistl.App.GUI.ControlKindMemoryImpl)Context.Find<Kistl.App.GUI.ControlKind>(_fk_RequestedKind.Value);
@@ -686,6 +695,7 @@ namespace Kistl.App.GUI
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(bool);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Required;
@@ -758,6 +768,7 @@ namespace Kistl.App.GUI
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.GUI.ViewModelDescriptorMemoryImpl __value;
                 if (_fk_ViewModelDescriptor.HasValue)
                     __value = (Kistl.App.GUI.ViewModelDescriptorMemoryImpl)Context.Find<Kistl.App.GUI.ViewModelDescriptor>(_fk_ViewModelDescriptor.Value);

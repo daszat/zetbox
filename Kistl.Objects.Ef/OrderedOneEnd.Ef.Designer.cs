@@ -104,6 +104,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.OrderedOneEnd> OnN
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(int?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _SomeInt;
@@ -271,6 +272,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.OrderedOneEnd> OnN
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(int);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ID;

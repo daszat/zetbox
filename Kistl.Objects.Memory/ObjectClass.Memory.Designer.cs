@@ -104,6 +104,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnAcc
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.ObjectClassMemoryImpl __value;
                 if (_fk_BaseObjectClass.HasValue)
                     __value = (Kistl.App.Base.ObjectClassMemoryImpl)Context.Find<Kistl.App.Base.ObjectClass>(_fk_BaseObjectClass.Value);
@@ -209,6 +210,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnAcc
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.GUI.ViewModelDescriptorMemoryImpl __value;
                 if (_fk_DefaultViewModelDescriptor.HasValue)
                     __value = (Kistl.App.GUI.ViewModelDescriptorMemoryImpl)Context.Find<Kistl.App.GUI.ViewModelDescriptor>(_fk_DefaultViewModelDescriptor.Value);
@@ -338,6 +340,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnFil
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(bool);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _IsAbstract;
@@ -388,6 +391,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnFil
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(bool);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _IsFrozenObject;
@@ -438,6 +442,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnFil
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(bool);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _IsSimpleObject;
@@ -527,6 +532,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _TableName;

@@ -145,6 +145,7 @@ namespace Kistl.App.GUI
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Description;
@@ -221,6 +222,7 @@ namespace Kistl.App.GUI
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.MethodEfImpl __value;
                 EntityReference<Kistl.App.Base.MethodEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.MethodEfImpl>(
@@ -323,6 +325,7 @@ namespace Kistl.App.GUI
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.PropertyEfImpl __value;
                 EntityReference<Kistl.App.Base.PropertyEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.PropertyEfImpl>(
@@ -575,6 +578,7 @@ namespace Kistl.App.GUI
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(int);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ID;

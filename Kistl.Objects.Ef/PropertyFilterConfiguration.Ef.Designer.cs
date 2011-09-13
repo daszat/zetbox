@@ -73,6 +73,7 @@ namespace Kistl.App.GUI
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.PropertyEfImpl __value;
                 EntityReference<Kistl.App.Base.PropertyEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.PropertyEfImpl>(

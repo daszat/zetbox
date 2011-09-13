@@ -49,6 +49,7 @@ namespace Kistl.App.Test
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(decimal?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Large;
@@ -102,6 +103,7 @@ namespace Kistl.App.Test
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(decimal?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _NoScale;
@@ -155,6 +157,7 @@ namespace Kistl.App.Test
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(decimal?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _SmallDecimal;
@@ -332,6 +335,7 @@ namespace Kistl.App.Test
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(int);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ID;

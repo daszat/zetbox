@@ -88,6 +88,7 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.ControlKind> OnChil
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = FetchExportGuidOrDefault();
@@ -163,6 +164,7 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.ControlKind> OnChil
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.ModuleNHibernateImpl __value = (Kistl.App.Base.ModuleNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Module);
 
                 if (OnModule_Getter != null)
@@ -243,6 +245,7 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.ControlKind> OnChil
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.Name;
@@ -298,6 +301,7 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.ControlKind> OnChil
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.GUI.ControlKindNHibernateImpl __value = (Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Parent);
 
                 if (OnParent_Getter != null)

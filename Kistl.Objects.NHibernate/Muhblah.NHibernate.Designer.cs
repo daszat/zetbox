@@ -54,6 +54,7 @@ namespace Kistl.App.Test
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(bool?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.TestBool;
@@ -171,6 +172,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Test.TestCustomObjectNHibernateImpl __value = (Kistl.App.Test.TestCustomObjectNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.TestCustomObjects_Nav);
 
                 if (OnTestCustomObjects_Nav_Getter != null)
@@ -278,6 +280,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Test.TestCustomObjectNHibernateImpl __value = (Kistl.App.Test.TestCustomObjectNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.TestCustomObjects_One_Nav);
 
                 if (OnTestCustomObjects_One_Nav_Getter != null)
@@ -372,6 +375,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(DateTime?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.TestDateTime;
@@ -421,6 +425,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(Kistl.App.Test.TestEnum);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.TestEnum;
@@ -470,6 +475,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.TestString;

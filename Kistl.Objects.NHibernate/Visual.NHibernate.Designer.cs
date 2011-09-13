@@ -112,6 +112,7 @@ namespace Kistl.App.GUI
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.Description;
@@ -167,6 +168,7 @@ namespace Kistl.App.GUI
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.MethodNHibernateImpl __value = (Kistl.App.Base.MethodNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Method);
 
                 if (OnMethod_Getter != null)
@@ -251,6 +253,7 @@ namespace Kistl.App.GUI
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.PropertyNHibernateImpl __value = (Kistl.App.Base.PropertyNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Property);
 
                 if (OnProperty_Getter != null)

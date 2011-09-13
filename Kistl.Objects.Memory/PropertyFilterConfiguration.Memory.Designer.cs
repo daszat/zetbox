@@ -65,6 +65,7 @@ namespace Kistl.App.GUI
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.PropertyMemoryImpl __value;
                 if (_fk_Property.HasValue)
                     __value = (Kistl.App.Base.PropertyMemoryImpl)Context.Find<Kistl.App.Base.Property>(_fk_Property.Value);

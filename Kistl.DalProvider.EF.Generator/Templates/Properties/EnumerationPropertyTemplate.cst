@@ -32,6 +32,7 @@
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(<%= enumType %>);
 <%
 				if(callGetterSetterEvents)
 				{

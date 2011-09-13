@@ -65,6 +65,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.ConstraintInvocationMemoryImpl __value;
                 if (_fk_GetErrorTextInvocation.HasValue)
                     __value = (Kistl.App.Base.ConstraintInvocationMemoryImpl)Context.Find<Kistl.App.Base.ConstraintInvocation>(_fk_GetErrorTextInvocation.Value);
@@ -154,6 +155,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.ConstraintInvocationMemoryImpl __value;
                 if (_fk_IsValidInvocation.HasValue)
                     __value = (Kistl.App.Base.ConstraintInvocationMemoryImpl)Context.Find<Kistl.App.Base.ConstraintInvocation>(_fk_IsValidInvocation.Value);

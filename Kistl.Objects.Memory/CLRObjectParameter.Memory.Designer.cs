@@ -65,6 +65,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.TypeRefMemoryImpl __value;
                 if (_fk_Type.HasValue)
                     __value = (Kistl.App.Base.TypeRefMemoryImpl)Context.Find<Kistl.App.Base.TypeRef>(_fk_Type.Value);

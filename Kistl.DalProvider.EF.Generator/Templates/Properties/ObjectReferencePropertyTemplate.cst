@@ -56,6 +56,7 @@
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 <%= referencedImplementation %> __value;
                 EntityReference<<%= referencedImplementation %>> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<<%= referencedImplementation %>>(

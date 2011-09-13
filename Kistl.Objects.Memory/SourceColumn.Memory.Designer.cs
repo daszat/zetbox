@@ -64,6 +64,7 @@ namespace ZBox.App.SchemaMigration
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.IdentityMemoryImpl __value;
                 if (_fk_ChangedBy.HasValue)
                     __value = (Kistl.App.Base.IdentityMemoryImpl)Context.Find<Kistl.App.Base.Identity>(_fk_ChangedBy.Value);
@@ -131,6 +132,7 @@ namespace ZBox.App.SchemaMigration
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ChangedOn;
@@ -194,6 +196,7 @@ namespace ZBox.App.SchemaMigration
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Comment;
@@ -265,6 +268,7 @@ namespace ZBox.App.SchemaMigration
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.IdentityMemoryImpl __value;
                 if (_fk_CreatedBy.HasValue)
                     __value = (Kistl.App.Base.IdentityMemoryImpl)Context.Find<Kistl.App.Base.Identity>(_fk_CreatedBy.Value);
@@ -332,6 +336,7 @@ namespace ZBox.App.SchemaMigration
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _CreatedOn;
@@ -395,6 +400,7 @@ namespace ZBox.App.SchemaMigration
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(ZBox.App.SchemaMigration.ColumnType);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _DbType;
@@ -445,6 +451,7 @@ namespace ZBox.App.SchemaMigration
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Description;
@@ -559,6 +566,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
@@ -622,6 +630,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(bool?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _IsNullable;
@@ -672,6 +681,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Name;
@@ -744,6 +754,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 ZBox.App.SchemaMigration.SourceColumnMemoryImpl __value;
                 if (_fk_References.HasValue)
                     __value = (ZBox.App.SchemaMigration.SourceColumnMemoryImpl)Context.Find<ZBox.App.SchemaMigration.SourceColumn>(_fk_References.Value);
@@ -866,6 +877,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(int?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Size;
@@ -938,6 +950,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 ZBox.App.SchemaMigration.SourceTableMemoryImpl __value;
                 if (_fk_SourceTable.HasValue)
                     __value = (ZBox.App.SchemaMigration.SourceTableMemoryImpl)Context.Find<ZBox.App.SchemaMigration.SourceTable>(_fk_SourceTable.Value);
@@ -1021,6 +1034,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(ZBox.App.SchemaMigration.MappingStatus?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Status;

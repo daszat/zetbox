@@ -54,6 +54,7 @@ namespace Kistl.App.Calendar
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(Kistl.App.Base.DayOfWeek);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.DayOfWeek;

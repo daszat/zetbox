@@ -89,6 +89,7 @@ namespace Kistl.App.GUI
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Description;
@@ -160,6 +161,7 @@ namespace Kistl.App.GUI
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.MethodMemoryImpl __value;
                 if (_fk_Method.HasValue)
                     __value = (Kistl.App.Base.MethodMemoryImpl)Context.Find<Kistl.App.Base.Method>(_fk_Method.Value);
@@ -248,6 +250,7 @@ namespace Kistl.App.GUI
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.PropertyMemoryImpl __value;
                 if (_fk_Property.HasValue)
                     __value = (Kistl.App.Base.PropertyMemoryImpl)Context.Find<Kistl.App.Base.Property>(_fk_Property.Value);

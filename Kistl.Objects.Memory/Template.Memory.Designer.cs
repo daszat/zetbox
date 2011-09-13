@@ -64,6 +64,7 @@ namespace Kistl.App.GUI
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.AssemblyMemoryImpl __value;
                 if (_fk_DisplayedTypeAssembly.HasValue)
                     __value = (Kistl.App.Base.AssemblyMemoryImpl)Context.Find<Kistl.App.Base.Assembly>(_fk_DisplayedTypeAssembly.Value);
@@ -131,6 +132,7 @@ namespace Kistl.App.GUI
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _DisplayedTypeFullName;
@@ -181,6 +183,7 @@ namespace Kistl.App.GUI
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _DisplayName;
@@ -275,6 +278,7 @@ namespace Kistl.App.GUI
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.GUI.VisualMemoryImpl __value;
                 if (_fk_VisualTree.HasValue)
                     __value = (Kistl.App.GUI.VisualMemoryImpl)Context.Find<Kistl.App.GUI.Visual>(_fk_VisualTree.Value);

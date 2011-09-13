@@ -49,6 +49,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Auftragsname;
@@ -102,6 +103,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(double?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Auftragswert;
@@ -178,6 +180,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.IdentityEfImpl __value;
                 EntityReference<Kistl.App.Base.IdentityEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.IdentityEfImpl>(
@@ -257,6 +260,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ChangedOn;
@@ -346,6 +350,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.IdentityEfImpl __value;
                 EntityReference<Kistl.App.Base.IdentityEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.IdentityEfImpl>(
@@ -425,6 +430,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _CreatedOn;
@@ -514,6 +520,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Projekte.KundeEfImpl __value;
                 EntityReference<Kistl.App.Projekte.KundeEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.KundeEfImpl>(
@@ -616,6 +623,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Projekte.MitarbeiterEfImpl __value;
                 EntityReference<Kistl.App.Projekte.MitarbeiterEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.MitarbeiterEfImpl>(
@@ -718,6 +726,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Projekte.ProjektEfImpl __value;
                 EntityReference<Kistl.App.Projekte.ProjektEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Projekte.ProjektEfImpl>(
@@ -1074,6 +1083,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(int);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ID;
@@ -1100,9 +1110,12 @@ namespace Kistl.App.Projekte
         {
             get
             {
+				if(Context == null) return Kistl.API.AccessRights.Full;
                 if (__currentAccessRights == null)
                 {
-                    __currentAccessRights = (Kistl.API.AccessRights)SecurityRightsCollectionImpl.First().Right;
+					__currentAccessRights = base.CurrentAccessRights;
+					var secRight = SecurityRightsCollectionImpl.FirstOrDefault(); // TODO: should be SingleOrDefault() instead of FirstOrDefault()
+                    __currentAccessRights |= secRight != null ? (Kistl.API.AccessRights)secRight.Right : Kistl.API.AccessRights.None;
                 }
                 return __currentAccessRights.Value;
             }

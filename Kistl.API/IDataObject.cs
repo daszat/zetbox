@@ -288,6 +288,10 @@ namespace Kistl.API
         /// Gets a value indicating whether values of this object can be set. This mostly depends on the state of the containing object.
         /// </summary>
         bool IsReadonly { get; }
+        /// <summary>
+        /// Reflects the current access rights by the current Identity. 
+        /// </summary>
+        AccessRights CurrentAccessRights { get; }
 
         /// <summary>
         /// Attaches this CompoundObject to the specified object on the specified property.

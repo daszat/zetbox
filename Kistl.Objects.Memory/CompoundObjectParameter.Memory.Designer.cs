@@ -65,6 +65,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.CompoundObjectMemoryImpl __value;
                 if (_fk_CompoundObject.HasValue)
                     __value = (Kistl.App.Base.CompoundObjectMemoryImpl)Context.Find<Kistl.App.Base.CompoundObject>(_fk_CompoundObject.Value);

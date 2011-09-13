@@ -72,6 +72,7 @@ namespace Kistl.App.Test
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(DateTime?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.Birthday;
@@ -160,6 +161,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Test.MuhblahNHibernateImpl __value = (Kistl.App.Test.MuhblahNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.MubBlah_Nav);
 
                 if (OnMubBlah_Nav_Getter != null)
@@ -296,6 +298,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Test.MuhblahNHibernateImpl __value = (Kistl.App.Test.MuhblahNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.MuhBlah_One_Nav);
 
                 if (OnMuhBlah_One_Nav_Getter != null)
@@ -390,6 +393,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.PersonName;
@@ -445,7 +449,11 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
         /// <summary>backing property for PhoneNumberMobile, takes care of attaching/detaching the values</summary>
         public Kistl.App.Test.TestPhoneCompoundObjectNHibernateImpl PhoneNumberMobileImpl
         {
-            get { return this.Proxy.PhoneNumberMobile; }
+            get 
+			{ 
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+				return this.Proxy.PhoneNumberMobile; 
+			}
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
@@ -492,7 +500,11 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
         /// <summary>backing property for PhoneNumberOffice, takes care of attaching/detaching the values</summary>
         public Kistl.App.Test.TestPhoneCompoundObjectNHibernateImpl PhoneNumberOfficeImpl
         {
-            get { return this.Proxy.PhoneNumberOffice; }
+            get 
+			{ 
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+				return this.Proxy.PhoneNumberOffice; 
+			}
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();

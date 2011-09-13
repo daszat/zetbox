@@ -93,6 +93,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnAcc
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.ObjectClassNHibernateImpl __value = (Kistl.App.Base.ObjectClassNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.BaseObjectClass);
 
                 if (OnBaseObjectClass_Getter != null)
@@ -202,6 +203,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnAcc
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.GUI.ViewModelDescriptorNHibernateImpl __value = (Kistl.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.DefaultViewModelDescriptor);
 
                 if (OnDefaultViewModelDescriptor_Getter != null)
@@ -344,6 +346,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnFil
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(bool);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.IsAbstract;
@@ -393,6 +396,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnFil
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(bool);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.IsFrozenObject;
@@ -442,6 +446,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnFil
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(bool);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.IsSimpleObject;
@@ -524,6 +529,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.TableName;

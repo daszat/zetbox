@@ -65,6 +65,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.DataTypeMemoryImpl __value;
                 if (_fk_Constrained.HasValue)
                     __value = (Kistl.App.Base.DataTypeMemoryImpl)Context.Find<Kistl.App.Base.DataType>(_fk_Constrained.Value);
@@ -148,6 +149,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
@@ -211,6 +213,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Reason;

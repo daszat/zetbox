@@ -43,6 +43,7 @@ namespace ZBox.App.SchemaMigration
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Destination;
@@ -93,6 +94,7 @@ namespace ZBox.App.SchemaMigration
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(int);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _DestinationRows;
@@ -143,6 +145,7 @@ namespace ZBox.App.SchemaMigration
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Source;
@@ -193,6 +196,7 @@ namespace ZBox.App.SchemaMigration
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(int);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _SourceRows;
@@ -243,6 +247,7 @@ namespace ZBox.App.SchemaMigration
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Timestamp;

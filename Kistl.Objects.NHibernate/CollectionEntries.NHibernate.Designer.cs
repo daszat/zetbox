@@ -45,6 +45,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.ExportGuid;
@@ -116,6 +117,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.CalculatedObjectReferencePropertyNHibernateImpl __value = (Kistl.App.Base.CalculatedObjectReferencePropertyNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
@@ -181,6 +183,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.PropertyNHibernateImpl __value = (Kistl.App.Base.PropertyNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
@@ -405,6 +408,7 @@ namespace at.dasz.DocumentManagement
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.ExportGuid;
@@ -476,6 +480,7 @@ namespace at.dasz.DocumentManagement
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 at.dasz.DocumentManagement.DocumentNHibernateImpl __value = (at.dasz.DocumentManagement.DocumentNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
@@ -529,6 +534,7 @@ namespace at.dasz.DocumentManagement
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(int?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.A_pos;
@@ -565,6 +571,7 @@ namespace at.dasz.DocumentManagement
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.BlobNHibernateImpl __value = (Kistl.App.Base.BlobNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
@@ -618,6 +625,7 @@ namespace at.dasz.DocumentManagement
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(int?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.B_pos;
@@ -923,6 +931,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.IdentityNHibernateImpl __value = (Kistl.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
@@ -986,6 +995,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.GroupNHibernateImpl __value = (Kistl.App.Base.GroupNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
@@ -1167,6 +1177,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.ExportGuid;
@@ -1238,6 +1249,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.IndexConstraintNHibernateImpl __value = (Kistl.App.Base.IndexConstraintNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
@@ -1303,6 +1315,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.PropertyNHibernateImpl __value = (Kistl.App.Base.PropertyNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
@@ -1569,6 +1582,7 @@ namespace Kistl.App.Test
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Test.MuhblahNHibernateImpl __value = (Kistl.App.Test.MuhblahNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
@@ -1632,6 +1646,7 @@ namespace Kistl.App.Test
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Test.TestCustomObjectNHibernateImpl __value = (Kistl.App.Test.TestCustomObjectNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
@@ -1856,6 +1871,7 @@ namespace Kistl.App.Test
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Test.N_to_M_relations_ANHibernateImpl __value = (Kistl.App.Test.N_to_M_relations_ANHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
@@ -1919,6 +1935,7 @@ namespace Kistl.App.Test
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Test.N_to_M_relations_BNHibernateImpl __value = (Kistl.App.Test.N_to_M_relations_BNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
@@ -2101,6 +2118,7 @@ namespace Kistl.App.GUI
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.ExportGuid;
@@ -2172,6 +2190,7 @@ namespace Kistl.App.GUI
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.GUI.NavigationScreenNHibernateImpl __value = (Kistl.App.GUI.NavigationScreenNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
@@ -2237,6 +2256,7 @@ namespace Kistl.App.GUI
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.GroupNHibernateImpl __value = (Kistl.App.Base.GroupNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
@@ -2460,6 +2480,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.ExportGuid;
@@ -2531,6 +2552,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.ObjectClassNHibernateImpl __value = (Kistl.App.Base.ObjectClassNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
@@ -2596,6 +2618,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.InterfaceNHibernateImpl __value = (Kistl.App.Base.InterfaceNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
@@ -2862,6 +2885,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Projekte.ProjektNHibernateImpl __value = (Kistl.App.Projekte.ProjektNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
@@ -2913,6 +2937,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(int?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.A_pos;
@@ -2949,6 +2974,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Projekte.MitarbeiterNHibernateImpl __value = (Kistl.App.Projekte.MitarbeiterNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
@@ -3000,6 +3026,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(int?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.B_pos;
@@ -3208,6 +3235,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.ExportGuid;
@@ -3279,6 +3307,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.RoleMembershipNHibernateImpl __value = (Kistl.App.Base.RoleMembershipNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
@@ -3332,6 +3361,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(int?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.A_pos;
@@ -3368,6 +3398,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.RelationNHibernateImpl __value = (Kistl.App.Base.RelationNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
@@ -3421,6 +3452,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(int?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.B_pos;
@@ -3684,6 +3716,7 @@ namespace ZBox.App.SchemaMigration
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.ExportGuid;
@@ -3755,6 +3788,7 @@ namespace ZBox.App.SchemaMigration
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 ZBox.App.SchemaMigration.SourceColumnNHibernateImpl __value = (ZBox.App.SchemaMigration.SourceColumnNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
@@ -3808,6 +3842,7 @@ namespace ZBox.App.SchemaMigration
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(int?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.A_pos;
@@ -3844,6 +3879,7 @@ namespace ZBox.App.SchemaMigration
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.PropertyNHibernateImpl __value = (Kistl.App.Base.PropertyNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
@@ -3897,6 +3933,7 @@ namespace ZBox.App.SchemaMigration
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(int?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.B_pos;
@@ -4202,6 +4239,7 @@ namespace Kistl.App.GUI
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.GUI.TemplateNHibernateImpl __value = (Kistl.App.GUI.TemplateNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
@@ -4265,6 +4303,7 @@ namespace Kistl.App.GUI
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.GUI.VisualNHibernateImpl __value = (Kistl.App.GUI.VisualNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
@@ -4489,6 +4528,7 @@ namespace Kistl.App.Test
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Test.TestStudentNHibernateImpl __value = (Kistl.App.Test.TestStudentNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
@@ -4552,6 +4592,7 @@ namespace Kistl.App.Test
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Test.FragebogenNHibernateImpl __value = (Kistl.App.Test.FragebogenNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
@@ -4733,6 +4774,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.ExportGuid;
@@ -4804,6 +4846,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.TypeRefNHibernateImpl __value = (Kistl.App.Base.TypeRefNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
@@ -4857,6 +4900,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(int?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.A_pos;
@@ -4893,6 +4937,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.TypeRefNHibernateImpl __value = (Kistl.App.Base.TypeRefNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
@@ -4946,6 +4991,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(int?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.B_pos;
@@ -5209,6 +5255,7 @@ namespace Kistl.App.GUI
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.ExportGuid;
@@ -5280,6 +5327,7 @@ namespace Kistl.App.GUI
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.GUI.ViewDescriptorNHibernateImpl __value = (Kistl.App.GUI.ViewDescriptorNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
@@ -5345,6 +5393,7 @@ namespace Kistl.App.GUI
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.TypeRefNHibernateImpl __value = (Kistl.App.Base.TypeRefNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
@@ -5568,6 +5617,7 @@ namespace Kistl.App.GUI
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.ExportGuid;
@@ -5639,6 +5689,7 @@ namespace Kistl.App.GUI
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.GUI.ViewModelDescriptorNHibernateImpl __value = (Kistl.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
@@ -5704,6 +5755,7 @@ namespace Kistl.App.GUI
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.GUI.ControlKindNHibernateImpl __value = (Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
@@ -5970,6 +6022,7 @@ namespace Kistl.App.GUI
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.GUI.VisualNHibernateImpl __value = (Kistl.App.GUI.VisualNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
@@ -6033,6 +6086,7 @@ namespace Kistl.App.GUI
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.GUI.VisualNHibernateImpl __value = (Kistl.App.GUI.VisualNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
@@ -6257,6 +6311,7 @@ namespace Kistl.App.GUI
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.GUI.VisualNHibernateImpl __value = (Kistl.App.GUI.VisualNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
@@ -6320,6 +6375,7 @@ namespace Kistl.App.GUI
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.GUI.VisualNHibernateImpl __value = (Kistl.App.GUI.VisualNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
 
@@ -6511,6 +6567,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Projekte.KundeNHibernateImpl __value = (Kistl.App.Projekte.KundeNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Parent);
 
 
@@ -6597,6 +6654,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(System.String);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.Value;
@@ -6792,6 +6850,7 @@ namespace Kistl.App.Test
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Test.TestCustomObjectNHibernateImpl __value = (Kistl.App.Test.TestCustomObjectNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Parent);
 
 
@@ -6884,7 +6943,11 @@ namespace Kistl.App.Test
         /// <summary>backing property for Value, takes care of attaching/detaching the values</summary>
         public Kistl.App.Test.TestPhoneCompoundObjectNHibernateImpl ValueImpl
         {
-            get { return this.Proxy.Value; }
+            get 
+			{ 
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+				return this.Proxy.Value; 
+			}
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();

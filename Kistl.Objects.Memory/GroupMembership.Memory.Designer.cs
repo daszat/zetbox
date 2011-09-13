@@ -65,6 +65,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.GroupMemoryImpl __value;
                 if (_fk_Group.HasValue)
                     __value = (Kistl.App.Base.GroupMemoryImpl)Context.Find<Kistl.App.Base.Group>(_fk_Group.Value);

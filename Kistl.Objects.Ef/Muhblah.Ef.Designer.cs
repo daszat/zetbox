@@ -49,6 +49,7 @@ namespace Kistl.App.Test
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(bool?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _TestBool;
@@ -228,6 +229,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Test.TestCustomObjectEfImpl __value;
                 EntityReference<Kistl.App.Test.TestCustomObjectEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Test.TestCustomObjectEfImpl>(
@@ -342,6 +344,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Test.TestCustomObjectEfImpl __value;
                 EntityReference<Kistl.App.Test.TestCustomObjectEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Test.TestCustomObjectEfImpl>(
@@ -433,6 +436,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(DateTime?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _TestDateTime;
@@ -484,6 +488,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(Kistl.App.Test.TestEnum);
 				var __value = _TestEnum;
 				if(OnTestEnum_Getter != null)
 				{
@@ -554,6 +559,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _TestString;
@@ -807,6 +813,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(int);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ID;

@@ -65,6 +65,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.GUI.IconMemoryImpl __value;
                 if (_fk_FalseIcon.HasValue)
                     __value = (Kistl.App.GUI.IconMemoryImpl)Context.Find<Kistl.App.GUI.Icon>(_fk_FalseIcon.Value);
@@ -132,6 +133,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _FalseLabel;
@@ -204,6 +206,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.GUI.IconMemoryImpl __value;
                 if (_fk_NullIcon.HasValue)
                     __value = (Kistl.App.GUI.IconMemoryImpl)Context.Find<Kistl.App.GUI.Icon>(_fk_NullIcon.Value);
@@ -271,6 +274,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _NullLabel;
@@ -343,6 +347,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.GUI.IconMemoryImpl __value;
                 if (_fk_TrueIcon.HasValue)
                     __value = (Kistl.App.GUI.IconMemoryImpl)Context.Find<Kistl.App.GUI.Icon>(_fk_TrueIcon.Value);
@@ -410,6 +415,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _TrueLabel;

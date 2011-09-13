@@ -47,6 +47,7 @@ namespace Kistl.App.Test
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(DateTime?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Birthday;
@@ -157,6 +158,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Test.MuhblahMemoryImpl __value;
                 if (_fk_MubBlah_Nav.HasValue)
                     __value = (Kistl.App.Test.MuhblahMemoryImpl)Context.Find<Kistl.App.Test.Muhblah>(_fk_MubBlah_Nav.Value);
@@ -284,6 +286,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Test.MuhblahMemoryImpl __value;
                 if (_fk_MuhBlah_One_Nav.HasValue)
                     __value = (Kistl.App.Test.MuhblahMemoryImpl)Context.Find<Kistl.App.Test.Muhblah>(_fk_MuhBlah_One_Nav.Value);
@@ -367,6 +370,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _PersonName;
@@ -428,7 +432,11 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
         /// <summary>backing property for PhoneNumberMobile, takes care of attaching/detaching the values</summary>
         public Kistl.App.Test.TestPhoneCompoundObjectMemoryImpl PhoneNumberMobileImpl
         {
-            get { return _PhoneNumberMobile; }
+            get 
+			{ 
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+				return _PhoneNumberMobile; 
+			}
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
@@ -479,7 +487,11 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
         /// <summary>backing property for PhoneNumberOffice, takes care of attaching/detaching the values</summary>
         public Kistl.App.Test.TestPhoneCompoundObjectMemoryImpl PhoneNumberOfficeImpl
         {
-            get { return _PhoneNumberOffice; }
+            get 
+			{ 
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+				return _PhoneNumberOffice; 
+			}
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();

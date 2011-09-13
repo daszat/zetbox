@@ -34,7 +34,11 @@
         [EdmComplexProperty()]
         public <%= coImplementationType %> <%= backingPropertyName %>
         {
-            get { return <%= backingStoreName %>; }
+            get 
+			{ 
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+				return <%= backingStoreName %>; 
+			}
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();

@@ -43,6 +43,7 @@ namespace Kistl.App.Test
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Name;
@@ -114,6 +115,7 @@ namespace Kistl.App.Test
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Test.One_to_N_relations_OneMemoryImpl __value;
                 if (_fk_OneSide.HasValue)
                     __value = (Kistl.App.Test.One_to_N_relations_OneMemoryImpl)Context.Find<Kistl.App.Test.One_to_N_relations_One>(_fk_OneSide.Value);

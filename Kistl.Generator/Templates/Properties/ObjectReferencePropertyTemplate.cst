@@ -52,6 +52,7 @@
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 <%= referencedImplementation %> __value;
                 if (<%= fkBackingName %>.HasValue)
                     __value = (<%= referencedImplementation %>)Context.Find<<%= referencedInterface %>>(<%= fkBackingName %>.Value);

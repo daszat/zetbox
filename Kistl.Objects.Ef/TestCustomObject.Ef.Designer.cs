@@ -53,6 +53,7 @@ namespace Kistl.App.Test
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(DateTime?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Birthday;
@@ -184,6 +185,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Test.MuhblahEfImpl __value;
                 EntityReference<Kistl.App.Test.MuhblahEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Test.MuhblahEfImpl>(
@@ -346,6 +348,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Test.MuhblahEfImpl __value;
                 EntityReference<Kistl.App.Test.MuhblahEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Test.MuhblahEfImpl>(
@@ -437,6 +440,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _PersonName;
@@ -498,7 +502,11 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
         [EdmComplexProperty()]
         public Kistl.App.Test.TestPhoneCompoundObjectEfImpl PhoneNumberMobileImpl
         {
-            get { return _PhoneNumberMobile; }
+            get 
+			{ 
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+				return _PhoneNumberMobile; 
+			}
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
@@ -548,7 +556,11 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
         [EdmComplexProperty()]
         public Kistl.App.Test.TestPhoneCompoundObjectEfImpl PhoneNumberOfficeImpl
         {
-            get { return _PhoneNumberOffice; }
+            get 
+			{ 
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+				return _PhoneNumberOffice; 
+			}
             set
             {
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
@@ -854,6 +866,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(int);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ID;

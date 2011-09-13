@@ -56,11 +56,12 @@ this.WriteObjects("        public ",  enumType , " ",  name , "\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            get\r\n");
 this.WriteObjects("            {\r\n");
-#line 36 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\EnumerationPropertyTemplate.cst"
+this.WriteObjects("                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(",  enumType , ");\r\n");
+#line 37 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\EnumerationPropertyTemplate.cst"
 if(callGetterSetterEvents)
 				{
 
-#line 39 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\EnumerationPropertyTemplate.cst"
+#line 40 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\EnumerationPropertyTemplate.cst"
 this.WriteObjects("				var __value = ",  backingName , ";\r\n");
 this.WriteObjects("				if(",  eventName , "_Getter != null)\r\n");
 this.WriteObjects("				{\r\n");
@@ -69,17 +70,17 @@ this.WriteObjects("					",  eventName , "_Getter(this, e);\r\n");
 this.WriteObjects("					__value = e.Result;\r\n");
 this.WriteObjects("				}\r\n");
 this.WriteObjects("                return __value;\r\n");
-#line 48 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\EnumerationPropertyTemplate.cst"
+#line 49 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\EnumerationPropertyTemplate.cst"
 }
 				else
 				{
 
-#line 52 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\EnumerationPropertyTemplate.cst"
+#line 53 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\EnumerationPropertyTemplate.cst"
 this.WriteObjects("				return ",  backingName , ";\r\n");
-#line 54 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\EnumerationPropertyTemplate.cst"
+#line 55 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\EnumerationPropertyTemplate.cst"
 }
 
-#line 55 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\EnumerationPropertyTemplate.cst"
+#line 56 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\EnumerationPropertyTemplate.cst"
 this.WriteObjects("            }\r\n");
 this.WriteObjects("            set\r\n");
 this.WriteObjects("            {\r\n");
@@ -88,39 +89,39 @@ this.WriteObjects("                if (",  backingName , " != value)\r\n");
 this.WriteObjects("                {\r\n");
 this.WriteObjects("					var __oldValue = ",  backingName , ";\r\n");
 this.WriteObjects("					var __newValue = value;\r\n");
-#line 64 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\EnumerationPropertyTemplate.cst"
+#line 65 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\EnumerationPropertyTemplate.cst"
 if(callGetterSetterEvents)
 					{
 
-#line 67 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\EnumerationPropertyTemplate.cst"
+#line 68 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\EnumerationPropertyTemplate.cst"
 this.WriteObjects("                    if(",  eventName , "_PreSetter != null)\r\n");
 this.WriteObjects("                    {\r\n");
 this.WriteObjects("						var e = new PropertyPreSetterEventArgs<",  enumType , ">(__oldValue, __newValue);\r\n");
 this.WriteObjects("						",  eventName , "_PreSetter(this, e);\r\n");
 this.WriteObjects("						__newValue = e.Result;\r\n");
 this.WriteObjects("                    }\r\n");
-#line 74 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\EnumerationPropertyTemplate.cst"
+#line 75 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\EnumerationPropertyTemplate.cst"
 }
 
-#line 75 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\EnumerationPropertyTemplate.cst"
+#line 76 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\EnumerationPropertyTemplate.cst"
 this.WriteObjects("					\r\n");
 this.WriteObjects("                    NotifyPropertyChanging(\"",  name , "\", \"",  efName , "\", __oldValue, __newValue);\r\n");
 this.WriteObjects("                    ",  backingName , " = value;\r\n");
 this.WriteObjects("                    NotifyPropertyChanged(\"",  name , "\", \"",  efName , "\", __oldValue, __newValue);\r\n");
-#line 80 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\EnumerationPropertyTemplate.cst"
+#line 81 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\EnumerationPropertyTemplate.cst"
 if(callGetterSetterEvents)
 					{
 
-#line 83 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\EnumerationPropertyTemplate.cst"
+#line 84 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\EnumerationPropertyTemplate.cst"
 this.WriteObjects("                    if(",  eventName , "_PostSetter != null)\r\n");
 this.WriteObjects("                    {\r\n");
 this.WriteObjects("						var e = new PropertyPostSetterEventArgs<",  enumType , ">(__oldValue, __newValue);\r\n");
 this.WriteObjects("						",  eventName , "_PostSetter(this, e);\r\n");
 this.WriteObjects("                    }\r\n");
-#line 89 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\EnumerationPropertyTemplate.cst"
+#line 90 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\EnumerationPropertyTemplate.cst"
 }
 
-#line 90 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\EnumerationPropertyTemplate.cst"
+#line 91 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\EnumerationPropertyTemplate.cst"
 this.WriteObjects("                    \r\n");
 this.WriteObjects("                }\r\n");
 this.WriteObjects("            }\r\n");
@@ -144,7 +145,7 @@ this.WriteObjects("                this.",  name , " = (",  enumType , ")value;\
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        \r\n");
-#line 114 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\EnumerationPropertyTemplate.cst"
+#line 115 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\EnumerationPropertyTemplate.cst"
 AddSerialization(serializationList);
 
 

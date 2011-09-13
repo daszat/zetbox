@@ -63,6 +63,7 @@ namespace ZBox.App.SchemaMigration
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.IdentityNHibernateImpl __value = (Kistl.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ChangedBy);
 
                 if (OnChangedBy_Getter != null)
@@ -141,6 +142,7 @@ namespace ZBox.App.SchemaMigration
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = FetchChangedOnOrDefault();
@@ -210,6 +212,7 @@ namespace ZBox.App.SchemaMigration
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.Comment;
@@ -265,6 +268,7 @@ namespace ZBox.App.SchemaMigration
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.IdentityNHibernateImpl __value = (Kistl.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.CreatedBy);
 
                 if (OnCreatedBy_Getter != null)
@@ -343,6 +347,7 @@ namespace ZBox.App.SchemaMigration
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = FetchCreatedOnOrDefault();
@@ -412,6 +417,7 @@ namespace ZBox.App.SchemaMigration
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(ZBox.App.SchemaMigration.ColumnType);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.DbType;
@@ -461,6 +467,7 @@ namespace ZBox.App.SchemaMigration
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.Description;
@@ -572,6 +579,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = FetchExportGuidOrDefault();
@@ -641,6 +649,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(bool?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.IsNullable;
@@ -690,6 +699,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.Name;
@@ -745,6 +755,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 ZBox.App.SchemaMigration.SourceColumnNHibernateImpl __value = (ZBox.App.SchemaMigration.SourceColumnNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.References);
 
                 if (OnReferences_Getter != null)
@@ -881,6 +892,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(int?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.Size;
@@ -936,6 +948,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 ZBox.App.SchemaMigration.SourceTableNHibernateImpl __value = (ZBox.App.SchemaMigration.SourceTableNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.SourceTable);
 
                 if (OnSourceTable_Getter != null)
@@ -1039,6 +1052,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(ZBox.App.SchemaMigration.MappingStatus?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.Status;

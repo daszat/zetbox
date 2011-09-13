@@ -28,6 +28,10 @@ namespace Kistl.API.AbstractConsumerTests.BinarySerializers
         {
             get { throw new NotImplementedException(); }
         }
+        public AccessRights CurrentAccessRights
+        {
+            get { throw new NotImplementedException(); }
+        }
 
         #endregion
 

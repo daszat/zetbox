@@ -60,6 +60,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.GroupNHibernateImpl __value = (Kistl.App.Base.GroupNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Group);
 
                 if (OnGroup_Getter != null)

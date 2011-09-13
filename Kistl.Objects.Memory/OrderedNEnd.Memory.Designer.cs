@@ -64,6 +64,7 @@ namespace Kistl.App.Test
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Test.OrderedOneEndMemoryImpl __value;
                 if (_fk_OneEnd.HasValue)
                     __value = (Kistl.App.Test.OrderedOneEndMemoryImpl)Context.Find<Kistl.App.Test.OrderedOneEnd>(_fk_OneEnd.Value);
@@ -138,6 +139,7 @@ namespace Kistl.App.Test
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(int?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _NEnds_pos;
@@ -172,6 +174,7 @@ namespace Kistl.App.Test
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(int?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _OtherInt;

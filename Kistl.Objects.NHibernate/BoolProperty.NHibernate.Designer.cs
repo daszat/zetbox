@@ -60,6 +60,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.GUI.IconNHibernateImpl __value = (Kistl.App.GUI.IconNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.FalseIcon);
 
                 if (OnFalseIcon_Getter != null)
@@ -140,6 +141,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.FalseLabel;
@@ -195,6 +197,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.GUI.IconNHibernateImpl __value = (Kistl.App.GUI.IconNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.NullIcon);
 
                 if (OnNullIcon_Getter != null)
@@ -275,6 +278,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.NullLabel;
@@ -330,6 +334,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.GUI.IconNHibernateImpl __value = (Kistl.App.GUI.IconNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.TrueIcon);
 
                 if (OnTrueIcon_Getter != null)
@@ -410,6 +415,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.TrueLabel;

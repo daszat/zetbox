@@ -70,11 +70,13 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                 this.WriteLine();
                 this.WriteObjects("           get { ");
                 this.WriteLine();
+                this.WriteObjects("             if(Context == null) return Kistl.API.AccessRights.Full;");
+                this.WriteLine();
                 this.WriteObjects("             if(__currentAccessRights == null) { ");
                 this.WriteLine();
                 this.WriteObjects("                 __currentAccessRights = base.CurrentAccessRights; ");
                 this.WriteLine();
-                this.WriteObjects("                 var secRight = this.Proxy.SecurityRightsCollectionImpl.SingleOrDefault();");
+                this.WriteObjects("                 var secRight = this.Proxy.SecurityRightsCollectionImpl != null ? this.Proxy.SecurityRightsCollectionImpl.SingleOrDefault() : null;");
                 this.WriteLine();
                 this.WriteObjects("                 __currentAccessRights |= secRight != null ? (Kistl.API.AccessRights)secRight.Right : Kistl.API.AccessRights.None; ");
                 this.WriteLine();

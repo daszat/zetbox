@@ -73,6 +73,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.GroupEfImpl __value;
                 EntityReference<Kistl.App.Base.GroupEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.GroupEfImpl>(

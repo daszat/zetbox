@@ -65,6 +65,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.GUI.ViewModelDescriptorMemoryImpl __value;
                 if (_fk_DefaultPropertyViewModelDescriptor.HasValue)
                     __value = (Kistl.App.GUI.ViewModelDescriptorMemoryImpl)Context.Find<Kistl.App.GUI.ViewModelDescriptor>(_fk_DefaultPropertyViewModelDescriptor.Value);

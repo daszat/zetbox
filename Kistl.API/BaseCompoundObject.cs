@@ -44,6 +44,13 @@ namespace Kistl.API
         }
 
         public virtual bool IsReadonly { get { return ParentObject != null ? ParentObject.IsReadonly : false; } }
+        public virtual Kistl.API.AccessRights CurrentAccessRights
+        {
+            get
+            {
+                return ParentObject != null ? ParentObject.CurrentAccessRights : Kistl.API.AccessRights.Full;
+            }
+        }
 
         public virtual void ApplyChangesFrom(ICompoundObject other) { }
 

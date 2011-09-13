@@ -65,6 +65,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.EnumerationMemoryImpl __value;
                 if (_fk_Enumeration.HasValue)
                     __value = (Kistl.App.Base.EnumerationMemoryImpl)Context.Find<Kistl.App.Base.Enumeration>(_fk_Enumeration.Value);

@@ -43,6 +43,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(bool);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _EagerLoading;
@@ -93,6 +94,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(bool?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _IsInlineEditable;
@@ -165,6 +167,7 @@ namespace Kistl.App.Base
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
                 Kistl.App.Base.RelationEndMemoryImpl __value;
                 if (_fk_RelationEnd.HasValue)
                     __value = (Kistl.App.Base.RelationEndMemoryImpl)Context.Find<Kistl.App.Base.RelationEnd>(_fk_RelationEnd.Value);

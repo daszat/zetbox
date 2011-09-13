@@ -47,6 +47,7 @@ namespace Kistl.App.Calendar
         {
             get
             {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(Kistl.App.Base.DayOfWeek);
 				var __value = _DayOfWeek;
 				if(OnDayOfWeek_Getter != null)
 				{
