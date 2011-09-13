@@ -975,6 +975,10 @@ using Kistl.API.Client.PerfCounter;
         public event EventHandler IsModifiedChanged;
 
         #region IZBoxContextInternals Members
+        /// <summary>
+        /// TODO: Not supported yet
+        /// </summary>
+        int IZBoxContextInternals.IdentityID { get { return Helper.INVALIDID; } }
 
         void IZBoxContextInternals.SetModified(IPersistenceObject obj)
         {

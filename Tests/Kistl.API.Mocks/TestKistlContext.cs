@@ -325,6 +325,7 @@ namespace Kistl.API.Mocks
         public event EventHandler IsModifiedChanged;
 
         #region IZBoxContextInternals Members
+        int IZBoxContextInternals.IdentityID { get { return Helper.INVALIDID; } }
 
         void IZBoxContextInternals.SetModified(IPersistenceObject obj)
         {

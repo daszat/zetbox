@@ -76,7 +76,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                 this.WriteLine();
                 this.WriteObjects("                 __currentAccessRights = base.CurrentAccessRights; ");
                 this.WriteLine();
-                this.WriteObjects("                 var secRight = this.Proxy.SecurityRightsCollectionImpl != null ? this.Proxy.SecurityRightsCollectionImpl.SingleOrDefault() : null;");
+                this.WriteObjects("                 var secRight = this.Proxy.SecurityRightsCollectionImpl != null ? this.Proxy.SecurityRightsCollectionImpl.SingleOrDefault(i => i.Identity == Context.Internals().IdentityID) : null;");
                 this.WriteLine();
                 this.WriteObjects("                 __currentAccessRights |= secRight != null ? (Kistl.API.AccessRights)secRight.Right : Kistl.API.AccessRights.None; ");
                 this.WriteLine();

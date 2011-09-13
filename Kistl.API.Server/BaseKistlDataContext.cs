@@ -81,6 +81,8 @@ namespace Kistl.API.Server
 
         public bool IsReadonly { get { return false; } }
 
+        int IZBoxContextInternals.IdentityID { get { return Identity != null ? Identity.ID : Helper.INVALIDID; } }
+
         public Kistl.API.AccessRights GetGroupAccessRights(InterfaceType ifType)
         {
             if (Identity == null || !ifType.Type.IsIDataObject()) return Kistl.API.AccessRights.Full;

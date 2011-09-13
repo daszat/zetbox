@@ -543,6 +543,8 @@ namespace Kistl.API
         /// <param name="t"></param>
         /// <returns></returns>
         List<IDataObject> GetAll(InterfaceType t);
+
+        int IdentityID { get; }
     }
 
     public interface IDebuggingKistlContext : IKistlContext

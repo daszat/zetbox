@@ -1053,7 +1053,7 @@ namespace Kistl.App.Projekte
                 if (__currentAccessRights == null)
                 {
 					__currentAccessRights = base.CurrentAccessRights;
-					var secRight = SecurityRightsCollectionImpl.FirstOrDefault(); // TODO: should be SingleOrDefault() instead of FirstOrDefault()
+					var secRight = SecurityRightsCollectionImpl.FirstOrDefault(i => i.Identity == Context.Internals().IdentityID); // TODO: should be SingleOrDefault() instead of FirstOrDefault()
                     __currentAccessRights |= secRight != null ? (Kistl.API.AccessRights)secRight.Right : Kistl.API.AccessRights.None;
                 }
                 return __currentAccessRights.Value;

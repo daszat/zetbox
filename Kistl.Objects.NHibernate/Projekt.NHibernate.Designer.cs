@@ -1002,7 +1002,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
              if(Context == null) return Kistl.API.AccessRights.Full;
              if(__currentAccessRights == null) { 
                  __currentAccessRights = base.CurrentAccessRights; 
-                 var secRight = this.Proxy.SecurityRightsCollectionImpl != null ? this.Proxy.SecurityRightsCollectionImpl.SingleOrDefault() : null;
+                 var secRight = this.Proxy.SecurityRightsCollectionImpl != null ? this.Proxy.SecurityRightsCollectionImpl.SingleOrDefault(i => i.Identity == Context.Internals().IdentityID) : null;
                  __currentAccessRights |= secRight != null ? (Kistl.API.AccessRights)secRight.Right : Kistl.API.AccessRights.None; 
              } 
              return __currentAccessRights.Value; }
