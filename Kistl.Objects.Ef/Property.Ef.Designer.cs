@@ -1897,6 +1897,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             BinarySerializer.ToStream(this._CategoryTags, binStream);
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.IdentityEfImpl>("Model.FK_Property_was_ChangedBy", "ChangedBy").EntityKey;
@@ -1971,6 +1972,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             BinarySerializer.FromStream(out this._CategoryTags, binStream);
             BinarySerializer.FromStream(out this._fk_ChangedBy, binStream);
             BinarySerializer.FromStream(out this._isChangedOnSet, binStream);
@@ -2014,7 +2016,8 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
             BinarySerializer.FromStream(out this._Properties_pos, binStream);
             BinarySerializer.FromStream(out this._fk_RequestedKind, binStream);
             BinarySerializer.FromStream(out this._fk_ValueModelDescriptor, binStream);
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -2024,6 +2027,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             XmlStreamer.ToStream(this._CategoryTags, xml, "CategoryTags", "Kistl.App.Base");
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.IdentityEfImpl>("Model.FK_Property_was_ChangedBy", "ChangedBy").EntityKey;
@@ -2079,6 +2083,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
         {
             var baseResult = base.FromStream(xml);
             var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             XmlStreamer.FromStream(ref this._CategoryTags, xml, "CategoryTags", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_ChangedBy, xml, "ChangedBy", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._isChangedOnSet, xml, "IsChangedOnSet", "Kistl.App.Base");
@@ -2104,7 +2109,8 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
             XmlStreamer.FromStream(ref this._Properties_pos, xml, "Properties_pos", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_RequestedKind, xml, "RequestedKind", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_ValueModelDescriptor, xml, "ValueModelDescriptor", "Kistl.App.GUI");
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -2114,6 +2120,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
         {
             xml.WriteAttributeString("ExportGuid", this._ExportGuid.ToString());
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._CategoryTags, xml, "CategoryTags", "Kistl.App.Base");
             System.Diagnostics.Debug.Assert(this._isChangedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "Kistl.App.Base");
@@ -2133,6 +2140,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             XmlStreamer.FromStream(ref this._CategoryTags, xml, "CategoryTags", "Kistl.App.Base");
             // Import must have default value set
             XmlStreamer.FromStream(ref this._ChangedOn, xml, "ChangedOn", "Kistl.App.Base");

@@ -1008,6 +1008,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.StagingD
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             BinarySerializer.ToStream(ChangedBy != null ? ChangedBy.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._isChangedOnSet, binStream);
             if (this._isChangedOnSet) {
@@ -1033,6 +1034,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.StagingD
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             BinarySerializer.FromStream(out this._fk_ChangedBy, binStream);
             BinarySerializer.FromStream(out this._isChangedOnSet, binStream);
             if (this._isChangedOnSet) {
@@ -1052,7 +1054,8 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.StagingD
             BinarySerializer.FromStream(out this._fk_MigrationProject, binStream);
             BinarySerializer.FromStream(out this._OriginConnectionStringKey, binStream);
             BinarySerializer.FromStream(out this._Schema, binStream);
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -1062,6 +1065,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.StagingD
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             XmlStreamer.ToStream(ChangedBy != null ? ChangedBy.ID : (int?)null, xml, "ChangedBy", "ZBox.App.SchemaMigration");
             XmlStreamer.ToStream(this._isChangedOnSet, xml, "IsChangedOnSet", "ZBox.App.SchemaMigration");
             if (this._isChangedOnSet) {
@@ -1087,6 +1091,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.StagingD
         {
             var baseResult = base.FromStream(xml);
             var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             XmlStreamer.FromStream(ref this._fk_ChangedBy, xml, "ChangedBy", "ZBox.App.SchemaMigration");
             XmlStreamer.FromStream(ref this._isChangedOnSet, xml, "IsChangedOnSet", "ZBox.App.SchemaMigration");
             if (this._isChangedOnSet) {
@@ -1106,7 +1111,8 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.StagingD
             XmlStreamer.FromStream(ref this._fk_MigrationProject, xml, "MigrationProject", "ZBox.App.SchemaMigration");
             XmlStreamer.FromStream(ref this._OriginConnectionStringKey, xml, "OriginConnectionStringKey", "ZBox.App.SchemaMigration");
             XmlStreamer.FromStream(ref this._Schema, xml, "Schema", "ZBox.App.SchemaMigration");
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -1116,6 +1122,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.StagingD
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
         {
             xml.WriteAttributeString("ExportGuid", this._ExportGuid.ToString());
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             System.Diagnostics.Debug.Assert(this._isChangedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("ZBox.App.SchemaMigration")) XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "ZBox.App.SchemaMigration");
             if (modules.Contains("*") || modules.Contains("ZBox.App.SchemaMigration")) XmlStreamer.ToStream(this._ConnectionStringKey, xml, "ConnectionStringKey", "ZBox.App.SchemaMigration");
@@ -1129,6 +1136,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.StagingD
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             // Import must have default value set
             XmlStreamer.FromStream(ref this._ChangedOn, xml, "ChangedOn", "ZBox.App.SchemaMigration");
             this._isChangedOnSet = true;

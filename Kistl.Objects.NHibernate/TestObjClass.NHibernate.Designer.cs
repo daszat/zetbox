@@ -513,6 +513,7 @@ namespace Kistl.App.Test
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             BinarySerializer.ToStream(this.Proxy.MyIntProperty, binStream);
             BinarySerializer.ToStream(this.Proxy.ObjectProp != null ? this.Proxy.ObjectProp.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this.Proxy.StringProp, binStream);
@@ -523,6 +524,7 @@ namespace Kistl.App.Test
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             {
                 int? tmp;
                 BinarySerializer.FromStream(out tmp, binStream);
@@ -539,7 +541,8 @@ namespace Kistl.App.Test
                 BinarySerializer.FromStream(out baseValue, binStream);
                 Proxy.TestEnumProp = (Kistl.App.Test.TestEnum)baseValue;
             }
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -549,6 +552,7 @@ namespace Kistl.App.Test
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             XmlStreamer.ToStream(this.Proxy.MyIntProperty, xml, "MyIntProperty", "Kistl.App.Test");
             XmlStreamer.ToStream(this.Proxy.ObjectProp != null ? this.Proxy.ObjectProp.ID : (int?)null, xml, "ObjectProp", "Kistl.App.Test");
             XmlStreamer.ToStream(this.Proxy.StringProp, xml, "StringProp", "Kistl.App.Test");
@@ -559,6 +563,7 @@ namespace Kistl.App.Test
         {
             var baseResult = base.FromStream(xml);
             var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             {
                 // yuck
                 int? tmp = this.Proxy.MyIntProperty;
@@ -573,7 +578,8 @@ namespace Kistl.App.Test
                 this.Proxy.StringProp = tmp;
             }
             XmlStreamer.FromStreamConverter(v => Proxy.TestEnumProp = (Kistl.App.Test.TestEnum)v, xml, "TestEnumProp", "Kistl.App.Test");
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result

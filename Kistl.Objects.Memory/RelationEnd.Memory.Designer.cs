@@ -1306,6 +1306,7 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             BinarySerializer.ToStream(AParent != null ? AParent.ID : (int?)null, binStream);
             BinarySerializer.ToStream(BParent != null ? BParent.ID : (int?)null, binStream);
             BinarySerializer.ToStream(ChangedBy != null ? ChangedBy.ID : (int?)null, binStream);
@@ -1333,6 +1334,7 @@ namespace Kistl.App.Base
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             BinarySerializer.FromStream(out this._fk_AParent, binStream);
             BinarySerializer.FromStream(out this._fk_BParent, binStream);
             BinarySerializer.FromStream(out this._fk_ChangedBy, binStream);
@@ -1358,7 +1360,8 @@ namespace Kistl.App.Base
             BinarySerializer.FromStream(out this._fk_Navigator, binStream);
             BinarySerializer.FromStream(out this._RoleName, binStream);
             BinarySerializer.FromStream(out this._fk_Type, binStream);
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -1368,6 +1371,7 @@ namespace Kistl.App.Base
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             XmlStreamer.ToStream(AParent != null ? AParent.ID : (int?)null, xml, "AParent", "Kistl.App.Base");
             XmlStreamer.ToStream(BParent != null ? BParent.ID : (int?)null, xml, "BParent", "Kistl.App.Base");
             XmlStreamer.ToStream(ChangedBy != null ? ChangedBy.ID : (int?)null, xml, "ChangedBy", "Kistl.App.Base");
@@ -1395,6 +1399,7 @@ namespace Kistl.App.Base
         {
             var baseResult = base.FromStream(xml);
             var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             XmlStreamer.FromStream(ref this._fk_AParent, xml, "AParent", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_BParent, xml, "BParent", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_ChangedBy, xml, "ChangedBy", "Kistl.App.Base");
@@ -1416,7 +1421,8 @@ namespace Kistl.App.Base
             XmlStreamer.FromStream(ref this._fk_Navigator, xml, "Navigator", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._RoleName, xml, "RoleName", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_Type, xml, "Type", "Kistl.App.Base");
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -1426,6 +1432,7 @@ namespace Kistl.App.Base
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
         {
             xml.WriteAttributeString("ExportGuid", this._ExportGuid.ToString());
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(AParent != null ? AParent.ExportGuid : (Guid?)null, xml, "AParent", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(BParent != null ? BParent.ExportGuid : (Guid?)null, xml, "BParent", "Kistl.App.Base");
             System.Diagnostics.Debug.Assert(this._isChangedOnSet, "Exported objects need to have all default values evaluated");
@@ -1441,6 +1448,7 @@ namespace Kistl.App.Base
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             XmlStreamer.FromStream(ref this._fk_guid_AParent, xml, "AParent", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_guid_BParent, xml, "BParent", "Kistl.App.Base");
             // Import must have default value set

@@ -491,6 +491,7 @@ namespace ZBox.App.SchemaMigration
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             BinarySerializer.ToStream(this.Proxy.Destination, binStream);
             BinarySerializer.ToStream(this.Proxy.DestinationRows, binStream);
             BinarySerializer.ToStream(this.Proxy.Source, binStream);
@@ -502,6 +503,7 @@ namespace ZBox.App.SchemaMigration
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             {
                 string tmp;
                 BinarySerializer.FromStream(out tmp, binStream);
@@ -527,7 +529,8 @@ namespace ZBox.App.SchemaMigration
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.Proxy.Timestamp = tmp;
             }
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -537,6 +540,7 @@ namespace ZBox.App.SchemaMigration
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             XmlStreamer.ToStream(this.Proxy.Destination, xml, "Destination", "ZBox.App.SchemaMigration");
             XmlStreamer.ToStream(this.Proxy.DestinationRows, xml, "DestinationRows", "ZBox.App.SchemaMigration");
             XmlStreamer.ToStream(this.Proxy.Source, xml, "Source", "ZBox.App.SchemaMigration");
@@ -548,6 +552,7 @@ namespace ZBox.App.SchemaMigration
         {
             var baseResult = base.FromStream(xml);
             var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             {
                 // yuck
                 string tmp = this.Proxy.Destination;
@@ -578,7 +583,8 @@ namespace ZBox.App.SchemaMigration
                 XmlStreamer.FromStream(ref tmp, xml, "Timestamp", "ZBox.App.SchemaMigration");
                 this.Proxy.Timestamp = tmp;
             }
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result

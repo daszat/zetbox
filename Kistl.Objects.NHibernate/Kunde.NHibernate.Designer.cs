@@ -1048,6 +1048,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             BinarySerializer.ToStream(this.Proxy.Adresse, binStream);
             BinarySerializer.ToStream(this.Proxy.ChangedBy != null ? this.Proxy.ChangedBy.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._isChangedOnSet, binStream);
@@ -1074,6 +1075,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             {
                 string tmp;
                 BinarySerializer.FromStream(out tmp, binStream);
@@ -1120,7 +1122,8 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.Proxy.PLZ = tmp;
             }
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -1130,6 +1133,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             XmlStreamer.ToStream(this.Proxy.Adresse, xml, "Adresse", "Kistl.App.Projekte");
             XmlStreamer.ToStream(this.Proxy.ChangedBy != null ? this.Proxy.ChangedBy.ID : (int?)null, xml, "ChangedBy", "Kistl.App.Projekte");
             XmlStreamer.ToStream(this._isChangedOnSet, xml, "IsChangedOnSet", "Kistl.App.Projekte");
@@ -1156,6 +1160,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
         {
             var baseResult = base.FromStream(xml);
             var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             {
                 // yuck
                 string tmp = this.Proxy.Adresse;
@@ -1211,7 +1216,8 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
                 XmlStreamer.FromStream(ref tmp, xml, "PLZ", "Kistl.App.Projekte");
                 this.Proxy.PLZ = tmp;
             }
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -1221,6 +1227,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
         {
             xml.WriteAttributeString("ExportGuid", this.Proxy.ExportGuid.ToString());
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this.Proxy.Adresse, xml, "Adresse", "Kistl.App.Projekte");
             System.Diagnostics.Debug.Assert(this._isChangedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this.Proxy.ChangedOn, xml, "ChangedOn", "Kistl.App.Projekte");
@@ -1235,6 +1242,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             {
                 // yuck
                 string tmp = this.Proxy.Adresse;

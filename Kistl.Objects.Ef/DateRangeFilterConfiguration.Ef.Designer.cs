@@ -378,6 +378,7 @@ namespace Kistl.App.GUI
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             BinarySerializer.ToStream(this._IsCurrentMonthDefault, binStream);
             BinarySerializer.ToStream(this._IsCurrentQuaterDefault, binStream);
             BinarySerializer.ToStream(this._IsCurrentYearDefault, binStream);
@@ -387,10 +388,12 @@ namespace Kistl.App.GUI
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             BinarySerializer.FromStream(out this._IsCurrentMonthDefault, binStream);
             BinarySerializer.FromStream(out this._IsCurrentQuaterDefault, binStream);
             BinarySerializer.FromStream(out this._IsCurrentYearDefault, binStream);
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -400,6 +403,7 @@ namespace Kistl.App.GUI
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             XmlStreamer.ToStream(this._IsCurrentMonthDefault, xml, "IsCurrentMonthDefault", "Kistl.App.GUI");
             XmlStreamer.ToStream(this._IsCurrentQuaterDefault, xml, "IsCurrentQuaterDefault", "Kistl.App.GUI");
             XmlStreamer.ToStream(this._IsCurrentYearDefault, xml, "IsCurrentYearDefault", "Kistl.App.GUI");
@@ -409,10 +413,12 @@ namespace Kistl.App.GUI
         {
             var baseResult = base.FromStream(xml);
             var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             XmlStreamer.FromStream(ref this._IsCurrentMonthDefault, xml, "IsCurrentMonthDefault", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._IsCurrentQuaterDefault, xml, "IsCurrentQuaterDefault", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._IsCurrentYearDefault, xml, "IsCurrentYearDefault", "Kistl.App.GUI");
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -422,6 +428,7 @@ namespace Kistl.App.GUI
         public override void Export(System.Xml.XmlWriter xml, string[] modules)
         {
             base.Export(xml, modules);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this._IsCurrentMonthDefault, xml, "IsCurrentMonthDefault", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this._IsCurrentQuaterDefault, xml, "IsCurrentQuaterDefault", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this._IsCurrentYearDefault, xml, "IsCurrentYearDefault", "Kistl.App.GUI");
@@ -430,6 +437,7 @@ namespace Kistl.App.GUI
         public override void MergeImport(System.Xml.XmlReader xml)
         {
             base.MergeImport(xml);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             XmlStreamer.FromStream(ref this._IsCurrentMonthDefault, xml, "IsCurrentMonthDefault", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._IsCurrentQuaterDefault, xml, "IsCurrentQuaterDefault", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._IsCurrentYearDefault, xml, "IsCurrentYearDefault", "Kistl.App.GUI");

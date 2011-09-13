@@ -430,6 +430,7 @@ namespace Kistl.App.Test
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             BinarySerializer.ToStream(this.Proxy.OneEnd != null ? this.Proxy.OneEnd.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this.Proxy.NEnds_pos, binStream);
             BinarySerializer.ToStream(this.Proxy.OtherInt, binStream);
@@ -439,6 +440,7 @@ namespace Kistl.App.Test
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             BinarySerializer.FromStream(out this._fk_OneEnd, binStream);
             {
                 int? tmp;
@@ -450,7 +452,8 @@ namespace Kistl.App.Test
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.Proxy.OtherInt = tmp;
             }
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -460,6 +463,7 @@ namespace Kistl.App.Test
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             XmlStreamer.ToStream(this.Proxy.OneEnd != null ? this.Proxy.OneEnd.ID : (int?)null, xml, "OneEnd", "Kistl.App.Test");
             XmlStreamer.ToStream(this.Proxy.NEnds_pos, xml, "NEnds_pos", "Kistl.App.Test");
             XmlStreamer.ToStream(this.Proxy.OtherInt, xml, "OtherInt", "Kistl.App.Test");
@@ -469,6 +473,7 @@ namespace Kistl.App.Test
         {
             var baseResult = base.FromStream(xml);
             var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             XmlStreamer.FromStream(ref this._fk_OneEnd, xml, "OneEnd", "Kistl.App.Test");
             {
                 // yuck
@@ -482,7 +487,8 @@ namespace Kistl.App.Test
                 XmlStreamer.FromStream(ref tmp, xml, "OtherInt", "Kistl.App.Test");
                 this.Proxy.OtherInt = tmp;
             }
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result

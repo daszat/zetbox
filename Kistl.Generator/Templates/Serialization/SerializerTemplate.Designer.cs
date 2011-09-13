@@ -122,7 +122,10 @@ this.WriteObjects("            xml.WriteAttributeString(\"ExportGuid\", ",  expo
 #line 94 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
 }
 
-    foreach(var serMember in fields.Where(f => (f.SerializerType & serType) == serType))
+#line 96 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
+this.WriteObjects("            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;\r\n");
+#line 98 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
+foreach(var serMember in fields.Where(f => (f.SerializerType & serType) == serType))
     {
         if (direction == SerializerDirection.Export && serMember.XmlName == "ExportGuid")
         {
@@ -131,43 +134,46 @@ this.WriteObjects("            xml.WriteAttributeString(\"ExportGuid\", ",  expo
         ApplySerializer(direction, serMember, argName);
     }
 
-#line 105 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
-this.WriteObjects("        }\r\n");
 #line 107 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
+this.WriteObjects("        }\r\n");
+#line 109 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
 break;
         case SerializerDirection.FromStream:
         case SerializerDirection.FromXmlStream:
 
-#line 111 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
+#line 113 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
 this.WriteObjects("        public ",  overrideAndCallBase ? "override" : "virtual" , " IEnumerable<IPersistenceObject> ",  methodName , "(",  argType , " ",  argName , "",  additionalArgs , ")\r\n");
 this.WriteObjects("        {\r\n");
-#line 114 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
+#line 116 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
 if (overrideAndCallBase)
     {
 
-#line 117 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
+#line 119 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
 this.WriteObjects("            var baseResult = base.",  methodName , "(",  argName , "",  callBaseWithAdditionalArgs , ");\r\n");
 this.WriteObjects("            var result = new List<IPersistenceObject>();\r\n");
-#line 120 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
+#line 122 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
 }
     else
     {
 
-#line 124 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
+#line 126 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
 this.WriteObjects("            object baseResult = null;\r\n");
 this.WriteObjects("            var result = new List<IPersistenceObject>();\r\n");
-#line 127 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
+#line 129 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
 }
     
     if (!overrideAndCallBase && direction == SerializerDirection.Export && !String.IsNullOrEmpty(exportGuidBackingStore))
     {
 
-#line 132 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
-this.WriteObjects("            xml.WriteAttributeString(\"ExportGuid\", ",  exportGuidBackingStore , ".ToString());\r\n");
 #line 134 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
+this.WriteObjects("            xml.WriteAttributeString(\"ExportGuid\", ",  exportGuidBackingStore , ".ToString());\r\n");
+#line 136 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
 }
 
-    foreach(var serMember in fields.Where(f => (f.SerializerType & serType) == serType))
+#line 138 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
+this.WriteObjects("            if (CurrentAccessRights != Kistl.API.AccessRights.None) {\r\n");
+#line 140 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
+foreach(var serMember in fields.Where(f => (f.SerializerType & serType) == serType))
     {
         if (direction == SerializerDirection.Export && serMember.XmlName == "ExportGuid")
         {
@@ -176,14 +182,15 @@ this.WriteObjects("            xml.WriteAttributeString(\"ExportGuid\", ",  expo
         ApplySerializer(direction, serMember, argName);
     }
 
-#line 145 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
-this.WriteObjects("            return baseResult == null\r\n");
+#line 149 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
+this.WriteObjects("            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)\r\n");
+this.WriteObjects("			return baseResult == null\r\n");
 this.WriteObjects("                ? result.Count == 0\r\n");
 this.WriteObjects("                    ? null\r\n");
 this.WriteObjects("                    : result\r\n");
 this.WriteObjects("                : baseResult.Concat(result);\r\n");
 this.WriteObjects("        }\r\n");
-#line 152 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
+#line 157 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
 break;
         }
 

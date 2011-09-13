@@ -292,6 +292,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Fragebogen> OnAntw
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
 
 			BinarySerializer.ToStream(eagerLoadLists, binStream);
 			if (eagerLoadLists && auxObjects != null)
@@ -315,6 +316,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Fragebogen> OnAntw
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
 
 			BinarySerializer.FromStream(out Antworten_was_eagerLoaded, binStream);
 			{
@@ -334,7 +336,8 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Fragebogen> OnAntw
 				}
 			}
             BinarySerializer.FromStream(out this._BogenNummer, binStream);
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -344,6 +347,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Fragebogen> OnAntw
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             XmlStreamer.ToStream(this._BogenNummer, xml, "BogenNummer", "Kistl.App.Test");
         }
 
@@ -351,8 +355,10 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Fragebogen> OnAntw
         {
             var baseResult = base.FromStream(xml);
             var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             XmlStreamer.FromStream(ref this._BogenNummer, xml, "BogenNummer", "Kistl.App.Test");
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result

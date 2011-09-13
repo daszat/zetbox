@@ -1014,6 +1014,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             BinarySerializer.ToStream(this.Proxy.AufwandGes, binStream);
             BinarySerializer.ToStream(this.Proxy.ChangedBy != null ? this.Proxy.ChangedBy.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._isChangedOnSet, binStream);
@@ -1037,6 +1038,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             {
                 double? tmp;
                 BinarySerializer.FromStream(out tmp, binStream);
@@ -1072,7 +1074,8 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.Proxy.Name = tmp;
             }
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -1082,6 +1085,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             XmlStreamer.ToStream(this.Proxy.AufwandGes, xml, "AufwandGes", "Kistl.App.Projekte");
             XmlStreamer.ToStream(this.Proxy.ChangedBy != null ? this.Proxy.ChangedBy.ID : (int?)null, xml, "ChangedBy", "Kistl.App.Projekte");
             XmlStreamer.ToStream(this._isChangedOnSet, xml, "IsChangedOnSet", "Kistl.App.Projekte");
@@ -1105,6 +1109,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
         {
             var baseResult = base.FromStream(xml);
             var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             {
                 // yuck
                 double? tmp = this.Proxy.AufwandGes;
@@ -1146,7 +1151,8 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
                 XmlStreamer.FromStream(ref tmp, xml, "Name", "Kistl.App.Projekte");
                 this.Proxy.Name = tmp;
             }
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -1156,6 +1162,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
         {
             xml.WriteAttributeString("ExportGuid", this.Proxy.ExportGuid.ToString());
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this.Proxy.AufwandGes, xml, "AufwandGes", "Kistl.App.Projekte");
             System.Diagnostics.Debug.Assert(this._isChangedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this.Proxy.ChangedOn, xml, "ChangedOn", "Kistl.App.Projekte");
@@ -1167,6 +1174,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             {
                 // yuck
                 double? tmp = this.Proxy.AufwandGes;

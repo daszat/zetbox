@@ -489,6 +489,7 @@ namespace ZBox.App.SchemaMigration
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             BinarySerializer.ToStream(this._Destination, binStream);
             BinarySerializer.ToStream(this._DestinationRows, binStream);
             BinarySerializer.ToStream(this._Source, binStream);
@@ -500,12 +501,14 @@ namespace ZBox.App.SchemaMigration
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             BinarySerializer.FromStream(out this._Destination, binStream);
             BinarySerializer.FromStream(out this._DestinationRows, binStream);
             BinarySerializer.FromStream(out this._Source, binStream);
             BinarySerializer.FromStream(out this._SourceRows, binStream);
             BinarySerializer.FromStream(out this._Timestamp, binStream);
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -515,6 +518,7 @@ namespace ZBox.App.SchemaMigration
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             XmlStreamer.ToStream(this._Destination, xml, "Destination", "ZBox.App.SchemaMigration");
             XmlStreamer.ToStream(this._DestinationRows, xml, "DestinationRows", "ZBox.App.SchemaMigration");
             XmlStreamer.ToStream(this._Source, xml, "Source", "ZBox.App.SchemaMigration");
@@ -526,12 +530,14 @@ namespace ZBox.App.SchemaMigration
         {
             var baseResult = base.FromStream(xml);
             var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             XmlStreamer.FromStream(ref this._Destination, xml, "Destination", "ZBox.App.SchemaMigration");
             XmlStreamer.FromStream(ref this._DestinationRows, xml, "DestinationRows", "ZBox.App.SchemaMigration");
             XmlStreamer.FromStream(ref this._Source, xml, "Source", "ZBox.App.SchemaMigration");
             XmlStreamer.FromStream(ref this._SourceRows, xml, "SourceRows", "ZBox.App.SchemaMigration");
             XmlStreamer.FromStream(ref this._Timestamp, xml, "Timestamp", "ZBox.App.SchemaMigration");
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result

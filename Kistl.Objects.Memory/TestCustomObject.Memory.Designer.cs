@@ -780,6 +780,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             BinarySerializer.ToStream(this._Birthday, binStream);
             BinarySerializer.ToStream(MubBlah_Nav != null ? MubBlah_Nav.ID : (int?)null, binStream);
             BinarySerializer.ToStream(MuhBlah_One_Nav != null ? MuhBlah_One_Nav.ID : (int?)null, binStream);
@@ -793,6 +794,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             BinarySerializer.FromStream(out this._Birthday, binStream);
             BinarySerializer.FromStream(out this._fk_MubBlah_Nav, binStream);
             BinarySerializer.FromStream(out this._fk_MuhBlah_One_Nav, binStream);
@@ -814,7 +816,8 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
                     this.PhoneNumberOfficeImpl.AttachToObject(this, "PhoneNumberOffice");
 	        }
             BinarySerializer.FromStreamCollectionEntries(this, this._PhoneNumbersOtherCollection, binStream);
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -824,6 +827,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             XmlStreamer.ToStream(this._Birthday, xml, "Birthday", "Kistl.App.Test");
             XmlStreamer.ToStream(MubBlah_Nav != null ? MubBlah_Nav.ID : (int?)null, xml, "MubBlah_Nav", "Kistl.App.Test");
             XmlStreamer.ToStream(MuhBlah_One_Nav != null ? MuhBlah_One_Nav.ID : (int?)null, xml, "MuhBlah_One_Nav", "Kistl.App.Test");
@@ -837,6 +841,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
         {
             var baseResult = base.FromStream(xml);
             var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             XmlStreamer.FromStream(ref this._Birthday, xml, "Birthday", "Kistl.App.Test");
             XmlStreamer.FromStream(ref this._fk_MubBlah_Nav, xml, "MubBlah_Nav", "Kistl.App.Test");
             XmlStreamer.FromStream(ref this._fk_MuhBlah_One_Nav, xml, "MuhBlah_One_Nav", "Kistl.App.Test");
@@ -845,7 +850,8 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
             // TODO: Add XML Serializer here
             XmlStreamer.FromStreamCollectionEntries(this, this._PhoneNumbersOtherCollection, xml, "PhoneNumbersOther", "Kistl.App.Test");
             result.AddRange(this._PhoneNumbersOtherCollection.Cast<IPersistenceObject>());
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result

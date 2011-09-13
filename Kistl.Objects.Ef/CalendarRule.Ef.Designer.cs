@@ -1275,6 +1275,7 @@ namespace Kistl.App.Calendar
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Calendar.CalendarEfImpl>("Model.FK_Calendar_has_CalendarRules", "Calendar").EntityKey;
                 BinarySerializer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, binStream);
@@ -1317,6 +1318,7 @@ namespace Kistl.App.Calendar
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             BinarySerializer.FromStream(out this._fk_Calendar, binStream);
             BinarySerializer.FromStream(out this._fk_ChangedBy, binStream);
             BinarySerializer.FromStream(out this._isChangedOnSet, binStream);
@@ -1341,7 +1343,8 @@ namespace Kistl.App.Calendar
             BinarySerializer.FromStream(out this._ValidFrom, binStream);
             BinarySerializer.FromStream(out this._ValidUntil, binStream);
             BinarySerializer.FromStream(out this._WorkingHours, binStream);
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -1351,6 +1354,7 @@ namespace Kistl.App.Calendar
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Calendar.CalendarEfImpl>("Model.FK_Calendar_has_CalendarRules", "Calendar").EntityKey;
                 XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "Calendar", "Kistl.App.Calendar");
@@ -1393,6 +1397,7 @@ namespace Kistl.App.Calendar
         {
             var baseResult = base.FromStream(xml);
             var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             XmlStreamer.FromStream(ref this._fk_Calendar, xml, "Calendar", "Kistl.App.Calendar");
             XmlStreamer.FromStream(ref this._fk_ChangedBy, xml, "ChangedBy", "Kistl.App.Calendar");
             XmlStreamer.FromStream(ref this._isChangedOnSet, xml, "IsChangedOnSet", "Kistl.App.Calendar");
@@ -1417,7 +1422,8 @@ namespace Kistl.App.Calendar
             XmlStreamer.FromStream(ref this._ValidFrom, xml, "ValidFrom", "Kistl.App.Calendar");
             XmlStreamer.FromStream(ref this._ValidUntil, xml, "ValidUntil", "Kistl.App.Calendar");
             XmlStreamer.FromStream(ref this._WorkingHours, xml, "WorkingHours", "Kistl.App.Calendar");
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -1427,6 +1433,7 @@ namespace Kistl.App.Calendar
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
         {
             xml.WriteAttributeString("ExportGuid", this._ExportGuid.ToString());
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             if (modules.Contains("*") || modules.Contains("Kistl.App.Calendar")) XmlStreamer.ToStream(Calendar != null ? Calendar.ExportGuid : (Guid?)null, xml, "Calendar", "Kistl.App.Calendar");
             System.Diagnostics.Debug.Assert(this._isChangedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Calendar")) XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "Kistl.App.Calendar");
@@ -1443,6 +1450,7 @@ namespace Kistl.App.Calendar
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             XmlStreamer.FromStream(ref this._fk_guid_Calendar, xml, "Calendar", "Kistl.App.Calendar");
             // Import must have default value set
             XmlStreamer.FromStream(ref this._ChangedOn, xml, "ChangedOn", "Kistl.App.Calendar");

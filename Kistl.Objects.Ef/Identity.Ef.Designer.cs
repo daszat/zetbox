@@ -419,6 +419,7 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             BinarySerializer.ToStream(this._DisplayName, binStream);
             BinarySerializer.ToStream(this._Password, binStream);
             BinarySerializer.ToStream(this._UserName, binStream);
@@ -428,10 +429,12 @@ namespace Kistl.App.Base
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             BinarySerializer.FromStream(out this._DisplayName, binStream);
             BinarySerializer.FromStream(out this._Password, binStream);
             BinarySerializer.FromStream(out this._UserName, binStream);
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -441,6 +444,7 @@ namespace Kistl.App.Base
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             XmlStreamer.ToStream(this._DisplayName, xml, "DisplayName", "Kistl.App.Base");
             XmlStreamer.ToStream(this._Password, xml, "Password", "Kistl.App.Base");
             XmlStreamer.ToStream(this._UserName, xml, "UserName", "Kistl.App.Base");
@@ -450,10 +454,12 @@ namespace Kistl.App.Base
         {
             var baseResult = base.FromStream(xml);
             var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             XmlStreamer.FromStream(ref this._DisplayName, xml, "DisplayName", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._Password, xml, "Password", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._UserName, xml, "UserName", "Kistl.App.Base");
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result

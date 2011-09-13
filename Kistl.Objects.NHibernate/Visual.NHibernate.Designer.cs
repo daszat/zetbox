@@ -571,6 +571,7 @@ namespace Kistl.App.GUI
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             BinarySerializer.ToStream(this.Proxy.Description, binStream);
             BinarySerializer.ToStream(this.Proxy.Method != null ? this.Proxy.Method.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this.Proxy.Property != null ? this.Proxy.Property.ID : (int?)null, binStream);
@@ -580,6 +581,7 @@ namespace Kistl.App.GUI
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             {
                 string tmp;
                 BinarySerializer.FromStream(out tmp, binStream);
@@ -587,7 +589,8 @@ namespace Kistl.App.GUI
             }
             BinarySerializer.FromStream(out this._fk_Method, binStream);
             BinarySerializer.FromStream(out this._fk_Property, binStream);
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -597,6 +600,7 @@ namespace Kistl.App.GUI
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             XmlStreamer.ToStream(this.Proxy.Description, xml, "Description", "Kistl.App.GUI");
             XmlStreamer.ToStream(this.Proxy.Method != null ? this.Proxy.Method.ID : (int?)null, xml, "Method", "Kistl.App.GUI");
             XmlStreamer.ToStream(this.Proxy.Property != null ? this.Proxy.Property.ID : (int?)null, xml, "Property", "Kistl.App.GUI");
@@ -606,6 +610,7 @@ namespace Kistl.App.GUI
         {
             var baseResult = base.FromStream(xml);
             var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             {
                 // yuck
                 string tmp = this.Proxy.Description;
@@ -614,7 +619,8 @@ namespace Kistl.App.GUI
             }
             XmlStreamer.FromStream(ref this._fk_Method, xml, "Method", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_Property, xml, "Property", "Kistl.App.GUI");
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result

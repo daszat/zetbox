@@ -298,6 +298,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.RequiredParent> On
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             BinarySerializer.ToStream(this.Proxy.Name, binStream);
         }
 
@@ -305,12 +306,14 @@ public static event PropertyListChangedHandler<Kistl.App.Test.RequiredParent> On
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             {
                 string tmp;
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.Proxy.Name = tmp;
             }
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -320,6 +323,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.RequiredParent> On
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             XmlStreamer.ToStream(this.Proxy.Name, xml, "Name", "Kistl.App.Test");
         }
 
@@ -327,13 +331,15 @@ public static event PropertyListChangedHandler<Kistl.App.Test.RequiredParent> On
         {
             var baseResult = base.FromStream(xml);
             var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             {
                 // yuck
                 string tmp = this.Proxy.Name;
                 XmlStreamer.FromStream(ref tmp, xml, "Name", "Kistl.App.Test");
                 this.Proxy.Name = tmp;
             }
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result

@@ -797,6 +797,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             BinarySerializer.ToStream(this.Proxy.TestBool, binStream);
             BinarySerializer.ToStream(this.Proxy.TestCustomObjects_Nav != null ? this.Proxy.TestCustomObjects_Nav.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this.Proxy.TestCustomObjects_One_Nav != null ? this.Proxy.TestCustomObjects_One_Nav.ID : (int?)null, binStream);
@@ -809,6 +810,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             {
                 bool? tmp;
                 BinarySerializer.FromStream(out tmp, binStream);
@@ -831,7 +833,8 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.Proxy.TestString = tmp;
             }
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -841,6 +844,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             XmlStreamer.ToStream(this.Proxy.TestBool, xml, "TestBool", "Kistl.App.Test");
             XmlStreamer.ToStream(this.Proxy.TestCustomObjects_Nav != null ? this.Proxy.TestCustomObjects_Nav.ID : (int?)null, xml, "TestCustomObjects_Nav", "Kistl.App.Test");
             XmlStreamer.ToStream(this.Proxy.TestCustomObjects_One_Nav != null ? this.Proxy.TestCustomObjects_One_Nav.ID : (int?)null, xml, "TestCustomObjects_One_Nav", "Kistl.App.Test");
@@ -853,6 +857,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
         {
             var baseResult = base.FromStream(xml);
             var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             {
                 // yuck
                 bool? tmp = this.Proxy.TestBool;
@@ -874,7 +879,8 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
                 XmlStreamer.FromStream(ref tmp, xml, "TestString", "Kistl.App.Test");
                 this.Proxy.TestString = tmp;
             }
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result

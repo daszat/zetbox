@@ -894,6 +894,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             BinarySerializer.ToStream(this._Birthday, binStream);
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Test.MuhblahEfImpl>("Model.FK_MB_Role_has_TCO_Lst_Role", "MB_Role").EntityKey;
@@ -913,6 +914,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             BinarySerializer.FromStream(out this._Birthday, binStream);
             BinarySerializer.FromStream(out this._fk_MubBlah_Nav, binStream);
             BinarySerializer.FromStream(out this._fk_MuhBlah_One_Nav, binStream);
@@ -932,7 +934,8 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
                 this.PhoneNumberOfficeImpl.AttachToObject(this, "PhoneNumberOffice");
 	        }
             BinarySerializer.FromStreamCollectionEntries(this, this.PhoneNumbersOtherImpl, binStream);
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -942,6 +945,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             XmlStreamer.ToStream(this._Birthday, xml, "Birthday", "Kistl.App.Test");
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Test.MuhblahEfImpl>("Model.FK_MB_Role_has_TCO_Lst_Role", "MB_Role").EntityKey;
@@ -961,6 +965,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
         {
             var baseResult = base.FromStream(xml);
             var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             XmlStreamer.FromStream(ref this._Birthday, xml, "Birthday", "Kistl.App.Test");
             XmlStreamer.FromStream(ref this._fk_MubBlah_Nav, xml, "MubBlah_Nav", "Kistl.App.Test");
             XmlStreamer.FromStream(ref this._fk_MuhBlah_One_Nav, xml, "MuhBlah_One_Nav", "Kistl.App.Test");
@@ -969,7 +974,8 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
             // TODO: Add XML Serializer here
             XmlStreamer.FromStreamCollectionEntries(this, this.PhoneNumbersOtherImpl, xml, "PhoneNumbersOther", "Kistl.App.Test");
             result.AddRange(this.PhoneNumbersOtherImpl.Cast<IPersistenceObject>());
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result

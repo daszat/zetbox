@@ -1180,6 +1180,7 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Calendar.CalendarEfImpl>("Model.FK_BaseCalendar_has_ChildCalendar", "BaseCalendar").EntityKey;
                 BinarySerializer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, binStream);
@@ -1215,6 +1216,7 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             BinarySerializer.FromStream(out this._fk_BaseCalendar, binStream);
             BinarySerializer.FromStream(out this._fk_ChangedBy, binStream);
             BinarySerializer.FromStream(out this._isChangedOnSet, binStream);
@@ -1232,7 +1234,8 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
             }
             BinarySerializer.FromStream(out this._fk_Module, binStream);
             BinarySerializer.FromStream(out this._Name, binStream);
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -1242,6 +1245,7 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Calendar.CalendarEfImpl>("Model.FK_BaseCalendar_has_ChildCalendar", "BaseCalendar").EntityKey;
                 XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "BaseCalendar", "Kistl.App.Calendar");
@@ -1277,6 +1281,7 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
         {
             var baseResult = base.FromStream(xml);
             var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             XmlStreamer.FromStream(ref this._fk_BaseCalendar, xml, "BaseCalendar", "Kistl.App.Calendar");
             XmlStreamer.FromStream(ref this._fk_ChangedBy, xml, "ChangedBy", "Kistl.App.Calendar");
             XmlStreamer.FromStream(ref this._isChangedOnSet, xml, "IsChangedOnSet", "Kistl.App.Calendar");
@@ -1294,7 +1299,8 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
             }
             XmlStreamer.FromStream(ref this._fk_Module, xml, "Module", "Kistl.App.Calendar");
             XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.Calendar");
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -1304,6 +1310,7 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
         {
             xml.WriteAttributeString("ExportGuid", this._ExportGuid.ToString());
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             if (modules.Contains("*") || modules.Contains("Kistl.App.Calendar")) XmlStreamer.ToStream(BaseCalendar != null ? BaseCalendar.ExportGuid : (Guid?)null, xml, "BaseCalendar", "Kistl.App.Calendar");
             System.Diagnostics.Debug.Assert(this._isChangedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Calendar")) XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "Kistl.App.Calendar");
@@ -1315,6 +1322,7 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             XmlStreamer.FromStream(ref this._fk_guid_BaseCalendar, xml, "BaseCalendar", "Kistl.App.Calendar");
             // Import must have default value set
             XmlStreamer.FromStream(ref this._ChangedOn, xml, "ChangedOn", "Kistl.App.Calendar");

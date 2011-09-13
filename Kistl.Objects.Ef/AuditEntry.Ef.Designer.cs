@@ -436,6 +436,7 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             BinarySerializer.ToStream(this._Identity, binStream);
             BinarySerializer.ToStream(this._MessageFormat, binStream);
             BinarySerializer.ToStream(this._NewValue, binStream);
@@ -451,6 +452,7 @@ namespace Kistl.App.Base
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             BinarySerializer.FromStream(out this._Identity, binStream);
             BinarySerializer.FromStream(out this._MessageFormat, binStream);
             BinarySerializer.FromStream(out this._NewValue, binStream);
@@ -460,7 +462,8 @@ namespace Kistl.App.Base
             if (this._isTimestampSet) {
                 BinarySerializer.FromStream(out this._Timestamp, binStream);
             }
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -470,6 +473,7 @@ namespace Kistl.App.Base
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             XmlStreamer.ToStream(this._Identity, xml, "Identity", "Kistl.App.Base");
             XmlStreamer.ToStream(this._MessageFormat, xml, "MessageFormat", "Kistl.App.Base");
             XmlStreamer.ToStream(this._NewValue, xml, "NewValue", "Kistl.App.Base");
@@ -485,6 +489,7 @@ namespace Kistl.App.Base
         {
             var baseResult = base.FromStream(xml);
             var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             XmlStreamer.FromStream(ref this._Identity, xml, "Identity", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._MessageFormat, xml, "MessageFormat", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._NewValue, xml, "NewValue", "Kistl.App.Base");
@@ -494,7 +499,8 @@ namespace Kistl.App.Base
             if (this._isTimestampSet) {
                 XmlStreamer.FromStream(ref this._Timestamp, xml, "Timestamp", "Kistl.App.Base");
             }
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result

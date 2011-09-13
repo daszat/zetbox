@@ -92,7 +92,9 @@
             xml.WriteAttributeString("ExportGuid", <%= exportGuidBackingStore %>.ToString());
 <%
     }
-
+%>
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+<%
     foreach(var serMember in fields.Where(f => (f.SerializerType & serType) == serType))
     {
         if (direction == SerializerDirection.Export && serMember.XmlName == "ExportGuid")
@@ -132,7 +134,9 @@
             xml.WriteAttributeString("ExportGuid", <%= exportGuidBackingStore %>.ToString());
 <%
     }
-
+%>
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
+<%
     foreach(var serMember in fields.Where(f => (f.SerializerType & serType) == serType))
     {
         if (direction == SerializerDirection.Export && serMember.XmlName == "ExportGuid")
@@ -142,7 +146,8 @@
         ApplySerializer(direction, serMember, argName);
     }
 %>
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result

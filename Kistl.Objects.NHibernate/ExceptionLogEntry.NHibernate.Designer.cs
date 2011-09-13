@@ -552,6 +552,7 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             BinarySerializer.ToStream(this.Proxy.Date, binStream);
             BinarySerializer.ToStream(this.Proxy.Exception, binStream);
             BinarySerializer.ToStream(this.Proxy.Level, binStream);
@@ -564,6 +565,7 @@ namespace Kistl.App.Base
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             {
                 DateTime tmp;
                 BinarySerializer.FromStream(out tmp, binStream);
@@ -594,7 +596,8 @@ namespace Kistl.App.Base
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.Proxy.Thread = tmp;
             }
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -604,6 +607,7 @@ namespace Kistl.App.Base
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             XmlStreamer.ToStream(this.Proxy.Date, xml, "Date", "Kistl.App.Base");
             XmlStreamer.ToStream(this.Proxy.Exception, xml, "Exception", "Kistl.App.Base");
             XmlStreamer.ToStream(this.Proxy.Level, xml, "Level", "Kistl.App.Base");
@@ -616,6 +620,7 @@ namespace Kistl.App.Base
         {
             var baseResult = base.FromStream(xml);
             var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             {
                 // yuck
                 DateTime tmp = this.Proxy.Date;
@@ -652,7 +657,8 @@ namespace Kistl.App.Base
                 XmlStreamer.FromStream(ref tmp, xml, "Thread", "Kistl.App.Base");
                 this.Proxy.Thread = tmp;
             }
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result

@@ -290,6 +290,7 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             BinarySerializer.ToStream(this._isIsUniqueSet, binStream);
             if (this._isIsUniqueSet) {
                 BinarySerializer.ToStream(this._IsUnique, binStream);
@@ -300,11 +301,13 @@ namespace Kistl.App.Base
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             BinarySerializer.FromStream(out this._isIsUniqueSet, binStream);
             if (this._isIsUniqueSet) {
                 BinarySerializer.FromStream(out this._IsUnique, binStream);
             }
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -314,6 +317,7 @@ namespace Kistl.App.Base
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             XmlStreamer.ToStream(this._isIsUniqueSet, xml, "IsIsUniqueSet", "Kistl.App.Base");
             if (this._isIsUniqueSet) {
                 XmlStreamer.ToStream(this._IsUnique, xml, "IsUnique", "Kistl.App.Base");
@@ -324,11 +328,13 @@ namespace Kistl.App.Base
         {
             var baseResult = base.FromStream(xml);
             var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             XmlStreamer.FromStream(ref this._isIsUniqueSet, xml, "IsIsUniqueSet", "Kistl.App.Base");
             if (this._isIsUniqueSet) {
                 XmlStreamer.FromStream(ref this._IsUnique, xml, "IsUnique", "Kistl.App.Base");
             }
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -338,6 +344,7 @@ namespace Kistl.App.Base
         public override void Export(System.Xml.XmlWriter xml, string[] modules)
         {
             base.Export(xml, modules);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             System.Diagnostics.Debug.Assert(this._isIsUniqueSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._IsUnique, xml, "IsUnique", "Kistl.App.Base");
         }
@@ -345,6 +352,7 @@ namespace Kistl.App.Base
         public override void MergeImport(System.Xml.XmlReader xml)
         {
             base.MergeImport(xml);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             // Import must have default value set
             XmlStreamer.FromStream(ref this._IsUnique, xml, "IsUnique", "Kistl.App.Base");
             this._isIsUniqueSet = true;

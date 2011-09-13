@@ -123,13 +123,20 @@ namespace Kistl.DalProvider.Base
         {
             base.ToStream(sw, auxObjects, eagerLoadLists);
             BinarySerializer.ToStream((int)ObjectState, sw);
+            BinarySerializer.ToStream((int)CurrentAccessRights, sw);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(BinaryReader sr)
         {
             var baseResult = base.FromStream(sr);
             BinarySerializer.FromStreamConverter(i => _ObjectState = (DataObjectState)i, sr);
+            BinarySerializer.FromStreamConverter(i => ApplyRightsFromStream((API.AccessRights)i), sr); 
             return baseResult;
+        }
+
+        protected virtual void ApplyRightsFromStream(Kistl.API.AccessRights rights)
+        {
+            // cannot handle it, but some derived classes are able to
         }
 
         #region Auditing

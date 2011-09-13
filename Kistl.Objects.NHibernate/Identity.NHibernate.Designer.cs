@@ -878,6 +878,7 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             BinarySerializer.ToStream(this.Proxy.DisplayName, binStream);
             BinarySerializer.ToStream(this.Proxy.Password, binStream);
             BinarySerializer.ToStream(this.Proxy.UserName, binStream);
@@ -887,6 +888,7 @@ namespace Kistl.App.Base
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             {
                 string tmp;
                 BinarySerializer.FromStream(out tmp, binStream);
@@ -902,7 +904,8 @@ namespace Kistl.App.Base
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.Proxy.UserName = tmp;
             }
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -912,6 +915,7 @@ namespace Kistl.App.Base
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             XmlStreamer.ToStream(this.Proxy.DisplayName, xml, "DisplayName", "Kistl.App.Base");
             XmlStreamer.ToStream(this.Proxy.Password, xml, "Password", "Kistl.App.Base");
             XmlStreamer.ToStream(this.Proxy.UserName, xml, "UserName", "Kistl.App.Base");
@@ -921,6 +925,7 @@ namespace Kistl.App.Base
         {
             var baseResult = base.FromStream(xml);
             var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             {
                 // yuck
                 string tmp = this.Proxy.DisplayName;
@@ -939,7 +944,8 @@ namespace Kistl.App.Base
                 XmlStreamer.FromStream(ref tmp, xml, "UserName", "Kistl.App.Base");
                 this.Proxy.UserName = tmp;
             }
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result

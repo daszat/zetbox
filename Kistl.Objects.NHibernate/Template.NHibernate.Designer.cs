@@ -606,6 +606,7 @@ namespace Kistl.App.GUI
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             BinarySerializer.ToStream(this.Proxy.DisplayedTypeAssembly != null ? this.Proxy.DisplayedTypeAssembly.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this.Proxy.DisplayedTypeFullName, binStream);
             BinarySerializer.ToStream(this.Proxy.DisplayName, binStream);
@@ -616,6 +617,7 @@ namespace Kistl.App.GUI
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             BinarySerializer.FromStream(out this._fk_DisplayedTypeAssembly, binStream);
             {
                 string tmp;
@@ -628,7 +630,8 @@ namespace Kistl.App.GUI
                 this.Proxy.DisplayName = tmp;
             }
             BinarySerializer.FromStream(out this._fk_VisualTree, binStream);
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -638,6 +641,7 @@ namespace Kistl.App.GUI
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             XmlStreamer.ToStream(this.Proxy.DisplayedTypeAssembly != null ? this.Proxy.DisplayedTypeAssembly.ID : (int?)null, xml, "DisplayedTypeAssembly", "Kistl.App.GUI");
             XmlStreamer.ToStream(this.Proxy.DisplayedTypeFullName, xml, "DisplayedTypeFullName", "Kistl.App.GUI");
             XmlStreamer.ToStream(this.Proxy.DisplayName, xml, "DisplayName", "Kistl.App.GUI");
@@ -648,6 +652,7 @@ namespace Kistl.App.GUI
         {
             var baseResult = base.FromStream(xml);
             var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             XmlStreamer.FromStream(ref this._fk_DisplayedTypeAssembly, xml, "DisplayedTypeAssembly", "Kistl.App.GUI");
             {
                 // yuck
@@ -662,7 +667,8 @@ namespace Kistl.App.GUI
                 this.Proxy.DisplayName = tmp;
             }
             XmlStreamer.FromStream(ref this._fk_VisualTree, xml, "VisualTree", "Kistl.App.GUI");
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result

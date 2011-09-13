@@ -340,6 +340,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Fragebogen> OnAntw
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
 
 			BinarySerializer.ToStream(eagerLoadLists, binStream);
 			if (eagerLoadLists && auxObjects != null)
@@ -363,6 +364,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Fragebogen> OnAntw
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
 
 			BinarySerializer.FromStream(out Antworten_was_eagerLoaded, binStream);
 			{
@@ -386,7 +388,8 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Fragebogen> OnAntw
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.Proxy.BogenNummer = tmp;
             }
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -396,6 +399,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Fragebogen> OnAntw
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             XmlStreamer.ToStream(this.Proxy.BogenNummer, xml, "BogenNummer", "Kistl.App.Test");
         }
 
@@ -403,13 +407,15 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Fragebogen> OnAntw
         {
             var baseResult = base.FromStream(xml);
             var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             {
                 // yuck
                 int? tmp = this.Proxy.BogenNummer;
                 XmlStreamer.FromStream(ref tmp, xml, "BogenNummer", "Kistl.App.Test");
                 this.Proxy.BogenNummer = tmp;
             }
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result

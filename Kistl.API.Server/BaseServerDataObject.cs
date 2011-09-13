@@ -133,12 +133,15 @@ namespace Kistl.API.Server
         {
             base.ToStream(sw, auxObjects, eagerLoadLists);
             BinarySerializer.ToStream((int)DataObjectState.Unmodified, sw);
+            BinarySerializer.ToStream((int)CurrentAccessRights, sw);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(BinaryReader sr)
         {
             var baseResult = base.FromStream(sr);
             BinarySerializer.FromStreamConverter(i => ClientObjectState = (DataObjectState)i, sr);
+            int clientsRights = 0;
+            BinarySerializer.FromStreamConverter(i => clientsRights = i, sr); // nice try
             return baseResult;
         }
 

@@ -737,6 +737,7 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             BinarySerializer.ToStream(FalseIcon != null ? FalseIcon.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._FalseLabel, binStream);
             BinarySerializer.ToStream(NullIcon != null ? NullIcon.ID : (int?)null, binStream);
@@ -749,13 +750,15 @@ namespace Kistl.App.Base
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             BinarySerializer.FromStream(out this._fk_FalseIcon, binStream);
             BinarySerializer.FromStream(out this._FalseLabel, binStream);
             BinarySerializer.FromStream(out this._fk_NullIcon, binStream);
             BinarySerializer.FromStream(out this._NullLabel, binStream);
             BinarySerializer.FromStream(out this._fk_TrueIcon, binStream);
             BinarySerializer.FromStream(out this._TrueLabel, binStream);
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -765,6 +768,7 @@ namespace Kistl.App.Base
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             XmlStreamer.ToStream(FalseIcon != null ? FalseIcon.ID : (int?)null, xml, "FalseIcon", "Kistl.App.GUI");
             XmlStreamer.ToStream(this._FalseLabel, xml, "FalseLabel", "Kistl.App.Base");
             XmlStreamer.ToStream(NullIcon != null ? NullIcon.ID : (int?)null, xml, "NullIcon", "Kistl.App.GUI");
@@ -777,13 +781,15 @@ namespace Kistl.App.Base
         {
             var baseResult = base.FromStream(xml);
             var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             XmlStreamer.FromStream(ref this._fk_FalseIcon, xml, "FalseIcon", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._FalseLabel, xml, "FalseLabel", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_NullIcon, xml, "NullIcon", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._NullLabel, xml, "NullLabel", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_TrueIcon, xml, "TrueIcon", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._TrueLabel, xml, "TrueLabel", "Kistl.App.Base");
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -793,6 +799,7 @@ namespace Kistl.App.Base
         public override void Export(System.Xml.XmlWriter xml, string[] modules)
         {
             base.Export(xml, modules);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(FalseIcon != null ? FalseIcon.ExportGuid : (Guid?)null, xml, "FalseIcon", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._FalseLabel, xml, "FalseLabel", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(NullIcon != null ? NullIcon.ExportGuid : (Guid?)null, xml, "NullIcon", "Kistl.App.GUI");
@@ -804,6 +811,7 @@ namespace Kistl.App.Base
         public override void MergeImport(System.Xml.XmlReader xml)
         {
             base.MergeImport(xml);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             XmlStreamer.FromStream(ref this._fk_guid_FalseIcon, xml, "FalseIcon", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._FalseLabel, xml, "FalseLabel", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_guid_NullIcon, xml, "NullIcon", "Kistl.App.GUI");

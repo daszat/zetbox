@@ -1183,6 +1183,7 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationScreen> O
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             BinarySerializer.ToStream(ChangedBy != null ? ChangedBy.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._isChangedOnSet, binStream);
             if (this._isChangedOnSet) {
@@ -1218,6 +1219,7 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationScreen> O
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             BinarySerializer.FromStream(out this._fk_ChangedBy, binStream);
             BinarySerializer.FromStream(out this._isChangedOnSet, binStream);
             if (this._isChangedOnSet) {
@@ -1240,7 +1242,8 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationScreen> O
             BinarySerializer.FromStream(out this._Children_pos, binStream);
             BinarySerializer.FromStream(out this._Title, binStream);
             BinarySerializer.FromStream(out this._fk_ViewModelDescriptor, binStream);
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -1250,6 +1253,7 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationScreen> O
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             XmlStreamer.ToStream(ChangedBy != null ? ChangedBy.ID : (int?)null, xml, "ChangedBy", "Kistl.App.GUI");
             XmlStreamer.ToStream(this._isChangedOnSet, xml, "IsChangedOnSet", "Kistl.App.GUI");
             if (this._isChangedOnSet) {
@@ -1276,6 +1280,7 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationScreen> O
         {
             var baseResult = base.FromStream(xml);
             var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             XmlStreamer.FromStream(ref this._fk_ChangedBy, xml, "ChangedBy", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._isChangedOnSet, xml, "IsChangedOnSet", "Kistl.App.GUI");
             if (this._isChangedOnSet) {
@@ -1296,7 +1301,8 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationScreen> O
             XmlStreamer.FromStream(ref this._Children_pos, xml, "Children_pos", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._Title, xml, "Title", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_ViewModelDescriptor, xml, "ViewModelDescriptor", "Kistl.App.GUI");
-            return baseResult == null
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
@@ -1306,6 +1312,7 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationScreen> O
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
         {
             xml.WriteAttributeString("ExportGuid", this._ExportGuid.ToString());
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             System.Diagnostics.Debug.Assert(this._isChangedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this._Color, xml, "Color", "Kistl.App.GUI");
@@ -1320,6 +1327,7 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationScreen> O
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
+            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
             // Import must have default value set
             XmlStreamer.FromStream(ref this._ChangedOn, xml, "ChangedOn", "Kistl.App.GUI");
             this._isChangedOnSet = true;
