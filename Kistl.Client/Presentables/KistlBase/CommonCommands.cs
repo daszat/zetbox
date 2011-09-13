@@ -228,7 +228,7 @@ namespace Kistl.Client.Presentables.KistlBase
         protected override void DoExecute(object data)
         {
             var newCtx = ctxFactory();
-            var objClass = newCtx.Find<DataType>(this.Type.ID);
+            var objClass = newCtx.FindPersistenceObject<DataType>(this.Type.ExportGuid);
             var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx,null);
             newWorkspace.ShowForeignModel(DataObjectViewModel.Fetch(ViewModelFactory, newCtx, Parent, objClass));
             ViewModelFactory.ShowModel(newWorkspace, true);
