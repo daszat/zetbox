@@ -55,7 +55,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
         public bool CanMove()
         {
-            return SelectedItem != null && !IsSorting;
+            return SelectedItem != null && !IsSorting && !IsReadOnly;
         }
 
         private ICommandViewModel _MoveItemUpCommand = null;
