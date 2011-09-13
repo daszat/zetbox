@@ -218,6 +218,7 @@ using Kistl.API.Client.PerfCounter;
         public List<T> GetListOf<T>(IDataObject obj, string propertyName) where T : class, IDataObject
         {
             CheckDisposed();
+            if (obj.CurrentAccessRights == AccessRights.None) return new List<T>();
             return this.GetListOf<T>(GetInterfaceType(obj), obj.ID, propertyName);
         }
 
@@ -232,6 +233,7 @@ using Kistl.API.Client.PerfCounter;
         public List<T> GetListOf<T>(InterfaceType type, int ID, string propertyName) where T : class, IDataObject
         {
             CheckDisposed();
+            if (Find<T>(ID).CurrentAccessRights == AccessRights.None) return new List<T>();
             KistlContextQuery<T> query = new KistlContextQuery<T>(this, type, proxy, _perfCounter);
             return ((KistlContextProvider)query.Provider).GetListOfCall(ID, propertyName).Cast<T>().ToList();
         }
@@ -690,6 +692,16 @@ using Kistl.API.Client.PerfCounter;
                 .Invoke(this, new object[] { ID });
         }
 
+        private T MakeAccessDeniedProxy<T>(int id) 
+            where T : class, IPersistenceObject
+        {
+            var result = CreateUnattached<T>();
+            (result as BasePersistenceObject).ID = id;
+            Attach(result);
+            ((IClientObject)result).MakeAccessDeniedProxy();
+            return result;
+        }
+
         /// <summary>
         /// Find the Object of the given type by ID
         /// TODO: This is quite redundant here as it only uses other IKistlContext Methods.
@@ -704,19 +716,9 @@ using Kistl.API.Client.PerfCounter;
             CheckDisposed();
             IPersistenceObject cacheHit = _objects.Lookup(_iftFactory(typeof(T)), ID);
             if (cacheHit != null)
-            {
                 return (T)cacheHit;
-            }
             else
-            {
-                var result = GetQuery<T>().SingleOrDefault(o => o.ID == ID);
-                if (result == null)
-                {
-                    result = Create<T>();
-                    ((IClientObject)result).MakeAccessDeniedProxy();
-                }
-                return result;
-            }
+                return GetQuery<T>().SingleOrDefault(o => o.ID == ID) ?? MakeAccessDeniedProxy<T>(ID);
         }
 
         /// <summary>
@@ -758,13 +760,7 @@ using Kistl.API.Client.PerfCounter;
             }
             else
             {
-                var result = GetPersistenceObjectQuery<T>().SingleOrDefault(o => o.ID == ID);
-                if (result == null)
-                {
-                    result = (T)Create(GetInterfaceType(typeof(T)));
-                    ((IClientObject)result).MakeAccessDeniedProxy();
-                }
-                return result;
+                return GetPersistenceObjectQuery<T>().SingleOrDefault(o => o.ID == ID) ?? MakeAccessDeniedProxy<T>(ID);
             }
         }
 
@@ -797,13 +793,7 @@ using Kistl.API.Client.PerfCounter;
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         public T FindPersistenceObject<T>(Guid exportGuid) where T : class, IPersistenceObject
         {
-            var result = GetPersistenceObjectQuery<T>().SingleOrDefault(o => ((Kistl.App.Base.IExportable)o).ExportGuid == exportGuid);
-            if (result == null)
-            {
-                result = (T)Create(GetInterfaceType(typeof(T)));
-                ((IClientObject)result).MakeAccessDeniedProxy();
-            }
-            return result;
+            return GetPersistenceObjectQuery<T>().Single(o => ((Kistl.App.Base.IExportable)o).ExportGuid == exportGuid);
         }
 
         /// <summary>
