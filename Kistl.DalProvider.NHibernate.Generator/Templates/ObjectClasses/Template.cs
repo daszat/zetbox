@@ -62,11 +62,13 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
             if (NeedsRightsTable())
             {
                 this.WriteLine();
+                this.WriteObjects("        private Kistl.API.AccessRights? __currentAccessRights;");
+                this.WriteLine();
                 this.WriteObjects("        public override Kistl.API.AccessRights CurrentAccessRights");
                 this.WriteLine();
                 this.WriteObjects("        {");
                 this.WriteLine();
-                this.WriteObjects("           get { return (Kistl.API.AccessRights)this.Proxy.SecurityRightsCollectionImpl.Single().Right; }");
+                this.WriteObjects("           get { if(__currentAccessRights == null) { __currentAccessRights = (Kistl.API.AccessRights)this.Proxy.SecurityRightsCollectionImpl.Single().Right; } return __currentAccessRights.Value; }");
                 this.WriteLine();
                 this.WriteObjects("        }");
                 this.WriteLine();

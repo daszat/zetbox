@@ -17,12 +17,17 @@
 <%@ Parameter Name="referencedImplementation" Type="string" %>
 <%@ Parameter Name="efNameRightsPropertyName" Type="string" %>
 
+        private Kistl.API.AccessRights? __currentAccessRights;
         public override Kistl.API.AccessRights CurrentAccessRights
         {
             get
             {
-<% // TODO: should be Single() instead of First() %>
-                return (Kistl.API.AccessRights)<%= efNameRightsPropertyName %>.First().Right;
+				// TODO: should be Single() instead of First()
+                if (__currentAccessRights == null)
+                {
+                    __currentAccessRights = (Kistl.API.AccessRights)SecurityRightsCollectionImpl.First().Right;
+                }
+                return __currentAccessRights.Value;
             }
         }
 

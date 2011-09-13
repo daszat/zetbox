@@ -44,14 +44,17 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.Properties
         {
 #line 19 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\SecurityRulesProperties.cst"
 this.WriteObjects("\r\n");
+this.WriteObjects("        private Kistl.API.AccessRights? __currentAccessRights;\r\n");
 this.WriteObjects("        public override Kistl.API.AccessRights CurrentAccessRights\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            get\r\n");
 this.WriteObjects("            {\r\n");
-#line 24 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\SecurityRulesProperties.cst"
-// TODO: should be Single() instead of First() 
-#line 25 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\SecurityRulesProperties.cst"
-this.WriteObjects("                return (Kistl.API.AccessRights)",  efNameRightsPropertyName , ".First().Right;\r\n");
+this.WriteObjects("				// TODO: should be Single() instead of First()\r\n");
+this.WriteObjects("                if (__currentAccessRights == null)\r\n");
+this.WriteObjects("                {\r\n");
+this.WriteObjects("                    __currentAccessRights = (Kistl.API.AccessRights)SecurityRightsCollectionImpl.First().Right;\r\n");
+this.WriteObjects("                }\r\n");
+this.WriteObjects("                return __currentAccessRights.Value;\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
