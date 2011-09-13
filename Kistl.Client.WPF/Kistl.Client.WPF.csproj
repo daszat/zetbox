@@ -177,6 +177,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\KistlBase\AccessDeniedDisplay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\KistlBase\FilterListDisplay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -557,6 +561,9 @@
     <Compile Include="View\Filters\DateRangeFilterEditor.xaml.cs">
       <DependentUpon>DateRangeFilterEditor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\KistlBase\AccessDeniedDisplay.xaml.cs">
+      <DependentUpon>AccessDeniedDisplay.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\KistlBase\FilterListDisplay.xaml.cs">
       <DependentUpon>FilterListDisplay.xaml</DependentUpon>
     </Compile>
@@ -881,6 +888,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="View\Parties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\AccessDenied.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

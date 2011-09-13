@@ -135,6 +135,11 @@
     <Compile Include="Presentables\Calendar\LedgerViewModel.cs" />
     <Compile Include="Presentables\Calendar\TimeSlotItemViewModel.cs" />
     <Compile Include="Presentables\Calendar\WeekCalendarViewModel.cs" />
+    <Compile Include="Presentables\DataObjectViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataObjectViewModelResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Presentables\FilterViewModels\DateRangeFilterViewModel.cs" />
     <Compile Include="Presentables\IContextViewModel.cs" />
     <Compile Include="Presentables\ISortableViewModel.cs" />
@@ -353,6 +358,11 @@
     <EmbeddedResource Include="Presentables\CacheDebuggerViewModelResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>CacheDebuggerViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\DataObjectViewModelResources.de.resx" />
+    <EmbeddedResource Include="Presentables\DataObjectViewModelResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>DataObjectViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentables\KistlBase\FilterListEntryViewModelResources.de.resx" />
     <EmbeddedResource Include="Presentables\KistlBase\FilterListEntryViewModelResources.resx">

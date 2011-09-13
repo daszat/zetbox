@@ -67,5 +67,7 @@ namespace Kistl.Client
 
         public static readonly Guid ControlKind_Kistl_App_GUI_ObjectRefKind = new Guid("b86945ed-9edc-42ca-9ca5-8124fbf47b5c");
         public static readonly Guid ControlKind_Kistl_App_GUI_ObjectRefDropdownKind = new Guid("d30d2676-7f2f-4f0d-895a-e46f19b8f526");
+
+        public static readonly Guid ControlKind_Kistl_App_GUI_AccessDeniedDataObjectKind = new Guid("62047263-be4c-4495-bd1e-a32006513537");        
     }
 }

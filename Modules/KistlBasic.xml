@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2011-09-13T14:37:05.333827Z" xmlns="http://dasz.at/Kistl">
+<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2011-09-13T16:44:54.857817Z" xmlns="http://dasz.at/Kistl">
   <KistlBase:Module ExportGuid="84f486f7-19fe-49ad-8e4a-6c05089e7684">
     <KistlBase:ChangedOn>2011-08-05T10:30:47.650235Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05Z</KistlBase:CreatedOn>
@@ -8891,6 +8891,13 @@
     <KistlBase:Parent>ee07bd36-41ee-43df-8099-f4dd0c355902</KistlBase:Parent>
     <KistlBase:ToStringCache>Kistl.Client.WPF.SplashScreen</KistlBase:ToStringCache>
   </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="cb3e57bb-9b71-4a7a-8759-7077d29bee45">
+    <KistlBase:Assembly>157c1754-6eed-49f7-883b-ae2543bafd7e</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2011-09-13T16:44:54.857817Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2011-09-13T16:44:54.857817Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.WPF.Styles.Simple.Module</KistlBase:FullName>
+    <KistlBase:Parent>2790156b-feec-4b8e-bbfd-2555f6bfff40</KistlBase:Parent>
+  </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="00697d16-c9b2-4af2-9fa8-484316348c5b">
     <KistlBase:Assembly>157c1754-6eed-49f7-883b-ae2543bafd7e</KistlBase:Assembly>
     <KistlBase:ChangedOn>2011-08-05T10:31:13.143288Z</KistlBase:ChangedOn>
@@ -9087,6 +9094,13 @@
     <KistlBase:Parent>562a3a20-007d-464f-bf35-169f4c7e6c93</KistlBase:Parent>
     <KistlBase:ToStringCache>Kistl.Client.WPF.View.GUI.NavigatorDisplay</KistlBase:ToStringCache>
   </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="0bfcfbff-feae-485b-a5f5-7cce43c3b2c4">
+    <KistlBase:Assembly>157c1754-6eed-49f7-883b-ae2543bafd7e</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2011-09-13T16:44:54.857817Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2011-09-13T16:44:54.857817Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.WPF.View.KistlBase.AccessDeniedDisplay</KistlBase:FullName>
+    <KistlBase:Parent>1fda132a-a95c-4483-9f9d-1e952fa20245</KistlBase:Parent>
+  </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="a7c67d95-c198-47da-ad6d-af90e08137f7">
     <KistlBase:Assembly>157c1754-6eed-49f7-883b-ae2543bafd7e</KistlBase:Assembly>
     <KistlBase:ChangedOn>2011-08-05T10:31:13.130287Z</KistlBase:ChangedOn>
@@ -9213,9 +9227,17 @@
   </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="2f151f8f-aaf5-41fb-a747-65e23098afd8">
     <KistlBase:Assembly>157c1754-6eed-49f7-883b-ae2543bafd7e</KistlBase:Assembly>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.144288Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2011-09-13T16:44:54.857817Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2011-08-03T15:42:16Z</KistlBase:CreatedOn>
+    <KistlBase:Deleted>true</KistlBase:Deleted>
     <KistlBase:FullName>Kistl.Client.WPF.View.KistlBase.InstanceListElementCount</KistlBase:FullName>
+    <KistlBase:Parent>1fda132a-a95c-4483-9f9d-1e952fa20245</KistlBase:Parent>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="38fc2f61-98bc-4316-8778-940256befbba">
+    <KistlBase:Assembly>157c1754-6eed-49f7-883b-ae2543bafd7e</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2011-09-13T16:44:54.857817Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2011-09-13T16:44:54.857817Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>Kistl.Client.WPF.View.KistlBase.InstanceListHeader</KistlBase:FullName>
     <KistlBase:Parent>1fda132a-a95c-4483-9f9d-1e952fa20245</KistlBase:Parent>
   </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="ae39d1d3-550b-4cd8-94b1-344e18578855">
@@ -9313,7 +9335,7 @@
     <KistlBase:ChangedOn>2011-08-05T10:31:13.130287Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05Z</KistlBase:CreatedOn>
     <KistlBase:FullName>Kistl.Client.WPF.View.KistlBase.StringDisplay</KistlBase:FullName>
-    <KistlBase:Parent>07e0e1dc-3cd5-4a88-b2c6-fce98870b3db</KistlBase:Parent>
+    <KistlBase:Parent>63bc0dd1-0823-4c5a-8357-a6c0a324e2da</KistlBase:Parent>
     <KistlBase:ToStringCache>Kistl.Client.WPF.View.KistlBase.StringDisplay</KistlBase:ToStringCache>
   </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="f0735939-9224-43f1-9bd7-73c7152b3c93">
@@ -9590,8 +9612,9 @@
   </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="208fa5e1-a3f6-4d4d-a0e0-c013eaea99d6">
     <KistlBase:Assembly>157c1754-6eed-49f7-883b-ae2543bafd7e</KistlBase:Assembly>
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.131287Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2011-09-13T16:44:54.857817Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-11-02T16:46:44Z</KistlBase:CreatedOn>
+    <KistlBase:Deleted>true</KistlBase:Deleted>
     <KistlBase:FullName>Kistl.Client.WPF.View.SchemaMigration.SelectDestinationPropertyDialog</KistlBase:FullName>
     <KistlBase:Parent>562a3a20-007d-464f-bf35-169f4c7e6c93</KistlBase:Parent>
     <KistlBase:ToStringCache>Kistl.Client.WPF.View.SchemaMigration.SelectDestinationPropertyDialog</KistlBase:ToStringCache>
@@ -9853,6 +9876,13 @@
     <KistlBase:FullName>System.Windows.Controls.Primitives.ButtonBase</KistlBase:FullName>
     <KistlBase:Parent>950b505b-54b5-44ae-a155-c06c96727d0a</KistlBase:Parent>
     <KistlBase:ToStringCache>System.Windows.Controls.Primitives.ButtonBase</KistlBase:ToStringCache>
+  </KistlBase:TypeRef>
+  <KistlBase:TypeRef ExportGuid="63bc0dd1-0823-4c5a-8357-a6c0a324e2da">
+    <KistlBase:Assembly>8ab0933e-9dda-4ae5-9cd8-d87aefe9b555</KistlBase:Assembly>
+    <KistlBase:ChangedOn>2011-09-13T16:44:54.857817Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2011-09-13T16:44:54.857817Z</KistlBase:CreatedOn>
+    <KistlBase:FullName>System.Windows.Controls.TextBlock</KistlBase:FullName>
+    <KistlBase:Parent>c12ccef7-55ee-454f-befb-e917d00ab79d</KistlBase:Parent>
   </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="d347be9b-73c0-4753-be0b-5350dd8f7b7b">
     <KistlBase:Assembly>8ab0933e-9dda-4ae5-9cd8-d87aefe9b555</KistlBase:Assembly>
@@ -11265,6 +11295,10 @@
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:Name>Kistl.App.GUI.InstanceGridHorizontalKind</GUI:Name>
     <GUI:Parent>4e7a8b0b-0c8e-49e1-aa35-d3a9ec7b8e4c</GUI:Parent>
+  </GUI:ControlKind>
+  <GUI:ControlKind ExportGuid="62047263-be4c-4495-bd1e-a32006513537">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>Kistl.App.GUI.AccessDeniedDataObjectKind</GUI:Name>
   </GUI:ControlKind>
   <GUI:ControlKind ExportGuid="66e080be-471d-4dc5-9850-25bedbdfc76e">
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
@@ -29137,6 +29171,12 @@
   <GUI:ViewDescriptor ExportGuid="76d4e8f0-558d-4012-af32-4ab52ed48a66">
     <GUI:ControlKind>017abeeb-c2fa-4203-83fb-e64bb418b0a1</GUI:ControlKind>
     <GUI:ControlRef>eb4a56ac-88c3-4f19-85c1-b217e93a2a70</GUI:ControlRef>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:Toolkit>0</GUI:Toolkit>
+  </GUI:ViewDescriptor>
+  <GUI:ViewDescriptor ExportGuid="920c6bf1-5961-4512-9303-7ae9626eda47">
+    <GUI:ControlKind>62047263-be4c-4495-bd1e-a32006513537</GUI:ControlKind>
+    <GUI:ControlRef>0bfcfbff-feae-485b-a5f5-7cce43c3b2c4</GUI:ControlRef>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>

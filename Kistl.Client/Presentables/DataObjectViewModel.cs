@@ -450,11 +450,20 @@ namespace Kistl.Client.Presentables
         {
             get
             {
+                if (Object.CurrentAccessRights == API.AccessRights.None) return FrozenContext.FindPersistenceObject<ControlKind>(NamedObjects.ControlKind_Kistl_App_GUI_AccessDeniedDataObjectKind);
                 return base.RequestedKind ?? _object.GetObjectClass(FrozenContext).RequestedKind;
             }
             set
             {
                 base.RequestedKind = value;
+            }
+        }
+
+        public virtual string AccessDeniedText
+        {
+            get
+            {
+                return DataObjectViewModelResources.AccessDeniedText;
             }
         }
 
