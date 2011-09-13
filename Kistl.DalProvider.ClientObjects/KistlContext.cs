@@ -219,23 +219,8 @@ using Kistl.API.Client.PerfCounter;
         {
             CheckDisposed();
             if (obj.CurrentAccessRights == AccessRights.None) return new List<T>();
-            return this.GetListOf<T>(GetInterfaceType(obj), obj.ID, propertyName);
-        }
-
-        /// <summary>
-        /// Returns the List referenced by the given Type, ID and Name.
-        /// </summary>
-        /// <typeparam name="T">List Type of the ObjectReferenceProperty</typeparam>
-        /// <param name="type">Type of the Object which holds the ObjectReferenceProperty</param>
-        /// <param name="ID">ID of the Object which holds the ObjectReferenceProperty</param>
-        /// <param name="propertyName">Propertyname which holds the ObjectReferenceProperty</param>
-        /// <returns>A List of Objects</returns>
-        public List<T> GetListOf<T>(InterfaceType type, int ID, string propertyName) where T : class, IDataObject
-        {
-            CheckDisposed();
-            if (Find<T>(ID).CurrentAccessRights == AccessRights.None) return new List<T>();
-            KistlContextQuery<T> query = new KistlContextQuery<T>(this, type, proxy, _perfCounter);
-            return ((KistlContextProvider)query.Provider).GetListOfCall(ID, propertyName).Cast<T>().ToList();
+            KistlContextQuery<T> query = new KistlContextQuery<T>(this, GetInterfaceType(obj), proxy, _perfCounter);
+            return ((KistlContextProvider)query.Provider).GetListOfCall(obj.ID, propertyName).Cast<T>().ToList();
         }
 
         public IList<T> FetchRelation<T>(Guid relationId, RelationEndRole role, IDataObject container) where T : class, IRelationEntry

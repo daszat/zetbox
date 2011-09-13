@@ -432,18 +432,6 @@ namespace Kistl.API.AbstractConsumerTests
         }
 
         [Test]
-        public void GetListOf_ObjType_returns_a_non_empty_list_on_class_DataType()
-        {
-            using (IKistlContext ctx = GetContext())
-            {
-                var obj = ctx.GetQuery<ObjectClass>().First(o => o.Name == "DataType");
-                List<ObjectClass> result = ctx.GetListOf<ObjectClass>(iftFactory(typeof(ObjectClass)), obj.ID, "SubClasses").ToList();
-                Assert.That(result, Is.Not.Null);
-                Assert.That(result.Count, Is.GreaterThan(0));
-            }
-        }
-
-        [Test]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void GetListOf_T_WrongPropertyName_fails()
         {
@@ -455,16 +443,6 @@ namespace Kistl.API.AbstractConsumerTests
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void GetListOf_ObjType_WrongPropertyName_fails()
-        {
-            using (IKistlContext ctx = GetContext())
-            {
-                ctx.GetListOf<TestObjClass>(iftFactory(typeof(TestObjClass)), firstId, "NotAProperty");
-            }
-        }
-
-        [Test]
         [ExpectedException(typeof(InvalidCastException))]
         public void GetListOf_T_WrongItemType_fails()
         {
@@ -472,17 +450,6 @@ namespace Kistl.API.AbstractConsumerTests
             {
                 var obj = ctx.GetQuery<ObjectClass>().First(o => o.Name == "DataType");
                 ctx.GetListOf<TestObjClass>(obj, "SubClasses").ToList();
-            }
-        }
-
-        [Test]
-        [ExpectedException(typeof(InvalidCastException))]
-        public void GetListOf_ObjType_WrongItemType_fails()
-        {
-            using (IKistlContext ctx = GetContext())
-            {
-                var obj = ctx.GetQuery<ObjectClass>().First(o => o.Name == "DataType");
-                ctx.GetListOf<TestObjClass>(iftFactory(typeof(ObjectClass)), obj.ID, "SubClasses").ToList();
             }
         }
 

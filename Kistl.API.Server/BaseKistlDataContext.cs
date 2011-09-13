@@ -268,22 +268,6 @@ namespace Kistl.API.Server
             return obj.GetPropertyValue<IEnumerable>(propertyName).Cast<T>().ToList();
         }
 
-        /// <summary>
-        /// Returns the List referenced by the given Type, ID and Name.
-        /// </summary>
-        /// <typeparam name="T">List Type of the ObjectReferenceProperty</typeparam>
-        /// <param name="type">Type of the Object which holds the ObjectReferenceProperty</param>
-        /// <param name="ID">ID of the Object which holds the ObjectReferenceProperty</param>
-        /// <param name="propertyName">Propertyname which holds the ObjectReferenceProperty</param>
-        /// <returns>A List of Objects</returns>
-        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public virtual List<T> GetListOf<T>(InterfaceType type, int ID, string propertyName) where T : class, IDataObject
-        {
-            CheckDisposed();
-            IDataObject obj = (IDataObject)this.Find(type, ID);
-            return GetListOf<T>(obj, propertyName);
-        }
-
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         public abstract IList<T> FetchRelation<T>(Guid relationId, RelationEndRole endRole, IDataObject parent) where T : class, IRelationEntry;
 

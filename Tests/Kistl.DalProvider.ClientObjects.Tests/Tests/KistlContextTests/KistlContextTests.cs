@@ -103,7 +103,8 @@ namespace Kistl.DalProvider.Client.Tests.KistlContextTests
         [Test]
         public void GetListOf()
         {
-            List<TestObjClass> list = ctx.GetListOf<TestObjClass>(_iftFactory(typeof(TestObjClass)), 1, "Children");
+            TestObjClass o = (TestObjClass)ctx.Find(_iftFactory(typeof(TestObjClass)), 1);
+            List<TestObjClass> list = ctx.GetListOf<TestObjClass>(o, "Children");
             Assert.That(list, Is.Not.Null);
             Assert.That(list.Count, Is.AtLeast(2));
             list.ForEach(obj => Assert.That(obj, Is.Not.Null));
@@ -114,15 +115,16 @@ namespace Kistl.DalProvider.Client.Tests.KistlContextTests
         [Test]
         public void GetListOf_Twice()
         {
-            List<TestObjClass> list1 = ctx.GetListOf<TestObjClass>(_iftFactory(typeof(TestObjClass)), 1, "Children");
+            TestObjClass o = (TestObjClass)ctx.Find(_iftFactory(typeof(TestObjClass)), 1);
+            List<TestObjClass> list1 = ctx.GetListOf<TestObjClass>(o, "Children");
             Assert.That(list1, Is.Not.Null);
             Assert.That(list1.Count, Is.AtLeast(2));
-            list1.ForEach(obj => Assert.That(obj, Is.Not.Null));
+            list1.ForEach(obj => Assert.That(o, Is.Not.Null));
 
-            List<TestObjClass> list2 = ctx.GetListOf<TestObjClass>(_iftFactory(typeof(TestObjClass)), 1, "Children");
+            List<TestObjClass> list2 = ctx.GetListOf<TestObjClass>(o, "Children");
             Assert.That(list2, Is.Not.Null);
             Assert.That(list2.Count, Is.EqualTo(list1.Count));
-            list2.ForEach(obj => Assert.That(obj, Is.Not.Null));
+            list2.ForEach(obj => Assert.That(o, Is.Not.Null));
 
             for (int i = 0; i < list1.Count; i++)
             {
@@ -152,10 +154,11 @@ namespace Kistl.DalProvider.Client.Tests.KistlContextTests
         public void GetObject_GetListOf()
         {
             TestObjClass obj = ctx.Find<TestObjClass>(3);
+            TestObjClass obj1 = ctx.Find<TestObjClass>(1);
             Assert.That(obj, Is.Not.Null);
             Assert.That(obj.ID, Is.EqualTo(3));
 
-            List<TestObjClass> list = ctx.GetListOf<TestObjClass>(_iftFactory(typeof(TestObjClass)), 1, "Children");
+            List<TestObjClass> list = ctx.GetListOf<TestObjClass>(obj1, "Children");
             Assert.That(list, Is.Not.Null);
             Assert.That(list.Count, Is.AtLeast(2));
 
@@ -173,7 +176,8 @@ namespace Kistl.DalProvider.Client.Tests.KistlContextTests
             Assert.That(list, Is.Not.Null);
             Assert.That(list.Count, Is.AtLeast(2));
 
-            List<TestObjClass> listOf = ctx.GetListOf<TestObjClass>(_iftFactory(typeof(TestObjClass)), 1, "Children");
+            TestObjClass obj = ctx.Find<TestObjClass>(1);
+            List<TestObjClass> listOf = ctx.GetListOf<TestObjClass>(obj, "Children");
             Assert.That(listOf, Is.Not.Null);
             Assert.That(listOf.Count, Is.AtLeast(2));
 

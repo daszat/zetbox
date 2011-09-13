@@ -200,12 +200,6 @@ namespace Kistl.API
             throw new NotImplementedException();
         }
 
-        /// <summary>Not implemented.</summary>
-        List<T> IReadOnlyKistlContext.GetListOf<T>(InterfaceType ifType, int ID, string propertyName)
-        {
-            throw new NotImplementedException();
-        }
-
         /// <summary>Only implemented for the parent==null case.</summary>
         IList<T> IReadOnlyKistlContext.FetchRelation<T>(Guid relId, RelationEndRole role, IDataObject parent)
         {

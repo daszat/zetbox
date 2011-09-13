@@ -70,11 +70,6 @@ namespace Kistl.API.Mocks
             throw new NotImplementedException();
         }
 
-        public List<T> GetListOf<T>(InterfaceType ifType, int ID, string propertyName) where T : class, IDataObject
-        {
-            throw new NotImplementedException();
-        }
-
         public IList<T> FetchRelation<T>(Guid relationId, RelationEndRole role, IDataObject parent) where T : class, IRelationEntry
         {
             throw new NotImplementedException();
