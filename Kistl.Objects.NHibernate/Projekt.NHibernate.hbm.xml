@@ -42,6 +42,10 @@
                   column="`CreatedOn`" 
                   optimistic-lock="false"/>
         <!-- ValueTypeProperty isValue -->
+        <property name="ExportGuid" 
+                  column="`ExportGuid`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
         <property name="Kundenname" 
                   column="`Kundenname`" 
                   optimistic-lock="false"/>

@@ -39,6 +39,10 @@
         <property name="CreatedOn" type="Timestamp"
                   column="`CreatedOn`" 
                   optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ExportGuid" 
+                  column="`ExportGuid`" 
+                  optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Kunde" column="`fk_Kunde`" class="Kistl.App.Projekte.KundeNHibernateImpl+KundeProxy, Kistl.Objects.NHibernateImpl" />
 

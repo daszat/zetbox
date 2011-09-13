@@ -22,7 +22,7 @@ namespace Kistl.App.Projekte
     /// 
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("Task")]
-    public class TaskNHibernateImpl : Kistl.DalProvider.NHibernate.DataObjectNHibernateImpl, Task
+    public class TaskNHibernateImpl : Kistl.DalProvider.NHibernate.DataObjectNHibernateImpl, Kistl.API.IExportableInternal, Task
     {
         public TaskNHibernateImpl()
             : this(null)
@@ -42,6 +42,7 @@ namespace Kistl.App.Projekte
             this.Proxy = proxy;
             _isChangedOnSet = Proxy.ID > 0;
             _isCreatedOnSet = Proxy.ID > 0;
+            _isExportGuidSet = Proxy.ID > 0;
         }
 
         /// <summary>the NHibernate proxy of the represented entity</summary>
@@ -508,6 +509,76 @@ namespace Kistl.App.Projekte
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Task, DateTime?> OnDatumVon_PostSetter;
 
         /// <summary>
+        /// Export Guid
+        /// </summary>
+
+        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+        public Guid ExportGuid
+        {
+            get
+            {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(Guid);
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = FetchExportGuidOrDefault();
+                if (OnExportGuid_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<Guid>(__result);
+                    OnExportGuid_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                _isExportGuidSet = true;
+                if (Proxy.ExportGuid != value)
+                {
+                    var __oldValue = Proxy.ExportGuid;
+                    var __newValue = value;
+                    if (OnExportGuid_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<Guid>(__oldValue, __newValue);
+                        OnExportGuid_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
+                    Proxy.ExportGuid = __newValue;
+                    NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    if (OnExportGuid_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<Guid>(__oldValue, __newValue);
+                        OnExportGuid_PostSetter(this, __e);
+                    }
+                }
+            }
+        }
+
+        private Guid FetchExportGuidOrDefault()
+        {
+            var __result = Proxy.ExportGuid;
+                if (!_isExportGuidSet && ObjectState == DataObjectState.New) {
+                    var __p = FrozenContext.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("1c8414ef-f164-4f7e-a7bf-5fca894aa4f4"));
+                    if (__p != null) {
+                        _isExportGuidSet = true;
+                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
+                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
+                        __result = this.Proxy.ExportGuid = (Guid)__tmp_value;
+                    } else {
+                        Kistl.API.Utils.Logging.Log.Warn("Unable to get default value for property 'Kistl.App.Projekte.Task.ExportGuid'");
+                    }
+                }
+            return __result;
+        }
+
+        private bool _isExportGuidSet = false;
+        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+		public static event PropertyGetterHandler<Kistl.App.Projekte.Task, Guid> OnExportGuid_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Task, Guid> OnExportGuid_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Task, Guid> OnExportGuid_PostSetter;
+
+        /// <summary>
         /// Taskname
         /// </summary>
 
@@ -565,7 +636,7 @@ namespace Kistl.App.Projekte
         // referencedInterface=Kistl.App.Projekte.Projekt; moduleNamespace=Kistl.App.Projekte;
         // inverse Navigator=Tasks; is list;
         // PositionStorage=none;
-        // Target not exportable; does call events
+        // Target exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Projekte.Projekt Projekt
@@ -659,6 +730,8 @@ namespace Kistl.App.Projekte
         /// <summary>Backing store for Projekt's id, used on dehydration only</summary>
         private int? _fk_Projekt = null;
 
+        /// <summary>Backing store for Projekt's guid, used on import only</summary>
+        private Guid? _fk_guid_Projekt = null;
 
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Projekt
 		public static event PropertyGetterHandler<Kistl.App.Projekte.Task, Kistl.App.Projekte.Projekt> OnProjekt_Getter;
@@ -682,6 +755,7 @@ namespace Kistl.App.Projekte
             me.CreatedOn = other.CreatedOn;
             me.DatumBis = other.DatumBis;
             me.DatumVon = other.DatumVon;
+            me.ExportGuid = other.ExportGuid;
             me.Name = other.Name;
             this._fk_ChangedBy = otherImpl._fk_ChangedBy;
             this._fk_CreatedBy = otherImpl._fk_CreatedBy;
@@ -750,6 +824,9 @@ namespace Kistl.App.Projekte
             else
                 this.Proxy.CreatedBy = null;
 
+            if (_fk_guid_Projekt.HasValue)
+                this.Proxy.Projekt = ((Kistl.App.Projekte.ProjektNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Projekte.Projekt>(_fk_guid_Projekt.Value)).Proxy;
+            else
             if (_fk_Projekt.HasValue)
                 this.Proxy.Projekt = ((Kistl.App.Projekte.ProjektNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Projekte.Projekt>(_fk_Projekt.Value)).Proxy;
             else
@@ -825,6 +902,14 @@ namespace Kistl.App.Projekte
                         obj => obj.DatumVon,
                         (obj, val) => obj.DatumVon = val),
                     // else
+                    new PropertyDescriptorNHibernateImpl<TaskNHibernateImpl, Guid>(
+                        lazyCtx,
+                        new Guid("1c8414ef-f164-4f7e-a7bf-5fca894aa4f4"),
+                        "ExportGuid",
+                        null,
+                        obj => obj.ExportGuid,
+                        (obj, val) => obj.ExportGuid = val),
+                    // else
                     new PropertyDescriptorNHibernateImpl<TaskNHibernateImpl, string>(
                         lazyCtx,
                         new Guid("91595e02-411c-40f2-ab83-4cced76e954d"),
@@ -873,6 +958,7 @@ namespace Kistl.App.Projekte
         {
             FetchChangedOnOrDefault();
             FetchCreatedOnOrDefault();
+            FetchExportGuidOrDefault();
             base.NotifyPreSave();
             if (OnPreSave_Task != null) OnPreSave_Task(this);
         }
@@ -956,6 +1042,8 @@ namespace Kistl.App.Projekte
 
             public virtual DateTime? DatumVon { get; set; }
 
+            public virtual Guid ExportGuid { get; set; }
+
             public virtual string Name { get; set; }
 
             public virtual Kistl.App.Projekte.ProjektNHibernateImpl.ProjektProxy Projekt { get; set; }
@@ -998,6 +1086,10 @@ namespace Kistl.App.Projekte
             }
             BinarySerializer.ToStream(this.Proxy.DatumBis, binStream);
             BinarySerializer.ToStream(this.Proxy.DatumVon, binStream);
+            BinarySerializer.ToStream(this._isExportGuidSet, binStream);
+            if (this._isExportGuidSet) {
+                BinarySerializer.ToStream(this.Proxy.ExportGuid, binStream);
+            }
             BinarySerializer.ToStream(this.Proxy.Name, binStream);
             BinarySerializer.ToStream(this.Proxy.Projekt != null ? this.Proxy.Projekt.ID : (int?)null, binStream);
         }
@@ -1035,6 +1127,12 @@ namespace Kistl.App.Projekte
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.Proxy.DatumVon = tmp;
             }
+            BinarySerializer.FromStream(out this._isExportGuidSet, binStream);
+            if (this._isExportGuidSet) {
+                Guid tmp;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.Proxy.ExportGuid = tmp;
+            }
             {
                 string tmp;
                 BinarySerializer.FromStream(out tmp, binStream);
@@ -1064,6 +1162,10 @@ namespace Kistl.App.Projekte
             }
             XmlStreamer.ToStream(this.Proxy.DatumBis, xml, "DatumBis", "Kistl.App.Projekte");
             XmlStreamer.ToStream(this.Proxy.DatumVon, xml, "DatumVon", "Kistl.App.Projekte");
+            XmlStreamer.ToStream(this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Projekte");
+            if (this._isExportGuidSet) {
+                XmlStreamer.ToStream(this.Proxy.ExportGuid, xml, "ExportGuid", "Kistl.App.Projekte");
+            }
             XmlStreamer.ToStream(this.Proxy.Name, xml, "Name", "Kistl.App.Projekte");
             XmlStreamer.ToStream(this.Proxy.Projekt != null ? this.Proxy.Projekt.ID : (int?)null, xml, "Projekt", "Kistl.App.Projekte");
         }
@@ -1106,6 +1208,13 @@ namespace Kistl.App.Projekte
                 XmlStreamer.FromStream(ref tmp, xml, "DatumVon", "Kistl.App.Projekte");
                 this.Proxy.DatumVon = tmp;
             }
+            XmlStreamer.FromStream(ref this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Projekte");
+            if (this._isExportGuidSet) {
+                // yuck
+                Guid tmp = this.Proxy.ExportGuid;
+                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Projekte");
+                this.Proxy.ExportGuid = tmp;
+            }
             {
                 // yuck
                 string tmp = this.Proxy.Name;
@@ -1118,6 +1227,73 @@ namespace Kistl.App.Projekte
                     ? null
                     : result
                 : baseResult.Concat(result);
+        }
+
+        public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+            xml.WriteAttributeString("ExportGuid", this.Proxy.ExportGuid.ToString());
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this.Proxy.Aufwand, xml, "Aufwand", "Kistl.App.Projekte");
+            System.Diagnostics.Debug.Assert(this._isChangedOnSet, "Exported objects need to have all default values evaluated");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this.Proxy.ChangedOn, xml, "ChangedOn", "Kistl.App.Projekte");
+            System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this.Proxy.CreatedOn, xml, "CreatedOn", "Kistl.App.Projekte");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this.Proxy.DatumBis, xml, "DatumBis", "Kistl.App.Projekte");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this.Proxy.DatumVon, xml, "DatumVon", "Kistl.App.Projekte");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this.Proxy.Name, xml, "Name", "Kistl.App.Projekte");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this.Proxy.Projekt != null ? this.Proxy.Projekt.ExportGuid : (Guid?)null, xml, "Projekt", "Kistl.App.Projekte");
+        }
+
+        public virtual void MergeImport(System.Xml.XmlReader xml)
+        {
+            {
+                // yuck
+                double? tmp = this.Proxy.Aufwand;
+                XmlStreamer.FromStream(ref tmp, xml, "Aufwand", "Kistl.App.Projekte");
+                this.Proxy.Aufwand = tmp;
+            }
+            // Import must have default value set
+            {
+                // yuck
+                DateTime tmp = this.Proxy.ChangedOn;
+                XmlStreamer.FromStream(ref tmp, xml, "ChangedOn", "Kistl.App.Projekte");
+                this.Proxy.ChangedOn = tmp;
+                this._isChangedOnSet = true;
+            }
+            // Import must have default value set
+            {
+                // yuck
+                DateTime tmp = this.Proxy.CreatedOn;
+                XmlStreamer.FromStream(ref tmp, xml, "CreatedOn", "Kistl.App.Projekte");
+                this.Proxy.CreatedOn = tmp;
+                this._isCreatedOnSet = true;
+            }
+            {
+                // yuck
+                DateTime? tmp = this.Proxy.DatumBis;
+                XmlStreamer.FromStream(ref tmp, xml, "DatumBis", "Kistl.App.Projekte");
+                this.Proxy.DatumBis = tmp;
+            }
+            {
+                // yuck
+                DateTime? tmp = this.Proxy.DatumVon;
+                XmlStreamer.FromStream(ref tmp, xml, "DatumVon", "Kistl.App.Projekte");
+                this.Proxy.DatumVon = tmp;
+            }
+            // Import must have default value set
+            {
+                // yuck
+                Guid tmp = this.Proxy.ExportGuid;
+                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Projekte");
+                this.Proxy.ExportGuid = tmp;
+                this._isExportGuidSet = true;
+            }
+            {
+                // yuck
+                string tmp = this.Proxy.Name;
+                XmlStreamer.FromStream(ref tmp, xml, "Name", "Kistl.App.Projekte");
+                this.Proxy.Name = tmp;
+            }
+            XmlStreamer.FromStream(ref this._fk_guid_Projekt, xml, "Projekt", "Kistl.App.Projekte");
         }
 
         #endregion

@@ -10,7 +10,7 @@ namespace Kistl.App.Projekte
     /// <summary>
     /// 
     /// </summary>
-    public interface Projekt : IDataObject, Kistl.App.Base.IChangedBy 
+    public interface Projekt : IDataObject, Kistl.App.Base.IChangedBy, Kistl.App.Base.IExportable 
     {
 
         /// <summary>

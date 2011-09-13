@@ -21,7 +21,7 @@ namespace Kistl.App.Projekte
     /// 
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("Mitarbeiter")]
-    public class MitarbeiterMemoryImpl : Kistl.DalProvider.Memory.DataObjectMemoryImpl, Mitarbeiter
+    public class MitarbeiterMemoryImpl : Kistl.DalProvider.Memory.DataObjectMemoryImpl, Kistl.API.IExportableInternal, Mitarbeiter
     {
         [Obsolete]
         public MitarbeiterMemoryImpl()
@@ -339,6 +339,70 @@ namespace Kistl.App.Projekte
 		public static event PropertyGetterHandler<Kistl.App.Projekte.Mitarbeiter, DateTime> OnCreatedOn_Getter;
 		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Mitarbeiter, DateTime> OnCreatedOn_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Mitarbeiter, DateTime> OnCreatedOn_PostSetter;
+
+        /// <summary>
+        /// Export Guid
+        /// </summary>
+        // value type property
+        // BEGIN Kistl.Generator.Templates.Properties.NotifyingDataProperty
+        public Guid ExportGuid
+        {
+            get
+            {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(Guid);
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ExportGuid;
+                if (!_isExportGuidSet && ObjectState == DataObjectState.New) {
+                    var __p = FrozenContext.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("fc57ee0f-1ba5-445c-9007-a5ec1507cf39"));
+                    if (__p != null) {
+                        _isExportGuidSet = true;
+                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
+                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
+                        __result = this._ExportGuid = (Guid)__tmp_value;
+                    } else {
+                        Kistl.API.Utils.Logging.Log.Warn("Unable to get default value for property 'Mitarbeiter.ExportGuid'");
+                    }
+                }
+                if (OnExportGuid_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<Guid>(__result);
+                    OnExportGuid_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                _isExportGuidSet = true;
+                if (_ExportGuid != value)
+                {
+                    var __oldValue = _ExportGuid;
+                    var __newValue = value;
+                    if (OnExportGuid_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<Guid>(__oldValue, __newValue);
+                        OnExportGuid_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
+                    _ExportGuid = __newValue;
+                    NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    if (OnExportGuid_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<Guid>(__oldValue, __newValue);
+                        OnExportGuid_PostSetter(this, __e);
+                    }
+                }
+            }
+        }
+        private Guid _ExportGuid;
+        private bool _isExportGuidSet = false;
+        // END Kistl.Generator.Templates.Properties.NotifyingDataProperty
+		public static event PropertyGetterHandler<Kistl.App.Projekte.Mitarbeiter, Guid> OnExportGuid_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Mitarbeiter, Guid> OnExportGuid_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Mitarbeiter, Guid> OnExportGuid_PostSetter;
 
         /// <summary>
         /// Herzlichen Glückwunsch zum Geburtstag
@@ -692,6 +756,7 @@ namespace Kistl.App.Projekte
 
             me.ChangedOn = other.ChangedOn;
             me.CreatedOn = other.CreatedOn;
+            me.ExportGuid = other.ExportGuid;
             me.Geburtstag = other.Geburtstag;
             me.Name = other.Name;
             me.SVNr = other.SVNr;
@@ -805,6 +870,14 @@ namespace Kistl.App.Projekte
                         null,
                         obj => obj.CreatedOn,
                         (obj, val) => obj.CreatedOn = val),
+                    // else
+                    new PropertyDescriptorMemoryImpl<MitarbeiterMemoryImpl, Guid>(
+                        lazyCtx,
+                        new Guid("fc57ee0f-1ba5-445c-9007-a5ec1507cf39"),
+                        "ExportGuid",
+                        null,
+                        obj => obj.ExportGuid,
+                        (obj, val) => obj.ExportGuid = val),
                     // else
                     new PropertyDescriptorMemoryImpl<MitarbeiterMemoryImpl, DateTime?>(
                         lazyCtx,
@@ -931,6 +1004,10 @@ namespace Kistl.App.Projekte
             if (this._isCreatedOnSet) {
                 BinarySerializer.ToStream(this._CreatedOn, binStream);
             }
+            BinarySerializer.ToStream(this._isExportGuidSet, binStream);
+            if (this._isExportGuidSet) {
+                BinarySerializer.ToStream(this._ExportGuid, binStream);
+            }
             BinarySerializer.ToStream(this._Geburtstag, binStream);
             BinarySerializer.ToStream(Identity != null ? Identity.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._Name, binStream);
@@ -951,6 +1028,10 @@ namespace Kistl.App.Projekte
             BinarySerializer.FromStream(out this._isCreatedOnSet, binStream);
             if (this._isCreatedOnSet) {
                 BinarySerializer.FromStream(out this._CreatedOn, binStream);
+            }
+            BinarySerializer.FromStream(out this._isExportGuidSet, binStream);
+            if (this._isExportGuidSet) {
+                BinarySerializer.FromStream(out this._ExportGuid, binStream);
             }
             BinarySerializer.FromStream(out this._Geburtstag, binStream);
             BinarySerializer.FromStream(out this._fk_Identity, binStream);
@@ -977,6 +1058,10 @@ namespace Kistl.App.Projekte
             if (this._isCreatedOnSet) {
                 XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Kistl.App.Projekte");
             }
+            XmlStreamer.ToStream(this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Projekte");
+            if (this._isExportGuidSet) {
+                XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Projekte");
+            }
             XmlStreamer.ToStream(this._Geburtstag, xml, "Geburtstag", "Kistl.App.Projekte");
             XmlStreamer.ToStream(Identity != null ? Identity.ID : (int?)null, xml, "Identity", "Kistl.App.Projekte");
             XmlStreamer.ToStream(this._Name, xml, "Name", "Kistl.App.Projekte");
@@ -998,6 +1083,10 @@ namespace Kistl.App.Projekte
             if (this._isCreatedOnSet) {
                 XmlStreamer.FromStream(ref this._CreatedOn, xml, "CreatedOn", "Kistl.App.Projekte");
             }
+            XmlStreamer.FromStream(ref this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Projekte");
+            if (this._isExportGuidSet) {
+                XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Projekte");
+            }
             XmlStreamer.FromStream(ref this._Geburtstag, xml, "Geburtstag", "Kistl.App.Projekte");
             XmlStreamer.FromStream(ref this._fk_Identity, xml, "Identity", "Kistl.App.Projekte");
             XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.Projekte");
@@ -1008,6 +1097,36 @@ namespace Kistl.App.Projekte
                     ? null
                     : result
                 : baseResult.Concat(result);
+        }
+
+        public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+            xml.WriteAttributeString("ExportGuid", this._ExportGuid.ToString());
+            System.Diagnostics.Debug.Assert(this._isChangedOnSet, "Exported objects need to have all default values evaluated");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "Kistl.App.Projekte");
+            System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Kistl.App.Projekte");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this._Geburtstag, xml, "Geburtstag", "Kistl.App.Projekte");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this._Name, xml, "Name", "Kistl.App.Projekte");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this._SVNr, xml, "SVNr", "Kistl.App.Projekte");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this._TelefonNummer, xml, "TelefonNummer", "Kistl.App.Projekte");
+        }
+
+        public virtual void MergeImport(System.Xml.XmlReader xml)
+        {
+            // Import must have default value set
+            XmlStreamer.FromStream(ref this._ChangedOn, xml, "ChangedOn", "Kistl.App.Projekte");
+            this._isChangedOnSet = true;
+            // Import must have default value set
+            XmlStreamer.FromStream(ref this._CreatedOn, xml, "CreatedOn", "Kistl.App.Projekte");
+            this._isCreatedOnSet = true;
+            // Import must have default value set
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Projekte");
+            this._isExportGuidSet = true;
+            XmlStreamer.FromStream(ref this._Geburtstag, xml, "Geburtstag", "Kistl.App.Projekte");
+            XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.Projekte");
+            XmlStreamer.FromStream(ref this._SVNr, xml, "SVNr", "Kistl.App.Projekte");
+            XmlStreamer.FromStream(ref this._TelefonNummer, xml, "TelefonNummer", "Kistl.App.Projekte");
         }
 
         #endregion

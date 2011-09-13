@@ -44,6 +44,10 @@
                   column="`DatumVon`" 
                   optimistic-lock="false"/>
         <!-- ValueTypeProperty isValue -->
+        <property name="ExportGuid" 
+                  column="`ExportGuid`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
         <property name="Name" 
                   column="`Name`" 
                   optimistic-lock="false"/>

@@ -69,7 +69,9 @@ namespace Kistl.DalProvider.Client.Mocks
         {
             get { return this; }
         }
-
+        void IClientObject.MakeAccessDeniedProxy()
+        {
+        }
         #endregion
 
         public override void NotifyPreSave()

@@ -2814,7 +2814,7 @@ namespace Kistl.App.Projekte
 {
     // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
     [System.Diagnostics.DebuggerDisplay("Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl")]
-    public class Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl : Kistl.DalProvider.NHibernate.RelationEntryNHibernateImpl<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.ProjektNHibernateImpl, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.MitarbeiterNHibernateImpl>, Projekt_haben_Mitarbeiter_RelationEntry
+    public class Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl : Kistl.DalProvider.NHibernate.RelationEntryNHibernateImpl<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.ProjektNHibernateImpl, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.MitarbeiterNHibernateImpl>, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable, Projekt_haben_Mitarbeiter_RelationEntry
     {
         public Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl()
             : this(null)
@@ -2836,6 +2836,35 @@ namespace Kistl.App.Projekte
 
         /// <summary>the NHibernate proxy of the represented entity</summary>
         internal readonly Projekt_haben_Mitarbeiter_RelationEntryProxy Proxy;
+
+        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
+        public Guid ExportGuid
+        {
+            get
+            {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(Guid);
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = Proxy.ExportGuid;
+                if (this.Proxy.ExportGuid == Guid.Empty) {
+                    __result = this.Proxy.ExportGuid = Guid.NewGuid();
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (Proxy.ExportGuid != value)
+                {
+                    var __oldValue = Proxy.ExportGuid;
+                    var __newValue = value;
+                    NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
+                    Proxy.ExportGuid = __newValue;
+                    NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                }
+            }
+        }
+        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
         #region RelationEntry.ApplyClassHeadTemplate
 
         private static readonly Guid _relationID = new Guid("c7b3cf10-cdc8-454c-826c-04a0f7e5ef3e");
@@ -2878,7 +2907,7 @@ namespace Kistl.App.Projekte
         // referencedInterface=Kistl.App.Projekte.Projekt; moduleNamespace=Kistl.App.Projekte;
         // inverse Navigator=none; is reference;
         // PositionStorage=A_pos;
-        // Target not exportable; does not call events
+        // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Projekte.Projekt A
@@ -2931,6 +2960,8 @@ namespace Kistl.App.Projekte
         /// <summary>Backing store for A's id, used on dehydration only</summary>
         private int? _fk_A = null;
 
+        /// <summary>Backing store for A's guid, used on import only</summary>
+        private Guid? _fk_guid_A = null;
 
         // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
         public virtual int? A_pos
@@ -2967,7 +2998,7 @@ namespace Kistl.App.Projekte
         // referencedInterface=Kistl.App.Projekte.Mitarbeiter; moduleNamespace=Kistl.App.Projekte;
         // inverse Navigator=none; is reference;
         // PositionStorage=B_pos;
-        // Target not exportable; does not call events
+        // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Kistl.App.Projekte.Mitarbeiter B
@@ -3020,6 +3051,8 @@ namespace Kistl.App.Projekte
         /// <summary>Backing store for B's id, used on dehydration only</summary>
         private int? _fk_B = null;
 
+        /// <summary>Backing store for B's guid, used on import only</summary>
+        private Guid? _fk_guid_B = null;
 
         // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
         public virtual int? B_pos
@@ -3076,6 +3109,7 @@ namespace Kistl.App.Projekte
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
+            BinarySerializer.ToStream(this.Proxy.ExportGuid, binStream);
             BinarySerializer.ToStream(this.Proxy.A != null ? this.Proxy.A.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this.Proxy.A_pos, binStream);
             BinarySerializer.ToStream(this.Proxy.B != null ? this.Proxy.B.ID : (int?)null, binStream);
@@ -3086,6 +3120,11 @@ namespace Kistl.App.Projekte
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
+            {
+                Guid tmp;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.Proxy.ExportGuid = tmp;
+            }
             BinarySerializer.FromStream(out this._fk_A, binStream);
             {
                 int? tmp;
@@ -3108,6 +3147,7 @@ namespace Kistl.App.Projekte
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
+            XmlStreamer.ToStream(this.Proxy.ExportGuid, xml, "ExportGuid", "Kistl.App.Projekte");
             XmlStreamer.ToStream(this.Proxy.A != null ? this.Proxy.A.ID : (int?)null, xml, "A", "Kistl.App.Projekte");
             XmlStreamer.ToStream(this.Proxy.A_pos, xml, "A_pos", "Kistl.App.Projekte");
             XmlStreamer.ToStream(this.Proxy.B != null ? this.Proxy.B.ID : (int?)null, xml, "B", "Kistl.App.Projekte");
@@ -3118,6 +3158,12 @@ namespace Kistl.App.Projekte
         {
             var baseResult = base.FromStream(xml);
             var result = new List<IPersistenceObject>();
+            {
+                // yuck
+                Guid tmp = this.Proxy.ExportGuid;
+                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Projekte");
+                this.Proxy.ExportGuid = tmp;
+            }
             XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Projekte");
             {
                 // yuck
@@ -3137,6 +3183,39 @@ namespace Kistl.App.Projekte
                     ? null
                     : result
                 : baseResult.Concat(result);
+        }
+
+        public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+            xml.WriteAttributeString("ExportGuid", this.Proxy.ExportGuid.ToString());
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this.Proxy.A != null ? this.Proxy.A.ExportGuid : (Guid?)null, xml, "A", "Kistl.App.Projekte");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this.Proxy.A_pos, xml, "A_pos", "Kistl.App.Projekte");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this.Proxy.B != null ? this.Proxy.B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.Projekte");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this.Proxy.B_pos, xml, "B_pos", "Kistl.App.Projekte");
+        }
+
+        public virtual void MergeImport(System.Xml.XmlReader xml)
+        {
+            {
+                // yuck
+                Guid tmp = this.Proxy.ExportGuid;
+                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Projekte");
+                this.Proxy.ExportGuid = tmp;
+            }
+            XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.Projekte");
+            {
+                // yuck
+                int? tmp = this.Proxy.A_pos;
+                XmlStreamer.FromStream(ref tmp, xml, "A_pos", "Kistl.App.Projekte");
+                this.Proxy.A_pos = tmp;
+            }
+            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.Projekte");
+            {
+                // yuck
+                int? tmp = this.Proxy.B_pos;
+                XmlStreamer.FromStream(ref tmp, xml, "B_pos", "Kistl.App.Projekte");
+                this.Proxy.B_pos = tmp;
+            }
         }
 
         #endregion
@@ -3163,11 +3242,17 @@ namespace Kistl.App.Projekte
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
+            if (_fk_guid_A.HasValue)
+                this.Proxy.A = ((Kistl.App.Projekte.ProjektNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Projekte.Projekt>(_fk_guid_A.Value)).Proxy;
+            else
             if (_fk_A.HasValue)
                 this.Proxy.A = ((Kistl.App.Projekte.ProjektNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Projekte.Projekt>(_fk_A.Value)).Proxy;
             else
                 this.Proxy.A = null;
 
+            if (_fk_guid_B.HasValue)
+                this.Proxy.B = ((Kistl.App.Projekte.MitarbeiterNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Projekte.Mitarbeiter>(_fk_guid_B.Value)).Proxy;
+            else
             if (_fk_B.HasValue)
                 this.Proxy.B = ((Kistl.App.Projekte.MitarbeiterNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Projekte.Mitarbeiter>(_fk_B.Value)).Proxy;
             else
@@ -3195,6 +3280,8 @@ namespace Kistl.App.Projekte
             public virtual int? A_pos { get; set; }
 
             public virtual int? B_pos { get; set; }
+
+            public virtual Guid ExportGuid { get; set; }
 
         }
 
@@ -6529,7 +6616,7 @@ namespace Kistl.App.Projekte
 {
     // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.ValueCollectionEntry
     [System.Diagnostics.DebuggerDisplay("Kunde_EMails_CollectionEntryNHibernateImpl")]
-    public class Kunde_EMails_CollectionEntryNHibernateImpl : Kistl.DalProvider.NHibernate.ValueCollectionEntryNHibernateImpl<Kistl.App.Projekte.Kunde, Kistl.App.Projekte.KundeNHibernateImpl, string>, Kunde_EMails_CollectionEntry
+    public class Kunde_EMails_CollectionEntryNHibernateImpl : Kistl.DalProvider.NHibernate.ValueCollectionEntryNHibernateImpl<Kistl.App.Projekte.Kunde, Kistl.App.Projekte.KundeNHibernateImpl, string>, Kistl.API.IExportableValueCollectionEntryInternal, Kunde_EMails_CollectionEntry
     {
         public Kunde_EMails_CollectionEntryNHibernateImpl()
             : this(null)
@@ -6732,6 +6819,21 @@ namespace Kistl.App.Projekte
                     ? null
                     : result
                 : baseResult.Concat(result);
+        }
+
+        public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this.Proxy.Value, xml, "Value", "Kistl.App.Projekte");
+        }
+
+        public virtual void MergeImport(System.Xml.XmlReader xml)
+        {
+            {
+                // yuck
+                System.String tmp = this.Proxy.Value;
+                XmlStreamer.FromStream(ref tmp, xml, "Value", "Kistl.App.Projekte");
+                this.Proxy.Value = tmp;
+            }
         }
 
         #endregion

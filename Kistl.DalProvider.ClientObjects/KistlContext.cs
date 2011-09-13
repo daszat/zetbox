@@ -704,9 +704,19 @@ using Kistl.API.Client.PerfCounter;
             CheckDisposed();
             IPersistenceObject cacheHit = _objects.Lookup(_iftFactory(typeof(T)), ID);
             if (cacheHit != null)
+            {
                 return (T)cacheHit;
+            }
             else
-                return GetQuery<T>().Single(o => o.ID == ID);
+            {
+                var result = GetQuery<T>().SingleOrDefault(o => o.ID == ID);
+                if (result == null)
+                {
+                    result = Create<T>();
+                    ((IClientObject)result).MakeAccessDeniedProxy();
+                }
+                return result;
+            }
         }
 
         /// <summary>
@@ -743,9 +753,19 @@ using Kistl.API.Client.PerfCounter;
             CheckDisposed();
             IPersistenceObject cacheHit = _objects.Lookup(_iftFactory(typeof(T)), ID);
             if (cacheHit != null)
+            {
                 return (T)cacheHit;
+            }
             else
-                return GetPersistenceObjectQuery<T>().Single(o => o.ID == ID);
+            {
+                var result = GetPersistenceObjectQuery<T>().SingleOrDefault(o => o.ID == ID);
+                if (result == null)
+                {
+                    result = (T)Create(GetInterfaceType(typeof(T)));
+                    ((IClientObject)result).MakeAccessDeniedProxy();
+                }
+                return result;
+            }
         }
 
         /// <summary>
@@ -770,7 +790,6 @@ using Kistl.API.Client.PerfCounter;
 
         /// <summary>
         /// Find the Persistence Object of the given type by an ExportGuid
-        /// Note: This method is not supported on the client
         /// </summary>
         /// <typeparam name="T">Object Type of the Object to find.</typeparam>
         /// <param name="exportGuid">ExportGuid of the Object to find.</param>
@@ -778,7 +797,13 @@ using Kistl.API.Client.PerfCounter;
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         public T FindPersistenceObject<T>(Guid exportGuid) where T : class, IPersistenceObject
         {
-            return GetPersistenceObjectQuery<T>().Single(o => ((Kistl.App.Base.IExportable)o).ExportGuid == exportGuid);
+            var result = GetPersistenceObjectQuery<T>().SingleOrDefault(o => ((Kistl.App.Base.IExportable)o).ExportGuid == exportGuid);
+            if (result == null)
+            {
+                result = (T)Create(GetInterfaceType(typeof(T)));
+                ((IClientObject)result).MakeAccessDeniedProxy();
+            }
+            return result;
         }
 
         /// <summary>

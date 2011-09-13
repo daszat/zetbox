@@ -14,5 +14,7 @@ namespace Kistl.DalProvider.Client
         void SetNew();
 
         BasePersistenceObject UnderlyingObject { get; }
+
+        void MakeAccessDeniedProxy();
     }
 }

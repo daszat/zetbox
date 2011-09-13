@@ -28,6 +28,10 @@ namespace Kistl.DalProvider.Client
         {
             get { return this; }
         }
+        
+        void IClientObject.MakeAccessDeniedProxy()
+        {
+        }
 
         #endregion
     }

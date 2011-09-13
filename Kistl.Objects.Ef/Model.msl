@@ -94,6 +94,7 @@
 <ScalarProperty Name="Auftragswert" ColumnName="Auftragswert" />
 <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+<ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -610,6 +611,7 @@
 <ScalarProperty Name="Adresse" ColumnName="Adresse" />
 <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+<ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 <ScalarProperty Name="Kundenname" ColumnName="Kundenname" />
 <ScalarProperty Name="Land" ColumnName="Land" />
 <ScalarProperty Name="Ort" ColumnName="Ort" />
@@ -662,6 +664,7 @@
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+<ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 <ScalarProperty Name="Geburtstag" ColumnName="Geburtstag" />
 <ScalarProperty Name="Name" ColumnName="Name" />
 <ScalarProperty Name="SVNr" ColumnName="SVNr" />
@@ -763,6 +766,7 @@
 <ScalarProperty Name="AufwandGes" ColumnName="AufwandGes" />
 <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+<ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 <ScalarProperty Name="Kundenname" ColumnName="Kundenname" />
 <ScalarProperty Name="Name" ColumnName="Name" />
 	    </MappingFragment>
@@ -1017,6 +1021,7 @@
 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
 <ScalarProperty Name="DatumBis" ColumnName="DatumBis" />
 <ScalarProperty Name="DatumVon" ColumnName="DatumVon" />
+<ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 <ScalarProperty Name="Name" ColumnName="Name" />
 	    </MappingFragment>
       </EntityTypeMapping>
@@ -1458,6 +1463,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.Projekt_haben_Mitarbeiter_RelationEntry)">
         <MappingFragment StoreEntitySet="Projekt_haben_Mitarbeiter_RelationEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
+		  <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
           <ScalarProperty Name="A_pos" ColumnName="fk_Projekte_pos" />
           <ScalarProperty Name="B_pos" ColumnName="fk_Mitarbeiter_pos" />
         </MappingFragment>

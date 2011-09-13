@@ -27,7 +27,26 @@ namespace Kistl.DalProvider.Client
             get { return this; }
         }
 
+        void IClientObject.MakeAccessDeniedProxy()
+        {
+            _currentAccessRights = AccessRights.None;
+            SetUnmodified();
+        }
+
         #endregion
+
+        /// <summary>
+        /// Reflects the current access rights by the current Identity. 
+        /// Base implementations returnes always Full
+        /// </summary>
+        private Kistl.API.AccessRights _currentAccessRights = Kistl.API.AccessRights.Full;
+        public override Kistl.API.AccessRights CurrentAccessRights
+        {
+            get
+            {
+                return _currentAccessRights;
+            }
+        }
 
         protected override void AuditPropertyChange(string property, object oldValue, object newValue)
         {

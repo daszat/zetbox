@@ -1100,6 +1100,7 @@
                         FromRole="Auftrag"
                         ToRole="CreatedBy" />
     <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
+    <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
     <NavigationProperty Name="KundeImpl"
                         Relationship="Model.FK_Auftrag_has_Kunde"
                         FromRole="Auftrag"
@@ -1567,6 +1568,7 @@
                         Relationship="Model.FK_Kunde_value_EMails"
                         FromRole="Kunde"
                         ToRole="CollectionEntry" />
+    <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
     <Property Name="Kundenname" Type="String" Nullable="false" MaxLength="200"  />
     <Property Name="Land" Type="String" Nullable="true" MaxLength="50"  />
     <Property Name="Ort" Type="String" Nullable="true" MaxLength="100"  />
@@ -1663,6 +1665,7 @@
                         FromRole="Mitarbeiter"
                         ToRole="CreatedBy" />
     <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
+    <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
     <Property Name="Geburtstag" Type="DateTime" Nullable="true"  />
     <NavigationProperty Name="IdentityImpl"
                         Relationship="Model.FK_Mitarbeiter_is_a_Identity"
@@ -1850,6 +1853,7 @@
                         FromRole="Projekt"
                         ToRole="CreatedBy" />
     <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
+    <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
     <Property Name="Kundenname" Type="String" Nullable="true" MaxLength="100"  />
     <NavigationProperty Name="MitarbeiterImpl"
                         Relationship="Model.FK_Projekte_haben_Mitarbeiter_A"
@@ -2225,6 +2229,7 @@
     <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
     <Property Name="DatumBis" Type="DateTime" Nullable="true"  />
     <Property Name="DatumVon" Type="DateTime" Nullable="true"  />
+    <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
     <Property Name="Name" Type="String" Nullable="true" MaxLength="100"  />
     <NavigationProperty Name="ProjektImpl"
                         Relationship="Model.FK_Projekt_has_Tasks"
@@ -3105,6 +3110,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
+	<Property Name="ExportGuid" Type="Guid" Nullable="false" />
 	
     
     <!-- A -->

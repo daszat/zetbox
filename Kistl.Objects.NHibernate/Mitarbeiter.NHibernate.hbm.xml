@@ -32,6 +32,10 @@
                   column="`CreatedOn`" 
                   optimistic-lock="false"/>
         <!-- ValueTypeProperty isValue -->
+        <property name="ExportGuid" 
+                  column="`ExportGuid`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
         <property name="Geburtstag" type="Timestamp"
                   column="`Geburtstag`" 
                   optimistic-lock="false"/>

@@ -169,6 +169,7 @@
                     column="`fk_Mitarbeiter_pos`" />
         <property name="B_pos"
                   column="`fk_Projekte_pos`" />
+        <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
     </class>
     <class name="Kistl.App.Base.RoleMembership_resolves_Relation_RelationEntryNHibernateImpl+RoleMembership_resolves_Relation_RelationEntryProxy"
            proxy="Kistl.App.Base.RoleMembership_resolves_Relation_RelationEntryNHibernateImpl+RoleMembership_resolves_Relation_RelationEntryProxy"
@@ -360,6 +361,9 @@
         <property name="Value" 
                   column="`EMails`" 
                   optimistic-lock="false"/>
+        <!-- export guid is not needed since serialization is always "in-place"
+        <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
+        -->
     </class>
 
     <!-- CompoundObjectCollectionEntries -->

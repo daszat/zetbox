@@ -21,7 +21,7 @@ namespace Kistl.App.Projekte
     /// 
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("Auftrag")]
-    public class AuftragMemoryImpl : Kistl.DalProvider.Memory.DataObjectMemoryImpl, Auftrag
+    public class AuftragMemoryImpl : Kistl.DalProvider.Memory.DataObjectMemoryImpl, Auftrag, Kistl.API.IExportableInternal
     {
         [Obsolete]
         public AuftragMemoryImpl()
@@ -443,6 +443,70 @@ namespace Kistl.App.Projekte
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Auftrag, DateTime> OnCreatedOn_PostSetter;
 
         /// <summary>
+        /// Export Guid
+        /// </summary>
+        // value type property
+        // BEGIN Kistl.Generator.Templates.Properties.NotifyingDataProperty
+        public Guid ExportGuid
+        {
+            get
+            {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(Guid);
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ExportGuid;
+                if (!_isExportGuidSet && ObjectState == DataObjectState.New) {
+                    var __p = FrozenContext.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("9e6faf9c-4636-403b-94fa-98c789806793"));
+                    if (__p != null) {
+                        _isExportGuidSet = true;
+                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
+                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
+                        __result = this._ExportGuid = (Guid)__tmp_value;
+                    } else {
+                        Kistl.API.Utils.Logging.Log.Warn("Unable to get default value for property 'Auftrag.ExportGuid'");
+                    }
+                }
+                if (OnExportGuid_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<Guid>(__result);
+                    OnExportGuid_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                _isExportGuidSet = true;
+                if (_ExportGuid != value)
+                {
+                    var __oldValue = _ExportGuid;
+                    var __newValue = value;
+                    if (OnExportGuid_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<Guid>(__oldValue, __newValue);
+                        OnExportGuid_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
+                    _ExportGuid = __newValue;
+                    NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    if (OnExportGuid_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<Guid>(__oldValue, __newValue);
+                        OnExportGuid_PostSetter(this, __e);
+                    }
+                }
+            }
+        }
+        private Guid _ExportGuid;
+        private bool _isExportGuidSet = false;
+        // END Kistl.Generator.Templates.Properties.NotifyingDataProperty
+		public static event PropertyGetterHandler<Kistl.App.Projekte.Auftrag, Guid> OnExportGuid_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Auftrag, Guid> OnExportGuid_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Auftrag, Guid> OnExportGuid_PostSetter;
+
+        /// <summary>
         /// Kunde des Projektes
         /// </summary>
         // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Kunde
@@ -450,7 +514,7 @@ namespace Kistl.App.Projekte
         // referencedInterface=Kistl.App.Projekte.Kunde; moduleNamespace=Kistl.App.Projekte;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
-        // Target not exportable; does call events
+        // Target exportable; does call events
 
         // implement the user-visible interface
         [XmlIgnore()]
@@ -465,6 +529,7 @@ namespace Kistl.App.Projekte
 
         private int? _fk_Kunde;
 
+        private Guid? _fk_guid_Kunde = null;
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -539,7 +604,7 @@ namespace Kistl.App.Projekte
         // referencedInterface=Kistl.App.Projekte.Mitarbeiter; moduleNamespace=Kistl.App.Projekte;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
-        // Target not exportable; does call events
+        // Target exportable; does call events
 
         // implement the user-visible interface
         [XmlIgnore()]
@@ -554,6 +619,7 @@ namespace Kistl.App.Projekte
 
         private int? _fk_Mitarbeiter;
 
+        private Guid? _fk_guid_Mitarbeiter = null;
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -628,7 +694,7 @@ namespace Kistl.App.Projekte
         // referencedInterface=Kistl.App.Projekte.Projekt; moduleNamespace=Kistl.App.Projekte;
         // inverse Navigator=Auftraege; is list;
         // PositionStorage=none;
-        // Target not exportable; does call events
+        // Target exportable; does call events
 
         // implement the user-visible interface
         [XmlIgnore()]
@@ -643,6 +709,7 @@ namespace Kistl.App.Projekte
 
         private int? _fk_Projekt;
 
+        private Guid? _fk_guid_Projekt = null;
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -762,6 +829,7 @@ namespace Kistl.App.Projekte
             me.Auftragswert = other.Auftragswert;
             me.ChangedOn = other.ChangedOn;
             me.CreatedOn = other.CreatedOn;
+            me.ExportGuid = other.ExportGuid;
             this._fk_ChangedBy = otherImpl._fk_ChangedBy;
             this._fk_CreatedBy = otherImpl._fk_CreatedBy;
             this._fk_Kunde = otherImpl._fk_Kunde;
@@ -835,16 +903,25 @@ namespace Kistl.App.Projekte
             else
                 CreatedByImpl = null;
 
+            if (_fk_guid_Kunde.HasValue)
+                KundeImpl = (Kistl.App.Projekte.KundeMemoryImpl)Context.FindPersistenceObject<Kistl.App.Projekte.Kunde>(_fk_guid_Kunde.Value);
+            else
             if (_fk_Kunde.HasValue)
                 KundeImpl = (Kistl.App.Projekte.KundeMemoryImpl)Context.Find<Kistl.App.Projekte.Kunde>(_fk_Kunde.Value);
             else
                 KundeImpl = null;
 
+            if (_fk_guid_Mitarbeiter.HasValue)
+                MitarbeiterImpl = (Kistl.App.Projekte.MitarbeiterMemoryImpl)Context.FindPersistenceObject<Kistl.App.Projekte.Mitarbeiter>(_fk_guid_Mitarbeiter.Value);
+            else
             if (_fk_Mitarbeiter.HasValue)
                 MitarbeiterImpl = (Kistl.App.Projekte.MitarbeiterMemoryImpl)Context.Find<Kistl.App.Projekte.Mitarbeiter>(_fk_Mitarbeiter.Value);
             else
                 MitarbeiterImpl = null;
 
+            if (_fk_guid_Projekt.HasValue)
+                ProjektImpl = (Kistl.App.Projekte.ProjektMemoryImpl)Context.FindPersistenceObject<Kistl.App.Projekte.Projekt>(_fk_guid_Projekt.Value);
+            else
             if (_fk_Projekt.HasValue)
                 ProjektImpl = (Kistl.App.Projekte.ProjektMemoryImpl)Context.Find<Kistl.App.Projekte.Projekt>(_fk_Projekt.Value);
             else
@@ -911,6 +988,14 @@ namespace Kistl.App.Projekte
                         null,
                         obj => obj.CreatedOn,
                         (obj, val) => obj.CreatedOn = val),
+                    // else
+                    new PropertyDescriptorMemoryImpl<AuftragMemoryImpl, Guid>(
+                        lazyCtx,
+                        new Guid("9e6faf9c-4636-403b-94fa-98c789806793"),
+                        "ExportGuid",
+                        null,
+                        obj => obj.ExportGuid,
+                        (obj, val) => obj.ExportGuid = val),
                     // else
                     new PropertyDescriptorMemoryImpl<AuftragMemoryImpl, Kistl.App.Projekte.Kunde>(
                         lazyCtx,
@@ -1015,6 +1100,10 @@ namespace Kistl.App.Projekte
             if (this._isCreatedOnSet) {
                 BinarySerializer.ToStream(this._CreatedOn, binStream);
             }
+            BinarySerializer.ToStream(this._isExportGuidSet, binStream);
+            if (this._isExportGuidSet) {
+                BinarySerializer.ToStream(this._ExportGuid, binStream);
+            }
             BinarySerializer.ToStream(Kunde != null ? Kunde.ID : (int?)null, binStream);
             BinarySerializer.ToStream(Mitarbeiter != null ? Mitarbeiter.ID : (int?)null, binStream);
             BinarySerializer.ToStream(Projekt != null ? Projekt.ID : (int?)null, binStream);
@@ -1035,6 +1124,10 @@ namespace Kistl.App.Projekte
             BinarySerializer.FromStream(out this._isCreatedOnSet, binStream);
             if (this._isCreatedOnSet) {
                 BinarySerializer.FromStream(out this._CreatedOn, binStream);
+            }
+            BinarySerializer.FromStream(out this._isExportGuidSet, binStream);
+            if (this._isExportGuidSet) {
+                BinarySerializer.FromStream(out this._ExportGuid, binStream);
             }
             BinarySerializer.FromStream(out this._fk_Kunde, binStream);
             BinarySerializer.FromStream(out this._fk_Mitarbeiter, binStream);
@@ -1061,6 +1154,10 @@ namespace Kistl.App.Projekte
             if (this._isCreatedOnSet) {
                 XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Kistl.App.Projekte");
             }
+            XmlStreamer.ToStream(this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Projekte");
+            if (this._isExportGuidSet) {
+                XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Projekte");
+            }
             XmlStreamer.ToStream(Kunde != null ? Kunde.ID : (int?)null, xml, "Kunde", "Kistl.App.Projekte");
             XmlStreamer.ToStream(Mitarbeiter != null ? Mitarbeiter.ID : (int?)null, xml, "Mitarbeiter", "Kistl.App.Projekte");
             XmlStreamer.ToStream(Projekt != null ? Projekt.ID : (int?)null, xml, "Projekt", "Kistl.App.Projekte");
@@ -1082,6 +1179,10 @@ namespace Kistl.App.Projekte
             if (this._isCreatedOnSet) {
                 XmlStreamer.FromStream(ref this._CreatedOn, xml, "CreatedOn", "Kistl.App.Projekte");
             }
+            XmlStreamer.FromStream(ref this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Projekte");
+            if (this._isExportGuidSet) {
+                XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Projekte");
+            }
             XmlStreamer.FromStream(ref this._fk_Kunde, xml, "Kunde", "Kistl.App.Projekte");
             XmlStreamer.FromStream(ref this._fk_Mitarbeiter, xml, "Mitarbeiter", "Kistl.App.Projekte");
             XmlStreamer.FromStream(ref this._fk_Projekt, xml, "Projekt", "Kistl.App.Projekte");
@@ -1090,6 +1191,38 @@ namespace Kistl.App.Projekte
                     ? null
                     : result
                 : baseResult.Concat(result);
+        }
+
+        public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+            xml.WriteAttributeString("ExportGuid", this._ExportGuid.ToString());
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this._Auftragsname, xml, "Auftragsname", "Kistl.App.Projekte");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this._Auftragswert, xml, "Auftragswert", "Kistl.App.Projekte");
+            System.Diagnostics.Debug.Assert(this._isChangedOnSet, "Exported objects need to have all default values evaluated");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "Kistl.App.Projekte");
+            System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Kistl.App.Projekte");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(Kunde != null ? Kunde.ExportGuid : (Guid?)null, xml, "Kunde", "Kistl.App.Projekte");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(Mitarbeiter != null ? Mitarbeiter.ExportGuid : (Guid?)null, xml, "Mitarbeiter", "Kistl.App.Projekte");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(Projekt != null ? Projekt.ExportGuid : (Guid?)null, xml, "Projekt", "Kistl.App.Projekte");
+        }
+
+        public virtual void MergeImport(System.Xml.XmlReader xml)
+        {
+            XmlStreamer.FromStream(ref this._Auftragsname, xml, "Auftragsname", "Kistl.App.Projekte");
+            XmlStreamer.FromStream(ref this._Auftragswert, xml, "Auftragswert", "Kistl.App.Projekte");
+            // Import must have default value set
+            XmlStreamer.FromStream(ref this._ChangedOn, xml, "ChangedOn", "Kistl.App.Projekte");
+            this._isChangedOnSet = true;
+            // Import must have default value set
+            XmlStreamer.FromStream(ref this._CreatedOn, xml, "CreatedOn", "Kistl.App.Projekte");
+            this._isCreatedOnSet = true;
+            // Import must have default value set
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Projekte");
+            this._isExportGuidSet = true;
+            XmlStreamer.FromStream(ref this._fk_guid_Kunde, xml, "Kunde", "Kistl.App.Projekte");
+            XmlStreamer.FromStream(ref this._fk_guid_Mitarbeiter, xml, "Mitarbeiter", "Kistl.App.Projekte");
+            XmlStreamer.FromStream(ref this._fk_guid_Projekt, xml, "Projekt", "Kistl.App.Projekte");
         }
 
         #endregion

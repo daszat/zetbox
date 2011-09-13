@@ -24,7 +24,7 @@ namespace Kistl.App.Projekte
     /// </summary>
     [EdmEntityType(NamespaceName="Model", Name="Task")]
     [System.Diagnostics.DebuggerDisplay("Task")]
-    public class TaskEfImpl : BaseServerDataObject_EntityFramework, Task
+    public class TaskEfImpl : BaseServerDataObject_EntityFramework, Kistl.API.IExportableInternal, Task
     {
         [Obsolete]
         public TaskEfImpl()
@@ -540,6 +540,73 @@ namespace Kistl.App.Projekte
 		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Task, DateTime?> OnDatumVon_PostSetter;
 
         /// <summary>
+        /// Export Guid
+        /// </summary>
+        // value type property
+        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public Guid ExportGuid
+        {
+            get
+            {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(Guid);
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ExportGuid;
+                if (!_isExportGuidSet && ObjectState == DataObjectState.New) {
+                    var __p = FrozenContext.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("1c8414ef-f164-4f7e-a7bf-5fca894aa4f4"));
+                    if (__p != null) {
+                        _isExportGuidSet = true;
+                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
+                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
+                        __result = this._ExportGuid = (Guid)__tmp_value;
+                    } else {
+                        Kistl.API.Utils.Logging.Log.Warn("Unable to get default value for property 'Task.ExportGuid'");
+                    }
+                }
+                if (OnExportGuid_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<Guid>(__result);
+                    OnExportGuid_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                _isExportGuidSet = true;
+                if (_ExportGuid != value)
+                {
+                    var __oldValue = _ExportGuid;
+                    var __newValue = value;
+                    if (OnExportGuid_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<Guid>(__oldValue, __newValue);
+                        OnExportGuid_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
+                    _ExportGuid = __newValue;
+                    NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    if (OnExportGuid_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<Guid>(__oldValue, __newValue);
+                        OnExportGuid_PostSetter(this, __e);
+                    }
+                }
+            }
+        }
+        private Guid _ExportGuid;
+        private bool _isExportGuidSet = false;
+        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
+		public static event PropertyGetterHandler<Kistl.App.Projekte.Task, Guid> OnExportGuid_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Projekte.Task, Guid> OnExportGuid_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Projekte.Task, Guid> OnExportGuid_PostSetter;
+
+        /// <summary>
         /// Taskname
         /// </summary>
         // value type property
@@ -608,7 +675,7 @@ namespace Kistl.App.Projekte
         // referencedInterface=Kistl.App.Projekte.Projekt; moduleNamespace=Kistl.App.Projekte;
         // inverse Navigator=Tasks; is list;
         // PositionStorage=none;
-        // Target not exportable
+        // Target exportable
 
         // implement the user-visible interface
         [XmlIgnore()]
@@ -621,6 +688,7 @@ namespace Kistl.App.Projekte
 
         private int? _fk_Projekt;
 
+        private Guid? _fk_guid_Projekt = null;
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Projekt_has_Tasks", "Projekt")]
@@ -725,6 +793,7 @@ namespace Kistl.App.Projekte
             me.CreatedOn = other.CreatedOn;
             me.DatumBis = other.DatumBis;
             me.DatumVon = other.DatumVon;
+            me.ExportGuid = other.ExportGuid;
             me.Name = other.Name;
             this._fk_ChangedBy = otherImpl._fk_ChangedBy;
             this._fk_CreatedBy = otherImpl._fk_CreatedBy;
@@ -785,6 +854,9 @@ namespace Kistl.App.Projekte
             else
                 CreatedByImpl = null;
 
+            if (_fk_guid_Projekt.HasValue)
+                ProjektImpl = (Kistl.App.Projekte.ProjektEfImpl)Context.FindPersistenceObject<Kistl.App.Projekte.Projekt>(_fk_guid_Projekt.Value);
+            else
             if (_fk_Projekt.HasValue)
                 ProjektImpl = (Kistl.App.Projekte.ProjektEfImpl)Context.Find<Kistl.App.Projekte.Projekt>(_fk_Projekt.Value);
             else
@@ -859,6 +931,14 @@ namespace Kistl.App.Projekte
                         null,
                         obj => obj.DatumVon,
                         (obj, val) => obj.DatumVon = val),
+                    // else
+                    new PropertyDescriptorEfImpl<TaskEfImpl, Guid>(
+                        lazyCtx,
+                        new Guid("1c8414ef-f164-4f7e-a7bf-5fca894aa4f4"),
+                        "ExportGuid",
+                        null,
+                        obj => obj.ExportGuid,
+                        (obj, val) => obj.ExportGuid = val),
                     // else
                     new PropertyDescriptorEfImpl<TaskEfImpl, string>(
                         lazyCtx,
@@ -1023,6 +1103,10 @@ namespace Kistl.App.Projekte
             }
             BinarySerializer.ToStream(this._DatumBis, binStream);
             BinarySerializer.ToStream(this._DatumVon, binStream);
+            BinarySerializer.ToStream(this._isExportGuidSet, binStream);
+            if (this._isExportGuidSet) {
+                BinarySerializer.ToStream(this._ExportGuid, binStream);
+            }
             BinarySerializer.ToStream(this._Name, binStream);
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Projekte.ProjektEfImpl>("Model.FK_Projekt_has_Tasks", "Projekt").EntityKey;
@@ -1047,6 +1131,10 @@ namespace Kistl.App.Projekte
             }
             BinarySerializer.FromStream(out this._DatumBis, binStream);
             BinarySerializer.FromStream(out this._DatumVon, binStream);
+            BinarySerializer.FromStream(out this._isExportGuidSet, binStream);
+            if (this._isExportGuidSet) {
+                BinarySerializer.FromStream(out this._ExportGuid, binStream);
+            }
             BinarySerializer.FromStream(out this._Name, binStream);
             BinarySerializer.FromStream(out this._fk_Projekt, binStream);
             return baseResult == null
@@ -1078,6 +1166,10 @@ namespace Kistl.App.Projekte
             }
             XmlStreamer.ToStream(this._DatumBis, xml, "DatumBis", "Kistl.App.Projekte");
             XmlStreamer.ToStream(this._DatumVon, xml, "DatumVon", "Kistl.App.Projekte");
+            XmlStreamer.ToStream(this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Projekte");
+            if (this._isExportGuidSet) {
+                XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "Kistl.App.Projekte");
+            }
             XmlStreamer.ToStream(this._Name, xml, "Name", "Kistl.App.Projekte");
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Projekte.ProjektEfImpl>("Model.FK_Projekt_has_Tasks", "Projekt").EntityKey;
@@ -1102,6 +1194,10 @@ namespace Kistl.App.Projekte
             }
             XmlStreamer.FromStream(ref this._DatumBis, xml, "DatumBis", "Kistl.App.Projekte");
             XmlStreamer.FromStream(ref this._DatumVon, xml, "DatumVon", "Kistl.App.Projekte");
+            XmlStreamer.FromStream(ref this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Projekte");
+            if (this._isExportGuidSet) {
+                XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Projekte");
+            }
             XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.Projekte");
             XmlStreamer.FromStream(ref this._fk_Projekt, xml, "Projekt", "Kistl.App.Projekte");
             return baseResult == null
@@ -1109,6 +1205,38 @@ namespace Kistl.App.Projekte
                     ? null
                     : result
                 : baseResult.Concat(result);
+        }
+
+        public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+            xml.WriteAttributeString("ExportGuid", this._ExportGuid.ToString());
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this._Aufwand, xml, "Aufwand", "Kistl.App.Projekte");
+            System.Diagnostics.Debug.Assert(this._isChangedOnSet, "Exported objects need to have all default values evaluated");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "Kistl.App.Projekte");
+            System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Kistl.App.Projekte");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this._DatumBis, xml, "DatumBis", "Kistl.App.Projekte");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this._DatumVon, xml, "DatumVon", "Kistl.App.Projekte");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this._Name, xml, "Name", "Kistl.App.Projekte");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(Projekt != null ? Projekt.ExportGuid : (Guid?)null, xml, "Projekt", "Kistl.App.Projekte");
+        }
+
+        public virtual void MergeImport(System.Xml.XmlReader xml)
+        {
+            XmlStreamer.FromStream(ref this._Aufwand, xml, "Aufwand", "Kistl.App.Projekte");
+            // Import must have default value set
+            XmlStreamer.FromStream(ref this._ChangedOn, xml, "ChangedOn", "Kistl.App.Projekte");
+            this._isChangedOnSet = true;
+            // Import must have default value set
+            XmlStreamer.FromStream(ref this._CreatedOn, xml, "CreatedOn", "Kistl.App.Projekte");
+            this._isCreatedOnSet = true;
+            XmlStreamer.FromStream(ref this._DatumBis, xml, "DatumBis", "Kistl.App.Projekte");
+            XmlStreamer.FromStream(ref this._DatumVon, xml, "DatumVon", "Kistl.App.Projekte");
+            // Import must have default value set
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "Kistl.App.Projekte");
+            this._isExportGuidSet = true;
+            XmlStreamer.FromStream(ref this._Name, xml, "Name", "Kistl.App.Projekte");
+            XmlStreamer.FromStream(ref this._fk_guid_Projekt, xml, "Projekt", "Kistl.App.Projekte");
         }
 
         #endregion

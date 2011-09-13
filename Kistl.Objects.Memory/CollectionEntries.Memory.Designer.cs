@@ -2729,7 +2729,7 @@ namespace Kistl.App.Projekte
 {
     // BEGIN Kistl.Generator.Templates.CollectionEntries.RelationEntry
     [System.Diagnostics.DebuggerDisplay("Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl")]
-    public class Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl : Kistl.DalProvider.Memory.RelationEntryMemoryImpl<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.ProjektMemoryImpl, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.MitarbeiterMemoryImpl>, Projekt_haben_Mitarbeiter_RelationEntry
+    public class Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl : Kistl.DalProvider.Memory.RelationEntryMemoryImpl<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.ProjektMemoryImpl, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.MitarbeiterMemoryImpl>, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable, Projekt_haben_Mitarbeiter_RelationEntry
     {
         [Obsolete]
         public Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl()
@@ -2767,6 +2767,35 @@ namespace Kistl.App.Projekte
         }
         private int _ID;
         // END Kistl.Generator.Templates.Properties.IdProperty
+        // BEGIN Kistl.Generator.Templates.Properties.ExportGuidProperty
+        public Guid ExportGuid
+        {
+            get
+            {
+                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(Guid);
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ExportGuid;
+                if (_ExportGuid == Guid.Empty) {
+                    __result = _ExportGuid = Guid.NewGuid();
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_ExportGuid != value)
+                {
+                    var __oldValue = _ExportGuid;
+                    var __newValue = value;
+                    NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
+                    _ExportGuid = __newValue;
+                    NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                }
+            }
+        }
+        private Guid _ExportGuid;
+        // END Kistl.Generator.Templates.Properties.ExportGuidProperty
         #region RelationEntry.ApplyClassHeadTemplate
 
         private static readonly Guid _relationID = new Guid("c7b3cf10-cdc8-454c-826c-04a0f7e5ef3e");
@@ -2809,7 +2838,7 @@ namespace Kistl.App.Projekte
         // referencedInterface=Kistl.App.Projekte.Projekt; moduleNamespace=Kistl.App.Projekte;
         // inverse Navigator=none; is reference;
         // PositionStorage=A_pos;
-        // Target not exportable; does not call events
+        // Target exportable; does not call events
 
         // implement the user-visible interface
         [XmlIgnore()]
@@ -2824,6 +2853,7 @@ namespace Kistl.App.Projekte
 
         private int? _fk_A;
 
+        private Guid? _fk_guid_A = null;
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -2904,7 +2934,7 @@ namespace Kistl.App.Projekte
         // referencedInterface=Kistl.App.Projekte.Mitarbeiter; moduleNamespace=Kistl.App.Projekte;
         // inverse Navigator=none; is reference;
         // PositionStorage=B_pos;
-        // Target not exportable; does not call events
+        // Target exportable; does not call events
 
         // implement the user-visible interface
         [XmlIgnore()]
@@ -2919,6 +2949,7 @@ namespace Kistl.App.Projekte
 
         private int? _fk_B;
 
+        private Guid? _fk_guid_B = null;
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -3007,6 +3038,7 @@ namespace Kistl.App.Projekte
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
+            BinarySerializer.ToStream(this._ExportGuid, binStream);
             BinarySerializer.ToStream(A != null ? A.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._A_pos, binStream);
             BinarySerializer.ToStream(B != null ? B.ID : (int?)null, binStream);
@@ -3017,6 +3049,7 @@ namespace Kistl.App.Projekte
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
+            BinarySerializer.FromStream(out this._ExportGuid, binStream);
             BinarySerializer.FromStream(out this._fk_A, binStream);
             BinarySerializer.FromStream(out this._A_pos, binStream);
             BinarySerializer.FromStream(out this._fk_B, binStream);
@@ -3031,6 +3064,7 @@ namespace Kistl.App.Projekte
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
+            XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "");
             XmlStreamer.ToStream(A != null ? A.ID : (int?)null, xml, "A", "Kistl.App.Projekte");
             XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "Kistl.App.Projekte");
             XmlStreamer.ToStream(B != null ? B.ID : (int?)null, xml, "B", "Kistl.App.Projekte");
@@ -3041,6 +3075,7 @@ namespace Kistl.App.Projekte
         {
             var baseResult = base.FromStream(xml);
             var result = new List<IPersistenceObject>();
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
             XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Projekte");
             XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "Kistl.App.Projekte");
             XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Projekte");
@@ -3050,6 +3085,24 @@ namespace Kistl.App.Projekte
                     ? null
                     : result
                 : baseResult.Concat(result);
+        }
+
+        public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+            xml.WriteAttributeString("ExportGuid", _ExportGuid.ToString());
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Kistl.App.Projekte");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "Kistl.App.Projekte");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.Projekte");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "Kistl.App.Projekte");
+        }
+
+        public virtual void MergeImport(System.Xml.XmlReader xml)
+        {
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
+            XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.Projekte");
+            XmlStreamer.FromStream(ref this._A_pos, xml, "A_pos", "Kistl.App.Projekte");
+            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.Projekte");
+            XmlStreamer.FromStream(ref this._B_pos, xml, "B_pos", "Kistl.App.Projekte");
         }
 
         #endregion
@@ -3076,11 +3129,17 @@ namespace Kistl.App.Projekte
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
+            if (_fk_guid_A.HasValue)
+                AImpl = (Kistl.App.Projekte.ProjektMemoryImpl)Context.FindPersistenceObject<Kistl.App.Projekte.Projekt>(_fk_guid_A.Value);
+            else
             if (_fk_A.HasValue)
                 AImpl = (Kistl.App.Projekte.ProjektMemoryImpl)Context.Find<Kistl.App.Projekte.Projekt>(_fk_A.Value);
             else
                 AImpl = null;
 
+            if (_fk_guid_B.HasValue)
+                BImpl = (Kistl.App.Projekte.MitarbeiterMemoryImpl)Context.FindPersistenceObject<Kistl.App.Projekte.Mitarbeiter>(_fk_guid_B.Value);
+            else
             if (_fk_B.HasValue)
                 BImpl = (Kistl.App.Projekte.MitarbeiterMemoryImpl)Context.Find<Kistl.App.Projekte.Mitarbeiter>(_fk_B.Value);
             else
@@ -6256,7 +6315,7 @@ namespace Kistl.App.Projekte
 {
     // BEGIN Kistl.Generator.Templates.CollectionEntries.ValueCollectionEntry
     [System.Diagnostics.DebuggerDisplay("Kunde_EMails_CollectionEntryMemoryImpl")]
-    public class Kunde_EMails_CollectionEntryMemoryImpl : Kistl.DalProvider.Memory.ValueCollectionEntryMemoryImpl<Kistl.App.Projekte.Kunde, Kistl.App.Projekte.KundeMemoryImpl, string>, Kunde_EMails_CollectionEntry
+    public class Kunde_EMails_CollectionEntryMemoryImpl : Kistl.DalProvider.Memory.ValueCollectionEntryMemoryImpl<Kistl.App.Projekte.Kunde, Kistl.App.Projekte.KundeMemoryImpl, string>, Kistl.API.IExportableValueCollectionEntryInternal, Kunde_EMails_CollectionEntry
     {
         [Obsolete]
         public Kunde_EMails_CollectionEntryMemoryImpl()
@@ -6434,6 +6493,18 @@ namespace Kistl.App.Projekte
                     ? null
                     : result
                 : baseResult.Concat(result);
+        }
+
+        public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this._fk_Parent, xml, "Parent", "Kistl.App.Projekte");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this._Value, xml, "Value", "Kistl.App.Projekte");
+        }
+
+        public virtual void MergeImport(System.Xml.XmlReader xml)
+        {
+            XmlStreamer.FromStream(ref this._fk_Parent, xml, "Parent", "Kistl.App.Projekte");
+            XmlStreamer.FromStream(ref this._Value, xml, "Value", "Kistl.App.Projekte");
         }
 
         #endregion

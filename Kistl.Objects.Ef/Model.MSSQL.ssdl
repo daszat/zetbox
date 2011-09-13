@@ -1564,6 +1564,7 @@
     <Property Name="Auftragswert" Type="float" Nullable="true" />
     <Property Name="ChangedOn" Type="datetime2" Nullable="false" />
     <Property Name="CreatedOn" Type="datetime2" Nullable="false" />
+    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
     <EntityType Name="Auftrag_Rights">
       <Key>
@@ -2172,6 +2173,7 @@
     <Property Name="Adresse" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="ChangedOn" Type="datetime2" Nullable="false" />
     <Property Name="CreatedOn" Type="datetime2" Nullable="false" />
+    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Kundenname" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="Land" Type="nvarchar" MaxLength="50" Nullable="true" />
     <Property Name="Ort" Type="nvarchar" MaxLength="100" Nullable="true" />
@@ -2242,6 +2244,7 @@
     <Property Name="fk_CreatedBy" Type="int" />
     <Property Name="ChangedOn" Type="datetime2" Nullable="false" />
     <Property Name="CreatedOn" Type="datetime2" Nullable="false" />
+    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Geburtstag" Type="datetime2" Nullable="true" />
     <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="true" />
     <Property Name="SVNr" Type="nvarchar" MaxLength="20" Nullable="true" />
@@ -2438,6 +2441,7 @@
     <Property Name="AufwandGes" Type="float" Nullable="true" />
     <Property Name="ChangedOn" Type="datetime2" Nullable="false" />
     <Property Name="CreatedOn" Type="datetime2" Nullable="false" />
+    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Kundenname" Type="nvarchar" MaxLength="100" Nullable="true" />
     <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="true" />
   </EntityType>
@@ -2726,6 +2730,7 @@
     <Property Name="CreatedOn" Type="datetime2" Nullable="false" />
     <Property Name="DatumBis" Type="datetime2" Nullable="true" />
     <Property Name="DatumVon" Type="datetime2" Nullable="true" />
+    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="true" />
   </EntityType>
     <EntityType Name="Task_Rights">
@@ -3213,6 +3218,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+	<Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="fk_Projekte" Type="int" Nullable="true" />
     <Property Name="fk_Projekte_pos" Type="int" Nullable="true" />
     <Property Name="fk_Mitarbeiter" Type="int" Nullable="true" />

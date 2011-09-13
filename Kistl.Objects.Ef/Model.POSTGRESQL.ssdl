@@ -1564,6 +1564,7 @@
     <Property Name="Auftragswert" Type="float8" Nullable="true" />
     <Property Name="ChangedOn" Type="timestamp" Nullable="false" />
     <Property Name="CreatedOn" Type="timestamp" Nullable="false" />
+    <Property Name="ExportGuid" Type="uuid" Nullable="false" />
   </EntityType>
     <EntityType Name="Auftrag_Rights">
       <Key>
@@ -2172,6 +2173,7 @@
     <Property Name="Adresse" Type="varchar" MaxLength="200" Nullable="true" />
     <Property Name="ChangedOn" Type="timestamp" Nullable="false" />
     <Property Name="CreatedOn" Type="timestamp" Nullable="false" />
+    <Property Name="ExportGuid" Type="uuid" Nullable="false" />
     <Property Name="Kundenname" Type="varchar" MaxLength="200" Nullable="false" />
     <Property Name="Land" Type="varchar" MaxLength="50" Nullable="true" />
     <Property Name="Ort" Type="varchar" MaxLength="100" Nullable="true" />
@@ -2242,6 +2244,7 @@
     <Property Name="fk_CreatedBy" Type="int4" />
     <Property Name="ChangedOn" Type="timestamp" Nullable="false" />
     <Property Name="CreatedOn" Type="timestamp" Nullable="false" />
+    <Property Name="ExportGuid" Type="uuid" Nullable="false" />
     <Property Name="Geburtstag" Type="timestamp" Nullable="true" />
     <Property Name="Name" Type="varchar" MaxLength="100" Nullable="true" />
     <Property Name="SVNr" Type="varchar" MaxLength="20" Nullable="true" />
@@ -2438,6 +2441,7 @@
     <Property Name="AufwandGes" Type="float8" Nullable="true" />
     <Property Name="ChangedOn" Type="timestamp" Nullable="false" />
     <Property Name="CreatedOn" Type="timestamp" Nullable="false" />
+    <Property Name="ExportGuid" Type="uuid" Nullable="false" />
     <Property Name="Kundenname" Type="varchar" MaxLength="100" Nullable="true" />
     <Property Name="Name" Type="varchar" MaxLength="100" Nullable="true" />
   </EntityType>
@@ -2726,6 +2730,7 @@
     <Property Name="CreatedOn" Type="timestamp" Nullable="false" />
     <Property Name="DatumBis" Type="timestamp" Nullable="true" />
     <Property Name="DatumVon" Type="timestamp" Nullable="true" />
+    <Property Name="ExportGuid" Type="uuid" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="100" Nullable="true" />
   </EntityType>
     <EntityType Name="Task_Rights">
@@ -3213,6 +3218,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
+	<Property Name="ExportGuid" Type="uuid" Nullable="false" />
     <Property Name="fk_Projekte" Type="int4" Nullable="true" />
     <Property Name="fk_Projekte_pos" Type="int4" Nullable="true" />
     <Property Name="fk_Mitarbeiter" Type="int4" Nullable="true" />
