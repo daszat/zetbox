@@ -392,5 +392,7 @@ namespace Kistl.API.Mocks
         {
             throw new NotImplementedException();
         }
+
+        public AccessRights GetGroupAccessRights(InterfaceType ifType) { return AccessRights.Full; }
     }
 }

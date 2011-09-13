@@ -48,14 +48,25 @@ namespace Kistl.API
         [XmlIgnore]
         public bool IsReadonly
         {
-            get { return this.Context != null ? this.Context.IsReadonly : false; }
+            get 
+            { 
+                return (CurrentAccessRights == AccessRights.None)
+                    || (this.Context != null ? this.Context.IsReadonly : false); 
+            }
         }
 
         /// <summary>
         /// Reflects the current access rights by the current Identity. 
         /// Base implementations returnes always Full
         /// </summary>
-        public virtual Kistl.API.AccessRights CurrentAccessRights { get { return Kistl.API.AccessRights.Full; } }
+        public virtual Kistl.API.AccessRights CurrentAccessRights 
+        { 
+            get 
+            { 
+                if(Context == null) return Kistl.API.AccessRights.Full;
+                return Context.GetGroupAccessRights(Context.GetInterfaceType(this.GetImplementedInterface()));
+            } 
+        }
 
         /// <summary>
         /// Gets the <see cref="IKistlContext"/> containing this object.

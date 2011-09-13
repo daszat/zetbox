@@ -145,6 +145,8 @@ namespace Kistl.API
         ImplementationType GetImplementationType(Type t);
         ImplementationType ToImplementationType(InterfaceType t);
 
+        Kistl.API.AccessRights GetGroupAccessRights(InterfaceType ifType);
+
         /// <summary>
         /// Fired when the Context is beeing disposed.
         /// </summary>

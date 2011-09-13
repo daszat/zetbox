@@ -49,10 +49,12 @@ this.WriteObjects("        public override Kistl.API.AccessRights CurrentAccessR
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            get\r\n");
 this.WriteObjects("            {\r\n");
-this.WriteObjects("				// TODO: should be Single() instead of First()\r\n");
+this.WriteObjects("				if(Context == null) return Kistl.API.AccessRights.Full;\r\n");
 this.WriteObjects("                if (__currentAccessRights == null)\r\n");
 this.WriteObjects("                {\r\n");
-this.WriteObjects("                    __currentAccessRights = (Kistl.API.AccessRights)SecurityRightsCollectionImpl.First().Right;\r\n");
+this.WriteObjects("					__currentAccessRights = base.CurrentAccessRights;\r\n");
+this.WriteObjects("					var secRight = SecurityRightsCollectionImpl.FirstOrDefault(); // TODO: should be SingleOrDefault() instead of FirstOrDefault()\r\n");
+this.WriteObjects("                    __currentAccessRights |= secRight != null ? (Kistl.API.AccessRights)secRight.Right : Kistl.API.AccessRights.None;\r\n");
 this.WriteObjects("                }\r\n");
 this.WriteObjects("                return __currentAccessRights.Value;\r\n");
 this.WriteObjects("            }\r\n");

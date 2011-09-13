@@ -116,6 +116,13 @@ using Kistl.API.Client.PerfCounter;
         public bool IsReadonly { get { return false; } }
 
         /// <summary>
+        /// Allways full, managed on the server side
+        /// </summary>
+        /// <param name="ifType"></param>
+        /// <returns></returns>
+        public AccessRights GetGroupAccessRights(InterfaceType ifType) { return AccessRights.Full; }
+
+        /// <summary>
         /// Throws an Exception when this Context has been disposed
         /// </summary>
         private void CheckDisposed()

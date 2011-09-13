@@ -628,5 +628,7 @@ namespace Kistl.API
         }
 
         #endregion
+
+        public AccessRights GetGroupAccessRights(InterfaceType ifType) { return AccessRights.Full; }
     }
 }

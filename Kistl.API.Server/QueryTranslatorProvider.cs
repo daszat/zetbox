@@ -351,8 +351,6 @@ namespace Kistl.API.Server
         #region SecurityFilter
         private Expression AddSecurityFilter(Expression e, InterfaceType ifType)
         {
-            // _identity == null - privileged operations
-            // !IsIDataObject - no ACL's defined
             if (Identity == null || !ifType.Type.IsIDataObject()) return e;
 
             // Case #1363: May return NULL during initialization
@@ -362,15 +360,8 @@ namespace Kistl.API.Server
             // Only ACL's on Root classes are allowed
             var rootClass = objClass.GetRootClass();
 
-            // No AccessControlList - no need to filter
-            if (!rootClass.HasAccessControlList()) return e;
-
-            // Identity is a Administrator - is alowed to read everything
-            if (Identity.IsAdmininistrator()) return e;
-
-            if ((rootClass.GetGroupAccessRights(Identity) & Kistl.App.Base.AccessRights.Read) == Kistl.App.Base.AccessRights.Read)
+            if ((Ctx.GetGroupAccessRights(ifType) & Kistl.API.AccessRights.Read) == Kistl.API.AccessRights.Read)
             {
-                // Identity has a group membership - no need to filter
                 return e;
             }
             else if (rootClass.NeedsRightsTable())

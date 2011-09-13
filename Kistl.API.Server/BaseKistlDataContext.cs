@@ -81,6 +81,38 @@ namespace Kistl.API.Server
 
         public bool IsReadonly { get { return false; } }
 
+        public Kistl.API.AccessRights GetGroupAccessRights(InterfaceType ifType)
+        {
+            if (Identity == null || !ifType.Type.IsIDataObject()) return Kistl.API.AccessRights.Full;
+
+            // Case #1363: May return NULL during initialization
+            var objClass = metaDataResolver.GetObjectClass(ifType);
+            if (objClass == null) return Kistl.API.AccessRights.Full;
+
+            // Only ACL's on Root classes are allowed
+            var rootClass = objClass.GetRootClass();
+
+            // No AccessControlList - full rights
+            if (!rootClass.HasAccessControlList()) return Kistl.API.AccessRights.Full;
+
+            // Identity is a Administrator - is alowed to do everything
+            if (Identity.IsAdmininistrator()) return Kistl.API.AccessRights.Full;
+
+            var rights = (Kistl.API.AccessRights)rootClass.GetGroupAccessRights(Identity);
+            if (rights != Kistl.API.AccessRights.None)
+            {
+                return rights;
+            }
+            else if (rootClass.NeedsRightsTable())
+            {
+                // No group rights
+                return Kistl.API.AccessRights.None;
+            }
+
+            // else full
+            return Kistl.API.AccessRights.Full;
+        }
+
         /// <summary>
         /// Attach an IPersistenceObject. The EntityFramework guarantees the all Objects are unique. No check required.
         /// </summary>
