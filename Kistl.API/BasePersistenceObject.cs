@@ -50,7 +50,7 @@ namespace Kistl.API
         {
             get 
             { 
-                return ((CurrentAccessRights & AccessRights.Write) == AccessRights.None)
+                return (CurrentAccessRights <= AccessRights.Read)
                     || (this.Context != null ? this.Context.IsReadonly : false); 
             }
         }

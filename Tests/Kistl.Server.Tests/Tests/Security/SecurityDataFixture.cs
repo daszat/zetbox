@@ -169,12 +169,22 @@ namespace Kistl.Server.Tests.Security
                 if (identity2 != null) { var id = ctx.Find<Identity>(identity2.ID); id.Groups.Clear(); ctx.Delete(id); }
                 if (identity3_low != null) { var id = ctx.Find<Identity>(identity3_low.ID); id.Groups.Clear(); ctx.Delete(id); }
 
+                identity1 = null;
+                identity2= null;
+                identity3_low = null;
+
                 ctx.GetQuery<Kunde>().ForEach(obj => ctx.Delete(obj));
                 ctx.GetQuery<Auftrag>().ForEach(obj => ctx.Delete(obj));
                 ctx.GetQuery<Mitarbeiter>().ForEach(obj => ctx.Delete(obj));
                 ctx.GetQuery<Projekt>().ForEach(obj => { obj.Mitarbeiter.Clear(); ctx.Delete(obj); });
                 ctx.SubmitChanges();
             }
+        }
+
+        public override void TearDown()
+        {
+            DeleteData();
+            base.TearDown();
         }
 
         public override void SetUp()
