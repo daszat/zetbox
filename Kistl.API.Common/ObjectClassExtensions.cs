@@ -120,24 +120,31 @@ namespace Kistl.App.Extensions
             return cls.AccessControlList.OfType<RoleMembership>().Count() > 0;
         }
 
-        public static Kistl.App.Base.AccessRights GetGroupAccessRights(this ObjectClass cls, Identity id)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cls"></param>
+        /// <param name="id"></param>
+        /// <returns>Returns null if not mentioned in any group membership</returns>
+        public static Kistl.API.AccessRights? GetGroupAccessRights(this ObjectClass cls, Identity id)
         {
             if (cls == null) throw new ArgumentNullException("cls");
             if (id == null) throw new ArgumentNullException("id");
             cls = cls.GetRootClass();
             var groups = id.Groups.ToLookup(i => i.ExportGuid);
 
-            var result = Kistl.App.Base.AccessRights.None;
+            Kistl.App.Base.AccessRights? result = null;
 
             foreach (var gm in cls.AccessControlList.OfType<GroupMembership>())
             {
                 if (groups.Contains(gm.Group.ExportGuid))
                 {
-                    result |= (gm.Rights ?? Kistl.App.Base.AccessRights.None);
+                    if (result == null) result = Kistl.App.Base.AccessRights.None;
+                    result = result.Value | (gm.Rights ?? Kistl.App.Base.AccessRights.None);
                 }
             }
 
-            return result;
+            return (Kistl.API.AccessRights?)result;
         }
 
         public static InterfaceType GetDescribedInterfaceType(this ObjectClass cls)

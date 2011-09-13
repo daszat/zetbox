@@ -85,6 +85,9 @@ namespace Kistl.API.Server
         {
             if (Identity == null || !ifType.Type.IsIDataObject()) return Kistl.API.AccessRights.Full;
 
+            // Identity is a Administrator - is allowed to do everything
+            if (Identity.IsAdmininistrator()) return Kistl.API.AccessRights.Full;
+
             // Case #1363: May return NULL during initialization
             var objClass = metaDataResolver.GetObjectClass(ifType);
             if (objClass == null) return Kistl.API.AccessRights.Full;
@@ -95,22 +98,15 @@ namespace Kistl.API.Server
             // No AccessControlList - full rights
             if (!rootClass.HasAccessControlList()) return Kistl.API.AccessRights.Full;
 
-            // Identity is a Administrator - is alowed to do everything
-            if (Identity.IsAdmininistrator()) return Kistl.API.AccessRights.Full;
-
-            var rights = (Kistl.API.AccessRights)rootClass.GetGroupAccessRights(Identity);
-            if (rights != Kistl.API.AccessRights.None)
+            var rights = rootClass.GetGroupAccessRights(Identity);
+            if (rights.HasValue)
             {
-                return rights;
+                return rights.Value;
             }
-            else if (rootClass.NeedsRightsTable())
+            else 
             {
-                // No group rights
-                return Kistl.API.AccessRights.None;
+                return rootClass.NeedsRightsTable() ? Kistl.API.AccessRights.None : Kistl.API.AccessRights.Full;
             }
-
-            // else full
-            return Kistl.API.AccessRights.Full;
         }
 
         /// <summary>
@@ -182,7 +178,7 @@ namespace Kistl.API.Server
                     throw new ApplicationException("Unexpected failure from metadata resolver");
                 }
                 cls = cls.GetRootClass();
-                if (identityStore != null && cls.HasAccessControlList() && (cls.GetGroupAccessRights(identityStore) & AccessRights.Create) != AccessRights.Create)
+                if (identityStore != null && cls.HasAccessControlList() && (cls.GetGroupAccessRights(identityStore) & API.AccessRights.Create) != API.AccessRights.Create)
                 {
                     throw new System.Security.SecurityException(string.Format("The current identity has no rights to create an Object of type '{0}'", ifType.Type.FullName));
                 }
@@ -404,7 +400,7 @@ namespace Kistl.API.Server
                 throw new InvalidOperationException("Creating a Blob is not supported. Use CreateBlob() instead");
 
             ObjectClass cls = metaDataResolver.GetObjectClass(ifType).GetRootClass();
-            if (identityStore != null && cls.HasAccessControlList() && (cls.GetGroupAccessRights(identityStore) & AccessRights.Create) != AccessRights.Create)
+            if (identityStore != null && cls.HasAccessControlList() && ((cls.GetGroupAccessRights(identityStore) ?? API.AccessRights.None) & API.AccessRights.Create) != API.AccessRights.Create)
             {
                 throw new System.Security.SecurityException(string.Format("The current identity has no rights to create an Object of type '{0}'", ifType.Type.FullName));
             }
