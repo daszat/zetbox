@@ -37,8 +37,10 @@ namespace Kistl.Client.Presentables
             IDataObject obj)
             : base(appCtx, dataCtx, parent)
         {
+            if (obj == null) throw new ArgumentNullException("obj");
             _object = obj;
             _object.PropertyChanged += Object_PropertyChanged;
+            isReadOnlyStore = _object.IsReadonly;
         }
 
         #region Property Management
