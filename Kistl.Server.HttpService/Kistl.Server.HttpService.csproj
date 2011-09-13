@@ -66,6 +66,17 @@
     <Reference Include="System.Web.Mobile" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Themes\BasicTheme\dasz_sidebar_blauebox.png" />
+    <Content Include="App_Themes\BasicTheme\dasz_sidebar_blauebox_bottom.png" />
+    <Content Include="App_Themes\BasicTheme\dasz_sidebar_blauebox_top.png" />
+    <Content Include="App_Themes\BasicTheme\dasz_sidebar_ecke_links_oben.png" />
+    <Content Include="App_Themes\BasicTheme\dasz_sidebar_ecke_links_unten.png" />
+    <Content Include="App_Themes\BasicTheme\dasz_sidebar_ecke_rechts_oben.png" />
+    <Content Include="App_Themes\BasicTheme\dasz_sidebar_ecke_rechts_unten.png" />
+    <Content Include="App_Themes\BasicTheme\dasz_sidebar_links_steg_vertikal.png" />
+    <Content Include="App_Themes\BasicTheme\dasz_sidebar_oben_steg_horizontal.png" />
+    <Content Include="App_Themes\BasicTheme\dasz_sidebar_rechts_steg_vertikal.png" />
+    <Content Include="App_Themes\BasicTheme\dasz_sidebar_unten_steg_horizontal.png" />
     <Content Include="App_Themes\BasicTheme\logo.png" />
     <Content Include="App_Themes\BasicTheme\StyleSheet.css" />
     <Content Include="Bootstrapper.svc" />
@@ -209,7 +220,7 @@ bash -c 'cp -r "$(SolutionDir)/bin/$(Configuration)"/{Common,Server,Client,Boots
     <Message Text="Copying to Deployment Dir:" />
     <Copy SourceFiles="@(Content)" DestinationFolder="$(SolutionDir)\bin\$(Configuration).HttpService\%(Content.RelativeDir)" />
     <CreateItem Include="$(OutputPath)\*">
-      <Output TaskParameter="Include" ItemName="WebBinaries"/>
+      <Output TaskParameter="Include" ItemName="WebBinaries" />
     </CreateItem>
     <Copy SourceFiles="@(WebBinaries)" DestinationFolder="$(SolutionDir)\bin\$(Configuration).HttpService\bin" />
   </Target>
