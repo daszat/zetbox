@@ -43,11 +43,6 @@ namespace Kistl.DalProvider.Base
             throw new MemberAccessException(String.Format("No {0} property in {1}", propertyName, GetImplementedInterface().FullName));
         }
 
-        /// <summary>
-        /// Reflects the current access rights by the current Identity. 
-        /// </summary>
-        public AccessRights CurrentAccessRights { get; protected set; }
-
         int System.IComparable.CompareTo(object other)
         {
             if (other == null) return 1;

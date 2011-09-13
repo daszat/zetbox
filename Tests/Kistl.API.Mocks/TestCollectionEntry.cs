@@ -14,6 +14,10 @@ namespace Kistl.API.Mocks
         private int _ID = -1;
         public int ID { get { return _ID; } set { _ID = value; } }
         public bool IsReadonly { get; private set; }
+        /// <summary>
+        /// Reflects the current access rights by the current Identity. 
+        /// </summary>
+        public AccessRights CurrentAccessRights { get { return Kistl.API.AccessRights.Full; } }
 
         public Guid RelationID { get { return Guid.NewGuid(); } }
         public IDataObject AObject { get; set; }

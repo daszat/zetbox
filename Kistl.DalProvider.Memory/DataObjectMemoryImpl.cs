@@ -25,12 +25,6 @@ namespace Kistl.DalProvider.Memory
         /// <inheritdoc />
         public virtual void NotifyDeleting() { }
 
-        /// <inheritdoc />
-        public AccessRights CurrentAccessRights
-        {
-            get;
-            protected set;
-        }
 
         #endregion
 

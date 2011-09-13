@@ -246,12 +246,6 @@ namespace Kistl.API.Server
         /// </summary>
         public virtual void NotifyDeleting() { }
 
-        /// <summary>
-        /// Reflects the current access rights by the current Identity. 
-        /// Base implementations returnes always Full
-        /// </summary>
-        public virtual Kistl.API.AccessRights CurrentAccessRights { get { return Kistl.API.AccessRights.Full; } }
-
         public abstract void UpdateParent(string propertyName, int? id);
 
         int System.IComparable.CompareTo(object other)

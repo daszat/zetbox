@@ -1095,11 +1095,16 @@ namespace Kistl.App.Projekte
         private int _ID;
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty
 
+        private Kistl.API.AccessRights? __currentAccessRights;
         public override Kistl.API.AccessRights CurrentAccessRights
         {
             get
             {
-                return (Kistl.API.AccessRights)SecurityRightsCollectionImpl.First().Right;
+                if (__currentAccessRights == null)
+                {
+                    __currentAccessRights = (Kistl.API.AccessRights)SecurityRightsCollectionImpl.First().Right;
+                }
+                return __currentAccessRights.Value;
             }
         }
 

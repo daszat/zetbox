@@ -197,6 +197,11 @@ namespace Kistl.API
         /// </summary>
         bool IsReadonly { get; }
 
+        /// <summary>
+        /// Reflects the current access rights by the current Identity. 
+        /// </summary>
+        AccessRights CurrentAccessRights { get; }
+
         #region //// INTERNALS /////
         // TODO: move to separate interface
 
@@ -241,11 +246,6 @@ namespace Kistl.API
     /// </summary>
     public interface IDataObject : IPersistenceObject, IDataErrorInfo, IComparable
     {
-        /// <summary>
-        /// Reflects the current access rights by the current Identity. 
-        /// </summary>
-        AccessRights CurrentAccessRights { get; }
-
         #region //// INTERNALS /////
         // TODO: move to separate interface
 
