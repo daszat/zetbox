@@ -65,7 +65,7 @@ namespace Kistl.App.GUI
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+                if (!CurrentAccessRights.HasReadRights()) return null;
                 Kistl.App.GUI.ControlKindMemoryImpl __value;
                 if (_fk_ControlKind.HasValue)
                     __value = (Kistl.App.GUI.ControlKindMemoryImpl)Context.Find<Kistl.App.GUI.ControlKind>(_fk_ControlKind.Value);
@@ -155,7 +155,7 @@ namespace Kistl.App.GUI
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+                if (!CurrentAccessRights.HasReadRights()) return null;
                 Kistl.App.Base.TypeRefMemoryImpl __value;
                 if (_fk_ControlRef.HasValue)
                     __value = (Kistl.App.Base.TypeRefMemoryImpl)Context.Find<Kistl.App.Base.TypeRef>(_fk_ControlRef.Value);
@@ -223,7 +223,7 @@ namespace Kistl.App.GUI
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(Guid);
+                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
@@ -309,7 +309,7 @@ namespace Kistl.App.GUI
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+                if (!CurrentAccessRights.HasReadRights()) return null;
                 Kistl.App.Base.ModuleMemoryImpl __value;
                 if (_fk_Module.HasValue)
                     __value = (Kistl.App.Base.ModuleMemoryImpl)Context.Find<Kistl.App.Base.Module>(_fk_Module.Value);
@@ -402,7 +402,7 @@ namespace Kistl.App.GUI
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(Kistl.App.GUI.Toolkit);
+                if (!CurrentAccessRights.HasReadRights()) return default(Kistl.App.GUI.Toolkit);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Toolkit;
@@ -660,7 +660,7 @@ namespace Kistl.App.GUI
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             BinarySerializer.ToStream(ControlKind != null ? ControlKind.ID : (int?)null, binStream);
             BinarySerializer.ToStream(ControlRef != null ? ControlRef.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._isExportGuidSet, binStream);
@@ -710,7 +710,7 @@ namespace Kistl.App.GUI
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.ToStream(ControlKind != null ? ControlKind.ID : (int?)null, xml, "ControlKind", "Kistl.App.GUI");
             XmlStreamer.ToStream(ControlRef != null ? ControlRef.ID : (int?)null, xml, "ControlRef", "Kistl.App.GUI");
             XmlStreamer.ToStream(this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.GUI");
@@ -745,7 +745,7 @@ namespace Kistl.App.GUI
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
         {
             xml.WriteAttributeString("ExportGuid", this._ExportGuid.ToString());
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(ControlKind != null ? ControlKind.ExportGuid : (Guid?)null, xml, "ControlKind", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(ControlRef != null ? ControlRef.ExportGuid : (Guid?)null, xml, "ControlRef", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Kistl.App.GUI");
@@ -754,7 +754,7 @@ namespace Kistl.App.GUI
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.FromStream(ref this._fk_guid_ControlKind, xml, "ControlKind", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_guid_ControlRef, xml, "ControlRef", "Kistl.App.GUI");
             // Import must have default value set

@@ -34,7 +34,7 @@
         {
             get 
 			{ 
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+                if (!CurrentAccessRights.HasReadRights()) return null;
 				return <%= backingStoreName %>; 
 			}
             set

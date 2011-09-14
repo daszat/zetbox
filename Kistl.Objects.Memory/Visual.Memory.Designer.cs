@@ -89,7 +89,7 @@ namespace Kistl.App.GUI
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
+                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Description;
@@ -161,7 +161,7 @@ namespace Kistl.App.GUI
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+                if (!CurrentAccessRights.HasReadRights()) return null;
                 Kistl.App.Base.MethodMemoryImpl __value;
                 if (_fk_Method.HasValue)
                     __value = (Kistl.App.Base.MethodMemoryImpl)Context.Find<Kistl.App.Base.Method>(_fk_Method.Value);
@@ -250,7 +250,7 @@ namespace Kistl.App.GUI
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+                if (!CurrentAccessRights.HasReadRights()) return null;
                 Kistl.App.Base.PropertyMemoryImpl __value;
                 if (_fk_Property.HasValue)
                     __value = (Kistl.App.Base.PropertyMemoryImpl)Context.Find<Kistl.App.Base.Property>(_fk_Property.Value);
@@ -495,7 +495,7 @@ namespace Kistl.App.GUI
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             BinarySerializer.ToStream(this._Description, binStream);
             BinarySerializer.ToStream(Method != null ? Method.ID : (int?)null, binStream);
             BinarySerializer.ToStream(Property != null ? Property.ID : (int?)null, binStream);
@@ -520,7 +520,7 @@ namespace Kistl.App.GUI
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.GUI");
             XmlStreamer.ToStream(Method != null ? Method.ID : (int?)null, xml, "Method", "Kistl.App.GUI");
             XmlStreamer.ToStream(Property != null ? Property.ID : (int?)null, xml, "Property", "Kistl.App.GUI");

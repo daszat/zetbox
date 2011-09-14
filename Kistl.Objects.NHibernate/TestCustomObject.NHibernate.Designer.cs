@@ -72,7 +72,7 @@ namespace Kistl.App.Test
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(DateTime?);
+                if (!CurrentAccessRights.HasReadRights()) return default(DateTime?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.Birthday;
@@ -161,7 +161,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+                if (!CurrentAccessRights.HasReadRights()) return null;
                 Kistl.App.Test.MuhblahNHibernateImpl __value = (Kistl.App.Test.MuhblahNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.MubBlah_Nav);
 
                 if (OnMubBlah_Nav_Getter != null)
@@ -298,7 +298,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+                if (!CurrentAccessRights.HasReadRights()) return null;
                 Kistl.App.Test.MuhblahNHibernateImpl __value = (Kistl.App.Test.MuhblahNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.MuhBlah_One_Nav);
 
                 if (OnMuhBlah_One_Nav_Getter != null)
@@ -393,7 +393,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
+                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.PersonName;
@@ -451,7 +451,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
         {
             get 
 			{ 
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+                if (!CurrentAccessRights.HasReadRights()) return null;
 				return this.Proxy.PhoneNumberMobile; 
 			}
             set
@@ -502,7 +502,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
         {
             get 
 			{ 
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+                if (!CurrentAccessRights.HasReadRights()) return null;
 				return this.Proxy.PhoneNumberOffice; 
 			}
             set
@@ -882,7 +882,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             BinarySerializer.ToStream(this.Proxy.Birthday, binStream);
             BinarySerializer.ToStream(this.Proxy.MubBlah_Nav != null ? this.Proxy.MubBlah_Nav.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this.Proxy.MuhBlah_One_Nav != null ? this.Proxy.MuhBlah_One_Nav.ID : (int?)null, binStream);
@@ -937,7 +937,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.ToStream(this.Proxy.Birthday, xml, "Birthday", "Kistl.App.Test");
             XmlStreamer.ToStream(this.Proxy.MubBlah_Nav != null ? this.Proxy.MubBlah_Nav.ID : (int?)null, xml, "MubBlah_Nav", "Kistl.App.Test");
             XmlStreamer.ToStream(this.Proxy.MuhBlah_One_Nav != null ? this.Proxy.MuhBlah_One_Nav.ID : (int?)null, xml, "MuhBlah_One_Nav", "Kistl.App.Test");

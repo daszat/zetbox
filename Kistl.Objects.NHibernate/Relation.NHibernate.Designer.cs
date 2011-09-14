@@ -63,7 +63,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+                if (!CurrentAccessRights.HasReadRights()) return null;
                 Kistl.App.Base.RelationEndNHibernateImpl __value = (Kistl.App.Base.RelationEndNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
                 if (OnA_Getter != null)
@@ -166,7 +166,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+                if (!CurrentAccessRights.HasReadRights()) return null;
                 Kistl.App.Base.RelationEndNHibernateImpl __value = (Kistl.App.Base.RelationEndNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
 
                 if (OnB_Getter != null)
@@ -269,7 +269,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+                if (!CurrentAccessRights.HasReadRights()) return null;
                 Kistl.App.Base.IdentityNHibernateImpl __value = (Kistl.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ChangedBy);
 
                 if (OnChangedBy_Getter != null)
@@ -348,7 +348,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(DateTime);
+                if (!CurrentAccessRights.HasReadRights()) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = FetchChangedOnOrDefault();
@@ -418,7 +418,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(Kistl.App.Base.ContainmentSpecification);
+                if (!CurrentAccessRights.HasReadRights()) return default(Kistl.App.Base.ContainmentSpecification);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.Containment;
@@ -474,7 +474,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+                if (!CurrentAccessRights.HasReadRights()) return null;
                 Kistl.App.Base.IdentityNHibernateImpl __value = (Kistl.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.CreatedBy);
 
                 if (OnCreatedBy_Getter != null)
@@ -553,7 +553,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(DateTime);
+                if (!CurrentAccessRights.HasReadRights()) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = FetchCreatedOnOrDefault();
@@ -623,7 +623,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
+                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.Description;
@@ -673,7 +673,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(Guid);
+                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = FetchExportGuidOrDefault();
@@ -749,7 +749,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+                if (!CurrentAccessRights.HasReadRights()) return null;
                 Kistl.App.Base.ModuleNHibernateImpl __value = (Kistl.App.Base.ModuleNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Module);
 
                 if (OnModule_Getter != null)
@@ -830,7 +830,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(Kistl.App.Base.StorageType);
+                if (!CurrentAccessRights.HasReadRights()) return default(Kistl.App.Base.StorageType);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.Storage;
@@ -880,7 +880,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
+                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.Verb;
@@ -1460,7 +1460,7 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             BinarySerializer.ToStream(this.Proxy.A != null ? this.Proxy.A.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this.Proxy.B != null ? this.Proxy.B.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this.Proxy.ChangedBy != null ? this.Proxy.ChangedBy.ID : (int?)null, binStream);
@@ -1543,7 +1543,7 @@ namespace Kistl.App.Base
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.ToStream(this.Proxy.A != null ? this.Proxy.A.ID : (int?)null, xml, "A", "Kistl.App.Base");
             XmlStreamer.ToStream(this.Proxy.B != null ? this.Proxy.B.ID : (int?)null, xml, "B", "Kistl.App.Base");
             XmlStreamer.ToStream(this.Proxy.ChangedBy != null ? this.Proxy.ChangedBy.ID : (int?)null, xml, "ChangedBy", "Kistl.App.Base");
@@ -1623,7 +1623,7 @@ namespace Kistl.App.Base
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
         {
             xml.WriteAttributeString("ExportGuid", this.Proxy.ExportGuid.ToString());
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.A != null ? this.Proxy.A.ExportGuid : (Guid?)null, xml, "A", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.B != null ? this.Proxy.B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.Base");
             System.Diagnostics.Debug.Assert(this._isChangedOnSet, "Exported objects need to have all default values evaluated");
@@ -1639,7 +1639,7 @@ namespace Kistl.App.Base
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.Base");
             // Import must have default value set

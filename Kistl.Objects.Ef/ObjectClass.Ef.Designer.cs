@@ -128,7 +128,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnAcc
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+                if (!CurrentAccessRights.HasReadRights()) return null;
                 Kistl.App.Base.ObjectClassEfImpl __value;
                 EntityReference<Kistl.App.Base.ObjectClassEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClassEfImpl>(
@@ -244,7 +244,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnAcc
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+                if (!CurrentAccessRights.HasReadRights()) return null;
                 Kistl.App.GUI.ViewModelDescriptorEfImpl __value;
                 EntityReference<Kistl.App.GUI.ViewModelDescriptorEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.ViewModelDescriptorEfImpl>(
@@ -427,7 +427,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnFil
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(bool);
+                if (!CurrentAccessRights.HasReadRights()) return default(bool);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _IsAbstract;
@@ -481,7 +481,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnFil
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(bool);
+                if (!CurrentAccessRights.HasReadRights()) return default(bool);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _IsFrozenObject;
@@ -535,7 +535,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnFil
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(bool);
+                if (!CurrentAccessRights.HasReadRights()) return default(bool);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _IsSimpleObject;
@@ -644,7 +644,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
+                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _TableName;
@@ -1071,7 +1071,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClassEfImpl>("Model.FK_BaseObjectClass_has_SubClasses", "BaseObjectClass").EntityKey;
                 BinarySerializer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, binStream);
@@ -1108,7 +1108,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClassEfImpl>("Model.FK_BaseObjectClass_has_SubClasses", "BaseObjectClass").EntityKey;
                 XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "BaseObjectClass", "Kistl.App.Base");
@@ -1145,7 +1145,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
         public override void Export(System.Xml.XmlWriter xml, string[] modules)
         {
             base.Export(xml, modules);
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(BaseObjectClass != null ? BaseObjectClass.ExportGuid : (Guid?)null, xml, "BaseObjectClass", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(DefaultViewModelDescriptor != null ? DefaultViewModelDescriptor.ExportGuid : (Guid?)null, xml, "DefaultViewModelDescriptor", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._IsAbstract, xml, "IsAbstract", "Kistl.App.Base");
@@ -1157,7 +1157,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
         public override void MergeImport(System.Xml.XmlReader xml)
         {
             base.MergeImport(xml);
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.FromStream(ref this._fk_guid_BaseObjectClass, xml, "BaseObjectClass", "Kistl.App.Base");
             XmlStreamer.FromStream(ref this._fk_guid_DefaultViewModelDescriptor, xml, "DefaultViewModelDescriptor", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._IsAbstract, xml, "IsAbstract", "Kistl.App.Base");

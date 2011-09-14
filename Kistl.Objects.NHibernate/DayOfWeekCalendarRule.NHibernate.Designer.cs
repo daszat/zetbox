@@ -54,7 +54,7 @@ namespace Kistl.App.Calendar
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(Kistl.App.Base.DayOfWeek);
+                if (!CurrentAccessRights.HasReadRights()) return default(Kistl.App.Base.DayOfWeek);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.DayOfWeek;
@@ -265,7 +265,7 @@ namespace Kistl.App.Calendar
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             BinarySerializer.ToStream((int?)Proxy.DayOfWeek, binStream);
         }
 
@@ -290,7 +290,7 @@ namespace Kistl.App.Calendar
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.ToStream((int?)Proxy.DayOfWeek, xml, "DayOfWeek", "Kistl.App.Calendar");
         }
 
@@ -311,14 +311,14 @@ namespace Kistl.App.Calendar
         public override void Export(System.Xml.XmlWriter xml, string[] modules)
         {
             base.Export(xml, modules);
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             if (modules.Contains("*") || modules.Contains("Kistl.App.Calendar")) XmlStreamer.ToStream((int?)Proxy.DayOfWeek, xml, "DayOfWeek", "Kistl.App.Calendar");
         }
 
         public override void MergeImport(System.Xml.XmlReader xml)
         {
             base.MergeImport(xml);
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.FromStreamConverter(v => Proxy.DayOfWeek = (Kistl.App.Base.DayOfWeek)v, xml, "DayOfWeek", "Kistl.App.Calendar");
         }
 

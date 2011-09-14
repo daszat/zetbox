@@ -100,7 +100,7 @@ this.WriteObjects("        public ",  referencedImplementation , " ",  implName 
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            get\r\n");
 this.WriteObjects("            {\r\n");
-this.WriteObjects("                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;\r\n");
+this.WriteObjects("                if (!CurrentAccessRights.HasReadRights()) return null;\r\n");
 this.WriteObjects("                ",  referencedImplementation , " __value;\r\n");
 this.WriteObjects("                EntityReference<",  referencedImplementation , "> r\r\n");
 this.WriteObjects("                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<",  referencedImplementation , ">(\r\n");

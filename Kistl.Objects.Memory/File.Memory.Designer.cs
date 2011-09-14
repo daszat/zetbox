@@ -65,7 +65,7 @@ namespace at.dasz.DocumentManagement
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+                if (!CurrentAccessRights.HasReadRights()) return null;
                 Kistl.App.Base.BlobMemoryImpl __value;
                 if (_fk_Blob.HasValue)
                     __value = (Kistl.App.Base.BlobMemoryImpl)Context.Find<Kistl.App.Base.Blob>(_fk_Blob.Value);
@@ -154,7 +154,7 @@ namespace at.dasz.DocumentManagement
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+                if (!CurrentAccessRights.HasReadRights()) return null;
                 Kistl.App.Base.IdentityMemoryImpl __value;
                 if (_fk_ChangedBy.HasValue)
                     __value = (Kistl.App.Base.IdentityMemoryImpl)Context.Find<Kistl.App.Base.Identity>(_fk_ChangedBy.Value);
@@ -222,7 +222,7 @@ namespace at.dasz.DocumentManagement
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(DateTime);
+                if (!CurrentAccessRights.HasReadRights()) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ChangedOn;
@@ -307,7 +307,7 @@ namespace at.dasz.DocumentManagement
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+                if (!CurrentAccessRights.HasReadRights()) return null;
                 Kistl.App.Base.IdentityMemoryImpl __value;
                 if (_fk_CreatedBy.HasValue)
                     __value = (Kistl.App.Base.IdentityMemoryImpl)Context.Find<Kistl.App.Base.Identity>(_fk_CreatedBy.Value);
@@ -375,7 +375,7 @@ namespace at.dasz.DocumentManagement
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(DateTime);
+                if (!CurrentAccessRights.HasReadRights()) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _CreatedOn;
@@ -439,7 +439,7 @@ namespace at.dasz.DocumentManagement
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(Guid);
+                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
@@ -503,7 +503,7 @@ namespace at.dasz.DocumentManagement
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
+                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Name;
@@ -829,7 +829,7 @@ namespace at.dasz.DocumentManagement
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             BinarySerializer.ToStream(Blob != null ? Blob.ID : (int?)null, binStream);
             BinarySerializer.ToStream(ChangedBy != null ? ChangedBy.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._isChangedOnSet, binStream);
@@ -880,7 +880,7 @@ namespace at.dasz.DocumentManagement
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.ToStream(Blob != null ? Blob.ID : (int?)null, xml, "Blob", "at.dasz.DocumentManagement");
             XmlStreamer.ToStream(ChangedBy != null ? ChangedBy.ID : (int?)null, xml, "ChangedBy", "at.dasz.DocumentManagement");
             XmlStreamer.ToStream(this._isChangedOnSet, xml, "IsChangedOnSet", "at.dasz.DocumentManagement");
@@ -931,7 +931,7 @@ namespace at.dasz.DocumentManagement
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
         {
             xml.WriteAttributeString("ExportGuid", this._ExportGuid.ToString());
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(Blob != null ? Blob.ExportGuid : (Guid?)null, xml, "Blob", "at.dasz.DocumentManagement");
             System.Diagnostics.Debug.Assert(this._isChangedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "at.dasz.DocumentManagement");
@@ -942,7 +942,7 @@ namespace at.dasz.DocumentManagement
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.FromStream(ref this._fk_guid_Blob, xml, "Blob", "at.dasz.DocumentManagement");
             // Import must have default value set
             XmlStreamer.FromStream(ref this._ChangedOn, xml, "ChangedOn", "at.dasz.DocumentManagement");

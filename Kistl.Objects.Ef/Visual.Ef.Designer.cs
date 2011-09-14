@@ -145,7 +145,7 @@ namespace Kistl.App.GUI
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
+                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Description;
@@ -222,7 +222,7 @@ namespace Kistl.App.GUI
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+                if (!CurrentAccessRights.HasReadRights()) return null;
                 Kistl.App.Base.MethodEfImpl __value;
                 EntityReference<Kistl.App.Base.MethodEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.MethodEfImpl>(
@@ -325,7 +325,7 @@ namespace Kistl.App.GUI
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+                if (!CurrentAccessRights.HasReadRights()) return null;
                 Kistl.App.Base.PropertyEfImpl __value;
                 EntityReference<Kistl.App.Base.PropertyEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.PropertyEfImpl>(
@@ -578,7 +578,7 @@ namespace Kistl.App.GUI
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(int);
+                if (!CurrentAccessRights.HasReadRights()) return default(int);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ID;
@@ -606,7 +606,7 @@ namespace Kistl.App.GUI
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             BinarySerializer.ToStream(this._Description, binStream);
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.MethodEfImpl>("Model.FK_Visual_has_Method", "Method").EntityKey;
@@ -637,7 +637,7 @@ namespace Kistl.App.GUI
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.ToStream(this._Description, xml, "Description", "Kistl.App.GUI");
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.MethodEfImpl>("Model.FK_Visual_has_Method", "Method").EntityKey;

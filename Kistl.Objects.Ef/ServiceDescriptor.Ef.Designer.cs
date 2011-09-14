@@ -72,7 +72,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+                if (!CurrentAccessRights.HasReadRights()) return null;
                 Kistl.App.Base.IdentityEfImpl __value;
                 EntityReference<Kistl.App.Base.IdentityEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.IdentityEfImpl>(
@@ -152,7 +152,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(DateTime);
+                if (!CurrentAccessRights.HasReadRights()) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ChangedOn;
@@ -242,7 +242,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+                if (!CurrentAccessRights.HasReadRights()) return null;
                 Kistl.App.Base.IdentityEfImpl __value;
                 EntityReference<Kistl.App.Base.IdentityEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.IdentityEfImpl>(
@@ -322,7 +322,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(DateTime);
+                if (!CurrentAccessRights.HasReadRights()) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _CreatedOn;
@@ -387,7 +387,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(Kistl.App.Base.DeploymentRestriction?);
+                if (!CurrentAccessRights.HasReadRights()) return default(Kistl.App.Base.DeploymentRestriction?);
 				var __value = _DeploymentRestriction;
 				if(OnDeploymentRestriction_Getter != null)
 				{
@@ -458,7 +458,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
+                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Description;
@@ -512,7 +512,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(Guid);
+                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ExportGuid;
@@ -603,7 +603,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+                if (!CurrentAccessRights.HasReadRights()) return null;
                 Kistl.App.Base.ModuleEfImpl __value;
                 EntityReference<Kistl.App.Base.ModuleEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ModuleEfImpl>(
@@ -707,7 +707,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+                if (!CurrentAccessRights.HasReadRights()) return null;
                 Kistl.App.Base.TypeRefEfImpl __value;
                 EntityReference<Kistl.App.Base.TypeRefEfImpl> r
                     = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.TypeRefEfImpl>(
@@ -1026,7 +1026,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(int);
+                if (!CurrentAccessRights.HasReadRights()) return default(int);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ID;
@@ -1054,7 +1054,7 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.IdentityEfImpl>("Model.FK_ServiceDescriptor_was_ChangedBy", "ChangedBy").EntityKey;
                 BinarySerializer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, binStream);
@@ -1125,7 +1125,7 @@ namespace Kistl.App.Base
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.IdentityEfImpl>("Model.FK_ServiceDescriptor_was_ChangedBy", "ChangedBy").EntityKey;
                 XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "ChangedBy", "Kistl.App.Base");
@@ -1192,7 +1192,7 @@ namespace Kistl.App.Base
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
         {
             xml.WriteAttributeString("ExportGuid", this._ExportGuid.ToString());
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             System.Diagnostics.Debug.Assert(this._isChangedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "Kistl.App.Base");
             System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");
@@ -1205,7 +1205,7 @@ namespace Kistl.App.Base
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             // Import must have default value set
             XmlStreamer.FromStream(ref this._ChangedOn, xml, "ChangedOn", "Kistl.App.Base");
             this._isChangedOnSet = true;

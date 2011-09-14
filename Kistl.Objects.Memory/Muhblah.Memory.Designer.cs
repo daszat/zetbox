@@ -43,7 +43,7 @@ namespace Kistl.App.Test
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(bool?);
+                if (!CurrentAccessRights.HasReadRights()) return default(bool?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _TestBool;
@@ -177,7 +177,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+                if (!CurrentAccessRights.HasReadRights()) return null;
                 Kistl.App.Test.TestCustomObjectMemoryImpl __value;
                 if (_fk_TestCustomObjects_Nav.HasValue)
                     __value = (Kistl.App.Test.TestCustomObjectMemoryImpl)Context.Find<Kistl.App.Test.TestCustomObject>(_fk_TestCustomObjects_Nav.Value);
@@ -282,7 +282,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+                if (!CurrentAccessRights.HasReadRights()) return null;
                 Kistl.App.Test.TestCustomObjectMemoryImpl __value;
                 if (_fk_TestCustomObjects_One_Nav.HasValue)
                     __value = (Kistl.App.Test.TestCustomObjectMemoryImpl)Context.Find<Kistl.App.Test.TestCustomObject>(_fk_TestCustomObjects_One_Nav.Value);
@@ -366,7 +366,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(DateTime?);
+                if (!CurrentAccessRights.HasReadRights()) return default(DateTime?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _TestDateTime;
@@ -417,7 +417,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(Kistl.App.Test.TestEnum);
+                if (!CurrentAccessRights.HasReadRights()) return default(Kistl.App.Test.TestEnum);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _TestEnum;
@@ -468,7 +468,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
+                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _TestString;
@@ -723,7 +723,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             BinarySerializer.ToStream(this._TestBool, binStream);
             BinarySerializer.ToStream(TestCustomObjects_Nav != null ? TestCustomObjects_Nav.ID : (int?)null, binStream);
             BinarySerializer.ToStream(TestCustomObjects_One_Nav != null ? TestCustomObjects_One_Nav.ID : (int?)null, binStream);
@@ -758,7 +758,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.ToStream(this._TestBool, xml, "TestBool", "Kistl.App.Test");
             XmlStreamer.ToStream(TestCustomObjects_Nav != null ? TestCustomObjects_Nav.ID : (int?)null, xml, "TestCustomObjects_Nav", "Kistl.App.Test");
             XmlStreamer.ToStream(TestCustomObjects_One_Nav != null ? TestCustomObjects_One_Nav.ID : (int?)null, xml, "TestCustomObjects_One_Nav", "Kistl.App.Test");

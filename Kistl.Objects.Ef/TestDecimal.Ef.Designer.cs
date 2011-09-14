@@ -49,7 +49,7 @@ namespace Kistl.App.Test
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(decimal?);
+                if (!CurrentAccessRights.HasReadRights()) return default(decimal?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Large;
@@ -103,7 +103,7 @@ namespace Kistl.App.Test
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(decimal?);
+                if (!CurrentAccessRights.HasReadRights()) return default(decimal?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _NoScale;
@@ -157,7 +157,7 @@ namespace Kistl.App.Test
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(decimal?);
+                if (!CurrentAccessRights.HasReadRights()) return default(decimal?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _SmallDecimal;
@@ -335,7 +335,7 @@ namespace Kistl.App.Test
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(int);
+                if (!CurrentAccessRights.HasReadRights()) return default(int);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ID;
@@ -363,7 +363,7 @@ namespace Kistl.App.Test
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             BinarySerializer.ToStream(this._Large, binStream);
             BinarySerializer.ToStream(this._NoScale, binStream);
             BinarySerializer.ToStream(this._SmallDecimal, binStream);
@@ -388,7 +388,7 @@ namespace Kistl.App.Test
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.ToStream(this._Large, xml, "Large", "Kistl.App.Test");
             XmlStreamer.ToStream(this._NoScale, xml, "NoScale", "Kistl.App.Test");
             XmlStreamer.ToStream(this._SmallDecimal, xml, "SmallDecimal", "Kistl.App.Test");

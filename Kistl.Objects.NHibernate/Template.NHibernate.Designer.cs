@@ -60,7 +60,7 @@ namespace Kistl.App.GUI
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+                if (!CurrentAccessRights.HasReadRights()) return null;
                 Kistl.App.Base.AssemblyNHibernateImpl __value = (Kistl.App.Base.AssemblyNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.DisplayedTypeAssembly);
 
                 if (OnDisplayedTypeAssembly_Getter != null)
@@ -139,7 +139,7 @@ namespace Kistl.App.GUI
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
+                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.DisplayedTypeFullName;
@@ -189,7 +189,7 @@ namespace Kistl.App.GUI
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
+                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.DisplayName;
@@ -274,7 +274,7 @@ namespace Kistl.App.GUI
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+                if (!CurrentAccessRights.HasReadRights()) return null;
                 Kistl.App.GUI.VisualNHibernateImpl __value = (Kistl.App.GUI.VisualNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.VisualTree);
 
                 if (OnVisualTree_Getter != null)
@@ -606,7 +606,7 @@ namespace Kistl.App.GUI
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             BinarySerializer.ToStream(this.Proxy.DisplayedTypeAssembly != null ? this.Proxy.DisplayedTypeAssembly.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this.Proxy.DisplayedTypeFullName, binStream);
             BinarySerializer.ToStream(this.Proxy.DisplayName, binStream);
@@ -641,7 +641,7 @@ namespace Kistl.App.GUI
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.ToStream(this.Proxy.DisplayedTypeAssembly != null ? this.Proxy.DisplayedTypeAssembly.ID : (int?)null, xml, "DisplayedTypeAssembly", "Kistl.App.GUI");
             XmlStreamer.ToStream(this.Proxy.DisplayedTypeFullName, xml, "DisplayedTypeFullName", "Kistl.App.GUI");
             XmlStreamer.ToStream(this.Proxy.DisplayName, xml, "DisplayName", "Kistl.App.GUI");

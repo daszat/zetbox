@@ -47,7 +47,7 @@ namespace Kistl.App.Test
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(DateTime?);
+                if (!CurrentAccessRights.HasReadRights()) return default(DateTime?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Birthday;
@@ -158,7 +158,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+                if (!CurrentAccessRights.HasReadRights()) return null;
                 Kistl.App.Test.MuhblahMemoryImpl __value;
                 if (_fk_MubBlah_Nav.HasValue)
                     __value = (Kistl.App.Test.MuhblahMemoryImpl)Context.Find<Kistl.App.Test.Muhblah>(_fk_MubBlah_Nav.Value);
@@ -286,7 +286,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+                if (!CurrentAccessRights.HasReadRights()) return null;
                 Kistl.App.Test.MuhblahMemoryImpl __value;
                 if (_fk_MuhBlah_One_Nav.HasValue)
                     __value = (Kistl.App.Test.MuhblahMemoryImpl)Context.Find<Kistl.App.Test.Muhblah>(_fk_MuhBlah_One_Nav.Value);
@@ -370,7 +370,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
+                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _PersonName;
@@ -434,7 +434,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
         {
             get 
 			{ 
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+                if (!CurrentAccessRights.HasReadRights()) return null;
 				return _PhoneNumberMobile; 
 			}
             set
@@ -489,7 +489,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
         {
             get 
 			{ 
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+                if (!CurrentAccessRights.HasReadRights()) return null;
 				return _PhoneNumberOffice; 
 			}
             set
@@ -780,7 +780,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             BinarySerializer.ToStream(this._Birthday, binStream);
             BinarySerializer.ToStream(MubBlah_Nav != null ? MubBlah_Nav.ID : (int?)null, binStream);
             BinarySerializer.ToStream(MuhBlah_One_Nav != null ? MuhBlah_One_Nav.ID : (int?)null, binStream);
@@ -827,7 +827,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.ToStream(this._Birthday, xml, "Birthday", "Kistl.App.Test");
             XmlStreamer.ToStream(MubBlah_Nav != null ? MubBlah_Nav.ID : (int?)null, xml, "MubBlah_Nav", "Kistl.App.Test");
             XmlStreamer.ToStream(MuhBlah_One_Nav != null ? MuhBlah_One_Nav.ID : (int?)null, xml, "MuhBlah_One_Nav", "Kistl.App.Test");

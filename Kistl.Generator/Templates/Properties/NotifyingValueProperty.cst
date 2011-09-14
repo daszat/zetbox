@@ -26,7 +26,7 @@
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(<%= type %>);
+                if (!CurrentAccessRights.HasReadRights()) return default(<%= type %>);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = <%= backingName %>;

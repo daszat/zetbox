@@ -61,7 +61,7 @@ namespace Kistl.App.GUI
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+                if (!CurrentAccessRights.HasReadRights()) return null;
                 Kistl.App.GUI.ControlKindNHibernateImpl __value = (Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.DefaultDisplayKind);
 
                 if (OnDefaultDisplayKind_Getter != null)
@@ -148,7 +148,7 @@ namespace Kistl.App.GUI
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+                if (!CurrentAccessRights.HasReadRights()) return null;
                 Kistl.App.GUI.ControlKindNHibernateImpl __value = (Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.DefaultEditorKind);
 
                 if (OnDefaultEditorKind_Getter != null)
@@ -235,7 +235,7 @@ namespace Kistl.App.GUI
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+                if (!CurrentAccessRights.HasReadRights()) return null;
                 Kistl.App.GUI.ControlKindNHibernateImpl __value = (Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.DefaultGridCellDisplayKind);
 
                 if (OnDefaultGridCellDisplayKind_Getter != null)
@@ -322,7 +322,7 @@ namespace Kistl.App.GUI
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+                if (!CurrentAccessRights.HasReadRights()) return null;
                 Kistl.App.GUI.ControlKindNHibernateImpl __value = (Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.DefaultGridCellEditorKind);
 
                 if (OnDefaultGridCellEditorKind_Getter != null)
@@ -409,7 +409,7 @@ namespace Kistl.App.GUI
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+                if (!CurrentAccessRights.HasReadRights()) return null;
                 Kistl.App.GUI.ControlKindNHibernateImpl __value = (Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.DefaultGridCellPreEditorKind);
 
                 if (OnDefaultGridCellPreEditorKind_Getter != null)
@@ -490,7 +490,7 @@ namespace Kistl.App.GUI
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
+                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.Description;
@@ -540,7 +540,7 @@ namespace Kistl.App.GUI
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(Guid);
+                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = FetchExportGuidOrDefault();
@@ -616,7 +616,7 @@ namespace Kistl.App.GUI
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+                if (!CurrentAccessRights.HasReadRights()) return null;
                 Kistl.App.Base.ModuleNHibernateImpl __value = (Kistl.App.Base.ModuleNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Module);
 
                 if (OnModule_Getter != null)
@@ -732,7 +732,7 @@ namespace Kistl.App.GUI
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+                if (!CurrentAccessRights.HasReadRights()) return null;
                 Kistl.App.Base.TypeRefNHibernateImpl __value = (Kistl.App.Base.TypeRefNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ViewModelRef);
 
                 if (OnViewModelRef_Getter != null)
@@ -1254,7 +1254,7 @@ namespace Kistl.App.GUI
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             BinarySerializer.ToStream(this.Proxy.DefaultDisplayKind != null ? this.Proxy.DefaultDisplayKind.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this.Proxy.DefaultEditorKind != null ? this.Proxy.DefaultEditorKind.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this.Proxy.DefaultGridCellDisplayKind != null ? this.Proxy.DefaultGridCellDisplayKind.ID : (int?)null, binStream);
@@ -1303,7 +1303,7 @@ namespace Kistl.App.GUI
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.ToStream(this.Proxy.DefaultDisplayKind != null ? this.Proxy.DefaultDisplayKind.ID : (int?)null, xml, "DefaultDisplayKind", "Kistl.App.GUI");
             XmlStreamer.ToStream(this.Proxy.DefaultEditorKind != null ? this.Proxy.DefaultEditorKind.ID : (int?)null, xml, "DefaultEditorKind", "Kistl.App.GUI");
             XmlStreamer.ToStream(this.Proxy.DefaultGridCellDisplayKind != null ? this.Proxy.DefaultGridCellDisplayKind.ID : (int?)null, xml, "DefaultGridCellDisplayKind", "Kistl.App.GUI");
@@ -1354,7 +1354,7 @@ namespace Kistl.App.GUI
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
         {
             xml.WriteAttributeString("ExportGuid", this.Proxy.ExportGuid.ToString());
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.DefaultDisplayKind != null ? this.Proxy.DefaultDisplayKind.ExportGuid : (Guid?)null, xml, "DefaultDisplayKind", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.DefaultEditorKind != null ? this.Proxy.DefaultEditorKind.ExportGuid : (Guid?)null, xml, "DefaultEditorKind", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.DefaultGridCellDisplayKind != null ? this.Proxy.DefaultGridCellDisplayKind.ExportGuid : (Guid?)null, xml, "DefaultGridCellDisplayKind", "Kistl.App.GUI");
@@ -1367,7 +1367,7 @@ namespace Kistl.App.GUI
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.FromStream(ref this._fk_guid_DefaultDisplayKind, xml, "DefaultDisplayKind", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_guid_DefaultEditorKind, xml, "DefaultEditorKind", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_guid_DefaultGridCellDisplayKind, xml, "DefaultGridCellDisplayKind", "Kistl.App.GUI");

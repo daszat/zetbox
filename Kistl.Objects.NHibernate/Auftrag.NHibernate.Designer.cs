@@ -57,7 +57,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
+                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.Auftragsname;
@@ -107,7 +107,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(double?);
+                if (!CurrentAccessRights.HasReadRights()) return default(double?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.Auftragswert;
@@ -163,7 +163,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+                if (!CurrentAccessRights.HasReadRights()) return null;
                 Kistl.App.Base.IdentityNHibernateImpl __value = (Kistl.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ChangedBy);
 
                 if (OnChangedBy_Getter != null)
@@ -242,7 +242,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(DateTime);
+                if (!CurrentAccessRights.HasReadRights()) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = FetchChangedOnOrDefault();
@@ -318,7 +318,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+                if (!CurrentAccessRights.HasReadRights()) return null;
                 Kistl.App.Base.IdentityNHibernateImpl __value = (Kistl.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.CreatedBy);
 
                 if (OnCreatedBy_Getter != null)
@@ -397,7 +397,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(DateTime);
+                if (!CurrentAccessRights.HasReadRights()) return default(DateTime);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = FetchCreatedOnOrDefault();
@@ -467,7 +467,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(Guid);
+                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = FetchExportGuidOrDefault();
@@ -543,7 +543,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+                if (!CurrentAccessRights.HasReadRights()) return null;
                 Kistl.App.Projekte.KundeNHibernateImpl __value = (Kistl.App.Projekte.KundeNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Kunde);
 
                 if (OnKunde_Getter != null)
@@ -630,7 +630,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+                if (!CurrentAccessRights.HasReadRights()) return null;
                 Kistl.App.Projekte.MitarbeiterNHibernateImpl __value = (Kistl.App.Projekte.MitarbeiterNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Mitarbeiter);
 
                 if (OnMitarbeiter_Getter != null)
@@ -717,7 +717,7 @@ namespace Kistl.App.Projekte
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+                if (!CurrentAccessRights.HasReadRights()) return null;
                 Kistl.App.Projekte.ProjektNHibernateImpl __value = (Kistl.App.Projekte.ProjektNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Projekt);
 
                 if (OnProjekt_Getter != null)
@@ -1210,7 +1210,7 @@ namespace Kistl.App.Projekte
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             BinarySerializer.ToStream(this.Proxy.Auftragsname, binStream);
             BinarySerializer.ToStream(this.Proxy.Auftragswert, binStream);
             BinarySerializer.ToStream(this.Proxy.ChangedBy != null ? this.Proxy.ChangedBy.ID : (int?)null, binStream);
@@ -1281,7 +1281,7 @@ namespace Kistl.App.Projekte
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.ToStream(this.Proxy.Auftragsname, xml, "Auftragsname", "Kistl.App.Projekte");
             XmlStreamer.ToStream(this.Proxy.Auftragswert, xml, "Auftragswert", "Kistl.App.Projekte");
             XmlStreamer.ToStream(this.Proxy.ChangedBy != null ? this.Proxy.ChangedBy.ID : (int?)null, xml, "ChangedBy", "Kistl.App.Projekte");
@@ -1357,7 +1357,7 @@ namespace Kistl.App.Projekte
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
         {
             xml.WriteAttributeString("ExportGuid", this.Proxy.ExportGuid.ToString());
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this.Proxy.Auftragsname, xml, "Auftragsname", "Kistl.App.Projekte");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this.Proxy.Auftragswert, xml, "Auftragswert", "Kistl.App.Projekte");
             System.Diagnostics.Debug.Assert(this._isChangedOnSet, "Exported objects need to have all default values evaluated");
@@ -1371,7 +1371,7 @@ namespace Kistl.App.Projekte
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             {
                 // yuck
                 string tmp = this.Proxy.Auftragsname;

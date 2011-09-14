@@ -80,7 +80,7 @@ this.WriteObjects("        ",  GetModifiers() , " ",  referencedInterface , " ",
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            get\r\n");
 this.WriteObjects("            {\r\n");
-this.WriteObjects("                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;\r\n");
+this.WriteObjects("                if (!CurrentAccessRights.HasReadRights()) return null;\r\n");
 this.WriteObjects("                ",  referencedImplementation , " __value = (",  referencedImplementation , ")OurContext.AttachAndWrap(this.Proxy.",  name , ");\r\n");
 this.WriteObjects("\r\n");
 #line 46 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"

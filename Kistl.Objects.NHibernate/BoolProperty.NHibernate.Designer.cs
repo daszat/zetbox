@@ -60,7 +60,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+                if (!CurrentAccessRights.HasReadRights()) return null;
                 Kistl.App.GUI.IconNHibernateImpl __value = (Kistl.App.GUI.IconNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.FalseIcon);
 
                 if (OnFalseIcon_Getter != null)
@@ -141,7 +141,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
+                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.FalseLabel;
@@ -197,7 +197,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+                if (!CurrentAccessRights.HasReadRights()) return null;
                 Kistl.App.GUI.IconNHibernateImpl __value = (Kistl.App.GUI.IconNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.NullIcon);
 
                 if (OnNullIcon_Getter != null)
@@ -278,7 +278,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
+                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.NullLabel;
@@ -334,7 +334,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+                if (!CurrentAccessRights.HasReadRights()) return null;
                 Kistl.App.GUI.IconNHibernateImpl __value = (Kistl.App.GUI.IconNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.TrueIcon);
 
                 if (OnTrueIcon_Getter != null)
@@ -415,7 +415,7 @@ namespace Kistl.App.Base
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
+                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.TrueLabel;
@@ -795,7 +795,7 @@ namespace Kistl.App.Base
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             BinarySerializer.ToStream(this.Proxy.FalseIcon != null ? this.Proxy.FalseIcon.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this.Proxy.FalseLabel, binStream);
             BinarySerializer.ToStream(this.Proxy.NullIcon != null ? this.Proxy.NullIcon.ID : (int?)null, binStream);
@@ -838,7 +838,7 @@ namespace Kistl.App.Base
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.ToStream(this.Proxy.FalseIcon != null ? this.Proxy.FalseIcon.ID : (int?)null, xml, "FalseIcon", "Kistl.App.GUI");
             XmlStreamer.ToStream(this.Proxy.FalseLabel, xml, "FalseLabel", "Kistl.App.Base");
             XmlStreamer.ToStream(this.Proxy.NullIcon != null ? this.Proxy.NullIcon.ID : (int?)null, xml, "NullIcon", "Kistl.App.GUI");
@@ -884,7 +884,7 @@ namespace Kistl.App.Base
         public override void Export(System.Xml.XmlWriter xml, string[] modules)
         {
             base.Export(xml, modules);
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.FalseIcon != null ? this.Proxy.FalseIcon.ExportGuid : (Guid?)null, xml, "FalseIcon", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.FalseLabel, xml, "FalseLabel", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.NullIcon != null ? this.Proxy.NullIcon.ExportGuid : (Guid?)null, xml, "NullIcon", "Kistl.App.GUI");
@@ -896,7 +896,7 @@ namespace Kistl.App.Base
         public override void MergeImport(System.Xml.XmlReader xml)
         {
             base.MergeImport(xml);
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.FromStream(ref this._fk_guid_FalseIcon, xml, "FalseIcon", "Kistl.App.GUI");
             {
                 // yuck

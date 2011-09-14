@@ -123,7 +123,7 @@ this.WriteObjects("            xml.WriteAttributeString(\"ExportGuid\", ",  expo
 }
 
 #line 96 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
-this.WriteObjects("            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;\r\n");
+this.WriteObjects("            if (!CurrentAccessRights.HasReadRights()) return;\r\n");
 #line 98 "P:\Kistl\Kistl.Generator\Templates\Serialization\SerializerTemplate.cst"
 foreach(var serMember in fields.Where(f => (f.SerializerType & serType) == serType))
     {

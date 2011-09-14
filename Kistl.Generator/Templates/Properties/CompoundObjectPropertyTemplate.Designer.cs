@@ -62,7 +62,7 @@ this.WriteObjects("        ",  GetModifiers() , " ",  coImplementationType , " "
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            get \r\n");
 this.WriteObjects("			{ \r\n");
-this.WriteObjects("                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;\r\n");
+this.WriteObjects("                if (!CurrentAccessRights.HasReadRights()) return null;\r\n");
 this.WriteObjects("				return ",  backingStoreName , "; \r\n");
 this.WriteObjects("			}\r\n");
 this.WriteObjects("            set\r\n");

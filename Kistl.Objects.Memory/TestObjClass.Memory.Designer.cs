@@ -43,7 +43,7 @@ namespace Kistl.App.Test
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(int?);
+                if (!CurrentAccessRights.HasReadRights()) return default(int?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _MyIntProperty;
@@ -115,7 +115,7 @@ namespace Kistl.App.Test
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+                if (!CurrentAccessRights.HasReadRights()) return null;
                 Kistl.App.Projekte.KundeMemoryImpl __value;
                 if (_fk_ObjectProp.HasValue)
                     __value = (Kistl.App.Projekte.KundeMemoryImpl)Context.Find<Kistl.App.Projekte.Kunde>(_fk_ObjectProp.Value);
@@ -183,7 +183,7 @@ namespace Kistl.App.Test
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
+                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _StringProp;
@@ -234,7 +234,7 @@ namespace Kistl.App.Test
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(Kistl.App.Test.TestEnum);
+                if (!CurrentAccessRights.HasReadRights()) return default(Kistl.App.Test.TestEnum);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _TestEnumProp;
@@ -465,7 +465,7 @@ namespace Kistl.App.Test
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             BinarySerializer.ToStream(this._MyIntProperty, binStream);
             BinarySerializer.ToStream(ObjectProp != null ? ObjectProp.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._StringProp, binStream);
@@ -496,7 +496,7 @@ namespace Kistl.App.Test
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.ToStream(this._MyIntProperty, xml, "MyIntProperty", "Kistl.App.Test");
             XmlStreamer.ToStream(ObjectProp != null ? ObjectProp.ID : (int?)null, xml, "ObjectProp", "Kistl.App.Test");
             XmlStreamer.ToStream(this._StringProp, xml, "StringProp", "Kistl.App.Test");

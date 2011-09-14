@@ -60,7 +60,7 @@ namespace Kistl.App.Test
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+                if (!CurrentAccessRights.HasReadRights()) return null;
                 Kistl.App.Test.OrderedOneEndNHibernateImpl __value = (Kistl.App.Test.OrderedOneEndNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.OneEnd);
 
                 if (OnOneEnd_Getter != null)
@@ -153,7 +153,7 @@ namespace Kistl.App.Test
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(int?);
+                if (!CurrentAccessRights.HasReadRights()) return default(int?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.NEnds_pos;
@@ -187,7 +187,7 @@ namespace Kistl.App.Test
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(int?);
+                if (!CurrentAccessRights.HasReadRights()) return default(int?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.OtherInt;
@@ -430,7 +430,7 @@ namespace Kistl.App.Test
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             BinarySerializer.ToStream(this.Proxy.OneEnd != null ? this.Proxy.OneEnd.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this.Proxy.NEnds_pos, binStream);
             BinarySerializer.ToStream(this.Proxy.OtherInt, binStream);
@@ -463,7 +463,7 @@ namespace Kistl.App.Test
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.ToStream(this.Proxy.OneEnd != null ? this.Proxy.OneEnd.ID : (int?)null, xml, "OneEnd", "Kistl.App.Test");
             XmlStreamer.ToStream(this.Proxy.NEnds_pos, xml, "NEnds_pos", "Kistl.App.Test");
             XmlStreamer.ToStream(this.Proxy.OtherInt, xml, "OtherInt", "Kistl.App.Test");

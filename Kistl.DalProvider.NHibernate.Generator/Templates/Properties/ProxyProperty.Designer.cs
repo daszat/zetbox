@@ -68,7 +68,7 @@ this.WriteObjects("        ",  GetModifiers() , " ",  propertyType , " ",  prope
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            get\r\n");
 this.WriteObjects("            {\r\n");
-this.WriteObjects("                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(",  propertyType , ");\r\n");
+this.WriteObjects("                if (!CurrentAccessRights.HasReadRights()) return default(",  propertyType , ");\r\n");
 this.WriteObjects("                // create local variable to create single point of return\r\n");
 this.WriteObjects("                // for the benefit of down-stream templates\r\n");
 #line 38 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Properties\ProxyProperty.cst"

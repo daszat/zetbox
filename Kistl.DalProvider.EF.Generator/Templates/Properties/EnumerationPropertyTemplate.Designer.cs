@@ -56,7 +56,7 @@ this.WriteObjects("        public ",  enumType , " ",  name , "\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            get\r\n");
 this.WriteObjects("            {\r\n");
-this.WriteObjects("                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(",  enumType , ");\r\n");
+this.WriteObjects("                if (!CurrentAccessRights.HasReadRights()) return default(",  enumType , ");\r\n");
 #line 37 "P:\Kistl\Kistl.DalProvider.EF.Generator\Templates\Properties\EnumerationPropertyTemplate.cst"
 if(callGetterSetterEvents)
 				{

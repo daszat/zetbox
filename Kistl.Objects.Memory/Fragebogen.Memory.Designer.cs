@@ -92,7 +92,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Fragebogen> OnAntw
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(int?);
+                if (!CurrentAccessRights.HasReadRights()) return default(int?);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _BogenNummer;
@@ -292,7 +292,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Fragebogen> OnAntw
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
 
 			BinarySerializer.ToStream(eagerLoadLists, binStream);
 			if (eagerLoadLists && auxObjects != null)
@@ -347,7 +347,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Fragebogen> OnAntw
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.ToStream(this._BogenNummer, xml, "BogenNummer", "Kistl.App.Test");
         }
 

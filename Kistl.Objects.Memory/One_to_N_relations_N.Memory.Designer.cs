@@ -43,7 +43,7 @@ namespace Kistl.App.Test
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return default(string);
+                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Name;
@@ -115,7 +115,7 @@ namespace Kistl.App.Test
         {
             get
             {
-                if (CurrentAccessRights == Kistl.API.AccessRights.None) return null;
+                if (!CurrentAccessRights.HasReadRights()) return null;
                 Kistl.App.Test.One_to_N_relations_OneMemoryImpl __value;
                 if (_fk_OneSide.HasValue)
                     __value = (Kistl.App.Test.One_to_N_relations_OneMemoryImpl)Context.Find<Kistl.App.Test.One_to_N_relations_One>(_fk_OneSide.Value);
@@ -340,7 +340,7 @@ namespace Kistl.App.Test
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             BinarySerializer.ToStream(this._Name, binStream);
             BinarySerializer.ToStream(OneSide != null ? OneSide.ID : (int?)null, binStream);
         }
@@ -363,7 +363,7 @@ namespace Kistl.App.Test
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.ToStream(this._Name, xml, "Name", "Kistl.App.Test");
             XmlStreamer.ToStream(OneSide != null ? OneSide.ID : (int?)null, xml, "OneSide", "Kistl.App.Test");
         }

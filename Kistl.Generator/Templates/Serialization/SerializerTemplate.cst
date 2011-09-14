@@ -93,7 +93,7 @@
 <%
     }
 %>
-            if (CurrentAccessRights == Kistl.API.AccessRights.None) return;
+            if (!CurrentAccessRights.HasReadRights()) return;
 <%
     foreach(var serMember in fields.Where(f => (f.SerializerType & serType) == serType))
     {
