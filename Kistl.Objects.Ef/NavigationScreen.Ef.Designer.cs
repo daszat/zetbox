@@ -1309,7 +1309,6 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationScreen> O
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(int);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ID;

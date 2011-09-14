@@ -62,29 +62,18 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
             if (NeedsRightsTable())
             {
                 this.WriteLine();
-                this.WriteObjects("        private Kistl.API.AccessRights? __currentAccessRights;");
-                this.WriteLine();
-                this.WriteObjects("        public override Kistl.API.AccessRights CurrentAccessRights");
-                this.WriteLine();
-                this.WriteObjects("        {");
-                this.WriteLine();
-                this.WriteObjects("           get { ");
-                this.WriteLine();
-                this.WriteObjects("             if(Context == null) return Kistl.API.AccessRights.Full;");
-                this.WriteLine();
-                this.WriteObjects("             if(__currentAccessRights == null) { ");
-                this.WriteLine();
-                this.WriteObjects("                 __currentAccessRights = base.CurrentAccessRights; ");
-                this.WriteLine();
-                this.WriteObjects("                 var secRight = this.Proxy.SecurityRightsCollectionImpl != null ? this.Proxy.SecurityRightsCollectionImpl.SingleOrDefault(i => i.Identity == Context.Internals().IdentityID) : null;");
-                this.WriteLine();
-                this.WriteObjects("                 __currentAccessRights |= secRight != null ? (Kistl.API.AccessRights)secRight.Right : Kistl.API.AccessRights.None; ");
-                this.WriteLine();
-                this.WriteObjects("             } ");
-                this.WriteLine();
-                this.WriteObjects("             return __currentAccessRights.Value; }");
-                this.WriteLine();
-                this.WriteObjects("        }");
+                this.WriteLine("        private Kistl.API.AccessRights? __currentAccessRights;");
+                this.WriteLine("        public override Kistl.API.AccessRights CurrentAccessRights");
+                this.WriteLine("        {");
+                this.WriteLine("           get { ");
+                this.WriteLine("             if(Context == null) return Kistl.API.AccessRights.Full;");
+                this.WriteLine("             if(__currentAccessRights == null) { ");
+                this.WriteLine("                 __currentAccessRights = base.CurrentAccessRights; ");
+                this.WriteLine("                 var secRight = this.Proxy.SecurityRightsCollectionImpl != null ? this.Proxy.SecurityRightsCollectionImpl.SingleOrDefault(i => i.Identity == Context.Internals().IdentityID) : null;");
+                this.WriteLine("                 __currentAccessRights |= secRight != null ? (Kistl.API.AccessRights)secRight.Right : Kistl.API.AccessRights.None; ");
+                this.WriteLine("             } ");
+                this.WriteLine("             return __currentAccessRights.Value; }");
+                this.WriteLine("        }");
                 this.WriteLine();
             }
         }

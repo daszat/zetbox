@@ -1204,6 +1204,7 @@ namespace Kistl.App.Projekte
              return __currentAccessRights.Value; }
         }
 
+
         #region Serializer
 
 

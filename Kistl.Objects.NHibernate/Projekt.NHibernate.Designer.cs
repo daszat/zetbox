@@ -1008,6 +1008,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTas
              return __currentAccessRights.Value; }
         }
 
+
         #region Serializer
 
 

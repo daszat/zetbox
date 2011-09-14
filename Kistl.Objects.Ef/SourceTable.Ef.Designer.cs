@@ -1269,7 +1269,6 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceTa
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(int);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _ID;

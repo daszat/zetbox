@@ -37,5 +37,10 @@ namespace Kistl.Generator.Templates.Properties
             // add override flag to implement abstract ID member
             return base.ModifyMemberAttributes(memberAttributes) & ~MemberAttributes.Final | MemberAttributes.Override;
         }
+
+        protected override void ApplySecurityCheckTemplate()
+        {
+            // No security check. there is no information to hide.
+        }
     }
 }

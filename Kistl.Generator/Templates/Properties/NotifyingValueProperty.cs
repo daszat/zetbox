@@ -23,6 +23,11 @@ namespace Kistl.Generator.Templates.Properties
                 ctx, serializationList, type, name, modulenamespace, backingName);
         }
 
+        protected virtual void ApplySecurityCheckTemplate()
+        {
+            this.WriteLine("                if (!CurrentAccessRights.HasReadRights()) return default({0});", type);
+        }
+
         /// <summary>
         /// Is called to insert requisites into the containing class, like wrappers or similar.
         /// </summary>

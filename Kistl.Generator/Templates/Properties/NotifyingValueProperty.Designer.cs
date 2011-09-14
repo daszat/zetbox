@@ -53,7 +53,9 @@ this.WriteObjects("        ",  GetModifiers() , " ",  type , " ",  name , "\r\n"
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            get\r\n");
 this.WriteObjects("            {\r\n");
-this.WriteObjects("                if (!CurrentAccessRights.HasReadRights()) return default(",  type , ");\r\n");
+#line 29 "P:\Kistl\Kistl.Generator\Templates\Properties\NotifyingValueProperty.cst"
+ApplySecurityCheckTemplate(); 
+#line 30 "P:\Kistl\Kistl.Generator\Templates\Properties\NotifyingValueProperty.cst"
 this.WriteObjects("                // create local variable to create single point of return\r\n");
 this.WriteObjects("                // for the benefit of down-stream templates\r\n");
 this.WriteObjects("                var __result = ",  backingName , ";\r\n");
