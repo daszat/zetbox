@@ -83,6 +83,17 @@ namespace Kistl.Client.Presentables.GUI
             get { return _screen.Title; }
         }
 
+        public override Highlight Highlight
+        {
+            get
+            {
+                // Don't call base, since it's readonly, deactivated would be returned
+                // Deactivated on !IsEnabled is OK
+                if (!IsEnabled) return Highlight.Deactivated;
+                return null;
+            }
+        }
+
         public NavigationScreen Screen { get { return _screen; } }
 
         public Guid ExportGuid { get { return _screen.ExportGuid; } }
