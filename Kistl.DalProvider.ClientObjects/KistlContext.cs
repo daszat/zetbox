@@ -363,7 +363,7 @@ using Kistl.API.Client.PerfCounter;
 
             if (_clientIsolationLevel == ClientIsolationLevel.MergeServerData && obj != localobj)
             {
-                RecordNotifications(obj);
+                RecordNotifications(localobj);
                 localobj.ApplyChangesFrom(obj);
                 // reset ObjectState to new truth
                 ((IClientObject)localobj).SetUnmodified();
