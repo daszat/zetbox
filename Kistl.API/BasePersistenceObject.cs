@@ -49,9 +49,10 @@ namespace Kistl.API
         public bool IsReadonly
         {
             get 
-            { 
-                return (CurrentAccessRights <= AccessRights.Read)
-                    || (this.Context != null ? this.Context.IsReadonly : false); 
+            {
+                return this.Context != null
+                    ? this.Context.IsReadonly || (CurrentAccessRights <= AccessRights.Read) // when attaced -> eval. Don't look at the implementation below (CurrentAccessRights), it may be overridden
+                    : false; // unattached - cannot be readonly
             }
         }
 
