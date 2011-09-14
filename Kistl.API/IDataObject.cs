@@ -83,9 +83,19 @@ namespace Kistl.API
 
     public static class AccessRightsExtensions
     {
+        public static bool HasNoRights(this AccessRights r)
+        {
+            return r == API.AccessRights.None;
+        }
+
+        public static bool HasOnlyReadRightsOrNone(this AccessRights r)
+        {
+            return r <= API.AccessRights.Read;
+        }
+
         public static bool HasReadRights(this AccessRights r)
         {
-            return r >= AccessRights.Read;
+            return (r & API.AccessRights.Read) == API.AccessRights.Read;
         }
 
         public static bool HasWriteRights(this AccessRights r)
@@ -104,19 +114,31 @@ namespace Kistl.API
         }
 
 
+        public static bool HasNoRights(this AccessRights? r)
+        {
+            return r.HasValue && r == API.AccessRights.None;
+        }
+        public static bool HasOnlyReadRightsOrNone(this AccessRights? r)
+        {
+            return r.HasValue && r <= API.AccessRights.Read;
+        }
+        public static bool HasReadRights(this AccessRights? r)
+        {
+            return r.HasValue && (r & API.AccessRights.Read) == API.AccessRights.Read;
+        }
         public static bool HasWriteRights(this AccessRights? r)
         {
-            return (r & API.AccessRights.Write) == API.AccessRights.Write;
+            return r.HasValue && (r & API.AccessRights.Write) == API.AccessRights.Write;
         }
 
         public static bool HasDeleteRights(this AccessRights? r)
         {
-            return (r & API.AccessRights.Delete) == API.AccessRights.Delete;
+            return r.HasValue && (r & API.AccessRights.Delete) == API.AccessRights.Delete;
         }
 
         public static bool HasCreateRights(this AccessRights? r)
         {
-            return (r & API.AccessRights.Create) == API.AccessRights.Create;
+            return r.HasValue && (r & API.AccessRights.Create) == API.AccessRights.Create;
         }
     }
 

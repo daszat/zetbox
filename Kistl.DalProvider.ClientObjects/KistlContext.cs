@@ -218,7 +218,7 @@ using Kistl.API.Client.PerfCounter;
         public List<T> GetListOf<T>(IDataObject obj, string propertyName) where T : class, IDataObject
         {
             CheckDisposed();
-            if (obj.CurrentAccessRights == AccessRights.None) return new List<T>();
+            if (obj.CurrentAccessRights.HasNoRights()) return new List<T>();
             KistlContextQuery<T> query = new KistlContextQuery<T>(this, GetInterfaceType(obj), proxy, _perfCounter);
             return ((KistlContextProvider)query.Provider).GetListOfCall(obj.ID, propertyName).Cast<T>().ToList();
         }
