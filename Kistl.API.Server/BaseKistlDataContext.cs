@@ -338,9 +338,9 @@ namespace Kistl.API.Server
                 {
                     throw new System.Security.SecurityException(string.Format("The current identity has no rights to delete an Object of type '{0}'", this.GetInterfaceType(obj).Type.FullName));
                 }
-                else if (state == DataObjectState.New && !rights.HasCreateRights())
+                else if (state == DataObjectState.New)
                 {
-                    throw new System.Security.SecurityException(string.Format("The current identity has no rights to create an Object of type '{0}'", this.GetInterfaceType(obj).Type.FullName));
+                    CheckCreateRights(obj);
                 }
 
                 // Update IChangedBy 

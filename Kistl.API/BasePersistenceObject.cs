@@ -64,12 +64,18 @@ namespace Kistl.API
         /// Reflects the current access rights by the current Identity. 
         /// Base implementations returnes always Full
         /// </summary>
+        private Kistl.API.AccessRights? __currentAccessRights;
         public virtual Kistl.API.AccessRights CurrentAccessRights 
         { 
             get 
             { 
                 if(Context == null) return Kistl.API.AccessRights.Full;
-                return Context.GetGroupAccessRights(Context.GetInterfaceType(this.GetImplementedInterface()));
+                if(__currentAccessRights == null)
+                {
+                    __currentAccessRights = Context.GetGroupAccessRights(Context.GetInterfaceType(this.GetImplementedInterface()));
+                    __currentAccessRights &= ~Kistl.API.AccessRights.Create; // exclude create rights - not instance specific
+                }
+                return __currentAccessRights.Value;
             } 
         }
 
