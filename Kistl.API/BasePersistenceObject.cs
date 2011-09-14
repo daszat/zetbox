@@ -43,14 +43,18 @@ namespace Kistl.API
         public abstract int ID { get; set; }
 
         /// <summary>
-        /// Gets a value indicating whether values of this object can be set. This is only a shorthand for asking the context for read-only status.
+        /// Gets a value indicating whether values of this object can be set.
         /// </summary>
+        /// <remarks>
+        /// true, when the context is readonly or there are not sufficient access rights.
+        /// Always false, when the object is not attached or a playback is happening.
+        /// </remarks>
         [XmlIgnore]
         public bool IsReadonly
         {
             get 
             {
-                return this.Context != null
+                return this.Context != null && !IsRecordingNotifications 
                     ? this.Context.IsReadonly || (CurrentAccessRights <= AccessRights.Read) // when attaced -> eval. Don't look at the implementation below (CurrentAccessRights), it may be overridden
                     : false; // unattached - cannot be readonly
             }

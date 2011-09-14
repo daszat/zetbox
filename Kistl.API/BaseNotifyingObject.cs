@@ -161,6 +161,14 @@ namespace Kistl.API
             }
         }
 
+        protected bool IsRecordingNotifications
+        {
+            get
+            {
+                return notifications != null;
+            }
+        }
+
         #region Auditing
 
         private Dictionary<string, Notification> _auditLog;

@@ -180,7 +180,7 @@ namespace Kistl.API.Server
                     throw new ApplicationException("Unexpected failure from metadata resolver");
                 }
                 cls = cls.GetRootClass();
-                if (identityStore != null && cls.HasAccessControlList() && (cls.GetGroupAccessRights(identityStore) & API.AccessRights.Create) != API.AccessRights.Create)
+                if (identityStore != null && cls.HasAccessControlList() && !cls.GetGroupAccessRights(identityStore).HasCreateRights())
                 {
                     throw new System.Security.SecurityException(string.Format("The current identity has no rights to create an Object of type '{0}'", ifType.Type.FullName));
                 }
@@ -310,18 +310,41 @@ namespace Kistl.API.Server
         public abstract int SubmitRestore();
 
         Identity localIdentity = null;
-        protected virtual void NotifyChanging(IEnumerable<IDataObject> changedOrAdded)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="modifiedObjects">All changed, added and deleted objects</param>
+        protected virtual void NotifyChanging(IEnumerable<IDataObject> modifiedObjects)
         {
             var now = DateTime.Now;
 
-            foreach (IDataObject obj in changedOrAdded)
+            foreach (IDataObject obj in modifiedObjects)
             {
-                if (obj is Kistl.App.Base.Blob && obj.ObjectState == DataObjectState.Modified)
+                var state = obj.ObjectState;
+                var rights = obj.CurrentAccessRights;
+
+                // Blob check
+                if (obj is Kistl.App.Base.Blob && state == DataObjectState.Modified)
                 {
                     throw new InvalidOperationException("Modifying a Kistl.App.Base.Blob is not allowed. Upload a new Blob instead.");
                 }
 
-                if (obj is Kistl.App.Base.IChangedBy)
+                // last rights check
+                if (state == DataObjectState.Modified && !rights.HasWriteRights())
+                {
+                    throw new System.Security.SecurityException(string.Format("The current identity has no rights to modify an Object of type '{0}'", this.GetInterfaceType(obj).Type.FullName));
+                }
+                else if (state == DataObjectState.Deleted && !rights.HasDeleteRights())
+                {
+                    throw new System.Security.SecurityException(string.Format("The current identity has no rights to delete an Object of type '{0}'", this.GetInterfaceType(obj).Type.FullName));
+                }
+                else if (state == DataObjectState.New && !rights.HasCreateRights())
+                {
+                    throw new System.Security.SecurityException(string.Format("The current identity has no rights to create an Object of type '{0}'", this.GetInterfaceType(obj).Type.FullName));
+                }
+
+                // Update IChangedBy 
+                if (obj is Kistl.App.Base.IChangedBy && state != DataObjectState.Deleted)
                 {
                     var cb = (Kistl.App.Base.IChangedBy)obj;
                     if (obj.ObjectState == DataObjectState.New)
@@ -345,7 +368,11 @@ namespace Kistl.API.Server
                     }
                 }
 
-                obj.NotifyPreSave();
+                // Save notification
+                if (state != DataObjectState.Deleted)
+                {
+                    obj.NotifyPreSave();
+                }
             }
         }
 
@@ -386,7 +413,7 @@ namespace Kistl.API.Server
                 throw new InvalidOperationException("Creating a Blob is not supported. Use CreateBlob() instead");
 
             ObjectClass cls = metaDataResolver.GetObjectClass(ifType).GetRootClass();
-            if (identityStore != null && cls.HasAccessControlList() && ((cls.GetGroupAccessRights(identityStore) ?? API.AccessRights.None) & API.AccessRights.Create) != API.AccessRights.Create)
+            if (identityStore != null && cls.HasAccessControlList() && !cls.GetGroupAccessRights(identityStore).HasCreateRights())
             {
                 throw new System.Security.SecurityException(string.Format("The current identity has no rights to create an Object of type '{0}'", ifType.Type.FullName));
             }

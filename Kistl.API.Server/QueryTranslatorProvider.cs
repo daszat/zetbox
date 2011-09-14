@@ -360,7 +360,7 @@ namespace Kistl.API.Server
             // Only ACL's on Root classes are allowed
             var rootClass = objClass.GetRootClass();
 
-            if ((Ctx.GetGroupAccessRights(ifType) & Kistl.API.AccessRights.Read) == Kistl.API.AccessRights.Read)
+            if (Ctx.GetGroupAccessRights(ifType) >= Kistl.API.AccessRights.Read)
             {
                 return e;
             }

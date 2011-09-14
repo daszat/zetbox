@@ -269,7 +269,7 @@ namespace Kistl.DalProvider.Ef
                 DebugTraceChangedObjects();
 
                 var notifySaveList = _ctx.ObjectStateManager
-                    .GetObjectStateEntries(EntityState.Added | EntityState.Modified)
+                    .GetObjectStateEntries(EntityState.Added | EntityState.Modified | EntityState.Deleted)
                     .Select(e => e.Entity)
                     .OfType<IDataObject>()
                     .ToList();

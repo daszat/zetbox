@@ -81,6 +81,45 @@ namespace Kistl.API
         Change = Read | Write,
     }
 
+    public static class AccessRightsExtensions
+    {
+        public static bool HasReadRights(this AccessRights r)
+        {
+            return r >= AccessRights.Read;
+        }
+
+        public static bool HasWriteRights(this AccessRights r)
+        {
+            return (r & API.AccessRights.Write) == API.AccessRights.Write;
+        }
+
+        public static bool HasDeleteRights(this AccessRights r)
+        {
+            return (r & API.AccessRights.Delete) == API.AccessRights.Delete;
+        }
+
+        public static bool HasCreateRights(this AccessRights r)
+        {
+            return (r & API.AccessRights.Create) == API.AccessRights.Create;
+        }
+
+
+        public static bool HasWriteRights(this AccessRights? r)
+        {
+            return (r & API.AccessRights.Write) == API.AccessRights.Write;
+        }
+
+        public static bool HasDeleteRights(this AccessRights? r)
+        {
+            return (r & API.AccessRights.Delete) == API.AccessRights.Delete;
+        }
+
+        public static bool HasCreateRights(this AccessRights? r)
+        {
+            return (r & API.AccessRights.Create) == API.AccessRights.Create;
+        }
+    }
+
     /// <summary>
     /// Interface for Exporting/Importing Objects with XML
     /// </summary>
