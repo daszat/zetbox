@@ -95,22 +95,22 @@ namespace Kistl.API
 
         public static bool HasReadRights(this AccessRights r)
         {
-            return (r & API.AccessRights.Read) == API.AccessRights.Read;
+            return (r & API.AccessRights.Read) != 0 || (r & API.AccessRights.Write) != 0;
         }
 
         public static bool HasWriteRights(this AccessRights r)
         {
-            return (r & API.AccessRights.Write) == API.AccessRights.Write;
+            return (r & API.AccessRights.Write) != 0;
         }
 
         public static bool HasDeleteRights(this AccessRights r)
         {
-            return (r & API.AccessRights.Delete) == API.AccessRights.Delete;
+            return (r & API.AccessRights.Delete) != 0;
         }
 
         public static bool HasCreateRights(this AccessRights r)
         {
-            return (r & API.AccessRights.Create) == API.AccessRights.Create;
+            return (r & API.AccessRights.Create) != 0;
         }
 
 
@@ -124,21 +124,21 @@ namespace Kistl.API
         }
         public static bool HasReadRights(this AccessRights? r)
         {
-            return r.HasValue && (r & API.AccessRights.Read) == API.AccessRights.Read;
+            return r.HasValue && ( (r & API.AccessRights.Read) != 0 || (r & API.AccessRights.Write) != 0 );
         }
         public static bool HasWriteRights(this AccessRights? r)
         {
-            return r.HasValue && (r & API.AccessRights.Write) == API.AccessRights.Write;
+            return r.HasValue && (r & API.AccessRights.Write) != 0;
         }
 
         public static bool HasDeleteRights(this AccessRights? r)
         {
-            return r.HasValue && (r & API.AccessRights.Delete) == API.AccessRights.Delete;
+            return r.HasValue && (r & API.AccessRights.Delete) != 0;
         }
 
         public static bool HasCreateRights(this AccessRights? r)
         {
-            return r.HasValue && (r & API.AccessRights.Create) == API.AccessRights.Create;
+            return r.HasValue && (r & API.AccessRights.Create) != 0;
         }
     }
 
