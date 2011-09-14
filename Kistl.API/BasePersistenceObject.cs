@@ -72,7 +72,15 @@ namespace Kistl.API
                 if(Context == null) return Kistl.API.AccessRights.Full;
                 if(__currentAccessRights == null)
                 {
-                    __currentAccessRights = Context.GetGroupAccessRights(Context.GetInterfaceType(this.GetImplementedInterface()));
+                    if (ObjectState == DataObjectState.New)
+                    {
+                        // Newly created objects get full rights
+                        __currentAccessRights = Kistl.API.AccessRights.Full;
+                    }
+                    else
+                    {
+                        __currentAccessRights = Context.GetGroupAccessRights(Context.GetInterfaceType(this.GetImplementedInterface()));
+                    }
                     __currentAccessRights &= ~Kistl.API.AccessRights.Create; // exclude create rights - not instance specific
                 }
                 return __currentAccessRights.Value;
