@@ -32,12 +32,12 @@
     </Modules>
   </Server>
 
-  <SourceFileLocation>
+  <AssemblySearchPaths>
     <!-- Common libaries -->
     <string>P:\Kistl\bin\Debug\bin\Common</string>
     <!-- Server libraries -->
     <string>P:\Kistl\bin\Debug\bin\Server</string>
     <!-- precompiled DALs -->
     <string>P:\Kistl\bin\Debug\bin\Server\Fallback</string>
-  </SourceFileLocation>
+  </AssemblySearchPaths>
 </KistlConfig>

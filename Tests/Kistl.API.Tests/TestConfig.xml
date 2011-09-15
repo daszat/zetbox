@@ -18,10 +18,10 @@
       <Module>Kistl.API.ApiModule, Kistl.API</Module>
     </Modules>
   </Client>
-  <SourceFileLocation>
+  <AssemblySearchPaths>
     <!-- default probe path -->
     <string>/srv/CCNet/Projects/zbox/repo/bin/CodeGen/bin/Debug</string>
     <!-- common libaries -->
     <string>/srv/CCNet/Projects/zbox/repo/bin/Debug/bin/Common</string>
-  </SourceFileLocation>
+  </AssemblySearchPaths>
 </KistlConfig>

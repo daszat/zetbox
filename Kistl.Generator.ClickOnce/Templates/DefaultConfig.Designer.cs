@@ -46,15 +46,14 @@ this.WriteObjects("      <Module>Kistl.DalProvider.Client.ClientProvider, Kistl.
 this.WriteObjects("      <Module>Kistl.DalProvider.Memory.MemoryProvider, Kistl.DalProvider.Memory</Module>\r\n");
 this.WriteObjects("      <Module>Kistl.App.Projekte.Client.CustomClientActionsModule, Kistl.App.Projekte.Client</Module>\r\n");
 this.WriteObjects("      <Module>Kistl.App.Projekte.Common.CustomCommonActionsModule, Kistl.App.Projekte.Common</Module>\r\n");
-this.WriteObjects("      <Module>Ini50.App.Client.Ini50Module, Ini50.App.Client</Module>\r\n");
 this.WriteObjects("    </Modules>\r\n");
 this.WriteObjects("  </Client>\r\n");
-this.WriteObjects("  <SourceFileLocation>\r\n");
+this.WriteObjects("  <AssemblySearchPaths>\r\n");
 this.WriteObjects("    <!-- default probe path -->\r\n");
 this.WriteObjects("    <string>ZBox\\CodeGen</string>\r\n");
 this.WriteObjects("    <!-- common libaries -->\r\n");
 this.WriteObjects("    <string>ZBox\\Common</string>\r\n");
-this.WriteObjects("  </SourceFileLocation>\r\n");
+this.WriteObjects("  </AssemblySearchPaths>\r\n");
 this.WriteObjects("</KistlConfig>");
 
         }

@@ -37,12 +37,12 @@
       <Module>Kistl.DalProvider.Memory.MemoryProvider, Kistl.DalProvider.Memory</Module>
     </Modules>
   </Client>
-  <SourceFileLocation>
+  <AssemblySearchPaths>
     <!-- default probe path -->
     <string>P:\Kistl\bin\CodeGen\bin\Debug</string>
     <!-- Fallback path for local development -->
     <string>P:\Kistl\bin\Debug\bin\server\fallback</string>
     <!-- Fallback path for CC.net on srv2008 -->
     <string>f:\CruiseControl.Net\Projects\Kistl\bin\Debug\bin\Server\Fallback</string>
-  </SourceFileLocation>
+  </AssemblySearchPaths>
 </KistlConfig>

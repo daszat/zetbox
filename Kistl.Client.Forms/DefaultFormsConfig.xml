@@ -4,10 +4,10 @@
   <Client StartClient="false" ThrowErrors="false">
     <DocumentStore>..\..\..\..\DocumentStore\Client\</DocumentStore>
   </Client>
-  <SourceFileLocation>
+  <AssemblySearchPaths>
     <!-- default probe path -->
     <string>..\..\..\CodeGen\bin\Debug</string>
     <!-- common libaries -->
     <string>P:\Kistl\bin\Debug\bin\Common</string>
-  </SourceFileLocation>
+  </AssemblySearchPaths>
 </KistlConfig>
