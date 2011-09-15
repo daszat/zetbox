@@ -60,6 +60,7 @@ namespace Kistl.API.Mocks
             BinarySerializer.ToStream(GetSerializableType<LOCALINTERFACE, ENUMTYPE>(iftFactory), sw);
             BinarySerializer.ToStream(TestObjClassId, sw);
             BinarySerializer.ToStream((int)TestObjectState, sw);
+            BinarySerializer.ToStream((int)AccessRights.Full, sw);
 
 
             // TestObjClass
@@ -90,6 +91,7 @@ namespace Kistl.API.Mocks
                 BinarySerializer.ToStream(ceType, sw);
                 BinarySerializer.ToStream(TestTestNamesIds[i], sw);
                 BinarySerializer.ToStream((int)TestCollectionEntryState, sw);
+                BinarySerializer.ToStream((int)AccessRights.Full, sw);
 
                 BinarySerializer.ToStream(TestTestNamesValues[i], sw);
             }
@@ -113,6 +115,10 @@ namespace Kistl.API.Mocks
             DataObjectState? objectState = null;
             BinarySerializer.FromStreamConverter(i => objectState = (DataObjectState)i, sr);
             Assert.That(objectState, Is.EqualTo(TestObjectState), "wrong ObjectState found");
+
+            int accessRights;
+            BinarySerializer.FromStream(out accessRights, sr);
+            Assert.That(accessRights, Is.GreaterThan(0), "wrong Access Rights found");
 
             // TestObjClass
 
@@ -165,6 +171,11 @@ namespace Kistl.API.Mocks
                 DataObjectState? ceObjectState = null;
                 BinarySerializer.FromStreamConverter(read => ceObjectState = (DataObjectState)read, sr);
                 Assert.That(ceObjectState, Is.EqualTo(TestCollectionEntryState), "wrong ObjectState found for collection entry #{0}", i);
+
+                int readCeAccessRights;
+                BinarySerializer.FromStream(out readCeAccessRights, sr);
+                Assert.That(readCeAccessRights, Is.GreaterThan(0), "wrong access rights for collection entry #{0}", i);
+
 
                 string readValue;
                 BinarySerializer.FromStream(out readValue, sr);
