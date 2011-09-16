@@ -139,6 +139,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="StartupScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles\Simple\Styles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -554,6 +558,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="StartupScreen.xaml.cs">
+      <DependentUpon>StartupScreen.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Styles\Simple\Module.cs" />
     <Compile Include="View\Filters\DateRangeButtonsFilterEditor.xaml.cs">
       <DependentUpon>DateRangeButtonsFilterEditor.xaml</DependentUpon>
@@ -879,7 +886,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <SplashScreen Include="SplashScreenImage.png" />
+    <Resource Include="SplashScreenImage.png" />
     <Resource Include="Images\pen.png" />
     <EmbeddedResource Include="AppIcon.ico" />
   </ItemGroup>

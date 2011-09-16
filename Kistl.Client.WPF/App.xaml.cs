@@ -99,18 +99,25 @@ namespace Kistl.Client.WPF
                     var config = KistlConfig.FromFile(configFilePath, "Kistl.Client.WPF.xml");
                     InitCulture(config);
 
+                    StartupScreen.ShowSplashScreen(Kistl.Client.Properties.Resources.Startup_Message, Kistl.Client.Properties.Resources.Startup_InitApp, 5);
+
                     if (config.Server != null && config.Server.StartServer)
                     {
+                        StartupScreen.SetInfo(Kistl.Client.Properties.Resources.Startup_Server);
                         serverDomain = new ServerDomainManager();
                         serverDomain.Start(config);
                     }
                     else
                     {
+                        StartupScreen.SetInfo(Kistl.Client.Properties.Resources.Startup_NoServerStart);
                     }
 
+                    StartupScreen.SetInfo(Kistl.Client.Properties.Resources.Startup_AssemblyResolver);
                     AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
 
                     container = CreateMasterContainer(config);
+
+                    StartupScreen.SetInfo(Kistl.Client.Properties.Resources.Startup_Launcher);
 
                     // Make Gendarme happy
                     var resources = this.Resources;
@@ -168,6 +175,7 @@ namespace Kistl.Client.WPF
                     // allows us to load the Kistl.Objects assemblies _before_ 
                     // they are needed.
                     var launcher = container.Resolve<Launcher>();
+                    StartupScreen.HideSplashScreen();
                     launcher.Show(args);
                 }
             }

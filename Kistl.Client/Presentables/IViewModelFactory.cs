@@ -4,8 +4,8 @@ namespace Kistl.Client.Presentables
     using System;
     using Kistl.App.GUI;
     using Kistl.API.Client;
-using Kistl.API;
-using Kistl.API.Client.PerfCounter;
+    using Kistl.API;
+    using Kistl.API.Client.PerfCounter;
 
     public interface IViewModelFactory : IToolkit
     {
