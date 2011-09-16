@@ -139,8 +139,8 @@ namespace Kistl.App.Extensions
             {
                 if (groups.Contains(gm.Group.ExportGuid))
                 {
-                    if (result == null) result = Kistl.App.Base.AccessRights.None;
-                    result = result.Value | (gm.Rights ?? Kistl.App.Base.AccessRights.None);
+                    if (result == null) result = 0;
+                    result = result.Value | (gm.Rights ?? 0);
                 }
             }
 

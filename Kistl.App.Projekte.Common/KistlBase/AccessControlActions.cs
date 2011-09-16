@@ -14,7 +14,7 @@ namespace Kistl.App.Base
         {
             e.Result = String.Format("{0} ({1}) {2}",
                 obj.Name ?? string.Empty,
-                obj.Rights ?? AccessRights.None,
+                obj.Rights != null ? obj.Rights.ToString() :  "None",
                 obj.Description ?? string.Empty);
 
             ToStringHelper.FixupFloatingObjectsToString(obj, e);
