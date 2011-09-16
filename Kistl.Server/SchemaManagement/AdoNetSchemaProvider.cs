@@ -208,7 +208,7 @@ namespace Kistl.Server.SchemaManagement
 
         public string GetSafeConnectionString()
         {
-            return currentConnectionString;
+            return GetSafeConnectionString(currentConnectionString);
         }
 
         public abstract string GetSafeConnectionString(string connectionString);
