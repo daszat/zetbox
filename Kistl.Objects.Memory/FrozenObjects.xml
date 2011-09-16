@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2011-09-13T16:44:54.857817Z" xmlns="http://dasz.at/Kistl">
+<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2011-09-16T16:39:52.50395Z" xmlns="http://dasz.at/Kistl">
   <KistlBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <KistlBase:ChangedOn>2011-08-05T10:30:47.603232Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2011-06-15T14:03:02Z</KistlBase:CreatedOn>
@@ -20699,11 +20699,12 @@
     <KistlBase:Type>5d152c6f-6c1e-48b7-b03e-669e30468808</KistlBase:Type>
   </KistlBase:RelationEnd>
   <KistlBase:EnumerationEntry ExportGuid="5d82dda2-7b8d-4dbb-b418-ae64cdad9856">
-    <KistlBase:ChangedOn>2011-08-05T10:31:08.822041Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2011-09-16T16:39:52.50395Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-01-29T16:54:15Z</KistlBase:CreatedOn>
     <KistlBase:Description>May Read and Write</KistlBase:Description>
     <KistlBase:Enumeration>1d067873-d5e7-448e-a46a-4377a1a16ece</KistlBase:Enumeration>
     <KistlBase:EnumerationEntries_pos>100</KistlBase:EnumerationEntries_pos>
+    <KistlBase:Label>Read &amp; Write</KistlBase:Label>
     <KistlBase:Name>Change</KistlBase:Name>
     <KistlBase:Value>3</KistlBase:Value>
   </KistlBase:EnumerationEntry>
@@ -20717,49 +20718,31 @@
     <KistlBase:Value>8</KistlBase:Value>
   </KistlBase:EnumerationEntry>
   <KistlBase:EnumerationEntry ExportGuid="c64d196e-9985-4cb3-b084-0a3e66a7b70f">
-    <KistlBase:ChangedOn>2011-08-05T10:31:08.825041Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2011-09-16T16:39:52.50395Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-01-29T16:54:15Z</KistlBase:CreatedOn>
     <KistlBase:Description>May Delete</KistlBase:Description>
     <KistlBase:Enumeration>1d067873-d5e7-448e-a46a-4377a1a16ece</KistlBase:Enumeration>
-    <KistlBase:EnumerationEntries_pos>700</KistlBase:EnumerationEntries_pos>
+    <KistlBase:EnumerationEntries_pos>101</KistlBase:EnumerationEntries_pos>
     <KistlBase:Name>Delete</KistlBase:Name>
     <KistlBase:Value>4</KistlBase:Value>
   </KistlBase:EnumerationEntry>
   <KistlBase:EnumerationEntry ExportGuid="140f60f7-5616-49a0-a070-09c8e341d6a4">
-    <KistlBase:ChangedOn>2011-08-05T10:31:08.827041Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2011-09-16T16:39:52.50395Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-01-29T16:54:15Z</KistlBase:CreatedOn>
     <KistlBase:Description>Full Rights: Read, Write, Delete, Create</KistlBase:Description>
     <KistlBase:Enumeration>1d067873-d5e7-448e-a46a-4377a1a16ece</KistlBase:Enumeration>
-    <KistlBase:EnumerationEntries_pos>500</KistlBase:EnumerationEntries_pos>
+    <KistlBase:EnumerationEntries_pos>701</KistlBase:EnumerationEntries_pos>
     <KistlBase:Name>Full</KistlBase:Name>
     <KistlBase:Value>15</KistlBase:Value>
   </KistlBase:EnumerationEntry>
-  <KistlBase:EnumerationEntry ExportGuid="3ea46f5d-0052-40cf-9b69-1de6dac89af9">
-    <KistlBase:ChangedOn>2011-08-05T10:31:08.829041Z</KistlBase:ChangedOn>
-    <KistlBase:CreatedOn>2010-01-29T16:54:15Z</KistlBase:CreatedOn>
-    <KistlBase:Description>No Rights</KistlBase:Description>
-    <KistlBase:Enumeration>1d067873-d5e7-448e-a46a-4377a1a16ece</KistlBase:Enumeration>
-    <KistlBase:EnumerationEntries_pos>400</KistlBase:EnumerationEntries_pos>
-    <KistlBase:Name>None</KistlBase:Name>
-    <KistlBase:Value>0</KistlBase:Value>
-  </KistlBase:EnumerationEntry>
   <KistlBase:EnumerationEntry ExportGuid="25aaeb21-8143-467d-9368-94aede884053">
-    <KistlBase:ChangedOn>2011-08-05T10:31:08.831041Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2011-09-16T16:39:52.50395Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-01-29T16:54:15Z</KistlBase:CreatedOn>
     <KistlBase:Description>May Read</KistlBase:Description>
     <KistlBase:Enumeration>1d067873-d5e7-448e-a46a-4377a1a16ece</KistlBase:Enumeration>
-    <KistlBase:EnumerationEntries_pos>200</KistlBase:EnumerationEntries_pos>
+    <KistlBase:EnumerationEntries_pos>0</KistlBase:EnumerationEntries_pos>
     <KistlBase:Name>Read</KistlBase:Name>
     <KistlBase:Value>1</KistlBase:Value>
-  </KistlBase:EnumerationEntry>
-  <KistlBase:EnumerationEntry ExportGuid="21f76c71-d7be-4427-8fb5-3b7bc73bc071">
-    <KistlBase:ChangedOn>2011-08-05T10:31:08.833041Z</KistlBase:ChangedOn>
-    <KistlBase:CreatedOn>2010-01-29T16:54:15Z</KistlBase:CreatedOn>
-    <KistlBase:Description>May Write</KistlBase:Description>
-    <KistlBase:Enumeration>1d067873-d5e7-448e-a46a-4377a1a16ece</KistlBase:Enumeration>
-    <KistlBase:EnumerationEntries_pos>300</KistlBase:EnumerationEntries_pos>
-    <KistlBase:Name>Write</KistlBase:Name>
-    <KistlBase:Value>2</KistlBase:Value>
   </KistlBase:EnumerationEntry>
   <KistlBase:EnumerationEntry ExportGuid="8ed37905-2837-48b3-81f1-56143651e14c">
     <KistlBase:ChangedOn>2011-08-05T10:31:08.835041Z</KistlBase:ChangedOn>

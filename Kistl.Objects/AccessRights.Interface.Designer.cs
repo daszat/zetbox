@@ -10,19 +10,9 @@ namespace Kistl.App.Base
     public enum AccessRights
     {
 		/// <summary>
-		/// No Rights
-		/// </summary>
-		None = 0,
-
-		/// <summary>
 		/// May Read
 		/// </summary>
 		Read = 1,
-
-		/// <summary>
-		/// May Write
-		/// </summary>
-		Write = 2,
 
 		/// <summary>
 		/// May Read and Write
