@@ -1,10 +1,9 @@
 ﻿<Window x:Class="Kistl.Client.WPF.StartupScreen"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Kistl"
-        Width="480"
-        Height="300" WindowStyle="None"
-    x:Name="MyCtrl"
+    Title="Kistl"
+    Width="480"
+    Height="300" WindowStyle="None"
     Background="Transparent" AllowsTransparency="True"
     ResizeMode="NoResize" WindowStartupLocation="CenterScreen" ShowInTaskbar="False">
   <Border>
@@ -13,12 +12,18 @@
     </Border.Background>
     <StackPanel VerticalAlignment="Bottom">
       <!--<TextBlock HorizontalAlignment="Center" Margin="0 30 0 0" FontWeight="Bold"
-             Text="{Binding  ElementName=MyCtrl, Path=Message}" /> -->
+             Text="{Binding Message}" /> -->
       <ProgressBar Margin="10 10 10 0" Height="15"
-               Maximum="{Binding  ElementName=MyCtrl, Path=Steps}"
-               Value="{Binding  ElementName=MyCtrl, Path=CurrentStep}" />
-      <TextBlock Name="txtInfo" HorizontalAlignment="Center" Margin="0 10 0 10"
-             Text="{Binding  ElementName=MyCtrl, Path=Info}" />
-    </StackPanel>
+               Maximum="{Binding Steps}"
+               Value="{Binding CurrentStep}" />
+            <DockPanel Margin="10">
+                <Button DockPanel.Dock="Right"
+                        Content="{Binding ExitCommand.Label}"
+                        Command="{Binding ExitCommand}"
+                        Padding="10 0 10 0" />
+                <TextBlock Name="txtInfo" HorizontalAlignment="Center"
+             Text="{Binding Info}" />
+            </DockPanel>
+        </StackPanel>
   </Border>
 </Window>

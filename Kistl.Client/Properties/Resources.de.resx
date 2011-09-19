@@ -144,4 +144,7 @@
   <data name="Startup_EnsuringCredentials" xml:space="preserve">
     <value>Berechtigungen prüfen</value>
   </data>
+  <data name="ExitButton" xml:space="preserve">
+    <value>Beenden</value>
+  </data>
 </root>

@@ -26,9 +26,11 @@ namespace Kistl.Client.WPF
         {
             if (DesignerProperties.GetIsInDesignMode(this)) return;
 
+
             Steps = 10;
             CurrentStep = 0;
             InitializeComponent();
+            DataContext = this;
             Log.Debug("Initialization complete");
         }
 
@@ -155,5 +157,50 @@ namespace Kistl.Client.WPF
         // Using a DependencyProperty as the backing store for CurrentStep.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CurrentStepProperty =
             DependencyProperty.Register("CurrentStep", typeof(int), typeof(StartupScreen));
+
+        public class ExitCommandImpl : ICommand
+        {
+            public bool CanExecute(object parameter)
+            {
+                return true;
+            }
+
+            public event EventHandler CanExecuteChanged;
+
+            protected void OnCanExecuteChanged()
+            {
+                var temp = CanExecuteChanged;
+                if (temp != null)
+                {
+                    temp(this, EventArgs.Empty);
+                }
+            }
+
+            public void Execute(object parameter)
+            {
+                System.Environment.Exit(1);
+            }
+
+            public string Label
+            {
+                get
+                {
+                    return Kistl.Client.Properties.Resources.ExitButton;
+                }
+            }
+        }
+
+        private ICommand _ExitCommand;
+        public ICommand ExitCommand
+        {
+            get
+            {
+                if (_ExitCommand == null)
+                {
+                    _ExitCommand = new ExitCommandImpl();
+                }
+                return _ExitCommand;
+            }
+        }
     }
 }

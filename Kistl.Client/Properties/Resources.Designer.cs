@@ -61,6 +61,15 @@ namespace Kistl.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Exit.
+        /// </summary>
+        public static string ExitButton {
+            get {
+                return ResourceManager.GetString("ExitButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bootstrapping Assembly Resolver.
         /// </summary>
         public static string Startup_AssemblyResolver {
