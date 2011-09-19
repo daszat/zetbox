@@ -1,5 +1,3 @@
-//#define NO_SPLASH_SCREEN
-
 namespace Kistl.Client.WPF
 {
     using System;
@@ -28,15 +26,12 @@ namespace Kistl.Client.WPF
         {
             if (DesignerProperties.GetIsInDesignMode(this)) return;
 
-#if !NO_SPLASH_SCREEN
             Steps = 10;
             CurrentStep = 0;
             InitializeComponent();
             Log.Debug("Initialization complete");
-#endif
         }
 
-#if !NO_SPLASH_SCREEN
         private static readonly log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Client.WPF.SplashScreen");
         private static readonly object _lock = new object();
         private static StartupScreen _current = null;
@@ -54,101 +49,71 @@ namespace Kistl.Client.WPF
             Log.Debug("Run: Set");
             _created.Set();
             System.Windows.Threading.Dispatcher.Run();
+            _current = null;
+            _thread = null;
         }
-#endif
+
+        /// <summary>
+        /// Closes the splash screen on first window loaded event
+        /// </summary>
+        /// <remarks>
+        /// Trick 17, close splash screen, when Application Dispatcher is ready to dispatch messages after the app has been loaded
+        /// http://www.olsonsoft.com/blogs/stefanolson/post/A-better-WPF-splash-screen.aspx
+        /// </remarks>
+        public static void CanCloseOnWindowLoaded()
+        {
+            Application.Current.Dispatcher.BeginInvoke(
+                DispatcherPriority.Loaded,
+                new ThreadStart(() =>
+                {
+                    lock (_lock)
+                    {
+                        if (_current != null) _current.Dispatcher.InvokeShutdown();
+                    }
+                })
+            );
+        }
+
         public static void ShowSplashScreen(string message, string info, int steps)
         {
-#if !NO_SPLASH_SCREEN
-            using (Log.DebugTraceMethodCall("ShowSplashScreen"))
+            lock (_lock)
             {
-                lock (_lock)
+                if (_current == null)
                 {
-                    Log.Debug("Acquired lock for ShowSplashScreen");
-                    if (_current == null)
+                    _thread = new Thread(new ThreadStart(Run));
+                    _thread.SetApartmentState(ApartmentState.STA);
+                    _thread.IsBackground = true; // do not block main process from closing
+                    _thread.Start();
+
+                    _created.WaitOne();
+
+                    _current.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(delegate()
                     {
-                        Log.Debug("Will create new Thread");
-                        _thread = new Thread(new ThreadStart(Run));
-                        _thread.SetApartmentState(ApartmentState.STA);
-                        _thread.IsBackground = true; // do not block main process from closing
-                        _thread.Start();
-
-                        Log.Debug("Waiting for thread to proceed");
-                        _created.WaitOne();
-
-                        _current.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(delegate()
-                        {
-                            Log.Debug("Setting new message");
-                            _current.Message = message;
-                            _current.Info = info;
-                            _current.Steps = steps;
-                        }));
-                    }
-                    else
-                    {
-                        Log.Debug("Reusing existing dispatcher");
-                        _current.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(delegate()
-                        {
-                            Log.Debug("Setting new message on reused thread");
-                            _current.Message = message;
-                            _current.Info = info;
-                            _current.Steps = steps;
-
-                            _current.Show();
-                            _current.Activate();
-                        }));
-                    }
+                        _current.Message = message;
+                        _current.Info = info;
+                        _current.Steps = steps;
+                    }));
+                }
+                else
+                {
+                    Log.Warn("There is already a SplashScreen shown");
                 }
             }
-#endif
-        }
-
-        public static void HideSplashScreen()
-        {
-#if !NO_SPLASH_SCREEN
-            using (Log.DebugTraceMethodCall("HideSplashScreen"))
-            {
-                lock (_lock)
-                {
-                    Log.Debug("Acquired lock for HideSplashScreen");
-                    if (_current != null)
-                    {
-                        Log.Debug("Signalling Hide to the dispatcher");
-                        _current.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(delegate()
-                        {
-                            Log.Debug("Committing Hide to the dispatcher");
-                            _current.Hide();
-                        }));
-                    }
-                    else
-                    {
-                        Log.Debug("No current dispatcher");
-                    }
-                }
-            }
-#endif
         }
 
         public static void SetInfo(string info)
         {
-#if !NO_SPLASH_SCREEN
-            using (Log.DebugTraceMethodCall("SetInfo"))
+            lock (_lock)
             {
-                lock (_lock)
+                if (_current != null)
                 {
-                    Log.Debug("Acquired lock for SetInfo");
-                    if (_current != null)
+                    _current.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(delegate()
                     {
-                        Log.Debug("Signalling SetInfo to the dispatcher");
-                        _current.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(delegate()
-                        {
-                            Log.Debug("Set new Info and incremented CurrentStep");
-                            _current.Info = info;
-                            _current.CurrentStep++;
-                        }));
-                    }
+                        _current.Info = info;
+                        _current.CurrentStep++;
+                    }));
                 }
             }
-#endif
         }
 
         public string Message

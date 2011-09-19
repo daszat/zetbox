@@ -99,7 +99,7 @@ namespace Kistl.Client.WPF
                     var config = KistlConfig.FromFile(configFilePath, "Kistl.Client.WPF.xml");
                     InitCulture(config);
 
-                    StartupScreen.ShowSplashScreen(Kistl.Client.Properties.Resources.Startup_Message, Kistl.Client.Properties.Resources.Startup_InitApp, 5);
+                    StartupScreen.ShowSplashScreen(Kistl.Client.Properties.Resources.Startup_Message, Kistl.Client.Properties.Resources.Startup_InitApp, 7);
 
                     if (config.Server != null && config.Server.StartServer)
                     {
@@ -155,7 +155,10 @@ namespace Kistl.Client.WPF
                     resources.EndInit();
 
                     // Init credentials explicit
+                    StartupScreen.SetInfo(Kistl.Client.Properties.Resources.Startup_EnsuringCredentials);
                     container.Resolve<ICredentialsResolver>().EnsureCredentials();
+
+                    StartupScreen.SetInfo(Kistl.Client.Properties.Resources.Startup_Launcher);
 
                     // Create real converter after credentials are resolved
                     var iconConverter = new IconConverter(container.Resolve<IFrozenContext>(), container.Resolve<IKistlContext>());
@@ -171,11 +174,11 @@ namespace Kistl.Client.WPF
 
                     FixupDatabase(container.Resolve<Func<IKistlContext>>());
 
+                    StartupScreen.CanCloseOnWindowLoaded();
                     // delegate all business logic into another class, which 
                     // allows us to load the Kistl.Objects assemblies _before_ 
                     // they are needed.
                     var launcher = container.Resolve<Launcher>();
-                    StartupScreen.HideSplashScreen();
                     launcher.Show(args);
                 }
             }
