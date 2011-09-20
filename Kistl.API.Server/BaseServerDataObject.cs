@@ -140,8 +140,7 @@ namespace Kistl.API.Server
         {
             var baseResult = base.FromStream(sr);
             BinarySerializer.FromStreamConverter(i => ClientObjectState = (DataObjectState)i, sr);
-            int clientsRights = 0;
-            BinarySerializer.FromStreamConverter(i => clientsRights = i, sr); // nice try
+            BinarySerializer.FromStreamConverter(i => { int tmp = i; }, sr); // nice try
             return baseResult;
         }
 
