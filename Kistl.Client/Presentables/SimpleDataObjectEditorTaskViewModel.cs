@@ -16,11 +16,11 @@ namespace Kistl.Client.Presentables
         : WindowViewModel
     {
         public new delegate SimpleDataObjectEditorTaskViewModel Factory(IKistlContext dataCtx, ViewModel parent,
-            DataObjectViewModel obj);
+            ViewModel obj);
 
         public SimpleDataObjectEditorTaskViewModel(
             IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent,
-            DataObjectViewModel obj)
+            ViewModel obj)
             : base(appCtx, dataCtx, parent)
         {
             if (obj == null) throw new ArgumentNullException("obj");
@@ -47,10 +47,9 @@ namespace Kistl.Client.Presentables
         }
         #endregion
 
-
         #region Public interface
 
-        public DataObjectViewModel Object
+        public ViewModel Object
         {
             get; private set;
         }

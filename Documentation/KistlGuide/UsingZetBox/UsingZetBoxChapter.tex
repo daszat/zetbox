@@ -1,0 +1,17 @@
+\chapter{Using the ZetBox}
+
+This chapter describes common tasks and how to use the ZetBox.
+
+\section{Dialogs}
+Sometimes it is necessary to show a Dialog. For example to select something or
+to edit some details.
+\par
+
+Usage is simple, just create a \emph{SimpleDataObjectEditorTaskViewModel}, pass the ViewModel (can be any view model) to edit and call \emph{ShowDialog}.
+\begin{CS}
+var dlg = ViewModelFactory
+	.CreateViewModel<SimpleDataObjectEditorTaskViewModel.Factory>()
+	.Invoke(DataContext, this, item); 
+ViewModelFactory.ShowDialog(dlg);
+\end{CS}
+
