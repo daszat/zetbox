@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -15,7 +16,6 @@ using System.Windows.Shapes;
 using Kistl.Client.GUI;
 using Kistl.Client.Presentables.FilterViewModels;
 using Kistl.Client.Presentables.KistlBase;
-using System.Windows.Controls.Primitives;
 
 namespace Kistl.Client.WPF.View.Filters
 {
@@ -43,7 +43,8 @@ namespace Kistl.Client.WPF.View.Filters
             var focus = FocusManager.GetFocusedElement(scope);
             btn.Focus();
 
-            Dispatcher.BeginInvoke(new Action(() => focus.Focus()), System.Windows.Threading.DispatcherPriority.Background);
+            if (focus != null)
+                Dispatcher.BeginInvoke(new Action(() => focus.Focus()), System.Windows.Threading.DispatcherPriority.Background);
         }
     }
 }
