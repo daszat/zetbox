@@ -30,9 +30,20 @@ namespace Kistl.API.AbstractConsumerTests
         protected abstract string GetConfigFile();
         protected abstract HostType GetHostType();
 
+        /// <summary>
+        /// This method is called first for early setup tasks before any Kistl stuff is touched.
+        /// </summary>
+        protected virtual void EarlySetup()
+        {
+        }
+
         [SetUp]
         public void SetUpTestFixture()
         {
+            using (Log.InfoTraceMethodCall("EarlySetup"))
+            {
+                EarlySetup();
+            }
             using (Log.InfoTraceMethodCall("Starting up"))
             {
                 var config = KistlConfig.FromFile(null, GetConfigFile());
