@@ -90,6 +90,11 @@
       <Name>Kistl.API.AbstractConsumerTests</Name>
       <Private>False</Private>
     </ProjectReference>
+	<!-- workaround https://bugzilla.novell.com/show_bug.cgi?id=676049 in mono-2-10 -->
+    <ProjectReference Include="..\..\Kistl.Objects\Kistl.Objects.csproj" Condition="'$(Configuration)|$(Platform)' == 'Linux.Debug|AnyCPU'">
+      <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
+      <Name>Kistl.Objects</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="BackupRestoreTestDatabase.sql" />
