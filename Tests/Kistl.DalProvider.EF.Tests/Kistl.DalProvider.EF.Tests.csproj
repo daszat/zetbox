@@ -212,6 +212,10 @@
       <Project>{1E56A7BA-61B7-4283-B65F-ADFA6418F72B}</Project>
       <Name>Kistl.Tests.Utilities.MsSql</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Kistl.Tests.Utilities.PostgreSql\Kistl.Tests.Utilities.PostgreSql.csproj">
+      <Project>{C0992804-A195-4087-B77C-910ABEAB74B9}</Project>
+      <Name>Kistl.Tests.Utilities.PostgreSql</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
