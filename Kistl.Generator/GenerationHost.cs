@@ -34,6 +34,9 @@ namespace Kistl.Generator
         private Stack<TextWriter> contextWriter;
         private string outputDirectory;
 
+        private static readonly object _lock = new object();
+        private static bool _arebisInitialized = false;
+
         public ResourceBasedGenerationHost()
         {
         }
@@ -45,12 +48,22 @@ namespace Kistl.Generator
             // Store settings:
             this.settings = settings;
 
-            // Setup generation language settings:
-            GenerationLanguage.DefaultNameSpace = "Arebis.DynamicAssembly";
-            GenerationLanguage.DefaultBaseClass = "Arebis.CodeGeneration.CodeTemplate";
-            GenerationLanguage.CodeBuilders["vb"] = typeof(VBCodeBuilder);
-            GenerationLanguage.CodeBuilders["c#"] = typeof(CSCodeBuilder);
-            GenerationLanguage.DefaultTemplateLanguage = "c#";
+            if (!_arebisInitialized)
+            {
+                lock (_lock)
+                {
+                    if (!_arebisInitialized)
+                    {
+                        // Setup generation language settings:
+                        GenerationLanguage.DefaultNameSpace = "Arebis.DynamicAssembly";
+                        GenerationLanguage.DefaultBaseClass = "Arebis.CodeGeneration.CodeTemplate";
+                        GenerationLanguage.CodeBuilders["vb"] = typeof(VBCodeBuilder);
+                        GenerationLanguage.CodeBuilders["c#"] = typeof(CSCodeBuilder);
+                        GenerationLanguage.DefaultTemplateLanguage = "c#";
+                        _arebisInitialized = true;
+                    }
+                }
+            }
 
             // Default to T3 syntax:
             new Arebis.CodeGenerator.Templated.Syntax.T3Syntax().Setup(this.settings);
