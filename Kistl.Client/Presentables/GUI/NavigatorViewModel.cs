@@ -52,6 +52,9 @@ namespace Kistl.Client.Presentables.GUI
 
         #region Navigational Aides
 
+        /// <summary>
+        /// The currently displayed NavigationScreenViewModel.
+        /// </summary>
         public NavigationScreenViewModel CurrentScreen
         {
             get
@@ -72,6 +75,9 @@ namespace Kistl.Client.Presentables.GUI
             }
         }
 
+        /// <summary>
+        /// The "path" to the CurrentScreen, as defined by its Parents.
+        /// </summary>
         public ReadOnlyObservableCollection<NavigationScreenViewModel> Location
         {
             get { return _locationRO; }
@@ -112,6 +118,9 @@ namespace Kistl.Client.Presentables.GUI
             }
         }
 
+        /// <summary>
+        /// A list of recently visited screens.
+        /// </summary>
         public ReadOnlyObservableCollection<NavigationScreenViewModel> History
         {
             get { return _historyRO; }
