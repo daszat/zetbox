@@ -2090,6 +2090,7 @@
                         ToRole="ChangedBy" />
     <Property Name="ChangedOn" Type="DateTime" Nullable="false"  ConcurrencyMode="Fixed"/>
     <Property Name="Comment" Type="String" Nullable="true" MaxLength="2147483647"  />
+    <Property Name="CompareNulls" Type="Boolean" Nullable="false"  />
     <NavigationProperty Name="CreatedByImpl"
                         Relationship="Model.FK_SourceColumn_was_CreatedBy"
                         FromRole="SourceColumn"

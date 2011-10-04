@@ -28,6 +28,10 @@
         <property name="Comment" 
                   column="`Comment`" 
                   optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="CompareNulls" 
+                  column="`CompareNulls`" 
+                  optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
         <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Kistl.App.Base.IdentityNHibernateImpl+IdentityProxy, Kistl.Objects.NHibernateImpl" />
 

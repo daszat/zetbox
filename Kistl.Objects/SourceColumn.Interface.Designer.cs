@@ -22,6 +22,14 @@ namespace ZBox.App.SchemaMigration
         }
 
         /// <summary>
+        /// In some cases, when joining across source tables, nulls should be compared as equals, instead of not. This is especially true, when &quot;null&quot; is used as a domain value.
+        /// </summary>
+        bool CompareNulls {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// 
         /// </summary>
         ZBox.App.SchemaMigration.ColumnType DbType {

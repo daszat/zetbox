@@ -1384,11 +1384,25 @@ END$BODY$
 
             for (int i = 0; i < join.JoinColumnName.Length; i++)
             {
-                query.AppendFormat("{0}.{1} = {2}.{3}",
+                var joinColumn = string.Format("{0}.{1}",
                     join.JoinColumnName[i].Source == ColumnRef.PrimaryTable ? "t0" : (join.JoinColumnName[i].Source == ColumnRef.Local ? alias : join_alias[join.JoinColumnName[i].Source]),
-                    QuoteIdentifier(join.JoinColumnName[i].ColumnName),
+                    QuoteIdentifier(join.JoinColumnName[i].ColumnName));
+                var fkColumn = string.Format("{0}.{1}",
                     join.FKColumnName[i].Source == ColumnRef.PrimaryTable ? "t0" : (join.FKColumnName[i].Source == ColumnRef.Local ? alias : join_alias[join.FKColumnName[i].Source]),
                     QuoteIdentifier(join.FKColumnName[i].ColumnName));
+
+                if (join.CompareNullsAsEqual[i])
+                {
+                    query.AppendFormat("({0} = {1} OR ({0} IS NULL AND {1} IS NULL))",
+                        joinColumn,
+                        fkColumn);
+                }
+                else
+                {
+                    query.AppendFormat("{0} = {1}",
+                        joinColumn,
+                        fkColumn);
+                }
 
                 if (i < join.JoinColumnName.Length - 1)
                 {

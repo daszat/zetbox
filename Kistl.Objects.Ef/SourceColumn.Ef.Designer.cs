@@ -262,6 +262,73 @@ namespace ZBox.App.SchemaMigration
 		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.SourceColumn, string> OnComment_PostSetter;
 
         /// <summary>
+        /// In some cases, when joining across source tables, nulls should be compared as equals, instead of not. This is especially true, when &quot;null&quot; is used as a domain value.
+        /// </summary>
+        // value type property
+        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public bool CompareNulls
+        {
+            get
+            {
+                if (!CurrentAccessRights.HasReadRights()) return default(bool);
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _CompareNulls;
+                if (!_isCompareNullsSet && ObjectState == DataObjectState.New) {
+                    var __p = FrozenContext.FindPersistenceObject<Kistl.App.Base.Property>(new Guid("09607800-4b5c-4d8a-a0cf-b508986c2f17"));
+                    if (__p != null) {
+                        _isCompareNullsSet = true;
+                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
+                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
+                        __result = this._CompareNulls = (bool)__tmp_value;
+                    } else {
+                        Kistl.API.Utils.Logging.Log.Warn("Unable to get default value for property 'SourceColumn.CompareNulls'");
+                    }
+                }
+                if (OnCompareNulls_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<bool>(__result);
+                    OnCompareNulls_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                _isCompareNullsSet = true;
+                if (_CompareNulls != value)
+                {
+                    var __oldValue = _CompareNulls;
+                    var __newValue = value;
+                    if (OnCompareNulls_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<bool>(__oldValue, __newValue);
+                        OnCompareNulls_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("CompareNulls", __oldValue, __newValue);
+                    _CompareNulls = __newValue;
+                    NotifyPropertyChanged("CompareNulls", __oldValue, __newValue);
+                    if (OnCompareNulls_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);
+                        OnCompareNulls_PostSetter(this, __e);
+                    }
+                }
+            }
+        }
+        private bool _CompareNulls;
+        private bool _isCompareNullsSet = false;
+        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
+		public static event PropertyGetterHandler<ZBox.App.SchemaMigration.SourceColumn, bool> OnCompareNulls_Getter;
+		public static event PropertyPreSetterHandler<ZBox.App.SchemaMigration.SourceColumn, bool> OnCompareNulls_PreSetter;
+		public static event PropertyPostSetterHandler<ZBox.App.SchemaMigration.SourceColumn, bool> OnCompareNulls_PostSetter;
+
+        /// <summary>
         /// Identity which created this object
         /// </summary>
     /*
@@ -1278,6 +1345,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
 
             me.ChangedOn = other.ChangedOn;
             me.Comment = other.Comment;
+            me.CompareNulls = other.CompareNulls;
             me.CreatedOn = other.CreatedOn;
             me.DbType = other.DbType;
             me.Description = other.Description;
@@ -1405,6 +1473,14 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
                         null,
                         obj => obj.Comment,
                         (obj, val) => obj.Comment = val),
+                    // else
+                    new PropertyDescriptorEfImpl<SourceColumnEfImpl, bool>(
+                        lazyCtx,
+                        new Guid("09607800-4b5c-4d8a-a0cf-b508986c2f17"),
+                        "CompareNulls",
+                        null,
+                        obj => obj.CompareNulls,
+                        (obj, val) => obj.CompareNulls = val),
                     // else
                     new PropertyDescriptorEfImpl<SourceColumnEfImpl, Kistl.App.Base.Identity>(
                         lazyCtx,
@@ -1621,6 +1697,10 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
                 BinarySerializer.ToStream(this._ChangedOn, binStream);
             }
             BinarySerializer.ToStream(this._Comment, binStream);
+            BinarySerializer.ToStream(this._isCompareNullsSet, binStream);
+            if (this._isCompareNullsSet) {
+                BinarySerializer.ToStream(this._CompareNulls, binStream);
+            }
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.IdentityEfImpl>("Model.FK_SourceColumn_was_CreatedBy", "CreatedBy").EntityKey;
                 BinarySerializer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, binStream);
@@ -1676,6 +1756,10 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
                 BinarySerializer.FromStream(out this._ChangedOn, binStream);
             }
             BinarySerializer.FromStream(out this._Comment, binStream);
+            BinarySerializer.FromStream(out this._isCompareNullsSet, binStream);
+            if (this._isCompareNullsSet) {
+                BinarySerializer.FromStream(out this._CompareNulls, binStream);
+            }
             BinarySerializer.FromStream(out this._fk_CreatedBy, binStream);
             BinarySerializer.FromStream(out this._isCreatedOnSet, binStream);
             if (this._isCreatedOnSet) {
@@ -1724,6 +1808,10 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
                 XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "ZBox.App.SchemaMigration");
             }
             XmlStreamer.ToStream(this._Comment, xml, "Comment", "ZBox.App.SchemaMigration");
+            XmlStreamer.ToStream(this._isCompareNullsSet, xml, "IsCompareNullsSet", "ZBox.App.SchemaMigration");
+            if (this._isCompareNullsSet) {
+                XmlStreamer.ToStream(this._CompareNulls, xml, "CompareNulls", "ZBox.App.SchemaMigration");
+            }
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.IdentityEfImpl>("Model.FK_SourceColumn_was_CreatedBy", "CreatedBy").EntityKey;
                 XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "CreatedBy", "ZBox.App.SchemaMigration");
@@ -1763,6 +1851,10 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
                 XmlStreamer.FromStream(ref this._ChangedOn, xml, "ChangedOn", "ZBox.App.SchemaMigration");
             }
             XmlStreamer.FromStream(ref this._Comment, xml, "Comment", "ZBox.App.SchemaMigration");
+            XmlStreamer.FromStream(ref this._isCompareNullsSet, xml, "IsCompareNullsSet", "ZBox.App.SchemaMigration");
+            if (this._isCompareNullsSet) {
+                XmlStreamer.FromStream(ref this._CompareNulls, xml, "CompareNulls", "ZBox.App.SchemaMigration");
+            }
             XmlStreamer.FromStream(ref this._fk_CreatedBy, xml, "CreatedBy", "ZBox.App.SchemaMigration");
             XmlStreamer.FromStream(ref this._isCreatedOnSet, xml, "IsCreatedOnSet", "ZBox.App.SchemaMigration");
             if (this._isCreatedOnSet) {
@@ -1795,6 +1887,8 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
             System.Diagnostics.Debug.Assert(this._isChangedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("ZBox.App.SchemaMigration")) XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "ZBox.App.SchemaMigration");
             if (modules.Contains("*") || modules.Contains("ZBox.App.SchemaMigration")) XmlStreamer.ToStream(this._Comment, xml, "Comment", "ZBox.App.SchemaMigration");
+            System.Diagnostics.Debug.Assert(this._isCompareNullsSet, "Exported objects need to have all default values evaluated");
+            if (modules.Contains("*") || modules.Contains("ZBox.App.SchemaMigration")) XmlStreamer.ToStream(this._CompareNulls, xml, "CompareNulls", "ZBox.App.SchemaMigration");
             System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("ZBox.App.SchemaMigration")) XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "ZBox.App.SchemaMigration");
             if (modules.Contains("*") || modules.Contains("ZBox.App.SchemaMigration")) XmlStreamer.ToStream((int?)((ZBox.App.SchemaMigration.SourceColumn)this).DbType, xml, "DbType", "ZBox.App.SchemaMigration");
@@ -1814,6 +1908,9 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
             XmlStreamer.FromStream(ref this._ChangedOn, xml, "ChangedOn", "ZBox.App.SchemaMigration");
             this._isChangedOnSet = true;
             XmlStreamer.FromStream(ref this._Comment, xml, "Comment", "ZBox.App.SchemaMigration");
+            // Import must have default value set
+            XmlStreamer.FromStream(ref this._CompareNulls, xml, "CompareNulls", "ZBox.App.SchemaMigration");
+            this._isCompareNullsSet = true;
             // Import must have default value set
             XmlStreamer.FromStream(ref this._CreatedOn, xml, "CreatedOn", "ZBox.App.SchemaMigration");
             this._isCreatedOnSet = true;

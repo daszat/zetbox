@@ -349,6 +349,12 @@ namespace Kistl.API.Server
         /// Type of Join
         /// </summary>
         public JoinType Type { get; set; }
+        /// <summary>
+        /// Whether or not this join treats nulls as equal.
+        ///
+        /// By default, SQL treats comparisons to null as null, but in some special cases, we want to treat null as equal to null. Set this property to true to do so.
+        /// </summary>
+        public bool[] CompareNullsAsEqual { get; set; }
 
         private List<Join> _joins = null;
         public List<Join> Joins

@@ -2619,6 +2619,7 @@
     <Property Name="fk_CreatedBy" Type="int" />
     <Property Name="ChangedOn" Type="datetime2" Nullable="false" />
     <Property Name="Comment" Type="nvarchar" Nullable="true" />
+    <Property Name="CompareNulls" Type="bit" Nullable="false" />
     <Property Name="CreatedOn" Type="datetime2" Nullable="false" />
     <Property Name="DbType" Type="int" Nullable="false" />
     <Property Name="Description" Type="nvarchar" MaxLength="250" Nullable="true" />

@@ -277,6 +277,7 @@ namespace Kistl.API.Migration
                     // Append join columns to primary join
                     join.JoinColumnName = join.JoinColumnName.Concat(new[] { new ColumnRef("ID", j, System.Data.DbType.Int32) }).ToArray();
                     join.FKColumnName = join.FKColumnName.Concat(new[] { new ColumnRef(GetColName(subJoin.Property), ColumnRef.Local, System.Data.DbType.Int32) }).ToArray();
+                    join.CompareNullsAsEqual = join.CompareNullsAsEqual.Concat(new[] { j.CompareNullsAsEqual[0] }).ToArray();
                     join.Joins.Add(j);
                 }
             }
@@ -295,7 +296,8 @@ namespace Kistl.API.Migration
                 Type = JoinType.Left,
                 JoinTableName = _dst.GetTableName(srcTbl.DestinationObjectClass.Module.SchemaName, srcTbl.DestinationObjectClass.TableName),
                 JoinColumnName = directRefs.Select(reference => new ColumnRef(reference.Value.References.DestinationProperty.Single().Name, ColumnRef.Local, reference.Value.References.DestinationProperty.Single().GetDbType())).ToArray(),
-                FKColumnName = directRefs.Select(reference => new ColumnRef(reference.Value.Name, ColumnRef.PrimaryTable, (System.Data.DbType)reference.Value.DbType)).ToArray()
+                FKColumnName = directRefs.Select(reference => new ColumnRef(reference.Value.Name, ColumnRef.PrimaryTable, (System.Data.DbType)reference.Value.DbType)).ToArray(),
+                CompareNullsAsEqual = directRefs.Select(reference => reference.Key.CompareNulls).ToArray()
             };
             directRefs.ForEach(dr => all_joins[dr.Key] = result);
             return result;

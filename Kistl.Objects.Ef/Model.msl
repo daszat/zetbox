@@ -962,6 +962,7 @@
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
 <ScalarProperty Name="Comment" ColumnName="Comment" />
+<ScalarProperty Name="CompareNulls" ColumnName="CompareNulls" />
 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
 <ScalarProperty Name="DbTypeImpl" ColumnName="DbType" />
 <ScalarProperty Name="Description" ColumnName="Description" />
