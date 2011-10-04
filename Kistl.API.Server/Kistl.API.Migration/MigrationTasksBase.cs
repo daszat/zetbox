@@ -256,36 +256,32 @@ namespace Kistl.API.Migration
                 all_joins);
         }
 
+        // recursively create necessary joins to resolve references
         private IEnumerable<Join> CreateReferenceJoin(IGrouping<Property, KeyValuePair<SourceColumn, SourceColumn>> referenceGroup, Dictionary<SourceColumn, Join> all_joins)
         {
-            var x = referenceGroup
+            var secondaryReferences = referenceGroup
                 .Select(r => new KeyValuePair<SourceColumn, SourceColumn>(r.Key, r.Value.References)) // go to referenced SourceColumns
-                .Where(r => r.Value.References != null && r.Value.DestinationProperty.Count > 0) // find secondary references
-                .GroupBy(r => r.Value.DestinationProperty.Single())
-                .Select(g => new { Property = g.Key, Result = CreateReferenceJoin(g, all_joins) })
-                .ToArray();
+                .Where(r => r.Value.References != null && r.Value.DestinationProperty.Count > 0); // find secondary references
 
-            if (x.Length > 0)
+            // Create join for this referenceGroup
+            var join = CreateJoinComponent(referenceGroup, all_joins);
+
+            // add secondary joins for referenced tables
+            foreach (var subJoin in secondaryReferences
+                .GroupBy(r => r.Value.DestinationProperty.Single())
+                .Select(g => new { Property = g.Key, Joins = CreateReferenceJoin(g, all_joins) })
+                .ToArray())
             {
-                var result = new List<Join>();
-                foreach (var i in x)
+                foreach (var j in subJoin.Joins)
                 {
-                    foreach (var j in i.Result)
-                    {
-                        var join = CreateJoinComponent(referenceGroup, all_joins);
-                        join.JoinColumnName = join.JoinColumnName.Concat(new[] { new ColumnRef("ID", j, System.Data.DbType.Int32) }).ToArray();
-                        join.FKColumnName = join.FKColumnName.Concat(new[] { new ColumnRef(GetColName(i.Property), ColumnRef.Local, System.Data.DbType.Int32) }).ToArray();
-                        j.Joins.Add(join);
-                        result.Add(j);
-                    }
+                    // Append join columns to primary join
+                    join.JoinColumnName = join.JoinColumnName.Concat(new[] { new ColumnRef("ID", j, System.Data.DbType.Int32) }).ToArray();
+                    join.FKColumnName = join.FKColumnName.Concat(new[] { new ColumnRef(GetColName(subJoin.Property), ColumnRef.Local, System.Data.DbType.Int32) }).ToArray();
+                    join.Joins.Add(j);
                 }
-                return result;
             }
-            else
-            {
-                var result = CreateJoinComponent(referenceGroup, all_joins);
-                return new[] { result };
-            }
+
+            return new[] { join };
         }
 
         private Join CreateJoinComponent(IGrouping<Property, KeyValuePair<SourceColumn, SourceColumn>> referenceGroup, Dictionary<SourceColumn, Join> all_joins)

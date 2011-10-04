@@ -1284,13 +1284,14 @@ END$BODY$
                 .JoinColumnName
                 .Concat(join.FKColumnName);
 
-            aliases[join] = String.Format(CultureInfo.InvariantCulture, "t{0}", nextIdx);
-            nextIdx += 1;
-
             foreach (var subJoin in join.Joins)
             {
                 result = result.Concat(FetchColumns(subJoin, aliases, ref nextIdx));
             }
+
+            aliases[join] = String.Format(CultureInfo.InvariantCulture, "t{0}", nextIdx);
+            nextIdx += 1;
+
             return result;
         }
 
@@ -1347,6 +1348,11 @@ END$BODY$
             if (join.JoinColumnName.Length != join.FKColumnName.Length)
                 throw new ArgumentException(string.Format("Column count on Join '{0}' does not match", join), "join");
 
+            foreach (var j in join.Joins)
+            {
+                AddReadJoin(query, j, join_alias, colNames, allColumnsByJoin);
+            }
+
             var alias = join_alias[join];
 
             // Select data and join-id columns for dblink
@@ -1388,11 +1394,6 @@ END$BODY$
                 {
                     query.Append(" AND ");
                 }
-            }
-
-            foreach (var j in join.Joins)
-            {
-                AddReadJoin(query, j, join_alias, colNames, allColumnsByJoin);
             }
         }
 

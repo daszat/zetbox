@@ -1219,6 +1219,12 @@ END";
             if (join.JoinColumnName.Length != join.FKColumnName.Length)
                 throw new ArgumentException(string.Format("Column count on Join '{0}' does not match", join), "join");
 
+            foreach (var j in join.Joins)
+            {
+                idx++;
+                AddReadJoin(query, ref idx, j, join_alias);
+            }
+
             join_alias[join] = string.Format("t{0}", idx);
             query.AppendFormat("\n  {2} JOIN {0} t{1} ON ", FormatFullName(join.JoinTableName), idx, join.Type.ToString().ToUpper());
             for (int i = 0; i < join.JoinColumnName.Length; i++)
@@ -1230,11 +1236,6 @@ END";
                     join.FKColumnName[i].ColumnName);
                 if (i < join.JoinColumnName.Length - 1)
                     query.Append(" AND ");
-            }
-            foreach (var j in join.Joins)
-            {
-                idx++;
-                AddReadJoin(query, ref idx, j, join_alias);
             }
         }
 
