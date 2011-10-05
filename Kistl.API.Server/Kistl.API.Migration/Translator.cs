@@ -20,7 +20,7 @@ namespace Kistl.API.Migration
         private readonly IDataReader _source;
         private readonly SourceColumn[] _srcColumns;
         private readonly SourceColumnInfo[] _srcColumnsInfos;
-        private readonly Converter[] _converter;
+        private readonly Dictionary<SourceColumn, Converter> _converter;
 
         private readonly int _errorColIdx;
         private StringBuilder _currentError;
@@ -28,7 +28,7 @@ namespace Kistl.API.Migration
         private object[] _resultValues;
         private int _resultColumnCount;
 
-        private Dictionary<string, int> _compoundObjectSourceColumns = new Dictionary<string,int>();
+        private Dictionary<string, int> _compoundObjectSourceColumns = new Dictionary<string, int>();
 
         private long _processedRows = 0;
 
@@ -62,7 +62,7 @@ namespace Kistl.API.Migration
                         DbTypeMapper.GetDbType(col.DbType),
                         col.DestinationProperty.Last() is EnumerationProperty,
                         col.DestinationProperty.First() is CompoundObjectProperty)).ToArray();
-            _converter = converter ?? new Converter[] { };
+            _converter = converter == null ? converter.ToDictionary(c => c.Column) : new Dictionary<SourceColumn, Converter>();
             _resultColumnCount = _srcColumns.Length;
 
             if (typeof(IMigrationInfo).IsAssignableFrom(tbl.DestinationObjectClass.GetDataType()))
@@ -76,7 +76,8 @@ namespace Kistl.API.Migration
                 _errorColIdx = -1;
             }
 
-            foreach(var comp in srcColumns
+
+            foreach (var comp in srcColumns
                 .Where(c => c.DestinationProperty.First() is CompoundObjectProperty)
                 .GroupBy(c => c.DestinationProperty.First()))
             {
@@ -144,20 +145,19 @@ namespace Kistl.API.Migration
                 {
                     var src_col = _srcColumns[i];
                     var src_info = _srcColumnsInfos[i];
-                    var src_val = _source.GetValue(i);
                     object val = null;
 
-                    var fieldConv = _converter.OfType<FieldConverter>().SingleOrDefault(c => c.Column.Name == src_col.Name);
-                    if (fieldConv != null)
+                    Converter converter = null;
+                    if (_converter.TryGetValue(src_col, out converter))
                     {
-                        val = fieldConv.Converter(_source);
+                        val = converter.Convert(_source);
                     }
                     else
                     {
+                        var src_val = _source.GetValue(i);
                         val = ConvertType(src_col, src_info, src_val);
                     }
 
-                    val = HandleNullValue(src_col, val, src_val);
                     _resultValues[i] = val;
 
                     // Handle compound object null bit
@@ -188,18 +188,6 @@ namespace Kistl.API.Migration
                 _resultValues = null;
             }
             return result;
-        }
-
-        private object HandleNullValue(SourceColumn sourceColumn, object val, object src_val)
-        {
-            var nullConv = _converter.OfType<NullConverter>().SingleOrDefault(i => i.Column == sourceColumn);
-            if (nullConv == null) return val;
-            if (val == null || val == DBNull.Value)
-            {
-                AddError(nullConv.ErrorMsg, src_val != null ? src_val.ToString() : "(null)");
-                val = nullConv.NullValue;
-            }
-            return val;
         }
 
         private static ITypeConverter _dateTimeConverter = new SqlServerDateTimeConverter();

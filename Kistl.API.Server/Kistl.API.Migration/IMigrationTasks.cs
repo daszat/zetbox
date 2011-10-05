@@ -3,11 +3,11 @@ namespace Kistl.API.Migration
 {
     using System;
     using System.Collections.Generic;
+    using System.Data;
     using System.Linq;
     using System.Text;
     using Kistl.API.Server;
     using ZBox.App.SchemaMigration;
-    using System.Data;
 
     public delegate IMigrationTasks TaskFactory(ISchemaProvider src, ISchemaProvider dst);
 
@@ -15,70 +15,107 @@ namespace Kistl.API.Migration
     {
         public SourceColumn Column { get; set; }
         public string ErrorMsg { get; set; }
+        public abstract object Convert(IDataReader source);
+
+        public Converter()
+        {
+        }
+
+        public Converter(SourceColumn column, string errorMsg)
+        {
+            this.Column = column;
+            this.ErrorMsg = errorMsg;
+        }
     }
 
-    public class NullConverter : Converter
+    public abstract class SimpleFieldConverter : Converter
+    {
+        public SimpleFieldConverter()
+        {
+        }
+
+        public SimpleFieldConverter(SourceColumn column, string errorMsg)
+            : base(column, errorMsg)
+        {
+        }
+
+        protected int position = -1;
+        public override object Convert(IDataReader source)
+        {
+            if (position < 0)
+            {
+                position = source.GetOrdinal(this.Column.Name);
+            }
+            return ConvertValue(source.GetValue(position));
+        }
+        protected abstract object ConvertValue(object value);
+    }
+
+    public class NullConverter : SimpleFieldConverter
     {
         public NullConverter()
         {
         }
 
         public NullConverter(SourceColumn column, object nullValue, string errorMsg)
+            : base(column, errorMsg)
         {
-            this.Column = column;
             this.NullValue = nullValue;
-            this.ErrorMsg = errorMsg;
         }
 
         public object NullValue { get; set; }
+
+        protected override object ConvertValue(object value)
+        {
+            return (value == null || value == DBNull.Value)
+                ? NullValue
+                : value;
+        }
     }
 
-    public class FieldConverter : Converter
+    public class LambdaFieldConverter : SimpleFieldConverter
     {
-        public FieldConverter()
+        public Func<object, object> Converter { get; set; }
+
+        public LambdaFieldConverter(SourceColumn column, Func<object, object> converter)
+            : this(column, converter, string.Empty)
         {
         }
 
-        public FieldConverter(SourceColumn column, Func<IDataReader, object> converter)
+        public LambdaFieldConverter(SourceColumn column, Func<object, object> converter, string errorMsg)
+            : base(column, errorMsg)
         {
-            this.Column = column;
             this.Converter = converter;
         }
 
-        public FieldConverter(SourceColumn column, Func<IDataReader, object> converter, string errorMsg)
+        protected override object ConvertValue(object value)
         {
-            this.Column = column;
-            this.Converter = converter;
-            this.ErrorMsg = errorMsg;
+            return Converter(value);
         }
+    }
 
+    public class LambdaConverter : Converter
+    {
         public Func<IDataReader, object> Converter { get; set; }
-    }
 
-    public class SimpleFieldConverter : FieldConverter
-    {
-        public SimpleFieldConverter()
+        public LambdaConverter ()
         {
         }
 
-        public SimpleFieldConverter(SourceColumn column, Func<object, object> valueConverter)
-            : base(column, MakeConverter(valueConverter, column.Name))
+        public LambdaConverter (SourceColumn column, Func<IDataReader, object> converter)
+            : this(column, converter, string.Empty)
         {
         }
 
-        public SimpleFieldConverter(SourceColumn column, Func<object, object> valueConverter, string errorMsg)
-            : base(column, MakeConverter(valueConverter, column.Name), errorMsg)
+        public LambdaConverter(SourceColumn column, Func<IDataReader, object> converter, string errorMsg)
+            : base(column, errorMsg)
         {
+            this.Converter = converter;
         }
 
-        private static Func<IDataReader, object> MakeConverter(Func<object, object> valueConverter, string columnName)
+        public override object Convert(IDataReader source)
         {
-            return rd => valueConverter(rd.GetValue(rd.GetOrdinal(columnName)));
-        }
-
-        public void SetConverter(Func<object, object> valueConverter)
-        {
-            this.Converter = MakeConverter(valueConverter, this.Column.Name);
+            return Converter(source);
         }
     }
 
