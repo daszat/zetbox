@@ -62,7 +62,7 @@ namespace Kistl.API.Migration
                         DbTypeMapper.GetDbType(col.DbType),
                         col.DestinationProperty.Last() is EnumerationProperty,
                         col.DestinationProperty.First() is CompoundObjectProperty)).ToArray();
-            _converter = converter == null ? converter.ToDictionary(c => c.Column) : new Dictionary<SourceColumn, Converter>();
+            _converter = converter != null ? converter.ToDictionary(c => c.Column) : new Dictionary<SourceColumn, Converter>();
             _resultColumnCount = _srcColumns.Length;
 
             if (typeof(IMigrationInfo).IsAssignableFrom(tbl.DestinationObjectClass.GetDataType()))
@@ -148,14 +148,24 @@ namespace Kistl.API.Migration
                     object val = null;
 
                     Converter converter = null;
-                    if (_converter.TryGetValue(src_col, out converter))
+                    _converter.TryGetValue(src_col, out converter) ;
+                    // null converter need a default type conversion step before being applied.
+                    // therefore they are handled differently here.
+                    // In a better world, the ConvertType() function would go into a DefaultConverter and be accessible within all Converters
+                    var nullConverter = converter as NullConverter;
+
+                    if (converter != null && nullConverter == null)
                     {
-                        val = converter.Convert(_source);
+                        val = converter.Convert(_source, i);
                     }
                     else
                     {
                         var src_val = _source.GetValue(i);
                         val = ConvertType(src_col, src_info, src_val);
+                        if (nullConverter != null)
+                        {
+                            val = nullConverter.ConvertValue(val);
+                        }
                     }
 
                     _resultValues[i] = val;
