@@ -19,6 +19,7 @@ namespace Kistl.API.Migration
         //private readonly SourceTable _tbl;
         private readonly IDataReader _source;
         private readonly SourceColumn[] _srcColumns;
+        private readonly SourceColumnInfo[] _srcColumnsInfos;
         private readonly Converter[] _converter;
 
         private readonly int _errorColIdx;
@@ -31,6 +32,22 @@ namespace Kistl.API.Migration
 
         private long _processedRows = 0;
 
+        private class SourceColumnInfo
+        {
+            public readonly DbType DestType;
+            public readonly DbType SrcType;
+            public readonly bool DestIsEnumProp;
+            public readonly bool DestIsCompoundProp;
+
+            public SourceColumnInfo(DbType DestType, DbType SrcType, bool DestIsEnumProp, bool DestIsCompoundProp)
+            {
+                this.DestType = DestType;
+                this.SrcType = SrcType;
+                this.DestIsEnumProp = DestIsEnumProp;
+                this.DestIsCompoundProp = DestIsCompoundProp;
+            }
+        }
+
         public Translator(SourceTable tbl, IDataReader source, IEnumerable<SourceColumn> srcColumns, Converter[] converter)
         {
             if (tbl == null) throw new ArgumentNullException("tbl");
@@ -40,6 +57,11 @@ namespace Kistl.API.Migration
             //_tbl = tbl;
             _source = source;
             _srcColumns = srcColumns.ToArray();
+            _srcColumnsInfos = _srcColumns.Select(
+                col => new SourceColumnInfo(DbTypeMapper.GetDbTypeForProperty(col.DestinationProperty.Last().GetType()),
+                        DbTypeMapper.GetDbType(col.DbType),
+                        col.DestinationProperty.Last() is EnumerationProperty,
+                        col.DestinationProperty.First() is CompoundObjectProperty)).ToArray();
             _converter = converter ?? new Converter[] { };
             _resultColumnCount = _srcColumns.Length;
 
@@ -121,6 +143,7 @@ namespace Kistl.API.Migration
                 for (int i = 0; i < _srcColumns.Length; i++)
                 {
                     var src_col = _srcColumns[i];
+                    var src_info = _srcColumnsInfos[i];
                     var src_val = _source.GetValue(i);
                     object val = null;
 
@@ -131,14 +154,14 @@ namespace Kistl.API.Migration
                     }
                     else
                     {
-                        val = ConvertType(src_col, src_val);
+                        val = ConvertType(src_col, src_info, src_val);
                     }
 
                     val = HandleNullValue(src_col, val, src_val);
                     _resultValues[i] = val;
 
                     // Handle compound object null bit
-                    if (src_col.DestinationProperty.First() is CompoundObjectProperty)
+                    if (src_info.DestIsCompoundProp)
                     {
                         bool isNull = val == null || val == DBNull.Value;
                         var idx = _compoundObjectSourceColumns[src_col.Name];
@@ -185,15 +208,17 @@ namespace Kistl.API.Migration
         private static ITypeConverter _byteConverter = new ByteConverter();
         private static ITypeConverter _boolConverter = new BoolConverter();
 
-        private object ConvertType(SourceColumn col, object src_val)
+        private object ConvertType(SourceColumn col, SourceColumnInfo sci, object src_val)
         {
             if (src_val == null || src_val == DBNull.Value) return src_val;
 
-            var destType = DbTypeMapper.GetDbTypeForProperty(col.DestinationProperty.Last().GetType());
-            var srcType = DbTypeMapper.GetDbType(col.DbType);
+            var destType = sci.DestType;
+            var srcType = sci.SrcType;
+            var dstIsEnumProp = sci.DestIsEnumProp;
+
             object dest_val = src_val;
 
-            if (col.DestinationProperty.Last() is Kistl.App.Base.EnumerationProperty)
+            if (dstIsEnumProp)
             {
                 Log.DebugFormat("Convert [{0}] = '{1}' from [{2}] to enum", col.Name, src_val, srcType);
                 // Lookup mapping first
@@ -227,7 +252,7 @@ namespace Kistl.API.Migration
                     }
                     // Nothing found -> return null
                     return DBNull.Value;
-                }                
+                }
             }
             else if (srcType != destType
                 && col.References == null)
