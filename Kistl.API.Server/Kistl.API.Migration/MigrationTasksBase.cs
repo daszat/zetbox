@@ -105,12 +105,12 @@ namespace Kistl.API.Migration
             TableBaseMigration(tbl, (Converter[])null, (Join[])null);
         }
 
-        public void TableBaseMigration(SourceTable tbl, params Converter[] nullConverter)
+        public void TableBaseMigration(SourceTable tbl, params Converter[] converter)
         {
-            TableBaseMigration(tbl, nullConverter, null);
+            TableBaseMigration(tbl, converter, null);
         }
 
-        public void TableBaseMigration(SourceTable tbl, Converter[] nullConverter, Join[] additional_joins)
+        public void TableBaseMigration(SourceTable tbl, Converter[] converter, Join[] additional_joins)
         {
             // ------------------- Argument checks ------------------- 
             if (tbl == null)
@@ -134,11 +134,11 @@ namespace Kistl.API.Migration
                 // ------------------- Migrate ------------------- 
                 if (referringCols.Count == 0 && (additional_joins == null || additional_joins.Length == 0))
                 {
-                    TableBaseSimpleMigration(tbl, nullConverter, mappedColumns);
+                    TableBaseSimpleMigration(tbl, converter, mappedColumns);
                 }
                 else
                 {
-                    TableBaseComplexMigration(tbl, nullConverter, mappedColumns, referringCols, additional_joins);
+                    TableBaseComplexMigration(tbl, converter, mappedColumns, referringCols, additional_joins);
                 }
             }
         }
@@ -159,7 +159,7 @@ namespace Kistl.API.Migration
             return dstColumnNames;
         }
 
-        private void TableBaseComplexMigration(SourceTable tbl, Converter[] nullConverter, List<SourceColumn> mappedColumns, List<SourceColumn> referringCols, Join[] additional_joins)
+        private void TableBaseComplexMigration(SourceTable tbl, Converter[] converter, List<SourceColumn> mappedColumns, List<SourceColumn> referringCols, Join[] additional_joins)
         {
             if (additional_joins != null
                 && additional_joins.Length > 0
@@ -215,7 +215,7 @@ namespace Kistl.API.Migration
                             System.Data.DbType.Int32,
                             orp.Name);
                     }
-                    else if (nullConverter.Any(converter => converter.Column.Name == c.Name))
+                    else if (converter.Any(cnv => cnv.Column.Name == c.Name))
                     {
                         return new ProjectionColumn(c.Name, ColumnRef.PrimaryTable, c.DestinationProperty.Single().Name);
                     }
@@ -234,7 +234,7 @@ namespace Kistl.API.Migration
             long processedRows;
 
             using (var srcReader = _src.ReadJoin(_src.GetTableName(tbl.StagingDatabase.Schema, tbl.Name), srcColumnNames, joins))
-            using (var translator = new Translator(tbl, srcReader, srcColumns, nullConverter))
+            using (var translator = new Translator(tbl, srcReader, srcColumns, converter))
             {
                 _dst.WriteTableData(_dst.GetTableName(tbl.DestinationObjectClass.Module.SchemaName, tbl.DestinationObjectClass.TableName), translator, dstColumnNames);
                 processedRows = translator.ProcessedRows;
