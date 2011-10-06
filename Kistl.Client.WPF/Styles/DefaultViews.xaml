@@ -334,4 +334,12 @@
   <DataTemplate x:Key="nameCellTemplate">
     <TextBlock Text="{Binding Name}" />
   </DataTemplate>
+
+  <!-- default styles for our usecontrols -->
+  <Style TargetType="{x:Type ctrls:LabeledView}">
+    <Setter Property="Margin" Value="2,1,2,1" />
+    <Setter Property="MinWidth" Value="100" />
+    <Setter Property="MinHeight" Value="26" />
+    <Setter Property="VerticalAlignment" Value="Top" />
+  </Style>
 </ResourceDictionary>
