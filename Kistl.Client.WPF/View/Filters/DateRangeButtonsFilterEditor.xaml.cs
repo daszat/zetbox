@@ -38,7 +38,8 @@ namespace Kistl.Client.WPF.View.Filters
 
         public void btn_OnUncheck(object sender, RoutedEventArgs e)
         {
-            var btn = (ToggleButton)sender;
+            var btn = sender as ToggleButton;
+            if (btn == null) return;
             var scope = FocusManager.GetFocusScope(btn);
             var focus = FocusManager.GetFocusedElement(scope);
             btn.Focus();
