@@ -536,7 +536,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
 				if (_PhoneNumbersOther == null)
 				{
 				    _PhoneNumbersOther 
-				        = new ClientValueCollectionWrapper<TestCustomObject, Kistl.App.Test.TestPhoneCompoundObject, TestCustomObject_PhoneNumbersOther_CollectionEntry, TestCustomObject_PhoneNumbersOther_CollectionEntryMemoryImpl, ObservableCollection<TestCustomObject_PhoneNumbersOther_CollectionEntryMemoryImpl>>(
+				        = new ClientValueCollectionWrapper<TestCustomObject, Kistl.App.Test.TestPhoneCompoundObject, Kistl.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntry, Kistl.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntryMemoryImpl, ObservableCollection<Kistl.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntryMemoryImpl>>(
 							this.Context,
 				            this, 
 				            () => { this.NotifyPropertyChanged("PhoneNumbersOther", null, null); if(OnPhoneNumbersOther_PostSetter != null && IsAttached) OnPhoneNumbersOther_PostSetter(this); },
@@ -546,8 +546,8 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
 			}
 		}
 
-		private ClientValueCollectionWrapper<TestCustomObject, Kistl.App.Test.TestPhoneCompoundObject, TestCustomObject_PhoneNumbersOther_CollectionEntry, TestCustomObject_PhoneNumbersOther_CollectionEntryMemoryImpl, ObservableCollection<TestCustomObject_PhoneNumbersOther_CollectionEntryMemoryImpl>> _PhoneNumbersOther;
-		private ObservableCollection<TestCustomObject_PhoneNumbersOther_CollectionEntryMemoryImpl> _PhoneNumbersOtherCollection = new ObservableCollection<TestCustomObject_PhoneNumbersOther_CollectionEntryMemoryImpl>();
+		private ClientValueCollectionWrapper<TestCustomObject, Kistl.App.Test.TestPhoneCompoundObject, Kistl.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntry, Kistl.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntryMemoryImpl, ObservableCollection<Kistl.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntryMemoryImpl>> _PhoneNumbersOther;
+		private ObservableCollection<Kistl.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntryMemoryImpl> _PhoneNumbersOtherCollection = new ObservableCollection<Kistl.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntryMemoryImpl>();
 public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> OnPhoneNumbersOther_PostSetter;
 
         public override Type GetImplementedInterface()
@@ -578,7 +578,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
             } else if (me.PhoneNumberOffice != null && other.PhoneNumberOffice != null) {
                 me.PhoneNumberOffice.ApplyChangesFrom(other.PhoneNumberOffice);
             }
-            SynchronizeLists(this._PhoneNumbersOtherCollection, otherImpl._PhoneNumbersOtherCollection);
+            SynchronizeCollections(this._PhoneNumbersOtherCollection, otherImpl._PhoneNumbersOtherCollection);
             this._fk_MubBlah_Nav = otherImpl._fk_MubBlah_Nav;
             this._fk_MuhBlah_One_Nav = otherImpl._fk_MuhBlah_One_Nav;
         }

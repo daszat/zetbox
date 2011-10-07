@@ -420,7 +420,7 @@ namespace Kistl.App.Projekte
             {
                 if (_EMails == null)
                 {
-                    _EMails = new ClientValueCollectionWrapper<Kunde, string, Kunde_EMails_CollectionEntry, Kunde_EMails_CollectionEntryNHibernateImpl, ICollection<Kunde_EMails_CollectionEntryNHibernateImpl>>(
+                    _EMails = new ClientValueCollectionWrapper<Kunde, string, Kistl.App.Projekte.Kunde_EMails_CollectionEntry, Kistl.App.Projekte.Kunde_EMails_CollectionEntryNHibernateImpl, ICollection<Kistl.App.Projekte.Kunde_EMails_CollectionEntryNHibernateImpl>>(
                             this.Context,
                             this,
                             () => { this.NotifyPropertyChanged("EMails", null, null); if(OnEMails_PostSetter != null && IsAttached) OnEMails_PostSetter(this); },
@@ -430,22 +430,22 @@ namespace Kistl.App.Projekte
             }
         }
 
-        private ProjectedCollection<Kunde_EMails_CollectionEntryNHibernateImpl.Kunde_EMails_CollectionEntryProxy, Kunde_EMails_CollectionEntryNHibernateImpl> EMailsCollection
+        private ProjectedCollection<Kistl.App.Projekte.Kunde_EMails_CollectionEntryNHibernateImpl.Kunde_EMails_CollectionEntryProxy, Kistl.App.Projekte.Kunde_EMails_CollectionEntryNHibernateImpl> EMailsCollection
         {
             get {
                 if (_EMailsCollection == null)
                 {
-                    _EMailsCollection = new ProjectedCollection<Kunde_EMails_CollectionEntryNHibernateImpl.Kunde_EMails_CollectionEntryProxy, Kunde_EMails_CollectionEntryNHibernateImpl>(
+                    _EMailsCollection = new ProjectedCollection<Kistl.App.Projekte.Kunde_EMails_CollectionEntryNHibernateImpl.Kunde_EMails_CollectionEntryProxy, Kistl.App.Projekte.Kunde_EMails_CollectionEntryNHibernateImpl>(
                         this.Proxy.EMails,
-                        p => (Kunde_EMails_CollectionEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                        d => (Kunde_EMails_CollectionEntryNHibernateImpl.Kunde_EMails_CollectionEntryProxy)((NHibernatePersistenceObject)d).NHibernateProxy);
+                        p => (Kistl.App.Projekte.Kunde_EMails_CollectionEntryNHibernateImpl)OurContext.AttachAndWrap(p),
+                        d => (Kistl.App.Projekte.Kunde_EMails_CollectionEntryNHibernateImpl.Kunde_EMails_CollectionEntryProxy)((NHibernatePersistenceObject)d).NHibernateProxy);
                 }
                 return _EMailsCollection;
             }
         }
 
-        private ClientValueCollectionWrapper<Kunde, string, Kunde_EMails_CollectionEntry, Kunde_EMails_CollectionEntryNHibernateImpl, ICollection<Kunde_EMails_CollectionEntryNHibernateImpl>> _EMails;
-        private ProjectedCollection<Kunde_EMails_CollectionEntryNHibernateImpl.Kunde_EMails_CollectionEntryProxy, Kunde_EMails_CollectionEntryNHibernateImpl> _EMailsCollection;
+        private ClientValueCollectionWrapper<Kunde, string, Kistl.App.Projekte.Kunde_EMails_CollectionEntry, Kistl.App.Projekte.Kunde_EMails_CollectionEntryNHibernateImpl, ICollection<Kistl.App.Projekte.Kunde_EMails_CollectionEntryNHibernateImpl>> _EMails;
+        private ProjectedCollection<Kistl.App.Projekte.Kunde_EMails_CollectionEntryNHibernateImpl.Kunde_EMails_CollectionEntryProxy, Kistl.App.Projekte.Kunde_EMails_CollectionEntryNHibernateImpl> _EMailsCollection;
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ValueCollectionProperty
 public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMails_PostSetter;
 

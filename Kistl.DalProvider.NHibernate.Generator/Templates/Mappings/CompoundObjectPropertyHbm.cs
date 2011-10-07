@@ -45,7 +45,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Mappings
             {
                 // set the proper type for collection entries
                 ceClassAttr = String.Format("class=\"{0}.{1}{2}+{1}Proxy,Kistl.Objects.NHibernateImpl\"",
-                    prop.Module.Namespace,
+                    prop.GetCollectionEntryNamespace(),
                     prop.GetCollectionEntryClassName(),
                     implementationSuffix);
             }

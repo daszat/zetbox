@@ -606,7 +606,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
             {
                 if (_PhoneNumbersOther == null)
                 {
-                    _PhoneNumbersOther = new EfValueCollectionWrapper<TestCustomObject, Kistl.App.Test.TestPhoneCompoundObject, TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl, EntityCollection<TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl>>(
+                    _PhoneNumbersOther = new EfValueCollectionWrapper<TestCustomObject, Kistl.App.Test.TestPhoneCompoundObject, Kistl.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl, EntityCollection<Kistl.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl>>(
 						this.Context,
                         this,
               			() => { this.NotifyPropertyChanged("PhoneNumbersOther", null, null, null); if(OnPhoneNumbersOther_PostSetter != null && IsAttached) OnPhoneNumbersOther_PostSetter(this); },
@@ -617,12 +617,12 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
         }
         
         [EdmRelationshipNavigationProperty("Model", "FK_TestCustomObject_value_PhoneNumbersOther", "CollectionEntry")]
-        public EntityCollection<TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl> PhoneNumbersOtherImpl
+        public EntityCollection<Kistl.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl> PhoneNumbersOtherImpl
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl>(
+                    .GetRelatedCollection<Kistl.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl>(
                         "Model.FK_TestCustomObject_value_PhoneNumbersOther",
                         "CollectionEntry");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -634,7 +634,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
                 return c;
             }
         }
-        private EfValueCollectionWrapper<TestCustomObject, Kistl.App.Test.TestPhoneCompoundObject, TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl, EntityCollection<TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl>> _PhoneNumbersOther;
+        private EfValueCollectionWrapper<TestCustomObject, Kistl.App.Test.TestPhoneCompoundObject, Kistl.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl, EntityCollection<Kistl.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl>> _PhoneNumbersOther;
 public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> OnPhoneNumbersOther_PostSetter;
 
         public override Type GetImplementedInterface()

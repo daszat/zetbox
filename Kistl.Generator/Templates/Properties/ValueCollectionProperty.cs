@@ -55,7 +55,7 @@ namespace Kistl.Generator.Templates.Properties
 
             string thisInterface = prop.ObjectClass.Name;
             string referencedType = prop.ReferencedTypeAsCSharp();
-            string referencedCollectionEntry = prop.GetCollectionEntryClassName();
+            string referencedCollectionEntry = prop.GetCollectionEntryFullName();
             string referencedCollectionEntryImpl = referencedCollectionEntry + host.Settings["extrasuffix"] + Kistl.API.Helper.ImplementationSuffix;
 
             string providerCollectionType = "ObservableCollection<" + referencedCollectionEntryImpl + ">";

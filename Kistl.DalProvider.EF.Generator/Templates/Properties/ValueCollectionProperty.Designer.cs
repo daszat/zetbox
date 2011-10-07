@@ -62,7 +62,7 @@ Debug.Assert(prop is ValueTypeProperty ? ((ValueTypeProperty)prop).IsList : ((Co
 	// which type this list contains
 	string referencedType = prop.ReferencedTypeAsCSharp();
 	// collection entries in this list
-	string referencedCollectionEntry = prop.GetCollectionEntryClassName() + ImplementationSuffix;
+	string referencedCollectionEntry = prop.GetCollectionEntryFullName() + ImplementationSuffix;
 
     AddSerialization(serializationList, efName);
 	var eventName = "On" + name + "_PostSetter";

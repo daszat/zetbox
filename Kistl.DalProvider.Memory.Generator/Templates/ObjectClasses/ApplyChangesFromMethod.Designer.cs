@@ -53,24 +53,40 @@ foreach(var prop in cls.Properties.OfType<ValueTypeProperty>().Where(p => !p.IsC
 #line 26 "P:\Kistl\Kistl.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 if (prop.IsList) { 
 #line 27 "P:\Kistl\Kistl.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
-this.WriteObjects("            SynchronizeLists(this._",  prop.Name , "Collection, otherImpl._",  prop.Name , "Collection);\r\n");
+if (prop.HasPersistentOrder) { 
 #line 28 "P:\Kistl\Kistl.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
-} else { 
+this.WriteObjects("            SynchronizeLists(this._",  prop.Name , "Collection, otherImpl._",  prop.Name , "Collection);\r\n");
 #line 29 "P:\Kistl\Kistl.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
-this.WriteObjects("            me.",  prop.Name , " = other.",  prop.Name , ";\r\n");
+} else { 
 #line 30 "P:\Kistl\Kistl.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
-} 
+this.WriteObjects("            SynchronizeCollections(this._",  prop.Name , "Collection, otherImpl._",  prop.Name , "Collection);\r\n");
 #line 31 "P:\Kistl\Kistl.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 } 
 #line 32 "P:\Kistl\Kistl.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
-foreach(var prop in cls.Properties.OfType<CompoundObjectProperty>()/*.Where(p => !p.IsCalculated)*/.OrderBy(p => p.Name)) { 
-#line 33 "P:\Kistl\Kistl.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
-if (prop.IsList) { 
-#line 34 "P:\Kistl\Kistl.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
-this.WriteObjects("            SynchronizeLists(this._",  prop.Name , "Collection, otherImpl._",  prop.Name , "Collection);\r\n");
-#line 35 "P:\Kistl\Kistl.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 } else { 
+#line 33 "P:\Kistl\Kistl.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+this.WriteObjects("            me.",  prop.Name , " = other.",  prop.Name , ";\r\n");
+#line 34 "P:\Kistl\Kistl.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+} 
+#line 35 "P:\Kistl\Kistl.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+} 
 #line 36 "P:\Kistl\Kistl.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+foreach(var prop in cls.Properties.OfType<CompoundObjectProperty>()/*.Where(p => !p.IsCalculated)*/.OrderBy(p => p.Name)) { 
+#line 37 "P:\Kistl\Kistl.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+if (prop.IsList) { 
+#line 38 "P:\Kistl\Kistl.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+if (prop.HasPersistentOrder) { 
+#line 39 "P:\Kistl\Kistl.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+this.WriteObjects("            SynchronizeLists(this._",  prop.Name , "Collection, otherImpl._",  prop.Name , "Collection);\r\n");
+#line 40 "P:\Kistl\Kistl.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+} else { 
+#line 41 "P:\Kistl\Kistl.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+this.WriteObjects("            SynchronizeCollections(this._",  prop.Name , "Collection, otherImpl._",  prop.Name , "Collection);\r\n");
+#line 42 "P:\Kistl\Kistl.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+} 
+#line 43 "P:\Kistl\Kistl.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+} else { 
+#line 44 "P:\Kistl\Kistl.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 this.WriteObjects("            if (me.",  prop.Name , " == null && other.",  prop.Name , " != null) {\r\n");
 this.WriteObjects("                me.",  prop.Name , " = (",  prop.GetPropertyTypeString() , ")other.",  prop.Name , ".Clone();\r\n");
 this.WriteObjects("            } else if (me.",  prop.Name , " != null && other.",  prop.Name , " == null) {\r\n");
@@ -78,24 +94,24 @@ this.WriteObjects("                me.",  prop.Name , " = null;\r\n");
 this.WriteObjects("            } else if (me.",  prop.Name , " != null && other.",  prop.Name , " != null) {\r\n");
 this.WriteObjects("                me.",  prop.Name , ".ApplyChangesFrom(other.",  prop.Name , ");\r\n");
 this.WriteObjects("            }\r\n");
-#line 43 "P:\Kistl\Kistl.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+#line 51 "P:\Kistl\Kistl.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 } 
-#line 44 "P:\Kistl\Kistl.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+#line 52 "P:\Kistl\Kistl.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 } 
-#line 45 "P:\Kistl\Kistl.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+#line 53 "P:\Kistl\Kistl.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 foreach(var prop in cls.Properties.OfType<ObjectReferenceProperty>().Where(p => !p.IsList()).OrderBy(p => p.Name)) {
         if (prop.RelationEnd.HasPersistentOrder) {
             var positionPropertyName = Construct.ListPositionPropertyName(prop.RelationEnd);
 
-#line 49 "P:\Kistl\Kistl.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+#line 57 "P:\Kistl\Kistl.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 this.WriteObjects("            this.",  positionPropertyName , " = otherImpl.",  positionPropertyName , ";\r\n");
-#line 50 "P:\Kistl\Kistl.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+#line 58 "P:\Kistl\Kistl.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 } 
-#line 51 "P:\Kistl\Kistl.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+#line 59 "P:\Kistl\Kistl.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 this.WriteObjects("            this._fk_",  prop.Name , " = otherImpl._fk_",  prop.Name , ";\r\n");
-#line 52 "P:\Kistl\Kistl.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+#line 60 "P:\Kistl\Kistl.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 } 
-#line 53 "P:\Kistl\Kistl.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+#line 61 "P:\Kistl\Kistl.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 this.WriteObjects("        }\r\n");
 
         }

@@ -445,7 +445,7 @@ namespace Kistl.App.Projekte
             {
                 if (_EMails == null)
                 {
-                    _EMails = new EfValueCollectionWrapper<Kunde, string, Kunde_EMails_CollectionEntryEfImpl, EntityCollection<Kunde_EMails_CollectionEntryEfImpl>>(
+                    _EMails = new EfValueCollectionWrapper<Kunde, string, Kistl.App.Projekte.Kunde_EMails_CollectionEntryEfImpl, EntityCollection<Kistl.App.Projekte.Kunde_EMails_CollectionEntryEfImpl>>(
 						this.Context,
                         this,
               			() => { this.NotifyPropertyChanged("EMails", null, null, null); if(OnEMails_PostSetter != null && IsAttached) OnEMails_PostSetter(this); },
@@ -456,12 +456,12 @@ namespace Kistl.App.Projekte
         }
         
         [EdmRelationshipNavigationProperty("Model", "FK_Kunde_value_EMails", "CollectionEntry")]
-        public EntityCollection<Kunde_EMails_CollectionEntryEfImpl> EMailsImpl
+        public EntityCollection<Kistl.App.Projekte.Kunde_EMails_CollectionEntryEfImpl> EMailsImpl
         {
             get
             {
                 var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Kunde_EMails_CollectionEntryEfImpl>(
+                    .GetRelatedCollection<Kistl.App.Projekte.Kunde_EMails_CollectionEntryEfImpl>(
                         "Model.FK_Kunde_value_EMails",
                         "CollectionEntry");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -473,7 +473,7 @@ namespace Kistl.App.Projekte
                 return c;
             }
         }
-        private EfValueCollectionWrapper<Kunde, string, Kunde_EMails_CollectionEntryEfImpl, EntityCollection<Kunde_EMails_CollectionEntryEfImpl>> _EMails;
+        private EfValueCollectionWrapper<Kunde, string, Kistl.App.Projekte.Kunde_EMails_CollectionEntryEfImpl, EntityCollection<Kistl.App.Projekte.Kunde_EMails_CollectionEntryEfImpl>> _EMails;
 public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMails_PostSetter;
 
         /// <summary>

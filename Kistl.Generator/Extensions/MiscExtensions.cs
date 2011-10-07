@@ -57,6 +57,12 @@ namespace Kistl.Generator.Extensions
         #endregion
 
         #region CollectionEntry naming standards
+        public static string GetCollectionEntryNamespace(this Property prop)
+        {
+            if (prop == null) { throw new ArgumentNullException("prop"); }
+            return prop.Module.Namespace;
+        }
+
         public static string GetCollectionEntryClassName(this Property prop)
         {
             if (prop == null) { throw new ArgumentNullException("prop"); }
@@ -73,7 +79,7 @@ namespace Kistl.Generator.Extensions
         public static string GetCollectionEntryFullName(this Property prop)
         {
             if (prop == null) { throw new ArgumentNullException("prop"); }
-            return String.Format("{0}.{1}", prop.ObjectClass.Module.Namespace, prop.GetCollectionEntryClassName());
+            return String.Format("{0}.{1}", prop.GetCollectionEntryNamespace(), prop.GetCollectionEntryClassName());
         }
 
         public static string GetCollectionEntryReverseKeyColumnName(this Property prop)

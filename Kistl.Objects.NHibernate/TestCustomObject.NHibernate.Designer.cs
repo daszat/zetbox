@@ -550,7 +550,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
             {
                 if (_PhoneNumbersOther == null)
                 {
-                    _PhoneNumbersOther = new ClientValueCollectionWrapper<TestCustomObject, Kistl.App.Test.TestPhoneCompoundObject, TestCustomObject_PhoneNumbersOther_CollectionEntry, TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl, ICollection<TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl>>(
+                    _PhoneNumbersOther = new ClientValueCollectionWrapper<TestCustomObject, Kistl.App.Test.TestPhoneCompoundObject, Kistl.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntry, Kistl.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl, ICollection<Kistl.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl>>(
                             this.Context,
                             this,
                             () => { this.NotifyPropertyChanged("PhoneNumbersOther", null, null); if(OnPhoneNumbersOther_PostSetter != null && IsAttached) OnPhoneNumbersOther_PostSetter(this); },
@@ -560,22 +560,22 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
             }
         }
 
-        private ProjectedCollection<TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl.TestCustomObject_PhoneNumbersOther_CollectionEntryProxy, TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl> PhoneNumbersOtherCollection
+        private ProjectedCollection<Kistl.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl.TestCustomObject_PhoneNumbersOther_CollectionEntryProxy, Kistl.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl> PhoneNumbersOtherCollection
         {
             get {
                 if (_PhoneNumbersOtherCollection == null)
                 {
-                    _PhoneNumbersOtherCollection = new ProjectedCollection<TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl.TestCustomObject_PhoneNumbersOther_CollectionEntryProxy, TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl>(
+                    _PhoneNumbersOtherCollection = new ProjectedCollection<Kistl.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl.TestCustomObject_PhoneNumbersOther_CollectionEntryProxy, Kistl.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl>(
                         this.Proxy.PhoneNumbersOther,
-                        p => (TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                        d => (TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl.TestCustomObject_PhoneNumbersOther_CollectionEntryProxy)((NHibernatePersistenceObject)d).NHibernateProxy);
+                        p => (Kistl.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl)OurContext.AttachAndWrap(p),
+                        d => (Kistl.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl.TestCustomObject_PhoneNumbersOther_CollectionEntryProxy)((NHibernatePersistenceObject)d).NHibernateProxy);
                 }
                 return _PhoneNumbersOtherCollection;
             }
         }
 
-        private ClientValueCollectionWrapper<TestCustomObject, Kistl.App.Test.TestPhoneCompoundObject, TestCustomObject_PhoneNumbersOther_CollectionEntry, TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl, ICollection<TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl>> _PhoneNumbersOther;
-        private ProjectedCollection<TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl.TestCustomObject_PhoneNumbersOther_CollectionEntryProxy, TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl> _PhoneNumbersOtherCollection;
+        private ClientValueCollectionWrapper<TestCustomObject, Kistl.App.Test.TestPhoneCompoundObject, Kistl.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntry, Kistl.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl, ICollection<Kistl.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl>> _PhoneNumbersOther;
+        private ProjectedCollection<Kistl.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl.TestCustomObject_PhoneNumbersOther_CollectionEntryProxy, Kistl.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl> _PhoneNumbersOtherCollection;
         // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ValueCollectionProperty
 public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> OnPhoneNumbersOther_PostSetter;
 

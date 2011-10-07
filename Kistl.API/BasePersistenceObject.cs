@@ -9,6 +9,7 @@ namespace Kistl.API
     using System.Text;
     using System.Xml;
     using System.Xml.Serialization;
+    using Kistl.API.Utils;
 
     /// <summary>
     /// Implement basic functionality needed by all persistent objects.
@@ -52,9 +53,9 @@ namespace Kistl.API
         [XmlIgnore]
         public bool IsReadonly
         {
-            get 
+            get
             {
-                return this.Context != null && !IsRecordingNotifications 
+                return this.Context != null && !IsRecordingNotifications
                     ? this.Context.IsReadonly || CurrentAccessRights.HasOnlyReadRightsOrNone() // when attaced -> eval. Don't look at the implementation below (CurrentAccessRights), it may be overridden
                     : false; // unattached - cannot be readonly
             }
@@ -65,12 +66,12 @@ namespace Kistl.API
         /// Base implementations returnes always Full
         /// </summary>
         private Kistl.API.AccessRights? __currentAccessRights;
-        public virtual Kistl.API.AccessRights CurrentAccessRights 
-        { 
-            get 
-            { 
-                if(Context == null) return Kistl.API.AccessRights.Full;
-                if(__currentAccessRights == null)
+        public virtual Kistl.API.AccessRights CurrentAccessRights
+        {
+            get
+            {
+                if (Context == null) return Kistl.API.AccessRights.Full;
+                if (__currentAccessRights == null)
                 {
                     if (ObjectState == DataObjectState.New)
                     {
@@ -84,7 +85,7 @@ namespace Kistl.API
                     __currentAccessRights &= ~Kistl.API.AccessRights.Create; // exclude create rights - not instance specific
                 }
                 return __currentAccessRights.Value;
-            } 
+            }
         }
 
         /// <summary>
@@ -149,16 +150,19 @@ namespace Kistl.API
             this.ID = obj.ID;
         }
 
-        private void Synchronize<T>(IEnumerable<T> me, IEnumerable<T> other, Action<T> add, Action<T> delete) where T : class, IValueCollectionEntry
+        public virtual void SynchronizeCollections<T>(ICollection<T> me, ICollection<T> other) where T : class, IValueCollectionEntry
         {
+            if (me == null) throw new ArgumentNullException("me");
+            if (other == null) throw new ArgumentNullException("other");
+
             // Add/Modify
             foreach (IPersistenceObject otherItem in other)
             {
                 var meItem = me.SingleOrDefault(i => i.ID == otherItem.ID);
                 if (meItem == null)
                 {
-                    add((T)otherItem);
-                    if(otherItem.ID < Helper.INVALIDID)
+                    me.Add((T)otherItem);
+                    if (otherItem.ID < Helper.INVALIDID)
                         Context.Internals().AttachAsNew(otherItem);
                     else
                         Context.Attach(otherItem);
@@ -168,25 +172,55 @@ namespace Kistl.API
                     meItem.ApplyChangesFrom(otherItem);
                 }
             }
+
             // Delete
+            var toDelete = new List<T>();
             foreach (IPersistenceObject meItem in me)
             {
-                var otherItem = me.SingleOrDefault(i => i.ID == meItem.ID);
+                var otherItem = other.SingleOrDefault(i => i.ID == meItem.ID);
                 if (otherItem == null)
                 {
-                    delete((T)otherItem);
+                    toDelete.Add((T)meItem);
                 }
             }
+
+            toDelete.ForEach(i => me.Remove(i));
         }
 
-        public virtual void SynchronizeCollections<T>(ICollection<T> me, ICollection<T> other) where T : class, IValueCollectionEntry
+        public virtual void SynchronizeLists<T>(ICollection<T> me, ICollection<T> other) where T : class, IValueListEntry
         {
-            Synchronize<T>(me, other, (obj) => me.Add(obj), (obj) => me.Remove(obj));
-        }
+            if (me == null) throw new ArgumentNullException("me");
+            if (other == null) throw new ArgumentNullException("other");
 
-        public virtual void SynchronizeLists<T>(IList<T> me, IList<T> other) where T : class, IValueCollectionEntry
-        {
-            Synchronize<T>(me, other, (obj) => me.Add(obj), (obj) => me.Remove(obj));
+            var meList = me.OrderBy(i => i.Index ?? -1).ToList();
+            var otherList = other.OrderBy(i => i.Index ?? -1).ToList();
+
+            var diff = Diff.DiffInt(
+                meList.Select(i => i == null ? -1 : i.ID).ToArray(),
+                otherList.Select(i => i == null ? -1 : i.ID).ToArray());
+
+            foreach (var item in diff)
+            {
+                int deleted = 0;
+                while (deleted < item.deletedA)
+                {
+                    me.Remove(meList[item.StartA]);
+                    meList.RemoveAt(item.StartA);
+                    deleted += 1;
+                }
+                int added = 0;
+                while (added < item.insertedB)
+                {
+                    var otherItem = otherList[item.StartB + added];
+                    meList.Insert(item.StartA + added, otherItem);
+                    me.Add(otherItem);
+                    if (otherItem.ID < Helper.INVALIDID)
+                        Context.Internals().AttachAsNew(otherItem);
+                    else
+                        Context.Attach(otherItem);
+                    added += 1;
+                }
+            }
         }
 
 

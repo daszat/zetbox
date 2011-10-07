@@ -30,7 +30,7 @@ namespace Kistl.DalProvider.Ef
         : ValueListWrapper<TParent, TValue, TEntry, TEntryCollection>
         where TParent : IDataObject
         where TEntry : class, IValueListEntry<TParent, TValue>
-        where TEntryCollection : IList<TEntry>
+        where TEntryCollection : ICollection<TEntry>
     {
         public EfValueListWrapper(IKistlContext ctx, TParent parent, Action parentNotifier, TEntryCollection collection)
             : base(ctx, parent, parentNotifier, collection)

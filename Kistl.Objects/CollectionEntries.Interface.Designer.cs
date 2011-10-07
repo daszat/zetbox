@@ -269,11 +269,12 @@ namespace Kistl.App.GUI
 namespace Kistl.App.Projekte
 {
     using Kistl.API;
+    using Kistl.App.Base;
 
     /// <summary>
     /// ValueCollectionEntry for EMails des Kunden - können mehrere sein
     /// </summary>
-    public interface Kunde_EMails_CollectionEntry : IValueCollectionEntry<Kunde, System.String> 
+    public interface Kunde_EMails_CollectionEntry : IValueCollectionEntry<Kunde, string> 
     {
 
     }
@@ -282,6 +283,7 @@ namespace Kistl.App.Projekte
 namespace Kistl.App.Test
 {
     using Kistl.API;
+    using Kistl.App.Base;
 
     /// <summary>
     /// ValueCollectionEntry for 

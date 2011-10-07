@@ -197,7 +197,7 @@ namespace Kistl.DalProvider.Base.RelationWrappers
         : ValueCollectionWrapper<TParent, TValue, TEntry, TEntryCollection>, IList<TValue>
         where TParent : IDataObject
         where TEntry : class, IValueListEntry<TParent, TValue>
-        where TEntryCollection : IList<TEntry>
+        where TEntryCollection : ICollection<TEntry>
     {
         protected ValueListWrapper(IKistlContext ctx, TParent parent, Action parentNotifier, TEntryCollection collection)
             : base(ctx, parent, parentNotifier, collection)

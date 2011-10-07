@@ -64,7 +64,7 @@
                             .OrderBy(p => p.ObjectClass.Name)
                             .ThenBy(p => p.Name))
    {
-        var collectionEntryNamespace = prop.Module.Namespace;
+        var collectionEntryNamespace = prop.GetCollectionEntryNamespace();
         var collectionEntryClassName = prop.GetCollectionEntryClassName() + ImplementationSuffix;
         var proxyClassName = prop.GetCollectionEntryClassName() + "Proxy";
         var schemaName = prop.Module.SchemaName;
@@ -82,7 +82,7 @@
                      column="`<%= ceReverseKeyColumnName %>`" />
 <% ValueTypePropertyHbm.Call(Host, String.Empty, prop, "Value", prop.Name, true, ImplementationSuffix, false); %>
 <% if (prop.HasPersistentOrder) { %>
-        <property name="Index"
+        <property name="Value_pos"
                   column="`Index`" />
 <% } %>
 <% if (((ObjectClass)prop.ObjectClass).ImplementsIExportable()) { %>
@@ -102,7 +102,7 @@
                             .OrderBy(p => p.ObjectClass.Name)
                             .ThenBy(p => p.Name))
    {
-        var collectionEntryNamespace = prop.Module.Namespace;
+        var collectionEntryNamespace = prop.GetCollectionEntryNamespace();
         var collectionEntryClassName = prop.GetCollectionEntryClassName() + ImplementationSuffix;
         var proxyClassName = prop.GetCollectionEntryClassName() + "Proxy";
         var schemaName = prop.Module.SchemaName;
@@ -120,7 +120,7 @@
                      column="`<%= ceReverseKeyColumnName %>`" />
 <% CompoundObjectPropertyHbm.Call(Host, ctx, String.Empty, prop, "Value", prop.Name, true, ImplementationSuffix); %>
 <% if (prop.HasPersistentOrder) { %>
-        <property name="Index"
+        <property name="Value_pos"
                   column="`Index`" />
 <% } %>
 <% if (((ObjectClass)prop.ObjectClass).ImplementsIExportable()) { %>

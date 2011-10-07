@@ -45,7 +45,7 @@ namespace Kistl.Generator.InterfaceTemplates.CollectionEntries
             return String.Format("{0}<{1}, {2}>",
                 IsOrdered() ? "IValueListEntry" : "IValueCollectionEntry",
                 this.prop.ObjectClass.Name,
-                this.prop.GetPropertyTypeString());
+                this.prop.ReferencedTypeAsCSharp());
         }
 
         protected override bool IsOrdered()
@@ -56,6 +56,11 @@ namespace Kistl.Generator.InterfaceTemplates.CollectionEntries
         protected override string GetDescription()
         {
             return String.Format("ValueCollectionEntry for {0}", prop.Description);
+        }
+
+        protected override IEnumerable<string> GetAdditionalImports()
+        {
+            return base.GetAdditionalImports().Concat(new[] { prop.GetObjectClass(prop.Context).Module.Namespace });
         }
     }
 }

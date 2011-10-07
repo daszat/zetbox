@@ -22,7 +22,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries
 
         protected override void ApplyAPropertyTemplate()
         {
-            string moduleNamespace = prop.ObjectClass.Module.Namespace;
+            string moduleNamespace = prop.GetCollectionEntryNamespace();
             string ownInterface = prop.GetCollectionEntryClassName();
             string name = "Parent";
             string eventName = "unused";
@@ -92,7 +92,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries
 
         protected override void ApplyBIndexPropertyTemplate()
         {
-            Templates.Properties.DelegatingProperty.Call(Host, ctx, "ValueIndex", "int?", "this.Proxy.Value" + Kistl.API.Helper.PositionSuffix, "int?");
+            Templates.Properties.DelegatingProperty.Call(Host, ctx, "Index", "int?", "this.Proxy.Value" + Kistl.API.Helper.PositionSuffix, "int?");
         }
 
         protected override void ApplyClassTailTemplate()
@@ -100,7 +100,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries
             base.ApplyClassTailTemplate();
 
             string interfaceName = GetCeInterface();
-            string referencedType = prop.GetPropertyTypeString();
+            string referencedType = prop.ReferencedTypeAsCSharp();
             if (prop is CompoundObjectProperty)
             {
                 referencedType += ImplementationSuffix;

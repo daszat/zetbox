@@ -67,7 +67,7 @@ namespace <%= rel.A.Type.Module.Namespace %>
 
 %>
 
-namespace <%= prop.ObjectClass.Module.Namespace %>
+namespace <%= prop.GetCollectionEntryNamespace() %>
 {
 <%
 		ValueCollectionEntry.Call(Host, ctx, prop);
@@ -86,7 +86,7 @@ namespace <%= prop.ObjectClass.Module.Namespace %>
 	{
 %>
 
-namespace <%= prop.ObjectClass.Module.Namespace %>
+namespace <%= prop.GetCollectionEntryNamespace() %>
 {
 <%
 		ValueCollectionEntry.Call(Host, ctx, prop);

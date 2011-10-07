@@ -403,7 +403,7 @@ namespace Kistl.App.Projekte
 				if (_EMails == null)
 				{
 				    _EMails 
-				        = new ClientValueCollectionWrapper<Kunde, string, Kunde_EMails_CollectionEntry, Kunde_EMails_CollectionEntryMemoryImpl, ObservableCollection<Kunde_EMails_CollectionEntryMemoryImpl>>(
+				        = new ClientValueCollectionWrapper<Kunde, string, Kistl.App.Projekte.Kunde_EMails_CollectionEntry, Kistl.App.Projekte.Kunde_EMails_CollectionEntryMemoryImpl, ObservableCollection<Kistl.App.Projekte.Kunde_EMails_CollectionEntryMemoryImpl>>(
 							this.Context,
 				            this, 
 				            () => { this.NotifyPropertyChanged("EMails", null, null); if(OnEMails_PostSetter != null && IsAttached) OnEMails_PostSetter(this); },
@@ -413,8 +413,8 @@ namespace Kistl.App.Projekte
 			}
 		}
 
-		private ClientValueCollectionWrapper<Kunde, string, Kunde_EMails_CollectionEntry, Kunde_EMails_CollectionEntryMemoryImpl, ObservableCollection<Kunde_EMails_CollectionEntryMemoryImpl>> _EMails;
-		private ObservableCollection<Kunde_EMails_CollectionEntryMemoryImpl> _EMailsCollection = new ObservableCollection<Kunde_EMails_CollectionEntryMemoryImpl>();
+		private ClientValueCollectionWrapper<Kunde, string, Kistl.App.Projekte.Kunde_EMails_CollectionEntry, Kistl.App.Projekte.Kunde_EMails_CollectionEntryMemoryImpl, ObservableCollection<Kistl.App.Projekte.Kunde_EMails_CollectionEntryMemoryImpl>> _EMails;
+		private ObservableCollection<Kistl.App.Projekte.Kunde_EMails_CollectionEntryMemoryImpl> _EMailsCollection = new ObservableCollection<Kistl.App.Projekte.Kunde_EMails_CollectionEntryMemoryImpl>();
 public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMails_PostSetter;
 
         /// <summary>
@@ -700,7 +700,7 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Kunde> OnEMail
             me.Adresse = other.Adresse;
             me.ChangedOn = other.ChangedOn;
             me.CreatedOn = other.CreatedOn;
-            SynchronizeLists(this._EMailsCollection, otherImpl._EMailsCollection);
+            SynchronizeCollections(this._EMailsCollection, otherImpl._EMailsCollection);
             me.ExportGuid = other.ExportGuid;
             me.Kundenname = other.Kundenname;
             me.Land = other.Land;

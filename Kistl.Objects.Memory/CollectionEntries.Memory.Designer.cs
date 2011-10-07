@@ -6530,11 +6530,11 @@ namespace Kistl.App.Projekte
         /// the B-side value of this CollectionEntry
         /// </summary>
         // BEGIN Kistl.Generator.Templates.Properties.NotifyingValueProperty
-        public System.String Value
+        public string Value
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(System.String);
+                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Value;
@@ -6553,13 +6553,13 @@ namespace Kistl.App.Projekte
                 }
             }
         }
-        private System.String _Value;
+        private string _Value;
         // END Kistl.Generator.Templates.Properties.NotifyingValueProperty
         // BEGIN Kistl.Generator.Templates.Properties.DelegatingProperty
         public object ValueObject
         {
             get { return Value; }
-            set { Value = (System.String)value; }
+            set { Value = (string)value; }
         }
         // END Kistl.Generator.Templates.Properties.DelegatingProperty
 

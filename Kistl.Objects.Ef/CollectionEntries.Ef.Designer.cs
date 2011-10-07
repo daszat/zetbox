@@ -7114,11 +7114,11 @@ public Kunde_EMails_CollectionEntryEfImpl(Func<IFrozenContext> lazyCtx)
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         [EdmScalarProperty()]
-        public System.String Value
+        public string Value
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(System.String);
+                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _Value;
@@ -7137,13 +7137,13 @@ public Kunde_EMails_CollectionEntryEfImpl(Func<IFrozenContext> lazyCtx)
                 }
             }
         }
-        private System.String _Value;
+        private string _Value;
         // END Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
         // BEGIN Kistl.Generator.Templates.Properties.DelegatingProperty
         public object ValueObject
         {
             get { return Value; }
-            set { Value = (System.String)value; }
+            set { Value = (string)value; }
         }
         // END Kistl.Generator.Templates.Properties.DelegatingProperty
 

@@ -101,7 +101,7 @@ foreach (var prop in ctx.GetQuery<ValueTypeProperty>()
                             .OrderBy(p => p.ObjectClass.Name)
                             .ThenBy(p => p.Name))
    {
-        var collectionEntryNamespace = prop.Module.Namespace;
+        var collectionEntryNamespace = prop.GetCollectionEntryNamespace();
         var collectionEntryClassName = prop.GetCollectionEntryClassName() + ImplementationSuffix;
         var proxyClassName = prop.GetCollectionEntryClassName() + "Proxy";
         var schemaName = prop.Module.SchemaName;
@@ -125,7 +125,7 @@ ValueTypePropertyHbm.Call(Host, String.Empty, prop, "Value", prop.Name, true, Im
 #line 84 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
 if (prop.HasPersistentOrder) { 
 #line 85 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
-this.WriteObjects("        <property name=\"Index\"\r\n");
+this.WriteObjects("        <property name=\"Value_pos\"\r\n");
 this.WriteObjects("                  column=\"`Index`\" />\r\n");
 #line 87 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
 } 
@@ -152,7 +152,7 @@ foreach (var prop in ctx.GetQuery<CompoundObjectProperty>()
                             .OrderBy(p => p.ObjectClass.Name)
                             .ThenBy(p => p.Name))
    {
-        var collectionEntryNamespace = prop.Module.Namespace;
+        var collectionEntryNamespace = prop.GetCollectionEntryNamespace();
         var collectionEntryClassName = prop.GetCollectionEntryClassName() + ImplementationSuffix;
         var proxyClassName = prop.GetCollectionEntryClassName() + "Proxy";
         var schemaName = prop.Module.SchemaName;
@@ -176,7 +176,7 @@ CompoundObjectPropertyHbm.Call(Host, ctx, String.Empty, prop, "Value", prop.Name
 #line 122 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
 if (prop.HasPersistentOrder) { 
 #line 123 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
-this.WriteObjects("        <property name=\"Index\"\r\n");
+this.WriteObjects("        <property name=\"Value_pos\"\r\n");
 this.WriteObjects("                  column=\"`Index`\" />\r\n");
 #line 125 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
 } 

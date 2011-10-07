@@ -157,10 +157,10 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
 
             return this.ObjectClass
                 .Properties
-                .Select(p =>
+                .Select(prop =>
                 {
-                    var type = p.ReferencedTypeAsCSharp();
-                    var orp = p as ObjectReferenceProperty;
+                    var type = prop.ReferencedTypeAsCSharp();
+                    var orp = prop as ObjectReferenceProperty;
 
                     // object references have to be translated to internal proxy interfaces
                     if (orp != null)
@@ -182,12 +182,12 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                     }
                     else
                     {
-                        var ceClassName = p.GetCollectionEntryClassName();
+                        var ceClassName = prop.GetCollectionEntryClassName();
                         var ceCollectionType = String.Format("ICollection<{0}.{1}{2}.{1}Proxy>",
-                            p.ObjectClass.Module.Namespace,
+                            prop.GetCollectionEntryNamespace(),
                             ceClassName,
                             ImplementationSuffix);
-                        var cop = p as CompoundObjectProperty;
+                        var cop = prop as CompoundObjectProperty;
                         if (cop != null)
                         {
                             if (cop.IsList)
@@ -197,7 +197,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                         }
                         else
                         {
-                            var vtp = p as ValueTypeProperty;
+                            var vtp = prop as ValueTypeProperty;
                             if (vtp != null && vtp.IsList)
                             {
                                 type = ceCollectionType;
@@ -208,7 +208,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                             }
                         }
                     }
-                    return new KeyValuePair<string, string>(type, p.Name);
+                    return new KeyValuePair<string, string>(type, prop.Name);
                 })
                 .Concat(relationPosProperties)
                 //.Concat(relationProperties)

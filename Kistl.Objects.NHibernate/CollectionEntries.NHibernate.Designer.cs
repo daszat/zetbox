@@ -6867,11 +6867,11 @@ namespace Kistl.App.Projekte
         /// the B-side value of this CollectionEntry
         /// </summary>
         // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
-        public virtual System.String Value
+        public virtual string Value
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(System.String);
+                if (!CurrentAccessRights.HasReadRights()) return default(string);
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = Proxy.Value;
@@ -6895,7 +6895,7 @@ namespace Kistl.App.Projekte
         public object ValueObject
         {
             get { return Value; }
-            set { Value = (System.String)value; }
+            set { Value = (string)value; }
         }
         // END Kistl.Generator.Templates.Properties.DelegatingProperty
 
@@ -6917,7 +6917,7 @@ namespace Kistl.App.Projekte
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             BinarySerializer.FromStream(out this._fk_Parent, binStream);
             {
-                System.String tmp;
+                string tmp;
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.Proxy.Value = tmp;
             }
@@ -6945,7 +6945,7 @@ namespace Kistl.App.Projekte
             XmlStreamer.FromStream(ref this._fk_Parent, xml, "Parent", "Kistl.App.Projekte");
             {
                 // yuck
-                System.String tmp = this.Proxy.Value;
+                string tmp = this.Proxy.Value;
                 XmlStreamer.FromStream(ref tmp, xml, "Value", "Kistl.App.Projekte");
                 this.Proxy.Value = tmp;
             }
@@ -6968,7 +6968,7 @@ namespace Kistl.App.Projekte
             if (!CurrentAccessRights.HasReadRights()) return;
             {
                 // yuck
-                System.String tmp = this.Proxy.Value;
+                string tmp = this.Proxy.Value;
                 XmlStreamer.FromStream(ref tmp, xml, "Value", "Kistl.App.Projekte");
                 this.Proxy.Value = tmp;
             }
@@ -7028,7 +7028,7 @@ namespace Kistl.App.Projekte
 
             public virtual bool ValueIsNull { get; set; }
 
-            public virtual System.String Value { get; set; }
+            public virtual string Value { get; set; }
 
         }
 

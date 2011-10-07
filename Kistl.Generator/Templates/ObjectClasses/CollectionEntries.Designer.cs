@@ -94,7 +94,7 @@ foreach (var prop in ctx.GetQuery<ValueTypeProperty>()
 
 #line 69 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\CollectionEntries.cst"
 this.WriteObjects("\r\n");
-this.WriteObjects("namespace ",  prop.ObjectClass.Module.Namespace , "\r\n");
+this.WriteObjects("namespace ",  prop.GetCollectionEntryNamespace() , "\r\n");
 this.WriteObjects("{\r\n");
 #line 73 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\CollectionEntries.cst"
 ValueCollectionEntry.Call(Host, ctx, prop);
@@ -115,7 +115,7 @@ foreach (var prop in ctx.GetQuery<CompoundObjectProperty>()
 
 #line 88 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\CollectionEntries.cst"
 this.WriteObjects("\r\n");
-this.WriteObjects("namespace ",  prop.ObjectClass.Module.Namespace , "\r\n");
+this.WriteObjects("namespace ",  prop.GetCollectionEntryNamespace() , "\r\n");
 this.WriteObjects("{\r\n");
 #line 92 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\CollectionEntries.cst"
 ValueCollectionEntry.Call(Host, ctx, prop);

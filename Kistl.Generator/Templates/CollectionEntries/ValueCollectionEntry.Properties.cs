@@ -7,6 +7,7 @@ namespace Kistl.Generator.Templates.CollectionEntries
     using System.Text;
 
     using Kistl.App.Base;
+    using Kistl.Generator.Extensions;
 
     public partial class ValueCollectionEntry
     {
@@ -18,14 +19,14 @@ namespace Kistl.Generator.Templates.CollectionEntries
                 MembersToSerialize, interfaceType, "Parent", prop.Module.Namespace);
 
             Properties.DelegatingProperty.Call(
-                Host, ctx, 
-                "ParentObject", "Kistl.API.IDataObject", 
+                Host, ctx,
+                "ParentObject", "Kistl.API.IDataObject",
                 "Parent", interfaceType + ImplementationSuffix);
         }
 
         protected override void ApplyBPropertyTemplate()
         {
-            string interfaceType = prop.GetPropertyTypeString();
+            string interfaceType = prop.ReferencedTypeAsCSharp();
             string implementationType = interfaceType;
 
             var cop = prop as CompoundObjectProperty;
@@ -40,8 +41,8 @@ namespace Kistl.Generator.Templates.CollectionEntries
             if (vtp != null)
             {
                 Properties.NotifyingValueProperty.Call(
-                    Host, ctx, MembersToSerialize, 
-                    vtp.GetPropertyTypeString(), "Value", vtp.Module.Namespace);
+                    Host, ctx, MembersToSerialize,
+                    interfaceType, "Value", vtp.Module.Namespace);
             }
 
             Properties.DelegatingProperty.Call(Host, ctx, "ValueObject", "object", "Value", implementationType);
@@ -49,14 +50,14 @@ namespace Kistl.Generator.Templates.CollectionEntries
 
         protected override sealed void ApplyAIndexPropertyTemplate()
         {
-            this.WriteLine("        // always ignored because the other side (a value) cannot have a navigator and therefore no order");
-            this.WriteObjects("        int? ", GetCeInterface(), ".AIndex { get { return null; } set { } }");
-            this.WriteLine();
+            // never used
         }
 
         protected override void ApplyBIndexPropertyTemplate()
         {
-            this.WriteLine("// TODO: implement element ordering");
+            Properties.NotifyingValueProperty.Call(
+                Host, ctx, MembersToSerialize,
+                "int?", "Index", prop.GetCollectionEntryNamespace());
         }
     }
 }
