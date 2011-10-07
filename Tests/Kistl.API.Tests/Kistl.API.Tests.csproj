@@ -101,6 +101,7 @@
     <Compile Include="Properties\VersionInfo.Designer.cs">
       <DependentUpon>VersionInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Tests\DiffTests.cs" />
     <Compile Include="Tests\GenericObservableCollectionTestsBaseline.cs" />
     <Compile Include="Tests\BasicObservableCollectionTestsBaseline.cs" />
     <Compile Include="Tests\GenericListTestsBaseline.cs" />

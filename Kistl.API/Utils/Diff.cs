@@ -1,4 +1,5 @@
-namespace my.utils
+
+namespace Kistl.API.Utils
 {
     using System;
     using System.Collections;
@@ -25,7 +26,7 @@ namespace my.utils
     /// The algorithm itself is comparing 2 arrays of numbers so when comparing 2 text documents
     /// each line is converted into a (hash) number. See DiffText(). 
     /// 
-    /// Some chages to the original algorithm:
+    /// Some changes to the original algorithm:
     /// The original algorithm was described using a recursive approach and comparing zero indexed arrays.
     /// Extracting sub-arrays and rejoining them is very performance and memory intensive so the same
     /// (readonly) data arrays are passed arround together with their lower and upper bounds.
@@ -43,7 +44,7 @@ namespace my.utils
     /// In SMS is a lot of boundary arithmetic in the for-D and for-k loops that can be done by increment
     /// and decrement of local variables.
     /// The DownVector and UpVector arrays are alywas created and destroyed each time the SMS gets called.
-    /// It is possible to reuse tehm when transfering them to members of the class.
+    /// It is possible to reuse them when transfering them to members of the class.
     /// See TODO: hints.
     /// 
     /// diff.cs: A port of the algorythm to C#
@@ -72,6 +73,7 @@ namespace my.utils
     /// 2007.09.23 UpVector and DownVector optimization by Jan Stoklasa ().
     /// 2008.05.31 Adjusted the testing code that failed because of the Optimize method (not a bug in the diff algorithm).
     /// 2008.10.08 Fixing a test case and adding a new test case.
+    /// 2011.10.07 adapted for Kistl usage
     /// </summary>
 
     public class Diff
@@ -100,110 +102,11 @@ namespace my.utils
             // internal int u, v;  // 2002.09.20: no need for 2 points 
         }
 
-
-        #region self-Test
-
-#if (SELFTEST)
-    /// <summary>
-    /// start a self- / box-test for some diff cases and report to the debug output.
-    /// </summary>
-    /// <param name="args">not used</param>
-    /// <returns>always 0</returns>
-    public static int Main(string[] args) {
-      StringBuilder ret = new StringBuilder();
-      string a, b;
-
-      System.Diagnostics.ConsoleTraceListener ctl = new System.Diagnostics.ConsoleTraceListener(false);
-      System.Diagnostics.Debug.Listeners.Add(ctl);
-
-      System.Console.WriteLine("Diff Self Test...");
-      
-      // test all changes
-      a = "a,b,c,d,e,f,g,h,i,j,k,l".Replace(',', '\n');
-      b = "0,1,2,3,4,5,6,7,8,9".Replace(',', '\n');
-      System.Diagnostics.Debug.Assert(TestHelper(Diff.DiffText(a, b, false, false, false))
-        == "12.10.0.0*", 
-        "all-changes test failed.");
-      System.Diagnostics.Debug.WriteLine("all-changes test passed.");
-      // test all same
-      a = "a,b,c,d,e,f,g,h,i,j,k,l".Replace(',', '\n');
-      b = a;
-      System.Diagnostics.Debug.Assert(TestHelper(Diff.DiffText(a, b, false, false, false))
-        == "",
-        "all-same test failed.");
-      System.Diagnostics.Debug.WriteLine("all-same test passed.");
-
-      // test snake
-      a = "a,b,c,d,e,f".Replace(',', '\n');
-      b = "b,c,d,e,f,x".Replace(',', '\n');
-      System.Diagnostics.Debug.Assert(TestHelper(Diff.DiffText(a, b, false, false, false))
-        == "1.0.0.0*0.1.6.5*",
-        "snake test failed.");
-      System.Diagnostics.Debug.WriteLine("snake test passed.");
-
-      // 2002.09.20 - repro
-      a = "c1,a,c2,b,c,d,e,g,h,i,j,c3,k,l".Replace(',', '\n');
-      b = "C1,a,C2,b,c,d,e,I1,e,g,h,i,j,C3,k,I2,l".Replace(',', '\n');
-      System.Diagnostics.Debug.Assert(TestHelper(Diff.DiffText(a, b, false, false, false))
-        == "1.1.0.0*1.1.2.2*0.2.7.7*1.1.11.13*0.1.13.15*",
-        "repro20020920 test failed.");
-      System.Diagnostics.Debug.WriteLine("repro20020920 test passed.");
-      
-      // 2003.02.07 - repro
-      a = "F".Replace(',', '\n');
-      b = "0,F,1,2,3,4,5,6,7".Replace(',', '\n');
-      System.Diagnostics.Debug.Assert(TestHelper(Diff.DiffText(a, b, false, false, false))
-        == "0.1.0.0*0.7.1.2*", 
-        "repro20030207 test failed.");
-      System.Diagnostics.Debug.WriteLine("repro20030207 test passed.");
-      
-      // Muegel - repro
-      a = "HELLO\nWORLD";
-      b = "\n\nhello\n\n\n\nworld\n";
-      System.Diagnostics.Debug.Assert(TestHelper(Diff.DiffText(a, b, false, false, false))
-        == "2.8.0.0*", 
-        "repro20030409 test failed.");
-      System.Diagnostics.Debug.WriteLine("repro20030409 test passed.");
-
-      // test some differences
-      a = "a,b,-,c,d,e,f,f".Replace(',', '\n');
-      b = "a,b,x,c,e,f".Replace(',', '\n');
-      System.Diagnostics.Debug.Assert(TestHelper(Diff.DiffText(a, b, false, false, false))
-        == "1.1.2.2*1.0.4.4*1.0.7.6*", 
-        "some-changes test failed.");
-      System.Diagnostics.Debug.WriteLine("some-changes test passed.");
-
-      // test one change within long chain of repeats
-      a = "a,a,a,a,a,a,a,a,a,a".Replace(',', '\n');
-      b = "a,a,a,a,-,a,a,a,a,a".Replace(',', '\n');
-      System.Diagnostics.Debug.Assert(TestHelper(Diff.DiffText(a, b, false, false, false))
-        == "0.1.4.4*1.0.9.10*", 
-        "long chain of repeats test failed.");
-
-      System.Diagnostics.Debug.WriteLine("End.");
-      System.Diagnostics.Debug.Flush();
-
-      return (0);
-    }
-
-
-    public static string TestHelper(Item []f) {
-      StringBuilder ret = new StringBuilder();
-      for (int n = 0; n < f.Length; n++) {
-        ret.Append(f[n].deletedA.ToString() + "." + f[n].insertedB.ToString() + "." + f[n].StartA.ToString() + "." + f[n].StartB.ToString() + "*");
-      }
-      // Debug.Write(5, "TestHelper", ret.ToString());
-      return (ret.ToString());
-    }
-#endif
-        #endregion
-
-
         /// <summary>
         /// Find the difference in 2 texts, comparing by textlines.
         /// </summary>
-        /// <param name="TextA">A-version of the text (usualy the old one)</param>
-        /// <param name="TextB">B-version of the text (usualy the new one)</param>
+        /// <param name="TextA">A-version of the text (usually the old one)</param>
+        /// <param name="TextB">B-version of the text (usually the new one)</param>
         /// <returns>Returns a array of Items that describe the differences.</returns>
         public Item[] DiffText(string TextA, string TextB)
         {
@@ -218,14 +121,17 @@ namespace my.utils
         /// textlines into a common hashtable so i can find dublicates in there, and generating a 
         /// new number each time a new textline is inserted.
         /// </summary>
-        /// <param name="TextA">A-version of the text (usualy the old one)</param>
-        /// <param name="TextB">B-version of the text (usualy the new one)</param>
-        /// <param name="trimSpace">When set to true, all leading and trailing whitespace characters are stripped out before the comparation is done.</param>
-        /// <param name="ignoreSpace">When set to true, all whitespace characters are converted to a single space character before the comparation is done.</param>
-        /// <param name="ignoreCase">When set to true, all characters are converted to their lowercase equivivalence before the comparation is done.</param>
+        /// <param name="TextA">A-version of the text (usually the old one)</param>
+        /// <param name="TextB">B-version of the text (usually the new one)</param>
+        /// <param name="trimSpace">When set to true, all leading and trailing whitespace characters are stripped out before the comparison is done.</param>
+        /// <param name="ignoreSpace">When set to true, all whitespace characters are converted to a single space character before the comparison is done.</param>
+        /// <param name="ignoreCase">When set to true, all characters are converted to their lowercase equivivalence before the comparison is done.</param>
         /// <returns>Returns a array of Items that describe the differences.</returns>
         public static Item[] DiffText(string TextA, string TextB, bool trimSpace, bool ignoreSpace, bool ignoreCase)
         {
+            if (TextA == null) { throw new ArgumentNullException("TextA"); }
+            if (TextB == null) { throw new ArgumentNullException("TextB"); }
+
             // prepare the input-text and convert to comparable numbers.
             Hashtable h = new Hashtable(TextA.Length + TextB.Length);
 
@@ -238,9 +144,9 @@ namespace my.utils
             h = null; // free up hashtable memory (maybe)
 
             int MAX = DataA.Length + DataB.Length + 1;
-            /// vector for the (0,0) to (x,y) search
+            // vector for the (0,0) to (x,y) search
             int[] DownVector = new int[2 * MAX + 2];
-            /// vector for the (u,v) to (N,M) search
+            // vector for the (u,v) to (N,M) search
             int[] UpVector = new int[2 * MAX + 2];
 
             LCS(DataA, 0, DataA.Length, DataB, 0, DataB.Length, DownVector, UpVector);
@@ -287,8 +193,8 @@ namespace my.utils
         /// <summary>
         /// Find the difference in 2 arrays of integers.
         /// </summary>
-        /// <param name="ArrayA">A-version of the numbers (usualy the old one)</param>
-        /// <param name="ArrayB">B-version of the numbers (usualy the new one)</param>
+        /// <param name="ArrayA">A-version of the numbers (usually the old one)</param>
+        /// <param name="ArrayB">B-version of the numbers (usually the new one)</param>
         /// <returns>Returns a array of Items that describe the differences.</returns>
         public static Item[] DiffInt(int[] ArrayA, int[] ArrayB)
         {
@@ -299,9 +205,9 @@ namespace my.utils
             DiffData DataB = new DiffData(ArrayB);
 
             int MAX = DataA.Length + DataB.Length + 1;
-            /// vector for the (0,0) to (x,y) search
+            // vector for the (0,0) to (x,y) search
             int[] DownVector = new int[2 * MAX + 2];
-            /// vector for the (u,v) to (N,M) search
+            // vector for the (u,v) to (N,M) search
             int[] UpVector = new int[2 * MAX + 2];
 
             LCS(DataA, 0, DataA.Length, DataB, 0, DataB.Length, DownVector, UpVector);
@@ -316,6 +222,8 @@ namespace my.utils
         /// <param name="aText">the input text</param>
         /// <param name="h">This extern initialized hashtable is used for storing all ever used textlines.</param>
         /// <param name="trimSpace">ignore leading and trailing space characters</param>
+        /// <param name="ignoreSpace"></param>
+        /// <param name="ignoreCase"></param>
         /// <returns>a array of integers.</returns>
         private static int[] DiffCodes(string aText, Hashtable h, bool trimSpace, bool ignoreSpace, bool ignoreCase)
         {
@@ -628,7 +536,7 @@ namespace my.utils
         /// <summary>
         /// Initialize the Diff-Data buffer.
         /// </summary>
-        /// <param name="data">reference to the buffer</param>
+        /// <param name="initData">reference to the buffer</param>
         internal DiffData(int[] initData)
         {
             data = initData;
