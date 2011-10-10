@@ -15,7 +15,6 @@ namespace Kistl.API.Tests
         [Test]
         public void Test()
         {
-            StringBuilder ret = new StringBuilder();
             string a, b;
 
             // test all changes
