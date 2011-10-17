@@ -784,6 +784,11 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
             ExecuteNonQuery(String.Format("DROP TABLE {0} CASCADE", FormatSchemaName(tblName)));
         }
 
+        protected virtual void DropViewCascade(TableRef tblName)
+        {
+            ExecuteNonQuery(String.Format("DROP VIEW {0} CASCADE", FormatSchemaName(tblName)));
+        }
+
         private IEnumerable<string[]> GetParameterTypes(ProcRef procName)
         {
             List<string[]> result = new List<string[]>();
@@ -835,7 +840,7 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
             foreach (var v in GetViewNames().ToList())
             {
-                DropView(v);
+                DropViewCascade(v);
             }
 
             foreach (var tbl in GetTableNames().ToList())
