@@ -197,6 +197,11 @@ namespace Kistl.API
         {
             return typeof(IExportableInternal).IsAssignableFrom(type);
         }
+        public static bool IsNullableEnum(this Type type)
+        {
+            if (type == null) return false;
+            return type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>) && type.GetGenericArguments().Single().IsEnum;
+        }
     }
 
     /// <summary>

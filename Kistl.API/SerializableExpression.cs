@@ -541,19 +541,19 @@ namespace Kistl.API
             else
             {
                 // Deserialize only basic types
-                if (Type.IsAssignableFrom(typeof(int)) || Type.IsEnum)
+                if (Type == typeof(int) || Type == typeof(int?) || Type.IsEnum || Type.IsNullableEnum())
                 {
                     Value = binReader.ReadInt32();
                 }
-                else if (Type.IsAssignableFrom(typeof(bool)))
+                else if (Type == typeof(bool) || Type == typeof(bool?))
                 {
                     Value = binReader.ReadBoolean();
                 }
-                else if (Type.IsAssignableFrom(typeof(double)))
+                else if (Type == typeof(double) || Type == typeof(double?))
                 {
                     Value = binReader.ReadDouble();
                 }
-                else if (Type.IsAssignableFrom(typeof(float)))
+                else if (Type == typeof(float) || Type == typeof(float?))
                 {
                     Value = binReader.ReadSingle();
                 }
@@ -561,17 +561,17 @@ namespace Kistl.API
                 {
                     Value = binReader.ReadString();
                 }
-                else if (Type.IsAssignableFrom(typeof(decimal)))
+                else if (Type == typeof(decimal) || Type == typeof(decimal?))
                 {
                     Value = binReader.ReadDecimal();
                 }
-                else if (Type.IsAssignableFrom(typeof(DateTime)))
+                else if (Type == typeof(DateTime) || Type == typeof(DateTime?))
                 {
                     DateTime val;
                     BinarySerializer.FromStream(out val, binReader);
                     Value = val;
                 }
-                else if (Type.IsAssignableFrom(typeof(Guid)))
+                else if (Type == typeof(Guid) || Type == typeof(Guid?))
                 {
                     Guid val;
                     BinarySerializer.FromStream(out val, binReader);
@@ -625,19 +625,19 @@ namespace Kistl.API
                 // IsNull
                 binStream.Write(false);
                 // Serialize only basic types
-                if (Type.IsAssignableFrom(typeof(int)) || Type.IsEnum)
+                if (Type == typeof(int) || Type == typeof(int?) || Type.IsEnum || Type.IsNullableEnum())
                 {
                     binStream.Write((int)Value);
                 }
-                else if (Type.IsAssignableFrom(typeof(bool)))
+                else if (Type == typeof(bool) || Type == typeof(bool?))
                 {
                     binStream.Write((bool)Value);
                 }
-                else if (Type.IsAssignableFrom(typeof(double)))
+                else if (Type == typeof(double) || Type == typeof(double?))
                 {
                     binStream.Write((double)Value);
                 }
-                else if (Type.IsAssignableFrom(typeof(float)))
+                else if (Type == typeof(float) || Type == typeof(float?))
                 {
                     binStream.Write((float)Value);
                 }
@@ -645,15 +645,15 @@ namespace Kistl.API
                 {
                     binStream.Write((string)Value);
                 }
-                else if (Type.IsAssignableFrom(typeof(decimal)))
+                else if (Type == typeof(decimal) || Type == typeof(decimal?))
                 {
                     binStream.Write((decimal)Value);
                 }
-                else if (Type.IsAssignableFrom(typeof(DateTime)))
+                else if (Type == typeof(DateTime) || Type == typeof(DateTime?))
                 {
                     BinarySerializer.ToStream((DateTime)Value, binStream);
                 }
-                else if (Type.IsAssignableFrom(typeof(Guid)))
+                else if (Type == typeof(Guid) || Type == typeof(Guid?))
                 {
                     BinarySerializer.ToStream((Guid)Value, binStream);
                 }
