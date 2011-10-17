@@ -238,8 +238,16 @@ namespace Kistl.Client.WPF
             if (serverDomain != null)
                 serverDomain.Stop();
 
-            if (container != null)
-                container.Dispose();
+            try
+            {
+                if (container != null)
+                    container.Dispose();
+            }
+            catch(Exception ex)
+            {
+                // A WCF Proxy may throw an exception while shutting down when the server is not available - WTF?
+                Logging.Log.Error("Application_Exit", ex);
+            }
         }
 
         private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
