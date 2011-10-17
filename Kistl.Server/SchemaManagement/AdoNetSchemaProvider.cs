@@ -355,11 +355,6 @@ namespace Kistl.Server.SchemaManagement
             ExecuteNonQuery(String.Format("DROP TABLE {0}", FormatSchemaName(tblName)));
         }
 
-        protected virtual void DropTableCascade(TableRef tblName)
-        {
-            ExecuteNonQuery(String.Format("DROP TABLE {0} CASCADE", FormatSchemaName(tblName)));
-        }
-
         public abstract bool CheckColumnExists(TableRef tblName, string colName);
 
         public abstract IEnumerable<string> GetTableColumnNames(TableRef tblName);

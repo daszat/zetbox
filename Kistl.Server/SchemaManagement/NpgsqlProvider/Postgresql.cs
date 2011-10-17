@@ -779,6 +779,11 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
             }
         }
 
+        protected virtual void DropTableCascade(TableRef tblName)
+        {
+            ExecuteNonQuery(String.Format("DROP TABLE {0} CASCADE", FormatSchemaName(tblName)));
+        }
+
         private IEnumerable<string[]> GetParameterTypes(ProcRef procName)
         {
             List<string[]> result = new List<string[]>();
