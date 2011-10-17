@@ -838,9 +838,13 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
                 DropProcedureInternal(proc, true);
             }
 
-            foreach (var v in GetViewNames().ToList())
+            // Do not optimize this
+            // drop cascase will drop dependend views
+            List<TableRef> views = GetViewNames().ToList();
+            while(views.Count > 0)
             {
-                DropViewCascade(v);
+                DropViewCascade(views.First());
+                views = GetViewNames().ToList();
             }
 
             foreach (var tbl in GetTableNames().ToList())
