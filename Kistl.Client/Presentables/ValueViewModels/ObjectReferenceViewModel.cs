@@ -153,27 +153,6 @@ namespace Kistl.Client.Presentables.ValueViewModels
         }
         #endregion
 
-        #region Utilities and UI callbacks
-
-        private void CollectChildClasses(int id, List<ObjectClass> children)
-        {
-            var nextChildren = FrozenContext
-                .GetQuery<ObjectClass>()
-                .Where(oc => oc.BaseObjectClass != null && oc.BaseObjectClass.ID == id)
-                .ToList();
-
-            if (nextChildren.Count() > 0)
-            {
-                foreach (ObjectClass oc in nextChildren)
-                {
-                    if (!oc.IsAbstract) children.Add(oc);
-                    CollectChildClasses(oc.ID, children);
-                };
-            }
-        }
-
-        #endregion
-
         #region Commands
 
         protected override ObservableCollection<ICommandViewModel> CreateCommands()
@@ -240,7 +219,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
             {
                 children.Add(baseclass);
             }
-            CollectChildClasses(baseclass.ID, children);
+            baseclass.CollectChildClasses(FrozenContext, children, false);
 
             if (children.Count == 1)
             {

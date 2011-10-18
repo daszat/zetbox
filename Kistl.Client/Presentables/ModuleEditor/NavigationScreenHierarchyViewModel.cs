@@ -39,8 +39,8 @@ namespace Kistl.Client.Presentables.ModuleEditor
             return Name;
         }
 
-        private NavigationScreenViewModel _selectedItem;
-        public NavigationScreenViewModel SelectedItem
+        private NavigationEntryViewModel _selectedItem;
+        public NavigationEntryViewModel SelectedItem
         {
             get
             {
@@ -56,20 +56,20 @@ namespace Kistl.Client.Presentables.ModuleEditor
             }
         }
 
-        private ReadOnlyObservableCollection<NavigationScreenViewModel> _rootScreens = null;
-        public ReadOnlyObservableCollection<NavigationScreenViewModel> RootScreens
+        private ReadOnlyObservableCollection<NavigationEntryViewModel> _rootScreens = null;
+        public ReadOnlyObservableCollection<NavigationEntryViewModel> RootScreens
         {
             get
             {
                 if (_rootScreens == null)
                 {
                     var moduleID = Module.ID;
-                    _rootScreens = new ReadOnlyObservableCollection<NavigationScreenViewModel>(new ObservableCollection<NavigationScreenViewModel>(
+                    _rootScreens = new ReadOnlyObservableCollection<NavigationEntryViewModel>(new ObservableCollection<NavigationEntryViewModel>(
                         DataContext.GetQuery<NavigationScreen>()
                         .Where(i => i.Module.ID == moduleID)
                         .Where(i => i.Parent == null)
                         .OrderBy(i => i.Title)
-                        .Select(i => NavigationScreenViewModel.Fetch(ViewModelFactory, DataContext, this, i))));
+                        .Select(i => NavigationEntryViewModel.Fetch(ViewModelFactory, DataContext, this, i))));
                 }
                 return _rootScreens;
             }
@@ -109,8 +109,8 @@ namespace Kistl.Client.Presentables.ModuleEditor
             {
                 if (_NewCommand == null)
                 {
-                    _NewCommand = ViewModelFactory.CreateViewModel<NewDataObjectCommand.Factory>().Invoke(DataContext, this, typeof(NavigationScreen).GetObjectClass(FrozenContext), null, null, this);
-                    _NewCommand.ObjectCreated += (obj) => ((NavigationScreen)obj).Parent = SelectedItem != null ? obj.Context.Find<NavigationScreen>(SelectedItem.ID) : null;
+                    _NewCommand = ViewModelFactory.CreateViewModel<NewDataObjectCommand.Factory>().Invoke(DataContext, this, typeof(NavigationEntry).GetObjectClass(FrozenContext), null, null, this);
+                    _NewCommand.ObjectCreated += (obj) => ((NavigationEntry)obj).Parent = SelectedItem != null ? obj.Context.Find<NavigationEntry>(SelectedItem.ID) : null;
                 }
                 return _NewCommand;
             }

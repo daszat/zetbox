@@ -1189,6 +1189,27 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.NavigationSearchScreen, Kistl.App.GUI.InstanceListViewMethod?> OnViewMethod_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.NavigationSearchScreen, Kistl.App.GUI.InstanceListViewMethod?> OnViewMethod_PostSetter;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnGetDefaultViewModel_NavigationSearchScreen")]
+        public override System.Object GetDefaultViewModel(Kistl.API.IKistlContext dataCtx, System.Object parent)
+        {
+            var e = new MethodReturnEventArgs<System.Object>();
+            if (OnGetDefaultViewModel_NavigationSearchScreen != null)
+            {
+                OnGetDefaultViewModel_NavigationSearchScreen(this, e, dataCtx, parent);
+            }
+            else
+            {
+                e.Result = base.GetDefaultViewModel(dataCtx, parent);
+            }
+            return e.Result;
+        }
+        public static event GetDefaultViewModel_Handler<NavigationSearchScreen> OnGetDefaultViewModel_NavigationSearchScreen;
+        // END Kistl.Generator.Templates.ObjectClasses.Method
+
         public override Type GetImplementedInterface()
         {
             return typeof(NavigationSearchScreen);

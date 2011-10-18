@@ -45,6 +45,27 @@ namespace Kistl.App.GUI
         /// <summary>the NHibernate proxy of the represented entity</summary>
         internal new readonly NavigationScreenProxy Proxy;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnGetDefaultViewModel_NavigationScreen")]
+        public override System.Object GetDefaultViewModel(Kistl.API.IKistlContext dataCtx, System.Object parent)
+        {
+            var e = new MethodReturnEventArgs<System.Object>();
+            if (OnGetDefaultViewModel_NavigationScreen != null)
+            {
+                OnGetDefaultViewModel_NavigationScreen(this, e, dataCtx, parent);
+            }
+            else
+            {
+                e.Result = base.GetDefaultViewModel(dataCtx, parent);
+            }
+            return e.Result;
+        }
+        public static event GetDefaultViewModel_Handler<NavigationScreen> OnGetDefaultViewModel_NavigationScreen;
+        // END Kistl.Generator.Templates.ObjectClasses.Method
+
         public override Type GetImplementedInterface()
         {
             return typeof(NavigationScreen);

@@ -8,6 +8,7 @@ namespace Kistl.Client.Presentables.KistlBase
     using Kistl.API;
     using Kistl.App.Base;
     using Kistl.App.GUI;
+    using Kistl.App.Extensions;
     using ObjectEditorWorkspace = Kistl.Client.Presentables.ObjectEditor.WorkspaceViewModel;
     using Kistl.API.Client;
     using Kistl.API.Utils;
@@ -115,14 +116,14 @@ namespace Kistl.Client.Presentables.KistlBase
 
     public class NewDataObjectCommand : CommandViewModel
     {
-        public new delegate NewDataObjectCommand Factory(IKistlContext dataCtx, ViewModel parent, DataType type, ControlKind reqWorkspaceKind, ControlKind reqEditorKind, IRefreshCommandListener listener);
+        public new delegate NewDataObjectCommand Factory(IKistlContext dataCtx, ViewModel parent, ObjectClass type, ControlKind reqWorkspaceKind, ControlKind reqEditorKind, IRefreshCommandListener listener);
 
         protected readonly Func<IKistlContext> ctxFactory;
-        protected DataType Type { get; private set; }
+        protected ObjectClass Type { get; private set; }
         protected IRefreshCommandListener Listener { get; private set; }
 
         public NewDataObjectCommand(IViewModelDependencies appCtx, Func<IKistlContext> ctxFactory,
-            IKistlContext dataCtx, ViewModel parent, DataType type, ControlKind reqWorkspaceKind, ControlKind reqEditorKind, IRefreshCommandListener listener)
+            IKistlContext dataCtx, ViewModel parent, ObjectClass type, ControlKind reqWorkspaceKind, ControlKind reqEditorKind, IRefreshCommandListener listener)
             : base(appCtx, dataCtx, parent, CommonCommandsResources.NewDataObjectCommand_Name, CommonCommandsResources.NewDataObjectCommand_Tooltip)
         {
             this.Type = type;
@@ -173,10 +174,44 @@ namespace Kistl.Client.Presentables.KistlBase
 
         protected override void DoExecute(object data)
         {
-            var isSimpleObject = Type is ObjectClass && ((ObjectClass)Type).IsSimpleObject;
+            ObjectClass baseclass = Type;
+
+            var children = new List<ObjectClass>();
+            if (baseclass.IsAbstract == false)
+            {
+                children.Add(baseclass);
+            }
+            baseclass.CollectChildClasses(FrozenContext, children, false);
+
+            if (children.Count == 1)
+            {
+                CreateItem(Type);
+            }
+            else
+            {
+                var lstMdl = ViewModelFactory.CreateViewModel<DataObjectSelectionTaskViewModel.Factory>().Invoke(
+                        DataContext, this,
+                        typeof(ObjectClass).GetObjectClass(FrozenContext),
+                        () => children.AsQueryable(),
+                        new Action<DataObjectViewModel>(delegate(DataObjectViewModel chosen)
+                        {
+                            if (chosen != null)
+                            {
+                                CreateItem((ObjectClass)chosen.Object);
+                            }
+                        }), null);
+                lstMdl.ListViewModel.ShowCommands = false;
+
+                ViewModelFactory.ShowModel(lstMdl, true);
+            }
+        }
+
+        private void CreateItem(ObjectClass dtType)
+        {
+            var isSimpleObject = dtType.IsSimpleObject;
 
             var newCtx = isSimpleObject ? DataContext : ctxFactory();
-            var newObj = newCtx.Create(DataContext.GetInterfaceType(Type.GetDataType()));
+            var newObj = newCtx.Create(DataContext.GetInterfaceType(dtType.GetDataType()));
             OnObjectCreated(newObj);
 
             if (!isSimpleObject)

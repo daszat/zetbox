@@ -34,6 +34,27 @@ namespace Kistl.App.GUI
         {
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnGetDefaultViewModel_NavigationAction")]
+        public override System.Object GetDefaultViewModel(Kistl.API.IKistlContext dataCtx, System.Object parent)
+        {
+            var e = new MethodReturnEventArgs<System.Object>();
+            if (OnGetDefaultViewModel_NavigationAction != null)
+            {
+                OnGetDefaultViewModel_NavigationAction(this, e, dataCtx, parent);
+            }
+            else
+            {
+                e.Result = base.GetDefaultViewModel(dataCtx, parent);
+            }
+            return e.Result;
+        }
+        public static event GetDefaultViewModel_Handler<NavigationAction> OnGetDefaultViewModel_NavigationAction;
+        // END Kistl.Generator.Templates.ObjectClasses.Method
+
         public override Type GetImplementedInterface()
         {
             return typeof(NavigationAction);

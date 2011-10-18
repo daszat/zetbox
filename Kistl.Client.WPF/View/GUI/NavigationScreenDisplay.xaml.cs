@@ -24,7 +24,7 @@ namespace Kistl.Client.WPF.View.GUI
     /// Interaction logic for NavigationScreenDisplay.xaml
     /// </summary>
     [ViewDescriptor(Kistl.App.GUI.Toolkit.WPF)]
-    public partial class NavigationScreenDisplay : UserControl, IHasViewModel<NavigationScreenViewModel>
+    public partial class NavigationScreenDisplay : UserControl, IHasViewModel<NavigationEntryViewModel>
     {
         public NavigationScreenDisplay()
         {
@@ -34,9 +34,9 @@ namespace Kistl.Client.WPF.View.GUI
 
         #region IHasViewModel<NavigationScreenViewModel> Members
 
-        public NavigationScreenViewModel ViewModel
+        public NavigationEntryViewModel ViewModel
         {
-            get { return (NavigationScreenViewModel)DataContext; }
+            get { return (NavigationEntryViewModel)DataContext; }
         }
 
         #endregion

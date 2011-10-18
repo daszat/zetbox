@@ -88,7 +88,11 @@
   <ItemGroup>
     <Compile Include="CustomClientActionsModule.cs" />
     <Compile Include="DocumentManagement\FileActions.cs" />
+    <Compile Include="Gui\NavigationActionActions.cs" />
+    <Compile Include="Gui\NavigationSearchScreenActions.cs" />
+    <Compile Include="Gui\NavigationScreenActions.cs" />
     <Compile Include="Gui\DateRangeFilterConfigurationActions.cs" />
+    <Compile Include="Gui\NavigationEntryActions.cs" />
     <Compile Include="Gui\YearFilterConfigurationActions.cs" />
     <Compile Include="Gui\MonthFilterConfigurationActions.cs" />
     <Compile Include="Gui\OptionalPredicateFilterConfigurationActions.cs" />
@@ -112,6 +116,7 @@
     <Compile Include="KistlBase\ObjectClassActions.cs" />
     <Compile Include="KistlBase\RelationActions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\Projekte\ShowCalendarNavigationActionViewModel.cs" />
     <None Include="Properties\VersionInfo.cs" />
     <Compile Include="Properties\VersionInfo.Designer.cs">
       <DependentUpon>VersionInfo.cs</DependentUpon>

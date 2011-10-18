@@ -141,6 +141,8 @@
       <DependentUpon>DataObjectViewModelResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Presentables\FilterViewModels\DateRangeFilterViewModel.cs" />
+    <Compile Include="Presentables\GUI\NavigationActionViewModel.cs" />
+    <Compile Include="Presentables\GUI\NavigationScreenViewModel.cs" />
     <Compile Include="Presentables\GUI\NavigationSearchScreenViewModel.cs" />
     <Compile Include="Presentables\IContextViewModel.cs" />
     <Compile Include="Presentables\ISortableViewModel.cs" />
@@ -265,7 +267,7 @@
     <Compile Include="Presentables\ValueViewModels\CompoundObjectPropertyViewModel.cs" />
     <Compile Include="Presentables\CompoundObjectViewModel.cs" />
     <Compile Include="Presentables\GUI\NavigatorViewModel.cs" />
-    <Compile Include="Presentables\GUI\NavigationScreenViewModel.cs" />
+    <Compile Include="Presentables\GUI\NavigationEntryViewModel.cs" />
     <Compile Include="Models\FilterModels.cs" />
     <Compile Include="Presentables\DataObjectViewModel.cs" />
     <Compile Include="Presentables\DataTypeViewModel.cs" />

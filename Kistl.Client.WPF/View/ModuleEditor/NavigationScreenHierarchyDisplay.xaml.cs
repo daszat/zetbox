@@ -40,7 +40,7 @@ namespace Kistl.Client.WPF.View.ModuleEditor
 
         private void NavTree_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            var item = NavTree.SelectedItem as NavigationScreenViewModel;
+            var item = NavTree.SelectedItem as NavigationEntryViewModel;
             if (item != null)
             {
                 this.ViewModel.SelectedItem = item;

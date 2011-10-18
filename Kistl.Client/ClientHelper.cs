@@ -10,6 +10,8 @@ using Kistl.API.Client;
 using Kistl.App.Base;
 using Kistl.App.Extensions;
 using Kistl.API.Utils;
+using Kistl.Client.Presentables;
+using Autofac;
 
 namespace Kistl.Client
 {
@@ -71,6 +73,32 @@ namespace Kistl.Client
             else
             {
                 return WIDTH_SMALL;
+            }
+        }
+
+        /// <summary>
+        /// Register all ViewModel Types
+        /// </summary>
+        /// <param name="moduleBuilder"></param>
+        /// <param name="assembly"></param>
+        public static void RegisterViewModels(this ContainerBuilder moduleBuilder, System.Reflection.Assembly assembly)
+        {
+            if (moduleBuilder == null) throw new ArgumentNullException("moduleBuilder");
+            if (assembly == null) throw new ArgumentNullException("assembly");
+
+            foreach (var t in assembly.GetTypes()
+                .Where(t => typeof(ViewModel).IsAssignableFrom(t)))
+            {
+                if (t.IsGenericTypeDefinition)
+                {
+                    moduleBuilder.RegisterGeneric(t)
+                        .InstancePerDependency();
+                }
+                else
+                {
+                    moduleBuilder.RegisterType(t)
+                        .InstancePerDependency();
+                }
             }
         }
     }

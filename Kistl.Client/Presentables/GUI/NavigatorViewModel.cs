@@ -15,25 +15,25 @@ namespace Kistl.Client.Presentables.GUI
     {
         public new delegate NavigatorViewModel Factory(IKistlContext dataCtx, ViewModel parent, NavigationScreen root);
 
-        private readonly NavigationScreenViewModel _root;
-        private NavigationScreenViewModel _current;
-        private readonly ObservableCollection<NavigationScreenViewModel> _history;
-        private readonly ReadOnlyObservableCollection<NavigationScreenViewModel> _historyRO;
+        private readonly NavigationEntryViewModel _root;
+        private NavigationEntryViewModel _current;
+        private readonly ObservableCollection<NavigationEntryViewModel> _history;
+        private readonly ReadOnlyObservableCollection<NavigationEntryViewModel> _historyRO;
 
-        private readonly ObservableCollection<NavigationScreenViewModel> _location;
-        private readonly ReadOnlyObservableCollection<NavigationScreenViewModel> _locationRO;
+        private readonly ObservableCollection<NavigationEntryViewModel> _location;
+        private readonly ReadOnlyObservableCollection<NavigationEntryViewModel> _locationRO;
 
         public NavigatorViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, NavigationScreen root)
             : base(dependencies, dataCtx, parent)
         {
-            _current = _root = NavigationScreenViewModel.Fetch(ViewModelFactory, dataCtx, parent, root);
+            _current = _root = NavigationEntryViewModel.Fetch(ViewModelFactory, dataCtx, parent, root);
             _current.Displayer = this;
 
-            _history = new ObservableCollection<NavigationScreenViewModel>() { _current };
-            _historyRO = new ReadOnlyObservableCollection<NavigationScreenViewModel>(_history);
+            _history = new ObservableCollection<NavigationEntryViewModel>() { _current };
+            _historyRO = new ReadOnlyObservableCollection<NavigationEntryViewModel>(_history);
 
-            _location = new ObservableCollection<NavigationScreenViewModel>() { _root };
-            _locationRO = new ReadOnlyObservableCollection<NavigationScreenViewModel>(_location);
+            _location = new ObservableCollection<NavigationEntryViewModel>() { _root };
+            _locationRO = new ReadOnlyObservableCollection<NavigationEntryViewModel>(_location);
         }
 
         #region Name
@@ -43,7 +43,7 @@ namespace Kistl.Client.Presentables.GUI
             get { return GetTitle(_root, _current); }
         }
 
-        private static string GetTitle(NavigationScreenViewModel root, NavigationScreenViewModel current)
+        private static string GetTitle(NavigationEntryViewModel root, NavigationEntryViewModel current)
         {
             return root.Name + ": " + current.Name;
         }
@@ -55,7 +55,7 @@ namespace Kistl.Client.Presentables.GUI
         /// <summary>
         /// The currently displayed NavigationScreenViewModel.
         /// </summary>
-        public NavigationScreenViewModel CurrentScreen
+        public NavigationEntryViewModel CurrentScreen
         {
             get
             {
@@ -78,14 +78,14 @@ namespace Kistl.Client.Presentables.GUI
         /// <summary>
         /// The "path" to the CurrentScreen, as defined by its Parents.
         /// </summary>
-        public ReadOnlyObservableCollection<NavigationScreenViewModel> Location
+        public ReadOnlyObservableCollection<NavigationEntryViewModel> Location
         {
             get { return _locationRO; }
         }
 
         private void UpdateLocation()
         {
-            var newLocation = new List<NavigationScreenViewModel>();
+            var newLocation = new List<NavigationEntryViewModel>();
             var screen = CurrentScreen;
             while (screen != null)
             {
@@ -121,7 +121,7 @@ namespace Kistl.Client.Presentables.GUI
         /// <summary>
         /// A list of recently visited screens.
         /// </summary>
-        public ReadOnlyObservableCollection<NavigationScreenViewModel> History
+        public ReadOnlyObservableCollection<NavigationEntryViewModel> History
         {
             get { return _historyRO; }
         }
@@ -194,7 +194,7 @@ namespace Kistl.Client.Presentables.GUI
             {
                 if (_NavigateToCommand == null)
                 {
-                    _NavigateToCommand = ViewModelFactory.CreateViewModel<SimpleParameterCommandViewModel<NavigationScreenViewModel>.Factory>().Invoke(
+                    _NavigateToCommand = ViewModelFactory.CreateViewModel<SimpleParameterCommandViewModel<NavigationEntryViewModel>.Factory>().Invoke(
                                 DataContext,
                                 this,
                                 NavigatorViewModelResources.NavigateToCommand_Name,
@@ -206,7 +206,7 @@ namespace Kistl.Client.Presentables.GUI
             }
         }
 
-        public void NavigateTo(NavigationScreenViewModel screen)
+        public void NavigateTo(NavigationEntryViewModel screen)
         {
             CurrentScreen = screen;
         }

@@ -7,12 +7,12 @@ namespace Kistl.App.GUI
     using Kistl.API;
 
     [Implementor]
-    public static class NavigationScreenActions
+    public static class NavigationEntryActions
     {
         [Invocation]
-        public static void ToString(Kistl.App.GUI.NavigationScreen obj, MethodReturnEventArgs<System.String> e)
+        public static void ToString(Kistl.App.GUI.NavigationEntry obj, MethodReturnEventArgs<System.String> e)
         {
-            e.Result = String.Format("Screen: {0}",
+            e.Result = String.Format("NavEntry: {0}",
                   obj.Title);
         }
     }

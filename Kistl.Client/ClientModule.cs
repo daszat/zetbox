@@ -93,23 +93,8 @@ namespace Kistl.Client
                 .Register<DefaultCredentialsResolver>(c => new DefaultCredentialsResolver())
                 .As<ICredentialsResolver>()
                 .SingleInstance();
-
-
-            // Register all ViewModel Types
-            foreach (var t in typeof(ClientModule).Assembly.GetTypes()
-                .Where(t => typeof(ViewModel).IsAssignableFrom(t)))
-            {
-                if (t.IsGenericTypeDefinition)
-                {
-                    moduleBuilder.RegisterGeneric(t)
-                        .InstancePerDependency();
-                }
-                else
-                {
-                    moduleBuilder.RegisterType(t)
-                        .InstancePerDependency();
-                }
-            }
+            
+            moduleBuilder.RegisterViewModels(typeof(ClientModule).Assembly);
         }
     }
 }

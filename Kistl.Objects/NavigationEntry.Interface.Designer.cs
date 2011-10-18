@@ -56,5 +56,10 @@ namespace Kistl.App.GUI
             get;
             set;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        System.Object GetDefaultViewModel(Kistl.API.IKistlContext dataCtx, System.Object parent);
     }
 }

@@ -882,6 +882,28 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.NavigationEntry, Kistl.App.GUI.ViewModelDescriptor> OnViewModelDescriptor_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.NavigationEntry, Kistl.App.GUI.ViewModelDescriptor> OnViewModelDescriptor_PostSetter;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnGetDefaultViewModel_NavigationEntry")]
+        public virtual System.Object GetDefaultViewModel(Kistl.API.IKistlContext dataCtx, System.Object parent)
+        {
+            var e = new MethodReturnEventArgs<System.Object>();
+            if (OnGetDefaultViewModel_NavigationEntry != null)
+            {
+                OnGetDefaultViewModel_NavigationEntry(this, e, dataCtx, parent);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on NavigationEntry.GetDefaultViewModel");
+            }
+            return e.Result;
+        }
+        public delegate void GetDefaultViewModel_Handler<T>(T obj, MethodReturnEventArgs<System.Object> ret, Kistl.API.IKistlContext dataCtx, System.Object parent);
+        public static event GetDefaultViewModel_Handler<NavigationEntry> OnGetDefaultViewModel_NavigationEntry;
+        // END Kistl.Generator.Templates.ObjectClasses.Method
+
         public override Type GetImplementedInterface()
         {
             return typeof(NavigationEntry);

@@ -61,6 +61,27 @@ namespace Kistl.App.Extensions
             return cls;
         }
 
+        public static void CollectChildClasses(this ObjectClass cls, IReadOnlyKistlContext ctx, List<ObjectClass> children, bool includeAbstract)
+        {
+            if (cls == null) throw new ArgumentNullException("cls");
+            if (ctx == null) throw new ArgumentNullException("ctx");
+            if (children == null) throw new ArgumentNullException("children");
+
+            var nextChildren = ctx
+                .GetQuery<ObjectClass>()
+                .Where(oc => oc.BaseObjectClass != null && oc.BaseObjectClass.ID == cls.ID)
+                .ToList();
+
+            if (nextChildren.Count() > 0)
+            {
+                foreach (ObjectClass oc in nextChildren)
+                {
+                    if (includeAbstract || !oc.IsAbstract) children.Add(oc);
+                    CollectChildClasses(oc, ctx, children, includeAbstract);
+                };
+            }
+        }
+
         public static Property GetProperty(this ObjectClass cls, string property)
         {
             if (cls == null) { throw new ArgumentNullException("cls"); }

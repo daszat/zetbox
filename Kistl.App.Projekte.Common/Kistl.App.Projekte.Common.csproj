@@ -80,7 +80,7 @@
     <Compile Include="Calendar\YearlyCalendarRuleActions.cs" />
     <Compile Include="Gui\FilterConfigurationActions.cs" />
     <Compile Include="Gui\PropertyFilterConfigurationActions.cs" />
-    <Compile Include="Gui\NavigationScreenActions.cs" />
+    <Compile Include="Gui\NavigationEntryActions.cs" />
     <Compile Include="Gui\ViewDescriptorActions.cs" />
     <Compile Include="Gui\ViewModelDescriptorActions.cs" />
     <Compile Include="KistlBase\BaseParameterActions.cs" />

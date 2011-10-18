@@ -11,211 +11,35 @@ namespace Kistl.Client.Presentables.GUI
     using Kistl.App.GUI;
     using Kistl.App.Extensions;
     using Kistl.Client.Presentables.KistlBase;
+    using Kistl.App.Base;
 
     [ViewModelDescriptor]
     public class NavigationScreenViewModel
-        : DataObjectViewModel
+        : NavigationEntryViewModel
     {
-        public new delegate NavigationScreenViewModel Factory(IKistlContext dataCtx, ViewModel parent, NavigationEntry screen);
+        public new delegate NavigationScreenViewModel Factory(IKistlContext dataCtx, ViewModel parent, NavigationScreen screen);
 
-        public static NavigationScreenViewModel Fetch(IViewModelFactory ModelFactory, IKistlContext dataCtx, ViewModel parent, NavigationEntry screen)
-        {
-            if (ModelFactory == null) throw new ArgumentNullException("ModelFactory");
-            if (screen == null) throw new ArgumentNullException("screen");
-
-            return (NavigationScreenViewModel)dataCtx.GetViewModelCache(ModelFactory.PerfCounter).LookupOrCreate(screen, () =>
-            {
-                if (screen.ViewModelDescriptor != null)
-                {
-                    var t = screen.ViewModelDescriptor.ViewModelRef.AsType(true);
-                    return ModelFactory.CreateViewModel<NavigationScreenViewModel.Factory>(t).Invoke(dataCtx, parent, screen);
-                }
-                else
-                {
-                    // TODO: Move this into a Method
-                    if (screen is NavigationSearchScreen)
-                    {
-                        return ModelFactory.CreateViewModel<NavigationSearchScreenViewModel.Factory>().Invoke(dataCtx, parent, (NavigationSearchScreen)screen);
-                    }
-                    else
-                    {
-                        return ModelFactory.CreateViewModel<NavigationScreenViewModel.Factory>().Invoke(dataCtx, parent, screen);
-                    }
-                }
-            });
-        }
-
-        private readonly NavigationEntry _screen;
-        private NavigationScreenViewModel _parent;
-
-        private NavigatorViewModel _displayer = null;
-
-        public NavigationScreenViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, NavigationScreen screen)
+        public NavigationScreenViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, NavigationEntry screen)
             : base(dependencies, dataCtx, parent, screen)
         {
-            if (screen == null) throw new ArgumentNullException("screen");
-
-            if (CurrentIdentity == null) throw new UnresolvableIdentityException();
-
-            if (screen.Groups.Count != 0 && !CurrentIdentity.IsAdmininistrator() && !screen.Groups.Any(g => CurrentIdentity.Groups.Any(grp => grp.ExportGuid == g.ExportGuid)))
-                throw new InvalidOperationException("The current identity is not allowed to see this screen. The screen should not be displayed! Check your filters.");
-
-            _screen = screen;
-            _screen.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(_screen_PropertyChanged);
         }
 
-        void _screen_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case "Title":
-                    OnPropertyChanged("Name");
-                    OnPropertyChanged("Title");
-                    break;
-                case "Parent":
-                    OnPropertyChanged("Parent");
-                    break;
-                case "Children":
-                    OnPropertyChanged("Children");
-                    break;
-            }
-        }
+        public new NavigationScreen Screen { get { return (NavigationSearchScreen)base.Screen; } }
 
-        public override string Name
-        {
-            get { return _screen.Title; }
-        }
-
-        public string Title
-        {
-            get { return _screen.Title; }
-        }
-
-        public override Highlight Highlight
+        private ICommandViewModel _ExecuteCommand = null;
+        public override ICommandViewModel ExecuteCommand
         {
             get
             {
-                // Don't call base, since it's readonly, deactivated would be returned
-                // Deactivated on !IsEnabled is OK
-                if (!IsEnabled) return Highlight.Deactivated;
-                return null;
-            }
-        }
-
-        public NavigationEntry Screen { get { return _screen; } }
-
-        public Guid ExportGuid { get { return _screen.ExportGuid; } }
-
-        public NavigatorViewModel Displayer
-        {
-            get
-            {
-                return _displayer;
-            }
-            set
-            {
-                if (_displayer != value)
+                if (_ExecuteCommand == null)
                 {
-                    _displayer = value;
-                    foreach (var c in Children)
-                    {
-                        c.Displayer = value;
-                    }
-                    OnPropertyChanged("Displayer");
+                    _ExecuteCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, Name, "",
+                        () => Displayer.NavigateTo(this),
+                        null,
+                        null);
                 }
+                return _ExecuteCommand;
             }
         }
-
-        public NavigationScreenViewModel ParentScreen
-        {
-            get
-            {
-                if (_parent == null && _screen.Parent != null)
-                {
-                    _parent = Fetch(ViewModelFactory, DataContext, this._displayer, _screen.Parent);
-                }
-                return _parent;
-            }
-        }
-
-        private ObservableCollection<NavigationScreenViewModel> _children;
-        private ReadOnlyObservableCollection<NavigationScreenViewModel> _childrenRO;
-        public ReadOnlyObservableCollection<NavigationScreenViewModel> Children
-        {
-            get
-            {
-                if (_childrenRO == null)
-                {
-                    _children = new ObservableCollection<NavigationScreenViewModel>();
-                    foreach (var s in _screen.Children.Where(c => c.Groups.Count == 0 || CurrentIdentity.IsAdmininistrator() || c.Groups.Any(g => CurrentIdentity.Groups.Select(grp => grp.ExportGuid).Contains(g.ExportGuid))))
-                    {
-                        _children.Add(NavigationScreenViewModel.Fetch(ViewModelFactory, DataContext, this, s));
-                    }
-                    _childrenRO = new ReadOnlyObservableCollection<NavigationScreenViewModel>(_children);
-                }
-                return _childrenRO;
-            }
-        }
-
-        private ObservableCollection<CommandViewModel> _additionalCommandsRW;
-        protected ObservableCollection<CommandViewModel> AdditionalCommandsRW
-        {
-            get
-            {
-                if (_additionalCommandsRW == null)
-                {
-                    _additionalCommandsRW = new ObservableCollection<CommandViewModel>(CreateAdditionalCommands());
-                }
-                return _additionalCommandsRW;
-            }
-        }
-
-        private ReadOnlyObservableCollection<CommandViewModel> _additionalCommands;
-        public ReadOnlyObservableCollection<CommandViewModel> AdditionalCommands
-        {
-            get
-            {
-                if (_additionalCommands == null)
-                {
-                    _additionalCommands = new ReadOnlyObservableCollection<CommandViewModel>(AdditionalCommandsRW);
-                }
-                return _additionalCommands;
-            }
-        }
-
-        protected virtual List<CommandViewModel> CreateAdditionalCommands()
-        {
-            return new List<CommandViewModel>(); 
-        }
-
-        public string Color
-        {
-            get
-            {
-                var tmp = _screen;
-                while (tmp != null)
-                {
-                    if (!string.IsNullOrEmpty(tmp.Color)) return tmp.Color;
-                    tmp = tmp.Parent;
-                }
-                return null;
-            }
-        }
-
-        #region ReportProblemCommand
-        private ICommandViewModel _ReportProblemCommand = null;
-        public ICommandViewModel ReportProblemCommand
-        {
-            get
-            {
-                if (_ReportProblemCommand == null)
-                {
-                    _ReportProblemCommand = ViewModelFactory.CreateViewModel<ReportProblemCommand.Factory>().Invoke(DataContext, this);
-                }
-                return _ReportProblemCommand;
-            }
-        }
-        #endregion
-
     }
 }
