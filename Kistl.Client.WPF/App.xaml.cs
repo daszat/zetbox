@@ -97,89 +97,12 @@ namespace Kistl.Client.WPF
                     var args = HandleCommandline(e.Args, out configFilePath);
 
                     var config = KistlConfig.FromFile(configFilePath, "Kistl.Client.WPF.xml");
-                    InitCulture(config);
-
-                    StartupScreen.ShowSplashScreen(Kistl.Client.Properties.Resources.Startup_Message, Kistl.Client.Properties.Resources.Startup_InitApp, 7);
-
-                    if (config.Server != null && config.Server.StartServer)
-                    {
-                        StartupScreen.SetInfo(Kistl.Client.Properties.Resources.Startup_Server);
-                        serverDomain = new ServerDomainManager();
-                        serverDomain.Start(config);
-                    }
-                    else
-                    {
-                        StartupScreen.SetInfo(Kistl.Client.Properties.Resources.Startup_NoServerStart);
-                    }
-
-                    StartupScreen.SetInfo(Kistl.Client.Properties.Resources.Startup_AssemblyResolver);
                     AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
 
-                    container = CreateMasterContainer(config);
+                    InitCulture(config);
+                    StartupScreen.ShowSplashScreen(Kistl.Client.Properties.Resources.Startup_Message, Kistl.Client.Properties.Resources.Startup_InitApp, 6);
 
-                    StartupScreen.SetInfo(Kistl.Client.Properties.Resources.Startup_Launcher);
-
-                    // Make Gendarme happy
-                    var resources = this.Resources;
-
-                    resources.BeginInit();
-
-                    // Introduce noop converter to prevent them to ask for credentials during initialization
-                    resources["IconConverter"] = new NoopConverter();
-                    resources["ImageCtrlConverter"] = new NoopConverter();
-
-                    // Init all Converter that are not using a Context
-                    var templateSelectorFactory = container.Resolve<Kistl.Client.WPF.Toolkit.VisualTypeTemplateSelector.Factory>();
-                    resources["defaultTemplateSelector"] = templateSelectorFactory(null);
-                    resources["listItemTemplateSelector"] = templateSelectorFactory("Kistl.App.GUI.SingleLineKind");
-                    resources["dashBoardTemplateSelector"] = templateSelectorFactory("Kistl.App.GUI.DashboardKind");
-
-                    // Manually add DefaultStyles and DefaultViews
-                    // Otherwise converter are unknown
-                    resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Kistl.Client.WPF;component/Styles/DefaultStyles.xaml", UriKind.Relative) });
-                    resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Kistl.Client.WPF;component/Styles/DefaultHighlightColorDefinitions.xaml", UriKind.Relative) });
-
-                    // Load registrated dictionaries from autofac
-                    foreach (var dict in container.Resolve<IEnumerable<Meta<ResourceDictionary>>>().Where(m => WPFHelper.RESOURCE_DICTIONARY_STYLE.Equals(m.Metadata[WPFHelper.RESOURCE_DICTIONARY_KIND])).Select(m => m.Value))
-                    {
-                        resources.MergedDictionaries.Add(dict);
-                    }
-
-                    resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Kistl.Client.WPF;component/Styles/DefaultViews.xaml", UriKind.Relative) });
-                    // Load registrated dictionaries from autofac
-                    foreach (var dict in container.Resolve<IEnumerable<Meta<ResourceDictionary>>>().Where(m => WPFHelper.RESOURCE_DICTIONARY_VIEW.Equals(m.Metadata[WPFHelper.RESOURCE_DICTIONARY_KIND])).Select(m => m.Value))
-                    {
-                        resources.MergedDictionaries.Add(dict);
-                    }
-
-                    resources.EndInit();
-
-                    // Init credentials explicit
-                    StartupScreen.SetInfo(Kistl.Client.Properties.Resources.Startup_EnsuringCredentials);
-                    container.Resolve<ICredentialsResolver>().EnsureCredentials();
-
-                    StartupScreen.SetInfo(Kistl.Client.Properties.Resources.Startup_Launcher);
-
-                    // Create real converter after credentials are resolved
-                    var iconConverter = new IconConverter(container.Resolve<IFrozenContext>(), container.Resolve<IKistlContext>());
-                    resources["IconConverter"] = iconConverter;
-                    resources["ImageCtrlConverter"] = new ImageCtrlConverter(iconConverter);
-
-                    // Focus nightmare
-                    // http://stackoverflow.com/questions/673536/wpf-cant-set-focus-to-a-child-of-usercontrol/4785124#4785124
-                    EventManager.RegisterClassHandler(typeof(Window), Window.LoadedEvent, new RoutedEventHandler(FocusFixLoaded));
-                    EventManager.RegisterClassHandler(typeof(Kistl.Client.WPF.View.KistlBase.InstanceCollectionBase), UserControl.LoadedEvent, new RoutedEventHandler(FocusFixLoaded));
-
-                    wpfResourcesInitialized = true;
-
-                    FixupDatabase(container.Resolve<Func<IKistlContext>>());
-
-                    StartupScreen.CanCloseOnWindowLoaded();
-                    // delegate all business logic into another class, which 
-                    // allows us to load the Kistl.Objects assemblies _before_ 
-                    // they are needed.
-                    var launcher = container.Resolve<Launcher>();
-                    launcher.Show(args);
+                    InitializeClient(args, config);
                 }
             }
             catch (Exception ex)
@@ -203,6 +126,88 @@ namespace Kistl.Client.WPF
                 // ignore this
                 //ShowExceptionReporter(ex);
             }
+        }
+
+        // Move to another method to avoid loading Kistl.Objects
+        private void InitializeClient(string[] args, KistlConfig config)
+        {
+            if (config.Server != null && config.Server.StartServer)
+            {
+                StartupScreen.SetInfo(Kistl.Client.Properties.Resources.Startup_Server);
+                serverDomain = new ServerDomainManager();
+                serverDomain.Start(config);
+            }
+            else
+            {
+                StartupScreen.SetInfo(Kistl.Client.Properties.Resources.Startup_NoServerStart);
+            }
+
+
+            container = CreateMasterContainer(config);
+
+            StartupScreen.SetInfo(Kistl.Client.Properties.Resources.Startup_Launcher);
+
+            // Make Gendarme happy
+            var resources = this.Resources;
+
+            resources.BeginInit();
+
+            // Introduce noop converter to prevent them to ask for credentials during initialization
+            resources["IconConverter"] = new NoopConverter();
+            resources["ImageCtrlConverter"] = new NoopConverter();
+
+            // Init all Converter that are not using a Context
+            var templateSelectorFactory = container.Resolve<Kistl.Client.WPF.Toolkit.VisualTypeTemplateSelector.Factory>();
+            resources["defaultTemplateSelector"] = templateSelectorFactory(null);
+            resources["listItemTemplateSelector"] = templateSelectorFactory("Kistl.App.GUI.SingleLineKind");
+            resources["dashBoardTemplateSelector"] = templateSelectorFactory("Kistl.App.GUI.DashboardKind");
+
+            // Manually add DefaultStyles and DefaultViews
+            // Otherwise converter are unknown
+            resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Kistl.Client.WPF;component/Styles/DefaultStyles.xaml", UriKind.Relative) });
+            resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Kistl.Client.WPF;component/Styles/DefaultHighlightColorDefinitions.xaml", UriKind.Relative) });
+
+            // Load registrated dictionaries from autofac
+            foreach (var dict in container.Resolve<IEnumerable<Meta<ResourceDictionary>>>().Where(m => WPFHelper.RESOURCE_DICTIONARY_STYLE.Equals(m.Metadata[WPFHelper.RESOURCE_DICTIONARY_KIND])).Select(m => m.Value))
+            {
+                resources.MergedDictionaries.Add(dict);
+            }
+
+            resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/Kistl.Client.WPF;component/Styles/DefaultViews.xaml", UriKind.Relative) });
+            // Load registrated dictionaries from autofac
+            foreach (var dict in container.Resolve<IEnumerable<Meta<ResourceDictionary>>>().Where(m => WPFHelper.RESOURCE_DICTIONARY_VIEW.Equals(m.Metadata[WPFHelper.RESOURCE_DICTIONARY_KIND])).Select(m => m.Value))
+            {
+                resources.MergedDictionaries.Add(dict);
+            }
+
+            resources.EndInit();
+
+            // Init credentials explicit
+            StartupScreen.SetInfo(Kistl.Client.Properties.Resources.Startup_EnsuringCredentials);
+            container.Resolve<ICredentialsResolver>().EnsureCredentials();
+
+            StartupScreen.SetInfo(Kistl.Client.Properties.Resources.Startup_Launcher);
+
+            // Create real converter after credentials are resolved
+            var iconConverter = new IconConverter(container.Resolve<IFrozenContext>(), container.Resolve<IKistlContext>());
+            resources["IconConverter"] = iconConverter;
+            resources["ImageCtrlConverter"] = new ImageCtrlConverter(iconConverter);
+
+            // Focus nightmare
+            // http://stackoverflow.com/questions/673536/wpf-cant-set-focus-to-a-child-of-usercontrol/4785124#4785124
+            EventManager.RegisterClassHandler(typeof(Window), Window.LoadedEvent, new RoutedEventHandler(FocusFixLoaded));
+            EventManager.RegisterClassHandler(typeof(Kistl.Client.WPF.View.KistlBase.InstanceCollectionBase), UserControl.LoadedEvent, new RoutedEventHandler(FocusFixLoaded));
+
+            wpfResourcesInitialized = true;
+
+            FixupDatabase(container.Resolve<Func<IKistlContext>>());
+
+            StartupScreen.CanCloseOnWindowLoaded();
+            // delegate all business logic into another class, which 
+            // allows us to load the Kistl.Objects assemblies _before_ 
+            // they are needed.
+            var launcher = container.Resolve<Launcher>();
+            launcher.Show(args);
         }
 
         // Focus nightmare
