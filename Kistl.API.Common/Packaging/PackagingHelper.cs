@@ -98,14 +98,14 @@ namespace Kistl.App.Packaging
                 AddMetaObjects(result, () => ctx.Internals().GetPersistenceObjectQuery<ViewDescriptor_supports_TypeRef_RelationEntry>().Where(i => i.A.Module.ID == moduleID)
                     .OrderBy(i => i.A.ControlRef.Assembly.Name).ThenBy(i => i.A.ControlRef.FullName).ThenBy(i => i.A.ExportGuid));
 
-                AddMetaObjects(result, () => ctx.GetQuery<NavigationScreen>()
+                AddMetaObjects(result, () => ctx.GetQuery<NavigationEntry>()
                     .Where(i => i.Module.ID == moduleID)
                     .ToList()
                     .AsQueryable()
                     .OrderBy(i => i.Title)
                     .ThenBy(i => i.Parent != null ? i.Parent.Title : String.Empty)
                     .ThenBy(i => i.ExportGuid));
-                AddMetaObjects(result, () => ctx.Internals().GetPersistenceObjectQuery<NavigationScreen_accessed_by_Group_RelationEntry>()
+                AddMetaObjects(result, () => ctx.Internals().GetPersistenceObjectQuery<NavigationEntry_accessed_by_Group_RelationEntry>()
                     .Where(i => i.A.Module.ID == moduleID)
                     .ToList()
                     .AsQueryable()
