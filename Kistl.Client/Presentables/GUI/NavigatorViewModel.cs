@@ -8,6 +8,7 @@ namespace Kistl.Client.Presentables.GUI
     using System.Text;
     using Kistl.API;
     using Kistl.App.GUI;
+    using Kistl.Client.Presentables.KistlBase;
 
     [ViewModelDescriptor]
     public class NavigatorViewModel
@@ -70,6 +71,7 @@ namespace Kistl.Client.Presentables.GUI
                     _current.Displayer = this;
                     _history.Add(_current);
                     UpdateLocation();
+                    OnPropertyChanged("Name");
                     OnPropertyChanged("CurrentScreen");
                 }
             }
@@ -209,6 +211,22 @@ namespace Kistl.Client.Presentables.GUI
         public void NavigateTo(NavigationEntryViewModel screen)
         {
             CurrentScreen = screen;
+        }
+
+        #endregion
+
+        #region ReportProblemCommand
+        private ICommandViewModel _ReportProblemCommand = null;
+        public ICommandViewModel ReportProblemCommand
+        {
+            get
+            {
+                if (_ReportProblemCommand == null)
+                {
+                    _ReportProblemCommand = ViewModelFactory.CreateViewModel<ReportProblemCommand.Factory>().Invoke(DataContext, this);
+                }
+                return _ReportProblemCommand;
+            }
         }
         #endregion
 

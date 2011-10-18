@@ -18,39 +18,58 @@
   </ctrls:WindowView.InputBindings>
 
   <DockPanel LastChildFill="True">
-        <!-- location breadcrumbs -->
-        <ItemsControl DockPanel.Dock="Top"
-                      ItemsSource="{Binding Location}"
-                      Margin="5">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal"
-                                IsItemsHost="True" />
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <StackPanel.Resources>
-                            <Style TargetType="TextBlock"
-                                   BasedOn="{StaticResource NavigationBreadCrumb}" />
-                            <Style TargetType="Button"
-                                   BasedOn="{StaticResource NavigationBreadCrumb}" />
-                        </StackPanel.Resources>
-                        <TextBlock Text=">" />
-                        <Button Style="{StaticResource NavigationBreadCrumbLinkButton}"
-                                Command="{Binding Displayer.NavigateToCommand, Converter={StaticResource CommandConverter}}"
-                                CommandParameter="{Binding}"
-                                Content="{Binding Name}">
-                        </Button>
-                    </StackPanel>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+    <!-- location breadcrumbs -->
+    <ItemsControl DockPanel.Dock="Top"
+                  ItemsSource="{Binding Location}"
+                  Margin="5">
+      <ItemsControl.ItemsPanel>
+        <ItemsPanelTemplate>
+          <StackPanel Orientation="Horizontal"
+                      IsItemsHost="True" />
+        </ItemsPanelTemplate>
+      </ItemsControl.ItemsPanel>
+      <ItemsControl.ItemTemplate>
+        <DataTemplate>
+          <StackPanel Orientation="Horizontal">
+            <StackPanel.Resources>
+              <Style TargetType="TextBlock"
+                     BasedOn="{StaticResource NavigationBreadCrumb}" />
+              <Style TargetType="Button"
+                     BasedOn="{StaticResource NavigationBreadCrumb}" />
+            </StackPanel.Resources>
+            <TextBlock Text=">" />
+            <Button Style="{StaticResource NavigationBreadCrumbLinkButton}"
+                    Command="{Binding Displayer.NavigateToCommand, Converter={StaticResource CommandConverter}}"
+                    CommandParameter="{Binding}"
+                    Content="{Binding Name}">
+            </Button>
+          </StackPanel>
+        </DataTemplate>
+      </ItemsControl.ItemTemplate>
+    </ItemsControl>
 
-        <Grid Background="{Binding CurrentScreen.Color}">
-            <ContentPresenter Content="{Binding CurrentScreen}"
-                          ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
-        </Grid>
+    <DockPanel DockPanel.Dock="Bottom"
+               Margin="10">
+      <ctrls:CommandButton DockPanel.Dock="Left"
+                           CommandViewModel="{Binding ReportProblemCommand}"
+                           Style="{StaticResource ImageButton}"
+                           Image="/Kistl.Client.WPF;component/Images/info.png"
+                           Margin="5"
+                           Height="30"/>
+      <ctrls:CommandButton DockPanel.Dock="Right"
+                           CommandViewModel="{Binding BackCommand}"
+                           Style="{StaticResource ImageButton}"
+                           Image="/Kistl.Client.WPF;component/Images/back.png"
+                           Margin="5"
+                           Height="30"/>
+      <TextBlock   TextAlignment="Center"
+                   VerticalAlignment="Bottom"
+                   Text="{Binding Name}" />
     </DockPanel>
+
+    <Grid Background="{Binding CurrentScreen.Color}">
+      <ContentPresenter Content="{Binding CurrentScreen}"
+                    ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
+    </Grid>
+  </DockPanel>
 </ctrls:WindowView>
