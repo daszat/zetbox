@@ -498,6 +498,180 @@ namespace Kistl.App.GUI
         /// <summary>
         /// 
         /// </summary>
+        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RequestedEditorKind
+        // fkBackingName=this.Proxy.RequestedEditorKind; fkGuidBackingName=_fk_guid_RequestedEditorKind;
+        // referencedInterface=Kistl.App.GUI.ControlKind; moduleNamespace=Kistl.App.GUI;
+        // inverse Navigator=none; is reference;
+        // PositionStorage=none;
+        // Target exportable; does call events
+
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.GUI.ControlKind RequestedEditorKind
+        {
+            get
+            {
+                if (!CurrentAccessRights.HasReadRights()) return null;
+                Kistl.App.GUI.ControlKindNHibernateImpl __value = (Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.RequestedEditorKind);
+
+                if (OnRequestedEditorKind_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Kistl.App.GUI.ControlKind>(__value);
+                    OnRequestedEditorKind_Getter(this, e);
+                    __value = (Kistl.App.GUI.ControlKindNHibernateImpl)e.Result;
+                }
+
+                return __value;
+            }
+            set
+            {
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+
+                // shortcut noop with nulls
+                if (value == null && this.Proxy.RequestedEditorKind == null)
+                    return;
+
+                // cache old value to remove inverse references later
+                var __oldValue = (Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.RequestedEditorKind);
+                var __newValue = (Kistl.App.GUI.ControlKindNHibernateImpl)value;
+
+                // shortcut noop on objects
+                // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
+                if (__oldValue == __newValue)
+                    return;
+
+                // Changing Event fires before anything is touched
+                NotifyPropertyChanging("RequestedEditorKind", __oldValue, __newValue);
+
+                if (OnRequestedEditorKind_PreSetter != null && IsAttached)
+                {
+                    var e = new PropertyPreSetterEventArgs<Kistl.App.GUI.ControlKind>(__oldValue, __newValue);
+                    OnRequestedEditorKind_PreSetter(this, e);
+                    __newValue = (Kistl.App.GUI.ControlKindNHibernateImpl)e.Result;
+                }
+
+                // next, set the local reference
+                if (__newValue == null)
+                {
+                    this.Proxy.RequestedEditorKind = null;
+                }
+                else
+                {
+                    this.Proxy.RequestedEditorKind = __newValue.Proxy;
+                }
+
+                // everything is done. fire the Changed event
+                NotifyPropertyChanged("RequestedEditorKind", __oldValue, __newValue);
+
+                if (OnRequestedEditorKind_PostSetter != null && IsAttached)
+                {
+                    var e = new PropertyPostSetterEventArgs<Kistl.App.GUI.ControlKind>(__oldValue, __newValue);
+                    OnRequestedEditorKind_PostSetter(this, e);
+                }
+            }
+        }
+
+        /// <summary>Backing store for RequestedEditorKind's id, used on dehydration only</summary>
+        private int? _fk_RequestedEditorKind = null;
+
+        /// <summary>Backing store for RequestedEditorKind's guid, used on import only</summary>
+        private Guid? _fk_guid_RequestedEditorKind = null;
+
+        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RequestedEditorKind
+		public static event PropertyGetterHandler<Kistl.App.GUI.NavigationSearchScreen, Kistl.App.GUI.ControlKind> OnRequestedEditorKind_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.GUI.NavigationSearchScreen, Kistl.App.GUI.ControlKind> OnRequestedEditorKind_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.GUI.NavigationSearchScreen, Kistl.App.GUI.ControlKind> OnRequestedEditorKind_PostSetter;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RequestedWorkspaceKind
+        // fkBackingName=this.Proxy.RequestedWorkspaceKind; fkGuidBackingName=_fk_guid_RequestedWorkspaceKind;
+        // referencedInterface=Kistl.App.GUI.ControlKind; moduleNamespace=Kistl.App.GUI;
+        // inverse Navigator=none; is reference;
+        // PositionStorage=none;
+        // Target exportable; does call events
+
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.GUI.ControlKind RequestedWorkspaceKind
+        {
+            get
+            {
+                if (!CurrentAccessRights.HasReadRights()) return null;
+                Kistl.App.GUI.ControlKindNHibernateImpl __value = (Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.RequestedWorkspaceKind);
+
+                if (OnRequestedWorkspaceKind_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Kistl.App.GUI.ControlKind>(__value);
+                    OnRequestedWorkspaceKind_Getter(this, e);
+                    __value = (Kistl.App.GUI.ControlKindNHibernateImpl)e.Result;
+                }
+
+                return __value;
+            }
+            set
+            {
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+
+                // shortcut noop with nulls
+                if (value == null && this.Proxy.RequestedWorkspaceKind == null)
+                    return;
+
+                // cache old value to remove inverse references later
+                var __oldValue = (Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.RequestedWorkspaceKind);
+                var __newValue = (Kistl.App.GUI.ControlKindNHibernateImpl)value;
+
+                // shortcut noop on objects
+                // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
+                if (__oldValue == __newValue)
+                    return;
+
+                // Changing Event fires before anything is touched
+                NotifyPropertyChanging("RequestedWorkspaceKind", __oldValue, __newValue);
+
+                if (OnRequestedWorkspaceKind_PreSetter != null && IsAttached)
+                {
+                    var e = new PropertyPreSetterEventArgs<Kistl.App.GUI.ControlKind>(__oldValue, __newValue);
+                    OnRequestedWorkspaceKind_PreSetter(this, e);
+                    __newValue = (Kistl.App.GUI.ControlKindNHibernateImpl)e.Result;
+                }
+
+                // next, set the local reference
+                if (__newValue == null)
+                {
+                    this.Proxy.RequestedWorkspaceKind = null;
+                }
+                else
+                {
+                    this.Proxy.RequestedWorkspaceKind = __newValue.Proxy;
+                }
+
+                // everything is done. fire the Changed event
+                NotifyPropertyChanged("RequestedWorkspaceKind", __oldValue, __newValue);
+
+                if (OnRequestedWorkspaceKind_PostSetter != null && IsAttached)
+                {
+                    var e = new PropertyPostSetterEventArgs<Kistl.App.GUI.ControlKind>(__oldValue, __newValue);
+                    OnRequestedWorkspaceKind_PostSetter(this, e);
+                }
+            }
+        }
+
+        /// <summary>Backing store for RequestedWorkspaceKind's id, used on dehydration only</summary>
+        private int? _fk_RequestedWorkspaceKind = null;
+
+        /// <summary>Backing store for RequestedWorkspaceKind's guid, used on import only</summary>
+        private Guid? _fk_guid_RequestedWorkspaceKind = null;
+
+        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RequestedWorkspaceKind
+		public static event PropertyGetterHandler<Kistl.App.GUI.NavigationSearchScreen, Kistl.App.GUI.ControlKind> OnRequestedWorkspaceKind_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.GUI.NavigationSearchScreen, Kistl.App.GUI.ControlKind> OnRequestedWorkspaceKind_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.GUI.NavigationSearchScreen, Kistl.App.GUI.ControlKind> OnRequestedWorkspaceKind_PostSetter;
+
+        /// <summary>
+        /// 
+        /// </summary>
 
         // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
         public bool? RespectRequiredFilter
@@ -832,6 +1006,56 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.NavigationSearchScreen, Kistl.App.Base.ObjectClass> OnType_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.NavigationSearchScreen, Kistl.App.Base.ObjectClass> OnType_PostSetter;
 
+        /// <summary>
+        /// 
+        /// </summary>
+
+        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+        public Kistl.App.GUI.InstanceListViewMethod? ViewMethod
+        {
+            get
+            {
+                if (!CurrentAccessRights.HasReadRights()) return default(Kistl.App.GUI.InstanceListViewMethod?);
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = Proxy.ViewMethod;
+                if (OnViewMethod_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<Kistl.App.GUI.InstanceListViewMethod?>(__result);
+                    OnViewMethod_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (Proxy.ViewMethod != value)
+                {
+                    var __oldValue = Proxy.ViewMethod;
+                    var __newValue = value;
+                    if (OnViewMethod_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<Kistl.App.GUI.InstanceListViewMethod?>(__oldValue, __newValue);
+                        OnViewMethod_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("ViewMethod", __oldValue, __newValue);
+                    Proxy.ViewMethod = __newValue;
+                    NotifyPropertyChanged("ViewMethod", __oldValue, __newValue);
+                    if (OnViewMethod_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<Kistl.App.GUI.InstanceListViewMethod?>(__oldValue, __newValue);
+                        OnViewMethod_PostSetter(this, __e);
+                    }
+                }
+            }
+        }
+        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+		public static event PropertyGetterHandler<Kistl.App.GUI.NavigationSearchScreen, Kistl.App.GUI.InstanceListViewMethod?> OnViewMethod_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.GUI.NavigationSearchScreen, Kistl.App.GUI.InstanceListViewMethod?> OnViewMethod_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.GUI.NavigationSearchScreen, Kistl.App.GUI.InstanceListViewMethod?> OnViewMethod_PostSetter;
+
         public override Type GetImplementedInterface()
         {
             return typeof(NavigationSearchScreen);
@@ -858,6 +1082,9 @@ namespace Kistl.App.GUI
             me.ShowMasterDetail = other.ShowMasterDetail;
             me.ShowOpenCommand = other.ShowOpenCommand;
             me.ShowRefreshCommand = other.ShowRefreshCommand;
+            me.ViewMethod = other.ViewMethod;
+            this._fk_RequestedEditorKind = otherImpl._fk_RequestedEditorKind;
+            this._fk_RequestedWorkspaceKind = otherImpl._fk_RequestedWorkspaceKind;
             this._fk_Type = otherImpl._fk_Type;
         }
 
@@ -871,6 +1098,24 @@ namespace Kistl.App.GUI
         {
             switch(propertyName)
             {
+                case "RequestedEditorKind":
+                    {
+                        var __oldValue = (Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.RequestedEditorKind);
+                        var __newValue = (Kistl.App.GUI.ControlKindNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.GUI.ControlKind>(id.Value));
+                        NotifyPropertyChanging("RequestedEditorKind", __oldValue, __newValue);
+                        this.Proxy.RequestedEditorKind = __newValue == null ? null : __newValue.Proxy;
+                        NotifyPropertyChanged("RequestedEditorKind", __oldValue, __newValue);
+                    }
+                    break;
+                case "RequestedWorkspaceKind":
+                    {
+                        var __oldValue = (Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.RequestedWorkspaceKind);
+                        var __newValue = (Kistl.App.GUI.ControlKindNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.GUI.ControlKind>(id.Value));
+                        NotifyPropertyChanging("RequestedWorkspaceKind", __oldValue, __newValue);
+                        this.Proxy.RequestedWorkspaceKind = __newValue == null ? null : __newValue.Proxy;
+                        NotifyPropertyChanged("RequestedWorkspaceKind", __oldValue, __newValue);
+                    }
+                    break;
                 case "Type":
                     {
                         var __oldValue = (Kistl.App.Base.ObjectClassNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Type);
@@ -894,6 +1139,22 @@ namespace Kistl.App.GUI
             base.ReloadReferences();
 
             // fix direct object references
+
+            if (_fk_guid_RequestedEditorKind.HasValue)
+                this.Proxy.RequestedEditorKind = ((Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_guid_RequestedEditorKind.Value)).Proxy;
+            else
+            if (_fk_RequestedEditorKind.HasValue)
+                this.Proxy.RequestedEditorKind = ((Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_RequestedEditorKind.Value)).Proxy;
+            else
+                this.Proxy.RequestedEditorKind = null;
+
+            if (_fk_guid_RequestedWorkspaceKind.HasValue)
+                this.Proxy.RequestedWorkspaceKind = ((Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_guid_RequestedWorkspaceKind.Value)).Proxy;
+            else
+            if (_fk_RequestedWorkspaceKind.HasValue)
+                this.Proxy.RequestedWorkspaceKind = ((Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_RequestedWorkspaceKind.Value)).Proxy;
+            else
+                this.Proxy.RequestedWorkspaceKind = null;
 
             if (_fk_guid_Type.HasValue)
                 this.Proxy.Type = ((Kistl.App.Base.ObjectClassNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.ObjectClass>(_fk_guid_Type.Value)).Proxy;
@@ -989,6 +1250,22 @@ namespace Kistl.App.GUI
                         obj => obj.IsMultiselect,
                         (obj, val) => obj.IsMultiselect = val),
                     // else
+                    new PropertyDescriptorNHibernateImpl<NavigationSearchScreenNHibernateImpl, Kistl.App.GUI.ControlKind>(
+                        lazyCtx,
+                        new Guid("80987e44-841a-4d56-88d2-92c28efb70a1"),
+                        "RequestedEditorKind",
+                        null,
+                        obj => obj.RequestedEditorKind,
+                        (obj, val) => obj.RequestedEditorKind = val),
+                    // else
+                    new PropertyDescriptorNHibernateImpl<NavigationSearchScreenNHibernateImpl, Kistl.App.GUI.ControlKind>(
+                        lazyCtx,
+                        new Guid("e0a94b30-5225-45e6-9dfc-c88dbf0648f5"),
+                        "RequestedWorkspaceKind",
+                        null,
+                        obj => obj.RequestedWorkspaceKind,
+                        (obj, val) => obj.RequestedWorkspaceKind = val),
+                    // else
                     new PropertyDescriptorNHibernateImpl<NavigationSearchScreenNHibernateImpl, bool?>(
                         lazyCtx,
                         new Guid("9323c1cf-f8d6-4b29-b854-41ceb509b57e"),
@@ -1036,6 +1313,14 @@ namespace Kistl.App.GUI
                         null,
                         obj => obj.Type,
                         (obj, val) => obj.Type = val),
+                    // else
+                    new PropertyDescriptorNHibernateImpl<NavigationSearchScreenNHibernateImpl, Kistl.App.GUI.InstanceListViewMethod?>(
+                        lazyCtx,
+                        new Guid("3b671e20-eb7e-4f24-b183-19bdf2666651"),
+                        "ViewMethod",
+                        null,
+                        obj => obj.ViewMethod,
+                        (obj, val) => obj.ViewMethod = val),
                     // position columns
                 };
             }
@@ -1101,6 +1386,14 @@ namespace Kistl.App.GUI
         {
             var result = base.GetParentsToDelete();
 
+            // Follow Search_has_RequestedEditorKind
+            if (this.RequestedEditorKind != null && this.RequestedEditorKind.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.RequestedEditorKind);
+
+            // Follow Search_has_RequestedWorkspaceKind
+            if (this.RequestedWorkspaceKind != null && this.RequestedWorkspaceKind.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.RequestedWorkspaceKind);
+
             // Follow SearchScreen_of_Type
             if (this.Type != null && this.Type.ObjectState == DataObjectState.Deleted)
                 result.Add((NHibernatePersistenceObject)this.Type);
@@ -1145,6 +1438,10 @@ namespace Kistl.App.GUI
 
             public virtual bool? IsMultiselect { get; set; }
 
+            public virtual Kistl.App.GUI.ControlKindNHibernateImpl.ControlKindProxy RequestedEditorKind { get; set; }
+
+            public virtual Kistl.App.GUI.ControlKindNHibernateImpl.ControlKindProxy RequestedWorkspaceKind { get; set; }
+
             public virtual bool? RespectRequiredFilter { get; set; }
 
             public virtual bool? ShowFilter { get; set; }
@@ -1156,6 +1453,8 @@ namespace Kistl.App.GUI
             public virtual bool? ShowRefreshCommand { get; set; }
 
             public virtual Kistl.App.Base.ObjectClassNHibernateImpl.ObjectClassProxy Type { get; set; }
+
+            public virtual Kistl.App.GUI.InstanceListViewMethod? ViewMethod { get; set; }
 
         }
 
@@ -1175,12 +1474,15 @@ namespace Kistl.App.GUI
             BinarySerializer.ToStream((int?)Proxy.InitialSortDirection, binStream);
             BinarySerializer.ToStream(this.Proxy.IsEditable, binStream);
             BinarySerializer.ToStream(this.Proxy.IsMultiselect, binStream);
+            BinarySerializer.ToStream(this.Proxy.RequestedEditorKind != null ? this.Proxy.RequestedEditorKind.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.Proxy.RequestedWorkspaceKind != null ? this.Proxy.RequestedWorkspaceKind.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this.Proxy.RespectRequiredFilter, binStream);
             BinarySerializer.ToStream(this.Proxy.ShowFilter, binStream);
             BinarySerializer.ToStream(this.Proxy.ShowMasterDetail, binStream);
             BinarySerializer.ToStream(this.Proxy.ShowOpenCommand, binStream);
             BinarySerializer.ToStream(this.Proxy.ShowRefreshCommand, binStream);
             BinarySerializer.ToStream(this.Proxy.Type != null ? this.Proxy.Type.ID : (int?)null, binStream);
+            BinarySerializer.ToStream((int?)Proxy.ViewMethod, binStream);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
@@ -1233,6 +1535,8 @@ namespace Kistl.App.GUI
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.Proxy.IsMultiselect = tmp;
             }
+            BinarySerializer.FromStream(out this._fk_RequestedEditorKind, binStream);
+            BinarySerializer.FromStream(out this._fk_RequestedWorkspaceKind, binStream);
             {
                 bool? tmp;
                 BinarySerializer.FromStream(out tmp, binStream);
@@ -1259,6 +1563,11 @@ namespace Kistl.App.GUI
                 this.Proxy.ShowRefreshCommand = tmp;
             }
             BinarySerializer.FromStream(out this._fk_Type, binStream);
+            {
+                int? baseValue;
+                BinarySerializer.FromStream(out baseValue, binStream);
+                Proxy.ViewMethod = (Kistl.App.GUI.InstanceListViewMethod?)baseValue;
+            }
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
 			return baseResult == null
                 ? result.Count == 0
@@ -1280,12 +1589,15 @@ namespace Kistl.App.GUI
             XmlStreamer.ToStream((int?)Proxy.InitialSortDirection, xml, "InitialSortDirection", "Kistl.App.GUI");
             XmlStreamer.ToStream(this.Proxy.IsEditable, xml, "IsEditable", "Kistl.App.GUI");
             XmlStreamer.ToStream(this.Proxy.IsMultiselect, xml, "IsMultiselect", "Kistl.App.GUI");
+            XmlStreamer.ToStream(this.Proxy.RequestedEditorKind != null ? this.Proxy.RequestedEditorKind.ID : (int?)null, xml, "RequestedEditorKind", "Kistl.App.GUI");
+            XmlStreamer.ToStream(this.Proxy.RequestedWorkspaceKind != null ? this.Proxy.RequestedWorkspaceKind.ID : (int?)null, xml, "RequestedWorkspaceKind", "Kistl.App.GUI");
             XmlStreamer.ToStream(this.Proxy.RespectRequiredFilter, xml, "RespectRequiredFilter", "Kistl.App.GUI");
             XmlStreamer.ToStream(this.Proxy.ShowFilter, xml, "ShowFilter", "Kistl.App.GUI");
             XmlStreamer.ToStream(this.Proxy.ShowMasterDetail, xml, "ShowMasterDetail", "Kistl.App.GUI");
             XmlStreamer.ToStream(this.Proxy.ShowOpenCommand, xml, "ShowOpenCommand", "Kistl.App.GUI");
             XmlStreamer.ToStream(this.Proxy.ShowRefreshCommand, xml, "ShowRefreshCommand", "Kistl.App.GUI");
             XmlStreamer.ToStream(this.Proxy.Type != null ? this.Proxy.Type.ID : (int?)null, xml, "Type", "Kistl.App.GUI");
+            XmlStreamer.ToStream((int?)Proxy.ViewMethod, xml, "ViewMethod", "Kistl.App.GUI");
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
@@ -1342,6 +1654,8 @@ namespace Kistl.App.GUI
                 XmlStreamer.FromStream(ref tmp, xml, "IsMultiselect", "Kistl.App.GUI");
                 this.Proxy.IsMultiselect = tmp;
             }
+            XmlStreamer.FromStream(ref this._fk_RequestedEditorKind, xml, "RequestedEditorKind", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._fk_RequestedWorkspaceKind, xml, "RequestedWorkspaceKind", "Kistl.App.GUI");
             {
                 // yuck
                 bool? tmp = this.Proxy.RespectRequiredFilter;
@@ -1373,6 +1687,7 @@ namespace Kistl.App.GUI
                 this.Proxy.ShowRefreshCommand = tmp;
             }
             XmlStreamer.FromStream(ref this._fk_Type, xml, "Type", "Kistl.App.GUI");
+            XmlStreamer.FromStreamConverter(v => Proxy.ViewMethod = (Kistl.App.GUI.InstanceListViewMethod?)v, xml, "ViewMethod", "Kistl.App.GUI");
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
 			return baseResult == null
                 ? result.Count == 0
@@ -1394,12 +1709,15 @@ namespace Kistl.App.GUI
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream((int?)Proxy.InitialSortDirection, xml, "InitialSortDirection", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.IsEditable, xml, "IsEditable", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.IsMultiselect, xml, "IsMultiselect", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.RequestedEditorKind != null ? this.Proxy.RequestedEditorKind.ExportGuid : (Guid?)null, xml, "RequestedEditorKind", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.RequestedWorkspaceKind != null ? this.Proxy.RequestedWorkspaceKind.ExportGuid : (Guid?)null, xml, "RequestedWorkspaceKind", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.RespectRequiredFilter, xml, "RespectRequiredFilter", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.ShowFilter, xml, "ShowFilter", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.ShowMasterDetail, xml, "ShowMasterDetail", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.ShowOpenCommand, xml, "ShowOpenCommand", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.ShowRefreshCommand, xml, "ShowRefreshCommand", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.Type != null ? this.Proxy.Type.ExportGuid : (Guid?)null, xml, "Type", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream((int?)Proxy.ViewMethod, xml, "ViewMethod", "Kistl.App.GUI");
         }
 
         public override void MergeImport(System.Xml.XmlReader xml)
@@ -1455,6 +1773,8 @@ namespace Kistl.App.GUI
                 XmlStreamer.FromStream(ref tmp, xml, "IsMultiselect", "Kistl.App.GUI");
                 this.Proxy.IsMultiselect = tmp;
             }
+            XmlStreamer.FromStream(ref this._fk_guid_RequestedEditorKind, xml, "RequestedEditorKind", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._fk_guid_RequestedWorkspaceKind, xml, "RequestedWorkspaceKind", "Kistl.App.GUI");
             {
                 // yuck
                 bool? tmp = this.Proxy.RespectRequiredFilter;
@@ -1486,6 +1806,7 @@ namespace Kistl.App.GUI
                 this.Proxy.ShowRefreshCommand = tmp;
             }
             XmlStreamer.FromStream(ref this._fk_guid_Type, xml, "Type", "Kistl.App.GUI");
+            XmlStreamer.FromStreamConverter(v => Proxy.ViewMethod = (Kistl.App.GUI.InstanceListViewMethod?)v, xml, "ViewMethod", "Kistl.App.GUI");
         }
 
         #endregion

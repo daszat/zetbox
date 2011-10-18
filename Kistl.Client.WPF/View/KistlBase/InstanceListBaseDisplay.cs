@@ -41,7 +41,7 @@ namespace Kistl.Client.WPF.View.KistlBase
 
         private void ApplyViewMethod()
         {
-            if (ViewModel.ViewMethod == InstanceListViewMethod.Details)
+            if (ViewModel.ViewMethod == Kistl.App.GUI.InstanceListViewMethod.Details)
             {
                 WPFHelper.RefreshGridView(ListView, ViewModel.DisplayedColumns, WpfSortHelper.SortPropertyNameProperty);
                 ListView.ItemContainerStyle = Application.Current.Resources["ListViewAsGridViewItemContainerStyle"] as Style;

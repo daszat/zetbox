@@ -116,6 +116,12 @@
         <property name="IsMultiselect" 
                   column="`IsMultiselect`" 
                   optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="RequestedEditorKind" column="`fk_RequestedEditorKind`" class="Kistl.App.GUI.ControlKindNHibernateImpl+ControlKindProxy, Kistl.Objects.NHibernateImpl" />
+
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="RequestedWorkspaceKind" column="`fk_RequestedWorkspaceKind`" class="Kistl.App.GUI.ControlKindNHibernateImpl+ControlKindProxy, Kistl.Objects.NHibernateImpl" />
+
         <!-- ValueTypeProperty isValue -->
         <property name="RespectRequiredFilter" 
                   column="`RespectRequiredFilter`" 
@@ -139,6 +145,10 @@
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Type" column="`fk_Type`" class="Kistl.App.Base.ObjectClassNHibernateImpl+ObjectClassProxy, Kistl.Objects.NHibernateImpl" />
 
+        <!-- ValueTypeProperty isValue -->
+        <property name="ViewMethod" 
+                  column="`ViewMethod`" 
+                  optimistic-lock="false"/>
 
             <!-- define the subclasses -->
 

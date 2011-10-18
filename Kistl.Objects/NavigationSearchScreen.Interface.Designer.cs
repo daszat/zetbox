@@ -88,6 +88,22 @@ namespace Kistl.App.GUI
         /// <summary>
         /// 
         /// </summary>
+        Kistl.App.GUI.ControlKind RequestedEditorKind {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        Kistl.App.GUI.ControlKind RequestedWorkspaceKind {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         bool? RespectRequiredFilter {
             get;
             set;
@@ -129,6 +145,14 @@ namespace Kistl.App.GUI
         /// 
         /// </summary>
         Kistl.App.Base.ObjectClass Type {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        Kistl.App.GUI.InstanceListViewMethod? ViewMethod {
             get;
             set;
         }

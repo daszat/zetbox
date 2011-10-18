@@ -635,6 +635,20 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.ControlKind> OnChil
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
 
+            // Follow Search_has_RequestedEditorKind
+            result.AddRange(Context.AttachedObjects
+                .OfType<Kistl.App.GUI.NavigationSearchScreen>()
+                .Where(child => child.RequestedEditorKind == this
+                    && child.ObjectState == DataObjectState.Deleted)
+                .Cast<NHibernatePersistenceObject>());
+
+            // Follow Search_has_RequestedWorkspaceKind
+            result.AddRange(Context.AttachedObjects
+                .OfType<Kistl.App.GUI.NavigationSearchScreen>()
+                .Where(child => child.RequestedWorkspaceKind == this
+                    && child.ObjectState == DataObjectState.Deleted)
+                .Cast<NHibernatePersistenceObject>());
+
             // Follow ViewDescriptor_is_a_ControlKind
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.GUI.ViewDescriptor>()

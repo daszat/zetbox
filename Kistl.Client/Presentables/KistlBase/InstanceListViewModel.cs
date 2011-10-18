@@ -24,12 +24,6 @@ namespace Kistl.Client.Presentables.KistlBase
     using Kistl.Client.Presentables.ValueViewModels;
     using ObjectEditor = Kistl.Client.Presentables.ObjectEditor;
 
-    public enum InstanceListViewMethod
-    {
-        List = 1,
-        Details = 2,
-    }
-
     /// <summary>
     /// Models the specialities of <see cref="DataType"/>s.
     /// </summary>

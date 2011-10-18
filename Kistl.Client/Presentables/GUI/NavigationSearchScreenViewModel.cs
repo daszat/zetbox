@@ -29,11 +29,20 @@ namespace Kistl.Client.Presentables.GUI
 
         private readonly Func<IKistlContext> _ctxFactory;
 
+        protected virtual Func<IQueryable> InitializeQueryFactory()
+        {
+            return _queryFactory;
+        }
+
         private Func<IQueryable> _queryFactory;
         public Func<IQueryable> QueryFactory
         {
             get
             {
+                if (_queryFactory == null)
+                {
+                    _queryFactory = InitializeQueryFactory();
+                }
                 return _queryFactory;
             }
             set
@@ -69,23 +78,6 @@ namespace Kistl.Client.Presentables.GUI
             }
         }
 
-        private ControlKind _requestedEditorKind;
-        public ControlKind RequestedEditorKind
-        {
-            get
-            {
-                return _requestedEditorKind;
-            }
-            set
-            {
-                if (_requestedEditorKind != value)
-                {
-                    _requestedEditorKind = value;
-                    OnPropertyChanged("RequestedEditorKind");
-                }
-            }
-        }
-
         private InstanceListViewModel _listViewModel;
         public InstanceListViewModel ListViewModel
         {
@@ -106,37 +98,42 @@ namespace Kistl.Client.Presentables.GUI
                     .CreateViewModel<InstanceListViewModel.Factory>()
                     .Invoke(DataContext, this, _ctxFactory, Type, _queryFactory);
 
-                var screen = this.Screen;
-
-                if (screen.AllowAddNew.HasValue) _listViewModel.AllowAddNew = screen.AllowAddNew.Value;
-                if (screen.AllowDelete.HasValue) _listViewModel.AllowDelete = screen.AllowDelete.Value;
-                if (screen.AllowSelectColumns.HasValue) _listViewModel.AllowSelectColumns = screen.AllowSelectColumns.Value;
-                if (screen.AllowUserFilter.HasValue) _listViewModel.AllowUserFilter = screen.AllowUserFilter.Value;
-                if (screen.EnableAutoFilter.HasValue) _listViewModel.EnableAutoFilter = screen.EnableAutoFilter.Value;
-                if (screen.IsEditable.HasValue) _listViewModel.IsEditable = screen.IsEditable.Value;
-                if (screen.IsMultiselect.HasValue) _listViewModel.IsMultiselect = screen.IsMultiselect.Value;
-                if (screen.RespectRequiredFilter.HasValue) _listViewModel.RespectRequiredFilter = screen.RespectRequiredFilter.Value;
-                if (screen.ShowFilter.HasValue) _listViewModel.ShowFilter = screen.ShowFilter.Value;
-                if (screen.ShowMasterDetail.HasValue) _listViewModel.ShowMasterDetail = screen.ShowMasterDetail.Value;
-                if (screen.ShowOpenCommand.HasValue) _listViewModel.ShowOpenCommand = screen.ShowOpenCommand.Value;
-                if (screen.ShowRefreshCommand.HasValue) _listViewModel.ShowRefreshCommand = screen.ShowRefreshCommand.Value;
-
-                if (!string.IsNullOrEmpty(screen.InitialSort))
-                {
-                    if (screen.InitialSortDirection.HasValue)
-                    {
-                        _listViewModel.SetInitialSort(screen.InitialSort, (System.ComponentModel.ListSortDirection)screen.InitialSortDirection.Value);
-                    }
-                    else
-                    {
-                        _listViewModel.SetInitialSort(screen.InitialSort);
-                    }
-                }
-
-                //_listViewModel.RequestedWorkspaceKind = _requestedEditorKind;
-                _listViewModel.RequestedEditorKind = _requestedEditorKind;
-                _listViewModel.ViewMethod = InstanceListViewMethod.List;
+                InitializeListViewModel(_listViewModel);
             }
+        }
+
+        protected virtual void InitializeListViewModel(InstanceListViewModel mdl)
+        {
+            var screen = this.Screen;
+
+            if (screen.AllowAddNew.HasValue) mdl.AllowAddNew = screen.AllowAddNew.Value;
+            if (screen.AllowDelete.HasValue) mdl.AllowDelete = screen.AllowDelete.Value;
+            if (screen.AllowSelectColumns.HasValue) mdl.AllowSelectColumns = screen.AllowSelectColumns.Value;
+            if (screen.AllowUserFilter.HasValue) mdl.AllowUserFilter = screen.AllowUserFilter.Value;
+            if (screen.EnableAutoFilter.HasValue) mdl.EnableAutoFilter = screen.EnableAutoFilter.Value;
+            if (screen.IsEditable.HasValue) mdl.IsEditable = screen.IsEditable.Value;
+            if (screen.IsMultiselect.HasValue) mdl.IsMultiselect = screen.IsMultiselect.Value;
+            if (screen.RespectRequiredFilter.HasValue) mdl.RespectRequiredFilter = screen.RespectRequiredFilter.Value;
+            if (screen.ShowFilter.HasValue) mdl.ShowFilter = screen.ShowFilter.Value;
+            if (screen.ShowMasterDetail.HasValue) mdl.ShowMasterDetail = screen.ShowMasterDetail.Value;
+            if (screen.ShowOpenCommand.HasValue) mdl.ShowOpenCommand = screen.ShowOpenCommand.Value;
+            if (screen.ShowRefreshCommand.HasValue) mdl.ShowRefreshCommand = screen.ShowRefreshCommand.Value;
+
+            if (!string.IsNullOrEmpty(screen.InitialSort))
+            {
+                if (screen.InitialSortDirection.HasValue)
+                {
+                    mdl.SetInitialSort(screen.InitialSort, (System.ComponentModel.ListSortDirection)screen.InitialSortDirection.Value);
+                }
+                else
+                {
+                    mdl.SetInitialSort(screen.InitialSort);
+                }
+            }
+
+            if (screen.RequestedWorkspaceKind != null) mdl.RequestedWorkspaceKind = screen.RequestedWorkspaceKind;
+            if (screen.RequestedEditorKind != null) mdl.RequestedEditorKind = screen.RequestedEditorKind;
+            if (screen.ViewMethod.HasValue) mdl.ViewMethod = screen.ViewMethod.Value;
         }
     }
 }

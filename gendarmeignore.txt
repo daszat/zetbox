@@ -17,7 +17,7 @@ M: System.Collections.ObjectModel.ReadOnlyObservableCollection`1<Kistl.Client.Pr
 M: System.Void ZBox.App.SchemaMigration.MigrationProjectMappingReport::RenderFirstPage()
 # meh
 M: System.Void Kistl.DalProvider.Ef.Generator.Templates.ObjectClasses.AssociationSetAttributes::Generate()
-M: System.Void Kistl.Client.Presentables.GUI.NavigationSearchScreenViewModel::EnsureListViewModel()
+M: System.Void Kistl.Client.Presentables.GUI.NavigationSearchScreenViewModel::InitializeListViewModel(Kistl.Client.Presentables.KistlBase.InstanceListViewModel)
 
 R: Gendarme.Rules.Maintainability.AvoidUnnecessarySpecializationRule
 # This method has a parameter whose type is more specialized than necessary. This can make it difficult to reuse the method in other contexts.

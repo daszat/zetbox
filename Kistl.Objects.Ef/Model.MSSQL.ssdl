@@ -1293,6 +1293,14 @@
       <End Role="Screen" EntitySet="NavigationScreen" />
       <End Role="ViewModelDescriptor" EntitySet="ViewModelDescriptor" />
     </AssociationSet>
+    <AssociationSet Name="FK_Search_has_RequestedEditorKind" Association="Model.Store.FK_Search_has_RequestedEditorKind" >
+      <End Role="Search" EntitySet="NavigationSearchScreen" />
+      <End Role="RequestedEditorKind" EntitySet="ControlKind" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Search_has_RequestedWorkspaceKind" Association="Model.Store.FK_Search_has_RequestedWorkspaceKind" >
+      <End Role="Search" EntitySet="NavigationSearchScreen" />
+      <End Role="RequestedWorkspaceKind" EntitySet="ControlKind" />
+    </AssociationSet>
     <AssociationSet Name="FK_SearchScreen_of_Type" Association="Model.Store.FK_SearchScreen_of_Type" >
       <End Role="SearchScreen" EntitySet="NavigationSearchScreen" />
       <End Role="Type" EntitySet="ObjectClass" />
@@ -2337,6 +2345,8 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="fk_RequestedEditorKind" Type="int" />
+    <Property Name="fk_RequestedWorkspaceKind" Type="int" />
     <Property Name="fk_Type" Type="int" />
     <Property Name="AllowAddNew" Type="bit" Nullable="true" />
     <Property Name="AllowDelete" Type="bit" Nullable="true" />
@@ -2352,6 +2362,7 @@
     <Property Name="ShowMasterDetail" Type="bit" Nullable="true" />
     <Property Name="ShowOpenCommand" Type="bit" Nullable="true" />
     <Property Name="ShowRefreshCommand" Type="bit" Nullable="true" />
+    <Property Name="ViewMethod" Type="int" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="NewGuidDefaultValue">
@@ -5486,6 +5497,34 @@
       </Principal>
       <Dependent Role="Screen">
         <PropertyRef Name="fk_ViewModelDescriptor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_Search_has_RequestedEditorKind">
+    <End Role="RequestedEditorKind" Type="Model.Store.ControlKind" Multiplicity="0..1" />
+    <End Role="Search" Type="Model.Store.NavigationSearchScreen" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RequestedEditorKind">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Search">
+        <PropertyRef Name="fk_RequestedEditorKind" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_Search_has_RequestedWorkspaceKind">
+    <End Role="RequestedWorkspaceKind" Type="Model.Store.ControlKind" Multiplicity="0..1" />
+    <End Role="Search" Type="Model.Store.NavigationSearchScreen" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RequestedWorkspaceKind">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Search">
+        <PropertyRef Name="fk_RequestedWorkspaceKind" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

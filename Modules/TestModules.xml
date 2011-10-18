@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2011-10-18T11:35:47.607347Z" xmlns="http://dasz.at/Kistl">
+<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2011-10-18T11:47:09.950347Z" xmlns="http://dasz.at/Kistl">
   <KistlBase:Module ExportGuid="a56d9701-d98e-49ab-bd49-a491d09e2d46">
     <KistlBase:ChangedOn>2011-08-05T10:30:47.664236Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05Z</KistlBase:CreatedOn>
@@ -2104,13 +2104,15 @@
     <KistlBase:Property>1c8414ef-f164-4f7e-a7bf-5fca894aa4f4</KistlBase:Property>
   </KistlBase:NewGuidDefaultValue>
   <GUI:NavigationSearchScreen ExportGuid="a3ab3e25-fffb-47e7-86df-197e8ab45db1">
-    <GUI:ChangedOn>2011-10-18T11:07:04.028607Z</GUI:ChangedOn>
+    <GUI:ChangedOn>2011-10-18T12:11:36.072348Z</GUI:ChangedOn>
     <GUI:CreatedOn>2011-10-18T11:06:40.027207Z</GUI:CreatedOn>
     <GUI:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</GUI:Module>
     <GUI:Parent>8bc286d2-899a-4348-9c5a-3d4e90f3ff6d</GUI:Parent>
     <GUI:Children_pos>1</GUI:Children_pos>
     <GUI:Title>Projekt Suche</GUI:Title>
+    <GUI:AllowAddNew>true</GUI:AllowAddNew>
     <GUI:Type>885939e8-82e1-4fdf-b80e-5f612d5131d3</GUI:Type>
+    <GUI:ViewMethod>2</GUI:ViewMethod>
   </GUI:NavigationSearchScreen>
   <GUI:NavigationScreen ExportGuid="8bc286d2-899a-4348-9c5a-3d4e90f3ff6d">
     <GUI:ChangedOn>2011-10-18T11:06:40.027207Z</GUI:ChangedOn>

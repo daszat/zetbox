@@ -789,6 +789,14 @@
       <End Role="Screen" EntitySet="NavigationScreen" />
       <End Role="ViewModelDescriptor" EntitySet="ViewModelDescriptor" />
     </AssociationSet>
+    <AssociationSet Name="FK_Search_has_RequestedEditorKind" Association="Model.FK_Search_has_RequestedEditorKind" >
+      <End Role="Search" EntitySet="NavigationScreen" />
+      <End Role="RequestedEditorKind" EntitySet="ControlKind" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Search_has_RequestedWorkspaceKind" Association="Model.FK_Search_has_RequestedWorkspaceKind" >
+      <End Role="Search" EntitySet="NavigationScreen" />
+      <End Role="RequestedWorkspaceKind" EntitySet="ControlKind" />
+    </AssociationSet>
     <AssociationSet Name="FK_SearchScreen_of_Type" Association="Model.FK_SearchScreen_of_Type" >
       <End Role="SearchScreen" EntitySet="NavigationScreen" />
       <End Role="Type" EntitySet="DataType" />
@@ -2658,6 +2666,14 @@
     <Property Name="InitialSortDirectionImpl" Type="Int32" Nullable="true"  />
     <Property Name="IsEditable" Type="Boolean" Nullable="true"  />
     <Property Name="IsMultiselect" Type="Boolean" Nullable="true"  />
+    <NavigationProperty Name="RequestedEditorKindImpl"
+                        Relationship="Model.FK_Search_has_RequestedEditorKind"
+                        FromRole="Search"
+                        ToRole="RequestedEditorKind" />
+    <NavigationProperty Name="RequestedWorkspaceKindImpl"
+                        Relationship="Model.FK_Search_has_RequestedWorkspaceKind"
+                        FromRole="Search"
+                        ToRole="RequestedWorkspaceKind" />
     <Property Name="RespectRequiredFilter" Type="Boolean" Nullable="true"  />
     <Property Name="ShowFilter" Type="Boolean" Nullable="true"  />
     <Property Name="ShowMasterDetail" Type="Boolean" Nullable="true"  />
@@ -2667,6 +2683,7 @@
                         Relationship="Model.FK_SearchScreen_of_Type"
                         FromRole="SearchScreen"
                         ToRole="Type" />
+    <Property Name="ViewMethodImpl" Type="Int32" Nullable="true"  />
   </EntityType>
   <EntityType Name="NewGuidDefaultValue" BaseType="Model.DefaultPropertyValue">
   </EntityType>
@@ -4667,6 +4684,22 @@
          Multiplicity="*" />
     <End Role="ViewModelDescriptor"
          Type="Model.ViewModelDescriptor" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_Search_has_RequestedEditorKind" >
+    <End Role="Search"
+         Type="Model.NavigationSearchScreen" 
+         Multiplicity="*" />
+    <End Role="RequestedEditorKind"
+         Type="Model.ControlKind" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_Search_has_RequestedWorkspaceKind" >
+    <End Role="Search"
+         Type="Model.NavigationSearchScreen" 
+         Multiplicity="*" />
+    <End Role="RequestedWorkspaceKind"
+         Type="Model.ControlKind" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_SearchScreen_of_Type" >

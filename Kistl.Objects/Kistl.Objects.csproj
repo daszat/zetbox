@@ -236,6 +236,7 @@
     <Compile Include="DayOfWeek.Interface.Designer.cs" />
     <Compile Include="DeploymentRestriction.Interface.Designer.cs" />
     <Compile Include="HighlightState.Interface.Designer.cs" />
+    <Compile Include="InstanceListViewMethod.Interface.Designer.cs" />
     <Compile Include="ListSortDirection.Interface.Designer.cs" />
     <Compile Include="MappingStatus.Interface.Designer.cs" />
     <Compile Include="Multiplicity.Interface.Designer.cs" />

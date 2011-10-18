@@ -541,6 +541,214 @@ namespace Kistl.App.GUI
         /// <summary>
         /// 
         /// </summary>
+    /*
+    Relation: FK_Search_has_RequestedEditorKind
+    A: ZeroOrMore NavigationSearchScreen as Search
+    B: ZeroOrOne ControlKind as RequestedEditorKind
+    Preferred Storage: MergeIntoA
+    */
+        // object reference property
+        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RequestedEditorKind
+        // fkBackingName=_fk_RequestedEditorKind; fkGuidBackingName=_fk_guid_RequestedEditorKind;
+        // referencedInterface=Kistl.App.GUI.ControlKind; moduleNamespace=Kistl.App.GUI;
+        // inverse Navigator=none; is reference;
+        // PositionStorage=none;
+        // Target exportable
+
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.GUI.ControlKind RequestedEditorKind
+        {
+            get { return RequestedEditorKindImpl; }
+            set { RequestedEditorKindImpl = (Kistl.App.GUI.ControlKindEfImpl)value; }
+        }
+
+        private int? _fk_RequestedEditorKind;
+
+        private Guid? _fk_guid_RequestedEditorKind = null;
+
+        // internal implementation, EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_Search_has_RequestedEditorKind", "RequestedEditorKind")]
+        public Kistl.App.GUI.ControlKindEfImpl RequestedEditorKindImpl
+        {
+            get
+            {
+                if (!CurrentAccessRights.HasReadRights()) return null;
+                Kistl.App.GUI.ControlKindEfImpl __value;
+                EntityReference<Kistl.App.GUI.ControlKindEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.ControlKindEfImpl>(
+                        "Model.FK_Search_has_RequestedEditorKind",
+                        "RequestedEditorKind");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load();
+                }
+                if (r.Value != null) r.Value.AttachToContext(this.Context);
+                __value = r.Value;
+                if (OnRequestedEditorKind_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Kistl.App.GUI.ControlKind>(__value);
+                    OnRequestedEditorKind_Getter(this, e);
+                    __value = (Kistl.App.GUI.ControlKindEfImpl)e.Result;
+                }
+                return __value;
+            }
+            set
+            {
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+
+                EntityReference<Kistl.App.GUI.ControlKindEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.ControlKindEfImpl>(
+                        "Model.FK_Search_has_RequestedEditorKind",
+                        "RequestedEditorKind");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load();
+                }
+                Kistl.App.GUI.ControlKindEfImpl __oldValue = (Kistl.App.GUI.ControlKindEfImpl)r.Value;
+                Kistl.App.GUI.ControlKindEfImpl __newValue = (Kistl.App.GUI.ControlKindEfImpl)value;
+
+                // Changing Event fires before anything is touched
+                // navigators may not be notified to entity framework
+                NotifyPropertyChanging("RequestedEditorKind", null, __oldValue, __newValue);
+
+                if (OnRequestedEditorKind_PreSetter != null)
+                {
+                    var e = new PropertyPreSetterEventArgs<Kistl.App.GUI.ControlKind>(__oldValue, __newValue);
+                    OnRequestedEditorKind_PreSetter(this, e);
+                    __newValue = (Kistl.App.GUI.ControlKindEfImpl)e.Result;
+                }
+
+                r.Value = (Kistl.App.GUI.ControlKindEfImpl)__newValue;
+
+                if (OnRequestedEditorKind_PostSetter != null)
+                {
+                    var e = new PropertyPostSetterEventArgs<Kistl.App.GUI.ControlKind>(__oldValue, __newValue);
+                    OnRequestedEditorKind_PostSetter(this, e);
+                }
+
+                // everything is done. fire the Changed event
+                // navigators may not be notified to entity framework
+                NotifyPropertyChanged("RequestedEditorKind", null, __oldValue, __newValue);
+            }
+        }
+
+        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RequestedEditorKind
+		public static event PropertyGetterHandler<Kistl.App.GUI.NavigationSearchScreen, Kistl.App.GUI.ControlKind> OnRequestedEditorKind_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.GUI.NavigationSearchScreen, Kistl.App.GUI.ControlKind> OnRequestedEditorKind_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.GUI.NavigationSearchScreen, Kistl.App.GUI.ControlKind> OnRequestedEditorKind_PostSetter;
+
+        /// <summary>
+        /// 
+        /// </summary>
+    /*
+    Relation: FK_Search_has_RequestedWorkspaceKind
+    A: ZeroOrMore NavigationSearchScreen as Search
+    B: ZeroOrOne ControlKind as RequestedWorkspaceKind
+    Preferred Storage: MergeIntoA
+    */
+        // object reference property
+        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RequestedWorkspaceKind
+        // fkBackingName=_fk_RequestedWorkspaceKind; fkGuidBackingName=_fk_guid_RequestedWorkspaceKind;
+        // referencedInterface=Kistl.App.GUI.ControlKind; moduleNamespace=Kistl.App.GUI;
+        // inverse Navigator=none; is reference;
+        // PositionStorage=none;
+        // Target exportable
+
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.GUI.ControlKind RequestedWorkspaceKind
+        {
+            get { return RequestedWorkspaceKindImpl; }
+            set { RequestedWorkspaceKindImpl = (Kistl.App.GUI.ControlKindEfImpl)value; }
+        }
+
+        private int? _fk_RequestedWorkspaceKind;
+
+        private Guid? _fk_guid_RequestedWorkspaceKind = null;
+
+        // internal implementation, EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_Search_has_RequestedWorkspaceKind", "RequestedWorkspaceKind")]
+        public Kistl.App.GUI.ControlKindEfImpl RequestedWorkspaceKindImpl
+        {
+            get
+            {
+                if (!CurrentAccessRights.HasReadRights()) return null;
+                Kistl.App.GUI.ControlKindEfImpl __value;
+                EntityReference<Kistl.App.GUI.ControlKindEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.ControlKindEfImpl>(
+                        "Model.FK_Search_has_RequestedWorkspaceKind",
+                        "RequestedWorkspaceKind");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load();
+                }
+                if (r.Value != null) r.Value.AttachToContext(this.Context);
+                __value = r.Value;
+                if (OnRequestedWorkspaceKind_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Kistl.App.GUI.ControlKind>(__value);
+                    OnRequestedWorkspaceKind_Getter(this, e);
+                    __value = (Kistl.App.GUI.ControlKindEfImpl)e.Result;
+                }
+                return __value;
+            }
+            set
+            {
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+
+                EntityReference<Kistl.App.GUI.ControlKindEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.ControlKindEfImpl>(
+                        "Model.FK_Search_has_RequestedWorkspaceKind",
+                        "RequestedWorkspaceKind");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load();
+                }
+                Kistl.App.GUI.ControlKindEfImpl __oldValue = (Kistl.App.GUI.ControlKindEfImpl)r.Value;
+                Kistl.App.GUI.ControlKindEfImpl __newValue = (Kistl.App.GUI.ControlKindEfImpl)value;
+
+                // Changing Event fires before anything is touched
+                // navigators may not be notified to entity framework
+                NotifyPropertyChanging("RequestedWorkspaceKind", null, __oldValue, __newValue);
+
+                if (OnRequestedWorkspaceKind_PreSetter != null)
+                {
+                    var e = new PropertyPreSetterEventArgs<Kistl.App.GUI.ControlKind>(__oldValue, __newValue);
+                    OnRequestedWorkspaceKind_PreSetter(this, e);
+                    __newValue = (Kistl.App.GUI.ControlKindEfImpl)e.Result;
+                }
+
+                r.Value = (Kistl.App.GUI.ControlKindEfImpl)__newValue;
+
+                if (OnRequestedWorkspaceKind_PostSetter != null)
+                {
+                    var e = new PropertyPostSetterEventArgs<Kistl.App.GUI.ControlKind>(__oldValue, __newValue);
+                    OnRequestedWorkspaceKind_PostSetter(this, e);
+                }
+
+                // everything is done. fire the Changed event
+                // navigators may not be notified to entity framework
+                NotifyPropertyChanged("RequestedWorkspaceKind", null, __oldValue, __newValue);
+            }
+        }
+
+        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RequestedWorkspaceKind
+		public static event PropertyGetterHandler<Kistl.App.GUI.NavigationSearchScreen, Kistl.App.GUI.ControlKind> OnRequestedWorkspaceKind_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.GUI.NavigationSearchScreen, Kistl.App.GUI.ControlKind> OnRequestedWorkspaceKind_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.GUI.NavigationSearchScreen, Kistl.App.GUI.ControlKind> OnRequestedWorkspaceKind_PostSetter;
+
+        /// <summary>
+        /// 
+        /// </summary>
         // value type property
         // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
         [XmlIgnore()]
@@ -912,6 +1120,75 @@ namespace Kistl.App.GUI
 		public static event PropertyPreSetterHandler<Kistl.App.GUI.NavigationSearchScreen, Kistl.App.Base.ObjectClass> OnType_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.GUI.NavigationSearchScreen, Kistl.App.Base.ObjectClass> OnType_PostSetter;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        // enumeration property
+   		// Kistl.DalProvider.Ef.Generator.Templates.Properties.EnumerationPropertyTemplate
+        // implement the user-visible interface
+        public Kistl.App.GUI.InstanceListViewMethod? ViewMethod
+        {
+            get
+            {
+                if (!CurrentAccessRights.HasReadRights()) return default(Kistl.App.GUI.InstanceListViewMethod?);
+				var __value = _ViewMethod;
+				if(OnViewMethod_Getter != null)
+				{
+					var e = new PropertyGetterEventArgs<Kistl.App.GUI.InstanceListViewMethod?>(__value);
+					OnViewMethod_Getter(this, e);
+					__value = e.Result;
+				}
+                return __value;
+            }
+            set
+            {
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (_ViewMethod != value)
+                {
+					var __oldValue = _ViewMethod;
+					var __newValue = value;
+                    if(OnViewMethod_PreSetter != null)
+                    {
+						var e = new PropertyPreSetterEventArgs<Kistl.App.GUI.InstanceListViewMethod?>(__oldValue, __newValue);
+						OnViewMethod_PreSetter(this, e);
+						__newValue = e.Result;
+                    }
+					
+                    NotifyPropertyChanging("ViewMethod", "ViewMethodImpl", __oldValue, __newValue);
+                    _ViewMethod = value;
+                    NotifyPropertyChanged("ViewMethod", "ViewMethodImpl", __oldValue, __newValue);
+                    if(OnViewMethod_PostSetter != null)
+                    {
+						var e = new PropertyPostSetterEventArgs<Kistl.App.GUI.InstanceListViewMethod?>(__oldValue, __newValue);
+						OnViewMethod_PostSetter(this, e);
+                    }
+                    
+                }
+            }
+        }
+        
+        /// <summary>backing store for ViewMethod</summary>
+        private Kistl.App.GUI.InstanceListViewMethod? _ViewMethod;
+        
+        /// <summary>EF sees only this property, for ViewMethod</summary>
+        [XmlIgnore()]
+        [EdmScalarProperty()]
+        public int? ViewMethodImpl
+        {
+            get
+            {
+                return (int?)this.ViewMethod;
+            }
+            set
+            {
+                this.ViewMethod = (Kistl.App.GUI.InstanceListViewMethod?)value;
+            }
+        }
+        
+		public static event PropertyGetterHandler<Kistl.App.GUI.NavigationSearchScreen, Kistl.App.GUI.InstanceListViewMethod?> OnViewMethod_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.GUI.NavigationSearchScreen, Kistl.App.GUI.InstanceListViewMethod?> OnViewMethod_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.GUI.NavigationSearchScreen, Kistl.App.GUI.InstanceListViewMethod?> OnViewMethod_PostSetter;
+
         public override Type GetImplementedInterface()
         {
             return typeof(NavigationSearchScreen);
@@ -938,6 +1215,9 @@ namespace Kistl.App.GUI
             me.ShowMasterDetail = other.ShowMasterDetail;
             me.ShowOpenCommand = other.ShowOpenCommand;
             me.ShowRefreshCommand = other.ShowRefreshCommand;
+            me.ViewMethod = other.ViewMethod;
+            this._fk_RequestedEditorKind = otherImpl._fk_RequestedEditorKind;
+            this._fk_RequestedWorkspaceKind = otherImpl._fk_RequestedWorkspaceKind;
             this._fk_Type = otherImpl._fk_Type;
         }
 
@@ -952,6 +1232,18 @@ namespace Kistl.App.GUI
 			
 			switch(propertyName)
 			{
+                case "RequestedEditorKind":
+                    __oldValue = _fk_RequestedEditorKind;
+                    NotifyPropertyChanging("RequestedEditorKind", __oldValue, __newValue);
+                    _fk_RequestedEditorKind = __newValue;
+                    NotifyPropertyChanged("RequestedEditorKind", __oldValue, __newValue);
+                    break;
+                case "RequestedWorkspaceKind":
+                    __oldValue = _fk_RequestedWorkspaceKind;
+                    NotifyPropertyChanging("RequestedWorkspaceKind", __oldValue, __newValue);
+                    _fk_RequestedWorkspaceKind = __newValue;
+                    NotifyPropertyChanged("RequestedWorkspaceKind", __oldValue, __newValue);
+                    break;
                 case "Type":
                     __oldValue = _fk_Type;
                     NotifyPropertyChanging("Type", __oldValue, __newValue);
@@ -972,6 +1264,22 @@ namespace Kistl.App.GUI
             base.ReloadReferences();
 
             // fix direct object references
+
+            if (_fk_guid_RequestedEditorKind.HasValue)
+                RequestedEditorKindImpl = (Kistl.App.GUI.ControlKindEfImpl)Context.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_guid_RequestedEditorKind.Value);
+            else
+            if (_fk_RequestedEditorKind.HasValue)
+                RequestedEditorKindImpl = (Kistl.App.GUI.ControlKindEfImpl)Context.Find<Kistl.App.GUI.ControlKind>(_fk_RequestedEditorKind.Value);
+            else
+                RequestedEditorKindImpl = null;
+
+            if (_fk_guid_RequestedWorkspaceKind.HasValue)
+                RequestedWorkspaceKindImpl = (Kistl.App.GUI.ControlKindEfImpl)Context.FindPersistenceObject<Kistl.App.GUI.ControlKind>(_fk_guid_RequestedWorkspaceKind.Value);
+            else
+            if (_fk_RequestedWorkspaceKind.HasValue)
+                RequestedWorkspaceKindImpl = (Kistl.App.GUI.ControlKindEfImpl)Context.Find<Kistl.App.GUI.ControlKind>(_fk_RequestedWorkspaceKind.Value);
+            else
+                RequestedWorkspaceKindImpl = null;
 
             if (_fk_guid_Type.HasValue)
                 TypeImpl = (Kistl.App.Base.ObjectClassEfImpl)Context.FindPersistenceObject<Kistl.App.Base.ObjectClass>(_fk_guid_Type.Value);
@@ -1067,6 +1375,22 @@ namespace Kistl.App.GUI
                         obj => obj.IsMultiselect,
                         (obj, val) => obj.IsMultiselect = val),
                     // else
+                    new PropertyDescriptorEfImpl<NavigationSearchScreenEfImpl, Kistl.App.GUI.ControlKind>(
+                        lazyCtx,
+                        new Guid("80987e44-841a-4d56-88d2-92c28efb70a1"),
+                        "RequestedEditorKind",
+                        null,
+                        obj => obj.RequestedEditorKind,
+                        (obj, val) => obj.RequestedEditorKind = val),
+                    // else
+                    new PropertyDescriptorEfImpl<NavigationSearchScreenEfImpl, Kistl.App.GUI.ControlKind>(
+                        lazyCtx,
+                        new Guid("e0a94b30-5225-45e6-9dfc-c88dbf0648f5"),
+                        "RequestedWorkspaceKind",
+                        null,
+                        obj => obj.RequestedWorkspaceKind,
+                        (obj, val) => obj.RequestedWorkspaceKind = val),
+                    // else
                     new PropertyDescriptorEfImpl<NavigationSearchScreenEfImpl, bool?>(
                         lazyCtx,
                         new Guid("9323c1cf-f8d6-4b29-b854-41ceb509b57e"),
@@ -1114,6 +1438,14 @@ namespace Kistl.App.GUI
                         null,
                         obj => obj.Type,
                         (obj, val) => obj.Type = val),
+                    // else
+                    new PropertyDescriptorEfImpl<NavigationSearchScreenEfImpl, Kistl.App.GUI.InstanceListViewMethod?>(
+                        lazyCtx,
+                        new Guid("3b671e20-eb7e-4f24-b183-19bdf2666651"),
+                        "ViewMethod",
+                        null,
+                        obj => obj.ViewMethod,
+                        (obj, val) => obj.ViewMethod = val),
                     // position columns
                 };
             }
@@ -1192,6 +1524,14 @@ namespace Kistl.App.GUI
             BinarySerializer.ToStream((int?)((Kistl.App.GUI.NavigationSearchScreen)this).InitialSortDirection, binStream);
             BinarySerializer.ToStream(this._IsEditable, binStream);
             BinarySerializer.ToStream(this._IsMultiselect, binStream);
+            {
+                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.GUI.ControlKindEfImpl>("Model.FK_Search_has_RequestedEditorKind", "RequestedEditorKind").EntityKey;
+                BinarySerializer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, binStream);
+            }
+            {
+                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.GUI.ControlKindEfImpl>("Model.FK_Search_has_RequestedWorkspaceKind", "RequestedWorkspaceKind").EntityKey;
+                BinarySerializer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, binStream);
+            }
             BinarySerializer.ToStream(this._RespectRequiredFilter, binStream);
             BinarySerializer.ToStream(this._ShowFilter, binStream);
             BinarySerializer.ToStream(this._ShowMasterDetail, binStream);
@@ -1201,6 +1541,7 @@ namespace Kistl.App.GUI
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClassEfImpl>("Model.FK_SearchScreen_of_Type", "Type").EntityKey;
                 BinarySerializer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, binStream);
             }
+            BinarySerializer.ToStream((int?)((Kistl.App.GUI.NavigationSearchScreen)this).ViewMethod, binStream);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
@@ -1221,12 +1562,19 @@ namespace Kistl.App.GUI
             }
             BinarySerializer.FromStream(out this._IsEditable, binStream);
             BinarySerializer.FromStream(out this._IsMultiselect, binStream);
+            BinarySerializer.FromStream(out this._fk_RequestedEditorKind, binStream);
+            BinarySerializer.FromStream(out this._fk_RequestedWorkspaceKind, binStream);
             BinarySerializer.FromStream(out this._RespectRequiredFilter, binStream);
             BinarySerializer.FromStream(out this._ShowFilter, binStream);
             BinarySerializer.FromStream(out this._ShowMasterDetail, binStream);
             BinarySerializer.FromStream(out this._ShowOpenCommand, binStream);
             BinarySerializer.FromStream(out this._ShowRefreshCommand, binStream);
             BinarySerializer.FromStream(out this._fk_Type, binStream);
+            {
+                int? baseValue;
+                BinarySerializer.FromStream(out baseValue, binStream);
+                ((Kistl.App.GUI.NavigationSearchScreen)this).ViewMethod = (Kistl.App.GUI.InstanceListViewMethod?)baseValue;
+            }
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
 			return baseResult == null
                 ? result.Count == 0
@@ -1248,6 +1596,14 @@ namespace Kistl.App.GUI
             XmlStreamer.ToStream((int?)((Kistl.App.GUI.NavigationSearchScreen)this).InitialSortDirection, xml, "InitialSortDirection", "Kistl.App.GUI");
             XmlStreamer.ToStream(this._IsEditable, xml, "IsEditable", "Kistl.App.GUI");
             XmlStreamer.ToStream(this._IsMultiselect, xml, "IsMultiselect", "Kistl.App.GUI");
+            {
+                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.GUI.ControlKindEfImpl>("Model.FK_Search_has_RequestedEditorKind", "RequestedEditorKind").EntityKey;
+                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "RequestedEditorKind", "Kistl.App.GUI");
+            }
+            {
+                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.GUI.ControlKindEfImpl>("Model.FK_Search_has_RequestedWorkspaceKind", "RequestedWorkspaceKind").EntityKey;
+                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "RequestedWorkspaceKind", "Kistl.App.GUI");
+            }
             XmlStreamer.ToStream(this._RespectRequiredFilter, xml, "RespectRequiredFilter", "Kistl.App.GUI");
             XmlStreamer.ToStream(this._ShowFilter, xml, "ShowFilter", "Kistl.App.GUI");
             XmlStreamer.ToStream(this._ShowMasterDetail, xml, "ShowMasterDetail", "Kistl.App.GUI");
@@ -1257,6 +1613,7 @@ namespace Kistl.App.GUI
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClassEfImpl>("Model.FK_SearchScreen_of_Type", "Type").EntityKey;
                 XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "Type", "Kistl.App.GUI");
             }
+            XmlStreamer.ToStream((int?)((Kistl.App.GUI.NavigationSearchScreen)this).ViewMethod, xml, "ViewMethod", "Kistl.App.GUI");
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
@@ -1273,12 +1630,15 @@ namespace Kistl.App.GUI
             XmlStreamer.FromStreamConverter(v => ((Kistl.App.GUI.NavigationSearchScreen)this).InitialSortDirection = (Kistl.App.GUI.ListSortDirection?)v, xml, "InitialSortDirection", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._IsEditable, xml, "IsEditable", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._IsMultiselect, xml, "IsMultiselect", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._fk_RequestedEditorKind, xml, "RequestedEditorKind", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._fk_RequestedWorkspaceKind, xml, "RequestedWorkspaceKind", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._RespectRequiredFilter, xml, "RespectRequiredFilter", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._ShowFilter, xml, "ShowFilter", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._ShowMasterDetail, xml, "ShowMasterDetail", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._ShowOpenCommand, xml, "ShowOpenCommand", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._ShowRefreshCommand, xml, "ShowRefreshCommand", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_Type, xml, "Type", "Kistl.App.GUI");
+            XmlStreamer.FromStreamConverter(v => ((Kistl.App.GUI.NavigationSearchScreen)this).ViewMethod = (Kistl.App.GUI.InstanceListViewMethod?)v, xml, "ViewMethod", "Kistl.App.GUI");
             } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
 			return baseResult == null
                 ? result.Count == 0
@@ -1300,12 +1660,15 @@ namespace Kistl.App.GUI
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream((int?)((Kistl.App.GUI.NavigationSearchScreen)this).InitialSortDirection, xml, "InitialSortDirection", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this._IsEditable, xml, "IsEditable", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this._IsMultiselect, xml, "IsMultiselect", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(RequestedEditorKind != null ? RequestedEditorKind.ExportGuid : (Guid?)null, xml, "RequestedEditorKind", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(RequestedWorkspaceKind != null ? RequestedWorkspaceKind.ExportGuid : (Guid?)null, xml, "RequestedWorkspaceKind", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this._RespectRequiredFilter, xml, "RespectRequiredFilter", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this._ShowFilter, xml, "ShowFilter", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this._ShowMasterDetail, xml, "ShowMasterDetail", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this._ShowOpenCommand, xml, "ShowOpenCommand", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this._ShowRefreshCommand, xml, "ShowRefreshCommand", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(Type != null ? Type.ExportGuid : (Guid?)null, xml, "Type", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream((int?)((Kistl.App.GUI.NavigationSearchScreen)this).ViewMethod, xml, "ViewMethod", "Kistl.App.GUI");
         }
 
         public override void MergeImport(System.Xml.XmlReader xml)
@@ -1321,12 +1684,15 @@ namespace Kistl.App.GUI
             XmlStreamer.FromStreamConverter(v => ((Kistl.App.GUI.NavigationSearchScreen)this).InitialSortDirection = (Kistl.App.GUI.ListSortDirection?)v, xml, "InitialSortDirection", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._IsEditable, xml, "IsEditable", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._IsMultiselect, xml, "IsMultiselect", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._fk_guid_RequestedEditorKind, xml, "RequestedEditorKind", "Kistl.App.GUI");
+            XmlStreamer.FromStream(ref this._fk_guid_RequestedWorkspaceKind, xml, "RequestedWorkspaceKind", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._RespectRequiredFilter, xml, "RespectRequiredFilter", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._ShowFilter, xml, "ShowFilter", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._ShowMasterDetail, xml, "ShowMasterDetail", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._ShowOpenCommand, xml, "ShowOpenCommand", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._ShowRefreshCommand, xml, "ShowRefreshCommand", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_guid_Type, xml, "Type", "Kistl.App.GUI");
+            XmlStreamer.FromStreamConverter(v => ((Kistl.App.GUI.NavigationSearchScreen)this).ViewMethod = (Kistl.App.GUI.InstanceListViewMethod?)v, xml, "ViewMethod", "Kistl.App.GUI");
         }
 
         #endregion

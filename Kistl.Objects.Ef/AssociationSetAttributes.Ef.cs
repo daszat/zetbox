@@ -2168,6 +2168,36 @@ using Kistl.DalProvider.Ef;
 
 
 	/*
+    Relation: FK_Search_has_RequestedEditorKind
+    A: ZeroOrMore NavigationSearchScreen as Search
+    B: ZeroOrOne ControlKind as RequestedEditorKind
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Search_has_RequestedEditorKind",
+    "Search", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.NavigationSearchScreenEfImpl),
+    "RequestedEditorKind", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.ControlKindEfImpl)
+    )]
+
+
+	/*
+    Relation: FK_Search_has_RequestedWorkspaceKind
+    A: ZeroOrMore NavigationSearchScreen as Search
+    B: ZeroOrOne ControlKind as RequestedWorkspaceKind
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Search_has_RequestedWorkspaceKind",
+    "Search", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.NavigationSearchScreenEfImpl),
+    "RequestedWorkspaceKind", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.ControlKindEfImpl)
+    )]
+
+
+	/*
     Relation: FK_SearchScreen_of_Type
     A: ZeroOrMore NavigationSearchScreen as SearchScreen
     B: ZeroOrOne ObjectClass as Type

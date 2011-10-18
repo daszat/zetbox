@@ -742,6 +742,7 @@
 <ScalarProperty Name="ShowMasterDetail" ColumnName="ShowMasterDetail" />
 <ScalarProperty Name="ShowOpenCommand" ColumnName="ShowOpenCommand" />
 <ScalarProperty Name="ShowRefreshCommand" ColumnName="ShowRefreshCommand" />
+<ScalarProperty Name="ViewMethodImpl" ColumnName="ViewMethod" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -4113,6 +4114,40 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_ViewModelDescriptor" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_Search_has_RequestedEditorKind
+    A: ZeroOrMore NavigationSearchScreen as Search
+    B: ZeroOrOne ControlKind as RequestedEditorKind
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_Search_has_RequestedEditorKind"
+                           TypeName="Model.FK_Search_has_RequestedEditorKind"
+                           StoreEntitySet="NavigationSearchScreen" >
+      <EndProperty Name="RequestedEditorKind">
+        <ScalarProperty Name="ID" ColumnName="fk_RequestedEditorKind"/>
+      </EndProperty>
+      <EndProperty Name="Search">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_RequestedEditorKind" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_Search_has_RequestedWorkspaceKind
+    A: ZeroOrMore NavigationSearchScreen as Search
+    B: ZeroOrOne ControlKind as RequestedWorkspaceKind
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_Search_has_RequestedWorkspaceKind"
+                           TypeName="Model.FK_Search_has_RequestedWorkspaceKind"
+                           StoreEntitySet="NavigationSearchScreen" >
+      <EndProperty Name="RequestedWorkspaceKind">
+        <ScalarProperty Name="ID" ColumnName="fk_RequestedWorkspaceKind"/>
+      </EndProperty>
+      <EndProperty Name="Search">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_RequestedWorkspaceKind" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_SearchScreen_of_Type
