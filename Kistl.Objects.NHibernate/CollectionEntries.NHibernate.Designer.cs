@@ -2131,29 +2131,29 @@ namespace Kistl.App.GUI
 {
 	using Kistl.App.Base;
     // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
-    [System.Diagnostics.DebuggerDisplay("NavigationScreen_accessed_by_Group_RelationEntryNHibernateImpl")]
-    public class NavigationScreen_accessed_by_Group_RelationEntryNHibernateImpl : Kistl.DalProvider.NHibernate.RelationEntryNHibernateImpl<Kistl.App.GUI.NavigationScreen, Kistl.App.GUI.NavigationScreenNHibernateImpl, Kistl.App.Base.Group, Kistl.App.Base.GroupNHibernateImpl>, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable, NavigationScreen_accessed_by_Group_RelationEntry
+    [System.Diagnostics.DebuggerDisplay("NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl")]
+    public class NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl : Kistl.DalProvider.NHibernate.RelationEntryNHibernateImpl<Kistl.App.GUI.NavigationEntry, Kistl.App.GUI.NavigationEntryNHibernateImpl, Kistl.App.Base.Group, Kistl.App.Base.GroupNHibernateImpl>, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable, NavigationEntry_accessed_by_Group_RelationEntry
     {
-        public NavigationScreen_accessed_by_Group_RelationEntryNHibernateImpl()
+        public NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl()
             : this(null)
         {
         }
 
         /// <summary>Create a new unattached instance</summary>
-        public NavigationScreen_accessed_by_Group_RelationEntryNHibernateImpl(Func<IFrozenContext> lazyCtx)
-            : this(lazyCtx, new NavigationScreen_accessed_by_Group_RelationEntryProxy())
+        public NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl(Func<IFrozenContext> lazyCtx)
+            : this(lazyCtx, new NavigationEntry_accessed_by_Group_RelationEntryProxy())
         {
         }
 
         /// <summary>Create a instance, wrapping the specified proxy</summary>
-        public NavigationScreen_accessed_by_Group_RelationEntryNHibernateImpl(Func<IFrozenContext> lazyCtx, NavigationScreen_accessed_by_Group_RelationEntryProxy proxy)
+        public NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl(Func<IFrozenContext> lazyCtx, NavigationEntry_accessed_by_Group_RelationEntryProxy proxy)
             : base(lazyCtx) // do not pass proxy to base data object
         {
             this.Proxy = proxy;
         }
 
         /// <summary>the NHibernate proxy of the represented entity</summary>
-        internal readonly NavigationScreen_accessed_by_Group_RelationEntryProxy Proxy;
+        internal readonly NavigationEntry_accessed_by_Group_RelationEntryProxy Proxy;
 
         // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
         public Guid ExportGuid
@@ -2197,7 +2197,7 @@ namespace Kistl.App.GUI
             set
             {
                 // settor will do checking for us
-                A = (Kistl.App.GUI.NavigationScreen)value;
+                A = (Kistl.App.GUI.NavigationEntry)value;
             }
         }
 
@@ -2222,18 +2222,18 @@ namespace Kistl.App.GUI
         /// </summary>
         // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=this.Proxy.A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=Kistl.App.GUI.NavigationScreen; moduleNamespace=Kistl.App.GUI;
+        // referencedInterface=Kistl.App.GUI.NavigationEntry; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.GUI.NavigationScreen A
+        public Kistl.App.GUI.NavigationEntry A
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.GUI.NavigationScreenNHibernateImpl __value = (Kistl.App.GUI.NavigationScreenNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
+                Kistl.App.GUI.NavigationEntryNHibernateImpl __value = (Kistl.App.GUI.NavigationEntryNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
                 return __value;
@@ -2248,8 +2248,8 @@ namespace Kistl.App.GUI
                     return;
 
                 // cache old value to remove inverse references later
-                var __oldValue = (Kistl.App.GUI.NavigationScreenNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
-                var __newValue = (Kistl.App.GUI.NavigationScreenNHibernateImpl)value;
+                var __oldValue = (Kistl.App.GUI.NavigationEntryNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
+                var __newValue = (Kistl.App.GUI.NavigationEntryNHibernateImpl)value;
 
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
@@ -2436,14 +2436,14 @@ namespace Kistl.App.GUI
 
         public override Type GetImplementedInterface()
         {
-            return typeof(NavigationScreen_accessed_by_Group_RelationEntry);
+            return typeof(NavigationEntry_accessed_by_Group_RelationEntry);
         }
 
         public override void ApplyChangesFrom(IPersistenceObject obj)
         {
             base.ApplyChangesFrom(obj);
-            var other = (NavigationScreen_accessed_by_Group_RelationEntryNHibernateImpl)obj;
-            var me = (NavigationScreen_accessed_by_Group_RelationEntryNHibernateImpl)this;
+            var other = (NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl)obj;
+            var me = (NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl)this;
 
         }
 
@@ -2455,10 +2455,10 @@ namespace Kistl.App.GUI
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_guid_A.HasValue)
-                this.Proxy.A = ((Kistl.App.GUI.NavigationScreenNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.NavigationScreen>(_fk_guid_A.Value)).Proxy;
+                this.Proxy.A = ((Kistl.App.GUI.NavigationEntryNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.NavigationEntry>(_fk_guid_A.Value)).Proxy;
             else
             if (_fk_A.HasValue)
-                this.Proxy.A = ((Kistl.App.GUI.NavigationScreenNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.NavigationScreen>(_fk_A.Value)).Proxy;
+                this.Proxy.A = ((Kistl.App.GUI.NavigationEntryNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.GUI.NavigationEntry>(_fk_A.Value)).Proxy;
             else
                 this.Proxy.A = null;
 
@@ -2473,19 +2473,19 @@ namespace Kistl.App.GUI
         }
 
 
-        public class NavigationScreen_accessed_by_Group_RelationEntryProxy
+        public class NavigationEntry_accessed_by_Group_RelationEntryProxy
             : IProxyObject, ISortKey<int>
         {
-            public NavigationScreen_accessed_by_Group_RelationEntryProxy()
+            public NavigationEntry_accessed_by_Group_RelationEntryProxy()
             {
             }
 
             public virtual int ID { get; set; }
 
-            public virtual Type ZBoxWrapper { get { return typeof(NavigationScreen_accessed_by_Group_RelationEntryNHibernateImpl); } }
-            public virtual Type ZBoxProxy { get { return typeof(NavigationScreen_accessed_by_Group_RelationEntryProxy); } }
+            public virtual Type ZBoxWrapper { get { return typeof(NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl); } }
+            public virtual Type ZBoxProxy { get { return typeof(NavigationEntry_accessed_by_Group_RelationEntryProxy); } }
 
-            public virtual Kistl.App.GUI.NavigationScreenNHibernateImpl.NavigationScreenProxy A { get; set; }
+            public virtual Kistl.App.GUI.NavigationEntryNHibernateImpl.NavigationEntryProxy A { get; set; }
 
             public virtual Kistl.App.Base.GroupNHibernateImpl.GroupProxy B { get; set; }
 

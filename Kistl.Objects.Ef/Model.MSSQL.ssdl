@@ -49,7 +49,7 @@
     <EntitySet Name="Muhblah" EntityType="Model.Store.Muhblah" Schema="test" Table="Muhblas"/>
     <EntitySet Name="N_to_M_relations_A" EntityType="Model.Store.N_to_M_relations_A" Schema="test" Table="N_to_M_relations_As"/>
     <EntitySet Name="N_to_M_relations_B" EntityType="Model.Store.N_to_M_relations_B" Schema="test" Table="N_to_M_relations_Bs"/>
-    <EntitySet Name="NavigationScreen" EntityType="Model.Store.NavigationScreen" Schema="gui" Table="NavigationScreens"/>
+    <EntitySet Name="NavigationEntry" EntityType="Model.Store.NavigationEntry" Schema="gui" Table="NavigationEntries"/>
     <EntitySet Name="One_to_N_relations_N" EntityType="Model.Store.One_to_N_relations_N" Schema="test" Table="One_to_N_relations_Ns"/>
     <EntitySet Name="One_to_N_relations_One" EntityType="Model.Store.One_to_N_relations_One" Schema="test" Table="One_to_N_relations_Ones"/>
     <EntitySet Name="OrderedNEnd" EntityType="Model.Store.OrderedNEnd" Schema="test" Table="OrderedNEnds"/>
@@ -334,6 +334,18 @@
       <End Role="A_PropertyFilterConfiguration" EntitySet="PropertyFilterConfiguration" />
       <End Role="B_MonthFilterConfiguration" EntitySet="MonthFilterConfiguration" />
     </AssociationSet>
+    <EntitySet Name="NavigationAction" EntityType="Model.Store.NavigationAction" Schema="gui" Table="NavigationActions"/>
+    <!-- inherits from NavigationEntry -->
+    <AssociationSet Name="FK_NavigationAction_NavigationEntry_ID" Association="Model.Store.FK_NavigationAction_NavigationEntry_ID" >
+      <End Role="A_NavigationEntry" EntitySet="NavigationEntry" />
+      <End Role="B_NavigationAction" EntitySet="NavigationAction" />
+    </AssociationSet>
+    <EntitySet Name="NavigationScreen" EntityType="Model.Store.NavigationScreen" Schema="gui" Table="NavigationScreens"/>
+    <!-- inherits from NavigationEntry -->
+    <AssociationSet Name="FK_NavigationScreen_NavigationEntry_ID" Association="Model.Store.FK_NavigationScreen_NavigationEntry_ID" >
+      <End Role="A_NavigationEntry" EntitySet="NavigationEntry" />
+      <End Role="B_NavigationScreen" EntitySet="NavigationScreen" />
+    </AssociationSet>
     <EntitySet Name="NavigationSearchScreen" EntityType="Model.Store.NavigationSearchScreen" Schema="gui" Table="NavigationSearchScreens"/>
     <!-- inherits from NavigationScreen -->
     <AssociationSet Name="FK_NavigationSearchScreen_NavigationScreen_ID" Association="Model.Store.FK_NavigationSearchScreen_NavigationScreen_ID" >
@@ -556,17 +568,17 @@
     
     <!-- 
     Relation: FK_NavigationScreen_accessed_by_Groups
-    A: ZeroOrMore NavigationScreen as NavigationScreen
+    A: ZeroOrMore NavigationEntry as NavigationScreen
     B: ZeroOrMore Group as Groups
     Preferred Storage: Separate
     -->
-    <EntitySet Name="NavigationScreen_accessed_by_Group_RelationEntry" EntityType="Model.Store.NavigationScreen_accessed_by_Group_RelationEntry" Schema="gui" Table="NavigationScreen_accessed_by_Groups" />
+    <EntitySet Name="NavigationEntry_accessed_by_Group_RelationEntry" EntityType="Model.Store.NavigationEntry_accessed_by_Group_RelationEntry" Schema="gui" Table="NavigationScreen_accessed_by_Groups" />
     <AssociationSet Name="FK_NavigationScreen_accessed_by_Groups_A" Association="Model.Store.FK_NavigationScreen_accessed_by_Groups_A" >
-      <End Role="NavigationScreen" EntitySet="NavigationScreen" />
-      <End Role="CollectionEntry" EntitySet="NavigationScreen_accessed_by_Group_RelationEntry" />
+      <End Role="NavigationScreen" EntitySet="NavigationEntry" />
+      <End Role="CollectionEntry" EntitySet="NavigationEntry_accessed_by_Group_RelationEntry" />
     </AssociationSet>
     <AssociationSet Name="FK_NavigationScreen_accessed_by_Groups_B" Association="Model.Store.FK_NavigationScreen_accessed_by_Groups_B" >
-      <End Role="CollectionEntry" EntitySet="NavigationScreen_accessed_by_Group_RelationEntry" />
+      <End Role="CollectionEntry" EntitySet="NavigationEntry_accessed_by_Group_RelationEntry" />
       <End Role="Groups" EntitySet="Group" />
     </AssociationSet>
     
@@ -1154,15 +1166,15 @@
       <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
     <AssociationSet Name="FK_NavigationScreen_has_Module" Association="Model.Store.FK_NavigationScreen_has_Module" >
-      <End Role="NavigationScreen" EntitySet="NavigationScreen" />
+      <End Role="NavigationScreen" EntitySet="NavigationEntry" />
       <End Role="Module" EntitySet="Module" />
     </AssociationSet>
     <AssociationSet Name="FK_NavigationScreen_was_ChangedBy" Association="Model.Store.FK_NavigationScreen_was_ChangedBy" >
-      <End Role="NavigationScreen" EntitySet="NavigationScreen" />
+      <End Role="NavigationScreen" EntitySet="NavigationEntry" />
       <End Role="ChangedBy" EntitySet="Identity" />
     </AssociationSet>
     <AssociationSet Name="FK_NavigationScreen_was_CreatedBy" Association="Model.Store.FK_NavigationScreen_was_CreatedBy" >
-      <End Role="NavigationScreen" EntitySet="NavigationScreen" />
+      <End Role="NavigationScreen" EntitySet="NavigationEntry" />
       <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
     <AssociationSet Name="FK_ObjectClass_has_AccessControlList" Association="Model.Store.FK_ObjectClass_has_AccessControlList" >
@@ -1198,8 +1210,8 @@
       <End Role="NSide" EntitySet="One_to_N_relations_N" />
     </AssociationSet>
     <AssociationSet Name="FK_Parent_navigates_to_Children" Association="Model.Store.FK_Parent_navigates_to_Children" >
-      <End Role="Parent" EntitySet="NavigationScreen" />
-      <End Role="Children" EntitySet="NavigationScreen" />
+      <End Role="Parent" EntitySet="NavigationEntry" />
+      <End Role="Children" EntitySet="NavigationEntry" />
     </AssociationSet>
     <AssociationSet Name="FK_Parent_of_Children" Association="Model.Store.FK_Parent_of_Children" >
       <End Role="Parent" EntitySet="RequiredParent" />
@@ -1290,7 +1302,7 @@
       <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
     <AssociationSet Name="FK_Screen_modeled_by_ViewModelDescriptor" Association="Model.Store.FK_Screen_modeled_by_ViewModelDescriptor" >
-      <End Role="Screen" EntitySet="NavigationScreen" />
+      <End Role="Screen" EntitySet="NavigationEntry" />
       <End Role="ViewModelDescriptor" EntitySet="ViewModelDescriptor" />
     </AssociationSet>
     <AssociationSet Name="FK_Search_has_RequestedEditorKind" Association="Model.Store.FK_Search_has_RequestedEditorKind" >
@@ -2322,7 +2334,14 @@
     <Property Name="Name" Type="nvarchar" MaxLength="1000" Nullable="true" />
   </EntityType>
 	
-  <EntityType Name="NavigationScreen">
+  <EntityType Name="NavigationAction">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="NavigationEntry">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -2338,6 +2357,13 @@
     <Property Name="CreatedOn" Type="datetime2" Nullable="false" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Title" Type="nvarchar" MaxLength="500" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="NavigationScreen">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="NavigationSearchScreen">
@@ -3140,7 +3166,7 @@
   </Association>
 
 	
-  <EntityType Name="NavigationScreen_accessed_by_Group_RelationEntry">
+  <EntityType Name="NavigationEntry_accessed_by_Group_RelationEntry">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -3152,8 +3178,8 @@
 
   <!-- A to CollectionEntry -->
   <Association Name="FK_NavigationScreen_accessed_by_Groups_A">
-    <End Role="NavigationScreen" Type="Model.Store.NavigationScreen" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.NavigationScreen_accessed_by_Group_RelationEntry" Multiplicity="*" />
+    <End Role="NavigationScreen" Type="Model.Store.NavigationEntry" Multiplicity="0..1" />
+    <End Role="CollectionEntry" Type="Model.Store.NavigationEntry_accessed_by_Group_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="NavigationScreen">
         <PropertyRef Name="ID" />
@@ -3167,7 +3193,7 @@
   <!-- B to CollectionEntry -->
   <Association Name="FK_NavigationScreen_accessed_by_Groups_B">
     <End Role="Groups" Type="Model.Store.Group" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.NavigationScreen_accessed_by_Group_RelationEntry" Multiplicity="*" />
+    <End Role="CollectionEntry" Type="Model.Store.NavigationEntry_accessed_by_Group_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Groups">
         <PropertyRef Name="ID" />
@@ -5014,7 +5040,7 @@
 
   <Association Name="FK_NavigationScreen_has_Module">
     <End Role="Module" Type="Model.Store.Module" Multiplicity="0..1" />
-    <End Role="NavigationScreen" Type="Model.Store.NavigationScreen" Multiplicity="*" />
+    <End Role="NavigationScreen" Type="Model.Store.NavigationEntry" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Module">
         <PropertyRef Name="ID" />
@@ -5028,7 +5054,7 @@
 
   <Association Name="FK_NavigationScreen_was_ChangedBy">
     <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <End Role="NavigationScreen" Type="Model.Store.NavigationScreen" Multiplicity="*" />
+    <End Role="NavigationScreen" Type="Model.Store.NavigationEntry" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ChangedBy">
         <PropertyRef Name="ID" />
@@ -5042,7 +5068,7 @@
 
   <Association Name="FK_NavigationScreen_was_CreatedBy">
     <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <End Role="NavigationScreen" Type="Model.Store.NavigationScreen" Multiplicity="*" />
+    <End Role="NavigationScreen" Type="Model.Store.NavigationEntry" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CreatedBy">
         <PropertyRef Name="ID" />
@@ -5167,8 +5193,8 @@
 
 
   <Association Name="FK_Parent_navigates_to_Children">
-    <End Role="Parent" Type="Model.Store.NavigationScreen" Multiplicity="0..1" />
-    <End Role="Children" Type="Model.Store.NavigationScreen" Multiplicity="*" />
+    <End Role="Parent" Type="Model.Store.NavigationEntry" Multiplicity="0..1" />
+    <End Role="Children" Type="Model.Store.NavigationEntry" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Parent">
         <PropertyRef Name="ID" />
@@ -5490,7 +5516,7 @@
 
   <Association Name="FK_Screen_modeled_by_ViewModelDescriptor">
     <End Role="ViewModelDescriptor" Type="Model.Store.ViewModelDescriptor" Multiplicity="0..1" />
-    <End Role="Screen" Type="Model.Store.NavigationScreen" Multiplicity="*" />
+    <End Role="Screen" Type="Model.Store.NavigationEntry" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ViewModelDescriptor">
         <PropertyRef Name="ID" />
@@ -6566,6 +6592,30 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_MonthFilterConfiguration">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NavigationAction_NavigationEntry_ID">
+    <End Role="A_NavigationEntry" Type="Model.Store.NavigationEntry" Multiplicity="1" />
+    <End Role="B_NavigationAction" Type="Model.Store.NavigationAction" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_NavigationEntry">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_NavigationAction">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NavigationScreen_NavigationEntry_ID">
+    <End Role="A_NavigationEntry" Type="Model.Store.NavigationEntry" Multiplicity="1" />
+    <End Role="B_NavigationScreen" Type="Model.Store.NavigationScreen" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_NavigationEntry">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_NavigationScreen">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>

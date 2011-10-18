@@ -45,7 +45,7 @@
     <EntitySet Name="Muhblah" EntityType="Model.Muhblah" />
     <EntitySet Name="N_to_M_relations_A" EntityType="Model.N_to_M_relations_A" />
     <EntitySet Name="N_to_M_relations_B" EntityType="Model.N_to_M_relations_B" />
-    <EntitySet Name="NavigationScreen" EntityType="Model.NavigationScreen" />
+    <EntitySet Name="NavigationEntry" EntityType="Model.NavigationEntry" />
     <EntitySet Name="One_to_N_relations_N" EntityType="Model.One_to_N_relations_N" />
     <EntitySet Name="One_to_N_relations_One" EntityType="Model.One_to_N_relations_One" />
     <EntitySet Name="OrderedNEnd" EntityType="Model.OrderedNEnd" />
@@ -128,14 +128,14 @@
       <End Role="TCO_ManyList_Role" EntitySet="TestCustomObject" />
       <End Role="CollectionEntry" EntitySet="Muhblah_has_TestCustomObject_RelationEntry" />
     </AssociationSet>
-    <EntitySet Name="NavigationScreen_accessed_by_Group_RelationEntry" EntityType="Model.NavigationScreen_accessed_by_Group_RelationEntry" />
+    <EntitySet Name="NavigationEntry_accessed_by_Group_RelationEntry" EntityType="Model.NavigationEntry_accessed_by_Group_RelationEntry" />
     <AssociationSet Name="FK_NavigationScreen_accessed_by_Groups_A" Association="Model.FK_NavigationScreen_accessed_by_Groups_A" >
-      <End Role="NavigationScreen" EntitySet="NavigationScreen" />
-      <End Role="CollectionEntry" EntitySet="NavigationScreen_accessed_by_Group_RelationEntry" />
+      <End Role="NavigationScreen" EntitySet="NavigationEntry" />
+      <End Role="CollectionEntry" EntitySet="NavigationEntry_accessed_by_Group_RelationEntry" />
     </AssociationSet>
     <AssociationSet Name="FK_NavigationScreen_accessed_by_Groups_B" Association="Model.FK_NavigationScreen_accessed_by_Groups_B" >
       <End Role="Groups" EntitySet="Group" />
-      <End Role="CollectionEntry" EntitySet="NavigationScreen_accessed_by_Group_RelationEntry" />
+      <End Role="CollectionEntry" EntitySet="NavigationEntry_accessed_by_Group_RelationEntry" />
     </AssociationSet>
     <EntitySet Name="ObjectClass_implements_Interface_RelationEntry" EntityType="Model.ObjectClass_implements_Interface_RelationEntry" />
     <AssociationSet Name="FK_ObjectClass_implements_ImplementsInterfaces_A" Association="Model.FK_ObjectClass_implements_ImplementsInterfaces_A" >
@@ -291,7 +291,7 @@
     </AssociationSet>
     <AssociationSet Name="FK_Application_has_RootScreen" Association="Model.FK_Application_has_RootScreen" >
       <End Role="Application" EntitySet="Application" />
-      <End Role="RootScreen" EntitySet="NavigationScreen" />
+      <End Role="RootScreen" EntitySet="NavigationEntry" />
     </AssociationSet>
     <AssociationSet Name="FK_Application_opens_a_WorkspaceViewModel" Association="Model.FK_Application_opens_a_WorkspaceViewModel" >
       <End Role="Application" EntitySet="Application" />
@@ -650,15 +650,15 @@
       <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
     <AssociationSet Name="FK_NavigationScreen_has_Module" Association="Model.FK_NavigationScreen_has_Module" >
-      <End Role="NavigationScreen" EntitySet="NavigationScreen" />
+      <End Role="NavigationScreen" EntitySet="NavigationEntry" />
       <End Role="Module" EntitySet="Module" />
     </AssociationSet>
     <AssociationSet Name="FK_NavigationScreen_was_ChangedBy" Association="Model.FK_NavigationScreen_was_ChangedBy" >
-      <End Role="NavigationScreen" EntitySet="NavigationScreen" />
+      <End Role="NavigationScreen" EntitySet="NavigationEntry" />
       <End Role="ChangedBy" EntitySet="Identity" />
     </AssociationSet>
     <AssociationSet Name="FK_NavigationScreen_was_CreatedBy" Association="Model.FK_NavigationScreen_was_CreatedBy" >
-      <End Role="NavigationScreen" EntitySet="NavigationScreen" />
+      <End Role="NavigationScreen" EntitySet="NavigationEntry" />
       <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
     <AssociationSet Name="FK_ObjectClass_has_AccessControlList" Association="Model.FK_ObjectClass_has_AccessControlList" >
@@ -694,8 +694,8 @@
       <End Role="NSide" EntitySet="One_to_N_relations_N" />
     </AssociationSet>
     <AssociationSet Name="FK_Parent_navigates_to_Children" Association="Model.FK_Parent_navigates_to_Children" >
-      <End Role="Parent" EntitySet="NavigationScreen" />
-      <End Role="Children" EntitySet="NavigationScreen" />
+      <End Role="Parent" EntitySet="NavigationEntry" />
+      <End Role="Children" EntitySet="NavigationEntry" />
     </AssociationSet>
     <AssociationSet Name="FK_Parent_of_Children" Association="Model.FK_Parent_of_Children" >
       <End Role="Parent" EntitySet="RequiredParent" />
@@ -786,19 +786,19 @@
       <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
     <AssociationSet Name="FK_Screen_modeled_by_ViewModelDescriptor" Association="Model.FK_Screen_modeled_by_ViewModelDescriptor" >
-      <End Role="Screen" EntitySet="NavigationScreen" />
+      <End Role="Screen" EntitySet="NavigationEntry" />
       <End Role="ViewModelDescriptor" EntitySet="ViewModelDescriptor" />
     </AssociationSet>
     <AssociationSet Name="FK_Search_has_RequestedEditorKind" Association="Model.FK_Search_has_RequestedEditorKind" >
-      <End Role="Search" EntitySet="NavigationScreen" />
+      <End Role="Search" EntitySet="NavigationEntry" />
       <End Role="RequestedEditorKind" EntitySet="ControlKind" />
     </AssociationSet>
     <AssociationSet Name="FK_Search_has_RequestedWorkspaceKind" Association="Model.FK_Search_has_RequestedWorkspaceKind" >
-      <End Role="Search" EntitySet="NavigationScreen" />
+      <End Role="Search" EntitySet="NavigationEntry" />
       <End Role="RequestedWorkspaceKind" EntitySet="ControlKind" />
     </AssociationSet>
     <AssociationSet Name="FK_SearchScreen_of_Type" Association="Model.FK_SearchScreen_of_Type" >
-      <End Role="SearchScreen" EntitySet="NavigationScreen" />
+      <End Role="SearchScreen" EntitySet="NavigationEntry" />
       <End Role="Type" EntitySet="DataType" />
     </AssociationSet>
     <AssociationSet Name="FK_Sequence_has_Module" Association="Model.FK_Sequence_has_Module" >
@@ -1760,7 +1760,7 @@
                         ToRole="CollectionEntry" />
     <Property Name="Name" Type="String" Nullable="true" MaxLength="1000"  />
   </EntityType>
-  <EntityType Name="NavigationScreen">
+  <EntityType Name="NavigationEntry" Abstract="true">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -2656,6 +2656,10 @@
   <EntityType Name="MonthFilterConfiguration" BaseType="Model.PropertyFilterConfiguration">
     <Property Name="IsCurrentMonthDefault" Type="Boolean" Nullable="true"  />
   </EntityType>
+  <EntityType Name="NavigationAction" BaseType="Model.NavigationEntry">
+  </EntityType>
+  <EntityType Name="NavigationScreen" BaseType="Model.NavigationEntry">
+  </EntityType>
   <EntityType Name="NavigationSearchScreen" BaseType="Model.NavigationScreen">
     <Property Name="AllowAddNew" Type="Boolean" Nullable="true"  />
     <Property Name="AllowDelete" Type="Boolean" Nullable="true"  />
@@ -3014,11 +3018,11 @@
   
   <!--
     Relation: FK_NavigationScreen_accessed_by_Groups
-    A: ZeroOrMore NavigationScreen as NavigationScreen
+    A: ZeroOrMore NavigationEntry as NavigationScreen
     B: ZeroOrMore Group as Groups
     Preferred Storage: Separate
   -->
-  <EntityType Name="NavigationScreen_accessed_by_Group_RelationEntry" >
+  <EntityType Name="NavigationEntry_accessed_by_Group_RelationEntry" >
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -3040,10 +3044,10 @@
   </EntityType>
   <Association Name="FK_NavigationScreen_accessed_by_Groups_A" >
     <End Role="NavigationScreen"
-         Type="Model.NavigationScreen" 
+         Type="Model.NavigationEntry" 
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
-         Type="Model.NavigationScreen_accessed_by_Group_RelationEntry"
+         Type="Model.NavigationEntry_accessed_by_Group_RelationEntry"
          Multiplicity="*" />
   </Association>
   <Association Name="FK_NavigationScreen_accessed_by_Groups_B" >
@@ -3051,7 +3055,7 @@
          Type="Model.Group" 
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
-         Type="Model.NavigationScreen_accessed_by_Group_RelationEntry"
+         Type="Model.NavigationEntry_accessed_by_Group_RelationEntry"
          Multiplicity="*" />
   </Association>
   
@@ -4408,7 +4412,7 @@
   </Association>
   <Association Name="FK_NavigationScreen_has_Module" >
     <End Role="NavigationScreen"
-         Type="Model.NavigationScreen" 
+         Type="Model.NavigationEntry" 
          Multiplicity="*" />
     <End Role="Module"
          Type="Model.Module" 
@@ -4416,7 +4420,7 @@
   </Association>
   <Association Name="FK_NavigationScreen_was_ChangedBy" >
     <End Role="NavigationScreen"
-         Type="Model.NavigationScreen" 
+         Type="Model.NavigationEntry" 
          Multiplicity="*" />
     <End Role="ChangedBy"
          Type="Model.Identity" 
@@ -4424,7 +4428,7 @@
   </Association>
   <Association Name="FK_NavigationScreen_was_CreatedBy" >
     <End Role="NavigationScreen"
-         Type="Model.NavigationScreen" 
+         Type="Model.NavigationEntry" 
          Multiplicity="*" />
     <End Role="CreatedBy"
          Type="Model.Identity" 
@@ -4496,10 +4500,10 @@
   </Association>
   <Association Name="FK_Parent_navigates_to_Children" >
     <End Role="Parent"
-         Type="Model.NavigationScreen" 
+         Type="Model.NavigationEntry" 
          Multiplicity="0..1" />
     <End Role="Children"
-         Type="Model.NavigationScreen" 
+         Type="Model.NavigationEntry" 
          Multiplicity="*" />
   </Association>
   <Association Name="FK_Parent_of_Children" >
@@ -4680,7 +4684,7 @@
   </Association>
   <Association Name="FK_Screen_modeled_by_ViewModelDescriptor" >
     <End Role="Screen"
-         Type="Model.NavigationScreen" 
+         Type="Model.NavigationEntry" 
          Multiplicity="*" />
     <End Role="ViewModelDescriptor"
          Type="Model.ViewModelDescriptor" 

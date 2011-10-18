@@ -14,40 +14,37 @@ namespace Kistl.App.GUI
     using Kistl.API;
     using Kistl.DalProvider.Base.RelationWrappers;
 
-    using Kistl.API.Server;
-    using Kistl.DalProvider.Ef;
-    using System.Data.Objects;
-    using System.Data.Objects.DataClasses;
+    using Kistl.DalProvider.Base;
+    using Kistl.DalProvider.Memory;
 
     /// <summary>
     /// 
     /// </summary>
-    [EdmEntityType(NamespaceName="Model", Name="NavigationScreen")]
-    [System.Diagnostics.DebuggerDisplay("NavigationScreen")]
-    public class NavigationScreenEfImpl : Kistl.App.GUI.NavigationEntryEfImpl, NavigationScreen
+    [System.Diagnostics.DebuggerDisplay("NavigationAction")]
+    public class NavigationActionMemoryImpl : Kistl.App.GUI.NavigationEntryMemoryImpl, NavigationAction
     {
         [Obsolete]
-        public NavigationScreenEfImpl()
+        public NavigationActionMemoryImpl()
             : base(null)
         {
         }
 
-        public NavigationScreenEfImpl(Func<IFrozenContext> lazyCtx)
+        public NavigationActionMemoryImpl(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
         }
 
         public override Type GetImplementedInterface()
         {
-            return typeof(NavigationScreen);
+            return typeof(NavigationAction);
         }
 
         public override void ApplyChangesFrom(IPersistenceObject obj)
         {
             base.ApplyChangesFrom(obj);
-            var other = (NavigationScreen)obj;
-            var otherImpl = (NavigationScreenEfImpl)obj;
-            var me = (NavigationScreen)this;
+            var other = (NavigationAction)obj;
+            var otherImpl = (NavigationActionMemoryImpl)obj;
+            var me = (NavigationAction)this;
 
         }
 
@@ -67,77 +64,54 @@ namespace Kistl.App.GUI
             // fix direct object references
         }
         #region Kistl.Generator.Templates.ObjectClasses.CustomTypeDescriptor
-        private static readonly object _propertiesLock = new object();
-        private static System.ComponentModel.PropertyDescriptor[] _properties;
-
-        private void _InitializePropertyDescriptors(Func<IFrozenContext> lazyCtx)
-        {
-            if (_properties != null) return;
-            lock (_propertiesLock)
-            {
-                // recheck for a lost race after aquiring the lock
-                if (_properties != null) return;
-
-                _properties = new System.ComponentModel.PropertyDescriptor[] {
-                    // position columns
-                };
-            }
-        }
-
-        protected override void CollectProperties(Func<IFrozenContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
-        {
-            base.CollectProperties(lazyCtx, props);
-            _InitializePropertyDescriptors(lazyCtx);
-            props.AddRange(_properties);
-        }
         #endregion // Kistl.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         #region Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 
         [System.Diagnostics.DebuggerHidden()]
-        [EventBasedMethod("OnToString_NavigationScreen")]
+        [EventBasedMethod("OnToString_NavigationAction")]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
             e.Result = base.ToString();
-            if (OnToString_NavigationScreen != null)
+            if (OnToString_NavigationAction != null)
             {
-                OnToString_NavigationScreen(this, e);
+                OnToString_NavigationAction(this, e);
             }
             return e.Result;
         }
-        public static event ToStringHandler<NavigationScreen> OnToString_NavigationScreen;
+        public static event ToStringHandler<NavigationAction> OnToString_NavigationAction;
 
-        [EventBasedMethod("OnPreSave_NavigationScreen")]
+        [EventBasedMethod("OnPreSave_NavigationAction")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_NavigationScreen != null) OnPreSave_NavigationScreen(this);
+            if (OnPreSave_NavigationAction != null) OnPreSave_NavigationAction(this);
         }
-        public static event ObjectEventHandler<NavigationScreen> OnPreSave_NavigationScreen;
+        public static event ObjectEventHandler<NavigationAction> OnPreSave_NavigationAction;
 
-        [EventBasedMethod("OnPostSave_NavigationScreen")]
+        [EventBasedMethod("OnPostSave_NavigationAction")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_NavigationScreen != null) OnPostSave_NavigationScreen(this);
+            if (OnPostSave_NavigationAction != null) OnPostSave_NavigationAction(this);
         }
-        public static event ObjectEventHandler<NavigationScreen> OnPostSave_NavigationScreen;
+        public static event ObjectEventHandler<NavigationAction> OnPostSave_NavigationAction;
 
-        [EventBasedMethod("OnCreated_NavigationScreen")]
+        [EventBasedMethod("OnCreated_NavigationAction")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_NavigationScreen != null) OnCreated_NavigationScreen(this);
+            if (OnCreated_NavigationAction != null) OnCreated_NavigationAction(this);
         }
-        public static event ObjectEventHandler<NavigationScreen> OnCreated_NavigationScreen;
+        public static event ObjectEventHandler<NavigationAction> OnCreated_NavigationAction;
 
-        [EventBasedMethod("OnDeleting_NavigationScreen")]
+        [EventBasedMethod("OnDeleting_NavigationAction")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_NavigationScreen != null) OnDeleting_NavigationScreen(this);
+            if (OnDeleting_NavigationAction != null) OnDeleting_NavigationAction(this);
         }
-        public static event ObjectEventHandler<NavigationScreen> OnDeleting_NavigationScreen;
+        public static event ObjectEventHandler<NavigationAction> OnDeleting_NavigationAction;
 
         #endregion // Kistl.Generator.Templates.ObjectClasses.DefaultMethods
 

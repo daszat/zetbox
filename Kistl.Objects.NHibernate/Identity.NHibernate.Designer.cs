@@ -663,14 +663,14 @@ namespace Kistl.App.Base
 
             // Follow NavigationScreen_was_ChangedBy
             result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.GUI.NavigationScreen>()
+                .OfType<Kistl.App.GUI.NavigationEntry>()
                 .Where(child => child.ChangedBy == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
 
             // Follow NavigationScreen_was_CreatedBy
             result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.GUI.NavigationScreen>()
+                .OfType<Kistl.App.GUI.NavigationEntry>()
                 .Where(child => child.CreatedBy == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());

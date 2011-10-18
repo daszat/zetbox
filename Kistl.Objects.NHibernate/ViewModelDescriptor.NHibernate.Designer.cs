@@ -1202,7 +1202,7 @@ namespace Kistl.App.GUI
 
             // Follow Screen_modeled_by_ViewModelDescriptor
             result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.GUI.NavigationScreen>()
+                .OfType<Kistl.App.GUI.NavigationEntry>()
                 .Where(child => child.ViewModelDescriptor == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());

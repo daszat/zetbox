@@ -16,9 +16,9 @@ namespace Kistl.Client.Presentables.GUI
     public class NavigationScreenViewModel
         : DataObjectViewModel
     {
-        public new delegate NavigationScreenViewModel Factory(IKistlContext dataCtx, ViewModel parent, NavigationScreen screen);
+        public new delegate NavigationScreenViewModel Factory(IKistlContext dataCtx, ViewModel parent, NavigationEntry screen);
 
-        public static NavigationScreenViewModel Fetch(IViewModelFactory ModelFactory, IKistlContext dataCtx, ViewModel parent, NavigationScreen screen)
+        public static NavigationScreenViewModel Fetch(IViewModelFactory ModelFactory, IKistlContext dataCtx, ViewModel parent, NavigationEntry screen)
         {
             if (ModelFactory == null) throw new ArgumentNullException("ModelFactory");
             if (screen == null) throw new ArgumentNullException("screen");
@@ -45,7 +45,7 @@ namespace Kistl.Client.Presentables.GUI
             });
         }
 
-        private readonly NavigationScreen _screen;
+        private readonly NavigationEntry _screen;
         private NavigationScreenViewModel _parent;
 
         private NavigatorViewModel _displayer = null;
@@ -102,7 +102,7 @@ namespace Kistl.Client.Presentables.GUI
             }
         }
 
-        public NavigationScreen Screen { get { return _screen; } }
+        public NavigationEntry Screen { get { return _screen; } }
 
         public Guid ExportGuid { get { return _screen.ExportGuid; } }
 

@@ -2064,16 +2064,16 @@ namespace Kistl.App.GUI
 {
 	using Kistl.App.Base;
     // BEGIN Kistl.Generator.Templates.CollectionEntries.RelationEntry
-    [System.Diagnostics.DebuggerDisplay("NavigationScreen_accessed_by_Group_RelationEntryMemoryImpl")]
-    public class NavigationScreen_accessed_by_Group_RelationEntryMemoryImpl : Kistl.DalProvider.Memory.RelationEntryMemoryImpl<Kistl.App.GUI.NavigationScreen, Kistl.App.GUI.NavigationScreenMemoryImpl, Kistl.App.Base.Group, Kistl.App.Base.GroupMemoryImpl>, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable, NavigationScreen_accessed_by_Group_RelationEntry
+    [System.Diagnostics.DebuggerDisplay("NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl")]
+    public class NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl : Kistl.DalProvider.Memory.RelationEntryMemoryImpl<Kistl.App.GUI.NavigationEntry, Kistl.App.GUI.NavigationEntryMemoryImpl, Kistl.App.Base.Group, Kistl.App.Base.GroupMemoryImpl>, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable, NavigationEntry_accessed_by_Group_RelationEntry
     {
         [Obsolete]
-        public NavigationScreen_accessed_by_Group_RelationEntryMemoryImpl()
+        public NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl()
             : base(null)
         {
         }
 
-        public NavigationScreen_accessed_by_Group_RelationEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
+        public NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
         }
@@ -2145,7 +2145,7 @@ namespace Kistl.App.GUI
             set
             {
                 // settor will do checking for us
-                A = (Kistl.App.GUI.NavigationScreen)value;
+                A = (Kistl.App.GUI.NavigationEntry)value;
             }
         }
 
@@ -2170,7 +2170,7 @@ namespace Kistl.App.GUI
         /// </summary>
         // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=Kistl.App.GUI.NavigationScreen; moduleNamespace=Kistl.App.GUI;
+        // referencedInterface=Kistl.App.GUI.NavigationEntry; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable; does not call events
@@ -2179,10 +2179,10 @@ namespace Kistl.App.GUI
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Kistl.Generator.Templates.Properties.DelegatingProperty
-        public Kistl.App.GUI.NavigationScreen A
+        public Kistl.App.GUI.NavigationEntry A
         {
             get { return AImpl; }
-            set { AImpl = (Kistl.App.GUI.NavigationScreenMemoryImpl)value; }
+            set { AImpl = (Kistl.App.GUI.NavigationEntryMemoryImpl)value; }
         }
         // END Kistl.Generator.Templates.Properties.DelegatingProperty
 
@@ -2192,14 +2192,14 @@ namespace Kistl.App.GUI
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        internal Kistl.App.GUI.NavigationScreenMemoryImpl AImpl
+        internal Kistl.App.GUI.NavigationEntryMemoryImpl AImpl
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.GUI.NavigationScreenMemoryImpl __value;
+                Kistl.App.GUI.NavigationEntryMemoryImpl __value;
                 if (_fk_A.HasValue)
-                    __value = (Kistl.App.GUI.NavigationScreenMemoryImpl)Context.Find<Kistl.App.GUI.NavigationScreen>(_fk_A.Value);
+                    __value = (Kistl.App.GUI.NavigationEntryMemoryImpl)Context.Find<Kistl.App.GUI.NavigationEntry>(_fk_A.Value);
                 else
                     __value = null;
 
@@ -2378,14 +2378,14 @@ namespace Kistl.App.GUI
 
         public override Type GetImplementedInterface()
         {
-            return typeof(NavigationScreen_accessed_by_Group_RelationEntry);
+            return typeof(NavigationEntry_accessed_by_Group_RelationEntry);
         }
 
         public override void ApplyChangesFrom(IPersistenceObject obj)
         {
             base.ApplyChangesFrom(obj);
-            var other = (NavigationScreen_accessed_by_Group_RelationEntryMemoryImpl)obj;
-            var me = (NavigationScreen_accessed_by_Group_RelationEntryMemoryImpl)this;
+            var other = (NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl)obj;
+            var me = (NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl)this;
 
         }
 
@@ -2397,10 +2397,10 @@ namespace Kistl.App.GUI
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_guid_A.HasValue)
-                AImpl = (Kistl.App.GUI.NavigationScreenMemoryImpl)Context.FindPersistenceObject<Kistl.App.GUI.NavigationScreen>(_fk_guid_A.Value);
+                AImpl = (Kistl.App.GUI.NavigationEntryMemoryImpl)Context.FindPersistenceObject<Kistl.App.GUI.NavigationEntry>(_fk_guid_A.Value);
             else
             if (_fk_A.HasValue)
-                AImpl = (Kistl.App.GUI.NavigationScreenMemoryImpl)Context.Find<Kistl.App.GUI.NavigationScreen>(_fk_A.Value);
+                AImpl = (Kistl.App.GUI.NavigationEntryMemoryImpl)Context.Find<Kistl.App.GUI.NavigationEntry>(_fk_A.Value);
             else
                 AImpl = null;
 

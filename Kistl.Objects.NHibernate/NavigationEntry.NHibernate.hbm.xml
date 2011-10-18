@@ -1,18 +1,18 @@
 <?xml version="1.0"?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
                    default-cascade="save-update" >
-    <class name="Kistl.App.GUI.NavigationScreenNHibernateImpl+NavigationScreenProxy, Kistl.Objects.NHibernateImpl"
-           proxy="Kistl.App.GUI.NavigationScreenNHibernateImpl+NavigationScreenProxy, Kistl.Objects.NHibernateImpl"
+    <class name="Kistl.App.GUI.NavigationEntryNHibernateImpl+NavigationEntryProxy, Kistl.Objects.NHibernateImpl"
+           proxy="Kistl.App.GUI.NavigationEntryNHibernateImpl+NavigationEntryProxy, Kistl.Objects.NHibernateImpl"
            schema="`gui`"
-           table="`NavigationScreens`"
-           abstract="false"
+           table="`NavigationEntries`"
+           abstract="true"
            dynamic-update="true"
            optimistic-lock="dirty">
 
         <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
             <generator class="native">
                 <param name="schema">`gui`</param>
-                <param name="sequence">`NavigationScreens_ID_seq`</param>
+                <param name="sequence">`NavigationEntries_ID_seq`</param>
             </generator>
         </id>
 
@@ -27,7 +27,7 @@
 <!-- ObjectReferenceProperty -->
         <set name="Children" batch-size="100" inverse="true" >
             <key column="`fk_Parent`" />
-            <one-to-many class="Kistl.App.GUI.NavigationScreenNHibernateImpl+NavigationScreenProxy, Kistl.Objects.NHibernateImpl" />
+            <one-to-many class="Kistl.App.GUI.NavigationEntryNHibernateImpl+NavigationEntryProxy, Kistl.Objects.NHibernateImpl" />
         </set>
 
         <!-- ValueTypeProperty isValue -->
@@ -47,18 +47,18 @@
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
-        <!-- rel=NavigationScreen_accessed_by_Group_RelationEntry -->
+        <!-- rel=NavigationEntry_accessed_by_Group_RelationEntry -->
         <!-- relEnd=NavigationScreen otherEnd=Groups -->
         <set name="Groups" table="`NavigationScreen_accessed_by_Groups`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
             <key column="`fk_NavigationScreen`" />
-            <one-to-many class="Kistl.App.GUI.NavigationScreen_accessed_by_Group_RelationEntryNHibernateImpl+NavigationScreen_accessed_by_Group_RelationEntryProxy,Kistl.Objects.NHibernateImpl" />
+            <one-to-many class="Kistl.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl+NavigationEntry_accessed_by_Group_RelationEntryProxy,Kistl.Objects.NHibernateImpl" />
         </set>
 
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Module" column="`fk_Module`" class="Kistl.App.Base.ModuleNHibernateImpl+ModuleProxy, Kistl.Objects.NHibernateImpl" />
 
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="Parent" column="`fk_Parent`" class="Kistl.App.GUI.NavigationScreenNHibernateImpl+NavigationScreenProxy, Kistl.Objects.NHibernateImpl" />
+        <many-to-one name="Parent" column="`fk_Parent`" class="Kistl.App.GUI.NavigationEntryNHibernateImpl+NavigationEntryProxy, Kistl.Objects.NHibernateImpl" />
         <property name="Children_pos" column="`fk_Parent_pos`" />
 
         <!-- ValueTypeProperty isValue -->
@@ -70,6 +70,32 @@
 
 
         <!-- define the subclasses -->
+        <joined-subclass name="Kistl.App.GUI.NavigationActionNHibernateImpl+NavigationActionProxy, Kistl.Objects.NHibernateImpl"
+                         proxy="Kistl.App.GUI.NavigationActionNHibernateImpl+NavigationActionProxy, Kistl.Objects.NHibernateImpl"
+                         schema="`gui`"
+                         table="`NavigationActions`"
+                         dynamic-update="true">
+            
+            <!-- base class reference -->
+            <key column="`ID`" />
+
+            <!-- define the properties -->
+
+            <!-- define the subclasses -->
+
+        </joined-subclass>
+        <joined-subclass name="Kistl.App.GUI.NavigationScreenNHibernateImpl+NavigationScreenProxy, Kistl.Objects.NHibernateImpl"
+                         proxy="Kistl.App.GUI.NavigationScreenNHibernateImpl+NavigationScreenProxy, Kistl.Objects.NHibernateImpl"
+                         schema="`gui`"
+                         table="`NavigationScreens`"
+                         dynamic-update="true">
+            
+            <!-- base class reference -->
+            <key column="`ID`" />
+
+            <!-- define the properties -->
+
+            <!-- define the subclasses -->
         <joined-subclass name="Kistl.App.GUI.NavigationSearchScreenNHibernateImpl+NavigationSearchScreenProxy, Kistl.Objects.NHibernateImpl"
                          proxy="Kistl.App.GUI.NavigationSearchScreenNHibernateImpl+NavigationSearchScreenProxy, Kistl.Objects.NHibernateImpl"
                          schema="`gui`"
@@ -151,6 +177,8 @@
                   optimistic-lock="false"/>
 
             <!-- define the subclasses -->
+
+        </joined-subclass>
 
         </joined-subclass>
 

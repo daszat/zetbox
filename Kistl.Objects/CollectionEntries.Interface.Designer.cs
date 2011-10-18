@@ -104,7 +104,7 @@ namespace Kistl.App.GUI
     /// <summary>
     /// ObjectCollectionEntry for These Groups are allowed to see this Screen
     /// </summary>
-    public interface NavigationScreen_accessed_by_Group_RelationEntry : IRelationEntry<NavigationScreen, Group> 
+    public interface NavigationEntry_accessed_by_Group_RelationEntry : IRelationEntry<NavigationEntry, Group> 
     {
 
     }

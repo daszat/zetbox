@@ -2240,17 +2240,17 @@ namespace Kistl.App.GUI
 {
 	using Kistl.App.Base;
     // BEGIN Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
-    [EdmEntityType(NamespaceName="Model", Name="NavigationScreen_accessed_by_Group_RelationEntry")]
-    [System.Diagnostics.DebuggerDisplay("NavigationScreen_accessed_by_Group_RelationEntryEfImpl")]
-    public class NavigationScreen_accessed_by_Group_RelationEntryEfImpl : Kistl.DalProvider.Ef.RelationEntryEfImpl<Kistl.App.GUI.NavigationScreen, Kistl.App.GUI.NavigationScreenEfImpl, Kistl.App.Base.Group, Kistl.App.Base.GroupEfImpl>, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable, NavigationScreen_accessed_by_Group_RelationEntry
+    [EdmEntityType(NamespaceName="Model", Name="NavigationEntry_accessed_by_Group_RelationEntry")]
+    [System.Diagnostics.DebuggerDisplay("NavigationEntry_accessed_by_Group_RelationEntryEfImpl")]
+    public class NavigationEntry_accessed_by_Group_RelationEntryEfImpl : Kistl.DalProvider.Ef.RelationEntryEfImpl<Kistl.App.GUI.NavigationEntry, Kistl.App.GUI.NavigationEntryEfImpl, Kistl.App.Base.Group, Kistl.App.Base.GroupEfImpl>, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable, NavigationEntry_accessed_by_Group_RelationEntry
     {
         [Obsolete]
-        public NavigationScreen_accessed_by_Group_RelationEntryEfImpl()
+        public NavigationEntry_accessed_by_Group_RelationEntryEfImpl()
             : base(null)
         {
         }
 
-        public NavigationScreen_accessed_by_Group_RelationEntryEfImpl(Func<IFrozenContext> lazyCtx)
+        public NavigationEntry_accessed_by_Group_RelationEntryEfImpl(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
         }
@@ -2326,7 +2326,7 @@ namespace Kistl.App.GUI
             set
             {
                 // settor will do checking for us
-                A = (Kistl.App.GUI.NavigationScreen)value;
+                A = (Kistl.App.GUI.NavigationEntry)value;
             }
         }
 
@@ -2351,7 +2351,7 @@ namespace Kistl.App.GUI
         /// </summary>
         // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=Kistl.App.GUI.NavigationScreen; moduleNamespace=Kistl.App.GUI;
+        // referencedInterface=Kistl.App.GUI.NavigationEntry; moduleNamespace=Kistl.App.GUI;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable
@@ -2359,10 +2359,10 @@ namespace Kistl.App.GUI
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.GUI.NavigationScreen A
+        public Kistl.App.GUI.NavigationEntry A
         {
             get { return AImpl; }
-            set { AImpl = (Kistl.App.GUI.NavigationScreenEfImpl)value; }
+            set { AImpl = (Kistl.App.GUI.NavigationEntryEfImpl)value; }
         }
 
         private int? _fk_A;
@@ -2371,14 +2371,14 @@ namespace Kistl.App.GUI
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_NavigationScreen_accessed_by_Groups_A", "NavigationScreen")]
-        public Kistl.App.GUI.NavigationScreenEfImpl AImpl
+        public Kistl.App.GUI.NavigationEntryEfImpl AImpl
         {
             get
             {
                 if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.GUI.NavigationScreenEfImpl __value;
-                EntityReference<Kistl.App.GUI.NavigationScreenEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.NavigationScreenEfImpl>(
+                Kistl.App.GUI.NavigationEntryEfImpl __value;
+                EntityReference<Kistl.App.GUI.NavigationEntryEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.NavigationEntryEfImpl>(
                         "Model.FK_NavigationScreen_accessed_by_Groups_A",
                         "NavigationScreen");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -2395,8 +2395,8 @@ namespace Kistl.App.GUI
                 if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
 
-                EntityReference<Kistl.App.GUI.NavigationScreenEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.NavigationScreenEfImpl>(
+                EntityReference<Kistl.App.GUI.NavigationEntryEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.GUI.NavigationEntryEfImpl>(
                         "Model.FK_NavigationScreen_accessed_by_Groups_A",
                         "NavigationScreen");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -2404,14 +2404,14 @@ namespace Kistl.App.GUI
                 {
                     r.Load();
                 }
-                Kistl.App.GUI.NavigationScreenEfImpl __oldValue = (Kistl.App.GUI.NavigationScreenEfImpl)r.Value;
-                Kistl.App.GUI.NavigationScreenEfImpl __newValue = (Kistl.App.GUI.NavigationScreenEfImpl)value;
+                Kistl.App.GUI.NavigationEntryEfImpl __oldValue = (Kistl.App.GUI.NavigationEntryEfImpl)r.Value;
+                Kistl.App.GUI.NavigationEntryEfImpl __newValue = (Kistl.App.GUI.NavigationEntryEfImpl)value;
 
                 // Changing Event fires before anything is touched
                 // navigators may not be notified to entity framework
                 NotifyPropertyChanging("A", null, __oldValue, __newValue);
 
-                r.Value = (Kistl.App.GUI.NavigationScreenEfImpl)__newValue;
+                r.Value = (Kistl.App.GUI.NavigationEntryEfImpl)__newValue;
 
                 // everything is done. fire the Changed event
                 // navigators may not be notified to entity framework
@@ -2505,7 +2505,7 @@ namespace Kistl.App.GUI
             if (!CurrentAccessRights.HasReadRights()) return;
             BinarySerializer.ToStream(this._ExportGuid, binStream);
             {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.GUI.NavigationScreenEfImpl>("Model.FK_NavigationScreen_accessed_by_Groups_A", "NavigationScreen").EntityKey;
+                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.GUI.NavigationEntryEfImpl>("Model.FK_NavigationScreen_accessed_by_Groups_A", "NavigationScreen").EntityKey;
                 BinarySerializer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, binStream);
             }
 			if (auxObjects != null) {
@@ -2539,7 +2539,7 @@ namespace Kistl.App.GUI
             if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "");
             {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.GUI.NavigationScreenEfImpl>("Model.FK_NavigationScreen_accessed_by_Groups_A", "NavigationScreen").EntityKey;
+                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.GUI.NavigationEntryEfImpl>("Model.FK_NavigationScreen_accessed_by_Groups_A", "NavigationScreen").EntityKey;
                 XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "A", "Kistl.App.GUI");
             }
             {
@@ -2584,14 +2584,14 @@ namespace Kistl.App.GUI
 
         public override Type GetImplementedInterface()
         {
-            return typeof(NavigationScreen_accessed_by_Group_RelationEntry);
+            return typeof(NavigationEntry_accessed_by_Group_RelationEntry);
         }
 
         public override void ApplyChangesFrom(IPersistenceObject obj)
         {
             base.ApplyChangesFrom(obj);
-            var other = (NavigationScreen_accessed_by_Group_RelationEntryEfImpl)obj;
-            var me = (NavigationScreen_accessed_by_Group_RelationEntryEfImpl)this;
+            var other = (NavigationEntry_accessed_by_Group_RelationEntryEfImpl)obj;
+            var me = (NavigationEntry_accessed_by_Group_RelationEntryEfImpl)this;
 
             me._fk_A = other._fk_A;
             me._fk_B = other._fk_B;
@@ -2605,10 +2605,10 @@ namespace Kistl.App.GUI
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_guid_A.HasValue)
-                AImpl = (Kistl.App.GUI.NavigationScreenEfImpl)Context.FindPersistenceObject<Kistl.App.GUI.NavigationScreen>(_fk_guid_A.Value);
+                AImpl = (Kistl.App.GUI.NavigationEntryEfImpl)Context.FindPersistenceObject<Kistl.App.GUI.NavigationEntry>(_fk_guid_A.Value);
             else
             if (_fk_A.HasValue)
-                AImpl = (Kistl.App.GUI.NavigationScreenEfImpl)Context.Find<Kistl.App.GUI.NavigationScreen>(_fk_A.Value);
+                AImpl = (Kistl.App.GUI.NavigationEntryEfImpl)Context.Find<Kistl.App.GUI.NavigationEntry>(_fk_A.Value);
             else
                 AImpl = null;
 

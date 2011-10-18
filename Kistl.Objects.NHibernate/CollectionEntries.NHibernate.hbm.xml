@@ -113,8 +113,8 @@
         <many-to-one name="B"
                      column="`fk_BSide`" />
     </class>
-    <class name="Kistl.App.GUI.NavigationScreen_accessed_by_Group_RelationEntryNHibernateImpl+NavigationScreen_accessed_by_Group_RelationEntryProxy"
-           proxy="Kistl.App.GUI.NavigationScreen_accessed_by_Group_RelationEntryNHibernateImpl+NavigationScreen_accessed_by_Group_RelationEntryProxy"
+    <class name="Kistl.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl+NavigationEntry_accessed_by_Group_RelationEntryProxy"
+           proxy="Kistl.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl+NavigationEntry_accessed_by_Group_RelationEntryProxy"
            table="`NavigationScreen_accessed_by_Groups`"
            schema="`gui`" >
 

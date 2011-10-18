@@ -979,7 +979,7 @@ namespace Kistl.App.Base
 
             // Follow NavigationScreen_has_Module
             result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.GUI.NavigationScreen>()
+                .OfType<Kistl.App.GUI.NavigationEntry>()
                 .Where(child => child.Module == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());

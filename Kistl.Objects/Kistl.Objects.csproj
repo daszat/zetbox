@@ -170,6 +170,8 @@
     <Compile Include="Muhblah.Interface.Designer.cs" />
     <Compile Include="N_to_M_relations_A.Interface.Designer.cs" />
     <Compile Include="N_to_M_relations_B.Interface.Designer.cs" />
+    <Compile Include="NavigationAction.Interface.Designer.cs" />
+    <Compile Include="NavigationEntry.Interface.Designer.cs" />
     <Compile Include="NavigationScreen.Interface.Designer.cs" />
     <Compile Include="NavigationSearchScreen.Interface.Designer.cs" />
     <Compile Include="NewGuidDefaultValue.Interface.Designer.cs" />

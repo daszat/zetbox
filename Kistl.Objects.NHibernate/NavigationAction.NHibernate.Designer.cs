@@ -21,41 +21,41 @@ namespace Kistl.App.GUI
     /// <summary>
     /// 
     /// </summary>
-    [System.Diagnostics.DebuggerDisplay("NavigationScreen")]
-    public class NavigationScreenNHibernateImpl : Kistl.App.GUI.NavigationEntryNHibernateImpl, NavigationScreen
+    [System.Diagnostics.DebuggerDisplay("NavigationAction")]
+    public class NavigationActionNHibernateImpl : Kistl.App.GUI.NavigationEntryNHibernateImpl, NavigationAction
     {
-        public NavigationScreenNHibernateImpl()
+        public NavigationActionNHibernateImpl()
             : this(null)
         {
         }
 
         /// <summary>Create a new unattached instance</summary>
-        public NavigationScreenNHibernateImpl(Func<IFrozenContext> lazyCtx)
-            : this(lazyCtx, new NavigationScreenProxy())
+        public NavigationActionNHibernateImpl(Func<IFrozenContext> lazyCtx)
+            : this(lazyCtx, new NavigationActionProxy())
         {
         }
 
         /// <summary>Create a instance, wrapping the specified proxy</summary>
-        public NavigationScreenNHibernateImpl(Func<IFrozenContext> lazyCtx, NavigationScreenProxy proxy)
+        public NavigationActionNHibernateImpl(Func<IFrozenContext> lazyCtx, NavigationActionProxy proxy)
             : base(lazyCtx, proxy) // pass proxy to parent
         {
             this.Proxy = proxy;
         }
 
         /// <summary>the NHibernate proxy of the represented entity</summary>
-        internal new readonly NavigationScreenProxy Proxy;
+        internal new readonly NavigationActionProxy Proxy;
 
         public override Type GetImplementedInterface()
         {
-            return typeof(NavigationScreen);
+            return typeof(NavigationAction);
         }
 
         public override void ApplyChangesFrom(IPersistenceObject obj)
         {
             base.ApplyChangesFrom(obj);
-            var other = (NavigationScreen)obj;
-            var otherImpl = (NavigationScreenNHibernateImpl)obj;
-            var me = (NavigationScreen)this;
+            var other = (NavigationAction)obj;
+            var otherImpl = (NavigationActionNHibernateImpl)obj;
+            var me = (NavigationAction)this;
 
         }
 
@@ -76,77 +76,54 @@ namespace Kistl.App.GUI
             // fix direct object references
         }
         #region Kistl.Generator.Templates.ObjectClasses.CustomTypeDescriptor
-        private static readonly object _propertiesLock = new object();
-        private static System.ComponentModel.PropertyDescriptor[] _properties;
-
-        private void _InitializePropertyDescriptors(Func<IFrozenContext> lazyCtx)
-        {
-            if (_properties != null) return;
-            lock (_propertiesLock)
-            {
-                // recheck for a lost race after aquiring the lock
-                if (_properties != null) return;
-
-                _properties = new System.ComponentModel.PropertyDescriptor[] {
-                    // position columns
-                };
-            }
-        }
-
-        protected override void CollectProperties(Func<IFrozenContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
-        {
-            base.CollectProperties(lazyCtx, props);
-            _InitializePropertyDescriptors(lazyCtx);
-            props.AddRange(_properties);
-        }
         #endregion // Kistl.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         #region Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
 
         [System.Diagnostics.DebuggerHidden()]
-        [EventBasedMethod("OnToString_NavigationScreen")]
+        [EventBasedMethod("OnToString_NavigationAction")]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
             e.Result = base.ToString();
-            if (OnToString_NavigationScreen != null)
+            if (OnToString_NavigationAction != null)
             {
-                OnToString_NavigationScreen(this, e);
+                OnToString_NavigationAction(this, e);
             }
             return e.Result;
         }
-        public static event ToStringHandler<NavigationScreen> OnToString_NavigationScreen;
+        public static event ToStringHandler<NavigationAction> OnToString_NavigationAction;
 
-        [EventBasedMethod("OnPreSave_NavigationScreen")]
+        [EventBasedMethod("OnPreSave_NavigationAction")]
         public override void NotifyPreSave()
         {
             base.NotifyPreSave();
-            if (OnPreSave_NavigationScreen != null) OnPreSave_NavigationScreen(this);
+            if (OnPreSave_NavigationAction != null) OnPreSave_NavigationAction(this);
         }
-        public static event ObjectEventHandler<NavigationScreen> OnPreSave_NavigationScreen;
+        public static event ObjectEventHandler<NavigationAction> OnPreSave_NavigationAction;
 
-        [EventBasedMethod("OnPostSave_NavigationScreen")]
+        [EventBasedMethod("OnPostSave_NavigationAction")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnPostSave_NavigationScreen != null) OnPostSave_NavigationScreen(this);
+            if (OnPostSave_NavigationAction != null) OnPostSave_NavigationAction(this);
         }
-        public static event ObjectEventHandler<NavigationScreen> OnPostSave_NavigationScreen;
+        public static event ObjectEventHandler<NavigationAction> OnPostSave_NavigationAction;
 
-        [EventBasedMethod("OnCreated_NavigationScreen")]
+        [EventBasedMethod("OnCreated_NavigationAction")]
         public override void NotifyCreated()
         {
             base.NotifyCreated();
-            if (OnCreated_NavigationScreen != null) OnCreated_NavigationScreen(this);
+            if (OnCreated_NavigationAction != null) OnCreated_NavigationAction(this);
         }
-        public static event ObjectEventHandler<NavigationScreen> OnCreated_NavigationScreen;
+        public static event ObjectEventHandler<NavigationAction> OnCreated_NavigationAction;
 
-        [EventBasedMethod("OnDeleting_NavigationScreen")]
+        [EventBasedMethod("OnDeleting_NavigationAction")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnDeleting_NavigationScreen != null) OnDeleting_NavigationScreen(this);
+            if (OnDeleting_NavigationAction != null) OnDeleting_NavigationAction(this);
         }
-        public static event ObjectEventHandler<NavigationScreen> OnDeleting_NavigationScreen;
+        public static event ObjectEventHandler<NavigationAction> OnDeleting_NavigationAction;
 
         #endregion // Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
         public override List<NHibernatePersistenceObject> GetParentsToDelete()
@@ -160,27 +137,20 @@ namespace Kistl.App.GUI
         {
             var result = base.GetChildrenToDelete();
 
-            // Follow Application_has_RootScreen
-            result.AddRange(Context.AttachedObjects
-                .OfType<Kistl.App.GUI.Application>()
-                .Where(child => child.RootScreen == this
-                    && child.ObjectState == DataObjectState.Deleted)
-                .Cast<NHibernatePersistenceObject>());
-
             return result;
         }
 
 
-        public class NavigationScreenProxy
+        public class NavigationActionProxy
             : Kistl.App.GUI.NavigationEntryNHibernateImpl.NavigationEntryProxy
         {
-            public NavigationScreenProxy()
+            public NavigationActionProxy()
             {
             }
 
-            public override Type ZBoxWrapper { get { return typeof(NavigationScreenNHibernateImpl); } }
+            public override Type ZBoxWrapper { get { return typeof(NavigationActionNHibernateImpl); } }
 
-            public override Type ZBoxProxy { get { return typeof(NavigationScreenProxy); } }
+            public override Type ZBoxProxy { get { return typeof(NavigationActionProxy); } }
 
         }
 

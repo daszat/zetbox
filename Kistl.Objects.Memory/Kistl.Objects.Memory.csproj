@@ -196,6 +196,8 @@
     <Compile Include="Muhblah.Memory.Designer.cs" />
     <Compile Include="N_to_M_relations_A.Memory.Designer.cs" />
     <Compile Include="N_to_M_relations_B.Memory.Designer.cs" />
+    <Compile Include="NavigationAction.Memory.Designer.cs" />
+    <Compile Include="NavigationEntry.Memory.Designer.cs" />
     <Compile Include="NavigationScreen.Memory.Designer.cs" />
     <Compile Include="NavigationSearchScreen.Memory.Designer.cs" />
     <Compile Include="NewGuidDefaultValue.Memory.Designer.cs" />

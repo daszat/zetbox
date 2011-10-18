@@ -713,9 +713,9 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="NavigationScreen">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.NavigationScreen)">
-	    <MappingFragment StoreEntitySet="NavigationScreen">
+    <EntitySetMapping Name="NavigationEntry">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.NavigationEntry)">
+	    <MappingFragment StoreEntitySet="NavigationEntry">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="Children_pos" ColumnName="fk_Parent_pos" />
 <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
@@ -723,6 +723,16 @@
 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
 <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 <ScalarProperty Name="Title" ColumnName="Title" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.NavigationAction)">
+	    <MappingFragment StoreEntitySet="NavigationAction">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.NavigationScreen)">
+	    <MappingFragment StoreEntitySet="NavigationScreen">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.NavigationSearchScreen)">
@@ -1359,13 +1369,13 @@
 
     <!--
     Relation: FK_NavigationScreen_accessed_by_Groups
-    A: ZeroOrMore NavigationScreen as NavigationScreen
+    A: ZeroOrMore NavigationEntry as NavigationScreen
     B: ZeroOrMore Group as Groups
     Preferred Storage: Separate
     -->
-    <EntitySetMapping Name="NavigationScreen_accessed_by_Group_RelationEntry">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.NavigationScreen_accessed_by_Group_RelationEntry)">
-        <MappingFragment StoreEntitySet="NavigationScreen_accessed_by_Group_RelationEntry">
+    <EntitySetMapping Name="NavigationEntry_accessed_by_Group_RelationEntry">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.NavigationEntry_accessed_by_Group_RelationEntry)">
+        <MappingFragment StoreEntitySet="NavigationEntry_accessed_by_Group_RelationEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
 		  <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
         </MappingFragment>
@@ -1374,7 +1384,7 @@
     <!-- A to CollectionEntry -->
     <AssociationSetMapping Name="FK_NavigationScreen_accessed_by_Groups_A"
                            TypeName="Model.FK_NavigationScreen_accessed_by_Groups_A"
-                           StoreEntitySet="NavigationScreen_accessed_by_Group_RelationEntry" >
+                           StoreEntitySet="NavigationEntry_accessed_by_Group_RelationEntry" >
       <EndProperty Name="NavigationScreen">
         <ScalarProperty Name="ID" ColumnName="fk_NavigationScreen"/>
       </EndProperty>
@@ -1386,7 +1396,7 @@
     <!-- B to CollectionEntry -->
     <AssociationSetMapping Name="FK_NavigationScreen_accessed_by_Groups_B"
                            TypeName="Model.FK_NavigationScreen_accessed_by_Groups_B"
-                           StoreEntitySet="NavigationScreen_accessed_by_Group_RelationEntry" >
+                           StoreEntitySet="NavigationEntry_accessed_by_Group_RelationEntry" >
       <EndProperty Name="Groups">
         <ScalarProperty Name="ID" ColumnName="fk_Groups"/>
       </EndProperty>
@@ -3522,13 +3532,13 @@
     </AssociationSetMapping>
     <!--
     Relation: FK_NavigationScreen_has_Module
-    A: ZeroOrMore NavigationScreen as NavigationScreen
-    B: ZeroOrOne Module as Module
+    A: ZeroOrMore NavigationEntry as NavigationScreen
+    B: One Module as Module
     Preferred Storage: MergeIntoA
     -->
     <AssociationSetMapping Name="FK_NavigationScreen_has_Module"
                            TypeName="Model.FK_NavigationScreen_has_Module"
-                           StoreEntitySet="NavigationScreen" >
+                           StoreEntitySet="NavigationEntry" >
       <EndProperty Name="Module">
         <ScalarProperty Name="ID" ColumnName="fk_Module"/>
       </EndProperty>
@@ -3539,13 +3549,13 @@
     </AssociationSetMapping>
     <!--
     Relation: FK_NavigationScreen_was_ChangedBy
-    A: ZeroOrMore NavigationScreen as NavigationScreen
+    A: ZeroOrMore NavigationEntry as NavigationScreen
     B: ZeroOrOne Identity as ChangedBy
     Preferred Storage: MergeIntoA
     -->
     <AssociationSetMapping Name="FK_NavigationScreen_was_ChangedBy"
                            TypeName="Model.FK_NavigationScreen_was_ChangedBy"
-                           StoreEntitySet="NavigationScreen" >
+                           StoreEntitySet="NavigationEntry" >
       <EndProperty Name="ChangedBy">
         <ScalarProperty Name="ID" ColumnName="fk_ChangedBy"/>
       </EndProperty>
@@ -3556,13 +3566,13 @@
     </AssociationSetMapping>
     <!--
     Relation: FK_NavigationScreen_was_CreatedBy
-    A: ZeroOrMore NavigationScreen as NavigationScreen
+    A: ZeroOrMore NavigationEntry as NavigationScreen
     B: ZeroOrOne Identity as CreatedBy
     Preferred Storage: MergeIntoA
     -->
     <AssociationSetMapping Name="FK_NavigationScreen_was_CreatedBy"
                            TypeName="Model.FK_NavigationScreen_was_CreatedBy"
-                           StoreEntitySet="NavigationScreen" >
+                           StoreEntitySet="NavigationEntry" >
       <EndProperty Name="CreatedBy">
         <ScalarProperty Name="ID" ColumnName="fk_CreatedBy"/>
       </EndProperty>
@@ -3709,13 +3719,13 @@
     </AssociationSetMapping>
     <!--
     Relation: FK_Parent_navigates_to_Children
-    A: ZeroOrOne NavigationScreen as Parent
-    B: ZeroOrMore NavigationScreen as Children
+    A: ZeroOrOne NavigationEntry as Parent
+    B: ZeroOrMore NavigationEntry as Children
     Preferred Storage: MergeIntoB
     -->
     <AssociationSetMapping Name="FK_Parent_navigates_to_Children"
                            TypeName="Model.FK_Parent_navigates_to_Children"
-                           StoreEntitySet="NavigationScreen" >
+                           StoreEntitySet="NavigationEntry" >
       <EndProperty Name="Parent">
         <ScalarProperty Name="ID" ColumnName="fk_Parent"/>
       </EndProperty>
@@ -4100,13 +4110,13 @@
     </AssociationSetMapping>
     <!--
     Relation: FK_Screen_modeled_by_ViewModelDescriptor
-    A: ZeroOrMore NavigationScreen as Screen
+    A: ZeroOrMore NavigationEntry as Screen
     B: ZeroOrOne ViewModelDescriptor as ViewModelDescriptor
     Preferred Storage: MergeIntoA
     -->
     <AssociationSetMapping Name="FK_Screen_modeled_by_ViewModelDescriptor"
                            TypeName="Model.FK_Screen_modeled_by_ViewModelDescriptor"
-                           StoreEntitySet="NavigationScreen" >
+                           StoreEntitySet="NavigationEntry" >
       <EndProperty Name="ViewModelDescriptor">
         <ScalarProperty Name="ID" ColumnName="fk_ViewModelDescriptor"/>
       </EndProperty>

@@ -10,7 +10,7 @@ namespace Kistl.App.GUI
     /// <summary>
     /// 
     /// </summary>
-    public interface NavigationScreen : Kistl.App.GUI.NavigationEntry 
+    public interface NavigationAction : Kistl.App.GUI.NavigationEntry 
     {
     }
 }

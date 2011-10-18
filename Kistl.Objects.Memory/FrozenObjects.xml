@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2011-10-18T11:47:09.950347Z" xmlns="http://dasz.at/Kistl">
+<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2011-10-18T13:12:03.805961Z" xmlns="http://dasz.at/Kistl">
   <KistlBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <KistlBase:ChangedOn>2011-08-05T10:30:47.603232Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2011-06-15T14:03:02Z</KistlBase:CreatedOn>
@@ -1873,6 +1873,36 @@
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <KistlBase:TableName>MonthFilterConfigurations</KistlBase:TableName>
   </KistlBase:ObjectClass>
+  <KistlBase:ObjectClass ExportGuid="e1415447-ccb4-4de5-aba0-9479c4472b08">
+    <KistlBase:ChangedOn>2011-10-18T13:12:03.805961Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2011-10-18T13:12:03.805961Z</KistlBase:CreatedOn>
+    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Name>NavigationAction</KistlBase:Name>
+    <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
+    <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
+    <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
+    <KistlBase:BaseObjectClass>9a640b13-a8c2-4a90-899a-954f0c57c1ab</KistlBase:BaseObjectClass>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
+    <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
+    <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
+    <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:TableName>NavigationActions</KistlBase:TableName>
+  </KistlBase:ObjectClass>
+  <KistlBase:ObjectClass ExportGuid="9a640b13-a8c2-4a90-899a-954f0c57c1ab">
+    <KistlBase:ChangedOn>2011-10-18T13:07:43.581941Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2011-10-18T13:02:59.376523Z</KistlBase:CreatedOn>
+    <KistlBase:Description>Abstract base class for Navigation Entries</KistlBase:Description>
+    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Name>NavigationEntry</KistlBase:Name>
+    <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
+    <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
+    <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
+    <KistlBase:IsAbstract>true</KistlBase:IsAbstract>
+    <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
+    <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <KistlBase:TableName>NavigationEntries</KistlBase:TableName>
+  </KistlBase:ObjectClass>
   <KistlBase:ObjectClass ExportGuid="2879e023-77e4-4601-80b0-75ef76fd4001">
     <KistlBase:ChangedOn>2011-08-05T10:31:13.023281Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-07-23T15:05:45Z</KistlBase:CreatedOn>
@@ -1881,6 +1911,7 @@
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
+    <KistlBase:BaseObjectClass>9a640b13-a8c2-4a90-899a-954f0c57c1ab</KistlBase:BaseObjectClass>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>true</KistlBase:IsFrozenObject>
@@ -2110,16 +2141,16 @@
     <KistlBase:A>78b6f354-013b-4129-a390-7f3a5a5e28e9</KistlBase:A>
     <KistlBase:B>b6afa3e7-edf6-4318-9194-75bdbfc7ec7b</KistlBase:B>
   </KistlBase:ObjectClass_implements_Interface_RelationEntry>
-  <KistlBase:ObjectClass_implements_Interface_RelationEntry ExportGuid="dc065aee-f7a1-4d90-b957-5ba4e827346c">
-    <KistlBase:A>2879e023-77e4-4601-80b0-75ef76fd4001</KistlBase:A>
+  <KistlBase:ObjectClass_implements_Interface_RelationEntry ExportGuid="244607ba-edbe-4d51-b5f0-368570bac3f9">
+    <KistlBase:A>9a640b13-a8c2-4a90-899a-954f0c57c1ab</KistlBase:A>
     <KistlBase:B>a73f2d0a-786b-483d-b474-b9d9df42b8b3</KistlBase:B>
   </KistlBase:ObjectClass_implements_Interface_RelationEntry>
-  <KistlBase:ObjectClass_implements_Interface_RelationEntry ExportGuid="b0a761bc-1555-4126-acee-74723f91b9cc">
-    <KistlBase:A>2879e023-77e4-4601-80b0-75ef76fd4001</KistlBase:A>
+  <KistlBase:ObjectClass_implements_Interface_RelationEntry ExportGuid="69d5f8bd-420f-4efe-b99f-23bccb4f70c4">
+    <KistlBase:A>9a640b13-a8c2-4a90-899a-954f0c57c1ab</KistlBase:A>
     <KistlBase:B>4ae6616a-eca3-47a5-b502-8e3c3913c2f0</KistlBase:B>
   </KistlBase:ObjectClass_implements_Interface_RelationEntry>
-  <KistlBase:ObjectClass_implements_Interface_RelationEntry ExportGuid="1f8eb55b-9c35-4728-a3b6-9aed4ea5bfc0">
-    <KistlBase:A>2879e023-77e4-4601-80b0-75ef76fd4001</KistlBase:A>
+  <KistlBase:ObjectClass_implements_Interface_RelationEntry ExportGuid="b6ae2168-8112-4797-b55c-bd6e42faba74">
+    <KistlBase:A>9a640b13-a8c2-4a90-899a-954f0c57c1ab</KistlBase:A>
     <KistlBase:B>b6afa3e7-edf6-4318-9194-75bdbfc7ec7b</KistlBase:B>
   </KistlBase:ObjectClass_implements_Interface_RelationEntry>
   <KistlBase:ObjectClass_implements_Interface_RelationEntry ExportGuid="fe0a5037-b476-486e-9105-9d92991854c1">
@@ -2702,7 +2733,7 @@
     <KistlBase:Description>Identity which changed this object</KistlBase:Description>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
     <KistlBase:Name>ChangedBy</KistlBase:Name>
-    <KistlBase:ObjectClass>2879e023-77e4-4601-80b0-75ef76fd4001</KistlBase:ObjectClass>
+    <KistlBase:ObjectClass>9a640b13-a8c2-4a90-899a-954f0c57c1ab</KistlBase:ObjectClass>
     <KistlBase:Properties_pos>900</KistlBase:Properties_pos>
     <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
     <KistlBase:EagerLoading>false</KistlBase:EagerLoading>
@@ -2716,7 +2747,7 @@
     <KistlBase:Description>Date and time where this object was changed</KistlBase:Description>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
     <KistlBase:Name>ChangedOn</KistlBase:Name>
-    <KistlBase:ObjectClass>2879e023-77e4-4601-80b0-75ef76fd4001</KistlBase:ObjectClass>
+    <KistlBase:ObjectClass>9a640b13-a8c2-4a90-899a-954f0c57c1ab</KistlBase:ObjectClass>
     <KistlBase:Properties_pos>700</KistlBase:Properties_pos>
     <GUI:ValueModelDescriptor>fc74b434-3801-4e4a-ab67-e65a9e014005</GUI:ValueModelDescriptor>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
@@ -2729,7 +2760,7 @@
     <KistlBase:CreatedOn>2010-07-23T15:07:39Z</KistlBase:CreatedOn>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
     <KistlBase:Name>Children</KistlBase:Name>
-    <KistlBase:ObjectClass>2879e023-77e4-4601-80b0-75ef76fd4001</KistlBase:ObjectClass>
+    <KistlBase:ObjectClass>9a640b13-a8c2-4a90-899a-954f0c57c1ab</KistlBase:ObjectClass>
     <KistlBase:Properties_pos>300</KistlBase:Properties_pos>
     <GUI:ValueModelDescriptor>9fce01fe-fd6d-4e21-8b55-08d5e38aea36</GUI:ValueModelDescriptor>
     <KistlBase:EagerLoading>false</KistlBase:EagerLoading>
@@ -2742,7 +2773,7 @@
     <KistlBase:Description>Color of the ViewScreen or default color if empty</KistlBase:Description>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
     <KistlBase:Name>Color</KistlBase:Name>
-    <KistlBase:ObjectClass>2879e023-77e4-4601-80b0-75ef76fd4001</KistlBase:ObjectClass>
+    <KistlBase:ObjectClass>9a640b13-a8c2-4a90-899a-954f0c57c1ab</KistlBase:ObjectClass>
     <KistlBase:Properties_pos>3</KistlBase:Properties_pos>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
@@ -2756,7 +2787,7 @@
     <KistlBase:Description>Identity which created this object</KistlBase:Description>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
     <KistlBase:Name>CreatedBy</KistlBase:Name>
-    <KistlBase:ObjectClass>2879e023-77e4-4601-80b0-75ef76fd4001</KistlBase:ObjectClass>
+    <KistlBase:ObjectClass>9a640b13-a8c2-4a90-899a-954f0c57c1ab</KistlBase:ObjectClass>
     <KistlBase:Properties_pos>800</KistlBase:Properties_pos>
     <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
     <KistlBase:EagerLoading>false</KistlBase:EagerLoading>
@@ -2770,7 +2801,7 @@
     <KistlBase:Description>Date and time where this object was created</KistlBase:Description>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
     <KistlBase:Name>CreatedOn</KistlBase:Name>
-    <KistlBase:ObjectClass>2879e023-77e4-4601-80b0-75ef76fd4001</KistlBase:ObjectClass>
+    <KistlBase:ObjectClass>9a640b13-a8c2-4a90-899a-954f0c57c1ab</KistlBase:ObjectClass>
     <KistlBase:Properties_pos>600</KistlBase:Properties_pos>
     <GUI:ValueModelDescriptor>fc74b434-3801-4e4a-ab67-e65a9e014005</GUI:ValueModelDescriptor>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
@@ -2785,7 +2816,7 @@
     <KistlBase:Description>Export Guid</KistlBase:Description>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
     <KistlBase:Name>ExportGuid</KistlBase:Name>
-    <KistlBase:ObjectClass>2879e023-77e4-4601-80b0-75ef76fd4001</KistlBase:ObjectClass>
+    <KistlBase:ObjectClass>9a640b13-a8c2-4a90-899a-954f0c57c1ab</KistlBase:ObjectClass>
     <KistlBase:Properties_pos>1000</KistlBase:Properties_pos>
     <GUI:ValueModelDescriptor>2b6fb70f-a382-4057-a139-cc33333d619d</GUI:ValueModelDescriptor>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
@@ -2798,7 +2829,7 @@
     <KistlBase:CreatedOn>2011-01-24T09:34:15Z</KistlBase:CreatedOn>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
     <KistlBase:Name>Groups</KistlBase:Name>
-    <KistlBase:ObjectClass>2879e023-77e4-4601-80b0-75ef76fd4001</KistlBase:ObjectClass>
+    <KistlBase:ObjectClass>9a640b13-a8c2-4a90-899a-954f0c57c1ab</KistlBase:ObjectClass>
     <KistlBase:Properties_pos>400</KistlBase:Properties_pos>
     <GUI:ValueModelDescriptor>67a49c49-b890-4d35-a8db-1f8e43bfc7df</GUI:ValueModelDescriptor>
     <KistlBase:EagerLoading>true</KistlBase:EagerLoading>
@@ -2811,7 +2842,7 @@
     <GUI:FilterConfiguration>b8304141-2e41-4a21-8f13-0234c21fc2b5</GUI:FilterConfiguration>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
     <KistlBase:Name>Module</KistlBase:Name>
-    <KistlBase:ObjectClass>2879e023-77e4-4601-80b0-75ef76fd4001</KistlBase:ObjectClass>
+    <KistlBase:ObjectClass>9a640b13-a8c2-4a90-899a-954f0c57c1ab</KistlBase:ObjectClass>
     <KistlBase:Properties_pos>0</KistlBase:Properties_pos>
     <GUI:RequestedKind>d30d2676-7f2f-4f0d-895a-e46f19b8f526</GUI:RequestedKind>
     <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
@@ -2824,7 +2855,7 @@
     <KistlBase:CreatedOn>2010-07-23T15:07:39Z</KistlBase:CreatedOn>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
     <KistlBase:Name>Parent</KistlBase:Name>
-    <KistlBase:ObjectClass>2879e023-77e4-4601-80b0-75ef76fd4001</KistlBase:ObjectClass>
+    <KistlBase:ObjectClass>9a640b13-a8c2-4a90-899a-954f0c57c1ab</KistlBase:ObjectClass>
     <KistlBase:Properties_pos>200</KistlBase:Properties_pos>
     <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
     <KistlBase:EagerLoading>false</KistlBase:EagerLoading>
@@ -2837,7 +2868,7 @@
     <KistlBase:Description>The title of this screen</KistlBase:Description>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
     <KistlBase:Name>Title</KistlBase:Name>
-    <KistlBase:ObjectClass>2879e023-77e4-4601-80b0-75ef76fd4001</KistlBase:ObjectClass>
+    <KistlBase:ObjectClass>9a640b13-a8c2-4a90-899a-954f0c57c1ab</KistlBase:ObjectClass>
     <KistlBase:Properties_pos>1</KistlBase:Properties_pos>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
@@ -2850,7 +2881,7 @@
     <KistlBase:CreatedOn>2010-07-23T16:08:33Z</KistlBase:CreatedOn>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
     <KistlBase:Name>ViewModelDescriptor</KistlBase:Name>
-    <KistlBase:ObjectClass>2879e023-77e4-4601-80b0-75ef76fd4001</KistlBase:ObjectClass>
+    <KistlBase:ObjectClass>9a640b13-a8c2-4a90-899a-954f0c57c1ab</KistlBase:ObjectClass>
     <KistlBase:Properties_pos>100</KistlBase:Properties_pos>
     <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
     <KistlBase:EagerLoading>false</KistlBase:EagerLoading>
@@ -4578,10 +4609,10 @@
   </KistlBase:RelationEnd>
   <KistlBase:RelationEnd ExportGuid="6f0afaf3-e711-4e98-b541-cb6a6c98c377">
     <KistlBase:BParent>1dddc905-13c9-4d3f-a56a-9f39bfc439fa</KistlBase:BParent>
-    <KistlBase:ChangedOn>2011-08-05T10:30:50.320185Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2011-10-18T13:10:24.183999Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-07-23T16:21:13Z</KistlBase:CreatedOn>
     <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
-    <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
+    <KistlBase:Multiplicity>2</KistlBase:Multiplicity>
     <KistlBase:RoleName>Module</KistlBase:RoleName>
     <KistlBase:Type>8a1ace7c-77f2-4b48-9b0b-bcb68c660d11</KistlBase:Type>
   </KistlBase:RelationEnd>
@@ -4611,7 +4642,7 @@
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>0d3e3599-3cf7-4025-8848-597194c3dc2f</KistlBase:Navigator>
     <KistlBase:RoleName>Children</KistlBase:RoleName>
-    <KistlBase:Type>2879e023-77e4-4601-80b0-75ef76fd4001</KistlBase:Type>
+    <KistlBase:Type>9a640b13-a8c2-4a90-899a-954f0c57c1ab</KistlBase:Type>
   </KistlBase:RelationEnd>
   <KistlBase:RelationEnd ExportGuid="6a993721-f5ee-4027-a80e-31941087e398">
     <KistlBase:AParent>1dddc905-13c9-4d3f-a56a-9f39bfc439fa</KistlBase:AParent>
@@ -4621,7 +4652,7 @@
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>e45868e3-9638-4259-a908-16cb3f1d515d</KistlBase:Navigator>
     <KistlBase:RoleName>NavigationScreen</KistlBase:RoleName>
-    <KistlBase:Type>2879e023-77e4-4601-80b0-75ef76fd4001</KistlBase:Type>
+    <KistlBase:Type>9a640b13-a8c2-4a90-899a-954f0c57c1ab</KistlBase:Type>
   </KistlBase:RelationEnd>
   <KistlBase:RelationEnd ExportGuid="92fc82fe-d590-491a-a3d1-bb16e6c635c6">
     <KistlBase:AParent>069b3b4e-4e25-4b51-b2f0-2e1bd5ca3682</KistlBase:AParent>
@@ -4631,7 +4662,7 @@
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>f688a7e1-6833-4e78-ac7d-4dfd74242867</KistlBase:Navigator>
     <KistlBase:RoleName>NavigationScreen</KistlBase:RoleName>
-    <KistlBase:Type>2879e023-77e4-4601-80b0-75ef76fd4001</KistlBase:Type>
+    <KistlBase:Type>9a640b13-a8c2-4a90-899a-954f0c57c1ab</KistlBase:Type>
   </KistlBase:RelationEnd>
   <KistlBase:RelationEnd ExportGuid="aeeb8709-32f5-491a-9d7f-210242e399ba">
     <KistlBase:AParent>a642a70d-1cad-408b-ad0d-b54c9846255d</KistlBase:AParent>
@@ -4641,7 +4672,7 @@
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>5a54e4f1-4118-4cc7-b8a1-e2f25a9ac9df</KistlBase:Navigator>
     <KistlBase:RoleName>NavigationScreen</KistlBase:RoleName>
-    <KistlBase:Type>2879e023-77e4-4601-80b0-75ef76fd4001</KistlBase:Type>
+    <KistlBase:Type>9a640b13-a8c2-4a90-899a-954f0c57c1ab</KistlBase:Type>
   </KistlBase:RelationEnd>
   <KistlBase:RelationEnd ExportGuid="dc2ff4f4-047a-463b-a3a8-2dd44ac22923">
     <KistlBase:AParent>b88c12ac-eabe-4aee-913e-5edd9d2a193a</KistlBase:AParent>
@@ -4651,7 +4682,7 @@
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>7b01db75-218a-4040-bae9-aa82c253a620</KistlBase:Navigator>
     <KistlBase:RoleName>NavigationScreen</KistlBase:RoleName>
-    <KistlBase:Type>2879e023-77e4-4601-80b0-75ef76fd4001</KistlBase:Type>
+    <KistlBase:Type>9a640b13-a8c2-4a90-899a-954f0c57c1ab</KistlBase:Type>
   </KistlBase:RelationEnd>
   <KistlBase:RelationEnd ExportGuid="d1e37076-4733-41a8-9bb4-83a2428627b1">
     <KistlBase:AParent>45cc7d94-b50d-4a2f-9351-d96e508027d8</KistlBase:AParent>
@@ -4661,16 +4692,7 @@
     <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
     <KistlBase:Navigator>87eecae1-aa07-4159-8953-716cd27bb5dd</KistlBase:Navigator>
     <KistlBase:RoleName>Parent</KistlBase:RoleName>
-    <KistlBase:Type>2879e023-77e4-4601-80b0-75ef76fd4001</KistlBase:Type>
-  </KistlBase:RelationEnd>
-  <KistlBase:RelationEnd ExportGuid="8f18ea5b-5fde-4d8e-883c-ec069cc5d5b0">
-    <KistlBase:BParent>c3215a5f-11a9-4f98-9b51-96281212cac5</KistlBase:BParent>
-    <KistlBase:ChangedOn>2011-08-05T10:30:49.986166Z</KistlBase:ChangedOn>
-    <KistlBase:CreatedOn>2010-07-23T16:05:46Z</KistlBase:CreatedOn>
-    <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
-    <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
-    <KistlBase:RoleName>RootScreen</KistlBase:RoleName>
-    <KistlBase:Type>2879e023-77e4-4601-80b0-75ef76fd4001</KistlBase:Type>
+    <KistlBase:Type>9a640b13-a8c2-4a90-899a-954f0c57c1ab</KistlBase:Type>
   </KistlBase:RelationEnd>
   <KistlBase:RelationEnd ExportGuid="2c9674b5-2794-4a8f-ab31-de9cd03d0a13">
     <KistlBase:AParent>4dfc2342-5440-4bc4-8a82-dad8b478f61c</KistlBase:AParent>
@@ -4680,6 +4702,15 @@
     <KistlBase:Multiplicity>3</KistlBase:Multiplicity>
     <KistlBase:Navigator>60c43bca-219a-4346-859a-b2979a9f71a5</KistlBase:Navigator>
     <KistlBase:RoleName>Screen</KistlBase:RoleName>
+    <KistlBase:Type>9a640b13-a8c2-4a90-899a-954f0c57c1ab</KistlBase:Type>
+  </KistlBase:RelationEnd>
+  <KistlBase:RelationEnd ExportGuid="8f18ea5b-5fde-4d8e-883c-ec069cc5d5b0">
+    <KistlBase:BParent>c3215a5f-11a9-4f98-9b51-96281212cac5</KistlBase:BParent>
+    <KistlBase:ChangedOn>2011-08-05T10:30:49.986166Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2010-07-23T16:05:46Z</KistlBase:CreatedOn>
+    <KistlBase:HasPersistentOrder>false</KistlBase:HasPersistentOrder>
+    <KistlBase:Multiplicity>1</KistlBase:Multiplicity>
+    <KistlBase:RoleName>RootScreen</KistlBase:RoleName>
     <KistlBase:Type>2879e023-77e4-4601-80b0-75ef76fd4001</KistlBase:Type>
   </KistlBase:RelationEnd>
   <KistlBase:RelationEnd ExportGuid="02ed585b-9c89-4f43-bd69-a243bbad1ceb">
@@ -5532,37 +5563,45 @@
     <KistlBase:Name>ShowObject</KistlBase:Name>
     <KistlBase:ObjectClass>2e93e071-875a-41ee-a768-5d55c2683546</KistlBase:ObjectClass>
   </KistlBase:Method>
-  <KistlBase:Method ExportGuid="c8f973ee-31cb-4f1a-a5b9-3802afb52ad4">
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.099285Z</KistlBase:ChangedOn>
-    <KistlBase:CreatedOn>2010-07-23T16:21:13Z</KistlBase:CreatedOn>
+  <KistlBase:Method ExportGuid="f4e6e584-2fbc-47ac-b75c-4098fdab1409">
+    <KistlBase:ChangedOn>2011-10-18T13:04:22.343819Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2011-10-18T13:04:22.343819Z</KistlBase:CreatedOn>
     <GUI:IsDisplayable>false</GUI:IsDisplayable>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
     <KistlBase:Name>NotifyCreated</KistlBase:Name>
-    <KistlBase:ObjectClass>2879e023-77e4-4601-80b0-75ef76fd4001</KistlBase:ObjectClass>
+    <KistlBase:ObjectClass>9a640b13-a8c2-4a90-899a-954f0c57c1ab</KistlBase:ObjectClass>
   </KistlBase:Method>
-  <KistlBase:Method ExportGuid="36798b5f-ef5e-4f59-9385-c4f56ccc02e3">
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.099285Z</KistlBase:ChangedOn>
-    <KistlBase:CreatedOn>2010-07-23T16:21:13Z</KistlBase:CreatedOn>
+  <KistlBase:Method ExportGuid="a033aab5-0005-48da-8b58-dd7454f518df">
+    <KistlBase:ChangedOn>2011-10-18T13:04:22.343819Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2011-10-18T13:04:22.343819Z</KistlBase:CreatedOn>
     <GUI:IsDisplayable>false</GUI:IsDisplayable>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
     <KistlBase:Name>NotifyDeleting</KistlBase:Name>
-    <KistlBase:ObjectClass>2879e023-77e4-4601-80b0-75ef76fd4001</KistlBase:ObjectClass>
+    <KistlBase:ObjectClass>9a640b13-a8c2-4a90-899a-954f0c57c1ab</KistlBase:ObjectClass>
   </KistlBase:Method>
-  <KistlBase:Method ExportGuid="28ca161c-ee07-4568-8516-c45c8a53f74f">
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.099285Z</KistlBase:ChangedOn>
-    <KistlBase:CreatedOn>2010-07-23T16:21:13Z</KistlBase:CreatedOn>
+  <KistlBase:Method ExportGuid="4d01dec2-d7c7-4e2e-b8f1-cb2291b88e8c">
+    <KistlBase:ChangedOn>2011-10-18T13:04:22.343819Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2011-10-18T13:04:22.343819Z</KistlBase:CreatedOn>
     <GUI:IsDisplayable>false</GUI:IsDisplayable>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
     <KistlBase:Name>NotifyPostSave</KistlBase:Name>
-    <KistlBase:ObjectClass>2879e023-77e4-4601-80b0-75ef76fd4001</KistlBase:ObjectClass>
+    <KistlBase:ObjectClass>9a640b13-a8c2-4a90-899a-954f0c57c1ab</KistlBase:ObjectClass>
   </KistlBase:Method>
-  <KistlBase:Method ExportGuid="16abdd54-9b51-4994-b025-ba8eed622569">
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.099285Z</KistlBase:ChangedOn>
-    <KistlBase:CreatedOn>2010-07-23T16:21:13Z</KistlBase:CreatedOn>
+  <KistlBase:Method ExportGuid="06f2c8c8-2389-4dea-b27b-4737cea2a0a5">
+    <KistlBase:ChangedOn>2011-10-18T13:04:22.343819Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2011-10-18T13:04:22.343819Z</KistlBase:CreatedOn>
     <GUI:IsDisplayable>false</GUI:IsDisplayable>
     <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
     <KistlBase:Name>NotifyPreSave</KistlBase:Name>
-    <KistlBase:ObjectClass>2879e023-77e4-4601-80b0-75ef76fd4001</KistlBase:ObjectClass>
+    <KistlBase:ObjectClass>9a640b13-a8c2-4a90-899a-954f0c57c1ab</KistlBase:ObjectClass>
+  </KistlBase:Method>
+  <KistlBase:Method ExportGuid="b0a09d6d-1938-41c9-97a4-b88242849da1">
+    <KistlBase:ChangedOn>2011-10-18T13:04:22.343819Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2011-10-18T13:04:22.343819Z</KistlBase:CreatedOn>
+    <GUI:IsDisplayable>false</GUI:IsDisplayable>
+    <KistlBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</KistlBase:Module>
+    <KistlBase:Name>ToString</KistlBase:Name>
+    <KistlBase:ObjectClass>9a640b13-a8c2-4a90-899a-954f0c57c1ab</KistlBase:ObjectClass>
   </KistlBase:Method>
   <KistlBase:Method ExportGuid="fbdccccb-e7cf-46e3-bd2b-c338408f1ddd">
     <KistlBase:ChangedOn>2011-08-05T10:31:13.099285Z</KistlBase:ChangedOn>
@@ -5869,6 +5908,16 @@
     <KistlBase:Name>obj</KistlBase:Name>
     <KistlBase:Type>527370ff-ca5e-4c4f-a665-bd5483f1936f</KistlBase:Type>
   </KistlBase:CLRObjectParameter>
+  <KistlBase:StringParameter ExportGuid="bf516c87-cd1d-4f31-b73f-03095e9a762a">
+    <KistlBase:ChangedOn>2011-10-18T13:04:22.343819Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2011-10-18T13:04:22.343819Z</KistlBase:CreatedOn>
+    <KistlBase:IsList>false</KistlBase:IsList>
+    <KistlBase:IsNullable>false</KistlBase:IsNullable>
+    <KistlBase:IsReturnParameter>true</KistlBase:IsReturnParameter>
+    <KistlBase:Method>b0a09d6d-1938-41c9-97a4-b88242849da1</KistlBase:Method>
+    <KistlBase:Parameter_pos>0</KistlBase:Parameter_pos>
+    <KistlBase:Name>retVal</KistlBase:Name>
+  </KistlBase:StringParameter>
   <KistlBase:StringParameter ExportGuid="e9eed21c-4484-47f6-ab14-f92688a45be9">
     <KistlBase:ChangedOn>2011-08-05T10:31:00.584772Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-07-23T16:21:13Z</KistlBase:CreatedOn>
@@ -6327,8 +6376,8 @@
     <KistlBase:Reason>ExportGuid must be unique</KistlBase:Reason>
     <KistlBase:IsUnique>true</KistlBase:IsUnique>
   </KistlBase:IndexConstraint>
-  <KistlBase:IndexConstraint ExportGuid="6ffe90a7-91d9-4a60-89ed-c10077c792f1">
-    <KistlBase:Constrained>2879e023-77e4-4601-80b0-75ef76fd4001</KistlBase:Constrained>
+  <KistlBase:IndexConstraint ExportGuid="27999ecb-d323-4a9b-8928-869f33594448">
+    <KistlBase:Constrained>9a640b13-a8c2-4a90-899a-954f0c57c1ab</KistlBase:Constrained>
     <KistlBase:Reason>ExportGuid must be unique</KistlBase:Reason>
     <KistlBase:IsUnique>true</KistlBase:IsUnique>
   </KistlBase:IndexConstraint>
@@ -6342,6 +6391,10 @@
     <KistlBase:Reason>ExportGuid must be unique</KistlBase:Reason>
     <KistlBase:IsUnique>true</KistlBase:IsUnique>
   </KistlBase:IndexConstraint>
+  <KistlBase:IndexConstraint_ensures_unique_on_Property_RelationEntry ExportGuid="ff306761-06ac-4994-b567-720074f005a3">
+    <KistlBase:A>27999ecb-d323-4a9b-8928-869f33594448</KistlBase:A>
+    <KistlBase:B>9c987946-8816-48a6-bd21-b1120c3a78b4</KistlBase:B>
+  </KistlBase:IndexConstraint_ensures_unique_on_Property_RelationEntry>
   <KistlBase:IndexConstraint_ensures_unique_on_Property_RelationEntry ExportGuid="af56a26a-2220-45ff-b0f0-9c91a036f5f0">
     <KistlBase:A>58b639f1-39d8-4bd7-90fa-263bf2929cfb</KistlBase:A>
     <KistlBase:B>94140a56-9fed-4d65-8c2c-cb8e658dff96</KistlBase:B>
@@ -6349,10 +6402,6 @@
   <KistlBase:IndexConstraint_ensures_unique_on_Property_RelationEntry ExportGuid="e410851e-0be7-4609-8286-2e2eca2b6eb0">
     <KistlBase:A>5c639258-fb33-4ddb-899f-7510f9411ecd</KistlBase:A>
     <KistlBase:B>569d3c7a-69e7-4eb2-818c-5990bd6e02d9</KistlBase:B>
-  </KistlBase:IndexConstraint_ensures_unique_on_Property_RelationEntry>
-  <KistlBase:IndexConstraint_ensures_unique_on_Property_RelationEntry ExportGuid="c24e0690-cda9-49b2-afcf-0f5450d6568d">
-    <KistlBase:A>6ffe90a7-91d9-4a60-89ed-c10077c792f1</KistlBase:A>
-    <KistlBase:B>9c987946-8816-48a6-bd21-b1120c3a78b4</KistlBase:B>
   </KistlBase:IndexConstraint_ensures_unique_on_Property_RelationEntry>
   <KistlBase:IndexConstraint_ensures_unique_on_Property_RelationEntry ExportGuid="7ac307e5-5562-487d-ae3d-ef3486f40925">
     <KistlBase:A>dfc94b1a-29c4-4543-a03e-7bb8f333776d</KistlBase:A>

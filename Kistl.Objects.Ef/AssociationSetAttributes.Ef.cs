@@ -1554,40 +1554,40 @@ using Kistl.DalProvider.Ef;
 
 	/*
     Relation: FK_NavigationScreen_accessed_by_Groups
-    A: ZeroOrMore NavigationScreen as NavigationScreen
+    A: ZeroOrMore NavigationEntry as NavigationScreen
     B: ZeroOrMore Group as Groups
     Preferred Storage: Separate
 	*/
 
 // The association from A to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_NavigationScreen_accessed_by_Groups_A",
-    "NavigationScreen", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.NavigationScreenEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.NavigationScreen_accessed_by_Group_RelationEntryEfImpl)
+    "NavigationScreen", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.NavigationEntryEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryEfImpl)
     )]
 // The association from B to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_NavigationScreen_accessed_by_Groups_B",
     "Groups", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.GroupEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.NavigationScreen_accessed_by_Group_RelationEntryEfImpl)
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryEfImpl)
     )]
 
 	/*
     Relation: FK_NavigationScreen_has_Module
-    A: ZeroOrMore NavigationScreen as NavigationScreen
-    B: ZeroOrOne Module as Module
+    A: ZeroOrMore NavigationEntry as NavigationScreen
+    B: One Module as Module
     Preferred Storage: MergeIntoA
 	*/
 
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_NavigationScreen_has_Module",
-    "NavigationScreen", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.NavigationScreenEfImpl),
+    "NavigationScreen", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.NavigationEntryEfImpl),
     "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ModuleEfImpl)
     )]
 
 
 	/*
     Relation: FK_NavigationScreen_was_ChangedBy
-    A: ZeroOrMore NavigationScreen as NavigationScreen
+    A: ZeroOrMore NavigationEntry as NavigationScreen
     B: ZeroOrOne Identity as ChangedBy
     Preferred Storage: MergeIntoA
 	*/
@@ -1595,14 +1595,14 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_NavigationScreen_was_ChangedBy",
-    "NavigationScreen", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.NavigationScreenEfImpl),
+    "NavigationScreen", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.NavigationEntryEfImpl),
     "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
     )]
 
 
 	/*
     Relation: FK_NavigationScreen_was_CreatedBy
-    A: ZeroOrMore NavigationScreen as NavigationScreen
+    A: ZeroOrMore NavigationEntry as NavigationScreen
     B: ZeroOrOne Identity as CreatedBy
     Preferred Storage: MergeIntoA
 	*/
@@ -1610,7 +1610,7 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_NavigationScreen_was_CreatedBy",
-    "NavigationScreen", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.NavigationScreenEfImpl),
+    "NavigationScreen", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.NavigationEntryEfImpl),
     "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
     )]
 
@@ -1755,16 +1755,16 @@ using Kistl.DalProvider.Ef;
 
 	/*
     Relation: FK_Parent_navigates_to_Children
-    A: ZeroOrOne NavigationScreen as Parent
-    B: ZeroOrMore NavigationScreen as Children
+    A: ZeroOrOne NavigationEntry as Parent
+    B: ZeroOrMore NavigationEntry as Children
     Preferred Storage: MergeIntoB
 	*/
 
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Parent_navigates_to_Children",
-    "Parent", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.NavigationScreenEfImpl),
-    "Children", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.NavigationScreenEfImpl)
+    "Parent", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.NavigationEntryEfImpl),
+    "Children", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.NavigationEntryEfImpl)
     )]
 
 
@@ -2154,7 +2154,7 @@ using Kistl.DalProvider.Ef;
 
 	/*
     Relation: FK_Screen_modeled_by_ViewModelDescriptor
-    A: ZeroOrMore NavigationScreen as Screen
+    A: ZeroOrMore NavigationEntry as Screen
     B: ZeroOrOne ViewModelDescriptor as ViewModelDescriptor
     Preferred Storage: MergeIntoA
 	*/
@@ -2162,7 +2162,7 @@ using Kistl.DalProvider.Ef;
 // basic association
 [assembly: EdmRelationship(
     "Model", "FK_Screen_modeled_by_ViewModelDescriptor",
-    "Screen", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.NavigationScreenEfImpl),
+    "Screen", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.NavigationEntryEfImpl),
     "ViewModelDescriptor", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.GUI.ViewModelDescriptorEfImpl)
     )]
 
