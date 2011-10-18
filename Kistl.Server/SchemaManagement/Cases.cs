@@ -122,9 +122,10 @@ namespace Kistl.Server.SchemaManagement
         {
             var saved = savedSchema.FindPersistenceObject<ValueTypeProperty>(prop.ExportGuid);
 
-            // TODO: What will happen if the object hierarchie is also changed?
-            var movedUp = IsParentOf(objClass, (ObjectClass)saved.ObjectClass);
-            var movedDown = IsParentOf((ObjectClass)saved.ObjectClass, objClass);
+            // Refleced changed hierarchie
+            var currentOriginObjClass = schema.FindPersistenceObject<ObjectClass>(saved.ObjectClass.ExportGuid);
+            var movedUp = IsParentOf(objClass, currentOriginObjClass);
+            var movedDown = IsParentOf(currentOriginObjClass, objClass);
 
             var tblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
             var srcTblName = db.GetTableName(saved.Module.SchemaName, ((ObjectClass)saved.ObjectClass).TableName);
@@ -172,7 +173,7 @@ namespace Kistl.Server.SchemaManagement
             }
             else
             {
-                Log.ErrorFormat("moving a Property from '{0}' to '{1}' is not supported. ObjectClasses are not in the same hierarchy.", saved.ObjectClass.Name, prop.ObjectClass.Name);
+                Log.ErrorFormat("Moving property '{2}' from '{0}' to '{1}' is not supported. ObjectClasses are not in the same hierarchy.", saved.ObjectClass.Name, prop.ObjectClass.Name, prop.Name);
             }
         }
 
