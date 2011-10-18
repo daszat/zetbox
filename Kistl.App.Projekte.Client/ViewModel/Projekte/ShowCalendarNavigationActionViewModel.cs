@@ -14,13 +14,10 @@ namespace Kistl.App.Projekte.Client.ViewModel.Projekte
     {
         public new delegate ShowCalendarNavigationActionViewModel Factory(IKistlContext dataCtx, ViewModel parent, NavigationAction screen);
 
-        private readonly Func<IKistlContext> _ctxFactory;
-
-        public ShowCalendarNavigationActionViewModel(IViewModelDependencies appCtx, Func<IKistlContext> ctxFactory,
+        public ShowCalendarNavigationActionViewModel(IViewModelDependencies appCtx,
             IKistlContext dataCtx, ViewModel parent, NavigationAction screen)
             : base(appCtx, dataCtx, parent, screen)
         {
-            _ctxFactory = ctxFactory;
         }
 
         public override bool CanExecute()
