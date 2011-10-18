@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2011-10-18T15:57:26.426196Z" xmlns="http://dasz.at/Kistl">
+<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2011-10-18T17:42:24.492505Z" xmlns="http://dasz.at/Kistl">
   <KistlBase:Module ExportGuid="84f486f7-19fe-49ad-8e4a-6c05089e7684">
     <KistlBase:ChangedOn>2011-08-05T10:30:47.650235Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05Z</KistlBase:CreatedOn>
@@ -6315,7 +6315,7 @@
     <KistlBase:ChangedOn>2011-10-18T10:20:31.157956Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2011-10-18T10:20:31.157956Z</KistlBase:CreatedOn>
     <KistlBase:FullName>Kistl.Client.Presentables.GUI.NavigationSearchScreenViewModel</KistlBase:FullName>
-    <KistlBase:Parent>46f911ca-722a-4e6e-b3df-a7f22a158668</KistlBase:Parent>
+    <KistlBase:Parent>353304f7-dc53-472a-a800-c9fa64977418</KistlBase:Parent>
   </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="a20a8aeb-75ed-49bb-aaed-8fae52011003">
     <KistlBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</KistlBase:Assembly>
@@ -9686,8 +9686,9 @@
   </KistlBase:TypeRef>
   <KistlBase:TypeRef ExportGuid="3c3238e5-5757-4b39-98b4-599fbe27e67e">
     <KistlBase:Assembly>157c1754-6eed-49f7-883b-ae2543bafd7e</KistlBase:Assembly>
-    <KistlBase:ChangedOn>2011-10-18T15:22:58.790326Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2011-10-18T17:42:24.492505Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2011-10-18T15:22:58.790326Z</KistlBase:CreatedOn>
+    <KistlBase:Deleted>true</KistlBase:Deleted>
     <KistlBase:FullName>Kistl.Client.WPF.View.GUI.NavigationActionDisplay</KistlBase:FullName>
     <KistlBase:Parent>7332b744-15de-473c-8c3e-f1f2826adde6</KistlBase:Parent>
   </KistlBase:TypeRef>
@@ -11578,7 +11579,6 @@
     <GUI:ViewModelRef>4c9aa30e-3915-45ea-bb70-8a499cbc14ee</GUI:ViewModelRef>
   </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="ba5965a8-9cc6-4226-ab4b-70b123e8d281">
-    <GUI:DefaultEditorKind>fe30476e-a98a-4ba1-baec-083f2ad5bcde</GUI:DefaultEditorKind>
     <GUI:Description>ViewModel for Navigation Actions</GUI:Description>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:ViewModelRef>22cf4588-0227-40a8-95de-19e62b475328</GUI:ViewModelRef>
@@ -11747,12 +11747,6 @@
   <GUI:ViewDescriptor ExportGuid="3f530b14-b40e-44a0-9aa9-40676b4162fe">
     <GUI:ControlKind>ac155a59-74bd-46c1-b63a-120f68118af2</GUI:ControlKind>
     <GUI:ControlRef>e3877431-6d33-4de4-9aa5-67a626fe4c61</GUI:ControlRef>
-    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
-    <GUI:Toolkit>0</GUI:Toolkit>
-  </GUI:ViewDescriptor>
-  <GUI:ViewDescriptor ExportGuid="de992d69-c35a-4ef4-8d85-78420064eff6">
-    <GUI:ControlKind>fe30476e-a98a-4ba1-baec-083f2ad5bcde</GUI:ControlKind>
-    <GUI:ControlRef>3c3238e5-5757-4b39-98b4-599fbe27e67e</GUI:ControlRef>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
@@ -12117,10 +12111,6 @@
   <GUI:ControlKind ExportGuid="f9092349-b263-4887-b605-cccac6a361bd">
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:Name>Kistl.App.GUI.StringListKind</GUI:Name>
-  </GUI:ControlKind>
-  <GUI:ControlKind ExportGuid="fe30476e-a98a-4ba1-baec-083f2ad5bcde">
-    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
-    <GUI:Name>Kistl.App.GUI.NavigationAction</GUI:Name>
   </GUI:ControlKind>
   <GUI:ViewModelDescriptor_displayedBy_ControlKind_RelationEntry ExportGuid="1e583b93-0b57-492f-b430-07e969bc92c0">
     <GUI:A>b09632bd-f37f-4820-9f29-eb6a38e40bdb</GUI:A>
