@@ -200,6 +200,7 @@
     <Compile Include="N_to_M_relations_A.Ef.Designer.cs" />
     <Compile Include="N_to_M_relations_B.Ef.Designer.cs" />
     <Compile Include="NavigationScreen.Ef.Designer.cs" />
+    <Compile Include="NavigationSearchScreen.Ef.Designer.cs" />
     <Compile Include="NewGuidDefaultValue.Ef.Designer.cs" />
     <Compile Include="NotNullableConstraint.Ef.Designer.cs" />
     <Compile Include="ObjectClass.Ef.Designer.cs" />

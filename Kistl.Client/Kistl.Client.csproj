@@ -141,6 +141,7 @@
       <DependentUpon>DataObjectViewModelResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Presentables\FilterViewModels\DateRangeFilterViewModel.cs" />
+    <Compile Include="Presentables\GUI\NavigationSearchScreenViewModel.cs" />
     <Compile Include="Presentables\IContextViewModel.cs" />
     <Compile Include="Presentables\ISortableViewModel.cs" />
     <Compile Include="Presentables\KistlBase\FilterListEntryViewModel.cs" />

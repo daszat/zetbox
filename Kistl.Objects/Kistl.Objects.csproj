@@ -171,6 +171,7 @@
     <Compile Include="N_to_M_relations_A.Interface.Designer.cs" />
     <Compile Include="N_to_M_relations_B.Interface.Designer.cs" />
     <Compile Include="NavigationScreen.Interface.Designer.cs" />
+    <Compile Include="NavigationSearchScreen.Interface.Designer.cs" />
     <Compile Include="NewGuidDefaultValue.Interface.Designer.cs" />
     <Compile Include="NotNullableConstraint.Interface.Designer.cs" />
     <Compile Include="ObjectClass.Interface.Designer.cs" />
@@ -235,6 +236,7 @@
     <Compile Include="DayOfWeek.Interface.Designer.cs" />
     <Compile Include="DeploymentRestriction.Interface.Designer.cs" />
     <Compile Include="HighlightState.Interface.Designer.cs" />
+    <Compile Include="ListSortDirection.Interface.Designer.cs" />
     <Compile Include="MappingStatus.Interface.Designer.cs" />
     <Compile Include="Multiplicity.Interface.Designer.cs" />
     <Compile Include="PropertyInvocationType.Interface.Designer.cs" />

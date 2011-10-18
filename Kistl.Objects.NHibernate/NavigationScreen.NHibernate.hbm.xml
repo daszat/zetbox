@@ -70,6 +70,79 @@
 
 
         <!-- define the subclasses -->
+        <joined-subclass name="Kistl.App.GUI.NavigationSearchScreenNHibernateImpl+NavigationSearchScreenProxy, Kistl.Objects.NHibernateImpl"
+                         proxy="Kistl.App.GUI.NavigationSearchScreenNHibernateImpl+NavigationSearchScreenProxy, Kistl.Objects.NHibernateImpl"
+                         schema="`gui`"
+                         table="`NavigationSearchScreens`"
+                         dynamic-update="true">
+            
+            <!-- base class reference -->
+            <key column="`ID`" />
+
+            <!-- define the properties -->
+        <!-- ValueTypeProperty isValue -->
+        <property name="AllowAddNew" 
+                  column="`AllowAddNew`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="AllowDelete" 
+                  column="`AllowDelete`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="AllowSelectColumns" 
+                  column="`AllowSelectColumns`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="AllowUserFilter" 
+                  column="`AllowUserFilter`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="EnableAutoFilter" 
+                  column="`EnableAutoFilter`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="InitialSort" 
+                  column="`InitialSort`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="InitialSortDirection" 
+                  column="`InitialSortDirection`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="IsEditable" 
+                  column="`IsEditable`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="IsMultiselect" 
+                  column="`IsMultiselect`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="RespectRequiredFilter" 
+                  column="`RespectRequiredFilter`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ShowFilter" 
+                  column="`ShowFilter`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ShowMasterDetail" 
+                  column="`ShowMasterDetail`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ShowOpenCommand" 
+                  column="`ShowOpenCommand`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ShowRefreshCommand" 
+                  column="`ShowRefreshCommand`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="Type" column="`fk_Type`" class="Kistl.App.Base.ObjectClassNHibernateImpl+ObjectClassProxy, Kistl.Objects.NHibernateImpl" />
+
+
+            <!-- define the subclasses -->
+
+        </joined-subclass>
 
     </class>
 </hibernate-mapping>

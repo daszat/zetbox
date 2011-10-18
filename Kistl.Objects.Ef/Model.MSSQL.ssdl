@@ -334,6 +334,12 @@
       <End Role="A_PropertyFilterConfiguration" EntitySet="PropertyFilterConfiguration" />
       <End Role="B_MonthFilterConfiguration" EntitySet="MonthFilterConfiguration" />
     </AssociationSet>
+    <EntitySet Name="NavigationSearchScreen" EntityType="Model.Store.NavigationSearchScreen" Schema="gui" Table="NavigationSearchScreens"/>
+    <!-- inherits from NavigationScreen -->
+    <AssociationSet Name="FK_NavigationSearchScreen_NavigationScreen_ID" Association="Model.Store.FK_NavigationSearchScreen_NavigationScreen_ID" >
+      <End Role="A_NavigationScreen" EntitySet="NavigationScreen" />
+      <End Role="B_NavigationSearchScreen" EntitySet="NavigationSearchScreen" />
+    </AssociationSet>
     <EntitySet Name="NewGuidDefaultValue" EntityType="Model.Store.NewGuidDefaultValue" Schema="base" Table="NewGuidDefaultValues"/>
     <!-- inherits from DefaultPropertyValue -->
     <AssociationSet Name="FK_NewGuidDefaultValue_DefaultPropertyValue_ID" Association="Model.Store.FK_NewGuidDefaultValue_DefaultPropertyValue_ID" >
@@ -1286,6 +1292,10 @@
     <AssociationSet Name="FK_Screen_modeled_by_ViewModelDescriptor" Association="Model.Store.FK_Screen_modeled_by_ViewModelDescriptor" >
       <End Role="Screen" EntitySet="NavigationScreen" />
       <End Role="ViewModelDescriptor" EntitySet="ViewModelDescriptor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SearchScreen_of_Type" Association="Model.Store.FK_SearchScreen_of_Type" >
+      <End Role="SearchScreen" EntitySet="NavigationSearchScreen" />
+      <End Role="Type" EntitySet="ObjectClass" />
     </AssociationSet>
     <AssociationSet Name="FK_Sequence_has_Module" Association="Model.Store.FK_Sequence_has_Module" >
       <End Role="Sequence" EntitySet="Sequence" />
@@ -2320,6 +2330,28 @@
     <Property Name="CreatedOn" Type="datetime2" Nullable="false" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Title" Type="nvarchar" MaxLength="500" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="NavigationSearchScreen">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="fk_Type" Type="int" />
+    <Property Name="AllowAddNew" Type="bit" Nullable="true" />
+    <Property Name="AllowDelete" Type="bit" Nullable="true" />
+    <Property Name="AllowSelectColumns" Type="bit" Nullable="true" />
+    <Property Name="AllowUserFilter" Type="bit" Nullable="true" />
+    <Property Name="EnableAutoFilter" Type="bit" Nullable="true" />
+    <Property Name="InitialSort" Type="nvarchar" MaxLength="1000" Nullable="true" />
+    <Property Name="InitialSortDirection" Type="int" Nullable="true" />
+    <Property Name="IsEditable" Type="bit" Nullable="true" />
+    <Property Name="IsMultiselect" Type="bit" Nullable="true" />
+    <Property Name="RespectRequiredFilter" Type="bit" Nullable="true" />
+    <Property Name="ShowFilter" Type="bit" Nullable="true" />
+    <Property Name="ShowMasterDetail" Type="bit" Nullable="true" />
+    <Property Name="ShowOpenCommand" Type="bit" Nullable="true" />
+    <Property Name="ShowRefreshCommand" Type="bit" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="NewGuidDefaultValue">
@@ -5459,6 +5491,20 @@
   </Association>
 
 
+  <Association Name="FK_SearchScreen_of_Type">
+    <End Role="Type" Type="Model.Store.ObjectClass" Multiplicity="0..1" />
+    <End Role="SearchScreen" Type="Model.Store.NavigationSearchScreen" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Type">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SearchScreen">
+        <PropertyRef Name="fk_Type" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
   <Association Name="FK_Sequence_has_Module">
     <End Role="Module" Type="Model.Store.Module" Multiplicity="0..1" />
     <End Role="Sequence" Type="Model.Store.Sequence" Multiplicity="*" />
@@ -6481,6 +6527,18 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_MonthFilterConfiguration">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NavigationSearchScreen_NavigationScreen_ID">
+    <End Role="A_NavigationScreen" Type="Model.Store.NavigationScreen" Multiplicity="1" />
+    <End Role="B_NavigationSearchScreen" Type="Model.Store.NavigationSearchScreen" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_NavigationScreen">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_NavigationSearchScreen">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>

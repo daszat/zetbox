@@ -1049,8 +1049,8 @@ namespace Kistl.Client.Presentables.KistlBase
 
         #region Sorting
         private string _sortProperty = null;
-        private ListSortDirection _sortDirection = ListSortDirection.Ascending;
-        public void Sort(string propName, ListSortDirection direction)
+        private System.ComponentModel.ListSortDirection _sortDirection = System.ComponentModel.ListSortDirection.Ascending;
+        public void Sort(string propName, System.ComponentModel.ListSortDirection direction)
         {
             if (string.IsNullOrEmpty(propName)) throw new ArgumentNullException("propName");
             _sortProperty = propName;
@@ -1066,9 +1066,9 @@ namespace Kistl.Client.Presentables.KistlBase
         }
         public void SetInitialSort(string propName)
         {
-            SetInitialSort(propName, ListSortDirection.Ascending);
+            SetInitialSort(propName, System.ComponentModel.ListSortDirection.Ascending);
         }
-        public void SetInitialSort(string propName, ListSortDirection direction)
+        public void SetInitialSort(string propName, System.ComponentModel.ListSortDirection direction)
         {
             if (string.IsNullOrEmpty(propName)) throw new ArgumentNullException("propName");
             _sortProperty = propName;
@@ -1076,7 +1076,7 @@ namespace Kistl.Client.Presentables.KistlBase
         }
 
         public string SortProperty { get { return _sortProperty; } }
-        public ListSortDirection SortDirection { get { return _sortDirection; } }
+        public System.ComponentModel.ListSortDirection SortDirection { get { return _sortDirection; } }
         #endregion
 
         #region Opening items
@@ -1337,7 +1337,7 @@ namespace Kistl.Client.Presentables.KistlBase
             {
                 result = result.OrderBy(string.Format("it.{0} {1}",                // Sorting CompundObjects does not work
                                 _sortProperty,                         // Maybe we should implement a custom comparer
-                                _sortDirection == ListSortDirection.Descending ? "desc" : string.Empty));
+                                _sortDirection == System.ComponentModel.ListSortDirection.Descending ? "desc" : string.Empty));
             }
 
             return result;
@@ -1439,7 +1439,7 @@ namespace Kistl.Client.Presentables.KistlBase
                            .AsQueryable(this.InterfaceType.Type)               // To a typed List
                            .OrderBy(string.Format("it.{0} {1}",                // Sorting CompundObjects does not work
                                         _sortProperty,                         // Maybe we should implement a custom comparer
-                                        _sortDirection == ListSortDirection.Descending ? "desc" : string.Empty))
+                                        _sortDirection == System.ComponentModel.ListSortDirection.Descending ? "desc" : string.Empty))
                            .Cast<IDataObject>()
                            .Select(obj => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj))
                     );

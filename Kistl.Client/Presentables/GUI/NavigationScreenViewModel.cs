@@ -32,7 +32,15 @@ namespace Kistl.Client.Presentables.GUI
                 }
                 else
                 {
-                    return ModelFactory.CreateViewModel<NavigationScreenViewModel.Factory>().Invoke(dataCtx, parent, screen);
+                    // TODO: Move this into a Method
+                    if (screen is NavigationSearchScreen)
+                    {
+                        return ModelFactory.CreateViewModel<NavigationSearchScreenViewModel.Factory>().Invoke(dataCtx, parent, (NavigationSearchScreen)screen);
+                    }
+                    else
+                    {
+                        return ModelFactory.CreateViewModel<NavigationScreenViewModel.Factory>().Invoke(dataCtx, parent, screen);
+                    }
                 }
             });
         }

@@ -212,6 +212,7 @@
     <Compile Include="N_to_M_relations_A.NHibernate.Designer.cs" />
     <Compile Include="N_to_M_relations_B.NHibernate.Designer.cs" />
     <Compile Include="NavigationScreen.NHibernate.Designer.cs" />
+    <Compile Include="NavigationSearchScreen.NHibernate.Designer.cs" />
     <Compile Include="NewGuidDefaultValue.NHibernate.Designer.cs" />
     <Compile Include="NotNullableConstraint.NHibernate.Designer.cs" />
     <Compile Include="ObjectClass.NHibernate.Designer.cs" />

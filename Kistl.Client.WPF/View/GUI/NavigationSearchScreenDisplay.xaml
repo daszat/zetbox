@@ -1,0 +1,10 @@
+﻿<UserControl x:Class="Kistl.Client.WPF.View.GUI.NavigationSearchScreenDisplay"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit">
+  <Grid>
+    <ContentPresenter ContentTemplateSelector="{StaticResource defaultTemplateSelector}"
+                      Content="{Binding ListViewModel}"
+                      Margin="10"/>
+  </Grid>
+</UserControl>

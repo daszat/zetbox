@@ -2168,6 +2168,21 @@ using Kistl.DalProvider.Ef;
 
 
 	/*
+    Relation: FK_SearchScreen_of_Type
+    A: ZeroOrMore NavigationSearchScreen as SearchScreen
+    B: ZeroOrOne ObjectClass as Type
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_SearchScreen_of_Type",
+    "SearchScreen", RelationshipMultiplicity.Many, typeof(Kistl.App.GUI.NavigationSearchScreenEfImpl),
+    "Type", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ObjectClassEfImpl)
+    )]
+
+
+	/*
     Relation: FK_Sequence_has_Module
     A: ZeroOrMore Sequence as Sequence
     B: One Module as Module

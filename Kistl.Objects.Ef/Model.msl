@@ -725,6 +725,25 @@
 <ScalarProperty Name="Title" ColumnName="Title" />
 	    </MappingFragment>
       </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.NavigationSearchScreen)">
+	    <MappingFragment StoreEntitySet="NavigationSearchScreen">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="AllowAddNew" ColumnName="AllowAddNew" />
+<ScalarProperty Name="AllowDelete" ColumnName="AllowDelete" />
+<ScalarProperty Name="AllowSelectColumns" ColumnName="AllowSelectColumns" />
+<ScalarProperty Name="AllowUserFilter" ColumnName="AllowUserFilter" />
+<ScalarProperty Name="EnableAutoFilter" ColumnName="EnableAutoFilter" />
+<ScalarProperty Name="InitialSort" ColumnName="InitialSort" />
+<ScalarProperty Name="InitialSortDirectionImpl" ColumnName="InitialSortDirection" />
+<ScalarProperty Name="IsEditable" ColumnName="IsEditable" />
+<ScalarProperty Name="IsMultiselect" ColumnName="IsMultiselect" />
+<ScalarProperty Name="RespectRequiredFilter" ColumnName="RespectRequiredFilter" />
+<ScalarProperty Name="ShowFilter" ColumnName="ShowFilter" />
+<ScalarProperty Name="ShowMasterDetail" ColumnName="ShowMasterDetail" />
+<ScalarProperty Name="ShowOpenCommand" ColumnName="ShowOpenCommand" />
+<ScalarProperty Name="ShowRefreshCommand" ColumnName="ShowRefreshCommand" />
+	    </MappingFragment>
+      </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="One_to_N_relations_N">
       <EntityTypeMapping TypeName="IsTypeOf(Model.One_to_N_relations_N)">
@@ -4094,6 +4113,23 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_ViewModelDescriptor" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_SearchScreen_of_Type
+    A: ZeroOrMore NavigationSearchScreen as SearchScreen
+    B: ZeroOrOne ObjectClass as Type
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_SearchScreen_of_Type"
+                           TypeName="Model.FK_SearchScreen_of_Type"
+                           StoreEntitySet="NavigationSearchScreen" >
+      <EndProperty Name="Type">
+        <ScalarProperty Name="ID" ColumnName="fk_Type"/>
+      </EndProperty>
+      <EndProperty Name="SearchScreen">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Type" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_Sequence_has_Module

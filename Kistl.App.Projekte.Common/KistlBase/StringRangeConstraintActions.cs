@@ -41,7 +41,7 @@ namespace Kistl.App.Base
             object constrainedValueParam)
         {
             int length = (constrainedValueParam ?? String.Empty).ToString().Length;
-            e.Result = (obj.MinLength <= length) && (length <= (obj.MaxLength ?? int.MaxValue));
+            e.Result = length == 0 || ((obj.MinLength <= length) && (length <= (obj.MaxLength ?? int.MaxValue)));
         }
 
         [Invocation]

@@ -693,9 +693,9 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
         #region Sorting
         private string _sortProperty = null;
-        private ListSortDirection _sortDirection = ListSortDirection.Ascending;
+        private System.ComponentModel.ListSortDirection _sortDirection = System.ComponentModel.ListSortDirection.Ascending;
 
-        public void Sort(string propName, ListSortDirection direction)
+        public void Sort(string propName, System.ComponentModel.ListSortDirection direction)
         {
             _sortProperty = propName;
             _sortDirection = direction;
@@ -708,7 +708,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
         }
 
         public string SortProperty { get { return _sortProperty; } }
-        public ListSortDirection SortDirection { get { return _sortDirection; } }
+        public System.ComponentModel.ListSortDirection SortDirection { get { return _sortDirection; } }
         #endregion
 
         protected override ParseResult<IReadOnlyObservableList<DataObjectViewModel>> ParseValue(string str)

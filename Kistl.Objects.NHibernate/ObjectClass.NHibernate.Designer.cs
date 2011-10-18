@@ -1017,6 +1017,13 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
 
+            // Follow SearchScreen_of_Type
+            result.AddRange(Context.AttachedObjects
+                .OfType<Kistl.App.GUI.NavigationSearchScreen>()
+                .Where(child => child.Type == this
+                    && child.ObjectState == DataObjectState.Deleted)
+                .Cast<NHibernatePersistenceObject>());
+
             // Follow SourceTable_created_ObjectClass
             result.AddRange(Context.AttachedObjects
                 .OfType<ZBox.App.SchemaMigration.SourceTable>()

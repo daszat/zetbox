@@ -789,6 +789,10 @@
       <End Role="Screen" EntitySet="NavigationScreen" />
       <End Role="ViewModelDescriptor" EntitySet="ViewModelDescriptor" />
     </AssociationSet>
+    <AssociationSet Name="FK_SearchScreen_of_Type" Association="Model.FK_SearchScreen_of_Type" >
+      <End Role="SearchScreen" EntitySet="NavigationScreen" />
+      <End Role="Type" EntitySet="DataType" />
+    </AssociationSet>
     <AssociationSet Name="FK_Sequence_has_Module" Association="Model.FK_Sequence_has_Module" >
       <End Role="Sequence" EntitySet="Sequence" />
       <End Role="Module" EntitySet="Module" />
@@ -2643,6 +2647,26 @@
   </EntityType>
   <EntityType Name="MonthFilterConfiguration" BaseType="Model.PropertyFilterConfiguration">
     <Property Name="IsCurrentMonthDefault" Type="Boolean" Nullable="true"  />
+  </EntityType>
+  <EntityType Name="NavigationSearchScreen" BaseType="Model.NavigationScreen">
+    <Property Name="AllowAddNew" Type="Boolean" Nullable="true"  />
+    <Property Name="AllowDelete" Type="Boolean" Nullable="true"  />
+    <Property Name="AllowSelectColumns" Type="Boolean" Nullable="true"  />
+    <Property Name="AllowUserFilter" Type="Boolean" Nullable="true"  />
+    <Property Name="EnableAutoFilter" Type="Boolean" Nullable="true"  />
+    <Property Name="InitialSort" Type="String" Nullable="true" MaxLength="1000"  />
+    <Property Name="InitialSortDirectionImpl" Type="Int32" Nullable="true"  />
+    <Property Name="IsEditable" Type="Boolean" Nullable="true"  />
+    <Property Name="IsMultiselect" Type="Boolean" Nullable="true"  />
+    <Property Name="RespectRequiredFilter" Type="Boolean" Nullable="true"  />
+    <Property Name="ShowFilter" Type="Boolean" Nullable="true"  />
+    <Property Name="ShowMasterDetail" Type="Boolean" Nullable="true"  />
+    <Property Name="ShowOpenCommand" Type="Boolean" Nullable="true"  />
+    <Property Name="ShowRefreshCommand" Type="Boolean" Nullable="true"  />
+    <NavigationProperty Name="TypeImpl"
+                        Relationship="Model.FK_SearchScreen_of_Type"
+                        FromRole="SearchScreen"
+                        ToRole="Type" />
   </EntityType>
   <EntityType Name="NewGuidDefaultValue" BaseType="Model.DefaultPropertyValue">
   </EntityType>
@@ -4643,6 +4667,14 @@
          Multiplicity="*" />
     <End Role="ViewModelDescriptor"
          Type="Model.ViewModelDescriptor" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_SearchScreen_of_Type" >
+    <End Role="SearchScreen"
+         Type="Model.NavigationSearchScreen" 
+         Multiplicity="*" />
+    <End Role="Type"
+         Type="Model.ObjectClass" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_Sequence_has_Module" >
