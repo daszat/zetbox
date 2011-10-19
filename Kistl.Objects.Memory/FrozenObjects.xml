@@ -34097,7 +34097,7 @@
     <GUI:CreatedOn>2011-10-18T16:23:36.583319Z</GUI:CreatedOn>
     <GUI:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</GUI:Module>
     <GUI:Parent>8bc286d2-899a-4348-9c5a-3d4e90f3ff6d</GUI:Parent>
-    <GUI:Children_pos>0</GUI:Children_pos>
+    <GUI:Children_pos>200</GUI:Children_pos>
     <GUI:Title>Kalender</GUI:Title>
     <GUI:ViewModelDescriptor>ec83ad5c-a62a-4407-81d4-6f6ab15ef633</GUI:ViewModelDescriptor>
   </GUI:NavigationAction>
@@ -34106,7 +34106,7 @@
     <GUI:CreatedOn>2011-10-18T11:06:40.027207Z</GUI:CreatedOn>
     <GUI:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</GUI:Module>
     <GUI:Parent>8bc286d2-899a-4348-9c5a-3d4e90f3ff6d</GUI:Parent>
-    <GUI:Children_pos>1</GUI:Children_pos>
+    <GUI:Children_pos>300</GUI:Children_pos>
     <GUI:Title>Projekt Suche</GUI:Title>
     <GUI:AllowAddNew>true</GUI:AllowAddNew>
     <GUI:Type>885939e8-82e1-4fdf-b80e-5f612d5131d3</GUI:Type>
@@ -34123,7 +34123,7 @@
     <GUI:CreatedOn>2011-10-18T11:06:40.027207Z</GUI:CreatedOn>
     <GUI:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</GUI:Module>
     <GUI:Parent>8bc286d2-899a-4348-9c5a-3d4e90f3ff6d</GUI:Parent>
-    <GUI:Children_pos>0</GUI:Children_pos>
+    <GUI:Children_pos>100</GUI:Children_pos>
     <GUI:Title>Statistik</GUI:Title>
   </GUI:NavigationScreen>
   <KistlBase:GroupMembership ExportGuid="b4abcf53-5464-4942-a36b-bbc124315df2">
