@@ -103,9 +103,6 @@ namespace Kistl.Client.Presentables.DtoViewModels
                 return null;
             }
             var isPrintableRoot = ExtractIsPrintableRoot(parentProp, dto);
-            var debugInfo = parentProp == null
-                ? string.Format("topgroup:{0}", dto.GetType())
-                : string.Format("group:{0}.{1} = {2}", parentProp.DeclaringType, parentProp.Name, dto.GetType());
 
             var dataProps = new List<PropertyInfo>();
             var percentProps = new Dictionary<string, PropertyInfo>();
