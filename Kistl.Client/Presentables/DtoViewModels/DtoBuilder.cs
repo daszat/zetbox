@@ -220,9 +220,6 @@ namespace Kistl.Client.Presentables.DtoViewModels
             ExtractProps(dto.GetType().FindElementTypes().FirstOrDefault() ?? dto.GetType(),
                 dataProps, percentProps);
 
-            var headers = dataProps.Select(p => p.Name).ToArray();
-            var cells = new List<DtoBaseViewModel[]>();
-
             var allColumns = new Dictionary<PropertyInfo, DtoColumnViewModel>();
             int columnIdx = 0;
             foreach (var prop in dataProps)

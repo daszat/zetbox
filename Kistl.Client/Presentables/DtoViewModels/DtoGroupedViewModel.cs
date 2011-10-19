@@ -60,8 +60,16 @@ namespace Kistl.Client.Presentables.DtoViewModels
 
             this.AlternateBackground = other.AlternateBackground;
             var selectedIdx = other.Items.IndexOf(other.SelectedItem);
-
             DtoBuilder.Merge(this.Items, other.Items);
+
+            if (selectedIdx >= 0 && selectedIdx < this.Items.Count)
+            {
+                this.SelectedItem = this.Items[selectedIdx];
+            }
+            else
+            {
+                this.SelectedItem = this.Items.FirstOrDefault();
+            }
         }
     }
 }
