@@ -114,6 +114,8 @@ namespace Kistl.Client.Presentables.DtoViewModels
             {
                 var value = dto.GetPropertyValue<object>(prop.Name);
                 var viewModel = BuildFrom(root, prop, value, dependencies, dataCtx, parent);
+                if (viewModel == null) continue; // do not add without content
+
                 var valueModel = viewModel as DtoValueViewModel;
                 if (valueModel != null && percentProps.ContainsKey(prop.Name))
                 {
@@ -121,10 +123,7 @@ namespace Kistl.Client.Presentables.DtoViewModels
                     valueModel.AlternateRepresentationAlignment = ContentAlignment.MiddleRight;
                 }
 
-                if (viewModel != null)
-                {
-                    items.Add(viewModel);
-                }
+                items.Add(viewModel);
             }
 
             var result = parent as DtoGroupedViewModel;
@@ -178,6 +177,8 @@ namespace Kistl.Client.Presentables.DtoViewModels
             {
                 var value = dto.GetPropertyValue<object>(prop.Name);
                 var viewModel = BuildFrom(root, prop, value, dependencies, dataCtx, parent);
+                if (viewModel == null) continue; // do not add without content
+
                 var valueModel = viewModel as DtoValueViewModel;
                 if (valueModel != null && percentProps.ContainsKey(prop.Name))
                 {
@@ -185,10 +186,7 @@ namespace Kistl.Client.Presentables.DtoViewModels
                     valueModel.AlternateRepresentationAlignment = ContentAlignment.MiddleRight;
                 }
 
-                if (viewModel != null)
-                {
-                    result.Items.Add(viewModel);
-                }
+                result.Items.Add(viewModel);
             }
 
             return result;
@@ -246,10 +244,13 @@ namespace Kistl.Client.Presentables.DtoViewModels
 
                 result.Rows.Add(row);
 
-                columnIdx = 0;
+                columnIdx = -1;
                 foreach (var prop in dataProps)
                 {
+                    columnIdx += 1;
                     var viewModel = BuildFrom(root, prop, line.GetPropertyValue<object>(prop.Name), dependencies, dataCtx, row);
+                    if (viewModel == null) continue; // do not add cell without content
+
                     viewModel.Title = null; // do not display title in table
                     var valueModel = viewModel as DtoValueViewModel;
                     if (valueModel != null && percentProps.ContainsKey(prop.Name))
@@ -258,12 +259,8 @@ namespace Kistl.Client.Presentables.DtoViewModels
                         valueModel.AlternateRepresentationAlignment = ContentAlignment.MiddleRight;
                     }
 
-                    if (viewModel != null)
-                    {
-                        var cell = new DtoCellViewModel(dependencies, dataCtx, result, row, allColumns[prop], new GuiGridLocationAttribute(rowIdx, columnIdx), viewModel, string.Format("cell:{0}.{1}[{2}].{3}", parentProp.DeclaringType, parentProp.Name, rowIdx, prop.Name));
-                        result.Cells.Add(cell);
-                    }
-                    columnIdx += 1;
+                    var cell = new DtoCellViewModel(dependencies, dataCtx, result, row, allColumns[prop], new GuiGridLocationAttribute(rowIdx, columnIdx), viewModel, string.Format("cell:{0}.{1}[{2}].{3}", parentProp.DeclaringType, parentProp.Name, rowIdx, prop.Name));
+                    result.Cells.Add(cell);
                 }
 
                 rowIdx += 1;
@@ -317,6 +314,7 @@ namespace Kistl.Client.Presentables.DtoViewModels
                 foreach (var prop in dataProps)
                 {
                     var value = BuildFrom(root, prop, dto.GetPropertyValue<object>(prop.Name), dependencies, dataCtx, result);
+                    if (value == null) continue; // do not add without content
 
                     // struct initialises to (0,0) by default
                     var gridLocation = prop.GetCustomAttributes(false)
