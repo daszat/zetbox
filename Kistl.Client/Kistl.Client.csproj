@@ -140,6 +140,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataObjectViewModelResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Presentables\DtoViewModels\DtoBuilder.cs" />
+    <Compile Include="Presentables\DtoViewModels\DtoBaseViewModel.cs" />
+    <Compile Include="Presentables\DtoViewModels\DtoGroupedViewModel.cs" />
+    <Compile Include="Presentables\DtoViewModels\DtoPrinter.cs" />
+    <Compile Include="Presentables\DtoViewModels\DtoTabbedViewModel.cs" />
+    <Compile Include="Presentables\DtoViewModels\DtoTableViewModel.cs" />
+    <Compile Include="Presentables\DtoViewModels\DtoValueViewModel.cs" />
     <Compile Include="Presentables\FilterViewModels\DateRangeFilterViewModel.cs" />
     <Compile Include="Presentables\GUI\NavigationActionViewModel.cs" />
     <Compile Include="Presentables\GUI\NavigationScreenViewModel.cs" />

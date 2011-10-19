@@ -100,13 +100,20 @@
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Commands\SmartRoutedUICommand.cs" />
     <Compile Include="Commands\WrappedKistlCommand.cs" />
+    <Compile Include="Converter\ContentAlignmentConverters.cs" />
     <Compile Include="Converter\Converters.cs" />
+    <Compile Include="Converter\EmptyCountToCollapsedConverter.cs" />
+    <Compile Include="Converter\EmptyStringToCollapsedConverter.cs" />
+    <Compile Include="Converter\FormattingToFontWeightConverter.cs" />
     <Compile Include="Converter\HighlightConverter.cs" />
     <Compile Include="Converter\DebugConverter.cs" />
     <Compile Include="Converter\IconConverter.cs" />
     <Compile Include="Converter\ImageConverter.cs" />
     <Compile Include="Converter\ImageCtrlConverter.cs" />
     <Compile Include="CustomControls\ContentAdorner.cs" />
+    <Compile Include="CustomControls\DtoDisplayer.xaml.cs">
+      <DependentUpon>DtoDisplayer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WpfDelayedTask.cs" />
     <Compile Include="CustomControls\LabeledViewHorizontal.xaml.cs">
       <DependentUpon>LabeledViewHorizontal.xaml</DependentUpon>
@@ -168,6 +175,10 @@
     <None Include="Kistl.snk" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="CustomControls\DtoDisplayer.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="CustomControls\LabeledViewHorizontal.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

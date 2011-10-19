@@ -26,6 +26,12 @@
             <commands:Converter x:Key="CommandConverter" />
             <tk:TypeNameTemplateSelector x:Key="TypeNameTemplateSelector" />
 
+            <converter:HorizontalContentAlignmentConverter x:Key="HorizontalContentAlignmentConverter"/>
+            <converter:VerticalContentAlignmentConverter x:Key="VerticalContentAlignmentConverter"/>
+            <converter:EmptyStringToCollapsedConverter x:Key="EmptyStringToCollapsedConverter"/>
+            <converter:EmptyCountToCollapsedConverter x:Key="EmptyCountToCollapsedConverter"/>
+            <converter:FormattingToFontWeightConverter x:Key="FormattingToFontWeightConverter"/>
+
             <converter:HighlightGridBackgroundConverter x:Key="HighlightGridBackgroundConverter" />
             <converter:HighlightGridForegroundConverter x:Key="HighlightGridForegroundConverter" />
             <converter:HighlightGridFontStyleConverter x:Key="HighlightGridFontStyleConverter" />

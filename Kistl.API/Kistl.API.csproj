@@ -69,6 +69,7 @@
     <Compile Include="BinarySerializer.cs" />
     <Compile Include="CollectionEntries.cs" />
     <Compile Include="Configuration\KistlConfig.cs" />
+    <Compile Include="Dtos\DtoTransformationAttributes.cs" />
     <Compile Include="ExpressionFilter.cs" />
     <Compile Include="ExpressionTreeTranslator.cs" />
     <Compile Include="ExpressionTreeVisitor.cs" />
