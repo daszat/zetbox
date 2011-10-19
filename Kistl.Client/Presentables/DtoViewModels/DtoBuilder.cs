@@ -427,13 +427,13 @@ namespace Kistl.Client.Presentables.DtoViewModels
             var description = ExtractDescription(parentProp, dto);
             var background = ExtractBackground(parentProp, dto);
             var asPercent = parentProp.GetCustomAttributes(typeof(GuiFormatAsPercentAttribute), true).Length > 0;
+            var formatString = parentProp.GetCustomAttributes(typeof(GuiFormatStringAttribute), true).OfType<GuiFormatStringAttribute>().Select(gfsa => gfsa.FormatString).SingleOrDefault();
 
             if (typeof(long).IsAssignableFrom(propertyType) || typeof(int).IsAssignableFrom(propertyType) || typeof(short).IsAssignableFrom(propertyType))
             {
-                // TODO: create && check formatstring attribute
                 valueModel = new DtoValueViewModel(dependencies, dataCtx, parent, string.Format("value:{0}.{1} = {2}", parentProp.DeclaringType, parentProp.Name, dto))
                 {
-                    Value = asPercent ? string.Format("{0} %", 100 * Convert.ToInt64(dto)) : string.Format("{0}", dto),
+                    Value = asPercent ? string.Format("{0} %", 100 * Convert.ToInt64(dto)) : string.Format(formatString ?? "{0}", dto),
                     ValueAlignment = ContentAlignment.MiddleRight,
                     Title = title,
                     Description = description,
@@ -451,7 +451,7 @@ namespace Kistl.Client.Presentables.DtoViewModels
             {
                 valueModel = new DtoValueViewModel(dependencies, dataCtx, parent, string.Format("value:{0}.{1} = {2}", parentProp.DeclaringType, parentProp.Name, dto))
                 {
-                    Value = asPercent ? string.Format("{0:0.00} %", 100 * Convert.ToDouble(dto)) : string.Format("{0:0.00}", dto),
+                    Value = asPercent ? string.Format("{0:0.00} %", 100 * Convert.ToDouble(dto)) : string.Format(formatString ?? "{0:0.00}", dto),
                     ValueAlignment = ContentAlignment.MiddleRight,
                     Title = title,
                     Description = description,

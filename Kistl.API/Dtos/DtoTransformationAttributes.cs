@@ -133,6 +133,25 @@ namespace Kistl.API.Dtos
     }
 
     /// <summary>
+    /// Specify a format string to be used for this value.
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Property, Inherited = false, AllowMultiple = false)]
+    public sealed class GuiFormatStringAttribute : Attribute
+    {
+        private readonly string _formatString;
+
+        public GuiFormatStringAttribute(string formatString)
+        {
+            this._formatString = formatString;
+        }
+
+        public string FormatString
+        {
+            get { return _formatString; }
+        }
+    }
+
+    /// <summary>
     /// Specify whether or not the class can be the root of a print-out.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Property, Inherited = false, AllowMultiple = false)]
