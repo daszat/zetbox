@@ -1,31 +1,44 @@
 ﻿<local:PreviewEditor x:Class="Kistl.Client.WPF.View.DocumentManagement.DocumentWithPreviewEditor"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Kistl.Client.WPF.View.DocumentManagement"
              xmlns:ctrls="clr-namespace:Kistl.Client.WPF.CustomControls;assembly=Kistl.Client.WPF.Toolkit"
              xmlns:tk="clr-namespace:Kistl.Client.WPF.Toolkit;assembly=Kistl.Client.WPF.Toolkit"
              xmlns:viewKistlBase="clr-namespace:Kistl.Client.WPF.View.KistlBase"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
-    <DockPanel>
-      <ctrls:WorkaroundToolBar DockPanel.Dock="Top"
-                               ItemsSource="{Binding Actions}"
-                               ItemTemplateSelector="{StaticResource defaultTemplateSelector}">
-        <ctrls:WorkaroundToolBar.Resources>
-          <Style TargetType="{x:Type viewKistlBase:ActionDisplay}"
-                 BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" />
-        </ctrls:WorkaroundToolBar.Resources>
-      </ctrls:WorkaroundToolBar>
-      <StackPanel DockPanel.Dock="Top">
-        <ctrls:LabeledView DataContext="{Binding PropertyModelsByName[Name]}" />
-        <ctrls:LabeledView DataContext="{Binding PropertyModelsByName[CreatedOn]}" />
-        <ctrls:LabeledView DataContext="{Binding PropertyModelsByName[CreatedBy]}" />
-        <ctrls:LabeledView DataContext="{Binding PropertyModelsByName[ChangedOn]}" />
-        <ctrls:LabeledView DataContext="{Binding PropertyModelsByName[ChangedBy]}" />
-        <ctrls:LabeledView DataContext="{Binding PropertyModelsByName[ExportGuid]}" />
-      </StackPanel>
-      <ContentPresenter x:Name="preview" />
-    </DockPanel>
+  <DockPanel>
+    <ctrls:WorkaroundToolBar DockPanel.Dock="Top"
+                             ItemsSource="{Binding Actions}"
+                             ItemTemplateSelector="{StaticResource defaultTemplateSelector}">
+      <ctrls:WorkaroundToolBar.Resources>
+        <Style TargetType="{x:Type viewKistlBase:ActionDisplay}"
+               BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" />
+      </ctrls:WorkaroundToolBar.Resources>
+    </ctrls:WorkaroundToolBar>
+    <TabControl DockPanel.Dock="Top">
+      <TabItem Header="Summary">
+        <StackPanel>
+          <ctrls:LabeledView DataContext="{Binding PropertyModelsByName[Name]}" />
+        </StackPanel>
+      </TabItem>
+      <TabItem Header="Revisions">
+        <StackPanel>
+          <ctrls:LabeledView DataContext="{Binding PropertyModelsByName[Revisions]}" />
+        </StackPanel>
+      </TabItem>
+      <TabItem Header="Metadata">
+        <StackPanel>
+          <ctrls:LabeledView DataContext="{Binding PropertyModelsByName[CreatedOn]}" />
+          <ctrls:LabeledView DataContext="{Binding PropertyModelsByName[CreatedBy]}" />
+          <ctrls:LabeledView DataContext="{Binding PropertyModelsByName[ChangedOn]}" />
+          <ctrls:LabeledView DataContext="{Binding PropertyModelsByName[ChangedBy]}" />
+          <ctrls:LabeledView DataContext="{Binding PropertyModelsByName[ExportGuid]}" />
+        </StackPanel>
+      </TabItem>
+    </TabControl>
+    <ContentPresenter x:Name="preview" />
+  </DockPanel>
 </local:PreviewEditor>
