@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2011-10-18T17:42:24.492505Z" xmlns="http://dasz.at/Kistl">
+<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2011-10-21T14:32:49.180246Z" xmlns="http://dasz.at/Kistl">
   <KistlBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <KistlBase:ChangedOn>2011-08-05T10:30:47.603232Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2011-06-15T14:03:02Z</KistlBase:CreatedOn>
@@ -1238,7 +1238,7 @@
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>8043ccd8-6ff1-4b45-b04b-e0a0f19ce1b6</KistlBase:BaseObjectClass>
-    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>377176c3-4ff9-4a6f-bfc0-de893bce1c12</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -1255,7 +1255,7 @@
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>8043ccd8-6ff1-4b45-b04b-e0a0f19ce1b6</KistlBase:BaseObjectClass>
-    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>62f82ae5-b646-4ce3-a66a-da3fe3f49e9f</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -1271,7 +1271,7 @@
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
-    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>f580a1b4-26c0-46e8-a268-3b3d4b4f15a7</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>true</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -1288,7 +1288,7 @@
     <GUI:ShowIdInLists>true</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
     <KistlBase:BaseObjectClass>8043ccd8-6ff1-4b45-b04b-e0a0f19ce1b6</KistlBase:BaseObjectClass>
-    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>c6753751-760d-498d-9e0a-f7f85f44e985</GUI:DefaultViewModelDescriptor>
     <KistlBase:IsAbstract>false</KistlBase:IsAbstract>
     <KistlBase:IsFrozenObject>false</KistlBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -1711,7 +1711,20 @@
     <KistlBase:CreatedOn>2010-03-10T13:14:05Z</KistlBase:CreatedOn>
     <KistlBase:Property>91566b41-879d-4e72-b48b-9677cc156649</KistlBase:Property>
   </KistlBase:NewGuidDefaultValue>
+  <GUI:ViewModelDescriptor ExportGuid="377176c3-4ff9-4a6f-bfc0-de893bce1c12">
+    <GUI:DefaultEditorKind>24338f74-ec90-48a5-90ff-b9830082cb12</GUI:DefaultEditorKind>
+    <GUI:Description>ViewModel for documents</GUI:Description>
+    <GUI:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</GUI:Module>
+    <GUI:ViewModelRef>0a8a2ea9-dbe0-4586-a7ff-43a482045fab</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="62f82ae5-b646-4ce3-a66a-da3fe3f49e9f">
+    <GUI:DefaultEditorKind>b22d6746-5704-4ea7-934a-c3648081bd0a</GUI:DefaultEditorKind>
+    <GUI:Description>ViewModel for dynamic files</GUI:Description>
+    <GUI:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</GUI:Module>
+    <GUI:ViewModelRef>bb1ca52e-a835-4282-9411-81ee06789f72</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="f580a1b4-26c0-46e8-a268-3b3d4b4f15a7">
+    <GUI:DefaultEditorKind>b22d6746-5704-4ea7-934a-c3648081bd0a</GUI:DefaultEditorKind>
     <GUI:Description>ViewModel for a File</GUI:Description>
     <GUI:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</GUI:Module>
     <GUI:ViewModelRef>02072003-1525-49fb-b180-34b5b03262cf</GUI:ViewModelRef>
@@ -1722,15 +1735,44 @@
     <GUI:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</GUI:Module>
     <GUI:ViewModelRef>de119bfe-c5ac-47ec-902a-9800ea1bcafe</GUI:ViewModelRef>
   </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="c6753751-760d-498d-9e0a-f7f85f44e985">
+    <GUI:DefaultEditorKind>b22d6746-5704-4ea7-934a-c3648081bd0a</GUI:DefaultEditorKind>
+    <GUI:Description>ViewModel for static files</GUI:Description>
+    <GUI:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</GUI:Module>
+    <GUI:ViewModelRef>4f827999-8240-4a54-83a7-71270a227d5e</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewDescriptor ExportGuid="a9d450c0-1882-476a-b0b8-270df5c00623">
+    <GUI:ControlKind>24338f74-ec90-48a5-90ff-b9830082cb12</GUI:ControlKind>
+    <GUI:ControlRef>002642f4-df4f-4204-9051-1abdfd034263</GUI:ControlRef>
+    <GUI:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</GUI:Module>
+    <GUI:Toolkit>0</GUI:Toolkit>
+  </GUI:ViewDescriptor>
+  <GUI:ViewDescriptor ExportGuid="34bc1764-65bd-4ed9-b382-2f80c36f0e83">
+    <GUI:ControlKind>b22d6746-5704-4ea7-934a-c3648081bd0a</GUI:ControlKind>
+    <GUI:ControlRef>a2e5114e-4b88-4674-ba3a-a25ab15173e1</GUI:ControlRef>
+    <GUI:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</GUI:Module>
+    <GUI:Toolkit>0</GUI:Toolkit>
+  </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="ba118051-6439-4abf-b7ef-51b4cd8403bb">
     <GUI:ControlKind>d414b18f-e90a-4b69-a45a-4224c62f74cb</GUI:ControlKind>
     <GUI:ControlRef>5ad7e1ba-856c-43f9-81ee-6af87f3921cf</GUI:ControlRef>
     <GUI:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
+  <GUI:ControlKind ExportGuid="24338f74-ec90-48a5-90ff-b9830082cb12">
+    <GUI:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</GUI:Module>
+    <GUI:Name>ZBox.DocumentManagement.DocumentWithPreviewEditor</GUI:Name>
+    <GUI:Parent>b22d6746-5704-4ea7-934a-c3648081bd0a</GUI:Parent>
+  </GUI:ControlKind>
+  <GUI:ControlKind ExportGuid="b22d6746-5704-4ea7-934a-c3648081bd0a">
+    <GUI:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</GUI:Module>
+    <GUI:Name>ZBox.DocumentManagement.FileWithPreviewEditor</GUI:Name>
+    <GUI:Parent>06bf9adc-c5bc-4552-abdc-18a96c527962</GUI:Parent>
+  </GUI:ControlKind>
   <GUI:ControlKind ExportGuid="d414b18f-e90a-4b69-a45a-4224c62f74cb">
     <GUI:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</GUI:Module>
     <GUI:Name>ZBox.DocumentManagement.ImageEditor</GUI:Name>
+    <GUI:Parent>06bf9adc-c5bc-4552-abdc-18a96c527962</GUI:Parent>
   </GUI:ControlKind>
   <KistlBase:Module ExportGuid="0fe1ab38-860a-414f-a599-b0b86a22ce1a">
     <KistlBase:ChangedOn>2011-08-05T10:30:47.660236Z</KistlBase:ChangedOn>

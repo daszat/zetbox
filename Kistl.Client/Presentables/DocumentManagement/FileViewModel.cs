@@ -21,6 +21,11 @@ namespace Kistl.Client.Presentables.DocumentManagement
             this.File = obj;
         }
 
+        protected override System.Collections.ObjectModel.ObservableCollection<ICommandViewModel> CreateCommands()
+        {
+            return base.CreateCommands();
+        }
+
         public File File { get; private set; }
     }
 }

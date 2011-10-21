@@ -107,6 +107,7 @@
     <Reference Include="System.ServiceModel">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -123,6 +124,7 @@
     <Reference Include="PresentationFramework">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="WindowsFormsIntegration" />
     <Reference Include="WPFExtensions">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\WPFExtensions.dll</HintPath>
@@ -170,6 +172,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Calendar\CalendarLedger.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\DocumentManagement\DocumentWithPreviewEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\DocumentManagement\FileWithPreviewEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -566,6 +576,15 @@
       <DependentUpon>StartupScreen.xaml</DependentUpon>
     </Compile>
     <Compile Include="Styles\Simple\Module.cs" />
+    <Compile Include="View\DocumentManagement\DocumentWithPreviewEditor.xaml.cs">
+      <DependentUpon>DocumentWithPreviewEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DocumentManagement\FileWithPreviewEditor.xaml.cs">
+      <DependentUpon>FileWithPreviewEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DocumentManagement\PreviewEditor.cs" />
+    <Compile Include="View\DocumentManagement\PreviewersManager.cs" />
+    <Compile Include="View\DocumentManagement\WPFPreviewControl.cs" />
     <Compile Include="View\Filters\DateRangeButtonsFilterEditor.xaml.cs">
       <DependentUpon>DateRangeButtonsFilterEditor.xaml</DependentUpon>
     </Compile>
