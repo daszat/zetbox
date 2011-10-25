@@ -27,7 +27,7 @@ namespace Kistl.API.Utils
     }
 
     [Serializable]
-    public sealed class XmlDictionary<TKey, TValue>// : Collection<XmlKeyValuePair<TKey, TValue>>
+    public sealed class XmlDictionary<TKey, TValue> : IEnumerable<XmlKeyValuePair<TKey, TValue>>
     {
         private Dictionary<TKey, TValue> _dict = new Dictionary<TKey, TValue>();
 
@@ -81,6 +81,22 @@ namespace Kistl.API.Utils
         public void Add(TKey key, TValue value)
         {
             _dict[key] = value;
+        }
+
+        public void Add(object obj)
+        {
+            var kvp = (XmlKeyValuePair<TKey, TValue>)obj;
+            _dict[kvp.Key] = kvp.Value;
+        }
+
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        {
+            return ((System.Collections.IEnumerable)_dict.Select(kvp => new XmlKeyValuePair<TKey, TValue>(kvp))).GetEnumerator();
+        }
+
+        IEnumerator<XmlKeyValuePair<TKey, TValue>> IEnumerable<XmlKeyValuePair<TKey, TValue>>.GetEnumerator()
+        {
+            return _dict.Select(kvp => new XmlKeyValuePair<TKey, TValue>(kvp)).GetEnumerator();
         }
     }
 }
