@@ -117,7 +117,7 @@ namespace Kistl.DalProvider.Client
         /// </summary>
         /// <param name="e"></param>
         /// <returns></returns>
-        internal T GetListCall<T>(Expression e)
+        internal List<T> GetListCall<T>(Expression e)
         {
             int objectCount = 0;
             var ticks = perfCounter.IncrementQuery(_type);
@@ -131,11 +131,7 @@ namespace Kistl.DalProvider.Client
                 }
 
                 List<IStreamable> auxObjects;
-                List<IDataObject> serviceResult = VisitAndCallService(e, out auxObjects);
-                foreach (IDataObject obj in serviceResult)
-                {
-                    _context.AttachRespectingIsolationLevel(obj);
-                }
+                var serviceResult = VisitAndCallService(e, out auxObjects).Select(obj => (IDataObject)_context.AttachRespectingIsolationLevel(obj)).ToList();
                 // prepare caches
                 foreach (IPersistenceObject obj in auxObjects)
                 {
@@ -144,8 +140,8 @@ namespace Kistl.DalProvider.Client
                 objectCount = serviceResult.Count;
 
                 // in the face of local changes, we have to re-query against local objects, to provide a consistent view of the objects
-                var result = _context.IsModified ? QueryFromLocalObjectsHack(_type) : serviceResult;
-
+                var result = _context.IsModified ? QueryFromLocalObjectsHack(_type).Cast<IDataObject>().ToList() : serviceResult;
+                var unattachedObjs = serviceResult.Where(s => !s.IsAttached).ToList();
                 _context.PlaybackNotifications();
 
                 // Projection
@@ -157,18 +153,14 @@ namespace Kistl.DalProvider.Client
                     LambdaExpression selector = (LambdaExpression)me.Arguments[1].StripQuotes();
                     Type sourceType = selector.Parameters[0].Type;
 
-                    IQueryable selectResult = result.AsQueryable().AddSelector(selector, sourceType, selector.Body.Type); // typeof(T).FindElementTypes().First());
-                    return (T)Activator.CreateInstance(typeof(T), selectResult.AddCast(typeof(T).FindElementTypes().First()).GetEnumerator());
+                    // AddSelector needs a list of the correct type, so we add a cast before selecting
+                    // TODO: revisit with covariant structures
+                    IQueryable selectResult = result.AsQueryable().AddCast(sourceType).AddSelector(selector, sourceType, selector.Body.Type); // typeof(T).FindElementTypes().First());
+                    return selectResult.Cast<T>().ToList();
                 }
                 else
                 {
-                    T castResult = Activator.CreateInstance<T>();
-                    if (!(castResult is IList)) throw new InvalidOperationException("A GetListCall supports only ILists as return result");
-                    foreach (var obj in result)
-                    {
-                        ((IList)castResult).Add(obj);
-                    }
-                    return castResult;
+                    return result.Cast<T>().ToList();
                 }
             }
             finally
@@ -271,6 +263,7 @@ namespace Kistl.DalProvider.Client
         #endregion
 
         #region IQueryProvider Members
+
         public IQueryable<TElement> CreateQuery<TElement>(Expression expression)
         {
             return (IQueryable<TElement>)new KistlContextQuery<TElement>(_context, _type, this, expression, perfCounter);
