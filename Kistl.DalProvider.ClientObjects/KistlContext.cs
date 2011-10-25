@@ -2,20 +2,19 @@
 namespace Kistl.DalProvider.Client
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Linq;
     using System.Text;
-
     using Kistl.API;
     using Kistl.API.Client;
+    using Kistl.API.Client.PerfCounter;
     using Kistl.API.Configuration;
     using Kistl.API.Utils;
     using Kistl.DalProvider.Base;
-    using System.Collections;
-using Kistl.API.Client.PerfCounter;
 
     public interface IZBoxClientContextInternals
     {
@@ -509,7 +508,7 @@ using Kistl.API.Client.PerfCounter;
 
             IsModified = true;
             OnObjectDeleted(obj);
-            
+
             if (obj is IDataObject)
             {
                 ((IDataObject)obj).NotifyDeleting();
@@ -677,7 +676,7 @@ using Kistl.API.Client.PerfCounter;
                 .Invoke(this, new object[] { ID });
         }
 
-        private T MakeAccessDeniedProxy<T>(int id) 
+        private T MakeAccessDeniedProxy<T>(int id)
             where T : class, IPersistenceObject
         {
             var result = CreateUnattached<T>();
@@ -1035,7 +1034,7 @@ using Kistl.API.Client.PerfCounter;
                 else if (Result != null && Result.GetType().IsIList() && Result.GetType().FindElementTypes().First().IsIPersistenceObject())
                 {
                     var lst = (IList)Result;
-                    for(int i= 0;i<lst.Count;i++)
+                    for (int i = 0; i < lst.Count; i++)
                     {
                         lst[i] = ctx.AttachRespectingIsolationLevel((IPersistenceObject)lst[i]);
                     }

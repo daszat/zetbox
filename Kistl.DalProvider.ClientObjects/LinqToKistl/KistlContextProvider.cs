@@ -9,11 +9,10 @@ namespace Kistl.DalProvider.Client
     using System.Linq.Expressions;
     using System.Reflection;
     using System.Text;
-
     using Kistl.API;
     using Kistl.API.Client;
+    using Kistl.API.Client.PerfCounter;
     using Kistl.API.Utils;
-using Kistl.API.Client.PerfCounter;
 
     /// <summary>
     /// Provider for Kistl Linq Provider. See http://blogs.msdn.com/mattwar/archive/2007/07/30/linq-building-an-iqueryable-provider-part-i.aspx for details.
@@ -144,7 +143,9 @@ using Kistl.API.Client.PerfCounter;
                 }
                 objectCount = serviceResult.Count;
 
-                var result = QueryFromLocalObjectsHack(_type);
+                // in the face of local changes, we have to re-query against local objects, to provide a consistent view of the objects
+                var result = _context.IsModified ? QueryFromLocalObjectsHack(_type) : serviceResult;
+
                 _context.PlaybackNotifications();
 
                 // Projection
@@ -254,7 +255,7 @@ using Kistl.API.Client.PerfCounter;
         {
             MethodInfo mi = typeof(KistlContextProvider).GetMethod("QueryFromLocalObjects", BindingFlags.Instance | BindingFlags.NonPublic)
                 .MakeGenericMethod(ifType.Type);
-            return (IList)mi.Invoke(this, new object[] {  });
+            return (IList)mi.Invoke(this, new object[] { });
         }
 
         private List<T> QueryFromLocalObjects<T>()
