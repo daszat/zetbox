@@ -141,7 +141,7 @@ namespace Kistl.DalProvider.Client
 
                 // in the face of local changes, we have to re-query against local objects, to provide a consistent view of the objects
                 var result = _context.IsModified ? QueryFromLocalObjectsHack(_type).Cast<IDataObject>().ToList() : serviceResult;
-                var unattachedObjs = serviceResult.Where(s => !s.IsAttached).ToList();
+                
                 _context.PlaybackNotifications();
 
                 // Projection
