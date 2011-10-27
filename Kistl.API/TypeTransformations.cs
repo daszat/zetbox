@@ -74,6 +74,10 @@ namespace Kistl.API
             if (type.IsValueType && type.Assembly == typeof(int).Assembly)
                 return true;
 
+            // Allow strings (not a value type)
+            if (type == typeof(string))
+                return true;
+
             // Hack: Allow all types that are not generated at all
             if (type.Assembly != GetAssembly()
                 && !ImplTypeCheckers.Any(checker => checker.IsImplementationType(type)))
