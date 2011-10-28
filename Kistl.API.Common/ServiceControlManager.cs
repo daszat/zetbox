@@ -63,7 +63,10 @@ namespace Kistl.API.Common
                 Logging.Log.InfoFormat("Starting service {0}", descr.Description);
 
                 var service = GetInstance(descr);
-                service.Start();
+                if(service != null)
+                    service.Start();
+                else
+                    Logging.Log.Warn("Service has not been registered");
 
                 Logging.Log.Info("Service started successfully");
             }
@@ -82,7 +85,10 @@ namespace Kistl.API.Common
                 Logging.Log.InfoFormat("Stopping service {0}", descr.Description);
 
                 var service = GetInstance(descr);
-                service.Stop();
+                if (service != null)
+                    service.Stop();
+                else
+                    Logging.Log.Warn("Service has not been registered");
 
                 Logging.Log.Info("Service stopped successfully");
             }
@@ -96,7 +102,9 @@ namespace Kistl.API.Common
         private IService GetInstance(ServiceDescriptor descr)
         {
             var type = descr.TypeRef.AsType(true);
-            return (IService)_container.Resolve(type);
+            object service;
+            _container.TryResolve(type, out service);
+            return service as IService;
         }
 
         private IEnumerable<ServiceDescriptor> GetServiceDescriptors()

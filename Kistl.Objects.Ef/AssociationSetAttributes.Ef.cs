@@ -599,6 +599,21 @@ using Kistl.DalProvider.Ef;
 
 
 	/*
+    Relation: FK_Configuration_of_Identity
+    A: ZeroOrMore FileImportConfiguration as Configuration
+    B: ZeroOrOne Identity as Identity
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Configuration_of_Identity",
+    "Configuration", RelationshipMultiplicity.Many, typeof(at.dasz.DocumentManagement.FileImportConfigurationEfImpl),
+    "Identity", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    )]
+
+
+	/*
     Relation: FK_ConstrainedProperty_has_Constraints
     A: One Property as ConstrainedProperty
     B: ZeroOrMore Constraint as Constraints
@@ -1032,6 +1047,36 @@ using Kistl.DalProvider.Ef;
 [assembly: EdmRelationship(
     "Model", "FK_File_was_CreatedBy",
     "File", RelationshipMultiplicity.Many, typeof(at.dasz.DocumentManagement.FileEfImpl),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    )]
+
+
+	/*
+    Relation: FK_FileImportConfiguration_was_ChangedBy
+    A: ZeroOrMore FileImportConfiguration as FileImportConfiguration
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_FileImportConfiguration_was_ChangedBy",
+    "FileImportConfiguration", RelationshipMultiplicity.Many, typeof(at.dasz.DocumentManagement.FileImportConfigurationEfImpl),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
+    )]
+
+
+	/*
+    Relation: FK_FileImportConfiguration_was_CreatedBy
+    A: ZeroOrMore FileImportConfiguration as FileImportConfiguration
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_FileImportConfiguration_was_CreatedBy",
+    "FileImportConfiguration", RelationshipMultiplicity.Many, typeof(at.dasz.DocumentManagement.FileImportConfigurationEfImpl),
     "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.IdentityEfImpl)
     )]
 

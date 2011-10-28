@@ -166,6 +166,7 @@
     <Compile Include="EnumParameter.Memory.Designer.cs" />
     <Compile Include="ExceptionLogEntry.Memory.Designer.cs" />
     <Compile Include="File.Memory.Designer.cs" />
+    <Compile Include="FileImportConfiguration.Memory.Designer.cs" />
     <Compile Include="FilterConfiguration.Memory.Designer.cs" />
     <Compile Include="FixedYearlyCalendarRule.Memory.Designer.cs" />
     <Compile Include="Fragebogen.Memory.Designer.cs" />
@@ -174,6 +175,7 @@
     <Compile Include="GuidProperty.Memory.Designer.cs" />
     <Compile Include="Icon.Memory.Designer.cs" />
     <Compile Include="Identity.Memory.Designer.cs" />
+    <Compile Include="ImportedFile.Memory.Designer.cs" />
     <Compile Include="IndexConstraint.Memory.Designer.cs" />
     <Compile Include="InitOnlyConstraint.Memory.Designer.cs" />
     <Compile Include="InstanceConstraint.Memory.Designer.cs" />

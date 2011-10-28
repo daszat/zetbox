@@ -486,6 +486,13 @@ namespace Kistl.App.Base
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());
 
+            // Follow Configuration_of_Identity
+            result.AddRange(Context.AttachedObjects
+                .OfType<at.dasz.DocumentManagement.FileImportConfiguration>()
+                .Where(child => child.Identity == this
+                    && child.ObjectState == DataObjectState.Deleted)
+                .Cast<NHibernatePersistenceObject>());
+
             // Follow Constraint_was_ChangedBy
             result.AddRange(Context.AttachedObjects
                 .OfType<Kistl.App.Base.Constraint>()
@@ -566,6 +573,20 @@ namespace Kistl.App.Base
             // Follow File_was_CreatedBy
             result.AddRange(Context.AttachedObjects
                 .OfType<at.dasz.DocumentManagement.File>()
+                .Where(child => child.CreatedBy == this
+                    && child.ObjectState == DataObjectState.Deleted)
+                .Cast<NHibernatePersistenceObject>());
+
+            // Follow FileImportConfiguration_was_ChangedBy
+            result.AddRange(Context.AttachedObjects
+                .OfType<at.dasz.DocumentManagement.FileImportConfiguration>()
+                .Where(child => child.ChangedBy == this
+                    && child.ObjectState == DataObjectState.Deleted)
+                .Cast<NHibernatePersistenceObject>());
+
+            // Follow FileImportConfiguration_was_CreatedBy
+            result.AddRange(Context.AttachedObjects
+                .OfType<at.dasz.DocumentManagement.FileImportConfiguration>()
                 .Where(child => child.CreatedBy == this
                     && child.ObjectState == DataObjectState.Deleted)
                 .Cast<NHibernatePersistenceObject>());

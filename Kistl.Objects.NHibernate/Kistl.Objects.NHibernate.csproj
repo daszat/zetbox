@@ -181,6 +181,7 @@
     <Compile Include="EnumParameter.NHibernate.Designer.cs" />
     <Compile Include="ExceptionLogEntry.NHibernate.Designer.cs" />
     <Compile Include="File.NHibernate.Designer.cs" />
+    <Compile Include="FileImportConfiguration.NHibernate.Designer.cs" />
     <Compile Include="FilterConfiguration.NHibernate.Designer.cs" />
     <Compile Include="FixedYearlyCalendarRule.NHibernate.Designer.cs" />
     <Compile Include="Fragebogen.NHibernate.Designer.cs" />
@@ -189,6 +190,7 @@
     <Compile Include="GuidProperty.NHibernate.Designer.cs" />
     <Compile Include="Icon.NHibernate.Designer.cs" />
     <Compile Include="Identity.NHibernate.Designer.cs" />
+    <Compile Include="ImportedFile.NHibernate.Designer.cs" />
     <Compile Include="IndexConstraint.NHibernate.Designer.cs" />
     <Compile Include="InitOnlyConstraint.NHibernate.Designer.cs" />
     <Compile Include="InstanceConstraint.NHibernate.Designer.cs" />

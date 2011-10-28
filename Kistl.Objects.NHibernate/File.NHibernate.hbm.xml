@@ -93,6 +93,20 @@
             <!-- define the properties -->
 
             <!-- define the subclasses -->
+        <joined-subclass name="at.dasz.DocumentManagement.ImportedFileNHibernateImpl+ImportedFileProxy, Kistl.Objects.NHibernateImpl"
+                         proxy="at.dasz.DocumentManagement.ImportedFileNHibernateImpl+ImportedFileProxy, Kistl.Objects.NHibernateImpl"
+                         schema="`doc`"
+                         table="`ImportedFiles`"
+                         dynamic-update="true">
+            
+            <!-- base class reference -->
+            <key column="`ID`" />
+
+            <!-- define the properties -->
+
+            <!-- define the subclasses -->
+
+        </joined-subclass>
 
         </joined-subclass>
 

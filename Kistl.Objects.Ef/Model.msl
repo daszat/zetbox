@@ -493,6 +493,23 @@
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ImportedFile)">
+	    <MappingFragment StoreEntitySet="ImportedFile">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FileImportConfiguration">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.FileImportConfiguration)">
+	    <MappingFragment StoreEntitySet="FileImportConfiguration">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+<ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+<ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+<ScalarProperty Name="MachineName" ColumnName="MachineName" />
+<ScalarProperty Name="PickupDirectory" ColumnName="PickupDirectory" />
+	    </MappingFragment>
+      </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="FilterConfiguration">
       <EntityTypeMapping TypeName="IsTypeOf(Model.FilterConfiguration)">
@@ -2511,6 +2528,23 @@
       <Condition ColumnName="fk_CompoundObjectDefinition" IsNull="false"/>
     </AssociationSetMapping>
     <!--
+    Relation: FK_Configuration_of_Identity
+    A: ZeroOrMore FileImportConfiguration as Configuration
+    B: ZeroOrOne Identity as Identity
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_Configuration_of_Identity"
+                           TypeName="Model.FK_Configuration_of_Identity"
+                           StoreEntitySet="FileImportConfiguration" >
+      <EndProperty Name="Identity">
+        <ScalarProperty Name="ID" ColumnName="fk_Identity"/>
+      </EndProperty>
+      <EndProperty Name="Configuration">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Identity" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
     Relation: FK_ConstrainedProperty_has_Constraints
     A: One Property as ConstrainedProperty
     B: ZeroOrMore Constraint as Constraints
@@ -2982,6 +3016,40 @@
         <ScalarProperty Name="ID" ColumnName="fk_CreatedBy"/>
       </EndProperty>
       <EndProperty Name="File">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_FileImportConfiguration_was_ChangedBy
+    A: ZeroOrMore FileImportConfiguration as FileImportConfiguration
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_FileImportConfiguration_was_ChangedBy"
+                           TypeName="Model.FK_FileImportConfiguration_was_ChangedBy"
+                           StoreEntitySet="FileImportConfiguration" >
+      <EndProperty Name="ChangedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_ChangedBy"/>
+      </EndProperty>
+      <EndProperty Name="FileImportConfiguration">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_ChangedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_FileImportConfiguration_was_CreatedBy
+    A: ZeroOrMore FileImportConfiguration as FileImportConfiguration
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_FileImportConfiguration_was_CreatedBy"
+                           TypeName="Model.FK_FileImportConfiguration_was_CreatedBy"
+                           StoreEntitySet="FileImportConfiguration" >
+      <EndProperty Name="CreatedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_CreatedBy"/>
+      </EndProperty>
+      <EndProperty Name="FileImportConfiguration">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_CreatedBy" IsNull="false"/>

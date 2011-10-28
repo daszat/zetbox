@@ -140,6 +140,7 @@
     <Compile Include="EnumParameter.Interface.Designer.cs" />
     <Compile Include="ExceptionLogEntry.Interface.Designer.cs" />
     <Compile Include="File.Interface.Designer.cs" />
+    <Compile Include="FileImportConfiguration.Interface.Designer.cs" />
     <Compile Include="FilterConfiguration.Interface.Designer.cs" />
     <Compile Include="FixedYearlyCalendarRule.Interface.Designer.cs" />
     <Compile Include="Fragebogen.Interface.Designer.cs" />
@@ -148,6 +149,7 @@
     <Compile Include="GuidProperty.Interface.Designer.cs" />
     <Compile Include="Icon.Interface.Designer.cs" />
     <Compile Include="Identity.Interface.Designer.cs" />
+    <Compile Include="ImportedFile.Interface.Designer.cs" />
     <Compile Include="IndexConstraint.Interface.Designer.cs" />
     <Compile Include="InitOnlyConstraint.Interface.Designer.cs" />
     <Compile Include="InstanceConstraint.Interface.Designer.cs" />

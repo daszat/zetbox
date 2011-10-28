@@ -169,6 +169,7 @@
     <Compile Include="EnumParameter.Ef.Designer.cs" />
     <Compile Include="ExceptionLogEntry.Ef.Designer.cs" />
     <Compile Include="File.Ef.Designer.cs" />
+    <Compile Include="FileImportConfiguration.Ef.Designer.cs" />
     <Compile Include="FilterConfiguration.Ef.Designer.cs" />
     <Compile Include="FixedYearlyCalendarRule.Ef.Designer.cs" />
     <Compile Include="Fragebogen.Ef.Designer.cs" />
@@ -177,6 +178,7 @@
     <Compile Include="GuidProperty.Ef.Designer.cs" />
     <Compile Include="Icon.Ef.Designer.cs" />
     <Compile Include="Identity.Ef.Designer.cs" />
+    <Compile Include="ImportedFile.Ef.Designer.cs" />
     <Compile Include="IndexConstraint.Ef.Designer.cs" />
     <Compile Include="InitOnlyConstraint.Ef.Designer.cs" />
     <Compile Include="InstanceConstraint.Ef.Designer.cs" />

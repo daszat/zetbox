@@ -32,6 +32,8 @@ T: Kistl.Server.SchemaManagement.Cases
 T: Kistl.Server.SchemaManagement.SchemaManager
 T: Kistl.API.Migration.OutputStream
 T: Kistl.API.StreamPackageProvider
+# False positive
+T: Kistl.Client.WPF.View.DocumentManagement.PreviewersManager
 
 # Floating point values should not be directly compared for equality (e.g. == or !=).
 R: Gendarme.Rules.Correctness.AvoidFloatingPointEqualityRule

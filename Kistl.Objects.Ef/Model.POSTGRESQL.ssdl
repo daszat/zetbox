@@ -34,6 +34,7 @@
     <EntitySet Name="EnumerationEntry" EntityType="Model.Store.EnumerationEntry" Schema="base" Table="EnumerationEntries"/>
     <EntitySet Name="ExceptionLogEntry" EntityType="Model.Store.ExceptionLogEntry" Schema="base" Table="ExceptionLog"/>
     <EntitySet Name="File" EntityType="Model.Store.File" Schema="doc" Table="Files"/>
+    <EntitySet Name="FileImportConfiguration" EntityType="Model.Store.FileImportConfiguration" Schema="doc" Table="FileImportConfigurations"/>
     <EntitySet Name="FilterConfiguration" EntityType="Model.Store.FilterConfiguration" Schema="gui" Table="FilterConfigurations"/>
     <EntitySet Name="Fragebogen" EntityType="Model.Store.Fragebogen" Schema="test" Table="Frageboegen"/>
     <EntitySet Name="Group" EntityType="Model.Store.Group" Schema="base" Table="Groups"/>
@@ -261,6 +262,12 @@
     <AssociationSet Name="FK_GuidProperty_ValueTypeProperty_ID" Association="Model.Store.FK_GuidProperty_ValueTypeProperty_ID" >
       <End Role="A_ValueTypeProperty" EntitySet="ValueTypeProperty" />
       <End Role="B_GuidProperty" EntitySet="GuidProperty" />
+    </AssociationSet>
+    <EntitySet Name="ImportedFile" EntityType="Model.Store.ImportedFile" Schema="doc" Table="ImportedFiles"/>
+    <!-- inherits from StaticFile -->
+    <AssociationSet Name="FK_ImportedFile_StaticFile_ID" Association="Model.Store.FK_ImportedFile_StaticFile_ID" >
+      <End Role="A_StaticFile" EntitySet="StaticFile" />
+      <End Role="B_ImportedFile" EntitySet="ImportedFile" />
     </AssociationSet>
     <EntitySet Name="IndexConstraint" EntityType="Model.Store.IndexConstraint" Schema="base" Table="IndexConstraints"/>
     <!-- inherits from InstanceConstraint -->
@@ -925,6 +932,10 @@
       <End Role="CompoundObjectProperty" EntitySet="CompoundObjectProperty" />
       <End Role="CompoundObjectDefinition" EntitySet="CompoundObject" />
     </AssociationSet>
+    <AssociationSet Name="FK_Configuration_of_Identity" Association="Model.Store.FK_Configuration_of_Identity" >
+      <End Role="Configuration" EntitySet="FileImportConfiguration" />
+      <End Role="Identity" EntitySet="Identity" />
+    </AssociationSet>
     <AssociationSet Name="FK_ConstrainedProperty_has_Constraints" Association="Model.Store.FK_ConstrainedProperty_has_Constraints" >
       <End Role="ConstrainedProperty" EntitySet="Property" />
       <End Role="Constraints" EntitySet="Constraint" />
@@ -1035,6 +1046,14 @@
     </AssociationSet>
     <AssociationSet Name="FK_File_was_CreatedBy" Association="Model.Store.FK_File_was_CreatedBy" >
       <End Role="File" EntitySet="File" />
+      <End Role="CreatedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FileImportConfiguration_was_ChangedBy" Association="Model.Store.FK_FileImportConfiguration_was_ChangedBy" >
+      <End Role="FileImportConfiguration" EntitySet="FileImportConfiguration" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FileImportConfiguration_was_CreatedBy" Association="Model.Store.FK_FileImportConfiguration_was_CreatedBy" >
+      <End Role="FileImportConfiguration" EntitySet="FileImportConfiguration" />
       <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
     <AssociationSet Name="FK_FilterConfiguration_has_Module" Association="Model.Store.FK_FilterConfiguration_has_Module" >
@@ -2026,6 +2045,21 @@
     <Property Name="Name" Type="varchar" MaxLength="1000" Nullable="true" />
   </EntityType>
 	
+  <EntityType Name="FileImportConfiguration">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_Identity" Type="int4" />
+    <Property Name="fk_ChangedBy" Type="int4" />
+    <Property Name="fk_CreatedBy" Type="int4" />
+    <Property Name="ChangedOn" Type="timestamp" Nullable="false" />
+    <Property Name="CreatedOn" Type="timestamp" Nullable="false" />
+    <Property Name="ExportGuid" Type="uuid" Nullable="false" />
+    <Property Name="MachineName" Type="varchar" MaxLength="200" Nullable="true" />
+    <Property Name="PickupDirectory" Type="varchar" Nullable="true" />
+  </EntityType>
+	
   <EntityType Name="FilterConfiguration">
     <Key>
       <PropertyRef Name="ID" />
@@ -2105,6 +2139,13 @@
     <Property Name="DisplayName" Type="varchar" MaxLength="200" Nullable="true" />
     <Property Name="Password" Type="varchar" MaxLength="100" Nullable="true" />
     <Property Name="UserName" Type="varchar" MaxLength="100" Nullable="true" />
+  </EntityType>
+	
+  <EntityType Name="ImportedFile">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int4" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="IndexConstraint">
@@ -4198,6 +4239,20 @@
   </Association>
 
 
+  <Association Name="FK_Configuration_of_Identity">
+    <End Role="Identity" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <End Role="Configuration" Type="Model.Store.FileImportConfiguration" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Identity">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Configuration">
+        <PropertyRef Name="fk_Identity" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
   <Association Name="FK_ConstrainedProperty_has_Constraints">
     <End Role="ConstrainedProperty" Type="Model.Store.Property" Multiplicity="0..1" />
     <End Role="Constraints" Type="Model.Store.Constraint" Multiplicity="*" />
@@ -4584,6 +4639,34 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="File">
+        <PropertyRef Name="fk_CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_FileImportConfiguration_was_ChangedBy">
+    <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <End Role="FileImportConfiguration" Type="Model.Store.FileImportConfiguration" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChangedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="FileImportConfiguration">
+        <PropertyRef Name="fk_ChangedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_FileImportConfiguration_was_CreatedBy">
+    <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <End Role="FileImportConfiguration" Type="Model.Store.FileImportConfiguration" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CreatedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="FileImportConfiguration">
         <PropertyRef Name="fk_CreatedBy" />
       </Dependent>
     </ReferentialConstraint>
@@ -6448,6 +6531,18 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_GuidProperty">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ImportedFile_StaticFile_ID">
+    <End Role="A_StaticFile" Type="Model.Store.StaticFile" Multiplicity="1" />
+    <End Role="B_ImportedFile" Type="Model.Store.ImportedFile" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_StaticFile">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_ImportedFile">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>
