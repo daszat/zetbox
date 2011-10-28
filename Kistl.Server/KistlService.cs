@@ -422,8 +422,10 @@ namespace Kistl.Server
                         foreach (var t in parameterTypes)
                         { 
                             object val;
-                            BinarySerializer.FromStream(out val, 
-                                ctx.ToImplementationType(ctx.GetInterfaceType(t.GetSystemType())).Type, 
+                            BinarySerializer.FromStream(out val,
+                                t.GetSystemType().IsIStreamable()
+                                    ? ctx.ToImplementationType(ctx.GetInterfaceType(t.GetSystemType())).Type
+                                    : t.GetSystemType(), 
                                 parameterReader);
                             parameterList.Add(val);
                         }

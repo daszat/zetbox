@@ -27,9 +27,9 @@ namespace Kistl.App.Projekte
         }
 
         [Invocation]
-        public static void GetSummaryReport(Projekt obj, MethodReturnEventArgs<System.Object> e, Kistl.App.Base.DateTimeRange range)
+        public static void GetSummaryReport(Projekt obj, MethodReturnEventArgs<System.Object> e, string title, Kistl.App.Base.DateTimeRange range)
         {
-            e.Result = string.Format("This will be a summary report in the range {0}", range);
+            e.Result = string.Format("This will be a summary report '{0}' in the range {1}", title, range);
         }
     }
 }
