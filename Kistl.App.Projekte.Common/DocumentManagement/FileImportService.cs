@@ -9,7 +9,7 @@ namespace Kistl.App.Projekte.DocumentManagement
     using System.Threading;
     using at.dasz.DocumentManagement;
     using Kistl.API.Common;
-using System.IO;
+    using System.IO;
     using Kistl.API.Utils;
 
     [ServiceDescriptor]
@@ -45,7 +45,7 @@ using System.IO;
             ThreadPool.QueueUserWorkItem(start_serivce);
         }
 
-        private List<FileSystemWatcher> _watcher = new List<FileSystemWatcher>();        
+        private List<FileSystemWatcher> _watcher = new List<FileSystemWatcher>();
 
         private void start_serivce(object state)
         {
@@ -66,15 +66,23 @@ using System.IO;
                         {
                             var dir = cfg.PickupDirectory;
                             System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(@"\.*%(\w*)%\.*");
-                            dir = regex.Replace(dir, new System.Text.RegularExpressions.MatchEvaluator((m) => System.Environment.GetEnvironmentVariable(m.Groups[1].Value)));
+                            dir = regex.Replace(dir, (m) => System.Environment.GetEnvironmentVariable(m.Groups[1].Value));
 
                             if (Directory.Exists(dir))
                             {
-                                var watcher = new FileSystemWatcher(dir);
+                                var watcher = new FileSystemWatcher(dir, "*.*");
                                 watcher.IncludeSubdirectories = true;
-                                watcher.Created += new FileSystemEventHandler(watcher_Created);
+                                watcher.Created += watcher_Changed;
+                                watcher.Changed += watcher_Changed;
+                                watcher.EnableRaisingEvents = true;
+
                                 _watcher.Add(watcher);
                                 Logging.Log.InfoFormat("Directory '{0}' added to file watcher", dir);
+
+                                foreach (var f in Directory.GetFiles(dir, "*.*", SearchOption.AllDirectories))
+                                {
+                                    AddToQueue(f);
+                                }
                             }
                             else
                             {
@@ -90,11 +98,16 @@ using System.IO;
             }
         }
 
-        void watcher_Created(object sender, FileSystemEventArgs e)
+        void watcher_Changed(object sender, FileSystemEventArgs e)
         {
-            using (var ctx = _ctxFactory())
-            {
+            AddToQueue(e.FullPath);
+        }
 
+        private static void AddToQueue(string file)
+        {
+            if (!string.IsNullOrEmpty(file))
+            {
+                Logging.Log.InfoFormat("TODO: adding '{0}' to queue", file);
             }
         }
 
