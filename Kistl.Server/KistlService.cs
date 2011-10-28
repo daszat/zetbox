@@ -406,14 +406,8 @@ namespace Kistl.Server
                     throw new ArgumentNullException("changedObjectsArray");
 
                 _perfCounter.IncrementServerMethodInvocation();
-
-                var parameter = new MemoryStream(parameterArray);
-                var changedObjects = new MemoryStream(changedObjectsArray);
-
-                parameter.Seek(0, SeekOrigin.Begin);
-                changedObjects.Seek(0, SeekOrigin.Begin);
-
                 retChangedObjects = null;
+
                 try
                 {
 
@@ -421,11 +415,23 @@ namespace Kistl.Server
 
                     using (IKistlContext ctx = _ctxFactory())
                     {
-                        BinaryFormatter bf = new BinaryFormatter();
+                        var parameter = new MemoryStream(parameterArray);
+                        parameter.Seek(0, SeekOrigin.Begin);
+                        List<object> parameterList = new List<object>(); 
+                        var parameterReader = new BinaryReader(parameter);
+                        foreach (var t in parameterTypes)
+                        { 
+                            object val;
+                            BinarySerializer.FromStream(out val, 
+                                ctx.ToImplementationType(ctx.GetInterfaceType(t.GetSystemType())).Type, 
+                                parameterReader);
+                            parameterList.Add(val);
+                        }
+
+                        var changedObjects = new MemoryStream(changedObjectsArray);
+                        changedObjects.Seek(0, SeekOrigin.Begin);
 
                         IEnumerable<IPersistenceObject> changedObjectsList;
-                        IEnumerable<object> parameterList = (IEnumerable<object>)bf.Deserialize(parameter);
-
                         var result = _sohFactory
                             .GetServerObjectHandler(_iftFactory(type.GetSystemType()))
                             .InvokeServerMethod(ctx, ID, method,
@@ -437,7 +443,14 @@ namespace Kistl.Server
 
                         retChangedObjects = SendObjects(changedObjectsList.Cast<IStreamable>(), true).ToArray();
 
-                        if (result != null && result.GetType().IsIStreamable())
+                        if (result != null && result.GetType() == typeof(string))
+                        {
+                            // string is also a IEnumerable, but FindElementTypes returns nothing
+                            MemoryStream resultStream = new MemoryStream();
+                            new BinaryFormatter().Serialize(resultStream, result);
+                            return resultStream.ToArray();
+                        }
+                        else if (result != null && result.GetType().IsIStreamable())
                         {
                             IStreamable resultObj = (IStreamable)result;
                             return SendObjects(new IStreamable[] { resultObj }, false).ToArray();
@@ -450,7 +463,7 @@ namespace Kistl.Server
                         else if (result != null)
                         {
                             MemoryStream resultStream = new MemoryStream();
-                            bf.Serialize(resultStream, result);
+                            new BinaryFormatter().Serialize(resultStream, result);
                             return resultStream.ToArray();
                         }
                         else

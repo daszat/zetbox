@@ -25,5 +25,11 @@ namespace Kistl.App.Projekte
                 obj.AufwandGes = obj.Tasks.Sum(t => t.Aufwand);
             }
         }
+
+        [Invocation]
+        public static void GetSummaryReport(Projekt obj, MethodReturnEventArgs<System.Object> e, Kistl.App.Base.DateTimeRange range)
+        {
+            e.Result = string.Format("This will be a summary report in the range {0}", range);
+        }
     }
 }

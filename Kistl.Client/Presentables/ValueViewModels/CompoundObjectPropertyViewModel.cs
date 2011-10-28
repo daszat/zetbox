@@ -70,6 +70,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 // TODO: This may be a subject to change
                 // We still don't know, how to handle nullable CompoundObjects!!!
                 obj = DataContext.CreateCompoundObject(DataContext.GetInterfaceType(ReferencedType.GetDataType()));
+                ValueModel.Value = obj;
             }
             _valueCache = CompoundObjectViewModel.Fetch(ViewModelFactory, DataContext, this, obj);
             _valueCacheInititalized = true;

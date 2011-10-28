@@ -250,6 +250,7 @@
     <Compile Include="YearlyCalendarRule.Memory.Designer.cs" />
     <Compile Include="CollectionEntries.Memory.Designer.cs" />
     <Compile Include="AuditEntry.Memory.Designer.cs" />
+    <Compile Include="DateTimeRange.Memory.Designer.cs" />
     <Compile Include="TestPhoneCompoundObject.Memory.Designer.cs" />
     <Compile Include="AssemblyInfo.Memory.cs" />
     <Compile Include="Module.Memory.cs" />

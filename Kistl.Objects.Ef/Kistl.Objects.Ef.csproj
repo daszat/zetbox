@@ -253,6 +253,7 @@
     <Compile Include="YearlyCalendarRule.Ef.Designer.cs" />
     <Compile Include="CollectionEntries.Ef.Designer.cs" />
     <Compile Include="AuditEntry.Ef.Designer.cs" />
+    <Compile Include="DateTimeRange.Ef.Designer.cs" />
     <Compile Include="TestPhoneCompoundObject.Ef.Designer.cs" />
     <Compile Include="AssemblyInfo.Ef.cs" />
     <Compile Include="Module.Ef.cs" />

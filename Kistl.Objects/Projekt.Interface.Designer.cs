@@ -54,5 +54,10 @@ namespace Kistl.App.Projekte
         /// </summary>
 
         ICollection<Kistl.App.Projekte.Task> Tasks { get; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        System.Object GetSummaryReport(Kistl.App.Base.DateTimeRange range);
     }
 }

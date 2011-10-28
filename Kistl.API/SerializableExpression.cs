@@ -533,58 +533,9 @@ namespace Kistl.API
         internal SerializableConstantExpression(BinaryReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
             : base(binReader, ctx, iftFactory)
         {
-            var isNull = binReader.ReadBoolean();
-            if (isNull)
-            {
-                Value = null;
-            }
-            else
-            {
-                // Deserialize only basic types
-                if (Type == typeof(int) || Type == typeof(int?) || Type.IsEnum || Type.IsNullableEnum())
-                {
-                    Value = binReader.ReadInt32();
-                }
-                else if (Type == typeof(bool) || Type == typeof(bool?))
-                {
-                    Value = binReader.ReadBoolean();
-                }
-                else if (Type == typeof(double) || Type == typeof(double?))
-                {
-                    Value = binReader.ReadDouble();
-                }
-                else if (Type == typeof(float) || Type == typeof(float?))
-                {
-                    Value = binReader.ReadSingle();
-                }
-                else if (Type == typeof(string))
-                {
-                    Value = binReader.ReadString();
-                }
-                else if (Type == typeof(decimal) || Type == typeof(decimal?))
-                {
-                    Value = binReader.ReadDecimal();
-                }
-                else if (Type == typeof(DateTime) || Type == typeof(DateTime?))
-                {
-                    DateTime val;
-                    BinarySerializer.FromStream(out val, binReader);
-                    Value = val;
-                }
-                else if (Type == typeof(Guid) || Type == typeof(Guid?))
-                {
-                    Guid val;
-                    BinarySerializer.FromStream(out val, binReader);
-                    Value = val;
-                }
-                else
-                {
-                    throw new NotSupportedException(string.Format("Can't deserialize Value of type '{0}'.", Type));
-                }
-            }
-            //var bf = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-            //// let's hope that mono has at least the basic types covered here!
-            //Value = bf.Deserialize(binReader.BaseStream);
+            object val;
+            BinarySerializer.FromStream(out val, Type, binReader);
+            Value = val;
         }
 
         internal override Expression ToExpressionInternal(SerializationContext ctx)
@@ -615,53 +566,7 @@ namespace Kistl.API
             binStream.Write((byte)SerializableExpressionType.Constant);
             base.ToStream(binStream, ctx);
 
-            if (Value == null)
-            {
-                // IsNull
-                binStream.Write(true);
-            }
-            else
-            {
-                // IsNull
-                binStream.Write(false);
-                // Serialize only basic types
-                if (Type == typeof(int) || Type == typeof(int?) || Type.IsEnum || Type.IsNullableEnum())
-                {
-                    binStream.Write((int)Value);
-                }
-                else if (Type == typeof(bool) || Type == typeof(bool?))
-                {
-                    binStream.Write((bool)Value);
-                }
-                else if (Type == typeof(double) || Type == typeof(double?))
-                {
-                    binStream.Write((double)Value);
-                }
-                else if (Type == typeof(float) || Type == typeof(float?))
-                {
-                    binStream.Write((float)Value);
-                }
-                else if (Type == typeof(string))
-                {
-                    binStream.Write((string)Value);
-                }
-                else if (Type == typeof(decimal) || Type == typeof(decimal?))
-                {
-                    binStream.Write((decimal)Value);
-                }
-                else if (Type == typeof(DateTime) || Type == typeof(DateTime?))
-                {
-                    BinarySerializer.ToStream((DateTime)Value, binStream);
-                }
-                else if (Type == typeof(Guid) || Type == typeof(Guid?))
-                {
-                    BinarySerializer.ToStream((Guid)Value, binStream);
-                }
-                else
-                {
-                    throw new NotSupportedException(string.Format("Can't serialize Value '{0}' of type '{1}'.", Value, Type));
-                }
-            }
+            BinarySerializer.ToStream(Value, binStream);
         }
     }
     #endregion

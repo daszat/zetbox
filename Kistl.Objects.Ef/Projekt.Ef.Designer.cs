@@ -764,6 +764,28 @@ public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnAuf
 
 public static event PropertyListChangedHandler<Kistl.App.Projekte.Projekt> OnTasks_PostSetter;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnGetSummaryReport_Projekt")]
+        public virtual System.Object GetSummaryReport(Kistl.App.Base.DateTimeRange range)
+        {
+            var e = new MethodReturnEventArgs<System.Object>();
+            if (OnGetSummaryReport_Projekt != null)
+            {
+                OnGetSummaryReport_Projekt(this, e, range);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on Projekt.GetSummaryReport");
+            }
+            return e.Result;
+        }
+        public delegate void GetSummaryReport_Handler<T>(T obj, MethodReturnEventArgs<System.Object> ret, Kistl.App.Base.DateTimeRange range);
+        public static event GetSummaryReport_Handler<Projekt> OnGetSummaryReport_Projekt;
+        // END Kistl.Generator.Templates.ObjectClasses.Method
+
         public override Type GetImplementedInterface()
         {
             return typeof(Projekt);

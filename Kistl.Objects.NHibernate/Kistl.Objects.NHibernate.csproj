@@ -265,6 +265,7 @@
     <Compile Include="YearlyCalendarRule.NHibernate.Designer.cs" />
     <Compile Include="CollectionEntries.NHibernate.Designer.cs" />
     <Compile Include="AuditEntry.NHibernate.Designer.cs" />
+    <Compile Include="DateTimeRange.NHibernate.Designer.cs" />
     <Compile Include="TestPhoneCompoundObject.NHibernate.Designer.cs" />
     <Compile Include="AssemblyInfo.NHibernate.cs" />
     <Compile Include="Module.NHibernate.cs" />

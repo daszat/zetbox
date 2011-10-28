@@ -302,9 +302,12 @@ using Kistl.API.Client.PerfCounter;
             object result = null;
             IEnumerable<IPersistenceObject> tmpChangedObjects = null;
 
-            BinaryFormatter bf = new BinaryFormatter();
             MemoryStream parameterStream = new MemoryStream();
-            bf.Serialize(parameterStream, parameter);
+            var parameterWriter = new BinaryWriter(parameterStream);
+            foreach (var paramVal in parameter)
+            {
+                BinarySerializer.ToStream(paramVal, parameterWriter);
+            }
 
             MemoryStream changedObjectsStream = new MemoryStream();
             BinaryWriter sw = new BinaryWriter(changedObjectsStream);
@@ -357,7 +360,7 @@ using Kistl.API.Client.PerfCounter;
             }
             else if (resultStream.Length > 0)
             {
-                result = bf.Deserialize(resultStream);
+                result = new BinaryFormatter().Deserialize(resultStream);
             }
             else
             {
