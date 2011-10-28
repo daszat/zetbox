@@ -24,6 +24,7 @@ namespace Kistl.Client.WPF
     using Kistl.Client.WPF.Toolkit;
     using Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;
     using Autofac.Features.Metadata;
+    using Kistl.API.Common;
 
     /// <summary>
     /// Interaction logic for App.xaml
@@ -201,6 +202,17 @@ namespace Kistl.Client.WPF
             wpfResourcesInitialized = true;
 
             FixupDatabase(container.Resolve<Func<IKistlContext>>());
+
+            Logging.Log.Info("Starting ZBox Services");
+            IServiceControlManager scm = null;
+            if (container.TryResolve<IServiceControlManager>(out scm))
+            {
+                scm.Start();
+            }
+            else
+            {
+                Logging.Log.Info("Service control manager not registered");
+            }
 
             StartupScreen.CanCloseOnWindowLoaded();
             // delegate all business logic into another class, which 
