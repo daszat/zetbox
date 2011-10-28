@@ -11,14 +11,16 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows.Interop;
 using System.Security;
+using Kistl.API.Utils;
 
 namespace Kistl.Client.WPF.View.DocumentManagement
 {
-    static class PreviewersManager
+    class PreviewersManager : IDisposable
     {
-        public static IPreviewHandler pHandler;
+        private IPreviewHandler pHandler;
+        private COMStream stream;
 
-        public static void InvalidateAttachedPreview(this IntPtr handler, Rect viewRect)
+        public void InvalidateAttachedPreview(IntPtr handler, Rect viewRect)
         {
             if (pHandler != null)
             {
@@ -27,12 +29,10 @@ namespace Kistl.Client.WPF.View.DocumentManagement
             }
         }
 
-        public static void AttachPreview(this IntPtr handler, string fileName, Rect viewRect)
+        public void AttachPreview(IntPtr handler, string fileName, Rect viewRect)
         {
-            if (pHandler != null)
-            {
-                pHandler.Unload();
-            }
+            Release();
+
             string CLSID = "8895b1c6-b41f-4c1c-a562-0d564250836f";
             Guid g = new Guid(CLSID);
             string[] exts = fileName.Split('.');
@@ -43,11 +43,11 @@ namespace Kistl.Client.WPF.View.DocumentManagement
                 {
                     g = new Guid(hk.GetValue("").ToString());
 
-                    Type a = Type.GetTypeFromCLSID(g, true);
-                    object o = Activator.CreateInstance(a);
+                    Type type = Type.GetTypeFromCLSID(g, true);
+                    object comObj = Activator.CreateInstance(type);
 
-                    IInitializeWithFile fileInit = o as IInitializeWithFile;
-                    IInitializeWithStream streamInit = o as IInitializeWithStream;
+                    IInitializeWithFile fileInit = comObj as IInitializeWithFile;
+                    IInitializeWithStream streamInit = comObj as IInitializeWithStream;
 
                     bool isInitialized = false;
                     try
@@ -59,31 +59,57 @@ namespace Kistl.Client.WPF.View.DocumentManagement
                         }
                         else if (streamInit != null)
                         {
-                            COMStream stream = new COMStream(File.Open(fileName, FileMode.Open, FileAccess.Read));
+                            stream = new COMStream(File.Open(fileName, FileMode.Open, FileAccess.Read, FileShare.Read));
                             streamInit.Initialize((IStream)stream, 0);
                             isInitialized = true;
                         }
                     }
                     catch (Exception ex)
                     {
-                        System.Diagnostics.Debug.WriteLine(ex.ToString());
+                        Logging.Log.Warn("Unable to initialize IPreviewHandler", ex);
                     }
 
-                    if (isInitialized)
+                    pHandler = comObj as IPreviewHandler;
+                    if (isInitialized && pHandler != null)
                     {
-                        pHandler = o as IPreviewHandler;
-                        if (pHandler != null)
-                        {
-                            RECT r = new RECT(viewRect);
+                        RECT r = new RECT(viewRect);
 
-                            pHandler.SetWindow(handler, ref r);
-                            pHandler.SetRect(ref r);
+                        pHandler.SetWindow(handler, ref r);
+                        pHandler.SetRect(ref r);
 
-                            pHandler.DoPreview();
-
-                        }
+                        pHandler.DoPreview();
+                    }
+                    else
+                    {
+                        Marshal.FinalReleaseComObject(comObj);
+                        Release();
                     }
                 }
+            }
+        }
+
+        public void Dispose()
+        {
+            Release();
+        }
+
+        private void Release()
+        {
+            if (pHandler != null)
+            {
+                try
+                {
+                    pHandler.Unload();
+                }
+                catch { }
+                Marshal.FinalReleaseComObject(pHandler);
+                pHandler = null;
+            }
+
+            if (stream != null)
+            {
+                stream.Dispose();
+                stream = null;
             }
         }
     }
@@ -94,6 +120,7 @@ namespace Kistl.Client.WPF.View.DocumentManagement
         public string Title { get; set; }
     }
 
+    #region COM Interfaces
     [ComImport]
     [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
     [Guid("8895b1c6-b41f-4c1c-a562-0d564250836f")]
@@ -268,4 +295,5 @@ namespace Kistl.Client.WPF.View.DocumentManagement
 
         #endregion
     }
+    #endregion
 }

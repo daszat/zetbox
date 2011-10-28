@@ -13,11 +13,14 @@ namespace Kistl.Client.WPF.View.DocumentManagement
     {
         Rect actualRect = new Rect();
         System.Windows.Forms.Integration.WindowsFormsHost host;
+        PreviewersManager pManager;
 
         public WPFPreviewControl()
         {
             this.HorizontalAlignment = HorizontalAlignment.Stretch;
             this.VerticalAlignment = VerticalAlignment.Stretch;
+
+            this.Unloaded += new RoutedEventHandler(WPFPreviewControl_Unloaded);
 
             host = new System.Windows.Forms.Integration.WindowsFormsHost();
             host.Child = new System.Windows.Forms.Panel();
@@ -25,40 +28,62 @@ namespace Kistl.Client.WPF.View.DocumentManagement
             this.Content = host;
         }
 
+        void WPFPreviewControl_Unloaded(object sender, RoutedEventArgs e)
+        {
+            pManager.Dispose();
+            pManager = null;
+        }
+
         void host_Loaded(object sender, RoutedEventArgs e)
         {
             AttachPreview();
         }
 
-        public string PreviewContent
+        public string PreviewFilePath
         {
-            get { return (string)GetValue(PreviewContentProperty); }
-            set { SetValue(PreviewContentProperty, value); }
+            get { return (string)GetValue(PreviewFilePathProperty); }
+            set { SetValue(PreviewFilePathProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for Content.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty PreviewContentProperty =
-            DependencyProperty.Register("PreviewContent", typeof(string), typeof(WPFPreviewControl));
+        public static readonly DependencyProperty PreviewFilePathProperty =
+            DependencyProperty.Register("PreviewFilePath", typeof(string), typeof(WPFPreviewControl));
 
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
             if (e.Property == ContentControl.ActualHeightProperty || e.Property == ContentControl.ActualWidthProperty)
             {
                 actualRect = new Rect(0, 0, this.ActualWidth, this.ActualHeight);
-                if(host != null && host.Handle != IntPtr.Zero)
-                    host.Handle.InvalidateAttachedPreview(actualRect);
+                InvalidateAttachedPreview();
             }
-            if (e.Property == PreviewContentProperty)
+            if (e.Property == PreviewFilePathProperty)
             {
                 AttachPreview();
             }
             base.OnPropertyChanged(e);
         }
 
+        private void InvalidateAttachedPreview()
+        {
+            EnsurePreviewManager();
+            if (host != null && host.Handle != IntPtr.Zero)
+            {
+                pManager.InvalidateAttachedPreview(host.Handle, actualRect);
+            }
+        }
+
         private void AttachPreview()
         {
-            if (host != null && host.Handle != IntPtr.Zero && !string.IsNullOrEmpty(PreviewContent))
-                host.Handle.AttachPreview(PreviewContent, actualRect);
+            EnsurePreviewManager();
+            if (host != null && host.Handle != IntPtr.Zero && !string.IsNullOrEmpty(PreviewFilePath))
+            {
+                pManager.AttachPreview(host.Handle, PreviewFilePath, actualRect);
+            }
+        }
+
+        private void EnsurePreviewManager()
+        {
+            if (pManager == null) pManager = new PreviewersManager();
         }
     }
 }

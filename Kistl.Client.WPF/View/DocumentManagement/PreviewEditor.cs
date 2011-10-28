@@ -30,7 +30,7 @@ namespace Kistl.Client.WPF.View.DocumentManagement
                 if (ViewModel != null)
                 {
                     PreviewDocument();
-                    ViewModel.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(vmdl_PropertyChanged);
+                    ViewModel.Object.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(vmdl_PropertyChanged);
                 }
             }
         }
@@ -53,7 +53,7 @@ namespace Kistl.Client.WPF.View.DocumentManagement
                     vistaPreview = new WPFPreviewControl();
                 }
                 PreviewControl.Content = vistaPreview;
-                vistaPreview.PreviewContent = ViewModel.File.Context.GetFileInfo(ViewModel.File.Blob.ID).FullName;
+                vistaPreview.PreviewFilePath = ViewModel.File.Context.GetFileInfo(ViewModel.File.Blob.ID).FullName;
             }
             else
             {
