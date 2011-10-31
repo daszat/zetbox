@@ -2,14 +2,12 @@ namespace Kistl.App.Projekte.DocumentManagement
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
-    using System.Text;
-    using Kistl.API;
-    using Autofac;
     using System.Threading;
     using at.dasz.DocumentManagement;
-    using Kistl.API.Common;
-    using System.IO;
+    using Autofac;
+    using Kistl.API;
     using Kistl.API.Utils;
 
     [ServiceDescriptor]
@@ -29,15 +27,12 @@ namespace Kistl.App.Projekte.DocumentManagement
         }
 
         private Func<IKistlContext> _ctxFactory;
-        IIdentityResolver _idResolver;
 
-        public FileImportService(Func<IKistlContext> ctxFactory, IIdentityResolver idResolver)
+        public FileImportService(Func<IKistlContext> ctxFactory)
         {
             if (ctxFactory == null) throw new ArgumentNullException("ctxFactory");
-            if (idResolver == null) throw new ArgumentNullException("idResolver");
 
             _ctxFactory = ctxFactory;
-            _idResolver = idResolver;
         }
 
         public void Start()
@@ -52,7 +47,6 @@ namespace Kistl.App.Projekte.DocumentManagement
             using (var ctx = _ctxFactory())
             {
                 var machine = System.Environment.MachineName.ToLower();
-                //var id = _idResolver.GetCurrent();
 
                 var configs = ctx.GetQuery<FileImportConfiguration>()
                                 .Where(i => (i.MachineName.ToLower() == machine)
