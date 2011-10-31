@@ -35,6 +35,7 @@ namespace at.dasz.DocumentManagement
             var ctx = obj.Context;
             var doc = ctx.Create<Document>();
             MakeInternal(ctx, obj, doc);
+            e.Result = doc;
         }
         [Invocation]
         public static void MakeDynamicFile(ImportedFile obj, MethodReturnEventArgs<DynamicFile> e)
@@ -42,6 +43,7 @@ namespace at.dasz.DocumentManagement
             var ctx = obj.Context;
             var doc = ctx.Create<DynamicFile>();
             MakeInternal(ctx, obj, doc);
+            e.Result = doc;
         }
         [Invocation]
         public static void MakeStaticFile(ImportedFile obj, MethodReturnEventArgs<StaticFile> e)
@@ -49,6 +51,7 @@ namespace at.dasz.DocumentManagement
             var ctx = obj.Context;
             var doc = ctx.Create<StaticFile>();
             MakeInternal(ctx, obj, doc);
+            e.Result = doc;
         }
     }
 }

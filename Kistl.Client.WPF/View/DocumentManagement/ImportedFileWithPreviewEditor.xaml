@@ -10,14 +10,6 @@
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
   <DockPanel>
-    <ctrls:WorkaroundToolBar DockPanel.Dock="Top"
-                             ItemsSource="{Binding Actions}"
-                             ItemTemplateSelector="{StaticResource defaultTemplateSelector}">
-      <ctrls:WorkaroundToolBar.Resources>
-        <Style TargetType="{x:Type viewKistlBase:ActionDisplay}"
-               BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" />
-      </ctrls:WorkaroundToolBar.Resources>
-    </ctrls:WorkaroundToolBar>
     <TabControl DockPanel.Dock="Top">
       <TabItem Header="Summary">
         <StackPanel>
@@ -34,6 +26,21 @@
         </StackPanel>
       </TabItem>
     </TabControl>
+    <ItemsControl DockPanel.Dock="Right"
+                             ItemsSource="{Binding Actions}"
+                             ItemTemplateSelector="{StaticResource defaultTemplateSelector}">
+      <ItemsControl.Resources>
+        <Style TargetType="{x:Type viewKistlBase:ActionDisplay}">
+          <Setter Property="Margin"
+                  Value="5" />
+        </Style>
+      </ItemsControl.Resources>
+      <ItemsControl.ItemsPanel>
+        <ItemsPanelTemplate>
+          <StackPanel IsItemsHost="True" />
+        </ItemsPanelTemplate>
+      </ItemsControl.ItemsPanel>
+    </ItemsControl>
     <ContentPresenter x:Name="preview" />
   </DockPanel>
 </local:PreviewEditor>
