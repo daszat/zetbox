@@ -488,13 +488,13 @@
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.StaticFile)">
-	    <MappingFragment StoreEntitySet="StaticFile">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ImportedFile)">
+	    <MappingFragment StoreEntitySet="ImportedFile">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Model.ImportedFile)">
-	    <MappingFragment StoreEntitySet="ImportedFile">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.StaticFile)">
+	    <MappingFragment StoreEntitySet="StaticFile">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>

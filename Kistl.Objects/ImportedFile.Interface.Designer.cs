@@ -10,12 +10,22 @@ namespace at.dasz.DocumentManagement
     /// <summary>
     /// Files beeing imported by the import service.
     /// </summary>
-    public interface ImportedFile : at.dasz.DocumentManagement.StaticFile 
+    public interface ImportedFile : at.dasz.DocumentManagement.File 
     {
 
         /// <summary>
         /// Converts the imported file to a document
         /// </summary>
         at.dasz.DocumentManagement.Document MakeDocument();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        at.dasz.DocumentManagement.DynamicFile MakeDynamicFile();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        at.dasz.DocumentManagement.StaticFile MakeStaticFile();
     }
 }

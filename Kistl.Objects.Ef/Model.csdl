@@ -2651,7 +2651,7 @@
   </EntityType>
   <EntityType Name="GuidProperty" BaseType="Model.ValueTypeProperty">
   </EntityType>
-  <EntityType Name="ImportedFile" BaseType="Model.StaticFile">
+  <EntityType Name="ImportedFile" BaseType="Model.File">
   </EntityType>
   <EntityType Name="IndexConstraint" BaseType="Model.InstanceConstraint">
     <Property Name="IsUnique" Type="Boolean" Nullable="false"  />

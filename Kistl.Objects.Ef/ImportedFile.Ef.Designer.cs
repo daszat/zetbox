@@ -24,7 +24,7 @@ namespace at.dasz.DocumentManagement
     /// </summary>
     [EdmEntityType(NamespaceName="Model", Name="ImportedFile")]
     [System.Diagnostics.DebuggerDisplay("ImportedFile")]
-    public class ImportedFileEfImpl : at.dasz.DocumentManagement.StaticFileEfImpl, ImportedFile
+    public class ImportedFileEfImpl : at.dasz.DocumentManagement.FileEfImpl, ImportedFile
     {
         [Obsolete]
         public ImportedFileEfImpl()
@@ -78,6 +78,50 @@ namespace at.dasz.DocumentManagement
         }
         public delegate void MakeDocument_Handler<T>(T obj, MethodReturnEventArgs<at.dasz.DocumentManagement.Document> ret);
         public static event MakeDocument_Handler<ImportedFile> OnMakeDocument_ImportedFile;
+        // END Kistl.Generator.Templates.ObjectClasses.Method
+
+        /// <summary>
+        /// 
+        /// </summary>
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnMakeDynamicFile_ImportedFile")]
+        public virtual at.dasz.DocumentManagement.DynamicFile MakeDynamicFile()
+        {
+            var e = new MethodReturnEventArgs<at.dasz.DocumentManagement.DynamicFile>();
+            if (OnMakeDynamicFile_ImportedFile != null)
+            {
+                OnMakeDynamicFile_ImportedFile(this, e);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on ImportedFile.MakeDynamicFile");
+            }
+            return e.Result;
+        }
+        public delegate void MakeDynamicFile_Handler<T>(T obj, MethodReturnEventArgs<at.dasz.DocumentManagement.DynamicFile> ret);
+        public static event MakeDynamicFile_Handler<ImportedFile> OnMakeDynamicFile_ImportedFile;
+        // END Kistl.Generator.Templates.ObjectClasses.Method
+
+        /// <summary>
+        /// 
+        /// </summary>
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnMakeStaticFile_ImportedFile")]
+        public virtual at.dasz.DocumentManagement.StaticFile MakeStaticFile()
+        {
+            var e = new MethodReturnEventArgs<at.dasz.DocumentManagement.StaticFile>();
+            if (OnMakeStaticFile_ImportedFile != null)
+            {
+                OnMakeStaticFile_ImportedFile(this, e);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on ImportedFile.MakeStaticFile");
+            }
+            return e.Result;
+        }
+        public delegate void MakeStaticFile_Handler<T>(T obj, MethodReturnEventArgs<at.dasz.DocumentManagement.StaticFile> ret);
+        public static event MakeStaticFile_Handler<ImportedFile> OnMakeStaticFile_ImportedFile;
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>

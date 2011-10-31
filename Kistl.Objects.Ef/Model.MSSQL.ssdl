@@ -264,9 +264,9 @@
       <End Role="B_GuidProperty" EntitySet="GuidProperty" />
     </AssociationSet>
     <EntitySet Name="ImportedFile" EntityType="Model.Store.ImportedFile" Schema="doc" Table="ImportedFiles"/>
-    <!-- inherits from StaticFile -->
-    <AssociationSet Name="FK_ImportedFile_StaticFile_ID" Association="Model.Store.FK_ImportedFile_StaticFile_ID" >
-      <End Role="A_StaticFile" EntitySet="StaticFile" />
+    <!-- inherits from File -->
+    <AssociationSet Name="FK_ImportedFile_File_ID" Association="Model.Store.FK_ImportedFile_File_ID" >
+      <End Role="A_File" EntitySet="File" />
       <End Role="B_ImportedFile" EntitySet="ImportedFile" />
     </AssociationSet>
     <EntitySet Name="IndexConstraint" EntityType="Model.Store.IndexConstraint" Schema="base" Table="IndexConstraints"/>
@@ -6535,11 +6535,11 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ImportedFile_StaticFile_ID">
-    <End Role="A_StaticFile" Type="Model.Store.StaticFile" Multiplicity="1" />
+  <Association Name="FK_ImportedFile_File_ID">
+    <End Role="A_File" Type="Model.Store.File" Multiplicity="1" />
     <End Role="B_ImportedFile" Type="Model.Store.ImportedFile" Multiplicity="0..1" />
     <ReferentialConstraint>
-      <Principal Role="A_StaticFile">
+      <Principal Role="A_File">
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_ImportedFile">

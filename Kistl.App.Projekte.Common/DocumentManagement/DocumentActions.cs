@@ -18,5 +18,14 @@ namespace at.dasz.DocumentManagement
             }
             e.Result = newBlob;
         }
+
+        [Invocation]
+        public static void NotifyDeleting(at.dasz.DocumentManagement.Document obj)
+        {
+            foreach(var blob in obj.Revisions)
+            {
+                obj.Context.Delete(blob);
+            }
+        }
     }
 }

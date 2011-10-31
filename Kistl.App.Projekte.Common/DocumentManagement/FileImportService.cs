@@ -9,6 +9,7 @@ namespace Kistl.App.Projekte.DocumentManagement
     using Autofac;
     using Kistl.API;
     using Kistl.API.Utils;
+    using Kistl.App.Base;
 
     [ServiceDescriptor]
     public class FileImportService : Kistl.API.IService
@@ -26,7 +27,13 @@ namespace Kistl.App.Projekte.DocumentManagement
             }
         }
 
+        private object _lock = new object();
+        private List<FileSystemWatcher> _watcher = new List<FileSystemWatcher>();
         private Func<IKistlContext> _ctxFactory;
+        private Queue<string> _fileQueue = new Queue<string>();
+        private Thread _workerThread;
+        private bool _isRunning = true;
+        private AutoResetEvent _fileEvent;
 
         public FileImportService(Func<IKistlContext> ctxFactory)
         {
@@ -37,12 +44,36 @@ namespace Kistl.App.Projekte.DocumentManagement
 
         public void Start()
         {
-            ThreadPool.QueueUserWorkItem(start_serivce);
+            _isRunning = true;
+            _fileEvent = new AutoResetEvent(false);
+
+            ThreadPool.QueueUserWorkItem(initFileWatcher);
+
+            // start background thread
+            _workerThread = new Thread(backgroundThread);
+            _workerThread.Priority = ThreadPriority.BelowNormal;
+            _workerThread.Start();
         }
 
-        private List<FileSystemWatcher> _watcher = new List<FileSystemWatcher>();
+        public void Stop()
+        {
+            _isRunning = false;
+            foreach (var w in _watcher)
+            {
+                w.Dispose();
+            }
+            _watcher.Clear();
 
-        private void start_serivce(object state)
+            if (!_workerThread.Join(2000))
+            {
+                _workerThread.Abort();
+            }
+            _workerThread = null;
+            _fileEvent.Close();
+            _fileEvent = null;
+        }
+
+        private void initFileWatcher(object state)
         {
             using (var ctx = _ctxFactory())
             {
@@ -75,7 +106,7 @@ namespace Kistl.App.Projekte.DocumentManagement
 
                                 foreach (var f in Directory.GetFiles(dir, "*.*", SearchOption.AllDirectories))
                                 {
-                                    AddToQueue(f);
+                                    Enqueue(f);
                                 }
                             }
                             else
@@ -94,24 +125,103 @@ namespace Kistl.App.Projekte.DocumentManagement
 
         void watcher_Changed(object sender, FileSystemEventArgs e)
         {
-            AddToQueue(e.FullPath);
+            Enqueue(e.FullPath);
         }
 
-        private static void AddToQueue(string file)
+        private void Enqueue(string file)
         {
             if (!string.IsNullOrEmpty(file))
             {
-                Logging.Log.InfoFormat("TODO: adding '{0}' to queue", file);
+                Logging.Log.InfoFormat("Adding '{0}' to queue", file);
+                lock (_lock)
+                {
+                    _fileQueue.Enqueue(file);
+                }
+                _fileEvent.Set();
             }
         }
 
-        public void Stop()
+        private string Dequeue()
         {
-            foreach (var w in _watcher)
+            lock (_lock)
             {
-                w.Dispose();
+                if (_fileQueue.Count > 0)
+                    return _fileQueue.Dequeue();
+                else
+                    return null;
             }
-            _watcher.Clear();
+        }
+
+        public void backgroundThread()
+        {
+            while (_isRunning)
+            {
+                _fileEvent.WaitOne(1000);
+                while (_isRunning)
+                {
+                    var file = Dequeue();
+                    if (file == null) break;
+                    try
+                    {
+                        ProcessFile(file);
+                    }
+                    catch (Exception ex)
+                    {
+                        Logging.Log.Error("Error in FileImport", ex);
+                        // Put back to queue, at the end
+                        Enqueue(file);
+                    }
+                }
+            }
+        }
+
+        private void ProcessFile(string file)
+        {
+            Logging.Log.InfoFormat("FileImport: processing '{0}'", file);
+            if (System.IO.File.Exists(file))
+            {
+                using (var s = TryGetExclusiveLock(file))
+                {
+                    if (s != null)
+                    {
+                        // Upload
+                        using (Logging.Log.DebugTraceMethodCall("Uploading file", file))
+                        using (var ctx = _ctxFactory())
+                        {
+                            var blobID = ctx.CreateBlob(s, Path.GetFileName(file), new System.IO.FileInfo(file).GetMimeType());
+                            var importedFile = ctx.Create<ImportedFile>();
+                            importedFile.Blob = ctx.Find<Blob>(blobID);
+                            importedFile.Name = importedFile.Blob.OriginalName;
+                            ctx.SubmitChanges();
+                        }
+
+                        // Success -> delete file
+                        s.Dispose();
+                        System.IO.File.Delete(file);
+                    }
+                    else
+                    {
+                        Logging.Log.DebugFormat("FileImport: unable to get exclusive lock, putting back to queue");
+                        Enqueue(file);
+                    }
+                }
+            }
+            else
+            {
+                Logging.Log.DebugFormat("FileImport: '{0}' has been deleted", file);
+            }
+        }
+
+        private Stream TryGetExclusiveLock(string file)
+        {
+            try
+            {
+                return System.IO.File.Open(file, FileMode.Open, FileAccess.Read, FileShare.None);
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }
