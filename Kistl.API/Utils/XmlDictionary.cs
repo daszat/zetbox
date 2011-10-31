@@ -29,7 +29,23 @@ namespace Kistl.API.Utils
     [Serializable]
     public sealed class XmlDictionary<TKey, TValue> : IEnumerable<XmlKeyValuePair<TKey, TValue>>
     {
+        /// <summary>
+        /// This value factory is used to create new value objects when a unknown key is set.
+        /// </summary>
+        [NonSerialized]
+        private readonly Func<TKey, TValue> _valueFactory;
+
         private Dictionary<TKey, TValue> _dict = new Dictionary<TKey, TValue>();
+
+        public XmlDictionary()
+            : this(null)
+        {
+        }
+
+        public XmlDictionary(Func<TKey, TValue> valueFactory)
+        {
+            _valueFactory = valueFactory;
+        }
 
         /// <summary>
         /// This list can only be used by the XmlSerializer
@@ -52,6 +68,10 @@ namespace Kistl.API.Utils
         {
             get
             {
+                if (_valueFactory != null && !_dict.ContainsKey(key))
+                {
+                    _dict[key] = _valueFactory(key);
+                }
                 return _dict[key];
             }
             set
@@ -87,6 +107,11 @@ namespace Kistl.API.Utils
         {
             var kvp = (XmlKeyValuePair<TKey, TValue>)obj;
             _dict[kvp.Key] = kvp.Value;
+        }
+
+        public bool ContainsKey(TKey key)
+        {
+            return _dict.ContainsKey(key);
         }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
