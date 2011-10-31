@@ -21,26 +21,22 @@ namespace Kistl.Client.WPF.View.DocumentManagement
     /// Interaction logic for ImageEditor.xaml
     /// </summary>
     [ViewDescriptor(Kistl.App.GUI.Toolkit.WPF)]
-    public partial class DocumentWithPreviewEditor : PreviewEditor, IHasViewModel<DocumentViewModel>
+    public partial class ImportedFileWithPreviewEditor : PreviewEditor, IHasViewModel<ImportedFileViewModel>
     {
-        public DocumentWithPreviewEditor()
+        public ImportedFileWithPreviewEditor()
         {
             if (DesignerProperties.GetIsInDesignMode(this)) return;
             InitializeComponent();
         }
 
-        #region IHasViewModel<DocumentViewModel> Members
-
-        public new DocumentViewModel ViewModel
-        {
-            get { return (DocumentViewModel)DataContext; }
-        }
-
-        #endregion
-
         protected override ContentPresenter PreviewControl
         {
             get { return preview; }
+        }
+
+        public new ImportedFileViewModel ViewModel
+        {
+            get { return (ImportedFileViewModel)DataContext; }
         }
     }
 }

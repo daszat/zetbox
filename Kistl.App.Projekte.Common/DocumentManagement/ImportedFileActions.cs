@@ -6,6 +6,7 @@ namespace at.dasz.DocumentManagement
     using System.Linq;
     using System.Text;
     using Kistl.API;
+    using Kistl.App.Base;
 
     [Implementor]
     public static class ImportedFileActions
@@ -13,42 +14,41 @@ namespace at.dasz.DocumentManagement
         [Invocation]
         public static void HandleBlobChange(ImportedFile obj, MethodReturnEventArgs<Kistl.App.Base.Blob> e, Kistl.App.Base.Blob oldBlob, Kistl.App.Base.Blob newBlob)
         {
-            if (oldBlob != null && newBlob != null && newBlob != oldBlob)
+            if (oldBlob != null && newBlob != oldBlob)
             {
                 throw new InvalidOperationException("Changing blob on imported files is not allowed");
             }
             e.Result = newBlob;
         }
 
+        public static void MakeInternal(IKistlContext ctx, ImportedFile obj, File doc)
+        {
+            // Clone blob, so it could be deleted
+            doc.Blob = ctx.Find<Blob>(ctx.CreateBlob(ctx.GetFileInfo(obj.Blob.ID), obj.Blob.MimeType));
+            doc.Name = obj.Name;
+            ctx.Delete(obj);
+        }
+
         [Invocation]
-        public static void MakeDocument(ImportedFile obj, MethodReturnEventArgs<at.dasz.DocumentManagement.Document> e)
+        public static void MakeDocument(ImportedFile obj, MethodReturnEventArgs<Document> e)
         {
             var ctx = obj.Context;
             var doc = ctx.Create<Document>();
-            doc.Blob = obj.Blob;
-            obj.Blob = null;
-            doc.Name = obj.Name;
-            ctx.Delete(obj);
+            MakeInternal(ctx, obj, doc);
         }
         [Invocation]
-        public static void MakeDynamicFile(ImportedFile obj, MethodReturnEventArgs<at.dasz.DocumentManagement.Document> e)
+        public static void MakeDynamicFile(ImportedFile obj, MethodReturnEventArgs<DynamicFile> e)
         {
             var ctx = obj.Context;
             var doc = ctx.Create<DynamicFile>();
-            doc.Blob = obj.Blob;
-            obj.Blob = null;
-            doc.Name = obj.Name;
-            ctx.Delete(obj);
+            MakeInternal(ctx, obj, doc);
         }
         [Invocation]
-        public static void MakeStaticFile(ImportedFile obj, MethodReturnEventArgs<at.dasz.DocumentManagement.Document> e)
+        public static void MakeStaticFile(ImportedFile obj, MethodReturnEventArgs<StaticFile> e)
         {
             var ctx = obj.Context;
             var doc = ctx.Create<StaticFile>();
-            doc.Blob = obj.Blob;
-            obj.Blob = null;
-            doc.Name = obj.Name;
-            ctx.Delete(obj);
+            MakeInternal(ctx, obj, doc);
         }
     }
 }

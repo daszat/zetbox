@@ -52,6 +52,7 @@ namespace Kistl.App.Projekte.DocumentManagement
             // start background thread
             _workerThread = new Thread(backgroundThread);
             _workerThread.Priority = ThreadPriority.BelowNormal;
+            _workerThread.IsBackground = true;
             _workerThread.Start();
         }
 

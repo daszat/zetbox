@@ -140,6 +140,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataObjectViewModelResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Presentables\DocumentManagement\ImportedFileViewModel.cs" />
     <Compile Include="Presentables\DocumentManagement\DynamicFileViewModel.cs" />
     <Compile Include="Presentables\DocumentManagement\FileViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>

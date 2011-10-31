@@ -252,6 +252,17 @@ namespace Kistl.Client.WPF
 
         private void Application_Exit(object sender, ExitEventArgs e)
         {
+            Logging.Log.Info("Stopping ZBox Services");
+            IServiceControlManager scm = null;
+            if (container.TryResolve<IServiceControlManager>(out scm))
+            {
+                scm.Stop();
+            }
+            else
+            {
+                Logging.Log.Info("Service control manager not registered");
+            }
+
             if (serverDomain != null)
                 serverDomain.Stop();
 
