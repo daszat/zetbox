@@ -85,7 +85,11 @@ namespace Kistl.Client.Presentables.DtoViewModels
                 }
             }
 
-            if (typeof(IEnumerable).IsAssignableFrom(dto.GetType()))
+            if (dto.GetType().HasGenericDefinition(typeof(XmlDictionary<,>)))
+            {
+                return BuildTabbedFrom(root, parentProp, dto, dependencies, dataCtx, parent);
+            }
+            else if (typeof(IEnumerable).IsAssignableFrom(dto.GetType()))
             {
                 return BuildTableFrom(root, parentProp, dto, dependencies, dataCtx, parent);
             }
@@ -199,6 +203,12 @@ namespace Kistl.Client.Presentables.DtoViewModels
         {
             if (dto == null) return null;
             if (parentProp == null) throw new ArgumentNullException("parentProp");
+
+            // skip XmlDictionary to its values
+            if (dto.GetType().HasGenericDefinition(typeof(XmlDictionary<,>)))
+            {
+                dto = dto.GetPropertyValue<object>("Values");
+            }
 
             var result = new DtoTableViewModel(dependencies, dataCtx, parent, string.Format("table:{0}.{1} = {2}", parentProp.DeclaringType, parentProp.Name, dto.GetType()))
             {
@@ -386,7 +396,16 @@ namespace Kistl.Client.Presentables.DtoViewModels
                 Data = dto,
             };
 
-            if (typeof(IEnumerable).IsAssignableFrom(dto.GetType()))
+            // need to extract value from XmlDictionaries
+            if (dto.GetType().HasGenericDefinition(typeof(XmlDictionary<,>)))
+            {
+                foreach (var element in ((IEnumerable)dto).OfType<object>().OrderBy(o => o.GetPropertyValue<object>("Key")))
+                {
+                    var item = BuildFrom(root, parentProp, element.GetPropertyValue<object>("Value"), dependencies, dataCtx, result);
+                    if (item != null) result.Items.Add(item);
+                }
+            }
+            else if (typeof(IEnumerable).IsAssignableFrom(dto.GetType()))
             {
                 foreach (var element in ((IEnumerable)dto))
                 {
