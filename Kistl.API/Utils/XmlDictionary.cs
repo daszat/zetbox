@@ -27,7 +27,7 @@ namespace Kistl.API.Utils
     }
 
     [Serializable]
-    public sealed class XmlDictionary<TKey, TValue> : IEnumerable<XmlKeyValuePair<TKey, TValue>>
+    public class XmlDictionary<TKey, TValue> : IEnumerable<XmlKeyValuePair<TKey, TValue>>
     {
         /// <summary>
         /// This value factory is used to create new value objects when a unknown key is set.
