@@ -114,6 +114,11 @@ namespace Kistl.API.Utils
             return _dict.ContainsKey(key);
         }
 
+        public void Clear()
+        {
+            _dict.Clear();
+        }
+
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
             return ((System.Collections.IEnumerable)_dict.Select(kvp => new XmlKeyValuePair<TKey, TValue>(kvp))).GetEnumerator();
