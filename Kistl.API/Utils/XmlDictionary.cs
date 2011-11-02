@@ -3,10 +3,10 @@ namespace Kistl.API.Utils
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text;
     using System.Xml.Serialization;
-    using System.Collections.ObjectModel;
 
     // These two classes can be used to substitute for a Dictionary, when XmlSerialization is needed
 
@@ -38,8 +38,20 @@ namespace Kistl.API.Utils
         private Dictionary<TKey, TValue> _dict = new Dictionary<TKey, TValue>();
 
         public XmlDictionary()
-            : this(null)
+            : this((Func<TKey, TValue>)null)
         {
+        }
+
+        public XmlDictionary(IEnumerable<XmlKeyValuePair<TKey, TValue>> data)
+            : this((Func<TKey, TValue>)null)
+        {
+            if (data != null)
+            {
+                foreach (var d in data)
+                {
+                    this.Add(d.Key, d.Value);
+                }
+            }
         }
 
         public XmlDictionary(Func<TKey, TValue> valueFactory)
