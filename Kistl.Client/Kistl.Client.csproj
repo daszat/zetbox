@@ -141,6 +141,11 @@
       <DependentUpon>DataObjectViewModelResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Presentables\DocumentManagement\ImportedFileNavigationSearchScreenViewModel.cs" />
+    <Compile Include="Presentables\DocumentManagement\ImportedFileNavigationSearchScreenViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ImportedFileNavigationSearchScreenViewModelResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Presentables\DocumentManagement\ImportedFileViewModel.cs" />
     <Compile Include="Presentables\DocumentManagement\DynamicFileViewModel.cs" />
     <Compile Include="Presentables\DocumentManagement\FileViewModelResources.Designer.cs">
@@ -388,6 +393,11 @@
     <EmbeddedResource Include="Presentables\DocumentManagement\FileViewModelResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>FileViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\DocumentManagement\ImportedFileNavigationSearchScreenViewModelResources.de.resx" />
+    <EmbeddedResource Include="Presentables\DocumentManagement\ImportedFileNavigationSearchScreenViewModelResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ImportedFileNavigationSearchScreenViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentables\KistlBase\FilterListEntryViewModelResources.de.resx" />
     <EmbeddedResource Include="Presentables\KistlBase\FilterListEntryViewModelResources.resx">
