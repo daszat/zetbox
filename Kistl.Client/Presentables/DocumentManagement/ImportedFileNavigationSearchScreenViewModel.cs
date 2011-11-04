@@ -23,8 +23,13 @@ namespace Kistl.Client.Presentables.DocumentManagement
             : base(appCtx, dataCtx, ctxFactory, parent, screen)
         {
             _ctxFactory = ctxFactory;
-
             base.Type = typeof(ImportedFile).GetObjectClass(FrozenContext);
+        }
+
+        protected override void InitializeListViewModel(KistlBase.InstanceListViewModel mdl)
+        {
+            base.InitializeListViewModel(mdl);
+
             base.ListViewModel.ViewMethod = InstanceListViewMethod.Details;
             base.ListViewModel.AllowAddNew = false;
             base.ListViewModel.Commands.Add(OpenAllCommand);
