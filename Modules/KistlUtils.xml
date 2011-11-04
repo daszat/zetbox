@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2011-10-31T18:04:49.277012Z" xmlns="http://dasz.at/Kistl">
+<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2011-11-04T11:23:24.420415Z" xmlns="http://dasz.at/Kistl">
   <KistlBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <KistlBase:ChangedOn>2011-08-05T10:30:47.603232Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2011-06-15T14:03:02Z</KistlBase:CreatedOn>
@@ -2165,6 +2165,11 @@
     <GUI:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</GUI:Module>
     <GUI:ViewModelRef>de119bfe-c5ac-47ec-902a-9800ea1bcafe</GUI:ViewModelRef>
   </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="eabf464f-a5a9-4967-ac2e-577fe51fd23d">
+    <GUI:Description>Navigation Screen Search ViewModel for imported files</GUI:Description>
+    <GUI:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</GUI:Module>
+    <GUI:ViewModelRef>f5917065-890d-4bd5-8db5-ccc87e3566da</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="3aeddad1-a2cf-46b0-af26-6bf6e5f8f6e2">
     <GUI:DefaultEditorKind>d72c2283-b956-461f-b47e-93d81c8bf896</GUI:DefaultEditorKind>
     <GUI:Description>ViewModel for imported files</GUI:Description>
@@ -2201,6 +2206,21 @@
     <GUI:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
+  <GUI:NavigationScreen ExportGuid="6c3f5c91-7245-479d-aeb3-64ebcdcfc4e0">
+    <GUI:ChangedOn>2011-11-04T11:19:45.410889Z</GUI:ChangedOn>
+    <GUI:CreatedOn>2011-11-04T11:18:55.730047Z</GUI:CreatedOn>
+    <GUI:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</GUI:Module>
+    <GUI:Title>Document Management</GUI:Title>
+  </GUI:NavigationScreen>
+  <GUI:NavigationSearchScreen ExportGuid="5e4e6a3a-06a6-46f3-8eec-118e28d2fce6">
+    <GUI:ChangedOn>2011-11-04T11:23:44.847584Z</GUI:ChangedOn>
+    <GUI:CreatedOn>2011-11-04T11:19:45.410889Z</GUI:CreatedOn>
+    <GUI:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</GUI:Module>
+    <GUI:Parent>6c3f5c91-7245-479d-aeb3-64ebcdcfc4e0</GUI:Parent>
+    <GUI:Children_pos>0</GUI:Children_pos>
+    <GUI:Title>Imported files</GUI:Title>
+    <GUI:ViewModelDescriptor>eabf464f-a5a9-4967-ac2e-577fe51fd23d</GUI:ViewModelDescriptor>
+  </GUI:NavigationSearchScreen>
   <GUI:ControlKind ExportGuid="24338f74-ec90-48a5-90ff-b9830082cb12">
     <GUI:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</GUI:Module>
     <GUI:Name>ZBox.DocumentManagement.DocumentWithPreviewEditor</GUI:Name>
@@ -2221,6 +2241,13 @@
     <GUI:Name>ZBox.DocumentManagement.ImportedFileWithPreviewEditor</GUI:Name>
     <GUI:Parent>b22d6746-5704-4ea7-934a-c3648081bd0a</GUI:Parent>
   </GUI:ControlKind>
+  <GUI:Application ExportGuid="e4f4697a-241d-407a-a8bb-34f7ac8c28c1">
+    <GUI:ChangedOn>2011-11-04T11:18:55.730047Z</GUI:ChangedOn>
+    <GUI:CreatedOn>2011-11-04T11:18:55.730047Z</GUI:CreatedOn>
+    <GUI:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</GUI:Module>
+    <GUI:Name>Document Management</GUI:Name>
+    <GUI:RootScreen>6c3f5c91-7245-479d-aeb3-64ebcdcfc4e0</GUI:RootScreen>
+  </GUI:Application>
   <KistlBase:ServiceDescriptor ExportGuid="7fb74796-9341-4c90-bd78-10a92351d25a">
     <KistlBase:ChangedOn>2011-10-28T16:34:33.342477Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2011-10-28T16:34:33.342477Z</KistlBase:CreatedOn>
