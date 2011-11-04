@@ -21,7 +21,7 @@ namespace at.dasz.DocumentManagement
             e.Result = newBlob;
         }
 
-        public static void MakeInternal(IKistlContext ctx, ImportedFile obj, File doc)
+        private static void MakeInternal(IKistlContext ctx, ImportedFile obj, File doc)
         {
             // Clone blob, so it could be deleted
             doc.Blob = ctx.Find<Blob>(ctx.CreateBlob(ctx.GetFileInfo(obj.Blob.ID), obj.Blob.MimeType));
