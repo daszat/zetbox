@@ -304,6 +304,13 @@ namespace Kistl.Client.Presentables.ObjectEditor
                 try
                 {
                     DataContext.SubmitChanges();
+                    foreach (var i in Items.OfType<DataObjectViewModel>().ToList())
+                    {
+                        if (i.Object == null || i.Object.ObjectState == DataObjectState.Deleted)
+                        {
+                            Items.Remove(i);
+                        }
+                    }
                     return true;
                 }
                 catch (Exception ex)
