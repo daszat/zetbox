@@ -425,7 +425,18 @@ namespace Kistl.Client.Presentables.KistlBase
                 OnPropertyChanged("InstancesCountWarningText");
 
                 this.SelectedItem = mdl;
-                ViewModelFactory.ShowModel(mdl, true);
+
+                if (this.DataType.IsSimpleObject && !IsEditable)
+                {
+                    // Open in a Dialog
+                    var dlg = ViewModelFactory.CreateViewModel<SimpleDataObjectEditorTaskViewModel.Factory>().Invoke(DataContext, this, mdl);
+                    ViewModelFactory.ShowDialog(dlg);
+                }
+                else if (!this.DataType.IsSimpleObject)
+                {
+                    ViewModelFactory.ShowModel(mdl, true);
+                }
+                // Don't open simple objects
             }
             else
             {
@@ -522,7 +533,7 @@ namespace Kistl.Client.Presentables.KistlBase
                         InstanceListViewModelResources.SelectColumnsCommand,
                         InstanceListViewModelResources.SelectColumnsCommand_Tooltip,
                         SelectColumns,
-                        () => AllowSelectColumns, 
+                        () => AllowSelectColumns,
                         null);
                 }
                 return _SelectColumnsCommand;
@@ -1082,7 +1093,15 @@ namespace Kistl.Client.Presentables.KistlBase
             {
                 foreach (var item in objects)
                 {
-                    ViewModelFactory.ShowModel(item, true);
+                    if (this.DataType.IsSimpleObject)
+                    {
+                        var dlg = ViewModelFactory.CreateViewModel<SimpleDataObjectEditorTaskViewModel.Factory>().Invoke(DataContext, this, item);
+                        ViewModelFactory.ShowDialog(dlg);
+                    }
+                    else
+                    {
+                        ViewModelFactory.ShowModel(item, true);
+                    }
                 }
             }
             else
