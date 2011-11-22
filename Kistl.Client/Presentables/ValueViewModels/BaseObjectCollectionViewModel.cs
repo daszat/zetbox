@@ -694,10 +694,18 @@ namespace Kistl.Client.Presentables.ValueViewModels
         public System.ComponentModel.ListSortDirection SortDirection { get { return _sortDirection; } }
         #endregion
 
+        #region IFormattedValueViewModel Members
+        protected override string FormatValue(IReadOnlyObservableList<DataObjectViewModel> value)
+        {
+            if (value.Count == 0) return BaseObjectCollectionViewModelResources.NoItems;
+            if (value.Count == 1) string.Format(BaseObjectCollectionViewModelResources.OneItem, value[0].Name);
+            return string.Format(BaseObjectCollectionViewModelResources.MoreItems, value.Count, value[0].Name);
+        }
         protected override ParseResult<IReadOnlyObservableList<DataObjectViewModel>> ParseValue(string str)
         {
             throw new NotSupportedException();
         }
+        #endregion
     }
 
     /// <summary>
