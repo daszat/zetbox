@@ -142,7 +142,7 @@
     <value />
   </data>
   <data name="OneItem" xml:space="preserve">
-    <value>(1): {0}</value>
+    <value>{0}</value>
   </data>
   <data name="RemoveCommand_Name" xml:space="preserve">
     <value>Entfernen</value>

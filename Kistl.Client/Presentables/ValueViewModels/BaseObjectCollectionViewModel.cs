@@ -698,7 +698,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
         protected override string FormatValue(IReadOnlyObservableList<DataObjectViewModel> value)
         {
             if (value.Count == 0) return BaseObjectCollectionViewModelResources.NoItems;
-            if (value.Count == 1) string.Format(BaseObjectCollectionViewModelResources.OneItem, value[0].Name);
+            if (value.Count == 1) return string.Format(BaseObjectCollectionViewModelResources.OneItem, value[0].Name);
             return string.Format(BaseObjectCollectionViewModelResources.MoreItems, value.Count, value[0].Name);
         }
         protected override ParseResult<IReadOnlyObservableList<DataObjectViewModel>> ParseValue(string str)
