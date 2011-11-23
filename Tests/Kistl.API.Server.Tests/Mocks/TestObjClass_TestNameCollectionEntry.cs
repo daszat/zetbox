@@ -85,5 +85,19 @@ namespace Kistl.API.Server.Mocks
             Value = s;
             return baseResult;
         }
+
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
+        {
+            switch (propertyName)
+            {
+                case "Parent":
+                    Parent = (TestObjClass)parentObj;
+                    ParentObject = parentObj;
+                    break;
+                default:
+                    base.UpdateParent(propertyName, parentObj);
+                    break;
+            }
+        }
     }
 }
