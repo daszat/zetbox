@@ -76,7 +76,6 @@
   <ItemGroup>
     <Compile Include="ApiCommonModule.cs" />
     <Compile Include="BaseCustomActionsManager.cs" />
-    <Compile Include="BaseValueCollectionWrapper.cs" />
     <Compile Include="CompoundObjectExtensions.cs" />
     <Compile Include="GuiExtensions.cs" />
     <Compile Include="IdentityExtensions.cs" />

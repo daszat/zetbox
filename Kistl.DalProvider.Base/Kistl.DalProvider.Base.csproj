@@ -54,6 +54,10 @@
       <HintPath>..\Libs\AutoFac 2\Autofac.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml" />
@@ -69,6 +73,7 @@
     <Compile Include="DataObjectBaseImpl.cs" />
     <Compile Include="IBaseActionsManager.cs" />
     <Compile Include="IBaseImplementationTypeChecker.cs" />
+    <Compile Include="RelationWrappers\ValueCollectionWrapper.cs" />
     <Compile Include="RelationWrappers\OneNRelationList.cs" />
     <Compile Include="PersistenceObjectBaseImpl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
