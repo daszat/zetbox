@@ -48,7 +48,7 @@ namespace Kistl.API.Client.Mocks.OneNLists
         {
             if (propertyName == "OneSide")
             {
-                _fk_OneSide = parentObj.ID;
+                _fk_OneSide = parentObj == null ? (int?)null : parentObj.ID;
             }
             else
             {

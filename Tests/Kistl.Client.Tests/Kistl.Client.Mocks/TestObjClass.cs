@@ -343,7 +343,7 @@ namespace Kistl.App.Test
 
         public override void UpdateParent(string propertyName, IDataObject parentObj)
         {
-            int? __oldValue, __newValue = parentObj.ID;
+            int? __oldValue, __newValue = parentObj == null ? (int?)null : parentObj.ID;
 
             switch (propertyName)
             {
