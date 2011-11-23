@@ -96,7 +96,7 @@ namespace Kistl.DalProvider.Base.RelationWrappers
 
         protected virtual TEntry InitialiseEntry(TEntry e, TValue value)
         {
-            e.Parent = parent;
+            e.UpdateParent("Parent", parent);
             e.Value = value;
             ctx.Attach(e);
             return e;
