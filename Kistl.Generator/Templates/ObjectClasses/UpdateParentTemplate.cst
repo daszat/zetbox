@@ -1,7 +1,7 @@
 ﻿<%@ CodeTemplate Language="C#" 
-	Name="ObjectClasses.UpdateParentTemplate"
-	ClassName="Kistl.Generator.Templates.ObjectClasses.UpdateParentTemplate" 
-	Inherits="Kistl.Generator.ResourceTemplate" %>
+    Name="ObjectClasses.UpdateParentTemplate"
+    ClassName="Kistl.Generator.Templates.ObjectClasses.UpdateParentTemplate"
+    Inherits="Kistl.Generator.ResourceTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Collections.Generic" %>
 <%@ Import Namespace="System.Diagnostics" %>
@@ -15,27 +15,17 @@
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 <%@ Parameter Name="props" Type="List<ObjectReferenceProperty>" %>
 
-<%
-if (props.Count > 0)
-{
-%>
-		public override void UpdateParent(string propertyName, int? id)
-		{
-			int? __oldValue, __newValue = id;
-			
-			switch(propertyName)
-			{
-<%
-	foreach(var prop in props)
-	{
-		ApplyCase(prop);
-	}
-%>
-				default:
-					base.UpdateParent(propertyName, id);
-					break;
-			}
-		}
-<%
-}
-%>
+<% if (props.Count > 0) {               %>
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
+        {
+            switch(propertyName)
+            {
+<%      foreach(var prop in props) {    %>
+<%      ApplyCase(prop);                %>
+<% }                                    %>
+                default:
+                    base.UpdateParent(propertyName, parentObj);
+                    break;
+            }
+        }
+<% }                                    %>

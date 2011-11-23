@@ -626,30 +626,6 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
             base.AttachToContext(ctx);
         }
 
-		public override void UpdateParent(string propertyName, int? id)
-		{
-			int? __oldValue, __newValue = id;
-			
-			switch(propertyName)
-			{
-                case "TestCustomObjects_Nav":
-                    __oldValue = _fk_TestCustomObjects_Nav;
-                    NotifyPropertyChanging("TestCustomObjects_Nav", __oldValue, __newValue);
-                    _fk_TestCustomObjects_Nav = __newValue;
-                    NotifyPropertyChanged("TestCustomObjects_Nav", __oldValue, __newValue);
-                    break;
-                case "TestCustomObjects_One_Nav":
-                    __oldValue = _fk_TestCustomObjects_One_Nav;
-                    NotifyPropertyChanging("TestCustomObjects_One_Nav", __oldValue, __newValue);
-                    _fk_TestCustomObjects_One_Nav = __newValue;
-                    NotifyPropertyChanged("TestCustomObjects_One_Nav", __oldValue, __newValue);
-                    break;
-				default:
-					base.UpdateParent(propertyName, id);
-					break;
-			}
-		}
-
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.

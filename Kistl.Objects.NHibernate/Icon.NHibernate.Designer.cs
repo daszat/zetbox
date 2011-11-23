@@ -406,14 +406,14 @@ namespace Kistl.App.GUI
             var nhCtx = (NHibernateContext)ctx;
         }
 
-        public override void UpdateParent(string propertyName, int? id)
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
         {
             switch(propertyName)
             {
                 case "Blob":
                     {
                         var __oldValue = (Kistl.App.Base.BlobNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Blob);
-                        var __newValue = (Kistl.App.Base.BlobNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.Base.Blob>(id.Value));
+                        var __newValue = (Kistl.App.Base.BlobNHibernateImpl)parentObj;
                         NotifyPropertyChanging("Blob", __oldValue, __newValue);
                         this.Proxy.Blob = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("Blob", __oldValue, __newValue);
@@ -422,14 +422,14 @@ namespace Kistl.App.GUI
                 case "Module":
                     {
                         var __oldValue = (Kistl.App.Base.ModuleNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Module);
-                        var __newValue = (Kistl.App.Base.ModuleNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.Base.Module>(id.Value));
+                        var __newValue = (Kistl.App.Base.ModuleNHibernateImpl)parentObj;
                         NotifyPropertyChanging("Module", __oldValue, __newValue);
                         this.Proxy.Module = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("Module", __oldValue, __newValue);
                     }
                     break;
                 default:
-                    base.UpdateParent(propertyName, id);
+                    base.UpdateParent(propertyName, parentObj);
                     break;
             }
         }

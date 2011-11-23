@@ -57,20 +57,20 @@ namespace at.dasz.DocumentManagement
 				if (_Revisions == null)
 				{
 					_Revisions 
-						= new NHibernateBSideListWrapper<at.dasz.DocumentManagement.Document, Kistl.App.Base.Blob, Document_has_Blob_RelationEntryNHibernateImpl>(
+						= new NHibernateBSideListWrapper<at.dasz.DocumentManagement.Document, Kistl.App.Base.Blob, at.dasz.DocumentManagement.Document_has_Blob_RelationEntryNHibernateImpl>(
 							this, 
-							new ProjectedCollection<Document_has_Blob_RelationEntryNHibernateImpl.Document_has_Blob_RelationEntryProxy, Document_has_Blob_RelationEntryNHibernateImpl>(
+							new ProjectedCollection<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryNHibernateImpl.Document_has_Blob_RelationEntryProxy, at.dasz.DocumentManagement.Document_has_Blob_RelationEntryNHibernateImpl>(
                                 this.Proxy.Revisions,
-                                p => (Document_has_Blob_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Document_has_Blob_RelationEntryNHibernateImpl.Document_has_Blob_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
-                            entry => (IRelationListSync<Document_has_Blob_RelationEntryNHibernateImpl>)null);
+                                p => (at.dasz.DocumentManagement.Document_has_Blob_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
+                                ce => (at.dasz.DocumentManagement.Document_has_Blob_RelationEntryNHibernateImpl.Document_has_Blob_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
+                            entry => (IRelationListSync<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryNHibernateImpl>)null);
                     if (Revisions_was_eagerLoaded) { Revisions_was_eagerLoaded = false; }
 				}
 				return (IList<Kistl.App.Base.Blob>)_Revisions;
 			}
 		}
 
-		private NHibernateBSideListWrapper<at.dasz.DocumentManagement.Document, Kistl.App.Base.Blob, Document_has_Blob_RelationEntryNHibernateImpl> _Revisions;
+		private NHibernateBSideListWrapper<at.dasz.DocumentManagement.Document, Kistl.App.Base.Blob, at.dasz.DocumentManagement.Document_has_Blob_RelationEntryNHibernateImpl> _Revisions;
 		// ignored, but required for Serialization
         private bool Revisions_was_eagerLoaded = false;
 

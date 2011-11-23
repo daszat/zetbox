@@ -211,23 +211,24 @@ namespace Kistl.App.Test
             base.AttachToContext(ctx);
         }
 
-		public override void UpdateParent(string propertyName, int? id)
-		{
-			int? __oldValue, __newValue = id;
-			
-			switch(propertyName)
-			{
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
+        {
+            switch(propertyName)
+            {
                 case "OneSide":
-                    __oldValue = _fk_OneSide;
-                    NotifyPropertyChanging("OneSide", __oldValue, __newValue);
-                    _fk_OneSide = __newValue;
-                    NotifyPropertyChanged("OneSide", __oldValue, __newValue);
+                    {
+                        var __oldValue = _fk_OneSide;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("OneSide", __oldValue, __newValue);
+                        _fk_OneSide = __newValue;
+                        NotifyPropertyChanged("OneSide", __oldValue, __newValue);
+                    }
                     break;
-				default:
-					base.UpdateParent(propertyName, id);
-					break;
-			}
-		}
+                default:
+                    base.UpdateParent(propertyName, parentObj);
+                    break;
+            }
+        }
 
         public override void ReloadReferences()
         {

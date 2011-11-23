@@ -242,20 +242,20 @@ namespace Kistl.App.GUI
 				if (_Menu == null)
 				{
 					_Menu 
-						= new NHibernateBSideCollectionWrapper<Kistl.App.GUI.Template, Kistl.App.GUI.Visual, Template_hasMenu_Visual_RelationEntryNHibernateImpl>(
+						= new NHibernateBSideCollectionWrapper<Kistl.App.GUI.Template, Kistl.App.GUI.Visual, Kistl.App.GUI.Template_hasMenu_Visual_RelationEntryNHibernateImpl>(
 							this, 
-							new ProjectedCollection<Template_hasMenu_Visual_RelationEntryNHibernateImpl.Template_hasMenu_Visual_RelationEntryProxy, Template_hasMenu_Visual_RelationEntryNHibernateImpl>(
+							new ProjectedCollection<Kistl.App.GUI.Template_hasMenu_Visual_RelationEntryNHibernateImpl.Template_hasMenu_Visual_RelationEntryProxy, Kistl.App.GUI.Template_hasMenu_Visual_RelationEntryNHibernateImpl>(
                                 this.Proxy.Menu,
-                                p => (Template_hasMenu_Visual_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Template_hasMenu_Visual_RelationEntryNHibernateImpl.Template_hasMenu_Visual_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
-                            entry => (IRelationListSync<Template_hasMenu_Visual_RelationEntryNHibernateImpl>)null);
+                                p => (Kistl.App.GUI.Template_hasMenu_Visual_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
+                                ce => (Kistl.App.GUI.Template_hasMenu_Visual_RelationEntryNHibernateImpl.Template_hasMenu_Visual_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
+                            entry => (IRelationListSync<Kistl.App.GUI.Template_hasMenu_Visual_RelationEntryNHibernateImpl>)null);
                     if (Menu_was_eagerLoaded) { Menu_was_eagerLoaded = false; }
 				}
 				return (ICollection<Kistl.App.GUI.Visual>)_Menu;
 			}
 		}
 
-		private NHibernateBSideCollectionWrapper<Kistl.App.GUI.Template, Kistl.App.GUI.Visual, Template_hasMenu_Visual_RelationEntryNHibernateImpl> _Menu;
+		private NHibernateBSideCollectionWrapper<Kistl.App.GUI.Template, Kistl.App.GUI.Visual, Kistl.App.GUI.Template_hasMenu_Visual_RelationEntryNHibernateImpl> _Menu;
 		// ignored, but required for Serialization
         private bool Menu_was_eagerLoaded = false;
 
@@ -389,14 +389,14 @@ namespace Kistl.App.GUI
             var nhCtx = (NHibernateContext)ctx;
         }
 
-        public override void UpdateParent(string propertyName, int? id)
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
         {
             switch(propertyName)
             {
                 case "DisplayedTypeAssembly":
                     {
                         var __oldValue = (Kistl.App.Base.AssemblyNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.DisplayedTypeAssembly);
-                        var __newValue = (Kistl.App.Base.AssemblyNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.Base.Assembly>(id.Value));
+                        var __newValue = (Kistl.App.Base.AssemblyNHibernateImpl)parentObj;
                         NotifyPropertyChanging("DisplayedTypeAssembly", __oldValue, __newValue);
                         this.Proxy.DisplayedTypeAssembly = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("DisplayedTypeAssembly", __oldValue, __newValue);
@@ -405,14 +405,14 @@ namespace Kistl.App.GUI
                 case "VisualTree":
                     {
                         var __oldValue = (Kistl.App.GUI.VisualNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.VisualTree);
-                        var __newValue = (Kistl.App.GUI.VisualNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.GUI.Visual>(id.Value));
+                        var __newValue = (Kistl.App.GUI.VisualNHibernateImpl)parentObj;
                         NotifyPropertyChanging("VisualTree", __oldValue, __newValue);
                         this.Proxy.VisualTree = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("VisualTree", __oldValue, __newValue);
                     }
                     break;
                 default:
-                    base.UpdateParent(propertyName, id);
+                    base.UpdateParent(propertyName, parentObj);
                     break;
             }
         }

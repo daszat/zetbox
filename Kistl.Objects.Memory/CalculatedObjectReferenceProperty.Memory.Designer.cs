@@ -45,17 +45,17 @@ namespace Kistl.App.Base
 			{
 				if (_Inputs == null)
 				{
-					if (!Inputs_was_eagerLoaded) Context.FetchRelation<CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryMemoryImpl>(new Guid("47595643-e8d0-48ef-82c7-2d24de8a784e"), RelationEndRole.A, this);
+					if (!Inputs_was_eagerLoaded) Context.FetchRelation<Kistl.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryMemoryImpl>(new Guid("47595643-e8d0-48ef-82c7-2d24de8a784e"), RelationEndRole.A, this);
 					_Inputs 
-						= new ObservableBSideCollectionWrapper<Kistl.App.Base.CalculatedObjectReferenceProperty, Kistl.App.Base.Property, CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryMemoryImpl, ICollection<CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryMemoryImpl>>(
+						= new ObservableBSideCollectionWrapper<Kistl.App.Base.CalculatedObjectReferenceProperty, Kistl.App.Base.Property, Kistl.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryMemoryImpl, ICollection<Kistl.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryMemoryImpl>>(
 							this, 
-							new RelationshipFilterASideCollection<CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryMemoryImpl>(this.Context, this));
+							new RelationshipFilterASideCollection<Kistl.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryMemoryImpl>(this.Context, this));
 				}
 				return (ICollection<Kistl.App.Base.Property>)_Inputs;
 			}
 		}
 
-		private ObservableBSideCollectionWrapper<Kistl.App.Base.CalculatedObjectReferenceProperty, Kistl.App.Base.Property, CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryMemoryImpl, ICollection<CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryMemoryImpl>> _Inputs;
+		private ObservableBSideCollectionWrapper<Kistl.App.Base.CalculatedObjectReferenceProperty, Kistl.App.Base.Property, Kistl.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryMemoryImpl, ICollection<Kistl.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryMemoryImpl>> _Inputs;
 		
 		private bool Inputs_was_eagerLoaded = false;
 
@@ -232,23 +232,24 @@ namespace Kistl.App.Base
             base.AttachToContext(ctx);
         }
 
-		public override void UpdateParent(string propertyName, int? id)
-		{
-			int? __oldValue, __newValue = id;
-			
-			switch(propertyName)
-			{
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
+        {
+            switch(propertyName)
+            {
                 case "ReferencedClass":
-                    __oldValue = _fk_ReferencedClass;
-                    NotifyPropertyChanging("ReferencedClass", __oldValue, __newValue);
-                    _fk_ReferencedClass = __newValue;
-                    NotifyPropertyChanged("ReferencedClass", __oldValue, __newValue);
+                    {
+                        var __oldValue = _fk_ReferencedClass;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("ReferencedClass", __oldValue, __newValue);
+                        _fk_ReferencedClass = __newValue;
+                        NotifyPropertyChanged("ReferencedClass", __oldValue, __newValue);
+                    }
                     break;
-				default:
-					base.UpdateParent(propertyName, id);
-					break;
-			}
-		}
+                default:
+                    base.UpdateParent(propertyName, parentObj);
+                    break;
+            }
+        }
 
         public override void ReloadReferences()
         {

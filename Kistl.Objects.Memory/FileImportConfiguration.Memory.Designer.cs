@@ -622,35 +622,42 @@ namespace at.dasz.DocumentManagement
             base.AttachToContext(ctx);
         }
 
-		public override void UpdateParent(string propertyName, int? id)
-		{
-			int? __oldValue, __newValue = id;
-			
-			switch(propertyName)
-			{
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
+        {
+            switch(propertyName)
+            {
                 case "ChangedBy":
-                    __oldValue = _fk_ChangedBy;
-                    NotifyPropertyChanging("ChangedBy", __oldValue, __newValue);
-                    _fk_ChangedBy = __newValue;
-                    NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
+                    {
+                        var __oldValue = _fk_ChangedBy;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("ChangedBy", __oldValue, __newValue);
+                        _fk_ChangedBy = __newValue;
+                        NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
+                    }
                     break;
                 case "CreatedBy":
-                    __oldValue = _fk_CreatedBy;
-                    NotifyPropertyChanging("CreatedBy", __oldValue, __newValue);
-                    _fk_CreatedBy = __newValue;
-                    NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
+                    {
+                        var __oldValue = _fk_CreatedBy;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("CreatedBy", __oldValue, __newValue);
+                        _fk_CreatedBy = __newValue;
+                        NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
+                    }
                     break;
                 case "Identity":
-                    __oldValue = _fk_Identity;
-                    NotifyPropertyChanging("Identity", __oldValue, __newValue);
-                    _fk_Identity = __newValue;
-                    NotifyPropertyChanged("Identity", __oldValue, __newValue);
+                    {
+                        var __oldValue = _fk_Identity;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("Identity", __oldValue, __newValue);
+                        _fk_Identity = __newValue;
+                        NotifyPropertyChanged("Identity", __oldValue, __newValue);
+                    }
                     break;
-				default:
-					base.UpdateParent(propertyName, id);
-					break;
-			}
-		}
+                default:
+                    base.UpdateParent(propertyName, parentObj);
+                    break;
+            }
+        }
 
         public override void ReloadReferences()
         {

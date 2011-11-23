@@ -1115,14 +1115,14 @@ namespace Kistl.App.GUI
             var nhCtx = (NHibernateContext)ctx;
         }
 
-        public override void UpdateParent(string propertyName, int? id)
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
         {
             switch(propertyName)
             {
                 case "RequestedEditorKind":
                     {
                         var __oldValue = (Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.RequestedEditorKind);
-                        var __newValue = (Kistl.App.GUI.ControlKindNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.GUI.ControlKind>(id.Value));
+                        var __newValue = (Kistl.App.GUI.ControlKindNHibernateImpl)parentObj;
                         NotifyPropertyChanging("RequestedEditorKind", __oldValue, __newValue);
                         this.Proxy.RequestedEditorKind = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("RequestedEditorKind", __oldValue, __newValue);
@@ -1131,7 +1131,7 @@ namespace Kistl.App.GUI
                 case "RequestedWorkspaceKind":
                     {
                         var __oldValue = (Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.RequestedWorkspaceKind);
-                        var __newValue = (Kistl.App.GUI.ControlKindNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.GUI.ControlKind>(id.Value));
+                        var __newValue = (Kistl.App.GUI.ControlKindNHibernateImpl)parentObj;
                         NotifyPropertyChanging("RequestedWorkspaceKind", __oldValue, __newValue);
                         this.Proxy.RequestedWorkspaceKind = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("RequestedWorkspaceKind", __oldValue, __newValue);
@@ -1140,14 +1140,14 @@ namespace Kistl.App.GUI
                 case "Type":
                     {
                         var __oldValue = (Kistl.App.Base.ObjectClassNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Type);
-                        var __newValue = (Kistl.App.Base.ObjectClassNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.Base.ObjectClass>(id.Value));
+                        var __newValue = (Kistl.App.Base.ObjectClassNHibernateImpl)parentObj;
                         NotifyPropertyChanging("Type", __oldValue, __newValue);
                         this.Proxy.Type = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("Type", __oldValue, __newValue);
                     }
                     break;
                 default:
-                    base.UpdateParent(propertyName, id);
+                    base.UpdateParent(propertyName, parentObj);
                     break;
             }
         }

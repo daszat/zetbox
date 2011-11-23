@@ -45,17 +45,17 @@ namespace at.dasz.DocumentManagement
 			{
 				if (_Revisions == null)
 				{
-					Context.FetchRelation<Document_has_Blob_RelationEntryMemoryImpl>(new Guid("69d27812-e981-443b-a94b-dfe1a95f3aad"), RelationEndRole.A, this);
+					Context.FetchRelation<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryMemoryImpl>(new Guid("69d27812-e981-443b-a94b-dfe1a95f3aad"), RelationEndRole.A, this);
 					_Revisions 
-						= new ObservableBSideListWrapper<at.dasz.DocumentManagement.Document, Kistl.App.Base.Blob, Document_has_Blob_RelationEntryMemoryImpl, ICollection<Document_has_Blob_RelationEntryMemoryImpl>>(
+						= new ObservableBSideListWrapper<at.dasz.DocumentManagement.Document, Kistl.App.Base.Blob, at.dasz.DocumentManagement.Document_has_Blob_RelationEntryMemoryImpl, ICollection<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryMemoryImpl>>(
 							this, 
-							new RelationshipFilterASideCollection<Document_has_Blob_RelationEntryMemoryImpl>(this.Context, this));
+							new RelationshipFilterASideCollection<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryMemoryImpl>(this.Context, this));
 				}
 				return (IList<Kistl.App.Base.Blob>)_Revisions;
 			}
 		}
 
-		private ObservableBSideListWrapper<at.dasz.DocumentManagement.Document, Kistl.App.Base.Blob, Document_has_Blob_RelationEntryMemoryImpl, ICollection<Document_has_Blob_RelationEntryMemoryImpl>> _Revisions;
+		private ObservableBSideListWrapper<at.dasz.DocumentManagement.Document, Kistl.App.Base.Blob, at.dasz.DocumentManagement.Document_has_Blob_RelationEntryMemoryImpl, ICollection<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryMemoryImpl>> _Revisions;
 
         /// <summary>
         /// Handles the change of the current blob

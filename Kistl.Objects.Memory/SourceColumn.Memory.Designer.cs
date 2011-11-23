@@ -568,17 +568,17 @@ namespace ZBox.App.SchemaMigration
 			{
 				if (_DestinationProperty == null)
 				{
-					if (!DestinationProperty_was_eagerLoaded) Context.FetchRelation<SourceColumn_created_Property_RelationEntryMemoryImpl>(new Guid("fb27e3f8-3615-4f3b-ae2a-2b89b8782e27"), RelationEndRole.A, this);
+					if (!DestinationProperty_was_eagerLoaded) Context.FetchRelation<ZBox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryMemoryImpl>(new Guid("fb27e3f8-3615-4f3b-ae2a-2b89b8782e27"), RelationEndRole.A, this);
 					_DestinationProperty 
-						= new ObservableBSideListWrapper<ZBox.App.SchemaMigration.SourceColumn, Kistl.App.Base.Property, SourceColumn_created_Property_RelationEntryMemoryImpl, ICollection<SourceColumn_created_Property_RelationEntryMemoryImpl>>(
+						= new ObservableBSideListWrapper<ZBox.App.SchemaMigration.SourceColumn, Kistl.App.Base.Property, ZBox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryMemoryImpl, ICollection<ZBox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryMemoryImpl>>(
 							this, 
-							new RelationshipFilterASideCollection<SourceColumn_created_Property_RelationEntryMemoryImpl>(this.Context, this));
+							new RelationshipFilterASideCollection<ZBox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryMemoryImpl>(this.Context, this));
 				}
 				return (IList<Kistl.App.Base.Property>)_DestinationProperty;
 			}
 		}
 
-		private ObservableBSideListWrapper<ZBox.App.SchemaMigration.SourceColumn, Kistl.App.Base.Property, SourceColumn_created_Property_RelationEntryMemoryImpl, ICollection<SourceColumn_created_Property_RelationEntryMemoryImpl>> _DestinationProperty;
+		private ObservableBSideListWrapper<ZBox.App.SchemaMigration.SourceColumn, Kistl.App.Base.Property, ZBox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryMemoryImpl, ICollection<ZBox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryMemoryImpl>> _DestinationProperty;
 		
 		private bool DestinationProperty_was_eagerLoaded = false;
 
@@ -1195,41 +1195,51 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
             base.AttachToContext(ctx);
         }
 
-		public override void UpdateParent(string propertyName, int? id)
-		{
-			int? __oldValue, __newValue = id;
-			
-			switch(propertyName)
-			{
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
+        {
+            switch(propertyName)
+            {
                 case "ChangedBy":
-                    __oldValue = _fk_ChangedBy;
-                    NotifyPropertyChanging("ChangedBy", __oldValue, __newValue);
-                    _fk_ChangedBy = __newValue;
-                    NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
+                    {
+                        var __oldValue = _fk_ChangedBy;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("ChangedBy", __oldValue, __newValue);
+                        _fk_ChangedBy = __newValue;
+                        NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
+                    }
                     break;
                 case "CreatedBy":
-                    __oldValue = _fk_CreatedBy;
-                    NotifyPropertyChanging("CreatedBy", __oldValue, __newValue);
-                    _fk_CreatedBy = __newValue;
-                    NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
+                    {
+                        var __oldValue = _fk_CreatedBy;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("CreatedBy", __oldValue, __newValue);
+                        _fk_CreatedBy = __newValue;
+                        NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
+                    }
                     break;
                 case "References":
-                    __oldValue = _fk_References;
-                    NotifyPropertyChanging("References", __oldValue, __newValue);
-                    _fk_References = __newValue;
-                    NotifyPropertyChanged("References", __oldValue, __newValue);
+                    {
+                        var __oldValue = _fk_References;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("References", __oldValue, __newValue);
+                        _fk_References = __newValue;
+                        NotifyPropertyChanged("References", __oldValue, __newValue);
+                    }
                     break;
                 case "SourceTable":
-                    __oldValue = _fk_SourceTable;
-                    NotifyPropertyChanging("SourceTable", __oldValue, __newValue);
-                    _fk_SourceTable = __newValue;
-                    NotifyPropertyChanged("SourceTable", __oldValue, __newValue);
+                    {
+                        var __oldValue = _fk_SourceTable;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("SourceTable", __oldValue, __newValue);
+                        _fk_SourceTable = __newValue;
+                        NotifyPropertyChanged("SourceTable", __oldValue, __newValue);
+                    }
                     break;
-				default:
-					base.UpdateParent(propertyName, id);
-					break;
-			}
-		}
+                default:
+                    base.UpdateParent(propertyName, parentObj);
+                    break;
+            }
+        }
 
         public override void ReloadReferences()
         {

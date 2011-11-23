@@ -308,30 +308,6 @@ namespace Kistl.App.Base
             base.AttachToContext(ctx);
         }
 
-		public override void UpdateParent(string propertyName, int? id)
-		{
-			int? __oldValue, __newValue = id;
-			
-			switch(propertyName)
-			{
-                case "GetErrorTextInvocation":
-                    __oldValue = _fk_GetErrorTextInvocation;
-                    NotifyPropertyChanging("GetErrorTextInvocation", __oldValue, __newValue);
-                    _fk_GetErrorTextInvocation = __newValue;
-                    NotifyPropertyChanged("GetErrorTextInvocation", __oldValue, __newValue);
-                    break;
-                case "IsValidInvocation":
-                    __oldValue = _fk_IsValidInvocation;
-                    NotifyPropertyChanging("IsValidInvocation", __oldValue, __newValue);
-                    _fk_IsValidInvocation = __newValue;
-                    NotifyPropertyChanged("IsValidInvocation", __oldValue, __newValue);
-                    break;
-				default:
-					base.UpdateParent(propertyName, id);
-					break;
-			}
-		}
-
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.

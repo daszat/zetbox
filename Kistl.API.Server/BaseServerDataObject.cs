@@ -249,7 +249,7 @@ namespace Kistl.API.Server
         /// </summary>
         public virtual void NotifyDeleting() { }
 
-        public abstract void UpdateParent(string propertyName, int? id);
+        public abstract void UpdateParent(string propertyName, IDataObject parentObj);
 
         int System.IComparable.CompareTo(object other)
         {

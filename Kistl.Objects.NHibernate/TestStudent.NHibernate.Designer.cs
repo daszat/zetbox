@@ -107,20 +107,20 @@ namespace Kistl.App.Test
 				if (_Testbogen == null)
 				{
 					_Testbogen 
-						= new NHibernateBSideCollectionWrapper<Kistl.App.Test.TestStudent, Kistl.App.Test.Fragebogen, TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl>(
+						= new NHibernateBSideCollectionWrapper<Kistl.App.Test.TestStudent, Kistl.App.Test.Fragebogen, Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl>(
 							this, 
-							new ProjectedCollection<TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl.TestStudent_füllt_aus_Fragebogen_RelationEntryProxy, TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl>(
+							new ProjectedCollection<Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl.TestStudent_füllt_aus_Fragebogen_RelationEntryProxy, Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl>(
                                 this.Proxy.Testbogen,
-                                p => (TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl.TestStudent_füllt_aus_Fragebogen_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
-                            entry => (IRelationListSync<TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl>)entry.B.Student);
+                                p => (Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
+                                ce => (Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl.TestStudent_füllt_aus_Fragebogen_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
+                            entry => (IRelationListSync<Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl>)entry.B.Student);
                     if (Testbogen_was_eagerLoaded) { Testbogen_was_eagerLoaded = false; }
 				}
 				return (ICollection<Kistl.App.Test.Fragebogen>)_Testbogen;
 			}
 		}
 
-		private NHibernateBSideCollectionWrapper<Kistl.App.Test.TestStudent, Kistl.App.Test.Fragebogen, TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl> _Testbogen;
+		private NHibernateBSideCollectionWrapper<Kistl.App.Test.TestStudent, Kistl.App.Test.Fragebogen, Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl> _Testbogen;
 		// ignored, but required for Serialization
         private bool Testbogen_was_eagerLoaded = false;
 

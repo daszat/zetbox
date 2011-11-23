@@ -962,60 +962,6 @@ namespace Kistl.App.GUI
             base.AttachToContext(ctx);
         }
 
-		public override void UpdateParent(string propertyName, int? id)
-		{
-			int? __oldValue, __newValue = id;
-			
-			switch(propertyName)
-			{
-                case "DefaultDisplayKind":
-                    __oldValue = _fk_DefaultDisplayKind;
-                    NotifyPropertyChanging("DefaultDisplayKind", __oldValue, __newValue);
-                    _fk_DefaultDisplayKind = __newValue;
-                    NotifyPropertyChanged("DefaultDisplayKind", __oldValue, __newValue);
-                    break;
-                case "DefaultEditorKind":
-                    __oldValue = _fk_DefaultEditorKind;
-                    NotifyPropertyChanging("DefaultEditorKind", __oldValue, __newValue);
-                    _fk_DefaultEditorKind = __newValue;
-                    NotifyPropertyChanged("DefaultEditorKind", __oldValue, __newValue);
-                    break;
-                case "DefaultGridCellDisplayKind":
-                    __oldValue = _fk_DefaultGridCellDisplayKind;
-                    NotifyPropertyChanging("DefaultGridCellDisplayKind", __oldValue, __newValue);
-                    _fk_DefaultGridCellDisplayKind = __newValue;
-                    NotifyPropertyChanged("DefaultGridCellDisplayKind", __oldValue, __newValue);
-                    break;
-                case "DefaultGridCellEditorKind":
-                    __oldValue = _fk_DefaultGridCellEditorKind;
-                    NotifyPropertyChanging("DefaultGridCellEditorKind", __oldValue, __newValue);
-                    _fk_DefaultGridCellEditorKind = __newValue;
-                    NotifyPropertyChanged("DefaultGridCellEditorKind", __oldValue, __newValue);
-                    break;
-                case "DefaultGridCellPreEditorKind":
-                    __oldValue = _fk_DefaultGridCellPreEditorKind;
-                    NotifyPropertyChanging("DefaultGridCellPreEditorKind", __oldValue, __newValue);
-                    _fk_DefaultGridCellPreEditorKind = __newValue;
-                    NotifyPropertyChanged("DefaultGridCellPreEditorKind", __oldValue, __newValue);
-                    break;
-                case "Module":
-                    __oldValue = _fk_Module;
-                    NotifyPropertyChanging("Module", __oldValue, __newValue);
-                    _fk_Module = __newValue;
-                    NotifyPropertyChanged("Module", __oldValue, __newValue);
-                    break;
-                case "ViewModelRef":
-                    __oldValue = _fk_ViewModelRef;
-                    NotifyPropertyChanging("ViewModelRef", __oldValue, __newValue);
-                    _fk_ViewModelRef = __newValue;
-                    NotifyPropertyChanged("ViewModelRef", __oldValue, __newValue);
-                    break;
-				default:
-					base.UpdateParent(propertyName, id);
-					break;
-			}
-		}
-
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.

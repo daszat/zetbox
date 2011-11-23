@@ -211,21 +211,21 @@ namespace Kistl.App.GUI
             var nhCtx = (NHibernateContext)ctx;
         }
 
-        public override void UpdateParent(string propertyName, int? id)
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
         {
             switch(propertyName)
             {
                 case "Property":
                     {
                         var __oldValue = (Kistl.App.Base.PropertyNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Property);
-                        var __newValue = (Kistl.App.Base.PropertyNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.Base.Property>(id.Value));
+                        var __newValue = (Kistl.App.Base.PropertyNHibernateImpl)parentObj;
                         NotifyPropertyChanging("Property", __oldValue, __newValue);
                         this.Proxy.Property = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("Property", __oldValue, __newValue);
                     }
                     break;
                 default:
-                    base.UpdateParent(propertyName, id);
+                    base.UpdateParent(propertyName, parentObj);
                     break;
             }
         }

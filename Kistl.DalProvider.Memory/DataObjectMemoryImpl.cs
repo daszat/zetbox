@@ -28,7 +28,7 @@ namespace Kistl.DalProvider.Memory
 
         #endregion
 
-        public virtual void UpdateParent(string propertyName, int? id)
+        public virtual void UpdateParent(string propertyName, IDataObject parentObj)
         {
             throw new MemberAccessException(String.Format("No {0} property in {1}", propertyName, GetImplementedInterface().FullName));
         }

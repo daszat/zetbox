@@ -545,35 +545,42 @@ namespace Kistl.App.Base
             base.AttachToContext(ctx);
         }
 
-		public override void UpdateParent(string propertyName, int? id)
-		{
-			int? __oldValue, __newValue = id;
-			
-			switch(propertyName)
-			{
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
+        {
+            switch(propertyName)
+            {
                 case "FalseIcon":
-                    __oldValue = _fk_FalseIcon;
-                    NotifyPropertyChanging("FalseIcon", __oldValue, __newValue);
-                    _fk_FalseIcon = __newValue;
-                    NotifyPropertyChanged("FalseIcon", __oldValue, __newValue);
+                    {
+                        var __oldValue = _fk_FalseIcon;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("FalseIcon", __oldValue, __newValue);
+                        _fk_FalseIcon = __newValue;
+                        NotifyPropertyChanged("FalseIcon", __oldValue, __newValue);
+                    }
                     break;
                 case "NullIcon":
-                    __oldValue = _fk_NullIcon;
-                    NotifyPropertyChanging("NullIcon", __oldValue, __newValue);
-                    _fk_NullIcon = __newValue;
-                    NotifyPropertyChanged("NullIcon", __oldValue, __newValue);
+                    {
+                        var __oldValue = _fk_NullIcon;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("NullIcon", __oldValue, __newValue);
+                        _fk_NullIcon = __newValue;
+                        NotifyPropertyChanged("NullIcon", __oldValue, __newValue);
+                    }
                     break;
                 case "TrueIcon":
-                    __oldValue = _fk_TrueIcon;
-                    NotifyPropertyChanging("TrueIcon", __oldValue, __newValue);
-                    _fk_TrueIcon = __newValue;
-                    NotifyPropertyChanged("TrueIcon", __oldValue, __newValue);
+                    {
+                        var __oldValue = _fk_TrueIcon;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("TrueIcon", __oldValue, __newValue);
+                        _fk_TrueIcon = __newValue;
+                        NotifyPropertyChanged("TrueIcon", __oldValue, __newValue);
+                    }
                     break;
-				default:
-					base.UpdateParent(propertyName, id);
-					break;
-			}
-		}
+                default:
+                    base.UpdateParent(propertyName, parentObj);
+                    break;
+            }
+        }
 
         public override void ReloadReferences()
         {

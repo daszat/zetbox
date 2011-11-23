@@ -523,20 +523,20 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
 				if (_Groups == null)
 				{
 					_Groups 
-						= new NHibernateBSideCollectionWrapper<Kistl.App.GUI.NavigationEntry, Kistl.App.Base.Group, NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl>(
+						= new NHibernateBSideCollectionWrapper<Kistl.App.GUI.NavigationEntry, Kistl.App.Base.Group, Kistl.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl>(
 							this, 
-							new ProjectedCollection<NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl.NavigationEntry_accessed_by_Group_RelationEntryProxy, NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl>(
+							new ProjectedCollection<Kistl.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl.NavigationEntry_accessed_by_Group_RelationEntryProxy, Kistl.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl>(
                                 this.Proxy.Groups,
-                                p => (NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl.NavigationEntry_accessed_by_Group_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
-                            entry => (IRelationListSync<NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl>)null);
+                                p => (Kistl.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
+                                ce => (Kistl.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl.NavigationEntry_accessed_by_Group_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
+                            entry => (IRelationListSync<Kistl.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl>)null);
                     if (Groups_was_eagerLoaded) { Groups_was_eagerLoaded = false; }
 				}
 				return (ICollection<Kistl.App.Base.Group>)_Groups;
 			}
 		}
 
-		private NHibernateBSideCollectionWrapper<Kistl.App.GUI.NavigationEntry, Kistl.App.Base.Group, NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl> _Groups;
+		private NHibernateBSideCollectionWrapper<Kistl.App.GUI.NavigationEntry, Kistl.App.Base.Group, Kistl.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl> _Groups;
 		// ignored, but required for Serialization
         private bool Groups_was_eagerLoaded = false;
 
@@ -952,14 +952,14 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
             var nhCtx = (NHibernateContext)ctx;
         }
 
-        public override void UpdateParent(string propertyName, int? id)
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
         {
             switch(propertyName)
             {
                 case "ChangedBy":
                     {
                         var __oldValue = (Kistl.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ChangedBy);
-                        var __newValue = (Kistl.App.Base.IdentityNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.Base.Identity>(id.Value));
+                        var __newValue = (Kistl.App.Base.IdentityNHibernateImpl)parentObj;
                         NotifyPropertyChanging("ChangedBy", __oldValue, __newValue);
                         this.Proxy.ChangedBy = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
@@ -968,7 +968,7 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
                 case "CreatedBy":
                     {
                         var __oldValue = (Kistl.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.CreatedBy);
-                        var __newValue = (Kistl.App.Base.IdentityNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.Base.Identity>(id.Value));
+                        var __newValue = (Kistl.App.Base.IdentityNHibernateImpl)parentObj;
                         NotifyPropertyChanging("CreatedBy", __oldValue, __newValue);
                         this.Proxy.CreatedBy = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
@@ -977,7 +977,7 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
                 case "Module":
                     {
                         var __oldValue = (Kistl.App.Base.ModuleNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Module);
-                        var __newValue = (Kistl.App.Base.ModuleNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.Base.Module>(id.Value));
+                        var __newValue = (Kistl.App.Base.ModuleNHibernateImpl)parentObj;
                         NotifyPropertyChanging("Module", __oldValue, __newValue);
                         this.Proxy.Module = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("Module", __oldValue, __newValue);
@@ -986,7 +986,7 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
                 case "Parent":
                     {
                         var __oldValue = (Kistl.App.GUI.NavigationEntryNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Parent);
-                        var __newValue = (Kistl.App.GUI.NavigationEntryNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.GUI.NavigationEntry>(id.Value));
+                        var __newValue = (Kistl.App.GUI.NavigationEntryNHibernateImpl)parentObj;
                         NotifyPropertyChanging("Parent", __oldValue, __newValue);
                         this.Proxy.Parent = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("Parent", __oldValue, __newValue);
@@ -995,14 +995,14 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
                 case "ViewModelDescriptor":
                     {
                         var __oldValue = (Kistl.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ViewModelDescriptor);
-                        var __newValue = (Kistl.App.GUI.ViewModelDescriptorNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.GUI.ViewModelDescriptor>(id.Value));
+                        var __newValue = (Kistl.App.GUI.ViewModelDescriptorNHibernateImpl)parentObj;
                         NotifyPropertyChanging("ViewModelDescriptor", __oldValue, __newValue);
                         this.Proxy.ViewModelDescriptor = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("ViewModelDescriptor", __oldValue, __newValue);
                     }
                     break;
                 default:
-                    base.UpdateParent(propertyName, id);
+                    base.UpdateParent(propertyName, parentObj);
                     break;
             }
         }

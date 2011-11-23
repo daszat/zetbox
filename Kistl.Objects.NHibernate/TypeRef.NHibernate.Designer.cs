@@ -627,20 +627,20 @@ namespace Kistl.App.Base
 				if (_GenericArguments == null)
 				{
 					_GenericArguments 
-						= new NHibernateBSideListWrapper<Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef, TypeRef_hasGenericArguments_TypeRef_RelationEntryNHibernateImpl>(
+						= new NHibernateBSideListWrapper<Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryNHibernateImpl>(
 							this, 
-							new ProjectedCollection<TypeRef_hasGenericArguments_TypeRef_RelationEntryNHibernateImpl.TypeRef_hasGenericArguments_TypeRef_RelationEntryProxy, TypeRef_hasGenericArguments_TypeRef_RelationEntryNHibernateImpl>(
+							new ProjectedCollection<Kistl.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryNHibernateImpl.TypeRef_hasGenericArguments_TypeRef_RelationEntryProxy, Kistl.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryNHibernateImpl>(
                                 this.Proxy.GenericArguments,
-                                p => (TypeRef_hasGenericArguments_TypeRef_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (TypeRef_hasGenericArguments_TypeRef_RelationEntryNHibernateImpl.TypeRef_hasGenericArguments_TypeRef_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
-                            entry => (IRelationListSync<TypeRef_hasGenericArguments_TypeRef_RelationEntryNHibernateImpl>)null);
+                                p => (Kistl.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
+                                ce => (Kistl.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryNHibernateImpl.TypeRef_hasGenericArguments_TypeRef_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
+                            entry => (IRelationListSync<Kistl.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryNHibernateImpl>)null);
                     if (GenericArguments_was_eagerLoaded) { GenericArguments_was_eagerLoaded = false; }
 				}
 				return (IList<Kistl.App.Base.TypeRef>)_GenericArguments;
 			}
 		}
 
-		private NHibernateBSideListWrapper<Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef, TypeRef_hasGenericArguments_TypeRef_RelationEntryNHibernateImpl> _GenericArguments;
+		private NHibernateBSideListWrapper<Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef, Kistl.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryNHibernateImpl> _GenericArguments;
 		// ignored, but required for Serialization
         private bool GenericArguments_was_eagerLoaded = false;
 
@@ -875,14 +875,14 @@ namespace Kistl.App.Base
             var nhCtx = (NHibernateContext)ctx;
         }
 
-        public override void UpdateParent(string propertyName, int? id)
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
         {
             switch(propertyName)
             {
                 case "Assembly":
                     {
                         var __oldValue = (Kistl.App.Base.AssemblyNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Assembly);
-                        var __newValue = (Kistl.App.Base.AssemblyNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.Base.Assembly>(id.Value));
+                        var __newValue = (Kistl.App.Base.AssemblyNHibernateImpl)parentObj;
                         NotifyPropertyChanging("Assembly", __oldValue, __newValue);
                         this.Proxy.Assembly = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("Assembly", __oldValue, __newValue);
@@ -891,7 +891,7 @@ namespace Kistl.App.Base
                 case "ChangedBy":
                     {
                         var __oldValue = (Kistl.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ChangedBy);
-                        var __newValue = (Kistl.App.Base.IdentityNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.Base.Identity>(id.Value));
+                        var __newValue = (Kistl.App.Base.IdentityNHibernateImpl)parentObj;
                         NotifyPropertyChanging("ChangedBy", __oldValue, __newValue);
                         this.Proxy.ChangedBy = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
@@ -900,7 +900,7 @@ namespace Kistl.App.Base
                 case "CreatedBy":
                     {
                         var __oldValue = (Kistl.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.CreatedBy);
-                        var __newValue = (Kistl.App.Base.IdentityNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.Base.Identity>(id.Value));
+                        var __newValue = (Kistl.App.Base.IdentityNHibernateImpl)parentObj;
                         NotifyPropertyChanging("CreatedBy", __oldValue, __newValue);
                         this.Proxy.CreatedBy = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
@@ -909,14 +909,14 @@ namespace Kistl.App.Base
                 case "Parent":
                     {
                         var __oldValue = (Kistl.App.Base.TypeRefNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Parent);
-                        var __newValue = (Kistl.App.Base.TypeRefNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.Base.TypeRef>(id.Value));
+                        var __newValue = (Kistl.App.Base.TypeRefNHibernateImpl)parentObj;
                         NotifyPropertyChanging("Parent", __oldValue, __newValue);
                         this.Proxy.Parent = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("Parent", __oldValue, __newValue);
                     }
                     break;
                 default:
-                    base.UpdateParent(propertyName, id);
+                    base.UpdateParent(propertyName, parentObj);
                     break;
             }
         }

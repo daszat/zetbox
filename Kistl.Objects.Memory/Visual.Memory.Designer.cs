@@ -45,17 +45,17 @@ namespace Kistl.App.GUI
 			{
 				if (_Children == null)
 				{
-					Context.FetchRelation<Visual_contains_Visual_RelationEntryMemoryImpl>(new Guid("4d4e1ffd-f362-40e2-9fe1-0711ded83241"), RelationEndRole.A, this);
+					Context.FetchRelation<Kistl.App.GUI.Visual_contains_Visual_RelationEntryMemoryImpl>(new Guid("4d4e1ffd-f362-40e2-9fe1-0711ded83241"), RelationEndRole.A, this);
 					_Children 
-						= new ObservableBSideCollectionWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Visual_contains_Visual_RelationEntryMemoryImpl, ICollection<Visual_contains_Visual_RelationEntryMemoryImpl>>(
+						= new ObservableBSideCollectionWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Kistl.App.GUI.Visual_contains_Visual_RelationEntryMemoryImpl, ICollection<Kistl.App.GUI.Visual_contains_Visual_RelationEntryMemoryImpl>>(
 							this, 
-							new RelationshipFilterASideCollection<Visual_contains_Visual_RelationEntryMemoryImpl>(this.Context, this));
+							new RelationshipFilterASideCollection<Kistl.App.GUI.Visual_contains_Visual_RelationEntryMemoryImpl>(this.Context, this));
 				}
 				return (ICollection<Kistl.App.GUI.Visual>)_Children;
 			}
 		}
 
-		private ObservableBSideCollectionWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Visual_contains_Visual_RelationEntryMemoryImpl, ICollection<Visual_contains_Visual_RelationEntryMemoryImpl>> _Children;
+		private ObservableBSideCollectionWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Kistl.App.GUI.Visual_contains_Visual_RelationEntryMemoryImpl, ICollection<Kistl.App.GUI.Visual_contains_Visual_RelationEntryMemoryImpl>> _Children;
 
         /// <summary>
         /// The context menu for this Visual
@@ -68,17 +68,17 @@ namespace Kistl.App.GUI
 			{
 				if (_ContextMenu == null)
 				{
-					Context.FetchRelation<Visual_hasContextMenu_Visual_RelationEntryMemoryImpl>(new Guid("358c14b9-fef5-495d-8d44-04e84186830e"), RelationEndRole.A, this);
+					Context.FetchRelation<Kistl.App.GUI.Visual_hasContextMenu_Visual_RelationEntryMemoryImpl>(new Guid("358c14b9-fef5-495d-8d44-04e84186830e"), RelationEndRole.A, this);
 					_ContextMenu 
-						= new ObservableBSideCollectionWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Visual_hasContextMenu_Visual_RelationEntryMemoryImpl, ICollection<Visual_hasContextMenu_Visual_RelationEntryMemoryImpl>>(
+						= new ObservableBSideCollectionWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Kistl.App.GUI.Visual_hasContextMenu_Visual_RelationEntryMemoryImpl, ICollection<Kistl.App.GUI.Visual_hasContextMenu_Visual_RelationEntryMemoryImpl>>(
 							this, 
-							new RelationshipFilterASideCollection<Visual_hasContextMenu_Visual_RelationEntryMemoryImpl>(this.Context, this));
+							new RelationshipFilterASideCollection<Kistl.App.GUI.Visual_hasContextMenu_Visual_RelationEntryMemoryImpl>(this.Context, this));
 				}
 				return (ICollection<Kistl.App.GUI.Visual>)_ContextMenu;
 			}
 		}
 
-		private ObservableBSideCollectionWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Visual_hasContextMenu_Visual_RelationEntryMemoryImpl, ICollection<Visual_hasContextMenu_Visual_RelationEntryMemoryImpl>> _ContextMenu;
+		private ObservableBSideCollectionWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Kistl.App.GUI.Visual_hasContextMenu_Visual_RelationEntryMemoryImpl, ICollection<Kistl.App.GUI.Visual_hasContextMenu_Visual_RelationEntryMemoryImpl>> _ContextMenu;
 
         /// <summary>
         /// A short description of the utility of this visual
@@ -331,29 +331,33 @@ namespace Kistl.App.GUI
             base.AttachToContext(ctx);
         }
 
-		public override void UpdateParent(string propertyName, int? id)
-		{
-			int? __oldValue, __newValue = id;
-			
-			switch(propertyName)
-			{
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
+        {
+            switch(propertyName)
+            {
                 case "Method":
-                    __oldValue = _fk_Method;
-                    NotifyPropertyChanging("Method", __oldValue, __newValue);
-                    _fk_Method = __newValue;
-                    NotifyPropertyChanged("Method", __oldValue, __newValue);
+                    {
+                        var __oldValue = _fk_Method;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("Method", __oldValue, __newValue);
+                        _fk_Method = __newValue;
+                        NotifyPropertyChanged("Method", __oldValue, __newValue);
+                    }
                     break;
                 case "Property":
-                    __oldValue = _fk_Property;
-                    NotifyPropertyChanging("Property", __oldValue, __newValue);
-                    _fk_Property = __newValue;
-                    NotifyPropertyChanged("Property", __oldValue, __newValue);
+                    {
+                        var __oldValue = _fk_Property;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("Property", __oldValue, __newValue);
+                        _fk_Property = __newValue;
+                        NotifyPropertyChanged("Property", __oldValue, __newValue);
+                    }
                     break;
-				default:
-					base.UpdateParent(propertyName, id);
-					break;
-			}
-		}
+                default:
+                    base.UpdateParent(propertyName, parentObj);
+                    break;
+            }
+        }
 
         public override void ReloadReferences()
         {

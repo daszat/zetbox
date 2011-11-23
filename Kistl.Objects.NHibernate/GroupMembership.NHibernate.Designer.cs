@@ -153,21 +153,21 @@ namespace Kistl.App.Base
             var nhCtx = (NHibernateContext)ctx;
         }
 
-        public override void UpdateParent(string propertyName, int? id)
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
         {
             switch(propertyName)
             {
                 case "Group":
                     {
                         var __oldValue = (Kistl.App.Base.GroupNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Group);
-                        var __newValue = (Kistl.App.Base.GroupNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.Base.Group>(id.Value));
+                        var __newValue = (Kistl.App.Base.GroupNHibernateImpl)parentObj;
                         NotifyPropertyChanging("Group", __oldValue, __newValue);
                         this.Proxy.Group = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("Group", __oldValue, __newValue);
                     }
                     break;
                 default:
-                    base.UpdateParent(propertyName, id);
+                    base.UpdateParent(propertyName, parentObj);
                     break;
             }
         }

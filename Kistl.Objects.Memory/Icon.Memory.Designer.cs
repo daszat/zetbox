@@ -394,29 +394,33 @@ namespace Kistl.App.GUI
             base.AttachToContext(ctx);
         }
 
-		public override void UpdateParent(string propertyName, int? id)
-		{
-			int? __oldValue, __newValue = id;
-			
-			switch(propertyName)
-			{
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
+        {
+            switch(propertyName)
+            {
                 case "Blob":
-                    __oldValue = _fk_Blob;
-                    NotifyPropertyChanging("Blob", __oldValue, __newValue);
-                    _fk_Blob = __newValue;
-                    NotifyPropertyChanged("Blob", __oldValue, __newValue);
+                    {
+                        var __oldValue = _fk_Blob;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("Blob", __oldValue, __newValue);
+                        _fk_Blob = __newValue;
+                        NotifyPropertyChanged("Blob", __oldValue, __newValue);
+                    }
                     break;
                 case "Module":
-                    __oldValue = _fk_Module;
-                    NotifyPropertyChanging("Module", __oldValue, __newValue);
-                    _fk_Module = __newValue;
-                    NotifyPropertyChanged("Module", __oldValue, __newValue);
+                    {
+                        var __oldValue = _fk_Module;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("Module", __oldValue, __newValue);
+                        _fk_Module = __newValue;
+                        NotifyPropertyChanged("Module", __oldValue, __newValue);
+                    }
                     break;
-				default:
-					base.UpdateParent(propertyName, id);
-					break;
-			}
-		}
+                default:
+                    base.UpdateParent(propertyName, parentObj);
+                    break;
+            }
+        }
 
         public override void ReloadReferences()
         {

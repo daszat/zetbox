@@ -1273,48 +1273,6 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
             base.AttachToContext(ctx);
         }
 
-		public override void UpdateParent(string propertyName, int? id)
-		{
-			int? __oldValue, __newValue = id;
-			
-			switch(propertyName)
-			{
-                case "ChangedBy":
-                    __oldValue = _fk_ChangedBy;
-                    NotifyPropertyChanging("ChangedBy", __oldValue, __newValue);
-                    _fk_ChangedBy = __newValue;
-                    NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
-                    break;
-                case "CreatedBy":
-                    __oldValue = _fk_CreatedBy;
-                    NotifyPropertyChanging("CreatedBy", __oldValue, __newValue);
-                    _fk_CreatedBy = __newValue;
-                    NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
-                    break;
-                case "DefaultIcon":
-                    __oldValue = _fk_DefaultIcon;
-                    NotifyPropertyChanging("DefaultIcon", __oldValue, __newValue);
-                    _fk_DefaultIcon = __newValue;
-                    NotifyPropertyChanged("DefaultIcon", __oldValue, __newValue);
-                    break;
-                case "Module":
-                    __oldValue = _fk_Module;
-                    NotifyPropertyChanging("Module", __oldValue, __newValue);
-                    _fk_Module = __newValue;
-                    NotifyPropertyChanged("Module", __oldValue, __newValue);
-                    break;
-                case "RequestedKind":
-                    __oldValue = _fk_RequestedKind;
-                    NotifyPropertyChanging("RequestedKind", __oldValue, __newValue);
-                    _fk_RequestedKind = __newValue;
-                    NotifyPropertyChanged("RequestedKind", __oldValue, __newValue);
-                    break;
-				default:
-					base.UpdateParent(propertyName, id);
-					break;
-			}
-		}
-
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.

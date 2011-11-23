@@ -96,17 +96,17 @@ namespace Kistl.App.Base
 			{
 				if (_Groups == null)
 				{
-					Context.FetchRelation<Identity_memberOf_Group_RelationEntryMemoryImpl>(new Guid("3efb7ae8-ba6b-40e3-9482-b45d1c101743"), RelationEndRole.A, this);
+					Context.FetchRelation<Kistl.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl>(new Guid("3efb7ae8-ba6b-40e3-9482-b45d1c101743"), RelationEndRole.A, this);
 					_Groups 
-						= new ObservableBSideCollectionWrapper<Kistl.App.Base.Identity, Kistl.App.Base.Group, Identity_memberOf_Group_RelationEntryMemoryImpl, ICollection<Identity_memberOf_Group_RelationEntryMemoryImpl>>(
+						= new ObservableBSideCollectionWrapper<Kistl.App.Base.Identity, Kistl.App.Base.Group, Kistl.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl, ICollection<Kistl.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl>>(
 							this, 
-							new RelationshipFilterASideCollection<Identity_memberOf_Group_RelationEntryMemoryImpl>(this.Context, this));
+							new RelationshipFilterASideCollection<Kistl.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl>(this.Context, this));
 				}
 				return (ICollection<Kistl.App.Base.Group>)_Groups;
 			}
 		}
 
-		private ObservableBSideCollectionWrapper<Kistl.App.Base.Identity, Kistl.App.Base.Group, Identity_memberOf_Group_RelationEntryMemoryImpl, ICollection<Identity_memberOf_Group_RelationEntryMemoryImpl>> _Groups;
+		private ObservableBSideCollectionWrapper<Kistl.App.Base.Identity, Kistl.App.Base.Group, Kistl.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl, ICollection<Kistl.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl>> _Groups;
 
         /// <summary>
         /// Password of a generic identity

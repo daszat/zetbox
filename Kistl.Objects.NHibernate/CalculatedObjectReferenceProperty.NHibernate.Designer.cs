@@ -57,20 +57,20 @@ namespace Kistl.App.Base
 				if (_Inputs == null)
 				{
 					_Inputs 
-						= new NHibernateBSideCollectionWrapper<Kistl.App.Base.CalculatedObjectReferenceProperty, Kistl.App.Base.Property, CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryNHibernateImpl>(
+						= new NHibernateBSideCollectionWrapper<Kistl.App.Base.CalculatedObjectReferenceProperty, Kistl.App.Base.Property, Kistl.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryNHibernateImpl>(
 							this, 
-							new ProjectedCollection<CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryNHibernateImpl.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryProxy, CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryNHibernateImpl>(
+							new ProjectedCollection<Kistl.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryNHibernateImpl.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryProxy, Kistl.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryNHibernateImpl>(
                                 this.Proxy.Inputs,
-                                p => (CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryNHibernateImpl.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
-                            entry => (IRelationListSync<CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryNHibernateImpl>)null);
+                                p => (Kistl.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
+                                ce => (Kistl.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryNHibernateImpl.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
+                            entry => (IRelationListSync<Kistl.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryNHibernateImpl>)null);
                     if (Inputs_was_eagerLoaded) { Inputs_was_eagerLoaded = false; }
 				}
 				return (ICollection<Kistl.App.Base.Property>)_Inputs;
 			}
 		}
 
-		private NHibernateBSideCollectionWrapper<Kistl.App.Base.CalculatedObjectReferenceProperty, Kistl.App.Base.Property, CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryNHibernateImpl> _Inputs;
+		private NHibernateBSideCollectionWrapper<Kistl.App.Base.CalculatedObjectReferenceProperty, Kistl.App.Base.Property, Kistl.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryNHibernateImpl> _Inputs;
 		// ignored, but required for Serialization
         private bool Inputs_was_eagerLoaded = false;
 
@@ -245,21 +245,21 @@ namespace Kistl.App.Base
             var nhCtx = (NHibernateContext)ctx;
         }
 
-        public override void UpdateParent(string propertyName, int? id)
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
         {
             switch(propertyName)
             {
                 case "ReferencedClass":
                     {
                         var __oldValue = (Kistl.App.Base.ObjectClassNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ReferencedClass);
-                        var __newValue = (Kistl.App.Base.ObjectClassNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.Base.ObjectClass>(id.Value));
+                        var __newValue = (Kistl.App.Base.ObjectClassNHibernateImpl)parentObj;
                         NotifyPropertyChanging("ReferencedClass", __oldValue, __newValue);
                         this.Proxy.ReferencedClass = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("ReferencedClass", __oldValue, __newValue);
                     }
                     break;
                 default:
-                    base.UpdateParent(propertyName, id);
+                    base.UpdateParent(propertyName, parentObj);
                     break;
             }
         }

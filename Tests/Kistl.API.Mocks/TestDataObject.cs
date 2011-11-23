@@ -289,7 +289,7 @@ namespace Kistl.API.Mocks
         #endregion
 
 
-        public void UpdateParent(string propertyName, int? id)
+        public void UpdateParent(string propertyName, IDataObject parentObj)
         {
             throw new NotImplementedException();
         }

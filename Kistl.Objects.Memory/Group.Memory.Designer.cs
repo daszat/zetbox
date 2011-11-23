@@ -109,17 +109,17 @@ namespace Kistl.App.Base
 			{
 				if (_Member == null)
 				{
-					Context.FetchRelation<Identity_memberOf_Group_RelationEntryMemoryImpl>(new Guid("3efb7ae8-ba6b-40e3-9482-b45d1c101743"), RelationEndRole.B, this);
+					Context.FetchRelation<Kistl.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl>(new Guid("3efb7ae8-ba6b-40e3-9482-b45d1c101743"), RelationEndRole.B, this);
 					_Member 
-						= new ObservableASideCollectionWrapper<Kistl.App.Base.Identity, Kistl.App.Base.Group, Identity_memberOf_Group_RelationEntryMemoryImpl, ICollection<Identity_memberOf_Group_RelationEntryMemoryImpl>>(
+						= new ObservableASideCollectionWrapper<Kistl.App.Base.Identity, Kistl.App.Base.Group, Kistl.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl, ICollection<Kistl.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl>>(
 							this, 
-							new RelationshipFilterBSideCollection<Identity_memberOf_Group_RelationEntryMemoryImpl>(this.Context, this));
+							new RelationshipFilterBSideCollection<Kistl.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl>(this.Context, this));
 				}
 				return (ICollection<Kistl.App.Base.Identity>)_Member;
 			}
 		}
 
-		private ObservableASideCollectionWrapper<Kistl.App.Base.Identity, Kistl.App.Base.Group, Identity_memberOf_Group_RelationEntryMemoryImpl, ICollection<Identity_memberOf_Group_RelationEntryMemoryImpl>> _Member;
+		private ObservableASideCollectionWrapper<Kistl.App.Base.Identity, Kistl.App.Base.Group, Kistl.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl, ICollection<Kistl.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl>> _Member;
 
         /// <summary>
         /// Module is optional. Use it only when you need a Group to be exportable
@@ -284,23 +284,24 @@ namespace Kistl.App.Base
             base.AttachToContext(ctx);
         }
 
-		public override void UpdateParent(string propertyName, int? id)
-		{
-			int? __oldValue, __newValue = id;
-			
-			switch(propertyName)
-			{
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
+        {
+            switch(propertyName)
+            {
                 case "Module":
-                    __oldValue = _fk_Module;
-                    NotifyPropertyChanging("Module", __oldValue, __newValue);
-                    _fk_Module = __newValue;
-                    NotifyPropertyChanged("Module", __oldValue, __newValue);
+                    {
+                        var __oldValue = _fk_Module;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("Module", __oldValue, __newValue);
+                        _fk_Module = __newValue;
+                        NotifyPropertyChanged("Module", __oldValue, __newValue);
+                    }
                     break;
-				default:
-					base.UpdateParent(propertyName, id);
-					break;
-			}
-		}
+                default:
+                    base.UpdateParent(propertyName, parentObj);
+                    break;
+            }
+        }
 
         public override void ReloadReferences()
         {

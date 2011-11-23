@@ -625,20 +625,20 @@ namespace Kistl.App.Projekte
 				if (_Projekte == null)
 				{
 					_Projekte 
-						= new NHibernateASideListWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl>(
+						= new NHibernateASideListWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl>(
 							this, 
-							new ProjectedCollection<Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl.Projekt_haben_Mitarbeiter_RelationEntryProxy, Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl>(
+							new ProjectedCollection<Kistl.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl.Projekt_haben_Mitarbeiter_RelationEntryProxy, Kistl.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl>(
                                 this.Proxy.Projekte,
-                                p => (Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl.Projekt_haben_Mitarbeiter_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
-                            entry => (IRelationListSync<Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl>)entry.A.Mitarbeiter);
+                                p => (Kistl.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
+                                ce => (Kistl.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl.Projekt_haben_Mitarbeiter_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
+                            entry => (IRelationListSync<Kistl.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl>)entry.A.Mitarbeiter);
                     if (Projekte_was_eagerLoaded) { Projekte_was_eagerLoaded = false; }
 				}
 				return (IList<Kistl.App.Projekte.Projekt>)_Projekte;
 			}
 		}
 
-		private NHibernateASideListWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl> _Projekte;
+		private NHibernateASideListWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl> _Projekte;
 		// ignored, but required for Serialization
         private bool Projekte_was_eagerLoaded = false;
 
@@ -794,14 +794,14 @@ namespace Kistl.App.Projekte
             var nhCtx = (NHibernateContext)ctx;
         }
 
-        public override void UpdateParent(string propertyName, int? id)
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
         {
             switch(propertyName)
             {
                 case "ChangedBy":
                     {
                         var __oldValue = (Kistl.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ChangedBy);
-                        var __newValue = (Kistl.App.Base.IdentityNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.Base.Identity>(id.Value));
+                        var __newValue = (Kistl.App.Base.IdentityNHibernateImpl)parentObj;
                         NotifyPropertyChanging("ChangedBy", __oldValue, __newValue);
                         this.Proxy.ChangedBy = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
@@ -810,7 +810,7 @@ namespace Kistl.App.Projekte
                 case "CreatedBy":
                     {
                         var __oldValue = (Kistl.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.CreatedBy);
-                        var __newValue = (Kistl.App.Base.IdentityNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.Base.Identity>(id.Value));
+                        var __newValue = (Kistl.App.Base.IdentityNHibernateImpl)parentObj;
                         NotifyPropertyChanging("CreatedBy", __oldValue, __newValue);
                         this.Proxy.CreatedBy = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
@@ -819,14 +819,14 @@ namespace Kistl.App.Projekte
                 case "Identity":
                     {
                         var __oldValue = (Kistl.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Identity);
-                        var __newValue = (Kistl.App.Base.IdentityNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.Base.Identity>(id.Value));
+                        var __newValue = (Kistl.App.Base.IdentityNHibernateImpl)parentObj;
                         NotifyPropertyChanging("Identity", __oldValue, __newValue);
                         this.Proxy.Identity = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("Identity", __oldValue, __newValue);
                     }
                     break;
                 default:
-                    base.UpdateParent(propertyName, id);
+                    base.UpdateParent(propertyName, parentObj);
                     break;
             }
         }

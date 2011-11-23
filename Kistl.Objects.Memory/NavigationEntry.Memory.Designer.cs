@@ -505,17 +505,17 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
 			{
 				if (_Groups == null)
 				{
-					if (!Groups_was_eagerLoaded) Context.FetchRelation<NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl>(new Guid("b88c12ac-eabe-4aee-913e-5edd9d2a193a"), RelationEndRole.A, this);
+					if (!Groups_was_eagerLoaded) Context.FetchRelation<Kistl.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl>(new Guid("b88c12ac-eabe-4aee-913e-5edd9d2a193a"), RelationEndRole.A, this);
 					_Groups 
-						= new ObservableBSideCollectionWrapper<Kistl.App.GUI.NavigationEntry, Kistl.App.Base.Group, NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl, ICollection<NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl>>(
+						= new ObservableBSideCollectionWrapper<Kistl.App.GUI.NavigationEntry, Kistl.App.Base.Group, Kistl.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl, ICollection<Kistl.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl>>(
 							this, 
-							new RelationshipFilterASideCollection<NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl>(this.Context, this));
+							new RelationshipFilterASideCollection<Kistl.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl>(this.Context, this));
 				}
 				return (ICollection<Kistl.App.Base.Group>)_Groups;
 			}
 		}
 
-		private ObservableBSideCollectionWrapper<Kistl.App.GUI.NavigationEntry, Kistl.App.Base.Group, NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl, ICollection<NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl>> _Groups;
+		private ObservableBSideCollectionWrapper<Kistl.App.GUI.NavigationEntry, Kistl.App.Base.Group, Kistl.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl, ICollection<Kistl.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl>> _Groups;
 		
 		private bool Groups_was_eagerLoaded = false;
 
@@ -934,47 +934,60 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.NavigationEntry> On
             base.AttachToContext(ctx);
         }
 
-		public override void UpdateParent(string propertyName, int? id)
-		{
-			int? __oldValue, __newValue = id;
-			
-			switch(propertyName)
-			{
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
+        {
+            switch(propertyName)
+            {
                 case "ChangedBy":
-                    __oldValue = _fk_ChangedBy;
-                    NotifyPropertyChanging("ChangedBy", __oldValue, __newValue);
-                    _fk_ChangedBy = __newValue;
-                    NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
+                    {
+                        var __oldValue = _fk_ChangedBy;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("ChangedBy", __oldValue, __newValue);
+                        _fk_ChangedBy = __newValue;
+                        NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
+                    }
                     break;
                 case "CreatedBy":
-                    __oldValue = _fk_CreatedBy;
-                    NotifyPropertyChanging("CreatedBy", __oldValue, __newValue);
-                    _fk_CreatedBy = __newValue;
-                    NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
+                    {
+                        var __oldValue = _fk_CreatedBy;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("CreatedBy", __oldValue, __newValue);
+                        _fk_CreatedBy = __newValue;
+                        NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
+                    }
                     break;
                 case "Module":
-                    __oldValue = _fk_Module;
-                    NotifyPropertyChanging("Module", __oldValue, __newValue);
-                    _fk_Module = __newValue;
-                    NotifyPropertyChanged("Module", __oldValue, __newValue);
+                    {
+                        var __oldValue = _fk_Module;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("Module", __oldValue, __newValue);
+                        _fk_Module = __newValue;
+                        NotifyPropertyChanged("Module", __oldValue, __newValue);
+                    }
                     break;
                 case "Parent":
-                    __oldValue = _fk_Parent;
-                    NotifyPropertyChanging("Parent", __oldValue, __newValue);
-                    _fk_Parent = __newValue;
-                    NotifyPropertyChanged("Parent", __oldValue, __newValue);
+                    {
+                        var __oldValue = _fk_Parent;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("Parent", __oldValue, __newValue);
+                        _fk_Parent = __newValue;
+                        NotifyPropertyChanged("Parent", __oldValue, __newValue);
+                    }
                     break;
                 case "ViewModelDescriptor":
-                    __oldValue = _fk_ViewModelDescriptor;
-                    NotifyPropertyChanging("ViewModelDescriptor", __oldValue, __newValue);
-                    _fk_ViewModelDescriptor = __newValue;
-                    NotifyPropertyChanged("ViewModelDescriptor", __oldValue, __newValue);
+                    {
+                        var __oldValue = _fk_ViewModelDescriptor;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("ViewModelDescriptor", __oldValue, __newValue);
+                        _fk_ViewModelDescriptor = __newValue;
+                        NotifyPropertyChanged("ViewModelDescriptor", __oldValue, __newValue);
+                    }
                     break;
-				default:
-					base.UpdateParent(propertyName, id);
-					break;
-			}
-		}
+                default:
+                    base.UpdateParent(propertyName, parentObj);
+                    break;
+            }
+        }
 
         public override void ReloadReferences()
         {

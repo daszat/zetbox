@@ -44,15 +44,15 @@ namespace Kistl.API.Client.Mocks.OneNLists
 
         public string Description { get; set; }
 
-        public override void UpdateParent(string propertyName, int? id)
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
         {
             if (propertyName == "OneSide")
             {
-                _fk_OneSide = id;
+                _fk_OneSide = parentObj.ID;
             }
             else
             {
-                base.UpdateParent(propertyName, id);
+                base.UpdateParent(propertyName, parentObj);
             }
         }
 

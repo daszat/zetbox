@@ -216,7 +216,7 @@ namespace Kistl.API.Server.Mocks
             throw new NotImplementedException();
         }
 
-        public override void UpdateParent(string propertyName, int? id)
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
         {
             throw new NotImplementedException();
         }

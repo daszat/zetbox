@@ -1,6 +1,6 @@
 ﻿<%@ CodeTemplate Language="C#" 
     Name="ObjectClasses.UpdateParentTemplate"
-    ClassName="Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.UpdateParentTemplate" 
+    ClassName="Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses.UpdateParentTemplate"
     Inherits="Kistl.Generator.ResourceTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Collections.Generic" %>
@@ -15,25 +15,17 @@
 <%@ Parameter Name="ctx" Type="IKistlContext" %>
 <%@ Parameter Name="props" Type="List<ObjectReferenceProperty>" %>
 
-<%
-if (props.Count > 0)
-{
-%>
-        public override void UpdateParent(string propertyName, int? id)
+<% if (props.Count > 0) {               %>
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
         {
             switch(propertyName)
             {
-<%
-    foreach(var prop in props)
-    {
-        ApplyCase(prop);
-    }
-%>
+<%      foreach(var prop in props) {    %>
+<%      ApplyCase(prop);                %>
+<% }                                    %>
                 default:
-                    base.UpdateParent(propertyName, id);
+                    base.UpdateParent(propertyName, parentObj);
                     break;
             }
         }
-<%
-}
-%>
+<% }                                    %>

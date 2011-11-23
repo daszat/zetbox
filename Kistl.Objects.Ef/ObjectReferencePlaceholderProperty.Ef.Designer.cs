@@ -499,24 +499,6 @@ namespace Kistl.App.Base
             base.AttachToContext(ctx);
         }
 
-		public override void UpdateParent(string propertyName, int? id)
-		{
-			int? __oldValue, __newValue = id;
-			
-			switch(propertyName)
-			{
-                case "ReferencedObjectClass":
-                    __oldValue = _fk_ReferencedObjectClass;
-                    NotifyPropertyChanging("ReferencedObjectClass", __oldValue, __newValue);
-                    _fk_ReferencedObjectClass = __newValue;
-                    NotifyPropertyChanged("ReferencedObjectClass", __oldValue, __newValue);
-                    break;
-				default:
-					base.UpdateParent(propertyName, id);
-					break;
-			}
-		}
-
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.

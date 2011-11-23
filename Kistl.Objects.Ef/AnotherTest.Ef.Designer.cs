@@ -56,7 +56,6 @@ namespace Kistl.App.Test
             base.AttachToContext(ctx);
         }
 
-
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.

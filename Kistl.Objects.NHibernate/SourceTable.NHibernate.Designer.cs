@@ -931,14 +931,14 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceTa
             var nhCtx = (NHibernateContext)ctx;
         }
 
-        public override void UpdateParent(string propertyName, int? id)
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
         {
             switch(propertyName)
             {
                 case "ChangedBy":
                     {
                         var __oldValue = (Kistl.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ChangedBy);
-                        var __newValue = (Kistl.App.Base.IdentityNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.Base.Identity>(id.Value));
+                        var __newValue = (Kistl.App.Base.IdentityNHibernateImpl)parentObj;
                         NotifyPropertyChanging("ChangedBy", __oldValue, __newValue);
                         this.Proxy.ChangedBy = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
@@ -947,7 +947,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceTa
                 case "CreatedBy":
                     {
                         var __oldValue = (Kistl.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.CreatedBy);
-                        var __newValue = (Kistl.App.Base.IdentityNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.Base.Identity>(id.Value));
+                        var __newValue = (Kistl.App.Base.IdentityNHibernateImpl)parentObj;
                         NotifyPropertyChanging("CreatedBy", __oldValue, __newValue);
                         this.Proxy.CreatedBy = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
@@ -956,7 +956,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceTa
                 case "DestinationObjectClass":
                     {
                         var __oldValue = (Kistl.App.Base.ObjectClassNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.DestinationObjectClass);
-                        var __newValue = (Kistl.App.Base.ObjectClassNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.Base.ObjectClass>(id.Value));
+                        var __newValue = (Kistl.App.Base.ObjectClassNHibernateImpl)parentObj;
                         NotifyPropertyChanging("DestinationObjectClass", __oldValue, __newValue);
                         this.Proxy.DestinationObjectClass = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("DestinationObjectClass", __oldValue, __newValue);
@@ -965,14 +965,14 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceTa
                 case "StagingDatabase":
                     {
                         var __oldValue = (ZBox.App.SchemaMigration.StagingDatabaseNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.StagingDatabase);
-                        var __newValue = (ZBox.App.SchemaMigration.StagingDatabaseNHibernateImpl)(id == null ? null : OurContext.Find<ZBox.App.SchemaMigration.StagingDatabase>(id.Value));
+                        var __newValue = (ZBox.App.SchemaMigration.StagingDatabaseNHibernateImpl)parentObj;
                         NotifyPropertyChanging("StagingDatabase", __oldValue, __newValue);
                         this.Proxy.StagingDatabase = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("StagingDatabase", __oldValue, __newValue);
                     }
                     break;
                 default:
-                    base.UpdateParent(propertyName, id);
+                    base.UpdateParent(propertyName, parentObj);
                     break;
             }
         }

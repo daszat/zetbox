@@ -109,17 +109,17 @@ namespace Kistl.App.Base
 			{
 				if (_Properties == null)
 				{
-					Context.FetchRelation<IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl>(new Guid("29235ba6-5979-4ed8-8e75-6bd0837c7f28"), RelationEndRole.A, this);
+					Context.FetchRelation<Kistl.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl>(new Guid("29235ba6-5979-4ed8-8e75-6bd0837c7f28"), RelationEndRole.A, this);
 					_Properties 
-						= new ObservableBSideCollectionWrapper<Kistl.App.Base.IndexConstraint, Kistl.App.Base.Property, IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl, ICollection<IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl>>(
+						= new ObservableBSideCollectionWrapper<Kistl.App.Base.IndexConstraint, Kistl.App.Base.Property, Kistl.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl, ICollection<Kistl.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl>>(
 							this, 
-							new RelationshipFilterASideCollection<IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl>(this.Context, this));
+							new RelationshipFilterASideCollection<Kistl.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl>(this.Context, this));
 				}
 				return (ICollection<Kistl.App.Base.Property>)_Properties;
 			}
 		}
 
-		private ObservableBSideCollectionWrapper<Kistl.App.Base.IndexConstraint, Kistl.App.Base.Property, IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl, ICollection<IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl>> _Properties;
+		private ObservableBSideCollectionWrapper<Kistl.App.Base.IndexConstraint, Kistl.App.Base.Property, Kistl.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl, ICollection<Kistl.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl>> _Properties;
 
         /// <summary>
         /// 

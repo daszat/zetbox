@@ -166,7 +166,7 @@ namespace Kistl.DalProvider.Base.RelationWrappers
 
         private void SetPointerProperty(T item)
         {
-            (item as IDataObject).UpdateParent(_propertyName, _owner.ID);
+            (item as IDataObject).UpdateParent(_propertyName, _owner);
         }
 
         private void SetPosition(T item, int index)

@@ -107,20 +107,20 @@ namespace Kistl.App.Base
 				if (_Groups == null)
 				{
 					_Groups 
-						= new NHibernateBSideCollectionWrapper<Kistl.App.Base.Identity, Kistl.App.Base.Group, Identity_memberOf_Group_RelationEntryNHibernateImpl>(
+						= new NHibernateBSideCollectionWrapper<Kistl.App.Base.Identity, Kistl.App.Base.Group, Kistl.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl>(
 							this, 
-							new ProjectedCollection<Identity_memberOf_Group_RelationEntryNHibernateImpl.Identity_memberOf_Group_RelationEntryProxy, Identity_memberOf_Group_RelationEntryNHibernateImpl>(
+							new ProjectedCollection<Kistl.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl.Identity_memberOf_Group_RelationEntryProxy, Kistl.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl>(
                                 this.Proxy.Groups,
-                                p => (Identity_memberOf_Group_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Identity_memberOf_Group_RelationEntryNHibernateImpl.Identity_memberOf_Group_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
-                            entry => (IRelationListSync<Identity_memberOf_Group_RelationEntryNHibernateImpl>)entry.B.Member);
+                                p => (Kistl.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
+                                ce => (Kistl.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl.Identity_memberOf_Group_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
+                            entry => (IRelationListSync<Kistl.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl>)entry.B.Member);
                     if (Groups_was_eagerLoaded) { Groups_was_eagerLoaded = false; }
 				}
 				return (ICollection<Kistl.App.Base.Group>)_Groups;
 			}
 		}
 
-		private NHibernateBSideCollectionWrapper<Kistl.App.Base.Identity, Kistl.App.Base.Group, Identity_memberOf_Group_RelationEntryNHibernateImpl> _Groups;
+		private NHibernateBSideCollectionWrapper<Kistl.App.Base.Identity, Kistl.App.Base.Group, Kistl.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl> _Groups;
 		// ignored, but required for Serialization
         private bool Groups_was_eagerLoaded = false;
 

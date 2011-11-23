@@ -128,20 +128,20 @@ namespace Kistl.App.Base
 				if (_Properties == null)
 				{
 					_Properties 
-						= new NHibernateBSideCollectionWrapper<Kistl.App.Base.IndexConstraint, Kistl.App.Base.Property, IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl>(
+						= new NHibernateBSideCollectionWrapper<Kistl.App.Base.IndexConstraint, Kistl.App.Base.Property, Kistl.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl>(
 							this, 
-							new ProjectedCollection<IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl.IndexConstraint_ensures_unique_on_Property_RelationEntryProxy, IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl>(
+							new ProjectedCollection<Kistl.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl.IndexConstraint_ensures_unique_on_Property_RelationEntryProxy, Kistl.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl>(
                                 this.Proxy.Properties,
-                                p => (IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl.IndexConstraint_ensures_unique_on_Property_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
-                            entry => (IRelationListSync<IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl>)null);
+                                p => (Kistl.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
+                                ce => (Kistl.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl.IndexConstraint_ensures_unique_on_Property_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
+                            entry => (IRelationListSync<Kistl.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl>)null);
                     if (Properties_was_eagerLoaded) { Properties_was_eagerLoaded = false; }
 				}
 				return (ICollection<Kistl.App.Base.Property>)_Properties;
 			}
 		}
 
-		private NHibernateBSideCollectionWrapper<Kistl.App.Base.IndexConstraint, Kistl.App.Base.Property, IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl> _Properties;
+		private NHibernateBSideCollectionWrapper<Kistl.App.Base.IndexConstraint, Kistl.App.Base.Property, Kistl.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl> _Properties;
 		// ignored, but required for Serialization
         private bool Properties_was_eagerLoaded = false;
 

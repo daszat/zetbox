@@ -456,30 +456,6 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.ControlKind> OnChil
             base.AttachToContext(ctx);
         }
 
-		public override void UpdateParent(string propertyName, int? id)
-		{
-			int? __oldValue, __newValue = id;
-			
-			switch(propertyName)
-			{
-                case "Module":
-                    __oldValue = _fk_Module;
-                    NotifyPropertyChanging("Module", __oldValue, __newValue);
-                    _fk_Module = __newValue;
-                    NotifyPropertyChanged("Module", __oldValue, __newValue);
-                    break;
-                case "Parent":
-                    __oldValue = _fk_Parent;
-                    NotifyPropertyChanging("Parent", __oldValue, __newValue);
-                    _fk_Parent = __newValue;
-                    NotifyPropertyChanged("Parent", __oldValue, __newValue);
-                    break;
-				default:
-					base.UpdateParent(propertyName, id);
-					break;
-			}
-		}
-
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.

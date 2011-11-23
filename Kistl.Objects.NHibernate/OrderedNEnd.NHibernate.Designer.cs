@@ -251,21 +251,21 @@ namespace Kistl.App.Test
             var nhCtx = (NHibernateContext)ctx;
         }
 
-        public override void UpdateParent(string propertyName, int? id)
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
         {
             switch(propertyName)
             {
                 case "OneEnd":
                     {
                         var __oldValue = (Kistl.App.Test.OrderedOneEndNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.OneEnd);
-                        var __newValue = (Kistl.App.Test.OrderedOneEndNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.Test.OrderedOneEnd>(id.Value));
+                        var __newValue = (Kistl.App.Test.OrderedOneEndNHibernateImpl)parentObj;
                         NotifyPropertyChanging("OneEnd", __oldValue, __newValue);
                         this.Proxy.OneEnd = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("OneEnd", __oldValue, __newValue);
                     }
                     break;
                 default:
-                    base.UpdateParent(propertyName, id);
+                    base.UpdateParent(propertyName, parentObj);
                     break;
             }
         }

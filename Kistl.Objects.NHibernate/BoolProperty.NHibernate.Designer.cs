@@ -545,14 +545,14 @@ namespace Kistl.App.Base
             var nhCtx = (NHibernateContext)ctx;
         }
 
-        public override void UpdateParent(string propertyName, int? id)
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
         {
             switch(propertyName)
             {
                 case "FalseIcon":
                     {
                         var __oldValue = (Kistl.App.GUI.IconNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.FalseIcon);
-                        var __newValue = (Kistl.App.GUI.IconNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.GUI.Icon>(id.Value));
+                        var __newValue = (Kistl.App.GUI.IconNHibernateImpl)parentObj;
                         NotifyPropertyChanging("FalseIcon", __oldValue, __newValue);
                         this.Proxy.FalseIcon = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("FalseIcon", __oldValue, __newValue);
@@ -561,7 +561,7 @@ namespace Kistl.App.Base
                 case "NullIcon":
                     {
                         var __oldValue = (Kistl.App.GUI.IconNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.NullIcon);
-                        var __newValue = (Kistl.App.GUI.IconNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.GUI.Icon>(id.Value));
+                        var __newValue = (Kistl.App.GUI.IconNHibernateImpl)parentObj;
                         NotifyPropertyChanging("NullIcon", __oldValue, __newValue);
                         this.Proxy.NullIcon = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("NullIcon", __oldValue, __newValue);
@@ -570,14 +570,14 @@ namespace Kistl.App.Base
                 case "TrueIcon":
                     {
                         var __oldValue = (Kistl.App.GUI.IconNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.TrueIcon);
-                        var __newValue = (Kistl.App.GUI.IconNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.GUI.Icon>(id.Value));
+                        var __newValue = (Kistl.App.GUI.IconNHibernateImpl)parentObj;
                         NotifyPropertyChanging("TrueIcon", __oldValue, __newValue);
                         this.Proxy.TrueIcon = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("TrueIcon", __oldValue, __newValue);
                     }
                     break;
                 default:
-                    base.UpdateParent(propertyName, id);
+                    base.UpdateParent(propertyName, parentObj);
                     break;
             }
         }

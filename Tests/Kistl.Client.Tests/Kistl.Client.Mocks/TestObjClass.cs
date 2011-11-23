@@ -341,9 +341,9 @@ namespace Kistl.App.Test
         }
 
 
-        public override void UpdateParent(string propertyName, int? id)
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
         {
-            int? __oldValue, __newValue = id;
+            int? __oldValue, __newValue = parentObj.ID;
 
             switch (propertyName)
             {
@@ -354,7 +354,7 @@ namespace Kistl.App.Test
                     NotifyPropertyChanged("ObjectProp", __oldValue, __newValue);
                     break;
                 default:
-                    base.UpdateParent(propertyName, id);
+                    base.UpdateParent(propertyName, parentObj);
                     break;
             }
         }

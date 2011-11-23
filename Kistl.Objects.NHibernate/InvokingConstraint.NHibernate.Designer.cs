@@ -283,14 +283,14 @@ namespace Kistl.App.Base
             var nhCtx = (NHibernateContext)ctx;
         }
 
-        public override void UpdateParent(string propertyName, int? id)
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
         {
             switch(propertyName)
             {
                 case "GetErrorTextInvocation":
                     {
                         var __oldValue = (Kistl.App.Base.ConstraintInvocationNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.GetErrorTextInvocation);
-                        var __newValue = (Kistl.App.Base.ConstraintInvocationNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.Base.ConstraintInvocation>(id.Value));
+                        var __newValue = (Kistl.App.Base.ConstraintInvocationNHibernateImpl)parentObj;
                         NotifyPropertyChanging("GetErrorTextInvocation", __oldValue, __newValue);
                         this.Proxy.GetErrorTextInvocation = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("GetErrorTextInvocation", __oldValue, __newValue);
@@ -299,14 +299,14 @@ namespace Kistl.App.Base
                 case "IsValidInvocation":
                     {
                         var __oldValue = (Kistl.App.Base.ConstraintInvocationNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.IsValidInvocation);
-                        var __newValue = (Kistl.App.Base.ConstraintInvocationNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.Base.ConstraintInvocation>(id.Value));
+                        var __newValue = (Kistl.App.Base.ConstraintInvocationNHibernateImpl)parentObj;
                         NotifyPropertyChanging("IsValidInvocation", __oldValue, __newValue);
                         this.Proxy.IsValidInvocation = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("IsValidInvocation", __oldValue, __newValue);
                     }
                     break;
                 default:
-                    base.UpdateParent(propertyName, id);
+                    base.UpdateParent(propertyName, parentObj);
                     break;
             }
         }

@@ -591,20 +591,20 @@ namespace ZBox.App.SchemaMigration
 				if (_DestinationProperty == null)
 				{
 					_DestinationProperty 
-						= new NHibernateBSideListWrapper<ZBox.App.SchemaMigration.SourceColumn, Kistl.App.Base.Property, SourceColumn_created_Property_RelationEntryNHibernateImpl>(
+						= new NHibernateBSideListWrapper<ZBox.App.SchemaMigration.SourceColumn, Kistl.App.Base.Property, ZBox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryNHibernateImpl>(
 							this, 
-							new ProjectedCollection<SourceColumn_created_Property_RelationEntryNHibernateImpl.SourceColumn_created_Property_RelationEntryProxy, SourceColumn_created_Property_RelationEntryNHibernateImpl>(
+							new ProjectedCollection<ZBox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryNHibernateImpl.SourceColumn_created_Property_RelationEntryProxy, ZBox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryNHibernateImpl>(
                                 this.Proxy.DestinationProperty,
-                                p => (SourceColumn_created_Property_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (SourceColumn_created_Property_RelationEntryNHibernateImpl.SourceColumn_created_Property_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
-                            entry => (IRelationListSync<SourceColumn_created_Property_RelationEntryNHibernateImpl>)null);
+                                p => (ZBox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
+                                ce => (ZBox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryNHibernateImpl.SourceColumn_created_Property_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
+                            entry => (IRelationListSync<ZBox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryNHibernateImpl>)null);
                     if (DestinationProperty_was_eagerLoaded) { DestinationProperty_was_eagerLoaded = false; }
 				}
 				return (IList<Kistl.App.Base.Property>)_DestinationProperty;
 			}
 		}
 
-		private NHibernateBSideListWrapper<ZBox.App.SchemaMigration.SourceColumn, Kistl.App.Base.Property, SourceColumn_created_Property_RelationEntryNHibernateImpl> _DestinationProperty;
+		private NHibernateBSideListWrapper<ZBox.App.SchemaMigration.SourceColumn, Kistl.App.Base.Property, ZBox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryNHibernateImpl> _DestinationProperty;
 		// ignored, but required for Serialization
         private bool DestinationProperty_was_eagerLoaded = false;
 
@@ -1220,14 +1220,14 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
             var nhCtx = (NHibernateContext)ctx;
         }
 
-        public override void UpdateParent(string propertyName, int? id)
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
         {
             switch(propertyName)
             {
                 case "ChangedBy":
                     {
                         var __oldValue = (Kistl.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ChangedBy);
-                        var __newValue = (Kistl.App.Base.IdentityNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.Base.Identity>(id.Value));
+                        var __newValue = (Kistl.App.Base.IdentityNHibernateImpl)parentObj;
                         NotifyPropertyChanging("ChangedBy", __oldValue, __newValue);
                         this.Proxy.ChangedBy = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
@@ -1236,7 +1236,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
                 case "CreatedBy":
                     {
                         var __oldValue = (Kistl.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.CreatedBy);
-                        var __newValue = (Kistl.App.Base.IdentityNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.Base.Identity>(id.Value));
+                        var __newValue = (Kistl.App.Base.IdentityNHibernateImpl)parentObj;
                         NotifyPropertyChanging("CreatedBy", __oldValue, __newValue);
                         this.Proxy.CreatedBy = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
@@ -1245,7 +1245,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
                 case "References":
                     {
                         var __oldValue = (ZBox.App.SchemaMigration.SourceColumnNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.References);
-                        var __newValue = (ZBox.App.SchemaMigration.SourceColumnNHibernateImpl)(id == null ? null : OurContext.Find<ZBox.App.SchemaMigration.SourceColumn>(id.Value));
+                        var __newValue = (ZBox.App.SchemaMigration.SourceColumnNHibernateImpl)parentObj;
                         NotifyPropertyChanging("References", __oldValue, __newValue);
                         this.Proxy.References = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("References", __oldValue, __newValue);
@@ -1254,14 +1254,14 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.SourceCo
                 case "SourceTable":
                     {
                         var __oldValue = (ZBox.App.SchemaMigration.SourceTableNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.SourceTable);
-                        var __newValue = (ZBox.App.SchemaMigration.SourceTableNHibernateImpl)(id == null ? null : OurContext.Find<ZBox.App.SchemaMigration.SourceTable>(id.Value));
+                        var __newValue = (ZBox.App.SchemaMigration.SourceTableNHibernateImpl)parentObj;
                         NotifyPropertyChanging("SourceTable", __oldValue, __newValue);
                         this.Proxy.SourceTable = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("SourceTable", __oldValue, __newValue);
                     }
                     break;
                 default:
-                    base.UpdateParent(propertyName, id);
+                    base.UpdateParent(propertyName, parentObj);
                     break;
             }
         }

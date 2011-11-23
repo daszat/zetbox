@@ -842,47 +842,60 @@ namespace Kistl.App.Projekte
             base.AttachToContext(ctx);
         }
 
-		public override void UpdateParent(string propertyName, int? id)
-		{
-			int? __oldValue, __newValue = id;
-			
-			switch(propertyName)
-			{
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
+        {
+            switch(propertyName)
+            {
                 case "ChangedBy":
-                    __oldValue = _fk_ChangedBy;
-                    NotifyPropertyChanging("ChangedBy", __oldValue, __newValue);
-                    _fk_ChangedBy = __newValue;
-                    NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
+                    {
+                        var __oldValue = _fk_ChangedBy;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("ChangedBy", __oldValue, __newValue);
+                        _fk_ChangedBy = __newValue;
+                        NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
+                    }
                     break;
                 case "CreatedBy":
-                    __oldValue = _fk_CreatedBy;
-                    NotifyPropertyChanging("CreatedBy", __oldValue, __newValue);
-                    _fk_CreatedBy = __newValue;
-                    NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
+                    {
+                        var __oldValue = _fk_CreatedBy;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("CreatedBy", __oldValue, __newValue);
+                        _fk_CreatedBy = __newValue;
+                        NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
+                    }
                     break;
                 case "Kunde":
-                    __oldValue = _fk_Kunde;
-                    NotifyPropertyChanging("Kunde", __oldValue, __newValue);
-                    _fk_Kunde = __newValue;
-                    NotifyPropertyChanged("Kunde", __oldValue, __newValue);
+                    {
+                        var __oldValue = _fk_Kunde;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("Kunde", __oldValue, __newValue);
+                        _fk_Kunde = __newValue;
+                        NotifyPropertyChanged("Kunde", __oldValue, __newValue);
+                    }
                     break;
                 case "Mitarbeiter":
-                    __oldValue = _fk_Mitarbeiter;
-                    NotifyPropertyChanging("Mitarbeiter", __oldValue, __newValue);
-                    _fk_Mitarbeiter = __newValue;
-                    NotifyPropertyChanged("Mitarbeiter", __oldValue, __newValue);
+                    {
+                        var __oldValue = _fk_Mitarbeiter;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("Mitarbeiter", __oldValue, __newValue);
+                        _fk_Mitarbeiter = __newValue;
+                        NotifyPropertyChanged("Mitarbeiter", __oldValue, __newValue);
+                    }
                     break;
                 case "Projekt":
-                    __oldValue = _fk_Projekt;
-                    NotifyPropertyChanging("Projekt", __oldValue, __newValue);
-                    _fk_Projekt = __newValue;
-                    NotifyPropertyChanged("Projekt", __oldValue, __newValue);
+                    {
+                        var __oldValue = _fk_Projekt;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("Projekt", __oldValue, __newValue);
+                        _fk_Projekt = __newValue;
+                        NotifyPropertyChanged("Projekt", __oldValue, __newValue);
+                    }
                     break;
-				default:
-					base.UpdateParent(propertyName, id);
-					break;
-			}
-		}
+                default:
+                    base.UpdateParent(propertyName, parentObj);
+                    break;
+            }
+        }
 
         public override void ReloadReferences()
         {

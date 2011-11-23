@@ -320,20 +320,20 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnFil
 				if (_ImplementsInterfaces == null)
 				{
 					_ImplementsInterfaces 
-						= new NHibernateBSideCollectionWrapper<Kistl.App.Base.ObjectClass, Kistl.App.Base.Interface, ObjectClass_implements_Interface_RelationEntryNHibernateImpl>(
+						= new NHibernateBSideCollectionWrapper<Kistl.App.Base.ObjectClass, Kistl.App.Base.Interface, Kistl.App.Base.ObjectClass_implements_Interface_RelationEntryNHibernateImpl>(
 							this, 
-							new ProjectedCollection<ObjectClass_implements_Interface_RelationEntryNHibernateImpl.ObjectClass_implements_Interface_RelationEntryProxy, ObjectClass_implements_Interface_RelationEntryNHibernateImpl>(
+							new ProjectedCollection<Kistl.App.Base.ObjectClass_implements_Interface_RelationEntryNHibernateImpl.ObjectClass_implements_Interface_RelationEntryProxy, Kistl.App.Base.ObjectClass_implements_Interface_RelationEntryNHibernateImpl>(
                                 this.Proxy.ImplementsInterfaces,
-                                p => (ObjectClass_implements_Interface_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (ObjectClass_implements_Interface_RelationEntryNHibernateImpl.ObjectClass_implements_Interface_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
-                            entry => (IRelationListSync<ObjectClass_implements_Interface_RelationEntryNHibernateImpl>)null);
+                                p => (Kistl.App.Base.ObjectClass_implements_Interface_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
+                                ce => (Kistl.App.Base.ObjectClass_implements_Interface_RelationEntryNHibernateImpl.ObjectClass_implements_Interface_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
+                            entry => (IRelationListSync<Kistl.App.Base.ObjectClass_implements_Interface_RelationEntryNHibernateImpl>)null);
                     if (ImplementsInterfaces_was_eagerLoaded) { ImplementsInterfaces_was_eagerLoaded = false; }
 				}
 				return (ICollection<Kistl.App.Base.Interface>)_ImplementsInterfaces;
 			}
 		}
 
-		private NHibernateBSideCollectionWrapper<Kistl.App.Base.ObjectClass, Kistl.App.Base.Interface, ObjectClass_implements_Interface_RelationEntryNHibernateImpl> _ImplementsInterfaces;
+		private NHibernateBSideCollectionWrapper<Kistl.App.Base.ObjectClass, Kistl.App.Base.Interface, Kistl.App.Base.ObjectClass_implements_Interface_RelationEntryNHibernateImpl> _ImplementsInterfaces;
 		// ignored, but required for Serialization
         private bool ImplementsInterfaces_was_eagerLoaded = false;
 
@@ -746,14 +746,14 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
             var nhCtx = (NHibernateContext)ctx;
         }
 
-        public override void UpdateParent(string propertyName, int? id)
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
         {
             switch(propertyName)
             {
                 case "BaseObjectClass":
                     {
                         var __oldValue = (Kistl.App.Base.ObjectClassNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.BaseObjectClass);
-                        var __newValue = (Kistl.App.Base.ObjectClassNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.Base.ObjectClass>(id.Value));
+                        var __newValue = (Kistl.App.Base.ObjectClassNHibernateImpl)parentObj;
                         NotifyPropertyChanging("BaseObjectClass", __oldValue, __newValue);
                         this.Proxy.BaseObjectClass = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("BaseObjectClass", __oldValue, __newValue);
@@ -762,14 +762,14 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
                 case "DefaultViewModelDescriptor":
                     {
                         var __oldValue = (Kistl.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.DefaultViewModelDescriptor);
-                        var __newValue = (Kistl.App.GUI.ViewModelDescriptorNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.GUI.ViewModelDescriptor>(id.Value));
+                        var __newValue = (Kistl.App.GUI.ViewModelDescriptorNHibernateImpl)parentObj;
                         NotifyPropertyChanging("DefaultViewModelDescriptor", __oldValue, __newValue);
                         this.Proxy.DefaultViewModelDescriptor = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("DefaultViewModelDescriptor", __oldValue, __newValue);
                     }
                     break;
                 default:
-                    base.UpdateParent(propertyName, id);
+                    base.UpdateParent(propertyName, parentObj);
                     break;
             }
         }

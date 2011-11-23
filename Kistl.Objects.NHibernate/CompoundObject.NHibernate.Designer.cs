@@ -195,21 +195,21 @@ namespace Kistl.App.Base
             var nhCtx = (NHibernateContext)ctx;
         }
 
-        public override void UpdateParent(string propertyName, int? id)
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
         {
             switch(propertyName)
             {
                 case "DefaultPropertyViewModelDescriptor":
                     {
                         var __oldValue = (Kistl.App.GUI.ViewModelDescriptorNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.DefaultPropertyViewModelDescriptor);
-                        var __newValue = (Kistl.App.GUI.ViewModelDescriptorNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.GUI.ViewModelDescriptor>(id.Value));
+                        var __newValue = (Kistl.App.GUI.ViewModelDescriptorNHibernateImpl)parentObj;
                         NotifyPropertyChanging("DefaultPropertyViewModelDescriptor", __oldValue, __newValue);
                         this.Proxy.DefaultPropertyViewModelDescriptor = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("DefaultPropertyViewModelDescriptor", __oldValue, __newValue);
                     }
                     break;
                 default:
-                    base.UpdateParent(propertyName, id);
+                    base.UpdateParent(propertyName, parentObj);
                     break;
             }
         }

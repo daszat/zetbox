@@ -296,7 +296,6 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Enumeration> OnEnu
             base.AttachToContext(ctx);
         }
 
-
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.

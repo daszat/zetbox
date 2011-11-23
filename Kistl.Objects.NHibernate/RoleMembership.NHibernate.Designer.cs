@@ -57,20 +57,20 @@ namespace Kistl.App.Base
 				if (_Relations == null)
 				{
 					_Relations 
-						= new NHibernateBSideListWrapper<Kistl.App.Base.RoleMembership, Kistl.App.Base.Relation, RoleMembership_resolves_Relation_RelationEntryNHibernateImpl>(
+						= new NHibernateBSideListWrapper<Kistl.App.Base.RoleMembership, Kistl.App.Base.Relation, Kistl.App.Base.RoleMembership_resolves_Relation_RelationEntryNHibernateImpl>(
 							this, 
-							new ProjectedCollection<RoleMembership_resolves_Relation_RelationEntryNHibernateImpl.RoleMembership_resolves_Relation_RelationEntryProxy, RoleMembership_resolves_Relation_RelationEntryNHibernateImpl>(
+							new ProjectedCollection<Kistl.App.Base.RoleMembership_resolves_Relation_RelationEntryNHibernateImpl.RoleMembership_resolves_Relation_RelationEntryProxy, Kistl.App.Base.RoleMembership_resolves_Relation_RelationEntryNHibernateImpl>(
                                 this.Proxy.Relations,
-                                p => (RoleMembership_resolves_Relation_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (RoleMembership_resolves_Relation_RelationEntryNHibernateImpl.RoleMembership_resolves_Relation_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
-                            entry => (IRelationListSync<RoleMembership_resolves_Relation_RelationEntryNHibernateImpl>)null);
+                                p => (Kistl.App.Base.RoleMembership_resolves_Relation_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
+                                ce => (Kistl.App.Base.RoleMembership_resolves_Relation_RelationEntryNHibernateImpl.RoleMembership_resolves_Relation_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
+                            entry => (IRelationListSync<Kistl.App.Base.RoleMembership_resolves_Relation_RelationEntryNHibernateImpl>)null);
                     if (Relations_was_eagerLoaded) { Relations_was_eagerLoaded = false; }
 				}
 				return (IList<Kistl.App.Base.Relation>)_Relations;
 			}
 		}
 
-		private NHibernateBSideListWrapper<Kistl.App.Base.RoleMembership, Kistl.App.Base.Relation, RoleMembership_resolves_Relation_RelationEntryNHibernateImpl> _Relations;
+		private NHibernateBSideListWrapper<Kistl.App.Base.RoleMembership, Kistl.App.Base.Relation, Kistl.App.Base.RoleMembership_resolves_Relation_RelationEntryNHibernateImpl> _Relations;
 		// ignored, but required for Serialization
         private bool Relations_was_eagerLoaded = false;
 

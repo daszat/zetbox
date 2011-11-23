@@ -38,30 +38,27 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
         {
 #line 17 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\UpdateParentTemplate.cst"
 this.WriteObjects("\r\n");
+#line 18 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\UpdateParentTemplate.cst"
+if (props.Count > 0) {               
 #line 19 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\UpdateParentTemplate.cst"
-if (props.Count > 0)
-{
-
-#line 22 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\UpdateParentTemplate.cst"
-this.WriteObjects("        public override void UpdateParent(string propertyName, int? id)\r\n");
+this.WriteObjects("        public override void UpdateParent(string propertyName, IDataObject parentObj)\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            switch(propertyName)\r\n");
 this.WriteObjects("            {\r\n");
-#line 27 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\UpdateParentTemplate.cst"
-foreach(var prop in props)
-    {
-        ApplyCase(prop);
-    }
-
-#line 32 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\UpdateParentTemplate.cst"
+#line 23 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\UpdateParentTemplate.cst"
+foreach(var prop in props) {    
+#line 24 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\UpdateParentTemplate.cst"
+ApplyCase(prop);                
+#line 25 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\UpdateParentTemplate.cst"
+}                                    
+#line 26 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\UpdateParentTemplate.cst"
 this.WriteObjects("                default:\r\n");
-this.WriteObjects("                    base.UpdateParent(propertyName, id);\r\n");
+this.WriteObjects("                    base.UpdateParent(propertyName, parentObj);\r\n");
 this.WriteObjects("                    break;\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
-#line 38 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\UpdateParentTemplate.cst"
-}
-
+#line 31 "P:\Kistl\Kistl.DalProvider.NHibernate.Generator\Templates\ObjectClasses\UpdateParentTemplate.cst"
+}                                    
 
         }
 

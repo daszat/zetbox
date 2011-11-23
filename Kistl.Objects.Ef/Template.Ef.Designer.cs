@@ -443,30 +443,6 @@ namespace Kistl.App.GUI
             base.AttachToContext(ctx);
         }
 
-		public override void UpdateParent(string propertyName, int? id)
-		{
-			int? __oldValue, __newValue = id;
-			
-			switch(propertyName)
-			{
-                case "DisplayedTypeAssembly":
-                    __oldValue = _fk_DisplayedTypeAssembly;
-                    NotifyPropertyChanging("DisplayedTypeAssembly", __oldValue, __newValue);
-                    _fk_DisplayedTypeAssembly = __newValue;
-                    NotifyPropertyChanged("DisplayedTypeAssembly", __oldValue, __newValue);
-                    break;
-                case "VisualTree":
-                    __oldValue = _fk_VisualTree;
-                    NotifyPropertyChanging("VisualTree", __oldValue, __newValue);
-                    _fk_VisualTree = __newValue;
-                    NotifyPropertyChanged("VisualTree", __oldValue, __newValue);
-                    break;
-				default:
-					base.UpdateParent(propertyName, id);
-					break;
-			}
-		}
-
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.

@@ -145,17 +145,17 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Fragebogen> OnAntw
 			{
 				if (_Student == null)
 				{
-					Context.FetchRelation<TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>(new Guid("6819ca86-571c-4d59-bc30-cc1fb0decc9e"), RelationEndRole.B, this);
+					Context.FetchRelation<Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>(new Guid("6819ca86-571c-4d59-bc30-cc1fb0decc9e"), RelationEndRole.B, this);
 					_Student 
-						= new ObservableASideCollectionWrapper<Kistl.App.Test.TestStudent, Kistl.App.Test.Fragebogen, TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl, ICollection<TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>>(
+						= new ObservableASideCollectionWrapper<Kistl.App.Test.TestStudent, Kistl.App.Test.Fragebogen, Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl, ICollection<Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>>(
 							this, 
-							new RelationshipFilterBSideCollection<TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>(this.Context, this));
+							new RelationshipFilterBSideCollection<Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>(this.Context, this));
 				}
 				return (ICollection<Kistl.App.Test.TestStudent>)_Student;
 			}
 		}
 
-		private ObservableASideCollectionWrapper<Kistl.App.Test.TestStudent, Kistl.App.Test.Fragebogen, TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl, ICollection<TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>> _Student;
+		private ObservableASideCollectionWrapper<Kistl.App.Test.TestStudent, Kistl.App.Test.Fragebogen, Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl, ICollection<Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>> _Student;
 
         public override Type GetImplementedInterface()
         {

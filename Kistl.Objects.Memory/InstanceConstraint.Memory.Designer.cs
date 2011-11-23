@@ -321,23 +321,24 @@ namespace Kistl.App.Base
             base.AttachToContext(ctx);
         }
 
-		public override void UpdateParent(string propertyName, int? id)
-		{
-			int? __oldValue, __newValue = id;
-			
-			switch(propertyName)
-			{
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
+        {
+            switch(propertyName)
+            {
                 case "Constrained":
-                    __oldValue = _fk_Constrained;
-                    NotifyPropertyChanging("Constrained", __oldValue, __newValue);
-                    _fk_Constrained = __newValue;
-                    NotifyPropertyChanged("Constrained", __oldValue, __newValue);
+                    {
+                        var __oldValue = _fk_Constrained;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("Constrained", __oldValue, __newValue);
+                        _fk_Constrained = __newValue;
+                        NotifyPropertyChanged("Constrained", __oldValue, __newValue);
+                    }
                     break;
-				default:
-					base.UpdateParent(propertyName, id);
-					break;
-			}
-		}
+                default:
+                    base.UpdateParent(propertyName, parentObj);
+                    break;
+            }
+        }
 
         public override void ReloadReferences()
         {

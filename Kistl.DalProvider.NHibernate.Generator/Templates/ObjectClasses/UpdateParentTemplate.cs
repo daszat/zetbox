@@ -48,7 +48,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
             this.WriteLine();
             this.WriteObjects("                        var __oldValue = (", implType, ")OurContext.AttachAndWrap(this.Proxy.", name, ");");
             this.WriteLine();
-            this.WriteObjects("                        var __newValue = (", implType, ")(id == null ? null : OurContext.Find<", ifType, ">(id.Value));");
+            this.WriteObjects("                        var __newValue = (", implType, ")parentObj;");
             this.WriteLine();
             this.WriteObjects("                        NotifyPropertyChanging(\"", name, "\", __oldValue, __newValue);");
             this.WriteLine();

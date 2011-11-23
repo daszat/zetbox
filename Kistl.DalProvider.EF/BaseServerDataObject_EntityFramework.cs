@@ -190,7 +190,7 @@ namespace Kistl.DalProvider.Ef
             }
         }
 
-        public override void UpdateParent(string propertyName, int? id)
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
         {
             // EF keeps tabs for us, so we do nothing.
         }

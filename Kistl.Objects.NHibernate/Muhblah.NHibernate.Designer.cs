@@ -140,20 +140,20 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
 				if (_TestCustomObjects_ManyList_Nav == null)
 				{
 					_TestCustomObjects_ManyList_Nav 
-						= new NHibernateBSideCollectionWrapper<Kistl.App.Test.Muhblah, Kistl.App.Test.TestCustomObject, Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl>(
+						= new NHibernateBSideCollectionWrapper<Kistl.App.Test.Muhblah, Kistl.App.Test.TestCustomObject, Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl>(
 							this, 
-							new ProjectedCollection<Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl.Muhblah_has_TestCustomObject_RelationEntryProxy, Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl>(
+							new ProjectedCollection<Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl.Muhblah_has_TestCustomObject_RelationEntryProxy, Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl>(
                                 this.Proxy.TestCustomObjects_ManyList_Nav,
-                                p => (Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl.Muhblah_has_TestCustomObject_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
-                            entry => (IRelationListSync<Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl>)entry.B.MuhBlah_ManyList_Nav);
+                                p => (Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
+                                ce => (Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl.Muhblah_has_TestCustomObject_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
+                            entry => (IRelationListSync<Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl>)entry.B.MuhBlah_ManyList_Nav);
                     if (TestCustomObjects_ManyList_Nav_was_eagerLoaded) { TestCustomObjects_ManyList_Nav_was_eagerLoaded = false; }
 				}
 				return (ICollection<Kistl.App.Test.TestCustomObject>)_TestCustomObjects_ManyList_Nav;
 			}
 		}
 
-		private NHibernateBSideCollectionWrapper<Kistl.App.Test.Muhblah, Kistl.App.Test.TestCustomObject, Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl> _TestCustomObjects_ManyList_Nav;
+		private NHibernateBSideCollectionWrapper<Kistl.App.Test.Muhblah, Kistl.App.Test.TestCustomObject, Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl> _TestCustomObjects_ManyList_Nav;
 		// ignored, but required for Serialization
         private bool TestCustomObjects_ManyList_Nav_was_eagerLoaded = false;
 
@@ -542,14 +542,14 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
             var nhCtx = (NHibernateContext)ctx;
         }
 
-        public override void UpdateParent(string propertyName, int? id)
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
         {
             switch(propertyName)
             {
                 case "TestCustomObjects_Nav":
                     {
                         var __oldValue = (Kistl.App.Test.TestCustomObjectNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.TestCustomObjects_Nav);
-                        var __newValue = (Kistl.App.Test.TestCustomObjectNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.Test.TestCustomObject>(id.Value));
+                        var __newValue = (Kistl.App.Test.TestCustomObjectNHibernateImpl)parentObj;
                         NotifyPropertyChanging("TestCustomObjects_Nav", __oldValue, __newValue);
                         this.Proxy.TestCustomObjects_Nav = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("TestCustomObjects_Nav", __oldValue, __newValue);
@@ -558,14 +558,14 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
                 case "TestCustomObjects_One_Nav":
                     {
                         var __oldValue = (Kistl.App.Test.TestCustomObjectNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.TestCustomObjects_One_Nav);
-                        var __newValue = (Kistl.App.Test.TestCustomObjectNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.Test.TestCustomObject>(id.Value));
+                        var __newValue = (Kistl.App.Test.TestCustomObjectNHibernateImpl)parentObj;
                         NotifyPropertyChanging("TestCustomObjects_One_Nav", __oldValue, __newValue);
                         this.Proxy.TestCustomObjects_One_Nav = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("TestCustomObjects_One_Nav", __oldValue, __newValue);
                     }
                     break;
                 default:
-                    base.UpdateParent(propertyName, id);
+                    base.UpdateParent(propertyName, parentObj);
                     break;
             }
         }

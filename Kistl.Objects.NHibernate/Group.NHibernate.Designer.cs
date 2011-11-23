@@ -128,20 +128,20 @@ namespace Kistl.App.Base
 				if (_Member == null)
 				{
 					_Member 
-						= new NHibernateASideCollectionWrapper<Kistl.App.Base.Identity, Kistl.App.Base.Group, Identity_memberOf_Group_RelationEntryNHibernateImpl>(
+						= new NHibernateASideCollectionWrapper<Kistl.App.Base.Identity, Kistl.App.Base.Group, Kistl.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl>(
 							this, 
-							new ProjectedCollection<Identity_memberOf_Group_RelationEntryNHibernateImpl.Identity_memberOf_Group_RelationEntryProxy, Identity_memberOf_Group_RelationEntryNHibernateImpl>(
+							new ProjectedCollection<Kistl.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl.Identity_memberOf_Group_RelationEntryProxy, Kistl.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl>(
                                 this.Proxy.Member,
-                                p => (Identity_memberOf_Group_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Identity_memberOf_Group_RelationEntryNHibernateImpl.Identity_memberOf_Group_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
-                            entry => (IRelationListSync<Identity_memberOf_Group_RelationEntryNHibernateImpl>)entry.A.Groups);
+                                p => (Kistl.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
+                                ce => (Kistl.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl.Identity_memberOf_Group_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
+                            entry => (IRelationListSync<Kistl.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl>)entry.A.Groups);
                     if (Member_was_eagerLoaded) { Member_was_eagerLoaded = false; }
 				}
 				return (ICollection<Kistl.App.Base.Identity>)_Member;
 			}
 		}
 
-		private NHibernateASideCollectionWrapper<Kistl.App.Base.Identity, Kistl.App.Base.Group, Identity_memberOf_Group_RelationEntryNHibernateImpl> _Member;
+		private NHibernateASideCollectionWrapper<Kistl.App.Base.Identity, Kistl.App.Base.Group, Kistl.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl> _Member;
 		// ignored, but required for Serialization
         private bool Member_was_eagerLoaded = false;
 
@@ -305,21 +305,21 @@ namespace Kistl.App.Base
             var nhCtx = (NHibernateContext)ctx;
         }
 
-        public override void UpdateParent(string propertyName, int? id)
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
         {
             switch(propertyName)
             {
                 case "Module":
                     {
                         var __oldValue = (Kistl.App.Base.ModuleNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Module);
-                        var __newValue = (Kistl.App.Base.ModuleNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.Base.Module>(id.Value));
+                        var __newValue = (Kistl.App.Base.ModuleNHibernateImpl)parentObj;
                         NotifyPropertyChanging("Module", __oldValue, __newValue);
                         this.Proxy.Module = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("Module", __oldValue, __newValue);
                     }
                     break;
                 default:
-                    base.UpdateParent(propertyName, id);
+                    base.UpdateParent(propertyName, parentObj);
                     break;
             }
         }

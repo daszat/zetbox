@@ -861,30 +861,6 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
             base.AttachToContext(ctx);
         }
 
-		public override void UpdateParent(string propertyName, int? id)
-		{
-			int? __oldValue, __newValue = id;
-			
-			switch(propertyName)
-			{
-                case "BaseObjectClass":
-                    __oldValue = _fk_BaseObjectClass;
-                    NotifyPropertyChanging("BaseObjectClass", __oldValue, __newValue);
-                    _fk_BaseObjectClass = __newValue;
-                    NotifyPropertyChanged("BaseObjectClass", __oldValue, __newValue);
-                    break;
-                case "DefaultViewModelDescriptor":
-                    __oldValue = _fk_DefaultViewModelDescriptor;
-                    NotifyPropertyChanging("DefaultViewModelDescriptor", __oldValue, __newValue);
-                    _fk_DefaultViewModelDescriptor = __newValue;
-                    NotifyPropertyChanged("DefaultViewModelDescriptor", __oldValue, __newValue);
-                    break;
-				default:
-					base.UpdateParent(propertyName, id);
-					break;
-			}
-		}
-
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.

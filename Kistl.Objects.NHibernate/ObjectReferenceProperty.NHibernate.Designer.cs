@@ -356,21 +356,21 @@ namespace Kistl.App.Base
             var nhCtx = (NHibernateContext)ctx;
         }
 
-        public override void UpdateParent(string propertyName, int? id)
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
         {
             switch(propertyName)
             {
                 case "RelationEnd":
                     {
                         var __oldValue = (Kistl.App.Base.RelationEndNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.RelationEnd);
-                        var __newValue = (Kistl.App.Base.RelationEndNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.Base.RelationEnd>(id.Value));
+                        var __newValue = (Kistl.App.Base.RelationEndNHibernateImpl)parentObj;
                         NotifyPropertyChanging("RelationEnd", __oldValue, __newValue);
                         this.Proxy.RelationEnd = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("RelationEnd", __oldValue, __newValue);
                     }
                     break;
                 default:
-                    base.UpdateParent(propertyName, id);
+                    base.UpdateParent(propertyName, parentObj);
                     break;
             }
         }

@@ -331,11 +331,11 @@ namespace Kistl.API
         void NotifyDeleting();
 
         /// <summary>
-        /// Update 
+        /// Update to-one navigators when fixing 1:N relations from the collection
         /// </summary>
         /// <param name="propertyName"></param>
-        /// <param name="id"></param>
-        void UpdateParent(string propertyName, int? id);
+        /// <param name="parentObj"></param>
+        void UpdateParent(string propertyName, IDataObject parentObj);
         #endregion
     }
 

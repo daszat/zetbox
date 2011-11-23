@@ -700,20 +700,20 @@ namespace Kistl.App.GUI
 				if (_SecondaryControlKinds == null)
 				{
 					_SecondaryControlKinds 
-						= new NHibernateBSideCollectionWrapper<Kistl.App.GUI.ViewModelDescriptor, Kistl.App.GUI.ControlKind, ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl>(
+						= new NHibernateBSideCollectionWrapper<Kistl.App.GUI.ViewModelDescriptor, Kistl.App.GUI.ControlKind, Kistl.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl>(
 							this, 
-							new ProjectedCollection<ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryProxy, ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl>(
+							new ProjectedCollection<Kistl.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryProxy, Kistl.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl>(
                                 this.Proxy.SecondaryControlKinds,
-                                p => (ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
-                            entry => (IRelationListSync<ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl>)null);
+                                p => (Kistl.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
+                                ce => (Kistl.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
+                            entry => (IRelationListSync<Kistl.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl>)null);
                     if (SecondaryControlKinds_was_eagerLoaded) { SecondaryControlKinds_was_eagerLoaded = false; }
 				}
 				return (ICollection<Kistl.App.GUI.ControlKind>)_SecondaryControlKinds;
 			}
 		}
 
-		private NHibernateBSideCollectionWrapper<Kistl.App.GUI.ViewModelDescriptor, Kistl.App.GUI.ControlKind, ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl> _SecondaryControlKinds;
+		private NHibernateBSideCollectionWrapper<Kistl.App.GUI.ViewModelDescriptor, Kistl.App.GUI.ControlKind, Kistl.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl> _SecondaryControlKinds;
 		// ignored, but required for Serialization
         private bool SecondaryControlKinds_was_eagerLoaded = false;
 
@@ -833,14 +833,14 @@ namespace Kistl.App.GUI
             var nhCtx = (NHibernateContext)ctx;
         }
 
-        public override void UpdateParent(string propertyName, int? id)
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
         {
             switch(propertyName)
             {
                 case "DefaultDisplayKind":
                     {
                         var __oldValue = (Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.DefaultDisplayKind);
-                        var __newValue = (Kistl.App.GUI.ControlKindNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.GUI.ControlKind>(id.Value));
+                        var __newValue = (Kistl.App.GUI.ControlKindNHibernateImpl)parentObj;
                         NotifyPropertyChanging("DefaultDisplayKind", __oldValue, __newValue);
                         this.Proxy.DefaultDisplayKind = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("DefaultDisplayKind", __oldValue, __newValue);
@@ -849,7 +849,7 @@ namespace Kistl.App.GUI
                 case "DefaultEditorKind":
                     {
                         var __oldValue = (Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.DefaultEditorKind);
-                        var __newValue = (Kistl.App.GUI.ControlKindNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.GUI.ControlKind>(id.Value));
+                        var __newValue = (Kistl.App.GUI.ControlKindNHibernateImpl)parentObj;
                         NotifyPropertyChanging("DefaultEditorKind", __oldValue, __newValue);
                         this.Proxy.DefaultEditorKind = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("DefaultEditorKind", __oldValue, __newValue);
@@ -858,7 +858,7 @@ namespace Kistl.App.GUI
                 case "DefaultGridCellDisplayKind":
                     {
                         var __oldValue = (Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.DefaultGridCellDisplayKind);
-                        var __newValue = (Kistl.App.GUI.ControlKindNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.GUI.ControlKind>(id.Value));
+                        var __newValue = (Kistl.App.GUI.ControlKindNHibernateImpl)parentObj;
                         NotifyPropertyChanging("DefaultGridCellDisplayKind", __oldValue, __newValue);
                         this.Proxy.DefaultGridCellDisplayKind = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("DefaultGridCellDisplayKind", __oldValue, __newValue);
@@ -867,7 +867,7 @@ namespace Kistl.App.GUI
                 case "DefaultGridCellEditorKind":
                     {
                         var __oldValue = (Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.DefaultGridCellEditorKind);
-                        var __newValue = (Kistl.App.GUI.ControlKindNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.GUI.ControlKind>(id.Value));
+                        var __newValue = (Kistl.App.GUI.ControlKindNHibernateImpl)parentObj;
                         NotifyPropertyChanging("DefaultGridCellEditorKind", __oldValue, __newValue);
                         this.Proxy.DefaultGridCellEditorKind = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("DefaultGridCellEditorKind", __oldValue, __newValue);
@@ -876,7 +876,7 @@ namespace Kistl.App.GUI
                 case "DefaultGridCellPreEditorKind":
                     {
                         var __oldValue = (Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.DefaultGridCellPreEditorKind);
-                        var __newValue = (Kistl.App.GUI.ControlKindNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.GUI.ControlKind>(id.Value));
+                        var __newValue = (Kistl.App.GUI.ControlKindNHibernateImpl)parentObj;
                         NotifyPropertyChanging("DefaultGridCellPreEditorKind", __oldValue, __newValue);
                         this.Proxy.DefaultGridCellPreEditorKind = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("DefaultGridCellPreEditorKind", __oldValue, __newValue);
@@ -885,7 +885,7 @@ namespace Kistl.App.GUI
                 case "Module":
                     {
                         var __oldValue = (Kistl.App.Base.ModuleNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Module);
-                        var __newValue = (Kistl.App.Base.ModuleNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.Base.Module>(id.Value));
+                        var __newValue = (Kistl.App.Base.ModuleNHibernateImpl)parentObj;
                         NotifyPropertyChanging("Module", __oldValue, __newValue);
                         this.Proxy.Module = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("Module", __oldValue, __newValue);
@@ -894,14 +894,14 @@ namespace Kistl.App.GUI
                 case "ViewModelRef":
                     {
                         var __oldValue = (Kistl.App.Base.TypeRefNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ViewModelRef);
-                        var __newValue = (Kistl.App.Base.TypeRefNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.Base.TypeRef>(id.Value));
+                        var __newValue = (Kistl.App.Base.TypeRefNHibernateImpl)parentObj;
                         NotifyPropertyChanging("ViewModelRef", __oldValue, __newValue);
                         this.Proxy.ViewModelRef = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("ViewModelRef", __oldValue, __newValue);
                     }
                     break;
                 default:
-                    base.UpdateParent(propertyName, id);
+                    base.UpdateParent(propertyName, parentObj);
                     break;
             }
         }

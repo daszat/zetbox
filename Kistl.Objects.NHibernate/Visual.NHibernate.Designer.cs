@@ -57,20 +57,20 @@ namespace Kistl.App.GUI
 				if (_Children == null)
 				{
 					_Children 
-						= new NHibernateBSideCollectionWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Visual_contains_Visual_RelationEntryNHibernateImpl>(
+						= new NHibernateBSideCollectionWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Kistl.App.GUI.Visual_contains_Visual_RelationEntryNHibernateImpl>(
 							this, 
-							new ProjectedCollection<Visual_contains_Visual_RelationEntryNHibernateImpl.Visual_contains_Visual_RelationEntryProxy, Visual_contains_Visual_RelationEntryNHibernateImpl>(
+							new ProjectedCollection<Kistl.App.GUI.Visual_contains_Visual_RelationEntryNHibernateImpl.Visual_contains_Visual_RelationEntryProxy, Kistl.App.GUI.Visual_contains_Visual_RelationEntryNHibernateImpl>(
                                 this.Proxy.Children,
-                                p => (Visual_contains_Visual_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Visual_contains_Visual_RelationEntryNHibernateImpl.Visual_contains_Visual_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
-                            entry => (IRelationListSync<Visual_contains_Visual_RelationEntryNHibernateImpl>)null);
+                                p => (Kistl.App.GUI.Visual_contains_Visual_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
+                                ce => (Kistl.App.GUI.Visual_contains_Visual_RelationEntryNHibernateImpl.Visual_contains_Visual_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
+                            entry => (IRelationListSync<Kistl.App.GUI.Visual_contains_Visual_RelationEntryNHibernateImpl>)null);
                     if (Children_was_eagerLoaded) { Children_was_eagerLoaded = false; }
 				}
 				return (ICollection<Kistl.App.GUI.Visual>)_Children;
 			}
 		}
 
-		private NHibernateBSideCollectionWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Visual_contains_Visual_RelationEntryNHibernateImpl> _Children;
+		private NHibernateBSideCollectionWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Kistl.App.GUI.Visual_contains_Visual_RelationEntryNHibernateImpl> _Children;
 		// ignored, but required for Serialization
         private bool Children_was_eagerLoaded = false;
 
@@ -86,20 +86,20 @@ namespace Kistl.App.GUI
 				if (_ContextMenu == null)
 				{
 					_ContextMenu 
-						= new NHibernateBSideCollectionWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl>(
+						= new NHibernateBSideCollectionWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Kistl.App.GUI.Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl>(
 							this, 
-							new ProjectedCollection<Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl.Visual_hasContextMenu_Visual_RelationEntryProxy, Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl>(
+							new ProjectedCollection<Kistl.App.GUI.Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl.Visual_hasContextMenu_Visual_RelationEntryProxy, Kistl.App.GUI.Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl>(
                                 this.Proxy.ContextMenu,
-                                p => (Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl.Visual_hasContextMenu_Visual_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
-                            entry => (IRelationListSync<Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl>)null);
+                                p => (Kistl.App.GUI.Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
+                                ce => (Kistl.App.GUI.Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl.Visual_hasContextMenu_Visual_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
+                            entry => (IRelationListSync<Kistl.App.GUI.Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl>)null);
                     if (ContextMenu_was_eagerLoaded) { ContextMenu_was_eagerLoaded = false; }
 				}
 				return (ICollection<Kistl.App.GUI.Visual>)_ContextMenu;
 			}
 		}
 
-		private NHibernateBSideCollectionWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl> _ContextMenu;
+		private NHibernateBSideCollectionWrapper<Kistl.App.GUI.Visual, Kistl.App.GUI.Visual, Kistl.App.GUI.Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl> _ContextMenu;
 		// ignored, but required for Serialization
         private bool ContextMenu_was_eagerLoaded = false;
 
@@ -346,14 +346,14 @@ namespace Kistl.App.GUI
             var nhCtx = (NHibernateContext)ctx;
         }
 
-        public override void UpdateParent(string propertyName, int? id)
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
         {
             switch(propertyName)
             {
                 case "Method":
                     {
                         var __oldValue = (Kistl.App.Base.MethodNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Method);
-                        var __newValue = (Kistl.App.Base.MethodNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.Base.Method>(id.Value));
+                        var __newValue = (Kistl.App.Base.MethodNHibernateImpl)parentObj;
                         NotifyPropertyChanging("Method", __oldValue, __newValue);
                         this.Proxy.Method = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("Method", __oldValue, __newValue);
@@ -362,14 +362,14 @@ namespace Kistl.App.GUI
                 case "Property":
                     {
                         var __oldValue = (Kistl.App.Base.PropertyNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Property);
-                        var __newValue = (Kistl.App.Base.PropertyNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.Base.Property>(id.Value));
+                        var __newValue = (Kistl.App.Base.PropertyNHibernateImpl)parentObj;
                         NotifyPropertyChanging("Property", __oldValue, __newValue);
                         this.Proxy.Property = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("Property", __oldValue, __newValue);
                     }
                     break;
                 default:
-                    base.UpdateParent(propertyName, id);
+                    base.UpdateParent(propertyName, parentObj);
                     break;
             }
         }

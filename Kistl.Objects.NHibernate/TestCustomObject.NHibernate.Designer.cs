@@ -266,20 +266,20 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
 				if (_MuhBlah_ManyList_Nav == null)
 				{
 					_MuhBlah_ManyList_Nav 
-						= new NHibernateASideCollectionWrapper<Kistl.App.Test.Muhblah, Kistl.App.Test.TestCustomObject, Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl>(
+						= new NHibernateASideCollectionWrapper<Kistl.App.Test.Muhblah, Kistl.App.Test.TestCustomObject, Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl>(
 							this, 
-							new ProjectedCollection<Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl.Muhblah_has_TestCustomObject_RelationEntryProxy, Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl>(
+							new ProjectedCollection<Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl.Muhblah_has_TestCustomObject_RelationEntryProxy, Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl>(
                                 this.Proxy.MuhBlah_ManyList_Nav,
-                                p => (Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl.Muhblah_has_TestCustomObject_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
-                            entry => (IRelationListSync<Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl>)entry.A.TestCustomObjects_ManyList_Nav);
+                                p => (Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
+                                ce => (Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl.Muhblah_has_TestCustomObject_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
+                            entry => (IRelationListSync<Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl>)entry.A.TestCustomObjects_ManyList_Nav);
                     if (MuhBlah_ManyList_Nav_was_eagerLoaded) { MuhBlah_ManyList_Nav_was_eagerLoaded = false; }
 				}
 				return (ICollection<Kistl.App.Test.Muhblah>)_MuhBlah_ManyList_Nav;
 			}
 		}
 
-		private NHibernateASideCollectionWrapper<Kistl.App.Test.Muhblah, Kistl.App.Test.TestCustomObject, Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl> _MuhBlah_ManyList_Nav;
+		private NHibernateASideCollectionWrapper<Kistl.App.Test.Muhblah, Kistl.App.Test.TestCustomObject, Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl> _MuhBlah_ManyList_Nav;
 		// ignored, but required for Serialization
         private bool MuhBlah_ManyList_Nav_was_eagerLoaded = false;
 
@@ -620,21 +620,21 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
                 this.Proxy.PhoneNumbersOther.ForEach<IProxyObject>(i => nhCtx.AttachAndWrap(i));
         }
 
-        public override void UpdateParent(string propertyName, int? id)
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
         {
             switch(propertyName)
             {
                 case "MubBlah_Nav":
                     {
                         var __oldValue = (Kistl.App.Test.MuhblahNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.MubBlah_Nav);
-                        var __newValue = (Kistl.App.Test.MuhblahNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.Test.Muhblah>(id.Value));
+                        var __newValue = (Kistl.App.Test.MuhblahNHibernateImpl)parentObj;
                         NotifyPropertyChanging("MubBlah_Nav", __oldValue, __newValue);
                         this.Proxy.MubBlah_Nav = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("MubBlah_Nav", __oldValue, __newValue);
                     }
                     break;
                 default:
-                    base.UpdateParent(propertyName, id);
+                    base.UpdateParent(propertyName, parentObj);
                     break;
             }
         }

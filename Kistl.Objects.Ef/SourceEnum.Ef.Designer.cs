@@ -745,42 +745,6 @@ namespace ZBox.App.SchemaMigration
             base.AttachToContext(ctx);
         }
 
-		public override void UpdateParent(string propertyName, int? id)
-		{
-			int? __oldValue, __newValue = id;
-			
-			switch(propertyName)
-			{
-                case "ChangedBy":
-                    __oldValue = _fk_ChangedBy;
-                    NotifyPropertyChanging("ChangedBy", __oldValue, __newValue);
-                    _fk_ChangedBy = __newValue;
-                    NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
-                    break;
-                case "CreatedBy":
-                    __oldValue = _fk_CreatedBy;
-                    NotifyPropertyChanging("CreatedBy", __oldValue, __newValue);
-                    _fk_CreatedBy = __newValue;
-                    NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
-                    break;
-                case "DestinationValue":
-                    __oldValue = _fk_DestinationValue;
-                    NotifyPropertyChanging("DestinationValue", __oldValue, __newValue);
-                    _fk_DestinationValue = __newValue;
-                    NotifyPropertyChanged("DestinationValue", __oldValue, __newValue);
-                    break;
-                case "SourceColumn":
-                    __oldValue = _fk_SourceColumn;
-                    NotifyPropertyChanging("SourceColumn", __oldValue, __newValue);
-                    _fk_SourceColumn = __newValue;
-                    NotifyPropertyChanged("SourceColumn", __oldValue, __newValue);
-                    break;
-				default:
-					base.UpdateParent(propertyName, id);
-					break;
-			}
-		}
-
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.

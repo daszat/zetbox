@@ -420,14 +420,14 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.ControlKind> OnChil
             var nhCtx = (NHibernateContext)ctx;
         }
 
-        public override void UpdateParent(string propertyName, int? id)
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
         {
             switch(propertyName)
             {
                 case "Module":
                     {
                         var __oldValue = (Kistl.App.Base.ModuleNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Module);
-                        var __newValue = (Kistl.App.Base.ModuleNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.Base.Module>(id.Value));
+                        var __newValue = (Kistl.App.Base.ModuleNHibernateImpl)parentObj;
                         NotifyPropertyChanging("Module", __oldValue, __newValue);
                         this.Proxy.Module = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("Module", __oldValue, __newValue);
@@ -436,14 +436,14 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.ControlKind> OnChil
                 case "Parent":
                     {
                         var __oldValue = (Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Parent);
-                        var __newValue = (Kistl.App.GUI.ControlKindNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.GUI.ControlKind>(id.Value));
+                        var __newValue = (Kistl.App.GUI.ControlKindNHibernateImpl)parentObj;
                         NotifyPropertyChanging("Parent", __oldValue, __newValue);
                         this.Proxy.Parent = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("Parent", __oldValue, __newValue);
                     }
                     break;
                 default:
-                    base.UpdateParent(propertyName, id);
+                    base.UpdateParent(propertyName, parentObj);
                     break;
             }
         }

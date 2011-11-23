@@ -166,7 +166,6 @@ public static event PropertyListChangedHandler<Kistl.App.Test.OrderedOneEnd> OnN
             base.AttachToContext(ctx);
         }
 
-
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.

@@ -353,21 +353,21 @@ namespace Kistl.App.Test
             var nhCtx = (NHibernateContext)ctx;
         }
 
-        public override void UpdateParent(string propertyName, int? id)
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
         {
             switch(propertyName)
             {
                 case "Fragebogen":
                     {
                         var __oldValue = (Kistl.App.Test.FragebogenNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Fragebogen);
-                        var __newValue = (Kistl.App.Test.FragebogenNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.Test.Fragebogen>(id.Value));
+                        var __newValue = (Kistl.App.Test.FragebogenNHibernateImpl)parentObj;
                         NotifyPropertyChanging("Fragebogen", __oldValue, __newValue);
                         this.Proxy.Fragebogen = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("Fragebogen", __oldValue, __newValue);
                     }
                     break;
                 default:
-                    base.UpdateParent(propertyName, id);
+                    base.UpdateParent(propertyName, parentObj);
                     break;
             }
         }

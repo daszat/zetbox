@@ -244,17 +244,17 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
 			{
 				if (_MuhBlah_ManyList_Nav == null)
 				{
-					Context.FetchRelation<Muhblah_has_TestCustomObject_RelationEntryMemoryImpl>(new Guid("d1e0da3e-ce64-4587-b62d-70c0f4371d97"), RelationEndRole.B, this);
+					Context.FetchRelation<Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl>(new Guid("d1e0da3e-ce64-4587-b62d-70c0f4371d97"), RelationEndRole.B, this);
 					_MuhBlah_ManyList_Nav 
-						= new ObservableASideCollectionWrapper<Kistl.App.Test.Muhblah, Kistl.App.Test.TestCustomObject, Muhblah_has_TestCustomObject_RelationEntryMemoryImpl, ICollection<Muhblah_has_TestCustomObject_RelationEntryMemoryImpl>>(
+						= new ObservableASideCollectionWrapper<Kistl.App.Test.Muhblah, Kistl.App.Test.TestCustomObject, Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl, ICollection<Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl>>(
 							this, 
-							new RelationshipFilterBSideCollection<Muhblah_has_TestCustomObject_RelationEntryMemoryImpl>(this.Context, this));
+							new RelationshipFilterBSideCollection<Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl>(this.Context, this));
 				}
 				return (ICollection<Kistl.App.Test.Muhblah>)_MuhBlah_ManyList_Nav;
 			}
 		}
 
-		private ObservableASideCollectionWrapper<Kistl.App.Test.Muhblah, Kistl.App.Test.TestCustomObject, Muhblah_has_TestCustomObject_RelationEntryMemoryImpl, ICollection<Muhblah_has_TestCustomObject_RelationEntryMemoryImpl>> _MuhBlah_ManyList_Nav;
+		private ObservableASideCollectionWrapper<Kistl.App.Test.Muhblah, Kistl.App.Test.TestCustomObject, Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl, ICollection<Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl>> _MuhBlah_ManyList_Nav;
 
         /// <summary>
         /// 
@@ -590,23 +590,24 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
                 _PhoneNumbersOtherCollection.ForEach<IPersistenceObject>(i => ctx.Attach(i));
         }
 
-		public override void UpdateParent(string propertyName, int? id)
-		{
-			int? __oldValue, __newValue = id;
-			
-			switch(propertyName)
-			{
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
+        {
+            switch(propertyName)
+            {
                 case "MubBlah_Nav":
-                    __oldValue = _fk_MubBlah_Nav;
-                    NotifyPropertyChanging("MubBlah_Nav", __oldValue, __newValue);
-                    _fk_MubBlah_Nav = __newValue;
-                    NotifyPropertyChanged("MubBlah_Nav", __oldValue, __newValue);
+                    {
+                        var __oldValue = _fk_MubBlah_Nav;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("MubBlah_Nav", __oldValue, __newValue);
+                        _fk_MubBlah_Nav = __newValue;
+                        NotifyPropertyChanged("MubBlah_Nav", __oldValue, __newValue);
+                    }
                     break;
-				default:
-					base.UpdateParent(propertyName, id);
-					break;
-			}
-		}
+                default:
+                    base.UpdateParent(propertyName, parentObj);
+                    break;
+            }
+        }
 
         public override void ReloadReferences()
         {

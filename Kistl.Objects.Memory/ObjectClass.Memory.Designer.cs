@@ -319,17 +319,17 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnFil
 			{
 				if (_ImplementsInterfaces == null)
 				{
-					Context.FetchRelation<ObjectClass_implements_Interface_RelationEntryMemoryImpl>(new Guid("692c1064-37a2-4be3-a81e-4cb91f673aa3"), RelationEndRole.A, this);
+					Context.FetchRelation<Kistl.App.Base.ObjectClass_implements_Interface_RelationEntryMemoryImpl>(new Guid("692c1064-37a2-4be3-a81e-4cb91f673aa3"), RelationEndRole.A, this);
 					_ImplementsInterfaces 
-						= new ObservableBSideCollectionWrapper<Kistl.App.Base.ObjectClass, Kistl.App.Base.Interface, ObjectClass_implements_Interface_RelationEntryMemoryImpl, ICollection<ObjectClass_implements_Interface_RelationEntryMemoryImpl>>(
+						= new ObservableBSideCollectionWrapper<Kistl.App.Base.ObjectClass, Kistl.App.Base.Interface, Kistl.App.Base.ObjectClass_implements_Interface_RelationEntryMemoryImpl, ICollection<Kistl.App.Base.ObjectClass_implements_Interface_RelationEntryMemoryImpl>>(
 							this, 
-							new RelationshipFilterASideCollection<ObjectClass_implements_Interface_RelationEntryMemoryImpl>(this.Context, this));
+							new RelationshipFilterASideCollection<Kistl.App.Base.ObjectClass_implements_Interface_RelationEntryMemoryImpl>(this.Context, this));
 				}
 				return (ICollection<Kistl.App.Base.Interface>)_ImplementsInterfaces;
 			}
 		}
 
-		private ObservableBSideCollectionWrapper<Kistl.App.Base.ObjectClass, Kistl.App.Base.Interface, ObjectClass_implements_Interface_RelationEntryMemoryImpl, ICollection<ObjectClass_implements_Interface_RelationEntryMemoryImpl>> _ImplementsInterfaces;
+		private ObservableBSideCollectionWrapper<Kistl.App.Base.ObjectClass, Kistl.App.Base.Interface, Kistl.App.Base.ObjectClass_implements_Interface_RelationEntryMemoryImpl, ICollection<Kistl.App.Base.ObjectClass_implements_Interface_RelationEntryMemoryImpl>> _ImplementsInterfaces;
 
         /// <summary>
         /// Class is abstract
@@ -749,29 +749,33 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
             base.AttachToContext(ctx);
         }
 
-		public override void UpdateParent(string propertyName, int? id)
-		{
-			int? __oldValue, __newValue = id;
-			
-			switch(propertyName)
-			{
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
+        {
+            switch(propertyName)
+            {
                 case "BaseObjectClass":
-                    __oldValue = _fk_BaseObjectClass;
-                    NotifyPropertyChanging("BaseObjectClass", __oldValue, __newValue);
-                    _fk_BaseObjectClass = __newValue;
-                    NotifyPropertyChanged("BaseObjectClass", __oldValue, __newValue);
+                    {
+                        var __oldValue = _fk_BaseObjectClass;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("BaseObjectClass", __oldValue, __newValue);
+                        _fk_BaseObjectClass = __newValue;
+                        NotifyPropertyChanged("BaseObjectClass", __oldValue, __newValue);
+                    }
                     break;
                 case "DefaultViewModelDescriptor":
-                    __oldValue = _fk_DefaultViewModelDescriptor;
-                    NotifyPropertyChanging("DefaultViewModelDescriptor", __oldValue, __newValue);
-                    _fk_DefaultViewModelDescriptor = __newValue;
-                    NotifyPropertyChanged("DefaultViewModelDescriptor", __oldValue, __newValue);
+                    {
+                        var __oldValue = _fk_DefaultViewModelDescriptor;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("DefaultViewModelDescriptor", __oldValue, __newValue);
+                        _fk_DefaultViewModelDescriptor = __newValue;
+                        NotifyPropertyChanged("DefaultViewModelDescriptor", __oldValue, __newValue);
+                    }
                     break;
-				default:
-					base.UpdateParent(propertyName, id);
-					break;
-			}
-		}
+                default:
+                    base.UpdateParent(propertyName, parentObj);
+                    break;
+            }
+        }
 
         public override void ReloadReferences()
         {

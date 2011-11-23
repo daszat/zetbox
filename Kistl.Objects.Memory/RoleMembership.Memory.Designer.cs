@@ -45,17 +45,17 @@ namespace Kistl.App.Base
 			{
 				if (_Relations == null)
 				{
-					Context.FetchRelation<RoleMembership_resolves_Relation_RelationEntryMemoryImpl>(new Guid("f74d425f-e733-4cba-baca-f4a05fbc0a80"), RelationEndRole.A, this);
+					Context.FetchRelation<Kistl.App.Base.RoleMembership_resolves_Relation_RelationEntryMemoryImpl>(new Guid("f74d425f-e733-4cba-baca-f4a05fbc0a80"), RelationEndRole.A, this);
 					_Relations 
-						= new ObservableBSideListWrapper<Kistl.App.Base.RoleMembership, Kistl.App.Base.Relation, RoleMembership_resolves_Relation_RelationEntryMemoryImpl, ICollection<RoleMembership_resolves_Relation_RelationEntryMemoryImpl>>(
+						= new ObservableBSideListWrapper<Kistl.App.Base.RoleMembership, Kistl.App.Base.Relation, Kistl.App.Base.RoleMembership_resolves_Relation_RelationEntryMemoryImpl, ICollection<Kistl.App.Base.RoleMembership_resolves_Relation_RelationEntryMemoryImpl>>(
 							this, 
-							new RelationshipFilterASideCollection<RoleMembership_resolves_Relation_RelationEntryMemoryImpl>(this.Context, this));
+							new RelationshipFilterASideCollection<Kistl.App.Base.RoleMembership_resolves_Relation_RelationEntryMemoryImpl>(this.Context, this));
 				}
 				return (IList<Kistl.App.Base.Relation>)_Relations;
 			}
 		}
 
-		private ObservableBSideListWrapper<Kistl.App.Base.RoleMembership, Kistl.App.Base.Relation, RoleMembership_resolves_Relation_RelationEntryMemoryImpl, ICollection<RoleMembership_resolves_Relation_RelationEntryMemoryImpl>> _Relations;
+		private ObservableBSideListWrapper<Kistl.App.Base.RoleMembership, Kistl.App.Base.Relation, Kistl.App.Base.RoleMembership_resolves_Relation_RelationEntryMemoryImpl, ICollection<Kistl.App.Base.RoleMembership_resolves_Relation_RelationEntryMemoryImpl>> _Relations;
 
         public override Type GetImplementedInterface()
         {

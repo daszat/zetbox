@@ -379,17 +379,17 @@ namespace Kistl.App.GUI
 			{
 				if (_SupportedViewModels == null)
 				{
-					if (!SupportedViewModels_was_eagerLoaded) Context.FetchRelation<ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl>(new Guid("786dae2f-cb6e-454d-93fd-192541df928d"), RelationEndRole.A, this);
+					if (!SupportedViewModels_was_eagerLoaded) Context.FetchRelation<Kistl.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl>(new Guid("786dae2f-cb6e-454d-93fd-192541df928d"), RelationEndRole.A, this);
 					_SupportedViewModels 
-						= new ObservableBSideCollectionWrapper<Kistl.App.GUI.ViewDescriptor, Kistl.App.Base.TypeRef, ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl, ICollection<ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl>>(
+						= new ObservableBSideCollectionWrapper<Kistl.App.GUI.ViewDescriptor, Kistl.App.Base.TypeRef, Kistl.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl, ICollection<Kistl.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl>>(
 							this, 
-							new RelationshipFilterASideCollection<ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl>(this.Context, this));
+							new RelationshipFilterASideCollection<Kistl.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl>(this.Context, this));
 				}
 				return (ICollection<Kistl.App.Base.TypeRef>)_SupportedViewModels;
 			}
 		}
 
-		private ObservableBSideCollectionWrapper<Kistl.App.GUI.ViewDescriptor, Kistl.App.Base.TypeRef, ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl, ICollection<ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl>> _SupportedViewModels;
+		private ObservableBSideCollectionWrapper<Kistl.App.GUI.ViewDescriptor, Kistl.App.Base.TypeRef, Kistl.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl, ICollection<Kistl.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl>> _SupportedViewModels;
 		
 		private bool SupportedViewModels_was_eagerLoaded = false;
 
@@ -468,35 +468,42 @@ namespace Kistl.App.GUI
             base.AttachToContext(ctx);
         }
 
-		public override void UpdateParent(string propertyName, int? id)
-		{
-			int? __oldValue, __newValue = id;
-			
-			switch(propertyName)
-			{
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
+        {
+            switch(propertyName)
+            {
                 case "ControlKind":
-                    __oldValue = _fk_ControlKind;
-                    NotifyPropertyChanging("ControlKind", __oldValue, __newValue);
-                    _fk_ControlKind = __newValue;
-                    NotifyPropertyChanged("ControlKind", __oldValue, __newValue);
+                    {
+                        var __oldValue = _fk_ControlKind;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("ControlKind", __oldValue, __newValue);
+                        _fk_ControlKind = __newValue;
+                        NotifyPropertyChanged("ControlKind", __oldValue, __newValue);
+                    }
                     break;
                 case "ControlRef":
-                    __oldValue = _fk_ControlRef;
-                    NotifyPropertyChanging("ControlRef", __oldValue, __newValue);
-                    _fk_ControlRef = __newValue;
-                    NotifyPropertyChanged("ControlRef", __oldValue, __newValue);
+                    {
+                        var __oldValue = _fk_ControlRef;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("ControlRef", __oldValue, __newValue);
+                        _fk_ControlRef = __newValue;
+                        NotifyPropertyChanged("ControlRef", __oldValue, __newValue);
+                    }
                     break;
                 case "Module":
-                    __oldValue = _fk_Module;
-                    NotifyPropertyChanging("Module", __oldValue, __newValue);
-                    _fk_Module = __newValue;
-                    NotifyPropertyChanged("Module", __oldValue, __newValue);
+                    {
+                        var __oldValue = _fk_Module;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("Module", __oldValue, __newValue);
+                        _fk_Module = __newValue;
+                        NotifyPropertyChanged("Module", __oldValue, __newValue);
+                    }
                     break;
-				default:
-					base.UpdateParent(propertyName, id);
-					break;
-			}
-		}
+                default:
+                    base.UpdateParent(propertyName, parentObj);
+                    break;
+            }
+        }
 
         public override void ReloadReferences()
         {

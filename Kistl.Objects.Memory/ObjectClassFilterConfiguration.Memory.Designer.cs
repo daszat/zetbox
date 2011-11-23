@@ -202,23 +202,24 @@ namespace Kistl.App.GUI
             base.AttachToContext(ctx);
         }
 
-		public override void UpdateParent(string propertyName, int? id)
-		{
-			int? __oldValue, __newValue = id;
-			
-			switch(propertyName)
-			{
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
+        {
+            switch(propertyName)
+            {
                 case "ObjectClass":
-                    __oldValue = _fk_ObjectClass;
-                    NotifyPropertyChanging("ObjectClass", __oldValue, __newValue);
-                    _fk_ObjectClass = __newValue;
-                    NotifyPropertyChanged("ObjectClass", __oldValue, __newValue);
+                    {
+                        var __oldValue = _fk_ObjectClass;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("ObjectClass", __oldValue, __newValue);
+                        _fk_ObjectClass = __newValue;
+                        NotifyPropertyChanged("ObjectClass", __oldValue, __newValue);
+                    }
                     break;
-				default:
-					base.UpdateParent(propertyName, id);
-					break;
-			}
-		}
+                default:
+                    base.UpdateParent(propertyName, parentObj);
+                    break;
+            }
+        }
 
         public override void ReloadReferences()
         {

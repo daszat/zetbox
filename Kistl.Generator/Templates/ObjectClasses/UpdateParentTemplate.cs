@@ -9,7 +9,7 @@ namespace Kistl.Generator.Templates.ObjectClasses
     using Kistl.API;
     using Kistl.App.Base;
     using Kistl.App.Extensions;
-    
+
     public partial class UpdateParentTemplate
     {
         public static void Call(IGenerationHost host, IKistlContext ctx,
@@ -35,20 +35,37 @@ namespace Kistl.Generator.Templates.ObjectClasses
                 ctx, props);
         }
 
+        protected virtual string GetPropertyBackingStore(ObjectReferenceProperty prop)
+        {
+            return "_fk_" + prop.Name;
+        }
+
+        protected virtual string GetParentObjExpression(ObjectReferenceProperty prop)
+        {
+            return "parentObj == null ? (int?)null : parentObj.ID";
+        }
+
         private void ApplyCase(ObjectReferenceProperty prop)
         {
             string name = prop.Name;
-            string fkBackingName = "_fk_" + name;
+            string propertyBackingStore = GetPropertyBackingStore(prop);
+            string parentObjExpression = GetParentObjExpression(prop);
 
             this.WriteObjects("                case \"", name, "\":");
             this.WriteLine();
-            this.WriteObjects("                    __oldValue = ", fkBackingName, ";");
+            this.WriteObjects("                    {");
             this.WriteLine();
-            this.WriteObjects("                    NotifyPropertyChanging(\"", name, "\", __oldValue, __newValue);");
+            this.WriteObjects("                        var __oldValue = ", propertyBackingStore, ";");
             this.WriteLine();
-            this.WriteObjects("                    ", fkBackingName, " = __newValue;");
+            this.WriteObjects("                        var __newValue = ", parentObjExpression, ";");
             this.WriteLine();
-            this.WriteObjects("                    NotifyPropertyChanged(\"", name, "\", __oldValue, __newValue);");
+            this.WriteObjects("                        NotifyPropertyChanging(\"", name, "\", __oldValue, __newValue);");
+            this.WriteLine();
+            this.WriteObjects("                        ", propertyBackingStore, " = __newValue;");
+            this.WriteLine();
+            this.WriteObjects("                        NotifyPropertyChanged(\"", name, "\", __oldValue, __newValue);");
+            this.WriteLine();
+            this.WriteObjects("                    }");
             this.WriteLine();
             this.WriteObjects("                    break;");
             this.WriteLine();

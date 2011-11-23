@@ -1121,14 +1121,14 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
             var nhCtx = (NHibernateContext)ctx;
         }
 
-        public override void UpdateParent(string propertyName, int? id)
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
         {
             switch(propertyName)
             {
                 case "ChangedBy":
                     {
                         var __oldValue = (Kistl.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ChangedBy);
-                        var __newValue = (Kistl.App.Base.IdentityNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.Base.Identity>(id.Value));
+                        var __newValue = (Kistl.App.Base.IdentityNHibernateImpl)parentObj;
                         NotifyPropertyChanging("ChangedBy", __oldValue, __newValue);
                         this.Proxy.ChangedBy = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
@@ -1137,7 +1137,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
                 case "CreatedBy":
                     {
                         var __oldValue = (Kistl.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.CreatedBy);
-                        var __newValue = (Kistl.App.Base.IdentityNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.Base.Identity>(id.Value));
+                        var __newValue = (Kistl.App.Base.IdentityNHibernateImpl)parentObj;
                         NotifyPropertyChanging("CreatedBy", __oldValue, __newValue);
                         this.Proxy.CreatedBy = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
@@ -1146,7 +1146,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
                 case "DefaultIcon":
                     {
                         var __oldValue = (Kistl.App.GUI.IconNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.DefaultIcon);
-                        var __newValue = (Kistl.App.GUI.IconNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.GUI.Icon>(id.Value));
+                        var __newValue = (Kistl.App.GUI.IconNHibernateImpl)parentObj;
                         NotifyPropertyChanging("DefaultIcon", __oldValue, __newValue);
                         this.Proxy.DefaultIcon = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("DefaultIcon", __oldValue, __newValue);
@@ -1155,7 +1155,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
                 case "Module":
                     {
                         var __oldValue = (Kistl.App.Base.ModuleNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Module);
-                        var __newValue = (Kistl.App.Base.ModuleNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.Base.Module>(id.Value));
+                        var __newValue = (Kistl.App.Base.ModuleNHibernateImpl)parentObj;
                         NotifyPropertyChanging("Module", __oldValue, __newValue);
                         this.Proxy.Module = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("Module", __oldValue, __newValue);
@@ -1164,14 +1164,14 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
                 case "RequestedKind":
                     {
                         var __oldValue = (Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.RequestedKind);
-                        var __newValue = (Kistl.App.GUI.ControlKindNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.GUI.ControlKind>(id.Value));
+                        var __newValue = (Kistl.App.GUI.ControlKindNHibernateImpl)parentObj;
                         NotifyPropertyChanging("RequestedKind", __oldValue, __newValue);
                         this.Proxy.RequestedKind = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("RequestedKind", __oldValue, __newValue);
                     }
                     break;
                 default:
-                    base.UpdateParent(propertyName, id);
+                    base.UpdateParent(propertyName, parentObj);
                     break;
             }
         }

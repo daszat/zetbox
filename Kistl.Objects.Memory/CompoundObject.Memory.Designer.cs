@@ -186,23 +186,24 @@ namespace Kistl.App.Base
             base.AttachToContext(ctx);
         }
 
-		public override void UpdateParent(string propertyName, int? id)
-		{
-			int? __oldValue, __newValue = id;
-			
-			switch(propertyName)
-			{
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
+        {
+            switch(propertyName)
+            {
                 case "DefaultPropertyViewModelDescriptor":
-                    __oldValue = _fk_DefaultPropertyViewModelDescriptor;
-                    NotifyPropertyChanging("DefaultPropertyViewModelDescriptor", __oldValue, __newValue);
-                    _fk_DefaultPropertyViewModelDescriptor = __newValue;
-                    NotifyPropertyChanged("DefaultPropertyViewModelDescriptor", __oldValue, __newValue);
+                    {
+                        var __oldValue = _fk_DefaultPropertyViewModelDescriptor;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("DefaultPropertyViewModelDescriptor", __oldValue, __newValue);
+                        _fk_DefaultPropertyViewModelDescriptor = __newValue;
+                        NotifyPropertyChanged("DefaultPropertyViewModelDescriptor", __oldValue, __newValue);
+                    }
                     break;
-				default:
-					base.UpdateParent(propertyName, id);
-					break;
-			}
-		}
+                default:
+                    base.UpdateParent(propertyName, parentObj);
+                    break;
+            }
+        }
 
         public override void ReloadReferences()
         {

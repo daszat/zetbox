@@ -343,21 +343,21 @@ namespace Kistl.App.Base
             var nhCtx = (NHibernateContext)ctx;
         }
 
-        public override void UpdateParent(string propertyName, int? id)
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
         {
             switch(propertyName)
             {
                 case "Constrained":
                     {
                         var __oldValue = (Kistl.App.Base.DataTypeNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Constrained);
-                        var __newValue = (Kistl.App.Base.DataTypeNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.Base.DataType>(id.Value));
+                        var __newValue = (Kistl.App.Base.DataTypeNHibernateImpl)parentObj;
                         NotifyPropertyChanging("Constrained", __oldValue, __newValue);
                         this.Proxy.Constrained = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("Constrained", __oldValue, __newValue);
                     }
                     break;
                 default:
-                    base.UpdateParent(propertyName, id);
+                    base.UpdateParent(propertyName, parentObj);
                     break;
             }
         }

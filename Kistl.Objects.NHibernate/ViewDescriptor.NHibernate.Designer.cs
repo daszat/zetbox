@@ -389,20 +389,20 @@ namespace Kistl.App.GUI
 				if (_SupportedViewModels == null)
 				{
 					_SupportedViewModels 
-						= new NHibernateBSideCollectionWrapper<Kistl.App.GUI.ViewDescriptor, Kistl.App.Base.TypeRef, ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl>(
+						= new NHibernateBSideCollectionWrapper<Kistl.App.GUI.ViewDescriptor, Kistl.App.Base.TypeRef, Kistl.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl>(
 							this, 
-							new ProjectedCollection<ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl.ViewDescriptor_supports_TypeRef_RelationEntryProxy, ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl>(
+							new ProjectedCollection<Kistl.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl.ViewDescriptor_supports_TypeRef_RelationEntryProxy, Kistl.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl>(
                                 this.Proxy.SupportedViewModels,
-                                p => (ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl.ViewDescriptor_supports_TypeRef_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
-                            entry => (IRelationListSync<ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl>)null);
+                                p => (Kistl.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
+                                ce => (Kistl.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl.ViewDescriptor_supports_TypeRef_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
+                            entry => (IRelationListSync<Kistl.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl>)null);
                     if (SupportedViewModels_was_eagerLoaded) { SupportedViewModels_was_eagerLoaded = false; }
 				}
 				return (ICollection<Kistl.App.Base.TypeRef>)_SupportedViewModels;
 			}
 		}
 
-		private NHibernateBSideCollectionWrapper<Kistl.App.GUI.ViewDescriptor, Kistl.App.Base.TypeRef, ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl> _SupportedViewModels;
+		private NHibernateBSideCollectionWrapper<Kistl.App.GUI.ViewDescriptor, Kistl.App.Base.TypeRef, Kistl.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl> _SupportedViewModels;
 		// ignored, but required for Serialization
         private bool SupportedViewModels_was_eagerLoaded = false;
 
@@ -481,14 +481,14 @@ namespace Kistl.App.GUI
             var nhCtx = (NHibernateContext)ctx;
         }
 
-        public override void UpdateParent(string propertyName, int? id)
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
         {
             switch(propertyName)
             {
                 case "ControlKind":
                     {
                         var __oldValue = (Kistl.App.GUI.ControlKindNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ControlKind);
-                        var __newValue = (Kistl.App.GUI.ControlKindNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.GUI.ControlKind>(id.Value));
+                        var __newValue = (Kistl.App.GUI.ControlKindNHibernateImpl)parentObj;
                         NotifyPropertyChanging("ControlKind", __oldValue, __newValue);
                         this.Proxy.ControlKind = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("ControlKind", __oldValue, __newValue);
@@ -497,7 +497,7 @@ namespace Kistl.App.GUI
                 case "ControlRef":
                     {
                         var __oldValue = (Kistl.App.Base.TypeRefNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ControlRef);
-                        var __newValue = (Kistl.App.Base.TypeRefNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.Base.TypeRef>(id.Value));
+                        var __newValue = (Kistl.App.Base.TypeRefNHibernateImpl)parentObj;
                         NotifyPropertyChanging("ControlRef", __oldValue, __newValue);
                         this.Proxy.ControlRef = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("ControlRef", __oldValue, __newValue);
@@ -506,14 +506,14 @@ namespace Kistl.App.GUI
                 case "Module":
                     {
                         var __oldValue = (Kistl.App.Base.ModuleNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Module);
-                        var __newValue = (Kistl.App.Base.ModuleNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.Base.Module>(id.Value));
+                        var __newValue = (Kistl.App.Base.ModuleNHibernateImpl)parentObj;
                         NotifyPropertyChanging("Module", __oldValue, __newValue);
                         this.Proxy.Module = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("Module", __oldValue, __newValue);
                     }
                     break;
                 default:
-                    base.UpdateParent(propertyName, id);
+                    base.UpdateParent(propertyName, parentObj);
                     break;
             }
         }

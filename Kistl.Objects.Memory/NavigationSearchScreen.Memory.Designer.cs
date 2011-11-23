@@ -1127,35 +1127,42 @@ namespace Kistl.App.GUI
             base.AttachToContext(ctx);
         }
 
-		public override void UpdateParent(string propertyName, int? id)
-		{
-			int? __oldValue, __newValue = id;
-			
-			switch(propertyName)
-			{
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
+        {
+            switch(propertyName)
+            {
                 case "RequestedEditorKind":
-                    __oldValue = _fk_RequestedEditorKind;
-                    NotifyPropertyChanging("RequestedEditorKind", __oldValue, __newValue);
-                    _fk_RequestedEditorKind = __newValue;
-                    NotifyPropertyChanged("RequestedEditorKind", __oldValue, __newValue);
+                    {
+                        var __oldValue = _fk_RequestedEditorKind;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("RequestedEditorKind", __oldValue, __newValue);
+                        _fk_RequestedEditorKind = __newValue;
+                        NotifyPropertyChanged("RequestedEditorKind", __oldValue, __newValue);
+                    }
                     break;
                 case "RequestedWorkspaceKind":
-                    __oldValue = _fk_RequestedWorkspaceKind;
-                    NotifyPropertyChanging("RequestedWorkspaceKind", __oldValue, __newValue);
-                    _fk_RequestedWorkspaceKind = __newValue;
-                    NotifyPropertyChanged("RequestedWorkspaceKind", __oldValue, __newValue);
+                    {
+                        var __oldValue = _fk_RequestedWorkspaceKind;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("RequestedWorkspaceKind", __oldValue, __newValue);
+                        _fk_RequestedWorkspaceKind = __newValue;
+                        NotifyPropertyChanged("RequestedWorkspaceKind", __oldValue, __newValue);
+                    }
                     break;
                 case "Type":
-                    __oldValue = _fk_Type;
-                    NotifyPropertyChanging("Type", __oldValue, __newValue);
-                    _fk_Type = __newValue;
-                    NotifyPropertyChanged("Type", __oldValue, __newValue);
+                    {
+                        var __oldValue = _fk_Type;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("Type", __oldValue, __newValue);
+                        _fk_Type = __newValue;
+                        NotifyPropertyChanged("Type", __oldValue, __newValue);
+                    }
                     break;
-				default:
-					base.UpdateParent(propertyName, id);
-					break;
-			}
-		}
+                default:
+                    base.UpdateParent(propertyName, parentObj);
+                    break;
+            }
+        }
 
         public override void ReloadReferences()
         {

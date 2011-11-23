@@ -606,17 +606,17 @@ namespace Kistl.App.Projekte
 			{
 				if (_Projekte == null)
 				{
-					Context.FetchRelation<Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl>(new Guid("c7b3cf10-cdc8-454c-826c-04a0f7e5ef3e"), RelationEndRole.B, this);
+					Context.FetchRelation<Kistl.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl>(new Guid("c7b3cf10-cdc8-454c-826c-04a0f7e5ef3e"), RelationEndRole.B, this);
 					_Projekte 
-						= new ObservableASideListWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl, ICollection<Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl>>(
+						= new ObservableASideListWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl, ICollection<Kistl.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl>>(
 							this, 
-							new RelationshipFilterBSideCollection<Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl>(this.Context, this));
+							new RelationshipFilterBSideCollection<Kistl.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl>(this.Context, this));
 				}
 				return (IList<Kistl.App.Projekte.Projekt>)_Projekte;
 			}
 		}
 
-		private ObservableASideListWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl, ICollection<Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl>> _Projekte;
+		private ObservableASideListWrapper<Kistl.App.Projekte.Projekt, Kistl.App.Projekte.Mitarbeiter, Kistl.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl, ICollection<Kistl.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl>> _Projekte;
 
         /// <summary>
         /// NNNN TTMMYY
@@ -771,35 +771,42 @@ namespace Kistl.App.Projekte
             base.AttachToContext(ctx);
         }
 
-		public override void UpdateParent(string propertyName, int? id)
-		{
-			int? __oldValue, __newValue = id;
-			
-			switch(propertyName)
-			{
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
+        {
+            switch(propertyName)
+            {
                 case "ChangedBy":
-                    __oldValue = _fk_ChangedBy;
-                    NotifyPropertyChanging("ChangedBy", __oldValue, __newValue);
-                    _fk_ChangedBy = __newValue;
-                    NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
+                    {
+                        var __oldValue = _fk_ChangedBy;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("ChangedBy", __oldValue, __newValue);
+                        _fk_ChangedBy = __newValue;
+                        NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
+                    }
                     break;
                 case "CreatedBy":
-                    __oldValue = _fk_CreatedBy;
-                    NotifyPropertyChanging("CreatedBy", __oldValue, __newValue);
-                    _fk_CreatedBy = __newValue;
-                    NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
+                    {
+                        var __oldValue = _fk_CreatedBy;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("CreatedBy", __oldValue, __newValue);
+                        _fk_CreatedBy = __newValue;
+                        NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
+                    }
                     break;
                 case "Identity":
-                    __oldValue = _fk_Identity;
-                    NotifyPropertyChanging("Identity", __oldValue, __newValue);
-                    _fk_Identity = __newValue;
-                    NotifyPropertyChanged("Identity", __oldValue, __newValue);
+                    {
+                        var __oldValue = _fk_Identity;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("Identity", __oldValue, __newValue);
+                        _fk_Identity = __newValue;
+                        NotifyPropertyChanged("Identity", __oldValue, __newValue);
+                    }
                     break;
-				default:
-					base.UpdateParent(propertyName, id);
-					break;
-			}
-		}
+                default:
+                    base.UpdateParent(propertyName, parentObj);
+                    break;
+            }
+        }
 
         public override void ReloadReferences()
         {

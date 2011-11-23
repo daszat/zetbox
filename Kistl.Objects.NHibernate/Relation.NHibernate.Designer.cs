@@ -1106,14 +1106,14 @@ namespace Kistl.App.Base
             var nhCtx = (NHibernateContext)ctx;
         }
 
-        public override void UpdateParent(string propertyName, int? id)
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
         {
             switch(propertyName)
             {
                 case "A":
                     {
                         var __oldValue = (Kistl.App.Base.RelationEndNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
-                        var __newValue = (Kistl.App.Base.RelationEndNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.Base.RelationEnd>(id.Value));
+                        var __newValue = (Kistl.App.Base.RelationEndNHibernateImpl)parentObj;
                         NotifyPropertyChanging("A", __oldValue, __newValue);
                         this.Proxy.A = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("A", __oldValue, __newValue);
@@ -1122,7 +1122,7 @@ namespace Kistl.App.Base
                 case "B":
                     {
                         var __oldValue = (Kistl.App.Base.RelationEndNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
-                        var __newValue = (Kistl.App.Base.RelationEndNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.Base.RelationEnd>(id.Value));
+                        var __newValue = (Kistl.App.Base.RelationEndNHibernateImpl)parentObj;
                         NotifyPropertyChanging("B", __oldValue, __newValue);
                         this.Proxy.B = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("B", __oldValue, __newValue);
@@ -1131,7 +1131,7 @@ namespace Kistl.App.Base
                 case "ChangedBy":
                     {
                         var __oldValue = (Kistl.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ChangedBy);
-                        var __newValue = (Kistl.App.Base.IdentityNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.Base.Identity>(id.Value));
+                        var __newValue = (Kistl.App.Base.IdentityNHibernateImpl)parentObj;
                         NotifyPropertyChanging("ChangedBy", __oldValue, __newValue);
                         this.Proxy.ChangedBy = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
@@ -1140,7 +1140,7 @@ namespace Kistl.App.Base
                 case "CreatedBy":
                     {
                         var __oldValue = (Kistl.App.Base.IdentityNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.CreatedBy);
-                        var __newValue = (Kistl.App.Base.IdentityNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.Base.Identity>(id.Value));
+                        var __newValue = (Kistl.App.Base.IdentityNHibernateImpl)parentObj;
                         NotifyPropertyChanging("CreatedBy", __oldValue, __newValue);
                         this.Proxy.CreatedBy = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
@@ -1149,14 +1149,14 @@ namespace Kistl.App.Base
                 case "Module":
                     {
                         var __oldValue = (Kistl.App.Base.ModuleNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Module);
-                        var __newValue = (Kistl.App.Base.ModuleNHibernateImpl)(id == null ? null : OurContext.Find<Kistl.App.Base.Module>(id.Value));
+                        var __newValue = (Kistl.App.Base.ModuleNHibernateImpl)parentObj;
                         NotifyPropertyChanging("Module", __oldValue, __newValue);
                         this.Proxy.Module = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("Module", __oldValue, __newValue);
                     }
                     break;
                 default:
-                    base.UpdateParent(propertyName, id);
+                    base.UpdateParent(propertyName, parentObj);
                     break;
             }
         }

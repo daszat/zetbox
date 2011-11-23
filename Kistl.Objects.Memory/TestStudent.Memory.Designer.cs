@@ -96,17 +96,17 @@ namespace Kistl.App.Test
 			{
 				if (_Testbogen == null)
 				{
-					Context.FetchRelation<TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>(new Guid("6819ca86-571c-4d59-bc30-cc1fb0decc9e"), RelationEndRole.A, this);
+					Context.FetchRelation<Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>(new Guid("6819ca86-571c-4d59-bc30-cc1fb0decc9e"), RelationEndRole.A, this);
 					_Testbogen 
-						= new ObservableBSideCollectionWrapper<Kistl.App.Test.TestStudent, Kistl.App.Test.Fragebogen, TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl, ICollection<TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>>(
+						= new ObservableBSideCollectionWrapper<Kistl.App.Test.TestStudent, Kistl.App.Test.Fragebogen, Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl, ICollection<Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>>(
 							this, 
-							new RelationshipFilterASideCollection<TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>(this.Context, this));
+							new RelationshipFilterASideCollection<Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>(this.Context, this));
 				}
 				return (ICollection<Kistl.App.Test.Fragebogen>)_Testbogen;
 			}
 		}
 
-		private ObservableBSideCollectionWrapper<Kistl.App.Test.TestStudent, Kistl.App.Test.Fragebogen, TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl, ICollection<TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>> _Testbogen;
+		private ObservableBSideCollectionWrapper<Kistl.App.Test.TestStudent, Kistl.App.Test.Fragebogen, Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl, ICollection<Kistl.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>> _Testbogen;
 
         public override Type GetImplementedInterface()
         {

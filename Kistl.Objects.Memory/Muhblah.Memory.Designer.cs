@@ -135,17 +135,17 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
 			{
 				if (_TestCustomObjects_ManyList_Nav == null)
 				{
-					Context.FetchRelation<Muhblah_has_TestCustomObject_RelationEntryMemoryImpl>(new Guid("d1e0da3e-ce64-4587-b62d-70c0f4371d97"), RelationEndRole.A, this);
+					Context.FetchRelation<Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl>(new Guid("d1e0da3e-ce64-4587-b62d-70c0f4371d97"), RelationEndRole.A, this);
 					_TestCustomObjects_ManyList_Nav 
-						= new ObservableBSideCollectionWrapper<Kistl.App.Test.Muhblah, Kistl.App.Test.TestCustomObject, Muhblah_has_TestCustomObject_RelationEntryMemoryImpl, ICollection<Muhblah_has_TestCustomObject_RelationEntryMemoryImpl>>(
+						= new ObservableBSideCollectionWrapper<Kistl.App.Test.Muhblah, Kistl.App.Test.TestCustomObject, Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl, ICollection<Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl>>(
 							this, 
-							new RelationshipFilterASideCollection<Muhblah_has_TestCustomObject_RelationEntryMemoryImpl>(this.Context, this));
+							new RelationshipFilterASideCollection<Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl>(this.Context, this));
 				}
 				return (ICollection<Kistl.App.Test.TestCustomObject>)_TestCustomObjects_ManyList_Nav;
 			}
 		}
 
-		private ObservableBSideCollectionWrapper<Kistl.App.Test.Muhblah, Kistl.App.Test.TestCustomObject, Muhblah_has_TestCustomObject_RelationEntryMemoryImpl, ICollection<Muhblah_has_TestCustomObject_RelationEntryMemoryImpl>> _TestCustomObjects_ManyList_Nav;
+		private ObservableBSideCollectionWrapper<Kistl.App.Test.Muhblah, Kistl.App.Test.TestCustomObject, Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl, ICollection<Kistl.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl>> _TestCustomObjects_ManyList_Nav;
 
         /// <summary>
         /// 
@@ -535,29 +535,33 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
             base.AttachToContext(ctx);
         }
 
-		public override void UpdateParent(string propertyName, int? id)
-		{
-			int? __oldValue, __newValue = id;
-			
-			switch(propertyName)
-			{
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
+        {
+            switch(propertyName)
+            {
                 case "TestCustomObjects_Nav":
-                    __oldValue = _fk_TestCustomObjects_Nav;
-                    NotifyPropertyChanging("TestCustomObjects_Nav", __oldValue, __newValue);
-                    _fk_TestCustomObjects_Nav = __newValue;
-                    NotifyPropertyChanged("TestCustomObjects_Nav", __oldValue, __newValue);
+                    {
+                        var __oldValue = _fk_TestCustomObjects_Nav;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("TestCustomObjects_Nav", __oldValue, __newValue);
+                        _fk_TestCustomObjects_Nav = __newValue;
+                        NotifyPropertyChanged("TestCustomObjects_Nav", __oldValue, __newValue);
+                    }
                     break;
                 case "TestCustomObjects_One_Nav":
-                    __oldValue = _fk_TestCustomObjects_One_Nav;
-                    NotifyPropertyChanging("TestCustomObjects_One_Nav", __oldValue, __newValue);
-                    _fk_TestCustomObjects_One_Nav = __newValue;
-                    NotifyPropertyChanged("TestCustomObjects_One_Nav", __oldValue, __newValue);
+                    {
+                        var __oldValue = _fk_TestCustomObjects_One_Nav;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("TestCustomObjects_One_Nav", __oldValue, __newValue);
+                        _fk_TestCustomObjects_One_Nav = __newValue;
+                        NotifyPropertyChanged("TestCustomObjects_One_Nav", __oldValue, __newValue);
+                    }
                     break;
-				default:
-					base.UpdateParent(propertyName, id);
-					break;
-			}
-		}
+                default:
+                    base.UpdateParent(propertyName, parentObj);
+                    break;
+            }
+        }
 
         public override void ReloadReferences()
         {

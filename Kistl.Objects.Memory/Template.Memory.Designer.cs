@@ -236,17 +236,17 @@ namespace Kistl.App.GUI
 			{
 				if (_Menu == null)
 				{
-					Context.FetchRelation<Template_hasMenu_Visual_RelationEntryMemoryImpl>(new Guid("81ff3089-57da-478c-8be5-fd23abc222a2"), RelationEndRole.A, this);
+					Context.FetchRelation<Kistl.App.GUI.Template_hasMenu_Visual_RelationEntryMemoryImpl>(new Guid("81ff3089-57da-478c-8be5-fd23abc222a2"), RelationEndRole.A, this);
 					_Menu 
-						= new ObservableBSideCollectionWrapper<Kistl.App.GUI.Template, Kistl.App.GUI.Visual, Template_hasMenu_Visual_RelationEntryMemoryImpl, ICollection<Template_hasMenu_Visual_RelationEntryMemoryImpl>>(
+						= new ObservableBSideCollectionWrapper<Kistl.App.GUI.Template, Kistl.App.GUI.Visual, Kistl.App.GUI.Template_hasMenu_Visual_RelationEntryMemoryImpl, ICollection<Kistl.App.GUI.Template_hasMenu_Visual_RelationEntryMemoryImpl>>(
 							this, 
-							new RelationshipFilterASideCollection<Template_hasMenu_Visual_RelationEntryMemoryImpl>(this.Context, this));
+							new RelationshipFilterASideCollection<Kistl.App.GUI.Template_hasMenu_Visual_RelationEntryMemoryImpl>(this.Context, this));
 				}
 				return (ICollection<Kistl.App.GUI.Visual>)_Menu;
 			}
 		}
 
-		private ObservableBSideCollectionWrapper<Kistl.App.GUI.Template, Kistl.App.GUI.Visual, Template_hasMenu_Visual_RelationEntryMemoryImpl, ICollection<Template_hasMenu_Visual_RelationEntryMemoryImpl>> _Menu;
+		private ObservableBSideCollectionWrapper<Kistl.App.GUI.Template, Kistl.App.GUI.Visual, Kistl.App.GUI.Template_hasMenu_Visual_RelationEntryMemoryImpl, ICollection<Kistl.App.GUI.Template_hasMenu_Visual_RelationEntryMemoryImpl>> _Menu;
 
         /// <summary>
         /// The visual representation of this Template
@@ -381,29 +381,33 @@ namespace Kistl.App.GUI
             base.AttachToContext(ctx);
         }
 
-		public override void UpdateParent(string propertyName, int? id)
-		{
-			int? __oldValue, __newValue = id;
-			
-			switch(propertyName)
-			{
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
+        {
+            switch(propertyName)
+            {
                 case "DisplayedTypeAssembly":
-                    __oldValue = _fk_DisplayedTypeAssembly;
-                    NotifyPropertyChanging("DisplayedTypeAssembly", __oldValue, __newValue);
-                    _fk_DisplayedTypeAssembly = __newValue;
-                    NotifyPropertyChanged("DisplayedTypeAssembly", __oldValue, __newValue);
+                    {
+                        var __oldValue = _fk_DisplayedTypeAssembly;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("DisplayedTypeAssembly", __oldValue, __newValue);
+                        _fk_DisplayedTypeAssembly = __newValue;
+                        NotifyPropertyChanged("DisplayedTypeAssembly", __oldValue, __newValue);
+                    }
                     break;
                 case "VisualTree":
-                    __oldValue = _fk_VisualTree;
-                    NotifyPropertyChanging("VisualTree", __oldValue, __newValue);
-                    _fk_VisualTree = __newValue;
-                    NotifyPropertyChanged("VisualTree", __oldValue, __newValue);
+                    {
+                        var __oldValue = _fk_VisualTree;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("VisualTree", __oldValue, __newValue);
+                        _fk_VisualTree = __newValue;
+                        NotifyPropertyChanged("VisualTree", __oldValue, __newValue);
+                    }
                     break;
-				default:
-					base.UpdateParent(propertyName, id);
-					break;
-			}
-		}
+                default:
+                    base.UpdateParent(propertyName, parentObj);
+                    break;
+            }
+        }
 
         public override void ReloadReferences()
         {

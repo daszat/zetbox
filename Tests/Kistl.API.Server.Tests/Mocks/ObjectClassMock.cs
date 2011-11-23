@@ -180,7 +180,7 @@ namespace Kistl.API.Server.Mocks
             get { throw new NotImplementedException(); }
         }
 
-        public void UpdateParent(string propertyName, int? id)
+        public void UpdateParent(string propertyName, IDataObject parentObj)
         {
             throw new NotImplementedException();
         }

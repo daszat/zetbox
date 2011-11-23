@@ -700,17 +700,17 @@ namespace Kistl.App.GUI
 			{
 				if (_SecondaryControlKinds == null)
 				{
-					Context.FetchRelation<ViewModelDescriptor_displayedBy_ControlKind_RelationEntryMemoryImpl>(new Guid("5404456a-4527-4e40-a660-b4a5e96e4a47"), RelationEndRole.A, this);
+					Context.FetchRelation<Kistl.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryMemoryImpl>(new Guid("5404456a-4527-4e40-a660-b4a5e96e4a47"), RelationEndRole.A, this);
 					_SecondaryControlKinds 
-						= new ObservableBSideCollectionWrapper<Kistl.App.GUI.ViewModelDescriptor, Kistl.App.GUI.ControlKind, ViewModelDescriptor_displayedBy_ControlKind_RelationEntryMemoryImpl, ICollection<ViewModelDescriptor_displayedBy_ControlKind_RelationEntryMemoryImpl>>(
+						= new ObservableBSideCollectionWrapper<Kistl.App.GUI.ViewModelDescriptor, Kistl.App.GUI.ControlKind, Kistl.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryMemoryImpl, ICollection<Kistl.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryMemoryImpl>>(
 							this, 
-							new RelationshipFilterASideCollection<ViewModelDescriptor_displayedBy_ControlKind_RelationEntryMemoryImpl>(this.Context, this));
+							new RelationshipFilterASideCollection<Kistl.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryMemoryImpl>(this.Context, this));
 				}
 				return (ICollection<Kistl.App.GUI.ControlKind>)_SecondaryControlKinds;
 			}
 		}
 
-		private ObservableBSideCollectionWrapper<Kistl.App.GUI.ViewModelDescriptor, Kistl.App.GUI.ControlKind, ViewModelDescriptor_displayedBy_ControlKind_RelationEntryMemoryImpl, ICollection<ViewModelDescriptor_displayedBy_ControlKind_RelationEntryMemoryImpl>> _SecondaryControlKinds;
+		private ObservableBSideCollectionWrapper<Kistl.App.GUI.ViewModelDescriptor, Kistl.App.GUI.ControlKind, Kistl.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryMemoryImpl, ICollection<Kistl.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryMemoryImpl>> _SecondaryControlKinds;
 
         /// <summary>
         /// The described CLR class&amp;apos; reference
@@ -830,59 +830,78 @@ namespace Kistl.App.GUI
             base.AttachToContext(ctx);
         }
 
-		public override void UpdateParent(string propertyName, int? id)
-		{
-			int? __oldValue, __newValue = id;
-			
-			switch(propertyName)
-			{
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
+        {
+            switch(propertyName)
+            {
                 case "DefaultDisplayKind":
-                    __oldValue = _fk_DefaultDisplayKind;
-                    NotifyPropertyChanging("DefaultDisplayKind", __oldValue, __newValue);
-                    _fk_DefaultDisplayKind = __newValue;
-                    NotifyPropertyChanged("DefaultDisplayKind", __oldValue, __newValue);
+                    {
+                        var __oldValue = _fk_DefaultDisplayKind;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("DefaultDisplayKind", __oldValue, __newValue);
+                        _fk_DefaultDisplayKind = __newValue;
+                        NotifyPropertyChanged("DefaultDisplayKind", __oldValue, __newValue);
+                    }
                     break;
                 case "DefaultEditorKind":
-                    __oldValue = _fk_DefaultEditorKind;
-                    NotifyPropertyChanging("DefaultEditorKind", __oldValue, __newValue);
-                    _fk_DefaultEditorKind = __newValue;
-                    NotifyPropertyChanged("DefaultEditorKind", __oldValue, __newValue);
+                    {
+                        var __oldValue = _fk_DefaultEditorKind;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("DefaultEditorKind", __oldValue, __newValue);
+                        _fk_DefaultEditorKind = __newValue;
+                        NotifyPropertyChanged("DefaultEditorKind", __oldValue, __newValue);
+                    }
                     break;
                 case "DefaultGridCellDisplayKind":
-                    __oldValue = _fk_DefaultGridCellDisplayKind;
-                    NotifyPropertyChanging("DefaultGridCellDisplayKind", __oldValue, __newValue);
-                    _fk_DefaultGridCellDisplayKind = __newValue;
-                    NotifyPropertyChanged("DefaultGridCellDisplayKind", __oldValue, __newValue);
+                    {
+                        var __oldValue = _fk_DefaultGridCellDisplayKind;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("DefaultGridCellDisplayKind", __oldValue, __newValue);
+                        _fk_DefaultGridCellDisplayKind = __newValue;
+                        NotifyPropertyChanged("DefaultGridCellDisplayKind", __oldValue, __newValue);
+                    }
                     break;
                 case "DefaultGridCellEditorKind":
-                    __oldValue = _fk_DefaultGridCellEditorKind;
-                    NotifyPropertyChanging("DefaultGridCellEditorKind", __oldValue, __newValue);
-                    _fk_DefaultGridCellEditorKind = __newValue;
-                    NotifyPropertyChanged("DefaultGridCellEditorKind", __oldValue, __newValue);
+                    {
+                        var __oldValue = _fk_DefaultGridCellEditorKind;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("DefaultGridCellEditorKind", __oldValue, __newValue);
+                        _fk_DefaultGridCellEditorKind = __newValue;
+                        NotifyPropertyChanged("DefaultGridCellEditorKind", __oldValue, __newValue);
+                    }
                     break;
                 case "DefaultGridCellPreEditorKind":
-                    __oldValue = _fk_DefaultGridCellPreEditorKind;
-                    NotifyPropertyChanging("DefaultGridCellPreEditorKind", __oldValue, __newValue);
-                    _fk_DefaultGridCellPreEditorKind = __newValue;
-                    NotifyPropertyChanged("DefaultGridCellPreEditorKind", __oldValue, __newValue);
+                    {
+                        var __oldValue = _fk_DefaultGridCellPreEditorKind;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("DefaultGridCellPreEditorKind", __oldValue, __newValue);
+                        _fk_DefaultGridCellPreEditorKind = __newValue;
+                        NotifyPropertyChanged("DefaultGridCellPreEditorKind", __oldValue, __newValue);
+                    }
                     break;
                 case "Module":
-                    __oldValue = _fk_Module;
-                    NotifyPropertyChanging("Module", __oldValue, __newValue);
-                    _fk_Module = __newValue;
-                    NotifyPropertyChanged("Module", __oldValue, __newValue);
+                    {
+                        var __oldValue = _fk_Module;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("Module", __oldValue, __newValue);
+                        _fk_Module = __newValue;
+                        NotifyPropertyChanged("Module", __oldValue, __newValue);
+                    }
                     break;
                 case "ViewModelRef":
-                    __oldValue = _fk_ViewModelRef;
-                    NotifyPropertyChanging("ViewModelRef", __oldValue, __newValue);
-                    _fk_ViewModelRef = __newValue;
-                    NotifyPropertyChanged("ViewModelRef", __oldValue, __newValue);
+                    {
+                        var __oldValue = _fk_ViewModelRef;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("ViewModelRef", __oldValue, __newValue);
+                        _fk_ViewModelRef = __newValue;
+                        NotifyPropertyChanged("ViewModelRef", __oldValue, __newValue);
+                    }
                     break;
-				default:
-					base.UpdateParent(propertyName, id);
-					break;
-			}
-		}
+                default:
+                    base.UpdateParent(propertyName, parentObj);
+                    break;
+            }
+        }
 
         public override void ReloadReferences()
         {

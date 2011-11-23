@@ -677,24 +677,6 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
                 PhoneNumbersOtherImpl.ForEach<IPersistenceObject>(i => ctx.Attach(i));
         }
 
-		public override void UpdateParent(string propertyName, int? id)
-		{
-			int? __oldValue, __newValue = id;
-			
-			switch(propertyName)
-			{
-                case "MubBlah_Nav":
-                    __oldValue = _fk_MubBlah_Nav;
-                    NotifyPropertyChanging("MubBlah_Nav", __oldValue, __newValue);
-                    _fk_MubBlah_Nav = __newValue;
-                    NotifyPropertyChanged("MubBlah_Nav", __oldValue, __newValue);
-                    break;
-				default:
-					base.UpdateParent(propertyName, id);
-					break;
-			}
-		}
-
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
