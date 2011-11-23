@@ -146,10 +146,15 @@ namespace Kistl.Generator.Templates.ObjectClasses
         protected override void ApplyClassTailTemplate()
         {
             base.ApplyClassTailTemplate();
-            UpdateParentTemplate.Call(Host, ctx, this.DataType);
+            ApplyUpdateParentTemplate();
             ReloadReferences.Call(Host, ctx, this.DataType);
             CustomTypeDescriptor.Call(Host, ctx, this.ObjectClass, this.GetTypeName());
             DefaultMethods.Call(Host, ctx, this.DataType);
+        }
+
+        protected virtual void ApplyUpdateParentTemplate()
+        {
+            UpdateParentTemplate.Call(Host, ctx, this.DataType);
         }
 
         protected override IEnumerable<App.Base.Method> MethodsToGenerate()

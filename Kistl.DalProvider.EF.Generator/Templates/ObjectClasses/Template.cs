@@ -139,6 +139,12 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.ObjectClasses
                 rel, endRole);
         }
 
+        protected override void ApplyUpdateParentTemplate()
+        {
+            // Do not implement/override UpdateParent, since EF keeps the tabs for us.
+            //base.ApplyUpdateParentTemplate();
+        }
+
         protected override void ApplyClassTailTemplate()
         {
             base.ApplyClassTailTemplate();
