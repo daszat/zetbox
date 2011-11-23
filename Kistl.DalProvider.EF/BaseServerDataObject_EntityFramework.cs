@@ -327,7 +327,22 @@ namespace Kistl.DalProvider.Ef
             base.NotifyPropertyChanged(property, oldValue, newValue);
             if (_changeTracker != null && !String.IsNullOrEmpty(efProperty))
             {
-                _changeTracker.EntityMemberChanged(efProperty);
+                try
+                {
+                    _changeTracker.EntityMemberChanged(efProperty);
+                }
+                catch (ArgumentException)
+                {
+                    // TODO: Sorry, but this public method is sometimes called
+                    // for calculated properties. EF doesn't know about them
+                    // so it throws this ArgumentException
+                }
+                catch (InvalidOperationException)
+                {
+                    // TODO: Sorry, but this public method is sometimes called
+                    // for calculated properties. EF doesn't know about them
+                    // so it throws this InvalidOperationException
+                }
             }
         }
 
@@ -345,7 +360,22 @@ namespace Kistl.DalProvider.Ef
             base.NotifyPropertyChanging(property, oldValue, newValue);
             if (_changeTracker != null && !String.IsNullOrEmpty(efProperty))
             {
-                _changeTracker.EntityMemberChanging(efProperty);
+                try
+                {
+                    _changeTracker.EntityMemberChanging(efProperty);
+                }
+                catch (ArgumentException)
+                {
+                    // TODO: Sorry, but this public method is sometimes called
+                    // for calculated properties. EF doesn't know about them
+                    // so it throws this ArgumentException
+                }
+                catch (InvalidOperationException)
+                {
+                    // TODO: Sorry, but this public method is sometimes called
+                    // for calculated properties. EF doesn't know about them
+                    // so it throws this InvalidOperationException
+                }
             }
         }
 
