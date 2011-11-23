@@ -18,5 +18,10 @@ namespace Kistl.DalProvider.Memory
             : base(lazyCtx)
         {
         }
+
+        public virtual void UpdateParent(string propertyName, IDataObject parentObj)
+        {
+            throw new MemberAccessException(String.Format("No {0} property in {1}", propertyName, GetImplementedInterface().FullName));
+        }
     }
 }

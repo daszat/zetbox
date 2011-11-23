@@ -7005,6 +7005,25 @@ namespace Kistl.App.Projekte
 
         }
 
+
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
+        {
+            switch(propertyName)
+            {
+                case "Parent":
+                    {
+                        var __oldValue = (Kistl.App.Projekte.KundeNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Parent);
+                        var __newValue = (Kistl.App.Projekte.KundeNHibernateImpl)parentObj;
+                        NotifyPropertyChanging("Parent", __oldValue, __newValue);
+                        this.Proxy.Parent = __newValue == null ? null : __newValue.Proxy;
+                        NotifyPropertyChanged("Parent", __oldValue, __newValue);
+                    }
+                    break;
+                default:
+                    base.UpdateParent(propertyName, parentObj);
+                    break;
+            }
+        }
         public override void SaveOrUpdateTo(NHibernate.ISession session)
         {
             // ValueCollectionEntries and CompoundCollectionEntries are saved by cascade
@@ -7319,6 +7338,25 @@ namespace Kistl.App.Test
 
         }
 
+
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
+        {
+            switch(propertyName)
+            {
+                case "Parent":
+                    {
+                        var __oldValue = (Kistl.App.Test.TestCustomObjectNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Parent);
+                        var __newValue = (Kistl.App.Test.TestCustomObjectNHibernateImpl)parentObj;
+                        NotifyPropertyChanging("Parent", __oldValue, __newValue);
+                        this.Proxy.Parent = __newValue == null ? null : __newValue.Proxy;
+                        NotifyPropertyChanged("Parent", __oldValue, __newValue);
+                    }
+                    break;
+                default:
+                    base.UpdateParent(propertyName, parentObj);
+                    break;
+            }
+        }
         public override void SaveOrUpdateTo(NHibernate.ISession session)
         {
             // ValueCollectionEntries and CompoundCollectionEntries are saved by cascade

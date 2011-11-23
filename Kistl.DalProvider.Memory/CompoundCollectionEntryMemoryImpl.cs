@@ -50,5 +50,10 @@ namespace Kistl.DalProvider.Memory
         //        Value = (TBImpl)value;
         //    }
         //}
+
+        public virtual void UpdateParent(string propertyName, IDataObject parentObj)
+        {
+            throw new MemberAccessException(String.Format("No {0} property in {1}", propertyName, GetImplementedInterface().FullName));
+        }
     }
 }

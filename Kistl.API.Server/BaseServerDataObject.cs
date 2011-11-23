@@ -292,7 +292,13 @@ namespace Kistl.API.Server
         {
             return String.Empty;
         }
+
+        public virtual void UpdateParent(string propertyName, IDataObject parentObj)
+        {
+            throw new MemberAccessException(String.Format("No {0} property in {1}", propertyName, GetImplementedInterface().FullName));
+        }
     }
+
 
     /// <summary>
     /// local proxy

@@ -157,5 +157,18 @@ namespace Kistl.Generator.Templates.CollectionEntries
                 this.WriteLine("            me.Value = other.Value;");
             }
         }
+
+        protected override void ApplyClassTailTemplate()
+        {
+            base.ApplyClassTailTemplate();
+
+            ApplyUpdateParentTemplate();
+        }
+
+        protected virtual void ApplyUpdateParentTemplate()
+        {
+            var interfaceType = prop.ObjectClass.Module.Namespace + "." + prop.ObjectClass.Name;
+            ObjectClasses.UpdateParentTemplate.Call(Host, new[] { new ObjectClasses.UpdateParentTemplateParams() { PropertyName = "Parent", IfType = interfaceType } }.ToList());
+        }
     }
 }

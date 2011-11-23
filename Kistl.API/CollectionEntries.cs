@@ -70,6 +70,13 @@ namespace Kistl.API
 
         /// <summary>Gets or sets the contained value.</summary>
         object ValueObject { get; set; }
+
+        /// <summary>
+        /// Update parent reference when the collection has changed
+        /// </summary>
+        /// <param name="propertyName"></param>
+        /// <param name="parentObj"></param>
+        void UpdateParent(string propertyName, IDataObject parentObj);
     }
 
     /// <summary>

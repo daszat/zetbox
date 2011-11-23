@@ -354,6 +354,11 @@ namespace Kistl.DalProvider.Ef
         {
             return _relationships.GetPrivatePropertyValue<ObjectContext>("Context");
         }
+
+        public override void UpdateParent(string propertyName, IDataObject parentObj)
+        {
+            // EF keeps tabs for us, so we do nothing.
+        }
     }
 
     /// <summary>
