@@ -215,14 +215,7 @@
       <DependentUpon>RightsClass.cst</DependentUpon>
     </Compile>
     <Compile Include="Templates\ObjectClasses\Template.cs" />
-    <Compile Include="Templates\ObjectClasses\UpdateParentTemplate.cs">
-      <DependentUpon>UpdateParentTemplate.cst</DependentUpon>
-    </Compile>
-    <Compile Include="Templates\ObjectClasses\UpdateParentTemplate.Designer.cs">
-      <DependentUpon>UpdateParentTemplate.cst</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
+    <Compile Include="Templates\ObjectClasses\UpdateParentTemplate.cs" />
     <Compile Include="Templates\ProjectFile.cs" />
     <Compile Include="Templates\Properties\CollectionEntryListProperty.cs">
       <DependentUpon>CollectionEntryListProperty.cst</DependentUpon>
@@ -385,10 +378,6 @@
     <None Include="Templates\ObjectClasses\ReloadReferences.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ReloadReferences.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Templates\ObjectClasses\UpdateParentTemplate.cst">
-      <Generator>Arebis Template Processor</Generator>
-      <LastGenOutput>UpdateParentTemplate.Designer.cs</LastGenOutput>
     </None>
     <None Include="Templates\Properties\CollectionEntryListProperty.cst">
       <Generator>Arebis Template Processor</Generator>

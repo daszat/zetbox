@@ -11,50 +11,31 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
     using Kistl.App.Extensions;
     using Templates = Kistl.Generator.Templates;
 
-    public partial class UpdateParentTemplate
+    public class UpdateParentTemplate : Templates.ObjectClasses.UpdateParentTemplate
     {
-        public static void Call(IGenerationHost host, IKistlContext ctx,
-            DataType dataType)
+        public UpdateParentTemplate(Arebis.CodeGeneration.IGenerationHost _host, List<Templates.ObjectClasses.UpdateParentTemplateParams> props)
+            : base(_host, props)
         {
-            if (host == null) { throw new ArgumentNullException("host"); }
-            if (dataType == null) { throw new ArgumentNullException("dataType"); }
-
-            var props = dataType
-                .Properties
-                .OfType<ObjectReferenceProperty>()
-                .OrderBy(p => p.Name)
-                .Where(p =>
-                {
-                    Relation rel = RelationExtensions.Lookup(ctx, p);
-                    //RelationEnd relEnd = rel.GetEnd(p);
-
-                    return (rel.Storage == StorageType.MergeIntoA && rel.A.Navigator == p)
-                        || (rel.Storage == StorageType.MergeIntoB && rel.B.Navigator == p);
-                }).ToList();
-
-            host.CallTemplate("ObjectClasses.UpdateParentTemplate",
-                ctx, props);
         }
 
-        private void ApplyCase(ObjectReferenceProperty prop)
+        // NHibernate has different structure, accesses Proxy directly
+        protected override void ApplyCase(Templates.ObjectClasses.UpdateParentTemplateParams prop)
         {
-            string name = prop.Name;
-            var ifType = String.Format("{0}.{1}", prop.GetReferencedObjectClass().Module.Namespace, prop.GetReferencedObjectClass().Name);
-            var implType = ifType + ImplementationSuffix;
+            string implType = prop.IfType+ ImplementationSuffix;
 
-            this.WriteObjects("                case \"", name, "\":");
+            this.WriteObjects("                case \"", prop.PropertyName, "\":");
             this.WriteLine();
             this.WriteObjects("                    {");
             this.WriteLine();
-            this.WriteObjects("                        var __oldValue = (", implType, ")OurContext.AttachAndWrap(this.Proxy.", name, ");");
+            this.WriteObjects("                        var __oldValue = (", implType, ")OurContext.AttachAndWrap(this.Proxy.", prop.PropertyName, ");");
             this.WriteLine();
             this.WriteObjects("                        var __newValue = (", implType, ")parentObj;");
             this.WriteLine();
-            this.WriteObjects("                        NotifyPropertyChanging(\"", name, "\", __oldValue, __newValue);");
+            this.WriteObjects("                        NotifyPropertyChanging(\"", prop.PropertyName, "\", __oldValue, __newValue);");
             this.WriteLine();
-            this.WriteObjects("                        this.Proxy.", name, " = __newValue == null ? null : __newValue.Proxy;");
+            this.WriteObjects("                        this.Proxy.", prop.PropertyName, " = __newValue == null ? null : __newValue.Proxy;");
             this.WriteLine();
-            this.WriteObjects("                        NotifyPropertyChanged(\"", name, "\", __oldValue, __newValue);");
+            this.WriteObjects("                        NotifyPropertyChanged(\"", prop.PropertyName, "\", __oldValue, __newValue);");
             this.WriteLine();
             this.WriteObjects("                    }");
             this.WriteLine();

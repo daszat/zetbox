@@ -10,6 +10,12 @@ namespace Kistl.Generator.Templates.ObjectClasses
     using Kistl.App.Base;
     using Kistl.App.Extensions;
 
+    public class UpdateParentTemplateParams
+    {
+        public string IfType { get; set; }
+        public string PropertyName { get; set; }
+    }
+
     public partial class UpdateParentTemplate
     {
         public static void Call(IGenerationHost host, IKistlContext ctx,
@@ -29,29 +35,34 @@ namespace Kistl.Generator.Templates.ObjectClasses
 
                     return (rel.Storage == StorageType.MergeIntoA && rel.A.Navigator == p)
                         || (rel.Storage == StorageType.MergeIntoB && rel.B.Navigator == p);
-                }).ToList();
+                })
+                .Select(p => new UpdateParentTemplateParams()
+                {
+                    PropertyName = p.Name,
+                    IfType = string.Format("{0}.{1}", p.GetReferencedObjectClass().Module.Namespace, p.GetReferencedObjectClass().Name)
+                })
+                .ToList();
 
             host.CallTemplate("ObjectClasses.UpdateParentTemplate",
-                ctx, props);
+                props);
         }
 
-        protected virtual string GetPropertyBackingStore(ObjectReferenceProperty prop)
+        protected virtual string GetPropertyBackingStore(string propName)
         {
-            return "_fk_" + prop.Name;
+            return "_fk_" + propName;
         }
 
-        protected virtual string GetParentObjExpression(ObjectReferenceProperty prop)
+        protected virtual string GetParentObjExpression(string ifType)
         {
             return "parentObj == null ? (int?)null : parentObj.ID";
         }
 
-        private void ApplyCase(ObjectReferenceProperty prop)
+        protected virtual void ApplyCase(UpdateParentTemplateParams prop)
         {
-            string name = prop.Name;
-            string propertyBackingStore = GetPropertyBackingStore(prop);
-            string parentObjExpression = GetParentObjExpression(prop);
+            string propertyBackingStore = GetPropertyBackingStore(prop.PropertyName);
+            string parentObjExpression = GetParentObjExpression(prop.IfType);
 
-            this.WriteObjects("                case \"", name, "\":");
+            this.WriteObjects("                case \"", prop.PropertyName, "\":");
             this.WriteLine();
             this.WriteObjects("                    {");
             this.WriteLine();
@@ -59,11 +70,11 @@ namespace Kistl.Generator.Templates.ObjectClasses
             this.WriteLine();
             this.WriteObjects("                        var __newValue = ", parentObjExpression, ";");
             this.WriteLine();
-            this.WriteObjects("                        NotifyPropertyChanging(\"", name, "\", __oldValue, __newValue);");
+            this.WriteObjects("                        NotifyPropertyChanging(\"", prop.PropertyName, "\", __oldValue, __newValue);");
             this.WriteLine();
             this.WriteObjects("                        ", propertyBackingStore, " = __newValue;");
             this.WriteLine();
-            this.WriteObjects("                        NotifyPropertyChanged(\"", name, "\", __oldValue, __newValue);");
+            this.WriteObjects("                        NotifyPropertyChanged(\"", prop.PropertyName, "\", __oldValue, __newValue);");
             this.WriteLine();
             this.WriteObjects("                    }");
             this.WriteLine();
