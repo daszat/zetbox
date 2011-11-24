@@ -280,6 +280,7 @@ namespace Kistl.DalProvider.NHibernate
         private void FlushSession(List<NHibernatePersistenceObject> notifySaveList)
         {
             var ticks = _perfCounter.IncrementSubmitChanges();
+            BeginTransaction();
             try
             {
                 foreach (var obj in RelationTopoSort(notifySaveList.Where(obj => obj.ObjectState == DataObjectState.Deleted)))
@@ -305,6 +306,7 @@ namespace Kistl.DalProvider.NHibernate
                     _attachedObjects.Add(obj);
                     _attachedObjectsByProxy.Add(obj);
                 }
+                CommitTransaction();
                 Logging.Log.InfoFormat("[{0}] changes submitted.", notifySaveList.Count);
             }
             catch (StaleObjectStateException ex)
@@ -319,6 +321,8 @@ namespace Kistl.DalProvider.NHibernate
             }
             finally
             {
+                if(IsTransactionRunning) 
+                    RollbackTransaction();
                 _perfCounter.DecrementSubmitChanges(notifySaveList.Count, ticks);
             }
         }
