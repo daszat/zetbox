@@ -372,7 +372,7 @@ namespace Kistl.API.Mocks
 
         public void RollbackTransaction()
         {
-            throw new NotImplementedException();
+            // Allways allowed
         }
 
         #endregion

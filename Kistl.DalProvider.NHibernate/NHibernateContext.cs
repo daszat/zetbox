@@ -280,7 +280,9 @@ namespace Kistl.DalProvider.NHibernate
         private void FlushSession(List<NHibernatePersistenceObject> notifySaveList)
         {
             var ticks = _perfCounter.IncrementSubmitChanges();
-            BeginTransaction();
+            bool isItMyTransaction = !IsTransactionRunning;
+            if (isItMyTransaction)
+                BeginTransaction();
             try
             {
                 foreach (var obj in RelationTopoSort(notifySaveList.Where(obj => obj.ObjectState == DataObjectState.Deleted)))
@@ -306,23 +308,27 @@ namespace Kistl.DalProvider.NHibernate
                     _attachedObjects.Add(obj);
                     _attachedObjectsByProxy.Add(obj);
                 }
-                CommitTransaction();
+
+                if (isItMyTransaction)
+                    CommitTransaction();
                 Logging.Log.InfoFormat("[{0}] changes submitted.", notifySaveList.Count);
             }
             catch (StaleObjectStateException ex)
             {
+                if (isItMyTransaction)
+                    RollbackTransaction();
                 var error = string.Format("Failed saving transaction: Concurrent modification on {0}#{1}", ex.EntityName, ex.Identifier);
                 throw new ConcurrencyException(error, ex);
             }
             catch (Exception ex)
             {
+                if (isItMyTransaction)
+                    RollbackTransaction();
                 Logging.Log.Error("Failed saving transaction", ex);
                 throw;
             }
             finally
             {
-                if(IsTransactionRunning) 
-                    RollbackTransaction();
                 _perfCounter.DecrementSubmitChanges(notifySaveList.Count, ticks);
             }
         }
@@ -623,9 +629,11 @@ namespace Kistl.DalProvider.NHibernate
 
         public override void RollbackTransaction()
         {
-            if (_transaction == null) throw new InvalidOperationException("No transaction running");
-            _transaction.Rollback();
-            _transaction = null;
+            if (_transaction == null)
+            {
+                _transaction.Rollback();
+                _transaction = null;
+            }
         }
 
         public IPersistenceObject AttachAndWrap(IProxyObject proxy)

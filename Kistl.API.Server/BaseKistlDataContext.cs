@@ -776,11 +776,9 @@ namespace Kistl.API.Server
             var s = GetSequence(sequenceGuid);
             if (s.IsContinuous) throw new InvalidOperationException("Sequence is a continuous sequence. use GetContinuousSequenceNumber instead.");
 
-            bool transactionRunning = IsTransactionRunning;
-            if (!transactionRunning)
-            {
+            bool isItMyTransaction = !IsTransactionRunning;
+            if (isItMyTransaction)
                 BeginTransaction();
-            }
 
             try
             {
@@ -788,10 +786,8 @@ namespace Kistl.API.Server
             }
             finally
             {
-                if (!transactionRunning)
-                {
+                if (isItMyTransaction)
                     CommitTransaction();
-                }
             }
         }
 

@@ -163,7 +163,7 @@ namespace Kistl.API.Server.Mocks
 
         public override void RollbackTransaction()
         {
-            throw new NotImplementedException();
+            // Allways allowed
         }
 
         protected override int ExecGetSequenceNumber(Guid sequenceGuid)

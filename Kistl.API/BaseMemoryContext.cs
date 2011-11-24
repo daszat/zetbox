@@ -620,7 +620,7 @@ namespace Kistl.API
 
         public void RollbackTransaction()
         {
-            throw new NotImplementedException();
+            // Allways alowed
         }
 
         #endregion

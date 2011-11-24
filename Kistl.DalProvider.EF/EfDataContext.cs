@@ -814,9 +814,11 @@ namespace Kistl.DalProvider.Ef
 
         public override void RollbackTransaction()
         {
-            if (_transaction == null) throw new InvalidOperationException("No transaction running");
-            _transaction.Rollback();
-            _transaction = null;
+            if (_transaction != null)
+            {
+                _transaction.Rollback();
+                _transaction = null;
+            }
         }
     }
 }

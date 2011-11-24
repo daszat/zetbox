@@ -1083,7 +1083,7 @@ namespace Kistl.DalProvider.Client
 
         public void RollbackTransaction()
         {
-            throw new NotSupportedException();
+            // Allways allowed
         }
 
         public List<IDataObject> GetAll(InterfaceType t)
