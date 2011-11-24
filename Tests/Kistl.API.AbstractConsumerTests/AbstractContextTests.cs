@@ -187,8 +187,7 @@ namespace Kistl.API.AbstractConsumerTests
         }
 
         [Test]
-        [ExpectedException(typeof(InvalidOperationException))]
-        public void rollback_should_fail_on_non_existing_transaction()
+        public void rollback_should_not_fail_on_non_existing_transaction()
         {
             using (var ctx = GetContext())
             {
