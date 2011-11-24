@@ -397,11 +397,12 @@ namespace Kistl.Client.Presentables.DtoViewModels
             };
 
             // need to extract value from XmlDictionaries
-            if (dto.GetType().HasGenericDefinition(typeof(XmlDictionary<,>)))
+            var dtoData = dto as IXmlDictionaryDtoData;
+            if (dtoData != null)
             {
-                foreach (var element in ((IEnumerable)dto).OfType<object>().OrderBy(o => o.GetPropertyValue<object>("Key")))
+                foreach (var kvp in dtoData.DtoData.OrderBy(e => e.Key))
                 {
-                    var item = BuildFrom(root, parentProp, element.GetPropertyValue<object>("Value"), dependencies, dataCtx, result);
+                    var item = BuildFrom(root, parentProp, kvp.Value, dependencies, dataCtx, result);
                     if (item != null) result.Items.Add(item);
                 }
             }

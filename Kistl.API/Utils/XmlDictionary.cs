@@ -26,8 +26,15 @@ namespace Kistl.API.Utils
         public TValue Value { get; set; }
     }
 
+    // non-generic interface to avoid implementing IEnumerable on XmlDictonary, which would break XmlSerializer
+    public interface IXmlDictionaryDtoData
+    {
+        IEnumerable<KeyValuePair<object, object>> DtoData { get; }
+    }
+
     [Serializable]
-    public class XmlDictionary<TKey, TValue> : IEnumerable<XmlKeyValuePair<TKey, TValue>>
+    // non-generic interface to avoid implementing IEnumerable on XmlDictonary, which would break XmlSerializer
+    public class XmlDictionary<TKey, TValue> : IXmlDictionaryDtoData
     {
         /// <summary>
         /// This value factory is used to create new value objects when a unknown key is set.
@@ -131,14 +138,9 @@ namespace Kistl.API.Utils
             _dict.Clear();
         }
 
-        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        IEnumerable<KeyValuePair<object, object>> IXmlDictionaryDtoData.DtoData
         {
-            return ((System.Collections.IEnumerable)_dict.Select(kvp => new XmlKeyValuePair<TKey, TValue>(kvp))).GetEnumerator();
-        }
-
-        IEnumerator<XmlKeyValuePair<TKey, TValue>> IEnumerable<XmlKeyValuePair<TKey, TValue>>.GetEnumerator()
-        {
-            return _dict.Select(kvp => new XmlKeyValuePair<TKey, TValue>(kvp)).GetEnumerator();
+            get { return Data.Select(xkvp => new KeyValuePair<object, object>(xkvp.Key, xkvp.Value)); }
         }
     }
 }
