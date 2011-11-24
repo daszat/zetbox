@@ -629,7 +629,7 @@ namespace Kistl.DalProvider.NHibernate
 
         public override void RollbackTransaction()
         {
-            if (_transaction == null)
+            if (_transaction != null)
             {
                 _transaction.Rollback();
                 _transaction = null;
