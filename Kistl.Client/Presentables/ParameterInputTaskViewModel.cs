@@ -81,7 +81,7 @@ namespace Kistl.Client.Presentables
                 if (_parameterModelsByName == null)
                 {
                     FetchParameterModels();
-                    _parameterModelsByName = _parameterModelList.ToLookup(k => k.Name);
+                    _parameterModelsByName = ValueViewModels.ToLookup(k => k.Name);
                 }
                 return _parameterModelsByName;
             }
