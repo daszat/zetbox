@@ -113,9 +113,10 @@ namespace Kistl.Tests.Utilities.PostgreSql
         {
             var binPath = Path.Combine(GetPgSqlBinPath(), util);
 
-#if !MONO
-            binPath += ".exe";
-#endif
+            if (!File.Exists(binPath) && File.Exists(binPath + ".exe"))
+            {
+                binPath += ".exe";
+            }
 
             var pi = new ProcessStartInfo(binPath, args);
             pi.UseShellExecute = false;
