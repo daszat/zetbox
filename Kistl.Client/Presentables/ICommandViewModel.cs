@@ -286,8 +286,8 @@ namespace Kistl.Client.Presentables
         /// <param name="label">Label</param>
         /// <param name="tooltip">Tooltip</param>
         /// <param name="execute">The action to execure</param>
-        /// <param name="canExecute">A function to determinante if the action can be executet. If null, true is assumed.</param>
-        /// <param name="getReason">A function to receive a reason why the action cannot be executet. Can be null. If a function is provided, the tooltip will be overridden in case of can execute == false. Thus a simple string can always be returned.</param>
+        /// <param name="canExecute">A function to determinante if the action can be executed. If null, true is assumed.</param>
+        /// <param name="getReason">A function to receive a reason why the action cannot be executed. Can be null. If a function is provided, the tooltip will be overridden in case of can execute == false. Thus a simple string can always be returned.</param>
         /// <returns></returns>
         public new delegate SimpleCommandViewModel Factory(IKistlContext dataCtx, ViewModel parent, string label, string tooltip, Action execute, Func<bool> canExecute, Func<string> getReason);
 
