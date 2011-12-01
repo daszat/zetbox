@@ -225,6 +225,7 @@ namespace Kistl.App.Packaging
                     if (exportGuid != Guid.Empty)
                     {
                         string ifTypeName = string.Format("{0}.{1}", ns, tn);
+                        ifTypeName = MigrateTypeNameMapping(ifTypeName);
                         Type t = ctx.GetInterfaceType(ifTypeName).Type;
                         if (t != null)
                         {
@@ -264,6 +265,7 @@ namespace Kistl.App.Packaging
             if (exportGuid != Guid.Empty)
             {
                 string ifTypeName = string.Format("{0}.{1}", s.Reader.NamespaceURI, s.Reader.LocalName);
+                ifTypeName = MigrateTypeNameMapping(ifTypeName);
                 InterfaceType ifType = ctx.GetInterfaceType(ifTypeName);
                 if (ifType.Type == null)
                 {
@@ -298,6 +300,24 @@ namespace Kistl.App.Packaging
             else
             {
                 return null;
+            }
+        }
+
+        /// <summary>
+        /// Map from pre-migration class names to current ones.
+        /// </summary>
+        /// <remarks>
+        /// This mapping keeps the saved schema XML in the destination database valid. Without this we couldn't deploy/migrate from the old schema to the new one.
+        /// </remarks>
+        /// <param name="ifTypeName"></param>
+        /// <returns></returns>
+        private static string MigrateTypeNameMapping(string ifTypeName)
+        {
+            switch(ifTypeName) {
+                case "Kistl.App.Base.ObjectClass_implements_Interface_RelationEntry":
+                    return "Kistl.App.Base.DataType_implements_Interface_RelationEntry";
+                default:
+                    return ifTypeName;
             }
         }
 
