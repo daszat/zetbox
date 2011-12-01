@@ -102,6 +102,15 @@
       <End Role="InputProperties" EntitySet="Property" />
       <End Role="CollectionEntry" EntitySet="CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry" />
     </AssociationSet>
+    <EntitySet Name="DataType_implements_Interface_RelationEntry" EntityType="Model.DataType_implements_Interface_RelationEntry" />
+    <AssociationSet Name="FK_DataType_implements_ImplementedInterfaces_A" Association="Model.FK_DataType_implements_ImplementedInterfaces_A" >
+      <End Role="DataType" EntitySet="DataType" />
+      <End Role="CollectionEntry" EntitySet="DataType_implements_Interface_RelationEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DataType_implements_ImplementedInterfaces_B" Association="Model.FK_DataType_implements_ImplementedInterfaces_B" >
+      <End Role="ImplementedInterfaces" EntitySet="DataType" />
+      <End Role="CollectionEntry" EntitySet="DataType_implements_Interface_RelationEntry" />
+    </AssociationSet>
     <EntitySet Name="Document_has_Blob_RelationEntry" EntityType="Model.Document_has_Blob_RelationEntry" />
     <AssociationSet Name="FK_Document_has_Revisions_A" Association="Model.FK_Document_has_Revisions_A" >
       <End Role="Document" EntitySet="File" />
@@ -137,15 +146,6 @@
     <AssociationSet Name="FK_NavigationScreen_accessed_by_Groups_B" Association="Model.FK_NavigationScreen_accessed_by_Groups_B" >
       <End Role="Groups" EntitySet="Group" />
       <End Role="CollectionEntry" EntitySet="NavigationEntry_accessed_by_Group_RelationEntry" />
-    </AssociationSet>
-    <EntitySet Name="ObjectClass_implements_Interface_RelationEntry" EntityType="Model.ObjectClass_implements_Interface_RelationEntry" />
-    <AssociationSet Name="FK_ObjectClass_implements_ImplementsInterfaces_A" Association="Model.FK_ObjectClass_implements_ImplementsInterfaces_A" >
-      <End Role="ObjectClass" EntitySet="DataType" />
-      <End Role="CollectionEntry" EntitySet="ObjectClass_implements_Interface_RelationEntry" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ObjectClass_implements_ImplementsInterfaces_B" Association="Model.FK_ObjectClass_implements_ImplementsInterfaces_B" >
-      <End Role="ImplementsInterfaces" EntitySet="DataType" />
-      <End Role="CollectionEntry" EntitySet="ObjectClass_implements_Interface_RelationEntry" />
     </AssociationSet>
     <EntitySet Name="ViewModelDescriptor_displayedBy_ControlKind_RelationEntry" EntityType="Model.ViewModelDescriptor_displayedBy_ControlKind_RelationEntry" />
     <AssociationSet Name="FK_Presentable_displayedBy_SecondaryControlKinds_A" Association="Model.FK_Presentable_displayedBy_SecondaryControlKinds_A" >
@@ -1367,6 +1367,10 @@
                         ToRole="DefaultIcon" />
     <Property Name="Description" Type="String" Nullable="true" MaxLength="200"  />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
+    <NavigationProperty Name="ImplementsInterfacesImpl"
+                        Relationship="Model.FK_DataType_implements_ImplementedInterfaces_A"
+                        FromRole="DataType"
+                        ToRole="CollectionEntry" />
     <NavigationProperty Name="MethodsImpl"
                         Relationship="Model.FK_ObjectClass_has_Methods"
                         FromRole="ObjectClass"
@@ -2748,10 +2752,6 @@
                         Relationship="Model.FK_ObjectClass_Has_FilterConfigurations"
                         FromRole="ObjectClass"
                         ToRole="FilterConfigurations" />
-    <NavigationProperty Name="ImplementsInterfacesImpl"
-                        Relationship="Model.FK_ObjectClass_implements_ImplementsInterfaces_A"
-                        FromRole="ObjectClass"
-                        ToRole="CollectionEntry" />
     <Property Name="IsAbstract" Type="Boolean" Nullable="false"  />
     <Property Name="IsFrozenObject" Type="Boolean" Nullable="false"  />
     <Property Name="IsSimpleObject" Type="Boolean" Nullable="false"  />
@@ -2926,6 +2926,49 @@
   </Association>
   
   <!--
+    Relation: FK_DataType_implements_ImplementedInterfaces
+    A: ZeroOrMore DataType as DataType
+    B: ZeroOrMore Interface as ImplementedInterfaces
+    Preferred Storage: Separate
+  -->
+  <EntityType Name="DataType_implements_Interface_RelationEntry" >
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+	<Property Name="ExportGuid" Type="Guid" Nullable="false" />
+	
+    
+    <!-- A -->
+    <NavigationProperty Name="AImpl"
+                        Relationship="Model.FK_DataType_implements_ImplementedInterfaces_A"
+                        FromRole="CollectionEntry"
+                        ToRole="DataType" />
+
+    <!-- B -->
+    <NavigationProperty Name="BImpl"
+                        Relationship="Model.FK_DataType_implements_ImplementedInterfaces_B"
+                        FromRole="CollectionEntry"
+                        ToRole="ImplementedInterfaces" />
+  </EntityType>
+  <Association Name="FK_DataType_implements_ImplementedInterfaces_A" >
+    <End Role="DataType"
+         Type="Model.DataType" 
+         Multiplicity="0..1" />
+    <End Role="CollectionEntry"
+         Type="Model.DataType_implements_Interface_RelationEntry"
+         Multiplicity="*" />
+  </Association>
+  <Association Name="FK_DataType_implements_ImplementedInterfaces_B" >
+    <End Role="ImplementedInterfaces"
+         Type="Model.Interface" 
+         Multiplicity="0..1" />
+    <End Role="CollectionEntry"
+         Type="Model.DataType_implements_Interface_RelationEntry"
+         Multiplicity="*" />
+  </Association>
+  
+  <!--
     Relation: FK_Document_has_Revisions
     A: ZeroOrMore Document as Document
     B: ZeroOrMore Blob as Revisions
@@ -3094,49 +3137,6 @@
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
          Type="Model.NavigationEntry_accessed_by_Group_RelationEntry"
-         Multiplicity="*" />
-  </Association>
-  
-  <!--
-    Relation: FK_ObjectClass_implements_ImplementsInterfaces
-    A: ZeroOrMore ObjectClass as ObjectClass
-    B: ZeroOrMore Interface as ImplementsInterfaces
-    Preferred Storage: Separate
-  -->
-  <EntityType Name="ObjectClass_implements_Interface_RelationEntry" >
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-	<Property Name="ExportGuid" Type="Guid" Nullable="false" />
-	
-    
-    <!-- A -->
-    <NavigationProperty Name="AImpl"
-                        Relationship="Model.FK_ObjectClass_implements_ImplementsInterfaces_A"
-                        FromRole="CollectionEntry"
-                        ToRole="ObjectClass" />
-
-    <!-- B -->
-    <NavigationProperty Name="BImpl"
-                        Relationship="Model.FK_ObjectClass_implements_ImplementsInterfaces_B"
-                        FromRole="CollectionEntry"
-                        ToRole="ImplementsInterfaces" />
-  </EntityType>
-  <Association Name="FK_ObjectClass_implements_ImplementsInterfaces_A" >
-    <End Role="ObjectClass"
-         Type="Model.ObjectClass" 
-         Multiplicity="0..1" />
-    <End Role="CollectionEntry"
-         Type="Model.ObjectClass_implements_Interface_RelationEntry"
-         Multiplicity="*" />
-  </Association>
-  <Association Name="FK_ObjectClass_implements_ImplementsInterfaces_B" >
-    <End Role="ImplementsInterfaces"
-         Type="Model.Interface" 
-         Multiplicity="0..1" />
-    <End Role="CollectionEntry"
-         Type="Model.ObjectClass_implements_Interface_RelationEntry"
          Multiplicity="*" />
   </Association>
   

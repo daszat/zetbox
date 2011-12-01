@@ -403,6 +403,392 @@ namespace Kistl.App.Base
     // END Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
 }
 
+namespace Kistl.App.Base
+{
+    // BEGIN Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
+    [EdmEntityType(NamespaceName="Model", Name="DataType_implements_Interface_RelationEntry")]
+    [System.Diagnostics.DebuggerDisplay("DataType_implements_Interface_RelationEntryEfImpl")]
+    public class DataType_implements_Interface_RelationEntryEfImpl : Kistl.DalProvider.Ef.RelationEntryEfImpl<Kistl.App.Base.DataType, Kistl.App.Base.DataTypeEfImpl, Kistl.App.Base.Interface, Kistl.App.Base.InterfaceEfImpl>, DataType_implements_Interface_RelationEntry, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable
+    {
+        [Obsolete]
+        public DataType_implements_Interface_RelationEntryEfImpl()
+            : base(null)
+        {
+        }
+
+        public DataType_implements_Interface_RelationEntryEfImpl(Func<IFrozenContext> lazyCtx)
+            : base(lazyCtx)
+        {
+        }
+        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty
+        [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
+        public override int ID
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ID;
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_ID != value)
+                {
+                    var __oldValue = _ID;
+                    var __newValue = value;
+                    NotifyPropertyChanging("ID", __oldValue, __newValue);
+                    _ID = __newValue;
+                    NotifyPropertyChanged("ID", __oldValue, __newValue);
+                }
+            }
+        }
+        private int _ID;
+        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty
+        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public Guid ExportGuid
+        {
+            get
+            {
+                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ExportGuid;
+                if (_ExportGuid == Guid.Empty) {
+                    __result = _ExportGuid = Guid.NewGuid();
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_ExportGuid != value)
+                {
+                    var __oldValue = _ExportGuid;
+                    var __newValue = value;
+                    NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
+                    _ExportGuid = __newValue;
+                    NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                }
+            }
+        }
+        private Guid _ExportGuid;
+        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
+        #region RelationEntry.ApplyClassHeadTemplate
+
+        private static readonly Guid _relationID = new Guid("692c1064-37a2-4be3-a81e-4cb91f673aa3");
+        public override Guid RelationID { get { return _relationID; } }
+
+        IDataObject IRelationEntry.AObject
+        {
+            get
+            {
+                return A;
+            }
+            set
+            {
+                // settor will do checking for us
+                A = (Kistl.App.Base.DataType)value;
+            }
+        }
+
+        IDataObject IRelationEntry.BObject
+        {
+            get
+            {
+                return B;
+            }
+            set
+            {
+                // settor will do checking for us
+                B = (Kistl.App.Base.Interface)value;
+            }
+        }
+
+        #endregion // RelationEntry.ApplyClassHeadTemplate
+
+
+        /// <summary>
+        /// the A-side value of this CollectionEntry
+        /// </summary>
+        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
+        // referencedInterface=Kistl.App.Base.DataType; moduleNamespace=Kistl.App.Base;
+        // inverse Navigator=none; is reference;
+        // PositionStorage=none;
+        // Target exportable
+
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Base.DataType A
+        {
+            get { return AImpl; }
+            set { AImpl = (Kistl.App.Base.DataTypeEfImpl)value; }
+        }
+
+        private int? _fk_A;
+
+        private Guid? _fk_guid_A = null;
+
+        // internal implementation, EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_DataType_implements_ImplementedInterfaces_A", "DataType")]
+        public Kistl.App.Base.DataTypeEfImpl AImpl
+        {
+            get
+            {
+                if (!CurrentAccessRights.HasReadRights()) return null;
+                Kistl.App.Base.DataTypeEfImpl __value;
+                EntityReference<Kistl.App.Base.DataTypeEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.DataTypeEfImpl>(
+                        "Model.FK_DataType_implements_ImplementedInterfaces_A",
+                        "DataType");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load();
+                }
+                if (r.Value != null) r.Value.AttachToContext(this.Context);
+                __value = r.Value;
+                return __value;
+            }
+            set
+            {
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+
+                EntityReference<Kistl.App.Base.DataTypeEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.DataTypeEfImpl>(
+                        "Model.FK_DataType_implements_ImplementedInterfaces_A",
+                        "DataType");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load();
+                }
+                Kistl.App.Base.DataTypeEfImpl __oldValue = (Kistl.App.Base.DataTypeEfImpl)r.Value;
+                Kistl.App.Base.DataTypeEfImpl __newValue = (Kistl.App.Base.DataTypeEfImpl)value;
+
+                // Changing Event fires before anything is touched
+                // navigators may not be notified to entity framework
+                NotifyPropertyChanging("A", null, __oldValue, __newValue);
+
+                r.Value = (Kistl.App.Base.DataTypeEfImpl)__newValue;
+
+                // everything is done. fire the Changed event
+                // navigators may not be notified to entity framework
+                NotifyPropertyChanged("A", null, __oldValue, __newValue);
+            }
+        }
+
+        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+
+        /// <summary>
+        /// the B-side value of this CollectionEntry
+        /// </summary>
+        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
+        // referencedInterface=Kistl.App.Base.Interface; moduleNamespace=Kistl.App.Base;
+        // inverse Navigator=none; is reference;
+        // PositionStorage=none;
+        // Target exportable
+
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Base.Interface B
+        {
+            get { return BImpl; }
+            set { BImpl = (Kistl.App.Base.InterfaceEfImpl)value; }
+        }
+
+        private int? _fk_B;
+
+        private Guid? _fk_guid_B = null;
+
+        // internal implementation, EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_DataType_implements_ImplementedInterfaces_B", "ImplementedInterfaces")]
+        public Kistl.App.Base.InterfaceEfImpl BImpl
+        {
+            get
+            {
+                if (!CurrentAccessRights.HasReadRights()) return null;
+                Kistl.App.Base.InterfaceEfImpl __value;
+                EntityReference<Kistl.App.Base.InterfaceEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.InterfaceEfImpl>(
+                        "Model.FK_DataType_implements_ImplementedInterfaces_B",
+                        "ImplementedInterfaces");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load();
+                }
+                if (r.Value != null) r.Value.AttachToContext(this.Context);
+                __value = r.Value;
+                return __value;
+            }
+            set
+            {
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+
+                EntityReference<Kistl.App.Base.InterfaceEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.InterfaceEfImpl>(
+                        "Model.FK_DataType_implements_ImplementedInterfaces_B",
+                        "ImplementedInterfaces");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load();
+                }
+                Kistl.App.Base.InterfaceEfImpl __oldValue = (Kistl.App.Base.InterfaceEfImpl)r.Value;
+                Kistl.App.Base.InterfaceEfImpl __newValue = (Kistl.App.Base.InterfaceEfImpl)value;
+
+                // Changing Event fires before anything is touched
+                // navigators may not be notified to entity framework
+                NotifyPropertyChanging("B", null, __oldValue, __newValue);
+
+                r.Value = (Kistl.App.Base.InterfaceEfImpl)__newValue;
+
+                // everything is done. fire the Changed event
+                // navigators may not be notified to entity framework
+                NotifyPropertyChanged("B", null, __oldValue, __newValue);
+            }
+        }
+
+        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+
+        #region Serializer
+
+
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        {
+            base.ToStream(binStream, auxObjects, eagerLoadLists);
+            if (!CurrentAccessRights.HasReadRights()) return;
+            BinarySerializer.ToStream(this._ExportGuid, binStream);
+            {
+                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.DataTypeEfImpl>("Model.FK_DataType_implements_ImplementedInterfaces_A", "DataType").EntityKey;
+                BinarySerializer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, binStream);
+            }
+            {
+                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.InterfaceEfImpl>("Model.FK_DataType_implements_ImplementedInterfaces_B", "ImplementedInterfaces").EntityKey;
+                BinarySerializer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, binStream);
+            }
+        }
+
+        public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
+        {
+            var baseResult = base.FromStream(binStream);
+            var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
+            BinarySerializer.FromStream(out this._ExportGuid, binStream);
+            BinarySerializer.FromStream(out this._fk_A, binStream);
+            BinarySerializer.FromStream(out this._fk_B, binStream);
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
+                ? result.Count == 0
+                    ? null
+                    : result
+                : baseResult.Concat(result);
+        }
+
+        public override void ToStream(System.Xml.XmlWriter xml)
+        {
+            base.ToStream(xml);
+            if (!CurrentAccessRights.HasReadRights()) return;
+            XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "");
+            {
+                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.DataTypeEfImpl>("Model.FK_DataType_implements_ImplementedInterfaces_A", "DataType").EntityKey;
+                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "A", "Kistl.App.Base");
+            }
+            {
+                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.InterfaceEfImpl>("Model.FK_DataType_implements_ImplementedInterfaces_B", "ImplementedInterfaces").EntityKey;
+                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "B", "Kistl.App.Base");
+            }
+        }
+
+        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
+        {
+            var baseResult = base.FromStream(xml);
+            var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
+            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Base");
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
+                ? result.Count == 0
+                    ? null
+                    : result
+                : baseResult.Concat(result);
+        }
+
+        public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+            xml.WriteAttributeString("ExportGuid", _ExportGuid.ToString());
+            if (!CurrentAccessRights.HasReadRights()) return;
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.Base");
+        }
+
+        public virtual void MergeImport(System.Xml.XmlReader xml)
+        {
+            if (!CurrentAccessRights.HasReadRights()) return;
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
+            XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.Base");
+        }
+
+        #endregion
+
+        public override Type GetImplementedInterface()
+        {
+            return typeof(DataType_implements_Interface_RelationEntry);
+        }
+
+        public override void ApplyChangesFrom(IPersistenceObject obj)
+        {
+            base.ApplyChangesFrom(obj);
+            var other = (DataType_implements_Interface_RelationEntryEfImpl)obj;
+            var me = (DataType_implements_Interface_RelationEntryEfImpl)this;
+
+            me._fk_A = other._fk_A;
+            me._fk_B = other._fk_B;
+        }
+
+
+        public override void ReloadReferences()
+        {
+            // Do not reload references if the current object has been deleted.
+            // TODO: enable when MemoryContext uses MemoryDataObjects
+            //if (this.ObjectState == DataObjectState.Deleted) return;
+
+            if (_fk_guid_A.HasValue)
+                AImpl = (Kistl.App.Base.DataTypeEfImpl)Context.FindPersistenceObject<Kistl.App.Base.DataType>(_fk_guid_A.Value);
+            else
+            if (_fk_A.HasValue)
+                AImpl = (Kistl.App.Base.DataTypeEfImpl)Context.Find<Kistl.App.Base.DataType>(_fk_A.Value);
+            else
+                AImpl = null;
+
+            if (_fk_guid_B.HasValue)
+                BImpl = (Kistl.App.Base.InterfaceEfImpl)Context.FindPersistenceObject<Kistl.App.Base.Interface>(_fk_guid_B.Value);
+            else
+            if (_fk_B.HasValue)
+                BImpl = (Kistl.App.Base.InterfaceEfImpl)Context.Find<Kistl.App.Base.Interface>(_fk_B.Value);
+            else
+                BImpl = null;
+
+        }
+
+    }
+    // END Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
+}
+
 namespace at.dasz.DocumentManagement
 {
 	using Kistl.App.Base;
@@ -2617,392 +3003,6 @@ namespace Kistl.App.GUI
             else
             if (_fk_B.HasValue)
                 BImpl = (Kistl.App.Base.GroupEfImpl)Context.Find<Kistl.App.Base.Group>(_fk_B.Value);
-            else
-                BImpl = null;
-
-        }
-
-    }
-    // END Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
-}
-
-namespace Kistl.App.Base
-{
-    // BEGIN Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
-    [EdmEntityType(NamespaceName="Model", Name="ObjectClass_implements_Interface_RelationEntry")]
-    [System.Diagnostics.DebuggerDisplay("ObjectClass_implements_Interface_RelationEntryEfImpl")]
-    public class ObjectClass_implements_Interface_RelationEntryEfImpl : Kistl.DalProvider.Ef.RelationEntryEfImpl<Kistl.App.Base.ObjectClass, Kistl.App.Base.ObjectClassEfImpl, Kistl.App.Base.Interface, Kistl.App.Base.InterfaceEfImpl>, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable, ObjectClass_implements_Interface_RelationEntry
-    {
-        [Obsolete]
-        public ObjectClass_implements_Interface_RelationEntryEfImpl()
-            : base(null)
-        {
-        }
-
-        public ObjectClass_implements_Interface_RelationEntryEfImpl(Func<IFrozenContext> lazyCtx)
-            : base(lazyCtx)
-        {
-        }
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty
-        [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
-        public override int ID
-        {
-            get
-            {
-                // create local variable to create single point of return
-                // for the benefit of down-stream templates
-                var __result = _ID;
-                return __result;
-            }
-            set
-            {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (_ID != value)
-                {
-                    var __oldValue = _ID;
-                    var __newValue = value;
-                    NotifyPropertyChanging("ID", __oldValue, __newValue);
-                    _ID = __newValue;
-                    NotifyPropertyChanged("ID", __oldValue, __newValue);
-                }
-            }
-        }
-        private int _ID;
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.IdProperty
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public Guid ExportGuid
-        {
-            get
-            {
-                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
-                // create local variable to create single point of return
-                // for the benefit of down-stream templates
-                var __result = _ExportGuid;
-                if (_ExportGuid == Guid.Empty) {
-                    __result = _ExportGuid = Guid.NewGuid();
-                }
-                return __result;
-            }
-            set
-            {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (_ExportGuid != value)
-                {
-                    var __oldValue = _ExportGuid;
-                    var __newValue = value;
-                    NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
-                    _ExportGuid = __newValue;
-                    NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
-                }
-            }
-        }
-        private Guid _ExportGuid;
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
-        #region RelationEntry.ApplyClassHeadTemplate
-
-        private static readonly Guid _relationID = new Guid("692c1064-37a2-4be3-a81e-4cb91f673aa3");
-        public override Guid RelationID { get { return _relationID; } }
-
-        IDataObject IRelationEntry.AObject
-        {
-            get
-            {
-                return A;
-            }
-            set
-            {
-                // settor will do checking for us
-                A = (Kistl.App.Base.ObjectClass)value;
-            }
-        }
-
-        IDataObject IRelationEntry.BObject
-        {
-            get
-            {
-                return B;
-            }
-            set
-            {
-                // settor will do checking for us
-                B = (Kistl.App.Base.Interface)value;
-            }
-        }
-
-        #endregion // RelationEntry.ApplyClassHeadTemplate
-
-
-        /// <summary>
-        /// the A-side value of this CollectionEntry
-        /// </summary>
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
-        // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=Kistl.App.Base.ObjectClass; moduleNamespace=Kistl.App.Base;
-        // inverse Navigator=none; is reference;
-        // PositionStorage=none;
-        // Target exportable
-
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.ObjectClass A
-        {
-            get { return AImpl; }
-            set { AImpl = (Kistl.App.Base.ObjectClassEfImpl)value; }
-        }
-
-        private int? _fk_A;
-
-        private Guid? _fk_guid_A = null;
-
-        // internal implementation, EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_ObjectClass_implements_ImplementsInterfaces_A", "ObjectClass")]
-        public Kistl.App.Base.ObjectClassEfImpl AImpl
-        {
-            get
-            {
-                if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Base.ObjectClassEfImpl __value;
-                EntityReference<Kistl.App.Base.ObjectClassEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClassEfImpl>(
-                        "Model.FK_ObjectClass_implements_ImplementsInterfaces_A",
-                        "ObjectClass");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !r.IsLoaded)
-                {
-                    r.Load();
-                }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
-                __value = r.Value;
-                return __value;
-            }
-            set
-            {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
-
-                EntityReference<Kistl.App.Base.ObjectClassEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClassEfImpl>(
-                        "Model.FK_ObjectClass_implements_ImplementsInterfaces_A",
-                        "ObjectClass");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !r.IsLoaded)
-                {
-                    r.Load();
-                }
-                Kistl.App.Base.ObjectClassEfImpl __oldValue = (Kistl.App.Base.ObjectClassEfImpl)r.Value;
-                Kistl.App.Base.ObjectClassEfImpl __newValue = (Kistl.App.Base.ObjectClassEfImpl)value;
-
-                // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("A", null, __oldValue, __newValue);
-
-                r.Value = (Kistl.App.Base.ObjectClassEfImpl)__newValue;
-
-                // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("A", null, __oldValue, __newValue);
-            }
-        }
-
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
-
-        /// <summary>
-        /// the B-side value of this CollectionEntry
-        /// </summary>
-        // BEGIN Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
-        // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
-        // referencedInterface=Kistl.App.Base.Interface; moduleNamespace=Kistl.App.Base;
-        // inverse Navigator=none; is reference;
-        // PositionStorage=none;
-        // Target exportable
-
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.Interface B
-        {
-            get { return BImpl; }
-            set { BImpl = (Kistl.App.Base.InterfaceEfImpl)value; }
-        }
-
-        private int? _fk_B;
-
-        private Guid? _fk_guid_B = null;
-
-        // internal implementation, EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_ObjectClass_implements_ImplementsInterfaces_B", "ImplementsInterfaces")]
-        public Kistl.App.Base.InterfaceEfImpl BImpl
-        {
-            get
-            {
-                if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Base.InterfaceEfImpl __value;
-                EntityReference<Kistl.App.Base.InterfaceEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.InterfaceEfImpl>(
-                        "Model.FK_ObjectClass_implements_ImplementsInterfaces_B",
-                        "ImplementsInterfaces");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !r.IsLoaded)
-                {
-                    r.Load();
-                }
-                if (r.Value != null) r.Value.AttachToContext(this.Context);
-                __value = r.Value;
-                return __value;
-            }
-            set
-            {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
-
-                EntityReference<Kistl.App.Base.InterfaceEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Kistl.App.Base.InterfaceEfImpl>(
-                        "Model.FK_ObjectClass_implements_ImplementsInterfaces_B",
-                        "ImplementsInterfaces");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !r.IsLoaded)
-                {
-                    r.Load();
-                }
-                Kistl.App.Base.InterfaceEfImpl __oldValue = (Kistl.App.Base.InterfaceEfImpl)r.Value;
-                Kistl.App.Base.InterfaceEfImpl __newValue = (Kistl.App.Base.InterfaceEfImpl)value;
-
-                // Changing Event fires before anything is touched
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanging("B", null, __oldValue, __newValue);
-
-                r.Value = (Kistl.App.Base.InterfaceEfImpl)__newValue;
-
-                // everything is done. fire the Changed event
-                // navigators may not be notified to entity framework
-                NotifyPropertyChanged("B", null, __oldValue, __newValue);
-            }
-        }
-
-        // END Kistl.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
-
-        #region Serializer
-
-
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
-        {
-            base.ToStream(binStream, auxObjects, eagerLoadLists);
-            if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream(this._ExportGuid, binStream);
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClassEfImpl>("Model.FK_ObjectClass_implements_ImplementsInterfaces_A", "ObjectClass").EntityKey;
-                BinarySerializer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, binStream);
-            }
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.InterfaceEfImpl>("Model.FK_ObjectClass_implements_ImplementsInterfaces_B", "ImplementsInterfaces").EntityKey;
-                BinarySerializer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, binStream);
-            }
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
-        {
-            var baseResult = base.FromStream(binStream);
-            var result = new List<IPersistenceObject>();
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            BinarySerializer.FromStream(out this._ExportGuid, binStream);
-            BinarySerializer.FromStream(out this._fk_A, binStream);
-            BinarySerializer.FromStream(out this._fk_B, binStream);
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "");
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.ObjectClassEfImpl>("Model.FK_ObjectClass_implements_ImplementsInterfaces_A", "ObjectClass").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "A", "Kistl.App.Base");
-            }
-            {
-                var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Base.InterfaceEfImpl>("Model.FK_ObjectClass_implements_ImplementsInterfaces_B", "ImplementsInterfaces").EntityKey;
-                XmlStreamer.ToStream(key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null, xml, "B", "Kistl.App.Base");
-            }
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Base");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
-        {
-            xml.WriteAttributeString("ExportGuid", _ExportGuid.ToString());
-            if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Kistl.App.Base");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.Base");
-        }
-
-        public virtual void MergeImport(System.Xml.XmlReader xml)
-        {
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
-            XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.Base");
-        }
-
-        #endregion
-
-        public override Type GetImplementedInterface()
-        {
-            return typeof(ObjectClass_implements_Interface_RelationEntry);
-        }
-
-        public override void ApplyChangesFrom(IPersistenceObject obj)
-        {
-            base.ApplyChangesFrom(obj);
-            var other = (ObjectClass_implements_Interface_RelationEntryEfImpl)obj;
-            var me = (ObjectClass_implements_Interface_RelationEntryEfImpl)this;
-
-            me._fk_A = other._fk_A;
-            me._fk_B = other._fk_B;
-        }
-
-
-        public override void ReloadReferences()
-        {
-            // Do not reload references if the current object has been deleted.
-            // TODO: enable when MemoryContext uses MemoryDataObjects
-            //if (this.ObjectState == DataObjectState.Deleted) return;
-
-            if (_fk_guid_A.HasValue)
-                AImpl = (Kistl.App.Base.ObjectClassEfImpl)Context.FindPersistenceObject<Kistl.App.Base.ObjectClass>(_fk_guid_A.Value);
-            else
-            if (_fk_A.HasValue)
-                AImpl = (Kistl.App.Base.ObjectClassEfImpl)Context.Find<Kistl.App.Base.ObjectClass>(_fk_A.Value);
-            else
-                AImpl = null;
-
-            if (_fk_guid_B.HasValue)
-                BImpl = (Kistl.App.Base.InterfaceEfImpl)Context.FindPersistenceObject<Kistl.App.Base.Interface>(_fk_guid_B.Value);
-            else
-            if (_fk_B.HasValue)
-                BImpl = (Kistl.App.Base.InterfaceEfImpl)Context.Find<Kistl.App.Base.Interface>(_fk_B.Value);
             else
                 BImpl = null;
 

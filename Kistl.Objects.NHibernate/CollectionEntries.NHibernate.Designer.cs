@@ -383,6 +383,376 @@ namespace Kistl.App.Base
     // END Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
 }
 
+namespace Kistl.App.Base
+{
+    // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
+    [System.Diagnostics.DebuggerDisplay("DataType_implements_Interface_RelationEntryNHibernateImpl")]
+    public class DataType_implements_Interface_RelationEntryNHibernateImpl : Kistl.DalProvider.NHibernate.RelationEntryNHibernateImpl<Kistl.App.Base.DataType, Kistl.App.Base.DataTypeNHibernateImpl, Kistl.App.Base.Interface, Kistl.App.Base.InterfaceNHibernateImpl>, DataType_implements_Interface_RelationEntry, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable
+    {
+        public DataType_implements_Interface_RelationEntryNHibernateImpl()
+            : this(null)
+        {
+        }
+
+        /// <summary>Create a new unattached instance</summary>
+        public DataType_implements_Interface_RelationEntryNHibernateImpl(Func<IFrozenContext> lazyCtx)
+            : this(lazyCtx, new DataType_implements_Interface_RelationEntryProxy())
+        {
+        }
+
+        /// <summary>Create a instance, wrapping the specified proxy</summary>
+        public DataType_implements_Interface_RelationEntryNHibernateImpl(Func<IFrozenContext> lazyCtx, DataType_implements_Interface_RelationEntryProxy proxy)
+            : base(lazyCtx) // do not pass proxy to base data object
+        {
+            this.Proxy = proxy;
+        }
+
+        /// <summary>the NHibernate proxy of the represented entity</summary>
+        internal readonly DataType_implements_Interface_RelationEntryProxy Proxy;
+
+        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
+        public Guid ExportGuid
+        {
+            get
+            {
+                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = Proxy.ExportGuid;
+                if (this.Proxy.ExportGuid == Guid.Empty) {
+                    __result = this.Proxy.ExportGuid = Guid.NewGuid();
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (Proxy.ExportGuid != value)
+                {
+                    var __oldValue = Proxy.ExportGuid;
+                    var __newValue = value;
+                    NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
+                    Proxy.ExportGuid = __newValue;
+                    NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                }
+            }
+        }
+        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
+        #region RelationEntry.ApplyClassHeadTemplate
+
+        private static readonly Guid _relationID = new Guid("692c1064-37a2-4be3-a81e-4cb91f673aa3");
+        public override Guid RelationID { get { return _relationID; } }
+
+        IDataObject IRelationEntry.AObject
+        {
+            get
+            {
+                return A;
+            }
+            set
+            {
+                // settor will do checking for us
+                A = (Kistl.App.Base.DataType)value;
+            }
+        }
+
+        IDataObject IRelationEntry.BObject
+        {
+            get
+            {
+                return B;
+            }
+            set
+            {
+                // settor will do checking for us
+                B = (Kistl.App.Base.Interface)value;
+            }
+        }
+
+        #endregion // RelationEntry.ApplyClassHeadTemplate
+
+
+        /// <summary>
+        /// the A-side value of this CollectionEntry
+        /// </summary>
+        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // fkBackingName=this.Proxy.A; fkGuidBackingName=_fk_guid_A;
+        // referencedInterface=Kistl.App.Base.DataType; moduleNamespace=Kistl.App.Base;
+        // inverse Navigator=none; is reference;
+        // PositionStorage=none;
+        // Target exportable; does not call events
+
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Base.DataType A
+        {
+            get
+            {
+                if (!CurrentAccessRights.HasReadRights()) return null;
+                Kistl.App.Base.DataTypeNHibernateImpl __value = (Kistl.App.Base.DataTypeNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
+
+
+                return __value;
+            }
+            set
+            {
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+
+                // shortcut noop with nulls
+                if (value == null && this.Proxy.A == null)
+                    return;
+
+                // cache old value to remove inverse references later
+                var __oldValue = (Kistl.App.Base.DataTypeNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
+                var __newValue = (Kistl.App.Base.DataTypeNHibernateImpl)value;
+
+                // shortcut noop on objects
+                // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
+                if (__oldValue == __newValue)
+                    return;
+
+                // Changing Event fires before anything is touched
+                NotifyPropertyChanging("A", __oldValue, __newValue);
+
+                // next, set the local reference
+                if (__newValue == null)
+                {
+                    this.Proxy.A = null;
+                }
+                else
+                {
+                    this.Proxy.A = __newValue.Proxy;
+                }
+
+                // everything is done. fire the Changed event
+                NotifyPropertyChanged("A", __oldValue, __newValue);
+
+            }
+        }
+
+        /// <summary>Backing store for A's id, used on dehydration only</summary>
+        private int? _fk_A = null;
+
+        /// <summary>Backing store for A's guid, used on import only</summary>
+        private Guid? _fk_guid_A = null;
+
+        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+
+        /// <summary>
+        /// the B-side value of this CollectionEntry
+        /// </summary>
+        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // fkBackingName=this.Proxy.B; fkGuidBackingName=_fk_guid_B;
+        // referencedInterface=Kistl.App.Base.Interface; moduleNamespace=Kistl.App.Base;
+        // inverse Navigator=none; is reference;
+        // PositionStorage=none;
+        // Target exportable; does not call events
+
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Base.Interface B
+        {
+            get
+            {
+                if (!CurrentAccessRights.HasReadRights()) return null;
+                Kistl.App.Base.InterfaceNHibernateImpl __value = (Kistl.App.Base.InterfaceNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
+
+
+                return __value;
+            }
+            set
+            {
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+
+                // shortcut noop with nulls
+                if (value == null && this.Proxy.B == null)
+                    return;
+
+                // cache old value to remove inverse references later
+                var __oldValue = (Kistl.App.Base.InterfaceNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
+                var __newValue = (Kistl.App.Base.InterfaceNHibernateImpl)value;
+
+                // shortcut noop on objects
+                // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
+                if (__oldValue == __newValue)
+                    return;
+
+                // Changing Event fires before anything is touched
+                NotifyPropertyChanging("B", __oldValue, __newValue);
+
+                // next, set the local reference
+                if (__newValue == null)
+                {
+                    this.Proxy.B = null;
+                }
+                else
+                {
+                    this.Proxy.B = __newValue.Proxy;
+                }
+
+                // everything is done. fire the Changed event
+                NotifyPropertyChanged("B", __oldValue, __newValue);
+
+            }
+        }
+
+        /// <summary>Backing store for B's id, used on dehydration only</summary>
+        private int? _fk_B = null;
+
+        /// <summary>Backing store for B's guid, used on import only</summary>
+        private Guid? _fk_guid_B = null;
+
+        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+
+        #region Serializer
+
+
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        {
+            base.ToStream(binStream, auxObjects, eagerLoadLists);
+            if (!CurrentAccessRights.HasReadRights()) return;
+            BinarySerializer.ToStream(this.Proxy.ExportGuid, binStream);
+            BinarySerializer.ToStream(this.Proxy.A != null ? this.Proxy.A.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.Proxy.B != null ? this.Proxy.B.ID : (int?)null, binStream);
+        }
+
+        public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
+        {
+            var baseResult = base.FromStream(binStream);
+            var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
+            {
+                Guid tmp;
+                BinarySerializer.FromStream(out tmp, binStream);
+                this.Proxy.ExportGuid = tmp;
+            }
+            BinarySerializer.FromStream(out this._fk_A, binStream);
+            BinarySerializer.FromStream(out this._fk_B, binStream);
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
+                ? result.Count == 0
+                    ? null
+                    : result
+                : baseResult.Concat(result);
+        }
+
+        public override void ToStream(System.Xml.XmlWriter xml)
+        {
+            base.ToStream(xml);
+            if (!CurrentAccessRights.HasReadRights()) return;
+            XmlStreamer.ToStream(this.Proxy.ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
+            XmlStreamer.ToStream(this.Proxy.A != null ? this.Proxy.A.ID : (int?)null, xml, "A", "Kistl.App.Base");
+            XmlStreamer.ToStream(this.Proxy.B != null ? this.Proxy.B.ID : (int?)null, xml, "B", "Kistl.App.Base");
+        }
+
+        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
+        {
+            var baseResult = base.FromStream(xml);
+            var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
+            {
+                // yuck
+                Guid tmp = this.Proxy.ExportGuid;
+                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Base");
+                this.Proxy.ExportGuid = tmp;
+            }
+            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Base");
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
+                ? result.Count == 0
+                    ? null
+                    : result
+                : baseResult.Concat(result);
+        }
+
+        public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+            xml.WriteAttributeString("ExportGuid", this.Proxy.ExportGuid.ToString());
+            if (!CurrentAccessRights.HasReadRights()) return;
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.A != null ? this.Proxy.A.ExportGuid : (Guid?)null, xml, "A", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.B != null ? this.Proxy.B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.Base");
+        }
+
+        public virtual void MergeImport(System.Xml.XmlReader xml)
+        {
+            if (!CurrentAccessRights.HasReadRights()) return;
+            {
+                // yuck
+                Guid tmp = this.Proxy.ExportGuid;
+                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Base");
+                this.Proxy.ExportGuid = tmp;
+            }
+            XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.Base");
+        }
+
+        #endregion
+
+        public override Type GetImplementedInterface()
+        {
+            return typeof(DataType_implements_Interface_RelationEntry);
+        }
+
+        public override void ApplyChangesFrom(IPersistenceObject obj)
+        {
+            base.ApplyChangesFrom(obj);
+            var other = (DataType_implements_Interface_RelationEntryNHibernateImpl)obj;
+            var me = (DataType_implements_Interface_RelationEntryNHibernateImpl)this;
+
+        }
+
+
+        public override void ReloadReferences()
+        {
+            // Do not reload references if the current object has been deleted.
+            // TODO: enable when MemoryContext uses MemoryDataObjects
+            //if (this.ObjectState == DataObjectState.Deleted) return;
+
+            if (_fk_guid_A.HasValue)
+                this.Proxy.A = ((Kistl.App.Base.DataTypeNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.DataType>(_fk_guid_A.Value)).Proxy;
+            else
+            if (_fk_A.HasValue)
+                this.Proxy.A = ((Kistl.App.Base.DataTypeNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.DataType>(_fk_A.Value)).Proxy;
+            else
+                this.Proxy.A = null;
+
+            if (_fk_guid_B.HasValue)
+                this.Proxy.B = ((Kistl.App.Base.InterfaceNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Interface>(_fk_guid_B.Value)).Proxy;
+            else
+            if (_fk_B.HasValue)
+                this.Proxy.B = ((Kistl.App.Base.InterfaceNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Interface>(_fk_B.Value)).Proxy;
+            else
+                this.Proxy.B = null;
+
+        }
+
+
+        public class DataType_implements_Interface_RelationEntryProxy
+            : IProxyObject, ISortKey<int>
+        {
+            public DataType_implements_Interface_RelationEntryProxy()
+            {
+            }
+
+            public virtual int ID { get; set; }
+
+            public virtual Type ZBoxWrapper { get { return typeof(DataType_implements_Interface_RelationEntryNHibernateImpl); } }
+            public virtual Type ZBoxProxy { get { return typeof(DataType_implements_Interface_RelationEntryProxy); } }
+
+            public virtual Kistl.App.Base.DataTypeNHibernateImpl.DataTypeProxy A { get; set; }
+
+            public virtual Kistl.App.Base.InterfaceNHibernateImpl.InterfaceProxy B { get; set; }
+
+            public virtual Guid ExportGuid { get; set; }
+
+        }
+
+        // make proxy available for the provider
+        public override IProxyObject NHibernateProxy { get { return Proxy; } }    }
+    // END Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
+}
+
 namespace at.dasz.DocumentManagement
 {
 	using Kistl.App.Base;
@@ -2488,376 +2858,6 @@ namespace Kistl.App.GUI
             public virtual Kistl.App.GUI.NavigationEntryNHibernateImpl.NavigationEntryProxy A { get; set; }
 
             public virtual Kistl.App.Base.GroupNHibernateImpl.GroupProxy B { get; set; }
-
-            public virtual Guid ExportGuid { get; set; }
-
-        }
-
-        // make proxy available for the provider
-        public override IProxyObject NHibernateProxy { get { return Proxy; } }    }
-    // END Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
-}
-
-namespace Kistl.App.Base
-{
-    // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
-    [System.Diagnostics.DebuggerDisplay("ObjectClass_implements_Interface_RelationEntryNHibernateImpl")]
-    public class ObjectClass_implements_Interface_RelationEntryNHibernateImpl : Kistl.DalProvider.NHibernate.RelationEntryNHibernateImpl<Kistl.App.Base.ObjectClass, Kistl.App.Base.ObjectClassNHibernateImpl, Kistl.App.Base.Interface, Kistl.App.Base.InterfaceNHibernateImpl>, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable, ObjectClass_implements_Interface_RelationEntry
-    {
-        public ObjectClass_implements_Interface_RelationEntryNHibernateImpl()
-            : this(null)
-        {
-        }
-
-        /// <summary>Create a new unattached instance</summary>
-        public ObjectClass_implements_Interface_RelationEntryNHibernateImpl(Func<IFrozenContext> lazyCtx)
-            : this(lazyCtx, new ObjectClass_implements_Interface_RelationEntryProxy())
-        {
-        }
-
-        /// <summary>Create a instance, wrapping the specified proxy</summary>
-        public ObjectClass_implements_Interface_RelationEntryNHibernateImpl(Func<IFrozenContext> lazyCtx, ObjectClass_implements_Interface_RelationEntryProxy proxy)
-            : base(lazyCtx) // do not pass proxy to base data object
-        {
-            this.Proxy = proxy;
-        }
-
-        /// <summary>the NHibernate proxy of the represented entity</summary>
-        internal readonly ObjectClass_implements_Interface_RelationEntryProxy Proxy;
-
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
-        public Guid ExportGuid
-        {
-            get
-            {
-                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
-                // create local variable to create single point of return
-                // for the benefit of down-stream templates
-                var __result = Proxy.ExportGuid;
-                if (this.Proxy.ExportGuid == Guid.Empty) {
-                    __result = this.Proxy.ExportGuid = Guid.NewGuid();
-                }
-                return __result;
-            }
-            set
-            {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (Proxy.ExportGuid != value)
-                {
-                    var __oldValue = Proxy.ExportGuid;
-                    var __newValue = value;
-                    NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
-                    Proxy.ExportGuid = __newValue;
-                    NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
-                }
-            }
-        }
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
-        #region RelationEntry.ApplyClassHeadTemplate
-
-        private static readonly Guid _relationID = new Guid("692c1064-37a2-4be3-a81e-4cb91f673aa3");
-        public override Guid RelationID { get { return _relationID; } }
-
-        IDataObject IRelationEntry.AObject
-        {
-            get
-            {
-                return A;
-            }
-            set
-            {
-                // settor will do checking for us
-                A = (Kistl.App.Base.ObjectClass)value;
-            }
-        }
-
-        IDataObject IRelationEntry.BObject
-        {
-            get
-            {
-                return B;
-            }
-            set
-            {
-                // settor will do checking for us
-                B = (Kistl.App.Base.Interface)value;
-            }
-        }
-
-        #endregion // RelationEntry.ApplyClassHeadTemplate
-
-
-        /// <summary>
-        /// the A-side value of this CollectionEntry
-        /// </summary>
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
-        // fkBackingName=this.Proxy.A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=Kistl.App.Base.ObjectClass; moduleNamespace=Kistl.App.Base;
-        // inverse Navigator=none; is reference;
-        // PositionStorage=none;
-        // Target exportable; does not call events
-
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.ObjectClass A
-        {
-            get
-            {
-                if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Base.ObjectClassNHibernateImpl __value = (Kistl.App.Base.ObjectClassNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
-
-
-                return __value;
-            }
-            set
-            {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
-
-                // shortcut noop with nulls
-                if (value == null && this.Proxy.A == null)
-                    return;
-
-                // cache old value to remove inverse references later
-                var __oldValue = (Kistl.App.Base.ObjectClassNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
-                var __newValue = (Kistl.App.Base.ObjectClassNHibernateImpl)value;
-
-                // shortcut noop on objects
-                // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
-                if (__oldValue == __newValue)
-                    return;
-
-                // Changing Event fires before anything is touched
-                NotifyPropertyChanging("A", __oldValue, __newValue);
-
-                // next, set the local reference
-                if (__newValue == null)
-                {
-                    this.Proxy.A = null;
-                }
-                else
-                {
-                    this.Proxy.A = __newValue.Proxy;
-                }
-
-                // everything is done. fire the Changed event
-                NotifyPropertyChanged("A", __oldValue, __newValue);
-
-            }
-        }
-
-        /// <summary>Backing store for A's id, used on dehydration only</summary>
-        private int? _fk_A = null;
-
-        /// <summary>Backing store for A's guid, used on import only</summary>
-        private Guid? _fk_guid_A = null;
-
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
-
-        /// <summary>
-        /// the B-side value of this CollectionEntry
-        /// </summary>
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
-        // fkBackingName=this.Proxy.B; fkGuidBackingName=_fk_guid_B;
-        // referencedInterface=Kistl.App.Base.Interface; moduleNamespace=Kistl.App.Base;
-        // inverse Navigator=none; is reference;
-        // PositionStorage=none;
-        // Target exportable; does not call events
-
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Kistl.App.Base.Interface B
-        {
-            get
-            {
-                if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Base.InterfaceNHibernateImpl __value = (Kistl.App.Base.InterfaceNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
-
-
-                return __value;
-            }
-            set
-            {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
-
-                // shortcut noop with nulls
-                if (value == null && this.Proxy.B == null)
-                    return;
-
-                // cache old value to remove inverse references later
-                var __oldValue = (Kistl.App.Base.InterfaceNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
-                var __newValue = (Kistl.App.Base.InterfaceNHibernateImpl)value;
-
-                // shortcut noop on objects
-                // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
-                if (__oldValue == __newValue)
-                    return;
-
-                // Changing Event fires before anything is touched
-                NotifyPropertyChanging("B", __oldValue, __newValue);
-
-                // next, set the local reference
-                if (__newValue == null)
-                {
-                    this.Proxy.B = null;
-                }
-                else
-                {
-                    this.Proxy.B = __newValue.Proxy;
-                }
-
-                // everything is done. fire the Changed event
-                NotifyPropertyChanged("B", __oldValue, __newValue);
-
-            }
-        }
-
-        /// <summary>Backing store for B's id, used on dehydration only</summary>
-        private int? _fk_B = null;
-
-        /// <summary>Backing store for B's guid, used on import only</summary>
-        private Guid? _fk_guid_B = null;
-
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
-
-        #region Serializer
-
-
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
-        {
-            base.ToStream(binStream, auxObjects, eagerLoadLists);
-            if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream(this.Proxy.ExportGuid, binStream);
-            BinarySerializer.ToStream(this.Proxy.A != null ? this.Proxy.A.ID : (int?)null, binStream);
-            BinarySerializer.ToStream(this.Proxy.B != null ? this.Proxy.B.ID : (int?)null, binStream);
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
-        {
-            var baseResult = base.FromStream(binStream);
-            var result = new List<IPersistenceObject>();
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                Guid tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this.Proxy.ExportGuid = tmp;
-            }
-            BinarySerializer.FromStream(out this._fk_A, binStream);
-            BinarySerializer.FromStream(out this._fk_B, binStream);
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.Proxy.A != null ? this.Proxy.A.ID : (int?)null, xml, "A", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.Proxy.B != null ? this.Proxy.B.ID : (int?)null, xml, "B", "Kistl.App.Base");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            {
-                // yuck
-                Guid tmp = this.Proxy.ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Base");
-                this.Proxy.ExportGuid = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Base");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
-        {
-            xml.WriteAttributeString("ExportGuid", this.Proxy.ExportGuid.ToString());
-            if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.A != null ? this.Proxy.A.ExportGuid : (Guid?)null, xml, "A", "Kistl.App.Base");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.B != null ? this.Proxy.B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.Base");
-        }
-
-        public virtual void MergeImport(System.Xml.XmlReader xml)
-        {
-            if (!CurrentAccessRights.HasReadRights()) return;
-            {
-                // yuck
-                Guid tmp = this.Proxy.ExportGuid;
-                XmlStreamer.FromStream(ref tmp, xml, "ExportGuid", "Kistl.App.Base");
-                this.Proxy.ExportGuid = tmp;
-            }
-            XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.Base");
-        }
-
-        #endregion
-
-        public override Type GetImplementedInterface()
-        {
-            return typeof(ObjectClass_implements_Interface_RelationEntry);
-        }
-
-        public override void ApplyChangesFrom(IPersistenceObject obj)
-        {
-            base.ApplyChangesFrom(obj);
-            var other = (ObjectClass_implements_Interface_RelationEntryNHibernateImpl)obj;
-            var me = (ObjectClass_implements_Interface_RelationEntryNHibernateImpl)this;
-
-        }
-
-
-        public override void ReloadReferences()
-        {
-            // Do not reload references if the current object has been deleted.
-            // TODO: enable when MemoryContext uses MemoryDataObjects
-            //if (this.ObjectState == DataObjectState.Deleted) return;
-
-            if (_fk_guid_A.HasValue)
-                this.Proxy.A = ((Kistl.App.Base.ObjectClassNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.ObjectClass>(_fk_guid_A.Value)).Proxy;
-            else
-            if (_fk_A.HasValue)
-                this.Proxy.A = ((Kistl.App.Base.ObjectClassNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.ObjectClass>(_fk_A.Value)).Proxy;
-            else
-                this.Proxy.A = null;
-
-            if (_fk_guid_B.HasValue)
-                this.Proxy.B = ((Kistl.App.Base.InterfaceNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Interface>(_fk_guid_B.Value)).Proxy;
-            else
-            if (_fk_B.HasValue)
-                this.Proxy.B = ((Kistl.App.Base.InterfaceNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Interface>(_fk_B.Value)).Proxy;
-            else
-                this.Proxy.B = null;
-
-        }
-
-
-        public class ObjectClass_implements_Interface_RelationEntryProxy
-            : IProxyObject, ISortKey<int>
-        {
-            public ObjectClass_implements_Interface_RelationEntryProxy()
-            {
-            }
-
-            public virtual int ID { get; set; }
-
-            public virtual Type ZBoxWrapper { get { return typeof(ObjectClass_implements_Interface_RelationEntryNHibernateImpl); } }
-            public virtual Type ZBoxProxy { get { return typeof(ObjectClass_implements_Interface_RelationEntryProxy); } }
-
-            public virtual Kistl.App.Base.ObjectClassNHibernateImpl.ObjectClassProxy A { get; set; }
-
-            public virtual Kistl.App.Base.InterfaceNHibernateImpl.InterfaceProxy B { get; set; }
 
             public virtual Guid ExportGuid { get; set; }
 

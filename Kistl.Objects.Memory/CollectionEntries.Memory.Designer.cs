@@ -369,6 +369,363 @@ namespace Kistl.App.Base
     // END Kistl.Generator.Templates.CollectionEntries.RelationEntry
 }
 
+namespace Kistl.App.Base
+{
+    // BEGIN Kistl.Generator.Templates.CollectionEntries.RelationEntry
+    [System.Diagnostics.DebuggerDisplay("DataType_implements_Interface_RelationEntryMemoryImpl")]
+    public class DataType_implements_Interface_RelationEntryMemoryImpl : Kistl.DalProvider.Memory.RelationEntryMemoryImpl<Kistl.App.Base.DataType, Kistl.App.Base.DataTypeMemoryImpl, Kistl.App.Base.Interface, Kistl.App.Base.InterfaceMemoryImpl>, DataType_implements_Interface_RelationEntry, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable
+    {
+        [Obsolete]
+        public DataType_implements_Interface_RelationEntryMemoryImpl()
+            : base(null)
+        {
+        }
+
+        public DataType_implements_Interface_RelationEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
+            : base(lazyCtx)
+        {
+        }
+        // BEGIN Kistl.Generator.Templates.Properties.IdProperty
+        public override int ID
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ID;
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_ID != value)
+                {
+                    var __oldValue = _ID;
+                    var __newValue = value;
+                    NotifyPropertyChanging("ID", __oldValue, __newValue);
+                    _ID = __newValue;
+                    NotifyPropertyChanged("ID", __oldValue, __newValue);
+                }
+            }
+        }
+        private int _ID;
+        // END Kistl.Generator.Templates.Properties.IdProperty
+        // BEGIN Kistl.Generator.Templates.Properties.ExportGuidProperty
+        public Guid ExportGuid
+        {
+            get
+            {
+                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ExportGuid;
+                if (_ExportGuid == Guid.Empty) {
+                    __result = _ExportGuid = Guid.NewGuid();
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_ExportGuid != value)
+                {
+                    var __oldValue = _ExportGuid;
+                    var __newValue = value;
+                    NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
+                    _ExportGuid = __newValue;
+                    NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                }
+            }
+        }
+        private Guid _ExportGuid;
+        // END Kistl.Generator.Templates.Properties.ExportGuidProperty
+        #region RelationEntry.ApplyClassHeadTemplate
+
+        private static readonly Guid _relationID = new Guid("692c1064-37a2-4be3-a81e-4cb91f673aa3");
+        public override Guid RelationID { get { return _relationID; } }
+
+        IDataObject IRelationEntry.AObject
+        {
+            get
+            {
+                return A;
+            }
+            set
+            {
+                // settor will do checking for us
+                A = (Kistl.App.Base.DataType)value;
+            }
+        }
+
+        IDataObject IRelationEntry.BObject
+        {
+            get
+            {
+                return B;
+            }
+            set
+            {
+                // settor will do checking for us
+                B = (Kistl.App.Base.Interface)value;
+            }
+        }
+
+        #endregion // RelationEntry.ApplyClassHeadTemplate
+
+
+        /// <summary>
+        /// the A-side value of this CollectionEntry
+        /// </summary>
+        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
+        // referencedInterface=Kistl.App.Base.DataType; moduleNamespace=Kistl.App.Base;
+        // inverse Navigator=none; is reference;
+        // PositionStorage=none;
+        // Target exportable; does not call events
+
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        // BEGIN Kistl.Generator.Templates.Properties.DelegatingProperty
+        public Kistl.App.Base.DataType A
+        {
+            get { return AImpl; }
+            set { AImpl = (Kistl.App.Base.DataTypeMemoryImpl)value; }
+        }
+        // END Kistl.Generator.Templates.Properties.DelegatingProperty
+
+        private int? _fk_A;
+
+        private Guid? _fk_guid_A = null;
+
+        // internal implementation
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        internal Kistl.App.Base.DataTypeMemoryImpl AImpl
+        {
+            get
+            {
+                if (!CurrentAccessRights.HasReadRights()) return null;
+                Kistl.App.Base.DataTypeMemoryImpl __value;
+                if (_fk_A.HasValue)
+                    __value = (Kistl.App.Base.DataTypeMemoryImpl)Context.Find<Kistl.App.Base.DataType>(_fk_A.Value);
+                else
+                    __value = null;
+
+
+                return __value;
+            }
+            set
+            {
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+
+                // shortcut noops
+                if (value == null && _fk_A == null)
+                    return;
+                else if (value != null && value.ID == _fk_A)
+                    return;
+
+                // cache old value to remove inverse references later
+                var __oldValue = AImpl;
+                var __newValue = value;
+
+                // Changing Event fires before anything is touched
+                NotifyPropertyChanging("A", __oldValue, __newValue);
+
+
+                // next, set the local reference
+                _fk_A = __newValue == null ? (int?)null : __newValue.ID;
+
+                // everything is done. fire the Changed event
+                NotifyPropertyChanged("A", __oldValue, __newValue);
+
+            }
+        }
+        // END Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+
+        /// <summary>
+        /// the B-side value of this CollectionEntry
+        /// </summary>
+        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
+        // referencedInterface=Kistl.App.Base.Interface; moduleNamespace=Kistl.App.Base;
+        // inverse Navigator=none; is reference;
+        // PositionStorage=none;
+        // Target exportable; does not call events
+
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        // BEGIN Kistl.Generator.Templates.Properties.DelegatingProperty
+        public Kistl.App.Base.Interface B
+        {
+            get { return BImpl; }
+            set { BImpl = (Kistl.App.Base.InterfaceMemoryImpl)value; }
+        }
+        // END Kistl.Generator.Templates.Properties.DelegatingProperty
+
+        private int? _fk_B;
+
+        private Guid? _fk_guid_B = null;
+
+        // internal implementation
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        internal Kistl.App.Base.InterfaceMemoryImpl BImpl
+        {
+            get
+            {
+                if (!CurrentAccessRights.HasReadRights()) return null;
+                Kistl.App.Base.InterfaceMemoryImpl __value;
+                if (_fk_B.HasValue)
+                    __value = (Kistl.App.Base.InterfaceMemoryImpl)Context.Find<Kistl.App.Base.Interface>(_fk_B.Value);
+                else
+                    __value = null;
+
+
+                return __value;
+            }
+            set
+            {
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+
+                // shortcut noops
+                if (value == null && _fk_B == null)
+                    return;
+                else if (value != null && value.ID == _fk_B)
+                    return;
+
+                // cache old value to remove inverse references later
+                var __oldValue = BImpl;
+                var __newValue = value;
+
+                // Changing Event fires before anything is touched
+                NotifyPropertyChanging("B", __oldValue, __newValue);
+
+
+                // next, set the local reference
+                _fk_B = __newValue == null ? (int?)null : __newValue.ID;
+
+                // everything is done. fire the Changed event
+                NotifyPropertyChanged("B", __oldValue, __newValue);
+
+            }
+        }
+        // END Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+
+        #region Serializer
+
+
+        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        {
+            base.ToStream(binStream, auxObjects, eagerLoadLists);
+            if (!CurrentAccessRights.HasReadRights()) return;
+            BinarySerializer.ToStream(this._ExportGuid, binStream);
+            BinarySerializer.ToStream(A != null ? A.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(B != null ? B.ID : (int?)null, binStream);
+        }
+
+        public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
+        {
+            var baseResult = base.FromStream(binStream);
+            var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
+            BinarySerializer.FromStream(out this._ExportGuid, binStream);
+            BinarySerializer.FromStream(out this._fk_A, binStream);
+            BinarySerializer.FromStream(out this._fk_B, binStream);
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
+                ? result.Count == 0
+                    ? null
+                    : result
+                : baseResult.Concat(result);
+        }
+
+        public override void ToStream(System.Xml.XmlWriter xml)
+        {
+            base.ToStream(xml);
+            if (!CurrentAccessRights.HasReadRights()) return;
+            XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "");
+            XmlStreamer.ToStream(A != null ? A.ID : (int?)null, xml, "A", "Kistl.App.Base");
+            XmlStreamer.ToStream(B != null ? B.ID : (int?)null, xml, "B", "Kistl.App.Base");
+        }
+
+        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
+        {
+            var baseResult = base.FromStream(xml);
+            var result = new List<IPersistenceObject>();
+            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
+            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Base");
+            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
+			return baseResult == null
+                ? result.Count == 0
+                    ? null
+                    : result
+                : baseResult.Concat(result);
+        }
+
+        public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+            xml.WriteAttributeString("ExportGuid", _ExportGuid.ToString());
+            if (!CurrentAccessRights.HasReadRights()) return;
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.Base");
+        }
+
+        public virtual void MergeImport(System.Xml.XmlReader xml)
+        {
+            if (!CurrentAccessRights.HasReadRights()) return;
+            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
+            XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.Base");
+            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.Base");
+        }
+
+        #endregion
+
+        public override Type GetImplementedInterface()
+        {
+            return typeof(DataType_implements_Interface_RelationEntry);
+        }
+
+        public override void ApplyChangesFrom(IPersistenceObject obj)
+        {
+            base.ApplyChangesFrom(obj);
+            var other = (DataType_implements_Interface_RelationEntryMemoryImpl)obj;
+            var me = (DataType_implements_Interface_RelationEntryMemoryImpl)this;
+
+        }
+
+
+        public override void ReloadReferences()
+        {
+            // Do not reload references if the current object has been deleted.
+            // TODO: enable when MemoryContext uses MemoryDataObjects
+            //if (this.ObjectState == DataObjectState.Deleted) return;
+
+            if (_fk_guid_A.HasValue)
+                AImpl = (Kistl.App.Base.DataTypeMemoryImpl)Context.FindPersistenceObject<Kistl.App.Base.DataType>(_fk_guid_A.Value);
+            else
+            if (_fk_A.HasValue)
+                AImpl = (Kistl.App.Base.DataTypeMemoryImpl)Context.Find<Kistl.App.Base.DataType>(_fk_A.Value);
+            else
+                AImpl = null;
+
+            if (_fk_guid_B.HasValue)
+                BImpl = (Kistl.App.Base.InterfaceMemoryImpl)Context.FindPersistenceObject<Kistl.App.Base.Interface>(_fk_guid_B.Value);
+            else
+            if (_fk_B.HasValue)
+                BImpl = (Kistl.App.Base.InterfaceMemoryImpl)Context.Find<Kistl.App.Base.Interface>(_fk_B.Value);
+            else
+                BImpl = null;
+
+        }
+
+    }
+    // END Kistl.Generator.Templates.CollectionEntries.RelationEntry
+}
+
 namespace at.dasz.DocumentManagement
 {
 	using Kistl.App.Base;
@@ -2409,363 +2766,6 @@ namespace Kistl.App.GUI
             else
             if (_fk_B.HasValue)
                 BImpl = (Kistl.App.Base.GroupMemoryImpl)Context.Find<Kistl.App.Base.Group>(_fk_B.Value);
-            else
-                BImpl = null;
-
-        }
-
-    }
-    // END Kistl.Generator.Templates.CollectionEntries.RelationEntry
-}
-
-namespace Kistl.App.Base
-{
-    // BEGIN Kistl.Generator.Templates.CollectionEntries.RelationEntry
-    [System.Diagnostics.DebuggerDisplay("ObjectClass_implements_Interface_RelationEntryMemoryImpl")]
-    public class ObjectClass_implements_Interface_RelationEntryMemoryImpl : Kistl.DalProvider.Memory.RelationEntryMemoryImpl<Kistl.App.Base.ObjectClass, Kistl.App.Base.ObjectClassMemoryImpl, Kistl.App.Base.Interface, Kistl.App.Base.InterfaceMemoryImpl>, Kistl.API.IExportableInternal, Kistl.App.Base.IExportable, ObjectClass_implements_Interface_RelationEntry
-    {
-        [Obsolete]
-        public ObjectClass_implements_Interface_RelationEntryMemoryImpl()
-            : base(null)
-        {
-        }
-
-        public ObjectClass_implements_Interface_RelationEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
-            : base(lazyCtx)
-        {
-        }
-        // BEGIN Kistl.Generator.Templates.Properties.IdProperty
-        public override int ID
-        {
-            get
-            {
-                // create local variable to create single point of return
-                // for the benefit of down-stream templates
-                var __result = _ID;
-                return __result;
-            }
-            set
-            {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (_ID != value)
-                {
-                    var __oldValue = _ID;
-                    var __newValue = value;
-                    NotifyPropertyChanging("ID", __oldValue, __newValue);
-                    _ID = __newValue;
-                    NotifyPropertyChanged("ID", __oldValue, __newValue);
-                }
-            }
-        }
-        private int _ID;
-        // END Kistl.Generator.Templates.Properties.IdProperty
-        // BEGIN Kistl.Generator.Templates.Properties.ExportGuidProperty
-        public Guid ExportGuid
-        {
-            get
-            {
-                if (!CurrentAccessRights.HasReadRights()) return default(Guid);
-                // create local variable to create single point of return
-                // for the benefit of down-stream templates
-                var __result = _ExportGuid;
-                if (_ExportGuid == Guid.Empty) {
-                    __result = _ExportGuid = Guid.NewGuid();
-                }
-                return __result;
-            }
-            set
-            {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (_ExportGuid != value)
-                {
-                    var __oldValue = _ExportGuid;
-                    var __newValue = value;
-                    NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
-                    _ExportGuid = __newValue;
-                    NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
-                }
-            }
-        }
-        private Guid _ExportGuid;
-        // END Kistl.Generator.Templates.Properties.ExportGuidProperty
-        #region RelationEntry.ApplyClassHeadTemplate
-
-        private static readonly Guid _relationID = new Guid("692c1064-37a2-4be3-a81e-4cb91f673aa3");
-        public override Guid RelationID { get { return _relationID; } }
-
-        IDataObject IRelationEntry.AObject
-        {
-            get
-            {
-                return A;
-            }
-            set
-            {
-                // settor will do checking for us
-                A = (Kistl.App.Base.ObjectClass)value;
-            }
-        }
-
-        IDataObject IRelationEntry.BObject
-        {
-            get
-            {
-                return B;
-            }
-            set
-            {
-                // settor will do checking for us
-                B = (Kistl.App.Base.Interface)value;
-            }
-        }
-
-        #endregion // RelationEntry.ApplyClassHeadTemplate
-
-
-        /// <summary>
-        /// the A-side value of this CollectionEntry
-        /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
-        // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=Kistl.App.Base.ObjectClass; moduleNamespace=Kistl.App.Base;
-        // inverse Navigator=none; is reference;
-        // PositionStorage=none;
-        // Target exportable; does not call events
-
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        // BEGIN Kistl.Generator.Templates.Properties.DelegatingProperty
-        public Kistl.App.Base.ObjectClass A
-        {
-            get { return AImpl; }
-            set { AImpl = (Kistl.App.Base.ObjectClassMemoryImpl)value; }
-        }
-        // END Kistl.Generator.Templates.Properties.DelegatingProperty
-
-        private int? _fk_A;
-
-        private Guid? _fk_guid_A = null;
-
-        // internal implementation
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        internal Kistl.App.Base.ObjectClassMemoryImpl AImpl
-        {
-            get
-            {
-                if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Base.ObjectClassMemoryImpl __value;
-                if (_fk_A.HasValue)
-                    __value = (Kistl.App.Base.ObjectClassMemoryImpl)Context.Find<Kistl.App.Base.ObjectClass>(_fk_A.Value);
-                else
-                    __value = null;
-
-
-                return __value;
-            }
-            set
-            {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
-
-                // shortcut noops
-                if (value == null && _fk_A == null)
-                    return;
-                else if (value != null && value.ID == _fk_A)
-                    return;
-
-                // cache old value to remove inverse references later
-                var __oldValue = AImpl;
-                var __newValue = value;
-
-                // Changing Event fires before anything is touched
-                NotifyPropertyChanging("A", __oldValue, __newValue);
-
-
-                // next, set the local reference
-                _fk_A = __newValue == null ? (int?)null : __newValue.ID;
-
-                // everything is done. fire the Changed event
-                NotifyPropertyChanged("A", __oldValue, __newValue);
-
-            }
-        }
-        // END Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
-
-        /// <summary>
-        /// the B-side value of this CollectionEntry
-        /// </summary>
-        // BEGIN Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
-        // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
-        // referencedInterface=Kistl.App.Base.Interface; moduleNamespace=Kistl.App.Base;
-        // inverse Navigator=none; is reference;
-        // PositionStorage=none;
-        // Target exportable; does not call events
-
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        // BEGIN Kistl.Generator.Templates.Properties.DelegatingProperty
-        public Kistl.App.Base.Interface B
-        {
-            get { return BImpl; }
-            set { BImpl = (Kistl.App.Base.InterfaceMemoryImpl)value; }
-        }
-        // END Kistl.Generator.Templates.Properties.DelegatingProperty
-
-        private int? _fk_B;
-
-        private Guid? _fk_guid_B = null;
-
-        // internal implementation
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        internal Kistl.App.Base.InterfaceMemoryImpl BImpl
-        {
-            get
-            {
-                if (!CurrentAccessRights.HasReadRights()) return null;
-                Kistl.App.Base.InterfaceMemoryImpl __value;
-                if (_fk_B.HasValue)
-                    __value = (Kistl.App.Base.InterfaceMemoryImpl)Context.Find<Kistl.App.Base.Interface>(_fk_B.Value);
-                else
-                    __value = null;
-
-
-                return __value;
-            }
-            set
-            {
-                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
-
-                // shortcut noops
-                if (value == null && _fk_B == null)
-                    return;
-                else if (value != null && value.ID == _fk_B)
-                    return;
-
-                // cache old value to remove inverse references later
-                var __oldValue = BImpl;
-                var __newValue = value;
-
-                // Changing Event fires before anything is touched
-                NotifyPropertyChanging("B", __oldValue, __newValue);
-
-
-                // next, set the local reference
-                _fk_B = __newValue == null ? (int?)null : __newValue.ID;
-
-                // everything is done. fire the Changed event
-                NotifyPropertyChanged("B", __oldValue, __newValue);
-
-            }
-        }
-        // END Kistl.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
-
-        #region Serializer
-
-
-        public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
-        {
-            base.ToStream(binStream, auxObjects, eagerLoadLists);
-            if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream(this._ExportGuid, binStream);
-            BinarySerializer.ToStream(A != null ? A.ID : (int?)null, binStream);
-            BinarySerializer.ToStream(B != null ? B.ID : (int?)null, binStream);
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
-        {
-            var baseResult = base.FromStream(binStream);
-            var result = new List<IPersistenceObject>();
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            BinarySerializer.FromStream(out this._ExportGuid, binStream);
-            BinarySerializer.FromStream(out this._fk_A, binStream);
-            BinarySerializer.FromStream(out this._fk_B, binStream);
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public override void ToStream(System.Xml.XmlWriter xml)
-        {
-            base.ToStream(xml);
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this._ExportGuid, xml, "ExportGuid", "");
-            XmlStreamer.ToStream(A != null ? A.ID : (int?)null, xml, "A", "Kistl.App.Base");
-            XmlStreamer.ToStream(B != null ? B.ID : (int?)null, xml, "B", "Kistl.App.Base");
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
-        {
-            var baseResult = base.FromStream(xml);
-            var result = new List<IPersistenceObject>();
-            if (CurrentAccessRights != Kistl.API.AccessRights.None) {
-            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
-            XmlStreamer.FromStream(ref this._fk_A, xml, "A", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_B, xml, "B", "Kistl.App.Base");
-            } // if (CurrentAccessRights != Kistl.API.AccessRights.None)
-			return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
-        {
-            xml.WriteAttributeString("ExportGuid", _ExportGuid.ToString());
-            if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Kistl.App.Base");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Kistl.App.Base");
-        }
-
-        public virtual void MergeImport(System.Xml.XmlReader xml)
-        {
-            if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.FromStream(ref this._ExportGuid, xml, "ExportGuid", "");
-            XmlStreamer.FromStream(ref this._fk_guid_A, xml, "A", "Kistl.App.Base");
-            XmlStreamer.FromStream(ref this._fk_guid_B, xml, "B", "Kistl.App.Base");
-        }
-
-        #endregion
-
-        public override Type GetImplementedInterface()
-        {
-            return typeof(ObjectClass_implements_Interface_RelationEntry);
-        }
-
-        public override void ApplyChangesFrom(IPersistenceObject obj)
-        {
-            base.ApplyChangesFrom(obj);
-            var other = (ObjectClass_implements_Interface_RelationEntryMemoryImpl)obj;
-            var me = (ObjectClass_implements_Interface_RelationEntryMemoryImpl)this;
-
-        }
-
-
-        public override void ReloadReferences()
-        {
-            // Do not reload references if the current object has been deleted.
-            // TODO: enable when MemoryContext uses MemoryDataObjects
-            //if (this.ObjectState == DataObjectState.Deleted) return;
-
-            if (_fk_guid_A.HasValue)
-                AImpl = (Kistl.App.Base.ObjectClassMemoryImpl)Context.FindPersistenceObject<Kistl.App.Base.ObjectClass>(_fk_guid_A.Value);
-            else
-            if (_fk_A.HasValue)
-                AImpl = (Kistl.App.Base.ObjectClassMemoryImpl)Context.Find<Kistl.App.Base.ObjectClass>(_fk_A.Value);
-            else
-                AImpl = null;
-
-            if (_fk_guid_B.HasValue)
-                BImpl = (Kistl.App.Base.InterfaceMemoryImpl)Context.FindPersistenceObject<Kistl.App.Base.Interface>(_fk_guid_B.Value);
-            else
-            if (_fk_B.HasValue)
-                BImpl = (Kistl.App.Base.InterfaceMemoryImpl)Context.Find<Kistl.App.Base.Interface>(_fk_B.Value);
             else
                 BImpl = null;
 

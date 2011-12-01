@@ -22,6 +22,24 @@
                      column="`fk_InputProperties`" />
         <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
     </class>
+    <class name="Kistl.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl+DataType_implements_Interface_RelationEntryProxy"
+           proxy="Kistl.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl+DataType_implements_Interface_RelationEntryProxy"
+           table="`DataType_implements_ImplementedInterfaces`"
+           schema="`base`" >
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`base`</param>
+                <param name="sequence">`DataType_implements_ImplementedInterfaces_ID_seq`</param>
+            </generator>
+        </id>
+
+        <many-to-one name="A"
+                     column="`fk_DataType`" />
+        <many-to-one name="B"
+                     column="`fk_ImplementedInterfaces`" />
+        <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
+    </class>
     <class name="at.dasz.DocumentManagement.Document_has_Blob_RelationEntryNHibernateImpl+Document_has_Blob_RelationEntryProxy"
            proxy="at.dasz.DocumentManagement.Document_has_Blob_RelationEntryNHibernateImpl+Document_has_Blob_RelationEntryProxy"
            table="`Document_has_Revisions`"
@@ -129,24 +147,6 @@
                      column="`fk_NavigationScreen`" />
         <many-to-one name="B"
                      column="`fk_Groups`" />
-        <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
-    </class>
-    <class name="Kistl.App.Base.ObjectClass_implements_Interface_RelationEntryNHibernateImpl+ObjectClass_implements_Interface_RelationEntryProxy"
-           proxy="Kistl.App.Base.ObjectClass_implements_Interface_RelationEntryNHibernateImpl+ObjectClass_implements_Interface_RelationEntryProxy"
-           table="`ObjectClass_implements_ImplementsInterfaces`"
-           schema="`base`" >
-
-        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
-            <generator class="native">
-                <param name="schema">`base`</param>
-                <param name="sequence">`ObjectClass_implements_ImplementsInterfaces_ID_seq`</param>
-            </generator>
-        </id>
-
-        <many-to-one name="A"
-                     column="`fk_ObjectClass`" />
-        <many-to-one name="B"
-                     column="`fk_ImplementsInterfaces`" />
         <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
     </class>
     <class name="Kistl.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl+Projekt_haben_Mitarbeiter_RelationEntryProxy"

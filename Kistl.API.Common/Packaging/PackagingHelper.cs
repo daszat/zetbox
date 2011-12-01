@@ -29,8 +29,8 @@ namespace Kistl.App.Packaging
                     .OrderBy(i => i.Name).ThenBy(i => i.ExportGuid));
 
                 // export only relation entry ending on a "local" class. Since we do not have proper inter-module dependencies in place, we cannot support pushing interface implementations across modules.
-                AddMetaObjects(result, () => ctx.Internals().GetPersistenceObjectQuery<ObjectClass_implements_Interface_RelationEntry>()
-                    // Workaround for missing Module relation on ObjectClass_implements_Interface_RelationEntry when creating KistlBase.xml
+                AddMetaObjects(result, () => ctx.Internals().GetPersistenceObjectQuery<DataType_implements_Interface_RelationEntry>()
+                    // Workaround for missing Module relation on DataType_implements_Interface_RelationEntry when creating KistlBase.xml
                     .Where(i => i.A != null && i.A.Module != null && i.B != null)
                     .Where(i => i.A.Module == module)
                     .OrderBy(i => i.A.Name).ThenBy(i => i.B.Name).ThenBy(i => i.A.ExportGuid).ThenBy(i => i.B.ExportGuid));

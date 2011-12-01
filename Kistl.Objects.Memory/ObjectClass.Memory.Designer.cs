@@ -309,29 +309,6 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnAcc
 public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnFilterConfigurations_PostSetter;
 
         /// <summary>
-        /// Interfaces der Objektklasse
-        /// </summary>
-        // collection entry list property
-   		// Kistl.Generator.Templates.Properties.CollectionEntryListProperty
-		public ICollection<Kistl.App.Base.Interface> ImplementsInterfaces
-		{
-			get
-			{
-				if (_ImplementsInterfaces == null)
-				{
-					Context.FetchRelation<Kistl.App.Base.ObjectClass_implements_Interface_RelationEntryMemoryImpl>(new Guid("692c1064-37a2-4be3-a81e-4cb91f673aa3"), RelationEndRole.A, this);
-					_ImplementsInterfaces 
-						= new ObservableBSideCollectionWrapper<Kistl.App.Base.ObjectClass, Kistl.App.Base.Interface, Kistl.App.Base.ObjectClass_implements_Interface_RelationEntryMemoryImpl, ICollection<Kistl.App.Base.ObjectClass_implements_Interface_RelationEntryMemoryImpl>>(
-							this, 
-							new RelationshipFilterASideCollection<Kistl.App.Base.ObjectClass_implements_Interface_RelationEntryMemoryImpl>(this.Context, this));
-				}
-				return (ICollection<Kistl.App.Base.Interface>)_ImplementsInterfaces;
-			}
-		}
-
-		private ObservableBSideCollectionWrapper<Kistl.App.Base.ObjectClass, Kistl.App.Base.Interface, Kistl.App.Base.ObjectClass_implements_Interface_RelationEntryMemoryImpl, ICollection<Kistl.App.Base.ObjectClass_implements_Interface_RelationEntryMemoryImpl>> _ImplementsInterfaces;
-
-        /// <summary>
         /// Class is abstract
         /// </summary>
         // value type property
@@ -846,14 +823,6 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
                         "FilterConfigurations",
                         null,
                         obj => obj.FilterConfigurations,
-                        null), // lists are read-only properties
-                    // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new PropertyDescriptorMemoryImpl<ObjectClassMemoryImpl, ICollection<Kistl.App.Base.Interface>>(
-                        lazyCtx,
-                        new Guid("a9ec04c2-0807-4d6c-a96a-824d13e5c571"),
-                        "ImplementsInterfaces",
-                        null,
-                        obj => obj.ImplementsInterfaces,
                         null), // lists are read-only properties
                     // else
                     new PropertyDescriptorMemoryImpl<ObjectClassMemoryImpl, bool>(

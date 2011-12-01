@@ -36,6 +36,12 @@ namespace Kistl.App.Base
         }
 
         /// <summary>
+        /// Interfaces der Objektklasse
+        /// </summary>
+
+        ICollection<Kistl.App.Base.Interface> ImplementsInterfaces { get; }
+
+        /// <summary>
         /// Liste aller Methoden der Objektklasse.
         /// </summary>
 

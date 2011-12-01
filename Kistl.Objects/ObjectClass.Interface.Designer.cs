@@ -42,12 +42,6 @@ namespace Kistl.App.Base
         ICollection<Kistl.App.GUI.ObjectClassFilterConfiguration> FilterConfigurations { get; }
 
         /// <summary>
-        /// Interfaces der Objektklasse
-        /// </summary>
-
-        ICollection<Kistl.App.Base.Interface> ImplementsInterfaces { get; }
-
-        /// <summary>
         /// Class is abstract
         /// </summary>
         bool IsAbstract {

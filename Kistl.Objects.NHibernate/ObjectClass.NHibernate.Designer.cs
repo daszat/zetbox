@@ -309,35 +309,6 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnAcc
 public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnFilterConfigurations_PostSetter;
 
         /// <summary>
-        /// Interfaces der Objektklasse
-        /// </summary>
-        // collection entry list property
-   		// Kistl.DalProvider.NHibernate.Generator.Templates.Properties.CollectionEntryListProperty
-		public ICollection<Kistl.App.Base.Interface> ImplementsInterfaces
-		{
-			get
-			{
-				if (_ImplementsInterfaces == null)
-				{
-					_ImplementsInterfaces 
-						= new NHibernateBSideCollectionWrapper<Kistl.App.Base.ObjectClass, Kistl.App.Base.Interface, Kistl.App.Base.ObjectClass_implements_Interface_RelationEntryNHibernateImpl>(
-							this, 
-							new ProjectedCollection<Kistl.App.Base.ObjectClass_implements_Interface_RelationEntryNHibernateImpl.ObjectClass_implements_Interface_RelationEntryProxy, Kistl.App.Base.ObjectClass_implements_Interface_RelationEntryNHibernateImpl>(
-                                this.Proxy.ImplementsInterfaces,
-                                p => (Kistl.App.Base.ObjectClass_implements_Interface_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Kistl.App.Base.ObjectClass_implements_Interface_RelationEntryNHibernateImpl.ObjectClass_implements_Interface_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
-                            entry => (IRelationListSync<Kistl.App.Base.ObjectClass_implements_Interface_RelationEntryNHibernateImpl>)null);
-                    if (ImplementsInterfaces_was_eagerLoaded) { ImplementsInterfaces_was_eagerLoaded = false; }
-				}
-				return (ICollection<Kistl.App.Base.Interface>)_ImplementsInterfaces;
-			}
-		}
-
-		private NHibernateBSideCollectionWrapper<Kistl.App.Base.ObjectClass, Kistl.App.Base.Interface, Kistl.App.Base.ObjectClass_implements_Interface_RelationEntryNHibernateImpl> _ImplementsInterfaces;
-		// ignored, but required for Serialization
-        private bool ImplementsInterfaces_was_eagerLoaded = false;
-
-        /// <summary>
         /// Class is abstract
         /// </summary>
 
@@ -844,14 +815,6 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
                         null,
                         obj => obj.FilterConfigurations,
                         null), // lists are read-only properties
-                    // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new PropertyDescriptorNHibernateImpl<ObjectClassNHibernateImpl, ICollection<Kistl.App.Base.Interface>>(
-                        lazyCtx,
-                        new Guid("a9ec04c2-0807-4d6c-a96a-824d13e5c571"),
-                        "ImplementsInterfaces",
-                        null,
-                        obj => obj.ImplementsInterfaces,
-                        null), // lists are read-only properties
                     // else
                     new PropertyDescriptorNHibernateImpl<ObjectClassNHibernateImpl, bool>(
                         lazyCtx,
@@ -1042,7 +1005,6 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
             {
                 AccessControlList = new Collection<Kistl.App.Base.AccessControlNHibernateImpl.AccessControlProxy>();
                 FilterConfigurations = new Collection<Kistl.App.GUI.ObjectClassFilterConfigurationNHibernateImpl.ObjectClassFilterConfigurationProxy>();
-                ImplementsInterfaces = new Collection<Kistl.App.Base.ObjectClass_implements_Interface_RelationEntryNHibernateImpl.ObjectClass_implements_Interface_RelationEntryProxy>();
                 SubClasses = new Collection<Kistl.App.Base.ObjectClassNHibernateImpl.ObjectClassProxy>();
             }
 
@@ -1057,8 +1019,6 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
             public virtual Kistl.App.GUI.ViewModelDescriptorNHibernateImpl.ViewModelDescriptorProxy DefaultViewModelDescriptor { get; set; }
 
             public virtual ICollection<Kistl.App.GUI.ObjectClassFilterConfigurationNHibernateImpl.ObjectClassFilterConfigurationProxy> FilterConfigurations { get; set; }
-
-            public virtual ICollection<Kistl.App.Base.ObjectClass_implements_Interface_RelationEntryNHibernateImpl.ObjectClass_implements_Interface_RelationEntryProxy> ImplementsInterfaces { get; set; }
 
             public virtual bool IsAbstract { get; set; }
 

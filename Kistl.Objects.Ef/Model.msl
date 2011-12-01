@@ -1268,6 +1268,45 @@
     </AssociationSetMapping>
 
     <!--
+    Relation: FK_DataType_implements_ImplementedInterfaces
+    A: ZeroOrMore DataType as DataType
+    B: ZeroOrMore Interface as ImplementedInterfaces
+    Preferred Storage: Separate
+    -->
+    <EntitySetMapping Name="DataType_implements_Interface_RelationEntry">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.DataType_implements_Interface_RelationEntry)">
+        <MappingFragment StoreEntitySet="DataType_implements_Interface_RelationEntry">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+		  <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <!-- A to CollectionEntry -->
+    <AssociationSetMapping Name="FK_DataType_implements_ImplementedInterfaces_A"
+                           TypeName="Model.FK_DataType_implements_ImplementedInterfaces_A"
+                           StoreEntitySet="DataType_implements_Interface_RelationEntry" >
+      <EndProperty Name="DataType">
+        <ScalarProperty Name="ID" ColumnName="fk_DataType"/>
+      </EndProperty>
+      <EndProperty Name="CollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_DataType" IsNull="false"/>
+    </AssociationSetMapping>
+    <!-- B to CollectionEntry -->
+    <AssociationSetMapping Name="FK_DataType_implements_ImplementedInterfaces_B"
+                           TypeName="Model.FK_DataType_implements_ImplementedInterfaces_B"
+                           StoreEntitySet="DataType_implements_Interface_RelationEntry" >
+      <EndProperty Name="ImplementedInterfaces">
+        <ScalarProperty Name="ID" ColumnName="fk_ImplementedInterfaces"/>
+      </EndProperty>
+      <EndProperty Name="CollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_ImplementedInterfaces" IsNull="false"/>
+    </AssociationSetMapping>
+
+    <!--
     Relation: FK_Document_has_Revisions
     A: ZeroOrMore Document as Document
     B: ZeroOrMore Blob as Revisions
@@ -1421,45 +1460,6 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_Groups" IsNull="false"/>
-    </AssociationSetMapping>
-
-    <!--
-    Relation: FK_ObjectClass_implements_ImplementsInterfaces
-    A: ZeroOrMore ObjectClass as ObjectClass
-    B: ZeroOrMore Interface as ImplementsInterfaces
-    Preferred Storage: Separate
-    -->
-    <EntitySetMapping Name="ObjectClass_implements_Interface_RelationEntry">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.ObjectClass_implements_Interface_RelationEntry)">
-        <MappingFragment StoreEntitySet="ObjectClass_implements_Interface_RelationEntry">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-		  <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <!-- A to CollectionEntry -->
-    <AssociationSetMapping Name="FK_ObjectClass_implements_ImplementsInterfaces_A"
-                           TypeName="Model.FK_ObjectClass_implements_ImplementsInterfaces_A"
-                           StoreEntitySet="ObjectClass_implements_Interface_RelationEntry" >
-      <EndProperty Name="ObjectClass">
-        <ScalarProperty Name="ID" ColumnName="fk_ObjectClass"/>
-      </EndProperty>
-      <EndProperty Name="CollectionEntry">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_ObjectClass" IsNull="false"/>
-    </AssociationSetMapping>
-    <!-- B to CollectionEntry -->
-    <AssociationSetMapping Name="FK_ObjectClass_implements_ImplementsInterfaces_B"
-                           TypeName="Model.FK_ObjectClass_implements_ImplementsInterfaces_B"
-                           StoreEntitySet="ObjectClass_implements_Interface_RelationEntry" >
-      <EndProperty Name="ImplementsInterfaces">
-        <ScalarProperty Name="ID" ColumnName="fk_ImplementsInterfaces"/>
-      </EndProperty>
-      <EndProperty Name="CollectionEntry">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_ImplementsInterfaces" IsNull="false"/>
     </AssociationSetMapping>
 
     <!--

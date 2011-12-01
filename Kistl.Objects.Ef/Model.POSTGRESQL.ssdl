@@ -526,6 +526,22 @@
     </AssociationSet>
     
     <!-- 
+    Relation: FK_DataType_implements_ImplementedInterfaces
+    A: ZeroOrMore DataType as DataType
+    B: ZeroOrMore Interface as ImplementedInterfaces
+    Preferred Storage: Separate
+    -->
+    <EntitySet Name="DataType_implements_Interface_RelationEntry" EntityType="Model.Store.DataType_implements_Interface_RelationEntry" Schema="base" Table="DataType_implements_ImplementedInterfaces" />
+    <AssociationSet Name="FK_DataType_implements_ImplementedInterfaces_A" Association="Model.Store.FK_DataType_implements_ImplementedInterfaces_A" >
+      <End Role="DataType" EntitySet="DataType" />
+      <End Role="CollectionEntry" EntitySet="DataType_implements_Interface_RelationEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DataType_implements_ImplementedInterfaces_B" Association="Model.Store.FK_DataType_implements_ImplementedInterfaces_B" >
+      <End Role="CollectionEntry" EntitySet="DataType_implements_Interface_RelationEntry" />
+      <End Role="ImplementedInterfaces" EntitySet="Interface" />
+    </AssociationSet>
+    
+    <!-- 
     Relation: FK_Document_has_Revisions
     A: ZeroOrMore Document as Document
     B: ZeroOrMore Blob as Revisions
@@ -587,22 +603,6 @@
     <AssociationSet Name="FK_NavigationScreen_accessed_by_Groups_B" Association="Model.Store.FK_NavigationScreen_accessed_by_Groups_B" >
       <End Role="CollectionEntry" EntitySet="NavigationEntry_accessed_by_Group_RelationEntry" />
       <End Role="Groups" EntitySet="Group" />
-    </AssociationSet>
-    
-    <!-- 
-    Relation: FK_ObjectClass_implements_ImplementsInterfaces
-    A: ZeroOrMore ObjectClass as ObjectClass
-    B: ZeroOrMore Interface as ImplementsInterfaces
-    Preferred Storage: Separate
-    -->
-    <EntitySet Name="ObjectClass_implements_Interface_RelationEntry" EntityType="Model.Store.ObjectClass_implements_Interface_RelationEntry" Schema="base" Table="ObjectClass_implements_ImplementsInterfaces" />
-    <AssociationSet Name="FK_ObjectClass_implements_ImplementsInterfaces_A" Association="Model.Store.FK_ObjectClass_implements_ImplementsInterfaces_A" >
-      <End Role="ObjectClass" EntitySet="ObjectClass" />
-      <End Role="CollectionEntry" EntitySet="ObjectClass_implements_Interface_RelationEntry" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ObjectClass_implements_ImplementsInterfaces_B" Association="Model.Store.FK_ObjectClass_implements_ImplementsInterfaces_B" >
-      <End Role="CollectionEntry" EntitySet="ObjectClass_implements_Interface_RelationEntry" />
-      <End Role="ImplementsInterfaces" EntitySet="Interface" />
     </AssociationSet>
     
     <!-- 
@@ -3090,6 +3090,45 @@
   </Association>
 
 	
+  <EntityType Name="DataType_implements_Interface_RelationEntry">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
+	<Property Name="ExportGuid" Type="uuid" Nullable="false" />
+    <Property Name="fk_DataType" Type="int4" Nullable="true" />
+    <Property Name="fk_ImplementedInterfaces" Type="int4" Nullable="true" />
+  </EntityType>
+
+  <!-- A to CollectionEntry -->
+  <Association Name="FK_DataType_implements_ImplementedInterfaces_A">
+    <End Role="DataType" Type="Model.Store.DataType" Multiplicity="0..1" />
+    <End Role="CollectionEntry" Type="Model.Store.DataType_implements_Interface_RelationEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DataType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CollectionEntry">
+        <PropertyRef Name="fk_DataType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+  <!-- B to CollectionEntry -->
+  <Association Name="FK_DataType_implements_ImplementedInterfaces_B">
+    <End Role="ImplementedInterfaces" Type="Model.Store.Interface" Multiplicity="0..1" />
+    <End Role="CollectionEntry" Type="Model.Store.DataType_implements_Interface_RelationEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ImplementedInterfaces">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CollectionEntry">
+        <PropertyRef Name="fk_ImplementedInterfaces" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+	
   <EntityType Name="Document_has_Blob_RelationEntry">
     <Key>
       <PropertyRef Name="ID" />
@@ -3241,45 +3280,6 @@
       </Principal>
       <Dependent Role="CollectionEntry">
         <PropertyRef Name="fk_Groups" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-	
-  <EntityType Name="ObjectClass_implements_Interface_RelationEntry">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
-	<Property Name="ExportGuid" Type="uuid" Nullable="false" />
-    <Property Name="fk_ObjectClass" Type="int4" Nullable="true" />
-    <Property Name="fk_ImplementsInterfaces" Type="int4" Nullable="true" />
-  </EntityType>
-
-  <!-- A to CollectionEntry -->
-  <Association Name="FK_ObjectClass_implements_ImplementsInterfaces_A">
-    <End Role="ObjectClass" Type="Model.Store.ObjectClass" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.ObjectClass_implements_Interface_RelationEntry" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ObjectClass">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="CollectionEntry">
-        <PropertyRef Name="fk_ObjectClass" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-  <!-- B to CollectionEntry -->
-  <Association Name="FK_ObjectClass_implements_ImplementsInterfaces_B">
-    <End Role="ImplementsInterfaces" Type="Model.Store.Interface" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.ObjectClass_implements_Interface_RelationEntry" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ImplementsInterfaces">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="CollectionEntry">
-        <PropertyRef Name="fk_ImplementsInterfaces" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

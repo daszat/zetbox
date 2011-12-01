@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2011-11-04T11:23:24.420415Z" xmlns="http://dasz.at/Kistl">
+<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2011-12-01T15:39:39Z" xmlns="http://dasz.at/Kistl">
   <KistlBase:Module ExportGuid="a56d9701-d98e-49ab-bd49-a491d09e2d46">
     <KistlBase:ChangedOn>2011-08-05T10:30:47.664236Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05Z</KistlBase:CreatedOn>
@@ -88,46 +88,46 @@
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <KistlBase:TableName>Tasks</KistlBase:TableName>
   </KistlBase:ObjectClass>
-  <KistlBase:ObjectClass_implements_Interface_RelationEntry ExportGuid="8c60753a-addf-4edf-92f8-8ad18157d9a5">
+  <KistlBase:DataType_implements_Interface_RelationEntry ExportGuid="8c60753a-addf-4edf-92f8-8ad18157d9a5">
     <KistlBase:A>f6e11d1d-a832-413a-bf1d-5ecf5f7bc79d</KistlBase:A>
     <KistlBase:B>a73f2d0a-786b-483d-b474-b9d9df42b8b3</KistlBase:B>
-  </KistlBase:ObjectClass_implements_Interface_RelationEntry>
-  <KistlBase:ObjectClass_implements_Interface_RelationEntry ExportGuid="d4171947-0bb8-4afd-8e8c-f1bb91ca9434">
+  </KistlBase:DataType_implements_Interface_RelationEntry>
+  <KistlBase:DataType_implements_Interface_RelationEntry ExportGuid="d4171947-0bb8-4afd-8e8c-f1bb91ca9434">
     <KistlBase:A>f6e11d1d-a832-413a-bf1d-5ecf5f7bc79d</KistlBase:A>
     <KistlBase:B>4ae6616a-eca3-47a5-b502-8e3c3913c2f0</KistlBase:B>
-  </KistlBase:ObjectClass_implements_Interface_RelationEntry>
-  <KistlBase:ObjectClass_implements_Interface_RelationEntry ExportGuid="d969f01b-8e07-465f-80c1-a19cf67c8cf9">
+  </KistlBase:DataType_implements_Interface_RelationEntry>
+  <KistlBase:DataType_implements_Interface_RelationEntry ExportGuid="d969f01b-8e07-465f-80c1-a19cf67c8cf9">
     <KistlBase:A>b9ddd097-4f45-40c5-87e9-7331ab58727c</KistlBase:A>
     <KistlBase:B>a73f2d0a-786b-483d-b474-b9d9df42b8b3</KistlBase:B>
-  </KistlBase:ObjectClass_implements_Interface_RelationEntry>
-  <KistlBase:ObjectClass_implements_Interface_RelationEntry ExportGuid="9c6e9aeb-b513-472a-8a40-62efa064d458">
+  </KistlBase:DataType_implements_Interface_RelationEntry>
+  <KistlBase:DataType_implements_Interface_RelationEntry ExportGuid="9c6e9aeb-b513-472a-8a40-62efa064d458">
     <KistlBase:A>b9ddd097-4f45-40c5-87e9-7331ab58727c</KistlBase:A>
     <KistlBase:B>4ae6616a-eca3-47a5-b502-8e3c3913c2f0</KistlBase:B>
-  </KistlBase:ObjectClass_implements_Interface_RelationEntry>
-  <KistlBase:ObjectClass_implements_Interface_RelationEntry ExportGuid="b7707e1b-5d4d-4e60-aa8a-c21b8a01a333">
+  </KistlBase:DataType_implements_Interface_RelationEntry>
+  <KistlBase:DataType_implements_Interface_RelationEntry ExportGuid="b7707e1b-5d4d-4e60-aa8a-c21b8a01a333">
     <KistlBase:A>77933a20-338a-4961-b751-62ffa0a75c6a</KistlBase:A>
     <KistlBase:B>a73f2d0a-786b-483d-b474-b9d9df42b8b3</KistlBase:B>
-  </KistlBase:ObjectClass_implements_Interface_RelationEntry>
-  <KistlBase:ObjectClass_implements_Interface_RelationEntry ExportGuid="db4db4c0-9c21-4ea8-ad4f-5ca7d7f67310">
+  </KistlBase:DataType_implements_Interface_RelationEntry>
+  <KistlBase:DataType_implements_Interface_RelationEntry ExportGuid="db4db4c0-9c21-4ea8-ad4f-5ca7d7f67310">
     <KistlBase:A>77933a20-338a-4961-b751-62ffa0a75c6a</KistlBase:A>
     <KistlBase:B>4ae6616a-eca3-47a5-b502-8e3c3913c2f0</KistlBase:B>
-  </KistlBase:ObjectClass_implements_Interface_RelationEntry>
-  <KistlBase:ObjectClass_implements_Interface_RelationEntry ExportGuid="0f9d7471-7f42-4e62-a59a-cb22b702bd7f">
+  </KistlBase:DataType_implements_Interface_RelationEntry>
+  <KistlBase:DataType_implements_Interface_RelationEntry ExportGuid="0f9d7471-7f42-4e62-a59a-cb22b702bd7f">
     <KistlBase:A>885939e8-82e1-4fdf-b80e-5f612d5131d3</KistlBase:A>
     <KistlBase:B>a73f2d0a-786b-483d-b474-b9d9df42b8b3</KistlBase:B>
-  </KistlBase:ObjectClass_implements_Interface_RelationEntry>
-  <KistlBase:ObjectClass_implements_Interface_RelationEntry ExportGuid="21117d5e-73c0-4667-9766-7c90216d2d0e">
+  </KistlBase:DataType_implements_Interface_RelationEntry>
+  <KistlBase:DataType_implements_Interface_RelationEntry ExportGuid="21117d5e-73c0-4667-9766-7c90216d2d0e">
     <KistlBase:A>885939e8-82e1-4fdf-b80e-5f612d5131d3</KistlBase:A>
     <KistlBase:B>4ae6616a-eca3-47a5-b502-8e3c3913c2f0</KistlBase:B>
-  </KistlBase:ObjectClass_implements_Interface_RelationEntry>
-  <KistlBase:ObjectClass_implements_Interface_RelationEntry ExportGuid="33251813-22bd-4913-8225-8f71da76e801">
+  </KistlBase:DataType_implements_Interface_RelationEntry>
+  <KistlBase:DataType_implements_Interface_RelationEntry ExportGuid="33251813-22bd-4913-8225-8f71da76e801">
     <KistlBase:A>3fbb42ca-a084-491d-9135-85ed24f1ef78</KistlBase:A>
     <KistlBase:B>a73f2d0a-786b-483d-b474-b9d9df42b8b3</KistlBase:B>
-  </KistlBase:ObjectClass_implements_Interface_RelationEntry>
-  <KistlBase:ObjectClass_implements_Interface_RelationEntry ExportGuid="36a57af0-4527-4d92-af6c-7007f44bdc25">
+  </KistlBase:DataType_implements_Interface_RelationEntry>
+  <KistlBase:DataType_implements_Interface_RelationEntry ExportGuid="36a57af0-4527-4d92-af6c-7007f44bdc25">
     <KistlBase:A>3fbb42ca-a084-491d-9135-85ed24f1ef78</KistlBase:A>
     <KistlBase:B>4ae6616a-eca3-47a5-b502-8e3c3913c2f0</KistlBase:B>
-  </KistlBase:ObjectClass_implements_Interface_RelationEntry>
+  </KistlBase:DataType_implements_Interface_RelationEntry>
   <KistlBase:StringProperty ExportGuid="aaffed82-1f4c-4c0f-a52d-3ca4dbdefe94">
     <KistlBase:ChangedOn>2011-08-05T10:31:13.089285Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05Z</KistlBase:CreatedOn>
@@ -2645,10 +2645,10 @@
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <KistlBase:TableName>TestStudenten</KistlBase:TableName>
   </KistlBase:ObjectClass>
-  <KistlBase:ObjectClass_implements_Interface_RelationEntry ExportGuid="83c778d4-d0f7-473d-82c4-4fed100cee73">
+  <KistlBase:DataType_implements_Interface_RelationEntry ExportGuid="83c778d4-d0f7-473d-82c4-4fed100cee73">
     <KistlBase:A>19f38f05-e88e-44c6-bfdf-d502b3632028</KistlBase:A>
     <KistlBase:B>c8ff9958-dd26-4a92-a049-7fa9d51d8bf2</KistlBase:B>
-  </KistlBase:ObjectClass_implements_Interface_RelationEntry>
+  </KistlBase:DataType_implements_Interface_RelationEntry>
   <KistlBase:StringProperty ExportGuid="e7371fa9-cd18-4cdc-91c3-a73c0984a019">
     <KistlBase:ChangedOn>2011-08-05T10:31:13.094285Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05Z</KistlBase:CreatedOn>

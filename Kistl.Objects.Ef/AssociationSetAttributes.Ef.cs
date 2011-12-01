@@ -764,6 +764,24 @@ using Kistl.DalProvider.Ef;
 
 
 	/*
+    Relation: FK_DataType_implements_ImplementedInterfaces
+    A: ZeroOrMore DataType as DataType
+    B: ZeroOrMore Interface as ImplementedInterfaces
+    Preferred Storage: Separate
+	*/
+
+// The association from A to the CollectionEntry
+[assembly: EdmRelationship("Model", "FK_DataType_implements_ImplementedInterfaces_A",
+    "DataType", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.DataTypeEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.DataType_implements_Interface_RelationEntryEfImpl)
+    )]
+// The association from B to the CollectionEntry
+[assembly: EdmRelationship("Model", "FK_DataType_implements_ImplementedInterfaces_B",
+    "ImplementedInterfaces", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.InterfaceEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.DataType_implements_Interface_RelationEntryEfImpl)
+    )]
+
+	/*
     Relation: FK_DataType_may_request_ControlKind
     A: ZeroOrMore DataType as DataType
     B: ZeroOrOne ControlKind as ControlKind
@@ -1719,24 +1737,6 @@ using Kistl.DalProvider.Ef;
     "Properties", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.PropertyEfImpl)
     )]
 
-
-	/*
-    Relation: FK_ObjectClass_implements_ImplementsInterfaces
-    A: ZeroOrMore ObjectClass as ObjectClass
-    B: ZeroOrMore Interface as ImplementsInterfaces
-    Preferred Storage: Separate
-	*/
-
-// The association from A to the CollectionEntry
-[assembly: EdmRelationship("Model", "FK_ObjectClass_implements_ImplementsInterfaces_A",
-    "ObjectClass", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.ObjectClassEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.ObjectClass_implements_Interface_RelationEntryEfImpl)
-    )]
-// The association from B to the CollectionEntry
-[assembly: EdmRelationship("Model", "FK_ObjectClass_implements_ImplementsInterfaces_B",
-    "ImplementsInterfaces", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.InterfaceEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Kistl.App.Base.ObjectClass_implements_Interface_RelationEntryEfImpl)
-    )]
 
 	/*
     Relation: FK_ObjectParameter_has_ObjectClass

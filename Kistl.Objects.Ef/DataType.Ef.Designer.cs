@@ -660,6 +660,54 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnConstr
 		public static event PropertyPostSetterHandler<Kistl.App.Base.DataType, Guid> OnExportGuid_PostSetter;
 
         /// <summary>
+        /// Interfaces der Objektklasse
+        /// </summary>
+    /*
+    Relation: FK_DataType_implements_ImplementedInterfaces
+    A: ZeroOrMore DataType as DataType
+    B: ZeroOrMore Interface as ImplementedInterfaces
+    Preferred Storage: Separate
+    */
+        // collection reference property
+        // Kistl.DalProvider.Ef.Generator.Templates.Properties.CollectionEntryListProperty
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public ICollection<Kistl.App.Base.Interface> ImplementsInterfaces
+        {
+            get
+            {
+                if (_ImplementsInterfaces == null)
+                {
+                    _ImplementsInterfaces = new BSideCollectionWrapper<Kistl.App.Base.DataType, Kistl.App.Base.Interface, Kistl.App.Base.DataType_implements_Interface_RelationEntryEfImpl, EntityCollection<Kistl.App.Base.DataType_implements_Interface_RelationEntryEfImpl>>(
+                            this,
+                            ImplementsInterfacesImpl);
+                }
+                return _ImplementsInterfaces;
+            }
+        }
+        
+        [EdmRelationshipNavigationProperty("Model", "FK_DataType_implements_ImplementedInterfaces_A", "CollectionEntry")]
+        public EntityCollection<Kistl.App.Base.DataType_implements_Interface_RelationEntryEfImpl> ImplementsInterfacesImpl
+        {
+            get
+            {
+                var c = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<Kistl.App.Base.DataType_implements_Interface_RelationEntryEfImpl>(
+                        "Model.FK_DataType_implements_ImplementedInterfaces_A",
+                        "CollectionEntry");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !c.IsLoaded)
+                {
+                    c.Load();
+                }
+                c.ForEach(i => i.AttachToContext(Context));
+                return c;
+            }
+        }
+        private BSideCollectionWrapper<Kistl.App.Base.DataType, Kistl.App.Base.Interface, Kistl.App.Base.DataType_implements_Interface_RelationEntryEfImpl, EntityCollection<Kistl.App.Base.DataType_implements_Interface_RelationEntryEfImpl>> _ImplementsInterfaces;
+
+        /// <summary>
         /// Liste aller Methoden der Objektklasse.
         /// </summary>
     /*
@@ -1393,6 +1441,14 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
                         null,
                         obj => obj.ExportGuid,
                         (obj, val) => obj.ExportGuid = val),
+                    // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+                    new PropertyDescriptorEfImpl<DataTypeEfImpl, ICollection<Kistl.App.Base.Interface>>(
+                        lazyCtx,
+                        new Guid("a9ec04c2-0807-4d6c-a96a-824d13e5c571"),
+                        "ImplementsInterfaces",
+                        null,
+                        obj => obj.ImplementsInterfaces,
+                        null), // lists are read-only properties
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
                     new PropertyDescriptorEfImpl<DataTypeEfImpl, ICollection<Kistl.App.Base.Method>>(
                         lazyCtx,

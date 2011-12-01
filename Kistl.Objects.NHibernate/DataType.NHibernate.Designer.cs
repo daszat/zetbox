@@ -601,6 +601,35 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnConstr
 		public static event PropertyPostSetterHandler<Kistl.App.Base.DataType, Guid> OnExportGuid_PostSetter;
 
         /// <summary>
+        /// Interfaces der Objektklasse
+        /// </summary>
+        // collection entry list property
+   		// Kistl.DalProvider.NHibernate.Generator.Templates.Properties.CollectionEntryListProperty
+		public ICollection<Kistl.App.Base.Interface> ImplementsInterfaces
+		{
+			get
+			{
+				if (_ImplementsInterfaces == null)
+				{
+					_ImplementsInterfaces 
+						= new NHibernateBSideCollectionWrapper<Kistl.App.Base.DataType, Kistl.App.Base.Interface, Kistl.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl>(
+							this, 
+							new ProjectedCollection<Kistl.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl.DataType_implements_Interface_RelationEntryProxy, Kistl.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl>(
+                                this.Proxy.ImplementsInterfaces,
+                                p => (Kistl.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
+                                ce => (Kistl.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl.DataType_implements_Interface_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
+                            entry => (IRelationListSync<Kistl.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl>)null);
+                    if (ImplementsInterfaces_was_eagerLoaded) { ImplementsInterfaces_was_eagerLoaded = false; }
+				}
+				return (ICollection<Kistl.App.Base.Interface>)_ImplementsInterfaces;
+			}
+		}
+
+		private NHibernateBSideCollectionWrapper<Kistl.App.Base.DataType, Kistl.App.Base.Interface, Kistl.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl> _ImplementsInterfaces;
+		// ignored, but required for Serialization
+        private bool ImplementsInterfaces_was_eagerLoaded = false;
+
+        /// <summary>
         /// Liste aller Methoden der Objektklasse.
         /// </summary>
         // object list property
@@ -1297,6 +1326,14 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
                         obj => obj.ExportGuid,
                         (obj, val) => obj.ExportGuid = val),
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+                    new PropertyDescriptorNHibernateImpl<DataTypeNHibernateImpl, ICollection<Kistl.App.Base.Interface>>(
+                        lazyCtx,
+                        new Guid("a9ec04c2-0807-4d6c-a96a-824d13e5c571"),
+                        "ImplementsInterfaces",
+                        null,
+                        obj => obj.ImplementsInterfaces,
+                        null), // lists are read-only properties
+                    // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
                     new PropertyDescriptorNHibernateImpl<DataTypeNHibernateImpl, ICollection<Kistl.App.Base.Method>>(
                         lazyCtx,
                         new Guid("e9f8a1f1-a5ed-44a6-bbf3-9b040766f19f"),
@@ -1486,6 +1523,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
             public DataTypeProxy()
             {
                 Constraints = new Collection<Kistl.App.Base.InstanceConstraintNHibernateImpl.InstanceConstraintProxy>();
+                ImplementsInterfaces = new Collection<Kistl.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl.DataType_implements_Interface_RelationEntryProxy>();
                 Methods = new Collection<Kistl.App.Base.MethodNHibernateImpl.MethodProxy>();
                 Properties = new Collection<Kistl.App.Base.PropertyNHibernateImpl.PropertyProxy>();
             }
@@ -1510,6 +1548,8 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
             public virtual string Description { get; set; }
 
             public virtual Guid ExportGuid { get; set; }
+
+            public virtual ICollection<Kistl.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl.DataType_implements_Interface_RelationEntryProxy> ImplementsInterfaces { get; set; }
 
             public virtual ICollection<Kistl.App.Base.MethodNHibernateImpl.MethodProxy> Methods { get; set; }
 
