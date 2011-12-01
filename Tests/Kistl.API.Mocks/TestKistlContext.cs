@@ -264,7 +264,7 @@ namespace Kistl.API.Mocks
 
         public InterfaceType GetInterfaceType(string typeName)
         {
-            return _iftFactory(Type.GetType(typeName + ",Kistl.Objects"));
+            return _iftFactory(Type.GetType(typeName + ",Kistl.Objects", true));
         }
 
         public InterfaceType GetInterfaceType(IPersistenceObject obj)

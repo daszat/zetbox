@@ -75,7 +75,7 @@ namespace Kistl.DalProvider.Memory
 
         public override InterfaceType GetInterfaceType(string typeName)
         {
-            return IftFactory(Type.GetType(typeName + "," + typeof(Kistl.App.Base.ObjectClass).Assembly.FullName));
+            return IftFactory(Type.GetType(typeName + "," + typeof(Kistl.App.Base.ObjectClass).Assembly.FullName, true));
         }
 
         public override ImplementationType GetImplementationType(Type t)
