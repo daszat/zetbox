@@ -614,7 +614,7 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
         }
 
         /// <summary>Not supported.</summary>
-        void ISchemaProvider.CreateFKConstraint(TableRef tblName, TableRef refTblName, string colName, string constraintName, bool onDeleteCascade)
+        void ISchemaProvider.CreateFKConstraint(TableRef tblName, TableRef refTblName, string colName, string newConstraintName, bool onDeleteCascade)
         {
             throw new NotSupportedException();
         }
@@ -761,7 +761,7 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
         }
 
         /// <summary>Not supported.</summary>
-        void ISchemaProvider.RenameFKConstraint(TableRef tblName, string oldConstraintName, string newConstraintName)
+        void ISchemaProvider.RenameFKConstraint(TableRef tblName, string oldConstraintName, TableRef refTblName, string colName, string newConstraintName, bool onDeleteCascade)
         {
             throw new NotSupportedException();
         }

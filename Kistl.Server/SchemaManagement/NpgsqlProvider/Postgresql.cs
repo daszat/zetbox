@@ -644,31 +644,28 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
                 .ToList();
         }
 
-        public override void CreateFKConstraint(TableRef tblName, TableRef refTblName, string colName, string constraintName, bool onDeleteCascade)
+        public override void CreateFKConstraint(TableRef tblName, TableRef refTblName, string colName, string newConstraintName, bool onDeleteCascade)
         {
             ExecuteNonQuery(String.Format(
                 @"ALTER TABLE {0}
                     ADD CONSTRAINT {1} FOREIGN KEY({2})
                     REFERENCES {3} ({4}){5}",
                 FormatSchemaName(tblName),
-                QuoteIdentifier(constraintName),
+                QuoteIdentifier(newConstraintName),
                 QuoteIdentifier(colName),
                 FormatSchemaName(refTblName),
                 QuoteIdentifier("ID"),
                 onDeleteCascade ? @" ON DELETE CASCADE" : String.Empty));
         }
 
-        public override void RenameFKConstraint(TableRef tblName, string oldConstraintName, string newConstraintName)
+        public override void RenameFKConstraint(TableRef tblName, string oldConstraintName, TableRef refTblName, string colName, string newConstraintName, bool onDeleteCascade)
         {
             if (tblName == null) throw new ArgumentNullException("tblName");
             if (string.IsNullOrEmpty(oldConstraintName)) throw new ArgumentNullException("oldConstraintName");
             if (string.IsNullOrEmpty(newConstraintName)) throw new ArgumentNullException("newConstraintName");
 
-            ExecuteNonQuery(String.Format(
-                "ALTER INDEX {0}.{1} RENAME TO {2}",
-                QuoteIdentifier(tblName.Schema),
-                QuoteIdentifier(oldConstraintName),
-                QuoteIdentifier(newConstraintName)));
+            CreateFKConstraint(tblName, refTblName, colName, newConstraintName, onDeleteCascade);
+            DropFKConstraint(tblName, oldConstraintName);
         }
 
         public override bool CheckIndexExists(TableRef tblName, string idxName)

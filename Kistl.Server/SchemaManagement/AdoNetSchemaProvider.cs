@@ -413,8 +413,8 @@ namespace Kistl.Server.SchemaManagement
 
         public abstract bool CheckFKConstraintExists(TableRef tblName, string fkName);
         public abstract IEnumerable<TableConstraintNamePair> GetFKConstraintNames();
-        public abstract void CreateFKConstraint(TableRef tblName, TableRef refTblName, string colName, string constraintName, bool onDeleteCascade);
-        public abstract void RenameFKConstraint(TableRef tblName, string oldConstraintName, string newConstraintName);
+        public abstract void CreateFKConstraint(TableRef tblName, TableRef refTblName, string colName, string newConstraintName, bool onDeleteCascade);
+        public abstract void RenameFKConstraint(TableRef tblName, string oldConstraintName, TableRef refTblName, string colName, string newConstraintName, bool onDeleteCascade);
         public virtual void DropFKConstraint(TableRef tblName, string constraintName)
         {
             ExecuteNonQuery(String.Format("ALTER TABLE {0} DROP CONSTRAINT {1}",

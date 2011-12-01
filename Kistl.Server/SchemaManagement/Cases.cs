@@ -1083,10 +1083,30 @@ namespace Kistl.Server.SchemaManagement
 
             if (rel.GetRelationType() == RelationType.n_m)
             {
-                var tblName = db.GetTableName(saved.Module.SchemaName, saved.GetRelationTableName());
-                if (db.CheckTableContainsData(tblName))
+                var oldTblName = db.GetTableName(saved.Module.SchemaName, saved.GetRelationTableName());
+                if (db.CheckTableContainsData(oldTblName))
                 {
-                    Log.WarnFormat("Unable to drop old relation. Relation has some instances. Table: " + tblName);
+                    if (saved.A.Type.AndParents(cls => cls.BaseObjectClass).Select(cls => cls.ExportGuid).Contains(rel.A.Type.ExportGuid)
+                        && saved.B.Type.AndParents(cls => cls.BaseObjectClass).Select(cls => cls.ExportGuid).Contains(rel.B.Type.ExportGuid))
+                    {
+                        string assocName = rel.GetAssociationName();
+                        Log.InfoFormat("Rewiring N:M Relation: {0}", assocName);
+
+                        db.DropFKConstraint(oldTblName, saved.GetRelationAssociationName(RelationEndRole.A));
+                        db.DropFKConstraint(oldTblName, saved.GetRelationAssociationName(RelationEndRole.B));
+
+                        // renaming is handled by DoChangeRelationName
+                        //db.RenameTable(oldTblName, newTblName);
+
+                        var fkAName = saved.GetRelationFkColumnName(RelationEndRole.A);
+                        var fkBName = saved.GetRelationFkColumnName(RelationEndRole.B);
+                        db.CreateFKConstraint(oldTblName, db.GetTableName(rel.A.Type.Module.SchemaName, rel.A.Type.TableName), fkAName, saved.GetRelationAssociationName(RelationEndRole.A), false);
+                        db.CreateFKConstraint(oldTblName, db.GetTableName(rel.B.Type.Module.SchemaName, rel.B.Type.TableName), fkBName, saved.GetRelationAssociationName(RelationEndRole.B), false);
+                    }
+                    else
+                    {
+                        Log.WarnFormat("Unable to drop old relation. Relation has some instances. Table: " + oldTblName);
+                    }
                 }
                 else
                 {
@@ -1175,14 +1195,19 @@ namespace Kistl.Server.SchemaManagement
         {
             var saved = savedSchema.FindPersistenceObject<Relation>(rel.ExportGuid);
 
+            var fkAName = saved.GetRelationFkColumnName(RelationEndRole.A);
+            var fkBName = saved.GetRelationFkColumnName(RelationEndRole.B);
+
             if (rel.GetRelationType() == RelationType.n_m)
             {
                 var srcRelTbl = db.GetTableName(saved.Module.SchemaName, saved.GetRelationTableName());
                 var destRelTbl = db.GetTableName(rel.Module.SchemaName, rel.GetRelationTableName());
 
-                db.RenameFKConstraint(srcRelTbl, saved.GetRelationAssociationName(RelationEndRole.A), rel.GetRelationAssociationName(RelationEndRole.A));
-                db.RenameFKConstraint(srcRelTbl, saved.GetRelationAssociationName(RelationEndRole.B), rel.GetRelationAssociationName(RelationEndRole.B));
-
+                db.RenameFKConstraint(srcRelTbl, saved.GetRelationAssociationName(RelationEndRole.A),
+                    db.GetTableName(rel.A.Type.Module.SchemaName, rel.A.Type.TableName), fkAName, rel.GetRelationAssociationName(RelationEndRole.A), false);
+                db.RenameFKConstraint(srcRelTbl, saved.GetRelationAssociationName(RelationEndRole.B),
+                    db.GetTableName(rel.B.Type.Module.SchemaName, rel.B.Type.TableName), fkBName, rel.GetRelationAssociationName(RelationEndRole.B), false);
+                
                 db.RenameTable(srcRelTbl, destRelTbl);
 
                 db.RenameColumn(destRelTbl, saved.GetRelationFkColumnName(RelationEndRole.A), rel.GetRelationFkColumnName(RelationEndRole.A));
@@ -1194,14 +1219,16 @@ namespace Kistl.Server.SchemaManagement
                     Construct.ForeignKeyColumnName(saved.B) != Construct.ForeignKeyColumnName(rel.B))
                 {
                     var tbl = db.GetTableName(rel.A.Type.Module.SchemaName, rel.A.Type.TableName);
-                    db.RenameFKConstraint(tbl, saved.GetAssociationName(), rel.GetAssociationName());
+                    db.RenameFKConstraint(tbl, saved.GetAssociationName(),
+                        db.GetTableName(rel.A.Type.Module.SchemaName, rel.A.Type.TableName), fkAName, rel.GetAssociationName(), false);
                     db.RenameColumn(tbl, Construct.ForeignKeyColumnName(saved.B), Construct.ForeignKeyColumnName(rel.B));
                 }
                 else if (saved.HasStorage(RelationEndRole.B) &&
                     Construct.ForeignKeyColumnName(saved.A) != Construct.ForeignKeyColumnName(rel.A))
                 {
                     var tbl = db.GetTableName(rel.B.Type.Module.SchemaName, rel.B.Type.TableName);
-                    db.RenameFKConstraint(tbl, saved.GetAssociationName(), rel.GetAssociationName());
+                    db.RenameFKConstraint(tbl, saved.GetAssociationName(),
+                        db.GetTableName(rel.B.Type.Module.SchemaName, rel.B.Type.TableName), fkBName, rel.GetAssociationName(), false);
                     db.RenameColumn(tbl, Construct.ForeignKeyColumnName(saved.A), Construct.ForeignKeyColumnName(rel.A));
                 }
             }
@@ -1210,7 +1237,8 @@ namespace Kistl.Server.SchemaManagement
                 if (saved.HasStorage(RelationEndRole.A))
                 {
                     var tbl = db.GetTableName(rel.A.Type.Module.SchemaName, rel.A.Type.TableName);
-                    db.RenameFKConstraint(tbl, saved.GetRelationAssociationName(RelationEndRole.A), rel.GetRelationAssociationName(RelationEndRole.A));
+                    db.RenameFKConstraint(tbl, saved.GetRelationAssociationName(RelationEndRole.A),
+                        db.GetTableName(rel.A.Type.Module.SchemaName, rel.A.Type.TableName), fkAName, rel.GetRelationAssociationName(RelationEndRole.A), false);
                     if (Construct.ForeignKeyColumnName(saved.B) != Construct.ForeignKeyColumnName(rel.B))
                     {
                         db.RenameColumn(tbl, Construct.ForeignKeyColumnName(saved.B), Construct.ForeignKeyColumnName(rel.B));
@@ -1219,7 +1247,8 @@ namespace Kistl.Server.SchemaManagement
                 if (saved.HasStorage(RelationEndRole.B))
                 {
                     var tbl = db.GetTableName(rel.B.Type.Module.SchemaName, rel.B.Type.TableName);
-                    db.RenameFKConstraint(tbl, saved.GetRelationAssociationName(RelationEndRole.B), rel.GetRelationAssociationName(RelationEndRole.B));
+                    db.RenameFKConstraint(tbl, saved.GetRelationAssociationName(RelationEndRole.B),
+                        db.GetTableName(rel.B.Type.Module.SchemaName, rel.B.Type.TableName), fkBName, rel.GetRelationAssociationName(RelationEndRole.B), false);
                     if (Construct.ForeignKeyColumnName(saved.A) != Construct.ForeignKeyColumnName(rel.A))
                     {
                         db.RenameColumn(tbl, Construct.ForeignKeyColumnName(saved.A), Construct.ForeignKeyColumnName(rel.A));

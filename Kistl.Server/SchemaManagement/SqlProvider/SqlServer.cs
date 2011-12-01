@@ -650,24 +650,24 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
                 });
         }
 
-        public override void CreateFKConstraint(TableRef tblName, TableRef refTblName, string colName, string constraintName, bool onDeleteCascade)
+        public override void CreateFKConstraint(TableRef tblName, TableRef refTblName, string colName, string newConstraintName, bool onDeleteCascade)
         {
             ExecuteNonQuery(string.Format(@"
                 ALTER TABLE {0} WITH CHECK 
                 ADD CONSTRAINT [{1}] FOREIGN KEY([{2}])
                 REFERENCES {3} ([ID]){4}",
                 FormatSchemaName(tblName),
-                constraintName,
+                newConstraintName,
                 colName,
                 FormatSchemaName(refTblName),
                 onDeleteCascade ? @" ON DELETE CASCADE" : String.Empty));
 
             ExecuteNonQuery(string.Format(@"ALTER TABLE {0} CHECK CONSTRAINT [{1}]",
                    FormatSchemaName(tblName),
-                   constraintName));
+                   newConstraintName));
         }
 
-        public override void RenameFKConstraint(TableRef tblName, string oldConstraintName, string newConstraintName)
+        public override void RenameFKConstraint(TableRef tblName, string oldConstraintName, TableRef refTblName, string colName, string newConstraintName, bool onDeleteCascade)
         {
             if (tblName == null) throw new ArgumentNullException("tblName");
             if (string.IsNullOrEmpty(oldConstraintName)) throw new ArgumentNullException("oldConstraintName");

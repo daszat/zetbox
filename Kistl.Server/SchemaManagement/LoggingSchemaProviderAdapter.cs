@@ -128,7 +128,7 @@ namespace Kistl.Server.SchemaManagement
         {
             return _provider.GetViewNames();
         }
-        
+
         public string GetViewDefinition(TableRef view)
         {
             return _provider.GetViewDefinition(view);
@@ -297,9 +297,9 @@ namespace Kistl.Server.SchemaManagement
             _provider.RenameColumn(tblName, oldColName, newColName);
         }
 
-        public void RenameFKConstraint(TableRef tblName, string oldConstraintName, string newConstraintName)
+        public void RenameFKConstraint(TableRef tblName, string oldConstraintName, TableRef refTblName, string colName, string newConstraintName, bool onDeleteCascade)
         {
-            _provider.RenameFKConstraint(tblName, oldConstraintName, newConstraintName);
+            _provider.RenameFKConstraint(tblName, oldConstraintName, refTblName, colName, newConstraintName, onDeleteCascade);
         }
 
         public void TruncateTable(TableRef tblName)

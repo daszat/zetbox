@@ -258,7 +258,7 @@ namespace Kistl.API.Server
             return base.GetHashCode();
         }
     }
-    
+
     public sealed class TriggerRef : DboRef, IComparable<TriggerRef>, ICloneable
     {
         public TriggerRef(string database, string schema, string name)
@@ -665,8 +665,8 @@ namespace Kistl.API.Server
 
         bool CheckFKConstraintExists(TableRef tblName, string fkName);
         IEnumerable<TableConstraintNamePair> GetFKConstraintNames();
-        void CreateFKConstraint(TableRef tblName, TableRef refTblName, string colName, string constraintName, bool onDeleteCascade);
-        void RenameFKConstraint(TableRef tblName, string oldConstraintName, string newConstraintName);
+        void CreateFKConstraint(TableRef tblName, TableRef refTblName, string colName, string newConstraintName, bool onDeleteCascade);
+        void RenameFKConstraint(TableRef tblName, string oldConstraintName, TableRef refTblName, string colName, string newConstraintName, bool onDeleteCascade);
         void DropFKConstraint(TableRef tblName, string constraintName);
 
         bool CheckIndexExists(TableRef tblName, string idxName);

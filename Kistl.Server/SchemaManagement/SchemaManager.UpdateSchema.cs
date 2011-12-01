@@ -165,7 +165,7 @@ namespace Kistl.Server.SchemaManagement
             {
                 db.CreateSequenceNumberProcedure();
             }
-            else if(repair)
+            else if (repair)
             {
                 db.DropProcedure(getSequenceNumberRef);
                 db.CreateSequenceNumberProcedure();
@@ -176,7 +176,7 @@ namespace Kistl.Server.SchemaManagement
             {
                 db.CreateContinuousSequenceNumberProcedure();
             }
-            else if(repair)
+            else if (repair)
             {
                 db.DropProcedure(getContinuousSequenceNumberRef);
                 db.CreateContinuousSequenceNumberProcedure();
@@ -237,7 +237,7 @@ namespace Kistl.Server.SchemaManagement
             foreach (ObjectClass objClass in schema.GetQuery<ObjectClass>().OrderBy(o => o.Module.Namespace).ThenBy(o => o.Name))
             {
                 Log.DebugFormat("Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.Name);
-                
+
                 // Delete early to avoid collisions with newly created columns (like changing data type)
                 // Note: migration of data types is not supported now. Only chance is to delete and recreate a column
                 UpdateDeletedColumns(objClass, String.Empty);
@@ -499,7 +499,8 @@ namespace Kistl.Server.SchemaManagement
                     {
                         Case.DoChangeRelationEndTypes(rel);
                     }
-                    else if (Case.IsChangeRelationName(rel))
+
+                    if (Case.IsChangeRelationName(rel))
                     {
                         Case.DoChangeRelationName(rel);
                     }
