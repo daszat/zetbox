@@ -644,7 +644,7 @@ namespace Kistl.Server.SchemaManagement.OleDbProvider
         }
 
         /// <summary>Not supported.</summary>
-        void ISchemaProvider.DropFKConstraint(TableRef tblName, string fkName)
+        void ISchemaProvider.DropFKConstraint(TableRef tblName, string constraintName)
         {
             throw new NotSupportedException();
         }

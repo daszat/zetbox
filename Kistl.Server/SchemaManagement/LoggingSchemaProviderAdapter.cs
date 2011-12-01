@@ -320,10 +320,10 @@ namespace Kistl.Server.SchemaManagement
             _provider.DropColumn(tblName, colName);
         }
 
-        public void DropFKConstraint(TableRef tblName, string fkName)
+        public void DropFKConstraint(TableRef tblName, string constraintName)
         {
-            Log.DebugFormat("Dropping foreign key constraint [{0}].[{1}]", tblName, fkName);
-            _provider.DropFKConstraint(tblName, fkName);
+            Log.DebugFormat("Dropping foreign key constraint [{0}].[{1}]", tblName, constraintName);
+            _provider.DropFKConstraint(tblName, constraintName);
         }
 
         public void DropTrigger(TableRef objName, string triggerName)

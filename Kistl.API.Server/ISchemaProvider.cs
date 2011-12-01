@@ -667,7 +667,7 @@ namespace Kistl.API.Server
         IEnumerable<TableConstraintNamePair> GetFKConstraintNames();
         void CreateFKConstraint(TableRef tblName, TableRef refTblName, string colName, string constraintName, bool onDeleteCascade);
         void RenameFKConstraint(TableRef tblName, string oldConstraintName, string newConstraintName);
-        void DropFKConstraint(TableRef tblName, string fkName);
+        void DropFKConstraint(TableRef tblName, string constraintName);
 
         bool CheckIndexExists(TableRef tblName, string idxName);
         void DropIndex(TableRef tblName, string idxName);

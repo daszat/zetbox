@@ -415,11 +415,11 @@ namespace Kistl.Server.SchemaManagement
         public abstract IEnumerable<TableConstraintNamePair> GetFKConstraintNames();
         public abstract void CreateFKConstraint(TableRef tblName, TableRef refTblName, string colName, string constraintName, bool onDeleteCascade);
         public abstract void RenameFKConstraint(TableRef tblName, string oldConstraintName, string newConstraintName);
-        public virtual void DropFKConstraint(TableRef tblName, string fkName)
+        public virtual void DropFKConstraint(TableRef tblName, string constraintName)
         {
             ExecuteNonQuery(String.Format("ALTER TABLE {0} DROP CONSTRAINT {1}",
                 FormatSchemaName(tblName),
-                QuoteIdentifier(fkName)));
+                QuoteIdentifier(constraintName)));
         }
 
         public abstract bool CheckIndexExists(TableRef tblName, string idxName);
