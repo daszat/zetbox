@@ -1192,6 +1192,20 @@ namespace Kistl.API
             }
             return result;
         }
+
+        public static List<T> AndParents<T>(this T obj, Func<T, T> parentSelector)
+        {
+            if (obj == null) throw new ArgumentNullException("obj");
+            if (parentSelector == null) throw new ArgumentNullException("parentSelector");
+
+            var result = new List<T>();
+            while (obj != null)
+            {
+                result.Add(obj);
+                obj = parentSelector(obj);
+            }
+            return result;
+        }
     }
 
     public static class FileExtensions
