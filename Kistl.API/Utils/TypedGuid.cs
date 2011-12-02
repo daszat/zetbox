@@ -22,7 +22,7 @@ namespace Kistl.API.Utils
         private readonly Guid _guid;
         public Guid Guid { get { return _guid; } }
 
-        public T Find(IKistlContext ctx)
+        public T Find(IReadOnlyKistlContext ctx)
         {
             if (ctx == null) throw new ArgumentNullException("ctx");
 
@@ -47,7 +47,7 @@ namespace Kistl.API.Utils
         private readonly Guid[] _guid;
         public IEnumerable<Guid> Guid { get { return _guid; } }
 
-        public IEnumerable<T> Find(IKistlContext ctx)
+        public IEnumerable<T> Find(IReadOnlyKistlContext ctx)
         {
             if (ctx == null) throw new ArgumentNullException("ctx");
 
