@@ -772,7 +772,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
         /// </summary>
         // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnImplementInterfaces_ObjectClass")]
-        public virtual void ImplementInterfaces()
+        public override void ImplementInterfaces()
         {
             // base.ImplementInterfaces();
             if (OnImplementInterfaces_ObjectClass != null)
@@ -781,10 +781,9 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
             }
             else
             {
-                throw new NotImplementedException("No handler registered on method ObjectClass.ImplementInterfaces");
+                base.ImplementInterfaces();
             }
         }
-        public delegate void ImplementInterfaces_Handler<T>(T obj);
         public static event ImplementInterfaces_Handler<ObjectClass> OnImplementInterfaces_ObjectClass;
         // END Kistl.Generator.Templates.ObjectClasses.Method
 

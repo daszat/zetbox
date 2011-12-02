@@ -258,6 +258,26 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Enumeration> OnEnu
         public static event GetLabelByValue_Handler<Enumeration> OnGetLabelByValue_Enumeration;
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
+        /// <summary>
+        /// Implements all available interfaces as Properties and Methods
+        /// </summary>
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnImplementInterfaces_Enumeration")]
+        public override void ImplementInterfaces()
+        {
+            // base.ImplementInterfaces();
+            if (OnImplementInterfaces_Enumeration != null)
+            {
+                OnImplementInterfaces_Enumeration(this);
+            }
+            else
+            {
+                base.ImplementInterfaces();
+            }
+        }
+        public static event ImplementInterfaces_Handler<Enumeration> OnImplementInterfaces_Enumeration;
+        // END Kistl.Generator.Templates.ObjectClasses.Method
+
         public override Type GetImplementedInterface()
         {
             return typeof(Enumeration);

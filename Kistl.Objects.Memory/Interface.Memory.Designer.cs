@@ -76,6 +76,26 @@ namespace Kistl.App.Base
         public static event GetDataTypeString_Handler<Interface> OnGetDataTypeString_Interface;
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
+        /// <summary>
+        /// Implements all available interfaces as Properties and Methods
+        /// </summary>
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnImplementInterfaces_Interface")]
+        public override void ImplementInterfaces()
+        {
+            // base.ImplementInterfaces();
+            if (OnImplementInterfaces_Interface != null)
+            {
+                OnImplementInterfaces_Interface(this);
+            }
+            else
+            {
+                base.ImplementInterfaces();
+            }
+        }
+        public static event ImplementInterfaces_Handler<Interface> OnImplementInterfaces_Interface;
+        // END Kistl.Generator.Templates.ObjectClasses.Method
+
         public override Type GetImplementedInterface()
         {
             return typeof(Interface);

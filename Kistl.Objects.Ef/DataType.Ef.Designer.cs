@@ -1289,6 +1289,27 @@ public static event PropertyListChangedHandler<Kistl.App.Base.DataType> OnProper
         public static event GetDataTypeString_Handler<DataType> OnGetDataTypeString_DataType;
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
+        /// <summary>
+        /// Implements all available interfaces as Properties and Methods
+        /// </summary>
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnImplementInterfaces_DataType")]
+        public virtual void ImplementInterfaces()
+        {
+            // base.ImplementInterfaces();
+            if (OnImplementInterfaces_DataType != null)
+            {
+                OnImplementInterfaces_DataType(this);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on method DataType.ImplementInterfaces");
+            }
+        }
+        public delegate void ImplementInterfaces_Handler<T>(T obj);
+        public static event ImplementInterfaces_Handler<DataType> OnImplementInterfaces_DataType;
+        // END Kistl.Generator.Templates.ObjectClasses.Method
+
         public override Type GetImplementedInterface()
         {
             return typeof(DataType);

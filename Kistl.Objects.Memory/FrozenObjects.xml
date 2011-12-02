@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2011-12-02T10:04:31Z" xmlns="http://dasz.at/Kistl">
+<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2011-12-02T10:22:35Z" xmlns="http://dasz.at/Kistl">
   <KistlBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <KistlBase:ChangedOn>2011-08-05T10:30:47.603232Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2011-06-15T14:03:02Z</KistlBase:CreatedOn>
@@ -22744,6 +22744,15 @@
     <KistlBase:Name>GetDataTypeString</KistlBase:Name>
     <KistlBase:ObjectClass>6f005f31-c09c-45f9-9bcb-44090ebf0d1f</KistlBase:ObjectClass>
   </KistlBase:Method>
+  <KistlBase:Method ExportGuid="7742e3af-1038-4dd1-91b2-164a2cecb330">
+    <KistlBase:ChangedOn>2011-08-05T10:31:13.107286Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2009-12-14T17:08:05Z</KistlBase:CreatedOn>
+    <KistlBase:Description>Implements all available interfaces as Properties and Methods</KistlBase:Description>
+    <GUI:IsDisplayable>true</GUI:IsDisplayable>
+    <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>ImplementInterfaces</KistlBase:Name>
+    <KistlBase:ObjectClass>6f005f31-c09c-45f9-9bcb-44090ebf0d1f</KistlBase:ObjectClass>
+  </KistlBase:Method>
   <KistlBase:Method ExportGuid="2e692975-10da-4330-a21e-484d73508922">
     <KistlBase:ChangedOn>2011-08-05T10:31:13.106286Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05Z</KistlBase:CreatedOn>
@@ -23083,10 +23092,9 @@
     <KistlBase:ObjectClass>0999effb-c645-45e1-b3c2-5654530d0acb</KistlBase:ObjectClass>
   </KistlBase:Method>
   <KistlBase:Method ExportGuid="ded38fac-122d-46a6-8000-9e67e3809b7b">
-    <KistlBase:ChangedOn>2011-12-02T10:04:31.820932Z</KistlBase:ChangedOn>
+    <KistlBase:ChangedOn>2011-12-02T10:22:35.039732Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2011-12-02T10:04:31.820932Z</KistlBase:CreatedOn>
     <KistlBase:Description>Returns a name where this instance can be found in the NamedObjects space</KistlBase:Description>
-    <KistlBase:InvokeOnServer>false</KistlBase:InvokeOnServer>
     <GUI:IsDisplayable>false</GUI:IsDisplayable>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
     <KistlBase:Name>GetName</KistlBase:Name>
@@ -23285,15 +23293,6 @@
     <GUI:IsDisplayable>true</GUI:IsDisplayable>
     <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
     <KistlBase:Name>GetInheritedMethods</KistlBase:Name>
-    <KistlBase:ObjectClass>20888dfc-1fbc-47c8-9f3c-c6a30a5c0048</KistlBase:ObjectClass>
-  </KistlBase:Method>
-  <KistlBase:Method ExportGuid="7742e3af-1038-4dd1-91b2-164a2cecb330">
-    <KistlBase:ChangedOn>2011-08-05T10:31:13.107286Z</KistlBase:ChangedOn>
-    <KistlBase:CreatedOn>2009-12-14T17:08:05Z</KistlBase:CreatedOn>
-    <KistlBase:Description>Implements all available interfaces as Properties and Methods</KistlBase:Description>
-    <GUI:IsDisplayable>true</GUI:IsDisplayable>
-    <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
-    <KistlBase:Name>ImplementInterfaces</KistlBase:Name>
     <KistlBase:ObjectClass>20888dfc-1fbc-47c8-9f3c-c6a30a5c0048</KistlBase:ObjectClass>
   </KistlBase:Method>
   <KistlBase:Method ExportGuid="2e3df852-a5ef-499b-a294-1705be9177d9">

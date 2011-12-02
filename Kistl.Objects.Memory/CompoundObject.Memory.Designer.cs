@@ -166,6 +166,26 @@ namespace Kistl.App.Base
         public static event GetDataTypeString_Handler<CompoundObject> OnGetDataTypeString_CompoundObject;
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
+        /// <summary>
+        /// Implements all available interfaces as Properties and Methods
+        /// </summary>
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnImplementInterfaces_CompoundObject")]
+        public override void ImplementInterfaces()
+        {
+            // base.ImplementInterfaces();
+            if (OnImplementInterfaces_CompoundObject != null)
+            {
+                OnImplementInterfaces_CompoundObject(this);
+            }
+            else
+            {
+                base.ImplementInterfaces();
+            }
+        }
+        public static event ImplementInterfaces_Handler<CompoundObject> OnImplementInterfaces_CompoundObject;
+        // END Kistl.Generator.Templates.ObjectClasses.Method
+
         public override Type GetImplementedInterface()
         {
             return typeof(CompoundObject);

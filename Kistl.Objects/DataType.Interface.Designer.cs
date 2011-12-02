@@ -102,5 +102,10 @@ namespace Kistl.App.Base
         /// Returns the String representation of this Datatype Meta Object.
         /// </summary>
         string GetDataTypeString();
+
+        /// <summary>
+        /// Implements all available interfaces as Properties and Methods
+        /// </summary>
+        void ImplementInterfaces();
     }
 }
