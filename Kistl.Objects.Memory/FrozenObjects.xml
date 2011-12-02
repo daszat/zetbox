@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2011-12-01T15:39:39Z" xmlns="http://dasz.at/Kistl">
+<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2011-12-02T10:04:31Z" xmlns="http://dasz.at/Kistl">
   <KistlBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <KistlBase:ChangedOn>2011-08-05T10:30:47.603232Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2011-06-15T14:03:02Z</KistlBase:CreatedOn>
@@ -15256,6 +15256,16 @@
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
   </KistlBase:Interface>
+  <KistlBase:Interface ExportGuid="9c7c4532-2624-4b37-8f77-1ef06a6d174b">
+    <KistlBase:ChangedOn>2011-12-02T10:04:31.820932Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2011-12-02T10:04:31.820932Z</KistlBase:CreatedOn>
+    <KistlBase:Description>Objects implementing this interface can be accessed as named objects.</KistlBase:Description>
+    <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>INamedObject</KistlBase:Name>
+    <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
+    <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
+    <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
+  </KistlBase:Interface>
   <KistlBase:ObjectClass ExportGuid="1d5a58e9-fba6-4ef8-b3b7-9966a4dcba83">
     <KistlBase:ChangedOn>2011-08-05T10:31:13.032282Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-05-31T16:45:05Z</KistlBase:CreatedOn>
@@ -15940,6 +15950,10 @@
   <KistlBase:DataType_implements_Interface_RelationEntry ExportGuid="276f43e8-7c56-44ef-8467-01e60c488615">
     <KistlBase:A>01a06aef-8fe4-4cb6-b348-ee4bcd11f5af</KistlBase:A>
     <KistlBase:B>b6afa3e7-edf6-4318-9194-75bdbfc7ec7b</KistlBase:B>
+  </KistlBase:DataType_implements_Interface_RelationEntry>
+  <KistlBase:DataType_implements_Interface_RelationEntry ExportGuid="27de3945-e21a-4758-954c-a118c7559320">
+    <KistlBase:A>9c7c4532-2624-4b37-8f77-1ef06a6d174b</KistlBase:A>
+    <KistlBase:B>4ae6616a-eca3-47a5-b502-8e3c3913c2f0</KistlBase:B>
   </KistlBase:DataType_implements_Interface_RelationEntry>
   <KistlBase:DataType_implements_Interface_RelationEntry ExportGuid="3f8e0a58-0020-4bd9-9b5d-98c8c8b4f408">
     <KistlBase:A>25a83f49-3cff-4baf-850d-8d185bb329ec</KistlBase:A>
@@ -23068,6 +23082,16 @@
     <KistlBase:Name>GetMemberName</KistlBase:Name>
     <KistlBase:ObjectClass>0999effb-c645-45e1-b3c2-5654530d0acb</KistlBase:ObjectClass>
   </KistlBase:Method>
+  <KistlBase:Method ExportGuid="ded38fac-122d-46a6-8000-9e67e3809b7b">
+    <KistlBase:ChangedOn>2011-12-02T10:04:31.820932Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2011-12-02T10:04:31.820932Z</KistlBase:CreatedOn>
+    <KistlBase:Description>Returns a name where this instance can be found in the NamedObjects space</KistlBase:Description>
+    <KistlBase:InvokeOnServer>false</KistlBase:InvokeOnServer>
+    <GUI:IsDisplayable>false</GUI:IsDisplayable>
+    <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>GetName</KistlBase:Name>
+    <KistlBase:ObjectClass>9c7c4532-2624-4b37-8f77-1ef06a6d174b</KistlBase:ObjectClass>
+  </KistlBase:Method>
   <KistlBase:Method ExportGuid="3645a0d5-abb5-4e87-aec1-17ecaa9c1b5f">
     <KistlBase:ChangedOn>2011-08-05T10:31:13.107286Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-03-24T15:41:58Z</KistlBase:CreatedOn>
@@ -24064,6 +24088,17 @@
     <KistlBase:Method>d3e45fcf-6fc8-4e46-bd08-963168332687</KistlBase:Method>
     <KistlBase:Parameter_pos>0</KistlBase:Parameter_pos>
     <KistlBase:Name>ReturnValue</KistlBase:Name>
+  </KistlBase:StringParameter>
+  <KistlBase:StringParameter ExportGuid="6e79179a-c2e7-490b-8eb8-5dd1a5fede9f">
+    <KistlBase:ChangedOn>2011-12-02T10:04:31.820932Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2011-12-02T10:04:31.820932Z</KistlBase:CreatedOn>
+    <KistlBase:Description>the requested name</KistlBase:Description>
+    <KistlBase:IsList>false</KistlBase:IsList>
+    <KistlBase:IsNullable>false</KistlBase:IsNullable>
+    <KistlBase:IsReturnParameter>true</KistlBase:IsReturnParameter>
+    <KistlBase:Method>ded38fac-122d-46a6-8000-9e67e3809b7b</KistlBase:Method>
+    <KistlBase:Parameter_pos>0</KistlBase:Parameter_pos>
+    <KistlBase:Name>name</KistlBase:Name>
   </KistlBase:StringParameter>
   <KistlBase:CLRObjectParameter ExportGuid="00cf4c73-f3f4-476f-b985-c6f9bc14c3ff">
     <KistlBase:ChangedOn>2011-08-05T10:31:01.146804Z</KistlBase:ChangedOn>

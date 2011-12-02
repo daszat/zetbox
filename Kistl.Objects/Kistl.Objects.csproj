@@ -231,6 +231,7 @@
     <Compile Include="IInvocation.Interface.Designer.cs" />
     <Compile Include="IMigrationInfo.Interface.Designer.cs" />
     <Compile Include="IModuleMember.Interface.Designer.cs" />
+    <Compile Include="INamedObject.Interface.Designer.cs" />
     <Compile Include="IRenderer.Interface.Designer.cs" />
     <Compile Include="ITestInterface.Interface.Designer.cs" />
     <Compile Include="AccessRights.Interface.Designer.cs" />
