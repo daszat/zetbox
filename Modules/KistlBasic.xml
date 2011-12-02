@@ -12215,7 +12215,7 @@
   </GUI:ControlKind>
   <GUI:ControlKind ExportGuid="a09a78f4-a583-4fef-8ae7-cf7acd95e8b8">
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
-    <GUI:Name>Kistl.App.Gui.MonthEditorKind</GUI:Name>
+    <GUI:Name>Kistl.App.GUI.MonthEditorKind</GUI:Name>
   </GUI:ControlKind>
   <GUI:ControlKind ExportGuid="a3f09ef3-2fac-4d7e-aea8-cbf0eab4de70">
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
