@@ -21,7 +21,6 @@ namespace Kistl.IntegrationTests
     public sealed class BasicOneNRelationTests
         : BasicListTests<OneNRelationList<Property>, Property>
     {
-        private static readonly Guid TestObjClassGuid = new Guid("19F38F05-E88E-44C6-BFDF-D502B3632028");
         private Guid _fixtureGuid;
         private Guid _moduleGuid;
         private Guid _valueDescGuid;
@@ -43,7 +42,7 @@ namespace Kistl.IntegrationTests
 
                 var fixtureOC = initCtx.GetQuery<ObjectClass>().FirstOrDefault(oc => oc.Properties.Count == items)
                     ?? initCtx.GetQuery<ObjectClass>().FirstOrDefault(oc => oc.Properties.Count > items)
-                    ?? initCtx.FindPersistenceObject<ObjectClass>(TestObjClassGuid);
+                    ?? (ObjectClass)Kistl.NamedObjects.Base.Classes.Kistl.App.Test.TestObjClass.Find(initCtx);
 
                 _fixtureGuid = fixtureOC.ExportGuid;
                 var otherClass = initCtx.GetQuery<ObjectClass>().First(oc => oc.ExportGuid != _fixtureGuid);
@@ -183,7 +182,6 @@ namespace Kistl.IntegrationTests
     public sealed class GenericOneNRelationTests
         : GenericListTests<OneNRelationList<Property>, Property>
     {
-        private static readonly Guid TestObjClassGuid = new Guid("19F38F05-E88E-44C6-BFDF-D502B3632028");
         private Guid _fixtureGuid;
         private Guid _moduleGuid;
         private Guid _valueDescGuid;
@@ -206,7 +204,7 @@ namespace Kistl.IntegrationTests
                 var fixtureOC = initCtx.GetQuery<ObjectClass>().FirstOrDefault(oc => oc.Properties.Count == items);
                 if (fixtureOC == null)
                 {
-                    fixtureOC = initCtx.FindPersistenceObject<ObjectClass>(TestObjClassGuid);
+                    fixtureOC = (ObjectClass)Kistl.NamedObjects.Base.Classes.Kistl.App.Test.TestObjClass.Find(initCtx);
                 }
 
                 while (fixtureOC.Properties.Count < items)

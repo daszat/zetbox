@@ -194,9 +194,6 @@ namespace Kistl.Server
             }
         }
 
-        // TODO: Replace this when NamedInstances are introduced
-        public static readonly Guid Groups_Everyone = new Guid("76D43CF2-4DDF-4A3A-9AD6-28CABFDDDFF1");
-
         public void SyncIdentities()
         {
             using (Log.InfoTraceMethodCall("SyncIdentities"))
@@ -206,7 +203,7 @@ namespace Kistl.Server
                 var userList = subContainer.Resolve<IIdentitySource>().GetAllIdentities();
 
                 var identities = ctx.GetQuery<Kistl.App.Base.Identity>().ToLookup(k => k.UserName.ToUpper());
-                var everyone = ctx.FindPersistenceObject<Kistl.App.Base.Group>(Groups_Everyone);
+                var everyone = Kistl.NamedObjects.Base.Groups.Everyone.Find(ctx);
 
                 foreach (var user in userList)
                 {

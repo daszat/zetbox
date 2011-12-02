@@ -360,7 +360,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 if (_RefreshCommand == null)
                 {
                     _RefreshCommand = ViewModelFactory.CreateViewModel<RefreshCommand.Factory>().Invoke(DataContext, this, this);
-                    _RefreshCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_reload_png);
+                    _RefreshCommand.Icon = Kistl.NamedObjects.Gui.Icons.KistlBase.reload_png.Find(FrozenContext);
                 }
                 return _RefreshCommand;
             }
@@ -379,7 +379,7 @@ namespace Kistl.Client.Presentables.KistlBase
                         CommonCommandsResources.OpenDataObjectCommand_Name,
                         CommonCommandsResources.OpenDataObjectCommand_Tooltip,
                         OpenObjects);
-                    _OpenCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_fileopen_png);
+                    _OpenCommand.Icon = Kistl.NamedObjects.Gui.Icons.KistlBase.fileopen_png.Find(FrozenContext);
                 }
                 return _OpenCommand;
             }
@@ -394,7 +394,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 {
                     _NewCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
                         DataContext, this, CommonCommandsResources.NewDataObjectCommand_Name, CommonCommandsResources.NewDataObjectCommand_Tooltip, NewObject, () => AllowAddNew, null);
-                    _NewCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_new_png);
+                    _NewCommand.Icon = Kistl.NamedObjects.Gui.Icons.KistlBase.new_png.Find(FrozenContext);
                 }
                 return _NewCommand;
             }
@@ -471,7 +471,7 @@ namespace Kistl.Client.Presentables.KistlBase
                         CommonCommandsResources.DeleteDataObjectCommand_Name,
                         CommonCommandsResources.DeleteDataObjectCommand_Tooltip,
                         DeleteObjects);
-                    _DeleteCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_delete_png);
+                    _DeleteCommand.Icon = Kistl.NamedObjects.Gui.Icons.KistlBase.delete_png.Find(FrozenContext);
                 }
                 return _DeleteCommand;
             }
@@ -579,7 +579,7 @@ namespace Kistl.Client.Presentables.KistlBase
                         InstanceListViewModelResources.PrintCommand,
                         InstanceListViewModelResources.PrintCommand_Tooltip,
                         Print, null, null);
-                    _PrintCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_Printer_png);
+                    _PrintCommand.Icon = Kistl.NamedObjects.Gui.Icons.KistlBase.Printer_png.Find(FrozenContext);
                 }
                 return _PrintCommand;
             }

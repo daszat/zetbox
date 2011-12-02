@@ -450,7 +450,7 @@ namespace Kistl.Client.Presentables
         {
             get
             {
-                if (Object.CurrentAccessRights.HasNoRights()) return FrozenContext.FindPersistenceObject<ControlKind>(NamedObjects.ControlKind_Kistl_App_GUI_AccessDeniedDataObjectKind);
+                if (Object.CurrentAccessRights.HasNoRights()) return Kistl.NamedObjects.Gui.ControlKinds.Kistl.App.GUI.AccessDeniedDataObjectKind.Find(FrozenContext);
                 return base.RequestedKind ?? _object.GetObjectClass(FrozenContext).RequestedKind;
             }
             set

@@ -132,7 +132,7 @@ using Kistl.Client.Presentables.ValueViewModels;
                         ExceptionReporterViewModelResources.Report,
                         ExceptionReporterViewModelResources.Report_Tooltip,
                         Report, null, null);
-                    _ReportCommand.Icon = FrozenContext.FindPersistenceObject<Kistl.App.GUI.Icon>(NamedObjects.Icon_todo_png);
+                    _ReportCommand.Icon = Kistl.NamedObjects.Gui.Icons.KistlBase.todo_png.Find(FrozenContext);
                 }
                 return _ReportCommand;
             }
@@ -161,7 +161,7 @@ using Kistl.Client.Presentables.ValueViewModels;
                         ExceptionReporterViewModelResources.Cancel,
                         ExceptionReporterViewModelResources.Cancel_Tooltip,
                         Cancel, null, null);
-                    _CancelCommand.Icon = FrozenContext.FindPersistenceObject<Kistl.App.GUI.Icon>(NamedObjects.Icon_no_png);
+                    _CancelCommand.Icon = Kistl.NamedObjects.Gui.Icons.KistlBase.no_png.Find(FrozenContext);
                 }
                 return _CancelCommand;
             }

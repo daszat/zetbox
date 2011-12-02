@@ -314,7 +314,7 @@ namespace Kistl.Client.Presentables.KistlBase
                         AddFilter,
                         () => ShowFilter && AllowUserFilter, 
                         null);
-                    _AddFilterCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_new_png);
+                    _AddFilterCommand.Icon = Kistl.NamedObjects.Gui.Icons.KistlBase.new_png.Find(FrozenContext);
                 }
                 return _AddFilterCommand;
             }

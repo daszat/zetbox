@@ -68,7 +68,7 @@ namespace Kistl.Client.Presentables.KistlBase
                         FilterListEntryViewModelResources.RemoveCommand, 
                         FilterListEntryViewModelResources.RemoveCommand_Tooltip,
                         Remove, () => IsUserFilter, null);
-                    _RemoveCommand.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_delete_png);
+                    _RemoveCommand.Icon = Kistl.NamedObjects.Gui.Icons.KistlBase.delete_png.Find(FrozenContext);
                 }
                 return _RemoveCommand;
             }

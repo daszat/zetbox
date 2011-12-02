@@ -51,8 +51,8 @@ namespace Kistl.Server.Tests.Security
             {
                 srvCtx = scope.Resolve<IKistlServerContext>();
 
-                var grpAdmin = srvCtx.FindPersistenceObject<Group>(new Guid("9C46F2B1-09D9-46B8-A7BF-812850921030"));
-                var grpEveryOne = srvCtx.FindPersistenceObject<Group>(new Guid("76D43CF2-4DDF-4A3A-9AD6-28CABFDDDFF1"));
+                var grpAdmin = Kistl.NamedObjects.Base.Groups.Administrator.Find(srvCtx);
+                var grpEveryOne = Kistl.NamedObjects.Base.Groups.Everyone.Find(srvCtx);
 
                 // Create Identities
                 admin = srvCtx.Create<Identity>();

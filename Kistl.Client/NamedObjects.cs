@@ -11,25 +11,6 @@ namespace Kistl.Client
     /// </summary>
     public static class NamedObjects
     {
-        public static readonly Guid Module_KistlBase = new Guid("ef6d5bd8-5826-4ce6-a9ca-c8438ddde773");
-        public static readonly Guid Module_GUI = new Guid("84f486f7-19fe-49ad-8e4a-6c05089e7684");
-
-        public static readonly Guid Icon_delete_png = new Guid("84e97f4c-ceca-49d6-be50-aaa92b5b1ba8");
-        public static readonly Guid Icon_new_png = new Guid("c9b11ee6-8a62-4af3-9ee7-d6e78eeadad7");
-        public static readonly Guid Icon_reload_png = new Guid("bbfd9a59-257a-42e6-a1f4-90de28bd7f7a");
-        public static readonly Guid Icon_fileopen_png = new Guid("f1f14c5c-4cbd-499e-a388-3cf56aa80a11");
-        public static readonly Guid Icon_search_png = new Guid("dbb2f49e-48f4-49fc-a9a6-53a403f8ac4b");
-        public static readonly Guid Icon_Printer_png = new Guid("6b6376e1-519b-4601-9b88-4c7b5594ca2d");
-        public static readonly Guid Icon_Pen_png = new Guid("d7d4767f-0b2d-468a-8931-866ce07828cb");
-        public static readonly Guid Icon_info_png = new Guid("d2c90a25-c93b-4f52-a358-199ac0d71248");
-        public static readonly Guid Icon_no_png = new Guid("f2db9015-0f03-41ef-9113-fb10a7b45d6c");
-        public static readonly Guid Icon_ok_png = new Guid("b2c884fb-87a7-4abe-9893-be4ef2cd4888");
-        public static readonly Guid Icon_todo_png = new Guid("32dc1dd9-6f33-486a-a504-133f93ae02b9");
-        public static readonly Guid Icon_stop_png = new Guid("da02708c-58e1-4219-8a55-06202c724171");
-        public static readonly Guid Icon_back_png = new Guid("e685b093-3732-4fee-958b-510474f0cedf");
-        
-        
-
         public static readonly Guid ViewModelDescriptor_NullableValuePropertyModel_Bool = new Guid("09d1f453-d0d9-429e-88e7-e84b33de7c2e");
         public static readonly Guid ViewModelDescriptor_NullableValuePropertyModel_DateTime = new Guid("fc74b434-3801-4e4a-ab67-e65a9e014005");
         public static readonly Guid ViewModelDescriptor_NullableMonthPropertyViewModel = new Guid("e66f8cad-f532-4c75-8fb0-e1aa8baddd06");
@@ -50,24 +31,5 @@ namespace Kistl.Client
         public static readonly Guid ViewModelDescriptor_OptionalPredicateFilterViewModel = new Guid("29550c38-e240-46e4-b856-c7066d8395eb");
         public static readonly Guid ViewModelDescriptor_RangeFilterViewModel = new Guid("47ea2958-1036-4fe2-afb5-84568651d817");
         public static readonly Guid ViewModelDescriptor_DateRangeFilterViewModel = new Guid("e77b05ac-9908-4152-afed-f722410cde98");
-
-        public static readonly Guid ControlKind_Kistl_App_GUI_TextKind = new Guid("A3F09EF3-2FAC-4D7E-AEA8-CBF0EAB4DE70");
-        public static readonly Guid ControlKind_Kistl_App_GUI_LauncherKind = new Guid("90D5FF7F-0C82-4278-BB8D-49C240F6BC2C");
-        public static readonly Guid ControlKind_Kistl_App_GUI_PasswordKind = new Guid("2f6233fe-6fd6-4145-b438-64cc85f89fd8");
-        public static readonly Guid ControlKind_Kistl_App_GUI_MultiLineTextboxKind = new Guid("b8391867-7c76-40fe-b387-96ab5597fd0d");
-
-        public static readonly Guid ControlKind_Kistl_App_GUI_InstanceListKind = new Guid("4e7a8b0b-0c8e-49e1-aa35-d3a9ec7b8e4c");
-        public static readonly Guid ControlKind_Kistl_App_GUI_InstanceListHorizontalKind = new Guid("997f9eb7-084f-4703-b905-2b97be27a9f1");
-
-        public static readonly Guid ControlKind_Kistl_App_GUI_InstanceGridKind = new Guid("150c7db0-d068-4fe3-8137-5b23c73e1fc8");
-        public static readonly Guid ControlKind_Kistl_App_GUI_InstanceGridHorizontalKind = new Guid("601d4613-016a-4b8b-97fb-53f0f0feb51a");
-
-        public static readonly Guid ControlKind_Kistl_App_GUI_CommandKind = new Guid("8b4273bc-dee4-4985-926d-40d3833fe4f9");
-        public static readonly Guid ControlKind_Kistl_App_GUI_CommandLinkKind = new Guid("1c39f2f9-f4ba-4653-b92f-4672dfc4294a");
-
-        public static readonly Guid ControlKind_Kistl_App_GUI_ObjectRefKind = new Guid("b86945ed-9edc-42ca-9ca5-8124fbf47b5c");
-        public static readonly Guid ControlKind_Kistl_App_GUI_ObjectRefDropdownKind = new Guid("d30d2676-7f2f-4f0d-895a-e46f19b8f526");
-
-        public static readonly Guid ControlKind_Kistl_App_GUI_AccessDeniedDataObjectKind = new Guid("62047263-be4c-4495-bd1e-a32006513537");        
     }
 }

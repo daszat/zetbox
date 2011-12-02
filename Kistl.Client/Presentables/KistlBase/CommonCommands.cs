@@ -94,7 +94,7 @@ namespace Kistl.Client.Presentables.KistlBase
         {
             this.Listener = listener;
             this.SubmitChanges = submitChanges;
-            this.Icon = FrozenContext.FindPersistenceObject<Icon>(NamedObjects.Icon_delete_png);
+            this.Icon = Kistl.NamedObjects.Gui.Icons.KistlBase.delete_png.Find(FrozenContext);
         }
 
         protected override void DoExecute(IEnumerable<DataObjectViewModel> data)
