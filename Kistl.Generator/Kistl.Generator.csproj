@@ -103,6 +103,14 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="InterfaceTemplates\NamedObjects.cs">
+      <DependentUpon>NamedObjects.cst</DependentUpon>
+    </Compile>
+    <Compile Include="InterfaceTemplates\NamedObjects.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NamedObjects.cst</DependentUpon>
+    </Compile>
     <Compile Include="InterfaceTemplates\Properties\SimplePropertyListTemplate.cs">
       <DependentUpon>SimplePropertyListTemplate.cst</DependentUpon>
     </Compile>
@@ -388,6 +396,10 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XBuildCompiler.cs" />
+    <None Include="InterfaceTemplates\NamedObjects.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>NamedObjects.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Properties\VersionInfo.cs" />
     <Compile Include="Properties\VersionInfo.Designer.cs">
       <DependentUpon>VersionInfo.cs</DependentUpon>

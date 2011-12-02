@@ -51,19 +51,14 @@ namespace Kistl.Generator
             return RunTemplateWithExtension(ctx, "Interfaces.Template", i.Name, "Designer.cs", i);
         }
 
-        //protected override IEnumerable<string> Generate_Other(IKistlContext ctx)
-        //{
-        //    var otherFileNames = new List<string>();
+        protected override IEnumerable<string> Generate_Other(IKistlContext ctx)
+        {
+            var otherFileNames = new List<string>();
 
-        //    var modules = ctx.GetQuery<Module>().OrderBy(m => m.Name).ToList();
-        //    otherFileNames.Add(RunTemplateWithExtension(ctx, "Interface.Repositories.ModuleRepository", "ModuleRepository", "Designer.cs", modules));
-        //    foreach (var m in modules)
-        //    {
-        //        otherFileNames.Add(RunTemplateWithExtension(ctx, "Interface.Repositories.Repository", m.Name + "Repository", "Designer.cs", m));
-        //    }
+            otherFileNames.Add(RunTemplateWithExtension(ctx, "NamedObjects", "NamedObjects", "Designer.cs"));
 
-        //    return base.Generate_Other(ctx).Concat(otherFileNames);
-        //}
+            return base.Generate_Other(ctx).Concat(otherFileNames);
+        }
 
         public override IEnumerable<string> RequiredNamespaces
         {

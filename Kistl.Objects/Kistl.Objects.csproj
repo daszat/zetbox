@@ -170,7 +170,6 @@
     <Compile Include="Module.Interface.Designer.cs" />
     <Compile Include="MonthFilterConfiguration.Interface.Designer.cs" />
     <Compile Include="Muhblah.Interface.Designer.cs" />
-    <Compile Include="NamedObjects.cs" />
     <Compile Include="N_to_M_relations_A.Interface.Designer.cs" />
     <Compile Include="N_to_M_relations_B.Interface.Designer.cs" />
     <Compile Include="NavigationAction.Interface.Designer.cs" />
@@ -255,6 +254,7 @@
     <Compile Include="TestPhoneCompoundObject.Interface.Designer.cs" />
     <Compile Include="AssemblyInfo.Interface.cs" />
     <Compile Include="Module.Interface.cs" />
+    <Compile Include="NamedObjects.Interface.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Kistl.Objects.snk" />
