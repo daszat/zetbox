@@ -63,7 +63,7 @@
   </PropertyGroup>
   <!-- additional properties have to come in a separate group to receive correct $(OutputPath) -->
   <PropertyGroup>
-     <DocumentationFile>$(OutputPath)\Kistl.Objects.xml</DocumentationFile>
+    <DocumentationFile>$(OutputPath)\Kistl.Objects.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <AdditionalReferencePath Include="$(OutputPath)" />

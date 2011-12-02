@@ -30,7 +30,7 @@ namespace Kistl.Generator.InterfaceTemplates
         protected override void ApplyAdditionalProperties()
         {
             base.ApplyAdditionalProperties();
-            this.WriteObjects("     <DocumentationFile>$(OutputPath)\\", GetAssemblyName(), ".xml</DocumentationFile>\r\n");
+            this.WriteObjects("    <DocumentationFile>$(OutputPath)\\", GetAssemblyName(), ".xml</DocumentationFile>\r\n");
         }
 
         protected override string GetRelativeOutputPath()
