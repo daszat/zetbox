@@ -374,13 +374,11 @@ namespace Kistl.API
 
         #region ICustomTypeDescriptor Members
 
-        protected virtual string GetName() { return this.GetType().FullName; }
-
         protected virtual PropertyDescriptor[] AccessPropertyDescriptors() { return _properties; }
 
-        string ICustomTypeDescriptor.GetClassName() { return GetName(); }
+        string ICustomTypeDescriptor.GetClassName() { return this.GetType().FullName; }
 
-        string ICustomTypeDescriptor.GetComponentName() { return GetName(); }
+        string ICustomTypeDescriptor.GetComponentName() { return this.GetType().FullName; }
 
         TypeConverter ICustomTypeDescriptor.GetConverter() { return null; }
 
