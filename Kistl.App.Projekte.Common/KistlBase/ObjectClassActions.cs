@@ -114,5 +114,11 @@ namespace Kistl.App.Base
                 e.Result = new List<Method>();
             }
         }
+
+        [Invocation]
+        public static void GetName(ObjectClass obj, MethodReturnEventArgs<string> e)
+        {
+            e.Result = string.Format("Base.Classes.{0}.{1}", obj.Module.Namespace, obj.Name);
+        }
     }
 }

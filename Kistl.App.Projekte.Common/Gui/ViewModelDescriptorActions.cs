@@ -4,6 +4,7 @@ namespace Kistl.App.GUI
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using System.Text.RegularExpressions;
     using Kistl.API;
 
     [Implementor]
@@ -12,11 +13,23 @@ namespace Kistl.App.GUI
         [Invocation]
         public static void ToString(ViewModelDescriptor obj, MethodReturnEventArgs<string> e)
         {
-            e.Result = String.Format("{0} (default: {1}) [{2}]",
+            e.Result = string.Format("{0} (default: {1}) [{2}]",
                 obj.Description,
                 obj.DefaultEditorKind,
                 obj.ViewModelRef == null ? "(no type)" : obj.ViewModelRef.ToString());
         }
 
+        [Invocation]
+        public static void GetName(ViewModelDescriptor obj, MethodReturnEventArgs<string> e)
+        {
+            if (obj.ViewModelRef != null)
+            {
+                var type = obj.ViewModelRef.AsType(false);
+                if (type != null)
+                {
+                    e.Result = string.Format("Gui.ViewModelDescriptors.{0}", Regex.Replace(type.ToString(), @"\W", "_"));
+                }
+            }
+        }
     }
 }

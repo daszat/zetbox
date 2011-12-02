@@ -17,5 +17,10 @@ namespace Kistl.App.Base
             ToStringHelper.FixupFloatingObjectsToString(obj, e);
         }
 
+        [Invocation]
+        public static void GetName(Module obj, MethodReturnEventArgs<string> e)
+        {
+            e.Result = "Base.Modules." + obj.Name;
+        }
     }
 }

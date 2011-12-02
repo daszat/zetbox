@@ -28,5 +28,11 @@ namespace Kistl.App.GUI
 
             e.Result = kind.Name;
         }
+
+        [Invocation]
+        public static void GetName(ControlKind kind, MethodReturnEventArgs<string> e)
+        {
+            e.Result = "Gui.ControlKinds." + kind.Name;
+        }
     }
 }

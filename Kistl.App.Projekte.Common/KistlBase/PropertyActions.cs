@@ -89,5 +89,15 @@ namespace Kistl.App.Base
 
             e.Result = sb.ToString();
         }
+
+        [Invocation]
+        public static void GetName(Property obj, MethodReturnEventArgs<string> e)
+        {
+            var cls = obj.ObjectClass as ObjectClass;
+            if (cls != null)
+            {
+                e.Result = string.Format("{0}_Properties.{1}", cls.GetName(), obj.Name);
+            }
+        }
     }
 }

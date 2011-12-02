@@ -10,12 +10,17 @@ namespace Kistl.App.Base
     public static class GroupActions
     {
         [Invocation]
-        public static void ToString(Kistl.App.Base.Group obj, MethodReturnEventArgs<string> e)
+        public static void ToString(Group obj, MethodReturnEventArgs<string> e)
         {
             e.Result = obj.Name;
 
             ToStringHelper.FixupFloatingObjectsToString(obj, e);
         }
 
+        [Invocation]
+        public static void GetName(Group kind, MethodReturnEventArgs<string> e)
+        {
+            e.Result = "Base.Groups." + kind.Name;
+        }
     }
 }

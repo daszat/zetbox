@@ -92,6 +92,7 @@
     <Compile Include="KistlBase\ConstraintActions.cs" />
     <Compile Include="KistlBase\BoolDefaultValueActions.cs" />
     <Compile Include="KistlBase\CompoundObjectParameterActions.cs" />
+    <Compile Include="KistlBase\SequenceActions.cs" />
     <Compile Include="KistlBase\DateTimeRangeActions.cs" />
     <Compile Include="KistlBase\ValueTypePropertyActions.cs" />
     <Compile Include="KistlBase\StringDefaultValueActions.cs" />
