@@ -18,10 +18,10 @@ namespace Kistl.Generator.InterfaceTemplates.Interfaces
         /// <returns>The interfaces this type implements</returns>
         protected virtual string[] GetInterfaces()
         {
+            string[] interfaces = dataType.ImplementsInterfaces.Select(i => i.Module.Namespace + "." + i.Name).ToArray();
+
             if (dataType is Kistl.App.Base.ObjectClass)
             {
-                ObjectClass cls = (ObjectClass)dataType;
-                string[] interfaces = cls.ImplementsInterfaces.Select(i => i.Module.Namespace + "." + i.Name).ToArray();
                 var baseClass = (dataType as Kistl.App.Base.ObjectClass).BaseObjectClass;
                 if (baseClass != null)
                 {
@@ -38,8 +38,7 @@ namespace Kistl.Generator.InterfaceTemplates.Interfaces
             }
             else if (dataType is Kistl.App.Base.Interface)
             {
-                // no type hierarchy here
-                return new string[] { };
+                return interfaces;
             }
             else
             {
@@ -102,52 +101,41 @@ namespace Kistl.Generator.InterfaceTemplates.Interfaces
         /// <returns>true if found in ImplementsIntercafe Collection</returns>
         protected bool IsDeclaredInImplementsInterface(Property prop)
         {
-            if (prop.ObjectClass is ObjectClass)
-            {
-                ObjectClass cls = (ObjectClass)prop.ObjectClass;
-                if (cls.ImplementsInterfaces.FirstOrDefault(c => c.Properties.FirstOrDefault(p => p.Name == prop.Name) != null) != null)
-                {
-                    return true;
-                }
-            }
-            return false;
+            return prop.ObjectClass.ImplementsInterfaces
+                .FirstOrDefault(c => c.Properties.FirstOrDefault(p => p.Name == prop.Name) != null) != null;
         }
 
         /// <summary>
         /// Check if Method was defined on a "ImplementsInterface" Interface
         /// </summary>
         /// <param name="method">Method to check</param>
-        /// <returns>true if found in ImplementsIntercafe Collection</returns>
+        /// <returns>true if found in ImplementsInterface Collection</returns>
         protected bool IsDeclaredInImplementsInterface(Kistl.App.Base.Method method)
         {
-            if (method.ObjectClass is ObjectClass)
+            List<Kistl.App.Base.Method> methods = new List<Kistl.App.Base.Method>();
+            foreach (var c in method.ObjectClass.ImplementsInterfaces)
             {
-                ObjectClass cls = (ObjectClass)method.ObjectClass;
-                List<Kistl.App.Base.Method> methods = new List<Kistl.App.Base.Method>();
-                foreach (var c in cls.ImplementsInterfaces)
+                methods.AddRange(c.Methods.Where(m => m.Name == method.Name));
+            }
+            foreach (var m in methods)
+            {
+                if (m.Parameter.Count == method.Parameter.Count)
                 {
-                    methods.AddRange(c.Methods.Where(m => m.Name == method.Name));
-                }
-                foreach (var m in methods)
-                {
-                    if (m.Parameter.Count == method.Parameter.Count)
-                    {
-                        bool paramSame = true;
+                    bool paramSame = true;
 
-                        // TODO: Uncomment this when IList Poshandling works correctly
-                        //for (int i = 0; i < m.Parameter.Count; i++)
-                        //{
-                        //    if (   m.Parameter[i].GetParameterType() != meth.Parameter[i].GetParameterType() 
-                        //        || m.Parameter[i].IsReturnParameter != meth.Parameter[i].IsReturnParameter)
-                        //    {
-                        //        paramSame = false;
-                        //        break;
-                        //    }
-                        //}
+                    // TODO: Uncomment this when IList Poshandling works correctly
+                    //for (int i = 0; i < m.Parameter.Count; i++)
+                    //{
+                    //    if (   m.Parameter[i].GetParameterType() != meth.Parameter[i].GetParameterType()
+                    //        || m.Parameter[i].IsReturnParameter != meth.Parameter[i].IsReturnParameter)
+                    //    {
+                    //        paramSame = false;
+                    //        break;
+                    //    }
+                    //}
 
-                        if (paramSame)
-                            return true;
-                    }
+                    if (paramSame)
+                        return true;
                 }
             }
             return false;
