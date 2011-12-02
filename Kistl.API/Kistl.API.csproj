@@ -108,6 +108,7 @@
     <Compile Include="Utils\Diff.cs" />
     <Compile Include="Utils\ExpressionDumper.cs" />
     <Compile Include="Utils\FuncCache.cs" />
+    <Compile Include="Utils\TypedGuid.cs" />
     <Compile Include="Utils\ReadOnlyObservableProjection.cs" />
     <Compile Include="Utils\ReadOnlyProjection.cs" />
     <Compile Include="IIdentitySource.cs" />
