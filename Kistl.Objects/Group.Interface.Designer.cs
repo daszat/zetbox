@@ -10,7 +10,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// 
     /// </summary>
-    public interface Group : IDataObject, Kistl.App.Base.IExportable, Kistl.App.Base.IModuleMember 
+    public interface Group : IDataObject, Kistl.App.Base.IExportable, Kistl.App.Base.IModuleMember, Kistl.App.Base.INamedObject 
     {
 
         /// <summary>

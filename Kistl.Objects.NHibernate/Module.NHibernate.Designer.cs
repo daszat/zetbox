@@ -628,6 +628,28 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Module, string> OnSchemaName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Module, string> OnSchemaName_PostSetter;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnGetName_Module")]
+        public virtual string GetName()
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetName_Module != null)
+            {
+                OnGetName_Module(this, e);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on Module.GetName");
+            }
+            return e.Result;
+        }
+        public delegate void GetName_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
+        public static event GetName_Handler<Module> OnGetName_Module;
+        // END Kistl.Generator.Templates.ObjectClasses.Method
+
         public override Type GetImplementedInterface()
         {
             return typeof(Module);

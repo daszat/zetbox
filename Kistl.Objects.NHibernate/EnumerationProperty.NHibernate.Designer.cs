@@ -154,6 +154,27 @@ namespace Kistl.App.Base
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
+        /// 
+        /// </summary>
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnGetName_EnumerationProperty")]
+        public override string GetName()
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetName_EnumerationProperty != null)
+            {
+                OnGetName_EnumerationProperty(this, e);
+            }
+            else
+            {
+                e.Result = base.GetName();
+            }
+            return e.Result;
+        }
+        public static event GetName_Handler<EnumerationProperty> OnGetName_EnumerationProperty;
+        // END Kistl.Generator.Templates.ObjectClasses.Method
+
+        /// <summary>
         /// Returns the resulting Type of this Property Meta Object.
         /// </summary>
         // BEGIN Kistl.Generator.Templates.ObjectClasses.Method

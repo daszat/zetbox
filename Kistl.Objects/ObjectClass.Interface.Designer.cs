@@ -10,7 +10,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// Metadefinition Object for ObjectClasses.
     /// </summary>
-    public interface ObjectClass : Kistl.App.Base.DataType 
+    public interface ObjectClass : Kistl.App.Base.DataType, Kistl.App.Base.INamedObject 
     {
 
         /// <summary>

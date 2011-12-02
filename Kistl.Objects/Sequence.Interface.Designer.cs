@@ -10,7 +10,7 @@ namespace Kistl.App.Base
     /// <summary>
     /// Provides the definition of a database sequence
     /// </summary>
-    public interface Sequence : IDataObject, Kistl.App.Base.IChangedBy, Kistl.App.Base.IExportable, Kistl.App.Base.IModuleMember 
+    public interface Sequence : IDataObject, Kistl.App.Base.IChangedBy, Kistl.App.Base.IExportable, Kistl.App.Base.IModuleMember, Kistl.App.Base.INamedObject 
     {
 
         /// <summary>

@@ -1316,6 +1316,28 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
+        /// 
+        /// </summary>
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnGetName_Property")]
+        public virtual string GetName()
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetName_Property != null)
+            {
+                OnGetName_Property(this, e);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on Property.GetName");
+            }
+            return e.Result;
+        }
+        public delegate void GetName_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
+        public static event GetName_Handler<Property> OnGetName_Property;
+        // END Kistl.Generator.Templates.ObjectClasses.Method
+
+        /// <summary>
         /// Returns the resulting Type of this Property Meta Object.
         /// </summary>
         // BEGIN Kistl.Generator.Templates.ObjectClasses.Method

@@ -59,6 +59,27 @@ namespace Kistl.App.Base
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
+        /// 
+        /// </summary>
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnGetName_DoubleProperty")]
+        public override string GetName()
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetName_DoubleProperty != null)
+            {
+                OnGetName_DoubleProperty(this, e);
+            }
+            else
+            {
+                e.Result = base.GetName();
+            }
+            return e.Result;
+        }
+        public static event GetName_Handler<DoubleProperty> OnGetName_DoubleProperty;
+        // END Kistl.Generator.Templates.ObjectClasses.Method
+
+        /// <summary>
         /// Returns the resulting Type of this Property Meta Object.
         /// </summary>
         // BEGIN Kistl.Generator.Templates.ObjectClasses.Method

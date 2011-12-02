@@ -209,6 +209,27 @@ namespace Kistl.App.Base
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
+        /// 
+        /// </summary>
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnGetName_ValueTypeProperty")]
+        public override string GetName()
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetName_ValueTypeProperty != null)
+            {
+                OnGetName_ValueTypeProperty(this, e);
+            }
+            else
+            {
+                e.Result = base.GetName();
+            }
+            return e.Result;
+        }
+        public static event GetName_Handler<ValueTypeProperty> OnGetName_ValueTypeProperty;
+        // END Kistl.Generator.Templates.ObjectClasses.Method
+
+        /// <summary>
         /// Returns the resulting Type of this Property Meta Object.
         /// </summary>
         // BEGIN Kistl.Generator.Templates.ObjectClasses.Method

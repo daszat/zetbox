@@ -344,6 +344,28 @@ namespace Kistl.App.GUI
         /// 
         /// </summary>
         // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnGetName_Icon")]
+        public virtual string GetName()
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetName_Icon != null)
+            {
+                OnGetName_Icon(this, e);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on Icon.GetName");
+            }
+            return e.Result;
+        }
+        public delegate void GetName_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
+        public static event GetName_Handler<Icon> OnGetName_Icon;
+        // END Kistl.Generator.Templates.ObjectClasses.Method
+
+        /// <summary>
+        /// 
+        /// </summary>
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnOpen_Icon")]
         public virtual void Open()
         {

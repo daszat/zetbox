@@ -10,7 +10,7 @@ namespace Kistl.App.GUI
     /// <summary>
     /// 
     /// </summary>
-    public interface ViewModelDescriptor : IDataObject, Kistl.App.Base.IExportable, Kistl.App.Base.IModuleMember 
+    public interface ViewModelDescriptor : IDataObject, Kistl.App.Base.IExportable, Kistl.App.Base.IModuleMember, Kistl.App.Base.INamedObject 
     {
 
         /// <summary>

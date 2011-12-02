@@ -310,6 +310,28 @@ namespace Kistl.App.Base
 		public static event PropertyPreSetterHandler<Kistl.App.Base.Group, string> OnName_PreSetter;
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Group, string> OnName_PostSetter;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnGetName_Group")]
+        public virtual string GetName()
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetName_Group != null)
+            {
+                OnGetName_Group(this, e);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on Group.GetName");
+            }
+            return e.Result;
+        }
+        public delegate void GetName_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
+        public static event GetName_Handler<Group> OnGetName_Group;
+        // END Kistl.Generator.Templates.ObjectClasses.Method
+
         public override Type GetImplementedInterface()
         {
             return typeof(Group);

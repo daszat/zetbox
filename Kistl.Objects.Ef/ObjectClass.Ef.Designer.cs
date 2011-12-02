@@ -768,6 +768,28 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
+        /// 
+        /// </summary>
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnGetName_ObjectClass")]
+        public virtual string GetName()
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetName_ObjectClass != null)
+            {
+                OnGetName_ObjectClass(this, e);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on ObjectClass.GetName");
+            }
+            return e.Result;
+        }
+        public delegate void GetName_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
+        public static event GetName_Handler<ObjectClass> OnGetName_ObjectClass;
+        // END Kistl.Generator.Templates.ObjectClasses.Method
+
+        /// <summary>
         /// Implements all available interfaces as Properties and Methods
         /// </summary>
         // BEGIN Kistl.Generator.Templates.ObjectClasses.Method

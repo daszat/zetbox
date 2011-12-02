@@ -355,6 +355,15 @@ namespace Kistl.API.Server.Mocks
 
         #endregion
 
+        #region INamedObject
+
+        public string GetName()
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
         #region ObjectClass Members
 
 
@@ -464,5 +473,6 @@ namespace Kistl.API.Server.Mocks
             return aStr.CompareTo(bStr);
         }
         #endregion
+
     }
 }
