@@ -4,12 +4,12 @@ namespace Kistl.App.Base
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-
     using Kistl.API;
     using Kistl.App.Base;
-    using Kistl.App.GUI;
     using Kistl.App.Extensions;
+    using Kistl.App.GUI;
     using Kistl.Client;
+    using ViewModelDescriptors = Kistl.NamedObjects.Gui.ViewModelDescriptors;
 
     /// <summary>
     /// Client implementation
@@ -23,13 +23,13 @@ namespace Kistl.App.Base
         [Invocation]
         public static void NotifyCreated(Kistl.App.Base.CompoundObjectProperty obj)
         {
-            obj.ValueModelDescriptor = obj.Context.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_CompoundObjectPropertyViewModel);
+            obj.ValueModelDescriptor = ViewModelDescriptors.Kistl_Client_Presentables_ValueViewModels_CompoundObjectPropertyViewModel.Find(obj.Context);
         }
 
         [Invocation]
         public static void postSet_CompoundObjectDefinition(CompoundObjectProperty obj, PropertyPostSetterEventArgs<CompoundObject> e)
         {
-            var def = obj.Context.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_CompoundObjectPropertyViewModel);
+            var def = ViewModelDescriptors.Kistl_Client_Presentables_ValueViewModels_CompoundObjectPropertyViewModel.Find(obj.Context);
             if (obj.ValueModelDescriptor == def && e.OldValue == null && e.NewValue != null && e.NewValue.DefaultPropertyViewModelDescriptor != null)
             {
                 // Only once, during initialize

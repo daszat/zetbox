@@ -114,7 +114,6 @@
     <Compile Include="Models\IValueModel.cs" />
     <Compile Include="Models\PropertyValueModel.cs" />
     <Compile Include="Models\ValueModel.cs" />
-    <Compile Include="NamedObjects.cs" />
     <Compile Include="Presentables\ActionViewModel.cs" />
     <Compile Include="Presentables\ActionViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>

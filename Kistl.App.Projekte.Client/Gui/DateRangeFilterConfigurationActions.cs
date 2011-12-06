@@ -9,6 +9,7 @@ namespace Kistl.App.GUI
     using Kistl.Client;
     using Kistl.Client.Models;
     using Kistl.Client.Presentables;
+    using ViewModelDescriptors = Kistl.NamedObjects.Gui.ViewModelDescriptors;
 
     /// <summary>
     /// Client implementation
@@ -27,19 +28,20 @@ namespace Kistl.App.GUI
         public static void CreateFilterModel(Kistl.App.GUI.DateRangeFilterConfiguration obj, MethodReturnEventArgs<IFilterModel> e)
         {
             e.Result = DateRangeFilterModel.Create(
-                FrozenContext, 
-                obj.GetLabel(), 
-                FilterValueSource.FromProperty(obj.Property), 
+                FrozenContext,
+                obj.GetLabel(),
+                FilterValueSource.FromProperty(obj.Property),
                 obj.RequestedKind,
-                obj.IsCurrentYearDefault ?? false, 
-                obj.IsCurrentQuaterDefault ?? false, 
+                obj.IsCurrentYearDefault ?? false,
+                obj.IsCurrentQuaterDefault ?? false,
                 obj.IsCurrentMonthDefault ?? false);
         }
 
         [Invocation]
         public static void NotifyCreated(Kistl.App.GUI.DateRangeFilterConfiguration obj)
         {
-            obj.ViewModelDescriptor = obj.Context.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_DateRangeFilterViewModel);
+            obj.ViewModelDescriptor = ViewModelDescriptors.Kistl_Client_Presentables_FilterViewModels_DateRangeFilterViewModel
+               .Find(obj.Context);
         }
     }
 }

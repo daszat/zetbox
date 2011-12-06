@@ -4,12 +4,12 @@ namespace Kistl.App.Base
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-
     using Kistl.API;
     using Kistl.App.Base;
-    using Kistl.App.GUI;
     using Kistl.App.Extensions;
+    using Kistl.App.GUI;
     using Kistl.Client;
+    using ViewModelDescriptors = Kistl.NamedObjects.Gui.ViewModelDescriptors;
 
     /// <summary>
     /// Client implementation
@@ -23,7 +23,7 @@ namespace Kistl.App.Base
         [Invocation]
         public static void NotifyCreated(Kistl.App.Base.DateTimeProperty obj)
         {
-            obj.ValueModelDescriptor = obj.Context.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableValuePropertyModel_DateTime);
+            obj.ValueModelDescriptor = ViewModelDescriptors.Kistl_Client_Presentables_ValueViewModels_NullableDateTimePropertyViewModel.Find(obj.Context);
         }
     }
 }

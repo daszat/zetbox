@@ -9,6 +9,7 @@ namespace Kistl.App.GUI
     using Kistl.Client;
     using Kistl.Client.Models;
     using Kistl.Client.Presentables;
+    using ViewModelDescriptors = Kistl.NamedObjects.Gui.ViewModelDescriptors;
 
     /// <summary>
     /// Client implementation
@@ -46,7 +47,7 @@ namespace Kistl.App.GUI
         [Invocation]
         public static void NotifyCreated(Kistl.App.GUI.SinglePropertyFilterConfiguration obj)
         {
-            obj.ViewModelDescriptor = obj.Context.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_SingleValueFilterViewModel);
+            obj.ViewModelDescriptor = ViewModelDescriptors.Kistl_Client_Presentables_FilterViewModels_SingleValueFilterViewModel.Find(obj.Context);
         }
     }
 }

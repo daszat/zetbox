@@ -12,6 +12,7 @@ namespace Kistl.App.Base
     using Kistl.App.GUI;
     using Kistl.Client;
     using Kistl.Client.Presentables;
+    using ViewModelDescriptors = Kistl.NamedObjects.Gui.ViewModelDescriptors;
 
     /// <summary>
     /// Client implementation
@@ -22,7 +23,7 @@ namespace Kistl.App.Base
         [Invocation]
         public static void NotifyCreated(ObjectClass obj)
         {
-            obj.DefaultViewModelDescriptor = obj.Context.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_DataObjectViewModel);
+            obj.DefaultViewModelDescriptor = ViewModelDescriptors.Kistl_Client_Presentables_DataObjectViewModel.Find(obj.Context);
         }
     }
 }

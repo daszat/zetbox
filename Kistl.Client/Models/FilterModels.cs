@@ -14,6 +14,7 @@ namespace Kistl.Client.Models
     using Kistl.App.Extensions;
     using Kistl.App.GUI;
     using Kistl.Client.Presentables.ValueViewModels;
+    using ViewModelDescriptors = Kistl.NamedObjects.Gui.ViewModelDescriptors;
 
     public class FilterEvaluator
     {
@@ -190,7 +191,7 @@ namespace Kistl.Client.Models
             }
         }
 
-        public bool Required {get;set;}
+        public bool Required { get; set; }
 
         public bool RefreshOnFilterChanged { get; set; }
 
@@ -216,11 +217,11 @@ namespace Kistl.Client.Models
             if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
             base.IsServerSideFilter = false;
             base.Label = FilterModelsResources.ToStringFilterModel_Label;
-            base.ViewModelType = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_SingleValueFilterViewModel);
+            base.ViewModelType = ViewModelDescriptors.Kistl_Client_Presentables_FilterViewModels_SingleValueFilterViewModel.Find(frozenCtx);
             base.FilterArguments.Add(new FilterArgumentConfig(
                 new ClassValueModel<string>(base.Label, FilterModelsResources.ToStringFilterModel_Description, true, false),
-                frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_ReferencePropertyModel_String)
-            )); // ClassValueViewModel<string>
+                ViewModelDescriptors.Kistl_Client_Presentables_ValueViewModels_ClassValueViewModel_1_System_String_.Find(frozenCtx)
+            ));
 
             base.RefreshOnFilterChanged = false;
         }
@@ -253,13 +254,13 @@ namespace Kistl.Client.Models
                 Label = label,
                 ValueSource = predicate,
                 Operator = FilterOperators.Equals,
-                ViewModelType = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_SingleValueFilterViewModel),
+                ViewModelType = ViewModelDescriptors.Kistl_Client_Presentables_FilterViewModels_SingleValueFilterViewModel.Find(frozenCtx),
                 RequestedKind = requestedKind,
                 RefreshOnFilterChanged = true,
             };
             fmdl.FilterArguments.Add(new FilterArgumentConfig(
                 new EnumerationValueModel(label, "", true, false, requestedArgumentKind, frozenCtx.FindPersistenceObject<Enumeration>(enumDef)),
-                frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableValuePropertyModel_Enum)));
+                ViewModelDescriptors.Kistl_Client_Presentables_ValueViewModels_EnumerationValueViewModel.Find(frozenCtx)));
             return fmdl;
         }
 
@@ -283,13 +284,13 @@ namespace Kistl.Client.Models
                 Label = label,
                 ValueSource = predicate,
                 Operator = FilterOperators.Equals,
-                ViewModelType = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_SingleValueFilterViewModel),
+                ViewModelType = ViewModelDescriptors.Kistl_Client_Presentables_FilterViewModels_SingleValueFilterViewModel.Find(frozenCtx),
                 RequestedKind = requestedKind,
                 RefreshOnFilterChanged = true,
             };
             fmdl.FilterArguments.Add(new FilterArgumentConfig(
                 new ObjectReferenceValueModel(label, "", true, false, requestedArgumentKind, referencedClass),
-                frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_ObjectReferenceModel)));
+                ViewModelDescriptors.Kistl_Client_Presentables_ValueViewModels_ObjectReferenceViewModel.Find(frozenCtx)));
             return fmdl;
         }
 
@@ -313,7 +314,7 @@ namespace Kistl.Client.Models
                 Label = label,
                 ValueSource = predicate,
                 Operator = FilterOperators.Equals,
-                ViewModelType = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_SingleValueFilterViewModel),
+                ViewModelType = ViewModelDescriptors.Kistl_Client_Presentables_FilterViewModels_SingleValueFilterViewModel.Find(frozenCtx),
                 RequestedKind = requestedKind,
                 RefreshOnFilterChanged = false,
             };
@@ -322,28 +323,28 @@ namespace Kistl.Client.Models
             BaseValueModel mdl = null;
             if (propType == typeof(decimal))
             {
-                vDesc = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableValuePropertyModel_Decimal);
+                vDesc = ViewModelDescriptors.Kistl_Client_Presentables_ValueViewModels_NullableStructValueViewModel_1_System_Decimal_.Find(frozenCtx);
                 mdl = new NullableStructValueModel<decimal>(label, "", true, false, requestedArgumentKind);
             }
             else if (propType == typeof(int))
             {
-                vDesc = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableValuePropertyModel_Int);
+                vDesc = ViewModelDescriptors.Kistl_Client_Presentables_ValueViewModels_NullableStructValueViewModel_1_System_Int32_.Find(frozenCtx);
                 mdl = new NullableStructValueModel<int>(label, "", true, false, requestedArgumentKind);
             }
             else if (propType == typeof(double))
             {
-                vDesc = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableValuePropertyModel_Double);
+                vDesc = ViewModelDescriptors.Kistl_Client_Presentables_ValueViewModels_NullableStructValueViewModel_1_System_Double_.Find(frozenCtx);
                 mdl = new NullableStructValueModel<double>(label, "", true, false, requestedArgumentKind);
             }
             else if (propType == typeof(bool))
             {
-                vDesc = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableValuePropertyModel_Bool);
+                vDesc = ViewModelDescriptors.Kistl_Client_Presentables_ValueViewModels_NullableBoolPropertyViewModel.Find(frozenCtx);
                 fmdl.RefreshOnFilterChanged = true;
                 mdl = new BoolValueModel(label, "", true, false, requestedArgumentKind);
             }
             else if (propType == typeof(string))
             {
-                vDesc = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_ReferencePropertyModel_String);
+                vDesc = ViewModelDescriptors.Kistl_Client_Presentables_ValueViewModels_ClassValueViewModel_1_System_String_.Find(frozenCtx);
                 mdl = new ClassValueModel<string>(label, "", true, false, requestedArgumentKind);
                 fmdl.Operator = FilterOperators.Contains;
             }
@@ -368,7 +369,7 @@ namespace Kistl.Client.Models
 
         public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, Property prop, ControlKind requestedKind, ControlKind requestedArgumentKind)
         {
-            return Create(frozenCtx, label, new [] { prop }, requestedKind, requestedArgumentKind);
+            return Create(frozenCtx, label, new[] { prop }, requestedKind, requestedArgumentKind);
         }
 
         public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, IEnumerable<Property> props, ControlKind requestedKind, ControlKind requestedArgumentKind)
@@ -446,11 +447,11 @@ namespace Kistl.Client.Models
             var mdl = new MonthValueFilterModel();
             mdl.Label = label;
             mdl.ValueSource = valueSource;
-            mdl.ViewModelType = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_SingleValueFilterViewModel);
+            mdl.ViewModelType = ViewModelDescriptors.Kistl_Client_Presentables_FilterViewModels_SingleValueFilterViewModel.Find(frozenCtx);
             mdl.RequestedKind = requestedKind;
             mdl.FilterArguments.Add(new FilterArgumentConfig(
                 valMdl,
-                /*cfg.ArgumentViewModel ?? */ frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableMonthPropertyViewModel)));
+                /*cfg.ArgumentViewModel ?? */ ViewModelDescriptors.Kistl_Client_Presentables_ValueViewModels_NullableMonthPropertyViewModel.Find(frozenCtx)));
 
             if (setDefault)
             {
@@ -487,11 +488,11 @@ namespace Kistl.Client.Models
             var mdl = new YearValueFilterModel();
             mdl.Label = label;
             mdl.ValueSource = valueSource;
-            mdl.ViewModelType = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_SingleValueFilterViewModel);
+            mdl.ViewModelType = ViewModelDescriptors.Kistl_Client_Presentables_FilterViewModels_SingleValueFilterViewModel.Find(frozenCtx);
             mdl.RequestedKind = requestedKind;
             mdl.FilterArguments.Add(new FilterArgumentConfig(
                 valMdl,
-                /*cfg.ArgumentViewModel ?? */ frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableValuePropertyModel_Int)));
+                /*cfg.ArgumentViewModel ?? */ ViewModelDescriptors.Kistl_Client_Presentables_ValueViewModels_NullableStructValueViewModel_1_System_Int32_.Find(frozenCtx)));
 
             if (setDefault)
             {
@@ -521,7 +522,7 @@ namespace Kistl.Client.Models
             var mdl = new DateRangeFilterModel();
             mdl.Label = label;
             mdl.ValueSource = valueSource;
-            mdl.ViewModelType = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_DateRangeFilterViewModel);
+            mdl.ViewModelType = ViewModelDescriptors.Kistl_Client_Presentables_FilterViewModels_DateRangeFilterViewModel.Find(frozenCtx);
             mdl.RequestedKind = requestedKind;
 
             var fromMdl = new DateTimeValueModel(FilterModelsResources.From, "", true, false, DateTimeStyles.Date);
@@ -529,10 +530,10 @@ namespace Kistl.Client.Models
 
             mdl.FilterArguments.Add(new FilterArgumentConfig(
                 fromMdl,
-                /*cfg.ArgumentViewModel ?? */ frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableValuePropertyModel_DateTime)));
+                /*cfg.ArgumentViewModel ?? */ ViewModelDescriptors.Kistl_Client_Presentables_ValueViewModels_NullableDateTimePropertyViewModel.Find(frozenCtx)));
             mdl.FilterArguments.Add(new FilterArgumentConfig(
                 toMdl,
-                /*cfg.ArgumentViewModel ?? */ frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableValuePropertyModel_DateTime)));
+                /*cfg.ArgumentViewModel ?? */ ViewModelDescriptors.Kistl_Client_Presentables_ValueViewModels_NullableDateTimePropertyViewModel.Find(frozenCtx)));
 
             if (setYearDefault)
             {
@@ -605,7 +606,7 @@ namespace Kistl.Client.Models
             {
                 Label = label,
                 ValueSource = predicate,
-                ViewModelType = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_RangeFilterViewModel),
+                ViewModelType = ViewModelDescriptors.Kistl_Client_Presentables_FilterViewModels_RangeFilterViewModel.Find(frozenCtx),
                 RequestedKind = requestedKind,
             };
 
@@ -614,25 +615,25 @@ namespace Kistl.Client.Models
             BaseValueModel mdl2 = null;
             if (type == typeof(decimal))
             {
-                vDesc = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableValuePropertyModel_Decimal);
+                vDesc = ViewModelDescriptors.Kistl_Client_Presentables_ValueViewModels_NullableStructValueViewModel_1_System_Decimal_.Find(frozenCtx);
                 mdl1 = new NullableStructValueModel<decimal>("", "", true, false, requestedArgumentKind);
                 mdl2 = new NullableStructValueModel<decimal>("", "", true, false, requestedArgumentKind);
             }
             else if (type == typeof(int))
             {
-                vDesc = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableValuePropertyModel_Int);
+                vDesc = ViewModelDescriptors.Kistl_Client_Presentables_ValueViewModels_NullableStructValueViewModel_1_System_Int32_.Find(frozenCtx);
                 mdl1 = new NullableStructValueModel<int>("", "", true, false, requestedArgumentKind);
                 mdl2 = new NullableStructValueModel<int>("", "", true, false, requestedArgumentKind);
             }
             else if (type == typeof(double))
             {
-                vDesc = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableValuePropertyModel_Double);
+                vDesc = ViewModelDescriptors.Kistl_Client_Presentables_ValueViewModels_NullableStructValueViewModel_1_System_Double_.Find(frozenCtx);
                 mdl1 = new NullableStructValueModel<double>("", "", true, false, requestedArgumentKind);
                 mdl2 = new NullableStructValueModel<double>("", "", true, false, requestedArgumentKind);
             }
             else if (type == typeof(DateTime))
             {
-                vDesc = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableValuePropertyModel_DateTime);
+                vDesc = ViewModelDescriptors.Kistl_Client_Presentables_ValueViewModels_NullableDateTimePropertyViewModel.Find(frozenCtx);
                 mdl1 = new DateTimeValueModel("", "", true, false, DateTimeStyles.Date, requestedArgumentKind);
                 mdl2 = new DateTimeValueModel("", "", true, false, DateTimeStyles.Date, requestedArgumentKind);
             }
@@ -786,13 +787,13 @@ namespace Kistl.Client.Models
             {
                 Label = label,
                 ValueSource = FilterValueSource.FromExpression(predicate),
-                ViewModelType = frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_OptionalPredicateFilterViewModel),
+                ViewModelType = ViewModelDescriptors.Kistl_Client_Presentables_FilterViewModels_OptionalPredicateFilterViewModel.Find(frozenCtx),
                 RequestedKind = requestedKind,
             };
             var valueMdl = new BoolValueModel(label, "", false, false, requestedArgumentKind);
             valueMdl.Value = false;
             fmdl.FilterArguments.Add(new FilterArgumentConfig(valueMdl,
-                frozenCtx.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableValuePropertyModel_Bool)));
+                ViewModelDescriptors.Kistl_Client_Presentables_ValueViewModels_NullableBoolPropertyViewModel.Find(frozenCtx)));
             return fmdl;
         }
 

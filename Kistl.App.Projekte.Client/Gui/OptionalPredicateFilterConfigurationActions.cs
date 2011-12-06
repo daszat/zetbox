@@ -9,6 +9,7 @@ namespace Kistl.App.GUI
     using Kistl.Client;
     using Kistl.Client.Models;
     using Kistl.Client.Presentables;
+    using ViewModelDescriptors = Kistl.NamedObjects.Gui.ViewModelDescriptors;
 
     /// <summary>
     /// Client implementation
@@ -36,7 +37,7 @@ namespace Kistl.App.GUI
 
             var valueMdl = new BoolValueModel("", "", false, false);
             valueMdl.Value = false;
-            mdl.FilterArguments.Add(new FilterArgumentConfig(valueMdl, /*cfg.ArgumentViewModel ?? */ FrozenContext.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_NullableValuePropertyModel_Bool)));
+            mdl.FilterArguments.Add(new FilterArgumentConfig(valueMdl, /*cfg.ArgumentViewModel ?? */ ViewModelDescriptors.Kistl_Client_Presentables_ValueViewModels_NullableBoolPropertyViewModel.Find(FrozenContext)));
 
             e.Result = mdl;
         }
@@ -44,7 +45,7 @@ namespace Kistl.App.GUI
         [Invocation]
         public static void NotifyCreated(Kistl.App.GUI.OptionalPredicateFilterConfiguration obj)
         {
-            obj.ViewModelDescriptor = obj.Context.FindPersistenceObject<ViewModelDescriptor>(NamedObjects.ViewModelDescriptor_OptionalPredicateFilterViewModel);
+            obj.ViewModelDescriptor = ViewModelDescriptors.Kistl_Client_Presentables_FilterViewModels_OptionalPredicateFilterViewModel.Find(obj.Context);
         }
     }
 }
