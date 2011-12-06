@@ -22,6 +22,8 @@ namespace Kistl.Generator.InterfaceTemplates
 
     public partial class NamedObjects
     {
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Generator.InterfaceTemplates.NamedObjects");
+
         private List<string> currentPrefix;
         private string currentPrefixString;
         private string indent;
@@ -56,27 +58,42 @@ namespace Kistl.Generator.InterfaceTemplates
         {
             foreach (var objClass in ctx.GetQuery<ObjectClass>().ToList().Where(cls => cls.ImplementsIModuleMember(false)))
             {
-                var typeName = objClass.GetDescribedInterfaceTypeName();
-                foreach (var nod in ctx.Internals().GetAll(objClass.GetDescribedInterfaceType())
-                    .OfType<INamedObject>()
-                    .Select(ino => new { Ino = ino, Path = ino.GetName(), Guid = ino.ExportGuid, })
-                    .Where(ino => !string.IsNullOrEmpty(ino.Path))
-                    .Select(ino =>
-                    {
-                        var splitName = ino.Path.Split('.');
-                        var path = splitName.Take(splitName.Length - 1).ToArray();
-
-                        return new NamedObjectDescriptor()
-                        {
-                            Type = typeName,
-                            Name = splitName.Last(),
-                            Path = path,
-                            PathString = string.Join(".", path),
-                            Guid = ino.Guid
-                        };
-                    }))
+                string typeName = null;
+                List<NamedObjectDescriptor> instances = null;
+                try
                 {
-                    yield return nod;
+                    typeName = objClass.GetDescribedInterfaceTypeName();
+                    instances = ctx.Internals().GetAll(objClass.GetDescribedInterfaceType())
+                        .OfType<INamedObject>()
+                        .Select(ino => new { Ino = ino, Path = ino.GetName(), Guid = ino.ExportGuid, })
+                        .Where(ino => !string.IsNullOrEmpty(ino.Path))
+                        .Select(ino =>
+                        {
+                            var splitName = ino.Path.Split('.');
+                            var path = splitName.Take(splitName.Length - 1).ToArray();
+
+                            return new NamedObjectDescriptor()
+                            {
+                                Type = typeName,
+                                Name = splitName.Last(),
+                                Path = path,
+                                PathString = string.Join(".", path),
+                                Guid = ino.Guid
+                            };
+                        })
+                        .ToList();
+                }
+                catch (TypeLoadException ex)
+                {
+                    Log.WarnFormat("Skipping rendering for {0}: {1}", objClass, ex.Message);
+                }
+
+                if (instances != null)
+                {
+                    foreach (var nod in instances)
+                    {
+                        yield return nod;
+                    }
                 }
             }
         }
