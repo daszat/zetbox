@@ -1294,6 +1294,28 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Property> OnConstr
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Property, Kistl.App.GUI.ViewModelDescriptor> OnValueModelDescriptor_PostSetter;
 
         /// <summary>
+        /// The element type for multi-valued properties. The property type string in all other cases.
+        /// </summary>
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnGetElementTypeString_Property")]
+        public virtual string GetElementTypeString()
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetElementTypeString_Property != null)
+            {
+                OnGetElementTypeString_Property(this, e);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on Property.GetElementTypeString");
+            }
+            return e.Result;
+        }
+        public delegate void GetElementTypeString_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
+        public static event GetElementTypeString_Handler<Property> OnGetElementTypeString_Property;
+        // END Kistl.Generator.Templates.ObjectClasses.Method
+
+        /// <summary>
         /// 
         /// </summary>
         // BEGIN Kistl.Generator.Templates.ObjectClasses.Method

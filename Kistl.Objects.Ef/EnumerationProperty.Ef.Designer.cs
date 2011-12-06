@@ -142,6 +142,27 @@ namespace Kistl.App.Base
 		public static event PropertyPostSetterHandler<Kistl.App.Base.EnumerationProperty, Kistl.App.Base.Enumeration> OnEnumeration_PostSetter;
 
         /// <summary>
+        /// The element type for multi-valued properties. The property type string in all other cases.
+        /// </summary>
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnGetElementTypeString_EnumerationProperty")]
+        public override string GetElementTypeString()
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetElementTypeString_EnumerationProperty != null)
+            {
+                OnGetElementTypeString_EnumerationProperty(this, e);
+            }
+            else
+            {
+                e.Result = base.GetElementTypeString();
+            }
+            return e.Result;
+        }
+        public static event GetElementTypeString_Handler<EnumerationProperty> OnGetElementTypeString_EnumerationProperty;
+        // END Kistl.Generator.Templates.ObjectClasses.Method
+
+        /// <summary>
         /// 
         /// </summary>
         // BEGIN Kistl.Generator.Templates.ObjectClasses.Method

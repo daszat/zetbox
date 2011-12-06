@@ -146,6 +146,27 @@ namespace Kistl.App.Base
 		public static event PropertyPostSetterHandler<Kistl.App.Base.DecimalProperty, int> OnScale_PostSetter;
 
         /// <summary>
+        /// The element type for multi-valued properties. The property type string in all other cases.
+        /// </summary>
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnGetElementTypeString_DecimalProperty")]
+        public override string GetElementTypeString()
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetElementTypeString_DecimalProperty != null)
+            {
+                OnGetElementTypeString_DecimalProperty(this, e);
+            }
+            else
+            {
+                e.Result = base.GetElementTypeString();
+            }
+            return e.Result;
+        }
+        public static event GetElementTypeString_Handler<DecimalProperty> OnGetElementTypeString_DecimalProperty;
+        // END Kistl.Generator.Templates.ObjectClasses.Method
+
+        /// <summary>
         /// 
         /// </summary>
         // BEGIN Kistl.Generator.Templates.ObjectClasses.Method

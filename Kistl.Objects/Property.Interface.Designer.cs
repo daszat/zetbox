@@ -99,6 +99,11 @@ namespace Kistl.App.Base
         }
 
         /// <summary>
+        /// The element type for multi-valued properties. The property type string in all other cases.
+        /// </summary>
+        string GetElementTypeString();
+
+        /// <summary>
         /// 
         /// </summary>
         string GetLabel();

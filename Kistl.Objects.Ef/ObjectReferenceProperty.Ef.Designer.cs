@@ -262,6 +262,27 @@ namespace Kistl.App.Base
 		public static event PropertyPostSetterHandler<Kistl.App.Base.ObjectReferenceProperty, Kistl.App.Base.RelationEnd> OnRelationEnd_PostSetter;
 
         /// <summary>
+        /// The element type for multi-valued properties. The property type string in all other cases.
+        /// </summary>
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnGetElementTypeString_ObjectReferenceProperty")]
+        public override string GetElementTypeString()
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetElementTypeString_ObjectReferenceProperty != null)
+            {
+                OnGetElementTypeString_ObjectReferenceProperty(this, e);
+            }
+            else
+            {
+                e.Result = base.GetElementTypeString();
+            }
+            return e.Result;
+        }
+        public static event GetElementTypeString_Handler<ObjectReferenceProperty> OnGetElementTypeString_ObjectReferenceProperty;
+        // END Kistl.Generator.Templates.ObjectClasses.Method
+
+        /// <summary>
         /// 
         /// </summary>
         // BEGIN Kistl.Generator.Templates.ObjectClasses.Method

@@ -233,6 +233,27 @@ namespace Kistl.App.Base
 		public static event PropertyPostSetterHandler<Kistl.App.Base.CompoundObjectProperty, bool> OnIsList_PostSetter;
 
         /// <summary>
+        /// The element type for multi-valued properties. The property type string in all other cases.
+        /// </summary>
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnGetElementTypeString_CompoundObjectProperty")]
+        public override string GetElementTypeString()
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetElementTypeString_CompoundObjectProperty != null)
+            {
+                OnGetElementTypeString_CompoundObjectProperty(this, e);
+            }
+            else
+            {
+                e.Result = base.GetElementTypeString();
+            }
+            return e.Result;
+        }
+        public static event GetElementTypeString_Handler<CompoundObjectProperty> OnGetElementTypeString_CompoundObjectProperty;
+        // END Kistl.Generator.Templates.ObjectClasses.Method
+
+        /// <summary>
         /// 
         /// </summary>
         // BEGIN Kistl.Generator.Templates.ObjectClasses.Method

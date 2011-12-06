@@ -46,6 +46,27 @@ namespace Kistl.App.Base
         internal new readonly IntPropertyProxy Proxy;
 
         /// <summary>
+        /// The element type for multi-valued properties. The property type string in all other cases.
+        /// </summary>
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnGetElementTypeString_IntProperty")]
+        public override string GetElementTypeString()
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetElementTypeString_IntProperty != null)
+            {
+                OnGetElementTypeString_IntProperty(this, e);
+            }
+            else
+            {
+                e.Result = base.GetElementTypeString();
+            }
+            return e.Result;
+        }
+        public static event GetElementTypeString_Handler<IntProperty> OnGetElementTypeString_IntProperty;
+        // END Kistl.Generator.Templates.ObjectClasses.Method
+
+        /// <summary>
         /// 
         /// </summary>
         // BEGIN Kistl.Generator.Templates.ObjectClasses.Method

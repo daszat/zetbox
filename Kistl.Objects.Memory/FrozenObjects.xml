@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2011-12-06T14:01:51Z" xmlns="http://dasz.at/Kistl">
+<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2011-12-06T16:50:12Z" xmlns="http://dasz.at/Kistl">
   <KistlBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <KistlBase:ChangedOn>2011-08-05T10:30:47.603232Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2011-06-15T14:03:02Z</KistlBase:CreatedOn>
@@ -23416,6 +23416,15 @@
     <KistlBase:Name>GetIsList</KistlBase:Name>
     <KistlBase:ObjectClass>f1baf69c-a341-4a3a-b321-e782e1458e87</KistlBase:ObjectClass>
   </KistlBase:Method>
+  <KistlBase:Method ExportGuid="def3e6b9-de3b-4dcd-9b79-0af3f011a1c4">
+    <KistlBase:ChangedOn>2011-12-06T16:50:12.09668Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2011-12-06T16:50:12.09668Z</KistlBase:CreatedOn>
+    <KistlBase:Description>The element type for multi-valued properties. The property type string in all other cases.</KistlBase:Description>
+    <GUI:IsDisplayable>true</GUI:IsDisplayable>
+    <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>GetElementTypeString</KistlBase:Name>
+    <KistlBase:ObjectClass>e5f93f63-9cb8-40a5-8118-d1d9e479370c</KistlBase:ObjectClass>
+  </KistlBase:Method>
   <KistlBase:Method ExportGuid="de43445e-00eb-4614-b59f-2384e6dfa25a">
     <KistlBase:ChangedOn>2011-08-05T10:31:13.107286Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-11-19T09:22:30Z</KistlBase:CreatedOn>
@@ -24411,6 +24420,16 @@
     <KistlBase:Parameter_pos>0</KistlBase:Parameter_pos>
     <KistlBase:Name>result</KistlBase:Name>
   </KistlBase:BoolParameter>
+  <KistlBase:StringParameter ExportGuid="fa6008e1-41ef-4ed1-9ec1-0a0cfa361334">
+    <KistlBase:ChangedOn>2011-12-06T16:50:12.09668Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2011-12-06T16:50:12.09668Z</KistlBase:CreatedOn>
+    <KistlBase:IsList>false</KistlBase:IsList>
+    <KistlBase:IsNullable>false</KistlBase:IsNullable>
+    <KistlBase:IsReturnParameter>true</KistlBase:IsReturnParameter>
+    <KistlBase:Method>def3e6b9-de3b-4dcd-9b79-0af3f011a1c4</KistlBase:Method>
+    <KistlBase:Parameter_pos>0</KistlBase:Parameter_pos>
+    <KistlBase:Name>result</KistlBase:Name>
+  </KistlBase:StringParameter>
   <KistlBase:StringParameter ExportGuid="b8676f54-7f01-4b24-9c0e-4a8b36d3b8f2">
     <KistlBase:ChangedOn>2011-08-05T10:31:01.192807Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-11-19T09:22:30Z</KistlBase:CreatedOn>
