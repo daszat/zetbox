@@ -24,11 +24,7 @@ namespace Kistl.App.GUI
         {
             if (obj.ViewModelRef != null)
             {
-                var type = obj.ViewModelRef.AsType(false);
-                if (type != null)
-                {
-                    e.Result = string.Format("Gui.ViewModelDescriptors.{0}", Regex.Replace(type.ToString(), @"\W", "_"));
-                }
+                e.Result = string.Format("Gui.ViewModelDescriptors.{0}", Regex.Replace(obj.ViewModelRef.ToTypeName(), @"\W", "_"));
             }
         }
     }

@@ -3587,6 +3587,305 @@ namespace Kistl {
                     }
                 }
             }
+            public static class ViewModelDescriptors
+            {
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_App_Projekte_Client_ViewModel_Projekte_ShowCalendarNavigationActionViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("ec83ad5c-a62a-4407-81d4-6f6ab15ef633"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_ActionViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("3d779eaf-1c37-4c3b-822b-0b1af0926802"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_CacheDebuggerViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("f87858ba-688f-495d-99c0-b52ad117a4c2"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_Calendar_WeekCalendarViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("7fbcbbdf-1821-47dc-9332-c0ae4f6a70a1"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_DataObjectSelectionTaskViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("7ec25c1a-c819-4219-9432-af1fdb0aaf63"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_DataObjectViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("d8e95ac5-d46a-4dfa-a574-12ea299eadc4"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_DocumentManagement_DocumentViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("377176c3-4ff9-4a6f-bfc0-de893bce1c12"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_DocumentManagement_DynamicFileViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("62f82ae5-b646-4ce3-a66a-da3fe3f49e9f"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_DocumentManagement_FileViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("f580a1b4-26c0-46e8-a268-3b3d4b4f15a7"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_DocumentManagement_ImageViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("8b9215ca-d679-4d8a-9a83-7c939f7d1d1f"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_DocumentManagement_ImportedFileNavigationSearchScreenViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("eabf464f-a5a9-4967-ac2e-577fe51fd23d"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_DocumentManagement_ImportedFileViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("3aeddad1-a2cf-46b0-af26-6bf6e5f8f6e2"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_DocumentManagement_StaticFileViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("c6753751-760d-498d-9e0a-f7f85f44e985"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_ErrorListViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("bec5adb5-06fe-4c4f-8d72-69d4c359cb08"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_ExceptionReporterViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("a658dd55-98ef-4c55-978a-d9ce13386135"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_FilterViewModels_DateRangeFilterViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("e77b05ac-9908-4152-afed-f722410cde98"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_FilterViewModels_OptionalPredicateFilterViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("29550c38-e240-46e4-b856-c7066d8395eb"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_FilterViewModels_RangeFilterViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("47ea2958-1036-4fe2-afb5-84568651d817"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_FilterViewModels_SingleValueFilterViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("4ff2b6ec-a47f-431b-aa6d-d10b39f8d628"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_GUI_ControlKindViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("a6327c38-655d-4188-9601-07f2e71756bc"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_GUI_MultiLineEditorDialogViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("fbf7ee47-b967-4e63-8db9-e7827f5ffe05"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_GUI_NavigationActionViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("ba5965a8-9cc6-4226-ab4b-70b123e8d281"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_GUI_NavigationEntryViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("1c9e10f1-48bc-44a5-b7de-f7b9527e317c"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_GUI_NavigationScreenViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("ce563605-37f5-4280-af7c-42eb7598e079"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_GUI_NavigationSearchScreenViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("bc59173d-b5e3-423d-a8b3-eab7616532d8"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_GUI_NavigatorViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("94be5252-6aeb-4a0d-b6eb-6f7ae07728e8"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_KistlBase_AuditJournalViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("b8e11c28-a64b-4e9b-a18d-1e0f006faedc"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_KistlBase_FilterListEntryViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("afc4b471-3aea-44cb-a1df-859594a3c1cf"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_KistlBase_FilterListViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("00493346-865e-4784-8fe7-8f3b252d4369"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_KistlBase_InstanceListViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("0d3a2e45-9a49-4e29-afea-619baa8d3871"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_KistlBase_MethodInvocationViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("caf3e708-2f31-4084-9957-ca11fccc1374"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_KistlBase_PropertySelectionTaskViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("c5020414-f8cb-4e19-a0d7-c429dfdcdd5b"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_KistlBase_RelationChainViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("7a499c86-2151-4cb3-ae20-7d3edbb1b278"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_KistlBase_RoleMembershipViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("882ba118-6545-4ba8-83de-0e973a38fc3e"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_KistlBase_TypeRefPropertyViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("d96d030e-eebe-4b7f-8b55-dca30cbd4bde"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_KistlDebuggerAsViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("b1df266b-a841-4669-9199-a6a01f6dbfcc"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_ModuleEditor_ControlKindHierarchyViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("16c4762d-451a-48f6-a460-b987d63edaa0"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_ModuleEditor_DiagramViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("e8343dd6-81a0-48eb-af63-5527cdccfa63"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_ModuleEditor_NavigationScreenHierarchyViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("94ec32fc-1914-4937-a8ab-4753335cb502"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_ModuleEditor_WorkspaceViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("c92286af-1bb6-4e0d-ac58-d77179e626a1"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_ObjectBrowser_ModuleViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("84828181-4048-47a7-b526-01508b7a0fd0"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_ObjectBrowser_WorkspaceViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("b8c85c21-966f-4cb0-a2b9-fcad029de674"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_ObjectClassViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("6b368136-addd-4e86-ad29-3d2158a00de5"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_ObjectEditor_WorkspaceViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("ffc833d5-a2a5-4cde-8335-6285973742d8"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_ParameterInputTaskViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("44ddb453-0e08-40cd-b707-7b66a610a900"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_PropertyGroupViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("ac2f4c88-333a-4917-a0b5-a39ad7ea991a"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_Relations_RelationEndViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("d4d5ae35-104d-4445-b0a9-2d49ae5f7716"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_Relations_RelationViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("225bfb18-82fc-429d-81ff-e1ba738fdbc7"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_SchemaMigration_DestinationPropertyViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("d9b9db3b-7514-4989-96d1-cb9c4d3faa36"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_SchemaMigration_SelectDestinationPropertyViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("318e3256-e53a-4d5a-a887-98bd122f38bc"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_SchemaMigration_SourceColumnsObjectCollectionViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("2bec34d6-48ed-4fcc-950c-2eacc2f292db"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_SimpleCommandViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("b09632bd-f37f-4820-9f29-eb6a38e40bdb"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_SimpleDataObjectEditorTaskViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("3c67f649-6684-42b4-b3c8-f1e2f3378927"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_StringListPropertyModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("88ce02bf-fc40-4227-a7b5-28f6385efa1b"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_TimeRecords_Dashboard
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("8023e937-5827-4056-b0c0-ffb5bf061dfd"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_TimeRecords_PresenceRecordModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("382050bb-706b-4812-b23b-133833d72d55"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_TimeRecords_WorkEffortModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("b6dc8994-6930-4cf4-8cb7-7f18efe9ef68"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_TimeRecords_WorkEffortRecorderModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("b4b23681-f63b-4aeb-9ecb-b258bd33be24"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_ValueInputTaskViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("3c1858e5-da99-4328-9308-f95cb9e9cb02"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_ValueViewModels_ClassValueViewModel_1_System_String_
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("975eee82-e7e1-4a12-ab43-d2e3bc3766e4"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_ValueViewModels_CompoundListViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("b255299f-0e90-42f6-a752-2619c058ccf2"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_ValueViewModels_CompoundObjectPropertyViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("a63b9f47-18b7-463d-a06b-7b636de9553f"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_ValueViewModels_EnumerationValueViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("a6ff986c-a485-4c4d-947c-e59d14112ec2"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_ValueViewModels_MultiLineStringValueViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("a5e18586-d80f-49cf-8aa1-41d305eee289"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_ValueViewModels_NullableBoolPropertyViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("09d1f453-d0d9-429e-88e7-e84b33de7c2e"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_ValueViewModels_NullableDateTimePropertyViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("fc74b434-3801-4e4a-ab67-e65a9e014005"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_ValueViewModels_NullableGuidPropertyViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("2b6fb70f-a382-4057-a139-cc33333d619d"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_ValueViewModels_NullableMonthPropertyViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("e66f8cad-f532-4c75-8fb0-e1aa8baddd06"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_ValueViewModels_NullableStructValueViewModel_1_System_Decimal_
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("481d7a65-208c-4706-8d4d-64ea629a109c"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_ValueViewModels_NullableStructValueViewModel_1_System_Double_
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("3a3d0c1c-679e-4d4d-adeb-3ab260079ccb"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_ValueViewModels_NullableStructValueViewModel_1_System_Int32_
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("edaf9334-dc36-4778-aa33-1e5cdaeeb767"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_ValueViewModels_ObjectCollectionViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("67a49c49-b890-4d35-a8db-1f8e43bfc7df"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_ValueViewModels_ObjectListViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("9fce01fe-fd6d-4e21-8b55-08d5e38aea36"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_ValueViewModels_ObjectReferenceViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("83aae6fd-0fae-4348-b313-737a6e751027"); }
+                }
+            }
         }
     }
 }
