@@ -886,6 +886,28 @@ namespace Kistl.App.Base
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
         /// <summary>
+        /// 
+        /// </summary>
+        // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnToTypeName_TypeRef")]
+        public virtual string ToTypeName()
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnToTypeName_TypeRef != null)
+            {
+                OnToTypeName_TypeRef(this, e);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on TypeRef.ToTypeName");
+            }
+            return e.Result;
+        }
+        public delegate void ToTypeName_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
+        public static event ToTypeName_Handler<TypeRef> OnToTypeName_TypeRef;
+        // END Kistl.Generator.Templates.ObjectClasses.Method
+
+        /// <summary>
         /// Update the Parent property to the currently loaded assemblies&apos; state
         /// </summary>
         // BEGIN Kistl.Generator.Templates.ObjectClasses.Method

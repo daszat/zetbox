@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2011-12-02T10:41:10Z" xmlns="http://dasz.at/Kistl">
+<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2011-12-06T14:01:51Z" xmlns="http://dasz.at/Kistl">
   <KistlBase:Module ExportGuid="84f486f7-19fe-49ad-8e4a-6c05089e7684">
     <KistlBase:ChangedOn>2011-08-05T10:30:47.650235Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05Z</KistlBase:CreatedOn>
@@ -21527,6 +21527,14 @@
     <KistlBase:Name>ToString</KistlBase:Name>
     <KistlBase:ObjectClass>87766ae2-89a4-4c37-ab25-583a710c55e5</KistlBase:ObjectClass>
   </KistlBase:Method>
+  <KistlBase:Method ExportGuid="ccf89050-d3c6-4987-8f32-892110c7758b">
+    <KistlBase:ChangedOn>2011-12-06T14:01:51.547121Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2011-12-06T14:01:51.547121Z</KistlBase:CreatedOn>
+    <GUI:IsDisplayable>false</GUI:IsDisplayable>
+    <KistlBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</KistlBase:Module>
+    <KistlBase:Name>ToTypeName</KistlBase:Name>
+    <KistlBase:ObjectClass>87766ae2-89a4-4c37-ab25-583a710c55e5</KistlBase:ObjectClass>
+  </KistlBase:Method>
   <KistlBase:Method ExportGuid="09f139c2-6b61-4606-a3a3-77b2296d79b8">
     <KistlBase:ChangedOn>2011-08-05T10:31:13.108286Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05Z</KistlBase:CreatedOn>
@@ -22405,6 +22413,17 @@
     <KistlBase:Method>7c84c750-4d64-49eb-b02a-1ed9814a5836</KistlBase:Method>
     <KistlBase:Parameter_pos>0</KistlBase:Parameter_pos>
     <KistlBase:Name>retVal</KistlBase:Name>
+  </KistlBase:StringParameter>
+  <KistlBase:StringParameter ExportGuid="b9cfbadc-c777-4889-a3b1-7ebd07c8c6f0">
+    <KistlBase:ChangedOn>2011-12-06T14:01:51.547121Z</KistlBase:ChangedOn>
+    <KistlBase:CreatedOn>2011-12-06T14:01:51.547121Z</KistlBase:CreatedOn>
+    <KistlBase:Description>A full type name for the referenced type. Should be parseable by Type.GetType</KistlBase:Description>
+    <KistlBase:IsList>false</KistlBase:IsList>
+    <KistlBase:IsNullable>false</KistlBase:IsNullable>
+    <KistlBase:IsReturnParameter>true</KistlBase:IsReturnParameter>
+    <KistlBase:Method>ccf89050-d3c6-4987-8f32-892110c7758b</KistlBase:Method>
+    <KistlBase:Parameter_pos>0</KistlBase:Parameter_pos>
+    <KistlBase:Name>result</KistlBase:Name>
   </KistlBase:StringParameter>
   <KistlBase:ClientReadOnlyConstraint ExportGuid="8d458f5f-ad20-4908-9825-7423c7997cb6">
     <KistlBase:ChangedOn>2011-08-05T10:31:04.865017Z</KistlBase:ChangedOn>

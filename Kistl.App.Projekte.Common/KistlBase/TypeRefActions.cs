@@ -48,6 +48,16 @@ namespace Kistl.App.Base
         //    obj.UpdateToStringCache();
         //}
 
+        [Invocation]
+        public static void ToTypeName(TypeRef obj, MethodReturnEventArgs<string> e)
+        {
+            e.Result = obj.FullName;
+            if (obj.GenericArguments.Count > 0)
+            {
+                e.Result += "[" + string.Join(",", obj.GenericArguments.Select(arg => arg.ToTypeName()).ToArray()) + "]";
+            }
+        }
+
         private const string transientTypeTypeRefCacheKey = "__TypeTypeRefCache__";
         [Invocation]
         public static void AsType(TypeRef obj, MethodReturnEventArgs<Type> e, bool throwOnError)
