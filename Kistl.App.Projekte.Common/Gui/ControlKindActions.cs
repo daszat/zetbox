@@ -5,7 +5,7 @@ namespace Kistl.App.GUI
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-
+    using System.Text.RegularExpressions;
     using Kistl.API;
 
     /// <summary>
@@ -32,7 +32,7 @@ namespace Kistl.App.GUI
         [Invocation]
         public static void GetName(ControlKind kind, MethodReturnEventArgs<string> e)
         {
-            e.Result = "Gui.ControlKinds." + kind.Name;
+            e.Result = "Gui.ControlKinds." + Regex.Replace(kind.Name, "\\W", "_");
         }
     }
 }

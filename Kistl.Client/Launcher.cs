@@ -57,7 +57,7 @@ namespace Kistl.Client
             else
             {
                 var ws = mdlFactory.CreateViewModel<WorkspaceViewModel.Factory>().Invoke(ctxFactory.Invoke(), null);
-                ControlKind launcher = Kistl.NamedObjects.Gui.ControlKinds.Kistl.App.GUI.LauncherKind.Find(frozenCtx);
+                ControlKind launcher = Kistl.NamedObjects.Gui.ControlKinds.Kistl_App_GUI_LauncherKind.Find(frozenCtx);
                 mdlFactory.ShowModel(ws, launcher, true);
             }
 

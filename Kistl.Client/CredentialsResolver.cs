@@ -124,7 +124,7 @@ namespace Kistl.Client
 
                             var pwd = new ClassValueModel<string>(CredentialsResolverResources.PasswordLabel, "", false, false);
                             var pwdvm = _vmf.CreateViewModel<ClassValueViewModel<string>.Factory>().Invoke(ctx, null, pwd);
-                            pwdvm.RequestedKind = Kistl.NamedObjects.Gui.ControlKinds.Kistl.App.GUI.PasswordKind.Find(_frozenCtx);
+                            pwdvm.RequestedKind = Kistl.NamedObjects.Gui.ControlKinds.Kistl_App_GUI_PasswordKind.Find(_frozenCtx);
                             valueModels.Add(pwdvm);
 
                             var dlgOK = false;

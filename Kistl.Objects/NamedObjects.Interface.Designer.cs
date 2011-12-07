@@ -3146,320 +3146,293 @@ namespace Kistl {
         {
             public static class ControlKinds
             {
-                public static class daszAt
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> daszAt_ModuleEditor_ControlKindHierachyDisplayKind
                 {
-                    public static class ModuleEditor
-                    {
-                        public static TypedGuid<global::Kistl.App.GUI.ControlKind> ControlKindHierachyDisplayKind
-                        {
-                            get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("1b67c8b9-fd42-4852-b6e4-3b8bd5e853d5"); }
-                        }
-                        public static TypedGuid<global::Kistl.App.GUI.ControlKind> ModuleEditorWorkspaceKind
-                        {
-                            get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("66c71e86-39d1-4a19-a3c7-11b03168f598"); }
-                        }
-                        public static TypedGuid<global::Kistl.App.GUI.ControlKind> NavigationScreenHierachyDisplayKind
-                        {
-                            get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("f236ecd4-d9dc-4fc3-a4a9-6da8ef1a228e"); }
-                        }
-                    }
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("1b67c8b9-fd42-4852-b6e4-3b8bd5e853d5"); }
                 }
-                public static class Kistl
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> daszAt_ModuleEditor_ModuleEditorWorkspaceKind
                 {
-                    public static class App
-                    {
-                        public static class GUI
-                        {
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> AccessDeniedDataObjectKind
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("62047263-be4c-4495-bd1e-a32006513537"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> ActionKind
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("364aaaf3-0f61-4642-a0e3-bd812935cf44"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> AuditJournal
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("aa2fb611-a8aa-44b7-9b55-80ef3ef4c4b1"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> CheckboxKind
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("12b829e1-abab-43f3-99ea-e33cd383d7e6"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> CommandKind
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("8b4273bc-dee4-4985-926d-40d3833fe4f9"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> CommandLinkKind
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("1c39f2f9-f4ba-4653-b92f-4672dfc4294a"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> CompoundListPropertyKind
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("c87f7018-72b8-4f9a-8c10-9e0b6d10a77d"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> CompoundObjectPropertyKind
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("122b23a9-e1ee-4796-ab85-c60527a0060f"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> DashboardKind
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("545aac34-3b0e-441d-87db-386dd711970d"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> DataObjectKind
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("06bf9adc-c5bc-4552-abdc-18a96c527962"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> DataObjectSelectionTaskKind
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("18c0afa2-61bc-4ecb-b1e9-47b33b294573"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> DataObjectSummaryKind
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("c2b9dfc5-0744-430c-9373-bcd98f783180"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> DateRangeButtonsKind
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("c6e426b8-2754-4509-8ad4-9a51938b17a1"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> DateRangeFilterKind
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("3824d326-f4d5-477e-ae3e-50d9dd9edaf9"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> DateTimeKind
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("2073aa42-81ce-4beb-a3f5-c76c788247c5"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> DropdownBoolKind
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("974fae02-0f72-4631-bcf3-edbebbafea4f"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> EnumerationSelectorKind
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("9d414225-460a-4c54-8e36-e368804e387f"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> ErrorListKind
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("7e30f1de-076c-42d3-80b2-9c1111a6cdfb"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> ExceptionReporterDialog
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("017abeeb-c2fa-4203-83fb-e64bb418b0a1"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> FilterKind
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("b020b3b3-ddc2-4724-b922-27bd9d562b1f"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> FilterList
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("8e5c1940-a460-4055-8172-b3a238b298ff"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> FilterListEntry
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("b056e51c-efcf-4ba5-bb34-3b1204254ef9"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> InstanceGridHorizontalKind
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("601d4613-016a-4b8b-97fb-53f0f0feb51a"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> InstanceGridKind
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("150c7db0-d068-4fe3-8137-5b23c73e1fc8"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> InstanceListHorizontalKind
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("997f9eb7-084f-4703-b905-2b97be27a9f1"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> InstanceListKind
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("4e7a8b0b-0c8e-49e1-aa35-d3a9ec7b8e4c"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> KistlDebuggerKind
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("59253ed1-a3a5-4574-b3bb-3c4fa535d21c"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> LauncherKind
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("90d5ff7f-0c82-4278-bb8d-49c240f6bc2c"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> MonthEditorKind
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("a09a78f4-a583-4fef-8ae7-cf7acd95e8b8"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> MultiLineEditorDialog
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("ac155a59-74bd-46c1-b63a-120f68118af2"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> MultiLineTextboxGridKind
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("8cf4c4e6-8c6f-48ac-a879-f09679141298"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> MultiLineTextboxKind
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("b8391867-7c76-40fe-b387-96ab5597fd0d"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> NavigationScreen
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("b2be0e95-d69e-44ff-8d19-2ccd70da2512"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> NavigationSearchScreen
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("37578c9c-5c1a-4443-acc0-d809a4866c6f"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> Navigator
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("90fe1019-7eea-4a90-8c3b-28fa317c9b65"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> ObjectCollectionGridKind
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("70d8ada7-6c9c-4f14-8fbb-d8c6fd3c6491"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> ObjectCollectionKind
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("4f6779a0-46f6-48a0-8880-fc491164d04a"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> ObjectListGridKind
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("3e933ba6-a890-4114-97f8-595ef0560aee"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> ObjectListKind
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("9731f312-8ce4-4c2d-8d95-1923256dc9b8"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> ObjectRefDropdownKind
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("d30d2676-7f2f-4f0d-895a-e46f19b8f526"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> ObjectRefGridCellKind
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("d55c9558-4ced-47b0-8eda-81553340fb5b"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> ObjectRefKind
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("b86945ed-9edc-42ca-9ca5-8124fbf47b5c"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> OptionalPredicateFilterKind
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("ace074dc-845d-4796-841e-973939a1e98f"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> ParameterInputTaskDialog
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("20488fcd-595b-49f6-89f9-e84221586f54"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> PasswordKind
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("2f6233fe-6fd6-4145-b438-64cc85f89fd8"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> PropertyGroupKind
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("d9fb7cec-b71f-48f1-a591-216de253c7d1"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> PropertySelectionTask
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("515e884b-33e0-4db6-b0ad-9755f7543a2b"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> RangeFilterKind
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("2445ac09-ac5e-4bfd-8bd3-166df6fc5176"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> RelationEditorKind
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("f7cf3060-5fa5-4077-93e9-5fc681f875fe"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> SimpleBoolFilterKind
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("d781be32-1e8a-416c-a964-9e51aa8694de"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> SimpleDataObjectEditorDialog
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("c9253b72-608b-4e3d-b215-49995af78791"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> SimpleDropdownFilterKind
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("3c26e38b-bc18-4209-b279-e4ed74afacff"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> SingleLineDataObjectKind
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("66e080be-471d-4dc5-9850-25bedbdfc76e"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> SingleLineKind
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("f3ef02a1-2f89-4edf-91c8-0d79b4e6f0c4"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> SingleValueFilterKind
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("da264078-444c-4cf4-a018-8dddaa8ed8cd"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> StringFilterKind
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("aee9072d-6d36-48ed-b94e-e7eff7321e46"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> StringListKind
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("f9092349-b263-4887-b605-cccac6a361bd"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> StringSelectorKind
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("ab09eaba-507b-4dce-9fbd-589adbc9580b"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> TextboxKind
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("2279b0a6-36b8-4c97-b1fd-9eb1710e74f3"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> TextKind
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("a3f09ef3-2fac-4d7e-aea8-cbf0eab4de70"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> TypeRefRefKind
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("6b5093bb-3ac0-4710-b30d-d72a50b09ee8"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> WeekCalendarDisplay
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("df5134d6-18f1-43b9-96d3-9283bc2b09a8"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> WorkspaceKind
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("329837fd-1146-48b2-9f4e-79aec8958b1e"); }
-                            }
-                        }
-                    }
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("66c71e86-39d1-4a19-a3c7-11b03168f598"); }
                 }
-                public static class ZBox
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> daszAt_ModuleEditor_NavigationScreenHierachyDisplayKind
                 {
-                    public static class App
-                    {
-                        public static class SchemaMigration
-                        {
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> DestinationPropertyEditor
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("3b955f8c-4112-4bcf-9a49-20ef05c04518"); }
-                            }
-                            public static TypedGuid<global::Kistl.App.GUI.ControlKind> SelectDestinationPropertyDialog
-                            {
-                                get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("42d263e9-0108-4068-a38c-e550299cf966"); }
-                            }
-                        }
-                    }
-                    public static class DocumentManagement
-                    {
-                        public static TypedGuid<global::Kistl.App.GUI.ControlKind> DocumentWithPreviewEditor
-                        {
-                            get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("24338f74-ec90-48a5-90ff-b9830082cb12"); }
-                        }
-                        public static TypedGuid<global::Kistl.App.GUI.ControlKind> FileWithPreviewEditor
-                        {
-                            get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("b22d6746-5704-4ea7-934a-c3648081bd0a"); }
-                        }
-                        public static TypedGuid<global::Kistl.App.GUI.ControlKind> ImageEditor
-                        {
-                            get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("d414b18f-e90a-4b69-a45a-4224c62f74cb"); }
-                        }
-                        public static TypedGuid<global::Kistl.App.GUI.ControlKind> ImportedFileWithPreviewEditor
-                        {
-                            get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("d72c2283-b956-461f-b47e-93d81c8bf896"); }
-                        }
-                    }
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("f236ecd4-d9dc-4fc3-a4a9-6da8ef1a228e"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_AccessDeniedDataObjectKind
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("62047263-be4c-4495-bd1e-a32006513537"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_ActionKind
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("364aaaf3-0f61-4642-a0e3-bd812935cf44"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_AuditJournal
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("aa2fb611-a8aa-44b7-9b55-80ef3ef4c4b1"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_CheckboxKind
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("12b829e1-abab-43f3-99ea-e33cd383d7e6"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_CommandKind
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("8b4273bc-dee4-4985-926d-40d3833fe4f9"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_CommandLinkKind
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("1c39f2f9-f4ba-4653-b92f-4672dfc4294a"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_CompoundListPropertyKind
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("c87f7018-72b8-4f9a-8c10-9e0b6d10a77d"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_CompoundObjectPropertyKind
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("122b23a9-e1ee-4796-ab85-c60527a0060f"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_DashboardKind
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("545aac34-3b0e-441d-87db-386dd711970d"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_DataObjectKind
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("06bf9adc-c5bc-4552-abdc-18a96c527962"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_DataObjectSelectionTaskKind
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("18c0afa2-61bc-4ecb-b1e9-47b33b294573"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_DataObjectSummaryKind
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("c2b9dfc5-0744-430c-9373-bcd98f783180"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_DateRangeButtonsKind
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("c6e426b8-2754-4509-8ad4-9a51938b17a1"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_DateRangeFilterKind
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("3824d326-f4d5-477e-ae3e-50d9dd9edaf9"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_DateTimeKind
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("2073aa42-81ce-4beb-a3f5-c76c788247c5"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_DropdownBoolKind
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("974fae02-0f72-4631-bcf3-edbebbafea4f"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_EnumerationSelectorKind
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("9d414225-460a-4c54-8e36-e368804e387f"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_ErrorListKind
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("7e30f1de-076c-42d3-80b2-9c1111a6cdfb"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_ExceptionReporterDialog
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("017abeeb-c2fa-4203-83fb-e64bb418b0a1"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_FilterKind
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("b020b3b3-ddc2-4724-b922-27bd9d562b1f"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_FilterList
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("8e5c1940-a460-4055-8172-b3a238b298ff"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_FilterListEntry
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("b056e51c-efcf-4ba5-bb34-3b1204254ef9"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_InstanceGridHorizontalKind
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("601d4613-016a-4b8b-97fb-53f0f0feb51a"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_InstanceGridKind
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("150c7db0-d068-4fe3-8137-5b23c73e1fc8"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_InstanceListHorizontalKind
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("997f9eb7-084f-4703-b905-2b97be27a9f1"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_InstanceListKind
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("4e7a8b0b-0c8e-49e1-aa35-d3a9ec7b8e4c"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_KistlDebuggerKind
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("59253ed1-a3a5-4574-b3bb-3c4fa535d21c"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_LauncherKind
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("90d5ff7f-0c82-4278-bb8d-49c240f6bc2c"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_MonthEditorKind
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("a09a78f4-a583-4fef-8ae7-cf7acd95e8b8"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_MultiLineEditorDialog
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("ac155a59-74bd-46c1-b63a-120f68118af2"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_MultiLineTextboxGridKind
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("8cf4c4e6-8c6f-48ac-a879-f09679141298"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_MultiLineTextboxKind
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("b8391867-7c76-40fe-b387-96ab5597fd0d"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_NavigationScreen
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("b2be0e95-d69e-44ff-8d19-2ccd70da2512"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_NavigationSearchScreen
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("37578c9c-5c1a-4443-acc0-d809a4866c6f"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_Navigator
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("90fe1019-7eea-4a90-8c3b-28fa317c9b65"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_ObjectCollectionGridKind
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("70d8ada7-6c9c-4f14-8fbb-d8c6fd3c6491"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_ObjectCollectionKind
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("4f6779a0-46f6-48a0-8880-fc491164d04a"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_ObjectListGridKind
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("3e933ba6-a890-4114-97f8-595ef0560aee"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_ObjectListKind
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("9731f312-8ce4-4c2d-8d95-1923256dc9b8"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_ObjectRefDropdownKind
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("d30d2676-7f2f-4f0d-895a-e46f19b8f526"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_ObjectRefGridCellKind
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("d55c9558-4ced-47b0-8eda-81553340fb5b"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_ObjectRefKind
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("b86945ed-9edc-42ca-9ca5-8124fbf47b5c"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_OptionalPredicateFilterKind
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("ace074dc-845d-4796-841e-973939a1e98f"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_ParameterInputTaskDialog
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("20488fcd-595b-49f6-89f9-e84221586f54"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_PasswordKind
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("2f6233fe-6fd6-4145-b438-64cc85f89fd8"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_PropertyGroupKind
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("d9fb7cec-b71f-48f1-a591-216de253c7d1"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_PropertySelectionTask
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("515e884b-33e0-4db6-b0ad-9755f7543a2b"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_RangeFilterKind
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("2445ac09-ac5e-4bfd-8bd3-166df6fc5176"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_RelationEditorKind
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("f7cf3060-5fa5-4077-93e9-5fc681f875fe"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_SimpleBoolFilterKind
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("d781be32-1e8a-416c-a964-9e51aa8694de"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_SimpleDataObjectEditorDialog
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("c9253b72-608b-4e3d-b215-49995af78791"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_SimpleDropdownFilterKind
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("3c26e38b-bc18-4209-b279-e4ed74afacff"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_SingleLineDataObjectKind
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("66e080be-471d-4dc5-9850-25bedbdfc76e"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_SingleLineKind
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("f3ef02a1-2f89-4edf-91c8-0d79b4e6f0c4"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_SingleValueFilterKind
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("da264078-444c-4cf4-a018-8dddaa8ed8cd"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_StringFilterKind
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("aee9072d-6d36-48ed-b94e-e7eff7321e46"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_StringListKind
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("f9092349-b263-4887-b605-cccac6a361bd"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_StringSelectorKind
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("ab09eaba-507b-4dce-9fbd-589adbc9580b"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_TextboxKind
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("2279b0a6-36b8-4c97-b1fd-9eb1710e74f3"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_TextKind
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("a3f09ef3-2fac-4d7e-aea8-cbf0eab4de70"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_TypeRefRefKind
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("6b5093bb-3ac0-4710-b30d-d72a50b09ee8"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_WeekCalendarDisplay
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("df5134d6-18f1-43b9-96d3-9283bc2b09a8"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_WorkspaceKind
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("329837fd-1146-48b2-9f4e-79aec8958b1e"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> ZBox_App_SchemaMigration_DestinationPropertyEditor
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("3b955f8c-4112-4bcf-9a49-20ef05c04518"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> ZBox_App_SchemaMigration_SelectDestinationPropertyDialog
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("42d263e9-0108-4068-a38c-e550299cf966"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> ZBox_DocumentManagement_DocumentWithPreviewEditor
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("24338f74-ec90-48a5-90ff-b9830082cb12"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> ZBox_DocumentManagement_FileWithPreviewEditor
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("b22d6746-5704-4ea7-934a-c3648081bd0a"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> ZBox_DocumentManagement_ImageEditor
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("d414b18f-e90a-4b69-a45a-4224c62f74cb"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> ZBox_DocumentManagement_ImportedFileWithPreviewEditor
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("d72c2283-b956-461f-b47e-93d81c8bf896"); }
                 }
             }
             public static class Icons

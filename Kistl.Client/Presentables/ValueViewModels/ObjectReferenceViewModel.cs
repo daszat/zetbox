@@ -438,7 +438,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                             SelectValue,
                             null,
                             null);
-                        cmdMdl.RequestedKind = Kistl.NamedObjects.Gui.ControlKinds.Kistl.App.GUI.CommandLinkKind.Find(FrozenContext);
+                        cmdMdl.RequestedKind = Kistl.NamedObjects.Gui.ControlKinds.Kistl_App_GUI_CommandLinkKind.Find(FrozenContext);
                         mdlList.Add(cmdMdl);
                     }
                     _possibleValues = new ObservableCollection<ViewModel>(mdlList);

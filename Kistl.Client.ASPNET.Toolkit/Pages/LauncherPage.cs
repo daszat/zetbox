@@ -35,7 +35,7 @@ namespace Kistl.Client.ASPNET.Toolkit.Pages
         {
             var mdl = KistlContextManagerModule.ViewModelFactory
                 .CreateViewModel<WorkspaceViewModel.Factory>().Invoke(KistlContextManagerModule.KistlContext, null);
-            ControlKind launcher = Kistl.NamedObjects.Gui.ControlKinds.Kistl.App.GUI.LauncherKind.Find(KistlContextManagerModule.KistlContext);
+            ControlKind launcher = Kistl.NamedObjects.Gui.ControlKinds.Kistl_App_GUI_LauncherKind.Find(KistlContextManagerModule.KistlContext);
             KistlContextManagerModule.ViewModelFactory.CreateSpecificView(mdl, launcher, ctrlMainContent);
         }
     }
