@@ -32,6 +32,25 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.EfModel
                 type = type.Substring(0, type.Length - 1);
             }
 
+            switch (type)
+            {
+                case "bool":
+                    type = typeof(bool).FullName;
+                    break;
+                case "decimal":
+                    type = typeof(decimal).FullName;
+                    break;
+                case "double":
+                    type = typeof(double).FullName;
+                    break;
+                case "int":
+                    type = typeof(int).FullName;
+                    break;
+                case "string":
+                    type = typeof(string).FullName;
+                    break;
+            }
+
             if (prop is EnumerationProperty)
             {
                 type = "Int32";

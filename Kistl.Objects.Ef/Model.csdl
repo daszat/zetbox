@@ -1014,13 +1014,13 @@
                         FromRole="AccessControl"
                         ToRole="CreatedBy" />
     <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
-    <Property Name="Description" Type="string" Nullable="true" MaxLength="1000"  />
+    <Property Name="Description" Type="System.String" Nullable="true" MaxLength="1000"  />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
     <NavigationProperty Name="ModuleImpl"
                         Relationship="Model.FK_AccessControl_has_Module"
                         FromRole="AccessControl"
                         ToRole="Module" />
-    <Property Name="Name" Type="string" Nullable="false" MaxLength="100"  />
+    <Property Name="Name" Type="System.String" Nullable="false" MaxLength="100"  />
     <NavigationProperty Name="ObjectClassImpl"
                         Relationship="Model.FK_ObjectClass_has_AccessControlList"
                         FromRole="AccessControlList"
@@ -1032,7 +1032,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="TestString" Type="string" Nullable="true" MaxLength="1000"  />
+    <Property Name="TestString" Type="System.String" Nullable="true" MaxLength="1000"  />
   </EntityType>
   <EntityType Name="AnotherTest">
     <Key>
@@ -1045,14 +1045,14 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Frage" Type="string" Nullable="false" MaxLength="1000"  />
+    <Property Name="Frage" Type="System.String" Nullable="false" MaxLength="1000"  />
     <NavigationProperty Name="FragebogenImpl"
                         Relationship="Model.FK_Ein_Fragebogen_enthaelt_gute_Antworten"
                         FromRole="gute_Antworten"
                         ToRole="Ein_Fragebogen" />
     <Property Name="gute_Antworten_pos" Type="Int32" Nullable="true" />
-    <Property Name="FragenNummer" Type="int" Nullable="false"  />
-    <Property Name="GegebeneAntwort" Type="int" Nullable="true"  />
+    <Property Name="FragenNummer" Type="System.Int32" Nullable="false"  />
+    <Property Name="GegebeneAntwort" Type="System.Int32" Nullable="true"  />
   </EntityType>
   <EntityType Name="Application">
     <Key>
@@ -1069,13 +1069,13 @@
                         FromRole="Application"
                         ToRole="CreatedBy" />
     <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
-    <Property Name="Description" Type="string" Nullable="true" MaxLength="1000"  />
+    <Property Name="Description" Type="System.String" Nullable="true" MaxLength="1000"  />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
     <NavigationProperty Name="ModuleImpl"
                         Relationship="Model.FK_Application_has_Module"
                         FromRole="Application"
                         ToRole="Module" />
-    <Property Name="Name" Type="string" Nullable="false" MaxLength="200"  />
+    <Property Name="Name" Type="System.String" Nullable="false" MaxLength="200"  />
     <NavigationProperty Name="RootScreenImpl"
                         Relationship="Model.FK_Application_has_RootScreen"
                         FromRole="Application"
@@ -1106,15 +1106,15 @@
                         Relationship="Model.FK_Module_contains_Assemblies"
                         FromRole="Assemblies"
                         ToRole="Module" />
-    <Property Name="Name" Type="string" Nullable="false" MaxLength="200"  />
+    <Property Name="Name" Type="System.String" Nullable="false" MaxLength="200"  />
   </EntityType>
   <EntityType Name="Auftrag">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Auftragsname" Type="string" Nullable="true" MaxLength="200"  />
-    <Property Name="Auftragswert" Type="double" Nullable="true"  />
+    <Property Name="Auftragsname" Type="System.String" Nullable="true" MaxLength="200"  />
+    <Property Name="Auftragswert" Type="System.Double" Nullable="true"  />
     <NavigationProperty Name="ChangedByImpl"
                         Relationship="Model.FK_Auftrag_ChangedBy_ChangedBy"
                         FromRole="Auftrag"
@@ -1176,18 +1176,18 @@
                         FromRole="BaseParameter"
                         ToRole="CreatedBy" />
     <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
-    <Property Name="Description" Type="string" Nullable="true" MaxLength="200"  />
+    <Property Name="Description" Type="System.String" Nullable="true" MaxLength="200"  />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
-    <Property Name="IsList" Type="bool" Nullable="false"  />
-    <Property Name="IsNullable" Type="bool" Nullable="false"  />
-    <Property Name="IsReturnParameter" Type="bool" Nullable="false"  />
-    <Property Name="Label" Type="string" Nullable="true" MaxLength="200"  />
+    <Property Name="IsList" Type="System.Boolean" Nullable="false"  />
+    <Property Name="IsNullable" Type="System.Boolean" Nullable="false"  />
+    <Property Name="IsReturnParameter" Type="System.Boolean" Nullable="false"  />
+    <Property Name="Label" Type="System.String" Nullable="true" MaxLength="200"  />
     <NavigationProperty Name="MethodImpl"
                         Relationship="Model.FK_Method_has_Parameter"
                         FromRole="Parameter"
                         ToRole="Method" />
     <Property Name="Parameter_pos" Type="Int32" Nullable="true" />
-    <Property Name="Name" Type="string" Nullable="false" MaxLength="100"  />
+    <Property Name="Name" Type="System.String" Nullable="false" MaxLength="100"  />
   </EntityType>
   <EntityType Name="Blob">
     <Key>
@@ -1205,9 +1205,9 @@
                         ToRole="CreatedBy" />
     <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
-    <Property Name="MimeType" Type="string" Nullable="false" MaxLength="1000"  />
-    <Property Name="OriginalName" Type="string" Nullable="false" MaxLength="1000"  />
-    <Property Name="StoragePath" Type="string" Nullable="false" MaxLength="1000"  />
+    <Property Name="MimeType" Type="System.String" Nullable="false" MaxLength="1000"  />
+    <Property Name="OriginalName" Type="System.String" Nullable="false" MaxLength="1000"  />
+    <Property Name="StoragePath" Type="System.String" Nullable="false" MaxLength="1000"  />
   </EntityType>
   <EntityType Name="Calendar">
     <Key>
@@ -1241,7 +1241,7 @@
                         Relationship="Model.FK_Calendar_has_Module"
                         FromRole="Calendar"
                         ToRole="Module" />
-    <Property Name="Name" Type="string" Nullable="false" MaxLength="200"  />
+    <Property Name="Name" Type="System.String" Nullable="false" MaxLength="200"  />
   </EntityType>
   <EntityType Name="CalendarRule" Abstract="true">
     <Key>
@@ -1263,22 +1263,22 @@
                         ToRole="CreatedBy" />
     <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
-    <Property Name="IsWorkingDay" Type="bool" Nullable="false"  />
+    <Property Name="IsWorkingDay" Type="System.Boolean" Nullable="false"  />
     <NavigationProperty Name="ModuleImpl"
                         Relationship="Model.FK_CalendarRule_has_Module"
                         FromRole="CalendarRule"
                         ToRole="Module" />
-    <Property Name="Name" Type="string" Nullable="false" MaxLength="200"  />
+    <Property Name="Name" Type="System.String" Nullable="false" MaxLength="200"  />
     <Property Name="ValidFrom" Type="DateTime" Nullable="true"  />
     <Property Name="ValidUntil" Type="DateTime" Nullable="true"  />
-    <Property Name="WorkingHours" Type="decimal" Nullable="false" Precision="10" Scale="2"  />
+    <Property Name="WorkingHours" Type="System.Decimal" Nullable="false" Precision="10" Scale="2"  />
   </EntityType>
   <EntityType Name="Company">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Name" Type="string" Nullable="false" MaxLength="1000"  />
+    <Property Name="Name" Type="System.String" Nullable="false" MaxLength="1000"  />
   </EntityType>
   <EntityType Name="Constraint">
     <Key>
@@ -1300,7 +1300,7 @@
                         ToRole="CreatedBy" />
     <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
-    <Property Name="Reason" Type="string" Nullable="true" MaxLength="400"  />
+    <Property Name="Reason" Type="System.String" Nullable="true" MaxLength="400"  />
   </EntityType>
   <EntityType Name="ConstraintInvocation">
     <Key>
@@ -1312,7 +1312,7 @@
                         Relationship="Model.FK_ConstraintInvocation_has_TypeRef"
                         FromRole="ConstraintInvocation"
                         ToRole="TypeRef" />
-    <Property Name="MemberName" Type="string" Nullable="false" MaxLength="2147483647"  />
+    <Property Name="MemberName" Type="System.String" Nullable="false" MaxLength="2147483647"  />
   </EntityType>
   <EntityType Name="ControlKind">
     <Key>
@@ -1328,7 +1328,7 @@
                         Relationship="Model.FK_ControlKind_has_Module"
                         FromRole="ControlKind"
                         ToRole="Module" />
-    <Property Name="Name" Type="string" Nullable="true" MaxLength="1000"  />
+    <Property Name="Name" Type="System.String" Nullable="true" MaxLength="1000"  />
     <NavigationProperty Name="ParentImpl"
                         Relationship="Model.FK_ChildControlKinds_have_a_Parent"
                         FromRole="ChildControlKinds"
@@ -1339,8 +1339,8 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Schema" Type="string" Nullable="false" MaxLength="2147483647"  />
-    <Property Name="Version" Type="int" Nullable="false"  />
+    <Property Name="Schema" Type="System.String" Nullable="false" MaxLength="2147483647"  />
+    <Property Name="Version" Type="System.Int32" Nullable="false"  />
   </EntityType>
   <EntityType Name="DataType" Abstract="true">
     <Key>
@@ -1365,7 +1365,7 @@
                         Relationship="Model.FK_DataType_has_DefaultIcon"
                         FromRole="DataType"
                         ToRole="DefaultIcon" />
-    <Property Name="Description" Type="string" Nullable="true" MaxLength="200"  />
+    <Property Name="Description" Type="System.String" Nullable="true" MaxLength="200"  />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
     <NavigationProperty Name="ImplementsInterfacesImpl"
                         Relationship="Model.FK_DataType_implements_ImplementedInterfaces_A"
@@ -1379,7 +1379,7 @@
                         Relationship="Model.FK_Module_contains_DataTypes"
                         FromRole="DataTypes"
                         ToRole="Module" />
-    <Property Name="Name" Type="string" Nullable="false" MaxLength="51"  />
+    <Property Name="Name" Type="System.String" Nullable="false" MaxLength="51"  />
     <NavigationProperty Name="PropertiesImpl"
                         Relationship="Model.FK_ObjectClass_has_Properties"
                         FromRole="ObjectClass"
@@ -1388,9 +1388,9 @@
                         Relationship="Model.FK_DataType_may_request_ControlKind"
                         FromRole="DataType"
                         ToRole="ControlKind" />
-    <Property Name="ShowIconInLists" Type="bool" Nullable="false"  />
-    <Property Name="ShowIdInLists" Type="bool" Nullable="false"  />
-    <Property Name="ShowNameInLists" Type="bool" Nullable="false"  />
+    <Property Name="ShowIconInLists" Type="System.Boolean" Nullable="false"  />
+    <Property Name="ShowIdInLists" Type="System.Boolean" Nullable="false"  />
+    <Property Name="ShowNameInLists" Type="System.Boolean" Nullable="false"  />
   </EntityType>
   <EntityType Name="DefaultPropertyValue" Abstract="true">
     <Key>
@@ -1428,16 +1428,16 @@
                         FromRole="EnumerationEntry"
                         ToRole="CreatedBy" />
     <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
-    <Property Name="Description" Type="string" Nullable="true" MaxLength="200"  />
+    <Property Name="Description" Type="System.String" Nullable="true" MaxLength="200"  />
     <NavigationProperty Name="EnumerationImpl"
                         Relationship="Model.FK_Enumeration_has_EnumerationEntries"
                         FromRole="EnumerationEntries"
                         ToRole="Enumeration" />
     <Property Name="EnumerationEntries_pos" Type="Int32" Nullable="true" />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
-    <Property Name="Label" Type="string" Nullable="true" MaxLength="200"  />
-    <Property Name="Name" Type="string" Nullable="false" MaxLength="200"  />
-    <Property Name="Value" Type="int" Nullable="false"  />
+    <Property Name="Label" Type="System.String" Nullable="true" MaxLength="200"  />
+    <Property Name="Name" Type="System.String" Nullable="false" MaxLength="200"  />
+    <Property Name="Value" Type="System.Int32" Nullable="false"  />
   </EntityType>
   <EntityType Name="ExceptionLogEntry">
     <Key>
@@ -1445,11 +1445,11 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="Date" Type="DateTime" Nullable="false"  />
-    <Property Name="Exception" Type="string" Nullable="true" MaxLength="4000"  />
-    <Property Name="Level" Type="string" Nullable="false" MaxLength="20"  />
-    <Property Name="Logger" Type="string" Nullable="false" MaxLength="255"  />
-    <Property Name="Message" Type="string" Nullable="false" MaxLength="4000"  />
-    <Property Name="Thread" Type="string" Nullable="false" MaxLength="255"  />
+    <Property Name="Exception" Type="System.String" Nullable="true" MaxLength="4000"  />
+    <Property Name="Level" Type="System.String" Nullable="false" MaxLength="20"  />
+    <Property Name="Logger" Type="System.String" Nullable="false" MaxLength="255"  />
+    <Property Name="Message" Type="System.String" Nullable="false" MaxLength="4000"  />
+    <Property Name="Thread" Type="System.String" Nullable="false" MaxLength="255"  />
   </EntityType>
   <EntityType Name="File" Abstract="true">
     <Key>
@@ -1471,7 +1471,7 @@
                         ToRole="CreatedBy" />
     <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
-    <Property Name="Name" Type="string" Nullable="true" MaxLength="1000"  />
+    <Property Name="Name" Type="System.String" Nullable="true" MaxLength="1000"  />
   </EntityType>
   <EntityType Name="FileImportConfiguration">
     <Key>
@@ -1493,8 +1493,8 @@
                         Relationship="Model.FK_Configuration_of_Identity"
                         FromRole="Configuration"
                         ToRole="Identity" />
-    <Property Name="MachineName" Type="string" Nullable="true" MaxLength="200"  />
-    <Property Name="PickupDirectory" Type="string" Nullable="true" MaxLength="2147483647"  />
+    <Property Name="MachineName" Type="System.String" Nullable="true" MaxLength="200"  />
+    <Property Name="PickupDirectory" Type="System.String" Nullable="true" MaxLength="2147483647"  />
   </EntityType>
   <EntityType Name="FilterConfiguration" Abstract="true">
     <Key>
@@ -1512,17 +1512,17 @@
                         ToRole="CreatedBy" />
     <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
-    <Property Name="Label" Type="string" Nullable="true" MaxLength="200"  />
+    <Property Name="Label" Type="System.String" Nullable="true" MaxLength="200"  />
     <NavigationProperty Name="ModuleImpl"
                         Relationship="Model.FK_FilterConfiguration_has_Module"
                         FromRole="FilterConfiguration"
                         ToRole="Module" />
-    <Property Name="RefreshOnFilterChanged" Type="bool" Nullable="true"  />
+    <Property Name="RefreshOnFilterChanged" Type="System.Boolean" Nullable="true"  />
     <NavigationProperty Name="RequestedKindImpl"
                         Relationship="Model.FK_FilterConfiguration_has_RequestedKind"
                         FromRole="FilterConfiguration"
                         ToRole="RequestedKind" />
-    <Property Name="Required" Type="bool" Nullable="false"  />
+    <Property Name="Required" Type="System.Boolean" Nullable="false"  />
     <NavigationProperty Name="ViewModelDescriptorImpl"
                         Relationship="Model.FK_FilterConfiguration_has_ViewModelDescriptor"
                         FromRole="FilterConfiguration"
@@ -1537,7 +1537,7 @@
                         Relationship="Model.FK_Ein_Fragebogen_enthaelt_gute_Antworten"
                         FromRole="Ein_Fragebogen"
                         ToRole="gute_Antworten" />
-    <Property Name="BogenNummer" Type="int" Nullable="true"  />
+    <Property Name="BogenNummer" Type="System.Int32" Nullable="true"  />
     <NavigationProperty Name="StudentImpl"
                         Relationship="Model.FK_Student_füllt_aus_Testbogen_B"
                         FromRole="Testbogen"
@@ -1557,7 +1557,7 @@
                         Relationship="Model.FK_Group_has_Module"
                         FromRole="Group"
                         ToRole="Module" />
-    <Property Name="Name" Type="string" Nullable="false" MaxLength="1000"  />
+    <Property Name="Name" Type="System.String" Nullable="false" MaxLength="1000"  />
   </EntityType>
   <EntityType Name="Icon">
     <Key>
@@ -1569,7 +1569,7 @@
                         FromRole="Icon"
                         ToRole="Blob" />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
-    <Property Name="IconFile" Type="string" Nullable="false" MaxLength="200"  />
+    <Property Name="IconFile" Type="System.String" Nullable="false" MaxLength="200"  />
     <NavigationProperty Name="ModuleImpl"
                         Relationship="Model.FK_Icon_has_Module"
                         FromRole="Icon"
@@ -1580,13 +1580,13 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="DisplayName" Type="string" Nullable="true" MaxLength="200"  />
+    <Property Name="DisplayName" Type="System.String" Nullable="true" MaxLength="200"  />
     <NavigationProperty Name="GroupsImpl"
                         Relationship="Model.FK_Identities_memberOf_Groups_A"
                         FromRole="Identities"
                         ToRole="CollectionEntry" />
-    <Property Name="Password" Type="string" Nullable="true" MaxLength="100"  />
-    <Property Name="UserName" Type="string" Nullable="true" MaxLength="100"  />
+    <Property Name="Password" Type="System.String" Nullable="true" MaxLength="100"  />
+    <Property Name="UserName" Type="System.String" Nullable="true" MaxLength="100"  />
   </EntityType>
   <EntityType Name="InstanceConstraint">
     <Key>
@@ -1598,14 +1598,14 @@
                         FromRole="Constraint"
                         ToRole="Constrained" />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
-    <Property Name="Reason" Type="string" Nullable="true" MaxLength="1000"  />
+    <Property Name="Reason" Type="System.String" Nullable="true" MaxLength="1000"  />
   </EntityType>
   <EntityType Name="Kunde">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Adresse" Type="string" Nullable="true" MaxLength="200"  />
+    <Property Name="Adresse" Type="System.String" Nullable="true" MaxLength="200"  />
     <NavigationProperty Name="ChangedByImpl"
                         Relationship="Model.FK_Kunde_was_ChangedBy"
                         FromRole="Kunde"
@@ -1621,17 +1621,17 @@
                         FromRole="Kunde"
                         ToRole="CollectionEntry" />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
-    <Property Name="Kundenname" Type="string" Nullable="false" MaxLength="200"  />
-    <Property Name="Land" Type="string" Nullable="true" MaxLength="50"  />
-    <Property Name="Ort" Type="string" Nullable="true" MaxLength="100"  />
-    <Property Name="PLZ" Type="string" Nullable="false" MaxLength="10"  />
+    <Property Name="Kundenname" Type="System.String" Nullable="false" MaxLength="200"  />
+    <Property Name="Land" Type="System.String" Nullable="true" MaxLength="50"  />
+    <Property Name="Ort" Type="System.String" Nullable="true" MaxLength="100"  />
+    <Property Name="PLZ" Type="System.String" Nullable="false" MaxLength="10"  />
   </EntityType>
   <EntityType Name="Method">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="CategoryTags" Type="string" Nullable="true" MaxLength="4000"  />
+    <Property Name="CategoryTags" Type="System.String" Nullable="true" MaxLength="4000"  />
     <NavigationProperty Name="ChangedByImpl"
                         Relationship="Model.FK_Method_was_ChangedBy"
                         FromRole="Method"
@@ -1642,20 +1642,20 @@
                         FromRole="Method"
                         ToRole="CreatedBy" />
     <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
-    <Property Name="Description" Type="string" Nullable="true" MaxLength="200"  />
+    <Property Name="Description" Type="System.String" Nullable="true" MaxLength="200"  />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
     <NavigationProperty Name="IconImpl"
                         Relationship="Model.FK_Method_has_Icon"
                         FromRole="Method"
                         ToRole="Icon" />
-    <Property Name="InvokeOnServer" Type="bool" Nullable="true"  />
-    <Property Name="IsDisplayable" Type="bool" Nullable="false"  />
-    <Property Name="Label" Type="string" Nullable="true" MaxLength="200"  />
+    <Property Name="InvokeOnServer" Type="System.Boolean" Nullable="true"  />
+    <Property Name="IsDisplayable" Type="System.Boolean" Nullable="false"  />
+    <Property Name="Label" Type="System.String" Nullable="true" MaxLength="200"  />
     <NavigationProperty Name="ModuleImpl"
                         Relationship="Model.FK_Method_has_Module"
                         FromRole="Method"
                         ToRole="Module" />
-    <Property Name="Name" Type="string" Nullable="false" MaxLength="100"  />
+    <Property Name="Name" Type="System.String" Nullable="false" MaxLength="100"  />
     <NavigationProperty Name="ObjectClassImpl"
                         Relationship="Model.FK_ObjectClass_has_Methods"
                         FromRole="Methods"
@@ -1670,10 +1670,10 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Destination" Type="string" Nullable="false" MaxLength="255"  />
-    <Property Name="DestinationRows" Type="int" Nullable="false"  />
-    <Property Name="Source" Type="string" Nullable="false" MaxLength="255"  />
-    <Property Name="SourceRows" Type="int" Nullable="false"  />
+    <Property Name="Destination" Type="System.String" Nullable="false" MaxLength="255"  />
+    <Property Name="DestinationRows" Type="System.Int32" Nullable="false"  />
+    <Property Name="Source" Type="System.String" Nullable="false" MaxLength="255"  />
+    <Property Name="SourceRows" Type="System.Int32" Nullable="false"  />
     <Property Name="Timestamp" Type="DateTime" Nullable="false"  />
   </EntityType>
   <EntityType Name="MigrationProject">
@@ -1691,7 +1691,7 @@
                         FromRole="MigrationProject"
                         ToRole="CreatedBy" />
     <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
-    <Property Name="Description" Type="string" Nullable="false" MaxLength="250"  />
+    <Property Name="Description" Type="System.String" Nullable="false" MaxLength="250"  />
     <NavigationProperty Name="DestinationModuleImpl"
                         Relationship="Model.FK_MigrationProject_migrates_to_Module"
                         FromRole="MigrationProject"
@@ -1723,13 +1723,13 @@
                         Relationship="Model.FK_Mitarbeiter_is_a_Identity"
                         FromRole="Mitarbeiter"
                         ToRole="Identity" />
-    <Property Name="Name" Type="string" Nullable="true" MaxLength="100"  />
+    <Property Name="Name" Type="System.String" Nullable="true" MaxLength="100"  />
     <NavigationProperty Name="ProjekteImpl"
                         Relationship="Model.FK_Projekte_haben_Mitarbeiter_B"
                         FromRole="Mitarbeiter"
                         ToRole="CollectionEntry" />
-    <Property Name="SVNr" Type="string" Nullable="true" MaxLength="20"  />
-    <Property Name="TelefonNummer" Type="string" Nullable="true" MaxLength="50"  />
+    <Property Name="SVNr" Type="System.String" Nullable="true" MaxLength="20"  />
+    <Property Name="TelefonNummer" Type="System.String" Nullable="true" MaxLength="50"  />
   </EntityType>
   <EntityType Name="Module">
     <Key>
@@ -1746,18 +1746,18 @@
                         FromRole="Module"
                         ToRole="CreatedBy" />
     <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
-    <Property Name="Description" Type="string" Nullable="true" MaxLength="200"  />
+    <Property Name="Description" Type="System.String" Nullable="true" MaxLength="200"  />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
-    <Property Name="Name" Type="string" Nullable="false" MaxLength="200"  />
-    <Property Name="Namespace" Type="string" Nullable="false" MaxLength="200"  />
-    <Property Name="SchemaName" Type="string" Nullable="false" MaxLength="60"  />
+    <Property Name="Name" Type="System.String" Nullable="false" MaxLength="200"  />
+    <Property Name="Namespace" Type="System.String" Nullable="false" MaxLength="200"  />
+    <Property Name="SchemaName" Type="System.String" Nullable="false" MaxLength="60"  />
   </EntityType>
   <EntityType Name="Muhblah">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="TestBool" Type="bool" Nullable="true"  />
+    <Property Name="TestBool" Type="System.Boolean" Nullable="true"  />
     <NavigationProperty Name="TestCustomObjects_List_NavImpl"
                         Relationship="Model.FK_MB_Role_has_TCO_Lst_Role"
                         FromRole="MB_Role"
@@ -1776,7 +1776,7 @@
                         ToRole="TCO_One_Role" />
     <Property Name="TestDateTime" Type="DateTime" Nullable="true"  />
     <Property Name="TestEnumImpl" Type="Int32" Nullable="false"  />
-    <Property Name="TestString" Type="string" Nullable="true" MaxLength="1000"  />
+    <Property Name="TestString" Type="System.String" Nullable="true" MaxLength="1000"  />
   </EntityType>
   <EntityType Name="N_to_M_relations_A">
     <Key>
@@ -1787,7 +1787,7 @@
                         Relationship="Model.FK_ASide_connectsTo_BSide_A"
                         FromRole="ASide"
                         ToRole="CollectionEntry" />
-    <Property Name="Name" Type="string" Nullable="true" MaxLength="1000"  />
+    <Property Name="Name" Type="System.String" Nullable="true" MaxLength="1000"  />
   </EntityType>
   <EntityType Name="N_to_M_relations_B">
     <Key>
@@ -1798,7 +1798,7 @@
                         Relationship="Model.FK_ASide_connectsTo_BSide_B"
                         FromRole="BSide"
                         ToRole="CollectionEntry" />
-    <Property Name="Name" Type="string" Nullable="true" MaxLength="1000"  />
+    <Property Name="Name" Type="System.String" Nullable="true" MaxLength="1000"  />
   </EntityType>
   <EntityType Name="NavigationEntry" Abstract="true">
     <Key>
@@ -1814,7 +1814,7 @@
                         Relationship="Model.FK_Parent_navigates_to_Children"
                         FromRole="Parent"
                         ToRole="Children" />
-    <Property Name="Color" Type="string" Nullable="true" MaxLength="7"  />
+    <Property Name="Color" Type="System.String" Nullable="true" MaxLength="7"  />
     <NavigationProperty Name="CreatedByImpl"
                         Relationship="Model.FK_NavigationScreen_was_CreatedBy"
                         FromRole="NavigationScreen"
@@ -1834,7 +1834,7 @@
                         FromRole="Children"
                         ToRole="Parent" />
     <Property Name="Children_pos" Type="Int32" Nullable="true" />
-    <Property Name="Title" Type="string" Nullable="false" MaxLength="500"  />
+    <Property Name="Title" Type="System.String" Nullable="false" MaxLength="500"  />
     <NavigationProperty Name="ViewModelDescriptorImpl"
                         Relationship="Model.FK_Screen_modeled_by_ViewModelDescriptor"
                         FromRole="Screen"
@@ -1845,7 +1845,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Name" Type="string" Nullable="true" MaxLength="1000"  />
+    <Property Name="Name" Type="System.String" Nullable="true" MaxLength="1000"  />
     <NavigationProperty Name="OneSideImpl"
                         Relationship="Model.FK_OneSide_connectsTo_NSide"
                         FromRole="NSide"
@@ -1856,7 +1856,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Name" Type="string" Nullable="true" MaxLength="1000"  />
+    <Property Name="Name" Type="System.String" Nullable="true" MaxLength="1000"  />
     <NavigationProperty Name="NSideImpl"
                         Relationship="Model.FK_OneSide_connectsTo_NSide"
                         FromRole="OneSide"
@@ -1872,7 +1872,7 @@
                         FromRole="NEnds"
                         ToRole="OneEnd" />
     <Property Name="NEnds_pos" Type="Int32" Nullable="true" />
-    <Property Name="OtherInt" Type="int" Nullable="true"  />
+    <Property Name="OtherInt" Type="System.Int32" Nullable="true"  />
   </EntityType>
   <EntityType Name="OrderedOneEnd">
     <Key>
@@ -1883,7 +1883,7 @@
                         Relationship="Model.FK_OneEnd_hasMany_NEnds"
                         FromRole="OneEnd"
                         ToRole="NEnds" />
-    <Property Name="SomeInt" Type="int" Nullable="true"  />
+    <Property Name="SomeInt" Type="System.Int32" Nullable="true"  />
   </EntityType>
   <EntityType Name="Projekt">
     <Key>
@@ -1894,7 +1894,7 @@
                         Relationship="Model.FK_Projekt_has_Auftraege"
                         FromRole="Projekt"
                         ToRole="Auftraege" />
-    <Property Name="AufwandGes" Type="double" Nullable="true"  />
+    <Property Name="AufwandGes" Type="System.Double" Nullable="true"  />
     <NavigationProperty Name="ChangedByImpl"
                         Relationship="Model.FK_Projekt_was_ChangedBy"
                         FromRole="Projekt"
@@ -1906,12 +1906,12 @@
                         ToRole="CreatedBy" />
     <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
-    <Property Name="Kundenname" Type="string" Nullable="true" MaxLength="100"  />
+    <Property Name="Kundenname" Type="System.String" Nullable="true" MaxLength="100"  />
     <NavigationProperty Name="MitarbeiterImpl"
                         Relationship="Model.FK_Projekte_haben_Mitarbeiter_A"
                         FromRole="Projekte"
                         ToRole="CollectionEntry" />
-    <Property Name="Name" Type="string" Nullable="true" MaxLength="100"  />
+    <Property Name="Name" Type="System.String" Nullable="true" MaxLength="100"  />
     <NavigationProperty Name="TasksImpl"
                         Relationship="Model.FK_Projekt_has_Tasks"
                         FromRole="Projekt"
@@ -1944,7 +1944,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="CategoryTags" Type="string" Nullable="true" MaxLength="4000"  />
+    <Property Name="CategoryTags" Type="System.String" Nullable="true" MaxLength="4000"  />
     <NavigationProperty Name="ChangedByImpl"
                         Relationship="Model.FK_Property_was_ChangedBy"
                         FromRole="Property"
@@ -1963,18 +1963,18 @@
                         Relationship="Model.FK_Property_has_DefaultValue"
                         FromRole="Property"
                         ToRole="DefaultValue" />
-    <Property Name="Description" Type="string" Nullable="true" MaxLength="200"  />
+    <Property Name="Description" Type="System.String" Nullable="true" MaxLength="200"  />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
     <NavigationProperty Name="FilterConfigurationImpl"
                         Relationship="Model.FK_Property_Has_PropertyFilterConfiguration"
                         FromRole="Property"
                         ToRole="PropertyFilterConfiguration" />
-    <Property Name="Label" Type="string" Nullable="true" MaxLength="200"  />
+    <Property Name="Label" Type="System.String" Nullable="true" MaxLength="200"  />
     <NavigationProperty Name="ModuleImpl"
                         Relationship="Model.FK_BaseProperty_has_Module"
                         FromRole="BaseProperty"
                         ToRole="Module" />
-    <Property Name="Name" Type="string" Nullable="false" MaxLength="100"  />
+    <Property Name="Name" Type="System.String" Nullable="false" MaxLength="100"  />
     <NavigationProperty Name="ObjectClassImpl"
                         Relationship="Model.FK_ObjectClass_has_Properties"
                         FromRole="Properties"
@@ -2013,14 +2013,14 @@
                         FromRole="Relation"
                         ToRole="CreatedBy" />
     <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
-    <Property Name="Description" Type="string" Nullable="true" MaxLength="200"  />
+    <Property Name="Description" Type="System.String" Nullable="true" MaxLength="200"  />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
     <NavigationProperty Name="ModuleImpl"
                         Relationship="Model.FK_Module_has_Relation"
                         FromRole="Relation"
                         ToRole="Module" />
     <Property Name="StorageImpl" Type="Int32" Nullable="false"  />
-    <Property Name="Verb" Type="string" Nullable="false" MaxLength="200"  />
+    <Property Name="Verb" Type="System.String" Nullable="false" MaxLength="200"  />
   </EntityType>
   <EntityType Name="RelationEnd">
     <Key>
@@ -2046,13 +2046,13 @@
                         ToRole="CreatedBy" />
     <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
-    <Property Name="HasPersistentOrder" Type="bool" Nullable="false"  />
+    <Property Name="HasPersistentOrder" Type="System.Boolean" Nullable="false"  />
     <Property Name="MultiplicityImpl" Type="Int32" Nullable="false"  />
     <NavigationProperty Name="NavigatorImpl"
                         Relationship="Model.FK_RelationEnd_has_Navigator"
                         FromRole="RelationEnd"
                         ToRole="Navigator" />
-    <Property Name="RoleName" Type="string" Nullable="false" MaxLength="200"  />
+    <Property Name="RoleName" Type="System.String" Nullable="false" MaxLength="200"  />
     <NavigationProperty Name="TypeImpl"
                         Relationship="Model.FK_RelationEnd_has_Type"
                         FromRole="RelationEnd"
@@ -2067,14 +2067,14 @@
                         Relationship="Model.FK_Parent_of_Children"
                         FromRole="Parent"
                         ToRole="Children" />
-    <Property Name="Name" Type="string" Nullable="true" MaxLength="1000"  />
+    <Property Name="Name" Type="System.String" Nullable="true" MaxLength="1000"  />
   </EntityType>
   <EntityType Name="RequiredParentChild">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Name" Type="string" Nullable="true" MaxLength="1000"  />
+    <Property Name="Name" Type="System.String" Nullable="true" MaxLength="1000"  />
     <NavigationProperty Name="ParentImpl"
                         Relationship="Model.FK_Parent_of_Children"
                         FromRole="Children"
@@ -2095,10 +2095,10 @@
                         FromRole="Sequence"
                         ToRole="CreatedBy" />
     <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
-    <Property Name="CurrentNumber" Type="int" Nullable="false"  />
-    <Property Name="Description" Type="string" Nullable="false" MaxLength="1000"  />
+    <Property Name="CurrentNumber" Type="System.Int32" Nullable="false"  />
+    <Property Name="Description" Type="System.String" Nullable="false" MaxLength="1000"  />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
-    <Property Name="IsContinuous" Type="bool" Nullable="false"  />
+    <Property Name="IsContinuous" Type="System.Boolean" Nullable="false"  />
     <NavigationProperty Name="ModuleImpl"
                         Relationship="Model.FK_Sequence_has_Module"
                         FromRole="Sequence"
@@ -2120,7 +2120,7 @@
                         ToRole="CreatedBy" />
     <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
     <Property Name="DeploymentRestrictionImpl" Type="Int32" Nullable="true"  />
-    <Property Name="Description" Type="string" Nullable="false" MaxLength="1000"  />
+    <Property Name="Description" Type="System.String" Nullable="false" MaxLength="1000"  />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
     <NavigationProperty Name="ModuleImpl"
                         Relationship="Model.FK_ServiceDescriptor_has_Module"
@@ -2141,15 +2141,15 @@
                         FromRole="SourceColumn"
                         ToRole="ChangedBy" />
     <Property Name="ChangedOn" Type="DateTime" Nullable="false"  ConcurrencyMode="Fixed"/>
-    <Property Name="Comment" Type="string" Nullable="true" MaxLength="2147483647"  />
-    <Property Name="CompareNulls" Type="bool" Nullable="false"  />
+    <Property Name="Comment" Type="System.String" Nullable="true" MaxLength="2147483647"  />
+    <Property Name="CompareNulls" Type="System.Boolean" Nullable="false"  />
     <NavigationProperty Name="CreatedByImpl"
                         Relationship="Model.FK_SourceColumn_was_CreatedBy"
                         FromRole="SourceColumn"
                         ToRole="CreatedBy" />
     <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
     <Property Name="DbTypeImpl" Type="Int32" Nullable="false"  />
-    <Property Name="Description" Type="string" Nullable="true" MaxLength="250"  />
+    <Property Name="Description" Type="System.String" Nullable="true" MaxLength="250"  />
     <NavigationProperty Name="DestinationPropertyImpl"
                         Relationship="Model.FK_SourceColumn_created_Property_A"
                         FromRole="SourceColumn"
@@ -2159,8 +2159,8 @@
                         FromRole="SourceColumn"
                         ToRole="EnumEntries" />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
-    <Property Name="IsNullable" Type="bool" Nullable="true"  />
-    <Property Name="Name" Type="string" Nullable="false" MaxLength="250"  />
+    <Property Name="IsNullable" Type="System.Boolean" Nullable="true"  />
+    <Property Name="Name" Type="System.String" Nullable="false" MaxLength="250"  />
     <NavigationProperty Name="ReferencesImpl"
                         Relationship="Model.FK_FK_Column_references_PK_Column"
                         FromRole="FK_Column"
@@ -2169,7 +2169,7 @@
                         Relationship="Model.FK_FK_Column_references_PK_Column"
                         FromRole="PK_Column"
                         ToRole="FK_Column" />
-    <Property Name="Size" Type="int" Nullable="true"  />
+    <Property Name="Size" Type="System.Int32" Nullable="true"  />
     <NavigationProperty Name="SourceTableImpl"
                         Relationship="Model.FK_SourceColumn_belongs_to_SourceTable"
                         FromRole="SourceColumn"
@@ -2200,7 +2200,7 @@
                         Relationship="Model.FK_SourceColumn_may_have_EnumEntries"
                         FromRole="EnumEntries"
                         ToRole="SourceColumn" />
-    <Property Name="SourceValue" Type="string" Nullable="false" MaxLength="1000"  />
+    <Property Name="SourceValue" Type="System.String" Nullable="false" MaxLength="1000"  />
   </EntityType>
   <EntityType Name="SourceTable">
     <Key>
@@ -2212,19 +2212,19 @@
                         FromRole="SourceTable"
                         ToRole="ChangedBy" />
     <Property Name="ChangedOn" Type="DateTime" Nullable="false"  ConcurrencyMode="Fixed"/>
-    <Property Name="Comment" Type="string" Nullable="true" MaxLength="2147483647"  />
+    <Property Name="Comment" Type="System.String" Nullable="true" MaxLength="2147483647"  />
     <NavigationProperty Name="CreatedByImpl"
                         Relationship="Model.FK_SourceTable_was_CreatedBy"
                         FromRole="SourceTable"
                         ToRole="CreatedBy" />
     <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
-    <Property Name="Description" Type="string" Nullable="true" MaxLength="250"  />
+    <Property Name="Description" Type="System.String" Nullable="true" MaxLength="250"  />
     <NavigationProperty Name="DestinationObjectClassImpl"
                         Relationship="Model.FK_SourceTable_created_ObjectClass"
                         FromRole="SourceTable"
                         ToRole="ObjectClass" />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
-    <Property Name="Name" Type="string" Nullable="false" MaxLength="250"  />
+    <Property Name="Name" Type="System.String" Nullable="false" MaxLength="250"  />
     <NavigationProperty Name="SourceColumnImpl"
                         Relationship="Model.FK_SourceColumn_belongs_to_SourceTable"
                         FromRole="SourceTable"
@@ -2245,20 +2245,20 @@
                         FromRole="StagingDatabase"
                         ToRole="ChangedBy" />
     <Property Name="ChangedOn" Type="DateTime" Nullable="false"  ConcurrencyMode="Fixed"/>
-    <Property Name="ConnectionStringKey" Type="string" Nullable="false" MaxLength="1000"  />
+    <Property Name="ConnectionStringKey" Type="System.String" Nullable="false" MaxLength="1000"  />
     <NavigationProperty Name="CreatedByImpl"
                         Relationship="Model.FK_StagingDatabase_was_CreatedBy"
                         FromRole="StagingDatabase"
                         ToRole="CreatedBy" />
     <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
-    <Property Name="Description" Type="string" Nullable="true" MaxLength="1000"  />
+    <Property Name="Description" Type="System.String" Nullable="true" MaxLength="1000"  />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
     <NavigationProperty Name="MigrationProjectImpl"
                         Relationship="Model.FK_MigrationProject_reads_from_StagingDatabases"
                         FromRole="StagingDatabases"
                         ToRole="MigrationProject" />
-    <Property Name="OriginConnectionStringKey" Type="string" Nullable="true" MaxLength="1000"  />
-    <Property Name="Schema" Type="string" Nullable="false" MaxLength="63"  />
+    <Property Name="OriginConnectionStringKey" Type="System.String" Nullable="true" MaxLength="1000"  />
+    <Property Name="Schema" Type="System.String" Nullable="false" MaxLength="63"  />
     <NavigationProperty Name="SourceTablesImpl"
                         Relationship="Model.FK_SourceTables_are_contained_in_StagingDatabase"
                         FromRole="StagingDatabase"
@@ -2269,7 +2269,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Aufwand" Type="double" Nullable="true"  />
+    <Property Name="Aufwand" Type="System.Double" Nullable="true"  />
     <NavigationProperty Name="ChangedByImpl"
                         Relationship="Model.FK_Task_was_ChangedBy"
                         FromRole="Task"
@@ -2283,7 +2283,7 @@
     <Property Name="DatumBis" Type="DateTime" Nullable="true"  />
     <Property Name="DatumVon" Type="DateTime" Nullable="true"  />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
-    <Property Name="Name" Type="string" Nullable="true" MaxLength="100"  />
+    <Property Name="Name" Type="System.String" Nullable="true" MaxLength="100"  />
     <NavigationProperty Name="ProjektImpl"
                         Relationship="Model.FK_Projekt_has_Tasks"
                         FromRole="Tasks"
@@ -2320,8 +2320,8 @@
                         Relationship="Model.FK_Template_has_DisplayedTypeAssembly"
                         FromRole="Template"
                         ToRole="DisplayedTypeAssembly" />
-    <Property Name="DisplayedTypeFullName" Type="string" Nullable="false" MaxLength="200"  />
-    <Property Name="DisplayName" Type="string" Nullable="false" MaxLength="200"  />
+    <Property Name="DisplayedTypeFullName" Type="System.String" Nullable="false" MaxLength="200"  />
+    <Property Name="DisplayName" Type="System.String" Nullable="false" MaxLength="200"  />
     <NavigationProperty Name="MenuImpl"
                         Relationship="Model.FK_Template_hasMenu_Menu_A"
                         FromRole="Template"
@@ -2353,7 +2353,7 @@
                         Relationship="Model.FK_MB_One_Role_loves_TCO_One_Role"
                         FromRole="TCO_One_Role"
                         ToRole="MB_One_Role" />
-    <Property Name="PersonName" Type="string" Nullable="false" MaxLength="200"  />
+    <Property Name="PersonName" Type="System.String" Nullable="false" MaxLength="200"  />
     <Property Name="PhoneNumberMobileImpl"
               Type="Model.TestPhoneCompoundObject"
               Nullable="false" />
@@ -2370,21 +2370,21 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Large" Type="decimal" Nullable="true" Precision="20" Scale="2"  />
-    <Property Name="NoScale" Type="decimal" Nullable="true" Precision="6" Scale="0"  />
-    <Property Name="SmallDecimal" Type="decimal" Nullable="true" Precision="4" Scale="2"  />
+    <Property Name="Large" Type="System.Decimal" Nullable="true" Precision="20" Scale="2"  />
+    <Property Name="NoScale" Type="System.Decimal" Nullable="true" Precision="6" Scale="0"  />
+    <Property Name="SmallDecimal" Type="System.Decimal" Nullable="true" Precision="4" Scale="2"  />
   </EntityType>
   <EntityType Name="TestObjClass">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="MyIntProperty" Type="int" Nullable="true"  />
+    <Property Name="MyIntProperty" Type="System.Int32" Nullable="true"  />
     <NavigationProperty Name="ObjectPropImpl"
                         Relationship="Model.FK_TestObjClass_has_ObjectProp"
                         FromRole="TestObjClass"
                         ToRole="ObjectProp" />
-    <Property Name="StringProp" Type="string" Nullable="false" MaxLength="200"  />
+    <Property Name="StringProp" Type="System.String" Nullable="false" MaxLength="200"  />
     <Property Name="TestEnumPropImpl" Type="Int32" Nullable="false"  />
   </EntityType>
   <EntityType Name="TestStudent">
@@ -2392,7 +2392,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Name" Type="string" Nullable="false" MaxLength="1000"  />
+    <Property Name="Name" Type="System.String" Nullable="false" MaxLength="1000"  />
     <NavigationProperty Name="TestbogenImpl"
                         Relationship="Model.FK_Student_füllt_aus_Testbogen_A"
                         FromRole="Student"
@@ -2417,9 +2417,9 @@
                         FromRole="TypeRef"
                         ToRole="CreatedBy" />
     <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
-    <Property Name="Deleted" Type="bool" Nullable="true"  />
+    <Property Name="Deleted" Type="System.Boolean" Nullable="true"  />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
-    <Property Name="FullName" Type="string" Nullable="false" MaxLength="200"  />
+    <Property Name="FullName" Type="System.String" Nullable="false" MaxLength="200"  />
     <NavigationProperty Name="GenericArgumentsImpl"
                         Relationship="Model.FK_TypeRef_hasGenericArguments_GenericArguments_A"
                         FromRole="TypeRef"
@@ -2428,7 +2428,7 @@
                         Relationship="Model.FK_Child_has_Parent"
                         FromRole="Child"
                         ToRole="Parent" />
-    <Property Name="ToStringCache" Type="string" Nullable="true" MaxLength="1000"  />
+    <Property Name="ToStringCache" Type="System.String" Nullable="true" MaxLength="1000"  />
   </EntityType>
   <EntityType Name="ViewDescriptor">
     <Key>
@@ -2479,7 +2479,7 @@
                         Relationship="Model.FK_ViewModelDescriptor_displayedInGridBy_DefaultGridCellKind"
                         FromRole="ViewModelDescriptor"
                         ToRole="DefaultGridCellKind" />
-    <Property Name="Description" Type="string" Nullable="false" MaxLength="4000"  />
+    <Property Name="Description" Type="System.String" Nullable="false" MaxLength="4000"  />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
     <NavigationProperty Name="ModuleImpl"
                         Relationship="Model.FK_ViewModelDescriptor_has_Module"
@@ -2507,7 +2507,7 @@
                         Relationship="Model.FK_Visual_hasContextMenu_ContextMenu_A"
                         FromRole="Visual"
                         ToRole="CollectionEntry" />
-    <Property Name="Description" Type="string" Nullable="false" MaxLength="200"  />
+    <Property Name="Description" Type="System.String" Nullable="false" MaxLength="200"  />
     <NavigationProperty Name="MethodImpl"
                         Relationship="Model.FK_Visual_has_Method"
                         FromRole="Visual"
@@ -2520,7 +2520,7 @@
 
   <!-- EntityTypes for all other classes -->
   <EntityType Name="BoolDefaultValue" BaseType="Model.DefaultPropertyValue">
-    <Property Name="BoolValue" Type="bool" Nullable="false"  />
+    <Property Name="BoolValue" Type="System.Boolean" Nullable="false"  />
   </EntityType>
   <EntityType Name="BoolParameter" BaseType="Model.BaseParameter">
   </EntityType>
@@ -2529,17 +2529,17 @@
                         Relationship="Model.FK_BoolProperty_has_FalseIcon"
                         FromRole="BoolProperty"
                         ToRole="FalseIcon" />
-    <Property Name="FalseLabel" Type="string" Nullable="true" MaxLength="1000"  />
+    <Property Name="FalseLabel" Type="System.String" Nullable="true" MaxLength="1000"  />
     <NavigationProperty Name="NullIconImpl"
                         Relationship="Model.FK_BoolProperty_has_NullIcon"
                         FromRole="BoolProperty"
                         ToRole="NullIcon" />
-    <Property Name="NullLabel" Type="string" Nullable="true" MaxLength="1000"  />
+    <Property Name="NullLabel" Type="System.String" Nullable="true" MaxLength="1000"  />
     <NavigationProperty Name="TrueIconImpl"
                         Relationship="Model.FK_BoolProperty_has_TrueIcon"
                         FromRole="BoolProperty"
                         ToRole="TrueIcon" />
-    <Property Name="TrueLabel" Type="string" Nullable="true" MaxLength="1000"  />
+    <Property Name="TrueLabel" Type="System.String" Nullable="true" MaxLength="1000"  />
   </EntityType>
   <EntityType Name="CalculatedObjectReferenceProperty" BaseType="Model.Property">
     <NavigationProperty Name="InputsImpl"
@@ -2578,15 +2578,15 @@
                         Relationship="Model.FK_CompoundObjectProperty_has_CompoundObjectDefinition"
                         FromRole="CompoundObjectProperty"
                         ToRole="CompoundObjectDefinition" />
-    <Property Name="HasPersistentOrder" Type="bool" Nullable="false"  />
-    <Property Name="IsList" Type="bool" Nullable="false"  />
+    <Property Name="HasPersistentOrder" Type="System.Boolean" Nullable="false"  />
+    <Property Name="IsList" Type="System.Boolean" Nullable="false"  />
   </EntityType>
   <EntityType Name="CurrentDateTimeDefaultValue" BaseType="Model.DefaultPropertyValue">
   </EntityType>
   <EntityType Name="DateRangeFilterConfiguration" BaseType="Model.PropertyFilterConfiguration">
-    <Property Name="IsCurrentMonthDefault" Type="bool" Nullable="true"  />
-    <Property Name="IsCurrentQuaterDefault" Type="bool" Nullable="true"  />
-    <Property Name="IsCurrentYearDefault" Type="bool" Nullable="true"  />
+    <Property Name="IsCurrentMonthDefault" Type="System.Boolean" Nullable="true"  />
+    <Property Name="IsCurrentQuaterDefault" Type="System.Boolean" Nullable="true"  />
+    <Property Name="IsCurrentYearDefault" Type="System.Boolean" Nullable="true"  />
   </EntityType>
   <EntityType Name="DateTimeParameter" BaseType="Model.BaseParameter">
     <Property Name="DateTimeStyleImpl" Type="Int32" Nullable="true"  />
@@ -2600,8 +2600,8 @@
   <EntityType Name="DecimalParameter" BaseType="Model.BaseParameter">
   </EntityType>
   <EntityType Name="DecimalProperty" BaseType="Model.ValueTypeProperty">
-    <Property Name="Precision" Type="int" Nullable="false"  />
-    <Property Name="Scale" Type="int" Nullable="false"  />
+    <Property Name="Precision" Type="System.Int32" Nullable="false"  />
+    <Property Name="Scale" Type="System.Int32" Nullable="false"  />
   </EntityType>
   <EntityType Name="Document" BaseType="Model.File">
     <NavigationProperty Name="RevisionsImpl"
@@ -2616,7 +2616,7 @@
   <EntityType Name="DynamicFile" BaseType="Model.File">
   </EntityType>
   <EntityType Name="EasterCalendarRule" BaseType="Model.YearlyCalendarRule">
-    <Property Name="Offset" Type="int" Nullable="true"  />
+    <Property Name="Offset" Type="System.Int32" Nullable="true"  />
   </EntityType>
   <EntityType Name="EnumDefaultValue" BaseType="Model.DefaultPropertyValue">
     <NavigationProperty Name="EnumValueImpl"
@@ -2625,7 +2625,7 @@
                         ToRole="EnumValue" />
   </EntityType>
   <EntityType Name="Enumeration" BaseType="Model.DataType">
-    <Property Name="AreFlags" Type="bool" Nullable="false"  />
+    <Property Name="AreFlags" Type="System.Boolean" Nullable="false"  />
     <NavigationProperty Name="EnumerationEntriesImpl"
                         Relationship="Model.FK_Enumeration_has_EnumerationEntries"
                         FromRole="Enumeration"
@@ -2644,8 +2644,8 @@
                         ToRole="Enumeration" />
   </EntityType>
   <EntityType Name="FixedYearlyCalendarRule" BaseType="Model.YearlyCalendarRule">
-    <Property Name="Day" Type="int" Nullable="false"  />
-    <Property Name="Month" Type="int" Nullable="false"  />
+    <Property Name="Day" Type="System.Int32" Nullable="false"  />
+    <Property Name="Month" Type="System.Int32" Nullable="false"  />
   </EntityType>
   <EntityType Name="GroupMembership" BaseType="Model.AccessControl">
     <NavigationProperty Name="GroupImpl"
@@ -2658,7 +2658,7 @@
   <EntityType Name="ImportedFile" BaseType="Model.File">
   </EntityType>
   <EntityType Name="IndexConstraint" BaseType="Model.InstanceConstraint">
-    <Property Name="IsUnique" Type="bool" Nullable="false"  />
+    <Property Name="IsUnique" Type="System.Boolean" Nullable="false"  />
     <NavigationProperty Name="PropertiesImpl"
                         Relationship="Model.FK_UniqueContraints_ensures_unique_on_Properties_A"
                         FromRole="UniqueContraints"
@@ -2667,11 +2667,11 @@
   <EntityType Name="InitOnlyConstraint" BaseType="Model.ReadOnlyConstraint">
   </EntityType>
   <EntityType Name="IntDefaultValue" BaseType="Model.DefaultPropertyValue">
-    <Property Name="IntValue" Type="int" Nullable="false"  />
+    <Property Name="IntValue" Type="System.Int32" Nullable="false"  />
   </EntityType>
   <EntityType Name="IntegerRangeConstraint" BaseType="Model.Constraint">
-    <Property Name="Max" Type="int" Nullable="false"  />
-    <Property Name="Min" Type="int" Nullable="false"  />
+    <Property Name="Max" Type="System.Int32" Nullable="false"  />
+    <Property Name="Min" Type="System.Int32" Nullable="false"  />
   </EntityType>
   <EntityType Name="Interface" BaseType="Model.DataType">
   </EntityType>
@@ -2696,22 +2696,22 @@
   <EntityType Name="MethodInvocationConstraint" BaseType="Model.Constraint">
   </EntityType>
   <EntityType Name="MonthFilterConfiguration" BaseType="Model.PropertyFilterConfiguration">
-    <Property Name="IsCurrentMonthDefault" Type="bool" Nullable="true"  />
+    <Property Name="IsCurrentMonthDefault" Type="System.Boolean" Nullable="true"  />
   </EntityType>
   <EntityType Name="NavigationAction" BaseType="Model.NavigationEntry">
   </EntityType>
   <EntityType Name="NavigationScreen" BaseType="Model.NavigationEntry">
   </EntityType>
   <EntityType Name="NavigationSearchScreen" BaseType="Model.NavigationScreen">
-    <Property Name="AllowAddNew" Type="bool" Nullable="true"  />
-    <Property Name="AllowDelete" Type="bool" Nullable="true"  />
-    <Property Name="AllowSelectColumns" Type="bool" Nullable="true"  />
-    <Property Name="AllowUserFilter" Type="bool" Nullable="true"  />
-    <Property Name="EnableAutoFilter" Type="bool" Nullable="true"  />
-    <Property Name="InitialSort" Type="string" Nullable="true" MaxLength="1000"  />
+    <Property Name="AllowAddNew" Type="System.Boolean" Nullable="true"  />
+    <Property Name="AllowDelete" Type="System.Boolean" Nullable="true"  />
+    <Property Name="AllowSelectColumns" Type="System.Boolean" Nullable="true"  />
+    <Property Name="AllowUserFilter" Type="System.Boolean" Nullable="true"  />
+    <Property Name="EnableAutoFilter" Type="System.Boolean" Nullable="true"  />
+    <Property Name="InitialSort" Type="System.String" Nullable="true" MaxLength="1000"  />
     <Property Name="InitialSortDirectionImpl" Type="Int32" Nullable="true"  />
-    <Property Name="IsEditable" Type="bool" Nullable="true"  />
-    <Property Name="IsMultiselect" Type="bool" Nullable="true"  />
+    <Property Name="IsEditable" Type="System.Boolean" Nullable="true"  />
+    <Property Name="IsMultiselect" Type="System.Boolean" Nullable="true"  />
     <NavigationProperty Name="RequestedEditorKindImpl"
                         Relationship="Model.FK_Search_has_RequestedEditorKind"
                         FromRole="Search"
@@ -2720,11 +2720,11 @@
                         Relationship="Model.FK_Search_has_RequestedWorkspaceKind"
                         FromRole="Search"
                         ToRole="RequestedWorkspaceKind" />
-    <Property Name="RespectRequiredFilter" Type="bool" Nullable="true"  />
-    <Property Name="ShowFilter" Type="bool" Nullable="true"  />
-    <Property Name="ShowMasterDetail" Type="bool" Nullable="true"  />
-    <Property Name="ShowOpenCommand" Type="bool" Nullable="true"  />
-    <Property Name="ShowRefreshCommand" Type="bool" Nullable="true"  />
+    <Property Name="RespectRequiredFilter" Type="System.Boolean" Nullable="true"  />
+    <Property Name="ShowFilter" Type="System.Boolean" Nullable="true"  />
+    <Property Name="ShowMasterDetail" Type="System.Boolean" Nullable="true"  />
+    <Property Name="ShowOpenCommand" Type="System.Boolean" Nullable="true"  />
+    <Property Name="ShowRefreshCommand" Type="System.Boolean" Nullable="true"  />
     <NavigationProperty Name="TypeImpl"
                         Relationship="Model.FK_SearchScreen_of_Type"
                         FromRole="SearchScreen"
@@ -2752,14 +2752,14 @@
                         Relationship="Model.FK_ObjectClass_Has_FilterConfigurations"
                         FromRole="ObjectClass"
                         ToRole="FilterConfigurations" />
-    <Property Name="IsAbstract" Type="bool" Nullable="false"  />
-    <Property Name="IsFrozenObject" Type="bool" Nullable="false"  />
-    <Property Name="IsSimpleObject" Type="bool" Nullable="false"  />
+    <Property Name="IsAbstract" Type="System.Boolean" Nullable="false"  />
+    <Property Name="IsFrozenObject" Type="System.Boolean" Nullable="false"  />
+    <Property Name="IsSimpleObject" Type="System.Boolean" Nullable="false"  />
     <NavigationProperty Name="SubClassesImpl"
                         Relationship="Model.FK_BaseObjectClass_has_SubClasses"
                         FromRole="BaseObjectClass"
                         ToRole="SubClasses" />
-    <Property Name="TableName" Type="string" Nullable="false" MaxLength="100"  />
+    <Property Name="TableName" Type="System.String" Nullable="false" MaxLength="100"  />
   </EntityType>
   <EntityType Name="ObjectClassFilterConfiguration" BaseType="Model.FilterConfiguration" Abstract="true">
     <NavigationProperty Name="ObjectClassImpl"
@@ -2774,26 +2774,26 @@
                         ToRole="ObjectClass" />
   </EntityType>
   <EntityType Name="ObjectReferencePlaceholderProperty" BaseType="Model.Property">
-    <Property Name="HasPersistentOrder" Type="bool" Nullable="false"  />
-    <Property Name="ImplementorRoleName" Type="string" Nullable="true" MaxLength="1000"  />
-    <Property Name="IsList" Type="bool" Nullable="false"  />
-    <Property Name="ItemRoleName" Type="string" Nullable="true" MaxLength="1000"  />
+    <Property Name="HasPersistentOrder" Type="System.Boolean" Nullable="false"  />
+    <Property Name="ImplementorRoleName" Type="System.String" Nullable="true" MaxLength="1000"  />
+    <Property Name="IsList" Type="System.Boolean" Nullable="false"  />
+    <Property Name="ItemRoleName" Type="System.String" Nullable="true" MaxLength="1000"  />
     <NavigationProperty Name="ReferencedObjectClassImpl"
                         Relationship="Model.FK_ObjectReferencePlaceholderProperty_ofType_ReferencedObjectClass"
                         FromRole="ObjectReferencePlaceholderProperty"
                         ToRole="ReferencedObjectClass" />
-    <Property Name="Verb" Type="string" Nullable="true" MaxLength="1000"  />
+    <Property Name="Verb" Type="System.String" Nullable="true" MaxLength="1000"  />
   </EntityType>
   <EntityType Name="ObjectReferenceProperty" BaseType="Model.Property">
-    <Property Name="EagerLoading" Type="bool" Nullable="false"  />
-    <Property Name="IsInlineEditable" Type="bool" Nullable="true"  />
+    <Property Name="EagerLoading" Type="System.Boolean" Nullable="false"  />
+    <Property Name="IsInlineEditable" Type="System.Boolean" Nullable="true"  />
     <NavigationProperty Name="RelationEndImpl"
                         Relationship="Model.FK_RelationEnd_has_Navigator"
                         FromRole="Navigator"
                         ToRole="RelationEnd" />
   </EntityType>
   <EntityType Name="OptionalPredicateFilterConfiguration" BaseType="Model.ObjectClassFilterConfiguration">
-    <Property Name="Predicate" Type="string" Nullable="true" MaxLength="1000"  />
+    <Property Name="Predicate" Type="System.String" Nullable="true" MaxLength="1000"  />
   </EntityType>
   <EntityType Name="PropertyFilterConfiguration" BaseType="Model.FilterConfiguration" Abstract="true">
     <NavigationProperty Name="PropertyImpl"
@@ -2816,25 +2816,25 @@
   <EntityType Name="StaticFile" BaseType="Model.File">
   </EntityType>
   <EntityType Name="StringDefaultValue" BaseType="Model.DefaultPropertyValue">
-    <Property Name="DefaultValue" Type="string" Nullable="true" MaxLength="1000"  />
+    <Property Name="DefaultValue" Type="System.String" Nullable="true" MaxLength="1000"  />
   </EntityType>
   <EntityType Name="StringParameter" BaseType="Model.BaseParameter">
   </EntityType>
   <EntityType Name="StringProperty" BaseType="Model.ValueTypeProperty">
   </EntityType>
   <EntityType Name="StringRangeConstraint" BaseType="Model.Constraint">
-    <Property Name="MaxLength" Type="int" Nullable="true"  />
-    <Property Name="MinLength" Type="int" Nullable="false"  />
+    <Property Name="MaxLength" Type="System.Int32" Nullable="true"  />
+    <Property Name="MinLength" Type="System.Int32" Nullable="false"  />
   </EntityType>
   <EntityType Name="ValueTypeProperty" BaseType="Model.Property" Abstract="true">
-    <Property Name="HasPersistentOrder" Type="bool" Nullable="false"  />
-    <Property Name="IsCalculated" Type="bool" Nullable="false"  />
-    <Property Name="IsList" Type="bool" Nullable="false"  />
+    <Property Name="HasPersistentOrder" Type="System.Boolean" Nullable="false"  />
+    <Property Name="IsCalculated" Type="System.Boolean" Nullable="false"  />
+    <Property Name="IsList" Type="System.Boolean" Nullable="false"  />
   </EntityType>
   <EntityType Name="ViewReadOnlyConstraint" BaseType="Model.ReadOnlyConstraint">
   </EntityType>
   <EntityType Name="YearFilterConfiguration" BaseType="Model.PropertyFilterConfiguration">
-    <Property Name="IsCurrentYearDefault" Type="bool" Nullable="true"  />
+    <Property Name="IsCurrentYearDefault" Type="System.Boolean" Nullable="true"  />
   </EntityType>
   <EntityType Name="YearlyCalendarRule" BaseType="Model.CalendarRule" Abstract="true">
   </EntityType>
@@ -3633,7 +3633,7 @@
                         FromRole="CollectionEntry"
                         ToRole="Kunde" />
     <!-- B -->
-    <Property Name="Value" Type="string" Nullable="true" MaxLength="200"  />
+    <Property Name="Value" Type="System.String" Nullable="true" MaxLength="200"  />
   </EntityType>
   <Association Name="FK_Kunde_value_EMails" >
     <End Role="Kunde"
@@ -5085,11 +5085,11 @@
   <!-- ComplexTypes for all CompoundObjects -->
   <ComplexType Name="AuditEntry" >
     <Property Name="CompoundObject_IsNull" Type="Boolean" Nullable="false" />
-    <Property Name="Identity" Type="string" Nullable="true" MaxLength="1000"  />
-    <Property Name="MessageFormat" Type="string" Nullable="true" MaxLength="1000"  />
-    <Property Name="NewValue" Type="string" Nullable="true" MaxLength="1000"  />
-    <Property Name="OldValue" Type="string" Nullable="true" MaxLength="1000"  />
-    <Property Name="PropertyName" Type="string" Nullable="true" MaxLength="1000"  />
+    <Property Name="Identity" Type="System.String" Nullable="true" MaxLength="1000"  />
+    <Property Name="MessageFormat" Type="System.String" Nullable="true" MaxLength="1000"  />
+    <Property Name="NewValue" Type="System.String" Nullable="true" MaxLength="1000"  />
+    <Property Name="OldValue" Type="System.String" Nullable="true" MaxLength="1000"  />
+    <Property Name="PropertyName" Type="System.String" Nullable="true" MaxLength="1000"  />
     <Property Name="Timestamp" Type="DateTime" Nullable="true"  />
   </ComplexType>
   <ComplexType Name="DateTimeRange" >
@@ -5099,8 +5099,8 @@
   </ComplexType>
   <ComplexType Name="TestPhoneCompoundObject" >
     <Property Name="CompoundObject_IsNull" Type="Boolean" Nullable="false" />
-    <Property Name="AreaCode" Type="string" Nullable="true" MaxLength="50"  />
-    <Property Name="Number" Type="string" Nullable="true" MaxLength="50"  />
+    <Property Name="AreaCode" Type="System.String" Nullable="true" MaxLength="50"  />
+    <Property Name="Number" Type="System.String" Nullable="true" MaxLength="50"  />
   </ComplexType>
 
 </Schema>
