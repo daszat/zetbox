@@ -26,6 +26,12 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.EfModel
             string precScaleAttr = String.Empty;
             string concurrency = String.Empty;
 
+            // strip nullable "?"
+            if (prop.IsNullable() && type.EndsWith("?"))
+            {
+                type = type.Substring(0, type.Length - 1);
+            }
+
             if (prop is EnumerationProperty)
             {
                 type = "Int32";

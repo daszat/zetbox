@@ -1052,7 +1052,7 @@
                         ToRole="Ein_Fragebogen" />
     <Property Name="gute_Antworten_pos" Type="Int32" Nullable="true" />
     <Property Name="FragenNummer" Type="int" Nullable="false"  />
-    <Property Name="GegebeneAntwort" Type="int?" Nullable="true"  />
+    <Property Name="GegebeneAntwort" Type="int" Nullable="true"  />
   </EntityType>
   <EntityType Name="Application">
     <Key>
@@ -1114,7 +1114,7 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="Auftragsname" Type="string" Nullable="true" MaxLength="200"  />
-    <Property Name="Auftragswert" Type="double?" Nullable="true"  />
+    <Property Name="Auftragswert" Type="double" Nullable="true"  />
     <NavigationProperty Name="ChangedByImpl"
                         Relationship="Model.FK_Auftrag_ChangedBy_ChangedBy"
                         FromRole="Auftrag"
@@ -1269,8 +1269,8 @@
                         FromRole="CalendarRule"
                         ToRole="Module" />
     <Property Name="Name" Type="string" Nullable="false" MaxLength="200"  />
-    <Property Name="ValidFrom" Type="DateTime?" Nullable="true"  />
-    <Property Name="ValidUntil" Type="DateTime?" Nullable="true"  />
+    <Property Name="ValidFrom" Type="DateTime" Nullable="true"  />
+    <Property Name="ValidUntil" Type="DateTime" Nullable="true"  />
     <Property Name="WorkingHours" Type="decimal" Nullable="false" Precision="10" Scale="2"  />
   </EntityType>
   <EntityType Name="Company">
@@ -1517,7 +1517,7 @@
                         Relationship="Model.FK_FilterConfiguration_has_Module"
                         FromRole="FilterConfiguration"
                         ToRole="Module" />
-    <Property Name="RefreshOnFilterChanged" Type="bool?" Nullable="true"  />
+    <Property Name="RefreshOnFilterChanged" Type="bool" Nullable="true"  />
     <NavigationProperty Name="RequestedKindImpl"
                         Relationship="Model.FK_FilterConfiguration_has_RequestedKind"
                         FromRole="FilterConfiguration"
@@ -1537,7 +1537,7 @@
                         Relationship="Model.FK_Ein_Fragebogen_enthaelt_gute_Antworten"
                         FromRole="Ein_Fragebogen"
                         ToRole="gute_Antworten" />
-    <Property Name="BogenNummer" Type="int?" Nullable="true"  />
+    <Property Name="BogenNummer" Type="int" Nullable="true"  />
     <NavigationProperty Name="StudentImpl"
                         Relationship="Model.FK_Student_füllt_aus_Testbogen_B"
                         FromRole="Testbogen"
@@ -1648,7 +1648,7 @@
                         Relationship="Model.FK_Method_has_Icon"
                         FromRole="Method"
                         ToRole="Icon" />
-    <Property Name="InvokeOnServer" Type="bool?" Nullable="true"  />
+    <Property Name="InvokeOnServer" Type="bool" Nullable="true"  />
     <Property Name="IsDisplayable" Type="bool" Nullable="false"  />
     <Property Name="Label" Type="string" Nullable="true" MaxLength="200"  />
     <NavigationProperty Name="ModuleImpl"
@@ -1718,7 +1718,7 @@
                         ToRole="CreatedBy" />
     <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
-    <Property Name="Geburtstag" Type="DateTime?" Nullable="true"  />
+    <Property Name="Geburtstag" Type="DateTime" Nullable="true"  />
     <NavigationProperty Name="IdentityImpl"
                         Relationship="Model.FK_Mitarbeiter_is_a_Identity"
                         FromRole="Mitarbeiter"
@@ -1757,7 +1757,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="TestBool" Type="bool?" Nullable="true"  />
+    <Property Name="TestBool" Type="bool" Nullable="true"  />
     <NavigationProperty Name="TestCustomObjects_List_NavImpl"
                         Relationship="Model.FK_MB_Role_has_TCO_Lst_Role"
                         FromRole="MB_Role"
@@ -1774,7 +1774,7 @@
                         Relationship="Model.FK_MB_One_Role_loves_TCO_One_Role"
                         FromRole="MB_One_Role"
                         ToRole="TCO_One_Role" />
-    <Property Name="TestDateTime" Type="DateTime?" Nullable="true"  />
+    <Property Name="TestDateTime" Type="DateTime" Nullable="true"  />
     <Property Name="TestEnumImpl" Type="Int32" Nullable="false"  />
     <Property Name="TestString" Type="string" Nullable="true" MaxLength="1000"  />
   </EntityType>
@@ -1872,7 +1872,7 @@
                         FromRole="NEnds"
                         ToRole="OneEnd" />
     <Property Name="NEnds_pos" Type="Int32" Nullable="true" />
-    <Property Name="OtherInt" Type="int?" Nullable="true"  />
+    <Property Name="OtherInt" Type="int" Nullable="true"  />
   </EntityType>
   <EntityType Name="OrderedOneEnd">
     <Key>
@@ -1883,7 +1883,7 @@
                         Relationship="Model.FK_OneEnd_hasMany_NEnds"
                         FromRole="OneEnd"
                         ToRole="NEnds" />
-    <Property Name="SomeInt" Type="int?" Nullable="true"  />
+    <Property Name="SomeInt" Type="int" Nullable="true"  />
   </EntityType>
   <EntityType Name="Projekt">
     <Key>
@@ -1894,7 +1894,7 @@
                         Relationship="Model.FK_Projekt_has_Auftraege"
                         FromRole="Projekt"
                         ToRole="Auftraege" />
-    <Property Name="AufwandGes" Type="double?" Nullable="true"  />
+    <Property Name="AufwandGes" Type="double" Nullable="true"  />
     <NavigationProperty Name="ChangedByImpl"
                         Relationship="Model.FK_Projekt_was_ChangedBy"
                         FromRole="Projekt"
@@ -2159,7 +2159,7 @@
                         FromRole="SourceColumn"
                         ToRole="EnumEntries" />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
-    <Property Name="IsNullable" Type="bool?" Nullable="true"  />
+    <Property Name="IsNullable" Type="bool" Nullable="true"  />
     <Property Name="Name" Type="string" Nullable="false" MaxLength="250"  />
     <NavigationProperty Name="ReferencesImpl"
                         Relationship="Model.FK_FK_Column_references_PK_Column"
@@ -2169,7 +2169,7 @@
                         Relationship="Model.FK_FK_Column_references_PK_Column"
                         FromRole="PK_Column"
                         ToRole="FK_Column" />
-    <Property Name="Size" Type="int?" Nullable="true"  />
+    <Property Name="Size" Type="int" Nullable="true"  />
     <NavigationProperty Name="SourceTableImpl"
                         Relationship="Model.FK_SourceColumn_belongs_to_SourceTable"
                         FromRole="SourceColumn"
@@ -2269,7 +2269,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Aufwand" Type="double?" Nullable="true"  />
+    <Property Name="Aufwand" Type="double" Nullable="true"  />
     <NavigationProperty Name="ChangedByImpl"
                         Relationship="Model.FK_Task_was_ChangedBy"
                         FromRole="Task"
@@ -2280,8 +2280,8 @@
                         FromRole="Task"
                         ToRole="CreatedBy" />
     <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
-    <Property Name="DatumBis" Type="DateTime?" Nullable="true"  />
-    <Property Name="DatumVon" Type="DateTime?" Nullable="true"  />
+    <Property Name="DatumBis" Type="DateTime" Nullable="true"  />
+    <Property Name="DatumVon" Type="DateTime" Nullable="true"  />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
     <Property Name="Name" Type="string" Nullable="true" MaxLength="100"  />
     <NavigationProperty Name="ProjektImpl"
@@ -2336,7 +2336,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Birthday" Type="DateTime?" Nullable="true"  />
+    <Property Name="Birthday" Type="DateTime" Nullable="true"  />
     <NavigationProperty Name="MubBlah_List_NavImpl"
                         Relationship="Model.FK_MB_Lst_Role_hasOther_TCO_Role"
                         FromRole="TCO_Role"
@@ -2370,16 +2370,16 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Large" Type="decimal?" Nullable="true" Precision="20" Scale="2"  />
-    <Property Name="NoScale" Type="decimal?" Nullable="true" Precision="6" Scale="0"  />
-    <Property Name="SmallDecimal" Type="decimal?" Nullable="true" Precision="4" Scale="2"  />
+    <Property Name="Large" Type="decimal" Nullable="true" Precision="20" Scale="2"  />
+    <Property Name="NoScale" Type="decimal" Nullable="true" Precision="6" Scale="0"  />
+    <Property Name="SmallDecimal" Type="decimal" Nullable="true" Precision="4" Scale="2"  />
   </EntityType>
   <EntityType Name="TestObjClass">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="MyIntProperty" Type="int?" Nullable="true"  />
+    <Property Name="MyIntProperty" Type="int" Nullable="true"  />
     <NavigationProperty Name="ObjectPropImpl"
                         Relationship="Model.FK_TestObjClass_has_ObjectProp"
                         FromRole="TestObjClass"
@@ -2417,7 +2417,7 @@
                         FromRole="TypeRef"
                         ToRole="CreatedBy" />
     <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
-    <Property Name="Deleted" Type="bool?" Nullable="true"  />
+    <Property Name="Deleted" Type="bool" Nullable="true"  />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
     <Property Name="FullName" Type="string" Nullable="false" MaxLength="200"  />
     <NavigationProperty Name="GenericArgumentsImpl"
@@ -2584,9 +2584,9 @@
   <EntityType Name="CurrentDateTimeDefaultValue" BaseType="Model.DefaultPropertyValue">
   </EntityType>
   <EntityType Name="DateRangeFilterConfiguration" BaseType="Model.PropertyFilterConfiguration">
-    <Property Name="IsCurrentMonthDefault" Type="bool?" Nullable="true"  />
-    <Property Name="IsCurrentQuaterDefault" Type="bool?" Nullable="true"  />
-    <Property Name="IsCurrentYearDefault" Type="bool?" Nullable="true"  />
+    <Property Name="IsCurrentMonthDefault" Type="bool" Nullable="true"  />
+    <Property Name="IsCurrentQuaterDefault" Type="bool" Nullable="true"  />
+    <Property Name="IsCurrentYearDefault" Type="bool" Nullable="true"  />
   </EntityType>
   <EntityType Name="DateTimeParameter" BaseType="Model.BaseParameter">
     <Property Name="DateTimeStyleImpl" Type="Int32" Nullable="true"  />
@@ -2616,7 +2616,7 @@
   <EntityType Name="DynamicFile" BaseType="Model.File">
   </EntityType>
   <EntityType Name="EasterCalendarRule" BaseType="Model.YearlyCalendarRule">
-    <Property Name="Offset" Type="int?" Nullable="true"  />
+    <Property Name="Offset" Type="int" Nullable="true"  />
   </EntityType>
   <EntityType Name="EnumDefaultValue" BaseType="Model.DefaultPropertyValue">
     <NavigationProperty Name="EnumValueImpl"
@@ -2696,22 +2696,22 @@
   <EntityType Name="MethodInvocationConstraint" BaseType="Model.Constraint">
   </EntityType>
   <EntityType Name="MonthFilterConfiguration" BaseType="Model.PropertyFilterConfiguration">
-    <Property Name="IsCurrentMonthDefault" Type="bool?" Nullable="true"  />
+    <Property Name="IsCurrentMonthDefault" Type="bool" Nullable="true"  />
   </EntityType>
   <EntityType Name="NavigationAction" BaseType="Model.NavigationEntry">
   </EntityType>
   <EntityType Name="NavigationScreen" BaseType="Model.NavigationEntry">
   </EntityType>
   <EntityType Name="NavigationSearchScreen" BaseType="Model.NavigationScreen">
-    <Property Name="AllowAddNew" Type="bool?" Nullable="true"  />
-    <Property Name="AllowDelete" Type="bool?" Nullable="true"  />
-    <Property Name="AllowSelectColumns" Type="bool?" Nullable="true"  />
-    <Property Name="AllowUserFilter" Type="bool?" Nullable="true"  />
-    <Property Name="EnableAutoFilter" Type="bool?" Nullable="true"  />
+    <Property Name="AllowAddNew" Type="bool" Nullable="true"  />
+    <Property Name="AllowDelete" Type="bool" Nullable="true"  />
+    <Property Name="AllowSelectColumns" Type="bool" Nullable="true"  />
+    <Property Name="AllowUserFilter" Type="bool" Nullable="true"  />
+    <Property Name="EnableAutoFilter" Type="bool" Nullable="true"  />
     <Property Name="InitialSort" Type="string" Nullable="true" MaxLength="1000"  />
     <Property Name="InitialSortDirectionImpl" Type="Int32" Nullable="true"  />
-    <Property Name="IsEditable" Type="bool?" Nullable="true"  />
-    <Property Name="IsMultiselect" Type="bool?" Nullable="true"  />
+    <Property Name="IsEditable" Type="bool" Nullable="true"  />
+    <Property Name="IsMultiselect" Type="bool" Nullable="true"  />
     <NavigationProperty Name="RequestedEditorKindImpl"
                         Relationship="Model.FK_Search_has_RequestedEditorKind"
                         FromRole="Search"
@@ -2720,11 +2720,11 @@
                         Relationship="Model.FK_Search_has_RequestedWorkspaceKind"
                         FromRole="Search"
                         ToRole="RequestedWorkspaceKind" />
-    <Property Name="RespectRequiredFilter" Type="bool?" Nullable="true"  />
-    <Property Name="ShowFilter" Type="bool?" Nullable="true"  />
-    <Property Name="ShowMasterDetail" Type="bool?" Nullable="true"  />
-    <Property Name="ShowOpenCommand" Type="bool?" Nullable="true"  />
-    <Property Name="ShowRefreshCommand" Type="bool?" Nullable="true"  />
+    <Property Name="RespectRequiredFilter" Type="bool" Nullable="true"  />
+    <Property Name="ShowFilter" Type="bool" Nullable="true"  />
+    <Property Name="ShowMasterDetail" Type="bool" Nullable="true"  />
+    <Property Name="ShowOpenCommand" Type="bool" Nullable="true"  />
+    <Property Name="ShowRefreshCommand" Type="bool" Nullable="true"  />
     <NavigationProperty Name="TypeImpl"
                         Relationship="Model.FK_SearchScreen_of_Type"
                         FromRole="SearchScreen"
@@ -2786,7 +2786,7 @@
   </EntityType>
   <EntityType Name="ObjectReferenceProperty" BaseType="Model.Property">
     <Property Name="EagerLoading" Type="bool" Nullable="false"  />
-    <Property Name="IsInlineEditable" Type="bool?" Nullable="true"  />
+    <Property Name="IsInlineEditable" Type="bool" Nullable="true"  />
     <NavigationProperty Name="RelationEndImpl"
                         Relationship="Model.FK_RelationEnd_has_Navigator"
                         FromRole="Navigator"
@@ -2823,7 +2823,7 @@
   <EntityType Name="StringProperty" BaseType="Model.ValueTypeProperty">
   </EntityType>
   <EntityType Name="StringRangeConstraint" BaseType="Model.Constraint">
-    <Property Name="MaxLength" Type="int?" Nullable="true"  />
+    <Property Name="MaxLength" Type="int" Nullable="true"  />
     <Property Name="MinLength" Type="int" Nullable="false"  />
   </EntityType>
   <EntityType Name="ValueTypeProperty" BaseType="Model.Property" Abstract="true">
@@ -2834,7 +2834,7 @@
   <EntityType Name="ViewReadOnlyConstraint" BaseType="Model.ReadOnlyConstraint">
   </EntityType>
   <EntityType Name="YearFilterConfiguration" BaseType="Model.PropertyFilterConfiguration">
-    <Property Name="IsCurrentYearDefault" Type="bool?" Nullable="true"  />
+    <Property Name="IsCurrentYearDefault" Type="bool" Nullable="true"  />
   </EntityType>
   <EntityType Name="YearlyCalendarRule" BaseType="Model.CalendarRule" Abstract="true">
   </EntityType>
@@ -5090,12 +5090,12 @@
     <Property Name="NewValue" Type="string" Nullable="true" MaxLength="1000"  />
     <Property Name="OldValue" Type="string" Nullable="true" MaxLength="1000"  />
     <Property Name="PropertyName" Type="string" Nullable="true" MaxLength="1000"  />
-    <Property Name="Timestamp" Type="DateTime?" Nullable="true"  />
+    <Property Name="Timestamp" Type="DateTime" Nullable="true"  />
   </ComplexType>
   <ComplexType Name="DateTimeRange" >
     <Property Name="CompoundObject_IsNull" Type="Boolean" Nullable="false" />
-    <Property Name="From" Type="DateTime?" Nullable="true"  />
-    <Property Name="Thru" Type="DateTime?" Nullable="true"  />
+    <Property Name="From" Type="DateTime" Nullable="true"  />
+    <Property Name="Thru" Type="DateTime" Nullable="true"  />
   </ComplexType>
   <ComplexType Name="TestPhoneCompoundObject" >
     <Property Name="CompoundObject_IsNull" Type="Boolean" Nullable="false" />
