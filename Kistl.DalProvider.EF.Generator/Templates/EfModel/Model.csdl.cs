@@ -35,19 +35,19 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.EfModel
             switch (type)
             {
                 case "bool":
-                    type = typeof(bool).FullName;
+                    type = "Boolean";
                     break;
                 case "decimal":
-                    type = typeof(decimal).FullName;
+                    type = "Decimal";
                     break;
                 case "double":
-                    type = typeof(double).FullName;
+                    type = "Double";
                     break;
                 case "int":
-                    type = typeof(int).FullName;
+                    type = "Int32";
                     break;
                 case "string":
-                    type = typeof(string).FullName;
+                    type = "String";
                     break;
             }
 
