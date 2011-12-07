@@ -46,7 +46,7 @@
             {
 %>
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new <%= propertyDescriptorName %><<%= implName %>, <%= property.GetCollectionTypeString() %>>(
+                    new <%= propertyDescriptorName %><<%= implName %>, <%= property.GetPropertyTypeString() %>>(
                         lazyCtx,
                         new Guid("<%= property.ExportGuid %>"),
                         "<%= propertyName %>",
@@ -55,7 +55,7 @@
                         null), // lists are read-only properties
 <%          } else if (property is CalculatedObjectReferenceProperty) { %>
                     // property is CalculatedObjectReferenceProperty
-                    new <%= propertyDescriptorName %><<%= implName %>, <%= property.ReferencedTypeAsCSharp() %>>(
+                    new <%= propertyDescriptorName %><<%= implName %>, <%= property.GetPropertyTypeString() %>>(
                         lazyCtx,
                         new Guid("<%= property.ExportGuid %>"),
                         "<%= propertyName %>",
@@ -65,7 +65,7 @@
 <%          } else { %>
 <%              var isReadonly = (property is ValueTypeProperty) && ((ValueTypeProperty)property).IsCalculated; %>
                     // else
-                    new <%= propertyDescriptorName %><<%= implName %>, <%= property.ReferencedTypeAsCSharp() %>>(
+                    new <%= propertyDescriptorName %><<%= implName %>, <%= property.GetPropertyTypeString() %>>(
                         lazyCtx,
                         new Guid("<%= property.ExportGuid %>"),
                         "<%= propertyName %>",

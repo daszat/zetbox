@@ -10,11 +10,17 @@ namespace Kistl.App.Base
     public static class DateTimeParameterActions
     {
         [Invocation]
-        public static void GetParameterTypeString(Kistl.App.Base.DateTimeParameter obj, Kistl.API.MethodReturnEventArgs<string> e)
+        public static void GetParameterType(DateTimeParameter obj, MethodReturnEventArgs<Type> e)
         {
-            e.Result = "System.DateTime";
+            e.Result = typeof(DateTime);
+            BaseParameterActions.DecorateParameterType(obj, e, true);
         }
 
-
+        [Invocation]
+        public static void GetParameterTypeString(DateTimeParameter obj, MethodReturnEventArgs<string> e)
+        {
+            e.Result = "DateTime";
+            BaseParameterActions.DecorateParameterType(obj, e, true);
+        }
     }
 }

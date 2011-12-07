@@ -10,10 +10,17 @@ namespace Kistl.App.Base
     public static class BoolParameterActions
     {
         [Invocation]
-        public static void GetParameterTypeString(Kistl.App.Base.BoolParameter obj, Kistl.API.MethodReturnEventArgs<string> e)
+        public static void GetParameterType(BoolParameter obj, MethodReturnEventArgs<Type> e)
         {
-            e.Result = "System.Boolean";
+            e.Result = typeof(bool);
+            BaseParameterActions.DecorateParameterType(obj, e, true);
         }
 
+        [Invocation]
+        public static void GetParameterTypeString(BoolParameter obj, MethodReturnEventArgs<string> e)
+        {
+            e.Result = "bool";
+            BaseParameterActions.DecorateParameterType(obj, e, true);
+        }
     }
 }

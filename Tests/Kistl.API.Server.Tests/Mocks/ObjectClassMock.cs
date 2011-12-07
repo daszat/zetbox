@@ -75,7 +75,7 @@ namespace Kistl.API.Server.Mocks
             throw new NotImplementedException();
         }
 
-        public IList<Kistl.App.Base.Method> GetInheritedMethods()
+        public IEnumerable<Kistl.App.Base.Method> GetInheritedMethods()
         {
             throw new NotImplementedException();
         }

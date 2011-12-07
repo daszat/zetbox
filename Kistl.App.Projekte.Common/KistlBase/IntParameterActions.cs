@@ -10,10 +10,17 @@ namespace Kistl.App.Base
     public static class IntParameterActions
     {
         [Invocation]
-        public static void GetParameterTypeString(Kistl.App.Base.IntParameter obj, Kistl.API.MethodReturnEventArgs<string> e)
+        public static void GetParameterType(IntParameter obj, MethodReturnEventArgs<Type> e)
         {
-            e.Result = "System.Int32";
+            e.Result = typeof(int);
+            BaseParameterActions.DecorateParameterType(obj, e, true);
         }
 
+        [Invocation]
+        public static void GetParameterTypeString(IntParameter obj, MethodReturnEventArgs<string> e)
+        {
+            e.Result = "int";
+            BaseParameterActions.DecorateParameterType(obj, e, true);
+        }
     }
 }

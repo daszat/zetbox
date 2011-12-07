@@ -22,17 +22,28 @@ namespace Kistl.Generator.Templates.Properties
 
             string propName = prop.Name;
 
-            Call(host, ctx, serializationList, prop, propName);
+            Call(host, ctx, serializationList, prop, propName, prop.IsList, prop.HasPersistentOrder);
         }
 
-        public static void Call(Arebis.CodeGeneration.IGenerationHost host, IKistlContext ctx, Serialization.SerializationMembersList serializationList, CompoundObjectProperty prop, string overridePropName)
+        public static void Call(Arebis.CodeGeneration.IGenerationHost host, IKistlContext ctx, Serialization.SerializationMembersList serializationList, CompoundObjectProperty prop, string overridePropName, bool isList, bool hasPersistentOrder)
         {
             string xmlNamespace = prop.Module.Namespace;
             string backingPropertyName = overridePropName + Kistl.API.Helper.ImplementationSuffix;
             string backingStoreName = "_" + overridePropName;
 
-            string coType = prop.GetPropertyTypeString();
+            string coType = prop.GetElementTypeString();
             string coImplementationType = coType + host.Settings["extrasuffix"] + Kistl.API.Helper.ImplementationSuffix;
+
+            if (isList && hasPersistentOrder)
+            {
+                coType = string.Format("IList<{0}>", coType);
+                coImplementationType = string.Format("IList<{0}>", coImplementationType);
+            }
+            else if (isList && !hasPersistentOrder)
+            {
+                coType = string.Format("ICollection<{0}>", coType);
+                coImplementationType = string.Format("ICollection<{0}>", coImplementationType);
+            }
 
             bool isNullable = prop.IsNullable();
 

@@ -86,7 +86,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                 .Where(orp => orp.IsList())
                 .Select(orp =>
                 {
-                    var type = orp.ReferencedTypeAsCSharp();
+                    var type = orp.GetElementTypeString();
                     Relation rel = RelationExtensions.Lookup(ctx, orp);
                     if (rel.Storage == StorageType.Separate)
                     {
@@ -159,7 +159,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                 .Properties
                 .Select(prop =>
                 {
-                    var type = prop.ReferencedTypeAsCSharp();
+                    var type = prop.GetElementTypeString();
                     var orp = prop as ObjectReferenceProperty;
 
                     // object references have to be translated to internal proxy interfaces
@@ -233,8 +233,8 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
             Templates.Serialization.SerializationMembersList serList)
         {
             Properties.ProxyProperty.Call(Host, ctx,
-                serList, prop.Module.Namespace, prop.ReferencedTypeAsCSharp(), prop.Name, false, true,
-                prop.DefaultValue != null, prop.ObjectClass.GetDataTypeString(), prop.GetClassName(), prop.IsNullable(), "_is" + prop.Name + "Set", prop.ExportGuid, prop.ReferencedTypeAsCSharp(), "Proxy." + prop.Name);
+                serList, prop.Module.Namespace, prop.GetElementTypeString(), prop.Name, false, true,
+                prop.DefaultValue != null, prop.ObjectClass.GetDataTypeString(), prop.GetClassName(), prop.IsNullable(), "_is" + prop.Name + "Set", prop.ExportGuid, prop.GetElementTypeString(), "Proxy." + prop.Name);
         }
 
 
@@ -275,7 +275,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                 prop.Module.Namespace,
                 prop.Name,
                 "Proxy." + prop.Name,
-                prop.Enumeration.Module.Namespace + "." + prop.Enumeration.Name + (prop.IsNullable() ? "?" : String.Empty));
+                prop.GetElementTypeString());
         }
 
         protected override void ApplyListProperty(Property prop, Templates.Serialization.SerializationMembersList serList)

@@ -10,10 +10,17 @@ namespace Kistl.App.Base
     public static class StringParameterActions
     {
         [Invocation]
-        public static void GetParameterTypeString(StringParameter obj, MethodReturnEventArgs<string> e)
+        public static void GetParameterType(StringParameter obj, MethodReturnEventArgs<Type> e)
         {
-            e.Result = "System.String";
+            e.Result = typeof(string);
+            BaseParameterActions.DecorateParameterType(obj, e, false);
         }
 
+        [Invocation]
+        public static void GetParameterTypeString(StringParameter obj, MethodReturnEventArgs<string> e)
+        {
+            e.Result = "string";
+            BaseParameterActions.DecorateParameterType(obj, e, false);
+        }
     }
 }

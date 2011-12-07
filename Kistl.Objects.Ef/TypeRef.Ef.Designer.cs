@@ -868,7 +868,7 @@ namespace Kistl.App.Base
         /// </summary>
         // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnAsType_TypeRef")]
-        public virtual System.Type AsType(System.Boolean throwOnError)
+        public virtual System.Type AsType(bool throwOnError)
         {
             var e = new MethodReturnEventArgs<System.Type>();
             if (OnAsType_TypeRef != null)
@@ -881,7 +881,7 @@ namespace Kistl.App.Base
             }
             return e.Result;
         }
-        public delegate void AsType_Handler<T>(T obj, MethodReturnEventArgs<System.Type> ret, System.Boolean throwOnError);
+        public delegate void AsType_Handler<T>(T obj, MethodReturnEventArgs<System.Type> ret, bool throwOnError);
         public static event AsType_Handler<TypeRef> OnAsType_TypeRef;
         // END Kistl.Generator.Templates.ObjectClasses.Method
 

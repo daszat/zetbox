@@ -322,7 +322,7 @@ namespace Kistl.App.Test
         /// </summary>
         // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnTestMethod_TestObjClass")]
-        public virtual void TestMethod(System.DateTime DateTimeParamForTestMethod)
+        public virtual void TestMethod(DateTime DateTimeParamForTestMethod)
         {
             // base.TestMethod();
             if (OnTestMethod_TestObjClass != null)
@@ -334,7 +334,7 @@ namespace Kistl.App.Test
                 throw new NotImplementedException("No handler registered on method TestObjClass.TestMethod");
             }
         }
-        public delegate void TestMethod_Handler<T>(T obj, System.DateTime DateTimeParamForTestMethod);
+        public delegate void TestMethod_Handler<T>(T obj, DateTime DateTimeParamForTestMethod);
         public static event TestMethod_Handler<TestObjClass> OnTestMethod_TestObjClass;
         // END Kistl.Generator.Templates.ObjectClasses.Method
 

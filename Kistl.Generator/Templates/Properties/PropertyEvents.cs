@@ -21,7 +21,7 @@ namespace Kistl.Generator.Templates.Properties
             if (prop == null) { throw new ArgumentNullException("prop"); }
 
             string eventName = "On" + prop.Name;
-            string propType = prop.ReferencedTypeAsCSharp();
+            string propType = prop.GetElementTypeString();
             string objType = prop.ObjectClass.GetDataTypeString();
 
             Call(host, ctx, eventName, propType, objType, true, !isReadOnly);

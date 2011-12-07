@@ -64,6 +64,6 @@ namespace Kistl.App.Calendar
         /// <summary>
         /// Checks if the Rule applies to the given date
         /// </summary>
-        bool AppliesTo(System.DateTime date);
+        bool AppliesTo(DateTime date);
     }
 }

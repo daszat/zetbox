@@ -54,7 +54,7 @@ namespace Kistl.Generator.Templates.Properties
             string exposedCollectionInterface = hasPersistentOrder ? "IList" : "ICollection";
 
             string thisInterface = prop.ObjectClass.Name;
-            string referencedType = prop.ReferencedTypeAsCSharp();
+            string referencedType = prop.GetElementTypeString();
             string referencedCollectionEntry = prop.GetCollectionEntryFullName();
             string referencedCollectionEntryImpl = referencedCollectionEntry + host.Settings["extrasuffix"] + Kistl.API.Helper.ImplementationSuffix;
 

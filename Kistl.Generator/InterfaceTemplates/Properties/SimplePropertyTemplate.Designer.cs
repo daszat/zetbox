@@ -36,7 +36,7 @@ namespace Kistl.Generator.InterfaceTemplates.Properties
         {
 #line 15 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Properties\SimplePropertyTemplate.cst"
 string name = prop.Name;
-    string type = prop.ReferencedTypeAsCSharp();
+    string type = prop.GetPropertyTypeString();
 
 #line 18 "P:\Kistl\Kistl.Generator\InterfaceTemplates\Properties\SimplePropertyTemplate.cst"
 this.WriteObjects("        ",  type , " ",  name , " {\r\n");

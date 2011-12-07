@@ -816,7 +816,7 @@ namespace Kistl.App.Projekte
         /// </summary>
         // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnTestMethodForParameter_Mitarbeiter")]
-        public virtual DateTime TestMethodForParameter(System.Boolean TestBool, System.Guid TestCLRObjectParameter, System.DateTime TestDateTime, System.Double TestDouble, System.Int32 TestInt, Kistl.App.Projekte.Auftrag TestObjectParameter, System.String TestString)
+        public virtual DateTime TestMethodForParameter(bool TestBool, System.Guid TestCLRObjectParameter, DateTime TestDateTime, double TestDouble, int TestInt, Kistl.App.Projekte.Auftrag TestObjectParameter, string TestString)
         {
             var e = new MethodReturnEventArgs<DateTime>();
             if (OnTestMethodForParameter_Mitarbeiter != null)
@@ -829,7 +829,7 @@ namespace Kistl.App.Projekte
             }
             return e.Result;
         }
-        public delegate void TestMethodForParameter_Handler<T>(T obj, MethodReturnEventArgs<DateTime> ret, System.Boolean TestBool, System.Guid TestCLRObjectParameter, System.DateTime TestDateTime, System.Double TestDouble, System.Int32 TestInt, Kistl.App.Projekte.Auftrag TestObjectParameter, System.String TestString);
+        public delegate void TestMethodForParameter_Handler<T>(T obj, MethodReturnEventArgs<DateTime> ret, bool TestBool, System.Guid TestCLRObjectParameter, DateTime TestDateTime, double TestDouble, int TestInt, Kistl.App.Projekte.Auftrag TestObjectParameter, string TestString);
         public static event TestMethodForParameter_Handler<Mitarbeiter> OnTestMethodForParameter_Mitarbeiter;
         // END Kistl.Generator.Templates.ObjectClasses.Method
 

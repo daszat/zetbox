@@ -60,7 +60,7 @@ Debug.Assert(prop is ValueTypeProperty ? ((ValueTypeProperty)prop).IsList : ((Co
 	// which Kistl interface this is 
 	string thisInterface = prop.ObjectClass.Name;
 	// which type this list contains
-	string referencedType = prop.ReferencedTypeAsCSharp();
+	string referencedType = prop.GetElementTypeString();
 	// collection entries in this list
 	string referencedCollectionEntry = prop.GetCollectionEntryFullName() + ImplementationSuffix;
 

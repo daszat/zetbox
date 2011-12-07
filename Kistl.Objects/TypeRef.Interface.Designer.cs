@@ -62,7 +62,7 @@ namespace Kistl.App.Base
         /// <summary>
         /// get the referenced &lt;see cref=&quot;Type&quot;/&gt;
         /// </summary>
-        System.Type AsType(System.Boolean throwOnError);
+        System.Type AsType(bool throwOnError);
 
         /// <summary>
         /// 

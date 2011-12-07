@@ -101,13 +101,12 @@ namespace Kistl.App.Base
         }
 
         [Invocation]
-        public static void GetInheritedMethods(ObjectClass obj, MethodReturnEventArgs<IList<Method>> e)
+        public static void GetInheritedMethods(ObjectClass obj, MethodReturnEventArgs<IEnumerable<Method>> e)
         {
             ObjectClass baseObjectClass = obj.BaseObjectClass;
             if (baseObjectClass != null)
             {
-                e.Result = baseObjectClass.GetInheritedMethods();
-                baseObjectClass.Methods.ForEach<Method>(m => e.Result.Add(m));
+                e.Result = baseObjectClass.GetInheritedMethods().Concat(baseObjectClass.Methods);
             }
             else
             {

@@ -10,9 +10,24 @@ namespace Kistl.App.Base
     public static class GuidPropertyActions
     {
         [Invocation]
+        public static void GetPropertyType(GuidProperty obj, MethodReturnEventArgs<Type> e)
+        {
+            e.Result = typeof(Guid);
+            PropertyActions.DecorateParameterType(obj, e, true, obj.IsList, obj.HasPersistentOrder);
+        }
+
+        [Invocation]
+        public static void GetElementTypeString(GuidProperty obj, MethodReturnEventArgs<string> e)
+        {
+            e.Result = "Guid";
+            PropertyActions.DecorateElementType(obj, e, true);
+        }
+
+        [Invocation]
         public static void GetPropertyTypeString(GuidProperty obj, MethodReturnEventArgs<string> e)
         {
-            e.Result = "System.Guid";
+            GetElementTypeString(obj, e);
+            PropertyActions.DecorateParameterType(obj, e, true, obj.IsList, obj.HasPersistentOrder);
         }
     }
 }

@@ -193,7 +193,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Enumeration> OnEnu
         /// </summary>
         // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetEntryByName_Enumeration")]
-        public virtual Kistl.App.Base.EnumerationEntry GetEntryByName(System.String name)
+        public virtual Kistl.App.Base.EnumerationEntry GetEntryByName(string name)
         {
             var e = new MethodReturnEventArgs<Kistl.App.Base.EnumerationEntry>();
             if (OnGetEntryByName_Enumeration != null)
@@ -206,7 +206,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Enumeration> OnEnu
             }
             return e.Result;
         }
-        public delegate void GetEntryByName_Handler<T>(T obj, MethodReturnEventArgs<Kistl.App.Base.EnumerationEntry> ret, System.String name);
+        public delegate void GetEntryByName_Handler<T>(T obj, MethodReturnEventArgs<Kistl.App.Base.EnumerationEntry> ret, string name);
         public static event GetEntryByName_Handler<Enumeration> OnGetEntryByName_Enumeration;
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
@@ -215,7 +215,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Enumeration> OnEnu
         /// </summary>
         // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetEntryByValue_Enumeration")]
-        public virtual Kistl.App.Base.EnumerationEntry GetEntryByValue(System.Int32 val)
+        public virtual Kistl.App.Base.EnumerationEntry GetEntryByValue(int val)
         {
             var e = new MethodReturnEventArgs<Kistl.App.Base.EnumerationEntry>();
             if (OnGetEntryByValue_Enumeration != null)
@@ -228,7 +228,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Enumeration> OnEnu
             }
             return e.Result;
         }
-        public delegate void GetEntryByValue_Handler<T>(T obj, MethodReturnEventArgs<Kistl.App.Base.EnumerationEntry> ret, System.Int32 val);
+        public delegate void GetEntryByValue_Handler<T>(T obj, MethodReturnEventArgs<Kistl.App.Base.EnumerationEntry> ret, int val);
         public static event GetEntryByValue_Handler<Enumeration> OnGetEntryByValue_Enumeration;
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
@@ -237,7 +237,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Enumeration> OnEnu
         /// </summary>
         // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetLabelByName_Enumeration")]
-        public virtual string GetLabelByName(System.String name)
+        public virtual string GetLabelByName(string name)
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetLabelByName_Enumeration != null)
@@ -250,7 +250,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Enumeration> OnEnu
             }
             return e.Result;
         }
-        public delegate void GetLabelByName_Handler<T>(T obj, MethodReturnEventArgs<string> ret, System.String name);
+        public delegate void GetLabelByName_Handler<T>(T obj, MethodReturnEventArgs<string> ret, string name);
         public static event GetLabelByName_Handler<Enumeration> OnGetLabelByName_Enumeration;
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
@@ -259,7 +259,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Enumeration> OnEnu
         /// </summary>
         // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetLabelByValue_Enumeration")]
-        public virtual string GetLabelByValue(System.Int32 val)
+        public virtual string GetLabelByValue(int val)
         {
             var e = new MethodReturnEventArgs<string>();
             if (OnGetLabelByValue_Enumeration != null)
@@ -272,7 +272,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.Enumeration> OnEnu
             }
             return e.Result;
         }
-        public delegate void GetLabelByValue_Handler<T>(T obj, MethodReturnEventArgs<string> ret, System.Int32 val);
+        public delegate void GetLabelByValue_Handler<T>(T obj, MethodReturnEventArgs<string> ret, int val);
         public static event GetLabelByValue_Handler<Enumeration> OnGetLabelByValue_Enumeration;
         // END Kistl.Generator.Templates.ObjectClasses.Method
 

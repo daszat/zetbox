@@ -58,6 +58,6 @@ namespace Kistl.App.Projekte
         /// <summary>
         /// 
         /// </summary>
-        System.Object GetSummaryReport(System.String title, Kistl.App.Base.DateTimeRange range);
+        System.Object GetSummaryReport(string title, Kistl.App.Base.DateTimeRange range);
     }
 }

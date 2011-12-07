@@ -16,7 +16,7 @@ namespace Kistl.Generator.InterfaceTemplates.Properties
     {
         protected virtual string GetPropertyTypeString()
         {
-            return prop.GetCollectionTypeString();
+            return prop.GetPropertyTypeString();
         }
 
         protected virtual string GetPropertyName()

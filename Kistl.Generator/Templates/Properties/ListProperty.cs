@@ -54,7 +54,7 @@ namespace Kistl.Generator.Templates.Properties
         /// <returns>the type of the property as string</returns>
         protected virtual string GetPropertyTypeString()
         {
-            return property.GetCollectionTypeString();
+            return property.GetPropertyTypeString();
         }
 
         /// <returns>the type of the backing store as string</returns>

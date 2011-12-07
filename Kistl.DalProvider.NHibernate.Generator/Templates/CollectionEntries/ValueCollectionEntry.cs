@@ -70,8 +70,8 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries
                     new ObjectClasses.Constructors.CompoundInitialisationDescriptor(
                         "Value",
                         "this.Proxy.Value",
-                        prop.GetPropertyTypeString(),
-                        prop.GetPropertyTypeString() + ImplementationSuffix,
+                        prop.GetElementTypeString(),
+                        prop.GetElementTypeString() + ImplementationSuffix,
                         prop.IsNullable())
                 }
                 : new ObjectClasses.Constructors.CompoundInitialisationDescriptor[0];
@@ -100,7 +100,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries
             base.ApplyClassTailTemplate();
 
             string interfaceName = GetCeInterface();
-            string referencedType = prop.ReferencedTypeAsCSharp();
+            string referencedType = prop.GetElementTypeString();
             if (prop is CompoundObjectProperty)
             {
                 referencedType += ImplementationSuffix;

@@ -116,7 +116,7 @@ this.WriteObjects("        public delegate void ",  delegateName , "<T>(T obj", 
     else
     {
 
-        string returnArgsType = String.Format("MethodReturnEventArgs<{0}>", returnParam.ReturnedTypeAsCSharp());
+        string returnArgsType = String.Format("MethodReturnEventArgs<{0}>", returnParam.GetParameterTypeString());
 
 #line 88 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\Method.cst"
 this.WriteObjects("        {\r\n");

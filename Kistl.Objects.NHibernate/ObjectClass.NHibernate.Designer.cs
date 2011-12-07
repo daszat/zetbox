@@ -653,9 +653,9 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
         /// </summary>
         // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetInheritedMethods_ObjectClass")]
-        public virtual IList<Kistl.App.Base.Method> GetInheritedMethods()
+        public virtual IEnumerable<Kistl.App.Base.Method> GetInheritedMethods()
         {
-            var e = new MethodReturnEventArgs<IList<Kistl.App.Base.Method>>();
+            var e = new MethodReturnEventArgs<IEnumerable<Kistl.App.Base.Method>>();
             if (OnGetInheritedMethods_ObjectClass != null)
             {
                 OnGetInheritedMethods_ObjectClass(this, e);
@@ -666,7 +666,7 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
             }
             return e.Result;
         }
-        public delegate void GetInheritedMethods_Handler<T>(T obj, MethodReturnEventArgs<IList<Kistl.App.Base.Method>> ret);
+        public delegate void GetInheritedMethods_Handler<T>(T obj, MethodReturnEventArgs<IEnumerable<Kistl.App.Base.Method>> ret);
         public static event GetInheritedMethods_Handler<ObjectClass> OnGetInheritedMethods_ObjectClass;
         // END Kistl.Generator.Templates.ObjectClasses.Method
 

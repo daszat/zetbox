@@ -17,9 +17,7 @@ namespace Kistl.Generator.Templates.Serialization
         {
             string xmlnamespace = prop.Module.Namespace;
             string xmlname = prop.Name;
-            string enumerationType = prop.Enumeration.Module.Namespace + "." + prop.Enumeration.Name;
-            if (prop.IsNullable())
-                enumerationType += "?";
+            string enumerationType = prop.GetElementTypeString();
 
             AddToSerializers(list,
                 SerializerType.All,

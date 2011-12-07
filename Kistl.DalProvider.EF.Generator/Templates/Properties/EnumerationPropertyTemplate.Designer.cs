@@ -45,7 +45,7 @@ string interfaceName = prop.ObjectClass.Name;
 	string backingName = "_" + name;
 
 	bool isNullable = prop.Constraints.OfType<NotNullableConstraint>().Count() == 0;
-	string enumType = prop.ReferencedTypeAsCSharp();
+	string enumType = prop.GetElementTypeString();
 	string eventName = "On" + name;
 
 

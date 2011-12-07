@@ -10,20 +10,37 @@ namespace Kistl.App.Base
     public static class EnumerationPropertyActions
     {
         [Invocation]
-        public static void GetPropertyTypeString(EnumerationProperty obj, MethodReturnEventArgs<string> e)
+        public static void GetPropertyType(EnumerationProperty obj, MethodReturnEventArgs<Type> e)
         {
-            if (obj.Enumeration == null)
+            var cls = obj.Enumeration;
+            e.Result = Type.GetType(cls.Module.Namespace + "." + cls.Name + ", " + Kistl.API.Helper.InterfaceAssembly, true);
+            PropertyActions.DecorateParameterType(obj, e, true, obj.IsList, obj.HasPersistentOrder);
+        }
+
+        [Invocation]
+        public static void GetElementTypeString(EnumerationProperty obj, MethodReturnEventArgs<string> e)
+        {
+            var cls = obj.Enumeration;
+            if (cls == null)
             {
                 e.Result = "<no enum>";
             }
-            else if (obj.Enumeration.Module == null)
+            else if (cls.Module == null)
             {
-                e.Result = "<no namespace>." + obj.Enumeration.Name;
+                e.Result = "<no namespace>." + cls.Name;
             }
             else
             {
-                e.Result = obj.Enumeration.Module.Namespace + "." + obj.Enumeration.Name;
+                e.Result = cls.Module.Namespace + "." + cls.Name;
             }
+            PropertyActions.DecorateElementType(obj, e, true);
+        }
+
+        [Invocation]
+        public static void GetPropertyTypeString(EnumerationProperty obj, MethodReturnEventArgs<string> e)
+        {
+            GetElementTypeString(obj, e);
+            PropertyActions.DecorateParameterType(obj, e, true, obj.IsList, obj.HasPersistentOrder);
         }
     }
 }

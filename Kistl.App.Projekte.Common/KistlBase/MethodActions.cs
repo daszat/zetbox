@@ -5,11 +5,10 @@ namespace Kistl.App.Base
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-
     using Kistl.API;
+    using Kistl.API.Utils;
     using Kistl.App.Base;
     using Kistl.App.Extensions;
-    using Kistl.API.Utils;
 
     [Implementor]
     public static class MethodActions
@@ -73,20 +72,13 @@ namespace Kistl.App.Base
             var returnParam = obj.GetReturnParameter();
             if (returnParam != null)
             {
-                if (returnParam.IsList)
-                {
-                    sb.AppendFormat(", MethodReturnEventArgs<IList<{0}>> e", returnParam.GetParameterTypeString());
-                }
-                else
-                {
-                    sb.AppendFormat(", MethodReturnEventArgs<{0}> e", returnParam.GetParameterTypeString());
-                }
+                sb.AppendFormat(", MethodReturnEventArgs<{0}> e", returnParam.GetParameterTypeString());
             }
 
             foreach (var param in obj.Parameter.Where(p => !p.IsReturnParameter))
             {
                 sb.AppendFormat(", {0} {1}",
-                    param.IsList ? string.Format("IList<{0}>", param.GetParameterTypeString()) : param.GetParameterTypeString(),
+                    param.GetParameterTypeString(),
                     param.Name);
             }
 

@@ -29,7 +29,7 @@ namespace Kistl.App.GUI
         /// <summary>
         /// 
         /// </summary>
-        void ShowMessage(System.String message);
+        void ShowMessage(string message);
 
         /// <summary>
         /// 

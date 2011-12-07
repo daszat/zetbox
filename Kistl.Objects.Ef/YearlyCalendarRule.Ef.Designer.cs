@@ -42,7 +42,7 @@ namespace Kistl.App.Calendar
         /// </summary>
         // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnAppliesTo_YearlyCalendarRule")]
-        public override bool AppliesTo(System.DateTime date)
+        public override bool AppliesTo(DateTime date)
         {
             var e = new MethodReturnEventArgs<bool>();
             if (OnAppliesTo_YearlyCalendarRule != null)

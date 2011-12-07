@@ -81,7 +81,7 @@ this.WriteObjects("            SynchronizeCollections(this.",  prop.Name , "Impl
 } else { 
 #line 41 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 this.WriteObjects("            if (me.",  prop.Name , " == null && other.",  prop.Name , " != null) {\r\n");
-this.WriteObjects("                me.",  prop.Name , " = (",  prop.GetPropertyTypeString() , ")other.",  prop.Name , ".Clone();\r\n");
+this.WriteObjects("                me.",  prop.Name , " = (",  prop.GetElementTypeString() , ")other.",  prop.Name , ".Clone();\r\n");
 this.WriteObjects("            } else if (me.",  prop.Name , " != null && other.",  prop.Name , " == null) {\r\n");
 this.WriteObjects("                me.",  prop.Name , " = null;\r\n");
 this.WriteObjects("            } else if (me.",  prop.Name , " != null && other.",  prop.Name , " != null) {\r\n");

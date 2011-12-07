@@ -19,7 +19,7 @@ namespace Kistl.Generator.Templates.Properties
         {
             if (prop == null) { throw new ArgumentNullException("prop"); }
 
-            Call(host, ctx, prop.ObjectClass.GetDataTypeString(), prop.ReferencedTypeAsCSharp(), prop.Name, "On" + prop.Name + "_Getter");
+            Call(host, ctx, prop.ObjectClass.GetDataTypeString(), prop.GetElementTypeString(), prop.Name, "On" + prop.Name + "_Getter");
         }
 
         //public static void Call(Arebis.CodeGeneration.IGenerationHost host,

@@ -188,7 +188,7 @@ namespace Kistl.Client.Presentables
             }
             else
             {
-                throw new NotImplementedException(String.Format("==>> No model for parameter '{0}' with type '{1}'", param, param.GetParameterType()));
+                throw new NotImplementedException(String.Format("==>> No model for parameter '{0}' with type '{1}'", param, param.GetParameterTypeString()));
             }
 
             return CreateViewModel<TModelFactory>(ResolveFactory(t));

@@ -57,7 +57,7 @@ namespace Kistl.Generator.Templates.ObjectClasses
             }
             else
             {
-                return ret.ReturnedTypeAsCSharp();
+                return ret.GetParameterTypeString();
             }
         }
 

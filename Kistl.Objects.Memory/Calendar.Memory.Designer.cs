@@ -734,7 +734,7 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
         /// </summary>
         // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetOffDays_Calendar")]
-        public virtual int GetOffDays(System.DateTime from, System.DateTime until)
+        public virtual int GetOffDays(DateTime from, DateTime until)
         {
             var e = new MethodReturnEventArgs<int>();
             if (OnGetOffDays_Calendar != null)
@@ -747,7 +747,7 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
             }
             return e.Result;
         }
-        public delegate void GetOffDays_Handler<T>(T obj, MethodReturnEventArgs<int> ret, System.DateTime from, System.DateTime until);
+        public delegate void GetOffDays_Handler<T>(T obj, MethodReturnEventArgs<int> ret, DateTime from, DateTime until);
         public static event GetOffDays_Handler<Calendar> OnGetOffDays_Calendar;
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
@@ -756,7 +756,7 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
         /// </summary>
         // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetWorkingDays_Calendar")]
-        public virtual int GetWorkingDays(System.DateTime from, System.DateTime until)
+        public virtual int GetWorkingDays(DateTime from, DateTime until)
         {
             var e = new MethodReturnEventArgs<int>();
             if (OnGetWorkingDays_Calendar != null)
@@ -769,7 +769,7 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
             }
             return e.Result;
         }
-        public delegate void GetWorkingDays_Handler<T>(T obj, MethodReturnEventArgs<int> ret, System.DateTime from, System.DateTime until);
+        public delegate void GetWorkingDays_Handler<T>(T obj, MethodReturnEventArgs<int> ret, DateTime from, DateTime until);
         public static event GetWorkingDays_Handler<Calendar> OnGetWorkingDays_Calendar;
         // END Kistl.Generator.Templates.ObjectClasses.Method
 
@@ -778,9 +778,9 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
         /// </summary>
         // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetWorkingHours_Calendar")]
-        public virtual System.Decimal GetWorkingHours(System.DateTime from, System.DateTime until)
+        public virtual decimal GetWorkingHours(DateTime from, DateTime until)
         {
-            var e = new MethodReturnEventArgs<System.Decimal>();
+            var e = new MethodReturnEventArgs<decimal>();
             if (OnGetWorkingHours_Calendar != null)
             {
                 OnGetWorkingHours_Calendar(this, e, from, until);
@@ -791,7 +791,7 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
             }
             return e.Result;
         }
-        public delegate void GetWorkingHours_Handler<T>(T obj, MethodReturnEventArgs<System.Decimal> ret, System.DateTime from, System.DateTime until);
+        public delegate void GetWorkingHours_Handler<T>(T obj, MethodReturnEventArgs<decimal> ret, DateTime from, DateTime until);
         public static event GetWorkingHours_Handler<Calendar> OnGetWorkingHours_Calendar;
         // END Kistl.Generator.Templates.ObjectClasses.Method
 

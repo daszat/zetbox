@@ -42,7 +42,7 @@
 <%          } %>
 <%      } else { %>
             if (me.<%= prop.Name %> == null && other.<%= prop.Name %> != null) {
-                me.<%= prop.Name %> = (<%= prop.GetPropertyTypeString() %>)other.<%= prop.Name %>.Clone();
+                me.<%= prop.Name %> = (<%= prop.GetElementTypeString() %>)other.<%= prop.Name %>.Clone();
             } else if (me.<%= prop.Name %> != null && other.<%= prop.Name %> == null) {
                 me.<%= prop.Name %> = null;
             } else if (me.<%= prop.Name %> != null && other.<%= prop.Name %> != null) {

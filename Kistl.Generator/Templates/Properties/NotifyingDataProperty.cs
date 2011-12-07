@@ -26,7 +26,7 @@ namespace Kistl.Generator.Templates.Properties
         private Property _prop;
 
         public NotifyingDataProperty(Arebis.CodeGeneration.IGenerationHost _host, IKistlContext ctx, Serialization.SerializationMembersList serializationList, Property prop)
-            : base(_host, ctx, serializationList, prop.ReferencedTypeAsCSharp(), prop.Name, prop.Module.Namespace, "_" + prop.Name)
+            : base(_host, ctx, serializationList, prop.GetElementTypeString(), prop.Name, prop.Module.Namespace, "_" + prop.Name)
         {
             _prop = prop;
         }

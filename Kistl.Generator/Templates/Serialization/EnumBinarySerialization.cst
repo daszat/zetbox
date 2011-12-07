@@ -18,13 +18,6 @@
 <%@ Parameter Name="backingStoreName" Type="string" %>
 <%@ Parameter Name="enumerationType" Type="string" %>
 <%
-    // always use the interface to get the "right" property
-    // string interfaceName = prop.ObjectClass.Name;
-    // string memberName = prop.Name;
-    // string enumName =  prop.Enumeration.Module.Namespace + "." +  prop.Enumeration.Name;
-    // if (prop.IsNullable()) enumName += "?";
-    // string methodName = direction.ToString();
-
     ////
     ////  This class always serializes as int? to avoid complicating the code
     ////

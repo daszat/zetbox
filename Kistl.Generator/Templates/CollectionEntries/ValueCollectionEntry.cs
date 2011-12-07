@@ -54,7 +54,7 @@ namespace Kistl.Generator.Templates.CollectionEntries
                     ImplementationNamespace,
                     ImplementationSuffix,
                     prop.ObjectClass.GetDataTypeString(),
-                    prop.ReferencedTypeAsCSharp());
+                    prop.GetElementTypeString());
             }
             else
             {
@@ -62,7 +62,7 @@ namespace Kistl.Generator.Templates.CollectionEntries
                     ImplementationNamespace,
                     ImplementationSuffix,
                     prop.ObjectClass.GetDataTypeString(),
-                    prop.ReferencedTypeAsCSharp());
+                    prop.GetElementTypeString());
             }
         }
 
@@ -145,7 +145,7 @@ namespace Kistl.Generator.Templates.CollectionEntries
             if (prop is CompoundObjectProperty)
             {
                 this.WriteLine("            if (me.Value == null && other.Value != null) {");
-                this.WriteLine("                me.Value = ({0})other.Value.Clone();", prop.GetPropertyTypeString());
+                this.WriteLine("                me.Value = ({0})other.Value.Clone();", prop.GetElementTypeString());
                 this.WriteLine("            } else if (me.Value != null && other.Value == null) {");
                 this.WriteLine("                me.Value = null;");
                 this.WriteLine("            } else if (me.Value != null && other.Value != null) {");

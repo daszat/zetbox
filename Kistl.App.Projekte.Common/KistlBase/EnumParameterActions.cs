@@ -10,7 +10,15 @@ namespace Kistl.App.Base
     public static class EnumParameterActions
     {
         [Invocation]
-        public static void GetParameterTypeString(Kistl.App.Base.EnumParameter obj, MethodReturnEventArgs<System.String> e)
+        public static void GetParameterType(EnumParameter obj, MethodReturnEventArgs<Type> e)
+        {
+            var cls = obj.Enumeration;
+            e.Result = Type.GetType(cls.Module.Namespace + "." + cls.Name + ", " + Kistl.API.Helper.InterfaceAssembly, true);
+            BaseParameterActions.DecorateParameterType(obj, e, true);
+        }
+
+        [Invocation]
+        public static void GetParameterTypeString(EnumParameter obj, MethodReturnEventArgs<System.String> e)
         {
             if (obj.Enumeration == null)
             {
@@ -24,7 +32,7 @@ namespace Kistl.App.Base
             {
                 e.Result = obj.Enumeration.Module.Namespace + "." + obj.Enumeration.Name;
             }
+            BaseParameterActions.DecorateParameterType(obj, e, true);
         }
-
     }
 }

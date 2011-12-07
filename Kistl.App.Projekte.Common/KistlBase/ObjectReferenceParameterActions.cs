@@ -5,36 +5,39 @@ namespace Kistl.App.Base
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-
     using Kistl.API;
+    using Kistl.API.Utils;
     using Kistl.App.Base;
     using Kistl.App.Extensions;
-    using Kistl.API.Utils;
 
     [Implementor]
     public static class ObjectReferenceParameterActions
     {
         [Invocation]
-        public static void GetParameterType(Kistl.App.Base.ObjectReferenceParameter obj, Kistl.API.MethodReturnEventArgs<System.Type> e)
+        public static void GetParameterType(ObjectReferenceParameter obj, MethodReturnEventArgs<Type> e)
         {
-            e.Result = Type.GetType(obj.GetParameterTypeString() + ", " + Kistl.API.Helper.InterfaceAssembly, true);
+            var def = obj.ObjectClass;
+            e.Result = Type.GetType(def.Module.Namespace + "." + def.Name + ", " + Kistl.API.Helper.InterfaceAssembly, true);
+            BaseParameterActions.DecorateParameterType(obj, e, false);
         }
 
         [Invocation]
         public static void GetParameterTypeString(ObjectReferenceParameter obj, MethodReturnEventArgs<string> e)
         {
-            if (obj.ObjectClass == null)
+            var def = obj.ObjectClass;
+            if (def == null)
             {
                 e.Result = "<no type>";
             }
-            else if (obj.ObjectClass.Module == null)
+            else if (def.Module == null)
             {
-                e.Result = "<no namespace>." + obj.ObjectClass.Name;
+                e.Result = "<no namespace>." + def.Name;
             }
             else
             {
-                e.Result = obj.ObjectClass.Module.Namespace + "." + obj.ObjectClass.Name;
+                e.Result = def.Module.Namespace + "." + def.Name;
             }
+            BaseParameterActions.DecorateParameterType(obj, e, false);
         }
     }
 }

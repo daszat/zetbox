@@ -83,7 +83,7 @@
     else
     {
 
-        string returnArgsType = String.Format("MethodReturnEventArgs<{0}>", returnParam.ReturnedTypeAsCSharp());
+        string returnArgsType = String.Format("MethodReturnEventArgs<{0}>", returnParam.GetParameterTypeString());
 %>
         {
             var e = new <%= returnArgsType %>();

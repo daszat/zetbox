@@ -10,9 +10,17 @@ namespace Kistl.App.Base
     public static class DoubleParameterActions
     {
         [Invocation]
-        public static void GetParameterTypeString(Kistl.App.Base.DoubleParameter obj, Kistl.API.MethodReturnEventArgs<string> e)
+        public static void GetParameterType(DoubleParameter obj, MethodReturnEventArgs<Type> e)
         {
-            e.Result = "System.Double";
+            e.Result = typeof(double);
+            BaseParameterActions.DecorateParameterType(obj, e, true);
+        }
+
+        [Invocation]
+        public static void GetParameterTypeString(DoubleParameter obj, MethodReturnEventArgs<string> e)
+        {
+            e.Result = "double";
+            BaseParameterActions.DecorateParameterType(obj, e, true);
         }
     }
 }

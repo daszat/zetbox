@@ -5,10 +5,52 @@ namespace Kistl.App.Base
     using System.Linq;
     using System.Text;
     using Kistl.API;
+    using Kistl.App.Extensions;
 
     [Implementor]
     public static class PropertyActions
     {
+        internal static void DecorateElementType(Property obj, MethodReturnEventArgs<string> e, bool isStruct)
+        {
+            if (obj == null) throw new ArgumentNullException("obj");
+            if (e == null) throw new ArgumentNullException("e");
+
+            if (isStruct && obj.IsNullable())
+            {
+                e.Result += "?";
+            }
+        }
+
+        internal static void DecorateParameterType(Property obj, MethodReturnEventArgs<string> e, bool isStruct, bool isList, bool isOrdered)
+        {
+            if (obj == null) throw new ArgumentNullException("obj");
+            if (e == null) throw new ArgumentNullException("e");
+
+            if (isList && isOrdered)
+            {
+                e.Result = string.Format("IList<{0}>", e.Result);
+            }
+            else if (isList && !isOrdered)
+            {
+                e.Result = string.Format("ICollection<{0}>", e.Result);
+            }
+        }
+
+        internal static void DecorateParameterType(Property obj, MethodReturnEventArgs<Type> e, bool isStruct, bool isList, bool isOrdered)
+        {
+            if (obj == null) throw new ArgumentNullException("obj");
+            if (e == null) throw new ArgumentNullException("e");
+
+            if (isList && isOrdered)
+            {
+                e.Result = typeof(IList<>).MakeGenericType(e.Result);
+            }
+            else if (isList && !isOrdered)
+            {
+                e.Result = typeof(ICollection<>).MakeGenericType(e.Result);
+            }
+        }
+        
         [Invocation]
         public static void GetLabel(Kistl.App.Base.Property obj, MethodReturnEventArgs<System.String> e)
         {
@@ -29,32 +71,13 @@ namespace Kistl.App.Base
                     obj.ObjectClass.Name,
                     obj.Name);
             }
-
-            // TODO: fix in overrides for struct/valuetype and objectreference*
-            //if (obj.IsList) e.Result += " [0..n]";
             ToStringHelper.FixupFloatingObjectsToString(obj, e);
         }
 
         [Invocation]
         public static void GetPropertyType(Kistl.App.Base.Property obj, Kistl.API.MethodReturnEventArgs<System.Type> e)
         {
-            string fullname = obj.GetPropertyTypeString();
-
-            if (obj is EnumerationProperty)
-            {
-                e.Result = Type.GetType(fullname + ", " + Kistl.API.Helper.InterfaceAssembly);
-            }
-            // ValueTypes all use mscorlib types,
-            else if (obj is ValueTypeProperty)
-            {
-                e.Result = Type.GetType(fullname);
-            }
-            else
-            {
-                // other properties not
-                string assembly = Kistl.API.Helper.InterfaceAssembly;
-                e.Result = Type.GetType(fullname + ", " + assembly, true);
-            }
+            throw new NotImplementedException();
         }
 
         [Invocation]

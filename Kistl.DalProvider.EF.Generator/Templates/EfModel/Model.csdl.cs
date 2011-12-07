@@ -21,7 +21,7 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.EfModel
         /// false) and when defining the CollectionEntry (IsList == true)
         internal static string PlainPropertyDefinitionFromValueType(ValueTypeProperty prop, string name, string implementationSuffix)
         {
-            string type = prop.GetPropertyTypeString();
+            string type = prop.GetElementTypeString();
             string maxlength = String.Empty;
             string precScaleAttr = String.Empty;
             string concurrency = String.Empty;
@@ -30,11 +30,6 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.EfModel
             {
                 type = "Int32";
                 name += implementationSuffix;
-            }
-            else
-            {
-                // translate to short name
-                type = Type.GetType(type).Name;
             }
 
             if (prop is StringProperty)
@@ -55,7 +50,7 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.EfModel
             }
 
             return String.Format("<Property Name=\"{0}\" Type=\"{1}\" Nullable=\"{2}\" {3}{4} {5}/>",
-                name, type, prop.IsNullable().ToString().ToLowerInvariant(), maxlength, precScaleAttr, concurrency);
+                name, type, prop.IsNullable() ? "true" : "false", maxlength, precScaleAttr, concurrency);
         }
 
         protected virtual void ApplyEntityTypeFieldDefs(IEnumerable<Property> properties)

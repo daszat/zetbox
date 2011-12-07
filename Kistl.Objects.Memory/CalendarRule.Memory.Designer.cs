@@ -873,7 +873,7 @@ namespace Kistl.App.Calendar
         /// </summary>
         // BEGIN Kistl.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnAppliesTo_CalendarRule")]
-        public virtual bool AppliesTo(System.DateTime date)
+        public virtual bool AppliesTo(DateTime date)
         {
             var e = new MethodReturnEventArgs<bool>();
             if (OnAppliesTo_CalendarRule != null)
@@ -886,7 +886,7 @@ namespace Kistl.App.Calendar
             }
             return e.Result;
         }
-        public delegate void AppliesTo_Handler<T>(T obj, MethodReturnEventArgs<bool> ret, System.DateTime date);
+        public delegate void AppliesTo_Handler<T>(T obj, MethodReturnEventArgs<bool> ret, DateTime date);
         public static event AppliesTo_Handler<CalendarRule> OnAppliesTo_CalendarRule;
         // END Kistl.Generator.Templates.ObjectClasses.Method
 

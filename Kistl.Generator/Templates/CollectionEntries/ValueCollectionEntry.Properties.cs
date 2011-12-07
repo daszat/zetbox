@@ -26,7 +26,7 @@ namespace Kistl.Generator.Templates.CollectionEntries
 
         protected override void ApplyBPropertyTemplate()
         {
-            string interfaceType = prop.ReferencedTypeAsCSharp();
+            string interfaceType = prop.GetElementTypeString();
             string implementationType = interfaceType;
 
             var cop = prop as CompoundObjectProperty;
@@ -34,7 +34,8 @@ namespace Kistl.Generator.Templates.CollectionEntries
             {
                 Properties.CompoundObjectPropertyTemplate.Call(
                     Host, ctx, MembersToSerialize,
-                    prop as CompoundObjectProperty, "Value");
+                    prop as CompoundObjectProperty, "Value",
+                    false, false);
                 implementationType = interfaceType + ImplementationSuffix;
             }
             var vtp = prop as ValueTypeProperty;

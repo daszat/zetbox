@@ -60,20 +60,6 @@ namespace Kistl.Generator.Extensions
             return prop is CompoundObjectProperty && ((CompoundObjectProperty)prop).IsList;
         }
 
-        public static string GetCollectionTypeString(this Property prop)
-        {
-            if (prop == null) { throw new ArgumentNullException("prop"); }
-
-            if (prop.HasPersistentOrder())
-            {
-                return string.Format("IList<{0}>", prop.ReferencedTypeAsCSharp());
-            }
-            else
-            {
-                return string.Format("ICollection<{0}>", prop.ReferencedTypeAsCSharp());
-            }
-        }
-
         public static bool HasPersistentOrder(this Property prop)
         {
             if (prop == null) { throw new ArgumentNullException("prop"); }
@@ -107,7 +93,7 @@ namespace Kistl.Generator.Extensions
         public static bool IsList(this ObjectReferenceProperty prop)
         {
             if (prop == null) { throw new ArgumentNullException("prop"); }
-            if(prop.RelationEnd == null) throw new InvalidOperationException(string.Format("Error: object reference property {0} on ObjectClass {1} has no relation end", prop.Name, prop.ObjectClass));
+            if (prop.RelationEnd == null) throw new InvalidOperationException(string.Format("Error: object reference property {0} on ObjectClass {1} has no relation end", prop.Name, prop.ObjectClass));
 
             RelationEnd relEnd = prop.RelationEnd;
             Relation rel = relEnd.GetParent();
@@ -116,49 +102,9 @@ namespace Kistl.Generator.Extensions
             return otherEnd.Multiplicity.UpperBound() > 1;
         }
 
-        // TODO: convert to class method 
         public static string GetCSharpTypeDef(this Property prop)
         {
-            if (prop is ValueTypeProperty)
-            {
-                var vtp = (ValueTypeProperty)prop;
-                if (vtp.IsList && vtp.HasPersistentOrder)
-                {
-                    return String.Format("IList<{0}>", vtp.GetPropertyTypeString());
-                }
-                else if (vtp.IsList && !vtp.HasPersistentOrder)
-                {
-                    return String.Format("ICollection<{0}>", vtp.GetPropertyTypeString());
-                }
-                else if (!vtp.IsList)
-                {
-                    return String.Format("{0}{1}", vtp.GetPropertyTypeString(), vtp.IsNullable() ? "?" : String.Empty);
-                }
-                else
-                {
-                    throw new NotImplementedException(prop.ToString());
-                }
-            }
-            else if (prop is ObjectReferenceProperty)
-            {
-                var orp = (ObjectReferenceProperty)prop;
-                if (orp.IsList())
-                {
-                    return orp.GetCollectionTypeString();
-                }
-                else if (!orp.IsList())
-                {
-                    return String.Format("{0}{1}", orp.GetPropertyTypeString(), orp.IsNullable() ? "?" : String.Empty);
-                }
-                else
-                {
-                    throw new NotImplementedException(prop.ToString());
-                }
-            }
-            else
-            {
-                throw new NotImplementedException(prop.ToString());
-            }
+            return prop.GetPropertyTypeString();
         }
     }
 }

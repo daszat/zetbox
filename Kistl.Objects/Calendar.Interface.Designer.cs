@@ -44,16 +44,16 @@ namespace Kistl.App.Calendar
         /// <summary>
         /// Gets the number of free days between two dates
         /// </summary>
-        int GetOffDays(System.DateTime from, System.DateTime until);
+        int GetOffDays(DateTime from, DateTime until);
 
         /// <summary>
         /// Get the number of working days between two dates
         /// </summary>
-        int GetWorkingDays(System.DateTime from, System.DateTime until);
+        int GetWorkingDays(DateTime from, DateTime until);
 
         /// <summary>
         /// Returns the amount of working hours between two dates
         /// </summary>
-        System.Decimal GetWorkingHours(System.DateTime from, System.DateTime until);
+        decimal GetWorkingHours(DateTime from, DateTime until);
     }
 }

@@ -73,7 +73,7 @@ foreach(var property in properties)
 
 #line 48 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
 this.WriteObjects("                    // property.IsAssociation() && !property.IsObjectReferencePropertySingle()\r\n");
-this.WriteObjects("                    new ",  propertyDescriptorName , "<",  implName , ", ",  property.GetCollectionTypeString() , ">(\r\n");
+this.WriteObjects("                    new ",  propertyDescriptorName , "<",  implName , ", ",  property.GetPropertyTypeString() , ">(\r\n");
 this.WriteObjects("                        lazyCtx,\r\n");
 this.WriteObjects("                        new Guid(\"",  property.ExportGuid , "\"),\r\n");
 this.WriteObjects("                        \"",  propertyName , "\",\r\n");
@@ -84,7 +84,7 @@ this.WriteObjects("                        null), // lists are read-only propert
 } else if (property is CalculatedObjectReferenceProperty) { 
 #line 57 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
 this.WriteObjects("                    // property is CalculatedObjectReferenceProperty\r\n");
-this.WriteObjects("                    new ",  propertyDescriptorName , "<",  implName , ", ",  property.ReferencedTypeAsCSharp() , ">(\r\n");
+this.WriteObjects("                    new ",  propertyDescriptorName , "<",  implName , ", ",  property.GetPropertyTypeString() , ">(\r\n");
 this.WriteObjects("                        lazyCtx,\r\n");
 this.WriteObjects("                        new Guid(\"",  property.ExportGuid , "\"),\r\n");
 this.WriteObjects("                        \"",  propertyName , "\",\r\n");
@@ -97,7 +97,7 @@ this.WriteObjects("                        null), // CalculatedObjectReferencePr
 var isReadonly = (property is ValueTypeProperty) && ((ValueTypeProperty)property).IsCalculated; 
 #line 67 "P:\Kistl\Kistl.Generator\Templates\ObjectClasses\CustomTypeDescriptor.cst"
 this.WriteObjects("                    // else\r\n");
-this.WriteObjects("                    new ",  propertyDescriptorName , "<",  implName , ", ",  property.ReferencedTypeAsCSharp() , ">(\r\n");
+this.WriteObjects("                    new ",  propertyDescriptorName , "<",  implName , ", ",  property.GetPropertyTypeString() , ">(\r\n");
 this.WriteObjects("                        lazyCtx,\r\n");
 this.WriteObjects("                        new Guid(\"",  property.ExportGuid , "\"),\r\n");
 this.WriteObjects("                        \"",  propertyName , "\",\r\n");

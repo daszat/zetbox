@@ -97,6 +97,6 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
-        IList<Kistl.App.Base.Method> GetInheritedMethods();
+        IEnumerable<Kistl.App.Base.Method> GetInheritedMethods();
     }
 }

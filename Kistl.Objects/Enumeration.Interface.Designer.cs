@@ -30,21 +30,21 @@ namespace Kistl.App.Base
         /// <summary>
         /// 
         /// </summary>
-        Kistl.App.Base.EnumerationEntry GetEntryByName(System.String name);
+        Kistl.App.Base.EnumerationEntry GetEntryByName(string name);
 
         /// <summary>
         /// 
         /// </summary>
-        Kistl.App.Base.EnumerationEntry GetEntryByValue(System.Int32 val);
+        Kistl.App.Base.EnumerationEntry GetEntryByValue(int val);
 
         /// <summary>
         /// 
         /// </summary>
-        string GetLabelByName(System.String name);
+        string GetLabelByName(string name);
 
         /// <summary>
         /// 
         /// </summary>
-        string GetLabelByValue(System.Int32 val);
+        string GetLabelByValue(int val);
     }
 }

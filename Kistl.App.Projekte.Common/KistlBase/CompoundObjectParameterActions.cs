@@ -5,11 +5,10 @@ namespace Kistl.App.Base
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-
     using Kistl.API;
+    using Kistl.API.Utils;
     using Kistl.App.Base;
     using Kistl.App.Extensions;
-    using Kistl.API.Utils;
 
     [Implementor]
     public static class CompoundObjectParameterActions
@@ -17,24 +16,28 @@ namespace Kistl.App.Base
         [Invocation]
         public static void GetParameterType(Kistl.App.Base.CompoundObjectParameter obj, Kistl.API.MethodReturnEventArgs<System.Type> e)
         {
-            e.Result = Type.GetType(obj.GetParameterTypeString() + ", " + Kistl.API.Helper.InterfaceAssembly, true);
+            var cls = obj.CompoundObject;
+            e.Result = Type.GetType(cls.Module.Namespace + "." + cls.Name + ", " + Kistl.API.Helper.InterfaceAssembly, true);
+            BaseParameterActions.DecorateParameterType(obj, e, false);
         }
 
         [Invocation]
         public static void GetParameterTypeString(CompoundObjectParameter obj, MethodReturnEventArgs<string> e)
         {
-            if (obj.CompoundObject == null)
+            var cls = obj.CompoundObject;
+            if (cls == null)
             {
                 e.Result = "<no type>";
             }
-            else if (obj.CompoundObject.Module == null)
+            else if (cls.Module == null)
             {
-                e.Result = "<no namespace>." + obj.CompoundObject.Name;
+                e.Result = "<no namespace>." + cls.Name;
             }
             else
             {
-                e.Result = obj.CompoundObject.Module.Namespace + "." + obj.CompoundObject.Name;
+                e.Result = cls.Module.Namespace + "." + cls.Name;
             }
+            BaseParameterActions.DecorateParameterType(obj, e, false);
         }
     }
 }

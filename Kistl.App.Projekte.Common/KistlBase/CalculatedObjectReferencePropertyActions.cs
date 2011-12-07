@@ -10,21 +10,37 @@ namespace Kistl.App.Base
     public static class CalculatedObjectReferencePropertyActions
     {
         [Invocation]
-        public static void GetPropertyTypeString(CalculatedObjectReferenceProperty obj, MethodReturnEventArgs<string> e)
+        public static void GetPropertyType(CalculatedObjectReferenceProperty obj, MethodReturnEventArgs<Type> e)
         {
-            ObjectClass objClass = obj.ReferencedClass;
-            if (objClass == null)
+            var def = obj.ReferencedClass;
+            e.Result = Type.GetType(def.Module.Namespace + "." + def.Name, true);
+            PropertyActions.DecorateParameterType(obj, e, false, false, false);
+        }
+
+        [Invocation]
+        public static void GetElementTypeString(CalculatedObjectReferenceProperty obj, MethodReturnEventArgs<string> e)
+        {
+            var def = obj.ReferencedClass;
+            if (def == null)
             {
                 e.Result = "<no class>";
             }
-            else if (objClass.Module == null)
+            else if (def.Module == null)
             {
-                e.Result = "<no namespace>." + objClass.Name;
+                e.Result = "<no namespace>." + def.Name;
             }
             else
             {
-                e.Result = objClass.Module.Namespace + "." + objClass.Name;
+                e.Result = def.Module.Namespace + "." + def.Name;
             }
+            PropertyActions.DecorateElementType(obj, e, false);
+        }
+
+        [Invocation]
+        public static void GetPropertyTypeString(CalculatedObjectReferenceProperty obj, MethodReturnEventArgs<string> e)
+        {
+            GetElementTypeString(obj, e);
+            PropertyActions.DecorateParameterType(obj, e, false, false, false);
         }
     }
 }

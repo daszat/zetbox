@@ -61,7 +61,7 @@ namespace Kistl.Generator.Extensions
         {
             if (param == null) { throw new ArgumentNullException("param"); }
 
-            return "typeof(" + param.ReturnedTypeAsCSharp() + ")";
+            return "typeof(" + param.GetParameterTypeString() + ")";
         }
 
 

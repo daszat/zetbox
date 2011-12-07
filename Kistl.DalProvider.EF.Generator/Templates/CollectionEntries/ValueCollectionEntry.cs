@@ -35,7 +35,7 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries
 
             if (this.prop is CompoundObjectProperty)
             {
-                Templates.Properties.CompoundObjectPropertyInitialisation.Call(Host, ctx, prop.GetPropertyTypeString() + ImplementationSuffix, "Value", "_Value", false);
+                Templates.Properties.CompoundObjectPropertyInitialisation.Call(Host, ctx, prop.GetElementTypeString() + ImplementationSuffix, "Value", "_Value", false);
             }
 
             this.WriteObjects("}");
@@ -50,7 +50,7 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries
             
             if (this.prop is CompoundObjectProperty)
             {
-                Templates.Properties.CompoundObjectPropertyInitialisation.Call(Host, ctx, prop.GetPropertyTypeString() + ImplementationSuffix, "Value", "_Value", false);
+                Templates.Properties.CompoundObjectPropertyInitialisation.Call(Host, ctx, prop.GetElementTypeString() + ImplementationSuffix, "Value", "_Value", false);
             }
 
             this.WriteObjects("}");

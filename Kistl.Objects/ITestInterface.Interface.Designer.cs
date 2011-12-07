@@ -40,6 +40,6 @@ namespace Kistl.App.Test
         /// <summary>
         /// 
         /// </summary>
-        void TestMethod(System.DateTime DateTimeParam);
+        void TestMethod(DateTime DateTimeParam);
     }
 }

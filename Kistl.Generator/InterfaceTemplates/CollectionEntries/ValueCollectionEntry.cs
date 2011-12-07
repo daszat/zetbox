@@ -45,7 +45,7 @@ namespace Kistl.Generator.InterfaceTemplates.CollectionEntries
             return String.Format("{0}<{1}, {2}>",
                 IsOrdered() ? "IValueListEntry" : "IValueCollectionEntry",
                 this.prop.ObjectClass.Name,
-                this.prop.ReferencedTypeAsCSharp());
+                this.prop.GetElementTypeString());
         }
 
         protected override bool IsOrdered()

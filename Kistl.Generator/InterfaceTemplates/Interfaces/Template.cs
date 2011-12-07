@@ -144,7 +144,7 @@ namespace Kistl.Generator.InterfaceTemplates.Interfaces
         protected virtual void ApplyMethodTemplate(Kistl.App.Base.Method m, int index)
         {
             var returnParam = m.Parameter.SingleOrDefault(p => p.IsReturnParameter);
-            var returnString = returnParam == null ? "void" : returnParam.ReturnedTypeAsCSharp();
+            var returnString = returnParam == null ? "void" : returnParam.GetParameterTypeString();
             var name = m.Name;
             var args = String.Join(", ", m.Parameter
                 .Where(p => !p.IsReturnParameter)

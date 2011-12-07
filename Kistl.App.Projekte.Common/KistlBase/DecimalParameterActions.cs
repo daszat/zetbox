@@ -10,10 +10,17 @@ namespace Kistl.App.Base
     public static class DecimalParameterActions
     {
         [Invocation]
-        public static void GetParameterTypeString(Kistl.App.Base.DecimalParameter obj, MethodReturnEventArgs<System.String> e)
+        public static void GetParameterType(DecimalParameter obj, MethodReturnEventArgs<Type> e)
         {
-            e.Result = "System.Decimal";
+            e.Result = typeof(decimal);
+            BaseParameterActions.DecorateParameterType(obj, e, true);
         }
 
+        [Invocation]
+        public static void GetParameterTypeString(DecimalParameter obj, MethodReturnEventArgs<string> e)
+        {
+            e.Result = "decimal";
+            BaseParameterActions.DecorateParameterType(obj, e, true);
+        }
     }
 }
