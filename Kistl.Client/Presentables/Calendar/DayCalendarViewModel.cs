@@ -116,12 +116,87 @@ namespace Kistl.Client.Presentables.Calendar
         {
             if (overlappingChain.Count > 1)
             {
-                // calc prev overlapping chain
-                int idx = 0;
-                foreach (var ovItem in overlappingChain)
+                // allocate items into slots: 
+                // slots.Count is the number of required slots.
+                // slots are filled left-to-right with the next available item.
+                // when a slot is empty, we set it to null.
+                var slots = new List<CalendarItemViewModel>();
+                // remember the last time a slot was filled
+                var openSince = new List<DateTime>();
+                foreach (var ovItem in overlappingChain
+                    .SelectMany(i => new[]
+                        {
+                            new { Item = i, Time = i.From, Start = true , Duration = (i.To - i.From).TotalHours },
+                            new { Item = i, Time = i.To,   Start = false, Duration = (i.To - i.From).TotalHours },
+                        })
+                    .OrderBy(i => i.Time)
+                    .ThenBy(i => i.Item.From)
+                    .ThenByDescending(i => i.Duration))
                 {
-                    ovItem.OverlappingIndex = idx++;
-                    ovItem.OverlappingWidth = 1.0 / (double)overlappingChain.Count;
+                    if (ovItem.Start)
+                    {
+                        // add item into first free slot
+                        int i = 0;
+                        for (; i < slots.Count; i++)
+                        {
+                            if (slots[i] == null)
+                            {
+                                slots[i] = ovItem.Item;
+                                openSince[i] = ovItem.Item.To;
+                                break;
+                            }
+                        }
+                        // no free slot found, adding at the end
+                        if (i == slots.Count)
+                        {
+                            slots.Add(ovItem.Item);
+                            openSince.Add(ovItem.Item.To);
+                        }
+                    }
+                    else
+                    {
+                        // remove item from slots after calculating best width
+                        int idx = -1;
+                        for (int i = 0; i < slots.Count; i++)
+                        {
+                            if (slots[i] == ovItem.Item)
+                            {
+                                // found item. delete, initialise
+                                slots[i] = null;
+                                ovItem.Item.OverlappingIndex = idx = i;
+                                ovItem.Item.OverlappingWidth = i < slots.Count - 1 ? 1 : -1; // can already be in last slot
+                            }
+                            else if (idx >= 0 && (slots[i] != null || openSince[i] > ovItem.Item.From))
+                            {
+                                // blocked!
+                                break;
+                            }
+                            else if (idx >= 0 && slots[i] == null && openSince[i] <= ovItem.Item.From)
+                            {
+                                if (i < slots.Count - 1)
+                                {
+                                    // empty adjacent slot
+                                    ovItem.Item.OverlappingWidth += 1;
+                                }
+                                else // if (i == slots.Count - 1)
+                                {
+                                    // reached end of slots, might be extended later
+                                    ovItem.Item.OverlappingWidth = -1;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // Normalize width to needed slots, extend items with undetermined right side to fill all available space
+                foreach (var item in overlappingChain)
+                {
+                    if (item.OverlappingWidth < 0)
+                    {
+                        item.OverlappingWidth = slots.Count - item.OverlappingIndex;
+                    }
+                    item.SlotWidth = 1.0d / slots.Count;
+                    item.OverlappingWidth /= slots.Count;
                 }
             }
         }

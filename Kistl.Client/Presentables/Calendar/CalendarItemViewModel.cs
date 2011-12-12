@@ -17,7 +17,7 @@ namespace Kistl.Client.Presentables.Calendar
             if (obj == null) throw new ArgumentNullException("obj");
             if (update == null) throw new ArgumentNullException("update");
 
-            this.OverlappingWidth = 1.0;
+            this.SlotWidth = this.OverlappingWidth = 1.0;
             this.ObjectViewModel = obj;
             this._update = update;
 
@@ -146,12 +146,13 @@ namespace Kistl.Client.Presentables.Calendar
         {
             get
             {
-                return new System.Drawing.PointF((float)OverlappingIndex * (float)Width, (float)From.TimeOfDay.TotalHours * 44.0f);
+                return new System.Drawing.PointF((float)(OverlappingIndex * SlotWidth * ActualWidth), (float)From.TimeOfDay.TotalHours * 44.0f);
             }
         }
 
         public int OverlappingIndex { get; set; }
         public double OverlappingWidth { get; set; }
+        public double SlotWidth { get; set; }
 
         public double Width
         {
