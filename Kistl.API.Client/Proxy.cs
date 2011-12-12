@@ -27,7 +27,7 @@ using Kistl.API.Client.PerfCounter;
 
         IEnumerable<IPersistenceObject> SetObjects(IKistlContext ctx, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests);
 
-        object InvokeServerMethod(IKistlContext ctx, InterfaceType ifType, int ID, string method, Type retValType, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests, out IEnumerable<IPersistenceObject> changedObjects);
+        object InvokeServerMethod(IKistlContext ctx, InterfaceType ifType, int ID, string method, Type retValType, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests, out IEnumerable<IPersistenceObject> changedObjects, out List<IStreamable> auxObjects);
 
         IEnumerable<T> FetchRelation<T>(IKistlContext ctx, Guid relationId, RelationEndRole role, IDataObject parent, out List<IStreamable> auxObjects)
             where T : class, IRelationEntry;
@@ -295,12 +295,13 @@ using Kistl.API.Client.PerfCounter;
             return result;
         }
 
-        public object InvokeServerMethod(IKistlContext ctx, InterfaceType ifType, int ID, string method, Type retValType, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests, out IEnumerable<IPersistenceObject> changedObjects)
+        public object InvokeServerMethod(IKistlContext ctx, InterfaceType ifType, int ID, string method, Type retValType, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests, out IEnumerable<IPersistenceObject> changedObjects, out List<IStreamable> auxObjects)
         {
             _perfCounter.IncrementServerMethodInvocation();
 
             object result = null;
             IEnumerable<IPersistenceObject> tmpChangedObjects = null;
+            auxObjects = null;
 
             MemoryStream parameterStream = new MemoryStream();
             var parameterWriter = new BinaryWriter(parameterStream);
@@ -346,13 +347,13 @@ using Kistl.API.Client.PerfCounter;
             if (retValType.IsIStreamable())
             {
                 BinaryReader br = new BinaryReader(resultStream);
-                result = ReceiveObjectList(ctx, br).Cast<IPersistenceObject>().FirstOrDefault();
+                result = ReceiveObjects(ctx, br, out auxObjects).Cast<IPersistenceObject>().FirstOrDefault();
             }
             else if (retValType.IsIEnumerable() && retValType.FindElementTypes().First().IsIPersistenceObject())
             {
                 BinaryReader br = new BinaryReader(resultStream);
                 IList lst = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(retValType.FindElementTypes().First()));
-                foreach (object resultObj in ReceiveObjectList(ctx, br))
+                foreach (object resultObj in ReceiveObjects(ctx, br, out auxObjects))
                 {
                     lst.Add(resultObj);
                 }

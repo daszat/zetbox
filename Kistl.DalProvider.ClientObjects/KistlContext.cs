@@ -1015,6 +1015,7 @@ namespace Kistl.DalProvider.Client
             protected override IEnumerable<IPersistenceObject> ExecuteServerCall(KistlContextImpl ctx, IEnumerable<IPersistenceObject> objectsToSubmit, IEnumerable<ObjectNotificationRequest> notificationRequests)
             {
                 IEnumerable<IPersistenceObject> changedObjects;
+                List<IStreamable> auxObjects;
                 Result = ctx.proxy.InvokeServerMethod(
                     ctx,
                     ctx.GetInterfaceType(obj),
@@ -1025,7 +1026,8 @@ namespace Kistl.DalProvider.Client
                     parameter,
                     objectsToSubmit,
                     notificationRequests,
-                    out changedObjects);
+                    out changedObjects,
+                    out auxObjects);
 
                 if (Result != null && Result.GetType().IsIPersistenceObject())
                 {
@@ -1037,6 +1039,14 @@ namespace Kistl.DalProvider.Client
                     for (int i = 0; i < lst.Count; i++)
                     {
                         lst[i] = ctx.AttachRespectingIsolationLevel((IPersistenceObject)lst[i]);
+                    }
+                }
+
+                if (auxObjects != null)
+                {
+                    foreach (IPersistenceObject auxObj in auxObjects)
+                    {
+                        ctx.AttachRespectingIsolationLevel(auxObj);
                     }
                 }
 
