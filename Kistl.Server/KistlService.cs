@@ -455,12 +455,12 @@ namespace Kistl.Server
                         else if (result != null && result.GetType().IsIStreamable())
                         {
                             IStreamable resultObj = (IStreamable)result;
-                            return SendObjects(new IStreamable[] { resultObj }, false).ToArray();
+                            return SendObjects(new IStreamable[] { resultObj }, true).ToArray();
                         }
                         else if (result != null && result.GetType().IsIEnumerable() && result.GetType().FindElementTypes().First().IsIStreamable())
                         {
                             var lst = ((IEnumerable)result).AsQueryable().Cast<IStreamable>().Take(Kistl.API.Helper.MAXLISTCOUNT);
-                            return SendObjects(lst, false).ToArray();
+                            return SendObjects(lst, true).ToArray();
                         }
                         else if (result != null)
                         {
