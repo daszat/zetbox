@@ -12,6 +12,7 @@ namespace Kistl.API
     using System.Runtime.Serialization.Formatters.Binary;
     using System.Text;
     using Kistl.API.Utils;
+    using System.Collections;
 
     /// <summary>
     /// Binary Serializer Helper.
@@ -1090,47 +1091,66 @@ namespace Kistl.API
                 var type = value.GetType();
                 // IsNull
                 sw.Write(false);
-                // Serialize only basic types
-                if (type == typeof(int) || type == typeof(int?) || type.IsEnum || type.IsNullableEnum())
+
+                if (type.IsArray)
                 {
-                    sw.Write((int)value);
-                }
-                else if (type == typeof(bool) || type == typeof(bool?))
-                {
-                    sw.Write((bool)value);
-                }
-                else if (type == typeof(double) || type == typeof(double?))
-                {
-                    sw.Write((double)value);
-                }
-                else if (type == typeof(float) || type == typeof(float?))
-                {
-                    sw.Write((float)value);
-                }
-                else if (type == typeof(string))
-                {
-                    sw.Write((string)value);
-                }
-                else if (type == typeof(decimal) || type == typeof(decimal?))
-                {
-                    sw.Write((decimal)value);
-                }
-                else if (type == typeof(DateTime) || type == typeof(DateTime?))
-                {
-                    BinarySerializer.ToStream((DateTime)value, sw);
-                }
-                else if (type == typeof(Guid) || type == typeof(Guid?))
-                {
-                    BinarySerializer.ToStream((Guid)value, sw);
-                }
-                else if (type.IsICompoundObject())
-                {
-                    BinarySerializer.ToStream((ICompoundObject)value, sw);
+                    var elementType = type.GetElementType();
+                    foreach (var element in (IEnumerable)value)
+                    {
+                        sw.Write(true);
+                        ToStreamInternal(element, elementType, sw);
+                    }
+                    sw.Write(false);
                 }
                 else
                 {
-                    throw new NotSupportedException(string.Format("Can't serialize Value '{0}' of type '{1}'.", value, type));
+                    ToStreamInternal(value, type, sw);
                 }
+            }
+        }
+
+        // Serialize only basic types
+        private static void ToStreamInternal(object value, Type type, BinaryWriter sw)
+        {
+            if (type == typeof(int) || type == typeof(int?) || type.IsEnum || type.IsNullableEnum())
+            {
+                sw.Write((int)value);
+            }
+            else if (type == typeof(bool) || type == typeof(bool?))
+            {
+                sw.Write((bool)value);
+            }
+            else if (type == typeof(double) || type == typeof(double?))
+            {
+                sw.Write((double)value);
+            }
+            else if (type == typeof(float) || type == typeof(float?))
+            {
+                sw.Write((float)value);
+            }
+            else if (type == typeof(string))
+            {
+                sw.Write((string)value);
+            }
+            else if (type == typeof(decimal) || type == typeof(decimal?))
+            {
+                sw.Write((decimal)value);
+            }
+            else if (type == typeof(DateTime) || type == typeof(DateTime?))
+            {
+                BinarySerializer.ToStream((DateTime)value, sw);
+            }
+            else if (type == typeof(Guid) || type == typeof(Guid?))
+            {
+                BinarySerializer.ToStream((Guid)value, sw);
+            }
+            else if (type.IsICompoundObject())
+            {
+                BinarySerializer.ToStream((ICompoundObject)value, sw);
+            }
+            else
+            {
+                throw new NotSupportedException(string.Format("Can't serialize Value '{0}' of type '{1}'.", value, type));
             }
         }
 
@@ -1145,54 +1165,94 @@ namespace Kistl.API
             }
             else
             {
-                // Deserialize only basic types
-                if (type == typeof(int) || type == typeof(int?) || type.IsEnum || type.IsNullableEnum())
+                // Plain arrays
+                if (type.IsArray)
                 {
-                    value = sr.ReadInt32();
+                    var elementType = type.GetElementType();
+                    ArrayList array = new ArrayList();
+                    FromStreamInternalArray(array, sr, elementType);
+                    value = Activator.CreateInstance(type);
+                    array.CopyTo((Array)value);
                 }
-                else if (type == typeof(bool) || type == typeof(bool?))
+                // only IEnumerable<> -> use List<>
+                else if (type.IsGenericType && type.GetGenericArguments().Length == 1 && type.GetGenericTypeDefinition() == typeof(IEnumerable<>))
                 {
-                    value = sr.ReadBoolean();
+                    var elementType = type.FindElementTypes().First();
+                    IList array = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(elementType));
+                    FromStreamInternalArray(array, sr, elementType);
+                    value = array;
                 }
-                else if (type == typeof(double) || type == typeof(double?))
-                {
-                    value = sr.ReadDouble();
-                }
-                else if (type == typeof(float) || type == typeof(float?))
-                {
-                    value = sr.ReadSingle();
-                }
-                else if (type == typeof(string))
-                {
-                    value = sr.ReadString();
-                }
-                else if (type == typeof(decimal) || type == typeof(decimal?))
-                {
-                    value = sr.ReadDecimal();
-                }
-                else if (type == typeof(DateTime) || type == typeof(DateTime?))
-                {
-                    DateTime val;
-                    BinarySerializer.FromStream(out val, sr);
-                    value = val;
-                }
-                else if (type == typeof(Guid) || type == typeof(Guid?))
-                {
-                    Guid val;
-                    BinarySerializer.FromStream(out val, sr);
-                    value = val;
-                }
-                else if (type.IsICompoundObject())
-                {
-                    ICompoundObject val;
-                    BinarySerializer.FromStream(out val, type, sr);
-                    value = val;
-                }
+                // Try plain types
                 else
                 {
-                    throw new NotSupportedException(string.Format("Can't deserialize Value of type '{0}'.", type));
+                    value = FromStreamInternal(type, sr);
                 }
             }
+        }
+
+        private static void FromStreamInternalArray(IList array, BinaryReader sr, Type elementType)
+        {
+            while (true)
+            {
+                var hasValue = sr.ReadBoolean();
+                if (!hasValue) break;
+
+                var elementValue = FromStreamInternal(elementType, sr);
+                array.Add(elementValue);
+            }
+        }
+
+        private static object FromStreamInternal(Type type, BinaryReader sr)
+        {
+            object value;
+            // Deserialize only basic types
+            if (type == typeof(int) || type == typeof(int?) || type.IsEnum || type.IsNullableEnum())
+            {
+                value = sr.ReadInt32();
+            }
+            else if (type == typeof(bool) || type == typeof(bool?))
+            {
+                value = sr.ReadBoolean();
+            }
+            else if (type == typeof(double) || type == typeof(double?))
+            {
+                value = sr.ReadDouble();
+            }
+            else if (type == typeof(float) || type == typeof(float?))
+            {
+                value = sr.ReadSingle();
+            }
+            else if (type == typeof(string))
+            {
+                value = sr.ReadString();
+            }
+            else if (type == typeof(decimal) || type == typeof(decimal?))
+            {
+                value = sr.ReadDecimal();
+            }
+            else if (type == typeof(DateTime) || type == typeof(DateTime?))
+            {
+                DateTime val;
+                BinarySerializer.FromStream(out val, sr);
+                value = val;
+            }
+            else if (type == typeof(Guid) || type == typeof(Guid?))
+            {
+                Guid val;
+                BinarySerializer.FromStream(out val, sr);
+                value = val;
+            }
+            else if (type.IsICompoundObject())
+            {
+                ICompoundObject val;
+                BinarySerializer.FromStream(out val, type, sr);
+                value = val;
+            }
+            else
+            {
+                throw new NotSupportedException(string.Format("Can't deserialize Value of type '{0}'.", type));
+            }
+            return value;
         }
         #endregion
     }
