@@ -110,6 +110,7 @@
     <Compile Include="Converter\IconConverter.cs" />
     <Compile Include="Converter\ImageConverter.cs" />
     <Compile Include="Converter\ImageCtrlConverter.cs" />
+    <Compile Include="Converter\ObjectStateConverter.cs" />
     <Compile Include="CustomControls\ContentAdorner.cs" />
     <Compile Include="CustomControls\DtoDisplayer.xaml.cs">
       <DependentUpon>DtoDisplayer.xaml</DependentUpon>

@@ -24,9 +24,13 @@
             <converter:SystemDrawingConverter x:Key="SystemDrawingConverter" />
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
             <commands:Converter x:Key="CommandConverter" />
-            <tk:TypeNameTemplateSelector x:Key="TypeNameTemplateSelector" />
+            <converter:ObjectStateToTextConverter x:Key="ObjectStateToTextConverter" />
+            <converter:ObjectStateToTextVisibilityConverter x:Key="ObjectStateToTextVisibilityConverter" />
 
-            <converter:HorizontalContentAlignmentConverter x:Key="HorizontalContentAlignmentConverter"/>
+          <tk:TypeNameTemplateSelector x:Key="TypeNameTemplateSelector" />
+
+
+          <converter:HorizontalContentAlignmentConverter x:Key="HorizontalContentAlignmentConverter"/>
             <converter:VerticalContentAlignmentConverter x:Key="VerticalContentAlignmentConverter"/>
             <converter:EmptyStringToCollapsedConverter x:Key="EmptyStringToCollapsedConverter"/>
             <converter:EmptyCountToCollapsedConverter x:Key="EmptyCountToCollapsedConverter"/>

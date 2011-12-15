@@ -247,6 +247,7 @@ namespace Kistl.Client.Presentables
 
         private IDataObject _object;
         public IDataObject Object { get { return _object; } }
+        public DataObjectState ObjectState { get { return _object.ObjectState; } }
 
         public int ID
         {
@@ -476,6 +477,7 @@ namespace Kistl.Client.Presentables
                 OnPropertyChanged("ID");
 
             UpdateToStringCache();
+            OnPropertyChanged("ObjectState");
 
             OnObjectPropertyChanged(e.PropertyName);
         }
