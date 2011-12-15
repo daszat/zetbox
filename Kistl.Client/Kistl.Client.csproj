@@ -360,7 +360,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="TheseMethodsShouldBeImplementedOnKistlObjects.cs" />
     <EmbeddedResource Include="CredentialsResolverResources.de.resx" />
     <EmbeddedResource Include="CredentialsResolverResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

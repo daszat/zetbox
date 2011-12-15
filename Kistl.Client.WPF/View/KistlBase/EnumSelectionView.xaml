@@ -9,6 +9,7 @@
 
     <ComboBox x:Name="cb"
               ItemsSource="{Binding PossibleValues, Mode=OneWay}"
+              IsEditable="True"
               DisplayMemberPath="Value"
               SelectedValuePath="Key"
               IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertedBoolConverter}}"
