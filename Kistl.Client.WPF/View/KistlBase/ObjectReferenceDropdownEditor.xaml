@@ -22,6 +22,10 @@
                              ItemContainerStyle="{StaticResource CommandMenuItem}"/>
             </ctrls:DropDownButton.DropDown>
         </ctrls:DropDownButton>
+        <Image Source="{Binding Value, Converter={StaticResource IconConverter}}"
+               Margin="3 0 3 0"
+               Width="14"
+               Height="14" />
         <ComboBox x:Name="cbValue"
                   IsSynchronizedWithCurrentItem="False"
                   IsEditable="True"
