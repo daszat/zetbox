@@ -29,6 +29,8 @@
         <ComboBox x:Name="cbValue"
                   IsSynchronizedWithCurrentItem="False"
                   IsEditable="True"
+                  Text="{Binding SearchString, Mode=OneWayToSource}"
+                  KeyDown="cbValue_KeyDown"
                   ItemsSource="{Binding PossibleValues, Mode=OneWay, ValidatesOnDataErrors=true}"
                   SelectedItem="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
                   IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertedBoolConverter}}"

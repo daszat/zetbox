@@ -61,5 +61,14 @@ namespace Kistl.Client.WPF.View.KistlBase
             if (dpProp != BackgroundProperty) base.SetHighlightValue(ctrl, dpProp, h, converter, finalConverter);
         }
 
+        private void cbValue_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                e.Handled = true;
+                ViewModel.ResetPossibleValues();
+                cbValue.IsDropDownOpen = true;
+            }
+        }
     }
 }

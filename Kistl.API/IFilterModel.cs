@@ -5,10 +5,12 @@ namespace Kistl.API
     using System.Linq;
     using System.Text;
     using System.Collections;
+    using System.Linq.Expressions;
 
     public interface IFilterModel
     {
         IQueryable GetQuery(IQueryable src);
+        Expression GetExpression(IQueryable src);
         IEnumerable GetResult(IEnumerable src);
         bool IsServerSideFilter { get; }
 

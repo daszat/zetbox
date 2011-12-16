@@ -16,6 +16,8 @@ namespace Kistl.Client.Presentables.ValueViewModels
     using Kistl.App.GUI;
     using Kistl.Client.Models;
     using Kistl.Client.Presentables.ValueViewModels;
+    using System.Linq.Dynamic;
+    using System.Linq.Expressions;
 
     [ViewModelDescriptor]
     public class ObjectReferenceViewModel
@@ -328,7 +330,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
         #region Value
         protected override ParseResult<DataObjectViewModel> ParseValue(string str)
         {
-            throw new NotImplementedException();
+            throw new NotSupportedException();
         }
 
         protected override void OnValueModelPropertyChanged(PropertyChangedEventArgs e)
@@ -367,7 +369,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
 
         private void EnsureValuePossible(DataObjectViewModel value)
         {
-            if (_possibleValues != null)
+            if (_possibleValues != null && value != null)
             {
                 // Add if not found
                 if (!_possibleValues.Contains(value))
@@ -448,20 +450,28 @@ namespace Kistl.Client.Presentables.ValueViewModels
             }
         }
 
-        private IQueryable<IDataObject> GetUntypedQueryHack<T>()
+        private IQueryable GetUntypedQueryHack<T>()
             where T : class, IDataObject
         {
-            return DataContext.GetQuery<T>().Cast<IDataObject>();
+            return DataContext.GetQuery<T>();
         }
 
-        public IQueryable<IDataObject> GetUntypedQuery(ObjectClass cls)
+        public IQueryable GetUntypedQuery(ObjectClass cls)
         {
             var mi = this.GetType().FindGenericMethod(true, "GetUntypedQueryHack", new[] { cls.GetDescribedInterfaceType().Type }, new Type[0]);
-            return (IQueryable<IDataObject>)mi.Invoke(this, new object[0]);
+            return (IQueryable)mi.Invoke(this, new object[0]);
         }
 
+        private static readonly List<ViewModel> _emptyPossibleValuesList = new List<ViewModel>();
         protected virtual List<ViewModel> GetPossibleValues(out bool needMoreButton)
         {
+            // No selection allowed -> no inline search allowed
+            if (!AllowSelectValue)
+            {
+                needMoreButton = false;
+                return _emptyPossibleValuesList;
+            }
+
             var qry = GetUntypedQuery(ReferencedClass);
             qry = ApplyFilter(qry);
             // Abort query of null was returned
@@ -471,7 +481,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 return new List<ViewModel>();
             }
 
-            var lst = qry.Take(PossibleValuesLimit + 1).ToList();
+            var lst = qry.Take(PossibleValuesLimit + 1).OfType<IDataObject>().ToList();
 
             var mdlList = lst
                         .Take(PossibleValuesLimit)
@@ -501,12 +511,81 @@ namespace Kistl.Client.Presentables.ValueViewModels
         /// </remarks>
         /// <param name="qry">Query to filter</param>
         /// <returns>filtered query or null</returns>
-        protected virtual IQueryable<IDataObject> ApplyFilter(IQueryable<IDataObject> qry)
+        protected virtual IQueryable ApplyFilter(IQueryable qry)
         {
-            return qry;
+            FetchFilterModels();
+            if (_filterModels.Count == 0) return qry;
+
+            if (string.IsNullOrEmpty(SearchString))
+            {
+                if (_filterModels.Any(f => f.Required)) return null;
+                return qry;
+            }
+
+            Expression tmp = null;
+
+            foreach (FilterModel f in _filterModels)
+            {
+                var valMdl = f.FilterArgument.Value as ClassValueModel<string>;
+                if (valMdl != null)
+                {
+                    valMdl.Value = SearchString;
+                    var expr = f.GetExpression(qry);
+                    if(tmp == null) 
+                        tmp = expr;
+                    else
+                        tmp = Expression.OrElse(tmp, expr);
+                }
+            }
+
+            if (tmp == null) return qry;
+            return qry.AddFilter(tmp);
         }
 
-        protected void ResetPossibleValues()
+        private List<IFilterModel> _filterModels;
+        private void FetchFilterModels()
+        {
+            if (_filterModels == null)
+            {
+                _filterModels = new List<IFilterModel>();
+                // Resolve default property filter
+                var t = ReferencedClass;
+                while (t != null)
+                {
+                    // Add ObjectClass filter expressions
+                    foreach (var cfc in t.FilterConfigurations)
+                    {
+                        _filterModels.Add(cfc.CreateFilterModel());
+                    }
+
+                    // Add Property filter expressions
+                    foreach (var prop in t.Properties.Where(p => p.FilterConfiguration != null))
+                    {
+                        _filterModels.Add(prop.FilterConfiguration.CreateFilterModel());
+                    }
+                    t = t.BaseObjectClass;
+                }
+            }
+        }
+
+        private string _searchString;
+        public string SearchString
+        {
+            get
+            {
+                return _searchString;
+            }
+            set
+            {
+                if (_searchString != value)
+                {
+                    _searchString = value;
+                    OnPropertyChanged("SearchString");
+                }
+            }
+        }
+
+        public void ResetPossibleValues()
         {
             _possibleValues = null;
             _possibleValuesRO = null;

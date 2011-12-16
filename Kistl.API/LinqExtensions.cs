@@ -250,7 +250,6 @@ namespace Kistl.API
 
         #region // http://stackoverflow.com/questions/110314/linq-to-entities-building-where-clauses-to-test-collections-within-a-many-to-ma#131551
         public static Expression<Func<T, bool>> True<T>() { return f => true; }
-
         public static Expression<Func<T, bool>> False<T>() { return f => false; }
 
         public class ParameterRebinder : ExpressionTreeTranslator

@@ -74,7 +74,7 @@ M: System.Collections.Generic.IEnumerable`1<Kistl.API.IRelationEntry> Kistl.DalP
 # Helper method which is only called by reflection from GetPersistenceObjectQuery
 M: System.Linq.IQueryable`1<Kistl.API.IPersistenceObject> Kistl.DalProvider.NHibernate.NHibernateContext::PrepareQueryable()
 # Helper method which is only called by reflection from GetUntypedQuery
-M: System.Linq.IQueryable`1<Kistl.API.IDataObject> Kistl.Client.Presentables.ValueViewModels.ObjectReferenceViewModel::GetUntypedQueryHack()
+M: System.Linq.IQueryable Kistl.Client.Presentables.ValueViewModels.ObjectReferenceViewModel::GetUntypedQueryHack()
 # Helper method which is only called by reflection from GetAll
 M: System.Collections.Generic.List`1<Kistl.API.IDataObject> Kistl.API.BaseMemoryContext::GetAllHack()
 M: System.Collections.Generic.List`1<Kistl.API.IDataObject> Kistl.API.Server.BaseKistlDataContext::GetAllHack()

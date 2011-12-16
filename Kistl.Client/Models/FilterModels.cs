@@ -15,6 +15,7 @@ namespace Kistl.Client.Models
     using Kistl.App.GUI;
     using Kistl.Client.Presentables.ValueViewModels;
     using ViewModelDescriptors = Kistl.NamedObjects.Gui.ViewModelDescriptors;
+using System.Linq.Expressions;
 
     public class FilterEvaluator
     {
@@ -133,6 +134,20 @@ namespace Kistl.Client.Models
         protected virtual string GetPredicate()
         {
             return string.Empty;
+        }
+
+        public virtual Expression GetExpression(IQueryable src)
+        {
+            if (src == null) throw new ArgumentNullException("src");
+            var p = GetPredicate();
+            if (!string.IsNullOrEmpty(p))
+            {
+                return DynamicExpression.ParseLambda(src.ElementType, typeof(bool), p, FilterArguments.Select(i => i.Value.GetUntypedValue()).ToArray());
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public virtual IQueryable GetQuery(IQueryable src)
@@ -839,6 +854,12 @@ namespace Kistl.Client.Models
         public IQueryable GetQuery(IQueryable src)
         {
             return src.Where(predicate, values);
+        }
+
+        public Expression GetExpression(IQueryable src)
+        {
+            if (src == null) throw new ArgumentNullException("src");
+            return DynamicExpression.ParseLambda(src.ElementType, typeof(bool), predicate);
         }
 
         public IEnumerable GetResult(IEnumerable src)
