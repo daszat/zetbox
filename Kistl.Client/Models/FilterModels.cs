@@ -136,7 +136,7 @@ using System.Linq.Expressions;
             return string.Empty;
         }
 
-        public virtual Expression GetExpression(IQueryable src)
+        public virtual LambdaExpression GetExpression(IQueryable src)
         {
             if (src == null) throw new ArgumentNullException("src");
             var p = GetPredicate();
@@ -856,7 +856,7 @@ using System.Linq.Expressions;
             return src.Where(predicate, values);
         }
 
-        public Expression GetExpression(IQueryable src)
+        public LambdaExpression GetExpression(IQueryable src)
         {
             if (src == null) throw new ArgumentNullException("src");
             return DynamicExpression.ParseLambda(src.ElementType, typeof(bool), predicate);

@@ -10,7 +10,7 @@ namespace Kistl.API
     public interface IFilterModel
     {
         IQueryable GetQuery(IQueryable src);
-        Expression GetExpression(IQueryable src);
+        LambdaExpression GetExpression(IQueryable src);
         IEnumerable GetResult(IEnumerable src);
         bool IsServerSideFilter { get; }
 

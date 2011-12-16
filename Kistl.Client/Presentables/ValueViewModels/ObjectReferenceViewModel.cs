@@ -523,7 +523,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 return qry;
             }
 
-            Expression tmp = null;
+            LambdaExpression tmp = null;
 
             foreach (FilterModel f in _filterModels)
             {
@@ -532,10 +532,10 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 {
                     valMdl.Value = SearchString;
                     var expr = f.GetExpression(qry);
-                    if(tmp == null) 
+                    if (tmp == null)
                         tmp = expr;
                     else
-                        tmp = Expression.OrElse(tmp, expr);
+                        tmp = tmp.OrElse(expr);
                 }
             }
 
