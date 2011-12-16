@@ -67,6 +67,10 @@ namespace Kistl.App.Extensions
                 && requestedControlKind != null
                 && self.DefaultEditorKind.AndParents().Select(i => i.ExportGuid).Contains(requestedControlKind.ExportGuid))
             {
+                if (requestedControlKind != self.DefaultEditorKind)
+                {
+                    Logging.Log.DebugFormat("Using more specific default kind: {0} -> {1}", requestedControlKind.Name, self.DefaultEditorKind.Name);
+                }
                 requestedControlKind = self.DefaultEditorKind;
             }
             else

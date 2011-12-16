@@ -1491,6 +1491,7 @@
     <KistlBase:Name>FilterConfiguration</KistlBase:Name>
     <KistlBase:ObjectClass>e5f93f63-9cb8-40a5-8118-d1d9e479370c</KistlBase:ObjectClass>
     <KistlBase:Properties_pos>202</KistlBase:Properties_pos>
+    <GUI:RequestedKind>b86945ed-9edc-42ca-9ca5-8124fbf47b5c</GUI:RequestedKind>
     <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
     <KistlBase:EagerLoading>false</KistlBase:EagerLoading>
     <KistlBase:RelationEnd>9a0639c1-3313-4387-a197-b7ed056b5583</KistlBase:RelationEnd>
@@ -12282,7 +12283,6 @@
   <GUI:ControlKind ExportGuid="d30d2676-7f2f-4f0d-895a-e46f19b8f526">
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:Name>Kistl.App.GUI.ObjectRefDropdownKind</GUI:Name>
-    <GUI:Parent>b86945ed-9edc-42ca-9ca5-8124fbf47b5c</GUI:Parent>
   </GUI:ControlKind>
   <GUI:ControlKind ExportGuid="d55c9558-4ced-47b0-8eda-81553340fb5b">
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
@@ -16621,6 +16621,7 @@
     <KistlBase:Name>DefaultValue</KistlBase:Name>
     <KistlBase:ObjectClass>e5f93f63-9cb8-40a5-8118-d1d9e479370c</KistlBase:ObjectClass>
     <KistlBase:Properties_pos>204</KistlBase:Properties_pos>
+    <GUI:RequestedKind>b86945ed-9edc-42ca-9ca5-8124fbf47b5c</GUI:RequestedKind>
     <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
     <KistlBase:EagerLoading>true</KistlBase:EagerLoading>
     <KistlBase:RelationEnd>728164e6-be17-44c3-a73f-ed94657a7624</KistlBase:RelationEnd>
@@ -16719,6 +16720,7 @@
     <KistlBase:Name>A</KistlBase:Name>
     <KistlBase:ObjectClass>1c0e894f-4eb4-422f-8094-3095735b4917</KistlBase:ObjectClass>
     <KistlBase:Properties_pos>600</KistlBase:Properties_pos>
+    <GUI:RequestedKind>b86945ed-9edc-42ca-9ca5-8124fbf47b5c</GUI:RequestedKind>
     <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
     <KistlBase:EagerLoading>true</KistlBase:EagerLoading>
     <KistlBase:RelationEnd>c9a3cd17-11a9-487e-b9af-c8e88c9e51de</KistlBase:RelationEnd>
@@ -16732,6 +16734,7 @@
     <KistlBase:Name>B</KistlBase:Name>
     <KistlBase:ObjectClass>1c0e894f-4eb4-422f-8094-3095735b4917</KistlBase:ObjectClass>
     <KistlBase:Properties_pos>700</KistlBase:Properties_pos>
+    <GUI:RequestedKind>b86945ed-9edc-42ca-9ca5-8124fbf47b5c</GUI:RequestedKind>
     <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
     <KistlBase:EagerLoading>true</KistlBase:EagerLoading>
     <KistlBase:RelationEnd>148a4638-801e-4fe8-ac83-cea08114076e</KistlBase:RelationEnd>
@@ -30652,6 +30655,10 @@
   <GUI:ViewModelDescriptor_displayedBy_ControlKind_RelationEntry ExportGuid="c7aea9ea-b7af-4f5f-918c-259de18ef3b4">
     <GUI:A>fc74b434-3801-4e4a-ab67-e65a9e014005</GUI:A>
     <GUI:B>2279b0a6-36b8-4c97-b1fd-9eb1710e74f3</GUI:B>
+  </GUI:ViewModelDescriptor_displayedBy_ControlKind_RelationEntry>
+  <GUI:ViewModelDescriptor_displayedBy_ControlKind_RelationEntry ExportGuid="3a5db637-e165-4fda-95c0-5a55d4132060">
+    <GUI:A>83aae6fd-0fae-4348-b313-737a6e751027</GUI:A>
+    <GUI:B>b86945ed-9edc-42ca-9ca5-8124fbf47b5c</GUI:B>
   </GUI:ViewModelDescriptor_displayedBy_ControlKind_RelationEntry>
   <GUI:SinglePropertyFilterConfiguration ExportGuid="641ef131-f589-400c-9c0c-5ec1c166213e">
     <GUI:ChangedOn>2011-08-05T10:30:56.024511Z</GUI:ChangedOn>

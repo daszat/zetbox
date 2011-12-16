@@ -445,6 +445,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                     }
                     _possibleValues = new ObservableCollection<ViewModel>(mdlList);
                     _possibleValuesRO = new ReadOnlyObservableCollection<ViewModel>(_possibleValues);
+                    EnsureValuePossible(Value);
                 }
                 return _possibleValuesRO;
             }
