@@ -67,7 +67,7 @@ namespace Kistl.Client.Presentables
                 FetchParameterList();
                 _parameterModels = new LookupDictionary<BaseParameter, BaseParameter, BaseValueViewModel>(_parameterList, k => k, v =>
                 {
-                    var result = BaseValueViewModel.Fetch(ViewModelFactory, DataContext, this, v, v.GetValueModel(false /* c.IsNullable */));
+                    var result = BaseValueViewModel.Fetch(ViewModelFactory, DataContext, this, v, v.GetValueModel(v.IsNullable));
                     return result;
                 });
             }

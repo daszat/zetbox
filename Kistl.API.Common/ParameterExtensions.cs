@@ -21,8 +21,10 @@ namespace Kistl.App.Extensions
 
             if (param is BoolParameter && param.IsList)
                 return typeof(IEnumerable<bool>);
-            else if (param is BoolParameter && !param.IsList)
+            else if (param is BoolParameter && !param.IsList && !param.IsNullable)
                 return typeof(bool);
+            else if (param is BoolParameter && !param.IsList && param.IsNullable)
+                return typeof(bool?);
 
             else if (param is CLRObjectParameter)
             {
@@ -36,23 +38,31 @@ namespace Kistl.App.Extensions
 
             else if (param is DateTimeParameter && param.IsList)
                 return typeof(IEnumerable<DateTime>);
-            else if (param is DateTimeParameter && !param.IsList)
+            else if (param is DateTimeParameter && !param.IsList && !param.IsNullable)
                 return typeof(DateTime);
+            else if (param is DateTimeParameter && !param.IsList && param.IsNullable)
+                return typeof(DateTime?);
 
             else if (param is DoubleParameter && param.IsList)
-                return typeof(IEnumerable<Double>);
-            else if (param is DoubleParameter && !param.IsList)
-                return typeof(Double);
+                return typeof(IEnumerable<double>);
+            else if (param is DoubleParameter && !param.IsList && !param.IsNullable)
+                return typeof(double);
+            else if (param is DoubleParameter && !param.IsList && param.IsNullable)
+                return typeof(double?);
 
             else if (param is IntParameter && param.IsList)
                 return typeof(IEnumerable<int>);
-            else if (param is IntParameter && !param.IsList)
+            else if (param is IntParameter && !param.IsList && !param.IsNullable)
                 return typeof(int);
+            else if (param is IntParameter && !param.IsList && param.IsNullable)
+                return typeof(int?);
 
             else if (param is DecimalParameter && param.IsList)
                 return typeof(IEnumerable<decimal>);
-            else if (param is DecimalParameter && !param.IsList)
+            else if (param is DecimalParameter && !param.IsList && !param.IsNullable)
                 return typeof(decimal);
+            else if (param is DecimalParameter && !param.IsList && param.IsNullable)
+                return typeof(decimal?);
 
             else if (param is ObjectReferenceParameter)
             {
@@ -72,6 +82,8 @@ namespace Kistl.App.Extensions
                 Type t = Type.GetType(p.Enumeration.Module.Namespace + "." + p.Enumeration.Name + ", " + Kistl.API.Helper.InterfaceAssembly, true);
                 if (param.IsList)
                     t = typeof(IEnumerable<>).MakeGenericType(t);
+                else if (param.IsNullable)
+                    t = typeof(Nullable<>).MakeGenericType(t);
 
                 return t;
             }
