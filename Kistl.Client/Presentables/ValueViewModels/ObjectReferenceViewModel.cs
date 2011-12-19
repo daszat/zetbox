@@ -582,6 +582,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
                 {
                     _searchString = value;
                     OnPropertyChanged("SearchString");
+                    OnErrorChanged(); // Maybe error state has changed
                 }
             }
         }
@@ -591,6 +592,21 @@ namespace Kistl.Client.Presentables.ValueViewModels
             _possibleValues = null;
             _possibleValuesRO = null;
             OnPropertyChanged("PossibleValues");
+        }
+
+        public override string Error
+        {
+            get
+            {
+                if (Value == null && !string.IsNullOrEmpty(SearchString))
+                {
+                    return ObjectReferenceViewModelResources.Error_SearchString_NoValue;
+                }
+                else
+                {
+                    return base.Error;
+                }
+            }
         }
 
         private GridDisplayConfiguration _displayedColumns = null;

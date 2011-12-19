@@ -123,6 +123,9 @@
   <data name="CreateNewItemAndSetValueCommand_Tooltip" xml:space="preserve">
     <value>Erstellt einen neuen Datensatz</value>
   </data>
+  <data name="Error_SearchString_NoValue" xml:space="preserve">
+    <value>Es wurde kein Datensatz ausgewählt</value>
+  </data>
   <data name="OpenReferenceCommand_Name" xml:space="preserve">
     <value>Öffnen</value>
   </data>
