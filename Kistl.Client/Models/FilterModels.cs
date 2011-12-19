@@ -29,6 +29,9 @@ using System.Linq.Expressions;
     public enum FilterOperators
     {
         Equals = 1,
+        /// <summary>
+        /// Only for strings
+        /// </summary>
         Contains = 2,
         Less = 3,
         LessOrEqual = 4,
@@ -129,6 +132,13 @@ using System.Linq.Expressions;
                 return FilterArguments.Single();
             }
         }
+        protected virtual object[] FilterArgumentValues
+        {
+            get
+            {
+                return FilterArguments.Select(i => i.Value.GetUntypedValue()).ToArray();
+            }
+        }
 
         // Goes to Linq
         protected virtual string GetPredicate()
@@ -142,7 +152,7 @@ using System.Linq.Expressions;
             var p = GetPredicate();
             if (!string.IsNullOrEmpty(p))
             {
-                return DynamicExpression.ParseLambda(src.ElementType, typeof(bool), p, FilterArguments.Select(i => i.Value.GetUntypedValue()).ToArray());
+                return DynamicExpression.ParseLambda(src.ElementType, typeof(bool), p, FilterArgumentValues);
             }
             else
             {
@@ -155,7 +165,7 @@ using System.Linq.Expressions;
             var p = GetPredicate();
             if (!string.IsNullOrEmpty(p))
             {
-                return src.Where(p, FilterArguments.Select(i => i.Value.GetUntypedValue()).ToArray());
+                return src.Where(p, FilterArgumentValues);
             }
             else
             {
@@ -433,6 +443,21 @@ using System.Linq.Expressions;
 
         public FilterOperators Operator { get; set; }
 
+        protected override object[] FilterArgumentValues
+        {
+            get
+            {
+                if (Operator == FilterOperators.Contains)
+                {
+                    return GetStringParts();
+                }
+                else
+                {
+                    return base.FilterArgumentValues;
+                }
+            }
+        }
+
         protected override string GetPredicate()
         {
             switch (Operator)
@@ -440,10 +465,28 @@ using System.Linq.Expressions;
                 case FilterOperators.Equals:
                     return string.Format("{0} = @0", ValueSource.Expression);
                 case FilterOperators.Contains:
-                    return string.Format("{0} != null && {0}.ToLower().Contains(@0.ToLower())", ValueSource.Expression);
+                    {
+                        // Only for strings
+                        var parts = GetStringParts();
+                        var sb = new StringBuilder();
+                        sb.Append("( (1==0) ");
+                        int counter = 0;
+                        foreach (var p in parts)
+                        {
+                            sb.AppendFormat(" || ({0} != null && {0}.ToLower().Contains(@{1}.ToLower()) )", ValueSource.Expression, counter++);
+                        }
+                        sb.Append(")");
+                        return sb.ToString();
+                    }
                 default:
                     throw new InvalidOperationException("Operator is not defined");
             }
+        }
+
+        protected string[] GetStringParts()
+        {
+            var str = (string)FilterArgument.Value.GetUntypedValue();
+            return str.Split(',', ' ', ';').Select(i => i.Trim()).Where(i => !string.IsNullOrEmpty(i)).ToArray();
         }
     }
 
