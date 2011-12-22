@@ -447,6 +447,7 @@ namespace Kistl.Server
 
                         if (result != null && result.GetType() == typeof(string))
                         {
+                            Logging.Facade.Debug("Serializing method result as string");
                             // string is also a IEnumerable, but FindElementTypes returns nothing
                             MemoryStream resultStream = new MemoryStream();
                             new BinaryFormatter().Serialize(resultStream, result);
@@ -454,22 +455,26 @@ namespace Kistl.Server
                         }
                         else if (result != null && result.GetType().IsIStreamable())
                         {
+                            Logging.Facade.Debug("Serializing method result as IStreamable");
                             IStreamable resultObj = (IStreamable)result;
                             return SendObjects(new IStreamable[] { resultObj }, true).ToArray();
                         }
                         else if (result != null && result.GetType().IsIEnumerable() && result.GetType().FindElementTypes().First().IsIStreamable())
                         {
+                            Logging.Facade.Debug("Serializing method result as IEnumerable<IStreamable>");
                             var lst = ((IEnumerable)result).AsQueryable().Cast<IStreamable>().Take(Kistl.API.Helper.MAXLISTCOUNT);
                             return SendObjects(lst, true).ToArray();
                         }
                         else if (result != null)
                         {
+                            Logging.Facade.Debug("Serializing method result as object with BinaryFormatter");
                             MemoryStream resultStream = new MemoryStream();
                             new BinaryFormatter().Serialize(resultStream, result);
                             return resultStream.ToArray();
                         }
                         else
                         {
+                            Logging.Facade.Debug("Serializing empty method");
                             return new byte[] { };
                         }
                     }

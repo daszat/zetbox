@@ -218,7 +218,7 @@ namespace Kistl.API.Server
         internal static void ApplyObjectChanges(IKistlContext ctx, IEnumerable<ObjectNotificationRequest> notificationRequests, List<BaseServerPersistenceObject> objects, Dictionary<IPersistenceObject, IPersistenceObject> entityObjects)
         {
             Logging.Log.InfoFormat(
-                "SetObjects for {0} objects and {1} notification requests called.",
+                "ApplyObjectChanges for {0} objects and {1} notification requests called.",
                 objects.Count(),
                 notificationRequests.Sum(req => req.IDs.Length));
 
