@@ -621,7 +621,7 @@ namespace Kistl.Client.Presentables.DtoViewModels
             {
                 var type = dto.GetType();
                 var elementType = typeof(IEnumerable).IsAssignableFrom(type)
-                    ? type.FindElementTypes().Single(t => t != typeof(object)) ?? type
+                    ? type.FindElementTypes().SingleOrDefault(t => t != typeof(object)) ?? type
                     : type;
 
                 var clsDescriptionProp = elementType.GetProperties().SingleOrDefault(p => p.GetCustomAttributes(typeof(TClassAttr), true).Length > 0);
