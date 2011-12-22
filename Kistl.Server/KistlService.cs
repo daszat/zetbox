@@ -445,6 +445,11 @@ namespace Kistl.Server
 
                         retChangedObjects = SendObjects(changedObjectsList.Cast<IStreamable>(), true).ToArray();
 
+                        if (Logging.Facade.IsDebugEnabled && result != null)
+                        {
+                            Logging.Facade.DebugFormat("Serializing method result type is '{0}'", result.GetType().FullName);
+                        }
+
                         if (result != null && result.GetType() == typeof(string))
                         {
                             Logging.Facade.Debug("Serializing method result as string");
