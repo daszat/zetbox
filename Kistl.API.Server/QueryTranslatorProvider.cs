@@ -80,7 +80,7 @@ namespace Kistl.API.Server
         {
             if (expression == null) throw new ArgumentNullException("expression");
 
-            Type elementType = expression.Type.FindElementTypes().First();
+            Type elementType = expression.Type.FindElementTypes().Single(t => t != typeof(object));
             MethodInfo getSubProvider = typeof(QueryTranslatorProvider<T>).GetMethod("GetSubProvider", BindingFlags.NonPublic | BindingFlags.Instance).MakeGenericMethod(elementType);
             // new' up a generic class with the result of a generic method call, yay!
             IQueryable result = (IQueryable)Activator.CreateInstance(typeof(QueryTranslator<>).MakeGenericType(elementType),
@@ -213,7 +213,7 @@ namespace Kistl.API.Server
 
                 if (result.IsMethodCallExpression("OfType"))
                 {
-                    var type = result.Type.FindElementTypes().First();
+                    var type = result.Type.FindElementTypes().Single(t => t != typeof(object));
                     return AddSecurityFilter(result, Ctx.GetImplementationType(type).ToInterfaceType());
                 }
                 return result;

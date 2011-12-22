@@ -1177,7 +1177,7 @@ namespace Kistl.API
                 // only IEnumerable<> -> use List<>
                 else if (type.IsGenericType && type.GetGenericArguments().Length == 1 && type.GetGenericTypeDefinition() == typeof(IEnumerable<>))
                 {
-                    var elementType = type.FindElementTypes().First();
+                    var elementType = type.FindElementTypes().Single(t => t != typeof(object));
                     IList array = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(elementType));
                     FromStreamInternalArray(array, sr, elementType);
                     value = array;

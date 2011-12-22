@@ -738,7 +738,7 @@ namespace Kistl.API
             if (pi == null) throw new ArgumentOutOfRangeException("propName", string.Format("Property {0} was not found in Type {1}", propName, obj.GetType().FullName));
 
             Type collectionType = obj.GetPropertyType(propName);
-            Type collectionItemType = collectionType.FindElementTypes().First(); // Object is also included
+            Type collectionItemType = collectionType.FindElementTypes().Single(t => t != typeof(object));
             object collection = pi.GetValue(obj, null);
             if (collection == null) throw new ArgumentException("Collection cannot be null");
 
@@ -760,7 +760,7 @@ namespace Kistl.API
             if (col == null) throw new ArgumentNullException("col");
 
             Type collectionType = col.GetType();
-            Type collectionItemType = collectionType.FindElementTypes().First(); // Object is also included
+            Type collectionItemType = collectionType.FindElementTypes().Single(t => t != typeof(object));
 
             if (unique)
             {
@@ -790,7 +790,7 @@ namespace Kistl.API
             if (pi == null) throw new ArgumentOutOfRangeException("propName", string.Format("Property {0} was not found in Type {1}", propName, obj.GetType().FullName));
 
             Type collectionType = obj.GetPropertyType(propName);
-            Type collectionItemType = collectionType.FindElementTypes().First(); // Object is also included
+            Type collectionItemType = collectionType.FindElementTypes().Single(t => t != typeof(object));
             object collection = pi.GetValue(obj, null);
             if (collection == null) throw new ArgumentException("Collection cannot be null");
 
@@ -804,7 +804,7 @@ namespace Kistl.API
             if (col == null) throw new ArgumentNullException("col");
 
             Type collectionType = col.GetType();
-            Type collectionItemType = collectionType.FindElementTypes().First(); // Object is also included
+            Type collectionItemType = collectionType.FindElementTypes().Single(t => t != typeof(object));
 
             MethodInfo remove = collectionType.FindMethod("Remove", new Type[] { collectionItemType });
             if (remove == null) throw new ArgumentException("Cound not find \"Remove\" method of the given Collection");

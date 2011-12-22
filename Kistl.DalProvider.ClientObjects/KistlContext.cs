@@ -1033,7 +1033,7 @@ namespace Kistl.DalProvider.Client
                 {
                     Result = ctx.AttachRespectingIsolationLevel((IPersistenceObject)Result);
                 }
-                else if (Result != null && Result.GetType().IsIList() && Result.GetType().FindElementTypes().First().IsIPersistenceObject())
+                else if (Result != null && Result.GetType().IsIList() && Result.GetType().FindElementTypes().Any(t => t.IsIPersistenceObject()))
                 {
                     var lst = (IList)Result;
                     for (int i = 0; i < lst.Count; i++)

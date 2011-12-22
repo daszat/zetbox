@@ -349,10 +349,10 @@ using Kistl.API.Client.PerfCounter;
                 BinaryReader br = new BinaryReader(resultStream);
                 result = ReceiveObjects(ctx, br, out auxObjects).Cast<IPersistenceObject>().FirstOrDefault();
             }
-            else if (retValType.IsIEnumerable() && retValType.FindElementTypes().First().IsIPersistenceObject())
+            else if (retValType.IsIEnumerable() && retValType.FindElementTypes().Any(t => t.IsIPersistenceObject()))
             {
                 BinaryReader br = new BinaryReader(resultStream);
-                IList lst = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(retValType.FindElementTypes().First()));
+                IList lst = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(retValType.FindElementTypes().Single(t => t.IsIPersistenceObject())));
                 foreach (object resultObj in ReceiveObjects(ctx, br, out auxObjects))
                 {
                     lst.Add(resultObj);

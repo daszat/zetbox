@@ -273,7 +273,7 @@ namespace Kistl.DalProvider.Client
         {
             if (expression == null) { throw new ArgumentNullException("expression"); }
 
-            Type elementType = expression.Type.FindElementTypes().First();
+            Type elementType = expression.Type.FindElementTypes().Single(t => t != typeof(object));
             return (IQueryable)Activator.CreateInstance(typeof(KistlContextQuery<>)
                 .MakeGenericType(elementType), new object[] { _context, _type, this, expression, perfCounter });
         }

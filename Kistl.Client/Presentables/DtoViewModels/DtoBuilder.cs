@@ -225,7 +225,7 @@ namespace Kistl.Client.Presentables.DtoViewModels
 
             var dataProps = new List<PropertyInfo>();
             var percentProps = new Dictionary<string, PropertyInfo>();
-            ExtractProps(dto.GetType().FindElementTypes().FirstOrDefault() ?? dto.GetType(),
+            ExtractProps(dto.GetType().FindElementTypes().SingleOrDefault(t => t != typeof(object)) ?? dto.GetType(),
                 dataProps, percentProps);
 
             var allColumns = new Dictionary<PropertyInfo, DtoColumnViewModel>();
@@ -621,7 +621,7 @@ namespace Kistl.Client.Presentables.DtoViewModels
             {
                 var type = dto.GetType();
                 var elementType = typeof(IEnumerable).IsAssignableFrom(type)
-                    ? type.FindElementTypes().FirstOrDefault() ?? type
+                    ? type.FindElementTypes().Single(t => t != typeof(object)) ?? type
                     : type;
 
                 var clsDescriptionProp = elementType.GetProperties().SingleOrDefault(p => p.GetCustomAttributes(typeof(TClassAttr), true).Length > 0);
