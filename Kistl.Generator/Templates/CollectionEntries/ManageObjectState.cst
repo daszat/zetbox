@@ -12,11 +12,13 @@
 
 		protected override void OnPropertyChanged(string property, object oldValue, object newValue)
         {
-            var oldNotifier = (INotifyingObject)oldValue;
-            var newNotifier = (INotifyingObject)newValue;
             base.OnPropertyChanged(property, oldValue, newValue);
+
             if (property == "A" || property == "B")
             {
+				var oldNotifier = (INotifyPropertyChanged)oldValue;
+				var newNotifier = (INotifyPropertyChanged)newValue;
+
                 if (oldNotifier != null) oldNotifier.PropertyChanged -= new System.ComponentModel.PropertyChangedEventHandler(AB_PropertyChanged);
                 if (newNotifier != null) newNotifier.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(AB_PropertyChanged);
                 ManageMyObjectState();
@@ -33,9 +35,9 @@
 
         private void ManageMyObjectState()
         {
-            if (A != null && A.ObjectState == DataObjectState.Deleted)
+            if (A != null && A.ObjectState == DataObjectState.Deleted && this.Context != null)
                 this.Context.Delete(this);
-            if (B != null && B.ObjectState == DataObjectState.Deleted)
+            if (B != null && B.ObjectState == DataObjectState.Deleted && this.Context != null)
                 this.Context.Delete(this);
 
             if (A != null && B != null && A.ObjectState != DataObjectState.Deleted && B.ObjectState != DataObjectState.Deleted)
