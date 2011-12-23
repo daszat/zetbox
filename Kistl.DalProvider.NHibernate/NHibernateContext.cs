@@ -341,6 +341,7 @@ namespace Kistl.DalProvider.NHibernate
         /// </remarks>
         private IEnumerable<NHibernatePersistenceObject> RelationTopoSort(IEnumerable<NHibernatePersistenceObject> input)
         {
+            List<NHibernatePersistenceObject> result = new List<NHibernatePersistenceObject>();
             var edges = input.ToDictionary(i => i, i => i.GetChildrenToDelete());
 
             // > L ← Empty list that will contain the sorted elements
@@ -356,7 +357,7 @@ namespace Kistl.DalProvider.NHibernate
                 var n = S.Pop();
 
                 // > insert n into L
-                yield return n;
+                result.Add(n);
 
                 // > for each node m with an edge e from n to m do
                 foreach (var m in n.GetParentsToDelete())
@@ -388,6 +389,8 @@ namespace Kistl.DalProvider.NHibernate
             // > else 
             // >     output message (proposed topologically sorted order: L)
             // already done by yielding
+
+            return result;
         }
 
         protected override object CreateUnattachedInstance(InterfaceType ifType)
