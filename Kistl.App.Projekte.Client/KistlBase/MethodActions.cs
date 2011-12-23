@@ -1,4 +1,3 @@
-
 namespace Kistl.App.Base
 {
     using System;
@@ -6,40 +5,29 @@ namespace Kistl.App.Base
     using System.Linq;
     using System.Text;
     using Kistl.API;
-    using Kistl.API.Utils;
     using Kistl.App.Base;
     using Kistl.App.Extensions;
     using Kistl.App.GUI;
     using Kistl.Client;
-    using Kistl.Client.Presentables;
     using ViewModelDescriptors = Kistl.NamedObjects.Gui.ViewModelDescriptors;
 
     /// <summary>
     /// Client implementation
+    /// Sets the Property it's default ValueModelDescriptor.
+    /// GUI Tasks - so Client Actions.
+    /// Note: OnNotifyCreated should always be implemented on the client side. importing or deploying also calls this event.
     /// </summary>
     [Implementor]
-    public static class DataTypeActions
+    public static class MethodActions
     {
         [Invocation]
-        public static void NotifyDeleting(DataType obj)
+        public static void NotifyDeleting(Method obj)
         {
             var ctx = obj.Context;
-            foreach (var prop in obj.Properties)
+            foreach (var p in obj.Parameter)
             {
-                ctx.Delete(prop);
+                ctx.Delete(p);
             }
-
-            foreach (var m in obj.Methods)
-            {
-                ctx.Delete(m);
-            }
-
-            foreach (var c in obj.Constraints)
-            {
-                ctx.Delete(c);
-            }
-
-            obj.ImplementsInterfaces.Clear();
         }
     }
 }
