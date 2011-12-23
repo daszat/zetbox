@@ -145,6 +145,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Templates\CollectionEntries\ManageObjectState.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ManageObjectState.cst</DependentUpon>
+    </Compile>
     <Compile Include="Templates\CollectionEntries\RelationEntry.cs" />
     <Compile Include="Templates\CollectionEntries\RelationEntry.Properties.cs" />
     <Compile Include="Templates\CollectionEntries\CollectionEntryTemplate.cs">
@@ -542,6 +547,10 @@
     <None Include="Templates\CollectionEntries\CollectionEntryTemplate.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>CollectionEntryTemplate.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\CollectionEntries\ManageObjectState.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>ManageObjectState.Designer.cs</LastGenOutput>
     </None>
     <None Include="Templates\CollectionEntries\ValueCollectionEntryParentReference.cst">
       <Generator>Arebis Template Processor</Generator>

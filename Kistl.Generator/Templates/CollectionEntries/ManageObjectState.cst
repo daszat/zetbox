@@ -1,0 +1,43 @@
+﻿<%@ CodeTemplate Language="C#"
+    Name="CollectionEntries.ManageObjectState"
+    ClassName="Kistl.Generator.Templates.CollectionEntries.ManageObjectState"
+    Inherits="Kistl.Generator.ResourceTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.Generator" %>
+<%@ Import Namespace="Kistl.Generator.Extensions" %>
+
+		protected override void OnPropertyChanged(string property, object oldValue, object newValue)
+        {
+            var oldNotifier = (INotifyingObject)oldValue;
+            var newNotifier = (INotifyingObject)newValue;
+            base.OnPropertyChanged(property, oldValue, newValue);
+            if (property == "A" || property == "B")
+            {
+                if (oldNotifier != null) oldNotifier.PropertyChanged -= new System.ComponentModel.PropertyChangedEventHandler(AB_PropertyChanged);
+                if (newNotifier != null) newNotifier.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(AB_PropertyChanged);
+                ManageMyObjectState();
+            }
+        }
+
+        void AB_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "ObjectState")
+            {
+                ManageMyObjectState();
+            }
+        }
+
+        private void ManageMyObjectState()
+        {
+            if (A != null && A.ObjectState == DataObjectState.Deleted)
+                this.Context.Delete(this);
+            if (B != null && B.ObjectState == DataObjectState.Deleted)
+                this.Context.Delete(this);
+
+            if (A != null && B != null && A.ObjectState != DataObjectState.Deleted && B.ObjectState != DataObjectState.Deleted)
+                this.SetUnDeleted();
+        }

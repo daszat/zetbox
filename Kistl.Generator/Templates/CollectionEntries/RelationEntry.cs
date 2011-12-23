@@ -112,6 +112,17 @@ namespace Kistl.Generator.Templates.CollectionEntries
             this.WriteLine();
         }
 
+        protected virtual void ApplyManageObjectState()
+        {
+            ManageObjectState.Call(Host);
+        }
+
+        protected override void ApplyClassTailTemplate()
+        {
+            base.ApplyClassTailTemplate();
+            ApplyManageObjectState();
+        }
+
         protected override bool IsOrdered()
         {
             return rel.NeedsPositionStorage(RelationEndRole.A) || rel.NeedsPositionStorage(RelationEndRole.B);
