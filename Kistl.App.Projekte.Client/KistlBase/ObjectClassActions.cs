@@ -25,5 +25,30 @@ namespace Kistl.App.Base
         {
             obj.DefaultViewModelDescriptor = ViewModelDescriptors.Kistl_Client_Presentables_DataObjectViewModel.Find(obj.Context);
         }
+
+        [Invocation]
+        public static void NotifyDeleting(ObjectClass obj)
+        {
+            var ctx = obj.Context;
+            foreach (var ac in obj.AccessControlList)
+            {
+                ctx.Delete(ac);
+            }
+
+            foreach (var f in obj.FilterConfigurations)
+            {
+                ctx.Delete(f);
+            }
+
+            foreach (var cls in obj.SubClasses)
+            {
+                ctx.Delete(cls);
+            }
+
+            foreach (var rel in obj.GetRelations())
+            {
+                ctx.Delete(rel);
+            }
+        }
     }
 }

@@ -31,17 +31,18 @@ namespace Kistl.App.Base
         [Invocation]
         public static void NotifyDeleting(Relation obj)
         {
+            var ctx = obj.Context;
             if (obj.A != null)
             {
                 obj.A.Type = null;
-                obj.A.Navigator = null;
-                obj.Context.Delete(obj.A);
+                if (obj.A.Navigator != null) ctx.Delete(obj.A.Navigator);
+                ctx.Delete(obj.A);
             }
             if (obj.B != null)
             {
                 obj.B.Type = null;
-                obj.B.Navigator = null;
-                obj.Context.Delete(obj.B);
+                if (obj.B.Navigator != null) ctx.Delete(obj.B.Navigator);
+                ctx.Delete(obj.B);
             }
         }
     }

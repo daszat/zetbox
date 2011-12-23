@@ -101,6 +101,8 @@
     <Compile Include="Gui\IconActions.cs" />
     <Compile Include="KistlBase\BoolPropertyActions.cs" />
     <Compile Include="KistlBase\CalculatedObjectReferencePropertyActions.cs" />
+    <Compile Include="KistlBase\PropertyActions.cs" />
+    <Compile Include="KistlBase\DataTypeActions.cs" />
     <Compile Include="KistlBase\DateTimePropertyActions.cs" />
     <Compile Include="KistlBase\DoublePropertyActions.cs" />
     <Compile Include="KistlBase\EnumerationPropertyActions.cs" />
