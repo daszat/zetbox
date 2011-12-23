@@ -130,6 +130,8 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries
             this.WriteLine("        }");
             this.WriteLine("");
 
+            GetDeletedRelatives.Call(Host, "Parent", null);
+
             ObjectClasses.ProxyClass.Call(Host, ctx, interfaceName, new KeyValuePair<string, string>[0], typeAndNameList);
         }
 

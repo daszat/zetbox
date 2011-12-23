@@ -1,0 +1,34 @@
+﻿<%@ CodeTemplate Language="C#" 
+    Name="CollectionEntries.GetDeletedRelatives"
+    ClassName="Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries.GetDeletedRelatives" 
+    Inherits="Kistl.Generator.ResourceTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="System.Linq" %>
+<%@ Import Namespace="Kistl.API" %>
+<%@ Import Namespace="Kistl.API.Server" %>
+<%@ Import Namespace="Kistl.App.Base" %>
+<%@ Import Namespace="Kistl.App.Extensions" %>
+<%@ Import Namespace="Kistl.Generator" %>
+<%@ Import Namespace="Kistl.Generator.Extensions" %>
+<%@ Parameter Name="aName" Type="string" %>
+<%@ Parameter Name="bName" Type="string" %>
+
+        public override List<NHibernatePersistenceObject> GetParentsToDelete()
+        {
+            var result = base.GetParentsToDelete();
+
+<% if (!string.IsNullOrEmpty(aName)) { %>
+            // Follow <%= aName %>
+            if (this.<%= aName %> != null && this.<%= aName %>.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.<%= aName %>);
+<% } %>
+
+<% if (!string.IsNullOrEmpty(bName)) { %>
+            // Follow <%= bName %>
+            if (this.<%= bName %> != null && this.<%= bName %>.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.<%= bName %>);
+
+<% } %>
+            return result;
+        }

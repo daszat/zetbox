@@ -45,6 +45,16 @@ namespace Kistl.DalProvider.Memory
             _objectState = DataObjectState.New;
         }
 
+        public override void SetDeleted()
+        {
+            _objectState = DataObjectState.Deleted;
+        }
+
+        public override void SetUnDeleted()
+        {
+            _objectState = DataObjectState.Modified;
+        }
+
         public override void ToStream(BinaryWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(sw, auxObjects, eagerLoadLists);
@@ -58,7 +68,7 @@ namespace Kistl.DalProvider.Memory
             return baseResult;
         }
 
-        internal void SetUnmodified()
+        public override void SetUnmodified()
         {
             _objectState = DataObjectState.Unmodified;
         }

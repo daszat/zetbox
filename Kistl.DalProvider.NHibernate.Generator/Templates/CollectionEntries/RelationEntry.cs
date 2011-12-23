@@ -121,6 +121,8 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.CollectionEntries
                 typeAndNameList.Add(new KeyValuePair<string, string>("Guid", "ExportGuid"));
             }
 
+            GetDeletedRelatives.Call(Host, "A", "B");
+
             ObjectClasses.ProxyClass.Call(Host, ctx, interfaceName, new KeyValuePair<string, string>[0], typeAndNameList);
         }
 

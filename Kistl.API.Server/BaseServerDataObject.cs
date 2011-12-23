@@ -84,7 +84,7 @@ namespace Kistl.API.Server
             SetObjectState(DataObjectState.New);
         }
 
-        public void SetUnmodified()
+        public override void SetUnmodified()
         {
             if (this.Context == null) throw new InvalidOperationException("Cannot set object to Unmodified when object has no Context");
 
@@ -96,7 +96,7 @@ namespace Kistl.API.Server
             SetObjectState(DataObjectState.Unmodified);
         }
 
-        public void SetDeleted()
+        public override void SetDeleted()
         {
             if (!_ObjectState.In(DataObjectState.New, DataObjectState.Modified, DataObjectState.Unmodified, DataObjectState.Deleted))
             {
@@ -104,6 +104,16 @@ namespace Kistl.API.Server
             }
 
             SetObjectState(DataObjectState.Deleted);
+        }
+
+        public override void SetUnDeleted()
+        {
+            if (!_ObjectState.In(DataObjectState.Deleted))
+            {
+                throw new InvalidOperationException("Cannot undelete object when in State " + _ObjectState.ToString());
+            }
+
+            SetObjectState(DataObjectState.Modified);            
         }
 
         public override void AttachToContext(IKistlContext ctx)

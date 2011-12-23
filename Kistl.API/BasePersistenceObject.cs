@@ -111,6 +111,10 @@ namespace Kistl.API
         public abstract DataObjectState ObjectState { get; }
 
         public abstract void SetNew();
+        public abstract void SetUnmodified();
+        public abstract void SetDeleted();
+        public abstract void SetUnDeleted();
+        
 
         /// <summary>
         /// Attach this Object to a Context. This Method is called by the Context.

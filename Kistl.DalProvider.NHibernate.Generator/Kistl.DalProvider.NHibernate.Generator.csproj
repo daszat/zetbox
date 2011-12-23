@@ -77,6 +77,11 @@
     <Compile Include="Properties\VersionInfo.Designer.cs">
       <DependentUpon>VersionInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Templates\CollectionEntries\GetDeletedRelatives.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GetDeletedRelatives.cst</DependentUpon>
+    </Compile>
     <Compile Include="Templates\CollectionEntries\RelationEntry.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -315,6 +320,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Templates\CollectionEntries\GetDeletedRelatives.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>GetDeletedRelatives.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Templates\CompoundObjects\Constructors.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>Constructors.Designer.cs</LastGenOutput>

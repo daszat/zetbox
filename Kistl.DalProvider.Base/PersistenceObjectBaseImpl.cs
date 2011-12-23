@@ -72,7 +72,7 @@ namespace Kistl.DalProvider.Base
                 this.Context.Internals().SetModified(this);
         }
 
-        protected void SetUnmodified()
+        public override void SetUnmodified()
         {
             var oldValue = this._ObjectState;
             NotifyPropertyChanging("ObjectState", oldValue, DataObjectState.Unmodified);
@@ -80,7 +80,7 @@ namespace Kistl.DalProvider.Base
             NotifyPropertyChanged("ObjectState", oldValue, DataObjectState.Unmodified);
         }
 
-        protected void SetDeleted()
+        public override void SetDeleted()
         {
             var oldValue = this._ObjectState;
             NotifyPropertyChanging("ObjectState", oldValue, DataObjectState.Deleted);
@@ -88,6 +88,16 @@ namespace Kistl.DalProvider.Base
             if (this.Context != null)
                 this.Context.Internals().SetModified(this);
             NotifyPropertyChanged("ObjectState", oldValue, DataObjectState.Deleted);
+        }
+
+        public override void SetUnDeleted()
+        {
+            var oldValue = this._ObjectState;
+            NotifyPropertyChanging("ObjectState", oldValue, DataObjectState.Modified);
+            this._ObjectState = DataObjectState.Modified;
+            if (this.Context != null)
+                this.Context.Internals().SetModified(this);
+            NotifyPropertyChanged("ObjectState", oldValue, DataObjectState.Modified);
         }
 
         public override void SetNew()

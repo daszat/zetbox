@@ -358,6 +358,21 @@ namespace Kistl.App.Base
         }
 
 
+        public override List<NHibernatePersistenceObject> GetParentsToDelete()
+        {
+            var result = base.GetParentsToDelete();
+
+            // Follow A
+            if (this.A != null && this.A.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.A);
+
+            // Follow B
+            if (this.B != null && this.B.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.B);
+
+            return result;
+        }
+
         public class CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryProxy
             : IProxyObject, ISortKey<int>
         {
@@ -727,6 +742,21 @@ namespace Kistl.App.Base
 
         }
 
+
+        public override List<NHibernatePersistenceObject> GetParentsToDelete()
+        {
+            var result = base.GetParentsToDelete();
+
+            // Follow A
+            if (this.A != null && this.A.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.A);
+
+            // Follow B
+            if (this.B != null && this.B.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.B);
+
+            return result;
+        }
 
         public class DataType_implements_Interface_RelationEntryProxy
             : IProxyObject, ISortKey<int>
@@ -1213,6 +1243,21 @@ namespace at.dasz.DocumentManagement
         }
 
 
+        public override List<NHibernatePersistenceObject> GetParentsToDelete()
+        {
+            var result = base.GetParentsToDelete();
+
+            // Follow A
+            if (this.A != null && this.A.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.A);
+
+            // Follow B
+            if (this.B != null && this.B.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.B);
+
+            return result;
+        }
+
         public class Document_has_Blob_RelationEntryProxy
             : IProxyObject, ISortKey<int>
         {
@@ -1513,6 +1558,21 @@ namespace Kistl.App.Base
 
         }
 
+
+        public override List<NHibernatePersistenceObject> GetParentsToDelete()
+        {
+            var result = base.GetParentsToDelete();
+
+            // Follow A
+            if (this.A != null && this.A.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.A);
+
+            // Follow B
+            if (this.B != null && this.B.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.B);
+
+            return result;
+        }
 
         public class Identity_memberOf_Group_RelationEntryProxy
             : IProxyObject, ISortKey<int>
@@ -1882,6 +1942,21 @@ namespace Kistl.App.Base
         }
 
 
+        public override List<NHibernatePersistenceObject> GetParentsToDelete()
+        {
+            var result = base.GetParentsToDelete();
+
+            // Follow A
+            if (this.A != null && this.A.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.A);
+
+            // Follow B
+            if (this.B != null && this.B.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.B);
+
+            return result;
+        }
+
         public class IndexConstraint_ensures_unique_on_Property_RelationEntryProxy
             : IProxyObject, ISortKey<int>
         {
@@ -2179,6 +2254,21 @@ namespace Kistl.App.Test
         }
 
 
+        public override List<NHibernatePersistenceObject> GetParentsToDelete()
+        {
+            var result = base.GetParentsToDelete();
+
+            // Follow A
+            if (this.A != null && this.A.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.A);
+
+            // Follow B
+            if (this.B != null && this.B.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.B);
+
+            return result;
+        }
+
         public class Muhblah_has_TestCustomObject_RelationEntryProxy
             : IProxyObject, ISortKey<int>
         {
@@ -2473,6 +2563,21 @@ namespace Kistl.App.Test
 
         }
 
+
+        public override List<NHibernatePersistenceObject> GetParentsToDelete()
+        {
+            var result = base.GetParentsToDelete();
+
+            // Follow A
+            if (this.A != null && this.A.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.A);
+
+            // Follow B
+            if (this.B != null && this.B.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.B);
+
+            return result;
+        }
 
         public class N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryProxy
             : IProxyObject, ISortKey<int>
@@ -2842,6 +2947,21 @@ namespace Kistl.App.GUI
 
         }
 
+
+        public override List<NHibernatePersistenceObject> GetParentsToDelete()
+        {
+            var result = base.GetParentsToDelete();
+
+            // Follow A
+            if (this.A != null && this.A.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.A);
+
+            // Follow B
+            if (this.B != null && this.B.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.B);
+
+            return result;
+        }
 
         public class NavigationEntry_accessed_by_Group_RelationEntryProxy
             : IProxyObject, ISortKey<int>
@@ -3326,6 +3446,21 @@ namespace Kistl.App.Projekte
 
         }
 
+
+        public override List<NHibernatePersistenceObject> GetParentsToDelete()
+        {
+            var result = base.GetParentsToDelete();
+
+            // Follow A
+            if (this.A != null && this.A.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.A);
+
+            // Follow B
+            if (this.B != null && this.B.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.B);
+
+            return result;
+        }
 
         public class Projekt_haben_Mitarbeiter_RelationEntryProxy
             : IProxyObject, ISortKey<int>
@@ -3814,6 +3949,21 @@ namespace Kistl.App.Base
 
         }
 
+
+        public override List<NHibernatePersistenceObject> GetParentsToDelete()
+        {
+            var result = base.GetParentsToDelete();
+
+            // Follow A
+            if (this.A != null && this.A.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.A);
+
+            // Follow B
+            if (this.B != null && this.B.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.B);
+
+            return result;
+        }
 
         public class RoleMembership_resolves_Relation_RelationEntryProxy
             : IProxyObject, ISortKey<int>
@@ -4304,6 +4454,21 @@ namespace ZBox.App.SchemaMigration
         }
 
 
+        public override List<NHibernatePersistenceObject> GetParentsToDelete()
+        {
+            var result = base.GetParentsToDelete();
+
+            // Follow A
+            if (this.A != null && this.A.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.A);
+
+            // Follow B
+            if (this.B != null && this.B.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.B);
+
+            return result;
+        }
+
         public class SourceColumn_created_Property_RelationEntryProxy
             : IProxyObject, ISortKey<int>
         {
@@ -4605,6 +4770,21 @@ namespace Kistl.App.GUI
         }
 
 
+        public override List<NHibernatePersistenceObject> GetParentsToDelete()
+        {
+            var result = base.GetParentsToDelete();
+
+            // Follow A
+            if (this.A != null && this.A.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.A);
+
+            // Follow B
+            if (this.B != null && this.B.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.B);
+
+            return result;
+        }
+
         public class Template_hasMenu_Visual_RelationEntryProxy
             : IProxyObject, ISortKey<int>
         {
@@ -4899,6 +5079,21 @@ namespace Kistl.App.Test
 
         }
 
+
+        public override List<NHibernatePersistenceObject> GetParentsToDelete()
+        {
+            var result = base.GetParentsToDelete();
+
+            // Follow A
+            if (this.A != null && this.A.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.A);
+
+            // Follow B
+            if (this.B != null && this.B.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.B);
+
+            return result;
+        }
 
         public class TestStudent_füllt_aus_Fragebogen_RelationEntryProxy
             : IProxyObject, ISortKey<int>
@@ -5382,6 +5577,21 @@ namespace Kistl.App.Base
         }
 
 
+        public override List<NHibernatePersistenceObject> GetParentsToDelete()
+        {
+            var result = base.GetParentsToDelete();
+
+            // Follow A
+            if (this.A != null && this.A.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.A);
+
+            // Follow B
+            if (this.B != null && this.B.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.B);
+
+            return result;
+        }
+
         public class TypeRef_hasGenericArguments_TypeRef_RelationEntryProxy
             : IProxyObject, ISortKey<int>
         {
@@ -5757,6 +5967,21 @@ namespace Kistl.App.GUI
         }
 
 
+        public override List<NHibernatePersistenceObject> GetParentsToDelete()
+        {
+            var result = base.GetParentsToDelete();
+
+            // Follow A
+            if (this.A != null && this.A.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.A);
+
+            // Follow B
+            if (this.B != null && this.B.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.B);
+
+            return result;
+        }
+
         public class ViewDescriptor_supports_TypeRef_RelationEntryProxy
             : IProxyObject, ISortKey<int>
         {
@@ -6127,6 +6352,21 @@ namespace Kistl.App.GUI
         }
 
 
+        public override List<NHibernatePersistenceObject> GetParentsToDelete()
+        {
+            var result = base.GetParentsToDelete();
+
+            // Follow A
+            if (this.A != null && this.A.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.A);
+
+            // Follow B
+            if (this.B != null && this.B.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.B);
+
+            return result;
+        }
+
         public class ViewModelDescriptor_displayedBy_ControlKind_RelationEntryProxy
             : IProxyObject, ISortKey<int>
         {
@@ -6424,6 +6664,21 @@ namespace Kistl.App.GUI
         }
 
 
+        public override List<NHibernatePersistenceObject> GetParentsToDelete()
+        {
+            var result = base.GetParentsToDelete();
+
+            // Follow A
+            if (this.A != null && this.A.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.A);
+
+            // Follow B
+            if (this.B != null && this.B.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.B);
+
+            return result;
+        }
+
         public class Visual_contains_Visual_RelationEntryProxy
             : IProxyObject, ISortKey<int>
         {
@@ -6718,6 +6973,21 @@ namespace Kistl.App.GUI
 
         }
 
+
+        public override List<NHibernatePersistenceObject> GetParentsToDelete()
+        {
+            var result = base.GetParentsToDelete();
+
+            // Follow A
+            if (this.A != null && this.A.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.A);
+
+            // Follow B
+            if (this.B != null && this.B.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.B);
+
+            return result;
+        }
 
         public class Visual_hasContextMenu_Visual_RelationEntryProxy
             : IProxyObject, ISortKey<int>
@@ -7030,6 +7300,17 @@ namespace Kistl.App.Projekte
             //base.SaveOrUpdateTo(session);
         }
 
+
+        public override List<NHibernatePersistenceObject> GetParentsToDelete()
+        {
+            var result = base.GetParentsToDelete();
+
+            // Follow Parent
+            if (this.Parent != null && this.Parent.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.Parent);
+
+            return result;
+        }
 
         public class Kunde_EMails_CollectionEntryProxy
             : IProxyObject, ISortKey<int>
@@ -7363,6 +7644,17 @@ namespace Kistl.App.Test
             //base.SaveOrUpdateTo(session);
         }
 
+
+        public override List<NHibernatePersistenceObject> GetParentsToDelete()
+        {
+            var result = base.GetParentsToDelete();
+
+            // Follow Parent
+            if (this.Parent != null && this.Parent.ObjectState == DataObjectState.Deleted)
+                result.Add((NHibernatePersistenceObject)this.Parent);
+
+            return result;
+        }
 
         public class TestCustomObject_PhoneNumbersOther_CollectionEntryProxy
             : IProxyObject, ISortKey<int>

@@ -28,7 +28,6 @@ namespace Kistl.API.AbstractConsumerTests.N_to_M_relations
         }
 
         [Test]
-        [Ignore("Doesn't work yet")]
         public void should_remove_from_Collection()
         {
             ctx.Delete(bSide1);
