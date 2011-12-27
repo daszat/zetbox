@@ -162,7 +162,7 @@ namespace Kistl.App.Packaging
             }
             catch (Exception ex)
             {
-                Logging.Log.WarnFormat("Warning: Unable to query {0}, but will continue loading MetaObjects. Error was: \n{1}", typeof(T).FullName, ex.GetInnerMessage());
+                Logging.Log.WarnFormat("Warning: Unable to query {0}, but will continue loading MetaObjects: {1}", typeof(T).FullName, ex.GetInnerMessage());
                 return;
             }
 
