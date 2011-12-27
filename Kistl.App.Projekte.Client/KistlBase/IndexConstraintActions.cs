@@ -23,7 +23,6 @@ namespace Kistl.App.Base
         [Invocation]
         public static void NotifyDeleting(IndexConstraint obj)
         {
-            var ctx = obj.Context;
             obj.Properties.Clear();
         }
     }
