@@ -401,14 +401,14 @@ namespace Kistl.App.Base
         }
 
 
-		protected override void OnPropertyChanged(string property, object oldValue, object newValue)
+        protected override void OnPropertyChanged(string property, object oldValue, object newValue)
         {
             base.OnPropertyChanged(property, oldValue, newValue);
 
             if (property == "A" || property == "B")
             {
-				var oldNotifier = (INotifyPropertyChanged)oldValue;
-				var newNotifier = (INotifyPropertyChanged)newValue;
+                var oldNotifier = (INotifyPropertyChanged)oldValue;
+                var newNotifier = (INotifyPropertyChanged)newValue;
 
                 if (oldNotifier != null) oldNotifier.PropertyChanged -= new System.ComponentModel.PropertyChangedEventHandler(AB_PropertyChanged);
                 if (newNotifier != null) newNotifier.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(AB_PropertyChanged);
@@ -431,9 +431,10 @@ namespace Kistl.App.Base
             if (B != null && B.ObjectState == DataObjectState.Deleted && this.Context != null)
                 this.Context.Delete(this);
 
-            if (A != null && B != null && A.ObjectState != DataObjectState.Deleted && B.ObjectState != DataObjectState.Deleted)
+            if (this.ObjectState == DataObjectState.Deleted && A != null && B != null && A.ObjectState != DataObjectState.Deleted && B.ObjectState != DataObjectState.Deleted)
                 this.SetUnDeleted();
-        }    }
+        }
+    }
     // END Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
 }
 
@@ -820,14 +821,14 @@ namespace Kistl.App.Base
         }
 
 
-		protected override void OnPropertyChanged(string property, object oldValue, object newValue)
+        protected override void OnPropertyChanged(string property, object oldValue, object newValue)
         {
             base.OnPropertyChanged(property, oldValue, newValue);
 
             if (property == "A" || property == "B")
             {
-				var oldNotifier = (INotifyPropertyChanged)oldValue;
-				var newNotifier = (INotifyPropertyChanged)newValue;
+                var oldNotifier = (INotifyPropertyChanged)oldValue;
+                var newNotifier = (INotifyPropertyChanged)newValue;
 
                 if (oldNotifier != null) oldNotifier.PropertyChanged -= new System.ComponentModel.PropertyChangedEventHandler(AB_PropertyChanged);
                 if (newNotifier != null) newNotifier.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(AB_PropertyChanged);
@@ -850,9 +851,10 @@ namespace Kistl.App.Base
             if (B != null && B.ObjectState == DataObjectState.Deleted && this.Context != null)
                 this.Context.Delete(this);
 
-            if (A != null && B != null && A.ObjectState != DataObjectState.Deleted && B.ObjectState != DataObjectState.Deleted)
+            if (this.ObjectState == DataObjectState.Deleted && A != null && B != null && A.ObjectState != DataObjectState.Deleted && B.ObjectState != DataObjectState.Deleted)
                 this.SetUnDeleted();
-        }    }
+        }
+    }
     // END Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
 }
 
@@ -1322,14 +1324,14 @@ namespace at.dasz.DocumentManagement
         }
 
 
-		protected override void OnPropertyChanged(string property, object oldValue, object newValue)
+        protected override void OnPropertyChanged(string property, object oldValue, object newValue)
         {
             base.OnPropertyChanged(property, oldValue, newValue);
 
             if (property == "A" || property == "B")
             {
-				var oldNotifier = (INotifyPropertyChanged)oldValue;
-				var newNotifier = (INotifyPropertyChanged)newValue;
+                var oldNotifier = (INotifyPropertyChanged)oldValue;
+                var newNotifier = (INotifyPropertyChanged)newValue;
 
                 if (oldNotifier != null) oldNotifier.PropertyChanged -= new System.ComponentModel.PropertyChangedEventHandler(AB_PropertyChanged);
                 if (newNotifier != null) newNotifier.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(AB_PropertyChanged);
@@ -1352,9 +1354,10 @@ namespace at.dasz.DocumentManagement
             if (B != null && B.ObjectState == DataObjectState.Deleted && this.Context != null)
                 this.Context.Delete(this);
 
-            if (A != null && B != null && A.ObjectState != DataObjectState.Deleted && B.ObjectState != DataObjectState.Deleted)
+            if (this.ObjectState == DataObjectState.Deleted && A != null && B != null && A.ObjectState != DataObjectState.Deleted && B.ObjectState != DataObjectState.Deleted)
                 this.SetUnDeleted();
-        }    }
+        }
+    }
     // END Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
 }
 
@@ -1681,14 +1684,14 @@ namespace Kistl.App.Base
         }
 
 
-		protected override void OnPropertyChanged(string property, object oldValue, object newValue)
+        protected override void OnPropertyChanged(string property, object oldValue, object newValue)
         {
             base.OnPropertyChanged(property, oldValue, newValue);
 
             if (property == "A" || property == "B")
             {
-				var oldNotifier = (INotifyPropertyChanged)oldValue;
-				var newNotifier = (INotifyPropertyChanged)newValue;
+                var oldNotifier = (INotifyPropertyChanged)oldValue;
+                var newNotifier = (INotifyPropertyChanged)newValue;
 
                 if (oldNotifier != null) oldNotifier.PropertyChanged -= new System.ComponentModel.PropertyChangedEventHandler(AB_PropertyChanged);
                 if (newNotifier != null) newNotifier.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(AB_PropertyChanged);
@@ -1711,9 +1714,10 @@ namespace Kistl.App.Base
             if (B != null && B.ObjectState == DataObjectState.Deleted && this.Context != null)
                 this.Context.Delete(this);
 
-            if (A != null && B != null && A.ObjectState != DataObjectState.Deleted && B.ObjectState != DataObjectState.Deleted)
+            if (this.ObjectState == DataObjectState.Deleted && A != null && B != null && A.ObjectState != DataObjectState.Deleted && B.ObjectState != DataObjectState.Deleted)
                 this.SetUnDeleted();
-        }    }
+        }
+    }
     // END Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
 }
 
@@ -2100,14 +2104,14 @@ namespace Kistl.App.Base
         }
 
 
-		protected override void OnPropertyChanged(string property, object oldValue, object newValue)
+        protected override void OnPropertyChanged(string property, object oldValue, object newValue)
         {
             base.OnPropertyChanged(property, oldValue, newValue);
 
             if (property == "A" || property == "B")
             {
-				var oldNotifier = (INotifyPropertyChanged)oldValue;
-				var newNotifier = (INotifyPropertyChanged)newValue;
+                var oldNotifier = (INotifyPropertyChanged)oldValue;
+                var newNotifier = (INotifyPropertyChanged)newValue;
 
                 if (oldNotifier != null) oldNotifier.PropertyChanged -= new System.ComponentModel.PropertyChangedEventHandler(AB_PropertyChanged);
                 if (newNotifier != null) newNotifier.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(AB_PropertyChanged);
@@ -2130,9 +2134,10 @@ namespace Kistl.App.Base
             if (B != null && B.ObjectState == DataObjectState.Deleted && this.Context != null)
                 this.Context.Delete(this);
 
-            if (A != null && B != null && A.ObjectState != DataObjectState.Deleted && B.ObjectState != DataObjectState.Deleted)
+            if (this.ObjectState == DataObjectState.Deleted && A != null && B != null && A.ObjectState != DataObjectState.Deleted && B.ObjectState != DataObjectState.Deleted)
                 this.SetUnDeleted();
-        }    }
+        }
+    }
     // END Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
 }
 
@@ -2459,14 +2464,14 @@ namespace Kistl.App.Test
         }
 
 
-		protected override void OnPropertyChanged(string property, object oldValue, object newValue)
+        protected override void OnPropertyChanged(string property, object oldValue, object newValue)
         {
             base.OnPropertyChanged(property, oldValue, newValue);
 
             if (property == "A" || property == "B")
             {
-				var oldNotifier = (INotifyPropertyChanged)oldValue;
-				var newNotifier = (INotifyPropertyChanged)newValue;
+                var oldNotifier = (INotifyPropertyChanged)oldValue;
+                var newNotifier = (INotifyPropertyChanged)newValue;
 
                 if (oldNotifier != null) oldNotifier.PropertyChanged -= new System.ComponentModel.PropertyChangedEventHandler(AB_PropertyChanged);
                 if (newNotifier != null) newNotifier.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(AB_PropertyChanged);
@@ -2489,9 +2494,10 @@ namespace Kistl.App.Test
             if (B != null && B.ObjectState == DataObjectState.Deleted && this.Context != null)
                 this.Context.Delete(this);
 
-            if (A != null && B != null && A.ObjectState != DataObjectState.Deleted && B.ObjectState != DataObjectState.Deleted)
+            if (this.ObjectState == DataObjectState.Deleted && A != null && B != null && A.ObjectState != DataObjectState.Deleted && B.ObjectState != DataObjectState.Deleted)
                 this.SetUnDeleted();
-        }    }
+        }
+    }
     // END Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
 }
 
@@ -2818,14 +2824,14 @@ namespace Kistl.App.Test
         }
 
 
-		protected override void OnPropertyChanged(string property, object oldValue, object newValue)
+        protected override void OnPropertyChanged(string property, object oldValue, object newValue)
         {
             base.OnPropertyChanged(property, oldValue, newValue);
 
             if (property == "A" || property == "B")
             {
-				var oldNotifier = (INotifyPropertyChanged)oldValue;
-				var newNotifier = (INotifyPropertyChanged)newValue;
+                var oldNotifier = (INotifyPropertyChanged)oldValue;
+                var newNotifier = (INotifyPropertyChanged)newValue;
 
                 if (oldNotifier != null) oldNotifier.PropertyChanged -= new System.ComponentModel.PropertyChangedEventHandler(AB_PropertyChanged);
                 if (newNotifier != null) newNotifier.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(AB_PropertyChanged);
@@ -2848,9 +2854,10 @@ namespace Kistl.App.Test
             if (B != null && B.ObjectState == DataObjectState.Deleted && this.Context != null)
                 this.Context.Delete(this);
 
-            if (A != null && B != null && A.ObjectState != DataObjectState.Deleted && B.ObjectState != DataObjectState.Deleted)
+            if (this.ObjectState == DataObjectState.Deleted && A != null && B != null && A.ObjectState != DataObjectState.Deleted && B.ObjectState != DataObjectState.Deleted)
                 this.SetUnDeleted();
-        }    }
+        }
+    }
     // END Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
 }
 
@@ -3241,14 +3248,14 @@ namespace Kistl.App.GUI
         }
 
 
-		protected override void OnPropertyChanged(string property, object oldValue, object newValue)
+        protected override void OnPropertyChanged(string property, object oldValue, object newValue)
         {
             base.OnPropertyChanged(property, oldValue, newValue);
 
             if (property == "A" || property == "B")
             {
-				var oldNotifier = (INotifyPropertyChanged)oldValue;
-				var newNotifier = (INotifyPropertyChanged)newValue;
+                var oldNotifier = (INotifyPropertyChanged)oldValue;
+                var newNotifier = (INotifyPropertyChanged)newValue;
 
                 if (oldNotifier != null) oldNotifier.PropertyChanged -= new System.ComponentModel.PropertyChangedEventHandler(AB_PropertyChanged);
                 if (newNotifier != null) newNotifier.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(AB_PropertyChanged);
@@ -3271,9 +3278,10 @@ namespace Kistl.App.GUI
             if (B != null && B.ObjectState == DataObjectState.Deleted && this.Context != null)
                 this.Context.Delete(this);
 
-            if (A != null && B != null && A.ObjectState != DataObjectState.Deleted && B.ObjectState != DataObjectState.Deleted)
+            if (this.ObjectState == DataObjectState.Deleted && A != null && B != null && A.ObjectState != DataObjectState.Deleted && B.ObjectState != DataObjectState.Deleted)
                 this.SetUnDeleted();
-        }    }
+        }
+    }
     // END Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
 }
 
@@ -3742,14 +3750,14 @@ namespace Kistl.App.Projekte
         }
 
 
-		protected override void OnPropertyChanged(string property, object oldValue, object newValue)
+        protected override void OnPropertyChanged(string property, object oldValue, object newValue)
         {
             base.OnPropertyChanged(property, oldValue, newValue);
 
             if (property == "A" || property == "B")
             {
-				var oldNotifier = (INotifyPropertyChanged)oldValue;
-				var newNotifier = (INotifyPropertyChanged)newValue;
+                var oldNotifier = (INotifyPropertyChanged)oldValue;
+                var newNotifier = (INotifyPropertyChanged)newValue;
 
                 if (oldNotifier != null) oldNotifier.PropertyChanged -= new System.ComponentModel.PropertyChangedEventHandler(AB_PropertyChanged);
                 if (newNotifier != null) newNotifier.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(AB_PropertyChanged);
@@ -3772,9 +3780,10 @@ namespace Kistl.App.Projekte
             if (B != null && B.ObjectState == DataObjectState.Deleted && this.Context != null)
                 this.Context.Delete(this);
 
-            if (A != null && B != null && A.ObjectState != DataObjectState.Deleted && B.ObjectState != DataObjectState.Deleted)
+            if (this.ObjectState == DataObjectState.Deleted && A != null && B != null && A.ObjectState != DataObjectState.Deleted && B.ObjectState != DataObjectState.Deleted)
                 this.SetUnDeleted();
-        }    }
+        }
+    }
     // END Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
 }
 
@@ -4243,14 +4252,14 @@ namespace Kistl.App.Base
         }
 
 
-		protected override void OnPropertyChanged(string property, object oldValue, object newValue)
+        protected override void OnPropertyChanged(string property, object oldValue, object newValue)
         {
             base.OnPropertyChanged(property, oldValue, newValue);
 
             if (property == "A" || property == "B")
             {
-				var oldNotifier = (INotifyPropertyChanged)oldValue;
-				var newNotifier = (INotifyPropertyChanged)newValue;
+                var oldNotifier = (INotifyPropertyChanged)oldValue;
+                var newNotifier = (INotifyPropertyChanged)newValue;
 
                 if (oldNotifier != null) oldNotifier.PropertyChanged -= new System.ComponentModel.PropertyChangedEventHandler(AB_PropertyChanged);
                 if (newNotifier != null) newNotifier.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(AB_PropertyChanged);
@@ -4273,9 +4282,10 @@ namespace Kistl.App.Base
             if (B != null && B.ObjectState == DataObjectState.Deleted && this.Context != null)
                 this.Context.Delete(this);
 
-            if (A != null && B != null && A.ObjectState != DataObjectState.Deleted && B.ObjectState != DataObjectState.Deleted)
+            if (this.ObjectState == DataObjectState.Deleted && A != null && B != null && A.ObjectState != DataObjectState.Deleted && B.ObjectState != DataObjectState.Deleted)
                 this.SetUnDeleted();
-        }    }
+        }
+    }
     // END Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
 }
 
@@ -4748,14 +4758,14 @@ namespace ZBox.App.SchemaMigration
         }
 
 
-		protected override void OnPropertyChanged(string property, object oldValue, object newValue)
+        protected override void OnPropertyChanged(string property, object oldValue, object newValue)
         {
             base.OnPropertyChanged(property, oldValue, newValue);
 
             if (property == "A" || property == "B")
             {
-				var oldNotifier = (INotifyPropertyChanged)oldValue;
-				var newNotifier = (INotifyPropertyChanged)newValue;
+                var oldNotifier = (INotifyPropertyChanged)oldValue;
+                var newNotifier = (INotifyPropertyChanged)newValue;
 
                 if (oldNotifier != null) oldNotifier.PropertyChanged -= new System.ComponentModel.PropertyChangedEventHandler(AB_PropertyChanged);
                 if (newNotifier != null) newNotifier.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(AB_PropertyChanged);
@@ -4778,9 +4788,10 @@ namespace ZBox.App.SchemaMigration
             if (B != null && B.ObjectState == DataObjectState.Deleted && this.Context != null)
                 this.Context.Delete(this);
 
-            if (A != null && B != null && A.ObjectState != DataObjectState.Deleted && B.ObjectState != DataObjectState.Deleted)
+            if (this.ObjectState == DataObjectState.Deleted && A != null && B != null && A.ObjectState != DataObjectState.Deleted && B.ObjectState != DataObjectState.Deleted)
                 this.SetUnDeleted();
-        }    }
+        }
+    }
     // END Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
 }
 
@@ -5107,14 +5118,14 @@ namespace Kistl.App.GUI
         }
 
 
-		protected override void OnPropertyChanged(string property, object oldValue, object newValue)
+        protected override void OnPropertyChanged(string property, object oldValue, object newValue)
         {
             base.OnPropertyChanged(property, oldValue, newValue);
 
             if (property == "A" || property == "B")
             {
-				var oldNotifier = (INotifyPropertyChanged)oldValue;
-				var newNotifier = (INotifyPropertyChanged)newValue;
+                var oldNotifier = (INotifyPropertyChanged)oldValue;
+                var newNotifier = (INotifyPropertyChanged)newValue;
 
                 if (oldNotifier != null) oldNotifier.PropertyChanged -= new System.ComponentModel.PropertyChangedEventHandler(AB_PropertyChanged);
                 if (newNotifier != null) newNotifier.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(AB_PropertyChanged);
@@ -5137,9 +5148,10 @@ namespace Kistl.App.GUI
             if (B != null && B.ObjectState == DataObjectState.Deleted && this.Context != null)
                 this.Context.Delete(this);
 
-            if (A != null && B != null && A.ObjectState != DataObjectState.Deleted && B.ObjectState != DataObjectState.Deleted)
+            if (this.ObjectState == DataObjectState.Deleted && A != null && B != null && A.ObjectState != DataObjectState.Deleted && B.ObjectState != DataObjectState.Deleted)
                 this.SetUnDeleted();
-        }    }
+        }
+    }
     // END Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
 }
 
@@ -5466,14 +5478,14 @@ namespace Kistl.App.Test
         }
 
 
-		protected override void OnPropertyChanged(string property, object oldValue, object newValue)
+        protected override void OnPropertyChanged(string property, object oldValue, object newValue)
         {
             base.OnPropertyChanged(property, oldValue, newValue);
 
             if (property == "A" || property == "B")
             {
-				var oldNotifier = (INotifyPropertyChanged)oldValue;
-				var newNotifier = (INotifyPropertyChanged)newValue;
+                var oldNotifier = (INotifyPropertyChanged)oldValue;
+                var newNotifier = (INotifyPropertyChanged)newValue;
 
                 if (oldNotifier != null) oldNotifier.PropertyChanged -= new System.ComponentModel.PropertyChangedEventHandler(AB_PropertyChanged);
                 if (newNotifier != null) newNotifier.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(AB_PropertyChanged);
@@ -5496,9 +5508,10 @@ namespace Kistl.App.Test
             if (B != null && B.ObjectState == DataObjectState.Deleted && this.Context != null)
                 this.Context.Delete(this);
 
-            if (A != null && B != null && A.ObjectState != DataObjectState.Deleted && B.ObjectState != DataObjectState.Deleted)
+            if (this.ObjectState == DataObjectState.Deleted && A != null && B != null && A.ObjectState != DataObjectState.Deleted && B.ObjectState != DataObjectState.Deleted)
                 this.SetUnDeleted();
-        }    }
+        }
+    }
     // END Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
 }
 
@@ -5970,14 +5983,14 @@ namespace Kistl.App.Base
         }
 
 
-		protected override void OnPropertyChanged(string property, object oldValue, object newValue)
+        protected override void OnPropertyChanged(string property, object oldValue, object newValue)
         {
             base.OnPropertyChanged(property, oldValue, newValue);
 
             if (property == "A" || property == "B")
             {
-				var oldNotifier = (INotifyPropertyChanged)oldValue;
-				var newNotifier = (INotifyPropertyChanged)newValue;
+                var oldNotifier = (INotifyPropertyChanged)oldValue;
+                var newNotifier = (INotifyPropertyChanged)newValue;
 
                 if (oldNotifier != null) oldNotifier.PropertyChanged -= new System.ComponentModel.PropertyChangedEventHandler(AB_PropertyChanged);
                 if (newNotifier != null) newNotifier.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(AB_PropertyChanged);
@@ -6000,9 +6013,10 @@ namespace Kistl.App.Base
             if (B != null && B.ObjectState == DataObjectState.Deleted && this.Context != null)
                 this.Context.Delete(this);
 
-            if (A != null && B != null && A.ObjectState != DataObjectState.Deleted && B.ObjectState != DataObjectState.Deleted)
+            if (this.ObjectState == DataObjectState.Deleted && A != null && B != null && A.ObjectState != DataObjectState.Deleted && B.ObjectState != DataObjectState.Deleted)
                 this.SetUnDeleted();
-        }    }
+        }
+    }
     // END Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
 }
 
@@ -6393,14 +6407,14 @@ namespace Kistl.App.GUI
         }
 
 
-		protected override void OnPropertyChanged(string property, object oldValue, object newValue)
+        protected override void OnPropertyChanged(string property, object oldValue, object newValue)
         {
             base.OnPropertyChanged(property, oldValue, newValue);
 
             if (property == "A" || property == "B")
             {
-				var oldNotifier = (INotifyPropertyChanged)oldValue;
-				var newNotifier = (INotifyPropertyChanged)newValue;
+                var oldNotifier = (INotifyPropertyChanged)oldValue;
+                var newNotifier = (INotifyPropertyChanged)newValue;
 
                 if (oldNotifier != null) oldNotifier.PropertyChanged -= new System.ComponentModel.PropertyChangedEventHandler(AB_PropertyChanged);
                 if (newNotifier != null) newNotifier.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(AB_PropertyChanged);
@@ -6423,9 +6437,10 @@ namespace Kistl.App.GUI
             if (B != null && B.ObjectState == DataObjectState.Deleted && this.Context != null)
                 this.Context.Delete(this);
 
-            if (A != null && B != null && A.ObjectState != DataObjectState.Deleted && B.ObjectState != DataObjectState.Deleted)
+            if (this.ObjectState == DataObjectState.Deleted && A != null && B != null && A.ObjectState != DataObjectState.Deleted && B.ObjectState != DataObjectState.Deleted)
                 this.SetUnDeleted();
-        }    }
+        }
+    }
     // END Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
 }
 
@@ -6812,14 +6827,14 @@ namespace Kistl.App.GUI
         }
 
 
-		protected override void OnPropertyChanged(string property, object oldValue, object newValue)
+        protected override void OnPropertyChanged(string property, object oldValue, object newValue)
         {
             base.OnPropertyChanged(property, oldValue, newValue);
 
             if (property == "A" || property == "B")
             {
-				var oldNotifier = (INotifyPropertyChanged)oldValue;
-				var newNotifier = (INotifyPropertyChanged)newValue;
+                var oldNotifier = (INotifyPropertyChanged)oldValue;
+                var newNotifier = (INotifyPropertyChanged)newValue;
 
                 if (oldNotifier != null) oldNotifier.PropertyChanged -= new System.ComponentModel.PropertyChangedEventHandler(AB_PropertyChanged);
                 if (newNotifier != null) newNotifier.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(AB_PropertyChanged);
@@ -6842,9 +6857,10 @@ namespace Kistl.App.GUI
             if (B != null && B.ObjectState == DataObjectState.Deleted && this.Context != null)
                 this.Context.Delete(this);
 
-            if (A != null && B != null && A.ObjectState != DataObjectState.Deleted && B.ObjectState != DataObjectState.Deleted)
+            if (this.ObjectState == DataObjectState.Deleted && A != null && B != null && A.ObjectState != DataObjectState.Deleted && B.ObjectState != DataObjectState.Deleted)
                 this.SetUnDeleted();
-        }    }
+        }
+    }
     // END Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
 }
 
@@ -7171,14 +7187,14 @@ namespace Kistl.App.GUI
         }
 
 
-		protected override void OnPropertyChanged(string property, object oldValue, object newValue)
+        protected override void OnPropertyChanged(string property, object oldValue, object newValue)
         {
             base.OnPropertyChanged(property, oldValue, newValue);
 
             if (property == "A" || property == "B")
             {
-				var oldNotifier = (INotifyPropertyChanged)oldValue;
-				var newNotifier = (INotifyPropertyChanged)newValue;
+                var oldNotifier = (INotifyPropertyChanged)oldValue;
+                var newNotifier = (INotifyPropertyChanged)newValue;
 
                 if (oldNotifier != null) oldNotifier.PropertyChanged -= new System.ComponentModel.PropertyChangedEventHandler(AB_PropertyChanged);
                 if (newNotifier != null) newNotifier.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(AB_PropertyChanged);
@@ -7201,9 +7217,10 @@ namespace Kistl.App.GUI
             if (B != null && B.ObjectState == DataObjectState.Deleted && this.Context != null)
                 this.Context.Delete(this);
 
-            if (A != null && B != null && A.ObjectState != DataObjectState.Deleted && B.ObjectState != DataObjectState.Deleted)
+            if (this.ObjectState == DataObjectState.Deleted && A != null && B != null && A.ObjectState != DataObjectState.Deleted && B.ObjectState != DataObjectState.Deleted)
                 this.SetUnDeleted();
-        }    }
+        }
+    }
     // END Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
 }
 
@@ -7530,14 +7547,14 @@ namespace Kistl.App.GUI
         }
 
 
-		protected override void OnPropertyChanged(string property, object oldValue, object newValue)
+        protected override void OnPropertyChanged(string property, object oldValue, object newValue)
         {
             base.OnPropertyChanged(property, oldValue, newValue);
 
             if (property == "A" || property == "B")
             {
-				var oldNotifier = (INotifyPropertyChanged)oldValue;
-				var newNotifier = (INotifyPropertyChanged)newValue;
+                var oldNotifier = (INotifyPropertyChanged)oldValue;
+                var newNotifier = (INotifyPropertyChanged)newValue;
 
                 if (oldNotifier != null) oldNotifier.PropertyChanged -= new System.ComponentModel.PropertyChangedEventHandler(AB_PropertyChanged);
                 if (newNotifier != null) newNotifier.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(AB_PropertyChanged);
@@ -7560,9 +7577,10 @@ namespace Kistl.App.GUI
             if (B != null && B.ObjectState == DataObjectState.Deleted && this.Context != null)
                 this.Context.Delete(this);
 
-            if (A != null && B != null && A.ObjectState != DataObjectState.Deleted && B.ObjectState != DataObjectState.Deleted)
+            if (this.ObjectState == DataObjectState.Deleted && A != null && B != null && A.ObjectState != DataObjectState.Deleted && B.ObjectState != DataObjectState.Deleted)
                 this.SetUnDeleted();
-        }    }
+        }
+    }
     // END Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
 }
 
