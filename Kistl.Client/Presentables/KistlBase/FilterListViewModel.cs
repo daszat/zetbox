@@ -223,6 +223,14 @@ namespace Kistl.Client.Presentables.KistlBase
             if (mdl is IUIFilterModel)
             {
                 var uimdl = (IUIFilterModel)mdl;
+                
+                var vmdl = FilterViewModel.Fetch(ViewModelFactory, DataContext, this, uimdl);
+                vmdl.RequestedKind = uimdl.RequestedKind;
+                vmdl.RespectRequiredFilter = RespectRequiredFilter;
+                
+                var levmdl = FilterListEntryViewModel.Fetch(ViewModelFactory, DataContext, this, vmdl);
+                levmdl.IsUserFilter = allowRemove;
+
                 // attach change events
                 uimdl.FilterChanged += new EventHandler(delegate(object s, EventArgs a)
                 {
@@ -238,13 +246,6 @@ namespace Kistl.Client.Presentables.KistlBase
                         OnExecutePostFilter();
                     }
                 });
-
-                var vmdl = FilterViewModel.Fetch(ViewModelFactory, DataContext, this, uimdl);
-                vmdl.RequestedKind = uimdl.RequestedKind;
-                vmdl.RespectRequiredFilter = RespectRequiredFilter;
-                
-                var levmdl = FilterListEntryViewModel.Fetch(ViewModelFactory, DataContext, this, vmdl);
-                levmdl.IsUserFilter = allowRemove;
 
                 _FilterViewModels.Add(vmdl);
                 _FilterListEntryViewModels.Add(levmdl);
