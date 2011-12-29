@@ -30,8 +30,11 @@ namespace Kistl.Client.WPF.View.DocumentManagement
 
         void WPFPreviewControl_Unloaded(object sender, RoutedEventArgs e)
         {
-            pManager.Dispose();
-            pManager = null;
+            if (pManager != null)
+            {
+                pManager.Dispose();
+                pManager = null;
+            }
         }
 
         void host_Loaded(object sender, RoutedEventArgs e)
