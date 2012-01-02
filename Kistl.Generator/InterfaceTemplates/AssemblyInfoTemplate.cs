@@ -18,6 +18,7 @@ namespace Kistl.Generator.InterfaceTemplates
         {
             base.ApplyAdditionalAssemblyInfo();
             this.WriteLine("[assembly: System.CLSCompliantAttribute(true)]");
+            this.WriteLine("[assembly: Kistl.API.KistlGeneratedVersion(\"" + Guid.NewGuid() + "\")]");
         }
     }
 }
