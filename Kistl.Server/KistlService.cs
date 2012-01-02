@@ -392,7 +392,7 @@ namespace Kistl.Server
 
         public byte[] InvokeServerMethod(SerializableType type, int ID, string method, SerializableType[] parameterTypes, byte[] parameterArray, byte[] changedObjectsArray, ObjectNotificationRequest[] notificationRequests, out byte[] retChangedObjects)
         {
-            using (Logging.Facade.DebugTraceMethodCallFormat("InvokeServerMethod", "method={0}, ID={1}", method, ID))
+            using (Logging.Facade.DebugTraceMethodCallFormat("InvokeServerMethod:" + method, "method={0}, ID={1}", method, ID))
             {
                 if (type == null)
                     throw new ArgumentNullException("type");
@@ -410,22 +410,21 @@ namespace Kistl.Server
 
                 try
                 {
-
                     DebugLogIdentity();
 
                     using (IKistlContext ctx = _ctxFactory())
                     {
                         var parameter = new MemoryStream(parameterArray);
                         parameter.Seek(0, SeekOrigin.Begin);
-                        List<object> parameterList = new List<object>(); 
+                        List<object> parameterList = new List<object>();
                         var parameterReader = new BinaryReader(parameter);
                         foreach (var t in parameterTypes)
-                        { 
+                        {
                             object val;
                             BinarySerializer.FromStream(out val,
                                 t.GetSystemType().IsIStreamable()
                                     ? ctx.ToImplementationType(ctx.GetInterfaceType(t.GetSystemType())).Type
-                                    : t.GetSystemType(), 
+                                    : t.GetSystemType(),
                                 parameterReader);
                             parameterList.Add(val);
                         }
