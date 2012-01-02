@@ -144,8 +144,7 @@ namespace Kistl.API.Utils
 
                 watch.Start();
 
-                // only use the actual method name for NDC
-                stack = log4net.NDC.Push(Method.Split('.').Last());
+                stack = log4net.NDC.Push(Method);
             }
 
             /// <summary>
