@@ -43,10 +43,11 @@ namespace Kistl.Server
         /// <summary>
         /// Puts a number of changed objects into the database. The resultant objects are sent back to the client.
         /// </summary>
+        /// <param name="version">Current version of generated Kistl.Objects assembly</param>
         /// <param name="msgArray">a streamable list of <see cref="IPersistenceObject"/>s</param>
         /// <param name="notificationRequests">A list of objects the client wants to be notified about, if they change.</param>
         /// <returns>a streamable list of <see cref="IPersistenceObject"/>s</returns>
-        public byte[] SetObjects(byte[] msgArray, ObjectNotificationRequest[] notificationRequests)
+        public byte[] SetObjects(Guid version, byte[] msgArray, ObjectNotificationRequest[] notificationRequests)
         {
             using (Logging.Facade.DebugTraceMethodCall("SetObjects"))
             {
@@ -67,16 +68,12 @@ namespace Kistl.Server
                         // Set Operation
                         var changedObjects = _sohFactory
                             .GetServerObjectSetHandler()
-                            .SetObjects(ctx, objects, notificationRequests ?? new ObjectNotificationRequest[0])
+                            .SetObjects(version, ctx, objects, notificationRequests ?? new ObjectNotificationRequest[0])
                             .Cast<IStreamable>();
                         resultCount = objects.Count;
                         return SendObjects(changedObjects, true).ToArray();
                     }
 
-                }
-                catch (ConcurrencyException cex)
-                {
-                    throw new FaultException<ConcurrencyException>(cex);
                 }
                 catch (Exception ex)
                 {
@@ -94,13 +91,14 @@ namespace Kistl.Server
         /// <summary>
         /// Returns a list of objects from the datastore, matching the specified filters.
         /// </summary>
+        /// <param name="version">Current version of generated Kistl.Objects assembly</param>
         /// <param name="type">Type of Objects</param>
         /// <param name="maxListCount">Max. ammount of objects</param>
         /// <param name="eagerLoadLists">If true list properties will be eager loaded</param>
         /// <param name="filter">Serializable linq expression used a filter</param>
         /// <param name="orderBy">List of derializable linq expressions used as orderby</param>
         /// <returns>the found objects</returns>
-        public byte[] GetList(SerializableType type, int maxListCount, bool eagerLoadLists, SerializableExpression[] filter, OrderByContract[] orderBy)
+        public byte[] GetList(Guid version, SerializableType type, int maxListCount, bool eagerLoadLists, SerializableExpression[] filter, OrderByContract[] orderBy)
         {
             using (Logging.Facade.DebugTraceMethodCallFormat("GetList", "type={0}", type))
             {
@@ -118,7 +116,7 @@ namespace Kistl.Server
                             var filterExpresstions = filter != null ? filter.Select(f => SerializableExpression.ToExpression(f)).ToList() : null;
                             IEnumerable<IStreamable> lst = _sohFactory
                                 .GetServerObjectHandler(ifType)
-                                .GetList(ctx, maxListCount,
+                                .GetList(version, ctx, maxListCount,
                                     filterExpresstions,
                                     orderBy != null ? orderBy.Select(o => new OrderBy(o.Type, SerializableExpression.ToExpression(o.Expression))).ToList() : null);
                             resultCount = lst.Count();
@@ -227,12 +225,13 @@ namespace Kistl.Server
         /// <summary>
         /// returns a list of objects referenced by a specified Property. Use an equivalent query in GetList() instead.
         /// </summary>
+        /// <param name="version">Current version of generated Kistl.Objects assembly</param>
         /// <param name="type">Type of Object</param>
         /// <param name="ID">Object id</param>
         /// <param name="property">Property</param>
         /// <returns>the referenced objects</returns>
         [Obsolete]
-        public byte[] GetListOf(SerializableType type, int ID, string property)
+        public byte[] GetListOf(Guid version, SerializableType type, int ID, string property)
         {
             using (Logging.Facade.DebugTraceMethodCallFormat("GetListOf", "type={0}", type))
             {
@@ -251,7 +250,7 @@ namespace Kistl.Server
                         {
                             IEnumerable<IStreamable> lst = _sohFactory
                                 .GetServerObjectHandler(ifType)
-                                .GetListOf(ctx, ID, property);
+                                .GetListOf(version, ctx, ID, property);
                             resultCount = lst.Count();
                             return SendObjects(lst, false /*true*/).ToArray();
                         }
@@ -275,11 +274,12 @@ namespace Kistl.Server
         /// <paramref name="relId"/> which are owned by the object with the 
         /// ID <paramref name="parentObjID"/> in the role <paramref name="serializableRole"/>.
         /// </summary>
+        /// <param name="version">Current version of generated Kistl.Objects assembly</param>
         /// <param name="relId">the requested Relation</param>
         /// <param name="serializableRole">the parent role (1 == A, 2 == B)</param>
         /// <param name="parentObjID">the ID of the parent object</param>
         /// <returns>the requested collection entries</returns>
-        public byte[] FetchRelation(Guid relId, int serializableRole, int parentObjID)
+        public byte[] FetchRelation(Guid version, Guid relId, int serializableRole, int parentObjID)
         {
             using (Logging.Facade.DebugTraceMethodCallFormat("FetchRelation", "relId = [{0}], role = [{1}], parentObjID = [{2}]", relId, serializableRole, parentObjID))
             {
@@ -305,7 +305,7 @@ namespace Kistl.Server
                                     ifTypeA,
                                     ifTypeB,
                                     endRole)
-                                .GetCollectionEntries(ctx, relId, endRole, parentObjID);
+                                .GetCollectionEntries(version, ctx, relId, endRole, parentObjID);
                             resultCount = lst.Count();
                             return SendObjects(lst.Cast<IStreamable>(), true).ToArray();
                         }
@@ -327,9 +327,10 @@ namespace Kistl.Server
         /// <summary>
         /// Gets the content stream of the given Document instance ID
         /// </summary>
+        /// <param name="version">Current version of generated Kistl.Objects assembly</param>
         /// <param name="ID">ID of an valid Document instance</param>
         /// <returns>Stream containing the Document content</returns>
-        public Stream GetBlobStream(int ID)
+        public Stream GetBlobStream(Guid version, int ID)
         {
             using (Logging.Facade.DebugTraceMethodCallFormat("GetBlobStream", "ID={0}", ID))
             {
@@ -342,7 +343,7 @@ namespace Kistl.Server
                     {
                         return _sohFactory
                             .GetServerDocumentHandler()
-                            .GetBlobStream(ctx, ID);
+                            .GetBlobStream(version, ctx, ID);
                     }
                 }
                 catch (Exception ex)
@@ -374,7 +375,7 @@ namespace Kistl.Server
                     {
                         var result = _sohFactory
                             .GetServerDocumentHandler()
-                            .SetBlobStream(ctx, blob.Stream, blob.FileName, blob.MimeType);
+                            .SetBlobStream(blob.Version, ctx, blob.Stream, blob.FileName, blob.MimeType);
                         BlobResponse resp = new BlobResponse();
                         resp.ID = result.ID;
                         resp.BlobInstance = SendObjects(new IDataObject[] { result }, true);
@@ -390,7 +391,7 @@ namespace Kistl.Server
             }
         }
 
-        public byte[] InvokeServerMethod(SerializableType type, int ID, string method, SerializableType[] parameterTypes, byte[] parameterArray, byte[] changedObjectsArray, ObjectNotificationRequest[] notificationRequests, out byte[] retChangedObjects)
+        public byte[] InvokeServerMethod(Guid version, SerializableType type, int ID, string method, SerializableType[] parameterTypes, byte[] parameterArray, byte[] changedObjectsArray, ObjectNotificationRequest[] notificationRequests, out byte[] retChangedObjects)
         {
             using (Logging.Facade.DebugTraceMethodCallFormat("InvokeServerMethod:" + method, "method={0}, ID={1}", method, ID))
             {
@@ -435,7 +436,7 @@ namespace Kistl.Server
                         IEnumerable<IPersistenceObject> changedObjectsList;
                         var result = _sohFactory
                             .GetServerObjectHandler(_iftFactory(type.GetSystemType()))
-                            .InvokeServerMethod(ctx, ID, method,
+                            .InvokeServerMethod(version, ctx, ID, method,
                                 parameterTypes.Select(t => t.GetSystemType()),
                                 parameterList,
                                 ReadObjects(changedObjects, ctx),

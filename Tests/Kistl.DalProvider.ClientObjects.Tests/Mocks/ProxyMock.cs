@@ -59,7 +59,9 @@ namespace Kistl.DalProvider.Client.Mocks
             IEnumerable<IDataObject> result = null;
 
             var handler = _memoryFactory.GetServerObjectHandler(ifType);
-            var objects = handler.GetList(_backingStore,
+            var objects = handler.GetList(
+                KistlGeneratedVersionAttribute.Current,
+                _backingStore,
                 maxListCount,
                 filter != null ? filter.ToList() : null,
                 orderBy != null ? orderBy.ToList() : null);
@@ -79,7 +81,7 @@ namespace Kistl.DalProvider.Client.Mocks
             IEnumerable<IDataObject> result = null;
 
             var handler = _memoryFactory.GetServerObjectHandler(ifType);
-            var objects = handler.GetListOf(_backingStore, ID, property);
+            var objects = handler.GetListOf(KistlGeneratedVersionAttribute.Current, _backingStore, ID, property);
             var bytes = SendObjects(objects, true).ToArray();
 
             using (var sr = new BinaryReader(new MemoryStream(bytes)))
@@ -103,7 +105,7 @@ namespace Kistl.DalProvider.Client.Mocks
 
                 var handler = _memoryFactory.GetServerObjectSetHandler();
                 var changedObjects = handler
-                    .SetObjects(_backingStore, objects, notficationRequests ?? new ObjectNotificationRequest[0])
+                    .SetObjects(KistlGeneratedVersionAttribute.Current, _backingStore, objects, notficationRequests ?? new ObjectNotificationRequest[0])
                     .Cast<IStreamable>();
                 var bytes = SendObjects(changedObjects, true).ToArray();
 
@@ -141,7 +143,7 @@ namespace Kistl.DalProvider.Client.Mocks
                     _iftFactory(rel.B.Type.GetDataType()),
                     role);
             var objects = handler
-                .GetCollectionEntries(_backingStore, relationId, role, parent.ID)
+                .GetCollectionEntries(KistlGeneratedVersionAttribute.Current, _backingStore, relationId, role, parent.ID)
                 .Cast<IStreamable>();
             var bytes = SendObjects(objects, true).ToArray();
 
@@ -159,7 +161,7 @@ namespace Kistl.DalProvider.Client.Mocks
         {
             Stream result = null;
             var handler = _memoryFactory.GetServerDocumentHandler();
-            result = handler.GetBlobStream(_backingStore, ID);
+            result = handler.GetBlobStream(KistlGeneratedVersionAttribute.Current, _backingStore, ID);
             return result;
         }
 
@@ -167,7 +169,7 @@ namespace Kistl.DalProvider.Client.Mocks
         {
             Kistl.App.Base.Blob result = null;
             var handler = _memoryFactory.GetServerDocumentHandler();
-            var serverBlob = handler.SetBlobStream(_backingStore, stream, filename, mimetype);
+            var serverBlob = handler.SetBlobStream(KistlGeneratedVersionAttribute.Current, _backingStore, stream, filename, mimetype);
 
             BlobResponse resp = new BlobResponse();
             resp.ID = serverBlob.ID;

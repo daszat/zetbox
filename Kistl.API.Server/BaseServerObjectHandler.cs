@@ -20,23 +20,25 @@ namespace Kistl.API.Server
         /// <summary>
         /// Return a list of objects matching the specified parameters.
         /// </summary>
+        /// <param name="version">Current version of generated Kistl.Objects assembly</param>
         /// <param name="ctx">the server context to use for loading the objects</param>
         /// <param name="maxListCount">how many objects to load at most</param>
         /// <param name="filter">a Linq filter to apply</param>
         /// <param name="orderBy">a number of linq expressions to order by</param>
         /// <returns>the filtered and ordered list of objects, containing at most <paramref name="maxListCount"/> objects</returns>
-        IEnumerable<IStreamable> GetList(IKistlContext ctx, int maxListCount, List<Expression> filter, List<OrderBy> orderBy);
+        IEnumerable<IStreamable> GetList(Guid version, IKistlContext ctx, int maxListCount, List<Expression> filter, List<OrderBy> orderBy);
 
         /// <summary>
         /// Return the list of objects referenced by the specified property.
         /// </summary>
+        /// <param name="version">Current version of generated Kistl.Objects assembly</param>
         /// <param name="ctx">the server context to use for loading the objects</param>
         /// <param name="ID">the ID of the referencing object</param>
         /// <param name="property">the name of the referencing property</param>
         /// <returns>the list of objects</returns>
-        IEnumerable<IStreamable> GetListOf(IKistlContext ctx, int ID, string property);
+        IEnumerable<IStreamable> GetListOf(Guid version, IKistlContext ctx, int ID, string property);
 
-        object InvokeServerMethod(IKistlContext ctx, int ID, string method, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests, out IEnumerable<IPersistenceObject> changedObjects);
+        object InvokeServerMethod(Guid version, IKistlContext ctx, int ID, string method, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests, out IEnumerable<IPersistenceObject> changedObjects);
     }
 
     public interface IServerObjectSetHandler
@@ -44,18 +46,18 @@ namespace Kistl.API.Server
         /// <summary>
         /// Implementiert den SetObject Befehl.
         /// </summary>
-        IEnumerable<IPersistenceObject> SetObjects(IKistlContext ctx, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests);
+        IEnumerable<IPersistenceObject> SetObjects(Guid version, IKistlContext ctx, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests);
     }
 
     public interface IServerCollectionHandler
     {
-        IEnumerable<IRelationEntry> GetCollectionEntries(IKistlContext ctx, Guid relId, RelationEndRole endRole, int parentId);
+        IEnumerable<IRelationEntry> GetCollectionEntries(Guid version, IKistlContext ctx, Guid relId, RelationEndRole endRole, int parentId);
     }
 
     public interface IServerDocumentHandler
     {
-        Stream GetBlobStream(IKistlContext ctx, int ID);
-        Kistl.App.Base.Blob SetBlobStream(IKistlContext ctx, Stream blob, string filename, string mimetype);
+        Stream GetBlobStream(Guid version, IKistlContext ctx, int ID);
+        Kistl.App.Base.Blob SetBlobStream(Guid version, IKistlContext ctx, Stream blob, string filename, string mimetype);
     }
 
     /// <summary>
@@ -75,9 +77,10 @@ namespace Kistl.API.Server
         {
         }
 
-        public IEnumerable<IStreamable> GetList(IKistlContext ctx, int maxListCount, List<Expression> filter, List<OrderBy> orderBy)
+        public IEnumerable<IStreamable> GetList(Guid version, IKistlContext ctx, int maxListCount, List<Expression> filter, List<OrderBy> orderBy)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
+            KistlGeneratedVersionAttribute.Check(version);
 
             if (maxListCount > Kistl.API.Helper.MAXLISTCOUNT)
             {
@@ -126,9 +129,11 @@ namespace Kistl.API.Server
         /// <code>property</code> of the object with the <code>ID</code>
         /// </summary>
         /// <returns>the list of values in the property</returns>
-        public IEnumerable<IStreamable> GetListOf(IKistlContext ctx, int ID, string property)
+        public IEnumerable<IStreamable> GetListOf(Guid version, IKistlContext ctx, int ID, string property)
         {
             if (ID <= API.Helper.INVALIDID) throw new ArgumentException("ID must not be invalid");
+            KistlGeneratedVersionAttribute.Check(version);
+
             T obj = GetObjectInstance(ctx, ID);
             if (obj == null) throw new ArgumentOutOfRangeException("ID", "Object not found");
 
@@ -142,11 +147,12 @@ namespace Kistl.API.Server
         /// <returns>a typed object</returns>
         protected abstract T GetObjectInstance(IKistlContext ctx, int ID);
 
-        public object InvokeServerMethod(IKistlContext ctx, int ID, string method, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests, out IEnumerable<IPersistenceObject> changedObjects)
+        public object InvokeServerMethod(Guid version, IKistlContext ctx, int ID, string method, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests, out IEnumerable<IPersistenceObject> changedObjects)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
             if (objects == null) { throw new ArgumentNullException("objects"); }
             if (notificationRequests == null) { throw new ArgumentNullException("notificationRequests"); }
+            KistlGeneratedVersionAttribute.Check(version);
 
             var objList = objects.Cast<BaseServerPersistenceObject>().ToList();
             var entityObjects = new Dictionary<IPersistenceObject, IPersistenceObject>();
@@ -176,6 +182,7 @@ namespace Kistl.API.Server
         /// Implements the SetObject command
         /// </summary>
         public virtual IEnumerable<IPersistenceObject> SetObjects(
+            Guid version, 
             IKistlContext ctx,
             IEnumerable<IPersistenceObject> objList,
             IEnumerable<ObjectNotificationRequest> notificationRequests)
@@ -183,6 +190,7 @@ namespace Kistl.API.Server
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
             if (objList == null) { throw new ArgumentNullException("objList"); }
             if (notificationRequests == null) { throw new ArgumentNullException("notificationRequests"); }
+            KistlGeneratedVersionAttribute.Check(version);
 
             var objects = objList.Cast<BaseServerPersistenceObject>().ToList();
             var entityObjects = new Dictionary<IPersistenceObject, IPersistenceObject>();
@@ -280,16 +288,18 @@ namespace Kistl.API.Server
 
     public class ServerDocumentHandler : IServerDocumentHandler
     {
-        public Stream GetBlobStream(IKistlContext ctx, int ID)
+        public Stream GetBlobStream(Guid version, IKistlContext ctx, int ID)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
+            KistlGeneratedVersionAttribute.Check(version);
             return ctx.GetStream(ID);
         }
 
-        public Kistl.App.Base.Blob SetBlobStream(IKistlContext ctx, Stream blob, string filename, string mimetype)
+        public Kistl.App.Base.Blob SetBlobStream(Guid version, IKistlContext ctx, Stream blob, string filename, string mimetype)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
             if (blob == null) { throw new ArgumentNullException("blob"); }
+            KistlGeneratedVersionAttribute.Check(version);
 
             var id = ctx.CreateBlob(blob, filename, mimetype);
             var obj = ctx.Find<Kistl.App.Base.Blob>(id);

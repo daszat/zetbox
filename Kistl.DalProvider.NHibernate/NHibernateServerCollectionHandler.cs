@@ -20,11 +20,13 @@ namespace Kistl.DalProvider.NHibernate
     {
 
         public IEnumerable<IRelationEntry> GetCollectionEntries(
+            Guid version,
             IKistlContext ctx,
             Guid relId, RelationEndRole endRole,
             int parentId)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
+            KistlGeneratedVersionAttribute.Check(version);
 
             var rel = ctx.FindPersistenceObject<Relation>(relId);
             //var relEnd = rel.GetEndFromRole(endRole);

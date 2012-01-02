@@ -25,17 +25,20 @@ namespace Kistl.API
         /// <summary>
         /// Puts a number of changed objects into the database. The resultant objects are sent back to the client.
         /// </summary>
+        /// <param name="version">Current version of generated Kistl.Objects assembly</param>
         /// <param name="msg">a streamable list of <see cref="IPersistenceObject"/>s</param>
         /// <param name="notificationRequests">A list of objects the client wants to be notified about, if they change.</param>
         /// <returns>a streamable list of <see cref="IPersistenceObject"/>s</returns>
         [OperationContract]
         [FaultContract(typeof(Exception))]
         [FaultContract(typeof(ConcurrencyException))]
-        byte[] SetObjects(byte[] msg, ObjectNotificationRequest[] notificationRequests);
+        [FaultContract(typeof(InvalidKistlGeneratedVersionException))]
+        byte[] SetObjects(Guid version, byte[] msg, ObjectNotificationRequest[] notificationRequests);
 
         /// <summary>
         /// Returns a list of objects from the datastore, matching the specified filters.
         /// </summary>
+        /// <param name="version">Current version of generated Kistl.Objects assembly</param>
         /// <param name="type">Type of Objects</param>
         /// <param name="maxListCount">Max. ammount of objects</param>
         /// <param name="eagerLoadLists">If true list properties will be eager loaded</param>
@@ -44,11 +47,13 @@ namespace Kistl.API
         /// <returns>the found objects</returns>
         [OperationContract]
         [FaultContract(typeof(Exception))]
-        byte[] GetList(SerializableType type, int maxListCount, bool eagerLoadLists, SerializableExpression[] filter, OrderByContract[] orderBy);
+        [FaultContract(typeof(InvalidKistlGeneratedVersionException))]
+        byte[] GetList(Guid version, SerializableType type, int maxListCount, bool eagerLoadLists, SerializableExpression[] filter, OrderByContract[] orderBy);
 
         /// <summary>
         /// returns a list of objects referenced by a specified Property. Use an equivalent query in GetList() instead.
         /// </summary>
+        /// <param name="version">Current version of generated Kistl.Objects assembly</param>
         /// <param name="type">Type of Object</param>
         /// <param name="ID">Object id</param>
         /// <param name="property">Property</param>
@@ -56,29 +61,34 @@ namespace Kistl.API
         //[Obsolete("Use a properly filtered GetList instead")]
         [OperationContract]
         [FaultContract(typeof(Exception))]
-        byte[] GetListOf(SerializableType type, int ID, string property);
+        [FaultContract(typeof(InvalidKistlGeneratedVersionException))]
+        byte[] GetListOf(Guid version, SerializableType type, int ID, string property);
 
         /// <summary>
         /// Fetches a list of CollectionEntry objects of the Relation 
         /// <paramref name="relId"/> which are owned by the object with the 
         /// ID <paramref name="ID"/> in the role <paramref name="role"/>.
         /// </summary>
+        /// <param name="version">Current version of generated Kistl.Objects assembly</param>
         /// <param name="relId">the requested Relation</param>
         /// <param name="role">the parent role (1 == A, 2 == B)</param>
         /// <param name="ID">the ID of the parent object</param>
         /// <returns>the requested collection entries</returns>
         [OperationContract]
         [FaultContract(typeof(Exception))]
-        byte[] FetchRelation(Guid relId, int role, int ID);
+        [FaultContract(typeof(InvalidKistlGeneratedVersionException))]
+        byte[] FetchRelation(Guid version, Guid relId, int role, int ID);
 
         /// <summary>
         /// Gets the content stream of the given Blob instance ID
         /// </summary>
+        /// <param name="version">Current version of generated Kistl.Objects assembly</param>
         /// <param name="ID">ID of an valid Blob instance</param>
         /// <returns>Stream containing the Blob content</returns>
         [OperationContract]
         [FaultContract(typeof(Exception))]
-        Stream GetBlobStream(int ID);
+        [FaultContract(typeof(InvalidKistlGeneratedVersionException))]
+        Stream GetBlobStream(Guid version, int ID);
 
         /// <summary>
         /// Sets the content stream and creates a new Blob instance
@@ -87,17 +97,34 @@ namespace Kistl.API
         /// <returns>the newly created Blob instance</returns>
         [OperationContract]
         [FaultContract(typeof(Exception))]
+        [FaultContract(typeof(InvalidKistlGeneratedVersionException))]
         BlobResponse SetBlobStream(BlobMessage blob);
 
 
+        /// <summary>
+        /// Invokes a server side method
+        /// </summary>
+        /// <param name="version">Current version of generated Kistl.Objects assembly</param>
+        /// <param name="type">Type of the object to invoke method</param>
+        /// <param name="ID">ID of the object</param>
+        /// <param name="method">Method name</param>
+        /// <param name="parameterTypes">Array of method parameter type</param>
+        /// <param name="parameter">Array of method parameters</param>
+        /// <param name="changedObjects">Array of changed objects to restore context</param>
+        /// <param name="notificationRequests">A list of objects the client wants to be notified about, if they change.</param>
+        /// <param name="retChangedObjects">Array of changed objects on the server side</param>
+        /// <returns></returns>
         [OperationContract]
         [FaultContract(typeof(Exception))]
-        byte[] InvokeServerMethod(SerializableType type, int ID, string method, SerializableType[] parameterTypes, byte[] parameter, byte[] changedObjects, ObjectNotificationRequest[] notificationRequests, out byte[] retChangedObjects);
+        [FaultContract(typeof(InvalidKistlGeneratedVersionException))]
+        byte[] InvokeServerMethod(Guid version, SerializableType type, int ID, string method, SerializableType[] parameterTypes, byte[] parameter, byte[] changedObjects, ObjectNotificationRequest[] notificationRequests, out byte[] retChangedObjects);
     }
 
     [MessageContract]
     public class BlobMessage
     {
+        [MessageHeader]
+        public Guid Version { get; set; }
         [MessageHeader]
         public string FileName { get; set; }
         [MessageHeader]

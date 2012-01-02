@@ -31,11 +31,13 @@ namespace Kistl.DalProvider.Client.Mocks
     {
 
         public IEnumerable<IRelationEntry> GetCollectionEntries(
+            Guid version, 
             IKistlContext ctx,
             Guid relId, RelationEndRole endRole,
             int parentId)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
+            KistlGeneratedVersionAttribute.Check(version);
 
             var rel = ctx.FindPersistenceObject<Relation>(relId);
             //var relEnd = rel.GetEndFromRole(endRole);
@@ -61,9 +63,9 @@ namespace Kistl.DalProvider.Client.Mocks
         : BaseServerObjectSetHandler
     {
         /// <inheritdoc/>
-        public override IEnumerable<IPersistenceObject> SetObjects(IKistlContext ctx, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests)
+        public override IEnumerable<IPersistenceObject> SetObjects(Guid version, IKistlContext ctx, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests)
         {
-            return base.SetObjects(ctx, objects, notificationRequests);
+            return base.SetObjects(version, ctx, objects, notificationRequests);
         }
     }
 

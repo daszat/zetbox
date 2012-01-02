@@ -82,6 +82,9 @@ namespace Kistl.Server.HttpService
                     context.Request.Url,
                     username);
                 var reader = new BinaryReader(context.Request.InputStream);
+                Guid version;
+                BinarySerializer.FromStream(out version, reader);
+
                 switch (context.Request.Url.Segments.Last())
                 {
                     case "SetObjects": // byte[] SetObjects(byte[] msg, ObjectNotificationRequest[] notificationRequests);
@@ -91,7 +94,7 @@ namespace Kistl.Server.HttpService
                             ObjectNotificationRequest[] notificationRequests;
                             BinarySerializer.FromStream(out notificationRequests, reader);
                             Log.DebugFormat("SetObjects(byte[{0}], ObjectNotificationRequest[{1}])", msg.Length, notificationRequests.Length);
-                            var result = service.SetObjects(msg, notificationRequests);
+                            var result = service.SetObjects(version, msg, notificationRequests);
                             SendByteArray(context, result);
                             break;
                         }
@@ -115,7 +118,7 @@ namespace Kistl.Server.HttpService
                             BinarySerializer.FromStream(out orderBy, reader, iftFactory);
 
                             Log.DebugFormat("GetList(type=[{0}], maxListCount={1}, eagerLoadLists={2}, SerializableExpression[{3}], OrderByContract[{4}])", type, maxListCount, eagerLoadLists, filter != null ? filter.Length : -1, orderBy != null ? orderBy.Length : -1);
-                            var result = service.GetList(type, maxListCount, eagerLoadLists, filter, orderBy);
+                            var result = service.GetList(version, type, maxListCount, eagerLoadLists, filter, orderBy);
                             SendByteArray(context, result);
                             break;
                         }
@@ -131,7 +134,7 @@ namespace Kistl.Server.HttpService
                             BinarySerializer.FromStream(out property, reader);
 
                             Log.DebugFormat("GetListOf(type=[{0}], ID={1}, property=[{2}])", type, ID, property);
-                            var result = service.GetListOf(type, ID, property);
+                            var result = service.GetListOf(version, type, ID, property);
                             SendByteArray(context, result);
                             break;
                         }
@@ -147,7 +150,7 @@ namespace Kistl.Server.HttpService
                             BinarySerializer.FromStream(out ID, reader);
 
                             Log.DebugFormat("FetchRelation(relId=[{0}], role={1}, ID=[{2}])", relId, role, ID);
-                            var result = service.FetchRelation(relId, role, ID);
+                            var result = service.FetchRelation(version, relId, role, ID);
                             SendByteArray(context, result);
                             break;
                         }
@@ -156,7 +159,7 @@ namespace Kistl.Server.HttpService
                             var ID = Int32.Parse(context.Request.QueryString["id"]);
 
                             Log.DebugFormat("GetBlobStream(ID={0})", ID);
-                            var result = service.GetBlobStream(ID);
+                            var result = service.GetBlobStream(version, ID);
                             context.Response.StatusCode = 200;
                             context.Response.ContentType = "application/octet-stream";
                             result.CopyTo(context.Response.OutputStream);
@@ -176,6 +179,7 @@ namespace Kistl.Server.HttpService
                             Log.DebugFormat("SetBlobStream(fileName=[{0}], mimeType=[{1}], Stream of {2} bytes)", fileName, mimeType, data.Length);
                             var result = service.SetBlobStream(new BlobMessage()
                             {
+                                Version = version,
                                 FileName = fileName,
                                 MimeType = mimeType,
                                 Stream = new MemoryStream(data)
@@ -225,7 +229,7 @@ namespace Kistl.Server.HttpService
                                 changedObjects.Length,
                                 notificationRequests.Length);
                             byte[] retChangedObjects;
-                            var result = service.InvokeServerMethod(type, ID, method, parameterTypes, parameter, changedObjects, notificationRequests, out retChangedObjects);
+                            var result = service.InvokeServerMethod(version, type, ID, method, parameterTypes, parameter, changedObjects, notificationRequests, out retChangedObjects);
                             Log.DebugFormat("InvokeServerMethod received {0}B retChangedObjects", retChangedObjects.Length);
 
                             context.Response.StatusCode = 200;
@@ -255,6 +259,11 @@ namespace Kistl.Server.HttpService
             {
                 context.Response.StatusCode = (int)HttpStatusCode.Conflict;
                 Log.Info("Concurrency error while processing request", cex);
+            }
+            catch (FaultException<InvalidKistlGeneratedVersionException> vex)
+            {
+                context.Response.StatusCode = (int)HttpStatusCode.PreconditionFailed;
+                Log.Info("InvalidKistlGeneratedVersion error while processing request", vex);
             }
             catch (Exception ex)
             {

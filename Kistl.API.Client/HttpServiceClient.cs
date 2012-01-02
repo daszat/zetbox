@@ -78,6 +78,10 @@ namespace Kistl.API.Client
                         {
                             throw new ConcurrencyException();
                         }
+                        else if (httpResponse.StatusCode == HttpStatusCode.PreconditionFailed)
+                        {
+                            throw new InvalidKistlGeneratedVersionException();
+                        }
 
                         Log.ErrorFormat("HTTP Error: {0}: {1}", httpResponse.StatusCode, httpResponse.StatusDescription);
                         foreach (var header in ex.Response.Headers)
@@ -113,23 +117,25 @@ namespace Kistl.API.Client
             return req;
         }
 
-        public byte[] SetObjects(byte[] msg, ObjectNotificationRequest[] notificationRequests)
+        public byte[] SetObjects(Guid version, byte[] msg, ObjectNotificationRequest[] notificationRequests)
         {
             return MakeRequest(SetObjectsUri,
                 reqStream =>
                 {
+                    BinarySerializer.ToStream(version, reqStream);
                     BinarySerializer.ToStream(msg, reqStream);
                     BinarySerializer.ToStream(notificationRequests, reqStream);
                 });
         }
 
-        public byte[] GetList(SerializableType type, int maxListCount, bool eagerLoadLists, SerializableExpression[] filter, OrderByContract[] orderBy)
+        public byte[] GetList(Guid version, SerializableType type, int maxListCount, bool eagerLoadLists, SerializableExpression[] filter, OrderByContract[] orderBy)
         {
             if (type == null) throw new ArgumentNullException("type");
 
             return MakeRequest(GetListUri,
                 reqStream =>
                 {
+                    BinarySerializer.ToStream(version, reqStream);
                     BinarySerializer.ToStream(type, reqStream);
                     BinarySerializer.ToStream(maxListCount, reqStream);
                     BinarySerializer.ToStream(eagerLoadLists, reqStream);
@@ -139,7 +145,7 @@ namespace Kistl.API.Client
                 });
         }
 
-        public byte[] GetListOf(SerializableType type, int ID, string property)
+        public byte[] GetListOf(Guid version, SerializableType type, int ID, string property)
         {
             if (type == null) throw new ArgumentNullException("type");
             if (String.IsNullOrEmpty(property)) throw new ArgumentNullException("property");
@@ -147,6 +153,7 @@ namespace Kistl.API.Client
             return MakeRequest(GetListOfUri,
                 reqStream =>
                 {
+                    BinarySerializer.ToStream(version, reqStream);
                     BinarySerializer.ToStream(type, reqStream);
                     BinarySerializer.ToStream(ID, reqStream);
                     BinarySerializer.ToStream(property, reqStream);
@@ -154,11 +161,12 @@ namespace Kistl.API.Client
                 });
         }
 
-        public byte[] FetchRelation(Guid relId, int role, int ID)
+        public byte[] FetchRelation(Guid version, Guid relId, int role, int ID)
         {
             return MakeRequest(FetchRelationUri,
                 reqStream =>
                 {
+                    BinarySerializer.ToStream(version, reqStream);
                     BinarySerializer.ToStream(relId, reqStream);
                     BinarySerializer.ToStream(role, reqStream);
                     BinarySerializer.ToStream(ID, reqStream);
@@ -166,11 +174,16 @@ namespace Kistl.API.Client
                 });
         }
 
-        public Stream GetBlobStream(int ID)
+        public Stream GetBlobStream(Guid version, int ID)
         {
             var req = InitializeRequest(new Uri(String.Format("{0}?id={1}", GetBlobStreamUri.AbsoluteUri, ID)));
             try
             {
+                using (var reqStream = req.GetRequestStream())
+                using (var reqWriter = new BinaryWriter(reqStream))
+                {
+                    BinarySerializer.ToStream(version, reqWriter);
+                }
                 using (var response = req.GetResponse())
                 using (var stream = response.GetResponseStream())
                 {
@@ -196,6 +209,7 @@ namespace Kistl.API.Client
             using (var reqWriter = new BinaryWriter(reqStream))
             using (var upload = new MemoryStream())
             {
+                BinarySerializer.ToStream(request.Version, reqWriter);
                 BinarySerializer.ToStream(request.FileName, reqWriter);
                 BinarySerializer.ToStream(request.MimeType, reqWriter);
                 request.Stream.CopyTo(upload);
@@ -229,7 +243,7 @@ namespace Kistl.API.Client
             }
         }
 
-        public byte[] InvokeServerMethod(out byte[] retChangedObjects, SerializableType type, int ID, string method, SerializableType[] parameterTypes, byte[] parameter, byte[] changedObjects, ObjectNotificationRequest[] notificationRequests)
+        public byte[] InvokeServerMethod(out byte[] retChangedObjects, Guid version, SerializableType type, int ID, string method, SerializableType[] parameterTypes, byte[] parameter, byte[] changedObjects, ObjectNotificationRequest[] notificationRequests)
         {
             if (type == null) throw new ArgumentNullException("type");
 
@@ -237,6 +251,7 @@ namespace Kistl.API.Client
             using (var reqStream = req.GetRequestStream())
             using (var reqWriter = new BinaryWriter(reqStream))
             {
+                BinarySerializer.ToStream(version, reqWriter);
                 BinarySerializer.ToStream(type, reqWriter);
                 BinarySerializer.ToStream(ID, reqWriter);
                 BinarySerializer.ToStream(method, reqWriter);

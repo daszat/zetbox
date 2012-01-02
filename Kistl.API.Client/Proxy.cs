@@ -71,6 +71,10 @@ using Kistl.API.Client.PerfCounter;
                 {
                     throw cex.Detail;
                 }
+                catch (FaultException<InvalidKistlGeneratedVersionException> vex)
+                {
+                    throw vex.Detail;
+                }
                 catch (FaultException)
                 {
                     throw;
@@ -100,6 +104,7 @@ using Kistl.API.Client.PerfCounter;
                 MakeRequest(() =>
                 {
                     bytes = _service.GetList(
+                        KistlGeneratedVersionAttribute.Current,
                         _ifType,
                         maxListCount,
                         eagerLoadLists,
@@ -134,7 +139,7 @@ using Kistl.API.Client.PerfCounter;
 
                 MakeRequest(() =>
                 {
-                    bytes = _service.GetListOf(_ifType, ID, property);
+                    bytes = _service.GetListOf(KistlGeneratedVersionAttribute.Current, _ifType, ID, property);
                 });
 
                 IEnumerable<IDataObject> result = null;
@@ -170,7 +175,7 @@ using Kistl.API.Client.PerfCounter;
 
                     MakeRequest(() =>
                     {
-                        bytes = _service.SetObjects(_ms, _nReq);
+                        bytes = _service.SetObjects(KistlGeneratedVersionAttribute.Current, _ms, _nReq);
                     });
 
                     using (var sr = new BinaryReader(new MemoryStream(bytes)))
@@ -248,7 +253,7 @@ using Kistl.API.Client.PerfCounter;
 
                 MakeRequest(() =>
                 {
-                    bytes = _service.FetchRelation(relationId, (int)role, parent.ID);
+                    bytes = _service.FetchRelation(KistlGeneratedVersionAttribute.Current, relationId, (int)role, parent.ID);
                 });
                 using (MemoryStream s = new MemoryStream(bytes))
                 using (var sr = new BinaryReader(s))
@@ -271,7 +276,7 @@ using Kistl.API.Client.PerfCounter;
             Stream result = null;
             MakeRequest(() =>
             {
-                result = _service.GetBlobStream(ID);
+                result = _service.GetBlobStream(KistlGeneratedVersionAttribute.Current, ID);
             });
             return result;
         }
@@ -280,7 +285,7 @@ using Kistl.API.Client.PerfCounter;
         {
             Kistl.App.Base.Blob result = null;
             BlobResponse response = null;
-            BlobMessage msg = new BlobMessage() { FileName = filename, MimeType = mimetype, Stream = stream };
+            BlobMessage msg = new BlobMessage() { Version = KistlGeneratedVersionAttribute.Current, FileName = filename, MimeType = mimetype, Stream = stream };
 
             MakeRequest(() =>
             {
@@ -326,6 +331,7 @@ using Kistl.API.Client.PerfCounter;
             {
                 bytes = _service.InvokeServerMethod(
                      out retChangedObjectsArray,
+                     KistlGeneratedVersionAttribute.Current,
                      _ifType,
                      ID,
                      method,

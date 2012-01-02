@@ -2,6 +2,12 @@
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Kistl.API" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Kistl.API" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System" />
   <xs:import schemaLocation="http://localhost:6666/KistlService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="InvalidKistlGeneratedVersionException">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/System" base="q1:Exception" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="InvalidKistlGeneratedVersionException" nillable="true" type="tns:InvalidKistlGeneratedVersionException" />
   <xs:complexType name="ConcurrencyException">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:KistlContextException" />
@@ -10,7 +16,7 @@
   <xs:element name="ConcurrencyException" nillable="true" type="tns:ConcurrencyException" />
   <xs:complexType name="KistlContextException">
     <xs:complexContent mixed="false">
-      <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/System" base="q1:Exception" />
+      <xs:extension xmlns:q2="http://schemas.datacontract.org/2004/07/System" base="q2:Exception" />
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="KistlContextException" nillable="true" type="tns:KistlContextException" />

@@ -23,18 +23,30 @@ namespace Kistl.Server
         {
             if (ex == null) throw new ArgumentNullException("ex");
             Logging.Log.Error("Error in Facade: " + ex.Message, ex);
-#if DEBUG
-            if (ex is System.Data.DataException && ex.InnerException != null)
+
+            if (ex is ConcurrencyException)
             {
-                throw new FaultException(ex.InnerException.Message);
+                throw new FaultException<ConcurrencyException>((ConcurrencyException)ex);
+            }
+            else if (ex is InvalidKistlGeneratedVersionException)
+            {
+                throw new FaultException<InvalidKistlGeneratedVersionException>((InvalidKistlGeneratedVersionException)ex);
             }
             else
             {
-                throw new FaultException(ex.Message);
-            }
+#if DEBUG
+                if (ex is System.Data.DataException && ex.InnerException != null)
+                {
+                    throw new FaultException(ex.InnerException.Message);
+                }
+                else
+                {
+                    throw new FaultException(ex.Message);
+                }
 #else
-            throw new FaultException("An error ocurred while processing this request.");
+                throw new FaultException("An error ocurred while processing this request.");
 #endif
+            }
         }
     }
 }
