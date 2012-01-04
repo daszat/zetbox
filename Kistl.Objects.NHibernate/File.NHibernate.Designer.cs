@@ -917,13 +917,13 @@ namespace at.dasz.DocumentManagement
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream(this.Proxy.Blob != null ? this.Proxy.Blob.ID : (int?)null, binStream);
-            BinarySerializer.ToStream(this.Proxy.ChangedBy != null ? this.Proxy.ChangedBy.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.Blob != null ? this.Blob.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.ChangedBy != null ? this.ChangedBy.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._isChangedOnSet, binStream);
             if (this._isChangedOnSet) {
                 BinarySerializer.ToStream(this.Proxy.ChangedOn, binStream);
             }
-            BinarySerializer.ToStream(this.Proxy.CreatedBy != null ? this.Proxy.CreatedBy.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.CreatedBy != null ? this.CreatedBy.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._isCreatedOnSet, binStream);
             if (this._isCreatedOnSet) {
                 BinarySerializer.ToStream(this.Proxy.CreatedOn, binStream);
@@ -978,13 +978,13 @@ namespace at.dasz.DocumentManagement
         {
             base.ToStream(xml);
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.Blob != null ? this.Proxy.Blob.ID : (int?)null, xml, "Blob", "at.dasz.DocumentManagement");
-            XmlStreamer.ToStream(this.Proxy.ChangedBy != null ? this.Proxy.ChangedBy.ID : (int?)null, xml, "ChangedBy", "at.dasz.DocumentManagement");
+            XmlStreamer.ToStream(this.Blob != null ? this.Blob.ID : (int?)null, xml, "Blob", "at.dasz.DocumentManagement");
+            XmlStreamer.ToStream(this.ChangedBy != null ? this.ChangedBy.ID : (int?)null, xml, "ChangedBy", "at.dasz.DocumentManagement");
             XmlStreamer.ToStream(this._isChangedOnSet, xml, "IsChangedOnSet", "at.dasz.DocumentManagement");
             if (this._isChangedOnSet) {
                 XmlStreamer.ToStream(this.Proxy.ChangedOn, xml, "ChangedOn", "at.dasz.DocumentManagement");
             }
-            XmlStreamer.ToStream(this.Proxy.CreatedBy != null ? this.Proxy.CreatedBy.ID : (int?)null, xml, "CreatedBy", "at.dasz.DocumentManagement");
+            XmlStreamer.ToStream(this.CreatedBy != null ? this.CreatedBy.ID : (int?)null, xml, "CreatedBy", "at.dasz.DocumentManagement");
             XmlStreamer.ToStream(this._isCreatedOnSet, xml, "IsCreatedOnSet", "at.dasz.DocumentManagement");
             if (this._isCreatedOnSet) {
                 XmlStreamer.ToStream(this.Proxy.CreatedOn, xml, "CreatedOn", "at.dasz.DocumentManagement");
@@ -1043,7 +1043,7 @@ namespace at.dasz.DocumentManagement
         {
             xml.WriteAttributeString("ExportGuid", this.Proxy.ExportGuid.ToString());
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(this.Proxy.Blob != null ? this.Proxy.Blob.ExportGuid : (Guid?)null, xml, "Blob", "at.dasz.DocumentManagement");
+            if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(this.Blob != null ? this.Blob.ExportGuid : (Guid?)null, xml, "Blob", "at.dasz.DocumentManagement");
             System.Diagnostics.Debug.Assert(this._isChangedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(this.Proxy.ChangedOn, xml, "ChangedOn", "at.dasz.DocumentManagement");
             System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");

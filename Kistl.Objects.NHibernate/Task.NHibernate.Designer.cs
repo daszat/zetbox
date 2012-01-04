@@ -1076,12 +1076,12 @@ namespace Kistl.App.Projekte
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             if (!CurrentAccessRights.HasReadRights()) return;
             BinarySerializer.ToStream(this.Proxy.Aufwand, binStream);
-            BinarySerializer.ToStream(this.Proxy.ChangedBy != null ? this.Proxy.ChangedBy.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.ChangedBy != null ? this.ChangedBy.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._isChangedOnSet, binStream);
             if (this._isChangedOnSet) {
                 BinarySerializer.ToStream(this.Proxy.ChangedOn, binStream);
             }
-            BinarySerializer.ToStream(this.Proxy.CreatedBy != null ? this.Proxy.CreatedBy.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.CreatedBy != null ? this.CreatedBy.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._isCreatedOnSet, binStream);
             if (this._isCreatedOnSet) {
                 BinarySerializer.ToStream(this.Proxy.CreatedOn, binStream);
@@ -1093,7 +1093,7 @@ namespace Kistl.App.Projekte
                 BinarySerializer.ToStream(this.Proxy.ExportGuid, binStream);
             }
             BinarySerializer.ToStream(this.Proxy.Name, binStream);
-            BinarySerializer.ToStream(this.Proxy.Projekt != null ? this.Proxy.Projekt.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.Projekt != null ? this.Projekt.ID : (int?)null, binStream);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
@@ -1155,12 +1155,12 @@ namespace Kistl.App.Projekte
             base.ToStream(xml);
             if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.ToStream(this.Proxy.Aufwand, xml, "Aufwand", "Kistl.App.Projekte");
-            XmlStreamer.ToStream(this.Proxy.ChangedBy != null ? this.Proxy.ChangedBy.ID : (int?)null, xml, "ChangedBy", "Kistl.App.Projekte");
+            XmlStreamer.ToStream(this.ChangedBy != null ? this.ChangedBy.ID : (int?)null, xml, "ChangedBy", "Kistl.App.Projekte");
             XmlStreamer.ToStream(this._isChangedOnSet, xml, "IsChangedOnSet", "Kistl.App.Projekte");
             if (this._isChangedOnSet) {
                 XmlStreamer.ToStream(this.Proxy.ChangedOn, xml, "ChangedOn", "Kistl.App.Projekte");
             }
-            XmlStreamer.ToStream(this.Proxy.CreatedBy != null ? this.Proxy.CreatedBy.ID : (int?)null, xml, "CreatedBy", "Kistl.App.Projekte");
+            XmlStreamer.ToStream(this.CreatedBy != null ? this.CreatedBy.ID : (int?)null, xml, "CreatedBy", "Kistl.App.Projekte");
             XmlStreamer.ToStream(this._isCreatedOnSet, xml, "IsCreatedOnSet", "Kistl.App.Projekte");
             if (this._isCreatedOnSet) {
                 XmlStreamer.ToStream(this.Proxy.CreatedOn, xml, "CreatedOn", "Kistl.App.Projekte");
@@ -1172,7 +1172,7 @@ namespace Kistl.App.Projekte
                 XmlStreamer.ToStream(this.Proxy.ExportGuid, xml, "ExportGuid", "Kistl.App.Projekte");
             }
             XmlStreamer.ToStream(this.Proxy.Name, xml, "Name", "Kistl.App.Projekte");
-            XmlStreamer.ToStream(this.Proxy.Projekt != null ? this.Proxy.Projekt.ID : (int?)null, xml, "Projekt", "Kistl.App.Projekte");
+            XmlStreamer.ToStream(this.Projekt != null ? this.Projekt.ID : (int?)null, xml, "Projekt", "Kistl.App.Projekte");
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
@@ -1248,7 +1248,7 @@ namespace Kistl.App.Projekte
             if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this.Proxy.DatumBis, xml, "DatumBis", "Kistl.App.Projekte");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this.Proxy.DatumVon, xml, "DatumVon", "Kistl.App.Projekte");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this.Proxy.Name, xml, "Name", "Kistl.App.Projekte");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this.Proxy.Projekt != null ? this.Proxy.Projekt.ExportGuid : (Guid?)null, xml, "Projekt", "Kistl.App.Projekte");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Projekte")) XmlStreamer.ToStream(this.Projekt != null ? this.Projekt.ExportGuid : (Guid?)null, xml, "Projekt", "Kistl.App.Projekte");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)

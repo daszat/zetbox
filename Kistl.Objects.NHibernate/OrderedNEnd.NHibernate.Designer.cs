@@ -431,7 +431,7 @@ namespace Kistl.App.Test
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream(this.Proxy.OneEnd != null ? this.Proxy.OneEnd.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.OneEnd != null ? this.OneEnd.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this.Proxy.NEnds_pos, binStream);
             BinarySerializer.ToStream(this.Proxy.OtherInt, binStream);
         }
@@ -464,7 +464,7 @@ namespace Kistl.App.Test
         {
             base.ToStream(xml);
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.OneEnd != null ? this.Proxy.OneEnd.ID : (int?)null, xml, "OneEnd", "Kistl.App.Test");
+            XmlStreamer.ToStream(this.OneEnd != null ? this.OneEnd.ID : (int?)null, xml, "OneEnd", "Kistl.App.Test");
             XmlStreamer.ToStream(this.Proxy.NEnds_pos, xml, "NEnds_pos", "Kistl.App.Test");
             XmlStreamer.ToStream(this.Proxy.OtherInt, xml, "OtherInt", "Kistl.App.Test");
         }

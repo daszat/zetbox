@@ -377,7 +377,7 @@ namespace Kistl.App.GUI
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream(this.Proxy.ObjectClass != null ? this.Proxy.ObjectClass.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.ObjectClass != null ? this.ObjectClass.ID : (int?)null, binStream);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
@@ -398,7 +398,7 @@ namespace Kistl.App.GUI
         {
             base.ToStream(xml);
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.ObjectClass != null ? this.Proxy.ObjectClass.ID : (int?)null, xml, "ObjectClass", "Kistl.App.GUI");
+            XmlStreamer.ToStream(this.ObjectClass != null ? this.ObjectClass.ID : (int?)null, xml, "ObjectClass", "Kistl.App.GUI");
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
@@ -419,7 +419,7 @@ namespace Kistl.App.GUI
         {
             base.Export(xml, modules);
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.ObjectClass != null ? this.Proxy.ObjectClass.ExportGuid : (Guid?)null, xml, "ObjectClass", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.ObjectClass != null ? this.ObjectClass.ExportGuid : (Guid?)null, xml, "ObjectClass", "Kistl.App.GUI");
         }
 
         public override void MergeImport(System.Xml.XmlReader xml)

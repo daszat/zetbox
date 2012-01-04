@@ -521,7 +521,7 @@ namespace Kistl.App.Base
             if (this._isExportGuidSet) {
                 BinarySerializer.ToStream(this.Proxy.ExportGuid, binStream);
             }
-            BinarySerializer.ToStream(this.Proxy.Implementor != null ? this.Proxy.Implementor.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.Implementor != null ? this.Implementor.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this.Proxy.MemberName, binStream);
         }
 
@@ -558,7 +558,7 @@ namespace Kistl.App.Base
             if (this._isExportGuidSet) {
                 XmlStreamer.ToStream(this.Proxy.ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             }
-            XmlStreamer.ToStream(this.Proxy.Implementor != null ? this.Proxy.Implementor.ID : (int?)null, xml, "Implementor", "Kistl.App.Base");
+            XmlStreamer.ToStream(this.Implementor != null ? this.Implementor.ID : (int?)null, xml, "Implementor", "Kistl.App.Base");
             XmlStreamer.ToStream(this.Proxy.MemberName, xml, "MemberName", "Kistl.App.Base");
         }
 
@@ -593,7 +593,7 @@ namespace Kistl.App.Base
         {
             xml.WriteAttributeString("ExportGuid", this.Proxy.ExportGuid.ToString());
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.Implementor != null ? this.Proxy.Implementor.ExportGuid : (Guid?)null, xml, "Implementor", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Implementor != null ? this.Implementor.ExportGuid : (Guid?)null, xml, "Implementor", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.MemberName, xml, "MemberName", "Kistl.App.Base");
         }
 

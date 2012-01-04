@@ -1152,12 +1152,12 @@ namespace Kistl.App.GUI
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream(this.Proxy.ChangedBy != null ? this.Proxy.ChangedBy.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.ChangedBy != null ? this.ChangedBy.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._isChangedOnSet, binStream);
             if (this._isChangedOnSet) {
                 BinarySerializer.ToStream(this.Proxy.ChangedOn, binStream);
             }
-            BinarySerializer.ToStream(this.Proxy.CreatedBy != null ? this.Proxy.CreatedBy.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.CreatedBy != null ? this.CreatedBy.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._isCreatedOnSet, binStream);
             if (this._isCreatedOnSet) {
                 BinarySerializer.ToStream(this.Proxy.CreatedOn, binStream);
@@ -1167,10 +1167,10 @@ namespace Kistl.App.GUI
             if (this._isExportGuidSet) {
                 BinarySerializer.ToStream(this.Proxy.ExportGuid, binStream);
             }
-            BinarySerializer.ToStream(this.Proxy.Module != null ? this.Proxy.Module.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.Module != null ? this.Module.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this.Proxy.Name, binStream);
-            BinarySerializer.ToStream(this.Proxy.RootScreen != null ? this.Proxy.RootScreen.ID : (int?)null, binStream);
-            BinarySerializer.ToStream(this.Proxy.WorkspaceViewModel != null ? this.Proxy.WorkspaceViewModel.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.RootScreen != null ? this.RootScreen.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.WorkspaceViewModel != null ? this.WorkspaceViewModel.ID : (int?)null, binStream);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
@@ -1223,12 +1223,12 @@ namespace Kistl.App.GUI
         {
             base.ToStream(xml);
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.ChangedBy != null ? this.Proxy.ChangedBy.ID : (int?)null, xml, "ChangedBy", "Kistl.App.GUI");
+            XmlStreamer.ToStream(this.ChangedBy != null ? this.ChangedBy.ID : (int?)null, xml, "ChangedBy", "Kistl.App.GUI");
             XmlStreamer.ToStream(this._isChangedOnSet, xml, "IsChangedOnSet", "Kistl.App.GUI");
             if (this._isChangedOnSet) {
                 XmlStreamer.ToStream(this.Proxy.ChangedOn, xml, "ChangedOn", "Kistl.App.GUI");
             }
-            XmlStreamer.ToStream(this.Proxy.CreatedBy != null ? this.Proxy.CreatedBy.ID : (int?)null, xml, "CreatedBy", "Kistl.App.GUI");
+            XmlStreamer.ToStream(this.CreatedBy != null ? this.CreatedBy.ID : (int?)null, xml, "CreatedBy", "Kistl.App.GUI");
             XmlStreamer.ToStream(this._isCreatedOnSet, xml, "IsCreatedOnSet", "Kistl.App.GUI");
             if (this._isCreatedOnSet) {
                 XmlStreamer.ToStream(this.Proxy.CreatedOn, xml, "CreatedOn", "Kistl.App.GUI");
@@ -1238,10 +1238,10 @@ namespace Kistl.App.GUI
             if (this._isExportGuidSet) {
                 XmlStreamer.ToStream(this.Proxy.ExportGuid, xml, "ExportGuid", "Kistl.App.GUI");
             }
-            XmlStreamer.ToStream(this.Proxy.Module != null ? this.Proxy.Module.ID : (int?)null, xml, "Module", "Kistl.App.GUI");
+            XmlStreamer.ToStream(this.Module != null ? this.Module.ID : (int?)null, xml, "Module", "Kistl.App.GUI");
             XmlStreamer.ToStream(this.Proxy.Name, xml, "Name", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.RootScreen != null ? this.Proxy.RootScreen.ID : (int?)null, xml, "RootScreen", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.WorkspaceViewModel != null ? this.Proxy.WorkspaceViewModel.ID : (int?)null, xml, "WorkspaceViewModel", "Kistl.App.GUI");
+            XmlStreamer.ToStream(this.RootScreen != null ? this.RootScreen.ID : (int?)null, xml, "RootScreen", "Kistl.App.GUI");
+            XmlStreamer.ToStream(this.WorkspaceViewModel != null ? this.WorkspaceViewModel.ID : (int?)null, xml, "WorkspaceViewModel", "Kistl.App.GUI");
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
@@ -1304,10 +1304,10 @@ namespace Kistl.App.GUI
             System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.CreatedOn, xml, "CreatedOn", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.Description, xml, "Description", "Kistl.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.Module != null ? this.Proxy.Module.ExportGuid : (Guid?)null, xml, "Module", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Module != null ? this.Module.ExportGuid : (Guid?)null, xml, "Module", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.Name, xml, "Name", "Kistl.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.RootScreen != null ? this.Proxy.RootScreen.ExportGuid : (Guid?)null, xml, "RootScreen", "Kistl.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.WorkspaceViewModel != null ? this.Proxy.WorkspaceViewModel.ExportGuid : (Guid?)null, xml, "WorkspaceViewModel", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.RootScreen != null ? this.RootScreen.ExportGuid : (Guid?)null, xml, "RootScreen", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.WorkspaceViewModel != null ? this.WorkspaceViewModel.ExportGuid : (Guid?)null, xml, "WorkspaceViewModel", "Kistl.App.GUI");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)

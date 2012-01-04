@@ -108,7 +108,7 @@ namespace Kistl.DalProvider.NHibernate.Generator.Templates.Properties
         {
             if (list != null)
             {
-                var proxyName = "this.Proxy." + name;
+                var proxyName = "this." + name;
 
                 if (relDataTypeExportable)
                 {

@@ -884,8 +884,8 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             if (!CurrentAccessRights.HasReadRights()) return;
             BinarySerializer.ToStream(this.Proxy.Birthday, binStream);
-            BinarySerializer.ToStream(this.Proxy.MubBlah_Nav != null ? this.Proxy.MubBlah_Nav.ID : (int?)null, binStream);
-            BinarySerializer.ToStream(this.Proxy.MuhBlah_One_Nav != null ? this.Proxy.MuhBlah_One_Nav.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.MubBlah_Nav != null ? this.MubBlah_Nav.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.MuhBlah_One_Nav != null ? this.MuhBlah_One_Nav.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this.Proxy.PersonName, binStream);
 			BinarySerializer.ToStream(this.PhoneNumberMobile, binStream);
 			BinarySerializer.ToStream(this.PhoneNumberOffice, binStream);
@@ -939,8 +939,8 @@ public static event PropertyListChangedHandler<Kistl.App.Test.TestCustomObject> 
             base.ToStream(xml);
             if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.ToStream(this.Proxy.Birthday, xml, "Birthday", "Kistl.App.Test");
-            XmlStreamer.ToStream(this.Proxy.MubBlah_Nav != null ? this.Proxy.MubBlah_Nav.ID : (int?)null, xml, "MubBlah_Nav", "Kistl.App.Test");
-            XmlStreamer.ToStream(this.Proxy.MuhBlah_One_Nav != null ? this.Proxy.MuhBlah_One_Nav.ID : (int?)null, xml, "MuhBlah_One_Nav", "Kistl.App.Test");
+            XmlStreamer.ToStream(this.MubBlah_Nav != null ? this.MubBlah_Nav.ID : (int?)null, xml, "MubBlah_Nav", "Kistl.App.Test");
+            XmlStreamer.ToStream(this.MuhBlah_One_Nav != null ? this.MuhBlah_One_Nav.ID : (int?)null, xml, "MuhBlah_One_Nav", "Kistl.App.Test");
             XmlStreamer.ToStream(this.Proxy.PersonName, xml, "PersonName", "Kistl.App.Test");
 			// TODO: Add XML Serializer here
 			// TODO: Add XML Serializer here

@@ -748,9 +748,9 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.ControlKind> OnChil
             if (this._isExportGuidSet) {
                 BinarySerializer.ToStream(this.Proxy.ExportGuid, binStream);
             }
-            BinarySerializer.ToStream(this.Proxy.Module != null ? this.Proxy.Module.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.Module != null ? this.Module.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this.Proxy.Name, binStream);
-            BinarySerializer.ToStream(this.Proxy.Parent != null ? this.Proxy.Parent.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.Parent != null ? this.Parent.ID : (int?)null, binStream);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
@@ -787,9 +787,9 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.ControlKind> OnChil
             if (this._isExportGuidSet) {
                 XmlStreamer.ToStream(this.Proxy.ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             }
-            XmlStreamer.ToStream(this.Proxy.Module != null ? this.Proxy.Module.ID : (int?)null, xml, "Module", "Kistl.App.GUI");
+            XmlStreamer.ToStream(this.Module != null ? this.Module.ID : (int?)null, xml, "Module", "Kistl.App.GUI");
             XmlStreamer.ToStream(this.Proxy.Name, xml, "Name", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.Parent != null ? this.Proxy.Parent.ID : (int?)null, xml, "Parent", "Kistl.App.GUI");
+            XmlStreamer.ToStream(this.Parent != null ? this.Parent.ID : (int?)null, xml, "Parent", "Kistl.App.GUI");
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
@@ -824,9 +824,9 @@ public static event PropertyListChangedHandler<Kistl.App.GUI.ControlKind> OnChil
         {
             xml.WriteAttributeString("ExportGuid", this.Proxy.ExportGuid.ToString());
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.Module != null ? this.Proxy.Module.ExportGuid : (Guid?)null, xml, "Module", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Module != null ? this.Module.ExportGuid : (Guid?)null, xml, "Module", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.Name, xml, "Name", "Kistl.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.Parent != null ? this.Proxy.Parent.ExportGuid : (Guid?)null, xml, "Parent", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Parent != null ? this.Parent.ExportGuid : (Guid?)null, xml, "Parent", "Kistl.App.GUI");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)

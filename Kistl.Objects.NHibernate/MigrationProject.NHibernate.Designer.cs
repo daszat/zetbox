@@ -946,18 +946,18 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.Migratio
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream(this.Proxy.ChangedBy != null ? this.Proxy.ChangedBy.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.ChangedBy != null ? this.ChangedBy.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._isChangedOnSet, binStream);
             if (this._isChangedOnSet) {
                 BinarySerializer.ToStream(this.Proxy.ChangedOn, binStream);
             }
-            BinarySerializer.ToStream(this.Proxy.CreatedBy != null ? this.Proxy.CreatedBy.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.CreatedBy != null ? this.CreatedBy.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._isCreatedOnSet, binStream);
             if (this._isCreatedOnSet) {
                 BinarySerializer.ToStream(this.Proxy.CreatedOn, binStream);
             }
             BinarySerializer.ToStream(this.Proxy.Description, binStream);
-            BinarySerializer.ToStream(this.Proxy.DestinationModule != null ? this.Proxy.DestinationModule.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.DestinationModule != null ? this.DestinationModule.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._isExportGuidSet, binStream);
             if (this._isExportGuidSet) {
                 BinarySerializer.ToStream(this.Proxy.ExportGuid, binStream);
@@ -1007,18 +1007,18 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.Migratio
         {
             base.ToStream(xml);
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.ChangedBy != null ? this.Proxy.ChangedBy.ID : (int?)null, xml, "ChangedBy", "ZBox.App.SchemaMigration");
+            XmlStreamer.ToStream(this.ChangedBy != null ? this.ChangedBy.ID : (int?)null, xml, "ChangedBy", "ZBox.App.SchemaMigration");
             XmlStreamer.ToStream(this._isChangedOnSet, xml, "IsChangedOnSet", "ZBox.App.SchemaMigration");
             if (this._isChangedOnSet) {
                 XmlStreamer.ToStream(this.Proxy.ChangedOn, xml, "ChangedOn", "ZBox.App.SchemaMigration");
             }
-            XmlStreamer.ToStream(this.Proxy.CreatedBy != null ? this.Proxy.CreatedBy.ID : (int?)null, xml, "CreatedBy", "ZBox.App.SchemaMigration");
+            XmlStreamer.ToStream(this.CreatedBy != null ? this.CreatedBy.ID : (int?)null, xml, "CreatedBy", "ZBox.App.SchemaMigration");
             XmlStreamer.ToStream(this._isCreatedOnSet, xml, "IsCreatedOnSet", "ZBox.App.SchemaMigration");
             if (this._isCreatedOnSet) {
                 XmlStreamer.ToStream(this.Proxy.CreatedOn, xml, "CreatedOn", "ZBox.App.SchemaMigration");
             }
             XmlStreamer.ToStream(this.Proxy.Description, xml, "Description", "ZBox.App.SchemaMigration");
-            XmlStreamer.ToStream(this.Proxy.DestinationModule != null ? this.Proxy.DestinationModule.ID : (int?)null, xml, "DestinationModule", "ZBox.App.SchemaMigration");
+            XmlStreamer.ToStream(this.DestinationModule != null ? this.DestinationModule.ID : (int?)null, xml, "DestinationModule", "ZBox.App.SchemaMigration");
             XmlStreamer.ToStream(this._isExportGuidSet, xml, "IsExportGuidSet", "ZBox.App.SchemaMigration");
             if (this._isExportGuidSet) {
                 XmlStreamer.ToStream(this.Proxy.ExportGuid, xml, "ExportGuid", "ZBox.App.SchemaMigration");
@@ -1077,7 +1077,7 @@ public static event PropertyListChangedHandler<ZBox.App.SchemaMigration.Migratio
             System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("ZBox.App.SchemaMigration")) XmlStreamer.ToStream(this.Proxy.CreatedOn, xml, "CreatedOn", "ZBox.App.SchemaMigration");
             if (modules.Contains("*") || modules.Contains("ZBox.App.SchemaMigration")) XmlStreamer.ToStream(this.Proxy.Description, xml, "Description", "ZBox.App.SchemaMigration");
-            if (modules.Contains("*") || modules.Contains("ZBox.App.SchemaMigration")) XmlStreamer.ToStream(this.Proxy.DestinationModule != null ? this.Proxy.DestinationModule.ExportGuid : (Guid?)null, xml, "DestinationModule", "ZBox.App.SchemaMigration");
+            if (modules.Contains("*") || modules.Contains("ZBox.App.SchemaMigration")) XmlStreamer.ToStream(this.DestinationModule != null ? this.DestinationModule.ExportGuid : (Guid?)null, xml, "DestinationModule", "ZBox.App.SchemaMigration");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)

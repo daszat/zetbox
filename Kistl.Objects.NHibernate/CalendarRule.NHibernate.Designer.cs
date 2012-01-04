@@ -1283,13 +1283,13 @@ namespace Kistl.App.Calendar
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream(this.Proxy.Calendar != null ? this.Proxy.Calendar.ID : (int?)null, binStream);
-            BinarySerializer.ToStream(this.Proxy.ChangedBy != null ? this.Proxy.ChangedBy.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.Calendar != null ? this.Calendar.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.ChangedBy != null ? this.ChangedBy.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._isChangedOnSet, binStream);
             if (this._isChangedOnSet) {
                 BinarySerializer.ToStream(this.Proxy.ChangedOn, binStream);
             }
-            BinarySerializer.ToStream(this.Proxy.CreatedBy != null ? this.Proxy.CreatedBy.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.CreatedBy != null ? this.CreatedBy.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._isCreatedOnSet, binStream);
             if (this._isCreatedOnSet) {
                 BinarySerializer.ToStream(this.Proxy.CreatedOn, binStream);
@@ -1302,7 +1302,7 @@ namespace Kistl.App.Calendar
             if (this._isIsWorkingDaySet) {
                 BinarySerializer.ToStream(this.Proxy.IsWorkingDay, binStream);
             }
-            BinarySerializer.ToStream(this.Proxy.Module != null ? this.Proxy.Module.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.Module != null ? this.Module.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this.Proxy.Name, binStream);
             BinarySerializer.ToStream(this.Proxy.ValidFrom, binStream);
             BinarySerializer.ToStream(this.Proxy.ValidUntil, binStream);
@@ -1374,13 +1374,13 @@ namespace Kistl.App.Calendar
         {
             base.ToStream(xml);
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.Calendar != null ? this.Proxy.Calendar.ID : (int?)null, xml, "Calendar", "Kistl.App.Calendar");
-            XmlStreamer.ToStream(this.Proxy.ChangedBy != null ? this.Proxy.ChangedBy.ID : (int?)null, xml, "ChangedBy", "Kistl.App.Calendar");
+            XmlStreamer.ToStream(this.Calendar != null ? this.Calendar.ID : (int?)null, xml, "Calendar", "Kistl.App.Calendar");
+            XmlStreamer.ToStream(this.ChangedBy != null ? this.ChangedBy.ID : (int?)null, xml, "ChangedBy", "Kistl.App.Calendar");
             XmlStreamer.ToStream(this._isChangedOnSet, xml, "IsChangedOnSet", "Kistl.App.Calendar");
             if (this._isChangedOnSet) {
                 XmlStreamer.ToStream(this.Proxy.ChangedOn, xml, "ChangedOn", "Kistl.App.Calendar");
             }
-            XmlStreamer.ToStream(this.Proxy.CreatedBy != null ? this.Proxy.CreatedBy.ID : (int?)null, xml, "CreatedBy", "Kistl.App.Calendar");
+            XmlStreamer.ToStream(this.CreatedBy != null ? this.CreatedBy.ID : (int?)null, xml, "CreatedBy", "Kistl.App.Calendar");
             XmlStreamer.ToStream(this._isCreatedOnSet, xml, "IsCreatedOnSet", "Kistl.App.Calendar");
             if (this._isCreatedOnSet) {
                 XmlStreamer.ToStream(this.Proxy.CreatedOn, xml, "CreatedOn", "Kistl.App.Calendar");
@@ -1393,7 +1393,7 @@ namespace Kistl.App.Calendar
             if (this._isIsWorkingDaySet) {
                 XmlStreamer.ToStream(this.Proxy.IsWorkingDay, xml, "IsWorkingDay", "Kistl.App.Calendar");
             }
-            XmlStreamer.ToStream(this.Proxy.Module != null ? this.Proxy.Module.ID : (int?)null, xml, "Module", "Kistl.App.Calendar");
+            XmlStreamer.ToStream(this.Module != null ? this.Module.ID : (int?)null, xml, "Module", "Kistl.App.Calendar");
             XmlStreamer.ToStream(this.Proxy.Name, xml, "Name", "Kistl.App.Calendar");
             XmlStreamer.ToStream(this.Proxy.ValidFrom, xml, "ValidFrom", "Kistl.App.Calendar");
             XmlStreamer.ToStream(this.Proxy.ValidUntil, xml, "ValidUntil", "Kistl.App.Calendar");
@@ -1473,14 +1473,14 @@ namespace Kistl.App.Calendar
         {
             xml.WriteAttributeString("ExportGuid", this.Proxy.ExportGuid.ToString());
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Calendar")) XmlStreamer.ToStream(this.Proxy.Calendar != null ? this.Proxy.Calendar.ExportGuid : (Guid?)null, xml, "Calendar", "Kistl.App.Calendar");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Calendar")) XmlStreamer.ToStream(this.Calendar != null ? this.Calendar.ExportGuid : (Guid?)null, xml, "Calendar", "Kistl.App.Calendar");
             System.Diagnostics.Debug.Assert(this._isChangedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Calendar")) XmlStreamer.ToStream(this.Proxy.ChangedOn, xml, "ChangedOn", "Kistl.App.Calendar");
             System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Calendar")) XmlStreamer.ToStream(this.Proxy.CreatedOn, xml, "CreatedOn", "Kistl.App.Calendar");
             System.Diagnostics.Debug.Assert(this._isIsWorkingDaySet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Calendar")) XmlStreamer.ToStream(this.Proxy.IsWorkingDay, xml, "IsWorkingDay", "Kistl.App.Calendar");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Calendar")) XmlStreamer.ToStream(this.Proxy.Module != null ? this.Proxy.Module.ExportGuid : (Guid?)null, xml, "Module", "Kistl.App.Calendar");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Calendar")) XmlStreamer.ToStream(this.Module != null ? this.Module.ExportGuid : (Guid?)null, xml, "Module", "Kistl.App.Calendar");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Calendar")) XmlStreamer.ToStream(this.Proxy.Name, xml, "Name", "Kistl.App.Calendar");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Calendar")) XmlStreamer.ToStream(this.Proxy.ValidFrom, xml, "ValidFrom", "Kistl.App.Calendar");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Calendar")) XmlStreamer.ToStream(this.Proxy.ValidUntil, xml, "ValidUntil", "Kistl.App.Calendar");

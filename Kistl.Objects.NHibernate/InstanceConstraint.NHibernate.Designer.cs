@@ -526,7 +526,7 @@ namespace Kistl.App.Base
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream(this.Proxy.Constrained != null ? this.Proxy.Constrained.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.Constrained != null ? this.Constrained.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._isExportGuidSet, binStream);
             if (this._isExportGuidSet) {
                 BinarySerializer.ToStream(this.Proxy.ExportGuid, binStream);
@@ -563,7 +563,7 @@ namespace Kistl.App.Base
         {
             base.ToStream(xml);
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.Constrained != null ? this.Proxy.Constrained.ID : (int?)null, xml, "Constrained", "Kistl.App.Base");
+            XmlStreamer.ToStream(this.Constrained != null ? this.Constrained.ID : (int?)null, xml, "Constrained", "Kistl.App.Base");
             XmlStreamer.ToStream(this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Base");
             if (this._isExportGuidSet) {
                 XmlStreamer.ToStream(this.Proxy.ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
@@ -602,7 +602,7 @@ namespace Kistl.App.Base
         {
             xml.WriteAttributeString("ExportGuid", this.Proxy.ExportGuid.ToString());
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.Constrained != null ? this.Proxy.Constrained.ExportGuid : (Guid?)null, xml, "Constrained", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Constrained != null ? this.Constrained.ExportGuid : (Guid?)null, xml, "Constrained", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.Reason, xml, "Reason", "Kistl.App.Base");
         }
 

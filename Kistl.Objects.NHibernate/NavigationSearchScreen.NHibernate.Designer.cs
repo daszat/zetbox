@@ -1495,14 +1495,14 @@ namespace Kistl.App.GUI
             BinarySerializer.ToStream((int?)Proxy.InitialSortDirection, binStream);
             BinarySerializer.ToStream(this.Proxy.IsEditable, binStream);
             BinarySerializer.ToStream(this.Proxy.IsMultiselect, binStream);
-            BinarySerializer.ToStream(this.Proxy.RequestedEditorKind != null ? this.Proxy.RequestedEditorKind.ID : (int?)null, binStream);
-            BinarySerializer.ToStream(this.Proxy.RequestedWorkspaceKind != null ? this.Proxy.RequestedWorkspaceKind.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.RequestedEditorKind != null ? this.RequestedEditorKind.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.RequestedWorkspaceKind != null ? this.RequestedWorkspaceKind.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this.Proxy.RespectRequiredFilter, binStream);
             BinarySerializer.ToStream(this.Proxy.ShowFilter, binStream);
             BinarySerializer.ToStream(this.Proxy.ShowMasterDetail, binStream);
             BinarySerializer.ToStream(this.Proxy.ShowOpenCommand, binStream);
             BinarySerializer.ToStream(this.Proxy.ShowRefreshCommand, binStream);
-            BinarySerializer.ToStream(this.Proxy.Type != null ? this.Proxy.Type.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.Type != null ? this.Type.ID : (int?)null, binStream);
             BinarySerializer.ToStream((int?)Proxy.ViewMethod, binStream);
         }
 
@@ -1610,14 +1610,14 @@ namespace Kistl.App.GUI
             XmlStreamer.ToStream((int?)Proxy.InitialSortDirection, xml, "InitialSortDirection", "Kistl.App.GUI");
             XmlStreamer.ToStream(this.Proxy.IsEditable, xml, "IsEditable", "Kistl.App.GUI");
             XmlStreamer.ToStream(this.Proxy.IsMultiselect, xml, "IsMultiselect", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.RequestedEditorKind != null ? this.Proxy.RequestedEditorKind.ID : (int?)null, xml, "RequestedEditorKind", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.RequestedWorkspaceKind != null ? this.Proxy.RequestedWorkspaceKind.ID : (int?)null, xml, "RequestedWorkspaceKind", "Kistl.App.GUI");
+            XmlStreamer.ToStream(this.RequestedEditorKind != null ? this.RequestedEditorKind.ID : (int?)null, xml, "RequestedEditorKind", "Kistl.App.GUI");
+            XmlStreamer.ToStream(this.RequestedWorkspaceKind != null ? this.RequestedWorkspaceKind.ID : (int?)null, xml, "RequestedWorkspaceKind", "Kistl.App.GUI");
             XmlStreamer.ToStream(this.Proxy.RespectRequiredFilter, xml, "RespectRequiredFilter", "Kistl.App.GUI");
             XmlStreamer.ToStream(this.Proxy.ShowFilter, xml, "ShowFilter", "Kistl.App.GUI");
             XmlStreamer.ToStream(this.Proxy.ShowMasterDetail, xml, "ShowMasterDetail", "Kistl.App.GUI");
             XmlStreamer.ToStream(this.Proxy.ShowOpenCommand, xml, "ShowOpenCommand", "Kistl.App.GUI");
             XmlStreamer.ToStream(this.Proxy.ShowRefreshCommand, xml, "ShowRefreshCommand", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.Type != null ? this.Proxy.Type.ID : (int?)null, xml, "Type", "Kistl.App.GUI");
+            XmlStreamer.ToStream(this.Type != null ? this.Type.ID : (int?)null, xml, "Type", "Kistl.App.GUI");
             XmlStreamer.ToStream((int?)Proxy.ViewMethod, xml, "ViewMethod", "Kistl.App.GUI");
         }
 
@@ -1730,14 +1730,14 @@ namespace Kistl.App.GUI
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream((int?)Proxy.InitialSortDirection, xml, "InitialSortDirection", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.IsEditable, xml, "IsEditable", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.IsMultiselect, xml, "IsMultiselect", "Kistl.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.RequestedEditorKind != null ? this.Proxy.RequestedEditorKind.ExportGuid : (Guid?)null, xml, "RequestedEditorKind", "Kistl.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.RequestedWorkspaceKind != null ? this.Proxy.RequestedWorkspaceKind.ExportGuid : (Guid?)null, xml, "RequestedWorkspaceKind", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.RequestedEditorKind != null ? this.RequestedEditorKind.ExportGuid : (Guid?)null, xml, "RequestedEditorKind", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.RequestedWorkspaceKind != null ? this.RequestedWorkspaceKind.ExportGuid : (Guid?)null, xml, "RequestedWorkspaceKind", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.RespectRequiredFilter, xml, "RespectRequiredFilter", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.ShowFilter, xml, "ShowFilter", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.ShowMasterDetail, xml, "ShowMasterDetail", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.ShowOpenCommand, xml, "ShowOpenCommand", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.ShowRefreshCommand, xml, "ShowRefreshCommand", "Kistl.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.Type != null ? this.Proxy.Type.ExportGuid : (Guid?)null, xml, "Type", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Type != null ? this.Type.ExportGuid : (Guid?)null, xml, "Type", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream((int?)Proxy.ViewMethod, xml, "ViewMethod", "Kistl.App.GUI");
         }
 

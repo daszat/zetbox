@@ -838,11 +838,11 @@ namespace Kistl.App.Base
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream(this.Proxy.FalseIcon != null ? this.Proxy.FalseIcon.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.FalseIcon != null ? this.FalseIcon.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this.Proxy.FalseLabel, binStream);
-            BinarySerializer.ToStream(this.Proxy.NullIcon != null ? this.Proxy.NullIcon.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.NullIcon != null ? this.NullIcon.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this.Proxy.NullLabel, binStream);
-            BinarySerializer.ToStream(this.Proxy.TrueIcon != null ? this.Proxy.TrueIcon.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.TrueIcon != null ? this.TrueIcon.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this.Proxy.TrueLabel, binStream);
         }
 
@@ -881,11 +881,11 @@ namespace Kistl.App.Base
         {
             base.ToStream(xml);
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.FalseIcon != null ? this.Proxy.FalseIcon.ID : (int?)null, xml, "FalseIcon", "Kistl.App.GUI");
+            XmlStreamer.ToStream(this.FalseIcon != null ? this.FalseIcon.ID : (int?)null, xml, "FalseIcon", "Kistl.App.GUI");
             XmlStreamer.ToStream(this.Proxy.FalseLabel, xml, "FalseLabel", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.Proxy.NullIcon != null ? this.Proxy.NullIcon.ID : (int?)null, xml, "NullIcon", "Kistl.App.GUI");
+            XmlStreamer.ToStream(this.NullIcon != null ? this.NullIcon.ID : (int?)null, xml, "NullIcon", "Kistl.App.GUI");
             XmlStreamer.ToStream(this.Proxy.NullLabel, xml, "NullLabel", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.Proxy.TrueIcon != null ? this.Proxy.TrueIcon.ID : (int?)null, xml, "TrueIcon", "Kistl.App.GUI");
+            XmlStreamer.ToStream(this.TrueIcon != null ? this.TrueIcon.ID : (int?)null, xml, "TrueIcon", "Kistl.App.GUI");
             XmlStreamer.ToStream(this.Proxy.TrueLabel, xml, "TrueLabel", "Kistl.App.Base");
         }
 
@@ -927,11 +927,11 @@ namespace Kistl.App.Base
         {
             base.Export(xml, modules);
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.FalseIcon != null ? this.Proxy.FalseIcon.ExportGuid : (Guid?)null, xml, "FalseIcon", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.FalseIcon != null ? this.FalseIcon.ExportGuid : (Guid?)null, xml, "FalseIcon", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.FalseLabel, xml, "FalseLabel", "Kistl.App.Base");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.NullIcon != null ? this.Proxy.NullIcon.ExportGuid : (Guid?)null, xml, "NullIcon", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.NullIcon != null ? this.NullIcon.ExportGuid : (Guid?)null, xml, "NullIcon", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.NullLabel, xml, "NullLabel", "Kistl.App.Base");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.TrueIcon != null ? this.Proxy.TrueIcon.ExportGuid : (Guid?)null, xml, "TrueIcon", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.TrueIcon != null ? this.TrueIcon.ExportGuid : (Guid?)null, xml, "TrueIcon", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.TrueLabel, xml, "TrueLabel", "Kistl.App.Base");
         }
 

@@ -1306,12 +1306,12 @@ namespace Kistl.App.Base
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream(this.Proxy.ChangedBy != null ? this.Proxy.ChangedBy.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.ChangedBy != null ? this.ChangedBy.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._isChangedOnSet, binStream);
             if (this._isChangedOnSet) {
                 BinarySerializer.ToStream(this.Proxy.ChangedOn, binStream);
             }
-            BinarySerializer.ToStream(this.Proxy.CreatedBy != null ? this.Proxy.CreatedBy.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.CreatedBy != null ? this.CreatedBy.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._isCreatedOnSet, binStream);
             if (this._isCreatedOnSet) {
                 BinarySerializer.ToStream(this.Proxy.CreatedOn, binStream);
@@ -1328,7 +1328,7 @@ namespace Kistl.App.Base
             }
             BinarySerializer.ToStream(this.Proxy.IsReturnParameter, binStream);
             BinarySerializer.ToStream(this.Proxy.Label, binStream);
-            BinarySerializer.ToStream(this.Proxy.Method != null ? this.Proxy.Method.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.Method != null ? this.Method.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this.Proxy.Parameter_pos, binStream);
             BinarySerializer.ToStream(this.Proxy.Name, binStream);
         }
@@ -1407,12 +1407,12 @@ namespace Kistl.App.Base
         {
             base.ToStream(xml);
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.ChangedBy != null ? this.Proxy.ChangedBy.ID : (int?)null, xml, "ChangedBy", "Kistl.App.Base");
+            XmlStreamer.ToStream(this.ChangedBy != null ? this.ChangedBy.ID : (int?)null, xml, "ChangedBy", "Kistl.App.Base");
             XmlStreamer.ToStream(this._isChangedOnSet, xml, "IsChangedOnSet", "Kistl.App.Base");
             if (this._isChangedOnSet) {
                 XmlStreamer.ToStream(this.Proxy.ChangedOn, xml, "ChangedOn", "Kistl.App.Base");
             }
-            XmlStreamer.ToStream(this.Proxy.CreatedBy != null ? this.Proxy.CreatedBy.ID : (int?)null, xml, "CreatedBy", "Kistl.App.Base");
+            XmlStreamer.ToStream(this.CreatedBy != null ? this.CreatedBy.ID : (int?)null, xml, "CreatedBy", "Kistl.App.Base");
             XmlStreamer.ToStream(this._isCreatedOnSet, xml, "IsCreatedOnSet", "Kistl.App.Base");
             if (this._isCreatedOnSet) {
                 XmlStreamer.ToStream(this.Proxy.CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
@@ -1429,7 +1429,7 @@ namespace Kistl.App.Base
             }
             XmlStreamer.ToStream(this.Proxy.IsReturnParameter, xml, "IsReturnParameter", "Kistl.App.Base");
             XmlStreamer.ToStream(this.Proxy.Label, xml, "Label", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.Proxy.Method != null ? this.Proxy.Method.ID : (int?)null, xml, "Method", "Kistl.App.Base");
+            XmlStreamer.ToStream(this.Method != null ? this.Method.ID : (int?)null, xml, "Method", "Kistl.App.Base");
             XmlStreamer.ToStream(this.Proxy.Parameter_pos, xml, "Parameter_pos", "Kistl.App.Base");
             XmlStreamer.ToStream(this.Proxy.Name, xml, "Name", "Kistl.App.Base");
         }
@@ -1528,7 +1528,7 @@ namespace Kistl.App.Base
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.IsNullable, xml, "IsNullable", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.IsReturnParameter, xml, "IsReturnParameter", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.Label, xml, "Label", "Kistl.App.Base");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.Method != null ? this.Proxy.Method.ExportGuid : (Guid?)null, xml, "Method", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Method != null ? this.Method.ExportGuid : (Guid?)null, xml, "Method", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.Parameter_pos, xml, "Parameter_pos", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.Name, xml, "Name", "Kistl.App.Base");
         }

@@ -799,8 +799,8 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             if (!CurrentAccessRights.HasReadRights()) return;
             BinarySerializer.ToStream(this.Proxy.TestBool, binStream);
-            BinarySerializer.ToStream(this.Proxy.TestCustomObjects_Nav != null ? this.Proxy.TestCustomObjects_Nav.ID : (int?)null, binStream);
-            BinarySerializer.ToStream(this.Proxy.TestCustomObjects_One_Nav != null ? this.Proxy.TestCustomObjects_One_Nav.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.TestCustomObjects_Nav != null ? this.TestCustomObjects_Nav.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.TestCustomObjects_One_Nav != null ? this.TestCustomObjects_One_Nav.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this.Proxy.TestDateTime, binStream);
             BinarySerializer.ToStream((int?)Proxy.TestEnum, binStream);
             BinarySerializer.ToStream(this.Proxy.TestString, binStream);
@@ -846,8 +846,8 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
             base.ToStream(xml);
             if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.ToStream(this.Proxy.TestBool, xml, "TestBool", "Kistl.App.Test");
-            XmlStreamer.ToStream(this.Proxy.TestCustomObjects_Nav != null ? this.Proxy.TestCustomObjects_Nav.ID : (int?)null, xml, "TestCustomObjects_Nav", "Kistl.App.Test");
-            XmlStreamer.ToStream(this.Proxy.TestCustomObjects_One_Nav != null ? this.Proxy.TestCustomObjects_One_Nav.ID : (int?)null, xml, "TestCustomObjects_One_Nav", "Kistl.App.Test");
+            XmlStreamer.ToStream(this.TestCustomObjects_Nav != null ? this.TestCustomObjects_Nav.ID : (int?)null, xml, "TestCustomObjects_Nav", "Kistl.App.Test");
+            XmlStreamer.ToStream(this.TestCustomObjects_One_Nav != null ? this.TestCustomObjects_One_Nav.ID : (int?)null, xml, "TestCustomObjects_One_Nav", "Kistl.App.Test");
             XmlStreamer.ToStream(this.Proxy.TestDateTime, xml, "TestDateTime", "Kistl.App.Test");
             XmlStreamer.ToStream((int?)Proxy.TestEnum, xml, "TestEnum", "Kistl.App.Test");
             XmlStreamer.ToStream(this.Proxy.TestString, xml, "TestString", "Kistl.App.Test");

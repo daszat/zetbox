@@ -579,7 +579,7 @@ namespace Kistl.App.Base
             if (!CurrentAccessRights.HasReadRights()) return;
             BinarySerializer.ToStream(this.Proxy.EagerLoading, binStream);
             BinarySerializer.ToStream(this.Proxy.IsInlineEditable, binStream);
-            BinarySerializer.ToStream(this.Proxy.RelationEnd != null ? this.Proxy.RelationEnd.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.RelationEnd != null ? this.RelationEnd.ID : (int?)null, binStream);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
@@ -612,7 +612,7 @@ namespace Kistl.App.Base
             if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.ToStream(this.Proxy.EagerLoading, xml, "EagerLoading", "Kistl.App.Base");
             XmlStreamer.ToStream(this.Proxy.IsInlineEditable, xml, "IsInlineEditable", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.RelationEnd != null ? this.Proxy.RelationEnd.ID : (int?)null, xml, "RelationEnd", "Kistl.App.Base");
+            XmlStreamer.ToStream(this.RelationEnd != null ? this.RelationEnd.ID : (int?)null, xml, "RelationEnd", "Kistl.App.Base");
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
@@ -647,7 +647,7 @@ namespace Kistl.App.Base
             if (!CurrentAccessRights.HasReadRights()) return;
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.EagerLoading, xml, "EagerLoading", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.IsInlineEditable, xml, "IsInlineEditable", "Kistl.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.RelationEnd != null ? this.Proxy.RelationEnd.ExportGuid : (Guid?)null, xml, "RelationEnd", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.RelationEnd != null ? this.RelationEnd.ExportGuid : (Guid?)null, xml, "RelationEnd", "Kistl.App.Base");
         }
 
         public override void MergeImport(System.Xml.XmlReader xml)

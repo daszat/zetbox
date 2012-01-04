@@ -388,7 +388,7 @@ namespace Kistl.App.Base
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream(this.Proxy.DefaultPropertyViewModelDescriptor != null ? this.Proxy.DefaultPropertyViewModelDescriptor.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.DefaultPropertyViewModelDescriptor != null ? this.DefaultPropertyViewModelDescriptor.ID : (int?)null, binStream);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
@@ -409,7 +409,7 @@ namespace Kistl.App.Base
         {
             base.ToStream(xml);
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.DefaultPropertyViewModelDescriptor != null ? this.Proxy.DefaultPropertyViewModelDescriptor.ID : (int?)null, xml, "DefaultPropertyViewModelDescriptor", "Kistl.App.Base");
+            XmlStreamer.ToStream(this.DefaultPropertyViewModelDescriptor != null ? this.DefaultPropertyViewModelDescriptor.ID : (int?)null, xml, "DefaultPropertyViewModelDescriptor", "Kistl.App.Base");
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
@@ -430,7 +430,7 @@ namespace Kistl.App.Base
         {
             base.Export(xml, modules);
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.DefaultPropertyViewModelDescriptor != null ? this.Proxy.DefaultPropertyViewModelDescriptor.ExportGuid : (Guid?)null, xml, "DefaultPropertyViewModelDescriptor", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.DefaultPropertyViewModelDescriptor != null ? this.DefaultPropertyViewModelDescriptor.ExportGuid : (Guid?)null, xml, "DefaultPropertyViewModelDescriptor", "Kistl.App.Base");
         }
 
         public override void MergeImport(System.Xml.XmlReader xml)

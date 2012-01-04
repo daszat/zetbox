@@ -312,7 +312,7 @@ namespace Kistl.App.Base
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream(this.Proxy.Group != null ? this.Proxy.Group.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.Group != null ? this.Group.ID : (int?)null, binStream);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
@@ -333,7 +333,7 @@ namespace Kistl.App.Base
         {
             base.ToStream(xml);
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.Group != null ? this.Proxy.Group.ID : (int?)null, xml, "Group", "Kistl.App.Base");
+            XmlStreamer.ToStream(this.Group != null ? this.Group.ID : (int?)null, xml, "Group", "Kistl.App.Base");
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
@@ -354,7 +354,7 @@ namespace Kistl.App.Base
         {
             base.Export(xml, modules);
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.Group != null ? this.Proxy.Group.ExportGuid : (Guid?)null, xml, "Group", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Group != null ? this.Group.ExportGuid : (Guid?)null, xml, "Group", "Kistl.App.Base");
         }
 
         public override void MergeImport(System.Xml.XmlReader xml)

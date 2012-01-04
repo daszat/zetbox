@@ -539,7 +539,7 @@ namespace Kistl.App.Base
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream(this.Proxy.CompoundObjectDefinition != null ? this.Proxy.CompoundObjectDefinition.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.CompoundObjectDefinition != null ? this.CompoundObjectDefinition.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this.Proxy.HasPersistentOrder, binStream);
             BinarySerializer.ToStream(this.Proxy.IsList, binStream);
         }
@@ -572,7 +572,7 @@ namespace Kistl.App.Base
         {
             base.ToStream(xml);
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.CompoundObjectDefinition != null ? this.Proxy.CompoundObjectDefinition.ID : (int?)null, xml, "CompoundObjectDefinition", "Kistl.App.Base");
+            XmlStreamer.ToStream(this.CompoundObjectDefinition != null ? this.CompoundObjectDefinition.ID : (int?)null, xml, "CompoundObjectDefinition", "Kistl.App.Base");
             XmlStreamer.ToStream(this.Proxy.HasPersistentOrder, xml, "HasPersistentOrder", "Kistl.App.Base");
             XmlStreamer.ToStream(this.Proxy.IsList, xml, "IsList", "Kistl.App.Base");
         }
@@ -607,7 +607,7 @@ namespace Kistl.App.Base
         {
             base.Export(xml, modules);
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.CompoundObjectDefinition != null ? this.Proxy.CompoundObjectDefinition.ExportGuid : (Guid?)null, xml, "CompoundObjectDefinition", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.CompoundObjectDefinition != null ? this.CompoundObjectDefinition.ExportGuid : (Guid?)null, xml, "CompoundObjectDefinition", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.HasPersistentOrder, xml, "HasPersistentOrder", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.IsList, xml, "IsList", "Kistl.App.Base");
         }

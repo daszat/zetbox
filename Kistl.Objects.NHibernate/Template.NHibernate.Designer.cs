@@ -607,10 +607,10 @@ namespace Kistl.App.GUI
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream(this.Proxy.DisplayedTypeAssembly != null ? this.Proxy.DisplayedTypeAssembly.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.DisplayedTypeAssembly != null ? this.DisplayedTypeAssembly.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this.Proxy.DisplayedTypeFullName, binStream);
             BinarySerializer.ToStream(this.Proxy.DisplayName, binStream);
-            BinarySerializer.ToStream(this.Proxy.VisualTree != null ? this.Proxy.VisualTree.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.VisualTree != null ? this.VisualTree.ID : (int?)null, binStream);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
@@ -642,10 +642,10 @@ namespace Kistl.App.GUI
         {
             base.ToStream(xml);
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.DisplayedTypeAssembly != null ? this.Proxy.DisplayedTypeAssembly.ID : (int?)null, xml, "DisplayedTypeAssembly", "Kistl.App.GUI");
+            XmlStreamer.ToStream(this.DisplayedTypeAssembly != null ? this.DisplayedTypeAssembly.ID : (int?)null, xml, "DisplayedTypeAssembly", "Kistl.App.GUI");
             XmlStreamer.ToStream(this.Proxy.DisplayedTypeFullName, xml, "DisplayedTypeFullName", "Kistl.App.GUI");
             XmlStreamer.ToStream(this.Proxy.DisplayName, xml, "DisplayName", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Proxy.VisualTree != null ? this.Proxy.VisualTree.ID : (int?)null, xml, "VisualTree", "Kistl.App.GUI");
+            XmlStreamer.ToStream(this.VisualTree != null ? this.VisualTree.ID : (int?)null, xml, "VisualTree", "Kistl.App.GUI");
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)

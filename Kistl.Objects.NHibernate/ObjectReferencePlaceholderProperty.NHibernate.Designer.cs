@@ -726,7 +726,7 @@ namespace Kistl.App.Base
             BinarySerializer.ToStream(this.Proxy.ImplementorRoleName, binStream);
             BinarySerializer.ToStream(this.Proxy.IsList, binStream);
             BinarySerializer.ToStream(this.Proxy.ItemRoleName, binStream);
-            BinarySerializer.ToStream(this.Proxy.ReferencedObjectClass != null ? this.Proxy.ReferencedObjectClass.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.ReferencedObjectClass != null ? this.ReferencedObjectClass.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this.Proxy.Verb, binStream);
         }
 
@@ -777,7 +777,7 @@ namespace Kistl.App.Base
             XmlStreamer.ToStream(this.Proxy.ImplementorRoleName, xml, "ImplementorRoleName", "Kistl.App.Base");
             XmlStreamer.ToStream(this.Proxy.IsList, xml, "IsList", "Kistl.App.Base");
             XmlStreamer.ToStream(this.Proxy.ItemRoleName, xml, "ItemRoleName", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.Proxy.ReferencedObjectClass != null ? this.Proxy.ReferencedObjectClass.ID : (int?)null, xml, "ReferencedObjectClass", "Kistl.App.Base");
+            XmlStreamer.ToStream(this.ReferencedObjectClass != null ? this.ReferencedObjectClass.ID : (int?)null, xml, "ReferencedObjectClass", "Kistl.App.Base");
             XmlStreamer.ToStream(this.Proxy.Verb, xml, "Verb", "Kistl.App.Base");
         }
 
@@ -833,7 +833,7 @@ namespace Kistl.App.Base
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.ImplementorRoleName, xml, "ImplementorRoleName", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.IsList, xml, "IsList", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.ItemRoleName, xml, "ItemRoleName", "Kistl.App.Base");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.ReferencedObjectClass != null ? this.Proxy.ReferencedObjectClass.ExportGuid : (Guid?)null, xml, "ReferencedObjectClass", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.ReferencedObjectClass != null ? this.ReferencedObjectClass.ExportGuid : (Guid?)null, xml, "ReferencedObjectClass", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.Verb, xml, "Verb", "Kistl.App.Base");
         }
 

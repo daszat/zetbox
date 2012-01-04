@@ -1102,12 +1102,12 @@ namespace Kistl.App.Projekte
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream(this.Proxy.ChangedBy != null ? this.Proxy.ChangedBy.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.ChangedBy != null ? this.ChangedBy.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._isChangedOnSet, binStream);
             if (this._isChangedOnSet) {
                 BinarySerializer.ToStream(this.Proxy.ChangedOn, binStream);
             }
-            BinarySerializer.ToStream(this.Proxy.CreatedBy != null ? this.Proxy.CreatedBy.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.CreatedBy != null ? this.CreatedBy.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this._isCreatedOnSet, binStream);
             if (this._isCreatedOnSet) {
                 BinarySerializer.ToStream(this.Proxy.CreatedOn, binStream);
@@ -1117,7 +1117,7 @@ namespace Kistl.App.Projekte
                 BinarySerializer.ToStream(this.Proxy.ExportGuid, binStream);
             }
             BinarySerializer.ToStream(this.Proxy.Geburtstag, binStream);
-            BinarySerializer.ToStream(this.Proxy.Identity != null ? this.Proxy.Identity.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.Identity != null ? this.Identity.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this.Proxy.Name, binStream);
             BinarySerializer.ToStream(this.Proxy.SVNr, binStream);
             BinarySerializer.ToStream(this.Proxy.TelefonNummer, binStream);
@@ -1181,12 +1181,12 @@ namespace Kistl.App.Projekte
         {
             base.ToStream(xml);
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.Proxy.ChangedBy != null ? this.Proxy.ChangedBy.ID : (int?)null, xml, "ChangedBy", "Kistl.App.Projekte");
+            XmlStreamer.ToStream(this.ChangedBy != null ? this.ChangedBy.ID : (int?)null, xml, "ChangedBy", "Kistl.App.Projekte");
             XmlStreamer.ToStream(this._isChangedOnSet, xml, "IsChangedOnSet", "Kistl.App.Projekte");
             if (this._isChangedOnSet) {
                 XmlStreamer.ToStream(this.Proxy.ChangedOn, xml, "ChangedOn", "Kistl.App.Projekte");
             }
-            XmlStreamer.ToStream(this.Proxy.CreatedBy != null ? this.Proxy.CreatedBy.ID : (int?)null, xml, "CreatedBy", "Kistl.App.Projekte");
+            XmlStreamer.ToStream(this.CreatedBy != null ? this.CreatedBy.ID : (int?)null, xml, "CreatedBy", "Kistl.App.Projekte");
             XmlStreamer.ToStream(this._isCreatedOnSet, xml, "IsCreatedOnSet", "Kistl.App.Projekte");
             if (this._isCreatedOnSet) {
                 XmlStreamer.ToStream(this.Proxy.CreatedOn, xml, "CreatedOn", "Kistl.App.Projekte");
@@ -1196,7 +1196,7 @@ namespace Kistl.App.Projekte
                 XmlStreamer.ToStream(this.Proxy.ExportGuid, xml, "ExportGuid", "Kistl.App.Projekte");
             }
             XmlStreamer.ToStream(this.Proxy.Geburtstag, xml, "Geburtstag", "Kistl.App.Projekte");
-            XmlStreamer.ToStream(this.Proxy.Identity != null ? this.Proxy.Identity.ID : (int?)null, xml, "Identity", "Kistl.App.Projekte");
+            XmlStreamer.ToStream(this.Identity != null ? this.Identity.ID : (int?)null, xml, "Identity", "Kistl.App.Projekte");
             XmlStreamer.ToStream(this.Proxy.Name, xml, "Name", "Kistl.App.Projekte");
             XmlStreamer.ToStream(this.Proxy.SVNr, xml, "SVNr", "Kistl.App.Projekte");
             XmlStreamer.ToStream(this.Proxy.TelefonNummer, xml, "TelefonNummer", "Kistl.App.Projekte");
