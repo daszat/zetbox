@@ -12,6 +12,7 @@ namespace Kistl.Client.Presentables.KistlBase
     using Kistl.App.Extensions;
     using Kistl.Client.Models;
     using Kistl.Client.Presentables.ValueViewModels;
+    using Kistl.API.Utils;
 
     [ViewModelDescriptor]
     public class PropertySelectionTaskViewModel : WindowViewModel
@@ -65,6 +66,10 @@ namespace Kistl.Client.Presentables.KistlBase
             {
                 _followRelationsMany = value;
                 OnPropertyChanged("FollowRelationsMany");
+                if (value == true)
+                {
+                    Logging.Client.Warn("PropertySelectionTaskViewModel.FollowRelationsMany was set to true, this is not supported by the linq predicate builder yet");
+                }
             }
         }
         #endregion
@@ -157,6 +162,7 @@ namespace Kistl.Client.Presentables.KistlBase
                 if (_PossibleValues == null)
                 {
                     _PossibleValues = _objClass.GetAllProperties()
+                        .Where(i => IsPropAvailable(i))
                         .Select(prop => ViewModelFactory.CreateViewModel<SelectedPropertyViewModel.Factory>().Invoke(DataContext, this, prop, null))
                         .OrderBy(i => i.Name)
                         .ToList();
@@ -171,6 +177,18 @@ namespace Kistl.Client.Presentables.KistlBase
                     return _PossibleValues;
                 }
             }
+        }
+
+        private bool IsPropAvailable(Property prop)
+        {
+            if ((FollowRelationsOne || FollowRelationsMany) && prop is ObjectReferenceProperty)
+            {
+                var objRefProp = (ObjectReferenceProperty)prop;
+                return
+                    (FollowRelationsOne && !objRefProp.GetIsList()) ||
+                    (FollowRelationsMany && objRefProp.GetIsList());
+            }
+            return true;
         }
 
         private SelectedPropertyViewModel _SelectedItem = null;
