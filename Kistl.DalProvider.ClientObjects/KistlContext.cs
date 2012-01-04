@@ -590,12 +590,22 @@ namespace Kistl.DalProvider.Client
                     }
 
                     // reset ObjectState to new truth
-                    obj.SetUnmodified();
+                    switch (objFromServer.ObjectState)
+                    {
+                        case DataObjectState.Unmodified:
+                            obj.SetUnmodified();
+                            break;
+                        case DataObjectState.Deleted:
+                            obj.SetDeleted();
+                            break;
+                        default:
+                            break;
+                    }
 
                     changedObjects.Add(underlyingObject);
                 }
 
-                objectsToDetach.ForEach(obj => ctx.Detach(obj));
+                objectsToDetach.Except(changedObjects).ForEach(obj => ctx.Detach(obj));
                 changedObjects.ForEach(obj => ctx.Attach(obj));
 
                 this.UpdateModifiedState(ctx);

@@ -142,7 +142,7 @@ namespace Kistl.API.Server
         public override void ToStream(BinaryWriter sw, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(sw, auxObjects, eagerLoadLists);
-            BinarySerializer.ToStream((int)DataObjectState.Unmodified, sw);
+            BinarySerializer.ToStream((int)ObjectState, sw);
             BinarySerializer.ToStream((int)CurrentAccessRights, sw);
         }
 
