@@ -70,6 +70,8 @@ namespace Kistl.API.Server.Tests
                 objImpl.Context.Attach(ce);
                 objImpl.TestNamesImpl.Add(ce);
             }
+
+            objImpl.SetUnmodified();
         }
 
         [Test]
