@@ -127,7 +127,7 @@
     <value>Deleting {0}</value>
   </data>
   <data name="DownloadError" xml:space="preserve">
-    <value>Download failed:</value>
+    <value>Download failed: {0}</value>
   </data>
   <data name="LoadingFile" xml:space="preserve">
     <value>Loading File {0}/{1}: {2}</value>

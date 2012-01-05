@@ -157,7 +157,7 @@
     <value>Bitte fügen Sie Ihre Kommentare hier ein</value>
   </data>
   <data name="ReportProblemCommand_Error" xml:space="preserve">
-    <value>Problem kann nicht gesendet werden: \ n {0}</value>
+    <value>Problem kann nicht gesendet werden:\n{0}</value>
   </data>
   <data name="ReportProblemCommand_Error_Title" xml:space="preserve">
     <value>Fehler</value>
