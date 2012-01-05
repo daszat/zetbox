@@ -61,10 +61,15 @@ namespace Kistl.Client.Presentables.FilterViewModels
         {
             if (_year != null)
             {
-                if (_quater == null && _month == null)
+                if (_halfYear == null && _quater == null && _month == null)
                 {
                     RangeFilter.From.Value = new DateTime(_year, 1, 1);
                     RangeFilter.To.Value = new DateTime(_year, 12, 31);
+                }
+                else if (_halfYear != null)
+                {
+                    RangeFilter.From.Value = new DateTime(_year, ((_halfYear - 1) * 6) + 1, 1);
+                    RangeFilter.To.Value = RangeFilter.From.Value.Value.AddMonths(6).AddDays(-1);
                 }
                 else if (_quater != null)
                 {
@@ -182,6 +187,57 @@ namespace Kistl.Client.Presentables.FilterViewModels
 
         #endregion
 
+        #region HalfYear
+        private ItemViewModel _halfYear;
+        public ItemViewModel HalfYear
+        {
+            get
+            {
+                return _halfYear;
+            }
+            set
+            {
+                _halfYear = ItemViewModel.OnlyValid(value);
+                _month = null;
+                _quater = null;
+                UpdateIsSelected(Months, _month);
+                UpdateIsSelected(Quaters, _quater);
+                UpdateIsSelected(HalfYears, _halfYear);
+                OnPropertyChanged("HalfYear");
+                OnPropertyChanged("Quater");
+                OnPropertyChanged("Month");
+                AllYear.IsSelected = _halfYear == null || !_halfYear.IsSelected;
+                UpdateRange();
+            }
+        }
+
+        private IList<ItemViewModel> _halfYears = null;
+        public IEnumerable<ItemViewModel> HalfYears
+        {
+            get
+            {
+                if (_halfYears == null)
+                {
+                    _halfYears = new List<ItemViewModel>();
+                    _halfYears.Add(new ItemViewModel());
+                    for (int i = 1; i <= 2; i++)
+                    {
+                        _halfYears.Add(new ItemViewModel(i, i.ToString() + ". " + FilterViewModelResources.HalfYear));
+                    }
+                    AttachChangeEventListener(_halfYears, i => HalfYear = i);
+                }
+                return _halfYears;
+            }
+        }
+        public IEnumerable<ItemViewModel> HalfYearsWithoutEmpty
+        {
+            get
+            {
+                return HalfYears.Skip(1);
+            }
+        }
+        #endregion
+
         #region Quater
         private ItemViewModel _quater;
         public ItemViewModel Quater
@@ -194,10 +250,13 @@ namespace Kistl.Client.Presentables.FilterViewModels
             {
                 _quater = ItemViewModel.OnlyValid(value);
                 _month = null;
+                _halfYear = null;
                 UpdateIsSelected(Months, _month);
                 UpdateIsSelected(Quaters, _quater);
+                UpdateIsSelected(HalfYears, _halfYear);
                 OnPropertyChanged("Quater");
                 OnPropertyChanged("Month");
+                OnPropertyChanged("HalfYear");
                 AllYear.IsSelected = _quater == null || !_quater.IsSelected;
                 UpdateRange();
             }
@@ -242,11 +301,14 @@ namespace Kistl.Client.Presentables.FilterViewModels
             {
                 _month = ItemViewModel.OnlyValid(value);
                 _quater = null;
+                _halfYear = null;
 
                 UpdateIsSelected(Months, _month);
                 UpdateIsSelected(Quaters, _quater);
+                UpdateIsSelected(HalfYears, _halfYear);
                 OnPropertyChanged("Month");
                 OnPropertyChanged("Quater");
+                OnPropertyChanged("HalfYear");
                 AllYear.IsSelected = _month == null || !_month.IsSelected;
                 UpdateRange();
             }
@@ -295,10 +357,13 @@ namespace Kistl.Client.Presentables.FilterViewModels
                         {
                             _month = null;
                             _quater = null;
+                            _halfYear = null;
                             UpdateIsSelected(Months, null);
                             UpdateIsSelected(Quaters, null);
+                            UpdateIsSelected(HalfYears, null);
                             OnPropertyChanged("Month");
                             OnPropertyChanged("Quater");
+                            OnPropertyChanged("HalfYear");
                             UpdateRange();
                         }
                     };

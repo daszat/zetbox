@@ -6,15 +6,15 @@
              xmlns:view="clr-namespace:Kistl.Client.WPF.View.KistlBase"
              xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
              ToolTip="{Binding ToolTip}">
-  <ctrls:LabeledContainer Label="{Binding Label}"
+    <ctrls:LabeledContainer Label="{Binding Label}"
                          Required="{Binding Required}">
-    <StackPanel>
-      <!--<ContentPresenter Content="{Binding From, Mode=OneWay}"
+        <StackPanel>
+            <!--<ContentPresenter Content="{Binding From, Mode=OneWay}"
                           ContentTemplateSelector="{StaticResource defaultTemplateSelector}"/>
         <ContentPresenter Content="{Binding To, Mode=OneWay}"
                           ContentTemplateSelector="{StaticResource defaultTemplateSelector}"/>-->
-      <DockPanel>
-        <ComboBox
+            <DockPanel>
+                <ComboBox
               DockPanel.Dock="Left"
               Margin="5"
               DisplayMemberPath="Name"
@@ -22,66 +22,84 @@
               IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertedBoolConverter}}"
               SelectedValue="{Binding Year, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
               MinWidth="75">
-        </ComboBox>
-        <ItemsControl ItemsSource="{Binding YearsShort}">
-          <ItemsControl.ItemsPanel>
-            <ItemsPanelTemplate>
-              <UniformGrid Columns="{Binding YearsShortCount}"
+                </ComboBox>
+                <ItemsControl ItemsSource="{Binding YearsShort}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="{Binding YearsShortCount}"
                           IsItemsHost="True" />
-            </ItemsPanelTemplate>
-          </ItemsControl.ItemsPanel>
-          <ItemsControl.ItemTemplate>
-            <DataTemplate>
-              <ToggleButton
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <ToggleButton
                       IsChecked="{Binding IsSelected}"
                       Unchecked="btn_OnUncheck"
                       Content="{Binding Name}"
                       Margin="5" />
-            </DataTemplate>
-          </ItemsControl.ItemTemplate>
-        </ItemsControl>
-      </DockPanel>
-      <DockPanel >
-        <ToggleButton DockPanel.Dock="Left"
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </DockPanel>
+            <DockPanel >
+                <ToggleButton DockPanel.Dock="Left"
                       Unchecked="btn_OnUncheck"
                       IsChecked="{Binding AllYear.IsSelected}"
                       Content="{Binding AllYear.Name}"
                       Margin="5" />
-        <ItemsControl DockPanel.Dock="Left"
+                <ItemsControl DockPanel.Dock="Left"
+                      ItemsSource="{Binding HalfYearsWithoutEmpty}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="2"
+                                  IsItemsHost="True" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <ToggleButton
+                                  Unchecked="btn_OnUncheck"
+                                  IsChecked="{Binding IsSelected}"
+                                  Content="{Binding Name}"
+                                  Margin="5" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <ItemsControl DockPanel.Dock="Left"
                       ItemsSource="{Binding QuatersWithoutEmpty}">
-          <ItemsControl.ItemsPanel>
-            <ItemsPanelTemplate>
-              <UniformGrid Columns="4"
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="4"
                           IsItemsHost="True" />
-            </ItemsPanelTemplate>
-          </ItemsControl.ItemsPanel>
-          <ItemsControl.ItemTemplate>
-            <DataTemplate>
-              <ToggleButton
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <ToggleButton
                       Unchecked="btn_OnUncheck"
                       IsChecked="{Binding IsSelected}"
                       Content="{Binding Name}"
                       Margin="5" />
-            </DataTemplate>
-          </ItemsControl.ItemTemplate>
-        </ItemsControl>
-        <ItemsControl ItemsSource="{Binding MonthsWithoutEmpty}">
-          <ItemsControl.ItemsPanel>
-            <ItemsPanelTemplate>
-              <UniformGrid Columns="12"
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <ItemsControl ItemsSource="{Binding MonthsWithoutEmpty}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="12"
                           IsItemsHost="True" />
-            </ItemsPanelTemplate>
-          </ItemsControl.ItemsPanel>
-          <ItemsControl.ItemTemplate>
-            <DataTemplate>
-              <ToggleButton IsChecked="{Binding IsSelected}"
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <ToggleButton IsChecked="{Binding IsSelected}"
                             Unchecked="btn_OnUncheck"
                             Content="{Binding Name}"
                             Margin="5" />
-            </DataTemplate>
-          </ItemsControl.ItemTemplate>
-        </ItemsControl>
-      </DockPanel>
-    </StackPanel>
-  </ctrls:LabeledContainer>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </DockPanel>
+        </StackPanel>
+    </ctrls:LabeledContainer>
 </UserControl>

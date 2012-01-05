@@ -123,6 +123,9 @@
   <data name="Empty" xml:space="preserve">
     <value>(Leer)</value>
   </data>
+  <data name="HalfYear" xml:space="preserve">
+    <value>Halbjahr</value>
+  </data>
   <data name="Name" xml:space="preserve">
     <value>Ein Filter</value>
   </data>
