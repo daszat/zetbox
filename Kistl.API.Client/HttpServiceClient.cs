@@ -86,7 +86,8 @@ namespace Kistl.API.Client
                         Log.ErrorFormat("HTTP Error: {0}: {1}", httpResponse.StatusCode, httpResponse.StatusDescription);
                         foreach (var header in ex.Response.Headers)
                         {
-                            Log.Error(header.ToString());
+                            var headerString = header.ToString();
+                            Log.ErrorFormat("{0}: {1}", headerString, ex.Response.Headers[headerString]);
                         }
                     }
                     else
