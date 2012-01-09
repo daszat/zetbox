@@ -1,4 +1,3 @@
-//#define SERIALIZE_GENERATION_THREADS
 
 namespace Kistl.Generator
 {
@@ -106,17 +105,29 @@ namespace Kistl.Generator
         private void GenerateTo(string workingPath)
         {
             Log.InfoFormat("Generating Code to [{0}]", workingPath);
-            List<Exception> failed = new List<Exception>();
             // TODO: use TaskExecutor to optimally use multicores
-            var threads = new List<Thread>();
-#if SERIALIZE_GENERATION_THREADS
-            Log.Warn("Serializing generation threads.");
-            var ctx = _container.Resolve<IKistlContext>();
-            foreach (var gen in _generatorProviders)
+            // nhibernate on mono triggers a runtime fault with 2.10.x
+            if (Environment.GetEnvironmentVariable("ZBOX_SERIALIZE_COMPILATION") == "yes")
             {
-                gen.Generate(ctx, workingPath);
+                Log.Warn("Serializing generation threads.");
+
+                var ctx = _container.Resolve<IKistlContext>();
+                foreach (var gen in _generatorProviders)
+                {
+                    gen.Generate(ctx, workingPath);
+                }
+
             }
-#else
+            else
+            {
+                GenerateParallelTo(workingPath);
+            }
+        }
+
+        private void GenerateParallelTo(string workingPath)
+        {
+            List<Exception> failed = new List<Exception>();
+            var threads = new List<Thread>();
             foreach (var gen in _generatorProviders)
             {
                 // decouple from loop variable
@@ -143,8 +154,6 @@ namespace Kistl.Generator
                 genThread.Start();
                 threads.Add(genThread);
             }
-#endif
-
             foreach (var t in threads)
             {
                 t.Join();
