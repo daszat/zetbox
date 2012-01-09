@@ -225,7 +225,7 @@ namespace Kistl.Server.SchemaManagement
             string schema = provider.GetSavedSchema().TrimEnd((char)0); // Trim possible C++/Database/whatever ending 0 char
             if (!string.IsNullOrEmpty(schema))
             {
-                using (var ms = new MemoryStream(ASCIIEncoding.Default.GetBytes(schema)))
+                using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(schema)))
                 {
                     Importer.LoadFromXml(targetCtx, ms, "saved schema from " + provider.GetSafeConnectionString());
                 }
@@ -238,7 +238,7 @@ namespace Kistl.Server.SchemaManagement
             using (var ms = new MemoryStream())
             {
                 Exporter.PublishFromContext(schema, ms, new string[] { "*" }, "in-memory buffer for SaveSchema");
-                string schemaStr = ASCIIEncoding.Default.GetString(ms.GetBuffer()).TrimEnd((char)0); // Trim possible C++/Database/whatever ending 0 char
+                string schemaStr = Encoding.UTF8.GetString(ms.GetBuffer()).TrimEnd((char)0); // Trim possible C++/Database/whatever ending 0 char
                 db.SaveSchema(schemaStr);
             }
         }
