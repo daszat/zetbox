@@ -234,6 +234,12 @@
   <data name="DatePicker_WatermarkText" xml:space="preserve">
     <value>Datum eingeben</value>
   </data>
+  <data name="InvalidKistlGeneratedVersionException_Message" xml:space="preserve">
+    <value>Ihre Version der Applikation stimmt mit der Version am Server nicht mehr überein. Bitte schließen Sie die Applikation und starten Sie die Applikation neu.</value>
+  </data>
+  <data name="InvalidKistlGeneratedVersionException_Title" xml:space="preserve">
+    <value>Ungültige Version</value>
+  </data>
   <data name="SelectedCellsCollection_DuplicateItem" xml:space="preserve">
     <value>The collection already contains the item.</value>
   </data>

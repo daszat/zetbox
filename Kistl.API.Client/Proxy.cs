@@ -79,6 +79,14 @@ using Kistl.API.Client.PerfCounter;
                 {
                     throw;
                 }
+                catch (ConcurrencyException)
+                {
+                    throw;
+                }
+                catch (InvalidKistlGeneratedVersionException)
+                {
+                    throw;
+                }
                 catch (Exception ex)
                 {
                     // Retry

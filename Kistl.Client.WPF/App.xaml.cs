@@ -234,7 +234,7 @@ namespace Kistl.Client.WPF
                 {
                     Keyboard.Focus(firstTxt);
                 }
-            }),DispatcherPriority.ApplicationIdle);
+            }), DispatcherPriority.ApplicationIdle);
         }
 
         private static void InitCulture(KistlConfig config)
@@ -271,7 +271,7 @@ namespace Kistl.Client.WPF
                 if (container != null)
                     container.Dispose();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 // A WCF Proxy may throw an exception while shutting down when the server is not available - WTF?
                 Logging.Log.Error("Application_Exit", ex);
@@ -280,7 +280,8 @@ namespace Kistl.Client.WPF
 
         private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
-            if (e.Exception.GetInnerException() is Kistl.API.Common.UnresolvableIdentityException)
+            var inner = e.Exception.GetInnerException();
+            if (inner is Kistl.API.Common.UnresolvableIdentityException)
             {
                 Environment.Exit(1);
             }
@@ -293,8 +294,17 @@ namespace Kistl.Client.WPF
 
         private static void ShowExceptionReporter(Exception ex)
         {
-            Logging.Client.Error("Unhandled Exception", ex);
-            if (wpfResourcesInitialized && container != null)
+            var inner = ex.GetInnerException();
+            Logging.Client.Error("Unhandled Exception", inner);
+            if (inner is InvalidKistlGeneratedVersionException)
+            {
+                MessageBox.Show(
+                    WpfToolkitResources.InvalidKistlGeneratedVersionException_Message,
+                    WpfToolkitResources.InvalidKistlGeneratedVersionException_Title,
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Stop);
+            }
+            else if (wpfResourcesInitialized && container != null)
             {
                 var vmf = container.Resolve<IViewModelFactory>();
                 var mdl = vmf.CreateViewModel<ExceptionReporterViewModel.Factory>().Invoke(container.Resolve<IKistlContext>(), null, ex, container.Resolve<IScreenshotTool>().GetScreenshot());
