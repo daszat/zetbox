@@ -490,7 +490,7 @@ namespace Kistl.Server.SchemaManagement
                 case 1:
                     return (string)ExecuteScalar(BuildSelect(currentSchemaRef, "Schema"));
                 default:
-                    throw new InvalidOperationException("There is more then one Schema saved in your Database");
+                    throw new InvalidOperationException("There is more than one Schema saved in your Database");
             }
         }
 
