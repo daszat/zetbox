@@ -167,6 +167,7 @@ namespace Kistl.Client
             if (req == null) throw new ArgumentNullException("req");
 
             EnsureCredentials();
+            req.PreAuthenticate = true; // always send credentials, reduces startup and testing overhead
             req.Credentials = new NetworkCredential(UserName, Password);
         }
 
