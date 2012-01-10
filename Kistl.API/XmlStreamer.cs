@@ -66,7 +66,7 @@ namespace Kistl.API
 
             if (xml.LocalName == name && xml.NamespaceURI == ns)
             {
-                val = xml.ReadElementContentAsDateTime();
+                val = xml.ReadElementContentAsDateTime().ToLocalTime();
             }
         }
         public static void FromStream(ref DateTime? val, XmlReader xml, string name, string ns)
@@ -75,7 +75,7 @@ namespace Kistl.API
 
             if (xml.LocalName == name && xml.NamespaceURI == ns)
             {
-                val = xml.ReadElementContentAsDateTime();
+                val = xml.ReadElementContentAsDateTime().ToLocalTime();
             }
         }
         #endregion
