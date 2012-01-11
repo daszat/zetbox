@@ -836,12 +836,11 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
             }
 
             // Do not optimize this
-            // drop cascase will drop dependend views
-            List<TableRef> views = GetViewNames().ToList();
-            while(views.Count > 0)
+            // drop cascade will drop dependent views
+            TableRef view;
+            while (null != (view = GetViewNames().FirstOrDefault()))
             {
-                DropViewCascade(views.First());
-                views = GetViewNames().ToList();
+                DropViewCascade(view);
             }
 
             foreach (var tbl in GetTableNames().ToList())
