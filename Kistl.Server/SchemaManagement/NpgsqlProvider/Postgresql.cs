@@ -849,6 +849,13 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
                 DropTableCascade(tbl);
             }
 
+            foreach (var schema in GetSchemaNames().ToList())
+            {
+                // public schema only contains DB infrastructure
+                if (schema != "public")
+                    DropSchema(schema, true);
+            }
+
             if (!GetSchemaNames().Contains("dbo"))
             {
                 CreateSchema("dbo");
