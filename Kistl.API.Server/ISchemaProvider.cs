@@ -10,7 +10,7 @@ namespace Kistl.API.Server
     using System.Linq;
     using System.Text;
 
-    public abstract class DboRef : IComparable<DboRef>
+    public abstract class DboRef : IComparable<DboRef>, IComparable
     {
         private readonly string _database;
 
@@ -59,12 +59,14 @@ namespace Kistl.API.Server
             //   http://go.microsoft.com/fwlink/?LinkId=85238
             //
 
-            if (obj == null || GetType() != obj.GetType())
+            var other = obj as DboRef;
+
+            if (other == null || GetType() != obj.GetType())
             {
                 return false;
             }
 
-            return this == (DboRef)obj;
+            return this == other;
         }
 
         int IComparable<DboRef>.CompareTo(DboRef other)
@@ -76,15 +78,22 @@ namespace Kistl.API.Server
             if (type != 0)
                 return type;
 
-            var db = _database.CompareTo(other._database);
+            var db = String.Compare(_database, other._database);
             if (db != 0)
                 return db;
 
-            var sc = _schema.CompareTo(other._schema);
+            var sc = String.Compare(_schema, other._schema);
             if (sc != 0)
                 return sc;
 
-            return _name.CompareTo(other._name);
+            return String.Compare(_name, other._name);
+        }
+
+        // only needed for NUnit (and other legacy APIs)
+        int IComparable.CompareTo(object obj)
+        {
+            var other = obj as DboRef;
+            return ((IComparable<DboRef>)this).CompareTo(other);
         }
 
         public static bool operator ==(DboRef x, DboRef y)
@@ -98,7 +107,7 @@ namespace Kistl.API.Server
             }
             else
             {
-                return false;
+                return object.ReferenceEquals(x, null) && object.ReferenceEquals(y, null);
             }
         }
 

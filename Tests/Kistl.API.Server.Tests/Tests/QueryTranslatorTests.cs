@@ -10,9 +10,9 @@ namespace Kistl.API.Server.Tests
     using Kistl.API.Common;
     using Kistl.API.Configuration;
     using Kistl.API.Server.Mocks;
+    using Kistl.API.Server.PerfCounter;
     using Kistl.App.Base;
     using NUnit.Framework;
-    using Kistl.API.Server.PerfCounter;
 
     internal class TestQueryTranslatorProvider<T> : QueryTranslatorProvider<T>
     {

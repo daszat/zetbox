@@ -101,6 +101,7 @@
     <Compile Include="Tests\BaseServerDataObjectTests.cs" />
     <Compile Include="Tests\BaseServerCompoundObjectTests.cs" />
     <Compile Include="Tests\BinarySerializers\should_work_with_ICompoundObjects.cs" />
+    <Compile Include="Tests\DboRefTests.cs" />
     <Compile Include="Tests\QueryTranslatorTests.cs" />
   </ItemGroup>
   <ItemGroup>
