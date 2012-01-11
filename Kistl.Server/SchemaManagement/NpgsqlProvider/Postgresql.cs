@@ -850,14 +850,17 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
             foreach (var schema in GetSchemaNames().ToList())
             {
-                // public schema only contains DB infrastructure
-                if (schema != "public")
-                    DropSchema(schema, true);
-            }
-
-            if (!GetSchemaNames().Contains("dbo"))
-            {
-                CreateSchema("dbo");
+                switch (schema)
+                {
+                    // DB infrastructure
+                    case "pg_temp_1":
+                    case "pg_toast_temp_1":
+                    case "public":
+                        break;
+                    default:
+                        DropSchema(schema, true);
+                        break;
+                }
             }
         }
 
