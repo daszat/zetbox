@@ -106,7 +106,7 @@ namespace Kistl.App.Base
                             rel.Storage = ph.IsList ? StorageType.Separate : StorageType.MergeIntoA;
 
                             rel.A.Navigator = objRef;
-                            rel.A.Type = (ObjectClass)ph.ObjectClass;
+                            rel.A.Type = (ObjectClass)obj;
                             rel.A.Multiplicity = Multiplicity.ZeroOrMore;
                             rel.A.HasPersistentOrder = ph.HasPersistentOrder;
                             rel.A.RoleName = string.IsNullOrEmpty(ph.ImplementorRoleName) ? obj.Name : ph.ImplementorRoleName;
