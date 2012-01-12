@@ -63,8 +63,7 @@ namespace Kistl.Objects
 
             builder
                 .Register<ISession>(
-                    c => c.Resolve<ISessionFactory>()
-                            .OpenSession())
+                    (c, p) => c.Resolve<ISessionFactory>().OpenSession(c.Resolve<IInterceptor>()))
                 // TODO: reconsider this configuration
                 //       using IPD makes it safer, but requires passing the session manually
                 //       on the other hand, the session should never escape the data context

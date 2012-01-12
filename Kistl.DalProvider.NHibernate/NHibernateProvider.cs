@@ -66,6 +66,11 @@ namespace Kistl.DalProvider.NHibernate
                 .Register(c => new NHibernateServerObjectHandlerFactory())
                 .As(typeof(IServerObjectHandlerFactory));
 
+            moduleBuilder
+                .RegisterType<LocalDateTimeInterceptor>()
+                .AsImplementedInterfaces()
+                .InstancePerDependency();
+
             //moduleBuilder
             //    .RegisterType<AutofacBytecodeProvider>()
             //    .As<global::NHibernate.Bytecode.IBytecodeProvider>()
