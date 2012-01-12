@@ -680,15 +680,18 @@ namespace Kistl.Server.SchemaManagement
             }
 
             var srcTblRef = db.GetTableName(srcSchemaName, srcTblName);
+            var idxName = Construct.IndexName(srcTblName, srcColName);
 
             if (srcTblRef == destTblRef && srcColName == destColName)
             {
-                db.DropIndex(srcTblRef, Construct.IndexName(srcTblName, srcColName));
+                if (db.CheckIndexExists(srcTblRef, idxName))
+                    db.DropIndex(srcTblRef, idxName);
             }
             else if (srcTblRef == destTblRef && srcColName != destColName)
             {
                 db.RenameColumn(srcTblRef, srcColName, destColName);
-                db.DropIndex(srcTblRef, Construct.IndexName(srcTblName, srcColName));
+                if (db.CheckIndexExists(srcTblRef, idxName))
+                    db.DropIndex(srcTblRef, idxName);
             }
             else
             {
@@ -850,7 +853,8 @@ namespace Kistl.Server.SchemaManagement
             {
                 db.DropColumn(srcTblName, srcIndexName);
             }
-            db.DropIndex(srcTblName, Construct.IndexName(srcTblName.Name, srcColName));
+            if (db.CheckIndexExists(srcTblName, Construct.IndexName(srcTblName.Name, srcColName)))
+                db.DropIndex(srcTblName, Construct.IndexName(srcTblName.Name, srcColName));
 
             bool aCreated = false;
             bool bCreated = false;
@@ -1207,7 +1211,7 @@ namespace Kistl.Server.SchemaManagement
                     db.GetTableName(rel.A.Type.Module.SchemaName, rel.A.Type.TableName), fkAName, rel.GetRelationAssociationName(RelationEndRole.A), false);
                 db.RenameFKConstraint(srcRelTbl, saved.GetRelationAssociationName(RelationEndRole.B),
                     db.GetTableName(rel.B.Type.Module.SchemaName, rel.B.Type.TableName), fkBName, rel.GetRelationAssociationName(RelationEndRole.B), false);
-                
+
                 db.RenameTable(srcRelTbl, destRelTbl);
 
                 db.RenameColumn(destRelTbl, saved.GetRelationFkColumnName(RelationEndRole.A), rel.GetRelationFkColumnName(RelationEndRole.A));
@@ -2016,8 +2020,11 @@ namespace Kistl.Server.SchemaManagement
             var objClass = (ObjectClass)uc.Constrained;
             var tblName = db.GetTableName(objClass.Module.SchemaName, objClass.TableName);
             var columns = GetUCColNames(uc);
-            Log.InfoFormat("Drop Index Constraint: {0} on {1}({2})", uc.Reason, objClass.TableName, string.Join(", ", columns));
-            db.DropIndex(tblName, Construct.IndexName(objClass.TableName, columns));
+            if (db.CheckIndexExists(tblName, Construct.IndexName(objClass.TableName, columns)))
+            {
+                Log.InfoFormat("Drop Index Constraint: {0} on {1}({2})", uc.Reason, objClass.TableName, string.Join(", ", columns));
+                db.DropIndex(tblName, Construct.IndexName(objClass.TableName, columns));
+            }
         }
         #endregion
 
