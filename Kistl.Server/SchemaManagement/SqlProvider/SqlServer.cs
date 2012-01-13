@@ -1135,14 +1135,19 @@ FROM (", viewName.Schema, viewName.Name);
             ExecuteNonQuery(createTableProcQuery.ToString());
         }
 
-        private const string sequenceNumberProcedure = @"CREATE PROCEDURE {0} 
+        private const string sequenceNumberProcedure = @"CREATE PROCEDURE {0}
 @seqNumber uniqueidentifier,
+@seqDataID int,
 @result int OUTPUT
 AS
 BEGIN
-	SELECT @result = CurrentNumber + 1 FROM base.[Sequences] WITH(UPDLOCK) WHERE ExportGuid = @seqNumber
-	UPDATE base.[Sequences] SET CurrentNumber = @result WHERE ExportGuid = @seqNumber
-	SELECT @result -- don't ask, EF requieres for SQL server an resultset as output, for npgsql not now, because we've implemented it quick and dirty
+	SELECT @result = d.CurrentNumber + 1, @seqDataID = d.ID
+	FROM base.[Sequences] s
+		INNER JOIN base.[SequenceData] d WITH(UPDLOCK) ON (s.ID = d.[fk_Sequence])
+	WHERE s.ExportGuid = @seqNumber
+
+	UPDATE base.[SequenceData] SET CurrentNumber = @result WHERE [ID] = @seqDataID
+	SELECT @result -- don't ask, EF requires for SQL server an resultset as output, for npgsql not now, because we've implemented it quick and dirty
 END";
 
         public override void CreateSequenceNumberProcedure()
