@@ -1267,9 +1267,9 @@ LANGUAGE 'plpgsql' VOLATILE",
 $BODY$
 BEGIN
 
-LOCK TABLE ""base"".""Sequences"";
-UPDATE ""base"".""Sequences"" SET ""CurrentNumber"" = ""CurrentNumber"" + 1 WHERE ""ExportGuid"" = ""seqNumber"";
-SELECT ""CurrentNumber"" INTO result FROM ""base"".""Sequences"" WHERE ""ExportGuid"" = ""seqNumber"";
+LOCK TABLE ""base"".""SequenceData"";
+UPDATE ""base"".""SequenceData"" sd SET ""CurrentNumber"" = ""CurrentNumber"" + 1 FROM ""base"".""Sequences"" s WHERE s.""ExportGuid"" = ""seqNumber"" AND s.""ID"" = sd.""fk_Sequence"";
+SELECT ""CurrentNumber"" INTO result FROM ""base"".""SequenceData"" sd JOIN ""base"".""Sequences"" s ON (s.""ID"" = sd.""fk_Sequence"") WHERE s.""ExportGuid"" = ""seqNumber"";
 
 END$BODY$
   LANGUAGE plpgsql VOLATILE";
