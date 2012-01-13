@@ -173,7 +173,8 @@ namespace Kistl.Server.SchemaManagement
             }
             else
             {
-                Log.ErrorFormat("Moving property '{2}' from '{0}' to '{1}' is not supported. ObjectClasses are not in the same hierarchy.", saved.ObjectClass.Name, prop.ObjectClass.Name, prop.Name);
+                Log.ErrorFormat("Moving property '{2}' from '{0}' to '{1}' is not supported. ObjectClasses are not in the same hierarchy. Will only create destination column.", saved.ObjectClass.Name, prop.ObjectClass.Name, prop.Name);
+                db.CreateColumn(tblName, colName, dbType, size, scale, true, defConstr);
             }
         }
 
