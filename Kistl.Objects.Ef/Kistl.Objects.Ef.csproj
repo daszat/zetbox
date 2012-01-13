@@ -228,6 +228,7 @@
     <Compile Include="RequiredParentChild.Ef.Designer.cs" />
     <Compile Include="RoleMembership.Ef.Designer.cs" />
     <Compile Include="Sequence.Ef.Designer.cs" />
+    <Compile Include="SequenceData.Ef.Designer.cs" />
     <Compile Include="ServiceDescriptor.Ef.Designer.cs" />
     <Compile Include="SinglePropertyFilterConfiguration.Ef.Designer.cs" />
     <Compile Include="SourceColumn.Ef.Designer.cs" />

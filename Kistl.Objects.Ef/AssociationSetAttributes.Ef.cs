@@ -2258,6 +2258,21 @@ using Kistl.DalProvider.Ef;
 
 
 	/*
+    Relation: FK_Sequence_has_Data
+    A: One Sequence as Sequence
+    B: ZeroOrOne SequenceData as Data
+    Preferred Storage: MergeIntoB
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Sequence_has_Data",
+    "Sequence", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.SequenceEfImpl),
+    "Data", RelationshipMultiplicity.ZeroOrOne, typeof(Kistl.App.Base.SequenceDataEfImpl)
+    )]
+
+
+	/*
     Relation: FK_Sequence_has_Module
     A: ZeroOrMore Sequence as Sequence
     B: One Module as Module

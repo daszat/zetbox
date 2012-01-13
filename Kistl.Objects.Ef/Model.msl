@@ -984,10 +984,17 @@
 	      <ScalarProperty Name="ID" ColumnName="ID" />
 <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-<ScalarProperty Name="CurrentNumber" ColumnName="CurrentNumber" />
 <ScalarProperty Name="Description" ColumnName="Description" />
 <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
 <ScalarProperty Name="IsContinuous" ColumnName="IsContinuous" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SequenceData">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.SequenceData)">
+	    <MappingFragment StoreEntitySet="SequenceData">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+<ScalarProperty Name="CurrentNumber" ColumnName="CurrentNumber" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -4243,6 +4250,23 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_Type" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_Sequence_has_Data
+    A: One Sequence as Sequence
+    B: ZeroOrOne SequenceData as Data
+    Preferred Storage: MergeIntoB
+    -->
+    <AssociationSetMapping Name="FK_Sequence_has_Data"
+                           TypeName="Model.FK_Sequence_has_Data"
+                           StoreEntitySet="SequenceData" >
+      <EndProperty Name="Sequence">
+        <ScalarProperty Name="ID" ColumnName="fk_Sequence"/>
+      </EndProperty>
+      <EndProperty Name="Data">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Sequence" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_Sequence_has_Module

@@ -199,6 +199,7 @@
     <Compile Include="RequiredParentChild.Interface.Designer.cs" />
     <Compile Include="RoleMembership.Interface.Designer.cs" />
     <Compile Include="Sequence.Interface.Designer.cs" />
+    <Compile Include="SequenceData.Interface.Designer.cs" />
     <Compile Include="ServiceDescriptor.Interface.Designer.cs" />
     <Compile Include="SinglePropertyFilterConfiguration.Interface.Designer.cs" />
     <Compile Include="SourceColumn.Interface.Designer.cs" />

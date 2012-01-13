@@ -225,6 +225,7 @@
     <Compile Include="RequiredParentChild.Memory.Designer.cs" />
     <Compile Include="RoleMembership.Memory.Designer.cs" />
     <Compile Include="Sequence.Memory.Designer.cs" />
+    <Compile Include="SequenceData.Memory.Designer.cs" />
     <Compile Include="ServiceDescriptor.Memory.Designer.cs" />
     <Compile Include="SinglePropertyFilterConfiguration.Memory.Designer.cs" />
     <Compile Include="SourceColumn.Memory.Designer.cs" />

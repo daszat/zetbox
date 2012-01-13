@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2011-12-16T17:26:27Z" xmlns="http://dasz.at/Kistl">
+<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2012-01-13T10:00:00Z" xmlns="http://dasz.at/Kistl">
   <KistlBase:Module ExportGuid="a56d9701-d98e-49ab-bd49-a491d09e2d46">
     <KistlBase:ChangedOn>2011-08-05T10:30:47.664236Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2009-12-14T17:08:05Z</KistlBase:CreatedOn>
@@ -4306,7 +4306,6 @@
   <KistlBase:Sequence ExportGuid="57a01b4f-940d-4089-b239-fa5a46dc7d00">
     <KistlBase:ChangedOn>2011-08-05T10:31:12.739265Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-11-25T11:51:32Z</KistlBase:CreatedOn>
-    <KistlBase:CurrentNumber>0</KistlBase:CurrentNumber>
     <KistlBase:Description>Test ContinuousSequence</KistlBase:Description>
     <KistlBase:IsContinuous>true</KistlBase:IsContinuous>
     <KistlBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</KistlBase:Module>
@@ -4314,7 +4313,6 @@
   <KistlBase:Sequence ExportGuid="5c3d9012-a36d-4910-9e7b-1bf7d8f7d09d">
     <KistlBase:ChangedOn>2011-08-05T10:31:12.741265Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2010-11-25T11:50:57Z</KistlBase:CreatedOn>
-    <KistlBase:CurrentNumber>0</KistlBase:CurrentNumber>
     <KistlBase:Description>Test Sequence</KistlBase:Description>
     <KistlBase:IsContinuous>false</KistlBase:IsContinuous>
     <KistlBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</KistlBase:Module>

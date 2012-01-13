@@ -370,6 +370,10 @@ namespace Kistl {
                             {
                                 get { return new TypedGuid<global::Kistl.App.Base.DataType>("8745716a-a9e7-4b2f-b7e8-948b992aaafb"); }
                             }
+                            public static TypedGuid<global::Kistl.App.Base.DataType> SequenceData
+                            {
+                                get { return new TypedGuid<global::Kistl.App.Base.DataType>("6efc1387-cffc-4cff-9af3-19365d888f4b"); }
+                            }
                             public static TypedGuid<global::Kistl.App.Base.DataType> ServiceDescriptor
                             {
                                 get { return new TypedGuid<global::Kistl.App.Base.DataType>("d1bf8a7e-a8c0-435b-9dfe-b5ab61e71d1a"); }
@@ -1454,7 +1458,11 @@ namespace Kistl {
                                 }
                                 public static TypedGuid<global::Kistl.App.Base.Property> CurrentNumber
                                 {
-                                    get { return new TypedGuid<global::Kistl.App.Base.Property>("1fbfd6bc-5b18-4ef9-a152-06fa9808571f"); }
+                                    get { return new TypedGuid<global::Kistl.App.Base.Property>("62988bcd-bf1d-441f-95a1-3b9d58e08ad3"); }
+                                }
+                                public static TypedGuid<global::Kistl.App.Base.Property> Data
+                                {
+                                    get { return new TypedGuid<global::Kistl.App.Base.Property>("70836ae1-4b54-45e2-a0c6-d1a39c480631"); }
                                 }
                                 public static TypedGuid<global::Kistl.App.Base.Property> Description
                                 {
@@ -1471,6 +1479,17 @@ namespace Kistl {
                                 public static TypedGuid<global::Kistl.App.Base.Property> Module
                                 {
                                     get { return new TypedGuid<global::Kistl.App.Base.Property>("8ddc8653-3535-4f35-b9ab-6adb05894649"); }
+                                }
+                            }
+                            public static class SequenceData_Properties
+                            {
+                                public static TypedGuid<global::Kistl.App.Base.Property> CurrentNumber
+                                {
+                                    get { return new TypedGuid<global::Kistl.App.Base.Property>("e557569b-1ed8-49a6-959e-0a6bc3ffa591"); }
+                                }
+                                public static TypedGuid<global::Kistl.App.Base.Property> Sequence
+                                {
+                                    get { return new TypedGuid<global::Kistl.App.Base.Property>("98a20549-d4ff-4caf-bae2-10951b04c6f1"); }
                                 }
                             }
                             public static class ServiceDescriptor_Properties

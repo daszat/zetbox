@@ -240,6 +240,7 @@
     <Compile Include="RequiredParentChild.NHibernate.Designer.cs" />
     <Compile Include="RoleMembership.NHibernate.Designer.cs" />
     <Compile Include="Sequence.NHibernate.Designer.cs" />
+    <Compile Include="SequenceData.NHibernate.Designer.cs" />
     <Compile Include="ServiceDescriptor.NHibernate.Designer.cs" />
     <Compile Include="SinglePropertyFilterConfiguration.NHibernate.Designer.cs" />
     <Compile Include="SourceColumn.NHibernate.Designer.cs" />

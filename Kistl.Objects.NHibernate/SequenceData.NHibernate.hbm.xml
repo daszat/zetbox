@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
+                   default-cascade="save-update" >
+    <class name="Kistl.App.Base.SequenceDataNHibernateImpl+SequenceDataProxy, Kistl.Objects.NHibernateImpl"
+           proxy="Kistl.App.Base.SequenceDataNHibernateImpl+SequenceDataProxy, Kistl.Objects.NHibernateImpl"
+           schema="`base`"
+           table="`SequenceData`"
+           abstract="false"
+           dynamic-update="false"
+           optimistic-lock="none">
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`base`</param>
+                <param name="sequence">`SequenceData_ID_seq`</param>
+            </generator>
+        </id>
+
+        <!-- define the properties -->
+        <!-- ValueTypeProperty isValue -->
+        <property name="CurrentNumber" 
+                  column="`CurrentNumber`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="Sequence" column="`fk_Sequence`" class="Kistl.App.Base.SequenceNHibernateImpl+SequenceProxy, Kistl.Objects.NHibernateImpl" unique="true" />
+
+
+        <!-- define the subclasses -->
+
+    </class>
+</hibernate-mapping>

@@ -63,6 +63,7 @@
     <EntitySet Name="RequiredParent" EntityType="Model.RequiredParent" />
     <EntitySet Name="RequiredParentChild" EntityType="Model.RequiredParentChild" />
     <EntitySet Name="Sequence" EntityType="Model.Sequence" />
+    <EntitySet Name="SequenceData" EntityType="Model.SequenceData" />
     <EntitySet Name="ServiceDescriptor" EntityType="Model.ServiceDescriptor" />
     <EntitySet Name="SourceColumn" EntityType="Model.SourceColumn" />
     <EntitySet Name="SourceEnum" EntityType="Model.SourceEnum" />
@@ -813,6 +814,10 @@
     <AssociationSet Name="FK_SearchScreen_of_Type" Association="Model.FK_SearchScreen_of_Type" >
       <End Role="SearchScreen" EntitySet="NavigationEntry" />
       <End Role="Type" EntitySet="DataType" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sequence_has_Data" Association="Model.FK_Sequence_has_Data" >
+      <End Role="Sequence" EntitySet="Sequence" />
+      <End Role="Data" EntitySet="SequenceData" />
     </AssociationSet>
     <AssociationSet Name="FK_Sequence_has_Module" Association="Model.FK_Sequence_has_Module" >
       <End Role="Sequence" EntitySet="Sequence" />
@@ -2095,7 +2100,10 @@
                         FromRole="Sequence"
                         ToRole="CreatedBy" />
     <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
-    <Property Name="CurrentNumber" Type="Int32" Nullable="false"  />
+    <NavigationProperty Name="DataImpl"
+                        Relationship="Model.FK_Sequence_has_Data"
+                        FromRole="Sequence"
+                        ToRole="Data" />
     <Property Name="Description" Type="String" Nullable="false" MaxLength="1000"  />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
     <Property Name="IsContinuous" Type="Boolean" Nullable="false"  />
@@ -2103,6 +2111,17 @@
                         Relationship="Model.FK_Sequence_has_Module"
                         FromRole="Sequence"
                         ToRole="Module" />
+  </EntityType>
+  <EntityType Name="SequenceData">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="CurrentNumber" Type="Int32" Nullable="false"  />
+    <NavigationProperty Name="SequenceImpl"
+                        Relationship="Model.FK_Sequence_has_Data"
+                        FromRole="Data"
+                        ToRole="Sequence" />
   </EntityType>
   <EntityType Name="ServiceDescriptor">
     <Key>
@@ -4774,6 +4793,14 @@
          Multiplicity="*" />
     <End Role="Type"
          Type="Model.ObjectClass" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_Sequence_has_Data" >
+    <End Role="Sequence"
+         Type="Model.Sequence" 
+         Multiplicity="0..1" />
+    <End Role="Data"
+         Type="Model.SequenceData" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_Sequence_has_Module" >

@@ -14,9 +14,16 @@ namespace Kistl.App.Base
     {
 
         /// <summary>
+        /// The current number of this Sequence. This is calculated from the Data and initialises this, if not available.
+        /// </summary>
+        int? CurrentNumber {
+            get;
+        }
+
+        /// <summary>
         /// 
         /// </summary>
-        int CurrentNumber {
+        Kistl.App.Base.SequenceData Data {
             get;
             set;
         }

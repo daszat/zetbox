@@ -19,5 +19,24 @@ namespace Kistl.App.Base
             // TODO: Add "Name" property
             //e.Result = "Base.Sequences." + obj.Name;
         }
+
+        [Invocation]
+        public static void get_CurrentNumber(Sequence obj, PropertyGetterEventArgs<int?> e)
+        {
+            // Initialise SequenceData if not available
+            if (obj.Data == null)
+            {
+                obj.Data = obj.Context.Create<SequenceData>();
+                obj.Data.CurrentNumber = 0;
+            }
+
+            e.Result = obj.Data.CurrentNumber;
+        }
+
+        [Invocation]
+        public static void preSet_CurrentNumber(Sequence obj, PropertyPreSetterEventArgs<int?> e)
+        {
+            throw new NotSupportedException("Cannot change CurrentNumber");
+        }
     }
 }

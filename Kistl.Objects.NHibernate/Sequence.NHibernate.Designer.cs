@@ -359,54 +359,127 @@ namespace Kistl.App.Base
 		public static event PropertyPostSetterHandler<Kistl.App.Base.Sequence, DateTime> OnCreatedOn_PostSetter;
 
         /// <summary>
-        /// 
+        /// The current number of this Sequence. This is calculated from the Data and initialises this, if not available.
         /// </summary>
-
-        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
-        public int CurrentNumber
+        // calculated  property
+        // BEGIN Kistl.Generator.Templates.Properties.CalculatedProperty
+        public int? CurrentNumber
         {
             get
             {
-                if (!CurrentAccessRights.HasReadRights()) return default(int);
-                // create local variable to create single point of return
-                // for the benefit of down-stream templates
-                var __result = Proxy.CurrentNumber;
-                if (OnCurrentNumber_Getter != null)
+                if (OnCurrentNumber_Getter == null)
                 {
-                    var __e = new PropertyGetterEventArgs<int>(__result);
-                    OnCurrentNumber_Getter(this, __e);
-                    __result = __e.Result;
+                    throw new NotImplementedException("No handler registered on calculated property Kistl.App.Base.Sequence.CurrentNumber");
                 }
-                return __result;
+
+                var e = new PropertyGetterEventArgs<int?>(default(int?));
+                OnCurrentNumber_Getter(this, e);
+                return e.Result;
+            }
+        }
+        // END Kistl.Generator.Templates.Properties.CalculatedProperty
+		public static event PropertyGetterHandler<Kistl.App.Base.Sequence, int?> OnCurrentNumber_Getter;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        // BEGIN Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Data
+        // fkBackingName=this.Proxy.Data; fkGuidBackingName=_fk_guid_Data;
+        // referencedInterface=Kistl.App.Base.SequenceData; moduleNamespace=Kistl.App.Base;
+        // inverse Navigator=Sequence; is reference;
+        // PositionStorage=none;
+        // Target not exportable; does call events
+
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Kistl.App.Base.SequenceData Data
+        {
+            get
+            {
+                if (!CurrentAccessRights.HasReadRights()) return null;
+                Kistl.App.Base.SequenceDataNHibernateImpl __value = (Kistl.App.Base.SequenceDataNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Data);
+
+                if (OnData_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Kistl.App.Base.SequenceData>(__value);
+                    OnData_Getter(this, e);
+                    __value = (Kistl.App.Base.SequenceDataNHibernateImpl)e.Result;
+                }
+
+                return __value;
             }
             set
             {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (Proxy.CurrentNumber != value)
+                if (((IPersistenceObject)this).IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null && value.Context != this.Context) throw new WrongKistlContextException();
+
+                // shortcut noop with nulls
+                if (value == null && this.Proxy.Data == null)
+                    return;
+
+                // cache old value to remove inverse references later
+                var __oldValue = (Kistl.App.Base.SequenceDataNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Data);
+                var __newValue = (Kistl.App.Base.SequenceDataNHibernateImpl)value;
+
+                // shortcut noop on objects
+                // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
+                if (__oldValue == __newValue)
+                    return;
+
+                // Changing Event fires before anything is touched
+                NotifyPropertyChanging("Data", __oldValue, __newValue);
+
+                if (OnData_PreSetter != null && IsAttached)
                 {
-                    var __oldValue = Proxy.CurrentNumber;
-                    var __newValue = value;
-                    if (OnCurrentNumber_PreSetter != null && IsAttached)
-                    {
-                        var __e = new PropertyPreSetterEventArgs<int>(__oldValue, __newValue);
-                        OnCurrentNumber_PreSetter(this, __e);
-                        __newValue = __e.Result;
-                    }
-                    NotifyPropertyChanging("CurrentNumber", __oldValue, __newValue);
-                    Proxy.CurrentNumber = __newValue;
-                    NotifyPropertyChanged("CurrentNumber", __oldValue, __newValue);
-                    if (OnCurrentNumber_PostSetter != null && IsAttached)
-                    {
-                        var __e = new PropertyPostSetterEventArgs<int>(__oldValue, __newValue);
-                        OnCurrentNumber_PostSetter(this, __e);
-                    }
+                    var e = new PropertyPreSetterEventArgs<Kistl.App.Base.SequenceData>(__oldValue, __newValue);
+                    OnData_PreSetter(this, e);
+                    __newValue = (Kistl.App.Base.SequenceDataNHibernateImpl)e.Result;
+                }
+
+                // next, set the local reference
+                if (__newValue == null)
+                {
+                    this.Proxy.Data = null;
+                }
+                else
+                {
+                    this.Proxy.Data = __newValue.Proxy;
+                }
+
+                // now fixup redundant, inverse references
+                // The inverse navigator will also fire events when changed, so should
+                // only be touched after setting the local value above.
+                // TODO: for complete correctness, the "other" Changing event should also fire
+                //       before the local value is changed
+                if (__oldValue != null)
+                {
+                    // unset old reference
+                    __oldValue.Sequence = null;
+                }
+
+                if (__newValue != null)
+                {
+                    // set new reference
+                    __newValue.Sequence = this;
+                }
+                // everything is done. fire the Changed event
+                NotifyPropertyChanged("Data", __oldValue, __newValue);
+
+                if (OnData_PostSetter != null && IsAttached)
+                {
+                    var e = new PropertyPostSetterEventArgs<Kistl.App.Base.SequenceData>(__oldValue, __newValue);
+                    OnData_PostSetter(this, e);
                 }
             }
         }
-        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
-		public static event PropertyGetterHandler<Kistl.App.Base.Sequence, int> OnCurrentNumber_Getter;
-		public static event PropertyPreSetterHandler<Kistl.App.Base.Sequence, int> OnCurrentNumber_PreSetter;
-		public static event PropertyPostSetterHandler<Kistl.App.Base.Sequence, int> OnCurrentNumber_PostSetter;
+
+        /// <summary>Backing store for Data's id, used on dehydration only</summary>
+        private int? _fk_Data = null;
+
+
+        // END Kistl.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Data
+		public static event PropertyGetterHandler<Kistl.App.Base.Sequence, Kistl.App.Base.SequenceData> OnData_Getter;
+		public static event PropertyPreSetterHandler<Kistl.App.Base.Sequence, Kistl.App.Base.SequenceData> OnData_PreSetter;
+		public static event PropertyPostSetterHandler<Kistl.App.Base.Sequence, Kistl.App.Base.SequenceData> OnData_PostSetter;
 
         /// <summary>
         /// 
@@ -701,12 +774,12 @@ namespace Kistl.App.Base
 
             me.ChangedOn = other.ChangedOn;
             me.CreatedOn = other.CreatedOn;
-            me.CurrentNumber = other.CurrentNumber;
             me.Description = other.Description;
             me.ExportGuid = other.ExportGuid;
             me.IsContinuous = other.IsContinuous;
             this._fk_ChangedBy = otherImpl._fk_ChangedBy;
             this._fk_CreatedBy = otherImpl._fk_CreatedBy;
+            this._fk_Data = otherImpl._fk_Data;
             this._fk_Module = otherImpl._fk_Module;
         }
 
@@ -772,6 +845,11 @@ namespace Kistl.App.Base
             else
                 this.Proxy.CreatedBy = null;
 
+            if (_fk_Data.HasValue)
+                this.Proxy.Data = ((Kistl.App.Base.SequenceDataNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.SequenceData>(_fk_Data.Value)).Proxy;
+            else
+                this.Proxy.Data = null;
+
             if (_fk_guid_Module.HasValue)
                 this.Proxy.Module = ((Kistl.App.Base.ModuleNHibernateImpl)OurContext.FindPersistenceObject<Kistl.App.Base.Module>(_fk_guid_Module.Value)).Proxy;
             else
@@ -826,13 +904,21 @@ namespace Kistl.App.Base
                         obj => obj.CreatedOn,
                         (obj, val) => obj.CreatedOn = val),
                     // else
-                    new PropertyDescriptorNHibernateImpl<SequenceNHibernateImpl, int>(
+                    new PropertyDescriptorNHibernateImpl<SequenceNHibernateImpl, int?>(
                         lazyCtx,
-                        new Guid("1fbfd6bc-5b18-4ef9-a152-06fa9808571f"),
+                        new Guid("62988bcd-bf1d-441f-95a1-3b9d58e08ad3"),
                         "CurrentNumber",
                         null,
                         obj => obj.CurrentNumber,
-                        (obj, val) => obj.CurrentNumber = val),
+                        null), // calculated property
+                    // else
+                    new PropertyDescriptorNHibernateImpl<SequenceNHibernateImpl, Kistl.App.Base.SequenceData>(
+                        lazyCtx,
+                        new Guid("70836ae1-4b54-45e2-a0c6-d1a39c480631"),
+                        "Data",
+                        null,
+                        obj => obj.Data,
+                        (obj, val) => obj.Data = val),
                     // else
                     new PropertyDescriptorNHibernateImpl<SequenceNHibernateImpl, string>(
                         lazyCtx,
@@ -952,6 +1038,13 @@ namespace Kistl.App.Base
         {
             var result = base.GetChildrenToDelete();
 
+            // Follow Sequence_has_Data
+            result.AddRange(Context.AttachedObjects
+                .OfType<Kistl.App.Base.SequenceData>()
+                .Where(child => child.Sequence == this
+                    && child.ObjectState == DataObjectState.Deleted)
+                .Cast<NHibernatePersistenceObject>());
+
             return result;
         }
 
@@ -976,7 +1069,7 @@ namespace Kistl.App.Base
 
             public virtual DateTime CreatedOn { get; set; }
 
-            public virtual int CurrentNumber { get; set; }
+            public virtual Kistl.App.Base.SequenceDataNHibernateImpl.SequenceDataProxy Data { get; set; }
 
             public virtual string Description { get; set; }
 
@@ -1007,7 +1100,7 @@ namespace Kistl.App.Base
             if (this._isCreatedOnSet) {
                 BinarySerializer.ToStream(this.Proxy.CreatedOn, binStream);
             }
-            BinarySerializer.ToStream(this.Proxy.CurrentNumber, binStream);
+            BinarySerializer.ToStream(this.Data != null ? this.Data.ID : (int?)null, binStream);
             BinarySerializer.ToStream(this.Proxy.Description, binStream);
             BinarySerializer.ToStream(this._isExportGuidSet, binStream);
             if (this._isExportGuidSet) {
@@ -1036,11 +1129,7 @@ namespace Kistl.App.Base
                 BinarySerializer.FromStream(out tmp, binStream);
                 this.Proxy.CreatedOn = tmp;
             }
-            {
-                int tmp;
-                BinarySerializer.FromStream(out tmp, binStream);
-                this.Proxy.CurrentNumber = tmp;
-            }
+            BinarySerializer.FromStream(out this._fk_Data, binStream);
             {
                 string tmp;
                 BinarySerializer.FromStream(out tmp, binStream);
@@ -1080,7 +1169,7 @@ namespace Kistl.App.Base
             if (this._isCreatedOnSet) {
                 XmlStreamer.ToStream(this.Proxy.CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
             }
-            XmlStreamer.ToStream(this.Proxy.CurrentNumber, xml, "CurrentNumber", "Kistl.App.Base");
+            XmlStreamer.ToStream(this.Data != null ? this.Data.ID : (int?)null, xml, "Data", "Kistl.App.Base");
             XmlStreamer.ToStream(this.Proxy.Description, xml, "Description", "Kistl.App.Base");
             XmlStreamer.ToStream(this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Base");
             if (this._isExportGuidSet) {
@@ -1111,12 +1200,7 @@ namespace Kistl.App.Base
                 XmlStreamer.FromStream(ref tmp, xml, "CreatedOn", "Kistl.App.Base");
                 this.Proxy.CreatedOn = tmp;
             }
-            {
-                // yuck
-                int tmp = this.Proxy.CurrentNumber;
-                XmlStreamer.FromStream(ref tmp, xml, "CurrentNumber", "Kistl.App.Base");
-                this.Proxy.CurrentNumber = tmp;
-            }
+            XmlStreamer.FromStream(ref this._fk_Data, xml, "Data", "Kistl.App.Base");
             {
                 // yuck
                 string tmp = this.Proxy.Description;
@@ -1153,7 +1237,6 @@ namespace Kistl.App.Base
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.ChangedOn, xml, "ChangedOn", "Kistl.App.Base");
             System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.CurrentNumber, xml, "CurrentNumber", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.Description, xml, "Description", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.IsContinuous, xml, "IsContinuous", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Module != null ? this.Module.ExportGuid : (Guid?)null, xml, "Module", "Kistl.App.Base");
@@ -1177,12 +1260,6 @@ namespace Kistl.App.Base
                 XmlStreamer.FromStream(ref tmp, xml, "CreatedOn", "Kistl.App.Base");
                 this.Proxy.CreatedOn = tmp;
                 this._isCreatedOnSet = true;
-            }
-            {
-                // yuck
-                int tmp = this.Proxy.CurrentNumber;
-                XmlStreamer.FromStream(ref tmp, xml, "CurrentNumber", "Kistl.App.Base");
-                this.Proxy.CurrentNumber = tmp;
             }
             {
                 // yuck
