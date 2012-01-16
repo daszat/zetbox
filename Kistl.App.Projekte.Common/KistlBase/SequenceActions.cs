@@ -32,11 +32,5 @@ namespace Kistl.App.Base
 
             e.Result = obj.Data.CurrentNumber;
         }
-
-        [Invocation]
-        public static void preSet_CurrentNumber(Sequence obj, PropertyPreSetterEventArgs<int?> e)
-        {
-            throw new NotSupportedException("Cannot change CurrentNumber");
-        }
     }
 }
