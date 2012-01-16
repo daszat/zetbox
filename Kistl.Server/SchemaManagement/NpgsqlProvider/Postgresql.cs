@@ -1272,9 +1272,9 @@ UPDATE ""base"".""SequenceData"" sd SET ""CurrentNumber"" = ""CurrentNumber"" + 
 SELECT ""CurrentNumber"" INTO result FROM ""base"".""SequenceData"" sd JOIN ""base"".""Sequences"" s ON (s.""ID"" = sd.""fk_Sequence"") WHERE s.""ExportGuid"" = ""seqNumber"";
 
 IF result IS NULL THEN
-	result := 0;
+	result := 1;
 	INSERT INTO ""base"".""SequenceData"" (""fk_Sequence"", ""CurrentNumber"")
-        SELECT s.""ID"", 0 FROM ""base"".""Sequences"" s WHERE s.""ExportGuid"" = ""seqNumber"";
+        SELECT s.""ID"", 1 FROM ""base"".""Sequences"" s WHERE s.""ExportGuid"" = ""seqNumber"";
 END IF;
 
 END$BODY$
