@@ -401,7 +401,7 @@ namespace Kistl.App.Extensions
                 EventInfo ei = implType.FindEvent(eventName);
                 if (ei == null)
                 {
-                    Log.WarnFormat("CLR Event {0} not found", eventName);
+                    Log.WarnFormat("CLR Event {0}.{1} not found", implType.FullName, eventName);
                     return;
                 }
 
