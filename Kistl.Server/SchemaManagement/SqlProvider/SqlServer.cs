@@ -1145,7 +1145,7 @@ DECLARE
 BEGIN
 	SELECT @result = d.CurrentNumber + 1, @seqID = s.ID, @seqDataID = d.ID
 	FROM base.[Sequences] s
-		INNER JOIN base.[SequenceData] d WITH(UPDLOCK) ON (s.ID = d.[fk_Sequence])
+		LEFT JOIN base.[SequenceData] d WITH(UPDLOCK) ON (s.ID = d.[fk_Sequence])
 	WHERE s.ExportGuid = @seqNumber
 
     IF @result IS NULL
