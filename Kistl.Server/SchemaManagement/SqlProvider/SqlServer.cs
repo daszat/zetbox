@@ -1137,16 +1137,23 @@ FROM (", viewName.Schema, viewName.Name);
 
         private const string sequenceNumberProcedure = @"CREATE PROCEDURE {0}
 @seqNumber uniqueidentifier,
-@seqDataID int,
 @result int OUTPUT
 AS
+DECLARE
+@seqID int,
+@seqDataID int
 BEGIN
-	SELECT @result = d.CurrentNumber + 1, @seqDataID = d.ID
+	SELECT @result = d.CurrentNumber + 1, @seqID = s.ID, @seqDataID = d.ID
 	FROM base.[Sequences] s
 		INNER JOIN base.[SequenceData] d WITH(UPDLOCK) ON (s.ID = d.[fk_Sequence])
 	WHERE s.ExportGuid = @seqNumber
 
-	UPDATE base.[SequenceData] SET CurrentNumber = @result WHERE [ID] = @seqDataID
+    IF @result IS NULL
+    BEGIN
+        INSERT INTO base.[SequenceData] ([fk_Sequence], [CurrentNumber]) VALUES (@seqID, 1);
+    END
+
+    UPDATE base.[SequenceData] SET CurrentNumber = @result WHERE [ID] = @seqDataID
 	SELECT @result -- don't ask, EF requires for SQL server an resultset as output, for npgsql not now, because we've implemented it quick and dirty
 END";
 
