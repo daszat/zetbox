@@ -1271,6 +1271,12 @@ LOCK TABLE ""base"".""SequenceData"";
 UPDATE ""base"".""SequenceData"" sd SET ""CurrentNumber"" = ""CurrentNumber"" + 1 FROM ""base"".""Sequences"" s WHERE s.""ExportGuid"" = ""seqNumber"" AND s.""ID"" = sd.""fk_Sequence"";
 SELECT ""CurrentNumber"" INTO result FROM ""base"".""SequenceData"" sd JOIN ""base"".""Sequences"" s ON (s.""ID"" = sd.""fk_Sequence"") WHERE s.""ExportGuid"" = ""seqNumber"";
 
+IF result IS NULL THEN
+	result := 0;
+	INSERT INTO ""base"".""SequenceData"" (""fk_Sequence"", ""CurrentNumber"")
+        SELECT s.""ID"", 0 FROM ""base"".""Sequences"" s WHERE s.""ExportGuid"" = ""seqNumber"";
+END IF;
+
 END$BODY$
   LANGUAGE plpgsql VOLATILE";
 
