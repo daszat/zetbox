@@ -760,27 +760,29 @@ namespace Kistl.DalProvider.Ef
 
         private int CallGetSequenceNumber(Guid sequenceGuid, string procName)
         {
-            var cmd = _ctx.Connection.CreateCommand();
-            cmd.Transaction = _transaction;
-            cmd.CommandText = "Entities." + procName;
-            cmd.CommandType = CommandType.StoredProcedure;
+            using (var cmd = _ctx.Connection.CreateCommand())
+            {
+                cmd.Transaction = _transaction;
+                cmd.CommandText = "Entities." + procName;
+                cmd.CommandType = CommandType.StoredProcedure;
 
-            var pIn = cmd.CreateParameter();
-            pIn.ParameterName = "seqNumber";
-            pIn.Value = sequenceGuid;
-            pIn.DbType = DbType.Guid;
-            pIn.Direction = ParameterDirection.Input;
-            cmd.Parameters.Add(pIn);
+                var pIn = cmd.CreateParameter();
+                pIn.ParameterName = "seqNumber";
+                pIn.Value = sequenceGuid;
+                pIn.DbType = DbType.Guid;
+                pIn.Direction = ParameterDirection.Input;
+                cmd.Parameters.Add(pIn);
 
-            var pOut = cmd.CreateParameter();
-            pOut.ParameterName = "result";
-            pOut.DbType = DbType.Int32;
-            pOut.Direction = ParameterDirection.Output;
-            cmd.Parameters.Add(pOut);
+                var pOut = cmd.CreateParameter();
+                pOut.ParameterName = "result";
+                pOut.DbType = DbType.Int32;
+                pOut.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(pOut);
 
-            cmd.ExecuteNonQuery();
+                cmd.ExecuteNonQuery();
 
-            return (int)pOut.Value;
+                return (int)pOut.Value;
+            }
         }
 
         private void OpenEntityConnection()
