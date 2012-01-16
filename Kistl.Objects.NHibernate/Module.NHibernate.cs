@@ -63,7 +63,13 @@ namespace Kistl.Objects
 
             builder
                 .Register<ISession>(
-                    (c, p) => c.Resolve<ISessionFactory>().OpenSession(c.Resolve<IInterceptor>()))
+                    (c, p) =>
+                    {
+                        var result = c.Resolve<ISessionFactory>().OpenSession(c.Resolve<IInterceptor>());
+                        Logging.Log.InfoFormat("Created ISession: {0}", result.GetHashCode());
+                        return result;
+                    })
+                .OnRelease(s => Logging.Log.InfoFormat("Disposing of ISession: {0}", s.GetHashCode()))
                 // TODO: reconsider this configuration
                 //       using IPD makes it safer, but requires passing the session manually
                 //       on the other hand, the session should never escape the data context
