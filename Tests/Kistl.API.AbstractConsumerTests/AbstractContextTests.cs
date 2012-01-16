@@ -305,7 +305,7 @@ namespace Kistl.API.AbstractConsumerTests
             {
                 var s = ctx.FindPersistenceObject<Sequence>(sequence);
                 Assert.That(s.IsContinuous, Is.False);
-                var currentNumber = s.Data.CurrentNumber;
+                var currentNumber = s.Data != null ? s.Data.CurrentNumber : 0;
                 var next = ctx.GetSequenceNumber(sequence);
                 Assert.That(next, Is.EqualTo(currentNumber + 1));
             }
@@ -319,7 +319,7 @@ namespace Kistl.API.AbstractConsumerTests
                 ctx.BeginTransaction();
                 var s = ctx.FindPersistenceObject<Sequence>(continuousSequence);
                 Assert.That(s.IsContinuous, Is.True);
-                var currentNumber = s.Data.CurrentNumber;
+                var currentNumber = s.Data != null ? s.Data.CurrentNumber : 0;
                 var next = ctx.GetContinuousSequenceNumber(continuousSequence);
                 Assert.That(next, Is.EqualTo(currentNumber + 1));
                 ctx.CommitTransaction();
