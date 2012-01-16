@@ -223,7 +223,7 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
 
         public override IEnumerable<string> GetSchemaNames()
         {
-            return ExecuteReader("SELECT nspname FROM pg_catalog.pg_namespace WHERE nspname NOT IN ('information_schema', 'pg_catalog', 'pg_toast', 'public')")
+            return ExecuteReader("SELECT nspname FROM pg_catalog.pg_namespace WHERE nspname NOT IN ('information_schema', 'pg_catalog', 'pg_toast', 'public') AND nspname NOT LIKE 'pg_%temp_%'")
                 .Select(rd => rd.GetString(0));
         }
 
