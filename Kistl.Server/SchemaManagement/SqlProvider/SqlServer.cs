@@ -1150,7 +1150,8 @@ BEGIN
 
     IF @result IS NULL
     BEGIN
-        INSERT INTO base.[SequenceData] ([fk_Sequence], [CurrentNumber]) VALUES (@seqID, 1);
+		SELECT @result = 1;
+        INSERT INTO base.[SequenceData] ([fk_Sequence], [CurrentNumber]) VALUES (@seqID, @result);
     END
 
     UPDATE base.[SequenceData] SET CurrentNumber = @result WHERE [ID] = @seqDataID
