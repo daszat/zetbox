@@ -319,6 +319,26 @@ using System.Linq.Expressions;
             return fmdl;
         }
 
+        public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, IFilterValueSource predicate, CompoundObject cpObj, ControlKind requestedKind, ControlKind requestedArgumentKind)
+        {
+            if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
+
+            var fmdl = new SingleCompoundValueFilterModel()
+            {
+                Label = label,
+                ValueSource = predicate,
+                Operator = FilterOperators.Equals,
+                ViewModelType = ViewModelDescriptors.Kistl_Client_Presentables_FilterViewModels_SingleValueFilterViewModel.Find(frozenCtx),
+                RequestedKind = requestedKind,
+                RefreshOnFilterChanged = true,
+                CompoundObjectDefinition = cpObj,
+            };
+            fmdl.FilterArguments.Add(new FilterArgumentConfig(
+                new CompoundObjectValueModel(label, "", true, false, requestedArgumentKind, cpObj),
+                cpObj.DefaultPropertyViewModelDescriptor ?? ViewModelDescriptors.Kistl_Client_Presentables_ValueViewModels_CompoundObjectPropertyViewModel.Find(frozenCtx)));
+            return fmdl;            
+        }
+
         public static SingleValueFilterModel Create<T>(IFrozenContext frozenCtx, string label, string predicate)
         {
             return Create<T>(frozenCtx, label, predicate, null, null);
@@ -429,6 +449,10 @@ using System.Linq.Expressions;
             {
                 return Create(frozenCtx, label, predicate, ((ObjectReferenceProperty)last).GetReferencedObjectClass(), requestedKind, requestedArgumentKind);
             }
+            else if (last is CompoundObjectProperty)
+            {
+                return Create(frozenCtx, label, predicate, ((CompoundObjectProperty)last).CompoundObjectDefinition, requestedKind, requestedArgumentKind);
+            }
             else
             {
                 throw new NotSupportedException(string.Format("Singlevalue filters of Property Type {0} are not supported yet", last.GetType().Name));
@@ -487,6 +511,58 @@ using System.Linq.Expressions;
         {
             var str = (string)FilterArgument.Value.GetUntypedValue();
             return str.Split(',', ' ', ';').Select(i => i.Trim()).Where(i => !string.IsNullOrEmpty(i)).ToArray();
+        }
+    }
+
+    public class SingleCompoundValueFilterModel : SingleValueFilterModel
+    {
+        public CompoundObject CompoundObjectDefinition { get; set; }
+
+        protected override string GetPredicate()
+        {
+            var sb = new StringBuilder();
+            int counter = 0;
+            foreach (var prop in PropertyNames)
+            {
+                sb.AppendFormat("({0}.{1} == @{2} || @{2} == null) && ", 
+                    ValueSource.Expression, 
+                    prop,
+                    counter++);
+            }
+            sb.Remove(sb.Length - 3, 3);
+            return sb.ToString(); 
+        }
+
+        private string[] _propNames;
+        protected string[] PropertyNames
+        {
+            get
+            {
+                if (_propNames == null)
+                {
+                    _propNames = CompoundObjectDefinition.Properties.Select(i => i.Name).ToArray();
+                }
+                return _propNames;
+            }
+        }
+
+        protected override object[] FilterArgumentValues
+        {
+            get
+            {
+                List<object> result = new List<object>();
+                var mdl = (CompoundObjectValueModel)FilterArgument.Value;
+                foreach (var prop in PropertyNames)
+                {
+                    var val = mdl.Value.GetPropertyValue<object>(prop);
+                    if (val is string && string.IsNullOrEmpty((string)val))
+                    {
+                        val = null;
+                    }
+                    result.Add(val);
+                }
+                return result.ToArray();
+            }
         }
     }
 
