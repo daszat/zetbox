@@ -59,6 +59,8 @@ namespace Kistl.Server.Service
                 string[] schemaModules = new string[] { "*" };
                 string[] ownerModules = new string[] { "*" };
 
+                bool runServices = false;
+                bool runWcfServer = true;
                 options = new OptionSet()
                     {
                         { "schemamodules=", "A semicolon-separated list of schema-defining modules to export",
@@ -141,6 +143,12 @@ namespace Kistl.Server.Service
                         { "uninstallperfcounter", "Uninstalls the perfomance counters",
                             v => { actions.Add((c, args) => c.Resolve<IPerfCounter>().Uninstall()); }
                             },
+                        { "services", "Run background services",
+                            v => { runServices = true; }
+                            },
+                        { "nowcf", "Do not run the WCF Server",
+                            v => { runWcfServer = false; }
+                            },
                         { "help", "prints this help", 
                             v => { if ( v != null) { PrintHelpAndExit(); } } 
                             },
@@ -193,10 +201,10 @@ namespace Kistl.Server.Service
                     }
                     else
                     {
-                        Log.Info("Starting ZBox Services");
                         IServiceControlManager scm = null;
-                        if (container.TryResolve<IServiceControlManager>(out scm))
+                        if (runServices && container.TryResolve<IServiceControlManager>(out scm))
                         {
+                            Log.Info("Starting ZBox Services");
                             scm.Start();
                         }
                         else
@@ -207,16 +215,23 @@ namespace Kistl.Server.Service
                         //RunTestCode(container.Resolve<Func<IKistlContext>>());
                         RunFixes(container.Resolve<Func<IKistlContext>>());
 
-                        Log.Info("Starting WCF Service");
-                        var wcfServer = container.Resolve<IKistlAppDomain>();
-                        wcfServer.Start(config);
+                        IKistlAppDomain wcfServer = null;
+                        if (runWcfServer)
+                        {
+                            Log.Info("Starting WCF Service");
+                            wcfServer = container.Resolve<IKistlAppDomain>();
+                            wcfServer.Start(config);
+                        }
 
-                        Log.Info("Waiting for console input to shutdown");
-                        Console.WriteLine("Server started, press the anykey to exit");
-                        Console.ReadKey();
+                        if (runWcfServer || runServices)
+                        {
+                            Log.Info("Waiting for console input to shutdown");
+                            Console.WriteLine("Server started, press the anykey to exit");
+                            Console.ReadKey();
+                            Log.Info("Shutting down");
+                        }
 
-                        Log.Info("Shutting down");
-                        wcfServer.Stop();
+                        if (wcfServer != null) wcfServer.Stop();
                         if (scm != null) scm.Stop();
                     }
                 }
