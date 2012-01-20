@@ -52,7 +52,7 @@ namespace Kistl.Tests.Utilities.PostgreSql
                     var cb = new NpgsqlConnectionStringBuilder(connectionString.ConnectionString);
                     var srcDB = cb.Database.Substring(0, cb.Database.Length - "_test".Length);
                     var destDB = cb.Database;
-                    var userCmdString = "--username=postgres --no-password";
+                    var userCmdString = "--username=sa --no-password";
                     var dumpFile = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName() + ".zbox.backup");
                     while (File.Exists(dumpFile))
                     {
