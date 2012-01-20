@@ -52,6 +52,13 @@
                                      CommandViewModel="{Binding NextWeekCommand}"
                                      Background="{x:Null}"
                                      BorderBrush="{x:Null}" />
+
+                <ctrls:CommandButton Height="25"
+                                     Width="100"
+                                     Margin="10,0,0,0"
+                                     CommandViewModel="{Binding RefreshCommand}"
+                                     Background="{x:Null}"
+                                     BorderBrush="{x:Null}" />
             </StackPanel>
             <Border BorderBrush="#6593CF"
                     BorderThickness="0,0,1,1"

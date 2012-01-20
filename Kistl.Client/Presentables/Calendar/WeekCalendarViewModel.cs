@@ -74,6 +74,19 @@ namespace Kistl.Client.Presentables.Calendar
         }
 
 
+        private ICommandViewModel _RefreshCommand = null;
+        public ICommandViewModel RefreshCommand
+        {
+            get
+            {
+                if (_RefreshCommand == null)
+                {
+                    _RefreshCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Aktualisieren", "Die angezeigten Daten neu laden", LoadItems, null, null);
+                }
+                return _RefreshCommand;
+            }
+        }
+
         private DateTime _From = DateTime.Today.FirstWeekDay();
         public DateTime From
         {
