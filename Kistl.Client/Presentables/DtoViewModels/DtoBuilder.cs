@@ -202,7 +202,6 @@ namespace Kistl.Client.Presentables.DtoViewModels
         public static DtoTableViewModel BuildTableFrom(object root, PropertyInfo parentProp, object dto, IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent)
         {
             if (dto == null) return null;
-            if (parentProp == null) throw new ArgumentNullException("parentProp");
 
             // skip XmlDictionary to its values
             if (dto.GetType().HasGenericDefinition(typeof(XmlDictionary<,>)))
@@ -210,7 +209,10 @@ namespace Kistl.Client.Presentables.DtoViewModels
                 dto = dto.GetPropertyValue<object>("Values");
             }
 
-            var result = new DtoTableViewModel(dependencies, dataCtx, parent, string.Format("table:{0}.{1} = {2}", parentProp.DeclaringType, parentProp.Name, dto.GetType()))
+            var debugInfo = parentProp == null
+                ? string.Format("topTable: {0}", dto.GetType())
+                : string.Format("table:{0}.{1} = {2}", parentProp.DeclaringType, parentProp.Name, dto.GetType());
+            var result = new DtoTableViewModel(dependencies, dataCtx, parent, debugInfo)
             {
                 IsDataTable = true,
                 Title = ExtractTitle(parentProp, dto),
@@ -269,7 +271,10 @@ namespace Kistl.Client.Presentables.DtoViewModels
                         valueModel.AlternateRepresentationAlignment = ContentAlignment.MiddleRight;
                     }
 
-                    var cell = new DtoCellViewModel(dependencies, dataCtx, result, row, allColumns[prop], new GuiGridLocationAttribute(rowIdx, columnIdx), viewModel, string.Format("cell:{0}.{1}[{2}].{3}", parentProp.DeclaringType, parentProp.Name, rowIdx, prop.Name));
+                    var cellDebugInfo = parentProp == null
+                        ? string.Format("topCell:[{0}].{1}", rowIdx, prop.Name)
+                        : string.Format("cell:{0}.{1}[{2}].{3}", parentProp.DeclaringType, parentProp.Name, rowIdx, prop.Name);
+                    var cell = new DtoCellViewModel(dependencies, dataCtx, result, row, allColumns[prop], new GuiGridLocationAttribute(rowIdx, columnIdx), viewModel, cellDebugInfo);
                     result.Cells.Add(cell);
                 }
 
@@ -285,9 +290,11 @@ namespace Kistl.Client.Presentables.DtoViewModels
         public static DtoTableViewModel BuildGridFrom(object root, PropertyInfo parentProp, object dto, IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent)
         {
             if (dto == null) return null;
-            if (parentProp == null) throw new ArgumentNullException("parentProp");
 
-            var result = new DtoTableViewModel(dependencies, dataCtx, parent, string.Format("grid:{0}.{1} = {2}", parentProp.DeclaringType, parentProp.Name, dto.GetType()))
+            var debugInfo = parentProp == null
+                ? string.Format("topGrid:{0}", dto.GetType())
+                : string.Format("grid:{0}.{1} = {2}", parentProp.DeclaringType, parentProp.Name, dto.GetType());
+            var result = new DtoTableViewModel(dependencies, dataCtx, parent, debugInfo)
             {
                 IsDataTable = false,
                 Title = ExtractTitle(parentProp, dto),
@@ -305,10 +312,13 @@ namespace Kistl.Client.Presentables.DtoViewModels
 
             if (typeof(IEnumerable).IsAssignableFrom(dto.GetType()))
             {
-                Logging.Client.WarnFormat("Unable to format a list from dto '{0}' of type '{1}' contained in property {2}",
+                var propertyMsg = parentProp == null
+                    ? string.Empty
+                    : string.Format(" contained in property {0}.{1}", parentProp.DeclaringType.Name, parentProp.Name);
+                Logging.Client.WarnFormat("Unable to format a list from dto '{0}' of type '{1}'{2}",
                                 dto,
                                 dto.GetType().Name,
-                                string.Format("{0}.{1}", parentProp.DeclaringType.Name, parentProp.Name));
+                                propertyMsg);
             }
             else
             {
@@ -383,9 +393,11 @@ namespace Kistl.Client.Presentables.DtoViewModels
         public static DtoTabbedViewModel BuildTabbedFrom(object root, PropertyInfo parentProp, object dto, IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent)
         {
             if (dto == null) return null;
-            if (parentProp == null) throw new ArgumentNullException("parentProp");
 
-            var result = new DtoTabbedViewModel(dependencies, dataCtx, parent, string.Format("tabbed:{0}.{1} = {2}", parentProp.DeclaringType, parentProp.Name, dto.GetType()))
+            var debugInfo = parentProp == null
+                ? string.Format("topTabbed:{0}", dto.GetType())
+                : string.Format("tabbed:{0}.{1} = {2}", parentProp.DeclaringType, parentProp.Name, dto.GetType());
+            var result = new DtoTabbedViewModel(dependencies, dataCtx, parent, debugInfo)
             {
                 Title = ExtractTitle(parentProp, dto),
                 Description = ExtractDescription(parentProp, dto),
