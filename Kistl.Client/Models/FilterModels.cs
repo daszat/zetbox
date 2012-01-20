@@ -518,16 +518,29 @@ using System.Linq.Expressions;
     {
         public CompoundObject CompoundObjectDefinition { get; set; }
 
+        public override bool Enabled
+        {
+            get
+            {
+                return FilterArgumentValues.Any(i => i != null);
+            }
+        }
+
         protected override string GetPredicate()
         {
             var sb = new StringBuilder();
             int counter = 0;
+            var args = FilterArgumentValues;
             foreach (var prop in PropertyNames)
             {
-                sb.AppendFormat("({0}.{1} == @{2}) && ", 
-                    ValueSource.Expression, 
-                    prop,
-                    counter++);
+                if (args[counter] != null)
+                {
+                    sb.AppendFormat("({0}.{1} == @{2}) && ",
+                        ValueSource.Expression,
+                        prop,
+                        counter);
+                }
+                counter++;
             }
             sb.Remove(sb.Length - 3, 3);
             return sb.ToString(); 
