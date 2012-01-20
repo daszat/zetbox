@@ -339,7 +339,8 @@ namespace Kistl.Client.Presentables.DtoViewModels
                     // struct initialises to (0,0) by default
                     var gridLocation = prop.GetCustomAttributes(false)
                         .OfType<GuiGridLocationAttribute>()
-                        .SingleOrDefault();
+                        .Single();
+
                     // TODO: avoid silent overwriting
                     /* 
                      * TODO: might want to consider automatic appending?
