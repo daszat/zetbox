@@ -524,7 +524,7 @@ using System.Linq.Expressions;
             int counter = 0;
             foreach (var prop in PropertyNames)
             {
-                sb.AppendFormat("({0}.{1} == @{2} || @{2} == null) && ", 
+                sb.AppendFormat("({0}.{1} == @{2}) && ", 
                     ValueSource.Expression, 
                     prop,
                     counter++);
