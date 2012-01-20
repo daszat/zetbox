@@ -63,11 +63,11 @@ namespace Kistl.Server
                 .RegisterType<KistlService>()
                 .As<KistlService>() // registration for WCF
                 .As<IKistlService>() // registration for KistlServiceFacade
-                .SingleInstance();
+                .InstancePerLifetimeScope();
 
             moduleBuilder
                 .RegisterType<BootstrapperService>()
-                .SingleInstance();
+                .InstancePerLifetimeScope();
 
             moduleBuilder
                 .RegisterType<ThreadPrincipalResolver>()
