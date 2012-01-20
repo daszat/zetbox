@@ -28,7 +28,7 @@ namespace Kistl.Server
 
         public KistlService(IServerObjectHandlerFactory sohFactory, Func<IKistlContext> ctxFactory, InterfaceType.Factory iftFactory, IPerfCounter perfCounter)
         {
-            Logging.Facade.Info("Creating new KistlService instance");
+            Logging.Facade.Debug("Creating new KistlService instance");
             _sohFactory = sohFactory;
             _ctxFactory = ctxFactory;
             _iftFactory = iftFactory;
@@ -497,7 +497,7 @@ namespace Kistl.Server
 
         public void Dispose()
         {
-            Logging.Facade.Info("Disposing KistlService instance");
+            Logging.Facade.Debug("Disposing KistlService instance");
         }
 
         #endregion
