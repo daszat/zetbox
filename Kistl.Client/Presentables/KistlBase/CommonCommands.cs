@@ -319,6 +319,18 @@ namespace Kistl.Client.Presentables.KistlBase
             this._screenShot = screenShot;
         }
 
+        public override bool UseDelayedTask
+        {
+            get
+            {
+                return false;
+            }
+            set
+            {
+                // Ignore
+            }
+        }
+
         public override bool CanExecute(object data)
         {
             return true;

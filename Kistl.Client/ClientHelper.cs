@@ -49,9 +49,9 @@ namespace Kistl.Client
             {
                 var sp = (StringProperty)p;
                 var length = sp.GetMaxLength();
-                if (length > 1000) return WIDTH_HUGE;
-                if (length > 500) return WIDTH_LARGE;
-                if (length > 200) return WIDTH_NORMAL;
+                if (length >= 1000) return WIDTH_HUGE;
+                if (length >= 500) return WIDTH_LARGE;
+                if (length >= 200) return WIDTH_NORMAL;
                 return WIDTH_SMALL;
             }
             else if (p is ObjectReferenceProperty)
@@ -60,7 +60,15 @@ namespace Kistl.Client
             }
             else if (p is DateTimeProperty)
             {
-                return WIDTH_NORMAL;
+                var dtp = (DateTimeProperty)p;
+                switch (dtp.DateTimeStyle)
+                {
+                    case DateTimeStyles.Date:
+                    case DateTimeStyles.Time:
+                        return WIDTH_SMALL;
+                    default:
+                        return WIDTH_NORMAL;
+                }
             }
             else if (p is CalculatedObjectReferenceProperty)
             {

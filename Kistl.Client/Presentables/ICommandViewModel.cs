@@ -125,6 +125,27 @@ namespace Kistl.Client.Presentables
 
         #region Execution
 
+        private bool _useDelayedTask = true;
+
+        /// <summary>
+        /// Use a delayed Task for executing the command. In most toolkits this will delay the execution so UI Changes can be performed before execution (and after). Default is true.
+        /// </summary>
+        public virtual bool UseDelayedTask
+        {
+            get
+            {
+                return _useDelayedTask;
+            }
+            set
+            {
+                if (value != _useDelayedTask)
+                {
+                    _useDelayedTask = value;
+                    OnPropertyChanged("UseDelayedTask");
+                }
+            }
+        }
+
         /// <summary>
         /// Will execute the command with the given parameter. This takes care of setting the
         /// <see cref="Executing"/> property and then calls the abstract <see cref="DoExecute"/> method.
@@ -134,9 +155,24 @@ namespace Kistl.Client.Presentables
         {
             if (!Executing)
             {
-                Executing = true;
-                ViewModelFactory.TriggerDelayedTask(Parent, () =>
+                if (UseDelayedTask)
                 {
+                    Executing = true;
+                    ViewModelFactory.TriggerDelayedTask(Parent, () =>
+                    {
+                        try
+                        {
+                            DoExecute(data);
+                        }
+                        finally
+                        {
+                            Executing = false;
+                        }
+                    });
+                }
+                else
+                {
+                    Executing = true;
                     try
                     {
                         DoExecute(data);
@@ -145,7 +181,7 @@ namespace Kistl.Client.Presentables
                     {
                         Executing = false;
                     }
-                });
+                }
             }
         }
 
