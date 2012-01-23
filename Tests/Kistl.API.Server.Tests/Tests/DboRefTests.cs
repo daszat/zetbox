@@ -11,7 +11,7 @@ namespace Kistl.API.Server.Tests
     public class DboRefTests
     {
         [Datapoints]
-        private static readonly DboRef[] testValues = new DboRef[] {
+        public static readonly DboRef[] testValues = new DboRef[] {
             null,
             
             new TableRef("db", null, null),
