@@ -55,136 +55,51 @@ namespace Kistl.Server.Service
             bool waitForKey = false;
             try
             {
-                List<Action<ILifetimeScope, List<string>>> actions = new List<Action<ILifetimeScope, List<string>>>();
-                string[] schemaModules = new string[] { "*" };
-                string[] ownerModules = new string[] { "*" };
-
-                bool runServices = false;
-                bool runWcfServer = true;
-                options = new OptionSet()
-                    {
-                        { "schemamodules=", "A semicolon-separated list of schema-defining modules to export",
-                            v => { if (v != null) { schemaModules = v.Split(";".ToCharArray(), StringSplitOptions.RemoveEmptyEntries); } }
-                            },
-                        { "ownermodules=", "A semicolon-separated list of data-owning modules to export",
-                            v => { if (v != null) { ownerModules = v.Split(";".ToCharArray(), StringSplitOptions.RemoveEmptyEntries); } }
-                            },
-                        { "export=", "export the database to the specified xml file. Select the exported data with -schemamodules and -ownermodules", 
-                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<IServer>().Export(v, schemaModules, ownerModules )); } }
-                            },
-                        { "import=", "import the database from the specified xml file",
-                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<IServer>().Import(v)); } }
-                            },
-                        { "publish=", "publish the specified modules to this xml file. Select the exported data with -ownermodules",
-                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<IServer>().Publish(v, ownerModules)); } }
-                            },
-                        { "deploy=", "deploy the database from the specified xml file",
-                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<IServer>().Deploy(v)); } }
-                            },
-                        { "deploy-local:", "deploy all modules from the local Modules directory",
-                            v => { actions.AddRange(Directory.GetFiles(v ?? "Modules", "*.xml", SearchOption.TopDirectoryOnly).Select(f => new Action<ILifetimeScope, List<string>>((c, args) => c.Resolve<IServer>().Deploy(f)))); }
-                            },
-                        { "checkdeployedschema", "checks the sql schema against the deployed schema",
-                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<IServer>().CheckSchema(false)); } } 
-                            },
-                        { "checkschema=", "checks the sql schema against the metadata (parameter 'meta') or a specified xml file",
-                            v => {
-                                if (v == null) { return; }
-                                
-                                if (v.Equals("meta"))
-                                {
-                                    actions.Add((c, args) => c.Resolve<IServer>().CheckSchemaFromCurrentMetaData(false));
-                                } 
-                                else 
-                                {
-                                    actions.Add((c, args) => c.Resolve<IServer>().CheckSchema(v, false));
-                                }
-                            }},
-                        { "repairschema", "checks the schema against the deployed schema and tries to correct it",
-                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<IServer>().CheckSchema(true)); } }
-                            },
-                        { "updatedeployedschema", "updates the schema to the current metadata",
-                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<IServer>().UpdateSchema()); } }
-                            },
-                        { "updateschema=", "updates the schema to the specified xml file(s)",
-                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<IServer>().UpdateSchema(v.Split(";:".ToCharArray(), StringSplitOptions.RemoveEmptyEntries))); } }
-                            },
-                        { "generate", "generates and compiles new data classes",
-                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<Kistl.Generator.Compiler>().GenerateCode()); } }
-                            },
-                        { "compile", "compiles new data classes from already generated code; used mostly for testing",
-                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<Kistl.Generator.Compiler>().CompileCode()); } }
-                            },
-                        { "fix", "[DEVEL] run ad-hoc fixes against the database",
-                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<IServer>().RunFixes()); } }
-                            },
-                        { "wipe", "[DEVEL] completely wipe the contents of the database",
-                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<IServer>().WipeDatabase()); } }
-                            },
-                        { "benchmark", "[DEVEL] run ad-hoc benchmarks against the database",
-                            v => { if (v != null) {
-                                actions.Add((c, args) => c.Resolve<IServer>().RunBenchmarks());
-                				waitForKey = true;
-                			} }
-                            },
-                        { "wait", "let the process wait for user input before exiting",
-                            v => {
-                                waitForKey = (v != null);
-                            }},
-                        { "syncidentities", "synchronices local and domain users with Kistl Identities",
-                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<IServer>().SyncIdentities()); } }
-                            },
-                        { "analyze=", "analyzes the configured database",
-                            v => { if (v != null) { actions.Add((c, args) => c.Resolve<IServer>().AnalyzeDatabase(v, File.CreateText(string.Format("{0} Report.txt", v)))); } }
-                            },
-                        { "installperfcounter", "Installs/Reinstalls the perfomance counters",
-                            v => { actions.Add((c, args) => c.Resolve<IPerfCounter>().Install()); }
-                            },
-                        { "uninstallperfcounter", "Uninstalls the perfomance counters",
-                            v => { actions.Add((c, args) => c.Resolve<IPerfCounter>().Uninstall()); }
-                            },
-                        { "services", "Run background services",
-                            v => { runServices = true; }
-                            },
-                        { "nowcf", "Do not run the WCF Server",
-                            v => { runWcfServer = false; }
-                            },
-                        { "help", "prints this help", 
-                            v => { if ( v != null) { PrintHelpAndExit(); } } 
-                            },
-                    };
-
-                List<string> extraArguments;
-                try
-                {
-                    extraArguments = options.Parse(arguments);
-                }
-                catch (OptionException e)
-                {
-                    Log.Fatal("Error in commandline", e);
-                    return 1;
-                }
-
-                Log.TraceTotalMemory("Before InitApplicationContext");
-
-                var config = ExtractConfig(extraArguments);
-
-                Log.TraceTotalMemory("After InitApplicationContext");
-
+                var config = ExtractConfig(ref arguments);
                 AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
+
                 using (var container = CreateMasterContainer(config))
                 {
+                    List<Action<ILifetimeScope>> actions = new List<Action<ILifetimeScope>>();
+
+                    options = new OptionSet()
+                    {
+                        { "help", "prints this help", v => { if ( v != null) { PrintHelpAndExit(); } } },
+                    };
+
+                    var cmdLineData = container.Resolve<IEnumerable<CmdLineData>>();
+                    foreach (var d in cmdLineData)
+                    {
+                        options.Add(d.Prototype, d.Description, v => { if (v != null) { config.AdditionalCommandlineOptions.Add(d.DataKey, v); } });
+                    }
+
+                    var cmdLineActions = container.Resolve<IEnumerable<CmdLineAction>>();
+                    foreach (var d in cmdLineActions)
+                    {
+                        options.Add(d.Prototype, d.Description, v => { if (v != null) { actions.Add(scope => d.Invoke(scope, v)); } });
+                    }
+
+                    List<string> extraArguments;
+                    try
+                    {
+                        extraArguments = options.Parse(arguments);
+                    }
+                    catch (OptionException e)
+                    {
+                        Log.Fatal("Error in commandline", e);
+                        return 1;
+                    }
+
+                    Log.TraceTotalMemory("Before InitApplicationContext");
+
                     // process command line
                     if (actions.Count > 0)
                     {
-                        // skip config file
-                        extraArguments = extraArguments.Skip(1).ToList();
-
                         foreach (var action in actions)
                         {
                             using (var innerContainer = container.BeginLifetimeScope())
                             {
-                                action(innerContainer, extraArguments);
+                                action(innerContainer);
                             }
                         }
 
@@ -202,36 +117,20 @@ namespace Kistl.Server.Service
                     else
                     {
                         IServiceControlManager scm = null;
-                        if (runServices && container.TryResolve<IServiceControlManager>(out scm))
+                        if (container.TryResolve<IServiceControlManager>(out scm))
                         {
-                            Log.Info("Starting ZBox Services");
+                            Log.Info("Starting zetbox Services");
                             scm.Start();
-                        }
-                        else
-                        {
-                            Log.Info("Service control manager not registered");
-                        }
-
-                        //RunTestCode(container.Resolve<Func<IKistlContext>>());
-                        RunFixes(container.Resolve<Func<IKistlContext>>());
-
-                        IKistlAppDomain wcfServer = null;
-                        if (runWcfServer)
-                        {
-                            Log.Info("Starting WCF Service");
-                            wcfServer = container.Resolve<IKistlAppDomain>();
-                            wcfServer.Start(config);
-                        }
-
-                        if (runWcfServer || runServices)
-                        {
                             Log.Info("Waiting for console input to shutdown");
-                            Console.WriteLine("Server started, press the anykey to exit");
+                            Console.WriteLine("Services started, press the anykey to exit");
                             Console.ReadKey();
                             Log.Info("Shutting down");
                         }
+                        else
+                        {
+                            Log.Error("No IServiceControlManager registered");
+                        }
 
-                        if (wcfServer != null) wcfServer.Stop();
                         if (scm != null) scm.Stop();
                     }
                 }
@@ -252,37 +151,6 @@ namespace Kistl.Server.Service
             }
         }
 
-        private static void RunFixes(Func<IKistlContext> ctxFactory)
-        {
-            //using (var ctx = ctxFactory())
-            //{
-            //    foreach (var objCls in ctx.GetQuery<Kistl.App.Base.ObjectClass>())
-            //    {
-            //        objCls.ImplementInterfaces();
-            //    }
-
-            //    ctx.SubmitChanges();
-            //}
-        }
-
-        //private static void RunTestCode(Func<IKistlContext> ctx)
-        //{
-        //    var ctx1 = ctx();
-        //    var ctx2 = ctx();
-
-        //    var cal1 = ctx1.GetQuery<Kistl.App.Calendar.Calendar>().First();
-        //    var cal2 = ctx2.FindPersistenceObject<Kistl.App.Calendar.Calendar>(cal1.ID);
-
-        //    System.Diagnostics.Debug.Assert(cal1.ID == cal2.ID);
-        //    System.Diagnostics.Debug.Assert(cal1.Name == cal2.Name);
-
-        //    cal1.Name = "Test1";
-        //    ctx1.SubmitChanges();
-
-        //    cal2.Name = "Test2";
-        //    ctx2.SubmitChanges();
-        //}
-
         internal static IContainer CreateMasterContainer(KistlConfig config)
         {
             var builder = Kistl.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Server.Modules);
@@ -295,12 +163,16 @@ namespace Kistl.Server.Service
             return container;
         }
 
-        private static KistlConfig ExtractConfig(List<string> args)
+        private static KistlConfig ExtractConfig(ref string[] args)
         {
             string configFilePath;
-            if (args.Count > 0 && !args[0].StartsWith("-"))
+            if (args.Length > 0 && File.Exists(args[0]))
             {
                 configFilePath = args[0];
+                // remove consumed config file argument
+                var newArgs = new string[args.Length - 1];
+                args.CopyTo(newArgs, 1);
+                args = newArgs;
             }
             else
             {

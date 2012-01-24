@@ -14,7 +14,6 @@
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="1" name="ConnectionStrings" type="tns:ArrayOfDatabase" />
       <xs:element minOccurs="0" maxOccurs="1" name="DocumentStore" type="xs:string" />
-      <xs:element minOccurs="0" maxOccurs="1" name="LogFilePath" type="xs:string" />
       <xs:element minOccurs="0" maxOccurs="1" name="CodeGenWorkingPath" type="xs:string" />
       <xs:element minOccurs="0" maxOccurs="1" name="CodeGenOutputPath" type="xs:string" />
       <xs:element minOccurs="0" maxOccurs="1" name="CodeGenBinaryOutputPath" type="tns:ArrayOfString" />

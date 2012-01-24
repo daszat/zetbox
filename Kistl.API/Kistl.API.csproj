@@ -67,6 +67,7 @@
     <Compile Include="AssemblyLoader.cs" />
     <Compile Include="AutofacExtensions.cs" />
     <Compile Include="BinarySerializer.cs" />
+    <Compile Include="CmdLineAction.cs" />
     <Compile Include="CollectionEntries.cs" />
     <Compile Include="Configuration\KistlConfig.cs" />
     <Compile Include="Dtos\DtoTransformationAttributes.cs" />

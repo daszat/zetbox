@@ -81,14 +81,23 @@ namespace Kistl.Server
         /// <param name="config">the loaded configuration for the Server</param>
         public void Start(KistlConfig config)
         {
-            using (Log.InfoTraceMethodCall("Starting Server"))
-            {
-                serviceThread = new Thread(new ThreadStart(this.RunWCFServer));
-                serviceThread.Start();
+            if (config == null) throw new ArgumentNullException("config");
 
-                if (!serverStarted.WaitOne(40 * 1000, false))
+            if (config.AdditionalCommandlineOptions.ContainsKey(ServerModule.NoWcfKey))
+            {
+                Log.Info("Not starting embedded WCF Server. As requested by -nowcf.");
+            }
+            else
+            {
+                using (Log.InfoTraceMethodCall("Starting Server"))
                 {
-                    throw new InvalidOperationException("Server did not start within 40 sec.");
+                    serviceThread = new Thread(new ThreadStart(this.RunWCFServer));
+                    serviceThread.Start();
+
+                    if (!serverStarted.WaitOne(40 * 1000, false))
+                    {
+                        throw new InvalidOperationException("Server did not start within 40 sec.");
+                    }
                 }
             }
         }
@@ -100,10 +109,12 @@ namespace Kistl.Server
         {
             Log.Info("Stopping Server");
 
-            _mainHost.Close();
-            _bootstrapperHost.Close();
+            if (_mainHost != null)
+                _mainHost.Close();
+            if (_bootstrapperHost != null)
+                _bootstrapperHost.Close();
 
-            if (!serviceThread.Join(5000))
+            if (serviceThread != null && !serviceThread.Join(5000))
             {
                 Log.Info("Server did not stop after 5s, aborting");
                 serviceThread.Abort();

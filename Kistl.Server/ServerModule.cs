@@ -17,11 +17,13 @@ namespace Kistl.Server
 
     public class ServerModule : Module
     {
-        protected override void Load(ContainerBuilder moduleBuilder)
-        {
-            base.Load(moduleBuilder);
+        public static object NoWcfKey { get { return "nowcf"; } }
 
-            moduleBuilder
+        protected override void Load(ContainerBuilder builder)
+        {
+            base.Load(builder);
+
+            builder
                 .Register((c, p) =>
                 {
                     KistlConfig cfg = c.Resolve<KistlConfig>();
@@ -39,60 +41,63 @@ namespace Kistl.Server
                 })
                 .InstancePerDependency();
 
-            moduleBuilder
+            builder
                 .RegisterType<Server>()
                 .As<IServer>()
                 .SingleInstance();
 
-            moduleBuilder
+            builder
                 .RegisterType<WcfServer>()
                 .AsImplementedInterfaces()
                 .SingleInstance();
 
-            moduleBuilder
+            builder
+                .RegisterCmdLineDataOption("nowcf", "Do not run the embedded WCF Server; running it is the default when no action parameter is specified", NoWcfKey);
+
+            builder
                 .Register(c => new AutofacServiceHostFactory())
                 .As<AutofacServiceHostFactory>()
                 .SingleInstance();
 
-            moduleBuilder
+            builder
                 .Register(c => new AutofacWebServiceHostFactory())
                 .As<AutofacWebServiceHostFactory>()
                 .SingleInstance();
 
-            moduleBuilder
+            builder
                 .RegisterType<KistlService>()
                 .As<KistlService>() // registration for WCF
                 .As<IKistlService>() // registration for KistlServiceFacade
                 .InstancePerLifetimeScope();
 
-            moduleBuilder
+            builder
                 .RegisterType<BootstrapperService>()
                 .InstancePerLifetimeScope();
 
-            moduleBuilder
+            builder
                 .RegisterType<ThreadPrincipalResolver>()
                 .As<IIdentityResolver>()
                 .InstancePerLifetimeScope();
 
             // TODO: move to separate SchemaProvider-specific assembly, since the SQL-Schema should be independent of the DalProvider
-            moduleBuilder
+            builder
                 .Register(c => new SchemaManagement.LoggingSchemaProviderAdapter(new SchemaManagement.OleDbProvider.OleDb()))
                 .As<ISchemaProvider>()
                 .Named<ISchemaProvider>("OLEDB")
                 .InstancePerDependency();
-            moduleBuilder
+            builder
                 .Register(c => new SchemaManagement.LoggingSchemaProviderAdapter(new SchemaManagement.SqlProvider.SqlServer()))
                 .As<ISchemaProvider>()
                 .Named<ISchemaProvider>("MSSQL")
                 .InstancePerDependency();
-            moduleBuilder
+            builder
                 .Register(c => new SchemaManagement.LoggingSchemaProviderAdapter(new SchemaManagement.NpgsqlProvider.Postgresql()))
                 .As<ISchemaProvider>()
                 .Named<ISchemaProvider>("POSTGRESQL")
                 .InstancePerDependency();
 
 #if !MONO
-            moduleBuilder
+            builder
                 .Register(c => new ActiveDirectoryIdentitySource())
                 .As<IIdentitySource>()
                 .InstancePerLifetimeScope();

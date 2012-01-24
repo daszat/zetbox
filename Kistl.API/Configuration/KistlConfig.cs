@@ -39,11 +39,13 @@ namespace Kistl.API.Configuration
     [Serializable]
     public class KistlConfig
     {
-
         /// <summary>
         /// Create an empty configuration
         /// </summary>
-        public KistlConfig() { }
+        public KistlConfig()
+        {
+            this.AdditionalCommandlineOptions = new Dictionary<object, string>();
+        }
 
         /// <summary>
         /// Path to the Config File
@@ -81,6 +83,12 @@ namespace Kistl.API.Configuration
         /// </summary>
         [XmlArray(IsNullable = false)]
         public string[] AssemblySearchPaths { get; set; }
+
+        /// <summary>
+        /// These additional command line options can be used to set values while parsing the commandline.
+        /// </summary>
+        [XmlIgnore]
+        public Dictionary<object, string> AdditionalCommandlineOptions { get; set; }
 
         /// <summary>
         /// Server Configuration

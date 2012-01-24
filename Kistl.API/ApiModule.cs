@@ -1,29 +1,36 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using Autofac;
-using System.Reflection;
 
 namespace Kistl.API
 {
     public sealed class ApiModule
         : Autofac.Module
     {
-        protected override void Load(ContainerBuilder moduleBuilder)
+        protected override void Load(ContainerBuilder builder)
         {
-            base.Load(moduleBuilder);
+            base.Load(builder);
 
-            moduleBuilder
+            builder
                 .Register<InterfaceType>((c, p) => InterfaceType.Create(p.Named<Type>("type"), c.Resolve<IInterfaceTypeChecker>()))
                 .InstancePerDependency();
 
-            moduleBuilder
+            builder
                 .Register<LoggingProblemReporter>(c => new LoggingProblemReporter())
                 .As<IProblemReporter>()
                 .SingleInstance();
 
-            moduleBuilder.RegisterModule(new Kistl.API.SmtpMailSender.Module());
+            builder
+                .RegisterModule(new Kistl.API.SmtpMailSender.Module());
+
+            builder
+                .RegisterAssemblyTypes(typeof(ApiModule).Assembly)
+                .AssignableTo<CmdLineOption>()
+                .As<CmdLineOption>()
+                .InstancePerLifetimeScope();
         }
     }
 }

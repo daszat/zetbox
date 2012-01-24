@@ -8,23 +8,23 @@ namespace Kistl.Client.WPF
     using System.Linq;
     using System.Reflection;
     using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Input;
     using System.Windows.Markup;
     using System.Windows.Threading;
     using Autofac;
+    using Autofac.Features.Metadata;
     using Kistl.API;
     using Kistl.API.Client;
+    using Kistl.API.Common;
     using Kistl.API.Configuration;
     using Kistl.API.Utils;
     using Kistl.App.Extensions;
     using Kistl.App.GUI;
     using Kistl.Client.Presentables;
     using Kistl.Client.WPF.Converter;
-    using System.Windows.Input;
-    using System.Windows.Controls;
     using Kistl.Client.WPF.Toolkit;
     using Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;
-    using Autofac.Features.Metadata;
-    using Kistl.API.Common;
 
     /// <summary>
     /// Interaction logic for App.xaml

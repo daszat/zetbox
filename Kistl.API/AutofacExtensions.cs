@@ -26,5 +26,19 @@ namespace Kistl.API
                     .SingleInstance();
             }
         }
+
+        public static void RegisterCmdLineDataOption(this ContainerBuilder builder, string prototype, string description, object dataKey)
+        {
+            builder
+               .RegisterInstance<CmdLineData>(new SimpleCmdLineData(prototype, description, dataKey))
+               .ExternallyOwned();
+        }
+
+        public static void RegisterCmdLineAction(this ContainerBuilder builder, string prototype, string description, Action<ILifetimeScope, string> action)
+        {
+            builder
+               .RegisterInstance<CmdLineAction>(new SimpleCmdLineAction(prototype, description, action))
+               .ExternallyOwned();
+        }
     }
 }

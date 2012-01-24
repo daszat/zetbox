@@ -6,10 +6,28 @@ namespace Kistl.Generator
     using System.Linq;
     using System.Text;
     using Autofac;
+    using Kistl.API;
 
     public sealed class GeneratorModule
         : Module
     {
+        internal static void RegisterCmdLine(ContainerBuilder builder)
+        {
+            builder
+                .RegisterCmdLineAction("generate", "generates and compiles new data classes",
+                (scope, arg) =>
+                {
+                    scope.Resolve<Compiler>().GenerateCode();
+                });
+
+            builder
+                .RegisterCmdLineAction("compile", "[DEVEL] compiles new data classes from already generated code; used mostly for testing",
+                (scope, arg) =>
+                {
+                    scope.Resolve<Compiler>().CompileCode();
+                });
+        }
+
         protected override void Load(ContainerBuilder builder)
         {
             base.Load(builder);
@@ -23,6 +41,8 @@ namespace Kistl.Generator
                 .RegisterType<MsBuildCompiler>()
                 .As<Compiler>()
                 .SingleInstance();
+
+            GeneratorModule.RegisterCmdLine(builder);
         }
     }
 
@@ -42,6 +62,8 @@ namespace Kistl.Generator
                 .RegisterType<XBuildCompiler>()
                 .As<Compiler>()
                 .SingleInstance();
+
+            GeneratorModule.RegisterCmdLine(builder);
         }
     }
 }

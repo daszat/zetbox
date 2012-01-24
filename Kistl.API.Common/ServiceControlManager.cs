@@ -7,6 +7,7 @@ namespace Kistl.API.Common
     using System.Text;
     using Autofac;
     using Kistl.API;
+    using Kistl.API.Configuration;
     using Kistl.API.Utils;
     using Kistl.App.Base;
 
@@ -18,15 +19,12 @@ namespace Kistl.API.Common
 
     public class ServiceControlManager : IServiceControlManager
     {
-        private readonly Autofac.ILifetimeScope _container;
         private readonly IEnumerable<IService> _services;
 
-        public ServiceControlManager(Autofac.ILifetimeScope container, IEnumerable<IService> services)
+        public ServiceControlManager(IEnumerable<IService> services)
         {
-            if (container == null) throw new ArgumentNullException("container");
             if (services == null) throw new ArgumentNullException("services");
 
-            this._container = container;
             this._services = services;
         }
 
