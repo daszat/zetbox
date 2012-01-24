@@ -1,3 +1,4 @@
+
 namespace Kistl.App.Projekte.DocumentManagement
 {
     using System;
@@ -11,8 +12,7 @@ namespace Kistl.App.Projekte.DocumentManagement
     using Kistl.API.Utils;
     using Kistl.App.Base;
 
-    [ServiceDescriptor]
-    public class FileImportService : Kistl.API.IService
+    public class FileImportService : IService
     {
         public class Module : Autofac.Module
         {
@@ -41,6 +41,8 @@ namespace Kistl.App.Projekte.DocumentManagement
 
             _ctxFactory = ctxFactory;
         }
+
+        #region IService Members
 
         public void Start()
         {
@@ -73,6 +75,11 @@ namespace Kistl.App.Projekte.DocumentManagement
             _fileEvent.Close();
             _fileEvent = null;
         }
+
+        public string DisplayName { get { return "Fileimporter"; } }
+        public string Description { get { return "Watches a directory and automatically imports new files as Blobs."; } }
+
+        #endregion
 
         private void initFileWatcher(object state)
         {

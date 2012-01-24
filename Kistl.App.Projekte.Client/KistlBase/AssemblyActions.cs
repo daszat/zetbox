@@ -46,7 +46,6 @@ namespace Kistl.App.Base
 
                     CreateViewModelDescriptors(ctx, newTypes);
                     CreateViewDescriptors(ctx, newTypes);
-                    CreateServiceDescriptors(ctx, newTypes);
 
                     var newDescriptors = new List<IDataObject>();
                     newDescriptors.AddRange(ctx.AttachedObjects.OfType<ViewModelDescriptor>().Where(d => d.ObjectState == DataObjectState.New).Cast<IDataObject>().ToList());
@@ -75,41 +74,6 @@ namespace Kistl.App.Base
                 {
                     Logging.Log.Warn("Failed to RegenerateTypeRefs", ex);
                     e.Result = false;
-                }
-            }
-        }
-
-        private static void CreateServiceDescriptors(IKistlContext ctx, Dictionary<int, TypeRef> newTypes)
-        {
-            using (Logging.Log.InfoTraceMethodCallFormat("CreateServiceModelDescriptors", "Creating ServiceDescriptors"))
-            {
-                foreach (var tr in newTypes.Values)
-                {
-                    var type = tr.AsType(false);
-                    if (type != null)
-                    {
-                        object attr;
-                        // http://blogs.msdn.com/b/kaevans/archive/2005/10/24/484186.aspx
-                        if (type.Assembly.ReflectionOnly)
-                        {
-                            attr = System.Reflection.CustomAttributeData.GetCustomAttributes(type).FirstOrDefault(i => i.Constructor.DeclaringType.FullName == typeof(ServiceDescriptorAttribute).FullName);
-                        }
-                        else
-                        {
-                            attr = type.GetCustomAttributes(typeof(ServiceDescriptorAttribute), false).FirstOrDefault() as ServiceDescriptorAttribute;
-                        }
-
-                        if (attr != null)
-                        {
-                            var descr = ctx.GetQuery<ServiceDescriptor>().FirstOrDefault(i => i.TypeRef == tr);
-                            if (descr == null)
-                            {
-                                descr = ctx.Create<ServiceDescriptor>();
-                                descr.TypeRef = tr;
-                                descr.Description = "TODO: Add description";
-                            }
-                        }
-                    }
                 }
             }
         }

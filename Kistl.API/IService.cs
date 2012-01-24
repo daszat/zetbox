@@ -5,15 +5,6 @@ using System.Text;
 
 namespace Kistl.API
 {
-    [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
-    public sealed class ServiceDescriptorAttribute : Attribute
-    {
-        public ServiceDescriptorAttribute()
-        {
-        }
-    }
-
-
     /// <summary>
     /// Interface fo an ZBox Custom Service
     /// </summary>
@@ -21,5 +12,8 @@ namespace Kistl.API
     {
         void Start();
         void Stop();
+
+        string DisplayName { get; }
+        string Description { get; }
     }
 }

@@ -9,38 +9,32 @@ namespace Kistl.API.Common
     using Kistl.API;
     using Kistl.API.Utils;
     using Kistl.App.Base;
-    
+
     public interface IServiceControlManager
     {
         void Start();
         void Stop();
-
-        void Start(ServiceDescriptor descr);
-        void Stop(ServiceDescriptor descr);
     }
 
     public class ServiceControlManager : IServiceControlManager
     {
         private readonly Autofac.ILifetimeScope _container;
-        private readonly IFrozenContext _frozenCtx;
-        private readonly IDeploymentRestrictor _restrictor;
+        private readonly IEnumerable<IService> _services;
 
-        public ServiceControlManager(Autofac.ILifetimeScope container, IFrozenContext frozenCtx, IDeploymentRestrictor restrictor)
+        public ServiceControlManager(Autofac.ILifetimeScope container, IEnumerable<IService> services)
         {
             if (container == null) throw new ArgumentNullException("container");
-            if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
-            if (restrictor == null) throw new ArgumentNullException("restrictor");
+            if (services == null) throw new ArgumentNullException("services");
 
             this._container = container;
-            this._frozenCtx = frozenCtx;
-            this._restrictor = restrictor;
+            this._services = services;
         }
 
         #region IServiceControlManager Members
 
         public void Start()
         {
-            foreach (var s in GetServiceDescriptors())
+            foreach (var s in _services)
             {
                 Start(s);
             }
@@ -48,72 +42,47 @@ namespace Kistl.API.Common
 
         public void Stop()
         {
-            foreach (var s in GetServiceDescriptors())
+            foreach (var s in _services)
             {
                 Stop(s);
             }
         }
 
-        public void Start(ServiceDescriptor descr)
+        private void Start(IService service)
         {
-            if (descr == null) throw new ArgumentNullException("descr");
+            if (service == null) throw new ArgumentNullException("service");
 
             try
             {
-                Logging.Log.InfoFormat("Starting service {0}", descr.Description);
+                Logging.Log.InfoFormat("Starting service {0}", service.DisplayName);
 
-                var service = GetInstance(descr);
-                if(service != null)
-                    service.Start();
-                else
-                    Logging.Log.Warn("Service has not been registered");
+                service.Start();
 
-                Logging.Log.Info("Service started successfully");
+                Logging.Log.InfoFormat("Service {0} started successfully", service.DisplayName);
             }
             catch (Exception ex)
             {
-                Logging.Log.Error("Failed starting service", ex);
+                Logging.Log.Error(string.Format("Failed starting service {0}", service.DisplayName), ex);
             }
         }
 
-        public void Stop(ServiceDescriptor descr)
+        private void Stop(IService service)
         {
-            if (descr == null) throw new ArgumentNullException("descr");
+            if (service == null) throw new ArgumentNullException("service");
 
             try
             {
-                Logging.Log.InfoFormat("Stopping service {0}", descr.Description);
+                Logging.Log.InfoFormat("Stopping service {0}", service.DisplayName);
 
-                var service = GetInstance(descr);
-                if (service != null)
-                    service.Stop();
-                else
-                    Logging.Log.Warn("Service has not been registered");
+                service.Stop();
 
-                Logging.Log.Info("Service stopped successfully");
+                Logging.Log.InfoFormat("Service {0} stopped successfully", service.DisplayName);
             }
             catch (Exception ex)
             {
-                Logging.Log.Error("Failed stopping service", ex);
+                Logging.Log.Error(string.Format("Failed stopping service {0}", service.DisplayName), ex);
             }
         }
         #endregion
-
-        private IService GetInstance(ServiceDescriptor descr)
-        {
-            var type = descr.TypeRef.AsType(true);
-            object service;
-            _container.TryResolve(type, out service);
-            return service as IService;
-        }
-
-        private IEnumerable<ServiceDescriptor> GetServiceDescriptors()
-        {
-            foreach (var s in _frozenCtx.GetQuery<ServiceDescriptor>())
-            {
-                if (_restrictor.IsAcceptableDeploymentRestriction((int)s.DeploymentRestriction))
-                    yield return s;
-            }
-        }
     }
 }
