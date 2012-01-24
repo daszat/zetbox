@@ -46,7 +46,7 @@ namespace Kistl.Server
 
             moduleBuilder
                 .RegisterType<WcfServer>()
-                .As<IKistlAppDomain>()
+                .AsImplementedInterfaces()
                 .SingleInstance();
 
             moduleBuilder

@@ -6,16 +6,16 @@ namespace Kistl.Server
     using System.Linq;
     using System.ServiceModel;
     using System.ServiceModel.Activation;
+    using System.ServiceModel.Web;
     using System.Text;
     using System.Threading;
     using Autofac.Integration.Wcf;
     using Kistl.API;
     using Kistl.API.Configuration;
     using Kistl.API.Utils;
-    using System.ServiceModel.Web;
 
     public class WcfServer
-        : MarshalByRefObject, IKistlAppDomain, IDisposable
+        : MarshalByRefObject, IKistlAppDomain, IService, IDisposable
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Wcf");
 
@@ -28,6 +28,8 @@ namespace Kistl.Server
         /// Bootstrapper WCF Service Host
         /// </summary>
         private readonly ServiceHostBase _bootstrapperHost = null;
+
+        private readonly KistlConfig _defaultConfig = null;
 
         /// <summary>
         /// WCF Service Thread
@@ -44,6 +46,8 @@ namespace Kistl.Server
             if (factory == null) { throw new ArgumentNullException("factory"); }
             if (webFactory == null) { throw new ArgumentNullException("webFactory"); }
             if (config == null) throw new ArgumentNullException("config");
+
+            _defaultConfig = config;
 
             _mainHost = factory.CreateServiceHost(typeof(KistlService).AssemblyQualifiedName, new Uri[] { });
             _mainHost.UnknownMessageReceived += new EventHandler<UnknownMessageReceivedEventArgs>(host_UnknownMessageReceived);
@@ -62,6 +66,11 @@ namespace Kistl.Server
         void host_Closed(object sender, EventArgs e)
         {
             Log.Info("Host closed");
+        }
+
+        public void Start()
+        {
+            this.Start(_defaultConfig);
         }
 
         /// <summary>
@@ -110,6 +119,9 @@ namespace Kistl.Server
 
             Log.Info("Server stopped");
         }
+
+        public string DisplayName { get { return "WCF-Service"; } }
+        public string Description { get { return "A WCF-based method to access the service"; } }
 
         /// <summary>
         /// Executes the actual WcfHost in a separate thread and waits until shutdown.
