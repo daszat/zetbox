@@ -62,9 +62,10 @@ namespace Kistl.Server.HttpService
 
         public void ProcessRequest(HttpContext context)
         {
+            IContainerProviderAccessor cpa = null;
             try
             {
-                var cpa = (IContainerProviderAccessor)HttpContext.Current.ApplicationInstance;
+                cpa = (IContainerProviderAccessor)HttpContext.Current.ApplicationInstance;
                 var scope = cpa.ContainerProvider.RequestLifetime;
                 var service = scope.Resolve<IKistlService>();
                 string username;
@@ -269,6 +270,13 @@ namespace Kistl.Server.HttpService
             {
                 context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
                 Log.Error("Error while processing request", ex);
+            }
+            finally
+            {
+                if (cpa != null && cpa.ContainerProvider != null)
+                {
+                    cpa.ContainerProvider.EndRequestLifetime();
+                }
             }
         }
 
