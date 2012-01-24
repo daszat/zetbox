@@ -67,15 +67,15 @@ namespace Kistl.Server.Service
                         { "help", "prints this help", v => { if ( v != null) { PrintHelpAndExit(); } } },
                     };
 
-                    var cmdLineData = container.Resolve<IEnumerable<CmdLineData>>();
-                    foreach (var d in cmdLineData)
+                    foreach (var cmdLineData in container.Resolve<IEnumerable<CmdLineData>>())
                     {
+                        var d = cmdLineData; // decouple from loop variable
                         options.Add(d.Prototype, d.Description, v => { if (v != null) { config.AdditionalCommandlineOptions.Add(d.DataKey, v); } });
                     }
 
-                    var cmdLineActions = container.Resolve<IEnumerable<CmdLineAction>>();
-                    foreach (var d in cmdLineActions)
+                    foreach (var cmdLineAction in container.Resolve<IEnumerable<CmdLineAction>>())
                     {
+                        var d = cmdLineAction; // decouple from loop variable
                         options.Add(d.Prototype, d.Description, v => { if (v != null) { actions.Add(scope => d.Invoke(scope, v)); } });
                     }
 

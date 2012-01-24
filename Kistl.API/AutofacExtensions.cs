@@ -30,14 +30,18 @@ namespace Kistl.API
         public static void RegisterCmdLineDataOption(this ContainerBuilder builder, string prototype, string description, object dataKey)
         {
             builder
-               .RegisterInstance<CmdLineData>(new SimpleCmdLineData(prototype, description, dataKey))
+               .RegisterInstance(new SimpleCmdLineData(prototype, description, dataKey))
+               .As<CmdLineData>()
+               .Named<CmdLineData>(prototype)
                .ExternallyOwned();
         }
 
         public static void RegisterCmdLineAction(this ContainerBuilder builder, string prototype, string description, Action<ILifetimeScope, string> action)
         {
             builder
-               .RegisterInstance<CmdLineAction>(new SimpleCmdLineAction(prototype, description, action))
+               .RegisterInstance(new SimpleCmdLineAction(prototype, description, action))
+               .As<CmdLineAction>()
+               .Named<CmdLineAction>(prototype)
                .ExternallyOwned();
         }
     }
