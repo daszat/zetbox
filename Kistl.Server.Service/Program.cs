@@ -79,7 +79,7 @@ namespace Kistl.Server.Service
                         options.Add(d.Prototype, d.Description, v => { if (v != null) { actions.Add(scope => d.Invoke(scope, v)); } });
                     }
 
-                    List<string> extraArguments;
+                    List<string> extraArguments = null;
                     try
                     {
                         extraArguments = options.Parse(arguments);
@@ -87,6 +87,12 @@ namespace Kistl.Server.Service
                     catch (OptionException e)
                     {
                         Log.Fatal("Error in commandline", e);
+                        return 1;
+                    }
+
+                    if (extraArguments != null && extraArguments.Count > 0)
+                    {
+                        Log.FatalFormat("Unrecognized arguments on commandline: {0}", string.Join(", ", extraArguments.ToArray()));
                         return 1;
                     }
 
