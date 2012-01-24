@@ -176,9 +176,7 @@ namespace Kistl.Server.Service
             {
                 configFilePath = args[0];
                 // remove consumed config file argument
-                var newArgs = new string[args.Length - 1];
-                args.CopyTo(newArgs, 1);
-                args = newArgs;
+                args = args.Skip(1).ToArray();
             }
             else
             {
