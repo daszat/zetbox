@@ -44,7 +44,7 @@ namespace Kistl.API.Configuration
         /// </summary>
         public KistlConfig()
         {
-            this.AdditionalCommandlineOptions = new Dictionary<object, string>();
+            this.AdditionalCommandlineOptions = new Dictionary<object, List<string>>();
         }
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace Kistl.API.Configuration
         /// These additional command line options can be used to set values while parsing the commandline.
         /// </summary>
         [XmlIgnore]
-        public Dictionary<object, string> AdditionalCommandlineOptions { get; set; }
+        public Dictionary<object, List<string>> AdditionalCommandlineOptions { get; set; }
 
         /// <summary>
         /// Server Configuration

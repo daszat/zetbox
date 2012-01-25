@@ -26,33 +26,12 @@ namespace Kistl.Server.Service
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Kistl.Server.Service");
 
-        private static OptionSet options;
-
-        private static void PrintHelpAndExit()
-        {
-            PrintHelp();
-            Environment.Exit(1);
-        }
-
-        private static void PrintHelp()
-        {
-            if (options != null)
-            {
-                options.WriteOptionDescriptions(Console.Out);
-            }
-            else
-            {
-                Log.Fatal("Error while generating commandline help");
-            }
-        }
-
         public static int Main(string[] arguments)
         {
             Logging.Configure();
 
             Log.InfoFormat("Starting Kistl Server with args [{0}]", String.Join(" ", arguments));
 
-            bool waitForKey = false;
             try
             {
                 var config = ExtractConfig(ref arguments);
@@ -60,24 +39,10 @@ namespace Kistl.Server.Service
 
                 using (var container = CreateMasterContainer(config))
                 {
-                    List<Action<ILifetimeScope>> actions = new List<Action<ILifetimeScope>>();
+                    OptionSet options = new OptionSet();
 
-                    options = new OptionSet()
-                    {
-                        { "help", "prints this help", v => { if ( v != null) { PrintHelpAndExit(); } } },
-                    };
-
-                    foreach (var cmdLineData in container.Resolve<IEnumerable<CmdLineData>>())
-                    {
-                        var d = cmdLineData; // decouple from loop variable
-                        options.Add(d.Prototype, d.Description, v => { if (v != null) { config.AdditionalCommandlineOptions.Add(d.DataKey, v); } });
-                    }
-
-                    foreach (var cmdLineAction in container.Resolve<IEnumerable<CmdLineAction>>())
-                    {
-                        var d = cmdLineAction; // decouple from loop variable
-                        options.Add(d.Prototype, d.Description, v => { if (v != null) { actions.Add(scope => d.Invoke(scope, v)); } });
-                    }
+                    // activate all registered options
+                    container.Resolve<IEnumerable<Option>>().OrderBy(o => o.Prototype).ForEach(o => options.Add(o));
 
                     List<string> extraArguments = null;
                     try
@@ -96,28 +61,21 @@ namespace Kistl.Server.Service
                         return 1;
                     }
 
-                    Log.TraceTotalMemory("Before InitApplicationContext");
+                    var actions = options.OfType<CmdLineAction>().Where(a => a.Arguments != null).ToList();
 
                     // process command line
                     if (actions.Count > 0)
                     {
-                        foreach (var action in actions)
+                        using (Log.DebugTraceMethodCall("CmdLineActions", "processing commandline actions"))
                         {
-                            using (var innerContainer = container.BeginLifetimeScope())
+                            foreach (var action in actions)
                             {
-                                action(innerContainer);
+                                using (var innerContainer = container.BeginLifetimeScope())
+                                {
+                                    action.ConditionalInvoke(innerContainer);
+                                }
                             }
                         }
-
-                        Log.TraceTotalMemory("After commandline processed");
-
-                        if (waitForKey)
-                        {
-                            Log.Info("Waiting for console input to shutdown");
-                            Console.WriteLine("Hit the anykey to exit");
-                            Console.ReadKey();
-                        }
-
                         Log.Info("Shutting down");
                     }
                     else
@@ -146,13 +104,6 @@ namespace Kistl.Server.Service
             catch (Exception ex)
             {
                 Log.Error("Server Application failed:", ex);
-                if (waitForKey)
-                {
-                    Log.Info("Waiting for console input to shutdown");
-                    Console.WriteLine("Hit the anykey to exit");
-                    Console.ReadKey();
-                    Log.Info("Exiting");
-                }
                 return 1;
             }
         }

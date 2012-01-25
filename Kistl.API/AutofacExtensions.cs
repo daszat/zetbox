@@ -8,6 +8,8 @@ namespace Kistl.API
     using System.Text;
     using Autofac;
     using Autofac.Builder;
+    using Kistl.API.Configuration;
+    using Kistl.API.Utils;
 
     public static class AutofacExtensions
     {
@@ -30,19 +32,19 @@ namespace Kistl.API
         public static void RegisterCmdLineDataOption(this ContainerBuilder builder, string prototype, string description, object dataKey)
         {
             builder
-               .RegisterInstance(new SimpleCmdLineData(prototype, description, dataKey))
-               .As<CmdLineData>()
+               .Register<CmdLineData>(c => new SimpleCmdLineData(c.Resolve<KistlConfig>(), prototype, description, dataKey))
+               .As<Option>()
                .Named<CmdLineData>(prototype)
-               .ExternallyOwned();
+               .SingleInstance();
         }
 
         public static void RegisterCmdLineAction(this ContainerBuilder builder, string prototype, string description, Action<ILifetimeScope, string> action)
         {
             builder
-               .RegisterInstance(new SimpleCmdLineAction(prototype, description, action))
-               .As<CmdLineAction>()
+               .Register<CmdLineAction>(c => new SimpleCmdLineAction(prototype, description, action))
+               .As<Option>()
                .Named<CmdLineAction>(prototype)
-               .ExternallyOwned();
+               .SingleInstance();
         }
     }
 }

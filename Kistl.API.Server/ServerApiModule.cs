@@ -43,10 +43,8 @@ namespace Kistl.API.Server
 
             builder
                 .RegisterAssemblyTypes(typeof(ServerApiModule).Assembly)
-                .AssignableTo<CmdLineOption>()
-                .Except<SimpleCmdLineAction>()
-                .Except<SimpleCmdLineData>()
-                .As<CmdLineOption>()
+                .AssignableTo<Option>()
+                .As<Option>()
                 .InstancePerLifetimeScope();
 
             builder
@@ -198,18 +196,25 @@ namespace Kistl.API.Server
 
         private static void ParseModules(KistlConfig config, out string[] schemaModulesArray, out string[] ownerModulesArray)
         {
-            string schemaModules;
-            string ownerModules;
-            if (!config.AdditionalCommandlineOptions.TryGetValue(SchemaModulesKey, out schemaModules))
+            List<string> schemaModules;
+            if (config.AdditionalCommandlineOptions.TryGetValue(SchemaModulesKey, out schemaModules))
             {
-                schemaModules = "*";
+                schemaModulesArray = schemaModules.SelectMany(s => s.Split(new char[] { Path.PathSeparator }, StringSplitOptions.RemoveEmptyEntries)).ToArray();
             }
-            if (!config.AdditionalCommandlineOptions.TryGetValue(OwnerModulesKey, out ownerModules))
+            else
             {
-                ownerModules = "*";
+                schemaModulesArray = new string[] { "*" };
             }
-            schemaModulesArray = schemaModules.Split(";:".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-            ownerModulesArray = ownerModules.Split(";:".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+
+            List<string> ownerModules;
+            if (config.AdditionalCommandlineOptions.TryGetValue(OwnerModulesKey, out ownerModules))
+            {
+                ownerModulesArray = ownerModules.SelectMany(s => s.Split(new char[] { Path.PathSeparator }, StringSplitOptions.RemoveEmptyEntries)).ToArray();
+            }
+            else
+            {
+                ownerModulesArray = new string[] { "*" };
+            }
         }
     }
 }

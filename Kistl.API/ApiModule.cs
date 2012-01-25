@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using Autofac;
+using Kistl.API.Utils;
 
 namespace Kistl.API
 {
@@ -28,8 +29,16 @@ namespace Kistl.API
 
             builder
                 .RegisterAssemblyTypes(typeof(ApiModule).Assembly)
-                .AssignableTo<CmdLineOption>()
-                .As<CmdLineOption>()
+                .Except<SimpleCmdLineAction>()
+                .AssignableTo<CmdLineAction>()
+                .As<Option>()
+                .InstancePerLifetimeScope();
+
+            builder
+                .RegisterAssemblyTypes(typeof(ApiModule).Assembly)
+                .Except<SimpleCmdLineData>()
+                .AssignableTo<CmdLineData>()
+                .As<Option>()
                 .InstancePerLifetimeScope();
         }
     }
