@@ -198,10 +198,16 @@ namespace Kistl.API.Server
 
         private static void ParseModules(KistlConfig config, out string[] schemaModulesArray, out string[] ownerModulesArray)
         {
-            string schemaModules = "*";
-            string ownerModules = "*";
-            config.AdditionalCommandlineOptions.TryGetValue(SchemaModulesKey, out schemaModules);
-            config.AdditionalCommandlineOptions.TryGetValue(OwnerModulesKey, out ownerModules);
+            string schemaModules;
+            string ownerModules;
+            if (!config.AdditionalCommandlineOptions.TryGetValue(SchemaModulesKey, out schemaModules))
+            {
+                schemaModules = "*";
+            }
+            if (!config.AdditionalCommandlineOptions.TryGetValue(OwnerModulesKey, out ownerModules))
+            {
+                ownerModules = "*";
+            }
             schemaModulesArray = schemaModules.Split(";:".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
             ownerModulesArray = ownerModules.Split(";:".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
         }
