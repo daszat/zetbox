@@ -37,6 +37,7 @@ namespace Kistl.API
             builder
                 .RegisterAssemblyTypes(typeof(ApiModule).Assembly)
                 .Except<SimpleCmdLineData>()
+                .Except<SimpleCmdLineFlag>()
                 .AssignableTo<CmdLineData>()
                 .As<Option>()
                 .InstancePerLifetimeScope();

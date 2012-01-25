@@ -61,7 +61,7 @@ namespace Kistl.Server.Service
                         return 1;
                     }
 
-                    var actions = options.OfType<CmdLineAction>().Where(a => a.Arguments != null).ToList();
+                    var actions = config.AdditionalCommandlineActions;
 
                     // process command line
                     if (actions.Count > 0)
@@ -72,7 +72,7 @@ namespace Kistl.Server.Service
                             {
                                 using (var innerContainer = container.BeginLifetimeScope())
                                 {
-                                    action.ConditionalInvoke(innerContainer);
+                                    action(innerContainer);
                                 }
                             }
                         }

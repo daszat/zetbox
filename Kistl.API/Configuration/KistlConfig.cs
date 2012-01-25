@@ -45,6 +45,7 @@ namespace Kistl.API.Configuration
         public KistlConfig()
         {
             this.AdditionalCommandlineOptions = new Dictionary<object, List<string>>();
+            this.AdditionalCommandlineActions = new List<Action<Autofac.ILifetimeScope>>();
         }
 
         /// <summary>
@@ -85,10 +86,16 @@ namespace Kistl.API.Configuration
         public string[] AssemblySearchPaths { get; set; }
 
         /// <summary>
-        /// These additional command line options can be used to set values while parsing the commandline.
+        /// These additional command line options are filled while parsing the commandline.
         /// </summary>
         [XmlIgnore]
         public Dictionary<object, List<string>> AdditionalCommandlineOptions { get; set; }
+
+        /// <summary>
+        /// These additional command line actions are filled while parsing the command line
+        /// </summary>
+        [XmlIgnore]
+        public List<Action<Autofac.ILifetimeScope>> AdditionalCommandlineActions { get; set; }
 
         /// <summary>
         /// Server Configuration

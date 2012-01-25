@@ -52,7 +52,7 @@ namespace Kistl.Server
                 .SingleInstance();
 
             builder
-                .RegisterCmdLineDataOption("nowcf", "Do not run the embedded WCF Server; running it is the default when no action parameter is specified", NoWcfKey);
+                .RegisterCmdLineFlag("nowcf", "Do not run the embedded WCF Server; running it is the default when no action parameter is specified", NoWcfKey);
 
             builder
                 .Register(c => new AutofacServiceHostFactory())

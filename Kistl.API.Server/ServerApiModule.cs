@@ -104,7 +104,7 @@ namespace Kistl.API.Server
 
             builder
                 .RegisterCmdLineAction("checkdeployedschema", "checks the sql schema against the deployed schema",
-                (scope, arg) =>
+                scope =>
                 {
                     scope.Resolve<IServer>().CheckSchema(false);
                 });
@@ -125,28 +125,28 @@ namespace Kistl.API.Server
 
             builder
                 .RegisterCmdLineAction("repairschema", "checks the schema against the deployed schema and tries to correct deviations",
-                (scope, arg) =>
+                scope =>
                 {
                     scope.Resolve<IServer>().CheckSchema(true);
                 });
 
             builder
                .RegisterCmdLineAction("updatedeployedschema", "updates the schema to the current metadata",
-               (scope, arg) =>
-               {
-                   scope.Resolve<IServer>().UpdateSchema();
-               });
+                scope =>
+                {
+                    scope.Resolve<IServer>().UpdateSchema();
+                });
 
             builder
-               .RegisterCmdLineAction("updateschema=", "updates the schema to the specified xml file(s)",
-               (scope, arg) =>
+               .RegisterCmdLineListAction("updateschema=", "updates the schema to the specified xml file(s)",
+               (scope, args) =>
                {
-                   scope.Resolve<IServer>().UpdateSchema(arg.Split(";:".ToCharArray(), StringSplitOptions.RemoveEmptyEntries));
+                   scope.Resolve<IServer>().UpdateSchema(args);
                });
 
             builder
                 .RegisterCmdLineAction("syncidentities", "synchronices local and domain users with Kistl Identities",
-                (scope, arg) =>
+                scope =>
                 {
                     scope.Resolve<IServer>().SyncIdentities();
                 });
@@ -160,35 +160,35 @@ namespace Kistl.API.Server
 
             builder
                 .RegisterCmdLineAction("installperfcounter", "Installs/Reinstalls the perfomance counters",
-                (scope, arg) =>
+                scope =>
                 {
                     scope.Resolve<IPerfCounter>().Install();
                 });
 
             builder
                 .RegisterCmdLineAction("uninstallperfcounter", "Uninstalls the perfomance counters",
-                (scope, arg) =>
+                scope =>
                 {
                     scope.Resolve<IPerfCounter>().Uninstall();
                 });
 
             builder
                 .RegisterCmdLineAction("benchmark", "[DEVEL] run ad-hoc benchmarks against the database",
-                (scope, arg) =>
+                scope =>
                 {
                     scope.Resolve<IServer>().RunBenchmarks();
                 });
 
             builder
                 .RegisterCmdLineAction("fix", "[DEVEL] run ad-hoc fixes against the database",
-                (scope, arg) =>
+                scope =>
                 {
                     scope.Resolve<IServer>().RunFixes();
                 });
 
             builder
                 .RegisterCmdLineAction("wipe", "[DEVEL] completely wipe the contents of the database",
-                (scope, arg) =>
+                scope =>
                 {
                     scope.Resolve<IServer>().WipeDatabase();
                 });

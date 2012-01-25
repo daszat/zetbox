@@ -15,14 +15,14 @@ namespace Kistl.Generator
         {
             builder
                 .RegisterCmdLineAction("generate", "generates and compiles new data classes",
-                (scope, arg) =>
+                scope =>
                 {
                     scope.Resolve<Compiler>().GenerateCode();
                 });
 
             builder
                 .RegisterCmdLineAction("compile", "[DEVEL] compiles new data classes from already generated code; used mostly for testing",
-                (scope, arg) =>
+                scope =>
                 {
                     scope.Resolve<Compiler>().CompileCode();
                 });

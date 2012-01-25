@@ -38,10 +38,37 @@ namespace Kistl.API
                .SingleInstance();
         }
 
+        public static void RegisterCmdLineFlag(this ContainerBuilder builder, string prototype, string description, object dataKey)
+        {
+            builder
+               .Register<CmdLineData>(c => new SimpleCmdLineFlag(c.Resolve<KistlConfig>(), prototype, description, dataKey))
+               .As<Option>()
+               .Named<CmdLineData>(prototype)
+               .SingleInstance();
+        }
+
+        public static void RegisterCmdLineAction(this ContainerBuilder builder, string prototype, string description, Action<ILifetimeScope> action)
+        {
+            builder
+               .Register<CmdLineAction>(c => new SimpleCmdLineAction(c.Resolve<KistlConfig>(), prototype, description, action))
+               .As<Option>()
+               .Named<CmdLineAction>(prototype)
+               .SingleInstance();
+        }
+
         public static void RegisterCmdLineAction(this ContainerBuilder builder, string prototype, string description, Action<ILifetimeScope, string> action)
         {
             builder
-               .Register<CmdLineAction>(c => new SimpleCmdLineAction(prototype, description, action))
+               .Register<CmdLineAction>(c => new SimpleCmdLineAction(c.Resolve<KistlConfig>(), prototype, description, action))
+               .As<Option>()
+               .Named<CmdLineAction>(prototype)
+               .SingleInstance();
+        }
+
+        public static void RegisterCmdLineListAction(this ContainerBuilder builder, string prototype, string description, Action<ILifetimeScope, string[]> listAction)
+        {
+            builder
+               .Register<CmdLineAction>(c => new SimpleCmdLineAction(c.Resolve<KistlConfig>(), prototype, description, listAction))
                .As<Option>()
                .Named<CmdLineAction>(prototype)
                .SingleInstance();
