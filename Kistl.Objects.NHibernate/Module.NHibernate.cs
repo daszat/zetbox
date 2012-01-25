@@ -63,8 +63,7 @@ namespace Kistl.Objects
 
             builder
                 .Register<ISession>(
-                    (c, p) =>
-                    {
+                    (c, p) => {
                         var result = c.Resolve<ISessionFactory>().OpenSession(c.Resolve<IInterceptor>());
                         Logging.Log.DebugFormat("Created ISession: {0}", result.GetHashCode());
                         return result;
