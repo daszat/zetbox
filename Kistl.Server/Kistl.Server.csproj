@@ -146,10 +146,6 @@
     <EmbeddedResource Include="Database\Scripts\BackupRestoreTestDatabase.sql" />
     <EmbeddedResource Include="Database\Scripts\RepairPositionColumnValidity.sql" />
     <None Include="Database\Scripts\DropFKConstraints.sql" />
-    <Content Include="Database\Database.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Database\SchemaMigrationProjects.xml" />
     <Content Include="SchemaManagement\NpgsqlProvider\TextFile1.txt" />
     <None Include="Kistl.snk" />
     <None Include="SchemaManagement\NpgsqlProvider\Scripts\create.sql" />

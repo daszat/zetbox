@@ -1252,10 +1252,16 @@ LANGUAGE 'plpgsql' VOLATILE",
                 createTableProcQuery.Append("ELS");
             }
 
-            // Complete ELS-E
-            createTableProcQuery.AppendLine("E");
+            if (refSpecs.Count > 0)
+            {
+                // Complete ELS-E
+                createTableProcQuery.AppendLine("E");
+            }
             createTableProcQuery.AppendLine("\tRAISE EXCEPTION 'Table [%] not found', tblName;");
-            createTableProcQuery.AppendLine("END IF;");
+            if (refSpecs.Count > 0)
+            {
+                createTableProcQuery.AppendLine("END IF;");
+            }
             createTableProcQuery.AppendLine("RETURN result;");
             createTableProcQuery.AppendLine("END;");
             createTableProcQuery.AppendLine("$BODY$ LANGUAGE 'plpgsql' VOLATILE;");
