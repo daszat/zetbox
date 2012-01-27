@@ -386,6 +386,14 @@ namespace Kistl.Client.Presentables.KistlBase
             }
         }
 
+        public bool IsElevated
+        {
+            get
+            {
+                return DataContext.IsElevatedMode;
+            }
+        }
+
         public override bool CanExecute(object data)
         {
             var result = CurrentIdentity != null && CurrentIdentity.IsAdmininistrator();
@@ -398,6 +406,7 @@ namespace Kistl.Client.Presentables.KistlBase
             if (CanExecute(data))
             {
                 DataContext.SetElevatedMode(!DataContext.IsElevatedMode);
+                OnPropertyChanged("IsElevated");
             }
         }
     }
