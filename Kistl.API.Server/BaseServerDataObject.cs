@@ -1,3 +1,4 @@
+//#define TRACE_OBJECT_CREATION
 
 namespace Kistl.API.Server
 {
@@ -22,7 +23,7 @@ namespace Kistl.API.Server
         {
             _auditable = this as IAuditable;
             ClientObjectState = DataObjectState.NotDeserialized;
-#if DEBUG
+#if TRACE_OBJECT_CREATION
             var trace = new System.Diagnostics.StackTrace(true);
             _constructTrace = String.Join("\n",
                 trace
@@ -37,7 +38,7 @@ namespace Kistl.API.Server
 #endif
         }
 
-#if DEBUG
+#if TRACE_OBJECT_CREATION
         /// <summary>
         /// A private field storing the stracktrace where the object was constructed.
         /// </summary>
