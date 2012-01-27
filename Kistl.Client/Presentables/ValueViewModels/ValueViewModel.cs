@@ -129,6 +129,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
         {
             get
             {
+                if (DataContext.IsElevatedMode && !ValueModel.IsReadOnly) return false; // If in elevated mode the model still say it's readonly, we should beleve it.
                 return ValueModel.IsReadOnly || _IsReadOnly;
             }
             set
