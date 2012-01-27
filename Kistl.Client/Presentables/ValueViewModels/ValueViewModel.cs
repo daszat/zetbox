@@ -86,15 +86,9 @@ namespace Kistl.Client.Presentables.ValueViewModels
         {
             get
             {
-                if (DataContext.IsElevatedMode && !IsReadOnly) // May be true for calculated properties
-                {
-                    if (ValueModel.IsReadOnly || _IsReadOnly) return Highlight.Bad; // Indicate overridden read only status
-                }
-                else
-                {
-                    if (Parent != null && Parent.Highlight != null) return Parent.Highlight;
-                    if (!IsEnabled || IsReadOnly) return Highlight.Deactivated;
-                }
+                if (DataContext.IsElevatedMode && !IsReadOnly) return Highlight.Bad; // May be true for calculated properties                
+                if (Parent != null && Parent.Highlight != null) return Parent.Highlight;
+                if (!IsEnabled || IsReadOnly) return Highlight.Deactivated;
                 return null;
             }
         }
