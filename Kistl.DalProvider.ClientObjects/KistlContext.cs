@@ -15,6 +15,8 @@ namespace Kistl.DalProvider.Client
     using Kistl.API.Configuration;
     using Kistl.API.Utils;
     using Kistl.DalProvider.Base;
+    using Kistl.API.Common;
+    using Kistl.App.Extensions;
 
     public interface IZBoxClientContextInternals
     {
@@ -47,6 +49,7 @@ namespace Kistl.DalProvider.Client
         private readonly ClientImplementationType.ClientFactory _implTypeFactory;
         private readonly ClientIsolationLevel _clientIsolationLevel;
         private readonly IPerfCounter _perfCounter;
+        private readonly IIdentityResolver _identityResolver;
 
         /// <summary>
         /// List of Objects (IDataObject and ICollectionEntry) in this Context.
@@ -59,7 +62,7 @@ namespace Kistl.DalProvider.Client
         [SuppressMessage("Microsoft.Performance", "CA1805:DoNotInitializeUnnecessarily", Justification = "Uses global constant")]
         private int _newIDCounter = Helper.INVALIDID;
 
-        public KistlContextImpl(ClientIsolationLevel il, KistlConfig config, IProxy proxy, string clientImplementationAssembly, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory, ClientImplementationType.ClientFactory implTypeFactory, IPerfCounter perfCounter)
+        public KistlContextImpl(ClientIsolationLevel il, KistlConfig config, IProxy proxy, string clientImplementationAssembly, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory, ClientImplementationType.ClientFactory implTypeFactory, IPerfCounter perfCounter, IIdentityResolver identityResolver)
         {
             if (perfCounter == null) throw new ArgumentNullException("perfCounter");
             this._clientIsolationLevel = il;
@@ -71,6 +74,7 @@ namespace Kistl.DalProvider.Client
             this._iftFactory = iftFactory;
             this._implTypeFactory = implTypeFactory;
             this._perfCounter = perfCounter;
+            this._identityResolver = identityResolver;
 
             CreatedAt = new StackTrace(true);
             KistlContextDebuggerSingleton.Created(this);
@@ -1114,6 +1118,7 @@ namespace Kistl.DalProvider.Client
         private bool _elevatedMode = false;
         public void SetElevatedMode(bool elevatedMode)
         {
+            if (!_identityResolver.GetCurrent().IsAdmininistrator()) throw new System.Security.SecurityException("You have no rights to enter elevated mode");
             if (_elevatedMode != elevatedMode)
             {
                 _elevatedMode = elevatedMode;

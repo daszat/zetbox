@@ -18,7 +18,9 @@
                       CommandParameter="{Binding SelectedItem}" />
             <MenuItem Command="{Binding ReportProblemCommand, Converter={StaticResource CommandConverter}}"
                       CommandParameter="{Binding SelectedItem}" />
-            <MenuItem Visibility="{Binding ShowAdditionalCommands, Converter={StaticResource BooleanToVisibilityConverter}}"
+          <MenuItem Command="{Binding ElevatedModeCommand, Converter={StaticResource CommandConverter}}" 
+                    Visibility="{Binding ElevatedModeCommand.Show, Converter={StaticResource BooleanToVisibilityConverter}}" />
+          <MenuItem Visibility="{Binding ShowAdditionalCommands, Converter={StaticResource BooleanToVisibilityConverter}}"
                       ItemsSource="{Binding AdditionalCommands}"
                       Header="Weitere Aktionen">
                 <MenuItem.ItemContainerStyle>

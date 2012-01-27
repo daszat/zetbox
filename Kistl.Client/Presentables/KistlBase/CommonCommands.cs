@@ -355,4 +355,50 @@ namespace Kistl.Client.Presentables.KistlBase
             }
         }
     }
+
+    public class ElevatedModeCommand : CommandViewModel
+    {
+        public new delegate ElevatedModeCommand Factory(IKistlContext dataCtx, ViewModel parent);
+
+        public ElevatedModeCommand(IViewModelDependencies appCtx, IKistlContext dataCtx, ViewModel parent)
+            : base(appCtx, dataCtx, parent, CommonCommandsResources.ElevatedModeCommand_Name, CommonCommandsResources.ElevatedModeCommand_Tooltip)
+        {
+            
+        }
+
+        public override Icon Icon
+        {
+            get
+            {
+                return base.Icon ?? NamedObjects.Gui.Icons.KistlBase.otheroptions_ico.Find(FrozenContext);
+            }
+            set
+            {
+                base.Icon = value;
+            }
+        }
+
+        public bool Show
+        {
+            get
+            {
+                return CanExecute(null);
+            }
+        }
+
+        public override bool CanExecute(object data)
+        {
+            var result = CurrentIdentity != null && CurrentIdentity.IsAdmininistrator();
+            this.Reason = result ? CommonCommandsResources.ElevatedModeCommand_Error : string.Empty;
+            return result;
+        }
+
+        protected override void DoExecute(object data)
+        {
+            if (CanExecute(data))
+            {
+                DataContext.SetElevatedMode(!DataContext.IsElevatedMode);
+            }
+        }
+    }
 }

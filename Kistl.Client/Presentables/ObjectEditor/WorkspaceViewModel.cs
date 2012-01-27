@@ -410,6 +410,22 @@ namespace Kistl.Client.Presentables.ObjectEditor
         }
         #endregion
 
+        #region ElevatedModeCommand
+        private ICommandViewModel _ElevatedModeCommand = null;
+        public ICommandViewModel ElevatedModeCommand
+        {
+            get
+            {
+                if (_ElevatedModeCommand == null)
+                {
+                    _ElevatedModeCommand = ViewModelFactory.CreateViewModel<ElevatedModeCommand.Factory>().Invoke(DataContext, this);
+                }
+                return _ElevatedModeCommand;
+            }
+        }
+
+        #endregion
+
         #endregion
 
         #region ErrorManagement

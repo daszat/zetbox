@@ -135,6 +135,15 @@
   <data name="EditDataObjectClassCommand_Tooltip" xml:space="preserve">
     <value>Opens the Editor for the current lists class</value>
   </data>
+  <data name="ElevatedModeCommand_Error" xml:space="preserve">
+    <value>You have no rights to enter elevated mode</value>
+  </data>
+  <data name="ElevatedModeCommand_Name" xml:space="preserve">
+    <value>Elevated Mode</value>
+  </data>
+  <data name="ElevatedModeCommand_Tooltip" xml:space="preserve">
+    <value>Toggle elevated mode</value>
+  </data>
   <data name="NewDataObjectCommand_Name" xml:space="preserve">
     <value>New</value>
   </data>
