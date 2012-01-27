@@ -109,6 +109,13 @@ namespace Kistl.Client.Presentables
             DataContext = dataCtx;
 
             if (_parent != null) _parent.PropertyChanged += (s, e) => { if (e.PropertyName == "Highlight") OnPropertyChanged("Highlight"); };
+            dataCtx.IsElevatedModeChanged += new EventHandler(dataCtx_IsElevatedModeChanged);
+        }
+
+        void dataCtx_IsElevatedModeChanged(object sender, EventArgs e)
+        {
+            OnPropertyChanged("IsEnabled");
+            OnPropertyChanged("Highlight");
         }
 
         #region Public interface
@@ -154,6 +161,7 @@ namespace Kistl.Client.Presentables
         {
             get
             {
+                if (DataContext.IsElevatedMode) return true;
                 return _isEnabled;
             }
             set

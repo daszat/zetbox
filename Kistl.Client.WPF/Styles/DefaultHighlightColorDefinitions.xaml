@@ -22,4 +22,10 @@
   <SolidColorBrush x:Key="HighlightState_Calculation_GridBackground" Color="#F2F2F2" />
   <SolidColorBrush x:Key="HighlightState_Calculation_GridForeground" Color="#FA7D00" />
   <FontWeight x:Key="HighlightState_Calculation_GridFontWeight">Bold</FontWeight>
+
+  <!-- Bad -->
+  <SolidColorBrush x:Key="HighlightState_Bad_GridBackground" Color="#FF0000" />
+  <SolidColorBrush x:Key="HighlightState_Bad_GridForeground" Color="#FFFFFF" />
+  <SolidColorBrush x:Key="HighlightState_Bad_PanelBackground" Color="#FF0000" />
+  <FontWeight x:Key="HighlightState_Bad_GridFontWeight">Bold</FontWeight>
 </ResourceDictionary>

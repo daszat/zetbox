@@ -41,6 +41,13 @@ namespace Kistl.Client.Presentables
             _object = obj;
             _object.PropertyChanged += Object_PropertyChanged;
             isReadOnlyStore = _object.IsReadonly;
+            dataCtx.IsElevatedModeChanged += new EventHandler(dataCtx_IsElevatedModeChanged);
+        }
+
+        void dataCtx_IsElevatedModeChanged(object sender, EventArgs e)
+        {
+            OnPropertyChanged("IsReadOnly");
+            OnPropertyChanged("Highlight");
         }
 
         #region Property Management
@@ -268,6 +275,7 @@ namespace Kistl.Client.Presentables
         {
             get
             {
+                if (DataContext.IsElevatedMode) return false;
                 return isReadOnlyStore;
             }
             set
@@ -439,6 +447,7 @@ namespace Kistl.Client.Presentables
         {
             get
             {
+                if (DataContext.IsElevatedMode) return Highlight.Bad;
                 if (!IsEnabled || IsReadOnly) return Highlight.Deactivated;
                 return null;
             }

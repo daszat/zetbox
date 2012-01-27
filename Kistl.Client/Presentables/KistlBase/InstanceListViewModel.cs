@@ -76,6 +76,14 @@ namespace Kistl.Client.Presentables.KistlBase
             this._filterList.ExecutePostFilter += (s, e) => ExecutePostFilter();
             this._filterList.PropertyChanged += _filterList_PropertyChanged;
             this._filterList.UserFilterAdded += _filterList_UserFilterAdded;
+
+            dataCtx.IsElevatedModeChanged += new EventHandler(dataCtx_IsElevatedModeChanged);
+        }
+
+        void dataCtx_IsElevatedModeChanged(object sender, EventArgs e)
+        {
+            OnPropertyChanged("AllowAddNew");
+            OnPropertyChanged("AllowDelete");
         }
 
         #region Kind Management
@@ -1210,6 +1218,7 @@ namespace Kistl.Client.Presentables.KistlBase
         {
             get
             {
+                if (DataContext.IsElevatedMode) return true;
                 return _allowAddNew;
             }
             set
@@ -1230,6 +1239,7 @@ namespace Kistl.Client.Presentables.KistlBase
         {
             get
             {
+                if (DataContext.IsElevatedMode) return true;
                 return _allowDelete;
             }
             set

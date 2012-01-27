@@ -73,6 +73,12 @@ namespace Kistl.Client.Presentables.ValueViewModels
                     }
                 }
             }
+            dataCtx.IsElevatedModeChanged += new EventHandler(dataCtx_IsElevatedModeChanged);
+        }
+
+        void dataCtx_IsElevatedModeChanged(object sender, EventArgs e)
+        {
+            OnPropertyChanged("AllowDelete");
         }
 
         #region Public Interface
@@ -137,6 +143,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
         {
             get
             {
+                if (DataContext.IsElevatedMode) return true;
                 return _allowDelete;
             }
             set

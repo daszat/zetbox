@@ -185,6 +185,16 @@ namespace Kistl.Client.Models
             this.Object = obj;
 
             this.Object.PropertyChanged += Object_PropertyChanged;
+            if (this.Object is IPersistenceObject)
+            {
+                DataContext = ((IPersistenceObject)this.Object).Context;
+                DataContext.IsElevatedModeChanged += new EventHandler(Context_IsElevatedModeChanged);
+            }
+        }
+
+        void Context_IsElevatedModeChanged(object sender, EventArgs e)
+        {
+            OnPropertyChanged("IsReadOnly");
         }
 
         void Object_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -200,6 +210,7 @@ namespace Kistl.Client.Models
 
         public Property Property { get; private set; }
         public INotifyingObject Object { get; private set; }
+        protected IKistlContext DataContext { get; private set; }
 
         #region IValueModel Members
 
@@ -231,6 +242,7 @@ namespace Kistl.Client.Models
         {
             get
             {
+                if (DataContext != null && DataContext.IsElevatedMode && !Property.IsCalculated()) return false;
                 if (_IsReadOnly == null)
                 {
                     _IsReadOnly = Property.IsReadOnly();

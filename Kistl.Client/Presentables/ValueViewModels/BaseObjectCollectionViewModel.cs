@@ -52,6 +52,13 @@ namespace Kistl.Client.Presentables.ValueViewModels
                     }
                 }
             }
+            dataCtx.IsElevatedModeChanged += new EventHandler(dataCtx_IsElevatedModeChanged);
+        }
+
+        void dataCtx_IsElevatedModeChanged(object sender, EventArgs e)
+        {
+            OnPropertyChanged("AllowAddNew");
+            OnPropertyChanged("AllowDelete");
         }
 
         public IObjectCollectionValueModel<TModelCollection> ObjectCollectionModel { get; private set; }
@@ -139,6 +146,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
         {
             get
             {
+                if (DataContext.IsElevatedMode) return true;
                 return _allowAddNew;
             }
             set
@@ -226,6 +234,7 @@ namespace Kistl.Client.Presentables.ValueViewModels
         {
             get
             {
+                if (DataContext.IsElevatedMode) return true;
                 return _allowDelete;
             }
             set
