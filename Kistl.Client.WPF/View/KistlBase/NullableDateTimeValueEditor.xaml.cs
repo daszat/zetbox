@@ -79,6 +79,12 @@ namespace Kistl.Client.WPF.View
             }
         }
 
+        protected override void OnHighlightChanged()
+        {
+            if (ViewModel.DatePartVisible) SetHighlightValue(txtDate);
+            if (ViewModel.TimePartVisible) SetHighlightValue(txtTime);
+        }
+
         // The DatePicker handles the Enter-KeyDown event, but we have to bubble it to our consumers, 
         // because this will trigger the RefreshCommand (or accept action) in filters (and dialogs)
         private bool _isEnterPressed = false;
@@ -101,7 +107,7 @@ namespace Kistl.Client.WPF.View
             if (_isEnterPressed)
             {
                 _isEnterPressed = false;
-                
+
                 var args = new KeyEventArgs(_lastKeyboardDevice, _lastInputSource, _lastTimestamp, Key.Enter)
                 {
                     RoutedEvent = UIElement.KeyDownEvent
@@ -110,8 +116,8 @@ namespace Kistl.Client.WPF.View
                 _lastKeyboardDevice = null;
                 _lastInputSource = null;
                 _lastTimestamp = -1;
-                
-                this.RaiseEvent(args); 
+
+                this.RaiseEvent(args);
             }
         }
     }

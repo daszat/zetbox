@@ -73,13 +73,20 @@ namespace Kistl.Client.WPF.CustomControls
         {
             if (MainControl != null)
             {
-                SetHighlightValue(MainControl, BackgroundProperty, Highlight, _highlightGridBackgroundConverter, _brushConverter);
-                SetHighlightValue(MainControl, ForegroundProperty, Highlight, _highlightGridForegroundConverter, _brushConverter);
-                SetHighlightValue(MainControl, FontStyleProperty, Highlight, _highlightGridFontStyleConverter, _fontStyleConverter);
-                SetHighlightValue(MainControl, FontWeightProperty, Highlight, _highlightGridFontWeightConverter, _fontWeightConverter);
+                SetHighlightValue(MainControl);
             }
         }
 
+        protected virtual void SetHighlightValue(FrameworkElement ctrl)
+        {
+            if (ctrl != null)
+            {
+                SetHighlightValue(ctrl, BackgroundProperty, Highlight, _highlightGridBackgroundConverter, _brushConverter);
+                SetHighlightValue(ctrl, ForegroundProperty, Highlight, _highlightGridForegroundConverter, _brushConverter);
+                SetHighlightValue(ctrl, FontStyleProperty, Highlight, _highlightGridFontStyleConverter, _fontStyleConverter);
+                SetHighlightValue(ctrl, FontWeightProperty, Highlight, _highlightGridFontWeightConverter, _fontWeightConverter);
+            }
+        }
 
         protected virtual void SetHighlightValue(FrameworkElement ctrl, DependencyProperty dpProp, Highlight h, HighlightConverter converter, TypeConverter finalConverter)
         {
