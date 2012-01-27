@@ -93,6 +93,7 @@
 <%
     }
 %>
+            // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
 <%
     foreach(var serMember in fields.Where(f => (f.SerializerType & serType) == serType))
@@ -135,6 +136,7 @@
 <%
     }
 %>
+            // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
 <%
     foreach(var serMember in fields.Where(f => (f.SerializerType & serType) == serType))
