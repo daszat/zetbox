@@ -25,6 +25,6 @@
 
   <!-- Bad -->
   <SolidColorBrush x:Key="HighlightState_Bad_GridForeground" Color="#FF0000" />
-  <SolidColorBrush x:Key="HighlightState_Bad_PanelBackground" Color="#000000" />
+  <SolidColorBrush x:Key="HighlightState_Bad_PanelBackground" Color="#FF0000" />
   <FontWeight x:Key="HighlightState_Bad_GridFontWeight">Bold</FontWeight>
 </ResourceDictionary>
