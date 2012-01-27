@@ -571,7 +571,7 @@ namespace Kistl.API
         #region IZBoxContextInternals Members
 
         int IZBoxContextInternals.IdentityID { get { return Helper.INVALIDID; } }
-        
+
         void IZBoxContextInternals.SetModified(IPersistenceObject obj)
         {
             if (obj.ObjectState.In(DataObjectState.Deleted, DataObjectState.Modified, DataObjectState.New))
@@ -626,5 +626,21 @@ namespace Kistl.API
         #endregion
 
         public AccessRights GetGroupAccessRights(InterfaceType ifType) { return AccessRights.Full; }
+
+        private bool _elevatedMode = false;
+        public void SetElevatedMode(bool elevatedMode)
+        {
+            if (_elevatedMode != elevatedMode)
+            {
+                _elevatedMode = elevatedMode;
+                var temp = IsElevatedModeChanged;
+                if (temp != null)
+                {
+                    temp(this, EventArgs.Empty);
+                }
+            }
+        }
+        public bool IsElevatedMode { get { return _elevatedMode; } }
+        public event EventHandler IsElevatedModeChanged;
     }
 }

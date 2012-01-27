@@ -464,6 +464,23 @@ namespace Kistl.API
         /// InvalidOperationException is thrown if no transaction is currently running.
         /// </exception>
         void RollbackTransaction();
+
+        /// <summary>
+        /// Elevates your priviliges to the highest level (equivalent to iddqd).
+        /// </summary>
+        /// <remarks>
+        /// Has no effect on the server because you have already the highest priviliges.
+        /// </remarks>
+        /// <param name="elevatedMode">true, to get highest priviliges</param>
+        void SetElevatedMode(bool elevatedMode);
+        /// <summary>
+        /// Indicates if the context is in a elevated mode
+        /// </summary>
+        bool IsElevatedMode { get; }
+        /// <summary>
+        /// Inidcates that the context has entered or leaded the elevated mode
+        /// </summary>
+        event EventHandler IsElevatedModeChanged;
     }
 
     public interface IZBoxContextInternals

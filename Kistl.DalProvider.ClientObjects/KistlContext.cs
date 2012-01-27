@@ -1110,5 +1110,21 @@ namespace Kistl.DalProvider.Client
         {
             throw new NotSupportedException("Use GetQuery<T>().Take(x) instead");
         }
+
+        private bool _elevatedMode = false;
+        public void SetElevatedMode(bool elevatedMode)
+        {
+            if (_elevatedMode != elevatedMode)
+            {
+                _elevatedMode = elevatedMode;
+                var temp = IsElevatedModeChanged;
+                if (temp != null)
+                {
+                    temp(this, EventArgs.Empty);
+                }
+            }
+        }
+        public bool IsElevatedMode { get { return _elevatedMode; } }
+        public event EventHandler IsElevatedModeChanged;
     }
 }

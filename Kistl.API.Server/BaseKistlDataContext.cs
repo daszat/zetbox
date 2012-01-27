@@ -105,7 +105,7 @@ namespace Kistl.API.Server
             {
                 return rights.Value;
             }
-            else 
+            else
             {
                 return rootClass.NeedsRightsTable() ? Kistl.API.AccessRights.None : Kistl.API.AccessRights.Full;
             }
@@ -813,5 +813,11 @@ namespace Kistl.API.Server
         {
             get { return this.identityStore; }
         }
+
+        public void SetElevatedMode(bool elevatedMode)
+        {
+        }
+        public bool IsElevatedMode { get { return true; } }
+        public event EventHandler IsElevatedModeChanged { add { } remove { } }
     }
 }
