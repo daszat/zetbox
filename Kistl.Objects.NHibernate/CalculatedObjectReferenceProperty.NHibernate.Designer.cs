@@ -470,7 +470,7 @@ namespace Kistl.App.Base
 					auxObjects.Add(OurContext.AttachAndWrap(relEntry));
 				}
 			}
-            BinarySerializer.ToStream(this.ReferencedClass != null ? this.ReferencedClass.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.Proxy.ReferencedClass != null ? OurContext.GetIdFromProxy(this.Proxy.ReferencedClass) : (int?)null, binStream);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
@@ -493,7 +493,7 @@ namespace Kistl.App.Base
         {
             base.ToStream(xml);
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.ReferencedClass != null ? this.ReferencedClass.ID : (int?)null, xml, "ReferencedClass", "Kistl.App.Base");
+            XmlStreamer.ToStream(this.Proxy.ReferencedClass != null ? OurContext.GetIdFromProxy(this.Proxy.ReferencedClass) : (int?)null, xml, "ReferencedClass", "Kistl.App.Base");
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
@@ -514,7 +514,7 @@ namespace Kistl.App.Base
         {
             base.Export(xml, modules);
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.ReferencedClass != null ? this.ReferencedClass.ExportGuid : (Guid?)null, xml, "ReferencedClass", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.ReferencedClass != null ? this.Proxy.ReferencedClass.ExportGuid : (Guid?)null, xml, "ReferencedClass", "Kistl.App.Base");
         }
 
         public override void MergeImport(System.Xml.XmlReader xml)

@@ -1090,24 +1090,24 @@ namespace Kistl.App.Base
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream(this.ChangedBy != null ? this.ChangedBy.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.Proxy.ChangedBy != null ? OurContext.GetIdFromProxy(this.Proxy.ChangedBy) : (int?)null, binStream);
             BinarySerializer.ToStream(this._isChangedOnSet, binStream);
             if (this._isChangedOnSet) {
                 BinarySerializer.ToStream(this.Proxy.ChangedOn, binStream);
             }
-            BinarySerializer.ToStream(this.CreatedBy != null ? this.CreatedBy.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.Proxy.CreatedBy != null ? OurContext.GetIdFromProxy(this.Proxy.CreatedBy) : (int?)null, binStream);
             BinarySerializer.ToStream(this._isCreatedOnSet, binStream);
             if (this._isCreatedOnSet) {
                 BinarySerializer.ToStream(this.Proxy.CreatedOn, binStream);
             }
-            BinarySerializer.ToStream(this.Data != null ? this.Data.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.Proxy.Data != null ? OurContext.GetIdFromProxy(this.Proxy.Data) : (int?)null, binStream);
             BinarySerializer.ToStream(this.Proxy.Description, binStream);
             BinarySerializer.ToStream(this._isExportGuidSet, binStream);
             if (this._isExportGuidSet) {
                 BinarySerializer.ToStream(this.Proxy.ExportGuid, binStream);
             }
             BinarySerializer.ToStream(this.Proxy.IsContinuous, binStream);
-            BinarySerializer.ToStream(this.Module != null ? this.Module.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.Proxy.Module != null ? OurContext.GetIdFromProxy(this.Proxy.Module) : (int?)null, binStream);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
@@ -1159,24 +1159,24 @@ namespace Kistl.App.Base
         {
             base.ToStream(xml);
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.ChangedBy != null ? this.ChangedBy.ID : (int?)null, xml, "ChangedBy", "Kistl.App.Base");
+            XmlStreamer.ToStream(this.Proxy.ChangedBy != null ? OurContext.GetIdFromProxy(this.Proxy.ChangedBy) : (int?)null, xml, "ChangedBy", "Kistl.App.Base");
             XmlStreamer.ToStream(this._isChangedOnSet, xml, "IsChangedOnSet", "Kistl.App.Base");
             if (this._isChangedOnSet) {
                 XmlStreamer.ToStream(this.Proxy.ChangedOn, xml, "ChangedOn", "Kistl.App.Base");
             }
-            XmlStreamer.ToStream(this.CreatedBy != null ? this.CreatedBy.ID : (int?)null, xml, "CreatedBy", "Kistl.App.Base");
+            XmlStreamer.ToStream(this.Proxy.CreatedBy != null ? OurContext.GetIdFromProxy(this.Proxy.CreatedBy) : (int?)null, xml, "CreatedBy", "Kistl.App.Base");
             XmlStreamer.ToStream(this._isCreatedOnSet, xml, "IsCreatedOnSet", "Kistl.App.Base");
             if (this._isCreatedOnSet) {
                 XmlStreamer.ToStream(this.Proxy.CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
             }
-            XmlStreamer.ToStream(this.Data != null ? this.Data.ID : (int?)null, xml, "Data", "Kistl.App.Base");
+            XmlStreamer.ToStream(this.Proxy.Data != null ? OurContext.GetIdFromProxy(this.Proxy.Data) : (int?)null, xml, "Data", "Kistl.App.Base");
             XmlStreamer.ToStream(this.Proxy.Description, xml, "Description", "Kistl.App.Base");
             XmlStreamer.ToStream(this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Base");
             if (this._isExportGuidSet) {
                 XmlStreamer.ToStream(this.Proxy.ExportGuid, xml, "ExportGuid", "Kistl.App.Base");
             }
             XmlStreamer.ToStream(this.Proxy.IsContinuous, xml, "IsContinuous", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.Module != null ? this.Module.ID : (int?)null, xml, "Module", "Kistl.App.Base");
+            XmlStreamer.ToStream(this.Proxy.Module != null ? OurContext.GetIdFromProxy(this.Proxy.Module) : (int?)null, xml, "Module", "Kistl.App.Base");
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
@@ -1239,7 +1239,7 @@ namespace Kistl.App.Base
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.Description, xml, "Description", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.IsContinuous, xml, "IsContinuous", "Kistl.App.Base");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Module != null ? this.Module.ExportGuid : (Guid?)null, xml, "Module", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.Module != null ? this.Proxy.Module.ExportGuid : (Guid?)null, xml, "Module", "Kistl.App.Base");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)

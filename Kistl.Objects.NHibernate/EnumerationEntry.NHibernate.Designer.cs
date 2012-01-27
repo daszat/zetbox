@@ -1132,18 +1132,18 @@ namespace Kistl.App.Base
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream(this.ChangedBy != null ? this.ChangedBy.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.Proxy.ChangedBy != null ? OurContext.GetIdFromProxy(this.Proxy.ChangedBy) : (int?)null, binStream);
             BinarySerializer.ToStream(this._isChangedOnSet, binStream);
             if (this._isChangedOnSet) {
                 BinarySerializer.ToStream(this.Proxy.ChangedOn, binStream);
             }
-            BinarySerializer.ToStream(this.CreatedBy != null ? this.CreatedBy.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.Proxy.CreatedBy != null ? OurContext.GetIdFromProxy(this.Proxy.CreatedBy) : (int?)null, binStream);
             BinarySerializer.ToStream(this._isCreatedOnSet, binStream);
             if (this._isCreatedOnSet) {
                 BinarySerializer.ToStream(this.Proxy.CreatedOn, binStream);
             }
             BinarySerializer.ToStream(this.Proxy.Description, binStream);
-            BinarySerializer.ToStream(this.Enumeration != null ? this.Enumeration.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.Proxy.Enumeration != null ? OurContext.GetIdFromProxy(this.Proxy.Enumeration) : (int?)null, binStream);
             BinarySerializer.ToStream(this.Proxy.EnumerationEntries_pos, binStream);
             BinarySerializer.ToStream(this._isExportGuidSet, binStream);
             if (this._isExportGuidSet) {
@@ -1217,18 +1217,18 @@ namespace Kistl.App.Base
         {
             base.ToStream(xml);
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.ChangedBy != null ? this.ChangedBy.ID : (int?)null, xml, "ChangedBy", "Kistl.App.Base");
+            XmlStreamer.ToStream(this.Proxy.ChangedBy != null ? OurContext.GetIdFromProxy(this.Proxy.ChangedBy) : (int?)null, xml, "ChangedBy", "Kistl.App.Base");
             XmlStreamer.ToStream(this._isChangedOnSet, xml, "IsChangedOnSet", "Kistl.App.Base");
             if (this._isChangedOnSet) {
                 XmlStreamer.ToStream(this.Proxy.ChangedOn, xml, "ChangedOn", "Kistl.App.Base");
             }
-            XmlStreamer.ToStream(this.CreatedBy != null ? this.CreatedBy.ID : (int?)null, xml, "CreatedBy", "Kistl.App.Base");
+            XmlStreamer.ToStream(this.Proxy.CreatedBy != null ? OurContext.GetIdFromProxy(this.Proxy.CreatedBy) : (int?)null, xml, "CreatedBy", "Kistl.App.Base");
             XmlStreamer.ToStream(this._isCreatedOnSet, xml, "IsCreatedOnSet", "Kistl.App.Base");
             if (this._isCreatedOnSet) {
                 XmlStreamer.ToStream(this.Proxy.CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
             }
             XmlStreamer.ToStream(this.Proxy.Description, xml, "Description", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.Enumeration != null ? this.Enumeration.ID : (int?)null, xml, "Enumeration", "Kistl.App.Base");
+            XmlStreamer.ToStream(this.Proxy.Enumeration != null ? OurContext.GetIdFromProxy(this.Proxy.Enumeration) : (int?)null, xml, "Enumeration", "Kistl.App.Base");
             XmlStreamer.ToStream(this.Proxy.EnumerationEntries_pos, xml, "EnumerationEntries_pos", "Kistl.App.Base");
             XmlStreamer.ToStream(this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.Base");
             if (this._isExportGuidSet) {
@@ -1315,7 +1315,7 @@ namespace Kistl.App.Base
             System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.CreatedOn, xml, "CreatedOn", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.Description, xml, "Description", "Kistl.App.Base");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Enumeration != null ? this.Enumeration.ExportGuid : (Guid?)null, xml, "Enumeration", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.Enumeration != null ? this.Proxy.Enumeration.ExportGuid : (Guid?)null, xml, "Enumeration", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.EnumerationEntries_pos, xml, "EnumerationEntries_pos", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.Label, xml, "Label", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.Name, xml, "Name", "Kistl.App.Base");

@@ -1060,8 +1060,8 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream(this.BaseObjectClass != null ? this.BaseObjectClass.ID : (int?)null, binStream);
-            BinarySerializer.ToStream(this.DefaultViewModelDescriptor != null ? this.DefaultViewModelDescriptor.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.Proxy.BaseObjectClass != null ? OurContext.GetIdFromProxy(this.Proxy.BaseObjectClass) : (int?)null, binStream);
+            BinarySerializer.ToStream(this.Proxy.DefaultViewModelDescriptor != null ? OurContext.GetIdFromProxy(this.Proxy.DefaultViewModelDescriptor) : (int?)null, binStream);
             BinarySerializer.ToStream(this.Proxy.IsAbstract, binStream);
             BinarySerializer.ToStream(this.Proxy.IsFrozenObject, binStream);
             BinarySerializer.ToStream(this.Proxy.IsSimpleObject, binStream);
@@ -1107,8 +1107,8 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
         {
             base.ToStream(xml);
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.BaseObjectClass != null ? this.BaseObjectClass.ID : (int?)null, xml, "BaseObjectClass", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.DefaultViewModelDescriptor != null ? this.DefaultViewModelDescriptor.ID : (int?)null, xml, "DefaultViewModelDescriptor", "Kistl.App.GUI");
+            XmlStreamer.ToStream(this.Proxy.BaseObjectClass != null ? OurContext.GetIdFromProxy(this.Proxy.BaseObjectClass) : (int?)null, xml, "BaseObjectClass", "Kistl.App.Base");
+            XmlStreamer.ToStream(this.Proxy.DefaultViewModelDescriptor != null ? OurContext.GetIdFromProxy(this.Proxy.DefaultViewModelDescriptor) : (int?)null, xml, "DefaultViewModelDescriptor", "Kistl.App.GUI");
             XmlStreamer.ToStream(this.Proxy.IsAbstract, xml, "IsAbstract", "Kistl.App.Base");
             XmlStreamer.ToStream(this.Proxy.IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
             XmlStreamer.ToStream(this.Proxy.IsSimpleObject, xml, "IsSimpleObject", "Kistl.App.GUI");
@@ -1158,8 +1158,8 @@ public static event PropertyListChangedHandler<Kistl.App.Base.ObjectClass> OnSub
         {
             base.Export(xml, modules);
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.BaseObjectClass != null ? this.BaseObjectClass.ExportGuid : (Guid?)null, xml, "BaseObjectClass", "Kistl.App.Base");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.DefaultViewModelDescriptor != null ? this.DefaultViewModelDescriptor.ExportGuid : (Guid?)null, xml, "DefaultViewModelDescriptor", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.BaseObjectClass != null ? this.Proxy.BaseObjectClass.ExportGuid : (Guid?)null, xml, "BaseObjectClass", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.DefaultViewModelDescriptor != null ? this.Proxy.DefaultViewModelDescriptor.ExportGuid : (Guid?)null, xml, "DefaultViewModelDescriptor", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.IsAbstract, xml, "IsAbstract", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.IsFrozenObject, xml, "IsFrozenObject", "Kistl.App.Base");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.IsSimpleObject, xml, "IsSimpleObject", "Kistl.App.GUI");

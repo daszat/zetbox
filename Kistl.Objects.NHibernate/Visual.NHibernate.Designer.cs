@@ -573,8 +573,8 @@ namespace Kistl.App.GUI
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             if (!CurrentAccessRights.HasReadRights()) return;
             BinarySerializer.ToStream(this.Proxy.Description, binStream);
-            BinarySerializer.ToStream(this.Method != null ? this.Method.ID : (int?)null, binStream);
-            BinarySerializer.ToStream(this.Property != null ? this.Property.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.Proxy.Method != null ? OurContext.GetIdFromProxy(this.Proxy.Method) : (int?)null, binStream);
+            BinarySerializer.ToStream(this.Proxy.Property != null ? OurContext.GetIdFromProxy(this.Proxy.Property) : (int?)null, binStream);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
@@ -602,8 +602,8 @@ namespace Kistl.App.GUI
             base.ToStream(xml);
             if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.ToStream(this.Proxy.Description, xml, "Description", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Method != null ? this.Method.ID : (int?)null, xml, "Method", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.Property != null ? this.Property.ID : (int?)null, xml, "Property", "Kistl.App.GUI");
+            XmlStreamer.ToStream(this.Proxy.Method != null ? OurContext.GetIdFromProxy(this.Proxy.Method) : (int?)null, xml, "Method", "Kistl.App.GUI");
+            XmlStreamer.ToStream(this.Proxy.Property != null ? OurContext.GetIdFromProxy(this.Proxy.Property) : (int?)null, xml, "Property", "Kistl.App.GUI");
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)

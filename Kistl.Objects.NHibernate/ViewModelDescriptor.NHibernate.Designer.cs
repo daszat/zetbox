@@ -1277,18 +1277,18 @@ namespace Kistl.App.GUI
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream(this.DefaultDisplayKind != null ? this.DefaultDisplayKind.ID : (int?)null, binStream);
-            BinarySerializer.ToStream(this.DefaultEditorKind != null ? this.DefaultEditorKind.ID : (int?)null, binStream);
-            BinarySerializer.ToStream(this.DefaultGridCellDisplayKind != null ? this.DefaultGridCellDisplayKind.ID : (int?)null, binStream);
-            BinarySerializer.ToStream(this.DefaultGridCellEditorKind != null ? this.DefaultGridCellEditorKind.ID : (int?)null, binStream);
-            BinarySerializer.ToStream(this.DefaultGridCellPreEditorKind != null ? this.DefaultGridCellPreEditorKind.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.Proxy.DefaultDisplayKind != null ? OurContext.GetIdFromProxy(this.Proxy.DefaultDisplayKind) : (int?)null, binStream);
+            BinarySerializer.ToStream(this.Proxy.DefaultEditorKind != null ? OurContext.GetIdFromProxy(this.Proxy.DefaultEditorKind) : (int?)null, binStream);
+            BinarySerializer.ToStream(this.Proxy.DefaultGridCellDisplayKind != null ? OurContext.GetIdFromProxy(this.Proxy.DefaultGridCellDisplayKind) : (int?)null, binStream);
+            BinarySerializer.ToStream(this.Proxy.DefaultGridCellEditorKind != null ? OurContext.GetIdFromProxy(this.Proxy.DefaultGridCellEditorKind) : (int?)null, binStream);
+            BinarySerializer.ToStream(this.Proxy.DefaultGridCellPreEditorKind != null ? OurContext.GetIdFromProxy(this.Proxy.DefaultGridCellPreEditorKind) : (int?)null, binStream);
             BinarySerializer.ToStream(this.Proxy.Description, binStream);
             BinarySerializer.ToStream(this._isExportGuidSet, binStream);
             if (this._isExportGuidSet) {
                 BinarySerializer.ToStream(this.Proxy.ExportGuid, binStream);
             }
-            BinarySerializer.ToStream(this.Module != null ? this.Module.ID : (int?)null, binStream);
-            BinarySerializer.ToStream(this.ViewModelRef != null ? this.ViewModelRef.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.Proxy.Module != null ? OurContext.GetIdFromProxy(this.Proxy.Module) : (int?)null, binStream);
+            BinarySerializer.ToStream(this.Proxy.ViewModelRef != null ? OurContext.GetIdFromProxy(this.Proxy.ViewModelRef) : (int?)null, binStream);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
@@ -1326,18 +1326,18 @@ namespace Kistl.App.GUI
         {
             base.ToStream(xml);
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.DefaultDisplayKind != null ? this.DefaultDisplayKind.ID : (int?)null, xml, "DefaultDisplayKind", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.DefaultEditorKind != null ? this.DefaultEditorKind.ID : (int?)null, xml, "DefaultEditorKind", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.DefaultGridCellDisplayKind != null ? this.DefaultGridCellDisplayKind.ID : (int?)null, xml, "DefaultGridCellDisplayKind", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.DefaultGridCellEditorKind != null ? this.DefaultGridCellEditorKind.ID : (int?)null, xml, "DefaultGridCellEditorKind", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.DefaultGridCellPreEditorKind != null ? this.DefaultGridCellPreEditorKind.ID : (int?)null, xml, "DefaultGridCellPreEditorKind", "Kistl.App.GUI");
+            XmlStreamer.ToStream(this.Proxy.DefaultDisplayKind != null ? OurContext.GetIdFromProxy(this.Proxy.DefaultDisplayKind) : (int?)null, xml, "DefaultDisplayKind", "Kistl.App.GUI");
+            XmlStreamer.ToStream(this.Proxy.DefaultEditorKind != null ? OurContext.GetIdFromProxy(this.Proxy.DefaultEditorKind) : (int?)null, xml, "DefaultEditorKind", "Kistl.App.GUI");
+            XmlStreamer.ToStream(this.Proxy.DefaultGridCellDisplayKind != null ? OurContext.GetIdFromProxy(this.Proxy.DefaultGridCellDisplayKind) : (int?)null, xml, "DefaultGridCellDisplayKind", "Kistl.App.GUI");
+            XmlStreamer.ToStream(this.Proxy.DefaultGridCellEditorKind != null ? OurContext.GetIdFromProxy(this.Proxy.DefaultGridCellEditorKind) : (int?)null, xml, "DefaultGridCellEditorKind", "Kistl.App.GUI");
+            XmlStreamer.ToStream(this.Proxy.DefaultGridCellPreEditorKind != null ? OurContext.GetIdFromProxy(this.Proxy.DefaultGridCellPreEditorKind) : (int?)null, xml, "DefaultGridCellPreEditorKind", "Kistl.App.GUI");
             XmlStreamer.ToStream(this.Proxy.Description, xml, "Description", "Kistl.App.GUI");
             XmlStreamer.ToStream(this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.GUI");
             if (this._isExportGuidSet) {
                 XmlStreamer.ToStream(this.Proxy.ExportGuid, xml, "ExportGuid", "Kistl.App.GUI");
             }
-            XmlStreamer.ToStream(this.Module != null ? this.Module.ID : (int?)null, xml, "Module", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.ViewModelRef != null ? this.ViewModelRef.ID : (int?)null, xml, "ViewModelRef", "Kistl.App.GUI");
+            XmlStreamer.ToStream(this.Proxy.Module != null ? OurContext.GetIdFromProxy(this.Proxy.Module) : (int?)null, xml, "Module", "Kistl.App.GUI");
+            XmlStreamer.ToStream(this.Proxy.ViewModelRef != null ? OurContext.GetIdFromProxy(this.Proxy.ViewModelRef) : (int?)null, xml, "ViewModelRef", "Kistl.App.GUI");
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
@@ -1377,14 +1377,14 @@ namespace Kistl.App.GUI
         {
             xml.WriteAttributeString("ExportGuid", this.Proxy.ExportGuid.ToString());
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.DefaultDisplayKind != null ? this.DefaultDisplayKind.ExportGuid : (Guid?)null, xml, "DefaultDisplayKind", "Kistl.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.DefaultEditorKind != null ? this.DefaultEditorKind.ExportGuid : (Guid?)null, xml, "DefaultEditorKind", "Kistl.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.DefaultGridCellDisplayKind != null ? this.DefaultGridCellDisplayKind.ExportGuid : (Guid?)null, xml, "DefaultGridCellDisplayKind", "Kistl.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.DefaultGridCellEditorKind != null ? this.DefaultGridCellEditorKind.ExportGuid : (Guid?)null, xml, "DefaultGridCellEditorKind", "Kistl.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.DefaultGridCellPreEditorKind != null ? this.DefaultGridCellPreEditorKind.ExportGuid : (Guid?)null, xml, "DefaultGridCellPreEditorKind", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.DefaultDisplayKind != null ? this.Proxy.DefaultDisplayKind.ExportGuid : (Guid?)null, xml, "DefaultDisplayKind", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.DefaultEditorKind != null ? this.Proxy.DefaultEditorKind.ExportGuid : (Guid?)null, xml, "DefaultEditorKind", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.DefaultGridCellDisplayKind != null ? this.Proxy.DefaultGridCellDisplayKind.ExportGuid : (Guid?)null, xml, "DefaultGridCellDisplayKind", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.DefaultGridCellEditorKind != null ? this.Proxy.DefaultGridCellEditorKind.ExportGuid : (Guid?)null, xml, "DefaultGridCellEditorKind", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.DefaultGridCellPreEditorKind != null ? this.Proxy.DefaultGridCellPreEditorKind.ExportGuid : (Guid?)null, xml, "DefaultGridCellPreEditorKind", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.Description, xml, "Description", "Kistl.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Module != null ? this.Module.ExportGuid : (Guid?)null, xml, "Module", "Kistl.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.ViewModelRef != null ? this.ViewModelRef.ExportGuid : (Guid?)null, xml, "ViewModelRef", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.Module != null ? this.Proxy.Module.ExportGuid : (Guid?)null, xml, "Module", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.ViewModelRef != null ? this.Proxy.ViewModelRef.ExportGuid : (Guid?)null, xml, "ViewModelRef", "Kistl.App.GUI");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)

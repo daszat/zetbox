@@ -388,7 +388,7 @@ namespace Kistl.App.Base
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             if (!CurrentAccessRights.HasReadRights()) return;
             BinarySerializer.ToStream(this.Proxy.CurrentNumber, binStream);
-            BinarySerializer.ToStream(this.Sequence != null ? this.Sequence.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.Proxy.Sequence != null ? OurContext.GetIdFromProxy(this.Proxy.Sequence) : (int?)null, binStream);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
@@ -415,7 +415,7 @@ namespace Kistl.App.Base
             base.ToStream(xml);
             if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.ToStream(this.Proxy.CurrentNumber, xml, "CurrentNumber", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.Sequence != null ? this.Sequence.ID : (int?)null, xml, "Sequence", "Kistl.App.Base");
+            XmlStreamer.ToStream(this.Proxy.Sequence != null ? OurContext.GetIdFromProxy(this.Proxy.Sequence) : (int?)null, xml, "Sequence", "Kistl.App.Base");
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)

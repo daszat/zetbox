@@ -281,6 +281,11 @@
       <DependentUpon>Registrations.cst</DependentUpon>
     </Compile>
     <Compile Include="Templates\Serialization\EagerLoadingSerialization.cs" />
+    <Compile Include="Templates\Serialization\ObjectReferencePropertySerialization.Designer.cs">
+      <DependentUpon>ObjectReferencePropertySerialization.cst</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Templates\Serialization\ProxySerialization.Designer.cs">
       <DependentUpon>ProxySerialization.cst</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -415,6 +420,10 @@
     <None Include="Templates\Registrations.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>Registrations.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\Serialization\ObjectReferencePropertySerialization.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>ObjectReferencePropertySerialization.Designer.cs</LastGenOutput>
     </None>
     <None Include="Templates\Serialization\ProxySerialization.cst">
       <Generator>Arebis Template Processor</Generator>

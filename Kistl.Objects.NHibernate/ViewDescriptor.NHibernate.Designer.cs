@@ -737,13 +737,13 @@ namespace Kistl.App.GUI
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream(this.ControlKind != null ? this.ControlKind.ID : (int?)null, binStream);
-            BinarySerializer.ToStream(this.ControlRef != null ? this.ControlRef.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.Proxy.ControlKind != null ? OurContext.GetIdFromProxy(this.Proxy.ControlKind) : (int?)null, binStream);
+            BinarySerializer.ToStream(this.Proxy.ControlRef != null ? OurContext.GetIdFromProxy(this.Proxy.ControlRef) : (int?)null, binStream);
             BinarySerializer.ToStream(this._isExportGuidSet, binStream);
             if (this._isExportGuidSet) {
                 BinarySerializer.ToStream(this.Proxy.ExportGuid, binStream);
             }
-            BinarySerializer.ToStream(this.Module != null ? this.Module.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.Proxy.Module != null ? OurContext.GetIdFromProxy(this.Proxy.Module) : (int?)null, binStream);
 
 			BinarySerializer.ToStream(eagerLoadLists, binStream);
 			if (eagerLoadLists && auxObjects != null)
@@ -793,13 +793,13 @@ namespace Kistl.App.GUI
         {
             base.ToStream(xml);
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.ControlKind != null ? this.ControlKind.ID : (int?)null, xml, "ControlKind", "Kistl.App.GUI");
-            XmlStreamer.ToStream(this.ControlRef != null ? this.ControlRef.ID : (int?)null, xml, "ControlRef", "Kistl.App.GUI");
+            XmlStreamer.ToStream(this.Proxy.ControlKind != null ? OurContext.GetIdFromProxy(this.Proxy.ControlKind) : (int?)null, xml, "ControlKind", "Kistl.App.GUI");
+            XmlStreamer.ToStream(this.Proxy.ControlRef != null ? OurContext.GetIdFromProxy(this.Proxy.ControlRef) : (int?)null, xml, "ControlRef", "Kistl.App.GUI");
             XmlStreamer.ToStream(this._isExportGuidSet, xml, "IsExportGuidSet", "Kistl.App.GUI");
             if (this._isExportGuidSet) {
                 XmlStreamer.ToStream(this.Proxy.ExportGuid, xml, "ExportGuid", "Kistl.App.GUI");
             }
-            XmlStreamer.ToStream(this.Module != null ? this.Module.ID : (int?)null, xml, "Module", "Kistl.App.GUI");
+            XmlStreamer.ToStream(this.Proxy.Module != null ? OurContext.GetIdFromProxy(this.Proxy.Module) : (int?)null, xml, "Module", "Kistl.App.GUI");
             XmlStreamer.ToStream((int?)Proxy.Toolkit, xml, "Toolkit", "Kistl.App.GUI");
         }
 
@@ -831,9 +831,9 @@ namespace Kistl.App.GUI
         {
             xml.WriteAttributeString("ExportGuid", this.Proxy.ExportGuid.ToString());
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.ControlKind != null ? this.ControlKind.ExportGuid : (Guid?)null, xml, "ControlKind", "Kistl.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.ControlRef != null ? this.ControlRef.ExportGuid : (Guid?)null, xml, "ControlRef", "Kistl.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Module != null ? this.Module.ExportGuid : (Guid?)null, xml, "Module", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.ControlKind != null ? this.Proxy.ControlKind.ExportGuid : (Guid?)null, xml, "ControlKind", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.ControlRef != null ? this.Proxy.ControlRef.ExportGuid : (Guid?)null, xml, "ControlRef", "Kistl.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.Module != null ? this.Proxy.Module.ExportGuid : (Guid?)null, xml, "Module", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream((int?)Proxy.Toolkit, xml, "Toolkit", "Kistl.App.GUI");
         }
 

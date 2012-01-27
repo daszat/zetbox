@@ -641,12 +641,16 @@ namespace Kistl.DalProvider.NHibernate
             }
         }
 
+        /// <summary>
+        /// Given an NH-proxy, load a full Impl-object. This may force going to the database to find the concrete type.
+        /// </summary>
         public IPersistenceObject AttachAndWrap(IProxyObject proxy)
         {
             if (proxy == null)
                 return null;
 
-            var ift = GetImplementationType(proxy.ZBoxWrapper).ToInterfaceType();
+            var implType = GetImplType(proxy);
+            var ift = GetImplementationType(implType).ToInterfaceType();
             var item = (NHibernatePersistenceObject)_attachedObjectsByProxy.Lookup(ift, proxy);
             if (item == null)
             {
@@ -672,6 +676,44 @@ namespace Kistl.DalProvider.NHibernate
                 }
             }
             return item;
+        }
+
+        /// <summary>
+        /// Get only the underlying ID from a proxy. This avoids going to the database when an object is not loaded yet.
+        /// </summary>
+        /// <param name="proxy"></param>
+        /// <returns></returns>
+        public int GetIdFromProxy(IProxyObject proxy)
+        {
+            if (proxy == null) throw new ArgumentNullException("proxy");
+
+            // existing object
+            if (proxy.ID > Kistl.API.Helper.INVALIDID)
+                return proxy.ID;
+
+            // new object
+            var implType = GetImplType(proxy);
+            var ift = GetImplementationType(implType).ToInterfaceType();
+            var item = (NHibernatePersistenceObject)_attachedObjectsByProxy.Lookup(ift, proxy);
+            if (item == null)
+            {
+                // ... without wrapper
+                item = (NHibernatePersistenceObject)Activator.CreateInstance(proxy.ZBoxWrapper, lazyCtx, proxy);
+                AttachAsNew(item);
+            }
+            return item.ID;
+        }
+
+        private static Type GetImplType(IProxyObject proxy)
+        {
+            // search for "our" implementation
+            var t = proxy.GetType();
+            while (!t.IsNested && t != typeof(object))
+            {
+                t = t.BaseType;
+            }
+            var implType = t.DeclaringType;
+            return implType;
         }
     }
 }

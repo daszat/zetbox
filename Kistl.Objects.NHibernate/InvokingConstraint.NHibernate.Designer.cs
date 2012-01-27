@@ -473,8 +473,8 @@ namespace Kistl.App.Base
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream(this.GetErrorTextInvocation != null ? this.GetErrorTextInvocation.ID : (int?)null, binStream);
-            BinarySerializer.ToStream(this.IsValidInvocation != null ? this.IsValidInvocation.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.Proxy.GetErrorTextInvocation != null ? OurContext.GetIdFromProxy(this.Proxy.GetErrorTextInvocation) : (int?)null, binStream);
+            BinarySerializer.ToStream(this.Proxy.IsValidInvocation != null ? OurContext.GetIdFromProxy(this.Proxy.IsValidInvocation) : (int?)null, binStream);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
@@ -496,8 +496,8 @@ namespace Kistl.App.Base
         {
             base.ToStream(xml);
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.GetErrorTextInvocation != null ? this.GetErrorTextInvocation.ID : (int?)null, xml, "GetErrorTextInvocation", "Kistl.App.Base");
-            XmlStreamer.ToStream(this.IsValidInvocation != null ? this.IsValidInvocation.ID : (int?)null, xml, "IsValidInvocation", "Kistl.App.Base");
+            XmlStreamer.ToStream(this.Proxy.GetErrorTextInvocation != null ? OurContext.GetIdFromProxy(this.Proxy.GetErrorTextInvocation) : (int?)null, xml, "GetErrorTextInvocation", "Kistl.App.Base");
+            XmlStreamer.ToStream(this.Proxy.IsValidInvocation != null ? OurContext.GetIdFromProxy(this.Proxy.IsValidInvocation) : (int?)null, xml, "IsValidInvocation", "Kistl.App.Base");
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
@@ -519,8 +519,8 @@ namespace Kistl.App.Base
         {
             base.Export(xml, modules);
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.GetErrorTextInvocation != null ? this.GetErrorTextInvocation.ExportGuid : (Guid?)null, xml, "GetErrorTextInvocation", "Kistl.App.Base");
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.IsValidInvocation != null ? this.IsValidInvocation.ExportGuid : (Guid?)null, xml, "IsValidInvocation", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.GetErrorTextInvocation != null ? this.Proxy.GetErrorTextInvocation.ExportGuid : (Guid?)null, xml, "GetErrorTextInvocation", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.IsValidInvocation != null ? this.Proxy.IsValidInvocation.ExportGuid : (Guid?)null, xml, "IsValidInvocation", "Kistl.App.Base");
         }
 
         public override void MergeImport(System.Xml.XmlReader xml)

@@ -515,7 +515,7 @@ namespace Kistl.App.Test
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             if (!CurrentAccessRights.HasReadRights()) return;
             BinarySerializer.ToStream(this.Proxy.MyIntProperty, binStream);
-            BinarySerializer.ToStream(this.ObjectProp != null ? this.ObjectProp.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.Proxy.ObjectProp != null ? OurContext.GetIdFromProxy(this.Proxy.ObjectProp) : (int?)null, binStream);
             BinarySerializer.ToStream(this.Proxy.StringProp, binStream);
             BinarySerializer.ToStream((int?)Proxy.TestEnumProp, binStream);
         }
@@ -554,7 +554,7 @@ namespace Kistl.App.Test
             base.ToStream(xml);
             if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.ToStream(this.Proxy.MyIntProperty, xml, "MyIntProperty", "Kistl.App.Test");
-            XmlStreamer.ToStream(this.ObjectProp != null ? this.ObjectProp.ID : (int?)null, xml, "ObjectProp", "Kistl.App.Test");
+            XmlStreamer.ToStream(this.Proxy.ObjectProp != null ? OurContext.GetIdFromProxy(this.Proxy.ObjectProp) : (int?)null, xml, "ObjectProp", "Kistl.App.Test");
             XmlStreamer.ToStream(this.Proxy.StringProp, xml, "StringProp", "Kistl.App.Test");
             XmlStreamer.ToStream((int?)Proxy.TestEnumProp, xml, "TestEnumProp", "Kistl.App.Test");
         }

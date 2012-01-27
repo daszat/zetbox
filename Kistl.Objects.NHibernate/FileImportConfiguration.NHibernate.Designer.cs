@@ -909,12 +909,12 @@ namespace at.dasz.DocumentManagement
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream(this.ChangedBy != null ? this.ChangedBy.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.Proxy.ChangedBy != null ? OurContext.GetIdFromProxy(this.Proxy.ChangedBy) : (int?)null, binStream);
             BinarySerializer.ToStream(this._isChangedOnSet, binStream);
             if (this._isChangedOnSet) {
                 BinarySerializer.ToStream(this.Proxy.ChangedOn, binStream);
             }
-            BinarySerializer.ToStream(this.CreatedBy != null ? this.CreatedBy.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.Proxy.CreatedBy != null ? OurContext.GetIdFromProxy(this.Proxy.CreatedBy) : (int?)null, binStream);
             BinarySerializer.ToStream(this._isCreatedOnSet, binStream);
             if (this._isCreatedOnSet) {
                 BinarySerializer.ToStream(this.Proxy.CreatedOn, binStream);
@@ -923,7 +923,7 @@ namespace at.dasz.DocumentManagement
             if (this._isExportGuidSet) {
                 BinarySerializer.ToStream(this.Proxy.ExportGuid, binStream);
             }
-            BinarySerializer.ToStream(this.Identity != null ? this.Identity.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.Proxy.Identity != null ? OurContext.GetIdFromProxy(this.Proxy.Identity) : (int?)null, binStream);
             BinarySerializer.ToStream(this.Proxy.MachineName, binStream);
             BinarySerializer.ToStream(this.Proxy.PickupDirectory, binStream);
         }
@@ -976,12 +976,12 @@ namespace at.dasz.DocumentManagement
         {
             base.ToStream(xml);
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.ChangedBy != null ? this.ChangedBy.ID : (int?)null, xml, "ChangedBy", "at.dasz.DocumentManagement");
+            XmlStreamer.ToStream(this.Proxy.ChangedBy != null ? OurContext.GetIdFromProxy(this.Proxy.ChangedBy) : (int?)null, xml, "ChangedBy", "at.dasz.DocumentManagement");
             XmlStreamer.ToStream(this._isChangedOnSet, xml, "IsChangedOnSet", "at.dasz.DocumentManagement");
             if (this._isChangedOnSet) {
                 XmlStreamer.ToStream(this.Proxy.ChangedOn, xml, "ChangedOn", "at.dasz.DocumentManagement");
             }
-            XmlStreamer.ToStream(this.CreatedBy != null ? this.CreatedBy.ID : (int?)null, xml, "CreatedBy", "at.dasz.DocumentManagement");
+            XmlStreamer.ToStream(this.Proxy.CreatedBy != null ? OurContext.GetIdFromProxy(this.Proxy.CreatedBy) : (int?)null, xml, "CreatedBy", "at.dasz.DocumentManagement");
             XmlStreamer.ToStream(this._isCreatedOnSet, xml, "IsCreatedOnSet", "at.dasz.DocumentManagement");
             if (this._isCreatedOnSet) {
                 XmlStreamer.ToStream(this.Proxy.CreatedOn, xml, "CreatedOn", "at.dasz.DocumentManagement");
@@ -990,7 +990,7 @@ namespace at.dasz.DocumentManagement
             if (this._isExportGuidSet) {
                 XmlStreamer.ToStream(this.Proxy.ExportGuid, xml, "ExportGuid", "at.dasz.DocumentManagement");
             }
-            XmlStreamer.ToStream(this.Identity != null ? this.Identity.ID : (int?)null, xml, "Identity", "at.dasz.DocumentManagement");
+            XmlStreamer.ToStream(this.Proxy.Identity != null ? OurContext.GetIdFromProxy(this.Proxy.Identity) : (int?)null, xml, "Identity", "at.dasz.DocumentManagement");
             XmlStreamer.ToStream(this.Proxy.MachineName, xml, "MachineName", "at.dasz.DocumentManagement");
             XmlStreamer.ToStream(this.Proxy.PickupDirectory, xml, "PickupDirectory", "at.dasz.DocumentManagement");
         }

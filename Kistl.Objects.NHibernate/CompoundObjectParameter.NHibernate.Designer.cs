@@ -375,7 +375,7 @@ namespace Kistl.App.Base
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             if (!CurrentAccessRights.HasReadRights()) return;
-            BinarySerializer.ToStream(this.CompoundObject != null ? this.CompoundObject.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.Proxy.CompoundObject != null ? OurContext.GetIdFromProxy(this.Proxy.CompoundObject) : (int?)null, binStream);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(System.IO.BinaryReader binStream)
@@ -396,7 +396,7 @@ namespace Kistl.App.Base
         {
             base.ToStream(xml);
             if (!CurrentAccessRights.HasReadRights()) return;
-            XmlStreamer.ToStream(this.CompoundObject != null ? this.CompoundObject.ID : (int?)null, xml, "CompoundObject", "Kistl.App.Base");
+            XmlStreamer.ToStream(this.Proxy.CompoundObject != null ? OurContext.GetIdFromProxy(this.Proxy.CompoundObject) : (int?)null, xml, "CompoundObject", "Kistl.App.Base");
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(System.Xml.XmlReader xml)
@@ -417,7 +417,7 @@ namespace Kistl.App.Base
         {
             base.Export(xml, modules);
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.CompoundObject != null ? this.CompoundObject.ExportGuid : (Guid?)null, xml, "CompoundObject", "Kistl.App.Base");
+            if (modules.Contains("*") || modules.Contains("Kistl.App.Base")) XmlStreamer.ToStream(this.Proxy.CompoundObject != null ? this.Proxy.CompoundObject.ExportGuid : (Guid?)null, xml, "CompoundObject", "Kistl.App.Base");
         }
 
         public override void MergeImport(System.Xml.XmlReader xml)

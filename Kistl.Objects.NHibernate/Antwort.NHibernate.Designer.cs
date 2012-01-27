@@ -554,7 +554,7 @@ namespace Kistl.App.Test
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             if (!CurrentAccessRights.HasReadRights()) return;
             BinarySerializer.ToStream(this.Proxy.Frage, binStream);
-            BinarySerializer.ToStream(this.Fragebogen != null ? this.Fragebogen.ID : (int?)null, binStream);
+            BinarySerializer.ToStream(this.Proxy.Fragebogen != null ? OurContext.GetIdFromProxy(this.Proxy.Fragebogen) : (int?)null, binStream);
             BinarySerializer.ToStream(this.Proxy.gute_Antworten_pos, binStream);
             BinarySerializer.ToStream(this.Proxy.FragenNummer, binStream);
             BinarySerializer.ToStream(this.Proxy.GegebeneAntwort, binStream);
@@ -599,7 +599,7 @@ namespace Kistl.App.Test
             base.ToStream(xml);
             if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.ToStream(this.Proxy.Frage, xml, "Frage", "Kistl.App.Test");
-            XmlStreamer.ToStream(this.Fragebogen != null ? this.Fragebogen.ID : (int?)null, xml, "Fragebogen", "Kistl.App.Test");
+            XmlStreamer.ToStream(this.Proxy.Fragebogen != null ? OurContext.GetIdFromProxy(this.Proxy.Fragebogen) : (int?)null, xml, "Fragebogen", "Kistl.App.Test");
             XmlStreamer.ToStream(this.Proxy.gute_Antworten_pos, xml, "gute_Antworten_pos", "Kistl.App.Test");
             XmlStreamer.ToStream(this.Proxy.FragenNummer, xml, "FragenNummer", "Kistl.App.Test");
             XmlStreamer.ToStream(this.Proxy.GegebeneAntwort, xml, "GegebeneAntwort", "Kistl.App.Test");
