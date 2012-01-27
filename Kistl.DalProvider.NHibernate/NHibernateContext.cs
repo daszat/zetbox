@@ -654,11 +654,16 @@ namespace Kistl.DalProvider.NHibernate
             var item = (NHibernatePersistenceObject)_attachedObjectsByProxy.Lookup(ift, proxy);
             if (item == null)
             {
-                // re-load proxy to avoid aliasing issues from unloaded proxies
+                // re-load proxy to avoid aliasing issues from unloaded proxies, but only if there is the possibility, that this might be a _different_ sub-class
+
                 if (proxy.ID > Kistl.API.Helper.INVALIDID)
                 {
-                    proxy = (IProxyObject)_nhSession.Load(proxy.ZBoxProxy, proxy.ID);
-                    item = (NHibernatePersistenceObject)ContainsObject(ift, proxy.ID);
+                    var objClass = metaDataResolver.GetObjectClass(ift);
+                    if (objClass != null && metaDataResolver.GetObjectClass(ift).SubClasses.Count > 0)
+                    {
+                        proxy = (IProxyObject)_nhSession.Load(proxy.ZBoxProxy, proxy.ID);
+                        item = (NHibernatePersistenceObject)ContainsObject(ift, proxy.ID);
+                    }
                 }
 
                 if (item == null)
