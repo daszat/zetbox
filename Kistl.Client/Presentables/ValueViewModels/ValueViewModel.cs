@@ -703,9 +703,17 @@ namespace Kistl.Client.Presentables.ValueViewModels
         {
             try
             {
+                var parsedValue = String.IsNullOrEmpty(str) ? null : (Nullable<TValue>)System.Convert.ChangeType(str, typeof(TValue));
+                if (!AllowNullInput && parsedValue == null)
+                {
+                    return new ParseResult<TValue?>()
+                    {
+                        Error = "Empty value"
+                    };
+                }
                 return new ParseResult<TValue?>()
                 {
-                    Value = String.IsNullOrEmpty(str) ? null : (Nullable<TValue>)System.Convert.ChangeType(str, typeof(TValue))
+                    Value = parsedValue
                 };
             }
             catch
