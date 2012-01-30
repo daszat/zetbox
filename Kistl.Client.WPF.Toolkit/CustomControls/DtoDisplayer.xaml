@@ -118,14 +118,15 @@
                      Background="{Binding Background}"
                      FontSize="12" />
           <!-- once for the column(headers) -->
-          <ItemsControl ItemsSource="{Binding Columns}"
+          <ItemsControl x:Name="Headers"
+                        ItemsSource="{Binding Columns}"
                         Background="{Binding Background}"
                         Visibility="{Binding Columns, Converter={StaticResource EmptyCountToCollapsedConverter}}">
             <ItemsControl.ItemContainerStyle>
               <Style>
                 <Setter Property="Grid.Column" Value="{Binding Column}" />
                 <Setter Property="TextBlock.HorizontalAlignment" Value="Center" />
-                <Setter Property="TextBlock.Margin" Value="1,0" />
+                <Setter Property="TextBlock.Margin" Value="5,0" />
               </Style>
             </ItemsControl.ItemContainerStyle>
             <ItemsControl.ItemsPanel>
@@ -135,7 +136,8 @@
             </ItemsControl.ItemsPanel>
           </ItemsControl>
           <!-- and once for the cells(data) -->
-          <ItemsControl ItemsSource="{Binding Cells}"
+          <ItemsControl x:Name="Values"
+                        ItemsSource="{Binding Cells}"
                         Background="{Binding Background}">
             <ItemsControl.ItemContainerStyle>
               <Style>

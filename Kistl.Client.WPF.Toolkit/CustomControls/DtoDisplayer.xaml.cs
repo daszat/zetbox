@@ -28,9 +28,9 @@ namespace Kistl.Client.WPF.CustomControls
 
         public void Grid_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            var vm = e.NewValue as DtoTableViewModel;
             var grid = sender as Grid;
-            InitGrid(grid, vm);
+            if (grid != null)
+                InitGrid(grid, e.NewValue as DtoTableViewModel);
         }
 
         public void Grid_Initialized(object sender, EventArgs e)
