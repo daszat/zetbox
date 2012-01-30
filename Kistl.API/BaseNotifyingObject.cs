@@ -186,8 +186,6 @@ namespace Kistl.API
                 _auditLogger.DebugFormat("{0}.{1} changed from '{2}' to '{3}'",
                     this.GetType().Name, msg.property, msg.oldValue, msg.newValue);
             }
-
-            _auditLog.Clear();
         }
 
         protected virtual void AuditPropertyChange(string property, object oldValue, object newValue)
