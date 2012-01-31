@@ -4,6 +4,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Collections.Specialized;
     using System.ComponentModel;
     using System.Linq;
     using System.Text;
@@ -12,7 +13,6 @@ namespace Kistl.Client.Presentables.ObjectEditor
     using Kistl.App.Base;
     using Kistl.App.Extensions;
     using Kistl.Client.Presentables.KistlBase;
-    using System.Collections.Specialized;
 
     public class WorkspaceViewModel
         : WindowViewModel, IMultipleInstancesManager, IContextViewModel, IDisposable
@@ -298,7 +298,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
 
         private bool SaveDelayed()
         {
-            UpdateErrors();            
+            UpdateErrors();
             if (_currentErrors.Count == 0)
             {
                 try
@@ -333,7 +333,7 @@ namespace Kistl.Client.Presentables.ObjectEditor
 
             return false;
         }
-        
+
 
         #endregion
 

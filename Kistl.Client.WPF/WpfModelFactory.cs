@@ -9,13 +9,13 @@ namespace Kistl.Client.WPF
     using System.Windows.Threading;
     using Autofac;
     using Kistl.API;
+    using Kistl.API.Client;
+    using Kistl.API.Client.PerfCounter;
+    using Kistl.API.Configuration;
     using Kistl.Client.GUI;
     using Kistl.Client.Presentables;
-    using Microsoft.Win32;
-    using Kistl.API.Client;
-    using Kistl.API.Configuration;
     using Kistl.Client.WPF.Toolkit;
-    using Kistl.API.Client.PerfCounter;
+    using Microsoft.Win32;
 
     public class WpfModelFactory
         : ViewModelFactory

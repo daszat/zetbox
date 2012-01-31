@@ -7,8 +7,8 @@ namespace Kistl.Client.WPF
     using System.Text;
     using Autofac;
     using Kistl.API;
-    using Kistl.Client.Presentables;
     using Kistl.API.Client;
+    using Kistl.Client.Presentables;
 
     public class WPFModule : Module
     {

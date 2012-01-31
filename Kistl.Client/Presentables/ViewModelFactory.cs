@@ -12,6 +12,7 @@ namespace Kistl.Client.Presentables
     using Autofac;
     using Kistl.API;
     using Kistl.API.Client;
+    using Kistl.API.Client.PerfCounter;
     using Kistl.API.Configuration;
     using Kistl.API.Utils;
     using Kistl.App.Base;
@@ -19,7 +20,6 @@ namespace Kistl.Client.Presentables
     using Kistl.App.GUI;
     using Kistl.Client.GUI;
     using Kistl.Client.Presentables.ValueViewModels;
-    using Kistl.API.Client.PerfCounter;
 
     /// <summary>
     /// Abstract base class to provide basic functionality of all model factories. Toolkit-specific implementations of this class will be 
@@ -570,6 +570,8 @@ namespace Kistl.Client.Presentables
 
         #endregion
 
+        #region delayed tasks
+
         public virtual IDelayedTask CreateDelayedTask(ViewModel displayer, Action loadAction)
         {
             return new ImmediateTask(loadAction);
@@ -586,10 +588,12 @@ namespace Kistl.Client.Presentables
             task.Trigger();
         }
 
+        #endregion
 
         public IPerfCounter PerfCounter
         {
-            get; private set;
+            get;
+            private set;
         }
     }
 }

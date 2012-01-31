@@ -50,11 +50,13 @@ namespace Kistl.Client.Presentables
     }
 
     /// <summary>
-    /// A base class for implementing the ViewModel pattern. This class proxies the actual
+    /// A base class for implementing the ViewModel pattern. This class should proxy the actual
     /// data model into a non-blocking, view-state holding entity. Unless noted differently, members
     /// are not thread-safe and may only be called from the UI thread.
     /// </summary>
-    /// See http://blogs.msdn.com/dancre/archive/2006/10/11/datamodel-view-viewmodel-pattern-series.aspx
+    /// <remarks>
+    /// See http://blogs.msdn.com/dancre/archive/2006/10/11/datamodel-view-viewmodel-pattern-series.aspx and various others.
+    /// </remarks>
     public abstract class ViewModel : INotifyPropertyChanged
     {
         public delegate ViewModel Factory(IKistlContext dataCtx, ViewModel parent);

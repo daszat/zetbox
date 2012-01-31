@@ -7,6 +7,9 @@ namespace Kistl.Client.Presentables
     using System.Text;
     using Kistl.API;
 
+    /// <summary>
+    /// A top-level working space. This is the user's "Unit of Work".
+    /// </summary>
     public abstract class WindowViewModel : ViewModel
     {
         public new delegate WindowViewModel Factory(IKistlContext dataCtx, ViewModel parent);

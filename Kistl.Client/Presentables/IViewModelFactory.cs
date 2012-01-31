@@ -2,10 +2,10 @@
 namespace Kistl.Client.Presentables
 {
     using System;
-    using Kistl.App.GUI;
-    using Kistl.API.Client;
     using Kistl.API;
+    using Kistl.API.Client;
     using Kistl.API.Client.PerfCounter;
+    using Kistl.App.GUI;
 
     public interface IViewModelFactory : IToolkit
     {
@@ -20,7 +20,7 @@ namespace Kistl.Client.Presentables
         ViewModel GetWorkspace(IKistlContext ctx);
 
         /// <summary>
-        /// Initializes the requested culture form config on the current thread
+        /// Initializes the requested culture from config on the current thread
         /// </summary>
         void InitCulture();
 
