@@ -14,9 +14,9 @@
   <SolidColorBrush x:Key="HighlightState_Warning_PanelBackground" Color="#FFFF00" />
 
   <!-- Deactivated -->
-  <SolidColorBrush x:Key="HighlightState_Deactivated_GridForeground" Color="#888888" />
+  <SolidColorBrush x:Key="HighlightState_Deactivated_GridForeground" Color="#777777" />
   <FontStyle x:Key="HighlightState_Deactivated_GridFontStyle">Italic</FontStyle>
-  <SolidColorBrush x:Key="HighlightState_Deactivated_PanelBackground" Color="#888888" />
+  <SolidColorBrush x:Key="HighlightState_Deactivated_PanelBackground" Color="#DDDDDD" />
 
   <!-- Calculation -->
   <SolidColorBrush x:Key="HighlightState_Calculation_GridBackground" Color="#F2F2F2" />
