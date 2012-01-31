@@ -62,10 +62,19 @@ namespace Kistl.Client.Presentables
         }
 
         /// <summary>
+        /// Execute the modelled Method.
+        /// </summary>
+        public void Execute()
+        {
+            Execute(null);
+        }
+
+        /// <summary>
         /// Execute the modelled Method. The callback will be called 
         /// back on the UI thread after the execution has finished.
         /// </summary>
-        public void Execute()
+        /// <param name="callback">A callback or null</param>
+        public void Execute(Action callback)
         {
             var parameter = Method.Parameter.Where(i => !i.IsReturnParameter).ToArray();
             MethodInfo info = Object.GetType().FindMethod(Method.Name, parameter.Select(i => i.GetParameterType()).ToArray());
@@ -76,18 +85,18 @@ namespace Kistl.Client.Presentables
                 var pitMdl = ViewModelFactory.CreateViewModel<ParameterInputTaskViewModel.Factory>().Invoke(DataContext, this, Method, 
                     (p) => {
                         var result = info.Invoke(Object, p);
-                        HandleResult(result);
+                        HandleResult(result, callback);
                     });
                 ViewModelFactory.ShowModel(pitMdl, true);
             }
             else
             {
                 var result = info.Invoke(Object, new object[] { });
-                HandleResult(result);
+                HandleResult(result, callback);
             }                        
         }
 
-        private void HandleResult(object result)
+        private void HandleResult(object result, Action callback)
         {
             IDataObject obj = result as IDataObject;
             if (obj != null && obj.Context == DataContext)
@@ -97,6 +106,11 @@ namespace Kistl.Client.Presentables
             else if(result != null)
             {
                 ViewModelFactory.ShowMessage(result.ToString(), "Result");
+            }
+
+            if (callback != null)
+            {
+                callback();
             }
         }
 
