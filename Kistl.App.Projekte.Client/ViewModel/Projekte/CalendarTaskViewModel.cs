@@ -40,7 +40,12 @@ namespace Kistl.App.Projekte.Client.ViewModel.Projekte
                     .GetQuery<Task>()
                     .Where(t => (t.DatumVon >= from && t.DatumVon <= to) || (t.DatumBis >= from && t.DatumBis <= to) || (t.DatumVon <= from && t.DatumBis >= to))
                     .ToList()
-                    .Select(t => ViewModelFactory.CreateViewModel<DataObjectViewModel.Factory>(t).Invoke(DataContext, this, t))
+                    .Select(t =>
+                    {
+                        var vmdl = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this, t);
+                        // vmdl.RequestedKind = muhblah;
+                        return vmdl;
+                    })
                     .Cast<IAppointmentViewModel>());
                 return result.ToList();
             }
