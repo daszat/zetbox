@@ -155,8 +155,8 @@ namespace Kistl.Client.Presentables.Calendar
             }
         }
 
-        private ViewModel _selectedItem;
-        public ViewModel SelectedItem
+        private IAppointmentViewModel _selectedItem;
+        public IAppointmentViewModel SelectedItem
         {
             get
             {
@@ -178,7 +178,7 @@ namespace Kistl.Client.Presentables.Calendar
             }
         }
 
-        private IEnumerable<CalendarItemViewModel> FindCalendarItemViewModel(ViewModel mdl)
+        private IEnumerable<CalendarItemViewModel> FindCalendarItemViewModel(IAppointmentViewModel mdl)
         {
             if (mdl == null) return null;
             return DayItems.SelectMany(i => i.CalendarItems.Where(c => c.ObjectViewModel == mdl));
@@ -217,27 +217,36 @@ namespace Kistl.Client.Presentables.Calendar
 
             foreach (var a in _allAppointments)
             {
-                a.Changed += appointment_Changed;
-                if (a.From <= a.Until)
-                {
-                    for (var current = a.From; current < a.Until; current = current.Date.AddDays(1))
-                    {
-                        var vmdl = ViewModelFactory.CreateViewModel<CalendarItemViewModel.Factory>()
-                        .Invoke(
-                            DataContext,
-                            this,
-                            a);
-                        vmdl.From = current == a.From ? current : current.Date;
-                        vmdl.Until = current.Date == a.Until.Date ? a.Until : current.Date.AddDays(1);
+                var items = CreateCalendarItemViewModel(a);
+                if (items != null && items.Count > 0) _allItems.AddRange(items);
+            }
+        }
 
-                        vmdl.IsAllDay = vmdl.From.TimeOfDay == TimeSpan.Zero && vmdl.Until.TimeOfDay == TimeSpan.Zero;
-                        _allItems.Add(vmdl);
-                    }
-                }
-                else
+        private List<CalendarItemViewModel> CreateCalendarItemViewModel(IAppointmentViewModel a)
+        {
+            a.Changed += appointment_Changed;
+            if (a.From <= a.Until)
+            {
+                List<CalendarItemViewModel> result = new List<CalendarItemViewModel>();
+                for (var current = a.From; current < a.Until; current = current.Date.AddDays(1))
                 {
-                    Logging.Client.WarnFormat("Appointment item {0} has an invalid time range of {1} - {2}", a.Subject, a.From, a.Until);
+                    var vmdl = ViewModelFactory.CreateViewModel<CalendarItemViewModel.Factory>()
+                    .Invoke(
+                        DataContext,
+                        this,
+                        a);
+                    vmdl.From = current == a.From ? current : current.Date;
+                    vmdl.Until = current.Date == a.Until.Date ? a.Until : current.Date.AddDays(1);
+
+                    vmdl.IsAllDay = vmdl.From.TimeOfDay == TimeSpan.Zero && vmdl.Until.TimeOfDay == TimeSpan.Zero;
+                    result.Add( vmdl);
                 }
+                return result;
+            }
+            else
+            {
+                Logging.Client.WarnFormat("Appointment item {0} has an invalid time range of {1} - {2}", a.Subject, a.From, a.Until);
+                return null;
             }
         }
 
@@ -252,16 +261,20 @@ namespace Kistl.Client.Presentables.Calendar
             var result = new NewItemCreatingEventArgs();
             OnNewItemCreating(dt, result);
 
-            if (result.CalendarViewModel == null || result.ObjectViewModel == null)
+            if (result.AppointmentViewModel == null)
             {
                 // Abort
                 return;
             }
 
             if (_allItems == null) LoadItemsInternal();
-            _allItems.Add(result.CalendarViewModel);
-            UpdateItems();
-            SelectedItem = result.ObjectViewModel;
+            var items = CreateCalendarItemViewModel(result.AppointmentViewModel);
+            if (items != null && items.Count > 0)
+            {
+                _allItems.AddRange(items);
+                UpdateItems();
+                SelectedItem = result.AppointmentViewModel;
+            }
         }
 
         /// <summary>
@@ -283,8 +296,7 @@ namespace Kistl.Client.Presentables.Calendar
 
     public class NewItemCreatingEventArgs : EventArgs
     {
-        public DataObjectViewModel ObjectViewModel;
-        public CalendarItemViewModel CalendarViewModel;
+        public IAppointmentViewModel AppointmentViewModel;
     }
 
     public delegate void NewItemCreatingEventHandler(DateTime dt, NewItemCreatingEventArgs e);
