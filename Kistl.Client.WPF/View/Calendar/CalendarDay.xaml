@@ -51,7 +51,7 @@
         </ItemsControl.ItemTemplate>
       </ItemsControl>
 
-      <ItemsControl ItemsSource="{Binding CalendarItems}">
+      <ItemsControl ItemsSource="{Binding DayItems}">
         <ItemsControl.ItemsPanel>
           <ItemsPanelTemplate>
             <Canvas IsItemsHost="True"

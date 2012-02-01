@@ -84,13 +84,33 @@ namespace Kistl.Client.Presentables.Calendar
 
                 CalcOverlapping();
                 OnPropertyChanged("CalendarItems");
+                OnPropertyChanged("DayItems");
+                OnPropertyChanged("AllDayItems");
+            }
+        }
+
+        public IEnumerable<CalendarItemViewModel> DayItems
+        {
+            get
+            {
+                if (_CalendarItems == null) return null;
+                return _CalendarItems.Where(i => i.IsAllDay == false);
+            }
+        }
+
+        public IEnumerable<CalendarItemViewModel> AllDayItems
+        {
+            get
+            {
+                if (_CalendarItems == null) return null;
+                return _CalendarItems.Where(i => i.IsAllDay == true);
             }
         }
 
         public void CalcOverlapping()
         {
             var overlappingChain = new List<CalendarItemViewModel>();
-            foreach (var item in _CalendarItems.OrderBy(i => i.From))
+            foreach (var item in DayItems.OrderBy(i => i.From))
             {
                 if (overlappingChain.Count > 0)
                 {

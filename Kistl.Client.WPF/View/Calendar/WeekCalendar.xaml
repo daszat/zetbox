@@ -38,6 +38,7 @@
         <Grid.RowDefinitions>
           <RowDefinition Height="38" />
           <RowDefinition Height="22" />
+          <RowDefinition Height="48" />
           <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -76,6 +77,7 @@
                 BorderThickness="0,0,1,1"
                 Grid.Column="0"
                 Grid.Row="1" />
+        <!-- Header -->
         <local:CalendarDayHeader Grid.Column="1"
                                  Grid.Row="1"
                                  DataContext="{Binding DayItems[0]}" />
@@ -97,8 +99,32 @@
         <local:CalendarDayHeader Grid.Column="7"
                                  Grid.Row="1"
                                  DataContext="{Binding DayItems[6]}" />
+
+        <!-- All Day -->
+        <local:CalendarAllDay Grid.Column="1"
+                              Grid.Row="2"
+                              DataContext="{Binding DayItems[0]}" />
+        <local:CalendarAllDay Grid.Column="2"
+                              Grid.Row="2"
+                              DataContext="{Binding DayItems[1]}" />
+        <local:CalendarAllDay Grid.Column="3"
+                              Grid.Row="2"
+                              DataContext="{Binding DayItems[2]}" />
+        <local:CalendarAllDay Grid.Column="4"
+                              Grid.Row="2"
+                              DataContext="{Binding DayItems[3]}" />
+        <local:CalendarAllDay Grid.Column="5"
+                              Grid.Row="2"
+                              DataContext="{Binding DayItems[4]}" />
+        <local:CalendarAllDay Grid.Column="6"
+                              Grid.Row="2"
+                              DataContext="{Binding DayItems[5]}" />
+        <local:CalendarAllDay Grid.Column="7"
+                              Grid.Row="2"
+                              DataContext="{Binding DayItems[6]}" />
+        <!-- Day Items -->
         <ScrollViewer x:Name="scrollDayEntries"
-                      Grid.Row="2"
+                      Grid.Row="3"
                       Grid.Column="0"
                       Grid.ColumnSpan="8">
           <Grid>
