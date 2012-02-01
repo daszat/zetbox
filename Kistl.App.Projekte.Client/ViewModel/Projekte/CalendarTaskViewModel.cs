@@ -36,18 +36,49 @@ namespace Kistl.App.Projekte.Client.ViewModel.Projekte
             using (Logging.Client.InfoTraceMethodCall("CalendarTaskViewModel.GetData()"))
             {
                 var result = new List<IAppointmentViewModel>();
-                result.AddRange(DataContext
-                    .GetQuery<Task>()
-                    .Where(t => (t.DatumVon >= from && t.DatumVon <= to) || (t.DatumBis >= from && t.DatumBis <= to) || (t.DatumVon <= from && t.DatumBis >= to))
-                    .ToList()
-                    .Select(t =>
+                FetchTasks(from, to, result);
+                FetchOffDays(from, to, result);
+                return result;
+            }
+        }
+
+        private void FetchTasks(DateTime from, DateTime to, List<IAppointmentViewModel> result)
+        {
+            result.AddRange(DataContext
+                .GetQuery<Task>()
+                .Where(t => (t.DatumVon >= from && t.DatumVon <= to) || (t.DatumBis >= from && t.DatumBis <= to) || (t.DatumVon <= from && t.DatumBis >= to))
+                .ToList()
+                .Select(t =>
+                {
+                    var vmdl = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this, t);
+                    // vmdl.RequestedKind = muhblah;
+                    return vmdl;
+                })
+                .Cast<IAppointmentViewModel>());
+        }
+
+        private void FetchOffDays(DateTime from, DateTime to, List<IAppointmentViewModel> result)
+        {
+            var rules = DataContext.GetQuery<Kistl.App.Calendar.YearlyCalendarRule>().Where(r => r.IsWorkingDay == false)
+                .ToList();
+            var dt = from;
+            while (dt <= to)
+            {
+                var localDt = dt;
+                result.AddRange(
+                    rules.Where(r => r.AppliesTo(dt))
+                    .Select(r =>
                     {
-                        var vmdl = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this, t);
-                        // vmdl.RequestedKind = muhblah;
-                        return vmdl;
+                        return ViewModelFactory.CreateViewModel<CalendarRuleInstanceViewModel.Factory>()
+                        .Invoke(
+                            DataContext,
+                            this,
+                            r,
+                            localDt);
                     })
-                    .Cast<IAppointmentViewModel>());
-                return result.ToList();
+                    .Cast<IAppointmentViewModel>()
+                );
+                dt = dt.AddDays(1);
             }
         }
         #endregion

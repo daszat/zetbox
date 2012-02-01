@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2012-02-01T11:23:47Z" xmlns="http://dasz.at/Kistl">
+<KistlPackaging xmlns:KistlBase="Kistl.App.Base" xmlns:GUI="Kistl.App.GUI" date="2012-02-01T15:55:49Z" xmlns="http://dasz.at/Kistl">
   <KistlBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <KistlBase:ChangedOn>2011-08-05T10:30:47.603232Z</KistlBase:ChangedOn>
     <KistlBase:CreatedOn>2011-06-15T14:03:02Z</KistlBase:CreatedOn>
@@ -1203,21 +1203,42 @@
     <KistlBase:Property>09cfc4e1-c106-46ec-825d-31226d8df335</KistlBase:Property>
     <KistlBase:BoolValue>false</KistlBase:BoolValue>
   </KistlBase:BoolDefaultValue>
+  <GUI:ViewModelDescriptor ExportGuid="bf9a6bc5-5f8d-4658-b033-cf571b4d503f">
+    <GUI:DefaultEditorKind>f9fc5f32-8dbd-4c86-8e94-2794336da0ac</GUI:DefaultEditorKind>
+    <GUI:Description>ViewModel for calendar rule instances, not representing the CalendarRule data object directly</GUI:Description>
+    <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
+    <GUI:ViewModelRef>bb7be5ef-4524-40ce-9bc0-999cde72ef36</GUI:ViewModelRef>
+  </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="7fbcbbdf-1821-47dc-9332-c0ae4f6a70a1">
     <GUI:DefaultEditorKind>df5134d6-18f1-43b9-96d3-9283bc2b09a8</GUI:DefaultEditorKind>
     <GUI:Description>ViewModel for Week Calendar Display</GUI:Description>
     <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
     <GUI:ViewModelRef>7e99f729-2330-4837-b355-6fe1a853be37</GUI:ViewModelRef>
   </GUI:ViewModelDescriptor>
+  <GUI:ViewDescriptor ExportGuid="4cfc8a24-f512-4f19-82fd-76641535abf5">
+    <GUI:ControlKind>f9fc5f32-8dbd-4c86-8e94-2794336da0ac</GUI:ControlKind>
+    <GUI:ControlRef>7bd0d3fa-be58-42e5-bdb3-c038be73a345</GUI:ControlRef>
+    <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
+    <GUI:Toolkit>0</GUI:Toolkit>
+  </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="cc2521f1-6368-4cc8-94f1-eb9e7080211b">
     <GUI:ControlKind>df5134d6-18f1-43b9-96d3-9283bc2b09a8</GUI:ControlKind>
     <GUI:ControlRef>ff78973f-bb78-47fd-ad8b-da3f1f06d77e</GUI:ControlRef>
     <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
+  <GUI:ControlKind ExportGuid="56e67178-a705-4f06-b50f-db2f4fb6b065">
+    <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
+    <GUI:Name>Kistl.App.Calendar.CalendarSummary</GUI:Name>
+  </GUI:ControlKind>
   <GUI:ControlKind ExportGuid="df5134d6-18f1-43b9-96d3-9283bc2b09a8">
     <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
-    <GUI:Name>Kistl.App.GUI.WeekCalendarDisplay</GUI:Name>
+    <GUI:Name>Kistl.App.Calendar.WeekCalendarDisplay</GUI:Name>
+  </GUI:ControlKind>
+  <GUI:ControlKind ExportGuid="f9fc5f32-8dbd-4c86-8e94-2794336da0ac">
+    <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
+    <GUI:Name>Kistl.App.Calendar.CalendarRuleInstanceDisplay</GUI:Name>
+    <GUI:Parent>56e67178-a705-4f06-b50f-db2f4fb6b065</GUI:Parent>
   </GUI:ControlKind>
   <KistlBase:Module ExportGuid="21dcfc7c-ab5c-4d04-8a41-9759b23907f9">
     <KistlBase:ChangedOn>2011-08-05T10:30:47.648235Z</KistlBase:ChangedOn>

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Kistl.App.GUI;
 
 namespace Kistl.Client.Presentables.Calendar
 {
@@ -25,6 +26,8 @@ namespace Kistl.Client.Presentables.Calendar
         /// Color (HTML style) of the appointment. If null or empty, the item will be transperent. Use WeekCalendarViewModel.DefaultColor as a default.
         /// </summary>
         string Color { get; }
+
+        ControlKind RequestedCalendarKind { get; }
 
         event EventHandler Changed;
     }

@@ -20,6 +20,7 @@
               <Grid x:Name="panelTimeSlotItem">
                 <!-- http://stackoverflow.com/questions/3410768/why-doesnt-wpf-border-control-have-a-mousedoubleclick-event/3411419#3411419 -->
                 <Control MouseDoubleClick="timeslot_MouseDoubleClick"
+                         MouseDown="timeslot_MouseDown"
                          Opacity="0"
                          x:Name="item">
                   <Control.Template>

@@ -7,6 +7,7 @@ namespace Kistl.App.Projekte.Client.ViewModel.Projekte
     using Kistl.Client.Presentables;
     using Kistl.API;
     using Kistl.Client.Presentables.Calendar;
+    using Kistl.App.GUI;
 
     [ViewModelDescriptor]
     public class TaskViewModel : DataObjectViewModel, IAppointmentViewModel
@@ -59,6 +60,11 @@ namespace Kistl.App.Projekte.Client.ViewModel.Projekte
         string IAppointmentViewModel.Color
         {
             get { return WeekCalendarViewModel.DefaultColor; }
+        }
+
+        ControlKind IAppointmentViewModel.RequestedCalendarKind
+        {
+            get { return null; } // default
         }
 
         private EventHandler _Changed;

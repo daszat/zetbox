@@ -163,6 +163,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\Calendar\CalendarRuleInstanceDisplay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Calendar\WeekCalendar.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -580,6 +584,9 @@
       <DependentUpon>StartupScreen.xaml</DependentUpon>
     </Compile>
     <Compile Include="Styles\Simple\Module.cs" />
+    <Compile Include="View\Calendar\CalendarRuleInstanceDisplay.xaml.cs">
+      <DependentUpon>CalendarRuleInstanceDisplay.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\DocumentManagement\ImportedFileWithPreviewEditor.xaml.cs">
       <DependentUpon>ImportedFileWithPreviewEditor.xaml</DependentUpon>
     </Compile>

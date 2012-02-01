@@ -58,6 +58,11 @@ namespace Kistl.Client.WPF.View.Calendar
             }
         }
 
+        void timeslot_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            ViewModel.WeekCalendar.SelectedItem = null;
+        }
+
         private void CalendarItem_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (sender is FrameworkElement)

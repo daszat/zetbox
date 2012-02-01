@@ -3177,6 +3177,18 @@ namespace Kistl {
                 {
                     get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("f236ecd4-d9dc-4fc3-a4a9-6da8ef1a228e"); }
                 }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_Calendar_CalendarRuleInstanceDisplay
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("f9fc5f32-8dbd-4c86-8e94-2794336da0ac"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_Calendar_CalendarSummary
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("56e67178-a705-4f06-b50f-db2f4fb6b065"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_Calendar_WeekCalendarDisplay
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("df5134d6-18f1-43b9-96d3-9283bc2b09a8"); }
+                }
                 public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_AccessDeniedDataObjectKind
                 {
                     get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("62047263-be4c-4495-bd1e-a32006513537"); }
@@ -3421,10 +3433,6 @@ namespace Kistl {
                 {
                     get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("6b5093bb-3ac0-4710-b30d-d72a50b09ee8"); }
                 }
-                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_WeekCalendarDisplay
-                {
-                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("df5134d6-18f1-43b9-96d3-9283bc2b09a8"); }
-                }
                 public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_GUI_WorkspaceKind
                 {
                     get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("329837fd-1146-48b2-9f4e-79aec8958b1e"); }
@@ -3604,6 +3612,10 @@ namespace Kistl {
                 public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_CacheDebuggerViewModel
                 {
                     get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("f87858ba-688f-495d-99c0-b52ad117a4c2"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_Calendar_CalendarRuleInstanceViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("bf9a6bc5-5f8d-4658-b033-cf571b4d503f"); }
                 }
                 public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_Calendar_WeekCalendarViewModel
                 {
