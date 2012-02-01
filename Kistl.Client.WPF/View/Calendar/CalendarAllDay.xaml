@@ -23,7 +23,6 @@
                 Background="{Binding Color}"
                 Margin="{Binding Position, Converter={StaticResource SystemDrawingConverter}}"
                 Padding="3"
-                Height="32"
                 HorizontalAlignment="Stretch"
                 x:Name="item">
           <Border.Effect>
