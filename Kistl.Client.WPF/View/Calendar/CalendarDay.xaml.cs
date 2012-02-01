@@ -62,7 +62,8 @@ namespace Kistl.Client.WPF.View.Calendar
         {
             if (sender is FrameworkElement)
             {
-                ViewModel.WeekCalendar.SelectedItem = ((CalendarItemViewModel)((FrameworkElement)sender).DataContext).ObjectViewModel;
+                var fe = (FrameworkElement)sender;
+                ViewModel.WeekCalendar.SelectedItem = ((CalendarItemViewModel)fe.DataContext).ObjectViewModel as ViewModel;
             }
         }
 

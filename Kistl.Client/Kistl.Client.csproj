@@ -130,6 +130,7 @@
     </Compile>
     <Compile Include="Presentables\Calendar\CalendarItemViewModel.cs" />
     <Compile Include="Presentables\Calendar\DayCalendarViewModel.cs" />
+    <Compile Include="Presentables\Calendar\IAppointmentViewModel.cs" />
     <Compile Include="Presentables\Calendar\LedgerItemViewModel.cs" />
     <Compile Include="Presentables\Calendar\LedgerViewModel.cs" />
     <Compile Include="Presentables\Calendar\TimeSlotItemViewModel.cs" />

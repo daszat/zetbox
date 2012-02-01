@@ -45,7 +45,7 @@ namespace Kistl.Client.Presentables.Calendar
         {
             get
             {
-                return Day.ToShortDateString();
+                return string.Format("{0}, {1}", Day.ToString("ddd"), Day.ToShortDateString());
             }
         }
 
@@ -94,7 +94,7 @@ namespace Kistl.Client.Presentables.Calendar
             {
                 if (overlappingChain.Count > 0)
                 {
-                    var last = overlappingChain.Max(i => i.To);
+                    var last = overlappingChain.Max(i => i.Until);
                     if (item.From < last)
                     {
                         // is overlapping, continue
@@ -126,8 +126,8 @@ namespace Kistl.Client.Presentables.Calendar
                 foreach (var ovItem in overlappingChain
                     .SelectMany(i => new[]
                         {
-                            new { Item = i, Time = i.From, Start = true , Duration = (i.To - i.From).TotalHours },
-                            new { Item = i, Time = i.To,   Start = false, Duration = (i.To - i.From).TotalHours },
+                            new { Item = i, Time = i.From, Start = true , Duration = (i.Until - i.From).TotalHours },
+                            new { Item = i, Time = i.Until,   Start = false, Duration = (i.Until - i.From).TotalHours },
                         })
                     .OrderBy(i => i.Time)
                     .ThenBy(i => i.Item.From)
@@ -142,7 +142,7 @@ namespace Kistl.Client.Presentables.Calendar
                             if (slots[i] == null)
                             {
                                 slots[i] = ovItem.Item;
-                                openSince[i] = ovItem.Item.To;
+                                openSince[i] = ovItem.Item.Until;
                                 break;
                             }
                         }
@@ -150,7 +150,7 @@ namespace Kistl.Client.Presentables.Calendar
                         if (i == slots.Count)
                         {
                             slots.Add(ovItem.Item);
-                            openSince.Add(ovItem.Item.To);
+                            openSince.Add(ovItem.Item.Until);
                         }
                     }
                     else

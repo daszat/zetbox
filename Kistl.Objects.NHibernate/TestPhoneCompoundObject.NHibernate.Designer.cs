@@ -190,6 +190,7 @@ public bool CompoundObject_IsNull { get; set; }
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
+            // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             BinarySerializer.ToStream(this._AreaCode, binStream);
             BinarySerializer.ToStream(this._Number, binStream);
@@ -199,6 +200,7 @@ public bool CompoundObject_IsNull { get; set; }
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
+            // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             BinarySerializer.FromStream(out this._AreaCode, binStream);
             BinarySerializer.FromStream(out this._Number, binStream);
@@ -213,6 +215,7 @@ public bool CompoundObject_IsNull { get; set; }
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
+            // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.ToStream(this._AreaCode, xml, "AreaCode", "Kistl.App.Test");
             XmlStreamer.ToStream(this._Number, xml, "Number", "Kistl.App.Test");
@@ -222,6 +225,7 @@ public bool CompoundObject_IsNull { get; set; }
         {
             var baseResult = base.FromStream(xml);
             var result = new List<IPersistenceObject>();
+            // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             XmlStreamer.FromStream(ref this._AreaCode, xml, "AreaCode", "Kistl.App.Test");
             XmlStreamer.FromStream(ref this._Number, xml, "Number", "Kistl.App.Test");

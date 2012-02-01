@@ -444,6 +444,7 @@ namespace ZBox.App.SchemaMigration
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
+            // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             BinarySerializer.ToStream(this._Destination, binStream);
             BinarySerializer.ToStream(this._DestinationRows, binStream);
@@ -456,6 +457,7 @@ namespace ZBox.App.SchemaMigration
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
+            // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             BinarySerializer.FromStream(out this._Destination, binStream);
             BinarySerializer.FromStream(out this._DestinationRows, binStream);
@@ -473,6 +475,7 @@ namespace ZBox.App.SchemaMigration
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
+            // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.ToStream(this._Destination, xml, "Destination", "ZBox.App.SchemaMigration");
             XmlStreamer.ToStream(this._DestinationRows, xml, "DestinationRows", "ZBox.App.SchemaMigration");
@@ -485,6 +488,7 @@ namespace ZBox.App.SchemaMigration
         {
             var baseResult = base.FromStream(xml);
             var result = new List<IPersistenceObject>();
+            // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             XmlStreamer.FromStream(ref this._Destination, xml, "Destination", "ZBox.App.SchemaMigration");
             XmlStreamer.FromStream(ref this._DestinationRows, xml, "DestinationRows", "ZBox.App.SchemaMigration");

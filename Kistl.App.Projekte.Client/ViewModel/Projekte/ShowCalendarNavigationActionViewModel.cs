@@ -14,10 +14,13 @@ namespace Kistl.App.Projekte.Client.ViewModel.Projekte
     {
         public new delegate ShowCalendarNavigationActionViewModel Factory(IKistlContext dataCtx, ViewModel parent, NavigationAction screen);
 
-        public ShowCalendarNavigationActionViewModel(IViewModelDependencies appCtx,
+        private readonly Func<IKistlContext> _ctxFactory;
+
+        public ShowCalendarNavigationActionViewModel(IViewModelDependencies appCtx, Func<IKistlContext> ctxFactory,
             IKistlContext dataCtx, ViewModel parent, NavigationAction screen)
             : base(appCtx, dataCtx, parent, screen)
         {
+            _ctxFactory = ctxFactory;
         }
 
         public override bool CanExecute()
@@ -27,7 +30,7 @@ namespace Kistl.App.Projekte.Client.ViewModel.Projekte
 
         public override void Execute()
         {
-            ViewModelFactory.ShowMessage("Opening calendar", "Hello World");
+            ViewModelFactory.ShowModel(ViewModelFactory.CreateViewModel<CalendarWorkspaceViewModel.Factory>().Invoke(_ctxFactory(), null), true);
         }
     }
 }

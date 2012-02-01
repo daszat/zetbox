@@ -285,6 +285,7 @@ namespace Kistl.App.Calendar
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
+            // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             BinarySerializer.ToStream(this._Day, binStream);
             BinarySerializer.ToStream(this._Month, binStream);
@@ -294,6 +295,7 @@ namespace Kistl.App.Calendar
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
+            // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             BinarySerializer.FromStream(out this._Day, binStream);
             BinarySerializer.FromStream(out this._Month, binStream);
@@ -308,6 +310,7 @@ namespace Kistl.App.Calendar
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
+            // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.ToStream(this._Day, xml, "Day", "Kistl.App.Calendar");
             XmlStreamer.ToStream(this._Month, xml, "Month", "Kistl.App.Calendar");
@@ -317,6 +320,7 @@ namespace Kistl.App.Calendar
         {
             var baseResult = base.FromStream(xml);
             var result = new List<IPersistenceObject>();
+            // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             XmlStreamer.FromStream(ref this._Day, xml, "Day", "Kistl.App.Calendar");
             XmlStreamer.FromStream(ref this._Month, xml, "Month", "Kistl.App.Calendar");
@@ -331,6 +335,7 @@ namespace Kistl.App.Calendar
         public override void Export(System.Xml.XmlWriter xml, string[] modules)
         {
             base.Export(xml, modules);
+            // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             if (modules.Contains("*") || modules.Contains("Kistl.App.Calendar")) XmlStreamer.ToStream(this._Day, xml, "Day", "Kistl.App.Calendar");
             if (modules.Contains("*") || modules.Contains("Kistl.App.Calendar")) XmlStreamer.ToStream(this._Month, xml, "Month", "Kistl.App.Calendar");
@@ -339,6 +344,7 @@ namespace Kistl.App.Calendar
         public override void MergeImport(System.Xml.XmlReader xml)
         {
             base.MergeImport(xml);
+            // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.FromStream(ref this._Day, xml, "Day", "Kistl.App.Calendar");
             XmlStreamer.FromStream(ref this._Month, xml, "Month", "Kistl.App.Calendar");

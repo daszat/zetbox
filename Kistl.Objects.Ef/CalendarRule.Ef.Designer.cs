@@ -1238,6 +1238,7 @@ namespace Kistl.App.Calendar
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
+            // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Calendar.CalendarEfImpl>("Model.FK_Calendar_has_CalendarRules", "Calendar").EntityKey;
@@ -1281,6 +1282,7 @@ namespace Kistl.App.Calendar
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
+            // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             BinarySerializer.FromStream(out this._fk_Calendar, binStream);
             BinarySerializer.FromStream(out this._fk_ChangedBy, binStream);
@@ -1317,6 +1319,7 @@ namespace Kistl.App.Calendar
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
+            // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             {
                 var key = this.RelationshipManager.GetRelatedReference<Kistl.App.Calendar.CalendarEfImpl>("Model.FK_Calendar_has_CalendarRules", "Calendar").EntityKey;
@@ -1360,6 +1363,7 @@ namespace Kistl.App.Calendar
         {
             var baseResult = base.FromStream(xml);
             var result = new List<IPersistenceObject>();
+            // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             XmlStreamer.FromStream(ref this._fk_Calendar, xml, "Calendar", "Kistl.App.Calendar");
             XmlStreamer.FromStream(ref this._fk_ChangedBy, xml, "ChangedBy", "Kistl.App.Calendar");
@@ -1396,6 +1400,7 @@ namespace Kistl.App.Calendar
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
         {
             xml.WriteAttributeString("ExportGuid", this._ExportGuid.ToString());
+            // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             if (modules.Contains("*") || modules.Contains("Kistl.App.Calendar")) XmlStreamer.ToStream(Calendar != null ? Calendar.ExportGuid : (Guid?)null, xml, "Calendar", "Kistl.App.Calendar");
             System.Diagnostics.Debug.Assert(this._isChangedOnSet, "Exported objects need to have all default values evaluated");
@@ -1413,6 +1418,7 @@ namespace Kistl.App.Calendar
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
+            // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.FromStream(ref this._fk_guid_Calendar, xml, "Calendar", "Kistl.App.Calendar");
             // Import must have default value set

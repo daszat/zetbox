@@ -1064,6 +1064,7 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
+            // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             BinarySerializer.ToStream(BaseCalendar != null ? BaseCalendar.ID : (int?)null, binStream);
             BinarySerializer.ToStream(ChangedBy != null ? ChangedBy.ID : (int?)null, binStream);
@@ -1088,6 +1089,7 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
+            // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             BinarySerializer.FromStream(out this._fk_BaseCalendar, binStream);
             BinarySerializer.FromStream(out this._fk_ChangedBy, binStream);
@@ -1117,6 +1119,7 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
+            // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.ToStream(BaseCalendar != null ? BaseCalendar.ID : (int?)null, xml, "BaseCalendar", "Kistl.App.Calendar");
             XmlStreamer.ToStream(ChangedBy != null ? ChangedBy.ID : (int?)null, xml, "ChangedBy", "Kistl.App.Calendar");
@@ -1141,6 +1144,7 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
         {
             var baseResult = base.FromStream(xml);
             var result = new List<IPersistenceObject>();
+            // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             XmlStreamer.FromStream(ref this._fk_BaseCalendar, xml, "BaseCalendar", "Kistl.App.Calendar");
             XmlStreamer.FromStream(ref this._fk_ChangedBy, xml, "ChangedBy", "Kistl.App.Calendar");
@@ -1170,6 +1174,7 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
         {
             xml.WriteAttributeString("ExportGuid", this._ExportGuid.ToString());
+            // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             if (modules.Contains("*") || modules.Contains("Kistl.App.Calendar")) XmlStreamer.ToStream(BaseCalendar != null ? BaseCalendar.ExportGuid : (Guid?)null, xml, "BaseCalendar", "Kistl.App.Calendar");
             System.Diagnostics.Debug.Assert(this._isChangedOnSet, "Exported objects need to have all default values evaluated");
@@ -1182,6 +1187,7 @@ public static event PropertyListChangedHandler<Kistl.App.Calendar.Calendar> OnCh
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
+            // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.FromStream(ref this._fk_guid_BaseCalendar, xml, "BaseCalendar", "Kistl.App.Calendar");
             // Import must have default value set

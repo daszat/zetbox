@@ -1276,6 +1276,7 @@ namespace Kistl.App.GUI
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
+            // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             BinarySerializer.ToStream(this.Proxy.DefaultDisplayKind != null ? OurContext.GetIdFromProxy(this.Proxy.DefaultDisplayKind) : (int?)null, binStream);
             BinarySerializer.ToStream(this.Proxy.DefaultEditorKind != null ? OurContext.GetIdFromProxy(this.Proxy.DefaultEditorKind) : (int?)null, binStream);
@@ -1295,6 +1296,7 @@ namespace Kistl.App.GUI
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
+            // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             BinarySerializer.FromStream(out this._fk_DefaultDisplayKind, binStream);
             BinarySerializer.FromStream(out this._fk_DefaultEditorKind, binStream);
@@ -1325,6 +1327,7 @@ namespace Kistl.App.GUI
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
+            // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.ToStream(this.Proxy.DefaultDisplayKind != null ? OurContext.GetIdFromProxy(this.Proxy.DefaultDisplayKind) : (int?)null, xml, "DefaultDisplayKind", "Kistl.App.GUI");
             XmlStreamer.ToStream(this.Proxy.DefaultEditorKind != null ? OurContext.GetIdFromProxy(this.Proxy.DefaultEditorKind) : (int?)null, xml, "DefaultEditorKind", "Kistl.App.GUI");
@@ -1344,6 +1347,7 @@ namespace Kistl.App.GUI
         {
             var baseResult = base.FromStream(xml);
             var result = new List<IPersistenceObject>();
+            // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             XmlStreamer.FromStream(ref this._fk_DefaultDisplayKind, xml, "DefaultDisplayKind", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_DefaultEditorKind, xml, "DefaultEditorKind", "Kistl.App.GUI");
@@ -1376,6 +1380,7 @@ namespace Kistl.App.GUI
         public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
         {
             xml.WriteAttributeString("ExportGuid", this.Proxy.ExportGuid.ToString());
+            // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.DefaultDisplayKind != null ? this.Proxy.DefaultDisplayKind.ExportGuid : (Guid?)null, xml, "DefaultDisplayKind", "Kistl.App.GUI");
             if (modules.Contains("*") || modules.Contains("Kistl.App.GUI")) XmlStreamer.ToStream(this.Proxy.DefaultEditorKind != null ? this.Proxy.DefaultEditorKind.ExportGuid : (Guid?)null, xml, "DefaultEditorKind", "Kistl.App.GUI");
@@ -1389,6 +1394,7 @@ namespace Kistl.App.GUI
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
         {
+            // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.FromStream(ref this._fk_guid_DefaultDisplayKind, xml, "DefaultDisplayKind", "Kistl.App.GUI");
             XmlStreamer.FromStream(ref this._fk_guid_DefaultEditorKind, xml, "DefaultEditorKind", "Kistl.App.GUI");

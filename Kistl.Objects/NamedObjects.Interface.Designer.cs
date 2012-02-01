@@ -3581,9 +3581,21 @@ namespace Kistl {
             }
             public static class ViewModelDescriptors
             {
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_App_Projekte_Client_ViewModel_Projekte_CalendarTaskViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("b8952a09-fd76-4bd8-a714-7d676ab89126"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_App_Projekte_Client_ViewModel_Projekte_CalendarWorkspaceViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("5c674594-0416-4d5f-9d9f-1388a8df629a"); }
+                }
                 public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_App_Projekte_Client_ViewModel_Projekte_ShowCalendarNavigationActionViewModel
                 {
                     get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("ec83ad5c-a62a-4407-81d4-6f6ab15ef633"); }
+                }
+                public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_App_Projekte_Client_ViewModel_Projekte_TaskViewModel
+                {
+                    get { return new TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor>("4d307461-610a-4403-92b9-bb686dacf276"); }
                 }
                 public static TypedGuid<global::Kistl.App.GUI.ViewModelDescriptor> Kistl_Client_Presentables_ActionViewModel
                 {

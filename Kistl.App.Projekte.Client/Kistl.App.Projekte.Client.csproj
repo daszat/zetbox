@@ -120,7 +120,10 @@
     <Compile Include="KistlBase\ObjectClassActions.cs" />
     <Compile Include="KistlBase\RelationActions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\Projekte\CalendarTaskViewModel.cs" />
     <Compile Include="ViewModel\Projekte\ShowCalendarNavigationActionViewModel.cs" />
+    <Compile Include="ViewModel\Projekte\CalendarWorkspaceViewModel.cs" />
+    <Compile Include="ViewModel\Projekte\TaskViewModel.cs" />
     <None Include="Properties\VersionInfo.cs" />
     <Compile Include="Properties\VersionInfo.Designer.cs">
       <DependentUpon>VersionInfo.cs</DependentUpon>

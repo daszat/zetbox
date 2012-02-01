@@ -797,6 +797,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
         public override void ToStream(System.IO.BinaryWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
         {
             base.ToStream(binStream, auxObjects, eagerLoadLists);
+            // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             BinarySerializer.ToStream(this.Proxy.TestBool, binStream);
             BinarySerializer.ToStream(this.Proxy.TestCustomObjects_Nav != null ? OurContext.GetIdFromProxy(this.Proxy.TestCustomObjects_Nav) : (int?)null, binStream);
@@ -810,6 +811,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
         {
             var baseResult = base.FromStream(binStream);
             var result = new List<IPersistenceObject>();
+            // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             {
                 bool? tmp;
@@ -844,6 +846,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
         public override void ToStream(System.Xml.XmlWriter xml)
         {
             base.ToStream(xml);
+            // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             XmlStreamer.ToStream(this.Proxy.TestBool, xml, "TestBool", "Kistl.App.Test");
             XmlStreamer.ToStream(this.Proxy.TestCustomObjects_Nav != null ? OurContext.GetIdFromProxy(this.Proxy.TestCustomObjects_Nav) : (int?)null, xml, "TestCustomObjects_Nav", "Kistl.App.Test");
@@ -857,6 +860,7 @@ public static event PropertyListChangedHandler<Kistl.App.Test.Muhblah> OnTestCus
         {
             var baseResult = base.FromStream(xml);
             var result = new List<IPersistenceObject>();
+            // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Kistl.API.AccessRights.None) {
             {
                 // yuck

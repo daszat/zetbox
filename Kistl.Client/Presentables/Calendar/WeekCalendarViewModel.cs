@@ -7,13 +7,14 @@ namespace Kistl.Client.Presentables.Calendar
     using System.Windows.Media;
     using Kistl.API;
     using Kistl.Client.Presentables;
+    using Kistl.API.Utils;
 
     [ViewModelDescriptor]
     public class WeekCalendarViewModel : Kistl.Client.Presentables.ViewModel
     {
-        public new delegate WeekCalendarViewModel Factory(IKistlContext dataCtx, ViewModel parent, Func<DateTime, DateTime, IEnumerable<CalendarItemViewModel>> source);
+        public new delegate WeekCalendarViewModel Factory(IKistlContext dataCtx, ViewModel parent, Func<DateTime, DateTime, IEnumerable<IAppointmentViewModel>> source);
 
-        public WeekCalendarViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, Func<DateTime, DateTime, IEnumerable<CalendarItemViewModel>> source)
+        public WeekCalendarViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, Func<DateTime, DateTime, IEnumerable<IAppointmentViewModel>> source)
             : base(dependencies, dataCtx, parent)
         {
             this._Source = source;
@@ -81,7 +82,12 @@ namespace Kistl.Client.Presentables.Calendar
             {
                 if (_RefreshCommand == null)
                 {
-                    _RefreshCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Aktualisieren", "Die angezeigten Daten neu laden", LoadItems, null, null);
+                    _RefreshCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this,
+                        "Aktualisieren",
+                        "Die angezeigten Daten neu laden",
+                        LoadItems,
+                        null,
+                        null);
                 }
                 return _RefreshCommand;
             }
@@ -138,7 +144,16 @@ namespace Kistl.Client.Presentables.Calendar
             get { return "Wochenkalender"; }
         }
 
-        private Func<DateTime, DateTime, IEnumerable<CalendarItemViewModel>> _Source = null;
+        private Func<DateTime, DateTime, IEnumerable<IAppointmentViewModel>> _Source = null;
+        public Func<DateTime, DateTime, IEnumerable<IAppointmentViewModel>> Source
+        {
+            get { return _Source; }
+            set
+            {
+                _Source = value;
+                LoadItems();
+            }
+        }
 
         private ViewModel _selectedItem;
         public ViewModel SelectedItem
@@ -156,7 +171,7 @@ namespace Kistl.Client.Presentables.Calendar
 
                     _selectedItem = value;
                     vivm = FindCalendarItemViewModel(_selectedItem);
-                    if(vivm != null) vivm.IsSelected = true;
+                    if (vivm != null) vivm.IsSelected = true;
 
                     OnPropertyChanged("SelectedItem");
                 }
@@ -186,9 +201,49 @@ namespace Kistl.Client.Presentables.Calendar
         }
 
         private List<CalendarItemViewModel> _allItems;
+        private List<IAppointmentViewModel> _allAppointments;
         private void LoadItemsInternal()
         {
-            _allItems = _Source(From, To).ToList();
+            if(_allAppointments != null)
+            {
+                foreach (var a in _allAppointments)
+                {
+                    a.Changed -= appointment_Changed;
+                }
+            }
+
+            _allAppointments = _Source(From, To).ToList();
+            _allItems = new List<CalendarItemViewModel>();
+
+            foreach (var a in _allAppointments)
+            {
+                a.Changed += appointment_Changed;
+                if (a.From <= a.Until)
+                {
+                    for (var current = a.From; current < a.Until; current = current.Date.AddDays(1))
+                    {
+                        var vmdl = ViewModelFactory.CreateViewModel<CalendarItemViewModel.Factory>()
+                        .Invoke(
+                            DataContext,
+                            this,
+                            a);
+                        vmdl.From = current == a.From ? current : current.Date;
+                        vmdl.Until = current.Date == a.Until.Date ? a.Until : current.Date.AddDays(1);
+
+                        vmdl.IsAllDay = vmdl.From.TimeOfDay == TimeSpan.Zero && vmdl.Until.TimeOfDay == TimeSpan.Zero;
+                        _allItems.Add(vmdl);
+                    }
+                }
+                else
+                {
+                    Logging.Client.WarnFormat("Appointment item {0} has an invalid time range of {1} - {2}", a.Subject, a.From, a.Until);
+                }
+            }
+        }
+
+        void appointment_Changed(object sender, EventArgs e)
+        {
+            UpdateItems();
         }
 
 
@@ -222,6 +277,8 @@ namespace Kistl.Client.Presentables.Calendar
                 temp(dt, e);
             }
         }
+
+        public static readonly string DefaultColor = "#F1F5E3";
     }
 
     public class NewItemCreatingEventArgs : EventArgs

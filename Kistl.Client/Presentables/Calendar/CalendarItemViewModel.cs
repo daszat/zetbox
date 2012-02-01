@@ -9,24 +9,16 @@ namespace Kistl.Client.Presentables.Calendar
 
     public class CalendarItemViewModel : Kistl.Client.Presentables.ViewModel
     {
-        public new delegate CalendarItemViewModel Factory(IKistlContext dataCtx, ViewModel parent, ViewModel obj, Action<ViewModel, CalendarItemViewModel> update);
+        public new delegate CalendarItemViewModel Factory(IKistlContext dataCtx, ViewModel parent, IAppointmentViewModel obj);
 
-        public CalendarItemViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, ViewModel obj, Action<ViewModel, CalendarItemViewModel> update)
+        public CalendarItemViewModel(IViewModelDependencies dependencies, IKistlContext dataCtx, ViewModel parent, IAppointmentViewModel obj)
             : base(dependencies, dataCtx, parent)
         {
             if (obj == null) throw new ArgumentNullException("obj");
-            if (update == null) throw new ArgumentNullException("update");
 
             this.SlotWidth = this.OverlappingWidth = 1.0;
             this.ObjectViewModel = obj;
-            this._update = update;
-
-            update(obj, this);
-
-            ObjectViewModel.PropertyChanged += obj_PropertyChanged;
         }
-
-        private Action<ViewModel, CalendarItemViewModel> _update;
 
         void parent_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
@@ -38,15 +30,6 @@ namespace Kistl.Client.Presentables.Calendar
                     OnPropertyChanged("Position");
                     break;
             }
-        }
-
-        void obj_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            _update(ObjectViewModel, this);
-            OnPropertyChanged("Width");
-            OnPropertyChanged("Height");
-            OnPropertyChanged("Position");
-            if (DayCalendar != null) DayCalendar.WeekCalendar.UpdateItems();
         }
 
         private DayCalendarViewModel _DayCalendar;
@@ -61,7 +44,7 @@ namespace Kistl.Client.Presentables.Calendar
             }
         }
 
-        public ViewModel ObjectViewModel { get; private set; }
+        public IAppointmentViewModel ObjectViewModel { get; private set; }
 
         private DateTime _From;
         public DateTime From
@@ -80,56 +63,54 @@ namespace Kistl.Client.Presentables.Calendar
             }
         }
 
-        private DateTime _To;
-        public DateTime To
+        private DateTime _until;
+        public DateTime Until
         {
             get
             {
-                return _To;
+                return _until;
             }
             set
             {
-                if (_To != value)
+                if (_until != value)
                 {
-                    _To = value;
-                    OnPropertyChanged("To");
+                    _until = value;
+                    OnPropertyChanged("Until");
                 }
             }
         }
 
+        private bool _isAllDay = false;
+        public bool IsAllDay
+        {
+            get
+            {
+                return _isAllDay;
+            }
+            set
+            {
+                if (_isAllDay != value)
+                {
+                    _isAllDay = value;
+                    OnPropertyChanged("IsAllDay");
+                }
+            }
+        }
 
-        private string _Text;
         public string Text
         {
             get
             {
-                return _Text;
-            }
-            set
-            {
-                if (_Text != value)
-                {
-                    _Text = value;
-                    OnPropertyChanged("Text");
-                }
+                return ObjectViewModel.Subject;
             }
         }
 
 
-        private string _Color;
         public string Color
         {
             get
             {
-                return _Color;
-            }
-            set
-            {
-                if (_Color != value)
-                {
-                    _Color = value;
-                    OnPropertyChanged("Color");
-                }
+                return ObjectViewModel.Color;
             }
         }
 
@@ -138,7 +119,7 @@ namespace Kistl.Client.Presentables.Calendar
         {
             get
             {
-                return string.Format("{0} - {1}", From.ToShortTimeString(), To.ToShortTimeString());
+                return string.Format("{0} - {1}", From.ToShortTimeString(), Until.ToShortTimeString());
             }
         }
 
@@ -166,7 +147,7 @@ namespace Kistl.Client.Presentables.Calendar
         {
             get
             {
-                var length = (To - From).TotalHours;
+                var length = (Until - From).TotalHours;
                 if (length < 0.5) length = 0.5; // display at least half a line
                 return (int)(length * 44.0);
             }
