@@ -166,22 +166,22 @@ namespace Kistl.Client.Presentables.Calendar
             {
                 if (_selectedItem != value)
                 {
-                    var vivm = FindCalendarItemViewModel(_selectedItem);
-                    if (vivm != null) vivm.IsSelected = false;
+                    var vivms = FindCalendarItemViewModel(_selectedItem);
+                    if (vivms != null) vivms.ForEach(i => i.IsSelected = false);
 
                     _selectedItem = value;
-                    vivm = FindCalendarItemViewModel(_selectedItem);
-                    if (vivm != null) vivm.IsSelected = true;
+                    vivms = FindCalendarItemViewModel(_selectedItem);
+                    if (vivms != null) vivms.ForEach(i => i.IsSelected = true);
 
                     OnPropertyChanged("SelectedItem");
                 }
             }
         }
 
-        private CalendarItemViewModel FindCalendarItemViewModel(ViewModel mdl)
+        private IEnumerable<CalendarItemViewModel> FindCalendarItemViewModel(ViewModel mdl)
         {
             if (mdl == null) return null;
-            return DayItems.SelectMany(i => i.CalendarItems.Where(c => c.ObjectViewModel == mdl)).FirstOrDefault();
+            return DayItems.SelectMany(i => i.CalendarItems.Where(c => c.ObjectViewModel == mdl));
         }
 
         public void UpdateItems()
