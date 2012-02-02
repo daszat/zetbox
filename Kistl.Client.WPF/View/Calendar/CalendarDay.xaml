@@ -6,7 +6,6 @@
              xmlns:local="clr-namespace:Kistl.Client.WPF.View.Calendar"
              xmlns:viewmdl="clr-namespace:Kistl.Client.Presentables.Calendar;assembly=Kistl.Client">
   <Border Background="#E3EFFF"
-          BorderBrush="#A5BFE1"
           BorderThickness="0">
     <Grid x:Name="panelCalendarDay">
       <ItemsControl ItemsSource="{Binding TimeSlotItems}">
@@ -65,14 +64,19 @@
             <Border MouseLeftButtonDown="CalendarItem_MouseLeftButtonDown"
                     BorderThickness="1,1,1,1"
                     BorderBrush="#5D8CC9"
-                    Background="{Binding Color}"
                     Margin="{Binding Position, Converter={StaticResource SystemDrawingConverter}}"
-                    Padding="3"
+                    Padding="5,3,3,3"
                     Height="{Binding Height}"
                     Width="{Binding Width}"
                     HorizontalAlignment="Stretch"
                     SnapsToDevicePixels="true"
                     x:Name="item">
+              <Border.Background>
+                <LinearGradientBrush>
+                  <GradientStop Color="{Binding Color, Converter={StaticResource LighterShadeConverter}}" Offset="0.0" />
+                  <GradientStop Color="{Binding Color}" Offset="1.0" />
+                </LinearGradientBrush>
+              </Border.Background>
               <StackPanel>
                 <TextBlock Text="{Binding Text}" FontWeight="Bold" />
                 <TextBlock Text="{Binding FromToText}" />
@@ -86,6 +90,9 @@
                         TargetName="item" />
                 <Setter Property="BorderBrush"
                         Value="Black"
+                        TargetName="item" />
+                <Setter Property="Padding"
+                        Value="3,1,1,1"
                         TargetName="item" />
               </DataTrigger>
             </DataTemplate.Triggers>

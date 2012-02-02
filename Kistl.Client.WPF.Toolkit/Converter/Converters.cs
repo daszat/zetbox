@@ -309,4 +309,46 @@ namespace Kistl.Client.WPF.Converter
             return Binding.DoNothing;
         }
     }
+
+    [ValueConversion(typeof(Color), typeof(Color))]
+    public class LighterShadeConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType,
+                            object parameter, System.Globalization.CultureInfo culture)
+        {
+            if (value == null) return Binding.DoNothing;
+            var type = value.GetType();
+            Color color;
+            float lighter;
+
+            if (!(parameter is string) || !float.TryParse((string)parameter, out lighter))
+            {
+                lighter = 0.5f;
+            }
+
+            if (type == typeof(string))
+            {
+                color = (Color)ColorConverter.ConvertFromString((string)value);
+            }
+            else if (type == typeof(Color))
+            {
+                color = (Color)value;
+            }
+            else
+            {
+                return value;
+            }
+
+            return Color.FromScRgb(color.ScA,
+                (1.0f - lighter) * color.ScR + lighter,
+                (1.0f - lighter) * color.ScG + lighter,
+                (1.0f - lighter) * color.ScB + lighter);
+        }
+
+        public object ConvertBack(object value, Type targetType,
+                            object parameter, System.Globalization.CultureInfo culture)
+        {
+            return Binding.DoNothing;
+        }
+    }
 }

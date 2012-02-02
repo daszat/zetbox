@@ -7,39 +7,51 @@
              xmlns:viewmdl="clr-namespace:Kistl.Client.Presentables.Calendar;assembly=Kistl.Client"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-  <ItemsControl ItemsSource="{Binding AllDayItems}">
-    <ItemsControl.ItemsPanel>
-      <ItemsPanelTemplate>
-        <StackPanel IsItemsHost="True"
-                    HorizontalAlignment="Stretch" />
-      </ItemsPanelTemplate>
-    </ItemsControl.ItemsPanel>
-    <ItemsControl.ItemTemplate>
-      <DataTemplate DataType="{x:Type viewmdl:CalendarItemViewModel}">
-        <Border MouseLeftButtonDown="CalendarItem_MouseLeftButtonDown"
-                BorderThickness="1,1,1,1"
-                BorderBrush="#5D8CC9"
-                Background="{Binding Color}"
-                Margin="{Binding Position, Converter={StaticResource SystemDrawingConverter}}"
-                Padding="3"
-                HorizontalAlignment="Stretch"
-                x:Name="item">
-          <StackPanel>
-            <TextBlock Text="{Binding Text}" FontWeight="Bold" />
-          </StackPanel>
-        </Border>
-        <DataTemplate.Triggers>
-          <DataTrigger Binding="{Binding IsSelected}"
-                   Value="True">
-            <Setter Property="BorderThickness"
-                    Value="3,3,3,3"
-                    TargetName="item" />
-            <Setter Property="BorderBrush"
-                    Value="Black"
-                    TargetName="item" />
-          </DataTrigger>
-        </DataTemplate.Triggers>
-      </DataTemplate>
-    </ItemsControl.ItemTemplate>
-  </ItemsControl>
+  <Border BorderBrush="#9493CF"
+          BorderThickness="0,0,1,0"
+          SnapsToDevicePixels="true">
+    <ItemsControl ItemsSource="{Binding AllDayItems}">
+      <ItemsControl.ItemsPanel>
+        <ItemsPanelTemplate>
+          <StackPanel IsItemsHost="True"
+                      HorizontalAlignment="Stretch" />
+        </ItemsPanelTemplate>
+      </ItemsControl.ItemsPanel>
+      <ItemsControl.ItemTemplate>
+        <DataTemplate DataType="{x:Type viewmdl:CalendarItemViewModel}">
+          <Border MouseLeftButtonDown="CalendarItem_MouseLeftButtonDown"
+                  BorderThickness="1,1,1,1"
+                  BorderBrush="#5D8CC9"
+                  Margin="-1, -1, 5, 0"
+                  Padding="5,3,3,3"
+                  HorizontalAlignment="Stretch"
+                  x:Name="item">
+            <Border.Background>
+              <LinearGradientBrush>
+                <GradientStop Color="{Binding Color, Converter={StaticResource LighterShadeConverter}}" Offset="-0.5" />
+                <GradientStop Color="{Binding Color}" Offset="1.0" />
+              </LinearGradientBrush>
+            </Border.Background>
+            <StackPanel>
+              <TextBlock Text="{Binding Text}" FontWeight="Bold" />
+            </StackPanel>
+          </Border>
+          <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding IsSelected}"
+                     Value="True">
+              <Setter Property="BorderThickness"
+                      Value="3,3,3,3"
+                      TargetName="item" />
+              <Setter Property="Padding"
+                      Value="3,1,1,1"
+                      TargetName="item" />
+              <Setter Property="BorderBrush"
+                      Value="Black"
+                      TargetName="item" />
+            </DataTrigger>
+          </DataTemplate.Triggers>
+        </DataTemplate>
+      </ItemsControl.ItemTemplate>
+    </ItemsControl>
+  </Border>
 </UserControl>
