@@ -68,7 +68,8 @@
         <Border BorderBrush="#6593CF"
                 BorderThickness="0,0,1,1"
                 Grid.Column="0"
-                Grid.Row="1" />
+                Grid.Row="1"
+                SnapsToDevicePixels="true" />
         <ScrollViewer x:Name="scrollDayHeaders"
                       Grid.Row="1"
                       Grid.Column="0">

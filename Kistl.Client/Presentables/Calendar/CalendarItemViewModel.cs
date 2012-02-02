@@ -139,7 +139,7 @@ namespace Kistl.Client.Presentables.Calendar
         {
             get
             {
-                return ActualWidth * OverlappingWidth;
+                return (ActualWidth * OverlappingWidth) + 1.0d; // Adjust for border width on meeting items, which should be only drawn once
             }
         }
 
@@ -162,7 +162,7 @@ namespace Kistl.Client.Presentables.Calendar
         {
             get
             {
-                return DayCalendar != null ? DayCalendar.ActualWidth - 5 : 0;
+                return DayCalendar != null ? DayCalendar.ActualWidth - 6 : 0;
             }
         }
 

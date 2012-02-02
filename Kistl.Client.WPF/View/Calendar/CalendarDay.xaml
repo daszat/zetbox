@@ -25,7 +25,8 @@
                          x:Name="item">
                   <Control.Template>
                     <ControlTemplate>
-                      <Border BorderThickness="1,1,1,1"
+                      <Border Margin="1"
+                              BorderThickness="1,1,1,1"
                               SnapsToDevicePixels="true"
                               BorderBrush="#5D8CC9"
                               Background="#10000000">
