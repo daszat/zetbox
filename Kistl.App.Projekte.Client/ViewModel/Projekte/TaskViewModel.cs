@@ -57,9 +57,11 @@ namespace Kistl.App.Projekte.Client.ViewModel.Projekte
             get { return string.Empty; }
         }
 
+        private string _color;
         string IAppointmentViewModel.Color
         {
-            get { return WeekCalendarViewModel.DefaultColor; }
+            get { return !string.IsNullOrEmpty(_color) ? _color : WeekCalendarViewModel.DefaultColor; }
+            set { _color = value; OnPropertyChanged("Color"); }
         }
 
         ControlKind IAppointmentViewModel.RequestedCalendarKind

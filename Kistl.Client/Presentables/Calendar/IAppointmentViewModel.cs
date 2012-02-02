@@ -25,7 +25,7 @@ namespace Kistl.Client.Presentables.Calendar
         /// <summary>
         /// Color (HTML style) of the appointment. If null or empty, the item will be transperent. Use WeekCalendarViewModel.DefaultColor as a default.
         /// </summary>
-        string Color { get; }
+        string Color { get; set; }
 
         ControlKind RequestedCalendarKind { get; }
 

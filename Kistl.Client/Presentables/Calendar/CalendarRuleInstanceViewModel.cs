@@ -54,9 +54,11 @@ namespace Kistl.Client.Presentables.Calendar
             get { return string.Empty; }
         }
 
+        private string _color;
         string IAppointmentViewModel.Color
         {
-            get { return "#00FF00"; }
+            get { return !string.IsNullOrEmpty(_color) ? _color : "#00FF00"; }
+            set { _color = value; OnPropertyChanged("Color"); }
         }
 
         event EventHandler IAppointmentViewModel.Changed
