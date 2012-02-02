@@ -149,6 +149,8 @@
   <Style x:Key="ImageToolbarButton"
            BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
            TargetType="{x:Type ctrls:CommandButton}">
+    <Setter Property="Margin" Value="0,0,7,0" />
+    <Setter Property="Padding" Value="0,0,5,0" />
     <Setter Property="ContentTemplate">
       <Setter.Value>
         <DataTemplate>
