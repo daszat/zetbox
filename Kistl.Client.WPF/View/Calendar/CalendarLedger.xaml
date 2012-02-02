@@ -13,6 +13,7 @@
                 <DataTemplate DataType="{x:Type viewmdl:LedgerItemViewModel}">
                     <Border Background="#E3EFFF"
                             BorderBrush="#9493CF"
+                            SnapsToDevicePixels="true"
                             BorderThickness="0,0,1,1"
                             Height="44"
                             Width="50">

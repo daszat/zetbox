@@ -127,7 +127,7 @@ namespace Kistl.Client.Presentables.Calendar
         {
             get
             {
-                return new System.Drawing.PointF((float)(OverlappingIndex * SlotWidth * ActualWidth), (float)From.TimeOfDay.TotalHours * 44.0f);
+                return new System.Drawing.PointF((float)(OverlappingIndex * SlotWidth * ActualWidth) - 1.0f, (float)From.TimeOfDay.TotalHours * 44.0f - 1.0f);
             }
         }
 
@@ -149,7 +149,7 @@ namespace Kistl.Client.Presentables.Calendar
             {
                 var length = (Until - From).TotalHours;
                 if (length < 0.5) length = 0.5; // display at least half a line
-                return (int)(length * 44.0);
+                return (int)(length * 44.0) + 1;
             }
         }
 

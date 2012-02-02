@@ -129,7 +129,7 @@
                       Grid.ColumnSpan="8">
           <Grid>
             <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="56" />
+              <ColumnDefinition Width="50" />
               <ColumnDefinition Width="*" />
               <ColumnDefinition Width="*" />
               <ColumnDefinition Width="*" />

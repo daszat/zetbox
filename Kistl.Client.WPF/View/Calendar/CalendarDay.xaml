@@ -7,14 +7,15 @@
              xmlns:viewmdl="clr-namespace:Kistl.Client.Presentables.Calendar;assembly=Kistl.Client">
   <Border Background="#E3EFFF"
           BorderBrush="#A5BFE1"
-          BorderThickness="0,0.5,0,0.5">
+          BorderThickness="0">
     <Grid x:Name="panelCalendarDay">
       <ItemsControl ItemsSource="{Binding TimeSlotItems}">
         <ItemsControl.ItemTemplate>
           <DataTemplate DataType="{x:Type viewmdl:TimeSlotItemViewModel}">
             <Border Background="{Binding Background}"
                     BorderBrush="#9493CF"
-                    BorderThickness="0,0,1,1"
+                    BorderThickness="{Binding BorderThickness, Converter={StaticResource SystemDrawingConverter}}"
+                    SnapsToDevicePixels="true"
                     Height="22"
                     HorizontalAlignment="Stretch">
               <Grid x:Name="panelTimeSlotItem">
@@ -25,8 +26,8 @@
                          x:Name="item">
                   <Control.Template>
                     <ControlTemplate>
-                      <Border CornerRadius="4,4,4,4"
-                              BorderThickness="1,1,1,1"
+                      <Border BorderThickness="1,1,1,1"
+                              SnapsToDevicePixels="true"
                               BorderBrush="#5D8CC9"
                               Background="#10000000">
                         <TextBlock Text="Neuer Termin"
@@ -62,7 +63,6 @@
         <ItemsControl.ItemTemplate>
           <DataTemplate DataType="{x:Type viewmdl:CalendarItemViewModel}">
             <Border MouseLeftButtonDown="CalendarItem_MouseLeftButtonDown"
-                    CornerRadius="4,4,4,4"
                     BorderThickness="1,1,1,1"
                     BorderBrush="#5D8CC9"
                     Background="{Binding Color}"
@@ -71,10 +71,8 @@
                     Height="{Binding Height}"
                     Width="{Binding Width}"
                     HorizontalAlignment="Stretch"
+                    SnapsToDevicePixels="true"
                     x:Name="item">
-              <Border.Effect>
-                <DropShadowEffect Opacity="0.5" />
-              </Border.Effect>
               <StackPanel>
                 <TextBlock Text="{Binding Text}" FontWeight="Bold" />
                 <TextBlock Text="{Binding FromToText}" />

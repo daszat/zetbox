@@ -44,5 +44,13 @@ namespace Kistl.Client.Presentables.Calendar
                 return Day.AddHours(Hour).AddMinutes(Minute);
             }
         }
+
+        public System.Drawing.RectangleF BorderThickness 
+        {
+            get
+            {
+                return new System.Drawing.RectangleF(0.0f, 0.0f, 1.0f, Minute == 0 ? 0.5f : 1.0f);
+            }
+        }
     }
 }
