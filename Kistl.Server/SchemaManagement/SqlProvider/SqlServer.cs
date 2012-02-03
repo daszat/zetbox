@@ -217,7 +217,7 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
         public override void CreateSchema(string schemaName)
         {
             if (string.IsNullOrEmpty(schemaName)) throw new ArgumentNullException("schemaName");
-            
+
             ExecuteNonQuery(String.Format("CREATE SCHEMA {0}", QuoteIdentifier(schemaName)));
         }
 
@@ -498,7 +498,17 @@ namespace Kistl.Server.SchemaManagement.SqlProvider
                 }
                 else if (constr is DateTimeDefaultConstraint)
                 {
-                    defValue = "getdate()";
+                    switch (((DateTimeDefaultConstraint)constr).Precision)
+                    {
+                        case DateTimeDefaultConstraintPrecision.Date:
+                            defValue = "CAST(getdate() AS date)";
+                            break;
+                        case DateTimeDefaultConstraintPrecision.Time:
+                            defValue = "getdate()";
+                            break;
+                        default:
+                            throw new NotImplementedException(string.Format("Unknown DateTimeDefaultConstraintPrecision: {0}", ((DateTimeDefaultConstraint)constr).Precision));
+                    }
                 }
                 else if (constr is BoolCheckConstraint)
                 {

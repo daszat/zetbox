@@ -531,8 +531,15 @@ namespace Kistl.API.Server
     {
     }
 
+    public enum DateTimeDefaultConstraintPrecision
+    {
+        Date,
+        Time,
+    }
+
     public class DateTimeDefaultConstraint : DefaultConstraint
     {
+        public DateTimeDefaultConstraintPrecision Precision { get; set; }
     }
 
     public abstract class CheckConstraint : DatabaseConstraint

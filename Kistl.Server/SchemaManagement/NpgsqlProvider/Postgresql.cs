@@ -474,7 +474,17 @@ namespace Kistl.Server.SchemaManagement.NpgsqlProvider
                 }
                 else if (defConstraint is DateTimeDefaultConstraint)
                 {
-                    defValue = "now()";
+                    switch (((DateTimeDefaultConstraint)defConstraint).Precision)
+                    {
+                        case DateTimeDefaultConstraintPrecision.Date:
+                            defValue = "CURRENT_DATE";
+                            break;
+                        case DateTimeDefaultConstraintPrecision.Time:
+                            defValue = "now()";
+                            break;
+                        default:
+                            throw new NotImplementedException(string.Format("Unknown DateTimeDefaultConstraintPrecision: {0}", ((DateTimeDefaultConstraint)defConstraint).Precision));
+                    }
                 }
                 else
                 {

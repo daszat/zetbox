@@ -198,7 +198,8 @@ namespace Kistl.Server.SchemaManagement
             }
             else if (prop.DefaultValue is Kistl.App.Base.CurrentDateTimeDefaultValue)
             {
-                return new DateTimeDefaultConstraint();
+                var dtProp = (DateTimeProperty)prop;
+                return new DateTimeDefaultConstraint() { Precision = dtProp.DateTimeStyle == DateTimeStyles.Date ? DateTimeDefaultConstraintPrecision.Date : DateTimeDefaultConstraintPrecision.Time };
             }
             else if (prop.DefaultValue is Kistl.App.Base.BoolDefaultValue)
             {
