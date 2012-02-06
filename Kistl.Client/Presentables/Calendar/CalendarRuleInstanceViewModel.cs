@@ -67,7 +67,7 @@ namespace Kistl.Client.Presentables.Calendar
             remove { } // unable to change 
         }
 
-        ControlKind IAppointmentViewModel.RequestedCalendarKind
+        public ControlKind RequestedCalendarKind
         {
             get { return null; } // default
         }
