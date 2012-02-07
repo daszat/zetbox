@@ -1227,10 +1227,6 @@
     <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
-  <GUI:ControlKind ExportGuid="56e67178-a705-4f06-b50f-db2f4fb6b065">
-    <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
-    <GUI:Name>Kistl.App.Calendar.CalendarSummary</GUI:Name>
-  </GUI:ControlKind>
   <GUI:ControlKind ExportGuid="df5134d6-18f1-43b9-96d3-9283bc2b09a8">
     <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
     <GUI:Name>Kistl.App.Calendar.WeekCalendarDisplay</GUI:Name>
@@ -1238,7 +1234,6 @@
   <GUI:ControlKind ExportGuid="f9fc5f32-8dbd-4c86-8e94-2794336da0ac">
     <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
     <GUI:Name>Kistl.App.Calendar.CalendarRuleInstanceDisplay</GUI:Name>
-    <GUI:Parent>56e67178-a705-4f06-b50f-db2f4fb6b065</GUI:Parent>
   </GUI:ControlKind>
   <KistlBase:Module ExportGuid="21dcfc7c-ab5c-4d04-8a41-9759b23907f9">
     <KistlBase:ChangedOn>2011-08-05T10:30:47.648235Z</KistlBase:ChangedOn>

@@ -3181,10 +3181,6 @@ namespace Kistl {
                 {
                     get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("f9fc5f32-8dbd-4c86-8e94-2794336da0ac"); }
                 }
-                public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_Calendar_CalendarSummary
-                {
-                    get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("56e67178-a705-4f06-b50f-db2f4fb6b065"); }
-                }
                 public static TypedGuid<global::Kistl.App.GUI.ControlKind> Kistl_App_Calendar_WeekCalendarDisplay
                 {
                     get { return new TypedGuid<global::Kistl.App.GUI.ControlKind>("df5134d6-18f1-43b9-96d3-9283bc2b09a8"); }
