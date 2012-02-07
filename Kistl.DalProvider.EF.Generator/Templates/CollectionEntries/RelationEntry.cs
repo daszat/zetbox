@@ -28,13 +28,6 @@ namespace Kistl.DalProvider.Ef.Generator.Templates.CollectionEntries
             this.WriteLine();
         }
 
-        protected override void ApplyChangesFromBody()
-        {
-            base.ApplyChangesFromBody();
-            this.WriteLine("            me._fk_A = other._fk_A;");
-            this.WriteLine("            me._fk_B = other._fk_B;");
-        }
-
         protected override void ApplyObjectReferenceProperty(Relation rel, RelationEndRole endRole, string propertyName)
         {
             // TODO: create/use ObjectReference*IMPLEMENTATION* instead (_fk* can already be made available)

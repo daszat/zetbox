@@ -1310,10 +1310,10 @@ namespace at.dasz.DocumentManagement
             var other = (Document_has_Blob_RelationEntryEfImpl)obj;
             var me = (Document_has_Blob_RelationEntryEfImpl)this;
 
-            me.AIndex = other.AIndex;
-            me.BIndex = other.BIndex;
             me._fk_A = other._fk_A;
+            me.AIndex = other.AIndex;
             me._fk_B = other._fk_B;
+            me.BIndex = other.BIndex;
         }
 
 
@@ -3766,10 +3766,10 @@ namespace Kistl.App.Projekte
             var other = (Projekt_haben_Mitarbeiter_RelationEntryEfImpl)obj;
             var me = (Projekt_haben_Mitarbeiter_RelationEntryEfImpl)this;
 
-            me.AIndex = other.AIndex;
-            me.BIndex = other.BIndex;
             me._fk_A = other._fk_A;
+            me.AIndex = other.AIndex;
             me._fk_B = other._fk_B;
+            me.BIndex = other.BIndex;
         }
 
 
@@ -4274,10 +4274,10 @@ namespace Kistl.App.Base
             var other = (RoleMembership_resolves_Relation_RelationEntryEfImpl)obj;
             var me = (RoleMembership_resolves_Relation_RelationEntryEfImpl)this;
 
-            me.AIndex = other.AIndex;
-            me.BIndex = other.BIndex;
             me._fk_A = other._fk_A;
+            me.AIndex = other.AIndex;
             me._fk_B = other._fk_B;
+            me.BIndex = other.BIndex;
         }
 
 
@@ -4786,10 +4786,10 @@ namespace ZBox.App.SchemaMigration
             var other = (SourceColumn_created_Property_RelationEntryEfImpl)obj;
             var me = (SourceColumn_created_Property_RelationEntryEfImpl)this;
 
-            me.AIndex = other.AIndex;
-            me.BIndex = other.BIndex;
             me._fk_A = other._fk_A;
+            me.AIndex = other.AIndex;
             me._fk_B = other._fk_B;
+            me.BIndex = other.BIndex;
         }
 
 
@@ -6025,10 +6025,10 @@ namespace Kistl.App.Base
             var other = (TypeRef_hasGenericArguments_TypeRef_RelationEntryEfImpl)obj;
             var me = (TypeRef_hasGenericArguments_TypeRef_RelationEntryEfImpl)this;
 
-            me.AIndex = other.AIndex;
-            me.BIndex = other.BIndex;
             me._fk_A = other._fk_A;
+            me.AIndex = other.AIndex;
             me._fk_B = other._fk_B;
+            me.BIndex = other.BIndex;
         }
 
 

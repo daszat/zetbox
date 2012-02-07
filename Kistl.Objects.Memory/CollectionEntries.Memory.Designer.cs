@@ -345,6 +345,8 @@ namespace Kistl.App.Base
             var other = (CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryMemoryImpl)obj;
             var me = (CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryMemoryImpl)this;
 
+            me._fk_A = other._fk_A;
+            me._fk_B = other._fk_B;
         }
 
 
@@ -742,6 +744,8 @@ namespace Kistl.App.Base
             var other = (DataType_implements_Interface_RelationEntryMemoryImpl)obj;
             var me = (DataType_implements_Interface_RelationEntryMemoryImpl)this;
 
+            me._fk_A = other._fk_A;
+            me._fk_B = other._fk_B;
         }
 
 
@@ -1214,7 +1218,9 @@ namespace at.dasz.DocumentManagement
             var other = (Document_has_Blob_RelationEntryMemoryImpl)obj;
             var me = (Document_has_Blob_RelationEntryMemoryImpl)this;
 
+            me._fk_A = other._fk_A;
             me.AIndex = other.AIndex;
+            me._fk_B = other._fk_B;
             me.BIndex = other.BIndex;
         }
 
@@ -1560,6 +1566,8 @@ namespace Kistl.App.Base
             var other = (Identity_memberOf_Group_RelationEntryMemoryImpl)obj;
             var me = (Identity_memberOf_Group_RelationEntryMemoryImpl)this;
 
+            me._fk_A = other._fk_A;
+            me._fk_B = other._fk_B;
         }
 
 
@@ -1951,6 +1959,8 @@ namespace Kistl.App.Base
             var other = (IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl)obj;
             var me = (IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl)this;
 
+            me._fk_A = other._fk_A;
+            me._fk_B = other._fk_B;
         }
 
 
@@ -2295,6 +2305,8 @@ namespace Kistl.App.Test
             var other = (Muhblah_has_TestCustomObject_RelationEntryMemoryImpl)obj;
             var me = (Muhblah_has_TestCustomObject_RelationEntryMemoryImpl)this;
 
+            me._fk_A = other._fk_A;
+            me._fk_B = other._fk_B;
         }
 
 
@@ -2633,6 +2645,8 @@ namespace Kistl.App.Test
             var other = (N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryMemoryImpl)obj;
             var me = (N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryMemoryImpl)this;
 
+            me._fk_A = other._fk_A;
+            me._fk_B = other._fk_B;
         }
 
 
@@ -3025,6 +3039,8 @@ namespace Kistl.App.GUI
             var other = (NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl)obj;
             var me = (NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl)this;
 
+            me._fk_A = other._fk_A;
+            me._fk_B = other._fk_B;
         }
 
 
@@ -3496,7 +3512,9 @@ namespace Kistl.App.Projekte
             var other = (Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl)obj;
             var me = (Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl)this;
 
+            me._fk_A = other._fk_A;
             me.AIndex = other.AIndex;
+            me._fk_B = other._fk_B;
             me.BIndex = other.BIndex;
         }
 
@@ -3969,7 +3987,9 @@ namespace Kistl.App.Base
             var other = (RoleMembership_resolves_Relation_RelationEntryMemoryImpl)obj;
             var me = (RoleMembership_resolves_Relation_RelationEntryMemoryImpl)this;
 
+            me._fk_A = other._fk_A;
             me.AIndex = other.AIndex;
+            me._fk_B = other._fk_B;
             me.BIndex = other.BIndex;
         }
 
@@ -4443,7 +4463,9 @@ namespace ZBox.App.SchemaMigration
             var other = (SourceColumn_created_Property_RelationEntryMemoryImpl)obj;
             var me = (SourceColumn_created_Property_RelationEntryMemoryImpl)this;
 
+            me._fk_A = other._fk_A;
             me.AIndex = other.AIndex;
+            me._fk_B = other._fk_B;
             me.BIndex = other.BIndex;
         }
 
@@ -4789,6 +4811,8 @@ namespace Kistl.App.GUI
             var other = (Template_hasMenu_Visual_RelationEntryMemoryImpl)obj;
             var me = (Template_hasMenu_Visual_RelationEntryMemoryImpl)this;
 
+            me._fk_A = other._fk_A;
+            me._fk_B = other._fk_B;
         }
 
 
@@ -5127,6 +5151,8 @@ namespace Kistl.App.Test
             var other = (TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl)obj;
             var me = (TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl)this;
 
+            me._fk_A = other._fk_A;
+            me._fk_B = other._fk_B;
         }
 
 
@@ -5592,7 +5618,9 @@ namespace Kistl.App.Base
             var other = (TypeRef_hasGenericArguments_TypeRef_RelationEntryMemoryImpl)obj;
             var me = (TypeRef_hasGenericArguments_TypeRef_RelationEntryMemoryImpl)this;
 
+            me._fk_A = other._fk_A;
             me.AIndex = other.AIndex;
+            me._fk_B = other._fk_B;
             me.BIndex = other.BIndex;
         }
 
@@ -5992,6 +6020,8 @@ namespace Kistl.App.GUI
             var other = (ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl)obj;
             var me = (ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl)this;
 
+            me._fk_A = other._fk_A;
+            me._fk_B = other._fk_B;
         }
 
 
@@ -6389,6 +6419,8 @@ namespace Kistl.App.GUI
             var other = (ViewModelDescriptor_displayedBy_ControlKind_RelationEntryMemoryImpl)obj;
             var me = (ViewModelDescriptor_displayedBy_ControlKind_RelationEntryMemoryImpl)this;
 
+            me._fk_A = other._fk_A;
+            me._fk_B = other._fk_B;
         }
 
 
@@ -6733,6 +6765,8 @@ namespace Kistl.App.GUI
             var other = (Visual_contains_Visual_RelationEntryMemoryImpl)obj;
             var me = (Visual_contains_Visual_RelationEntryMemoryImpl)this;
 
+            me._fk_A = other._fk_A;
+            me._fk_B = other._fk_B;
         }
 
 
@@ -7071,6 +7105,8 @@ namespace Kistl.App.GUI
             var other = (Visual_hasContextMenu_Visual_RelationEntryMemoryImpl)obj;
             var me = (Visual_hasContextMenu_Visual_RelationEntryMemoryImpl)this;
 
+            me._fk_A = other._fk_A;
+            me._fk_B = other._fk_B;
         }
 
 

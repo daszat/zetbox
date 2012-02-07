@@ -130,10 +130,13 @@ namespace Kistl.Generator.Templates.CollectionEntries
 
         protected override void ApplyChangesFromBody()
         {
+            this.WriteLine("            me._fk_A = other._fk_A;");
             if (rel.NeedsPositionStorage(RelationEndRole.A))
             {
                 this.WriteLine("            me.AIndex = other.AIndex;");
             }
+
+            this.WriteLine("            me._fk_B = other._fk_B;");
             if (rel.NeedsPositionStorage(RelationEndRole.B))
             {
                 this.WriteLine("            me.BIndex = other.BIndex;");
