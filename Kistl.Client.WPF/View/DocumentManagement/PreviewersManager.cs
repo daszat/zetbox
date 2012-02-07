@@ -216,9 +216,11 @@ namespace Kistl.Client.WPF.View.DocumentManagement
         public void Read(byte[] pv, int cb, IntPtr pcbRead)
         {
             int count = this._stream.Read(pv, 0, cb);
-            if (pcbRead != IntPtr.Zero)
+
+            // destination expects an ULONG, therefore we must guard against negative values
+            if (pcbRead != IntPtr.Zero && count >= 0)
             {
-                Marshal.WriteInt32(pcbRead, count);
+                Marshal.WriteInt64(pcbRead, count);
             }
         }
 
